@@ -98,10 +98,10 @@ query ($lang: String = "en") {
           fiscal_year
           commitment
         }
-      }
-      covid_funding {
-        fiscal_year
-        funding
+        covid_funding {
+          fiscal_year
+          funding
+        }
       }
     }
   }
@@ -130,6 +130,10 @@ query ($lang: String = "en") {
         covid_commitments {
           fiscal_year
           commitment
+        }
+        covid_funding {
+          fiscal_year
+          funding
         }
       }
     }

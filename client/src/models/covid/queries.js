@@ -29,16 +29,16 @@ const has_covid_data_fields = `
 export const org_has_covid_data_query = build_org_query(has_covid_data_fields);
 
 const covid_funding_fields = `
-  covid_funding {
-    fiscal_year
-    funding
-  }
+  fiscal_year
+  funding
 `;
 const covid_measure_fields = `
   id
   name
   in_estimates
-  ${covid_funding_fields}
+  covid_funding {
+    ${covid_funding_fields}
+  }
 
   ${has_covid_data_fields}
 `;
@@ -132,12 +132,14 @@ const covid_summary_query_fragment = `
     covid_commitments {
       ${covid_commitments_fields}
     }
+    covid_funding {
+      ${covid_funding_fields}
+    }
   }
 `;
 export const gov_covid_summary_query = build_base_query(`
   gov {
     ${covid_summary_query_fragment}
-    ${covid_funding_fields}
   }
 `);
 export const org_covid_summary_query = build_org_query(

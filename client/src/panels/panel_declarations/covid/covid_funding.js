@@ -252,8 +252,7 @@ class CovidFundingPanel extends React.Component {
           data: {
             root: {
               gov: {
-                covid_summary: { covid_expenditures },
-                covid_funding,
+                covid_summary: { covid_expenditures, covid_funding },
               },
             },
           },
