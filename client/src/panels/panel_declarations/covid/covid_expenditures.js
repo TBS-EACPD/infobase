@@ -354,7 +354,7 @@ class CovidExpendituresPanel extends React.Component {
         <Fragment>
           <div className="medium-panel-text text">
             <AboveTabFootnoteList subject={panel_args.subject}>
-              <TM k="covid_estimates_above_tab_footnote_list" />
+              <TM k="covid_expenditures_above_tab_footnote_list" />
             </AboveTabFootnoteList>
           </div>
           {tab_keys.length === 1 && (
