@@ -65,6 +65,8 @@ export default function (model_singleton) {
   const CovidSummarySchema = mongoose.Schema({
     org_id: pkey_type(),
 
+    covid_funding: [covid_funding_fields], // outlier, applies to gov level summary only, TODO make that less akward
+
     covid_estimates: [covid_estimates_fields],
     covid_expenditures: [covid_expenditures_fields],
     covid_commitments: [covid_commitments_fields],

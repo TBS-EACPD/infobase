@@ -99,6 +99,10 @@ query ($lang: String = "en") {
           commitment
         }
       }
+      covid_funding {
+        fiscal_year
+        funding
+      }
     }
   }
 }`;

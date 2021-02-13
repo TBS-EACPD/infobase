@@ -441,6 +441,16 @@ Object {
   "data": Object {
     "root": Object {
       "gov": Object {
+        "covid_funding": Array [
+          Object {
+            "fiscal_year": "2020",
+            "funding": 16,
+          },
+          Object {
+            "fiscal_year": "2021",
+            "funding": 11,
+          },
+        ],
         "covid_summary": Object {
           "covid_commitments": Array [
             Object {
