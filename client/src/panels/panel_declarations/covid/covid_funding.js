@@ -1,18 +1,11 @@
-// old covid expenditures panel code, likely to reuse a decent amount for the new funding panel
-
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  gov_covid_summary_query,
-  org_covid_summary_query,
-} from "src/models/covid/queries.js";
+import { gov_covid_summary_query } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
-
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
   create_text_maker_component,
