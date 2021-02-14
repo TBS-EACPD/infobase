@@ -553,18 +553,17 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {
-        if (
-          level_name === "dept" &&
-          !subject.has_data("covid_response")?.has_estimates
-        ) {
-          return false;
+        if (level_name === "gov") {
+          return true;
+        } else {
+          return subject.has_data("covid_response")?.has_estimates;
         }
-
-        return {
-          subject,
-        };
       },
-      render: ({ calculations: { panel_args }, footnotes, sources }) => (
+      render: ({
+        calculations: { panel_args, subject },
+        footnotes,
+        sources,
+      }) => (
         <InfographicPanel
           allowOverflow={true}
           title={text_maker("covid_estimates_panel_title")}
@@ -578,7 +577,7 @@ export const declare_covid_estimates_panel = () =>
               "Real (but non-final) data for supps A and B. Supps C values are faked (by repeatings supps B values). For development purposes only!"
             }
           </AlertBanner>
-          <CovidEstimatesPanel panel_args={panel_args} />
+          <CovidEstimatesPanel panel_args={{ ...panel_args, subject }} />
         </InfographicPanel>
       ),
     }),

@@ -316,22 +316,23 @@ export const declare_covid_funding_panel = () =>
       footnotes: false,
       source: (subject) => [],
       calculate: _.constant(true),
-      render: ({ calculations, footnotes, sources }) => {
-        const { panel_args, subject } = calculations;
-        return (
-          <InfographicPanel
-            title={text_maker("covid_funding_panel_title")}
-            {...{
-              sources,
-              footnotes,
-            }}
-          >
-            <AlertBanner banner_class="danger">
-              {"Real (but non-final) data. For development purposes only!"}
-            </AlertBanner>
-            <CovidFundingPanel panel_args={{ ...panel_args, subject }} />
-          </InfographicPanel>
-        );
-      },
+      render: ({
+        calculations: { panel_args, subject },
+        footnotes,
+        sources,
+      }) => (
+        <InfographicPanel
+          title={text_maker("covid_funding_panel_title")}
+          {...{
+            sources,
+            footnotes,
+          }}
+        >
+          <AlertBanner banner_class="danger">
+            {"Real (but non-final) data. For development purposes only!"}
+          </AlertBanner>
+          <CovidFundingPanel panel_args={{ ...panel_args, subject }} />
+        </InfographicPanel>
+      ),
     }),
   });

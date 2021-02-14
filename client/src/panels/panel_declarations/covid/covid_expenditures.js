@@ -1,10 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  gov_covid_summary_query,
-  org_covid_summary_query,
-} from "src/models/covid/queries.js";
+import { gov_covid_summary_query } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
@@ -388,9 +385,9 @@ export const declare_covid_expenditures_panel = () =>
     panel_key,
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
+      requires_has_covid_response: level_name === "dept",
       initial_queries: {
         gov_covid_summary_query,
-        ...(level_name === "dept" && { org_covid_summary_query }),
       },
       footnotes: false,
       source: (subject) => [],
@@ -401,22 +398,23 @@ export const declare_covid_expenditures_panel = () =>
           return subject.has_data("covid_response")?.has_expenditures;
         }
       },
-      render: ({ calculations, footnotes, sources }) => {
-        const { panel_args, subject } = calculations;
-        return (
-          <InfographicPanel
-            title={text_maker("covid_expenditures_panel_title")}
-            {...{
-              sources,
-              footnotes,
-            }}
-          >
-            <AlertBanner banner_class="danger">
-              {"Real (but non-final) data. For development purposes only!"}
-            </AlertBanner>
-            <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />
-          </InfographicPanel>
-        );
-      },
+      render: ({
+        calculations: { panel_args, subject },
+        footnotes,
+        sources,
+      }) => (
+        <InfographicPanel
+          title={text_maker("covid_expenditures_panel_title")}
+          {...{
+            sources,
+            footnotes,
+          }}
+        >
+          <AlertBanner banner_class="danger">
+            {"Real (but non-final) data. For development purposes only!"}
+          </AlertBanner>
+          <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />
+        </InfographicPanel>
+      ),
     }),
   });
