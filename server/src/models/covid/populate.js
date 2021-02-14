@@ -198,6 +198,7 @@ export default async function ({ models }) {
               ),
             }))
             .sortBy("total")
+            .reverse()
             .map("org_id")
             .value(),
         }))
@@ -217,6 +218,7 @@ export default async function ({ models }) {
               ),
             }))
             .sortBy("total")
+            .reverse()
             .map("covid_measure_id")
             .value(),
         }))
