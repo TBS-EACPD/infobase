@@ -1,4 +1,4 @@
-﻿"org_id","fiscal_year","is_budget","covid_measure_id","stat","vote"
+﻿"org_id","fiscal_year","is_budgetary","covid_measure_id","stat","vote"
 1,2020,1,"COV024",1844749.45,476285.76
 1,2020,1,"COV038",125715052.12,559033.05
 1,2020,1,"COV057",36643445.49,1305974.96
