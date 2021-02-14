@@ -579,7 +579,7 @@ Object {
               "vote": 2,
             },
           ],
-          "covid_funding": Array [],
+          "covid_funding": null,
         },
         "name": "National Defence",
         "org_id": "133",
