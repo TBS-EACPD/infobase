@@ -29,9 +29,10 @@ covid_questions_funding_value_q:
 covid_questions_funding_value_a:
   transform: [markdown]
   en: |
-    Funding amounts refer to the expected 2020-21 cash value of each measure. These cash values are based in the 
-    [Fall Economic Statement 2020 (FES)](https://www.budget.gc.ca/fes-eea/2020/home-accueil-en.html), which includes the annual accrual value of each measure. 
-    GC InfoBase presents these values on a cash basis rather than an accrual basis to align with the cash-based expenditure values and the spending authorities presented in the Estimates.  
+    Funding refers to the cash value of a COVID-19 measure in the identified fiscal year, as determined by the Department of Finance and the Treasury Board Secretariat.
+    These cash values are based in the [Fall Economic Statement 2020 (FES)](https://www.budget.gc.ca/fes-eea/2020/home-accueil-en.html), which includes the annual accrual
+    value of each measure. GC InfoBase presents these values on a cash basis rather than an accrual basis to align with cash-based expenditure values and the cash-based spending
+    authorities presented in the Estimates.  
 
-    Cases where the cash value here is higher than the accrual value provided in the FES are due to updates that have occurred since the FES.
+    Cases where the cash value here is higher than the accrual value provided in the FES are due to updates that have occurred since the publication of the FES.
   fr: TODO

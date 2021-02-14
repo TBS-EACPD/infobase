@@ -30,7 +30,7 @@ export const declare_covid_key_concepts_panel = () =>
       render: () => (
         <SomeThingsToKeepInMind>
           <KeyConceptList
-            question_answer_pairs={[
+            question_answer_pairs={_.compact([
               [
                 <TM key={"q"} k={"covid_questions_up_to_date_q"} />,
                 <TM key={"a"} k={"covid_questions_up_to_date_a"} />,
@@ -39,11 +39,11 @@ export const declare_covid_key_concepts_panel = () =>
                 <TM key={"q"} k={"covid_questions_financial_q"} />,
                 <TM key={"a"} k={"covid_questions_financial_a"} />,
               ],
-              [
+              level === "gov" && [
                 <TM key={"q"} k={"covid_questions_funding_value_q"} />,
                 <TM key={"a"} k={"covid_questions_funding_value_a"} />,
               ],
-            ]}
+            ])}
           />
         </SomeThingsToKeepInMind>
       ),
