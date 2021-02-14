@@ -62,14 +62,19 @@ export default function (model_singleton) {
     covid_commitments: [CovidCommitmentSchema],
   });
 
-  const CovidSummarySchema = mongoose.Schema({
+  const common_summary_fields = {
     org_id: pkey_type(),
-
-    covid_funding: [covid_funding_fields], // outlier here, only has data in the gov summary, empty at the dept level
 
     covid_estimates: [covid_estimates_fields],
     covid_expenditures: [covid_expenditures_fields],
     covid_commitments: [covid_commitments_fields],
+  };
+  const CovidOrgSummarySchema = mongoose.Schema({
+    ...common_summary_fields,
+  });
+  const CovidGovSummarySchema = mongoose.Schema({
+    ...common_summary_fields,
+    covid_funding: [covid_funding_fields],
   });
 
   const HasCovidDataSchema = mongoose.Schema({
@@ -80,10 +85,16 @@ export default function (model_singleton) {
   });
 
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
-  model_singleton.define_model("CovidSummary", CovidSummarySchema);
+  model_singleton.define_model("CovidOrgSummary", CovidOrgSummarySchema);
+  model_singleton.define_model("CovidGovSummary", CovidGovSummarySchema);
   model_singleton.define_model("HasCovidData", HasCovidDataSchema);
 
-  const { HasCovidData, CovidMeasure, CovidSummary } = model_singleton.models;
+  const {
+    HasCovidData,
+    CovidMeasure,
+    CovidOrgSummary,
+    CovidGovSummary,
+  } = model_singleton.models;
 
   const loaders = {
     has_covid_data_loader: create_resource_by_id_attr_dataloader(
@@ -98,8 +109,12 @@ export default function (model_singleton) {
       CovidMeasure,
       "covid_estimates.org_id"
     ),
-    covid_summary_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
-      CovidSummary,
+    covid_org_summary_loader: create_resource_by_foreignkey_attr_dataloader(
+      CovidOrgSummary,
+      "org_id"
+    ),
+    covid_gov_summary_loader: create_resource_by_foreignkey_attr_dataloader(
+      CovidGovSummary,
       "org_id"
     ),
   };
