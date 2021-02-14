@@ -308,7 +308,7 @@ Object {
                 "name": "Polar Knowledge Canada",
               },
               "org_id": "552",
-              "stat": 7,
+              "stat": 999,
               "vote": 7,
             },
           ],
@@ -506,7 +506,7 @@ Object {
             Object {
               "fiscal_year": "2021",
               "is_budgetary": true,
-              "stat": 7,
+              "stat": 999,
               "vote": 7,
             },
           ],
@@ -518,6 +518,26 @@ Object {
             Object {
               "fiscal_year": "2021",
               "funding": 11,
+            },
+          ],
+          "top_spending_measures": Array [
+            Object {
+              "id": "COV002",
+              "name": "measure 2",
+            },
+          ],
+          "top_spending_orgs": Array [
+            Object {
+              "name": "Polar Knowledge Canada",
+              "org_id": "552",
+            },
+            Object {
+              "name": "National Defence",
+              "org_id": "133",
+            },
+            Object {
+              "name": "Treasury Board of Canada Secretariat",
+              "org_id": "326",
             },
           ],
         },

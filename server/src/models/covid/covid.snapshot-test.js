@@ -78,7 +78,7 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
 }`;
 
 const gov_covid_summary_query = `
-query ($lang: String = "en", $top_x: Int = 2) {
+query ($lang: String = "en", $top_x: Int = 1) {
   root(lang: $lang) {
     gov {
       covid_summary {
@@ -90,7 +90,6 @@ query ($lang: String = "en", $top_x: Int = 2) {
         top_spending_orgs {
           org_id
           name
-          }
         }
         top_spending_measures(top_x: $top_x) {
           id
