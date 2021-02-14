@@ -179,82 +179,9 @@ const EverythingSearch = withRouter(
         on_query,
       } = this.props;
 
-      const search_options = this.state;
-
-      const option_node_to_component = (option_node, option_key) => {
-        if (!_.isEmpty(option_node.child_options)) {
-          const has_checked_child_option = _.chain(option_node.child_options)
-            .map((_child_node, child_key) => search_options[child_key])
-            .some()
-            .value();
-
-          const has_children_to_display = !(
-            _.size(option_node.child_options) === 1 &&
-            _.chain(option_node.child_options).map("label").first().value() ===
-              option_node.label
-          );
-
-          return (
-            <div key={option_key} style={{ width: "100%" }}>
-              {(!is_a11y_mode ||
-                (is_a11y_mode && !has_children_to_display)) && (
-                <CheckBox
-                  label={option_node.label}
-                  active={has_checked_child_option}
-                  container_style={{ padding: 3 }}
-                  onClick={() =>
-                    this.setState(
-                      _.chain(option_node.child_options)
-                        .map((_child_node, child_key) => [
-                          child_key,
-                          !has_checked_child_option,
-                        ])
-                        .fromPairs()
-                        .value()
-                    )
-                  }
-                />
-              )}
-              {has_children_to_display && (
-                <ul style={{ listStyle: "none" }}>
-                  {_.map(
-                    option_node.child_options,
-                    (option_node, option_key) => (
-                      <li key={option_key}>
-                        {option_node_to_component(option_node, option_key)}
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
-            </div>
-          );
-        } else {
-          const should_be_displayed = _.chain(search_options)
-            .keys()
-            .includes(option_key)
-            .value();
-
-          if (should_be_displayed) {
-            return (
-              <CheckBox
-                container_style={{ padding: 3 }}
-                key={option_key}
-                label={option_node.label}
-                active={search_options[option_key]}
-                onClick={() =>
-                  this.setState({
-                    [option_key]: !search_options[option_key],
-                  })
-                }
-              />
-            );
-          }
-        }
-      };
       const option_checkboxes = _.map(
         search_options_hierarchy,
-        option_node_to_component
+        this.option_node_to_component
       );
 
       return (
@@ -282,6 +209,72 @@ const EverythingSearch = withRouter(
         </div>
       );
     }
+    option_node_is_parent = (option_node) =>
+      !_.isEmpty(option_node.child_options);
+    option_node_should_be_displayed = (option_node, option_key) => {
+      if (this.option_node_is_parent(option_node)) {
+        return _.chain(option_node.child_options)
+          .map(this.option_node_should_be_displayed)
+          .some()
+          .value();
+      } else {
+        return _.chain(this.state).keys().includes(option_key).value();
+      }
+    };
+    option_node_to_component = (option_node, option_key) => {
+      if (this.option_node_should_be_displayed(option_node, option_key)) {
+        if (this.option_node_is_parent(option_node)) {
+          const has_checked_child_option = _.chain(option_node.child_options)
+            .map((_child_node, child_key) => this.state[child_key])
+            .some()
+            .value();
+
+          return (
+            <div key={option_key} style={{ width: "100%" }}>
+              {!is_a11y_mode && (
+                <CheckBox
+                  label={option_node.label}
+                  active={has_checked_child_option}
+                  container_style={{ padding: 3 }}
+                  onClick={() =>
+                    this.setState(
+                      _.chain(option_node.child_options)
+                        .map((_child_node, child_key) => [
+                          child_key,
+                          !has_checked_child_option,
+                        ])
+                        .fromPairs()
+                        .value()
+                    )
+                  }
+                />
+              )}
+              <ul style={{ listStyle: "none" }}>
+                {_.map(option_node.child_options, (option_node, option_key) => (
+                  <li key={option_key}>
+                    {this.option_node_to_component(option_node, option_key)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        } else {
+          return (
+            <CheckBox
+              container_style={{ padding: 3 }}
+              key={option_key}
+              label={option_node.label}
+              active={this.state[option_key]}
+              onClick={() =>
+                this.setState({
+                  [option_key]: !this.state[option_key],
+                })
+              }
+            />
+          );
+        }
+      }
+    };
   }
 );
 EverythingSearch.defaultProps = {
