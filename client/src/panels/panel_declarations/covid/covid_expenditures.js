@@ -1,7 +1,10 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { gov_covid_summary_query } from "src/models/covid/queries.js";
+import {
+  gov_covid_summary_query,
+  top_5_covid_spending_orgs_query,
+} from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
@@ -47,7 +50,7 @@ const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({ args: panel_args, data: { covid_expenditures } }) => (
+const SummaryTab = ({ args: panel_args }) => (
   <div className="frow middle-xs">
     <TM
       k={`covid_expenditures_overview_tab_text`}
@@ -63,7 +66,19 @@ const get_expenditures_by_index = (exp_data, index_key) =>
     .uniq()
     .map((index_value) => {
       const index = { [index_key]: index_value };
-      const { vote, stat } = _.find(exp_data, index) || { vote: 0, stat: 0 };
+
+      // not obvious, but bud and non-bud rows are rolled together here
+      const { vote, stat } = _.chain(exp_data)
+        .filter(index)
+        .reduce(
+          (memo, row) => ({
+            vote: memo.vote + row.vote,
+            stat: memo.stat + row.stat,
+          }),
+          { vote: 0, stat: 0 }
+        )
+        .value();
+
       return {
         ...index,
         vote,
@@ -260,13 +275,15 @@ const tab_content_configs = [
     load_data: (panel_args) =>
       client
         .query({
-          query: gov_covid_summary_query,
+          query: top_5_covid_spending_orgs_query,
           variables: {
             lang: lang,
-            _query_name: "gov_covid_summary_query",
+            _query_name: "top_5_covid_spending_orgs_query",
           },
         })
-        .then((response) => _.get(response, "data.root.gov.covid_summary")),
+        .then((response) => {
+          // TODO, unpack data, kind of a mess
+        }),
     TabContent: SummaryTab,
   },
   {
@@ -388,6 +405,7 @@ export const declare_covid_expenditures_panel = () =>
       requires_has_covid_response: level_name === "dept",
       initial_queries: {
         gov_covid_summary_query,
+        ...(level_name === "gov" && { top_5_covid_spending_orgs_query }),
       },
       footnotes: false,
       source: (subject) => [],

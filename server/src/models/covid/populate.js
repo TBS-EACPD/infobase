@@ -82,23 +82,18 @@ export default async function ({ models }) {
       covid_expenditures: _.chain(covid_expenditures_rows)
         .filter(({ org_id: row_org_id }) => row_org_id === org_id)
         .groupBy("fiscal_year")
-        .flatMap((year_rows, fiscal_year) =>
-          _.chain(year_rows)
-            .groupBy("is_budgetary")
-            .flatMap((doc_rows, is_budgetary) => ({
-              fiscal_year,
-              is_budgetary,
-              ..._.reduce(
-                doc_rows,
-                (memo, row) => ({
-                  vote: memo.vote + row.vote,
-                  stat: memo.stat + row.stat,
-                }),
-                { vote: 0, stat: 0 }
-              ),
-            }))
-            .value()
-        )
+        .flatMap((year_rows, fiscal_year) => ({
+          fiscal_year,
+          // note is_budgetary is excluded from the summary, bud and non-bud rolled up here
+          ..._.reduce(
+            year_rows,
+            (memo, row) => ({
+              vote: memo.vote + row.vote,
+              stat: memo.stat + row.stat,
+            }),
+            { vote: 0, stat: 0 }
+          ),
+        }))
         .value(),
       covid_commitments: _.chain(covid_commitments_rows)
         .filter(({ org_id: row_org_id }) => row_org_id === org_id)
@@ -142,23 +137,18 @@ export default async function ({ models }) {
       covid_expenditures: _.chain(covid_org_summary_records)
         .flatMap("covid_expenditures")
         .groupBy("fiscal_year")
-        .flatMap((year_rows, fiscal_year) =>
-          _.chain(year_rows)
-            .groupBy("is_budgetary")
-            .flatMap((doc_rows, is_budgetary) => ({
-              fiscal_year,
-              is_budgetary,
-              ..._.reduce(
-                doc_rows,
-                (memo, row) => ({
-                  vote: memo.vote + row.vote,
-                  stat: memo.stat + row.stat,
-                }),
-                { vote: 0, stat: 0 }
-              ),
-            }))
-            .value()
-        )
+        .flatMap((year_rows, fiscal_year) => ({
+          fiscal_year,
+          // note is_budgetary is excluded from the summary, bud and non-bud rolled up here
+          ..._.reduce(
+            year_rows,
+            (memo, row) => ({
+              vote: memo.vote + row.vote,
+              stat: memo.stat + row.stat,
+            }),
+            { vote: 0, stat: 0 }
+          ),
+        }))
         .value(),
       covid_commitments: _.chain(covid_org_summary_records)
         .flatMap("covid_commitments")

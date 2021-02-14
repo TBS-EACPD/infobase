@@ -66,7 +66,7 @@ export default function (model_singleton) {
     org_id: pkey_type(),
 
     covid_estimates: [covid_estimates_fields],
-    covid_expenditures: [covid_expenditures_fields],
+    covid_expenditures: [_.omit(covid_expenditures_fields, "is_budgetary")],
     covid_commitments: [covid_commitments_fields],
   };
   const CovidOrgSummarySchema = mongoose.Schema({

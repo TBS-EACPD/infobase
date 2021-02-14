@@ -12,7 +12,6 @@ const estimates_fields = `
 const expenditures_fields = `
   id: String
   fiscal_year: String
-  is_budgetary: Boolean
   vote: Float
   stat: Float
 `;
@@ -72,6 +71,7 @@ const schema = `
     org_id: String
     org: Org
 
+    is_budgetary: Boolean
     ${expenditures_fields}
   }
   type CovidCommitments {
