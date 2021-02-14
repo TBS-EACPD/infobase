@@ -79,7 +79,6 @@ export const org_covid_estimates_by_measure_query = build_org_query(
 
 const covid_expenditures_fields = `
   fiscal_year
-  is_budgetary
   vote
   stat
 `;
@@ -89,6 +88,8 @@ const covid_expenditures_by_measure_query_fragment = `
   
     covid_expenditures {
       org_id
+      
+      is_budgetary
       ${covid_expenditures_fields}
     }
   }
@@ -148,3 +149,23 @@ export const org_covid_summary_query = build_org_query(`
     ${common_covid_summary_query_fragment}
   }
 `);
+
+export const top_5_covid_spending_orgs_query = gql`
+  query($lang: String!) {
+    root(lang: $lang) {
+      gov {
+        id
+        covid_summary {
+          top_spending_orgs(top_x: 5) {
+            id
+            covid_summary {
+              covid_expenditures {
+                ${covid_expenditures_fields}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

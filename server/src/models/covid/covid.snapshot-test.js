@@ -104,7 +104,6 @@ query ($lang: String = "en", $top_x: Int = 1) {
         }
         covid_expenditures {
           fiscal_year
-          is_budgetary
           vote
           stat
         }
@@ -133,7 +132,6 @@ query ($lang: String = "en") {
         }
         covid_expenditures {
           fiscal_year
-          is_budgetary
           vote
           stat
         }
