@@ -32,7 +32,7 @@ import "./Infographic.scss";
 
 const sub_app_name = "infographic_org";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 const { Dept, Gov } = Subject;
 
 class AnalyticsSynchronizer extends React.Component {
@@ -161,17 +161,9 @@ class InfoGraph_ extends React.Component {
     return (
       <div>
         <AnalyticsSynchronizer {...this.props} />
-        {is_a11y_mode && (
-          <div>
-            <TM k="a11y_search_other_infographs" />
-            <EverythingSearch />
-          </div>
-        )}
-        {!is_a11y_mode && (
-          <div className="row infographic-search-container">
-            <EverythingSearch />
-          </div>
-        )}
+        <div className="row infographic-search-container">
+          <EverythingSearch href_template={this.search_href_template} />
+        </div>
         <div>
           <div>
             {loading && <SpinnerWrapper config_name={"route"} />}
@@ -317,6 +309,8 @@ class InfoGraph_ extends React.Component {
       }
     );
   }
+  search_href_template = (selected_subject) =>
+    infograph_href_template(selected_subject, this.props.active_bubble_id, "/");
 }
 
 const is_fake_infographic = (subject) =>
