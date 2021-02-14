@@ -183,6 +183,15 @@ export default async function ({ models }) {
           ),
         }))
         .value(),
+      spending_sorted_org_ids: [
+        { fiscal_year: 2020, org_ids: ["326", "133", "552"] },
+      ],
+      spending_sorted_measure_ids: [
+        {
+          fiscal_year: 2020,
+          covid_measure_ids: ["COV002", "COV003", "COV001"],
+        },
+      ],
     },
   ];
 

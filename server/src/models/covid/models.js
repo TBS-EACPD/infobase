@@ -75,6 +75,18 @@ export default function (model_singleton) {
   const CovidGovSummarySchema = mongoose.Schema({
     ...common_summary_fields,
     covid_funding: [covid_funding_fields],
+    spending_sorted_org_ids: [
+      {
+        fiscal_year: number_type,
+        org_ids: [parent_fkey_type()],
+      },
+    ],
+    spending_sorted_measure_ids: [
+      {
+        fiscal_year: number_type,
+        covid_measure_ids: [parent_fkey_type()],
+      },
+    ],
   });
 
   const HasCovidDataSchema = mongoose.Schema({
