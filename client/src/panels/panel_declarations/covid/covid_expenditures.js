@@ -74,6 +74,18 @@ const get_expenditures_by_index = (exp_data, index_key) =>
         total_exp: vote + stat,
       };
     })
+    .thru((rows) => {
+      const total = _.reduce(
+        rows,
+        (memo, { total_exp }) => memo + total_exp,
+        0
+      );
+
+      return _.map(rows, (row) => ({
+        ...row,
+        share: row.total_exp / total || 0,
+      }));
+    })
     .value();
 
 const get_common_column_configs = (show_vote_stat) => ({
@@ -100,6 +112,13 @@ const get_common_column_configs = (show_vote_stat) => ({
     is_summable: true,
     formatter: "compact2",
     initial_visible: !show_vote_stat,
+  },
+  share: {
+    index: 5,
+    header: text_maker(`covid_share_of_total`),
+    is_searchable: false,
+    is_summable: false,
+    formatter: "percentage2",
   },
 });
 
