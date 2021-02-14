@@ -71,7 +71,6 @@ const schema = `
     org_id: String
     org: Org
 
-    is_budgetary: Boolean
     ${expenditures_fields}
   }
   type CovidCommitments {

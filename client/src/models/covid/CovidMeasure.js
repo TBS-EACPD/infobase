@@ -111,7 +111,7 @@ class CovidMeasure extends mix().with(
   static org_lookup_data_by_measure = (data_type, org_id) =>
     _.filter(
       this.get_all_data_by_measure(data_type),
-      // TODO getting org ids from API as strings, but client tends to treat them as ints... lots of gotchas waiting to happen
+      // TODO getting org ids from API as strings, but client tends to treat them as ints... lots of gotchas waiting to happen (this is a general API flaw, not covid-specific)
       ({ org_id: row_org_id }) => +row_org_id === +org_id
     );
 

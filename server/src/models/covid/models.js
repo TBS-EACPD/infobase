@@ -21,7 +21,6 @@ const covid_estimates_fields = {
 };
 const covid_expenditures_fields = {
   fiscal_year: number_type,
-  is_budgetary: { type: Boolean },
   vote: number_type,
   stat: number_type,
 };
@@ -66,7 +65,7 @@ export default function (model_singleton) {
     org_id: pkey_type(),
 
     covid_estimates: [covid_estimates_fields],
-    covid_expenditures: [_.omit(covid_expenditures_fields, "is_budgetary")],
+    covid_expenditures: [covid_expenditures_fields],
     covid_commitments: [covid_commitments_fields],
   };
   const CovidOrgSummarySchema = mongoose.Schema({
