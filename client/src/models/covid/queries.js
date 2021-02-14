@@ -121,28 +121,30 @@ export const org_covid_commitments_by_measure_query = build_org_query(
   covid_commitments_by_measure_query_fragment
 );
 
-const covid_summary_query_fragment = `
-  covid_summary {
-    covid_estimates {
-      ${covid_estimates_fields}
-    }
-    covid_expenditures {
-      ${covid_expenditures_fields}
-    }
-    covid_commitments {
-      ${covid_commitments_fields}
-    }
-    covid_funding {
-      ${covid_funding_fields}
-    }
+const common_covid_summary_query_fragment = `
+  covid_estimates {
+    ${covid_estimates_fields}
+  }
+  covid_expenditures {
+    ${covid_expenditures_fields}
+  }
+  covid_commitments {
+    ${covid_commitments_fields}
   }
 `;
 export const gov_covid_summary_query = build_base_query(`
   gov {
     id
-    ${covid_summary_query_fragment}
+    covid_summary {
+      covid_funding {
+        ${covid_funding_fields}
+      }
+      ${common_covid_summary_query_fragment}
+    }
   }
 `);
-export const org_covid_summary_query = build_org_query(
-  covid_summary_query_fragment
-);
+export const org_covid_summary_query = build_org_query(`
+  covid_summary {
+    ${common_covid_summary_query_fragment}
+  }
+`);
