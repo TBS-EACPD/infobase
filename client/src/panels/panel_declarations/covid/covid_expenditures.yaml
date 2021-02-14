@@ -4,12 +4,9 @@ covid_expenditures_panel_title:
 
 covid_expenditures_above_tab_footnote_list:
   transform: [handlebars,markdown]
-  en: |
-    * The measures reported on here are limited to those presented in the Estimates, based on the Fall Economic Statement 2020 (FES)
-    * More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will
-    be reflected on GC InfoBase monthly. Finalized values for 2020-21 will be available in 2021-22
-  fr: |
-    * TODO
+  text: |
+    * {{gt "covid_above_tab_limited_measure_note"}}
+    * {{gt "covid_above_tab_data_freshness_note"}}
 
 covid_expenditures_overview_tab_text:
   transform: [handlebars,markdown]
