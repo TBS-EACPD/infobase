@@ -1,7 +1,6 @@
 covid_estimates_panel_title:
-  transform: [handlebars]
-  text: |
-    {{gt "estimates_by_covid_measures"}}
+  en: Spending Authorities by COVID-19 Measure
+  fr: TODO
 
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
