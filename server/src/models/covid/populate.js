@@ -183,15 +183,44 @@ export default async function ({ models }) {
           ),
         }))
         .value(),
-      spending_sorted_org_ids: [
-        { fiscal_year: 2020, org_ids: ["326", "133", "552"] },
-      ],
-      spending_sorted_measure_ids: [
-        {
-          fiscal_year: 2020,
-          covid_measure_ids: ["COV002", "COV003", "COV001"],
-        },
-      ],
+      spending_sorted_org_ids: _.chain(covid_expenditures_rows)
+        .groupBy("fiscal_year")
+        .map((year_rows, fiscal_year) => ({
+          fiscal_year,
+          org_ids: _.chain(year_rows)
+            .groupBy("org_id")
+            .flatMap((org_rows, org_id) => ({
+              org_id,
+              total: _.reduce(
+                org_rows,
+                (memo, { vote, stat }) => memo + vote + stat,
+                0
+              ),
+            }))
+            .sortBy("total")
+            .map("org_id")
+            .value(),
+        }))
+        .value(),
+      spending_sorted_measure_ids: _.chain(covid_expenditures_rows)
+        .groupBy("fiscal_year")
+        .map((year_rows, fiscal_year) => ({
+          fiscal_year,
+          covid_measure_ids: _.chain(year_rows)
+            .groupBy("covid_measure_id")
+            .flatMap((measure_rows, covid_measure_id) => ({
+              covid_measure_id,
+              total: _.reduce(
+                measure_rows,
+                (memo, { vote, stat }) => memo + vote + stat,
+                0
+              ),
+            }))
+            .sortBy("total")
+            .map("covid_measure_id")
+            .value(),
+        }))
+        .value(),
     },
   ];
 
