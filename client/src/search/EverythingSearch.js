@@ -286,6 +286,8 @@ EverythingSearch.defaultProps = {
   reject_gov: false,
   reject_dead_orgs: true,
 
+  // true and it's on by default, false and it's off but can still potentially be turned on in the options menu,
+  // excluded from the initial_search_options object and it is off AND not available in the option menu
   initial_search_options: {
     include_orgs_normal_data: true,
     include_orgs_limited_data: true,
