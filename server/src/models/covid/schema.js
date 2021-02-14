@@ -29,12 +29,12 @@ const schema = `
   }
 
   extend type Gov {
-    covid_summary: CovidSummary
+    covid_summary: CovidGovSummary
   }
 
   extend type Org {
     has_covid_data: HasCovidData
-    covid_summary: CovidSummary
+    covid_summary: CovidOrgSummary
     covid_measures: [CovidMeasure]
   }
 
@@ -81,10 +81,17 @@ const schema = `
     ${commitments_fields}
   }
 
-  type CovidSummary {
+  type CovidGovSummary {
     id: String
 
     covid_funding: [CovidFunding]
+
+    covid_estimates: [CovidEstimatesSummary]
+    covid_expenditures: [CovidExpendituresSummary]
+    covid_commitments: [CovidCommitmentsSummary]
+  }
+  type CovidOrgSummary {
+    id: String
 
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
@@ -109,7 +116,8 @@ export default function ({ models, loaders }) {
     has_covid_data_loader,
     covid_measure_loader,
     covid_measures_by_org_id_loader,
-    covid_summary_by_org_id_loader,
+    covid_org_summary_loader,
+    covid_gov_summary_loader,
   } = loaders;
 
   const has_covid_data_resolver = (subject_id) =>
@@ -129,13 +137,12 @@ export default function ({ models, loaders }) {
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
-      covid_summary: () =>
-        covid_summary_by_org_id_loader.load("gov").then(_.first),
+      covid_summary: () => covid_gov_summary_loader.load("gov").then(_.first),
     },
     Org: {
       has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),
       covid_summary: ({ org_id }) =>
-        covid_summary_by_org_id_loader.load(org_id).then(_.first),
+        covid_org_summary_loader.load(org_id).then(_.first),
       covid_measures: ({ org_id: queried_org_id }) =>
         covid_measures_by_org_id_loader.load(queried_org_id).then((measures) =>
           _.map(measures, (measure) => {

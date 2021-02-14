@@ -82,6 +82,11 @@ query ($lang: String = "en") {
   root(lang: $lang) {
     gov {
       covid_summary {
+        covid_funding {
+          fiscal_year
+          funding
+        }
+        
         covid_estimates {
           fiscal_year
           est_doc
@@ -97,10 +102,6 @@ query ($lang: String = "en") {
         covid_commitments {
           fiscal_year
           commitment
-        }
-        covid_funding {
-          fiscal_year
-          funding
         }
       }
     }
@@ -130,10 +131,6 @@ query ($lang: String = "en") {
         covid_commitments {
           fiscal_year
           commitment
-        }
-        covid_funding {
-          fiscal_year
-          funding
         }
       }
     }
