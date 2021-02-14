@@ -14,15 +14,32 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("covid_estimates.csv"),
     (row) => ({ ...row, vote: +row.vote, stat: +row.stat })
   );
-  const covid_expenditures_rows = _.map(
-    get_standard_csv_file_rows("covid_expenditures.csv"),
-    (row) => ({
-      ...row,
-      is_budgetary: !!+row.is_budgetary,
+  const covid_expenditures_rows = _.chain(
+    get_standard_csv_file_rows("covid_expenditures.csv")
+  )
+    .map((row) => ({
+      // covid_expenditures.csv contains the bud/non-bud split, but the client doesn't use it yet and supporting it creates lots of room for error,
+      // so for now it's dropped and rolled up here
+      ..._.omit(row, "is_budgetary"),
       vote: +row.vote,
       stat: +row.stat,
-    })
-  );
+    }))
+    .groupBy(({ org_id, fiscal_year, covid_measure_id }) =>
+      _.join([org_id, fiscal_year, covid_measure_id], "__")
+    )
+    .map((rolled_up_rows) => ({
+      ..._.first(rolled_up_rows),
+      ..._.reduce(
+        rolled_up_rows,
+        (memo, row) => ({
+          vote: memo.vote + row.vote,
+          stat: memo.stat + row.stat,
+        }),
+        { vote: 0, stat: 0 }
+      ),
+    }))
+    .map()
+    .value();
   const covid_commitments_rows = _.map(
     get_standard_csv_file_rows("covid_commitments.csv"),
     (row) => ({ ...row, commitment: +row.commitment })
@@ -84,7 +101,6 @@ export default async function ({ models }) {
         .groupBy("fiscal_year")
         .flatMap((year_rows, fiscal_year) => ({
           fiscal_year,
-          // note is_budgetary is excluded from the summary, bud and non-bud rolled up here
           ..._.reduce(
             year_rows,
             (memo, row) => ({
@@ -139,7 +155,6 @@ export default async function ({ models }) {
         .groupBy("fiscal_year")
         .flatMap((year_rows, fiscal_year) => ({
           fiscal_year,
-          // note is_budgetary is excluded from the summary, bud and non-bud rolled up here
           ..._.reduce(
             year_rows,
             (memo, row) => ({

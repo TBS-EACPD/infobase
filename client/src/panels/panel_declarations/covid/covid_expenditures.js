@@ -67,17 +67,7 @@ const get_expenditures_by_index = (exp_data, index_key) =>
     .map((index_value) => {
       const index = { [index_key]: index_value };
 
-      // not obvious, but bud and non-bud rows are rolled together here
-      const { vote, stat } = _.chain(exp_data)
-        .filter(index)
-        .reduce(
-          (memo, row) => ({
-            vote: memo.vote + row.vote,
-            stat: memo.stat + row.stat,
-          }),
-          { vote: 0, stat: 0 }
-        )
-        .value();
+      const { vote, stat } = _.find(exp_data, index) || { vote: 0, stat: 0 };
 
       return {
         ...index,

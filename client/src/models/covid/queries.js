@@ -89,7 +89,6 @@ const covid_expenditures_by_measure_query_fragment = `
     covid_expenditures {
       org_id
       
-      is_budgetary
       ${covid_expenditures_fields}
     }
   }

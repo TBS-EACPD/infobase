@@ -38,7 +38,6 @@ query ($lang: String = "en") {
         }
     
         fiscal_year
-        is_budgetary
         vote
         stat
       }
@@ -183,7 +182,6 @@ query ($lang: String = "en") {
           }
       
           fiscal_year
-          is_budgetary
           vote
           stat
         }
