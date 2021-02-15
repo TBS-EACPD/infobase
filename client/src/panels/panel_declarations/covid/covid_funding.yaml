@@ -5,7 +5,7 @@ covid_funding_panel_title:
 covid_funding_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * Funding amounts refer to the expected 2020-21 cash value of each measure 
+    * Funding amounts refer to the expected 2020-21 cash value of each measure.
     * {{gt "covid_above_tab_limited_measure_note"}}
     * {{gt "covid_above_tab_data_freshness_note"}}
   fr: |
