@@ -2,7 +2,7 @@ import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 
 import { formats } from "src/core/format.js";
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { infograph_href_template, glossary_href } from "../link_utils.js";
 import { GlossaryEntry } from "../models/glossary.js";
@@ -605,26 +605,11 @@ Handlebars.registerHelper("gl", function glossary_link(key) {
   return new Handlebars.SafeString(str);
 });
 
-//produces a link with glossary tooltip
-function glossary_tooltip(display, key) {
+Handlebars.registerHelper("gl_tt", function glossary_tooltip(display, key) {
   return new Handlebars.SafeString(
     `<span class="nowrap glossary-tippy-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip">${display}</span>`
   );
-}
-
-function tooltip_a11y_fallback(display, key) {
-  const href = glossary_href(key);
-  return new Handlebars.SafeString(
-    `<a href=${href} title="${trivial_text_maker(
-      "glossary_link_title"
-    )}">${display}</a>`
-  );
-}
-
-Handlebars.registerHelper(
-  "gl_tt",
-  is_a11y_mode ? tooltip_a11y_fallback : glossary_tooltip
-);
+});
 
 Handlebars.registerHelper("gl_def", function (key) {
   const glos_item = GlossaryEntry.lookup(key);
