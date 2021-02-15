@@ -79,7 +79,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
               duration: 0,
               allowHTML: true,
               hideOnClick: false,
-              appendTo: body, //silence the warning
+              appendTo: "parent",
             }),
           }));
         } else {
