@@ -1,11 +1,13 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
+import MediaQuery from "react-responsive";
 
 import {
   gov_covid_summary_query,
   top_covid_spending_query,
 } from "src/models/covid/queries.js";
 
+import { breakpoints } from "src/core/breakpoint_defs.js";
 import { lang } from "src/core/injected_build_constants.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
@@ -83,7 +85,7 @@ const SummaryTab = ({
         args={panel_args}
         className="medium-panel-text fcol-xs-12"
       />
-      <div className="fcol-xs-12">
+      <div className="fcol-sm-12">
         <WrappedNivoPie
           data={get_pie_ready_data(top_spending_orgs)}
           display_horizontal={true}
@@ -92,13 +94,17 @@ const SummaryTab = ({
         />
       </div>
       <div className="fcol-xs-12">
-        <WrappedNivoPie
-          data={get_pie_ready_data(top_spending_measures)}
-          display_horizontal={true}
-          sort_legend={false}
-          graph_height={"300px"}
-          reverse_layout={true}
-        />
+        <MediaQuery minWidth={breakpoints.minMediumDevice}>
+          {(matches) => (
+            <WrappedNivoPie
+              data={get_pie_ready_data(top_spending_measures)}
+              display_horizontal={true}
+              sort_legend={false}
+              graph_height={"300px"}
+              reverse_layout={matches}
+            />
+          )}
+        </MediaQuery>
       </div>
     </div>
   );
