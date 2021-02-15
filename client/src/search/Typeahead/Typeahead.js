@@ -194,55 +194,56 @@ export class Typeahead extends React.Component {
                     </a>
                   </li>
                 )}
-                {_.chain(results_on_page)
-                  .groupBy("config_group_index")
-                  .flatMap((results, group_index) =>
-                    _.map(results, (result, index) => ({
-                      is_first_in_group: index === 0,
-                      group_index,
-                      result,
-                    }))
-                  )
-                  .flatMap(
-                    (
-                      { is_first_in_group, group_index, result },
-                      result_index
-                    ) => {
-                      const adjusted_result_index = needs_pagination_up_control
-                        ? result_index + 1
-                        : result_index;
+                {!_.isEmpty(this.config_groups) &&
+                  _.chain(results_on_page)
+                    .groupBy("config_group_index")
+                    .flatMap((results, group_index) =>
+                      _.map(results, (result, index) => ({
+                        is_first_in_group: index === 0,
+                        group_index,
+                        result,
+                      }))
+                    )
+                    .flatMap(
+                      (
+                        { is_first_in_group, group_index, result },
+                        result_index
+                      ) => {
+                        const adjusted_result_index = needs_pagination_up_control
+                          ? result_index + 1
+                          : result_index;
 
-                      return [
-                        is_first_in_group && (
+                        return [
+                          is_first_in_group && (
+                            <li
+                              className="typeahead__header"
+                              key={`group-${group_index}`}
+                            >
+                              {this.config_groups[group_index].group_header}
+                            </li>
+                          ),
                           <li
-                            className="typeahead__header"
-                            key={`group-${group_index}`}
+                            key={`result-${adjusted_result_index}`}
+                            className={classNames(
+                              "typeahead__item",
+                              adjusted_result_index === selection_cursor &&
+                                "typeahead__item--active"
+                            )}
+                            onClick={() => this.handle_result_selection(result)}
+                            role="option"
+                            aria-selected={
+                              adjusted_result_index === selection_cursor
+                            }
                           >
-                            {this.config_groups[group_index].group_header}
-                          </li>
-                        ),
-                        <li
-                          key={`result-${adjusted_result_index}`}
-                          className={classNames(
-                            "typeahead__item",
-                            adjusted_result_index === selection_cursor &&
-                              "typeahead__item--active"
-                          )}
-                          onClick={() => this.handle_result_selection(result)}
-                          role="option"
-                          aria-selected={
-                            adjusted_result_index === selection_cursor
-                          }
-                        >
-                          <a className="typeahead__result">
-                            {result.menu_content(query_value)}
-                          </a>
-                        </li>,
-                      ];
-                    }
-                  )
-                  .compact()
-                  .value()}
+                            <a className="typeahead__result">
+                              {result.menu_content(query_value)}
+                            </a>
+                          </li>,
+                        ];
+                      }
+                    )
+                    .compact()
+                    .value()}
                 {needs_pagination_down_control && (
                   <li
                     className={classNames(
