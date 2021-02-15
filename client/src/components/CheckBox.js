@@ -2,7 +2,6 @@ import classNames from "classnames";
 import React from "react";
 
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
-
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconCheckmark } from "../icons/icons.js";
@@ -18,9 +17,9 @@ export class CheckBox extends React.Component {
   render() {
     const {
       id,
-      onClick, //required: id => {}
       label, //required text for checkbox
       active, //required, equivalent of 'checked'
+      onClick, //(id) => {}
       color, //defaults to primaryColor
       isSolidBox, //defaults to false
       container_style, //style for div, containing checkbox and label
