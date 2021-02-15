@@ -183,6 +183,7 @@ const EverythingSearch = withRouter(
         search_options_hierarchy,
         this.option_node_to_component
       );
+      console.log(this.state);
 
       return (
         <div className="fcol-md-12 p-0">
@@ -226,6 +227,18 @@ const EverythingSearch = withRouter(
             .map((_child_node, child_key) => this.state[child_key])
             .some()
             .value();
+          const falsified_child_nodes = {
+            ...this.state,
+            ..._.chain(option_node.child_options)
+              .map((_child_node, child_key) => [child_key, false])
+              .fromPairs()
+              .value(),
+          };
+          const is_only_active_node = _.chain(falsified_child_nodes)
+            .filter()
+            .size()
+            .isEqual(0)
+            .value();
 
           return (
             <div key={option_key} style={{ width: "100%" }}>
@@ -235,6 +248,7 @@ const EverythingSearch = withRouter(
                   active={has_checked_child_option}
                   container_style={{ padding: 3 }}
                   onClick={() =>
+                    !is_only_active_node &&
                     this.setState(
                       _.chain(option_node.child_options)
                         .map((_child_node, child_key) => [
@@ -257,6 +271,12 @@ const EverythingSearch = withRouter(
             </div>
           );
         } else {
+          const toggled_options = {
+            ...this.state,
+            [option_key]: !this.state[option_key],
+          };
+          const is_only_active_node =
+            _.chain(toggled_options).filter().size().value() < 1;
           return (
             <CheckBox
               container_style={{ padding: 3 }}
@@ -264,9 +284,7 @@ const EverythingSearch = withRouter(
               label={option_node.label}
               active={this.state[option_key]}
               onClick={() =>
-                this.setState({
-                  [option_key]: !this.state[option_key],
-                })
+                !is_only_active_node && this.setState(toggled_options)
               }
             />
           );
