@@ -22,7 +22,6 @@
     "@nivo/line": "^0.52.1",
     "@nivo/pie": "^0.52.1",
     "@nivo/stream": "^0.52.1",
-    "@tippyjs/react": "^4.2.0",
     "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
     "bootstrap": "^4.5.3",
