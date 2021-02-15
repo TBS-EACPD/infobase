@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { COVID_LAST_REFRESHED_DATE } from "src/models/covid/covid_consts.js";
+import { COVID_LAST_REFRESHED_MONTH } from "src/models/covid/covid_consts.js";
 
 import { create_text_maker_component } from "src/components";
 
@@ -15,7 +15,7 @@ export const covid_create_text_maker_component = (text) => {
   const { text_maker, TM } = create_text_maker_component(extended_text_bundle);
 
   const extended_text_maker = (key, args) =>
-    text_maker(key, { ...args, COVID_LAST_REFRESHED_DATE });
+    text_maker(key, { ...args, COVID_LAST_REFRESHED_MONTH });
 
   const ExtendedTM = (props) => <TM tmf={extended_text_maker} {...props} />;
 
