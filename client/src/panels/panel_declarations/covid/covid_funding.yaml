@@ -31,11 +31,8 @@ covid_funding_measure_tab_text:
   fr: |
     TODO
 
-covid_funding_no_funding_explanation:
-  en: TODO, short explaination of how expenditures can exist without funding... or are these all cases where we're just missing the funding value for a new measure?
-  fr: TODO
-covid_funding_surpassing_funding_explanation:
-  en: TODO. Is this right? "Spending on a measure may surpass the funding value for that measure when organizations reprofile their existing resources to further support that measure."
+covid_funding_see_footnotes:
+  en: See footnotes below for explanations of outliers, where available
   fr: TODO
 
 covid_funding:
