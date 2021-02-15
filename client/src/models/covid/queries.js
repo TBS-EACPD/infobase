@@ -136,6 +136,7 @@ export const gov_covid_summary_query = build_base_query(`
   gov {
     id
     covid_summary {
+      id
       covid_funding {
         ${covid_funding_fields}
       }
@@ -155,6 +156,7 @@ export const top_5_covid_spending_orgs_query = gql`
       gov {
         id
         covid_summary {
+          id
           top_spending_orgs(top_x: 5) {
             id
             covid_summary {
