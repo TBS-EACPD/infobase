@@ -54,6 +54,10 @@ Once you have all of the environment set up for InfoBase development, you can fo
 2. Install tmux: `brew install tmux`
 3. Make sure you're on the root directory of InfoBase, and run: `npm run infobase_tmux_init`
 
+Killing tmux sessions:
+- `exit` to exit session
+- `tmux kill-server` will reset by killing all tmux sessions.
+
 ## Tests
 
 ### Browser tests
