@@ -59,24 +59,31 @@ const SummaryTab = ({
 }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
 
-  const get_pie_ready_data = (top_spending_data) =>
-    _.chain(top_spending_data)
-      .map(({ name, spending }) => ({
-        id: name,
-        label: name,
-        value: spending,
-      }))
-      .thru((pie_data) => [
-        ...pie_data,
-        {
-          id: "other",
-          label: "other",
-          value:
-            gov_covid_expenditures_in_year -
-            _.reduce(pie_data, (memo, { value }) => memo + value, 0),
-        },
-      ])
-      .value();
+  const SummaryTabPie = ({ data, other_items_label, reverse_layout }) => (
+    <WrappedNivoPie
+      data={_.chain(data)
+        .map(({ name, spending }) => ({
+          id: name,
+          label: name,
+          value: spending,
+        }))
+        .thru((pie_data) => [
+          ...pie_data,
+          {
+            id: "other",
+            label: other_items_label,
+            value:
+              gov_covid_expenditures_in_year -
+              _.reduce(pie_data, (memo, { value }) => memo + value, 0),
+          },
+        ])
+        .value()}
+      display_horizontal={true}
+      sort_legend={false}
+      graph_height={"300px"}
+      reverse_layout={reverse_layout}
+    />
+  );
 
   return (
     <div className="frow middle-xs">
@@ -86,22 +93,21 @@ const SummaryTab = ({
         className="medium-panel-text fcol-xs-12"
       />
       <div className="fcol-sm-12">
-        <WrappedNivoPie
-          data={get_pie_ready_data(top_spending_orgs)}
-          display_horizontal={true}
-          sort_legend={false}
-          graph_height={"300px"}
+        <TM k={`covid_top_spending_orgs`} el={"h3"} />
+        <SummaryTabPie
+          data={top_spending_orgs}
+          other_items_label={text_maker("covid_all_other_orgs")}
+          reverse_layout={false}
         />
       </div>
       <div className="fcol-xs-12">
+        <TM k={`covid_top_spending_measures`} el={"h3"} />
         <MediaQuery minWidth={breakpoints.minMediumDevice}>
           {(matches) => (
-            <WrappedNivoPie
-              data={get_pie_ready_data(top_spending_measures)}
-              display_horizontal={true}
-              sort_legend={false}
-              graph_height={"300px"}
-              reverse_layout={matches}
+            <SummaryTabPie
+              data={top_spending_measures}
+              other_items_label={text_maker("covid_all_other_measures")}
+              reverse_layout={!!matches}
             />
           )}
         </MediaQuery>
