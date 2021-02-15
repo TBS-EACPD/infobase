@@ -145,11 +145,31 @@ class InfoGraph_ extends React.Component {
         options.panel_key &&
         _.includes(valid_panel_keys, options.panel_key) &&
         document.querySelector(`#${options.panel_key}`);
-      if (linked_to_panel) {
-        linked_to_panel.scrollIntoView();
-        linked_to_panel.focus();
-      }
+
+      linked_to_panel &&
+        this.scroll_to_panel_when_all_loading_done(linked_to_panel);
     }
+  }
+  scroll_to_panel_when_all_loading_done = _.debounce((linked_to_panel) => {
+    // Stop-gap to make sure linking to panel is resilient to some panels managing their own
+    // internal loading. Otherwise, infographic could scroll to a panel and then promptly have
+    // another panel above it finish it's own loading, re-render with content, and shift the content
+    // to push the linked to panel out of view again...
+    // TODO this shouldn't be necessary/should be made less hacky durring the full GraphQL rewrite
+
+    const something_is_loading = !_.isNull(
+      document.querySelector(".leaf-spinner")
+    );
+
+    if (something_is_loading) {
+      this.scroll_to_panel_when_all_loading_done(linked_to_panel);
+    } else {
+      linked_to_panel.scrollIntoView();
+      linked_to_panel.focus();
+    }
+  }, 100);
+  componentWillUnmount() {
+    this.scroll_to_panel_when_all_loading_done.cancel();
   }
   render() {
     const { subject, active_bubble_id } = this.props;
