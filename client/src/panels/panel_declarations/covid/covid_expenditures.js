@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 
 import {
   gov_covid_summary_query,
-  top_5_covid_spending_query,
+  top_covid_spending_query,
 } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
@@ -19,6 +19,7 @@ import {
   util_components,
   Subject,
   ensure_loaded,
+  WrappedNivoPie,
 } from "../shared.js";
 
 import { AboveTabFootnoteList } from "./covid_common_components.js";
@@ -54,17 +55,48 @@ const SummaryTab = ({
   args: panel_args,
   data: { top_spending_orgs, top_spending_measures },
 }) => {
-  // TODO some sort of viz to show proportionality between the top spending orgs vs the rest of the gov?
+  const { gov_covid_expenditures_in_year } = panel_args;
 
-  debugger;
+  const get_pie_ready_data = (top_spending_data) =>
+    _.chain(top_spending_data)
+      .map(({ name, spending }) => ({
+        id: name,
+        label: name,
+        value: spending,
+      }))
+      .thru((pie_data) => [
+        ...pie_data,
+        {
+          id: "other",
+          label: "other",
+          value:
+            gov_covid_expenditures_in_year -
+            _.reduce(pie_data, (memo, { value }) => memo + value, 0),
+        },
+      ])
+      .value();
 
   return (
     <div className="frow middle-xs">
       <TM
         k={`covid_expenditures_overview_tab_text`}
         args={panel_args}
-        className="medium-panel-text"
+        className="medium-panel-text fcol-xs-12"
       />
+      <div className="fcol-xs-12">
+        <WrappedNivoPie
+          data={get_pie_ready_data(top_spending_orgs)}
+          display_horizontal={true}
+          graph_height={"300px"}
+        />
+      </div>
+      <div className="fcol-xs-12">
+        <WrappedNivoPie
+          data={get_pie_ready_data(top_spending_measures)}
+          display_horizontal={true}
+          graph_height={"300px"}
+        />
+      </div>
     </div>
   );
 };
@@ -274,10 +306,10 @@ const tab_content_configs = [
     load_data: (panel_args) =>
       client
         .query({
-          query: top_5_covid_spending_query,
+          query: top_covid_spending_query,
           variables: {
             lang: lang,
-            _query_name: "top_5_covid_spending_query",
+            _query_name: "top_covid_spending_query",
           },
         })
         .then(
@@ -435,7 +467,7 @@ export const declare_covid_expenditures_panel = () =>
       requires_has_covid_response: level_name === "dept",
       initial_queries: {
         gov_covid_summary_query,
-        ...(level_name === "gov" && { top_5_covid_spending_query }),
+        ...(level_name === "gov" && { top_covid_spending_query }),
       },
       footnotes: false,
       source: (subject) => [],
