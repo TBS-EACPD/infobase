@@ -120,9 +120,7 @@ const ByMeasureTab = ({ args: panel_args, data: { covid_expenditures } }) => {
             <span>
               {"—"}
               <CellTooltip
-                tooltip_text={text_maker(
-                  "covid_funding_no_funding_explanation"
-                )}
+                tooltip_text={text_maker("covid_funding_see_footnotes")}
               />
             </span>
           );
@@ -153,9 +151,7 @@ const ByMeasureTab = ({ args: panel_args, data: { covid_expenditures } }) => {
               {formats.percentage2_raw(value)}
               {value > 1 && (
                 <CellTooltip
-                  tooltip_text={text_maker(
-                    "covid_funding_surpassing_funding_explanation"
-                  )}
+                  tooltip_text={text_maker("covid_funding_see_footnotes")}
                 />
               )}
             </span>
