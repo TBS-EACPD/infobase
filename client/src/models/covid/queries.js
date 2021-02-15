@@ -150,7 +150,7 @@ export const org_covid_summary_query = build_org_query(`
   }
 `);
 
-export const top_5_covid_spending_orgs_query = gql`
+export const top_5_covid_spending_query = gql`
   query($lang: String!) {
     root(lang: $lang) {
       gov {
@@ -159,10 +159,20 @@ export const top_5_covid_spending_orgs_query = gql`
           id
           top_spending_orgs(top_x: 5) {
             id
+            name
             covid_summary {
               covid_expenditures {
                 ${covid_expenditures_fields}
               }
+            }
+          }
+          top_spending_measures(top_x: 5) {
+            id
+            name
+            covid_expenditures {
+              org_id
+
+              ${covid_expenditures_fields}
             }
           }
         }

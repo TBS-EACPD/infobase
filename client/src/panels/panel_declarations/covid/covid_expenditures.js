@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 
 import {
   gov_covid_summary_query,
-  top_5_covid_spending_orgs_query,
+  top_5_covid_spending_query,
 } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
@@ -50,8 +50,13 @@ const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({ args: panel_args, data }) => {
+const SummaryTab = ({
+  args: panel_args,
+  data: { top_spending_orgs, top_spending_measures },
+}) => {
   // TODO some sort of viz to show proportionality between the top spending orgs vs the rest of the gov?
+
+  debugger;
 
   return (
     <div className="frow middle-xs">
@@ -269,30 +274,45 @@ const tab_content_configs = [
     load_data: (panel_args) =>
       client
         .query({
-          query: top_5_covid_spending_orgs_query,
+          query: top_5_covid_spending_query,
           variables: {
             lang: lang,
-            _query_name: "top_5_covid_spending_orgs_query",
+            _query_name: "top_5_covid_spending_query",
           },
         })
-        .then((response) =>
-          _.chain(response)
-            .thru(
-              ({
-                data: {
-                  root: {
-                    gov: {
-                      covid_summary: { top_spending_orgs },
-                    },
-                  },
+        .then(
+          ({
+            data: {
+              root: {
+                gov: {
+                  covid_summary: { top_spending_orgs, top_spending_measures },
                 },
-              }) => top_spending_orgs
-            )
-            .map(({ id, covid_summary: { covid_expenditures } }) => ({
-              org: Dept.lookup(id),
-              covid_expenditures,
-            }))
-            .value()
+              },
+            },
+          }) => ({
+            top_spending_orgs: _.map(
+              top_spending_orgs,
+              ({ name, covid_summary: { covid_expenditures } }) => ({
+                name,
+                spending: _.reduce(
+                  covid_expenditures,
+                  (memo, { vote, stat }) => memo + vote + stat,
+                  0
+                ),
+              })
+            ),
+            top_spending_measures: _.map(
+              top_spending_measures,
+              ({ name, covid_expenditures }) => ({
+                name,
+                spending: _.reduce(
+                  covid_expenditures,
+                  (memo, { vote, stat }) => memo + vote + stat,
+                  0
+                ),
+              })
+            ),
+          })
         ),
     TabContent: SummaryTab,
   },
@@ -415,7 +435,7 @@ export const declare_covid_expenditures_panel = () =>
       requires_has_covid_response: level_name === "dept",
       initial_queries: {
         gov_covid_summary_query,
-        ...(level_name === "gov" && { top_5_covid_spending_orgs_query }),
+        ...(level_name === "gov" && { top_5_covid_spending_query }),
       },
       footnotes: false,
       source: (subject) => [],
