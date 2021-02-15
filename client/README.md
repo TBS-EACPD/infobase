@@ -48,6 +48,12 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 
 Note: if you use `npm run serve` you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. IB_q, or equivalent, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
 
+### TMUX to automate build
+Once you have all of the environment set up for InfoBase development, you can follow the steps below to automate all of the build process in in one terminal screen using tmux (an alternative terminal multiplexer)
+1. Install Homebrew (skip if you already have Homebrew): `cd /usr/local && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew`
+2. Install tmux: `brew install tmux`
+3. Make sure you're on the root directory of InfoBase, and run: `npm run infobase_tmux_init`
+
 ## Tests
 
 ### Browser tests
