@@ -75,6 +75,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
                   )
                 : node.getAttribute("data-ibtt-text"),
               interactive: true,
+              interactiveBorder: 0,
               duration: 0,
               allowHTML: true,
               hideOnClick: false,
