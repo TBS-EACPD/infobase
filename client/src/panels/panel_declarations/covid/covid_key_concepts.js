@@ -15,9 +15,6 @@ const { KeyConceptList } = util_components;
 
 const { TM } = covid_create_text_maker_component(text);
 
-// TODO lots of dates and stuff hardcoded in covid_key_concept text,
-// do not want that since some of it will be changing as often as monthly...
-
 const panel_key = "covid_key_concepts";
 
 export const declare_covid_key_concepts_panel = () =>
@@ -54,7 +51,7 @@ export const declare_covid_key_concepts_panel = () =>
 
 // TODO, can this same UX be acheived with less hackyness?
 export const scroll_to_covid_key_concepts = () => {
-  // Doing this imparitevly, better behaviour for users than alternative, i.e. using a panel_key url option and the router
+  // Doing this imperatively, better behaviour for users than alternative, i.e. using a panel_key url option and the router.
   // More brittle this way, but the assumption that panels have their panel key as an id, and that the key concept panel will
   // be rendered (given it's calculate of _.constant(true)) are fundamental infographic assumptions, so safe enough
   const covid_key_concept_panel = document.querySelector(`#${panel_key}`);
