@@ -50,15 +50,19 @@ const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({ args: panel_args }) => (
-  <div className="frow middle-xs">
-    <TM
-      k={`covid_expenditures_overview_tab_text`}
-      args={panel_args}
-      className="medium-panel-text"
-    />
-  </div>
-);
+const SummaryTab = ({ args: panel_args, data }) => {
+  // TODO some sort of viz to show proportionality between the top spending orgs vs the rest of the gov?
+
+  return (
+    <div className="frow middle-xs">
+      <TM
+        k={`covid_expenditures_overview_tab_text`}
+        args={panel_args}
+        className="medium-panel-text"
+      />
+    </div>
+  );
+};
 
 const get_expenditures_by_index = (exp_data, index_key) =>
   _.chain(exp_data)
@@ -271,9 +275,25 @@ const tab_content_configs = [
             _query_name: "top_5_covid_spending_orgs_query",
           },
         })
-        .then((response) => {
-          // TODO, unpack data, kind of a mess
-        }),
+        .then((response) =>
+          _.chain(response)
+            .thru(
+              ({
+                data: {
+                  root: {
+                    gov: {
+                      covid_summary: { top_spending_orgs },
+                    },
+                  },
+                },
+              }) => top_spending_orgs
+            )
+            .map(({ id, covid_summary: { covid_expenditures } }) => ({
+              org: Dept.lookup(id),
+              covid_expenditures,
+            }))
+            .value()
+        ),
     TabContent: SummaryTab,
   },
   {
