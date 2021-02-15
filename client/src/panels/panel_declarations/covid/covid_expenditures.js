@@ -15,7 +15,6 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
-  create_text_maker_component,
   InfographicPanel,
   declare_panel,
   util_components,
@@ -30,13 +29,13 @@ import {
   wrap_with_vote_stat_controls,
   string_sort_func,
 } from "./covid_common_utils.js";
+import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
-import text2 from "./covid_common_lang.yaml";
-import text1 from "./covid_expenditures.yaml";
+import text from "./covid_expenditures.yaml";
 
 const { CovidMeasure, Dept } = Subject;
 
-const { text_maker, TM } = create_text_maker_component([text1, text2]);
+const { text_maker, TM } = covid_create_text_maker_component(text);
 const {
   TabbedContent,
   SpinnerWrapper,
@@ -45,11 +44,6 @@ const {
 } = util_components;
 
 const client = get_client();
-
-// TODO, would rather not hard code this here, but where else could it live?
-const last_refreshed_date = { en: "December 31, 2020", fr: "31 décembre 2020" }[
-  lang
-];
 
 const panel_key = "covid_expenditures_panel";
 
@@ -459,7 +453,6 @@ class CovidExpendituresPanel extends React.Component {
     } else {
       const extended_panel_args = {
         ...panel_args,
-        last_refreshed_date,
         gov_covid_expenditures_in_year,
       };
       const {
