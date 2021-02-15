@@ -87,6 +87,7 @@ const SummaryTab = ({
         <WrappedNivoPie
           data={get_pie_ready_data(top_spending_orgs)}
           display_horizontal={true}
+          sort_legend={false}
           graph_height={"300px"}
         />
       </div>
@@ -94,6 +95,7 @@ const SummaryTab = ({
         <WrappedNivoPie
           data={get_pie_ready_data(top_spending_measures)}
           display_horizontal={true}
+          sort_legend={false}
           graph_height={"300px"}
         />
       </div>
