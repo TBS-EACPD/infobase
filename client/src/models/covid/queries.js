@@ -150,7 +150,7 @@ export const org_covid_summary_query = build_org_query(`
   }
 `);
 
-const top_x = 3;
+const top_x = 4;
 export const top_covid_spending_query = gql`
   query($lang: String!) {
     root(lang: $lang) {
