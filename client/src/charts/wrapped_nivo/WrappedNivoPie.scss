@@ -23,6 +23,8 @@
 }
 
 .infobase-pie__legend-data {
+  display: inline-block;
+  min-width: 55px;
   padding-left: 5px;
   padding-right: 5px;
 }
