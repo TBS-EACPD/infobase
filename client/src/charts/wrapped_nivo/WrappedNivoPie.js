@@ -39,6 +39,7 @@ export class WrappedNivoPie extends React.Component {
       show_legend,
       theme,
       sort_legend,
+      reverse_layout,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
@@ -108,7 +109,8 @@ export class WrappedNivoPie extends React.Component {
       <div
         className={classNames(
           "infobase-pie",
-          display_horizontal && "infobase-pie--horizontal"
+          display_horizontal && "infobase-pie--horizontal",
+          reverse_layout && "infobase-pie--reverse"
         )}
         aria-hidden={true}
       >
@@ -194,4 +196,5 @@ WrappedNivoPie.defaultProps = {
   include_percent: true,
   show_legend: true,
   sort_legend: true,
+  reverse_layout: false,
 };

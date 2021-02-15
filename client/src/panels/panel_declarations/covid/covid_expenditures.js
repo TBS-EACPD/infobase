@@ -97,6 +97,7 @@ const SummaryTab = ({
           display_horizontal={true}
           sort_legend={false}
           graph_height={"300px"}
+          reverse_layout={true}
         />
       </div>
     </div>
