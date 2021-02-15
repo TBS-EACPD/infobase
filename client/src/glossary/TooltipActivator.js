@@ -4,8 +4,22 @@ import tippy from "tippy.js";
 
 import { get_glossary_item_tooltip_html } from "../models/glossary.js";
 
-const body = document.body;
 const app = document.querySelector("#app");
+
+const create_tooltip = (node) =>
+  tippy(node, {
+    content: node.getAttribute("data-ibtt-glossary-key")
+      ? get_glossary_item_tooltip_html(
+          node.getAttribute("data-ibtt-glossary-key")
+        )
+      : node.getAttribute("data-ibtt-text"),
+    interactive: true,
+    interactiveBorder: 0,
+    duration: 0,
+    allowHTML: true,
+    hideOnClick: false,
+    appendTo: "parent",
+  });
 
 const TooltipActivator = _.isUndefined(MutationObserver)
   ? _.constant(false)
@@ -68,19 +82,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
           this.tooltip_instances = _.map(current_tooltip_nodes, (node) => ({
             node,
             glossary_key: node.getAttribute("data-ibtt-glossary-key"),
-            tooltip: tippy(node, {
-              content: node.getAttribute("data-ibtt-glossary-key")
-                ? get_glossary_item_tooltip_html(
-                    node.getAttribute("data-ibtt-glossary-key")
-                  )
-                : node.getAttribute("data-ibtt-text"),
-              interactive: true,
-              interactiveBorder: 0,
-              duration: 0,
-              allowHTML: true,
-              hideOnClick: false,
-              appendTo: "parent",
-            }),
+            tooltip: create_tooltip(node),
           }));
         } else {
           const remaining_tooltips = [];
@@ -113,18 +115,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
             .map((node) => ({
               node,
               glossary_key: node.getAttribute("data-ibtt-glossary-key"),
-              tooltip: tippy(node, {
-                content: node.getAttribute("data-ibtt-glossary-key")
-                  ? get_glossary_item_tooltip_html(
-                      node.getAttribute("data-ibtt-glossary-key")
-                    )
-                  : node.getAttribute("data-ibtt-text"),
-                interactive: true,
-                duration: 0,
-                allowHTML: true,
-                hideOnClick: false,
-                appendTo: body, //silence the warning
-              }),
+              tooltip: create_tooltip(node),
             }))
             .value();
 
