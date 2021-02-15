@@ -5,4 +5,6 @@ export const COVID_LAST_REFRESHED_MONTH = {
   fr: "décembre 2020",
 }[lang];
 
-// TODO key concept talks about "up to December 2020", so need to be a bit more flexible in handling the last refreshed date to make that dynamic too
+export const COVID_CURRENT_YEAR = 2020;
+
+export const COVID_NEXT_YEAR = COVID_CURRENT_YEAR + 1;

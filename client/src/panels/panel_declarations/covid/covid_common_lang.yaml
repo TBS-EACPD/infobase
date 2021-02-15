@@ -17,7 +17,8 @@ covid_above_tab_limited_measure_note:
   en: Measures below are limited to those presented in the Estimates. As certain measures are not presented in the Estimates, only a portion of Canada’s COVID-19 Economic Response Plan is represented here.
   fr: TODO
 covid_above_tab_data_freshness_note:
-  en: More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for 2020-21 will be available in 2021-22.
+  transform: [handlebars]
+  en: More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be available in {{fmt_year_to_fiscal_year COVID_NEXT_YEAR}}.
   fr: TODO
 covid_above_tab_footnote_key_concept_link:
   transform: [handlebars,markdown]
