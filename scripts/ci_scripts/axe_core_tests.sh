@@ -1,8 +1,8 @@
 set -e 
 
-#npm set prefix ~/.npm
-#PATH="$HOME/.npm/bin:$PATH"
-#PATH="./node_modules/.bin:$PATH"
+npm set prefix ~/.npm
+PATH="$HOME/.npm/bin:$PATH"
+PATH="./node_modules/.bin:$PATH"
 
 npm install @axe-core/cli -g
 
