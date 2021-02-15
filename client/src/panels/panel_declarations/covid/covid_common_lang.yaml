@@ -14,14 +14,14 @@ covid_above_tab_footnote_title:
   fr: |
     Important:
 covid_above_tab_limited_measure_note:
-  en: The measures reported on here are limited to those presented in the Estimates. As certain measures are not presented in the Estimates, only a portion of Canada’s COVID-19 Economic Response Plan is represented
+  en: The measures reported on here are limited to those presented in the Estimates. As certain measures are not presented in the Estimates, only a portion of Canada’s COVID-19 Economic Response Plan is represented.
   fr: TODO
 covid_above_tab_data_freshness_note:
-  en: More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for 2020-21 will be available in 2021-22
+  en: More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for 2020-21 will be available in 2021-22.
   fr: TODO
 covid_above_tab_footnote_key_concept_link:
   transform: [handlebars,markdown]
-  en: See "{{gt "some_things_to_keep_in_mind"}}" for more details and additional caveats
+  en: See "{{gt "some_things_to_keep_in_mind"}}" for more details and additional caveats.
   fr: TODO
 
 show_vote_stat_split:
