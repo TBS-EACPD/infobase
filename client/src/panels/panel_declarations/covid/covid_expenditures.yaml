@@ -11,7 +11,11 @@ covid_expenditures_above_tab_footnote_list:
 covid_expenditures_overview_tab_text:
   transform: [handlebars,markdown]
   en: |
-    TODO
+    As of **{{last_refreshed_date}}**, **{{fmt_compact1_written gov_covid_expenditures_in_year}}** has been spent towards implementing the
+    government's response to the COVID-19 pandemic in **{{est_in_year}}**. By organization, the largest portion of this
+    (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}**) was spent by **{{top_spending_org_name}}**.
+    By COVID-19 Measure, the largest portion (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
+    was spent on **{{top_spending_measure_name}}**.
   fr: |
     TODO
 

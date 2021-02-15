@@ -59,6 +59,22 @@ const SummaryTab = ({
 }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
 
+  const {
+    name: top_spending_org_name,
+    spending: top_spending_org_amount,
+  } = _.first(top_spending_orgs);
+  const {
+    name: top_spending_measure_name,
+    spending: top_spending_measure_amount,
+  } = _.first(top_spending_measures);
+  const text_args = {
+    ...panel_args,
+    top_spending_org_name,
+    top_spending_org_amount,
+    top_spending_measure_name,
+    top_spending_measure_amount,
+  };
+
   const SummaryTabPie = ({ data, other_items_label, reverse_layout }) => (
     <WrappedNivoPie
       data={_.chain(data)
@@ -89,7 +105,7 @@ const SummaryTab = ({
     <div className="frow middle-xs">
       <TM
         k={`covid_expenditures_overview_tab_text`}
-        args={panel_args}
+        args={text_args}
         className="medium-panel-text fcol-xs-12"
       />
       <div className="fcol-sm-12">
