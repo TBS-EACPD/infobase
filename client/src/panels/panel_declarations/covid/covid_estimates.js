@@ -4,7 +4,6 @@ import React, { Fragment } from "react";
 import {
   Subject,
   util_components,
-  create_text_maker_component,
   InfographicPanel,
   ensure_loaded,
   declare_panel,
@@ -35,9 +34,9 @@ import {
   get_est_doc_glossary_key,
   string_sort_func,
 } from "./covid_common_utils.js";
+import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
-import text2 from "./covid_common_lang.yaml";
-import text1 from "./covid_estimates.yaml";
+import text from "./covid_estimates.yaml";
 
 const { CovidMeasure, Dept } = Subject;
 
@@ -48,7 +47,7 @@ const {
   SmartDisplayTable,
 } = util_components;
 
-const { text_maker, TM } = create_text_maker_component([text1, text2]);
+const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const client = get_client();
 

@@ -7,11 +7,13 @@ import {
   declare_panel,
 } from "../shared.js";
 
+import { covid_create_text_maker_component } from "./covid_text_provider.js";
+
 import text from "./covid_key_concepts.yaml";
 
-const { create_text_maker_component, KeyConceptList } = util_components;
+const { KeyConceptList } = util_components;
 
-const { TM } = create_text_maker_component(text);
+const { TM } = covid_create_text_maker_component(text);
 
 // TODO lots of dates and stuff hardcoded in covid_key_concept text,
 // do not want that since some of it will be changing as often as monthly...

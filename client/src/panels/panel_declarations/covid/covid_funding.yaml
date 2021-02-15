@@ -16,7 +16,7 @@ covid_funding_above_tab_footnote_list:
 covid_funding_summary_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{last_refreshed_date}}**, the government has identified **{{fmt_compact1_written covid_funding_in_year}}** in total
+    As of **{{COVID_LAST_REFRESHED_DATE}}**, the government has identified **{{fmt_compact1_written covid_funding_in_year}}** in total
     funding for use towards implementing its response to the COVID-19 pandemic in **{{est_in_year}}**. Of this total funding potential,
     **{{fmt_compact1_written covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide covid_expenditures_in_year covid_funding_in_year)}}**)
     has been spent so far.
@@ -25,7 +25,7 @@ covid_funding_summary_text:
 covid_funding_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{last_refreshed_date}}**, the COVID-19 measure with the most funding in **{{est_in_year}}** is **{{largest_measure_name}}** with 
+    As of **{{COVID_LAST_REFRESHED_DATE}}**, the COVID-19 measure with the most funding in **{{est_in_year}}** is **{{largest_measure_name}}** with 
     **{{fmt_compact1_written largest_measure_funding}}**. Of this total funding potential, **{{fmt_compact1_written largest_measure_exp}}**
     (**{{fmt_percentage1 (divide largest_measure_exp largest_measure_funding)}}**) has been spent so far.
   fr: |
