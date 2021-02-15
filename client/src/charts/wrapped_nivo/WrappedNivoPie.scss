@@ -1,8 +1,21 @@
 @import "src/common_css/common-variables";
 
 .infobase-pie.infobase-pie--horizontal {
+  display: flex;
+  flex-direction: column;
+
+  &.infobase-pie--reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+.infobase-pie.infobase-pie--horizontal {
   @media (min-width:$minMediumDevice){
-    display: flex;
+    flex-direction: row;
+    &.infobase-pie--reverse {
+      flex-direction: row-reverse;
+    }
+
     justify-content: space-around;
 
     & > .infobase-pie__graph{
