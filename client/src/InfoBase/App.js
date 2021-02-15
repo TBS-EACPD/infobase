@@ -148,7 +148,7 @@ export class App extends React.Component {
             />
             {has_local_storage && <SurveyPopup />}
             <ReactUnmounter />
-            {!is_a11y_mode && <TooltipActivator />}
+            {<TooltipActivator />}
             <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
               <Switch>
                 <Route
