@@ -15,11 +15,11 @@ covid_funding_above_tab_footnote_list:
 
 covid_funding_summary_text:
   transform: [handlebars,markdown]
-  en: |
-    As of **{{COVID_LAST_REFRESHED_MONTH}}**, the government has identified **{{fmt_compact1_written covid_funding_in_year}}** in total
-    funding for use towards implementing its response to the COVID-19 pandemic in **{{est_in_year}}**. Of this total funding potential,
-    **{{fmt_compact1_written covid_expenditures_in_year}}** (**{{fmt_percentage1 (divide covid_expenditures_in_year covid_funding_in_year)}}**)
-    has been spent so far.
+  en: | 
+    As of **{{COVID_LAST_REFRESHED_MONTH}}**, based on measures found in the Estimates, the government has identified 
+    **{{fmt_compact1_written covid_funding_in_year}}** in total funding for use towards implementing its response 
+    to the COVID-19 pandemic in **{{est_in_year}}**. Of this total funding potential, **{{fmt_compact1_written covid_expenditures_in_year}}**
+    (**{{fmt_percentage1 (divide covid_expenditures_in_year covid_funding_in_year)}}**) has been spent so far.
   fr: TODO
 
 covid_funding_measure_tab_text:
