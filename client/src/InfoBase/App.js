@@ -148,7 +148,7 @@ export class App extends React.Component {
             />
             {has_local_storage && <SurveyPopup />}
             <ReactUnmounter />
-            {<TooltipActivator />}
+            <TooltipActivator />
             <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
               <Switch>
                 <Route

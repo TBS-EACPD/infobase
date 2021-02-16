@@ -161,7 +161,7 @@ class InfoGraph_ extends React.Component {
     return (
       <div>
         <AnalyticsSynchronizer {...this.props} />
-        <div className="row infographic-search-container">
+        <div className="infographic-search-container">
           <EverythingSearch
             href_template={this.search_href_template}
             initial_search_options={{

@@ -185,7 +185,7 @@ const EverythingSearch = withRouter(
       );
 
       return (
-        <div className="col-md-12">
+        <div className="fcol-md-12 p-0">
           <Typeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
