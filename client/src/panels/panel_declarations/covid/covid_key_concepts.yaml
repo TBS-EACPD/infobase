@@ -12,7 +12,7 @@ covid_questions_financial_q:
   en: COVID response data is kept separate from other financial data on GC InfoBase. What makes it different from the data presented elsewhere?
   fr: TODO
 covid_questions_financial_a:
-  transform: [markdown]
+  transform: [handlebars,markdown]
   en: |
     The financial data presented on GC InfoBase is typically based on Volume II of the Public Accounts of Canada plus expenditure data presented
     following the tabling of the Public Accounts of Canada. Due to the COVID-19 global pandemic, the following exceptions have been made for this
