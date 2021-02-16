@@ -122,7 +122,9 @@
   },
   "sideEffects": false,
   "devDependencies": {
+    "@storybook/addon-a11y": "^6.1.18",
     "@storybook/addon-actions": "^6.1.18",
+    "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.1.18",
     "@storybook/addon-links": "^6.1.18",
     "@storybook/react": "^6.1.18",
