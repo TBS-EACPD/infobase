@@ -8,3 +8,5 @@ export const COVID_LAST_REFRESHED_MONTH = {
 export const COVID_CURRENT_YEAR = 2020;
 
 export const COVID_NEXT_YEAR = COVID_CURRENT_YEAR + 1;
+
+export const COVID_FUNDING_FEATURE_FLAG = false;

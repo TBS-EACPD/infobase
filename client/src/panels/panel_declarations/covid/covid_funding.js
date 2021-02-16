@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { COVID_FUNDING_FEATURE_FLAG } from "src/models/covid/covid_config.js";
 import { gov_covid_summary_query } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
@@ -295,6 +296,7 @@ class CovidFundingPanel extends React.Component {
 }
 
 export const declare_covid_funding_panel = () =>
+  COVID_FUNDING_FEATURE_FLAG &&
   declare_panel({
     panel_key,
     levels: ["gov"],
