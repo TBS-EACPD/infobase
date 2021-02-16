@@ -42,6 +42,7 @@ import {
   declare_employee_gender_panel,
   declare_results_intro_panel,
   declare_covid_key_concepts_panel,
+  declare_covid_intro_panel,
   declare_covid_expenditures_panel,
   declare_covid_estimates_panel,
 
@@ -87,6 +88,7 @@ export const get_dept_panels = (subject) =>
     ],
     covid: subject.has_data("covid_response") && [
       declare_covid_key_concepts_panel(),
+      declare_covid_intro_panel(),
       declare_covid_expenditures_panel(),
       declare_covid_estimates_panel(),
     ],
