@@ -91,7 +91,7 @@ export const PinnedContent = withRouter(
                         entry.boundingClientRect.top < 0 && {
                           position: "fixed",
                           top: 0,
-                          zIndex: 9001,
+                          zIndex: 2001,
                         }),
                     }}
                   >
