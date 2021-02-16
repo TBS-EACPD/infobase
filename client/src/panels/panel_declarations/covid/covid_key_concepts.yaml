@@ -19,7 +19,7 @@ covid_questions_financial_a:
     COVID-19 Response section of GC InfoBase:
     * It may include expenditure data that has not yet been published elsewhere, to better provide a more up to date Government of Canada wide view
     * Both {{gl_tt "budgetary" "BUD_EXP"}} and {{gl_tt "non-budgetary" "NB_EXP"}} expenditures are included here, whereas other GC InfoBase reporting is limited 
-    to budgetary ammounts only. Non-budgetary expenditures must be included here for completeness and accuracy as repayable assistance is a critical element of the
+    to budgetary amounts only. Non-budgetary expenditures must be included here for completeness and accuracy as repayable assistance is a critical element of the
     government's COVID-19 response.
     * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19
