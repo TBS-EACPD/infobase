@@ -319,7 +319,7 @@ const StatusIconTable = ({
             active_list.length === 0 ||
             _.indexOf(active_list, status_key) !== -1,
           count: icon_counts[status_key] || 0,
-          text: !is_a11y_mode ? (
+          text: (
             <span
               className="link-unstyled"
               tabIndex={-1}
@@ -329,9 +329,8 @@ const StatusIconTable = ({
             >
               {result_simple_statuses[status_key].text}
             </span>
-          ) : (
-            result_simple_statuses[status_key].text
           ),
+          ariaText: result_simple_statuses[status_key].text,
           icon: large_status_icons[status_key],
         }))}
         item_component_order={["count", "icon", "text"]}
