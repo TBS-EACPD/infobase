@@ -18,6 +18,8 @@ covid_questions_financial_a:
     following the tabling of the Public Accounts of Canada. Due to the COVID-19 global pandemic, the following exceptions have been made for this
     COVID-19 Response section of GC InfoBase:
     * It may include expenditure data that has not yet been published elsewhere, to better provide a more up to date Government of Canada wide view
+    * Both {{gl_tt "budgetary" "BUD_EXP"}} and {{gl_tt "non-budgetary" "NB_EXP"}} expenditures are included here, where as other GC InfoBase reporting is limited 
+    to budgetary only. Non-budgetary expenditures must be included here for completeness and accuracy as repayable assistance is a critical element of the COVID-19 response.
     * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19
   fr: TODO
@@ -34,4 +36,6 @@ covid_questions_funding_value_a:
     authorities presented in the Estimates.  
 
     Cases where the cash value here is higher than the accrual value provided in the FES are due to updates that have occurred since the publication of the FES.
+
+    Expenditures may be higher than funding for a given measure due to transfers between organizations and/or the use of existing resources by one or more organizations to support a measure.
   fr: TODO
