@@ -767,8 +767,8 @@ supps_b:
 supps_c:
   transform: [handlebars]
   en: |
-    {{est_last_year}} Supplementary Estimates C
-  fr: Budget supplémentaire des dépenses (C) {{est_last_year}}
+    {{est_in_year}} Supplementary Estimates C
+  fr: Budget supplémentaire des dépenses (C) {{est_in_year}}
 
 
 help:
