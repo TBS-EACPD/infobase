@@ -344,13 +344,15 @@ const StatusIconTable = ({
         <tr>
           {_.map(icon_counts, (count, status_key) => (
             <th key={status_key}>
-              <a
-                href={`#glossary/${status_key_to_glossary_key[status_key]}`}
-                className="sr-only"
-                title={text_maker("glossary_link_title")}
+              <span
+                className="link-unstyled sr-only"
+                aria-hidden="true"
+                tabIndex={0}
+                data-toggle="tooltip"
+                data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
               >
                 {result_simple_statuses[status_key].text}
-              </a>
+              </span>
             </th>
           ))}
         </tr>
