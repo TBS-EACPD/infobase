@@ -8,13 +8,13 @@ export class IconGrid extends React.Component {
     const { icons } = this.props;
     return (
       <div aria-hidden="true" className="icon-block">
-        {_.map(icons, (icon) =>
+        {_.map(icons, (icon, ix) =>
           icon.href ? (
             <a href={icon.href} key={icon.src}>
               <img src={icon.src} key={icon.src} />
             </a>
           ) : (
-            <Fragment key={icon.svg}>{icon.svg}</Fragment>
+            <Fragment key={ix}>{icon.svg}</Fragment>
           )
         )}
       </div>

@@ -12,7 +12,7 @@ import {
   connectRouter,
 } from "connected-react-router";
 import _ from "lodash";
-import { default as createHistory } from "history/createHashHistory";
+import { createHashHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -72,7 +72,7 @@ function bootstrapper(App, app_reducer, done) {
   populate_stores().then(() => {
     _.each(table_defs, (table_def) => Table.create_and_register(table_def));
 
-    const history = createHistory({ hashType: "noslash" });
+    const history = createHashHistory({ hashType: "noslash" });
 
     const middleware = routerMiddleware(history);
 
