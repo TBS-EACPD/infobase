@@ -159,7 +159,7 @@ const get_expenditures_by_index = (exp_data, index_key) =>
 const get_common_column_configs = (show_vote_stat) => ({
   vote: {
     index: 2,
-    header: text_maker(`covid_expenditures_voted`),
+    header: text_maker("covid_expenditures_voted"),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
@@ -167,7 +167,7 @@ const get_common_column_configs = (show_vote_stat) => ({
   },
   stat: {
     index: 3,
-    header: text_maker(`covid_expenditures_stat`),
+    header: text_maker("covid_expenditures_stat"),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
@@ -175,7 +175,7 @@ const get_common_column_configs = (show_vote_stat) => ({
   },
   total_exp: {
     index: 4,
-    header: text_maker(`covid_expenditures`),
+    header: text_maker("expenditures"),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
@@ -183,7 +183,7 @@ const get_common_column_configs = (show_vote_stat) => ({
   },
   share: {
     index: 5,
-    header: text_maker(`covid_share_of_total`),
+    header: text_maker("covid_share_of_total"),
     is_searchable: false,
     is_summable: false,
     formatter: "percentage2",

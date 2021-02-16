@@ -131,14 +131,14 @@ const ByMeasureTab = ({ args: panel_args, data: { covid_expenditures } }) => {
     },
     total_exp: {
       index: 4,
-      header: text_maker(`covid_expenditures`),
+      header: text_maker("expenditures"),
       is_searchable: false,
       is_summable: true,
       formatter: "compact2",
     },
     funding_used: {
       index: 5,
-      header: text_maker(`covid_funding_used`),
+      header: text_maker("covid_funding_used"),
       is_searchable: false,
       is_summable: false,
       raw_formatter: (value) => value || 0,
