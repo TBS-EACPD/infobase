@@ -5,7 +5,7 @@ import {
   COVID_LAST_REFRESHED_MONTH,
   COVID_CURRENT_YEAR,
   COVID_NEXT_YEAR,
-} from "src/models/covid/covid_consts.js";
+} from "src/models/covid/covid_config.js";
 
 import { create_text_maker_component } from "src/components";
 

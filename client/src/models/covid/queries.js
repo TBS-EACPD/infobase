@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+import { COVID_FUNDING_FEATURE_FLAG } from "./covid_config.js";
+
 const build_base_query = (inner_fragment) => gql`
   query($lang: String!) {
     root(lang: $lang) {
@@ -29,16 +31,16 @@ const has_covid_data_fields = `
 export const org_has_covid_data_query = build_org_query(has_covid_data_fields);
 
 const covid_funding_fields = `
-  fiscal_year
-  funding
+  covid_funding {
+    fiscal_year
+    funding
+  }
 `;
 const covid_measure_fields = `
   id
   name
   in_estimates
-  covid_funding {
-    ${covid_funding_fields}
-  }
+  ${COVID_FUNDING_FEATURE_FLAG ? covid_funding_fields : ""}
 
   ${has_covid_data_fields}
 `;
@@ -137,9 +139,7 @@ export const gov_covid_summary_query = build_base_query(`
     id
     covid_summary {
       id
-      covid_funding {
-        ${covid_funding_fields}
-      }
+      ${COVID_FUNDING_FEATURE_FLAG ? covid_funding_fields : ""}
       ${common_covid_summary_query_fragment}
     }
   }
