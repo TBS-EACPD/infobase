@@ -181,7 +181,6 @@ const combine_bundles = (bundles) => {
     .fromPairs()
     .value();
 };
-
 const combined_global_bundle = combine_bundles(global_bundles);
 
 const _create_text_maker = (deps = template_store) => (key, context = {}) => {

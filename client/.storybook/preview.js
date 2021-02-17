@@ -1,5 +1,7 @@
 import { addDecorator } from "@storybook/react";
 import { withConsole } from "@storybook/addon-console";
+import "src/extended_bootstrap_css/extended_bootstrap_index.side-effects.js";
+import "src/common_css/common_css_index.side-effects.js";
 
 const a11y_options = {
   element: "#root",
