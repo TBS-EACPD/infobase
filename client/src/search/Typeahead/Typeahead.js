@@ -17,6 +17,10 @@ import "./Typeahead.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+// tightly coupled to Typeahead logic, but defined outside the component to be available within getDerivedStateFromProps
+const default_pagination_cursor = 0;
+const default_selection_cursor = -1;
+
 export class Typeahead extends React.Component {
   constructor(props) {
     super(props);
@@ -29,26 +33,38 @@ export class Typeahead extends React.Component {
       query_value: "",
       may_show_menu: false,
       matching_results_by_page: [],
-      pagination_cursor: this.default_pagination_cursor,
-      selection_cursor: this.default_selection_cursor,
+      pagination_cursor: default_pagination_cursor,
+      selection_cursor: default_selection_cursor,
+      current_search_configs: props.search_configs,
     };
   }
-  componentDidMount() {
-    document.body.addEventListener("click", this.handle_window_click);
-  }
-  componentWillUnmount() {
-    document.body.removeEventListener("click", this.handle_window_click);
-    this.debounced_on_query.cancel();
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { search_configs } = nextProps;
+    const { current_search_configs } = prevState;
+
+    if (search_configs !== current_search_configs) {
+      return {
+        matching_results_by_page: [],
+        pagination_cursor: default_pagination_cursor,
+        selection_cursor: default_selection_cursor,
+        current_search_configs: search_configs,
+      };
+    } else {
+      return null;
+    }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { search_configs, page_size } = this.props;
-    const { search_configs: prev_search_configs } = prevProps;
-    const { query_value } = this.state;
-    const { query_value: prev_query_value } = prevState;
+    const { page_size } = this.props;
+
+    const { query_value, current_search_configs } = this.state;
+    const {
+      query_value: prev_query_value,
+      current_search_configs: prev_search_configs,
+    } = prevState;
 
     if (
       query_value !== prev_query_value ||
-      search_configs !== prev_search_configs
+      current_search_configs !== prev_search_configs
     ) {
       const matching_results_by_page = !this.show_menu
         ? []
@@ -66,8 +82,8 @@ export class Typeahead extends React.Component {
 
       this.setState({
         matching_results_by_page,
-        pagination_cursor: this.default_pagination_cursor,
-        selection_cursor: this.default_selection_cursor,
+        pagination_cursor: default_pagination_cursor,
+        selection_cursor: default_selection_cursor,
       });
     } else {
       const active_item = this.active_item;
@@ -86,6 +102,13 @@ export class Typeahead extends React.Component {
           });
       }
     }
+  }
+  componentDidMount() {
+    document.body.addEventListener("click", this.handle_window_click);
+  }
+  componentWillUnmount() {
+    document.body.removeEventListener("click", this.handle_window_click);
+    this.debounced_on_query.cancel();
   }
   render() {
     const {
@@ -359,12 +382,8 @@ export class Typeahead extends React.Component {
     };
   }
 
-  default_pagination_cursor = 0;
   get previous_pagination_cursor() {
-    return _.max([
-      this.default_pagination_cursor,
-      this.state.pagination_cursor - 1,
-    ]);
+    return _.max([default_pagination_cursor, this.state.pagination_cursor - 1]);
   }
   get next_pagination_cursor() {
     const { matching_results_by_page } = this.state;
@@ -384,12 +403,11 @@ export class Typeahead extends React.Component {
     i.e. default_selection_cursor = "input", all of the logic for what's next after "input" lives in 
     these getters, and they either return a meaningful string or the actual index of an item from results_on_page
   */
-  default_selection_cursor = -1;
   get previous_selection_cursor() {
     const { selection_cursor } = this.state;
     const { total_menu_items } = this.derived_menu_state;
 
-    if (selection_cursor === this.default_selection_cursor) {
+    if (selection_cursor === default_selection_cursor) {
       return total_menu_items - 1;
     } else {
       return selection_cursor - 1;
@@ -400,7 +418,7 @@ export class Typeahead extends React.Component {
     const { total_menu_items } = this.derived_menu_state;
 
     if (selection_cursor === total_menu_items - 1) {
-      return this.default_selection_cursor;
+      return default_selection_cursor;
     } else {
       return selection_cursor + 1;
     }
@@ -445,7 +463,7 @@ export class Typeahead extends React.Component {
   handle_paginate_down = () => {
     this.setState({
       pagination_cursor: this.next_pagination_cursor,
-      selection_cursor: this.default_selection_cursor,
+      selection_cursor: default_selection_cursor,
     });
   };
 
@@ -468,7 +486,7 @@ export class Typeahead extends React.Component {
       if (!_.isNull(active_item)) {
         active_item.click();
       } else if (!_.isEmpty(this.state.matching_results_by_page)) {
-        this.setState({ selection_cursor: this.default_selection_cursor + 1 });
+        this.setState({ selection_cursor: default_selection_cursor + 1 });
       }
     }
   };
