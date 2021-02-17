@@ -1,3 +1,19 @@
 covid_intro_panel_title:
   en: Introduction to the Government's COVID-19 Response
   fr: TODO
+
+covid_intro_text:
+  transform: [handlebars,markdown]
+  en: |
+    Since the start of COVID-19 in early 2020, the Government of Canada has put in place a series of measures in order help Canadians who may face hardship due to the pandemic.
+    Many of these measures are aimed at helping Canadians and businesses financially and are being rolled-out incrementally as the pandemic evolves. (_This is still evolving._)
+
+    In 2020-21 **number of organizations** organizations across the Government of Canada have spent funds in support of these **number of measures** measures.
+    (_Is this limited to measures presented in the Estimates? If yes, add text to indicate._)
+    To date, the Government of Canada has spent **dollar value** with the aim of keeping Canadians and businesses healthy, safe, and financially stable.
+    (_Figures are limited to 2020-21. Is this total limited to measures presented in the Estimates? If yes, add text to indicate and if appropriate, coordinate with statement above._)  
+
+    More information can be found in Main Estimates, 2020-21 Supplementary Estimates and the Fall Economic Statement 2020.
+    (_References are limited to the Supps and FES. Will be expanded to 2021-22 Mains and Budget 2021 once we have an idea of what this looks like._)
+  fr: |
+    TODO

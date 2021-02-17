@@ -7,7 +7,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_intro.yaml";
 
-const { text_maker } = covid_create_text_maker_component(text);
+const { text_maker, TM } = covid_create_text_maker_component(text);
 
 export const declare_covid_intro_panel = () =>
   declare_panel({
@@ -29,7 +29,11 @@ export const declare_covid_intro_panel = () =>
             footnotes,
           }}
         >
-          {"TODO"}
+          <TM
+            k={"covid_intro_text"}
+            args={panel_args}
+            className="medium-panel-text"
+          />
         </InfographicPanel>
       ),
     }),
