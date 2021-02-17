@@ -63,14 +63,14 @@ export class Typeahead extends React.Component {
       const matching_results_by_page = !this.show_menu
         ? []
         : _.chain(this.all_options)
-            .filter((option) => {
-              const { config_group_index, data } = option;
-
-              const group_filter = this.config_groups[config_group_index]
-                ?.group_filter;
-
-              return group_filter(query_value, data);
-            })
+            .filter(({ config_group_index, data }) =>
+              // could use optional chaining, but we WANT this to fail fast and loud, to catch
+              // malformed search_configs during development. Should be safe otherwsie
+              this.config_groups[config_group_index].group_filter(
+                query_value,
+                data
+              )
+            )
             .chunk(page_size)
             .value();
 
