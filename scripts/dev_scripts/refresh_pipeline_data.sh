@@ -17,5 +17,6 @@ cd ../pipeline
 
 git checkout $branch_name
 git pull origin $branch_name
+git reset --hard origin/$branch_name
 
 cp -f outputs/Infobase/* $repo_path/data
