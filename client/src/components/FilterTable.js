@@ -52,8 +52,8 @@ export class FilterTable extends React.Component {
               key={item.key}
               aria-label={
                 {
-                  en: `Activate to filter "${item.ariaText}" items from the following presentation.`,
-                  fr: `Appuyez pour filtrer les données «${item.ariaText}» de la présentation`,
+                  en: `Activate to filter "${item.aria_text}" items from the following presentation.`,
+                  fr: `Appuyez pour filtrer les données «${item.aria_text}» de la présentation`,
                 }[lang]
               }
             >
