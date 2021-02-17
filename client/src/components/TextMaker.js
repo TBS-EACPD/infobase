@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import { trivial_text_maker } from "../models/text.js";
 
 // I think eslint is wrong here
