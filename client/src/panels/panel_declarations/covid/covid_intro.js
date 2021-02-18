@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { Details } from "src/components";
+
 import { InfographicPanel, declare_panel } from "../shared.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
@@ -36,6 +38,10 @@ export const declare_covid_intro_panel = () =>
             k={"covid_intro_text"}
             args={panel_args}
             className="medium-panel-text"
+          />
+          <Details
+            summary_content={text_maker("covid_intro_links")}
+            content={"TODO"}
           />
         </InfographicPanel>
       ),

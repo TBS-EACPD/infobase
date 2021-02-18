@@ -6,27 +6,19 @@ covid_intro_text:
   transform: [handlebars,markdown]
   en: |
     Since the start of COVID-19 in early 2020, the Government of Canada has put in place a series of
-    measures in order help Canadians who may face hardship due to the pandemic.  Many of these
+    measures in order help Canadians who may face hardship due to the pandemic. Many of these
     measures are aimed at helping Canadians and businesses financially and are being rolled-out
     incrementally as the pandemic evolves.  
     
-    GC InfoBase is focused on measures that are presented through the {{gl_tt "Estimates process" "EST_PROC"}}, which represent
-    most of the government’s response to the pandemic. However, certain measures are not presented in
-    the Estimates. Meaning, only a portion of Canada’s COVID-19 Economic Response Plan is represented
-    here.  
+    GC InfoBase reporting is based on measures that are presented through the {{gl_tt "Estimates process" "EST_PROC"}}. The majority of
+    the government's COVID-19 measures are presented in the Estimates, but there are some exceptions. As a result a portion of Canada’s 
+    COVID-19 Economic Response Plan is not captured here.  
     
-    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}** **(number of orgs)** organizations across the Government of Canada have spent funds
-    in support of the **(number of measures)** measures presented in the Estimates  
-    
-    To date, the Government of Canada has spent **(spending to date, we don't have this yet though)** in support of Estimates measures with
-    the aim of keeping Canadians and businesses healthy, safe, and financially stable.  
-    
-    To help navigate the complexities of the Canada’s response to the pandemic, the first panel below gives the levels to which spending has been
-    authorized by the government through the Estimates process, by measure and by organization. The lower panel displays **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**
-    expenditures by COVID-19 as of **{{COVID_LAST_REFRESHED_MONTH}}**, also by measure and by organization
-    
-    More detailed information can be found in the “Some things to keep in mind as you explore the data…”
-    section pinned to the top of the page as you browse. Also, further information can be found in the 2020-21
-    Supplementary Estimates and in the Fall Economic Statement 2020. **TODO, add links to this sentence**
+    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **(number of orgs)** organizations
+    across the Government of Canada have spent funds in support of the **(number of measures)** measures presented in the Estimates.
   fr: |
     TODO
+
+covid_intro_links:
+  en: Links to additional online resources
+  fr: TODO
