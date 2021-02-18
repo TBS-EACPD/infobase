@@ -119,7 +119,24 @@ export const CanHaveServerData = (data_types) => (superclass) => {
     }
     set_has_data(data_type, has_data) {
       if (_.includes(this._API_data_types, data_type)) {
-        this._has_data[data_type] = has_data;
+        const store_value = this._has_data[data_type];
+
+        const store_value_is_unset = _.isNull(store_value);
+        const store_value_and_new_value_boolean =
+          _.isBoolean(store_value) && _.isBoolean(has_data);
+        const store_value_and_new_value_object =
+          _.isObject(store_value) && _.isObject(has_data);
+
+        if (store_value_is_unset || store_value_and_new_value_boolean) {
+          this._has_data[data_type] = has_data;
+        } else if (store_value_and_new_value_object) {
+          this._has_data[data_type] = {
+            ...store_value,
+            ...has_data,
+          };
+        } else {
+          throw `"${data_type}" has_data already set with value of "${store_value}" for this instance, new has_data arg of "${has_data}" is not of a compatible type with "${store_value}"`;
+        }
       } else {
         throw `"${data_type}" is not a valid API data type for this subject`;
       }
