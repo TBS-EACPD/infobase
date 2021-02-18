@@ -2,6 +2,18 @@ import React from "react";
 
 import { SpinnerWrapper } from "./SpinnerWrapper.js";
 
+const TabLoadingSpinner = () => (
+  <div
+    style={{
+      position: "relative",
+      height: "80px",
+      marginBottom: "-10px",
+    }}
+  >
+    <SpinnerWrapper config_name={"tabbed_content"} />
+  </div>
+);
+
 class TabLoadingWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -26,11 +38,11 @@ class TabLoadingWrapper extends React.Component {
     const { loading, data } = this.state;
 
     if (loading) {
-      return <SpinnerWrapper config_name={"tabbed_content"} />;
+      return <TabLoadingSpinner />;
     } else {
       return <TabContent args={args} data={data} />;
     }
   }
 }
 
-export { TabLoadingWrapper };
+export { TabLoadingWrapper, TabLoadingSpinner };
