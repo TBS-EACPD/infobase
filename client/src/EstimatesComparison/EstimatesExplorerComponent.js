@@ -64,12 +64,12 @@ const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
                 <tr key={doc_code}>
                   <td>{estimates_docs[doc_code][lang]}</td>
                   <td>
-                    {amount_last_year && (
+                    {(amount_last_year || amount_last_year === 0) && (
                       <Format type="compact2" content={amount_last_year} />
                     )}
                   </td>
                   <td>
-                    {amount_this_year && (
+                    {(amount_this_year || amount_this_year === 0) && (
                       <Format type="compact2" content={amount_this_year} />
                     )}
                   </td>
