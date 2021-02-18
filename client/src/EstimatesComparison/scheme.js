@@ -172,7 +172,14 @@ function get_data_by_org(include_stat) {
 
       let current_value = 0;
       if (current_doc_is_mains) {
-        current_value = _.sumBy(rows, "current_value") || 0;
+        // Need to check if all current_values are 0. Inactive if all are 0, else sum of it. Need to do an extra check in case sum=0
+        const org_is_active = !_.every(
+          rows,
+          ({ current_value }) => current_value === 0
+        );
+        current_value = org_is_active
+          ? _.sumBy(rows, "current_value") || 0
+          : "INACTIVE";
         if (current_value === 0) {
           return null;
         }
@@ -187,6 +194,7 @@ function get_data_by_org(include_stat) {
         ) {
           return null;
         }
+        // Need to check if all current_values are 0. Inactive if all are 0, else sum of it. Need to do an extra check in case sum=0
         const org_is_active = !_.every(
           sups_rows,
           ({ current_value }) => current_value === 0
