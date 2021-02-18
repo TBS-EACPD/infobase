@@ -32,6 +32,7 @@ const { Dept } = Subject;
 const biv_footnote = text_maker("biv_footnote");
 const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
+const INACTIVE = "INACTIVE";
 const row_identifier_func = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
 const current_doc_code = current_doc_is_mains
@@ -142,7 +143,7 @@ const get_keys_in_sups = (include_stat) =>
     .value();
 
 const calculate_percent_value = (current_value, comparison_value) => {
-  if (current_value === "INACTIVE") {
+  if (current_value === INACTIVE) {
     return -Infinity;
   } else if (current_value && !comparison_value) {
     return Infinity;
@@ -179,7 +180,7 @@ function get_data_by_org(include_stat) {
         );
         current_value = org_is_active
           ? _.sumBy(rows, "current_value") || 0
-          : "INACTIVE";
+          : INACTIVE;
         if (current_value === 0) {
           return null;
         }
@@ -201,7 +202,7 @@ function get_data_by_org(include_stat) {
         );
         current_value = org_is_active
           ? _.sumBy(sups_rows, "current_value") || 0
-          : "INACTIVE";
+          : INACTIVE;
       }
 
       const comparison_value = _.sumBy(rows, "comparison_value") || 0;
