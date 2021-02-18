@@ -68,15 +68,15 @@ query($lang: String!, $id: String) {
 }
 `;
 
-const process_indicator = (indicator) => {
-  indicator.target_year = _.isNull(indicator.target_year)
+const process_indicator = (indicator) => ({
+  ...indicator,
+  target_year: _.isNull(indicator.target_year)
     ? null
-    : parseInt(indicator.target_year);
-  indicator.target_month = _.isNull(indicator.target_month)
+    : parseInt(indicator.target_year),
+  target_month: _.isNull(indicator.target_month)
     ? null
-    : parseInt(indicator.target_month);
-  return indicator;
-};
+    : parseInt(indicator.target_month),
+});
 
 const query_api = (id) => {
   const time_at_request = Date.now();
@@ -112,6 +112,9 @@ export default class IndicatorDisplayPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true };
+  }
+  componentDidMount() {
+    query_api(this.props.id).then(() => this.setState({ loading: false }));
   }
 
   componentDidUpdate() {
