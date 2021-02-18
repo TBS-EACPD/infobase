@@ -2,7 +2,7 @@ covid_intro_panel_title:
   en: Introduction to the Government's COVID-19 Response
   fr: TODO
 
-covid_intro_text:
+covid_intro_static_text:
   transform: [handlebars,markdown]
   en: |
     Since the start of COVID-19 in early 2020, the Government of Canada has put in place a series of
@@ -12,8 +12,13 @@ covid_intro_text:
     
     GC InfoBase reporting is based on measures that are presented through the {{gl_tt "Estimates process" "EST_PROC"}}. The majority of
     the government's COVID-19 measures are presented in the Estimates but there are some exceptions. As a result, a portion of Canada’s 
-    COVID-19 Economic Response Plan is not captured here.  
-    
+    COVID-19 Economic Response Plan is not captured here.
+  fr: |
+    TODO
+
+covid_intro_dynamic_text:
+  transform: [handlebars,markdown]
+  en: |
     In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **(number of orgs)** organizations
     across the Government of Canada have spent funds in support of the **(number of measures)** measures presented in the Estimates.
   fr: |
@@ -22,7 +27,6 @@ covid_intro_text:
 covid_intro_links_summary:
   en: Links to additional online COVID-19 response reporting
   fr: TODO
-
 covid_intro_links_content:
   transform: [handlebars,markdown]
   en: |
