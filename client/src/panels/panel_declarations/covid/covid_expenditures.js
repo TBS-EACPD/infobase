@@ -38,7 +38,7 @@ const { CovidMeasure, Dept } = Subject;
 const { text_maker, TM } = covid_create_text_maker_component(text);
 const {
   TabbedContent,
-  SpinnerWrapper,
+  TabLoadingSpinner,
   AlertBanner,
   SmartDisplayTable,
 } = util_components;
@@ -449,7 +449,7 @@ class CovidExpendituresPanel extends React.Component {
     const { panel_args } = this.props;
 
     if (loading) {
-      return <SpinnerWrapper config_name={"tabbed_content"} />;
+      return <TabLoadingSpinner />;
     } else {
       const extended_panel_args = {
         ...panel_args,
