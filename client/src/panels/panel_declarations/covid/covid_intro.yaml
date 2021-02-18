@@ -14,15 +14,15 @@ covid_intro_text:
     most of the government’s response to the pandemic. However, certain measures are not presented in
     the Estimates. Meaning, only a portion of Canada’s COVID-19 Economic Response Plan is represented
     here.  
-     
-    In **<fiscal year>** **<number of orgs>** organizations across the Government of Canada have spent funds
-    in support of the **<number of measures>** measures presented in the Estimates  
     
-    To date, the Government of Canada has spent **<spending to date (we don't have this yet though)>** in support of Estimates measures with
+    In **{{COVID_CURRENT_YEAR}}** **(number of orgs)** organizations across the Government of Canada have spent funds
+    in support of the **(number of measures)** measures presented in the Estimates  
+    
+    To date, the Government of Canada has spent **(spending to date, we don't have this yet though)** in support of Estimates measures with
     the aim of keeping Canadians and businesses healthy, safe, and financially stable.  
     
     To help navigate the complexities of the Canada’s response to the pandemic, the first panel below
-    displays **<fiscal year>** expenditures by COVID-19, by measure and by organization, as of **<last updated date>**. The
+    displays **{{COVID_CURRENT_YEAR}}** expenditures by COVID-19, by measure and by organization, as of **{{COVID_LAST_REFRESHED_MONTH}}**. The
     lower panel gives the levels to which spending has been authorized by the government through the
     Estimates process, also displayed both by organization and measure.  
     
