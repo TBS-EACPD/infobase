@@ -89,8 +89,8 @@ export const get_dept_panels = (subject) =>
     covid: _.some(subject.has_data("covid_response")) && [
       declare_covid_key_concepts_panel(),
       declare_covid_intro_panel(),
-      declare_covid_expenditures_panel(),
       declare_covid_estimates_panel(),
+      declare_covid_expenditures_panel(),
     ],
     people: _.includes(subject.tables, "orgEmployeeType") && [
       declare_people_key_concepts_panel(),
