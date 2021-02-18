@@ -91,6 +91,11 @@ const schema = `
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
     covid_commitments: [CovidCommitmentsSummary]
+
+    measures_with_authorities_count: [CovidSummaryCounts],
+    measures_with_spending_count: [CovidSummaryCounts],
+    orgs_with_covid_authorities_count: [CovidSummaryCounts],
+    orgs_with_covid_spending_count: [CovidSummaryCounts],
   }
   type CovidOrgSummary {
     id: String
@@ -107,6 +112,10 @@ const schema = `
   }
   type CovidCommitmentsSummary {
     ${commitments_fields}
+  }
+  type CovidSummaryCounts {
+    fiscal_year: String
+    count: Int
   }
 `;
 
