@@ -19,6 +19,13 @@ covid_intro_text:
   fr: |
     TODO
 
-covid_intro_links:
+covid_intro_links_summary:
   en: Links to additional online COVID-19 response reporting
   fr: TODO
+
+covid_intro_links_content:
+  transform: [handlebars,markdown]
+  en: |
+    * TODO
+  fr: |
+    TODO
