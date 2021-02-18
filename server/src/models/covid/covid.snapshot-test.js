@@ -111,21 +111,15 @@ query ($lang: String = "en", $top_x: Int = 1) {
           commitment
         }
 
-        measures_with_authorities_count {
+        measure_counts {
           fiscal_year
-          count
+          with_authorities
+          with_spending
         }
-        measures_with_spending_count {
+        org_counts {
           fiscal_year
-          count
-        }
-        orgs_with_covid_authorities_count {
-          fiscal_year
-          count
-        }
-        orgs_with_covid_spending_count {
-          fiscal_year
-          count
+          with_authorities
+          with_spending
         }
       }
     }

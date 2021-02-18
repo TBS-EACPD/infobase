@@ -482,6 +482,30 @@ Object {
               "funding": 11,
             },
           ],
+          "measure_counts": Array [
+            Object {
+              "fiscal_year": "2020",
+              "with_authorities": 3,
+              "with_spending": 3,
+            },
+            Object {
+              "fiscal_year": "2021",
+              "with_authorities": 3,
+              "with_spending": 1,
+            },
+          ],
+          "org_counts": Array [
+            Object {
+              "fiscal_year": "2020",
+              "with_authorities": 4,
+              "with_spending": 3,
+            },
+            Object {
+              "fiscal_year": "2021",
+              "with_authorities": 3,
+              "with_spending": 1,
+            },
+          ],
           "top_spending_measures": Array [
             Object {
               "id": "COV002",

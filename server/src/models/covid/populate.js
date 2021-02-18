@@ -228,32 +228,45 @@ export default async function ({ models }) {
             .value(),
         }))
         .value(),
-      measures_with_authorities_count: _.chain(covid_estimates_rows)
-        .groupBy("fiscal_year")
-        .map((rows, fiscal_year) => ({
+      measure_counts: _.chain([
+        ...covid_estimates_rows,
+        ...covid_expenditures_rows,
+      ])
+        .map("fiscal_year")
+        .uniq()
+        .map((fiscal_year) => ({
           fiscal_year,
-          count: _.chain(rows).map("covid_measure_id").uniq().size().value(),
+          with_authorities: _.chain(covid_estimates_rows)
+            .filter({ fiscal_year })
+            .map("covid_measure_id")
+            .uniq()
+            .size()
+            .value(),
+          with_spending: _.chain(covid_expenditures_rows)
+            .filter({ fiscal_year })
+            .map("covid_measure_id")
+            .uniq()
+            .size()
+            .value(),
         }))
         .value(),
-      measures_with_spending_count: _.chain(covid_expenditures_rows)
-        .groupBy("fiscal_year")
-        .map((rows, fiscal_year) => ({
+      org_counts: _.chain([...covid_estimates_rows, ...covid_expenditures_rows])
+        .map("fiscal_year")
+        .uniq()
+        .map((fiscal_year) => ({
           fiscal_year,
-          count: _.chain(rows).map("covid_measure_id").uniq().size().value(),
-        }))
-        .value(),
-      orgs_with_covid_authorities_count: _.chain(covid_estimates_rows)
-        .groupBy("fiscal_year")
-        .map((rows, fiscal_year) => ({
-          fiscal_year,
-          count: _.chain(rows).map("org_id").uniq().size().value(),
-        }))
-        .value(),
-      orgs_with_covid_spending_count: _.chain(covid_expenditures_rows)
-        .groupBy("fiscal_year")
-        .map((rows, fiscal_year) => ({
-          fiscal_year,
-          count: _.chain(rows).map("org_id").uniq().size().value(),
+          with_authorities: _.chain(covid_estimates_rows)
+            .filter({ fiscal_year })
+            .map("org_id")
+            .uniq()
+            .size()
+            .value(),
+          with_spending: _.chain(covid_expenditures_rows)
+            .filter({ fiscal_year })
+            .map("org_id")
+            .uniq()
+            .size()
+            .value(),
         }))
         .value(),
     },
