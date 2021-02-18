@@ -87,11 +87,6 @@ show_only_votes:
   en: Only show voted items
   fr: Seulement afficher les crédits votés
 
-show_inactive_votes:
-  en: Show inactive items
-  fr: Afficher les objets inactifs
-
-
 showing_only_votes:
   en: Only showing voted items
   fr: Seulement les objets votés sont affichés

@@ -119,7 +119,7 @@ const get_non_col_content = ({ node }) => {
 export default class EstimatesExplorerComponent extends React.Component {
   constructor() {
     super();
-    this.state = { _query: "", show_inactive: false };
+    this.state = { _query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
   }
   handleQueryChange(new_query) {
@@ -183,21 +183,6 @@ export default class EstimatesExplorerComponent extends React.Component {
       zebra_stripe: true,
       col_click,
     };
-
-    const filtered_root = this.state.show_inactive
-      ? root
-      : {
-          ...root,
-          children: _.map(root.children, (org) => ({
-            ...org,
-            children: _.reject(
-              org.children,
-              (estimate) =>
-                estimate.data.current_value === 0 &&
-                estimate.data.percent_value === -Infinity
-            ),
-          })),
-        };
 
     return (
       <div>
@@ -266,17 +251,6 @@ export default class EstimatesExplorerComponent extends React.Component {
             {h7y_layout === "org" && (
               <div className="estimates-checkbox-row medium-panel-text">
                 <CheckBox
-                  label={text_maker("show_inactive_votes")}
-                  active={this.state.show_inactive}
-                  onClick={() =>
-                    this.setState((prevState) => {
-                      return { show_inactive: !prevState.show_inactive };
-                    })
-                  }
-                  checkmark_vertical_align={6}
-                  checkbox_style={{ marginTop: 4 }}
-                />
-                <CheckBox
                   label={text_maker("show_only_votes")}
                   active={!show_stat}
                   onClick={toggle_stat_filter}
@@ -308,7 +282,7 @@ export default class EstimatesExplorerComponent extends React.Component {
               </div>
             </div>
           )}
-          {is_filtering && _.isEmpty(filtered_root.children) && (
+          {is_filtering && _.isEmpty(root.children) && (
             <div
               style={{
                 fontWeight: "500",
@@ -326,7 +300,7 @@ export default class EstimatesExplorerComponent extends React.Component {
           )}
           <Explorer
             config={explorer_config}
-            root={filtered_root}
+            root={root}
             col_state={{
               sort_col,
               is_descending,

@@ -32,7 +32,6 @@ const { Dept } = Subject;
 const biv_footnote = text_maker("biv_footnote");
 const this_year_col = "{{est_in_year}}_estimates";
 const last_year_col = "{{est_last_year}}_estimates";
-const INACTIVE = "INACTIVE";
 const row_identifier_func = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
 const current_doc_code = current_doc_is_mains
@@ -143,9 +142,7 @@ const get_keys_in_sups = (include_stat) =>
     .value();
 
 const calculate_percent_value = (current_value, comparison_value) => {
-  if (current_value === INACTIVE) {
-    return -Infinity;
-  } else if (current_value && !comparison_value) {
+  if (current_value && !comparison_value) {
     return Infinity;
   } else {
     if (current_doc_is_mains) {
@@ -173,14 +170,7 @@ function get_data_by_org(include_stat) {
 
       let current_value = 0;
       if (current_doc_is_mains) {
-        // Need to check if all current_values are 0. Inactive if all are 0, else sum of it. Need to do an extra check in case sum=0
-        const org_is_active = !_.every(
-          rows,
-          ({ current_value }) => current_value === 0
-        );
-        current_value = org_is_active
-          ? _.sumBy(rows, "current_value") || 0
-          : INACTIVE;
+        current_value = _.sumBy(rows, "current_value") || 0;
         if (current_value === 0) {
           return null;
         }
@@ -195,14 +185,7 @@ function get_data_by_org(include_stat) {
         ) {
           return null;
         }
-        // Need to check if all current_values are 0. Inactive if all are 0, else sum of it. Need to do an extra check in case sum=0
-        const org_is_active = !_.every(
-          sups_rows,
-          ({ current_value }) => current_value === 0
-        );
-        current_value = org_is_active
-          ? _.sumBy(sups_rows, "current_value") || 0
-          : INACTIVE;
+        current_value = _.sumBy(sups_rows, "current_value") || 0;
       }
 
       const comparison_value = _.sumBy(rows, "comparison_value") || 0;
@@ -443,15 +426,7 @@ const get_column_defs = (use_legal_titles) => [
     ),
     get_val: (node) => _.get(node, "data.percent_value"),
     val_display: (val) => {
-      if (val === -Infinity) {
-        return (
-          <Red>
-            <strong>
-              <TM k="item_no_longer_active" />
-            </strong>
-          </Red>
-        );
-      } else if (val === Infinity) {
+      if (val === Infinity) {
         return (
           <Green>
             <strong>
