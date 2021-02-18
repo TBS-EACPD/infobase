@@ -38,8 +38,8 @@ class CovidIntroPanelDyanmicText extends React.Component {
       })
       .then(({ data: { root: { gov: { covid_summary } } } }) =>
         this.setState({
-          loading: false,
           covid_summary,
+          loading: false,
         })
       );
   }
@@ -50,10 +50,20 @@ class CovidIntroPanelDyanmicText extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
+      const { measure_counts, org_counts } = covid_summary;
+
+      const orgs_with_spending = _.first(org_counts)?.with_spending;
+      const measures_with_authorities = _.first(measure_counts)
+        ?.with_authorities;
+
       return (
         <TM
           k="covid_intro_dynamic_text"
-          args={{ ...panel_args, ...covid_summary }}
+          args={{
+            ...panel_args,
+            orgs_with_spending,
+            measures_with_authorities,
+          }}
           className="medium-panel-text"
         />
       );

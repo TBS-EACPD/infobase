@@ -19,8 +19,8 @@ covid_intro_static_text:
 covid_intro_dynamic_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **(number of orgs)** organizations
-    across the Government of Canada have spent funds in support of the **(number of measures)** measures presented in the Estimates.
+    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{orgs_with_spending}}** organizations
+    across the Government of Canada have spent funds in support of the **{{measures_with_authorities}}** measures presented in the Estimates.
   fr: |
     TODO
 
