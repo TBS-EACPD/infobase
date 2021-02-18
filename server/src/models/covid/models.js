@@ -34,7 +34,8 @@ const covid_funding_fields = {
 };
 const count_fields = {
   fiscal_year: number_type,
-  count: number_type,
+  with_authorities: number_type,
+  with_spending: number_type,
 };
 
 export default function (model_singleton) {
@@ -91,10 +92,8 @@ export default function (model_singleton) {
       },
     ],
 
-    measures_with_authorities_count: [count_fields],
-    measures_with_spending_count: [count_fields],
-    orgs_with_covid_authorities_count: [count_fields],
-    orgs_with_covid_spending_count: [count_fields],
+    measure_counts: [count_fields],
+    org_counts: [count_fields],
   });
 
   const HasCovidDataSchema = mongoose.Schema({
