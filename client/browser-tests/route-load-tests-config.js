@@ -56,6 +56,11 @@ module.exports.route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Infographic - Gov - COVID-19 Response",
+    route: "orgs/gov/gov/infograph/covid",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
     name: "Infographic - Gov - People",
     route: "orgs/gov/gov/infograph/people",
     test_on: ["eng", "basic-eng"],
@@ -83,6 +88,11 @@ module.exports.route_load_tests_config = [
   {
     name: "Infographic - Dept - Finance",
     route: "orgs/dept/326/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - COVID-19 Response",
+    route: "orgs/dept/1/infograph/covid",
     test_on: ["eng", "basic-eng"],
   },
   {
