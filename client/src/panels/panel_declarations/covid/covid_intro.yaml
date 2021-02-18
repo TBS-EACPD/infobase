@@ -11,7 +11,7 @@ covid_intro_text:
     incrementally as the pandemic evolves.  
     
     GC InfoBase reporting is based on measures that are presented through the {{gl_tt "Estimates process" "EST_PROC"}}. The majority of
-    the government's COVID-19 measures are presented in the Estimates, but there are some exceptions. As a result a portion of Canada’s 
+    the government's COVID-19 measures are presented in the Estimates but there are some exceptions. As a result, a portion of Canada’s 
     COVID-19 Economic Response Plan is not captured here.  
     
     In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **(number of orgs)** organizations
@@ -20,5 +20,5 @@ covid_intro_text:
     TODO
 
 covid_intro_links:
-  en: Links to additional online resources
+  en: Links to additional online COVID-19 response reporting
   fr: TODO
