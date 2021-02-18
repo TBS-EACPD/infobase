@@ -26,17 +26,7 @@ class TabLoadingWrapper extends React.Component {
     const { loading, data } = this.state;
 
     if (loading) {
-      return (
-        <div
-          style={{
-            position: "relative",
-            height: "80px",
-            marginBottom: "-10px",
-          }}
-        >
-          <SpinnerWrapper config_name={"tabbed_content"} />
-        </div>
-      );
+      return <SpinnerWrapper config_name={"tabbed_content"} />;
     } else {
       return <TabContent args={args} data={data} />;
     }

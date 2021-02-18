@@ -3,7 +3,6 @@ import React from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs.js";
 
-
 import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
 import "./LeafSpinner.scss";
 
@@ -15,6 +14,7 @@ export const LeafSpinner = ({ config_name }) => {
       position: "fixed",
     },
     svg_modifier: _.identity,
+    OptionalContainer: ({ children }) => children,
   });
 
   const leaf_spinner_configs = {
@@ -29,6 +29,17 @@ export const LeafSpinner = ({ config_name }) => {
         top: "50%",
       },
       svg_modifier: _.identity,
+      OptionalContainer: ({ children }) => (
+        <div
+          style={{
+            position: "relative",
+            height: "80px",
+            marginBottom: "-10px",
+          }}
+        >
+          {children}
+        </div>
+      ),
     },
     small_inline: {
       outer_positioning: "relative",
@@ -56,15 +67,20 @@ export const LeafSpinner = ({ config_name }) => {
     outer_positioning,
     spinner_container_style,
     svg_modifier,
+    OptionalContainer,
   } = leaf_spinner_configs[config_name || default_config_name];
 
   return (
-    <div style={{ position: outer_positioning }}>
-      <div
-        className="leaf-spinner-container"
-        style={spinner_container_style}
-        dangerouslySetInnerHTML={{ __html: svg_modifier(leaf_loading_spinner) }}
-      />
-    </div>
+    <OptionalContainer>
+      <div style={{ position: outer_positioning }}>
+        <div
+          className="leaf-spinner-container"
+          style={spinner_container_style}
+          dangerouslySetInnerHTML={{
+            __html: svg_modifier(leaf_loading_spinner),
+          }}
+        />
+      </div>
+    </OptionalContainer>
   );
 };
