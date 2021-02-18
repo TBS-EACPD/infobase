@@ -142,7 +142,7 @@ const get_keys_in_sups = (include_stat) =>
     .value();
 
 const calculate_percent_value = (current_value, comparison_value) => {
-  if (!current_value && comparison_value) {
+  if (current_value === "INACTIVE") {
     return -Infinity;
   } else if (current_value && !comparison_value) {
     return Infinity;
@@ -187,7 +187,13 @@ function get_data_by_org(include_stat) {
         ) {
           return null;
         }
-        current_value = _.sumBy(sups_rows, "current_value") || 0;
+        const org_is_active = !_.every(
+          sups_rows,
+          ({ current_value }) => current_value === 0
+        );
+        current_value = org_is_active
+          ? _.sumBy(sups_rows, "current_value") || 0
+          : "INACTIVE";
       }
 
       const comparison_value = _.sumBy(rows, "comparison_value") || 0;
