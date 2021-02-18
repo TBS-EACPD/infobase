@@ -228,6 +228,34 @@ export default async function ({ models }) {
             .value(),
         }))
         .value(),
+      measures_with_authorities_count: _.chain(covid_estimates_rows)
+        .groupBy("fiscal_year")
+        .map((rows, fiscal_year) => ({
+          fiscal_year,
+          count: _.chain(rows).map("covid_measure_id").uniq().size().value(),
+        }))
+        .value(),
+      measures_with_spending_count: _.chain(covid_expenditures_rows)
+        .groupBy("fiscal_year")
+        .map((rows, fiscal_year) => ({
+          fiscal_year,
+          count: _.chain(rows).map("covid_measure_id").uniq().size().value(),
+        }))
+        .value(),
+      orgs_with_covid_authorities_count: _.chain(covid_estimates_rows)
+        .groupBy("fiscal_year")
+        .map((rows, fiscal_year) => ({
+          fiscal_year,
+          count: _.chain(rows).map("org_id").uniq().size().value(),
+        }))
+        .value(),
+      orgs_with_covid_spending_count: _.chain(covid_expenditures_rows)
+        .groupBy("fiscal_year")
+        .map((rows, fiscal_year) => ({
+          fiscal_year,
+          count: _.chain(rows).map("org_id").uniq().size().value(),
+        }))
+        .value(),
     },
   ];
 
