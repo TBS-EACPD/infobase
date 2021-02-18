@@ -10,7 +10,7 @@ covid_intro_text:
     measures are aimed at helping Canadians and businesses financially and are being rolled-out
     incrementally as the pandemic evolves.  
     
-    GC InfoBase is focused on measures that are presented through the Estimates process, which represent
+    GC InfoBase is focused on measures that are presented through the {{gl_tt "Estimates process" "EST_PROC"}}, which represent
     most of the government’s response to the pandemic. However, certain measures are not presented in
     the Estimates. Meaning, only a portion of Canada’s COVID-19 Economic Response Plan is represented
     here.  
@@ -21,10 +21,9 @@ covid_intro_text:
     To date, the Government of Canada has spent **(spending to date, we don't have this yet though)** in support of Estimates measures with
     the aim of keeping Canadians and businesses healthy, safe, and financially stable.  
     
-    To help navigate the complexities of the Canada’s response to the pandemic, the first panel below
-    displays **{{COVID_CURRENT_YEAR}}** expenditures by COVID-19, by measure and by organization, as of **{{COVID_LAST_REFRESHED_MONTH}}**. The
-    lower panel gives the levels to which spending has been authorized by the government through the
-    Estimates process, also displayed both by organization and measure.  
+    To help navigate the complexities of the Canada’s response to the pandemic, the first panel below gives the levels to which spending has been
+    authorized by the government through the Estimates process, by measure and by organization. The lower panel displays **{{COVID_CURRENT_YEAR}}**
+    expenditures by COVID-19 as of **{{COVID_LAST_REFRESHED_MONTH}}**, also by measure and by organization
     
     More detailed information can be found in the “Some things to keep in mind as you explore the data…”
     section pinned to the top of the page as you browse. Also, further information can be found in the 2020-
