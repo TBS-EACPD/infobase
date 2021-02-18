@@ -19,9 +19,9 @@
 "ACOA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0.00,0,831,139970
 "ACOA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0.00,0,0,5863
 "ACOA","S",0,"Payments for the Community Futures Network pursuant to the Economic Statement Implementation Act, 2020","Paiements pour le Réseau de développement des collectivités en vertu de la Loi d’exécution de l'énoncé économique de 2020","SEC",,,,,20300000
+"ACOA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,40000000
+"ACOA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,21102865
 "ACOA","S",0,"Payments to provide financing support to small and medium-sized businesses pursuant to the Economic Statement Implementation Act, 2020","Paiements pour offrir un soutien financier aux petites et aux moyennes entreprises en vertu de la Loi d'exécution de l'énoncé économique de 2020","SEC",,,,,10500000
-"ACOA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,40000000
-"ACOA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,21102865
 "ACOA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",28013,26694.00,46817,60700,
 "AECB",1,1,"Operating and Program","Fonctionnement and Programme","ME",38686934,37939524.00,38176811,39136248,40522928
 "AECB",1,1,"Operating and Program","Fonctionnement and Programme","SEB",86001,0.00,0,0,360736
@@ -88,9 +88,9 @@
 "AGR","S",0,"Payments in connection with the Agricultural Marketing Programs Act (S.C., 1997, c. C-34)","Paiements relatifs à la Loi sur les programmes de commercialisation agricole (L.C. (1997), ch. C-34)","ME",65900000,65900000.00,65900000,65900000,90300000
 "AGR","S",0,"Payments in connection with the Agricultural Marketing Programs Act (S.C., 1997, c. C-34)","Paiements relatifs à la Loi sur les programmes de commercialisation agricole (L.C. (1997), ch. C-34)","SA",-40229121,-36869026.00,-29665609,-24649949,0
 "AGR","S",0,"Payments in connection with the Agricultural Marketing Programs Act (S.C., 1997, c. C-34)","Paiements relatifs à la Loi sur les programmes de commercialisation agricole (L.C. (1997), ch. C-34)","SEB",0,0.00,0,21400000,0
-"AGR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,237500000
-"AGR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,60000000
-"AGR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-17863715
+"AGR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,237500000
+"AGR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,60000000
+"AGR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-17863715
 "AGR","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",2846,,14030,13081,
 "AGR","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,89300
 "AGR","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,200.00,0,-200,0
@@ -183,8 +183,8 @@
 "CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",127001,441001.00,0,127000,127000
 "CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",100001,200001.00,0,0,0
 "CC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,725919.00,31557,0,0
-"CC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,55000000
-"CC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,7800000
+"CC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,55000000
+"CC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,7800000
 "CCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",3510000,,,,
 "CCMD",1,1,"Operating and Program","Fonctionnement and Programme","ME",69217505,63416105.00,64391765,63477818,64350979
 "CCMD",1,1,"Operating and Program","Fonctionnement and Programme","SEA",0,0.00,99196,0,0
@@ -246,8 +246,8 @@
 "CCRA","S",0,"Distribution of Fuel and Excess Emission Charges","Distribution de la redevance sur les combustibles et les émissions excédentaires","SA",,,,5609890,0
 "CCRA","S",0,"Distribution of Fuel and Excess Emission Charges","Distribution de la redevance sur les combustibles et les émissions excédentaires","SEB",,,,,20000000
 "CCRA","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",7139,7916.00,6859,5049,
-"CCRA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,147590000
-"CCRA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-28186975
+"CCRA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,147590000
+"CCRA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-28186975
 "CCRA","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",,844.00,8,42091,
 "CCRA","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,89300
 "CCRA","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,200.00,0,-200,0
@@ -289,9 +289,9 @@
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",0,2500001.00,0,0,0
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",2000000,0.00,0,0,49654000
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,618484.00,32249,0,0
-"CFDC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,27000000
-"CFDC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,52755000
-"CFDC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-49654000
+"CFDC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,27000000
+"CFDC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,52755000
+"CFDC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-49654000
 "CFGB",1,1,"Operating and Program","Fonctionnement and Programme","ME",6141086,6160384.00,6150062,6181230,6270103
 "CFGB",1,1,"Operating and Program","Fonctionnement and Programme","SEB",0,594400.00,0,0,0
 "CFGB",1,1,"Operating and Program","Fonctionnement and Programme","VA",326473,428673.00,397820,381803,0
@@ -365,11 +365,11 @@
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",220038,41400.00,538313,152489,0
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",24069,143898.00,18069,0,0
 "CH","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",1029487,369235.00,0,0,307567
+"CH","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,418000000
+"CH","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,4445000
+"CH","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-340000
 "CH","S",0,"Payments under the Lieutenant Governors Superannuation Act","Paiements en vertu de la Loi sur la pension de retraite des lieutenants-gouverneurs","ME",637000,637000.00,637000,637000,637000
 "CH","S",0,"Payments under the Lieutenant Governors Superannuation Act","Paiements en vertu de la Loi sur la pension de retraite des lieutenants-gouverneurs","SA",269832,253716.00,388484,452527,0
-"CH","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,418000000
-"CH","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,4445000
-"CH","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-340000
 "CH","S",0,"Salaries of the Lieutenant Governors","Traitements des lieutenants-gouverneurs","ME",1196000,1196000.00,1196000,1196000,1196000
 "CH","S",0,"Salaries of the Lieutenant Governors","Traitements des lieutenants-gouverneurs","SA",231751,235113.00,268077,284340,0
 "CH","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",87500,86400.00,88000,175400,91300
@@ -451,15 +451,15 @@
 "CIHR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-649021,-87502.00,365049,-155652,0
 "CIHR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",153628,0.00,0,0,283500
 "CIHR","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",199600,36956.00,0,19239,96429
-"CIHR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,112700000
-"CIHR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,222400000
-"CIHR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-126700000
+"CIHR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,112700000
+"CIHR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,222400000
+"CIHR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-126700000
 "CIHR","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",,7298.00,7298,,
 "CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",66199477,71600477.00,75952129,75630284,72188284
 "CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",11547000,624000.00,0,0,0
 "CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",0,188044.00,0,0,0
 "CMC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,1600542.00,294450,98604,0
-"CMC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,4256563
+"CMC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,4256563
 "CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",2027901048,2735001048.00,2427435894,2624301333,2919967012
 "CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",1069800000,40880175.00,7000000,9292221,65778000
 "CMHC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",78100000,1500001.00,1025000,77828091,360598400
@@ -469,21 +469,21 @@
 "CMHC",10,7,"Introducing the First-Time Home Buyer Incentive","Instaurer l'incitatif pour les acheteurs d'une première habitation","VA",,,,-14705104,
 "CMHC",5,7,"Expanding the Rental Construction Financing Initiative","Élargir l'initiative Financement de la construction de logements locatifs","ME",,,,18124501,
 "CMHC",5,7,"Expanding the Rental Construction Financing Initiative","Élargir l'initiative Financement de la construction de logements locatifs","VA",,,,-18124501,
-"CMHC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,2972900000
-"CMHC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,512355299
-"CMHC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-831018985
+"CMHC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,2972900000
+"CMHC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,512355299
+"CMHC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-831018985
 "CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",21700000,24865000.00,21308564,26954953,25502953
 "CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",11904000,0.00,0,0,0
 "CMHR",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,487335.00,4027416,0,0
-"CMHR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,2206586
+"CMHR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,2206586
 "CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",7700000,7820000.00,8215347,7905183,7895183
 "CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",200000,0.00,0,0,0
 "CMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,142724.00,25956,0,0
-"CMI","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,2049575
+"CMI","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,2049575
 "CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",26129112,32515112.00,31080812,28981201,26811201
 "CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",3312000,0.00,0,0,0
 "CMN",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",329185,753496.00,34485,215749,0
-"CMN","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,5927263
+"CMN","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,5927263
 "CNEDA",1,1,"Operating and Program","Fonctionnement and Programme","ME",8874718,13199586.00,11976317,14527629,17365446
 "CNEDA",1,1,"Operating and Program","Fonctionnement and Programme","SEA",4668559,0.00,99196,1583980,0
 "CNEDA",1,1,"Operating and Program","Fonctionnement and Programme","SEB",0,313028.00,0,0,2212580
@@ -504,7 +504,7 @@
 "CNEDA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-265274,-176953.00,7037,-3775,0
 "CNEDA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",702608,0.00,0,77364,0
 "CNEDA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,30106.00,0,0,476871
-"CNEDA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,5000000
+"CNEDA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,5000000
 "CNEDA","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",,,3,,
 "CNEDA","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",59,5228.00,27294,33225,
 "CNMI",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",140122000,76545000.00,151104000,152904000,55675667
@@ -662,6 +662,8 @@
 "EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",2301769,2583470.00,4600,3159413,0
 "EA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",3187372,3867531.00,0,0,1025660
 "EA","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",28965984,40839255.00,47814542,73415744,
+"EA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,41000000
+"EA","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,18050000
 "EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","ME",245000000,227048000.00,232491748,232491748,250684323
 "EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","SA",-4227359,-239798.00,-303872,-318339,0
 "EA","S",0,"Payments to International Financial Institutions - Direct payments","Paiements aux institutions financières internationales - Paiements directs","SEB",0,0.00,18192575,18192575,9870000
@@ -669,8 +671,6 @@
 "EA","S",0,"Payments under the Diplomatic Service (Special) Superannuation Act","Paiements en vertu de la Loi sur la pension spéciale du service diplomatique","ME",250000,250000.00,250000,500000,500000
 "EA","S",0,"Payments under the Diplomatic Service (Special) Superannuation Act","Paiements en vertu de la Loi sur la pension spéciale du service diplomatique","SA",131467,193832.00,-27031,329215,0
 "EA","S",0,"Payments under the Diplomatic Service (Special) Superannuation Act","Paiements en vertu de la Loi sur la pension spéciale du service diplomatique","SEB",0,0.00,250000,0,400000
-"EA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,41000000
-"EA","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,18050000
 "EA","S",0,"Pursuant to section 24.1 of the Financial Administration Act, to forgive an amount up to $449,533,044 owed by the Government of the Islamic Republic of Pakistan, in relation to loan agreements, subject to the conditions described in the Memorandum of Understanding signed on April 20, 2006 between the Government of Canada and the Government of the Islamic Republic of Pakistan","Conformément à l'article 24.1 de la Loi sur la gestion des finances publiques, faire grâce d'un montant jusqu'à concurrence de 449 533 044 $ que doit le gouvernement de la République islamique du Pakistan relativement à des ententes de prêt, sous réserve des conditions énoncées dans le protocole d'entente signé le 20 avril 2006 entre le gouvernement du Canada et le gouvernement de la République islamique du Pakistan","SA",124639977,84693673.00,60109558,22187530,
 "EA","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",58256,90366.00,2224,4657,
 "EA","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",250500,253200.00,258000,263100,267900
@@ -709,7 +709,7 @@
 "EC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",10717375,1246960.00,1777400,0,0
 "EC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",1675866,2320140.00,0,2300601,116998
 "EC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0.00,0,0,1665792
-"EC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,11338510
+"EC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,11338510
 "EC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,89300
 "EC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,200.00,0,-200,0
 "EC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",1939146,1223505.00,1898558,1874175,
@@ -726,8 +726,8 @@
 "FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",31414312,22885386.00,3472857,,0
 "FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",2011135,0.00,0,,1072166
 "FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEC",8356417,698501.00,0,,7219854
-"FBCL","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,1724241
-"FBCL","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-243854
+"FBCL","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,1724241
+"FBCL","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-243854
 "FCAC","S",0,"Payments under section 13 of the Financial Consumer Agency of Canada Act","Paiements en vertu de l'article 13 de la Loi sur l'Agence de la consommation en matière financière du Canada","SA",17426626,21517840.00,25543637,30330955,
 "FCAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",38,,892,236,
 "FEDSO",1,1,"Operating and Program","Fonctionnement and Programme","ME",25753625,24394707.00,25158031,29201373,30390354
@@ -746,9 +746,9 @@
 "FEDSO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-376252,298671.00,118776,-110764,0
 "FEDSO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0.00,0,0,359438
 "FEDSO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0.00,0,10800,225397
-"FEDSO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,148778999
-"FEDSO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,103200000
-"FEDSO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-14459146
+"FEDSO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,148778999
+"FEDSO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,103200000
+"FEDSO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-14459146
 "FEDSO","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",,577.00,20655,33392,
 "FIN",1,1,"Operating and Program","Fonctionnement and Programme","ME",90740545,89280597.00,95205613,99360558,105471317
 "FIN",1,1,"Operating and Program","Fonctionnement and Programme","SEA",0,0.00,3146796,4444093,18584030
@@ -806,13 +806,13 @@
 "FIN","S",0,"Payment to the Province of Newfoundland and Labrador pursuant to paragraph 60.2(2)b of the Financial Administration Act to support offshore energy sector workers","Paiement à la province de Terre-Neuve-et-Labrador en vertu de lʼalinéa 60.2(2)b) de la Loi sur la gestion des finances publiques pour soutenir les travailleurs du secteur de l'énergie extracôtière","SEC",,,,,320000000
 "FIN","S",0,"Payment to the Province of Saskatchewan pursuant to paragraph 60.2(2)b of the Financial Administration Act to clean up orphan and inactive oil and gas wells","Paiement à la province de la Saskatchewan en vertu de l'alinéa 60.2(2)b) de la Loi sur la gestion des finances publiques pour nettoyer les puits de pétrole et de gaz orphelins et inactifs","SEA",,,,,400000000
 "FIN","S",0,"Payments for the Safe Restart Agreement pursuant to paragraph 60.2(2)b of the Financial Administration Act","Paiements pour le Cadre de relance sécuritaire en vertu de l'alinéa 60.2(2)b) de la Loi sur la gestion des finances publiques","SEB",,,,,12276726000
+"FIN","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,10000000
 "FIN","S",0,"Payments related to Canada health transfer","Paiements liés au transfert canadien en matière de santé","SA",,,,500000000,
 "FIN","S",0,"Payments to International Development Association","Paiements à l'Association internationale de développement","ME",441620000,441610000.00,441610000,441620000,423240000
 "FIN","S",0,"Payments to depositors of Canadian Commercial Bank, CCB Mortgage Investment Corporation and Northland Bank pursuant to the Financial Institutions Depositors Compensation Act","Paiements aux déposants de la Banque Commerciale du Canada, de la Compagnie de placements hypothécaires CCB et de la Norbanque conformément à la Loi sur l'indemnité aux déposants de certaines institutions financières","SA",68571831,68571831.00,68571831,68571831,
 "FIN","S",0,"Payments to the COVID-19 Essential Workers Support Fund pursuant to paragraph 60.2(2)b of the Financial Administration Act","Paiements au Fonds de soutien des travailleurs essentiels de la COVID-19 en vertu de l'alinéa 60.2(2)b) de la Loi sur la gestion des finances publiques","SEB",,,,,2538999989
 "FIN","S",0,"Payments to the Canadian Securities regulation Regime Transition Office","Paiements au Bureau de transition vers un régime canadien de réglementation des valeurs mobilières","SA",,,11400000,,
 "FIN","S",0,"Payments to the Safe Return to Class Fund pursuant to paragraph 60.2(2)b of the Financial Administration Act","Paiements au Fonds pour une rentrée scolaire sécuritaire en vertu de l'alinéa 60.2(2)b) de la Loi sur la gestion des finances publiques","SEB",,,,,1000000000
-"FIN","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,10000000
 "FIN","S",0,"Purchase of Domestic Coinage","Achat de la monnaie canadienne","ME",96000000,104000000.00,95000000,88000000,86000000
 "FIN","S",0,"Purchase of Domestic Coinage","Achat de la monnaie canadienne","SA",-2445062,-9917032.00,-1262227,-1637321,0
 "FIN","S",0,"Purchase of Domestic Coinage","Achat de la monnaie canadienne","SEB",0,0.00,-3000000,0,-2000000
@@ -877,9 +877,9 @@
 "FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",1841055,1154471.00,299314,0,1724658
 "FO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",230063,128703.00,0,0,560606
 "FO","S",0,"Losses on Foreign Exchange","Pertes sur opérations de change","SA",14155,,2058925,82463,
-"FO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,531900000
-"FO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,-56800000
-"FO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-339744225
+"FO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,531900000
+"FO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,-56800000
+"FO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-339744225
 "FO","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",24129,1340.00,17559,2349,
 "FO","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,89300
 "FO","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",-18455,200.00,0,-200,0
@@ -901,9 +901,9 @@
 "FORDQ","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,0.00,0,0,262969
 "FORDQ","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0.00,0,8640,0
 "FORDQ","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,0.00,0,0,25235
-"FORDQ","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,78000000
-"FORDQ","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,14150000
-"FORDQ","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-1650000
+"FORDQ","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,78000000
+"FORDQ","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,14150000
+"FORDQ","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-1650000
 "FORDQ","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",53958,12952.00,248,,
 "FTRAC",1,1,"Operating and Program","Fonctionnement and Programme","ME",51042501,45942822.00,46614069,46229624,51189193
 "FTRAC",1,1,"Operating and Program","Fonctionnement and Programme","SEA",0,0.00,-245539,0,0
@@ -958,9 +958,9 @@
 "GSC","S",0,"Optional Services Revolving Fund","Fonds renouvelable des services optionnels","ME",0,0.00,0,208230,0
 "GSC","S",0,"Optional Services Revolving Fund","Fonds renouvelable des services optionnels","SA",27542676,36688658.00,35190218,32863513,0
 "GSC","S",0,"Payment in lieu of taxes to municipalities and other taxing authorities","Paiement en remplacement d'impôts fonciers versés aux municipalités et à d'autres autorités taxatrices","SA",31455045,6789983.00,-3227257,324530,
-"GSC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,500000000
-"GSC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,100000000
-"GSC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-379994612
+"GSC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,500000000
+"GSC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,100000000
+"GSC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-379994612
 "GSC","S",0,"Real Property Services Revolving Fund","Fonds renouvelable des Services immobiliers","ME",2600000,6125449.00,3700249,11214122,18908536
 "GSC","S",0,"Real Property Services Revolving Fund","Fonds renouvelable des Services immobiliers","SA",192408917,217925978.00,212976093,203288905,0
 "GSC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",,216745.00,,,
@@ -1014,9 +1014,9 @@
 "H","S",0,"Payments for supporting innovative approaches to COVID-19 testing pursuant to the Economic Statement Implementation Act, 2020","Paiements pour soutien aux approches novatrices de dépistage de la COVID-19 en vertu de la Loi d'exécution de l'énoncé économique","SEC",,,,,45000000
 "H","S",0,"Payments for virtual care and mental health tools for Canadians pursuant to the Economic Statement Implementation Act, 2020","Paiements pour outils de soins et de santé mentale virtuels pour les Canadiens en vertu de la Loi d'exécution de l'énoncé économique de 2020","SEC",,,,,68649968
 "H","S",0,"Payments in Connection with the Patent Act (Patented Medicines)","Paiements en vertu de la Loi sur les brevets (Médicaments brevetés)","SA",,30000000.00,20000000,,
-"H","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,262552742
-"H","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,221198925
-"H","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-350162445
+"H","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,262552742
+"H","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,221198925
+"H","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-350162445
 "H","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",233066,171575.00,2793,58728,
 "H","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,89300
 "H","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,1110.00,0,43,0
@@ -1120,15 +1120,15 @@
 "HRSD","S",0,"One-time payment to persons with disabilities pursuant to An Act respecting further COVID-19 measures","Paiement unique aux personnes handicapées en vertu de la Loi concernant des mesures supplémentaires liées à la COVID-19","SEB",,,,,848600000
 "HRSD","S",0,"One-time payment to persons with disabilities pursuant to An Act respecting further COVID-19 measures","Paiement unique aux personnes handicapées en vertu de la Loi concernant des mesures supplémentaires liées à la COVID-19","SEC",,,,,395866
 "HRSD","S",0,"Payments for the Canada Emergency Response Benefit pursuant to the Economic Statement Implementation Act, 2020","Paiements pour la Prestation canadienne d'urgence en vertu de la Loi d'exécution de l'énoncé économique de 2020","SEC",,,,,500000000
-"HRSD","S",0,"Payments for the Canada Emergency Response Benefit pursuant to the Public Health Events of National Concern Payments Act","Paiements pour la Prestation canadienne d'urgence en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SA",,,,4755547878,0
-"HRSD","S",0,"Payments for the Canada Emergency Response Benefit pursuant to the Public Health Events of National Concern Payments Act","Paiements pour la Prestation canadienne d'urgence en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,69918800000
-"HRSD","S",0,"Payments for the Canada Emergency Response Benefit pursuant to the Public Health Events of National Concern Payments Act","Paiements pour la Prestation canadienne d'urgence en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,27286570167
-"HRSD","S",0,"Payments for the Canada Emergency Response Benefit pursuant to the Public Health Events of National Concern Payments Act","Paiements pour la Prestation canadienne d'urgence en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-14672805848
 "HRSD","S",0,"Payments for the Canada Recovery Benefit pursuant to the Canada Recovery Benefits Act","Paiements pour la Prestation canadienne de la relance économique en vertu de la Loi sur les prestations canadiennes de relance économique","SEC",,,,,10095000000
 "HRSD","S",0,"Payments for the Canada Recovery Caregiving Benefit pursuant to the Canada Recovery Benefits Act","Paiements pour la Prestation canadienne de la relance économique pour proches aidants en vertu de la Loi sur les prestations canadiennes de relance économique","SEC",,,,,2897000000
 "HRSD","S",0,"Payments for the Canada Recovery Sickness Benefit pursuant to the Canada Recovery Benefits Act","Paiements pour la Prestation canadienne de maladie pour la relance économique en vertu de la Loi sur les prestations canadiennes de relance économique","SEC",,,,,780000000
 "HRSD","S",0,"Payments of compensation respecting government employees (Government Employees Compensation Act) and merchant seamen (Merchant Seamen Compensation Act)","Paiements d'indemnités à des agents de l'État (Loi sur l'indemnisation des agents de l'État) et à des marins marchands (Loi sur l'indemnisation des marins marchands)","ME",44000000,44000000.00,44000000,44000000,44000000
 "HRSD","S",0,"Payments of compensation respecting government employees (Government Employees Compensation Act) and merchant seamen (Merchant Seamen Compensation Act)","Paiements d'indemnités à des agents de l'État (Loi sur l'indemnisation des agents de l'État) et à des marins marchands (Loi sur l'indemnisation des marins marchands)","SA",-3770867,-10550281.00,-12374717,-14754710,0
+"HRSD","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SA",,,,4755547878,0
+"HRSD","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,69918800000
+"HRSD","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,29134315176
+"HRSD","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-14672930758
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","ME",4272751,3219095.00,5278857,3144591,2995219
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","SA",-695306,-56281.00,-25431,-962109,0
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis","SEB",0,0.00,-2618259,0,-992946
@@ -1137,8 +1137,6 @@
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","SA",-10975102,28797390.00,10509458,3899054,0
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","SEB",0,0.00,96166085,0,-207298351
 "HRSD","S",0,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants","SEC",-31734024,-26347227.00,0,0,0
-"HRSD","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,1847745009
-"HRSD","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-124910
 "HRSD","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",188471,823191.00,104453,884244,
 "HRSD","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",167000,168800.00,172000,263100,269900
 "HRSD","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",316,431.00,-25430,128,0
@@ -1221,9 +1219,9 @@
 "INAC","S",0,"Liabilities in respect of loan guarantees made to Indians for Housing and Economic Development","Obligations relatives aux garanties de prêts accordés aux Indiens pour le logement et le développement économique","ME",2000000,2000000.00,0,0,0
 "INAC","S",0,"Liabilities in respect of loan guarantees made to Indians for Housing and Economic Development","Obligations relatives aux garanties de prêts accordés aux Indiens pour le logement et le développement économique","SA",-2000000,-2000000.00,0,0,0
 "INAC","S",0,"Payment from the Consolidated Revenue Fund of guaranteed loans issued out of the Indian economic development account (authorized limit $60,000,000)","Paiement sur le Trésor en vertu de prêts garantis émis du Compte d'expansion économique des Indiens (limite autorisée 60 000 000 $)","SA",32490796,,,,
+"INAC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,114900000
 "INAC","S",0,"Payments to comprehensive claim beneficiaries in compensation for resource royalties","Paiements d'indemnités aux bénéficiaires des revendications territoriales globales pour des redevances sur les ressources","ME",2543528,2931144.00,2952146,1858791,1865718
 "INAC","S",0,"Payments to comprehensive claim beneficiaries in compensation for resource royalties","Paiements d'indemnités aux bénéficiaires des revendications territoriales globales pour des redevances sur les ressources","SA",-1545858,-1257538.00,-2471937,-1858791,0
-"INAC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,114900000
 "INAC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",1196122,1330169.00,112330,577230,
 "INAC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,178600
 "INAC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,1367.00,0,31641,0
@@ -1278,9 +1276,9 @@
 "INDSC","S",0,"Liabilities in respect of loan guarantees made to Indians for Housing and Economic Development","Obligations relatives aux garanties de prêts accordés aux Indiens pour le logement et le développement économique","ME",,,2000000,2000000,2000000
 "INDSC","S",0,"Liabilities in respect of loan guarantees made to Indians for Housing and Economic Development","Obligations relatives aux garanties de prêts accordés aux Indiens pour le logement et le développement économique","SA",,,-1925386,-2000000,0
 "INDSC","S",0,"Payment from the Consolidated Revenue Fund of guaranteed loans issued out of the Indian economic development account (authorized limit $60,000,000). Change in Ministry responsibility (Indian Affairs and Northern Development)","Paiement sur le Trésor en vertu de prêts garantis émis du Compte d'expansion économique des Indiens (limite autorisée 60 000 000 $). Changement de responsabilité du portefeuille ministériel (Affaires indiennes et du Nord canadien)","SA",,32490796.00,32490796,32490796,
-"INDSC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,950522900
-"INDSC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,782584778
-"INDSC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-96068838
+"INDSC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,950522900
+"INDSC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,782584778
+"INDSC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-96068838
 "INDSC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",,,,43,
 "INDSC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",,,86000,87700,89300
 "INDSC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",,,-84145,-22075,0
@@ -1370,9 +1368,9 @@
 "ISC","S",0,"Liabilities under the Canada Small Business Financing Act","Obligations contractées en vertu de la Loi sur le financement des petites entreprises du Canada","SA",-14828422,-17729402.00,-18719210,-7486260,0
 "ISC","S",0,"Liabilities under the Small Business Loan Act","Obligations contractées en vertu de la Loi sur le financement des petites entreprises du Canada","SA",10644,,,,
 "ISC","S",0,"Payments for the Community Futures Network pursuant to the Economic Statement Implementation Act, 2020","Paiements pour le Réseau de développement des collectivités en vertu de la Loi d'exécution de l'énoncé économique de 2020","SEC",,,,,17900000
+"ISC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,40923988
+"ISC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-20784546
 "ISC","S",0,"Payments to provide financing support to small and medium-sized businesses pursuant to the Economic Statement Implementation Act, 2020","Paiements pour offrir un soutien financier aux petites et aux moyennes entreprises en vertu de la Loi d'exécution de l'énoncé économique de 2020","SEC",,,,,8460000
-"ISC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,40923988
-"ISC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-20784546
 "ISC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",690349,316337.00,530621,528400,
 "ISC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",87500,88400.00,90000,350800,178600
 "ISC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,200.00,-75057,-61564,0
@@ -1445,14 +1443,14 @@
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",38000000,0.00,150000,0,0
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",17912375,0.00,0,0,190000
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",0,1289675.00,30398,0,0
-"NAC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,18200000
+"NAC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,18200000
 "NBC",1,1,"Operating and Program","Fonctionnement and Programme","ME",6461761,7520761.00,7470199,6982283,6557243
 "NBC",1,1,"Operating and Program","Fonctionnement and Programme","VA",537975,415054.00,379631,322231,0
 "NBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",375953,343166.00,341576,344531,333272
 "NBC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",110469,134581.00,177618,177110,0
 "NBC","S",0,"Expenditures pursuant to Paragraph 29.1(1) of Financial Administration Act","Dépenses aux termes du paragraphe 29.1(1) de la Loi sur la gestion des finances publiques","ME",1850000,1850000.00,2000000,2000000,2000000
 "NBC","S",0,"Expenditures pursuant to Paragraph 29.1(1) of Financial Administration Act","Dépenses aux termes du paragraphe 29.1(1) de la Loi sur la gestion des finances publiques","SA",351505,666943.00,567177,627049,0
-"NBC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,1112328
+"NBC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,1112328
 "NCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",66412180,67590380.00,66146361,73809724,66609096
 "NCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",0,0.00,0,0,5835000
 "NCC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",926000,0.00,0,0,4554500
@@ -1535,12 +1533,12 @@
 "NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",1190000,0.00,0,0,0
 "NGC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",48975,859833.00,77614,556908,0
 "NGC",5,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",8000000,8000000.00,8000000,8000000,8000000
-"NGC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,4808711
+"NGC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,4808711
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","ME",59979776,144527796.00,30158102,30842380,30567380
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEA",45624000,0.00,0,0,0
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","SEB",2569000,20001.00,0,0,0
 "NMST",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État","VA",255498,729779.00,84816,94452,0
-"NMST","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,5338974
+"NMST","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,5338974
 "NPA",1,1,"Operating and Program","Fonctionnement and Programme","ME",701095,465000.00,465000,1055000,1055000
 "NPA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",50740,29830.00,28880,29070,28120
 "NPA","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-47403,-25829.00,-25281,-25595,0
@@ -1598,11 +1596,11 @@
 "NR","S",0,"Grant to the Canada Foundation for Sustainable Development Technology for the Next Generation Biofuels Fund","Subvention à la Fondation du Canada pour l'appui technologique au développement durable pour le Fonds des biocarburants de la prochaine génération","SA",2290112,,,,
 "NR","S",0,"Payments of the Crown Share Adjustment for Nova Scotia Offshore Petroleum Resources","Paiements de rajustement à l'égard de la part de la Couronne pour les ressources pétrolières extracôtières de la Nouvelle-Écosse","ME",2407505,1817724.00,438281,,
 "NR","S",0,"Payments of the Crown Share Adjustment for Nova Scotia Offshore Petroleum Resources","Paiements de rajustement à l'égard de la part de la Couronne pour les ressources pétrolières extracôtières de la Nouvelle-Écosse","SA",-800552,-1764405.00,-315231,24862021,
+"NR","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,14522803
 "NR","S",0,"Payments to the Newfoundland Offshore Petroleum Resource Revenue Fund","Paiements au Fonds terre-neuvien des recettes provenant des ressources en hydrocarbures extracôtières","ME",713252922,387366755.00,392506962,374165337,289755606
 "NR","S",0,"Payments to the Newfoundland Offshore Petroleum Resource Revenue Fund","Paiements au Fonds terre-neuvien des recettes provenant des ressources en hydrocarbures extracôtières","SA",-257821321,-140631816.00,-58354729,-10198700,0
 "NR","S",0,"Payments to the Nova Scotia Offshore Revenue Account","Paiements au Compte néo-écossais des recettes extracôtières","ME",14828231,6623774.00,5356008,0,0
 "NR","S",0,"Payments to the Nova Scotia Offshore Revenue Account","Paiements au Compte néo-écossais des recettes extracôtières","SA",-1868113,268692899.00,68594846,9545908,0
-"NR","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,14522803
 "NR","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,87700,89300
 "NR","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,200.00,0,-2631,0
 "NR","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",579754,312335.00,251825,276646,
@@ -1628,9 +1626,9 @@
 "NRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",195211,0.00,0,0,488975
 "NRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,73790.00,0,0,481379
 "NRC","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",,105005.00,,,
-"NRC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,250000000
-"NRC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,206680000
-"NRC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-181579520
+"NRC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,250000000
+"NRC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,206680000
+"NRC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-181579520
 "NRC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",294078,192525.00,718354,947937,
 "NRC","S",0,"Spending of revenues pursuant to paragraph 5(1)(e) of the National Research Council Act","Dépense des recettes conformément à l'alinéa 5(1)e) de la Loi sur le Conseil national de recherches (L.R.C. (1985), ch. N-15)","ME",175000000,168000000.00,182000000,182000000,182000000
 "NRC","S",0,"Spending of revenues pursuant to paragraph 5(1)(e) of the National Research Council Act","Dépense des recettes conformément à l'alinéa 5(1)e) de la Loi sur le Conseil national de recherches (L.R.C. (1985), ch. N-15)","SA",153721311,171147477.00,143009078,123089750,0
@@ -1653,7 +1651,7 @@
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",74000,0.00,0,0,0
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",101000,16200.00,0,0,0
 "NSERC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,34000.00,0,0,0
-"NSERC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,153400000
+"NSERC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,153400000
 "NSERC","S",0,"Spending of Revenues pursuant to subsection 4.2 of the Natural Sciences and Engineering Research Council Act","Dépenses des revenus en vertu du paragraphe 4.2 de la Loi sur le Conseil de recherches en sciences naturelles et en génie","ME",378779,578779.00,178779,178779,178779
 "NSERC","S",0,"Spending of Revenues pursuant to subsection 4.2 of the Natural Sciences and Engineering Research Council Act","Dépenses des revenus en vertu du paragraphe 4.2 de la Loi sur le Conseil de recherches en sciences naturelles et en génie","SA",-206957,-155294.00,-4338,-37652,0
 "NSERC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",997,334.00,504,1026,
@@ -1814,9 +1812,9 @@
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",148604,0.00,137186,0,231982
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",279995,252388.00,0,255508,1229
 "PHAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,54053.00,0,0,18651729
-"PHAC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,2259268800
-"PHAC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,8775450430
-"PHAC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-5585821429
+"PHAC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,2259268800
+"PHAC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,8775450430
+"PHAC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-5585821429
 "PHAC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",15,,,9130,
 "PHAC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",70965,96665.00,124869,103577,
 "PHAC","S",0,"Spending of revenues from other departments for which the Minister is responsible, pursuant to subsection 4.2(4) of the Department of Health Act","Dépense des recettes provenant des autres ministères pour lesquels le ministre est responsable, conformément au paragraphe 4.2(4) de la Loi sur le ministère de la Santé","ME",13412742,13412742.00,13412742,13412742,13412742
@@ -1871,8 +1869,8 @@
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,261424.00,464843,410463,0
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",212821,164612.00,0,0,97371
 "PSEP","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",0,252078.00,0,0,617407
-"PSEP","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,40680000
-"PSEP","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,-1220400
+"PSEP","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,40680000
+"PSEP","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,-1220400
 "PSEP","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",83500,84400.00,86000,175400,89300
 "PSEP","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",0,200.00,-25430,-31997,0
 "PSEP","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SEA",0,0.00,86000,0,0
@@ -1968,8 +1966,8 @@
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",598563,0.00,3403338,570173,384258
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",52729,0.00,407765,0,516719
 "SHARE","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEC",15101,199606.00,0,0,0
+"SHARE","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,13480000
 "SHARE","S",0,"Pensions and other employee benefits - Members of Royal Canadian Mounted Police","Pensions et autres prestations des employés - Membres de la Gendarmerie royale du Canada","SA",3794495,4184282.00,4089021,5173660,
-"SHARE","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,13480000
 "SHARE","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",,,103,,
 "SHARE","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",291,1535.00,2579,18705,
 "SIRC",1,1,"Operating and Program","Fonctionnement and Programme","ME",2477401,4476578.00,4607497,4629028,22801056
@@ -1998,7 +1996,7 @@
 "SSHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",3547,51330.00,429002,-322767,0
 "SSHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",35000,0.00,0,75000,0
 "SSHRC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",117622,90431.00,0,0,0
-"SSHRC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,375700000
+"SSHRC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,375700000
 "SSHRC","S",0,"Spending of Revenues pursuant to subsection 4.2 of the Social Sciences and Humanities Research Council Act","Dépenses des revenus en vertu du paragraphe 4.2 de la Loi sur le Conseil de recherches en sciences humaines","ME",94976,94976.00,94976,94976,94976
 "SSHRC","S",0,"Spending of Revenues pursuant to subsection 4.2 of the Social Sciences and Humanities Research Council Act","Dépenses des revenus en vertu du paragraphe 4.2 de la Loi sur le Conseil de recherches en sciences humaines","SA",84626,26300.00,163223,-12092,0
 "SSHRC","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",15529,15568.00,,,
@@ -2016,9 +2014,9 @@
 "SWC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","ME",1304709,1787273.00,2788799,4177555,4391741
 "SWC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SA",-141440,-468049.00,-48907,-401831,0
 "SWC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",296000,425853.00,10722,0,0
-"SWC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,30000000
-"SWC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,50000000
-"SWC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-8700000
+"SWC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,30000000
+"SWC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,50000000
+"SWC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-8700000
 "SWC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","ME",,2000.00,2000,87700,89300
 "SWC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SA",,0.00,-2000,-200,0
 "SWC","S",0,"Salary and Motor Car Allowance","Traitement et allocation pour automobile","SEB",,0.00,86000,0,0
@@ -2165,7 +2163,7 @@
 "VAC","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",1480249,253966.00,0,0,0
 "VAC","S",0,"Court Awards","Montants adjugés par une cour","SA",13907,7121.00,10890,17550,
 "VAC","S",0,"Losses on Foreign Exchange","Pertes d'opérations de change","SA",5976,,2028,,
-"VAC","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,20000000
+"VAC","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,20000000
 "VAC","S",0,"Re-establishment credits under section 8 of the War Service Grants Act","Crédits de réadaptation, en vertu de l'article 8 de la Loi sur les indemnités de services de guerre (L.R.C. (1970), ch. W-4)","ME",12000,12000.00,12000,12000,12000
 "VAC","S",0,"Re-establishment credits under section 8 of the War Service Grants Act","Crédits de réadaptation, en vertu de l'article 8 de la Loi sur les indemnités de services de guerre (L.R.C. (1970), ch. W-4)","SA",-12000,-12000.00,-12000,-12000,0
 "VAC","S",0,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs","SA",35975,4766.00,1859,2433,
@@ -2211,9 +2209,9 @@
 "WDO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEA",0,49600.00,0,0,376454
 "WDO","S",0,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés","SEB",0,0.00,0,9867,526804
 "WDO","S",0,"Payments for the Community Futures Network pursuant to the Economic Statement Implementation Act, 2020","Paiements pour le Réseau de développement des collectivités en vertu de la Loi d’exécution de l'énoncé économique de 2020","SEC",,,,,63800000
+"WDO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,298455000
+"WDO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,207718000
+"WDO","S",0,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-125000000
 "WDO","S",0,"Payments to provide financing support to small and medium-sized businesses pursuant to the Economic Statement Implementation Act, 2020","Paiements pour offrir un soutien financier aux petites et aux moyennes entreprises en vertu de la Loi d'exécution de l'énoncé économique de 2020","SEC",,,,,85700000
-"WDO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEA",,,,,298455000
-"WDO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEB",,,,,207718000
-"WDO","S",0,"Public Health Events of National Concern Payments Act","Loi sur les paiements relatifs aux événements de santé publique d'intérêt national","SEC",,,,,-125000000
 "WDO","S",0,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État","SA",2240,15948.00,11976,446,
 
