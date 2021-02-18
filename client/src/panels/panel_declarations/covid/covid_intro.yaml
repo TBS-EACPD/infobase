@@ -26,6 +26,9 @@ covid_intro_links_summary:
 covid_intro_links_content:
   transform: [handlebars,markdown]
   en: |
-    * TODO
+    * [2020-21 Supplementary Estimates](https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates.html)
+      * [Supplementary Estimates (C), 2020-21: COVID-19 Planned Expenditures](https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/covid-19-planned-expenditures.html)
+    * [Fall Economic Statement (FES) 2020](https://www.budget.gc.ca/fes-eea/2020/home-accueil-en.html)
+    * [Canada’s COVID-19 Economic Response Plan](https://www.canada.ca/en/department-finance/economic-response-plan.html)
   fr: |
     TODO
