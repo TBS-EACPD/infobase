@@ -123,6 +123,11 @@ export const org_covid_commitments_by_measure_query = build_org_query(
   covid_commitments_by_measure_query_fragment
 );
 
+const covid_count_query_fields = `
+  fiscal_year
+  with_authorities
+  with_spending
+`;
 const common_covid_summary_query_fragment = `
   covid_estimates {
     ${covid_estimates_fields}
@@ -132,6 +137,12 @@ const common_covid_summary_query_fragment = `
   }
   covid_commitments {
     ${covid_commitments_fields}
+  }
+  measure_counts {
+    ${covid_count_query_fields}
+  }
+  org_counts {
+    ${covid_count_query_fields}
   }
 `;
 export const gov_covid_summary_query = build_base_query(`
