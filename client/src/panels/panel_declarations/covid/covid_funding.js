@@ -304,7 +304,7 @@ export const declare_covid_funding_panel = () =>
       initial_queries: {
         gov_covid_summary_query,
       },
-      footnotes: ["COVID", "COVID_FUNDING"],
+      footnotes: ["COVID", "COVID_FUNDING", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: _.constant(true),
       render: ({
