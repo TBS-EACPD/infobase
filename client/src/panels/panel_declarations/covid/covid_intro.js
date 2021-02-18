@@ -35,13 +35,13 @@ export const declare_covid_intro_panel = () =>
           }}
         >
           <TM
-            k={"covid_intro_text"}
+            k="covid_intro_text"
             args={panel_args}
             className="medium-panel-text"
           />
           <Details
-            summary_content={text_maker("covid_intro_links")}
-            content={"TODO"}
+            summary_content={text_maker("covid_intro_links_summary")}
+            content={<TM k="covid_intro_links_content" />}
           />
         </InfographicPanel>
       ),
