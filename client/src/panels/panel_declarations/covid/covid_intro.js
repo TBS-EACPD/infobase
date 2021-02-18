@@ -1,7 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
-import { Details } from "src/components";
+import { gov_covid_summary_query } from "src/models/covid/queries.js";
+
+import { lang } from "src/core/injected_build_constants.js";
+
+import { Details, TabLoadingSpinner } from "src/components";
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { InfographicPanel, declare_panel } from "../shared.js";
 
@@ -11,11 +17,59 @@ import text from "./covid_intro.yaml";
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
+const client = get_client();
+
+class CovidIntroPanelDyanmicText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      covid_summary: null,
+    };
+  }
+  componentDidMount() {
+    client
+      .query({
+        query: gov_covid_summary_query,
+        variables: {
+          lang: lang,
+          _query_name: "gov_covid_summary_query",
+        },
+      })
+      .then(({ data: { root: { gov: { covid_summary } } } }) =>
+        this.setState({
+          loading: false,
+          covid_summary,
+        })
+      );
+  }
+  render() {
+    const { panel_args } = this.props;
+    const { loading, covid_summary } = this.state;
+
+    if (loading) {
+      return <TabLoadingSpinner />;
+    } else {
+      return (
+        <TM
+          k="covid_intro_dynamic_text"
+          args={{ ...panel_args, ...covid_summary }}
+          className="medium-panel-text"
+        />
+      );
+    }
+  }
+}
+
 export const declare_covid_intro_panel = () =>
   declare_panel({
     panel_key: "covid_intro",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
+      requires_has_covid_response: level_name === "dept",
+      initial_queries: {
+        gov_covid_summary_query,
+      },
       footnotes: ["COVID"],
       source: (subject) => [],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
@@ -35,10 +89,11 @@ export const declare_covid_intro_panel = () =>
           }}
         >
           <TM
-            k="covid_intro_text"
+            k="covid_intro_static_text"
             args={panel_args}
             className="medium-panel-text"
           />
+          <CovidIntroPanelDyanmicText panel_args={panel_args} />
           <Details
             summary_content={text_maker("covid_intro_links_summary")}
             content={<TM k="covid_intro_links_content" />}
