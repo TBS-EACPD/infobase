@@ -546,7 +546,7 @@ export const declare_covid_estimates_panel = () =>
         gov_covid_summary_query,
         ...(level_name === "dept" && { org_covid_summary_query }),
       },
-      footnotes: ["COVID", "COVID_AUTH"],
+      footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {

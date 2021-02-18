@@ -493,7 +493,7 @@ export const declare_covid_expenditures_panel = () =>
         gov_covid_summary_query,
         ...(level_name === "gov" && { top_covid_spending_query }),
       },
-      footnotes: ["COVID", "COVID_EXP"],
+      footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: (subject, options) => {
         if (level_name === "gov") {
