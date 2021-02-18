@@ -183,7 +183,6 @@ const EverythingSearch = withRouter(
         search_options_hierarchy,
         this.option_node_to_component
       );
-      console.log(this.state);
 
       return (
         <div className="fcol-md-12 p-0">
