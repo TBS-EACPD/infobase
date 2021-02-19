@@ -18,7 +18,7 @@ covid_above_tab_limited_measure_note:
   fr: TODO
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
-  en: More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be available in {{fmt_year_to_fiscal_year COVID_NEXT_YEAR}}.
+  en: These figures represent in-year, unaudited expenditures. More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be available in {{fmt_year_to_fiscal_year COVID_NEXT_YEAR}}.
   fr: TODO
 covid_above_tab_footnote_key_concept_link:
   transform: [handlebars,markdown]
