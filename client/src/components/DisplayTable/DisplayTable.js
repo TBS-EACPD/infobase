@@ -6,7 +6,7 @@ import {
   AutoSizer,
   CellMeasurerCache,
   CellMeasurer,
-  MultiGrid,
+  Grid,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
 
@@ -29,7 +29,6 @@ import {
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
-import ReactResizeDetector from "react-resize-detector";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -90,7 +89,9 @@ export class DisplayTable extends React.Component {
       searches,
     };
 
-    this.cell_measurer_cache = new CellMeasurerCache({ fixedWidth: true });
+    this.cell_measurer_cache = new CellMeasurerCache({
+      fixedWidth: true,
+    });
   }
 
   render() {
@@ -338,6 +339,7 @@ export class DisplayTable extends React.Component {
                 sorted_filtered_data[rowIndex],
                 visible_ordered_col_keys[columnIndex]
               ),
+              height: "fit-content",
             }}
             tabIndex={-1}
             ref={columnIndex === 0 && rowIndex === 0 ? "first_data" : null}
@@ -513,14 +515,18 @@ export class DisplayTable extends React.Component {
         </table> */}
         <AutoSizer disableHeight>
           {({ width }) => (
-            <MultiGrid
+            <Grid
               width={width}
               height={500}
               rowCount={_.size(sorted_filtered_data)}
               rowHeight={this.cell_measurer_cache.rowHeight}
               deferredMeasurementCache={this.cell_measurer_cache}
               cellRenderer={cell_render}
-              columnWidth={200}
+              columnWidth={
+                _.size(visible_ordered_col_keys) <= 5
+                  ? (1 / _.size(visible_ordered_col_keys)) * width
+                  : 150
+              }
               columnCount={_.size(visible_ordered_col_keys)}
             />
           )}
