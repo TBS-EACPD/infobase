@@ -143,3 +143,11 @@ COVID:
 COVID_AUTH:
   en: COVID-19 Spending Authorities
   fr: Autorisations liées à la COVID-19
+
+COVID_EXP:
+  en: COVID-19 Expenditures
+  fr: Dépenses COVID-19
+
+COVID_MEASURE:
+  en: COVID-19 Measures
+  fr: Mesures COVID-19
