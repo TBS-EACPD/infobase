@@ -135,3 +135,11 @@ MACHINERY:
 ANY:
   en: Any
   fr: Tout
+
+COVID:
+  en: COVID-19 Response
+  fr: Réponse à la COVID-19
+
+COVID_AUTH:
+  en: COVID-19 Spending Authorities
+  fr: Autorisations liées à la COVID-19
