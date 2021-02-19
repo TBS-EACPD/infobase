@@ -25,7 +25,7 @@ covid_intro_dynamic_text:
     TODO
 
 covid_intro_links_summary:
-  en: Links to additional online COVID-19 response reporting
+  en: Links to additional COVID-19 response reporting
   fr: TODO
 covid_intro_links_content:
   transform: [handlebars,markdown]
