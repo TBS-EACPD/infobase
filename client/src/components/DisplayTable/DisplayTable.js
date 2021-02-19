@@ -2,7 +2,12 @@ import classNames from "classnames";
 import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
-import { Table, Column, CellMeasurerCache } from "react-virtualized";
+import {
+  Table,
+  Column,
+  CellMeasurerCache,
+  CellMeasurer,
+} from "react-virtualized";
 import "react-virtualized/styles.css";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
@@ -43,6 +48,8 @@ const get_col_configs_with_defaults = (column_configs) =>
     ...column_config_defaults,
     ...supplied_column_config,
   }));
+
+const cell_measurer_cache = new CellMeasurerCache({ fixedWidth: true });
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
@@ -323,28 +330,36 @@ export class DisplayTable extends React.Component {
       parent,
     }) => {
       return (
-        <div
+        <CellMeasurer
+          cache={cell_measurer_cache}
+          columnIndex={columnIndex}
           key={dataKey}
-          style={{
-            fontSize: "14px",
-            textAlign: determine_text_align(rowData, dataKey),
-          }}
-          tabIndex={-1}
-          ref={columnIndex === 0 && rowIndex === 0 ? "first_data" : null}
+          parent={parent}
+          rowIndex={rowIndex}
         >
-          {col_configs_with_defaults[dataKey].formatter ? (
-            _.isString(col_configs_with_defaults[dataKey].formatter) ? (
-              <Format
-                type={col_configs_with_defaults[dataKey].formatter}
-                content={rowData[dataKey]}
-              />
+          <div
+            key={dataKey}
+            style={{
+              fontSize: "14px",
+              textAlign: determine_text_align(rowData, dataKey),
+            }}
+            tabIndex={-1}
+            ref={columnIndex === 0 && rowIndex === 0 ? "first_data" : null}
+          >
+            {col_configs_with_defaults[dataKey].formatter ? (
+              _.isString(col_configs_with_defaults[dataKey].formatter) ? (
+                <Format
+                  type={col_configs_with_defaults[dataKey].formatter}
+                  content={rowData[dataKey]}
+                />
+              ) : (
+                col_configs_with_defaults[dataKey].formatter(rowData[dataKey])
+              )
             ) : (
-              col_configs_with_defaults[dataKey].formatter(rowData[dataKey])
-            )
-          ) : (
-            rowData[dataKey]
-          )}
-        </div>
+              rowData[dataKey]
+            )}
+          </div>
+        </CellMeasurer>
       );
     };
 
@@ -486,7 +501,8 @@ export class DisplayTable extends React.Component {
           headerHeight={100}
           rowCount={_.size(sorted_filtered_data)}
           rowGetter={({ index }) => sorted_filtered_data[index]}
-          rowHeight={50}
+          rowHeight={cell_measurer_cache.rowHeight}
+          deferredMeasurementCache={cell_measurer_cache}
         >
           {_.map(visible_ordered_col_keys, (col_key, idx) => (
             <Column
@@ -495,6 +511,7 @@ export class DisplayTable extends React.Component {
               dataKey={col_key}
               width={(1 / _.size(visible_col_keys)) * 500}
               cellRenderer={cell_render}
+              style={{ whiteSpace: "normal" }}
             />
           ))}
         </Table>
