@@ -9,7 +9,9 @@ export default {
 
 const Template = (args) => (
   <HeightClipper clipHeight={200} {...args}>
-    <div style={{ height: "300px" }}>hi </div>
+    <div style={{ height: "300px", backgroundColor: "black" }}>
+      some content
+    </div>
   </HeightClipper>
 );
 
