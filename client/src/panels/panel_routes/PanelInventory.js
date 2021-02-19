@@ -97,10 +97,9 @@ const get_panel_obj = createSelector(
   get_subj,
   (props) => _.get(props, "match.params.panel"),
   (subject, panel_key) => {
-    return (
-      PanelRegistry.lookup(panel_key, subject.level) ||
-      PanelRegistry.lookup("financial_key_concepts", "gov")
-    );
+    return panel_key
+      ? PanelRegistry.lookup(panel_key, subject.level)
+      : PanelRegistry.lookup("financial_key_concepts", "gov");
   }
 );
 
