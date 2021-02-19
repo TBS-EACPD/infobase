@@ -172,7 +172,7 @@ const GovInfographicLinkItem = ({ svg, title, href, onClick }) => (
 const FeaturedContent = ({ items }) => (
   <ul className="featured-content-list list-group">
     {_.map(items, ({ text_key, href, is_link_out, is_new }) => (
-      <li className="list-group-item" key={text_key}>
+      <li className="list-group-item list-group-item--home d-flex justify-content-between">
         <a
           href={_.has(href, lang) ? href[lang] : href}
           target={is_link_out ? "_blank" : "_self"}
