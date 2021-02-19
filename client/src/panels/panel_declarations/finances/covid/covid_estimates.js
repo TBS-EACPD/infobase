@@ -434,7 +434,7 @@ export const declare_covid_estimates_panel = () =>
     panel_config_func: (level_name, panel_key) => ({
       requires_covid_estimates_gov_summary: true,
       requires_covid_estimates: level_name === "dept",
-      footnotes: false,
+      footnotes: ["COVID", "COVID_AUTH"],
       depends_on: ["orgVoteStatEstimates"],
       source: (subject) => [],
       calculate: function (subject, options) {
