@@ -49,8 +49,6 @@ const get_col_configs_with_defaults = (column_configs) =>
     ...supplied_column_config,
   }));
 
-const cell_measurer_cache = new CellMeasurerCache({ fixedWidth: true });
-
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
   - 1st column cannot be toggled off by user
@@ -90,6 +88,8 @@ export class DisplayTable extends React.Component {
       descending: false,
       searches,
     };
+
+    this.cell_measurer_cache = new CellMeasurerCache({ fixedWidth: true });
   }
 
   render() {
@@ -331,7 +331,7 @@ export class DisplayTable extends React.Component {
     }) => {
       return (
         <CellMeasurer
-          cache={cell_measurer_cache}
+          cache={this.cell_measurer_cache}
           columnIndex={columnIndex}
           key={dataKey}
           parent={parent}
@@ -501,8 +501,8 @@ export class DisplayTable extends React.Component {
           headerHeight={100}
           rowCount={_.size(sorted_filtered_data)}
           rowGetter={({ index }) => sorted_filtered_data[index]}
-          rowHeight={cell_measurer_cache.rowHeight}
-          deferredMeasurementCache={cell_measurer_cache}
+          rowHeight={this.cell_measurer_cache.rowHeight}
+          deferredMeasurementCache={this.cell_measurer_cache}
         >
           {_.map(visible_ordered_col_keys, (col_key, idx) => (
             <Column
