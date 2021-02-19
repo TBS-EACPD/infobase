@@ -3,10 +3,10 @@ import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
 import {
-  Table,
-  Column,
+  AutoSizer,
   CellMeasurerCache,
   CellMeasurer,
+  MultiGrid,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
 
@@ -29,6 +29,7 @@ import {
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
+import ReactResizeDetector from "react-resize-detector";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -275,30 +276,28 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
-    const header_render = ({ dataKey }) => {
-      const sortable = col_configs_with_defaults[dataKey].is_sortable;
-      const searchable = col_configs_with_defaults[dataKey].is_searchable;
+    const header_render = ({ key }) => {
+      const sortable = col_configs_with_defaults[key].is_sortable;
+      const searchable = col_configs_with_defaults[key].is_searchable;
 
-      const current_search_input = (searchable && searches[dataKey]) || null;
+      const current_search_input = (searchable && searches[key]) || null;
 
       return (
-        <div className="center-text" key={dataKey}>
-          {col_configs_with_defaults[dataKey].header}
+        <div className="center-text" key={key}>
+          {col_configs_with_defaults[key].header}
           {sortable && (
             <div
               onClick={() =>
                 this.setState({
-                  sort_by: dataKey,
+                  sort_by: key,
                   descending:
-                    this.state.sort_by === dataKey
-                      ? !this.state.descending
-                      : true,
+                    this.state.sort_by === key ? !this.state.descending : true,
                 })
               }
             >
               <SortDirections
-                asc={!descending && sort_by === dataKey}
-                desc={descending && sort_by === dataKey}
+                asc={!descending && sort_by === key}
+                desc={descending && sort_by === key}
               />
             </div>
           )}
@@ -310,7 +309,7 @@ export class DisplayTable extends React.Component {
               defaultValue={current_search_input}
               updateCallback={(search_value) => {
                 const updated_searches = _.mapValues(searches, (value, key) =>
-                  key === dataKey ? search_value : value
+                  key === key ? search_value : value
                 );
 
                 this.setState({ searches: updated_searches });
@@ -322,41 +321,58 @@ export class DisplayTable extends React.Component {
       );
     };
 
-    const cell_render = ({
-      dataKey,
-      rowData,
-      columnIndex,
-      rowIndex,
-      parent,
-    }) => {
+    const cell_render = ({ key, style, columnIndex, rowIndex, parent }) => {
       return (
         <CellMeasurer
           cache={this.cell_measurer_cache}
           columnIndex={columnIndex}
-          key={dataKey}
+          key={key}
           parent={parent}
           rowIndex={rowIndex}
         >
           <div
-            key={dataKey}
             style={{
+              ...style,
               fontSize: "14px",
-              textAlign: determine_text_align(rowData, dataKey),
+              textAlign: determine_text_align(
+                sorted_filtered_data[rowIndex],
+                visible_ordered_col_keys[columnIndex]
+              ),
             }}
             tabIndex={-1}
             ref={columnIndex === 0 && rowIndex === 0 ? "first_data" : null}
           >
-            {col_configs_with_defaults[dataKey].formatter ? (
-              _.isString(col_configs_with_defaults[dataKey].formatter) ? (
+            {col_configs_with_defaults[visible_ordered_col_keys[columnIndex]]
+              .formatter ? (
+              _.isString(
+                col_configs_with_defaults[visible_ordered_col_keys[columnIndex]]
+                  .formatter
+              ) ? (
                 <Format
-                  type={col_configs_with_defaults[dataKey].formatter}
-                  content={rowData[dataKey]}
+                  type={
+                    col_configs_with_defaults[
+                      visible_ordered_col_keys[columnIndex]
+                    ].formatter
+                  }
+                  content={
+                    sorted_filtered_data[rowIndex][
+                      visible_ordered_col_keys[columnIndex]
+                    ]
+                  }
                 />
               ) : (
-                col_configs_with_defaults[dataKey].formatter(rowData[dataKey])
+                col_configs_with_defaults[
+                  visible_ordered_col_keys[columnIndex]
+                ].formatter(
+                  sorted_filtered_data[rowIndex][
+                    visible_ordered_col_keys[columnIndex]
+                  ]
+                )
               )
             ) : (
-              rowData[dataKey]
+              sorted_filtered_data[rowIndex][
+                visible_ordered_col_keys[columnIndex]
+              ]
             )}
           </div>
         </CellMeasurer>
@@ -370,7 +386,7 @@ export class DisplayTable extends React.Component {
           util_components_with_defaults && "display-table-container--with-utils"
         )}
       >
-        <table
+        {/* <table
           className={classNames(
             "table",
             "display-table",
@@ -494,27 +510,21 @@ export class DisplayTable extends React.Component {
               )}
             </tbody>
           )}
-        </table>
-        <Table
-          width={500}
-          height={500}
-          headerHeight={100}
-          rowCount={_.size(sorted_filtered_data)}
-          rowGetter={({ index }) => sorted_filtered_data[index]}
-          rowHeight={this.cell_measurer_cache.rowHeight}
-          deferredMeasurementCache={this.cell_measurer_cache}
-        >
-          {_.map(visible_ordered_col_keys, (col_key, idx) => (
-            <Column
-              key={col_key}
-              headerRenderer={header_render}
-              dataKey={col_key}
-              width={(1 / _.size(visible_col_keys)) * 500}
+        </table> */}
+        <AutoSizer disableHeight>
+          {({ width }) => (
+            <MultiGrid
+              width={width}
+              height={500}
+              rowCount={_.size(sorted_filtered_data)}
+              rowHeight={this.cell_measurer_cache.rowHeight}
+              deferredMeasurementCache={this.cell_measurer_cache}
               cellRenderer={cell_render}
-              style={{ whiteSpace: "normal" }}
+              columnWidth={200}
+              columnCount={_.size(visible_ordered_col_keys)}
             />
-          ))}
-        </Table>
+          )}
+        </AutoSizer>
 
         {sorted_filtered_data.length === 0 && (
           <TM
