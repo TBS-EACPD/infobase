@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
+import { Table, Column, CellMeasurerCache } from "react-virtualized";
+import "react-virtualized/styles.css";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
 import { toggle_list } from "src/general_utils.js";
@@ -120,7 +122,7 @@ export class DisplayTable extends React.Component {
           <td style={{ padding: 0 }} colSpan={_.size(visible_col_keys)}>
             <div
               style={{ borderRadius: 0, margin: 0 }}
-              className="card large_panel_text no-data-msg"
+              className="well large_panel_text no-data-msg"
             >
               {text_maker("no_data")}
             </div>
@@ -266,6 +268,86 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
+    const header_render = ({ dataKey }) => {
+      const sortable = col_configs_with_defaults[dataKey].is_sortable;
+      const searchable = col_configs_with_defaults[dataKey].is_searchable;
+
+      const current_search_input = (searchable && searches[dataKey]) || null;
+
+      return (
+        <div className="center-text" key={dataKey}>
+          {col_configs_with_defaults[dataKey].header}
+          {sortable && (
+            <div
+              onClick={() =>
+                this.setState({
+                  sort_by: dataKey,
+                  descending:
+                    this.state.sort_by === dataKey
+                      ? !this.state.descending
+                      : true,
+                })
+              }
+            >
+              <SortDirections
+                asc={!descending && sort_by === dataKey}
+                desc={descending && sort_by === dataKey}
+              />
+            </div>
+          )}
+          {searchable && (
+            <DebouncedTextInput
+              inputClassName={"search input-sm"}
+              placeHolder={text_maker("filter_data")}
+              a11y_label={text_maker("filter_data")}
+              defaultValue={current_search_input}
+              updateCallback={(search_value) => {
+                const updated_searches = _.mapValues(searches, (value, key) =>
+                  key === dataKey ? search_value : value
+                );
+
+                this.setState({ searches: updated_searches });
+              }}
+              debounceTime={300}
+            />
+          )}
+        </div>
+      );
+    };
+
+    const cell_render = ({
+      dataKey,
+      rowData,
+      columnIndex,
+      rowIndex,
+      parent,
+    }) => {
+      return (
+        <div
+          key={dataKey}
+          style={{
+            fontSize: "14px",
+            textAlign: determine_text_align(rowData, dataKey),
+          }}
+          tabIndex={-1}
+          ref={columnIndex === 0 && rowIndex === 0 ? "first_data" : null}
+        >
+          {col_configs_with_defaults[dataKey].formatter ? (
+            _.isString(col_configs_with_defaults[dataKey].formatter) ? (
+              <Format
+                type={col_configs_with_defaults[dataKey].formatter}
+                content={rowData[dataKey]}
+              />
+            ) : (
+              col_configs_with_defaults[dataKey].formatter(rowData[dataKey])
+            )
+          ) : (
+            rowData[dataKey]
+          )}
+        </div>
+      );
+    };
+
     return (
       <div
         className={classNames(
@@ -309,69 +391,8 @@ export class DisplayTable extends React.Component {
                 </td>
               </tr>
             )}
-            <tr className="table-header">
-              {_.map(visible_ordered_col_keys, (column_key, i) => (
-                <th key={i} className={"center-text"}>
-                  {col_configs_with_defaults[column_key].header}
-                </th>
-              ))}
-            </tr>
-            {_.some(col_configs_with_defaults, "is_sortable") && (
-              <tr className="table-header">
-                {_.map(visible_ordered_col_keys, (column_key) => {
-                  const sortable =
-                    col_configs_with_defaults[column_key].is_sortable;
-                  const searchable =
-                    col_configs_with_defaults[column_key].is_searchable;
-
-                  const current_search_input =
-                    (searchable && searches[column_key]) || null;
-
-                  return (
-                    <td key={column_key} style={{ textAlign: "center" }}>
-                      {sortable && (
-                        <div
-                          onClick={() =>
-                            this.setState({
-                              sort_by: column_key,
-                              descending:
-                                this.state.sort_by === column_key
-                                  ? !this.state.descending
-                                  : true,
-                            })
-                          }
-                        >
-                          <SortDirections
-                            asc={!descending && sort_by === column_key}
-                            desc={descending && sort_by === column_key}
-                          />
-                        </div>
-                      )}
-                      {searchable && (
-                        <DebouncedTextInput
-                          inputClassName={"search input-sm"}
-                          placeHolder={text_maker("filter_data")}
-                          a11y_label={text_maker("filter_data")}
-                          defaultValue={current_search_input}
-                          updateCallback={(search_value) => {
-                            const updated_searches = _.mapValues(
-                              searches,
-                              (value, key) =>
-                                key === column_key ? search_value : value
-                            );
-
-                            this.setState({ searches: updated_searches });
-                          }}
-                          debounceTime={300}
-                        />
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            )}
           </thead>
-          {_.isEmpty(visible_ordered_col_keys) ? (
+          {_.isEmpty(sorted_filtered_data) ? (
             <NoDataMessage />
           ) : (
             <tbody>
@@ -459,6 +480,24 @@ export class DisplayTable extends React.Component {
             </tbody>
           )}
         </table>
+        <Table
+          width={500}
+          height={500}
+          headerHeight={100}
+          rowCount={_.size(sorted_filtered_data)}
+          rowGetter={({ index }) => sorted_filtered_data[index]}
+          rowHeight={50}
+        >
+          {_.map(visible_ordered_col_keys, (col_key, idx) => (
+            <Column
+              key={col_key}
+              headerRenderer={header_render}
+              dataKey={col_key}
+              width={(1 / _.size(visible_col_keys)) * 500}
+              cellRenderer={cell_render}
+            />
+          ))}
+        </Table>
 
         {sorted_filtered_data.length === 0 && (
           <TM
