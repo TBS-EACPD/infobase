@@ -4,8 +4,7 @@ covid_questions_up_to_date_q:
 covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
   en: |
-    This data is current up to and including {{COVID_LAST_REFRESHED_MONTH}}. More recent or more detailed data may be available directly from individual federal
-    organizations (departments, agencies, and Crown corporations). {{gt "covid_above_tab_data_freshness_note"}}
+    This data is current up to and including {{COVID_LAST_REFRESHED_MONTH}}. {{gt "covid_above_tab_data_org_websites_note"}}
   fr: TODO
 
 covid_questions_financial_q:

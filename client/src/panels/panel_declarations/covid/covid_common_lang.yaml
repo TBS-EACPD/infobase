@@ -14,11 +14,15 @@ covid_above_tab_footnote_title:
   fr: |
     Important:
 covid_above_tab_limited_measure_note:
-  en: Only measures presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan has not been captured.
+  en: Only measures that are presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan has not been captured.
   fr: TODO
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
-  en: These figures represent in-year, unaudited expenditures. More recent or more detailed data may be available directly from individual federal organizations. Updates are ongoing and will be reflected on GC InfoBase monthly. Finalized values for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be available in {{fmt_year_to_fiscal_year COVID_NEXT_YEAR}}.
+  en: Current spending values represent unaudited expenditures. Finalized values for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be available with the publication of the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). Updates will be reflected on GC InfoBase monthly.
+  fr: TODO
+covid_above_tab_data_org_websites_note:
+  transform: [handlebars]
+  en: More recent or more detailed information may be available directly from individual federal organizations.
   fr: TODO
 covid_above_tab_footnote_key_concept_link:
   transform: [handlebars,markdown]

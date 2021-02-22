@@ -7,6 +7,7 @@ covid_expenditures_above_tab_footnote_list:
   text: |
     * {{gt "covid_above_tab_limited_measure_note"}}
     * {{gt "covid_above_tab_data_freshness_note"}}
+    * {{gt "covid_above_tab_data_org_websites_note"}}
 
 covid_expenditures_overview_tab_text:
   transform: [handlebars,markdown]
