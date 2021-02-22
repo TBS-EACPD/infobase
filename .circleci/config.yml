@@ -383,6 +383,7 @@ workflows:
   # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
     jobs:
+      - a11y_test_axe
       - build
       - test_end_to_end:
           requires:
@@ -403,9 +404,6 @@ workflows:
             - test_end_to_end
             - deploy_server
           <<: *deploy_filter
-      - a11y_test_axe:
-          requires:
-            - deploy_client
       - lighthouse:
           requires:
             - deploy_client
