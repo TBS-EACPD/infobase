@@ -44,7 +44,7 @@ const base_configs = [
   },
   {
     id: "covid",
-    title: text_maker("covid_response"),
+    title: text_maker("covid"),
     description: text_maker("covid_desc"),
     Icon: IconHelp,
   },
