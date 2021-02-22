@@ -6,6 +6,8 @@ PATH="./node_modules/.bin:$PATH"
 
 npm install @axe-core/cli -g
 
+echo -n "Finished installing @axe-core/cli"
+
 axe $CDN_BASE_URL/$CIRCLE_BRANCH/index-eng.html#start --disable color-contrast --exit
 axe $CDN_BASE_URL/$CIRCLE_BRANCH/index-eng.html#compare_estimates --disable color-contrast --exit
 axe $CDN_BASE_URL/$CIRCLE_BRANCH/index-eng.html#igoc --disable color-contrast --exit
