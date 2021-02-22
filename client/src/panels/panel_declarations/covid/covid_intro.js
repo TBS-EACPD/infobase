@@ -5,7 +5,7 @@ import { gov_covid_summary_query } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { Details, TabLoadingSpinner } from "src/components";
+import { TabLoadingSpinner } from "src/components";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
@@ -104,10 +104,6 @@ export const declare_covid_intro_panel = () =>
             className="medium-panel-text"
           />
           <CovidIntroPanelDyanmicText panel_args={panel_args} />
-          <Details
-            summary_content={text_maker("covid_intro_links_summary")}
-            content={<TM k="covid_intro_links_content" />}
-          />
         </InfographicPanel>
       ),
     }),

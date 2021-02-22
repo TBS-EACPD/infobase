@@ -6,7 +6,7 @@ covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
     * These figures represent {{gl_tt "spending authorities" "AUTH"}} as outlined in the {{gl_tt "Estimates process" "EST_PROC"}}.
-    * Any reallocation of existing authorities to the COVID-19 pandemic response are excluded.
+    * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * {{gt "covid_above_tab_limited_measure_note"}}
   fr: |
     * Ces chiffres correspondent aux {{gl_tt "autorisations de dépenses" "AUTH"}} énoncées dans le {{gl_tt "processus budgétaire" "EST_PROC"}}.
