@@ -24,7 +24,7 @@ export const api_load_has_covid_response = (subject) => {
   }
 
   try {
-    subject.has_data("covid_response");
+    subject.has_data("covid");
   } catch (e) {
     return get_client()
       .query({
@@ -37,7 +37,7 @@ export const api_load_has_covid_response = (subject) => {
       })
       .then((response) =>
         subject.set_has_data(
-          "covid_response",
+          "covid",
           _.omit(response.data.root.org.has_covid_data, "__typename") || false
         )
       );

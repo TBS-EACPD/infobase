@@ -499,7 +499,7 @@ export const declare_covid_expenditures_panel = () =>
         if (level_name === "gov") {
           return true;
         } else {
-          return subject.has_data("covid_response")?.has_expenditures;
+          return subject.has_data("covid")?.has_expenditures;
         }
       },
       render: ({

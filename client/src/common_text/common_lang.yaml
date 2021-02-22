@@ -686,8 +686,8 @@ all_voted_items:
   en: all voted items
   fr: tous les crédits votés
 
-covid_response:
-  en: COVID-19 Response
+covid:
+  en: COVID-19
   fr: TODO
 covid_measure:
   en: COVID-19 Measure

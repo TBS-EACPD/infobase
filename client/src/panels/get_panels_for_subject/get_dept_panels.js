@@ -86,7 +86,7 @@ export const get_dept_panels = (subject) =>
       declare_planned_actual_comparison_panel(),
       declare_dp_rev_split_panel(),
     ],
-    covid: _.some(subject.has_data("covid_response")) && [
+    covid: _.some(subject.has_data("covid")) && [
       declare_covid_key_concepts_panel(),
       declare_covid_intro_panel(),
       declare_covid_estimates_panel(),

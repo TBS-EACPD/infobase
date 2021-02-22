@@ -553,7 +553,7 @@ export const declare_covid_estimates_panel = () =>
         if (level_name === "gov") {
           return true;
         } else {
-          return subject.has_data("covid_response")?.has_estimates;
+          return subject.has_data("covid")?.has_estimates;
         }
       },
       render: ({
