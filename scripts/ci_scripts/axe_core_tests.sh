@@ -1,11 +1,10 @@
 set -e 
 
-npm set prefix ~/.npm
-PATH="$HOME/.npm/bin:$PATH"
-PATH="./node_modules/.bin:$PATH"
+#npm set prefix ~/.npm
+#PATH="$HOME/.npm/bin:$PATH"
+#PATH="./node_modules/.bin:$PATH"
 
-npm install -g npm@latest
-npm install @axe-core/cli -g
+npm install @axe-core/cli -g --unsafe-perm=true --allow-root
 
 echo -n "Finished installing @axe-core/cli"
 
