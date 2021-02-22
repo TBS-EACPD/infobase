@@ -687,8 +687,7 @@ all_voted_items:
   fr: tous les crédits votés
 
 covid:
-  en: COVID-19
-  fr: TODO
+  text: COVID-19
 covid_measure:
   en: COVID-19 Measure
   fr: Mesure COVID-19
