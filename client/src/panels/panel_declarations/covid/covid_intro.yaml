@@ -6,7 +6,7 @@ covid_intro_static_text:
   transform: [handlebars,markdown]
   en: |
     Since the start of COVID-19 in early 2020, the Government of Canada has put in place a series of
-    measures in order help Canadians who may face hardship due to the pandemic. Many of these
+    measures in order to help Canadians who may face hardship due to the pandemic. Many of these
     measures are aimed at helping Canadians and businesses financially and are being rolled-out
     incrementally as the pandemic evolves.  
     
@@ -19,8 +19,8 @@ covid_intro_static_text:
 covid_intro_dynamic_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{orgs_with_spending}}** organizations
-    across the Government of Canada have spent funds in support of the **{{measures_with_authorities}}** measures presented in the Estimates.
+    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{orgs_with_authorities}}** organizations
+    across the Government of Canada have been granted authorities to spend in support of the **{{measures_with_authorities}}** measures presented in the Estimates.
   fr: |
     TODO
 
