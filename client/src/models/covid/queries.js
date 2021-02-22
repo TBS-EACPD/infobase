@@ -138,12 +138,6 @@ const common_covid_summary_query_fragment = `
   covid_commitments {
     ${covid_commitments_fields}
   }
-  measure_counts {
-    ${covid_count_query_fields}
-  }
-  org_counts {
-    ${covid_count_query_fields}
-  }
 `;
 export const gov_covid_summary_query = build_base_query(`
   gov {
@@ -152,6 +146,12 @@ export const gov_covid_summary_query = build_base_query(`
       id
       ${COVID_FUNDING_FEATURE_FLAG ? covid_funding_fields : ""}
       ${common_covid_summary_query_fragment}
+      measure_counts {
+        ${covid_count_query_fields}
+      }
+      org_counts {
+        ${covid_count_query_fields}
+      }
     }
   }
 `);
