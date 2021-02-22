@@ -3,7 +3,6 @@ import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-
 import { trivial_text_maker } from "../../models/text.js";
 import "./bootstrap_modal_exstension.scss";
 
@@ -72,6 +71,7 @@ export class StatelessModal extends React.Component {
         size="xl"
         onHide={this.closeModal}
         dialogClassName={classNames(`modal-dialog`, additional_dialog_class)}
+        centered
       >
         <div>
           <Modal.Header closeButton={!close_text}>

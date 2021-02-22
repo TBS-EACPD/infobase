@@ -4,12 +4,12 @@ import React, { Fragment } from "react";
 //data and state stuff
 
 //re-usable view stuff
-import AriaModal from "react-aria-modal";
 import { withRouter } from "react-router";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { SpinnerWrapper, LabeledBox } from "../components/index.js";
+import { AriaModal } from "../components/modals_and_popovers/AriaModal.js";
 import { log_standard_event } from "../core/analytics.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
 import {
