@@ -4,7 +4,7 @@ set -e
 #PATH="$HOME/.npm/bin:$PATH"
 #PATH="./node_modules/.bin:$PATH"
 
-sudo chown -R $USER /usr/local/lib/node_modules
+chown -R $USER /usr/local/lib/node_modules
 npm install @axe-core/cli -g --unsafe-perm=true --allow-root
 
 echo -n "Finished installing @axe-core/cli"
