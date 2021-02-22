@@ -6,7 +6,7 @@ import {
   AutoSizer,
   CellMeasurerCache,
   CellMeasurer,
-  Grid,
+  MultiGrid,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
 
@@ -323,6 +323,8 @@ export class DisplayTable extends React.Component {
     };
 
     const cell_render = ({ key, style, columnIndex, rowIndex, parent }) => {
+      style = { ...style, padding: "10px" };
+
       return (
         <CellMeasurer
           cache={this.cell_measurer_cache}
@@ -331,52 +333,138 @@ export class DisplayTable extends React.Component {
           parent={parent}
           rowIndex={rowIndex}
         >
-          <div
-            style={{
-              ...style,
-              fontSize: "14px",
-              textAlign: determine_text_align(
-                sorted_filtered_data[rowIndex],
-                visible_ordered_col_keys[columnIndex]
-              ),
-              height: "fit-content",
-            }}
-            tabIndex={-1}
-            ref={columnIndex === 0 && rowIndex === 0 ? "first_data" : null}
-          >
-            {col_configs_with_defaults[visible_ordered_col_keys[columnIndex]]
-              .formatter ? (
-              _.isString(
-                col_configs_with_defaults[visible_ordered_col_keys[columnIndex]]
-                  .formatter
-              ) ? (
-                <Format
-                  type={
-                    col_configs_with_defaults[
+          {(() => {
+            //header
+            if (rowIndex <= 1) {
+              if (rowIndex === 0) {
+                return (
+                  <div className="center-text header" style={style}>
+                    {
+                      col_configs_with_defaults[
+                        visible_ordered_col_keys[columnIndex]
+                      ].header
+                    }
+                  </div>
+                );
+              } else {
+                return (
+                  _.some(col_configs_with_defaults, "is_sortable") &&
+                  (() => {
+                    const sortable =
+                      col_configs_with_defaults[
+                        visible_ordered_col_keys[columnIndex]
+                      ].is_sortable;
+                    const searchable =
+                      col_configs_with_defaults[
+                        visible_ordered_col_keys[columnIndex]
+                      ].is_searchable;
+
+                    const current_search_input =
+                      (searchable && searches[columnIndex]) || null;
+                    return (
+                      <div
+                        style={{ ...style, textAlign: "center" }}
+                        className="header"
+                      >
+                        {sortable && (
+                          <div
+                            onClick={() =>
+                              this.setState({
+                                sort_by: columnIndex,
+                                descending:
+                                  this.state.sort_by === columnIndex
+                                    ? !this.state.descending
+                                    : true,
+                              })
+                            }
+                          >
+                            <SortDirections
+                              asc={!descending && sort_by === columnIndex}
+                              desc={descending && sort_by === columnIndex}
+                            />
+                          </div>
+                        )}
+                        {searchable && (
+                          <DebouncedTextInput
+                            inputClassName={"search input-sm"}
+                            placeHolder={text_maker("filter_data")}
+                            a11y_label={text_maker("filter_data")}
+                            defaultValue={current_search_input}
+                            updateCallback={(search_value) => {
+                              const updated_searches = _.mapValues(
+                                searches,
+                                (value, key) =>
+                                  key === columnIndex ? search_value : value
+                              );
+
+                              this.setState({ searches: updated_searches });
+                            }}
+                            debounceTime={300}
+                          />
+                        )}
+                      </div>
+                    );
+                  })()
+                );
+              }
+            } else {
+              rowIndex -= 2;
+              return (
+                <div
+                  style={{
+                    ...style,
+                    fontSize: "14px",
+                    textAlign: determine_text_align(
+                      sorted_filtered_data[rowIndex],
                       visible_ordered_col_keys[columnIndex]
-                    ].formatter
+                    ),
+                  }}
+                  tabIndex={-1}
+                  ref={
+                    columnIndex === 0 && rowIndex === 0 ? "first_data" : null
                   }
-                  content={
+                  className={classNames("body-cell", {
+                    lighten: rowIndex % 2 === 0,
+                  })}
+                >
+                  {col_configs_with_defaults[
+                    visible_ordered_col_keys[columnIndex]
+                  ].formatter ? (
+                    _.isString(
+                      col_configs_with_defaults[
+                        visible_ordered_col_keys[columnIndex]
+                      ].formatter
+                    ) ? (
+                      <Format
+                        type={
+                          col_configs_with_defaults[
+                            visible_ordered_col_keys[columnIndex]
+                          ].formatter
+                        }
+                        content={
+                          sorted_filtered_data[rowIndex][
+                            visible_ordered_col_keys[columnIndex]
+                          ]
+                        }
+                      />
+                    ) : (
+                      col_configs_with_defaults[
+                        visible_ordered_col_keys[columnIndex]
+                      ].formatter(
+                        sorted_filtered_data[rowIndex][
+                          visible_ordered_col_keys[columnIndex]
+                        ]
+                      )
+                    )
+                  ) : (
                     sorted_filtered_data[rowIndex][
                       visible_ordered_col_keys[columnIndex]
                     ]
-                  }
-                />
-              ) : (
-                col_configs_with_defaults[
-                  visible_ordered_col_keys[columnIndex]
-                ].formatter(
-                  sorted_filtered_data[rowIndex][
-                    visible_ordered_col_keys[columnIndex]
-                  ]
-                )
-              )
-            ) : (
-              sorted_filtered_data[rowIndex][
-                visible_ordered_col_keys[columnIndex]
-              ]
-            )}
-          </div>
+                  )}
+                </div>
+              );
+            }
+          })()}
         </CellMeasurer>
       );
     };
@@ -515,12 +603,11 @@ export class DisplayTable extends React.Component {
         </table> */}
         <AutoSizer disableHeight>
           {({ width }) => (
-            <Grid
+            <MultiGrid
               width={width}
               height={500}
-              rowCount={_.size(sorted_filtered_data)}
+              rowCount={_.size(sorted_filtered_data) + 2} //add 2 for header title and header controls
               rowHeight={this.cell_measurer_cache.rowHeight}
-              deferredMeasurementCache={this.cell_measurer_cache}
               cellRenderer={cell_render}
               columnWidth={
                 _.size(visible_ordered_col_keys) <= 5
@@ -528,6 +615,7 @@ export class DisplayTable extends React.Component {
                   : 150
               }
               columnCount={_.size(visible_ordered_col_keys)}
+              fixedRowCount={2}
             />
           )}
         </AutoSizer>

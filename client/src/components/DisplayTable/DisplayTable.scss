@@ -77,6 +77,24 @@ table.display-table > thead > tr > th {
   font-weight: $mediumFontWeight;
 }
 
+.header {
+  background-color: $primaryColor;
+  border-top: none;
+
+  color: $textLightColor;
+
+  &.center-text {
+    vertical-align: middle;
+  }
+
+  & > .search {
+    width: 100%;
+    font-weight: $lightFontWeight;
+  }
+  vertical-align: top;
+  font-weight: $mediumFontWeight;
+}
+
 table.display-table > tbody > tr > td,
 table.display-table > tbody > tr > th {
   font-weight: $mediumFontWeight;
@@ -93,6 +111,17 @@ table.display-table > tbody > tr:nth-child(even) {
 
 table.display-table > tbody > tr:nth-child(odd) {
   background-color: $backgroundColor;
+}
+
+.body-cell {
+  background-color: $backgroundColor;
+  font-weight: $mediumFontWeight;
+  border: 1px solid $separatorColor;
+  transition: background-color 500ms ease-in;
+}
+
+.body-cell.lighten {
+  background-color: lighten($tertiaryColor, 40%);
 }
 
 table.display-table:not(.no-total-row) > tbody > tr > td {
