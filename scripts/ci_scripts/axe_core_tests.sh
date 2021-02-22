@@ -4,6 +4,7 @@ npm set prefix ~/.npm
 PATH="$HOME/.npm/bin:$PATH"
 PATH="./node_modules/.bin:$PATH"
 
+npm install -g npm@latest
 npm install @axe-core/cli -g
 
 echo -n "Finished installing @axe-core/cli"
