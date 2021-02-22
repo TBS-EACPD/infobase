@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 import {
   AutoSizer,
   CellMeasurerCache,
@@ -277,51 +277,6 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
-    const header_render = ({ key }) => {
-      const sortable = col_configs_with_defaults[key].is_sortable;
-      const searchable = col_configs_with_defaults[key].is_searchable;
-
-      const current_search_input = (searchable && searches[key]) || null;
-
-      return (
-        <div className="center-text" key={key}>
-          {col_configs_with_defaults[key].header}
-          {sortable && (
-            <div
-              onClick={() =>
-                this.setState({
-                  sort_by: key,
-                  descending:
-                    this.state.sort_by === key ? !this.state.descending : true,
-                })
-              }
-            >
-              <SortDirections
-                asc={!descending && sort_by === key}
-                desc={descending && sort_by === key}
-              />
-            </div>
-          )}
-          {searchable && (
-            <DebouncedTextInput
-              inputClassName={"search input-sm"}
-              placeHolder={text_maker("filter_data")}
-              a11y_label={text_maker("filter_data")}
-              defaultValue={current_search_input}
-              updateCallback={(search_value) => {
-                const updated_searches = _.mapValues(searches, (value, key) =>
-                  key === key ? search_value : value
-                );
-
-                this.setState({ searches: updated_searches });
-              }}
-              debounceTime={300}
-            />
-          )}
-        </div>
-      );
-    };
-
     const cell_render = ({ key, style, columnIndex, rowIndex, parent }) => {
       style = { ...style, padding: "10px" };
 
@@ -334,8 +289,11 @@ export class DisplayTable extends React.Component {
           rowIndex={rowIndex}
         >
           {(() => {
-            //header
-            if (rowIndex <= 1) {
+            if (
+              rowIndex <= 1 ||
+              (is_total_exist && rowIndex - 2 === _.size(sorted_filtered_data))
+            ) {
+              //header + footer
               if (rowIndex === 0) {
                 return (
                   <div className="center-text header" style={style}>
@@ -346,7 +304,7 @@ export class DisplayTable extends React.Component {
                     }
                   </div>
                 );
-              } else {
+              } else if (rowIndex === 1) {
                 return (
                   _.some(col_configs_with_defaults, "is_sortable") &&
                   (() => {
@@ -406,9 +364,60 @@ export class DisplayTable extends React.Component {
                     );
                   })()
                 );
+              } else {
+                if (columnIndex == 0) {
+                  return (
+                    <div className="total_color total-cell" style={style}>
+                      {text_maker("total")}
+                    </div>
+                  );
+                } else {
+                  const col_key = visible_ordered_col_keys[columnIndex];
+                  return (
+                    <div
+                      className="total_color total-cell"
+                      style={{
+                        ...style,
+                        textAlign: determine_text_align(total_row, col_key),
+                      }}
+                    >
+                      {(() => {
+                        const has_total_row = total_row[col_key];
+                        if (has_total_row) {
+                          const has_formatter =
+                            col_configs_with_defaults[col_key].formatter;
+                          if (has_formatter) {
+                            const is_formatter_string = _.isString(
+                              col_configs_with_defaults[col_key].formatter
+                            );
+                            if (is_formatter_string) {
+                              return (
+                                <Format
+                                  type={
+                                    col_configs_with_defaults[col_key].formatter
+                                  }
+                                  content={total_row[col_key]}
+                                />
+                              );
+                            } else {
+                              return col_configs_with_defaults[
+                                col_key
+                              ].formatter(total_row[col_key]);
+                            }
+                          } else {
+                            return total_row[col_key];
+                          }
+                        } else {
+                          return "";
+                        }
+                      })()}
+                    </div>
+                  );
+                }
               }
             } else {
               rowIndex -= 2;
+              const col_key = visible_ordered_col_keys[columnIndex];
               return (
                 <div
                   style={{
@@ -416,7 +425,7 @@ export class DisplayTable extends React.Component {
                     fontSize: "14px",
                     textAlign: determine_text_align(
                       sorted_filtered_data[rowIndex],
-                      visible_ordered_col_keys[columnIndex]
+                      col_key
                     ),
                   }}
                   tabIndex={-1}
@@ -427,39 +436,19 @@ export class DisplayTable extends React.Component {
                     lighten: rowIndex % 2 === 0,
                   })}
                 >
-                  {col_configs_with_defaults[
-                    visible_ordered_col_keys[columnIndex]
-                  ].formatter ? (
-                    _.isString(
-                      col_configs_with_defaults[
-                        visible_ordered_col_keys[columnIndex]
-                      ].formatter
-                    ) ? (
+                  {col_configs_with_defaults[col_key].formatter ? (
+                    _.isString(col_configs_with_defaults[col_key].formatter) ? (
                       <Format
-                        type={
-                          col_configs_with_defaults[
-                            visible_ordered_col_keys[columnIndex]
-                          ].formatter
-                        }
-                        content={
-                          sorted_filtered_data[rowIndex][
-                            visible_ordered_col_keys[columnIndex]
-                          ]
-                        }
+                        type={col_configs_with_defaults[col_key].formatter}
+                        content={sorted_filtered_data[rowIndex][col_key]}
                       />
                     ) : (
-                      col_configs_with_defaults[
-                        visible_ordered_col_keys[columnIndex]
-                      ].formatter(
-                        sorted_filtered_data[rowIndex][
-                          visible_ordered_col_keys[columnIndex]
-                        ]
+                      col_configs_with_defaults[col_key].formatter(
+                        sorted_filtered_data[rowIndex][col_key]
                       )
                     )
                   ) : (
-                    sorted_filtered_data[rowIndex][
-                      visible_ordered_col_keys[columnIndex]
-                    ]
+                    sorted_filtered_data[rowIndex][col_key]
                   )}
                 </div>
               );
@@ -606,7 +595,7 @@ export class DisplayTable extends React.Component {
             <MultiGrid
               width={width}
               height={500}
-              rowCount={_.size(sorted_filtered_data) + 2} //add 2 for header title and header controls
+              rowCount={_.size(sorted_filtered_data) + 2 + is_total_exist} //add 2 for header title and header controls
               rowHeight={this.cell_measurer_cache.rowHeight}
               cellRenderer={cell_render}
               columnWidth={
