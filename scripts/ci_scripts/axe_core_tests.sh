@@ -4,6 +4,8 @@ set -e
 #PATH="$HOME/.npm/bin:$PATH"
 #PATH="./node_modules/.bin:$PATH"
 
+npm cache clean -f
+
 npm install @axe-core/cli -g --unsafe-perm=true --allow-root
 
 echo -n "Finished installing @axe-core/cli"
