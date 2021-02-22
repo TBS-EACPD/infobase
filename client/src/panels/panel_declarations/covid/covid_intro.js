@@ -52,7 +52,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
     } else {
       const { measure_counts, org_counts } = covid_summary;
 
-      const orgs_with_spending = _.first(org_counts)?.with_spending;
+      const orgs_with_authorities = _.first(org_counts)?.with_authorities;
       const measures_with_authorities = _.first(measure_counts)
         ?.with_authorities;
 
@@ -61,7 +61,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
           k="covid_intro_dynamic_text"
           args={{
             ...panel_args,
-            orgs_with_spending,
+            orgs_with_authorities,
             measures_with_authorities,
           }}
           className="medium-panel-text"
