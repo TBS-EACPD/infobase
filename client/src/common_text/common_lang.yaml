@@ -404,8 +404,13 @@ the_NCR_full:
   en: the National Capital Region (NCR)
   fr: la région de la capitale nationale (RCN)
 a11y_table_title_default:
-  en: The following table provides additional detail
+  en: The following table provides additional details
   fr: La table qui suit fournit des données additionelles
+a11y_table_title_default_multigrid:
+  transform: [handlebars]
+  en: The following table provides additional details, {{row}} rows, {{col}} columns
+  fr: La table qui suit fournit des données additionelles, {{row}} lignes, {{col}} colonnes
+
 pie_filtered_groups_note:
   transform: [handlebars]
   en: |

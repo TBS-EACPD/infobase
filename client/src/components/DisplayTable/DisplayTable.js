@@ -590,32 +590,65 @@ export class DisplayTable extends React.Component {
             </tbody>
           )}
         </table> */}
-        <AutoSizer disableHeight>
-          {({ width }) => (
-            <MultiGrid
-              width={width}
-              height={500}
-              rowCount={_.size(sorted_filtered_data) + 2 + is_total_exist} //add 2 for header title and header controls
-              rowHeight={this.cell_measurer_cache.rowHeight}
-              cellRenderer={cell_render}
-              columnWidth={
-                _.size(visible_ordered_col_keys) <= 5
-                  ? (1 / _.size(visible_ordered_col_keys)) * width
-                  : 150
-              }
-              columnCount={_.size(visible_ordered_col_keys)}
-              fixedRowCount={2}
+        {/* react-virtualized table begins here */}
+        <div>
+          <caption className="sr-only">
+            <div>
+              {!_.isEmpty(table_name) ? (
+                table_name
+              ) : (
+                <TM
+                  k="a11y_table_title_default_multigrid"
+                  args={{
+                    row: _.size(sorted_filtered_data),
+                    col: _.size(visible_ordered_col_keys),
+                  }}
+                />
+              )}
+            </div>
+          </caption>
+          <div style={{ padding: "8px" }}>
+            {util_components_with_defaults && (
+              <div className={"display-table-container__utils"}>
+                <button
+                  tabIndex={0}
+                  className={"skip-to-data"}
+                  onClick={() => this.refs.first_data.focus()}
+                >
+                  {text_maker("skip_to_data")}
+                </button>
+                {_.map(util_components_with_defaults)}
+              </div>
+            )}
+          </div>
+          <AutoSizer disableHeight>
+            {({ width }) => (
+              <MultiGrid
+                width={width}
+                height={500}
+                rowCount={_.size(sorted_filtered_data) + 2 + is_total_exist} //add 2 for header title and header controls
+                rowHeight={this.cell_measurer_cache.rowHeight}
+                cellRenderer={cell_render}
+                columnWidth={
+                  _.size(visible_ordered_col_keys) <= 5
+                    ? (1 / _.size(visible_ordered_col_keys)) * width
+                    : 150
+                }
+                columnCount={_.size(visible_ordered_col_keys)}
+                fixedRowCount={2}
+                role="none"
+                containerRole="none"
+              />
+            )}
+          </AutoSizer>
+          {sorted_filtered_data.length === 0 && (
+            <TM
+              k="no_data"
+              el="div"
+              style={{ width: "100%", textAlign: "center" }}
             />
           )}
-        </AutoSizer>
-
-        {sorted_filtered_data.length === 0 && (
-          <TM
-            k="no_data"
-            el="div"
-            style={{ width: "100%", textAlign: "center" }}
-          />
-        )}
+        </div>
       </div>
     );
   }
