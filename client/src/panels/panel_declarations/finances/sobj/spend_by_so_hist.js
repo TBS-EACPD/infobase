@@ -126,7 +126,7 @@ class SobjLine extends React.Component {
           },
         ],
         raw_data: [max_y],
-        enableDots: false,
+        enablePoints: false,
         lineWidth: 0,
         isInteractive: false,
       };
@@ -141,7 +141,7 @@ class SobjLine extends React.Component {
           left: 70,
         },
         graph_height: "500px",
-        colorBy: (d) => colors(d.id),
+        colors: (d) => colors(d.id),
         custom_table: get_custom_table(data, active_sobjs),
         ...empty_data_nivo_props,
       };

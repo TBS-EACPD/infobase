@@ -1,8 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import { primaryColor, textColor } from "src/core/color_defs.js";
-
+import {
+  primaryColor,
+  textColor,
+  backgroundColor,
+} from "src/core/color_defs.js";
 
 import {
   formats,
@@ -96,9 +99,12 @@ export const declare_employee_totals_panel = () =>
                 colors={primaryColor}
                 is_money={false}
                 yScale={{ toggle: true }}
-                tooltip={(slice) => (
+                sliceTooltip={({ slice }) => (
                   <div
                     style={{
+                      padding: "5px",
+                      borderRadius: "10px",
+                      backgroundColor: backgroundColor,
                       color: textColor,
                     }}
                   >
@@ -106,19 +112,19 @@ export const declare_employee_totals_panel = () =>
                       style={{ width: "100%", borderCollapse: "collapse" }}
                     >
                       <tbody>
-                        {slice.data.map((tooltip_item) => (
-                          <tr key={tooltip_item.serie.id}>
+                        {slice.points.map((tooltip_item) => (
+                          <tr key={tooltip_item.serieId}>
                             <td className="nivo-tooltip__icon">
                               <div
                                 style={{
                                   height: "12px",
                                   width: "12px",
-                                  backgroundColor: tooltip_item.serie.color,
+                                  backgroundColor: tooltip_item.serieColor,
                                 }}
                               />
                             </td>
                             <td className="nivo-tooltip__label">
-                              {tooltip_item.serie.id}
+                              {tooltip_item.serieId}
                             </td>
                             <td className="nivo-tooltip__label">
                               {tooltip_item.data.x}
