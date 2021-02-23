@@ -21,7 +21,7 @@
     "@nivo/circle-packing": "^0.52.1",
     "@nivo/core": "^0.67.0",
     "@nivo/line": "^0.67.0",
-    "@nivo/pie": "^0.52.1",
+    "@nivo/pie": "^0.59.0",
     "@nivo/stream": "^0.52.1",
     "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
