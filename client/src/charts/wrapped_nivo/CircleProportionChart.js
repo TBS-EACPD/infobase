@@ -189,7 +189,7 @@ export class CircleProportionChart extends React.Component {
             root={graph_data}
             identity="name"
             value="value"
-            colorBy={(d) => color_scale(d.name)}
+            colors={(d) => color_scale(d.name)}
             borderColor="inherit:darker(1.6)"
             borderWidth={0}
             enableLabel={false}
