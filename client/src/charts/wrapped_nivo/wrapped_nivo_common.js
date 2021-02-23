@@ -68,7 +68,15 @@ const TooltipFactory = ({
   TooltipContentComponent,
   LegendIconComponent = DefaultLegendIcon,
 }) => (
-  <div className={tooltip_container_class} style={{ color: textColor }}>
+  <div
+    className={tooltip_container_class}
+    style={{
+      padding: "5px",
+      backgroundColor: backgroundColor,
+      color: textColor,
+      borderRadius: "10px",
+    }}
+  >
     <table className="nivo-tooltip">
       <tbody>
         {tooltip_items.map((tooltip_item) => (
