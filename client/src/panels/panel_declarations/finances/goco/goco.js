@@ -196,7 +196,7 @@ class Goco extends React.Component {
 
         const value = is_spending ? d.data.actual_spending : d.data.actual_ftes;
 
-        return get_formatter(is_spending)(value);
+        return get_formatter(is_spending)(value || 0);
       };
 
       const nivo_default_props = {
@@ -207,7 +207,7 @@ class Goco extends React.Component {
         enableGridX: false,
         enableGridY: false,
         label: (d) => format_value(d),
-        label_format: (d) => <tspan y={-3}>{d}</tspan>,
+        label_format: (d) => <tspan y={-10}>{d}</tspan>,
         tooltip: (slice) => (
           <div style={{ color: textColor }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -237,7 +237,7 @@ class Goco extends React.Component {
           </div>
         ),
         padding: 0.1,
-        colorBy: (d) => colors(d.id),
+        colors: (d) => colors(d.id),
         keys: series_labels,
         groupMode: "grouped",
         width: 200,
@@ -402,7 +402,7 @@ class Goco extends React.Component {
                 renderTick: (tick) => {
                   return (
                     <g
-                      key={tick.key}
+                      key={tick.tickIndex}
                       transform={`translate(${tick.x},${tick.y + 16})`}
                     >
                       <a
@@ -414,7 +414,7 @@ class Goco extends React.Component {
                           textAnchor="middle"
                           dominantBaseline="middle"
                           style={{
-                            ...tick.theme.axis.ticks.text,
+                            fontSize: "12px",
                           }}
                         >
                           <TspanLineWrapper text={tick.value} width={20} />
@@ -463,14 +463,14 @@ class Goco extends React.Component {
                   renderTick: (tick) => {
                     return (
                       <g
-                        key={tick.key}
+                        key={tick.tickIndex}
                         transform={`translate(${tick.x},${tick.y + 16})`}
                       >
                         <text
                           textAnchor="middle"
                           dominantBaseline="middle"
                           style={{
-                            ...tick.theme.axis.ticks.text,
+                            fontSize: "12px",
                           }}
                         >
                           <TspanLineWrapper text={tick.value} width={15} />

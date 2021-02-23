@@ -17,7 +17,7 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
-    "@nivo/bar": "^0.52.1",
+    "@nivo/bar": "^0.67.0",
     "@nivo/circle-packing": "^0.67.0",
     "@nivo/core": "^0.67.0",
     "@nivo/line": "^0.67.0",
@@ -147,9 +147,7 @@
     "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false --concurrency 8",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
-    "serve": "http-server",
-    "postinstall": "npx patch-package",
-    "postci": "npx patch-package"
+    "serve": "http-server"
   },
   "authors": [
     "Alex Cousineau-Leduc",
