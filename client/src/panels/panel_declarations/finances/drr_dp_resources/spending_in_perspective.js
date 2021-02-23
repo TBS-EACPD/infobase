@@ -47,8 +47,6 @@ class SpendInTagPerspective extends React.Component {
       active_tag_index
     ];
 
-    const color_scale = infobase_colors();
-
     const data = [
       {
         id: subject.name,
@@ -103,10 +101,7 @@ class SpendInTagPerspective extends React.Component {
               />
             </div>
           )}
-          <WrappedNivoPie
-            data={data}
-            colorBy={(obj) => color_scale(obj.label)}
-          />
+          <WrappedNivoPie data={data} />
         </div>
       </div>
     );
