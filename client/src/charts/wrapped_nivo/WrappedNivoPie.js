@@ -52,7 +52,6 @@ export class WrappedNivoPie extends React.Component {
         id: label,
       }))
       .value();
-    console.log(legend_items);
 
     const data_with_absolute_values = _.map(data, (data) => ({
       ...data,
@@ -115,10 +114,10 @@ export class WrappedNivoPie extends React.Component {
               margin,
             }}
             colors={color_func}
-            tooltip={(data) => {
+            tooltip={({ datum }) => {
               const data_with_original_values = {
-                ...data,
-                value: data.original_value,
+                ...datum,
+                value: datum.data.original_value,
               };
 
               if (include_percent) {
@@ -137,7 +136,7 @@ export class WrappedNivoPie extends React.Component {
             innerRadius={0.5}
             animate={false}
             borderWidth={0}
-            enableSlicesLabels={false}
+            enableSliceLabels={false}
             enableRadialLabels={false}
           />
         </div>
