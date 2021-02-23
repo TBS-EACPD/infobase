@@ -143,7 +143,7 @@ class PlannedProgramResources extends React.Component {
               data={data_by_year}
               keys={Object.keys(graph_data)}
               indexBy="year"
-              colorBy={(d) => colors(d.id)}
+              colors={(d) => colors(d.id)}
               is_money={!is_fte}
             />
           </div>

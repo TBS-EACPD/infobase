@@ -63,11 +63,9 @@ function render({ calculations, footnotes, sources }) {
             enableLabel={true}
             isInteractive={false}
             label_format={(d) => (
-              <tspan y={-4}>{formats.compact1(d, { raw: true })}</tspan>
+              <tspan y={-10}>{formats.compact1(d, { raw: true })}</tspan>
             )}
-            colorBy={(d) =>
-              d.data[d.id] < 0 ? highlightColor : secondaryColor
-            }
+            colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
             enableGridX={false}
           />
         </div>
