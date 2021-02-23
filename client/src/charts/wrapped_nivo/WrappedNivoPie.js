@@ -25,7 +25,6 @@ export class WrappedNivoPie extends React.Component {
       data,
       graph_height,
       colors,
-      colorBy,
       include_percent,
       tooltip,
       percent_value_tooltip,
@@ -41,7 +40,7 @@ export class WrappedNivoPie extends React.Component {
     const color_scale = infobase_colors_smart(
       scaleOrdinal().range(colors || newIBCategoryColors)
     );
-    const color_func = colorBy || ((d) => color_scale(d.label));
+    const color_func = colors || ((d) => color_scale(d.label));
 
     const legend_items = _.chain(data)
       .sortBy("value")
@@ -53,6 +52,7 @@ export class WrappedNivoPie extends React.Component {
         id: label,
       }))
       .value();
+    console.log(legend_items);
 
     const data_with_absolute_values = _.map(data, (data) => ({
       ...data,
@@ -113,9 +113,8 @@ export class WrappedNivoPie extends React.Component {
             {...{
               data: data_with_absolute_values,
               margin,
-              colors,
             }}
-            colorBy={color_func}
+            colors={color_func}
             tooltip={(data) => {
               const data_with_original_values = {
                 ...data,
