@@ -70,11 +70,11 @@ const estimates_split_render_w_text_key = (text_key) => ({
     <WrappedNivoBar
       data={estimate_data}
       keys={_.map(estimate_data, "label")}
-      label_format={(d) => <tspan y={-4}>{formats.compact2_raw(d)}</tspan>}
+      label_format={(d) => <tspan y={-10}>{formats.compact2_raw(d)}</tspan>}
       isInteractive={false}
       enableLabel={true}
       indexBy="label"
-      colorBy={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
+      colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
       margin={{
         top: 50,
         right: 40,
