@@ -1,4 +1,12 @@
+@import "../../../../common_css/common-variables";
+
 .auth-exp-planned-spend-tooltip {
+  padding: 5px;
+  border-radius: $standardBorderRadius;
+  background-color: $backgroundColor;
+}
+
+.auth-exp-planned-spend-tooltip__table {
   width: 100%;
   border-collapse: collapse;
 

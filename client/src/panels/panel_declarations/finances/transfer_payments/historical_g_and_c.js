@@ -105,7 +105,7 @@ class HistTPTypes extends React.Component {
               enableArea={true}
               disable_y_axis_zoom={true}
               data={expenditure_data}
-              colorBy={(d) => colors(d.id)}
+              colors={(d) => colors(d.id)}
               stacked={true}
             />
           </GraphOverlay>
@@ -252,7 +252,7 @@ class DetailedHistTPItems extends React.Component {
           },
         ],
         raw_data: [max_value],
-        enableDots: false,
+        enablePoints: false,
         lineWidth: 0,
         isInteractive: false,
       };
@@ -266,7 +266,7 @@ class DetailedHistTPItems extends React.Component {
           bottom: 50,
           left: 70,
         },
-        colorBy: (d) => color_scale(d.id),
+        colors: (d) => color_scale(d.id),
         custom_table: (
           <SmartDisplayTable
             data={custom_table_data}

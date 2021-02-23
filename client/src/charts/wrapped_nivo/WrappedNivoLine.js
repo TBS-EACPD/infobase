@@ -62,13 +62,11 @@ export class WrappedNivoLine extends React.Component {
       remove_left_axis,
       disable_y_axis_zoom,
       yScale,
-      enableDotLabel,
       is_money,
       text_formatter,
       theme,
       colors,
-      colorBy,
-      tooltip,
+      sliceTooltip,
       y_scale_max,
       y_scale_min,
       enableArea,
@@ -85,7 +83,7 @@ export class WrappedNivoLine extends React.Component {
       motionDamping,
       motionStiffness,
       custom_table,
-      enableDots,
+      enablePoints,
       lineWidth,
     } = this.props;
 
@@ -176,21 +174,20 @@ export class WrappedNivoLine extends React.Component {
             enableGridX,
             enableGridY,
             enableArea,
-            colorBy,
             colors,
             theme,
-            enableDotLabel,
             markers,
             layers,
             isInteractive,
             motionDamping,
             motionStiffness,
-            enableDots,
+            enablePoints,
             lineWidth,
           }}
           legends={fix_legend_symbols(legends)}
-          tooltip={(d) =>
-            tooltip(d, get_formatter(is_money, text_formatter, false))
+          enableSlices={"x"}
+          sliceTooltip={(d) =>
+            sliceTooltip(d, get_formatter(is_money, text_formatter, false))
           }
           yScale={{
             stacked: !!stacked,
@@ -220,7 +217,8 @@ export class WrappedNivoLine extends React.Component {
           axisRight={null}
           xScale={{ type: "point" }}
           animate={true}
-          dotSize={stacked ? 0 : 10}
+          pointSize={stacked ? 0 : 10}
+          pointColor={colors}
           areaOpacity={stacked ? 1 : 0}
         />
       </div>
@@ -238,10 +236,10 @@ export class WrappedNivoLine extends React.Component {
 }
 WrappedNivoLine.defaultProps = {
   ...general_default_props,
-  tooltip: (slice, formatter) => {
-    const tooltip_items = slice.data.map((d) => ({
-      id: d.serie.id,
-      color: d.serie.color,
+  sliceTooltip: ({ slice }, formatter) => {
+    const tooltip_items = slice.points.map((d) => ({
+      id: d.serieId,
+      color: d.serieColor,
       value: d.data.y,
     }));
 
@@ -254,7 +252,6 @@ WrappedNivoLine.defaultProps = {
     tickSize: 7,
     tickPadding: 12,
   },
-  enableDotLabel: false,
   enableArea: false,
   stacked: false,
   disable_y_axis_zoom: false,
