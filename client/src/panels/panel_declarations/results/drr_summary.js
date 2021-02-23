@@ -234,7 +234,7 @@ class PercentageViz extends React.Component {
     const graph_data = _.filter(all_data, ({ id }) => _.includes(selected, id));
 
     const graph_total = _.sumBy(graph_data, "value");
-    const colorBy = ({ id }) => result_color_scale(id);
+    const colors = ({ id }) => result_color_scale(id);
 
     const new_summary_text_args = {
       year: current_drr_year,
@@ -290,7 +290,7 @@ class PercentageViz extends React.Component {
               data={graph_data}
               graph_height="300px"
               is_money={false}
-              colorBy={colorBy}
+              colors={colors}
               margin={{
                 top: 30,
                 right: 30,
