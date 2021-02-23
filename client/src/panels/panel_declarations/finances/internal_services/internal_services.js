@@ -162,7 +162,7 @@ export const declare_internal_services_panel = () =>
                   <WrappedNivoBar
                     data={bar_data}
                     indexBy="date"
-                    colorBy={(d) => colors(d.id)}
+                    colors={(d) => colors(d.id)}
                     keys={label_keys}
                     is_money={false}
                     margin={{
