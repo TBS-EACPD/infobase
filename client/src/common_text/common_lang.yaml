@@ -982,9 +982,10 @@ commitments:
   en: Commitments
   fr: Engagements
 
-some_things_to_keep_in_mind:
-  en: Some things to keep in mind as you explore the data...
-  fr: Certaines choses à garder l'esprit lorsque vous explorez les données
+infographic_faq:
+  transform: [handlebars]
+  en: FAQ for this data
+  fr: FAQ pour ces données
 
 
 all_orgs:

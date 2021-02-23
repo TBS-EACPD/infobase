@@ -171,7 +171,7 @@ const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
         <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
           <ButtonToolbar style={{ margin: 0 }}>
             <AutoAccordion
-              title={trivial_text_maker("some_things_to_keep_in_mind")}
+              title={trivial_text_maker("infographic_faq")}
               isInitiallyExpanded={is_initially_expanded}
             >
               <div
