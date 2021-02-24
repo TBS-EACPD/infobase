@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import DOMPurify from "dompurify";
+import PropTypes from "prop-types";
 import React from "react";
 import { Modal } from "react-bootstrap";
 import FocusLock from "react-focus-lock";
@@ -9,10 +10,6 @@ import "./bootstrap_modal_exstension.scss";
 export class FocusLockedModal extends React.Component {
   constructor(props) {
     super(props);
-
-    if (!props.ariaLabel) {
-      throw new Error("Must have a prop ariaLabel");
-    }
   }
 
   render() {
@@ -20,19 +17,21 @@ export class FocusLockedModal extends React.Component {
       mounted,
       children,
       additional_dialog_class,
-      onExit,
-      ariaLabel,
+      on_exit,
+      aria_label,
     } = this.props;
 
-    const aria_label = DOMPurify.sanitize(ariaLabel, { ALLOWED_TAGS: [] });
+    const cleaned_aria_label = DOMPurify.sanitize(aria_label, {
+      ALLOWED_TAGS: [],
+    });
 
     return (
       <Modal
         show={mounted}
         size="xl"
-        onHide={onExit}
+        onHide={on_exit}
         dialogClassName={classNames(`modal-dialog`, additional_dialog_class)}
-        aria-label={aria_label}
+        aria-label={cleaned_aria_label}
         centered
       >
         <Modal.Body style={{ padding: 0 }}>
@@ -42,3 +41,7 @@ export class FocusLockedModal extends React.Component {
     );
   }
 }
+
+FocusLockedModal.propTypes = {
+  aria_label: PropTypes.string.isRequired,
+};

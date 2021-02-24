@@ -138,7 +138,7 @@ class TablePicker extends React.Component {
 
     return (
       <div ref="main" id="tbp-main">
-        <h1 id="tbp-title">
+        <h1>
           <TextMaker text_key="table_picker_title" />
         </h1>
         {broken_url && <BrokenLinkBanner />}
@@ -309,9 +309,9 @@ class TaggedItemCloud extends React.Component {
           </div>
         ) : (
           <div>
-            <div className="row item-cloud-row">
+            <div className="frow item-cloud-row">
               {_.map(items_split, (item_group, group_index) => (
-                <div key={group_index} className="col-lg-4 item-cloud-col">
+                <div key={group_index} className="fcol-md-4 item-cloud-col">
                   <TransitionGroup>
                     {_.map(item_group, (item, item_index) => (
                       <CSSTransition
