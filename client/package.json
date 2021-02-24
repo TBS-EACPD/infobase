@@ -51,7 +51,7 @@
     "d3-transition": "^1.2.0",
     "diff": "^4.0.1",
     "dom4": "^2.1.4",
-    "dompurify": "^2.0.7",
+    "dompurify": "^2.2.6",
     "eslint": "^7.12.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.5",

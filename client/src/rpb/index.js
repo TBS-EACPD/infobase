@@ -345,7 +345,8 @@ class RPB extends React.Component {
                     }, 200);
                   }
                 }}
-                ariaLabel={text_maker("table_picker_title")}
+                ariaLabel={`${text_maker("table_picker_title")}. 
+                  ${text_maker("table_picker_top_instructions")}`}
                 getApplicationNode={() => document.getElementById("app")}
                 underlayStyle={{
                   paddingTop: "50px",
