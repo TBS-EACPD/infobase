@@ -24,6 +24,18 @@ covid_questions_financial_a:
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19
   fr: TODO
 
+covid_questions_additional_estimates_measures_q:
+  en: Why are there some measures presented on the GC InfoBase which aren't listed in the Government's COVID-19 Economic Response Plan?
+  fr: TODO
+covid_questions_additional_estimates_measures_a:
+  transform: [handlebars,markdown]
+  en: |
+    The Government's COVID-19 Economic Response Plan was last presented in chapter 1 & 2 of the Fall Economic Statement (FES) 2020. All measures found in the FES 
+    that were also presented in the Estimates have been included in the GC InfoBase. In addition, a small number of other items included in the Estimates, but not 
+    found in the FES, have been identified as COVID-19 measures. This has been done to highlight all cases where authorities and expenditures are, at least in part,
+    driven by COVID-19, even if the initiative itself is not part of the COVID-19 Economic Response Plan. 
+  fr: TODO
+
 covid_questions_funding_value_q:
   en: What are "funding" amounts? Where do they come from?
   fr: TODO
