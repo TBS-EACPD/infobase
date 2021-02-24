@@ -329,7 +329,7 @@ class RPB extends React.Component {
             {!is_a11y_mode && (
               <FocusLockedModal
                 mounted={this.state.table_picking}
-                onExit={() => {
+                on_exit={() => {
                   if (this.state.table_picking) {
                     this.setState({
                       table_picking: false,
@@ -345,7 +345,7 @@ class RPB extends React.Component {
                     }, 200);
                   }
                 }}
-                ariaLabel={`${text_maker("table_picker_title")}. 
+                aria_label={`${text_maker("table_picker_title")}. 
                   ${text_maker("table_picker_top_instructions")}`}
                 getApplicationNode={() => document.getElementById("app")}
                 underlayStyle={{
