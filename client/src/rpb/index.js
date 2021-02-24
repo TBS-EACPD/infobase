@@ -9,7 +9,7 @@ import { withRouter } from "react-router";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { SpinnerWrapper, LabeledBox } from "../components/index.js";
-import { AriaModal } from "../components/modals_and_popovers/AriaModal.js";
+import { FocusLockedModal } from "../components/modals_and_popovers/FocusLockedModal.js";
 import { log_standard_event } from "../core/analytics.js";
 import { ensure_loaded } from "../core/lazy_loader.js";
 import {
@@ -327,7 +327,7 @@ class RPB extends React.Component {
               )}
             </div>
             {!is_a11y_mode && (
-              <AriaModal
+              <FocusLockedModal
                 mounted={this.state.table_picking}
                 onExit={() => {
                   if (this.state.table_picking) {
@@ -345,7 +345,7 @@ class RPB extends React.Component {
                     }, 200);
                   }
                 }}
-                titleId="tbp-title"
+                ariaLabel={text_maker("table_picker_title")}
                 getApplicationNode={() => document.getElementById("app")}
                 underlayStyle={{
                   paddingTop: "50px",
@@ -363,7 +363,7 @@ class RPB extends React.Component {
                     broken_url={broken_url}
                   />
                 </div>
-              </AriaModal>
+              </FocusLockedModal>
             )}
           </div>
         </LabeledBox>

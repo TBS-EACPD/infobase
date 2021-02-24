@@ -213,8 +213,8 @@ class TaggedItemCloud extends React.Component {
           <div className="item-title centerer">{display}</div>
           <div className="item-card-mat">
             <div>
-              <div className="item-card-footer row">
-                <div className="item-tag-container col-xl-7">
+              <div className="item-card-footer frow">
+                <div className="item-tag-container fcol-xl-7">
                   <span className="sr-only">
                     <u>
                       <TextMaker text_key="covered_concepts" />
@@ -240,7 +240,7 @@ class TaggedItemCloud extends React.Component {
                       .value()}
                   </div>
                 </div>
-                <div className="item-select col-xl-5 text-right">
+                <div className="item-select fcol-xl-5 text-right w-100">
                   <button
                     onClick={() => onSelectItem(id)}
                     className="btn btn-ib-primary btn-xs"
