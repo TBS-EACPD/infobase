@@ -1,9 +1,8 @@
 import classNames from "classnames";
+import DOMPurify from "dompurify";
 import React from "react";
 import { Modal } from "react-bootstrap";
 import FocusLock from "react-focus-lock";
-import DOMPurify from "dompurify";
-import marked from "marked";
 
 import "./bootstrap_modal_exstension.scss";
 
