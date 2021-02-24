@@ -24,6 +24,24 @@ covid_questions_financial_a:
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19
   fr: TODO
 
+covid_questions_benefits_q:
+  en: I am looking for information on a particular COVID-19 benefit offered by the Government of Canada, can I find that on GC InfoBase?
+  fr: TODO
+covid_questions_benefits_a:
+  transform: [handlebars,markdown]
+  en: |
+    GC InfoBase currently only reports on COVID-19 measures which have been presented in the Estimates. While this includes some benefits such as the
+    Canada Emergency Response Benefit (CERB), there are certain benefits which are not included at this time.
+
+    Notable COVID-19 related benefits not reported here include:
+      - Employment Insurance (EI)
+      - Canada Emergency Wage Subsidy (CEWS)
+      - Canada Emergency Rent Subsidy (CERS)
+
+    Information related to all benefits and services provided to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak
+    can be found on the {{ext_link "COVID-19 benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} portal. 
+  fr: TODO
+
 covid_questions_additional_estimates_measures_q:
   en: Why are there some measures presented on the GC InfoBase which aren't listed in the Government's COVID-19 Economic Response Plan?
   fr: TODO
@@ -43,7 +61,7 @@ covid_questions_funding_value_a:
   transform: [markdown]
   en: |
     Funding refers to the cash value of a COVID-19 measure in the identified fiscal year, as determined by the Department of Finance and the Treasury Board Secretariat.
-    These cash values are based in the [Fall Economic Statement 2020 (FES)](https://www.budget.gc.ca/fes-eea/2020/home-accueil-en.html), which includes the annual accrual
+    These cash values are based in the {{ext_link "Fall Economic Statement 2020 (FES)" "https://www.budget.gc.ca/fes-eea/2020/home-accueil-en.html"}}, which includes the annual accrual
     value of each measure. GC InfoBase presents these values on a cash basis rather than an accrual basis to align with cash-based expenditure values and the cash-based spending
     authorities presented in the Estimates.  
 
