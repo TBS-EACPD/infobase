@@ -6,7 +6,8 @@ import {
   AutoSizer,
   CellMeasurerCache,
   CellMeasurer,
-  MultiGrid,
+  Grid,
+  ArrowKeyStepper,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
 
@@ -428,7 +429,6 @@ export class DisplayTable extends React.Component {
                       col_key
                     ),
                   }}
-                  tabIndex={-1}
                   ref={
                     columnIndex === 0 && rowIndex === 0 ? "first_data" : null
                   }
@@ -592,13 +592,13 @@ export class DisplayTable extends React.Component {
         </table> */}
         {/* react-virtualized table begins here */}
         <div>
-          <caption className="sr-only">
+          <div className="sr-only">
             <div>
               {!_.isEmpty(table_name) ? (
                 table_name
               ) : (
                 <TM
-                  k="a11y_table_title_default_multigrid"
+                  k="a11y_table_title_default"
                   args={{
                     row: _.size(sorted_filtered_data),
                     col: _.size(visible_ordered_col_keys),
@@ -606,7 +606,7 @@ export class DisplayTable extends React.Component {
                 />
               )}
             </div>
-          </caption>
+          </div>
           <div style={{ padding: "8px" }}>
             {util_components_with_defaults && (
               <div className={"display-table-container__utils"}>
@@ -623,22 +623,33 @@ export class DisplayTable extends React.Component {
           </div>
           <AutoSizer disableHeight>
             {({ width }) => (
-              <MultiGrid
-                width={width}
-                height={500}
-                rowCount={_.size(sorted_filtered_data) + 2 + is_total_exist} //add 2 for header title and header controls
-                rowHeight={this.cell_measurer_cache.rowHeight}
-                cellRenderer={cell_render}
-                columnWidth={
-                  _.size(visible_ordered_col_keys) <= 5
-                    ? (1 / _.size(visible_ordered_col_keys)) * width
-                    : 150
-                }
+              <ArrowKeyStepper
                 columnCount={_.size(visible_ordered_col_keys)}
-                fixedRowCount={2}
-                role="none"
-                containerRole="none"
-              />
+                rowCount={_.size(sorted_filtered_data) + 2 + is_total_exist}
+                mode="cells"
+              >
+                {({ onSectionRendered, scrollToColumn, scrollToRow }) => (
+                  <Grid
+                    width={width}
+                    height={500}
+                    rowCount={_.size(sorted_filtered_data) + 2 + is_total_exist} //add 2 for header title and header controls
+                    rowHeight={this.cell_measurer_cache.rowHeight}
+                    cellRenderer={cell_render}
+                    columnWidth={
+                      _.size(visible_ordered_col_keys) <= 5
+                        ? (1 / _.size(visible_ordered_col_keys)) * width
+                        : 150
+                    }
+                    columnCount={_.size(visible_ordered_col_keys)}
+                    fixedRowCount={2}
+                    role="none"
+                    containerRole="none"
+                    onSectionRendered={onSectionRendered}
+                    scrollToColumn={scrollToColumn}
+                    scrollToRow={scrollToRow}
+                  />
+                )}
+              </ArrowKeyStepper>
             )}
           </AutoSizer>
           {sorted_filtered_data.length === 0 && (
