@@ -278,15 +278,16 @@ class Goco extends React.Component {
         targetElement.style.cursor = "pointer";
         const allGroupedElements = targetElement.parentNode.parentNode;
         const childrenGroupedElements = _.map(
-          _.drop(allGroupedElements.childNodes, 2),
+          _.drop(allGroupedElements.childNodes),
           _.identity
         );
+
         const hover_index_map = generate_index_map(data);
+
         const target_spending =
           childrenGroupedElements[hover_index_map[node.indexValue][0]];
         const target_fte =
           childrenGroupedElements[hover_index_map[node.indexValue][1]];
-
         if (
           !_.isEqual(target_spending, clicked_spending) &&
           !_.isEqual(target_fte, clicked_fte)
@@ -340,7 +341,7 @@ class Goco extends React.Component {
       const handleClick = (node, targetElement, data) => {
         const allGroupedElements = targetElement.parentNode.parentNode;
         const childrenGroupedElements = _.map(
-          _.drop(allGroupedElements.childNodes, 2),
+          _.drop(allGroupedElements.childNodes),
           _.identity
         );
 
@@ -358,6 +359,7 @@ class Goco extends React.Component {
           (textElement) => {
             const currentText = textElement.textContent.replace(/\s+/g, "");
             const target_text = node.indexValue.replace(/\s+/g, "");
+
             const spending_text =
               target_spending &&
               target_spending
