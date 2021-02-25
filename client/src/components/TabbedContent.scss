@@ -31,9 +31,6 @@ li.tabbed-controls__label {
   background-color: $primaryColor;
   transition: background-color 125ms ease, border-radius 250ms ease;
   color: $backgroundColor;
-  height: 28px;
-  padding-bottom: 200%;
-  margin-bottom: -200%;
   cursor: pointer;
 
   & > .tabbed-controls__label-text {
