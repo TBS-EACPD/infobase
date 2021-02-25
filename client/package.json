@@ -96,7 +96,7 @@
     "react-flip-move": "^3.0.4",
     "react-intersection-observer": "^8.30.1",
     "react-redux": "^6",
-    "react-resize-detector": "^5.2.0",
+    "react-resize-detector": "^6.6.0",
     "react-responsive": "^6.1.2",
     "react-router": "^5",
     "react-router-dom": "^5",
