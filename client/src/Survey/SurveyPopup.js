@@ -18,7 +18,7 @@ import text from "./SurveyPopup.yaml";
 const { TM, text_maker } = create_text_maker_component(text);
 
 const page_visit_increment = 1;
-const survey_campaign_end_date = new Date(2021, 0, 1).getTime(); // Reminder: months are 0-indexed, years and days aren't
+const survey_campaign_end_date = new Date(2021, 2, 26).getTime(); // Reminder: months are 0-indexed, years and days aren't
 
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();

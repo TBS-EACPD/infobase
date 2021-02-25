@@ -33,14 +33,13 @@ let year;
 const get_year = (presentation_scheme) => {
   switch (presentation_scheme) {
     case "est_doc_mains":
-    case "est_doc_sea":
-    case "est_doc_seb":
-    case "est_doc_sec":
     case "est_type":
     case "vs_type":
     case "org_estimates":
       return "{{est_in_year}}";
-    default:
+    case "est_doc_sea":
+    case "est_doc_seb":
+    case "est_doc_sec":
       return "{{est_last_year}}";
   }
 };

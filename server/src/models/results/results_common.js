@@ -1,6 +1,11 @@
 import _ from "lodash";
 
-const current_doc_keys_ordered_by_time_period = ["drr18", "drr19", "dp20"];
+const current_doc_keys_ordered_by_time_period = [
+  "drr18",
+  "drr19",
+  "dp20",
+  "dp21",
+];
 
 const current_drr_docs = _.filter(
   current_doc_keys_ordered_by_time_period,

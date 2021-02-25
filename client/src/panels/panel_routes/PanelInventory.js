@@ -186,7 +186,7 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
   );
 };
 
-export default class panelInventory extends React.Component {
+export default class PanelInventory extends React.Component {
   constructor() {
     super();
     this.state = {

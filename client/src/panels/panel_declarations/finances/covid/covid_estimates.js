@@ -441,7 +441,7 @@ export const declare_covid_estimates_panel = () =>
         const { orgVoteStatEstimates } = this.tables;
         const gov_total_auth_in_year = orgVoteStatEstimates
           .q(Gov)
-          .sum("{{est_in_year}}_estimates");
+          .sum("{{est_last_year}}_estimates");
 
         const gov_covid_estimates_data = CovidEstimates.get_gov_summary();
         const gov_covid_auth_in_year = _.reduce(
@@ -473,13 +473,13 @@ export const declare_covid_estimates_panel = () =>
         if (level_name === "gov") {
           return common;
         } else {
-          const dept_tabled_est_in_year = orgVoteStatEstimates
+          const dept_tabled_est_last_year = orgVoteStatEstimates
             .q(subject)
-            .sum("{{est_in_year}}_estimates");
+            .sum("{{est_last_year}}_estimates");
 
           return {
             ...common,
-            dept_tabled_est_in_year,
+            dept_tabled_est_last_year,
           };
         }
       },

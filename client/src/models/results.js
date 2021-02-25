@@ -387,6 +387,18 @@ const dp_docs = build_doc_info_objects("dp", [
     late_results_orgs: [],
     late_resources_orgs: [],
   },
+  {
+    year_short: "2021",
+    resource_years: [
+      "{{planning_year_1}}",
+      "{{planning_year_2}}",
+      "{{planning_year_3}}",
+    ],
+    doc_url_en: null, //DP_TODO
+    doc_url_fr: null, //DP_TODO
+    late_results_orgs: [], //DP_TODO
+    late_resources_orgs: [], //DP_TODO
+  },
 ]);
 const result_docs = {
   ...drr_docs,

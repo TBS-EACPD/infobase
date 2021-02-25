@@ -2,7 +2,12 @@ import _ from "lodash";
 
 const featured_content_items = _.compact([
   {
-    text_key: "supps_c",
+    text_key: "quick_link_DP_2022",
+    href: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)",
+    is_new: "true",
+  },
+  {
+    text_key: "quick_link_main_estimates",
     href: "#compare_estimates",
     is_new: "true",
   },

@@ -137,10 +137,10 @@ const HomeLayout = (props) => (
               svg={
                 <IconDPs width="100%" color="#FFFFFF" alternate_color={false} />
               }
-              title_key="quick_link_DRR_1920"
-              text_key="drr_home_text"
+              title_key="quick_link_DP_2022"
+              text_key="dp_home_text"
               link_key="check_home_link"
-              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)"
+              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)"
             />
           </div>
           <div className="col-content">
@@ -154,7 +154,7 @@ const HomeLayout = (props) => (
                 />
               }
               title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text_supps"
+              text_key="estimates_comp_home_text"
               link_href="#compare_estimates"
             />
           </div>
@@ -232,7 +232,7 @@ const SubAppLayout = (props) => (
                 />
               }
               title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text_supps"
+              text_key="estimates_comp_home_text"
               link_href="#compare_estimates"
             />
           </div>
