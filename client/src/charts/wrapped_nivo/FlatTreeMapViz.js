@@ -1,9 +1,11 @@
 import { ResponsiveTreeMapHtml } from "@nivo/treemap";
+import _ from "lodash";
 import React from "react";
 
 import "./FlatTreeMap.scss";
 
 import { TreeMapHtmlNode } from "./TreeMapHtmlNode.js";
+import { DefaultTooltip } from "./wrapped_nivo_common";
 
 export class FlatTreeMapViz extends React.Component {
   render() {
@@ -31,7 +33,6 @@ export class FlatTreeMapViz extends React.Component {
           data={nivo_data}
           identity={label_id}
           value={value_string}
-          valueFormat=" >-.1f"
           leavesOnly={true}
           colors={(d) => colorScale(d.data)}
           nodeOpacity={1}
@@ -57,6 +58,11 @@ export class FlatTreeMapViz extends React.Component {
             );
           }}
           labelSkipSize={50}
+          tooltip={({ node }) => (
+            <div style={{ maxWidth: "200px" }}>
+              <DefaultTooltip tooltip_items={[node]} formatter={formatter} />
+            </div>
+          )}
         />
       </div>
     );
