@@ -38,8 +38,8 @@ covid_questions_benefits_a:
       - Canada Emergency Wage Subsidy (CEWS)
       - Canada Emergency Rent Subsidy (CERS)
 
-    More information related to benefits and services provided by the Government of Canada to help Canadians and businesses facing hardship as a result of the global COVID-19
-    outbreak can be found on the {{ext_link "COVID-19 benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} portal. 
+    More information related to the benefits and services provided by the Government of Canada to help Canadians and businesses facing hardship as a result of the global COVID-19
+    outbreak can be found {{ext_link "here" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}. 
   fr: TODO
 
 covid_questions_additional_estimates_measures_q:
