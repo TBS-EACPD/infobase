@@ -31,15 +31,15 @@ covid_questions_benefits_a:
   transform: [handlebars,markdown]
   en: |
     GC InfoBase currently only reports on COVID-19 measures which have been presented in the Estimates. While this includes some benefits such as the
-    Canada Emergency Response Benefit (CERB), there are certain benefits which are not included at this time.
+    Canada Emergency Response Benefit (CERB), not all benefits fall inside the scope of the Estimates.
 
-    Notable COVID-19 related benefits not reported here include:
+    Notable COVID-19 related benefits not reported on here include:
       - Employment Insurance (EI)
       - Canada Emergency Wage Subsidy (CEWS)
       - Canada Emergency Rent Subsidy (CERS)
 
-    Information related to all benefits and services provided to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak
-    can be found on the {{ext_link "COVID-19 benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} portal. 
+    More information related to benefits and services provided by the Government of Canada to help Canadians and businesses facing hardship as a result of the global COVID-19
+    outbreak can be found on the {{ext_link "COVID-19 benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} portal. 
   fr: TODO
 
 covid_questions_additional_estimates_measures_q:
