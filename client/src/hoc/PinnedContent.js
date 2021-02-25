@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 import { InView } from "react-intersection-observer";
 import "intersection-observer";
-import ReactResizeDetector from "react-resize-detector";
+import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 import { withRouter } from "react-router";
 
 import { has_local_storage } from "src/core/feature_detection.js";
