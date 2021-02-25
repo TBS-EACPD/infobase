@@ -7,19 +7,29 @@ import { TreeMapHtmlNode } from "./TreeMapHtmlNode.js";
 
 export class FlatTreeMapViz extends React.Component {
   render() {
-    const { data, colorScale, value_string, formatter } = this.props;
+    const {
+      data,
+      colorScale,
+      value_string,
+      formatter,
+      label_id,
+      text_func,
+    } = this.props;
 
     const nivo_data = {
       name: "root",
       color: "white",
-      children: data.children,
+      children: _.map(data.children, (datum) => ({
+        ...datum,
+        [label_id]: text_func(datum, "-"),
+      })),
     };
 
     return (
       <div style={{ height: 400, width: "100%" }}>
         <ResponsiveTreeMapHtml
           data={nivo_data}
-          identity="desc"
+          identity={label_id}
           value={value_string}
           valueFormat=" >-.1f"
           leavesOnly={true}
