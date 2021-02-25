@@ -67,7 +67,7 @@ export class PartitionDataWrapper {
     );
   }
   process_node_children_for_compression(node) {
-    if (!node.children) {
+    if (!node.children || _.isEmpty(node.children)) {
       return;
     }
     if (!_.isUndefined(_.last(node.children).data.hidden_children)) {

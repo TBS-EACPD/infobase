@@ -36,8 +36,8 @@ partition_home_text:
 
 
 dp_home_text:
-  en: The 2020-21 Departmental Plans were tabled on March 10th, 2020. Explore the data to see upcoming departmental priorities
-  fr: Les rapports sur les plans ministériels de 2020-2021 ont été déposés le 10 mars 2020. Consultez les données pour voir les priorités ministérielles à venir
+  en: The 2021-22 Departmental Plans were tabled on February 26th, 2021. Explore the data to see upcoming departmental priorities
+  fr: Les rapports sur les plans ministériels de 2020-2021 ont été déposés le 25 février 2021. Consultez les données pour voir les priorités ministérielles à venir
 
 drr_home_text:
   en: The 2019-20 Departmental Results Reports were tabled on December 7th, 2020. Explore the data to see how departments performed against their plans
@@ -174,16 +174,16 @@ quick_link_people_2019:
   fr: Effectif et démographie des employés au 31 mars 2019
 
 quick_link_main_estimates:
-  en: 2020-21 Main Estimates
-  fr: Budget principal des dépenses 2020-2021
+  en: 2021-22 Main Estimates
+  fr: Budget principal des dépenses 2021-2022
 
 quick_link_hi_tags:
   en: 2019-20 Horizontal Initiatives
   fr: Initiatives horizontales de 2019-2020
 
-quick_link_DP_2021:
-  en: 2020-21 Departmental Plans
-  fr: Plans Ministériels de 2020-2021
+quick_link_DP_2022:
+  en: 2021-22 Departmental Plans
+  fr: Plans Ministériels de 2021-2022
 
 quick_link_DRR_1920:
   en: 2019-20 Departmental Results Reports

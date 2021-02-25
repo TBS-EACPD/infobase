@@ -755,20 +755,20 @@ tabled_estimates:
 supps_a:
    transform: [handlebars]
    en: |
-     {{est_in_year}} Supplementary Estimates A
-   fr: Budget supplémentaire des dépenses (A) {{est_in_year}}
+     {{est_last_year}} Supplementary Estimates A
+   fr: Budget supplémentaire des dépenses (A) {{est_last_year}}
 
 supps_b:
   transform: [handlebars]
   en: |
-    {{est_in_year}} Supplementary Estimates B
-  fr: Budget supplémentaire des dépenses (B) {{est_in_year}}
+    {{est_last_year}} Supplementary Estimates B
+  fr: Budget supplémentaire des dépenses (B) {{est_last_year}}
 
 supps_c:
   transform: [handlebars]
   en: |
-    {{est_in_year}} Supplementary Estimates C
-  fr: Budget supplémentaire des dépenses (C) {{est_in_year}}
+    {{est_last_year}} Supplementary Estimates C
+  fr: Budget supplémentaire des dépenses (C) {{est_last_year}}
 
 
 help:
