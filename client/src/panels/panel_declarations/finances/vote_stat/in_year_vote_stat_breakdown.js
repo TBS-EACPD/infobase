@@ -200,6 +200,7 @@ const planned_vote_or_stat_render = (vs) =>
                 node_render={node_render(vs)}
                 tooltip_render={tooltip_render(vs)}
                 value_string="{{est_in_year}}_estimates"
+                formatter={formats.compact1}
               />
             </div>
           </Col>
