@@ -1,9 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import { Canada } from "../../charts/canada/index.js";
-import { FlatTreeMapViz } from "../../charts/flat_treemap/FlatTreeMapViz.js";
 import { StandardLegend, SelectAllControl } from "../../charts/legends";
 import { get_formatter, infobase_colors_smart } from "../../charts/shared.js";
 import {
@@ -13,6 +11,7 @@ import {
   WrappedNivoPie,
   CircleProportionChart,
   NivoLineBarToggle,
+  FlatTreeMapViz,
 } from "../../charts/wrapped_nivo/index.js";
 import * as util_components from "../../components/index.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
