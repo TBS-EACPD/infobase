@@ -392,8 +392,8 @@ const dp_docs = build_doc_info_objects("dp", [
     ],
     doc_url_en: null, //DP_TODO
     doc_url_fr: null, //DP_TODO
-    late_results_orgs: [125, 256], //DP_TODO
-    late_resources_orgs: [],
+    late_results_orgs: [125, 244],
+    late_resources_orgs: [125, 244, 151],
   },
 ]);
 const result_docs = {
