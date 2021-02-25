@@ -41,8 +41,8 @@ export const declare_covid_key_concepts_panel = () =>
                 <TM key={"a"} k={"covid_questions_financial_a"} />,
               ],
               [
-                <TM key={"q"} k={"covid_questions_financial_q"} />,
-                <TM key={"a"} k={"covid_questions_financial_a"} />,
+                <TM key={"q"} k={"covid_questions_benefits_q"} />,
+                <TM key={"a"} k={"covid_questions_benefits_a"} />,
               ],
               [
                 <TM
