@@ -22,6 +22,7 @@
     "@nivo/core": "^0.67.0",
     "@nivo/line": "^0.67.0",
     "@nivo/pie": "^0.67.0",
+    "@nivo/treemap": "^0.67.0",
     "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
     "bootstrap": "^4.5.3",
