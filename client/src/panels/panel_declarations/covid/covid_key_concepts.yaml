@@ -48,8 +48,8 @@ covid_questions_additional_estimates_measures_q:
 covid_questions_additional_estimates_measures_a:
   transform: [handlebars,markdown]
   en: |
-    Details of the Government's COVID-19 Economic Response Plan are presented in chapter 1 & 2 of the Fall Economic Statement (FES) 2020. All measures found in the FES 
-    that were also presented in the Estimates have been included herein. In addition, a small number of items included in the Estimates, but not found in the FES, are 
+    Details of the Government's COVID-19 Economic Response Plan are presented in chapters 1 & 2 of the Fall Economic Statement (FES) 2020. All measures found in the FES 
+    that were also presented in the Estimates have been included here. In addition, a small number of items included in the Estimates, but not found in the FES, are 
     included here as they are, at least in part, driven by COVID-19.
   fr: TODO
 
