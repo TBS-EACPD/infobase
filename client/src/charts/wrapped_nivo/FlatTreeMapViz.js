@@ -42,6 +42,7 @@ export class FlatTreeMapViz extends React.Component {
               borderColor={{ theme: "background" }}
               borderWidth={2}
               nodeComponent={TreeMapHtmlNode}
+              animate={false}
               label={function (e) {
                 return (
                   <div
