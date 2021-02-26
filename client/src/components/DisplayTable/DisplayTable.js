@@ -18,6 +18,7 @@ import {
   DisplayTableCopyCsv,
   DisplayTableDownloadCsv,
   DisplayTableColumnToggle,
+  PageSelector,
 } from "./DisplayTableUtils.js";
 
 import text from "./DisplayTable.yaml";
@@ -303,13 +304,25 @@ export class DisplayTable extends React.Component {
       .value();
 
     const num_pages = _.toInteger(
-      paginate_by ? _.size(sorted_filtered_data) / paginate_by : 0
+      paginate_by ? _.size(sorted_filtered_data) / paginate_by : -1
     ); //start counting from 0 (-1 from the literal amount of pages)
 
     const paginated_data = _.chunk(
       sorted_filtered_data,
       paginate_by || _.size(sorted_filtered_data)
     )[current_page];
+
+    const change_page = (page) => {
+      this.setState({ current_page: page });
+    };
+
+    const page_selector = num_pages >= 0 && (
+      <PageSelector
+        num_pages={num_pages}
+        current_page={current_page}
+        change_page={change_page}
+      />
+    );
 
     return (
       <div
@@ -318,6 +331,7 @@ export class DisplayTable extends React.Component {
           util_components_with_defaults && "display-table-container--with-utils"
         )}
       >
+        {page_selector}
         <table
           className={classNames(
             "table",
@@ -504,6 +518,7 @@ export class DisplayTable extends React.Component {
             </tbody>
           )}
         </table>
+        {page_selector}
 
         {sorted_filtered_data.length === 0 && (
           <TM
