@@ -39,7 +39,7 @@ const covid_funding_fields = `
 const covid_measure_fields = `
   id
   name
-  in_estimates
+  is_in_response_plan
   ${COVID_FUNDING_FEATURE_FLAG ? covid_funding_fields : ""}
 
   ${has_covid_data_fields}
