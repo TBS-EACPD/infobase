@@ -6,7 +6,7 @@ query ($lang: String = "en") {
     covid_measures {
       id
       name
-      in_estimates
+      is_in_response_plan
       covid_funding {
         fiscal_year
         funding
@@ -61,7 +61,7 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
     covid_measure(covid_measure_id: $covid_measure_id) {
       id
       name
-      in_estimates
+      is_in_response_plan
       covid_funding {
         fiscal_year
         funding
@@ -161,7 +161,7 @@ query ($lang: String = "en") {
       covid_measures {
         id
         name
-        in_estimates
+        is_in_response_plan
         covid_funding {
           fiscal_year
           funding
