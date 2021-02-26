@@ -85,32 +85,29 @@ export class DisplayTable extends React.Component {
     super(props);
 
     this.state = get_default_state_from_props(props);
+
+    this.state = {
+      visible_col_keys,
+      sort_by,
+      descending: false,
+      searches,
+      paginate_by: 10,
+      current_page: 0,
+    };
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps !== prevState.initial_props) {
-      const new_default_state = get_default_state_from_props(nextProps);
 
-      const prev_sort_still_valid = _.includes(
-        new_default_state.visible_col_keys,
-        prevState.sort_by
-      );
-
-      const reconciled_searches = {
-        ...new_default_state.searches,
-        ..._.pick(prevState.searches, new_default_state.visible_col_keys),
-      };
-
+  static getDerivedStateFromProps(next_props, prev_state) {
+    if (
+      next_props.paginate_by &&
+      next_props.paginate_by !== prev_state.paginate_by
+    ) {
       return {
-        ...new_default_state,
-        ...(prev_sort_still_valid && {
-          sort_by: prevState.sort_by,
-          descending: prevState.descending,
-        }),
-        searches: reconciled_searches,
+        paginate_by: next_props.paginate_by,
+        current_page: 0,
       };
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   render() {
@@ -140,7 +137,14 @@ export class DisplayTable extends React.Component {
       util_components,
       disable_column_select,
     } = this.props;
-    const { sort_by, descending, searches, visible_col_keys } = this.state;
+    const {
+      sort_by,
+      descending,
+      searches,
+      visible_col_keys,
+      paginate_by,
+      current_page,
+    } = this.state;
 
     const col_configs_with_defaults = get_col_configs_with_defaults(
       column_configs
@@ -298,6 +302,15 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
+    const num_pages = _.toInteger(
+      paginate_by ? _.size(sorted_filtered_data) / paginate_by : 0
+    ); //start counting from 0 (-1 from the literal amount of pages)
+
+    const paginated_data = _.chunk(
+      sorted_filtered_data,
+      paginate_by || _.size(sorted_filtered_data)
+    )[current_page];
+
     return (
       <div
         className={classNames(
@@ -407,7 +420,7 @@ export class DisplayTable extends React.Component {
             <NoDataMessage />
           ) : (
             <tbody>
-              {_.map(sorted_filtered_data, (row, i) => (
+              {_.map(paginated_data, (row, i) => (
                 <tr key={i}>
                   {_.map(visible_ordered_col_keys, (col_key, idx) => (
                     <td
