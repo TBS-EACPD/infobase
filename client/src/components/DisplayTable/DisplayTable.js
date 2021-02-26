@@ -316,14 +316,6 @@ export class DisplayTable extends React.Component {
       this.setState({ current_page: page });
     };
 
-    const page_selector = num_pages >= 0 && (
-      <PageSelector
-        num_pages={num_pages}
-        current_page={current_page}
-        change_page={change_page}
-      />
-    );
-
     return (
       <div
         className={classNames(
@@ -331,7 +323,6 @@ export class DisplayTable extends React.Component {
           util_components_with_defaults && "display-table-container--with-utils"
         )}
       >
-        {page_selector}
         <table
           className={classNames(
             "table",
@@ -349,6 +340,15 @@ export class DisplayTable extends React.Component {
             </div>
           </caption>
           <thead>
+            {num_pages >= 0 && (
+              <PageSelector
+                num_pages={num_pages}
+                current_page={current_page}
+                change_page={change_page}
+                show_select
+                num_col={_.size(visible_ordered_col_keys)}
+              />
+            )}
             {util_components_with_defaults && (
               <tr>
                 <td
@@ -515,10 +515,17 @@ export class DisplayTable extends React.Component {
                     .value()}
                 </tr>
               )}
+              {num_pages >= 0 && (
+                <PageSelector
+                  num_pages={num_pages}
+                  current_page={current_page}
+                  change_page={change_page}
+                  num_col={_.size(visible_ordered_col_keys)}
+                />
+              )}
             </tbody>
           )}
         </table>
-        {page_selector}
 
         {sorted_filtered_data.length === 0 && (
           <TM
