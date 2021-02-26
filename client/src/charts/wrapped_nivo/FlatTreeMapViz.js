@@ -1,4 +1,4 @@
-import { TreeMapHtml } from "@nivo/treemap";
+import { ResponsiveTreeMapHtml } from "@nivo/treemap";
 import _ from "lodash";
 import React from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
@@ -10,33 +10,15 @@ import { DefaultTooltip } from "./wrapped_nivo_common";
 
 export class FlatTreeMapViz extends React.Component {
   render() {
-    const {
-      data,
-      colorScale,
-      value_string,
-      formatter,
-      label_id,
-      text_func,
-    } = this.props;
-
-    const nivo_data = {
-      name: "root",
-      color: "white",
-      children: _.map(data.children, (datum) => ({
-        ...datum,
-        [label_id]: text_func(datum, "-"),
-      })),
-    };
+    const { data, colorScale, value_string, formatter, label_id } = this.props;
 
     return (
       <ReactResizeDetector handleWidth>
         {({ width }) => (
-          <div style={{ height: "100%", width: "100%" }}>
+          <div style={{ height: width, width: "99%" }}>
             {width && (
-              <TreeMapHtml
-                width={width}
-                height={width}
-                data={nivo_data}
+              <ResponsiveTreeMapHtml
+                data={data}
                 identity={label_id}
                 value={value_string}
                 leavesOnly={true}
