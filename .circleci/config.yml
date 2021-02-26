@@ -165,7 +165,7 @@ jobs:
             - client/build
           key: prod-build-{{ .Branch }}-{{ .Revision }}
       
-      - run: cd client && npm run build-storybook -- -o $BUILD_DIR
+      - run: cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook
 
       - restore_cache:
           keys:
