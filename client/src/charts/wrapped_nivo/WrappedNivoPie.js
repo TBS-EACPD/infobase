@@ -35,6 +35,7 @@ export class WrappedNivoPie extends React.Component {
       disable_table_view,
       table_name,
       show_legend,
+      theme,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
@@ -112,6 +113,7 @@ export class WrappedNivoPie extends React.Component {
             {...{
               data: data_with_absolute_values,
               margin,
+              theme,
             }}
             colors={color_func}
             tooltip={({ datum }) => {
