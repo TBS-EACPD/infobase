@@ -64,83 +64,93 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
   </Fragment>
 );
 
-export const PageSelector = ({ current_page, num_pages, change_page }) => {
+export const PageSelector = ({
+  current_page,
+  num_pages,
+  change_page,
+  show_select,
+  num_col,
+}) => {
   const options = _.map(_.range(0, num_pages), (num) => ({
     value: num,
     label: num + 1,
   }));
 
   return (
-    <div>
-      <div style={{ padding: "10px" }}>
-        <div className="frow">
-          <div className="fcol-xs-4">
-            {current_page !== 0 && (
-              <Fragment>
-                <button
-                  className="btn-ib-light"
-                  style={{ marginRight: "5px" }}
-                  onClick={() => change_page(0)}
-                >
-                  First
-                </button>
-                <button
-                  className="btn-ib-light"
-                  onClick={() => change_page(current_page - 1)}
-                >
-                  Previous
-                </button>
-              </Fragment>
-            )}
-          </div>
-          <div className="fcol-xs-4 d-flex justify-content-center">
-            {_.map(
-              _.range(current_page - 2, current_page + 3),
-              (num) =>
-                num >= 0 &&
-                num <= num_pages && (
+    <tr>
+      <td colSpan={num_col}>
+        <div style={{ padding: "10px" }}>
+          <div className="frow">
+            <div className="fcol-xs-4">
+              {current_page !== 0 && (
+                <Fragment>
                   <button
-                    key={num}
-                    className={`btn-ib-light${
-                      (num === current_page && "--reversed") || ""
-                    }`}
-                    style={{ margin: "0px 2.5px" }}
-                    onClick={() => change_page(num)}
+                    className="btn-ib-light"
+                    style={{ marginRight: "5px" }}
+                    onClick={() => change_page(0)}
                   >
-                    {num + 1}
+                    First
                   </button>
-                )
-            )}
-          </div>
-          <div className="fcol-xs-4 d-flex justify-content-end">
-            {current_page !== num_pages && (
-              <Fragment>
-                <button
-                  className="btn-ib-light"
-                  style={{ marginRight: "5px" }}
-                  onClick={() => change_page(current_page + 1)}
-                >
-                  Next
-                </button>
-                <button
-                  className="btn-ib-light"
-                  onClick={() => change_page(num_pages)}
-                >
-                  Last
-                </button>
-              </Fragment>
-            )}
+                  <button
+                    className="btn-ib-light"
+                    onClick={() => change_page(current_page - 1)}
+                  >
+                    Previous
+                  </button>
+                </Fragment>
+              )}
+            </div>
+            <div className="fcol-xs-4 d-flex justify-content-center">
+              {_.map(
+                _.range(current_page - 2, current_page + 3),
+                (num) =>
+                  num >= 0 &&
+                  num <= num_pages && (
+                    <button
+                      key={num}
+                      className={`btn-ib-light${
+                        (num === current_page && "--reversed") || ""
+                      }`}
+                      style={{ margin: "0px 2.5px" }}
+                      onClick={() => change_page(num)}
+                    >
+                      {num + 1}
+                    </button>
+                  )
+              )}
+            </div>
+            <div className="fcol-xs-4 d-flex justify-content-end">
+              {current_page !== num_pages && (
+                <Fragment>
+                  <button
+                    className="btn-ib-light"
+                    style={{ marginRight: "5px" }}
+                    onClick={() => change_page(current_page + 1)}
+                  >
+                    Next
+                  </button>
+                  <button
+                    className="btn-ib-light"
+                    onClick={() => change_page(num_pages)}
+                  >
+                    Last
+                  </button>
+                </Fragment>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div style={{ padding: "2.5px 10px 0px" }}>
-        <Select
-          options={options}
-          placeholder="Select page"
-          styles={{ menu: (provided) => ({ ...provided, zIndex: 10000 }) }}
-          onChange={(option) => change_page(option.value)}
-        />
-      </div>
-    </div>
+        {show_select && (
+          <div style={{ padding: "2.5px 10px 0px" }}>
+            <Select
+              options={options}
+              placeholder="Select page"
+              styles={{ menu: (provided) => ({ ...provided, zIndex: 10000 }) }}
+              onChange={(option) => change_page(option.value)}
+            />
+          </div>
+        )}
+      </td>
+    </tr>
   );
 };
