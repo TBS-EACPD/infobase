@@ -323,6 +323,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
   }
 );
 
+const get_measure_name = (id) => CovidMeasure.lookup(id).name;
 const ByMeasureTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
@@ -343,7 +344,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         _.chain(rows)
           .groupBy("vs_type")
           .flatMap((vs_group, vs_type) => ({
-            measure_name: CovidMeasure.lookup(measure_id).name,
+            measure_id,
             vs_type,
             ..._.chain(est_docs)
               .map((est_doc) => [
@@ -360,11 +361,34 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .value();
 
     const column_configs = {
-      measure_name: {
+      measure_id: {
         index: 0,
         header: text_maker("covid_measure"),
         is_searchable: true,
-        sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
+        raw_formatter: get_measure_name,
+        formatter: get_measure_name,
+        sort_func: (id_a, id_b, is_descending) => {
+          const [measure_a, measure_b] = _.map(
+            [id_a, id_b],
+            CovidMeasure.lookup
+          );
+
+          if (measure_a.is_in_response_plan === measure_b.is_in_response_plan) {
+            return string_sort_func(measure_a.name, measure_b.name);
+          } else {
+            if (
+              !measure_a.is_in_response_plan &&
+              measure_b.is_in_response_plan
+            ) {
+              return is_descending ? -1 : 1;
+            } else if (
+              measure_a.is_in_response_plan &&
+              !measure_b.is_in_response_plan
+            ) {
+              return is_descending ? 1 : -1;
+            }
+          }
+        },
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
     };

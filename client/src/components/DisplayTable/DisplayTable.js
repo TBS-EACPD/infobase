@@ -131,7 +131,7 @@ export class DisplayTable extends React.Component {
             (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
           raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for searching/csv string Default to value
           sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
-          sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
+          sort_func: (a, b, this.state.descending) => ... <- (function) Custom sort func. Default to _.sortBy
           sum_initial_value: 0 <- (number) Default to 0
           visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
         },
@@ -199,7 +199,8 @@ export class DisplayTable extends React.Component {
             ? _.map(unsorted_array).sort((a, b) =>
                 col_configs_with_defaults[sort_by].sort_func(
                   a[sort_by],
-                  b[sort_by]
+                  b[sort_by],
+                  descending
                 )
               )
             : _.sortBy(unsorted_array, (row) =>
