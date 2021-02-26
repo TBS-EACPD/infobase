@@ -99,13 +99,14 @@ export const declare_employee_totals_panel = () =>
                 colors={primaryColor}
                 is_money={false}
                 yScale={{ toggle: true }}
-                sliceTooltip={({ slice }) => (
+                tooltip={({ slice }) => (
                   <div
                     style={{
                       padding: "5px",
                       borderRadius: "10px",
                       backgroundColor: backgroundColor,
                       color: textColor,
+                      boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
                     }}
                   >
                     <table

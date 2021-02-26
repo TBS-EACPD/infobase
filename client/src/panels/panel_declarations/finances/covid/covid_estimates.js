@@ -490,6 +490,7 @@ export const declare_covid_estimates_panel = () =>
 
         return (
           <InfographicPanel
+            allowOverflow={true}
             title={text_maker("covid_estimates_panel_title")}
             {...{
               sources,

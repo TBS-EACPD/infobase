@@ -207,7 +207,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       colors: (d) => colors(d.id),
       magnify_glass_translateX: 80,
       magnify_glass_translateY: 70,
-      sliceTooltip: auth_exp_planned_spending_tooltip,
+      tooltip: auth_exp_planned_spending_tooltip,
       margin: {
         top: 10,
         right: 30,
