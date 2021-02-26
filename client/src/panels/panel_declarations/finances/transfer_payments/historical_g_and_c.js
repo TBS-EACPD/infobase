@@ -390,6 +390,7 @@ export const declare_historical_g_and_c_panel = () =>
               return (
                 <InfographicPanel
                   title={text_maker("historical_g_and_c_title")}
+                  allowOverflow={true}
                   {...{ footnotes, sources }}
                 >
                   <HistTPTypes
@@ -484,6 +485,7 @@ export const declare_historical_g_and_c_panel = () =>
 
               return (
                 <InfographicPanel
+                  allowOverflow={true}
                   title={text_maker("historical_g_and_c_title")}
                   {...{ sources, footnotes }}
                 >

@@ -180,6 +180,11 @@ WrappedNivoPie.defaultProps = {
     bottom: 60,
     left: 50,
   },
+  theme: {
+    tooltip: {
+      boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
+    },
+  },
   include_percent: true,
   show_legend: true,
 };
