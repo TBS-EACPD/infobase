@@ -36,10 +36,16 @@ class Goco extends React.Component {
       child_graph: false,
       clicked_spending: false,
       clicked_fte: false,
+      clicked_id: false,
     };
   }
   render() {
-    const { child_graph, clicked_spending, clicked_fte } = this.state;
+    const {
+      child_graph,
+      clicked_spending,
+      clicked_fte,
+      clicked_id,
+    } = this.state;
     const programSpending = Table.lookup("programSpending");
     const programFtes = Table.lookup("programFtes");
     const spend_col = "{{pa_last_year}}exp";
@@ -89,23 +95,25 @@ class Goco extends React.Component {
           const actual_ftes = programFtes.q(goco).sum(fte_col);
           return {
             label: goco.name,
-            actual_spending: actual_spending,
-            actual_ftes: actual_ftes,
+            actual_spending: actual_spending || 0,
+            actual_ftes: actual_ftes || 0,
             [spending_text]:
-              actual_spending / total_fte_spend[sa.id].total_child_spending,
-            [ftes_text]: actual_ftes / total_fte_spend[sa.id].total_child_ftes,
+              actual_spending / total_fte_spend[sa.id].total_child_spending ||
+              0,
+            [ftes_text]:
+              actual_ftes / total_fte_spend[sa.id].total_child_ftes || 0,
           };
         });
         return {
           label: sa.name,
-          actual_spending: total_fte_spend[sa.id].total_child_spending,
-          actual_ftes: total_fte_spend[sa.id].total_child_ftes,
+          actual_spending: total_fte_spend[sa.id].total_child_spending || 0,
+          actual_ftes: total_fte_spend[sa.id].total_child_ftes || 0,
           [spending_text]:
             total_fte_spend[sa.id].total_child_spending /
-            total_fte_spend.total_spending,
+              total_fte_spend.total_spending || 0,
           [ftes_text]:
             total_fte_spend[sa.id].total_child_ftes /
-            total_fte_spend.total_ftes,
+              total_fte_spend.total_ftes || 0,
           children: _.sortBy(children, (d) => -d[spending_text]),
         };
       })
@@ -433,6 +441,7 @@ class Goco extends React.Component {
           child_graph: child_graph,
           clicked_spending: target_spending,
           clicked_fte: target_fte,
+          clicked_id: node.indexValue,
         });
       };
 
@@ -473,6 +482,10 @@ class Goco extends React.Component {
                           dominantBaseline="middle"
                           style={{
                             fontSize: "12px",
+                            opacity:
+                              !clicked_id || clicked_id === tick.value
+                                ? 1
+                                : 0.4,
                           }}
                         >
                           <TspanLineWrapper text={tick.value} width={15} />
