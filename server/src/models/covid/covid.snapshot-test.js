@@ -27,7 +27,6 @@ query ($lang: String = "en") {
     
         fiscal_year
         est_doc
-        is_above_line
         vote
         stat
       }
@@ -183,7 +182,6 @@ query ($lang: String = "en") {
       
           fiscal_year
           est_doc
-          is_above_line
           vote
           stat
         }

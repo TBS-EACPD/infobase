@@ -65,7 +65,6 @@ const schema = `
     org_id: String
     org: Org
 
-    is_above_line: Boolean
     ${estimates_fields}
   }
   type CovidExpenditures {
