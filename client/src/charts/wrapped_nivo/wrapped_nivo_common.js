@@ -75,6 +75,7 @@ const TooltipFactory = ({
       backgroundColor: backgroundColor,
       color: textColor,
       borderRadius: "10px",
+      maxWidth: "400px",
     }}
   >
     <table className="nivo-tooltip">

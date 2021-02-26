@@ -66,7 +66,7 @@ export class WrappedNivoLine extends React.Component {
       text_formatter,
       theme,
       colors,
-      sliceTooltip,
+      tooltip,
       y_scale_max,
       y_scale_min,
       enableArea,
@@ -187,7 +187,7 @@ export class WrappedNivoLine extends React.Component {
           legends={fix_legend_symbols(legends)}
           enableSlices={"x"}
           sliceTooltip={(d) =>
-            sliceTooltip(d, get_formatter(is_money, text_formatter, false))
+            tooltip(d, get_formatter(is_money, text_formatter, false))
           }
           yScale={{
             stacked: !!stacked,
@@ -236,7 +236,12 @@ export class WrappedNivoLine extends React.Component {
 }
 WrappedNivoLine.defaultProps = {
   ...general_default_props,
-  sliceTooltip: ({ slice }, formatter) => {
+  theme: {
+    tooltip: {
+      boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
+    },
+  },
+  tooltip: ({ slice }, formatter) => {
     const tooltip_items = slice.points.map((d) => ({
       id: d.serieId,
       color: d.serieColor,

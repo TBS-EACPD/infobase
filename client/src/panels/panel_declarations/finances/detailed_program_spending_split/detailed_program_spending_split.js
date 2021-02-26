@@ -553,6 +553,7 @@ export const declare_detailed_program_spending_split_panel = () =>
 
         return (
           <InfographicPanel
+            allowOverflow={true}
             title={text_maker("detailed_program_spending_split_title")}
             {...{ sources, footnotes: [...footnotes, ...program_footnotes] }}
           >
