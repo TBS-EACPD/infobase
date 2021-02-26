@@ -12,12 +12,7 @@ export default async function ({ models }) {
 
   const covid_estimates_rows = _.map(
     get_standard_csv_file_rows("covid_estimates.csv"),
-    (row) => ({
-      ...row,
-      is_above_line: row.is_above_line === "1",
-      vote: +row.vote,
-      stat: +row.stat,
-    })
+    (row) => ({ ...row, vote: +row.vote, stat: +row.stat })
   );
   const covid_expenditures_rows = _.chain(
     get_standard_csv_file_rows("covid_expenditures.csv")
