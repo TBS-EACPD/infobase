@@ -1,6 +1,5 @@
 import { sum } from "d3-array";
 import { scaleOrdinal } from "d3-scale";
-import { select } from "d3-selection";
 import _ from "lodash";
 import React from "react";
 
