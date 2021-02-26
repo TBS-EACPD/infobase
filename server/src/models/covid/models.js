@@ -42,6 +42,7 @@ export default function (model_singleton) {
   const CovidEstimatesSchema = mongoose.Schema({
     org_id: parent_fkey_type(),
 
+    is_above_line: { type: Boolean },
     ...covid_estimates_fields,
   });
   const CovidExpenditureSchema = mongoose.Schema({

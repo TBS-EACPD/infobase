@@ -1,4 +1,4 @@
-﻿"org_id","fiscal_year","est_doc","covid_measure_id","above_line","vote","stat"
+﻿"org_id","fiscal_year","est_doc","covid_measure_id","is_above_line","vote","stat"
 12,2020,"SEA","COV043",0,69880812,40103820
 12,2020,"SEB","COV043",0,60132884,67116
 12,2020,"SEB","COV050",0,1148000,
