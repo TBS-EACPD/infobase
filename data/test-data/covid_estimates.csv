@@ -1,4 +1,4 @@
-org_id,fiscal_year,est_doc,covid_measure_id,above_line,vote,stat
+org_id,fiscal_year,est_doc,covid_measure_id,is_above_line,vote,stat
 133,2020,ME,COV001,0,999,
 133,2020,ME,COV001,1,999,
 133,2020,SEA,COV001,1,9,
