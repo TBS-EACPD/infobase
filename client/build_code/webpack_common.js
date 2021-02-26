@@ -60,7 +60,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       // node modules that specifically require transpilation...
-      include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror)/,
+      include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror|d3-scale)/,
       test: /\.js$/,
       use: js_module_loader_rules,
     },
