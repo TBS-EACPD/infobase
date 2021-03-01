@@ -6,7 +6,7 @@ export {
 } from "./Accordions.js";
 export { TagCloud } from "./TagCloud.js";
 export { EmailFrontend } from "./EmailFrontend.js";
-export { HeightClipper } from "./HeightClipper.js";
+export { HeightClipper } from "./HeightClipper/HeightClipper.js";
 export { RadioButtons } from "./RadioButtons.js";
 export { Select } from "./Select.js";
 export { SortDirections } from "./SortDirection.js";
@@ -22,7 +22,7 @@ export { CardBackgroundImage } from "./CardBackgroundImage.js";
 export { DebouncedTextInput } from "./DebouncedTextInput.js";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
 export { FilterTable } from "./FilterTable.js";
-export { CheckBox } from "./CheckBox.js";
+export { CheckBox } from "./CheckBox/CheckBox.js";
 export { Details } from "./Details.js";
 export { SpinnerWrapper } from "./SpinnerWrapper.js";
 export { KeyConceptList } from "./KeyConceptList.js";
