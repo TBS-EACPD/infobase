@@ -13,7 +13,7 @@ import {
   send_completed_email_template,
 } from "../email_backend_utils.js";
 
-import { CheckBox } from "./CheckBox.js";
+import { CheckBox } from "./CheckBox/CheckBox.js";
 import { create_text_maker_component } from "./misc_util_components.js";
 
 import { SpinnerWrapper } from "./SpinnerWrapper";
