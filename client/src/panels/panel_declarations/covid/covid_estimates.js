@@ -393,15 +393,15 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
 
-    const [largest_measure_name, largest_measure_auth] = _.chain(
+    const [largest_measure_id, largest_measure_auth] = _.chain(
       pre_sorted_data
     )
-      .groupBy("measure_name")
-      .map((rows, measure_name) => [
-        measure_name,
+      .groupBy("measure_id")
+      .map((rows, measure_id) => [
+        measure_id,
         _.reduce(rows, (memo, { total }) => memo + total, 0),
       ])
-      .sortBy(([_measure_name, total]) => total)
+      .sortBy(([_measure_id, total]) => total)
       .last()
       .value();
 
@@ -411,7 +411,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           k={"covid_estimates_measure_tab_text"}
           args={{
             ...panel_args,
-            largest_measure_name,
+            largest_measure_name: CovidMeasure.lookup(largest_measure_id).name,
             largest_measure_auth,
           }}
           className="medium-panel-text"
