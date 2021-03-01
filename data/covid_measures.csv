@@ -52,7 +52,6 @@
 "COV065","Support for Fish and Seafood Processors","Soutien aux transformateurs de poissons et de produits de la mer",1
 "COV066","Support for Fish Harvesters","Soutien pour les pêcheurs canadiens",1
 "COV067","Support for Canada’s Academic Research Community","Soutien pour le milieu de la recherche universitaire du Canada",1
-"COV075","Large Employer Emergency Financing Facility","Crédit d’urgence pour les grands employeurs",1
 "COV078","Support for Safe Operation in the Forest Sector","Soutien à la sécurité des opérations dans le secteur forestier",1
 "COV079","Safe Restart Agreement Federal Investments in Testing, Contact Tracing, and Data Management","Accord sur la relance sécuritaire – Investissements fédéraux dans le dépistage, la recherche des contacts et la gestion des données",1
 "COV082","Further Support for Medical Research and Vaccine Developments","Soutien supplémentaire pour la recherche médicale et les vaccins",1
@@ -71,7 +70,6 @@
 "COV099","Indigenous Mental Wellness Support","Soutenir les services de santé mentale et de bien-être dans les communautés autochtones",1
 "COV100","Safe Return to Class","Fonds pour une rentrée scolaire sécuritaire",1
 "COV101","Support Essential Air Access to Remote Communities","Soutenir le transport aérien essentiel pour accéder aux collectivités éloignées",1
-"COV102","Canada Healthy Communities Initiative","Initiative canadienne pour des collectivités en santé",1
 "COV104","Canada Emergency Response Benefit Administration Costs","Administration de la prestation canadienne d’urgence (PCU)",1
 "COV106","Canada Recovery Benefits","Prestations canadienne de la relance économique",1
 "COV110","Support for Workers in the Newfoundland and Labrador Offshore Energy Sector","Soutien pour les travailleurs du secteur de l’énergie extracôtière de Terre-Neuve-et-Labrador",1
@@ -104,13 +102,5 @@
 "COV151","Maintaining the Federal Government’s Legal Services Capacity","Maintenir la capacité des services juridiques du gouvernement fédéral",1
 "COV153","Funding for VIA Rail Canada Inc.","Financement pour VIA Rail Canada Inc.",1
 "COV154","Supporting Court Operations and Access to Justice","Soutien aux opérations judiciaires et accès à la justice",1
-"COV156","Funding to support business resumption for federally regulated employers","Fonds pour soutenir la reprise des activités des employeurs relevant de la compétence fédérale",1
-"COV157","Funding for information technology services, infrastructure and cyber security","Fonds pour des services de technologie de l'information, l'infrastructure et la cybersécurité",1
-"COV158","Funding for medical countermeasures for chemical, biological, radiological and nuclear threats, including pandemic influenza","Fonds pour des contre-mesures médicales en cas de menaces chimiques, biologiques, radiologiques et nucléaires, incluant la grippe pandémique",1
-"COV159","Funding to secure domestic supply chain of N95 respirators","Fonds pour assurer l'approvisionnement domestique des respirateurs N95",1
-"COV160","Critical operating requirements","Besoins opérationnels critiques",1
-"COV161","To Government of Nunavut for increased health care costs due to the pandemic","Permettre au gouvernement du Nunavut de faire face à l’augmentation des coûts des soins de santé due à la pandémie",1
-"COV162","Spending of revenues received through the conduct of its operations","Dépense des recettes résultant de la poursuite des opérations",1
-"COV164","Communication services","Services de communication",1
-"COV165","Canada Emergency Business Account (CEBA) - Admin","Compte d’urgence pour les entreprises canadiennes – Admin",1
-"COV999","Other COVID-19 initiatives presented in Estimates","TODO",0
+"COV999","Other COVID-19 initiatives presented in Estimates","TO DO",0
+
