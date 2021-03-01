@@ -4,7 +4,7 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { CheckBox } from "../../components/CheckBox.js";
+import { CheckBox } from "../../components/CheckBox/CheckBox.js";
 
 import "./LegendList.scss";
 

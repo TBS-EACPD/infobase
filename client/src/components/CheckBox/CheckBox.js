@@ -4,7 +4,7 @@ import React from "react";
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { IconCheckmark } from "../icons/icons.js";
+import { IconCheckmark } from "src/icons/icons.js";
 import "./CheckBox.scss";
 
 export class CheckBox extends React.Component {
