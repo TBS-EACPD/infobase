@@ -48,16 +48,16 @@ if [ $concurrency == "full" ]; then
   echo "Running prod builds in background, full concurrency..."
   spinner_pid=$(sh ../scripts/spinner.sh)
 
-  npm run IB_prod_no_watch_en --max_old_space_size=$max_old_space_size > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
+  npm run IB_prod_no_watch_en -- --max_old_space_size=$max_old_space_size > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
   ib_prod_en_pid=$!
   
-  npm run IB_prod_no_watch_fr --max_old_space_size=$max_old_space_size > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
+  npm run IB_prod_no_watch_fr -- --max_old_space_size=$max_old_space_size > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
   ib_prod_fr_pid=$!
   
-  npm run a11y_prod_no_watch_en --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
+  npm run a11y_prod_no_watch_en -- --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
   a11y_prod_en_pid=$!
   
-  npm run a11y_prod_no_watch_fr --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
+  npm run a11y_prod_no_watch_fr -- --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
   a11y_prod_fr_pid=$!
 
   wait $ib_prod_en_pid
@@ -72,19 +72,19 @@ elif [ $concurrency == "half" ]; then
   echo "Running prod builds in background, half concurrency..."
   spinner_pid=$(sh ../scripts/spinner.sh)
 
-  npm run IB_prod_no_watch_en --max_old_space_size=$max_old_space_size > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
+  npm run IB_prod_no_watch_en -- --max_old_space_size=$max_old_space_size > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
   ib_prod_en_pid=$!
   
-  npm run IB_prod_no_watch_fr --max_old_space_size=$max_old_space_size > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
+  npm run IB_prod_no_watch_fr -- --max_old_space_size=$max_old_space_size > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
   ib_prod_fr_pid=$!
 
   wait $ib_prod_en_pid
   wait $ib_prod_fr_pid
   
-  npm run a11y_prod_no_watch_en --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
+  npm run a11y_prod_no_watch_en -- --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
   a11y_prod_en_pid=$!
   
-  npm run a11y_prod_no_watch_fr --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
+  npm run a11y_prod_no_watch_fr -- --max_old_space_size=$max_old_space_size > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
   a11y_prod_fr_pid=$!
   
   wait $a11y_prod_en_pid
@@ -92,13 +92,13 @@ elif [ $concurrency == "half" ]; then
 elif [ $concurrency == "none" ]; then
   # Just running all builds one at a time, no backgrounding or output redirection
 
-  npm run IB_prod_no_watch_en --max_old_space_size=$max_old_space_size 
+  npm run IB_prod_no_watch_en -- --max_old_space_size=$max_old_space_size 
   
-  npm run IB_prod_no_watch_fr --max_old_space_size=$max_old_space_size 
+  npm run IB_prod_no_watch_fr -- --max_old_space_size=$max_old_space_size 
   
-  npm run a11y_prod_no_watch_en --max_old_space_size=$max_old_space_size 
+  npm run a11y_prod_no_watch_en -- --max_old_space_size=$max_old_space_size 
 
-  npm run a11y_prod_no_watch_fr --max_old_space_size=$max_old_space_size
+  npm run a11y_prod_no_watch_fr -- --max_old_space_size=$max_old_space_size
 fi
 
 exit
