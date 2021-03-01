@@ -142,18 +142,6 @@ const get_expenditures_by_index = (exp_data, index_key) =>
         total_exp: vote + stat,
       };
     })
-    .thru((rows) => {
-      const total = _.reduce(
-        rows,
-        (memo, { total_exp }) => memo + total_exp,
-        0
-      );
-
-      return _.map(rows, (row) => ({
-        ...row,
-        share: row.total_exp / total || 0,
-      }));
-    })
     .value();
 
 const get_common_column_configs = (show_vote_stat) => ({
@@ -180,13 +168,6 @@ const get_common_column_configs = (show_vote_stat) => ({
     is_summable: true,
     formatter: "compact2",
     initial_visible: !show_vote_stat,
-  },
-  share: {
-    index: 5,
-    header: text_maker("covid_share_of_total"),
-    is_searchable: false,
-    is_summable: false,
-    formatter: "percentage2",
   },
 });
 
@@ -227,11 +208,12 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat),
     };
 
-    const {
-      org_id: largest_dept_id,
-      total_exp: largest_dept_exp,
-      share: largest_dept_share,
-    } = _.chain(rows).sortBy("total_exp").last().value();
+    const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _.chain(
+      rows
+    )
+      .sortBy("total_exp")
+      .last()
+      .value();
 
     return (
       <Fragment>
@@ -241,7 +223,6 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             ...panel_args,
             largest_dept_name: Dept.lookup(largest_dept_id).name,
             largest_dept_exp,
-            largest_dept_share,
           }}
           className="medium-panel-text"
         />
@@ -286,7 +267,6 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     const {
       measure_name: largest_measure_name,
       total_exp: largest_measure_exp,
-      share: largest_measure_share,
     } = _.chain(rows_with_measure_names).sortBy("total_exp").last().value();
 
     const subject_level = panel_args.subject.level;
@@ -294,7 +274,6 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       ...panel_args,
       largest_measure_name,
       largest_measure_exp,
-      largest_measure_share,
       ...(subject_level === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
           covid_expenditures,
