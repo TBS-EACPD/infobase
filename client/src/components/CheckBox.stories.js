@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { CheckBox } from "../components/CheckBox.js";
+import { CheckBox } from "./CheckBox.js";
 
 export default {
   title: "Input/CheckBox",
