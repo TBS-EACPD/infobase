@@ -82,7 +82,7 @@ export const PageSelector = ({
       <td colSpan={num_col}>
         <div style={{ padding: "10px" }}>
           <div className="frow">
-            <div className="fcol-xs-4">
+            <div className="fcol-xs-4" style={{ flexWrap: "wrap" }}>
               {current_page !== 0 && (
                 <Fragment>
                   <button
@@ -101,7 +101,10 @@ export const PageSelector = ({
                 </Fragment>
               )}
             </div>
-            <div className="fcol-xs-4 d-flex justify-content-center">
+            <div
+              className="fcol-xs-4 d-flex justify-content-center"
+              style={{ flexWrap: "wrap" }}
+            >
               {_.map(
                 _.range(current_page - 2, current_page + 3),
                 (num) =>
@@ -120,7 +123,10 @@ export const PageSelector = ({
                   )
               )}
             </div>
-            <div className="fcol-xs-4 d-flex justify-content-end">
+            <div
+              className="fcol-xs-4 d-flex justify-content-end"
+              style={{ flexWrap: "wrap" }}
+            >
               {current_page !== num_pages && (
                 <Fragment>
                   <button
