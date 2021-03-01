@@ -14,3 +14,9 @@ button.display_table__util-icon {
     transform: scale(1.15);
   }
 }
+
+.page-selector {
+  color: $textLightColor !important;
+  background-color: $primaryColor !important;
+  border-right: 1px solid $separatorColor !important;
+}
