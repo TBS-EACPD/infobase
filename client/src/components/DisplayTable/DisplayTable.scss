@@ -99,11 +99,8 @@ table.display-table:not(.no-total-row) > tbody > tr > td {
   border-right: 1px solid $separatorColor !important;
 }
 
-table.display-table:not(.no-total-row) > tbody > tr:last-child {
-  background-color: $primaryColor;
-}
-
-table.display-table:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
+.total-row {
+  background-color: $primaryColor !important;
   border-right: 1px solid $separatorColor !important;
 }
 

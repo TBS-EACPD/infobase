@@ -19,6 +19,7 @@ import {
   DisplayTableDownloadCsv,
   DisplayTableColumnToggle,
   PageSelector,
+  PageinateBySelector,
 } from "./DisplayTableUtils.js";
 
 import text from "./DisplayTable.yaml";
@@ -303,9 +304,14 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
-    const num_pages = _.toInteger(
-      paginate_by ? _.size(sorted_filtered_data) / paginate_by : -1
-    ); //start counting from 0 (-1 from the literal amount of pages)
+    const num_pages_exact = paginate_by
+      ? _.size(sorted_filtered_data) / paginate_by
+      : -1;
+
+    const num_pages =
+      num_pages_exact >= 0 && _.isInteger(num_pages_exact) //if we have the exact amount of items to fill an entire page, it will start a new empty page
+        ? num_pages_exact - 1 //thus we want to get rid of the extra page (as it has no content)
+        : _.toInteger(num_pages_exact); //start counting from 0 (-1 from the literal amount of pages)
 
     const paginated_data = _.chunk(
       sorted_filtered_data,
@@ -314,6 +320,10 @@ export class DisplayTable extends React.Component {
 
     const change_page = (page) => {
       this.setState({ current_page: page });
+    };
+
+    const change_paginate_by = (new_paginate_by) => {
+      this.setState({ paginate_by: new_paginate_by, current_page: 0 });
     };
 
     return (
@@ -352,18 +362,29 @@ export class DisplayTable extends React.Component {
             {util_components_with_defaults && (
               <tr>
                 <td
-                  style={{ padding: "8px 8px 0px 0px" }}
+                  style={{ padding: "8px 8px 0px 8px" }}
                   colSpan={_.size(visible_col_keys)}
                 >
-                  <div className={"display-table-container__utils"}>
-                    <button
-                      tabIndex={0}
-                      className={"skip-to-data"}
-                      onClick={() => this.refs.first_data.focus()}
-                    >
-                      {text_maker("skip_to_data")}
-                    </button>
-                    {_.map(util_components_with_defaults)}
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div>
+                      <PageinateBySelector
+                        selected={paginate_by}
+                        on_select={change_paginate_by}
+                        num_items={_.size(sorted_filtered_data)}
+                      />
+                    </div>
+                    <div className={"display-table-container__utils"}>
+                      <button
+                        tabIndex={0}
+                        className={"skip-to-data"}
+                        onClick={() => this.refs.first_data.focus()}
+                      >
+                        {text_maker("skip_to_data")}
+                      </button>
+                      {_.map(util_components_with_defaults)}
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -419,7 +440,10 @@ export class DisplayTable extends React.Component {
                                 key === column_key ? search_value : value
                             );
 
-                            this.setState({ searches: updated_searches });
+                            this.setState({
+                              searches: updated_searches,
+                              current_page: 0,
+                            });
                           }}
                           debounceTime={300}
                         />
@@ -467,7 +491,7 @@ export class DisplayTable extends React.Component {
                 </tr>
               ))}
               {is_total_exist && (
-                <tr key="total_row">
+                <tr key="total_row" className="total-row">
                   <td className="total_color">{text_maker("total")}</td>
                   {_.chain(visible_ordered_col_keys)
                     .tail()
