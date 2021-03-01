@@ -24,7 +24,7 @@ covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
     As of **{{COVID_LAST_REFRESHED_MONTH}}**, the organization with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}**,
-    with **{{fmt_compact1_written largest_dept_exp}}** spent. This represents **{{fmt_percentage2 largest_dept_share}}** of the government's total
+    with **{{fmt_compact1_written largest_dept_exp}}** spent. This represents **{{fmt_percentage2 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** of the government's total
     **{{est_in_year}}** COVID-19 expenditures.
   fr: |
     TODO
@@ -33,7 +33,7 @@ covid_expenditures_measure_tab_text_gov:
   transform: [handlebars,markdown]
   en: |
     As of **{{COVID_LAST_REFRESHED_MONTH}}**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}**,
-    with **{{fmt_compact1_written largest_measure_exp}}** spent. This represents **{{fmt_percentage2 largest_measure_share}}** of the government's total
+    with **{{fmt_compact1_written largest_measure_exp}}** spent. This represents **{{fmt_percentage2 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** of the government's total
     **{{est_in_year}}** COVID-19 expenditures.
   fr: |
     TODO
@@ -58,8 +58,4 @@ covid_top_spending_measures:
   fr: TODO
 covid_all_other_measures:
   en: All Other COVID-19 Measures
-  fr: TODO
-
-covid_share_of_total:
-  en: Portion of total (%)
   fr: TODO
