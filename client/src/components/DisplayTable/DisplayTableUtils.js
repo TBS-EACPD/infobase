@@ -90,13 +90,13 @@ export const PageSelector = ({
                     style={{ marginRight: "5px" }}
                     onClick={() => change_page(0)}
                   >
-                    First
+                    {text_maker("first")}
                   </button>
                   <button
                     className="btn-ib-light"
                     onClick={() => change_page(current_page - 1)}
                   >
-                    Previous
+                    {text_maker("previous")}
                   </button>
                 </Fragment>
               )}
@@ -128,13 +128,13 @@ export const PageSelector = ({
                     style={{ marginRight: "5px" }}
                     onClick={() => change_page(current_page + 1)}
                   >
-                    Next
+                    {text_maker("next")}
                   </button>
                   <button
                     className="btn-ib-light"
                     onClick={() => change_page(num_pages)}
                   >
-                    Last
+                    {text_maker("last")}
                   </button>
                 </Fragment>
               )}
@@ -145,7 +145,7 @@ export const PageSelector = ({
           <div style={{ padding: "2.5px 10px 0px" }}>
             <Select
               options={options}
-              placeholder="Select page"
+              placeholder={text_maker("select_page")}
               key={current_page}
               styles={{
                 menu: (provided) => ({
@@ -188,8 +188,8 @@ export const PageinateBySelector = ({ selected, on_select, num_items }) => {
     <DropdownMenu
       opened_button_class_name={"btn-ib-light--reversed"}
       closed_button_class_name={"btn-ib-light"}
-      button_description={""}
-      dropdown_trigger_txt={"Items per page"}
+      button_description={text_maker("items_per_page_description")}
+      dropdown_trigger_txt={text_maker("items_per_page")}
       dropdown_content={dropdown_content}
     />
   );
