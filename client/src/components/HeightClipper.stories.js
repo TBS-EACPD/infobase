@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HeightClipper } from "../components/HeightClipper.js";
+import { HeightClipper } from "./HeightClipper.js";
 
 export default {
   title: "HeightClipper",
