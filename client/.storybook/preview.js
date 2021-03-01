@@ -1,7 +1,15 @@
 import { addDecorator } from "@storybook/react";
 import { withConsole } from "@storybook/addon-console";
-import "src/extended_bootstrap_css/extended_bootstrap_index.side-effects.js";
-import "src/common_css/common_css_index.side-effects.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "src/extended_bootstrap_css/wet-bootstrap3-holdovers.scss";
+import "src/extended_bootstrap_css/bootstrap-wet-fixes-extensions.scss";
+import "src/extended_bootstrap_css/container-page.scss";
+
+import "src/common_css/site.scss";
+import "src/common_css/grid-system.scss";
+import "src/common_css/flexbox-grid.scss";
+import "src/common_css/charts.scss";
+import "src/common_css/tables.scss";
 
 const a11y_options = {
   element: "#root",
