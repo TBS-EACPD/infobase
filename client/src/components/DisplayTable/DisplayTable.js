@@ -82,23 +82,9 @@ export class DisplayTable extends React.Component {
       sort_by,
       descending: false,
       searches,
-      paginate_by: 10,
+      state_paginate_by: 10,
       current_page: 0,
     };
-  }
-
-  static getDerivedStateFromProps(next_props, prev_state) {
-    if (
-      next_props.paginate_by &&
-      next_props.paginate_by !== prev_state.paginate_by
-    ) {
-      return {
-        paginate_by: next_props.paginate_by,
-        current_page: 0,
-      };
-    }
-
-    return null;
   }
 
   render() {
@@ -126,13 +112,14 @@ export class DisplayTable extends React.Component {
       }
       */,
       util_components,
+      size_to_paginate,
     } = this.props;
     const {
       sort_by,
       descending,
       searches,
       visible_col_keys,
-      paginate_by,
+      state_paginate_by,
       current_page,
     } = this.state;
 
@@ -291,6 +278,11 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
+    const paginate_by =
+      size_to_paginate && _.size(sorted_filtered_data) > size_to_paginate
+        ? state_paginate_by
+        : 0;
+
     const num_pages_exact = paginate_by
       ? _.size(sorted_filtered_data) / paginate_by
       : -1;
@@ -310,8 +302,10 @@ export class DisplayTable extends React.Component {
     };
 
     const change_paginate_by = (new_paginate_by) => {
-      this.setState({ paginate_by: new_paginate_by, current_page: 0 });
+      this.setState({ state_paginate_by: new_paginate_by, current_page: 0 });
     };
+
+    const show_pagination_controls = num_pages >= 0;
 
     return (
       <div
@@ -337,7 +331,7 @@ export class DisplayTable extends React.Component {
             </div>
           </caption>
           <thead>
-            {num_pages >= 0 && (
+            {show_pagination_controls && (
               <PageSelector
                 num_pages={num_pages}
                 current_page={current_page}
@@ -356,11 +350,13 @@ export class DisplayTable extends React.Component {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <div>
-                      <PageinateBySelector
-                        selected={paginate_by}
-                        on_select={change_paginate_by}
-                        num_items={_.size(sorted_filtered_data)}
-                      />
+                      {show_pagination_controls && (
+                        <PageinateBySelector
+                          selected={paginate_by}
+                          on_select={change_paginate_by}
+                          num_items={_.size(sorted_filtered_data)}
+                        />
+                      )}
                     </div>
                     <div className={"display-table-container__utils"}>
                       <button
@@ -526,7 +522,7 @@ export class DisplayTable extends React.Component {
                     .value()}
                 </tr>
               )}
-              {num_pages >= 0 && (
+              {show_pagination_controls && (
                 <PageSelector
                   num_pages={num_pages}
                   current_page={current_page}
@@ -552,7 +548,13 @@ export class DisplayTable extends React.Component {
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
 export class SmartDisplayTable extends React.Component {
   render() {
-    const { data, show_search, show_sort, column_configs } = this.props;
+    const {
+      data,
+      show_search,
+      show_sort,
+      column_configs,
+      size_to_paginate,
+    } = this.props;
     const col_configs_with_defaults = get_col_configs_with_defaults(
       column_configs
     );
@@ -568,7 +570,11 @@ export class SmartDisplayTable extends React.Component {
       })
     );
     return (
-      <DisplayTable {...this.props} column_configs={smart_column_configs} />
+      <DisplayTable
+        {...this.props}
+        column_configs={smart_column_configs}
+        size_to_paginate={size_to_paginate || 25}
+      />
     );
   }
 }
