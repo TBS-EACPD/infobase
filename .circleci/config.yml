@@ -159,7 +159,7 @@ jobs:
             - prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 256 -c "none")
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 4096 -c "none")
       - save_cache:
           paths:
             - client/build
