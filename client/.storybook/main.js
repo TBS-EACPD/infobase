@@ -18,11 +18,10 @@ module.exports = {
     // You can change the configuration based on that.
     // 'PRODUCTION' is used when building the static version of storybook.
 
-    config.resolve.modules = [
-      ...config.resolve.modules,
-      std_lib_path.resolve(__dirname, "../"),
-      "node_modules/",
-    ];
+    config.resolve = {
+      ...config.resolve,
+      modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
+    };
 
     // TODO hacky, this is essentially to set injected_build_constants.js's lang export.
     // Going to have components that need other injected build constants though, and might
