@@ -13,7 +13,7 @@ covid_expenditures_overview_tab_text:
   transform: [handlebars,markdown]
   en: |
     As of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{fmt_compact1_written gov_covid_expenditures_in_year}}** has been spent towards implementing the
-    government's response to the COVID-19 pandemic in **{{est_in_year}}**. By organization, the largest portion of this
+    government's response to the COVID-19 pandemic in **{{est_last_year}}**. By organization, the largest portion of this
     (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}**) was spent by **{{top_spending_org_name}}**.
     By COVID-19 Measure, the largest portion (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
     was spent on **{{top_spending_measure_name}}**.
@@ -23,25 +23,25 @@ covid_expenditures_overview_tab_text:
 covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{COVID_LAST_REFRESHED_MONTH}}**, the organization with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_dept_name}}**,
+    As of **{{COVID_LAST_REFRESHED_MONTH}}**, the organization with the largest COVID-19 related expenditures in **{{est_last_year}}** is **{{largest_dept_name}}**,
     with **{{fmt_compact1_written largest_dept_exp}}** spent. This represents **{{fmt_percentage2 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** of the government's total
-    **{{est_in_year}}** COVID-19 expenditures.
+    **{{est_last_year}}** COVID-19 expenditures.
   fr: |
     TODO
 
 covid_expenditures_measure_tab_text_gov:
   transform: [handlebars,markdown]
   en: |
-    As of **{{COVID_LAST_REFRESHED_MONTH}}**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_in_year}}** is **{{largest_measure_name}}**,
+    As of **{{COVID_LAST_REFRESHED_MONTH}}**, the COVID-19 measure with the largest COVID-19 related expenditures in **{{est_last_year}}** is **{{largest_measure_name}}**,
     with **{{fmt_compact1_written largest_measure_exp}}** spent. This represents **{{fmt_percentage2 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** of the government's total
-    **{{est_in_year}}** COVID-19 expenditures.
+    **{{est_last_year}}** COVID-19 expenditures.
   fr: |
     TODO
 covid_expenditures_measure_tab_text_dept:
   transform: [handlebars,markdown]
   en: |
     As of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{subject.name}}** has spent **{{fmt_compact1_written dept_covid_expenditures_in_year}}** towards implementing the
-    government's response to the COVID-19 pandemic in **{{est_in_year}}**. The largest portion of this spending, **{{fmt_compact1_written largest_measure_exp}}**
+    government's response to the COVID-19 pandemic in **{{est_last_year}}**. The largest portion of this spending, **{{fmt_compact1_written largest_measure_exp}}**
     (**{{fmt_percentage1 (divide largest_measure_exp dept_covid_expenditures_in_year)}}**), was towards the measure **{{largest_measure_name}}**.
   fr: |
     TODO
