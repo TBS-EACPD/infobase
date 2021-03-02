@@ -3,6 +3,8 @@
 //fse just adds the ability to do 'cp -r' to the regular filesystem tools for node
 const fs = require("fs");
 
+const path = require("path");
+
 const d3_dsv = require("d3-dsv");
 const fse = require("fs-extra");
 const gitsha = require("git-bundle-sha");
@@ -274,7 +276,7 @@ function build_proj(PROJ) {
   console.log("\n done copying static assets \n");
 
   console.log("\n bundling extended bootstrap css... \n");
-  bundle_extended_bootstrap_css(app_dir);
+  bundle_extended_bootstrap_css(path.resolve(__dirname, `../${app_dir}`));
 }
 
 build_proj(IB);

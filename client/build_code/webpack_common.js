@@ -12,7 +12,7 @@ const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
 
-const get_rules = ({ target_ie11, language, is_prod_build }) => {
+const get_rules = ({ language, target_ie11, is_prod_build }) => {
   const js_module_loader_rules = [
     {
       loader: "babel-loader",
@@ -228,10 +228,10 @@ function create_config({
   stats_no_compare,
 }) {
   const new_output = _.clone(output);
+  new_output.publicPath = `${CDN_URL}/app/`;
   if (CDN_URL !== ".") {
     new_output.crossOriginLoading = "anonymous";
   }
-  new_output.publicPath = `${CDN_URL}/app/`;
 
   return {
     name: language,
@@ -241,7 +241,11 @@ function create_config({
     entry,
     output: new_output,
     module: {
-      rules: get_rules({ target_ie11, language, is_prod_build }),
+      rules: get_rules({
+        target_ie11,
+        language,
+        is_prod_build,
+      }),
       noParse: /\.csv$/,
     },
     plugins: get_plugins({
@@ -266,4 +270,5 @@ function create_config({
 
 module.exports = exports = {
   create_config,
+  get_rules,
 };
