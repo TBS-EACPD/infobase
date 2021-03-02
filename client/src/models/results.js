@@ -390,10 +390,12 @@ const dp_docs = build_doc_info_objects("dp", [
       "{{planning_year_2}}",
       "{{planning_year_3}}",
     ],
-    doc_url_en: null, //DP_TODO
-    doc_url_fr: null, //DP_TODO
-    late_results_orgs: [125, 244],
-    late_resources_orgs: [125, 244, 151],
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2021-22-departmental-plans.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2021-2022.html",
+    late_results_orgs: [125],
+    late_resources_orgs: [125, 151],
   },
 ]);
 const result_docs = {
