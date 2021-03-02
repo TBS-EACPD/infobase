@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
-const path = require("path");
-
 const webpack = require("webpack");
 
-function bundle_extended_bootstrap_css(app_dir) {
+function bundle_extended_bootstrap_css(output_path) {
   const MiniCssExtractPlugin = require("mini-css-extract-plugin");
   const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
   const FilterChunkWebpackPlugin = require("filter-chunk-webpack-plugin");
@@ -15,7 +13,7 @@ function bundle_extended_bootstrap_css(app_dir) {
       "./src/extended_bootstrap_css/extended_bootstrap_index.side-effects.js",
     ],
     output: {
-      path: path.resolve(__dirname, `../${app_dir}`),
+      path: output_path,
     },
     optimization: {
       minimize: true,
