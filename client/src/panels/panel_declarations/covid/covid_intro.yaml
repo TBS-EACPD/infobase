@@ -20,6 +20,6 @@ covid_intro_dynamic_text:
   transform: [handlebars,markdown]
   en: |
     In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{orgs_with_authorities}}** organizations
-    across the Government of Canada have been granted authorities to spend in support of the **{{measures_with_authorities}}** measures presented in the Estimates.
+    across the Government of Canada have been granted authorities to spend in support of the **{{measures_with_authorities}}** COVID-19 measures presented in the Estimates.
   fr: |
     TODO
