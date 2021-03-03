@@ -34,14 +34,13 @@ export class Typeahead extends React.Component {
 
     this.typeahead_ref = React.createRef();
     this.list_ref = React.createRef();
-    this.pageinate_status_ref = React.createRef();
 
     this.menu_id = _.uniqueId("typeahead-");
 
     this.state = {
       query_value: "",
       may_show_menu: false,
-      matching_results_by_page: [],
+      matching_results: [],
       selection_cursor: this.default_selection_cursor,
       current_search_configs: props.search_configs,
       list_height: 400,
@@ -53,7 +52,7 @@ export class Typeahead extends React.Component {
 
     if (search_configs !== current_search_configs) {
       return {
-        matching_results_by_page: [],
+        matching_results: [],
         current_search_configs: search_configs,
       };
     } else {
@@ -71,7 +70,7 @@ export class Typeahead extends React.Component {
       query_value !== prev_query_value ||
       current_search_configs !== prev_search_configs
     ) {
-      const matching_results_by_page = !this.show_menu
+      const matching_results = !this.show_menu
         ? []
         : _.filter(this.all_options, ({ config_group_index, data }) =>
             // could use optional chaining, but we WANT this to fail fast and loud, to catch
@@ -83,7 +82,7 @@ export class Typeahead extends React.Component {
           );
 
       this.setState({
-        matching_results_by_page,
+        matching_results,
         selection_cursor: this.default_selection_cursor,
       });
     }
@@ -115,21 +114,18 @@ export class Typeahead extends React.Component {
       utility_buttons,
     } = this.props;
 
-    const { query_value, selection_cursor, list_height } = this.state;
+    const {
+      query_value,
+      selection_cursor,
+      list_height,
+      matching_results,
+    } = this.state;
 
     const derived_menu_state = this.derived_menu_state;
-    const {
-      results_on_page,
-      total_matching_results,
-      cursor_offset,
-    } = derived_menu_state;
+    const { total_matching_results, cursor_offset } = derived_menu_state;
 
     const list_items = _.compact([
-      <li
-        key="header"
-        className="typeahead__header"
-        ref={this.pageinate_status_ref}
-      >
+      <li key="header" className="typeahead__header">
         <TM
           k="paginate_status"
           args={{
@@ -137,7 +133,7 @@ export class Typeahead extends React.Component {
           }}
         />
       </li>,
-      ..._.chain(results_on_page)
+      ..._.chain(matching_results)
         .groupBy("config_group_index")
         .flatMap((results, group_index) =>
           _.map(results, (result, index) => ({
@@ -242,12 +238,12 @@ export class Typeahead extends React.Component {
                   >
                     {({ measure, registerChild }) => (
                       <div ref={registerChild} style={style}>
-                        {_.isEmpty(results_on_page) && (
+                        {_.isEmpty(matching_results) && (
                           <li className="typeahead__header">
                             {text_maker("no_matches_found")}
                           </li>
                         )}
-                        {!_.isEmpty(results_on_page) && list_items[index]}
+                        {!_.isEmpty(matching_results) && list_items[index]}
                       </div>
                     )}
                   </CellMeasurer>
@@ -304,29 +300,27 @@ export class Typeahead extends React.Component {
   }
 
   get derived_menu_state() {
-    const { matching_results_by_page, selection_cursor } = this.state;
+    const { matching_results, selection_cursor } = this.state;
 
-    const total_matching_results = _.flatten(matching_results_by_page).length;
-
-    const results_on_page = matching_results_by_page || [];
+    const total_matching_results = _.flatten(matching_results).length;
 
     const first_node_of_groups = _.uniqBy(
-      results_on_page,
+      matching_results,
       (datum) => datum.data.constructor.name
     );
 
-    const num_headers = _.size(first_node_of_groups) + 1;
+    const num_headers = _.size(first_node_of_groups) + 1; // + 1 status header always present
 
-    const total_menu_items = results_on_page.length + num_headers;
+    const total_menu_items = matching_results.length + num_headers;
 
     const index_of_group_headers = _.map(
       first_node_of_groups,
-      (node, index) => _.indexOf(results_on_page, node) + 1 + index // (+ 1): header always present; (+ index): headers will push index down by one each time
+      (node, index) => _.indexOf(matching_results, node) + 1 + index // (+ 1): status header always present; (+ index): headers will push index down by one each time
     );
 
     const index_of_first_nodes = _.map(
       first_node_of_groups,
-      (node, index) => _.indexOf(results_on_page, node) + 1 + (index + 1) // (+ 1): header always present; (index + 1): headers push index of results
+      (node, index) => _.indexOf(matching_results, node) + 1 + (index + 1) // (+ 1): status header always present; (index + 1): headers push index of results
     );
 
     const cursor_offset = _.reduce(
@@ -336,7 +330,6 @@ export class Typeahead extends React.Component {
     );
 
     return {
-      results_on_page,
       total_matching_results,
       total_menu_items,
       index_of_group_headers,
@@ -352,7 +345,7 @@ export class Typeahead extends React.Component {
     Maybe easier to write, but worse for maintenance. Should claw all that scattered logic back and make 
     this a state machine providing directly useful values.
     i.e. this.default_selection_cursor = "input", all of the logic for what's next after "input" lives in 
-    these getters, and they either return a meaningful string or the actual index of an item from results_on_page
+    these getters, and they either return a meaningful string or the actual index of an item from matching_results
   */
   default_selection_cursor = -1;
   get previous_selection_cursor() {
@@ -366,10 +359,7 @@ export class Typeahead extends React.Component {
       return total_menu_items - 1;
     } else if (selection_cursor - 1 === index_of_group_headers[0]) {
       return this.default_selection_cursor;
-    } else if (
-      _.includes(index_of_group_headers, selection_cursor - 1) ||
-      selection_cursor - 1 === 0
-    ) {
+    } else if (_.includes(index_of_group_headers, selection_cursor - 1)) {
       return selection_cursor - 2;
     } else {
       return selection_cursor - 1;
@@ -442,8 +432,8 @@ export class Typeahead extends React.Component {
 
       if (!_.isNull(active_item)) {
         active_item.click();
-      } else if (!_.isEmpty(this.state.matching_results_by_page)) {
-        this.setState({ selection_cursor: this.default_selection_cursor + 1 });
+      } else if (!_.isEmpty(this.state.matching_results)) {
+        this.setState({ selection_cursor: 2 });
       }
     }
   };
