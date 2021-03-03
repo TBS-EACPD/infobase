@@ -75,7 +75,6 @@ export const TypeaheadA11yStatus = ({
   needs_pagination_down_control,
   total_menu_items,
   cursor_offset,
-  index_of_first_nodes,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
