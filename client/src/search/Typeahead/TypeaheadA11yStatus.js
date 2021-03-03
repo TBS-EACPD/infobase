@@ -74,10 +74,12 @@ export const TypeaheadA11yStatus = ({
   needs_pagination_up_control,
   needs_pagination_down_control,
   total_menu_items,
+  cursor_offset,
+  index_of_first_nodes,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
-      if (needs_pagination_up_control && selection_cursor === 0) {
+      if (needs_pagination_up_control && selection_cursor === 1) {
         return text_maker("paginate_previous", {
           page_size,
         });
@@ -90,11 +92,14 @@ export const TypeaheadA11yStatus = ({
 
       const selected_name =
         results_on_page[
-          needs_pagination_up_control ? selection_cursor - 1 : selection_cursor
+          needs_pagination_up_control
+            ? selection_cursor - cursor_offset - 1
+            : selection_cursor - cursor_offset
         ].name;
 
       const selected_position = (() => {
-        const base_position = page_range_start + selection_cursor;
+        const base_position =
+          page_range_start + (selection_cursor - cursor_offset);
 
         if (needs_pagination_up_control) {
           return base_position - 1;

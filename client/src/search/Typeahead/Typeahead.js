@@ -34,6 +34,7 @@ export class Typeahead extends React.Component {
 
     this.typeahead_ref = React.createRef();
     this.list_ref = React.createRef();
+    this.pageinate_status_ref = React.createRef();
 
     this.menu_id = _.uniqueId("typeahead-");
 
@@ -96,17 +97,23 @@ export class Typeahead extends React.Component {
       const active_item = this.active_item;
 
       if (active_item) {
-        active_item.scrollIntoView({
-          behaviour: "auto",
-          block: "nearest",
-        });
+        // active_item.scrollIntoView({
+        //   behaviour: "auto",
+        //   block: "nearest",
+        // });
       } else {
-        this.typeahead_ref.current
-          .querySelector(".typeahead__dropdown > *")
-          ?.scrollIntoView({
-            behaviour: "auto",
-            block: "nearest",
-          });
+        // console.log(this.list_ref.current && this.list_ref.current.Grid);
+        // this.pageinate_status_ref.current &&
+        //   this.pageinate_status_ref.current.scrollIntoView({
+        //     behaviour: "auto",
+        //     block: "nearest",
+        //   });
+        // this.typeahead_ref.current
+        //   .querySelector(".typeahead__dropdown > * > *")
+        //   ?.scrollIntoView({
+        //     behaviour: "auto",
+        //     block: "nearest",
+        //   });
       }
     }
 
@@ -155,10 +162,15 @@ export class Typeahead extends React.Component {
       needs_pagination_up_control,
       needs_pagination_down_control,
       total_menu_items,
+      cursor_offset,
     } = derived_menu_state;
 
     const list_items = _.compact([
-      <li key="header" className="typeahead__header">
+      <li
+        key="header"
+        className="typeahead__header"
+        ref={this.pageinate_status_ref}
+      >
         <TM
           k="paginate_status"
           args={{
@@ -172,7 +184,7 @@ export class Typeahead extends React.Component {
         <li
           className={classNames(
             "typeahead__item",
-            0 === selection_cursor && "typeahead__item--active"
+            1 === selection_cursor && "typeahead__item--active"
           )}
           onClick={this.handle_paginate_up}
           role="button"
@@ -208,7 +220,7 @@ export class Typeahead extends React.Component {
               key={`result-${adjusted_result_index}`}
               className={classNames(
                 "typeahead__item",
-                adjusted_result_index === selection_cursor &&
+                adjusted_result_index === selection_cursor - cursor_offset &&
                   "typeahead__item--active"
               )}
               onClick={() => this.handle_result_selection(result)}
@@ -294,6 +306,7 @@ export class Typeahead extends React.Component {
                 height={list_height}
                 width={width}
                 ref={this.list_ref}
+                scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
                 deferredMeasurementCache={cache}
                 rowHeight={cache.rowHeight}
                 rowCount={_.size(list_items)}
@@ -370,7 +383,11 @@ export class Typeahead extends React.Component {
 
   get derived_menu_state() {
     const { page_size } = this.props;
-    const { pagination_cursor, matching_results_by_page } = this.state;
+    const {
+      pagination_cursor,
+      matching_results_by_page,
+      selection_cursor,
+    } = this.state;
 
     const total_matching_results = _.flatten(matching_results_by_page).length;
 
@@ -391,15 +408,47 @@ export class Typeahead extends React.Component {
     const needs_pagination_down_control =
       page_range_end < total_matching_results;
 
+    const first_node_of_groups = _.uniqBy(
+      results_on_page,
+      (datum) => datum.data.constructor.name
+    );
+
+    const num_headers = _.size(first_node_of_groups) + 1;
+
     const total_menu_items = (() => {
+      const num_results_on_page = results_on_page.length + num_headers;
       if (needs_pagination_up_control && needs_pagination_down_control) {
-        return results_on_page.length + 2;
+        return num_results_on_page + 2;
       } else if (needs_pagination_up_control || needs_pagination_down_control) {
-        return results_on_page.length + 1;
+        return num_results_on_page + 1;
       } else {
-        return results_on_page.length;
+        return num_results_on_page;
       }
     })();
+
+    const index_of_group_headers = _.map(
+      first_node_of_groups,
+      (node, index) =>
+        _.indexOf(results_on_page, node) +
+        1 +
+        index +
+        needs_pagination_up_control // (+ 1): header always present; (+ index): headers will push index down by one each time
+    );
+
+    const index_of_first_nodes = _.map(
+      first_node_of_groups,
+      (node, index) =>
+        _.indexOf(results_on_page, node) +
+        1 +
+        (index + 1) +
+        needs_pagination_up_control // (+ 1): header always present; (index + 1): headers push index of results
+    );
+
+    const cursor_offset = _.reduce(
+      index_of_first_nodes,
+      (sum, index) => sum + _.toNumber(selection_cursor >= index),
+      1
+    );
 
     return {
       results_on_page,
@@ -410,6 +459,9 @@ export class Typeahead extends React.Component {
       needs_pagination_up_control,
       needs_pagination_down_control,
       total_menu_items,
+      index_of_group_headers,
+      index_of_first_nodes,
+      cursor_offset,
     };
   }
 
@@ -441,20 +493,39 @@ export class Typeahead extends React.Component {
   default_selection_cursor = -1;
   get previous_selection_cursor() {
     const { selection_cursor } = this.state;
-    const { total_menu_items } = this.derived_menu_state;
+    const {
+      total_menu_items,
+      index_of_group_headers,
+      needs_pagination_up_control,
+    } = this.derived_menu_state;
 
     if (selection_cursor === this.default_selection_cursor) {
       return total_menu_items - 1;
+    } else if (selection_cursor - 1 === index_of_group_headers[0]) {
+      return this.default_selection_cursor + 2 * needs_pagination_up_control;
+    } else if (
+      _.includes(index_of_group_headers, selection_cursor - 1) ||
+      selection_cursor - 1 === 0
+    ) {
+      return selection_cursor - 2;
     } else {
       return selection_cursor - 1;
     }
   }
   get next_selection_cursor() {
     const { selection_cursor } = this.state;
-    const { total_menu_items } = this.derived_menu_state;
+    const {
+      total_menu_items,
+      index_of_group_headers,
+      needs_pagination_up_control,
+    } = this.derived_menu_state;
 
     if (selection_cursor === total_menu_items - 1) {
       return this.default_selection_cursor;
+    } else if (selection_cursor + 1 == 0) {
+      return 2 - needs_pagination_up_control;
+    } else if (_.includes(index_of_group_headers, selection_cursor + 1)) {
+      return selection_cursor + 2;
     } else {
       return selection_cursor + 1;
     }
