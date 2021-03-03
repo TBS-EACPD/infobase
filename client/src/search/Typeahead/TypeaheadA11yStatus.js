@@ -63,49 +63,17 @@ class DelayedRender extends React.Component {
 }
 
 export const TypeaheadA11yStatus = ({
-  page_size,
   selection_cursor,
-
   results_on_page,
   total_matching_results,
-  page_range_start,
-  page_range_end,
-  next_page_size,
-  needs_pagination_up_control,
-  needs_pagination_down_control,
-  total_menu_items,
   cursor_offset,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
-      if (needs_pagination_up_control && selection_cursor === 1) {
-        return text_maker("paginate_previous", {
-          page_size,
-        });
-      } else if (
-        needs_pagination_down_control &&
-        selection_cursor === total_menu_items - 1
-      ) {
-        return text_maker("paginate_next", { next_page_size });
-      }
-
       const selected_name =
-        results_on_page[
-          needs_pagination_up_control
-            ? selection_cursor - cursor_offset - 1
-            : selection_cursor - cursor_offset
-        ].name;
+        results_on_page[selection_cursor - cursor_offset].name;
 
-      const selected_position = (() => {
-        const base_position =
-          page_range_start + (selection_cursor - cursor_offset);
-
-        if (needs_pagination_up_control) {
-          return base_position - 1;
-        } else {
-          return base_position;
-        }
-      })();
+      const selected_position = selection_cursor - cursor_offset + 1;
 
       return text_maker("selected_result", {
         total_matching_results,
@@ -121,8 +89,6 @@ export const TypeaheadA11yStatus = ({
           {total_matching_results > 0 &&
             text_maker("menu_with_results_status", {
               total_matching_results,
-              page_range_start,
-              page_range_end,
             })}
         </DelayedRender>
       );

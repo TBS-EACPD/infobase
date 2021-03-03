@@ -42,7 +42,6 @@ export class Typeahead extends React.Component {
       query_value: "",
       may_show_menu: false,
       matching_results_by_page: [],
-      pagination_cursor: this.default_pagination_cursor,
       selection_cursor: this.default_selection_cursor,
       current_search_configs: props.search_configs,
       list_height: 400,
@@ -85,17 +84,11 @@ export class Typeahead extends React.Component {
 
       this.setState({
         matching_results_by_page,
-        pagination_cursor: this.default_pagination_cursor,
         selection_cursor: this.default_selection_cursor,
       });
     }
 
     if (this.list_ref.current) {
-      if (prevState.pagination_cursor !== this.state.pagination_cursor) {
-        cache.clearAll();
-        this.list_ref.current.recomputeRowHeights();
-      }
-
       this.list_ref.current.Grid.measureAllCells();
       const list_height = this.list_ref.current.Grid.getTotalRowsHeight();
       if (list_height !== this.state.list_height) {
@@ -128,12 +121,6 @@ export class Typeahead extends React.Component {
     const {
       results_on_page,
       total_matching_results,
-      page_range_start,
-      page_range_end,
-      next_page_size,
-      needs_pagination_up_control,
-      needs_pagination_down_control,
-      total_menu_items,
       cursor_offset,
     } = derived_menu_state;
 
@@ -146,8 +133,6 @@ export class Typeahead extends React.Component {
         <TM
           k="paginate_status"
           args={{
-            page_range_start,
-            page_range_end,
             total_matching_results,
           }}
         />
@@ -162,9 +147,7 @@ export class Typeahead extends React.Component {
           }))
         )
         .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
-          const adjusted_result_index = needs_pagination_up_control
-            ? result_index + 1
-            : result_index;
+          const adjusted_result_index = result_index;
 
           return [
             is_first_in_group && (
@@ -321,31 +304,11 @@ export class Typeahead extends React.Component {
   }
 
   get derived_menu_state() {
-    const { page_size } = this.props;
-    const {
-      pagination_cursor,
-      matching_results_by_page,
-      selection_cursor,
-    } = this.state;
+    const { matching_results_by_page, selection_cursor } = this.state;
 
     const total_matching_results = _.flatten(matching_results_by_page).length;
 
     const results_on_page = matching_results_by_page || [];
-
-    const page_range_start = pagination_cursor * page_size + 1;
-    const page_range_end = page_range_start + results_on_page.length - 1;
-
-    const remaining_results =
-      (pagination_cursor + 1) * page_size < total_matching_results
-        ? total_matching_results - (pagination_cursor + 1) * page_size
-        : 0;
-
-    const next_page_size =
-      remaining_results < page_size ? remaining_results : page_size;
-
-    const needs_pagination_up_control = pagination_cursor > 0;
-    const needs_pagination_down_control =
-      page_range_end < total_matching_results;
 
     const first_node_of_groups = _.uniqBy(
       results_on_page,
@@ -354,33 +317,16 @@ export class Typeahead extends React.Component {
 
     const num_headers = _.size(first_node_of_groups) + 1;
 
-    const total_menu_items = (() => {
-      const num_results_on_page = results_on_page.length + num_headers;
-      if (needs_pagination_up_control && needs_pagination_down_control) {
-        return num_results_on_page + 2;
-      } else if (needs_pagination_up_control || needs_pagination_down_control) {
-        return num_results_on_page + 1;
-      } else {
-        return num_results_on_page;
-      }
-    })();
+    const total_menu_items = results_on_page.length + num_headers;
 
     const index_of_group_headers = _.map(
       first_node_of_groups,
-      (node, index) =>
-        _.indexOf(results_on_page, node) +
-        1 +
-        index +
-        needs_pagination_up_control // (+ 1): header always present; (+ index): headers will push index down by one each time
+      (node, index) => _.indexOf(results_on_page, node) + 1 + index // (+ 1): header always present; (+ index): headers will push index down by one each time
     );
 
     const index_of_first_nodes = _.map(
       first_node_of_groups,
-      (node, index) =>
-        _.indexOf(results_on_page, node) +
-        1 +
-        (index + 1) +
-        needs_pagination_up_control // (+ 1): header always present; (index + 1): headers push index of results
+      (node, index) => _.indexOf(results_on_page, node) + 1 + (index + 1) // (+ 1): header always present; (index + 1): headers push index of results
     );
 
     const cursor_offset = _.reduce(
@@ -392,32 +338,11 @@ export class Typeahead extends React.Component {
     return {
       results_on_page,
       total_matching_results,
-      page_range_start,
-      page_range_end,
-      next_page_size,
-      needs_pagination_up_control,
-      needs_pagination_down_control,
       total_menu_items,
       index_of_group_headers,
       index_of_first_nodes,
       cursor_offset,
     };
-  }
-
-  default_pagination_cursor = 0;
-  get previous_pagination_cursor() {
-    return _.max([
-      this.default_pagination_cursor,
-      this.state.pagination_cursor - 1,
-    ]);
-  }
-  get next_pagination_cursor() {
-    const { matching_results_by_page } = this.state;
-
-    return _.min([
-      this.state.pagination_cursor + 1,
-      matching_results_by_page.length - 1,
-    ]);
   }
 
   /*
@@ -435,13 +360,12 @@ export class Typeahead extends React.Component {
     const {
       total_menu_items,
       index_of_group_headers,
-      needs_pagination_up_control,
     } = this.derived_menu_state;
 
     if (selection_cursor === this.default_selection_cursor) {
       return total_menu_items - 1;
     } else if (selection_cursor - 1 === index_of_group_headers[0]) {
-      return this.default_selection_cursor + 2 * needs_pagination_up_control;
+      return this.default_selection_cursor;
     } else if (
       _.includes(index_of_group_headers, selection_cursor - 1) ||
       selection_cursor - 1 === 0
@@ -456,13 +380,12 @@ export class Typeahead extends React.Component {
     const {
       total_menu_items,
       index_of_group_headers,
-      needs_pagination_up_control,
     } = this.derived_menu_state;
 
     if (selection_cursor === total_menu_items - 1) {
       return this.default_selection_cursor;
     } else if (selection_cursor + 1 == 0) {
-      return 2 - needs_pagination_up_control;
+      return 2;
     } else if (_.includes(index_of_group_headers, selection_cursor + 1)) {
       return selection_cursor + 2;
     } else {
@@ -498,18 +421,6 @@ export class Typeahead extends React.Component {
     this.setState({
       may_show_menu: true,
       query_value: trimmed_input_value,
-    });
-  };
-
-  handle_paginate_up = () => {
-    this.setState({
-      pagination_cursor: this.previous_pagination_cursor,
-    });
-  };
-  handle_paginate_down = () => {
-    this.setState({
-      pagination_cursor: this.next_pagination_cursor,
-      selection_cursor: this.default_selection_cursor,
     });
   };
 
@@ -573,7 +484,6 @@ export class Typeahead extends React.Component {
 Typeahead.defaultProps = {
   placeholder: text_maker("org_search"),
   min_length: 3,
-  page_size: 30,
   on_query: _.noop,
   on_select: _.noop,
 };
