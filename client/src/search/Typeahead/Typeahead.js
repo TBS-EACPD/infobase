@@ -62,8 +62,6 @@ export class Typeahead extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { page_size } = this.props;
-
     const { query_value, current_search_configs } = this.state;
     const {
       query_value: prev_query_value,
@@ -76,45 +74,20 @@ export class Typeahead extends React.Component {
     ) {
       const matching_results_by_page = !this.show_menu
         ? []
-        : _.chain(this.all_options)
-            .filter(({ config_group_index, data }) =>
-              // could use optional chaining, but we WANT this to fail fast and loud, to catch
-              // malformed search_configs during development. Should be safe otherwsie
-              this.config_groups[config_group_index].group_filter(
-                query_value,
-                data
-              )
+        : _.filter(this.all_options, ({ config_group_index, data }) =>
+            // could use optional chaining, but we WANT this to fail fast and loud, to catch
+            // malformed search_configs during development. Should be safe otherwsie
+            this.config_groups[config_group_index].group_filter(
+              query_value,
+              data
             )
-            .chunk(page_size)
-            .value();
+          );
 
       this.setState({
         matching_results_by_page,
         pagination_cursor: this.default_pagination_cursor,
         selection_cursor: this.default_selection_cursor,
       });
-    } else {
-      const active_item = this.active_item;
-
-      if (active_item) {
-        // active_item.scrollIntoView({
-        //   behaviour: "auto",
-        //   block: "nearest",
-        // });
-      } else {
-        // console.log(this.list_ref.current && this.list_ref.current.Grid);
-        // this.pageinate_status_ref.current &&
-        //   this.pageinate_status_ref.current.scrollIntoView({
-        //     behaviour: "auto",
-        //     block: "nearest",
-        //   });
-        // this.typeahead_ref.current
-        //   .querySelector(".typeahead__dropdown > * > *")
-        //   ?.scrollIntoView({
-        //     behaviour: "auto",
-        //     block: "nearest",
-        //   });
-      }
     }
 
     if (this.list_ref.current) {
@@ -146,7 +119,6 @@ export class Typeahead extends React.Component {
       placeholder,
       additional_a11y_description,
       min_length,
-      page_size,
       utility_buttons,
     } = this.props;
 
@@ -180,22 +152,6 @@ export class Typeahead extends React.Component {
           }}
         />
       </li>,
-      needs_pagination_up_control && (
-        <li
-          className={classNames(
-            "typeahead__item",
-            1 === selection_cursor && "typeahead__item--active"
-          )}
-          onClick={this.handle_paginate_up}
-          role="button"
-        >
-          <a className="typeahead__control">
-            <span className="aria-hidden">▲</span>
-            <br />
-            <TM k="paginate_previous" args={{ page_size: page_size }} />
-          </a>
-        </li>
-      ),
       ..._.chain(results_on_page)
         .groupBy("config_group_index")
         .flatMap((results, group_index) =>
@@ -235,23 +191,6 @@ export class Typeahead extends React.Component {
         })
         .compact()
         .value(),
-      needs_pagination_down_control && (
-        <li
-          className={classNames(
-            "typeahead__item",
-            total_menu_items - 1 === selection_cursor &&
-              "typeahead__item--active"
-          )}
-          onClick={this.handle_paginate_down}
-          role="button"
-        >
-          <a className="typeahead__control">
-            <TM k="paginate_next" args={{ next_page_size: next_page_size }} />
-            <br />
-            <span className="aria-hidden">▼</span>
-          </a>
-        </li>
-      ),
     ]);
 
     return (
@@ -391,7 +330,7 @@ export class Typeahead extends React.Component {
 
     const total_matching_results = _.flatten(matching_results_by_page).length;
 
-    const results_on_page = matching_results_by_page[pagination_cursor] || [];
+    const results_on_page = matching_results_by_page || [];
 
     const page_range_start = pagination_cursor * page_size + 1;
     const page_range_end = page_range_start + results_on_page.length - 1;
