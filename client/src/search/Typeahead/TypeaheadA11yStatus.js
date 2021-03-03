@@ -39,6 +39,9 @@ class DelayedRender extends React.Component {
       };
     }
   }
+  componentDidMount() {
+    this.debounceUpdate();
+  }
   componentDidUpdate(prevProps, prevState) {
     const { children: prev_children } = prevState;
     const { children, debounced } = this.state;
@@ -64,14 +67,15 @@ class DelayedRender extends React.Component {
 
 export const TypeaheadA11yStatus = ({
   selection_cursor,
-  results_on_page,
+  matching_results,
   total_matching_results,
   cursor_offset,
+  min_length,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
       const selected_name =
-        results_on_page[selection_cursor - cursor_offset].name;
+        matching_results[selection_cursor - cursor_offset].name;
 
       const selected_position = selection_cursor - cursor_offset + 1;
 
@@ -84,7 +88,7 @@ export const TypeaheadA11yStatus = ({
       // Cases where focus is still on the typeahead input, testing shows the status message update
       // often gets cut off by re-reading the input value, a slight delay fixes that
       return (
-        <DelayedRender>
+        <DelayedRender min_length={min_length}>
           {total_matching_results === 0 && text_maker("no_matches_found")}
           {total_matching_results > 0 &&
             text_maker("menu_with_results_status", {
