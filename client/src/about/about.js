@@ -1,6 +1,16 @@
 import _ from "lodash";
 import React from "react";
 
+import { IconGrid } from "src/components/IconGrid.js";
+
+import { TM } from "src/components/index.js";
+
+import { LabeledTable } from "src/components/LabeledTable.js";
+
+import { create_text_maker } from "src/models/text.js";
+
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+
 import {
   IconHTML,
   IconNodeJS,
@@ -13,15 +23,10 @@ import {
   IconBaselineCloud,
 } from "src/icons/icons.js";
 
-import { IconGrid } from "../components/IconGrid.js";
-import { TM } from "../components/index.js";
-import { LabeledTable } from "../components/LabeledTable.js";
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { create_text_maker } from "../models/text.js";
-
 import about_text_bundle from "./about.yaml";
 import "./about.scss";
-import "../explorer_common/explorer-styles.scss";
+
+import "src/explorer_common/explorer-styles.scss";
 
 const text_maker = create_text_maker(about_text_bundle);
 

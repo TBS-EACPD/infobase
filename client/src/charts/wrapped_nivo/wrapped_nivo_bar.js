@@ -3,9 +3,9 @@ import { ResponsiveBar } from "@nivo/bar";
 import _ from "lodash";
 import React from "react";
 
-import { textColor } from "src/core/color_defs.js";
+import { SmartDisplayTable } from "src/components/index.js";
 
-import { SmartDisplayTable } from "../../components/index.js";
+import { textColor } from "src/core/color_defs.js";
 
 import {
   nivo_common_text_maker,

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TrivialTM } from "../../components/index.js";
+import { TrivialTM } from "src/components/index.js";
 
 export const SelectAllControl = ({ SelectAllOnClick, SelectNoneOnClick }) => (
   <div role="group" style={{ display: "flex", flexDirection: "row" }}>

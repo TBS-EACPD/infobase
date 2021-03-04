@@ -1,10 +1,12 @@
 import _ from "lodash";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { businessConstants } from "src/models/businessConstants.js";
 
-import { NA_color } from "../core/color_schemes.js";
-import { formats } from "../core/format.js";
-import { businessConstants } from "../models/businessConstants.js";
+import { NA_color } from "src/core/color_schemes.js";
+
+import { formats } from "src/core/format.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 export const infobase_colors_smart = (col_scale) => (label) => {
   if (_.includes(businessConstants.NA_values, label)) {
