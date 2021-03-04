@@ -93,7 +93,7 @@ export class DisplayTable extends React.Component {
       sort_by,
       descending: false,
       searches,
-      state_paginate_by: 10,
+      state_paginate_by: 100,
       current_page: 0,
     };
   }
@@ -577,7 +577,7 @@ export class SmartDisplayTable extends React.Component {
       <DisplayTable
         {...this.props}
         column_configs={smart_column_configs}
-        size_to_paginate={size_to_paginate || 25}
+        size_to_paginate={size_to_paginate || 101}
       />
     );
   }
