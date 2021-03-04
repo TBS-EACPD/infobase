@@ -60,7 +60,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       //NIVO_TODO: Temporary workaround for bug from Nivo. Will need to delete this as it gets fixed in newer versions
-      test: /react-spring/,
+      test: /node_modules\/(@react-spring\/(animated|core|konva|native|shared|three|web|zdog))/,
       sideEffects: true,
     },
     {
