@@ -6,7 +6,6 @@ import { breakpoints } from "src/core/breakpoint_defs.js";
 
 import "./FlatTreeMap.scss";
 
-import { TreeMapHtmlNode } from "./TreeMapHtmlNode.js";
 import { DefaultTooltip } from "./wrapped_nivo_common.js";
 
 class _FlatTreeMapViz extends React.Component {
@@ -33,7 +32,6 @@ class _FlatTreeMapViz extends React.Component {
         nodeOpacity={1}
         borderColor={{ theme: "background" }}
         borderWidth={2}
-        nodeComponent={TreeMapHtmlNode}
         animate={false}
         label={function (e) {
           return (
