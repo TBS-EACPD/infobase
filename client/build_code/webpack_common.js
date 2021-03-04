@@ -60,12 +60,12 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       //NIVO_TODO: Temporary workaround for bug from Nivo. Will need to delete this as it gets fixed in newer versions
-      test: /node_modules\/(@react-spring\/(animated|core|konva|native|shared|three|web|zdog))/,
+      test: /react-spring/,
       sideEffects: true,
     },
     {
       // node modules that specifically require transpilation...
-      include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror|d3-scale|@nivo\/bar|@nivo\/core)/,
+      include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror|d3-scale|@nivo\/(bar|core|circle-packing|line|treemap))/,
       test: /\.js$/,
       use: js_module_loader_rules,
     },
