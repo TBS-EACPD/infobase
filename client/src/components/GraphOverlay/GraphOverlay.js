@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import MediaQuery from "react-responsive";
 
 import "./GraphOverlay.scss";
-import { IconRotatePhone, IconExpandWindowWidth } from "../../icons/icons.js";
+import { IconRotatePhone, IconExpandWindowWidth } from "src/icons/icons.js";
 
-import { hide_graph_overlay } from "../../InfoBase/AppState.js";
+import { hide_graph_overlay } from "src/InfoBase/AppState.js";
+
 import { create_text_maker_component } from "../misc_util_components";
 
 import text from "./GraphOverlay.yaml";

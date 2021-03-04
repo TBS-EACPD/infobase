@@ -3,9 +3,10 @@ import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
+import { trivial_text_maker } from "src/models/text.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { trivial_text_maker } from "../../models/text.js";
 import { CountdownCircle } from "../CountdownCircle.js";
 
 import "./bootstrap_modal_exstension.scss";

@@ -1,11 +1,15 @@
 import React, { Fragment } from "react";
 
 import { backgroundColor } from "src/core/color_defs.js";
+
 import { is_IE } from "src/core/feature_detection.js";
 
-import { IconCopy, IconDownload } from "../../icons/icons.js";
+import { IconCopy, IconDownload } from "src/icons/icons.js";
+
 import { DropdownMenu } from "../DropdownMenu.js";
+
 import { create_text_maker_component } from "../misc_util_components.js";
+
 import { WriteToClipboard } from "../WriteToClipboard.js";
 
 import text from "./DisplayTable.yaml";

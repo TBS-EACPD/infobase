@@ -1,4 +1,4 @@
-import { ensure_loaded } from "../../core/lazy_loader.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
 
 import {
   // shared all

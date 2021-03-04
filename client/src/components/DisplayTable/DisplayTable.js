@@ -4,6 +4,7 @@ import _ from "lodash";
 import React from "react";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
+
 import { toggle_list } from "src/general_utils.js";
 
 import { DebouncedTextInput } from "../DebouncedTextInput.js";

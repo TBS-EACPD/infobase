@@ -1,11 +1,49 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import * as util_components from "src/components/index.js";
 
-import { Canada } from "../../charts/canada/index.js";
-import { FlatTreeMapViz } from "../../charts/flat_treemap/FlatTreeMapViz.js";
-import { StandardLegend, SelectAllControl } from "../../charts/legends";
-import { get_formatter, infobase_colors_smart } from "../../charts/shared.js";
+import { businessConstants } from "src/models/businessConstants.js";
+
+import FootNote from "src/models/footnotes/footnotes.js";
+
+import { GlossaryEntry } from "src/models/glossary.js";
+
+import * as Results from "src/models/results.js";
+
+import {
+  create_text_maker,
+  trivial_text_maker,
+  run_template,
+} from "src/models/text.js";
+
+import {
+  year_templates,
+  actual_to_planned_gap_year,
+} from "src/models/years.js";
+
+import { breakpoints } from "src/core/breakpoint_defs.js";
+
+import {
+  newIBCategoryColors,
+  newIBLightCategoryColors,
+  newIBDarkCategoryColors,
+} from "src/core/color_schemes.js";
+
+import { formats, formatter } from "src/core/format.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
+
+import { Table } from "src/core/TableClass.js";
+
+import { Canada } from "src/charts/canada/index.js";
+
+import { FlatTreeMapViz } from "src/charts/flat_treemap/FlatTreeMapViz.js";
+
+import { StandardLegend, SelectAllControl } from "src/charts/legends";
+
+import { get_formatter, infobase_colors_smart } from "src/charts/shared.js";
+
 import {
   WrappedNivoBar,
   WrappedNivoHBar,
@@ -13,43 +51,31 @@ import {
   WrappedNivoPie,
   CircleProportionChart,
   NivoLineBarToggle,
-} from "../../charts/wrapped_nivo/index.js";
-import * as util_components from "../../components/index.js";
-import { breakpoints } from "../../core/breakpoint_defs.js";
-import {
-  newIBCategoryColors,
-  newIBLightCategoryColors,
-  newIBDarkCategoryColors,
-} from "../../core/color_schemes.js";
-import { formats, formatter } from "../../core/format.js";
+} from "src/charts/wrapped_nivo/index.js";
 
-import { ensure_loaded } from "../../core/lazy_loader.js";
-import { Table } from "../../core/TableClass.js";
 
-import * as general_utils from "../../general_utils.js";
+
+import * as general_utils from "src/general_utils.js";
+
 import {
   infograph_href_template,
   infograph_options_href_template,
-} from "../../infographic/infographic_link.js";
-import { glossary_href } from "../../link_utils.js";
-import { get_source_links } from "../../metadata/data_sources.js";
-import { businessConstants } from "../../models/businessConstants.js";
-import FootNote from "../../models/footnotes/footnotes.js";
-import { GlossaryEntry } from "../../models/glossary.js";
-import * as Results from "../../models/results.js";
-import { Subject } from "../../models/subject";
-import {
-  create_text_maker,
-  trivial_text_maker,
-  run_template,
-} from "../../models/text.js";
-import {
-  year_templates,
-  actual_to_planned_gap_year,
-} from "../../models/years.js";
+} from "src/infographic/infographic_link.js";
 
-import { rpb_link, get_appropriate_rpb_subject } from "../../rpb/rpb_link.js";
-import * as table_common from "../../tables/table_common.js";
+import { glossary_href } from "src/link_utils.js";
+
+import { get_source_links } from "src/metadata/data_sources.js";
+
+
+
+
+
+import { Subject } from "src/models/subject";
+
+
+import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
+import * as table_common from "src/tables/table_common.js";
+
 import { PanelRegistry, layout_types } from "../PanelRegistry.js";
 
 import {
