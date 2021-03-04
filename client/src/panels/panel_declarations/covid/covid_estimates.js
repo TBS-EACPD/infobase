@@ -357,7 +357,9 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           }))
           .value()
       )
-      .sortBy(({ vs_type }) => vs_type_ordering[vs_type]) // pre-sort by secondary index, for consistency
+      .sortBy(({ measure_id, total }) =>
+        measure_id !== "OTHER" ? -total : Infinity
+      )
       .value();
 
     const column_configs = {
@@ -367,22 +369,13 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         is_searchable: true,
         raw_formatter: get_measure_name,
         formatter: get_measure_name,
-        sort_func: (id_a, id_b, is_descending) => {
-          const [measure_a, measure_b] = _.map(
-            [id_a, id_b],
-            CovidMeasure.lookup
-          );
-
-          if (!_.includes([id_a, id_b], "OTHER")) {
-            return string_sort_func(measure_a.name, measure_b.name);
-          } else {
-            if (id_a === "OTHER") {
-              return is_descending ? -1 : 1;
-            } else {
-              return is_descending ? 1 : -1;
-            }
-          }
-        },
+        sort_func: (id_a, id_b) =>
+          _.chain([id_a, id_b])
+            .map(CovidMeasure.lookup)
+            .thru(([measure_a, measure_b]) =>
+              string_sort_func(measure_a.name, measure_b.name)
+            )
+            .value(),
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
@@ -416,6 +409,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
           disable_column_select={true}
+          unsorted_initial={true}
         />
       </Fragment>
     );
