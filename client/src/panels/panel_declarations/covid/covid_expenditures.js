@@ -142,6 +142,7 @@ const get_expenditures_by_index = (exp_data, index_key) =>
         total_exp: vote + stat,
       };
     })
+    .sortBy(({ total_exp }) => -total_exp)
     .value();
 
 const get_common_column_configs = (show_vote_stat) => ({
@@ -178,7 +179,10 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
     args: panel_args,
     data: { covid_expenditures },
   }) => {
-    const rows = get_expenditures_by_index(covid_expenditures, "org_id");
+    const pre_sorted_rows = get_expenditures_by_index(
+      covid_expenditures,
+      "org_id"
+    );
 
     const column_configs = {
       org_id: {
@@ -209,7 +213,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
     };
 
     const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _.chain(
-      rows
+      pre_sorted_rows
     )
       .sortBy("total_exp")
       .last()
@@ -228,10 +232,11 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
         />
         <ToggleVoteStat />
         <SmartDisplayTable
-          data={rows}
+          data={pre_sorted_rows}
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
           disable_column_select={true}
+          unsorted_initial={true}
         />
       </Fragment>
     );
@@ -245,7 +250,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     args: panel_args,
     data: { covid_expenditures },
   }) => {
-    const rows_with_measure_names = _.chain(
+    const pre_sorted_rows_with_measure_names = _.chain(
       get_expenditures_by_index(covid_expenditures, "measure_id")
     )
       .map(({ measure_id, ...row }) => ({
@@ -267,7 +272,10 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     const {
       measure_name: largest_measure_name,
       total_exp: largest_measure_exp,
-    } = _.chain(rows_with_measure_names).sortBy("total_exp").last().value();
+    } = _.chain(pre_sorted_rows_with_measure_names)
+      .sortBy("total_exp")
+      .last()
+      .value();
 
     const subject_level = panel_args.subject.level;
     const text_args = {
@@ -292,10 +300,11 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         />
         <ToggleVoteStat />
         <SmartDisplayTable
-          data={rows_with_measure_names}
+          data={pre_sorted_rows_with_measure_names}
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
           disable_column_select={true}
+          unsorted_initial={true}
         />
       </Fragment>
     );

@@ -257,7 +257,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           }))
           .value()
       )
-      .sortBy(({ vs_type }) => vs_type_ordering[vs_type]) // pre-sort by secondary index, for consistency
+      .sortBy(({ total }) => -total)
       .value();
 
     const column_configs = {
@@ -317,6 +317,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
           disable_column_select={true}
+          unsorted_initial={true}
         />
       </Fragment>
     );
