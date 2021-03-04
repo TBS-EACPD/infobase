@@ -40,7 +40,6 @@ const schema = `
   type CovidMeasure {
     id: String
     name: String
-    is_in_response_plan: Boolean
     covid_funding: [CovidFunding]
 
     has_covid_data: HasCovidData

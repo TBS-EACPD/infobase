@@ -151,7 +151,6 @@ Object {
             "has_expenditures": true,
           },
           "id": "COV001",
-          "is_in_response_plan": true,
           "name": "measure 1",
         },
         Object {
@@ -300,7 +299,6 @@ Object {
             "has_expenditures": true,
           },
           "id": "COV002",
-          "is_in_response_plan": false,
           "name": "measure 2",
         },
         Object {
@@ -397,7 +395,6 @@ Object {
             "has_expenditures": true,
           },
           "id": "COV003",
-          "is_in_response_plan": true,
           "name": "measure 3",
         },
       ],
@@ -668,7 +665,6 @@ Object {
               "has_expenditures": true,
             },
             "id": "COV001",
-            "is_in_response_plan": true,
             "name": "measure 1",
           },
           Object {
@@ -724,7 +720,6 @@ Object {
               "has_expenditures": true,
             },
             "id": "COV002",
-            "is_in_response_plan": false,
             "name": "measure 2",
           },
           Object {
@@ -791,7 +786,6 @@ Object {
               "has_expenditures": true,
             },
             "id": "COV003",
-            "is_in_response_plan": true,
             "name": "measure 3",
           },
         ],
@@ -852,7 +846,6 @@ Object {
           "has_expenditures": true,
         },
         "id": "COV001",
-        "is_in_response_plan": true,
         "name": "measure 1",
       },
     },
