@@ -3,11 +3,11 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
 
-import { TextMaker as StandardTextMaker } from "../../../components/index.js";
-import { Table } from "../../../core/TableClass.js";
+import { TextMaker as StandardTextMaker } from "src/components/index.js";
+import { Table } from "src/core/TableClass.js";
 
-import { businessConstants } from "../../../models/businessConstants";
-import { Subject } from "../../../models/subject.js";
+import { businessConstants } from "src/models/businessConstants";
+import { Subject } from "src/models/subject.js";
 import { text_maker } from "../partition_text_provider.js";
 
 import {

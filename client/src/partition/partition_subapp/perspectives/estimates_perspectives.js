@@ -3,12 +3,12 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
 
-import { TextMaker as StandardTextMaker } from "../../../components/index.js";
-import { Table } from "../../../core/TableClass.js";
-import { rpb_link } from "../../../link_utils.js";
-import { Subject } from "../../../models/subject";
+import { TextMaker as StandardTextMaker } from "src/components/index.js";
+import { Table } from "src/core/TableClass.js";
+import { rpb_link } from "src/link_utils.js";
+import { Subject } from "src/models/subject";
 
-import { run_template } from "../../../models/text.js";
+import { run_template } from "src/models/text.js";
 import { text_maker } from "../partition_text_provider.js";
 
 import {

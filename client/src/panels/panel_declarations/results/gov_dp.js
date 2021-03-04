@@ -1,11 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
-import {
-  default_dept_name_sort_func,
-  SmartDisplayTable,
-} from "../../../components";
+import { default_dept_name_sort_func, SmartDisplayTable } from "src/components";
 import {
   Subject,
   create_text_maker_component,

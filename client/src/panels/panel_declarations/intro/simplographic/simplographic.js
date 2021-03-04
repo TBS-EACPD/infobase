@@ -10,8 +10,8 @@ import {
   IconClipboard,
 } from "src/icons/icons.js";
 
-import { infograph_href_template, rpb_link } from "../../../../link_utils.js";
-import { ResultCounts, current_drr_key } from "../../../../models/results.js";
+import { infograph_href_template, rpb_link } from "src/link_utils.js";
+import { ResultCounts, current_drr_key } from "src/models/results.js";
 import {
   Subject,
   declare_panel,

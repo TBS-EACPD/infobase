@@ -2,7 +2,7 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import text2 from "../../../common_text/common_lang.yaml";
+import text2 from "src/common_text/common_lang.yaml";
 import {
   create_text_maker_component,
   StdPanel,

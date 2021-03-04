@@ -3,8 +3,7 @@ import React from "react";
 
 import { primaryColor } from "src/core/color_defs.js";
 
-
-import { GraphOverlay } from "../../../../components";
+import { GraphOverlay } from "src/components";
 import {
   declare_panel,
   year_templates,

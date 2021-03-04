@@ -7,8 +7,8 @@ import _ from "lodash";
 
 import { is_IE } from "src/core/feature_detection.js";
 
-import * as general_utils from "../../general_utils";
-import { create_text_maker } from "../../models/text.js";
+import * as general_utils from "src/general_utils";
+import { create_text_maker } from "src/models/text.js";
 
 import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
 

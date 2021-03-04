@@ -8,7 +8,7 @@ import {
   IconAttention,
   IconNotApplicable,
   IconClock,
-} from "../../../icons/icons.js";
+} from "src/icons/icons.js";
 import { util_components, general_utils } from "../shared.js";
 
 import { TM, text_maker } from "./result_text_provider.js";

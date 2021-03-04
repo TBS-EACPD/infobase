@@ -10,8 +10,8 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "../../../../components";
-import FootNote from "../../../../models/footnotes/footnotes";
+import { GraphOverlay } from "src/components";
+import FootNote from "src/models/footnotes/footnotes";
 import {
   run_template,
   year_templates,

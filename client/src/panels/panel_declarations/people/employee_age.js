@@ -4,7 +4,7 @@ import React from "react";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "../../../components";
+import { GraphOverlay } from "src/components";
 import {
   formats,
   run_template,

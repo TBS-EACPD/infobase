@@ -5,7 +5,7 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { Canada } from "../../../charts/canada/index.js";
+import { Canada } from "src/charts/canada/index.js";
 import {
   formats,
   run_template,

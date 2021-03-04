@@ -6,7 +6,7 @@ import { textColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "../../../../components";
+import { GraphOverlay } from "src/components";
 import {
   create_text_maker_component,
   Subject,

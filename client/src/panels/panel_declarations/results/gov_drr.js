@@ -1,11 +1,10 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   SmartDisplayTable,
   default_dept_name_sort_func,
-} from "../../../components/index.js";
+} from "src/components/index.js";
 import {
   Subject,
   InfographicPanel,

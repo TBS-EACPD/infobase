@@ -4,7 +4,7 @@ import React from "react";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { get_static_url } from "../../../request_utils.js";
+import { get_static_url } from "src/request_utils.js";
 import {
   Subject,
   declare_panel,

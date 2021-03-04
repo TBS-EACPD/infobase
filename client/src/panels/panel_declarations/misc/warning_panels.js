@@ -3,8 +3,8 @@ import React, { Fragment } from "react";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "../../../models/footnotes/dynamic_footnotes.js";
-import dynamic_footnote_text from "../../../models/footnotes/dynamic_footnotes.yaml";
+import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes.js";
+import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 
 import {
   util_components,

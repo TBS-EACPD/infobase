@@ -3,7 +3,7 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import FootNote from "../../../../models/footnotes/footnotes.js";
+import FootNote from "src/models/footnotes/footnotes.js";
 
 import {
   StdPanel,

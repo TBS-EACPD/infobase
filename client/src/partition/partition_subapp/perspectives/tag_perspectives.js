@@ -2,9 +2,9 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 import React from "react";
 
-import { TM, KeyConceptList } from "../../../components/index.js";
-import { Table } from "../../../core/TableClass.js";
-import { Subject } from "../../../models/subject.js";
+import { TM, KeyConceptList } from "src/components/index.js";
+import { Table } from "src/core/TableClass.js";
+import { Subject } from "src/models/subject.js";
 import { text_maker } from "../partition_text_provider.js";
 
 import {
