@@ -1,26 +1,26 @@
 id,q_en,q_fr,a_en,a_fr
-data_source,Where is GC InfoBase data sourced from? Is it reliable?,D'où proviennent les données de l’InfoBase du GC? Sont-elles fiables?,"Relying on publications such as Public Accounts, Estimates, and Departmental Plans, GC InfoBase transforms complex
+data_source,Where is GC InfoBase data sourced from? Is it reliable?,D'où proviennent les données d'InfoBase du GC? Sont-elles fiables?,"Relying on publications such as Public Accounts, Estimates, and Departmental Plans, GC InfoBase transforms complex
 federal data into simple visual stories for Canadians. The data in GC InfoBase is typically updated shortly after
 the associated reports are tabled in Parliament. These reports are available in their original form through the
 <a target='_blank' rel='noopener noreferrer' href='http://publications.gc.ca/site/eng/home.html'>Government of Canada Publications website</a>.
 ","S'appuyant sur des publications telles que les Comptes publics, les budgets des dépenses et les plans ministériels,
-l’InfoBase du GC transforme des données fédérales complexes en de simples illustrations à l’intention des Canadiens.
-Les données de l’InfoBase du GC , en règle générale, sont mises à jour peu de temps après le dépôt des rapports au Parlement.
+InfoBase du GC transforme des données fédérales complexes en de simples illustrations à l’intention des Canadiens.
+Les données d’InfoBase du GC , en règle générale, sont mises à jour peu de temps après le dépôt des rapports au Parlement.
 Ces rapports accessibles intégralement sur le site <a target='_blank' rel='noopener noreferrer' href='http://publications.gc.ca/site/fra/accueil.html'>Publications du gouvernement du Canada</a>.
 "
-open_source,Is the GC InfoBase application open sourced?,L’application de l’InfoBase du GC est-elle une source en libre accès?,"Yes, the GC InfoBase web application is open sourced. The code is available for review and reuse
+open_source,Is GC InfoBase application open sourced?,L’application d’InfoBase du GC est-elle une source en libre accès?,"Yes, GC InfoBase web application is open sourced. The code is available for review and reuse
 <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='GC InfoBase source code on GitHub'>here</a>.
-","Oui, l’application web de l’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
-<a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='Code source de l’InfoBase du GC sur GitHub'>ici</a>.
+","Oui, l’application web d’InfoBase du GC est une source en libre accès. Le code est disponible pour examen et réutilisation
+<a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase' title='Code source d’InfoBase du GC sur GitHub'>ici</a>.
 "
-tools,What did you use to build GC InfoBase?,Qu'avez-vous utilisés pour construire l’InfoBase du GC?,"GC InfoBase is a single-page web application that was developed using open-source libraries and standards (such as React, Bootstrap, webpack, Sass, and GraphQL).","L’InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes (comme React, Bootstrap, webpack, Sass, et GraphQL)."
+tools,What did you use to build GC InfoBase?,Qu'avez-vous utilisés pour construire InfoBase du GC?,"GC InfoBase is a single-page web application that was developed using open-source libraries and standards (such as React, Bootstrap, webpack, Sass, and GraphQL).","InfoBase du GC est une application web d'une page qui a été développée au moyen des bibliothèques et des normes ouvertes (comme React, Bootstrap, webpack, Sass, et GraphQL)."
 infographic_tools,What did you use to create your data visualizations?,Qu'avez-vous utilisé pour créer vos visualisations de données?,"The graphs on GC InfoBase are built using JavaScript, specifically the graphing libraries D3.js and Nivo. For more information
 about the technology we use, you can consult the [About](#about) page or check out <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase'>our source code</a> on GitHub.
-","Les graphiques sur l’InfoBase du GC sont réalisés au moyen de JavaScript, plus particulièrement les bibliothèques
+","Les graphiques sur InfoBase du GC sont réalisés au moyen de JavaScript, plus particulièrement les bibliothèques
 graphiques D3.js et Nivo. Pour obtenir de plus amples renseignements sur la technologie utilisée, consultez la page
-[À propos](#about) ou la page <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase'>Code source de l'InfoBase du GC</a> sur GitHub.
+[À propos](#about) ou la page <a target='_blank' rel='noopener noreferrer' href='https://github.com/TBS-EACPD/infobase'>Code source d'InfoBase du GC</a> sur GitHub.
 "
-creation,Why was GC InfoBase created?,Pourquoi l’InfoBase du GC a-t-elle été créée?,GC InfoBase development began in 2013 in response to <a target='_blank' rel='noopener noreferrer' href='http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144'>a Parliamentary request</a> for better access to data on government finances.,Le développement de l’InfoBase du GC a commencé en 2013 en réponse à la <a target='_blank' rel='noopener noreferrer' href='http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144'>demande du Parlement</a> pour un meilleur accès aux données sur les finances publiques.
+creation,Why was GC InfoBase created?,Pourquoi InfoBase du GC a-t-elle été créée?,GC InfoBase development began in 2013 in response to <a target='_blank' rel='noopener noreferrer' href='http://www.ourcommons.ca/DocumentViewer/en/41-1/OGGO/report-7/page-144'>a Parliamentary request</a> for better access to data on government finances.,Le développement d'InfoBase du GC a commencé en 2013 en réponse à la <a target='_blank' rel='noopener noreferrer' href='http://www.noscommunes.ca/DocumentViewer/fr/41-1/OGGO/rapport-7/page-144'>demande du Parlement</a> pour un meilleur accès aux données sur les finances publiques.
 update_freq,How often is the data on GC InfoBase updated?,À quelle fréquence les données sur GC InfoBase est-elles mises à jour?,"The financial, people management and results data presented in GC InfoBase are updated as new data becomes available. Due to
 the nature of varying datasets, not all datasets are updated at the same time or on the same periodic schedule. For example,
 current-year data can be updated quarterly as organizations submit their Quarterly Financial Reports (QFRs), but historical
@@ -29,7 +29,7 @@ with the same periodic update schedule may not be updated simultaneously due to 
 For example, the Public Accounts of Canada are published every fall, while Departmental Plans are published on or before March 31
 each year. Once published, the data must be prepared in an appropriate format to be integrated in GC InfoBase. Ad hoc updates
 such as corrections to the data are also done on an as needed basis. 
-","Les données de l’InfoBase du GC relatives aux finances, à la gestion du personnel et aux résultats sont mises à jour dès qu’elles
+","Les données d’InfoBase du GC relatives aux finances, à la gestion du personnel et aux résultats sont mises à jour dès qu’elles
 sont disponibles. Compte tenu de la nature des divers ensembles de données, ils ne sont pas tous mis à jour en même temps ou
 selon le même calendrier périodique. Par exemple, il est possible de mettre à jour les données de l’exercice financier tous
 les trois mois quand l’organisation soumet son rapport financier trimestriel (RFT), mais les données financières antérieures
@@ -37,18 +37,18 @@ ne sont mises à jour que lors de la publication annuelle des Comptes publics du
 qui ont le même calendrier périodique peuvent ne pas être mis à jour simultanément en raison de délais de publication différents
 au cours de l'exercice financier. Les Comptes publics du Canada, par exemple, sont publiés à l’automne tandis que les plans
 ministériels sont publiés au plus tard le 31 mars de l'exercice en cours. Une fois publiées, les données doivent être reformatées
-pour être intégrées dans l’InfoBase du GC. On effectue aussi au besoin des mises à jour ponctuelles, telles que la correction de
+pour être intégrées dans InfoBase du GC. On effectue aussi au besoin des mises à jour ponctuelles, telles que la correction de
 données.
 "
 raw_data,How can I download the raw data?,Comment puis-je télécharger les données brutes?,"All GC InfoBase data is available in raw form on the Government of Canada Open Data Portal.
 Open Data links are available from our [Datasets page](#metadata). 
-","Toutes les données de l’InfoBase du GC sont disponibles sous forme brute sur le Portail du gouvernement ouvert.
+","Toutes les données d'InfoBase du GC sont disponibles sous forme brute sur le Portail du gouvernement ouvert.
 Les liens vers les données libres d’accès figurent sur notre [page Données](#metadata).
 "
 older_data,Where can I find data for previous years?,Où puis-je trouver des données pour les années précédentes?,"In cases where data exists for more years than GC InfoBase presents (5 years), older data is included in the raw datasets available
 on the Government of Canada Open Data Portal.
 Open Data links are available from our [Datasets page](#metadata).
-","Lorsqu’il existe des données antérieures à celles qui figurent dans l’InfoBase du GC (cinq ans), vous les trouverez dans
+","Lorsqu’il existe des données antérieures à celles qui figurent dans InfoBase du GC (cinq ans), vous les trouverez dans
 les ensembles de données brutes figurant sur le Portail du gouvernement ouvert.
 Les liens vers les données libres d’accès figurent sur notre [page Données](#metadata).
 "
@@ -83,23 +83,23 @@ pas disponibles dans les système de paye régional ou système de paye Phénix 
   - Placements Épargne Canada
   - Les Fonds non publics des Forces canadiennes.
 "
-spending_types,What types of spending are included in GC InfoBase?,Quels types de dépenses figurent dans l’InfoBase du GC?,"GC InfoBase contains data on planned and actual budgetary expenditures. Budgetary expenditures consist of the cost of
+spending_types,What types of spending are included in GC InfoBase?,Quels types de dépenses figurent dans InfoBase du GC?,"GC InfoBase contains data on planned and actual budgetary expenditures. Budgetary expenditures consist of the cost of
 servicing the public debt; operating and capital expenditures; transfer payments to other levels of government, organizations
 or individuals; and payments to Crown corporations. Budgetary expenditures are expenditures made in accordance with specific
 votes, statutory appropriations or other authorities. Non-budgetary expenditures – or loans, investments and advances – are
 outlays that represent changes in the composition of the Government’s financial assets, and are not included.
-","Dans l’InfoBase du GC, vous trouverez des données sur les dépenses budgétaires prévues et réelles, soit les frais de gestion
+","Dans InfoBase du GC, vous trouverez des données sur les dépenses budgétaires prévues et réelles, soit les frais de gestion
 de la dette publique, les dépenses de fonctionnement et d’immobilisation, les paiements de transferts à d’autres ordres de
 gouvernement, organismes ou particuliers et les paiements aux sociétés d’État. Les dépenses budgétaires sont des dépenses
 effectuées dans le cadre de crédits précis, de crédits législatifs ou d'autres autorisations. Les dépenses non budgétaires,
 c’est-à-dire les prêts, les investissements et les avances, sont des dépenses qui correspondent à des changements dans la
-composition des actifs financiers du gouvernement. Les dépenses non budgétaires ne figurent pas à l’InfoBase du GC.
+composition des actifs financiers du gouvernement. Les dépenses non budgétaires ne figurent pas à InfoBase du GC.
 "
-fte_levels,Does GC InfoBase collect spending and FTE data at the CR level or just at the program level?,Est-ce que l'InfoBase du GC collecte des données sur les dépenses et les ETP au niveau de la Responsabilité essentielle ou seulement au niveau du programme?,"All CR resource data (i.e., spending and FTEs) are calculated by the sum of their associated programs resources.
+fte_levels,Does GC InfoBase collect spending and FTE data at the CR level or just at the program level?,Est-ce que InfoBase du GC collecte des données sur les dépenses et les ETP au niveau de la Responsabilité essentielle ou seulement au niveau du programme?,"All CR resource data (i.e., spending and FTEs) are calculated by the sum of their associated programs resources.
 GC InfoBase collects it at the program level to “roll-up” the data for presentation at the higher CR level.
 In other words, CR resources are, by definition, equal to the sum of each CR’s related program resources.
 ","Les données sur les ressources de la Responsabilité essentielle (c'est-à-dire les dépenses et les ETP) correspondent
-à la somme des ressources des programmes qui lui sont associés. L’InfoBase du GC collecte ces données au niveau
+à la somme des ressources des programmes qui lui sont associés. InfoBase du GC collecte ces données au niveau
 du programme, puis les « regroupe » pour être ensuite affichées au niveau supérieur de la Responsabilité essentielle.
 Bref, les ressources de la Responsabilité essentielle sont, par définition, égales à la somme des ressources de ses programmes.
 "
@@ -108,4 +108,4 @@ or the [Government at a Glance diagram](#partition).
 ","Pour visualiser comment les organisations et les intérêts fédéraux sont reliés entre différents systèmes d’étiquetage,
 consultez le [page des Explorer les étiquettes](#tag-explorer) ou le [diagramme Panorama de l'administration publique](#partition).
 "
-contact,Is there a way to get in contact with a person who works with GC InfoBase?,Comment communiquer avec une personne de l’InfoBase du GC?,"For any questions related to GC InfoBase or Treasury Board of Canada Secretariat, please visit the [contact us](#contact) page to view the different methods of contacting us. We will respond as soon as possible.","Pour toute question sur l’InfoBase du GC ou le Secrétariat du Conseil du Trésor du Canada, visitez la page [Contactez-Nous](#contact) pour des méthodes différentes de contacter. Nous repondrons dès que possible."
+contact,Is there a way to get in contact with a person who works with GC InfoBase?,Comment communiquer avec une personne d’InfoBase du GC?,"For any questions related to GC InfoBase or Treasury Board of Canada Secretariat, please visit the [contact us](#contact) page to view the different methods of contacting us. We will respond as soon as possible.","Pour toute question sur InfoBase du GC ou le Secrétariat du Conseil du Trésor du Canada, visitez la page [Contactez-Nous](#contact) pour des méthodes différentes de contacter. Nous repondrons dès que possible."
