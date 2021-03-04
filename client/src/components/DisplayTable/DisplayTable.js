@@ -392,6 +392,7 @@ export class DisplayTable extends React.Component {
                                 this.state.sort_by === column_key
                                   ? !this.state.descending
                                   : true,
+                              current_page: 0,
                             })
                           }
                         >
