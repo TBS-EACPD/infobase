@@ -5,6 +5,7 @@ import {
   SmartDisplayTable,
   default_dept_name_sort_func,
 } from "src/components/index.js";
+
 import {
   Subject,
   InfographicPanel,

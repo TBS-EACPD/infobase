@@ -4,10 +4,13 @@ import _ from "lodash";
 import React from "react";
 
 import { TextMaker as StandardTextMaker } from "src/components/index.js";
+
+import { Subject } from "src/models/subject.js";
+
 import { Table } from "src/core/TableClass.js";
 
 import { businessConstants } from "src/models/businessConstants";
-import { Subject } from "src/models/subject.js";
+
 import { text_maker } from "../partition_text_provider.js";
 
 import {

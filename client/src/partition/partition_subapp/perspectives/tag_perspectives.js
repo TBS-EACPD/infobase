@@ -3,8 +3,11 @@ import _ from "lodash";
 import React from "react";
 
 import { TM, KeyConceptList } from "src/components/index.js";
-import { Table } from "src/core/TableClass.js";
+
 import { Subject } from "src/models/subject.js";
+
+import { Table } from "src/core/TableClass.js";
+
 import { text_maker } from "../partition_text_provider.js";
 
 import {

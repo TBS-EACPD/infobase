@@ -1,4 +1,5 @@
 import { create_text_maker } from "src/models/text.js";
+
 import diagram_text from "../partition_diagram/PartitionDiagram.yaml";
 
 import perspective_text from "./perspectives/perspective_content.yaml";

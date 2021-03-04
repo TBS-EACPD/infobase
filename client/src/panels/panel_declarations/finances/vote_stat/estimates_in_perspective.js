@@ -1,9 +1,10 @@
 import _ from "lodash";
 import React from "react";
 
+import FootNote from "src/models/footnotes/footnotes.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import FootNote from "src/models/footnotes/footnotes.js";
 
 import {
   StdPanel,

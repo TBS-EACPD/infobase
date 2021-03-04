@@ -8,9 +8,9 @@ import {
   textColor,
 } from "src/core/color_defs.js";
 
+import { formats } from "src/core/format.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { formats } from "src/core/format.js";
 import {
   StdPanel,
   Col,

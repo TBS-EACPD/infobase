@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { ResultCounts, current_drr_key } from "src/models/results.js";
+
 import { is_mobile } from "src/core/feature_detection.js";
 
 import {
@@ -11,7 +13,7 @@ import {
 } from "src/icons/icons.js";
 
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
-import { ResultCounts, current_drr_key } from "src/models/results.js";
+
 import {
   Subject,
   declare_panel,

@@ -2,9 +2,9 @@ import gql from "graphql-tag";
 
 import _ from "lodash";
 
+import { log_standard_event } from "src/core/analytics.js";
 import { lang } from "src/core/injected_build_constants.js";
 
-import { log_standard_event } from "src/core/analytics.js";
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { CovidEstimates } from "./CovidEstimates.js";

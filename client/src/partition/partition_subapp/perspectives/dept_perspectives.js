@@ -2,6 +2,7 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
 import { Subject } from "src/models/subject.js";
+
 import { text_maker } from "../partition_text_provider.js";
 
 import {

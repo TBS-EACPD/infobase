@@ -2,6 +2,7 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common.js";
+
 import {
   Results,
   infograph_href_template,
