@@ -331,15 +331,6 @@ export class DisplayTable extends React.Component {
             </div>
           </caption>
           <thead>
-            {show_pagination_controls && (
-              <PageSelector
-                num_pages={num_pages}
-                current_page={current_page}
-                change_page={change_page}
-                show_select
-                num_col={_.size(visible_ordered_col_keys)}
-              />
-            )}
             {util_components_with_defaults && (
               <tr>
                 <td
@@ -436,6 +427,15 @@ export class DisplayTable extends React.Component {
                 })}
               </tr>
             )}
+            {show_pagination_controls && (
+              <PageSelector
+                num_pages={num_pages}
+                current_page={current_page}
+                change_page={change_page}
+                show_select
+                num_col={_.size(visible_ordered_col_keys)}
+              />
+            )}
           </thead>
           {_.isEmpty(visible_ordered_col_keys) ? (
             <NoDataMessage />
@@ -521,14 +521,6 @@ export class DisplayTable extends React.Component {
                     ))
                     .value()}
                 </tr>
-              )}
-              {show_pagination_controls && (
-                <PageSelector
-                  num_pages={num_pages}
-                  current_page={current_page}
-                  change_page={change_page}
-                  num_col={_.size(visible_ordered_col_keys)}
-                />
               )}
             </tbody>
           )}
