@@ -60,10 +60,15 @@ export class Typeahead extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { query_value, current_search_configs } = this.state;
+    const {
+      query_value,
+      current_search_configs,
+      selection_cursor,
+    } = this.state;
     const {
       query_value: prev_query_value,
       current_search_configs: prev_search_configs,
+      selection_cursor: prev_selection_cursor,
     } = prevState;
 
     if (
@@ -96,6 +101,13 @@ export class Typeahead extends React.Component {
         } else if (this.state.list_height < 400) {
           this.setState({ list_height: 400 });
         }
+      }
+
+      if (
+        selection_cursor !== prev_selection_cursor &&
+        prev_selection_cursor > selection_cursor
+      ) {
+        this.list_ref.current.recomputeRowHeights(selection_cursor); //scrolling up is choppy if we don't do this
       }
     }
   }
