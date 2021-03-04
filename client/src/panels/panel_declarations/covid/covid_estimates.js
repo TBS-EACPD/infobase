@@ -373,18 +373,12 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             CovidMeasure.lookup
           );
 
-          if (measure_a.is_in_response_plan === measure_b.is_in_response_plan) {
+          if (!_.includes([id_a, id_b], "OTHER")) {
             return string_sort_func(measure_a.name, measure_b.name);
           } else {
-            if (
-              !measure_a.is_in_response_plan &&
-              measure_b.is_in_response_plan
-            ) {
+            if (id_a === "OTHER") {
               return is_descending ? -1 : 1;
-            } else if (
-              measure_a.is_in_response_plan &&
-              !measure_b.is_in_response_plan
-            ) {
+            } else {
               return is_descending ? 1 : -1;
             }
           }
@@ -393,9 +387,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
 
-    const [largest_measure_id, largest_measure_auth] = _.chain(
-      pre_sorted_data
-    )
+    const [largest_measure_id, largest_measure_auth] = _.chain(pre_sorted_data)
       .groupBy("measure_id")
       .map((rows, measure_id) => [
         measure_id,
