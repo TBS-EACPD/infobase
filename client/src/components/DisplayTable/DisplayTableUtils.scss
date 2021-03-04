@@ -15,8 +15,6 @@ button.display_table__util-icon {
   }
 }
 
-.page-selector {
-  color: $textLightColor !important;
-  background-color: $primaryColor !important;
-  border-right: 1px solid $separatorColor !important;
+.page-selector button {
+  margin: 0px 2.5px;
 }
