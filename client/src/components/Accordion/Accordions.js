@@ -7,9 +7,9 @@ import { TransitionGroup, Transition } from "react-transition-group";
 
 import { textLightColor } from "src/core/color_defs.js";
 
-import { IconChevron } from "../icons/icons.js";
+import { IconChevron } from "../../icons/icons.js";
 
-import { trivial_text_maker } from "../models/text.js";
+import { trivial_text_maker } from "../../models/text.js";
 
 import "./Accordions.scss";
 
@@ -144,7 +144,6 @@ class AutoAccordion extends React.Component {
       ...this.props,
       isExpanded,
       onToggle: () => this.setState({ isExpanded: !isExpanded }),
-      closeAccordion: () => this.setState({ isExpanded: false }),
     });
   }
 }
