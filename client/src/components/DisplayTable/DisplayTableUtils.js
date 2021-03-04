@@ -83,6 +83,7 @@ export const PageSelector = ({
                   <button
                     className="btn-ib-light"
                     onClick={() => change_page(0)}
+                    aria-label="Page 1"
                   >
                     1
                   </button>
@@ -102,6 +103,7 @@ export const PageSelector = ({
                         (num === current_page && "--reversed") || ""
                       }`}
                       onClick={() => change_page(num)}
+                      aria-label={`Page ${num + 1}`}
                     >
                       {num + 1}
                     </button>
@@ -115,6 +117,7 @@ export const PageSelector = ({
                   <button
                     className="btn-ib-light"
                     onClick={() => change_page(num_pages)}
+                    aria-label={`Page ${num_pages + 1}`}
                   >
                     {num_pages + 1}
                   </button>
@@ -129,7 +132,7 @@ export const PageSelector = ({
 };
 
 export const PageinateBySelector = ({ selected, on_select, num_items }) => {
-  const options = _.filter([10, 25, 50, 100, num_items > 100 && num_items]);
+  const options = _.filter([100, num_items > 100 && num_items]);
 
   const dropdown_content = (
     <form className="paginate_by_dropdown">
