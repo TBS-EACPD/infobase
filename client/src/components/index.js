@@ -3,7 +3,7 @@ export {
   AccordionEnterExit,
   StatelessPullDownAccordion,
   AutoAccordion,
-} from "./Accordions.js";
+} from "./Accordion/Accordions.js";
 export { TagCloud } from "./TagCloud.js";
 export { EmailFrontend } from "./EmailFrontend.js";
 export { HeightClipper } from "./HeightClipper/HeightClipper.js";
