@@ -60,21 +60,16 @@ export class Typeahead extends React.Component {
     if (
       query_value !== prev_query_value ||
       current_search_configs !== prev_search_configs ||
-      (may_show_menu && may_show_menu !== prev_may_show_menu)
+      (this.show_menu && may_show_menu !== prev_may_show_menu)
     ) {
-      const matching_results_by_page = !this.show_menu
-        ? []
-        : _.chain(this.all_options)
-            .filter(({ config_group_index, data }) =>
-              // could use optional chaining, but we WANT this to fail fast and loud, to catch
-              // malformed search_configs during development. Should be safe otherwsie
-              this.config_groups[config_group_index].group_filter(
-                query_value,
-                data
-              )
-            )
-            .chunk(page_size)
-            .value();
+      const matching_results_by_page = _.chain(this.all_options)
+        .filter(({ config_group_index, data }) =>
+          // could use optional chaining, but we WANT this to fail fast and loud, to catch
+          // malformed search_configs during development. Should be safe otherwsie
+          this.config_groups[config_group_index].group_filter(query_value, data)
+        )
+        .chunk(page_size)
+        .value();
 
       this.setState({
         matching_results_by_page,
