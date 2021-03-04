@@ -104,8 +104,10 @@ export class Typeahead extends React.Component {
       }
 
       if (
-        selection_cursor !== prev_selection_cursor &&
-        prev_selection_cursor > selection_cursor
+        query_value !== prev_query_value ||
+        current_search_configs !== prev_search_configs ||
+        (selection_cursor !== prev_selection_cursor &&
+          prev_selection_cursor > selection_cursor)
       ) {
         this.list_ref.current.recomputeRowHeights(selection_cursor); //scrolling up is choppy if we don't do this
       }
