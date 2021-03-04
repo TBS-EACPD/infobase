@@ -79,7 +79,7 @@
     "node-sass": "^5.0.0",
     "nodemon": "^2.0.2",
     "null-loader": "^4.0.1",
-    "patch-package": "^6.2.0",
+    "patch-package": "^6.4.5",
     "popper.js": "^1.14.6",
     "postcss": "^8.1.6",
     "prop-types": "^15.6.2",
