@@ -236,16 +236,14 @@ export class Typeahead extends React.Component {
                     parent={parent}
                     rowIndex={index}
                   >
-                    {({ measure, registerChild }) => (
-                      <div ref={registerChild} style={style}>
-                        {_.isEmpty(matching_results) && (
-                          <li className="typeahead__header">
-                            {text_maker("no_matches_found")}
-                          </li>
-                        )}
-                        {!_.isEmpty(matching_results) && list_items[index]}
-                      </div>
-                    )}
+                    <div style={style}>
+                      {_.isEmpty(matching_results) && (
+                        <li className="typeahead__header">
+                          {text_maker("no_matches_found")}
+                        </li>
+                      )}
+                      {!_.isEmpty(matching_results) && list_items[index]}
+                    </div>
                   </CellMeasurer>
                 )}
               />
@@ -306,7 +304,7 @@ export class Typeahead extends React.Component {
 
     const first_node_of_groups = _.uniqBy(
       matching_results,
-      (datum) => datum.data.constructor.name
+      (datum) => this.config_groups[datum.config_group_index].group_header
     );
 
     const num_headers = _.size(first_node_of_groups) + 1; // + 1 status header always present
@@ -371,7 +369,6 @@ export class Typeahead extends React.Component {
       total_menu_items,
       index_of_group_headers,
     } = this.derived_menu_state;
-
     if (selection_cursor === total_menu_items - 1) {
       return this.default_selection_cursor;
     } else if (selection_cursor + 1 == 0) {
