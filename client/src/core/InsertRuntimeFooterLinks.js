@@ -13,6 +13,10 @@ const bonus_footer_links = text_maker("bonus_footer_links");
 
 const footer_link_items = _.compact([
   {
+    href: text_maker("visit_canada_url"),
+    text: text_maker("visit_canada_title"),
+  },
+  {
     href: "#privacy",
     text: trivial_text_maker("privacy_title"),
   },

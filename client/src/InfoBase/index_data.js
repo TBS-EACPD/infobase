@@ -117,14 +117,6 @@ const index_lang_lookups = {
       <li><a target="_blank" rel="noopener noreferrer" href="https://ouvert.canada.ca/">Gouvernement ouvert</a></li>
     `,
   },
-  footer_list: {
-    en: `
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/en.html">Visit Canada.ca</a></li>
-    `,
-    fr: `
-      <li><a target="_blank" rel="noopener noreferrer" href="https://www.canada.ca/fr.html">Visiter Canada.ca</a></li>
-    `,
-  },
   script_url: {
     en: "app-en.min.js",
     fr: "app-fr.min.js",

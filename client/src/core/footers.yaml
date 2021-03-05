@@ -36,3 +36,11 @@ standard_version_url:
 standard_version_title:
   en: "Graphical version"
   fr: "Version graphique"
+
+visit_canada_title:
+  en: Visit Canada.ca
+  fr: Visiter Canada.ca
+
+visit_canada_url:
+  en: https://www.canada.ca/en.html
+  fr: https://www.canada.ca/fr.html
