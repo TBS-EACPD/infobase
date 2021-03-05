@@ -1,8 +1,8 @@
 import React from "react";
 
-import { EmailFrontend } from "../components/EmailFrontend.js";
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { create_text_maker } from "../models/text.js";
+import { EmailFrontend } from "src/components/EmailFrontend.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { create_text_maker } from "src/models/text.js";
 
 import text from "./Survey.yaml";
 

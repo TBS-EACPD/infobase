@@ -12,20 +12,20 @@ import { is_mobile } from "src/core/feature_detection.js";
 import {
   SpinnerWrapper,
   create_text_maker_component,
-} from "../components/index.js";
+} from "src/components/index.js";
 import {
   sequentialBlues,
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
-} from "../core/color_schemes.js";
-import { formats } from "../core/format.js";
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { infograph_href_template } from "../infographic/infographic_link.js";
+} from "src/core/color_schemes.js";
+import { formats } from "src/core/format.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 
-import { run_template } from "../models/text.js";
+import { run_template } from "src/models/text.js";
 
-import { actual_to_planned_gap_year } from "../models/years.js";
+import { actual_to_planned_gap_year } from "src/models/years.js";
 
 import { get_data, load_data } from "./data.js";
 

@@ -9,7 +9,7 @@ import {
   IconClipboard,
 } from "src/icons/icons.js";
 
-import { create_text_maker } from "../models/text.js";
+import { create_text_maker } from "src/models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";
 

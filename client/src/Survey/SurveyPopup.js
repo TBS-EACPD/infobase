@@ -9,9 +9,9 @@ import {
   FixedPopover,
   create_text_maker_component,
   EmailFrontend,
-} from "../components/index.js";
-import { log_standard_event } from "../core/analytics.js";
-import { IconFeedback } from "../icons/icons.js";
+} from "src/components/index.js";
+import { log_standard_event } from "src/core/analytics.js";
+import { IconFeedback } from "src/icons/icons.js";
 
 import text from "./SurveyPopup.yaml";
 

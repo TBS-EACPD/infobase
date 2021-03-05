@@ -15,23 +15,23 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { LegendList } from "../charts/legends";
+import { LegendList } from "src/charts/legends";
 import {
   Select,
   Panel,
   create_text_maker_component,
   SpinnerWrapper,
-} from "../components";
-import { ensure_loaded } from "../core/lazy_loader.js";
-import { StandardRouteContainer } from "../core/NavComponents.js";
+} from "src/components";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { result_docs } from "../models/results.js";
-import { Subject } from "../models/subject";
+import { result_docs } from "src/models/results.js";
+import { Subject } from "src/models/subject";
 import result_text from "../panels/panel_declarations/results/result_components.yaml";
 import {
   Result,
   indicator_text_functions,
-} from "../panels/panel_declarations/results/results_common.js";
+} from "src/panels/panel_declarations/results/results_common.js";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

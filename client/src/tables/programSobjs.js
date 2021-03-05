@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Subject } from "../models/subject";
+import { Subject } from "src/models/subject";
 
 import {
   trivial_text_maker,

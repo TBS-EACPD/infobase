@@ -10,9 +10,9 @@ import {
   ShareButton,
   WriteToClipboard,
   FootnoteList,
-} from "../components/index.js";
-import { IconCopyLink } from "../icons/icons.js";
-import { sources as all_sources } from "../metadata/data_sources.js";
+} from "src/components/index.js";
+import { IconCopyLink } from "src/icons/icons.js";
+import { sources as all_sources } from "src/metadata/data_sources.js";
 
 import { TextMaker } from "./rpb_text_provider.js";
 

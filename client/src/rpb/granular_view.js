@@ -7,8 +7,8 @@ import {
   SmartDisplayTable,
   Details,
   DropdownMenu,
-} from "../components/index.js";
-import { Subject } from "../models/subject.js";
+} from "src/components/index.js";
+import { Subject } from "src/models/subject.js";
 
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import { ReportDetails, ReportDatasets } from "./shared.js";

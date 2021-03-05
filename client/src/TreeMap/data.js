@@ -1,10 +1,10 @@
 import _ from "lodash";
 
-import { ensure_loaded } from "../core/lazy_loader.js";
-import { Table } from "../core/TableClass.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import { Table } from "src/core/TableClass.js";
 
-import { Subject } from "../models/subject.js";
-import { create_text_maker } from "../models/text.js";
+import { Subject } from "src/models/subject.js";
+import { create_text_maker } from "src/models/text.js";
 
 import treemap_text from "./TreeMap.yaml";
 

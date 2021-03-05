@@ -5,12 +5,12 @@ import { withRouter } from "react-router";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { CheckBox, DropdownMenu } from "../components/index.js";
-import { breakpoints } from "../core/breakpoint_defs.js";
-import { IconGear } from "../icons/icons.js";
+import { CheckBox, DropdownMenu } from "src/components/index.js";
+import { breakpoints } from "src/core/breakpoint_defs.js";
+import { IconGear } from "src/icons/icons.js";
 
-import { smart_href_template } from "../link_utils.js";
-import { create_text_maker } from "../models/text.js";
+import { smart_href_template } from "src/link_utils.js";
+import { create_text_maker } from "src/models/text.js";
 
 import {
   make_orgs_search_config,

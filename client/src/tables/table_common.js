@@ -2,11 +2,11 @@ import { sum } from "d3-array";
 import { nest } from "d3-collection";
 import _ from "lodash";
 
-import * as format from "../core/format";
-import { businessConstants } from "../models/businessConstants.js";
-import { Subject } from "../models/subject";
-import { trivial_text_maker, run_template } from "../models/text.js";
-import { year_templates } from "../models/years.js";
+import * as format from "src/core/format";
+import { businessConstants } from "src/models/businessConstants.js";
+import { Subject } from "src/models/subject";
+import { trivial_text_maker, run_template } from "src/models/text.js";
+import { year_templates } from "src/models/years.js";
 
 const m = run_template;
 const text_maker = trivial_text_maker;

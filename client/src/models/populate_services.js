@@ -4,8 +4,8 @@ import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { log_standard_event } from "../core/analytics.js";
-import { get_client } from "../graphql_utils/graphql_utils.js";
+import { log_standard_event } from "src/core/analytics.js";
+import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { Service, ServiceStandard } from "./services.js";
 

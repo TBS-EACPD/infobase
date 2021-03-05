@@ -6,8 +6,8 @@ import { primaryColor, backgroundColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { TM } from "../components/index.js";
-import { trivial_text_maker } from "../models/text.js";
+import { TM } from "src/components/index.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 import "./BubbleMenu.scss";
 

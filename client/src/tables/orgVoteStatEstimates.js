@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import * as FORMAT from "../core/format";
+import * as FORMAT from "src/core/format";
 
 import {
   vote_stat_dimension,

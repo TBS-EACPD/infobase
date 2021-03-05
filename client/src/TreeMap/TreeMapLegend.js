@@ -3,8 +3,8 @@ import React, { Fragment } from "react";
 
 import { backgroundColor } from "src/core/color_defs.js";
 
-import { formats } from "../core/format.js";
-import { create_text_maker } from "../models/text.js";
+import { formats } from "src/core/format.js";
+import { create_text_maker } from "src/models/text.js";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";

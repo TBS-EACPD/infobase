@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { get_static_url, make_request } from "../request_utils.js";
+import { get_static_url, make_request } from "src/request_utils.js";
 
 import { Subject } from "./subject.js";
 
