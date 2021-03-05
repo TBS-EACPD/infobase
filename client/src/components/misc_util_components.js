@@ -2,13 +2,13 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 
-import { formats } from "../core/format.js";
-import { text_abbrev } from "../general_utils.js";
+import { formats } from "src/core/format.js";
+import { text_abbrev } from "src/general_utils.js";
 import {
   run_template,
   trivial_text_maker,
   create_text_maker,
-} from "../models/text.js";
+} from "src/models/text.js";
 
 import { TextMaker, TM } from "./TextMaker.js";
 

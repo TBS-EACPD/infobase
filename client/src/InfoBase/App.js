@@ -12,19 +12,19 @@ import {
   is_dev,
 } from "src/core/injected_build_constants.js";
 
-import { HeaderNotification } from "../components/HeaderNotification";
-import { PageDetails } from "../components/PageDetails.js";
-import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
-import { initialize_analytics } from "../core/analytics.js";
-import { DevFip } from "../core/DevFip.js";
-import { EasyAccess } from "../core/EasyAccess.js";
-import { ErrorBoundary } from "../core/ErrorBoundary.js";
-import { has_local_storage } from "../core/feature_detection.js";
-import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
-import { ReactUnmounter } from "../core/NavComponents.js";
-import { RedirectHeader } from "../core/RedirectHeader.js";
-import { TooltipActivator } from "../glossary/TooltipActivator.js";
-import { SurveyPopup } from "../Survey/SurveyPopup.js";
+import { HeaderNotification } from "src/components/HeaderNotification";
+import { PageDetails } from "src/components/PageDetails.js";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
+import { initialize_analytics } from "src/core/analytics.js";
+import { DevFip } from "src/core/DevFip.js";
+import { EasyAccess } from "src/core/EasyAccess.js";
+import { ErrorBoundary } from "src/core/ErrorBoundary.js";
+import { has_local_storage } from "src/core/feature_detection.js";
+import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
+import { ReactUnmounter } from "src/core/NavComponents.js";
+import { RedirectHeader } from "src/core/RedirectHeader.js";
+import { TooltipActivator } from "src/glossary/TooltipActivator.js";
+import { SurveyPopup } from "src/Survey/SurveyPopup.js";
 
 import { app_reducer } from "./AppState.js";
 

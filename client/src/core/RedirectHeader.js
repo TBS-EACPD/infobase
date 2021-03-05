@@ -2,12 +2,12 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { HeaderNotification } from "../components/HeaderNotification.js";
+import { HeaderNotification } from "src/components/HeaderNotification.js";
 
 import {
   get_session_storage_w_expiry,
   set_session_storage_w_expiry,
-} from "../general_utils.js";
+} from "src/general_utils.js";
 
 import { log_standard_event } from "./analytics.js";
 

@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 
-import { Spinner, spinner_configs } from "../core/Spinner.js";
+import { Spinner, spinner_configs } from "src/core/Spinner.js";
 
 import { LeafSpinner } from "./LeafSpinner.js";
 

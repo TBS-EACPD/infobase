@@ -8,9 +8,9 @@ import GraphiQL from "graphiql";
 
 import _ from "lodash";
 
-import { SpinnerWrapper, ContainerEscapeHatch } from "../components/index.js";
-import { log_standard_event } from "../core/analytics.js";
-import { StandardRouteContainer } from "../core/NavComponents.js";
+import { SpinnerWrapper, ContainerEscapeHatch } from "src/components/index.js";
+import { log_standard_event } from "src/core/analytics.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { get_api_url } from "./graphql_utils.js";
 import "graphiql/graphiql.css";

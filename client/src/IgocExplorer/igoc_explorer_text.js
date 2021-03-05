@@ -1,4 +1,4 @@
-import { create_text_maker_component } from "../components/index.js";
+import { create_text_maker_component } from "src/components/index.js";
 
 import igoc_explorer_bundle from "./IgocExplorer.yaml";
 

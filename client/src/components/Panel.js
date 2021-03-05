@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 
-import { textLightColor } from "../core/color_defs.js";
+import { textLightColor } from "src/core/color_defs.js";
 
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";

@@ -7,10 +7,10 @@ import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_sc
 
 import { cached_property, bound } from "src/general_utils.js";
 
-import { StandardRouteContainer } from "../core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 //drilldown stuff
-import { filter_hierarchy } from "../explorer_common/hierarchy_tools.js";
+import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
 
 import { ExplorerForIgoc } from "./explorer_view.js";
 import { create_igoc_hierarchy } from "./hierarchies.js";

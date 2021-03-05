@@ -2,10 +2,10 @@ import _ from "lodash";
 import React from "react";
 
 
-import { sanitized_dangerous_inner_html } from "../general_utils.js";
-import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";
+import { sanitized_dangerous_inner_html } from "src/general_utils.js";
+import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
 
-import { create_text_maker } from "../models/text.js";
+import { create_text_maker } from "src/models/text.js";
 
 import { FancyUL } from "./FancyUL.js";
 

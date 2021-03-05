@@ -6,8 +6,8 @@ import { is_IE } from "src/core/feature_detection.js";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { IconDownload } from "../icons/icons.js";
-import { get_static_url } from "../request_utils.js";
+import { IconDownload } from "src/icons/icons.js";
+import { get_static_url } from "src/request_utils.js";
 
 import { create_text_maker_component } from "./misc_util_components.js";
 import { SpinnerWrapper } from "./SpinnerWrapper.js";

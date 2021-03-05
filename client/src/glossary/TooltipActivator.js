@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import tippy from "tippy.js";
 
-import { get_glossary_item_tooltip_html } from "../models/glossary.js";
+import { get_glossary_item_tooltip_html } from "src/models/glossary.js";
 
 const app = document.querySelector("#app");
 

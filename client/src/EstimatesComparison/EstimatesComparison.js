@@ -1,8 +1,8 @@
 import React from "react";
 
-import { SpinnerWrapper } from "../components/index.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
-import { StandardRouteContainer } from "../core/NavComponents";
+import { SpinnerWrapper } from "src/components/index.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
 import { EstimatesExplorer } from "./scheme.js";
 import { text_maker, TM } from "./utils.js";

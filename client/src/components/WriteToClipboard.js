@@ -6,8 +6,8 @@ import { tertiaryColor, textLightColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { IconCopy } from "../icons/icons.js";
-import { create_text_maker } from "../models/text.js";
+import { IconCopy } from "src/icons/icons.js";
+import { create_text_maker } from "src/models/text.js";
 
 import { FixedPopover } from "./modals_and_popovers";
 

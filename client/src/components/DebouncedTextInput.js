@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 
-import { text_maker } from "../tables/table_common";
+import { text_maker } from "src/tables/table_common";
 class DebouncedTextInput extends React.Component {
   render() {
     const {

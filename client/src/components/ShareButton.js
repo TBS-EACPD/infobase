@@ -8,8 +8,8 @@ import {
   IconTwitter,
   IconReddit,
   IconEmail,
-} from "../icons/icons.js";
-import { create_text_maker } from "../models/text.js";
+} from "src/icons/icons.js";
+import { create_text_maker } from "src/models/text.js";
 
 import { StatelessModal } from "./modals_and_popovers";
 

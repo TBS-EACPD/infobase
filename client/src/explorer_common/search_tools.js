@@ -1,7 +1,7 @@
 import _ from "lodash";
 
-import { escapeRegExp } from "../general_utils.js";
-import { GlossaryEntry } from "../models/glossary.js";
+import { escapeRegExp } from "src/general_utils.js";
+import { GlossaryEntry } from "src/models/glossary.js";
 
 function node_to_match_tokens(node) {
   const {

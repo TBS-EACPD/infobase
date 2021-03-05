@@ -3,10 +3,10 @@ import React from "react";
 import { createSelector } from "reselect";
 
 
-import { TrivialTM as TM, Format } from "../components/index.js";
-import { Table } from "../core/TableClass.js";
-import { run_template } from "../models/text.js";
-import { year_templates } from "../models/years.js";
+import { TrivialTM as TM, Format } from "src/components/index.js";
+import { Table } from "src/core/TableClass.js";
+import { run_template } from "src/models/text.js";
+import { year_templates } from "src/models/years.js";
 
 const is_planning_year = (year) =>
   _.includes(year_templates.planning_years, year);

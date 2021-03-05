@@ -6,11 +6,11 @@ import {
   LabeledTable,
   create_text_maker_component,
   FancyUL,
-} from "../components";
+} from "src/components";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
-} from "../core/NavComponents.js";
+} from "src/core/NavComponents.js";
 
 import { faq_data } from "./faq_data.js";
 

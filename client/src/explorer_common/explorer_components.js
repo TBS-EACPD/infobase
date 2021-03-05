@@ -9,8 +9,8 @@ import {
   FirstChild,
   AccordionEnterExit,
   SortDirections,
-} from "../components/index.js";
-import { trivial_text_maker } from "../models/text.js";
+} from "src/components/index.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 import "./explorer-components.scss";
 
