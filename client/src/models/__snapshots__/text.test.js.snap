@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`text_maker custom_text_makers should work 1`] = `
+"this key uses another: some_simple_key: A simple key
+also uses dynamic key: other_simple_key: another simple key"
+`;
+
+exports[`text_maker custom_text_makers should work 2`] = `
+"<h1 id=\\"title\\">title</h1>
+<p>some text with <em>italics</em> and <strong>bold</strong></p>
+<p>  the following block should be unescaped:
+  <div></p>
+<pre><code>      This should show up twice, once &amp;lt;strong&amp;gt;escaped&amp;lt;/strong&amp;gt; and once &amp;lt;span&amp;gt; unescaped &amp;lt;/span&amp;gt;
+      &amp;lt;div style&amp;#x3D;&amp;quot;width:100px;height:100px;background-color:red;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;</code></pre>  </div>
+
+<p>  the following block should be unescaped:</p>
+  <div>
+
+<pre><code>      This should show up twice, once &lt;strong&gt;escaped&lt;/strong&gt; and once &lt;span&gt; unescaped &lt;/span&gt;
+      &lt;div style=&quot;width:100px;height:100px;background-color:red;&quot;&gt;&lt;/div&gt;</code></pre>  </div>
+
+
+<p>list below</p>
+<ul>
+<li>a</li>
+<li>b</li>
+<li>c</li>
+</ul>
+"
+`;

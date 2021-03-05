@@ -1,0 +1,40 @@
+some_simple_key:
+  en: A simple key
+
+other_simple_key:
+  en: another simple key
+
+some_key_with_hbs_helpers:
+  transform: [handlebars]
+  en: |
+    this key uses another: some_simple_key: {{gt "some_simple_key"}}
+    also uses dynamic key: {{dynamic_key}}: {{gt dynamic_key}}
+
+
+some_key_with_hbs_and_md:
+  transform: [handlebars, markdown]
+  en: |
+    # title
+
+    some text with *italics* and **bold**
+
+    {{# if show_block_of_text }}
+      the following block should be unescaped:
+      <div>
+        {{ html_block_of_text }}
+      </div>
+      
+      the following block should be unescaped:
+
+      <div>
+        {{{ html_block_of_text }}}
+      </div>
+
+    {{/if}}
+
+    list below
+
+    {{# each list }}
+      * {{this}}
+    {{/each}}
+
