@@ -260,7 +260,7 @@ function create_config({
       stats_no_compare,
     }),
     optimization: get_optimizations(is_prod_build, produce_stats),
-    devtool: is_prod_build ? false : "inline-source-map",
+    devtool: !is_prod_build ? "eval-source-map" : is_ci ? "source-map" : false,
     resolve: {
       fallback: { assert: false },
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
