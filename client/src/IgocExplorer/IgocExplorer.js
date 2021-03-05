@@ -3,14 +3,15 @@ import React from "react";
 import { createSelector } from "reselect";
 
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
-
-import { cached_property, bound } from "src/general_utils.js";
-
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-//drilldown stuff
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+
 import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
+import { cached_property, bound } from "src/general_utils.js";
+
+
+//drilldown stuff
 
 import { ExplorerForIgoc } from "./explorer_view.js";
 import { create_igoc_hierarchy } from "./hierarchies.js";

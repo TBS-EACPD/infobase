@@ -3,14 +3,15 @@ import React from "react";
 
 
 import {
+  StandardRouteContainer,
+  ScrollToTargetContainer,
+} from "src/core/NavComponents.js";
+
+import {
   LabeledTable,
   create_text_maker_component,
   FancyUL,
 } from "src/components";
-import {
-  StandardRouteContainer,
-  ScrollToTargetContainer,
-} from "src/core/NavComponents.js";
 
 import { faq_data } from "./faq_data.js";
 

@@ -1,8 +1,9 @@
 import React from "react";
 
+import { HeaderNotification } from "src/components/HeaderNotification.js";
+
 import { trivial_text_maker } from "src/models/text.js";
 
-import { HeaderNotification } from "src/components/HeaderNotification.js";
 
 import {
   get_session_storage_w_expiry,

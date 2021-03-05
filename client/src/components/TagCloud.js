@@ -2,9 +2,11 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { backgroundColor } from "src/core/color_defs.js";
-import { IconCheckmark } from "src/icons/icons.js";
 import { GlossaryEntry } from "src/models/glossary.js";
+
+import { backgroundColor } from "src/core/color_defs.js";
+
+import { IconCheckmark } from "src/icons/icons.js";
 
 import { GlossaryIcon } from "./glossary_components.js";
 

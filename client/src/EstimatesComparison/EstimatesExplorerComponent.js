@@ -13,6 +13,8 @@ import {
   Details,
 } from "src/components/index.js";
 
+import { businessConstants } from "src/models/businessConstants.js";
+
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
@@ -20,7 +22,6 @@ import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
 import { sources } from "src/metadata/data_sources.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
 
 import {
   text_maker,

@@ -6,23 +6,26 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
-import {
-  lang,
-  is_a11y_mode,
-  is_dev,
-} from "src/core/injected_build_constants.js";
 
-import { HeaderNotification } from "src/components/HeaderNotification";
 import { PageDetails } from "src/components/PageDetails.js";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
+
 import { initialize_analytics } from "src/core/analytics.js";
 import { DevFip } from "src/core/DevFip.js";
 import { EasyAccess } from "src/core/EasyAccess.js";
 import { ErrorBoundary } from "src/core/ErrorBoundary.js";
 import { has_local_storage } from "src/core/feature_detection.js";
+import {
+  lang,
+  is_a11y_mode,
+  is_dev,
+} from "src/core/injected_build_constants.js";
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "src/core/NavComponents.js";
 import { RedirectHeader } from "src/core/RedirectHeader.js";
+
+import { HeaderNotification } from "src/components/HeaderNotification";
+
 import { TooltipActivator } from "src/glossary/TooltipActivator.js";
 import { SurveyPopup } from "src/Survey/SurveyPopup.js";
 

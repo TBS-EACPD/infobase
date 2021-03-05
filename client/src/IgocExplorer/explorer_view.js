@@ -3,15 +3,18 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import { createSelector } from "reselect";
 
+import { SpinnerWrapper, DlItem, CheckBox } from "src/components/index.js";
+
+import { Subject } from "src/models/subject.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { SpinnerWrapper, DlItem, CheckBox } from "src/components/index.js";
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
 
 import { sanitized_dangerous_inner_html } from "src/general_utils.js";
 import { infograph_href_template } from "src/link_utils.js";
-import { Subject } from "src/models/subject.js";
+
 
 import { grouping_options } from "./hierarchies.js";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";

@@ -2,12 +2,13 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants.js";
 
 import { get_client_id, log_standard_event } from "src/core/analytics.js";
 
 import { textRed } from "src/core/color_defs.js";
 import { has_local_storage } from "src/core/feature_detection.js";
+import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants.js";
+
 import {
   get_email_template,
   send_completed_email_template,

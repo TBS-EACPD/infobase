@@ -2,13 +2,15 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import { TrivialTM } from "src/components/index.js";
+
+import { trivial_text_maker } from "src/models/text.js";
+
 import {
   IconAbout,
   IconGlossary,
   IconDataset,
   IconQuestion,
 } from "src/icons/icons.js";
-import { trivial_text_maker } from "src/models/text.js";
 import "./NavComponents.scss";
 
 export class EasyAccess extends React.Component {

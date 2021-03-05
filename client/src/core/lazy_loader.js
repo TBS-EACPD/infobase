@@ -17,6 +17,7 @@ import {
   api_load_subject_has_services,
   api_load_services,
 } from "src/models/populate_services.js";
+
 import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
