@@ -6,6 +6,8 @@ import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 import { index_lang_lookups } from "../InfoBase/index_data.js";
 import { trivial_text_maker } from "../models/text.js";
 
+const bonus_footer_links = index_lang_lookups.bonus_footer_list[lang];
+
 const footer_link_items = _.compact([
   {
     href: "#privacy",
@@ -27,13 +29,17 @@ export class InsertRuntimeFooterLinks extends React.Component {
   constructor() {
     super();
     this.state = {
-      static_footer_links: document.querySelector("#footer_survey_link_area")
+      static_footer_links: document.querySelector("#footer_main_link_area")
         .innerHTML,
     };
   }
   render() {
-    const footer_survey_link_ul = document.querySelector(
-      "#footer_survey_link_area"
+    const bonus_footer_list = document.getElementById("bonus-footer-list-area");
+
+    bonus_footer_list.innerHTML = bonus_footer_links;
+
+    const footer_main_link_ul = document.querySelector(
+      "#footer_main_link_area"
     );
 
     const links_to_insert = _.chain(footer_link_items)
@@ -49,7 +55,7 @@ export class InsertRuntimeFooterLinks extends React.Component {
       )
       .value();
 
-    footer_survey_link_ul.innerHTML = links_to_insert;
+    footer_main_link_ul.innerHTML = links_to_insert;
 
     return null;
   }
