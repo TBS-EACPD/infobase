@@ -1,12 +1,15 @@
 import _ from "lodash";
 import React from "react";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { index_lang_lookups } from "../InfoBase/index_data.js";
-import { trivial_text_maker } from "../models/text.js";
+import { trivial_text_maker, create_text_maker } from "../models/text.js";
 
-const bonus_footer_links = index_lang_lookups.bonus_footer_list[lang];
+import text from "./footers.yaml";
+
+const text_maker = create_text_maker(text);
+
+const bonus_footer_links = text_maker("bonus_footer_links");
 
 const footer_link_items = _.compact([
   {
@@ -15,13 +18,13 @@ const footer_link_items = _.compact([
   },
   !is_a11y_mode && {
     id: "footer-a11y-link",
-    href: index_lang_lookups.a11y_version_url[lang],
-    text: index_lang_lookups.a11y_version_title[lang],
+    href: text_maker("a11y_version_url"),
+    text: text_maker("a11y_version_title"),
   },
   is_a11y_mode && {
     id: "footer-standard-link",
-    href: index_lang_lookups.standard_version_url[lang],
-    text: index_lang_lookups.standard_version_title[lang],
+    href: text_maker("standard_version_url"),
+    text: text_maker("standard_version_title"),
   },
 ]);
 

@@ -141,25 +141,9 @@ const index_lang_lookups = {
     en: "index-basic-fra.html",
     fr: "index-basic-eng.html",
   },
-  a11y_version_url: {
-    en: "index-basic-eng.html",
-    fr: "index-basic-fra.html",
-  },
-  a11y_version_title: {
-    en: "Text-only version",
-    fr: "Version texte",
-  },
   a11y_version_text: {
     en: "recommended for screen reader users",
     fr: "recommandée pour les utilisateurs de lecteur d'écran",
-  },
-  standard_version_url: {
-    en: "index-eng.html",
-    fr: "index-fra.html",
-  },
-  standard_version_title: {
-    en: "Graphical version",
-    fr: "Version graphique",
   },
 };
 
