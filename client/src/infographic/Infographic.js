@@ -2,18 +2,23 @@ import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   create_text_maker_component,
   SpinnerWrapper,
 } from "src/components/index.js";
-import { log_standard_event } from "src/core/analytics.js";
-import { ensure_loaded } from "src/core/lazy_loader.js";
-import { StandardRouteContainer } from "src/core/NavComponents";
-import { redirect_with_msg } from "src/core/RedirectHeader.js";
-import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";
+
 import { Subject } from "src/models/subject.js";
+
+import { log_standard_event } from "src/core/analytics.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
+
+import { redirect_with_msg } from "src/core/RedirectHeader.js";
+
+import { StandardRouteContainer } from "src/core/NavComponents";
+import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";
+
 
 import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
 import { PanelRegistry } from "src/panels/PanelRegistry.js";

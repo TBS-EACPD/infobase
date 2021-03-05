@@ -7,25 +7,29 @@ import "d3-transition";
 import _ from "lodash";
 import React from "react";
 
-import { is_mobile } from "src/core/feature_detection.js";
-
 import {
   SpinnerWrapper,
   create_text_maker_component,
 } from "src/components/index.js";
+
+import { run_template } from "src/models/text.js";
+
+import { actual_to_planned_gap_year } from "src/models/years.js";
+
 import {
   sequentialBlues,
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
 } from "src/core/color_schemes.js";
+import { is_mobile } from "src/core/feature_detection.js";
+
 import { formats } from "src/core/format.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
+
 import { infograph_href_template } from "src/infographic/infographic_link.js";
 
-import { run_template } from "src/models/text.js";
 
-import { actual_to_planned_gap_year } from "src/models/years.js";
 
 import { get_data, load_data } from "./data.js";
 

@@ -1,5 +1,7 @@
 import _ from "lodash";
 
+import { create_text_maker } from "src/models/text.js";
+
 import {
   IconAbout,
   IconRelatedBubble,
@@ -9,7 +11,6 @@ import {
   IconClipboard,
 } from "src/icons/icons.js";
 
-import { create_text_maker } from "src/models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";
 

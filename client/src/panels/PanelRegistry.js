@@ -1,11 +1,13 @@
 import _ from "lodash";
 
+import FootNote from "src/models/footnotes/footnotes.js";
+
+import { Subject } from "src/models/subject.js";
+
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 import { is_dev } from "src/core/injected_build_constants.js";
 import { Table } from "src/core/TableClass.js";
 
-import FootNote from "src/models/footnotes/footnotes.js";
-import { Subject } from "src/models/subject.js";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
 

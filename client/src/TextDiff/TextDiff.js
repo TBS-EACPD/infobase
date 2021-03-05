@@ -5,6 +5,8 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { result_docs } from "src/models/results.js";
+
 import {
   primaryColor,
   warnDarkColor,
@@ -15,6 +17,10 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
+import { ensure_loaded } from "src/core/lazy_loader.js";
+
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+
 import { LegendList } from "src/charts/legends";
 import {
   Select,
@@ -22,16 +28,15 @@ import {
   create_text_maker_component,
   SpinnerWrapper,
 } from "src/components";
-import { ensure_loaded } from "src/core/lazy_loader.js";
-import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { result_docs } from "src/models/results.js";
 import { Subject } from "src/models/subject";
-import result_text from "../panels/panel_declarations/results/result_components.yaml";
+
 import {
   Result,
   indicator_text_functions,
 } from "src/panels/panel_declarations/results/results_common.js";
+
+import result_text from "../panels/panel_declarations/results/result_components.yaml";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

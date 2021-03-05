@@ -8,6 +8,7 @@ import {
   Details,
   DropdownMenu,
 } from "src/components/index.js";
+
 import { Subject } from "src/models/subject.js";
 
 import { TextMaker, text_maker } from "./rpb_text_provider.js";

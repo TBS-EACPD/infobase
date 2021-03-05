@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
+import { log_standard_event } from "src/core/analytics.js";
 import { cdn_url, is_dev } from "src/core/injected_build_constants.js";
 
-import { log_standard_event } from "src/core/analytics.js";
 import { retry_promise } from "src/general_utils.js";
 
 // Link tags for stylesheets should all have non null sheet properties

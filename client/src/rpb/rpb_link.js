@@ -1,7 +1,8 @@
 import _ from "lodash";
 
-import { SafeJSURL } from "src/general_utils.js";
 import { Subject } from "src/models/subject.js";
+
+import { SafeJSURL } from "src/general_utils.js";
 
 const rpb_link = (naive_state, first_character = "#") =>
   _.chain(naive_state)

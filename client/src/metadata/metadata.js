@@ -3,11 +3,12 @@ import React from "react";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { create_text_maker_component, FancyUL, Panel } from "src/components";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "src/core/NavComponents.js";
+
+import { create_text_maker_component, FancyUL, Panel } from "src/components";
 
 import { sources } from "./data_sources.js";
 

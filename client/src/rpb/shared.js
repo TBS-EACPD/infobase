@@ -1,16 +1,17 @@
 import _ from "lodash";
 import React from "react";
 
-import { secondaryColor } from "src/core/color_defs.js";
-
-import { lang } from "src/core/injected_build_constants.js";
-
 import {
   FancyUL,
   ShareButton,
   WriteToClipboard,
   FootnoteList,
 } from "src/components/index.js";
+
+import { secondaryColor } from "src/core/color_defs.js";
+
+import { lang } from "src/core/injected_build_constants.js";
+
 import { IconCopyLink } from "src/icons/icons.js";
 import { sources as all_sources } from "src/metadata/data_sources.js";
 
