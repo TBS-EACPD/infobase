@@ -5,7 +5,7 @@ export {
   AutoAccordion,
 } from "./Accordion/Accordions.js";
 export { TagCloud } from "./TagCloud.js";
-export { EmailFrontend } from "./EmailFrontend.js";
+export { EmailFrontend } from "./EmailFrontend/EmailFrontend.js";
 export { HeightClipper } from "./HeightClipper/HeightClipper.js";
 export { RadioButtons } from "./RadioButtons.js";
 export { Select } from "./Select.js";

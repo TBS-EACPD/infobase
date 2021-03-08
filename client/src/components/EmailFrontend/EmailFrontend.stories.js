@@ -191,8 +191,6 @@ const basic_data = {
   additional: { required: false, value_type: "json", form_type: false },
 };
 
-const children = <div>{sentences}</div>;
-
 export const Basic = Template.bind({});
 Basic.args = {
   template_name: "EmailFrontend",
