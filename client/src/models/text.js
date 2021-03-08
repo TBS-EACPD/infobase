@@ -7,14 +7,14 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 import { is_mobile } from "src/core/feature_detection.js";
 import { lang } from "src/core/injected_build_constants.js";
 
-import a11y_lang from "../common_text/a11y_lang.yaml";
-import common_lang from "../common_text/common_lang.yaml";
-import estimates_lang from "../common_text/estimates_lang.yaml";
-import igoc_lang from "../common_text/igoc-lang.yaml";
-import nav_lang from "../common_text/nav_lang.yaml";
-import people_lang from "../common_text/people_lang.yaml";
-import result_lang from "../common_text/result_lang.yaml";
-import template_globals_file from "../common_text/template_globals.csv";
+import a11y_lang from "src/common_text/a11y_lang.yaml";
+import common_lang from "src/common_text/common_lang.yaml";
+import estimates_lang from "src/common_text/estimates_lang.yaml";
+import igoc_lang from "src/common_text/igoc-lang.yaml";
+import nav_lang from "src/common_text/nav_lang.yaml";
+import people_lang from "src/common_text/people_lang.yaml";
+import result_lang from "src/common_text/result_lang.yaml";
+import template_globals_file from "src/common_text/template_globals.csv";
 
 /* 
   TODO: some parts of this still feel hacky 

@@ -18,7 +18,7 @@ import { infograph_href_template } from "src/link_utils.js";
 
 import { grouping_options } from "./hierarchies.js";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
-import "../explorer_common/explorer-styles.scss";
+import "src/explorer_common/explorer-styles.scss";
 
 const { InstForm } = Subject;
 

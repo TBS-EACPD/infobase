@@ -5,7 +5,7 @@ import {
   TextMaker as StandardTextMaker,
 } from "src/components/index.js";
 
-import footnote_topic_text from "../models/footnotes/footnote_topics.yaml";
+import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
 
 import rpb_text from "./rpb.yaml";
 
