@@ -31,12 +31,12 @@ import {
 
 import { Subject } from "src/models/subject";
 
+import result_text from "src/panels/panel_declarations/results/result_components.yaml";
 import {
   Result,
   indicator_text_functions,
 } from "src/panels/panel_declarations/results/results_common.js";
 
-import result_text from "src/panels/panel_declarations/results/result_components.yaml";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";
