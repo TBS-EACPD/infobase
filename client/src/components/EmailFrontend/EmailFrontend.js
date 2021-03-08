@@ -4,19 +4,19 @@ import React, { Fragment } from "react";
 
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants.js";
 
-import { get_client_id, log_standard_event } from "../core/analytics.js";
+import { get_client_id, log_standard_event } from "../../core/analytics.js";
 
-import { textRed } from "../core/color_defs.js";
-import { has_local_storage } from "../core/feature_detection.js";
+import { textRed } from "../../core/color_defs.js";
+import { has_local_storage } from "../../core/feature_detection.js";
 import {
   get_email_template,
   send_completed_email_template,
-} from "../email_backend_utils.js";
+} from "../../email_backend_utils.js";
 
-import { CheckBox } from "./CheckBox/CheckBox.js";
-import { create_text_maker_component } from "./misc_util_components.js";
+import { CheckBox } from "../CheckBox/CheckBox.js";
+import { create_text_maker_component } from "../misc_util_components.js";
 
-import { SpinnerWrapper } from "./SpinnerWrapper";
+import { SpinnerWrapper } from "../SpinnerWrapper";
 
 import text from "./EmailFrontend.yaml";
 

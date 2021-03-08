@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
-    "@wry/equality": "0.3.2",
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-decorators": "^7.12.1",
@@ -23,6 +22,8 @@
     "@nivo/line": "^0.52.1",
     "@nivo/pie": "^0.52.1",
     "@nivo/stream": "^0.52.1",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@wry/equality": "0.3.2",
     "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
     "bootstrap": "^4.5.3",

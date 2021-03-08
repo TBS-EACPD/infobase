@@ -12,6 +12,15 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
+    "@storybook/addon-postcss",
+    {
+      name: "@storybook/addon-postcss",
+      options: {
+        postcssLoaderOptions: {
+          implementation: require("postcss"),
+        },
+      },
+    },
   ],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
@@ -22,6 +31,17 @@ module.exports = {
       ...config.resolve,
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
     };
+
+    config.module.rules = config.module.rules.filter(
+      (f) => f.test.toString() !== "/\\.css$/"
+    );
+
+    // Make whatever fine-grained changes you need
+    config.module.rules.push({
+      test: /\.css$/,
+      loaders: ["style-loader", "css-loader", "postcss-loader"],
+      include: std_lib_path.resolve(__dirname, "./"),
+    });
 
     // TODO hacky, this is essentially to set injected_build_constants.js's lang export.
     // Going to have components that need other injected build constants though, and might
