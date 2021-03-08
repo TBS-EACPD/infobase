@@ -88,7 +88,12 @@ export const PageSelector = ({
                   >
                     1
                   </button>
-                  <button className="btn-ib-light" tabIndex="-1">
+                  <button
+                    className="btn-ib-light"
+                    tabIndex="-1"
+                    onClick={() => change_page(current_page - 1)}
+                    aria-label={text_maker("previous")}
+                  >
                     &hellip;
                   </button>
                 </Fragment>
@@ -112,7 +117,12 @@ export const PageSelector = ({
               )}
               {current_page < num_pages - 2 && (
                 <Fragment>
-                  <button className="btn-ib-light" tabIndex="-1">
+                  <button
+                    className="btn-ib-light"
+                    tabIndex="-1"
+                    onClick={() => change_page(current_page + 1)}
+                    aria-label={text_maker("next")}
+                  >
                     &hellip;
                   </button>
                   <button
