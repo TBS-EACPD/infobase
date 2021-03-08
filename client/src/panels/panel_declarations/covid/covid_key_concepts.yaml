@@ -52,8 +52,89 @@ covid_questions_funding_value_a:
     value of each measure. GC InfoBase presents these values on a cash basis rather than an accrual basis to align with cash-based expenditure values and the cash-based spending
     authorities presented in the Estimates.  
 
-    Cases where the cash value here is higher than the accrual value provided in the FES are due to updates that have occurred since the publication of the FES.
+    Cases where the cash value here is higher than the accrual value provided in the FES are due to updates that have occurred since the publication of the FES.  
 
     Expenditures may be higher than funding for a given measure due to transfers between organizations and/or the use of existing resources by one or more organizations to support a measure.
     There may also be measures without funding amounts, which represent measures that have been identified in the Estimates that were not included in the FES.
   fr: TODO
+
+
+covid_questions_what_is_new_q:
+  en: What is new about the recent data presented on GC InfoBase?
+  fr: TODO 
+covid_questions_what_is_new_a:
+  en: |
+    As of March x, 2021, GC InfoBase reports Estimates authorities on a measure basis as
+    per Canada’s COVID-19 Economic Response Plan outlined in the Fall Economic Statement 2020.
+    For the first time, GC InfoBase is reporting on expenditures incurred against authorities as of
+    January 31, 2021, where available.
+  fr: TODO
+
+covid_questions_measure_vs_initiative_q:
+  en: How does the current presentation of COVID-19 authorities “by measure” differ from the previous presentation of authorities “by Estimates Initiative?
+  fr: TODO
+covid_questions_measure_vs_initiative_a:
+  en: |
+    The current presentation of “Spending Authorities by COVID-19 Measure” better aligns
+    authority information with Canada’s COVID-19 Economic Response Plan outlined in the 2020 Fall
+    Economic Statement, which provides a thematic list of anticipated authorities at an aggregate
+    level. The previous presentation by “Estimates Initiatives” included actual authorities at the
+    granular level by department and by initiative.
+  fr: TODO
+
+covid_questions_authorities_vs_funding_q:
+  en: Why don’t authorities correspond to funding announcements made by the Government?
+  fr: TODO
+covid_questions_authorities_vs_funding_a:
+  transform: [markdown]
+  en: |
+    GC InfoBase reports on the total authorities included in the Estimates. Excluded from the Estimates are:
+      - Measures legislated through the Income Tax Act such as the Canada Emergency Wage Subsidy and the Canada Child Benefit;
+      - Employment Insurance Benefits that are paid out of the Employment InsuranceOperating Account; and
+      - Liquidity measures such as the Canada Emergency Business Account, and the Business Credit Availability Program.  
+    
+    Another notable difference between Government announcements in the COVID-19 Economic
+    Response Plan and authorities included in the Estimates is the basis of accounting. The
+    Estimates use a cash-basis of accounting, reflecting when cash payments are anticipated, while
+    Government announcements are based on an accrual-basis of accounting, recognizing cash
+    investments over their useful life (e.g. recognizing the cost of an asset over 10 years vs. the year
+    in which the cash must be paid).
+  fr: TODO
+
+covid_questions_missing_measures_q:
+  en: Why are some measures of the Government’s COVID response plan missing from the measures tab?
+  fr: TODO
+covid_questions_missing_measures_a:
+  transform: [markdown]
+  en: |
+    GC InfoBase currently only reports on COVID-19 measures which have been presented
+    in the Estimates. While this includes some benefits such as the Canada Emergency Response
+    Benefit (CERB), not all benefits fall inside the scope of the Estimates, notably:
+      - Employment Insurance (EI);
+      - Canada Emergency Wage Subsidy (CEWS); and
+      - Canada Emergency Rent Subsidy (CERS).  
+    
+    More information related to the benefits and services provided by the Government of Canada to
+    help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are
+    available online.
+  fr: TODO
+
+covid_questions_frequency_q:
+  en: How frequently will COVID-19 spending authorities and expenditures be updated on GC InfoBase?
+  fr: TODO
+covid_questions_frequency_a:
+  en: |
+    COVID-19 spending authorities will be updated following the tabling of an Estimates
+    (e.g. Supplementary Estimates (A), 2020-21); or as other pertinent information becomes
+     available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
+  fr: TODO
+
+covid_questions_otherexpenditure_reporting_q:
+  en: Where does the Government normally report expenditure information (COVID, non-COVID)?
+  fr: TODO
+covid_questions_otherexpenditure_reporting_a:
+  en: |
+    Audited Government expenditures are reported after a fiscal year is complete (in the
+    fall), in the Public Accounts of Canada. During the year, the Department of Finance provides
+    monthly updates in the Fiscal Monitor; and departments provide information in their Quarterly
+    Financial Reports (QFR).
