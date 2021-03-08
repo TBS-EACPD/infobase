@@ -5,15 +5,16 @@ covid_intro_panel_title:
 covid_intro_static_text:
   transform: [handlebars,markdown]
   en: |
-    Since early 2020, the Government of Canada has put in place a series of measures in order to help Canadians who may face hardship due to the pandemic.
-    These measures form {{ext_link "Canada’s COVID-19 Economic Response Plan" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}},
+    Since March 2020, the Government of Canada has put in place temporary measures to mitigate the impacts of the COVID-19 pandemic on Canadians, businesses and organizations.
+    These measures form {{ext_link "Canada’s COVID-19 Economic Response Plan (ERP)" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}},
     with further details available in the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}.
-    Many of these measures, notably for direct health and economic supports, are also presented in the
-    {{ext_link "Estimates" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/covid-19-planned-expenditures.html"}}.
-     
-    GC InfoBase reporting is based on the {{gl_tt "Estimates" "EST_PROC"}}, meaning only those measures presented in the Estimates are reported here.
-    As a result, GC InfoBase does not currently cover the whole of Canada’s COVID-19 Economic Response Plan.
+    Additional information, notably for direct health and economic supports, are also presented in the {{ext_link "Estimates" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/covid-19-planned-expenditures.html"}}.  
+
+    GC InfoBase seeks to provide additional information on amounts presented in the {{gl_tt "Estimates" "EST_PROC"}}. For COVID-19, it reports total Estimates authorities,
+    but on a measure basis as per the COVID-19 Economic Response Plan (ERP), including associated expenditures where available. Given its focus on the Estimates,
+    GC InfoBase does not currently cover the whole of Canada’s COVID-19 Economic Response Plan.
   fr: |
+    Depuis mars 2020, le gouvernement du Canada a mis en place des mesures temporaires pour atténuer les impacts de la pandémie de la COVID-19 sur les Canadiens, les entreprises et les organisations.
     TODO
 
 covid_intro_dynamic_text:
