@@ -18,7 +18,7 @@ covid_above_tab_limited_measure_note:
   fr: TODO
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
-  en: Final expenditures for {{COVID_CURRENT_YEAR}} will be available with the publication of the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). For the purposes of reporting on the spending related to Canada’s COVID-19 Economic Response Plan, current spending represents unaudited expenditures to the date noted. Updates will be reflected on GC InfoBase monthly.
+  en: Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be available with the publication of the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). For the purposes of reporting on the spending related to Canada’s COVID-19 Economic Response Plan, current spending represents unaudited expenditures to the date noted. Updates will be reflected on GC InfoBase monthly.
   fr: TODO
 covid_above_tab_data_org_websites_note:
   transform: [handlebars]
