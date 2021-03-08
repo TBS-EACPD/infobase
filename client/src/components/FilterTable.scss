@@ -1,4 +1,4 @@
-@import '../common_css/common-variables';
+@import 'src/common_css/common-variables';
 
 $controlsColor: $primaryColor;
 $controlsColorLighter: lighten($controlsColor, 20%);
