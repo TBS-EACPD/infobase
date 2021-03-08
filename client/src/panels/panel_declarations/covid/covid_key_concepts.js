@@ -37,12 +37,8 @@ export const declare_covid_key_concepts_panel = () =>
                 <TM key={"a"} k={"covid_questions_up_to_date_a"} />,
               ],
               [
-                <TM key={"q"} k={"covid_questions_financial_q"} />,
-                <TM key={"a"} k={"covid_questions_financial_a"} />,
-              ],
-              [
-                <TM key={"q"} k={"covid_questions_benefits_q"} />,
-                <TM key={"a"} k={"covid_questions_benefits_a"} />,
+                <TM key={"q"} k={"covid_questions_frequency_q"} />,
+                <TM key={"a"} k={"covid_questions_frequency_a"} />,
               ],
               [
                 <TM key={"q"} k={"covid_questions_what_is_new_q"} />,
@@ -53,25 +49,25 @@ export const declare_covid_key_concepts_panel = () =>
                 <TM key={"a"} k={"covid_questions_measure_vs_initiative_a"} />,
               ],
               [
-                <TM key={"q"} k={"covid_questions_authorities_vs_funding_q"} />,
-                <TM key={"a"} k={"covid_questions_authorities_vs_funding_a"} />,
+                <TM key={"q"} k={"covid_questions_financial_q"} />,
+                <TM key={"a"} k={"covid_questions_financial_a"} />,
               ],
               [
                 <TM key={"q"} k={"covid_questions_missing_measures_q"} />,
                 <TM key={"a"} k={"covid_questions_missing_measures_a"} />,
               ],
               [
-                <TM key={"q"} k={"covid_questions_frequency_q"} />,
-                <TM key={"a"} k={"covid_questions_frequency_a"} />,
+                <TM key={"q"} k={"covid_questions_authorities_vs_funding_q"} />,
+                <TM key={"a"} k={"covid_questions_authorities_vs_funding_a"} />,
               ],
               [
                 <TM
                   key={"q"}
-                  k={"covid_questions_otherexpenditure_reporting_q"}
+                  k={"covid_questions_other_expenditure_reporting_q"}
                 />,
                 <TM
                   key={"a"}
-                  k={"covid_questions_otherexpenditure_reporting_a"}
+                  k={"covid_questions_other_expenditure_reporting_a"}
                 />,
               ],
               COVID_FUNDING_FEATURE_FLAG &&
