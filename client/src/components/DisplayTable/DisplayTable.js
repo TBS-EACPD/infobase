@@ -319,6 +319,16 @@ export class DisplayTable extends React.Component {
 
     const show_pagination_controls = num_pages >= 0;
 
+    const page_selector = show_pagination_controls && (
+      <PageSelector
+        num_pages={num_pages}
+        current_page={current_page}
+        change_page={change_page}
+        show_select
+        num_col={_.size(visible_ordered_col_keys)}
+      />
+    );
+
     return (
       <div
         className={classNames(
@@ -440,15 +450,7 @@ export class DisplayTable extends React.Component {
                 })}
               </tr>
             )}
-            {show_pagination_controls && (
-              <PageSelector
-                num_pages={num_pages}
-                current_page={current_page}
-                change_page={change_page}
-                show_select
-                num_col={_.size(visible_ordered_col_keys)}
-              />
-            )}
+            {page_selector}
           </thead>
           {_.isEmpty(visible_ordered_col_keys) ? (
             <NoDataMessage />
@@ -537,6 +539,17 @@ export class DisplayTable extends React.Component {
               )}
             </tbody>
           )}
+          <tfoot>
+            {show_pagination_controls && (
+              <PageSelector
+                num_pages={num_pages}
+                current_page={current_page}
+                change_page={change_page}
+                show_select
+                num_col={_.size(visible_ordered_col_keys)}
+              />
+            )}
+          </tfoot>
         </table>
 
         {sorted_filtered_data.length === 0 && (
