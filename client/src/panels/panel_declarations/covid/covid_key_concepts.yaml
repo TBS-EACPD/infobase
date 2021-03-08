@@ -23,24 +23,6 @@ covid_questions_financial_a:
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19.
   fr: TODO
 
-covid_questions_benefits_q:
-  en: I am looking for information on a particular COVID-19 benefit offered by the Government of Canada, can I find that on GC InfoBase?
-  fr: TODO
-covid_questions_benefits_a:
-  transform: [handlebars,markdown]
-  en: |
-    GC InfoBase currently only reports on COVID-19 measures which have been presented in the Estimates. While this includes some benefits such as the
-    Canada Emergency Response Benefit (CERB), not all benefits fall inside the scope of the Estimates.
-
-    Notable COVID-19 related benefits not reported on here include:
-      - Employment Insurance (EI)
-      - Canada Emergency Wage Subsidy (CEWS)
-      - Canada Emergency Rent Subsidy (CERS)
-
-    More information related to the benefits and services provided by the Government of Canada to help Canadians and businesses facing hardship as a result of the global COVID-19
-    outbreak can be found {{ext_link "here" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}. 
-  fr: TODO
-
 covid_questions_funding_value_q:
   en: What are "funding" amounts? Where do they come from?
   fr: TODO
@@ -57,7 +39,6 @@ covid_questions_funding_value_a:
     Expenditures may be higher than funding for a given measure due to transfers between organizations and/or the use of existing resources by one or more organizations to support a measure.
     There may also be measures without funding amounts, which represent measures that have been identified in the Estimates that were not included in the FES.
   fr: TODO
-
 
 covid_questions_what_is_new_q:
   en: What is new about the recent data presented on GC InfoBase?
@@ -129,10 +110,10 @@ covid_questions_frequency_a:
      available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
   fr: TODO
 
-covid_questions_otherexpenditure_reporting_q:
+covid_questions_other_expenditure_reporting_q:
   en: Where does the Government normally report expenditure information (COVID, non-COVID)?
   fr: TODO
-covid_questions_otherexpenditure_reporting_a:
+covid_questions_other_expenditure_reporting_a:
   en: |
     Audited Government expenditures are reported after a fiscal year is complete (in the
     fall), in the Public Accounts of Canada. During the year, the Department of Finance provides
