@@ -70,7 +70,7 @@ export const PageSelector = ({
   num_col,
 }) => {
   return (
-    <tr>
+    <tr className="page-selector-controls">
       <td colSpan={num_col}>
         <div style={{ padding: "10px" }}>
           <div className="frow">
