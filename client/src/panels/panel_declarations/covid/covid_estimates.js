@@ -25,7 +25,10 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
-import { AboveTabFootnoteList } from "./covid_common_components.js";
+import {
+  AboveTabFootnoteList,
+  CellTooltip,
+} from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -325,6 +328,36 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 );
 
 const get_measure_name = (id) => CovidMeasure.lookup(id).name;
+const measure_cell_tooltips = [
+  {
+    measure_ids: ["COV082"],
+    subject_ids: ["gov", 280],
+    text: text_maker("covid_estimates_COV082_2020_tooltip"),
+  },
+  {
+    measure_ids: ["COV115"],
+    subject_ids: ["gov", 280],
+    text: text_maker("covid_estimates_COV115_2020_tooltip"),
+  },
+  {
+    measure_ids: ["OTHER"],
+    subject_ids: ["*"],
+    text: text_maker("covid_estimates_OTHER_tooltip"),
+  },
+];
+const get_measure_cell_tooltip = (cell_measure_id, table_subject_id) =>
+  _.chain(measure_cell_tooltips)
+    .filter(
+      ({ measure_ids, subject_ids }) =>
+        _.some(measure_ids, (tooltip_measure_id) =>
+          _.includes(["*", cell_measure_id], tooltip_measure_id)
+        ) &&
+        _.some(subject_ids, (tooltip_subject_id) =>
+          _.includes(["*", table_subject_id], tooltip_subject_id)
+        )
+    )
+    .map(({ text }) => <CellTooltip tooltip_text={text} key={text} />)
+    .value();
 const ByMeasureTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
@@ -369,7 +402,12 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         header: text_maker("covid_measure"),
         is_searchable: true,
         raw_formatter: get_measure_name,
-        formatter: get_measure_name,
+        formatter: (id) => (
+          <Fragment>
+            {get_measure_name(id)}
+            {get_measure_cell_tooltip(id, panel_args.subject.id)}
+          </Fragment>
+        ),
         sort_func: (id_a, id_b) =>
           _.chain([id_a, id_b])
             .map(CovidMeasure.lookup)

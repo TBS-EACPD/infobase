@@ -65,3 +65,21 @@ covid_estimates_stat:
 covid_estimates_vote:
   en: Voted Authorities
   fr: Autorisations votées
+
+
+covid_estimates_COV082_2020_tooltip:
+  en: |
+    Includes $5 billion for vaccines that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
+    These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information online.
+  fr: TODO
+covid_estimates_COV115_2020_tooltip:
+  en: |
+    Includes $500 million for PPE that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22. These voted authorities
+    were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information online.
+  fr: TODO
+covid_estimates_OTHER_tooltip:
+  en: |
+    "COVID-19 items not included in the ERP but presented in Estimates" includes a small number of other items that are tagged as COVID-19
+    in the Estimates, as a means of highlighting to parliamentarians where the funding is, at least in part, driven by COVID-19 even though
+    the initiative itself is not part of the COVID-19 Economic Response Plan.
+  fr: TODO
