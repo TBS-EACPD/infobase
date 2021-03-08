@@ -5,7 +5,7 @@ export const COVID_LAST_REFRESHED_MONTH = {
   fr: "janvier 2021",
 }[lang];
 
-export const COVID_CURRENT_YEAR = 2021;
+export const COVID_CURRENT_YEAR = 2020;
 
 export const COVID_NEXT_YEAR = COVID_CURRENT_YEAR + 1;
 
