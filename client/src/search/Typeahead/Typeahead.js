@@ -50,17 +50,15 @@ export class Typeahead extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { page_size } = this.props;
 
-    const { query_value, current_search_configs, may_show_menu } = this.state;
+    const { query_value, current_search_configs } = this.state;
     const {
       query_value: prev_query_value,
       current_search_configs: prev_search_configs,
-      may_show_menu: prev_may_show_menu,
     } = prevState;
 
     if (
       query_value !== prev_query_value ||
-      current_search_configs !== prev_search_configs ||
-      (may_show_menu && may_show_menu !== prev_may_show_menu)
+      current_search_configs !== prev_search_configs
     ) {
       const matching_results_by_page = !this.show_menu
         ? []
