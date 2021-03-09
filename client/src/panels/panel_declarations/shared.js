@@ -9,7 +9,7 @@ import {
   WrappedNivoHBar,
   WrappedNivoLine,
   WrappedNivoPie,
-  CircleProportionChart,
+  WrappedNivoCircleProportion,
   NivoLineBarToggle,
   WrappedNivoTreemap,
 } from "../../charts/wrapped_nivo/index.js";
@@ -200,7 +200,7 @@ export {
   WrappedNivoHBar,
   WrappedNivoLine,
   WrappedNivoPie,
-  CircleProportionChart,
+  WrappedNivoCircleProportion,
   WrappedNivoTreemap,
   Canada,
   breakpoints,

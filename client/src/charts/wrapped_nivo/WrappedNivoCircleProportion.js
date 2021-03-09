@@ -20,8 +20,8 @@ import {
   TooltipFactory,
 } from "./wrapped_nivo_common.js";
 
-import text from "./CircleProportionChart.yaml";
-import "./CircleProportionChart.scss";
+import text from "./WrappedNivoCircleProportion.yaml";
+import "./WrappedNivoCircleProportion.scss";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
@@ -94,7 +94,7 @@ const ProportionalNode = ({ node, style, handlers }) => {
   );
 };
 
-export class CircleProportionChart extends React.Component {
+export class WrappedNivoCircleProportion extends React.Component {
   render() {
     const {
       margin,
@@ -241,7 +241,7 @@ export class CircleProportionChart extends React.Component {
     return <InteractiveGraph graph={graph} table={table} />;
   }
 }
-CircleProportionChart.defaultProps = {
+WrappedNivoCircleProportion.defaultProps = {
   ...general_default_props,
   margin: { top: 15, right: 0, bottom: 15, left: 0 },
 };
