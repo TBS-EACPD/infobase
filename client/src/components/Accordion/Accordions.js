@@ -9,9 +9,8 @@ import { trivial_text_maker } from "src/models/text.js";
 
 import { textLightColor } from "src/core/color_defs.js";
 
-import { IconChevron } from "../../icons/icons.js";
+import { IconChevron } from "src/icons/icons.js";
 
-import { trivial_text_maker } from "../../models/text.js";
 
 import "./Accordions.scss";
 
