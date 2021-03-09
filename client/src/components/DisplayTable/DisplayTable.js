@@ -86,7 +86,7 @@ export class DisplayTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.table_ref = React.createRef();
+    this.first_data_ref = React.createRef();
 
     const { unsorted_initial, column_configs } = props;
 
@@ -335,7 +335,7 @@ export class DisplayTable extends React.Component {
 
     const change_page = (page) => {
       this.setState({ current_page: page });
-      this.table_ref.current.scrollIntoView({ behavior: "smooth" });
+      this.first_data_ref.current.focus();
     };
 
     const change_paginate_by = (new_paginate_by) => {
@@ -401,7 +401,7 @@ export class DisplayTable extends React.Component {
                       <button
                         tabIndex={0}
                         className={"skip-to-data"}
-                        onClick={() => this.refs.first_data.focus()}
+                        onClick={() => this.first_data_ref.current.focus()}
                       >
                         {text_maker("skip_to_data")}
                       </button>
@@ -492,7 +492,7 @@ export class DisplayTable extends React.Component {
                       }}
                       key={col_key}
                       tabIndex={-1}
-                      ref={idx === 0 && i === 0 ? "first_data" : null}
+                      ref={idx === 0 && i === 0 ? this.first_data_ref : null}
                     >
                       {col_configs_with_defaults[col_key].formatter ? (
                         _.isString(
