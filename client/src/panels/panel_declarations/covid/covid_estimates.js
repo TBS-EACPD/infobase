@@ -87,7 +87,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
       data={graph_data}
       keys={graph_keys}
       indexBy={graph_index_key}
-      colorBy={(d) => colors(d.id)}
+      colors={(d) => colors(d.id)}
       margin={{
         top: 50,
         right: 40,
