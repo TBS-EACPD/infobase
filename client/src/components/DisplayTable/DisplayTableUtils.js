@@ -64,99 +64,89 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
   </Fragment>
 );
 
-export class PageSelector extends React.Component {
-  constructor(props) {
-    super(props);
-    this.selected_tab = React.createRef();
-  }
-  componentDidUpdate(prev_props, prev_state) {
-    const { current_page } = this.props;
-    const { current_page: prev_page } = prev_props;
-
-    if (current_page !== prev_page) {
-      this.selected_tab.current.focus();
-    }
-  }
-  render() {
-    const { current_page, num_pages, change_page, num_col } = this.props;
-
-    return (
-      <tr className="page-selector-controls">
-        <td colSpan={num_col}>
-          <div style={{ padding: "10px" }}>
-            <div className="frow">
-              <div
-                className="fcol-xs-12 d-flex justify-content-center page-selector"
-                style={{ flexWrap: "wrap" }}
-              >
-                {current_page > 2 && (
-                  <Fragment>
+export const PageSelector = ({
+  current_page,
+  num_pages,
+  change_page,
+  num_col,
+}) => {
+  return (
+    <tr className="page-selector-controls">
+      <td colSpan={num_col}>
+        <div style={{ padding: "10px" }}>
+          <div className="frow">
+            <div
+              className="fcol-xs-12 d-flex justify-content-center page-selector"
+              style={{ flexWrap: "wrap" }}
+            >
+              {current_page > 2 && (
+                <Fragment>
+                  <button
+                    className="btn-ib-light"
+                    onClick={() => change_page(0)}
+                    aria-label="Page 1"
+                    role="tab"
+                  >
+                    1
+                  </button>
+                  <button
+                    className="btn-ib-light"
+                    tabIndex="-1"
+                    onClick={() => change_page(current_page - 1)}
+                    aria-label={text_maker("previous")}
+                    role="tab"
+                  >
+                    &hellip;
+                  </button>
+                </Fragment>
+              )}
+              {_.map(
+                _.range(current_page - 2, current_page + 3),
+                (num) =>
+                  num >= 0 &&
+                  num <= num_pages && (
                     <button
-                      className="btn-ib-light"
-                      onClick={() => change_page(0)}
-                      aria-label="Page 1"
+                      key={num}
+                      className={`btn-ib-light${
+                        (num === current_page && "--reversed") || ""
+                      }`}
+                      onClick={() => change_page(num)}
+                      aria-label={`Page ${num + 1}`}
                       role="tab"
+                      aria-selected={`${num === current_page}`}
                     >
-                      1
+                      {num + 1}
                     </button>
-                    <button
-                      className="btn-ib-light"
-                      onClick={() => change_page(current_page - 1)}
-                      aria-label={text_maker("previous")}
-                      role="tab"
-                    >
-                      &hellip;
-                    </button>
-                  </Fragment>
-                )}
-                {_.map(
-                  _.range(current_page - 2, current_page + 3),
-                  (num) =>
-                    num >= 0 &&
-                    num <= num_pages && (
-                      <button
-                        key={num}
-                        className={`btn-ib-light${
-                          (num === current_page && "--reversed") || ""
-                        }`}
-                        onClick={() => change_page(num)}
-                        aria-label={`Page ${num + 1}`}
-                        aria-selected={`${num === current_page}`}
-                        role="tab"
-                        ref={num === current_page && this.selected_tab}
-                      >
-                        {num + 1}
-                      </button>
-                    )
-                )}
-                {current_page < num_pages - 2 && (
-                  <Fragment>
-                    <button
-                      className="btn-ib-light"
-                      onClick={() => change_page(current_page + 1)}
-                      aria-label={text_maker("next")}
-                      role="tab"
-                    >
-                      &hellip;
-                    </button>
-                    <button
-                      className="btn-ib-light"
-                      onClick={() => change_page(num_pages)}
-                      aria-label={`Page ${num_pages + 1}`}
-                      role="tab"
-                    >
-                      {num_pages + 1}
-                    </button>
-                  </Fragment>
-                )}
-              </div>
+                  )
+              )}
+              {current_page < num_pages - 2 && (
+                <Fragment>
+                  <button
+                    className="btn-ib-light"
+                    tabIndex="-1"
+                    onClick={() => change_page(current_page + 1)}
+                    aria-label={text_maker("next")}
+                    role="tab"
+                  >
+                    &hellip;
+                  </button>
+                  <button
+                    className="btn-ib-light"
+                    onClick={() => change_page(num_pages)}
+                    aria-label={`Page ${num_pages + 1}`}
+                    role="tab"
+                  >
+                    {num_pages + 1}
+                  </button>
+                </Fragment>
+              )}
             </div>
           </div>
-        </td>
-      </tr>
-    );
-  }
-}
+        </div>
+      </td>
+    </tr>
+  );
+};
 
 export const PageinateBySelector = ({ selected, on_select, num_items }) => {
   const options = _.filter([100, num_items > 100 && num_items]);
