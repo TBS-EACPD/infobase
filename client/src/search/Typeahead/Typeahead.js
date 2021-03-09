@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
+import ReactResizeDetector from "react-resize-detector";
 
 import {
   AutoSizer,
@@ -235,37 +236,52 @@ export class Typeahead extends React.Component {
         {this.show_menu && (
           <AutoSizer>
             {({ width }) => (
-              <List
-                className="typeahead__dropdown"
-                role="listbox"
-                id={this.menu_id}
-                aria-expanded={this.show_menu}
-                height={list_height}
-                width={width}
-                ref={this.list_ref}
-                scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
-                deferredMeasurementCache={cache}
-                rowHeight={cache.rowHeight}
-                rowCount={_.size(list_items)}
-                rowRenderer={({ index, isScrolling, key, parent, style }) => (
-                  <CellMeasurer
-                    cache={cache}
-                    columnIndex={0}
-                    key={key}
-                    parent={parent}
-                    rowIndex={index}
-                  >
-                    <div style={style}>
-                      {_.isEmpty(matching_results) && (
-                        <li className="typeahead__header">
-                          {text_maker("no_matches_found")}
-                        </li>
-                      )}
-                      {!_.isEmpty(matching_results) && list_items[index]}
-                    </div>
-                  </CellMeasurer>
+              <ReactResizeDetector
+                handleWidth
+                onResize={() => {
+                  cache.clearAll();
+                }}
+              >
+                {() => (
+                  <List
+                    className="typeahead__dropdown"
+                    role="listbox"
+                    id={this.menu_id}
+                    aria-expanded={this.show_menu}
+                    height={list_height}
+                    width={width}
+                    ref={this.list_ref}
+                    scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
+                    deferredMeasurementCache={cache}
+                    rowHeight={cache.rowHeight}
+                    rowCount={_.size(list_items)}
+                    rowRenderer={({
+                      index,
+                      isScrolling,
+                      key,
+                      parent,
+                      style,
+                    }) => (
+                      <CellMeasurer
+                        cache={cache}
+                        columnIndex={0}
+                        key={key}
+                        parent={parent}
+                        rowIndex={index}
+                      >
+                        <div style={style}>
+                          {_.isEmpty(matching_results) && (
+                            <li className="typeahead__header">
+                              {text_maker("no_matches_found")}
+                            </li>
+                          )}
+                          {!_.isEmpty(matching_results) && list_items[index]}
+                        </div>
+                      </CellMeasurer>
+                    )}
+                  />
                 )}
-              />
+              </ReactResizeDetector>
             )}
           </AutoSizer>
         )}
