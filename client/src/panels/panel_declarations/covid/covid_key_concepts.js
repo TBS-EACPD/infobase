@@ -31,52 +31,23 @@ export const declare_covid_key_concepts_panel = () =>
       render: () => (
         <SomeThingsToKeepInMind>
           <KeyConceptList
-            question_answer_pairs={_.compact([
-              [
-                <TM key={"q"} k={"covid_questions_up_to_date_q"} />,
-                <TM key={"a"} k={"covid_questions_up_to_date_a"} />,
-              ],
-              [
-                <TM key={"q"} k={"covid_questions_frequency_q"} />,
-                <TM key={"a"} k={"covid_questions_frequency_a"} />,
-              ],
-              [
-                // TODO this one should be fairly temporary
-                <TM key={"q"} k={"covid_questions_what_is_new_q"} />,
-                <TM key={"a"} k={"covid_questions_what_is_new_a"} />,
-              ],
-              [
-                <TM key={"q"} k={"covid_questions_measure_vs_initiative_q"} />,
-                <TM key={"a"} k={"covid_questions_measure_vs_initiative_a"} />,
-              ],
-              [
-                <TM key={"q"} k={"covid_questions_financial_q"} />,
-                <TM key={"a"} k={"covid_questions_financial_a"} />,
-              ],
-              [
-                <TM key={"q"} k={"covid_questions_missing_measures_q"} />,
-                <TM key={"a"} k={"covid_questions_missing_measures_a"} />,
-              ],
-              [
-                <TM key={"q"} k={"covid_questions_authorities_vs_funding_q"} />,
-                <TM key={"a"} k={"covid_questions_authorities_vs_funding_a"} />,
-              ],
-              [
-                <TM
-                  key={"q"}
-                  k={"covid_questions_other_expenditure_reporting_q"}
-                />,
-                <TM
-                  key={"a"}
-                  k={"covid_questions_other_expenditure_reporting_a"}
-                />,
-              ],
-              COVID_FUNDING_FEATURE_FLAG &&
-                level === "gov" && [
-                  <TM key={"q"} k={"covid_questions_funding_value_q"} />,
-                  <TM key={"a"} k={"covid_questions_funding_value_a"} />,
-                ],
-            ])}
+            question_answer_pairs={_.chain([
+              "up_to_date",
+              "frequency",
+              "what_is_new",
+              "measure_vs_initiative",
+              "financial",
+              "missing_measures",
+              "authorities_vs_funding",
+              "other_expenditure_reporting",
+              COVID_FUNDING_FEATURE_FLAG && "funding_value",
+            ])
+              .compact()
+              .map((key) => [
+                <TM key={"q"} k={`covid_questions_${key}_q`} />,
+                <TM key={"a"} k={`covid_questions_${key}_a`} />,
+              ])
+              .value()}
           />
         </SomeThingsToKeepInMind>
       ),
