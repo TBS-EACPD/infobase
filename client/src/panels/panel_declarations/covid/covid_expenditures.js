@@ -36,12 +36,7 @@ import text from "./covid_expenditures.yaml";
 const { CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
-const {
-  TabbedContent,
-  TabLoadingSpinner,
-  AlertBanner,
-  SmartDisplayTable,
-} = util_components;
+const { TabbedContent, TabLoadingSpinner, SmartDisplayTable } = util_components;
 
 const client = get_client();
 
@@ -502,9 +497,6 @@ export const declare_covid_expenditures_panel = () =>
             footnotes,
           }}
         >
-          <AlertBanner banner_class="danger">
-            {"Real (but non-final) data. For development purposes only!"}
-          </AlertBanner>
           <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />
         </InfographicPanel>
       ),
