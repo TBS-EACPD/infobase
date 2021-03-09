@@ -69,17 +69,24 @@ covid_estimates_vote:
 
 covid_estimates_COV082_2020_tooltip:
   en: |
-    Includes $5 billion for vaccines that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
+    Oncludes $5 billion for vaccines that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
     These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information online.
-  fr: TODO
+  fr: |
+    Comprend les cinq milliards de dollars pour les vaccins qui ont été approuvés dans le budget supplémentaire des dépenses (B), mais qui ont ensuite été reportés à 2021-2022. Ces
+    autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires en ligne relatifs au Budget supplémentaire des dépenses (C) 2020-2021.
 covid_estimates_COV115_2020_tooltip:
   en: |
-    Includes $500 million for PPE that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22. These voted authorities
-    were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information online.
-  fr: TODO
+    Includes $500 million for PPE that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22. These voted authorities were reported as frozen
+    allotments in the 2020-21 Supplementary Estimates (C) supplemental information online.
+  fr: |
+    Comprend 500 millions de dollars pour les EPI qui ont été approuvés dans le budget supplémentaire des dépenses (B), mais qui ont ensuite été reportés à 2021-2022. Ces
+    autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires en ligne relatifs au Budget supplémentaire des dépenses (C) 2020-2021.
 covid_estimates_OTHER_tooltip:
   en: |
     "COVID-19 items not included in the ERP but presented in Estimates" includes a small number of other items that are tagged as COVID-19
     in the Estimates, as a means of highlighting to parliamentarians where the funding is, at least in part, driven by COVID-19 even though
     the initiative itself is not part of the COVID-19 Economic Response Plan.
-  fr: TODO
+  fr: |
+    « Postes relatifs à la COVID-19 non inclus dans la PRO, mais figurant dans les budgets des dépenses » qui comportent un petit nombre d'autres
+    postes étiquetés COVID-19 dans les budgets des dépenses pour signaler aux parlementaires où se trouve le financement accordé pour la pandémie,
+    du moins en partie, même si l'initiative elle-même ne figure pas dans le Plan d’intervention économique du Canada pour répondre à la COVID-19.
