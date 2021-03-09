@@ -27,7 +27,7 @@ hr {
 .tippy-arrow {
   width: 12px;
   height: 6px;
-  color: $tooltipColor;
+  color: $primaryColor;
 }
 
 .tippy-arrow::before {
@@ -46,7 +46,7 @@ hr {
     & > .tippy-arrow {
       top: -6px;
       border-width: 0px 6px 6px 6px;
-      border-bottom-color: rgba($tooltipColor, 1);
+      border-bottom-color: rgba($primaryColor, 1);
     }
 
     & > .tippy-arrow::before {
@@ -63,7 +63,7 @@ hr {
     & > .tippy-arrow {
       bottom: -6px;
       border-width: 6px 6px 0px 6px;
-      border-top-color: rgba($tooltipColor, 1);
+      border-top-color: rgba($primaryColor, 1);
     }
 
     & > .tippy-arrow::before {
@@ -77,7 +77,7 @@ hr {
 
 .tippy-content {
   color: $textLightColor;
-  background-color: rgba($tooltipColor, 1);
+  background-color: rgba($primaryColor, 1);
   text-align: left !important;
   border: none;
   padding: 1px 20px;
@@ -91,11 +91,11 @@ hr {
   }
   @media (min-width:$minMediumDevice) and (max-width: $maxLargeDevice) { max-width: 60vw !important }
   @media (max-width:$maxMediumDevice){ max-width: 90vw !important }
-}
 
-.tippy-content a {
-  color: $textLightColor;
-  text-decoration: none;
+  & a, a:visited {
+    color: $buttonSecondaryColor;
+    text-decoration: none;
+  }
 }
 
 .pop.in, .fade.in {
