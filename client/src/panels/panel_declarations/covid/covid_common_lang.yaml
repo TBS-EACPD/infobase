@@ -14,7 +14,7 @@ covid_above_tab_footnote_title:
   fr: |
     Important:
 covid_above_tab_limited_measure_note:
-  en: Only measures that are presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan has not been captured.
+  en: Only measures that are presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan has not been captured. For more details, see the FAQ item "Why are some measures of the Government’s COVID response plan missing from the measures tab?"
   fr: TODO
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
