@@ -47,8 +47,7 @@ covid_questions_what_is_new_a:
   en: |
     As of March 2021, GC InfoBase reports Estimates authorities on a measure basis as
     per Canada’s COVID-19 Economic Response Plan outlined in the Fall Economic Statement 2020.
-    For the first time, GC InfoBase is reporting on expenditures incurred against authorities as of
-    January 31, 2021, where available.
+    For the first time, GC InfoBase is reporting on expenditures incurred against authorities as of, where available.
   fr: TODO
 
 covid_questions_measure_vs_initiative_q:
@@ -106,7 +105,7 @@ covid_questions_frequency_a:
   en: |
     COVID-19 spending authorities will be updated following the tabling of an Estimates
     (e.g. Supplementary Estimates (A), 2020-21); or as other pertinent information becomes
-     available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
+    available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
   fr: TODO
 
 covid_questions_other_expenditure_reporting_q:

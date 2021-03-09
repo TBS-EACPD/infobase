@@ -41,6 +41,7 @@ export const declare_covid_key_concepts_panel = () =>
                 <TM key={"a"} k={"covid_questions_frequency_a"} />,
               ],
               [
+                // TODO this one should be fairly temporary
                 <TM key={"q"} k={"covid_questions_what_is_new_q"} />,
                 <TM key={"a"} k={"covid_questions_what_is_new_a"} />,
               ],
