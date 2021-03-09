@@ -14,11 +14,11 @@ covid_above_tab_footnote_title:
   fr: |
     Important:
 covid_above_tab_limited_measure_note:
-  en: Only measures that are presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan has not been captured. For more details, see the FAQ item "Why are some measures of the Government’s COVID response plan missing from the measures tab?"
+  en: Only measures that are presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan (ERP) has not been captured. For more details, see the FAQ item "Why are some measures of the Government’s COVID response plan missing from the measures tab?"
   fr: TODO
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
-  en: Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan have not been audited. Expenditures will be refreshed monthly.
+  en: Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan (ERP) have not been audited. Expenditures will be refreshed monthly.
   fr: TODO
 covid_above_tab_data_org_websites_note:
   transform: [handlebars]
