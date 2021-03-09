@@ -43,12 +43,7 @@ import text from "./covid_estimates.yaml";
 
 const { CovidMeasure, Dept } = Subject;
 
-const {
-  TabbedContent,
-  TabLoadingSpinner,
-  AlertBanner,
-  SmartDisplayTable,
-} = util_components;
+const { TabbedContent, TabLoadingSpinner, SmartDisplayTable } = util_components;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -618,9 +613,6 @@ export const declare_covid_estimates_panel = () =>
             footnotes,
           }}
         >
-          <AlertBanner banner_class="danger">
-            {"Real (but non-final) data. For development purposes only!"}
-          </AlertBanner>
           <CovidEstimatesPanel panel_args={{ ...panel_args, subject }} />
         </InfographicPanel>
       ),
