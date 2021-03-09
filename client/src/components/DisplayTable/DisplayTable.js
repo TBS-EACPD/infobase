@@ -86,7 +86,31 @@ export class DisplayTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = get_default_state_from_props(props);
+    this.table_ref = React.createRef();
+
+    const { unsorted_initial, column_configs } = props;
+
+    const col_configs_with_defaults = get_col_configs_with_defaults(
+      column_configs
+    );
+
+    const visible_col_keys = _.chain(col_configs_with_defaults)
+      .pickBy((col) => col.initial_visible)
+      .keys()
+      .value();
+
+    const sort_by = unsorted_initial
+      ? null
+      : _.chain(col_configs_with_defaults)
+          .pickBy((col) => col.is_sortable)
+          .keys()
+          .first()
+          .value();
+
+    const searches = _.chain(col_configs_with_defaults)
+      .pickBy((col) => col.is_searchable)
+      .mapValues(() => "")
+      .value();
 
     this.state = {
       visible_col_keys,
@@ -311,6 +335,7 @@ export class DisplayTable extends React.Component {
 
     const change_page = (page) => {
       this.setState({ current_page: page });
+      this.table_ref.current.scrollIntoView({ behavior: "smooth" });
     };
 
     const change_paginate_by = (new_paginate_by) => {
@@ -342,6 +367,7 @@ export class DisplayTable extends React.Component {
             "display-table",
             !is_total_exist && "no-total-row"
           )}
+          ref={this.table_ref}
         >
           <caption className="sr-only">
             <div>
