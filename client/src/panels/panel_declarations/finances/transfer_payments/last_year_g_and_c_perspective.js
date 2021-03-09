@@ -6,7 +6,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 import {
   StdPanel,
   Col,
-  CircleProportionChart,
+  WrappedNivoCircleProportion,
   declare_panel,
 } from "../../shared.js";
 
@@ -72,7 +72,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
             {!is_a11y_mode && (
               <Fragment>
                 <Col size={3} isGraph>
-                  <CircleProportionChart
+                  <WrappedNivoCircleProportion
                     height={200}
                     child_value={org_tp}
                     child_name={text_maker("dept_transfer_payments", {
@@ -83,7 +83,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
                   />
                 </Col>
                 <Col size={3} isGraph>
-                  <CircleProportionChart
+                  <WrappedNivoCircleProportion
                     height={200}
                     child_value={org_tp}
                     child_name={text_maker("dept_transfer_payments", {
