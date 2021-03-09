@@ -15,11 +15,11 @@ covid_questions_financial_a:
   en: |
     The financial data presented on GC InfoBase is typically based on Volume II of the Public Accounts of Canada. Due to the COVID-19 global pandemic,
     the following exceptions have been made for this COVID-19 section of GC InfoBase:
-    * It includes expenditure data that has not yet been published in the Public Accounts of Canada, to better provide a more up to date Government of Canada wide view.
-    * Both {{gl_tt "budgetary" "BUD_EXP"}} and {{gl_tt "non-budgetary" "NB_EXP"}} expenditures and authorities are included here, whereas other GC InfoBase reporting is limited 
+      * It includes expenditure data that has not yet been published in the Public Accounts of Canada, to better provide a more up to date Government of Canada wide view.
+      * Both {{gl_tt "budgetary" "BUD_EXP"}} and {{gl_tt "non-budgetary" "NB_EXP"}} expenditures and authorities are included here, whereas other GC InfoBase reporting is limited 
     to budgetary amounts only. Non-budgetary expenditures and authorities must be included here for completeness and accuracy as repayable assistance is a critical element of the
     government's COVID-19 response.
-    * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
+      * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19.
   fr: TODO
 
@@ -45,7 +45,7 @@ covid_questions_what_is_new_q:
   fr: TODO 
 covid_questions_what_is_new_a:
   en: |
-    As of March x, 2021, GC InfoBase reports Estimates authorities on a measure basis as
+    As of March 2021, GC InfoBase reports Estimates authorities on a measure basis as
     per Canada’s COVID-19 Economic Response Plan outlined in the Fall Economic Statement 2020.
     For the first time, GC InfoBase is reporting on expenditures incurred against authorities as of
     January 31, 2021, where available.
@@ -86,7 +86,7 @@ covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the measures tab?
   fr: TODO
 covid_questions_missing_measures_a:
-  transform: [markdown]
+  transform: [handlebars,markdown]
   en: |
     GC InfoBase currently only reports on COVID-19 measures which have been presented
     in the Estimates. While this includes some benefits such as the Canada Emergency Response
@@ -95,9 +95,8 @@ covid_questions_missing_measures_a:
       - Canada Emergency Wage Subsidy (CEWS); and
       - Canada Emergency Rent Subsidy (CERS).  
     
-    More information related to the benefits and services provided by the Government of Canada to
-    help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are
-    available online.
+    More information related to {{ext_link "the benefits and services provided by the Government of Canada" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}
+    to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
   fr: TODO
 
 covid_questions_frequency_q:
