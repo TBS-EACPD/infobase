@@ -13,7 +13,7 @@ import {
   StdPanel,
   Col,
   newIBLightCategoryColors,
-  FlatTreeMapViz,
+  WrappedNivoTreemap,
   declare_panel,
 } from "../../shared.js";
 
@@ -143,7 +143,7 @@ const planned_vote_or_stat_render = (vs) =>
         {show_pack && (
           <Col isGraph size={6}>
             <div className="centerer" style={{ width: "100%" }}>
-              <FlatTreeMapViz
+              <WrappedNivoTreemap
                 data={packing_data}
                 colorScale={color_scale(vs)}
                 value_string="{{est_in_year}}_estimates"

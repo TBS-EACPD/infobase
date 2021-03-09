@@ -4,11 +4,11 @@ import MediaQuery from "react-responsive";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
 
-import "./FlatTreeMap.scss";
+import "./WrappedNivoTreemap.scss";
 
 import { DefaultTooltip } from "./wrapped_nivo_common.js";
 
-class _FlatTreeMapViz extends React.Component {
+class _WrappedNivoTreemap extends React.Component {
   render() {
     const {
       data,
@@ -62,15 +62,15 @@ class _FlatTreeMapViz extends React.Component {
   }
 }
 
-export class FlatTreeMapViz extends React.Component {
+export class WrappedNivoTreemap extends React.Component {
   render() {
     return (
       <Fragment>
         <MediaQuery maxWidth={breakpoints.maxExtraSmallDevice}>
-          <_FlatTreeMapViz {...this.props} height={200} width={200} />
+          <_WrappedNivoTreemap {...this.props} height={200} width={200} />
         </MediaQuery>
         <MediaQuery minWidth={breakpoints.minExtraSmallDevice}>
-          <_FlatTreeMapViz {...this.props} height={400} width={400} />
+          <_WrappedNivoTreemap {...this.props} height={400} width={400} />
         </MediaQuery>
       </Fragment>
     );

@@ -11,7 +11,7 @@ import {
   WrappedNivoPie,
   CircleProportionChart,
   NivoLineBarToggle,
-  FlatTreeMapViz,
+  WrappedNivoTreemap,
 } from "../../charts/wrapped_nivo/index.js";
 import * as util_components from "../../components/index.js";
 import { breakpoints } from "../../core/breakpoint_defs.js";
@@ -201,7 +201,7 @@ export {
   WrappedNivoLine,
   WrappedNivoPie,
   CircleProportionChart,
-  FlatTreeMapViz,
+  WrappedNivoTreemap,
   Canada,
   breakpoints,
   SpinnerWrapper,
