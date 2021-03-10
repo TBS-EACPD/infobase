@@ -229,7 +229,7 @@ class ServicesChannelsPanel extends React.Component {
                 is_money={false}
                 keys={_.map(services, "name")}
                 indexBy={"id"}
-                colorBy={(d) => colors(d.id)}
+                colors={(d) => colors(d.id)}
                 bttm_axis={{
                   tickRotation: 35,
                 }}

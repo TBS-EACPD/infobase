@@ -83,7 +83,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
 
   const nivo_common_props = {
     is_money: false,
-    colorBy: (d) => colors(d.id),
+    colors: (d) => colors(d.id),
   };
   const column_configs = {
     label: {
