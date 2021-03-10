@@ -98,7 +98,9 @@ export class Typeahead extends React.Component {
         selection_cursor !== prev_selection_cursor &&
         prev_selection_cursor > selection_cursor
       ) {
-        this.virtualized_list_ref.current.recomputeRowHeights(selection_cursor); //scrolling up is choppy if we don't do this
+        this.virtualized_list_ref.current.recomputeRowHeights(
+          selection_cursor >= 0 ? selection_cursor : 0
+        ); //scrolling up is choppy if we don't do this
       }
     }
   }
@@ -132,7 +134,6 @@ export class Typeahead extends React.Component {
         .groupBy("config_group_index")
         .flatMap((results, group_index) =>
           _.map(results, (result, index) => ({
-            is_first: group_index === 0 && index === 0,
             is_first_in_group: index === 0,
             group_index,
             result,
