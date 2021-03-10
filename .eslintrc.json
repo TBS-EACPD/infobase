@@ -15,6 +15,7 @@
     "lodash/no-double-unwrap": ["error"],
     "lodash/no-unbound-this": ["error"],
     "lodash/unwrap": ["error"],
+    "no-restricted-imports": ["error", {"patterns": ["../*"]}],
     "import/order": [
       "warn", { 
         "newlines-between": "always-and-inside-groups",
