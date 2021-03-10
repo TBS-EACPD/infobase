@@ -28,7 +28,6 @@ export class WrappedNivoPie extends React.Component {
       data,
       graph_height,
       colors,
-      colorBy,
       include_percent,
       tooltip,
       percent_value_tooltip,
@@ -39,12 +38,13 @@ export class WrappedNivoPie extends React.Component {
       disable_table_view,
       table_name,
       show_legend,
+      theme,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
       scaleOrdinal().range(colors || newIBCategoryColors)
     );
-    const color_func = colorBy || ((d) => color_scale(d.label));
+    const color_func = colors || ((d) => color_scale(d.label));
 
     const legend_items = _.chain(data)
       .sortBy("value")
@@ -116,13 +116,13 @@ export class WrappedNivoPie extends React.Component {
             {...{
               data: data_with_absolute_values,
               margin,
-              colors,
+              theme,
             }}
-            colorBy={color_func}
-            tooltip={(data) => {
+            colors={color_func}
+            tooltip={({ datum }) => {
               const data_with_original_values = {
-                ...data,
-                value: data.original_value,
+                ...datum,
+                value: datum.data.original_value,
               };
 
               if (include_percent) {
@@ -141,7 +141,7 @@ export class WrappedNivoPie extends React.Component {
             innerRadius={0.5}
             animate={false}
             borderWidth={0}
-            enableSlicesLabels={false}
+            enableSliceLabels={false}
             enableRadialLabels={false}
           />
         </div>
@@ -184,6 +184,11 @@ WrappedNivoPie.defaultProps = {
     right: 80,
     bottom: 60,
     left: 50,
+  },
+  theme: {
+    tooltip: {
+      boxShadow: "rgb(0 0 0 / 25%) 0px 1px 2px",
+    },
   },
   include_percent: true,
   show_legend: true,

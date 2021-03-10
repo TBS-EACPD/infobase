@@ -9,7 +9,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 import {
   StdPanel,
   Col,
-  CircleProportionChart,
+  WrappedNivoCircleProportion,
   declare_panel,
   Subject,
 } from "../../shared.js";
@@ -69,7 +69,7 @@ export const declare_estimates_in_perspective_panel = () =>
             </Col>
             {!is_a11y_mode && (
               <Col isGraph size={7}>
-                <CircleProportionChart
+                <WrappedNivoCircleProportion
                   height={250}
                   child_value={dept_tabled_est_in_year}
                   child_name={text_maker("dept_estimates", { subject })}

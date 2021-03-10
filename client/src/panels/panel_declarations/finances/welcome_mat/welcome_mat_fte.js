@@ -95,7 +95,7 @@ export const format_and_get_fte = (type, subject) => {
     data: graph_data,
     raw_data: raw_data,
     is_money: false,
-    colorBy: (d) => colors(d.id),
+    colors: (d) => colors(d.id),
     enableGridY: false,
     remove_left_axis: true,
     disable_y_axis_zoom: true,

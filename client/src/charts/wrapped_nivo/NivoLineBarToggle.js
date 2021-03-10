@@ -139,7 +139,7 @@ export class NivoLineBarToggle extends React.Component {
       data: extra_graph_options.normalized
         ? data_formatter_bar(normalize(data_bar))
         : data_formatter_bar(data_bar),
-      colorBy: (d) => colors(d.id),
+      colors: (d) => colors(d.id),
       text_formatter: formatter || extra_graph_options.formatter,
       indexBy: extra_graph_options.index,
       is_money: !!extra_graph_options.is_money,
@@ -160,7 +160,7 @@ export class NivoLineBarToggle extends React.Component {
 
     const extended_graph_options_line = {
       data: data_formatter_line,
-      colorBy: (d) => colors(d.id),
+      colors: (d) => colors(d.id),
       raw_data,
       yScale: {
         type: "linear",

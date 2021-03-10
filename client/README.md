@@ -52,8 +52,9 @@ Note: if you use `npm run serve` you can connect from other devices on your loca
 Once you have all of the environment set up for InfoBase development, you can follow the steps below to automate all of the build process in in one terminal screen using tmux (an alternative terminal multiplexer)
 1. Install Homebrew (skip if you already have Homebrew): `cd /usr/local && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew`
 2. Install tmux: `brew install tmux`
-3. Make sure you're on the root directory of InfoBase, and run: `npm run infobase_tmux_init`
-4. Wait for everything to finish running. Once everything is running, you should be able to visit the local site.
+3. Download/copy this [tmux config file](https://github.com/Stephen-ONeil/.dotfiles/blob/master/common/tmux/.tmux.conf), put it into your user folder (`~` directory)
+4. Make sure you're on the root directory of InfoBase, and run: `npm run infobase_tmux_init`
+5. Wait for everything to finish running. Once everything is running, you should be able to visit the local site.
 
 Killing tmux sessions:
 - `exit` to exit session

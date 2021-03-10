@@ -8,7 +8,7 @@ import {
   create_text_maker_component,
   StdPanel,
   Col,
-  CircleProportionChart,
+  WrappedNivoCircleProportion,
   declare_panel,
   year_templates,
 } from "../shared.js";
@@ -73,7 +73,7 @@ export const declare_employee_last_year_totals_panel = () =>
             </Col>
             {!is_a11y_mode && (
               <Col size={7} isGraph>
-                <CircleProportionChart
+                <WrappedNivoCircleProportion
                   height={200}
                   is_money={false}
                   child_value={dept_emp_value}

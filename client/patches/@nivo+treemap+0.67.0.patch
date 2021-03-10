@@ -1,0 +1,23 @@
+diff --git a/node_modules/@nivo/treemap/dist/nivo-treemap.es.js b/node_modules/@nivo/treemap/dist/nivo-treemap.es.js
+index 8533def..bd8a655 100644
+--- a/node_modules/@nivo/treemap/dist/nivo-treemap.es.js
++++ b/node_modules/@nivo/treemap/dist/nivo-treemap.es.js
+@@ -145,16 +145,13 @@ var TreeMapHtmlNode = function TreeMapHtmlNode(_ref) {
+     style: _objectSpread2(_objectSpread2({}, theme.labels.text), {}, {
+       position: 'absolute',
+       display: 'flex',
+-      top: -5,
+-      left: -5,
+-      width: 10,
+-      height: 10,
++      width: "100%",
++      height: "100%",
+       justifyContent: 'center',
+       alignItems: 'center',
+       whiteSpace: 'nowrap',
+       color: node.labelTextColor,
+       transformOrigin: 'center center',
+-      transform: animatedProps.labelHtmlTransform,
+       opacity: animatedProps.labelOpacity,
+       pointerEvents: 'none'
+     })

@@ -89,7 +89,7 @@ const SummaryTab = ({ panel_args }) => {
       data={graph_data}
       keys={graph_keys}
       indexBy="doc_name"
-      colorBy={(d) => colors(d.id)}
+      colors={(d) => colors(d.id)}
       margin={{
         top: 50,
         right: 40,
@@ -490,6 +490,7 @@ export const declare_covid_estimates_panel = () =>
 
         return (
           <InfographicPanel
+            allowOverflow={true}
             title={text_maker("covid_estimates_panel_title")}
             {...{
               sources,

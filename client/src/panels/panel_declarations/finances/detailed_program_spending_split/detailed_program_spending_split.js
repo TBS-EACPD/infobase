@@ -169,7 +169,7 @@ class HistoricalProgramBars extends React.Component {
                 data={graph_data}
                 keys={Object.keys(processed_data)}
                 indexBy="year"
-                colorBy={(d) => colors(d.id)}
+                colors={(d) => colors(d.id)}
                 margin={{
                   top: 50,
                   right: 20,
@@ -362,7 +362,7 @@ class DetailedProgramSplit extends React.Component {
                   left: 215,
                 }}
                 graph_height={divHeight}
-                colorBy={(d) => colors(d.id)}
+                colors={(d) => colors(d.id)}
                 bttm_axis={{
                   tickSize: 5,
                   tickPadding: 5,
@@ -374,7 +374,7 @@ class DetailedProgramSplit extends React.Component {
                   tickPadding: 5,
                   renderTick: (tick) => (
                     <g
-                      key={tick.key}
+                      key={tick.tickIndex}
                       transform={`translate(${tick.x - 5},${tick.y + 1.5})`}
                     >
                       <a
@@ -392,7 +392,7 @@ class DetailedProgramSplit extends React.Component {
                           textAnchor="end"
                           dominantBaseline="end"
                           style={{
-                            ...tick.theme.axis.ticks.text,
+                            fontSize: "11px",
                           }}
                         >
                           <TspanLineWrapper text={tick.value} width={40} />
@@ -553,6 +553,7 @@ export const declare_detailed_program_spending_split_panel = () =>
 
         return (
           <InfographicPanel
+            allowOverflow={true}
             title={text_maker("detailed_program_spending_split_title")}
             {...{ sources, footnotes: [...footnotes, ...program_footnotes] }}
           >

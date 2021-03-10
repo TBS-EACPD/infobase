@@ -37,37 +37,26 @@ import { ensure_loaded } from "src/core/lazy_loader.js";
 import { Table } from "src/core/TableClass.js";
 
 import { Canada } from "src/charts/canada/index.js";
-
-import { FlatTreeMapViz } from "src/charts/flat_treemap/FlatTreeMapViz.js";
-
 import { StandardLegend, SelectAllControl } from "src/charts/legends";
-
 import { get_formatter, infobase_colors_smart } from "src/charts/shared.js";
-
 import {
   WrappedNivoBar,
   WrappedNivoHBar,
   WrappedNivoLine,
   WrappedNivoPie,
-  CircleProportionChart,
+  WrappedNivoCircleProportion,
   NivoLineBarToggle,
+  WrappedNivoTreemap,
 } from "src/charts/wrapped_nivo/index.js";
 
 
-
 import * as general_utils from "src/general_utils.js";
-
 import {
   infograph_href_template,
   infograph_options_href_template,
 } from "src/infographic/infographic_link.js";
-
 import { glossary_href } from "src/link_utils.js";
-
 import { get_source_links } from "src/metadata/data_sources.js";
-
-
-
 
 
 import { Subject } from "src/models/subject";
@@ -227,8 +216,8 @@ export {
   WrappedNivoHBar,
   WrappedNivoLine,
   WrappedNivoPie,
-  CircleProportionChart,
-  FlatTreeMapViz,
+  WrappedNivoCircleProportion,
+  WrappedNivoTreemap,
   Canada,
   breakpoints,
   SpinnerWrapper,

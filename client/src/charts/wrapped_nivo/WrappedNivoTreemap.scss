@@ -1,19 +1,9 @@
 @import "src/common_css/common-variables";
 
-.FlatTreeMap__ContentBox {
-  position: absolute;
-  border: 2px solid white;
-  box-sizing: border-box;
-}
-
 .FlatTreeMap__TextBox {
   font-size: 13px;
   vertical-align: middle;
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   max-width: 90%;
   max-height: 90%;
   color: $textColor;
@@ -33,10 +23,4 @@
   text-overflow: ellipsis;
   overflow: hidden;
   color: $textColor;
-}
-
-
-.FlatTreeMap__ToolTip {   
-  font-size: 13px;     
-  text-align: left;  
 }

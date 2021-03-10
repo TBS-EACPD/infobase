@@ -1,6 +1,5 @@
 import { sum } from "d3-array";
 import { scaleOrdinal } from "d3-scale";
-import { select } from "d3-selection";
 import _ from "lodash";
 import React from "react";
 
@@ -14,7 +13,7 @@ import {
   StdPanel,
   Col,
   newIBLightCategoryColors,
-  FlatTreeMapViz,
+  WrappedNivoTreemap,
   declare_panel,
 } from "../../shared.js";
 
@@ -37,53 +36,6 @@ const text_func = (vs, d, break_str) => {
       : d.desc;
   }
 };
-
-const node_render = (vs) =>
-  function (foreign_sel) {
-    foreign_sel.html(function (node) {
-      if (this.offsetHeight <= 30 || this.offsetWidth <= 50) {
-        return;
-      }
-
-      const ret = `
-      <div class="FlatTreeMap__TextBox">
-        <div class="FlatTreeMap__ContentTitle">
-          ${text_func(vs, node.data, "-")}
-        </div>
-        ${
-          this.offsetHeight > 50
-            ? `<div class="FlatTreeMap__ContentText">
-            ${formats.compact1(node.data["{{est_in_year}}_estimates"])}
-          </div>`
-            : ""
-        }
-      </div>
-    `;
-      return ret;
-    });
-  };
-
-const tooltip_render = (vs) =>
-  function (d) {
-    const sel = select(this);
-    sel.attrs({
-      className: "link-unstyled",
-      tabIndex: "0",
-      // this can't be called "title" (what tooltip.js uses) because of some other hover effects that fire on titles.
-      "data-ibtt-text": ` 
-      <div class="FlatTreeMap__ToolTip">
-        ${text_func(vs, d.data, "<br/>", true)}<br/>
-        ${formats.compact1(
-          d.data["{{est_in_year}}_estimates"]
-        )} (${formats.percentage(
-        d.data["{{est_in_year}}_estimates"] / d.data.total
-      )} ${text_maker("of")} ${d.data.total_of})
-      </div>`,
-      "data-toggle": "tooltip",
-      "data-ibtt-html": "true",
-      "data-container": "body",
-    });
-  };
 
 const d3_scale = scaleOrdinal(newIBLightCategoryColors);
 const color_scale = (vs) =>
@@ -149,18 +101,15 @@ const planned_vote_or_stat_render = (vs) =>
     ]);
 
     const packing_data = {
-      name: "",
+      name: "root",
+      color: "white",
       children: _.map(data, (d, i) =>
-        _.extend(
-          {
-            id: i,
-            total: total_amt,
-            total_of: text_maker(
-              isVoted ? "all_voted_items" : "all_stat_items"
-            ),
-          },
-          d
-        )
+        _.extend(d, {
+          id: i,
+          total: total_amt,
+          total_of: text_maker(isVoted ? "all_voted_items" : "all_stat_items"),
+          desc: text_func(vs, d, "-"),
+        })
       ),
     };
 
@@ -194,12 +143,13 @@ const planned_vote_or_stat_render = (vs) =>
         {show_pack && (
           <Col isGraph size={6}>
             <div className="centerer" style={{ width: "100%" }}>
-              <FlatTreeMapViz
+              <WrappedNivoTreemap
                 data={packing_data}
                 colorScale={color_scale(vs)}
-                node_render={node_render(vs)}
-                tooltip_render={tooltip_render(vs)}
                 value_string="{{est_in_year}}_estimates"
+                formatter={formats.compact1}
+                label_id="desc"
+                text_func={(d, break_str) => text_func(vs, d, break_str)}
               />
             </div>
           </Col>

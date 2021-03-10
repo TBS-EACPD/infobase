@@ -42,28 +42,31 @@ const include_verbose_gap_year_explanation = false;
 
 const get_auth_exp_diff = ([larger_data_point, smaller_data_point]) =>
   Math.abs(larger_data_point.data.y - smaller_data_point.data.y);
-const auth_exp_planned_spending_tooltip = (graph_slice, tooltip_formatter) => {
+const auth_exp_planned_spending_tooltip = ({ slice }, tooltip_formatter) => {
   const null_filtered_slice_data = _.filter(
-    graph_slice.data,
+    slice.points,
     ({ data }) => !_.isNull(data.y)
   );
 
   return (
-    <div style={{ color: textColor }}>
-      <table className="auth-exp-planned-spend-tooltip">
+    <div
+      className="auth-exp-planned-spend-tooltip"
+      style={{ color: textColor }}
+    >
+      <table className="auth-exp-planned-spend-tooltip__table">
         <tbody>
           {null_filtered_slice_data.map((tooltip_item) => (
-            <tr key={tooltip_item.serie.id}>
+            <tr key={tooltip_item.serieId}>
               <td>
                 <div
                   style={{
-                    backgroundColor: tooltip_item.serie.color,
+                    backgroundColor: tooltip_item.serieColor,
                     height: "12px",
                     width: "12px",
                   }}
                 />
               </td>
-              <td>{tooltip_item.serie.id}</td>
+              <td>{tooltip_item.serieId}</td>
               <td
                 dangerouslySetInnerHTML={{
                   __html: tooltip_formatter(tooltip_item.data.y),
@@ -202,7 +205,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
     const nivo_props = {
       data: graph_data,
       raw_data: _.flatMap(data_series, "values"),
-      colorBy: (d) => colors(d.id),
+      colors: (d) => colors(d.id),
       magnify_glass_translateX: 80,
       magnify_glass_translateY: 70,
       tooltip: auth_exp_planned_spending_tooltip,
@@ -222,7 +225,7 @@ class AuthExpPlannedSpendingGraph extends React.Component {
         "areas",
         lines_with_dashed_overlaps,
         "slices",
-        "dots",
+        "points",
         "axes",
         "legends",
       ],

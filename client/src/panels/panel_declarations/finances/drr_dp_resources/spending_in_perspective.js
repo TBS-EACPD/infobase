@@ -1,8 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { infobase_colors } from "src/core/color_schemes.js";
-
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import {
@@ -46,8 +44,6 @@ class SpendInTagPerspective extends React.Component {
     const { tag: active_tag, amount: active_tag_exp } = tag_exps[
       active_tag_index
     ];
-
-    const color_scale = infobase_colors();
 
     const data = [
       {
@@ -103,10 +99,7 @@ class SpendInTagPerspective extends React.Component {
               />
             </div>
           )}
-          <WrappedNivoPie
-            data={data}
-            colorBy={(obj) => color_scale(obj.label)}
-          />
+          <WrappedNivoPie data={data} />
         </div>
       </div>
     );
