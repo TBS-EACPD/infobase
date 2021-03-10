@@ -10,21 +10,6 @@ select_columns:
 skip_to_data:
   en: Skip to main content of this table
   fr: Passer au contenu principal du tableau
-first:
-  en: First
-  fr: Première page
-previous:
-  en: Previous
-  fr: Page précédente
-next:
-  en: Next
-  fr: Page suivante
-last:
-  en: Last
-  fr: Dernière page
-select_page:
-  en: Select page
-  fr: Choisir la page
 items_per_page:
   en: Items per page
   fr: Nombre d’éléments par page

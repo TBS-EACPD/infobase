@@ -405,6 +405,12 @@ hidden_panels:
 student:
   en: Student
   fr: Étudiant
+page:
+  transform: [handlebars]
+  en: |
+    Page {{page_num}}
+  fr: |
+    Page {{page_num}}
 
 data_for_year:
   transform: [handlebars]
