@@ -329,7 +329,7 @@ const StatusIconTable = ({
               {text_maker(status_key)}
             </span>
           ),
-          aria_text: result_simple_statuses[status_key].text,
+          aria_text: text_maker(status_key),
           icon: large_status_icons[status_key],
         }))}
         item_component_order={["count", "icon", "text"]}
