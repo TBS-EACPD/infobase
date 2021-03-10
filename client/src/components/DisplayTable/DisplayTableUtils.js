@@ -84,7 +84,7 @@ export const PageSelector = ({
                   <button
                     className="btn-ib-light"
                     onClick={() => change_page(0)}
-                    aria-label="Page 1"
+                    aria-label={text_maker("page", { page_num: 1 })}
                     role="tab"
                   >
                     1
@@ -94,7 +94,9 @@ export const PageSelector = ({
                       className="btn-ib-light"
                       tabIndex="-1"
                       onClick={() => change_page(current_page - 3)}
-                      aria-label={`Page ${current_page - 2}`}
+                      aria-label={text_maker("page", {
+                        page_num: current_page - 2,
+                      })}
                       role="tab"
                     >
                       &hellip;
@@ -113,7 +115,7 @@ export const PageSelector = ({
                         (num === current_page && "--reversed") || ""
                       }`}
                       onClick={() => change_page(num)}
-                      aria-label={`Page ${num + 1}`}
+                      aria-label={text_maker("page", { page_num: num + 1 })}
                       role="tab"
                       aria-selected={`${num === current_page}`}
                     >
@@ -128,7 +130,9 @@ export const PageSelector = ({
                       className="btn-ib-light"
                       tabIndex="-1"
                       onClick={() => change_page(current_page + 3)}
-                      aria-label={`Page ${current_page + 4}`}
+                      aria-label={text_maker("page", {
+                        page_num: current_page + 4,
+                      })}
                       role="tab"
                     >
                       &hellip;
@@ -137,7 +141,9 @@ export const PageSelector = ({
                   <button
                     className="btn-ib-light"
                     onClick={() => change_page(num_pages)}
-                    aria-label={`Page ${num_pages + 1}`}
+                    aria-label={text_maker("page", {
+                      page_num: num_pages + 1,
+                    })}
                     role="tab"
                   >
                     {num_pages + 1}
