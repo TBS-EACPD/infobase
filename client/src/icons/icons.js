@@ -1579,6 +1579,52 @@ const IconFinancesAlt = (props) => {
     />
   );
 };
+const IconServicesHome = (props) => {
+  const SVGServicesHome = () => (
+    <Fragment>
+      <g>
+        <path
+          className="services_home_1"
+          d="M153,2.5H22C11.2,2.5,2.5,13.8,2.5,27.7v114.6c0,13.9,8.7,25.2,19.5,25.2h131c10.7,0,19.5-11.3,19.5-25.2V27.7
+		C172.5,13.8,163.8,2.5,153,2.5z"
+        />
+        <path
+          className="services_home_2"
+          d="M73.3,62.1c0,12.7-7.9,22.9-17.7,22.9S37.9,74.7,37.9,62.1c0-12.7,7.9-22.9,17.7-22.9S73.3,49.4,73.3,62.1z"
+        />
+        <path
+          className="services_home_2"
+          d="M87.5,124c0,3.8-2.4,6.9-5.3,6.9H29.1c-2.9,0-5.3-3.1-5.3-6.9v-4.6c0-13.9,8.7-25.2,19.5-25.2H68
+		c10.7,0,19.5,11.3,19.5,25.2V124z"
+        />
+        <g>
+          <path
+            className="services_home_3"
+            d="M145.9,130.8h-39c-2.9,0-5.3-3.1-5.3-6.9s2.4-6.9,5.3-6.9h39c2.9,0,5.3,3.1,5.3,6.9S148.9,130.8,145.9,130.8z
+			"
+          />
+          <path
+            className="services_home_3"
+            d="M145.9,94.2h-39c-2.9,0-5.3-3.1-5.3-6.9s2.4-6.9,5.3-6.9h39c2.9,0,5.3,3.1,5.3,6.9S148.9,94.2,145.9,94.2z"
+          />
+          <path
+            className="services_home_3"
+            d="M145.9,57.5l-39,0c-2.9,0-5.3-3.1-5.3-6.9s2.4-6.9,5.3-6.9l39,0c2.9,0,5.3,3.1,5.3,6.9S148.9,57.5,145.9,57.5
+			z"
+          />
+        </g>
+      </g>
+    </Fragment>
+  );
+  return (
+    <_IconWrapper
+      {...props}
+      viewbox_width={175}
+      viewbox_height={170}
+      ChildSVG={SVGServicesHome}
+    />
+  );
+};
 
 const IconEmployees = (props) => {
   const SVGEmployee = () => (
@@ -2197,6 +2243,7 @@ export {
   IconFinancesAlt,
   IconEmployees,
   IconEmployeesAlt,
+  IconServicesHome,
   IconClipboard,
   IconClipboardAlt,
   IconHelp,
