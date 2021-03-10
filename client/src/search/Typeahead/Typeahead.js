@@ -3,13 +3,9 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
-import {
-  AutoSizer,
-  List as VirtualizedList,
-  CellMeasurer,
-  CellMeasurerCache,
-} from "react-virtualized";
+import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 
+import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList.js";
 import { create_text_maker_component } from "src/components/index.js";
 
 import { log_standard_event } from "src/core/analytics.js";
@@ -44,7 +40,6 @@ export class Typeahead extends React.Component {
       matching_results: [],
       selection_cursor: this.default_selection_cursor,
       current_search_configs: props.search_configs,
-      list_height: 400,
     };
   }
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -99,16 +94,6 @@ export class Typeahead extends React.Component {
     }
 
     if (this.virtualized_list_ref.current) {
-      this.virtualized_list_ref.current.Grid.measureAllCells();
-      const list_height = this.virtualized_list_ref.current.Grid.getTotalRowsHeight();
-      if (list_height !== this.state.list_height) {
-        if (list_height < 400) {
-          this.setState({ list_height: list_height });
-        } else if (this.state.list_height < 400) {
-          this.setState({ list_height: 400 });
-        }
-      }
-
       if (
         selection_cursor !== prev_selection_cursor &&
         prev_selection_cursor > selection_cursor
@@ -243,14 +228,14 @@ export class Typeahead extends React.Component {
                 }}
               >
                 {() => (
-                  <VirtualizedList
+                  <AutoHeightVirtualList
                     className="typeahead__dropdown"
                     role="listbox"
                     id={this.menu_id}
                     aria-expanded={this.show_menu}
                     height={list_height}
                     width={width}
-                    ref={this.virtualized_list_ref}
+                    list_ref={this.virtualized_list_ref}
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
                     deferredMeasurementCache={virtualized_cell_measure_cache}
                     rowHeight={virtualized_cell_measure_cache.rowHeight}
