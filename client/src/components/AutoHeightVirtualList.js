@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { List } from "react-virtualized";
 
 export class AutoHeightVirtualList extends React.Component {

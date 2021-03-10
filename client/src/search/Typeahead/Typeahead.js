@@ -125,25 +125,14 @@ export class Typeahead extends React.Component {
     } = this.state;
 
     const derived_menu_state = this.derived_menu_state;
-    const { total_matching_results, cursor_offset } = derived_menu_state;
+    const { total_matching_results } = derived_menu_state;
 
     const list_items = _.compact([
-      <li
-        key="header"
-        className="typeahead__header"
-        style={{ borderTop: "none" }}
-      >
-        <TM
-          k="menu_with_results_status"
-          args={{
-            total_matching_results,
-          }}
-        />
-      </li>,
       ..._.chain(matching_results)
         .groupBy("config_group_index")
         .flatMap((results, group_index) =>
           _.map(results, (result, index) => ({
+            is_first: group_index === 0 && index === 0,
             is_first_in_group: index === 0,
             group_index,
             result,
@@ -151,26 +140,40 @@ export class Typeahead extends React.Component {
         )
         .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
           return [
-            is_first_in_group && (
-              <li className="typeahead__header" key={`group-${group_index}`}>
-                {this.config_groups[group_index].group_header}
-              </li>
-            ),
-            <li
-              key={`result-${result_index}`}
-              className={classNames(
-                "typeahead__item",
-                result_index === selection_cursor - cursor_offset &&
-                  "typeahead__item--active"
+            <div key={`result-${result_index}`}>
+              {result_index === 0 && (
+                <div
+                  key="header"
+                  className="typeahead__header"
+                  style={{ borderTop: "none" }}
+                >
+                  <TM
+                    k="menu_with_results_status"
+                    args={{
+                      total_matching_results,
+                    }}
+                  />
+                </div>
               )}
-              onClick={() => this.handle_result_selection(result)}
-              role="option"
-              aria-selected={result_index === selection_cursor}
-            >
-              <a className="typeahead__result">
-                {result.menu_content(query_value)}
-              </a>
-            </li>,
+              {is_first_in_group && (
+                <div className="typeahead__header" key={`group-${group_index}`}>
+                  {this.config_groups[group_index].group_header}
+                </div>
+              )}
+              <div
+                className={classNames(
+                  "typeahead__item",
+                  result_index === selection_cursor && "typeahead__item--active"
+                )}
+                onClick={() => this.handle_result_selection(result)}
+                role="option"
+                aria-selected={result_index === selection_cursor}
+              >
+                <a className="typeahead__result">
+                  {result.menu_content(query_value)}
+                </a>
+              </div>
+            </div>,
           ];
         })
         .compact()
@@ -318,41 +321,15 @@ export class Typeahead extends React.Component {
   }
 
   get derived_menu_state() {
-    const { matching_results, selection_cursor } = this.state;
+    const { matching_results } = this.state;
 
     const total_matching_results = _.flatten(matching_results).length;
 
-    const first_node_of_groups = _.uniqBy(
-      matching_results,
-      (datum) => this.config_groups[datum.config_group_index].group_header
-    );
-
-    const num_headers = _.size(first_node_of_groups) + 1; // + 1 status header always present
-
-    const total_menu_items = matching_results.length + num_headers;
-
-    const index_of_group_headers = _.map(
-      first_node_of_groups,
-      (node, index) => _.indexOf(matching_results, node) + 1 + index // (+ 1): status header always present; (+ index): headers will push index down by one each time
-    );
-
-    const index_of_first_nodes = _.map(
-      first_node_of_groups,
-      (node, index) => _.indexOf(matching_results, node) + 1 + (index + 1) // (+ 1): status header always present; (index + 1): headers push index of results
-    );
-
-    const cursor_offset = _.reduce(
-      index_of_first_nodes,
-      (sum, index) => sum + _.toNumber(selection_cursor >= index),
-      1
-    );
+    const total_menu_items = matching_results.length;
 
     return {
       total_matching_results,
       total_menu_items,
-      index_of_group_headers,
-      index_of_first_nodes,
-      cursor_offset,
     };
   }
 
@@ -368,33 +345,20 @@ export class Typeahead extends React.Component {
   default_selection_cursor = -1;
   get previous_selection_cursor() {
     const { selection_cursor } = this.state;
-    const {
-      total_menu_items,
-      index_of_group_headers,
-    } = this.derived_menu_state;
+    const { total_menu_items } = this.derived_menu_state;
 
     if (selection_cursor === this.default_selection_cursor) {
       return total_menu_items - 1;
-    } else if (selection_cursor - 1 === index_of_group_headers[0]) {
-      return this.default_selection_cursor;
-    } else if (_.includes(index_of_group_headers, selection_cursor - 1)) {
-      return selection_cursor - 2;
     } else {
       return selection_cursor - 1;
     }
   }
   get next_selection_cursor() {
     const { selection_cursor } = this.state;
-    const {
-      total_menu_items,
-      index_of_group_headers,
-    } = this.derived_menu_state;
+    const { total_menu_items } = this.derived_menu_state;
+
     if (selection_cursor === total_menu_items - 1) {
       return this.default_selection_cursor;
-    } else if (selection_cursor + 1 == 0) {
-      return 2;
-    } else if (_.includes(index_of_group_headers, selection_cursor + 1)) {
-      return selection_cursor + 2;
     } else {
       return selection_cursor + 1;
     }
@@ -450,7 +414,7 @@ export class Typeahead extends React.Component {
       if (!_.isNull(active_item)) {
         active_item.click();
       } else if (!_.isEmpty(this.state.matching_results)) {
-        this.setState({ selection_cursor: 2 });
+        this.setState({ selection_cursor: 0 });
       }
     }
   };
