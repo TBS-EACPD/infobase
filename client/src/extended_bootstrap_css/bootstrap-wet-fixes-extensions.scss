@@ -96,6 +96,10 @@ hr {
     color: $buttonSecondaryColor;
     text-decoration: none;
   }
+  & a:hover,a:focus {
+    color: $buttonPrimaryColor;
+    text-decoration: underline;
+  }
 }
 
 .pop.in, .fade.in {
