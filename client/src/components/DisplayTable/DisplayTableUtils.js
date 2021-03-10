@@ -157,8 +157,17 @@ export const PageSelector = ({
   );
 };
 
-export const PageinateBySelector = ({ selected, on_select, num_items }) => {
-  const options = _.filter([100, num_items > 100 && num_items]);
+export const SelectPageSize = ({
+  selected,
+  on_select,
+  page_size_increment,
+  num_items,
+}) => {
+  const options = _.chain(num_items / page_size_increment)
+    .ceil()
+    .range()
+    .map((_, ix) => (ix + 1) * page_size_increment)
+    .value();
 
   const dropdown_content = (
     <form className="paginate_by_dropdown">
