@@ -19,7 +19,7 @@ import {
   DisplayTableDownloadCsv,
   DisplayTableColumnToggle,
   PageSelector,
-  PageinateBySelector,
+  SelectPageSize,
 } from "./DisplayTableUtils.js";
 
 import text from "./DisplayTable.yaml";
@@ -117,7 +117,7 @@ export class DisplayTable extends React.Component {
       sort_by,
       descending: false,
       searches,
-      state_paginate_by: 100,
+      page_size: props.page_size_increment,
       current_page: 0,
     };
   }
@@ -146,15 +146,15 @@ export class DisplayTable extends React.Component {
         },
       }
       */,
+      page_size_increment,
       util_components,
-      size_to_paginate,
     } = this.props;
     const {
       sort_by,
       descending,
       searches,
       visible_col_keys,
-      state_paginate_by,
+      page_size,
       current_page,
     } = this.state;
 
@@ -314,61 +314,29 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
-    const {
-      paginate_by,
-      paginated_data,
-      change_paginate_by,
-      show_pagination_controls,
-      page_selector,
-    } = (() => {
-      const paginate_by =
-        size_to_paginate && _.size(sorted_filtered_data) > size_to_paginate
-          ? state_paginate_by
-          : 0;
+    const paginated_data = _.chunk(sorted_filtered_data, page_size);
 
-      const num_pages_exact = paginate_by
-        ? _.size(sorted_filtered_data) / paginate_by
-        : -1;
+    const number_of_pages = paginated_data.length;
+    const show_pagination_controls = number_of_pages > 1;
 
-      const num_pages =
-        num_pages_exact >= 0 && _.isInteger(num_pages_exact) //if we have the exact amount of items to fill an entire page, it will start a new empty page
-          ? num_pages_exact - 1 //thus we want to get rid of the extra page (as it has no content)
-          : _.toInteger(num_pages_exact); //start counting from 0 (-1 from the literal amount of pages)
+    const change_page_size = (new_page_size) => {
+      this.setState({ page_size: new_page_size, current_page: 0 });
+    };
 
-      const paginated_data = _.chunk(
-        sorted_filtered_data,
-        paginate_by || _.size(sorted_filtered_data)
-      )[current_page];
+    const change_page = (page) => {
+      this.setState({ current_page: page });
+      this.first_data_ref.current.focus();
+    };
 
-      const change_page = (page) => {
-        this.setState({ current_page: page });
-        this.first_data_ref.current.focus();
-      };
-
-      const change_paginate_by = (new_paginate_by) => {
-        this.setState({ state_paginate_by: new_paginate_by, current_page: 0 });
-      };
-
-      const show_pagination_controls = num_pages >= 0;
-
-      const page_selector = show_pagination_controls && (
-        <PageSelector
-          num_pages={num_pages}
-          current_page={current_page}
-          change_page={change_page}
-          show_select
-          num_col={_.size(visible_ordered_col_keys)}
-        />
-      );
-
-      return {
-        paginate_by,
-        paginated_data,
-        change_paginate_by,
-        show_pagination_controls,
-        page_selector,
-      };
-    })();
+    const page_selector = show_pagination_controls && (
+      <PageSelector
+        num_pages={number_of_pages}
+        current_page={current_page}
+        change_page={change_page}
+        show_select
+        num_col={_.size(visible_ordered_col_keys)}
+      />
+    );
 
     return (
       <div
@@ -404,9 +372,10 @@ export class DisplayTable extends React.Component {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     {show_pagination_controls && (
-                      <PageinateBySelector
-                        selected={paginate_by}
-                        on_select={change_paginate_by}
+                      <SelectPageSize
+                        selected={page_size}
+                        on_select={change_page_size}
+                        page_size_increment={page_size_increment}
                         num_items={_.size(sorted_filtered_data)}
                       />
                     )}
@@ -495,7 +464,7 @@ export class DisplayTable extends React.Component {
             <NoDataMessage />
           ) : (
             <tbody>
-              {_.map(paginated_data, (row, i) => (
+              {_.map(paginated_data[current_page], (row, i) => (
                 <tr key={i}>
                   {_.map(visible_ordered_col_keys, (col_key, idx) => (
                     <td
@@ -592,16 +561,14 @@ export class DisplayTable extends React.Component {
     );
   }
 }
+DisplayTable.defaultProps = {
+  page_size_increment: 100,
+};
+
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
 export class SmartDisplayTable extends React.Component {
   render() {
-    const {
-      data,
-      show_search,
-      show_sort,
-      column_configs,
-      size_to_paginate,
-    } = this.props;
+    const { data, show_search, show_sort, column_configs } = this.props;
     const col_configs_with_defaults = get_col_configs_with_defaults(
       column_configs
     );
@@ -617,11 +584,7 @@ export class SmartDisplayTable extends React.Component {
       })
     );
     return (
-      <DisplayTable
-        {...this.props}
-        column_configs={smart_column_configs}
-        size_to_paginate={size_to_paginate || 101}
-      />
+      <DisplayTable {...this.props} column_configs={smart_column_configs} />
     );
   }
 }
