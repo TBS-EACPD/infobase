@@ -2,27 +2,6 @@ no_matches_found:
   en: No results found
   fr: Aucun résultat
 
-paginate_status:
-  transform: [handlebars]
-  en: |
-    Showing {{total_matching_results}} results
-  fr: |
-    Liste des {{total_matching_results}} résultats
-
-paginate_previous:
-  transform: [handlebars]
-  en: |
-    Show previous {{page_size}} items
-  fr: |
-    Montrer les {{page_size}} items précédents
-
-paginate_next:
-  transform: [handlebars]
-  en: |
-    Show next {{next_page_size}} items
-  fr: |
-    Montrer les {{next_page_size}} items suivants
-
 close_menu:
   en: Close menu
   fr: Fermer le menu
