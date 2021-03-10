@@ -86,7 +86,7 @@ export class ServiceChannels extends React.Component {
             indexBy="label"
             keys={_.map(delivery_channels_keys, (key) => text_maker(key))}
             is_money={false}
-            colorBy={(d) => colors(d.id)}
+            colors={(d) => colors(d.id)}
             margin={{
               right: 10,
               left: 227,
