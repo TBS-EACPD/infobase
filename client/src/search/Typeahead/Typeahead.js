@@ -5,7 +5,7 @@ import ReactResizeDetector from "react-resize-detector";
 
 import {
   AutoSizer,
-  List,
+  List as VirtualizedList,
   CellMeasurer,
   CellMeasurerCache,
 } from "react-virtualized";
@@ -25,7 +25,7 @@ import "./Typeahead.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const cache = new CellMeasurerCache({
+const virtualized_cell_measure_cache = new CellMeasurerCache({
   fixedWidth: true,
 });
 
@@ -34,7 +34,7 @@ export class Typeahead extends React.Component {
     super(props);
 
     this.typeahead_ref = React.createRef();
-    this.list_ref = React.createRef();
+    this.virtualized_list_ref = React.createRef();
 
     this.menu_id = _.uniqueId("typeahead-");
 
@@ -70,6 +70,7 @@ export class Typeahead extends React.Component {
       query_value: prev_query_value,
       current_search_configs: prev_search_configs,
       selection_cursor: prev_selection_cursor,
+      matching_results: prev_matching_results,
     } = prevState;
 
     if (
@@ -87,15 +88,19 @@ export class Typeahead extends React.Component {
             )
           );
 
+      if (matching_results !== prev_matching_results) {
+        virtualized_cell_measure_cache.clearAll();
+      }
+
       this.setState({
         matching_results,
         selection_cursor: this.default_selection_cursor,
       });
     }
 
-    if (this.list_ref.current) {
-      this.list_ref.current.Grid.measureAllCells();
-      const list_height = this.list_ref.current.Grid.getTotalRowsHeight();
+    if (this.virtualized_list_ref.current) {
+      this.virtualized_list_ref.current.Grid.measureAllCells();
+      const list_height = this.virtualized_list_ref.current.Grid.getTotalRowsHeight();
       if (list_height !== this.state.list_height) {
         if (list_height < 400) {
           this.setState({ list_height: list_height });
@@ -105,17 +110,10 @@ export class Typeahead extends React.Component {
       }
 
       if (
-        query_value !== prev_query_value ||
-        current_search_configs !== prev_search_configs
-      ) {
-        cache.clearAll();
-      }
-
-      if (
         selection_cursor !== prev_selection_cursor &&
         prev_selection_cursor > selection_cursor
       ) {
-        this.list_ref.current.recomputeRowHeights(selection_cursor); //scrolling up is choppy if we don't do this
+        this.virtualized_list_ref.current.recomputeRowHeights(selection_cursor); //scrolling up is choppy if we don't do this
       }
     }
   }
@@ -145,9 +143,13 @@ export class Typeahead extends React.Component {
     const { total_matching_results, cursor_offset } = derived_menu_state;
 
     const list_items = _.compact([
-      <li key="header" className="typeahead__header">
+      <li
+        key="header"
+        className="typeahead__header"
+        style={{ borderTop: "none" }}
+      >
         <TM
-          k="paginate_status"
+          k="menu_with_results_status"
           args={{
             total_matching_results,
           }}
@@ -163,8 +165,6 @@ export class Typeahead extends React.Component {
           }))
         )
         .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
-          const adjusted_result_index = result_index;
-
           return [
             is_first_in_group && (
               <li className="typeahead__header" key={`group-${group_index}`}>
@@ -172,15 +172,15 @@ export class Typeahead extends React.Component {
               </li>
             ),
             <li
-              key={`result-${adjusted_result_index}`}
+              key={`result-${result_index}`}
               className={classNames(
                 "typeahead__item",
-                adjusted_result_index === selection_cursor - cursor_offset &&
+                result_index === selection_cursor - cursor_offset &&
                   "typeahead__item--active"
               )}
               onClick={() => this.handle_result_selection(result)}
               role="option"
-              aria-selected={adjusted_result_index === selection_cursor}
+              aria-selected={result_index === selection_cursor}
             >
               <a className="typeahead__result">
                 {result.menu_content(query_value)}
@@ -239,21 +239,21 @@ export class Typeahead extends React.Component {
               <ReactResizeDetector
                 handleWidth
                 onResize={() => {
-                  cache.clearAll();
+                  virtualized_cell_measure_cache.clearAll();
                 }}
               >
                 {() => (
-                  <List
+                  <VirtualizedList
                     className="typeahead__dropdown"
                     role="listbox"
                     id={this.menu_id}
                     aria-expanded={this.show_menu}
                     height={list_height}
                     width={width}
-                    ref={this.list_ref}
+                    ref={this.virtualized_list_ref}
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
-                    deferredMeasurementCache={cache}
-                    rowHeight={cache.rowHeight}
+                    deferredMeasurementCache={virtualized_cell_measure_cache}
+                    rowHeight={virtualized_cell_measure_cache.rowHeight}
                     rowCount={_.size(list_items)}
                     rowRenderer={({
                       index,
@@ -263,7 +263,7 @@ export class Typeahead extends React.Component {
                       style,
                     }) => (
                       <CellMeasurer
-                        cache={cache}
+                        cache={virtualized_cell_measure_cache}
                         columnIndex={0}
                         key={key}
                         parent={parent}
