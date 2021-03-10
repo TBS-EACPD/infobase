@@ -28,11 +28,18 @@ import {
   IconTag,
   IconReport,
   IconLab,
+<<<<<<< HEAD
   IconFinancesAlt,
   IconEmployeesAlt,
   IconClipboardAlt,
   IconHelpAlt,
   IconServices,
+=======
+  IconExpend,
+  IconPeople,
+  IconServicesHome,
+  IconResults,
+>>>>>>> change around svg into icons for services
   IconFlagLine,
 } from "src/icons/icons.js";
 
@@ -144,21 +151,16 @@ const HomeLayout = (props) => (
           }
           title={<TM k="home_ppl_title" />}
         />
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/services"
-          svg={
-            <IconServices
-              width="100%"
-              color="#FFFFFF"
-              alternate_color={false}
-            />
-          }
-          title={<TM k="home_ppl_title" />}
-        />
         {services_feature_flag && (
           <TrinityItem
             href="#orgs/gov/gov/infograph/services"
-            img_url={get_static_url("svg/service.svg")}
+            svg={
+              <IconServicesHome
+                width="100%"
+                color="#FFFFFF"
+                alternate_color={false}
+              />
+            }
             title={<TM k="home_services_title" />}
           />
         )}

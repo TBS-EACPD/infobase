@@ -3,10 +3,7 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import {
-  lang,
-  services_feature_flag,
-} from "src/core/injected_build_constants.js";
+import { services_feature_flag } from "src/core/injected_build_constants.js";
 
 import {
   IconInfo,
@@ -62,8 +59,8 @@ const base_configs = [
   },
   services_feature_flag && {
     id: "services",
-    title: _.constant(text.services_title[lang]),
-    description: _.constant(text.services_desc[lang]),
+    title: text_maker("services_title"),
+    description: text_maker("services_desc"),
     enable_panel_filter: true,
     svg: IconServices,
   },
