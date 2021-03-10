@@ -69,15 +69,13 @@ export const TypeaheadA11yStatus = ({
   selection_cursor,
   matching_results,
   total_matching_results,
-  cursor_offset,
   min_length,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
-      const selected_name =
-        matching_results[selection_cursor - cursor_offset].name;
+      const selected_name = matching_results[selection_cursor].name;
 
-      const selected_position = selection_cursor - cursor_offset + 1;
+      const selected_position = selection_cursor + 1;
 
       return text_maker("selected_result", {
         total_matching_results,
