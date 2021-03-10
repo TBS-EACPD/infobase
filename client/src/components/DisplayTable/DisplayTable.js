@@ -280,45 +280,61 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
-    const paginate_by =
-      size_to_paginate && _.size(sorted_filtered_data) > size_to_paginate
-        ? state_paginate_by
-        : 0;
+    const {
+      paginate_by,
+      paginated_data,
+      change_paginate_by,
+      show_pagination_controls,
+      page_selector,
+    } = (() => {
+      const paginate_by =
+        size_to_paginate && _.size(sorted_filtered_data) > size_to_paginate
+          ? state_paginate_by
+          : 0;
 
-    const num_pages_exact = paginate_by
-      ? _.size(sorted_filtered_data) / paginate_by
-      : -1;
+      const num_pages_exact = paginate_by
+        ? _.size(sorted_filtered_data) / paginate_by
+        : -1;
 
-    const num_pages =
-      num_pages_exact >= 0 && _.isInteger(num_pages_exact) //if we have the exact amount of items to fill an entire page, it will start a new empty page
-        ? num_pages_exact - 1 //thus we want to get rid of the extra page (as it has no content)
-        : _.toInteger(num_pages_exact); //start counting from 0 (-1 from the literal amount of pages)
+      const num_pages =
+        num_pages_exact >= 0 && _.isInteger(num_pages_exact) //if we have the exact amount of items to fill an entire page, it will start a new empty page
+          ? num_pages_exact - 1 //thus we want to get rid of the extra page (as it has no content)
+          : _.toInteger(num_pages_exact); //start counting from 0 (-1 from the literal amount of pages)
 
-    const paginated_data = _.chunk(
-      sorted_filtered_data,
-      paginate_by || _.size(sorted_filtered_data)
-    )[current_page];
+      const paginated_data = _.chunk(
+        sorted_filtered_data,
+        paginate_by || _.size(sorted_filtered_data)
+      )[current_page];
 
-    const change_page = (page) => {
-      this.setState({ current_page: page });
-      this.first_data_ref.current.focus();
-    };
+      const change_page = (page) => {
+        this.setState({ current_page: page });
+        this.first_data_ref.current.focus();
+      };
 
-    const change_paginate_by = (new_paginate_by) => {
-      this.setState({ state_paginate_by: new_paginate_by, current_page: 0 });
-    };
+      const change_paginate_by = (new_paginate_by) => {
+        this.setState({ state_paginate_by: new_paginate_by, current_page: 0 });
+      };
 
-    const show_pagination_controls = num_pages >= 0;
+      const show_pagination_controls = num_pages >= 0;
 
-    const page_selector = show_pagination_controls && (
-      <PageSelector
-        num_pages={num_pages}
-        current_page={current_page}
-        change_page={change_page}
-        show_select
-        num_col={_.size(visible_ordered_col_keys)}
-      />
-    );
+      const page_selector = show_pagination_controls && (
+        <PageSelector
+          num_pages={num_pages}
+          current_page={current_page}
+          change_page={change_page}
+          show_select
+          num_col={_.size(visible_ordered_col_keys)}
+        />
+      );
+
+      return {
+        paginate_by,
+        paginated_data,
+        change_paginate_by,
+        show_pagination_controls,
+        page_selector,
+      };
+    })();
 
     return (
       <div
@@ -333,7 +349,6 @@ export class DisplayTable extends React.Component {
             "display-table",
             !is_total_exist && "no-total-row"
           )}
-          ref={this.table_ref}
         >
           <caption className="sr-only">
             <div>
@@ -354,15 +369,13 @@ export class DisplayTable extends React.Component {
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <div>
-                      {show_pagination_controls && (
-                        <PageinateBySelector
-                          selected={paginate_by}
-                          on_select={change_paginate_by}
-                          num_items={_.size(sorted_filtered_data)}
-                        />
-                      )}
-                    </div>
+                    {show_pagination_controls && (
+                      <PageinateBySelector
+                        selected={paginate_by}
+                        on_select={change_paginate_by}
+                        num_items={_.size(sorted_filtered_data)}
+                      />
+                    )}
                     <div className={"display-table-container__utils"}>
                       <button
                         tabIndex={0}
@@ -531,17 +544,7 @@ export class DisplayTable extends React.Component {
               )}
             </tbody>
           )}
-          <tfoot>
-            {show_pagination_controls && (
-              <PageSelector
-                num_pages={num_pages}
-                current_page={current_page}
-                change_page={change_page}
-                show_select
-                num_col={_.size(visible_ordered_col_keys)}
-              />
-            )}
-          </tfoot>
+          <tfoot>{page_selector}</tfoot>
         </table>
 
         {sorted_filtered_data.length === 0 && (
