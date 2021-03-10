@@ -144,21 +144,15 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             is_money={false}
             indexBy={"id"}
             keys={[can_online, cannot_online, not_applicable]}
-            colorBy={(d) => colors(d.id)}
+            colors={(d) => colors(d.id)}
             bttm_axis={{
               renderTick: (tick) =>
                 tick.value % 1 === 0 && (
                   <g
-                    key={tick.key}
+                    key={tick.tickIndex}
                     transform={`translate(${tick.x - 3.5},${tick.y + 12})`}
                   >
-                    <text
-                      style={{
-                        ...tick.theme.axis.ticks.text,
-                      }}
-                    >
-                      {tick.value}
-                    </text>
+                    <text>{tick.value}</text>
                   </g>
                 ),
             }}

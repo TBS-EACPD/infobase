@@ -110,7 +110,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
               label={(d) => volume_formatter(d.value)}
               data={data}
               is_money={false}
-              colorBy={(d) => colors(d.id)}
+              colors={(d) => colors(d.id)}
               padding={0.1}
               enableGridY={false}
               enableGridX={false}
@@ -130,28 +130,26 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
                 tickValues: 6,
                 renderTick: (tick) => (
                   <g
-                    key={tick.key}
+                    key={tick.tickIndex}
                     transform={`translate(${tick.x - 10},${tick.y})`}
                   >
                     <a
                       href={
                         is_gov
                           ? infograph_href_template(
-                              Dept.lookup(tick.key),
+                              Dept.lookup(tick.value),
                               "services"
                             )
-                          : `#dept/${subject.id}/service-panels/${tick.key}`
+                          : `#dept/${subject.id}/service-panels/${tick.value}`
                       }
                     >
                       <text
+                        style={{ fontSize: "11px" }}
                         textAnchor="end"
                         dominantBaseline="end"
-                        style={{
-                          ...tick.theme.axis.ticks.text,
-                        }}
                       >
                         <TspanLineWrapper
-                          text={get_name(tick.key)}
+                          text={get_name(tick.value)}
                           width={70}
                         />
                       </text>
