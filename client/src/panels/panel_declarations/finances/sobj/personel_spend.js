@@ -11,9 +11,10 @@ import {
   run_template,
 } from "src/panels/panel_declarations/shared.js";
 
+import { GraphOverlay } from "src/components/index.js";
+
 import { primaryColor } from "src/core/color_defs.js";
 
-import { GraphOverlay } from "src/components/index.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";
 const { sos } = businessConstants;

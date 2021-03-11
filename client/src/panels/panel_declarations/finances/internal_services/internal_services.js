@@ -12,11 +12,12 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
+import { GraphOverlay } from "src/components/index.js";
+
 import { infobase_colors } from "src/core/color_schemes.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "src/components/index.js";
 
 import text from "./internal_services.yaml";
 

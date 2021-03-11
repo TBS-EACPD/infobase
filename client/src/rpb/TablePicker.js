@@ -7,9 +7,10 @@ import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
+import { AlertBanner, TagCloud } from "src/components/index.js";
+
 import { Table } from "src/core/TableClass.js";
 
-import { AlertBanner, TagCloud } from "src/components/index.js";
 
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import {

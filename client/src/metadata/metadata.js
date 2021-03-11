@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { create_text_maker_component, FancyUL, Panel } from "src/components/index.js";
+
 import { lang } from "src/core/injected_build_constants.js";
 
 import {
@@ -8,7 +10,6 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents.js";
 
-import { create_text_maker_component, FancyUL, Panel } from "src/components/index.js";
 
 import { sources } from "./data_sources.js";
 

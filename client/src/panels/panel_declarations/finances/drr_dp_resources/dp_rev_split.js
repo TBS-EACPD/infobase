@@ -10,9 +10,10 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
+import { Format, SmartDisplayTable } from "src/components/index.js";
+
 import { textGreen, textRed } from "src/core/color_defs.js";
 
-import { Format, SmartDisplayTable } from "src/components/index.js";
 
 import text from "./dp_rev_split.yaml";
 

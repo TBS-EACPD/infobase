@@ -12,6 +12,13 @@ import {
   indicator_text_functions,
 } from "src/panels/panel_declarations/results/results_common.js";
 
+import {
+  Select,
+  Panel,
+  create_text_maker_component,
+  SpinnerWrapper,
+} from "src/components/index.js";
+
 import { result_docs } from "src/models/results.js";
 
 import { Subject } from "src/models/subject";
@@ -31,12 +38,6 @@ import { ensure_loaded } from "src/core/lazy_loader.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { LegendList } from "src/charts/legends";
-import {
-  Select,
-  Panel,
-  create_text_maker_component,
-  SpinnerWrapper,
-} from "src/components/index.js";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

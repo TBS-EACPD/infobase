@@ -16,9 +16,10 @@ import {
   NivoLineBarToggle,
 } from "src/panels/panel_declarations/shared.js";
 
+import { GraphOverlay } from "src/components/index.js";
+
 import { lang } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "src/components/index.js";
 
 import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
