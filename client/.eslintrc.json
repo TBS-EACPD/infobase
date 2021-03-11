@@ -9,6 +9,7 @@
       "es6": true
   },
   "rules": {
+    "no-restricted-imports": ["error", {"patterns": ["../*"]}],
     "react/jsx-uses-vars": 1,
     "react/jsx-no-target-blank": [ "off"],
     "react/prop-types": [ "off" ],
