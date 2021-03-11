@@ -2,12 +2,6 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { infobase_colors } from "src/core/color_schemes.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { toggle_list } from "src/general_utils.js";
-
 import {
   WrappedNivoBar,
   year_templates,
@@ -18,7 +12,12 @@ import {
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { infobase_colors } from "src/core/color_schemes.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { toggle_list } from "src/general_utils.js";
 
 import text from "./crso_by_prog.yaml";
 

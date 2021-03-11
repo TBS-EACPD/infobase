@@ -1,17 +1,15 @@
 import React from "react";
 
+import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
+import { PanelRenderer } from "src/panels/PanelRenderer.js";
+
 import { SpinnerWrapper } from "src/components/index.js";
 
+import { Subject } from "src/models/subject";
 import { create_text_maker } from "src/models/text.js";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
-
 import { ensure_loaded } from "src/core/lazy_loader";
-import { Subject } from "src/models/subject";
-
-
-import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
-import { PanelRenderer } from "../PanelRenderer.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import text from "./IsolatedPanel.yaml";
 

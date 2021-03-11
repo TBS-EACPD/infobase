@@ -8,7 +8,7 @@ import { Subject } from "src/models/subject.js";
 
 import { Table } from "src/core/TableClass.js";
 
-import { text_maker } from "../partition_text_provider.js";
+import { text_maker } from "src/partition/partition_subapp/partition_text_provider.js";
 
 import {
   absolute_value_sort,

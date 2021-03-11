@@ -1,13 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   declare_panel,
   create_text_maker,
   TM,
   InfographicPanel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import text from "./gov_related.yaml";
 

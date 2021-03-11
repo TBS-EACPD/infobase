@@ -1,15 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { ModalButton } from "src/components/index.js";
-
-import { businessConstants } from "src/models/businessConstants.js";
-import { Indicator } from "src/models/results.js";
-
-import { lang } from "src/core/injected_build_constants.js";
-
-import { toggle_list } from "src/general_utils.js";
-
 import {
   util_components,
   InfographicPanel,
@@ -19,7 +10,16 @@ import {
   Results,
   declare_panel,
   HeightClippedGraph,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { ModalButton } from "src/components/index.js";
+
+import { businessConstants } from "src/models/businessConstants.js";
+import { Indicator } from "src/models/results.js";
+
+import { lang } from "src/core/injected_build_constants.js";
+
+import { toggle_list } from "src/general_utils.js";
 
 import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
 

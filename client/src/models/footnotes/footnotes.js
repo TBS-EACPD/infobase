@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
+import { mix, staticStoreMixin } from "src/models/storeMixins.js";
 
-import { mix, staticStoreMixin } from "../storeMixins.js";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 
 const footnotes_by_id = {};
 

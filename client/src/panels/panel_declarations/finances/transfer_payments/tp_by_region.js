@@ -4,6 +4,17 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
+  formats,
+  run_template,
+  declare_panel,
+  year_templates,
+  businessConstants,
+  create_text_maker_component,
+  StdPanel,
+  Col,
+} from "src/panels/panel_declarations/shared.js";
+
+import {
   SpinnerWrapper,
   TabbedContent,
   SmartDisplayTable,
@@ -13,17 +24,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { Canada } from "src/charts/canada/index.js";
 import { get_static_url, make_request } from "src/request_utils.js";
-
-import {
-  formats,
-  run_template,
-  declare_panel,
-  year_templates,
-  businessConstants,
-  create_text_maker_component,
-  StdPanel,
-  Col,
-} from "../../shared.js";
 
 import text from "./tp_by_region.yaml";
 

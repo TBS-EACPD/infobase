@@ -4,6 +4,7 @@ import marked from "marked";
 
 import { lang } from "src/core/injected_build_constants.js";
 
+/* eslint-disable no-restricted-imports */
 import faq_csv_string from "../../../data/faq.csv";
 
 const DISABLED_QUESTIONS = [];

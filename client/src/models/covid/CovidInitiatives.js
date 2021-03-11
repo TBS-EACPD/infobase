@@ -5,8 +5,8 @@ import {
   staticStoreMixin,
   PluralSingular,
   SubjectMixin,
-} from "../storeMixins.js";
-import { trivial_text_maker } from "../text.js";
+} from "src/models/storeMixins.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 class CovidInitiatives extends mix().with(
   staticStoreMixin,

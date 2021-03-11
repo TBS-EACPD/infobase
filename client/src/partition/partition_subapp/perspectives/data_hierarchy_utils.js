@@ -1,9 +1,10 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
+import { GlossaryEntry } from "src/models/glossary";
+
 import { Table } from "src/core/TableClass.js";
 
-import { GlossaryEntry } from "src/models/glossary";
 const absolute_value_sort = (a, b) => -(Math.abs(a.value) - Math.abs(b.value));
 const alphabetic_name_sort = (a, b) =>
   a.data.name.toLowerCase().localeCompare(b.data.name.toLowerCase());

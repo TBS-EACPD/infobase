@@ -1,8 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { default_dept_name_sort_func, SmartDisplayTable } from "src/components";
-
 import {
   Subject,
   create_text_maker_component,
@@ -10,7 +8,9 @@ import {
   get_source_links,
   declare_panel,
   HeightClippedGraph,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { default_dept_name_sort_func, SmartDisplayTable } from "src/components";
 
 import { LateDepartmentsBanner } from "./result_components.js";
 import {

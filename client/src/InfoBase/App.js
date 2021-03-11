@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
-
+import { HeaderNotification } from "src/components/HeaderNotification";
 import { PageDetails } from "src/components/PageDetails.js";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
 
@@ -23,8 +23,6 @@ import {
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "src/core/NavComponents.js";
 import { RedirectHeader } from "src/core/RedirectHeader.js";
-
-import { HeaderNotification } from "src/components/HeaderNotification";
 
 import { TooltipActivator } from "src/glossary/TooltipActivator.js";
 import { SurveyPopup } from "src/Survey/SurveyPopup.js";

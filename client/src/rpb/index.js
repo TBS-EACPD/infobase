@@ -17,21 +17,18 @@ import { Subject } from "src/models/subject.js";
 import { log_standard_event } from "src/core/analytics.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-
 import { ensure_loaded } from "src/core/lazy_loader.js";
-
-import { Table } from "src/core/TableClass.js";
 
 import {
   StandardRouteContainer,
   LangSynchronizer,
 } from "src/core/NavComponents";
+import { Table } from "src/core/TableClass.js";
 
 //specific view stuff
 
 //misc app stuff
 import { SafeJSURL } from "src/general_utils.js";
-
 
 import { GranularView } from "./granular_view.js";
 import { rpb_link } from "./rpb_link.js";

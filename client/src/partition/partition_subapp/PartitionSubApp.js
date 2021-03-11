@@ -12,9 +12,10 @@ import {
 import { newIBDarkCategoryColors } from "src/core/color_schemes.js";
 
 import { reactAdapter } from "src/core/reactAdapter";
-import { get_static_url } from "src/request_utils.js";
 
-import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
+import { PartitionDiagram } from "src/partition/partition_diagram/PartitionDiagram.js";
+
+import { get_static_url } from "src/request_utils.js";
 
 import { text_maker } from "./partition_text_provider.js";
 import { PartitionNotes } from "./PartitionNotes.js";

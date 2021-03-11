@@ -9,7 +9,7 @@ import {
   infograph_href_template,
   create_text_maker_component,
   declare_panel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import { HierarchyDeadElementIcon } from "./hierarchy_component.js";
 

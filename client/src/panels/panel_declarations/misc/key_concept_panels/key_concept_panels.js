@@ -1,8 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-
-import { declare_panel } from "../../shared.js";
+import { declare_panel } from "src/panels/panel_declarations/shared.js";
 
 import { KeyConcepts } from "./KeyConcepts.js";
 

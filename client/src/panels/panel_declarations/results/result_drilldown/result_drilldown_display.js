@@ -3,7 +3,18 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import {
+  StatusIconTable,
+  InlineStatusIconList,
+} from "src/panels/panel_declarations/results/result_components.js";
+import {
+  TM,
+  text_maker,
+} from "src/panels/panel_declarations/results/result_text_provider.js";
+import {
+  Indicator,
+  result_docs,
+} from "src/panels/panel_declarations/results/results_common.js";
 
 import {
   DlItem,
@@ -11,16 +22,14 @@ import {
   SpinnerWrapper,
   Format,
   TextAbbrev,
-} from "src/components";
+} from "src/components/";
+
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 
 import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";
-
-import { StatusIconTable, InlineStatusIconList } from "../result_components.js";
-import { TM, text_maker } from "../result_text_provider.js";
-import { Indicator, result_docs } from "../results_common.js";
 
 import {
   get_type_name,

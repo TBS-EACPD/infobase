@@ -8,7 +8,7 @@ import {
   rpb_link,
   create_text_maker_component,
   declare_panel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import text from "./rpb_links.yaml";
 

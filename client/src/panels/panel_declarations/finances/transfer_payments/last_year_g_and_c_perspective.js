@@ -1,14 +1,14 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   StdPanel,
   Col,
   WrappedNivoCircleProportion,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { text_maker, TM } from "./gnc_text_provider.js";
 

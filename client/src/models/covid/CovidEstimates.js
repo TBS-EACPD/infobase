@@ -1,10 +1,10 @@
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import { Dept } from "src/models/organizational_entities.js";
+import { mix, staticStoreMixin } from "src/models/storeMixins.js";
 
-import { businessConstants } from "../businessConstants.js";
-import { Dept } from "../organizational_entities.js";
-import { mix, staticStoreMixin } from "../storeMixins.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 class CovidEstimates extends mix().with(staticStoreMixin) {
   static create_and_register(covid_estimates_row) {

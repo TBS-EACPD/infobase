@@ -1,6 +1,9 @@
 import _ from "lodash";
 
-import { run_template, year_templates } from "../shared.js";
+import {
+  run_template,
+  year_templates,
+} from "src/panels/panel_declarations/shared.js";
 
 const { people_years } = year_templates;
 

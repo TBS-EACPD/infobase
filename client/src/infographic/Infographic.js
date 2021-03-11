@@ -2,6 +2,12 @@ import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
 
+import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
+
+import { PanelRegistry } from "src/panels/PanelRegistry.js";
+
+import { PanelRenderer } from "src/panels/PanelRenderer.js";
+
 import {
   create_text_maker_component,
   SpinnerWrapper,
@@ -14,15 +20,11 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
+import { StandardRouteContainer } from "src/core/NavComponents";
 import { redirect_with_msg } from "src/core/RedirectHeader.js";
 
-import { StandardRouteContainer } from "src/core/NavComponents";
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";
 
-
-import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
-import { PanelRegistry } from "src/panels/PanelRegistry.js";
-import { PanelRenderer } from "src/panels/PanelRenderer.js";
 import { EverythingSearch } from "src/search/EverythingSearch.js";
 
 import { bubble_defs } from "./bubble_definitions.js";

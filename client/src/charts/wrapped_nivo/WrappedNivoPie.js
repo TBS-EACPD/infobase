@@ -7,10 +7,9 @@ import React from "react";
 import { Format, SmartDisplayTable } from "src/components/index.js";
 
 import { newIBCategoryColors } from "src/core/color_schemes.js";
-
 import { formats } from "src/core/format.js";
 
-import { TabularLegend } from "../legends";
+import { TabularLegend } from "src/charts/legends";
 
 import {
   nivo_common_text_maker,

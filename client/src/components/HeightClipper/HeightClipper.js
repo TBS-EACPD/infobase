@@ -2,9 +2,10 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
+import { TM } from "src/components/TextMaker.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { TM } from "../TextMaker.js";
 /*props: 
   maxChildrenHeight as an INT of pixels,
   children : JSX (content to be clipped), 

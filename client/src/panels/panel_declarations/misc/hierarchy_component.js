@@ -2,13 +2,16 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import {
+  Subject,
+  create_text_maker_component,
+} from "src/panels/panel_declarations/shared.js";
+
 import { highlightColor } from "src/core/color_defs.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
 import { IconAttentionTriangle } from "src/icons/icons.js";
-
-import { Subject, create_text_maker_component } from "../shared.js";
 
 import text from "./hierarchy_panels.yaml";
 
