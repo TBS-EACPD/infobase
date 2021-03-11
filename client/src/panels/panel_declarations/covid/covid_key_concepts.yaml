@@ -8,7 +8,7 @@ covid_questions_up_to_date_a:
 
 covid_questions_financial_q:
   en: Why does GC InfoBase report COVID-19 financial data under "COVID-19" and not under "Finances"?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_financial_a:
   transform: [handlebars,markdown]
   en: |
@@ -33,7 +33,7 @@ covid_questions_financial_a:
 
 covid_questions_funding_value_q:
   en: What are "funding" amounts? Where do they come from?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_funding_value_a:
   transform: [markdown]
   en: |
@@ -46,21 +46,21 @@ covid_questions_funding_value_a:
 
     Expenditures may be higher than funding for a given measure due to transfers between organizations and/or the use of existing resources by one or more organizations to support a measure.
     There may also be measures without funding amounts, which represent measures that have been identified in the Estimates that were not included in the FES.
-  fr: TODO
+  fr: COVID_TEXT_TODO
 
 covid_questions_what_is_new_q:
   en: What is new about the recent data presented on GC InfoBase?
-  fr: TODO 
+  fr: COVID_TEXT_TODO 
 covid_questions_what_is_new_a:
   en: |
     As of March 2021, GC InfoBase reports Estimates authorities on a measure basis as
     per Canada’s COVID-19 Economic Response Plan outlined in the Fall Economic Statement 2020.
     For the first time, GC InfoBase is reporting on expenditures incurred against authorities, where available.
-  fr: TODO
+  fr: COVID_TEXT_TODO
 
 covid_questions_measure_vs_initiative_q:
   en: How does the current presentation of COVID-19 authorities “by measure” differ from the previous presentation of authorities “by Estimates Initiative?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_measure_vs_initiative_a:
   en: |
     The current presentation of “Spending Authorities by COVID-19 Measure” better aligns
@@ -68,11 +68,11 @@ covid_questions_measure_vs_initiative_a:
     Economic Statement, which provides a thematic list of anticipated authorities at an aggregate
     level. The previous presentation by “Estimates Initiatives” included actual authorities at the
     granular level by department and by initiative.
-  fr: TODO
+  fr: COVID_TEXT_TODO
 
 covid_questions_authorities_vs_funding_q:
   en: Why don’t authorities correspond to funding announcements made by the Government?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_authorities_vs_funding_a:
   transform: [markdown]
   en: |
@@ -87,11 +87,11 @@ covid_questions_authorities_vs_funding_a:
     Government announcements are based on an accrual-basis of accounting, recognizing cash
     investments over their useful life (e.g. recognizing the cost of an asset over 10 years vs. the year
     in which the cash must be paid).
-  fr: TODO
+  fr: COVID_TEXT_TODO
 
 covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the measures tab?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_missing_measures_a:
   transform: [handlebars,markdown]
   en: |
@@ -122,17 +122,17 @@ covid_questions_missing_measures_a:
 
 covid_questions_frequency_q:
   en: How frequently will COVID-19 spending authorities and expenditures be updated on GC InfoBase?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_frequency_a:
   en: |
     COVID-19 spending authorities will be updated following the tabling of an Estimates
     (e.g. Supplementary Estimates (A), 2020-21) or as other pertinent information becomes
     available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
-  fr: TODO
+  fr: COVID_TEXT_TODO
 
 covid_questions_other_expenditure_reporting_q:
   en: Where does the Government normally report expenditure information (COVID, non-COVID)?
-  fr: TODO
+  fr: COVID_TEXT_TODO
 covid_questions_other_expenditure_reporting_a:
   en: |
     Audited Government expenditures are reported after a fiscal year is complete (in the
