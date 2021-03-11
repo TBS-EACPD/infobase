@@ -299,7 +299,6 @@ export class DisplayTable extends React.Component {
         num_pages={number_of_pages}
         current_page={current_page}
         change_page={change_page}
-        show_select
         num_col={_.size(visible_ordered_col_keys)}
       />
     );

@@ -107,7 +107,7 @@ export const PageSelector = ({
                 _.range(current_page - 2, current_page + 3),
                 (num) =>
                   num >= 0 &&
-                  num <= num_pages && (
+                  num <= num_pages - 1 && (
                     <button
                       key={num}
                       className={`btn-ib-light${
@@ -122,9 +122,9 @@ export const PageSelector = ({
                     </button>
                   )
               )}
-              {current_page < num_pages - 2 && (
+              {current_page < num_pages - 3 && (
                 <Fragment>
-                  {current_page < num_pages - 3 && (
+                  {current_page < num_pages - 4 && (
                     <button
                       className="btn-ib-light"
                       tabIndex="-1"
@@ -139,13 +139,13 @@ export const PageSelector = ({
                   )}
                   <button
                     className="btn-ib-light"
-                    onClick={() => change_page(num_pages)}
+                    onClick={() => change_page(num_pages - 1)}
                     aria-label={text_maker("page", {
-                      page_num: num_pages + 1,
+                      page_num: num_pages,
                     })}
                     role="tab"
                   >
-                    {num_pages + 1}
+                    {num_pages}
                   </button>
                 </Fragment>
               )}
