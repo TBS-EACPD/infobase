@@ -3,10 +3,6 @@ import { scaleLinear } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { Canada } from "src/charts/canada/index.js";
-
 import {
   formats,
   run_template,
@@ -17,7 +13,11 @@ import {
   Col,
   declare_panel,
   util_components,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { Canada } from "src/charts/canada/index.js";
 
 import { calculate_common_text_args } from "./calculate_common_text_args.js";
 

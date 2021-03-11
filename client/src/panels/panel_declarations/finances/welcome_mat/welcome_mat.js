@@ -2,8 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   run_template,
   Table,
@@ -16,7 +14,10 @@ import {
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
 import { format_and_get_fte } from "./welcome_mat_fte.js";

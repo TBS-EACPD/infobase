@@ -1,10 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { highlightColor, secondaryColor } from "src/core/color_defs.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   formats,
   create_text_maker_component,
@@ -13,7 +9,11 @@ import {
   WrappedNivoBar,
   table_common,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { highlightColor, secondaryColor } from "src/core/color_defs.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import text from "./spend_rev_split.yaml";
 

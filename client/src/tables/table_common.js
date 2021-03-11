@@ -4,11 +4,11 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants.js";
 
+import { Subject } from "src/models/subject";
 import { trivial_text_maker, run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 
 import * as format from "src/core/format";
-import { Subject } from "src/models/subject";
 
 const m = run_template;
 const text_maker = trivial_text_maker;

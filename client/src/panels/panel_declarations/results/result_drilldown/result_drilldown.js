@@ -1,22 +1,20 @@
 import _ from "lodash";
 import React from "react";
 
+import { text_maker } from "src/panels/panel_declarations/results/result_text_provider.js";
+import {
+  ResultCounts,
+  GranularResultCounts,
+  result_docs,
+  result_docs_in_tabling_order,
+} from "src/panels/panel_declarations/results/results_common.js";
 import {
   util_components,
   InfographicPanel,
   get_source_links,
   ensure_loaded,
   declare_panel,
-} from "../../shared.js";
-
-import { text_maker } from "../result_text_provider.js";
-
-import {
-  ResultCounts,
-  GranularResultCounts,
-  result_docs,
-  result_docs_in_tabling_order,
-} from "../results_common.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import ResultsExplorer from "./results_scheme.js";
 

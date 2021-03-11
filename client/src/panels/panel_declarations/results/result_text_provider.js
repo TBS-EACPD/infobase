@@ -1,4 +1,4 @@
-import { create_text_maker_component } from "../shared.js";
+import { create_text_maker_component } from "src/panels/panel_declarations/shared.js";
 
 import drilldown_text from "./result_drilldown/result_drilldown.yaml";
 

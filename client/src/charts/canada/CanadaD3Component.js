@@ -18,10 +18,9 @@ import _ from "lodash";
 import { businessConstants } from "src/models/businessConstants.js";
 
 import { separatorColor } from "src/core/color_defs.js";
-
 import { lang } from "src/core/injected_build_constants.js";
 
-import graphRegistry from "../graphRegistry.js";
+import graphRegistry from "src/charts/graphRegistry.js";
 
 import { canada_svg } from "./canada_svg.yaml";
 

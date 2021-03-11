@@ -5,7 +5,16 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import result_text from "src/panels/panel_declarations/results/result_components.yaml";
+
+import {
+  Result,
+  indicator_text_functions,
+} from "src/panels/panel_declarations/results/results_common.js";
+
 import { result_docs } from "src/models/results.js";
+
+import { Subject } from "src/models/subject";
 
 import {
   primaryColor,
@@ -28,15 +37,6 @@ import {
   create_text_maker_component,
   SpinnerWrapper,
 } from "src/components";
-
-import { Subject } from "src/models/subject";
-
-import result_text from "src/panels/panel_declarations/results/result_components.yaml";
-import {
-  Result,
-  indicator_text_functions,
-} from "src/panels/panel_declarations/results/results_common.js";
-
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

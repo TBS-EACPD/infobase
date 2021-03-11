@@ -1,39 +1,33 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { PanelRegistry, layout_types } from "src/panels/PanelRegistry.js";
+
 import * as util_components from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.js";
-
 import FootNote from "src/models/footnotes/footnotes.js";
-
 import { GlossaryEntry } from "src/models/glossary.js";
-
 import * as Results from "src/models/results.js";
-
+import { Subject } from "src/models/subject";
 import {
   create_text_maker,
   trivial_text_maker,
   run_template,
 } from "src/models/text.js";
-
 import {
   year_templates,
   actual_to_planned_gap_year,
 } from "src/models/years.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
-
 import {
   newIBCategoryColors,
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
 } from "src/core/color_schemes.js";
-
 import { formats, formatter } from "src/core/format.js";
-
 import { ensure_loaded } from "src/core/lazy_loader.js";
-
 import { Table } from "src/core/TableClass.js";
 
 import { Canada } from "src/charts/canada/index.js";
@@ -49,7 +43,6 @@ import {
   WrappedNivoTreemap,
 } from "src/charts/wrapped_nivo/index.js";
 
-
 import * as general_utils from "src/general_utils.js";
 import {
   infograph_href_template,
@@ -58,14 +51,8 @@ import {
 import { glossary_href } from "src/link_utils.js";
 import { get_source_links } from "src/metadata/data_sources.js";
 
-
-import { Subject } from "src/models/subject";
-
-
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
 import * as table_common from "src/tables/table_common.js";
-
-import { PanelRegistry, layout_types } from "../PanelRegistry.js";
 
 import {
   InfographicPanel,

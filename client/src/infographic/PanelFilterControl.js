@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { PanelRegistry } from "src/panels/PanelRegistry.js";
+
 import {
   create_text_maker_component,
   Details,
@@ -12,8 +14,6 @@ import { tertiaryColor } from "src/core/color_defs.js";
 import { Table } from "src/core/TableClass.js";
 
 import { SelectAllControl } from "src/charts/legends/index.js";
-
-import { PanelRegistry } from "src/panels/PanelRegistry.js";
 
 import text from "./PanelFilterControl.yaml";
 

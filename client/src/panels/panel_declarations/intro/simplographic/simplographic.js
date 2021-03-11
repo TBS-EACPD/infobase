@@ -1,6 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
+import {
+  Subject,
+  declare_panel,
+  util_components,
+  InfographicPanel,
+} from "src/panels/panel_declarations/shared.js";
+
 import { ResultCounts, current_drr_key } from "src/models/results.js";
 
 import { is_mobile } from "src/core/feature_detection.js";
@@ -13,13 +20,6 @@ import {
 } from "src/icons/icons.js";
 
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
-
-import {
-  Subject,
-  declare_panel,
-  util_components,
-  InfographicPanel,
-} from "../../shared.js";
 
 import simplographic_text from "./simplographic.yaml";
 import "./simplographic.scss";

@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import MediaQuery from "react-responsive";
 
-import "./GraphOverlay.scss";
+import { create_text_maker_component } from "src/components/misc_util_components";
+
 import { IconRotatePhone, IconExpandWindowWidth } from "src/icons/icons.js";
 
 import { hide_graph_overlay } from "src/InfoBase/AppState.js";
 
-import { create_text_maker_component } from "../misc_util_components";
-
 import text from "./GraphOverlay.yaml";
+import "./GraphOverlay.scss";
 
 const { TM, text_maker } = create_text_maker_component(text);
 

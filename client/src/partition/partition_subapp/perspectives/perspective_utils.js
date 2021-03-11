@@ -2,7 +2,7 @@ import { run_template } from "src/models/text.js";
 
 import { formats } from "src/core/format.js";
 
-import { text_maker } from "../partition_text_provider.js";
+import { text_maker } from "src/partition/partition_subapp/partition_text_provider.js";
 
 const get_common_popup_options = (d) => {
   return {

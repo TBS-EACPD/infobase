@@ -2,12 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { IconArray } from "src/charts/IconArray.js";
-
-import { toggle_list } from "src/general_utils.js";
-
 import {
   StandardLegend,
   InfographicPanel,
@@ -17,7 +11,13 @@ import {
   declare_panel,
   WrappedNivoPie,
   util_components,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { IconArray } from "src/charts/IconArray.js";
+
+import { toggle_list } from "src/general_utils.js";
 
 import { TM, text_maker } from "./drr_summary_text.js";
 import { large_status_icons } from "./result_components.js";

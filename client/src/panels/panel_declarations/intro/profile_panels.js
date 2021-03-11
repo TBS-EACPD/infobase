@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   TextPanel,
   general_utils,
@@ -11,7 +10,7 @@ import {
   Subject,
   formats,
   declare_panel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import text from "./profile_panels.yaml";
 

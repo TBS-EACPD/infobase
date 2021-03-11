@@ -3,6 +3,8 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
+import { panel_context } from "src/panels/PanelRenderer.js";
+
 import {
   Panel,
   create_text_maker_component,
@@ -17,8 +19,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 import { IconCopyLink } from "src/icons/icons.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
-
-import { panel_context } from "../PanelRenderer.js";
 
 import text from "./InfographicPanel.yaml";
 

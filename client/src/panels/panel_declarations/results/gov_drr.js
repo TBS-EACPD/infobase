@@ -2,17 +2,17 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  SmartDisplayTable,
-  default_dept_name_sort_func,
-} from "src/components/index.js";
-
-import {
   Subject,
   InfographicPanel,
   get_source_links,
   declare_panel,
   HeightClippedGraph,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import {
+  SmartDisplayTable,
+  default_dept_name_sort_func,
+} from "src/components/index.js";
 
 import { DrrSummary } from "./drr_summary.js";
 import { TM, text_maker } from "./drr_summary_text.js";

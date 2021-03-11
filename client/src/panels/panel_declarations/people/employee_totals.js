@@ -2,12 +2,6 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  primaryColor,
-  textColor,
-  backgroundColor,
-} from "src/core/color_defs.js";
-
-import {
   formats,
   run_template,
   year_templates,
@@ -17,7 +11,13 @@ import {
   WrappedNivoLine,
   businessConstants,
   declare_panel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import {
+  primaryColor,
+  textColor,
+  backgroundColor,
+} from "src/core/color_defs.js";
 
 import text from "./employee_totals.yaml";
 

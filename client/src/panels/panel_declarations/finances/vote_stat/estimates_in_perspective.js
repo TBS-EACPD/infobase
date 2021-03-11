@@ -1,18 +1,17 @@
 import _ from "lodash";
 import React from "react";
 
-import FootNote from "src/models/footnotes/footnotes.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-
 import {
   StdPanel,
   Col,
   WrappedNivoCircleProportion,
   declare_panel,
   Subject,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import FootNote from "src/models/footnotes/footnotes.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { TM, text_maker } from "./vote_stat_text_provider.js";
 const { Gov } = Subject;

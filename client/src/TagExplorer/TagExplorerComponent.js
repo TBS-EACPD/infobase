@@ -2,13 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { GlossaryEntry } from "src/models/glossary.js";
-import { run_template } from "src/models/text.js";
-
-import { tertiaryColor, primaryColor } from "src/core/color_defs.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   SpinnerWrapper,
   KeyConceptList,
@@ -16,6 +9,13 @@ import {
   AlertBanner,
   GlossaryIcon,
 } from "src/components/";
+
+import { GlossaryEntry } from "src/models/glossary.js";
+import { run_template } from "src/models/text.js";
+
+import { tertiaryColor, primaryColor } from "src/core/color_defs.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

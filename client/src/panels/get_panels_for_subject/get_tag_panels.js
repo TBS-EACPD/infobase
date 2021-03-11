@@ -11,7 +11,7 @@ import {
   declare_description_panel,
   declare_tagging_key_concepts_panel,
   declare_resource_structure_panel,
-} from "../panel_declarations/index.js";
+} from "src/panels/panel_declarations/index.js";
 
 export const get_tag_panels = (subject) => ({
   intro: [

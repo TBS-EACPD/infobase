@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { create_text_maker_component } from "src/components";
-
 import { year_templates } from "src/models/years";
+
+import { create_text_maker_component } from "src/components";
 
 import text from "./resource_structure.yaml";
 

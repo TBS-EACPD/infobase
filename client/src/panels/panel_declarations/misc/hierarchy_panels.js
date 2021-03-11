@@ -1,14 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   util_components,
   TextPanel,
   infograph_href_template,
   create_text_maker,
   declare_panel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import {
   HierarchyPeek,

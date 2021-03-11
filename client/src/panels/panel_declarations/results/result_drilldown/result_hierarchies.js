@@ -1,13 +1,13 @@
 import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
+import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common.js";
+import { Subject, Results } from "src/panels/panel_declarations/shared.js";
+
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
 } from "src/explorer_common/hierarchy_tools.js";
-
-import { Subject, Results } from "../../shared.js";
-import { results_resource_fragment } from "../results_common.js";
 
 const { Dept } = Subject;
 const { Result } = Results;

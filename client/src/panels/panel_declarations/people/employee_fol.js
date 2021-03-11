@@ -12,7 +12,7 @@ import {
   Col,
   declare_panel,
   NivoLineBarToggle,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
 
 import { calculate_common_text_args } from "./calculate_common_text_args.js";
 

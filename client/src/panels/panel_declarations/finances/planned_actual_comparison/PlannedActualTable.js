@@ -1,8 +1,8 @@
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { util_components } from "src/panels/panel_declarations/shared.js";
 
-import { util_components } from "../../shared.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 const { Format, TM } = util_components;
 

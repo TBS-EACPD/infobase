@@ -4,21 +4,21 @@ import React, { Fragment } from "react";
 
 import ReactDOM from "react-dom";
 
-import { businessConstants } from "src/models/businessConstants.js";
-
-import { run_template } from "src/models/text.js";
-
-import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
-
 import {
   create_text_maker_component,
   GraphOverlay,
   Select,
-} from "src/components";
-import { hex_to_rgb } from "src/general_utils.js";
+} from "src/components/";
 
-import { StandardLegend } from "../legends";
-import { WrappedNivoHBar } from "../wrapped_nivo/index.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import { run_template } from "src/models/text.js";
+
+import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
+
+import { StandardLegend } from "src/charts/legends";
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
+
+import { hex_to_rgb } from "src/general_utils.js";
 
 import { CanadaD3Component } from "./CanadaD3Component.js";
 

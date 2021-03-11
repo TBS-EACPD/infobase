@@ -2,10 +2,6 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { lang } from "src/core/injected_build_constants.js";
-
-import { GraphOverlay } from "src/components";
-
 import {
   formats,
   run_template,
@@ -18,7 +14,11 @@ import {
   Col,
   declare_panel,
   NivoLineBarToggle,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { lang } from "src/core/injected_build_constants.js";
+
+import { GraphOverlay } from "src/components";
 
 import { calculate_common_text_args } from "./calculate_common_text_args.js";
 

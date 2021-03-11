@@ -1,15 +1,15 @@
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   declare_panel,
   util_components,
   InfographicPanel,
   create_text_maker_component,
   WrappedNivoPie,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import text from "./perspective_text.yaml";
 

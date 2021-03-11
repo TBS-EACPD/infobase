@@ -5,14 +5,14 @@ import React from "react";
 
 import { TextMaker as StandardTextMaker } from "src/components/index.js";
 
+import { Subject } from "src/models/subject";
 import { run_template } from "src/models/text.js";
 
 import { Table } from "src/core/TableClass.js";
 
 import { rpb_link } from "src/link_utils.js";
-import { Subject } from "src/models/subject";
 
-import { text_maker } from "../partition_text_provider.js";
+import { text_maker } from "src/partition/partition_subapp/partition_text_provider.js";
 
 import {
   absolute_value_sort,

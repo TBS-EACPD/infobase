@@ -1,9 +1,8 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.js";
-
 import * as FORMAT from "src/core/format";
+import { lang } from "src/core/injected_build_constants.js";
 
 import {
   vote_stat_dimension,

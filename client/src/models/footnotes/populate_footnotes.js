@@ -1,15 +1,15 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
+import { Subject } from "src/models/subject.js";
+import { run_template } from "src/models/text.js";
+import { fiscal_year_to_year } from "src/models/years.js";
+
 import { lang } from "src/core/injected_build_constants.js";
 
 import { sanitized_marked } from "src/general_utils.js";
 
 import { get_static_url, make_request } from "src/request_utils.js";
-
-import { Subject } from "../subject.js";
-import { run_template } from "../text.js";
-import { fiscal_year_to_year } from "../years.js";
 
 import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
 import FootNote from "./footnotes.js";

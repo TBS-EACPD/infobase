@@ -8,7 +8,7 @@ import { log_standard_event } from "src/core/analytics.js";
 
 import { IconSearch } from "src/icons/icons.js";
 
-import { InfoBaseHighlighter } from "../search_utils.js";
+import { InfoBaseHighlighter } from "src/search/search_utils.js";
 
 import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
 
