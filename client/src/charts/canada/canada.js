@@ -8,7 +8,7 @@ import {
   create_text_maker_component,
   GraphOverlay,
   Select,
-} from "src/components/";
+} from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.js";
 import { run_template } from "src/models/text.js";

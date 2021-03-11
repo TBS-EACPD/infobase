@@ -36,7 +36,7 @@ import {
   Panel,
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components";
+} from "src/components/index.js";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

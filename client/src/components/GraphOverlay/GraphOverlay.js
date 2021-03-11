@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import MediaQuery from "react-responsive";
 
-import { create_text_maker_component } from "src/components/misc_util_components";
+import { create_text_maker_component } from "src/components/misc_util_components.js";
 
 import { IconRotatePhone, IconExpandWindowWidth } from "src/icons/icons.js";
 

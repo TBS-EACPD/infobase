@@ -13,7 +13,7 @@ import {
 
 import { primaryColor } from "src/core/color_defs.js";
 
-import { GraphOverlay } from "src/components";
+import { GraphOverlay } from "src/components/index.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";
 const { sos } = businessConstants;

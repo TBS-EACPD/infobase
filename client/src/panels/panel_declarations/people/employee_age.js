@@ -18,7 +18,7 @@ import {
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "src/components";
+import { GraphOverlay } from "src/components/index.js";
 
 import { calculate_common_text_args } from "./calculate_common_text_args.js";
 

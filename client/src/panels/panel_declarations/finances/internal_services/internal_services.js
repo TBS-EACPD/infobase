@@ -16,7 +16,7 @@ import { infobase_colors } from "src/core/color_schemes.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "src/components";
+import { GraphOverlay } from "src/components/index.js";
 
 import text from "./internal_services.yaml";
 

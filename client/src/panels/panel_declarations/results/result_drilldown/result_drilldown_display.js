@@ -22,7 +22,7 @@ import {
   SpinnerWrapper,
   Format,
   TextAbbrev,
-} from "src/components/";
+} from "src/components/index.js";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 

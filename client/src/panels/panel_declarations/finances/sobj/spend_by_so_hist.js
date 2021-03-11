@@ -19,7 +19,7 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { GraphOverlay } from "src/components";
+import { GraphOverlay } from "src/components/index.js";
 import { toggle_list } from "src/general_utils.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";

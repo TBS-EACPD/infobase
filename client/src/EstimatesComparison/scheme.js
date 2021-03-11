@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import { Format } from "src/components/";
+import { Format } from "src/components/index.js";
 
 import FootNote from "src/models/footnotes/footnotes.js";
 import { GlossaryEntry } from "src/models/glossary.js";

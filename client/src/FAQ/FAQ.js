@@ -11,7 +11,7 @@ import {
   LabeledTable,
   create_text_maker_component,
   FancyUL,
-} from "src/components";
+} from "src/components/index.js";
 
 import { faq_data } from "./faq_data.js";
 

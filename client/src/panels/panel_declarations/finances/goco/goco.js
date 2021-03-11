@@ -16,7 +16,7 @@ import {
   util_components,
 } from "src/panels/panel_declarations/shared.js";
 
-import { GraphOverlay } from "src/components/";
+import { GraphOverlay } from "src/components/index.js";
 
 import { textColor } from "src/core/color_defs.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";

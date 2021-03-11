@@ -8,7 +8,7 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents.js";
 
-import { create_text_maker_component, FancyUL, Panel } from "src/components";
+import { create_text_maker_component, FancyUL, Panel } from "src/components/index.js";
 
 import { sources } from "./data_sources.js";
 

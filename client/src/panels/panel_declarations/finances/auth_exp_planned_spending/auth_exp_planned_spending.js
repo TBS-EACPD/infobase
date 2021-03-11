@@ -16,7 +16,7 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import { GraphOverlay } from "src/components/";
+import { GraphOverlay } from "src/components/index.js";
 
 import FootNote from "src/models/footnotes/footnotes";
 

@@ -8,7 +8,7 @@ import {
   TabbedControls,
   AlertBanner,
   GlossaryIcon,
-} from "src/components/";
+} from "src/components/index.js";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 import { run_template } from "src/models/text.js";

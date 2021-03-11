@@ -24,7 +24,7 @@ import {
   HeightClippedGraph,
 } from "src/panels/panel_declarations/shared.js";
 
-import { SmartDisplayTable, GraphOverlay } from "src/components/";
+import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
 import { highlightColor, textColor } from "src/core/color_defs.js";
 import { infobase_colors } from "src/core/color_schemes.js";
