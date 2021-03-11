@@ -163,25 +163,39 @@ export const SelectPageSize = ({
   on_select,
   page_size_increment,
   num_items,
+  num_max_options,
 }) => {
-  const options = _.chain(num_items / page_size_increment)
-    .ceil()
+  const num_options =
+    _.ceil(num_items / page_size_increment) > num_max_options
+      ? num_max_options
+      : _.ceil(num_items / page_size_increment);
+
+  const options = _.chain(num_options + 1)
     .range()
-    .map((_, ix) => (ix + 1) * page_size_increment)
+    .map((_, ix) => {
+      if (ix === num_options) {
+        return { value: num_items, label: text_maker("show_all") };
+      } else {
+        return {
+          value: (ix + 1) * page_size_increment,
+          label: (ix + 1) * page_size_increment,
+        };
+      }
+    })
     .value();
 
   const dropdown_content = (
     <form className="paginate_by_dropdown">
       <div style={{ marginBottom: 10 }}>
-        {_.map(options, (option) => (
-          <div key={option}>
+        {_.map(options, ({ label, value }) => (
+          <div key={value}>
             <input
               type={"radio"}
               name={"paginate_by_dropdown"}
-              onClick={() => on_select(option)}
-              defaultChecked={selected === option}
+              onClick={() => on_select(value)}
+              defaultChecked={selected === value}
             />
-            <label className={"normal-radio-btn-label"}>{option}</label>
+            <label className={"normal-radio-btn-label"}>{label}</label>
           </div>
         ))}
       </div>
@@ -197,4 +211,8 @@ export const SelectPageSize = ({
       dropdown_content={dropdown_content}
     />
   );
+};
+
+SelectPageSize.defaultProps = {
+  num_max_options: 5,
 };
