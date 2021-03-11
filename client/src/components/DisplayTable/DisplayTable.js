@@ -115,6 +115,7 @@ export class DisplayTable extends React.Component {
       */,
       page_size_increment,
       util_components,
+      show_pagination_controls,
     } = this.props;
     const {
       sort_by,
@@ -283,7 +284,6 @@ export class DisplayTable extends React.Component {
     const paginated_data = _.chunk(sorted_filtered_data, page_size);
 
     const number_of_pages = paginated_data.length;
-    const show_pagination_controls = number_of_pages > 1;
 
     const change_page_size = (new_page_size) => {
       this.setState({ page_size: new_page_size, current_page: 0 });
@@ -528,6 +528,7 @@ export class DisplayTable extends React.Component {
 }
 DisplayTable.defaultProps = {
   page_size_increment: 100,
+  show_pagination_controls: true,
 };
 
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
@@ -549,7 +550,11 @@ export class SmartDisplayTable extends React.Component {
       })
     );
     return (
-      <DisplayTable {...this.props} column_configs={smart_column_configs} />
+      <DisplayTable
+        {...this.props}
+        column_configs={smart_column_configs}
+        show_pagination_controls={_.size(data) > 100}
+      />
     );
   }
 }
