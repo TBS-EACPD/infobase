@@ -20,7 +20,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
-import { StandardRouteContainer } from "src/core/NavComponents";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 import { redirect_with_msg } from "src/core/RedirectHeader.js";
 
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";

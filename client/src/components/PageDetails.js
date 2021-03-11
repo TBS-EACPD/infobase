@@ -15,7 +15,7 @@ import { IconGitHub } from "src/icons/icons.js";
 import { EmailFrontend } from "./EmailFrontend.js";
 import { ExternalLink } from "./misc_util_components.js";
 
-import { StatelessModal } from "./modals_and_popovers";
+import { StatelessModal } from "./modals_and_popovers/index.js";
 
 import text from "./PageDetails.yaml";
 

@@ -10,7 +10,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconCopy } from "src/icons/icons.js";
 
-import { FixedPopover } from "./modals_and_popovers";
+import { FixedPopover } from "./modals_and_popovers/index.js";
 
 import text from "./WriteToClipboard.yaml";
 

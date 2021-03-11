@@ -10,7 +10,7 @@ import { newIBCategoryColors } from "src/core/color_schemes.js";
 import { formats } from "src/core/format.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { StandardLegend } from "src/charts/legends";
+import { StandardLegend } from "src/charts/legends/index.js";
 import { toggle_list } from "src/general_utils.js";
 
 import { WrappedNivoBar } from "././wrapped_nivo_bar.js";

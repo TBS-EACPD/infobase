@@ -11,7 +11,7 @@ import {
   breakpoints,
 } from "src/panels/panel_declarations/shared.js";
 
-import { PinnedContent } from "src/hoc/PinnedContent";
+import { PinnedContent } from "src/hoc/PinnedContent.js";
 
 import "./KeyConcepts.scss";
 

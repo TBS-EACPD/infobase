@@ -18,7 +18,7 @@ import {
 
 import { GraphOverlay } from "src/components/index.js";
 
-import FootNote from "src/models/footnotes/footnotes";
+import FootNote from "src/models/footnotes/footnotes.js";
 
 import {
   tertiaryColor,

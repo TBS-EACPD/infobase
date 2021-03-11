@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
 
 import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
 import { cached_property, bound } from "src/general_utils.js";

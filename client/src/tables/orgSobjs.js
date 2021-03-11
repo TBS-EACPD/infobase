@@ -4,7 +4,7 @@ import {
   trivial_text_maker,
   businessConstants,
   year_templates,
-} from "./table_common";
+} from "./table_common.js";
 
 import text from "./orgSobjs.yaml";
 

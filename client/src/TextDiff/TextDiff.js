@@ -21,7 +21,7 @@ import {
 
 import { result_docs } from "src/models/results.js";
 
-import { Subject } from "src/models/subject";
+import { Subject } from "src/models/subject.js";
 
 import {
   primaryColor,
@@ -37,7 +37,7 @@ import { ensure_loaded } from "src/core/lazy_loader.js";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { LegendList } from "src/charts/legends";
+import { LegendList } from "src/charts/legends/index.js";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

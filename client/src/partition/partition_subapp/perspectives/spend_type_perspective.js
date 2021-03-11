@@ -5,7 +5,7 @@ import React from "react";
 
 import { TextMaker as StandardTextMaker } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants";
+import { businessConstants } from "src/models/businessConstants.js";
 import { Subject } from "src/models/subject.js";
 
 import { Table } from "src/core/TableClass.js";

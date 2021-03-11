@@ -5,10 +5,10 @@ import { PanelRenderer } from "src/panels/PanelRenderer.js";
 
 import { SpinnerWrapper } from "src/components/index.js";
 
-import { Subject } from "src/models/subject";
+import { Subject } from "src/models/subject.js";
 import { create_text_maker } from "src/models/text.js";
 
-import { ensure_loaded } from "src/core/lazy_loader";
+import { ensure_loaded } from "src/core/lazy_loader.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import text from "./IsolatedPanel.yaml";

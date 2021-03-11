@@ -9,7 +9,7 @@ import { Format, SmartDisplayTable } from "src/components/index.js";
 import { newIBCategoryColors } from "src/core/color_schemes.js";
 import { formats } from "src/core/format.js";
 
-import { TabularLegend } from "src/charts/legends";
+import { TabularLegend } from "src/charts/legends/index.js";
 
 import {
   nivo_common_text_maker,

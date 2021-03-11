@@ -9,7 +9,7 @@ import { create_text_maker } from "src/models/text.js";
 
 import { is_IE } from "src/core/feature_detection.js";
 
-import * as general_utils from "src/general_utils";
+import * as general_utils from "src/general_utils.js";
 
 import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
 

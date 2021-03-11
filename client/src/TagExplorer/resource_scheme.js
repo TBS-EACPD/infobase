@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 import { trivial_text_maker as text_maker } from "src/models/text.js";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
@@ -19,7 +19,7 @@ import {
   bound,
   shallowEqualObjectsExceptKeys,
   sanitized_dangerous_inner_html,
-} from "src/general_utils";
+} from "src/general_utils.js";
 
 import { infograph_href_template } from "src/link_utils.js";
 

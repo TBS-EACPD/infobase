@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 
-import { Subject } from "src/models/subject";
+import { Subject } from "src/models/subject.js";
 import { trivial_text_maker, run_template } from "src/models/text.js";
 
 import { formats } from "src/core/format.js";

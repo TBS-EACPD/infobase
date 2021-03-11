@@ -9,7 +9,7 @@ import { businessConstants } from "src/models/businessConstants.js";
 import FootNote from "src/models/footnotes/footnotes.js";
 import { GlossaryEntry } from "src/models/glossary.js";
 import * as Results from "src/models/results.js";
-import { Subject } from "src/models/subject";
+import { Subject } from "src/models/subject.js";
 import {
   create_text_maker,
   trivial_text_maker,
@@ -31,7 +31,7 @@ import { ensure_loaded } from "src/core/lazy_loader.js";
 import { Table } from "src/core/TableClass.js";
 
 import { Canada } from "src/charts/canada/index.js";
-import { StandardLegend, SelectAllControl } from "src/charts/legends";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 import { get_formatter, infobase_colors_smart } from "src/charts/shared.js";
 import {
   WrappedNivoBar,

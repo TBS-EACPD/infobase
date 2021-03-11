@@ -1,7 +1,7 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { GlossaryEntry } from "src/models/glossary.js";
 
 import { Table } from "src/core/TableClass.js";
 

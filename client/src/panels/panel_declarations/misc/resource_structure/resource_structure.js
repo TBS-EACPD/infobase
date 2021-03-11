@@ -8,7 +8,7 @@ import {
 
 import { SingleTagResourceExplorer } from "./rooted_resource_scheme.js";
 
-import { text_maker, actual_year, planning_year } from "./utils";
+import { text_maker, actual_year, planning_year } from "./utils.js";
 
 export const declare_resource_structure_panel = () =>
   declare_panel({

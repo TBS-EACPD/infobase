@@ -1,18 +1,18 @@
 import _ from "lodash";
 import { createSelector } from "reselect";
 
-import { Indicator } from "src/models/results";
+import { Indicator } from "src/models/results.js";
 
-import { Subject } from "src/models/subject";
+import { Subject } from "src/models/subject.js";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
 import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
 
 import { toggle_list, cached_property, bound } from "src/general_utils.js";
 
-import ResultsExplorerDisplay from "./result_drilldown_display";
+import ResultsExplorerDisplay from "./result_drilldown_display.js";
 import { create_full_results_hierarchy } from "./result_hierarchies.js";
 
 export default class ResultsExplorer extends AbstractExplorerScheme {

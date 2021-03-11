@@ -7,7 +7,7 @@ import {
   people_five_year_percentage_formula,
   businessConstants,
   year_templates,
-} from "./table_common";
+} from "./table_common.js";
 
 import text from "./orgEmployeeRegion.yaml";
 

@@ -11,7 +11,7 @@ import {
 } from "src/core/color_defs.js";
 import { newIBDarkCategoryColors } from "src/core/color_schemes.js";
 
-import { reactAdapter } from "src/core/reactAdapter";
+import { reactAdapter } from "src/core/reactAdapter.js";
 
 import { PartitionDiagram } from "src/partition/partition_diagram/PartitionDiagram.js";
 

@@ -11,7 +11,7 @@ import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
 import { infograph_href_template } from "src/link_utils.js";
 
-import { actual_year, planning_year, TM } from "./utils";
+import { actual_year, planning_year, TM } from "./utils.js";
 
 import "src/explorer_common/explorer-styles.scss";
 

@@ -15,7 +15,7 @@ import { run_template } from "src/models/text.js";
 
 import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
 
-import { StandardLegend } from "src/charts/legends";
+import { StandardLegend } from "src/charts/legends/index.js";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
 
 import { hex_to_rgb } from "src/general_utils.js";

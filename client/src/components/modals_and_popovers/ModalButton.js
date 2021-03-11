@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import { withRouter } from "react-router-dom";
 
-import { SafeJSURL } from "src/general_utils";
+import { SafeJSURL } from "src/general_utils.js";
 
 import { StatelessModal } from "./StatelessModal.js";
 

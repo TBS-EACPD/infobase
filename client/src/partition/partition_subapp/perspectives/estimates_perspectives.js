@@ -5,7 +5,7 @@ import React from "react";
 
 import { TextMaker as StandardTextMaker } from "src/components/index.js";
 
-import { Subject } from "src/models/subject";
+import { Subject } from "src/models/subject.js";
 import { run_template } from "src/models/text.js";
 
 import { Table } from "src/core/TableClass.js";

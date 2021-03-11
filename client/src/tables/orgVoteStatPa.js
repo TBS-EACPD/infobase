@@ -8,7 +8,7 @@ import {
   major_vote_stat,
   m,
   year_templates,
-} from "./table_common";
+} from "./table_common.js";
 
 import text from "./orgVoteStatPa.yaml";
 

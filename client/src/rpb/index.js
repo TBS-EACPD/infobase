@@ -22,7 +22,7 @@ import { ensure_loaded } from "src/core/lazy_loader.js";
 import {
   StandardRouteContainer,
   LangSynchronizer,
-} from "src/core/NavComponents";
+} from "src/core/NavComponents.js";
 import { Table } from "src/core/TableClass.js";
 
 //specific view stuff

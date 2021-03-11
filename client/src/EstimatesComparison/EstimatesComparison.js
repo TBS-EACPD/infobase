@@ -4,7 +4,7 @@ import { SpinnerWrapper } from "src/components/index.js";
 
 import { ensure_loaded } from "src/core/lazy_loader.js";
 
-import { StandardRouteContainer } from "src/core/NavComponents";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { EstimatesExplorer } from "./scheme.js";
 import { text_maker, TM } from "./utils.js";
