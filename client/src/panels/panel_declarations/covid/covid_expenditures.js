@@ -220,7 +220,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           k={"covid_expenditures_department_tab_text"}
           args={{
             ...panel_args,
-            largest_dept_name: Dept.lookup(largest_dept_id).name,
+            largest_dept: Dept.lookup(largest_dept_id),
             largest_dept_exp,
           }}
           className="medium-panel-text"
