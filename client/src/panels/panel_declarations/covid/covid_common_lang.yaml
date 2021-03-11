@@ -15,24 +15,24 @@ covid_above_tab_footnote_title:
     Important:
 covid_above_tab_limited_measure_note:
   en: Only measures that are presented in the Estimates are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan (ERP) has not been captured. For more details, see the FAQ item "Why are some measures of the Government’s COVID response plan missing from the measures tab?"
-  fr: TODO
+  fr: Seules les mesures figurant dans les budgets des dépenses sont affichées ci-dessous. Par conséquent, une partie du Plan d’intervention économique du Canada pour répondre à la COVID-19 (PRO) n'a pas été prise en compte. COVID_TEXT_TODO
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
   en: Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan (ERP) have not been audited. Expenditures will be refreshed monthly.
-  fr: TODO
+  fr: Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} seront connues lors de la publication prévue des Comptes publics du Canada à l'automne {{COVID_NEXT_YEAR}}. COVID_TEXT_TODO
 covid_above_tab_data_org_websites_note:
   transform: [handlebars]
   en: More recent or more detailed information may be available directly from individual federal organizations.
-  fr: TODO
+  fr: On peut obtenir des renseignements plus récents ou plus complets en s'adressant directement aux diverses organisations fédérales.
 covid_above_tab_footnote_key_concept_link:
   transform: [handlebars,markdown]
   en: See the "{{gt "infographic_faq"}}" section for more details and additional caveats.
-  fr: TODO
+  fr: Voir la section « {{gt "infographic_faq"}} » pour obtenir plus de renseignements et d’autres mises en garde.
 
 show_vote_stat_split:
   transform: [handlebars]
   en: Show {{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}} amount breakout
-  fr: TODO
+  fr: Afficher la ventilation des montants {{gl_tt "votés" "VOTED"}} et {{gl_tt "législatifs" "STAT"}}
 
 covid_expenditures_stat:
   en: Statutory Expenditures
