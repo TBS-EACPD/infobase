@@ -125,9 +125,6 @@ export class Typeahead extends React.Component {
       matching_results,
     } = this.state;
 
-    const derived_menu_state = this.derived_menu_state;
-    const { total_matching_results } = derived_menu_state;
-
     const list_items = _.compact([
       ..._.chain(matching_results)
         .groupBy("config_group_index")
@@ -150,7 +147,7 @@ export class Typeahead extends React.Component {
                   <TM
                     k="menu_with_results_status"
                     args={{
-                      total_matching_results,
+                      total_matching_results: _.size(matching_results),
                     }}
                   />
                 </div>
@@ -217,9 +214,7 @@ export class Typeahead extends React.Component {
           )}
         </div>
         {this.show_menu && (
-          <TypeaheadA11yStatus
-            {...{ ...this.props, ...this.state, ...this.derived_menu_state }}
-          />
+          <TypeaheadA11yStatus {...{ ...this.props, ...this.state }} />
         )}
         {this.show_menu && (
           <AutoSizer>
@@ -259,9 +254,9 @@ export class Typeahead extends React.Component {
                       >
                         <div style={style}>
                           {_.isEmpty(matching_results) && (
-                            <li className="typeahead__header">
+                            <div className="typeahead__header">
                               {text_maker("no_matches_found")}
-                            </li>
+                            </div>
                           )}
                           {!_.isEmpty(matching_results) && list_items[index]}
                         </div>
@@ -320,19 +315,6 @@ export class Typeahead extends React.Component {
     return this.get_all_options(this.props.search_configs);
   }
 
-  get derived_menu_state() {
-    const { matching_results } = this.state;
-
-    const total_matching_results = _.flatten(matching_results).length;
-
-    const total_menu_items = matching_results.length;
-
-    return {
-      total_matching_results,
-      total_menu_items,
-    };
-  }
-
   /*
     TODO currently using a circular counter to represent the selection cursor in state, pushing off and 
     scattering the work of combining that with other state (such as needs_pagination_up_control etc) to
@@ -344,20 +326,18 @@ export class Typeahead extends React.Component {
   */
   default_selection_cursor = -1;
   get previous_selection_cursor() {
-    const { selection_cursor } = this.state;
-    const { total_menu_items } = this.derived_menu_state;
+    const { selection_cursor, matching_results } = this.state;
 
     if (selection_cursor === this.default_selection_cursor) {
-      return total_menu_items - 1;
+      return _.size(matching_results) - 1;
     } else {
       return selection_cursor - 1;
     }
   }
   get next_selection_cursor() {
-    const { selection_cursor } = this.state;
-    const { total_menu_items } = this.derived_menu_state;
+    const { selection_cursor, matching_results } = this.state;
 
-    if (selection_cursor === total_menu_items - 1) {
+    if (selection_cursor === _.size(matching_results) - 1) {
       return this.default_selection_cursor;
     } else {
       return selection_cursor + 1;
