@@ -1,16 +1,15 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
+import * as FORMAT from "src/core/format.js";
 import { lang } from "src/core/injected_build_constants.js";
-
-import * as FORMAT from "../core/format";
 
 import {
   vote_stat_dimension,
   major_vote_big_stat,
   year_templates,
   businessConstants,
-} from "./table_common";
+} from "./table_common.js";
 
 import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;

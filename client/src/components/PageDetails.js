@@ -2,19 +2,20 @@ import _ from "lodash";
 import React from "react";
 import { withRouter } from "react-router";
 
+import { create_text_maker } from "src/models/text.js";
+
 import {
   sha,
   previous_sha,
   build_date,
 } from "src/core/injected_build_constants.js";
 
-import { IconGitHub } from "../icons/icons.js";
-import { create_text_maker } from "../models/text.js";
+import { IconGitHub } from "src/icons/icons.js";
 
 import { EmailFrontend } from "./EmailFrontend.js";
 import { ExternalLink } from "./misc_util_components.js";
 
-import { StatelessModal } from "./modals_and_popovers";
+import { StatelessModal } from "./modals_and_popovers/index.js";
 
 import text from "./PageDetails.yaml";
 

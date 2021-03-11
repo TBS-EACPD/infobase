@@ -2,11 +2,15 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
+import { IndicatorList } from "src/panels/panel_declarations/results/result_components.js";
+import {
+  TM,
+  text_maker,
+} from "src/panels/panel_declarations/results/result_text_provider.js";
 
-import { infograph_href_template } from "../../../../link_utils.js";
-import { Indicator, result_docs } from "../../../../models/results.js";
-import { IndicatorList } from "../result_components.js";
-import { TM, text_maker } from "../result_text_provider.js";
+import { Indicator, result_docs } from "src/models/results.js";
+
+import { infograph_href_template } from "src/link_utils.js";
 
 const type_text_keys = {
   dept: "orgs",

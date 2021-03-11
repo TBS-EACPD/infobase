@@ -5,10 +5,11 @@ import { select } from "d3-selection";
 import "d3-transition";
 import _ from "lodash";
 
+import { create_text_maker } from "src/models/text.js";
+
 import { is_IE } from "src/core/feature_detection.js";
 
-import * as general_utils from "../../general_utils";
-import { create_text_maker } from "../../models/text.js";
+import * as general_utils from "src/general_utils.js";
 
 import { PartitionDataWrapper } from "./PartitionDataWrapper.js";
 

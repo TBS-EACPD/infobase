@@ -3,7 +3,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { panel_context } from "src/panels/PanelRenderer.js";
 
 import {
   Panel,
@@ -12,12 +12,13 @@ import {
   WriteToClipboard,
   PDFGenerator,
   LogInteractionEvents,
-} from "../../components/index.js";
+} from "src/components/index.js";
 
-import { IconCopyLink } from "../../icons/icons.js";
-import { infograph_options_href_template } from "../../infographic/infographic_link.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { panel_context } from "../PanelRenderer.js";
+import { IconCopyLink } from "src/icons/icons.js";
+
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import text from "./InfographicPanel.yaml";
 

@@ -3,16 +3,6 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  tertiaryColor,
-  textColor,
-  highlightColor,
-} from "src/core/color_defs.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { GraphOverlay } from "../../../../components";
-import FootNote from "../../../../models/footnotes/footnotes";
-import {
   run_template,
   year_templates,
   actual_to_planned_gap_year,
@@ -24,7 +14,18 @@ import {
   newIBCategoryColors,
   util_components,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { GraphOverlay } from "src/components/index.js";
+
+import FootNote from "src/models/footnotes/footnotes.js";
+
+import {
+  tertiaryColor,
+  textColor,
+  highlightColor,
+} from "src/core/color_defs.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";

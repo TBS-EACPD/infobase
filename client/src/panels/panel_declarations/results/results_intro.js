@@ -2,16 +2,17 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { get_static_url } from "../../../request_utils.js";
 import {
   Subject,
   declare_panel,
   InfographicPanel,
   get_source_links,
   create_text_maker_component,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { get_static_url } from "src/request_utils.js";
 
 import {
   ResultCounts,

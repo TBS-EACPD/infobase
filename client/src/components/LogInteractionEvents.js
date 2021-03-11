@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 
-import { log_standard_event } from "../core/analytics.js";
+import { log_standard_event } from "src/core/analytics.js";
 
 export const LogInteractionEvents = ({
   event_type,

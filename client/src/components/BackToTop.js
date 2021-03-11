@@ -3,9 +3,10 @@ import React from "react";
 
 import "intersection-observer";
 
+import { trivial_text_maker } from "src/models/text.js";
+
 import { is_mobile } from "src/core/feature_detection.js";
 
-import { trivial_text_maker } from "../models/text.js";
 import "./BackToTop.scss";
 
 export class BackToTop extends React.Component {

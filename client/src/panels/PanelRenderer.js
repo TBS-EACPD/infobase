@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-import { shallowEqualObjectsOverKeys } from "../general_utils.js";
+import { shallowEqualObjectsOverKeys } from "src/general_utils.js";
 
 import { PanelRegistry } from "./PanelRegistry.js";
 

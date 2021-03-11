@@ -3,14 +3,6 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { highlightColor, textColor } from "src/core/color_defs.js";
-import { infobase_colors } from "src/core/color_schemes.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { SmartDisplayTable, GraphOverlay } from "src/components";
-import { toggle_list } from "src/general_utils.js";
-
 import {
   WrappedNivoBar,
   WrappedNivoHBar,
@@ -30,7 +22,15 @@ import {
   declare_panel,
   TspanLineWrapper,
   HeightClippedGraph,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
+
+import { highlightColor, textColor } from "src/core/color_defs.js";
+import { infobase_colors } from "src/core/color_schemes.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { toggle_list } from "src/general_utils.js";
 
 import text from "./detailed_program_spending_split.yaml";
 

@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { trivial_text_maker } from "../models/text.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 import { Program } from "./organizational_entities.js";
 import {

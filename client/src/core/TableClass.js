@@ -2,16 +2,17 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { make_unique_func, make_unique } from "../general_utils.js";
-import { sources as all_sources } from "../metadata/data_sources.js";
-import { mix, staticStoreMixin } from "../models/storeMixins.js";
-import { Subject } from "../models/subject.js";
+import { mix, staticStoreMixin } from "src/models/storeMixins.js";
+import { Subject } from "src/models/subject.js";
 import {
   trivial_text_maker,
   run_template,
   create_text_maker,
-} from "../models/text.js";
-import { get_static_url, make_request } from "../request_utils.js";
+} from "src/models/text.js";
+
+import { make_unique_func, make_unique } from "src/general_utils.js";
+import { sources as all_sources } from "src/metadata/data_sources.js";
+import { get_static_url, make_request } from "src/request_utils.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
 import { lang } from "./injected_build_constants.js";

@@ -2,16 +2,18 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import { withRouter } from "react-router";
 
-import { tertiaryColor } from "src/core/color_defs.js";
-import { is_dev, is_dev_link } from "src/core/injected_build_constants.js";
-
 import {
   FixedPopover,
   create_text_maker_component,
   EmailFrontend,
-} from "../components/index.js";
-import { log_standard_event } from "../core/analytics.js";
-import { IconFeedback } from "../icons/icons.js";
+} from "src/components/index.js";
+
+import { log_standard_event } from "src/core/analytics.js";
+import { tertiaryColor } from "src/core/color_defs.js";
+import { is_dev, is_dev_link } from "src/core/injected_build_constants.js";
+
+
+import { IconFeedback } from "src/icons/icons.js";
 
 import text from "./SurveyPopup.yaml";
 

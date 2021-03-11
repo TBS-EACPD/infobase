@@ -1,10 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { primaryColor } from "src/core/color_defs.js";
-
-
-import { GraphOverlay } from "../../../../components";
 import {
   declare_panel,
   year_templates,
@@ -13,7 +9,12 @@ import {
   Col,
   WrappedNivoLine,
   run_template,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { GraphOverlay } from "src/components/index.js";
+
+import { primaryColor } from "src/core/color_defs.js";
+
 
 import { text_maker, TM } from "./sobj_text_provider.js";
 const { sos } = businessConstants;

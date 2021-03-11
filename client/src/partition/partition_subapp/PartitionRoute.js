@@ -3,12 +3,10 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import {
-  SpinnerWrapper,
-  ContainerEscapeHatch,
-} from "../../components/index.js";
-import { ensure_loaded } from "../../core/lazy_loader.js";
-import { StandardRouteContainer } from "../../core/NavComponents.js";
+import { SpinnerWrapper, ContainerEscapeHatch } from "src/components/index.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { text_maker } from "./partition_text_provider.js";
 import { PartitionSubApp } from "./PartitionSubApp.js";

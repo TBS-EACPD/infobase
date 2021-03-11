@@ -6,25 +6,26 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
+import { HeaderNotification } from "src/components/HeaderNotification.js";
+import { PageDetails } from "src/components/PageDetails.js";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
+
+import { initialize_analytics } from "src/core/analytics.js";
+import { DevFip } from "src/core/DevFip.js";
+import { EasyAccess } from "src/core/EasyAccess.js";
+import { ErrorBoundary } from "src/core/ErrorBoundary.js";
+import { has_local_storage } from "src/core/feature_detection.js";
 import {
   lang,
   is_a11y_mode,
   is_dev,
 } from "src/core/injected_build_constants.js";
+import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
+import { ReactUnmounter } from "src/core/NavComponents.js";
+import { RedirectHeader } from "src/core/RedirectHeader.js";
 
-import { HeaderNotification } from "../components/HeaderNotification";
-import { PageDetails } from "../components/PageDetails.js";
-import { SpinnerWrapper } from "../components/SpinnerWrapper.js";
-import { initialize_analytics } from "../core/analytics.js";
-import { DevFip } from "../core/DevFip.js";
-import { EasyAccess } from "../core/EasyAccess.js";
-import { ErrorBoundary } from "../core/ErrorBoundary.js";
-import { has_local_storage } from "../core/feature_detection.js";
-import { InsertRuntimeFooterLinks } from "../core/InsertRuntimeFooterLinks.js";
-import { ReactUnmounter } from "../core/NavComponents.js";
-import { RedirectHeader } from "../core/RedirectHeader.js";
-import { TooltipActivator } from "../glossary/TooltipActivator.js";
-import { SurveyPopup } from "../Survey/SurveyPopup.js";
+import { TooltipActivator } from "src/glossary/TooltipActivator.js";
+import { SurveyPopup } from "src/Survey/SurveyPopup.js";
 
 import { app_reducer } from "./AppState.js";
 
@@ -35,51 +36,51 @@ import {
 
 import "./App.scss";
 
-const Home = retrying_react_lazy(() => import("../home/home.js"));
-const A11yHome = retrying_react_lazy(() => import("../home/a11y_home.js"));
+const Home = retrying_react_lazy(() => import("src/home/home.js"));
+const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home.js"));
 const PartitionRoute = retrying_react_lazy(() =>
-  import("../partition/partition_subapp/PartitionRoute.js")
+  import("src/partition/partition_subapp/PartitionRoute.js")
 );
-const About = retrying_react_lazy(() => import("../about/about.js"));
+const About = retrying_react_lazy(() => import("src/about/about.js"));
 
-const Contact = retrying_react_lazy(() => import("../contact/contact.js"));
-const FAQ = retrying_react_lazy(() => import("../FAQ/FAQ.js"));
-const MetaData = retrying_react_lazy(() => import("../metadata/metadata.js"));
+const Contact = retrying_react_lazy(() => import("src/contact/contact.js"));
+const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ.js"));
+const MetaData = retrying_react_lazy(() => import("src/metadata/metadata.js"));
 const IgocExplorer = retrying_react_lazy(() =>
-  import("../IgocExplorer/IgocExplorer.js")
+  import("src/IgocExplorer/IgocExplorer.js")
 );
 const TagExplorer = retrying_react_lazy(() =>
-  import("../TagExplorer/TagExplorer.js")
+  import("src/TagExplorer/TagExplorer.js")
 );
-const Glossary = retrying_react_lazy(() => import("../glossary/glossary.js"));
-const ReportBuilder = retrying_react_lazy(() => import("../rpb/index.js"));
+const Glossary = retrying_react_lazy(() => import("src/glossary/glossary.js"));
+const ReportBuilder = retrying_react_lazy(() => import("src/rpb/index.js"));
 const Infographic = retrying_react_lazy(() =>
-  import("../infographic/Infographic.js")
+  import("src/infographic/Infographic.js")
 );
 const EstimatesComparison = retrying_react_lazy(() =>
-  import("../EstimatesComparison/EstimatesComparison.js")
+  import("src/EstimatesComparison/EstimatesComparison.js")
 );
 const PrivacyStatement = retrying_react_lazy(() =>
-  import("../PrivacyStatement/PrivacyStatement.js")
+  import("src/PrivacyStatement/PrivacyStatement.js")
 );
-const TreeMap = retrying_react_lazy(() => import("../TreeMap/TreeMap.js"));
-const TextDiff = retrying_react_lazy(() => import("../TextDiff/TextDiff.js"));
-const Lab = retrying_react_lazy(() => import("../InfoLab/InfoLab.js"));
+const TreeMap = retrying_react_lazy(() => import("src/TreeMap/TreeMap.js"));
+const TextDiff = retrying_react_lazy(() => import("src/TextDiff/TextDiff.js"));
+const Lab = retrying_react_lazy(() => import("src/InfoLab/InfoLab.js"));
 const IsolatedPanel = retrying_react_lazy(() =>
-  import("../panels/panel_routes/IsolatedPanel.js")
+  import("src/panels/panel_routes/IsolatedPanel.js")
 );
 const PanelInventory = retrying_react_lazy(() =>
-  import("../panels/panel_routes/PanelInventory.js")
+  import("src/panels/panel_routes/PanelInventory.js")
 );
 const GraphiQL = retrying_react_lazy(() =>
-  import("../graphql_utils/GraphiQL.js")
+  import("src/graphql_utils/GraphiQL.js")
 );
 const FootnoteInventory = retrying_react_lazy(() =>
-  import("../models/footnotes/FootnoteInventory.js")
+  import("src/models/footnotes/FootnoteInventory.js")
 );
 
 const Survey = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Survey" */ "../Survey/Survey.js")
+  import(/* webpackChunkName: "Survey" */ "src/Survey/Survey.js")
 );
 
 const store = createStore(app_reducer);

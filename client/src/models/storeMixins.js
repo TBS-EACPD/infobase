@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { completeAssign } from "../general_utils.js";
+import { completeAssign } from "src/general_utils.js";
 
 class BaseClass {}
 class MixinBuilder {

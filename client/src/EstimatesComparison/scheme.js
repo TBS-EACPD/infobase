@@ -3,13 +3,13 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
+import { Format } from "src/components/index.js";
+
 import FootNote from "src/models/footnotes/footnotes.js";
 import { GlossaryEntry } from "src/models/glossary.js";
 import { Subject } from "src/models/subject.js";
 
 import { Table } from "src/core/TableClass.js";
-
-import { Format } from "src/components/";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools.js";

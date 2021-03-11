@@ -1,6 +1,11 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import {
+  util_components,
+  general_utils,
+} from "src/panels/panel_declarations/shared.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import {
@@ -8,8 +13,7 @@ import {
   IconAttention,
   IconNotApplicable,
   IconClock,
-} from "../../../icons/icons.js";
-import { util_components, general_utils } from "../shared.js";
+} from "src/icons/icons.js";
 
 import { TM, text_maker } from "./result_text_provider.js";
 

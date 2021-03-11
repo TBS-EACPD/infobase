@@ -1,23 +1,24 @@
 import _ from "lodash";
 
+import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
+
 import {
   api_load_covid_estimates,
   api_load_covid_estimates_gov_summary,
   api_load_covid_initiatives,
   api_load_covid_measures,
-} from "../models/covid/populate.js";
-import { load_footnotes_bundle } from "../models/footnotes/populate_footnotes.js";
-import { load_horizontal_initiative_lookups } from "../models/populate_horizontal_initiative_lookups.js";
+} from "src/models/covid/populate.js";
+import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes.js";
+import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups.js";
 import {
   api_load_results_bundle,
   api_load_results_counts,
   subject_has_results,
-} from "../models/populate_results.js";
+} from "src/models/populate_results.js";
 import {
   api_load_subject_has_services,
   api_load_services,
-} from "../models/populate_services.js";
-import { PanelRegistry, tables_for_panel } from "../panels/PanelRegistry.js";
+} from "src/models/populate_services.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
 

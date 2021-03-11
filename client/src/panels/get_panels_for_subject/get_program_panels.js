@@ -1,5 +1,3 @@
-import { ensure_loaded } from "../../core/lazy_loader.js";
-
 import {
   // shared all
   declare_welcome_mat_panel,
@@ -32,7 +30,9 @@ import {
   declare_spending_in_tag_perspective_panel,
   declare_vote_stat_split_panel,
   declare_top_spending_areas_panel,
-} from "../panel_declarations/index.js";
+} from "src/panels/panel_declarations/index.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_program_panels = (subject) =>

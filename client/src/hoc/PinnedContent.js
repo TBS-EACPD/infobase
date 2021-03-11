@@ -6,13 +6,14 @@ import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 import { withRouter } from "react-router";
 
+import { create_text_maker } from "src/models/text.js";
+
+import { backgroundColor } from "src/core/color_defs.js";
 import { has_local_storage } from "src/core/feature_detection.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { backgroundColor } from "../core/color_defs";
-import { IconPin, IconUnpin } from "../icons/icons.js";
-import { create_text_maker } from "../models/text.js";
+import { IconPin, IconUnpin } from "src/icons/icons.js";
 
 import text from "./PinnedContent.yaml";
 

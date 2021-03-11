@@ -1,18 +1,19 @@
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   StdPanel,
   Col,
   WrappedNivoPie,
   declare_panel,
   year_templates,
-} from "../../shared.js";
-const { std_years } = year_templates;
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
+
+const { std_years } = year_templates;
 
 const render_w_options = ({ text_key, graph_col, text_col }) => ({
   calculations,

@@ -1,5 +1,3 @@
-import { ensure_loaded } from "../../core/lazy_loader.js";
-
 import {
   // shared all
   declare_welcome_mat_panel,
@@ -28,7 +26,9 @@ import {
   declare_crso_links_to_other_crso_panel,
   declare_crso_by_prog_fte_panel,
   declare_crso_by_prog_exp_panel,
-} from "../panel_declarations/index.js";
+} from "src/panels/panel_declarations/index.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_crso_panels = (subject) =>

@@ -2,11 +2,6 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { textColor } from "src/core/color_defs.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { GraphOverlay } from "../../../../components";
 import {
   create_text_maker_component,
   Subject,
@@ -19,7 +14,12 @@ import {
   declare_panel,
   TspanLineWrapper,
   util_components,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { GraphOverlay } from "src/components/index.js";
+
+import { textColor } from "src/core/color_defs.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import text from "./goco.yaml";
 

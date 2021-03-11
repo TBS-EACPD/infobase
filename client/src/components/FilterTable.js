@@ -6,7 +6,7 @@ import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { IconEyeOpen, IconEyeClosed } from "../icons/icons.js";
+import { IconEyeOpen, IconEyeClosed } from "src/icons/icons.js";
 
 import "./FilterTable.scss";
 

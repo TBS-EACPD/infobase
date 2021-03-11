@@ -3,13 +3,15 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
 
+import { AlertBanner } from "src/components/index.js";
+
+import { trivial_text_maker } from "src/models/text.js";
+
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { AlertBanner } from "../components/index.js";
-import { IconHome } from "../icons/icons.js";
-import { index_lang_lookups } from "../InfoBase/index_data.js";
+import { IconHome } from "src/icons/icons.js";
+import { index_lang_lookups } from "src/InfoBase/index_data.js";
 
-import { trivial_text_maker } from "../models/text.js";
 
 import { log_page_view } from "./analytics.js";
 import { reactAdapter } from "./reactAdapter.js";

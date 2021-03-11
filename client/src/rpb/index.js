@@ -6,24 +6,29 @@ import React, { Fragment } from "react";
 //re-usable view stuff
 import { withRouter } from "react-router";
 
+import { SpinnerWrapper, LabeledBox } from "src/components/index.js";
+
+import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal.js";
+
+import Footnote from "src/models/footnotes/footnotes.js";
+
+import { Subject } from "src/models/subject.js";
+
+import { log_standard_event } from "src/core/analytics.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { SpinnerWrapper, LabeledBox } from "../components/index.js";
-import { FocusLockedModal } from "../components/modals_and_popovers/FocusLockedModal.js";
-import { log_standard_event } from "../core/analytics.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+
 import {
   StandardRouteContainer,
   LangSynchronizer,
-} from "../core/NavComponents";
+} from "src/core/NavComponents.js";
+import { Table } from "src/core/TableClass.js";
 
 //specific view stuff
-import { Table } from "../core/TableClass.js";
 
 //misc app stuff
-import { SafeJSURL } from "../general_utils.js";
-import Footnote from "../models/footnotes/footnotes.js";
-import { Subject } from "../models/subject.js";
+import { SafeJSURL } from "src/general_utils.js";
 
 import { GranularView } from "./granular_view.js";
 import { rpb_link } from "./rpb_link.js";

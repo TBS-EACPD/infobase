@@ -1,6 +1,5 @@
 import _ from "lodash";
 
-import { ensure_loaded } from "../../core/lazy_loader.js";
 import {
   // shared all
   declare_welcome_mat_panel,
@@ -53,7 +52,9 @@ import {
   declare_internal_services_panel,
   declare_employee_last_year_totals_panel,
   declare_detailed_program_spending_split_panel,
-} from "../../panels/panel_declarations/index.js";
+} from "src/panels/panel_declarations/index.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_dept_panels = (subject) =>

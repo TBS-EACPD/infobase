@@ -4,10 +4,12 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { Format, SmartDisplayTable } from "../../components/index.js";
-import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { formats } from "../../core/format.js";
-import { TabularLegend } from "../legends";
+import { Format, SmartDisplayTable } from "src/components/index.js";
+
+import { newIBCategoryColors } from "src/core/color_schemes.js";
+import { formats } from "src/core/format.js";
+
+import { TabularLegend } from "src/charts/legends/index.js";
 
 import {
   nivo_common_text_maker,

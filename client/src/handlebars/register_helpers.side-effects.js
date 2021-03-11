@@ -1,14 +1,15 @@
 import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 
+import { GlossaryEntry } from "src/models/glossary.js";
+
+import { Subject } from "src/models/subject.js";
+import { trivial_text_maker, run_template } from "src/models/text.js";
+
 import { formats } from "src/core/format.js";
 import { lang } from "src/core/injected_build_constants.js";
 
-import { infograph_href_template, glossary_href } from "../link_utils.js";
-import { GlossaryEntry } from "../models/glossary.js";
-import { Subject } from "../models/subject";
-
-import { trivial_text_maker, run_template } from "../models/text.js";
+import { infograph_href_template, glossary_href } from "src/link_utils.js";
 
 _.each(formats, (format, key) => {
   Handlebars.registerHelper(

@@ -1,14 +1,14 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { trivial_text_maker } from "../models/text.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 import {
   vote_stat_dimension,
   major_vote_stat,
   m,
   year_templates,
-} from "./table_common";
+} from "./table_common.js";
 
 import text from "./orgVoteStatPa.yaml";
 

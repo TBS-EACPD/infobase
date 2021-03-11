@@ -2,10 +2,12 @@ import _ from "lodash";
 import React from "react";
 
 
-import { get_resources_for_subject } from "../explorer_common/resource_explorer_common.js";
-import { sanitized_dangerous_inner_html } from "../general_utils.js";
-import { Subject } from "../models/subject.js";
-import { trivial_text_maker } from "../models/text.js";
+import { Subject } from "src/models/subject.js";
+
+import { trivial_text_maker } from "src/models/text.js";
+
+import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common.js";
+import { sanitized_dangerous_inner_html } from "src/general_utils.js";
 
 import { related_tags_row } from "./tag_hierarchy_utils.js";
 

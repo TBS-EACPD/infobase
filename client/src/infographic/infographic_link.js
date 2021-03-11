@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { SafeJSURL } from "../general_utils.js";
+import { SafeJSURL } from "src/general_utils.js";
 
 const infograph_href_template = (subj, data_area, first_character = "#") =>
   `${first_character}orgs/${subj.level}/${subj.id}/infograph/${

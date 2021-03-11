@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import "./DropdownMenu.scss";
-import { trivial_text_maker } from "../models/text.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 export class DropdownMenu extends React.Component {
   constructor(props) {

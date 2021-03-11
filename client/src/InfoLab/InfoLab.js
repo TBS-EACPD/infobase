@@ -1,13 +1,16 @@
 import React from "react";
 
-import { IconDPs, IconClock } from "src/icons/icons.js";
 
 import {
   create_text_maker_component,
   CardLeftImage,
-} from "../components/index.js";
-import { StandardRouteContainer } from "../core/NavComponents.js";
-import { create_text_maker } from "../models/text.js";
+} from "src/components/index.js";
+
+import { create_text_maker } from "src/models/text.js";
+
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+
+import { IconDPs, IconClock } from "src/icons/icons.js";
 
 import lab_text from "./InfoLab.yaml";
 import "./InfoLab.scss";

@@ -3,14 +3,15 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import { SmartDisplayTable } from "src/components/index.js";
+
 import {
   textColor,
   secondaryColor,
   backgroundColor,
 } from "src/core/color_defs.js";
 
-import { SmartDisplayTable } from "../../components/index.js";
-import { IconZoomIn, IconZoomOut } from "../../icons/icons.js";
+import { IconZoomIn, IconZoomOut } from "src/icons/icons.js";
 
 import {
   create_text_maker_component_with_nivo_common,

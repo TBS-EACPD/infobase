@@ -2,23 +2,30 @@ import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
+
+import { PanelRegistry } from "src/panels/PanelRegistry.js";
+
+import { PanelRenderer } from "src/panels/PanelRenderer.js";
 
 import {
   create_text_maker_component,
   SpinnerWrapper,
-} from "../components/index.js";
-import { log_standard_event } from "../core/analytics.js";
-import { ensure_loaded } from "../core/lazy_loader.js";
-import { StandardRouteContainer } from "../core/NavComponents";
-import { redirect_with_msg } from "../core/RedirectHeader.js";
-import { shallowEqualObjectsOverKeys, SafeJSURL } from "../general_utils.js";
-import { Subject } from "../models/subject.js";
+} from "src/components/index.js";
 
-import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
-import { PanelRegistry } from "../panels/PanelRegistry.js";
-import { PanelRenderer } from "../panels/PanelRenderer.js";
-import { EverythingSearch } from "../search/EverythingSearch.js";
+import { Subject } from "src/models/subject.js";
+
+import { log_standard_event } from "src/core/analytics.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { ensure_loaded } from "src/core/lazy_loader.js";
+
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { redirect_with_msg } from "src/core/RedirectHeader.js";
+
+import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";
+
+import { EverythingSearch } from "src/search/EverythingSearch.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
 import { BubbleMenu } from "./BubbleMenu.js";

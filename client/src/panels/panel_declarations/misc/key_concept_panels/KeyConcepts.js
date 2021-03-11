@@ -6,8 +6,12 @@ import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 import "intersection-observer";
 
-import { PinnedContent } from "../../../../hoc/PinnedContent";
-import { util_components, breakpoints } from "../../shared.js";
+import {
+  util_components,
+  breakpoints,
+} from "src/panels/panel_declarations/shared.js";
+
+import { PinnedContent } from "src/hoc/PinnedContent.js";
 
 import "./KeyConcepts.scss";
 

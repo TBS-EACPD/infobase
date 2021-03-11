@@ -36,7 +36,7 @@ import {
   declare_in_year_stat_breakdown_panel,
   declare_gocographic_panel,
   declare_personnel_spend_panel,
-} from "../panel_declarations/index.js";
+} from "src/panels/panel_declarations/index.js";
 
 export const get_gov_panels = (subject) => ({
   intro: [declare_simplographic_panel()],

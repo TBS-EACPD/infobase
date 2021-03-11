@@ -1,12 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
-
-import { declare_panel, InfographicPanel } from "../../shared.js";
+import {
+  declare_panel,
+  InfographicPanel,
+} from "src/panels/panel_declarations/shared.js";
 
 import { SingleTagResourceExplorer } from "./rooted_resource_scheme.js";
 
-import { text_maker, actual_year, planning_year } from "./utils";
+import { text_maker, actual_year, planning_year } from "./utils.js";
 
 export const declare_resource_structure_panel = () =>
   declare_panel({

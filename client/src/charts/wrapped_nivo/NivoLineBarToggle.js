@@ -7,14 +7,11 @@ import React from "react";
 import { create_text_maker } from "src/models/text.js";
 
 import { newIBCategoryColors } from "src/core/color_schemes.js";
-
 import { formats } from "src/core/format.js";
-
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
+import { StandardLegend } from "src/charts/legends/index.js";
 import { toggle_list } from "src/general_utils.js";
-
-import { StandardLegend } from "../legends";
 
 import { WrappedNivoBar } from "././wrapped_nivo_bar.js";
 import { infobase_colors_smart } from "./wrapped_nivo_common.js";

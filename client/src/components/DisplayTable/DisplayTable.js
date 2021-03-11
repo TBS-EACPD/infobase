@@ -3,16 +3,16 @@ import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
 
-import { LegendList } from "src/charts/legends/LegendList.js";
-import { toggle_list } from "src/general_utils.js";
-
-import { DebouncedTextInput } from "../DebouncedTextInput.js";
+import { DebouncedTextInput } from "src/components/DebouncedTextInput.js";
 import {
   create_text_maker_component,
   Format,
-} from "../misc_util_components.js";
+} from "src/components/misc_util_components.js";
+import { SortDirections } from "src/components/SortDirection.js";
 
-import { SortDirections } from "../SortDirection.js";
+import { LegendList } from "src/charts/legends/LegendList.js";
+
+import { toggle_list } from "src/general_utils.js";
 
 import {
   DisplayTableCopyCsv,

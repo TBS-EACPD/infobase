@@ -8,11 +8,14 @@ import {
   primaryColor,
   separatorColor,
   backgroundColor,
-} from "../../core/color_defs.js";
-import { newIBDarkCategoryColors } from "../../core/color_schemes.js";
-import { reactAdapter } from "../../core/reactAdapter";
-import { get_static_url } from "../../request_utils.js";
-import { PartitionDiagram } from "../partition_diagram/PartitionDiagram.js";
+} from "src/core/color_defs.js";
+import { newIBDarkCategoryColors } from "src/core/color_schemes.js";
+
+import { reactAdapter } from "src/core/reactAdapter.js";
+
+import { PartitionDiagram } from "src/partition/partition_diagram/PartitionDiagram.js";
+
+import { get_static_url } from "src/request_utils.js";
 
 import { text_maker } from "./partition_text_provider.js";
 import { PartitionNotes } from "./PartitionNotes.js";

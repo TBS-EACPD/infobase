@@ -3,6 +3,8 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
+import { trivial_text_maker } from "src/models/text.js";
+
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
   filter_hierarchy,
@@ -17,9 +19,7 @@ import {
   bound,
   shallowEqualObjectsOverKeys,
   sanitized_dangerous_inner_html,
-} from "src/general_utils";
-
-import { trivial_text_maker } from "src/models/text";
+} from "src/general_utils.js";
 
 import SingleTagResourceExplorerComponent from "./explorer_component.js";
 

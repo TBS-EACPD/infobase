@@ -48,7 +48,7 @@ export {
   StatelessModal,
   FixedPopover,
   ModalButton,
-} from "./modals_and_popovers";
+} from "./modals_and_popovers/index.js";
 export {
   DisplayTable,
   SmartDisplayTable,

@@ -3,21 +3,25 @@ import { gql } from "@apollo/client";
 import _ from "lodash";
 import React from "react";
 
-import { lang } from "src/core/injected_build_constants.js";
-
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
-
 import {
   Panel,
   SpinnerWrapper,
   WriteToClipboard,
   create_text_maker_component,
-} from "../../../components/index.js";
-import { log_standard_event } from "../../../core/analytics.js";
-import { get_client } from "../../../graphql_utils/graphql_utils.js";
+} from "src/components/index.js";
 
-import { IconCopyLink } from "../../../icons/icons.js";
-import { Indicator } from "../../../models/results.js";
+import { Indicator } from "src/models/results.js";
+
+import { log_standard_event } from "src/core/analytics.js";
+import { lang } from "src/core/injected_build_constants.js";
+
+
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
+
+import { IconCopyLink } from "src/icons/icons.js";
+import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+
 
 import { IndicatorDisplay } from "./result_components.js";
 

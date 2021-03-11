@@ -1,11 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { textColor } from "src/core/color_defs.js";
-import { infobase_colors } from "src/core/color_schemes.js";
-
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   Subject,
   util_components,
@@ -17,7 +12,11 @@ import {
   StandardLegend,
   infograph_options_href_template,
   businessConstants,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { textColor } from "src/core/color_defs.js";
+import { infobase_colors } from "src/core/color_schemes.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import text from "./covid_estimates.yaml";
 

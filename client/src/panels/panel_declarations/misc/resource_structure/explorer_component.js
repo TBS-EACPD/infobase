@@ -1,19 +1,19 @@
-import "src/explorer_common/explorer-styles.scss";
-
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
-import { Explorer } from "src/explorer_common/explorer_components.js";
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
-import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
-import { infograph_href_template } from "src/link_utils.js";
 import {
   TabbedControls,
   run_template,
 } from "src/panels//panel_declarations/shared.js";
 
-import { actual_year, planning_year, TM } from "./utils";
+import { Explorer } from "src/explorer_common/explorer_components.js";
+import { get_root } from "src/explorer_common/hierarchy_tools.js";
+import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
+import { infograph_href_template } from "src/link_utils.js";
+
+import { actual_year, planning_year, TM } from "./utils.js";
+
+import "src/explorer_common/explorer-styles.scss";
 
 const children_grouper = (node, children) => {
   //this one only has one depth, so the root must group its children

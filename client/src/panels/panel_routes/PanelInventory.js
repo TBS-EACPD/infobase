@@ -3,6 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { createSelector } from "reselect";
 
+import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
+import { PanelRegistry } from "src/panels/PanelRegistry.js";
+import { PanelRenderer } from "src/panels/PanelRenderer.js";
+
 import { SpinnerWrapper } from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
@@ -12,10 +16,6 @@ import { ensure_loaded } from "src/core/lazy_loader.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { EverythingSearch } from "src/search/EverythingSearch.js";
-
-import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
-import { PanelRegistry } from "../PanelRegistry.js";
-import { PanelRenderer } from "../PanelRenderer.js";
 
 import panel_text from "./PanelInventory.yaml";
 

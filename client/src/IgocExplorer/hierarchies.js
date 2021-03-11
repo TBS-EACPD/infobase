@@ -1,9 +1,10 @@
 import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
-import { convert_d3_hierarchy_to_explorer_hierarchy } from "../explorer_common/hierarchy_tools.js";
-import { businessConstants } from "../models/businessConstants.js";
-import { Subject } from "../models/subject.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import { Subject } from "src/models/subject.js";
+
+import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools.js";
 
 import { igoc_tmf as text_maker } from "./igoc_explorer_text.js";
 

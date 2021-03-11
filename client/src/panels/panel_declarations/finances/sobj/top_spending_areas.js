@@ -2,8 +2,6 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   StdPanel,
   Col,
@@ -11,7 +9,9 @@ import {
   table_common,
   declare_panel,
   WrappedNivoPie,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import text from "./top_spending_areas.yaml";
 

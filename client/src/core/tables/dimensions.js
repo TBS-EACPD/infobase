@@ -1,8 +1,9 @@
 import { nest } from "d3-collection";
 import _ from "lodash";
 
-import { Subject } from "../../models/subject.js";
-import * as text_maker from "../../models/text.js";
+import { Subject } from "src/models/subject.js";
+
+import * as text_maker from "src/models/text.js";
 
 const { Gov } = Subject;
 

@@ -1,13 +1,16 @@
 import _ from "lodash";
 import React from "react";
 
+import { GlossaryEntry } from "src/models/glossary.js";
+
+import { create_text_maker } from "src/models/text.js";
+
 import { lang } from "src/core/injected_build_constants.js";
 
 //circular dependency hack..
-import { Table } from "../core/TableClass.js";
-import { GlossaryEntry } from "../models/glossary.js";
-import { create_text_maker } from "../models/text.js";
-import { rpb_link } from "../rpb/rpb_link.js";
+import { Table } from "src/core/TableClass.js";
+
+import { rpb_link } from "src/rpb/rpb_link.js";
 
 import data_source_text from "./data_sources.yaml";
 import freq_text from "./frequencies.yaml";

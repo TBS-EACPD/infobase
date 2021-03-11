@@ -11,15 +11,16 @@
 //
 
 import { select } from "d3-selection";
+
 import "d3-selection-multi";
 import _ from "lodash";
 
-import { separatorColor } from "src/core/color_defs.js";
+import { businessConstants } from "src/models/businessConstants.js";
 
+import { separatorColor } from "src/core/color_defs.js";
 import { lang } from "src/core/injected_build_constants.js";
 
-import { businessConstants } from "../../models/businessConstants.js";
-import graphRegistry from "../graphRegistry.js";
+import graphRegistry from "src/charts/graphRegistry.js";
 
 import { canada_svg } from "./canada_svg.yaml";
 

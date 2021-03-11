@@ -3,10 +3,6 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { tertiaryColor } from "src/core/color_defs.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
 import {
   run_template,
   year_templates,
@@ -15,7 +11,10 @@ import {
   newIBCategoryColors,
   trivial_text_maker,
   Table,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { tertiaryColor } from "src/core/color_defs.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 const { std_years, planning_years } = year_templates;
 

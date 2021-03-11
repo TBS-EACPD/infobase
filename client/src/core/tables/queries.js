@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { Subject } from "src/models/subject.js";
 
-import { Subject } from "../../models/subject";
-import * as FORMAT from "../format";
+import * as FORMAT from "src/core/format.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 // #Queries
 // This module exists to  provides a common interface for querying

@@ -1,10 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { textGreen, textRed } from "src/core/color_defs.js";
-
-
-import { Format, SmartDisplayTable } from "../../../../components";
 import {
   year_templates,
   run_template,
@@ -12,7 +8,12 @@ import {
   create_text_maker_component,
   get_source_links,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { Format, SmartDisplayTable } from "src/components/index.js";
+
+import { textGreen, textRed } from "src/core/color_defs.js";
+
 
 import text from "./dp_rev_split.yaml";
 

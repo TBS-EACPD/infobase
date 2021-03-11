@@ -5,12 +5,15 @@ import React, { Fragment } from "react";
 
 import MediaQuery from "react-responsive";
 
+import { SmartDisplayTable } from "src/components/index.js";
+
+import { breakpoints } from "src/core/breakpoint_defs.js";
+
 import { textColor } from "src/core/color_defs.js";
 
-import { SmartDisplayTable } from "../../components/index.js";
-import { breakpoints } from "../../core/breakpoint_defs.js";
-import { newIBCategoryColors } from "../../core/color_schemes.js";
-import { formats } from "../../core/format.js";
+import { newIBCategoryColors } from "src/core/color_schemes.js";
+
+import { formats } from "src/core/format.js";
 
 import {
   InteractiveGraph,

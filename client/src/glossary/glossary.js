@@ -1,16 +1,20 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { create_text_maker_component, BackToTop } from "src/components/index.js";
+
+import { GlossaryEntry } from "src/models/glossary.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { create_text_maker_component, BackToTop } from "../components/index.js";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
-} from "../core/NavComponents.js";
-import { Table } from "../core/TableClass.js";
-import { GlossaryEntry } from "../models/glossary.js";
-import { rpb_link } from "../rpb/rpb_link.js";
+} from "src/core/NavComponents.js";
+import { Table } from "src/core/TableClass.js";
+
+
+import { rpb_link } from "src/rpb/rpb_link.js";
 
 import { GlossarySearch } from "./GlossarySearch.js";
 

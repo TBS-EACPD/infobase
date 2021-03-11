@@ -2,9 +2,9 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { CheckBox } from "src/components/CheckBox/CheckBox.js";
 
-import { CheckBox } from "../../components/CheckBox/CheckBox.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import "./LegendList.scss";
 

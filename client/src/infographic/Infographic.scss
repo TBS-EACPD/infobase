@@ -1,7 +1,7 @@
 /* Adjusts different property sizes 
 of the advanced search for mobile */
 
-@import '../common_css/common-variables';
+@import 'src/common_css/common-variables';
 
 .infographic-search-container > div > a.btn {
   @media(max-width:$maxMediumDevice){

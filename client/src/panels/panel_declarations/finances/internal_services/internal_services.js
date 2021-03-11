@@ -1,12 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { infobase_colors } from "src/core/color_schemes.js";
-
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { GraphOverlay } from "src/components";
-
 import {
   InfographicPanel,
   Subject,
@@ -16,7 +10,14 @@ import {
   StandardLegend,
   WrappedNivoBar,
   declare_panel,
-} from "../../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { GraphOverlay } from "src/components/index.js";
+
+import { infobase_colors } from "src/core/color_schemes.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 
 import text from "./internal_services.yaml";
 

@@ -37,23 +37,28 @@
             "position": "after"
           },
           {
-            "pattern": "src/components/**/*.js",
+            "pattern": "src/panels/**",
             "group": "internal",
             "position": "before"
           },
           {
-            "pattern": "src/models/**/*.js",
+            "pattern": "src/components/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "src/models/**",
             "group": "internal",
             "position": "before"
 
           },
           {
-            "pattern": "src/core/**/*.js",
+            "pattern": "src/core/**",
             "group": "internal",
             "position": "before"
           },
           {
-            "pattern": "src/app_bootstrap/*.js",
+            "pattern": "src/app_bootstrap/**",
             "group": "internal",
             "position": "before"
           }

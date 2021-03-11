@@ -1,4 +1,4 @@
-import "../components/LabeledBox.scss";
+import "src/components/LabeledBox.scss";
 import classNames from "classnames";
 import { select } from "d3-selection";
 import "d3-transition";
@@ -7,8 +7,10 @@ import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import { AlertBanner, TagCloud } from "../components";
-import { Table } from "../core/TableClass.js";
+import { AlertBanner, TagCloud } from "src/components/index.js";
+
+import { Table } from "src/core/TableClass.js";
+
 
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import {

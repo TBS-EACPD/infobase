@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 
+import { create_text_maker } from "src/models/text.js";
+
 import { textLightColor, tertiaryColor } from "src/core/color_defs.js";
 
 import {
@@ -8,10 +10,9 @@ import {
   IconTwitter,
   IconReddit,
   IconEmail,
-} from "../icons/icons.js";
-import { create_text_maker } from "../models/text.js";
+} from "src/icons/icons.js";
 
-import { StatelessModal } from "./modals_and_popovers";
+import { StatelessModal } from "./modals_and_popovers/index.js";
 
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";

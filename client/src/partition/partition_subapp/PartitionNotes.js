@@ -2,7 +2,7 @@ import { select } from "d3-selection";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { AutoAccordion } from "../../components/index.js";
+import { AutoAccordion } from "src/components/index.js";
 
 import { text_maker } from "./partition_text_provider.js";
 
