@@ -18,8 +18,8 @@ covid_questions_financial_a:
       * Both {{gl_tt "budgetary" "BUD_EXP"}} and {{gl_tt "non-budgetary" "NB_EXP"}} expenditures and authorities are included here, whereas other GC InfoBase reporting is limited 
     to budgetary amounts only. Non-budgetary expenditures and authorities must be included here for completeness and accuracy as repayable assistance is a critical element of the
     government's COVID-19 response.
-      * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
-    included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19.
+      * For certain COVID-19 measures (CERB, CRB), authorities and expenditures may reflect a portion of the costs that are administered through the Employment Insurance Operating Account,
+      even though they will not be reported in Volume II of the Public Accounts, or elsewhere on GC InfoBase. 
   fr: |
     Les données financières figurant dans InfoBase du GC proviennent généralement du volume II des Comptes publics du Canada. En raison de la pandémie de COVID-19,
     nous avons fait les exceptions suivantes pour cette section de InfoBase du GC portant sur la COVID-19 :
@@ -28,8 +28,7 @@ covid_questions_financial_a:
       * Les autorisations et dépenses {{gl_tt "budgétaires" "BUD_EXP"}} et {{gl_tt "non budgétaires" "NB_EXP"}} figurent ici tandis que les autres informations contenues dans InfoBase du GC se
       limitent aux seuls montants budgétaires. Par souci d'exhaustivité et d'exactitude, les autorisations et dépenses non budgétaires doivent être incluses ici, car le remboursement de l'aide
       est un élément essentiel de la réponse du gouvernement à la COVID-19.
-      * Bien que les dépenses du Compte des opérations de l'assurance-emploi ne soient pas incluses dans le volume II des Comptes publics et ne figurent donc pas ailleurs dans InfoBase du GC,
-      ces montants sont inscrits ici, car ils sont un élément important de la réponse du gouvernement à la COVID-19.
+      * COVID_TEXT_TODO
 
 covid_questions_funding_value_q:
   en: What are "funding" amounts? Where do they come from?
