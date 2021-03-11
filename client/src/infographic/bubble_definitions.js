@@ -50,7 +50,6 @@ const base_configs = [
     id: "services",
     title: text_maker("services_title"),
     description: text_maker("services_desc"),
-    enable_panel_filter: true,
     svg: IconServices,
   },
   {
