@@ -149,6 +149,7 @@ export class DisplayTable extends React.Component {
       page_size_increment,
       util_components,
       show_pagination_controls,
+      disable_pagination,
     } = this.props;
     const {
       sort_by,
@@ -315,7 +316,10 @@ export class DisplayTable extends React.Component {
       .reverse()
       .value();
 
-    const paginated_data = _.chunk(sorted_filtered_data, page_size);
+    const paginated_data = _.chunk(
+      sorted_filtered_data,
+      disable_pagination ? _.size(sorted_filtered_data) : page_size
+    );
 
     const number_of_pages = paginated_data.length;
 
@@ -328,7 +332,7 @@ export class DisplayTable extends React.Component {
       this.first_data_ref.current.focus();
     };
 
-    const page_selector = show_pagination_controls && (
+    const page_selector = !disable_pagination && show_pagination_controls && (
       <PageSelector
         num_pages={number_of_pages}
         current_page={current_page}
@@ -370,14 +374,16 @@ export class DisplayTable extends React.Component {
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    {show_pagination_controls && (
-                      <SelectPageSize
-                        selected={page_size}
-                        on_select={change_page_size}
-                        page_size_increment={page_size_increment}
-                        num_items={_.size(sorted_filtered_data)}
-                      />
-                    )}
+                    <div>
+                      {!disable_pagination && show_pagination_controls && (
+                        <SelectPageSize
+                          selected={page_size}
+                          on_select={change_page_size}
+                          page_size_increment={page_size_increment}
+                          num_items={_.size(sorted_filtered_data)}
+                        />
+                      )}
+                    </div>
                     <div className={"display-table-container__utils"}>
                       <button
                         tabIndex={0}
