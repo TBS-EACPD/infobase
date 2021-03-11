@@ -16,3 +16,6 @@ items_per_page:
 items_per_page_description:
   en: Choose the number of items to be displayed on the table at a time.
   fr: Choisir le nombre d'éléments à afficher à la fois sur le tableau
+show_all:
+  en: Show all
+  fr: TODO
