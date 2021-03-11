@@ -188,12 +188,12 @@ export const SelectPageSize = ({
     <form className="paginate_by_dropdown">
       <div style={{ marginBottom: 10 }}>
         {_.map(options, ({ label, value }) => (
-          <div key={value}>
+          <div key={value} onClick={() => on_select(value)}>
             <input
               type={"radio"}
               name={"paginate_by_dropdown"}
-              onClick={() => on_select(value)}
-              defaultChecked={selected === value}
+              checked={selected === value}
+              readOnly
             />
             <label className={"normal-radio-btn-label"}>{label}</label>
           </div>
