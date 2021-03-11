@@ -1,11 +1,10 @@
 covid_questions_up_to_date_q:
   en: Are these values up to date? 
-  fr: TODO
+  fr: Ces valeurs sont-elles à jour?
 covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
-  en: |
-    This data is current up to and including {{COVID_LAST_REFRESHED_MONTH}}. {{gt "covid_above_tab_data_org_websites_note"}}
-  fr: TODO
+  en: This data is current up to and including {{COVID_LAST_REFRESHED_MONTH}}. {{gt "covid_above_tab_data_org_websites_note"}}
+  fr: Ces données sont à jour jusqu'en {{COVID_LAST_REFRESHED_MONTH}} inclusivement. {{gt "covid_above_tab_data_org_websites_note"}}
 
 covid_questions_financial_q:
   en: Why does GC InfoBase report COVID-19 financial data under "COVID-19" and not under "Finances"?
@@ -21,7 +20,16 @@ covid_questions_financial_a:
     government's COVID-19 response.
       * Although expenditures from the Employment Insurance Operating Account are not included in Volume II of the Public Accounts, and therefore are not
     included elsewhere on GC InfoBase, these amounts have been included here as they are an important factor in the government's response to COVID-19.
-  fr: TODO
+  fr: |
+    Les données financières figurant dans InfoBase du GC proviennent généralement du volume II des Comptes publics du Canada. En raison de la pandémie de COVID-19,
+    nous avons fait les exceptions suivantes pour cette section de InfoBase du GC portant sur la COVID-19 :
+      * Elle contient entre autres des données sur les dépenses qui n'ont pas encore été publiées dans les Comptes publics du Canada afin de donner une vue d'ensemble à jour de l'administration
+      publique fédérale.
+      * Les autorisations et dépenses {{gl_tt "budgétaires" "BUD_EXP"}} et {{gl_tt "non budgétaires" "NB_EXP"}} figurent ici tandis que les autres informations contenues dans InfoBase du GC se
+      limitent aux seuls montants budgétaires. Par souci d'exhaustivité et d'exactitude, les autorisations et dépenses non budgétaires doivent être incluses ici, car le remboursement de l'aide
+      est un élément essentiel de la réponse du gouvernement à la COVID-19.
+      * Bien que les dépenses du Compte des opérations de l'assurance-emploi ne soient pas incluses dans le volume II des Comptes publics et ne figurent donc pas ailleurs dans InfoBase du GC,
+      ces montants sont inscrits ici, car ils sont un élément important de la réponse du gouvernement à la COVID-19.
 
 covid_questions_funding_value_q:
   en: What are "funding" amounts? Where do they come from?
@@ -96,7 +104,21 @@ covid_questions_missing_measures_a:
     
     More information related to {{ext_link "the benefits and services provided by the Government of Canada" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}
     to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
-  fr: TODO
+  fr: |
+    COVID_TEXT_TODO this French is out of sync with the English, needs a re-translate
+
+    À l'heure actuelle, InfoBase du GC ne fait état que des mesures au titre de la COVID-19 qui figurent dans les budgets des dépenses. Bien que cela comprenne certains avantages
+    tels que la Prestation canadienne d'intervention d'urgence (PCU), la portée des budgets des dépenses ne couvre pas toutes les prestations.  
+
+    Parmi les prestations les plus importantes liées à COVID-19 qui ne sont pas mentionnées ici, on peut mentionner les suivantes :
+      * Assurance emploi (AE)
+      * Subvention salariale d’urgence du Canada (SSUC)
+      * Subvention d’urgence du Canada pour le loyer (SUCL)  
+
+    Pour obtenir de plus amples renseignements sur les prestations et services offerts par le gouvernement du Canada pour aider les Canadiens et les entreprises à surmonter
+    les difficultés découlant de la pandémie de COVID-19, cliquez {ext_link "ici" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}}
+
+    
 
 covid_questions_frequency_q:
   en: How frequently will COVID-19 spending authorities and expenditures be updated on GC InfoBase?
