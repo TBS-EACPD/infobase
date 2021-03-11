@@ -23,6 +23,6 @@ selected_result:
 menu_with_results_status:
   transform: [handlebars]
   en: |
-    {{total_matching_results}} results found.
+    {{total_matching_results}} results found
   fr: |
-    {{total_matching_results}} résultats trouvés.
+    {{total_matching_results}} résultats trouvés
