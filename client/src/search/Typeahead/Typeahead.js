@@ -60,29 +60,28 @@ export class Typeahead extends React.Component {
       query_value,
       current_search_configs,
       selection_cursor,
+      may_show_menu,
     } = this.state;
     const {
       query_value: prev_query_value,
       current_search_configs: prev_search_configs,
       selection_cursor: prev_selection_cursor,
       matching_results: prev_matching_results,
+      may_show_menu: prev_may_show_menu,
     } = prevState;
 
     if (
       query_value !== prev_query_value ||
-      current_search_configs !== prev_search_configs
+      current_search_configs !== prev_search_configs ||
+      (this.show_menu && may_show_menu !== prev_may_show_menu)
     ) {
-      const matching_results = !this.show_menu
-        ? []
-        : _.filter(this.all_options, ({ config_group_index, data }) =>
-            // could use optional chaining, but we WANT this to fail fast and loud, to catch
-            // malformed search_configs during development. Should be safe otherwsie
-            this.config_groups[config_group_index].group_filter(
-              query_value,
-              data
-            )
-          );
-
+      const matching_results = _.filter(
+        this.all_options,
+        ({ config_group_index, data }) =>
+          // could use optional chaining, but we WANT this to fail fast and loud, to catch
+          // malformed search_configs during development. Should be safe otherwsie
+          this.config_groups[config_group_index].group_filter(query_value, data)
+      );
       if (matching_results !== prev_matching_results) {
         virtualized_cell_measure_cache.clearAll();
       }
@@ -243,7 +242,7 @@ export class Typeahead extends React.Component {
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
                     deferredMeasurementCache={virtualized_cell_measure_cache}
                     rowHeight={virtualized_cell_measure_cache.rowHeight}
-                    rowCount={_.size(list_items)}
+                    rowCount={_.size(list_items) || 1}
                     rowRenderer={({
                       index,
                       isScrolling,
