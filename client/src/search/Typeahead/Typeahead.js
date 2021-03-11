@@ -118,12 +118,7 @@ export class Typeahead extends React.Component {
       utility_buttons,
     } = this.props;
 
-    const {
-      query_value,
-      selection_cursor,
-      list_height,
-      matching_results,
-    } = this.state;
+    const { query_value, selection_cursor, matching_results } = this.state;
 
     const list_items = _.compact([
       ..._.chain(matching_results)
@@ -147,7 +142,7 @@ export class Typeahead extends React.Component {
                   <TM
                     k="menu_with_results_status"
                     args={{
-                      total_matching_results: _.size(matching_results),
+                      total_matching_results: matching_results.length,
                     }}
                   />
                 </div>
@@ -231,13 +226,12 @@ export class Typeahead extends React.Component {
                     role="listbox"
                     id={this.menu_id}
                     aria-expanded={this.show_menu}
-                    height={list_height}
                     width={width}
                     list_ref={this.virtualized_list_ref}
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
                     deferredMeasurementCache={virtualized_cell_measure_cache}
                     rowHeight={virtualized_cell_measure_cache.rowHeight}
-                    rowCount={_.size(list_items) || 1}
+                    rowCount={list_items.length || 1}
                     rowRenderer={({
                       index,
                       isScrolling,
@@ -329,7 +323,7 @@ export class Typeahead extends React.Component {
     const { selection_cursor, matching_results } = this.state;
 
     if (selection_cursor === this.default_selection_cursor) {
-      return _.size(matching_results) - 1;
+      return matching_results.length - 1;
     } else {
       return selection_cursor - 1;
     }
@@ -337,7 +331,7 @@ export class Typeahead extends React.Component {
   get next_selection_cursor() {
     const { selection_cursor, matching_results } = this.state;
 
-    if (selection_cursor === _.size(matching_results) - 1) {
+    if (selection_cursor === matching_results.length - 1) {
       return this.default_selection_cursor;
     } else {
       return selection_cursor + 1;

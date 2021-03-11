@@ -5,7 +5,7 @@ export class AutoHeightVirtualList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.max_height = props.max_height || 400;
+    this.max_height = props.max_height;
     this.list_ref = this.props.list_ref || React.createRef();
 
     this.state = {
@@ -14,6 +14,12 @@ export class AutoHeightVirtualList extends React.Component {
   }
 
   componentDidUpdate(prev_props, prev_state) {
+    const { max_height } = this.props;
+
+    if (max_height !== this.max_height) {
+      this.max_height = max_height;
+    }
+
     if (this.list_ref && this.list_ref.current) {
       this.list_ref.current.Grid.measureAllCells();
       const list_height = this.list_ref.current.Grid.getTotalRowsHeight();
@@ -39,3 +45,7 @@ export class AutoHeightVirtualList extends React.Component {
     );
   }
 }
+
+AutoHeightVirtualList.defaultProps = {
+  max_height: 400,
+};
