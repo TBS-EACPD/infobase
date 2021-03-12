@@ -5,7 +5,7 @@ import { DropdownMenu } from "src/components/DropdownMenu.js";
 import { create_text_maker_component } from "src/components/misc_util_components.js";
 import { WriteToClipboard } from "src/components/WriteToClipboard.js";
 
-import { backgroundColor, textColor } from "src/core/color_defs.js";
+import { backgroundColor } from "src/core/color_defs.js";
 import { is_IE } from "src/core/feature_detection.js";
 
 import { IconCopy, IconDownload } from "src/icons/icons.js";
