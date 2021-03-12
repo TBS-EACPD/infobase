@@ -19,7 +19,7 @@ import {
   DisplayTableCopyCsv,
   DisplayTableDownloadCsv,
   DisplayTableColumnToggle,
-  PageSelector,
+  SelectPage,
   SelectPageSize,
 } from "./DisplayTableUtils.js";
 
@@ -358,7 +358,7 @@ export class DisplayTable extends React.Component {
     const page_selector = !disable_pagination &&
       show_pagination_controls &&
       !loading && (
-        <PageSelector
+        <SelectPage
           num_pages={number_of_pages}
           current_page={current_page}
           change_page={this.change_page}
@@ -637,7 +637,9 @@ export class SmartDisplayTable extends React.Component {
       <DisplayTable
         {...this.props}
         column_configs={smart_column_configs}
-        show_pagination_controls={_.size(data) > 100}
+        show_pagination_controls={
+          _.size(data) > DisplayTable.defaultProps.page_size_increment
+        }
       />
     );
   }

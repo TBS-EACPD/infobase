@@ -64,7 +64,7 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
   </Fragment>
 );
 
-export const PageSelector = ({
+export const SelectPage = ({
   current_page,
   num_pages,
   change_page,
