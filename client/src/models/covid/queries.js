@@ -23,7 +23,6 @@ const has_covid_data_fields = `
   has_covid_data {
     has_estimates
     has_expenditures
-    has_commitments
   }
 `;
 export const org_has_covid_data_query = build_org_query(has_covid_data_fields);
@@ -92,27 +91,6 @@ export const org_covid_expenditures_by_measure_query = build_org_query(
   covid_expenditures_by_measure_query_fragment
 );
 
-const covid_commitments_fields = `
-  fiscal_year
-  commitment
-`;
-const covid_commitments_by_measure_query_fragment = `
-  covid_commitments_by_measure: covid_measures {
-    ${covid_measure_fields}
-  
-    covid_commitments {
-      org_id
-      ${covid_commitments_fields}
-    }
-  }
-`;
-export const all_covid_commitments_by_measure_query = build_base_query(
-  covid_commitments_by_measure_query_fragment
-);
-export const org_covid_commitments_by_measure_query = build_org_query(
-  covid_commitments_by_measure_query_fragment
-);
-
 const covid_count_query_fields = `
   fiscal_year
   with_authorities
@@ -124,9 +102,6 @@ const common_covid_summary_query_fragment = `
   }
   covid_expenditures {
     ${covid_expenditures_fields}
-  }
-  covid_commitments {
-    ${covid_commitments_fields}
   }
 `;
 export const gov_covid_summary_query = build_base_query(`

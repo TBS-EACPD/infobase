@@ -15,11 +15,6 @@ const expenditures_fields = `
   vote: Float
   stat: Float
 `;
-const commitments_fields = `
-  id: String
-  fiscal_year: String
-  commitment: Float
-`;
 
 const schema = `
   extend type Root {
@@ -45,13 +40,11 @@ const schema = `
     
     covid_estimates: [CovidEstimates]
     covid_expenditures: [CovidExpenditures]
-    covid_commitments: [CovidCommitments]
   }
 
   type HasCovidData {
     has_estimates: Boolean
     has_expenditures: Boolean
-    has_commitments: Boolean
   }
 
   type CovidEstimates {
@@ -66,12 +59,6 @@ const schema = `
 
     ${expenditures_fields}
   }
-  type CovidCommitments {
-    org_id: String
-    org: Org
-
-    ${commitments_fields}
-  }
 
   type CovidGovSummary {
     id: String
@@ -81,7 +68,6 @@ const schema = `
 
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
-    covid_commitments: [CovidCommitmentsSummary]
 
     measure_counts: [CovidSummaryCounts],
     org_counts: [CovidSummaryCounts],
@@ -91,16 +77,12 @@ const schema = `
 
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
-    covid_commitments: [CovidCommitmentsSummary]
   }
   type CovidEstimatesSummary {
     ${estimates_fields}
   }
   type CovidExpendituresSummary {
     ${expenditures_fields}
-  }
-  type CovidCommitmentsSummary {
-    ${commitments_fields}
   }
   type CovidSummaryCounts {
     fiscal_year: String
@@ -132,7 +114,6 @@ export default function ({ models, loaders }) {
         has_covid_data || {
           has_estimates: false,
           has_expenditures: false,
-          has_commitments: false,
         }
     );
 
@@ -169,11 +150,7 @@ export default function ({ models, loaders }) {
         covid_measures_by_org_id_loader.load(queried_org_id).then((measures) =>
           _.map(measures, (measure) => {
             const filtered_data = _.chain(measure)
-              .pick([
-                "covid_estimates",
-                "covid_expenditures",
-                "covid_commitments",
-              ])
+              .pick(["covid_estimates", "covid_expenditures"])
               .mapValues((rows) =>
                 _.filter(
                   rows,
@@ -197,9 +174,6 @@ export default function ({ models, loaders }) {
       org: ({ org_id }) => org_id_loader.load(org_id),
     },
     CovidExpenditures: {
-      org: ({ org_id }) => org_id_loader.load(org_id),
-    },
-    CovidCommitments: {
       org: ({ org_id }) => org_id_loader.load(org_id),
     },
   };
