@@ -3,6 +3,15 @@ import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import {
+  InfographicPanel,
+  declare_panel,
+  util_components,
+  Subject,
+  ensure_loaded,
+  WrappedNivoPie,
+} from "src/panels/panel_declarations/shared.js";
+
+import {
   gov_covid_summary_query,
   top_covid_spending_query,
 } from "src/models/covid/queries.js";
@@ -13,15 +22,6 @@ import { lang } from "src/core/injected_build_constants.js";
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
-
-import {
-  InfographicPanel,
-  declare_panel,
-  util_components,
-  Subject,
-  ensure_loaded,
-  WrappedNivoPie,
-} from "../shared.js";
 
 import { AboveTabFootnoteList } from "./covid_common_components.js";
 import {

@@ -1,13 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
-import { COVID_FUNDING_FEATURE_FLAG } from "src/models/covid/covid_config.js";
-
 import {
   util_components,
   SomeThingsToKeepInMind,
   declare_panel,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { COVID_FUNDING_FEATURE_FLAG } from "src/models/covid/covid_config.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 

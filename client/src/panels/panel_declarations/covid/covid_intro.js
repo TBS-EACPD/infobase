@@ -1,6 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
+import {
+  InfographicPanel,
+  declare_panel,
+} from "src/panels/panel_declarations/shared.js";
+
 import { gov_covid_summary_query } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
@@ -8,8 +13,6 @@ import { lang } from "src/core/injected_build_constants.js";
 import { TabLoadingSpinner } from "src/components";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
-
-import { InfographicPanel, declare_panel } from "../shared.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
