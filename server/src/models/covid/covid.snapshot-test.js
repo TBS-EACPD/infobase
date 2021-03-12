@@ -10,7 +10,6 @@ query ($lang: String = "en") {
       has_covid_data {
         has_estimates
         has_expenditures
-        has_commitments
       }
 
       covid_estimates {
@@ -36,16 +35,6 @@ query ($lang: String = "en") {
         vote
         stat
       }
-      covid_commitments {
-        org_id
-        org {
-          id
-          name
-        }
-    
-        fiscal_year
-        commitment
-      }
     }
   }
 }`;
@@ -60,7 +49,6 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
       has_covid_data {
         has_estimates
         has_expenditures
-        has_commitments
       }
     }
   }
@@ -90,10 +78,6 @@ query ($lang: String = "en", $top_x: Int = 1) {
           fiscal_year
           vote
           stat
-        }
-        covid_commitments {
-          fiscal_year
-          commitment
         }
 
         measure_counts {
@@ -130,10 +114,6 @@ query ($lang: String = "en") {
           vote
           stat
         }
-        covid_commitments {
-          fiscal_year
-          commitment
-        }
       }
     }
   }
@@ -150,7 +130,6 @@ query ($lang: String = "en") {
         has_covid_data {
           has_estimates
           has_expenditures
-          has_commitments
         }
 
         covid_estimates {
@@ -176,16 +155,6 @@ query ($lang: String = "en") {
           vote
           stat
         }
-        covid_commitments {
-          org_id
-          org {
-            id
-            name
-          }
-      
-          fiscal_year
-          commitment
-        }
       }
     }
   }
@@ -198,21 +167,18 @@ query ($lang: String = "en") {
       has_covid_data {
         has_estimates
         has_expenditures
-        has_commitments
       }
     }
     does_not_have_data: org(org_id: "15") {
       has_covid_data {
         has_estimates
         has_expenditures
-        has_commitments
       }
     }
     only_has_estimates: org(org_id: "1") {
       has_covid_data {
         has_estimates
         has_expenditures
-        has_commitments
       }
     }
   }

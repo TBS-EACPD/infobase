@@ -6,35 +6,6 @@ Object {
     "root": Object {
       "covid_measures": Array [
         Object {
-          "covid_commitments": Array [
-            Object {
-              "commitment": 1,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "133",
-                "name": "National Defence",
-              },
-              "org_id": "133",
-            },
-            Object {
-              "commitment": 4,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "326",
-                "name": "Treasury Board of Canada Secretariat",
-              },
-              "org_id": "326",
-            },
-            Object {
-              "commitment": 6,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "552",
-                "name": "Polar Knowledge Canada",
-              },
-              "org_id": "552",
-            },
-          ],
           "covid_estimates": Array [
             Object {
               "est_doc": "ME",
@@ -136,7 +107,6 @@ Object {
             },
           ],
           "has_covid_data": Object {
-            "has_commitments": true,
             "has_estimates": true,
             "has_expenditures": true,
           },
@@ -144,35 +114,6 @@ Object {
           "name": "measure 1",
         },
         Object {
-          "covid_commitments": Array [
-            Object {
-              "commitment": 2,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "133",
-                "name": "National Defence",
-              },
-              "org_id": "133",
-            },
-            Object {
-              "commitment": 7,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "552",
-                "name": "Polar Knowledge Canada",
-              },
-              "org_id": "552",
-            },
-            Object {
-              "commitment": 8,
-              "fiscal_year": "2021",
-              "org": Object {
-                "id": "552",
-                "name": "Polar Knowledge Canada",
-              },
-              "org_id": "552",
-            },
-          ],
           "covid_estimates": Array [
             Object {
               "est_doc": "ME",
@@ -274,7 +215,6 @@ Object {
             },
           ],
           "has_covid_data": Object {
-            "has_commitments": true,
             "has_estimates": true,
             "has_expenditures": true,
           },
@@ -282,26 +222,6 @@ Object {
           "name": "measure 2",
         },
         Object {
-          "covid_commitments": Array [
-            Object {
-              "commitment": 3,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "133",
-                "name": "National Defence",
-              },
-              "org_id": "133",
-            },
-            Object {
-              "commitment": 5,
-              "fiscal_year": "2020",
-              "org": Object {
-                "id": "326",
-                "name": "Treasury Board of Canada Secretariat",
-              },
-              "org_id": "326",
-            },
-          ],
           "covid_estimates": Array [
             Object {
               "est_doc": "ME",
@@ -360,7 +280,6 @@ Object {
             },
           ],
           "has_covid_data": Object {
-            "has_commitments": true,
             "has_estimates": true,
             "has_expenditures": true,
           },
@@ -379,16 +298,6 @@ Object {
     "root": Object {
       "gov": Object {
         "covid_summary": Object {
-          "covid_commitments": Array [
-            Object {
-              "commitment": 28,
-              "fiscal_year": "2020",
-            },
-            Object {
-              "commitment": 8,
-              "fiscal_year": "2021",
-            },
-          ],
           "covid_estimates": Array [
             Object {
               "est_doc": "ME",
@@ -496,12 +405,6 @@ Object {
     "root": Object {
       "org": Object {
         "covid_summary": Object {
-          "covid_commitments": Array [
-            Object {
-              "commitment": 6,
-              "fiscal_year": "2020",
-            },
-          ],
           "covid_estimates": Array [
             Object {
               "est_doc": "ME",
@@ -551,17 +454,6 @@ Object {
       "org": Object {
         "covid_measures": Array [
           Object {
-            "covid_commitments": Array [
-              Object {
-                "commitment": 1,
-                "fiscal_year": "2020",
-                "org": Object {
-                  "id": "133",
-                  "name": "National Defence",
-                },
-                "org_id": "133",
-              },
-            ],
             "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
@@ -610,7 +502,6 @@ Object {
               },
             ],
             "has_covid_data": Object {
-              "has_commitments": true,
               "has_estimates": true,
               "has_expenditures": true,
             },
@@ -618,17 +509,6 @@ Object {
             "name": "measure 1",
           },
           Object {
-            "covid_commitments": Array [
-              Object {
-                "commitment": 2,
-                "fiscal_year": "2020",
-                "org": Object {
-                  "id": "133",
-                  "name": "National Defence",
-                },
-                "org_id": "133",
-              },
-            ],
             "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
@@ -655,7 +535,6 @@ Object {
               },
             ],
             "has_covid_data": Object {
-              "has_commitments": true,
               "has_estimates": true,
               "has_expenditures": true,
             },
@@ -663,17 +542,6 @@ Object {
             "name": "measure 2",
           },
           Object {
-            "covid_commitments": Array [
-              Object {
-                "commitment": 3,
-                "fiscal_year": "2020",
-                "org": Object {
-                  "id": "133",
-                  "name": "National Defence",
-                },
-                "org_id": "133",
-              },
-            ],
             "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
@@ -711,7 +579,6 @@ Object {
               },
             ],
             "has_covid_data": Object {
-              "has_commitments": true,
               "has_estimates": true,
               "has_expenditures": true,
             },
@@ -731,21 +598,18 @@ Object {
     "root": Object {
       "does_not_have_data": Object {
         "has_covid_data": Object {
-          "has_commitments": false,
           "has_estimates": false,
           "has_expenditures": false,
         },
       },
       "has_data": Object {
         "has_covid_data": Object {
-          "has_commitments": true,
           "has_estimates": true,
           "has_expenditures": true,
         },
       },
       "only_has_estimates": Object {
         "has_covid_data": Object {
-          "has_commitments": false,
           "has_estimates": true,
           "has_expenditures": false,
         },
@@ -761,7 +625,6 @@ Object {
     "root": Object {
       "covid_measure": Object {
         "has_covid_data": Object {
-          "has_commitments": true,
           "has_estimates": true,
           "has_expenditures": true,
         },

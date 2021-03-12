@@ -40,10 +40,6 @@ export default async function ({ models }) {
     }))
     .map()
     .value();
-  const covid_commitments_rows = _.map(
-    get_standard_csv_file_rows("covid_commitments.csv"),
-    (row) => ({ ...row, commitment: +row.commitment })
-  );
 
   const covid_measure_records = _.map(
     get_standard_csv_file_rows("covid_measures.csv"),
@@ -55,7 +51,6 @@ export default async function ({ models }) {
         ...row,
         covid_estimates: _.filter(covid_estimates_rows, filter_by_row_id),
         covid_expenditures: _.filter(covid_expenditures_rows, filter_by_row_id),
-        covid_commitments: _.filter(covid_commitments_rows, filter_by_row_id),
       });
     }
   );
@@ -63,7 +58,6 @@ export default async function ({ models }) {
   const all_rows_with_org_data = [
     ...covid_estimates_rows,
     ...covid_expenditures_rows,
-    ...covid_commitments_rows,
   ];
   const covid_org_summary_records = _.chain(all_rows_with_org_data)
     .map("org_id")
@@ -106,18 +100,6 @@ export default async function ({ models }) {
           ),
         }))
         .value(),
-      covid_commitments: _.chain(covid_commitments_rows)
-        .filter(({ org_id: row_org_id }) => row_org_id === org_id)
-        .groupBy("fiscal_year")
-        .map((year_rows, fiscal_year) => ({
-          fiscal_year,
-          commitment: _.reduce(
-            year_rows,
-            (memo, { commitment }) => memo + commitment,
-            0
-          ),
-        }))
-        .value(),
     }))
     .value();
 
@@ -157,18 +139,6 @@ export default async function ({ models }) {
               stat: memo.stat + row.stat,
             }),
             { vote: 0, stat: 0 }
-          ),
-        }))
-        .value(),
-      covid_commitments: _.chain(covid_org_summary_records)
-        .flatMap("covid_commitments")
-        .groupBy("fiscal_year")
-        .map((year_rows, fiscal_year) => ({
-          fiscal_year,
-          commitment: _.reduce(
-            year_rows,
-            (memo, { commitment }) => memo + commitment,
-            0
           ),
         }))
         .value(),
@@ -266,7 +236,6 @@ export default async function ({ models }) {
           const has_data_type = _.chain({
             estimates: covid_estimates_rows,
             expenditures: covid_expenditures_rows,
-            commitments: covid_commitments_rows,
           })
             .map((rows, data_type) => [
               `has_${data_type}`,

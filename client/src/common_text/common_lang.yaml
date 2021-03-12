@@ -694,9 +694,7 @@ covid_measure:
 covid_measures:
   en: COVID-19 Measures
   fr: Mesures COVID-19
-covid_commitments:
-  en: Commitments
-  fr: Engagements
+
 
 ##################################
 # text for welcome/netflix panel
