@@ -9,6 +9,7 @@ import {
   Format,
 } from "src/components/misc_util_components.js";
 import { SortDirections } from "src/components/SortDirection.js";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
 
@@ -122,6 +123,36 @@ export class DisplayTable extends React.Component {
     };
   }
 
+  change_page_size = (new_page_size) =>
+    this.setState(
+      {
+        loading: true,
+      },
+      _.debounce(() =>
+        this.setState({
+          page_size: new_page_size,
+          current_page: 0,
+          loading: false,
+        })
+      )
+    );
+
+  change_page = (page) =>
+    this.setState(
+      {
+        loading: true,
+      },
+      _.debounce(() =>
+        this.setState(
+          {
+            current_page: page,
+            loading: false,
+          },
+          _.debounce(() => this.first_data_ref.current.focus()) //for some reason if i don't debounce it by 0ms, it will sometimes execute without a proper focus
+        )
+      )
+    );
+
   render() {
     const {
       table_name, // Optional: Name of table
@@ -158,6 +189,7 @@ export class DisplayTable extends React.Component {
       visible_col_keys,
       page_size,
       current_page,
+      loading,
     } = this.state;
 
     const col_configs_with_defaults = get_col_configs_with_defaults(
@@ -323,23 +355,16 @@ export class DisplayTable extends React.Component {
 
     const number_of_pages = paginated_data.length;
 
-    const change_page_size = (new_page_size) => {
-      this.setState({ page_size: new_page_size, current_page: 0 });
-    };
-
-    const change_page = (page) => {
-      this.setState({ current_page: page });
-      this.first_data_ref.current.focus();
-    };
-
-    const page_selector = !disable_pagination && show_pagination_controls && (
-      <PageSelector
-        num_pages={number_of_pages}
-        current_page={current_page}
-        change_page={change_page}
-        num_col={_.size(visible_ordered_col_keys)}
-      />
-    );
+    const page_selector = !disable_pagination &&
+      show_pagination_controls &&
+      !loading && (
+        <PageSelector
+          num_pages={number_of_pages}
+          current_page={current_page}
+          change_page={this.change_page}
+          num_col={_.size(visible_ordered_col_keys)}
+        />
+      );
 
     return (
       <div
@@ -378,7 +403,7 @@ export class DisplayTable extends React.Component {
                       {!disable_pagination && show_pagination_controls && (
                         <SelectPageSize
                           selected={page_size}
-                          on_select={change_page_size}
+                          on_select={this.change_page_size}
                           page_size_increment={page_size_increment}
                           num_items={_.size(sorted_filtered_data)}
                         />
@@ -465,93 +490,112 @@ export class DisplayTable extends React.Component {
             )}
             {page_selector}
           </thead>
-          {_.isEmpty(visible_ordered_col_keys) ? (
-            <NoDataMessage />
-          ) : (
+          {loading && (
             <tbody>
-              {_.map(paginated_data[current_page], (row, i) => (
-                <tr key={i}>
-                  {_.map(visible_ordered_col_keys, (col_key, idx) => (
-                    <td
-                      style={{
-                        fontSize: "14px",
-                        textAlign: determine_text_align(row, col_key),
-                      }}
-                      key={col_key}
-                      tabIndex={-1}
-                      ref={idx === 0 && i === 0 ? this.first_data_ref : null}
-                    >
-                      {col_configs_with_defaults[col_key].formatter ? (
-                        _.isString(
-                          col_configs_with_defaults[col_key].formatter
-                        ) ? (
-                          <Format
-                            type={col_configs_with_defaults[col_key].formatter}
-                            content={row[col_key]}
-                          />
-                        ) : (
-                          col_configs_with_defaults[col_key].formatter(
-                            row[col_key]
-                          )
-                        )
-                      ) : (
-                        row[col_key]
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-              {is_total_exist && (
-                <tr key="total_row" className="total-row">
-                  <td className="total_color">{text_maker("total")}</td>
-                  {_.chain(visible_ordered_col_keys)
-                    .tail()
-                    .map((col_key) => (
-                      <td
-                        className="total_color"
-                        style={{
-                          textAlign: determine_text_align(total_row, col_key),
-                        }}
-                        key={col_key}
-                      >
-                        {(() => {
-                          const has_total_row = total_row[col_key];
-                          if (has_total_row) {
-                            const has_formatter =
-                              col_configs_with_defaults[col_key].formatter;
-                            if (has_formatter) {
-                              const is_formatter_string = _.isString(
-                                col_configs_with_defaults[col_key].formatter
-                              );
-                              if (is_formatter_string) {
-                                return (
-                                  <Format
-                                    type={
-                                      col_configs_with_defaults[col_key]
-                                        .formatter
-                                    }
-                                    content={total_row[col_key]}
-                                  />
-                                );
-                              } else {
-                                return col_configs_with_defaults[
-                                  col_key
-                                ].formatter(total_row[col_key]);
-                              }
-                            } else {
-                              return total_row[col_key];
-                            }
-                          } else {
-                            return "";
-                          }
-                        })()}
-                      </td>
-                    ))
-                    .value()}
-                </tr>
-              )}
+              <tr>
+                <td
+                  style={{
+                    color: "white",
+                    position: "relative",
+                    height: "100px",
+                  }}
+                  colSpan={_.size(visible_ordered_col_keys)}
+                >
+                  <SpinnerWrapper ref="spinner" config_name="tabbed_content" />
+                </td>
+              </tr>
             </tbody>
           )}
+          {!loading &&
+            (_.isEmpty(visible_ordered_col_keys) ? (
+              <NoDataMessage />
+            ) : (
+              <tbody>
+                {_.map(paginated_data[current_page], (row, i) => (
+                  <tr key={i}>
+                    {_.map(visible_ordered_col_keys, (col_key, idx) => (
+                      <td
+                        style={{
+                          fontSize: "14px",
+                          textAlign: determine_text_align(row, col_key),
+                        }}
+                        key={col_key}
+                        tabIndex={-1}
+                        ref={idx === 0 && i === 0 ? this.first_data_ref : null}
+                      >
+                        {col_configs_with_defaults[col_key].formatter ? (
+                          _.isString(
+                            col_configs_with_defaults[col_key].formatter
+                          ) ? (
+                            <Format
+                              type={
+                                col_configs_with_defaults[col_key].formatter
+                              }
+                              content={row[col_key]}
+                            />
+                          ) : (
+                            col_configs_with_defaults[col_key].formatter(
+                              row[col_key]
+                            )
+                          )
+                        ) : (
+                          row[col_key]
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+                {is_total_exist && (
+                  <tr key="total_row" className="total-row">
+                    <td className="total_color">{text_maker("total")}</td>
+                    {_.chain(visible_ordered_col_keys)
+                      .tail()
+                      .map((col_key) => (
+                        <td
+                          className="total_color"
+                          style={{
+                            textAlign: determine_text_align(total_row, col_key),
+                          }}
+                          key={col_key}
+                        >
+                          {(() => {
+                            const has_total_row = total_row[col_key];
+                            if (has_total_row) {
+                              const has_formatter =
+                                col_configs_with_defaults[col_key].formatter;
+                              if (has_formatter) {
+                                const is_formatter_string = _.isString(
+                                  col_configs_with_defaults[col_key].formatter
+                                );
+                                if (is_formatter_string) {
+                                  return (
+                                    <Format
+                                      type={
+                                        col_configs_with_defaults[col_key]
+                                          .formatter
+                                      }
+                                      content={total_row[col_key]}
+                                    />
+                                  );
+                                } else {
+                                  return col_configs_with_defaults[
+                                    col_key
+                                  ].formatter(total_row[col_key]);
+                                }
+                              } else {
+                                return total_row[col_key];
+                              }
+                            } else {
+                              return "";
+                            }
+                          })()}
+                        </td>
+                      ))
+                      .value()}
+                  </tr>
+                )}
+              </tbody>
+            ))}
           <tfoot>{page_selector}</tfoot>
         </table>
 
