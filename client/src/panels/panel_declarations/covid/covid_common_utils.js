@@ -1,9 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import { lang } from "src/core/injected_build_constants.js";
+import {
+  util_components,
+  businessConstants,
+} from "src/panels/panel_declarations/shared.js";
 
-import { util_components, businessConstants } from "../shared.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { ToggleVoteStatProvider } from "./covid_common_components.js";
 

@@ -1,13 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { COVID_FUNDING_FEATURE_FLAG } from "src/models/covid/covid_config.js";
-import { gov_covid_summary_query } from "src/models/covid/queries.js";
-
-import { lang } from "src/core/injected_build_constants.js";
-
-import { get_client } from "src/graphql_utils/graphql_utils.js";
-
 import {
   InfographicPanel,
   declare_panel,
@@ -16,7 +9,14 @@ import {
   ensure_loaded,
   formats,
   WrappedNivoPie,
-} from "../shared.js";
+} from "src/panels/panel_declarations/shared.js";
+
+import { COVID_FUNDING_FEATURE_FLAG } from "src/models/covid/covid_config.js";
+import { gov_covid_summary_query } from "src/models/covid/queries.js";
+
+import { lang } from "src/core/injected_build_constants.js";
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import {
   AboveTabFootnoteList,
