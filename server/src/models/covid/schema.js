@@ -40,18 +40,12 @@ const schema = `
   type CovidMeasure {
     id: String
     name: String
-    covid_funding: [CovidFunding]
 
     has_covid_data: HasCovidData
     
     covid_estimates: [CovidEstimates]
     covid_expenditures: [CovidExpenditures]
     covid_commitments: [CovidCommitments]
-  }
-  type CovidFunding {
-    id: String
-    fiscal_year: String
-    funding: Float
   }
 
   type HasCovidData {
@@ -84,8 +78,6 @@ const schema = `
 
     top_spending_orgs(top_x: Int): [Org]
     top_spending_measures(top_x: Int): [CovidMeasure]
-
-    covid_funding: [CovidFunding]
 
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]

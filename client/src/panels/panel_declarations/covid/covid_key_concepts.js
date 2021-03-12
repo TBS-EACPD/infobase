@@ -7,8 +7,6 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import { COVID_FUNDING_FEATURE_FLAG } from "src/models/covid/covid_config.js";
-
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_key_concepts.yaml";
@@ -40,7 +38,6 @@ export const declare_covid_key_concepts_panel = () =>
               "missing_measures",
               "authorities_vs_funding",
               "other_expenditure_reporting",
-              COVID_FUNDING_FEATURE_FLAG && "funding_value",
             ])
               .compact()
               .map((key) => [

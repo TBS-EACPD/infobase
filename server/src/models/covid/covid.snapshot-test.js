@@ -6,10 +6,6 @@ query ($lang: String = "en") {
     covid_measures {
       id
       name
-      covid_funding {
-        fiscal_year
-        funding
-      }
 
       has_covid_data {
         has_estimates
@@ -60,10 +56,6 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
     covid_measure(covid_measure_id: $covid_measure_id) {
       id
       name
-      covid_funding {
-        fiscal_year
-        funding
-      }
 
       has_covid_data {
         has_estimates
@@ -79,11 +71,6 @@ query ($lang: String = "en", $top_x: Int = 1) {
   root(lang: $lang) {
     gov {
       covid_summary {
-        covid_funding {
-          fiscal_year
-          funding
-        }
-
         top_spending_orgs {
           org_id
           name
@@ -159,10 +146,6 @@ query ($lang: String = "en") {
       covid_measures {
         id
         name
-        covid_funding {
-          fiscal_year
-          funding
-        }
 
         has_covid_data {
           has_estimates

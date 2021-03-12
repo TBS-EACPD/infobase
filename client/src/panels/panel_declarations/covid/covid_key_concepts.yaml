@@ -30,23 +30,6 @@ covid_questions_financial_a:
       est un élément essentiel de la réponse du gouvernement à la COVID-19.
       * COVID_TEXT_TODO
 
-covid_questions_funding_value_q:
-  en: What are "funding" amounts? Where do they come from?
-  fr: COVID_TEXT_TODO
-covid_questions_funding_value_a:
-  transform: [markdown]
-  en: |
-    Funding refers to the cash value of a COVID-19 measure in the identified fiscal year, as determined by the Department of Finance and the Treasury Board Secretariat.
-    These cash values are based in the {{ext_link "Fall Economic Statement 2020 (FES)" "https://www.budget.gc.ca/fes-eea/2020/home-accueil-en.html"}}, which includes the annual accrual
-    value of each measure. GC InfoBase presents these values on a cash basis rather than an accrual basis to align with cash-based expenditure values and the cash-based spending
-    authorities presented in the Estimates.  
-
-    Cases where the cash value here is higher than the accrual value provided in the FES are due to updates that have occurred since the publication of the FES.  
-
-    Expenditures may be higher than funding for a given measure due to transfers between organizations and/or the use of existing resources by one or more organizations to support a measure.
-    There may also be measures without funding amounts, which represent measures that have been identified in the Estimates that were not included in the FES.
-  fr: COVID_TEXT_TODO
-
 covid_questions_what_is_new_q:
   en: What is new about the recent data presented on GC InfoBase?
   fr: COVID_TEXT_TODO 

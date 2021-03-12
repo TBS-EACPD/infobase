@@ -44,10 +44,6 @@ export default async function ({ models }) {
     get_standard_csv_file_rows("covid_commitments.csv"),
     (row) => ({ ...row, commitment: +row.commitment })
   );
-  const covid_funding_rows = _.map(
-    get_standard_csv_file_rows("covid_funding.csv"),
-    (row) => ({ ...row, funding: +row.funding })
-  );
 
   const covid_measure_records = _.map(
     get_standard_csv_file_rows("covid_measures.csv"),
@@ -60,7 +56,6 @@ export default async function ({ models }) {
         covid_estimates: _.filter(covid_estimates_rows, filter_by_row_id),
         covid_expenditures: _.filter(covid_expenditures_rows, filter_by_row_id),
         covid_commitments: _.filter(covid_commitments_rows, filter_by_row_id),
-        covid_funding: _.filter(covid_funding_rows, filter_by_row_id),
       });
     }
   );
@@ -173,17 +168,6 @@ export default async function ({ models }) {
           commitment: _.reduce(
             year_rows,
             (memo, { commitment }) => memo + commitment,
-            0
-          ),
-        }))
-        .value(),
-      covid_funding: _.chain(covid_funding_rows)
-        .groupBy("fiscal_year")
-        .map((year_rows, fiscal_year) => ({
-          fiscal_year,
-          funding: _.reduce(
-            year_rows,
-            (memo, { funding }) => memo + funding,
             0
           ),
         }))
