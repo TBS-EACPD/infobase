@@ -84,3 +84,11 @@ CustomUtils.args = {
   column_configs: common_column_configs,
   util_components: custom_utils,
 };
+
+export const Pagination = Template.bind({});
+Pagination.args = {
+  data: common_data,
+  column_configs: common_column_configs,
+  page_size_increment: 2,
+  page_size_num_options_max: 2,
+};
