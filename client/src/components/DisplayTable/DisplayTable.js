@@ -181,6 +181,7 @@ export class DisplayTable extends React.Component {
       util_components,
       show_pagination_controls,
       disable_pagination,
+      page_size_num_options_max,
     } = this.props;
     const {
       sort_by,
@@ -406,6 +407,7 @@ export class DisplayTable extends React.Component {
                           on_select={this.change_page_size}
                           page_size_increment={page_size_increment}
                           num_items={_.size(sorted_filtered_data)}
+                          num_options_max={page_size_num_options_max}
                         />
                       )}
                     </div>
@@ -613,6 +615,7 @@ export class DisplayTable extends React.Component {
 DisplayTable.defaultProps = {
   page_size_increment: 100,
   show_pagination_controls: true,
+  page_size_num_options_max: 5,
 };
 
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils

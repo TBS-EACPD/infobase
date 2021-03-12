@@ -163,11 +163,11 @@ export const SelectPageSize = ({
   on_select,
   page_size_increment,
   num_items,
-  num_max_options,
+  num_options_max,
 }) => {
   const num_options =
-    _.ceil(num_items / page_size_increment) > num_max_options
-      ? num_max_options
+    _.ceil(num_items / page_size_increment) > num_options_max
+      ? num_options_max
       : _.ceil(num_items / page_size_increment);
 
   const options = _.chain(num_options + 1)
@@ -211,8 +211,4 @@ export const SelectPageSize = ({
       dropdown_content={dropdown_content}
     />
   );
-};
-
-SelectPageSize.defaultProps = {
-  num_max_options: 5,
 };
