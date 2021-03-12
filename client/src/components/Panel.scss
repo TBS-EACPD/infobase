@@ -33,13 +33,14 @@
     opacity: 0.8;
   }
   
-  /* 
-    Fixes Safari-specific bug, does nothing on other browsers. 
-    Only needed on larger screens. 
-  */
+
   .panel-body {
     padding: 10px;
 
+    /* 
+      Fixes Safari-specific bug, does nothing on other browsers. 
+      Only needed on larger screens. 
+    */
     @media (min-width:$minLargeDevice){
       content: none!important;
     }
