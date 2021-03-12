@@ -14,45 +14,57 @@ import {
 } from "../model_utils.js";
 
 const covid_estimates_fields = {
-  fiscal_year: number_type,
   est_doc: str_type,
   vote: number_type,
   stat: number_type,
 };
 const covid_expenditures_fields = {
-  fiscal_year: number_type,
   vote: number_type,
   stat: number_type,
 };
 const count_fields = {
-  fiscal_year: number_type,
   with_authorities: number_type,
   with_spending: number_type,
 };
 
 export default function (model_singleton) {
-  const CovidEstimatesSchema = mongoose.Schema({
-    org_id: parent_fkey_type(),
-
-    ...covid_estimates_fields,
-  });
-  const CovidExpenditureSchema = mongoose.Schema({
-    org_id: parent_fkey_type(),
-
-    ...covid_expenditures_fields,
-  });
-
   const CovidMeasureSchema = mongoose.Schema({
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
+  });
+
+  const HasCovidDataSchema = mongoose.Schema({
+    subject_id: pkey_type(),
+    fiscal_year: number_type,
+
+    has_estimates: { type: Boolean },
+    has_expenditures: { type: Boolean },
+  });
+
+  const CovidDataSchema = mongoose.Schema({
+    subject_id: pkey_type(),
+    fiscal_year: number_type,
 
     related_org_ids: [parent_fkey_type()],
-    covid_estimates: [CovidEstimatesSchema],
-    covid_expenditures: [CovidExpenditureSchema],
+    covid_estimates: [
+      {
+        org_id: parent_fkey_type(),
+
+        ...covid_estimates_fields,
+      },
+    ],
+    covid_expenditures: [
+      {
+        org_id: parent_fkey_type(),
+
+        ...covid_expenditures_fields,
+      },
+    ],
   });
 
   const common_summary_fields = {
-    org_id: pkey_type(),
+    org_id: pkey_type(), // small quirk, used for gov summary and gov summary loader as well, with an org_id of "gov"
+    fiscal_year: number_type,
 
     covid_estimates: [covid_estimates_fields],
     covid_expenditures: [covid_expenditures_fields],
@@ -64,13 +76,11 @@ export default function (model_singleton) {
     ...common_summary_fields,
     spending_sorted_org_ids: [
       {
-        fiscal_year: number_type,
         org_ids: [parent_fkey_type()],
       },
     ],
     spending_sorted_measure_ids: [
       {
-        fiscal_year: number_type,
         covid_measure_ids: [parent_fkey_type()],
       },
     ],
@@ -79,29 +89,21 @@ export default function (model_singleton) {
     org_counts: [count_fields],
   });
 
-  const HasCovidDataSchema = mongoose.Schema({
-    subject_id: pkey_type(),
-    has_estimates: { type: Boolean },
-    has_expenditures: { type: Boolean },
-  });
-
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
-  model_singleton.define_model("CovidOrgSummary", CovidOrgSummarySchema);
-  model_singleton.define_model("CovidGovSummary", CovidGovSummarySchema);
   model_singleton.define_model("HasCovidData", HasCovidDataSchema);
+  model_singleton.define_model("CovidData", CovidDataSchema);
+  model_singleton.define_model("CovidGovSummary", CovidGovSummarySchema);
+  model_singleton.define_model("CovidOrgSummary", CovidOrgSummarySchema);
 
   const {
-    HasCovidData,
     CovidMeasure,
-    CovidOrgSummary,
+    HasCovidData,
+    CovidData,
     CovidGovSummary,
+    CovidOrgSummary,
   } = model_singleton.models;
 
   const loaders = {
-    has_covid_data_loader: create_resource_by_id_attr_dataloader(
-      HasCovidData,
-      "subject_id"
-    ),
     covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
       "covid_measure_id"
@@ -110,12 +112,20 @@ export default function (model_singleton) {
       CovidMeasure,
       "related_org_ids"
     ),
-    covid_org_summary_loader: create_resource_by_foreignkey_attr_dataloader(
-      CovidOrgSummary,
-      "org_id"
+    has_covid_data_loader: create_resource_by_id_attr_dataloader(
+      HasCovidData,
+      "subject_id"
+    ),
+    covid_data_loader: create_resource_by_id_attr_dataloader(
+      CovidData,
+      "subject_id"
     ),
     covid_gov_summary_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidGovSummary,
+      "org_id"
+    ),
+    covid_org_summary_loader: create_resource_by_foreignkey_attr_dataloader(
+      CovidOrgSummary,
       "org_id"
     ),
   };

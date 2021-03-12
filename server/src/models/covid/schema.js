@@ -4,14 +4,14 @@ import { bilingual_field } from "../schema_utils";
 
 const estimates_fields = `
   id: String
-  fiscal_year: String
+
   est_doc: String
   vote: Float
   stat: Float
 `;
 const expenditures_fields = `
   id: String
-  fiscal_year: String
+
   vote: Float
   stat: Float
 `;
@@ -23,7 +23,7 @@ const schema = `
   }
 
   extend type Gov {
-    covid_summary: CovidGovSummary
+    covid_summary: [CovidGovSummary]
   }
 
   extend type Org {
@@ -34,19 +34,26 @@ const schema = `
 
   type CovidMeasure {
     id: String
+
     name: String
 
-    has_covid_data: HasCovidData
-    
-    covid_estimates: [CovidEstimates]
-    covid_expenditures: [CovidExpenditures]
+    has_covid_data: [HasCovidData]
+    covid_data: [CovidData]
   }
 
   type HasCovidData {
+    fiscal_year: String
+
     has_estimates: Boolean
     has_expenditures: Boolean
   }
 
+  type CovidData {
+    fiscal_year: String
+
+    covid_estimates: [CovidEstimates]
+    covid_expenditures: [CovidExpenditures]
+  }
   type CovidEstimates {
     org_id: String
     org: Org
@@ -62,6 +69,7 @@ const schema = `
 
   type CovidGovSummary {
     id: String
+    fiscal_year: String
 
     top_spending_orgs(top_x: Int): [Org]
     top_spending_measures(top_x: Int): [CovidMeasure]
@@ -72,22 +80,24 @@ const schema = `
     measure_counts: [CovidSummaryCounts],
     org_counts: [CovidSummaryCounts],
   }
+  type CovidSummaryCounts {
+    with_authorities: Int
+    with_spending: Int
+  }
+
   type CovidOrgSummary {
     id: String
+    fiscal_year: String
 
     covid_estimates: [CovidEstimatesSummary]
     covid_expenditures: [CovidExpendituresSummary]
   }
+
   type CovidEstimatesSummary {
     ${estimates_fields}
   }
   type CovidExpendituresSummary {
     ${expenditures_fields}
-  }
-  type CovidSummaryCounts {
-    fiscal_year: String
-    with_authorities: Int
-    with_spending: Int
   }
 `;
 
