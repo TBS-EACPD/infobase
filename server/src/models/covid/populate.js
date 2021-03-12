@@ -6,8 +6,8 @@ export default async function ({ models }) {
   const {
     HasCovidData,
     CovidMeasure,
-    CovidOrgSummary,
     CovidGovSummary,
+    CovidOrgSummary,
   } = models;
 
   const covid_estimates_rows = _.map(
@@ -41,205 +41,169 @@ export default async function ({ models }) {
     .map()
     .value();
 
+  const all_rows_with_org_data = [
+    ...covid_estimates_rows,
+    ...covid_expenditures_rows,
+  ];
+  const covid_years = _.chain(covid_estimates_rows)
+    .map("fiscal_year")
+    .uniq()
+    .value();
+
   const covid_measure_records = _.map(
     get_standard_csv_file_rows("covid_measures.csv"),
     (row) => {
-      const filter_by_row_id = ({ covid_measure_id }) =>
-        covid_measure_id === row.covid_measure_id;
+      const covid_data = _.map(covid_years, (fiscal_year) => ({
+        fiscal_year,
+        covid_estimates: _.filter(covid_estimates_rows, {
+          covid_measure_id: row.covid_measure_id,
+          fiscal_year,
+        }),
+        covid_expenditures: _.filter(covid_expenditures_rows, {
+          covid_measure_id: row.covid_measure_id,
+          fiscal_year,
+        }),
+      }));
 
-      const covid_estimates = _.filter(covid_estimates_rows, filter_by_row_id);
-      const covid_expenditures = _.filter(
-        covid_expenditures_rows,
-        filter_by_row_id
-      );
-
-      const related_org_ids = _.chain([
-        ...covid_estimates,
-        ...covid_expenditures,
-      ])
-        .map("org_id")
+      const related_org_ids = _.chain(covid_data)
+        .flatMap(({ covid_estimates, covid_expenditures }) =>
+          _.map([...covid_estimates, ...covid_expenditures], "org_id")
+        )
         .uniq()
         .value();
 
       return new CovidMeasure({
         ...row,
         related_org_ids,
-        covid_estimates,
-        covid_expenditures,
+        covid_data,
       });
     }
   );
 
-  const all_rows_with_org_data = [
-    ...covid_estimates_rows,
-    ...covid_expenditures_rows,
-  ];
   const covid_org_summary_records = _.chain(all_rows_with_org_data)
     .map("org_id")
     .uniq()
-    .map((org_id) => ({
-      org_id,
-      covid_estimates: _.chain(covid_estimates_rows)
-        .filter(({ org_id: row_org_id }) => row_org_id === org_id)
-        .groupBy("fiscal_year")
-        .flatMap((year_rows, fiscal_year) =>
-          _.chain(year_rows)
-            .groupBy("est_doc")
-            .flatMap((doc_rows, est_doc) => ({
-              fiscal_year,
-              est_doc,
-              ..._.reduce(
-                doc_rows,
-                (memo, row) => ({
-                  vote: memo.vote + row.vote,
-                  stat: memo.stat + row.stat,
-                }),
-                { vote: 0, stat: 0 }
-              ),
-            }))
-            .value()
-        )
-        .value(),
-      covid_expenditures: _.chain(covid_expenditures_rows)
-        .filter(({ org_id: row_org_id }) => row_org_id === org_id)
-        .groupBy("fiscal_year")
-        .flatMap((year_rows, fiscal_year) => ({
-          fiscal_year,
-          ..._.reduce(
-            year_rows,
+    .flatMap((org_id) =>
+      _.map(covid_years, (fiscal_year) => ({
+        org_id,
+        fiscal_year,
+        covid_estimates: _.chain(covid_estimates_rows)
+          .filter({ org_id, fiscal_year })
+          .groupBy("est_doc")
+          .flatMap((doc_rows, est_doc) => ({
+            est_doc,
+            ..._.reduce(
+              doc_rows,
+              (memo, row) => ({
+                vote: memo.vote + row.vote,
+                stat: memo.stat + row.stat,
+              }),
+              { vote: 0, stat: 0 }
+            ),
+          }))
+          .value(),
+        covid_expenditures: _.chain(covid_expenditures_rows)
+          .filter({ org_id, fiscal_year })
+          .reduce(
             (memo, row) => ({
               vote: memo.vote + row.vote,
               stat: memo.stat + row.stat,
             }),
             { vote: 0, stat: 0 }
-          ),
-        }))
-        .value(),
-    }))
+          )
+          .value(),
+      }))
+    )
     .value();
 
-  const covid_gov_summary_record = [
-    {
-      org_id: "gov",
-      covid_estimates: _.chain(covid_org_summary_records)
-        .flatMap("covid_estimates")
-        .groupBy("fiscal_year")
-        .flatMap((year_rows, fiscal_year) =>
-          _.chain(year_rows)
-            .groupBy("est_doc")
-            .flatMap((doc_rows, est_doc) => ({
-              fiscal_year,
-              est_doc,
-              ..._.reduce(
-                doc_rows,
-                (memo, row) => ({
-                  vote: memo.vote + row.vote,
-                  stat: memo.stat + row.stat,
-                }),
-                { vote: 0, stat: 0 }
-              ),
-            }))
-            .value()
-        )
-        .value(),
-      covid_expenditures: _.chain(covid_org_summary_records)
-        .flatMap("covid_expenditures")
-        .groupBy("fiscal_year")
-        .flatMap((year_rows, fiscal_year) => ({
-          fiscal_year,
-          ..._.reduce(
-            year_rows,
-            (memo, row) => ({
-              vote: memo.vote + row.vote,
-              stat: memo.stat + row.stat,
-            }),
-            { vote: 0, stat: 0 }
-          ),
-        }))
-        .value(),
-      spending_sorted_org_ids: _.chain(covid_expenditures_rows)
-        .groupBy("fiscal_year")
-        .map((year_rows, fiscal_year) => ({
-          fiscal_year,
-          org_ids: _.chain(year_rows)
-            .groupBy("org_id")
-            .flatMap((org_rows, org_id) => ({
-              org_id,
-              total: _.reduce(
-                org_rows,
-                (memo, { vote, stat }) => memo + vote + stat,
-                0
-              ),
-            }))
-            .sortBy("total")
-            .reverse()
-            .map("org_id")
-            .value(),
-        }))
-        .value(),
-      spending_sorted_measure_ids: _.chain(covid_expenditures_rows)
-        .groupBy("fiscal_year")
-        .map((year_rows, fiscal_year) => ({
-          fiscal_year,
-          covid_measure_ids: _.chain(year_rows)
-            .groupBy("covid_measure_id")
-            .flatMap((measure_rows, covid_measure_id) => ({
-              covid_measure_id,
-              total: _.reduce(
-                measure_rows,
-                (memo, { vote, stat }) => memo + vote + stat,
-                0
-              ),
-            }))
-            .sortBy("total")
-            .reverse()
-            .map("covid_measure_id")
-            .value(),
-        }))
-        .value(),
-      measure_counts: _.chain([
-        ...covid_estimates_rows,
-        ...covid_expenditures_rows,
-      ])
-        .map("fiscal_year")
+  const covid_gov_summary_record = _.map(covid_years, (fiscal_year) => ({
+    org_id: "gov",
+    covid_estimates: _.chain(covid_org_summary_records)
+      .filter({ fiscal_year })
+      .flatMap("covid_estimates")
+      .groupBy("est_doc")
+      .flatMap((doc_rows, est_doc) => ({
+        est_doc,
+        ..._.reduce(
+          doc_rows,
+          (memo, row) => ({
+            vote: memo.vote + row.vote,
+            stat: memo.stat + row.stat,
+          }),
+          { vote: 0, stat: 0 }
+        ),
+      }))
+      .value(),
+    covid_expenditures: _.chain(covid_org_summary_records)
+      .filter({ fiscal_year })
+      .flatMap("covid_expenditures")
+      .reduce(
+        (memo, row) => ({
+          vote: memo.vote + row.vote,
+          stat: memo.stat + row.stat,
+        }),
+        { vote: 0, stat: 0 }
+      )
+      .value(),
+    spending_sorted_org_ids: _.chain(covid_expenditures_rows)
+      .filter({ fiscal_year })
+      .groupBy("org_id")
+      .flatMap((org_rows, org_id) => ({
+        org_id,
+        total: _.reduce(
+          org_rows,
+          (memo, { vote, stat }) => memo + vote + stat,
+          0
+        ),
+      }))
+      .sortBy("total")
+      .reverse()
+      .map("org_id")
+      .value(),
+    spending_sorted_measure_ids: _.chain(covid_expenditures_rows)
+      .filter({ fiscal_year })
+      .groupBy("covid_measure_id")
+      .flatMap((measure_rows, covid_measure_id) => ({
+        covid_measure_id,
+        total: _.reduce(
+          measure_rows,
+          (memo, { vote, stat }) => memo + vote + stat,
+          0
+        ),
+      }))
+      .sortBy("total")
+      .reverse()
+      .map("covid_measure_id")
+      .value(),
+    measure_counts: {
+      with_authorities: _.chain(covid_estimates_rows)
+        .filter({ fiscal_year })
+        .map("covid_measure_id")
         .uniq()
-        .map((fiscal_year) => ({
-          fiscal_year,
-          with_authorities: _.chain(covid_estimates_rows)
-            .filter({ fiscal_year })
-            .map("covid_measure_id")
-            .uniq()
-            .size()
-            .value(),
-          with_spending: _.chain(covid_expenditures_rows)
-            .filter({ fiscal_year })
-            .map("covid_measure_id")
-            .uniq()
-            .size()
-            .value(),
-        }))
+        .size()
         .value(),
-      org_counts: _.chain([...covid_estimates_rows, ...covid_expenditures_rows])
-        .map("fiscal_year")
+      with_spending: _.chain(covid_expenditures_rows)
+        .filter({ fiscal_year })
+        .map("covid_measure_id")
         .uniq()
-        .map((fiscal_year) => ({
-          fiscal_year,
-          with_authorities: _.chain(covid_estimates_rows)
-            .filter({ fiscal_year })
-            .map("org_id")
-            .uniq()
-            .size()
-            .value(),
-          with_spending: _.chain(covid_expenditures_rows)
-            .filter({ fiscal_year })
-            .map("org_id")
-            .uniq()
-            .size()
-            .value(),
-        }))
+        .size()
         .value(),
     },
-  ];
+    org_counts: {
+      with_authorities: _.chain(covid_estimates_rows)
+        .filter({ fiscal_year })
+        .map("org_id")
+        .uniq()
+        .size()
+        .value(),
+      with_spending: _.chain(covid_expenditures_rows)
+        .filter({ fiscal_year })
+        .map("org_id")
+        .uniq()
+        .size()
+        .value(),
+    },
+  }));
 
   const has_covid_data_records = _.flatMap(
     ["org_id", "covid_measure_id"],
@@ -247,27 +211,33 @@ export default async function ({ models }) {
       _.chain(all_rows_with_org_data)
         .map(subject_id_key)
         .uniq()
-        .map((subject_id) => {
-          const has_data_type = _.chain({
-            estimates: covid_estimates_rows,
-            expenditures: covid_expenditures_rows,
-          })
-            .map((rows, data_type) => [
-              `has_${data_type}`,
-              _.some(rows, (row) => row[subject_id_key] === subject_id),
-            ])
-            .fromPairs()
-            .value();
+        .flatMap((subject_id) =>
+          _.map(covid_years, (fiscal_year) => {
+            const has_data_type = _.chain({
+              estimates: covid_estimates_rows,
+              expenditures: covid_expenditures_rows,
+            })
+              .map((rows, data_type) => [
+                `has_${data_type}`,
+                _.some(rows, { fiscal_year, [subject_id_key]: subject_id }),
+              ])
+              .fromPairs()
+              .value();
 
-          return new HasCovidData({ subject_id, ...has_data_type });
-        })
+            return new HasCovidData({
+              subject_id,
+              fiscal_year,
+              ...has_data_type,
+            });
+          })
+        )
         .value()
   );
 
   return await Promise.all([
-    CovidMeasure.insertMany(covid_measure_records),
-    CovidOrgSummary.insertMany(covid_org_summary_records),
-    CovidGovSummary.insertMany(covid_gov_summary_record),
     HasCovidData.insertMany(has_covid_data_records),
+    CovidMeasure.insertMany(covid_measure_records),
+    CovidGovSummary.insertMany(covid_gov_summary_record),
+    CovidOrgSummary.insertMany(covid_org_summary_records),
   ]);
 }

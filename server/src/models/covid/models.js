@@ -28,11 +28,6 @@ const count_fields = {
 };
 
 export default function (model_singleton) {
-  const CovidMeasureSchema = mongoose.Schema({
-    covid_measure_id: pkey_type(),
-    ...bilingual("name", { ...str_type, required: true }),
-  });
-
   const HasCovidDataSchema = mongoose.Schema({
     subject_id: pkey_type(),
     fiscal_year: number_type,
@@ -45,7 +40,6 @@ export default function (model_singleton) {
     subject_id: pkey_type(),
     fiscal_year: number_type,
 
-    related_org_ids: [parent_fkey_type()],
     covid_estimates: [
       {
         org_id: parent_fkey_type(),
@@ -61,6 +55,13 @@ export default function (model_singleton) {
       },
     ],
   });
+  const CovidMeasureSchema = mongoose.Schema({
+    covid_measure_id: pkey_type(),
+    ...bilingual("name", { ...str_type, required: true }),
+
+    related_org_ids: [parent_fkey_type()],
+    covid_data: [CovidDataSchema],
+  });
 
   const common_summary_fields = {
     org_id: pkey_type(), // small quirk, used for gov summary and gov summary loader as well, with an org_id of "gov"
@@ -74,31 +75,22 @@ export default function (model_singleton) {
   });
   const CovidGovSummarySchema = mongoose.Schema({
     ...common_summary_fields,
-    spending_sorted_org_ids: [
-      {
-        org_ids: [parent_fkey_type()],
-      },
-    ],
-    spending_sorted_measure_ids: [
-      {
-        covid_measure_ids: [parent_fkey_type()],
-      },
-    ],
+
+    spending_sorted_org_ids: [parent_fkey_type()],
+    spending_sorted_measure_ids: [parent_fkey_type()],
 
     measure_counts: [count_fields],
     org_counts: [count_fields],
   });
 
-  model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
   model_singleton.define_model("HasCovidData", HasCovidDataSchema);
-  model_singleton.define_model("CovidData", CovidDataSchema);
+  model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
   model_singleton.define_model("CovidGovSummary", CovidGovSummarySchema);
   model_singleton.define_model("CovidOrgSummary", CovidOrgSummarySchema);
 
   const {
     CovidMeasure,
     HasCovidData,
-    CovidData,
     CovidGovSummary,
     CovidOrgSummary,
   } = model_singleton.models;
@@ -114,10 +106,6 @@ export default function (model_singleton) {
     ),
     has_covid_data_loader: create_resource_by_id_attr_dataloader(
       HasCovidData,
-      "subject_id"
-    ),
-    covid_data_loader: create_resource_by_id_attr_dataloader(
-      CovidData,
       "subject_id"
     ),
     covid_gov_summary_loader: create_resource_by_foreignkey_attr_dataloader(
