@@ -7,9 +7,10 @@ import {
 } from "../loader_utils.js";
 import {
   pkey_type,
+  parent_fkey_type,
+  fyear_type,
   number_type,
   str_type,
-  parent_fkey_type,
   bilingual,
 } from "../model_utils.js";
 
@@ -29,46 +30,46 @@ const count_fields = {
 
 export default function (model_singleton) {
   const HasCovidDataSchema = mongoose.Schema({
-    subject_id: pkey_type(),
-    fiscal_year: number_type,
+    subject_id: parent_fkey_type(),
+    fiscal_year: fyear_type(),
 
     has_estimates: { type: Boolean },
     has_expenditures: { type: Boolean },
   });
 
-  const CovidDataSchema = mongoose.Schema({
-    subject_id: pkey_type(),
-    fiscal_year: number_type,
-
-    covid_estimates: [
-      {
-        org_id: parent_fkey_type(),
-
-        ...covid_estimates_fields,
-      },
-    ],
-    covid_expenditures: [
-      {
-        org_id: parent_fkey_type(),
-
-        ...covid_expenditures_fields,
-      },
-    ],
-  });
   const CovidMeasureSchema = mongoose.Schema({
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
 
     related_org_ids: [parent_fkey_type()],
-    covid_data: [CovidDataSchema],
+    covid_data: [
+      {
+        fiscal_year: fyear_type(),
+
+        covid_estimates: [
+          {
+            org_id: parent_fkey_type(),
+
+            ...covid_estimates_fields,
+          },
+        ],
+        covid_expenditures: [
+          {
+            org_id: parent_fkey_type(),
+
+            ...covid_expenditures_fields,
+          },
+        ],
+      },
+    ],
   });
 
   const common_summary_fields = {
-    org_id: pkey_type(), // small quirk, used for gov summary and gov summary loader as well, with an org_id of "gov"
-    fiscal_year: number_type,
+    org_id: parent_fkey_type(), // small quirk, used for gov summary and gov summary loader as well, with an org_id of "gov"
+    fiscal_year: fyear_type(),
 
     covid_estimates: [covid_estimates_fields],
-    covid_expenditures: [covid_expenditures_fields],
+    covid_expenditures: covid_expenditures_fields,
   };
   const CovidOrgSummarySchema = mongoose.Schema({
     ...common_summary_fields,

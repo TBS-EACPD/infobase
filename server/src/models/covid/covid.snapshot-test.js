@@ -1,5 +1,46 @@
 const { execQuery } = global;
 
+const estimates_fields = `
+  est_doc
+  vote
+  stat
+`;
+const expenditures_fields = `
+  vote
+  stat
+`;
+const measure_covid_data = `
+  covid_data {
+    fiscal_year
+
+    covid_estimates {
+      org_id
+      org {
+        id
+        name
+      }
+  
+      ${estimates_fields}
+    }
+    covid_expenditures {
+      org_id
+      org {
+        id
+        name
+      }
+  
+      ${expenditures_fields}
+    }
+  }
+`;
+const has_covid_data = `
+  has_covid_data {
+    fiscal_year
+    has_estimates
+    has_expenditures
+  }
+`;
+
 const all_covid_measures_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -7,34 +48,9 @@ query ($lang: String = "en") {
       id
       name
 
-      has_covid_data {
-        has_estimates
-        has_expenditures
-      }
+      ${has_covid_data}
 
-      covid_estimates {
-        org_id
-        org {
-          id
-          name
-        }
-    
-        fiscal_year
-        est_doc
-        vote
-        stat
-      }
-      covid_expenditures {
-        org_id
-        org {
-          id
-          name
-        }
-    
-        fiscal_year
-        vote
-        stat
-      }
+      ${measure_covid_data}
     }
   }
 }`;
@@ -46,10 +62,7 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
       id
       name
 
-      has_covid_data {
-        has_estimates
-        has_expenditures
-      }
+      ${has_covid_data}
     }
   }
 }`;
@@ -59,6 +72,8 @@ query ($lang: String = "en", $top_x: Int = 1) {
   root(lang: $lang) {
     gov {
       covid_summary {
+        fiscal_year
+
         top_spending_orgs {
           org_id
           name
@@ -69,24 +84,17 @@ query ($lang: String = "en", $top_x: Int = 1) {
         }
 
         covid_estimates {
-          fiscal_year
-          est_doc
-          vote
-          stat
+          ${estimates_fields}
         }
         covid_expenditures {
-          fiscal_year
-          vote
-          stat
+          ${expenditures_fields}
         }
 
         measure_counts {
-          fiscal_year
           with_authorities
           with_spending
         }
         org_counts {
-          fiscal_year
           with_authorities
           with_spending
         }
@@ -103,16 +111,12 @@ query ($lang: String = "en") {
       name
 
       covid_summary {
+        fiscal_year
         covid_estimates {
-          fiscal_year
-          est_doc
-          vote
-          stat
+          ${estimates_fields}
         }
         covid_expenditures {
-          fiscal_year
-          vote
-          stat
+          ${expenditures_fields}
         }
       }
     }
@@ -127,34 +131,9 @@ query ($lang: String = "en") {
         id
         name
 
-        has_covid_data {
-          has_estimates
-          has_expenditures
-        }
+        ${has_covid_data}
 
-        covid_estimates {
-          org_id
-          org {
-            id
-            name
-          }
-      
-          fiscal_year
-          est_doc
-          vote
-          stat
-        }
-        covid_expenditures {
-          org_id
-          org {
-            id
-            name
-          }
-      
-          fiscal_year
-          vote
-          stat
-        }
+        ${measure_covid_data}
       }
     }
   }
@@ -164,22 +143,13 @@ const org_has_covid_data_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     has_data: org(org_id: "133") {
-      has_covid_data {
-        has_estimates
-        has_expenditures
-      }
+      ${has_covid_data}
     }
     does_not_have_data: org(org_id: "15") {
-      has_covid_data {
-        has_estimates
-        has_expenditures
-      }
+      ${has_covid_data}
     }
     only_has_estimates: org(org_id: "1") {
-      has_covid_data {
-        has_estimates
-        has_expenditures
-      }
+      ${has_covid_data}
     }
   }
 }`;

@@ -75,7 +75,7 @@ const schema = `
     top_spending_measures(top_x: Int): [CovidMeasure]
 
     covid_estimates: [CovidEstimatesSummary]
-    covid_expenditures: [CovidExpendituresSummary]
+    covid_expenditures: CovidExpendituresSummary
 
     measure_counts: [CovidSummaryCounts],
     org_counts: [CovidSummaryCounts],
@@ -90,7 +90,7 @@ const schema = `
     fiscal_year: String
 
     covid_estimates: [CovidEstimatesSummary]
-    covid_expenditures: [CovidExpendituresSummary]
+    covid_expenditures: CovidExpendituresSummary
   }
 
   type CovidEstimatesSummary {
@@ -113,11 +113,6 @@ export default function ({ models, loaders }) {
     covid_gov_summary_loader,
   } = loaders;
 
-  // TODO, IMPORTANT, models respect that the data exists by fiscal year, but the schema and resolvers do not yet
-  // (since we don't yet actually have multiple years of data and this is somewhat rushed). Lots of resolvers using
-  // _.first on the results of loaders which return an array of results with an entry pr year... All needs to be upgraded
-  // eventually
-
   const has_covid_data_resolver = (subject_id) =>
     has_covid_data_loader.load(subject_id).then(
       (has_covid_data) =>
@@ -134,28 +129,23 @@ export default function ({ models, loaders }) {
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
-      covid_summary: () => covid_gov_summary_loader.load("gov").then(_.first),
+      covid_summary: () => covid_gov_summary_loader.load("gov"),
     },
     CovidGovSummary: {
       top_spending_orgs: ({ spending_sorted_org_ids }, { top_x = 5 }) =>
         _.chain(spending_sorted_org_ids.toObject())
-          .first()
-          .get("org_ids")
           .take(top_x)
           .thru((ids) => org_id_loader.loadMany(ids))
           .value(),
       top_spending_measures: ({ spending_sorted_measure_ids }, { top_x = 5 }) =>
         _.chain(spending_sorted_measure_ids.toObject())
-          .first()
-          .get("covid_measure_ids")
           .take(top_x)
           .thru((ids) => covid_measure_loader.loadMany(ids))
           .value(),
     },
     Org: {
       has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),
-      covid_summary: ({ org_id }) =>
-        covid_org_summary_loader.load(org_id).then(_.first),
+      covid_summary: ({ org_id }) => covid_org_summary_loader.load(org_id),
       covid_measures: ({ org_id: queried_org_id }) =>
         covid_measures_by_related_org_ids_loader.load(queried_org_id),
     },
