@@ -19,6 +19,7 @@ query($lang: String! $id: String) {
   }
 }
 `;
+// eslint-disable no-console
 const _subject_has_services = {};
 export function api_load_subject_has_services(subject) {
   const level = subject && subject.level;
@@ -220,17 +221,39 @@ const extract_flat_data_from_hierarchical_response = (response) => {
   return { services, serviceStandards };
 };
 
+let _is_pre_fetched = false;
 const _subject_ids_with_loaded_services = {};
+const subject_is_loaded = ({ level, id }) =>
+  _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
+
+const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
+const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
+
+export function pre_fetch_services() {
+  const t0 = performance.now();
+  if (_is_pre_fetched || all_is_loaded()) {
+    return;
+  }
+  const client = get_client();
+  client.query({
+    query: all_services_query,
+    variables: {
+      lang: lang,
+      id: "dept",
+      _query_name: "services",
+    },
+  });
+  _is_pre_fetched = true;
+
+  const t1 = performance.now();
+  console.log(t1 - t0);
+}
+
 export function api_load_services(subject) {
+  const t0 = performance.now();
   const level = (subject && subject.level) || "gov";
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
-
-    const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
-    const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
-
     switch (level) {
       case "dept":
         return {
@@ -297,22 +320,15 @@ export function api_load_services(subject) {
         );
       }
 
-      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
-      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
-      _.setWith(
-        _subject_ids_with_loaded_services,
-        `${level}.${id}`,
-        true,
-        Object
-      );
-
       // side effect
       _.setWith(
         _subject_ids_with_loaded_services,
         `${level}.${id}`,
-        _.isEmpty(services),
+        !_.isEmpty(services),
         Object
       );
+      const t1 = performance.now();
+      console.log(t1 - t0);
 
       return Promise.resolve();
     })
