@@ -212,24 +212,24 @@ export default async function ({ models }) {
         .map(subject_id_key)
         .uniq()
         .flatMap((subject_id) =>
-          _.map(covid_years, (fiscal_year) => {
-            const has_data_type = _.chain({
-              estimates: covid_estimates_rows,
-              expenditures: covid_expenditures_rows,
-            })
-              .map((rows, data_type) => [
-                `has_${data_type}`,
-                _.some(rows, { fiscal_year, [subject_id_key]: subject_id }),
-              ])
-              .fromPairs()
-              .value();
-
-            return new HasCovidData({
-              subject_id,
-              fiscal_year,
-              ...has_data_type,
-            });
-          })
+          _.map(
+            covid_years,
+            (fiscal_year) =>
+              new HasCovidData({
+                subject_id,
+                fiscal_year,
+                ..._.chain({
+                  estimates: covid_estimates_rows,
+                  expenditures: covid_expenditures_rows,
+                })
+                  .map((rows, data_type) => [
+                    `has_${data_type}`,
+                    _.some(rows, { fiscal_year, [subject_id_key]: subject_id }),
+                  ])
+                  .fromPairs()
+                  .value(),
+              })
+          )
         )
         .value()
   );
