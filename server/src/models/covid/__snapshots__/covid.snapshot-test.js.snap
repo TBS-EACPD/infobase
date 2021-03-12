@@ -135,16 +135,6 @@ Object {
               "vote": 0,
             },
           ],
-          "covid_funding": Array [
-            Object {
-              "fiscal_year": "2020",
-              "funding": 1,
-            },
-            Object {
-              "fiscal_year": "2020",
-              "funding": 4,
-            },
-          ],
           "has_covid_data": Object {
             "has_commitments": true,
             "has_estimates": true,
@@ -283,16 +273,6 @@ Object {
               "vote": 7,
             },
           ],
-          "covid_funding": Array [
-            Object {
-              "fiscal_year": "2020",
-              "funding": 8,
-            },
-            Object {
-              "fiscal_year": "2021",
-              "funding": 8,
-            },
-          ],
           "has_covid_data": Object {
             "has_commitments": true,
             "has_estimates": true,
@@ -379,16 +359,6 @@ Object {
               "vote": 5,
             },
           ],
-          "covid_funding": Array [
-            Object {
-              "fiscal_year": "2020",
-              "funding": 3,
-            },
-            Object {
-              "fiscal_year": "2021",
-              "funding": 3,
-            },
-          ],
           "has_covid_data": Object {
             "has_commitments": true,
             "has_estimates": true,
@@ -467,16 +437,6 @@ Object {
               "fiscal_year": "2021",
               "stat": 999,
               "vote": 7,
-            },
-          ],
-          "covid_funding": Array [
-            Object {
-              "fiscal_year": "2020",
-              "funding": 16,
-            },
-            Object {
-              "fiscal_year": "2021",
-              "funding": 11,
             },
           ],
           "measure_counts": Array [
@@ -649,16 +609,6 @@ Object {
                 "vote": 3,
               },
             ],
-            "covid_funding": Array [
-              Object {
-                "fiscal_year": "2020",
-                "funding": 1,
-              },
-              Object {
-                "fiscal_year": "2020",
-                "funding": 4,
-              },
-            ],
             "has_covid_data": Object {
               "has_commitments": true,
               "has_estimates": true,
@@ -702,16 +652,6 @@ Object {
                 "org_id": "133",
                 "stat": 2,
                 "vote": 3,
-              },
-            ],
-            "covid_funding": Array [
-              Object {
-                "fiscal_year": "2020",
-                "funding": 8,
-              },
-              Object {
-                "fiscal_year": "2021",
-                "funding": 8,
               },
             ],
             "has_covid_data": Object {
@@ -770,16 +710,6 @@ Object {
                 "vote": 0,
               },
             ],
-            "covid_funding": Array [
-              Object {
-                "fiscal_year": "2020",
-                "funding": 3,
-              },
-              Object {
-                "fiscal_year": "2021",
-                "funding": 3,
-              },
-            ],
             "has_covid_data": Object {
               "has_commitments": true,
               "has_estimates": true,
@@ -830,16 +760,6 @@ Object {
   "data": Object {
     "root": Object {
       "covid_measure": Object {
-        "covid_funding": Array [
-          Object {
-            "fiscal_year": "2020",
-            "funding": 1,
-          },
-          Object {
-            "fiscal_year": "2020",
-            "funding": 4,
-          },
-        ],
         "has_covid_data": Object {
           "has_commitments": true,
           "has_estimates": true,

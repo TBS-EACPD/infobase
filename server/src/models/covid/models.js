@@ -28,10 +28,6 @@ const covid_commitments_fields = {
   fiscal_year: number_type,
   commitment: number_type,
 };
-const covid_funding_fields = {
-  fiscal_year: number_type,
-  funding: number_type,
-};
 const count_fields = {
   fiscal_year: number_type,
   with_authorities: number_type,
@@ -58,7 +54,6 @@ export default function (model_singleton) {
   const CovidMeasureSchema = mongoose.Schema({
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
-    covid_funding: [covid_funding_fields],
 
     covid_estimates: [CovidEstimatesSchema],
     covid_expenditures: [CovidExpenditureSchema],
@@ -77,7 +72,6 @@ export default function (model_singleton) {
   });
   const CovidGovSummarySchema = mongoose.Schema({
     ...common_summary_fields,
-    covid_funding: [covid_funding_fields],
     spending_sorted_org_ids: [
       {
         fiscal_year: number_type,
