@@ -78,7 +78,7 @@ covid_estimates_vote:
 covid_estimates_COV082_2020_tooltip:
   transform: [handlebars,markdown]
   en: |
-    Oncludes $5 billion for vaccines that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
+    Includes $5 billion for vaccines that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
     These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information
     {{ext_link "online" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/frozen-allotments-voted-authorities.html"}}.
   fr: |
