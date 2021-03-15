@@ -53,19 +53,32 @@ class CovidIntroPanelDyanmicText extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const { measure_counts, org_counts } = covid_summary;
-
-      const orgs_with_authorities = _.first(org_counts)?.with_authorities;
-      const measures_with_authorities = _.first(measure_counts)
-        ?.with_authorities;
+      const { covid_estimates, covid_expenditures } = covid_summary;
+      const {
+        gov_total_covid_estimates,
+        gov_total_covid_expenditures,
+      } = _.chain({ covid_estimates, covid_expenditures })
+        .mapValues((summaries) =>
+          _.chain(summaries)
+            .groupBy("fiscal_year")
+            .toPairs()
+            .sortBy(_.first)
+            .first()
+            .thru(([_fiscal_year, rows]) =>
+              _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0)
+            )
+            .value()
+        )
+        .mapKeys((_, key) => `gov_total_${key}`)
+        .value();
 
       return (
         <TM
           k="covid_intro"
           args={{
             ...panel_args,
-            orgs_with_authorities,
-            measures_with_authorities,
+            gov_total_covid_estimates,
+            gov_total_covid_expenditures,
           }}
           className="medium-panel-text"
         />
