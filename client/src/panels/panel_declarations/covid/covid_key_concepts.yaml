@@ -12,13 +12,12 @@ covid_questions_up_to_date_a:
 
 covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the data?
-  fr: COVID_TEXT_TODO
+  fr: Pourquoi certaines mesures du plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?
 covid_questions_missing_measures_a:
   transform: [handlebars,markdown]
   en: |
-    GC InfoBase currently only reports on COVID-19 measures which have been presented
-    in the Estimates. While this includes some benefits such as the Canada Emergency Response
-    Benefit (CERB), not all benefits fall inside the scope of the Estimates, notably:
+    COVID-19 authority and estimated expenditure information is limited to the measures presented in the Estimates.
+    While this includes some benefits such as the Canada Emergency Response Benefit (CERB), not all benefits fall inside the scope of the Estimates, notably:
       - Employment Insurance (EI);
       - Canada Emergency Wage Subsidy (CEWS); and
       - Canada Emergency Rent Subsidy (CERS).  
@@ -26,33 +25,32 @@ covid_questions_missing_measures_a:
     More information related to the {{ext_link "benefits and services provided by the Government of Canada" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}
     to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
   fr: |
-    COVID_TEXT_TODO this French is out of sync with the English, needs a re-translate
+    Les renseignements sur les autorisations et l’estimation des dépenses liées à la COVID-19 sont limités aux mesures inscrites dans les budgets des dépenses.
+    Bien que cela comprenne certaines prestations telles que la Prestation canadienne d'urgence (PCU), toutes les prestations ne sont pas comprises dans le champ d'application des budgets des dépenses, notamment :
+      * l’Assurance-emploi (AE);
+      * la Subvention salariale d’urgence du Canada (SSUC);
+      * la Subvention d’urgence du Canada pour le loyer (SUCL).  
 
-    À l'heure actuelle, InfoBase du GC ne fait état que des mesures au titre de la COVID-19 qui figurent dans les budgets des dépenses. Bien que cela comprenne certains avantages
-    tels que la Prestation canadienne d'intervention d'urgence (PCU), la portée des budgets des dépenses ne couvre pas toutes les prestations.  
-
-    Parmi les prestations les plus importantes liées à COVID-19 qui ne sont pas mentionnées ici, on peut mentionner les suivantes :
-      * Assurance emploi (AE)
-      * Subvention salariale d’urgence du Canada (SSUC)
-      * Subvention d’urgence du Canada pour le loyer (SUCL)  
-
-    Pour obtenir de plus amples renseignements sur les prestations et services offerts par le gouvernement du Canada pour aider les Canadiens et les entreprises à surmonter
-    les difficultés découlant de la pandémie de COVID-19, cliquez {ext_link "ici" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}}
+    De plus amples renseignements sur les {ext_link "prestations et services offerts par le gouvernement du Canada" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}}
+    pour venir en aide aux Canadiens et aux entreprises qui éprouvent des difficultés en raison de la pandémie de COVID-19 sont affichés en ligne.
 
 covid_questions_other_expenditure_reporting_q:
   en: Where does the Government normally report expenditure information (COVID, non-COVID)?
-  fr: COVID_TEXT_TODO
+  fr: Où le gouvernement déclare-t-il habituellement ses dépenses (COVID, non-COVID)?
 covid_questions_other_expenditure_reporting_a:
   transform: [handlebars,markdown]
   en: |
     Typically, reporting on government expenditures is done on a monthly basis through the Department of Finance’s Fiscal Monitor, quarterly by departments and annually
     through the Annual Financial Report and the Public Accounts. Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public
     Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}).
-  fr: COVID_TEXT_TODO
+  fr: |
+   En règle générale, les rapports sur les dépenses gouvernementales sont présentés une fois par mois dans La revue financière du ministère des Finances, à chaque
+   trimestre par les ministères et une fois par an dans le Rapport financier annuel et les Comptes publics.
+   Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{COVID_NEXT_YEAR}}).
 
 covid_questions_spent_q:
   en: What are expenditures? What has to happen for dollars to be considered “spent”?
-  fr: COVID_TEXT_TODO
+  fr: En quoi consistent les dépenses? Que doit-il se passer pour que des fonds soient considérés comme étant « dépensés »?
 covid_questions_spent_a:
   transform: [handlebars,markdown]
   en: |
@@ -64,33 +62,45 @@ covid_questions_spent_a:
     services are accepted. A delayed invoice, or different terms in payment schedule (e.g., as per a contract) can result in spending being recorded
     several months after the initial receipt of the goods or services. For these reasons, there may be legal financial commitments made by implementing
     organizations in relation to the response measures, which are not yet included.
-  fr: COVID_TEXT_TODO
+  fr: |
+    Les dépenses sont comptabilisées lorsque des paiements en espèces sont effectués à même le Trésor (p. ex. pour des biens, des services, des subventions, des contributions, etc.)
+    conformément aux autorisations prévues par une loi ou, dans le cas d’un budget des dépenses, par un projet de loi de crédits. Les dépenses ne correspondent pas aux engagements
+    financiers pris par des entités d'exécution (ministères et organismes) pour lesquelles un paiement réel n'a pas été versé.  
+
+    La norme établie par la Directive sur les paiements est que les fournisseurs soient payés dans un délai de 30 jours, à compter de la réception de la facture et de l'acceptation
+    des biens ou des services. Une facture tardive ou des conditions de paiement différentes (p. ex. en vertu d'un contrat) peuvent entraîner la comptabilisation de dépenses plusieurs
+    mois après la réception initiale des biens ou des services. Pour ces raisons, il peut y avoir des engagements financiers légaux pris par les organisations exécutantes en
+    lien avec les mesures d'intervention qui ne sont pas encore comptabilisés.
 
 covid_questions_implementation_status_q:
   en: What do expenditures to date mean for the status of implementation of the Government’s COVID response plan?
-  fr: COVID_TEXT_TODO
+  fr:  Que signifie « dépenses à ce jour » dans l'état d’avancement de la mise en œuvre du plan d'intervention du gouvernement lié à la COVID-19? 
 covid_questions_implementation_status_a:
   en: |
     The estimated expenditures to date indicate the cash payments that have been made to suppliers for goods and services or to grants and contributions recipients. 
     They do not represent the implementation status or results achieved for a measure. Implementing organizations (departments, agencies, and Crown corporations)
     are best positioned to speak to the implementation status of a measure.
-  fr: COVID_TEXT_TODO
+  fr: |
+    Par « estimation des dépenses à ce jour », on entend les paiements en espèces qui ont été versés aux fournisseurs pour des biens et des services, et non
+    l'état d'avancement de la mise en œuvre ou les résultats obtenus pour une mesure donnée. Les organisations exécutantes (ministères, organismes et sociétés d'État)
+    sont les mieux placées pour parler de l'état d'avancement de la mise en œuvre d’une mesure.  
  
 #TODO ugh, the most appropriate year for this text won't always be clear (it should probably stay 2021 for some amount of 2021-22?), should it stay hardcoded?
 covid_questions_accruals_q:
   en: Will there be COVID-19 accruals at year-end?
-  fr: COVID_TEXT_TODO
+  fr: Y aura-t-il des charges à payer au titre de COVID-19 à la fin de l’exercice financier?
 covid_questions_accruals_a:
   en: |
     Like any other program that spans over March 31, 2021, some accruals for COVID-19 programs will be necessary.
     Note that accruals will not be reported with the cash based estimated expenditures presented now or at year-end.
-  fr: COVID_TEXT_TODO
-#NOTE the original english included a refference to the OGGO committee, remember to remove from the french too
+  fr: |
+    Comme tout autre programme qui s'étend au-delà du 31 mars 2021, il faudra comptabiliser certaines charges à payer pour les programmes liés à la COVID-19.
+    Prière de retenir que les charges à payer ne seront pas déclarées avec les estimations de dépenses en espèces présentées maintenant ou à la fin de l'exercice.
 
 # TODO, this one's a maintenance nightmare... review, maybe drop, some time after OGGO
 covid_questions_auth_but_no_exp_q:
   en: Why do some organizations and measures have spending authorities but no expenditures?
-  fr: COVID_TEXT_TODO
+  fr: Pour quelle raison certaines organisations et certaines mesures ont-elles un pouvoir de dépenser, mais pas de dépenses?
 covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
@@ -102,7 +112,15 @@ covid_questions_auth_but_no_exp_a:
     In 2020-21, there are 58 organizations and 105 measures with authorities identified as being related to COVID-19 in the Estimates.
     Of these, estimated expenditures are only reported for the 55 organizations and 81 measures that are within the scope of the COVID-19 Economic Response Plan;
     of which 48 organizations have estimated expenditures as of January 31, 2021.
-  fr: COVID_TEXT_TODO
+  fr: |
+    Alors que de nombreuses autorisations de dépenses ont été accordées plus tôt au cours de l'exercice, soit par une loi habilitante, comme la 
+    _Loi sur les paiements relatifs aux événements de santé publique d'intérêt national_, soit par la loi de crédits pour le budget supplémentaire (B),
+    d'autres n'ont été inscrites qu'en février 2021 dans le budget supplémentaire (C), pour lequel l'autorisation votée finale n'est attendue qu'à la fin du mois de mars.
+    Pour ces mesures, il se peut que les organisations n'aient pas eu de paiements enregistrés en date du 31 janvier 2021.  
+
+    En 2020-21, il y a 58 organisations et 105 mesures qui ont des autorisations liées à la pandémie dans les budgets des dépenses. Parmi elles,
+    seules figurent les estimations de dépenses pour les 55 organisations et les 81 mesures qui sont dans la portée du Plan d'intervention économique
+    du Canada pour répondre à la COVID-19; 48 organisations ont des estimations de dépenses au 31 janvier 2021.
 
 
 #####
