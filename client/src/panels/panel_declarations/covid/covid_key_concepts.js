@@ -31,17 +31,12 @@ export const declare_covid_key_concepts_panel = () =>
           <KeyConceptList
             question_answer_pairs={_.chain([
               "up_to_date",
-              "missing_measures",
-              "other_expenditure_reporting",
               "spent",
+              "other_expenditure_reporting",
               "implementation_status",
-              "accruals",
               "auth_but_no_exp",
-              //"frequency",
-              //"what_is_new",
-              //"measure_vs_initiative",
-              //"financial",
-              //"authorities_vs_funding",
+              "missing_measures",
+              "accruals",
             ])
               .compact()
               .map((key) => [
