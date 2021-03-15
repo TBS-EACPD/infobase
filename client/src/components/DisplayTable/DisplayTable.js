@@ -138,6 +138,7 @@ export class DisplayTable extends React.Component {
     );
 
   change_page = (page) =>
+    this.state.current_page !== page &&
     this.setState(
       {
         loading: true,

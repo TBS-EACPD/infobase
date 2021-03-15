@@ -171,7 +171,7 @@ export const SelectPage = ({
     }
   };
 
-  console.log(get_page_options(num_pages, current_page + 1));
+  const page_options = get_page_options(num_pages, current_page + 1);
   return (
     <tr className="page-selector-controls">
       <td colSpan={num_col}>
@@ -181,77 +181,27 @@ export const SelectPage = ({
               className="fcol-xs-12 d-flex justify-content-center page-selector"
               style={{ flexWrap: "wrap" }}
             >
-              {current_page > 2 && (
-                <Fragment>
-                  <button
-                    className="btn-ib-light"
-                    onClick={() => change_page(0)}
-                    aria-label={text_maker("page", { page_num: 1 })}
-                    role="tab"
-                  >
-                    1
-                  </button>
-                  {current_page > 3 && (
-                    <button
-                      className="btn-ib-light"
-                      tabIndex="-1"
-                      onClick={() => change_page(current_page - 3)}
-                      aria-label={text_maker("page", {
-                        page_num: current_page - 2,
-                      })}
-                      role="tab"
-                    >
-                      &hellip;
-                    </button>
-                  )}
-                </Fragment>
-              )}
-              {_.map(
-                _.range(current_page - 2, current_page + 3),
-                (num) =>
-                  num >= 0 &&
-                  num <= num_pages - 1 && (
-                    <button
-                      key={num}
-                      className={`btn-ib-light${
-                        (num === current_page && "--reversed") || ""
-                      }`}
-                      onClick={() => change_page(num)}
-                      aria-label={text_maker("page", { page_num: num + 1 })}
-                      role="tab"
-                      aria-selected={`${num === current_page}`}
-                    >
-                      {num + 1}
-                    </button>
-                  )
-              )}
-              {current_page < num_pages - 3 && (
-                <Fragment>
-                  {current_page < num_pages - 4 && (
-                    <button
-                      className="btn-ib-light"
-                      tabIndex="-1"
-                      onClick={() => change_page(current_page + 3)}
-                      aria-label={text_maker("page", {
-                        page_num: current_page + 4,
-                      })}
-                      role="tab"
-                    >
-                      &hellip;
-                    </button>
-                  )}
-                  <button
-                    className="btn-ib-light"
-                    onClick={() => change_page(num_pages - 1)}
-                    aria-label={text_maker("page", {
-                      page_num: num_pages,
-                    })}
-                    role="tab"
-                  >
-                    {num_pages}
-                  </button>
-                </Fragment>
-              )}
+              {_.map(page_options, (page_num, index) => (
+                <button
+                  key={page_num}
+                  className={`btn-ib-light${
+                    (page_num - 1 === current_page && "--reversed") || ""
+                  }`}
+                  onClick={() => change_page(page_num - 1)}
+                  aria-label={text_maker("page", { page_num: page_num })}
+                  role="tab"
+                  aria-selected={`${page_num - 1 === current_page}`}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      index !== 0 &&
+                      index !== page_options.length - 1 &&
+                      (page_options[index + 1] !== page_num + 1 ||
+                        page_options[index - 1] !== page_num - 1)
+                        ? "&hellip;"
+                        : page_num,
+                  }}
+                ></button>
+              ))}
             </div>
           </div>
         </div>
