@@ -1,3 +1,7 @@
+#####
+# OGGO-ALIGNED FAQS
+#####
+
 covid_questions_up_to_date_q:
   en: Are these values up to date? 
   fr: Ces valeurs sont-elles à jour?
@@ -5,6 +9,105 @@ covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
   en: This data is current up to and including {{COVID_LAST_REFRESHED_MONTH}}. {{gt "covid_above_tab_data_org_websites_note"}}
   fr: Ces données sont à jour jusqu'en {{COVID_LAST_REFRESHED_MONTH}} inclusivement. {{gt "covid_above_tab_data_org_websites_note"}}
+
+covid_questions_missing_measures_q:
+  en: Why are some measures of the Government’s COVID response plan missing from the data?
+  fr: COVID_TEXT_TODO
+covid_questions_missing_measures_a:
+  transform: [handlebars,markdown]
+  en: |
+    GC InfoBase currently only reports on COVID-19 measures which have been presented
+    in the Estimates. While this includes some benefits such as the Canada Emergency Response
+    Benefit (CERB), not all benefits fall inside the scope of the Estimates, notably:
+      - Employment Insurance (EI);
+      - Canada Emergency Wage Subsidy (CEWS); and
+      - Canada Emergency Rent Subsidy (CERS).  
+    
+    More information related to the {{ext_link "benefits and services provided by the Government of Canada" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}
+    to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
+  fr: |
+    COVID_TEXT_TODO this French is out of sync with the English, needs a re-translate
+
+    À l'heure actuelle, InfoBase du GC ne fait état que des mesures au titre de la COVID-19 qui figurent dans les budgets des dépenses. Bien que cela comprenne certains avantages
+    tels que la Prestation canadienne d'intervention d'urgence (PCU), la portée des budgets des dépenses ne couvre pas toutes les prestations.  
+
+    Parmi les prestations les plus importantes liées à COVID-19 qui ne sont pas mentionnées ici, on peut mentionner les suivantes :
+      * Assurance emploi (AE)
+      * Subvention salariale d’urgence du Canada (SSUC)
+      * Subvention d’urgence du Canada pour le loyer (SUCL)  
+
+    Pour obtenir de plus amples renseignements sur les prestations et services offerts par le gouvernement du Canada pour aider les Canadiens et les entreprises à surmonter
+    les difficultés découlant de la pandémie de COVID-19, cliquez {ext_link "ici" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}}
+
+covid_questions_other_expenditure_reporting_q:
+  en: Where does the Government normally report expenditure information (COVID, non-COVID)?
+  fr: COVID_TEXT_TODO
+covid_questions_other_expenditure_reporting_a:
+  transform: [handlebars,markdown]
+  en: |
+    Typically, reporting on government expenditures is done on a monthly basis through the Department of Finance’s Fiscal Monitor, quarterly by departments and annually
+    through the Annual Financial Report and the Public Accounts. Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public
+    Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}).
+  fr: COVID_TEXT_TODO
+
+covid_questions_spent_q:
+  en: What are expenditures? What has to happen for dollars to be considered “spent”?
+  fr: COVID_TEXT_TODO
+covid_questions_spent_a:
+  transform: [handlebars,markdown]
+  en: |
+    Expenditures are recorded when cash payments are made from the consolidated revenue fund (e.g. for goods, services, grants, contributions etc.)
+    against authorities provided through statutory legislation or appropriation bills for the Estimates. Expenditures do not reflect financial commitments
+    made by implementing organizations (departments and agencies) for which an actual payment has not been issued.  
+
+    The Directive on Payments establishes the norm that suppliers are paid within 30 days, from the time when an invoice is received, and the goods or
+    services are accepted. A delayed invoice, or different terms in payment schedule (e.g., as per a contract) can result in spending being recorded
+    several months after the initial receipt of the goods or services. For these reasons, there may be legal financial commitments made by implementing
+    organizations in relation to the response measures, which are not yet included.
+  fr: COVID_TEXT_TODO
+
+covid_questions_implementation_status_q:
+  en: What do expenditures to date mean for the status of implementation of the Government’s COVID response plan?
+  fr: COVID_TEXT_TODO
+covid_questions_implementation_status_a:
+  en: |
+    The estimated expenditures to date indicate the cash payments that have been made to suppliers for goods and services or to grants and contributions recipients. 
+    They do not represent the implementation status or results achieved for a measure. Implementing organizations (departments, agencies, and Crown corporations)
+    are best positioned to speak to the implementation status of a measure.
+  fr: COVID_TEXT_TODO
+ 
+#TODO ugh, the most appropriate year for this text won't always be clear (it should probably stay 2021 for some amount of 2021-22?), should it stay hardcoded?
+covid_questions_accruals_q:
+  en: Will there be COVID-19 accruals at year-end?
+  fr: COVID_TEXT_TODO
+covid_questions_accruals_a:
+  en: |
+    Like any other program that spans over March 31, 2021, some accruals for COVID-19 programs will be necessary.
+    Note that accruals will not be reported with the cash based estimated expenditures presented now or at year-end.
+  fr: COVID_TEXT_TODO
+#NOTE the original english included a refference to the OGGO committee, remember to remove from the french too
+
+# TODO, this one's a maintenance nightmare... review, maybe drop, some time after OGGO
+covid_questions_auth_but_no_exp_q:
+  en: Why do some organizations and measures have spending authorities but no expenditures?
+  fr: COVID_TEXT_TODO
+covid_questions_auth_but_no_exp_a:
+  transform: [handlebars,markdown]
+  en: |
+    While many spending authorities were authorized earlier in the fiscal year, either through statutory legislation, such as the _Public Health Events 
+    of National Concern Payments Act_ or the appropriation act for Supplementary Estimates (B), others were only presented in Supplementary Estimates 
+    (C) in February 2021, for which final voted authority is only expected by the end of March. For these measures, organizations may not have had
+    recorded payments as of January 31, 2021.  
+
+    In 2020-21, there are 58 organizations and 105 measures with authorities identified as being related to COVID-19 in the Estimates.
+    Of these, estimated expenditures are only reported for the 55 organizations and 81 measures that are within the scope of the COVID-19 Economic Response Plan;
+    of which 48 organizations have estimated expenditures as of January 31, 2021.
+  fr: COVID_TEXT_TODO
+
+
+#####
+# PRE-OGGO FAQS, not in current use but would like to add at least some back in eventually
+#####
 
 covid_questions_financial_q:
   en: Why does GC InfoBase report COVID-19 financial data under "COVID-19" and not under "Finances"?
@@ -69,38 +172,7 @@ covid_questions_authorities_vs_funding_a:
     Government announcements are based on an accrual-basis of accounting, recognizing cash
     investments over their useful life (e.g. recognizing the cost of an asset over 10 years vs. the year
     in which the cash must be paid).
-  fr: COVID_TEXT_TODO
-
-covid_questions_missing_measures_q:
-  en: Why are some measures of the Government’s COVID response plan missing from the measures tab?
-  fr: COVID_TEXT_TODO
-covid_questions_missing_measures_a:
-  transform: [handlebars,markdown]
-  en: |
-    GC InfoBase currently only reports on COVID-19 measures which have been presented
-    in the Estimates. While this includes some benefits such as the Canada Emergency Response
-    Benefit (CERB), not all benefits fall inside the scope of the Estimates, notably:
-      - Employment Insurance (EI);
-      - Canada Emergency Wage Subsidy (CEWS); and
-      - Canada Emergency Rent Subsidy (CERS).  
-    
-    More information related to {{ext_link "the benefits and services provided by the Government of Canada" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}}
-    to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
-  fr: |
-    COVID_TEXT_TODO this French is out of sync with the English, needs a re-translate
-
-    À l'heure actuelle, InfoBase du GC ne fait état que des mesures au titre de la COVID-19 qui figurent dans les budgets des dépenses. Bien que cela comprenne certains avantages
-    tels que la Prestation canadienne d'intervention d'urgence (PCU), la portée des budgets des dépenses ne couvre pas toutes les prestations.  
-
-    Parmi les prestations les plus importantes liées à COVID-19 qui ne sont pas mentionnées ici, on peut mentionner les suivantes :
-      * Assurance emploi (AE)
-      * Subvention salariale d’urgence du Canada (SSUC)
-      * Subvention d’urgence du Canada pour le loyer (SUCL)  
-
-    Pour obtenir de plus amples renseignements sur les prestations et services offerts par le gouvernement du Canada pour aider les Canadiens et les entreprises à surmonter
-    les difficultés découlant de la pandémie de COVID-19, cliquez {ext_link "ici" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}}
-
-    
+  fr: COVID_TEXT_TODO    
 
 covid_questions_frequency_q:
   en: How frequently will COVID-19 spending authorities and expenditures be updated on GC InfoBase?
@@ -111,13 +183,3 @@ covid_questions_frequency_a:
     (e.g. Supplementary Estimates (A), 2020-21) or as other pertinent information becomes
     available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
   fr: COVID_TEXT_TODO
-
-covid_questions_other_expenditure_reporting_q:
-  en: Where does the Government normally report expenditure information (COVID, non-COVID)?
-  fr: COVID_TEXT_TODO
-covid_questions_other_expenditure_reporting_a:
-  en: |
-    Audited Government expenditures are reported after a fiscal year is complete (in the
-    fall), in the Public Accounts of Canada. During the year, the Department of Finance provides
-    monthly updates in the Fiscal Monitor and departments provide information in their Quarterly
-    Financial Reports (QFR).
