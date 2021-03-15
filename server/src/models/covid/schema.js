@@ -109,8 +109,8 @@ export default function ({ models, loaders }) {
     has_covid_data_loader,
     covid_measure_loader,
     covid_measures_by_related_org_ids_loader,
-    covid_org_summary_loader,
     covid_gov_summary_loader,
+    covid_org_summary_loader,
   } = loaders;
 
   const has_covid_data_resolver = (subject_id) =>
