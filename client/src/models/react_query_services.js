@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { get_api_url } from "src/graphql_utils/graphql_utils.js";
+import { prod_api_url } from "src/graphql_utils/graphql_utils.js";
 
 import {
   all_services_query,
@@ -16,7 +16,7 @@ export const useGQLReactQuery = (key, subject) => {
   const query = is_gov ? all_services_query : dept_services_query;
 
   return useQuery(key, async () => {
-    const endpoint = await get_api_url();
+    const endpoint = prod_api_url;
     const res = await request(endpoint, query, {
       lang: lang,
       id: is_gov ? "gov" : subject.id,

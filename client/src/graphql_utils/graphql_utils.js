@@ -18,7 +18,7 @@ import {
   is_ci,
 } from "src/core/injected_build_constants.js";
 
-const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
+export const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
 export const get_api_url = async () => {
   if (is_ci) {
