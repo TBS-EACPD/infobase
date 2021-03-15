@@ -118,6 +118,7 @@ export default async function ({ models }) {
 
   const covid_gov_summary_record = _.map(covid_years, (fiscal_year) => ({
     org_id: "gov",
+    fiscal_year,
     covid_estimates: _.chain(covid_org_summary_records)
       .filter({ fiscal_year })
       .flatMap("covid_estimates")

@@ -105,7 +105,7 @@ export default function (model_singleton) {
       CovidMeasure,
       "related_org_ids"
     ),
-    has_covid_data_loader: create_resource_by_id_attr_dataloader(
+    has_covid_data_loader: create_resource_by_foreignkey_attr_dataloader(
       HasCovidData,
       "subject_id"
     ),
