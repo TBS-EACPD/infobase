@@ -61,7 +61,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
 
       return (
         <TM
-          k="covid_intro_dynamic_text"
+          k="covid_intro"
           args={{
             ...panel_args,
             orgs_with_authorities,
@@ -101,11 +101,6 @@ export const declare_covid_intro_panel = () =>
             glossary_keys,
           }}
         >
-          <TM
-            k="covid_intro_static_text"
-            args={panel_args}
-            className="medium-panel-text"
-          />
           <CovidIntroPanelDyanmicText panel_args={panel_args} />
         </InfographicPanel>
       ),

@@ -2,6 +2,38 @@ covid_intro_panel_title:
   en: Introduction to the Government's COVID-19 Response
   fr: Présentation de la réponse du gouvernement à la COVID-19
 
+
+#####
+# OGGO-ALIGNED INTRO
+#####
+
+covid_intro:
+  transform: [handlebars,markdown]
+  en: |
+    Over the last year, with the unprecedented scale and impact of COVID-19, Parliament has prioritized measures responding to COVID-19.
+    The Supplementary Estimates (A, B and C) for 2020-21 present a total of $159.5 billion in planned spending authorities for federal organizations
+    across the Government of Canada to spend in support of COVID-19 measures. These are “up to” authorities in recognition of the urgency and uncertainty
+    in which these measures were brought forward in the pandemic context.  
+    
+    As of January 31, 2021, federal organizations reported total estimated expenditures of $123.1 billion against COVID-19 measures, which correspond
+    with the measures announced as part of the COVID-19 Economic Response Plan (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020). These estimated expenditures do not
+    represent the implementation status or results achieved for a measure. Implementing organizations (departments, agencies, and Crown corporations) are best positioned to
+    speak to the implementation status of a measure.
+  fr: |
+    L’année dernière, compte tenu de l'ampleur et de l'impact sans précédent de la COVID-19, le Parlement a accordé la priorité aux mesures en réponse à la pandémie.
+    Les budgets supplémentaires des dépenses (A, B et C) pour 2020-2021 totalisent 159,5 milliards de dollars en autorisations de dépenses prévues des organisations
+    fédérales consacrées aux mesures liées à la pandémie. Il s'agit du plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude dans
+    lesquelles ces mesures ont été prises en réponse à la pandémie.
+
+    Au 31 janvier 2021, les organisations fédérales avaient déclaré des dépenses estimées totalisant 123,1 milliards de dollars pour les mesures liées à la pandémie,
+    qui correspondent aux mesures annoncées dans le cadre du Plan d’intervention économique pour répondre à la COVID-19 (c'est-à-dire les chapitres 1 et 2 de l'Énoncé
+    économique de l'automne 2020). Cette estimation des dépenses ne représente pas l'état d'avancement de la mise en œuvre ou les résultats obtenus pour une mesure donnée.
+    Les organisations exécutantes (ministères, organismes et sociétés d'État) sont les mieux placées pour parler de l'état d'avancement de la mise en œuvre d’une mesure donnée. 
+
+
+#####
+# PRE_OGGO INTRO, may return to some or all of this version at a future time
+#####
 covid_intro_static_text:
   transform: [handlebars,markdown]
   en: |
