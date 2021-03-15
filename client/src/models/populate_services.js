@@ -184,7 +184,7 @@ const dept_service_fragment = `org_id
       }
   `;
 
-const dept_services_query = gql`
+export const dept_services_query = gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
@@ -195,7 +195,7 @@ query($lang: String!, $id: String) {
 }
 `;
 
-const all_services_query = gql`
+export const all_services_query = gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {

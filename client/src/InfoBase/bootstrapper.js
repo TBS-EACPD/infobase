@@ -17,6 +17,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import WebFont from "webfontloader";
 
@@ -83,16 +85,20 @@ function bootstrapper(App, app_reducer, done) {
       }),
       applyMiddleware(middleware)
     );
+    const queryClient = new QueryClient();
 
     done();
 
     ReactDOM.render(
-      <Provider store={store}>
-        {/* ConnectedRouter will use the store from Provider automatically */}
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </Provider>,
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Provider store={store}>
+          {/* ConnectedRouter will use the store from Provider automatically */}
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </Provider>
+      </QueryClientProvider>,
       document.getElementById("app")
     );
   });
