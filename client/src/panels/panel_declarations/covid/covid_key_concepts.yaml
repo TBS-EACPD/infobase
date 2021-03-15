@@ -149,21 +149,21 @@ covid_questions_financial_a:
       * Les autorisations et dépenses {{gl_tt "budgétaires" "BUD_EXP"}} et {{gl_tt "non budgétaires" "NB_EXP"}} figurent ici tandis que les autres informations contenues dans InfoBase du GC se
       limitent aux seuls montants budgétaires. Par souci d'exhaustivité et d'exactitude, les autorisations et dépenses non budgétaires doivent être incluses ici, car le remboursement de l'aide
       est un élément essentiel de la réponse du gouvernement à la COVID-19.
-      * COVID_TEXT_TODO
+      * PAUSED_COVID_TEXT_TODO
 
 covid_questions_what_is_new_q:
   en: What is new about the recent data presented on GC InfoBase?
-  fr: COVID_TEXT_TODO 
+  fr: PAUSED_COVID_TEXT_TODO 
 covid_questions_what_is_new_a:
   en: |
     As of March 2021, GC InfoBase reports Estimates authorities on a measure basis as
     per Canada’s COVID-19 Economic Response Plan outlined in the Fall Economic Statement 2020.
     For the first time, GC InfoBase is reporting on expenditures incurred against authorities, where available.
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO
 
 covid_questions_measure_vs_initiative_q:
   en: How does the current presentation of COVID-19 authorities “by measure” differ from the previous presentation of authorities “by Estimates Initiative?
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO
 covid_questions_measure_vs_initiative_a:
   en: |
     The current presentation of “Spending Authorities by COVID-19 Measure” better aligns
@@ -171,11 +171,11 @@ covid_questions_measure_vs_initiative_a:
     Economic Statement, which provides a thematic list of anticipated authorities at an aggregate
     level. The previous presentation by “Estimates Initiatives” included actual authorities at the
     granular level by department and by initiative.
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO
 
 covid_questions_authorities_vs_funding_q:
   en: Why don’t authorities correspond to funding announcements made by the Government?
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO
 covid_questions_authorities_vs_funding_a:
   transform: [markdown]
   en: |
@@ -190,14 +190,14 @@ covid_questions_authorities_vs_funding_a:
     Government announcements are based on an accrual-basis of accounting, recognizing cash
     investments over their useful life (e.g. recognizing the cost of an asset over 10 years vs. the year
     in which the cash must be paid).
-  fr: COVID_TEXT_TODO    
+  fr: PAUSED_COVID_TEXT_TODO    
 
 covid_questions_frequency_q:
   en: How frequently will COVID-19 spending authorities and expenditures be updated on GC InfoBase?
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO
 covid_questions_frequency_a:
   en: |
     COVID-19 spending authorities will be updated following the tabling of an Estimates
     (e.g. Supplementary Estimates (A), 2020-21) or as other pertinent information becomes
     available. COVID-19 expenditures will be refreshed monthly commencing in April 2021.
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO

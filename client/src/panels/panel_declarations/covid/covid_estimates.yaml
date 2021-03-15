@@ -8,10 +8,12 @@ covid_estimates_above_tab_footnote_list:
     * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_tt "spending authorities" "AUTH"}} sought in {{est_last_year}} as outlined in the {{gl_tt "Estimates" "EST_PROC"}}.
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * {{gt "covid_above_tab_limited_measure_note"}}
+    * COVID-19 related spending authorities were previously reported by Estimates initiative. This dataset can still be found on {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}}.
   fr: |
     * Le Parlement doit approuver toutes les dépenses du gouvernement. Ces chiffres sont ceux des nouvelles {{gl_tt "autorisations de dépenser" "AUTH"}} au titre de la COVID-19 qui ont été accordées en {{est_last_year}}  et qui sont inscrites dans les {{gl_tt "budgets des dépenses" "EST_PROC"}}.
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
     * {{gt "covid_above_tab_limited_measure_note"}}
+    * COVID_TEXT_TODO
 
 
 covid_estimates_summary_text_gov:
