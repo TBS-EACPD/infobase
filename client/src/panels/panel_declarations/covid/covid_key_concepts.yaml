@@ -44,9 +44,9 @@ covid_questions_other_expenditure_reporting_a:
     through the Annual Financial Report and the Public Accounts. Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public
     Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}).
   fr: |
-   En règle générale, les rapports sur les dépenses gouvernementales sont présentés une fois par mois dans La revue financière du ministère des Finances, à chaque
-   trimestre par les ministères et une fois par an dans le Rapport financier annuel et les Comptes publics.
-   Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{COVID_NEXT_YEAR}}).
+    En règle générale, les rapports sur les dépenses gouvernementales sont présentés une fois par mois dans La revue financière du ministère des Finances, à chaque
+    trimestre par les ministères et une fois par an dans le Rapport financier annuel et les Comptes publics.
+    Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{COVID_NEXT_YEAR}}).
 
 covid_questions_spent_q:
   en: What are expenditures? What has to happen for dollars to be considered “spent”?
