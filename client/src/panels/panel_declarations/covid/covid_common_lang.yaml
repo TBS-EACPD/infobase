@@ -18,8 +18,8 @@ covid_above_tab_limited_measure_note:
   fr: Seules les mesures figurant dans les budgets des dépenses sont affichées ci-dessous. Par conséquent, une partie du Plan d’intervention économique du Canada pour répondre à la COVID-19 (PRO) n'a pas été prise en compte. Pour plus de détails, consultez la FAQ "Pourquoi certaines mesures du plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?"
 covid_above_tab_data_freshness_note:
   transform: [handlebars]
-  en: Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan (ERP) have not been audited. Expenditures will be refreshed monthly.
-  fr: Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{COVID_NEXT_YEAR}}). Les présents rapports sur les dépenses engagées dans le cadre du Plan d'intervention économique du Canada pour répondre à la COVID-19 (PRP) n'ont pas été vérifiés. Les dépenses sont actualisées chaque mois.
+  en: Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan (ERP) have not been audited. Estimated expenditures will be refreshed monthly.
+  fr: Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{COVID_NEXT_YEAR}}). Les présents rapports sur les dépenses engagées dans le cadre du Plan d'intervention économique du Canada pour répondre à la COVID-19 (PRP) n'ont pas été vérifiés. Les dépenses estimées sont actualisées chaque mois.
 covid_above_tab_data_org_websites_note:
   transform: [handlebars]
   en: More recent or more detailed information may be available directly from individual federal organizations.
@@ -33,10 +33,3 @@ show_vote_stat_split:
   transform: [handlebars]
   en: Show {{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}} amount breakout
   fr: Afficher la ventilation des montants {{gl_tt "votés" "VOTED"}} et {{gl_tt "législatifs" "STAT"}}
-
-covid_expenditures_stat:
-  en: Statutory Expenditures
-  fr: Dépenses législatives
-covid_expenditures_voted:
-  en: Voted Expenditures
-  fr: Dépenses votées 

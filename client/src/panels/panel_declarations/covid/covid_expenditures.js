@@ -159,7 +159,7 @@ const get_common_column_configs = (show_vote_stat) => ({
   },
   total_exp: {
     index: 4,
-    header: text_maker("expenditures"),
+    header: text_maker("covid_estimated_expenditures"),
     is_searchable: false,
     is_summable: true,
     formatter: "compact2",
