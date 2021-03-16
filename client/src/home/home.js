@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React from "react";
+import { useQueryClient } from "react-query";
 import MediaQuery from "react-responsive";
 
 import {
@@ -9,6 +10,10 @@ import {
   ContainerEscapeHatch,
   TrinityItem,
 } from "src/components/index.js";
+
+import { prefetchServices } from "src/models/react_query_services.js";
+
+import { Subject } from "src/models/subject.js";
 
 import { highlightColor } from "src/core/color_defs.js";
 
@@ -47,6 +52,7 @@ import "./home.scss";
 const { text_maker: home_tm, TM } = create_text_maker_component(
   home_text_bundle
 );
+const { Gov } = Subject;
 
 export default class Home extends React.Component {
   render() {
@@ -87,138 +93,162 @@ const FeaturedContentItem = ({ text_key, href, is_link_out, is_new }) => (
   </li>
 );
 
-const HomeLayout = (props) => (
-  <div className="home-root">
-    <div
-      className="intro-box"
-      style={{
-        backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
-      }}
-    >
-      <header className="container">
-        <h1>
-          <TM k="welcome" />
-        </h1>
-        <h2 style={{ marginTop: 0 }}>
-          <TM k="home_sub_title" />
-        </h2>
-        <div className="flag">
-          <IconFlagLine width="100%" color="#FFFFFF" alternate_color={false} />
-        </div>
-        <div className="search-box">
-          <EverythingSearch />
-        </div>
-      </header>
-    </div>
+const HomeLayout = (props) => {
+  const queryClient = useQueryClient();
+  return (
+    <div className="home-root">
+      <div
+        className="intro-box"
+        style={{
+          backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
+        }}
+      >
+        <header className="container">
+          <h1>
+            <TM k="welcome" />
+          </h1>
+          <h2 style={{ marginTop: 0 }}>
+            <TM k="home_sub_title" />
+          </h2>
+          <div className="flag">
+            <IconFlagLine
+              width="100%"
+              color="#FFFFFF"
+              alternate_color={false}
+            />
+          </div>
+          <div className="search-box">
+            <EverythingSearch />
+          </div>
+        </header>
+      </div>
 
-    <div className="container">
-      <div className="home-trinity-container frow">
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/financial"
-          svg={
-            <IconExpend width="100%" color="#FFFFFF" alternate_color={false} />
-          }
-          title={<TM k="home_finance_title" />}
-        />
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/people"
-          svg={
-            <IconPeople width="100%" color="#FFFFFF" alternate_color={false} />
-          }
-          title={<TM k="home_ppl_title" />}
-        />
-        {services_feature_flag && (
+      <div className="container">
+        <div className="home-trinity-container frow">
           <TrinityItem
-            href="#orgs/gov/gov/infograph/services"
+            href="#orgs/gov/gov/infograph/financial"
             svg={
-              <IconServicesHome
+              <IconExpend
                 width="100%"
                 color="#FFFFFF"
                 alternate_color={false}
               />
             }
-            title={<TM k="home_services_title" />}
+            title={<TM k="home_finance_title" />}
           />
-        )}
-        <TrinityItem
-          href="#orgs/gov/gov/infograph/results"
-          svg={
-            <IconResults width="100%" color="#FFFFFF" alternate_color={false} />
-          }
-          title={<TM k="home_results_title" />}
-        />
-      </div>
-      <div className="frow featured-home-cols">
-        <div className="fcol-md-7 featured-home-cols__additional">
-          <div className="col-content">
-            <CardLeftImage
-              tmf={home_tm}
+          <TrinityItem
+            href="#orgs/gov/gov/infograph/people"
+            svg={
+              <IconPeople
+                width="100%"
+                color="#FFFFFF"
+                alternate_color={false}
+              />
+            }
+            title={<TM k="home_ppl_title" />}
+          />
+          {services_feature_flag && (
+            <TrinityItem
+              href="#orgs/gov/gov/infograph/services"
               svg={
-                <IconDPs width="100%" color="#FFFFFF" alternate_color={false} />
-              }
-              title_key="quick_link_DP_2022"
-              text_key="dp_home_text"
-              link_key="check_home_link"
-              link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)"
-            />
-          </div>
-          <div className="col-content">
-            <CardLeftImage
-              tmf={home_tm}
-              svg={
-                <IconCompareEstimates
+                <IconServicesHome
                   width="100%"
                   color="#FFFFFF"
                   alternate_color={false}
                 />
               }
-              title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text"
-              link_href="#compare_estimates"
+              onMouseEnter={() => prefetchServices(queryClient, Gov)}
+              title={<TM k="home_services_title" />}
             />
+          )}
+          <TrinityItem
+            href="#orgs/gov/gov/infograph/results"
+            svg={
+              <IconResults
+                width="100%"
+                color="#FFFFFF"
+                alternate_color={false}
+              />
+            }
+            title={<TM k="home_results_title" />}
+          />
+        </div>
+        <div className="frow featured-home-cols">
+          <div className="fcol-md-7 featured-home-cols__additional">
+            <div className="col-content">
+              <CardLeftImage
+                tmf={home_tm}
+                svg={
+                  <IconDPs
+                    width="100%"
+                    color="#FFFFFF"
+                    alternate_color={false}
+                  />
+                }
+                title_key="quick_link_DP_2022"
+                text_key="dp_home_text"
+                link_key="check_home_link"
+                link_href="#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)"
+              />
+            </div>
+            <div className="col-content">
+              <CardLeftImage
+                tmf={home_tm}
+                svg={
+                  <IconCompareEstimates
+                    width="100%"
+                    color="#FFFFFF"
+                    alternate_color={false}
+                  />
+                }
+                title_key="estimates_comp_home_title"
+                text_key="estimates_comp_home_text"
+                link_href="#compare_estimates"
+              />
+            </div>
+          </div>
+          <div className="fcol-md-5 featured-home-cols__primary">
+            <h2>
+              <TM k="featured_data_title" />
+            </h2>
+            <div>
+              <ul className="list-group list-group--quick-links">
+                {_.map(props.featured_content_items, (item) => (
+                  <FeaturedContentItem key={item.text_key} {...item} />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="fcol-md-5 featured-home-cols__primary">
-          <h2>
-            <TM k="featured_data_title" />
+      </div>
+
+      <div
+        className="intro-box break-box"
+        style={{
+          backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
+          paddingTop: "10px",
+          paddingBottom: "10px",
+          borderBottom: `5px solid ${highlightColor}`,
+        }}
+      >
+        <header className="container">
+          <h2 className="h1">
+            <TM k="subapps_title" />
           </h2>
-          <div>
-            <ul className="list-group list-group--quick-links">
-              {_.map(props.featured_content_items, (item) => (
-                <FeaturedContentItem key={item.text_key} {...item} />
-              ))}
-            </ul>
-          </div>
+          <h3 className="h2">
+            <TM k="subapps_text" />
+          </h3>
+        </header>
+      </div>
+
+      <div className="container">
+        <div className="frow">
+          <SubAppLayout />
         </div>
       </div>
     </div>
-
-    <div
-      className="intro-box break-box"
-      style={{
-        backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
-        paddingTop: "10px",
-        paddingBottom: "10px",
-        borderBottom: `5px solid ${highlightColor}`,
-      }}
-    >
-      <header className="container">
-        <h2 className="h1">
-          <TM k="subapps_title" />
-        </h2>
-        <h3 className="h2">
-          <TM k="subapps_text" />
-        </h3>
-      </header>
-    </div>
-
-    <div className="container">
-      <div className="frow">
-        <SubAppLayout />
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 const SubAppLayout = (props) => (
   <div className="home-root">

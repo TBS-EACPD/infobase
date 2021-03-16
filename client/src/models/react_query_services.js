@@ -1,6 +1,6 @@
 import { request } from "graphql-request";
 import _ from "lodash";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 import { lang } from "src/core/injected_build_constants.js";
 
@@ -11,32 +11,40 @@ import {
   dept_services_query,
 } from "./populate_services.js";
 
-export const useGQLReactQuery = (key, subject) => {
-  const is_gov = subject.level === "gov" || _.isUndefined(subject);
+const fetchServices = async (subject) => {
+  const is_gov = subject.level === "gov";
   const query = is_gov ? all_services_query : dept_services_query;
 
-  return useQuery(
-    key,
-    async () => {
-      const endpoint = await get_api_url();
-      const res = await request(endpoint, query, {
-        lang: lang,
-        id: is_gov ? "gov" : subject.id,
-      });
-      if (res.isError) {
-        throw new Error(res.error);
-      }
-      const data = is_gov ? res.root.orgs : res.root.org.services;
-      const services = is_gov
-        ? _.chain(data)
-            .flatMap("services")
-            .compact()
-            .uniqBy("service_id")
-            .value()
-        : data;
+  const endpoint = await get_api_url();
+  const res = await request(endpoint, query, {
+    lang: lang,
+    id: is_gov ? "gov" : subject.id,
+  });
+  if (res.isError) {
+    throw new Error(res.error);
+  }
+  const data = is_gov ? res.root.orgs : res.root.org.services;
+  const services = is_gov
+    ? _.chain(data).flatMap("services").compact().uniqBy("service_id").value()
+    : data;
 
-      return services;
-    },
-    { cacheTime: 1000 * 60 * 15 }
+  return services;
+};
+
+const get_query_id = (subject) => `services_${subject.level}_${subject.id}`;
+
+export const prefetchServices = async (queryClient, subject) => {
+  await queryClient.prefetchQuery(
+    get_query_id(subject),
+    async () => fetchServices(subject),
+    {
+      cacheTime: 1000 * 60 * 15,
+    }
   );
+};
+
+export const useGQLReactQuery = (subject) => {
+  return useQuery(get_query_id(subject), async () => fetchServices(subject), {
+    cacheTime: 1000 * 60 * 15,
+  });
 };

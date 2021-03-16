@@ -20,10 +20,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ panel_args }) => {
   const { subject } = panel_args;
-  const { isLoading, data } = useGQLReactQuery(
-    `services_${subject.level}_${subject.id}`,
-    subject
-  );
+  const { isLoading, data } = useGQLReactQuery(subject);
 
   const processed_data = _.chain(data)
     .flatMap("service_type")
