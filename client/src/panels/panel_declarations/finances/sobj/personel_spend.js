@@ -2,18 +2,20 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  declare_panel,
-} from "src/panels/panel_declarations/shared.js";
-
-import {year_templates} from "src/models/years.js";
-import { businessConstants } from "src/models/businessConstants.js";
-import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
-import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
-import {run_template} from "src/models/text.js";
+  StdPanel,
+  Col,
+} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/shared.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
+import { businessConstants } from "src/models/businessConstants.js";
+import { run_template } from "src/models/text.js";
+import { year_templates } from "src/models/years.js";
+
 import { primaryColor } from "src/core/color_defs.js";
+
+import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
 
 import { text_maker, TM } from "./sobj_text_provider.js";
 const { sos } = businessConstants;

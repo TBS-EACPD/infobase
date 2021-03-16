@@ -1,16 +1,18 @@
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   declare_panel,
   create_text_maker_component,
 } from "src/panels/panel_declarations/shared.js";
 
 import * as util_components from "src/components/index.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
+
 
 import text from "./perspective_text.yaml";
 
