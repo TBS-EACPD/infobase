@@ -94,9 +94,6 @@ function bootstrapper(App, app_reducer, done) {
         },
       },
     });
-    /* eslint-disable no-console */
-    console.log(is_dev);
-    console.log(is_dev_link);
 
     done();
 
