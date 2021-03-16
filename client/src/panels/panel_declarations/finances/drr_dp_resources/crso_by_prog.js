@@ -3,16 +3,17 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  WrappedNivoBar,
-  year_templates,
-  StandardLegend,
-  run_template,
-  InfographicPanel,
   create_text_maker_component,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
+import {year_templates} from "src/models/years.js";
+import { StandardLegend} from "src/charts/legends/index.js";
+import {run_template} from "src/models/text.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import { infobase_colors } from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";

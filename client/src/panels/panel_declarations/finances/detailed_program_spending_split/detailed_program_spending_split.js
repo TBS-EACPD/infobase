@@ -4,25 +4,26 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  WrappedNivoBar,
-  WrappedNivoHBar,
-  Subject,
-  formats,
-  run_template,
-  util_components,
-  infograph_href_template,
-  year_templates,
-  StandardLegend,
-  SelectAllControl,
-  businessConstants,
-  InfographicPanel,
-  FootNote,
-  newIBLightCategoryColors,
-  newIBDarkCategoryColors,
   declare_panel,
   TspanLineWrapper,
   HeightClippedGraph,
 } from "src/panels/panel_declarations/shared.js";
+
+import {WrappedNivoBar,WrappedNivoHBar} from "src/charts/wrapped_nivo/index.js";
+import { Subject } from "src/models/subject.js";
+import { formats} from "src/core/format.js";
+import {run_template} from "src/models/text.js";
+import * as util_components from "src/components/index.js";
+import {infograph_href_template} from "src/infographic/infographic_link.js";
+import {year_templates} from "src/models/years.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import FootNote from "src/models/footnotes/footnotes.js";
+import {
+  newIBLightCategoryColors,
+  newIBDarkCategoryColors,
+} from "src/core/color_schemes.js";
 
 import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
