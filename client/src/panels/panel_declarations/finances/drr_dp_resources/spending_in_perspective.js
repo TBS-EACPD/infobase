@@ -3,11 +3,12 @@ import React from "react";
 
 import {
   declare_panel,
-  util_components,
-  InfographicPanel,
   create_text_maker_component,
-  WrappedNivoPie,
 } from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

@@ -4,17 +4,18 @@ import React, { Fragment } from "react";
 
 import {
   create_text_maker_component,
-  Subject,
-  StandardLegend,
-  InfographicPanel,
-  Table,
-  newIBCategoryColors,
-  WrappedNivoBar,
-  get_formatter,
   declare_panel,
   TspanLineWrapper,
-  util_components,
 } from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
+import { StandardLegend} from "src/charts/legends/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { Table } from "src/core/TableClass.js";
+import {newIBCategoryColors,} from "src/core/color_schemes.js";
+import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
+import {get_formatter} from "src/charts/shared.js";
+import * as util_components from "src/components/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 

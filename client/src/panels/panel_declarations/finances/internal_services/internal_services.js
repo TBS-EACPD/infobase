@@ -2,15 +2,16 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  InfographicPanel,
-  Subject,
-  run_template,
   create_text_maker_component,
-  year_templates,
-  StandardLegend,
-  WrappedNivoBar,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { Subject } from "src/models/subject.js";
+import {run_template} from "src/models/text.js";
+import {year_templates} from "src/models/years.js";
+import { StandardLegend} from "src/charts/legends/index.js";
+import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 

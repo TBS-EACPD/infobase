@@ -3,13 +3,13 @@ import React from "react";
 
 import {
   declare_panel,
-  year_templates,
-  businessConstants,
-  StdPanel,
-  Col,
-  WrappedNivoLine,
-  run_template,
 } from "src/panels/panel_declarations/shared.js";
+
+import {year_templates} from "src/models/years.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
+import {run_template} from "src/models/text.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
