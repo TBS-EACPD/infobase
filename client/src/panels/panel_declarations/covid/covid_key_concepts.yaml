@@ -16,20 +16,25 @@ covid_questions_missing_measures_q:
 covid_questions_missing_measures_a:
   transform: [handlebars,markdown]
   en: |
-    COVID-19 authority and estimated expenditure information is limited to the measures presented in the Estimates.
-    While this includes some benefits such as the Canada Emergency Response Benefit (CERB), not all benefits fall inside the scope of the Estimates, notably:
-      - Employment Insurance (EI);
-      - Canada Emergency Wage Subsidy (CEWS); and
-      - Canada Emergency Rent Subsidy (CERS).  
+    The scope has focused on COVID-19 Economic Response Plan measures that fall within planned authorities as outlined in the Estimates. 
+    The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments
+    for authorizing certain payments, and not all COVID-19 related measures fall within the scope of the Estimates. For instance, Parliament
+    does not authorize spending annually for tax and liquidity measures. Excluded from this collection effort are:
+      * Measures legislated through the Income Tax Act such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
+      * Employment Insurance Benefits that are paid out of the Employment Insurance Operating Account; and
+      * Liquidity measures such as the Canada Emergency Business Account, and the Business Credit Availability Program. 
     
     More information related to the {{ext_link "benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} provided by the Government of Canada
     to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
   fr: |
-    Les renseignements sur les autorisations et l’estimation des dépenses liées à la COVID-19 sont limités aux mesures inscrites dans les budgets des dépenses.
-    Bien que cela comprenne certaines prestations telles que la Prestation canadienne d'urgence (PCU), toutes les prestations ne sont pas comprises dans le champ d'application des budgets des dépenses, notamment :
-      * l’Assurance-emploi (AE);
-      * la Subvention salariale d’urgence du Canada (SSUC);
-      * la Subvention d’urgence du Canada pour le loyer (SUCL).  
+    La collecte de données a surtout été axée sur les dépenses liées à la COVID-19 dans le cadre des autorisations prévues, telles que décrites dans
+    les budgets des dépenses. Les budgets des dépenses ont pour principal objectif de faciliter l'étude par le Parlement des projets de loi de crédits,
+    qui sont les instruments juridiques permettant d'autoriser certains paiements, et toutes les mesures liées à la COVID-19 ne sont pas inscrites aux
+    budgets des dépenses. Le Parlement, par exemple, n'autorise pas sur une base annuelle les dépenses pour les mesures fiscales et les liquidités.
+    Sont exclus de cette collecte de renseignements sur les dépenses :
+      * les mesures prévues par la Loi de l'impôt sur le revenu, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants;
+      * les prestations d'assurance-emploi versées à même le Compte des opérations de l'assurance-emploi
+      * les mesures relatives aux liquidités telles que le Compte d'urgence pour les entreprises canadiennes et le Programme de crédit aux entreprises.
 
     De plus amples renseignements sur les {ext_link "prestations et services" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}} offerts par le gouvernement du Canada
     pour venir en aide aux Canadiens et aux entreprises qui éprouvent des difficultés en raison de la pandémie de COVID-19 sont affichés en ligne.
