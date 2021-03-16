@@ -14,6 +14,8 @@ import { IconGear } from "src/icons/icons.js";
 
 import { smart_href_template } from "src/link_utils.js";
 
+import { InfoBaseHighlighter } from "src/search/search_utils.js";
+
 import {
   make_orgs_search_config,
   crsos as crso_search_config,
@@ -173,6 +175,24 @@ const EverythingSearch = withRouter(
         history.push(href_template(item));
       }
     };
+    get_all_options = _.memoize((search_configs) =>
+      _.flatMap(search_configs, (search_config, ix) =>
+        _.map(search_config.get_data(), (data) => ({
+          data,
+          name: search_config.name_function(data),
+          menu_content: (search) =>
+            _.isFunction(search_config.menu_content_function) ? (
+              search_config.menu_content_function(data, search)
+            ) : (
+              <InfoBaseHighlighter
+                search={search}
+                content={search_config.name_function(data)}
+              />
+            ),
+          config_group_index: ix,
+        }))
+      )
+    );
     render() {
       const {
         placeholder,
@@ -191,6 +211,7 @@ const EverythingSearch = withRouter(
           <Typeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
+            all_options={this.all_options}
             utility_buttons={
               !hide_utility_buttons && [
                 <SearchOptions
@@ -275,6 +296,9 @@ const EverythingSearch = withRouter(
         }
       }
     };
+    get all_options() {
+      return this.get_all_options(this.get_search_configs());
+    }
   }
 );
 EverythingSearch.defaultProps = {
