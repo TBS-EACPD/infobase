@@ -175,24 +175,7 @@ const EverythingSearch = withRouter(
         history.push(href_template(item));
       }
     };
-    get_all_options = _.memoize((search_configs) =>
-      _.flatMap(search_configs, (search_config, ix) =>
-        _.map(search_config.get_data(), (data) => ({
-          data,
-          name: search_config.name_function(data),
-          menu_content: (search) =>
-            _.isFunction(search_config.menu_content_function) ? (
-              search_config.menu_content_function(data, search)
-            ) : (
-              <InfoBaseHighlighter
-                search={search}
-                content={search_config.name_function(data)}
-              />
-            ),
-          config_group_index: ix,
-        }))
-      )
-    );
+
     render() {
       const {
         placeholder,
@@ -211,6 +194,7 @@ const EverythingSearch = withRouter(
           <Typeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
+            config_groups={this.config_groups}
             all_options={this.all_options}
             utility_buttons={
               !hide_utility_buttons && [
@@ -296,8 +280,35 @@ const EverythingSearch = withRouter(
         }
       }
     };
+    get_all_options = _.memoize((search_configs) =>
+      _.flatMap(search_configs, (search_config, ix) =>
+        _.map(search_config.get_data(), (data) => ({
+          data,
+          name: search_config.name_function(data),
+          menu_content: (search) =>
+            _.isFunction(search_config.menu_content_function) ? (
+              search_config.menu_content_function(data, search)
+            ) : (
+              <InfoBaseHighlighter
+                search={search}
+                content={search_config.name_function(data)}
+              />
+            ),
+          config_group_index: ix,
+        }))
+      )
+    );
+    get_config_groups = _.memoize((search_configs) =>
+      _.map(search_configs, (search_config, ix) => ({
+        group_header: search_config.header_function(),
+        group_filter: search_config.filter,
+      }))
+    );
     get all_options() {
       return this.get_all_options(this.get_search_configs());
+    }
+    get config_groups() {
+      return this.get_config_groups(this.get_search_configs());
     }
   }
 );
