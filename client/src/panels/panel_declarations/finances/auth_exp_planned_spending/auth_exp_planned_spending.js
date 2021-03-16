@@ -3,18 +3,17 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  run_template,
-  year_templates,
-  actual_to_planned_gap_year,
-  StandardLegend,
-  StdPanel,
-  Col,
   create_text_maker_component,
-  WrappedNivoLine,
-  newIBCategoryColors,
   util_components,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {run_template} from "src/models/text.js";
+import {year_templates, actual_to_planned_gap_year} from "src/models/years.js";
+import {StandardLegend} from "src/charts/legends/index.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
+import {newIBCategoryColors} from "src/core/color_schemes.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
