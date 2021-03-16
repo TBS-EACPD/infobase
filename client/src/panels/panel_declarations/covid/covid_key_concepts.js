@@ -40,6 +40,7 @@ export const declare_covid_key_concepts_panel = () =>
               "implementation_status",
               "auth_but_no_exp",
               "missing_measures",
+              "initiatives",
               "accruals",
             ])
               .compact()
