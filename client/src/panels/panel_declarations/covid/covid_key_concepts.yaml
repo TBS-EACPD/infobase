@@ -116,8 +116,8 @@ covid_questions_accruals_a:
     Prière de retenir que les charges à payer ne seront pas déclarées avec les estimations de dépenses en espèces présentées maintenant ou à la fin de l'exercice.
 
 covid_questions_auth_but_no_exp_q:
-  en: Why do some organizations and measures have spending authorities but no expenditures?
-  fr: Pour quelle raison certaines organisations et certaines mesures ont-elles un pouvoir de dépenser, mais pas de dépenses?
+  en: Why do some organizations and measures have spending authorities but no expenditures? Why do others have estimated expenditures either below or above their spending authorities? 
+  fr: Pour quelle raison certaines organisations et certaines mesures ont-elles un pouvoir de dépenser, mais pas de dépenses? COVID_TEXT_TODO
 covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
