@@ -18,7 +18,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "../../node_modules/react-query/devtools/index.js";
+import { ReactQueryDevtools } from "../../node_modules/react-query/dist/react-query-devtools.production.min.js";
 import { is_dev, is_dev_link } from "src/core/injected_build_constants.js";
 
 import WebFont from "webfontloader";
@@ -94,6 +94,9 @@ function bootstrapper(App, app_reducer, done) {
         },
       },
     });
+    /* eslint-disable no-console */
+    console.log(is_dev);
+    console.log(is_dev_link);
 
     done();
 
