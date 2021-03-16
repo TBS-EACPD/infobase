@@ -12,8 +12,6 @@ import { log_standard_event } from "src/core/analytics.js";
 
 import { IconSearch } from "src/icons/icons.js";
 
-import { InfoBaseHighlighter } from "src/search/search_utils.js";
-
 import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
 
 import text from "./Typeahead.yaml";
@@ -69,6 +67,7 @@ export class Typeahead extends React.Component {
       matching_results: prev_matching_results,
       may_show_menu: prev_may_show_menu,
     } = prevState;
+    const { all_options } = this.props;
 
     if (
       query_value !== prev_query_value ||
@@ -76,7 +75,7 @@ export class Typeahead extends React.Component {
       (this.show_menu && may_show_menu !== prev_may_show_menu)
     ) {
       const matching_results = _.filter(
-        this.all_options,
+        all_options,
         ({ config_group_index, data }) =>
           // could use optional chaining, but we WANT this to fail fast and loud, to catch
           // malformed search_configs during development. Should be safe otherwsie
@@ -285,28 +284,6 @@ export class Typeahead extends React.Component {
   );
   get config_groups() {
     return this.get_config_groups(this.props.search_configs);
-  }
-
-  get_all_options = _.memoize((search_configs) =>
-    _.flatMap(search_configs, (search_config, ix) =>
-      _.map(search_config.get_data(), (data) => ({
-        data,
-        name: search_config.name_function(data),
-        menu_content: (search) =>
-          _.isFunction(search_config.menu_content_function) ? (
-            search_config.menu_content_function(data, search)
-          ) : (
-            <InfoBaseHighlighter
-              search={search}
-              content={search_config.name_function(data)}
-            />
-          ),
-        config_group_index: ix,
-      }))
-    )
-  );
-  get all_options() {
-    return this.get_all_options(this.props.search_configs);
   }
 
   /*
