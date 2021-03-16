@@ -21,7 +21,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ServicesTypesPanel = ({ panel_args }) => {
   const { subject } = panel_args;
   const { isLoading, data } = useGQLReactQuery(
-    `services_types_${subject.level}_${subject.id}`,
+    `services_${subject.level}_${subject.id}`,
     subject
   );
 
