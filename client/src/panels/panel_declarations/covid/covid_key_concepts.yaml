@@ -29,7 +29,11 @@ covid_questions_missing_measures_a:
     The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments
     for authorizing certain payments, and not all COVID-19 related measures fall within the scope of the Estimates. For instance, Parliament
     does not authorize spending annually for tax and liquidity measures. Excluded from this collection effort are:
-      * Measures legislated through the Income Tax Act such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
+      * Measures legislated through the _Income Tax Act_ such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
+        * As of January 31, 2021, estimated expenditures for these programs are as follows:
+          * Canada Emergency Wage Subsidy $63.2 billion
+          * Enhanced GST Credit $5.2 billion
+          * Enhanced Canada Child Benefit $1.9 billion
       * Employment Insurance Benefits that are paid out of the Employment Insurance Operating Account; and
       * Liquidity measures such as the Canada Emergency Business Account, and the Business Credit Availability Program. 
     
@@ -41,7 +45,11 @@ covid_questions_missing_measures_a:
     qui sont les instruments juridiques permettant d'autoriser certains paiements, et toutes les mesures liées à la COVID-19 ne sont pas inscrites aux
     budgets des dépenses. Le Parlement, par exemple, n'autorise pas sur une base annuelle les dépenses pour les mesures fiscales et les liquidités.
     Sont exclus de cette collecte de renseignements sur les dépenses :
-      * les mesures prévues par la Loi de l'impôt sur le revenu, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants;
+      * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
+        * En date du 31 janvier 2021, l'estimation des dépenses pour ces programmes est la suivante:
+          * Subvention salariale d’urgence du Canada 63,2 milliards de dollars
+          * Augmentation du crédit pour TPS 5,2 milliards de dollars
+          * Allocation Canadienne pour enfants 1,9 milliard de dollars
       * les prestations d'assurance-emploi versées à même le Compte des opérations de l'assurance-emploi
       * les mesures relatives aux liquidités telles que le Compte d'urgence pour les entreprises canadiennes et le Programme de crédit aux entreprises.
 
@@ -117,7 +125,7 @@ covid_questions_accruals_a:
 
 covid_questions_auth_but_no_exp_q:
   en: Why do some organizations and measures have spending authorities but no expenditures? Why do others have estimated expenditures either below or above their spending authorities? 
-  fr: Pour quelle raison certaines organisations et certaines mesures ont-elles un pouvoir de dépenser, mais pas de dépenses? COVID_TEXT_TODO
+  fr: Pour quelle raison certaines organisations et certaines mesures ont-elles un pouvoir de dépenser, mais pas de dépenses? Pourquoi l'estimation des dépenses d'autres pays est-elle inférieure ou supérieure à leurs dépenses?
 covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
@@ -143,15 +151,23 @@ covid_questions_auth_but_no_exp_a:
     sans que les autorisations soient épuisées, car les autorisations sont un plafond. 
 
 covid_questions_initiatives_q:
-  en: What is the difference between the spending authorities by COVID-19 measure and by Estimates initiative?
-  fr: COVID_TEXT_TODO
+  en: What is the difference between the current reporting of spending authorities by COVID-19 measure and the previously reported spending authorities by Estimates initiative?
+  fr: Quelle est la différence entre l'inscription actuelle par mesure et l'inscription antérieure par initiative des autorisations de dépenser liées à la COVID-19 dans les budgets des dépenses?
 covid_questions_initiatives_a:
   transform: [handlebars,markdown]
   en: |
-    Spending authorities are listed according to the COVID-19 Economic Response Plan (ERP) (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020).
-    These authorities were previously reported by Estimates initiative and this dataset can still be found on {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}}.
+    Spending authorities by COVID-19 measure aligns with the broader information provided in the COVID-19 Economic Response Plan (ERP)
+    (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020). The spending authorities by Estimates initiative, previously
+    reported on InfoBase and in the dataset on {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}},
+    were on a more granular level in order to better support parliamentarians in their role of approving the Estimates. Note that the overall authorities
+    remain the same under both presentations.
   fr: |
-    COVID_TEXT_TODO
+    Les autorisations de dépenser par mesure reposent sur l'information plus générale figurant dans le Plan d'intervention économique pour répondre à la
+    COVID-19 (c.-à-d. les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020). Les autorisations de dépenser par initiative budgétaire, figurant
+    auparavant dans les budgets des dépenses publiés sur l'InfoBase ainsi que dans l'ensemble de données compris dans les
+    {{ext_link "Données ouvertes." "https://open.canada.ca/data/fr/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}}, sont
+    présentées de façon plus granulaire pour faciliter le travail des parlementaires qui doivent approuver les budgets des dépenses.
+    Prière de retenir que les autorisations générales restent les mêmes sous ces deux présentations.
 
 #####
 # PRE-OGGO FAQS, not in current use but would like to add at least some back in eventually

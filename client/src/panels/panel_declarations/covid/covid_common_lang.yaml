@@ -32,7 +32,7 @@ covid_above_tab_faq_link:
     Voir la section « {{gt "infographic_faq"}} » pour obtenir plus de renseignements et d’autres mises en garde.
 covid_above_tab_footnote_item:
   en: See the "Footnote(s)" section below for additional technical notes specific to this data.
-  fr: COVID_TEXT_TODO
+  fr: Voir la section « Notes de bas de page » ci-dessous pour obtenir de plus amples informations techniques à ce sujet.
 
 show_vote_stat_split:
   transform: [handlebars]
