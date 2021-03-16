@@ -67,7 +67,7 @@ export class Typeahead extends React.Component {
       matching_results: prev_matching_results,
       may_show_menu: prev_may_show_menu,
     } = prevState;
-    const { all_options } = this.props;
+    const { all_options, config_groups } = this.props;
 
     if (
       query_value !== prev_query_value ||
@@ -79,7 +79,7 @@ export class Typeahead extends React.Component {
         ({ config_group_index, data }) =>
           // could use optional chaining, but we WANT this to fail fast and loud, to catch
           // malformed search_configs during development. Should be safe otherwsie
-          this.config_groups[config_group_index].group_filter(query_value, data)
+          config_groups[config_group_index].group_filter(query_value, data)
       );
       if (matching_results !== prev_matching_results) {
         virtualized_cell_measure_cache.clearAll();
@@ -115,6 +115,7 @@ export class Typeahead extends React.Component {
       additional_a11y_description,
       min_length,
       utility_buttons,
+      config_groups,
     } = this.props;
 
     const { query_value, selection_cursor, matching_results } = this.state;
@@ -148,7 +149,7 @@ export class Typeahead extends React.Component {
               )}
               {is_first_in_group && (
                 <div className="typeahead__header" key={`group-${group_index}`}>
-                  {this.config_groups[group_index].group_header}
+                  {config_groups[group_index].group_header}
                 </div>
               )}
               <div
@@ -274,16 +275,6 @@ export class Typeahead extends React.Component {
 
   get active_item() {
     return this.typeahead_ref.current.querySelector(".typeahead__item--active");
-  }
-
-  get_config_groups = _.memoize((search_configs) =>
-    _.map(search_configs, (search_config, ix) => ({
-      group_header: search_config.header_function(),
-      group_filter: search_config.filter,
-    }))
-  );
-  get config_groups() {
-    return this.get_config_groups(this.props.search_configs);
   }
 
   /*
