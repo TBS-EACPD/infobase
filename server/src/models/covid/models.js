@@ -46,6 +46,7 @@ export default function (model_singleton) {
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
 
+    related_org_ids: [parent_fkey_type()],
     covid_estimates: [CovidEstimatesSchema],
     covid_expenditures: [CovidExpenditureSchema],
   });
@@ -105,9 +106,9 @@ export default function (model_singleton) {
       CovidMeasure,
       "covid_measure_id"
     ),
-    covid_measures_by_org_id_loader: create_resource_by_foreignkey_attr_dataloader(
+    covid_measures_by_related_org_ids_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidMeasure,
-      "covid_estimates.org_id"
+      "related_org_ids"
     ),
     covid_org_summary_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidOrgSummary,

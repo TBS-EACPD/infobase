@@ -47,10 +47,25 @@ export default async function ({ models }) {
       const filter_by_row_id = ({ covid_measure_id }) =>
         covid_measure_id === row.covid_measure_id;
 
+      const covid_estimates = _.filter(covid_estimates_rows, filter_by_row_id);
+      const covid_expenditures = _.filter(
+        covid_expenditures_rows,
+        filter_by_row_id
+      );
+
+      const related_org_ids = _.chain([
+        ...covid_estimates,
+        ...covid_expenditures,
+      ])
+        .map("org_id")
+        .uniq()
+        .value();
+
       return new CovidMeasure({
         ...row,
-        covid_estimates: _.filter(covid_estimates_rows, filter_by_row_id),
-        covid_expenditures: _.filter(covid_expenditures_rows, filter_by_row_id),
+        related_org_ids,
+        covid_estimates,
+        covid_expenditures,
       });
     }
   );
