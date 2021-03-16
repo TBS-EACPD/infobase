@@ -8,6 +8,8 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
+import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
+
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import covid_questions from "./covid_key_concepts.yaml";
@@ -34,14 +36,14 @@ export const declare_covid_key_concepts_panel = () =>
         <SomeThingsToKeepInMind>
           <KeyConceptList
             question_answer_pairs={_.chain([
-              "up_to_date",
-              "spent",
-              "other_expenditure_reporting",
-              "implementation_status",
-              "auth_but_no_exp",
+              COVID_EXPENDITUES_FLAG && "up_to_date",
+              COVID_EXPENDITUES_FLAG && "spent",
+              COVID_EXPENDITUES_FLAG && "other_expenditure_reporting",
+              COVID_EXPENDITUES_FLAG && "implementation_status",
+              COVID_EXPENDITUES_FLAG && "auth_but_no_exp",
               "missing_measures",
               "initiatives",
-              "accruals",
+              COVID_EXPENDITUES_FLAG && "accruals",
             ])
               .compact()
               .map((key) => [

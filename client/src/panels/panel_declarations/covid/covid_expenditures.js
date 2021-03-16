@@ -11,6 +11,7 @@ import {
   WrappedNivoPie,
 } from "src/panels/panel_declarations/shared.js";
 
+import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import {
   gov_covid_summary_query,
   top_covid_spending_query,
@@ -479,6 +480,10 @@ export const declare_covid_expenditures_panel = () =>
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: (subject, options) => {
+        if (!COVID_EXPENDITUES_FLAG) {
+          return false;
+        }
+
         if (level_name === "gov") {
           return true;
         } else {
