@@ -3,31 +3,31 @@ import JSURL from "jsurl";
 import _ from "lodash";
 import marked from "marked";
 
-export const sanitized_marked = (markdown) => {
+export const sanitize_html = (markup) => {
   // a little tedious, but this is the safe way to enforce safe usage of target="_blank" with DOMPurify
   // note: add and then pop the hook, don't want the side effect of leaving hooks on DOMPurify (ugh)
 
   DOMPurify.addHook("afterSanitizeAttributes", function (node) {
-    if ("target" in node) {
+    if (node?.target) {
       node.setAttribute("target", "_blank");
       node.setAttribute("rel", "noopener noreferrer");
     }
   });
 
-  const safe_markup = DOMPurify.sanitize(
-    marked(markdown, { sanitize: false, gfm: true }),
-    {
-      ADD_ATTR: ["target"],
-    }
-  );
+  const sanitized_markup = DOMPurify.sanitize(markup, {
+    ADD_ATTR: ["target"],
+  });
 
   DOMPurify.removeHook("afterSanitizeAttributes");
 
-  return safe_markup;
+  return sanitized_markup;
 };
 
+export const sanitized_marked = (markdown) =>
+  sanitize_html(marked(markdown, { sanitize: false, gfm: true }));
+
 export const sanitized_dangerous_inner_html = (html) => ({
-  __html: DOMPurify.sanitize(html),
+  __html: sanitize_html(html),
 });
 
 export const text_abbrev = function (text, length) {
