@@ -13,8 +13,6 @@ import {
 
 import { prefetchServices } from "src/models/react_query_services.js";
 
-import { Subject } from "src/models/subject.js";
-
 import { highlightColor } from "src/core/color_defs.js";
 
 import {
@@ -52,8 +50,6 @@ import "./home.scss";
 const { text_maker: home_tm, TM } = create_text_maker_component(
   home_text_bundle
 );
-const { Gov } = Subject;
-
 export default class Home extends React.Component {
   render() {
     return (
@@ -157,7 +153,7 @@ const HomeLayout = (props) => {
                   alternate_color={false}
                 />
               }
-              onMouseEnter={() => prefetchServices(queryClient, Gov)}
+              onMouseEnter={() => prefetchServices(queryClient)}
               title={<TM k="home_services_title" />}
             />
           )}

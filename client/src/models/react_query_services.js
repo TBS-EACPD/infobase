@@ -1,6 +1,8 @@
 import { request } from "graphql-request";
 import _ from "lodash";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
+
+import { Subject } from "src/models/subject.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
@@ -10,6 +12,8 @@ import {
   all_services_query,
   dept_services_query,
 } from "./populate_services.js";
+
+const { Gov } = Subject;
 
 const fetchServices = async (subject) => {
   const is_gov = subject.level === "gov";
@@ -33,7 +37,7 @@ const fetchServices = async (subject) => {
 
 const get_query_id = (subject) => `services_${subject.level}_${subject.id}`;
 
-export const prefetchServices = async (queryClient, subject) => {
+export const prefetchServices = async (queryClient, subject = Gov) => {
   await queryClient.prefetchQuery(
     get_query_id(subject),
     async () => fetchServices(subject),
