@@ -159,7 +159,7 @@ covid_questions_initiatives_a:
 
 covid_questions_financial_q:
   en: Why does GC InfoBase report COVID-19 financial data under "COVID-19" and not under "Finances"?
-  fr: COVID_TEXT_TODO
+  fr: PAUSED_COVID_TEXT_TODO
 covid_questions_financial_a:
   transform: [handlebars,markdown]
   en: |
