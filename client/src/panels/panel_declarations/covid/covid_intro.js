@@ -6,6 +6,7 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
+import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import { gov_covid_summary_query } from "src/models/covid/queries.js";
 
 import { lang } from "src/core/injected_build_constants.js";
@@ -73,15 +74,24 @@ class CovidIntroPanelDyanmicText extends React.Component {
         .value();
 
       return (
-        <TM
-          k="covid_intro"
-          args={{
-            ...panel_args,
-            gov_total_covid_estimates,
-            gov_total_covid_expenditures,
-          }}
-          className="medium-panel-text"
-        />
+        <div className="medium-panel-text">
+          <TM
+            k="covid_intro_auth"
+            args={{
+              ...panel_args,
+              gov_total_covid_estimates,
+            }}
+          />
+          {COVID_EXPENDITUES_FLAG && (
+            <TM
+              k="covid_intro_exp"
+              args={{
+                ...panel_args,
+                gov_total_covid_expenditures,
+              }}
+            />
+          )}
+        </div>
       );
     }
   }

@@ -92,7 +92,7 @@ covid_questions_spent_a:
 
 covid_questions_implementation_status_q:
   en: What do expenditures to date mean for the status of implementation of the Government’s COVID response plan?
-  fr:  Que signifie « dépenses à ce jour » dans l'état d’avancement de la mise en œuvre du plan d'intervention du gouvernement lié à la COVID-19? 
+  fr: Que signifie « dépenses à ce jour » dans l'état d’avancement de la mise en œuvre du plan d'intervention du gouvernement lié à la COVID-19? 
 covid_questions_implementation_status_a:
   en: |
     The estimated expenditures to date indicate the cash payments that have been made to suppliers for goods and services or to grants and contributions recipients. 
