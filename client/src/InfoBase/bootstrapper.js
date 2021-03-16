@@ -90,7 +90,7 @@ function bootstrapper(App, app_reducer, done) {
       defaultOptions: {
         queries: {
           refetchOnWindowFocus: false,
-          staleTime: Infinity,
+          staleTime: 1000 * 60 * 15,
         },
       },
     });

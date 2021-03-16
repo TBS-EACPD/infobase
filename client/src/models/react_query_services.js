@@ -12,7 +12,7 @@ import {
 } from "./populate_services.js";
 
 export const useGQLReactQuery = (key, subject) => {
-  const is_gov = subject ? false : true;
+  const is_gov = subject.level === "gov" || _.isUndefined(subject);
   const query = is_gov ? all_services_query : dept_services_query;
 
   return useQuery(
