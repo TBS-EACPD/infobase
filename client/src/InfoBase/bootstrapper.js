@@ -18,7 +18,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { ReactQueryDevtools } from "../../node_modules/react-query/dist/react-query-devtools.production.min.js";
+import { is_dev, is_dev_link } from "src/core/injected_build_constants.js";
 
 import WebFont from "webfontloader";
 
@@ -91,7 +92,9 @@ function bootstrapper(App, app_reducer, done) {
 
     ReactDOM.render(
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {(is_dev || is_dev_link) && (
+          <ReactQueryDevtools initialIsOpen={false} />
+        )}
         <Provider store={store}>
           {/* ConnectedRouter will use the store from Provider automatically */}
           <ConnectedRouter history={history}>

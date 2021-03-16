@@ -186,12 +186,12 @@ function get_plugins({
         json: true,
         outDir: "..",
       }),
-    // is_prod_build &&
-    //   new webpack.DefinePlugin({
-    //     "process.env": {
-    //       NODE_ENV: JSON.stringify("production"),
-    //     },
-    //   }),
+    is_prod_build &&
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("production"),
+        },
+      }),
     is_prod_build && new webpack.optimize.ModuleConcatenationPlugin(),
   ]);
 }
