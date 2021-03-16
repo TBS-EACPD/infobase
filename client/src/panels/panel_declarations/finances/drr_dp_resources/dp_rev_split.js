@@ -1,17 +1,18 @@
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker_component,
   get_source_links,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import {year_templates} from "src/models/years.js";
-import {run_template} from "src/models/text.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-
 import { Format, SmartDisplayTable } from "src/components/index.js";
+
+import {run_template} from "src/models/text.js";
+import {year_templates} from "src/models/years.js";
+
 
 import { textGreen, textRed } from "src/core/color_defs.js";
 

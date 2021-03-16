@@ -1,13 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
+import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   declare_panel,
   create_text_maker_component,
 } from "src/panels/panel_declarations/shared.js";
 
 import FootNote from "src/models/footnotes/footnotes.js";
-import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+
 import { get_source_links } from "src/metadata/data_sources.js";
 
 import { PlannedActualTable } from "./PlannedActualTable.js";
