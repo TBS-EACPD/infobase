@@ -17,8 +17,9 @@ const AboveTabFootnoteList = ({ children, subject }) => (
     <div style={{ lineHeight: "normal" }}>
       {children}
       <a className={"link-styled"} onClick={scroll_to_covid_key_concepts}>
-        <TM k={"covid_above_tab_footnote_key_concept_link"} />
+        <TM k={"covid_above_tab_faq_link"} />
       </a>
+      <TM k={"covid_above_tab_footnote_item"} el="p" />
     </div>
   </Fragment>
 );

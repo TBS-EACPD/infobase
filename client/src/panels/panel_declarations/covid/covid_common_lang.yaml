@@ -24,10 +24,15 @@ covid_above_tab_data_org_websites_note:
   transform: [handlebars]
   en: More recent or more detailed information may be available directly from individual federal organizations.
   fr: On peut obtenir des renseignements plus récents ou plus complets en s'adressant directement aux diverses organisations fédérales.
-covid_above_tab_footnote_key_concept_link:
+covid_above_tab_faq_link:
   transform: [handlebars,markdown]
-  en: See the "{{gt "infographic_faq"}}" section for more details and additional caveats.
-  fr: Voir la section « {{gt "infographic_faq"}} » pour obtenir plus de renseignements et d’autres mises en garde.
+  en: |
+    See the "{{gt "infographic_faq"}}" section for more details and additional general caveats.
+  fr: 
+    Voir la section « {{gt "infographic_faq"}} » pour obtenir plus de renseignements et d’autres mises en garde.
+covid_above_tab_footnote_item:
+  en: See the "Footnote(s)" section below for additional technical notes specific to this data.
+  fr: COVID_TEXT_TODO
 
 show_vote_stat_split:
   transform: [handlebars]
