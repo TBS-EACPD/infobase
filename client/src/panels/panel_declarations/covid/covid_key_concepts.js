@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
+import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 import {
   util_components,
   SomeThingsToKeepInMind,
@@ -9,11 +10,14 @@ import {
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
-import text from "./covid_key_concepts.yaml";
+import covid_questions from "./covid_key_concepts.yaml";
 
 const { KeyConceptList } = util_components;
 
-const { TM } = covid_create_text_maker_component(text);
+const { TM } = covid_create_text_maker_component([
+  covid_questions,
+  common_questions,
+]);
 
 const panel_key = "covid_key_concepts";
 
@@ -42,6 +46,12 @@ export const declare_covid_key_concepts_panel = () =>
               .map((key) => [
                 <TM key={"q"} k={`covid_questions_${key}_q`} />,
                 <TM key={"a"} k={`covid_questions_${key}_a`} />,
+              ])
+              .concat([
+                [
+                  <TM key={"q"} k={"different_org_names_q"} />,
+                  <TM key={"a"} k={"different_org_names_a"} />,
+                ],
               ])
               .value()}
           />
