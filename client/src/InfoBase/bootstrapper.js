@@ -86,7 +86,14 @@ function bootstrapper(App, app_reducer, done) {
       }),
       applyMiddleware(middleware)
     );
-    const queryClient = new QueryClient();
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+          staleTime: Infinity,
+        },
+      },
+    });
 
     done();
 
