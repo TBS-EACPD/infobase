@@ -98,7 +98,7 @@ export default function ({ models, loaders }) {
     org_id_loader,
     has_covid_data_loader,
     covid_measure_loader,
-    covid_measures_by_org_id_loader,
+    covid_measures_by_related_org_ids_loader,
     covid_org_summary_loader,
     covid_gov_summary_loader,
   } = loaders;
@@ -147,22 +147,7 @@ export default function ({ models, loaders }) {
       covid_summary: ({ org_id }) =>
         covid_org_summary_loader.load(org_id).then(_.first),
       covid_measures: ({ org_id: queried_org_id }) =>
-        covid_measures_by_org_id_loader.load(queried_org_id).then((measures) =>
-          _.map(measures, (measure) => {
-            const filtered_data = _.chain(measure)
-              .pick(["covid_estimates", "covid_expenditures"])
-              .mapValues((rows) =>
-                _.filter(
-                  rows,
-                  ({ org_id: row_org_id }) => row_org_id === queried_org_id
-                )
-              )
-              .value();
-
-            // these objects have non-spreadable properites (getters, methods, etc.), assign instead (and clone, out of caution for assign mutating)
-            return _.chain(measure).cloneDeep().assign(filtered_data).value();
-          })
-        ),
+        covid_measures_by_related_org_ids_loader.load(queried_org_id),
     },
     CovidMeasure: {
       id: _.property("covid_measure_id"),
