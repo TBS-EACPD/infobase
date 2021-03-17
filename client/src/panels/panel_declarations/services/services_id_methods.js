@@ -5,7 +5,6 @@ import React from "react";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -20,8 +19,7 @@ import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesIdMethodsPanel = ({ panel_args }) => {
-  const services = panel_args.services;
+const ServicesIdMethodsPanel = ({ services }) => {
   const colors = scaleOrdinal()
     .domain(["uses_identifier", "does_not_identifier", "na"])
     .range(_.take(newIBCategoryColors, 3));
@@ -138,26 +136,14 @@ export const declare_services_id_methods_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
-        return {
-          subject,
-          services: services[level],
-        };
-      },
       footnotes: false,
-      render({ calculations, sources }) {
-        const { panel_args } = calculations;
+      render({ data, sources }) {
         return (
           <InfographicPanel
             title={text_maker("identification_methods")}
             sources={sources}
           >
-            <ServicesIdMethodsPanel panel_args={panel_args} />
+            <ServicesIdMethodsPanel services={data} />
           </InfographicPanel>
         );
       },

@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 
 import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
 
 import { Subject } from "../../../models/subject.js";
 
@@ -20,9 +19,7 @@ import text from "./services.yaml";
 const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const HighApplicationVolumePanel = ({ panel_args }) => {
-  const { services } = panel_args;
-
+const HighApplicationVolumePanel = ({ services }) => {
   const data = _.chain(services)
     .groupBy("org_id")
     .map((org_services, org_id) => ({
@@ -87,18 +84,14 @@ export const declare_high_application_volume_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: () => ({
-        services: Service.get_all(),
-      }),
       footnotes: false,
-      render({ calculations, sources }) {
-        const { panel_args } = calculations;
+      render({ data, sources }) {
         return (
           <InfographicPanel
             title={text_maker("high_application_volume_title")}
             sources={sources}
           >
-            <HighApplicationVolumePanel panel_args={panel_args} />
+            <HighApplicationVolumePanel services={data} />
           </InfographicPanel>
         );
       },

@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 
 import { FancyUL } from "../../../components";
-import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -22,9 +21,9 @@ class ProvidedServicesListPanel extends React.Component {
   }
 
   render() {
-    const { panel_args } = this.props;
+    const { panel_args, services } = this.props;
     const { service_query } = this.state;
-    const { services, subject } = panel_args;
+    const { subject } = panel_args;
     const includes_lowercase = (value, query) =>
       _.includes(value.toLowerCase(), query.toLowerCase());
     const filtered_sorted_data = _.chain(services)
@@ -117,20 +116,19 @@ export const declare_provided_services_list_panel = () =>
       requires_services: true,
       calculate: (subject) => ({
         subject,
-        services:
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ calculations, data, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("list_of_provided_services_title")}
             sources={sources}
           >
-            <ProvidedServicesListPanel panel_args={panel_args} />
+            <ProvidedServicesListPanel
+              services={data}
+              panel_args={panel_args}
+            />
           </InfographicPanel>
         );
       },

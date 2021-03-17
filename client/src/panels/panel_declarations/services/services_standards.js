@@ -5,7 +5,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import Gauge from "../../../charts/gauge.js";
 import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -18,9 +17,7 @@ import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesStandardsPanel = ({ panel_args }) => {
-  const { services } = panel_args;
-
+const ServicesStandardsPanel = ({ services }) => {
   const has_standards_count = _.chain(services)
     .countBy("standards")
     .filter((value, key) => key)
@@ -144,26 +141,14 @@ export const declare_services_standards_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
-      calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
-        return {
-          subject,
-          services: services[level],
-        };
-      },
       footnotes: false,
-      render({ calculations, sources }) {
-        const { panel_args } = calculations;
+      render({ data, sources }) {
         return (
           <InfographicPanel
             title={text_maker("service_standards_title")}
             sources={sources}
           >
-            <ServicesStandardsPanel panel_args={panel_args} />
+            <ServicesStandardsPanel services={data} />
           </InfographicPanel>
         );
       },

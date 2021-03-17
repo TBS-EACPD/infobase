@@ -10,8 +10,6 @@ import {
 
 import { is_a11y_mode, lang } from "src/core/injected_build_constants.js";
 
-import { Service } from "../../../models/services.js";
-
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -37,8 +35,8 @@ const colors = scaleOrdinal().range([
   separatorColor,
 ]);
 
-const ServicesDigitalStatusPanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
+const ServicesDigitalStatusPanel = ({ services, panel_args }) => {
+  const { subject } = panel_args;
 
   const get_current_status_count = (key, value) =>
     _.countBy(services, `${key}_status`)[value] || 0;
@@ -171,25 +169,22 @@ export const declare_services_digital_status_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ calculations, data, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("services_digital_status")}
             sources={sources}
           >
-            <ServicesDigitalStatusPanel panel_args={panel_args} />
+            <ServicesDigitalStatusPanel
+              services={data}
+              panel_args={panel_args}
+            />
           </InfographicPanel>
         );
       },

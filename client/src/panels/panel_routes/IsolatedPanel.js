@@ -6,7 +6,7 @@ import { StandardRouteContainer } from "../../core/NavComponents.js";
 import { Subject } from "../../models/subject";
 import { create_text_maker } from "../../models/text.js";
 import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
-import { PanelRenderer } from "../PanelRenderer.js";
+import PanelRenderer from "../PanelRenderer.js";
 
 import text from "./IsolatedPanel.yaml";
 

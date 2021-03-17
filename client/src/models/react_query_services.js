@@ -27,14 +27,20 @@ const fetchServices = async (subject) => {
     lang,
     id: is_gov ? "gov" : subject.id,
   });
-  console.log(res);
   if (res.isError) {
     throw new Error(res.error);
   }
   const data = is_gov ? res.root.orgs : res.root.org.services;
+  console.log(data);
+
   const services = is_gov
-    ? _.chain(data).flatMap("services").compact().uniqBy("service_id").value()
-    : data;
+    ? _.chain(data)
+        .flatMap("services")
+        .compact()
+        .uniqBy("service_id")
+        .flatMap((service) => ({ ...service, id: service.service_id })) //TODO I don't like this duplication. Should try to throw this into pipeline
+        .value()
+    : _.flatMap(data, (service) => ({ ...service, id: service.service_id }));
 
   return services;
 };

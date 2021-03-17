@@ -2,6 +2,8 @@ import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
 
+import { useGQLReactQuery } from "src/models/react_query_services.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import {
@@ -17,7 +19,7 @@ import { Subject } from "../models/subject.js";
 
 import { get_panels_for_subject } from "../panels/get_panels_for_subject/index.js";
 import { PanelRegistry } from "../panels/PanelRegistry.js";
-import { PanelRenderer } from "../panels/PanelRenderer.js";
+import PanelRenderer from "../panels/PanelRenderer.js";
 import { EverythingSearch } from "../search/EverythingSearch.js";
 
 import { bubble_defs } from "./bubble_definitions.js";
@@ -146,7 +148,7 @@ class InfoGraph_ extends React.Component {
     }
   }
   render() {
-    const { subject, active_bubble_id } = this.props;
+    const { subject, active_bubble_id, data } = this.props;
     const {
       loading,
       subject_bubble_defs,
@@ -220,6 +222,7 @@ class InfoGraph_ extends React.Component {
                 subject={subject}
                 active_bubble_id={active_bubble_id}
                 key={panel_key + subject.guid}
+                data={data}
               />
             ))}
         </div>
@@ -381,6 +384,14 @@ const Infographic = ({
     );
   }
 
+  const { isLoading, data } = (() => {
+    if (active_bubble_id === "services") {
+      return useGQLReactQuery(subject);
+    } else {
+      return { isLoading: undefined, data: undefined };
+    }
+  })();
+
   const title = text_maker("infographic_for", { subject });
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
@@ -395,12 +406,17 @@ const Infographic = ({
       route_key={sub_app_name}
     >
       <h1 dangerouslySetInnerHTML={{ __html: title }} />
-      <InfoGraph_
-        level={level}
-        subject={subject}
-        active_bubble_id={bubble_id}
-        options={options}
-      />
+      {isLoading ? (
+        <SpinnerWrapper config_name={"route"} />
+      ) : (
+        <InfoGraph_
+          data={data}
+          level={level}
+          subject={subject}
+          active_bubble_id={bubble_id}
+          options={options}
+        />
+      )}
     </StandardRouteContainer>
   );
 };

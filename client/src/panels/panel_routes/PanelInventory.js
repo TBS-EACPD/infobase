@@ -15,7 +15,7 @@ import { EverythingSearch } from "src/search/EverythingSearch.js";
 
 import { get_panels_for_subject } from "../get_panels_for_subject/index.js";
 import { PanelRegistry } from "../PanelRegistry.js";
-import { PanelRenderer } from "../PanelRenderer.js";
+import PanelRenderer from "../PanelRenderer.js";
 
 import panel_text from "./PanelInventory.yaml";
 

@@ -5,7 +5,6 @@ import { infobase_colors } from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { StandardLegend, SelectAllControl } from "../../../charts/legends";
-import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -59,9 +58,9 @@ class ServicesChannelsPanel extends React.Component {
     };
   }
   render() {
-    const { panel_args } = this.props;
+    const { panel_args, services } = this.props;
     const { active_services } = this.state;
-    const { services, subject } = panel_args;
+    const { subject } = panel_args;
 
     const { max_vol_service_name, max_vol_service_value } = _.chain(services)
       .map(({ name, service_report }) => ({
@@ -289,20 +288,16 @@ export const declare_services_channels_panel = () =>
       requires_services: true,
       calculate: (subject) => ({
         subject,
-        services:
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ calculations, data, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("services_channels_title")}
             sources={sources}
           >
-            <ServicesChannelsPanel panel_args={panel_args} />
+            <ServicesChannelsPanel services={data} panel_args={panel_args} />
           </InfographicPanel>
         );
       },

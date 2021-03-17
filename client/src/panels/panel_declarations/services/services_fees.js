@@ -3,7 +3,6 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { Service } from "../../../models/services.js";
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -17,8 +16,8 @@ import text from "./services.yaml";
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesFeesPanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
+const ServicesFeesPanel = ({ panel_args, services }) => {
+  const { subject } = panel_args;
   const service_charges_fees = _.countBy(services, "collects_fees");
   const data = [
     {
@@ -75,25 +74,19 @@ export const declare_services_fees_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ calculations, data, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("services_fees")}
             sources={sources}
           >
-            <ServicesFeesPanel panel_args={panel_args} />
+            <ServicesFeesPanel services={data} panel_args={panel_args} />
           </InfographicPanel>
         );
       },
