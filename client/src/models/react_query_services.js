@@ -24,7 +24,10 @@ const fetchServices = async (subject) => {
 
   const endpoint = await get_api_url();
   const client = new GraphQLClient(endpoint, {
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
   });
   const res = await client.request(query, {
     lang,
