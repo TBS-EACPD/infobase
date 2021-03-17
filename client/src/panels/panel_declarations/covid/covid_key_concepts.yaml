@@ -39,7 +39,11 @@ covid_questions_missing_measures_a:
     More information related to the {{ext_link "benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} provided by the Government of Canada
     to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
   fr: |
-    COVID_TEXT_TODO:
+    La portée actuelle du Plan intervention économique pour répondre à la COVID19 est axée sur les mesures qui font
+    partie des autorisations prévues inscrites dans les budgets des dépenses. Les budgets des dépenses ont pour
+    principal objectif de faciliter l'étude par le Parlement des projets de loi de crédits, qui sont les instruments
+    juridiques permettant d'autoriser certains paiements, ainsi que des mesures liées à la COVID-19 qui ne sont pas
+    inscrites aux budgets des dépenses. Par exemple, sont exclues de ces données :
       * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
         * En date du 31 janvier 2021, l'estimation des dépenses pour ces programmes est la suivante:
           * Subvention salariale d’urgence du Canada 63,2 milliards de dollars
