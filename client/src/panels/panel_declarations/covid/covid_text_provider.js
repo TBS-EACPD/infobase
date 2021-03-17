@@ -5,6 +5,7 @@ import {
   COVID_LAST_REFRESHED_MONTH,
   COVID_CURRENT_YEAR,
   COVID_NEXT_YEAR,
+  COVID_EXPENDITUES_FLAG,
 } from "src/models/covid/covid_config.js";
 
 import { create_text_maker_component } from "src/components";
@@ -24,6 +25,7 @@ export const covid_create_text_maker_component = (text) => {
       COVID_LAST_REFRESHED_MONTH,
       COVID_CURRENT_YEAR,
       COVID_NEXT_YEAR,
+      COVID_EXPENDITUES_FLAG,
     });
 
   const ExtendedTM = (props) => <TM tmf={extended_text_maker} {...props} />;

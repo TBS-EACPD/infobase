@@ -29,10 +29,12 @@ covid_questions_missing_measures_a:
     The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments
     for authorizing certain payments annually, and therefore not all COVID-19 related measures fall within its scope. For instance, excluded from the data are:
       * Measures legislated through the _Income Tax Act_ such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
+      {{#if COVID_EXPENDITUES_FLAG}}
         * As of January 31, 2021, estimated expenditures for these programs are as follows:
           * Canada Emergency Wage Subsidy $63.2 billion
           * Enhanced GST Credit $5.2 billion
           * Enhanced Canada Child Benefit $1.9 billion
+      {{/if}}
       * Employment Insurance Benefits that are paid out of the Employment Insurance Operating Account; and
       * Liquidity measures such as the Canada Emergency Business Account, and the Business Credit Availability Program. 
     
@@ -44,10 +46,12 @@ covid_questions_missing_measures_a:
     des projets de loi de crédits, qui sont les instruments juridiques permettant d'autoriser certains paiements, ainsi que  toutes les mesures
     liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses. Par exemple, sont exclues de ces données :
       * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
+      {{#if COVID_EXPENDITUES_FLAG}}
         * En date du 31 janvier 2021, l'estimation des dépenses pour ces programmes est la suivante:
           * Subvention salariale d’urgence du Canada 63,2 milliards de dollars
           * Augmentation du crédit pour TPS 5,2 milliards de dollars
           * Allocation Canadienne pour enfants 1,9 milliard de dollars
+      {{/if}}
       * les prestations d'assurance-emploi versées à même le Compte des opérations de l'assurance-emploi
       * les mesures relatives aux liquidités telles que le Compte d'urgence pour les entreprises canadiennes et le Programme de crédit aux entreprises.
 
