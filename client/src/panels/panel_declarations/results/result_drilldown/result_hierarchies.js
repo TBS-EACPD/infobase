@@ -3,8 +3,8 @@ import _ from "lodash";
 
 import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common.js";
 
-import { Subject } from "src/models/subject.js";
 import * as Results from "src/models/results.js";
+import { Subject } from "src/models/subject.js";
 
 import {
   filter_hierarchy,

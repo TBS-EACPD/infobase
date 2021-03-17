@@ -1,15 +1,18 @@
 import React from "react";
 
+
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker_component,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
-import {WrappedNivoCircleProportion} from "src/charts/wrapped_nivo/index.js";
+
 import {year_templates} from "src/models/years.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import {WrappedNivoCircleProportion} from "src/charts/wrapped_nivo/index.js";
 
 import text2 from "src/common_text/common_lang.yaml";
 

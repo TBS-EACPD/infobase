@@ -1,13 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
+import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
 import * as util_components from "src/components/index.js";
-import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+
 import {infograph_href_template} from "src/infographic/infographic_link.js";
 
 import {

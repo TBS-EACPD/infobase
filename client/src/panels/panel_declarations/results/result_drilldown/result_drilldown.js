@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import { text_maker } from "src/panels/panel_declarations/results/result_text_provider.js";
 import {
   ResultCounts,
@@ -11,9 +12,11 @@ import {
 import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
 import * as util_components from "src/components/index.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import { get_source_links } from "src/metadata/data_sources.js";
+
 import { ensure_loaded } from "src/core/lazy_loader.js";
+
+import { get_source_links } from "src/metadata/data_sources.js";
+
 
 import ResultsExplorer from "./results_scheme.js";
 

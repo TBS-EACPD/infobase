@@ -2,16 +2,18 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   declare_panel,
   create_text_maker_component,
 } from "src/panels/panel_declarations/shared.js";
 
 import { Subject } from "src/models/subject.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import { get_source_links } from "src/metadata/data_sources.js";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { get_source_links } from "src/metadata/data_sources.js";
+
 
 import { get_static_url } from "src/request_utils.js";
 
