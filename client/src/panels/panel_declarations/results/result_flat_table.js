@@ -2,15 +2,16 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  util_components,
-  InfographicPanel,
-  ensure_loaded,
-  infograph_href_template,
-  get_source_links,
-  Results,
   declare_panel,
   HeightClippedGraph,
 } from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
+import {infograph_href_template,} from "src/infographic/infographic_link.js";
+import { get_source_links } from "src/metadata/data_sources.js";
+import * as Results from "src/models/results.js";
 
 import { ModalButton } from "src/components/index.js";
 

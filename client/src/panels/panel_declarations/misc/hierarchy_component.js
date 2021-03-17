@@ -2,10 +2,9 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  Subject,
-  create_text_maker_component,
-} from "src/panels/panel_declarations/shared.js";
+import {create_text_maker_component} from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
 
 import { highlightColor } from "src/core/color_defs.js";
 

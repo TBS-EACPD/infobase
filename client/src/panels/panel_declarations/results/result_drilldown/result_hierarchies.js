@@ -2,7 +2,9 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
 import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common.js";
-import { Subject, Results } from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
+import * as Results from "src/models/results.js";
 
 import {
   filter_hierarchy,

@@ -3,18 +3,18 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  formats,
-  run_template,
-  Subject,
-  businessConstants,
-  year_templates,
   TabbedContent,
   create_text_maker_component,
-  StdPanel,
-  Col,
   declare_panel,
-  NivoLineBarToggle,
 } from "src/panels/panel_declarations/shared.js";
+
+import {formats} from "src/core/format.js";
+import {run_template} from "src/models/text.js";
+import { Subject } from "src/models/subject.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import {year_templates} from "src/models/years.js";
+import {StdPanel,Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {NivoLineBarToggle} from "src/charts/wrapped_nivo/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 

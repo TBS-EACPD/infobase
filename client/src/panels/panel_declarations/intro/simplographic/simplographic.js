@@ -1,12 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import {
-  Subject,
-  declare_panel,
-  util_components,
-  InfographicPanel,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
+import * as util_components from "src/components/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import { ResultCounts, current_drr_key } from "src/models/results.js";
 

@@ -1,13 +1,13 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
-import {
-  Results,
-  infograph_href_template,
-  businessConstants,
-  formats,
-  newIBCategoryColors,
-} from "src/panels/panel_declarations/shared.js";
+
+
+import * as Results from "src/models/results.js";
+import {infograph_href_template} from "src/infographic/infographic_link.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import { formats} from "src/core/format.js";
+import {newIBCategoryColors} from "src/core/color_schemes.js";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common.js";
 

@@ -8,13 +8,12 @@ import {
   result_docs,
   result_docs_in_tabling_order,
 } from "src/panels/panel_declarations/results/results_common.js";
-import {
-  util_components,
-  InfographicPanel,
-  get_source_links,
-  ensure_loaded,
-  declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { get_source_links } from "src/metadata/data_sources.js";
+import { ensure_loaded } from "src/core/lazy_loader.js";
 
 import ResultsExplorer from "./results_scheme.js";
 

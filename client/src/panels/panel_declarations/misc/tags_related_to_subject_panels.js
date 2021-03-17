@@ -3,13 +3,14 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  Subject,
-  TextPanel,
-  util_components,
-  infograph_href_template,
   create_text_maker_component,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
+import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import * as util_components from "src/components/index.js";
+import {infograph_href_template} from "src/infographic/infographic_link.js";
 
 import { HierarchyDeadElementIcon } from "./hierarchy_component.js";
 

@@ -2,13 +2,14 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  Subject,
   create_text_maker_component,
-  InfographicPanel,
-  get_source_links,
   declare_panel,
   HeightClippedGraph,
 } from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { get_source_links } from "src/metadata/data_sources.js";
 
 import {
   default_dept_name_sort_func,
