@@ -1,19 +1,21 @@
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   declare_panel,
   HeightClippedGraph,
 } from "src/panels/panel_declarations/shared.js";
 
-import { Subject } from "src/models/subject.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import { get_source_links } from "src/metadata/data_sources.js";
-
 import {
   SmartDisplayTable,
   default_dept_name_sort_func,
 } from "src/components/index.js";
+
+import { Subject } from "src/models/subject.js";
+
+import { get_source_links } from "src/metadata/data_sources.js";
+
 
 import { DrrSummary } from "./drr_summary.js";
 import { TM, text_maker } from "./drr_summary_text.js";

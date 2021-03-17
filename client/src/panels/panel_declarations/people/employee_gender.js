@@ -2,16 +2,18 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker_component,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import {formats} from "src/core/format.js";
-import {run_template} from "src/models/text.js";
 import { businessConstants } from "src/models/businessConstants.js";
+import {run_template} from "src/models/text.js";
 import {year_templates} from "src/models/years.js";
-import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+
+import {formats} from "src/core/format.js";
+
 import {NivoLineBarToggle} from "src/charts/wrapped_nivo/index.js";
 
 import { calculate_common_text_args } from "./calculate_common_text_args.js";

@@ -1,13 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
-import { Subject } from "src/models/subject.js";
 import * as util_components from "src/components/index.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import { ResultCounts, current_drr_key } from "src/models/results.js";
+import { Subject } from "src/models/subject.js";
 
 import { is_mobile } from "src/core/feature_detection.js";
 

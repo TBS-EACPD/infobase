@@ -3,13 +3,14 @@ import _ from "lodash";
 
 
 
-import * as Results from "src/models/results.js";
-import {infograph_href_template} from "src/infographic/infographic_link.js";
 import { businessConstants } from "src/models/businessConstants.js";
-import { formats} from "src/core/format.js";
+import * as Results from "src/models/results.js";
+
 import {newIBCategoryColors} from "src/core/color_schemes.js";
+import { formats} from "src/core/format.js";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common.js";
+import {infograph_href_template} from "src/infographic/infographic_link.js";
 
 import { text_maker } from "./result_text_provider.js";
 

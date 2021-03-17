@@ -3,17 +3,21 @@ import { scaleLinear } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker_component,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import {formats} from "src/core/format.js";
-import {run_template} from "src/models/text.js";
-import { businessConstants } from "src/models/businessConstants.js";
-import {year_templates} from "src/models/years.js";
-import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 import * as util_components from "src/components/index.js";
+
+import { businessConstants } from "src/models/businessConstants.js";
+import {run_template} from "src/models/text.js";
+
+import {year_templates} from "src/models/years.js";
+
+import {formats} from "src/core/format.js";
+
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

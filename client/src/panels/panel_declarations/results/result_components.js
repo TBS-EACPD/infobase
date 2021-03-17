@@ -2,10 +2,11 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 
-import * as general_utils from "src/general_utils.js";
 import * as util_components from "src/components/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import * as general_utils from "src/general_utils.js";
 
 import {
   IconCheck,
