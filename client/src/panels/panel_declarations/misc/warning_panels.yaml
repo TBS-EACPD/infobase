@@ -7,7 +7,7 @@ dead_program_warning_text:
   en: |
     Unless you're here for historical financial data, select the 'Where can I go from here?' topic above to see all of **{{subject.dept.name}}**'s Programs.
   fr: |
-    À moins que vous voulez des donées financières historiques, sélectionnez le sujet «Où puis-je aller à partir d'ici?» ci-dessus pour voir tous les Programmes **{{de_dept subject.dept}}**.
+    À moins que vous voulez des données financières historiques, sélectionnez le sujet «Où puis-je aller à partir d'ici?» ci-dessus pour voir tous les Programmes **{{de_dept subject.dept}}**.
 dead_program_warning:
   transform: [handlebars, markdown]
   en: This Program is no longer active; only limited information is available
