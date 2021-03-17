@@ -23,7 +23,9 @@ const fetchServices = async (subject) => {
   const query = is_gov ? all_services_query : dept_services_query;
 
   const endpoint = await get_api_url();
-  const client = new GraphQLClient(endpoint, { headers: {} });
+  const client = new GraphQLClient(endpoint, {
+    headers: { "Content-Type": "application/json" },
+  });
   const res = await client.request(query, {
     lang,
     id: is_gov ? "gov" : subject.id,

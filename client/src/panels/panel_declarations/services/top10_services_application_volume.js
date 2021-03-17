@@ -29,8 +29,9 @@ const total_volume = text_maker("applications_and_calls");
 const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
-const Top10ServicesApplicationVolumePanel = ({ panel_args }) => {
-  const { data, subject } = panel_args;
+const Top10ServicesApplicationVolumePanel = ({ panel_args, data }) => {
+  const { subject } = panel_args;
+
   const column_configs = {
     id: {
       index: 0,
@@ -141,15 +142,11 @@ export const declare_top10_services_application_volume_panel = () =>
       requires_services: true,
       calculate: (subject) => ({
         subject,
-        services:
-          level === "dept"
-            ? Service.get_by_dept(subject.id)
-            : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ calculations, data, sources }) {
         const { panel_args } = calculations;
-        const data = _.chain(panel_args.services)
+        const processed_data = _.chain(data)
           .map(({ id, service_report }) => ({
             id,
             [total_volume]: _.reduce(
@@ -166,12 +163,13 @@ export const declare_top10_services_application_volume_panel = () =>
         return (
           <InfographicPanel
             title={text_maker("top10_services_volume_title", {
-              num_of_services: data.length,
+              num_of_services: processed_data.length,
             })}
             sources={sources}
           >
             <Top10ServicesApplicationVolumePanel
-              panel_args={{ ...panel_args, data }}
+              panel_args={panel_args}
+              data={processed_data}
             />
           </InfographicPanel>
         );

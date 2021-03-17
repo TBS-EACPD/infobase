@@ -32,8 +32,8 @@ const total_volume = text_maker(website_visits_key);
 const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
-const Top10WebsiteVisitsPanel = ({ panel_args }) => {
-  const { data, subject } = panel_args;
+const Top10WebsiteVisitsPanel = ({ panel_args, data }) => {
+  const { subject } = panel_args;
   const is_gov = subject.level === "gov";
   const get_name = (id) => {
     if (is_gov) {
@@ -173,24 +173,18 @@ export const declare_top10_website_visits_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ calculations, data, sources }) {
         const { panel_args } = calculations;
-        const { subject, services } = panel_args;
+        const { subject } = panel_args;
 
         const preprocessed_data =
           subject.level === "gov"
-            ? _.chain(services)
+            ? _.chain(data)
                 .groupBy("org_id")
                 .map((org_services, org_id) => ({
                   id: org_id,
@@ -202,13 +196,13 @@ export const declare_top10_website_visits_panel = () =>
                   ),
                 }))
                 .value()
-            : _.map(services, ({ id, service_report }) => ({
+            : _.map(data, ({ id, service_report }) => ({
                 id,
                 [total_volume]:
                   _.sumBy(service_report, `${website_visits_key}_count`) || 0,
               }));
 
-        const data = _.chain(preprocessed_data)
+        const processed_data = _.chain(preprocessed_data)
           .filter(total_volume)
           .sortBy(total_volume)
           .takeRight(10)
@@ -220,11 +214,14 @@ export const declare_top10_website_visits_panel = () =>
               subject.level === "gov"
                 ? "top10_gov_website_visits"
                 : "top10_services_website_visits",
-              { num_of_services: data.length }
+              { num_of_services: processed_data.length }
             )}
             sources={sources}
           >
-            <Top10WebsiteVisitsPanel panel_args={{ ...panel_args, data }} />
+            <Top10WebsiteVisitsPanel
+              data={processed_data}
+              panel_args={panel_args}
+            />
           </InfographicPanel>
         );
       },
