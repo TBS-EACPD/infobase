@@ -34,7 +34,7 @@ home_a11y_non_a11y_redirect_warning:
     Any information which was presented on the page you were redirected from can be found in the [report builder](#rpb).
   fr: |
     Vous avez été redirigé vers une version d'InfoBase du GC textuel à partir d'une page sans équivalent textuel.
-    Les pages sans équivalent textuel servent à visualiser des donées et ne constituent pas la seule présentation de ces données dans InfoBase du GC.
+    Les pages sans équivalent textuel servent à visualiser des données et ne constituent pas la seule présentation de ces données dans InfoBase du GC.
     Toute information présentée sur la page à partir de laquelle vous avez été redirigé se trouve dans le [générateur de rapports](#rpb).
 
 home_a11y_desc:
