@@ -148,24 +148,6 @@ covid_questions_auth_but_no_exp_a:
     que l'estimation des dépenses soit supérieure aux autorisations pour une mesure donnée. Inversement, il se peut que la mise en œuvre d'une mesure soit achevée
     sans que les autorisations soient épuisées, car les autorisations sont un plafond. 
 
-covid_questions_initiatives_q:
-  en: What is the difference between the reporting of spending authorities by COVID-19 measure and the spending authorities by Estimates initiative dataset available on Open Data?
-  fr: Quelle est la différence entre l'inscription des autorisations de dépenses par mesure liées à la COVID-19 et les autorisations de dépenses par initiative inclus dans les Données ouvertes?
-covid_questions_initiatives_a:
-  transform: [handlebars,markdown]
-  en: |
-    Spending authorities by COVID-19 measure aligns with the broader information provided in the COVID-19 Economic Response Plan (ERP)
-    (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020). The spending authorities by Estimates initiative, in the dataset on 
-    {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}},
-    are on a more granular level in order to better support parliamentarians in their role of approving the Estimates. Note that the overall authorities
-    remain the same.
-  fr: |
-    Les autorisations de dépenses par mesure reposent sur l'information plus générale figurant dans le Plan d'intervention économique pour répondre à la
-    COVID-19 (c’est-à-dire les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020). Les autorisations de dépenses par initiative budgétaire dans
-    l'ensemble de données inclus dans les {{ext_link "Données ouvertes" "https://open.canada.ca/data/fr/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}}
-    figurent de façon plus granulaire afin de faciliter le travail des parlementaires chargés d’approuver les budgets des dépenses. Prière de retenir
-    que les autorisations générales restent les mêmes.
-
 #####
 # PRE-OGGO FAQS, not in current use but would like to add at least some back in eventually
 #####

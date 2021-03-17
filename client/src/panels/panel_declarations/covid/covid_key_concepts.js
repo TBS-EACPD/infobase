@@ -42,7 +42,6 @@ export const declare_covid_key_concepts_panel = () =>
               COVID_EXPENDITUES_FLAG && "implementation_status",
               COVID_EXPENDITUES_FLAG && "auth_but_no_exp",
               "missing_measures",
-              "initiatives",
               COVID_EXPENDITUES_FLAG && "accruals",
             ])
               .compact()
