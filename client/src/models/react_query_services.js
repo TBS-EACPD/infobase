@@ -1,4 +1,4 @@
-import { request } from "graphql-request";
+import { GraphQLClient } from "graphql-request";
 import _ from "lodash";
 import { useQuery } from "react-query";
 
@@ -23,7 +23,8 @@ const fetchServices = async (subject) => {
   const query = is_gov ? all_services_query : dept_services_query;
 
   const endpoint = await get_api_url();
-  const res = await request(endpoint, query, {
+  const client = new GraphQLClient(endpoint, { headers: {} });
+  const res = await client.request(query, {
     lang,
     id: is_gov ? "gov" : subject.id,
   });
