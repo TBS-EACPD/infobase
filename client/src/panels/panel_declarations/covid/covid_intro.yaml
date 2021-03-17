@@ -10,13 +10,11 @@ covid_intro_panel_title:
 covid_intro_auth:
   transform: [handlebars,markdown]
   en: |
-    Over the last year, with the unprecedented scale and impact of COVID-19, Parliament has prioritized measures responding to COVID-19.
     The Supplementary Estimates (A, B and C) for **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}** present a **total of
     {{fmt_compact1_written gov_total_covid_estimates}} in planned spending authorities** for federal organizations
     across the Government of Canada to spend in support of COVID-19 measures. These are “up to” authorities in recognition of the urgency and uncertainty
     in which these measures were brought forward in the pandemic context.
   fr: |
-    L’année dernière, compte tenu de l'ampleur et de l'impact sans précédent de la COVID-19, le Parlement a accordé la priorité aux mesures en réponse à la pandémie.
     Les budgets supplémentaires des dépenses (A, B et C) pour **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}** **totalisent
     {{fmt_compact1_written gov_total_covid_estimates}} en autorisations de dépenses** prévues des organisations
     fédérales consacrées aux mesures liées à la pandémie. Il s'agit du plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude dans
