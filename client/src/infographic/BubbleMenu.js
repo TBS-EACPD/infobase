@@ -1,9 +1,11 @@
 import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
+import { useQueryClient } from "react-query";
+
+import { prefetchServices } from "src/models/react_query_services.js";
 
 import { primaryColor, backgroundColor } from "src/core/color_defs.js";
-
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { TM } from "../components/index.js";
@@ -11,7 +13,8 @@ import { trivial_text_maker } from "../models/text.js";
 
 import "./BubbleMenu.scss";
 
-const BubbleMenu = ({ items, active_item_id }) => {
+const BubbleMenu = ({ items, active_item_id, subject }) => {
+  const queryClient = useQueryClient();
   if (is_a11y_mode) {
     return (
       <nav aria-label={trivial_text_maker("dataset_navigation")}>
@@ -51,6 +54,9 @@ const BubbleMenu = ({ items, active_item_id }) => {
               )}
               href={href}
               key={id}
+              onMouseEnter={() =>
+                id === "services" && prefetchServices(queryClient, subject)
+              }
             >
               <div className="bub-item">
                 <strong className="title">{title}</strong>

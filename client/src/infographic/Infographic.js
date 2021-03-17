@@ -183,6 +183,7 @@ class InfoGraph_ extends React.Component {
               <BubbleMenu
                 items={subject_bubble_defs}
                 active_item_id={active_bubble_id}
+                subject={subject}
               />
             )}
           </div>
