@@ -2,14 +2,11 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import {
-  StdPanel,
-  Col,
-  WrappedNivoBar,
-  declare_panel,
-  businessConstants,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
+import { businessConstants } from "src/models/businessConstants.js";
 import {
   highlightColor,
   secondaryColor,

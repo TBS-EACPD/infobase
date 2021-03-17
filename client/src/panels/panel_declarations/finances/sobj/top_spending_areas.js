@@ -3,13 +3,13 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  StdPanel,
-  Col,
   create_text_maker_component,
-  table_common,
   declare_panel,
-  WrappedNivoPie,
 } from "src/panels/panel_declarations/shared.js";
+
+import {StdPanel,Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import * as table_common from "src/tables/table_common.js";
+import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

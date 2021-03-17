@@ -2,14 +2,14 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  formats,
   create_text_maker_component,
-  StdPanel,
-  Col,
-  WrappedNivoBar,
-  table_common,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import { formats} from "src/core/format.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
+import * as table_common from "src/tables/table_common.js";
 
 import { highlightColor, secondaryColor } from "src/core/color_defs.js";
 

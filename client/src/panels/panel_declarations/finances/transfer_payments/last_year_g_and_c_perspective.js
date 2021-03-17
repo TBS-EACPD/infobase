@@ -1,12 +1,10 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  StdPanel,
-  Col,
-  WrappedNivoCircleProportion,
-  declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoCircleProportion} from "src/charts/wrapped_nivo/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

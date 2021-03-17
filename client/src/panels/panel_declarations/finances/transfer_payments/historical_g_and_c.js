@@ -1,17 +1,15 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  run_template,
-  declare_panel,
-  year_templates,
-  businessConstants,
-  StandardLegend,
-  SelectAllControl,
-  InfographicPanel,
-  util_components,
-  WrappedNivoLine,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import {run_template} from "src/models/text.js";
+import {year_templates} from "src/models/years.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import * as util_components from "src/components/index.js";
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
