@@ -334,11 +334,6 @@ const measure_cell_tooltips = [
     subject_ids: ["gov", 280],
     text: text_maker("covid_estimates_COV115_2020_tooltip"),
   },
-  {
-    measure_ids: ["OTHER"],
-    subject_ids: ["*"],
-    text: text_maker("covid_estimates_OTHER_tooltip"),
-  },
 ];
 const get_measure_cell_tooltip = (cell_measure_id, table_subject_id) =>
   _.chain(measure_cell_tooltips)
@@ -386,9 +381,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           }))
           .value()
       )
-      .sortBy(({ measure_id, total }) =>
-        measure_id !== "OTHER" ? -total : Infinity
-      )
+      .sortBy(({ total }) => -total)
       .value();
 
     const column_configs = {

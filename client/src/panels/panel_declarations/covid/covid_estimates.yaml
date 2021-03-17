@@ -97,12 +97,3 @@ covid_estimates_COV115_2020_tooltip:
     Ces autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires
     {{ext_link "en ligne" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/budgets-supplementaires/budget-supplementaire-depenses-c-2020-2021/affectations-bloquees-autorisations-votees.html"}}
     relatifs au Budget supplémentaire des dépenses (C) 2020-2021.
-covid_estimates_OTHER_tooltip:
-  en: |
-    "COVID-19 items not included in the ERP but presented in Estimates" includes a small number of other items that are tagged as COVID-19
-    in the Estimates, as a means of highlighting to parliamentarians where the funding is, at least in part, driven by COVID-19 even though
-    the initiative itself is not part of the COVID-19 Economic Response Plan.
-  fr: |
-    « Postes relatifs à la COVID-19 non inclus dans la PRO, mais figurant dans les budgets des dépenses » qui comportent un petit nombre d'autres
-    postes étiquetés COVID-19 dans les budgets des dépenses pour signaler aux parlementaires où se trouve le financement accordé pour la pandémie,
-    du moins en partie, même si l'initiative elle-même ne figure pas dans le Plan d’intervention économique du Canada pour répondre à la COVID-19.
