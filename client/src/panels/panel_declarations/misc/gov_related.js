@@ -5,8 +5,9 @@ import {
   declare_panel,
   create_text_maker,
   TM,
-  InfographicPanel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import text from "./gov_related.yaml";
 

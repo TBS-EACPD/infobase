@@ -1,10 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
-import {
-  declare_panel,
-  InfographicPanel,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import { SingleTagResourceExplorer } from "./rooted_resource_scheme.js";
 

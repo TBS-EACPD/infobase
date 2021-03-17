@@ -1,9 +1,8 @@
 import _ from "lodash";
 
-import {
-  run_template,
-  year_templates,
-} from "src/panels/panel_declarations/shared.js";
+
+import {run_template} from "src/models/text.js";
+import {year_templates} from "src/models/years.js";
 
 const { people_years } = year_templates;
 

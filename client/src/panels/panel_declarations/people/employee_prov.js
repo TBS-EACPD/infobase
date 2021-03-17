@@ -4,16 +4,16 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  formats,
-  run_template,
-  year_templates,
-  businessConstants,
   create_text_maker_component,
-  StdPanel,
-  Col,
   declare_panel,
-  util_components,
 } from "src/panels/panel_declarations/shared.js";
+
+import {formats} from "src/core/format.js";
+import {run_template} from "src/models/text.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import {year_templates} from "src/models/years.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import * as util_components from "src/components/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

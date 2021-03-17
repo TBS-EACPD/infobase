@@ -2,13 +2,14 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  TextPanel,
-  util_components,
-  Table,
-  rpb_link,
   create_text_maker_component,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import * as util_components from "src/components/index.js";
+import { Table } from "src/core/TableClass.js";
+import { rpb_link } from "src/rpb/rpb_link.js";
 
 import text from "./rpb_links.yaml";
 

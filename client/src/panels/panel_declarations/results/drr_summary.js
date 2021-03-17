@@ -2,16 +2,15 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  StandardLegend,
-  InfographicPanel,
-  businessConstants,
-  get_source_links,
-  Results,
-  declare_panel,
-  WrappedNivoPie,
-  util_components,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import { StandardLegend} from "src/charts/legends/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import { get_source_links } from "src/metadata/data_sources.js";
+import * as Results from "src/models/results.js";
+import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
+import * as util_components from "src/components/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

@@ -2,16 +2,16 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  formats,
-  run_template,
-  year_templates,
   create_text_maker_component,
-  StdPanel,
-  Col,
-  WrappedNivoLine,
-  businessConstants,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {formats} from "src/core/format.js";
+import {run_template} from "src/models/text.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import {year_templates} from "src/models/years.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
 
 import {
   primaryColor,
