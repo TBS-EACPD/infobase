@@ -147,7 +147,7 @@ covid_questions_auth_but_no_exp_a:
 
 covid_questions_initiatives_q:
   en: What is the difference between the reporting of spending authorities by COVID-19 measure and the previously reported spending authorities by Estimates initiative?
-  fr: COVID_TEXT_TODO
+  fr: Quelle est la différence entre l'inscription par mesure et l'inscription par initiative des autorisations de dépenser liées à la COVID-19 dans les budgets des dépenses?
 covid_questions_initiatives_a:
   transform: [handlebars,markdown]
   en: |
@@ -157,7 +157,11 @@ covid_questions_initiatives_a:
     are on a more granular level in order to better support parliamentarians in their role of approving the Estimates. Note that the overall authorities
     remain the same.
   fr: |
-    COVID_TEXT_TODO
+    Les autorisations de dépenser par mesure reposent sur l'information plus générale figurant dans le Plan d'intervention économique pour répondre à la COVID-19
+    (c.-à-d. les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020). Les autorisations de dépenser par initiative budgétaire dans l'ensemble de données
+    inclus dans les {{ext_link "Données ouvertes" "https://open.canada.ca/data/fr/dataset/80ae9905-9034-4cf7-9057-d34af6065561"}}
+    figurent de façon plus granulaire afin de faciliter le travail des parlementaires chargés d’approuver les budgets des dépenses.
+    Prière de retenir que les autorisations générales restent les mêmes.
 
 #####
 # PRE-OGGO FAQS, not in current use but would like to add at least some back in eventually
