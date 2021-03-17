@@ -3,18 +3,18 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  run_template,
-  Table,
-  InfographicPanel,
-  year_templates,
   create_text_maker_component,
-  util_components,
-  rpb_link,
-  get_appropriate_rpb_subject,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {run_template,} from "src/models/text.js";
+import { Table } from "src/core/TableClass.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import {year_templates} from "src/models/years.js";
+import * as util_components from "src/components/index.js";
+import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

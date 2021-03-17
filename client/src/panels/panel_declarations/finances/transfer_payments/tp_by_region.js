@@ -4,15 +4,15 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  formats,
-  run_template,
   declare_panel,
-  year_templates,
-  businessConstants,
   create_text_maker_component,
-  StdPanel,
-  Col,
 } from "src/panels/panel_declarations/shared.js";
+
+import {formats} from "src/core/format.js";
+import {run_template} from "src/models/text.js";
+import {year_templates} from "src/models/years.js";
+import { businessConstants } from "src/models/businessConstants.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
   SpinnerWrapper,

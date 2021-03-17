@@ -1,15 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import {
-  StdPanel,
-  Col,
-  WrappedNivoCircleProportion,
-  declare_panel,
-  Subject,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
 import FootNote from "src/models/footnotes/footnotes.js";
+import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {WrappedNivoCircleProportion} from "src/charts/wrapped_nivo/index.js";
+import { Subject } from "src/models/subject.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

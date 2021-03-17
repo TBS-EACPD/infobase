@@ -3,17 +3,15 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import {
-  Subject,
-  formats,
-  util_components,
-  infograph_href_template,
-  StdPanel,
-  Col,
-  newIBLightCategoryColors,
-  WrappedNivoTreemap,
-  declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import { Subject } from "src/models/subject.js";
+import { formats } from "src/core/format.js";
+import * as util_components from "src/components/index.js";
+import {infograph_href_template} from "src/infographic/infographic_link.js";
+import {StdPanel,Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {newIBLightCategoryColors} from "src/core/color_schemes.js";
+import {WrappedNivoTreemap} from "src/charts/wrapped_nivo/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 

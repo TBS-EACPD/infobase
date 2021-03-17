@@ -3,15 +3,12 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import {
-  run_template,
-  year_templates,
-  actual_to_planned_gap_year,
-  trivial_text_maker,
-  WrappedNivoLine,
-  newIBCategoryColors,
-  Table,
-} from "src/panels/panel_declarations/shared.js";
+import {run_template} from "src/models/text.js";
+import {year_templates, actual_to_planned_gap_year} from "src/models/years.js";
+import {trivial_text_maker} from "src/models/text.js";
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
+import {newIBCategoryColors,} from "src/core/color_schemes.js";
+import { Table } from "src/core/TableClass.js";
 
 import { tertiaryColor } from "src/core/color_defs.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";

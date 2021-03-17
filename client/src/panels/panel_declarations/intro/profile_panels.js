@@ -2,15 +2,16 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  TextPanel,
-  general_utils,
-  util_components,
   create_text_maker_component,
-  infograph_href_template,
-  Subject,
-  formats,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import * as general_utils from "src/general_utils.js";
+import * as util_components from "src/components/index.js";
+import {infograph_href_template} from "src/infographic/infographic_link.js";
+import { Subject } from "src/models/subject.js";
+import {formats} from "src/core/format.js";
 
 import text from "./profile_panels.yaml";
 

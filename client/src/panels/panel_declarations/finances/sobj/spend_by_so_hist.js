@@ -3,19 +3,16 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import {
-  businessConstants,
-  year_templates,
-  util_components,
-  InfographicPanel,
-  StandardLegend,
-  SelectAllControl,
-  run_template,
-  WrappedNivoLine,
-  newIBLightCategoryColors,
-  newIBDarkCategoryColors,
-  declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+import { businessConstants } from "src/models/businessConstants.js";
+import {year_templates} from "src/models/years.js";
+import * as util_components from "src/components/index.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
+import {run_template} from "src/models/text.js";
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
+import {newIBLightCategoryColors, newIBDarkCategoryColors} from "src/core/color_schemes.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
