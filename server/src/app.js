@@ -29,6 +29,7 @@ app.use(
     origin: "*",
     methods: ["POST", "GET"],
     allowedHeaders: [
+      "Access-Control-Allow-Origin",
       "Content-Type",
       "Authorization",
       "Content-Length",
