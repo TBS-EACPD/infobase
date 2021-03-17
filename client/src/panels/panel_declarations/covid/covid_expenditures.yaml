@@ -8,7 +8,7 @@ covid_expenditures_above_tab_footnote_list:
     * Given the extraordinary context of the pandemic, the Treasury Board Secretariat (TBS) has reached out to organizations to gather spending data related
       to COVID-19 on a monthly basis, recognizing that the ability to effectively track expenditures attributable to the COVID-19 response varies greatly by
       measure, and by organization. For more details, see the FAQ item "Where does the Government normally report expenditure information (COVID, non-COVID)?"
-    * {{gt "covid_above_tab_limited_measure_note"}}
+    * {{{gt "covid_above_tab_limited_measure_note"}}}
     * {{gt "covid_above_tab_data_org_websites_note"}}
     * {{gt "covid_above_tab_data_freshness_note"}}
   fr: |
@@ -16,7 +16,7 @@ covid_expenditures_above_tab_footnote_list:
       le Secrétariat du Conseil du Trésor (le Secrétariat) s'est adressé aux organisations pour recueillir des données mensuelles sur les dépenses au titre de la COVID-19,
       reconnaissant que la capacité de suivre efficacement les dépenses attribuables aux interventions liées à la pandémie varie grandement selon la mesure et l'organisation.
       Pour plus de détails, consultez la FAQ "Où le gouvernement déclare-t-il habituellement ses dépenses (COVID, non-COVID)?"
-    * {{gt "covid_above_tab_limited_measure_note"}}
+    * {{{gt "covid_above_tab_limited_measure_note"}}}
     * {{gt "covid_above_tab_data_org_websites_note"}}
     * {{gt "covid_above_tab_data_freshness_note"}}
     
