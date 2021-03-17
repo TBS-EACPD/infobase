@@ -1,13 +1,16 @@
 import _ from "lodash";
 import React from "react";
 
-import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
 import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
-import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
+import {declare_panel} from "src/panels/panel_declarations/shared.js";
+
+
 import {year_templates} from "src/models/years.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
 

@@ -2,6 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker_component,
   get_planned_fte_source_link,
@@ -9,14 +10,18 @@ import {
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
 
-import {run_template,} from "src/models/text.js";
-import { Table } from "src/core/TableClass.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import {year_templates} from "src/models/years.js";
 import * as util_components from "src/components/index.js";
-import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
+
+import {run_template,} from "src/models/text.js";
+
+import {year_templates} from "src/models/years.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { Table } from "src/core/TableClass.js";
+
+
+import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
+
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
 import { format_and_get_fte } from "./welcome_mat_fte.js";

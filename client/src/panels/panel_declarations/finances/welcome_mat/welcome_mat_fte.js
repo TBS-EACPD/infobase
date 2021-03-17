@@ -6,12 +6,14 @@ import MediaQuery from "react-responsive";
 
 import {run_template,trivial_text_maker} from "src/models/text.js";
 import {year_templates,actual_to_planned_gap_year} from "src/models/years.js";
-import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
-import {newIBCategoryColors} from "src/core/color_schemes.js";
-import { Table } from "src/core/TableClass.js";
 
 import { tertiaryColor } from "src/core/color_defs.js";
+import {newIBCategoryColors} from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { Table } from "src/core/TableClass.js";
+
+
+import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
 
 const { std_years, planning_years } = year_templates;
 
