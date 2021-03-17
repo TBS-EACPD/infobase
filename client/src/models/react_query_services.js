@@ -24,6 +24,7 @@ const fetchServices = async (subject) => {
 
   const endpoint = await get_api_url();
   const client = new GraphQLClient(endpoint, {
+    mode: "cors",
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",

@@ -113,7 +113,6 @@ export const CanHaveAPIData = (superclass) => {
       super();
       this._has_data = {
         results_data: null,
-        services_data: null,
       };
       this._API_data_types = _.keys(this._has_data);
     }

@@ -13,10 +13,10 @@ import {
   api_load_results_counts,
   subject_has_results,
 } from "../models/populate_results.js";
-import {
-  api_load_subject_has_services,
-  api_load_services,
-} from "../models/populate_services.js";
+// import {
+//   api_load_subject_has_services,
+//   api_load_services,
+// } from "../models/populate_services.js";
 import { PanelRegistry, tables_for_panel } from "../panels/PanelRegistry.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
@@ -94,21 +94,21 @@ function ensure_loaded({
     subject.root.id === "HI" &&
     _.isUndefined(subject.lookups);
 
-  const should_load_has_services =
-    has_services ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_has_services")
-      .some()
-      .value();
+  // const should_load_has_services =
+  //   has_services ||
+  //   _.chain(panel_keys)
+  //     .map((key) => PanelRegistry.lookup(key, subject_level))
+  //     .map("requires_has_services")
+  //     .some()
+  //     .value();
 
-  const should_load_services =
-    services ||
-    _.chain(panel_keys)
-      .map((key) => PanelRegistry.lookup(key, subject_level))
-      .map("requires_services")
-      .some()
-      .value();
+  // const should_load_services =
+  //   services ||
+  //   _.chain(panel_keys)
+  //     .map((key) => PanelRegistry.lookup(key, subject_level))
+  //     .map("requires_services")
+  //     .some()
+  //     .value();
 
   const should_load_covid_estimates =
     covid_estimates ||
@@ -173,14 +173,14 @@ function ensure_loaded({
     ? load_footnotes_bundle(footnotes_subject)
     : Promise.resolve();
 
-  const has_services_prom =
-    should_load_has_services && _.isFunction(subject.set_has_data)
-      ? api_load_subject_has_services(subject)
-      : Promise.resolve();
+  // const has_services_prom =
+  //   should_load_has_services && _.isFunction(subject.set_has_data)
+  //     ? api_load_subject_has_services(subject)
+  //     : Promise.resolve();
 
-  const services_prom = should_load_services
-    ? api_load_services(subject)
-    : Promise.resolve();
+  // const services_prom = should_load_services
+  //   ? api_load_services(subject)
+  //   : Promise.resolve();
 
   const horizontal_initiative_lookups_prom = should_load_horizontal_initiative_lookups
     ? load_horizontal_initiative_lookups()
@@ -209,8 +209,8 @@ function ensure_loaded({
     has_results_prom,
     granular_result_counts_prom,
     footnotes_prom,
-    has_services_prom,
-    services_prom,
+    // has_services_prom,
+    // services_prom,
     horizontal_initiative_lookups_prom,
     covid_initiatives_prom,
     covid_measures_prom,

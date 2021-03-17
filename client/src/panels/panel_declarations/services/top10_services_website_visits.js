@@ -6,7 +6,6 @@ import MediaQuery from "react-responsive";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
 import { Subject } from "../../../models/subject.js";
 
 import {
@@ -35,15 +34,10 @@ const volume_formatter = (val) =>
 const Top10WebsiteVisitsPanel = ({ panel_args, data }) => {
   const { subject } = panel_args;
   const is_gov = subject.level === "gov";
-  const get_name = (id) => {
-    if (is_gov) {
-      const dept = Dept.lookup(id);
-      return dept ? dept.name : "";
-    } else {
-      const srvce = Service.lookup(id);
-      return srvce ? srvce.name : "";
-    }
-  };
+  const data_name_lookup = _.chain(data)
+    .map(({ id, name }) => [id, name])
+    .fromPairs()
+    .value();
 
   const column_configs = {
     id: {
@@ -58,10 +52,10 @@ const Top10WebsiteVisitsPanel = ({ panel_args, data }) => {
               : `#dept/${subject.id}/service-panels/${id}`
           }
         >
-          {get_name(id)}
+          {data_name_lookup[id]}
         </a>
       ),
-      raw_formatter: (id) => get_name(id),
+      raw_formatter: (id) => data_name_lookup[id],
     },
     [total_volume]: {
       index: 1,
@@ -90,7 +84,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args, data }) => {
             : "top10_services_website_visits_text"
         }
         args={{
-          highest_volume_name: get_name(_.last(data).id),
+          highest_volume_name: data_name_lookup[_.last(data).id],
           highest_volume_value: _.last(data)[total_volume],
           num_of_services: data.length,
         }}
@@ -149,7 +143,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args, data }) => {
                         dominantBaseline="end"
                       >
                         <TspanLineWrapper
-                          text={get_name(tick.value)}
+                          text={data_name_lookup[tick.value]}
                           width={70}
                         />
                       </text>
@@ -186,18 +180,25 @@ export const declare_top10_website_visits_panel = () =>
           subject.level === "gov"
             ? _.chain(data)
                 .groupBy("org_id")
-                .map((org_services, org_id) => ({
-                  id: org_id,
-                  [total_volume]: _.sumBy(
-                    org_services,
-                    ({ service_report }) =>
-                      _.sumBy(service_report, `${website_visits_key}_count`) ||
-                      0
-                  ),
-                }))
+                .map((org_services, org_id) => {
+                  const dept = Dept.lookup(org_id);
+                  return {
+                    id: org_id,
+                    name: dept ? dept.name : "",
+                    [total_volume]: _.sumBy(
+                      org_services,
+                      ({ service_report }) =>
+                        _.sumBy(
+                          service_report,
+                          `${website_visits_key}_count`
+                        ) || 0
+                    ),
+                  };
+                })
                 .value()
-            : _.map(data, ({ id, service_report }) => ({
+            : _.map(data, ({ id, name, service_report }) => ({
                 id,
+                name,
                 [total_volume]:
                   _.sumBy(service_report, `${website_visits_key}_count`) || 0,
               }));

@@ -6,7 +6,6 @@ import MediaQuery from "react-responsive";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -31,6 +30,10 @@ const volume_formatter = (val) =>
 
 const Top10ServicesApplicationVolumePanel = ({ panel_args, data }) => {
   const { subject } = panel_args;
+  const data_name_lookup = _.chain(data)
+    .map(({ id, name }) => [id, name])
+    .fromPairs()
+    .value();
 
   const column_configs = {
     id: {
@@ -39,10 +42,10 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args, data }) => {
       is_searchable: true,
       formatter: (id) => (
         <a href={`#dept/${subject.id}/service-panels/${id}`}>
-          {Service.lookup(id).name}
+          {data_name_lookup[id]}
         </a>
       ),
-      raw_formatter: (id) => Service.lookup(id).name,
+      raw_formatter: (id) => data_name_lookup[id],
     },
     [total_volume]: {
       index: 1,
@@ -65,7 +68,7 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args, data }) => {
         className="medium-panel-text"
         k="top10_services_volume_text"
         args={{
-          highest_service_name: Service.lookup(_.last(data).id).name,
+          highest_service_name: data_name_lookup[_.last(data).id],
           highest_service_value: _.last(data)[total_volume],
           num_of_services: data.length,
         }}
@@ -117,7 +120,7 @@ const Top10ServicesApplicationVolumePanel = ({ panel_args, data }) => {
                         dominantBaseline="end"
                       >
                         <TspanLineWrapper
-                          text={Service.lookup(tick.value).name}
+                          text={data_name_lookup[tick.value]}
                           width={70}
                         />
                       </text>
@@ -147,8 +150,9 @@ export const declare_top10_services_application_volume_panel = () =>
       render({ calculations, data, sources }) {
         const { panel_args } = calculations;
         const processed_data = _.chain(data)
-          .map(({ id, service_report }) => ({
+          .map(({ id, name, service_report }) => ({
             id,
+            name,
             [total_volume]: _.reduce(
               delivery_channels_keys,
               (sum, key) => sum + _.sumBy(service_report, `${key}_count`) || 0,
