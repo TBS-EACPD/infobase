@@ -56,7 +56,6 @@ app.use(function (req, res, next) {
 
   process.env.USE_REMOTE_DB &&
     console.log(JSON.stringify(get_log_object_for_request(req)));
-  res.header("Access-Control-Allow-Origin", "*");
 
   next();
 });

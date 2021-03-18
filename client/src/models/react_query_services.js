@@ -27,7 +27,6 @@ const fetchServices = async (subject) => {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
     },
   });
   const res = await client.request(query, {
