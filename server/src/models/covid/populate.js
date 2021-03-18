@@ -212,25 +212,26 @@ export default async function ({ models }) {
       _.chain(all_rows_with_org_data)
         .map(subject_id_key)
         .uniq()
-        .flatMap((subject_id) =>
-          _.map(
-            covid_years,
-            (fiscal_year) =>
-              new HasCovidData({
-                subject_id,
-                fiscal_year,
-                ..._.chain({
-                  estimates: covid_estimates_rows,
-                  expenditures: covid_expenditures_rows,
-                })
-                  .map((rows, data_type) => [
-                    `has_${data_type}`,
-                    _.some(rows, { fiscal_year, [subject_id_key]: subject_id }),
-                  ])
-                  .fromPairs()
-                  .value(),
+        .map(
+          (subject_id) =>
+            new HasCovidData({
+              subject_id,
+              ..._.chain({
+                estimates: covid_estimates_rows,
+                expenditures: covid_expenditures_rows,
               })
-          )
+                .map((rows, data_type) => [
+                  `has_${data_type}`,
+                  _.chain(rows)
+                    .filter({ [subject_id_key]: subject_id })
+                    .map("fiscal_year")
+                    .uniq()
+                    .sortBy()
+                    .value(),
+                ])
+                .fromPairs()
+                .value(),
+            })
         )
         .value()
   );

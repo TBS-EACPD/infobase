@@ -42,10 +42,8 @@ const schema = `
   }
 
   type HasCovidData {
-    fiscal_year: String
-
-    has_estimates: Boolean
-    has_expenditures: Boolean
+    has_estimates: [String]
+    has_expenditures: [String]
   }
 
   type CovidData {
