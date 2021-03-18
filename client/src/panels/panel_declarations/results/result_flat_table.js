@@ -18,8 +18,8 @@ import { businessConstants } from "src/models/businessConstants.js";
 import * as Results from "src/models/results.js";
 import { Indicator } from "src/models/results.js";
 
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { lang } from "src/core/injected_build_constants.js";
-import { ensure_loaded } from "src/core/lazy_loader.js";
 
 import { toggle_list } from "src/general_utils.js";
 import {infograph_href_template,} from "src/infographic/infographic_link.js";
