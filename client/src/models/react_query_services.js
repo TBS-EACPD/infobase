@@ -1,4 +1,5 @@
-import { GraphQLClient } from "graphql-request";
+import axios from "axios";
+// import { GraphQLClient } from "graphql-request";
 import _ from "lodash";
 import { useQuery } from "react-query";
 
@@ -22,22 +23,36 @@ const fetchServices = async (subject) => {
   const is_gov = subject.level === "gov";
   const query = is_gov ? all_services_query : dept_services_query;
 
-  const endpoint = await get_api_url();
-  const client = new GraphQLClient(endpoint, {
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
+  const url = await get_api_url();
+  // const client = new GraphQLClient(url, {
+  //   mode: "cors",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  // const res = await client.request(query, {
+  //   lang,
+  //   id: is_gov ? "gov" : subject.id,
+  // });
+  const res = await axios.post(
+    url,
+    {
+      query: query.loc.source.body,
+      variables: { lang, id: is_gov ? "gov" : subject.id },
     },
-  });
-  const res = await client.request(query, {
-    lang,
-    id: is_gov ? "gov" : subject.id,
-  });
-  if (res.isError) {
-    throw new Error(res.error);
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(res);
+
+  if (res.status !== 200) {
+    throw new Error("fetchServices failed");
   }
-  const data = is_gov ? res.root.orgs : res.root.org.services;
-  console.log(data);
+  const res_data = res.data.data.root;
+  const data = is_gov ? res_data.orgs : res_data.org.services;
 
   const services = is_gov
     ? _.chain(data)
