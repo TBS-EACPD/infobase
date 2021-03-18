@@ -4,9 +4,10 @@ import React from "react";
 import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   declare_panel,
-  create_text_maker,
   TM,
 } from "src/panels/panel_declarations/shared.js";
+
+import { create_text_maker } from "src/models/text.js";
 
 
 import text from "./gov_related.yaml";

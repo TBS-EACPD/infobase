@@ -4,65 +4,19 @@ import React, { Fragment } from "react";
 import { ButtonToolbar } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 
-import { PanelRegistry, layout_types } from "src/panels/PanelRegistry.js";
+import { PanelRegistry} from "src/panels/PanelRegistry.js";
 
 import * as util_components from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
-import FootNote from "src/models/footnotes/footnotes.js";
-import { GlossaryEntry } from "src/models/glossary.js";
-import * as Results from "src/models/results.js";
-import { Subject } from "src/models/subject.js";
 import {
-  create_text_maker,
   trivial_text_maker,
-  run_template,
 } from "src/models/text.js";
-import {
-  year_templates,
-  actual_to_planned_gap_year,
-} from "src/models/years.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
-import {
-  newIBCategoryColors,
-  newIBLightCategoryColors,
-  newIBDarkCategoryColors,
-} from "src/core/color_schemes.js";
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { formats, formatter } from "src/core/format.js";
 import { Table } from "src/core/TableClass.js";
 
-import { Canada } from "src/charts/canada/index.js";
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
-import { get_formatter, infobase_colors_smart } from "src/charts/shared.js";
-import {
-  WrappedNivoBar,
-  WrappedNivoHBar,
-  WrappedNivoLine,
-  WrappedNivoPie,
-  WrappedNivoCircleProportion,
-  NivoLineBarToggle,
-  WrappedNivoTreemap,
-} from "src/charts/wrapped_nivo/index.js";
-
-import * as general_utils from "src/general_utils.js";
-import {
-  infograph_href_template,
-  infograph_options_href_template,
-} from "src/infographic/infographic_link.js";
-import { glossary_href } from "src/link_utils.js";
-import { get_source_links } from "src/metadata/data_sources.js";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
-import * as table_common from "src/tables/table_common.js";
-
-import {
-  InfographicPanel,
-  StdPanel,
-  TextPanel,
-  Col,
-} from "./InfographicPanel.js";
 
 import "./shared.scss";
 
@@ -192,57 +146,13 @@ const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
 
 export {
   // re-exports
-  Table,
-  rpb_link,
-  get_appropriate_rpb_subject,
-  Subject,
-  year_templates,
-  actual_to_planned_gap_year,
-  businessConstants,
-  general_utils,
-  FootNote,
-  GlossaryEntry,
-  util_components,
   Format,
-  infograph_href_template,
-  infograph_options_href_template,
-  glossary_href,
-  Results,
-  ensure_loaded,
-  formats,
-  formatter,
-  trivial_text_maker,
-  create_text_maker,
-  run_template,
-  StdPanel,
-  TextPanel,
-  InfographicPanel,
-  Col,
-  layout_types,
   TabbedControls,
   TabbedContent,
   TM,
   create_text_maker_component,
-  DlItem,
-  get_source_links,
-  newIBCategoryColors,
-  newIBLightCategoryColors,
-  newIBDarkCategoryColors,
-  StandardLegend,
-  SelectAllControl,
-  WrappedNivoBar,
-  WrappedNivoHBar,
-  WrappedNivoLine,
-  WrappedNivoPie,
-  WrappedNivoCircleProportion,
-  WrappedNivoTreemap,
-  Canada,
-  breakpoints,
   SpinnerWrapper,
-  get_formatter,
-  table_common,
-  NivoLineBarToggle,
-  infobase_colors_smart,
+  DlItem,
   // shared panel utils
   declare_panel,
   get_planned_spending_source_link,

@@ -3,10 +3,11 @@ import React from "react";
 
 import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 import {
-  util_components,
   SomeThingsToKeepInMind,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 

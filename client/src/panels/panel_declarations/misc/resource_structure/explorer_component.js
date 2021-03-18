@@ -3,8 +3,9 @@ import React, { Fragment } from "react";
 
 import {
   TabbedControls,
-  run_template,
 } from "src/panels//panel_declarations/shared.js";
+
+import { run_template } from "src/models/text.js";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

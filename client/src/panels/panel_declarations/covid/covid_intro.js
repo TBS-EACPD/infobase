@@ -1,10 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
-  InfographicPanel,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import { gov_covid_summary_query } from "src/models/covid/queries.js";
