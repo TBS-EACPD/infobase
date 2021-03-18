@@ -110,11 +110,11 @@ Object {
           ],
           "has_covid_data": Array [
             Object {
-              "has_estimates": Array [
+              "years_with_estimates": Array [
                 "2020",
                 "2021",
               ],
-              "has_expenditures": Array [
+              "years_with_expenditures": Array [
                 "2020",
               ],
             },
@@ -228,11 +228,11 @@ Object {
           ],
           "has_covid_data": Array [
             Object {
-              "has_estimates": Array [
+              "years_with_estimates": Array [
                 "2020",
                 "2021",
               ],
-              "has_expenditures": Array [
+              "years_with_expenditures": Array [
                 "2020",
                 "2021",
               ],
@@ -307,11 +307,11 @@ Object {
           ],
           "has_covid_data": Array [
             Object {
-              "has_estimates": Array [
+              "years_with_estimates": Array [
                 "2020",
                 "2021",
               ],
-              "has_expenditures": Array [
+              "years_with_expenditures": Array [
                 "2020",
               ],
             },
@@ -571,11 +571,11 @@ Object {
             ],
             "has_covid_data": Array [
               Object {
-                "has_estimates": Array [
+                "years_with_estimates": Array [
                   "2020",
                   "2021",
                 ],
-                "has_expenditures": Array [
+                "years_with_expenditures": Array [
                   "2020",
                 ],
               },
@@ -689,11 +689,11 @@ Object {
             ],
             "has_covid_data": Array [
               Object {
-                "has_estimates": Array [
+                "years_with_estimates": Array [
                   "2020",
                   "2021",
                 ],
-                "has_expenditures": Array [
+                "years_with_expenditures": Array [
                   "2020",
                   "2021",
                 ],
@@ -768,11 +768,11 @@ Object {
             ],
             "has_covid_data": Array [
               Object {
-                "has_estimates": Array [
+                "years_with_estimates": Array [
                   "2020",
                   "2021",
                 ],
-                "has_expenditures": Array [
+                "years_with_expenditures": Array [
                   "2020",
                 ],
               },
@@ -792,35 +792,40 @@ Object {
   "data": Object {
     "root": Object {
       "does_not_have_data": Object {
-        "has_covid_data": null,
+        "has_covid_data": Array [
+          Object {
+            "years_with_estimates": Array [],
+            "years_with_expenditures": Array [],
+          },
+        ],
       },
       "has_data": Object {
         "has_covid_data": Array [
           Object {
-            "has_estimates": Array [
+            "years_with_estimates": Array [
               "2020",
               "2021",
             ],
-            "has_expenditures": Array [
+            "years_with_expenditures": Array [
               "2020",
             ],
           },
         ],
       },
-      "only_has_estimates": Object {
+      "only_years_with_estimates": Object {
         "has_covid_data": Array [
           Object {
-            "has_estimates": Array [
+            "years_with_estimates": Array [
               "2020",
             ],
-            "has_expenditures": Array [],
+            "years_with_expenditures": Array [],
           },
           Object {
-            "has_estimates": Array [
+            "years_with_estimates": Array [
               "2020",
               "2021",
             ],
-            "has_expenditures": Array [
+            "years_with_expenditures": Array [
               "2020",
             ],
           },
@@ -838,11 +843,11 @@ Object {
       "covid_measure": Object {
         "has_covid_data": Array [
           Object {
-            "has_estimates": Array [
+            "years_with_estimates": Array [
               "2020",
               "2021",
             ],
-            "has_expenditures": Array [
+            "years_with_expenditures": Array [
               "2020",
             ],
           },

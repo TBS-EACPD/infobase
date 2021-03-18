@@ -32,8 +32,8 @@ export default function (model_singleton) {
   const HasCovidDataSchema = mongoose.Schema({
     subject_id: parent_fkey_type(),
 
-    has_estimates: [fyear_type()],
-    has_expenditures: [fyear_type()],
+    years_with_estimates: [fyear_type()],
+    years_with_expenditures: [fyear_type()],
   });
 
   const CovidMeasureSchema = mongoose.Schema({
