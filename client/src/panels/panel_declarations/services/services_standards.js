@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { useGQLReactQuery } from "src/models/react_query_services.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import Gauge from "../../../charts/gauge.js";
@@ -17,14 +19,33 @@ import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesStandardsPanel = ({ services }) => {
-  const has_standards_count = _.chain(services)
+const ServicesStandardsPanel = ({ panel_args }) => {
+  const { subject } = panel_args;
+  const { isLoading, data } = useGQLReactQuery({
+    subject,
+    key: `services_standards_${subject.id}`,
+    fetch_all_orgs: subject.level === "gov",
+    service_fragments: `standards {  
+      target_type
+      standard_report {
+        lower
+        count
+        met_count
+        is_target_met
+      }
+    }`,
+  });
+  if (isLoading) {
+    return <span>loading</span>;
+  }
+
+  const has_standards_count = _.chain(data)
     .countBy("standards")
     .filter((value, key) => key)
     .map()
     .sum()
     .value();
-  const total_flat_standards = _.chain(services)
+  const total_flat_standards = _.chain(data)
     .flatMap("standards")
     .reject(({ target_type }) => target_type === "Other type of target")
     .flatMap("standard_report")
@@ -55,15 +76,13 @@ const ServicesStandardsPanel = ({ services }) => {
             data={[
               {
                 id: text_maker("no_standards"),
-                value: services.length - has_standards_count,
-                pct:
-                  (services.length - has_standards_count) / services.length ||
-                  0,
+                value: data.length - has_standards_count,
+                pct: (data.length - has_standards_count) / data.length || 0,
               },
               {
                 id: text_maker("has_standards"),
                 value: has_standards_count,
-                pct: has_standards_count / services.length || 0,
+                pct: has_standards_count / data.length || 0,
               },
             ]}
             column_configs={{
@@ -77,7 +96,7 @@ const ServicesStandardsPanel = ({ services }) => {
         ) : (
           <Gauge
             value={has_standards_count}
-            total_value={services.length}
+            total_value={data.length}
             show_pct={false}
           />
         )}
@@ -85,7 +104,7 @@ const ServicesStandardsPanel = ({ services }) => {
           <TM
             k="gauge_has_standards_text"
             args={{
-              has_standards_pct: has_standards_count / services.length || 0,
+              has_standards_pct: has_standards_count / data.length || 0,
             }}
           />
         </h2>
@@ -142,13 +161,19 @@ export const declare_services_standards_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       footnotes: false,
-      render({ data, sources }) {
+      calculate: (subject) => {
+        return {
+          subject,
+        };
+      },
+      render({ calculations, sources }) {
+        const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("service_standards_title")}
             sources={sources}
           >
-            <ServicesStandardsPanel services={data} />
+            <ServicesStandardsPanel panel_args={panel_args} />
           </InfographicPanel>
         );
       },

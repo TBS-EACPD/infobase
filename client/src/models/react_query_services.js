@@ -6,24 +6,23 @@ import { Subject } from "src/models/subject.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-// import { get_api_url } from "src/graphql_utils/graphql_utils.js";
-import {
-  all_services_query,
-  dept_services_query,
-} from "./populate_services.js";
+import { get_api_url } from "src/graphql_utils/graphql_utils.js";
+
+import { services_query } from "./populate_services.js";
 
 const { Gov } = Subject;
 //eslint-disable no-console
 
-const get_query_id = (subject) => `services_${subject.level}_${subject.id}`;
+const fetchServices = async (query_options) => {
+  const t0 = performance.now();
 
-const fetchServices = async (subject) => {
+  const { subject } = query_options;
   const is_gov = subject.level === "gov";
-  const fetch_query = is_gov ? all_services_query : dept_services_query;
+  const fetch_query = services_query(query_options);
 
-  // const url = await get_api_url();
-  const url =
-    "https://us-central1-ib-serverless-api-dev.cloudfunctions.net/service_inventory_w_react_query/graphql";
+  const url = await get_api_url();
+  // const url =
+  //   "https://us-central1-ib-serverless-api-dev.cloudfunctions.net/service_inventory_w_react_query/graphql";
   const client = new GraphQLClient(url, {
     mode: "cors",
     headers: {
@@ -50,12 +49,15 @@ const fetchServices = async (subject) => {
         .value()
     : _.flatMap(data, (service) => ({ ...service, id: service.service_id }));
 
+  const t1 = performance.now();
+  console.log(t1 - t0);
+
   return services;
 };
 
 export const prefetchServices = async (queryClient, subject = Gov) => {
   await queryClient.prefetchQuery(
-    get_query_id(subject),
+    `services_${subject.level}_${subject.id}`,
     async () => fetchServices(subject),
     {
       cacheTime: 1000 * 60 * 15,
@@ -63,8 +65,9 @@ export const prefetchServices = async (queryClient, subject = Gov) => {
   );
 };
 
-export const useGQLReactQuery = (subject) => {
-  return useQuery(get_query_id(subject), async () => fetchServices(subject), {
+export const useGQLReactQuery = (query_options) => {
+  const { key } = query_options;
+  return useQuery(key, async () => fetchServices(query_options), {
     cacheTime: 1000 * 60 * 15,
   });
 };

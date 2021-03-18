@@ -1,10 +1,10 @@
 import _ from "lodash";
 import React from "react";
 
+import { useGQLReactQuery } from "src/models/react_query_services.js";
+
 import { DisplayTable } from "../../../components";
-
 import { Subject } from "../../../models/subject.js";
-
 import {
   create_text_maker_component,
   InfographicPanel,
@@ -12,15 +12,29 @@ import {
   HeightClippedGraph,
 } from "../shared.js";
 
-import { delivery_channels_keys } from "./shared.js";
+import {
+  delivery_channels_keys,
+  delivery_channels_query_fragment,
+} from "./shared.js";
 
 import text from "./services.yaml";
 
 const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const HighApplicationVolumePanel = ({ services }) => {
-  const data = _.chain(services)
+const HighApplicationVolumePanel = ({ panel_args }) => {
+  const { subject } = panel_args;
+  const { isLoading, data } = useGQLReactQuery({
+    subject,
+    key: `services_high_application_volume_${subject.id}`,
+    fetch_all_orgs: subject.level === "gov",
+    service_fragments: delivery_channels_query_fragment,
+  });
+  if (isLoading) {
+    return <span>loading</span>;
+  }
+
+  const processed_data = _.chain(data)
     .groupBy("org_id")
     .map((org_services, org_id) => ({
       org_id,
@@ -64,14 +78,14 @@ const HighApplicationVolumePanel = ({ services }) => {
         className="medium-panel-text"
         k="high_application_volume_text"
         args={{
-          num_of_high_volume_depts: data.length,
-          highest_volume_dept: Dept.lookup(data[0].org_id).name,
-          highest_volume_value: data[0].total_volume,
+          num_of_high_volume_depts: processed_data.length,
+          highest_volume_dept: Dept.lookup(processed_data[0].org_id).name,
+          highest_volume_value: processed_data[0].total_volume,
         }}
       />
       <DisplayTable
         unsorted_initial={true}
-        data={data}
+        data={processed_data}
         column_configs={column_configs}
       />
     </HeightClippedGraph>
@@ -85,13 +99,19 @@ export const declare_high_application_volume_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       footnotes: false,
-      render({ data, sources }) {
+      calculate: (subject) => {
+        return {
+          subject,
+        };
+      },
+      render({ calculations, sources }) {
+        const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("high_application_volume_title")}
             sources={sources}
           >
-            <HighApplicationVolumePanel services={data} />
+            <HighApplicationVolumePanel panel_args={panel_args} />
           </InfographicPanel>
         );
       },

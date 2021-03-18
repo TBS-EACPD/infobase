@@ -3,6 +3,8 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+import { useGQLReactQuery } from "src/models/react_query_services.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { DisplayTable } from "../../../components";
@@ -172,36 +174,44 @@ export const declare_top10_website_visits_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, data, sources }) {
+      render({ calculations, sources }) {
         const { panel_args } = calculations;
         const { subject } = panel_args;
-
-        const preprocessed_data =
-          subject.level === "gov"
-            ? _.chain(data)
-                .groupBy("org_id")
-                .map((org_services, org_id) => {
-                  const dept = Dept.lookup(org_id);
-                  return {
-                    id: org_id,
-                    name: dept ? dept.name : "",
-                    [total_volume]: _.sumBy(
-                      org_services,
-                      ({ service_report }) =>
-                        _.sumBy(
-                          service_report,
-                          `${website_visits_key}_count`
-                        ) || 0
-                    ),
-                  };
-                })
-                .value()
-            : _.map(data, ({ id, name, service_report }) => ({
-                id,
-                name,
-                [total_volume]:
-                  _.sumBy(service_report, `${website_visits_key}_count`) || 0,
-              }));
+        const is_gov = subject.level === "gov";
+        const { isLoading, data } = useGQLReactQuery({
+          subject,
+          key: `services_high_application_volume_${subject.id}`,
+          fetch_all_orgs: is_gov,
+          service_fragments: `service_report{
+            ${website_visits_key}_count
+          }`,
+        });
+        if (isLoading) {
+          return <span>loading</span>;
+        }
+        const preprocessed_data = is_gov
+          ? _.chain(data)
+              .groupBy("org_id")
+              .map((org_services, org_id) => {
+                const dept = Dept.lookup(org_id);
+                return {
+                  id: org_id,
+                  name: dept ? dept.name : "",
+                  [total_volume]: _.sumBy(
+                    org_services,
+                    ({ service_report }) =>
+                      _.sumBy(service_report, `${website_visits_key}_count`) ||
+                      0
+                  ),
+                };
+              })
+              .value()
+          : _.map(data, ({ id, name, service_report }) => ({
+              id,
+              name,
+              [total_volume]:
+                _.sumBy(service_report, `${website_visits_key}_count`) || 0,
+            }));
 
         const processed_data = _.chain(preprocessed_data)
           .filter(total_volume)
@@ -212,7 +222,7 @@ export const declare_top10_website_visits_panel = () =>
         return (
           <InfographicPanel
             title={text_maker(
-              subject.level === "gov"
+              is_gov
                 ? "top10_gov_website_visits"
                 : "top10_services_website_visits",
               { num_of_services: processed_data.length }

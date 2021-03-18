@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { useGQLReactQuery } from "src/models/react_query_services.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import {
@@ -16,10 +18,20 @@ import text from "./services.yaml";
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesFeesPanel = ({ panel_args, services }) => {
+const ServicesFeesPanel = ({ panel_args }) => {
   const { subject } = panel_args;
-  const service_charges_fees = _.countBy(services, "collects_fees");
-  const data = [
+  const { isLoading, data } = useGQLReactQuery({
+    subject,
+    key: `services_fees_${subject.id}`,
+    fetch_all_orgs: subject.level === "gov",
+    service_fragments: `collects_fees`,
+  });
+  if (isLoading) {
+    return <span>loading</span>;
+  }
+
+  const service_charges_fees = _.countBy(data, "collects_fees");
+  const processed_data = [
     {
       id: "fees",
       label: text_maker("service_charges_fees"),
@@ -41,14 +53,14 @@ const ServicesFeesPanel = ({ panel_args, services }) => {
         }
         args={{
           subject_name: subject.name,
-          services_count: services.length,
+          services_count: data.length,
           charge_fees_count: service_charges_fees.true || 0,
         }}
         className="medium-panel-text"
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={data}
+          data={processed_data}
           column_configs={{
             label: {
               index: 0,
@@ -61,7 +73,7 @@ const ServicesFeesPanel = ({ panel_args, services }) => {
           }}
         />
       ) : (
-        <WrappedNivoPie data={data} is_money={false} />
+        <WrappedNivoPie data={processed_data} is_money={false} />
       )}
     </div>
   );
@@ -79,14 +91,14 @@ export const declare_services_fees_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, data, sources }) {
+      render({ calculations, sources }) {
         const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("services_fees")}
             sources={sources}
           >
-            <ServicesFeesPanel services={data} panel_args={panel_args} />
+            <ServicesFeesPanel panel_args={panel_args} />
           </InfographicPanel>
         );
       },

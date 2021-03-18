@@ -8,14 +8,14 @@ import { PanelRegistry } from "./PanelRegistry.js";
 export const panel_context = React.createContext(null);
 
 const PanelRenderer = withRouter(
-  ({ subject, panel_key, history, active_bubble_id, data }) => {
+  ({ subject, panel_key, history, active_bubble_id }) => {
     const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
 
     const panel_options = { history };
 
     const { Provider } = panel_context;
 
-    const calculations = panel_obj.calculate(subject, data, panel_options);
+    const calculations = panel_obj.calculate(subject, panel_options);
 
     if (!calculations) {
       return null;
@@ -23,7 +23,7 @@ const PanelRenderer = withRouter(
     return (
       <div id={panel_key} tabIndex="0">
         <Provider value={{ active_bubble_id, panel_key, subject }}>
-          {panel_obj.render(calculations, data, panel_options)}
+          {panel_obj.render(calculations, panel_options)}
         </Provider>
       </div>
     );

@@ -2,8 +2,6 @@ import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
 
-import { useGQLReactQuery } from "src/models/react_query_services.js";
-
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import {
@@ -384,14 +382,6 @@ const Infographic = ({
     );
   }
 
-  const { isLoading, data } = (() => {
-    if (active_bubble_id === "services") {
-      return useGQLReactQuery(subject);
-    } else {
-      return { isLoading: undefined, data: undefined };
-    }
-  })();
-
   const title = text_maker("infographic_for", { subject });
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
@@ -406,17 +396,12 @@ const Infographic = ({
       route_key={sub_app_name}
     >
       <h1 dangerouslySetInnerHTML={{ __html: title }} />
-      {isLoading ? (
-        <SpinnerWrapper config_name={"route"} />
-      ) : (
-        <InfoGraph_
-          data={data}
-          level={level}
-          subject={subject}
-          active_bubble_id={bubble_id}
-          options={options}
-        />
-      )}
+      <InfoGraph_
+        level={level}
+        subject={subject}
+        active_bubble_id={bubble_id}
+        options={options}
+      />
     </StandardRouteContainer>
   );
 };

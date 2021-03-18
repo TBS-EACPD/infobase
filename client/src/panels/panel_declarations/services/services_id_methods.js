@@ -2,6 +2,8 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
+import { useGQLReactQuery } from "src/models/react_query_services.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { DisplayTable } from "../../../components";
@@ -19,13 +21,25 @@ import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesIdMethodsPanel = ({ services }) => {
-  const colors = scaleOrdinal()
-    .domain(["uses_identifier", "does_not_identifier", "na"])
-    .range(_.take(newIBCategoryColors, 3));
+const ServicesIdMethodsPanel = ({ panel_args }) => {
+  const { subject } = panel_args;
+  const { isLoading, data } = useGQLReactQuery({
+    subject,
+    key: `services_id_methods_${subject.id}`,
+    fetch_all_orgs: subject.level === "gov",
+    service_fragments: `service_report {
+      cra_business_ids_collected
+      sin_collected
+    }
+`,
+  });
+  if (isLoading) {
+    return <span>loading</span>;
+  }
+
   const get_id_method_count = (method) =>
     _.reduce(
-      services,
+      data,
       (sum, service) => {
         const service_id_count = _.countBy(service.service_report, method);
         return {
@@ -78,6 +92,9 @@ const ServicesIdMethodsPanel = ({ services }) => {
       value: cra_count.null,
     },
   ];
+  const colors = scaleOrdinal()
+    .domain(["uses_identifier", "does_not_identifier", "na"])
+    .range(_.take(newIBCategoryColors, 3));
 
   const nivo_common_props = {
     is_money: false,
@@ -136,14 +153,20 @@ export const declare_services_id_methods_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
+      calculate: (subject) => {
+        return {
+          subject,
+        };
+      },
       footnotes: false,
-      render({ data, sources }) {
+      render({ calculations, sources }) {
+        const { panel_args } = calculations;
         return (
           <InfographicPanel
             title={text_maker("identification_methods")}
             sources={sources}
           >
-            <ServicesIdMethodsPanel services={data} />
+            <ServicesIdMethodsPanel panel_args={panel_args} />
           </InfographicPanel>
         );
       },

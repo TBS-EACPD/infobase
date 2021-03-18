@@ -18,9 +18,19 @@ import text from "./services.yaml";
 const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
+const service_fragments = "service_type";
+
 const ServicesTypesPanel = ({ panel_args }) => {
   const { subject } = panel_args;
-  const { isLoading, data } = useGQLReactQuery(subject);
+  const { isLoading, data } = useGQLReactQuery({
+    subject,
+    key: `services_types_${subject.id}`,
+    fetch_all_orgs: subject.level === "gov",
+    service_fragments,
+  });
+  if (isLoading) {
+    return <span>loading</span>;
+  }
 
   const processed_data = _.chain(data)
     .flatMap("service_type")
@@ -32,10 +42,6 @@ const ServicesTypesPanel = ({ panel_args }) => {
     }))
     .value();
   const max_type = _.maxBy(processed_data, "value");
-
-  if (isLoading) {
-    return <span>loading</span>;
-  }
 
   return (
     <div>

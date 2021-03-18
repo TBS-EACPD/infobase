@@ -134,12 +134,12 @@ class PanelRegistry {
     return true;
   }
 
-  calculate(subject, data, options = {}) {
+  calculate(subject, options = {}) {
     if (this.is_panel_valid_for_subject(subject, options)) {
       const panel_args = this.get_panel_args(subject, options);
 
       //inner_render API : a panel's inner_render fucntion usually wants access to panel_args and subject.
-      return { subject, data, panel_args };
+      return { subject, panel_args };
     } else {
       return false;
     }
@@ -204,7 +204,7 @@ class PanelRegistry {
       .value();
   }
 
-  render(calculations, data, options = {}) {
+  render(calculations, options = {}) {
     const { subject } = calculations;
     const render_func = this._inner_render;
     const footnotes = this.get_footnotes(subject);
@@ -214,7 +214,6 @@ class PanelRegistry {
     const react_el = render_func(
       {
         calculations,
-        data,
         footnotes,
         glossary_keys,
         sources,
