@@ -221,7 +221,7 @@ export default async function ({ models }) {
                 expenditures: covid_expenditures_rows,
               })
                 .map((rows, data_type) => [
-                  `has_${data_type}`,
+                  `years_with_${data_type}`,
                   _.chain(rows)
                     .filter({ [subject_id_key]: subject_id })
                     .map("fiscal_year")

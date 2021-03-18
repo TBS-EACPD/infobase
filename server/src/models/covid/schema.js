@@ -42,8 +42,8 @@ const schema = `
   }
 
   type HasCovidData {
-    has_estimates: [String]
-    has_expenditures: [String]
+    years_with_estimates: [String]
+    years_with_expenditures: [String]
   }
 
   type CovidData {
@@ -111,6 +111,17 @@ export default function ({ models, loaders }) {
     covid_org_summary_loader,
   } = loaders;
 
+  const has_covid_data_resolver = (subject_id) =>
+    has_covid_data_loader.load(subject_id).then(
+      (has_covid_data) =>
+        has_covid_data || [
+          {
+            years_with_estimates: [],
+            years_with_expenditures: [],
+          },
+        ]
+    );
+
   const resolvers = {
     Root: {
       covid_measures: () => CovidMeasure.find({}),
@@ -133,7 +144,7 @@ export default function ({ models, loaders }) {
           .value(),
     },
     Org: {
-      has_covid_data: ({ org_id }) => has_covid_data_loader.load(org_id),
+      has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),
       covid_summary: ({ org_id }) => covid_org_summary_loader.load(org_id),
       covid_measures: ({ org_id: queried_org_id }) =>
         covid_measures_by_related_org_ids_loader.load(queried_org_id),
@@ -142,7 +153,7 @@ export default function ({ models, loaders }) {
       id: _.property("covid_measure_id"),
       name: bilingual_field("name"),
       has_covid_data: ({ covid_measure_id }) =>
-        has_covid_data_loader.load(covid_measure_id),
+        has_covid_data_resolver(covid_measure_id),
     },
     CovidEstimates: {
       org: ({ org_id }) => org_id_loader.load(org_id),

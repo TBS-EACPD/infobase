@@ -35,8 +35,8 @@ const measure_covid_data = `
 `;
 const has_covid_data = `
   has_covid_data {
-    has_estimates
-    has_expenditures
+    years_with_estimates
+    years_with_expenditures
   }
 `;
 
@@ -147,7 +147,7 @@ query ($lang: String = "en") {
     does_not_have_data: org(org_id: "15") {
       ${has_covid_data}
     }
-    only_has_estimates: org(org_id: "1") {
+    only_years_with_estimates: org(org_id: "1") {
       ${has_covid_data}
     }
   }
