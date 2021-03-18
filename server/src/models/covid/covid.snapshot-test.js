@@ -10,27 +10,25 @@ const expenditures_fields = `
   stat
 `;
 const measure_covid_data = `
-  covid_data {
-    fiscal_year
+  fiscal_year
 
-    covid_estimates {
-      org_id
-      org {
-        id
-        name
-      }
-  
-      ${estimates_fields}
+  covid_estimates {
+    org_id
+    org {
+      id
+      name
     }
-    covid_expenditures {
-      org_id
-      org {
-        id
-        name
-      }
   
-      ${expenditures_fields}
+    ${estimates_fields}
+  }
+  covid_expenditures {
+    org_id
+    org {
+      id
+      name
     }
+  
+    ${expenditures_fields}
   }
 `;
 const has_covid_data = `
@@ -49,7 +47,13 @@ query ($lang: String = "en") {
 
       ${has_covid_data}
 
-      ${measure_covid_data}
+      all_year_covid_data: covid_data {
+        ${measure_covid_data}
+      }
+
+      one_year_covid_data: covid_data(fiscal_year: 2020) {
+        ${measure_covid_data}
+      }
     }
   }
 }`;
@@ -70,7 +74,36 @@ const gov_covid_summary_query = `
 query ($lang: String = "en", $top_x: Int = 1) {
   root(lang: $lang) {
     gov {
-      covid_summary {
+      all_year_summaries: covid_summary {
+        fiscal_year
+
+        top_spending_orgs {
+          org_id
+          name
+        }
+        top_spending_measures(top_x: $top_x) {
+          id
+          name
+        }
+
+        covid_estimates {
+          ${estimates_fields}
+        }
+        covid_expenditures {
+          ${expenditures_fields}
+        }
+
+        measure_counts {
+          with_authorities
+          with_spending
+        }
+        org_counts {
+          with_authorities
+          with_spending
+        }
+      }
+
+      one_year_summary: covid_summary(fiscal_year: 2020) {
         fiscal_year
 
         top_spending_orgs {
@@ -109,7 +142,17 @@ query ($lang: String = "en") {
       org_id
       name
 
-      covid_summary {
+      all_year_summaries: covid_summary {
+        fiscal_year
+        covid_estimates {
+          ${estimates_fields}
+        }
+        covid_expenditures {
+          ${expenditures_fields}
+        }
+      }
+
+      one_year_summary: covid_summary(fiscal_year: 2020) {
         fiscal_year
         covid_estimates {
           ${estimates_fields}
@@ -132,7 +175,13 @@ query ($lang: String = "en") {
 
         ${has_covid_data}
 
-        ${measure_covid_data}
+        all_year_covid_data: covid_data {
+          ${measure_covid_data}
+        }
+
+        one_year_covid_data: covid_data(fiscal_year: 2020) {
+          ${measure_covid_data}
+        }
       }
     }
   }

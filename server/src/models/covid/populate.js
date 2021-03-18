@@ -65,12 +65,16 @@ export default async function ({ models }) {
         }),
       }));
 
-      const related_org_ids = _.chain(covid_data)
-        .flatMap(({ covid_estimates, covid_expenditures }) =>
-          _.map([...covid_estimates, ...covid_expenditures], "org_id")
-        )
-        .uniq()
-        .value();
+      const related_org_ids = _.map(
+        covid_data,
+        ({ fiscal_year, covid_estimates, covid_expenditures }) => ({
+          fiscal_year,
+          org_ids: _.chain([...covid_estimates, ...covid_expenditures])
+            .map("org_id")
+            .uniq()
+            .value(),
+        })
+      );
 
       return new CovidMeasure({
         ...row,

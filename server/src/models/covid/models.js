@@ -40,7 +40,12 @@ export default function (model_singleton) {
     covid_measure_id: pkey_type(),
     ...bilingual("name", { ...str_type, required: true }),
 
-    related_org_ids: [parent_fkey_type()],
+    related_org_ids: [
+      {
+        fiscal_year: fyear_type(),
+        org_ids: [parent_fkey_type()],
+      },
+    ],
     covid_data: [
       {
         fiscal_year: fyear_type(),
@@ -102,7 +107,7 @@ export default function (model_singleton) {
     ),
     covid_measures_by_related_org_ids_loader: create_resource_by_foreignkey_attr_dataloader(
       CovidMeasure,
-      "related_org_ids"
+      "related_org_ids.org_ids"
     ),
     has_covid_data_loader: create_resource_by_foreignkey_attr_dataloader(
       HasCovidData,
