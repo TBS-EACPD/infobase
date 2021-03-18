@@ -44,39 +44,6 @@ const get_col_configs_with_defaults = (column_configs) =>
     ...column_config_defaults,
     ...supplied_column_config,
   }));
-const get_default_state_from_props = (props) => {
-  const { unsorted_initial, column_configs } = props;
-
-  const col_configs_with_defaults = get_col_configs_with_defaults(
-    column_configs
-  );
-
-  const visible_col_keys = _.chain(col_configs_with_defaults)
-    .pickBy((col) => col.initial_visible)
-    .keys()
-    .value();
-
-  const sort_by = unsorted_initial
-    ? null
-    : _.chain(col_configs_with_defaults)
-        .pickBy((col) => col.is_sortable)
-        .keys()
-        .first()
-        .value();
-
-  const searches = _.chain(col_configs_with_defaults)
-    .pickBy((col) => col.is_searchable)
-    .mapValues(() => "")
-    .value();
-
-  return {
-    visible_col_keys,
-    sort_by,
-    descending: false,
-    searches,
-    initial_props: props,
-  };
-};
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
