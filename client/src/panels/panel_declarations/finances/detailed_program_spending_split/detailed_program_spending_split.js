@@ -4,12 +4,12 @@ import _ from "lodash";
 import React from "react";
 
 
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph,TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components.js";
 import {
-  declare_panel,
-  TspanLineWrapper,
-  HeightClippedGraph,
-} from "src/panels/panel_declarations/shared.js";
+  declare_panel
+} from "src/panels/panel_declarations/common_panel_utils.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+
 
 import * as util_components from "src/components/index.js";
 

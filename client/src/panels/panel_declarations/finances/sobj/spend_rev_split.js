@@ -1,11 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
   create_text_maker_component,
-  declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
 
 import { highlightColor, secondaryColor } from "src/core/color_defs.js";
 import { formats} from "src/core/format.js";

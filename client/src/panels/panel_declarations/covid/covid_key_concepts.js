@@ -1,11 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+import {SomeThingsToKeepInMind} from "src/panels/panel_declarations/common_panel_components.js"
 import {
-  SomeThingsToKeepInMind,
   declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+} from "src/panels/panel_declarations/common_panel_utils.js";
+import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+
 
 import * as util_components from "src/components/index.js";
 

@@ -1,11 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
-import {
-  create_text_maker_component,
-  declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+import { create_text_maker_component } from "src/panels/panel_declarations/shared.js";
 
 import { Format, SmartDisplayTable } from "src/components/index.js";
 
