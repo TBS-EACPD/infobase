@@ -2,10 +2,11 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  util_components,
   SomeThingsToKeepInMind,
   declare_panel,
 } from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
 
 import common_lang from "./common_questions.yaml";
 import fin_lang from "./financial_questions.yaml";
