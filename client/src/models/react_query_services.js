@@ -1,5 +1,4 @@
-import axios from "axios";
-// import { GraphQLClient } from "graphql-request";
+import { GraphQLClient } from "graphql-request";
 import _ from "lodash";
 import { useQuery } from "react-query";
 
@@ -7,8 +6,7 @@ import { Subject } from "src/models/subject.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-import { get_api_url } from "src/graphql_utils/graphql_utils.js";
-
+// import { get_api_url } from "src/graphql_utils/graphql_utils.js";
 import {
   all_services_query,
   dept_services_query,
@@ -21,38 +19,27 @@ const get_query_id = (subject) => `services_${subject.level}_${subject.id}`;
 
 const fetchServices = async (subject) => {
   const is_gov = subject.level === "gov";
-  const query = is_gov ? all_services_query : dept_services_query;
+  const fetch_query = is_gov ? all_services_query : dept_services_query;
 
-  const url = await get_api_url();
-  // const client = new GraphQLClient(url, {
-  //   mode: "cors",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // });
-  // const res = await client.request(query, {
-  //   lang,
-  //   id: is_gov ? "gov" : subject.id,
-  // });
-  const res = await axios.post(
-    url,
-    {
-      query: query.loc.source.body,
-      variables: { lang, id: is_gov ? "gov" : subject.id },
+  // const url = await get_api_url();
+  const url =
+    "https://us-central1-ib-serverless-api-dev.cloudfunctions.net/service_inventory_w_react_query/graphql";
+  const client = new GraphQLClient(url, {
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
     },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  });
+  const res = await client.request(fetch_query, {
+    lang,
+    id: is_gov ? "gov" : subject.id,
+  });
   console.log(res);
 
-  if (res.status !== 200) {
-    throw new Error("fetchServices failed");
+  if (res.isError) {
+    throw new Error(res.error);
   }
-  const res_data = res.data.data.root;
-  const data = is_gov ? res_data.orgs : res_data.org.services;
+  const data = is_gov ? res.root.orgs : res.root.org.services;
 
   const services = is_gov
     ? _.chain(data)
