@@ -3,13 +3,16 @@ import _ from "lodash";
 import React from "react";
 
 
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
-  create_text_maker_component,
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
-} from "src/panels/panel_declarations/shared.js";
+} from "src/panels/panel_declarations/common_panel_utils.js";
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+
+import {create_text_maker_component} from "src/panels/panel_declarations/shared.js";
+
+
 
 import {run_template} from "src/models/text.js";
 import {year_templates} from "src/models/years.js";

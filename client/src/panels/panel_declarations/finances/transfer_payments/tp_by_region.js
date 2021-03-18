@@ -3,11 +3,12 @@ import { scaleLinear } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
-  declare_panel,
   create_text_maker_component,
 } from "src/panels/panel_declarations/shared.js";
+
 
 import {
   SpinnerWrapper,

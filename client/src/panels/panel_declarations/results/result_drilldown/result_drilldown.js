@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import { text_maker } from "src/panels/panel_declarations/results/result_text_provider.js";
 import {
@@ -9,7 +10,6 @@ import {
   result_docs,
   result_docs_in_tabling_order,
 } from "src/panels/panel_declarations/results/results_common.js";
-import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
 import * as util_components from "src/components/index.js";
 

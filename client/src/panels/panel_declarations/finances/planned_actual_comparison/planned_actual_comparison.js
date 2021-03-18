@@ -1,11 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
-  declare_panel,
   create_text_maker_component,
 } from "src/panels/panel_declarations/shared.js";
+
 
 import FootNote from "src/models/footnotes/footnotes.js";
 

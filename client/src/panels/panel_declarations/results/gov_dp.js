@@ -1,12 +1,10 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
-import {
-  create_text_maker_component,
-  declare_panel,
-  HeightClippedGraph,
-} from "src/panels/panel_declarations/shared.js";
+import { create_text_maker_component } from "src/panels/panel_declarations/shared.js";
 
 import {
   default_dept_name_sort_func,

@@ -2,11 +2,10 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import {
-  declare_panel,
-  HeightClippedGraph,
-} from "src/panels/panel_declarations/shared.js";
+
 
 import * as util_components from "src/components/index.js";
 
