@@ -40,6 +40,8 @@ import programSobjs from "src/tables/programSobjs.js";
 import programSpending from "src/tables/programSpending.js";
 import programVoteStat from "src/tables/programVoteStat.js";
 
+import { add_runtime_polyfills } from "./add_runtime_polyfills.js";
+
 const table_defs = [
   orgVoteStatPa,
   orgSobjs,
@@ -68,6 +70,8 @@ const load_fonts = () =>
 
 function bootstrapper(App, app_reducer, done) {
   load_fonts();
+
+  add_runtime_polyfills();
 
   populate_stores().then(() => {
     _.each(table_defs, (table_def) => Table.create_and_register(table_def));
