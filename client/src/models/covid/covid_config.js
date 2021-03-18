@@ -9,4 +9,4 @@ export const COVID_CURRENT_YEAR = 2020;
 
 export const COVID_NEXT_YEAR = COVID_CURRENT_YEAR + 1;
 
-export const COVID_EXPENDITUES_FLAG = false;
+export const COVID_EXPENDITUES_FLAG = true;
