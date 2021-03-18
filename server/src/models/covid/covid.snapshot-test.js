@@ -35,7 +35,6 @@ const measure_covid_data = `
 `;
 const has_covid_data = `
   has_covid_data {
-    fiscal_year
     has_estimates
     has_expenditures
   }

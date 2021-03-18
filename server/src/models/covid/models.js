@@ -31,10 +31,9 @@ const count_fields = {
 export default function (model_singleton) {
   const HasCovidDataSchema = mongoose.Schema({
     subject_id: parent_fkey_type(),
-    fiscal_year: fyear_type(),
 
-    has_estimates: { type: Boolean },
-    has_expenditures: { type: Boolean },
+    has_estimates: [fyear_type()],
+    has_expenditures: [fyear_type()],
   });
 
   const CovidMeasureSchema = mongoose.Schema({

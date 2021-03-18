@@ -110,14 +110,13 @@ Object {
           ],
           "has_covid_data": Array [
             Object {
-              "fiscal_year": "2020",
-              "has_estimates": true,
-              "has_expenditures": true,
-            },
-            Object {
-              "fiscal_year": "2021",
-              "has_estimates": true,
-              "has_expenditures": false,
+              "has_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "has_expenditures": Array [
+                "2020",
+              ],
             },
           ],
           "id": "COV001",
@@ -229,14 +228,14 @@ Object {
           ],
           "has_covid_data": Array [
             Object {
-              "fiscal_year": "2020",
-              "has_estimates": true,
-              "has_expenditures": true,
-            },
-            Object {
-              "fiscal_year": "2021",
-              "has_estimates": true,
-              "has_expenditures": true,
+              "has_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "has_expenditures": Array [
+                "2020",
+                "2021",
+              ],
             },
           ],
           "id": "COV002",
@@ -308,14 +307,13 @@ Object {
           ],
           "has_covid_data": Array [
             Object {
-              "fiscal_year": "2020",
-              "has_estimates": true,
-              "has_expenditures": true,
-            },
-            Object {
-              "fiscal_year": "2021",
-              "has_estimates": true,
-              "has_expenditures": false,
+              "has_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "has_expenditures": Array [
+                "2020",
+              ],
             },
           ],
           "id": "COV003",
@@ -573,14 +571,13 @@ Object {
             ],
             "has_covid_data": Array [
               Object {
-                "fiscal_year": "2020",
-                "has_estimates": true,
-                "has_expenditures": true,
-              },
-              Object {
-                "fiscal_year": "2021",
-                "has_estimates": true,
-                "has_expenditures": false,
+                "has_estimates": Array [
+                  "2020",
+                  "2021",
+                ],
+                "has_expenditures": Array [
+                  "2020",
+                ],
               },
             ],
             "id": "COV001",
@@ -692,14 +689,14 @@ Object {
             ],
             "has_covid_data": Array [
               Object {
-                "fiscal_year": "2020",
-                "has_estimates": true,
-                "has_expenditures": true,
-              },
-              Object {
-                "fiscal_year": "2021",
-                "has_estimates": true,
-                "has_expenditures": true,
+                "has_estimates": Array [
+                  "2020",
+                  "2021",
+                ],
+                "has_expenditures": Array [
+                  "2020",
+                  "2021",
+                ],
               },
             ],
             "id": "COV002",
@@ -771,14 +768,13 @@ Object {
             ],
             "has_covid_data": Array [
               Object {
-                "fiscal_year": "2020",
-                "has_estimates": true,
-                "has_expenditures": true,
-              },
-              Object {
-                "fiscal_year": "2021",
-                "has_estimates": true,
-                "has_expenditures": false,
+                "has_estimates": Array [
+                  "2020",
+                  "2021",
+                ],
+                "has_expenditures": Array [
+                  "2020",
+                ],
               },
             ],
             "id": "COV003",
@@ -801,38 +797,32 @@ Object {
       "has_data": Object {
         "has_covid_data": Array [
           Object {
-            "fiscal_year": "2020",
-            "has_estimates": true,
-            "has_expenditures": true,
-          },
-          Object {
-            "fiscal_year": "2021",
-            "has_estimates": true,
-            "has_expenditures": false,
+            "has_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "has_expenditures": Array [
+              "2020",
+            ],
           },
         ],
       },
       "only_has_estimates": Object {
         "has_covid_data": Array [
           Object {
-            "fiscal_year": "2020",
-            "has_estimates": true,
-            "has_expenditures": false,
+            "has_estimates": Array [
+              "2020",
+            ],
+            "has_expenditures": Array [],
           },
           Object {
-            "fiscal_year": "2021",
-            "has_estimates": false,
-            "has_expenditures": false,
-          },
-          Object {
-            "fiscal_year": "2020",
-            "has_estimates": true,
-            "has_expenditures": true,
-          },
-          Object {
-            "fiscal_year": "2021",
-            "has_estimates": true,
-            "has_expenditures": false,
+            "has_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "has_expenditures": Array [
+              "2020",
+            ],
           },
         ],
       },
@@ -848,14 +838,13 @@ Object {
       "covid_measure": Object {
         "has_covid_data": Array [
           Object {
-            "fiscal_year": "2020",
-            "has_estimates": true,
-            "has_expenditures": true,
-          },
-          Object {
-            "fiscal_year": "2021",
-            "has_estimates": true,
-            "has_expenditures": false,
+            "has_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "has_expenditures": Array [
+              "2020",
+            ],
           },
         ],
         "id": "COV001",
