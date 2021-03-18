@@ -13,7 +13,7 @@ import {declare_panel} from "src/panels/panel_declarations/shared.js";
 
 import * as util_components from "src/components/index.js";
 
-import { ensure_loaded } from "src/core/lazy_loader.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 
 import { get_source_links } from "src/metadata/data_sources.js";
 
