@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
-import ReactResizeDetector from "react-resize-detector";
+import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
 import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 
