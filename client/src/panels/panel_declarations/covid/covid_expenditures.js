@@ -2,23 +2,27 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
+
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
-  InfographicPanel,
-  declare_panel,
-  util_components,
-  Subject,
-  ensure_loaded,
-  WrappedNivoPie,
+  declare_panel
 } from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
+
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import {
   gov_covid_summary_query,
   top_covid_spending_query,
 } from "src/models/covid/queries.js";
+import { Subject } from "src/models/subject.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { lang } from "src/core/injected_build_constants.js";
+
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
