@@ -1,10 +1,10 @@
 import _ from "lodash";
 import React from "react";
 
-import {
-  util_components,
-  businessConstants,
-} from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
+
+import { businessConstants } from "src/models/businessConstants.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 

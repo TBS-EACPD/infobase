@@ -1,25 +1,30 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
 import {
-  Subject,
-  util_components,
-  InfographicPanel,
-  ensure_loaded,
-  declare_panel,
-  StandardLegend,
-  WrappedNivoBar,
+  declare_panel
 } from "src/panels/panel_declarations/shared.js";
+
+import * as util_components from "src/components/index.js";
 
 import {
   gov_covid_summary_query,
   org_covid_summary_query,
 } from "src/models/covid/queries.js";
+import { Subject } from "src/models/subject.js";
 
 import { textColor } from "src/core/color_defs.js";
 import { infobase_colors } from "src/core/color_schemes.js";
+import { ensure_loaded } from "src/core/ensure_loaded.js";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { StandardLegend } from "src/charts/legends/index.js";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
+
+
+
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
