@@ -2,12 +2,9 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  create_text_maker_component,
-} from "src/panels/panel_declarations/shared.js";
-
-
 import * as util_components from "src/components/index.js";
+
+const { create_text_maker_component } = util_components;
 
 
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes.js";

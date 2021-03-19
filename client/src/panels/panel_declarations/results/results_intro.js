@@ -4,10 +4,9 @@ import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-import {
-  create_text_maker_component
-} from "src/panels/panel_declarations/shared.js";
+import * as util_components from "src/components/index.js";
 
+const { create_text_maker_component } = util_components;
 
 import { Subject } from "src/models/subject.js";
 
