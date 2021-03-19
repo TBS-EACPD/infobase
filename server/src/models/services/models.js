@@ -57,7 +57,7 @@ export default function (model_singleton) {
   });
 
   const ServiceSchema = mongoose.Schema({
-    service_id: pkey_type(),
+    id: pkey_type(),
     org_id: parent_fkey_type(),
     program_ids: [sparse_parent_fkey_type()],
     first_active_year: str_type,

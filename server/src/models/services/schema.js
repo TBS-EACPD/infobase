@@ -34,7 +34,7 @@ const schema = `
     standard_report_comment: String
   }
   type Service{
-    service_id: String
+    id: String
     org_id: String
     org: Org
     program_ids: [String]

@@ -45,11 +45,8 @@ const Service = class Service extends static_subject_store() {
   }
 
   static create_and_register(def) {
-    const { service_id } = def;
-    // duplicate service_id as id since it makes sense for each subject-like object to have an id
-    const extended_def = { ...def, id: def.service_id };
-    const inst = new Service(extended_def);
-    this.register(service_id, inst);
+    const inst = new Service(def);
+    this.register(def.id, inst);
   }
 
   get contributing_programs() {

@@ -115,7 +115,7 @@ export function api_load_subject_has_services(subject) {
 }
 
 const all_service_fragments = `
-      service_id
+      id
       org_id
       program_ids
 
@@ -188,7 +188,7 @@ query($lang: String!, $id: String) {
     org(org_id: $id) {
       id
       services: services {
-        service_id
+        id
         ${service_fragments || all_service_fragments}
       }
     }
@@ -202,7 +202,7 @@ query($lang: String!) {
     orgs {
       services: services {
         org_id
-        service_id
+        id
         ${service_fragments || all_service_fragments}
       }
     }
@@ -228,23 +228,16 @@ export const fetchServices = (query_options) => {
 
   const query = services_query(query_options);
   const res = useQuery(query, { variables });
-  const { loading, error, data } = res;
+  const { loading, error, data, client } = res;
   if (error) {
     throw new Error(error);
   }
   if (!loading) {
+    console.log(client.cache.data.data);
     const res_data = is_gov ? data.root.orgs : data.root.org.services;
     const services = is_gov
-      ? _.chain(res_data)
-          .flatMap("services")
-          .compact()
-          .uniqBy("service_id")
-          .flatMap((service) => ({ ...service, id: service.service_id })) //TODO I don't like this duplication. Should try to throw this into pipeline
-          .value()
-      : _.flatMap(res_data, (service) => ({
-          ...service,
-          id: service.service_id,
-        }));
+      ? _.chain(res_data).flatMap("services").compact().uniqBy("id").value()
+      : res_data;
     const t1 = performance.now();
     console.log(t1 - t0);
     return { ...res, data: services };
