@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import _ from "lodash";
 
@@ -114,96 +114,140 @@ export function api_load_subject_has_services(subject) {
     });
 }
 
-const dept_service_fragment = `org_id
-      services: services {
+const all_service_fragments = `
+      service_id
+      org_id
+      program_ids
+
+      first_active_year
+      last_active_year
+      is_active      
+
+      name
+      description
+      service_type
+      scope
+      target_groups
+      feedback_channels
+      urls
+
+      last_gender_analysis
+
+      collects_fees
+      account_reg_digital_status
+      authentication_status
+      application_digital_status
+      decision_digital_status
+      issuance_digital_status
+      issue_res_digital_status
+      digital_enablement_comment
+
+      service_report {
         service_id
-        org_id
-        program_ids
+        year
+        cra_business_ids_collected
+        sin_collected
+        phone_inquiry_count
+        online_inquiry_count
+        online_application_count
+        live_application_count
+        mail_application_count
+        other_application_count
+        service_report_comment
+      }
 
-        first_active_year
-        last_active_year
-        is_active      
-
+      standards {
+        standard_id
+        service_id
+    
         name
-        description
-        service_type
-        scope
-        target_groups
-        feedback_channels
+    
+        last_gcss_tool_year
+        channel
+        type
+        other_type_comment
+    
+        target_type
         urls
-
-        last_gender_analysis
-
-        collects_fees
-        account_reg_digital_status
-        authentication_status
-        application_digital_status
-        decision_digital_status
-        issuance_digital_status
-        issue_res_digital_status
-        digital_enablement_comment
-
-        service_report {
-          service_id
-          year
-          cra_business_ids_collected
-          sin_collected
-          phone_inquiry_count
-          online_inquiry_count
-          online_application_count
-          live_application_count
-          mail_application_count
-          other_application_count
-          service_report_comment
-        }
-
-        standards {
+        rtp_urls
+        standard_report {
           standard_id
-          service_id
-      
-          name
-      
-          last_gcss_tool_year
-          channel
-          type
-          other_type_comment
-      
-          target_type
-          urls
-          rtp_urls
-          standard_report {
-            standard_id
-            year
-            lower
-            count
-            met_count
-            is_target_met
-            standard_report_comment
-          }
+          year
+          lower
+          count
+          met_count
+          is_target_met
+          standard_report_comment
         }
       }
   `;
 
-const dept_services_query = gql`
+const dept_services_query = (service_fragments) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
-      ${dept_service_fragment}
+      services: services {
+        service_id
+        ${service_fragments || all_service_fragments}
+      }
     }
   }
 }
 `;
 
-const all_services_query = gql`
+const all_services_query = (service_fragments) => gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      ${dept_service_fragment}
+      services: services {
+        org_id
+        service_id
+        ${service_fragments || all_service_fragments}
+      }
     }
   }
 }
 `;
+
+const services_query = (query_options) => {
+  const { fetch_all_orgs, service_fragments } = query_options;
+  return fetch_all_orgs
+    ? all_services_query(service_fragments)
+    : dept_services_query(service_fragments);
+};
+
+export const fetchServices = (query_options) => {
+  const { subject } = query_options;
+  const is_gov = subject.level === "gov";
+  const variables = {
+    lang,
+    id: subject.id,
+  };
+
+  const query = services_query(query_options);
+  const res = useQuery(query, { variables });
+  const { loading, error, data } = res;
+  if (error) {
+    throw new Error(error);
+  }
+  if (!loading) {
+    const res_data = is_gov ? data.root.orgs : data.root.org.services;
+    const services = is_gov
+      ? _.chain(res_data)
+          .flatMap("services")
+          .compact()
+          .uniqBy("service_id")
+          .flatMap((service) => ({ ...service, id: service.service_id })) //TODO I don't like this duplication. Should try to throw this into pipeline
+          .value()
+      : _.flatMap(res_data, (service) => ({
+          ...service,
+          id: service.service_id,
+        }));
+    return { ...res, data: services };
+  }
+  return res;
+};
 
 const extract_flat_data_from_hierarchical_response = (response) => {
   const serviceStandards = [];
@@ -236,14 +280,16 @@ export function api_load_services(subject) {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: dept_services_query,
+          query: services_query({
+            fetch_all_orgs: false,
+          }),
           response_data_accessor: (response) => response.data.root.org,
         };
       default:
         return {
           is_loaded: all_is_loaded(subject),
           id: "gov",
-          query: all_services_query,
+          query: services_query({ fetch_all_orgs: true }),
           response_data_accessor: (response) => response.data.root.orgs,
         };
     }

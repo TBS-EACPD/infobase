@@ -16,10 +16,12 @@ import { createHashHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { ApolloProvider } from "@apollo/client";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import WebFont from "webfontloader";
 
+import { get_client } from "src/graphql_utils/graphql_utils.js";
 import { Table } from "../core/TableClass.js";
 import { populate_stores } from "../models/populate_stores.js";
 
@@ -83,16 +85,18 @@ function bootstrapper(App, app_reducer, done) {
       }),
       applyMiddleware(middleware)
     );
-
+    const client = get_client();
     done();
 
     ReactDOM.render(
-      <Provider store={store}>
-        {/* ConnectedRouter will use the store from Provider automatically */}
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </Provider>,
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          {/* ConnectedRouter will use the store from Provider automatically */}
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </Provider>
+      </ApolloProvider>,
       document.getElementById("app")
     );
   });
