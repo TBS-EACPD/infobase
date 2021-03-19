@@ -7,10 +7,9 @@ import {
   StdPanel,
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
-import {
-  TabbedContent,
-  create_text_maker_component,
-} from "src/panels/panel_declarations/shared.js";
+import * as util_components from "src/components/index.js";
+
+const { create_text_maker_component, TabbedContent } = util_components;
 
 import { GraphOverlay } from "src/components/index.js";
 
