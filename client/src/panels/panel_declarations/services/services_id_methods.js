@@ -2,10 +2,11 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
+import { fetchServices } from "src/models/populate_services.js";
+
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
 
 import {
   create_text_maker_component,
@@ -21,13 +22,23 @@ import "./services.scss";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIdMethodsPanel = ({ panel_args }) => {
-  const services = panel_args.services;
-  const colors = scaleOrdinal()
-    .domain(["uses_identifier", "does_not_identifier", "na"])
-    .range(_.take(newIBCategoryColors, 3));
+  const { subject } = panel_args;
+  const { loading, data } = fetchServices({
+    subject,
+    fetch_all_orgs: subject.level === "gov",
+    service_fragments: `service_report {
+      cra_business_ids_collected
+      sin_collected
+    }
+`,
+  });
+  if (loading) {
+    return <span>loading</span>;
+  }
+
   const get_id_method_count = (method) =>
     _.reduce(
-      services,
+      data,
       (sum, service) => {
         const service_id_count = _.countBy(service.service_report, method);
         return {
@@ -80,6 +91,9 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
       value: cra_count.null,
     },
   ];
+  const colors = scaleOrdinal()
+    .domain(["uses_identifier", "does_not_identifier", "na"])
+    .range(_.take(newIBCategoryColors, 3));
 
   const nivo_common_props = {
     is_money: false,
@@ -139,14 +153,8 @@ export const declare_services_id_methods_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,

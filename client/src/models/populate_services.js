@@ -218,6 +218,7 @@ const services_query = (query_options) => {
 };
 
 export const fetchServices = (query_options) => {
+  const t0 = performance.now();
   const { subject } = query_options;
   const is_gov = subject.level === "gov";
   const variables = {
@@ -244,6 +245,8 @@ export const fetchServices = (query_options) => {
           ...service,
           id: service.service_id,
         }));
+    const t1 = performance.now();
+    console.log(t1 - t0);
     return { ...res, data: services };
   }
   return res;

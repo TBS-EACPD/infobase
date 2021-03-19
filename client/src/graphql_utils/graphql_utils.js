@@ -77,6 +77,8 @@ let client = null;
 export function get_client() {
   if (!client) {
     client = new ApolloClient({
+      // uri:
+      //   "https://us-central1-ib-serverless-api-dev.cloudfunctions.net/service_inventory_w_react_query/graphql",
       link: createHttpLink({
         uri: prod_api_url, // query_length_tolerant_fetch replaces the uri on the fly, switches to appropriate local uri in dev
         fetchOptions: { method: "GET" },
