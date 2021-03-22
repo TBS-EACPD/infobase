@@ -1,7 +1,10 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { create_text_maker_component, BackToTop } from "src/components/index.js";
+import {
+  create_text_maker_component,
+  BackToTop,
+} from "src/components/index.js";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 
@@ -12,7 +15,6 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents.js";
 import { Table } from "src/core/TableClass.js";
-
 
 import { rpb_link } from "src/rpb/rpb_link.js";
 
@@ -74,7 +76,7 @@ const table_links_by_tag = _.chain(tables)
 //id tag is there for legacy styles
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
-    <div className="fcol-sm-12 fcol-md-8 offset-md-2 font-large">
+    <div className="fcol-sm-12 fcol-md-8 offset-lg-2 font-large">
       {!is_a11y_mode && (
         <div id="glossary_search" className="org_list font-xlarge mrgn-bttm-lg">
           <GlossarySearch />
