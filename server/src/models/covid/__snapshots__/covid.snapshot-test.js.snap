@@ -799,7 +799,7 @@ Object {
   "data": Object {
     "root": Object {
       "org": Object {
-        "covid_measures": Array [
+        "all_year_measures": Array [
           Object {
             "all_year_covid_data": Array [
               Object {
@@ -1323,6 +1323,41 @@ Object {
                 "fiscal_year": 2020,
               },
             ],
+          },
+        ],
+        "one_year_measures": Array [
+          Object {
+            "covid_data": Array [
+              Object {
+                "covid_estimates": Array [
+                  Object {
+                    "est_doc": "ME",
+                    "org": Object {
+                      "id": "133",
+                      "name": "National Defence",
+                    },
+                    "org_id": "133",
+                    "stat": 0,
+                    "vote": 9,
+                  },
+                ],
+                "covid_expenditures": Array [],
+                "fiscal_year": 2021,
+              },
+            ],
+            "has_covid_data": Array [
+              Object {
+                "years_with_estimates": Array [
+                  "2020",
+                  "2021",
+                ],
+                "years_with_expenditures": Array [
+                  "2020",
+                ],
+              },
+            ],
+            "id": "COV003",
+            "name": "measure 3",
           },
         ],
       },
