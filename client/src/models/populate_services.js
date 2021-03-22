@@ -189,7 +189,11 @@ query($lang: String!, $id: String) {
       id
       services: services {
         id
-        ${service_fragments || all_service_fragments}
+        ${
+          _.isUndefined(service_fragments)
+            ? all_service_fragments
+            : service_fragments
+        }
       }
     }
   }
@@ -203,18 +207,37 @@ query($lang: String!) {
       services: services {
         org_id
         id
-        ${service_fragments || all_service_fragments}
+        ${
+          _.isUndefined(service_fragments)
+            ? all_service_fragments
+            : service_fragments
+        }
       }
     }
   }
 }
 `;
 
-const services_query = (query_options) => {
+export const services_query = (query_options) => {
   const { fetch_all_orgs, service_fragments } = query_options;
   return fetch_all_orgs
     ? all_services_query(service_fragments)
     : dept_services_query(service_fragments);
+};
+
+export const prefetch_services = () => {
+  const client = get_client();
+  client.query({
+    query: services_query({
+      fetch_all_orgs: true,
+      service_fragments: "",
+    }),
+    variables: {
+      lang,
+      id: "gov",
+      _query_name: "services",
+    },
+  });
 };
 
 export const fetchServices = (query_options) => {

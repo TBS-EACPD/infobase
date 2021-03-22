@@ -2,6 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import { prefetch_services } from "src/models/populate_services.js";
+
 import { primaryColor, backgroundColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
@@ -49,6 +51,11 @@ const BubbleMenu = ({ items, active_item_id }) => {
                 "centerer bubble-button",
                 id === active_item_id && "active"
               )}
+              onMouseEnter={() => {
+                if (id === "services") {
+                  prefetch_services();
+                }
+              }}
               href={href}
               key={id}
             >

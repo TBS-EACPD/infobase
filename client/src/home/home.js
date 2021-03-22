@@ -10,6 +10,8 @@ import {
   TrinityItem,
 } from "src/components/index.js";
 
+import { prefetch_services } from "src/models/populate_services.js";
+
 import { highlightColor } from "src/core/color_defs.js";
 
 import {
@@ -137,6 +139,7 @@ const HomeLayout = (props) => (
                 alternate_color={false}
               />
             }
+            onMouseEnter={prefetch_services}
             title={<TM k="home_services_title" />}
           />
         )}
