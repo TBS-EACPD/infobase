@@ -29,7 +29,7 @@ const schema = `
   extend type Org {
     has_covid_data: [HasCovidData]
     covid_summary(fiscal_year: Int): [CovidOrgSummary]
-    covid_measures: [CovidMeasure]
+    covid_measures(fiscal_year: Int): [CovidMeasure]
   }
 
   type CovidMeasure {
@@ -156,9 +156,17 @@ export default function ({ models, loaders }) {
         covid_org_summary_loader
           .load(org_id)
           .then(optional_fiscal_year_filter(fiscal_year)),
-      covid_measures: (
-        { org_id: queried_org_id } // TODO potentially allow optional fiscal_year arg for this field
-      ) => covid_measures_by_related_org_ids_loader.load(queried_org_id),
+      covid_measures: ({ org_id: queried_org_id }, { fiscal_year }) =>
+        covid_measures_by_related_org_ids_loader
+          .load(queried_org_id)
+          .then((measures) =>
+            _.filter(measures, ({ related_org_ids }) =>
+              _.chain(related_org_ids)
+                .thru(optional_fiscal_year_filter(fiscal_year))
+                .some(({ org_ids }) => _.includes(org_ids, queried_org_id))
+                .value()
+            )
+          ),
     },
     CovidMeasure: {
       id: _.property("covid_measure_id"),

@@ -169,7 +169,7 @@ const org_covid_measures_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     org(org_id: "133") {
-      covid_measures {
+      all_year_measures: covid_measures {
         id
         name
 
@@ -180,6 +180,17 @@ query ($lang: String = "en") {
         }
 
         one_year_covid_data: covid_data(fiscal_year: 2020) {
+          ${measure_covid_data}
+        }
+      }
+
+      one_year_measures: covid_measures(fiscal_year: 2021) {
+        id
+        name
+
+        ${has_covid_data}
+
+        covid_data(fiscal_year: 2021) {
           ${measure_covid_data}
         }
       }
