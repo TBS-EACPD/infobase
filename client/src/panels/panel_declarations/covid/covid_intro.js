@@ -26,7 +26,8 @@ class CovidIntroPanelDyanmicText extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      covid_summary: null,
+      summaries_by_year: null,
+      selected_year: null,
     };
   }
   componentDidMount() {
@@ -38,21 +39,37 @@ class CovidIntroPanelDyanmicText extends React.Component {
           _query_name: "gov_covid_summary_query",
         },
       })
-      .then(({ data: { root: { gov: { covid_summary } } } }) =>
-        this.setState({
-          covid_summary,
-          loading: false,
-        })
+      .then(
+        ({
+          data: {
+            root: {
+              gov: { covid_summary },
+            },
+          },
+        }) => {
+          const summaries_by_year = _.chain(covid_summary)
+            .map((covid_summary) => [covid_summary.fiscal_year, covid_summary])
+            .fromPairs()
+            .value();
+
+          this.setState({
+            loading: false,
+            summaries_by_year,
+            selected_year: _.chain(summaries_by_year).keys().last().value(),
+          });
+        }
       );
   }
   render() {
     const { panel_args } = this.props;
-    const { loading, covid_summary } = this.state;
+    const { loading, summaries_by_year, selected_year } = this.state;
 
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const { covid_estimates, covid_expenditures } = covid_summary;
+      const { covid_estimates, covid_expenditures } = summaries_by_year[
+        selected_year
+      ];
       const {
         gov_total_covid_estimates,
         gov_total_covid_expenditures,

@@ -16,7 +16,7 @@ import {
   all_covid_expenditures_by_measure_query,
 } from "./queries.js";
 
-export const api_load_has_covid_response = (subject) => {
+export const api_load_has_covid_data = (subject) => {
   if (!(subject && subject.level === "dept")) {
     return Promise.resolve();
   }
@@ -30,7 +30,7 @@ export const api_load_has_covid_response = (subject) => {
         variables: {
           lang: lang,
           id: subject.id,
-          _query_name: "has_covid_response",
+          _query_name: "has_covid_data",
         },
       })
       .then((response) =>
@@ -201,16 +201,18 @@ export const api_load_covid_estimates_by_measure = (subject) => {
 
       _.each(
         covid_estimates_by_measure,
-        ({ covid_estimates, ...covid_measure }) => {
+        ({
+          covid_data: { fiscal_year, covid_estimates },
+          ...covid_measure
+        }) => {
           if (!CovidMeasure.lookup(covid_measure.id)) {
             CovidMeasure.create_and_register(covid_measure);
           }
 
-          CovidMeasure.extend_with_data(
-            covid_measure.id,
-            "estimates",
-            covid_estimates
-          );
+          CovidMeasure.extend_with_data(covid_measure.id, "estimates", {
+            fiscal_year,
+            ...covid_estimates,
+          });
         }
       );
 
@@ -310,16 +312,18 @@ export const api_load_covid_expenditures_by_measure = (subject) => {
 
       _.each(
         covid_expenditures_by_measure,
-        ({ covid_expenditures, ...covid_measure }) => {
+        ({
+          covid_data: { fiscal_year, covid_expenditures },
+          ...covid_measure
+        }) => {
           if (!CovidMeasure.lookup(covid_measure.id)) {
             CovidMeasure.create_and_register(covid_measure);
           }
 
-          CovidMeasure.extend_with_data(
-            covid_measure.id,
-            "expenditures",
-            covid_expenditures
-          );
+          CovidMeasure.extend_with_data(covid_measure.id, "expenditures", {
+            fiscal_year,
+            ...covid_expenditures,
+          });
         }
       );
 

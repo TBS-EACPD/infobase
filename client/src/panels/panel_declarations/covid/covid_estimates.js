@@ -592,7 +592,9 @@ export const declare_covid_estimates_panel = () =>
         if (level_name === "gov") {
           return true;
         } else {
-          return subject.has_data("covid")?.has_estimates;
+          const years_with_estimates = subject.has_data("covid")
+            ?.years_with_estimates;
+          return !_.isEmpty(years_with_estimates) && { years_with_estimates };
         }
       },
       render: ({
