@@ -2,14 +2,16 @@ covid_estimates_panel_title:
   en: Spending Authorities by COVID-19 Measure
   fr: Autorisations de dépenser par mesure au titre de la COVID-19
 
+# COVID_YEARS_TODO need to be getting tabled doc text from data
+# Part about the ERP is going to need to be maintained, will be a problem for multiple years eventually
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_tt "spending authorities" "AUTH"}} sought in Supplementary Estimates (A, B, and C) for 2020-21 and align with the COVID-19 Economic Response Plan (ERP) (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020).
+    * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_tt "spending authorities" "AUTH"}} sought in Supplementary Estimates (A, B, and C) for {{fmt_year_to_fiscal_year selected_year}} and align with the COVID-19 Economic Response Plan (ERP) (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020).
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
   fr: |
-    * Le Parlement doit approuver toutes les dépenses du gouvernement. Ces chiffres sont ceux des nouvelles {{gl_tt "autorisations de dépenses" "AUTH"}} au titre de la COVID-19 qui sont inscrites dans les budgets supplémentaires des dépenses (A, B et C) pour 2020-2021 et correspondent au Plan d'intervention économique pour répondre à la COVID-19 (c'est-à-dire les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020).
+    * Le Parlement doit approuver toutes les dépenses du gouvernement. Ces chiffres sont ceux des nouvelles {{gl_tt "autorisations de dépenses" "AUTH"}} au titre de la COVID-19 qui sont inscrites dans les budgets supplémentaires des dépenses (A, B et C) pour {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan d'intervention économique pour répondre à la COVID-19 (c'est-à-dire les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020).
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
 
@@ -17,18 +19,18 @@ covid_estimates_above_tab_footnote_list:
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
   en: |
-    So far this fiscal year (**{{est_last_year}}**), **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities have been presented through
+    So far this fiscal year (**{{fmt_year_to_fiscal_year fiscal_year}}**), **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities have been presented through
     the Estimates in response to the COVID-19 pandemic.
   fr:  |
-    Depuis le début de l'exercice en cours (**{{est_last_year}}**), des autorisations d’un montant de **{{fmt_compact1_written gov_covid_estimates_in_year}}** ont été
+    Depuis le début de l'exercice en cours (**{{fmt_year_to_fiscal_year fiscal_year}}**), des autorisations d’un montant de **{{fmt_compact1_written gov_covid_estimates_in_year}}** ont été
     accordées par le biais des budgets des dépenses pour les interventions en réponse à la pandémie de COVID-19. 
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
   en: |
-    So far this fiscal year (**{{est_last_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_estimates_in_year}}** in authorities
+    So far this fiscal year (**{{fmt_year_to_fiscal_year fiscal_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_estimates_in_year}}** in authorities
     available for its response to the COVID-19 pandemic, as presented through the Estimates.
   fr: |
-    Depuis le début de l'exercice en cours (**{{est_last_year}}**), **{{subject.name}}** a pu disposer d’autorisation d’un montant de
+    Depuis le début de l'exercice en cours (**{{fmt_year_to_fiscal_year fiscal_year}}**), **{{subject.name}}** a pu disposer d’autorisation d’un montant de
     **{{fmt_compact1_written dept_covid_estimates_in_year}}** pour ses interventions en réponse à la COVID-19, tel qu’il est indiqué dans les budgets des dépenses.
 
 
@@ -74,26 +76,25 @@ covid_estimates_vote:
   en: Voted Authorities
   fr: Autorisations votées
 
-
 covid_estimates_COV082_2020_tooltip:
   transform: [handlebars,markdown]
   en: |
-    Includes $5 billion for vaccines that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
+    Includes $5 billion for vaccines that was approved in the 2020-21 Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
     These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information
     {{ext_link "online" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/frozen-allotments-voted-authorities.html"}}.
   fr: |
-    Comprend les cinq milliards de dollars pour les vaccins qui ont été approuvés dans le budget supplémentaire des dépenses (B), mais qui ont ensuite été reportés à 2021-2022.
+    Comprend les cinq milliards de dollars pour les vaccins qui ont été approuvés dans le budget supplémentaire des dépenses (B) 2020-2021, mais qui ont ensuite été reportés à 2021-2022.
     Ces autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires
     {{ext_link "en ligne" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/budgets-supplementaires/budget-supplementaire-depenses-c-2020-2021/affectations-bloquees-autorisations-votees.html"}}
     relatifs au Budget supplémentaire des dépenses (C) 2020-2021.
 covid_estimates_COV115_2020_tooltip:
   transform: [handlebars,markdown]
   en: |
-    Includes $500 million for PPE that was approved in Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
+    Includes $500 million for PPE that was approved in the 2020-21 Supplementary Estimates (B), but has subsequently been reprofiled to 2021-22.
     These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information
     {{ext_link "online" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/frozen-allotments-voted-authorities.html"}}.
   fr: |
-    Comprend 500 millions de dollars pour les EPI qui ont été approuvés dans le budget supplémentaire des dépenses (B), mais qui ont ensuite été reportés à 2021-2022.
+    Comprend 500 millions de dollars pour les EPI qui ont été approuvés dans le budget supplémentaire des dépenses (B) 2020-2021, mais qui ont ensuite été reportés à 2021-2022.
     Ces autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires
     {{ext_link "en ligne" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/budgets-supplementaires/budget-supplementaire-depenses-c-2020-2021/affectations-bloquees-autorisations-votees.html"}}
     relatifs au Budget supplémentaire des dépenses (C) 2020-2021.

@@ -32,6 +32,7 @@ import { infograph_options_href_template } from "src/infographic/infographic_lin
 import {
   AboveTabFootnoteList,
   CellTooltip,
+  YearSelectionTabs,
 } from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
@@ -56,7 +57,7 @@ const colors = infobase_colors();
 const panel_key = "covid_estimates_panel";
 
 const SummaryTab = ({ args: panel_args, data }) => {
-  const { subject } = panel_args;
+  const { subject, fiscal_year } = panel_args;
 
   const graph_index_key = "index_key";
 
@@ -511,8 +512,8 @@ class CovidEstimatesPanel extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      gov_covid_estimates_in_year: null,
-      covid_summary: null,
+      estimates_summary_by_fiscal_year: null,
+      selected_year: _.last(props.panel_args.years_with_estimates),
     };
   }
   componentDidMount() {
@@ -524,35 +525,40 @@ class CovidEstimatesPanel extends React.Component {
           _query_name: "gov_covid_summary_query",
         },
       })
-      .then(
-        ({
-          data: {
-            root: {
-              gov: {
-                covid_summary: { covid_estimates },
-              },
-            },
-          },
-        }) =>
-          this.setState({
-            gov_covid_estimates_in_year: _.reduce(
+      .then(({ data: { root: { gov: { covid_summary } } } }) =>
+        this.setState({
+          estimates_summary_by_fiscal_year: _.chain(covid_summary)
+            .map(({ fiscal_year, covid_estimates }) => [
+              fiscal_year,
               covid_estimates,
-              (memo, { vote, stat }) => memo + vote + stat,
-              0
-            ),
-            loading: false,
-          })
+            ])
+            .fromPairs()
+            .value(),
+          loading: false,
+        })
       );
   }
+  on_select_year = (year) => this.setState({ selected_year: year });
   render() {
-    const { loading, gov_covid_estimates_in_year } = this.state;
+    const {
+      loading,
+      selected_year,
+      estimates_summary_by_fiscal_year,
+    } = this.state;
     const { panel_args } = this.props;
 
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
+      const gov_covid_estimates_in_year = _.reduce(
+        estimates_summary_by_fiscal_year[selected_year],
+        (memo, { vote, stat }) => memo + vote + stat,
+        0
+      );
+
       const extended_panel_args = {
         ...panel_args,
+        fiscal_year: selected_year,
         gov_covid_estimates_in_year,
       };
 
@@ -564,8 +570,16 @@ class CovidEstimatesPanel extends React.Component {
       return (
         <Fragment>
           <div className="medium-panel-text text">
+            <YearSelectionTabs
+              years={panel_args.years_with_estimates}
+              on_select_year={this.on_select_year}
+              selected_year={selected_year}
+            />
             <AboveTabFootnoteList subject={panel_args.subject}>
-              <TM k="covid_estimates_above_tab_footnote_list" />
+              <TM
+                k="covid_estimates_above_tab_footnote_list"
+                args={{ selected_year }}
+              />
             </AboveTabFootnoteList>
           </div>
           <TabbedContent {...tabbed_content_props} />
@@ -580,7 +594,7 @@ export const declare_covid_estimates_panel = () =>
     panel_key,
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      requires_years_with_covid_data: level_name === "dept",
+      requires_years_with_covid_data: true,
       initial_queries: {
         gov_covid_summary_query,
         ...(level_name === "dept" && { org_covid_summary_query }),
@@ -589,13 +603,11 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {
-        if (level_name === "gov") {
-          return true;
-        } else {
-          const years_with_estimates = subject.has_data("covid")
-            ?.years_with_estimates;
-          return !_.isEmpty(years_with_estimates) && { years_with_estimates };
-        }
+        // TODO need a whole rethink of using subject.has_data, it's really being abused at this point, storing all those years,
+        // and doesn't cover the gov case anyway
+        const years_with_estimates = subject.has_data("covid")
+          ?.years_with_estimates;
+        return !_.isEmpty(years_with_estimates) && { years_with_estimates };
       },
       render: ({
         calculations: { panel_args, subject },
