@@ -1,6 +1,13 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { create_text_maker_component, CheckBox } from "src/components/index.js";
+import {
+  create_text_maker_component,
+  CheckBox,
+  TabbedControls,
+} from "src/components/index.js";
+
+import { formats } from "src/core/format.js";
 
 import { IconQuestion } from "src/icons/icons.js";
 
@@ -10,7 +17,19 @@ import common_covid_text from "./covid_common_lang.yaml";
 
 const { TM } = create_text_maker_component(common_covid_text);
 
-const AboveTabFootnoteList = ({ children, subject }) => (
+const YearSelectionTabs = ({ years, on_select_year, selected_year }) =>
+  years.length > 1 && (
+    <TabbedControls
+      tab_options={_.map(years, (year) => ({
+        key: year,
+        label: formats.year_to_fiscal_year(year),
+        is_open: year === selected_year,
+      }))}
+      tab_callback={on_select_year}
+    />
+  );
+
+const AboveTabFootnoteList = ({ children }) => (
   <Fragment>
     <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
     <div style={{ lineHeight: "normal" }}>
@@ -63,4 +82,9 @@ const CellTooltip = ({ tooltip_text }) => (
   </span>
 );
 
-export { AboveTabFootnoteList, ToggleVoteStatProvider, CellTooltip };
+export {
+  YearSelectionTabs,
+  AboveTabFootnoteList,
+  ToggleVoteStatProvider,
+  CellTooltip,
+};

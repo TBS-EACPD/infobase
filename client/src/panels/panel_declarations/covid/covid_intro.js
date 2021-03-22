@@ -84,12 +84,6 @@ class CovidIntroPanelDyanmicText extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const [gov_total_covid_estimates, gov_total_covid_expenditures] = _.map(
-        [latest_estimates_summary, latest_expenditures_summary],
-        ({ summary }) =>
-          _.reduce(summary, (memo, { vote, stat }) => memo + vote + stat, 0)
-      );
-
       return (
         <div className="medium-panel-text">
           <TM
@@ -97,7 +91,11 @@ class CovidIntroPanelDyanmicText extends React.Component {
             args={{
               ...panel_args,
               fiscal_year: latest_estimates_summary.fiscal_year,
-              gov_total_covid_estimates,
+              gov_total_covid_estimates: _.reduce(
+                latest_estimates_summary.summary,
+                (memo, { vote, stat }) => memo + vote + stat,
+                0
+              ),
             }}
           />
           {COVID_EXPENDITUES_FLAG && (
@@ -106,7 +104,9 @@ class CovidIntroPanelDyanmicText extends React.Component {
               args={{
                 ...panel_args,
                 fiscal_year: latest_expenditures_summary.fiscal_year,
-                gov_total_covid_expenditures,
+                gov_total_covid_expenditures:
+                  latest_expenditures_summary.summary.vote +
+                  latest_expenditures_summary.summary.stat,
               }}
             />
           )}
@@ -121,7 +121,6 @@ export const declare_covid_intro_panel = () =>
     panel_key: "covid_intro",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      requires_years_with_covid_data: level_name === "dept",
       initial_queries: {
         gov_covid_summary_query,
       },
