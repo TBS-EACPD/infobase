@@ -26,8 +26,8 @@ class CovidIntroPanelDyanmicText extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      summaries_by_year: null,
-      selected_year: null,
+      latest_estimates_summary: null,
+      latest_expenditures_summary: null,
     };
   }
   componentDidMount() {
@@ -47,53 +47,56 @@ class CovidIntroPanelDyanmicText extends React.Component {
             },
           },
         }) => {
-          const summaries_by_year = _.chain(covid_summary)
-            .map((covid_summary) => [covid_summary.fiscal_year, covid_summary])
-            .fromPairs()
-            .value();
+          const [latest_estimates_summary, latest_expenditures_summary] = _.map(
+            ["covid_estimates", "covid_expenditures"],
+            (data_type) =>
+              _.chain(covid_summary)
+                .map((covid_summary) => [
+                  covid_summary.fiscal_year,
+                  covid_summary[data_type],
+                ])
+                .filter(([_fiscal_year, summary]) => !_.isEmpty(summary))
+                .sortBy(_.first)
+                .last()
+                .thru(([fiscal_year, summary]) => ({
+                  fiscal_year,
+                  summary,
+                }))
+                .value()
+          );
 
           this.setState({
             loading: false,
-            summaries_by_year,
-            selected_year: _.chain(summaries_by_year).keys().last().value(),
+            latest_estimates_summary,
+            latest_expenditures_summary,
           });
         }
       );
   }
   render() {
     const { panel_args } = this.props;
-    const { loading, summaries_by_year, selected_year } = this.state;
+    const {
+      loading,
+      latest_estimates_summary,
+      latest_expenditures_summary,
+    } = this.state;
 
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const { covid_estimates, covid_expenditures } = summaries_by_year[
-        selected_year
-      ];
-      const {
-        gov_total_covid_estimates,
-        gov_total_covid_expenditures,
-      } = _.chain({ covid_estimates, covid_expenditures })
-        .mapValues((summaries) =>
-          _.chain(summaries)
-            .groupBy("fiscal_year")
-            .toPairs()
-            .sortBy(_.first)
-            .first()
-            .thru(([_fiscal_year, rows]) =>
-              _.reduce(rows, (memo, { vote, stat }) => memo + vote + stat, 0)
-            )
-            .value()
-        )
-        .mapKeys((_, key) => `gov_total_${key}`)
-        .value();
+      const [gov_total_covid_estimates, gov_total_covid_expenditures] = _.map(
+        [latest_estimates_summary, latest_expenditures_summary],
+        ({ summary }) =>
+          _.reduce(summary, (memo, { vote, stat }) => memo + vote + stat, 0)
+      );
 
       return (
         <div className="medium-panel-text">
           <TM
-            k="covid_intro_auth"
+            k="covid_intro_est"
             args={{
               ...panel_args,
+              fiscal_year: latest_estimates_summary.fiscal_year,
               gov_total_covid_estimates,
             }}
           />
@@ -102,6 +105,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
               k="covid_intro_exp"
               args={{
                 ...panel_args,
+                fiscal_year: latest_expenditures_summary.fiscal_year,
                 gov_total_covid_expenditures,
               }}
             />
