@@ -24,12 +24,12 @@ const schema = `
   }
 
   extend type Gov {
-    has_covid_data: [HasCovidData]
+    years_with_covid_data: [YearsWithCovidData]
     covid_summary(fiscal_year: Int): [CovidGovSummary]
   }
 
   extend type Org {
-    has_covid_data: [HasCovidData]
+    years_with_covid_data: [YearsWithCovidData]
     covid_summary(fiscal_year: Int): [CovidOrgSummary]
     covid_measures(fiscal_year: Int): [CovidMeasure]
   }
@@ -39,11 +39,11 @@ const schema = `
 
     name: String
 
-    has_covid_data: [HasCovidData]
+    years_with_covid_data: [YearsWithCovidData]
     covid_data(fiscal_year: Int, org_id: String): [CovidData]
   }
 
-  type HasCovidData {
+  type YearsWithCovidData {
     years_with_estimates: [String]
     years_with_expenditures: [String]
   }
@@ -106,17 +106,17 @@ export default function ({ models, loaders }) {
 
   const {
     org_id_loader,
-    has_covid_data_loader,
+    years_with_covid_data_loader,
     covid_measure_loader,
     covid_measures_by_related_org_ids_loader,
     covid_gov_summary_loader,
     covid_org_summary_loader,
   } = loaders;
 
-  const has_covid_data_resolver = (subject_id) =>
-    has_covid_data_loader.load(subject_id).then(
-      (has_covid_data) =>
-        has_covid_data || [
+  const years_with_covid_data_resolver = (subject_id) =>
+    years_with_covid_data_loader.load(subject_id).then(
+      (years_with_covid_data) =>
+        years_with_covid_data || [
           {
             years_with_estimates: [],
             years_with_expenditures: [],
@@ -135,7 +135,7 @@ export default function ({ models, loaders }) {
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
-      has_covid_data: () => has_covid_data_resolver("gov"),
+      years_with_covid_data: () => years_with_covid_data_resolver("gov"),
       covid_summary: (_, { fiscal_year }) =>
         covid_gov_summary_loader
           .load("gov")
@@ -154,7 +154,8 @@ export default function ({ models, loaders }) {
           .value(),
     },
     Org: {
-      has_covid_data: ({ org_id }) => has_covid_data_resolver(org_id),
+      years_with_covid_data: ({ org_id }) =>
+        years_with_covid_data_resolver(org_id),
       covid_summary: ({ org_id }, { fiscal_year }) =>
         covid_org_summary_loader
           .load(org_id)
@@ -174,8 +175,8 @@ export default function ({ models, loaders }) {
     CovidMeasure: {
       id: _.property("covid_measure_id"),
       name: bilingual_field("name"),
-      has_covid_data: ({ covid_measure_id }) =>
-        has_covid_data_resolver(covid_measure_id),
+      years_with_covid_data: ({ covid_measure_id }) =>
+        years_with_covid_data_resolver(covid_measure_id),
       covid_data: ({ covid_data }, { fiscal_year, org_id }) =>
         _.chain(covid_data)
           .thru(optional_fiscal_year_filter(fiscal_year))

@@ -117,7 +117,7 @@ export const declare_covid_intro_panel = () =>
     panel_key: "covid_intro",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      requires_has_covid_response: level_name === "dept",
+      requires_years_with_covid_data: level_name === "dept",
       initial_queries: {
         gov_covid_summary_query,
       },

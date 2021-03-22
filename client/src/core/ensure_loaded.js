@@ -3,7 +3,7 @@ import _ from "lodash";
 import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
 
 import {
-  api_load_has_covid_data,
+  api_load_years_with_covid_data,
   api_load_covid_measures,
   api_load_covid_estimates_by_measure,
   api_load_covid_expenditures_by_measure,
@@ -68,7 +68,7 @@ function ensure_loaded({
   requires_granular_result_counts,
   has_services,
   services,
-  has_covid_response,
+  years_with_covid_data,
   covid_measures,
   covid_estimates,
   covid_expenditures,
@@ -115,9 +115,9 @@ function ensure_loaded({
   const should_load_services =
     services || check_for_panel_dependency("requires_services");
 
-  const should_load_has_covid_response =
-    has_covid_response ||
-    check_for_panel_dependency("requires_has_covid_response");
+  const should_load_years_with_covid_data =
+    years_with_covid_data ||
+    check_for_panel_dependency("requires_years_with_covid_data");
 
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
@@ -171,8 +171,8 @@ function ensure_loaded({
     ? load_horizontal_initiative_lookups()
     : Promise.resolve();
 
-  const has_covid_response_prom = should_load_has_covid_response
-    ? api_load_has_covid_data(subject)
+  const years_with_covid_data_prom = should_load_years_with_covid_data
+    ? api_load_years_with_covid_data(subject)
     : Promise.resolve();
 
   const covid_measures_prom = should_load_covid_measures
@@ -198,7 +198,7 @@ function ensure_loaded({
     has_services_prom,
     services_prom,
     horizontal_initiative_lookups_prom,
-    has_covid_response_prom,
+    years_with_covid_data_prom,
     covid_measures_prom,
     covid_estimates_prom,
     covid_expenditures_prom,

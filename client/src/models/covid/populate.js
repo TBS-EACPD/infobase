@@ -7,7 +7,7 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { CovidMeasure } from "./CovidMeasure.js";
 import {
-  org_has_covid_data_query,
+  org_years_with_covid_data_query,
   org_covid_measure_query,
   all_covid_measure_query,
   org_covid_estimates_by_measure_query,
@@ -16,7 +16,7 @@ import {
   all_covid_expenditures_by_measure_query,
 } from "./queries.js";
 
-export const api_load_has_covid_data = (subject) => {
+export const api_load_years_with_covid_data = (subject) => {
   if (!(subject && subject.level === "dept")) {
     return Promise.resolve();
   }
@@ -26,17 +26,18 @@ export const api_load_has_covid_data = (subject) => {
   } catch (e) {
     return get_client()
       .query({
-        query: org_has_covid_data_query,
+        query: org_years_with_covid_data_query,
         variables: {
           lang: lang,
           id: subject.id,
-          _query_name: "has_covid_data",
+          _query_name: "years_with_covid_data",
         },
       })
       .then((response) =>
         subject.set_has_data(
           "covid",
-          _.omit(response.data.root.org.has_covid_data, "__typename") || false
+          _.omit(response.data.root.org.years_with_covid_data, "__typename") ||
+            false
         )
       );
   }
