@@ -24,12 +24,12 @@ const schema = `
   }
 
   extend type Gov {
-    years_with_covid_data: [YearsWithCovidData]
+    years_with_covid_data: YearsWithCovidData
     covid_summary(fiscal_year: Int): [CovidGovSummary]
   }
 
   extend type Org {
-    years_with_covid_data: [YearsWithCovidData]
+    years_with_covid_data: YearsWithCovidData
     covid_summary(fiscal_year: Int): [CovidOrgSummary]
     covid_measures(fiscal_year: Int): [CovidMeasure]
   }
@@ -39,7 +39,7 @@ const schema = `
 
     name: String
 
-    years_with_covid_data: [YearsWithCovidData]
+    years_with_covid_data: YearsWithCovidData
     covid_data(fiscal_year: Int, org_id: String): [CovidData]
   }
 
@@ -116,12 +116,10 @@ export default function ({ models, loaders }) {
   const years_with_covid_data_resolver = (subject_id) =>
     years_with_covid_data_loader.load(subject_id).then(
       (years_with_covid_data) =>
-        years_with_covid_data || [
-          {
-            years_with_estimates: [],
-            years_with_expenditures: [],
-          },
-        ]
+        _.first(years_with_covid_data) || {
+          years_with_estimates: [],
+          years_with_expenditures: [],
+        }
     );
 
   const optional_fiscal_year_filter = _.curry((fiscal_year, data) =>
