@@ -7,113 +7,6 @@ import { lang } from "src/core/injected_build_constants.js";
 import { log_standard_event } from "../core/analytics.js";
 import { get_client } from "../graphql_utils/graphql_utils.js";
 
-import { Service, ServiceStandard } from "./services.js";
-
-const get_subject_has_services_query = (level, id_arg_name) => gql`
-query($lang: String! $id: String) {
-  root(lang: $lang) {
-    ${level}(${id_arg_name}: $id){
-      id
-      hasServices: has_services
-    }
-  }
-}
-`;
-const _subject_has_services = {};
-export function api_load_subject_has_services(subject) {
-  const level = subject && subject.level;
-
-  const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_has_services, `${level}.${id}`);
-
-    switch (level) {
-      case "dept":
-        return {
-          is_loaded: subject_is_loaded(subject),
-          id: subject.id,
-          query: get_subject_has_services_query("org", "org_id"),
-          response_data_accessor: (response) => response.data.root.org,
-        };
-      case "program":
-        return {
-          is_loaded: subject_is_loaded(subject),
-          id: subject.id,
-          query: get_subject_has_services_query("program", "id"),
-          response_data_accessor: (response) => {
-            return response.data.root.program;
-          },
-        };
-      default:
-        return {
-          is_loaded: true, // no default case, this is to resolve the promise early
-        };
-    }
-  })();
-
-  if (is_loaded) {
-    // ensure that subject.has_data matches _subject_has_services, since _subject_has_services hay have been updated via side-effect
-    subject.set_has_data(
-      `services_data`,
-      _.get(_subject_has_services, `${level}.${id}`)
-    );
-    return Promise.resolve();
-  }
-
-  const time_at_request = Date.now();
-  const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "subject_has_services",
-      },
-    })
-    .then((response) => {
-      const response_data = response_data_accessor(response);
-
-      const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(response_data)) {
-        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_SUCCESS",
-          MISC2: `Has services, took ${resp_time} ms`,
-        });
-      } else {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `Has services, took ${resp_time} ms`,
-        });
-      }
-
-      subject.set_has_data(`services_data`, response_data[`hasServices`]);
-
-      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
-      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
-      _.setWith(
-        _subject_has_services,
-        `${level}.${id}`,
-        response_data[`hasServices`],
-        Object
-      );
-
-      return Promise.resolve();
-    })
-    .catch(function (error) {
-      const resp_time = Date.now() - time_at_request;
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
-      });
-      throw error;
-    });
-}
-
 const all_service_fragments = `
       id
       org_id
@@ -241,7 +134,7 @@ export const prefetch_services = () => {
 };
 
 export const fetchServices = (query_options) => {
-  const t0 = performance.now();
+  const time_at_request = Date.now();
   const { subject } = query_options;
   const is_gov = subject.level === "gov";
   const variables = {
@@ -251,143 +144,22 @@ export const fetchServices = (query_options) => {
 
   const query = services_query(query_options);
   const res = useQuery(query, { variables });
-  const { loading, error, data, client } = res;
+  const { loading, error, data } = res;
   if (error) {
+    const resp_time = Date.now() - time_at_request;
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
+    });
     throw new Error(error);
   }
   if (!loading) {
-    console.log(client.cache.data.data);
     const res_data = is_gov ? data.root.orgs : data.root.org.services;
     const services = is_gov
       ? _.chain(res_data).flatMap("services").compact().uniqBy("id").value()
       : res_data;
-    const t1 = performance.now();
-    console.log(t1 - t0);
     return { ...res, data: services };
   }
   return res;
 };
-
-const extract_flat_data_from_hierarchical_response = (response) => {
-  const serviceStandards = [];
-  const services = _.chain(_.isArray(response) ? response : [response])
-    .map((resp) => resp.services)
-    .compact()
-    .flatten(true)
-    .each((service) =>
-      _.each(service.standards, (standard) =>
-        serviceStandards.push(_.omit(standard, "__typename"))
-      )
-    )
-    .value();
-  return { services, serviceStandards };
-};
-
-const _subject_ids_with_loaded_services = {};
-export function api_load_services(subject) {
-  const level = (subject && subject.level) || "gov";
-
-  const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
-
-    const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
-    const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
-
-    switch (level) {
-      case "dept":
-        return {
-          is_loaded: dept_is_loaded(subject),
-          id: subject.id,
-          query: services_query({
-            fetch_all_orgs: false,
-          }),
-          response_data_accessor: (response) => response.data.root.org,
-        };
-      default:
-        return {
-          is_loaded: all_is_loaded(subject),
-          id: "gov",
-          query: services_query({ fetch_all_orgs: true }),
-          response_data_accessor: (response) => response.data.root.orgs,
-        };
-    }
-  })();
-
-  if (is_loaded) {
-    return Promise.resolve();
-  }
-
-  const time_at_request = Date.now();
-  const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "services",
-      },
-    })
-    .then((response) => {
-      const response_data = response_data_accessor(response);
-
-      const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(response_data)) {
-        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_SUCCESS",
-          MISC2: `Services, took ${resp_time} ms`,
-        });
-      } else {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `Services, took ${resp_time} ms`,
-        });
-      }
-
-      const {
-        services,
-        serviceStandards,
-      } = extract_flat_data_from_hierarchical_response(response_data);
-
-      if (!_.isEmpty(services)) {
-        _.each(services, (service) => Service.create_and_register(service));
-      }
-      if (!_.isEmpty(serviceStandards)) {
-        _.each(serviceStandards, (standard) =>
-          ServiceStandard.create_and_register(standard)
-        );
-      }
-
-      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
-      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
-      _.setWith(
-        _subject_ids_with_loaded_services,
-        `${level}.${id}`,
-        true,
-        Object
-      );
-
-      // side effect
-      _.setWith(
-        _subject_ids_with_loaded_services,
-        `${level}.${id}`,
-        _.isEmpty(services),
-        Object
-      );
-
-      return Promise.resolve();
-    })
-    .catch(function (error) {
-      const resp_time = Date.now() - time_at_request;
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
-      });
-      throw error;
-    });
-}
