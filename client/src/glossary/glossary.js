@@ -166,10 +166,6 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
   </div>
 );
 
-function focusBTT() {
-  document.querySelector("#glossary_search > div > div > input").focus();
-}
-
 export default class Glossary extends React.Component {
   render() {
     const {
@@ -192,7 +188,9 @@ export default class Glossary extends React.Component {
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
           {!is_a11y_mode && (
-            <BackToTop focus={focusBTT}/>
+            <BackToTop focus={() => {
+              document.querySelector("#glossary_search > div > div > input").focus();
+            }}/>
           )}
           <Glossary_
             active_key={active_key}
