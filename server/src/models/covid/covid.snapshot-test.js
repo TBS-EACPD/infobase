@@ -31,8 +31,8 @@ const measure_covid_data = `
     ${expenditures_fields}
   }
 `;
-const has_covid_data = `
-  has_covid_data {
+const years_with_covid_data = `
+  years_with_covid_data {
     years_with_estimates
     years_with_expenditures
   }
@@ -45,7 +45,7 @@ query ($lang: String = "en") {
       id
       name
 
-      ${has_covid_data}
+      ${years_with_covid_data}
 
       all_year_covid_data: covid_data {
         ${measure_covid_data}
@@ -65,7 +65,7 @@ query ($lang: String = "en", $covid_measure_id: String = "COV001") {
       id
       name
 
-      ${has_covid_data}
+      ${years_with_covid_data}
     }
   }
 }`;
@@ -173,7 +173,7 @@ query ($lang: String = "en", $org_id: String = "133") {
         id
         name
 
-        ${has_covid_data}
+        ${years_with_covid_data}
 
         all_year_covid_data: covid_data(org_id: $org_id) {
           ${measure_covid_data}
@@ -188,7 +188,7 @@ query ($lang: String = "en", $org_id: String = "133") {
         id
         name
 
-        ${has_covid_data}
+        ${years_with_covid_data}
 
         covid_data(fiscal_year: 2021, org_id: $org_id) {
           ${measure_covid_data}
@@ -198,26 +198,26 @@ query ($lang: String = "en", $org_id: String = "133") {
   }
 }`;
 
-const gov_has_covid_data_query = `
+const gov_years_with_covid_data_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     gov {
-      ${has_covid_data}
+      ${years_with_covid_data}
     }
   }
 }`;
 
-const org_has_covid_data_query = `
+const org_years_with_covid_data_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
     has_data: org(org_id: "133") {
-      ${has_covid_data}
+      ${years_with_covid_data}
     }
     does_not_have_data: org(org_id: "15") {
-      ${has_covid_data}
+      ${years_with_covid_data}
     }
-    only_years_with_estimates: org(org_id: "1") {
-      ${has_covid_data}
+    only_has_estimates: org(org_id: "1") {
+      ${years_with_covid_data}
     }
   }
 }`;
@@ -243,12 +243,12 @@ describe("covid data", () => {
     const data = await execQuery(org_covid_measures_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("Gov has covid data", async () => {
-    const data = await execQuery(gov_has_covid_data_query, {});
+  it("Gov years with covid data", async () => {
+    const data = await execQuery(gov_years_with_covid_data_query, {});
     return expect(data).toMatchSnapshot();
   });
-  it("Org has covid data", async () => {
-    const data = await execQuery(org_has_covid_data_query, {});
+  it("Org years with covid data", async () => {
+    const data = await execQuery(org_years_with_covid_data_query, {});
     return expect(data).toMatchSnapshot();
   });
 });

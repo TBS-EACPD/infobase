@@ -19,19 +19,21 @@ const build_org_query = (inner_fragment) => gql`
   }
 `;
 
-const has_covid_data_fields = `
-  has_covid_data {
+const years_with_covid_data = `
+  years_with_covid_data {
     years_with_estimates
     years_with_expenditures
   }
 `;
-export const org_has_covid_data_query = build_org_query(has_covid_data_fields);
+export const org_years_with_covid_data_query = build_org_query(
+  years_with_covid_data
+);
 
 const covid_measure_fields = `
   id
   name
 
-  ${has_covid_data_fields}
+  ${years_with_covid_data}
 `;
 const covid_measure_query_fragment = `
   covid_measures {

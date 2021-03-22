@@ -29,7 +29,7 @@ const count_fields = {
 };
 
 export default function (model_singleton) {
-  const HasCovidDataSchema = mongoose.Schema({
+  const YearsWithCovidDataSchema = mongoose.Schema({
     subject_id: parent_fkey_type(),
 
     years_with_estimates: [fyear_type()],
@@ -88,14 +88,14 @@ export default function (model_singleton) {
     org_counts: [count_fields],
   });
 
-  model_singleton.define_model("HasCovidData", HasCovidDataSchema);
+  model_singleton.define_model("YearsWithCovidData", YearsWithCovidDataSchema);
   model_singleton.define_model("CovidMeasure", CovidMeasureSchema);
   model_singleton.define_model("CovidGovSummary", CovidGovSummarySchema);
   model_singleton.define_model("CovidOrgSummary", CovidOrgSummarySchema);
 
   const {
     CovidMeasure,
-    HasCovidData,
+    YearsWithCovidData,
     CovidGovSummary,
     CovidOrgSummary,
   } = model_singleton.models;
@@ -109,8 +109,8 @@ export default function (model_singleton) {
       CovidMeasure,
       "related_org_ids.org_ids"
     ),
-    has_covid_data_loader: create_resource_by_foreignkey_attr_dataloader(
-      HasCovidData,
+    years_with_covid_data_loader: create_resource_by_foreignkey_attr_dataloader(
+      YearsWithCovidData,
       "subject_id"
     ),
     covid_gov_summary_loader: create_resource_by_foreignkey_attr_dataloader(

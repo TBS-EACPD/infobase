@@ -4,7 +4,7 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 
 export default async function ({ models }) {
   const {
-    HasCovidData,
+    YearsWithCovidData,
     CovidMeasure,
     CovidGovSummary,
     CovidOrgSummary,
@@ -210,7 +210,7 @@ export default async function ({ models }) {
     },
   }));
 
-  const has_covid_data_records = _.flatMap(
+  const years_with_covid_data_records = _.flatMap(
     ["org_id", "covid_measure_id"],
     (subject_id_key) =>
       _.chain(all_rows_with_org_data)
@@ -218,7 +218,7 @@ export default async function ({ models }) {
         .uniq()
         .map(
           (subject_id) =>
-            new HasCovidData({
+            new YearsWithCovidData({
               subject_id,
               ..._.chain({
                 estimates: covid_estimates_rows,
@@ -239,7 +239,7 @@ export default async function ({ models }) {
         )
         .value()
   );
-  const gov_has_covid_data_record = new HasCovidData({
+  const gov_years_with_covid_data_record = new YearsWithCovidData({
     subject_id: "gov",
     years_with_estimates: _.chain(covid_estimates_rows)
       .map("fiscal_year")
@@ -254,9 +254,9 @@ export default async function ({ models }) {
   });
 
   return await Promise.all([
-    HasCovidData.insertMany([
-      ...has_covid_data_records,
-      gov_has_covid_data_record,
+    YearsWithCovidData.insertMany([
+      ...years_with_covid_data_records,
+      gov_years_with_covid_data_record,
     ]),
     CovidMeasure.insertMany(covid_measure_records),
     CovidGovSummary.insertMany(covid_gov_summary_record),
