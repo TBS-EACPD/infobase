@@ -28,7 +28,7 @@ const schema = `
 
   extend type Org {
     has_covid_data: [HasCovidData]
-    covid_summary(fiscal_year: Int): CovidOrgSummary
+    covid_summary(fiscal_year: Int): [CovidOrgSummary]
     covid_measures: [CovidMeasure]
   }
 
