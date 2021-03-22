@@ -38,8 +38,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const is_gov = subject.level === "gov";
 
   const { loading, data } = fetchServices({
-    subject,
-    fetch_all_orgs: is_gov,
+    id: subject.id,
     service_fragments: `service_report{
       ${website_visits_key}_count
     }`,

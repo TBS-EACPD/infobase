@@ -11,6 +11,7 @@ import {
 } from "src/icons/icons.js";
 
 import { services_feature_flag } from "../core/injected_build_constants.js";
+import { prefetch_services } from "../models/populate_services.js";
 import { create_text_maker } from "../models/text.js";
 
 import { infograph_href_template } from "./infographic_link.js";
@@ -51,6 +52,7 @@ const base_configs = [
     title: text_maker("services_title"),
     description: text_maker("services_desc"),
     svg: IconServices,
+    prefetch: () => prefetch_services,
   },
   {
     id: "results",

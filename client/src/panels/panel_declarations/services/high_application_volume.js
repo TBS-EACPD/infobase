@@ -25,8 +25,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const HighApplicationVolumePanel = ({ panel_args }) => {
   const { subject } = panel_args;
   const { loading, data } = fetchServices({
-    subject,
-    fetch_all_orgs: subject.level === "gov",
+    id: subject.id,
     service_fragments: delivery_channels_query_fragment,
   });
   if (loading) {

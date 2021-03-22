@@ -111,35 +111,36 @@ query($lang: String!) {
 }
 `;
 
-export const services_query = (query_options) => {
-  const { fetch_all_orgs, service_fragments } = query_options;
-  return fetch_all_orgs
+const services_query = (query_options) => {
+  const { id, service_fragments } = query_options;
+  return id === "gov"
     ? all_services_query(service_fragments)
     : dept_services_query(service_fragments);
 };
 
-export const prefetch_services = () => {
+export const prefetch_services = (id) => {
   const client = get_client();
   client.query({
     query: services_query({
-      fetch_all_orgs: true,
+      id: id || "gov",
       service_fragments: "",
     }),
     variables: {
       lang,
-      id: "gov",
+      id: id || "gov",
       _query_name: "services",
     },
   });
+  console.log(client.cache.data.data);
 };
 
 export const fetchServices = (query_options) => {
   const time_at_request = Date.now();
-  const { subject } = query_options;
-  const is_gov = subject.level === "gov";
+  const { id } = query_options;
+  const is_gov = id === "gov";
   const variables = {
     lang,
-    id: subject.id,
+    id,
   };
 
   const query = services_query(query_options);

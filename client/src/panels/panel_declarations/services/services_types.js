@@ -22,8 +22,7 @@ const ServicesTypesPanel = ({ panel_args }) => {
   const { subject } = panel_args;
 
   const { loading, data } = fetchServices({
-    subject,
-    fetch_all_orgs: subject.level === "gov",
+    id: subject.id,
     service_fragments: "service_type",
   });
   if (loading) {

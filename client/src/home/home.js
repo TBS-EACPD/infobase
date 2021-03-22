@@ -139,7 +139,7 @@ const HomeLayout = (props) => (
                 alternate_color={false}
               />
             }
-            onMouseEnter={prefetch_services}
+            onMouseEnter={() => prefetch_services()}
             title={<TM k="home_services_title" />}
           />
         )}
