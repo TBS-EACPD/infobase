@@ -834,26 +834,6 @@ Object {
                     "stat": 9,
                     "vote": 9,
                   },
-                  Object {
-                    "est_doc": "ME",
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 999,
-                    "vote": 0,
-                  },
-                  Object {
-                    "est_doc": "SEB",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 0,
-                    "vote": 9,
-                  },
                 ],
                 "covid_expenditures": Array [
                   Object {
@@ -865,42 +845,8 @@ Object {
                     "stat": 1,
                     "vote": 3,
                   },
-                  Object {
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 0,
-                    "vote": 4,
-                  },
-                  Object {
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 0,
-                  },
                 ],
                 "fiscal_year": 2020,
-              },
-              Object {
-                "covid_estimates": Array [
-                  Object {
-                    "est_doc": "ME",
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 999,
-                    "vote": 0,
-                  },
-                ],
-                "covid_expenditures": Array [],
-                "fiscal_year": 2021,
               },
             ],
             "has_covid_data": Array [
@@ -949,26 +895,6 @@ Object {
                     "stat": 9,
                     "vote": 9,
                   },
-                  Object {
-                    "est_doc": "ME",
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 999,
-                    "vote": 0,
-                  },
-                  Object {
-                    "est_doc": "SEB",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 0,
-                    "vote": 9,
-                  },
                 ],
                 "covid_expenditures": Array [
                   Object {
@@ -979,24 +905,6 @@ Object {
                     "org_id": "133",
                     "stat": 1,
                     "vote": 3,
-                  },
-                  Object {
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 0,
-                    "vote": 4,
-                  },
-                  Object {
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 0,
                   },
                 ],
                 "fiscal_year": 2020,
@@ -1017,46 +925,6 @@ Object {
                     "stat": 8,
                     "vote": 99,
                   },
-                  Object {
-                    "est_doc": "SEA",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 99,
-                    "vote": 99,
-                  },
-                  Object {
-                    "est_doc": "SEB",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 9,
-                  },
-                  Object {
-                    "est_doc": "SEC",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 0,
-                  },
-                  Object {
-                    "est_doc": "SEC",
-                    "org": Object {
-                      "id": "1",
-                      "name": "Agriculture and Agri-Food Canada",
-                    },
-                    "org_id": "1",
-                    "stat": 9,
-                    "vote": 0,
-                  },
                 ],
                 "covid_expenditures": Array [
                   Object {
@@ -1068,43 +936,8 @@ Object {
                     "stat": 2,
                     "vote": 3,
                   },
-                  Object {
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 6,
-                    "vote": 6,
-                  },
                 ],
                 "fiscal_year": 2020,
-              },
-              Object {
-                "covid_estimates": Array [
-                  Object {
-                    "est_doc": "SEC",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 0,
-                  },
-                ],
-                "covid_expenditures": Array [
-                  Object {
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 999,
-                    "vote": 7,
-                  },
-                ],
-                "fiscal_year": 2021,
               },
             ],
             "has_covid_data": Array [
@@ -1134,46 +967,6 @@ Object {
                     "stat": 8,
                     "vote": 99,
                   },
-                  Object {
-                    "est_doc": "SEA",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 99,
-                    "vote": 99,
-                  },
-                  Object {
-                    "est_doc": "SEB",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 9,
-                  },
-                  Object {
-                    "est_doc": "SEC",
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 9,
-                    "vote": 0,
-                  },
-                  Object {
-                    "est_doc": "SEC",
-                    "org": Object {
-                      "id": "1",
-                      "name": "Agriculture and Agri-Food Canada",
-                    },
-                    "org_id": "1",
-                    "stat": 9,
-                    "vote": 0,
-                  },
                 ],
                 "covid_expenditures": Array [
                   Object {
@@ -1184,15 +977,6 @@ Object {
                     "org_id": "133",
                     "stat": 2,
                     "vote": 3,
-                  },
-                  Object {
-                    "org": Object {
-                      "id": "552",
-                      "name": "Polar Knowledge Canada",
-                    },
-                    "org_id": "552",
-                    "stat": 6,
-                    "vote": 6,
                   },
                 ],
                 "fiscal_year": 2020,
@@ -1213,16 +997,6 @@ Object {
                     "stat": 0,
                     "vote": 9,
                   },
-                  Object {
-                    "est_doc": "SEA",
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 9,
-                    "vote": 99,
-                  },
                 ],
                 "covid_expenditures": Array [
                   Object {
@@ -1233,15 +1007,6 @@ Object {
                     "org_id": "133",
                     "stat": 3,
                     "vote": 0,
-                  },
-                  Object {
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 0,
-                    "vote": 5,
                   },
                 ],
                 "fiscal_year": 2020,
@@ -1289,16 +1054,6 @@ Object {
                     "stat": 0,
                     "vote": 9,
                   },
-                  Object {
-                    "est_doc": "SEA",
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 9,
-                    "vote": 99,
-                  },
                 ],
                 "covid_expenditures": Array [
                   Object {
@@ -1309,15 +1064,6 @@ Object {
                     "org_id": "133",
                     "stat": 3,
                     "vote": 0,
-                  },
-                  Object {
-                    "org": Object {
-                      "id": "326",
-                      "name": "Treasury Board of Canada Secretariat",
-                    },
-                    "org_id": "326",
-                    "stat": 0,
-                    "vote": 5,
                   },
                 ],
                 "fiscal_year": 2020,

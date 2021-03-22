@@ -166,20 +166,20 @@ query ($lang: String = "en") {
 }`;
 
 const org_covid_measures_query = `
-query ($lang: String = "en") {
+query ($lang: String = "en", $org_id: String = "133") {
   root(lang: $lang) {
-    org(org_id: "133") {
+    org(org_id: $org_id) {
       all_year_measures: covid_measures {
         id
         name
 
         ${has_covid_data}
 
-        all_year_covid_data: covid_data {
+        all_year_covid_data: covid_data(org_id: $org_id) {
           ${measure_covid_data}
         }
 
-        one_year_covid_data: covid_data(fiscal_year: 2020) {
+        one_year_covid_data: covid_data(fiscal_year: 2020, org_id: $org_id) {
           ${measure_covid_data}
         }
       }
@@ -190,7 +190,7 @@ query ($lang: String = "en") {
 
         ${has_covid_data}
 
-        covid_data(fiscal_year: 2021) {
+        covid_data(fiscal_year: 2021, org_id: $org_id) {
           ${measure_covid_data}
         }
       }
