@@ -4,6 +4,11 @@ import React, { Fragment } from "react";
 
 import { BackToTop } from "./BackToTop.js";
 
+function focusBTT () {
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
+  document.getElementById("#test").focus();
+}
+
 const BackToTopTemplate = ({ focusId }) => (
   <Fragment>
     <div id="ib-site-header-area">Header</div>
@@ -12,7 +17,7 @@ const BackToTopTemplate = ({ focusId }) => (
     <div id="wb-info" style={{ height: "287px" }}>
       Footer
     </div>
-    <BackToTop focus={focusId} />
+    <BackToTop focus={focusBTT} />
   </Fragment>
 );
 
@@ -20,6 +25,7 @@ export default {
   title: "BackToTop",
   component: BackToTopTemplate,
 };
+
 
 export const Basic = BackToTopTemplate.bind({});
 
