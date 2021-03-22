@@ -3,7 +3,7 @@ import _ from "lodash";
 import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
 
 import {
-  api_load_has_covid_response,
+  api_load_has_covid_data,
   api_load_covid_measures,
   api_load_covid_estimates_by_measure,
   api_load_covid_expenditures_by_measure,
@@ -172,7 +172,7 @@ function ensure_loaded({
     : Promise.resolve();
 
   const has_covid_response_prom = should_load_has_covid_response
-    ? api_load_has_covid_response(subject)
+    ? api_load_has_covid_data(subject)
     : Promise.resolve();
 
   const covid_measures_prom = should_load_covid_measures

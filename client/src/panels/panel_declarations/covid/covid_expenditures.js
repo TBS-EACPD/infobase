@@ -490,7 +490,11 @@ export const declare_covid_expenditures_panel = () =>
         if (level_name === "gov") {
           return true;
         } else {
-          return subject.has_data("covid")?.has_expenditures;
+          const years_with_expenditures = subject.has_data("covid")
+            ?.years_with_expenditures;
+          return (
+            !_.isEmpty(years_with_expenditures) && { years_with_expenditures }
+          );
         }
       },
       render: ({
