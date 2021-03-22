@@ -715,6 +715,29 @@ Object {
 }
 `;
 
+exports[`covid data Gov has covid data 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "gov": Object {
+        "has_covid_data": Array [
+          Object {
+            "years_with_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "years_with_expenditures": Array [
+              "2020",
+              "2021",
+            ],
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
 exports[`covid data Org covid estimates summary 1`] = `
 Object {
   "data": Object {

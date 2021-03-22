@@ -198,6 +198,15 @@ query ($lang: String = "en", $org_id: String = "133") {
   }
 }`;
 
+const gov_has_covid_data_query = `
+query ($lang: String = "en") {
+  root(lang: $lang) {
+    gov {
+      ${has_covid_data}
+    }
+  }
+}`;
+
 const org_has_covid_data_query = `
 query ($lang: String = "en") {
   root(lang: $lang) {
@@ -232,6 +241,10 @@ describe("covid data", () => {
   });
   it("Org covid measures", async () => {
     const data = await execQuery(org_covid_measures_query, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("Gov has covid data", async () => {
+    const data = await execQuery(gov_has_covid_data_query, {});
     return expect(data).toMatchSnapshot();
   });
   it("Org has covid data", async () => {

@@ -20,9 +20,11 @@ const schema = `
   extend type Root {
     covid_measures: [CovidMeasure]
     covid_measure(covid_measure_id: String!): CovidMeasure
+
   }
 
   extend type Gov {
+    has_covid_data: [HasCovidData]
     covid_summary(fiscal_year: Int): [CovidGovSummary]
   }
 
@@ -133,6 +135,7 @@ export default function ({ models, loaders }) {
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
+      has_covid_data: () => has_covid_data_resolver("gov"),
       covid_summary: (_, { fiscal_year }) =>
         covid_gov_summary_loader
           .load("gov")

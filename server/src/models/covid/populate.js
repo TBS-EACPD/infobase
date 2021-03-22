@@ -239,9 +239,25 @@ export default async function ({ models }) {
         )
         .value()
   );
+  const gov_has_covid_data_record = new HasCovidData({
+    subject_id: "gov",
+    years_with_estimates: _.chain(covid_estimates_rows)
+      .map("fiscal_year")
+      .uniq()
+      .sortBy()
+      .value(),
+    years_with_expenditures: _.chain(covid_expenditures_rows)
+      .map("fiscal_year")
+      .uniq()
+      .sortBy()
+      .value(),
+  });
 
   return await Promise.all([
-    HasCovidData.insertMany(has_covid_data_records),
+    HasCovidData.insertMany([
+      ...has_covid_data_records,
+      gov_has_covid_data_record,
+    ]),
     CovidMeasure.insertMany(covid_measure_records),
     CovidGovSummary.insertMany(covid_gov_summary_record),
     CovidOrgSummary.insertMany(covid_org_summary_records),
