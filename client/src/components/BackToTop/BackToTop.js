@@ -48,8 +48,9 @@ export class BackToTop extends React.Component {
   }
 
   handleClick() {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-    document.querySelector(this.props.focus).focus();
+    // document.body.scrollTop = document.documentElement.scrollTop = 0;
+    // document.querySelector(this.props.focus).focus();
+    this.props.focus()
   }
 
   render() {
