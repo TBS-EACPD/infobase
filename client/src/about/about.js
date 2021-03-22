@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { IconGrid } from "src/components/IconGrid.js";
+import { IconGrid } from "src/components/IconGrid/IconGrid.js";
 
 import { TM } from "src/components/index.js";
 
