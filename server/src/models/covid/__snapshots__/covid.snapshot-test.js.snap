@@ -196,17 +196,15 @@ Object {
               "fiscal_year": 2020,
             },
           ],
-          "years_with_covid_data": Array [
-            Object {
-              "years_with_estimates": Array [
-                "2020",
-                "2021",
-              ],
-              "years_with_expenditures": Array [
-                "2020",
-              ],
-            },
-          ],
+          "years_with_covid_data": Object {
+            "years_with_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "years_with_expenditures": Array [
+              "2020",
+            ],
+          },
         },
         Object {
           "all_year_covid_data": Array [
@@ -391,18 +389,16 @@ Object {
               "fiscal_year": 2020,
             },
           ],
-          "years_with_covid_data": Array [
-            Object {
-              "years_with_estimates": Array [
-                "2020",
-                "2021",
-              ],
-              "years_with_expenditures": Array [
-                "2020",
-                "2021",
-              ],
-            },
-          ],
+          "years_with_covid_data": Object {
+            "years_with_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "years_with_expenditures": Array [
+              "2020",
+              "2021",
+            ],
+          },
         },
         Object {
           "all_year_covid_data": Array [
@@ -517,17 +513,15 @@ Object {
               "fiscal_year": 2020,
             },
           ],
-          "years_with_covid_data": Array [
-            Object {
-              "years_with_estimates": Array [
-                "2020",
-                "2021",
-              ],
-              "years_with_expenditures": Array [
-                "2020",
-              ],
-            },
-          ],
+          "years_with_covid_data": Object {
+            "years_with_estimates": Array [
+              "2020",
+              "2021",
+            ],
+            "years_with_expenditures": Array [
+              "2020",
+            ],
+          },
         },
       ],
     },
@@ -720,18 +714,16 @@ Object {
   "data": Object {
     "root": Object {
       "gov": Object {
-        "years_with_covid_data": Array [
-          Object {
-            "years_with_estimates": Array [
-              "2020",
-              "2021",
-            ],
-            "years_with_expenditures": Array [
-              "2020",
-              "2021",
-            ],
-          },
-        ],
+        "years_with_covid_data": Object {
+          "years_with_estimates": Array [
+            "2020",
+            "2021",
+          ],
+          "years_with_expenditures": Array [
+            "2020",
+            "2021",
+          ],
+        },
       },
     },
   },
@@ -922,17 +914,15 @@ Object {
                 "fiscal_year": 2020,
               },
             ],
-            "years_with_covid_data": Array [
-              Object {
-                "years_with_estimates": Array [
-                  "2020",
-                  "2021",
-                ],
-                "years_with_expenditures": Array [
-                  "2020",
-                ],
-              },
-            ],
+            "years_with_covid_data": Object {
+              "years_with_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "years_with_expenditures": Array [
+                "2020",
+              ],
+            },
           },
           Object {
             "all_year_covid_data": Array [
@@ -993,18 +983,16 @@ Object {
                 "fiscal_year": 2020,
               },
             ],
-            "years_with_covid_data": Array [
-              Object {
-                "years_with_estimates": Array [
-                  "2020",
-                  "2021",
-                ],
-                "years_with_expenditures": Array [
-                  "2020",
-                  "2021",
-                ],
-              },
-            ],
+            "years_with_covid_data": Object {
+              "years_with_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "years_with_expenditures": Array [
+                "2020",
+                "2021",
+              ],
+            },
           },
           Object {
             "all_year_covid_data": Array [
@@ -1081,17 +1069,15 @@ Object {
                 "fiscal_year": 2020,
               },
             ],
-            "years_with_covid_data": Array [
-              Object {
-                "years_with_estimates": Array [
-                  "2020",
-                  "2021",
-                ],
-                "years_with_expenditures": Array [
-                  "2020",
-                ],
-              },
-            ],
+            "years_with_covid_data": Object {
+              "years_with_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "years_with_expenditures": Array [
+                "2020",
+              ],
+            },
           },
         ],
         "one_year_measures": Array [
@@ -1116,17 +1102,15 @@ Object {
             ],
             "id": "COV003",
             "name": "measure 3",
-            "years_with_covid_data": Array [
-              Object {
-                "years_with_estimates": Array [
-                  "2020",
-                  "2021",
-                ],
-                "years_with_expenditures": Array [
-                  "2020",
-                ],
-              },
-            ],
+            "years_with_covid_data": Object {
+              "years_with_estimates": Array [
+                "2020",
+                "2021",
+              ],
+              "years_with_expenditures": Array [
+                "2020",
+              ],
+            },
           },
         ],
       },
@@ -1140,44 +1124,29 @@ Object {
   "data": Object {
     "root": Object {
       "does_not_have_data": Object {
-        "years_with_covid_data": Array [
-          Object {
-            "years_with_estimates": Array [],
-            "years_with_expenditures": Array [],
-          },
-        ],
+        "years_with_covid_data": Object {
+          "years_with_estimates": Array [],
+          "years_with_expenditures": Array [],
+        },
       },
       "has_data": Object {
-        "years_with_covid_data": Array [
-          Object {
-            "years_with_estimates": Array [
-              "2020",
-              "2021",
-            ],
-            "years_with_expenditures": Array [
-              "2020",
-            ],
-          },
-        ],
+        "years_with_covid_data": Object {
+          "years_with_estimates": Array [
+            "2020",
+            "2021",
+          ],
+          "years_with_expenditures": Array [
+            "2020",
+          ],
+        },
       },
       "only_has_estimates": Object {
-        "years_with_covid_data": Array [
-          Object {
-            "years_with_estimates": Array [
-              "2020",
-            ],
-            "years_with_expenditures": Array [],
-          },
-          Object {
-            "years_with_estimates": Array [
-              "2020",
-              "2021",
-            ],
-            "years_with_expenditures": Array [
-              "2020",
-            ],
-          },
-        ],
+        "years_with_covid_data": Object {
+          "years_with_estimates": Array [
+            "2020",
+          ],
+          "years_with_expenditures": Array [],
+        },
       },
     },
   },
@@ -1191,17 +1160,15 @@ Object {
       "covid_measure": Object {
         "id": "COV001",
         "name": "measure 1",
-        "years_with_covid_data": Array [
-          Object {
-            "years_with_estimates": Array [
-              "2020",
-              "2021",
-            ],
-            "years_with_expenditures": Array [
-              "2020",
-            ],
-          },
-        ],
+        "years_with_covid_data": Object {
+          "years_with_estimates": Array [
+            "2020",
+            "2021",
+          ],
+          "years_with_expenditures": Array [
+            "2020",
+          ],
+        },
       },
     },
   },
