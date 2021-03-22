@@ -5,7 +5,6 @@ import React, { Fragment } from "react";
 import { BackToTop } from "./BackToTop.js";
 
 function focusBTT () {
-  document.body.scrollTop = document.documentElement.scrollTop = 0;
   document.getElementById("#test").focus();
 }
 
