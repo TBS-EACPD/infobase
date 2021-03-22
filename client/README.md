@@ -60,6 +60,23 @@ Killing tmux sessions:
 - `exit` to exit session
 - `tmux kill-server` will reset by killing all tmux sessions.
 
+Consider creating file `.tmux.conf` in the `~` folder and adding the following lines below to improve the workflow for tmux. (This will allow you to click to switch and scroll panes)
+
+
+```
+set-option -g default-shell $SHELL
+set-option -g status-position top
+set -sg status-interval 5
+set -g status-right-length 200 
+set -g history-limit 10000
+set-option -g mouse on
+bind | split-window -h
+bind - split-window -v
+if-shell '[[ -n $DISPLAY ]]' \
+  'set -g status-right ""' \
+  'set -g status-right "#(i3status --config ~/.i3/i3status.conf)"'
+```
+
 ## Tests
 
 ### Browser tests
