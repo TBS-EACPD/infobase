@@ -167,7 +167,6 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
 );
 
 function focusBTT() {
-  document.body.scrollTop = document.documentElement.scrollTop = 0;
   document.querySelector("#glossary_search > div > div > input").focus();
 }
 
