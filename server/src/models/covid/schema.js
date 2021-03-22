@@ -38,7 +38,7 @@ const schema = `
     name: String
 
     has_covid_data: [HasCovidData]
-    covid_data(fiscal_year: Int): [CovidData]
+    covid_data(fiscal_year: Int, org_id: String): [CovidData]
   }
 
   type HasCovidData {
@@ -173,8 +173,32 @@ export default function ({ models, loaders }) {
       name: bilingual_field("name"),
       has_covid_data: ({ covid_measure_id }) =>
         has_covid_data_resolver(covid_measure_id),
-      covid_data: ({ covid_data }, { fiscal_year }) =>
-        optional_fiscal_year_filter(fiscal_year, covid_data),
+      covid_data: ({ covid_data }, { fiscal_year, org_id }) =>
+        _.chain(covid_data)
+          .thru(optional_fiscal_year_filter(fiscal_year))
+          .thru((covid_data) => {
+            if (_.isUndefined(org_id)) {
+              return covid_data;
+            } else {
+              return _.chain(covid_data)
+                .map(
+                  ({ fiscal_year, covid_estimates, covid_expenditures }) => ({
+                    fiscal_year,
+                    ..._.mapValues(
+                      { covid_estimates, covid_expenditures },
+                      (rows) => _.filter(rows, { org_id })
+                    ),
+                  })
+                )
+                .filter(
+                  ({ covid_estimates, covid_expenditures }) =>
+                    !_.isEmpty(covid_estimates) ||
+                    !_.isEmpty(covid_expenditures)
+                )
+                .value();
+            }
+          })
+          .value(),
     },
     CovidEstimates: {
       org: ({ org_id }) => org_id_loader.load(org_id),
