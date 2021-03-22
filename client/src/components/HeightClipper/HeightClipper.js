@@ -123,7 +123,7 @@ export class HeightClipper extends React.Component {
               left: "0px",
               height: pixelClipHeight,
               cursor: "pointer",
-              zIndex: 100,
+              zIndex: 1005,
             }}
             className={gradientClasses ? gradientClasses : "gradient"}
             onClick={() => {
