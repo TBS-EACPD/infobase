@@ -18,13 +18,13 @@ export class BackToTop extends React.Component {
       caught_by_footer: false,
     };
 
-    this.page_header = document.getElementById("ib-site-header-area");
-    this.page_footer = document.getElementById("wb-info");
-
     this.button_ref = React.createRef();
   }
 
   componentDidMount() {
+    this.page_header = document.getElementById("ib-site-header-area");
+    this.page_footer = document.getElementById("wb-info");
+
     this.header_observer = new IntersectionObserver((entries, observer) => {
       this.setState({ show_back_to_top: entries[0].intersectionRatio <= 0 });
     });
@@ -33,9 +33,10 @@ export class BackToTop extends React.Component {
     this.footer_observer = new IntersectionObserver((entries, observer) => {
       this.setState({
         caught_by_footer: is_mobile()
-          ? window.innerWidth > 600 &&
-            window.pageYOffset + window.innerHeight >
-              this.page_footer.offsetTop + 15
+          ? window.innerWidth > 600
+            ? window.pageYOffset + window.innerHeight >=
+              this.page_footer.offsetTop
+            : entries[0].isIntersecting
           : entries[0].isIntersecting,
       });
     });
@@ -53,7 +54,6 @@ export class BackToTop extends React.Component {
 
   render() {
     const { show_back_to_top, caught_by_footer } = this.state;
-
     return (
       <button
         ref={this.button_ref}
@@ -69,6 +69,10 @@ export class BackToTop extends React.Component {
           top: caught_by_footer
             ? `${this.page_footer.offsetTop - 50}px`
             : "auto",
+          opacity:
+            caught_by_footer && is_mobile() && window.innerWidth <= 600
+              ? 0
+              : undefined,
         }}
         tabIndex="-1"
         onClick={() => this.handleClick()}
