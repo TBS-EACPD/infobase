@@ -30,6 +30,7 @@ module.exports = {
     config.plugins.push(
       new webpack.DefinePlugin({
         APPLICATION_LANGUAGE: JSON.stringify("en"),
+        IS_A11Y_MODE: process.env.STORYBOOK_A11Y,
       })
     );
 

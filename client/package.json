@@ -157,7 +157,7 @@
     "serve": "http-server",
     "postinstall": "npx patch-package",
     "postci": "npx patch-package",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "STORYBOOK_A11Y=\"false\" start-storybook -p 6006 & STORYBOOK_A11Y=\"true\" start-storybook -p 6007",
     "build-storybook": "build-storybook"
   },
   "authors": [
