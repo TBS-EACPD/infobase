@@ -7,24 +7,20 @@ import {
   get_planned_spending_source_link,
   declare_panel,
 } from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
 const { create_text_maker_component } = util_components;
 
+import { run_template } from "src/models/text.js";
 
-
-import {run_template,} from "src/models/text.js";
-
-import {year_templates} from "src/models/years.js";
+import { year_templates } from "src/models/years.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 import { Table } from "src/core/TableClass.js";
 
-
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
-
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
 import { format_and_get_fte } from "./welcome_mat_fte.js";

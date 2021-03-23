@@ -1,8 +1,7 @@
 import _ from "lodash";
 
-
-import {run_template} from "src/models/text.js";
-import {year_templates} from "src/models/years.js";
+import { run_template } from "src/models/text.js";
+import { year_templates } from "src/models/years.js";
 
 const { people_years } = year_templates;
 

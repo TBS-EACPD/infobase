@@ -4,22 +4,22 @@ import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {StdPanel,Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {
+  StdPanel,
+  Col,
+} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
 
-import {newIBLightCategoryColors} from "src/core/color_schemes.js";
+import { newIBLightCategoryColors } from "src/core/color_schemes.js";
 import { formats } from "src/core/format.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import {WrappedNivoTreemap} from "src/charts/wrapped_nivo/index.js";
-import {infograph_href_template} from "src/infographic/infographic_link.js";
-
-
-
+import { WrappedNivoTreemap } from "src/charts/wrapped_nivo/index.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
 

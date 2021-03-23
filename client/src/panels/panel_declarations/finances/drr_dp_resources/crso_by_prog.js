@@ -2,29 +2,26 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-
 import {
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
 } from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
 const { create_text_maker_component } = util_components;
 
-
-
-import {run_template} from "src/models/text.js";
-import {year_templates} from "src/models/years.js";
+import { run_template } from "src/models/text.js";
+import { year_templates } from "src/models/years.js";
 
 import { infobase_colors } from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { StandardLegend} from "src/charts/legends/index.js";
+import { StandardLegend } from "src/charts/legends/index.js";
 
-import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
 
 import { toggle_list } from "src/general_utils.js";
 

@@ -7,7 +7,6 @@ import * as util_components from "src/components/index.js";
 
 const { create_text_maker_component } = util_components;
 
-
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes.js";
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
