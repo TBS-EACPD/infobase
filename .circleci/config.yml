@@ -49,7 +49,6 @@ jobs:
             - node_modules
           key: top-level-dependencies-{{ checksum "package-lock.json" }}
 
-      - run: npm run check_format email_backend
       - run: (cd email_backend && npm run unit_tests)
 
       - run: (cd email_backend && npm run end_to_end_tests)
@@ -112,10 +111,10 @@ jobs:
           name: lhci autorun
           command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.js
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   format_check:
     docker:
-      - image: eaadtbs/ib-ci-test:v1.1
+      - image: eaadtbs/ib-ci-build:1.3
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -253,8 +252,6 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      - run: npm run check_format server
-
       - run: (cd server && npm run unit_tests)
 
       - run: 
@@ -390,7 +387,7 @@ workflows:
   format_check:
     jobs:
       - format_check
-      
+
   test_email_backend:
     jobs:
       - test_email_backend
