@@ -10,6 +10,8 @@ import React from "react";
 
 import string_hash from "string-hash";
 
+import { log_standard_event } from "src/core/analytics.js";
+
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
 import {
   sha,
@@ -98,6 +100,43 @@ export function get_client() {
   }
   return client;
 }
+
+export const query_logging_wrapper = (
+  query_name,
+  query,
+  expect_resolved_response = true
+) => (variables) => {
+  const time_at_request = Date.now();
+  return query({ ...variables, _query_name: query_name })
+    .then((resolved_response) => {
+      const resp_time = Date.now() - time_at_request;
+      if (!expect_resolved_response || !_.isEmpty(resolved_response)) {
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `${query_name}, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `${query_name}, took ${resp_time} ms`,
+        });
+      }
+
+      return resolved_response;
+    })
+    .catch((error) => {
+      const resp_time = Date.now() - time_at_request;
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `Covid measures, took ${resp_time} ms - ${error.toString()}`,
+      });
+      throw error;
+    });
+};
 
 const InnerLoadingHoc = ({ Component, data_to_props }) => (props) => {
   if (props.data.loading) {
