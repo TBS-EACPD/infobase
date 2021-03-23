@@ -66,10 +66,10 @@ const SummaryTab = ({ args: panel_args, data }) => {
   );
 
   const graph_data = _.chain(sorted_data)
-    .map((row) => ({
-      [graph_index_key]: get_est_doc_name(row.est_doc),
-      [text_maker(`covid_estimates_stat`)]: row.stat,
-      [text_maker(`covid_estimates_vote`)]: row.vote,
+    .map(({ est_doc, stat, vote }) => ({
+      [graph_index_key]: get_est_doc_name(est_doc),
+      [text_maker(`covid_estimates_stat`)]: stat,
+      [text_maker(`covid_estimates_vote`)]: vote,
     }))
     .value();
 
@@ -463,7 +463,11 @@ const tab_content_configs = [
               _query_name: "org_covid_summary_query",
             },
             response_accessor: (response) =>
-              _.get(response, "data.root.org.covid_summary.covid_estimates"),
+              _.chain(response)
+                .get("data.root.org.covid_summary")
+                .first()
+                .get("covid_estimates")
+                .value(),
           };
         } else {
           return {
@@ -474,7 +478,11 @@ const tab_content_configs = [
               _query_name: "gov_covid_summary_query",
             },
             response_accessor: (response) =>
-              _.get(response, "data.root.gov.covid_summary.covid_estimates"),
+              _.chain(response)
+                .get("data.root.gov.covid_summary")
+                .first()
+                .get("covid_estimates")
+                .value(),
           };
         }
       })();

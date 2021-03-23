@@ -17,7 +17,7 @@ export const gov_years_with_covid_data_query = gql`
   }
 `;
 export const org_years_with_covid_data_query = gql`
-  query($lang: String! $id: String!) {
+  query($lang: String!, $id: String!) {
     root(lang: $lang) {
       org(org_id: $id) {
         id
@@ -46,7 +46,7 @@ export const all_covid_measure_query = gql`
   }
 `;
 export const org_covid_measure_query = gql`
-query($lang: String! $id: String!) {
+query($lang: String!, $id: String!) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
@@ -83,7 +83,7 @@ export const all_covid_estimates_by_measure_query = gql`
   }
 `;
 export const org_covid_estimates_by_measure_query = gql`
-query($lang: String! $id: String!, $fiscal_year: Int) {
+query($lang: String!, $id: String!, $fiscal_year: Int) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
@@ -119,7 +119,7 @@ export const all_covid_expenditures_by_measure_query = gql`
   }
 `;
 export const org_covid_expenditures_by_measure_query = gql`
-query($lang: String! $id: String!, $fiscal_year: Int) {
+query($lang: String!, $id: String!, $fiscal_year: Int) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
@@ -167,7 +167,7 @@ export const gov_covid_summary_query = gql`
   }
 `;
 export const org_covid_summary_query = gql`
-query($lang: String! $id: String!, $fiscal_year: Int) {
+query($lang: String!, $id: String!, $fiscal_year: Int) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
