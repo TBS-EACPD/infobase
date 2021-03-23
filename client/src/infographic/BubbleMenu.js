@@ -49,7 +49,7 @@ const BubbleMenu = ({ items, active_item_id }) => {
                 "centerer bubble-button",
                 id === active_item_id && "active"
               )}
-              onMouseEnter={() => prefetch()}
+              onMouseEnter={() => prefetch && prefetch()}
               href={href}
               key={id}
             >
