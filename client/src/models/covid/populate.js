@@ -21,8 +21,8 @@ import { YearsWithCovidData } from "./YearsWithCovidData.js";
 const _subject_ids_with_loaded_years_with_covid_data = {};
 export const api_load_years_with_covid_data = (subject) => {
   const { is_loaded, level, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_ids_with_loaded_years_with_covid_data, `${level}.${id}`);
+    const subject_is_loaded = (id) =>
+      _.get(_subject_ids_with_loaded_years_with_covid_data, id);
 
     switch (subject.level) {
       case "dept":
@@ -93,7 +93,7 @@ export const api_load_years_with_covid_data = (subject) => {
 
       _.setWith(
         _subject_ids_with_loaded_years_with_covid_data,
-        `${level}.${id}`,
+        id,
         true,
         Object
       );
