@@ -469,14 +469,21 @@ class CovidExpendituresPanel extends React.Component {
               <TM k="covid_expenditures_above_tab_footnote_list" />
             </AboveTabFootnoteList>
           </div>
+          {/* 
+            key={selected_year} below is to force a re-render on year change, as React doesn't compare deep enough
+            to see the corresponding prop changes in tabbed_content_props itself 
+          */}
           {tab_keys.length === 1 && (
-            <Fragment>
+            <Fragment key={selected_year}>
               <div className="panel-separator" />
               {tab_pane_contents?.[tab_keys[0]]}
             </Fragment>
           )}
           {tab_keys.length > 1 && (
-            <TabbedContent {...{ tab_keys, tab_labels, tab_pane_contents }} />
+            <TabbedContent
+              {...{ tab_keys, tab_labels, tab_pane_contents }}
+              key={selected_year}
+            />
           )}
         </Fragment>
       );
