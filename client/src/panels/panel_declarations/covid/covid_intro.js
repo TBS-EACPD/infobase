@@ -5,21 +5,15 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
-import { gov_covid_summary_query } from "src/models/covid/queries.js";
-
-import { lang } from "src/core/injected_build_constants.js";
+import { query_gov_covid_summaries } from "src/models/covid/queries.js";
 
 import { TabLoadingSpinner } from "src/components";
-
-import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_intro.yaml";
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
-
-const client = get_client();
 
 class CovidIntroPanelDyanmicText extends React.Component {
   constructor(props) {
@@ -31,47 +25,31 @@ class CovidIntroPanelDyanmicText extends React.Component {
     };
   }
   componentDidMount() {
-    client
-      .query({
-        query: gov_covid_summary_query,
-        variables: {
-          lang: lang,
-          _query_name: "gov_covid_summary_query",
-        },
-      })
-      .then(
-        ({
-          data: {
-            root: {
-              gov: { covid_summary },
-            },
-          },
-        }) => {
-          const [latest_estimates_summary, latest_expenditures_summary] = _.map(
-            ["covid_estimates", "covid_expenditures"],
-            (data_type) =>
-              _.chain(covid_summary)
-                .map((covid_summary) => [
-                  covid_summary.fiscal_year,
-                  covid_summary[data_type],
-                ])
-                .filter(([_fiscal_year, summary]) => !_.isEmpty(summary))
-                .sortBy(_.first)
-                .last()
-                .thru(([fiscal_year, summary]) => ({
-                  fiscal_year,
-                  summary,
-                }))
-                .value()
-          );
-
-          this.setState({
-            loading: false,
-            latest_estimates_summary,
-            latest_expenditures_summary,
-          });
-        }
+    query_gov_covid_summaries().then((covid_summaries) => {
+      const [latest_estimates_summary, latest_expenditures_summary] = _.map(
+        ["covid_estimates", "covid_expenditures"],
+        (data_type) =>
+          _.chain(covid_summaries)
+            .map((covid_summary) => [
+              covid_summary.fiscal_year,
+              covid_summary[data_type],
+            ])
+            .filter(([_fiscal_year, summary]) => !_.isEmpty(summary))
+            .sortBy(_.first)
+            .last()
+            .thru(([fiscal_year, summary]) => ({
+              fiscal_year,
+              summary,
+            }))
+            .value()
       );
+
+      this.setState({
+        loading: false,
+        latest_estimates_summary,
+        latest_expenditures_summary,
+      });
+    });
   }
   render() {
     const { panel_args } = this.props;
@@ -121,9 +99,6 @@ export const declare_covid_intro_panel = () =>
     panel_key: "covid_intro",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
-      initial_queries: {
-        gov_covid_summary_query,
-      },
       footnotes: ["COVID"],
       source: (subject) => [],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],

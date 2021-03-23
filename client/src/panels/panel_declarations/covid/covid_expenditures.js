@@ -13,18 +13,12 @@ import {
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import {
-  gov_covid_summary_query,
-  top_covid_spending_query,
+  query_gov_covid_summaries,
+  query_top_covid_spending_query,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { lang } from "src/core/injected_build_constants.js";
-
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
-
-import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
@@ -44,8 +38,6 @@ import text from "./covid_expenditures.yaml";
 const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
-
-const client = get_client();
 
 const panel_key = "covid_expenditures_panel";
 
@@ -319,49 +311,32 @@ const tab_content_configs = [
     levels: ["gov"],
     label: text_maker("summary_tab_label"),
     load_data: ({ selected_year }) =>
-      client
-        .query({
-          query: top_covid_spending_query,
-          variables: {
-            lang: lang,
-            fiscal_year: selected_year,
-            _query_name: "top_covid_spending_query",
-          },
+      query_top_covid_spending_query({ fiscal_year: selected_year }).then(
+        ({ top_spending_orgs, top_spending_measures }) => ({
+          top_spending_orgs: _.map(
+            top_spending_orgs,
+            ({ name, covid_summary: { covid_expenditures } }) => ({
+              name,
+              spending: _.reduce(
+                covid_expenditures,
+                (memo, { vote, stat }) => memo + vote + stat,
+                0
+              ),
+            })
+          ),
+          top_spending_measures: _.map(
+            top_spending_measures,
+            ({ name, covid_expenditures }) => ({
+              name,
+              spending: _.reduce(
+                covid_expenditures,
+                (memo, { vote, stat }) => memo + vote + stat,
+                0
+              ),
+            })
+          ),
         })
-        .then(
-          ({
-            data: {
-              root: {
-                gov: {
-                  covid_summary: { top_spending_orgs, top_spending_measures },
-                },
-              },
-            },
-          }) => ({
-            top_spending_orgs: _.map(
-              top_spending_orgs,
-              ({ name, covid_summary: { covid_expenditures } }) => ({
-                name,
-                spending: _.reduce(
-                  covid_expenditures,
-                  (memo, { vote, stat }) => memo + vote + stat,
-                  0
-                ),
-              })
-            ),
-            top_spending_measures: _.map(
-              top_spending_measures,
-              ({ name, covid_expenditures }) => ({
-                name,
-                spending: _.reduce(
-                  covid_expenditures,
-                  (memo, { vote, stat }) => memo + vote + stat,
-                  0
-                ),
-              })
-            ),
-          })
-        ),
+      ),
     TabContent: SummaryTab,
   },
   {
@@ -410,26 +385,18 @@ class CovidExpendituresPanel extends React.Component {
     };
   }
   componentDidMount() {
-    client
-      .query({
-        query: gov_covid_summary_query,
-        variables: {
-          lang: lang,
-          _query_name: "gov_covid_summary_query",
-        },
+    query_gov_covid_summaries().then((covid_summaries) =>
+      this.setState({
+        summary_by_fiscal_year: _.chain(covid_summaries)
+          .map(({ fiscal_year, covid_expenditures }) => [
+            fiscal_year,
+            covid_expenditures,
+          ])
+          .fromPairs()
+          .value(),
+        loading: false,
       })
-      .then(({ data: { root: { gov: { covid_summary } } } }) =>
-        this.setState({
-          summary_by_fiscal_year: _.chain(covid_summary)
-            .map(({ fiscal_year, covid_expenditures }) => [
-              fiscal_year,
-              covid_expenditures,
-            ])
-            .fromPairs()
-            .value(),
-          loading: false,
-        })
-      );
+    );
   }
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
@@ -497,10 +464,6 @@ export const declare_covid_expenditures_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
-      initial_queries: {
-        gov_covid_summary_query,
-        ...(level_name === "gov" && { top_covid_spending_query }),
-      },
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: (subject, options) => {
