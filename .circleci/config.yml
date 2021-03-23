@@ -112,6 +112,14 @@ jobs:
           name: lhci autorun
           command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.js
 
+  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
+  format_check:
+    docker:
+      - image: eaadtbs/ib-ci-test:v1.1
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - run: npm run check_format .
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
@@ -272,7 +280,6 @@ jobs:
       # repeats some of the server tests, because these fail fast and short-curcuit us before the long-running browser tests
       - run: (cd server && npm run unit_tests)
       
-      - run: npm run check_format client
       - run: 
           name: mongod
           command: mongod
@@ -383,6 +390,7 @@ workflows:
   build_test_deploy:
     jobs:
       - build
+      - format_check
       - test_end_to_end:
           requires:
             - build
