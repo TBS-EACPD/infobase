@@ -103,6 +103,10 @@ class _PinnedContent extends React.Component {
                 // this div with ref is for the intersection check
                 <div ref={ref}>
                   {/* this conditional div acts as a placeholder to make scrolling smoother */}
+                  {/* before adding this, stickying by "position: fixed" would take it out of the DOM block
+                  flow which would bump up the window due to the total block content being shortened.
+                  By adding this placeholder div, the height of the total block content remains the same,
+                  thus no longer causing the window to jump  */}
                   {is_stickied && <div style={{ height: content_height }} />}
                   {/* this div is for sticky styline, must be flex to include margins onto height */}
                   <div
