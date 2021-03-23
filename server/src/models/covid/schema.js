@@ -18,7 +18,7 @@ const expenditures_fields = `
 
 const schema = `
   extend type Root {
-    covid_measures: [CovidMeasure]
+    covid_measures(fiscal_year: Int): [CovidMeasure]
     covid_measure(covid_measure_id: String!): CovidMeasure
   }
 
@@ -127,13 +127,21 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Root: {
-      covid_measures: () => CovidMeasure.find({}),
+      covid_measures: (_x, { fiscal_year }) =>
+        CovidMeasure.find({}).then((measures) =>
+          _.filter(measures, ({ related_org_ids }) =>
+            _.chain(related_org_ids)
+              .thru(optional_fiscal_year_filter(fiscal_year))
+              .some(({ org_ids }) => !_.isEmpty(org_ids))
+              .value()
+          )
+        ),
       covid_measure: (_x, { covid_measure_id }) =>
         covid_measure_loader.load(covid_measure_id),
     },
     Gov: {
       years_with_covid_data: () => years_with_covid_data_resolver("gov"),
-      covid_summary: (_, { fiscal_year }) =>
+      covid_summary: (_x, { fiscal_year }) =>
         covid_gov_summary_loader
           .load("gov")
           .then(optional_fiscal_year_filter(fiscal_year)),

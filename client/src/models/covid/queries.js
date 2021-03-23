@@ -63,24 +63,18 @@ export const query_org_years_with_covid_data = ({ id }) =>
         .value()
     );
 
-const covid_measure_fields = `
-  id
-  name
-
-  ${years_with_covid_data}
-`;
-const covid_measure_query_fragment = `
-  covid_measures {
-    ${covid_measure_fields}
-  }
-`;
 export const query_all_covid_measures = () =>
   client
     .query({
       query: gql`
         query($lang: String!) {
           root(lang: $lang) {
-            ${covid_measure_query_fragment}
+            covid_measures {
+              id
+              name
+          
+              ${years_with_covid_data}
+            }
           }
         }
       `,
@@ -95,31 +89,6 @@ export const query_all_covid_measures = () =>
         .omit("__typename")
         .value()
     );
-export const query_org_covid_measures = ({ id }) =>
-  client
-    .query({
-      query: gql`
-        query($lang: String!, $id: String!) {
-          root(lang: $lang) {
-            org(org_id: $id) {
-              id
-              ${covid_measure_query_fragment}
-            }
-          }
-        }
-      `,
-      variables: {
-        lang,
-        id,
-        _query_name: "org_covid_measures",
-      },
-    })
-    .then((response) =>
-      _.chain(response)
-        .get("data.root.org.covid_measures")
-        .omit("__typename")
-        .value()
-    );
 
 const covid_estimates_fields = `
   est_doc
@@ -127,16 +96,14 @@ const covid_estimates_fields = `
   stat
 `;
 const covid_estimates_by_measure_query_fragment = `
-  covid_estimates_by_measure: covid_measures {
-    ${covid_measure_fields}
+  id
   
-    covid_data(fiscal_year: $fiscal_year) {
-      fiscal_year
+  covid_data(fiscal_year: $fiscal_year) {
+    fiscal_year
 
-      covid_estimates {
-        org_id
-        ${covid_estimates_fields}
-      }
+    covid_estimates {
+      org_id
+      ${covid_estimates_fields}
     }
   }
 `;
@@ -146,7 +113,9 @@ export const query_all_covid_estimates_by_measure = ({ fiscal_year }) =>
       query: gql`
         query($lang: String!, $fiscal_year: Int) {
           root(lang: $lang) {
-            ${covid_estimates_by_measure_query_fragment}
+            covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+              ${covid_estimates_by_measure_query_fragment}
+            }
           }
         }
       `,
@@ -170,7 +139,9 @@ export const query_org_covid_estimates_by_measure = ({ id, fiscal_year }) =>
           root(lang: $lang) {
             org(org_id: $id) {
               id
-              ${covid_estimates_by_measure_query_fragment}
+              covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+                ${covid_estimates_by_measure_query_fragment}
+              }
             }
           }
         }
@@ -194,8 +165,8 @@ const covid_expenditures_fields = `
   stat
 `;
 const covid_expenditures_by_measure_query_fragment = `
-  ${covid_measure_fields}
-  
+  id
+
   covid_data(fiscal_year: $fiscal_year) {
     fiscal_year
 
@@ -237,7 +208,7 @@ export const query_org_covid_expenditures_by_measure = ({ id, fiscal_year }) =>
         root(lang: $lang) {
           org(org_id: $id) {
             id
-            covid_expenditures_by_measure: covid_measures(org_id: $id, fiscal_year: $fiscal_year) {
+            covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
               ${covid_expenditures_by_measure_query_fragment}
             }
           }

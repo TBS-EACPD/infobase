@@ -4,9 +4,7 @@ import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
 
 import {
   api_load_years_with_covid_data,
-  api_load_covid_measures,
-  api_load_covid_estimates_by_measure,
-  api_load_covid_expenditures_by_measure,
+  api_load_all_covid_measures,
 } from "src/models/covid/populate.js";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes.js";
 import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups.js";
@@ -46,8 +44,6 @@ function ensure_loaded({
   has_covid_data,
   years_with_covid_data,
   covid_measures,
-  covid_estimates,
-  covid_expenditures,
   footnotes_for: footnotes_subject,
 }) {
   const table_set = _.chain(table_keys)
@@ -99,13 +95,6 @@ function ensure_loaded({
   const should_load_covid_measures =
     covid_measures || check_for_panel_dependency("requires_covid_measures");
 
-  const should_load_covid_estimates =
-    covid_estimates || check_for_panel_dependency("requires_covid_estimates");
-
-  const should_load_covid_expenditures =
-    covid_expenditures ||
-    check_for_panel_dependency("requires_covid_expenditures");
-
   const result_docs_to_load = !_.isEmpty(result_docs)
     ? result_docs
     : _.chain(panel_set)
@@ -153,15 +142,7 @@ function ensure_loaded({
     : Promise.resolve();
 
   const covid_measures_prom = should_load_covid_measures
-    ? api_load_covid_measures()
-    : Promise.resolve();
-
-  const covid_estimates_prom = should_load_covid_estimates
-    ? api_load_covid_estimates_by_measure(subject)
-    : Promise.resolve();
-
-  const covid_expenditures_prom = should_load_covid_expenditures
-    ? api_load_covid_expenditures_by_measure(subject)
+    ? api_load_all_covid_measures()
     : Promise.resolve();
 
   return Promise.all([
@@ -176,8 +157,6 @@ function ensure_loaded({
     horizontal_initiative_lookups_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
-    covid_estimates_prom,
-    covid_expenditures_prom,
   ]);
 }
 
