@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import {
   mix,
-  exstensibleStoreMixin,
+  staticStoreMixin,
   PluralSingular,
   SubjectMixin,
 } from "src/models/storeMixins.js";
@@ -65,7 +65,7 @@ const roll_up_data_by_property = (
     .value();
 
 class CovidMeasure extends mix().with(
-  exstensibleStoreMixin,
+  staticStoreMixin,
   PluralSingular,
   SubjectMixin
 ) {
@@ -90,44 +90,6 @@ class CovidMeasure extends mix().with(
       ...measure,
     });
   }
-
-  static extend_with_data(measure_id, data_key, data) {
-    const measure = this.lookup(measure_id);
-    const extended_data_set =
-      measure && measure[data_key]
-        ? _.uniqBy(
-            [...measure[data_key], ...data],
-            ({ org_id, fiscal_year, est_doc }) =>
-              `${org_id}-${fiscal_year}-${est_doc}`
-          )
-        : data;
-
-    this.extend(measure_id, { [data_key]: extended_data_set });
-  }
-
-  static get_all_data_by_measure = (data_type) =>
-    flatten_data_rows(this.get_all(), data_type);
-
-  static org_lookup_data_by_measure = (data_type, org_id) =>
-    _.filter(
-      this.get_all_data_by_measure(data_type),
-      // TODO getting org ids from API as strings, but client tends to treat them as ints... lots of gotchas waiting to happen (this is a general API flaw, not covid-specific)
-      ({ org_id: row_org_id }) => +row_org_id === +org_id
-    );
-
-  static gov_data_by_measure = (data_type, grouping_key = null) =>
-    roll_up_data_by_property(
-      this.get_all_data_by_measure(data_type),
-      "measure_id",
-      grouping_key
-    );
-
-  static get_all_data_by_org = (data_type, grouping_key = null) =>
-    roll_up_data_by_property(
-      this.get_all_data_by_measure(data_type),
-      "org_id",
-      grouping_key
-    );
 }
 
 export { CovidMeasure };

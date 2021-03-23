@@ -14,12 +14,13 @@ import {
   query_gov_covid_summaries,
   query_gov_covid_summary,
   query_org_covid_summary,
+  query_all_covid_estimates_by_measure,
+  query_org_covid_estimates_by_measure,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
 import { textColor } from "src/core/color_defs.js";
 import { infobase_colors } from "src/core/color_schemes.js";
-import { ensure_loaded } from "src/core/ensure_loaded.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -453,11 +454,11 @@ const tab_content_configs = [
         if (subject.level === "dept") {
           return query_org_covid_summary({
             id: subject.id,
-            fiscal_year: +selected_year,
+            fiscal_year: selected_year,
           });
         } else {
           return query_gov_covid_summary({
-            fiscal_year: +selected_year,
+            fiscal_year: selected_year,
           });
         }
       })().then((covid_summary) => _.get(covid_summary, "covid_estimates")),
@@ -468,11 +469,11 @@ const tab_content_configs = [
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ subject, selected_year }) =>
-      ensure_loaded({
-        covid_estimates: true,
-        covid_year: selected_year,
-        subject,
-      }).then(() => CovidMeasure.get_all_data_by_org("estimates", "est_doc")),
+      query_all_covid_estimates_by_measure({ fiscal_year: selected_year }).then(
+        (data) => {
+          debugger;
+        }
+      ),
     TabContent: ByDepartmentTab,
   },
   {
@@ -480,15 +481,20 @@ const tab_content_configs = [
     levels: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
     load_data: ({ subject, selected_year }) =>
-      ensure_loaded({
-        covid_estimates: true,
-        covid_year: selected_year,
-        subject,
-      }).then(() =>
-        subject.level === "gov"
-          ? CovidMeasure.gov_data_by_measure("estimates", "est_doc")
-          : CovidMeasure.org_lookup_data_by_measure("estimates", subject.id)
-      ),
+      (() => {
+        if (subject.level === "dept") {
+          return query_org_covid_estimates_by_measure({
+            id: subject.id,
+            fiscal_year: selected_year,
+          });
+        } else {
+          return query_all_covid_estimates_by_measure({
+            fiscal_year: selected_year,
+          });
+        }
+      })().then((data) => {
+        debugger;
+      }),
     TabContent: ByMeasureTab,
   },
 ];
@@ -573,6 +579,7 @@ export const declare_covid_estimates_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
+      requires_covid_measures: true,
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
       source: (subject) => [],

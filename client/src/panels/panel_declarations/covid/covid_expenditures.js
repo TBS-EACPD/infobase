@@ -464,6 +464,7 @@ export const declare_covid_expenditures_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
+      requires_covid_measures: true,
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: (subject, options) => {
