@@ -160,7 +160,7 @@
     "storybook": "STORYBOOK_A11Y=\"false\" start-storybook -p 6006",
     "storybook-a11y": "STORYBOOK_A11Y=\"true\" start-storybook -p 6007",
     "build-storybook": "STORYBOOK_A11Y=\"false\" build-storybook",
-    "build-storybook-a11y": "STORYBOOK_A11Y=\"false\" build-storybook"
+    "build-storybook-a11y": "STORYBOOK_A11Y=\"true\" build-storybook"
   },
   "authors": [
     "Alex Cousineau-Leduc",
