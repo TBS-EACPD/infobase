@@ -38,7 +38,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_expenditures.yaml";
 
-const { CovidMeasure, Dept } = Subject;
+const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -487,15 +487,11 @@ export const declare_covid_expenditures_panel = () =>
           return false;
         }
 
-        if (level_name === "gov") {
-          return true;
-        } else {
-          const years_with_expenditures = subject.has_data("covid")
-            ?.years_with_expenditures;
-          return (
-            !_.isEmpty(years_with_expenditures) && { years_with_expenditures }
-          );
-        }
+        const years_with_expenditures = YearsWithCovidData.lookup(subject.id)
+          ?.years_with_expenditures;
+        return (
+          !_.isEmpty(years_with_expenditures) && { years_with_expenditures }
+        );
       },
       render: ({
         calculations: { panel_args, subject },

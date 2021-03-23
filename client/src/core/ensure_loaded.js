@@ -68,6 +68,7 @@ function ensure_loaded({
   requires_granular_result_counts,
   has_services,
   services,
+  has_covid_data,
   years_with_covid_data,
   covid_measures,
   covid_estimates,
@@ -116,6 +117,7 @@ function ensure_loaded({
     services || check_for_panel_dependency("requires_services");
 
   const should_load_years_with_covid_data =
+    has_covid_data ||
     years_with_covid_data ||
     check_for_panel_dependency("requires_years_with_covid_data");
 
