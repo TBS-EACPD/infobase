@@ -128,7 +128,7 @@ jobs:
       - run: 
           command: |
             [ -e "node_modules" ] ||  npm ci
-            
+
       - run: npm run check_format .
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
@@ -387,6 +387,10 @@ jobs:
 
 workflows:
   version: 2
+  format_check:
+    jobs:
+      - format_check
+      
   test_email_backend:
     jobs:
       - test_email_backend
@@ -400,7 +404,6 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - format_check
       - test_end_to_end:
           requires:
             - build
