@@ -7,8 +7,8 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { CovidMeasure } from "./CovidMeasure.js";
 import {
-  org_years_with_covid_data_query,
-  gov_years_with_covid_data_query,
+  query_gov_years_with_covid_data,
+  query_org_years_with_covid_data,
   org_covid_measure_query,
   all_covid_measure_query,
   org_covid_estimates_by_measure_query,
@@ -20,7 +20,7 @@ import { YearsWithCovidData } from "./YearsWithCovidData.js";
 
 const _subject_ids_with_loaded_years_with_covid_data = {};
 export const api_load_years_with_covid_data = (subject) => {
-  const { is_loaded, level, id, query, response_data_accessor } = (() => {
+  const { is_loaded, level, id, query } = (() => {
     const subject_is_loaded = (id) =>
       _.get(_subject_ids_with_loaded_years_with_covid_data, id);
 
@@ -30,18 +30,14 @@ export const api_load_years_with_covid_data = (subject) => {
           is_loaded: subject_is_loaded(subject.id),
           level: "dept",
           id: subject.id,
-          query: org_years_with_covid_data_query,
-          response_data_accessor: (response) =>
-            response.data.root.org.years_with_covid_data,
+          query: query_org_years_with_covid_data,
         };
       default:
         return {
           is_loaded: subject_is_loaded("gov"),
           level: "gov",
           id: "gov",
-          query: gov_years_with_covid_data_query,
-          response_data_accessor: (response) =>
-            response.data.root.gov.years_with_covid_data,
+          query: query_gov_years_with_covid_data,
         };
     }
   })();
@@ -51,53 +47,34 @@ export const api_load_years_with_covid_data = (subject) => {
   }
 
   const time_at_request = Date.now();
-  return get_client()
-    .query({
-      query: query,
-      variables: {
-        lang: lang,
-        id: id,
-        _query_name: `${level}_years_with_covid_data`,
-      },
-    })
-    .then((response) => {
-      const years_with_covid_data = _.omit(
-        response_data_accessor(response),
-        "__typename"
+  return query({ id }).then((years_with_covid_data) => {
+    const resp_time = Date.now() - time_at_request;
+    if (!_.isEmpty(years_with_covid_data)) {
+      // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_SUCCESS",
+        MISC2: `Years with covid data, ${level}, took ${resp_time} ms`,
+      });
+    } else {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_UNEXPECTED",
+        MISC2: `Years with covid data, ${level}, took ${resp_time} ms`,
+      });
+    }
+
+    YearsWithCovidData.create_and_register(id, years_with_covid_data);
+
+    if (level === "dept") {
+      subject.set_has_data(
+        "covid",
+        !_.chain(years_with_covid_data).flatMap().isEmpty().value()
       );
+    }
 
-      const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(years_with_covid_data)) {
-        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_SUCCESS",
-          MISC2: `Years with covid data, ${level}, took ${resp_time} ms`,
-        });
-      } else {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `Years with covid data, ${level}, took ${resp_time} ms`,
-        });
-      }
-
-      YearsWithCovidData.create_and_register(id, years_with_covid_data);
-
-      if (level === "dept") {
-        subject.set_has_data(
-          "covid",
-          !_.chain(years_with_covid_data).flatMap().isEmpty().value()
-        );
-      }
-
-      _.setWith(
-        _subject_ids_with_loaded_years_with_covid_data,
-        id,
-        true,
-        Object
-      );
-    });
+    _.setWith(_subject_ids_with_loaded_years_with_covid_data, id, true, Object);
+  });
 };
 
 const _subject_ids_with_loaded_measures = {};
