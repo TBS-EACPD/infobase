@@ -12,7 +12,8 @@ import {
 
 import {
   query_gov_covid_summaries,
-  query_org_covid_summaries,
+  query_gov_covid_summary,
+  query_org_covid_summary,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
@@ -450,18 +451,16 @@ const tab_content_configs = [
     load_data: ({ subject, selected_year }) =>
       (() => {
         if (subject.level === "dept") {
-          return query_org_covid_summaries({
+          return query_org_covid_summary({
             id: subject.id,
-            fiscal_year: selected_year,
+            fiscal_year: +selected_year,
           });
         } else {
-          return query_gov_covid_summaries({
-            fiscal_year: selected_year,
+          return query_gov_covid_summary({
+            fiscal_year: +selected_year,
           });
         }
-      })().then((covid_summaries) =>
-        _.chain(covid_summaries).first().get("covid_estimates").value()
-      ),
+      })().then((covid_summary) => _.get(covid_summary, "covid_estimates")),
     TabContent: SummaryTab,
   },
   {
