@@ -2,14 +2,13 @@ import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {TextPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
 import { create_text_maker } from "src/models/text.js";
 
-
-import {infograph_href_template} from "src/infographic/infographic_link.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 
 import {
   HierarchyPeek,

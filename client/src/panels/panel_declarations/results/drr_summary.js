@@ -2,10 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
@@ -15,8 +13,8 @@ import * as Results from "src/models/results.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { IconArray } from "src/charts/IconArray.js";
-import { StandardLegend} from "src/charts/legends/index.js";
-import {WrappedNivoPie} from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend } from "src/charts/legends/index.js";
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 
 import { toggle_list } from "src/general_utils.js";
 import { get_source_links } from "src/metadata/data_sources.js";

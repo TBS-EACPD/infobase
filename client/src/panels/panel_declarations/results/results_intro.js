@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
@@ -14,7 +14,6 @@ import { Subject } from "src/models/subject.js";
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { get_source_links } from "src/metadata/data_sources.js";
-
 
 import { get_static_url } from "src/request_utils.js";
 

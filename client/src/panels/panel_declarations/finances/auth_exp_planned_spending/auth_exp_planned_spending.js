@@ -2,31 +2,35 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
-import {declare_panel} from "src/panels/panel_declarations/common_panel_utils.js";
-import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import {
+  StdPanel,
+  Col,
+} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
 const { create_text_maker_component } = util_components;
 
-
 import { GraphOverlay } from "src/components/index.js";
 
 import FootNote from "src/models/footnotes/footnotes.js";
-import {run_template} from "src/models/text.js";
-import {year_templates, actual_to_planned_gap_year} from "src/models/years.js";
+import { run_template } from "src/models/text.js";
+import {
+  year_templates,
+  actual_to_planned_gap_year,
+} from "src/models/years.js";
 
 import {
   tertiaryColor,
   textColor,
   highlightColor,
 } from "src/core/color_defs.js";
-import {newIBCategoryColors} from "src/core/color_schemes.js";
+import { newIBCategoryColors } from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import {StandardLegend} from "src/charts/legends/index.js";
-import {WrappedNivoLine} from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend } from "src/charts/legends/index.js";
+import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";

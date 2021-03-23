@@ -3,17 +3,14 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-
-import { HeightClippedGraph,TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components.js";
 import {
-  declare_panel
-} from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-
+  HeightClippedGraph,
+  TspanLineWrapper,
+} from "src/panels/panel_declarations/common_panel_components.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
-
-
 
 import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
@@ -21,24 +18,28 @@ import { businessConstants } from "src/models/businessConstants.js";
 import FootNote from "src/models/footnotes/footnotes.js";
 
 import { Subject } from "src/models/subject.js";
-import {run_template} from "src/models/text.js";
-import {year_templates} from "src/models/years.js";
+import { run_template } from "src/models/text.js";
+import { year_templates } from "src/models/years.js";
 
 import { highlightColor, textColor } from "src/core/color_defs.js";
 import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
- infobase_colors } from "src/core/color_schemes.js";
-import { formats} from "src/core/format.js";
+  infobase_colors,
+} from "src/core/color_schemes.js";
+import { formats } from "src/core/format.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 
-import {WrappedNivoBar,WrappedNivoHBar} from "src/charts/wrapped_nivo/index.js";
+import {
+  WrappedNivoBar,
+  WrappedNivoHBar,
+} from "src/charts/wrapped_nivo/index.js";
 
 import { toggle_list } from "src/general_utils.js";
-import {infograph_href_template} from "src/infographic/infographic_link.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 
 import text from "./detailed_program_spending_split.yaml";
 

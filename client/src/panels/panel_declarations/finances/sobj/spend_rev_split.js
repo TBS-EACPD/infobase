@@ -2,22 +2,22 @@ import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {StdPanel, Col} from "src/panels/panel_declarations/InfographicPanel.js";
+import {
+  StdPanel,
+  Col,
+} from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
 
 const { create_text_maker_component } = util_components;
 
-
 import { highlightColor, secondaryColor } from "src/core/color_defs.js";
-import { formats} from "src/core/format.js";
+import { formats } from "src/core/format.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import {WrappedNivoBar} from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
 import * as table_common from "src/tables/table_common.js";
-
-
 
 import text from "./spend_rev_split.yaml";
 

@@ -1,15 +1,11 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import * as util_components from "src/components/index.js";
-
-
 
 import { ModalButton } from "src/components/index.js";
 
@@ -21,7 +17,7 @@ import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { lang } from "src/core/injected_build_constants.js";
 
 import { toggle_list } from "src/general_utils.js";
-import {infograph_href_template,} from "src/infographic/infographic_link.js";
+import { infograph_href_template } from "src/infographic/infographic_link.js";
 import { get_source_links } from "src/metadata/data_sources.js";
 
 import IndicatorDisplayPanel from "./IndicatorDisplayPanel";

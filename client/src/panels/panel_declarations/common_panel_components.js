@@ -6,18 +6,11 @@ import MediaQuery from "react-responsive";
 
 import * as util_components from "src/components/index.js";
 
-import {
-  trivial_text_maker,
-} from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
 
-
-const {
-  HeightClipper,
-  PinnedContent,
-  AutoAccordion,
-} = util_components;
+const { HeightClipper, PinnedContent, AutoAccordion } = util_components;
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>
@@ -88,8 +81,4 @@ const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
   </MediaQuery>
 );
 
-export {
-  HeightClippedGraph,
-  TspanLineWrapper,
-  SomeThingsToKeepInMind,
-};
+export { HeightClippedGraph, TspanLineWrapper, SomeThingsToKeepInMind };

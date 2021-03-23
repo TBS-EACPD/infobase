@@ -2,8 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {InfographicPanel} from "src/panels/panel_declarations/InfographicPanel.js";
-
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import { SingleTagResourceExplorer } from "./rooted_resource_scheme.js";
 
