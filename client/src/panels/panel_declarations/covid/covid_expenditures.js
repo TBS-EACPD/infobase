@@ -28,7 +28,10 @@ import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
-import { AboveTabFootnoteList } from "./covid_common_components.js";
+import {
+  YearSelectionTabs,
+  AboveTabFootnoteList,
+} from "./covid_common_components.js";
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -315,12 +318,13 @@ const tab_content_configs = [
     key: "summary",
     levels: ["gov"],
     label: text_maker("summary_tab_label"),
-    load_data: (panel_args) =>
+    load_data: ({ selected_year }) =>
       client
         .query({
           query: top_covid_spending_query,
           variables: {
             lang: lang,
+            fiscal_year: selected_year,
             _query_name: "top_covid_spending_query",
           },
         })
@@ -364,9 +368,10 @@ const tab_content_configs = [
     key: "department",
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
-    load_data: ({ subject }) =>
+    load_data: ({ subject, selected_year }) =>
       ensure_loaded({
         covid_expenditures: true,
+        covid_year: selected_year,
         subject,
       }).then(() => ({
         covid_expenditures: CovidMeasure.get_all_data_by_org("expenditures"),
@@ -377,9 +382,10 @@ const tab_content_configs = [
     key: "measure",
     levels: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
-    load_data: ({ subject }) =>
+    load_data: ({ subject, selected_year }) =>
       ensure_loaded({
         covid_expenditures: true,
+        covid_year: selected_year,
         subject,
       }).then(() => ({
         covid_expenditures:
@@ -399,6 +405,8 @@ class CovidExpendituresPanel extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      summary_by_fiscal_year: null,
+      selected_year: _.last(props.panel_args.years),
     };
   }
   componentDidMount() {
@@ -410,38 +418,39 @@ class CovidExpendituresPanel extends React.Component {
           _query_name: "gov_covid_summary_query",
         },
       })
-      .then(
-        ({
-          data: {
-            root: {
-              gov: {
-                covid_summary: { covid_expenditures },
-              },
-            },
-          },
-        }) => {
-          this.setState({
-            gov_covid_expenditures_in_year: _.reduce(
+      .then(({ data: { root: { gov: { covid_summary } } } }) =>
+        this.setState({
+          summary_by_fiscal_year: _.chain(covid_summary)
+            .map(({ fiscal_year, covid_expenditures }) => [
+              fiscal_year,
               covid_expenditures,
-              (memo, { vote, stat }) => memo + vote + stat,
-              0
-            ),
-            loading: false,
-          });
-        }
+            ])
+            .fromPairs()
+            .value(),
+          loading: false,
+        })
       );
   }
+  on_select_year = (year) => this.setState({ selected_year: year });
   render() {
-    const { loading, gov_covid_expenditures_in_year } = this.state;
+    const { loading, selected_year, summary_by_fiscal_year } = this.state;
     const { panel_args } = this.props;
 
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
+      const gov_covid_expenditures_in_year = _.reduce(
+        summary_by_fiscal_year[selected_year],
+        (memo, { vote, stat }) => memo + vote + stat,
+        0
+      );
+
       const extended_panel_args = {
         ...panel_args,
+        selected_year,
         gov_covid_expenditures_in_year,
       };
+
       const {
         tab_keys,
         tab_labels,
@@ -451,6 +460,11 @@ class CovidExpendituresPanel extends React.Component {
       return (
         <Fragment>
           <div className="medium-panel-text text">
+            <YearSelectionTabs
+              years={panel_args.years}
+              on_select_year={this.on_select_year}
+              selected_year={selected_year}
+            />
             <AboveTabFootnoteList subject={panel_args.subject}>
               <TM k="covid_expenditures_above_tab_footnote_list" />
             </AboveTabFootnoteList>
@@ -490,7 +504,9 @@ export const declare_covid_expenditures_panel = () =>
         const years_with_expenditures = YearsWithCovidData.lookup(subject.id)
           ?.years_with_expenditures;
         return (
-          !_.isEmpty(years_with_expenditures) && { years_with_expenditures }
+          !_.isEmpty(years_with_expenditures) && {
+            years: years_with_expenditures,
+          }
         );
       },
       render: ({

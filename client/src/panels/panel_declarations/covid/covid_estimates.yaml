@@ -19,18 +19,18 @@ covid_estimates_above_tab_footnote_list:
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
   en: |
-    So far this fiscal year (**{{fmt_year_to_fiscal_year fiscal_year}}**), **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities have been presented through
+    So far this fiscal year (**{{fmt_year_to_fiscal_year selected_year}}**), **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities have been presented through
     the Estimates in response to the COVID-19 pandemic.
   fr:  |
-    Depuis le début de l'exercice en cours (**{{fmt_year_to_fiscal_year fiscal_year}}**), des autorisations d’un montant de **{{fmt_compact1_written gov_covid_estimates_in_year}}** ont été
+    Depuis le début de l'exercice en cours (**{{fmt_year_to_fiscal_year selected_year}}**), des autorisations d’un montant de **{{fmt_compact1_written gov_covid_estimates_in_year}}** ont été
     accordées par le biais des budgets des dépenses pour les interventions en réponse à la pandémie de COVID-19. 
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
   en: |
-    So far this fiscal year (**{{fmt_year_to_fiscal_year fiscal_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_estimates_in_year}}** in authorities
+    So far this fiscal year (**{{fmt_year_to_fiscal_year selected_year}}**), **{{subject.name}}** has **{{fmt_compact1_written dept_covid_estimates_in_year}}** in authorities
     available for its response to the COVID-19 pandemic, as presented through the Estimates.
   fr: |
-    Depuis le début de l'exercice en cours (**{{fmt_year_to_fiscal_year fiscal_year}}**), **{{subject.name}}** a pu disposer d’autorisation d’un montant de
+    Depuis le début de l'exercice en cours (**{{fmt_year_to_fiscal_year selected_year}}**), **{{subject.name}}** a pu disposer d’autorisation d’un montant de
     **{{fmt_compact1_written dept_covid_estimates_in_year}}** pour ses interventions en réponse à la COVID-19, tel qu’il est indiqué dans les budgets des dépenses.
 
 
