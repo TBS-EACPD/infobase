@@ -592,7 +592,11 @@ class CovidEstimatesPanel extends React.Component {
               />
             </AboveTabFootnoteList>
           </div>
-          <TabbedContent {...tabbed_content_props} />
+          {/* 
+            key={selected_year} below is to force a re-render on year change, as React doesn't compare deep enough
+            to see the corresponding prop changes in tabbed_content_props itself 
+          */}
+          <TabbedContent {...tabbed_content_props} key={selected_year} />
         </Fragment>
       );
     }
