@@ -1,4 +1,11 @@
 import { gql } from "@apollo/client";
+import _ from "lodash";
+
+import { lang } from "src/core/injected_build_constants.js";
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
+
+const client = get_client();
 
 const years_with_covid_data = `
   years_with_covid_data {
@@ -6,26 +13,55 @@ const years_with_covid_data = `
     years_with_expenditures
   }
 `;
-export const gov_years_with_covid_data_query = gql`
-  query($lang: String!) {
-    root(lang: $lang) {
-      gov {
-        id
-        ${years_with_covid_data}
+export const query_gov_years_with_covid_data = () =>
+  client
+    .query({
+      query: gql`
+        query($lang: String!) {
+          root(lang: $lang) {
+            gov {
+              id
+              ${years_with_covid_data}
+            }
+          }
+        }
+      `,
+      variables: {
+        lang: lang,
+        _query_name: `gov_years_with_covid_data`,
+      },
+    })
+    .then((response) =>
+      _.chain(response)
+        .get("data.root.gov.years_with_covid_data")
+        .omit("__typename")
+        .value()
+    );
+export const query_org_years_with_covid_data = ({ id }) =>
+  client
+    .query({
+      query: gql`
+      query($lang: String!, $id: String!) {
+        root(lang: $lang) {
+          org(org_id: $id) {
+            id
+            ${years_with_covid_data}
+          }
+        }
       }
-    }
-  }
-`;
-export const org_years_with_covid_data_query = gql`
-  query($lang: String!, $id: String!) {
-    root(lang: $lang) {
-      org(org_id: $id) {
-        id
-        ${years_with_covid_data}
-      }
-    }
-  }
-`;
+    `,
+      variables: {
+        lang: lang,
+        id,
+        _query_name: `org_years_with_covid_data`,
+      },
+    })
+    .then((response) =>
+      _.chain(response)
+        .get("response.data.root.org.years_with_covid_data")
+        .omit("__typename")
+        .value()
+    );
 
 const covid_measure_fields = `
   id
