@@ -1,20 +1,17 @@
 import _ from "lodash";
 
 import { log_standard_event } from "src/core/analytics.js";
-import { lang } from "src/core/injected_build_constants.js";
-
-import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { CovidMeasure } from "./CovidMeasure.js";
 import {
   query_gov_years_with_covid_data,
   query_org_years_with_covid_data,
-  org_covid_measure_query,
-  all_covid_measure_query,
-  org_covid_estimates_by_measure_query,
-  all_covid_estimates_by_measure_query,
-  org_covid_expenditures_by_measure_query,
-  all_covid_expenditures_by_measure_query,
+  query_all_covid_measures,
+  query_org_covid_measures,
+  query_all_covid_estimates_by_measure,
+  query_org_covid_estimates_by_measure,
+  query_all_covid_expenditures_by_measure,
+  query_org_covid_expenditures_by_measure,
 } from "./queries.js";
 import { YearsWithCovidData } from "./YearsWithCovidData.js";
 
@@ -81,7 +78,7 @@ const _subject_ids_with_loaded_measures = {};
 export const api_load_covid_measures = (subject) => {
   const level = (subject && subject.level === "dept") || "all";
 
-  const { is_loaded, id, query, response_data_accessor } = (() => {
+  const { is_loaded, id, query } = (() => {
     const subject_is_loaded = ({ level, id }) =>
       _.get(_subject_ids_with_loaded_measures, `${level}.${id}`);
 
@@ -93,15 +90,13 @@ export const api_load_covid_measures = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: org_covid_measure_query,
-          response_data_accessor: (response) => response.data.root.org,
+          query: query_org_covid_measures,
         };
       default:
         return {
           is_loaded: all_is_loaded(),
           id: "all",
-          query: all_covid_measure_query,
-          response_data_accessor: (response) => response.data.root,
+          query: query_all_covid_measures,
         };
     }
   })();
@@ -111,19 +106,8 @@ export const api_load_covid_measures = (subject) => {
   }
 
   const time_at_request = Date.now();
-  const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "covid_measures",
-      },
-    })
-    .then((response) => {
-      const { covid_measures } = response_data_accessor(response);
-
+  return query({ id })
+    .then((covid_measures) => {
       const resp_time = Date.now() - time_at_request;
       if (!_.isEmpty(covid_measures)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
@@ -173,7 +157,7 @@ const _subject_ids_with_loaded_estimates_by_measure = {};
 export const api_load_covid_estimates_by_measure = (subject) => {
   const level = subject && subject.level === "dept" ? "dept" : "all";
 
-  const { is_loaded, id, query, response_data_accessor } = (() => {
+  const { is_loaded, id, query } = (() => {
     const subject_is_loaded = ({ level, id }) =>
       _.get(_subject_ids_with_loaded_estimates_by_measure, `${level}.${id}`);
 
@@ -185,15 +169,13 @@ export const api_load_covid_estimates_by_measure = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: org_covid_estimates_by_measure_query,
-          response_data_accessor: (response) => response.data.root.org,
+          query: query_org_covid_estimates_by_measure,
         };
       default:
         return {
           is_loaded: all_is_loaded(),
           id: "all",
-          query: all_covid_estimates_by_measure_query,
-          response_data_accessor: (response) => response.data.root,
+          query: query_all_covid_estimates_by_measure,
         };
     }
   })();
@@ -203,19 +185,8 @@ export const api_load_covid_estimates_by_measure = (subject) => {
   }
 
   const time_at_request = Date.now();
-  const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "covid_estimates_by_measure",
-      },
-    })
-    .then((response) => {
-      const { covid_estimates_by_measure } = response_data_accessor(response);
-
+  return query({ id })
+    .then((covid_estimates_by_measure) => {
       const resp_time = Date.now() - time_at_request;
       if (!_.isEmpty(covid_estimates_by_measure)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
@@ -282,7 +253,7 @@ const _subject_ids_with_loaded_expenditures_by_measure = {};
 export const api_load_covid_expenditures_by_measure = (subject) => {
   const level = subject && subject.level === "dept" ? "dept" : "all";
 
-  const { is_loaded, id, query, response_data_accessor } = (() => {
+  const { is_loaded, id, query } = (() => {
     const subject_is_loaded = ({ level, id }) =>
       _.get(_subject_ids_with_loaded_expenditures_by_measure, `${level}.${id}`);
 
@@ -294,15 +265,13 @@ export const api_load_covid_expenditures_by_measure = (subject) => {
         return {
           is_loaded: dept_is_loaded(subject),
           id: subject.id,
-          query: org_covid_expenditures_by_measure_query,
-          response_data_accessor: (response) => response.data.root.org,
+          query: query_org_covid_expenditures_by_measure,
         };
       default:
         return {
           is_loaded: all_is_loaded(),
           id: "all",
-          query: all_covid_expenditures_by_measure_query,
-          response_data_accessor: (response) => response.data.root,
+          query: query_all_covid_expenditures_by_measure,
         };
     }
   })();
@@ -312,21 +281,8 @@ export const api_load_covid_expenditures_by_measure = (subject) => {
   }
 
   const time_at_request = Date.now();
-  const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "covid_expenditures_by_measure",
-      },
-    })
-    .then((response) => {
-      const { covid_expenditures_by_measure } = response_data_accessor(
-        response
-      );
-
+  return query({ id })
+    .then((covid_expenditures_by_measure) => {
       const resp_time = Date.now() - time_at_request;
       if (!_.isEmpty(covid_expenditures_by_measure)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!

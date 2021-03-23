@@ -11,8 +11,8 @@ import {
 } from "src/components/index.js";
 
 import {
-  gov_covid_summary_query,
-  org_covid_summary_query,
+  query_gov_covid_summaries,
+  query_org_covid_summaries,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
@@ -20,12 +20,10 @@ import { textColor } from "src/core/color_defs.js";
 import { infobase_colors } from "src/core/color_schemes.js";
 import { ensure_loaded } from "src/core/ensure_loaded.js";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
 import { StandardLegend } from "src/charts/legends/index.js";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
-
-import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
@@ -49,8 +47,6 @@ import text from "./covid_estimates.yaml";
 const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
-
-const client = get_client();
 
 const colors = infobase_colors();
 
@@ -451,44 +447,21 @@ const tab_content_configs = [
     key: "summary",
     levels: ["gov", "dept"],
     label: text_maker("summary_tab_label"),
-    load_data: ({ subject, selected_year }) => {
-      const { query, variables, response_accessor } = (() => {
+    load_data: ({ subject, selected_year }) =>
+      (() => {
         if (subject.level === "dept") {
-          return {
-            query: org_covid_summary_query,
-            variables: {
-              lang: lang,
-              id: subject.id,
-              fiscal_year: selected_year,
-              _query_name: "org_covid_summary_query",
-            },
-            response_accessor: (response) =>
-              _.chain(response)
-                .get("data.root.org.covid_summary")
-                .first()
-                .get("covid_estimates")
-                .value(),
-          };
+          return query_org_covid_summaries({
+            id: subject.id,
+            fiscal_year: selected_year,
+          });
         } else {
-          return {
-            query: gov_covid_summary_query,
-            variables: {
-              lang: lang,
-              fiscal_year: selected_year,
-              _query_name: "gov_covid_summary_query",
-            },
-            response_accessor: (response) =>
-              _.chain(response)
-                .get("data.root.gov.covid_summary")
-                .first()
-                .get("covid_estimates")
-                .value(),
-          };
+          return query_gov_covid_summaries({
+            fiscal_year: selected_year,
+          });
         }
-      })();
-
-      return client.query({ query, variables }).then(response_accessor);
-    },
+      })().then((covid_summaries) =>
+        _.chain(covid_summaries).first().get("covid_estimates").value()
+      ),
     TabContent: SummaryTab,
   },
   {
@@ -531,26 +504,18 @@ class CovidEstimatesPanel extends React.Component {
     };
   }
   componentDidMount() {
-    client
-      .query({
-        query: gov_covid_summary_query,
-        variables: {
-          lang: lang,
-          _query_name: "gov_covid_summary_query",
-        },
+    query_gov_covid_summaries().then((covid_summaries) =>
+      this.setState({
+        summary_by_fiscal_year: _.chain(covid_summaries)
+          .map(({ fiscal_year, covid_estimates }) => [
+            fiscal_year,
+            covid_estimates,
+          ])
+          .fromPairs()
+          .value(),
+        loading: false,
       })
-      .then(({ data: { root: { gov: { covid_summary } } } }) =>
-        this.setState({
-          summary_by_fiscal_year: _.chain(covid_summary)
-            .map(({ fiscal_year, covid_estimates }) => [
-              fiscal_year,
-              covid_estimates,
-            ])
-            .fromPairs()
-            .value(),
-          loading: false,
-        })
-      );
+    );
   }
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
@@ -609,10 +574,6 @@ export const declare_covid_estimates_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
-      initial_queries: {
-        gov_covid_summary_query,
-        ...(level_name === "dept" && { org_covid_summary_query }),
-      },
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
       source: (subject) => [],
