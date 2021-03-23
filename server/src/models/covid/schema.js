@@ -20,7 +20,6 @@ const schema = `
   extend type Root {
     covid_measures: [CovidMeasure]
     covid_measure(covid_measure_id: String!): CovidMeasure
-
   }
 
   extend type Gov {

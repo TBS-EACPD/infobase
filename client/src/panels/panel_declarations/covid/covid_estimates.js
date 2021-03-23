@@ -57,7 +57,7 @@ const colors = infobase_colors();
 const panel_key = "covid_estimates_panel";
 
 const SummaryTab = ({ args: panel_args, data }) => {
-  const { subject, fiscal_year } = panel_args;
+  const { subject } = panel_args;
 
   const graph_index_key = "index_key";
 
@@ -451,9 +451,7 @@ const tab_content_configs = [
     key: "summary",
     levels: ["gov", "dept"],
     label: text_maker("summary_tab_label"),
-    load_data: (panel_args) => {
-      const { subject } = panel_args;
-
+    load_data: ({ subject, selected_year }) => {
       const { query, variables, response_accessor } = (() => {
         if (subject.level === "dept") {
           return {
@@ -461,6 +459,7 @@ const tab_content_configs = [
             variables: {
               lang: lang,
               id: subject.id,
+              fiscal_year: selected_year,
               _query_name: "org_covid_summary_query",
             },
             response_accessor: (response) =>
@@ -471,6 +470,7 @@ const tab_content_configs = [
             query: gov_covid_summary_query,
             variables: {
               lang: lang,
+              fiscal_year: selected_year,
               _query_name: "gov_covid_summary_query",
             },
             response_accessor: (response) =>
@@ -487,18 +487,24 @@ const tab_content_configs = [
     key: "department",
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
-    load_data: ({ subject }) =>
-      ensure_loaded({ covid_estimates: true, subject }).then(() =>
-        CovidMeasure.get_all_data_by_org("estimates", "est_doc")
-      ),
+    load_data: ({ subject, selected_year }) =>
+      ensure_loaded({
+        covid_estimates: true,
+        covid_year: selected_year,
+        subject,
+      }).then(() => CovidMeasure.get_all_data_by_org("estimates", "est_doc")),
     TabContent: ByDepartmentTab,
   },
   {
     key: "measure",
     levels: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
-    load_data: ({ subject }) =>
-      ensure_loaded({ covid_estimates: true, subject }).then(() =>
+    load_data: ({ subject, selected_year }) =>
+      ensure_loaded({
+        covid_estimates: true,
+        covid_year: selected_year,
+        subject,
+      }).then(() =>
         subject.level === "gov"
           ? CovidMeasure.gov_data_by_measure("estimates", "est_doc")
           : CovidMeasure.org_lookup_data_by_measure("estimates", subject.id)
@@ -512,8 +518,8 @@ class CovidEstimatesPanel extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      estimates_summary_by_fiscal_year: null,
-      selected_year: _.last(props.panel_args.years_with_estimates),
+      summary_by_fiscal_year: null,
+      selected_year: _.last(props.panel_args.years),
     };
   }
   componentDidMount() {
@@ -527,7 +533,7 @@ class CovidEstimatesPanel extends React.Component {
       })
       .then(({ data: { root: { gov: { covid_summary } } } }) =>
         this.setState({
-          estimates_summary_by_fiscal_year: _.chain(covid_summary)
+          summary_by_fiscal_year: _.chain(covid_summary)
             .map(({ fiscal_year, covid_estimates }) => [
               fiscal_year,
               covid_estimates,
@@ -540,25 +546,21 @@ class CovidEstimatesPanel extends React.Component {
   }
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
-    const {
-      loading,
-      selected_year,
-      estimates_summary_by_fiscal_year,
-    } = this.state;
+    const { loading, selected_year, summary_by_fiscal_year } = this.state;
     const { panel_args } = this.props;
 
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
       const gov_covid_estimates_in_year = _.reduce(
-        estimates_summary_by_fiscal_year[selected_year],
+        summary_by_fiscal_year[selected_year],
         (memo, { vote, stat }) => memo + vote + stat,
         0
       );
 
       const extended_panel_args = {
         ...panel_args,
-        fiscal_year: selected_year,
+        selected_year,
         gov_covid_estimates_in_year,
       };
 
@@ -571,7 +573,7 @@ class CovidEstimatesPanel extends React.Component {
         <Fragment>
           <div className="medium-panel-text text">
             <YearSelectionTabs
-              years={panel_args.years_with_estimates}
+              years={panel_args.years}
               on_select_year={this.on_select_year}
               selected_year={selected_year}
             />
@@ -605,7 +607,9 @@ export const declare_covid_estimates_panel = () =>
       calculate: function (subject, options) {
         const years_with_estimates = YearsWithCovidData.lookup(subject.id)
           ?.years_with_estimates;
-        return !_.isEmpty(years_with_estimates) && { years_with_estimates };
+        return (
+          !_.isEmpty(years_with_estimates) && { years: years_with_estimates }
+        );
       },
       render: ({
         calculations: { panel_args, subject },
