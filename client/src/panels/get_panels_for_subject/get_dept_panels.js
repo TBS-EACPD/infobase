@@ -64,7 +64,7 @@ export const get_dept_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
-    years_with_covid_data: true,
+    has_covid_data: true,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: _.includes(subject.tables, "programSpending") && [
@@ -86,10 +86,7 @@ export const get_dept_panels = (subject) =>
       declare_planned_actual_comparison_panel(),
       declare_dp_rev_split_panel(),
     ],
-    covid: _.some(
-      subject.has_data("covid"),
-      (years_with_data) => !_.isEmpty(years_with_data)
-    ) && [
+    covid: subject.has_data("covid") && [
       declare_covid_key_concepts_panel(),
       declare_covid_intro_panel(),
       declare_covid_estimates_panel(),

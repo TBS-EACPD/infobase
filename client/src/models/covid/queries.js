@@ -28,6 +28,11 @@ const years_with_covid_data = `
 export const org_years_with_covid_data_query = build_org_query(
   years_with_covid_data
 );
+export const gov_years_with_covid_data_query = build_base_query(`
+  gov {
+    ${years_with_covid_data}
+  }
+`);
 
 const covid_measure_fields = `
   id

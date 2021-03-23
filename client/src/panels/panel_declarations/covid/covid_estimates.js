@@ -46,7 +46,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_estimates.yaml";
 
-const { CovidMeasure, Dept } = Subject;
+const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -603,9 +603,7 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: (subject) => [],
       calculate: function (subject, options) {
-        // TODO need a whole rethink of using subject.has_data, it's really being abused at this point, storing all those years,
-        // and doesn't cover the gov case anyway
-        const years_with_estimates = subject.has_data("covid")
+        const years_with_estimates = YearsWithCovidData.lookup(subject.id)
           ?.years_with_estimates;
         return !_.isEmpty(years_with_estimates) && { years_with_estimates };
       },
