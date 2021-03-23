@@ -119,6 +119,16 @@ jobs:
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
+      - checkout:
+          path: "~/InfoBase"
+
+      - restore_cache:
+          keys:
+            - top-level-dependencies-{{ checksum "package-lock.json" }}
+      - run: 
+          command: |
+            [ -e "node_modules" ] ||  npm ci
+            
       - run: npm run check_format .
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
