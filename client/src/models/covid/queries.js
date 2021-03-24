@@ -293,6 +293,7 @@ const common_covid_summary_fields = `
     ${covid_estimates_fields}
   }
   covid_expenditures {
+    month_last_updated
     ${covid_expenditures_fields}
   }
 `;

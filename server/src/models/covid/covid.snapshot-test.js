@@ -6,6 +6,7 @@ const estimates_fields = `
   stat
 `;
 const expenditures_fields = `
+  month_last_updated
   vote
   stat
 `;

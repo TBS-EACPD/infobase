@@ -12,7 +12,11 @@ export default async function ({ models }) {
 
   const covid_estimates_rows = _.map(
     get_standard_csv_file_rows("covid_estimates.csv"),
-    (row) => ({ ...row, vote: +row.vote, stat: +row.stat })
+    (row) => ({
+      ...row,
+      vote: +row.vote,
+      stat: +row.stat,
+    })
   );
   const covid_expenditures_rows = _.chain(
     get_standard_csv_file_rows("covid_expenditures.csv")
@@ -20,7 +24,8 @@ export default async function ({ models }) {
     .map((row) => ({
       // covid_expenditures.csv contains the bud/non-bud split, but the client doesn't use it yet and supporting it creates lots of room for error,
       // so for now it's dropped and rolled up here
-      ..._.omit(row, "is_budgetary"),
+      ..._.omit(row, ["is_budgetary", "calendar_month"]),
+      month_last_updated: +row.calendar_month,
       vote: +row.vote,
       stat: +row.stat,
     }))
@@ -39,6 +44,25 @@ export default async function ({ models }) {
       ),
     }))
     .map()
+    .value();
+
+  const covid_expenditures_update_month_by_fiscal_year = _.chain(
+    get_standard_csv_file_rows("covid_expenditures.csv")
+  )
+    .groupBy("fiscal_year")
+    .mapValues((rows, fiscal_year) =>
+      _.chain(rows)
+        .map("calendar_month")
+        .uniq()
+        .thru((calendar_month) => {
+          if (calendar_month.length > 1) {
+            throw `covid_expenditures.csv contains more than one uniqe calendar_month (${calendar_month}) for ${fiscal_year}`;
+          } else {
+            return _.first(calendar_month);
+          }
+        })
+        .value()
+    )
     .value();
 
   const all_rows_with_org_data = [
@@ -115,6 +139,10 @@ export default async function ({ models }) {
             }),
             { vote: 0, stat: 0 }
           )
+          .assign({
+            month_last_updated:
+              covid_expenditures_update_month_by_fiscal_year[fiscal_year],
+          })
           .value(),
       }))
     )
@@ -149,6 +177,10 @@ export default async function ({ models }) {
         }),
         { vote: 0, stat: 0 }
       )
+      .assign({
+        month_last_updated:
+          covid_expenditures_update_month_by_fiscal_year[fiscal_year],
+      })
       .value(),
     spending_sorted_org_ids: _.chain(covid_expenditures_rows)
       .filter({ fiscal_year })
