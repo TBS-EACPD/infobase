@@ -20,7 +20,6 @@ import { GraphOverlay } from "src/components/index.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 
-
 import { calculate_common_text_args } from "./calculate_common_text_args.js";
 
 import text from "./employee_age.yaml";

@@ -29,8 +29,6 @@ import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { infograph_href_template } from "src/infographic/infographic_link.js";
 
-
-
 import { get_data, load_data } from "./data.js";
 
 import { TreeMapInstructions } from "./TreeMapInstructions.js";

@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import { Details } from "./Details.js";
 import "src/common_css/grid-system.scss";
 

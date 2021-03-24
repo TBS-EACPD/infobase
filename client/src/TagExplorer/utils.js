@@ -4,8 +4,6 @@ import { create_text_maker_component } from "src/components/index.js";
 
 import { year_templates } from "src/models/years.js";
 
-
-
 import text from "./TagExplorer.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);

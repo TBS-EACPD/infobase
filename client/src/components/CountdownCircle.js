@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 
 import { buttonPrimaryColor } from "src/core/color_defs.js";
 
-
 import { is_IE } from "src/core/feature_detection.js";
 
 import { Countdown } from "./Countdown.js";

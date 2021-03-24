@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import {
   run_template,
   trivial_text_maker,

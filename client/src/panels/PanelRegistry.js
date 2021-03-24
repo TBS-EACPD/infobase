@@ -8,7 +8,6 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 import { is_dev } from "src/core/injected_build_constants.js";
 import { Table } from "src/core/TableClass.js";
 
-
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
 
 const subjects = _.keys(Subject);

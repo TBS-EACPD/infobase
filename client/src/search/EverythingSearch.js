@@ -10,11 +10,9 @@ import { create_text_maker } from "src/models/text.js";
 import { breakpoints } from "src/core/breakpoint_defs.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-
 import { IconGear } from "src/icons/icons.js";
 
 import { smart_href_template } from "src/link_utils.js";
-
 
 import {
   make_orgs_search_config,

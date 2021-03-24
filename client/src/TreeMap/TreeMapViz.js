@@ -11,7 +11,6 @@ import { create_text_maker } from "src/models/text.js";
 
 import { is_mobile } from "src/core/feature_detection.js";
 
-
 import { smaller_items_text } from "./data.js";
 
 import text from "./TreeMap.yaml";

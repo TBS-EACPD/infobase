@@ -2,7 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-
 import { textLightColor } from "src/core/color_defs.js";
 
 import { Details } from "./Details.js";

@@ -12,7 +12,6 @@ import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
 import { IconHome } from "src/icons/icons.js";
 import { index_lang_lookups } from "src/InfoBase/index_data.js";
 
-
 import { log_page_view } from "./analytics.js";
 import { reactAdapter } from "./reactAdapter.js";
 

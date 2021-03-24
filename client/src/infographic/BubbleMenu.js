@@ -10,7 +10,6 @@ import { primaryColor, backgroundColor } from "src/core/color_defs.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-
 import "./BubbleMenu.scss";
 
 const BubbleMenu = ({ items, active_item_id }) => {

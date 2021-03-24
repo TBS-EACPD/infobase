@@ -15,13 +15,10 @@ import { Indicator } from "src/models/results.js";
 import { log_standard_event } from "src/core/analytics.js";
 import { lang } from "src/core/injected_build_constants.js";
 
-
-
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 import { IconCopyLink } from "src/icons/icons.js";
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
-
 
 import { IndicatorDisplay } from "./result_components.js";
 

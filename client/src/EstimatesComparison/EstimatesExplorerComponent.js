@@ -22,7 +22,6 @@ import { get_root } from "src/explorer_common/hierarchy_tools.js";
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
 import { sources } from "src/metadata/data_sources.js";
 
-
 import {
   text_maker,
   TM,
