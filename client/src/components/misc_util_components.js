@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import {
   run_template,
   trivial_text_maker,
@@ -24,13 +23,17 @@ const ExternalLink = ({ children, href, title }) => (
 
 class Format extends React.PureComponent {
   render() {
-    const { type, content, style, className } = this.props;
+    const { type, content, style, className, in_parenthesis } = this.props;
 
     return (
       <span
         style={style}
         className={className}
-        dangerouslySetInnerHTML={{ __html: formats[type](content) }}
+        dangerouslySetInnerHTML={{
+          __html: !in_parenthesis
+            ? formats[type](content)
+            : `(${formats[type](content)})`,
+        }}
       />
     );
   }
