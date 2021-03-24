@@ -15,6 +15,7 @@ import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import {
   query_gov_covid_summaries,
   query_top_covid_spending_query,
+  query_all_covid_expenditures_by_measure_id,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
@@ -30,6 +31,7 @@ import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
   string_sort_func,
+  roll_up_flat_measure_data_by_property,
 } from "./covid_common_utils.js";
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -41,11 +43,9 @@ const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({
-  args: panel_args,
-  data: { top_spending_orgs, top_spending_measures },
-}) => {
+const SummaryTab = ({ args: panel_args, data }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
+  const { top_spending_orgs, top_spending_measures } = data;
 
   const {
     name: top_spending_org_name,
@@ -167,16 +167,8 @@ const get_common_column_configs = (show_vote_stat) => ({
 });
 
 const ByDepartmentTab = wrap_with_vote_stat_controls(
-  ({
-    show_vote_stat,
-    ToggleVoteStat,
-    args: panel_args,
-    data: { covid_expenditures },
-  }) => {
-    const pre_sorted_rows = get_expenditures_by_index(
-      covid_expenditures,
-      "org_id"
-    );
+  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+    const pre_sorted_rows = get_expenditures_by_index(data, "org_id");
 
     const column_configs = {
       org_id: {
@@ -238,14 +230,9 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 );
 
 const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({
-    show_vote_stat,
-    ToggleVoteStat,
-    args: panel_args,
-    data: { covid_expenditures },
-  }) => {
+  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
     const pre_sorted_rows_with_measure_names = _.chain(
-      get_expenditures_by_index(covid_expenditures, "measure_id")
+      get_expenditures_by_index(data, "measure_id")
     )
       .map(({ measure_id, ...row }) => ({
         ...row,
@@ -278,7 +265,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       largest_measure_exp,
       ...(subject_level === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
-          covid_expenditures,
+          data,
           (memo, { vote, stat }) => memo + vote + stat,
           0
         ),
@@ -315,24 +302,24 @@ const tab_content_configs = [
         ({ top_spending_orgs, top_spending_measures }) => ({
           top_spending_orgs: _.map(
             top_spending_orgs,
-            ({ name, covid_summary: { covid_expenditures } }) => ({
+            ({ name, covid_summary }) => ({
               name,
-              spending: _.reduce(
-                covid_expenditures,
-                (memo, { vote, stat }) => memo + vote + stat,
-                0
-              ),
+              spending: _.chain(covid_summary)
+                .first()
+                .get("covid_expenditures")
+                .thru(({ vote, stat }) => vote + stat)
+                .value(),
             })
           ),
           top_spending_measures: _.map(
             top_spending_measures,
-            ({ name, covid_expenditures }) => ({
+            ({ name, covid_data }) => ({
               name,
-              spending: _.reduce(
-                covid_expenditures,
-                (memo, { vote, stat }) => memo + vote + stat,
-                0
-              ),
+              spending: _.chain(covid_data)
+                .first()
+                .get("covid_expenditures")
+                .reduce((memo, { vote, stat }) => memo + vote + stat, 0)
+                .value(),
             })
           ),
         })
@@ -343,14 +330,10 @@ const tab_content_configs = [
     key: "department",
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
-    load_data: ({ subject, selected_year }) =>
-      ensure_loaded({
-        covid_expenditures: true,
-        covid_year: selected_year,
-        subject,
-      }).then(() => ({
-        covid_expenditures: CovidMeasure.get_all_data_by_org("expenditures"),
-      })),
+    load_data: ({ selected_year }) =>
+      query_all_covid_expenditures_by_measure_id({
+        fiscal_year: selected_year,
+      }).then((data) => roll_up_flat_measure_data_by_property(data, "org_id")),
     TabContent: ByDepartmentTab,
   },
   {
@@ -406,11 +389,9 @@ class CovidExpendituresPanel extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const gov_covid_expenditures_in_year = _.reduce(
-        summary_by_fiscal_year[selected_year],
-        (memo, { vote, stat }) => memo + vote + stat,
-        0
-      );
+      const gov_covid_expenditures_in_year =
+        summary_by_fiscal_year[selected_year].vote +
+        summary_by_fiscal_year[selected_year].stat;
 
       const extended_panel_args = {
         ...panel_args,

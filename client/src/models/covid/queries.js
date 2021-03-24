@@ -209,7 +209,7 @@ export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
 
                   covid_expenditures {
                     org_id
-                    ${covid_estimates_fields}
+                    ${covid_expenditures_fields}
                   }
                 }
              }
@@ -255,7 +255,7 @@ export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
 
                     covid_expenditures {
                       org_id
-                      ${covid_estimates_fields}
+                      ${covid_expenditures_fields}
                     }
                   }
                 }
