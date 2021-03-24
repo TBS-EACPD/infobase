@@ -7,11 +7,15 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import { query_gov_covid_summaries } from "src/models/covid/queries.js";
 
+import { Subject } from "src/models/subject.js";
+
 import { TabLoadingSpinner } from "src/components";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_intro.yaml";
+
+const { YearsWithCovidData } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -27,21 +31,20 @@ class CovidIntroPanelDyanmicText extends React.Component {
   componentDidMount() {
     query_gov_covid_summaries().then((covid_summaries) => {
       const [latest_estimates_summary, latest_expenditures_summary] = _.map(
-        ["covid_estimates", "covid_expenditures"],
-        (data_type) =>
-          _.chain(covid_summaries)
-            .map((covid_summary) => [
-              covid_summary.fiscal_year,
-              covid_summary[data_type],
-            ])
-            .filter(([_fiscal_year, summary]) => !_.isEmpty(summary))
-            .sortBy(_.first)
-            .last()
-            .thru(([fiscal_year, summary]) => ({
-              fiscal_year,
-              summary,
-            }))
-            .value()
+        ["estimates", "expenditures"],
+        (data_type) => {
+          const last_fiscal_year_for_type = +_.last(
+            YearsWithCovidData.lookup("gov")[`years_with_${data_type}`]
+          );
+
+          return {
+            fiscal_year: last_fiscal_year_for_type,
+            summary: _.chain(covid_summaries)
+              .find({ fiscal_year: +last_fiscal_year_for_type })
+              .get(`covid_${data_type}`)
+              .value(),
+          };
+        }
       );
 
       this.setState({
@@ -99,12 +102,13 @@ export const declare_covid_intro_panel = () =>
     panel_key: "covid_intro",
     levels: ["gov", "dept"],
     panel_config_func: (level_name, panel_key) => ({
+      requires_years_with_covid_data: true,
       footnotes: ["COVID"],
       source: (subject) => [],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
       render: ({
-        calculations: { panel_args, subject },
+        calculations: { panel_args },
         footnotes,
         sources,
         glossary_keys,
