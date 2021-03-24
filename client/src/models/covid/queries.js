@@ -421,7 +421,7 @@ export const query_org_covid_summary = query_logging_wrapper(
       )
 );
 
-export const query_top_covid_spending_query = query_logging_wrapper(
+export const query_top_covid_spending = query_logging_wrapper(
   "top_covid_spending",
   ({ fiscal_year, top_x = 4, ...logging_variables }) =>
     client
@@ -475,7 +475,30 @@ export const query_top_covid_spending_query = query_logging_wrapper(
         _.chain(response)
           .get("data.root.gov.covid_summary")
           .first()
-          .pick(["top_spending_orgs", "top_spending_measures"])
+          .thru(({ top_spending_orgs, top_spending_measures }) => ({
+            top_spending_orgs: _.map(
+              top_spending_orgs,
+              ({ name, covid_summary }) => ({
+                name,
+                spending: _.chain(covid_summary)
+                  .first()
+                  .get("covid_expenditures")
+                  .thru(({ vote, stat }) => vote + stat)
+                  .value(),
+              })
+            ),
+            top_spending_measures: _.map(
+              top_spending_measures,
+              ({ name, covid_data }) => ({
+                name,
+                spending: _.chain(covid_data)
+                  .first()
+                  .get("covid_expenditures")
+                  .reduce((memo, { vote, stat }) => memo + vote + stat, 0)
+                  .value(),
+              })
+            ),
+          }))
           .value()
       )
 );
