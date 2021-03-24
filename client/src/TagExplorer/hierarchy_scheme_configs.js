@@ -26,6 +26,7 @@ const tag_configs = _.chain(Tag.tag_roots)
         data: {
           name: tag.name,
           resources: get_resources_for_subject(tag, year),
+          is_m2m: tag.is_m2m,
           subject: tag,
           defs:
             tag.is_lowest_level_tag &&

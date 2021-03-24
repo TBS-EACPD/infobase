@@ -114,6 +114,15 @@ export const get_col_defs = ({ year }) => [
     get_val: (node) => _.get(node, "data.resources.spending"),
     val_display: (val) =>
       _.isNumber(val) ? <Format type="compact1" content={val} /> : null,
+    first_node_m2m_display: (val) =>
+      _.isNumber(val) ? (
+        <Format
+          type="compact1"
+          content={val}
+          in_parenthesis
+          style={{ opacity: 0.5 }}
+        />
+      ) : null,
   },
   {
     id: "ftes",
@@ -132,6 +141,15 @@ export const get_col_defs = ({ year }) => [
     get_val: (node) => _.get(node, "data.resources.ftes"),
     val_display: (val) =>
       _.isNumber(val) ? <Format type="big_int" content={val} /> : null,
+    first_node_m2m_display: (val) =>
+      _.isNumber(val) ? (
+        <Format
+          type="big_int"
+          content={val}
+          in_parenthesis
+          style={{ opacity: 0.5 }}
+        />
+      ) : null,
   },
 ];
 
