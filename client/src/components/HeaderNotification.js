@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import { trivial_text_maker } from "src/models/text.js";
 import "./HeaderNotification.scss";
 

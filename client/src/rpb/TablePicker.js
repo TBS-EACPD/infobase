@@ -11,7 +11,6 @@ import { AlertBanner, TagCloud } from "src/components/index.js";
 
 import { Table } from "src/core/TableClass.js";
 
-
 import { TextMaker, text_maker } from "./rpb_text_provider.js";
 import {
   categories,

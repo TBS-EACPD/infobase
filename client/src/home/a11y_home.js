@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-
 import {
   create_text_maker_component,
   AlertBanner,

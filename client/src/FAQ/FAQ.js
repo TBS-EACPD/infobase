@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-
 import {
   LabeledTable,
   create_text_maker_component,
@@ -12,7 +11,6 @@ import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "src/core/NavComponents.js";
-
 
 import { faq_data } from "./faq_data.js";
 

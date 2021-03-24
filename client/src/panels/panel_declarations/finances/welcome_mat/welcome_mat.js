@@ -18,7 +18,6 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
 import { format_and_get_fte } from "./welcome_mat_fte.js";
 

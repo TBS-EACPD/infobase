@@ -1,7 +1,10 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { create_text_maker_component, BackToTop } from "src/components/index.js";
+import {
+  create_text_maker_component,
+  BackToTop,
+} from "src/components/index.js";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 
@@ -12,7 +15,6 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents.js";
 import { Table } from "src/core/TableClass.js";
-
 
 import { rpb_link } from "src/rpb/rpb_link.js";
 

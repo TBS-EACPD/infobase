@@ -10,7 +10,10 @@ import {
   HeightClippedGraph,
 } from "src/panels/panel_declarations/shared.js";
 
-import { default_dept_name_sort_func, SmartDisplayTable } from "src/components/index.js";
+import {
+  default_dept_name_sort_func,
+  SmartDisplayTable,
+} from "src/components/index.js";
 
 import { LateDepartmentsBanner } from "./result_components.js";
 import {

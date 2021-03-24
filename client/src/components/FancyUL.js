@@ -3,7 +3,6 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 
-
 import "./FancyUL.scss";
 
 export const FancyUL = ({ className, title, TitleComponent, children }) => (

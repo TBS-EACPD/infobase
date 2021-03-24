@@ -2,7 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-
 import { get_client_id, log_standard_event } from "src/core/analytics.js";
 
 import { textRed } from "src/core/color_defs.js";

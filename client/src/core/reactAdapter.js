@@ -1,7 +1,6 @@
 import _ from "lodash";
 import ReactDOM from "react-dom";
 
-
 class ReactContentRenderer {
   constructor() {
     this.nodes = [];

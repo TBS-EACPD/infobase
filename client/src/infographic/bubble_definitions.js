@@ -14,7 +14,6 @@ import {
   IconHelp,
 } from "src/icons/icons.js";
 
-
 import { infograph_href_template } from "./infographic_link.js";
 
 import text from "./bubble_definitions.yaml";

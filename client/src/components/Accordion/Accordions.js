@@ -11,7 +11,6 @@ import { textLightColor } from "src/core/color_defs.js";
 
 import { IconChevron } from "src/icons/icons.js";
 
-
 import "./Accordions.scss";
 
 const get_accordion_label = (isExpanded) =>

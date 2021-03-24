@@ -14,7 +14,6 @@ import { Format, SmartDisplayTable } from "src/components/index.js";
 
 import { textGreen, textRed } from "src/core/color_defs.js";
 
-
 import text from "./dp_rev_split.yaml";
 
 const { text_maker } = create_text_maker_component(text);
