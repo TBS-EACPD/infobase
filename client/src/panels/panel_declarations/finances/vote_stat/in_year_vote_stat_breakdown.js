@@ -9,7 +9,10 @@ import {
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import {
+  SmartDisplayTable,
+  default_dept_name_sort_func,
+} from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
 
@@ -22,8 +25,6 @@ import { WrappedNivoTreemap } from "src/charts/wrapped_nivo/index.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";
 
 import { text_maker, TM } from "./vote_stat_text_provider.js";
-
-const { SmartDisplayTable, default_dept_name_sort_func } = util_components;
 
 const main_col = "{{est_in_year}}_estimates";
 

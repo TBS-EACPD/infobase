@@ -5,15 +5,13 @@ import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_pan
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 
-import * as util_components from "src/components/index.js";
+import { KeyConceptList } from "src/components/index.js";
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import covid_questions from "./covid_key_concepts.yaml";
-
-const { KeyConceptList } = util_components;
 
 const { TM } = covid_create_text_maker_component([
   covid_questions,

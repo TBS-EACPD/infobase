@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index.js";
 
 import { ResultCounts, current_drr_key } from "src/models/results.js";
 import { Subject } from "src/models/subject.js";
@@ -24,7 +24,6 @@ import simplographic_text from "./simplographic.yaml";
 import "./simplographic.scss";
 
 const { Gov, Dept } = Subject;
-const { create_text_maker_component } = util_components;
 
 const { text_maker, TM } = create_text_maker_component(simplographic_text);
 

@@ -9,9 +9,7 @@ import {
 } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import { create_text_maker_component, Format } from "src/components/index.js";
 
 import { run_template } from "src/models/text.js";
 
@@ -27,8 +25,6 @@ import { format_and_get_fte } from "./welcome_mat_fte.js";
 
 import text from "./welcome_mat.yaml";
 import "./welcome-mat.scss";
-
-const { Format } = util_components;
 
 const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);

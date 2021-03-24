@@ -5,9 +5,11 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import {
+  create_text_maker_component,
+  HeightClipper,
+  CardList,
+} from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
 
@@ -20,7 +22,6 @@ import text from "./tags_related_to_subject_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component([text, hierarchy_text]);
 const { Dept, Tag, Program } = Subject;
-const { HeightClipper, CardList } = util_components;
 
 const scheme_order = ["GOCO", "WWH", "CCOFOG", "HWH"];
 

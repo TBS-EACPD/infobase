@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import { HeightClipper } from "src/components/index.js";
 
 import { create_text_maker } from "src/models/text.js";
 
@@ -23,7 +23,6 @@ import {
 import text from "./hierarchy_panels.yaml";
 
 const text_maker = create_text_maker(text);
-const { HeightClipper } = util_components;
 
 export const declare_portfolio_structure_intro_panel = () =>
   declare_panel({

@@ -7,9 +7,7 @@ import {
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import { create_text_maker_component } from "src/components/index.js";
 
 import { highlightColor, secondaryColor } from "src/core/color_defs.js";
 import { formats } from "src/core/format.js";

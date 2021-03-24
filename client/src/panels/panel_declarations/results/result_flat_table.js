@@ -5,7 +5,11 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import {
+  SpinnerWrapper,
+  SmartDisplayTable,
+  sort_func_template,
+} from "src/components/index.js";
 
 import { ModalButton } from "src/components/index.js";
 
@@ -35,12 +39,6 @@ import {
 } from "./results_common.js";
 
 import "./result_flat_table.scss";
-
-const {
-  SpinnerWrapper,
-  SmartDisplayTable,
-  sort_func_template,
-} = util_components;
 
 const { current_drr_key } = Results;
 const { months } = businessConstants;

@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import { create_text_maker_component } from "src/components/index.js";
 
 import { CheckBox } from "src/components";
 import { IconQuestion } from "src/icons/icons.js";

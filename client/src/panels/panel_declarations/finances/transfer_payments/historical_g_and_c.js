@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import { SmartDisplayTable } from "src/components/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
@@ -26,7 +26,6 @@ import { text_maker, TM } from "./gnc_text_provider.js";
 
 const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;
-const { SmartDisplayTable } = util_components;
 
 const exp_years = std_years.map((year) => year + "exp");
 

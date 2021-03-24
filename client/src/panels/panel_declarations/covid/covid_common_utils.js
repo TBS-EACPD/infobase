@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import * as util_components from "src/components/index.js";
+import { TabLoadingWrapper } from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.js";
 
@@ -10,7 +10,6 @@ import { lang } from "src/core/injected_build_constants.js";
 import { ToggleVoteStatProvider } from "./covid_common_components.js";
 
 const { estimates_docs } = businessConstants;
-const { TabLoadingWrapper } = util_components;
 
 const get_tabbed_content_props = (tab_content_configs, panel_args) => {
   const configs_for_level = _.filter(tab_content_configs, ({ levels }) =>

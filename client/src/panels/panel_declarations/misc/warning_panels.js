@@ -3,9 +3,12 @@ import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import {
+  create_text_maker_component,
+  AlertBanner,
+  KeyConceptList,
+  MultiColumnList,
+} from "src/components/index.js";
 
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes.js";
 
@@ -23,7 +26,6 @@ const { TM, text_maker } = create_text_maker_component([
 ]);
 const { Dept } = Subject;
 const { result_docs_in_tabling_order } = Results;
-const { AlertBanner, KeyConceptList, MultiColumnList } = util_components;
 
 const WarningPanel = ({
   banner_class = "info",

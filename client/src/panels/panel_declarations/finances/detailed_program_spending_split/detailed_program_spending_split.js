@@ -10,7 +10,7 @@ import {
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import { create_text_maker_component, Select } from "src/components/index.js";
 
 import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
@@ -44,8 +44,6 @@ import { infograph_href_template } from "src/infographic/infographic_link.js";
 import text from "./detailed_program_spending_split.yaml";
 
 const { std_years } = year_templates;
-
-const { create_text_maker_component, Select } = util_components;
 
 const { sos } = businessConstants;
 

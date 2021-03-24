@@ -6,9 +6,10 @@ import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_com
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import {
+  create_text_maker_component,
+  SmartDisplayTable,
+} from "src/components/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
@@ -25,7 +26,6 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
 
 import text from "./goco.yaml";
 
-const { SmartDisplayTable } = util_components;
 const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);

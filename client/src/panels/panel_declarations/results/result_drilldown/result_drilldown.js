@@ -11,15 +11,13 @@ import {
   result_docs_in_tabling_order,
 } from "src/panels/panel_declarations/results/results_common.js";
 
-import * as util_components from "src/components/index.js";
+import { SpinnerWrapper } from "src/components/index.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
 
 import { get_source_links } from "src/metadata/data_sources.js";
 
 import ResultsExplorer from "./results_scheme.js";
-
-const { SpinnerWrapper } = util_components;
 
 class SingleSubjResultsContainer extends React.Component {
   constructor(props) {
