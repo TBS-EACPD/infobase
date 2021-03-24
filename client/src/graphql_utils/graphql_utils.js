@@ -132,7 +132,7 @@ export const query_logging_wrapper = (
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
-        MISC2: `Covid measures, took ${resp_time} ms - ${error.toString()}`,
+        MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
       });
       throw error;
     });
