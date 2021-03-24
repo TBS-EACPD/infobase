@@ -77,8 +77,6 @@ export const query_all_covid_measures = query_logging_wrapper(
               covid_measures {
                 id
                 name
-            
-                ${years_with_covid_data}
               }
             }
           }
@@ -286,10 +284,6 @@ export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
       )
 );
 
-const covid_count_query_fields = `
-  with_authorities
-  with_spending
-`;
 const common_covid_summary_fields = `
   id
 
@@ -314,13 +308,6 @@ export const query_gov_covid_summaries = query_logging_wrapper(
                 id
                 covid_summary {
                   ${common_covid_summary_fields}
-                  
-                  measure_counts {
-                    ${covid_count_query_fields}
-                  }
-                  org_counts {
-                    ${covid_count_query_fields}
-                  }
                 }
               }
             }
@@ -370,13 +357,6 @@ export const query_gov_covid_summary = query_logging_wrapper(
                 id
                 covid_summary(fiscal_year: $fiscal_year) {
                   ${common_covid_summary_fields}
-                  
-                  measure_counts {
-                    ${covid_count_query_fields}
-                  }
-                  org_counts {
-                    ${covid_count_query_fields}
-                  }
                 }
               }
             }
@@ -438,6 +418,7 @@ export const query_top_covid_spending = query_logging_wrapper(
                   top_spending_orgs(top_x: $top_x) {
                     id
                     name
+
                     covid_summary(fiscal_year: $fiscal_year) {
                       fiscal_year
         
