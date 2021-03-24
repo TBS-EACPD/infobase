@@ -105,8 +105,16 @@ const roll_up_flat_measure_data_by_property = (
 ) =>
   _.chain(flat_measure_data)
     .groupBy(roll_up_property)
-    .flatMap((roll_up_group, roll_up_value) =>
-      _.chain(roll_up_group)
+    .flatMap((roll_up_group) => {
+      // could get this from the key arg to the predicate, but may loose the original type in the process
+      // since the key value will have been converted to a string (happens with fiscal_year below, but we
+      // know that should be an int so can just covert back ourselves)
+      const roll_up_value = _.chain(roll_up_group)
+        .first()
+        .get(roll_up_property)
+        .value();
+
+      return _.chain(roll_up_group)
         .groupBy("fiscal_year")
         .flatMap((year_group, fiscal_year) => {
           if (sub_group_property) {
@@ -115,20 +123,20 @@ const roll_up_flat_measure_data_by_property = (
               .flatMap((sub_group, sub_group_value) => ({
                 [roll_up_property]: roll_up_value,
                 [sub_group_property]: sub_group_value,
-                fiscal_year,
+                fiscal_year: +fiscal_year,
                 ...row_group_reducer(sub_group),
               }))
               .value();
           } else {
             return {
               [roll_up_property]: roll_up_value,
-              fiscal_year,
+              fiscal_year: +fiscal_year,
               ...row_group_reducer(year_group),
             };
           }
         })
-        .value()
-    )
+        .value();
+    })
     .value();
 
 export {
