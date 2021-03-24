@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-
 import { TrivialTM as TM, Format } from "src/components/index.js";
 
 import { run_template } from "src/models/text.js";
