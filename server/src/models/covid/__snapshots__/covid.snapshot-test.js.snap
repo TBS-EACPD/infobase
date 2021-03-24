@@ -62,7 +62,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -72,7 +72,7 @@ Object {
                   "vote": 3,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -82,7 +82,7 @@ Object {
                   "vote": 4,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "552",
                     "name": "Polar Knowledge Canada",
@@ -169,7 +169,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -179,7 +179,7 @@ Object {
                   "vote": 3,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -189,7 +189,7 @@ Object {
                   "vote": 4,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "552",
                     "name": "Polar Knowledge Canada",
@@ -269,7 +269,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -279,7 +279,7 @@ Object {
                   "vote": 3,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "552",
                     "name": "Polar Knowledge Canada",
@@ -306,7 +306,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 5,
+                  "month_last_updated": 4,
                   "org": Object {
                     "id": "552",
                     "name": "Polar Knowledge Canada",
@@ -377,7 +377,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -387,7 +387,7 @@ Object {
                   "vote": 3,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "552",
                     "name": "Polar Knowledge Canada",
@@ -438,7 +438,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -448,7 +448,7 @@ Object {
                   "vote": 0,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -505,7 +505,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -515,7 +515,7 @@ Object {
                   "vote": 0,
                 },
                 Object {
-                  "month_last_updated": 3,
+                  "month_last_updated": 2,
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -574,7 +574,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "month_last_updated": 3,
+              "month_last_updated": 2,
               "stat": 21,
               "vote": 21,
             },
@@ -626,7 +626,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "month_last_updated": 5,
+              "month_last_updated": 4,
               "stat": 999,
               "vote": 7,
             },
@@ -682,7 +682,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "month_last_updated": 3,
+              "month_last_updated": 2,
               "stat": 21,
               "vote": 21,
             },
@@ -773,7 +773,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "month_last_updated": 3,
+              "month_last_updated": 2,
               "stat": 6,
               "vote": 6,
             },
@@ -788,7 +788,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "month_last_updated": 5,
+              "month_last_updated": 4,
               "stat": 0,
               "vote": 0,
             },
@@ -816,7 +816,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "month_last_updated": 3,
+              "month_last_updated": 2,
               "stat": 6,
               "vote": 6,
             },
@@ -873,7 +873,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
-                    "month_last_updated": 3,
+                    "month_last_updated": 2,
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -924,7 +924,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
-                    "month_last_updated": 3,
+                    "month_last_updated": 2,
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -964,7 +964,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
-                    "month_last_updated": 3,
+                    "month_last_updated": 2,
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -995,7 +995,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
-                    "month_last_updated": 3,
+                    "month_last_updated": 2,
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1036,7 +1036,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
-                    "month_last_updated": 3,
+                    "month_last_updated": 2,
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1083,7 +1083,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
-                    "month_last_updated": 3,
+                    "month_last_updated": 2,
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
