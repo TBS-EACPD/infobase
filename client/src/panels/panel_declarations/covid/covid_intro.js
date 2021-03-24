@@ -11,6 +11,8 @@ import { Subject } from "src/models/subject.js";
 
 import { TabLoadingSpinner } from "src/components";
 
+import { format_month_last_updated } from "./covid_common_utils.js";
+
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
 import text from "./covid_intro.yaml";
@@ -85,6 +87,10 @@ class CovidIntroPanelDyanmicText extends React.Component {
               args={{
                 ...panel_args,
                 fiscal_year: latest_expenditures_summary.fiscal_year,
+                last_updated_date: format_month_last_updated(
+                  latest_expenditures_summary.fiscal_year,
+                  latest_expenditures_summary.summary.month_last_updated
+                ),
                 gov_total_covid_expenditures:
                   latest_expenditures_summary.summary.vote +
                   latest_expenditures_summary.summary.stat,

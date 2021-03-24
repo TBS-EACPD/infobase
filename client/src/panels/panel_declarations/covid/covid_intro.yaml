@@ -25,14 +25,14 @@ covid_intro_est:
 covid_intro_exp:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year fiscal_year}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, federal organizations reported **total estimated
+    In **{{fmt_year_to_fiscal_year fiscal_year}}**, as of **{{last_updated_date}}**, federal organizations reported **total estimated
     expenditures of {{fmt_compact1_written gov_total_covid_expenditures}}** against COVID-19 measures, which correspond with the measures announced as part of the
     {{ext_link "COVID-19 Economic Response Plan (ERP)" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}}
     (i.e., Chapters 1 and 2 of the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}).
     These estimated expenditures do not represent the implementation status or results achieved for a measure.
     Implementing organizations (departments, agencies, and Crown corporations) are best positioned to speak to the implementation status of a measure.
   fr: |
-    En **{{fmt_year_to_fiscal_year fiscal_year}}**, à partir de **{{COVID_LAST_REFRESHED_MONTH}}**, les organisations fédérales avaient déclaré des **dépenses
+    En **{{fmt_year_to_fiscal_year fiscal_year}}**, à partir de **{{last_updated_date}}**, les organisations fédérales avaient déclaré des **dépenses
     estimées totalisant {{fmt_compact1_written gov_total_covid_expenditures}}** pour les mesures liées à la pandémie, qui correspondent aux mesures annoncées dans le cadre du
     {{ext_link "Plan d’intervention économique pour répondre à la COVID-19 (PRO)" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}}
     (c'est-à-dire les chapitres 1 et 2 de {{ext_link "l'Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}).
@@ -69,8 +69,8 @@ covid_intro_static_text:
 covid_intro_dynamic_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{COVID_LAST_REFRESHED_MONTH}}**, **{{orgs_with_authorities}}** organizations
+    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{last_updated_date}}**, **{{orgs_with_authorities}}** organizations
     across the Government of Canada have been granted authorities to spend in support of the **{{measures_with_authorities}}** COVID-19 measures presented in the Estimates.
   fr: |
-    En **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, à partir de **{{COVID_LAST_REFRESHED_MONTH}}**, **{{orgs_with_authorities}}** organisations gouvernementales ont reçu l'autorisation de dépenser pour financer
+    En **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, à partir de **{{last_updated_date}}**, **{{orgs_with_authorities}}** organisations gouvernementales ont reçu l'autorisation de dépenser pour financer
     **{{measures_with_authorities}}** mesures au titre de la COVID-19 figurant dans les budgets des dépenses.
