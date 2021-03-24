@@ -139,6 +139,25 @@ const roll_up_flat_measure_data_by_property = (
     })
     .value();
 
+const format_month_last_updated = (fiscal_year, month_last_updated) => {
+  const calendar_year = (() => {
+    if (month_last_updated > 3) {
+      return fiscal_year;
+    } else {
+      return fiscal_year + 1;
+    }
+  })();
+
+  // little quirk of Date, day zero of a given month returns the last day of the prior month
+  const end_of_month_date = new Date(calendar_year, month_last_updated + 1, 0);
+
+  return new Intl.DateTimeFormat(`${lang}-CA`, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(end_of_month_date);
+};
+
 export {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -148,4 +167,5 @@ export {
   get_est_doc_glossary_key,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
+  format_month_last_updated,
 };

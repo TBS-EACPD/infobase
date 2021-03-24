@@ -33,6 +33,7 @@ import {
   wrap_with_vote_stat_controls,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
+  format_month_last_updated,
 } from "./covid_common_utils.js";
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -366,13 +367,19 @@ class CovidExpendituresPanel extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const gov_covid_expenditures_in_year =
-        summary_by_fiscal_year[selected_year].vote +
-        summary_by_fiscal_year[selected_year].stat;
+      const { month_last_updated, vote, stat } = summary_by_fiscal_year[
+        selected_year
+      ];
+
+      const gov_covid_expenditures_in_year = vote + stat;
 
       const extended_panel_args = {
         ...panel_args,
         selected_year,
+        last_updated_date: format_month_last_updated(
+          selected_year,
+          month_last_updated
+        ),
         gov_covid_expenditures_in_year,
       };
 
