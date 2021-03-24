@@ -25,7 +25,7 @@ const tag_configs = _.chain(Tag.tag_roots)
         id: tag.guid,
         data: {
           name: tag.name,
-          resources: is_m2m ? null : get_resources_for_subject(tag, year),
+          resources: get_resources_for_subject(tag, year),
           subject: tag,
           defs:
             tag.is_lowest_level_tag &&
