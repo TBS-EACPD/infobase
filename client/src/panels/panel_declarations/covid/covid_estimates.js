@@ -454,7 +454,7 @@ const tab_content_configs = [
       (() => {
         if (subject.level === "dept") {
           return query_org_covid_summary({
-            id: subject.id,
+            org_id: subject.id,
             fiscal_year: selected_year,
           });
         } else {
@@ -485,7 +485,7 @@ const tab_content_configs = [
       (() => {
         if (subject.level === "dept") {
           return query_org_covid_estimates_by_measure_id({
-            id: subject.id,
+            org_id: subject.id,
             fiscal_year: selected_year,
           });
         } else {
