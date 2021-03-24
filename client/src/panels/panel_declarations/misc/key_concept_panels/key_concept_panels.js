@@ -4,15 +4,16 @@ import React from "react";
 import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components.js";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 
-import * as util_components from "src/components/index.js";
+import {
+  create_text_maker_component,
+  KeyConceptList,
+} from "src/components/index.js";
 
 import common_lang from "./common_questions.yaml";
 import fin_lang from "./financial_questions.yaml";
 import ppl_lang from "./people_questions.yaml";
 import results_lang from "./results_questions.yaml";
 import tag_lang from "./tagging_questions.yaml";
-
-const { create_text_maker_component, KeyConceptList } = util_components;
 
 const { TM } = create_text_maker_component([
   common_lang,

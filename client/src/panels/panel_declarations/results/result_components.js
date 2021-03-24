@@ -1,7 +1,11 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import * as util_components from "src/components/index.js";
+import {
+  HeightClipper,
+  FilterTable,
+  AlertBanner,
+} from "src/components/index.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -36,7 +40,6 @@ const {
   indicator_previous_actual_text,
 } = indicator_text_functions;
 
-const { HeightClipper, FilterTable, AlertBanner } = util_components;
 const { sanitized_marked } = general_utils;
 
 const IndicatorResultDisplay = (props) => {

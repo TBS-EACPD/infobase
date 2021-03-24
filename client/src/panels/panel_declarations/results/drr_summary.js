@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
+import { SmartDisplayTable } from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.js";
 import * as Results from "src/models/results.js";
@@ -34,7 +34,6 @@ import {
 import "./drr_summary.scss";
 
 const { result_simple_statuses } = businessConstants;
-const { SmartDisplayTable } = util_components;
 const { current_drr_key, result_docs } = Results;
 
 const current_drr_year = result_docs[current_drr_key].year;

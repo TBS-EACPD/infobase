@@ -8,9 +8,7 @@ import {
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import * as util_components from "src/components/index.js";
-
-const { create_text_maker_component } = util_components;
+import { create_text_maker_component, Details } from "src/components/index.js";
 
 import { GraphOverlay } from "src/components/index.js";
 
@@ -34,8 +32,6 @@ import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
-
-const { Details } = util_components;
 
 const { std_years, planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);

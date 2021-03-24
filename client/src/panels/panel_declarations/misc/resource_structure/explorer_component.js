@@ -1,9 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import * as util_components from "src/components/index.js";
-
-const { TabbedControls } = util_components;
+import { TabbedControls } from "src/components/index.js";
 
 import { run_template } from "src/models/text.js";
 
