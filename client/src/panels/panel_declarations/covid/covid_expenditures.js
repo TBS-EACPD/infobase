@@ -16,6 +16,7 @@ import {
   query_gov_covid_summaries,
   query_top_covid_spending_query,
   query_all_covid_expenditures_by_measure_id,
+  query_org_covid_expenditures_by_measure_id,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
@@ -341,19 +342,20 @@ const tab_content_configs = [
     levels: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
     load_data: ({ subject, selected_year }) =>
-      ensure_loaded({
-        covid_expenditures: true,
-        covid_year: selected_year,
-        subject,
-      }).then(() => ({
-        covid_expenditures:
-          subject.level === "gov"
-            ? CovidMeasure.gov_data_by_measure("expenditures")
-            : CovidMeasure.org_lookup_data_by_measure(
-                "expenditures",
-                subject.id
-              ),
-      })),
+      (() => {
+        if (subject.level === "dept") {
+          return query_org_covid_expenditures_by_measure_id({
+            org_id: subject.id,
+            fiscal_year: selected_year,
+          });
+        } else {
+          return query_all_covid_expenditures_by_measure_id({
+            fiscal_year: selected_year,
+          });
+        }
+      })().then((data) =>
+        roll_up_flat_measure_data_by_property(data, "measure_id")
+      ),
     TabContent: ByMeasureTab,
   },
 ];
