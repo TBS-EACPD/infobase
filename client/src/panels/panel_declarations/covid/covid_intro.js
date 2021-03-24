@@ -33,14 +33,14 @@ class CovidIntroPanelDyanmicText extends React.Component {
       const [latest_estimates_summary, latest_expenditures_summary] = _.map(
         ["estimates", "expenditures"],
         (data_type) => {
-          const last_fiscal_year_for_type = +_.last(
+          const fiscal_year = +_.last(
             YearsWithCovidData.lookup("gov")[`years_with_${data_type}`]
           );
 
           return {
-            fiscal_year: last_fiscal_year_for_type,
+            fiscal_year,
             summary: _.chain(covid_summaries)
-              .find({ fiscal_year: +last_fiscal_year_for_type })
+              .find({ fiscal_year })
               .get(`covid_${data_type}`)
               .value(),
           };

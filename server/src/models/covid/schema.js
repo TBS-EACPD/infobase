@@ -43,8 +43,8 @@ const schema = `
   }
 
   type YearsWithCovidData {
-    years_with_estimates: [String]
-    years_with_expenditures: [String]
+    years_with_estimates: [Int]
+    years_with_expenditures: [Int]
   }
 
   type CovidData {
