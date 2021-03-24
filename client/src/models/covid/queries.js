@@ -96,18 +96,6 @@ const covid_estimates_fields = `
   vote
   stat
 `;
-const covid_estimates_by_measure_query_fragment = `
-  id
-  
-  covid_data(fiscal_year: $fiscal_year) {
-    fiscal_year
-
-    covid_estimates {
-      org_id
-      ${covid_estimates_fields}
-    }
-  }
-`;
 export const query_all_covid_estimates_by_measure_id = query_logging_wrapper(
   "all_covid_estimates_by_measure",
   ({ fiscal_year, ...logging_variables }) =>
@@ -117,7 +105,16 @@ export const query_all_covid_estimates_by_measure_id = query_logging_wrapper(
           query($lang: String!, $fiscal_year: Int) {
             root(lang: $lang) {
               covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
-                ${covid_estimates_by_measure_query_fragment}
+                id
+  
+                covid_data(fiscal_year: $fiscal_year) {
+                  fiscal_year
+
+                  covid_estimates {
+                    org_id
+                    ${covid_estimates_fields}
+                  }
+                }
               }
             }
           }
@@ -154,7 +151,16 @@ export const query_org_covid_estimates_by_measure_id = query_logging_wrapper(
               org(org_id: $org_id) {
                 id
                 covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
-                  ${covid_estimates_by_measure_query_fragment}
+                  id
+  
+                  covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
+                    fiscal_year
+
+                    covid_estimates {
+                      org_id
+                      ${covid_estimates_fields}
+                    }
+                  }
                 }
               }
             }
@@ -187,18 +193,6 @@ const covid_expenditures_fields = `
   vote
   stat
 `;
-const covid_expenditures_by_measure_query_fragment = `
-  id
-
-  covid_data(fiscal_year: $fiscal_year) {
-    fiscal_year
-
-    covid_expenditures {
-      org_id
-      ${covid_estimates_fields}
-    }
-  }
-`;
 export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
   "all_covid_expenditures_by_measure",
   ({ fiscal_year, ...logging_variables }) =>
@@ -208,7 +202,16 @@ export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
          query($lang: String!, $fiscal_year: Int) {
            root(lang: $lang) {
              covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
-               ${covid_expenditures_by_measure_query_fragment}
+                id
+  
+                covid_data(fiscal_year: $fiscal_year) {
+                  fiscal_year
+
+                  covid_expenditures {
+                    org_id
+                    ${covid_estimates_fields}
+                  }
+                }
              }
            }
          }
@@ -245,7 +248,16 @@ export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
               org(org_id: $org_id) {
                 id
                 covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
-                  ${covid_expenditures_by_measure_query_fragment}
+                  id
+
+                  covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
+                    fiscal_year
+
+                    covid_expenditures {
+                      org_id
+                      ${covid_estimates_fields}
+                    }
+                  }
                 }
               }
             }
