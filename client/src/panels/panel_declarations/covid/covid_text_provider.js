@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  COVID_LAST_REFRESHED_MONTH,
+  COVID_DATE_LAST_UPDATED,
   COVID_CURRENT_YEAR,
   COVID_NEXT_YEAR,
   COVID_EXPENDITUES_FLAG,
@@ -22,7 +22,7 @@ export const covid_create_text_maker_component = (text) => {
   const extended_text_maker = (key, args) =>
     text_maker(key, {
       ...args,
-      COVID_LAST_REFRESHED_MONTH,
+      COVID_DATE_LAST_UPDATED,
       COVID_CURRENT_YEAR,
       COVID_NEXT_YEAR,
       COVID_EXPENDITUES_FLAG,

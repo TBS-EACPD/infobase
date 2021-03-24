@@ -33,7 +33,7 @@ import {
   wrap_with_vote_stat_controls,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
-  format_month_last_updated,
+  get_date_last_updated,
 } from "./covid_common_utils.js";
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -376,7 +376,7 @@ class CovidExpendituresPanel extends React.Component {
       const extended_panel_args = {
         ...panel_args,
         selected_year,
-        last_updated_date: format_month_last_updated(
+        date_last_updated: get_date_last_updated(
           selected_year,
           month_last_updated
         ),
