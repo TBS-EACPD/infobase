@@ -106,7 +106,7 @@ const roll_up_flat_measure_data_by_property = (
   _.chain(flat_measure_data)
     .groupBy(roll_up_property)
     .flatMap((roll_up_group) => {
-      // could get this from the key arg to the predicate, but may loose the original type in the process
+      // could get this from the key arg to the predicate, but may lose the original type in the process
       // since the key value will have been converted to a string (happens with fiscal_year below, but we
       // know that should be an int so can just covert back ourselves)
       const roll_up_value = _.chain(roll_up_group)

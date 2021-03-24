@@ -20,6 +20,7 @@ const covid_estimates_fields = {
   stat: number_type,
 };
 const covid_expenditures_fields = {
+  month_last_updated: number_type,
   vote: number_type,
   stat: number_type,
 };
