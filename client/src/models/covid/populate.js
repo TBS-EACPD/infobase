@@ -36,7 +36,7 @@ export const api_load_years_with_covid_data = (subject) => {
     return Promise.resolve();
   }
 
-  return query({ id }).then((years_with_covid_data) => {
+  return query({ org_id: id }).then((years_with_covid_data) => {
     YearsWithCovidData.create_and_register(id, years_with_covid_data);
 
     if (level === "dept") {

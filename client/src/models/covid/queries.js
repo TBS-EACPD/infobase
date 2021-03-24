@@ -42,13 +42,13 @@ export const query_gov_years_with_covid_data = query_logging_wrapper(
 );
 export const query_org_years_with_covid_data = query_logging_wrapper(
   "org_years_with_covid_data",
-  ({ id, ...logging_variables }) =>
+  ({ org_id, ...logging_variables }) =>
     client
       .query({
         query: gql`
-          query($lang: String!, $id: String!) {
+          query($lang: String!, $org_id: String!) {
             root(lang: $lang) {
-              org(org_id: $id) {
+              org(org_id: $org_id) {
                 id
                 ${years_with_covid_data}
               }
@@ -57,7 +57,7 @@ export const query_org_years_with_covid_data = query_logging_wrapper(
         `,
         variables: {
           lang,
-          id,
+          org_id,
           ...logging_variables,
         },
       })
@@ -145,13 +145,13 @@ export const query_all_covid_estimates_by_measure_id = query_logging_wrapper(
 );
 export const query_org_covid_estimates_by_measure_id = query_logging_wrapper(
   "org_covid_estimates_by_measure",
-  ({ id, fiscal_year, ...logging_variables }) =>
+  ({ org_id, fiscal_year, ...logging_variables }) =>
     client
       .query({
         query: gql`
-          query($lang: String!, $id: String!, $fiscal_year: Int) {
+          query($lang: String!, $org_id: String!, $fiscal_year: Int) {
             root(lang: $lang) {
-              org(org_id: $id) {
+              org(org_id: $org_id) {
                 id
                 covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
                   ${covid_estimates_by_measure_query_fragment}
@@ -162,7 +162,7 @@ export const query_org_covid_estimates_by_measure_id = query_logging_wrapper(
         `,
         variables: {
           lang,
-          id,
+          org_id,
           fiscal_year,
           ...logging_variables,
         },
@@ -236,13 +236,13 @@ export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
 );
 export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
   "org_covid_expenditures_by_measure",
-  ({ id, fiscal_year, ...logging_variables }) =>
+  ({ org_id, fiscal_year, ...logging_variables }) =>
     client
       .query({
         query: gql`
-          query($lang: String!, $id: String!, $fiscal_year: Int) {
+          query($lang: String!, $org_id: String!, $fiscal_year: Int) {
             root(lang: $lang) {
-              org(org_id: $id) {
+              org(org_id: $org_id) {
                 id
                 covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
                   ${covid_expenditures_by_measure_query_fragment}
@@ -253,7 +253,7 @@ export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
         `,
         variables: {
           lang,
-          id,
+          org_id,
           fiscal_year,
           ...logging_variables,
         },
@@ -323,13 +323,13 @@ export const query_gov_covid_summaries = query_logging_wrapper(
 );
 export const query_org_covid_summaries = query_logging_wrapper(
   "org_covid_summaries",
-  ({ id, ...logging_variables }) =>
+  ({ org_id, ...logging_variables }) =>
     client
       .query({
         query: gql`
-          query($lang: String!, $id: String!) {
+          query($lang: String!, $org_id: String!) {
             root(lang: $lang) {
-              org(org_id: $id) {
+              org(org_id: $org_id) {
                 id
                 covid_summary {
                   ${common_covid_summary_fields}
@@ -340,7 +340,7 @@ export const query_org_covid_summaries = query_logging_wrapper(
         `,
         variables: {
           lang,
-          id,
+          org_id,
           ...logging_variables,
         },
       })
@@ -382,13 +382,13 @@ export const query_gov_covid_summary = query_logging_wrapper(
 );
 export const query_org_covid_summary = query_logging_wrapper(
   "org_covid_summary",
-  ({ id, fiscal_year, ...logging_variables }) =>
+  ({ org_id, fiscal_year, ...logging_variables }) =>
     client
       .query({
         query: gql`
-          query($lang: String!, $id: String!, $fiscal_year: Int!) {
+          query($lang: String!, $org_id: String!, $fiscal_year: Int!) {
             root(lang: $lang) {
-              org(org_id: $id) {
+              org(org_id: $org_id) {
                 id
                 covid_summary(fiscal_year: $fiscal_year) {
                   ${common_covid_summary_fields}
@@ -399,7 +399,7 @@ export const query_org_covid_summary = query_logging_wrapper(
         `,
         variables: {
           lang,
-          id,
+          org_id,
           fiscal_year,
           ...logging_variables,
         },
