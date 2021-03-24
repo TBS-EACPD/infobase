@@ -170,7 +170,6 @@ export const query_org_covid_estimates_by_measure_id = query_logging_wrapper(
       .then((response) =>
         _.chain(response)
           .get("data.root.org.covid_estimates_by_measure")
-          .groupBy("id")
           .flatMap(({ id: measure_id, covid_data }) =>
             _.flatMap(covid_data, ({ fiscal_year, covid_estimates }) =>
               _.map(covid_estimates, (row) => ({
