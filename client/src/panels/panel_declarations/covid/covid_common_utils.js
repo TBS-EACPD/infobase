@@ -83,6 +83,54 @@ const string_sort_func = (a, b) => {
   return 0;
 };
 
+const summable_data_keys = ["stat", "vote"];
+const row_group_reducer = (group) => {
+  const keys_to_sum_over = _.chain(group)
+    .first()
+    .keys()
+    .intersection(summable_data_keys)
+    .value();
+
+  return _.reduce(group, (memo, row) =>
+    _.chain(keys_to_sum_over)
+      .map((key) => [key, _.get(memo, key, 0) + _.get(row, key, 0)])
+      .fromPairs()
+      .value()
+  );
+};
+const roll_up_flat_measure_data_by_property = (
+  flat_measure_data,
+  roll_up_property,
+  sub_group_property = null
+) =>
+  _.chain(flat_measure_data)
+    .groupBy(roll_up_property)
+    .flatMap((roll_up_group, roll_up_value) =>
+      _.chain(roll_up_group)
+        .groupBy("fiscal_year")
+        .flatMap((year_group, fiscal_year) => {
+          if (sub_group_property) {
+            return _.chain(year_group)
+              .groupBy(sub_group_property)
+              .flatMap((sub_group, sub_group_value) => ({
+                [roll_up_property]: roll_up_value,
+                [sub_group_property]: sub_group_value,
+                fiscal_year,
+                ...row_group_reducer(sub_group),
+              }))
+              .value();
+          } else {
+            return {
+              [roll_up_property]: roll_up_value,
+              fiscal_year,
+              ...row_group_reducer(year_group),
+            };
+          }
+        })
+        .value()
+    )
+    .value();
+
 export {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -91,4 +139,5 @@ export {
   est_doc_sort_func,
   get_est_doc_glossary_key,
   string_sort_func,
+  roll_up_flat_measure_data_by_property,
 };

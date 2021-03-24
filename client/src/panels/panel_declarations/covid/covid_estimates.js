@@ -14,8 +14,8 @@ import {
   query_gov_covid_summaries,
   query_gov_covid_summary,
   query_org_covid_summary,
-  query_all_covid_estimates_by_measure,
-  query_org_covid_estimates_by_measure,
+  query_all_covid_estimates_by_measure_id,
+  query_org_covid_estimates_by_measure_id,
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
@@ -41,6 +41,7 @@ import {
   get_est_doc_order,
   get_est_doc_glossary_key,
   string_sort_func,
+  roll_up_flat_measure_data_by_property,
 } from "./covid_common_utils.js";
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -469,10 +470,10 @@ const tab_content_configs = [
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ subject, selected_year }) =>
-      query_all_covid_estimates_by_measure({ fiscal_year: selected_year }).then(
-        (data) => {
-          debugger;
-        }
+      query_all_covid_estimates_by_measure_id({
+        fiscal_year: selected_year,
+      }).then((data) =>
+        roll_up_flat_measure_data_by_property(data, "org_id", "est_doc")
       ),
     TabContent: ByDepartmentTab,
   },
@@ -483,18 +484,18 @@ const tab_content_configs = [
     load_data: ({ subject, selected_year }) =>
       (() => {
         if (subject.level === "dept") {
-          return query_org_covid_estimates_by_measure({
+          return query_org_covid_estimates_by_measure_id({
             id: subject.id,
             fiscal_year: selected_year,
           });
         } else {
-          return query_all_covid_estimates_by_measure({
+          return query_all_covid_estimates_by_measure_id({
             fiscal_year: selected_year,
           });
         }
-      })().then((data) => {
-        debugger;
-      }),
+      })().then((data) =>
+        roll_up_flat_measure_data_by_property(data, "measure_id", "est_doc")
+      ),
     TabContent: ByMeasureTab,
   },
 ];
