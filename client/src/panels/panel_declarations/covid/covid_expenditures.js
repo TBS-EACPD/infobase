@@ -14,7 +14,7 @@ import {
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import {
   query_gov_covid_summaries,
-  query_top_covid_spending_query,
+  query_top_covid_spending,
   query_all_covid_expenditures_by_measure_id,
   query_org_covid_expenditures_by_measure_id,
 } from "src/models/covid/queries.js";
@@ -299,32 +299,7 @@ const tab_content_configs = [
     levels: ["gov"],
     label: text_maker("summary_tab_label"),
     load_data: ({ selected_year }) =>
-      query_top_covid_spending_query({ fiscal_year: selected_year }).then(
-        ({ top_spending_orgs, top_spending_measures }) => ({
-          top_spending_orgs: _.map(
-            top_spending_orgs,
-            ({ name, covid_summary }) => ({
-              name,
-              spending: _.chain(covid_summary)
-                .first()
-                .get("covid_expenditures")
-                .thru(({ vote, stat }) => vote + stat)
-                .value(),
-            })
-          ),
-          top_spending_measures: _.map(
-            top_spending_measures,
-            ({ name, covid_data }) => ({
-              name,
-              spending: _.chain(covid_data)
-                .first()
-                .get("covid_expenditures")
-                .reduce((memo, { vote, stat }) => memo + vote + stat, 0)
-                .value(),
-            })
-          ),
-        })
-      ),
+      query_top_covid_spending({ fiscal_year: selected_year }),
     TabContent: SummaryTab,
   },
   {
