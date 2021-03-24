@@ -8,62 +8,6 @@ import {
 } from "src/models/storeMixins.js";
 import { trivial_text_maker } from "src/models/text.js";
 
-const flatten_data_rows = (measures, data_type) =>
-  _.flatMap(measures, (measure) =>
-    _.map(measure[data_type], (row) => ({
-      measure_id: measure.id,
-      ...row,
-    }))
-  );
-
-const summable_data_keys = ["stat", "vote"];
-const row_group_reducer = (group) => {
-  const keys_to_sum_over = _.chain(group)
-    .first()
-    .keys()
-    .intersection(summable_data_keys)
-    .value();
-
-  return _.reduce(group, (memo, row) =>
-    _.chain(keys_to_sum_over)
-      .map((key) => [key, _.get(memo, key, 0) + _.get(row, key, 0)])
-      .fromPairs()
-      .value()
-  );
-};
-const roll_up_data_by_property = (
-  data_by_measure,
-  roll_up_property,
-  sub_group_property = null
-) =>
-  _.chain(data_by_measure)
-    .groupBy(roll_up_property)
-    .flatMap((roll_up_group, roll_up_value) =>
-      _.chain(roll_up_group)
-        .groupBy("fiscal_year")
-        .flatMap((year_group, fiscal_year) => {
-          if (sub_group_property) {
-            return _.chain(year_group)
-              .groupBy(sub_group_property)
-              .flatMap((sub_group, sub_group_value) => ({
-                [roll_up_property]: roll_up_value,
-                [sub_group_property]: sub_group_value,
-                fiscal_year,
-                ...row_group_reducer(sub_group),
-              }))
-              .value();
-          } else {
-            return {
-              [roll_up_property]: roll_up_value,
-              fiscal_year,
-              ...row_group_reducer(year_group),
-            };
-          }
-        })
-        .value()
-    )
-    .value();
-
 class CovidMeasure extends mix().with(
   staticStoreMixin,
   PluralSingular,

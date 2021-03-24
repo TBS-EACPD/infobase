@@ -37,10 +37,7 @@ export const query_gov_years_with_covid_data = query_logging_wrapper(
         },
       })
       .then((response) =>
-        _.chain(response)
-          .get("data.root.gov.years_with_covid_data")
-          .omit("__typename")
-          .value()
+        _.get(response, "data.root.gov.years_with_covid_data")
       )
 );
 export const query_org_years_with_covid_data = query_logging_wrapper(
@@ -65,10 +62,7 @@ export const query_org_years_with_covid_data = query_logging_wrapper(
         },
       })
       .then((response) =>
-        _.chain(response)
-          .get("data.root.org.years_with_covid_data")
-          .omit("__typename")
-          .value()
+        _.get(response, "data.root.org.years_with_covid_data")
       )
 );
 
@@ -94,12 +88,7 @@ export const query_all_covid_measures = query_logging_wrapper(
           ...logging_variables,
         },
       })
-      .then((response) =>
-        _.chain(response)
-          .get("data.root.covid_measures")
-          .omit("__typename")
-          .value()
-      )
+      .then((response) => _.get(response, "data.root.covid_measures"))
 );
 
 const covid_estimates_fields = `
@@ -119,7 +108,7 @@ const covid_estimates_by_measure_query_fragment = `
     }
   }
 `;
-export const query_all_covid_estimates_by_measure = query_logging_wrapper(
+export const query_all_covid_estimates_by_measure_id = query_logging_wrapper(
   "all_covid_estimates_by_measure",
   ({ fiscal_year, ...logging_variables }) =>
     client
@@ -142,11 +131,19 @@ export const query_all_covid_estimates_by_measure = query_logging_wrapper(
       .then((response) =>
         _.chain(response)
           .get("data.root.covid_estimates_by_measure")
-          .omit("__typename")
+          .flatMap(({ id: measure_id, covid_data }) =>
+            _.flatMap(covid_data, ({ fiscal_year, covid_estimates }) =>
+              _.map(covid_estimates, (row) => ({
+                measure_id,
+                fiscal_year,
+                ..._.omit(row, "__typename"),
+              }))
+            )
+          )
           .value()
       )
 );
-export const query_org_covid_estimates_by_measure = query_logging_wrapper(
+export const query_org_covid_estimates_by_measure_id = query_logging_wrapper(
   "org_covid_estimates_by_measure",
   ({ id, fiscal_year, ...logging_variables }) =>
     client
@@ -173,7 +170,16 @@ export const query_org_covid_estimates_by_measure = query_logging_wrapper(
       .then((response) =>
         _.chain(response)
           .get("data.root.org.covid_estimates_by_measure")
-          .omit("__typename")
+          .groupBy("id")
+          .flatMap(({ id: measure_id, covid_data }) =>
+            _.flatMap(covid_data, ({ fiscal_year, covid_estimates }) =>
+              _.map(covid_estimates, (row) => ({
+                measure_id,
+                fiscal_year,
+                ..._.omit(row, "__typename"),
+              }))
+            )
+          )
           .value()
       )
 );
@@ -194,7 +200,7 @@ const covid_expenditures_by_measure_query_fragment = `
     }
   }
 `;
-export const query_all_covid_expenditures_by_measure = query_logging_wrapper(
+export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
   "all_covid_expenditures_by_measure",
   ({ fiscal_year, ...logging_variables }) =>
     client
@@ -217,11 +223,19 @@ export const query_all_covid_expenditures_by_measure = query_logging_wrapper(
       .then((response) =>
         _.chain(response)
           .get("data.root.covid_expenditures_by_measure")
-          .omit("__typename")
+          .flatMap(({ id: measure_id, covid_data }) =>
+            _.flatMap(covid_data, ({ fiscal_year, covid_expenditures }) =>
+              _.map(covid_expenditures, (row) => ({
+                measure_id,
+                fiscal_year,
+                ..._.omit(row, "__typename"),
+              }))
+            )
+          )
           .value()
       )
 );
-export const query_org_covid_expenditures_by_measure = query_logging_wrapper(
+export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
   "org_covid_expenditures_by_measure",
   ({ id, fiscal_year, ...logging_variables }) =>
     client
@@ -248,7 +262,15 @@ export const query_org_covid_expenditures_by_measure = query_logging_wrapper(
       .then((response) =>
         _.chain(response)
           .get("data.root.org.covid_expenditures_by_measure")
-          .omit("__typename")
+          .flatMap(({ id: measure_id, covid_data }) =>
+            _.flatMap(covid_data, ({ fiscal_year, covid_expenditures }) =>
+              _.map(covid_expenditures, (row) => ({
+                measure_id,
+                fiscal_year,
+                ..._.omit(row, "__typename"),
+              }))
+            )
+          )
           .value()
       )
 );
@@ -298,12 +320,7 @@ export const query_gov_covid_summaries = query_logging_wrapper(
           ...logging_variables,
         },
       })
-      .then((response) =>
-        _.chain(response)
-          .get("data.root.gov.covid_summary")
-          .omit("__typename")
-          .value()
-      )
+      .then((response) => _.get(response, "data.root.gov.covid_summary"))
 );
 export const query_org_covid_summaries = query_logging_wrapper(
   "org_covid_summaries",
@@ -328,12 +345,7 @@ export const query_org_covid_summaries = query_logging_wrapper(
           ...logging_variables,
         },
       })
-      .then((response) =>
-        _.chain(response)
-          .get("data.root.org.covid_summary")
-          .omit("__typename")
-          .value()
-      )
+      .then((response) => _.get(response, "data.root.org.covid_summary"))
 );
 export const query_gov_covid_summary = query_logging_wrapper(
   "gov_covid_summary",
@@ -366,11 +378,7 @@ export const query_gov_covid_summary = query_logging_wrapper(
         },
       })
       .then((response) =>
-        _.chain(response)
-          .get("data.root.gov.covid_summary")
-          .first()
-          .omit("__typename")
-          .value()
+        _.chain(response).get("data.root.gov.covid_summary").first().value()
       )
 );
 export const query_org_covid_summary = query_logging_wrapper(
@@ -398,11 +406,7 @@ export const query_org_covid_summary = query_logging_wrapper(
         },
       })
       .then((response) =>
-        _.chain(response)
-          .get("data.root.org.covid_summary")
-          .first()
-          .omit("__typename")
-          .value()
+        _.chain(response).get("data.root.org.covid_summary").first().value()
       )
 );
 
