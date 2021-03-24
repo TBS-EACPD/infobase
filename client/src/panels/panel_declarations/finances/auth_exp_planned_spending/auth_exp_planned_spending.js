@@ -8,9 +8,9 @@ import {
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { create_text_maker_component, Details } from "src/components/index.js";
+import { create_text_maker_component, Details , GraphOverlay } from "src/components/index.js";
 
-import { GraphOverlay } from "src/components/index.js";
+
 
 import FootNote from "src/models/footnotes/footnotes.js";
 import { run_template } from "src/models/text.js";

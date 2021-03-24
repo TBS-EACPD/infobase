@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component , CheckBox } from "src/components/index.js";
 
-import { CheckBox } from "src/components";
+
 import { IconQuestion } from "src/icons/icons.js";
 
 import { scroll_to_covid_key_concepts } from "./covid_key_concepts.js";

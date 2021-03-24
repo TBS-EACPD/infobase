@@ -9,9 +9,9 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   create_text_maker_component,
   SmartDisplayTable,
-} from "src/components/index.js";
+ GraphOverlay } from "src/components/index.js";
 
-import { GraphOverlay } from "src/components/index.js";
+
 
 import { Subject } from "src/models/subject.js";
 
