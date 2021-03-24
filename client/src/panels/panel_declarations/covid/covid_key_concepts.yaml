@@ -8,12 +8,12 @@ covid_questions_up_to_date_q:
 covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
   en: |
-    This data is current up to and including {{COVID_LAST_REFRESHED_MONTH}}.
+    This data is current up to and including {{COVID_DATE_LAST_UPDATED}}.
     Estimated expenditures are based on estimates that may be slightly modified in subsequent periods, and have not been audited. Organizations are responsible
     for determining how best to identify the appropriate estimated expenditures and, if required, to provide any subsequent explanation on the amounts and corresponding activities.
     {{gt "covid_above_tab_data_org_websites_note"}}
   fr: |
-    Ces données sont à jour jusqu'en {{COVID_LAST_REFRESHED_MONTH}} inclusivement.
+    Ces données sont à jour jusqu'en {{COVID_DATE_LAST_UPDATED}} inclusivement.
     Dépenses estimées sont fondés sur des estimations qui pourraient être légèrement modifiées lors de périodes ultérieures et qui n'ont pas été vérifiées.
     Il incombe aux organisations de déterminer la meilleure façon d’estimer leurs dépenses et, s’il y a lieu, de fournir ultérieurement toute
     explication requise sur les montants et les activités correspondantes. 
@@ -134,7 +134,7 @@ covid_questions_auth_but_no_exp_a:
     While many spending authorities were authorized earlier in the fiscal year, either through statutory legislation, such as the _Public Health Events 
     of National Concern Payments Act_ or the appropriation act for Supplementary Estimates (B), others were only presented in Supplementary Estimates 
     (C) in February 2021, for which final voted authority is only expected by the end of March. For these measures, organizations may not have had
-    recorded payments as of {{COVID_LAST_REFRESHED_MONTH}}.  
+    recorded payments as of {{COVID_DATE_LAST_UPDATED}}.  
 
     In comparing COVID-19 authorities and estimated expenditures, in some cases, the funding source of a measure is completely aligned with the authorities
     presented in the Estimates. In other cases, funding can include other sources of funds – for example, the use of existing resources and/or transfer of
@@ -144,7 +144,7 @@ covid_questions_auth_but_no_exp_a:
     Alors que de nombreuses autorisations de dépenses ont été accordées plus tôt au cours de l'exercice, soit par une loi habilitante, comme la 
     _Loi sur les paiements relatifs aux événements de santé publique d'intérêt national_, soit par la loi de crédits pour le budget supplémentaire (B),
     d'autres n'ont été inscrites qu'en février 2021 dans le budget supplémentaire (C), pour lequel l'autorisation votée finale n'est attendue qu'à la fin du mois de mars.
-    Pour ces mesures, il se peut que les organisations n'aient pas eu de paiements enregistrés en date du {{COVID_LAST_REFRESHED_MONTH}}.  
+    Pour ces mesures, il se peut que les organisations n'aient pas eu de paiements enregistrés en date du {{COVID_DATE_LAST_UPDATED}}.  
 
     En comparant les autorisations au titre de la COVID-19 et l’estimation des dépenses, il arrive dans certains cas que la source de financement d'une mesure
     donnée corresponde parfaitement aux autorisations figurant dans les budgets des dépenses. Dans d'autres cas, le financement peut inclure d'autres sources de

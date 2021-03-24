@@ -139,7 +139,7 @@ const roll_up_flat_measure_data_by_property = (
     })
     .value();
 
-const format_month_last_updated = (fiscal_year, month_last_updated) => {
+const get_date_last_updated = (fiscal_year, month_last_updated) => {
   const calendar_year = (() => {
     if (month_last_updated > 3) {
       return fiscal_year;
@@ -167,5 +167,5 @@ export {
   get_est_doc_glossary_key,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
-  format_month_last_updated,
+  get_date_last_updated,
 };
