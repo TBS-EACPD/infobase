@@ -11,9 +11,9 @@ import {
 import {
   create_text_maker_component,
   TabbedContent,
-} from "src/components/index.js";
+ GraphOverlay } from "src/components/index.js";
 
-import { GraphOverlay } from "src/components/index.js";
+
 
 import { businessConstants } from "src/models/businessConstants.js";
 import { Subject } from "src/models/subject.js";

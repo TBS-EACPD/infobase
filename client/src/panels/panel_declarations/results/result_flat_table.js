@@ -9,9 +9,9 @@ import {
   SpinnerWrapper,
   SmartDisplayTable,
   sort_func_template,
-} from "src/components/index.js";
+ ModalButton } from "src/components/index.js";
 
-import { ModalButton } from "src/components/index.js";
+
 
 import { businessConstants } from "src/models/businessConstants.js";
 import * as Results from "src/models/results.js";

@@ -10,9 +10,9 @@ import {
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { create_text_maker_component, Select } from "src/components/index.js";
+import { create_text_maker_component, Select , SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
-import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
+
 
 import { businessConstants } from "src/models/businessConstants.js";
 import FootNote from "src/models/footnotes/footnotes.js";
