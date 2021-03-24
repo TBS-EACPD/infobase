@@ -469,7 +469,7 @@ const tab_content_configs = [
     key: "department",
     levels: ["gov"],
     label: text_maker("by_department_tab_label"),
-    load_data: ({ subject, selected_year }) =>
+    load_data: ({ selected_year }) =>
       query_all_covid_estimates_by_measure_id({
         fiscal_year: selected_year,
       }).then((data) =>
