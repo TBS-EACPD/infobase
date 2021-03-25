@@ -147,8 +147,7 @@ export class DisplayTable extends React.Component {
       */,
       page_size_increment,
       util_components,
-      show_pagination_controls,
-      disable_pagination,
+      enable_pagination,
       page_size_num_options_max,
       disable_column_select,
     } = this.props;
@@ -320,21 +319,19 @@ export class DisplayTable extends React.Component {
 
     const paginated_data = _.chunk(
       sorted_filtered_data,
-      disable_pagination ? _.size(sorted_filtered_data) : page_size
+      !enable_pagination ? _.size(sorted_filtered_data) : page_size
     );
 
     const number_of_pages = paginated_data.length;
 
-    const page_selector = !disable_pagination &&
-      show_pagination_controls &&
-      !loading && (
-        <SelectPage
-          num_pages={number_of_pages}
-          current_page={current_page}
-          change_page={this.change_page}
-          num_col={_.size(visible_ordered_col_keys)}
-        />
-      );
+    const page_selector = enable_pagination && !loading && (
+      <SelectPage
+        num_pages={number_of_pages}
+        current_page={current_page}
+        change_page={this.change_page}
+        num_col={_.size(visible_ordered_col_keys)}
+      />
+    );
 
     return (
       <div
@@ -370,7 +367,7 @@ export class DisplayTable extends React.Component {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <div>
-                      {!disable_pagination && show_pagination_controls && (
+                      {enable_pagination && (
                         <SelectPageSize
                           selected={page_size}
                           on_select={this.change_page_size}
@@ -583,7 +580,7 @@ export class DisplayTable extends React.Component {
 }
 DisplayTable.defaultProps = {
   page_size_increment: 100,
-  show_pagination_controls: true,
+  enable_pagination: true,
   page_size_num_options_max: 5,
 };
 
@@ -609,7 +606,7 @@ export class SmartDisplayTable extends React.Component {
       <DisplayTable
         {...this.props}
         column_configs={smart_column_configs}
-        show_pagination_controls={
+        enable_pagination={
           _.size(data) > DisplayTable.defaultProps.page_size_increment
         }
       />
