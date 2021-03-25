@@ -376,6 +376,7 @@ class CovidExpendituresPanel extends React.Component {
       const extended_panel_args = {
         ...panel_args,
         selected_year,
+        next_year: +selected_year + 1,
         date_last_updated_text: get_date_last_updated_text(
           selected_year,
           month_last_updated
@@ -398,7 +399,10 @@ class CovidExpendituresPanel extends React.Component {
               selected_year={selected_year}
             />
             <AboveTabFootnoteList subject={panel_args.subject}>
-              <TM k="covid_expenditures_above_tab_footnote_list" />
+              <TM
+                k="covid_expenditures_above_tab_footnote_list"
+                args={extended_panel_args}
+              />
             </AboveTabFootnoteList>
           </div>
           {/* 

@@ -10,7 +10,9 @@ covid_expenditures_above_tab_footnote_list:
       measure, and by organization. For more details, see the FAQ item "Where does the Government normally report expenditure information (COVID, non-COVID)?"
     * {{{gt "covid_above_tab_limited_measure_note"}}}
     * {{gt "covid_above_tab_data_org_websites_note"}}
-    * {{gt "covid_above_tab_data_freshness_note"}}
+    * Final expenditures for {{fmt_year_to_fiscal_year selected_year}} will be reported in the Public Accounts of Canada {{next_year}}
+      (expected Fall {{next_year}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan (ERP) have not been audited.
+      Estimated expenditures will be refreshed monthly.
   fr: |
     * Compte tenu du contexte extraordinaire de la pandémie,
       le Secrétariat du Conseil du Trésor (le Secrétariat) s'est adressé aux organisations pour recueillir des données mensuelles sur les dépenses au titre de la COVID-19,
@@ -18,7 +20,9 @@ covid_expenditures_above_tab_footnote_list:
       Pour plus de détails, consultez la FAQ "Où le gouvernement déclare-t-il habituellement ses dépenses (COVID, non-COVID)?"
     * {{{gt "covid_above_tab_limited_measure_note"}}}
     * {{gt "covid_above_tab_data_org_websites_note"}}
-    * {{gt "covid_above_tab_data_freshness_note"}}
+    * Les dépenses finales pour {{fmt_year_to_fiscal_year selected_year}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{next_year}}).
+      Les présents rapports sur les dépenses engagées dans le cadre du Plan d'intervention économique du Canada pour répondre à la COVID-19 (PRP) n'ont pas été vérifiés.
+      Les dépenses estimées sont actualisées chaque mois.
     
 
 covid_expenditures_overview_tab_text:
