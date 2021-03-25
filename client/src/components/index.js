@@ -43,7 +43,7 @@ export { FootnoteList } from "./FootnoteList.js";
 export { AlertBanner } from "./AlertBanner.js";
 export { FancyUL } from "./FancyUL.js";
 export { DropdownMenu } from "./DropdownMenu.js";
-export { PinnedContent } from "./PinnedContent.js";
+export { PinnedContent } from "./PinnedContent/PinnedContent.js";
 
 export { GraphOverlay } from "./GraphOverlay/GraphOverlay.js";
 export {

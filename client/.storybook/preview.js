@@ -1,5 +1,7 @@
+import React from "react";
 import { addDecorator } from "@storybook/react";
 import { withConsole } from "@storybook/addon-console";
+import { MemoryRouter } from "react-router";
 
 import "src/common_css/common_css_index.side-effects.js";
 
@@ -26,3 +28,7 @@ export const parameters = {
 };
 
 addDecorator((storyFn, context) => withConsole()(storyFn)(context));
+
+addDecorator((story) => (
+  <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+));
