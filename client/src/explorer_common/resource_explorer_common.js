@@ -118,7 +118,7 @@ export const get_col_defs = ({ year }) => [
       _.isNumber(val) ? (
         <Format
           type="compact1"
-          content={val}
+          content={Math.ceil(val / 10000000) * 10000000}
           in_parenthesis
           prefix={"≤ "}
           style={{ opacity: 0.5 }}
@@ -146,7 +146,7 @@ export const get_col_defs = ({ year }) => [
       _.isNumber(val) ? (
         <Format
           type="big_int"
-          content={val}
+          content={Math.ceil(val / 100) * 100}
           in_parenthesis
           prefix={"≤ "}
           style={{ opacity: 0.5 }}
