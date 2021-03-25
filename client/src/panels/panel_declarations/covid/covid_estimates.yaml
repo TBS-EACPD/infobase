@@ -43,12 +43,12 @@ covid_estimates_summary_text_dept:
 covid_estimates_by_index_key:
   transform: [handlebars,markdown]
   en: |
-    Total COVID-19 authorities by {{gl_tt "release" "EST_DOC"}}:
+    COVID-19 authorities by {{gl_tt "release" "EST_DOC"}}:
     {{#each index_summary_stats}}
     * {{gl_tt this.[0] this.[1]}}: **{{fmt_compact1_written this.[2]}}**
     {{/each}}
   fr: |
-    Total des autorisations liées à la COVID-19 par {{gl_tt "source" "EST_DOC"}} :
+    Autorisations liées à la COVID-19 par {{gl_tt "source" "EST_DOC"}} :
     {{#each index_summary_stats}}
     * {{gl_tt this.[0] this.[1]}} : **{{fmt_compact1_written this.[2]}}**
     {{/each}}
@@ -57,19 +57,19 @@ covid_estimates_department_tab_text:
   transform: [handlebars,markdown]
   en: |
     In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{gl_tt gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
-    the organization with the largest total COVID-19 related authorities is **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
+    the organization with the largest COVID-19 related authorities was **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
   fr: |
     En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{gl_tt gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
-    l'organisation ayant le plus grand plus grand nombre d'autorisations liées à COVID-19 est **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.
+    l'organisation ayant le plus grand nombre d'autorisations liées à COVID-19 était **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.
 
 covid_estimates_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
     In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{gl_tt gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
-    the COVID-19 measure with the largest total COVID-19 related authorities is "**{{largest_measure_name}}**" with **{{fmt_compact1_written largest_measure_auth}}**.
+    the COVID-19 measure with the largest COVID-19 related authorities was "**{{largest_measure_name}}**" with **{{fmt_compact1_written largest_measure_auth}}**.
   fr: |
     En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{gl_tt gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
-    la mesure COVID-19 disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 est « **{{largest_measure_name}}** »
+    la mesure COVID-19 disposant des crédits les plus grand nombre d'autorisations liées à COVID-19 était « **{{largest_measure_name}}** »
     avec **{{fmt_compact1_written largest_measure_auth}}**.
 
 
