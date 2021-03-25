@@ -2,7 +2,6 @@ covid_estimates_panel_title:
   en: Spending Authorities by COVID-19 Measure
   fr: Autorisations de dépenser par mesure au titre de la COVID-19
 
-# COVID_YEARS_TODO need to be getting tabled doc text from data
 # Part about the ERP is going to need to be maintained, will be a problem for multiple years eventually
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
