@@ -1,11 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  create_text_maker_component,
-  CheckBox,
-  TabbedControls,
-} from "src/components/index.js";
+import { TabbedControls } from "src/components/index.js";
 
 import { formats } from "src/core/format.js";
 
@@ -13,9 +9,9 @@ import { IconQuestion } from "src/icons/icons.js";
 
 import { scroll_to_covid_key_concepts } from "./covid_key_concepts.js";
 
-import common_covid_text from "./covid_common_lang.yaml";
+import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
-const { TM } = create_text_maker_component(common_covid_text);
+const { TM } = covid_create_text_maker_component();
 
 const YearSelectionTabs = ({ years, on_select_year, selected_year }) =>
   years.length > 1 && (

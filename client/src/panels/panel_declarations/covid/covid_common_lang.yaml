@@ -39,3 +39,8 @@ show_vote_stat_split:
   transform: [handlebars]
   en: Show {{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}} amount breakout
   fr: Afficher la ventilation des montants {{gl_tt "votés" "VOTED"}} et {{gl_tt "législatifs" "STAT"}}
+
+supps_list:
+  transform: [handlebars]
+  en: Supplementary Estimates ({{array_to_grammatical_list supps_letters}})
+  fr: Budget supplémentaire des dépenses ({{array_to_grammatical_list supps_letters}})

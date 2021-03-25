@@ -14,7 +14,7 @@ import { TabLoadingSpinner } from "src/components";
 import { YearSelectionTabs } from "./covid_common_components.js";
 import {
   get_date_last_updated_text,
-  get_tabled_est_docs_text,
+  get_est_doc_list_plain_text,
 } from "./covid_common_utils.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
@@ -90,7 +90,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
                 fiscal_year: selected_year,
                 gov_tabled_est_docs_in_year_text: _.chain(covid_estimates)
                   .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
-                  .thru(get_tabled_est_docs_text)
+                  .thru(get_est_doc_list_plain_text)
                   .value(),
                 gov_covid_estimates_in_year: _.reduce(
                   covid_estimates,
