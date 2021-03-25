@@ -1,5 +1,7 @@
 import _ from "lodash";
 
+import { COVID_EXPENDITUES_FLAG } from "./covid_config.js";
+
 import { CovidMeasure } from "./CovidMeasure.js";
 import {
   query_gov_years_with_covid_data,
@@ -42,7 +44,14 @@ export const api_load_years_with_covid_data = (subject) => {
     if (level === "dept") {
       subject.set_has_data(
         "covid",
-        !_.chain(years_with_covid_data).flatMap().isEmpty().value()
+        !_.chain(years_with_covid_data)
+          .thru(({ years_with_estimates, years_with_expenditures }) =>
+            COVID_EXPENDITUES_FLAG
+              ? [...years_with_estimates, ...years_with_expenditures]
+              : years_with_estimates
+          )
+          .isEmpty()
+          .value()
       );
     }
 
