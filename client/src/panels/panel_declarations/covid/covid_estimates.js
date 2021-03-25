@@ -42,6 +42,7 @@ import {
   get_est_doc_glossary_key,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
+  get_tabled_est_docs_text,
 } from "./covid_common_utils.js";
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -531,6 +532,13 @@ class CovidEstimatesPanel extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
+      const gov_tabled_est_docs_in_year_text = _.chain(
+        summary_by_fiscal_year[selected_year]
+      )
+        .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
+        .thru(get_tabled_est_docs_text)
+        .value();
+
       const gov_covid_estimates_in_year = _.reduce(
         summary_by_fiscal_year[selected_year],
         (memo, { vote, stat }) => memo + vote + stat,
@@ -540,6 +548,7 @@ class CovidEstimatesPanel extends React.Component {
       const extended_panel_args = {
         ...panel_args,
         selected_year,
+        gov_tabled_est_docs_in_year_text,
         gov_covid_estimates_in_year,
       };
 
@@ -559,7 +568,7 @@ class CovidEstimatesPanel extends React.Component {
             <AboveTabFootnoteList subject={panel_args.subject}>
               <TM
                 k="covid_estimates_above_tab_footnote_list"
-                args={{ selected_year }}
+                args={extended_panel_args}
               />
             </AboveTabFootnoteList>
           </div>
