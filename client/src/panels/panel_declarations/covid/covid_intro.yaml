@@ -7,7 +7,6 @@ covid_intro_panel_title:
 # OGGO-ALIGNED INTRO
 #####
 
-# COVID_YEARS_TODO need to be getting tabled doc text from data
 covid_intro_est:
   transform: [handlebars,markdown]
   en: |
@@ -21,7 +20,6 @@ covid_intro_est:
     fédérales consacrées aux mesures liées à la pandémie. Il s'agit du plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude dans
     lesquelles ces mesures ont été prises en réponse à la pandémie.
 
-# COVID_YEARS_TODO need to be getting last refreshed date from data 
 covid_intro_exp:
   transform: [handlebars,markdown]
   en: |
