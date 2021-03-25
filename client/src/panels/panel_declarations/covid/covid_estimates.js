@@ -532,24 +532,34 @@ class CovidEstimatesPanel extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const gov_tabled_est_docs_in_year_text = _.chain(
+      const gov_tabled_est_docs_in_year = _.chain(
         summary_by_fiscal_year[selected_year]
       )
         .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
-        .thru(get_est_doc_list_plain_text)
+        .sortBy(get_est_doc_order)
         .value();
-
-      const gov_covid_estimates_in_year = _.reduce(
-        summary_by_fiscal_year[selected_year],
-        (memo, { vote, stat }) => memo + vote + stat,
-        0
+      const gov_latest_tabled_est_doc_in_year = _.last(
+        gov_tabled_est_docs_in_year
       );
 
       const extended_panel_args = {
         ...panel_args,
         selected_year,
-        gov_tabled_est_docs_in_year_text,
-        gov_covid_estimates_in_year,
+        gov_tabled_est_docs_in_year,
+        gov_tabled_est_docs_in_year_text: get_est_doc_list_plain_text(
+          gov_tabled_est_docs_in_year
+        ),
+        gov_latest_tabled_est_doc_in_year_text: get_est_doc_name(
+          gov_latest_tabled_est_doc_in_year
+        ),
+        gov_latest_tabled_est_doc_in_year_glossary_key: get_est_doc_glossary_key(
+          gov_latest_tabled_est_doc_in_year
+        ),
+        gov_covid_estimates_in_year: _.reduce(
+          summary_by_fiscal_year[selected_year],
+          (memo, { vote, stat }) => memo + vote + stat,
+          0
+        ),
       };
 
       const tabbed_content_props = get_tabbed_content_props(
