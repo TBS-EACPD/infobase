@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { TabbedControls } from "src/components/index.js";
+import { TabbedControls, CheckBox } from "src/components/index.js";
 
 import { formats } from "src/core/format.js";
 

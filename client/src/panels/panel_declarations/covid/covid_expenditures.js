@@ -22,6 +22,8 @@ import { Subject } from "src/models/subject.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
 
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
+
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import {
