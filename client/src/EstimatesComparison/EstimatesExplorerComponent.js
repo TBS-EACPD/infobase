@@ -5,7 +5,6 @@ import React from "react";
 import {
   SpinnerWrapper,
   FootnoteList,
-  HeightClipper,
   Format,
   RadioButtons,
   LabeledBox,
@@ -97,12 +96,10 @@ const get_non_col_content = ({ node }) => {
       )}
       {!_.isEmpty(footnotes) && (
         <div className={classNames(subject && "mrgn-bttm-lg")}>
-          <HeightClipper allowReclip={true} clipHeight={150}>
-            <Details
-              summary_content={<TM k="footnotes" />}
-              content={<FootnoteList footnotes={footnotes} />}
-            />
-          </HeightClipper>
+          <Details
+            summary_content={<TM k="footnotes" />}
+            content={<FootnoteList footnotes={footnotes} />}
+          />
         </div>
       )}
       {subject && (
