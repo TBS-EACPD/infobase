@@ -42,5 +42,5 @@ show_vote_stat_split:
 
 supps_list:
   transform: [handlebars]
-  en: Supplementary Estimates ({{array_to_grammatical_list supps_letters}})
-  fr: Budget supplémentaire des dépenses ({{array_to_grammatical_list supps_letters}})
+  en: Supplementary Estimates ({{fmt_array_to_grammatical_list supps_letters}})
+  fr: Budget supplémentaire des dépenses ({{fmt_array_to_grammatical_list supps_letters}})

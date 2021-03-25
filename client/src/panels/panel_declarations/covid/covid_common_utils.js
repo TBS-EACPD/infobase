@@ -5,6 +5,7 @@ import { TabLoadingWrapper } from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.js";
 
+import { array_to_grammatical_list } from "src/core/format.js";
 import { lang } from "src/core/injected_build_constants.js";
 
 import { ToggleVoteStatProvider } from "./covid_common_components.js";
@@ -85,7 +86,7 @@ const get_est_doc_list_plain_text = (est_docs) =>
         });
       }
     })
-    .join(" ") // TODO, need a plain language list formatter, believe I have that in a handlebar helper
+    .thru(array_to_grammatical_list)
     .value();
 
 const get_plain_string = (string) =>
