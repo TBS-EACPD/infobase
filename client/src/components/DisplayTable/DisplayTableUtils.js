@@ -87,16 +87,20 @@ export const SelectPage = ({
   };
   const extend_options_left = (option_range, page_count, current_page) => {
     if (_.first(option_range) === 1) {
+      //option range sees page 1, add 2 to the end
       return [
         ...option_range,
         _.last(option_range) + 1,
         _.last(option_range) + 2,
       ];
     } else if (_.first(option_range) === 2) {
+      //option range sees page 2 (page 1 is not visible so manually add it)
       return [1, ...option_range, _.last(option_range) + 1];
     } else if (_.first(option_range) === 3) {
+      //option range sees page 3 (page 1 and 2 not visible, manually add it)
       return [1, 2, ...option_range];
     } else if (current_page === page_count - 3) {
+      //being on the forth last page manages to be short 1 option
       return [
         1,
         _.first(option_range) - 2,
@@ -104,6 +108,7 @@ export const SelectPage = ({
         ...option_range,
       ];
     } else if (current_page > page_count - 3) {
+      //being in the last 3 pages manages to be short 2 options
       return [
         1,
         _.first(option_range) - 3,
@@ -120,6 +125,7 @@ export const SelectPage = ({
       _.includes(option_range, page_count - option_window) &&
       _.last(option_range) !== page_count
     ) {
+      //being on the 4th or 5th last page doesn't capture the ending extremities
       return [
         ...option_range,
         ..._.range(_.last(option_range) + 1, page_count + 1),
@@ -129,8 +135,11 @@ export const SelectPage = ({
     }
   };
   const get_page_options = (page_count, current_page, option_window = 2) => {
+    //depending on the sze of the options, we may have to format to ensure the correct number of options are shown
+    //the if check below is where we determine if we have the correct number of options
     const raw_page_options = _.chain(
-      //without ellipsis
+      //get numbers from current page and go left/right option_windows number of times
+      //ex: if current page is 10 and option_window is 2, we get [8,9,10,11,12]
       get_shifted_option_range(page_count, current_page, option_window)
     )
       .thru((option_range) =>
@@ -144,10 +153,14 @@ export const SelectPage = ({
       .sortBy()
       .value();
 
+    //option window * 2 because we go both left and right side by option window number of times
+    //+5: 1 from the current page, 2 from the ellipsis number, and 2 for the extremities
     if (page_count > option_window * 2 + 5) {
       if (raw_page_options.length === option_window * 2 + 5) {
+        //correct number of options
         return raw_page_options;
       } else if (raw_page_options.length === option_window * 2 + 1) {
+        //we are missing 4 options (2 ellipses and 2 extremeties)
         return [
           1,
           _.first(raw_page_options) - 1,
@@ -156,9 +169,12 @@ export const SelectPage = ({
           page_count,
         ];
       } else {
+        //handling cases for being in the extremities
         if (!_.includes(raw_page_options, 1)) {
+          //if we are close to the very front, we must manually add the ellipsis value and the very last value
           return [1, _.first(raw_page_options) - 1, ...raw_page_options];
         } else if (!_.includes(raw_page_options, page_count)) {
+          //same thing here except we are close to the very end
           return [
             ...raw_page_options,
             _.last(raw_page_options) + 1,
@@ -167,6 +183,7 @@ export const SelectPage = ({
         }
       }
     } else {
+      //not enough pages, just show all options
       return raw_page_options;
     }
   };
