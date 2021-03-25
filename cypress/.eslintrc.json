@@ -1,0 +1,13 @@
+{
+    "plugins": [
+        "cypress"
+    ],
+    "extends": [
+        "plugin:cypress/recommended"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    }
+}
