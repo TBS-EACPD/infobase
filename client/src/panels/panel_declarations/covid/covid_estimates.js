@@ -42,7 +42,7 @@ import {
   get_est_doc_glossary_key,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
-  get_tabled_est_docs_text,
+  get_est_doc_list_plain_text,
 } from "./covid_common_utils.js";
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -536,7 +536,7 @@ class CovidEstimatesPanel extends React.Component {
         summary_by_fiscal_year[selected_year]
       )
         .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
-        .thru(get_tabled_est_docs_text)
+        .thru(get_est_doc_list_plain_text)
         .value();
 
       const gov_covid_estimates_in_year = _.reduce(
