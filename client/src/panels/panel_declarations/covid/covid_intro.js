@@ -11,6 +11,7 @@ import { Subject } from "src/models/subject.js";
 
 import { TabLoadingSpinner } from "src/components";
 
+import { YearSelectionTabs } from "./covid_common_components.js";
 import { get_date_last_updated } from "./covid_common_utils.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
@@ -26,77 +27,88 @@ class CovidIntroPanelDyanmicText extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      latest_estimates_summary: null,
-      latest_expenditures_summary: null,
+      selected_year: _.chain(YearsWithCovidData.lookup("gov"))
+        .thru(({ years_with_estimates, years_with_expenditures }) =>
+          COVID_EXPENDITUES_FLAG
+            ? [...years_with_estimates, ...years_with_expenditures]
+            : years_with_estimates
+        )
+        .uniq()
+        .sortBy()
+        .last()
+        .value(),
+      summaries_by_year: null,
     };
   }
   componentDidMount() {
     query_gov_covid_summaries().then((covid_summaries) => {
-      const [latest_estimates_summary, latest_expenditures_summary] = _.map(
-        ["estimates", "expenditures"],
-        (data_type) => {
-          const fiscal_year = +_.last(
-            YearsWithCovidData.lookup("gov")[`years_with_${data_type}`]
-          );
-
-          return {
-            fiscal_year,
-            summary: _.chain(covid_summaries)
-              .find({ fiscal_year })
-              .get(`covid_${data_type}`)
-              .value(),
-          };
-        }
-      );
-
       this.setState({
         loading: false,
-        latest_estimates_summary,
-        latest_expenditures_summary,
+        summaries_by_year: _.chain(covid_summaries)
+          .map(({ fiscal_year, covid_estimates, covid_expenditures }) => [
+            fiscal_year,
+            COVID_EXPENDITUES_FLAG
+              ? { covid_estimates, covid_expenditures }
+              : { covid_estimates },
+          ])
+          .filter(([_fiscal_year, summaries]) => !_.isEmpty(summaries))
+          .fromPairs()
+          .value(),
       });
     });
   }
+  on_select_year = (year) => this.setState({ selected_year: year });
   render() {
     const { panel_args } = this.props;
-    const {
-      loading,
-      latest_estimates_summary,
-      latest_expenditures_summary,
-    } = this.state;
+    const { loading, selected_year, summaries_by_year } = this.state;
 
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
+      const { covid_estimates, covid_expenditures } = summaries_by_year[
+        selected_year
+      ];
+
       return (
         <div className="medium-panel-text">
-          <TM
-            k="covid_intro_est"
-            args={{
-              ...panel_args,
-              fiscal_year: latest_estimates_summary.fiscal_year,
-              gov_total_covid_estimates: _.reduce(
-                latest_estimates_summary.summary,
-                (memo, { vote, stat }) => memo + vote + stat,
-                0
-              ),
-            }}
+          <YearSelectionTabs
+            years={_.map(
+              summaries_by_year,
+              (_summary, fiscal_year) => +fiscal_year
+            )}
+            on_select_year={this.on_select_year}
+            selected_year={selected_year}
           />
-          {COVID_EXPENDITUES_FLAG && (
+          {!_.isEmpty(covid_estimates) && (
             <TM
-              k="covid_intro_exp"
+              k="covid_intro_est"
               args={{
                 ...panel_args,
-                fiscal_year: latest_expenditures_summary.fiscal_year,
-                date_last_updated: get_date_last_updated(
-                  latest_expenditures_summary.fiscal_year,
-                  latest_expenditures_summary.summary.month_last_updated
+                fiscal_year: selected_year,
+                gov_total_covid_estimates: _.reduce(
+                  covid_estimates,
+                  (memo, { vote, stat }) => memo + vote + stat,
+                  0
                 ),
-                gov_total_covid_expenditures:
-                  latest_expenditures_summary.summary.vote +
-                  latest_expenditures_summary.summary.stat,
               }}
             />
           )}
+          {!_.isUndefined(covid_expenditures) &&
+            !_.isNull(covid_expenditures.month_last_updated) && (
+              <TM
+                k="covid_intro_exp"
+                args={{
+                  ...panel_args,
+                  fiscal_year: selected_year,
+                  date_last_updated: get_date_last_updated(
+                    selected_year,
+                    covid_expenditures.month_last_updated
+                  ),
+                  gov_total_covid_expenditures:
+                    covid_expenditures.vote + covid_expenditures.stat,
+                }}
+              />
+            )}
         </div>
       );
     }
