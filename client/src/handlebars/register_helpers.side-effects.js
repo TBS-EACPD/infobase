@@ -6,7 +6,7 @@ import { GlossaryEntry } from "src/models/glossary.js";
 import { Subject } from "src/models/subject.js";
 import { trivial_text_maker, run_template } from "src/models/text.js";
 
-import { formats } from "src/core/format.js";
+import { formats, array_to_grammatical_list } from "src/core/format.js";
 import { lang } from "src/core/injected_build_constants.js";
 
 import { infograph_href_template, glossary_href } from "src/link_utils.js";
@@ -17,6 +17,10 @@ _.each(formats, (format, key) => {
     (amount) => new Handlebars.SafeString(format(amount))
   );
 });
+Handlebars.registerHelper(
+  "fmt_array_to_grammatical_list",
+  (array) => new Handlebars.SafeString(array_to_grammatical_list(array))
+);
 
 const change_map = {
   past: {
@@ -697,28 +701,5 @@ Handlebars.registerHelper("ext_link", function (display, url, title) {
     );
   } else {
     return display;
-  }
-});
-
-Handlebars.registerHelper("array_to_grammatical_list", function (options) {
-  const and_et = {
-    en: "and",
-    fr: "et",
-  }[lang];
-
-  const item_array = _.chain(options).values().flatten().value();
-
-  if (item_array.length === 1) {
-    return item_array[0];
-  } else if (item_array.length === 2) {
-    return `${item_array[0]} ${and_et} ${item_array[1]}`;
-  } else {
-    return _.chain(item_array)
-      .take(item_array.length - 1)
-      .reduce((list_fragment, item) => `${list_fragment}${item}, `, "")
-      .thru(
-        (list_fragment) => `${list_fragment}${and_et} ${_.last(item_array)}`
-      )
-      .value();
   }
 });

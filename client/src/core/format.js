@@ -329,4 +329,25 @@ const formats = _.chain(types_to_format)
   .fromPairs()
   .value();
 
-export { formatter, list_formatter, formats };
+// the distinction of formatter vs list_formatter vs formats and how they deal with values vs lists of values is very tedious,
+// I think this whole setup would be more usable if all formatters were standalone utils like this func. That cleanup's a TODO
+const array_to_grammatical_list = (items) => {
+  const and_et = {
+    en: "and",
+    fr: "et",
+  }[lang];
+
+  if (items.length === 1) {
+    return items[0];
+  } else if (items.length === 2) {
+    return `${items[0]} ${and_et} ${items[1]}`;
+  } else {
+    return _.chain(items)
+      .take(items.length - 1)
+      .join(", ")
+      .thru((list_fragment) => `${list_fragment}, ${and_et} ${_.last(items)}`)
+      .value();
+  }
+};
+
+export { formatter, list_formatter, formats, array_to_grammatical_list };
