@@ -12,7 +12,10 @@ import { Subject } from "src/models/subject.js";
 import { TabLoadingSpinner } from "src/components";
 
 import { YearSelectionTabs } from "./covid_common_components.js";
-import { get_date_last_updated } from "./covid_common_utils.js";
+import {
+  get_date_last_updated_text,
+  get_tabled_est_docs_text,
+} from "./covid_common_utils.js";
 
 import { covid_create_text_maker_component } from "./covid_text_provider.js";
 
@@ -85,7 +88,11 @@ class CovidIntroPanelDyanmicText extends React.Component {
               args={{
                 ...panel_args,
                 fiscal_year: selected_year,
-                gov_total_covid_estimates: _.reduce(
+                gov_tabled_est_docs_in_year_text: _.chain(covid_estimates)
+                  .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
+                  .thru(get_tabled_est_docs_text)
+                  .value(),
+                gov_covid_estimates_in_year: _.reduce(
                   covid_estimates,
                   (memo, { vote, stat }) => memo + vote + stat,
                   0
@@ -100,11 +107,11 @@ class CovidIntroPanelDyanmicText extends React.Component {
                 args={{
                   ...panel_args,
                   fiscal_year: selected_year,
-                  date_last_updated: get_date_last_updated(
+                  date_last_updated_text: get_date_last_updated_text(
                     selected_year,
                     covid_expenditures.month_last_updated
                   ),
-                  gov_total_covid_expenditures:
+                  gov_covid_expenditures_in_year:
                     covid_expenditures.vote + covid_expenditures.stat,
                 }}
               />

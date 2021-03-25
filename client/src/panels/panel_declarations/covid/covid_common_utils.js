@@ -139,7 +139,7 @@ const roll_up_flat_measure_data_by_property = (
     })
     .value();
 
-const get_date_last_updated = (fiscal_year, month_last_updated) => {
+const get_date_last_updated_text = (fiscal_year, month_last_updated) => {
   const calendar_year = (() => {
     if (month_last_updated > 3) {
       return fiscal_year;
@@ -158,6 +158,10 @@ const get_date_last_updated = (fiscal_year, month_last_updated) => {
   }).format(end_of_month_date);
 };
 
+const get_tabled_est_docs_text = (est_docs) => {
+  return _.join(est_docs); //todo
+};
+
 export {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -167,5 +171,6 @@ export {
   get_est_doc_glossary_key,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
-  get_date_last_updated,
+  get_date_last_updated_text,
+  get_tabled_est_docs_text,
 };

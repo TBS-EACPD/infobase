@@ -7,11 +7,11 @@ covid_estimates_panel_title:
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_tt "spending authorities" "AUTH"}} sought in Supplementary Estimates (A, B, and C) for {{fmt_year_to_fiscal_year selected_year}} and align with the COVID-19 Economic Response Plan (ERP) (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020).
+    * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_tt "spending authorities" "AUTH"}} sought in {{gov_tabled_est_docs_in_year_text}} for {{fmt_year_to_fiscal_year selected_year}} and align with the COVID-19 Economic Response Plan (ERP) (i.e., Chapters 1 and 2 of the Fall Economic Statement 2020).
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
   fr: |
-    * Le Parlement doit approuver toutes les dépenses du gouvernement. Ces chiffres sont ceux des nouvelles {{gl_tt "autorisations de dépenses" "AUTH"}} au titre de la COVID-19 qui sont inscrites dans les budgets supplémentaires des dépenses (A, B et C) pour {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan d'intervention économique pour répondre à la COVID-19 (c'est-à-dire les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020).
+    * Le Parlement doit approuver toutes les dépenses du gouvernement. Ces chiffres sont ceux des nouvelles {{gl_tt "autorisations de dépenses" "AUTH"}} au titre de la COVID-19 qui sont inscrites dans {{gov_tabled_est_docs_in_year_text}} pour {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan d'intervention économique pour répondre à la COVID-19 (c'est-à-dire les chapitres 1 et 2 de l'Énoncé économique de l'automne 2020).
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
 
