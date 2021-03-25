@@ -5,12 +5,11 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { create_text_maker_component ,
+import {
+  create_text_maker_component,
   default_dept_name_sort_func,
   SmartDisplayTable,
 } from "src/components/index.js";
-
-
 
 import { Subject } from "src/models/subject.js";
 
