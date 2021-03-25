@@ -23,16 +23,31 @@ const ExternalLink = ({ children, href, title }) => (
 
 class Format extends React.PureComponent {
   render() {
-    const { type, content, style, className, in_parenthesis } = this.props;
+    const {
+      type,
+      content,
+      style,
+      className,
+      in_parenthesis,
+      prefix,
+    } = this.props;
+
+    const formatted_content = formats[type](content);
+
+    const prefixed_content = prefix
+      ? `<span>${prefix}${formatted_content}</span>`
+      : formatted_content;
+
+    const parenthesis_content = in_parenthesis
+      ? `<span>(${prefixed_content})</span>`
+      : prefixed_content;
 
     return (
       <span
         style={style}
         className={className}
         dangerouslySetInnerHTML={{
-          __html: !in_parenthesis
-            ? formats[type](content)
-            : `(${formats[type](content)})`,
+          __html: parenthesis_content,
         }}
       />
     );
