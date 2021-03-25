@@ -120,6 +120,7 @@ export const get_col_defs = ({ year }) => [
           type="compact1"
           content={val}
           in_parenthesis
+          prefix={"≤ "}
           style={{ opacity: 0.5 }}
         />
       ) : null,
@@ -147,6 +148,7 @@ export const get_col_defs = ({ year }) => [
           type="big_int"
           content={val}
           in_parenthesis
+          prefix={"≤ "}
           style={{ opacity: 0.5 }}
         />
       ) : null,
