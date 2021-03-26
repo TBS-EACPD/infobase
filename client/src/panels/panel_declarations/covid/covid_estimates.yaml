@@ -40,18 +40,18 @@ covid_estimates_summary_text_dept:
     à la COVID-19, tel qu’il est indiqué dans les budgets des dépenses.
 
 
-covid_estimates_by_index_key:
+covid_estimates_by_release_title:
   transform: [handlebars,markdown]
   en: |
     Total COVID-19 authorities by {{gl_tt "release" "EST_DOC"}}:
-    {{#each index_summary_stats}}
-    * {{gl_tt this.[0] this.[1]}}: **{{fmt_compact1_written this.[2]}}**
-    {{/each}}
   fr: |
     Total des autorisations liées à la COVID-19 par {{gl_tt "source" "EST_DOC"}} :
-    {{#each index_summary_stats}}
-    * {{gl_tt this.[0] this.[1]}} : **{{fmt_compact1_written this.[2]}}**
-    {{/each}}
+covid_estimates_by_release:
+  transform: [handlebars,markdown]
+  en: |
+    {{gl_tt est_doc_name est_doc_glossary_key}}: **{{fmt_compact1_written total}}**
+  fr: |
+    {{gl_tt est_doc_name est_doc_glossary_key}} : **{{fmt_compact1_written total}}**
 
 covid_estimates_department_tab_text:
   transform: [handlebars,markdown]
