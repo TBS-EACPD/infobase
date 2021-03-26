@@ -40,3 +40,10 @@ supps_list:
   transform: [handlebars]
   en: Supplementary Estimates ({{fmt_array_to_grammatical_list supps_letters}})
   fr: Budget supplémentaire des dépenses ({{fmt_array_to_grammatical_list supps_letters}})
+
+covid_mains_2021_note:
+  en: |
+    The 22.7 billion identified in the Main Estimates for COVID-19 includes approximately $0.6 billion that has since been determined to be outside the scope of the ERP.
+  fr: |
+    Les 22,7 milliards au titre de la COVID-19 figurant dans le budget principal des dépenses incluent un montant d'environ 0,6 milliard de dollars qui, depuis,
+    a été jugé hors la portée du plan d'intervention économique.

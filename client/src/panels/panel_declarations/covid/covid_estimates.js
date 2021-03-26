@@ -56,8 +56,50 @@ const colors = infobase_colors();
 
 const panel_key = "covid_estimates_panel";
 
+const tooltips_by_topic = {
+  est_doc_total: [
+    {
+      fiscal_years: [2021],
+      subject_ids: ["gov"],
+      topic_ids: ["MAINS"],
+      text: text_maker("covid_mains_2021_note"),
+    },
+  ],
+  measure: [
+    {
+      fiscal_years: [2020, 2021],
+      subject_ids: ["gov", 280],
+      topic_ids: ["COV082"],
+      text: text_maker("covid_estimates_COV082_2020_tooltip"),
+    },
+    {
+      fiscal_years: [2020, 2021],
+      subject_ids: ["gov", 280],
+      topic_ids: ["COV115"],
+      text: text_maker("covid_estimates_COV115_2020_tooltip"),
+    },
+  ],
+};
+const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
+  _.chain(tooltips_by_topic)
+    .get(topic)
+    .filter(
+      ({ fiscal_years, subject_ids, measure_ids, topic_ids }) =>
+        _.some(fiscal_years, (tooltip_fiscal_year) =>
+          _.includes(["*", selected_year], tooltip_fiscal_year)
+        ) &&
+        _.some(subject_ids, (tooltip_subject_id) =>
+          _.includes(["*", panel_subject_id], tooltip_subject_id)
+        ) &&
+        _.some(topic_ids, (tooltip_topic_id) =>
+          _.includes(["*", topic_id], tooltip_topic_id)
+        )
+    )
+    .map(({ text }) => <CellTooltip tooltip_text={text} key={text} />)
+    .value();
+
 const SummaryTab = ({ args: panel_args, data }) => {
-  const { subject } = panel_args;
+  const { subject, selected_year } = panel_args;
 
   const graph_index_key = "index_key";
 
@@ -121,15 +163,8 @@ const SummaryTab = ({ args: panel_args, data }) => {
   );
 
   const additional_text_args = (() => {
-    const index_summary_stats = _.map(sorted_data, (row) => [
-      get_est_doc_name(row.est_doc),
-      get_est_doc_glossary_key(row.est_doc),
-      row.vote + row.stat,
-    ]);
-
     if (subject.level === "gov") {
       return {
-        index_summary_stats,
         covid_est_pct_of_all_est:
           panel_args[`gov_covid_estimates_in_year`] /
           panel_args[`gov_total_estimates_in_year`],
@@ -142,7 +177,6 @@ const SummaryTab = ({ args: panel_args, data }) => {
       );
 
       return {
-        index_summary_stats,
         dept_covid_estimates_in_year,
       };
     }
@@ -155,10 +189,24 @@ const SummaryTab = ({ args: panel_args, data }) => {
           k={`covid_estimates_summary_text_${subject.level}`}
           args={{ ...panel_args, ...additional_text_args }}
         />
-        <TM
-          k={"covid_estimates_by_index_key"}
-          args={{ ...panel_args, ...additional_text_args }}
-        />
+        <TM k={"covid_estimates_by_release_title"} />
+        <ul>
+          {_.map(sorted_data, ({ est_doc, vote, stat }) => (
+            <li key={est_doc}>
+              <TM
+                k={"covid_estimates_by_release"}
+                args={{
+                  est_doc_name: get_est_doc_name(est_doc),
+                  est_doc_glossary_key: get_est_doc_glossary_key(est_doc),
+                  total: vote + stat,
+                }}
+                el="span"
+                style={{ display: "inline-block" }}
+              />
+              {get_tooltip("est_doc_total", selected_year, subject.id, est_doc)}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="fcol-xs-12 fcol-md-6">
         {!is_a11y_mode && (
@@ -326,31 +374,6 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 );
 
 const get_measure_name = (id) => CovidMeasure.lookup(id).name;
-const measure_cell_tooltips = [
-  {
-    measure_ids: ["COV082"],
-    subject_ids: ["gov", 280],
-    text: text_maker("covid_estimates_COV082_2020_tooltip"),
-  },
-  {
-    measure_ids: ["COV115"],
-    subject_ids: ["gov", 280],
-    text: text_maker("covid_estimates_COV115_2020_tooltip"),
-  },
-];
-const get_measure_cell_tooltip = (cell_measure_id, table_subject_id) =>
-  _.chain(measure_cell_tooltips)
-    .filter(
-      ({ measure_ids, subject_ids }) =>
-        _.some(measure_ids, (tooltip_measure_id) =>
-          _.includes(["*", cell_measure_id], tooltip_measure_id)
-        ) &&
-        _.some(subject_ids, (tooltip_subject_id) =>
-          _.includes(["*", table_subject_id], tooltip_subject_id)
-        )
-    )
-    .map(({ text }) => <CellTooltip tooltip_text={text} key={text} />)
-    .value();
 const ByMeasureTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
@@ -396,7 +419,12 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         formatter: (id) => (
           <Fragment>
             {get_measure_name(id)}
-            {get_measure_cell_tooltip(id, panel_args.subject.id)}
+            {get_tooltip(
+              "measure",
+              panel_args.selected_year,
+              panel_args.subject.id,
+              id
+            )}
           </Fragment>
         ),
         sort_func: (id_a, id_b) =>
