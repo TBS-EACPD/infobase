@@ -56,9 +56,9 @@ class SpendInTagPerspective extends React.Component {
     ];
 
     return (
-      <div className="grid-row">
+      <div className="row" style={{ margin: 0 }}>
         <div
-          className="lg-grid-panel50"
+          className="fcol-md-6"
           style={{ padding: "10px", marginBottom: "auto", marginTop: "auto" }}
         >
           <div className="medium-panel-text">
@@ -74,7 +74,7 @@ class SpendInTagPerspective extends React.Component {
           </div>
         </div>
         <div
-          className="lg-grid-panel50"
+          className="fcol-md-6"
           style={{
             padding: "10px",
             flexDirection: "column",

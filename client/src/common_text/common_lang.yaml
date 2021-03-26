@@ -841,55 +841,55 @@ MtoM_tag_warning_double_counting_a:
 MtoM_tag_warning:
   transform: [handlebars]
   en: |
-    <div class="lg-grid">
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+    <div>
+      <div>
+        <div class="key_concept_term">
            Reporting is only done at the Program level not by tags
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="key_concept_def"> 
           Tags provide an easy way to search information and get a sense of how government resources are being allocated across key areas. However, it is important to keep in mind that funding associated with tags presented in GC InfoBase represents the maximum amount that may have or will be spent on that particular tag, and that there is a risk of double counting if you try to combine tags.  This is because federal organizations only report how much they have spent, or plan to spend, on a particular program not on a particular tag. 
         </div>
       </div>
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+      <div>
+        <div class="key_concept_term">
           Splitting program resources by its tags isn’t possible
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="key_concept_def"> 
           Government programs are designed to be efficient and multi-purposed. They can help more than one population group, economic segment, or organization and can be delivered through different mechanisms (e.g. regulations, transfer payments, etc.) to achieve a desired outcome. This design makes it nearly impossible to know the exact split of resources used to help one particular group (in this case "tag").  So, if a program is delivered via services and loans, it will not be possible to split the proportion of funds assigned to only one of the two tags. The full amount of funding spent on that Program would be reported under both tags.
         </div>
       </div>
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+      <div>
+        <div class="key_concept_term">
           Double counting will occur
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="key_concept_def"> 
            Where the risk of double counting exists, GC InfoBase will clearly list all relevant tags assigned to a program. More specifically, when you explore a particular program you will find under the description a section named "programs under this tag are also associated with the following tags" which will list all the tags this specific program is also linked to.
         </div>
       </div>
     </div>
   fr: |
-    <div class="lg-grid">
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+    <div>
+      <div>
+        <div class="key_concept_term">
            Le rapport est fait uniquement au niveau du Programme et non par étiquettes
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="key_concept_def"> 
            Les étiquettes constituent un moyen facile de rechercher des renseignements et d’avoir une idée de la façon dont les ressources gouvernementales sont attribuées dans des secteurs clés. Cependant, il est important de garder à l’esprit que le financement associé aux étiquettes présentées dans InfoBase du GC est un montant maximal qui a peut‑être été dépensé ou qui le sera. Il existe un risque de double comptage si vous tentez de combiner des étiquettes, car les organismes fédéraux déclarent seulement le montant qu’ils ont dépensé ou prévoient dépenser pour un programme donné et non pour une étiquette donnée.  
         </div>
       </div>
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+      <div>
+        <div class="key_concept_term">
            Fractionner les ressources d’un programme par ses étiquettes n’est pas possible
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="key_concept_def"> 
             Les programmes gouvernementaux sont conçus pour être efficients et polyvalents. Ils peuvent aider plus d’un groupe de population, plus d’un segment économique ou plus d’une organisation, et peuvent être exécutés par des mécanismes différents (par exemple, un règlement ou un paiement de transfert) pour obtenir un résultat souhaité. Avec ce modèle, il est presque impossible de connaître le fractionnement exact des ressources utilisées pour aider un groupe en particulier (c'est-à-dire « l'étiquette »). Donc, si un programme est mis en oeuvre au moyen de services et de prêts, il ne sera pas possible de fractionner la partie des fonds attribués à chacune des étiquettes. La somme totale des fonds dépensé pour ce programme serait déclarée sous les deux étiquettes.   
         </div>
       </div>
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+      <div>
+        <div class="key_concept_term">
           La double comptabilisation se produira
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="key_concept_def"> 
             S’il y a risque de double comptabilisation, InfoBase du GC dressera clairement la liste des étiquettes attribuées au programme. Plus précisément, lorsque vous explorez un programme, vous trouverez la description dans la section intitulée « Les programmes sous cette étiquette figurent également sous les étiquettes suivantes » où sont énumérées toutes les étiquettes auxquelles le programme est également associé.
         </div>
       </div>

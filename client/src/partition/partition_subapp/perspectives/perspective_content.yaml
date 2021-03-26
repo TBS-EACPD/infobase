@@ -269,23 +269,23 @@ partition_estimates_vote_popup:
 program_SOBJ_warning:
   transform: [handlebars,markdown]
   en: |
-    <div class="lg-grid">
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+    <div>
+      <div class="row" style="margin: 0;">
+        <div class="fcol-md-4 key_concept_term">
           Totals for all Program expenditures do not match the total government spending
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="fcol-md-8 key_concept_def"> 
           Data for Program expenditures by Standard Object are not available for the Canadian Security Intelligence Service and the Communication Security Establishment. As such, totals for all Program expenditures do not match the total government spending.
         </div>
       </div>
     </div> 
   fr: |
-    <div class="lg-grid">
-      <div class="grid-row">
-        <div class="lg-grid-panel30 key_concept_term">
+    <div>
+      <div class="row" style="margin: 0;">
+        <div class="fcol-md-4 key_concept_term">
           Les totaux de toutes les dépenses de programmes ne correspondent pas aux dépenses totales du gouvernement
         </div>
-        <div class="lg-grid-panel70 key_concept_def"> 
+        <div class="fcol-md-8 key_concept_def"> 
           Les données pour les dépenses de programme par article courant ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. À ce titre, les totaux de toutes les dépenses de programmes ne correspondent pas aux dépenses totales du gouvernement.
         </div>
       </div>
@@ -293,16 +293,16 @@ program_SOBJ_warning:
 partition_interim_estimates_def:
   transform: [handlebars,markdown]
   en: |
-    <div class="lg-grid">
-      <div class="grid-row">
+    <div>
+      <div class="row" style="margin: 0;">
         <div> 
           On {{interim_mains_table_date}}, the {{est_next_year}} {{gl_tt "Interim Estimates" "INTER_EST"}} were tabled in Parliament to begin the new fiscal year. This funding supports the government’s financial requirements for the first three months of the fiscal year.
         </div>
       </div>
     </div> 
   fr: |
-    <div class="lg-grid">
-      <div class="grid-row">
+    <div>
+      <div class="row" style="margin: 0;">
         <div> 
           Le {{gl_tt "Budget provisoire" "INTER_EST"}} des dépenses pour {{est_next_year}} a été déposé le {{interim_mains_table_date}} afin de disposer d’un financement suffisant au début du nouvel exercice. Ce financement vise à soutenir les besoins financiers du gouvernement pour les trois premiers mois de l’exercice.
         </div>

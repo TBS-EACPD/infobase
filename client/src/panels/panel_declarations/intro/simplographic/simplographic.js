@@ -122,7 +122,7 @@ export const declare_simplographic_panel = () =>
         const { panel_args: big_info } = calculations;
         const Row = (props) => {
           const this_row_props = {
-            className: "grid-row about-government-intro-grid",
+            className: "row about-government-intro-grid",
             style: {
               borderTop: 0,
               padding: "15px 0px",
@@ -136,18 +136,22 @@ export const declare_simplographic_panel = () =>
           return (
             <div {...this_row_props}>
               <div
-                className="lg-grid-panel20"
+                className="fcol-md-3"
                 style={{ flexDirection: "column", justifyContent: "center" }}
               >
                 <div
-                  className="inner-grid"
-                  style={{ display: "flex", alignItems: "center" }}
+                  className="justify-content-center"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
                 >
                   {props.svg}
                 </div>
               </div>
               <section
-                className="lg-grid-panel70"
+                className="fcol-md-9"
                 style={{ flexDirection: "column" }}
               >
                 <div
