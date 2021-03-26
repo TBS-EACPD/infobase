@@ -1,6 +1,9 @@
 import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+
 import { GlossaryEntry } from "src/models/glossary.js";
 
 import { Subject } from "src/models/subject.js";
@@ -8,6 +11,8 @@ import { trivial_text_maker, run_template } from "src/models/text.js";
 
 import { formats, array_to_grammatical_list } from "src/core/format.js";
 import { lang } from "src/core/injected_build_constants.js";
+
+import { IconQuestion } from "src/icons/icons.js";
 
 import { infograph_href_template, glossary_href } from "src/link_utils.js";
 
@@ -596,6 +601,35 @@ Handlebars.registerHelper("fFunc", function (obj, func, options) {
 
 Handlebars.registerHelper("stripes", function (index) {
   return index % 2 == 0 ? "even" : "odd";
+});
+
+Handlebars.registerHelper("icon_tooltip", function glossary_tooltip(
+  popup_text
+) {
+  const raw_icon_html = ReactDOMServer.renderToStaticMarkup(
+    <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
+  );
+
+  // our svg icons include embeded style nodes using * selectors, which in particular mess up the resulting output of
+  // text maker's markdown parsing, need to escape
+  const selective_markdown_escaped_icon_html = raw_icon_html.replaceAll(
+    "*",
+    "\\*"
+  );
+
+  return new Handlebars.SafeString(
+    `<span
+      class="nowrap link-unstyled"
+      tab-ndex="0"
+      aria-hidden="true"
+      data-toggle="tooltip"
+      data-ibtt-html="true"
+      data-ibtt-container="body"
+      data-ibtt-text="${popup_text}"
+    >
+      ${selective_markdown_escaped_icon_html}
+    </span>`
+  );
 });
 
 // register a handlebars helper for creating glossary links
