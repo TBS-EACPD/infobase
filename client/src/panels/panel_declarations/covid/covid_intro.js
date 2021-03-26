@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
@@ -73,7 +73,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
       ];
 
       return (
-        <div className="medium-panel-text">
+        <Fragment>
           <YearSelectionTabs
             years={_.map(
               summaries_by_year,
@@ -116,7 +116,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
                 }}
               />
             )}
-        </div>
+        </Fragment>
       );
     }
   }
@@ -146,7 +146,10 @@ export const declare_covid_intro_panel = () =>
             glossary_keys,
           }}
         >
-          <CovidIntroPanelDyanmicText panel_args={panel_args} />
+          <div className="medium-panel-text">
+            {COVID_EXPENDITUES_FLAG && <TM k="covid_intro_static_text" />}
+            <CovidIntroPanelDyanmicText panel_args={panel_args} />
+          </div>
         </InfographicPanel>
       ),
     }),
