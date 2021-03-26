@@ -17,22 +17,14 @@ covid_intro_est:
   transform: [handlebars,markdown]
   en: |
     The {{gov_tabled_est_docs_in_year_text}} for **{{fmt_year_to_fiscal_year fiscal_year}}** present a **total of
-    {{fmt_compact1_written gov_covid_estimates_in_year}}{{#if auth_total_note_key}}\*{{/if}} in planned spending authorities** for federal organizations
-    across the Government of Canada to spend in support of COVID-19 measures. These are “up to” authorities in recognition of the urgency and uncertainty
-    in which these measures were brought forward in the pandemic context.  
-
-    {{#if auth_total_note_key}}
-    \* **Note:** {{gt auth_total_note_key}}
-    {{/if}}
+    {{fmt_compact1_written gov_covid_estimates_in_year}} in planned spending authorities** for federal organizations across the Government
+    of Canada to spend in support of COVID-19 measures.{{#if auth_total_note_key}} {{{gt auth_total_note_key}}}{{/if}} These are “up to”
+    authorities in recognition of the urgency and uncertainty in which these measures were brought forward in the pandemic context.  
   fr: |
     Les {{gov_tabled_est_docs_in_year_text}} pour **{{fmt_year_to_fiscal_year fiscal_year}}** **totalisent
-    {{fmt_compact1_written gov_covid_estimates_in_year}}{{#if auth_total_note_key}}\*{{/if}} en autorisations de dépenses** prévues des organisations
-    fédérales consacrées aux mesures liées à la pandémie. Il s'agit du plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude dans
-    lesquelles ces mesures ont été prises en réponse à la pandémie.  
-
-    {{#if auth_total_note_key}}
-    \* **Note :** {{gt auth_total_note_key}}
-    {{/if}}
+    {{fmt_compact1_written gov_covid_estimates_in_year}} en autorisations de dépenses** prévues des organisations
+    fédérales consacrées aux mesures liées à la pandémie.{{#if auth_total_note_key}} {{gt auth_total_note_key}}{{/if}} Il s'agit du
+    plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude danslesquelles ces mesures ont été prises en réponse à la pandémie.  
 
 covid_intro_exp:
   transform: [handlebars,markdown]
