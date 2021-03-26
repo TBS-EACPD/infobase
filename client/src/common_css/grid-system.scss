@@ -3,45 +3,6 @@
 /* 
  * set o classes for grid-base text 
 */
-.grid-title {
-  padding: 10px;
-  text-align:center;
-  font-weight: $heavyFontWeight;
-}
-
-@media (min-width: $minMediumDevice){
-  .lg-1third {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 33%;
-    max-width: 33%;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .lg-1half {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 50%;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-
-.lg-hide {
-  @media (min-width: $minMediumDevice){
-     width: 0px;
-     height: 0px;
-     overflow: hidden;
-   }
-}
-.sm-hide {
-   display: none;
-
-   @media (min-width: $minMediumDevice){
-     display: block;
-   }
-}
 
 // Grid systems should all be based off min-width breakpoints, for consistency. These are just some minor misc. exceptions to that
 @media (max-width: $maxMediumDevice){
