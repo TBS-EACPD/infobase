@@ -97,6 +97,21 @@ class CovidIntroPanelDyanmicText extends React.Component {
                   (memo, { vote, stat }) => memo + vote + stat,
                   0
                 ),
+                /* temporary note, TODO clean up after Supps A */
+                auth_total_note_key:
+                  selected_year === 2021 &&
+                  _.chain(covid_estimates)
+                    .reduce(
+                      (est_docs, { est_doc }) => [...est_docs, est_doc],
+                      []
+                    )
+                    .thru(
+                      (tabled_est_docs) =>
+                        tabled_est_docs.length === 1 &&
+                        _.first(tabled_est_docs) === "MAINS"
+                    )
+                    .value() &&
+                  "covid_mains_2021_note",
               }}
             />
           )}
