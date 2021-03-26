@@ -98,7 +98,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
                   0
                 ),
                 /* temporary note, TODO clean up after Supps A */
-                auth_total_note_key:
+                auth_total_note:
                   selected_year === 2021 &&
                   _.chain(covid_estimates)
                     .reduce(
@@ -111,7 +111,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
                         _.first(tabled_est_docs) === "MAINS"
                     )
                     .value() &&
-                  "covid_mains_2021_note",
+                  text_maker("covid_mains_2021_note"),
               }}
             />
           )}
