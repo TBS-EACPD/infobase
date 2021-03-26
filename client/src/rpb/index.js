@@ -34,6 +34,8 @@ import "./rpb.scss";
 
 const sub_app_name = "_rpb";
 
+const temp_graphql_ids = ["services"];
+
 function get_all_data_columns_for_table(table) {
   return _.chain(table.unique_headers)
     .map((nick) => table.col_from_nick(nick))
@@ -107,7 +109,6 @@ class RPB extends React.Component {
       this.state = {
         loading: false,
         table_picking: true,
-        selected_subject: null,
         ...props.state,
       };
     }
@@ -154,12 +155,16 @@ class RPB extends React.Component {
       loading: true,
       table_picking: false,
     });
-    ensure_loaded({
-      table_keys: [table_id],
-      footnotes_for: "all",
-    }).then(() => {
+    if (_.includes(temp_graphql_ids, table_id)) {
       this.table_handlers.on_switch_table(table_id);
-    });
+    } else {
+      ensure_loaded({
+        table_keys: [table_id],
+        footnotes_for: "all",
+      }).then(() => {
+        this.table_handlers.on_switch_table(table_id);
+      });
+    }
   }
 
   get_key_columns_for_table = (table) => {
@@ -170,6 +175,9 @@ class RPB extends React.Component {
   };
 
   get_filters_for_dim = (table, dim_key) => {
+    if (_.includes(temp_graphql_ids, table.id)) {
+      return [text_maker("all")];
+    }
     return _.uniq([text_maker("all"), ..._.keys(table[dim_key]("*", true))]);
   };
 
@@ -181,14 +189,11 @@ class RPB extends React.Component {
     const subject =
       this.state.subject && Subject.get_by_guid(this.state.subject);
 
-    const all_data_columns =
-      this.state.table && get_all_data_columns_for_table(table);
+    const all_data_columns = get_all_data_columns_for_table(table);
 
-    const columns =
-      !_.isEmpty(all_data_columns) &&
-      _.filter(all_data_columns, ({ nick }) =>
-        _.includes(this.state.columns, nick)
-      );
+    const columns = _.filter(all_data_columns, ({ nick }) =>
+      _.includes(this.state.columns, nick)
+    );
 
     const sorted_key_columns =
       this.state.table && this.get_key_columns_for_table(table);
@@ -333,7 +338,6 @@ class RPB extends React.Component {
                   if (this.state.table_picking) {
                     this.setState({
                       table_picking: false,
-                      selected_subject: null,
                     });
                     setTimeout(() => {
                       const sub_app_node = document.querySelector(

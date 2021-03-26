@@ -41,6 +41,7 @@ import programFtes from "../tables/programFtes.js";
 import programSobjs from "../tables/programSobjs.js";
 import programSpending from "../tables/programSpending.js";
 import programVoteStat from "../tables/programVoteStat.js";
+import services from "../tables/services.js";
 
 const table_defs = [
   orgVoteStatPa,
@@ -59,6 +60,7 @@ const table_defs = [
   orgEmployeeFol,
   orgEmployeeAvgAge,
   programSobjs,
+  services,
 ];
 
 const load_fonts = () =>
