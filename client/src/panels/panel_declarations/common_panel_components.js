@@ -61,7 +61,7 @@ const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
   <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
     {(matches) => (
       <PinnedContent local_storage_name={"user_enabled_pinning_key_concepts"}>
-        <div className={classNames("mrgn-bttm-md", matches && "mrgn-tp-md")}>
+        <div className={classNames("mrgn-bttm-md")}>
           <ButtonToolbar style={{ margin: 0 }}>
             <AutoAccordion
               title={trivial_text_maker("infographic_faq")}
