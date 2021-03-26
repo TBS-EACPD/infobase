@@ -24,7 +24,7 @@ function FirstChild(props) {
   return childrenArray[0] || null;
 }
 
-const defaultMaxHeight = "300px";
+const defaultMaxHeight = "500px";
 class AccordionEnterExit extends React.Component {
   constructor() {
     super();
