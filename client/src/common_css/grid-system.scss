@@ -36,62 +36,6 @@
 }
 
 @media (min-width: $minMediumDevice){
-  [class*='lg-grid-panel'] {
-    padding: 5px;
-    /* nested flex containers for cross browser (safari doesn't let children of flex use height:100% properly) support */
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-  }
-  .lg-grid-panel20 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 20%;
-    max-width: 20%;
-  }
-  .lg-grid-panel30 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 30%;
-    max-width: 30%;
-  }
-  .lg-grid-panel40 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 40%;
-    max-width: 40%;
-  }
-  .lg-grid-panel50 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 50%;
-    max-width: 50%;
-  }
-  .lg-grid-panel70 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 70%;
-    max-width: 70%;
-  }
-  .lg-grid-panel80 {
-    flex-grow:0;
-    flex-shrink:0;
-    flex-basis: 80%;
-    max-width: 80%;
-  }
-  .lg-grid-panel100 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 100%;
-    max-width: 100%;
-  }
-  .lg-grid-panel-auto {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: auto;
-    width: 100%; /* also really hacky but necessary for IE11 */
-    min-width: 0px; /* hacky but necessary to sort of apply min-width: auto */
-  }
   .lg-1third {
     flex-grow: 0;
     flex-shrink: 0;
