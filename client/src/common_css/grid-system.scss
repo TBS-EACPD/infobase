@@ -8,32 +8,6 @@
   text-align:center;
   font-weight: $heavyFontWeight;
 }
-.inner-grid { 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.inner-grid > .small,
-.inner-grid > .tiny,
-.inner-grid > .large{
-  align-self: center;
-  text-align: center;
-  padding: 5px;
-  width: 100%;
-}
-.inner-grid > .small {
-  font-size: 1em;
-}
-.inner-grid > .tiny {
-  font-size: 0.7em;
-}
-.inner-grid > .large {
-  font-size: 1.5em;
-  
-  @media (min-width: $minLargeDevice){
-    font-size: 2em;
-  }
-}
 
 @media (min-width: $minMediumDevice){
   .lg-1third {
