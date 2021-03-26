@@ -84,6 +84,10 @@ class _PinnedContent extends React.Component {
     this.update_content_height();
   }
 
+  componentWillUnmount() {
+    this.update_content_height.cancel();
+  }
+
   render() {
     const { user_has_enabled_pinning, content_height } = this.state;
     const { children } = this.props;
