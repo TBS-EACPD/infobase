@@ -44,6 +44,39 @@ const get_col_configs_with_defaults = (column_configs) =>
     ...column_config_defaults,
     ...supplied_column_config,
   }));
+const get_default_state_from_props = (props) => {
+  const { unsorted_initial, column_configs } = props;
+
+  const col_configs_with_defaults = get_col_configs_with_defaults(
+    column_configs
+  );
+
+  const visible_col_keys = _.chain(col_configs_with_defaults)
+    .pickBy((col) => col.initial_visible)
+    .keys()
+    .value();
+
+  const sort_by = unsorted_initial
+    ? null
+    : _.chain(col_configs_with_defaults)
+        .pickBy((col) => col.is_sortable)
+        .keys()
+        .first()
+        .value();
+
+  const searches = _.chain(col_configs_with_defaults)
+    .pickBy((col) => col.is_searchable)
+    .mapValues(() => "")
+    .value();
+
+  return {
+    visible_col_keys,
+    sort_by,
+    descending: false,
+    searches,
+    initial_props: props,
+  };
+};
 
 /* Assumption: DisplayTable assumes 1st column to be string that describes its row
   - If total row exists, 1st column will have the word "Total"
@@ -88,6 +121,32 @@ export class DisplayTable extends React.Component {
       page_size: props.page_size_increment,
       current_page: 0,
     };
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps !== prevState.initial_props) {
+      const new_default_state = get_default_state_from_props(nextProps);
+
+      const prev_sort_still_valid = _.includes(
+        new_default_state.visible_col_keys,
+        prevState.sort_by
+      );
+
+      const reconciled_searches = {
+        ...new_default_state.searches,
+        ..._.pick(prevState.searches, new_default_state.visible_col_keys),
+      };
+
+      return {
+        ...new_default_state,
+        ...(prev_sort_still_valid && {
+          sort_by: prevState.sort_by,
+          descending: prevState.descending,
+        }),
+        searches: reconciled_searches,
+      };
+    } else {
+      return null;
+    }
   }
 
   change_page_size = (new_page_size) =>
