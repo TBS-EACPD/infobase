@@ -2,7 +2,7 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { fetchServices } from "src/models/populate_services.js";
+import { useServices } from "src/models/populate_services.js";
 
 import {
   secondaryColor,
@@ -41,7 +41,7 @@ const colors = scaleOrdinal().range([
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
   const { subject } = panel_args;
-  const { loading, data } = fetchServices({
+  const { loading, data } = useServices({
     id: subject.id,
     service_fragments: digital_status_query_fragment,
   });

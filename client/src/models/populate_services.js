@@ -134,7 +134,7 @@ export const prefetch_services = (id) => {
   console.log(client.cache.data.data);
 };
 
-export const fetchServices = (query_options) => {
+export const useServices = (query_options) => {
   const time_at_request = Date.now();
   const { id } = query_options;
   const is_gov = id === "gov";

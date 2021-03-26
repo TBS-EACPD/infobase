@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { fetchServices } from "src/models/populate_services.js";
+import { useServices } from "src/models/populate_services.js";
 
 import { DisplayTable } from "../../../components";
 import { Subject } from "../../../models/subject.js";
@@ -24,7 +24,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const HighApplicationVolumePanel = ({ panel_args }) => {
   const { subject } = panel_args;
-  const { loading, data } = fetchServices({
+  const { loading, data } = useServices({
     id: subject.id,
     service_fragments: delivery_channels_query_fragment,
   });

@@ -3,7 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { fetchServices } from "src/models/populate_services.js";
+import { useServices } from "src/models/populate_services.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -37,7 +37,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const { subject } = panel_args;
   const is_gov = subject.level === "gov";
 
-  const { loading, data } = fetchServices({
+  const { loading, data } = useServices({
     id: subject.id,
     service_fragments: `service_report{
       ${website_visits_key}_count
