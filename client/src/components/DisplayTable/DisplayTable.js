@@ -75,6 +75,7 @@ const get_default_state_from_props = (props) => {
     descending: false,
     searches,
     initial_props: props,
+    page_size: props.page_size_increment,
   };
 };
 
@@ -89,36 +90,8 @@ export class DisplayTable extends React.Component {
 
     this.first_data_ref = React.createRef();
 
-    const { unsorted_initial, column_configs } = props;
-
-    const col_configs_with_defaults = get_col_configs_with_defaults(
-      column_configs
-    );
-
-    const visible_col_keys = _.chain(col_configs_with_defaults)
-      .pickBy((col) => col.initial_visible)
-      .keys()
-      .value();
-
-    const sort_by = unsorted_initial
-      ? null
-      : _.chain(col_configs_with_defaults)
-          .pickBy((col) => col.is_sortable)
-          .keys()
-          .first()
-          .value();
-
-    const searches = _.chain(col_configs_with_defaults)
-      .pickBy((col) => col.is_searchable)
-      .mapValues(() => "")
-      .value();
-
     this.state = {
-      visible_col_keys,
-      sort_by,
-      descending: false,
-      searches,
-      page_size: props.page_size_increment,
+      ...get_default_state_from_props(props),
       current_page: 0,
     };
   }
