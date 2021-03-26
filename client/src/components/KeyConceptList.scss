@@ -1,0 +1,20 @@
+@import 'src/common_css/common-variables';
+
+.key_concept_term {
+  @media (min-width: $minMediumDevice) {
+    border-bottom: 1px solid $separatorColor;
+  }
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 20px;
+  color: $textColor;
+  font-weight: $heavyFontWeight;
+}
+
+.key_concept_def {
+  border-bottom: 1px solid $separatorColor;
+  padding: 10px;
+  padding-top: 20px;
+  background-color: $backgroundColor;
+}
