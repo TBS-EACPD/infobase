@@ -139,6 +139,8 @@ class EmailFrontend extends React.Component {
           MISC2: `${template_name}: ${backend_response.error_message}`,
         });
 
+        this.props.on_submitted();
+
         this._is_mounted &&
           this.setState({
             awaiting_backend_response: false,
@@ -147,8 +149,6 @@ class EmailFrontend extends React.Component {
       });
 
       this.setState({ sent_to_backend: true });
-    } else if (awaiting_backend_response && sent_to_backend) {
-      this.props.on_submitted();
     }
   }
   render() {
