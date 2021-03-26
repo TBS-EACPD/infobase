@@ -7,6 +7,12 @@ covid_intro_panel_title:
 # OGGO-ALIGNED INTRO
 #####
 
+covid_intro_static_text:
+    en: |
+      With the unprecedented scale and impact of COVID-19, Parliament has prioritized measures responding to COVID-19.
+    fr: |
+      Compte tenu de l'ampleur et de l'impact sans précédent de la COVID-19, le Parlement a accordé la priorité aux mesures en réponse à la pandémie.
+
 covid_intro_est:
   transform: [handlebars,markdown]
   en: |
@@ -41,7 +47,7 @@ covid_intro_exp:
 # PRE_OGGO INTRO, may return to some or all of this version at a future time
 #####
 
-covid_intro_static_text:
+old_covid_intro_static_text:
   transform: [handlebars,markdown]
   en: |
     Since March 2020, the Government of Canada has put in place temporary measures to mitigate the impacts of the COVID-19 pandemic on Canadians, businesses and organizations.
@@ -64,7 +70,7 @@ covid_intro_static_text:
     par mesure, prévu dans le Plan d'intervention économique pour répondre à la COVID-19, ainsi que les dépenses connexes le cas échéant. Étant donné que InfoBase du GC est axée sur les
     budgets des dépenses, elle ne couvre pas à l'heure actuelle la totalité du Plan d'intervention économique du Canada pour la COVID-19.  
 
-covid_intro_dynamic_text:
+old_covid_intro_dynamic_text:
   transform: [handlebars,markdown]
   en: |
     In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{date_last_updated_text}}**, **{{orgs_with_authorities}}** organizations
