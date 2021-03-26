@@ -3,16 +3,6 @@
 /* 
  * set o classes for grid-base text 
 */
-.grid-row {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-direction: column;
-
-  @media (min-width: $minMediumDevice) {
-    flex-direction: row;
-  }
-}
 .grid-title {
   padding: 10px;
   text-align:center;
@@ -193,9 +183,4 @@
   border: 1px solid rgba($secondaryColor, 0.9);
   text-align: center;
   padding: 10px;
-}
-
-.grid-row:last-child > .key_concept_term,
-.grid-row:last-child > .key_concept_def {
-  border: none;
 }
