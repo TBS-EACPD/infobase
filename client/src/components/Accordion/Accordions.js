@@ -89,6 +89,10 @@ class AccordionEnterExit extends React.Component {
   }
 }
 
+AccordionEnterExit.defaultProps = {
+  max_height: "80vh",
+};
+
 const StatelessPullDownAccordion = ({
   max_height,
   title,
