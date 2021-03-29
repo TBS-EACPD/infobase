@@ -181,9 +181,7 @@ export const ExplorerNode = ({
                 }
               >
                 {_.isFunction(val_display)
-                  ? depth === 0
-                    ? val_display(get_val(node), node)
-                    : val_display(get_val(node))
+                  ? val_display(get_val(node), node)
                   : get_val(node)}
               </div>
             ))}
