@@ -112,17 +112,19 @@ export const get_col_defs = ({ year }) => [
       />
     ),
     get_val: (node) => _.get(node, "data.resources.spending"),
-    val_display: (val) =>
-      _.isNumber(val) ? <Format type="compact1" content={val} /> : null,
-    first_node_m2m_display: (val) =>
+    val_display: (val, node = undefined) =>
       _.isNumber(val) ? (
-        <Format
-          type="compact1"
-          content={Math.ceil(val / 10000000) * 10000000}
-          in_parenthesis
-          prefix={"≤ "}
-          style={{ opacity: 0.7 }}
-        />
+        node && node.data.is_m2m ? (
+          <Format
+            type="compact1"
+            content={Math.ceil(val / 10000000) * 10000000}
+            in_parenthesis
+            prefix={"≤ "}
+            style={{ opacity: 0.7 }}
+          />
+        ) : (
+          <Format type="compact1" content={val} />
+        )
       ) : null,
   },
   {
@@ -140,17 +142,19 @@ export const get_col_defs = ({ year }) => [
       />
     ),
     get_val: (node) => _.get(node, "data.resources.ftes"),
-    val_display: (val) =>
-      _.isNumber(val) ? <Format type="big_int" content={val} /> : null,
-    first_node_m2m_display: (val) =>
+    val_display: (val, node = undefined) =>
       _.isNumber(val) ? (
-        <Format
-          type="big_int"
-          content={Math.ceil(val / 100) * 100}
-          in_parenthesis
-          prefix={"≤ "}
-          style={{ opacity: 0.7 }}
-        />
+        node && node.data.is_m2m ? (
+          <Format
+            type="big_int"
+            content={Math.ceil(val / 100) * 100}
+            in_parenthesis
+            prefix={"≤ "}
+            style={{ opacity: 0.7 }}
+          />
+        ) : (
+          <Format type="big_int" content={val} />
+        )
       ) : null,
   },
 ];
