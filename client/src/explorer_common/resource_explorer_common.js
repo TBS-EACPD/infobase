@@ -114,6 +114,7 @@ export const get_col_defs = ({ year }) => [
     get_val: (node) => _.get(node, "data.resources.spending"),
     val_display: (val, node = undefined) =>
       _.isNumber(val) ? (
+        //by default, only depth one nodes will only have is_m2m
         node && node.data.is_m2m ? (
           <Format
             type="compact1"
