@@ -32,22 +32,22 @@ class Format extends React.PureComponent {
       prefix,
     } = this.props;
 
-    const formatted_content = formats[type](content);
-
-    const prefixed_content = prefix
-      ? `<span>${prefix}${formatted_content}</span>`
-      : formatted_content;
-
-    const parenthesis_content = in_parenthesis
-      ? `<span>(${prefixed_content})</span>`
-      : prefixed_content;
+    const formatted_content = _.chain(content)
+      .thru(formats[type])
+      .thru((content) =>
+        prefix ? `<span>${prefix}${content}</span>` : content
+      )
+      .thru((content) =>
+        in_parenthesis ? `<span>(${content})</span>` : content
+      )
+      .value();
 
     return (
       <span
         style={style}
         className={className}
         dangerouslySetInnerHTML={{
-          __html: parenthesis_content,
+          __html: formatted_content,
         }}
       />
     );
