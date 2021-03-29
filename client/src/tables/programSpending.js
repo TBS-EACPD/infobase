@@ -75,7 +75,7 @@ export default {
       //TODO: the col definitions here are copied from orgVoteStatPa, either change them or make it DRY
       this.add_col(header).add_child([
         {
-          type: "big_int",
+          type: "dollar",
           nick: `${header}exp`,
           header: {
             en: "Expenditures",
@@ -89,7 +89,7 @@ export default {
       ]);
     });
     this.add_col({
-      type: "big_int",
+      type: "dollar",
       nick: "pa_last_year_planned",
       /* should be kept hidden!
        */
