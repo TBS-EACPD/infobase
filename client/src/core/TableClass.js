@@ -438,7 +438,15 @@ export class Table extends mix().with(staticStoreMixin) {
         // need to handle special cases of '.', '', and '-'
         if (
           _.includes(
-            ["percentage", "decimal", "decimal1", "percentage1", "percentage2"],
+            [
+              "percentage",
+              "decimal",
+              "decimal1",
+              "decimal2",
+              "percentage1",
+              "percentage2",
+              "dollar",
+            ],
             type
           ) &&
           !_.isNaN(parseFloat(val))
@@ -456,11 +464,13 @@ export class Table extends mix().with(staticStoreMixin) {
               "percentage",
               "decimal",
               "decimal1",
+              "decimal2",
               "percentage1",
               "percentage2",
               "big_int",
               "big_int",
               "int",
+              "dollar",
             ],
             type
           )
