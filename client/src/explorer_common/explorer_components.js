@@ -167,34 +167,26 @@ export const ExplorerNode = ({
           onClick={noExpand ? null : () => onClickExpand(node)}
         >
           <div className="ExplorerRow">
-            {_.map(
-              column_defs,
-              (
-                { id, width, get_val, val_display, first_node_m2m_display },
-                ix
-              ) => (
-                <div
-                  key={id}
-                  className="ExplorerRow__Cell"
-                  style={
-                    ix === 0
-                      ? {
-                          ...computed_col_styles[id],
-                          flex: `1 0 ${width - depth * INDENT_SIZE}px`,
-                        }
-                      : computed_col_styles[id]
-                  }
-                >
-                  {node.data.is_m2m &&
-                  _.isFunction(first_node_m2m_display) &&
-                  depth === 0
-                    ? first_node_m2m_display(get_val(node))
-                    : _.isFunction(val_display)
-                    ? val_display(get_val(node))
-                    : get_val(node)}
-                </div>
-              )
-            )}
+            {_.map(column_defs, ({ id, width, get_val, val_display }, ix) => (
+              <div
+                key={id}
+                className="ExplorerRow__Cell"
+                style={
+                  ix === 0
+                    ? {
+                        ...computed_col_styles[id],
+                        flex: `1 0 ${width - depth * INDENT_SIZE}px`,
+                      }
+                    : computed_col_styles[id]
+                }
+              >
+                {_.isFunction(val_display)
+                  ? depth === 0
+                    ? val_display(get_val(node), node)
+                    : val_display(get_val(node))
+                  : get_val(node)}
+              </div>
+            ))}
           </div>
         </div>
         <TransitionGroup component={FirstChild}>
