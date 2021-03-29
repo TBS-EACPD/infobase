@@ -24,7 +24,6 @@ function FirstChild(props) {
   return childrenArray[0] || null;
 }
 
-const defaultMaxHeight = "500px";
 class AccordionEnterExit extends React.Component {
   constructor() {
     super();
@@ -44,14 +43,13 @@ class AccordionEnterExit extends React.Component {
   };
   onEntering = (component) => {
     const node = ReactDOM.findDOMNode(component);
-
     select(node)
       .style("max-height", "0px")
       .style("opacity", 1e-6)
       .transition()
       .ease(easeLinear)
       .duration(this.props.expandDuration)
-      .style("max-height", this.props.maxHeight || defaultMaxHeight)
+      .style("max-height", this.props.max_height)
       .style("opacity", "1")
       .on("end", function () {
         select(node).style("max-height", "none");
@@ -92,6 +90,7 @@ class AccordionEnterExit extends React.Component {
 }
 
 const StatelessPullDownAccordion = ({
+  max_height,
   title,
   isExpanded,
   children,
@@ -114,8 +113,11 @@ const StatelessPullDownAccordion = ({
           style={{ paddingTop: "5px" }}
           expandDuration={600}
           collapseDuration={600}
+          max_height={max_height}
         >
-          <div style={{ maxHeight: "80vh", overflowY: "auto" }}>{children}</div>
+          <div style={{ maxHeight: max_height, overflowY: "auto" }}>
+            {children}
+          </div>
         </AccordionEnterExit>
       )}
     </TransitionGroup>
@@ -131,6 +133,9 @@ const StatelessPullDownAccordion = ({
   </div>
 );
 
+StatelessPullDownAccordion.defaultProps = {
+  max_height: "80vh",
+};
 class AutoAccordion extends React.Component {
   constructor(props) {
     super(props);
