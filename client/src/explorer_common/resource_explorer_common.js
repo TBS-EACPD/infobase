@@ -121,7 +121,7 @@ export const get_col_defs = ({ year }) => [
           content={Math.ceil(val / 10000000) * 10000000}
           in_parenthesis
           prefix={"≤ "}
-          style={{ opacity: 0.5 }}
+          style={{ opacity: 0.7 }}
         />
       ) : null,
   },
@@ -149,7 +149,7 @@ export const get_col_defs = ({ year }) => [
           content={Math.ceil(val / 100) * 100}
           in_parenthesis
           prefix={"≤ "}
-          style={{ opacity: 0.5 }}
+          style={{ opacity: 0.7 }}
         />
       ) : null,
   },
