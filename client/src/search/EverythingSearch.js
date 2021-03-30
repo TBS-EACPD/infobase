@@ -27,7 +27,7 @@ import {
   datasets as table_search_config,
   glossary_lite as glossary_lite_search_config,
 } from "./search_configs.js";
-import { Typeahead } from "./Typeahead/Typeahead.js";
+import { SubjectWrappedTypeahead } from "./SubjectWrappedTypeahead.js";
 
 import text from "./EverythingSearch.yaml";
 import "./EverythingSearch.scss";
@@ -177,12 +177,7 @@ const EverythingSearch = withRouter(
     };
 
     render() {
-      const {
-        placeholder,
-        hide_utility_buttons,
-        page_size,
-        on_query,
-      } = this.props;
+      const { placeholder, hide_utility_buttons, page_size } = this.props;
 
       const option_checkboxes = _.map(
         search_options_hierarchy,
@@ -191,7 +186,7 @@ const EverythingSearch = withRouter(
 
       return (
         <div className="fcol-md-12 p-0">
-          <Typeahead
+          <SubjectWrappedTypeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
             config_groups={this.config_groups}
@@ -205,7 +200,6 @@ const EverythingSearch = withRouter(
               ]
             }
             page_size={page_size}
-            on_query={on_query}
             on_select={this.onSelect}
             additional_a11y_description={text_maker(
               "everything_search_additional_a11y_description"

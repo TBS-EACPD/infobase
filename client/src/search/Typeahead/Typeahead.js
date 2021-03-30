@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
@@ -17,7 +16,7 @@ import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
 import text from "./Typeahead.yaml";
 import "./Typeahead.scss";
 
-const { text_maker, TM } = create_text_maker_component(text);
+const { text_maker } = create_text_maker_component(text);
 
 const virtualized_cell_measure_cache = new CellMeasurerCache({
   fixedWidth: true,
@@ -35,60 +34,41 @@ export class Typeahead extends React.Component {
     this.state = {
       query_value: "",
       may_show_menu: false,
-      matching_results: [],
       selection_cursor: this.default_selection_cursor,
-      current_search_configs: props.search_configs,
     };
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { search_configs } = nextProps;
-    const { current_search_configs } = prevState;
-
-    if (search_configs !== current_search_configs) {
-      return {
-        matching_results: [],
-        current_search_configs: search_configs,
-      };
-    } else {
-      return null;
-    }
-  }
   componentDidUpdate(prevProps, prevState) {
-    const {
-      query_value,
-      current_search_configs,
-      selection_cursor,
-      may_show_menu,
-    } = this.state;
+    const { query_value, selection_cursor, may_show_menu } = this.state;
     const {
       query_value: prev_query_value,
-      current_search_configs: prev_search_configs,
       selection_cursor: prev_selection_cursor,
-      matching_results: prev_matching_results,
       may_show_menu: prev_may_show_menu,
     } = prevState;
-    const { all_options, config_groups } = this.props;
+    const {
+      matching_results,
+      update_matching_results,
+      force_update_matching_results,
+    } = this.props;
+    const { matching_results: prev_matching_results } = prevProps;
+
+    if (force_update_matching_results) {
+      update_matching_results(query_value);
+      return;
+    }
 
     if (
       query_value !== prev_query_value ||
-      current_search_configs !== prev_search_configs ||
       (this.show_menu && may_show_menu !== prev_may_show_menu)
     ) {
-      const matching_results = _.filter(
-        all_options,
-        ({ config_group_index, data }) =>
-          // could use optional chaining, but we WANT this to fail fast and loud, to catch
-          // malformed search_configs during development. Should be safe otherwsie
-          config_groups[config_group_index].group_filter(query_value, data)
-      );
-      if (matching_results !== prev_matching_results) {
-        virtualized_cell_measure_cache.clearAll();
-      }
+      update_matching_results(query_value);
 
       this.setState({
-        matching_results,
         selection_cursor: this.default_selection_cursor,
       });
+    }
+
+    if (matching_results !== prev_matching_results) {
+      virtualized_cell_measure_cache.clearAll();
     }
 
     if (this.virtualized_list_ref.current) {
@@ -115,62 +95,13 @@ export class Typeahead extends React.Component {
       additional_a11y_description,
       min_length,
       utility_buttons,
-      config_groups,
+      list_items_render,
     } = this.props;
 
-    const { query_value, selection_cursor, matching_results } = this.state;
+    const { query_value, selection_cursor } = this.state;
+    const { matching_results } = this.props;
 
-    const list_items = _.compact([
-      ..._.chain(matching_results)
-        .groupBy("config_group_index")
-        .flatMap((results, group_index) =>
-          _.map(results, (result, index) => ({
-            is_first_in_group: index === 0,
-            group_index,
-            result,
-          }))
-        )
-        .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
-          return [
-            <div key={`result-${result_index}`}>
-              {result_index === 0 && (
-                <div
-                  key="header"
-                  className="typeahead__header"
-                  style={{ borderTop: "none" }}
-                >
-                  <TM
-                    k="menu_with_results_status"
-                    args={{
-                      total_matching_results: matching_results.length,
-                    }}
-                  />
-                </div>
-              )}
-              {is_first_in_group && (
-                <div className="typeahead__header" key={`group-${group_index}`}>
-                  {config_groups[group_index].group_header}
-                </div>
-              )}
-              <div
-                className={classNames(
-                  "typeahead__item",
-                  result_index === selection_cursor && "typeahead__item--active"
-                )}
-                onClick={() => this.handle_result_selection(result)}
-                role="option"
-                aria-selected={result_index === selection_cursor}
-              >
-                <a className="typeahead__result">
-                  {result.menu_content(query_value)}
-                </a>
-              </div>
-            </div>,
-          ];
-        })
-        .compact()
-        .value(),
-    ]);
+    const list_items = list_items_render(query_value, selection_cursor);
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
@@ -288,7 +219,8 @@ export class Typeahead extends React.Component {
   */
   default_selection_cursor = -1;
   get previous_selection_cursor() {
-    const { selection_cursor, matching_results } = this.state;
+    const { selection_cursor } = this.state;
+    const { matching_results } = this.props;
 
     if (selection_cursor === this.default_selection_cursor) {
       return matching_results.length - 1;
@@ -297,7 +229,8 @@ export class Typeahead extends React.Component {
     }
   }
   get next_selection_cursor() {
-    const { selection_cursor, matching_results } = this.state;
+    const { selection_cursor } = this.state;
+    const { matching_results } = this.props;
 
     if (selection_cursor === matching_results.length - 1) {
       return this.default_selection_cursor;
@@ -314,22 +247,10 @@ export class Typeahead extends React.Component {
 
   handle_input_focus = () => this.setState({ may_show_menu: true });
 
-  debounced_on_query = _.debounce((query_value) => {
-    this.props.on_query(query_value);
-
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: `TYPEAHEAD_SEARCH_QUERY`,
-      MISC2: `query: ${query_value}, search_configs: ${_.map(
-        this.props.search_configs,
-        "config_name"
-      )}`,
-    });
-  }, 400);
   handle_input_change = (event) => {
     const trimmed_input_value = _.trimStart(event.target.value);
 
-    this.debounced_on_query(trimmed_input_value);
+    this.props.debounced_on_query(trimmed_input_value);
 
     this.setState({
       may_show_menu: true,
@@ -355,7 +276,7 @@ export class Typeahead extends React.Component {
 
       if (!_.isNull(active_item)) {
         active_item.click();
-      } else if (!_.isEmpty(this.state.matching_results)) {
+      } else if (!_.isEmpty(this.props.matching_results)) {
         this.setState({ selection_cursor: 0 });
       }
     }
