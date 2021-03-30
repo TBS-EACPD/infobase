@@ -123,35 +123,44 @@ export class DisplayTable extends React.Component {
   }
 
   change_page_size = (new_page_size) =>
-    this.setState(
-      {
-        loading: true,
-      },
-      _.debounce(() =>
-        this.setState({
-          page_size: new_page_size,
-          current_page: 0,
-          loading: false,
-        })
-      )
-    );
+    this.state.page_size !== new_page_size &&
+    this.setState({
+      loading: true,
+      page_size: new_page_size,
+      current_page: 0,
+    });
 
   change_page = (page) =>
     this.state.current_page !== page &&
-    this.setState(
-      {
-        loading: true,
-      },
-      _.debounce(() =>
-        this.setState(
-          {
-            current_page: page,
-            loading: false,
-          },
-          _.debounce(() => this.first_data_ref.current.focus()) //for some reason if i don't debounce it by 0ms, it will sometimes execute without a proper focus
-        )
-      )
-    );
+    this.setState({
+      loading: true,
+      current_page: page,
+    });
+
+  debounced_stop_loading = _.debounce(
+    () => this.setState({ loading: false }),
+    100
+  );
+
+  debounced_first_data_focus = _.debounce(
+    () => this.first_data_ref.current.focus(),
+    100
+  );
+
+  componentDidUpdate(prev_props, prev_state) {
+    const { loading } = this.state;
+    const { loading: prev_loading } = prev_state;
+    if (loading) {
+      this.debounced_stop_loading();
+    } else if (prev_loading && !loading) {
+      this.debounced_first_data_focus();
+    }
+  }
+
+  componentWillUnmount() {
+    this.debounced_first_data_focus.cancel();
+    this.debounced_stop_loading.cancel();
+  }
 
   render() {
     const {
