@@ -120,6 +120,9 @@ export class SubjectWrappedTypeahead extends React.Component {
           .value(),
       ]);
 
+    const get_selected_item_text = (selection_cursor) =>
+      matching_results[selection_cursor].name;
+
     return (
       <Typeahead
         {...this.props}
@@ -128,6 +131,7 @@ export class SubjectWrappedTypeahead extends React.Component {
         list_items_render={list_items_render}
         force_update_matching_results={force_update_matching_results}
         debounced_on_query={this.debounced_on_query}
+        get_selected_item_text={get_selected_item_text}
       />
     );
   }
