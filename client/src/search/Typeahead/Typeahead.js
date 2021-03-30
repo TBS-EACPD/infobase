@@ -97,6 +97,7 @@ export class Typeahead extends React.Component {
       min_length,
       utility_buttons,
       list_items_render,
+      get_selected_item_text,
     } = this.props;
 
     const { query_value, selection_cursor } = this.state;
@@ -143,7 +144,12 @@ export class Typeahead extends React.Component {
           )}
         </div>
         {this.show_menu && (
-          <TypeaheadA11yStatus {...{ ...this.props, ...this.state }} />
+          <TypeaheadA11yStatus
+            min_length={min_length}
+            selection_cursor={selection_cursor}
+            get_selected_item_text={get_selected_item_text}
+            matching_results={matching_results}
+          />
         )}
         {this.show_menu && (
           <AutoSizer>
