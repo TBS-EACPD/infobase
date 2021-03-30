@@ -99,7 +99,7 @@ const get_children_content = ({
           typeName="ul"
           className="ExplorerNodeContainer__ChildrenList"
           staggerDurationBy="0"
-          duration={500}
+          duration={400}
           disableAllAnimations={node_group.length > 150} /* for perf reasons */
         >
           {_.map(node_group, (child_node, ix) => (
@@ -181,7 +181,7 @@ export const ExplorerNode = ({
                 }
               >
                 {_.isFunction(val_display)
-                  ? val_display(get_val(node), node)
+                  ? val_display(get_val(node))
                   : get_val(node)}
               </div>
             ))}
@@ -189,7 +189,11 @@ export const ExplorerNode = ({
         </div>
         <TransitionGroup component={FirstChild}>
           {isExpanded && (
-            <AccordionEnterExit expandDuration={500} collapseDuration={300}>
+            <AccordionEnterExit
+              expandDuration={300}
+              collapseDuration={100}
+              opacity={1e-20}
+            >
               <div className="ExplorerNode__SuppContent">
                 {_.isFunction(get_non_col_content) &&
                   get_non_col_content({ node })}
@@ -201,7 +205,11 @@ export const ExplorerNode = ({
     </div>
     <TransitionGroup component={FirstChild}>
       {isExpanded && (
-        <AccordionEnterExit expandDuration={500} collapseDuration={300}>
+        <AccordionEnterExit
+          expandDuration={300}
+          collapseDuration={100}
+          opacity={1e-20}
+        >
           {get_children_content({
             node,
             depth: depth + 1,
