@@ -31,21 +31,20 @@ class AccordionEnterExit extends React.Component {
   onExiting = (component) => {
     const node = ReactDOM.findDOMNode(component);
     const initialHeight = node.offsetHeight;
-
     select(node)
       .style("opacity", 1)
       .style("max-height", initialHeight + "px")
       .transition()
       .ease(easeLinear)
       .duration(this.props.collapseDuration)
-      .style("opacity", 1e-6)
+      .style("opacity", this.props.opacity)
       .style("max-height", "1px");
   };
   onEntering = (component) => {
     const node = ReactDOM.findDOMNode(component);
     select(node)
       .style("max-height", "0px")
-      .style("opacity", 1e-6)
+      .style("opacity", this.props.opacity)
       .transition()
       .ease(easeLinear)
       .duration(this.props.expandDuration)
@@ -91,6 +90,7 @@ class AccordionEnterExit extends React.Component {
 
 AccordionEnterExit.defaultProps = {
   max_height: "80vh",
+  opacity: 1e-6,
 };
 
 const StatelessPullDownAccordion = ({
