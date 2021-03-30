@@ -57,81 +57,96 @@ export class SubjectWrappedTypeahead extends React.Component {
       )}`,
     });
   }, 400);
+
+  handle_result_selection = (selected) => {
+    const { on_select } = this.props;
+    const { query_value } = this.state;
+
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: `TYPEAHEAD_SEARCH_SELECT`,
+      MISC2: `Queried: ${query_value}. Selected: ${selected.name}`,
+    });
+
+    if (_.isFunction(on_select)) {
+      on_select(selected.data);
+    }
+
+    this.setState({
+      query_value: "",
+    });
+  };
+
+  list_items_render = (query_value, selection_cursor) => {
+    const { matching_results } = this.state;
+    const { config_groups } = this.props;
+    return _.compact([
+      ..._.chain(matching_results)
+        .groupBy("config_group_index")
+        .flatMap((results, group_index) =>
+          _.map(results, (result, index) => ({
+            is_first_in_group: index === 0,
+            group_index,
+            result,
+          }))
+        )
+        .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
+          return [
+            <div key={`result-${result_index}`}>
+              {result_index === 0 && (
+                <div
+                  key="header"
+                  className="typeahead__header"
+                  style={{ borderTop: "none" }}
+                >
+                  <TM
+                    k="menu_with_results_status"
+                    args={{
+                      total_matching_results: matching_results.length,
+                    }}
+                  />
+                </div>
+              )}
+              {is_first_in_group && (
+                <div className="typeahead__header" key={`group-${group_index}`}>
+                  {config_groups[group_index].group_header}
+                </div>
+              )}
+              <div
+                className={classNames(
+                  "typeahead__item",
+                  result_index === selection_cursor && "typeahead__item--active"
+                )}
+                onClick={() => this.handle_result_selection(result)}
+                role="option"
+                aria-selected={result_index === selection_cursor}
+              >
+                <a className="typeahead__result">
+                  {result.menu_content(query_value)}
+                </a>
+              </div>
+            </div>,
+          ];
+        })
+        .compact()
+        .value(),
+    ]);
+  };
+
+  get_selected_item_text = (selection_cursor) =>
+    this.state.matching_results[selection_cursor].name;
   render() {
     const { matching_results, force_update_matching_results } = this.state;
-    const { config_groups } = this.props;
-
-    const list_items_render = (query_value, selection_cursor) =>
-      _.compact([
-        ..._.chain(matching_results)
-          .groupBy("config_group_index")
-          .flatMap((results, group_index) =>
-            _.map(results, (result, index) => ({
-              is_first_in_group: index === 0,
-              group_index,
-              result,
-            }))
-          )
-          .flatMap(
-            ({ is_first_in_group, group_index, result }, result_index) => {
-              return [
-                <div key={`result-${result_index}`}>
-                  {result_index === 0 && (
-                    <div
-                      key="header"
-                      className="typeahead__header"
-                      style={{ borderTop: "none" }}
-                    >
-                      <TM
-                        k="menu_with_results_status"
-                        args={{
-                          total_matching_results: matching_results.length,
-                        }}
-                      />
-                    </div>
-                  )}
-                  {is_first_in_group && (
-                    <div
-                      className="typeahead__header"
-                      key={`group-${group_index}`}
-                    >
-                      {config_groups[group_index].group_header}
-                    </div>
-                  )}
-                  <div
-                    className={classNames(
-                      "typeahead__item",
-                      result_index === selection_cursor &&
-                        "typeahead__item--active"
-                    )}
-                    onClick={() => this.handle_result_selection(result)}
-                    role="option"
-                    aria-selected={result_index === selection_cursor}
-                  >
-                    <a className="typeahead__result">
-                      {result.menu_content(query_value)}
-                    </a>
-                  </div>
-                </div>,
-              ];
-            }
-          )
-          .compact()
-          .value(),
-      ]);
-
-    const get_selected_item_text = (selection_cursor) =>
-      matching_results[selection_cursor].name;
 
     return (
       <Typeahead
         {...this.props}
         matching_results={matching_results}
         update_matching_results={this.update_matching_results}
-        list_items_render={list_items_render}
+        list_items_render={this.list_items_render}
         force_update_matching_results={force_update_matching_results}
         debounced_on_query={this.debounced_on_query}
-        get_selected_item_text={get_selected_item_text}
+        get_selected_item_text={this.get_selected_item_text}
       />
     );
   }

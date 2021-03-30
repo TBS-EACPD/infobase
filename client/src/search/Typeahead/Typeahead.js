@@ -7,8 +7,6 @@ import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList.js";
 import { create_text_maker_component } from "src/components/index.js";
 
-import { log_standard_event } from "src/core/analytics.js";
-
 import { IconSearch } from "src/icons/icons.js";
 
 import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
@@ -21,6 +19,18 @@ const { text_maker } = create_text_maker_component(text);
 const virtualized_cell_measure_cache = new CellMeasurerCache({
   fixedWidth: true,
 });
+
+/*
+  props: {
+    matching_results: required - actual data for results
+    update_matching_results: required - callback for when query or menu visibility changes
+    force_update_matching_results: optional - if some search configuration changes externally, use this as the matching results cannot be updated externally as well since query is missing
+    debounced_on_query: optional - when query changes, run a debounced function
+    list_items_render: optional - custom function to determine how the list should be rendered; runs function with arguments (query_value, selection_cursor). Default: assumes a list of strings and renders a <div> for each string
+    get_selected_item_text: optional - custom function to determine what screen reader should read for the selected item; runs function with argument (selection_cursor). Default: assumes a list of strings and selects the string of the current selected index
+  }
+
+ */
 
 export class Typeahead extends React.Component {
   constructor(props) {
@@ -45,15 +55,13 @@ export class Typeahead extends React.Component {
       may_show_menu: prev_may_show_menu,
     } = prevState;
     const {
-      matching_results, //actual data for results
-      update_matching_results, //callback for when query or menu visibility changes
-      force_update_matching_results, //if some search configuration changes externally, use this
-      // as the matching results cannot be updated externally as well since query is missing
+      update_matching_results,
+      force_update_matching_results,
     } = this.props;
-    const { matching_results: prev_matching_results } = prevProps;
 
     if (force_update_matching_results) {
       update_matching_results(query_value);
+      virtualized_cell_measure_cache.clearAll();
       return;
     }
 
@@ -62,14 +70,11 @@ export class Typeahead extends React.Component {
       (this.show_menu && may_show_menu !== prev_may_show_menu)
     ) {
       update_matching_results(query_value);
+      virtualized_cell_measure_cache.clearAll();
 
       this.setState({
         selection_cursor: this.default_selection_cursor,
       });
-    }
-
-    if (matching_results !== prev_matching_results) {
-      virtualized_cell_measure_cache.clearAll();
     }
 
     if (this.virtualized_list_ref.current) {
@@ -103,9 +108,9 @@ export class Typeahead extends React.Component {
     const { query_value, selection_cursor } = this.state;
     const { matching_results } = this.props;
 
-    const list_items = list_items_render
-      ? list_items_render(query_value, selection_cursor)
-      : _.map(matching_results, (result) => <div>{result}</div>);
+    const list_items =
+      list_items_render(query_value, selection_cursor) ??
+      _.map(matching_results, (result) => <div>{result}</div>);
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
@@ -303,25 +308,6 @@ export class Typeahead extends React.Component {
         this.handle_enter_key(e);
         break;
     }
-  };
-
-  handle_result_selection = (selected) => {
-    const { on_select } = this.props;
-    const { query_value } = this.state;
-
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-      MISC2: `Queried: ${query_value}. Selected: ${selected.name}`,
-    });
-
-    if (_.isFunction(on_select)) {
-      on_select(selected.data);
-    }
-
-    this.setState({
-      query_value: "",
-    });
   };
 }
 
