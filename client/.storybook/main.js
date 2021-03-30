@@ -50,7 +50,7 @@ module.exports = {
         // * small caveat, unlike normal builds nothing is watching the extended bootstrap files themselves, only output when
         // something changes in a files the storybook webpack IS watching
         apply: (compiler) => {
-          compiler.hooks.emit.tap("EmitPlugin", () =>
+          compiler.hooks.entryOption.tap("watchRun", () =>
             bundle_extended_bootstrap_css(config.output.path)
           );
         },
