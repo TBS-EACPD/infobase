@@ -45,9 +45,10 @@ export class Typeahead extends React.Component {
       may_show_menu: prev_may_show_menu,
     } = prevState;
     const {
-      matching_results,
-      update_matching_results,
-      force_update_matching_results,
+      matching_results, //actual data for results
+      update_matching_results, //callback for when query or menu visibility changes
+      force_update_matching_results, //if some search configuration changes externally, use this
+      // as the matching results cannot be updated externally as well since query is missing
     } = this.props;
     const { matching_results: prev_matching_results } = prevProps;
 
@@ -87,7 +88,7 @@ export class Typeahead extends React.Component {
   }
   componentWillUnmount() {
     document.body.removeEventListener("click", this.handle_window_click);
-    this.debounced_on_query.cancel();
+    this.props.debounced_on_query && this.props.debounced_on_query.cancel();
   }
   render() {
     const {
@@ -101,7 +102,9 @@ export class Typeahead extends React.Component {
     const { query_value, selection_cursor } = this.state;
     const { matching_results } = this.props;
 
-    const list_items = list_items_render(query_value, selection_cursor);
+    const list_items = list_items_render
+      ? list_items_render(query_value, selection_cursor)
+      : _.map(matching_results, (result) => <div>{result}</div>);
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
@@ -250,7 +253,8 @@ export class Typeahead extends React.Component {
   handle_input_change = (event) => {
     const trimmed_input_value = _.trimStart(event.target.value);
 
-    this.props.debounced_on_query(trimmed_input_value);
+    this.props.debounced_on_query &&
+      this.props.debounced_on_query(trimmed_input_value);
 
     this.setState({
       may_show_menu: true,

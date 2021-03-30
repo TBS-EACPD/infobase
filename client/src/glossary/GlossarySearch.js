@@ -8,7 +8,7 @@ import { glossary_href } from "src/link_utils.js";
 
 import { glossary as glossary_search_config } from "src/search/search_configs.js";
 import { InfoBaseHighlighter } from "src/search/search_utils.js";
-import { Typeahead } from "src/search/Typeahead/Typeahead.js";
+import { SubjectWrappedTypeahead } from "src/search/SubjectWrappedTypeahead.js";
 
 const glossary_placeholder = {
   en: "Search for a term used in GC InfoBase",
@@ -21,7 +21,7 @@ const GlossarySearch = withRouter(
       const { history } = this.props;
 
       return (
-        <Typeahead
+        <SubjectWrappedTypeahead
           placeholder={glossary_placeholder}
           search_configs={[glossary_search_config]}
           config_groups={this.config_groups}
