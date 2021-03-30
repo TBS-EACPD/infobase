@@ -26,10 +26,6 @@ function bundle_extended_bootstrap_css(output_path) {
           test: /\.css$|\.scss$/,
           use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
         },
-        {
-          test: /\.(eot|svg|ttf|woff|woff2)$/, // Temporary, throw out all bootstrap3 glyphicons, won't need in bootstrap4
-          loader: "null-loader",
-        },
       ],
     },
     plugins: [
