@@ -77,8 +77,7 @@
   }
 }
 
-.typeahead__result,
-.typeahead__control {
+.typeahead__result {
   display: block;
   padding: 3px 20px;
   overflow: hidden;
@@ -86,11 +85,6 @@
   white-space: normal;	
   color: $linkColor;
 }
-
-.typeahead__control {
-  text-align: center;
-}
-
 // utility classes not directly used by the Typeahead component, but by consumers, because
 // consumers are responsible for defining the contents of typeahead matches... currently...
 // (moving that responsibility more in to Typeahead itself is a possible TODO)
