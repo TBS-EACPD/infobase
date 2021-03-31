@@ -365,7 +365,7 @@ export class DisplayTable extends React.Component {
 
     const number_of_pages = paginated_data.length;
 
-    const page_selector = enable_pagination && !loading && (
+    const page_selector = enable_pagination && (
       <SelectPage
         num_pages={number_of_pages}
         current_page={current_page}

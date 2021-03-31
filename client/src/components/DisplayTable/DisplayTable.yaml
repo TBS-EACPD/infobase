@@ -19,3 +19,11 @@ items_per_page_description:
 show_all:
   en: Show all
   fr: TODO
+ellipsis_end:
+  transform: [handlebars]
+  en: Page {{page_num}}. Click this, then move right to view more options
+  fr: TODO
+ellipsis_start:
+  transform: [handlebars]
+  en: Page {{page_num}}. Click this, then move left to view more options
+  fr: TODO
