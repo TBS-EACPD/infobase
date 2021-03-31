@@ -149,16 +149,12 @@ export class DisplayTable extends React.Component {
 
   componentDidUpdate(prev_props, prev_state) {
     const { loading } = this.state;
-    const { loading: prev_loading } = prev_state;
     if (loading) {
       this.debounced_stop_loading();
-    } else if (prev_loading && !loading) {
-      this.debounced_first_data_focus();
     }
   }
 
   componentWillUnmount() {
-    this.debounced_first_data_focus.cancel();
     this.debounced_stop_loading.cancel();
   }
 
