@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
@@ -110,7 +111,16 @@ export class Typeahead extends React.Component {
 
     const list_items =
       list_items_render(query_value, selection_cursor) ??
-      _.map(matching_results, (result) => <div>{result}</div>);
+      _.map(matching_results, (result, result_index) => (
+        <div
+          className={classNames(
+            "typeahead__item",
+            result_index === selection_cursor && "typeahead__item--active"
+          )}
+        >
+          {result}
+        </div>
+      ));
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
