@@ -64,6 +64,12 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
   </Fragment>
 );
 
+const _is_ellipsis = (page_options, page_num, index) =>
+  index !== 0 &&
+  index !== page_options.length - 1 &&
+  (page_options[index + 1] !== page_num + 1 ||
+    page_options[index - 1] !== page_num - 1);
+
 export const SelectPage = ({
   current_page,
   num_pages,
@@ -205,17 +211,19 @@ export const SelectPage = ({
                     (page_num - 1 === current_page && "--reversed") || ""
                   }`}
                   onClick={() => change_page(page_num - 1)}
-                  aria-label={text_maker("page", { page_num: page_num })}
+                  aria-label={
+                    _is_ellipsis(page_options, page_num, index)
+                      ? page_options[index + 1] !== page_num + 1
+                        ? text_maker("ellipsis_end", { page_num: page_num })
+                        : text_maker("ellipsis_start", { page_num: page_num })
+                      : text_maker("page", { page_num: page_num })
+                  }
                   role="tab"
                   aria-selected={`${page_num - 1 === current_page}`}
                   dangerouslySetInnerHTML={{
-                    __html:
-                      index !== 0 &&
-                      index !== page_options.length - 1 &&
-                      (page_options[index + 1] !== page_num + 1 ||
-                        page_options[index - 1] !== page_num - 1)
-                        ? "&hellip;"
-                        : page_num,
+                    __html: _is_ellipsis(page_options, page_num, index)
+                      ? "&hellip;"
+                      : page_num,
                   }}
                 ></button>
               ))}
