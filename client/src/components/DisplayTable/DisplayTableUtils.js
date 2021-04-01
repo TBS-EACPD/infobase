@@ -201,7 +201,7 @@ export const SelectPage = ({
         <div style={{ padding: "10px" }}>
           <div className="frow">
             <div
-              className="fcol-xs-12 d-flex justify-content-center page-selector"
+              className="fcol-xs-12 d-flex justify-content-center"
               style={{ flexWrap: "wrap" }}
             >
               {_.map(page_options, (page_num, index) => (
@@ -209,7 +209,7 @@ export const SelectPage = ({
                   key={page_num}
                   className={`btn-ib-light${
                     (page_num - 1 === current_page && "--reversed") || ""
-                  }`}
+                  } page-selector`}
                   onClick={() => change_page(page_num - 1)}
                   aria-label={
                     _is_ellipsis(page_options, page_num, index)

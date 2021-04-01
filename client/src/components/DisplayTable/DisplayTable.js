@@ -125,7 +125,7 @@ export class DisplayTable extends React.Component {
   change_page_size = (new_page_size) =>
     this.state.page_size !== new_page_size &&
     this.setState({
-      loading: true,
+      show_pagination_load_spinner: true,
       page_size: new_page_size,
       current_page: 0,
     });
@@ -133,23 +133,18 @@ export class DisplayTable extends React.Component {
   change_page = (page) =>
     this.state.current_page !== page &&
     this.setState({
-      loading: true,
+      show_pagination_load_spinner: true,
       current_page: page,
     });
 
   debounced_stop_loading = _.debounce(
-    () => this.setState({ loading: false }),
-    100
-  );
-
-  debounced_first_data_focus = _.debounce(
-    () => this.first_data_ref.current.focus(),
-    100
+    () => this.setState({ show_pagination_load_spinner: false }),
+    1
   );
 
   componentDidUpdate(prev_props, prev_state) {
-    const { loading } = this.state;
-    if (loading) {
+    const { show_pagination_load_spinner } = this.state;
+    if (show_pagination_load_spinner) {
       this.debounced_stop_loading();
     }
   }
@@ -195,7 +190,7 @@ export class DisplayTable extends React.Component {
       visible_col_keys,
       page_size,
       current_page,
-      loading,
+      show_pagination_load_spinner,
     } = this.state;
 
     const col_configs_with_defaults = get_col_configs_with_defaults(
@@ -429,8 +424,8 @@ export class DisplayTable extends React.Component {
               </tr>
             )}
             <tr className="table-header">
-              {_.map(visible_ordered_col_keys, (column_key, i) => (
-                <th key={i} className={"center-text"}>
+              {_.map(visible_ordered_col_keys, (column_key, row_index) => (
+                <th key={row_index} className={"center-text"}>
                   {col_configs_with_defaults[column_key].header}
                 </th>
               ))}
@@ -495,7 +490,7 @@ export class DisplayTable extends React.Component {
             )}
             {page_selector}
           </thead>
-          {loading && (
+          {show_pagination_load_spinner && (
             <tbody>
               <tr>
                 <td
@@ -511,14 +506,14 @@ export class DisplayTable extends React.Component {
               </tr>
             </tbody>
           )}
-          {!loading &&
+          {!show_pagination_load_spinner &&
             (_.isEmpty(visible_ordered_col_keys) ? (
               <NoDataMessage />
             ) : (
               <tbody>
-                {_.map(paginated_data[current_page], (row, i) => (
-                  <tr key={i}>
-                    {_.map(visible_ordered_col_keys, (col_key, idx) => (
+                {_.map(paginated_data[current_page], (row, row_index) => (
+                  <tr key={row_index}>
+                    {_.map(visible_ordered_col_keys, (col_key, col_index) => (
                       <td
                         style={{
                           fontSize: "14px",
@@ -526,7 +521,11 @@ export class DisplayTable extends React.Component {
                         }}
                         key={col_key}
                         tabIndex={-1}
-                        ref={idx === 0 && i === 0 ? this.first_data_ref : null}
+                        ref={
+                          col_index === 0 && row_index === 0
+                            ? this.first_data_ref
+                            : null
+                        }
                       >
                         {col_configs_with_defaults[col_key].formatter ? (
                           _.isString(
