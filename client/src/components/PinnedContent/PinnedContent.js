@@ -84,6 +84,24 @@ class _PinnedContent extends React.Component {
     this.update_content_height();
   }
 
+  componentDidUpdate(prev_props, prev_state) {
+    const {
+      match: {
+        params: { options: panel_link },
+      },
+    } = this.props;
+
+    const {
+      match: {
+        params: { options: prev_panel_link },
+      },
+    } = prev_props;
+
+    !prev_panel_link &&
+      panel_link &&
+      this.setState({ user_has_enabled_pinning: false });
+  }
+
   componentWillUnmount() {
     this.update_content_height.cancel();
   }
