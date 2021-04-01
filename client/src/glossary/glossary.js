@@ -188,9 +188,13 @@ export default class Glossary extends React.Component {
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
           {!is_a11y_mode && (
-            <BackToTop focus={() => {
-              document.querySelector("#glossary_search > div > div > input").focus();
-            }}/>
+            <BackToTop
+              focus={() => {
+                document
+                  .querySelector("#glossary_search > div > div > input")
+                  .focus();
+              }}
+            />
           )}
           <Glossary_
             active_key={active_key}
