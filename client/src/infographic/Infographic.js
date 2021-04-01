@@ -32,6 +32,7 @@ import { BubbleMenu } from "./BubbleMenu.js";
 import { infograph_href_template } from "./infographic_link.js";
 
 import PanelFilterControl from "./PanelFilterControl.js";
+import TableOfContents from "./TableOfContents.js";
 
 import text from "./Infographic.yaml";
 import "./Infographic.scss";
@@ -245,6 +246,13 @@ class InfoGraph_ extends React.Component {
                 }}
               />
             )}
+          {!loading && (
+            <TableOfContents
+              subject={subject}
+              panel_keys={filtered_panel_keys}
+              active_bubble_id={active_bubble_id}
+            />
+          )}
           {!loading &&
             _.map(filtered_panel_keys, (panel_key) => (
               <PanelRenderer
