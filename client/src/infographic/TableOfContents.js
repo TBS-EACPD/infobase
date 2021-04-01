@@ -7,6 +7,8 @@ import {
   UnlabeledTombstone,
 } from "src/components/index.js";
 
+import { separatorColor } from "src/core/color_defs.js";
+
 import { infograph_options_href_template } from "./infographic_link.js";
 
 import text from "./TableOfContents.yaml";
@@ -52,7 +54,7 @@ export default class TableOfContents extends React.Component {
       (panel_link) =>
         panel_link && (
           <a
-            style={{ display: "block" }}
+            style={{ display: "block", margin: "0 5px" }}
             href={panel_link.link}
             key={panel_link.key}
           >
@@ -65,11 +67,21 @@ export default class TableOfContents extends React.Component {
       <Details
         summary_content={
           <div>
-            <TM k="table_of_contents" />
+            <TM k="table_of_contents" />{" "}
             <TM className="panel-status-text" k="skip_to_panel" />
           </div>
         }
-        content={<UnlabeledTombstone items={link_elements} />}
+        content={
+          <div
+            style={{
+              border: "1px solid",
+              borderColor: separatorColor,
+              borderRadius: "5px",
+            }}
+          >
+            <UnlabeledTombstone items={link_elements} />
+          </div>
+        }
       />
     );
   }
