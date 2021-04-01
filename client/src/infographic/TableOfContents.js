@@ -19,10 +19,11 @@ export default class TableOfContents extends React.Component {
   render() {
     const { active_bubble_id, panel_keys, subject } = this.props;
 
-    const panel_links = _.compact(
+    const panel_links =
       active_bubble_id &&
-        panel_keys &&
-        subject &&
+      panel_keys &&
+      subject &&
+      _.compact(
         _.map(panel_keys, (panel_key) => {
           const link = infograph_options_href_template(
             subject,
@@ -32,6 +33,7 @@ export default class TableOfContents extends React.Component {
             }
           );
 
+          //Kinda hacky... Should probably find a better way of doing this...
           const title_element = document.querySelector(
             `#${panel_key} > .panel > .panel-heading > .panel-title`
           );
@@ -41,48 +43,51 @@ export default class TableOfContents extends React.Component {
             title_element &&
             title_element.innerText && {
               link: link,
-              //Kinda hacky... Should probably find a better way of doing this...
               text: title_element.innerText,
               key: panel_key,
             }
           );
         })
-    );
+      );
 
-    const link_elements = _.map(
-      panel_links,
-      (panel_link) =>
-        panel_link && (
-          <a
-            style={{ display: "block", margin: "0 5px" }}
-            href={panel_link.link}
-            key={panel_link.key}
-          >
-            {panel_link.text}
-          </a>
-        )
-    );
+    const link_elements =
+      panel_links &&
+      _.map(
+        panel_links,
+        (panel_link) =>
+          panel_link && (
+            <a
+              style={{ margin: "0 5px" }}
+              href={panel_link.link}
+              key={panel_link.key}
+            >
+              {panel_link.text}
+            </a>
+          )
+      );
 
     return (
-      <Details
-        summary_content={
-          <div>
-            <TM k="table_of_contents" />{" "}
-            <TM className="panel-status-text" k="skip_to_panel" />
-          </div>
-        }
-        content={
-          <div
-            style={{
-              border: "1px solid",
-              borderColor: separatorColor,
-              borderRadius: "5px",
-            }}
-          >
-            <UnlabeledTombstone items={link_elements} />
-          </div>
-        }
-      />
+      link_elements && (
+        <Details
+          summary_content={
+            <div>
+              <TM k="table_of_contents" />{" "}
+              <TM className="panel-status-text" k="skip_to_panel" />
+            </div>
+          }
+          content={
+            <div
+              style={{
+                border: "1px solid",
+                borderColor: separatorColor,
+                borderRadius: "5px",
+              }}
+            >
+              <UnlabeledTombstone items={link_elements} />
+            </div>
+          }
+        />
+      )
     );
   }
 }
