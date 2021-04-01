@@ -37,10 +37,15 @@ const sub_app_name = "_rpb";
 const temp_graphql_ids = ["services"];
 
 function get_all_data_columns_for_table(table) {
-  return _.chain(table.unique_headers)
-    .map((nick) => table.col_from_nick(nick))
-    .filter((col) => !col.hidden && !col.key && col.not_for_display !== true)
-    .value();
+  // temp
+  return table
+    ? _.chain(table.unique_headers)
+        .map((nick) => table.col_from_nick(nick))
+        .filter(
+          (col) => !col.hidden && !col.key && col.not_for_display !== true
+        )
+        .value()
+    : [];
 }
 
 function get_default_dimension_for_table(table) {
