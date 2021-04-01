@@ -1,7 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import { Details, create_text_maker_component } from "src/components/index.js";
+import {
+  Details,
+  create_text_maker_component,
+  UnlabeledTombstone,
+} from "src/components/index.js";
 
 import { infograph_options_href_template } from "./infographic_link.js";
 
@@ -13,32 +17,49 @@ export default class TableOfContents extends React.Component {
   render() {
     const { active_bubble_id, panel_keys, subject } = this.props;
 
-    const panel_links =
+    const panel_links = _.compact(
       active_bubble_id &&
-      panel_keys &&
-      subject &&
-      _.map(
-        panel_keys,
-        (panel_key) =>
-          infograph_options_href_template(subject, active_bubble_id, {
-            panel_key: panel_key,
-          }) &&
-          document.querySelector(
+        panel_keys &&
+        subject &&
+        _.map(panel_keys, (panel_key) => {
+          const link = infograph_options_href_template(
+            subject,
+            active_bubble_id,
+            {
+              panel_key: panel_key,
+            }
+          );
+
+          const title_element = document.querySelector(
             `#${panel_key} > .panel > .panel-heading > .panel-title`
-          ) && {
-            link: window.location.href.replace(
-              window.location.hash,
-              infograph_options_href_template(subject, active_bubble_id, {
-                panel_key: panel_key,
-              })
-            ),
-            //Kinda hacky... Should probably find a better way of doing this...
-            text: document.querySelector(
-              `#${panel_key} > .panel > .panel-heading > .panel-title`
-            ).innerText,
-            key: panel_key,
-          }
-      );
+          );
+
+          return (
+            link &&
+            title_element &&
+            title_element.innerText && {
+              link: link,
+              //Kinda hacky... Should probably find a better way of doing this...
+              text: title_element.innerText,
+              key: panel_key,
+            }
+          );
+        })
+    );
+
+    const link_elements = _.map(
+      panel_links,
+      (panel_link) =>
+        panel_link && (
+          <a
+            style={{ display: "block" }}
+            href={panel_link.link}
+            key={panel_link.key}
+          >
+            {panel_link.text}
+          </a>
+        )
+    );
 
     return (
       <Details
@@ -48,19 +69,7 @@ export default class TableOfContents extends React.Component {
             <TM className="panel-status-text" k="skip_to_panel" />
           </div>
         }
-        content={_.map(
-          panel_links,
-          (panel_link) =>
-            panel_link && (
-              <a
-                style={{ display: "block" }}
-                href={panel_link.link}
-                key={panel_link.key}
-              >
-                {panel_link.text}
-              </a>
-            )
-        )}
+        content={<UnlabeledTombstone items={link_elements} />}
       />
     );
   }
