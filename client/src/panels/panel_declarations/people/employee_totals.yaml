@@ -12,10 +12,10 @@ gov_employee_totals_text:
   transform: [handlebars, markdown]
   en: |
    In **{{ppl_last_year}}**, there were **{{fmt_big_int last_year_num_emp}}** {{gl_tt "employees" "HEAD"}} in the 
-   **{{gl_tt "Federal Public Service" "FPS"}}**. 
+   {{gl_tt "**Federal Public Service**" "FPS"}}. 
    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **Federal Public Service** employed an average of **{{fmt_big_int avg_num_emp}}** people.
   fr: |
-   En **{{ppl_last_year}}**, la {{gl_tt "fonction publique fédérale" "FPS"}} comptait **{{fmt_big_int last_year_num_emp}}** {{gl_tt "employés" "HEAD"}}.
+   En **{{ppl_last_year}}**, la {{gl_tt "**fonction publique fédérale**" "FPS"}} comptait **{{fmt_big_int last_year_num_emp}}** {{gl_tt "employés" "HEAD"}}.
    Le nombre moyen de personnel de la **fonction publique fédérale** de **{{ppl_last_year_5}}** à **{{ppl_last_year}}** est de **{{fmt_big_int avg_num_emp}}** employés.
 
 dept_employee_totals_text:
