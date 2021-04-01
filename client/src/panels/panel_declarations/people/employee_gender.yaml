@@ -6,10 +6,10 @@ employee_gender_title:
 gov_employee_gender_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, **{{top_avg_group}}** accounted for an average of **{{fmt_percentage1 top_avg_group_share}}** of the **{{gl_tt "Federal Public Service" "FPS"}}**,
+    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, **{{top_avg_group}}** accounted for an average of **{{fmt_percentage1 top_avg_group_share}}** of the {{gl_tt "**Federal Public Service**" "FPS"}},
     while **{{bottom_avg_group}}** accounted for an average of **{{fmt_percentage1 bottom_avg_group_share}}**.
   fr: |
-    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les **{{top_avg_group}}** constituaient en moyenne **{{fmt_percentage1 top_avg_group_share}}** de la **{{gl_tt "fonction publique fédérale" "FPS"}}**, 
+    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, les **{{top_avg_group}}** constituaient en moyenne **{{fmt_percentage1 top_avg_group_share}}** de la {{gl_tt "**fonction publique fédérale**" "FPS"}}, 
     comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour les **{{bottom_avg_group}}**.
 
 dept_employee_gender_text:

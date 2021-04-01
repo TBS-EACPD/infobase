@@ -6,10 +6,10 @@ employee_fol_title:
 gov_employee_fol_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, an average of **{{fmt_percentage1 top_avg_group_share}}** of **{{gl_tt "Federal Public Service" "FPS"}}** employees had **{{top_avg_group}}** as their {{gl_tt "First Official Language" "FOL"}},
+    From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, an average of **{{fmt_percentage1 top_avg_group_share}}** of {{gl_tt "**Federal Public Service**" "FPS"}} employees had **{{top_avg_group}}** as their {{gl_tt "First Official Language" "FOL"}},
     while an average of **{{fmt_percentage1 bottom_avg_group_share}}** had **{{bottom_avg_group}}**.
   fr: |
-    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, **{{fmt_percentage1 top_avg_group_share}}** des employés de la **{{gl_tt "fonction publique fédérale" "FPS"}}**, en moyenne, avait {{#isEqual top_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{top_avg_group}}** comme {{gl_tt "première langue officielle" "FOL"}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour {{#isEqual bottom_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{bottom_avg_group}}**.
+    De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, **{{fmt_percentage1 top_avg_group_share}}** des employés de la {{gl_tt "**fonction publique fédérale**" "FPS"}}, en moyenne, avait {{#isEqual top_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{top_avg_group}}** comme {{gl_tt "première langue officielle" "FOL"}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour {{#isEqual bottom_avg_group "Anglais"}}l'{{else}}le {{/isEqual}}**{{bottom_avg_group}}**.
 
 dept_employee_fol_text:
   transform: [handlebars,markdown]
