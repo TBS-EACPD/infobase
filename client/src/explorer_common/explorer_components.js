@@ -192,7 +192,8 @@ export const ExplorerNode = ({
             <AccordionEnterExit
               expandDuration={300}
               collapseDuration={100}
-              opacity={1e-20}
+              opening_opacity={1e-20}
+              closing_opacity={0.2}
             >
               <div className="ExplorerNode__SuppContent">
                 {_.isFunction(get_non_col_content) &&
@@ -208,7 +209,8 @@ export const ExplorerNode = ({
         <AccordionEnterExit
           expandDuration={300}
           collapseDuration={100}
-          opacity={1e-20}
+          opening_opacity={1e-20}
+          closing_opacity={0.2}
         >
           {get_children_content({
             node,
