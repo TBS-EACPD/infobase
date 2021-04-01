@@ -15,6 +15,6 @@ gov_employee_gender_text:
 dept_employee_gender_text:
   transform: [handlebars,markdown]
   en: |
-    From **{{first_active_year}}** to **{{last_active_year}}**, **{{top_avg_group}}** accounted for an average of **{{fmt_percentage1 top_avg_group_share}}** of **{{subject.name}}**’s workforce{{#isEqual single_type_flag true}}.{{else}}, while **{{bottom_avg_group}}** accounted for an average of **{{fmt_percentage1 bottom_avg_group_share}}**.{{/isEqual}}
+    From **{{first_active_year}}** to **{{last_active_year}}**, **{{top_avg_group}}** accounted for an average of **{{fmt_percentage1 top_avg_group_share}}** of **{{subject.name}}**’s {{gl_tt "workforce" "HEAD"}}{{#isEqual single_type_flag true}}.{{else}}, while **{{bottom_avg_group}}** accounted for an average of **{{fmt_percentage1 bottom_avg_group_share}}**.{{/isEqual}}
   fr: |
-    De **{{first_active_year}}** à **{{last_active_year}}**, les **{{top_avg_group}}** constituaient en moyenne **{{fmt_percentage1 top_avg_group_share}}** du personnel **{{subject.name}}**{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour les **{{bottom_avg_group}}**.{{/isEqual}}
+    De **{{first_active_year}}** à **{{last_active_year}}**, les **{{top_avg_group}}** constituaient en moyenne **{{fmt_percentage1 top_avg_group_share}}** du {{gl_tt "personnel" "HEAD"}} **{{subject.name}}**{{#isEqual single_type_flag true}}.{{else}}, comparativement à **{{fmt_percentage1 bottom_avg_group_share}}** pour les **{{bottom_avg_group}}**.{{/isEqual}}

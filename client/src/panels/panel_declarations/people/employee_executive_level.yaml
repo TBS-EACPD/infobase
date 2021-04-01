@@ -6,12 +6,12 @@ employee_executive_level_title:
 gov_employee_executive_level_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, an average of **{{fmt_big_int avg_num_execs}}** {{gl_tt "**Federal Public Service**" "FPS"}} employees occupied a position at the executive level, representing an average of **{{fmt_percentage1 avg_pct_execs}}** of the total **Federal Public Service** population.
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, an average of **{{fmt_big_int avg_num_execs}}** {{gl_tt "**Federal Public Service**" "FPS"}} {{gl_tt "employees" "HEAD"}} occupied a position at the executive level, representing an average of **{{fmt_percentage1 avg_pct_execs}}** of the total **Federal Public Service** population.
    
    Over this period, employees at the **{{fmt_big_int top_avg_group}}** level accounted for the largest executive group with an average share of **{{fmt_percentage1 top_avg_group_share}}** of the total executive population.
    The smallest executive group was the **{{fmt_big_int bottom_avg_group}}** level, with an average share of **{{fmt_percentage1 bottom_avg_group_share}}** of the total executive population.
   fr: |
-   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, en moyenne, **{{fmt_big_int avg_num_execs}}** employés de la {{gl_tt "**fonction publique fédérale**" "FPS"}} occupaient un poste de direction, soit **{{fmt_percentage1 avg_pct_execs}}** du nombre moyen de personnel. 
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, en moyenne, **{{fmt_big_int avg_num_execs}}** {{gl_tt "employés" "HEAD"}} de la {{gl_tt "**fonction publique fédérale**" "FPS"}} occupaient un poste de direction, soit **{{fmt_percentage1 avg_pct_execs}}** du nombre moyen de personnel. 
    
    Au cours de cette période, les employés de niveau **{{fmt_big_int top_avg_group}}** constituaient le plus fort contingent, avec une moyenne de **{{fmt_percentage1 top_avg_group_share}}** du nombre total de cadres de direction. 
    Le niveau **{{fmt_big_int bottom_avg_group}}** formait le plus petit contingent, avec une moyenne de **{{fmt_percentage1 bottom_avg_group_share}}** du numbre total de cadres de direction.
@@ -20,14 +20,14 @@ gov_employee_executive_level_text:
 dept_employee_executive_level_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, an average of **{{fmt_big_int avg_num_execs}}** **{{subject.name}}** employees occupied a position at the executive level, representing an average share of **{{fmt_percentage1 avg_pct_execs}}** of its total population.
+   From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, an average of **{{fmt_big_int avg_num_execs}}** **{{subject.name}}** {{gl_tt "employees" "HEAD"}} occupied a position at the executive level, representing an average share of **{{fmt_percentage1 avg_pct_execs}}** of its total population.
    
    Over this period, employees at the **{{fmt_big_int top_avg_group}}** level accounted for the largest executive group with an average share of **{{fmt_percentage1 top_avg_group_share}}** of **{{subject.name}}'s** executive population.
    {{#if bottom_avg_group}}
      The smallest executive group was the **{{fmt_big_int bottom_avg_group}}** level, with an average share of **{{fmt_percentage1 bottom_avg_group_share}}** of **{{subject.name}}'s** executive population.
    {{/if}}
   fr: |
-   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_execs}}** employés **{{subject.name}}** occupaient un poste de direction, soit **{{fmt_percentage1 avg_pct_execs}}** du nombre moyen de personnel.
+   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_execs}}** {{gl_tt "employés" "HEAD"}} **{{subject.name}}** occupaient un poste de direction, soit **{{fmt_percentage1 avg_pct_execs}}** du nombre moyen de personnel.
    
    Au cours de cette période, les employés de niveau **{{fmt_big_int top_avg_group}}** constituaient le plus fort contingent, avec une moyenne de **{{fmt_percentage1 top_avg_group_share}}** du nombre total de cadres de direction **{{subject.name}}**. 
    {{#if bottom_avg_group}}
@@ -36,5 +36,5 @@ dept_employee_executive_level_text:
 
 all_non_executive_employee_text:
   transform: [handlebars,markdown]
-  en: From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, an average of **{{fmt_big_int avg_num_non_ex}}** **{{subject.name}}** employees occupied a position at the Non-EX level, representing **100%** of its total population.
-  fr: De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_non_ex}}** employés **{{subject.name}}** occupaient un poste de non-direction, soit **100%** du nombre de personnel.
+  en: From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, an average of **{{fmt_big_int avg_num_non_ex}}** **{{subject.name}}** {{gl_tt "employees" "HEAD"}} occupied a position at the Non-EX level, representing **100%** of its total population.
+  fr: De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, en moyenne, **{{fmt_big_int avg_num_non_ex}}** {{gl_tt "employés" "HEAD"}} **{{subject.name}}** occupaient un poste de non-direction, soit **100%** du nombre de personnel.

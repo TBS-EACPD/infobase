@@ -1,7 +1,7 @@
 gov_employee_prov_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the largest average share of {{gl_tt "**Federal Public Service**" "FPS"}} employees (**{{fmt_percentage1 top_avg_group_share}}**) worked in **{{fmt_big_int top_avg_group}}**.
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the largest average share of {{gl_tt "**Federal Public Service**" "FPS"}} {{gl_tt "employees" "HEAD"}} (**{{fmt_percentage1 top_avg_group_share}}**) worked in **{{fmt_big_int top_avg_group}}**.
    
    
    * The National Capital Region (NCR) includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
@@ -11,7 +11,7 @@ gov_employee_prov_text:
    
 
   fr: |
-   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, le plus fort contingent d’employés de la {{gl_tt "**fonction publique fédérale**" "FPS"}} (**{{fmt_percentage1 top_avg_group_share}}**) travaillait dans **{{fmt_big_int top_avg_group}}**.
+   De **{{ppl_last_year_5}}** à **{{ppl_last_year}}**, le plus fort contingent d’{{gl_tt "employés" "HEAD"}} de la {{gl_tt "**fonction publique fédérale**" "FPS"}} (**{{fmt_percentage1 top_avg_group_share}}**) travaillait dans **{{fmt_big_int top_avg_group}}**.
    
    
    * La région de la capitale nationale (RCN) inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
@@ -28,7 +28,7 @@ employee_prov_title:
 dept_employee_prov_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, the largest average share of **{{subject.name}}** employees (**{{fmt_percentage1 top_avg_group_share}}**) worked in **{{fmt_big_int top_avg_group}}**.
+   From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, the largest average share of **{{subject.name}}** {{gl_tt "employees" "HEAD"}} (**{{fmt_percentage1 top_avg_group_share}}**) worked in **{{fmt_big_int top_avg_group}}**.
 
 
    * The **National Capital Region (NCR)** includes employees working in both Ottawa (Ontario) and Gatineau (Quebec).
@@ -38,7 +38,7 @@ dept_employee_prov_text:
    
 
   fr: |
-   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, le plus fort contingent d’employés **{{subject.name}}** (**{{fmt_percentage1 top_avg_group_share}}**) travaillait dans **{{fmt_big_int top_avg_group}}**.  
+   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, le plus fort contingent d’{{gl_tt "employés" "HEAD"}} **{{subject.name}}** (**{{fmt_percentage1 top_avg_group_share}}**) travaillait dans **{{fmt_big_int top_avg_group}}**.  
 
    
    * La **région de la capitale nationale (RCN)** inclut à la fois les employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
