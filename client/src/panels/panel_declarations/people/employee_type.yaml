@@ -6,11 +6,11 @@ employee_type_title:
 gov_employee_type_text:
   transform: [handlebars,markdown]
   en: |
-   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **{{fmt_big_int top_avg_group}}** workforce accounted for the largest average share (**{{fmt_percentage1 top_avg_group_share}}**) of the **Federal Public Service** population. 
+   From **{{ppl_last_year_5}}** to **{{ppl_last_year}}**, the **{{fmt_big_int top_avg_group}}** workforce accounted for the largest average share (**{{fmt_percentage1 top_avg_group_share}}**) of the **{{gl_tt "Federal Public Service" "FPS"}}** population. 
    
    Over this period, the proportion of **Students** in the **Federal Public Service** **{{two_value_changed_to student_first_active_year_pct student_last_active_year_pct "fmt_percentage1"}}**.
   fr: |
-   De **{{ppl_last_year_5}}** à  **{{ppl_last_year}}**, les employés nommés pour une «**{{fmt_big_int top_avg_group}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 top_avg_group_share}}**) du personnel de la **fonction publique fédérale**.
+   De **{{ppl_last_year_5}}** à  **{{ppl_last_year}}**, les employés nommés pour une «**{{fmt_big_int top_avg_group}}**» constituaient en moyenne le plus fort contingent (**{{fmt_percentage1 top_avg_group_share}}**) du personnel de la **{{gl_tt "fonction publique fédérale" "FPS"}}**.
    
    Au cours de cette période, le personnel **« d’étudiants »** dans la **fonction publique fédérale** **{{fr_two_value_changed_to student_first_active_year_pct student_last_active_year_pct "m" "s" "fmt_percentage1"}}**.
 
