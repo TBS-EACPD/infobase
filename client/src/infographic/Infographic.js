@@ -96,6 +96,7 @@ const get_default_state_from_props = ({
   valid_panel_keys: null,
   previous_bubble: null,
   next_bubble: null,
+  mounted: false,
 });
 class InfoGraph_ extends React.Component {
   constructor(props) {
@@ -119,7 +120,7 @@ class InfoGraph_ extends React.Component {
     this.load({ ...this.state, ...this.props });
   }
   componentDidUpdate(prevProps) {
-    const { loading, active_bubble_id, valid_panel_keys } = this.state;
+    const { loading, active_bubble_id, valid_panel_keys, mounted } = this.state;
 
     if (loading) {
       this.load({ ...this.state, ...this.props });
@@ -149,6 +150,10 @@ class InfoGraph_ extends React.Component {
 
       linked_to_panel &&
         this.scroll_to_panel_when_all_loading_done(linked_to_panel);
+
+      if (!mounted) {
+        this.setState({ mounted: true });
+      }
     }
   }
   scroll_to_panel_when_all_loading_done = _.debounce((linked_to_panel) => {
@@ -181,6 +186,7 @@ class InfoGraph_ extends React.Component {
       previous_bubble,
       next_bubble,
       panel_filter,
+      mounted,
     } = this.state;
 
     const filtered_panel_keys = panel_filter(valid_panel_keys);
@@ -246,7 +252,7 @@ class InfoGraph_ extends React.Component {
                 }}
               />
             )}
-          {!loading && (
+          {!loading && mounted && (
             <TableOfContents
               subject={subject}
               panel_keys={filtered_panel_keys}
@@ -348,6 +354,7 @@ class InfoGraph_ extends React.Component {
               next_bubble,
               previous_bubble,
               valid_panel_keys,
+              mounted: false,
             });
           });
         }
