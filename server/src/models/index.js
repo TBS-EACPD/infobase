@@ -52,7 +52,7 @@ export async function populate_all_models() {
   );
 }
 
-export function create_schema() {
+export function getSchemaDeps() {
   const schema_strings = [root_schema.schema];
   const resolver_objs = [root_schema.resolvers];
 
@@ -65,8 +65,8 @@ export function create_schema() {
     }
   });
 
-  return makeExecutableSchema({
+  return {
     typeDefs: schema_strings,
     resolvers: _.merge(...resolver_objs),
-  });
+  };
 }

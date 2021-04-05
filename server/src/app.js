@@ -1,3 +1,4 @@
+import { ApolloServer } from "apollo-server-express";
 import body_parser from "body-parser";
 import compression from "compression";
 import cors from "cors";
@@ -6,7 +7,7 @@ import expressGraphQL from "express-graphql";
 import depthLimit from "graphql-depth-limit";
 
 import { connect_db, get_db_connection_status } from "./db_utils.js";
-import { create_models, create_schema } from "./models/index.js";
+import { create_models, getSchemaDeps } from "./models/index.js";
 import {
   convert_GET_with_compressed_query_to_POST,
   get_log_object_for_request,
@@ -19,10 +20,10 @@ connect_db().catch((err) => {
   // just logging, not trying to recover here. DB connection is reattempted per-request below
 });
 
-const schema = create_schema();
 const app = express();
 
-app.use(body_parser.json({ limit: "50mb" }));
+//TODO: figure out if we need this anymore, since apollo seems to work without it?
+// app.use(body_parser.json({ limit: "50mb" }));
 app.use(compression());
 app.use(
   cors({
@@ -70,18 +71,21 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(
-  expressGraphQL(() => ({
-    graphiql: true,
-    schema: schema,
-    context: {},
-    validationRules: [depthLimit(15)],
-  }))
-);
-
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send("Internal server error");
 });
 
-module.exports = app;
+async function startApollo() {
+  const { typeDefs, resolvers } = getSchemaDeps();
+  const server = new ApolloServer({ typeDefs, resolvers });
+  //todo: re-implement the following rules
+  // graphiql: true,
+  // context: {},
+  // validationRules: [depthLimit(15)],
+  await server.start();
+  server.applyMiddleware({ app });
+  return server;
+}
+
+module.exports = { app, startApollo };
