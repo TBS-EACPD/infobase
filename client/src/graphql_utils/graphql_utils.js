@@ -1,9 +1,10 @@
 import {
-  createHttpLink,
   InMemoryCache,
   ApolloClient,
   graphql as apollo_connect,
 } from "@apollo/client";
+import { BatchHttpLink } from "@apollo/client/link/batch-http";
+
 import _ from "lodash";
 import { compressToBase64 } from "lz-string";
 import React from "react";
@@ -56,19 +57,20 @@ export const query_length_tolerant_fetch = async (uri, options) => {
   // important, this regex lazy matches up to and including FIRST ? occurence, which (in a URI)
   // should be where the query string starts. I've complicated it slightly just in case there's ever a ? IN
   // the query string (well, that'd be an encoding error anyway)
-  const url_encoded_query = uri.replace(/^(.*?)\?/, "");
+  // const url_encoded_query = uri.replace(/^(.*?)\?/, "");
 
-  const query_string_hash = string_hash(url_encoded_query);
+  // const query_string_hash = string_hash(url_encoded_query);
 
-  const short_uri = `${await get_api_url()}?v=${sha}&queryHash=${query_string_hash}`;
+  // const short_uri = `${await get_api_url()}?v=${sha}&queryHash=${query_string_hash}`;
+  const short_uri = `${await get_api_url()}?v=${sha}`;
 
   const new_options = {
     ...options,
     headers: {
       ...options.headers,
-      "encoded-compressed-query": compressToBase64(
-        decodeURIComponent(url_encoded_query)
-      ),
+      // "encoded-compressed-query": compressToBase64(
+      //   decodeURIComponent(url_encoded_query)
+      // ),
     },
   };
 
@@ -79,9 +81,9 @@ let client = null;
 export function get_client() {
   if (!client) {
     client = new ApolloClient({
-      link: createHttpLink({
+      link: new BatchHttpLink({
         uri: prod_api_url, // query_length_tolerant_fetch replaces the uri on the fly, switches to appropriate local uri in dev
-        fetchOptions: { method: "GET" },
+        fetchOptions: { method: "POST" },
         fetch: query_length_tolerant_fetch,
       }),
       cache: new InMemoryCache({
