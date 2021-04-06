@@ -97,7 +97,7 @@ export default class PanelFilterControl extends React.Component {
       <Details
         summary_content={
           <div>
-            <TM style={{ fontSize: 16 }} k="filter_panels" />{" "}
+            <TM k="filter_panels" />{" "}
             <TM
               className="panel-status-text"
               k="panels_status"

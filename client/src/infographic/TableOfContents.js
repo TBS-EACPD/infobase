@@ -16,10 +16,29 @@ import text from "./TableOfContents.yaml";
 const { TM } = create_text_maker_component(text);
 
 export default class TableOfContents extends React.Component {
+  state = {
+    initial_open: false,
+  };
+
+  handle_click = () => {
+    this.setState((prev_state) => ({
+      initial_open: !prev_state.initial_open,
+    }));
+  };
+
   render() {
-    const { active_bubble_id, panel_keys, subject } = this.props;
+    const {
+      active_bubble_id,
+      panel_keys,
+      subject,
+      loading,
+      mounted,
+    } = this.props;
+    const { initial_open } = this.state;
 
     const panel_links =
+      !loading &&
+      mounted &&
       active_bubble_id &&
       panel_keys &&
       subject &&
@@ -68,25 +87,28 @@ export default class TableOfContents extends React.Component {
 
     return (
       link_elements && (
-        <Details
-          summary_content={
-            <div>
-              <TM k="table_of_contents" />{" "}
-              <TM className="panel-status-text" k="skip_to_panel" />
-            </div>
-          }
-          content={
-            <div
-              style={{
-                border: "1px solid",
-                borderColor: separatorColor,
-                borderRadius: "5px",
-              }}
-            >
-              <UnlabeledTombstone items={link_elements} />
-            </div>
-          }
-        />
+        <div onClick={this.handle_click}>
+          <Details
+            summary_content={
+              <div>
+                <TM k="table_of_contents" />{" "}
+                <TM className="panel-status-text" k="skip_to_panel" />
+              </div>
+            }
+            content={
+              <div
+                style={{
+                  border: "1px solid",
+                  borderColor: separatorColor,
+                  borderRadius: "5px",
+                }}
+              >
+                <UnlabeledTombstone items={link_elements} />
+              </div>
+            }
+            initialOpen={initial_open}
+          />
+        </div>
       )
     );
   }

@@ -248,17 +248,19 @@ class InfoGraph_ extends React.Component {
                       "/"
                     )
                   );
-                  this.setState({ panel_filter });
+                  this.setState({ panel_filter, mounted: false });
                 }}
               />
             )}
-          {!loading && mounted && (
-            <TableOfContents
-              subject={subject}
-              panel_keys={filtered_panel_keys}
-              active_bubble_id={active_bubble_id}
-            />
-          )}
+
+          <TableOfContents
+            loading={loading}
+            mounted={mounted}
+            subject={subject}
+            panel_keys={filtered_panel_keys}
+            active_bubble_id={active_bubble_id}
+          />
+
           {!loading &&
             _.map(filtered_panel_keys, (panel_key) => (
               <PanelRenderer
@@ -354,7 +356,6 @@ class InfoGraph_ extends React.Component {
               next_bubble,
               previous_bubble,
               valid_panel_keys,
-              mounted: false,
             });
           });
         }
