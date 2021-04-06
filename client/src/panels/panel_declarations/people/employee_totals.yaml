@@ -22,6 +22,6 @@ dept_employee_totals_text:
   transform: [handlebars,markdown]
   en: |
    From **{{fmt_big_int first_active_year}}** to **{{fmt_big_int last_active_year}}**, **{{subject.name}}** employed an average of 
-   **{{fmt_big_int avg_num_emp}}** people.
+   **{{fmt_big_int avg_num_emp}}** {{gl_tt "people" "HEAD"}}.
   fr: |
-   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, **{{subject.name}}** comptait en moyenne **{{fmt_big_int avg_num_emp}}** employés. 
+   De **{{fmt_big_int first_active_year}}** à **{{fmt_big_int last_active_year}}**, **{{subject.name}}** comptait en moyenne **{{fmt_big_int avg_num_emp}}** {{gl_tt "employés" "HEAD"}}. 
