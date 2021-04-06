@@ -192,12 +192,13 @@ export const ExplorerNode = ({
             <AccordionEnterExit
               expandDuration={300}
               collapseDuration={100}
-              opening_opacity={1e-20}
-              closing_opacity={0.2}
+              style={{ overflowY: "hidden" }}
             >
-              <div className="ExplorerNode__SuppContent">
-                {_.isFunction(get_non_col_content) &&
-                  get_non_col_content({ node })}
+              <div style={{ overflowY: "auto" }}>
+                <div className="ExplorerNode__SuppContent">
+                  {_.isFunction(get_non_col_content) &&
+                    get_non_col_content({ node })}
+                </div>
               </div>
             </AccordionEnterExit>
           )}
@@ -209,14 +210,15 @@ export const ExplorerNode = ({
         <AccordionEnterExit
           expandDuration={300}
           collapseDuration={100}
-          opening_opacity={1e-20}
-          closing_opacity={0.2}
+          style={{ overflowY: "hidden" }}
         >
-          {get_children_content({
-            node,
-            depth: depth + 1,
-            explorer_context,
-          })}
+          <div style={{ overflowY: "auto" }}>
+            {get_children_content({
+              node,
+              depth: depth + 1,
+              explorer_context,
+            })}
+          </div>
         </AccordionEnterExit>
       )}
     </TransitionGroup>
