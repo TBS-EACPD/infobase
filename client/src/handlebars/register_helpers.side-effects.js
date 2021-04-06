@@ -612,15 +612,14 @@ Handlebars.registerHelper("icon_tooltip", function glossary_tooltip(
 
   // our svg icons include embeded style nodes using * selectors, which in particular mess up the resulting output of
   // text maker's markdown parsing, need to escape
-  const selective_markdown_escaped_icon_html = raw_icon_html.replaceAll(
-    "*",
-    "\\*"
-  );
+  const selective_markdown_escaped_icon_html = raw_icon_html
+    .split("*")
+    .join("\\*");
 
   return new Handlebars.SafeString(
     `<span
       class="nowrap link-unstyled"
-      tab-ndex="0"
+      tabindex="0"
       aria-hidden="true"
       data-toggle="tooltip"
       data-ibtt-html="true"
