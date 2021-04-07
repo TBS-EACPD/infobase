@@ -29,6 +29,25 @@ export const InfographicPanel = (props) => {
   return <Consumer>{(ctx) => <Panel_ context={ctx} {...props} />}</Consumer>;
 };
 class Panel_ extends React.Component {
+  componentDidMount() {
+    const { context, title } = this.props;
+    const { add_visible_panel_title, panel_key } = context && {
+      add_visible_panel_title: context.add_visible_panel_title,
+      panel_key: context.panel_key,
+    };
+
+    add_visible_panel_title(panel_key, title);
+  }
+
+  componentWillUnmount() {
+    const { context } = this.props;
+    const { remove_visible_panel_title, panel_key } = context && {
+      remove_visible_panel_title: context.remove_visible_panel_title,
+      panel_key: context.panel_key,
+    };
+
+    remove_visible_panel_title(panel_key);
+  }
   render() {
     const {
       context,
