@@ -172,7 +172,7 @@ class InfoGraph_ extends React.Component {
     this.scroll_to_panel_when_all_loading_done.cancel();
   }
   render() {
-    const { subject, active_bubble_id } = this.props;
+    const { subject, active_bubble_id, url_replace } = this.props;
     const {
       loading,
       subject_bubble_defs,
@@ -233,9 +233,16 @@ class InfoGraph_ extends React.Component {
               <PanelFilterControl
                 subject={subject}
                 panel_keys={valid_panel_keys}
-                set_panel_filter={(panel_filter) =>
-                  this.setState({ panel_filter })
-                }
+                set_panel_filter={(panel_filter) => {
+                  url_replace(
+                    _.replace(
+                      infograph_href_template(subject, active_bubble_id),
+                      "#",
+                      "/"
+                    )
+                  );
+                  this.setState({ panel_filter });
+                }}
               />
             )}
           {!loading &&
@@ -349,6 +356,7 @@ const Infographic = ({
   match: {
     params: { level, subject_id, active_bubble_id, options },
   },
+  history: { replace },
 }) => {
   const is_level_valid = _.chain(Subject).keys().includes(level).value();
   if (!is_level_valid) {
@@ -417,6 +425,7 @@ const Infographic = ({
         subject={subject}
         active_bubble_id={bubble_id}
         options={options}
+        url_replace={replace}
       />
     </StandardRouteContainer>
   );
