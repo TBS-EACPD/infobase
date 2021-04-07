@@ -32,7 +32,7 @@ export const declare_internal_services_panel = () =>
     levels: ["dept"],
     panel_config_func: () => ({
       depends_on: ["programFtes"],
-      title: "internal_service_panel_title",
+      title: text_maker("internal_service_panel_title"),
       calculate(subject) {
         const { programFtes } = this.tables;
 
@@ -71,7 +71,7 @@ export const declare_internal_services_panel = () =>
           series,
         };
       },
-      render({ calculations, sources, footnotes }) {
+      render({ title, calculations, sources, footnotes }) {
         const {
           subject,
           panel_args: {
@@ -183,10 +183,7 @@ export const declare_internal_services_panel = () =>
 
         return (
           !_.isEmpty(bar_data) && (
-            <InfographicPanel
-              title={text_maker("internal_service_panel_title")}
-              {...{ sources, footnotes }}
-            >
+            <InfographicPanel {...{ title, sources, footnotes }}>
               {to_render}
             </InfographicPanel>
           )

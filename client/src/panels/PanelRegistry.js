@@ -98,6 +98,12 @@ class PanelRegistry {
 
     this.get_panel_args = _.memoize(this.get_panel_args);
   }
+  get_title(subject) {
+    // TODO we'd want to remove "this.title &&" check, once we populate all the titles for all panels so that it fails loud and clear here
+    const title =
+      this.title && (_.isString(this.title) ? this.title : this.title(subject));
+    return title;
+  }
 
   get tables() {
     //table defs in depends_on indexed by their table ids
@@ -211,9 +217,11 @@ class PanelRegistry {
     const footnotes = this.get_footnotes(subject);
     const glossary_keys = this.get_glossary_keys();
     const sources = this.get_source(subject);
+    const title = this.get_title(subject);
 
     const react_el = render_func(
       {
+        title,
         calculations,
         footnotes,
         glossary_keys,
