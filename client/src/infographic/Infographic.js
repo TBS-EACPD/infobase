@@ -201,10 +201,17 @@ class InfoGraph_ extends React.Component {
       next_bubble,
       panel_filter,
       mounted,
-      visible_panel_titles,
+      // visible_panel_titles,
     } = this.state;
 
     const filtered_panel_keys = panel_filter(valid_panel_keys);
+    const visible_panel_titles = _.chain(valid_panel_keys)
+      .map((panel_key) => [
+        panel_key,
+        PanelRegistry.lookup(panel_key, subject.level).get_title(subject),
+      ])
+      .fromPairs()
+      .value();
 
     return (
       <div>

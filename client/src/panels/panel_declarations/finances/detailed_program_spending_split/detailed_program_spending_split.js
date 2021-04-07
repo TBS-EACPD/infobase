@@ -428,7 +428,7 @@ export const declare_detailed_program_spending_split_panel = () =>
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSobjs", "programSpending"],
-
+      title: text_maker("detailed_program_spending_split_title"),
       footnotes: footnote_topics,
       calculate(subject, options) {
         const { programSobjs, programSpending } = this.tables;
@@ -527,7 +527,7 @@ export const declare_detailed_program_spending_split_panel = () =>
         };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const {
           panel_args: {
             text_calculations,
@@ -564,8 +564,11 @@ export const declare_detailed_program_spending_split_panel = () =>
         return (
           <InfographicPanel
             allowOverflow={true}
-            title={text_maker("detailed_program_spending_split_title")}
-            {...{ sources, footnotes: [...footnotes, ...program_footnotes] }}
+            {...{
+              title,
+              sources,
+              footnotes: [...footnotes, ...program_footnotes],
+            }}
           >
             <div className="medium-panel-text">
               <TM

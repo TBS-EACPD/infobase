@@ -280,7 +280,13 @@ class AuthExpPlannedSpendingGraph extends React.Component {
   }
 }
 
-const render = function ({ calculations, footnotes, sources, glossary_keys }) {
+const render = function ({
+  title,
+  calculations,
+  footnotes,
+  sources,
+  glossary_keys,
+}) {
   const { panel_args, subject } = calculations;
   const { data_series, additional_info } = panel_args;
 
@@ -298,10 +304,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   );
 
   return (
-    <StdPanel
-      title={text_maker("auth_exp_planned_spending_title", final_info)}
-      {...{ footnotes, sources, glossary_keys }}
-    >
+    <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
       <Col size={4} isText>
         <TM
           k={`${subject.level}_auth_exp_planned_spending_body`}
@@ -463,6 +466,10 @@ export const declare_auth_exp_planned_spending_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgVoteStatPa", "programSpending", "orgVoteStatEstimates"],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
+      title: (subject) =>
+        text_maker("auth_exp_planned_spending_title", {
+          has_planned_spending: subject.has_planned_spending,
+        }),
       calculate,
       render,
     }),
