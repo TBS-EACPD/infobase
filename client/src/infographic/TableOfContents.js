@@ -31,17 +31,15 @@ export default class TableOfContents extends React.Component {
       active_bubble_id,
       panel_keys,
       subject,
-      loading,
-      mounted,
+      visible_panel_titles,
     } = this.props;
     const { initial_open } = this.state;
 
     const panel_links =
-      !loading &&
-      mounted &&
       active_bubble_id &&
       panel_keys &&
       subject &&
+      visible_panel_titles &&
       _.compact(
         _.map(panel_keys, (panel_key) => {
           const link = infograph_options_href_template(
@@ -51,18 +49,12 @@ export default class TableOfContents extends React.Component {
               panel_key: panel_key,
             }
           );
-
-          //Kinda hacky... Should probably find a better way of doing this...
-          const title_element = document.querySelector(
-            `#${panel_key} > .panel > .panel-heading > .panel-title`
-          );
-
+          const title = visible_panel_titles[panel_key];
           return (
             link &&
-            title_element &&
-            title_element.innerText && {
-              link: link,
-              text: title_element.innerText,
+            title && {
+              link,
+              title,
               key: panel_key,
             }
           );
@@ -80,11 +72,10 @@ export default class TableOfContents extends React.Component {
               href={panel_link.link}
               key={panel_link.key}
             >
-              {panel_link.text}
+              {panel_link.title}
             </a>
           )
       );
-
     return (
       link_elements && (
         <div onClick={this.handle_click}>
