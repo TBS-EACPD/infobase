@@ -106,8 +106,8 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
               name: tag.name,
               subject: tag,
               resources: get_resources(tag),
-              defs: tag.description && [
-                {
+              defs: _.compact([
+                tag.description && {
                   term: text_maker("description"),
                   def: (
                     <div
@@ -117,7 +117,10 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
                     />
                   ),
                 },
-              ],
+                tag.is_m2m &&
+                  !_.isEmpty(tag.related_tags()) &&
+                  related_tags_row(tag.related_tags(), "tag"),
+              ]),
             },
           }));
         }
