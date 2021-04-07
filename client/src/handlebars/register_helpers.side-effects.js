@@ -618,6 +618,7 @@ Handlebars.registerHelper("icon_tooltip", function glossary_tooltip(
 
   return new Handlebars.SafeString(
     `<span
+      style="display: inline-flex;"
       class="nowrap link-unstyled"
       tabindex="0"
       aria-hidden="true"

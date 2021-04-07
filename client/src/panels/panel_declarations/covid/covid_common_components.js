@@ -66,6 +66,7 @@ class ToggleVoteStatProvider extends React.Component {
 
 const CellTooltip = ({ tooltip_text }) => (
   <span
+    style={{ display: "inline-flex" }}
     className="link-unstyled"
     tabIndex={0}
     aria-hidden="true"
