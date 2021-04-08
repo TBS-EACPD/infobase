@@ -36,7 +36,7 @@ export const declare_simplographic_panel = () =>
       requires_result_counts: true,
 
       depends_on: ["orgVoteStatPa", "orgEmployeeRegion"],
-
+      title: text_maker("simplographic_title"),
       calculate(dept) {
         const { orgVoteStatPa, orgEmployeeRegion } = this.tables;
         const gov_exp_pa_last_year = orgVoteStatPa
@@ -118,7 +118,7 @@ export const declare_simplographic_panel = () =>
         };
       },
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { panel_args: big_info } = calculations;
         const Row = (props) => {
           const this_row_props = {
@@ -169,7 +169,7 @@ export const declare_simplographic_panel = () =>
         };
 
         return (
-          <InfographicPanel title={text_maker("simplographic_title")}>
+          <InfographicPanel title={title}>
             <div className="medium-panel-text">
               <Row
                 top_border
