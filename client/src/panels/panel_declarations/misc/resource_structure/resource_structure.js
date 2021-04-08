@@ -12,8 +12,10 @@ export const declare_resource_structure_panel = () =>
   declare_panel({
     panel_key: "resource_structure",
     levels: ["tag"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
+      title: text_maker("resource_structure_title"),
       depends_on: ["programSpending", "programFtes"],
 
       calculate(subject) {
@@ -43,7 +45,7 @@ export const declare_resource_structure_panel = () =>
         );
       },
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const {
           subject,
           panel_args: { has_planning_data, has_actual_data },
@@ -56,7 +58,7 @@ export const declare_resource_structure_panel = () =>
         );
 
         return (
-          <InfographicPanel title={text_maker("resource_structure_title")}>
+          <InfographicPanel title={title}>
             {explorer_instance.to_react_element({
               subject,
               has_planning_data,

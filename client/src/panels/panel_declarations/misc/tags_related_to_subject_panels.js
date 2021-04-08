@@ -80,6 +80,7 @@ export const declare_tags_of_interest_panel = () =>
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
+      title: text_maker(title_by_level[level]),
       calculate(subject) {
         const tags_by_root = get_related_tag_list_args(subject);
         if (subject.dp_status === false || _.isEmpty(tags_by_root)) {
@@ -88,11 +89,11 @@ export const declare_tags_of_interest_panel = () =>
 
         return tags_by_root;
       },
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { panel_args: tags_by_root, subject } = calculations;
 
         return (
-          <TextPanel title={text_maker(title_by_level[level])}>
+          <TextPanel title={title}>
             <TM
               k={`${subject.level}_is_tagged_with_following`}
               args={{ subject }}
@@ -110,9 +111,10 @@ export const declare_tag_progs_by_dept_panel = () =>
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
+      title: text_maker("tag_progs_by_dept_title"),
       calculate: _.constant(true),
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const list_args = _.chain(subject.programs)
@@ -139,7 +141,7 @@ export const declare_tag_progs_by_dept_panel = () =>
           .value();
 
         return (
-          <TextPanel title={text_maker("tag_progs_by_dept_title")}>
+          <TextPanel title={title}>
             <div className="col-md-10 col-md-offset-1">
               <HeightClipper clipHeight={250} allowReclip={true}>
                 <CardList elements={list_args} />
@@ -162,9 +164,10 @@ export const declare_related_tags_panel = () =>
   declare_panel({
     panel_key: "related_tags",
     levels: ["tag"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
-
+      title: text_maker("related_tags_title"),
       calculate(subject) {
         const related_tags_by_type_with_counts = _.chain(subject.programs)
           .map((prog) => prog.tags)
@@ -198,7 +201,7 @@ export const declare_related_tags_panel = () =>
         };
       },
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const {
           panel_args: { related_tags_by_type_with_counts },
         } = calculations;
@@ -219,7 +222,7 @@ export const declare_related_tags_panel = () =>
         );
 
         return (
-          <TextPanel title={text_maker("related_tags_title")}>
+          <TextPanel title={title}>
             <div className="col-md-10 col-md-offset-1">
               <HeightClipper clipHeight={350} allowReclip={true}>
                 <CardList elements={list_args} />

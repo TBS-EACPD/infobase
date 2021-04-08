@@ -16,12 +16,14 @@ export const declare_gov_related_info_panel = () =>
   declare_panel({
     panel_key: "gov_related_info",
     levels: ["gov"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
-      render() {
+      title: text_maker("gov_related_info_title"),
+      render({ title }) {
         return (
-          <InfographicPanel title={text_maker("gov_related_info_title")}>
+          <InfographicPanel title={title}>
             <div className="medium-panel-text" style={{ lineHeight: "40px" }}>
               <TM tmf={text_maker} k="gov_related_info_text" />
             </div>

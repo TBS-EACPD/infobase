@@ -62,7 +62,7 @@ export default class TableOfContents extends React.Component {
       );
 
     const link_elements =
-      panel_links &&
+      !_.isEmpty(panel_links) &&
       _.map(
         panel_links,
         (panel_link) =>

@@ -28,18 +28,19 @@ export const declare_portfolio_structure_intro_panel = () =>
   declare_panel({
     panel_key: "portfolio_structure_intro",
     levels: ["dept"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
-
+      title: text_maker("portfolio_structure_intro_title"),
       calculate(subject) {
         return !_.isEmpty(subject.ministry);
       },
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         return (
-          <TextPanel title={text_maker("portfolio_structure_intro_title")}>
+          <TextPanel title={title}>
             <HeightClipper allowReclip={true} clipHeight={250}>
               <HierarchyPeek
                 root={org_external_hierarchy({
@@ -58,14 +59,15 @@ export const declare_portfolio_structure_related_panel = () =>
   declare_panel({
     panel_key: "portfolio_structure_related",
     levels: ["dept"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
-
+      title: text_maker("portfolio_structure_related_title"),
       calculate(subject) {
         return !_.isEmpty(subject.programs);
       },
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy_view = org_internal_hierarchy({
@@ -75,7 +77,7 @@ export const declare_portfolio_structure_related_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("portfolio_structure_related_title")}>
+          <TextPanel title={title}>
             <HierarchyPeek root={hierarchy_view} />
           </TextPanel>
         );
@@ -87,10 +89,12 @@ export const declare_program_fed_structure_panel = () =>
   declare_panel({
     panel_key: "program_fed_structure",
     levels: ["program"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
-      render({ calculations }) {
+      title: text_maker("program_fed_structure_title"),
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy = program_hierarchy({
@@ -104,7 +108,7 @@ export const declare_program_fed_structure_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("program_fed_structure_title")}>
+          <TextPanel title={title}>
             <HeightClipper clipHeight={250} allowReclip={true}>
               <HierarchyPeek root={hierarchy} />
             </HeightClipper>
@@ -118,11 +122,12 @@ export const declare_related_program_structure_panel = () =>
   declare_panel({
     panel_key: "related_program_structure",
     levels: ["program"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
-
-      render({ calculations }) {
+      title: text_maker("related_program_structure_title"),
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy = program_hierarchy({
@@ -136,7 +141,7 @@ export const declare_related_program_structure_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("related_program_structure_title")}>
+          <TextPanel title={title}>
             <HeightClipper clipHeight={250} allowReclip={true}>
               <HierarchyPeek root={hierarchy} />
             </HeightClipper>
@@ -150,11 +155,12 @@ export const declare_tag_fed_structure_panel = () =>
   declare_panel({
     panel_key: "tag_fed_structure",
     levels: ["tag"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
-
-      render({ calculations }) {
+      title: text_maker("tag_fed_structure_title"),
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy_structure = tag_hierarchy({
@@ -165,7 +171,7 @@ export const declare_tag_fed_structure_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("tag_fed_structure_title")}>
+          <TextPanel title={title}>
             <HeightClipper clipHeight={250} allowReclip={true}>
               <HierarchyPeek root={hierarchy_structure} />
             </HeightClipper>
@@ -179,11 +185,12 @@ export const declare_sibling_tags_panel = () =>
   declare_panel({
     panel_key: "sibling_tags",
     levels: ["tag"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
-
-      render({ calculations }) {
+      title: text_maker("sibling_tags_title"),
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy_structure = tag_hierarchy({
@@ -194,7 +201,7 @@ export const declare_sibling_tags_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("sibling_tags_title")}>
+          <TextPanel title={title}>
             <HeightClipper clipHeight={350} allowReclip={true}>
               <HierarchyPeek root={hierarchy_structure} />
             </HeightClipper>
@@ -208,11 +215,13 @@ export const declare_crso_in_gov_panel = () =>
   declare_panel({
     panel_key: "crso_in_gov",
     levels: ["crso"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
+      title: text_maker("crso_in_gov_title"),
       calculate: _.constant(true),
 
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy = crso_pi_hierarchy({
@@ -222,7 +231,7 @@ export const declare_crso_in_gov_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("crso_in_gov_title")}>
+          <TextPanel title={title}>
             <HierarchyPeek root={hierarchy} />
           </TextPanel>
         );
@@ -234,11 +243,12 @@ export const declare_crso_links_to_other_crso_panel = () =>
   declare_panel({
     panel_key: "crso_links_to_other_crso",
     levels: ["crso"],
+
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
-
-      render({ calculations }) {
+      title: text_maker("crso_links_to_other_crso_title"),
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         const hierarchy = crso_hierarchy({
@@ -248,7 +258,7 @@ export const declare_crso_links_to_other_crso_panel = () =>
         });
 
         return (
-          <TextPanel title={text_maker("crso_links_to_other_crso_title")}>
+          <TextPanel title={title}>
             <HeightClipper clipHeight={250} allowReclip={true}>
               <HierarchyPeek root={hierarchy} />
             </HeightClipper>
