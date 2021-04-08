@@ -29,6 +29,11 @@ const get_table_type = (table) =>
     ? text_maker("people")
     : text_maker("finances");
 
+const common_panel_config = {
+  footnotes: false,
+  title: text_maker("links_to_rpb_title"),
+};
+
 export const declare_links_to_rpb_panel = () =>
   declare_panel({
     panel_key: "links_to_rpb",
@@ -38,9 +43,9 @@ export const declare_links_to_rpb_panel = () =>
       switch (level) {
         case "gov":
           return {
-            footnotes: false,
+            ...common_panel_config,
             calculate: _.constant(true),
-            title: text_maker("links_to_rpb_title"),
+
             render({ title, calculations }) {
               const { subject } = calculations;
 
@@ -76,8 +81,7 @@ export const declare_links_to_rpb_panel = () =>
           };
         case "dept":
           return {
-            footnotes: false,
-            title: text_maker("links_to_rpb_title"),
+            ...common_panel_config,
             calculate(subject) {
               return !_.chain(subject.tables).compact().isEmpty().value();
             },

@@ -118,6 +118,13 @@ const estimates_split_render_w_text_key = (text_key) => ({
   );
 };
 
+const common_panel_config = {
+  machinery_footnotes: false,
+  depends_on: ["orgVoteStatEstimates"],
+  title: text_maker("in_year_estimates_split_title"),
+  calculate: estimates_split_calculate,
+};
+
 export const declare_in_year_estimates_split_panel = () =>
   declare_panel({
     panel_key: "in_year_estimates_split",
@@ -126,20 +133,14 @@ export const declare_in_year_estimates_split_panel = () =>
       switch (level) {
         case "gov":
           return {
-            machinery_footnotes: false,
-            depends_on: ["orgVoteStatEstimates"],
-            title: text_maker("in_year_estimates_split_title"),
-            calculate: estimates_split_calculate,
+            ...common_panel_config,
             render: estimates_split_render_w_text_key(
               "gov_in_year_estimates_split_text"
             ),
           };
         case "dept":
           return {
-            machinery_footnotes: false,
-            depends_on: ["orgVoteStatEstimates"],
-            title: text_maker("in_year_estimates_split_title"),
-            calculate: estimates_split_calculate,
+            ...common_panel_config,
             render: estimates_split_render_w_text_key(
               "dept_in_year_estimates_split_text"
             ),

@@ -99,9 +99,7 @@ class PanelRegistry {
     this.get_panel_args = _.memoize(this.get_panel_args);
   }
   get_title(subject) {
-    // TODO we'd want to remove "this.title &&" check, once we populate all the titles for all panels so that it fails loud and clear here
-    const title = _.isString(this.title) ? this.title : this.title(subject);
-    return title;
+    return _.isString(this.title) ? this.title : this.title(subject);
   }
 
   get tables() {

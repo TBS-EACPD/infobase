@@ -202,10 +202,10 @@ export const declare_description_panel = () =>
   declare_panel({
     panel_key: "description",
     levels: ["tag"],
-    title: text_maker("tag_desc_title"),
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: (subject) => !_.isEmpty(subject.description),
+      title: text_maker("tag_desc_title"),
       render({ title, calculations }) {
         const { subject } = calculations;
 
