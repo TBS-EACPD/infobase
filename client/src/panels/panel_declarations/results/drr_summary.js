@@ -372,15 +372,11 @@ export const DrrSummary = ({
   );
 };
 
-const render = ({ calculations, footnotes, sources }) => {
+const render = ({ title, calculations, footnotes, sources }) => {
   const { panel_args, subject } = calculations;
 
   return (
-    <InfographicPanel
-      title={text_maker("drr_summary_title", { year: current_drr_year })}
-      footnotes={footnotes}
-      sources={sources}
-    >
+    <InfographicPanel {...{ title, footnotes, sources }}>
       <DrrSummary subject={subject} {...panel_args} />
     </InfographicPanel>
   );
@@ -395,6 +391,7 @@ export const declare_drr_summary_panel = () =>
       requires_granular_result_counts: level !== "dept",
       footnotes: ["RESULTS_COUNTS", "RESULTS"],
       source: (subject) => get_source_links(["DRR"]),
+      title: text_maker("drr_summary_title", { year: current_drr_year }),
       calculate(subject) {
         const verbose_counts = (() => {
           switch (level) {

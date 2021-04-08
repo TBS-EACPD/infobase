@@ -65,6 +65,50 @@ class SingleSubjResultsContainer extends React.Component {
   }
 }
 
+const get_docs_with_data = (subject, level) => {
+  const subject_result_counts =
+    level === "dept"
+      ? ResultCounts.get_dept_counts(subject.id)
+      : GranularResultCounts.get_subject_counts(subject.id);
+
+  const had_doc_data = (doc_key) => {
+    const count_key = /drr/.test(doc_key)
+      ? `${doc_key}_total`
+      : `${doc_key}_indicators`;
+    return (
+      !_.isUndefined(subject_result_counts) &&
+      !_.isNull(subject_result_counts[count_key]) &&
+      subject_result_counts[count_key] > 0
+    );
+  };
+
+  const docs_with_data = _.chain(result_docs)
+    .keys()
+    .filter(had_doc_data)
+    .value();
+
+  if (_.isEmpty(docs_with_data)) {
+    return false;
+  }
+
+  const latest_doc_with_data = _.chain(result_docs_in_tabling_order)
+    .map("doc_key")
+    .intersection(docs_with_data)
+    .last()
+    .value();
+
+  return { docs_with_data, latest_doc_with_data };
+};
+
+const get_year_range_with_data = (docs_with_data) =>
+  _.chain(docs_with_data)
+    .map((doc) => result_docs[doc].year)
+    .thru((years_with_data) => ({
+      first_year: years_with_data[0],
+      last_year: years_with_data.length > 1 && _.last(years_with_data),
+    }))
+    .value();
+
 export const declare_explore_results_panel = () =>
   declare_panel({
     panel_key: "explore_results",
@@ -76,62 +120,24 @@ export const declare_explore_results_panel = () =>
       requires_result_counts: level === "dept",
       requires_granular_result_counts: level !== "dept",
       calculate(subject) {
-        const subject_result_counts =
-          level === "dept"
-            ? ResultCounts.get_dept_counts(subject.id)
-            : GranularResultCounts.get_subject_counts(subject.id);
-
-        const had_doc_data = (doc_key) => {
-          const count_key = /drr/.test(doc_key)
-            ? `${doc_key}_total`
-            : `${doc_key}_indicators`;
-          return (
-            !_.isUndefined(subject_result_counts) &&
-            !_.isNull(subject_result_counts[count_key]) &&
-            subject_result_counts[count_key] > 0
-          );
-        };
-
-        const docs_with_data = _.chain(result_docs)
-          .keys()
-          .filter(had_doc_data)
-          .value();
-
-        if (_.isEmpty(docs_with_data)) {
-          return false;
-        }
-
-        const latest_doc_with_data = _.chain(result_docs_in_tabling_order)
-          .map("doc_key")
-          .intersection(docs_with_data)
-          .last()
-          .value();
-
-        return { docs_with_data, latest_doc_with_data };
+        return get_docs_with_data(subject, level);
       },
-
-      render({ calculations, sources, footnotes }) {
+      title: (subject) => {
+        const year_range_with_data = get_year_range_with_data(
+          get_docs_with_data(subject, level).docs_with_data
+        );
+        return text_maker("result_drilldown_title", {
+          ...year_range_with_data,
+        });
+      },
+      render({ title, calculations, sources, footnotes }) {
         const {
           subject,
           panel_args: { docs_with_data, latest_doc_with_data },
         } = calculations;
 
-        const year_range_with_data = _.chain(docs_with_data)
-          .map((doc) => result_docs[doc].year)
-          .thru((years_with_data) => ({
-            first_year: years_with_data[0],
-            last_year: years_with_data.length > 1 && _.last(years_with_data),
-          }))
-          .value();
-
         return (
-          <InfographicPanel
-            title={text_maker("result_drilldown_title", {
-              ...year_range_with_data,
-            })}
-            sources={sources}
-            footnotes={footnotes}
-          >
+          <InfographicPanel {...{ title, sources, footnotes }}>
             <SingleSubjResultsContainer
               {...{
                 subject,

@@ -76,6 +76,9 @@ export const declare_gov_dp_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: true,
+      title: text_maker("gov_dp_summary_title", {
+        year: current_dp_year,
+      }),
       calculate: () => {
         const dept_counts = _.filter(
           ResultCounts.get_all_dept_counts(),
@@ -133,7 +136,7 @@ export const declare_gov_dp_panel = () =>
       },
       footnotes: ["DP"],
       source: (subject) => get_source_links(["DP"]),
-      render({ calculations, sources, footnotes }) {
+      render({ title, calculations, sources, footnotes }) {
         const {
           panel_args: {
             rows_of_counts_by_dept,
@@ -144,14 +147,7 @@ export const declare_gov_dp_panel = () =>
         const counts = ResultCounts.get_gov_counts();
 
         return (
-          <InfographicPanel
-            title={text_maker("gov_dp_summary_title", {
-              year: current_dp_year,
-            })}
-            sources={sources}
-            footnotes={footnotes}
-            allowOverflow
-          >
+          <InfographicPanel {...{ title, sources, footnotes }} allowOverflow>
             <DpSummary
               counts={counts}
               rows_of_counts_by_dept={rows_of_counts_by_dept}
