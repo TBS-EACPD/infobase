@@ -24,6 +24,7 @@ export const declare_estimates_in_perspective_panel = () =>
     panel_key: "estimates_in_perspective",
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("estimates_perspective_title"),
       depends_on: ["orgVoteStatEstimates"],
       machinery_footnotes: false,
       calculate(subject, options) {
@@ -43,7 +44,7 @@ export const declare_estimates_in_perspective_panel = () =>
         };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args } = calculations;
         const {
           subject,
@@ -60,11 +61,7 @@ export const declare_estimates_in_perspective_panel = () =>
           footnotes
         );
         return (
-          <StdPanel
-            title={text_maker("estimates_perspective_title")}
-            {...{ footnotes, sources }}
-            allowOverflow={true}
-          >
+          <StdPanel {...{ title, footnotes, sources }} allowOverflow={true}>
             <Col isText size={!is_a11y_mode ? 5 : 12}>
               <TM k="estimates_perspective_text" args={panel_args} />
             </Col>

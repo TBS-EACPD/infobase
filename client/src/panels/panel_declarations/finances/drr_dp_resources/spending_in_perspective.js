@@ -109,6 +109,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
     panel_key: "spending_in_tag_perspective",
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("program_spending_in_tag_perspective_title"),
       depends_on: ["programSpending"],
       calculate(subject, options) {
         if (is_a11y_mode) {
@@ -137,16 +138,13 @@ export const declare_spending_in_tag_perspective_panel = () =>
         return { tag_exps, prog_exp };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
         const { tag_exps, prog_exp } = panel_args;
 
         return (
-          <InfographicPanel
-            title={text_maker("program_spending_in_tag_perspective_title")}
-            {...{ footnotes, sources }}
-          >
+          <InfographicPanel {...{ title, footnotes, sources }}>
             <SpendInTagPerspective
               tag_exps={tag_exps}
               subject={subject}

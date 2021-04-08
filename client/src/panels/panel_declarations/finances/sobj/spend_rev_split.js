@@ -28,7 +28,7 @@ const text_keys_by_level = {
   program: "program_spend_rev_split_text",
 };
 
-function render({ calculations, footnotes, sources }) {
+function render({ title, calculations, footnotes, sources }) {
   const { panel_args, subject } = calculations;
   const { text_calculations } = panel_args;
   const {
@@ -76,10 +76,7 @@ function render({ calculations, footnotes, sources }) {
   })();
 
   return (
-    <StdPanel
-      title={text_maker("spend_rev_split_title")}
-      {...{ footnotes, sources }}
-    >
+    <StdPanel {...{ title, footnotes, sources }}>
       <Col size={5} isText>
         <TM k={text_keys_by_level[subject.level]} args={text_calculations} />
       </Col>
@@ -100,6 +97,7 @@ export const declare_spend_rev_split_panel = () =>
           return {
             depends_on: ["orgSobjs"],
             footnotes: ["SOBJ_REV"],
+            title: text_maker("spend_rev_split_title"),
             calculate(subject, options) {
               const { orgSobjs } = this.tables;
               const last_year_spend = orgSobjs.so_num(
@@ -136,6 +134,7 @@ export const declare_spend_rev_split_panel = () =>
         case "program":
           return {
             depends_on: ["programSobjs"],
+            title: text_maker("spend_rev_split_title"),
             calculate(subject, options) {
               const { programSobjs } = this.tables;
               const prog_rows = programSobjs.programs.get(subject);

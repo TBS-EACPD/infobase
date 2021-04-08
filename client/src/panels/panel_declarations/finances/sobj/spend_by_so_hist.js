@@ -196,6 +196,7 @@ export const declare_spend_by_so_hist_panel = () =>
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgSobjs"],
+      title: text_maker("dept_fin_spend_by_so_hist_title"),
       footnotes: ["SOBJ", "EXP"],
       calculate(subject) {
         const { orgSobjs } = this.tables;
@@ -234,7 +235,7 @@ export const declare_spend_by_so_hist_panel = () =>
           text_calculations,
         };
       },
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const {
           panel_args: { data, text_calculations },
         } = calculations;
@@ -248,10 +249,7 @@ export const declare_spend_by_so_hist_panel = () =>
         })();
 
         return (
-          <InfographicPanel
-            title={text_maker("dept_fin_spend_by_so_hist_title")}
-            {...{ sources, footnotes }}
-          >
+          <InfographicPanel {...{ title, sources, footnotes }}>
             <div className="medium-panel-text">
               <TM k="dept_fin_spend_by_so_hist_text" args={text_calculations} />
             </div>

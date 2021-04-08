@@ -27,7 +27,7 @@ export const declare_personnel_spend_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgSobjs"],
-
+      title: text_maker("personnel_spend_title"),
       calculate(subject, data) {
         const { orgSobjs } = this.tables;
 
@@ -57,7 +57,7 @@ export const declare_personnel_spend_panel = () =>
         };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args } = calculations;
 
         const { text_calculations } = panel_args;
@@ -73,10 +73,7 @@ export const declare_personnel_spend_panel = () =>
         ];
 
         return (
-          <StdPanel
-            title={text_maker("personnel_spend_title")}
-            {...{ footnotes, sources }}
-          >
+          <StdPanel {...{ title, footnotes, sources }}>
             <Col size={5} isText>
               <TM k="personnel_spend_text" args={text_calculations} />
             </Col>

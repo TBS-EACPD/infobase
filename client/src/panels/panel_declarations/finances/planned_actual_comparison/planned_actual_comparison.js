@@ -22,6 +22,7 @@ export const declare_planned_actual_comparison_panel = () =>
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending", "programFtes"],
+      title: text_maker("planned_actual_title"),
       source: (subject) => get_source_links(["DP", "DRR", "PA"]),
       calculate(subject) {
         if (subject.level === "dept") {
@@ -82,7 +83,7 @@ export const declare_planned_actual_comparison_panel = () =>
         };
       },
 
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args, subject } = calculations;
 
         const {
@@ -97,11 +98,7 @@ export const declare_planned_actual_comparison_panel = () =>
         } = panel_args;
 
         return (
-          <TextPanel
-            title={text_maker("planned_actual_title")}
-            footnotes={footnotes}
-            sources={sources}
-          >
+          <TextPanel {...{ title, footnotes, sources }}>
             <TM
               k={`${subject.level}_planned_actual_text`}
               args={text_calculations}

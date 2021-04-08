@@ -48,6 +48,7 @@ const common_cal = (programs, programSobjs) => {
 };
 
 const render_w_options = ({ text_key }) => ({
+  title,
   calculations,
   footnotes,
   sources,
@@ -62,10 +63,7 @@ const render_w_options = ({ text_key }) => ({
   }));
 
   return (
-    <StdPanel
-      title={text_maker("top_spending_areas_title")}
-      {...{ footnotes, sources }}
-    >
+    <StdPanel {...{ title, footnotes, sources }}>
       <Col isText size={5}>
         <TM k={text_key} args={text_calculations} />
       </Col>
@@ -83,6 +81,7 @@ export const declare_top_spending_areas_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSobjs"],
       footnotes: ["SOBJ"],
+      title: text_maker("top_spending_areas_title"),
       calculate(subject, options) {
         if (_.isEmpty(this.tables.programSobjs.programs.get(subject))) {
           return false;
