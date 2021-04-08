@@ -100,6 +100,7 @@ export const declare_results_intro_panel = () =>
       requires_granular_result_counts: level !== "gov",
       footnotes: ["RESULTS_COUNTS", "RESULTS", "DRR", "DP"],
       source: (subject) => get_source_links(["DP", "DRR"]),
+      title: text_maker("results_intro_title"),
       calculate: (subject) => {
         const is_gov = subject.level == "gov";
 
@@ -189,15 +190,11 @@ export const declare_results_intro_panel = () =>
           has_current_drr,
         };
       },
-      render({ calculations, sources, footnotes }) {
+      render({ title, calculations, sources, footnotes }) {
         const { panel_args } = calculations;
 
         return (
-          <InfographicPanel
-            title={text_maker("results_intro_title")}
-            sources={sources}
-            footnotes={footnotes}
-          >
+          <InfographicPanel {...{ title, sources, footnotes }}>
             <ResultsIntroPanel {...panel_args} />
           </InfographicPanel>
         );

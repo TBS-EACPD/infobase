@@ -78,6 +78,9 @@ export const declare_gov_drr_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: true,
       footnotes: ["RESULTS_COUNTS", "DRR"],
+      title: text_maker("gov_drr_summary_title", {
+        year: result_docs[current_drr_key].year,
+      }),
       source: (subject) => get_source_links(["DRR"]),
 
       calculate() {
@@ -155,16 +158,11 @@ export const declare_gov_drr_panel = () =>
         };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args } = calculations;
 
         return (
-          <InfographicPanel
-            title={text_maker("gov_drr_summary_title", {
-              year: result_docs[current_drr_key].year,
-            })}
-            {...{ footnotes, sources }}
-          >
+          <InfographicPanel {...{ title, footnotes, sources }}>
             <GovDRR {...panel_args} />
           </InfographicPanel>
         );

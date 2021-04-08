@@ -333,6 +333,9 @@ export const declare_results_table_panel = () =>
       source: (subject) => get_source_links(["DRR"]),
       requires_result_counts: level === "dept",
       requires_granular_result_counts: level !== "dept",
+      title: text_maker("result_flat_table_title", {
+        year: current_drr_year,
+      }),
       calculate(subject) {
         const subject_result_counts =
           level === "dept"
@@ -363,20 +366,14 @@ export const declare_results_table_panel = () =>
         return { docs_with_data, subject_result_counts, last_drr_doc };
       },
 
-      render({ calculations, sources, footnotes }) {
+      render({ title, calculations, sources, footnotes }) {
         const {
           subject,
           panel_args: { docs_with_data, last_drr_doc, subject_result_counts },
         } = calculations;
 
         return (
-          <InfographicPanel
-            title={text_maker("result_flat_table_title", {
-              year: current_drr_year,
-            })}
-            sources={sources}
-            footnotes={footnotes}
-          >
+          <InfographicPanel {...{ title, sources, footnotes }}>
             <ResultsTable
               {...{
                 subject,
