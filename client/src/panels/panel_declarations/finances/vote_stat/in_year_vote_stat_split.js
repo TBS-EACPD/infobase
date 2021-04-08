@@ -72,6 +72,13 @@ const get_text_calculations = (table, subject) => {
   };
 };
 
+const common_panel_config = {
+  depends_on: ["orgVoteStatEstimates"],
+  machinery_footnotes: false,
+  glossary_keys: ["AUTH"],
+  title: text_maker("in_year_voted_stat_split_title"),
+};
+
 export const declare_in_year_voted_stat_split_panel = () =>
   declare_panel({
     panel_key: "in_year_voted_stat_split",
@@ -80,10 +87,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
       switch (level) {
         case "gov":
           return {
-            depends_on: ["orgVoteStatEstimates"],
-            machinery_footnotes: false,
-            glossary_keys: ["AUTH"],
-            title: text_maker("in_year_voted_stat_split_title"),
+            ...common_panel_config,
             calculate(subject) {
               const { orgVoteStatEstimates } = this.tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
@@ -107,10 +111,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
           };
         case "dept":
           return {
-            depends_on: ["orgVoteStatEstimates"],
-            machinery_footnotes: false,
-            glossary_keys: ["AUTH"],
-            title: text_maker("in_year_voted_stat_split_title"),
+            ...common_panel_config,
             calculate(subject) {
               const { orgVoteStatEstimates } = this.tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(

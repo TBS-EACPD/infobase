@@ -87,6 +87,10 @@ function render({ title, calculations, footnotes, sources }) {
   );
 }
 
+const common_panel_config = {
+  title: text_maker("spend_rev_split_title"),
+};
+
 export const declare_spend_rev_split_panel = () =>
   declare_panel({
     panel_key: "spend_rev_split",
@@ -95,9 +99,9 @@ export const declare_spend_rev_split_panel = () =>
       switch (level) {
         case "dept":
           return {
+            ...common_panel_config,
             depends_on: ["orgSobjs"],
             footnotes: ["SOBJ_REV"],
-            title: text_maker("spend_rev_split_title"),
             calculate(subject, options) {
               const { orgSobjs } = this.tables;
               const last_year_spend = orgSobjs.so_num(
@@ -133,8 +137,8 @@ export const declare_spend_rev_split_panel = () =>
           };
         case "program":
           return {
+            ...common_panel_config,
             depends_on: ["programSobjs"],
-            title: text_maker("spend_rev_split_title"),
             calculate(subject, options) {
               const { programSobjs } = this.tables;
               const prog_rows = programSobjs.programs.get(subject);

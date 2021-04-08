@@ -837,7 +837,6 @@ function render({ title, calculations, footnotes, glossary_keys, sources }) {
     ];
   }
 
-  console.log(title);
   return (
     <InfographicPanel
       {...{ sources: sources_override, glossary_keys, footnotes, title }}
@@ -1005,6 +1004,12 @@ const common_program_crso_calculate = function (subject) {
 
 const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
 const depends_on = ["programSpending", "programFtes"];
+
+const common_panel_config = {
+  footnotes,
+  title: text_maker("welcome_mat_title"),
+};
+
 export const declare_welcome_mat_panel = () =>
   declare_panel({
     panel_key: "welcome_mat",
@@ -1013,9 +1018,9 @@ export const declare_welcome_mat_panel = () =>
       switch (level) {
         case "gov":
           return {
-            footnotes,
+            ...common_panel_config,
             depends_on,
-            title: text_maker("welcome_mat_title"),
+
             calculate(subject) {
               const { programSpending, programFtes } = this.tables;
               const q6 = programSpending.q(subject);
@@ -1032,14 +1037,13 @@ export const declare_welcome_mat_panel = () =>
           };
         case "dept":
           return {
-            footnotes,
+            ...common_panel_config,
             missing_info: "ok",
             depends_on: [
               "orgVoteStatEstimates",
               "orgVoteStatPa",
               ...depends_on,
             ],
-            title: text_maker("welcome_mat_title"),
             calculate(subject) {
               const {
                 programSpending,
@@ -1099,18 +1103,16 @@ export const declare_welcome_mat_panel = () =>
           };
         case "program":
           return {
-            footnotes,
+            ...common_panel_config,
             depends_on,
-            title: text_maker("welcome_mat_title"),
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,
           };
         case "crso":
           return {
-            footnotes,
+            ...common_panel_config,
             depends_on,
-            title: text_maker("welcome_mat_title"),
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,

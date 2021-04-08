@@ -28,6 +28,7 @@ const common_panel_config = {
   footnotes: false,
   source: false,
   calculate: _.constant(true),
+  title: "", //Won't show in the table of contents but allows us to know if the other panels are showing
 };
 
 const curried_render = ({ q_a_keys }) =>

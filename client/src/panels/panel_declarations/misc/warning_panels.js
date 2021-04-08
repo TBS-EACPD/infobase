@@ -41,11 +41,16 @@ const WarningPanel = ({
   </AlertBanner>
 );
 
+const common_panel_config = {
+  title: "", //Won't show in the table of contents but allows us to know if the other panels are showing
+};
+
 export const declare_dead_program_warning_panel = () =>
   declare_panel({
     panel_key: "dead_program_warning",
     levels: ["program"],
     panel_config_func: (level, panel_key) => ({
+      ...common_panel_config,
       is_static: true,
       footnotes: false,
       calculate: _.property("is_dead"),
@@ -64,6 +69,7 @@ export const declare_dead_crso_warning_panel = () =>
     panel_key: "dead_crso_warning",
     levels: ["crso"],
     panel_config_func: (level, panel_key) => ({
+      ...common_panel_config,
       is_static: true,
       footnotes: false,
       calculate: _.property("is_dead"),
@@ -82,6 +88,7 @@ export const declare_m2m_tag_warning_panel = () =>
     panel_key: "m2m_warning",
     levels: ["tag"],
     panel_config_func: (level, panel_key) => ({
+      ...common_panel_config,
       is_static: true,
       footnotes: false,
       calculate(subject) {
@@ -131,6 +138,7 @@ export const declare_late_results_warning_panel = () =>
       switch (level) {
         case "gov":
           return {
+            ...common_panel_config,
             is_static: true,
             footnotes: false,
             source: false,
@@ -171,6 +179,7 @@ export const declare_late_results_warning_panel = () =>
           };
         default:
           return {
+            ...common_panel_config,
             is_static: true,
             footnotes: false,
             source: false,
@@ -206,6 +215,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
       switch (level) {
         case "gov":
           return {
+            ...common_panel_config,
             is_static: true,
             footnotes: false,
             source: false,
@@ -226,6 +236,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
           };
         default:
           return {
+            ...common_panel_config,
             is_static: true,
             footnotes: false,
             source: false,
