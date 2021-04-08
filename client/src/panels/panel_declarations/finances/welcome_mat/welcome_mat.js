@@ -808,7 +808,7 @@ const MobileOrA11YContent = ({ children }) => [
   </PaneItem>,
 ];
 
-function render({ calculations, footnotes, glossary_keys, sources }) {
+function render({ title, calculations, footnotes, glossary_keys, sources }) {
   const { panel_args, subject } = calculations;
 
   let sources_override = sources;
@@ -837,12 +837,10 @@ function render({ calculations, footnotes, glossary_keys, sources }) {
     ];
   }
 
+  console.log(title);
   return (
     <InfographicPanel
-      title={text_maker("welcome_mat_title")}
-      sources={sources_override}
-      glossary_keys={glossary_keys}
-      footnotes={footnotes}
+      {...{ sources: sources_override, glossary_keys, footnotes, title }}
     >
       <WelcomeMat subject={subject} {...panel_args} />
     </InfographicPanel>
@@ -1017,6 +1015,7 @@ export const declare_welcome_mat_panel = () =>
           return {
             footnotes,
             depends_on,
+            title: text_maker("welcome_mat_title"),
             calculate(subject) {
               const { programSpending, programFtes } = this.tables;
               const q6 = programSpending.q(subject);
@@ -1040,6 +1039,7 @@ export const declare_welcome_mat_panel = () =>
               "orgVoteStatPa",
               ...depends_on,
             ],
+            title: text_maker("welcome_mat_title"),
             calculate(subject) {
               const {
                 programSpending,
@@ -1101,6 +1101,7 @@ export const declare_welcome_mat_panel = () =>
           return {
             footnotes,
             depends_on,
+            title: text_maker("welcome_mat_title"),
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,
@@ -1109,6 +1110,7 @@ export const declare_welcome_mat_panel = () =>
           return {
             footnotes,
             depends_on,
+            title: text_maker("welcome_mat_title"),
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,

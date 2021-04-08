@@ -351,6 +351,7 @@ export const declare_historical_g_and_c_panel = () =>
         case "gov":
           return {
             depends_on: ["orgTransferPayments"],
+            title: text_maker("historical_g_and_c_title"),
             calculate(subject) {
               const { orgTransferPayments } = this.tables;
 
@@ -378,7 +379,7 @@ export const declare_historical_g_and_c_panel = () =>
                 largest_type,
               };
             },
-            render({ calculations, footnotes, sources }) {
+            render({ title, calculations, footnotes, sources }) {
               const { panel_args } = calculations;
               const {
                 payments: series,
@@ -388,9 +389,8 @@ export const declare_historical_g_and_c_panel = () =>
               } = panel_args;
               return (
                 <InfographicPanel
-                  title={text_maker("historical_g_and_c_title")}
                   allowOverflow={true}
-                  {...{ footnotes, sources }}
+                  {...{ title, footnotes, sources }}
                 >
                   <HistTPTypes
                     text={
@@ -409,6 +409,7 @@ export const declare_historical_g_and_c_panel = () =>
         case "dept":
           return {
             depends_on: ["orgTransferPayments"],
+            title: text_maker("historical_g_and_c_title"),
             key: "historical_g_and_c",
             footnotes: ["SOBJ10"],
             calculate(dept) {
@@ -474,7 +475,7 @@ export const declare_historical_g_and_c_panel = () =>
                 }
               );
             },
-            render({ calculations, footnotes, sources }) {
+            render({ title, calculations, footnotes, sources }) {
               const {
                 panel_args: { rows, rolled_up, text_calculations },
               } = calculations;
@@ -485,8 +486,7 @@ export const declare_historical_g_and_c_panel = () =>
               return (
                 <InfographicPanel
                   allowOverflow={true}
-                  title={text_maker("historical_g_and_c_title")}
-                  {...{ sources, footnotes }}
+                  {...{ title, sources, footnotes }}
                 >
                   <HistTPTypes
                     text={text_content}

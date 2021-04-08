@@ -28,7 +28,11 @@ import text from "./crso_by_prog.yaml";
 const { planning_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
+const render_resource_type = (is_fte) => ({
+  title,
+  calculations,
+  footnotes,
+}) => {
   const { panel_args, subject } = calculations;
 
   const sources = [
@@ -65,12 +69,7 @@ const render_resource_type = (is_fte) => ({ calculations, footnotes }) => {
   );
 
   return (
-    <InfographicPanel
-      title={text_maker(
-        is_fte ? "crso_by_prog_fte_title" : "crso_by_prog_exp_title"
-      )}
-      {...{ sources, footnotes }}
-    >
+    <InfographicPanel {...{ title, sources, footnotes }}>
       <PlannedProgramResources
         programs={_.sortBy(
           is_fte ? fte_data : exp_data,
@@ -217,6 +216,7 @@ export const declare_crso_by_prog_fte_panel = () =>
     panel_config_func: (level, panel_key) => ({
       footnotes: ["PLANNED_EXP"],
       depends_on: ["programSpending", "programFtes"],
+      title: text_maker("crso_by_prog_fte_title"),
       calculate: get_calculate_func(true),
       render: render_resource_type(true),
     }),
@@ -228,6 +228,7 @@ export const declare_crso_by_prog_exp_panel = () =>
     panel_config_func: (level, panel_key) => ({
       footnotes: ["PLANNED_EXP"],
       depends_on: ["programSpending", "programFtes"],
+      title: text_maker("crso_by_prog_exp_title"),
       calculate: get_calculate_func(false),
       render: render_resource_type(false),
     }),

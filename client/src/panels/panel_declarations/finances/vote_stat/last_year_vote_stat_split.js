@@ -18,6 +18,7 @@ import { text_maker, TM } from "./vote_stat_text_provider.js";
 const { std_years } = year_templates;
 
 const render_w_options = ({ text_key, graph_col, text_col }) => ({
+  title,
   calculations,
   sources,
   footnotes,
@@ -32,10 +33,7 @@ const render_w_options = ({ text_key, graph_col, text_col }) => ({
   }));
 
   return (
-    <StdPanel
-      title={text_maker("vote_stat_split_title")}
-      {...{ footnotes, sources, glossary_keys }}
-    >
+    <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
       <Col isText size={text_col}>
         <TM k={text_key} args={text_calculations} />
       </Col>
@@ -56,7 +54,7 @@ export const declare_vote_stat_split_panel = () =>
       depends_on: ["programVoteStat"],
       footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
-
+      title: text_maker("vote_stat_split_title"),
       calculate(subject, options) {
         const { programVoteStat } = this.tables;
 

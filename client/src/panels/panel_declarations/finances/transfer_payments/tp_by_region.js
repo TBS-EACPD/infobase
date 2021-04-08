@@ -160,7 +160,7 @@ class TPMap extends React.Component {
     );
   }
   render() {
-    const { calculations, footnotes, sources } = this.props;
+    const { title, calculations, footnotes, sources } = this.props;
     const { loading, population_data } = this.state;
 
     if (loading) {
@@ -263,10 +263,7 @@ class TPMap extends React.Component {
       );
 
       return (
-        <StdPanel
-          title={text_maker("tp_by_region_title")}
-          {...{ footnotes, sources }}
-        >
+        <StdPanel {...{ title, footnotes, sources }}>
           <Col size={12} isText>
             <TM k="tp_by_region_text" args={text_args} />
             {!is_a11y_mode && <TM k="tp_by_region_graph_usage" />}
@@ -326,6 +323,7 @@ export const declare_tp_by_region_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgTransferPaymentsRegion"],
+      title: text_maker("tp_by_region_title"),
       calculate: function (subject) {
         const { orgTransferPaymentsRegion } = this.tables;
 
@@ -338,12 +336,8 @@ export const declare_tp_by_region_panel = () =>
 
         return { table: orgTransferPaymentsRegion };
       },
-      render: ({ calculations, footnotes, sources }) => (
-        <TPMap
-          calculations={calculations}
-          footnotes={footnotes}
-          sources={sources}
-        />
+      render: ({ title, calculations, footnotes, sources }) => (
+        <TPMap {...{ title, calculations, footnotes, sources }} />
       ),
     }),
   });

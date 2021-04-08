@@ -49,7 +49,7 @@ const color_scale = (vs) =>
   };
 
 const planned_vote_or_stat_render = (vs) =>
-  function ({ calculations, footnotes, sources }) {
+  function ({ title, calculations, footnotes, sources }) {
     const { panel_args } = calculations;
     const isVoted = vs === "voted";
 
@@ -120,14 +120,7 @@ const planned_vote_or_stat_render = (vs) =>
 
     const show_pack = !is_a11y_mode;
     return (
-      <StdPanel
-        title={text_maker(
-          isVoted
-            ? "in_year_voted_breakdown_title"
-            : "in_year_stat_breakdown_title"
-        )}
-        {...{ footnotes, sources }}
-      >
+      <StdPanel {...{ title, footnotes, sources }}>
         <Col isText size={12}>
           <TM
             k={
@@ -216,6 +209,7 @@ const declare_in_year_voted_breakdown_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgVoteStatEstimates"],
+      title: text_maker("in_year_voted_breakdown_title"),
       calculate: planned_vote_or_stat_calculate("voted"),
       render: planned_vote_or_stat_render("voted"),
     }),
@@ -226,6 +220,7 @@ const declare_in_year_stat_breakdown_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgVoteStatEstimates"],
+      title: text_maker("in_year_stat_breakdown_title"),
       calculate: planned_vote_or_stat_calculate("stat"),
       render: planned_vote_or_stat_render("stat"),
     }),

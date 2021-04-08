@@ -513,12 +513,9 @@ class Goco extends React.Component {
   }
 }
 
-function render({ footnotes, sources, glossary_keys }) {
+function render({ title, footnotes, sources, glossary_keys }) {
   return (
-    <InfographicPanel
-      title={text_maker("gocographic_title")}
-      {...{ sources, footnotes, glossary_keys }}
-    >
+    <InfographicPanel {...{ title, sources, footnotes, glossary_keys }}>
       <Goco />
     </InfographicPanel>
   );
@@ -530,6 +527,7 @@ export const declare_gocographic_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending", "programFtes"],
+      title: text_maker("gocographic_title"),
       footnotes: ["GOCO"],
       glossary_keys: ["GOCO"],
       render,

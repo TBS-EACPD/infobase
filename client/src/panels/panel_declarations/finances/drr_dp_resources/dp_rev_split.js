@@ -52,6 +52,7 @@ export const declare_dp_rev_split_panel = () =>
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["programSpending"],
+      title: text_maker("dp_rev_split_title"),
       machinery_footnotes: false,
       footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],
@@ -129,15 +130,12 @@ export const declare_dp_rev_split_panel = () =>
           column_configs,
         };
       },
-      render({ calculations, footnotes, sources, glossary_keys }) {
+      render({ title, calculations, footnotes, sources, glossary_keys }) {
         const { panel_args } = calculations;
         const { table_data, column_configs } = panel_args;
 
         return (
-          <InfographicPanel
-            title={text_maker("dp_rev_split_title")}
-            {...{ footnotes, sources, glossary_keys }}
-          >
+          <InfographicPanel {...{ title, footnotes, sources, glossary_keys }}>
             <SmartDisplayTable
               table_name={text_maker("dp_rev_split_title")}
               data={table_data}

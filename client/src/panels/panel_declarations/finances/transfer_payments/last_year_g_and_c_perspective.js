@@ -20,6 +20,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgTransferPayments", "programSpending"],
       footnotes: ["SOBJ10"],
+      title: text_maker("last_year_g_and_c_perspective_title"),
       calculate(subject, options) {
         const { orgTransferPayments, programSpending } = this.tables;
 
@@ -53,17 +54,12 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
           total_pct,
         };
       },
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { subject, panel_args } = calculations;
         const { gov_tp, org_tp, dept_spending } = panel_args;
 
         return (
-          <StdPanel
-            title={text_maker("last_year_g_and_c_perspective_title")}
-            footnotes={footnotes}
-            sources={sources}
-            allowOverflow={true}
-          >
+          <StdPanel {...{ title, footnotes, sources, allowOverflow: true }}>
             <Col size={!is_a11y_mode ? 6 : 12} isText>
               <TM
                 k="dept_last_year_g_and_c_perspective_text"

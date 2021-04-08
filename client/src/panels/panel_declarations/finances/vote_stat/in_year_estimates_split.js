@@ -56,6 +56,7 @@ const estimates_split_calculate = function (subject) {
 };
 
 const estimates_split_render_w_text_key = (text_key) => ({
+  title,
   calculations,
   footnotes,
   sources,
@@ -106,10 +107,7 @@ const estimates_split_render_w_text_key = (text_key) => ({
   );
 
   return (
-    <StdPanel
-      title={text_maker("in_year_estimates_split_title")}
-      {...{ sources, footnotes }}
-    >
+    <StdPanel {...{ title, sources, footnotes }}>
       <Col isText size={6}>
         <TM k={text_key} args={panel_args} />
       </Col>
@@ -130,6 +128,7 @@ export const declare_in_year_estimates_split_panel = () =>
           return {
             machinery_footnotes: false,
             depends_on: ["orgVoteStatEstimates"],
+            title: text_maker("in_year_estimates_split_title"),
             calculate: estimates_split_calculate,
             render: estimates_split_render_w_text_key(
               "gov_in_year_estimates_split_text"
@@ -139,6 +138,7 @@ export const declare_in_year_estimates_split_panel = () =>
           return {
             machinery_footnotes: false,
             depends_on: ["orgVoteStatEstimates"],
+            title: text_maker("in_year_estimates_split_title"),
             calculate: estimates_split_calculate,
             render: estimates_split_render_w_text_key(
               "dept_in_year_estimates_split_text"

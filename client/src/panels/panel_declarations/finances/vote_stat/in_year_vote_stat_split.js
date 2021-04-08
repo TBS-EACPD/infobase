@@ -18,6 +18,7 @@ const stat = text_maker("stat");
 const main_col = "{{est_in_year}}_estimates";
 
 const render_w_options = ({ graph_col, text_col, text_key }) => ({
+  title,
   calculations,
   footnotes,
   sources,
@@ -32,10 +33,7 @@ const render_w_options = ({ graph_col, text_col, text_key }) => ({
   }));
 
   return (
-    <StdPanel
-      title={text_maker("in_year_voted_stat_split_title")}
-      {...{ sources, footnotes, glossary_keys }}
-    >
+    <StdPanel {...{ title, sources, footnotes, glossary_keys }}>
       <Col isText size={text_col}>
         <TM k={text_key} args={text_calculations} />
       </Col>
@@ -85,7 +83,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
             depends_on: ["orgVoteStatEstimates"],
             machinery_footnotes: false,
             glossary_keys: ["AUTH"],
-
+            title: text_maker("in_year_voted_stat_split_title"),
             calculate(subject) {
               const { orgVoteStatEstimates } = this.tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
@@ -112,6 +110,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
             depends_on: ["orgVoteStatEstimates"],
             machinery_footnotes: false,
             glossary_keys: ["AUTH"],
+            title: text_maker("in_year_voted_stat_split_title"),
             calculate(subject) {
               const { orgVoteStatEstimates } = this.tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
