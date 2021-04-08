@@ -36,7 +36,7 @@ export const declare_employee_totals_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeType"],
-
+      title: text_maker(level + "_employee_totals_title"),
       calculate(subject) {
         const { orgEmployeeType } = this.tables;
         const q = orgEmployeeType.q(subject);
@@ -46,7 +46,7 @@ export const declare_employee_totals_panel = () =>
         };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { subject, panel_args } = calculations;
         const { series, ticks } = panel_args;
 
@@ -85,10 +85,7 @@ export const declare_employee_totals_panel = () =>
         ];
 
         return (
-          <StdPanel
-            title={text_maker(level + "_employee_totals_title")}
-            {...{ footnotes, sources }}
-          >
+          <StdPanel {...{ title, footnotes, sources }}>
             <Col size={4} isText>
               <TM
                 k={level + "_employee_totals_text"}

@@ -80,8 +80,8 @@ export const declare_employee_gender_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeGender"],
       calculate: calculate_funcs_by_level[level],
-
-      render({ calculations, footnotes, sources }) {
+      title: text_maker("employee_gender_title"),
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
         const text_groups = (() => {
@@ -133,10 +133,7 @@ export const declare_employee_gender_panel = () =>
         })();
 
         return (
-          <StdPanel
-            title={text_maker("employee_gender_title")}
-            {...{ footnotes: required_footnotes, sources }}
-          >
+          <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
             <Col size={12} isText>
               <TM
                 k={level + "_employee_gender_text"}

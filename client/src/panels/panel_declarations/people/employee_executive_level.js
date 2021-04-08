@@ -91,12 +91,13 @@ export const declare_employee_executive_level_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeExLvl"],
+      title: text_maker("employee_executive_level_title"),
       calculate: function (subject) {
         const { orgEmployeeExLvl } = this.tables;
 
         return calculate_funcs_by_level[level](orgEmployeeExLvl, subject);
       },
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const {
           panel_args: { series, has_non_ex_only },
           subject,
@@ -158,10 +159,7 @@ export const declare_employee_executive_level_panel = () =>
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
         return (
-          <StdPanel
-            title={text_maker("employee_executive_level_title")}
-            {...{ footnotes, sources }}
-          >
+          <StdPanel {...{ title, footnotes, sources }}>
             <Col size={12} isText>
               <TM
                 k={

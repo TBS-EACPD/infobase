@@ -72,6 +72,7 @@ export const declare_employee_type_panel = () =>
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeType"],
+      title: text_maker("employee_type_title"),
       glossary_keys: [
         "INDET_PEOPLE",
         "TERM_PEOPLE",
@@ -80,7 +81,7 @@ export const declare_employee_type_panel = () =>
       ],
       calculate: calculate_funcs_by_level[level],
 
-      render({ calculations, footnotes, sources, glossary_keys }) {
+      render({ title, calculations, footnotes, sources, glossary_keys }) {
         const { panel_args, subject } = calculations;
 
         const student = _.find(
@@ -121,10 +122,7 @@ export const declare_employee_type_panel = () =>
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
         return (
-          <StdPanel
-            title={text_maker("employee_type_title")}
-            {...{ footnotes, sources, glossary_keys }}
-          >
+          <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
             <Col size={12} isText>
               <TM k={level + "_employee_type_text"} args={text_calculations} />
             </Col>
