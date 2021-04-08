@@ -33,14 +33,15 @@ export const declare_links_to_rpb_panel = () =>
   declare_panel({
     panel_key: "links_to_rpb",
     levels: ["gov", "dept"],
+
     panel_config_func: (level, panel_key) => {
       switch (level) {
         case "gov":
           return {
             footnotes: false,
             calculate: _.constant(true),
-
-            render({ calculations }) {
+            title: text_maker("links_to_rpb_title"),
+            render({ title, calculations }) {
               const { subject } = calculations;
 
               const list_args = _.chain(Table.get_all())
@@ -66,7 +67,7 @@ export const declare_links_to_rpb_panel = () =>
                 .value();
 
               return (
-                <TextPanel title={text_maker("links_to_rpb_title")}>
+                <TextPanel title={title}>
                   <TM k="links_to_rpb_text" />
                   <CardList elements={list_args} />
                 </TextPanel>
@@ -76,12 +77,12 @@ export const declare_links_to_rpb_panel = () =>
         case "dept":
           return {
             footnotes: false,
-
+            title: text_maker("links_to_rpb_title"),
             calculate(subject) {
               return !_.chain(subject.tables).compact().isEmpty().value();
             },
 
-            render({ calculations }) {
+            render({ title, calculations }) {
               const { subject } = calculations;
 
               const list_args = _.chain(subject.tables)
@@ -109,7 +110,7 @@ export const declare_links_to_rpb_panel = () =>
                 .value();
 
               return (
-                <TextPanel title={text_maker("links_to_rpb_title")}>
+                <TextPanel title={title}>
                   <TM k="links_to_rpb_text" />
                   <CardList elements={list_args} />
                 </TextPanel>
