@@ -1,10 +1,10 @@
 filter_panels:
   en: Filter Panels
-  fr: Panneaux filtres
+  fr: Trier les panneaux
 panels_status:
   transform: [handlebars]
   en: (showing {{number_of_active_panels}} of {{total_number_of_panels}} panels)
-  fr: (montrant {{number_of_active_panels}} des {{total_number_of_panels}} panneaux)
+  fr: ({{number_of_active_panels}} des {{total_number_of_panels}} panneaux sont affichés)
 filter_panels_description:
   en: |
     Filter by datasets:
