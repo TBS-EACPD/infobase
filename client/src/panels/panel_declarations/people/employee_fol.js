@@ -80,8 +80,8 @@ export const declare_employee_fol_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeFol"],
       calculate: calculate_funcs_by_level[level],
-
-      render({ calculations, footnotes, sources }) {
+      title: text_maker("employee_fol_title"),
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
         const text_groups = (() => {
@@ -131,10 +131,7 @@ export const declare_employee_fol_panel = () =>
         })();
 
         return (
-          <StdPanel
-            title={text_maker("employee_fol_title")}
-            {...{ footnotes: required_footnotes, sources }}
-          >
+          <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
             <Col size={12} isText>
               <TM k={level + "_employee_fol_text"} args={text_calculations} />
             </Col>

@@ -73,7 +73,13 @@ class ProvPanel extends React.Component {
     };
   }
   render() {
-    const { calculations, footnotes, sources, level } = this.props.render_args;
+    const {
+      title,
+      calculations,
+      footnotes,
+      sources,
+      level,
+    } = this.props.render_args;
 
     const { panel_args, subject } = calculations;
     const { data } = panel_args;
@@ -126,10 +132,7 @@ class ProvPanel extends React.Component {
     };
 
     return (
-      <StdPanel
-        title={text_maker("employee_prov_title")}
-        {...{ footnotes, sources }}
-      >
+      <StdPanel {...{ title, footnotes, sources }}>
         <Col size={12} isText>
           <TM k={level + "_employee_prov_text"} args={text_calculations} />
         </Col>
@@ -208,7 +211,7 @@ export const declare_employee_prov_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeRegion"],
       calculate: calculate_funcs_by_level[level],
-
+      title: text_maker("employee_prov_title"),
       render(render_args) {
         return <ProvPanel render_args={{ ...render_args, level }} />;
       },

@@ -118,8 +118,8 @@ export const declare_employee_age_panel = () =>
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeAgeGroup", "orgEmployeeAvgAge"],
       calculate: calculate_funcs_by_level[level],
-
-      render({ calculations, footnotes, sources }) {
+      title: text_maker("employee_age_title"),
+      render({ title, calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
 
         const { avg_age, age_group } = panel_args;
@@ -199,10 +199,7 @@ export const declare_employee_age_panel = () =>
         })();
 
         return (
-          <StdPanel
-            title={text_maker("employee_age_title")}
-            {...{ footnotes: required_footnotes, sources }}
-          >
+          <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
             <Col size={12} isText>
               <TM k={level + "_employee_age_text"} args={text_calculations} />
             </Col>

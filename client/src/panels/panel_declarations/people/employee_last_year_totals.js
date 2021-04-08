@@ -27,7 +27,7 @@ export const declare_employee_last_year_totals_panel = () =>
     levels: ["dept"],
     panel_config_func: (level, panel_key) => ({
       depends_on: ["orgEmployeeType"],
-
+      title: text_maker("dept_employee_last_year_totals_title"),
       calculate(subject) {
         const { orgEmployeeType } = this.tables;
         const dept_last_year_emp = orgEmployeeType
@@ -53,7 +53,7 @@ export const declare_employee_last_year_totals_panel = () =>
         };
       },
 
-      render({ calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources }) {
         const { subject, panel_args } = calculations;
 
         const dept_emp_value = panel_args.vals[1].value;
@@ -63,11 +63,7 @@ export const declare_employee_last_year_totals_panel = () =>
 
         const text_calculations = { dept_emp_value, dept_emp_pct, subject };
         return (
-          <StdPanel
-            title={text_maker("dept_employee_last_year_totals_title")}
-            {...{ footnotes, sources }}
-            allowOverflow={true}
-          >
+          <StdPanel {...{ title, footnotes, sources }} allowOverflow={true}>
             <Col size={!is_a11y_mode ? 5 : 12} isText>
               <TM
                 k="dept_employee_last_year_totals_text"
