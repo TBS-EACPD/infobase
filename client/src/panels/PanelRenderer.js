@@ -10,14 +10,7 @@ export const panel_context = React.createContext(null);
 export const PanelRenderer = withRouter(
   class PanelRenderer_ extends React.Component {
     render() {
-      let {
-        subject,
-        panel_key,
-        history,
-        active_bubble_id,
-        add_visible_panel_title,
-        remove_visible_panel_title,
-      } = this.props;
+      let { subject, panel_key, history, active_bubble_id } = this.props;
 
       const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
 
@@ -37,8 +30,6 @@ export const PanelRenderer = withRouter(
               active_bubble_id,
               panel_key,
               subject,
-              add_visible_panel_title,
-              remove_visible_panel_title,
             }}
           >
             {panel_obj.render(calculations, panel_options)}

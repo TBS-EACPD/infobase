@@ -96,8 +96,6 @@ const get_default_state_from_props = ({
   valid_panel_keys: null,
   previous_bubble: null,
   next_bubble: null,
-  mounted: false,
-  visible_panel_titles: {},
 });
 class InfoGraph_ extends React.Component {
   constructor(props) {
@@ -121,7 +119,7 @@ class InfoGraph_ extends React.Component {
     this.load({ ...this.state, ...this.props });
   }
   componentDidUpdate(prevProps) {
-    const { loading, active_bubble_id, valid_panel_keys, mounted } = this.state;
+    const { loading, active_bubble_id, valid_panel_keys } = this.state;
 
     if (loading) {
       this.load({ ...this.state, ...this.props });
@@ -151,10 +149,6 @@ class InfoGraph_ extends React.Component {
 
       linked_to_panel &&
         this.scroll_to_panel_when_all_loading_done(linked_to_panel);
-
-      if (!mounted) {
-        this.setState({ mounted: true });
-      }
     }
   }
   scroll_to_panel_when_all_loading_done = _.debounce((linked_to_panel) => {
@@ -178,19 +172,6 @@ class InfoGraph_ extends React.Component {
   componentWillUnmount() {
     this.scroll_to_panel_when_all_loading_done.cancel();
   }
-  add_visible_panel_title = (panel_key, panel_title) =>
-    !_.has(this.state.visible_panel_titles, panel_key) &&
-    this.setState((prev_state) => ({
-      visible_panel_titles: {
-        ...prev_state.visible_panel_titles,
-        [panel_key]: panel_title,
-      },
-    }));
-  remove_visible_panel_title = (panel_key) =>
-    _.has(this.state.visible_panel_titles, panel_key) &&
-    this.setState((prev_state) => ({
-      visible_panel_titles: _.omit(prev_state.visible_panel_titles, panel_key),
-    }));
   render() {
     const { subject, active_bubble_id, url_replace } = this.props;
     const {
@@ -200,8 +181,6 @@ class InfoGraph_ extends React.Component {
       previous_bubble,
       next_bubble,
       panel_filter,
-      mounted,
-      // visible_panel_titles,
     } = this.state;
 
     const filtered_panel_keys = panel_filter(valid_panel_keys);
@@ -270,18 +249,18 @@ class InfoGraph_ extends React.Component {
                       "/"
                     )
                   );
-                  this.setState({ panel_filter, mounted: false });
+                  this.setState({ panel_filter });
                 }}
               />
             )}
 
           <TableOfContents
-            loading={loading}
-            mounted={mounted}
-            subject={subject}
-            panel_keys={filtered_panel_keys}
-            active_bubble_id={active_bubble_id}
-            visible_panel_titles={visible_panel_titles}
+            {...{
+              subject,
+              active_bubble_id,
+              visible_panel_titles,
+              panel_keys: filtered_panel_keys,
+            }}
           />
 
           {!loading &&
@@ -291,8 +270,6 @@ class InfoGraph_ extends React.Component {
                 subject={subject}
                 active_bubble_id={active_bubble_id}
                 key={panel_key + subject.guid}
-                add_visible_panel_title={this.add_visible_panel_title}
-                remove_visible_panel_title={this.remove_visible_panel_title}
               />
             ))}
         </div>
