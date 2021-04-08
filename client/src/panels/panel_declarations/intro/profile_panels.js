@@ -28,6 +28,7 @@ export const declare_profile_panel = () =>
     panel_key: "profile",
     levels: ["dept", "crso", "program", "tag"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker(`profile`),
       calculate: (subject) => {
         switch (level) {
           case "dept":
@@ -169,7 +170,7 @@ export const declare_profile_panel = () =>
             return false;
         }
       },
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { profile_fields } = calculations.panel_args;
 
         const labels_and_items = _.chain(profile_fields)
@@ -189,7 +190,7 @@ export const declare_profile_panel = () =>
           .value();
 
         return (
-          <TextPanel title={text_maker(`profile`)}>
+          <TextPanel title={title}>
             <LabeledTombstone labels_and_items={labels_and_items} />
           </TextPanel>
         );
@@ -201,14 +202,15 @@ export const declare_description_panel = () =>
   declare_panel({
     panel_key: "description",
     levels: ["tag"],
+    title: text_maker("tag_desc_title"),
     panel_config_func: (level, panel_key) => ({
       footnotes: false,
       calculate: (subject) => !_.isEmpty(subject.description),
-      render({ calculations }) {
+      render({ title, calculations }) {
         const { subject } = calculations;
 
         return (
-          <TextPanel title={text_maker("tag_desc_title")}>
+          <TextPanel title={title}>
             <div
               dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
                 subject.description
