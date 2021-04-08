@@ -144,18 +144,20 @@ export const declare_covid_intro_panel = () =>
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
       footnotes: ["COVID"],
+      title: text_maker("covid_intro_panel_title"),
       source: (subject) => [],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
       render: ({
+        title,
         calculations: { panel_args },
         footnotes,
         sources,
         glossary_keys,
       }) => (
         <InfographicPanel
-          title={text_maker("covid_intro_panel_title")}
           {...{
+            title,
             sources,
             footnotes,
             glossary_keys,
