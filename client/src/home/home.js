@@ -28,18 +28,11 @@ import {
   IconTag,
   IconReport,
   IconLab,
-<<<<<<< HEAD
   IconFinancesAlt,
   IconEmployeesAlt,
   IconClipboardAlt,
   IconHelpAlt,
-  IconServices,
-=======
-  IconExpend,
-  IconPeople,
   IconServicesHome,
-  IconResults,
->>>>>>> change around svg into icons for services
   IconFlagLine,
 } from "src/icons/icons.js";
 

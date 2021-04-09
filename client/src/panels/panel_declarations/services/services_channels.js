@@ -1,27 +1,30 @@
 import _ from "lodash";
 import React from "react";
 
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+
+import {
+  DisplayTable,
+  create_text_maker_component,
+} from "src/components/index.js";
+
+import { Service } from "src/models/services.js";
+
 import { infobase_colors } from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
-import { StandardLegend, SelectAllControl } from "../../../charts/legends";
-import { Service } from "../../../models/services.js";
-
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 import {
-  create_text_maker_component,
-  InfographicPanel,
-  declare_panel,
   WrappedNivoBar,
   WrappedNivoPie,
-  HeightClippedGraph,
-  util_components,
-} from "../shared.js";
+} from "src/charts/wrapped_nivo/index.js";
 
 import { delivery_channels_keys } from "./shared.js";
 
 import text from "./services.yaml";
 
-const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 const colors = infobase_colors();
 

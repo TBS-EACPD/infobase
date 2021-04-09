@@ -1,18 +1,20 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  create_text_maker_component,
-  Panel,
-  DisplayTable,
-} from "../../../../components";
-import FootNote from "../../../../models/footnotes/footnotes.js";
-import text from "../services.yaml";
+import text from "src/panels/panel_declarations/services/services.yaml";
 import {
   digital_status_keys,
   available_icons,
   available_keys,
-} from "../shared.js";
+} from "src/panels/panel_declarations/services/shared.js";
+
+import {
+  create_text_maker_component,
+  Panel,
+  DisplayTable,
+} from "src/components/index.js";
+
+import FootNote from "src/models/footnotes/footnotes.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

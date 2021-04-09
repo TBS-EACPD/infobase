@@ -1,4 +1,3 @@
-import { services_feature_flag } from "../../core/injected_build_constants.js";
 import {
   // shared all
   declare_welcome_mat_panel,
@@ -48,6 +47,8 @@ import {
   declare_personnel_spend_panel,
   declare_high_application_volume_panel,
 } from "src/panels/panel_declarations/index.js";
+
+import { services_feature_flag } from "src/core/injected_build_constants.js";
 
 export const get_gov_panels = (subject) => ({
   intro: [declare_simplographic_panel()],

@@ -1,21 +1,22 @@
 import _ from "lodash";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { Service } from "../../../models/services.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
+  DisplayTable,
   create_text_maker_component,
-  InfographicPanel,
-  declare_panel,
-  WrappedNivoPie,
-  util_components,
-} from "../shared.js";
+} from "src/components/index.js";
+
+import { Service } from "src/models/services.js";
+
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 
 import text from "./services.yaml";
 
-const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ panel_args }) => {

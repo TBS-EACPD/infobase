@@ -21,6 +21,7 @@ $smallMargin: 10px;
   @media(min-width: $minExtraSmallDevice) {
     flex-basis: 23%;
     max-width: 23%;
+  }
   @media(min-width: $minSmallDevice) {
     flex-basis: 30%;
     max-width: 24%;

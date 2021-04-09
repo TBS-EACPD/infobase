@@ -2,30 +2,30 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+
+import {
+  DisplayTable,
+  create_text_maker_component,
+} from "src/components/index.js";
+
+import { Service } from "src/models/services.js";
+
 import {
   secondaryColor,
   highlightOrangeColor,
   separatorColor,
 } from "src/core/color_defs.js";
-
 import { is_a11y_mode, lang } from "src/core/injected_build_constants.js";
 
-import { Service } from "../../../models/services.js";
-
-import {
-  create_text_maker_component,
-  InfographicPanel,
-  declare_panel,
-  WrappedNivoHBar,
-  StandardLegend,
-  util_components,
-} from "../shared.js";
+import { StandardLegend } from "src/charts/legends/index.js";
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
 
 import { digital_status_keys } from "./shared.js";
 
 import text from "./services.yaml";
 
-const { DisplayTable } = util_components;
 const { text_maker, TM } = create_text_maker_component(text);
 const can_online = text_maker("can_online");
 const cannot_online = text_maker("cannot_online");

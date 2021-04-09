@@ -3,22 +3,25 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
-import { Subject } from "../../../models/subject.js";
+import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
+  DisplayTable,
   create_text_maker_component,
-  InfographicPanel,
-  declare_panel,
-  WrappedNivoHBar,
-  TspanLineWrapper,
-  formatter,
-  newIBLightCategoryColors,
-  infograph_href_template,
-} from "../shared.js";
+} from "src/components/index.js";
+
+import { Service } from "src/models/services.js";
+import { Subject } from "src/models/subject.js";
+
+import { newIBLightCategoryColors } from "src/core/color_schemes.js";
+import { formatter } from "src/core/format.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
+
+import { infograph_href_template } from "src/link_utils.js";
 
 import text from "./services.yaml";
 

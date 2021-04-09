@@ -1,17 +1,17 @@
 import _ from "lodash";
 import React from "react";
 
-import { DisplayTable } from "../../../components";
-import { Service } from "../../../models/services.js";
-
-import { Subject } from "../../../models/subject.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
+  DisplayTable,
   create_text_maker_component,
-  InfographicPanel,
-  declare_panel,
-  HeightClippedGraph,
-} from "../shared.js";
+} from "src/components/index.js";
+
+import { Service } from "src/models/services.js";
+import { Subject } from "src/models/subject.js";
 
 import { delivery_channels_keys } from "./shared.js";
 

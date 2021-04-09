@@ -1,26 +1,30 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { backgroundColor } from "src/core/color_defs.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
-
-import Gauge from "../../../../charts/gauge.js";
-import {
-  create_text_maker_component,
-  FancyUL,
-  DisplayTable,
-} from "../../../../components";
-import { infograph_href_template } from "../../../../link_utils.js";
-import { Subject } from "../../../../models/subject.js";
-import { TextPanel, formatter } from "../../shared.js";
-import text from "../services.yaml";
+import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import text from "src/panels/panel_declarations/services/services.yaml";
 import {
   available_icons,
   available_keys,
   delivery_channels_keys,
-} from "../shared";
+} from "src/panels/panel_declarations/services/shared";
 
-import "../services.scss";
+import {
+  DisplayTable,
+  create_text_maker_component,
+  FancyUL,
+} from "src/components/index.js";
+
+import { Subject } from "src/models/subject.js";
+
+import { backgroundColor } from "src/core/color_defs.js";
+import { formatter } from "src/core/format.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import Gauge from "src/charts/gauge.js";
+
+import { infograph_href_template } from "src/link_utils.js";
+import "src/panels/panel_declarations/services/services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

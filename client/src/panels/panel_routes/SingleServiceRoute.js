@@ -1,17 +1,24 @@
 import React from "react";
 
-import { create_text_maker_component, SpinnerWrapper } from "../../components";
-import { ensure_loaded } from "../../core/lazy_loader.js";
-import { StandardRouteContainer } from "../../core/NavComponents.js";
-import { infograph_href_template } from "../../link_utils.js";
-import { Service } from "../../models/services";
-import { Subject } from "../../models/subject";
 import {
   ServiceOverview,
   ServiceChannels,
   ServiceStandards,
   ServiceDigitalStatus,
-} from "../panel_declarations/services";
+} from "src/panels/panel_declarations/services/index.js";
+
+import {
+  create_text_maker_component,
+  SpinnerWrapper,
+} from "src/components/index.js";
+
+import { Service } from "src/models/services";
+import { Subject } from "src/models/subject";
+
+import { ensure_loaded } from "src/core/ensure_loaded.js";
+import { StandardRouteContainer } from "src/core/NavComponents.js";
+
+import { infograph_href_template } from "src/link_utils.js";
 
 import text from "./SingleServiceRoute.yaml";
 
