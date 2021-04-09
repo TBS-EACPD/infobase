@@ -60,7 +60,7 @@ export const query_length_tolerant_fetch = async (uri, options) => {
   const query = options.body;
   const query_hash = string_hash(query);
 
-  const uri = `${await get_api_url()}?v=${sha}&queryHash=${query_hash}`;
+  const uriWithVersionAndQueryHash = `${await get_api_url()}?v=${sha}&queryHash=${query_hash}`;
 
   const new_options = {
     ...options,
@@ -73,7 +73,7 @@ export const query_length_tolerant_fetch = async (uri, options) => {
     },
   };
 
-  return fetch(uri, new_options);
+  return fetch(uriWithVersionAndQueryHash, new_options);
 };
 
 let client = null;
