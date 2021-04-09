@@ -59,7 +59,7 @@ export default {
     });
     std_years.forEach((yr) => {
       this.add_col({
-        type: "big_int",
+        type: "dollar",
         nick: yr,
         header: yr,
         description: {

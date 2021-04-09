@@ -106,7 +106,7 @@ export default {
     });
     _.each(estimates_years, (yr, ix) => {
       this.add_col({
-        type: "big_int",
+        type: "dollar",
         nick: yr + "_estimates",
         description: {
           en: "Tabled Amounts for " + yr,
