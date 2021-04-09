@@ -21,6 +21,7 @@ Object {
               "Online",
             ],
             "first_active_year": "2018",
+            "id": "1297",
             "is_active": true,
             "issuance_digital_status": true,
             "issue_res_digital_status": true,
@@ -42,7 +43,6 @@ Object {
             "scope": Array [
               "Internal Enterprise Service",
             ],
-            "service_id": "1297",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,
@@ -82,6 +82,7 @@ Object {
               "Other",
             ],
             "first_active_year": "2018",
+            "id": "1114",
             "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": null,
@@ -103,7 +104,6 @@ Object {
             "scope": Array [
               "External Service",
             ],
-            "service_id": "1114",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,
@@ -150,6 +150,7 @@ Object {
               "Email",
             ],
             "first_active_year": "2018",
+            "id": "1348",
             "is_active": true,
             "issuance_digital_status": true,
             "issue_res_digital_status": true,
@@ -171,7 +172,6 @@ Object {
             "scope": Array [
               "Internal Enterprise Service",
             ],
-            "service_id": "1348",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,
@@ -315,6 +315,7 @@ Object {
               "Online",
             ],
             "first_active_year": "2018",
+            "id": "1094",
             "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": true,
@@ -340,7 +341,6 @@ Object {
             "scope": Array [
               "Internal Enterprise Service",
             ],
-            "service_id": "1094",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,
@@ -380,6 +380,7 @@ Object {
               "Email",
             ],
             "first_active_year": "2018",
+            "id": "1349",
             "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": true,
@@ -401,7 +402,6 @@ Object {
             "scope": Array [
               "External Service",
             ],
-            "service_id": "1349",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,
@@ -449,6 +449,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "Online",
             ],
             "first_active_year": "2018",
+            "id": "1350",
             "is_active": true,
             "issuance_digital_status": null,
             "issue_res_digital_status": null,
@@ -474,7 +475,6 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "scope": Array [
               "Internal Enterprise Service",
             ],
-            "service_id": "1350",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,
@@ -527,6 +527,7 @@ Object {
               "Email",
             ],
             "first_active_year": "2018",
+            "id": "1348",
             "is_active": true,
             "issuance_digital_status": true,
             "issue_res_digital_status": true,
@@ -548,7 +549,6 @@ Object {
             "scope": Array [
               "Internal Enterprise Service",
             ],
-            "service_id": "1348",
             "service_report": Array [
               Object {
                 "cra_business_ids_collected": null,

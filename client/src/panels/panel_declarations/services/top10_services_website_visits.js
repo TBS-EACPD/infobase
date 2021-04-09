@@ -12,7 +12,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { Service } from "src/models/services.js";
+import { useServices } from "src/models/populate_services.js";
 import { Subject } from "src/models/subject.js";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes.ts";
@@ -36,17 +36,50 @@ const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
 const Top10WebsiteVisitsPanel = ({ panel_args }) => {
-  const { data, subject } = panel_args;
+  const { subject } = panel_args;
   const is_gov = subject.level === "gov";
-  const get_name = (id) => {
-    if (is_gov) {
-      const dept = Dept.lookup(id);
-      return dept ? dept.name : "";
-    } else {
-      const srvce = Service.lookup(id);
-      return srvce ? srvce.name : "";
-    }
-  };
+  const { loading, data } = useServices({
+    id: subject.id,
+    service_fragments: `service_report{
+      ${website_visits_key}_count
+    }`,
+  });
+  if (loading) {
+    return <span>loading</span>;
+  }
+  const preprocessed_data = is_gov
+    ? _.chain(data)
+        .groupBy("org_id")
+        .map((org_services, org_id) => {
+          const dept = Dept.lookup(org_id);
+          return {
+            id: org_id,
+            name: dept ? dept.name : "",
+            [total_volume]: _.sumBy(
+              org_services,
+              ({ service_report }) =>
+                _.sumBy(service_report, `${website_visits_key}_count`) || 0
+            ),
+          };
+        })
+        .value()
+    : _.map(data, ({ id, name, service_report }) => ({
+        id,
+        name,
+        [total_volume]:
+          _.sumBy(service_report, `${website_visits_key}_count`) || 0,
+      }));
+
+  const processed_data = _.chain(preprocessed_data)
+    .filter(total_volume)
+    .sortBy(total_volume)
+    .takeRight(10)
+    .value();
+
+  const data_name_lookup = _.chain(processed_data)
+    .map(({ id, name }) => [id, name])
+    .fromPairs()
+    .value();
 
   const column_configs = {
     id: {
@@ -61,10 +94,10 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
               : `#dept/${subject.id}/service-panels/${id}`
           }
         >
-          {get_name(id)}
+          {data_name_lookup[id]}
         </a>
       ),
-      raw_formatter: (id) => get_name(id),
+      raw_formatter: (id) => data_name_lookup[id],
     },
     [total_volume]: {
       index: 1,
@@ -75,13 +108,13 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   };
   const table_content = (
     <DisplayTable
-      data={[...data].reverse()}
+      data={[...processed_data].reverse()}
       column_configs={column_configs}
       unsorted_initial={true}
     />
   );
 
-  return _.isEmpty(data) ? (
+  return _.isEmpty(processed_data) ? (
     <TM k="no_data" el="h2" />
   ) : (
     <div>
@@ -93,9 +126,9 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
             : "top10_services_website_visits_text"
         }
         args={{
-          highest_volume_name: get_name(_.last(data).id),
-          highest_volume_value: _.last(data)[total_volume],
-          num_of_services: data.length,
+          highest_volume_name: data_name_lookup[_.last(processed_data).id],
+          highest_volume_value: _.last(processed_data)[total_volume],
+          num_of_services: processed_data.length,
         }}
       />
       {is_a11y_mode ? (
@@ -111,7 +144,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
               enableLabel={true}
               labelSkipWidth={30}
               label={(d) => volume_formatter(d.value)}
-              data={data}
+              data={processed_data}
               is_money={false}
               colors={(d) => colors(d.id)}
               padding={0.1}
@@ -152,7 +185,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
                         dominantBaseline="end"
                       >
                         <TspanLineWrapper
-                          text={get_name(tick.value)}
+                          text={data_name_lookup[tick.value]}
                           width={70}
                         />
                       </text>
@@ -182,46 +215,13 @@ export const declare_top10_website_visits_panel = () =>
             : "top10_services_website_visits"
         ),
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
       render({ title, calculations, sources }) {
         const { panel_args } = calculations;
-        const { subject, services } = panel_args;
-
-        const preprocessed_data =
-          subject.level === "gov"
-            ? _.chain(services)
-                .groupBy("org_id")
-                .map((org_services, org_id) => ({
-                  id: org_id,
-                  [total_volume]: _.sumBy(
-                    org_services,
-                    ({ service_report }) =>
-                      _.sumBy(service_report, `${website_visits_key}_count`) ||
-                      0
-                  ),
-                }))
-                .value()
-            : _.map(services, ({ id, service_report }) => ({
-                id,
-                [total_volume]:
-                  _.sumBy(service_report, `${website_visits_key}_count`) || 0,
-              }));
-
-        const data = _.chain(preprocessed_data)
-          .filter(total_volume)
-          .sortBy(total_volume)
-          .takeRight(10)
-          .value();
 
         return (
           <InfographicPanel title={title} sources={sources}>

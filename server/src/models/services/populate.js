@@ -76,7 +76,7 @@ export default async function ({ models }) {
   const service_rows = _.map(
     get_standard_csv_file_rows("services.csv"),
     ({
-      id: service_id,
+      id,
       dept_code,
       collects_fees,
       is_active,
@@ -103,7 +103,7 @@ export default async function ({ models }) {
 
       ...other_fields
     }) => ({
-      service_id,
+      id,
       is_active: convert_to_bool_or_null(_.toInteger(is_active), 1, 0),
       collects_fees: convert_to_bool_or_null(collects_fees, "Yes", "No"),
       account_reg_digital_status: convert_to_bool_or_null(
@@ -158,11 +158,11 @@ export default async function ({ models }) {
 
       standards: _.filter(
         service_standard_rows,
-        (service_standard) => service_standard.service_id === service_id
+        (service_standard) => service_standard.service_id === id
       ),
       service_report: _.filter(
         service_report_rows,
-        (service_report) => service_report.service_id === service_id
+        (service_report) => service_report.service_id === id
       ),
     })
   );

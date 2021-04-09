@@ -14,6 +14,7 @@ import {
 } from "connected-react-router";
 import _ from "lodash";
 import { createHashHistory } from "history";
+import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -40,6 +41,8 @@ import programFtes from "src/tables/programFtes.js";
 import programSobjs from "src/tables/programSobjs.js";
 import programSpending from "src/tables/programSpending.js";
 import programVoteStat from "src/tables/programVoteStat.js";
+
+import { get_client } from "src/graphql_utils/graphql_utils.js";
 
 const table_defs = [
   orgVoteStatPa,
@@ -85,15 +88,18 @@ function bootstrapper(App, app_reducer, done) {
       applyMiddleware(middleware)
     );
 
+    const client = get_client();
     done();
 
     ReactDOM.render(
-      <Provider store={store}>
-        {/* ConnectedRouter will use the store from Provider automatically */}
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </Provider>,
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          {/* ConnectedRouter will use the store from Provider automatically */}
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </Provider>
+      </ApolloProvider>,
       document.getElementById("app")
     );
   });
