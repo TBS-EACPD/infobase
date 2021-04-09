@@ -2,22 +2,25 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import text from "src/panels/panel_declarations/services/services.yaml";
 
 import {
+  DisplayTable,
   create_text_maker_component,
   Panel,
-  DisplayTable,
   FilterTable,
-} from "../../../../components";
+} from "src/components/index.js";
+
+import FootNote from "src/models/footnotes/footnotes.js";
+
+import { newIBCategoryColors } from "src/core/color_schemes.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
 import {
   IconAttention,
   IconCheck,
   IconNotApplicable,
-} from "../../../../icons/icons.js";
-import FootNote from "../../../../models/footnotes/footnotes.js";
-import { newIBCategoryColors } from "../../shared.js";
-import text from "../services.yaml";
+} from "src/icons/icons.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

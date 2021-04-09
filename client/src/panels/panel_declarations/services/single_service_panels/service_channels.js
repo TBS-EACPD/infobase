@@ -1,17 +1,19 @@
 import _ from "lodash";
 import React from "react";
 
-import { infobase_colors } from "src/core/color_schemes.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import text from "src/panels/panel_declarations/services/services.yaml";
+import { delivery_channels_keys } from "src/panels/panel_declarations/services/shared.js";
 
-import { WrappedNivoHBar } from "../../../../charts/wrapped_nivo";
 import {
   create_text_maker_component,
   Panel,
   DisplayTable,
-} from "../../../../components";
-import text from "../services.yaml";
-import { delivery_channels_keys } from "../shared.js";
+} from "src/components/index.js";
+
+import { infobase_colors } from "src/core/color_schemes.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.js";
+
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
