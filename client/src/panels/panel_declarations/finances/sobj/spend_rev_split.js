@@ -89,6 +89,7 @@ function render({ title, calculations, footnotes, sources }) {
 
 const common_panel_config = {
   title: text_maker("spend_rev_split_title"),
+  render,
 };
 
 export const declare_spend_rev_split_panel = () =>
@@ -133,7 +134,6 @@ export const declare_spend_rev_split_panel = () =>
                 text_calculations,
               };
             },
-            render,
           };
         case "program":
           return {
@@ -155,7 +155,6 @@ export const declare_spend_rev_split_panel = () =>
               };
               return { text_calculations };
             },
-            render,
           };
       }
     },
