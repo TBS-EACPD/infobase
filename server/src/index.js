@@ -2,5 +2,6 @@
 const _ = require("lodash");
 
 global._ = _;
-const app = require("./app");
+const { app, start_apollo } = require("./app");
+start_apollo();
 module.exports = { app };

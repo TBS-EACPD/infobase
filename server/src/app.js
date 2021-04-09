@@ -7,7 +7,7 @@ import expressGraphQL from "express-graphql";
 import depthLimit from "graphql-depth-limit";
 
 import { connect_db, get_db_connection_status } from "./db_utils.js";
-import { create_models, getSchemaDeps } from "./models/index.js";
+import { create_models, get_schema_deps } from "./models/index.js";
 import {
   convert_GET_with_query_to_POST,
   get_log_objects_for_request,
@@ -77,8 +77,8 @@ app.use(function (err, req, res, next) {
   res.status(500).send("Internal server error");
 });
 
-async function startApollo() {
-  const { typeDefs, resolvers } = getSchemaDeps();
+async function start_apollo() {
+  const { typeDefs, resolvers } = get_schema_deps();
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -89,4 +89,4 @@ async function startApollo() {
   return server;
 }
 
-module.exports = { app, startApollo };
+module.exports = { app, start_apollo };
