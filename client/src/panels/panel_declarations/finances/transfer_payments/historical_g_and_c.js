@@ -344,6 +344,7 @@ class DetailedHistTPItems extends React.Component {
 
 const common_panel_config = {
   title: text_maker("historical_g_and_c_title"),
+  depends_on: ["orgTransferPayments"],
 };
 
 export const declare_historical_g_and_c_panel = () =>
@@ -355,7 +356,6 @@ export const declare_historical_g_and_c_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-            depends_on: ["orgTransferPayments"],
 
             calculate(subject) {
               const { orgTransferPayments } = this.tables;
@@ -414,7 +414,6 @@ export const declare_historical_g_and_c_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
-            depends_on: ["orgTransferPayments"],
             key: "historical_g_and_c",
             footnotes: ["SOBJ10"],
             calculate(dept) {
