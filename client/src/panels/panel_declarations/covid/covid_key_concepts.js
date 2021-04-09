@@ -28,7 +28,7 @@ export const declare_covid_key_concepts_panel = () =>
       is_static: true,
       footnotes: false,
       source: false,
-      title: "", //Won't show in the table of contents but allows us to know if the other panels are showing
+      title: "", //Won't show in the table of contents (ToC) but allows us to ensure all (other) panels do show up there. (Ensures all new panels will be placed into ToC if appropriate)
       calculate: _.constant(true),
       render: () => (
         <SomeThingsToKeepInMind>
