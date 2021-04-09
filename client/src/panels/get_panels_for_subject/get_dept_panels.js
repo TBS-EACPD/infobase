@@ -78,7 +78,6 @@ export const get_dept_panels = (subject) =>
     subject: subject,
     has_results: true,
     has_covid_data: true,
-    has_services: true,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
     financial: _.includes(subject.tables, "programSpending") && [

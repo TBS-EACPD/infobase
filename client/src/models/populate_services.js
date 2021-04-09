@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import _ from "lodash";
 
@@ -7,322 +7,160 @@ import { lang } from "src/core/injected_build_constants.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
-import { Service, ServiceStandard } from "./services.js";
-
-const get_subject_has_services_query = (level, id_arg_name) => gql`
-query($lang: String! $id: String) {
-  root(lang: $lang) {
-    ${level}(${id_arg_name}: $id){
+const all_service_fragments = `
       id
-      hasServices: has_services
-    }
-  }
-}
-`;
-const _subject_has_services = {};
-export function api_load_subject_has_services(subject) {
-  const level = subject && subject.level;
+      org_id
+      program_ids
 
-  const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_has_services, `${level}.${id}`);
+      first_active_year
+      last_active_year
+      is_active      
 
-    switch (level) {
-      case "dept":
-        return {
-          is_loaded: subject_is_loaded(subject),
-          id: subject.id,
-          query: get_subject_has_services_query("org", "org_id"),
-          response_data_accessor: (response) => response.data.root.org,
-        };
-      case "program":
-        return {
-          is_loaded: subject_is_loaded(subject),
-          id: subject.id,
-          query: get_subject_has_services_query("program", "id"),
-          response_data_accessor: (response) => {
-            return response.data.root.program;
-          },
-        };
-      default:
-        return {
-          is_loaded: true, // no default case, this is to resolve the promise early
-        };
-    }
-  })();
+      name
+      description
+      service_type
+      scope
+      target_groups
+      feedback_channels
+      urls
 
-  if (is_loaded) {
-    // ensure that subject.has_data matches _subject_has_services, since _subject_has_services hay have been updated via side-effect
-    subject.set_has_data(
-      "services",
-      _.get(_subject_has_services, `${level}.${id}`)
-    );
-    return Promise.resolve();
-  }
+      last_gender_analysis
 
-  const time_at_request = Date.now();
-  const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "subject_has_services",
-      },
-    })
-    .then((response) => {
-      const response_data = response_data_accessor(response);
+      collects_fees
+      account_reg_digital_status
+      authentication_status
+      application_digital_status
+      decision_digital_status
+      issuance_digital_status
+      issue_res_digital_status
+      digital_enablement_comment
 
-      const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(response_data)) {
-        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_SUCCESS",
-          MISC2: `Has services, took ${resp_time} ms`,
-        });
-      } else {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `Has services, took ${resp_time} ms`,
-        });
+      service_report {
+        service_id
+        year
+        cra_business_ids_collected
+        sin_collected
+        phone_inquiry_count
+        online_inquiry_count
+        online_application_count
+        live_application_count
+        mail_application_count
+        other_application_count
+        service_report_comment
       }
 
-      subject.set_has_data("services", response_data[`hasServices`]);
-
-      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
-      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
-      _.setWith(
-        _subject_has_services,
-        `${level}.${id}`,
-        response_data[`hasServices`],
-        Object
-      );
-
-      return Promise.resolve();
-    })
-    .catch(function (error) {
-      const resp_time = Date.now() - time_at_request;
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
-      });
-      throw error;
-    });
-}
-
-const dept_service_fragment = `org_id
-      services: services {
+      standards {
+        standard_id
         service_id
-        org_id
-        program_ids
-
-        first_active_year
-        last_active_year
-        is_active      
-
+    
         name
-        description
-        service_type
-        scope
-        target_groups
-        feedback_channels
+    
+        last_gcss_tool_year
+        channel
+        type
+        other_type_comment
+    
+        target_type
         urls
-
-        last_gender_analysis
-
-        collects_fees
-        account_reg_digital_status
-        authentication_status
-        application_digital_status
-        decision_digital_status
-        issuance_digital_status
-        issue_res_digital_status
-        digital_enablement_comment
-
-        service_report {
-          service_id
-          year
-          cra_business_ids_collected
-          sin_collected
-          phone_inquiry_count
-          online_inquiry_count
-          online_application_count
-          live_application_count
-          mail_application_count
-          other_application_count
-          service_report_comment
-        }
-
-        standards {
+        rtp_urls
+        standard_report {
           standard_id
-          service_id
-      
-          name
-      
-          last_gcss_tool_year
-          channel
-          type
-          other_type_comment
-      
-          target_type
-          urls
-          rtp_urls
-          standard_report {
-            standard_id
-            year
-            lower
-            count
-            met_count
-            is_target_met
-            standard_report_comment
-          }
+          year
+          lower
+          count
+          met_count
+          is_target_met
+          standard_report_comment
         }
       }
   `;
 
-const dept_services_query = gql`
+const dept_services_query = (service_fragments) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
-      ${dept_service_fragment}
+      services: services {
+        id
+        ${
+          _.isUndefined(service_fragments)
+            ? all_service_fragments
+            : service_fragments
+        }
+      }
     }
   }
 }
 `;
 
-const all_services_query = gql`
+const all_services_query = (service_fragments) => gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      ${dept_service_fragment}
+      services: services {
+        org_id
+        id
+        ${
+          _.isUndefined(service_fragments)
+            ? all_service_fragments
+            : service_fragments
+        }
+      }
     }
   }
 }
 `;
 
-const extract_flat_data_from_hierarchical_response = (response) => {
-  const serviceStandards = [];
-  const services = _.chain(_.isArray(response) ? response : [response])
-    .map((resp) => resp.services)
-    .compact()
-    .flatten(true)
-    .each((service) =>
-      _.each(service.standards, (standard) =>
-        serviceStandards.push(_.omit(standard, "__typename"))
-      )
-    )
-    .value();
-  return { services, serviceStandards };
+const services_query = (query_options) => {
+  const { id, service_fragments } = query_options;
+  return id === "gov"
+    ? all_services_query(service_fragments)
+    : dept_services_query(service_fragments);
 };
 
-const _subject_ids_with_loaded_services = {};
-export function api_load_services(subject) {
-  const level = (subject && subject.level) || "gov";
-
-  const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_ids_with_loaded_services, `${level}.${id}`);
-
-    const all_is_loaded = () => subject_is_loaded({ level: "gov", id: "gov" });
-    const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
-
-    switch (level) {
-      case "dept":
-        return {
-          is_loaded: dept_is_loaded(subject),
-          id: subject.id,
-          query: dept_services_query,
-          response_data_accessor: (response) => response.data.root.org,
-        };
-      default:
-        return {
-          is_loaded: all_is_loaded(subject),
-          id: "gov",
-          query: all_services_query,
-          response_data_accessor: (response) => response.data.root.orgs,
-        };
-    }
-  })();
-
-  if (is_loaded) {
-    return Promise.resolve();
-  }
-
-  const time_at_request = Date.now();
+export const prefetch_services = (id) => {
   const client = get_client();
-  return client
-    .query({
-      query,
-      variables: {
-        lang: lang,
-        id,
-        _query_name: "services",
-      },
-    })
-    .then((response) => {
-      const response_data = response_data_accessor(response);
+  client.query({
+    query: services_query({
+      id: id || "gov",
+      service_fragments: "",
+    }),
+    variables: {
+      lang,
+      id: id || "gov",
+      _query_name: "services",
+    },
+  });
+  console.log(client.cache.data.data);
+};
 
-      const resp_time = Date.now() - time_at_request;
-      if (!_.isEmpty(response_data)) {
-        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_SUCCESS",
-          MISC2: `Services, took ${resp_time} ms`,
-        });
-      } else {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "API_QUERY_UNEXPECTED",
-          MISC2: `Services, took ${resp_time} ms`,
-        });
-      }
+export const useServices = (query_options) => {
+  const time_at_request = Date.now();
+  const { id } = query_options;
+  const is_gov = id === "gov";
+  const variables = {
+    lang,
+    id,
+  };
 
-      const {
-        services,
-        serviceStandards,
-      } = extract_flat_data_from_hierarchical_response(response_data);
-
-      if (!_.isEmpty(services)) {
-        _.each(services, (service) => Service.create_and_register(service));
-      }
-      if (!_.isEmpty(serviceStandards)) {
-        _.each(serviceStandards, (standard) =>
-          ServiceStandard.create_and_register(standard)
-        );
-      }
-
-      // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
-      // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
-      _.setWith(
-        _subject_ids_with_loaded_services,
-        `${level}.${id}`,
-        true,
-        Object
-      );
-
-      // side effect
-      _.setWith(
-        _subject_ids_with_loaded_services,
-        `${level}.${id}`,
-        _.isEmpty(services),
-        Object
-      );
-
-      return Promise.resolve();
-    })
-    .catch(function (error) {
-      const resp_time = Date.now() - time_at_request;
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
-      });
-      throw error;
+  const query = services_query(query_options);
+  const res = useQuery(query, { variables });
+  const { loading, error, data } = res;
+  if (error) {
+    const resp_time = Date.now() - time_at_request;
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
     });
-}
+    throw new Error(error);
+  }
+  if (!loading) {
+    const res_data = is_gov ? data.root.orgs : data.root.org.services;
+    const services = is_gov
+      ? _.chain(res_data).flatMap("services").compact().uniqBy("id").value()
+      : res_data;
+    return { ...res, data: services };
+  }
+  return res;
+};

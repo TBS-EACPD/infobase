@@ -51,7 +51,6 @@ export const get_program_panels = (subject) =>
   ensure_loaded({
     subject: subject,
     has_results: true,
-    has_services: true,
   }).then(() => ({
     intro: [
       declare_dead_program_warning_panel(),

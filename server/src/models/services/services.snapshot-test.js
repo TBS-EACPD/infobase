@@ -1,6 +1,6 @@
 const services_fields = `
 services {
-  service_id
+  id
   org_id
   org {
     name

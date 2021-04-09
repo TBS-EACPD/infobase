@@ -175,11 +175,11 @@ class ServicesChannelsPanel extends React.Component {
             <div className="fcol-md-4">
               <StandardLegend
                 items={_.chain(services)
-                  .map(({ service_id, name }) => ({
-                    id: service_id,
+                  .map(({ id, name }) => ({
+                    id,
                     label: name,
                     color: colors(name),
-                    active: active_services[service_id],
+                    active: active_services[id],
                   }))
                   .sortBy("label")
                   .value()}
@@ -196,7 +196,7 @@ class ServicesChannelsPanel extends React.Component {
                     SelectAllOnClick={() =>
                       this.setState({
                         active_services: _.chain(services)
-                          .map(({ service_id }) => [service_id, true])
+                          .map(({ id }) => [id, true])
                           .fromPairs()
                           .value(),
                       })
