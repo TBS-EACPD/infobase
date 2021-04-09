@@ -9,8 +9,8 @@ import depthLimit from "graphql-depth-limit";
 import { connect_db, get_db_connection_status } from "./db_utils.js";
 import { create_models, getSchemaDeps } from "./models/index.js";
 import {
-  convert_GET_with_compressed_query_to_POST,
-  get_log_object_for_request,
+  convert_GET_with_query_to_POST,
+  get_log_objects_for_request,
 } from "./server_utils.js";
 
 create_models();
@@ -34,7 +34,7 @@ app.use(
       "Authorization",
       "Content-Length",
       "X-Requested-With",
-      "encoded-compressed-query",
+      "gql-query",
     ],
   })
 );
@@ -42,21 +42,22 @@ app.use(
 app.use(function (req, res, next) {
   res.header("cache-control", "public, max-age=31536000");
 
-  // Often want to use GET to leverage http caching, but some of out longer queries are too long for a query parameter
-  // Instead, the client makes a GET with a header containing a compressed and base 64 encoded copy of the query (the query parameter becomes a hash, for cache busting)
-  // In that case, we mutate the request here to recover the query and let the server pretend it received a normal POST
-  if (
-    req.method === "GET" &&
-    !_.isEmpty(req.headers["encoded-compressed-query"])
-  ) {
-    console.log(`Request type: ${req.originalUrl}, GET with compressed query`);
-    convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
+  // Often want to use GET to leverage http caching, but query batching is not supported by GET parameters
+  // Instead, the client makes a GET with a header containing the query
+  // For caching, we also add a hash of the query as a GET parameter
+  // Since apollo isn't expecting this type of request, we mutate it to make it look like a normal POST request
+  if (req.method === "GET" && !_.isEmpty(req.headers["gql-query"])) {
+    console.log(`Request type: ${req.originalUrl}, GET with query header`);
+    convert_GET_with_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
   } else {
     console.log(`Request type: ${req.originalUrl}, ${req.method}`);
   }
 
-  process.env.USE_REMOTE_DB &&
-    console.log(JSON.stringify(get_log_object_for_request(req)));
+  if (process.env.USE_REMOTE_DB) {
+    get_log_objects_for_request(req).forEach((obj) => {
+      console.log(JSON.stringify());
+    });
+  }
 
   next();
 });

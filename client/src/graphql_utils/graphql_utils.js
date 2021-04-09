@@ -57,24 +57,23 @@ export const query_length_tolerant_fetch = async (uri, options) => {
   // important, this regex lazy matches up to and including FIRST ? occurence, which (in a URI)
   // should be where the query string starts. I've complicated it slightly just in case there's ever a ? IN
   // the query string (well, that'd be an encoding error anyway)
-  // const url_encoded_query = uri.replace(/^(.*?)\?/, "");
+  const query = options.body;
+  const query_hash = string_hash(query);
 
-  // const query_string_hash = string_hash(url_encoded_query);
-
-  // const short_uri = `${await get_api_url()}?v=${sha}&queryHash=${query_string_hash}`;
-  const short_uri = `${await get_api_url()}?v=${sha}`;
+  const uri = `${await get_api_url()}?v=${sha}&queryHash=${query_hash}`;
 
   const new_options = {
     ...options,
+    method: "GET",
+    body: undefined,
     headers: {
       ...options.headers,
-      // "encoded-compressed-query": compressToBase64(
-      //   decodeURIComponent(url_encoded_query)
-      // ),
+      // "encoded-compressed-query": compressToBase64(query),
+      "gql-query": query,
     },
   };
 
-  return fetch(short_uri, new_options);
+  return fetch(uri, new_options);
 };
 
 let client = null;
