@@ -13,10 +13,6 @@ import {
   api_load_results_counts,
   subject_has_results,
 } from "src/models/populate_results.js";
-import {
-  api_load_subject_has_services,
-  api_load_services,
-} from "src/models/populate_services.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
 import { Table } from "./TableClass.js";
@@ -81,12 +77,6 @@ function ensure_loaded({
     subject.root.id === "HI" &&
     _.isUndefined(subject.lookups);
 
-  const should_load_has_services =
-    has_services || check_for_panel_dependency("requires_has_services");
-
-  const should_load_services =
-    services || check_for_panel_dependency("requires_services");
-
   const should_load_years_with_covid_data =
     has_covid_data ||
     years_with_covid_data ||
@@ -124,15 +114,6 @@ function ensure_loaded({
     ? load_footnotes_bundle(footnotes_subject)
     : Promise.resolve();
 
-  const has_services_prom =
-    should_load_has_services && _.isFunction(subject.set_has_data)
-      ? api_load_subject_has_services(subject)
-      : Promise.resolve();
-
-  const services_prom = should_load_services
-    ? api_load_services(subject)
-    : Promise.resolve();
-
   const horizontal_initiative_lookups_prom = should_load_horizontal_initiative_lookups
     ? load_horizontal_initiative_lookups()
     : Promise.resolve();
@@ -152,8 +133,6 @@ function ensure_loaded({
     has_results_prom,
     granular_result_counts_prom,
     footnotes_prom,
-    has_services_prom,
-    services_prom,
     horizontal_initiative_lookups_prom,
     years_with_covid_data_prom,
     covid_measures_prom,

@@ -7,7 +7,7 @@ import {
   ContainerEscapeHatch,
 } from "src/components/index.js";
 
-import { highlightColor } from "src/core/color_defs.js";
+import { prefetch_services } from "src/models/populate_services.js";
 
 import { lang } from "src/core/injected_build_constants.js";
 

@@ -9,7 +9,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { Service } from "src/models/services.js";
+import { useServices } from "src/models/populate_services.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -21,15 +21,30 @@ import "./services.scss";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesStandardsPanel = ({ panel_args }) => {
-  const { services } = panel_args;
+  const { subject } = panel_args;
+  const { loading, data } = useServices({
+    id: subject.id,
+    service_fragments: `standards {  
+      target_type
+      standard_report {
+        lower
+        count
+        met_count
+        is_target_met
+      }
+    }`,
+  });
+  if (loading) {
+    return <span>loading</span>;
+  }
 
-  const has_standards_count = _.chain(services)
+  const has_standards_count = _.chain(data)
     .countBy("standards")
     .filter((value, key) => key)
     .map()
     .sum()
     .value();
-  const total_flat_standards = _.chain(services)
+  const total_flat_standards = _.chain(data)
     .flatMap("standards")
     .reject(({ target_type }) => target_type === "Other type of target")
     .flatMap("standard_report")
@@ -60,15 +75,13 @@ const ServicesStandardsPanel = ({ panel_args }) => {
             data={[
               {
                 id: text_maker("no_standards"),
-                value: services.length - has_standards_count,
-                pct:
-                  (services.length - has_standards_count) / services.length ||
-                  0,
+                value: data.length - has_standards_count,
+                pct: (data.length - has_standards_count) / data.length || 0,
               },
               {
                 id: text_maker("has_standards"),
                 value: has_standards_count,
-                pct: has_standards_count / services.length || 0,
+                pct: has_standards_count / data.length || 0,
               },
             ]}
             column_configs={{
@@ -82,7 +95,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
         ) : (
           <Gauge
             value={has_standards_count}
-            total_value={services.length}
+            total_value={data.length}
             show_pct={false}
           />
         )}
@@ -90,7 +103,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
           <TM
             k="gauge_has_standards_text"
             args={{
-              has_standards_pct: has_standards_count / services.length || 0,
+              has_standards_pct: has_standards_count / data.length || 0,
             }}
           />
         </h2>
@@ -148,14 +161,8 @@ export const declare_services_standards_panel = () =>
       title: text_maker("service_standards_title"),
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
