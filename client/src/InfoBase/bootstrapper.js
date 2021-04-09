@@ -40,6 +40,7 @@ import programFtes from "src/tables/programFtes.js";
 import programSobjs from "src/tables/programSobjs.js";
 import programSpending from "src/tables/programSpending.js";
 import programVoteStat from "src/tables/programVoteStat.js";
+import services from "src/tables/services.js";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
@@ -60,6 +61,7 @@ const table_defs = [
   orgEmployeeFol,
   orgEmployeeAvgAge,
   programSobjs,
+  services,
 ];
 
 const load_fonts = () =>
