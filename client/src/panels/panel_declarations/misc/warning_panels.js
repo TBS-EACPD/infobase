@@ -42,7 +42,7 @@ const WarningPanel = ({
 );
 
 const common_panel_config = {
-  title: "", //Won't show in the table of contents but allows us to know if the other panels are showing
+  title: "", //Won't show in the table of contents (ToC) but allows us to ensure all (other) panels do show up there. (Ensures all new panels will be placed into ToC if appropriate)
 };
 
 export const declare_dead_program_warning_panel = () =>
