@@ -79,11 +79,11 @@ app.use(function (err, req, res, next) {
 
 async function startApollo() {
   const { typeDefs, resolvers } = getSchemaDeps();
-  const server = new ApolloServer({ typeDefs, resolvers });
-  //todo: re-implement the following rules
-  // graphiql: true,
-  // context: {},
-  // validationRules: [depthLimit(15)],
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    validationRules: [depthLimit(15)],
+  });
   await server.start();
   server.applyMiddleware({ app });
   return server;
