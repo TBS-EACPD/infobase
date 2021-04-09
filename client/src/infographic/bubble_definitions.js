@@ -61,7 +61,7 @@ const base_configs = [
     id: "services",
     title: text_maker("services_title"),
     description: text_maker("services_desc"),
-    svg: IconServices,
+    Icon: IconServices,
   },
   {
     id: "results",
