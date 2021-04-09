@@ -9,7 +9,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { Service } from "src/models/services.js";
+import { useServices } from "src/models/populate_services.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -20,8 +20,17 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
-  const data = _.chain(services)
+  const { subject } = panel_args;
+
+  const { loading, data } = useServices({
+    id: subject.id,
+    service_fragments: "service_type",
+  });
+  if (loading) {
+    return <span>loading</span>;
+  }
+
+  const processed_data = _.chain(data)
     .flatMap("service_type")
     .countBy()
     .map((value, type) => ({
@@ -30,17 +39,17 @@ const ServicesTypesPanel = ({ panel_args }) => {
       value,
     }))
     .value();
-  const max_type = _.maxBy(data, "value");
+  const max_type = _.maxBy(processed_data, "value");
 
   return (
     <div>
       <TM
         args={{
-          num_of_types: data.length,
+          num_of_types: processed_data.length,
           subject,
           max_type: max_type.label,
           max_type_count: max_type.value,
-          num_of_services: services.length,
+          num_of_services: data.length,
         }}
         className="medium-panel-text"
         k={
@@ -51,7 +60,7 @@ const ServicesTypesPanel = ({ panel_args }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={data}
+          data={processed_data}
           column_configs={{
             label: {
               index: 0,
@@ -65,7 +74,11 @@ const ServicesTypesPanel = ({ panel_args }) => {
           }}
         />
       ) : (
-        <WrappedNivoPie data={data} include_percent={false} is_money={false} />
+        <WrappedNivoPie
+          data={processed_data}
+          include_percent={false}
+          is_money={false}
+        />
       )}
     </div>
   );
@@ -78,14 +91,8 @@ export const declare_services_types_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
