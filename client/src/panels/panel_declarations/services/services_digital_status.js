@@ -10,7 +10,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { Service } from "src/models/services.js";
+import { useServices } from "src/models/populate_services.js";
 
 import {
   secondaryColor,
@@ -22,7 +22,10 @@ import { is_a11y_mode, lang } from "src/core/injected_build_constants.ts";
 import { StandardLegend } from "src/charts/legends/index.js";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
 
-import { digital_status_keys } from "./shared.js";
+import {
+  digital_status_keys,
+  digital_status_query_fragment,
+} from "./shared.js";
 
 import text from "./services.yaml";
 
@@ -38,12 +41,18 @@ const colors = scaleOrdinal().range([
 ]);
 
 const ServicesDigitalStatusPanel = ({ panel_args }) => {
-  const { services, subject } = panel_args;
-
+  const { subject } = panel_args;
+  const { loading, data } = useServices({
+    id: subject.id,
+    service_fragments: digital_status_query_fragment,
+  });
+  if (loading) {
+    return <span>loading</span>;
+  }
   const get_current_status_count = (key, value) =>
-    _.countBy(services, `${key}_status`)[value] || 0;
+    _.countBy(data, `${key}_status`)[value] || 0;
 
-  const data = _.chain(digital_status_keys)
+  const processed_data = _.chain(digital_status_keys)
     .map((key) => ({
       id: text_maker(`${key}_desc`),
       key,
@@ -54,8 +63,8 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
     .sortBy(can_online)
     .value();
 
-  const most_digital_component = _.maxBy(data, can_online);
-  const least_digital_component = _.minBy(data, can_online);
+  const most_digital_component = _.maxBy(processed_data, can_online);
+  const least_digital_component = _.minBy(processed_data, can_online);
   const nivo_lang_props = {
     en: {
       margin: {
@@ -92,19 +101,17 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
         args={{
           is_most_and_least_same:
             most_digital_component.key === least_digital_component.key,
-          num_of_services: services.length,
+          num_of_services: data.length,
           subject_name: subject.name,
           most_digital_name: text_maker(most_digital_component.key),
-          most_digital_pct:
-            most_digital_component[can_online] / services.length,
+          most_digital_pct: most_digital_component[can_online] / data.length,
           least_digital_name: text_maker(least_digital_component.key),
-          least_digital_pct:
-            least_digital_component[can_online] / services.length,
+          least_digital_pct: least_digital_component[can_online] / data.length,
         }}
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={data}
+          data={processed_data}
           column_configs={{
             id: {
               index: 0,
@@ -140,7 +147,7 @@ const ServicesDigitalStatusPanel = ({ panel_args }) => {
             LegendCheckBoxProps={{ isSolidBox: true }}
           />
           <WrappedNivoHBar
-            data={data}
+            data={processed_data}
             is_money={false}
             indexBy={"id"}
             keys={[can_online, cannot_online, not_applicable]}
@@ -172,14 +179,8 @@ export const declare_services_digital_status_panel = () =>
       title: text_maker("services_digital_status"),
       requires_services: true,
       calculate: (subject) => {
-        const services = {
-          dept: Service.get_by_dept(subject.id),
-          program: Service.get_by_prog(subject.id),
-          gov: Service.get_all(),
-        };
         return {
           subject,
-          services: services[level],
         };
       },
       footnotes: false,
