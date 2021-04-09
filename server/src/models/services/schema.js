@@ -3,9 +3,6 @@ import _ from "lodash";
 import { bilingual_field } from "../schema_utils";
 
 const schema = `
-  extend type Gov{
-    service_summary: ServiceSummary
-  }
   extend type Org{
     services: [Service]
     has_services: Boolean
@@ -13,15 +10,6 @@ const schema = `
   extend type Program{
     services: [Service]
     has_services: Boolean
-  }
-  type ServiceSummary{
-    id: String
-    service_type_summary: ServiceTypeSummary
-  }
-  type ServiceTypeSummary{
-    id: String
-    label: String
-    value: Float
   }
   type ServiceReport{
     service_id: String
@@ -115,9 +103,6 @@ export default function ({ models, loaders }) {
   };
 
   const resolvers = {
-    Gov: {
-      covid_estimates_summary: () => true,
-    },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
       has_services: ({ org_id }) => org_has_services(org_id),

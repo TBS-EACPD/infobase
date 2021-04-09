@@ -87,19 +87,10 @@ export default function (model_singleton) {
     service_report: [ServiceReportSchema],
   });
 
-  const ServiceTypeSummarySchema = mongoose.Schema({
-    ...bilingual_str("id"),
-    ...bilingual_str("name"),
-    value: { type: Number },
-  });
-
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
-
-  // Summary schemas
-  model_singleton.define_model("ServiceTypeSummary", ServiceTypeSummarySchema);
 
   const { Service } = model_singleton.models;
 
