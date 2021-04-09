@@ -6,7 +6,6 @@ import {
 import { BatchHttpLink } from "@apollo/client/link/batch-http";
 
 import _ from "lodash";
-import { compressToBase64 } from "lz-string";
 import React from "react";
 
 import string_hash from "string-hash";
