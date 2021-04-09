@@ -97,6 +97,10 @@ export const declare_high_application_volume_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("high_application_volume_title"),
+<<<<<<< HEAD
+=======
+      requires_services: true,
+>>>>>>> whole change to apollo hooks copied from commits that became too hard to solve conflicts, please refer to PR to refer to previous commits
       footnotes: false,
       render({ title, calculations, sources }) {
         const { subject } = calculations;
