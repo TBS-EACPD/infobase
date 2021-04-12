@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  Details,
+  StatelessDetails,
   create_text_maker_component,
   UnlabeledTombstone,
 } from "src/components/index.js";
@@ -16,16 +16,13 @@ import text from "./TableOfContents.yaml";
 const { TM } = create_text_maker_component(text);
 
 export default class TableOfContents extends React.Component {
-  state = {
-    initial_open: false,
-  };
-
-  handle_click = () => {
-    this.setState((prev_state) => ({
-      initial_open: !prev_state.initial_open,
-    }));
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      is_open: false,
+    };
+  }
+  on_click = () => this.setState({ is_open: !this.state.is_open });
   render() {
     const {
       active_bubble_id,
@@ -33,7 +30,8 @@ export default class TableOfContents extends React.Component {
       subject,
       visible_panel_titles,
     } = this.props;
-    const { initial_open } = this.state;
+
+    const { is_open } = this.state;
 
     const panel_links =
       active_bubble_id &&
@@ -78,28 +76,27 @@ export default class TableOfContents extends React.Component {
       );
     return (
       link_elements && (
-        <div onClick={this.handle_click}>
-          <Details
-            summary_content={
-              <div>
-                <TM k="table_of_contents" />{" "}
-                <TM className="panel-status-text" k="skip_to_panel" />
-              </div>
-            }
-            content={
-              <div
-                style={{
-                  border: "1px solid",
-                  borderColor: separatorColor,
-                  borderRadius: "5px",
-                }}
-              >
-                <UnlabeledTombstone items={link_elements} />
-              </div>
-            }
-            initialOpen={initial_open}
-          />
-        </div>
+        <StatelessDetails
+          summary_content={
+            <div>
+              <TM k="table_of_contents" />{" "}
+              <TM className="panel-status-text" k="skip_to_panel" />
+            </div>
+          }
+          content={
+            <div
+              style={{
+                border: "1px solid",
+                borderColor: separatorColor,
+                borderRadius: "5px",
+              }}
+            >
+              <UnlabeledTombstone items={link_elements} />
+            </div>
+          }
+          on_click={this.on_click}
+          is_open={is_open}
+        />
       )
     );
   }
