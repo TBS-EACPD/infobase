@@ -20,8 +20,7 @@ import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesStandardsPanel = ({ panel_args }) => {
-  const { subject } = panel_args;
+const ServicesStandardsPanel = ({ subject }) => {
   const { loading, data } = useServices({
     id: subject.id,
     service_fragments: `standards {  
@@ -167,10 +166,10 @@ export const declare_services_standards_panel = () =>
       },
       footnotes: false,
       render({ title, calculations, sources }) {
-        const { panel_args } = calculations;
+        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <ServicesStandardsPanel panel_args={panel_args} />
+            <ServicesStandardsPanel subject={subject} />
           </InfographicPanel>
         );
       },

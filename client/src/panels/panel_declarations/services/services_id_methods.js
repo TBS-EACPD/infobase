@@ -22,8 +22,7 @@ import "./services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesIdMethodsPanel = ({ panel_args }) => {
-  const { subject } = panel_args;
+const ServicesIdMethodsPanel = ({ subject }) => {
   const { loading, data } = useServices({
     id: subject.id,
     service_fragments: `service_report {
@@ -159,10 +158,10 @@ export const declare_services_id_methods_panel = () =>
       },
       footnotes: false,
       render({ title, calculations, sources }) {
-        const { panel_args } = calculations;
+        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <ServicesIdMethodsPanel panel_args={panel_args} />
+            <ServicesIdMethodsPanel subject={subject} />
           </InfographicPanel>
         );
       },
