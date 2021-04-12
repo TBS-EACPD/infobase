@@ -69,4 +69,5 @@ export {
   create_text_maker_component,
   DlItem,
   MultiColumnList,
+  LinkStyled,
 } from "./misc_util_components.js";

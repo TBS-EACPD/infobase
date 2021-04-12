@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
@@ -97,6 +98,19 @@ const MultiColumnList = ({
   </div>
 );
 
+const LinkStyled = ({ on_click, className, style, children }) => (
+  <a
+    role="link"
+    tabIndex={0}
+    onClick={on_click}
+    onKeyDown={(e) => e.keyCode === 13 && on_click(e)}
+    className={classNames("link-styled", className)}
+    style={style}
+  >
+    {children}
+  </a>
+);
+
 export {
   Format,
   TrivialTextMaker,
@@ -107,4 +121,5 @@ export {
   create_text_maker_component,
   DlItem,
   MultiColumnList,
+  LinkStyled,
 };

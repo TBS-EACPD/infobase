@@ -5,6 +5,7 @@ import {
   StatelessDetails,
   create_text_maker_component,
   UnlabeledTombstone,
+  LinkStyled,
 } from "src/components/index.js";
 
 import { separatorColor } from "src/core/color_defs.js";
@@ -47,16 +48,15 @@ export default class TableOfContents extends React.Component {
           >
             <UnlabeledTombstone
               items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
-                <a
-                  className="link-styled"
+                <LinkStyled
                   style={{ margin: "0 5px" }}
                   key={panel_key}
-                  onClick={() =>
+                  on_click={() =>
                     scroll_to_panel_when_all_loading_done(panel_key)
                   }
                 >
                   {panel_title}
-                </a>
+                </LinkStyled>
               ))}
             />
           </div>
