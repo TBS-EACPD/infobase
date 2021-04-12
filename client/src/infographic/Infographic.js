@@ -1,5 +1,5 @@
-import _ from "lodash";
-import React from "react";
+import _, { map } from "lodash";
+import React, { Fragment } from "react";
 import { Redirect } from "react-router";
 
 import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
@@ -141,20 +141,15 @@ class InfoGraph_ extends React.Component {
         }
       })();
 
-      const linked_to_panel =
-        options &&
+      options &&
         options.panel_key &&
-        _.includes(valid_panel_keys, options.panel_key) &&
-        document.querySelector(`#${options.panel_key}`);
-
-      linked_to_panel &&
-        this.scroll_to_panel_when_all_loading_done(linked_to_panel);
+        this.scroll_to_panel_when_all_loading_done(options.panel_key);
     }
   }
-  scroll_to_panel_when_all_loading_done = _.debounce((linked_to_panel) => {
+  scroll_to_panel_when_all_loading_done = _.debounce((panel_key) => {
     // Stop-gap to make sure linking to panel is resilient to some panels managing their own
     // internal loading. Otherwise, infographic could scroll to a panel and then promptly have
-    // another panel above it finish it's own loading, re-render with content, and shift the content
+    // another panel above it finish it's own internal loading, re-render with content, and shift the content
     // to push the linked to panel out of view again...
     // TODO this shouldn't be necessary/should be made less hacky durring the full GraphQL rewrite
 
@@ -163,10 +158,14 @@ class InfoGraph_ extends React.Component {
     );
 
     if (something_is_loading) {
-      this.scroll_to_panel_when_all_loading_done(linked_to_panel);
+      this.scroll_to_panel_when_all_loading_done(panel_key);
     } else {
-      linked_to_panel.scrollIntoView();
-      linked_to_panel.focus();
+      const linked_to_panel = document.querySelector(`#${panel_key}`);
+
+      if (linked_to_panel) {
+        linked_to_panel.scrollIntoView();
+        linked_to_panel.focus();
+      }
     }
   }, 100);
   componentWillUnmount() {
@@ -184,13 +183,6 @@ class InfoGraph_ extends React.Component {
     } = this.state;
 
     const filtered_panel_keys = panel_filter(valid_panel_keys);
-    const visible_panel_titles = _.chain(valid_panel_keys)
-      .map((panel_key) => [
-        panel_key,
-        PanelRegistry.lookup(panel_key, subject.level).get_title(subject),
-      ])
-      .fromPairs()
-      .value();
 
     return (
       <div>
@@ -233,45 +225,50 @@ class InfoGraph_ extends React.Component {
                 : text_maker("a11y_infograph_description")}
             </p>
           )}
-          {!loading &&
-            _.find(subject_bubble_defs, {
-              id: active_bubble_id,
-              enable_panel_filter: true,
-            }) && (
-              <PanelFilterControl
-                subject={subject}
-                panel_keys={valid_panel_keys}
-                set_panel_filter={(panel_filter) => {
-                  url_replace(
-                    _.replace(
-                      infograph_href_template(subject, active_bubble_id),
-                      "#",
-                      "/"
-                    )
-                  );
-                  this.setState({ panel_filter });
-                }}
+          {!loading && (
+            <Fragment>
+              {_.find(subject_bubble_defs, {
+                id: active_bubble_id,
+                enable_panel_filter: true,
+              }) && (
+                <PanelFilterControl
+                  subject={subject}
+                  panel_keys={valid_panel_keys}
+                  set_panel_filter={(panel_filter) => {
+                    url_replace(
+                      _.replace(
+                        infograph_href_template(subject, active_bubble_id),
+                        "#",
+                        "/"
+                      )
+                    );
+                    this.setState({ panel_filter });
+                  }}
+                />
+              )}
+              <TableOfContents
+                panel_titles_by_key={_.chain(filtered_panel_keys)
+                  .map((panel_key) =>
+                    PanelRegistry.lookup(panel_key, subject.level)
+                  )
+                  .filter((panel) => !panel.is_static)
+                  .map((panel) => [panel.key, panel.get_title(subject)])
+                  .fromPairs()
+                  .value()}
+                scroll_to_panel_when_all_loading_done={
+                  this.scroll_to_panel_when_all_loading_done
+                }
               />
-            )}
-
-          <TableOfContents
-            {...{
-              subject,
-              active_bubble_id,
-              visible_panel_titles,
-              panel_keys: filtered_panel_keys,
-            }}
-          />
-
-          {!loading &&
-            _.map(filtered_panel_keys, (panel_key) => (
-              <PanelRenderer
-                panel_key={panel_key}
-                subject={subject}
-                active_bubble_id={active_bubble_id}
-                key={panel_key + subject.guid}
-              />
-            ))}
+              {_.map(filtered_panel_keys, (panel_key) => (
+                <PanelRenderer
+                  panel_key={panel_key}
+                  subject={subject}
+                  active_bubble_id={active_bubble_id}
+                  key={panel_key + subject.guid}
+                />
+              ))}
+            </Fragment>
+          )}
         </div>
         {!_.isEmpty(active_bubble_id) && (
           <div className="row medium-panel-text">
