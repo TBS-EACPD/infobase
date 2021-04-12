@@ -76,7 +76,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
     .takeRight(10)
     .value();
 
-  const data_name_lookup = _.chain(processed_data)
+  const data_name_lookup = _.chain(data)
     .map(({ id, name }) => [id, name])
     .fromPairs()
     .value();
@@ -207,7 +207,6 @@ export const declare_top10_website_visits_panel = () =>
     panel_key: "top10_website_visits",
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
-      requires_services: true,
       title: (subject) =>
         text_maker(
           subject.level === "gov"

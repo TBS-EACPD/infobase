@@ -35,7 +35,6 @@ function ensure_loaded({
   result_docs,
   requires_result_counts,
   requires_granular_result_counts,
-  has_services,
   services,
   has_covid_data,
   years_with_covid_data,

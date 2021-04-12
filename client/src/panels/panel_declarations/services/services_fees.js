@@ -83,7 +83,6 @@ export const declare_services_fees_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("services_fees"),
-      requires_services: true,
       calculate: (subject) => {
         return {
           subject,

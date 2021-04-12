@@ -150,7 +150,6 @@ export const declare_services_id_methods_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("identification_methods"),
-      requires_services: true,
       calculate: (subject) => {
         return {
           subject,

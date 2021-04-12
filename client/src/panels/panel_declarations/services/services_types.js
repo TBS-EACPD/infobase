@@ -88,7 +88,6 @@ export const declare_services_types_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("service_types"),
-      requires_services: true,
       calculate: (subject) => {
         return {
           subject,

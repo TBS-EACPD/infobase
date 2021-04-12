@@ -158,7 +158,6 @@ export const declare_services_standards_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("service_standards_title"),
-      requires_services: true,
       calculate: (subject) => {
         return {
           subject,
