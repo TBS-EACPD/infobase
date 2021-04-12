@@ -1,4 +1,4 @@
-import _, { map } from "lodash";
+import _ from "lodash";
 import React, { Fragment } from "react";
 import { Redirect } from "react-router";
 
@@ -119,7 +119,7 @@ class InfoGraph_ extends React.Component {
     this.load({ ...this.state, ...this.props });
   }
   componentDidUpdate(prevProps) {
-    const { loading, active_bubble_id, valid_panel_keys } = this.state;
+    const { loading, active_bubble_id } = this.state;
 
     if (loading) {
       this.load({ ...this.state, ...this.props });
