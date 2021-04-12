@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { TabbedControls, CheckBox } from "src/components/index.js";
+import { TabbedControls, CheckBox, LinkStyled } from "src/components/index.js";
 
 import { formats } from "src/core/format.js";
 
@@ -30,9 +30,9 @@ const AboveTabFootnoteList = ({ children }) => (
     <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
     <div style={{ lineHeight: "normal" }}>
       {children}
-      <a className={"link-styled"} onClick={scroll_to_covid_key_concepts}>
+      <LinkStyled on_click={scroll_to_covid_key_concepts}>
         <TM k={"covid_above_tab_faq_link"} />
-      </a>
+      </LinkStyled>
       <TM k={"covid_above_tab_footnote_item"} el="p" />
     </div>
   </Fragment>
