@@ -75,7 +75,6 @@ export class WrappedNivoLine extends React.Component {
       enableGridY,
       stacked,
       markers,
-      layers,
       disable_table_view,
       table_name,
       table_first_column_name,
@@ -87,6 +86,76 @@ export class WrappedNivoLine extends React.Component {
       enablePoints,
       lineWidth,
     } = this.props;
+
+    const line_segments = _.chain(data)
+      .flatMap(({ id, data }, z_index) =>
+        _.chain(data)
+          .dropRight()
+          .map((point, index) => ({
+            id,
+            z_index,
+            range: `${point.x}/${data[index + 1].x}`,
+            data: [point, data[index + 1]],
+          }))
+          .value()
+      )
+      .thru((line_segments) =>
+        _.map(line_segments, (line_segment) => ({
+          ...line_segment,
+          total_overlaps: _.filter(
+            line_segments,
+            ({ z_index, range, data }) =>
+              z_index !== line_segment.z_index &&
+              range === line_segment.range &&
+              _.isEqual(data, line_segment.data)
+          ).length,
+          overlaps_below: _.filter(
+            line_segments,
+            ({ z_index, range, data }) =>
+              z_index < line_segment.z_index &&
+              range === line_segment.range &&
+              _.isEqual(data, line_segment.data)
+          ).length,
+        }))
+      )
+      .value();
+    const lines_with_dashed_overlaps = ({ lineGenerator, xScale, yScale }) =>
+      _.map(
+        line_segments,
+        ({ id, data, total_overlaps, z_index, overlaps_below }, index) => {
+          return (
+            <path
+              key={index}
+              d={lineGenerator(
+                _.map(data, ({ x, y }) => ({
+                  x: xScale(x),
+                  y: !_.isNull(y) ? yScale(y) : null,
+                }))
+              )}
+              fill="none"
+              style={{
+                stroke: colors({ id }),
+                strokeWidth: 2.5,
+                strokeDasharray: total_overlaps
+                  ? `20 ${total_overlaps * 20}`
+                  : null,
+                strokeDashoffset: total_overlaps ? overlaps_below * 20 : null,
+              }}
+            />
+          );
+        }
+      );
+
+    const layers = [
+      "grid",
+      "markers",
+      "areas",
+      lines_with_dashed_overlaps,
+      "slices",
+      "points",
+      "axes",
+      "legends",
+    ];
 
     const { y_scale_zoomed } = this.state;
 

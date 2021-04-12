@@ -152,53 +152,6 @@ class AuthExpPlannedSpendingGraph extends React.Component {
       .compact()
       .value();
 
-    // TODO: is it worth hoisting this pattern in to WrappedNivoLine? Doesn't account for more than two lines overlapping but that would be easy enough to add
-    const line_segments = _.chain(graph_data)
-      .flatMap(({ id, data }, z_index) =>
-        _.chain(data)
-          .dropRight()
-          .map((point, index) => ({
-            id,
-            z_index,
-            range: `${point.x}/${data[index + 1].x}`,
-            data: [point, data[index + 1]],
-          }))
-          .value()
-      )
-      .thru((line_segments) =>
-        _.map(line_segments, (line_segment) => ({
-          ...line_segment,
-          overlaps: !_.chain(line_segments)
-            .filter(
-              ({ z_index, range, data }) =>
-                z_index < line_segment.z_index &&
-                range === line_segment.range &&
-                _.isEqual(data, line_segment.data)
-            )
-            .isEmpty()
-            .value(),
-        }))
-      )
-      .value();
-    const lines_with_dashed_overlaps = ({ lineGenerator, xScale, yScale }) =>
-      _.map(line_segments, ({ id, data, overlaps }, index) => (
-        <path
-          key={index}
-          d={lineGenerator(
-            _.map(data, ({ x, y }) => ({
-              x: xScale(x),
-              y: !_.isNull(y) ? yScale(y) : null,
-            }))
-          )}
-          fill="none"
-          style={{
-            stroke: colors(id),
-            strokeWidth: 2.5,
-            strokeDasharray: overlaps ? 25 : null,
-          }}
-        />
-      ));
-
     const should_mark_gap_year =
       gap_year &&
       active_series.budgetary_expenditures &&
@@ -222,16 +175,6 @@ class AuthExpPlannedSpendingGraph extends React.Component {
         ["authorities", "budgetary_expenditures", "planned_spending"],
         (key) => text_maker(key)
       ),
-      layers: [
-        "grid",
-        "markers",
-        "areas",
-        lines_with_dashed_overlaps,
-        "slices",
-        "points",
-        "axes",
-        "legends",
-      ],
       ...(should_mark_gap_year && {
         markers: [
           {
