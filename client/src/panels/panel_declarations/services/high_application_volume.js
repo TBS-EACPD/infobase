@@ -97,7 +97,6 @@ export const declare_high_application_volume_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("high_application_volume_title"),
-      requires_services: true,
       footnotes: false,
       render({ title, calculations, sources }) {
         const { subject } = calculations;
