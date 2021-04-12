@@ -123,6 +123,8 @@ export class WrappedNivoLine extends React.Component {
       _.map(
         line_segments,
         ({ id, data, total_overlaps, z_index, overlaps_below }, index) => {
+          const gap_between_points = xScale(data[1].x) - xScale(data[0].x);
+          const dash_size = gap_between_points / (total_overlaps + 1) / 2;
           return (
             <path
               key={index}
@@ -137,9 +139,11 @@ export class WrappedNivoLine extends React.Component {
                 stroke: colors({ id }),
                 strokeWidth: 2.5,
                 strokeDasharray: total_overlaps
-                  ? `20 ${total_overlaps * 20}`
+                  ? `${dash_size} ${total_overlaps * dash_size}`
                   : null,
-                strokeDashoffset: total_overlaps ? overlaps_below * 20 : null,
+                strokeDashoffset: total_overlaps
+                  ? overlaps_below * dash_size
+                  : null,
               }}
             />
           );
