@@ -9,7 +9,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
@@ -20,30 +20,26 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: "service_type",
+    summary_name: "service_type_summary",
+    query_fragment: `
+    service_type_summary {
+      id
+      label
+      value
+    }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
-
-  const processed_data = _.chain(data)
-    .flatMap("service_type")
-    .countBy()
-    .map((value, type) => ({
-      id: type,
-      label: type,
-      value,
-    }))
-    .value();
-  const max_type = _.maxBy(processed_data, "value");
+  const max_type = _.maxBy(data, "value");
 
   return (
     <div>
       <TM
         args={{
-          num_of_types: processed_data.length,
+          num_of_types: data.length,
           subject,
           max_type: max_type.label,
           max_type_count: max_type.value,
@@ -58,7 +54,7 @@ const ServicesTypesPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={processed_data}
+          data={data}
           column_configs={{
             label: {
               index: 0,
@@ -73,7 +69,8 @@ const ServicesTypesPanel = ({ subject }) => {
         />
       ) : (
         <WrappedNivoPie
-          data={processed_data}
+          id={"label"}
+          data={data}
           include_percent={false}
           is_money={false}
         />
