@@ -28,7 +28,6 @@ const common_panel_config = {
   footnotes: false,
   source: false,
   calculate: _.constant(true),
-  title: "", //Won't show in the table of contents (ToC) but allows us to ensure all (other) panels do show up there. (Ensures all new panels will be placed into ToC if appropriate)
 };
 
 const curried_render = ({ q_a_keys }) =>
