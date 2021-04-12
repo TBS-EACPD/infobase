@@ -59,11 +59,15 @@ class PanelRegistry {
   }
 
   static register_instance(instance) {
-    const { full_key, level } = instance;
+    const { key, full_key, level, title, is_static } = instance;
 
     if (!_.includes(subjects, level)) {
-      throw `panel ${instance.key} has an undefined level`;
+      throw `panel ${key}'s level (${level}) is not valid; level is required and must correspond to a valid subject.`;
     }
+    if (!is_static && _.isUndefined(title)) {
+      throw `panel ${key}'s title is undefined; title is required, unless the panel is "static"`;
+    }
+
     if (full_key in panels) {
       throw `panel ${instance.key} has already been defined`;
     }
@@ -99,7 +103,7 @@ class PanelRegistry {
     this.get_panel_args = _.memoize(this.get_panel_args);
   }
   get_title(subject) {
-    return _.isString(this.title) ? this.title : this.title(subject);
+    return _.isFunction(this.title) ? this.title(subject) : this.title;
   }
 
   get tables() {
