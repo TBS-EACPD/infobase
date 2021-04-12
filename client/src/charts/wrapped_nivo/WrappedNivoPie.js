@@ -41,6 +41,7 @@ export class WrappedNivoPie extends React.Component {
       sort_legend,
       reverse_layout,
       custom_legend_items,
+      id,
     } = this.props;
 
     const color_scale = infobase_colors_smart(
@@ -121,6 +122,7 @@ export class WrappedNivoPie extends React.Component {
               data: data_with_absolute_values,
               margin,
               theme,
+              id,
             }}
             colors={color_func}
             tooltip={({ datum }) => {
@@ -200,4 +202,5 @@ WrappedNivoPie.defaultProps = {
   show_legend: true,
   sort_legend: true,
   reverse_layout: false,
+  id: "id",
 };
