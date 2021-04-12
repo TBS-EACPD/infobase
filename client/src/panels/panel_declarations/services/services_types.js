@@ -19,9 +19,7 @@ import text from "./services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const ServicesTypesPanel = ({ panel_args }) => {
-  const { subject } = panel_args;
-
+const ServicesTypesPanel = ({ subject }) => {
   const { loading, data } = useServices({
     id: subject.id,
     service_fragments: "service_type",
@@ -98,10 +96,10 @@ export const declare_services_types_panel = () =>
       },
       footnotes: false,
       render({ title, calculations, sources }) {
-        const { panel_args } = calculations;
+        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <ServicesTypesPanel panel_args={panel_args} />
+            <ServicesTypesPanel subject={subject} />
           </InfographicPanel>
         );
       },

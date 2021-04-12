@@ -40,8 +40,7 @@ const colors = scaleOrdinal().range([
   separatorColor,
 ]);
 
-const ServicesDigitalStatusPanel = ({ panel_args }) => {
-  const { subject } = panel_args;
+const ServicesDigitalStatusPanel = ({ subject }) => {
   const { loading, data } = useServices({
     id: subject.id,
     service_fragments: digital_status_query_fragment,
@@ -185,10 +184,10 @@ export const declare_services_digital_status_panel = () =>
       },
       footnotes: false,
       render({ title, calculations, sources }) {
-        const { panel_args } = calculations;
+        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <ServicesDigitalStatusPanel panel_args={panel_args} />
+            <ServicesDigitalStatusPanel subject={subject} />
           </InfographicPanel>
         );
       },
