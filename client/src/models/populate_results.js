@@ -66,7 +66,7 @@ export const subject_has_results = (subject) => {
       return client
         .query({
           query: has_results_query(level, id_key),
-          variables: { lang: lang, id: id },
+          variables: { lang: lang, id: String(id) },
           _query_name: "has_results",
         })
         .then((response) => {
@@ -330,7 +330,7 @@ export function api_load_results_bundle(subject, result_docs) {
       case "dept":
         return {
           is_loaded: dept_is_loaded(subject),
-          id: subject.id,
+          id: String(subject.id),
           query: get_dept_load_results_bundle_query(docs_to_load),
           response_data_accessor: (response) => [response.data.root.org],
         };

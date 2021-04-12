@@ -216,7 +216,7 @@ export function api_load_services(subject) {
       case "dept":
         return {
           is_loaded: dept_is_loaded(subject),
-          id: subject.id,
+          id: String(subject.id),
           query: dept_services_query,
           response_data_accessor: (response) => response.data.root.org,
         };

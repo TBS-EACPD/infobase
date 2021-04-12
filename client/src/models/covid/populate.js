@@ -23,7 +23,7 @@ export const api_load_years_with_covid_data = (subject) => {
         return {
           is_loaded: subject_is_loaded(subject.id),
           level: "dept",
-          id: subject.id,
+          id: String(subject.id),
           query: query_org_years_with_covid_data,
         };
       default:
@@ -41,7 +41,7 @@ export const api_load_years_with_covid_data = (subject) => {
   }
 
   return (
-    query({ org_id: id })
+    query({ org_id: String(id) })
       .then((years_with_covid_data) => {
         YearsWithCovidData.create_and_register(id, years_with_covid_data);
 
