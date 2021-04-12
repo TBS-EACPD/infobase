@@ -612,9 +612,10 @@ Handlebars.registerHelper("icon_tooltip", function glossary_tooltip(
 
   // our svg icons include embeded style nodes using * selectors, which in particular mess up the resulting output of
   // text maker's markdown parsing, need to escape
-  const selective_markdown_escaped_icon_html = raw_icon_html
-    .split("*")
-    .join("\\*");
+  const selective_markdown_escaped_icon_html = raw_icon_html.replace(
+    /\*/g,
+    "\\*"
+  );
 
   return new Handlebars.SafeString(
     `<span
