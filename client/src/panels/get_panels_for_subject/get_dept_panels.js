@@ -118,7 +118,7 @@ export const get_dept_panels = (subject) =>
       declare_employee_gender_panel(),
     ],
     services: services_feature_flag &&
-      subject.has_data("services_data") && [
+      subject.has_data("services") && [
         declare_provided_services_list_panel(),
         declare_services_types_panel(),
         declare_services_digital_status_panel(),

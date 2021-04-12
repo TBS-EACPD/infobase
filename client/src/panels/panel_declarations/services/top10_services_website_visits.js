@@ -175,6 +175,12 @@ export const declare_top10_website_visits_panel = () =>
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
       requires_services: true,
+      title: (subject) =>
+        text_maker(
+          subject.level === "gov"
+            ? "top10_gov_website_visits"
+            : "top10_services_website_visits"
+        ),
       calculate: (subject) => {
         const services = {
           dept: Service.get_by_dept(subject.id),
@@ -187,7 +193,7 @@ export const declare_top10_website_visits_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         const { subject, services } = panel_args;
 
@@ -218,15 +224,7 @@ export const declare_top10_website_visits_panel = () =>
           .value();
 
         return (
-          <InfographicPanel
-            title={text_maker(
-              subject.level === "gov"
-                ? "top10_gov_website_visits"
-                : "top10_services_website_visits",
-              { num_of_services: data.length }
-            )}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <Top10WebsiteVisitsPanel panel_args={{ ...panel_args, data }} />
           </InfographicPanel>
         );

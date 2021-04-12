@@ -169,6 +169,7 @@ export const declare_services_digital_status_panel = () =>
     panel_key: "services_digital_status",
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("services_digital_status"),
       requires_services: true,
       calculate: (subject) => {
         const services = {
@@ -182,13 +183,10 @@ export const declare_services_digital_status_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("services_digital_status")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <ServicesDigitalStatusPanel panel_args={panel_args} />
           </InfographicPanel>
         );

@@ -145,6 +145,7 @@ export const declare_services_standards_panel = () =>
     panel_key: "services_standards",
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("service_standards_title"),
       requires_services: true,
       calculate: (subject) => {
         const services = {
@@ -158,13 +159,10 @@ export const declare_services_standards_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("service_standards_title")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <ServicesStandardsPanel panel_args={panel_args} />
           </InfographicPanel>
         );

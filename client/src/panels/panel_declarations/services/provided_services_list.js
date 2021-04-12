@@ -112,6 +112,7 @@ export const declare_provided_services_list_panel = () =>
     panel_key: "provided_services_list",
     levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("list_of_provided_services_title"),
       requires_services: true,
       calculate: (subject) => ({
         subject,
@@ -121,13 +122,10 @@ export const declare_provided_services_list_panel = () =>
             : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("list_of_provided_services_title")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <ProvidedServicesListPanel panel_args={panel_args} />
           </InfographicPanel>
         );

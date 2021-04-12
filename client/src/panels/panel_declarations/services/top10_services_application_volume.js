@@ -140,6 +140,7 @@ export const declare_top10_services_application_volume_panel = () =>
     panel_key: "top10_services_application_volume",
     levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("top10_services_volume_title"),
       requires_services: true,
       calculate: (subject) => ({
         subject,
@@ -149,7 +150,7 @@ export const declare_top10_services_application_volume_panel = () =>
             : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         const data = _.chain(panel_args.services)
           .map(({ id, service_report }) => ({
@@ -166,12 +167,7 @@ export const declare_top10_services_application_volume_panel = () =>
           .value();
 
         return (
-          <InfographicPanel
-            title={text_maker("top10_services_volume_title", {
-              num_of_services: data.length,
-            })}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <Top10ServicesApplicationVolumePanel
               panel_args={{ ...panel_args, data }}
             />

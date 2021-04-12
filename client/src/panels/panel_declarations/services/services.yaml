@@ -207,8 +207,8 @@ enquiries:
 # Top 10 volume
 top10_services_volume_title:
   transform: [handlebars]
-  en: Top {{num_of_services}} services with highest application volume
-  fr: Les {{num_of_services}} services les plus demandés
+  en: Top services with highest application volume
+  fr: Les services les plus demandés
 service_name:
   en: Service name
   fr: Nom du service
@@ -220,12 +220,12 @@ top10_services_volume_text:
     Vous trouverez ci-dessous les {{num_of_services}} services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
 top10_gov_website_visits:
   transform: [handlebars]
-  en: Top {{num_of_services}} organizations with highest website visits
-  fr: Les {{num_of_services}} organisations les plus visitées sur leur site web
+  en: Top organizations with highest website visits
+  fr: Les organisations les plus visitées sur leur site web
 top10_services_website_visits:
   transform: [handlebars]
-  en: Top {{num_of_services}} services with highest website visits
-  fr: Les {{num_of_services}} services les plus visités sur leur site web
+  en: Top services with highest website visits
+  fr: Les services les plus visités sur leur site web
 top10_gov_website_visits_text:
   transform: [handlebars, markdown]
   en: |

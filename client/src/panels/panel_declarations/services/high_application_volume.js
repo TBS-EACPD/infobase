@@ -86,18 +86,16 @@ export const declare_high_application_volume_panel = () =>
     panel_key: "high_application_volume",
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("high_application_volume_title"),
       requires_services: true,
       calculate: () => ({
         services: Service.get_all(),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("high_application_volume_title")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <HighApplicationVolumePanel panel_args={panel_args} />
           </InfographicPanel>
         );

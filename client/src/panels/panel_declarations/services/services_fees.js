@@ -75,6 +75,7 @@ export const declare_services_fees_panel = () =>
     panel_key: "services_fees",
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("services_fees"),
       requires_services: true,
       calculate: (subject) => {
         const services = {
@@ -88,13 +89,10 @@ export const declare_services_fees_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("services_fees")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <ServicesFeesPanel panel_args={panel_args} />
           </InfographicPanel>
         );

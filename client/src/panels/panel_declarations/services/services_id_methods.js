@@ -139,6 +139,7 @@ export const declare_services_id_methods_panel = () =>
     panel_key: "services_id_methods",
     levels: ["gov", "dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("identification_methods"),
       requires_services: true,
       calculate: (subject) => {
         const services = {
@@ -152,13 +153,10 @@ export const declare_services_id_methods_panel = () =>
         };
       },
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("identification_methods")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <ServicesIdMethodsPanel panel_args={panel_args} />
           </InfographicPanel>
         );

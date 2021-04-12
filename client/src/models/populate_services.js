@@ -52,11 +52,6 @@ export function api_load_subject_has_services(subject) {
   })();
 
   if (is_loaded) {
-    // ensure that subject.has_data matches _subject_has_services, since _subject_has_services hay have been updated via side-effect
-    subject.set_has_data(
-      "services",
-      _.get(_subject_has_services, `${level}.${id}`)
-    );
     return Promise.resolve();
   }
 

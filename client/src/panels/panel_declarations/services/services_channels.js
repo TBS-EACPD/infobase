@@ -289,6 +289,7 @@ export const declare_services_channels_panel = () =>
     panel_key: "services_channels",
     levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
+      title: text_maker("services_channels_title"),
       requires_services: true,
       calculate: (subject) => ({
         subject,
@@ -298,13 +299,10 @@ export const declare_services_channels_panel = () =>
             : Service.get_by_prog(subject.id),
       }),
       footnotes: false,
-      render({ calculations, sources }) {
+      render({ title, calculations, sources }) {
         const { panel_args } = calculations;
         return (
-          <InfographicPanel
-            title={text_maker("services_channels_title")}
-            sources={sources}
-          >
+          <InfographicPanel title={title} sources={sources}>
             <ServicesChannelsPanel panel_args={panel_args} />
           </InfographicPanel>
         );
