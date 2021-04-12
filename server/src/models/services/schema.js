@@ -7,6 +7,7 @@ const schema = `
     service_summary: ServiceSummary
   }
   extend type Org{
+    service_summary: ServiceSummary
     services: [Service]
     has_services: Boolean
   }
@@ -113,8 +114,8 @@ export default function ({ models, loaders }) {
     const has_service = await Service.findOne({ program_ids: program_id });
     return !_.isNull(has_service);
   };
-  const get_service_type_summary = async (lang) => {
-    const services = await Service.find();
+  const get_service_type_summary = async (lang, org_id) => {
+    const services = await Service.find(org_id && { org_id });
     return _.chain(services)
       .flatMap(`service_type_${lang}`)
       .countBy()
@@ -132,13 +133,15 @@ export default function ({ models, loaders }) {
       covid_estimates_summary: () => true,
 =======
       service_summary: (_x, __x, { lang }) => ({
-        id: "service_summary",
         service_type_summary: get_service_type_summary(lang),
       }),
 >>>>>>> initial basic concept of summary data for services_types for gov
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
+      service_summary: ({ org_id }, _x, { lang }) => ({
+        service_type_summary: get_service_type_summary(lang, org_id),
+      }),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
     Program: {

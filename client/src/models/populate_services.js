@@ -234,24 +234,29 @@ const get_services_query = (query_options) => {
   return query_lookup_by_subject_level[subject.level](service_fragments);
 };
 
-export const useSummaryServices = (query_options) => {
-  const time_at_request = Date.now();
-  const { summary_name, query_fragment } = query_options;
-  const query = gql`
-    query($lang: String!) {
-      root(lang: $lang) {
-        gov {
-          service_summary {
-            ${query_fragment}
-          }
+const get_summary_query = (query_options) => {
+  const { org_id, query_fragment } = query_options;
+  const is_gov = org_id === "gov";
+  return gql`
+  query($lang: String!) {
+    root(lang: $lang) {
+      ${is_gov ? "gov" : `org(org_id: ${org_id})`} {
+        service_summary {
+          ${query_fragment}
         }
       }
     }
+  }
   `;
+};
+
+export const useSummaryServices = (query_options) => {
+  const time_at_request = Date.now();
+  const { summary_name } = query_options;
+  const query = get_summary_query(query_options);
   const res = useQuery(query, {
     variables: {
       lang,
-      id: "gov",
     },
   });
   const { loading, error, data } = res;
