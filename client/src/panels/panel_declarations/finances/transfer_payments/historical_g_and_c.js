@@ -225,11 +225,18 @@ class DetailedHistTPItems extends React.Component {
           y: 200000,
         })),
       },
+      // {
+      //   id: "Stuff",
+      //   data: _.map([0, 1, 2, 3, 4], (index) => ({
+      //     x: text_years[index],
+      //     y: 200000,
+      //   })),
+      // },
       {
-        id: "Stuff",
+        id: "Hello",
         data: _.map([0, 1, 2, 3, 4], (index) => ({
           x: text_years[index],
-          y: 200000,
+          y: index === 3 ? 0 : index === 4 ? 431966 : 200000,
         })),
       },
     ];
