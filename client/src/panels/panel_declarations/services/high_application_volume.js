@@ -24,8 +24,7 @@ import text from "./services.yaml";
 const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const HighApplicationVolumePanel = ({ panel_args }) => {
-  const { subject } = panel_args;
+const HighApplicationVolumePanel = ({ subject }) => {
   const { loading, data } = useServices({
     id: subject.id,
     service_fragments: delivery_channels_query_fragment,
@@ -101,10 +100,10 @@ export const declare_high_application_volume_panel = () =>
       requires_services: true,
       footnotes: false,
       render({ title, calculations, sources }) {
-        const { panel_args } = calculations;
+        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <HighApplicationVolumePanel panel_args={panel_args} />
+            <HighApplicationVolumePanel subject={subject} />
           </InfographicPanel>
         );
       },

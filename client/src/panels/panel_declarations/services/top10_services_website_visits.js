@@ -225,7 +225,7 @@ export const declare_top10_website_visits_panel = () =>
 
         return (
           <InfographicPanel title={title} sources={sources}>
-            <Top10WebsiteVisitsPanel panel_args={{ ...panel_args, data }} />
+            <Top10WebsiteVisitsPanel panel_args={{ ...panel_args }} />
           </InfographicPanel>
         );
       },
