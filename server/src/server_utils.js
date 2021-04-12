@@ -34,14 +34,13 @@ const get_query_and_variables_from_request = (req) => {
   }
   if (req.query) {
     let { query, variables } = req.query;
-    const confirmed_query = /^query/.test(query) && query;
 
     variables = quiet_failing_json_parse(variables);
     const { _query_name, ...actual_query_variables } = variables;
 
     return [
       {
-        query: confirmed_query,
+        query,
         variables: actual_query_variables,
         _query_name: _query_name,
       },

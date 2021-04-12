@@ -54,8 +54,8 @@ app.use(function (req, res, next) {
   }
 
   if (process.env.USE_REMOTE_DB) {
-    get_log_objects_for_request(req).forEach((obj) => {
-      console.log(JSON.stringify());
+    get_log_objects_for_request(req).forEach((log_obj) => {
+      console.log(JSON.stringify(log_obj));
     });
   }
 
