@@ -136,7 +136,7 @@ export class WrappedNivoLine extends React.Component {
               )}
               fill="none"
               style={{
-                stroke: colors({ id }),
+                stroke: _.isFunction(colors) ? colors({ id }) : colors,
                 strokeWidth: 2.5,
                 strokeDasharray: total_overlaps
                   ? `${dash_size} ${total_overlaps * dash_size}`
@@ -153,8 +153,8 @@ export class WrappedNivoLine extends React.Component {
     const layers = [
       "grid",
       "markers",
-      "areas",
       lines_with_dashed_overlaps,
+      "areas",
       "slices",
       "points",
       "axes",
