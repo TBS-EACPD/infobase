@@ -16,7 +16,7 @@ const schema = `
   }
   type ServiceSummary{
     id: String
-    service_type_summary: ServiceTypeSummary
+    service_type_summary: [ServiceTypeSummary]
   }
   type ServiceTypeSummary{
     id: String
@@ -113,10 +113,29 @@ export default function ({ models, loaders }) {
     const has_service = await Service.findOne({ program_ids: program_id });
     return !_.isNull(has_service);
   };
+  const get_service_type_summary = async (lang) => {
+    const services = await Service.find();
+    return _.chain(services)
+      .flatMap(`service_type_${lang}`)
+      .countBy()
+      .map((value, type) => ({
+        id: `${type}_${value}`,
+        [`label_${lang}`]: type,
+        value,
+      }))
+      .value();
+  };
 
   const resolvers = {
     Gov: {
+<<<<<<< HEAD
       covid_estimates_summary: () => true,
+=======
+      service_summary: (_x, __x, { lang }) => ({
+        id: "service_summary",
+        service_type_summary: get_service_type_summary(lang),
+      }),
+>>>>>>> initial basic concept of summary data for services_types for gov
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
@@ -125,6 +144,9 @@ export default function ({ models, loaders }) {
     Program: {
       services: ({ program_id }) => services_by_program_id.load(program_id),
       has_services: ({ program_id }) => program_has_services(program_id),
+    },
+    ServiceTypeSummary: {
+      label: bilingual_field("label"),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),

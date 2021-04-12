@@ -88,8 +88,8 @@ export default function (model_singleton) {
   });
 
   const ServiceTypeSummarySchema = mongoose.Schema({
-    ...bilingual_str("id"),
-    ...bilingual_str("name"),
+    id: pkey_type(),
+    ...bilingual_str("label"),
     value: { type: Number },
   });
 

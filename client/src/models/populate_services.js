@@ -234,6 +234,42 @@ const get_services_query = (query_options) => {
   return query_lookup_by_subject_level[subject.level](service_fragments);
 };
 
+export const useSummaryServices = (query_options) => {
+  const time_at_request = Date.now();
+  const { summary_name, query_fragment } = query_options;
+  const query = gql`
+    query($lang: String!) {
+      root(lang: $lang) {
+        gov {
+          service_summary {
+            ${query_fragment}
+          }
+        }
+      }
+    }
+  `;
+  const res = useQuery(query, {
+    variables: {
+      lang,
+      id: "gov",
+    },
+  });
+  const { loading, error, data } = res;
+  if (error) {
+    const resp_time = Date.now() - time_at_request;
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
+    });
+    throw new Error(error);
+  }
+  if (!loading) {
+    return { ...res, data: data.root.gov.service_summary[summary_name] };
+  }
+  return res;
+};
+
 export const useServices = (query_options) => {
   const time_at_request = Date.now();
   const { subject } = query_options;
