@@ -234,23 +234,6 @@ const get_services_query = (query_options) => {
   return query_lookup_by_subject_level[subject.level](service_fragments);
 };
 
-export const prefetch_services = (id) => {
-  return;
-  // const client = get_client();
-  // client.query({
-  //   query: services_query({
-  //     id: id || "gov",
-  //     service_fragments: "",
-  //   }),
-  //   variables: {
-  //     lang,
-  //     id: id || "gov",
-  //     _query_name: "services",
-  //   },
-  // });
-  // console.log(client.cache.data.data);
-};
-
 export const useServices = (query_options) => {
   const time_at_request = Date.now();
   const { subject } = query_options;
