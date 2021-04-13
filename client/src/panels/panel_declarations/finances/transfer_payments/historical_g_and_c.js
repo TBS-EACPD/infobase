@@ -200,8 +200,9 @@ class DetailedHistTPItems extends React.Component {
       }))
     );
 
-    const detail_expend_data = [
-      ..._.map(graph_series, (expend_array, expend_label) => {
+    const detail_expend_data = _.map(
+      graph_series,
+      (expend_array, expend_label) => {
         return {
           id: expend_label,
           data: expend_array.map((expend_value, year_index) => ({
@@ -209,37 +210,8 @@ class DetailedHistTPItems extends React.Component {
             x: text_years[year_index],
           })),
         };
-      }),
-      //Used for testing. Remove this before merging
-      {
-        id: "Test",
-        data: _.map([0, 1, 2, 3, 4], (index) => ({
-          x: text_years[index],
-          y: 200000,
-        })),
-      },
-      {
-        id: "Thing",
-        data: _.map([0, 1, 2, 3, 4], (index) => ({
-          x: text_years[index],
-          y: 200000,
-        })),
-      },
-      // {
-      //   id: "Stuff",
-      //   data: _.map([0, 1, 2, 3, 4], (index) => ({
-      //     x: text_years[index],
-      //     y: 200000,
-      //   })),
-      // },
-      {
-        id: "Hello",
-        data: _.map([0, 1, 2, 3, 4], (index) => ({
-          x: text_years[index],
-          y: index === 3 ? 0 : index === 4 ? 431966 : 200000,
-        })),
-      },
-    ];
+      }
+    );
 
     const title_el = (
       <div className="h3">
