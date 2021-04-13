@@ -39,7 +39,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const { subject } = panel_args;
   const is_gov = subject.level === "gov";
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `
     name
     service_report{

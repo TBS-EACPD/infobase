@@ -36,7 +36,7 @@ const volume_formatter = (val) =>
 
 const Top10ServicesApplicationVolumePanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `
     id
     name

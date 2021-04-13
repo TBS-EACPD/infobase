@@ -21,7 +21,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: "service_type",
   });
   if (loading) {

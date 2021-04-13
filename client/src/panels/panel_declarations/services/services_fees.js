@@ -21,7 +21,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesFeesPanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `collects_fees`,
   });
   if (loading) {

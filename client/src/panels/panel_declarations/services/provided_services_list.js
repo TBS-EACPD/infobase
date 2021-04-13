@@ -16,7 +16,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `
     name
     id

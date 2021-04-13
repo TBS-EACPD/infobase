@@ -75,6 +75,24 @@ const all_service_fragments = `
       }
   `;
 
+const program_services_query = (service_fragments) => gql`
+query($lang: String!, $id: String) {
+  root(lang: $lang) {
+    program(id: $id) {
+      id
+      services: services {
+        id
+        ${
+          _.isUndefined(service_fragments)
+            ? all_service_fragments
+            : service_fragments
+        }
+      }
+    }
+  }
+}
+`;
+
 const dept_services_query = (service_fragments) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
@@ -111,39 +129,138 @@ query($lang: String!) {
 }
 `;
 
-const services_query = (query_options) => {
-  const { id, service_fragments } = query_options;
-  return id === "gov"
-    ? all_services_query(service_fragments)
-    : dept_services_query(service_fragments);
+const get_subject_has_services_query = (level, id_arg_name) => gql`
+query($lang: String! $id: String) {
+  root(lang: $lang) {
+    ${level}(${id_arg_name}: $id){
+      id
+      has_services
+    }
+  }
+}
+`;
+
+export const api_load_has_services = (subject) => {
+  const level = subject && subject.level;
+
+  const { is_loaded, id, query, response_data_accessor } = (() => {
+    const has_services_is_loaded = (() => {
+      try {
+        subject.has_data("services");
+      } catch (error) {
+        return false;
+      }
+      return true;
+    })();
+
+    switch (level) {
+      case "dept":
+        return {
+          is_loaded: has_services_is_loaded,
+          id: subject.id,
+          query: get_subject_has_services_query("org", "org_id"),
+          response_data_accessor: (response) => response.data.root.org,
+        };
+      case "program":
+        return {
+          is_loaded: has_services_is_loaded,
+          id: subject.id,
+          query: get_subject_has_services_query("program", "id"),
+          response_data_accessor: (response) => {
+            return response.data.root.program;
+          },
+        };
+      default:
+        return {
+          is_loaded: true, // no default case, this is to resolve the promise early
+        };
+    }
+  })();
+
+  if (is_loaded) {
+    return Promise.resolve();
+  }
+
+  const time_at_request = Date.now();
+  const client = get_client();
+  return client
+    .query({
+      query,
+      variables: {
+        lang,
+        id,
+        _query_name: "subject_has_services",
+      },
+    })
+    .then((response) => {
+      const response_data = response_data_accessor(response);
+
+      const resp_time = Date.now() - time_at_request;
+      if (!_.isEmpty(response_data)) {
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `Has services, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `Has services, took ${resp_time} ms`,
+        });
+      }
+      subject.set_has_data("services", response_data[`has_services`]);
+
+      return Promise.resolve();
+    })
+    .catch(function (error) {
+      const resp_time = Date.now() - time_at_request;
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
+      });
+      throw error;
+    });
+};
+const get_services_query = (query_options) => {
+  const { subject, service_fragments } = query_options;
+  const query_lookup_by_subject_level = {
+    gov: all_services_query,
+    dept: dept_services_query,
+    program: program_services_query,
+  };
+  return query_lookup_by_subject_level[subject.level](service_fragments);
 };
 
 export const prefetch_services = (id) => {
-  const client = get_client();
-  client.query({
-    query: services_query({
-      id: id || "gov",
-      service_fragments: "",
-    }),
-    variables: {
-      lang,
-      id: id || "gov",
-      _query_name: "services",
-    },
-  });
-  console.log(client.cache.data.data);
+  return;
+  // const client = get_client();
+  // client.query({
+  //   query: services_query({
+  //     id: id || "gov",
+  //     service_fragments: "",
+  //   }),
+  //   variables: {
+  //     lang,
+  //     id: id || "gov",
+  //     _query_name: "services",
+  //   },
+  // });
+  // console.log(client.cache.data.data);
 };
 
 export const useServices = (query_options) => {
   const time_at_request = Date.now();
-  const { id } = query_options;
-  const is_gov = id === "gov";
+  const { subject } = query_options;
+  const is_gov = subject.id === "gov";
   const variables = {
     lang,
-    id,
+    id: subject.id,
   };
 
-  const query = services_query(query_options);
+  const query = get_services_query(query_options);
   const res = useQuery(query, { variables });
   const { loading, error, data } = res;
   if (error) {
@@ -156,7 +273,13 @@ export const useServices = (query_options) => {
     throw new Error(error);
   }
   if (!loading) {
-    const res_data = is_gov ? data.root.orgs : data.root.org.services;
+    const data_path_by_subject_level = {
+      gov: (data) => data.root.orgs,
+      dept: (data) => data.root.org.services,
+      program: (data) => data.root.program.services,
+    };
+
+    const res_data = data_path_by_subject_level[subject.level](data);
     const services = is_gov
       ? _.chain(res_data).flatMap("services").compact().uniqBy("id").value()
       : res_data;

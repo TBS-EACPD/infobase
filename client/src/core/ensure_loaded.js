@@ -13,6 +13,7 @@ import {
   api_load_results_counts,
   subject_has_results,
 } from "src/models/populate_results.js";
+import { api_load_has_services } from "src/models/populate_services.js";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
 import { Table } from "./TableClass.js";
@@ -35,7 +36,7 @@ function ensure_loaded({
   result_docs,
   requires_result_counts,
   requires_granular_result_counts,
-  services,
+  has_services,
   has_covid_data,
   years_with_covid_data,
   covid_measures,
@@ -105,6 +106,11 @@ function ensure_loaded({
       ? subject_has_results(subject)
       : Promise.resolve();
 
+  const has_services_prom =
+    has_services && _.isFunction(subject.set_has_data)
+      ? api_load_has_services(subject)
+      : Promise.resolve();
+
   const granular_result_counts_prom = should_load_granular_result_counts
     ? api_load_results_counts("granular")
     : Promise.resolve();
@@ -130,6 +136,7 @@ function ensure_loaded({
     results_prom,
     result_counts_prom,
     has_results_prom,
+    has_services_prom,
     granular_result_counts_prom,
     footnotes_prom,
     horizontal_initiative_lookups_prom,
