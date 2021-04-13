@@ -145,6 +145,15 @@ export class DisplayTable extends React.Component {
   componentDidUpdate(prev_props, prev_state) {
     const { show_pagination_load_spinner } = this.state;
     if (show_pagination_load_spinner) {
+      // TODO: find a better work around than using debounce
+      // Note on hacky implementation:
+      /*
+       * This debounce allows us to properly display a loading spinner when a user makes pagination changes to
+       * the DisplayTable. We need the loading spinner because depending on how much data needs to be shown on
+       * the table, it can take a couple seconds to load without any indication (bad user experience).
+       * Without the debounce, the state update process occurs too quickly for the render process to actually
+       * update the DOM meaning that without the artificial delay, a loading spinner does not really get rendered
+       */
       this.debounced_stop_loading();
     }
   }

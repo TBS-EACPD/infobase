@@ -76,6 +76,11 @@ export const SelectPage = ({
   change_page,
   num_col,
 }) => {
+  /*
+   * TODO: refactor/clean up the following logic to be a lot more dense/simple to understand
+   * To future devs: you probably don't need to understand how this logic works unless changes
+   * are absolutely needed.
+   */
   const get_shifted_option_range = (
     page_count,
     current_page,
@@ -261,6 +266,8 @@ export const SelectPageSize = ({
     })
     .value();
 
+  const radio_group_name = _.uniqueId("select_page_size_");
+
   const dropdown_content = (
     <form className="paginate_by_dropdown">
       <div style={{ marginBottom: 10 }}>
@@ -268,7 +275,7 @@ export const SelectPageSize = ({
           <div key={value} onClick={() => on_select(value)}>
             <input
               type={"radio"}
-              name={"paginate_by_dropdown"}
+              name={radio_group_name}
               checked={selected === value}
               readOnly
             />
