@@ -101,7 +101,7 @@ export class PinnedContent extends React.Component {
           <InView>
             {({ inView, ref, entry }) => {
               const is_stickied =
-                !this.is_pinned &&
+                this.is_pinned &&
                 !inView &&
                 entry &&
                 entry.boundingClientRect.top < 0;
@@ -144,11 +144,11 @@ export class PinnedContent extends React.Component {
                             border: "none",
                           }}
                           aria-label={text_maker(
-                            this.is_pinned ? "pin" : "unpin"
+                            !this.is_pinned ? "pin" : "unpin"
                           )}
                           onKeyDown={this.handleKeyDown}
                         >
-                          {!this.is_pinned ? (
+                          {this.is_pinned ? (
                             <IconPin
                               height="25px"
                               width="25px"
