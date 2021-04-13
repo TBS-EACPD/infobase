@@ -167,7 +167,7 @@ class InfoGraph_ extends React.Component {
         // the standard pinned SomeThingsToKeepInMind covers up panel titles when scrolling to them, disabling it to avoid that
         set_pinned_content_local_storage(
           SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY,
-          true
+          false
         );
 
         linked_to_panel.scrollIntoView();
