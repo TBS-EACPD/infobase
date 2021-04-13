@@ -8,9 +8,7 @@ import {
 } from "src/components/index.js";
 
 import { highlightColor } from "src/core/color_defs.ts";
-
 import { lang } from "src/core/injected_build_constants.ts";
-
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { IconFlagLine } from "src/icons/icons.tsx";
