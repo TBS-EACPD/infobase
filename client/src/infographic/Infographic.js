@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React from "react";
 import { Redirect } from "react-router";
 
 import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
@@ -232,50 +232,48 @@ class InfoGraph_ extends React.Component {
                 : text_maker("a11y_infograph_description")}
             </p>
           )}
-          {!loading && (
-            <Fragment>
-              {_.find(subject_bubble_defs, {
-                id: active_bubble_id,
-                enable_panel_filter: true,
-              }) && (
-                <PanelFilterControl
-                  subject={subject}
-                  panel_keys={valid_panel_keys}
-                  set_panel_filter={(panel_filter) => {
-                    url_replace(
-                      _.replace(
-                        infograph_href_template(subject, active_bubble_id),
-                        "#",
-                        "/"
-                      )
-                    );
-                    this.setState({ panel_filter });
-                  }}
-                />
-              )}
-              <TableOfContents
-                panel_titles_by_key={_.chain(filtered_panel_keys)
-                  .map((panel_key) =>
-                    PanelRegistry.lookup(panel_key, subject.level)
-                  )
-                  .filter((panel) => !panel.is_static)
-                  .map((panel) => [panel.key, panel.get_title(subject)])
-                  .fromPairs()
-                  .value()}
-                scroll_to_panel_when_all_loading_done={
-                  this.scroll_to_panel_when_all_loading_done
-                }
+          {!loading &&
+            _.find(subject_bubble_defs, {
+              id: active_bubble_id,
+              enable_panel_filter: true,
+            }) && (
+              <PanelFilterControl
+                subject={subject}
+                panel_keys={valid_panel_keys}
+                set_panel_filter={(panel_filter) => {
+                  url_replace(
+                    _.replace(
+                      infograph_href_template(subject, active_bubble_id),
+                      "#",
+                      "/"
+                    )
+                  );
+                  this.setState({ panel_filter });
+                }}
               />
-              {_.map(filtered_panel_keys, (panel_key) => (
-                <PanelRenderer
-                  panel_key={panel_key}
-                  subject={subject}
-                  active_bubble_id={active_bubble_id}
-                  key={panel_key + subject.guid}
-                />
-              ))}
-            </Fragment>
-          )}
+            )}
+          <TableOfContents
+            panel_titles_by_key={_.chain(filtered_panel_keys)
+              .map((panel_key) =>
+                PanelRegistry.lookup(panel_key, subject.level)
+              )
+              .filter((panel) => !panel.is_static)
+              .map((panel) => [panel.key, panel.get_title(subject)])
+              .fromPairs()
+              .value()}
+            scroll_to_panel_when_all_loading_done={
+              this.scroll_to_panel_when_all_loading_done
+            }
+          />
+          {!loading &&
+            _.map(filtered_panel_keys, (panel_key) => (
+              <PanelRenderer
+                panel_key={panel_key}
+                subject={subject}
+                active_bubble_id={active_bubble_id}
+                key={panel_key + subject.guid}
+              />
+            ))}
         </div>
         {!_.isEmpty(active_bubble_id) && (
           <div className="row medium-panel-text">
