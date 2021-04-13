@@ -26,7 +26,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const HighApplicationVolumePanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: delivery_channels_query_fragment,
   });
   if (loading) {
