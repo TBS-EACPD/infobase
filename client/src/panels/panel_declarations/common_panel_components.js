@@ -57,10 +57,14 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
   );
 };
 
+const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
+  "user_enabled_pinning_key_concepts";
 const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
   <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
     {(matches) => (
-      <PinnedContent local_storage_name={"user_enabled_pinning_key_concepts"}>
+      <PinnedContent
+        local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}
+      >
         <div className={classNames("mrgn-bttm-md")}>
           <ButtonToolbar style={{ margin: 0 }}>
             <AutoAccordion
@@ -83,4 +87,9 @@ const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
   </MediaQuery>
 );
 
-export { HeightClippedGraph, TspanLineWrapper, SomeThingsToKeepInMind };
+export {
+  HeightClippedGraph,
+  TspanLineWrapper,
+  SomeThingsToKeepInMind,
+  SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY,
+};
