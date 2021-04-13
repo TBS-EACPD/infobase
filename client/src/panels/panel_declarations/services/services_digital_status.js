@@ -42,7 +42,7 @@ const colors = scaleOrdinal().range([
 
 const ServicesDigitalStatusPanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: digital_status_query_fragment,
   });
   if (loading) {

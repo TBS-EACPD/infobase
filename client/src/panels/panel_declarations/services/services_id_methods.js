@@ -24,7 +24,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIdMethodsPanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `service_report {
       cra_business_ids_collected
       sin_collected

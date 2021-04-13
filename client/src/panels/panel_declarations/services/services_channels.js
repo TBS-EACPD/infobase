@@ -33,7 +33,7 @@ const colors = infobase_colors();
 
 const ServicesChannelsPanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `
     id
     name

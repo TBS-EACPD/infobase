@@ -22,7 +22,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesStandardsPanel = ({ subject }) => {
   const { loading, data } = useServices({
-    id: subject.id,
+    subject,
     service_fragments: `standards {  
       target_type
       standard_report {
