@@ -129,13 +129,9 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Gov: {
-<<<<<<< HEAD
-      covid_estimates_summary: () => true,
-=======
       service_summary: (_x, __x, { lang }) => ({
         service_type_summary: get_service_type_summary(lang),
       }),
->>>>>>> initial basic concept of summary data for services_types for gov
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),

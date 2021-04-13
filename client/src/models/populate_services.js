@@ -240,7 +240,7 @@ const get_summary_query = (query_options) => {
   return gql`
   query($lang: String!) {
     root(lang: $lang) {
-      ${is_gov ? "gov" : `org(org_id: ${org_id})`} {
+      ${is_gov ? "gov" : `org(org_id: "${org_id}")`} {
         service_summary {
           ${query_fragment}
         }
@@ -252,7 +252,7 @@ const get_summary_query = (query_options) => {
 
 export const useSummaryServices = (query_options) => {
   const time_at_request = Date.now();
-  const { summary_name } = query_options;
+  const { org_id, summary_name } = query_options;
   const query = get_summary_query(query_options);
   const res = useQuery(query, {
     variables: {
@@ -270,7 +270,8 @@ export const useSummaryServices = (query_options) => {
     throw new Error(error);
   }
   if (!loading) {
-    return { ...res, data: data.root.gov.service_summary[summary_name] };
+    const level = org_id === "gov" ? "gov" : "org";
+    return { ...res, data: data.root[level].service_summary[summary_name] };
   }
   return res;
 };
