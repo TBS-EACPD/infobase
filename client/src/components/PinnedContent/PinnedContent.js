@@ -100,26 +100,27 @@ export class PinnedContent extends React.Component {
         {({ width }) => (
           <InView>
             {({ inView, ref, entry }) => {
-              const is_stickied =
+              const should_pin =
                 this.is_pinned &&
                 !inView &&
                 entry &&
                 entry.boundingClientRect.top < 0;
 
               return (
-                // this div with ref is for the intersection check
                 <div ref={ref}>
-                  {/* this conditional div acts as a placeholder to make scrolling smoother */}
-                  {/* before adding this, stickying by "position: fixed" would take it out of the DOM block
-                  flow which would bump up the window due to the total block content being shortened.
-                  By adding this placeholder div, the height of the total block content remains the same,
-                  thus no longer causing the window to jump  */}
-                  {is_stickied && <div style={{ height: content_height }} />}
+                  {/* 
+                    this conditional div with height height: content_height acts as a placeholder to make scrolling
+                    smoother. Before adding this, stickying by "position: fixed" would take it out of the DOM block
+                    flow which would bump up the window due to the total block content being shortened.
+                    By adding this placeholder div, the height of the total block content remains the same,
+                    thus no longer causing the window to jump
+                  */}
+                  {should_pin && <div style={{ height: content_height }} />}
                   {/* this div is for sticky styline, must be flex to include margins onto height */}
                   <div
                     style={{
                       display: "flex",
-                      ...(is_stickied && {
+                      ...(should_pin && {
                         position: "fixed",
                         top: 0,
                         zIndex: 2001,
@@ -148,7 +149,7 @@ export class PinnedContent extends React.Component {
                           )}
                           onKeyDown={this.handleKeyDown}
                         >
-                          {this.is_pinned ? (
+                          {!this.is_pinned ? (
                             <IconPin
                               height="25px"
                               width="25px"
