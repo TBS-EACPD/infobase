@@ -3,7 +3,6 @@ import React from "react";
 import { InView } from "react-intersection-observer";
 import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
-import { withRouter } from "react-router";
 
 import { create_text_maker } from "src/models/text.js";
 
@@ -17,58 +16,61 @@ import text from "./PinnedContent.yaml";
 
 const text_maker = create_text_maker(text);
 
-class _PinnedContent extends React.Component {
+export const get_pinned_content_local_storage = (local_storage_name) => {
+  try {
+    return has_local_storage && local_storage_name
+      ? JSON.parse(localStorage.getItem(local_storage_name))
+      : null;
+  } catch {
+    return null;
+  }
+};
+export const set_pinned_content_local_storage = (local_storage_name, value) => {
+  has_local_storage &&
+    local_storage_name &&
+    localStorage.setItem(local_storage_name, value);
+};
+
+export class PinnedContent extends React.Component {
   constructor(props) {
     super(props);
-
-    const {
-      match: {
-        params: { options: panel_link },
-      },
-      local_storage_name,
-    } = props;
-
-    const user_has_enabled_pinning = (() => {
-      if (panel_link) {
-        // TODO hack for a specific gotcha from infographics, where we want to disable the pinned content there when directly linking to a panel,
-        // because the pinned content otherwise hides the linked panel title/is confusing... should be handled somewhere else though, not a PinnedContent concern
-        return false;
-      } else if (has_local_storage && local_storage_name) {
-        try {
-          const storage_value = JSON.parse(
-            localStorage.getItem(local_storage_name)
-          );
-          return _.isBoolean(storage_value) ? storage_value : true;
-        } catch {
-          return true;
-        }
-      }
-    })();
 
     this.content_ref = React.createRef();
 
     this.state = {
-      user_has_enabled_pinning,
+      is_pinned_local_storage_mirror: null,
     };
   }
 
-  pin_pressed = () => {
-    const { local_storage_name } = this.props;
-    const { user_has_enabled_pinning } = this.state;
+  get is_pinned() {
+    const { local_storage_name, default_pin_state } = this.props;
+    const { is_pinned_local_storage_mirror } = this.state;
 
-    has_local_storage &&
-      local_storage_name &&
-      localStorage.setItem(local_storage_name, !user_has_enabled_pinning);
+    if (has_local_storage && local_storage_name) {
+      const is_pinned = get_pinned_content_local_storage(local_storage_name);
+      return _.isBoolean(is_pinned) ? is_pinned : default_pin_state;
+    } else {
+      return _.isBoolean(is_pinned_local_storage_mirror)
+        ? is_pinned_local_storage_mirror
+        : default_pin_state;
+    }
+  }
+  set_is_pinned = (is_pinned) => {
+    set_pinned_content_local_storage(this.props.local_storage_name, is_pinned);
+    this.setState({ is_pinned_local_storage_mirror: is_pinned });
+  };
+
+  pin_pressed = () => {
+    this.set_is_pinned(!this.is_pinned);
 
     this.setState({
-      user_has_enabled_pinning: !user_has_enabled_pinning,
       content_height: 0,
     });
   };
 
   handleKeyDown = (e) => {
     if (e.key === "Tab") {
-      this.setState({ user_has_enabled_pinning: false });
+      this.set_is_pinned(false);
     }
   };
 
@@ -81,6 +83,7 @@ class _PinnedContent extends React.Component {
   );
 
   componentDidMount() {
+    this.set_is_pinned(this.is_pinned);
     this.update_content_height();
   }
 
@@ -89,7 +92,7 @@ class _PinnedContent extends React.Component {
   }
 
   render() {
-    const { user_has_enabled_pinning, content_height } = this.state;
+    const { content_height } = this.state;
     const { children } = this.props;
 
     return !is_a11y_mode ? (
@@ -98,7 +101,7 @@ class _PinnedContent extends React.Component {
           <InView>
             {({ inView, ref, entry }) => {
               const is_stickied =
-                user_has_enabled_pinning &&
+                !this.is_pinned &&
                 !inView &&
                 entry &&
                 entry.boundingClientRect.top < 0;
@@ -141,11 +144,11 @@ class _PinnedContent extends React.Component {
                             border: "none",
                           }}
                           aria-label={text_maker(
-                            user_has_enabled_pinning ? "unpin" : "pin"
+                            this.is_pinned ? "pin" : "unpin"
                           )}
                           onKeyDown={this.handleKeyDown}
                         >
-                          {user_has_enabled_pinning ? (
+                          {!this.is_pinned ? (
                             <IconPin
                               height="25px"
                               width="25px"
@@ -177,9 +180,7 @@ class _PinnedContent extends React.Component {
     );
   }
 }
-
-_PinnedContent.defaultProps = {
+PinnedContent.defaultProps = {
   height_update_delay: 1000,
+  default_pin_state: has_local_storage,
 };
-
-export const PinnedContent = withRouter(_PinnedContent);

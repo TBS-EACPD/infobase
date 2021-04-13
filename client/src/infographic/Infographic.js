@@ -3,15 +3,16 @@ import React, { Fragment } from "react";
 import { Redirect } from "react-router";
 
 import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
-
+import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/panels/panel_declarations/common_panel_components.js";
 import { PanelRegistry } from "src/panels/PanelRegistry.js";
-
 import { PanelRenderer } from "src/panels/PanelRenderer.js";
 
 import {
   create_text_maker_component,
   SpinnerWrapper,
 } from "src/components/index.js";
+
+import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent.js";
 
 import { Subject } from "src/models/subject.js";
 
@@ -163,6 +164,12 @@ class InfoGraph_ extends React.Component {
       const linked_to_panel = document.querySelector(`#${panel_key}`);
 
       if (linked_to_panel) {
+        // the standard pinned SomeThingsToKeepInMind covers up panel titles when scrolling to them, disabling it to avoid that
+        set_pinned_content_local_storage(
+          SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY,
+          true
+        );
+
         linked_to_panel.scrollIntoView();
         linked_to_panel.focus();
       }
