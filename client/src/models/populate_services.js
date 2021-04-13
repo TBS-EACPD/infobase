@@ -24,20 +24,26 @@ export function api_load_subject_has_services(subject) {
   const level = subject && subject.level;
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
-      _.get(_subject_has_services, `${level}.${id}`);
+    const has_services_is_loaded = (() => {
+      try {
+        subject.has_data("services");
+      } catch (error) {
+        return false;
+      }
+      return true;
+    })();
 
     switch (level) {
       case "dept":
         return {
-          is_loaded: subject_is_loaded(subject),
+          is_loaded: has_services_is_loaded,
           id: subject.id,
           query: get_subject_has_services_query("org", "org_id"),
           response_data_accessor: (response) => response.data.root.org,
         };
       case "program":
         return {
-          is_loaded: subject_is_loaded(subject),
+          is_loaded: has_services_is_loaded,
           id: subject.id,
           query: get_subject_has_services_query("program", "id"),
           response_data_accessor: (response) => {
