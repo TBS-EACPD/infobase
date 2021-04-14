@@ -64,6 +64,7 @@
   line-height: 1.8em;	
   cursor: pointer;	
   display: block;
+  color: $linkColor;
 
   border-top: 1px solid $separatorColor;	
 
@@ -82,7 +83,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;	
-    color: $linkColor;
   }
 }
 
