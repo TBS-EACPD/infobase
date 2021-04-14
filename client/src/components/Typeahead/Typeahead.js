@@ -22,6 +22,13 @@ const virtualized_cell_measure_cache = new CellMeasurerCache({
 });
 
 /*
+  Currently using a circular counter to represent the selection cursor in state (potentially a TODO to rewrite, 
+  maybe make it a state machine). Small quirk, includes -1 which represents the text input. Otherwise, corresponds
+  to an item in the typeahead results
+*/
+const default_selection_cursor = -1;
+
+/*
   Required props:
     on_query: callback, called with debounce on input change. Responsible for updating the query_value and results props
 
@@ -47,7 +54,7 @@ export class Typeahead extends React.Component {
     this.state = {
       input_value: this.props.query_value,
       may_show_menu: false,
-      selection_cursor: this.default_selection_cursor,
+      selection_cursor: default_selection_cursor,
     };
   }
 
@@ -69,26 +76,24 @@ export class Typeahead extends React.Component {
     document.body.removeEventListener("click", this.handle_window_click);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { results } = this.props;
-    const { results: prev_results } = prevProps;
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { results: next_results } = nextProps;
+    const { results: prev_results } = prevState;
 
-    const { selection_cursor, may_show_menu } = this.state;
-    const {
-      selection_cursor: prev_selection_cursor,
-      may_show_menu: prev_may_show_menu,
-    } = prevState;
-
-    if (
-      results !== prev_results ||
-      (this.show_menu && may_show_menu !== prev_may_show_menu)
-    ) {
+    if (next_results !== prev_results) {
       virtualized_cell_measure_cache.clearAll();
 
-      this.setState({
-        selection_cursor: this.default_selection_cursor,
-      });
+      return {
+        results: next_results,
+        selection_cursor: default_selection_cursor,
+      };
+    } else {
+      return { results: next_results };
     }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const { selection_cursor } = this.state;
+    const { selection_cursor: prev_selection_cursor } = prevState;
 
     if (this.virtualized_list_ref.current) {
       if (
@@ -259,21 +264,11 @@ export class Typeahead extends React.Component {
     );
   }
 
-  /*
-    TODO currently using a circular counter to represent the selection cursor in state, pushing off and 
-    scattering the work of combining that with other state (such as needs_pagination_up_control etc) to
-    translate the counter in to useful information...
-    Maybe easier to write, but worse for maintenance. Should claw all that scattered logic back and make 
-    this a state machine providing directly useful values.
-    i.e. this.default_selection_cursor = "input", all of the logic for what's next after "input" lives in 
-    these getters, and they either return a meaningful string or the actual index of an item from results
-  */
-  default_selection_cursor = -1;
   get previous_selection_cursor() {
     const { selection_cursor } = this.state;
     const { results } = this.props;
 
-    if (selection_cursor === this.default_selection_cursor) {
+    if (selection_cursor === default_selection_cursor) {
       return results.length - 1;
     } else {
       return selection_cursor - 1;
@@ -284,7 +279,7 @@ export class Typeahead extends React.Component {
     const { results } = this.props;
 
     if (selection_cursor === results.length - 1) {
-      return this.default_selection_cursor;
+      return default_selection_cursor;
     } else {
       return selection_cursor + 1;
     }
