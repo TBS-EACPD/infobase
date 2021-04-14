@@ -86,7 +86,7 @@ export const TypeaheadA11yStatus = ({
       // often gets cut off by re-reading the input value, a slight delay fixes that
       return (
         <DelayedRender min_length={min_length}>
-          {matching_results.length === 0 && text_maker("no_matches_found")}
+          {_.isEmpty(matching_results) && text_maker("no_matches_found")}
           {matching_results.length > 0 &&
             text_maker("menu_with_results_status", {
               total_matching_results: matching_results.length,
