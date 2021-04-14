@@ -68,17 +68,16 @@ class DelayedRender extends React.Component {
 export const TypeaheadA11yStatus = ({
   selection_cursor,
   min_length,
-  matching_results,
+  results,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
-      const selected_name =
-        matching_results[selection_cursor].result_plain_text;
+      const selected_name = results[selection_cursor].plain_text;
 
       const selected_position = selection_cursor + 1;
 
       return text_maker("selected_result", {
-        total_matching_results: matching_results.length,
+        total_results: results.length,
         selected_name,
         selected_position,
       });
@@ -87,10 +86,10 @@ export const TypeaheadA11yStatus = ({
       // often gets cut off by re-reading the input value, a slight delay fixes that
       return (
         <DelayedRender min_length={min_length}>
-          {_.isEmpty(matching_results) && text_maker("no_matches_found")}
-          {matching_results.length > 0 &&
+          {_.isEmpty(results) && text_maker("no_matches_found")}
+          {results.length > 0 &&
             text_maker("menu_with_results_status", {
-              total_matching_results: matching_results.length,
+              total_results: results.length,
             })}
         </DelayedRender>
       );
