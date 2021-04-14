@@ -36,8 +36,6 @@ export class SearchConfigTypeahead extends React.Component {
       query_value !== "" &&
       _.chain(all_options)
         .filter(({ config_group_index, data }) =>
-          // could use optional chaining, but we WANT this to fail fast and loud, to catch
-          // malformed search_configs during development. Should be safe otherwsie
           config_groups[config_group_index].group_filter(query_value, data)
         )
         .groupBy("config_group_index")
@@ -49,11 +47,7 @@ export class SearchConfigTypeahead extends React.Component {
           }))
         )
         .map(({ is_first_in_group, group_index, result }) => ({
-          header: is_first_in_group && (
-            <div className="typeahead__header" key={`group-${group_index}`}>
-              {config_groups[group_index].group_header}
-            </div>
-          ),
+          header: is_first_in_group && config_groups[group_index].group_header,
           on_select: () => {
             log_standard_event({
               SUBAPP: window.location.hash.replace("#", ""),
