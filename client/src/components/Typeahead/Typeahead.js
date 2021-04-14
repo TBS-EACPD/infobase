@@ -21,18 +21,6 @@ const virtualized_cell_measure_cache = new CellMeasurerCache({
   fixedWidth: true,
 });
 
-/*
-  props: {
-    matching_results: required - actual data for results
-    update_matching_results: required - callback for when query or menu visibility changes
-    force_update_matching_results: optional - if some search configuration changes externally, use this as the matching results cannot be updated externally as well since query is missing
-    debounced_on_query: optional - when query changes, run a debounced function
-    list_items_render: optional - custom function to determine how the list should be rendered; runs function with arguments (query_value, selection_cursor). Default: assumes a list of strings and renders a <div> for each string
-    get_selected_item_text: optional - custom function to determine what screen reader should read for the selected item; runs function with argument (selection_cursor). Default: assumes a list of strings and selects the string of the current selected index
-  }
-
- */
-
 export class Typeahead extends React.Component {
   constructor(props) {
     super(props);
@@ -48,6 +36,18 @@ export class Typeahead extends React.Component {
       selection_cursor: this.default_selection_cursor,
     };
   }
+
+  debounced_on_query = (query) =>
+    _.debounce(this.props.on_query(query), this.props.on_query_debounce_time);
+
+  componentDidMount() {
+    document.body.addEventListener("click", this.handle_window_click);
+  }
+  componentWillUnmount() {
+    this.debounced_on_query.cancel();
+    document.body.removeEventListener("click", this.handle_window_click);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { query_value, selection_cursor, may_show_menu } = this.state;
     const {
@@ -55,22 +55,11 @@ export class Typeahead extends React.Component {
       selection_cursor: prev_selection_cursor,
       may_show_menu: prev_may_show_menu,
     } = prevState;
-    const {
-      update_matching_results,
-      force_update_matching_results,
-    } = this.props;
-
-    if (force_update_matching_results) {
-      update_matching_results(query_value);
-      virtualized_cell_measure_cache.clearAll();
-      return;
-    }
 
     if (
       query_value !== prev_query_value ||
       (this.show_menu && may_show_menu !== prev_may_show_menu)
     ) {
-      update_matching_results(query_value);
       virtualized_cell_measure_cache.clearAll();
 
       this.setState({
@@ -83,44 +72,24 @@ export class Typeahead extends React.Component {
         selection_cursor !== prev_selection_cursor &&
         prev_selection_cursor > selection_cursor
       ) {
+        //scrolling up is choppy if we don't do this
         this.virtualized_list_ref.current.recomputeRowHeights(
           selection_cursor >= 0 ? selection_cursor : 0
-        ); //scrolling up is choppy if we don't do this
+        );
       }
     }
   }
-  componentDidMount() {
-    document.body.addEventListener("click", this.handle_window_click);
-  }
-  componentWillUnmount() {
-    document.body.removeEventListener("click", this.handle_window_click);
-    this.props.debounced_on_query && this.props.debounced_on_query.cancel();
-  }
+
   render() {
     const {
       placeholder,
       additional_a11y_description,
       min_length,
       utility_buttons,
-      list_items_render,
-      get_selected_item_text,
+      matching_results,
     } = this.props;
 
     const { query_value, selection_cursor } = this.state;
-    const { matching_results } = this.props;
-
-    const list_items =
-      list_items_render(query_value, selection_cursor) ??
-      _.map(matching_results, (result, result_index) => (
-        <div
-          className={classNames(
-            "typeahead__item",
-            result_index === selection_cursor && "typeahead__item--active"
-          )}
-        >
-          {result}
-        </div>
-      ));
 
     return (
       <div ref={this.typeahead_ref} className="typeahead">
@@ -162,7 +131,6 @@ export class Typeahead extends React.Component {
           <TypeaheadA11yStatus
             min_length={min_length}
             selection_cursor={selection_cursor}
-            get_selected_item_text={get_selected_item_text}
             matching_results={matching_results}
           />
         )}
@@ -186,7 +154,7 @@ export class Typeahead extends React.Component {
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
                     deferredMeasurementCache={virtualized_cell_measure_cache}
                     rowHeight={virtualized_cell_measure_cache.rowHeight}
-                    rowCount={list_items.length || 1}
+                    rowCount={matching_results.length || 1}
                     rowRenderer={({
                       index,
                       isScrolling,
@@ -202,12 +170,26 @@ export class Typeahead extends React.Component {
                         rowIndex={index}
                       >
                         <div style={style}>
-                          {_.isEmpty(matching_results) && (
+                          {_.isEmpty(matching_results) ? (
                             <div className="typeahead__header">
                               {text_maker("no_matches_found")}
                             </div>
+                          ) : (
+                            _.map(
+                              matching_results,
+                              ({ component }, result_index) => (
+                                <div
+                                  className={classNames(
+                                    "typeahead__item",
+                                    result_index === selection_cursor &&
+                                      "typeahead__item--active"
+                                  )}
+                                >
+                                  {component}
+                                </div>
+                              )
+                            )
                           )}
-                          {!_.isEmpty(matching_results) && list_items[index]}
                         </div>
                       </CellMeasurer>
                     )}
@@ -274,8 +256,7 @@ export class Typeahead extends React.Component {
   handle_input_change = (event) => {
     const trimmed_input_value = _.trimStart(event.target.value);
 
-    this.props.debounced_on_query &&
-      this.props.debounced_on_query(trimmed_input_value);
+    this.debounced_on_query(trimmed_input_value);
 
     this.setState({
       may_show_menu: true,
@@ -324,6 +305,6 @@ export class Typeahead extends React.Component {
 Typeahead.defaultProps = {
   placeholder: text_maker("org_search"),
   min_length: 3,
-  on_query: _.noop,
+  on_query_debounce_time: 400,
   on_select: _.noop,
 };
