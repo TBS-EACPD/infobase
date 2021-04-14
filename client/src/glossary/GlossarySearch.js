@@ -30,6 +30,7 @@ const GlossarySearch = withRouter(
         />
       );
     }
+  }
 );
 
 export { GlossarySearch };
