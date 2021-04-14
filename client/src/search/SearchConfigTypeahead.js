@@ -18,7 +18,7 @@ export class SearchConfigTypeahead extends React.Component {
     super(props);
 
     this.state = {
-      matching_results: [],
+      results: [],
       current_search_configs: props.search_configs,
     };
   }
@@ -28,24 +28,24 @@ export class SearchConfigTypeahead extends React.Component {
 
     if (search_configs !== current_search_configs) {
       return {
-        matching_results: [],
+        results: [],
         current_search_configs: search_configs,
-        force_update_matching_results: true,
+        force_update_results: true,
       };
     } else {
       return null;
     }
   }
-  update_matching_results = (query_value) => {
+  update_results = (query_value) => {
     const { all_options, config_groups } = this.props;
 
     this.setState({
-      matching_results: _.filter(all_options, ({ config_group_index, data }) =>
+      results: _.filter(all_options, ({ config_group_index, data }) =>
         // could use optional chaining, but we WANT this to fail fast and loud, to catch
         // malformed search_configs during development. Should be safe otherwsie
         config_groups[config_group_index].group_filter(query_value, data)
       ),
-      force_update_matching_results: false,
+      force_update_results: false,
     });
   };
   debounced_on_query = _.debounce((query_value) => {
@@ -79,10 +79,10 @@ export class SearchConfigTypeahead extends React.Component {
   };
 
   list_items_render = (query_value, selection_cursor) => {
-    const { matching_results } = this.state;
+    const { results } = this.state;
     const { config_groups } = this.props;
     return _.compact([
-      ..._.chain(matching_results)
+      ..._.chain(results)
         .groupBy("config_group_index")
         .flatMap((results, group_index) =>
           _.map(results, (result, index) => ({
@@ -102,7 +102,7 @@ export class SearchConfigTypeahead extends React.Component {
                 <TM
                   k="menu_with_results_status"
                   args={{
-                    total_matching_results: matching_results.length,
+                    total_results: results.length,
                   }}
                 />
               </div>
@@ -130,17 +130,17 @@ export class SearchConfigTypeahead extends React.Component {
   };
 
   get_selected_item_text = (selection_cursor) =>
-    this.state.matching_results[selection_cursor].name;
+    this.state.results[selection_cursor].name;
   render() {
-    const { matching_results, force_update_matching_results } = this.state;
+    const { results, force_update_results } = this.state;
 
     return (
       <Typeahead
         {...this.props}
-        matching_results={matching_results}
-        update_matching_results={this.update_matching_results}
+        results={results}
+        update_results={this.update_results}
         list_items_render={this.list_items_render}
-        force_update_matching_results={force_update_matching_results}
+        force_update_results={force_update_results}
         debounced_on_query={this.debounced_on_query}
         get_selected_item_text={this.get_selected_item_text}
       />
