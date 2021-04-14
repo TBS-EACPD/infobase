@@ -16,13 +16,13 @@ typeahead_usage:
 selected_result:
   transform: [handlebars]
   en: |
-    {{selected_name}} ({{selected_position}} of {{total_matching_results}})
+    {{selected_name}} ({{selected_position}} of {{total_results}})
   fr: |
-    {{selected_name}} ({{selected_position}} sur {{total_matching_results}})
+    {{selected_name}} ({{selected_position}} sur {{total_results}})
 
 menu_with_results_status:
   transform: [handlebars]
   en: |
-    {{total_matching_results}} results found
+    {{total_results}} results found
   fr: |
-    {{total_matching_results}} résultats trouvés
+    {{total_results}} résultats trouvés

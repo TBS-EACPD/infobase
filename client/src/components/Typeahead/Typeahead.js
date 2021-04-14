@@ -21,6 +21,18 @@ const virtualized_cell_measure_cache = new CellMeasurerCache({
   fixedWidth: true,
 });
 
+/*
+  Required props:
+    on_query: callback, called with debounce on input change. Responsible for updating the results prop
+
+    results: [{
+      id: string, required,
+      group_header: string || component, optional. Non-option content to render above the result in the typeahead list,
+      content: string || component, required. Inner content for rendering,
+      plain_text: string, required. Specifically for use in a11y readout,
+    }]
+*/
+
 export class Typeahead extends React.Component {
   constructor(props) {
     super(props);
@@ -86,7 +98,7 @@ export class Typeahead extends React.Component {
       additional_a11y_description,
       min_length,
       utility_buttons,
-      matching_results,
+      results,
     } = this.props;
 
     const { query_value, selection_cursor } = this.state;
@@ -131,7 +143,7 @@ export class Typeahead extends React.Component {
           <TypeaheadA11yStatus
             min_length={min_length}
             selection_cursor={selection_cursor}
-            matching_results={matching_results}
+            results={results}
           />
         )}
         {this.show_menu && (
@@ -154,7 +166,7 @@ export class Typeahead extends React.Component {
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
                     deferredMeasurementCache={virtualized_cell_measure_cache}
                     rowHeight={virtualized_cell_measure_cache.rowHeight}
-                    rowCount={matching_results.length || 1}
+                    rowCount={results.length || 1}
                     rowRenderer={({
                       index,
                       isScrolling,
@@ -170,21 +182,18 @@ export class Typeahead extends React.Component {
                         rowIndex={index}
                       >
                         <div style={style}>
-                          {_.isEmpty(matching_results) ? (
+                          {_.isEmpty(results) ? (
                             <div className="typeahead__header">
                               {text_maker("no_matches_found")}
                             </div>
                           ) : (
                             _.map(
-                              matching_results,
-                              (
-                                { id, result_header, result_content },
-                                result_index
-                              ) => (
-                                <Fragment key={id || result_index}>
-                                  {result_header && (
+                              results,
+                              ({ id, group_header, content }, result_index) => (
+                                <Fragment key={id}>
+                                  {group_header && (
                                     <div className="typeahead__header">
-                                      {result_header}
+                                      {group_header}
                                     </div>
                                   )}
                                   <div
@@ -198,7 +207,7 @@ export class Typeahead extends React.Component {
                                       result_index === selection_cursor
                                     }
                                   >
-                                    {result_content}
+                                    {content}
                                   </div>
                                 </Fragment>
                               )
@@ -237,24 +246,24 @@ export class Typeahead extends React.Component {
     Maybe easier to write, but worse for maintenance. Should claw all that scattered logic back and make 
     this a state machine providing directly useful values.
     i.e. this.default_selection_cursor = "input", all of the logic for what's next after "input" lives in 
-    these getters, and they either return a meaningful string or the actual index of an item from matching_results
+    these getters, and they either return a meaningful string or the actual index of an item from results
   */
   default_selection_cursor = -1;
   get previous_selection_cursor() {
     const { selection_cursor } = this.state;
-    const { matching_results } = this.props;
+    const { results } = this.props;
 
     if (selection_cursor === this.default_selection_cursor) {
-      return matching_results.length - 1;
+      return results.length - 1;
     } else {
       return selection_cursor - 1;
     }
   }
   get next_selection_cursor() {
     const { selection_cursor } = this.state;
-    const { matching_results } = this.props;
+    const { results } = this.props;
 
-    if (selection_cursor === matching_results.length - 1) {
+    if (selection_cursor === results.length - 1) {
       return this.default_selection_cursor;
     } else {
       return selection_cursor + 1;
@@ -298,7 +307,7 @@ export class Typeahead extends React.Component {
 
       if (!_.isNull(active_item)) {
         active_item.click();
-      } else if (!_.isEmpty(this.props.matching_results)) {
+      } else if (!_.isEmpty(this.props.results)) {
         this.setState({ selection_cursor: 0 });
       }
     }
