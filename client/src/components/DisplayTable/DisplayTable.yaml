@@ -18,12 +18,12 @@ items_per_page_description:
   fr: Choisir le nombre d'éléments à afficher à la fois sur le tableau
 show_all:
   en: Show all
-  fr: TODO
+  fr: Tout afficher
 ellipsis_end:
   transform: [handlebars]
-  en: Page {{page_num}}. Click this, then move right to view more options
-  fr: TODO
+  en: Page {{page_num}}. Click this, then move right to view more options.
+  fr: Page {{page_num}}. Cliquez sur cette page, puis allez à droite pour afficher d'autres options.
 ellipsis_start:
   transform: [handlebars]
-  en: Page {{page_num}}. Click this, then move left to view more options
-  fr: TODO
+  en: Page {{page_num}}. Click this, then move left to view more options.
+  fr: Page {{page_num}}. Cliquez sur cette page, puis allez à gauche pour afficher d'autres options.
