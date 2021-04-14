@@ -27,7 +27,7 @@ import {
   datasets as table_search_config,
   glossary_lite as glossary_lite_search_config,
 } from "./search_configs.js";
-import { SubjectWrappedTypeahead } from "./SubjectWrappedTypeahead.js";
+import { SearchConfigTypeahead } from "./SearchConfigTypeahead.js";
 
 import text from "./EverythingSearch.yaml";
 import "./EverythingSearch.scss";
@@ -186,7 +186,7 @@ const EverythingSearch = withRouter(
 
       return (
         <div className="fcol-md-12 p-0">
-          <SubjectWrappedTypeahead
+          <SearchConfigTypeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
             config_groups={this.config_groups}

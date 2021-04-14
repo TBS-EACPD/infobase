@@ -13,7 +13,7 @@ import { log_standard_event } from "src/core/analytics.js";
 
 const { TM } = create_text_maker_component(text);
 
-export class SubjectWrappedTypeahead extends React.Component {
+export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
     super(props);
 
