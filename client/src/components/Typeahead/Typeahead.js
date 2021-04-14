@@ -177,16 +177,30 @@ export class Typeahead extends React.Component {
                           ) : (
                             _.map(
                               matching_results,
-                              ({ component }, result_index) => (
-                                <div
-                                  className={classNames(
-                                    "typeahead__item",
-                                    result_index === selection_cursor &&
-                                      "typeahead__item--active"
+                              (
+                                { id, result_header, result_content },
+                                result_index
+                              ) => (
+                                <Fragment key={id || result_index}>
+                                  {result_header && (
+                                    <div className="typeahead__header">
+                                      {result_header}
+                                    </div>
                                   )}
-                                >
-                                  {component}
-                                </div>
+                                  <div
+                                    className={classNames(
+                                      "typeahead__result",
+                                      result_index === selection_cursor &&
+                                        "typeahead__result--active"
+                                    )}
+                                    role="option"
+                                    aria-selected={
+                                      result_index === selection_cursor
+                                    }
+                                  >
+                                    {result_content}
+                                  </div>
+                                </Fragment>
                               )
                             )
                           )}
@@ -211,7 +225,9 @@ export class Typeahead extends React.Component {
   }
 
   get active_item() {
-    return this.typeahead_ref.current.querySelector(".typeahead__item--active");
+    return this.typeahead_ref.current.querySelector(
+      ".typeahead__result--active"
+    );
   }
 
   /*
