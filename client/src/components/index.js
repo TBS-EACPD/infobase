@@ -70,3 +70,5 @@ export {
   DlItem,
   MultiColumnList,
 } from "./misc_util_components.js";
+
+export { Typeahead } from "./Typeahead/Typeahead.js";

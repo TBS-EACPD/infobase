@@ -6,7 +6,7 @@ import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList.js";
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/misc_util_components.js";
 
 import { IconSearch } from "src/icons/icons.js";
 
