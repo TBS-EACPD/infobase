@@ -58,7 +58,7 @@
   border-top: 1px solid $separatorColor;
 }
 
-.typeahead__item {	
+.typeahead__result {	
   padding: 3px 20px;	
   font-size: 1.4em;	
   line-height: 1.8em;	
@@ -75,16 +75,17 @@
       color: $linkFocusColor;
       text-decoration: underline;
   }
+
+  & > * {
+    display: block;
+    padding: 3px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;	
+    color: $linkColor;
+  }
 }
 
-.typeahead__result {
-  display: block;
-  padding: 3px 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;	
-  color: $linkColor;
-}
 // utility classes not directly used by the Typeahead component, but by consumers, because
 // consumers are responsible for defining the contents of typeahead matches... currently...
 // (moving that responsibility more in to Typeahead itself is a possible TODO)

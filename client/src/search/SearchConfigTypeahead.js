@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 
 import {
   create_text_maker_component,
@@ -91,45 +91,40 @@ export class SearchConfigTypeahead extends React.Component {
             result,
           }))
         )
-        .flatMap(({ is_first_in_group, group_index, result }, result_index) => {
-          return [
-            <div key={`result-${result_index}`}>
-              {result_index === 0 && (
-                <div
-                  key="header"
-                  className="typeahead__header"
-                  style={{ borderTop: "none" }}
-                >
-                  <TM
-                    k="menu_with_results_status"
-                    args={{
-                      total_matching_results: matching_results.length,
-                    }}
-                  />
-                </div>
-              )}
-              {is_first_in_group && (
-                <div className="typeahead__header" key={`group-${group_index}`}>
-                  {config_groups[group_index].group_header}
-                </div>
-              )}
+        .map(({ is_first_in_group, group_index, result }, result_index) => (
+          <Fragment key={`result-${result_index}`}>
+            {result_index === 0 && (
               <div
-                className={classNames(
-                  "typeahead__item",
-                  result_index === selection_cursor && "typeahead__item--active"
-                )}
-                onClick={() => this.handle_result_selection(result)}
-                role="option"
-                aria-selected={result_index === selection_cursor}
+                key="header"
+                className="typeahead__header"
+                style={{ borderTop: "none" }}
               >
-                <a className="typeahead__result">
-                  {result.menu_content(query_value)}
-                </a>
+                <TM
+                  k="menu_with_results_status"
+                  args={{
+                    total_matching_results: matching_results.length,
+                  }}
+                />
               </div>
-            </div>,
-          ];
-        })
-        .compact()
+            )}
+            {is_first_in_group && (
+              <div className="typeahead__header" key={`group-${group_index}`}>
+                {config_groups[group_index].group_header}
+              </div>
+            )}
+            <div
+              className={classNames(
+                "typeahead__result",
+                result_index === selection_cursor && "typeahead__result--active"
+              )}
+              onClick={() => this.handle_result_selection(result)}
+              role="option"
+              aria-selected={result_index === selection_cursor}
+            >
+              <a>{result.menu_content(query_value)}</a>
+            </div>
+          </Fragment>
+        ))
         .value(),
     ]);
   };
