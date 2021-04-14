@@ -2,13 +2,14 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker_component } from "src/components/index.js";
+import {
+  create_text_maker_component,
+  Typeahead,
+} from "src/components/index.js";
+
+import text from "src/components/Typeahead/Typeahead.yaml";
 
 import { log_standard_event } from "src/core/analytics.js";
-
-import { Typeahead } from "./Typeahead/Typeahead.js";
-
-import text from "./Typeahead/Typeahead.yaml";
 
 const { TM } = create_text_maker_component(text);
 

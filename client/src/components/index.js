@@ -71,3 +71,5 @@ export {
   MultiColumnList,
   LinkStyled,
 } from "./misc_util_components.js";
+
+export { Typeahead } from "./Typeahead/Typeahead.js";
