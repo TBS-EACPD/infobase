@@ -14,8 +14,6 @@ import { IconGear } from "src/icons/icons.js";
 
 import { smart_href_template } from "src/link_utils.js";
 
-import { InfoBaseHighlighter } from "src/search/search_utils.js";
-
 import {
   make_orgs_search_config,
   crsos as crso_search_config,
@@ -177,7 +175,7 @@ const EverythingSearch = withRouter(
     };
 
     render() {
-      const { placeholder, hide_utility_buttons, page_size } = this.props;
+      const { placeholder, hide_utility_buttons } = this.props;
 
       const option_checkboxes = _.map(
         search_options_hierarchy,
@@ -189,8 +187,6 @@ const EverythingSearch = withRouter(
           <SearchConfigTypeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
-            config_groups={this.config_groups}
-            all_options={this.all_options}
             utility_buttons={
               !hide_utility_buttons && [
                 <SearchOptions
@@ -199,7 +195,6 @@ const EverythingSearch = withRouter(
                 />,
               ]
             }
-            page_size={page_size}
             on_select={this.onSelect}
             additional_a11y_description={text_maker(
               "everything_search_additional_a11y_description"
@@ -274,43 +269,12 @@ const EverythingSearch = withRouter(
         }
       }
     };
-    get_all_options = _.memoize((search_configs) =>
-      _.flatMap(search_configs, (search_config, ix) =>
-        _.map(search_config.get_data(), (data) => ({
-          data,
-          name: search_config.name_function(data),
-          menu_content: (search) =>
-            _.isFunction(search_config.menu_content_function) ? (
-              search_config.menu_content_function(data, search)
-            ) : (
-              <InfoBaseHighlighter
-                search={search}
-                content={search_config.name_function(data)}
-              />
-            ),
-          config_group_index: ix,
-        }))
-      )
-    );
-    get_config_groups = _.memoize((search_configs) =>
-      _.map(search_configs, (search_config, ix) => ({
-        group_header: search_config.header_function(),
-        group_filter: search_config.filter,
-      }))
-    );
-    get all_options() {
-      return this.get_all_options(this.get_search_configs());
-    }
-    get config_groups() {
-      return this.get_config_groups(this.get_search_configs());
-    }
   }
 );
 EverythingSearch.defaultProps = {
   placeholder: text_maker("everything_search_placeholder"),
   href_template: (item) => smart_href_template(item, "/"),
   hide_utility_buttons: false,
-  page_size: 30,
 
   reject_gov: false,
   reject_dead_orgs: true,
