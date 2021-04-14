@@ -67,15 +67,12 @@ class DelayedRender extends React.Component {
 
 export const TypeaheadA11yStatus = ({
   selection_cursor,
-  get_selected_item_text,
   min_length,
   matching_results,
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
-      const selected_name =
-        get_selected_item_text(selection_cursor) ??
-        matching_results[selection_cursor];
+      const selected_name = matching_results[selection_cursor].plain_text;
 
       const selected_position = selection_cursor + 1;
 
