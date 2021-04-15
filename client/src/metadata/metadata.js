@@ -28,7 +28,7 @@ export default class MetaData extends React.Component {
       },
     } = this.props;
 
-    const sorted_sources = _.sortBy(sources, (source) => source.title());
+    const sorted_sources = _.sortBy(sources, (source) => source.title);
 
     return (
       <StandardRouteContainer
@@ -48,11 +48,11 @@ export default class MetaData extends React.Component {
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(sorted_sources, (source) => (
             <div key={source.key} id={source.key}>
-              <Panel title={source.title()}>
-                <div>{source.description()}</div>
+              <Panel title={source.title}>
+                <div>{source.description}</div>
                 <FancyUL title={text_maker("datasets")}>
                   {_.map(
-                    source.items(),
+                    source.items,
                     ({ key, id, text, inline_link, external_link }) => (
                       <span key={key || id} className="frow">
                         {inline_link ? (
@@ -82,7 +82,7 @@ export default class MetaData extends React.Component {
                 </FancyUL>
                 <div className="frow">
                   <span style={{ alignSelf: "center" }}>
-                    <TM k="refresh_freq" /> {source.frequency.text}
+                    <TM k="refresh_freq" /> {source.frequency}
                   </span>
                   {source.open_data && (
                     <a
