@@ -29,6 +29,8 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
+import { get_source_links } from "src/metadata/data_sources.js";
+
 import {
   AboveTabFootnoteList,
   CellTooltip,
@@ -631,7 +633,7 @@ export const declare_covid_estimates_panel = () =>
       title: text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
-      source: (subject) => [],
+      source: (subject) => get_source_links(["COVID_AUTH"]),
       calculate: function (subject, options) {
         const years_with_estimates = YearsWithCovidData.lookup(subject.id)
           ?.years_with_estimates;
