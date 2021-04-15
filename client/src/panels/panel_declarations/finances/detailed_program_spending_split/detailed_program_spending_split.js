@@ -372,6 +372,10 @@ class DetailedProgramSplit extends React.Component {
                   bottom: 30,
                   left: 215,
                 }}
+                // HACKY: ideally we'd not be using a ternary to set a minimum height
+                // but the library used by nivo sets unpredicatble heights
+                // which for some reason causes graphs with only one bar to be a line instead
+                // TODO: refactor this
                 graph_height={divHeight > 100 ? divHeight : "90px"}
                 colors={(d) => colors(d.id)}
                 bttm_axis={{
