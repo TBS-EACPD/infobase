@@ -18,7 +18,7 @@ const create_tooltip = (node) =>
     duration: 0,
     allowHTML: true,
     hideOnClick: false,
-    appendTo: "parent",
+    appendTo: app,
   });
 
 const TooltipActivator = _.isUndefined(MutationObserver)
