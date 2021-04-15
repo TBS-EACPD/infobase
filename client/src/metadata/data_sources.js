@@ -257,7 +257,7 @@ const get_source_links = (source_keys) =>
     .map(
       (source_key) =>
         sources[source_key] && {
-          html: sources[source_key].title(),
+          html: sources[source_key].title,
           href: `#metadata/${source_key}`,
         }
     )

@@ -103,7 +103,7 @@ const ReportDatasets = ({ table, subject }) => {
       .map((source) => {
         return all_sources[source].open_data ? (
           <span key={table.id} className="frow">
-            <a href={"#metadata/" + source}>{all_sources[source].title()}</a>
+            <a href={"#metadata/" + source}>{all_sources[source].title}</a>
             <a
               target="_blank"
               rel="noopener noreferrer"
