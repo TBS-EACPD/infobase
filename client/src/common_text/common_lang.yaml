@@ -733,7 +733,9 @@ covid_measure:
 covid_measures:
   en: COVID-19 Measures
   fr: Mesures COVID-19
-
+covid_measure_spending_auth:
+  en: Spending Authorities by COVID-19 Measure
+  fr: Autorisations de dépenser par mesure au titre de la COVID-19
 
 ##################################
 # text for welcome/netflix panel

@@ -196,7 +196,3 @@ quick_link_gov_spending:
 quick_link_tp_by_region:
   en: Transfer payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
-
-quick_link_covid_estimates:
-  en: Spending Authorities by COVID-19 Measure
-  fr: Autorisations de dépenser par mesure au titre de la COVID-19

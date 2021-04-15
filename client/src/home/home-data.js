@@ -2,7 +2,7 @@ import _ from "lodash";
 
 const featured_content_items = _.compact([
   {
-    text_key: "quick_link_covid_estimates",
+    text_key: "covid_measure_spending_auth",
     href: "#orgs/gov/gov/infograph/covid",
     is_new: "true",
   },
