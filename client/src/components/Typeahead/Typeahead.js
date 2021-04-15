@@ -87,8 +87,6 @@ export class Typeahead extends React.Component {
         results: next_results,
         selection_cursor: default_selection_cursor,
       };
-    } else {
-      return { results: next_results };
     }
   }
   componentDidUpdate(prevProps, prevState) {
