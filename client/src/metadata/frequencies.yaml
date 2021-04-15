@@ -1,11 +1,15 @@
 yearly:
-  en  : Yearly
-  fr  : Annuellement
+  en: Yearly
+  fr: Annuellement
 
 quarterly:
-  en  : Quarterly
-  fr  : Trimestriellement
+  en: Quarterly
+  fr: Trimestriellement
 
 monthly:
-  en  : Monthly
-  fr  : Mensuellement
+  en: Monthly
+  fr: Mensuellement
+
+as_needed:
+  en: As needed
+  fr: Comme requis

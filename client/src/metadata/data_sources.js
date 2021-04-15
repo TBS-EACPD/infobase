@@ -36,6 +36,11 @@ const frequencies = {
       return tm("yearly");
     },
   },
+  as_needed: {
+    get text() {
+      return tm("as_needed");
+    },
+  },
 };
 
 //returns react elements
@@ -279,7 +284,7 @@ const sources = _.chain([
     description() {
       return tm("covid_auth_desc");
     },
-    frequency: frequencies.y,
+    frequency: frequencies.as_needed,
     open_data: {
       en:
         "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
