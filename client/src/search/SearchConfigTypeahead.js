@@ -13,7 +13,6 @@ export class SearchConfigTypeahead extends React.Component {
 
     this.state = {
       query_value: "",
-      current_search_configs: props.search_configs,
     };
   }
 
