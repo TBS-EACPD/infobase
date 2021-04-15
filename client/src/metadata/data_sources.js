@@ -271,6 +271,32 @@ const sources = _.chain([
       ];
     },
   },
+  {
+    key: "COVID_AUTH",
+    title() {
+      return tm("covid_auth_title");
+    },
+    description() {
+      return tm("covid_auth_desc");
+    },
+    frequency: frequencies.y,
+    open_data: {
+      en:
+        "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
+      fr:
+        "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
+    },
+    items() {
+      return [
+        {
+          id: "covid_auth_panel",
+          text: tm("covid_measure_spending_auth"),
+          inline_link:
+            "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+        },
+      ];
+    },
+  },
 ])
   .compact()
   .reduce((sources, source) => ({ ...sources, [source.key]: source }), {})
