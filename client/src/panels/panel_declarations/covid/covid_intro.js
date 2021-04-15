@@ -11,6 +11,8 @@ import { Subject } from "src/models/subject.js";
 
 import { TabLoadingSpinner } from "src/components";
 
+import { get_source_links } from "src/metadata/data_sources.js";
+
 import { YearSelectionTabs } from "./covid_common_components.js";
 import {
   get_date_last_updated_text,
@@ -145,7 +147,7 @@ export const declare_covid_intro_panel = () =>
       requires_years_with_covid_data: true,
       footnotes: ["COVID"],
       title: text_maker("covid_intro_panel_title"),
-      source: (subject) => [],
+      source: (subject) => get_source_links(["COVID_AUTH"]),
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
       render: ({
