@@ -20,31 +20,12 @@ import freq_text from "./frequencies.yaml";
 
 const tm = create_text_maker([data_source_text, freq_text]);
 
-const frequencies = {
-  m: {
-    get text() {
-      return tm("monthly");
-    },
-  },
-  q: {
-    get text() {
-      return tm("quarterly");
-    },
-  },
-  y: {
-    get text() {
-      return tm("yearly");
-    },
-  },
-  as_needed: {
-    get text() {
-      return tm("as_needed");
-    },
-  },
-};
+// BIG HACK WARNING on desc_from_glossary_keys and tables_from_source_key, due to a circular dependency and sloppy timing,
+// neither can be used on-module-load. Any source declarations using these functions need to call them inside getters
+// to defer calls to Table and GlossaryEntry until after both are populated
+// TODO sort the general mess of this code out
 
-//returns react elements
-function desc_from_gloss_keys(...glossary_keys) {
+function desc_from_glossary_keys(...glossary_keys) {
   const definitions = _.map(
     glossary_keys,
     (glossary_key) => GlossaryEntry.lookup(glossary_key).definition
@@ -84,31 +65,24 @@ const infobase_open_data_page = {
 const sources = _.chain([
   {
     key: "PA",
-    description() {
-      return desc_from_gloss_keys("PA");
-    },
-    title() {
-      return tm("pa_title");
-    },
-    frequency: frequencies.y,
+    title: tm("pa_title"),
+    frequency: tm("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
       en: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
       fr: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-fra.html",
     },
-    items() {
+    get description() {
+      return desc_from_glossary_keys("PA");
+    },
+    get items() {
       return _.map(tables_from_source_key("PA"), table_to_row_item);
     },
   },
   {
     key: "ESTIMATES",
-    description() {
-      return desc_from_gloss_keys("MAINS", "SUPPS");
-    },
-    title() {
-      return tm("estimates_title");
-    },
-    frequency: frequencies.q,
+    title: tm("estimates_title"),
+    frequency: tm("quarterly"),
     open_data: infobase_open_data_page,
     report_link: {
       en:
@@ -116,51 +90,45 @@ const sources = _.chain([
       fr:
         "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
     },
-    items() {
+    get description() {
+      return desc_from_glossary_keys("MAINS", "SUPPS");
+    },
+    get items() {
       return _.map(tables_from_source_key("ESTIMATES"), table_to_row_item);
     },
   },
   {
     key: "CFMRS",
-    description() {
-      return desc_from_gloss_keys("CFMRS");
-    },
-    title() {
-      return tm("cfmrs_title");
-    },
+    title: tm("cfmrs_title"),
     open_data: {
       en:
         "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
       fr:
         "http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
     },
-    frequency: frequencies.y,
-    items() {
+    frequency: tm("yearly"),
+    get description() {
+      return desc_from_glossary_keys("CFMRS");
+    },
+    get items() {
       return _.map(tables_from_source_key("CFMRS"), table_to_row_item);
     },
   },
   {
     key: "RPS",
-    description() {
-      return desc_from_gloss_keys("PEOPLE_DATA");
+    title: tm("rps_title"),
+    frequency: tm("yearly"),
+    get description() {
+      return desc_from_glossary_keys("PEOPLE_DATA");
     },
-    title() {
-      return tm("rps_title");
-    },
-    frequency: frequencies.y,
-    items() {
+    get items() {
       return _.map(tables_from_source_key("RPS"), table_to_row_item);
     },
   },
   {
     key: "DP",
-    description() {
-      return desc_from_gloss_keys("DP");
-    },
-    title() {
-      return tm("dp_title");
-    },
-    frequency: frequencies.y,
+    title: tm("dp_title"),
+    frequency: tm("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
       en:
@@ -168,7 +136,10 @@ const sources = _.chain([
       fr:
         "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
     },
-    items() {
+    get description() {
+      return desc_from_glossary_keys("DP");
+    },
+    get items() {
       return _.map(tables_from_source_key("DP"), table_to_row_item).concat([
         {
           id: "dp_results",
@@ -181,13 +152,8 @@ const sources = _.chain([
   },
   {
     key: "DRR",
-    title() {
-      return tm("drr_title");
-    },
-    description() {
-      return desc_from_gloss_keys("DRR");
-    },
-    frequency: frequencies.y,
+    title: tm("drr_title"),
+    frequency: tm("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
       en:
@@ -195,7 +161,10 @@ const sources = _.chain([
       fr:
         "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
     },
-    items() {
+    get description() {
+      return desc_from_glossary_keys("DRR");
+    },
+    get items() {
       return _.map(tables_from_source_key("DRR"), table_to_row_item).concat([
         {
           id: "drr_results",
@@ -208,99 +177,75 @@ const sources = _.chain([
   },
   {
     key: "IGOC",
-    title() {
-      return tm("igoc_source_title");
-    },
-    description() {
-      return tm("igoc_source_desc");
-    },
-    frequency: frequencies.y,
+    title: tm("igoc_source_title"),
+    frequency: tm("yearly"),
     open_data: infobase_open_data_page,
-    items() {
-      return [
-        {
-          id: "igoc",
-          text: tm("igoc_item_name"),
-          inline_link: "#igoc",
-        },
-      ];
-    },
+    description: tm("igoc_source_desc"),
+    items: [
+      {
+        id: "igoc",
+        text: tm("igoc_item_name"),
+        inline_link: "#igoc",
+      },
+    ],
   },
   {
     key: "RTP",
-    title() {
-      return tm("transfer_payments_source_title");
-    },
-    description() {
-      return tm("transfer_payments_source_desc");
-    },
-    frequency: frequencies.y,
+    title: tm("transfer_payments_source_title"),
+    frequency: tm("yearly"),
     open_data: {
       en:
         "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
       fr:
         "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
     },
-    items() {
-      return [
-        {
-          id: "rtp",
-          text: tm("transfer_payments_source_title"),
-          inline_link: rpb_link({
-            table: "orgTransferPaymentsRegion",
-            mode: "details",
-          }),
-        },
-      ];
-    },
+    description: tm("transfer_payments_source_desc"),
+    items: [
+      {
+        id: "rtp",
+        text: tm("transfer_payments_source_title"),
+        inline_link: rpb_link({
+          table: "orgTransferPaymentsRegion",
+          mode: "details",
+        }),
+      },
+    ],
   },
   services_feature_flag && {
     key: "SERVICES",
-    title() {
-      return tm("services_title");
-    },
-    description() {
-      return tm("services_desc");
-    },
-    frequency: frequencies.y,
-    items() {
-      return [
-        {
-          id: "service",
-          text: tm("service_inventory"),
-          external_link:
-            lang === "en"
-              ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
-              : "https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c",
-        },
-      ];
-    },
+    title: tm("services_title"),
+    frequency: tm("yearly"),
+    description: tm("services_desc"),
+    items: [
+      {
+        id: "service",
+        text: tm("service_inventory"),
+        external_link:
+          lang === "en"
+            ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
+            : "https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c",
+      },
+    ],
   },
   {
     key: "COVID_AUTH",
-    title() {
-      return tm("covid_auth_title");
-    },
-    description() {
-      return tm("covid_auth_desc");
-    },
-    frequency: frequencies.as_needed,
+    title: tm("covid_auth_title"),
+    frequency: tm("as_needed"),
+    description: tm("covid_auth_desc"),
     open_data: {
       en:
         "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
       fr:
         "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
     },
-    items() {
-      return [
-        {
-          id: "covid_auth_panel",
-          text: tm("covid_measure_spending_auth"),
-          inline_link:
-            "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
-        },
-      ];
-    },
+    items: [
+      {
+        id: "covid_auth_panel",
+        text: tm("covid_measure_spending_auth"),
+        inline_link:
+          "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+      },
+    ],
   },
 ])
   .compact()
