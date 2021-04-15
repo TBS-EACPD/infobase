@@ -348,6 +348,7 @@ class DetailedProgramSplit extends React.Component {
                 style={{
                   display: "block",
                   margin: "10px auto",
+                  width: "100%",
                 }}
                 className="form-control"
               />
@@ -371,7 +372,7 @@ class DetailedProgramSplit extends React.Component {
                   bottom: 30,
                   left: 215,
                 }}
-                graph_height={divHeight}
+                graph_height={divHeight > 100 ? divHeight : "90px"}
                 colors={(d) => colors(d.id)}
                 bttm_axis={{
                   tickSize: 5,
