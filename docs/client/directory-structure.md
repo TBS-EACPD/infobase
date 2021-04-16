@@ -6,8 +6,8 @@ Listed are the modules/directories that will be encountered in the client `src` 
 - `charts`: this is where the data visualization components exist
 - `common_css`: this is where general css is placed - will probably be importing from here quite often
 - `common_text`: this is where general text is placed - won't be directly importing here, but check here for common text that might be useful before creating text key-value pairs
-- `components`: this is where "reuseable" `React Components` are placed
-- `core`: this is where code that is "core" to the application is stored. This includes the JS equivalents of common css, or "non-reusable" `React Components`. - note that reusable in this case refers to the ability to receive props to render different information, rather than being rendered only once on the website.
+- `components`: this is where `React Components` are placed
+- `core`: this is where code that is "core" to the application is stored.
 - `extended_bootstrap`: this is where extensions to bootstrap css are placed
 - `handlebars`: this is where handlebars, `{{ something }}`, are processed with logic/code. These functions are used within text files `.yaml`.
 - `icons`: this is where run time svgs are stored. That is, the svg markup is handled by React.

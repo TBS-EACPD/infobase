@@ -9,7 +9,7 @@
   * One for a webpack/etc build (`IB_base_watch`)
   * One for a build script, e.g. `IB_q_both` (running on watch, but regularly checked for linter warnings and webpack errors)
   * One for active use with git, npm, grep, etc.
-* Use VS Code, install the Prettier extension. This will reformat your code on save. Note that non-Prettier compliant code will fail in CI
+* Use VS Code, install the Prettier extension. This will reformat your code on save. Note that prior to each push, prettier will run automatically and warn you if there are non-prettier compliant files
 * Use Chrome for prototyping; the Chrome dev tools are still the most friendly option
   * Disable cacheing: open a dev tools window, in the "Network" tab check the "Disable cache" option
 * Testing in IE (still a significant target platform) and on mobile (sees limited use, but that's probably because we don't give it enough care in the first place)
