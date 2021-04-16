@@ -277,6 +277,7 @@ WrappedNivoHBar.defaultProps = {
   bttm_axis: {
     tickSize: 7,
     tickPadding: 10,
+    tickRotation: -20,
   },
   theme: {
     legends: {

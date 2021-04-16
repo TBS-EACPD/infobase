@@ -348,6 +348,7 @@ class DetailedProgramSplit extends React.Component {
                 style={{
                   display: "block",
                   margin: "10px auto",
+                  width: "100%",
                 }}
                 className="form-control"
               />
@@ -377,6 +378,7 @@ class DetailedProgramSplit extends React.Component {
                   tickSize: 5,
                   tickPadding: 5,
                   tickValues: 6,
+                  tickRotation: -20,
                   format: (d) => formatter(d),
                 }}
                 left_axis={{
