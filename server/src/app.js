@@ -1,15 +1,14 @@
-import body_parser from "body-parser";
+import { ApolloServer } from "apollo-server-express";
 import compression from "compression";
 import cors from "cors";
 import express from "express";
-import expressGraphQL from "express-graphql";
 import depthLimit from "graphql-depth-limit";
 
 import { connect_db, get_db_connection_status } from "./db_utils.js";
-import { create_models, create_schema } from "./models/index.js";
+import { create_models, get_schema_deps } from "./models/index.js";
 import {
-  convert_GET_with_compressed_query_to_POST,
-  get_log_object_for_request,
+  convert_GET_with_query_to_POST,
+  get_log_objects_for_request,
 } from "./server_utils.js";
 
 create_models();
@@ -19,10 +18,8 @@ connect_db().catch((err) => {
   // just logging, not trying to recover here. DB connection is reattempted per-request below
 });
 
-const schema = create_schema();
 const app = express();
 
-app.use(body_parser.json({ limit: "50mb" }));
 app.use(compression());
 app.use(
   cors({
@@ -33,7 +30,7 @@ app.use(
       "Authorization",
       "Content-Length",
       "X-Requested-With",
-      "encoded-compressed-query",
+      "gql-query",
     ],
   })
 );
@@ -41,21 +38,22 @@ app.use(
 app.use(function (req, res, next) {
   res.header("cache-control", "public, max-age=31536000");
 
-  // Often want to use GET to leverage http caching, but some of out longer queries are too long for a query parameter
-  // Instead, the client makes a GET with a header containing a compressed and base 64 encoded copy of the query (the query parameter becomes a hash, for cache busting)
-  // In that case, we mutate the request here to recover the query and let the server pretend it received a normal POST
-  if (
-    req.method === "GET" &&
-    !_.isEmpty(req.headers["encoded-compressed-query"])
-  ) {
-    console.log(`Request type: ${req.originalUrl}, GET with compressed query`);
-    convert_GET_with_compressed_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
+  // Often want to use GET to leverage http caching, but query batching is not supported by GET parameters
+  // Instead, the client makes a GET with a header containing the query
+  // For caching, we also add a hash of the query as a GET parameter
+  // Since apollo isn't expecting this type of request, we mutate it to make it look like a normal POST request
+  if (req.method === "GET" && !_.isEmpty(req.headers["gql-query"])) {
+    console.log(`Request type: ${req.originalUrl}, GET with query header`);
+    convert_GET_with_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
   } else {
     console.log(`Request type: ${req.originalUrl}, ${req.method}`);
   }
 
-  process.env.USE_REMOTE_DB &&
-    console.log(JSON.stringify(get_log_object_for_request(req)));
+  if (process.env.USE_REMOTE_DB) {
+    get_log_objects_for_request(req).forEach((log_obj) => {
+      console.log(JSON.stringify(log_obj));
+    });
+  }
 
   next();
 });
@@ -70,18 +68,21 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(
-  expressGraphQL(() => ({
-    graphiql: true,
-    schema: schema,
-    context: {},
-    validationRules: [depthLimit(15)],
-  }))
-);
-
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send("Internal server error");
 });
 
-module.exports = app;
+async function start_apollo() {
+  const { typeDefs, resolvers } = get_schema_deps();
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    validationRules: [depthLimit(15)],
+  });
+  await server.start();
+  server.applyMiddleware({ app });
+  return server;
+}
+
+module.exports = { app, start_apollo };

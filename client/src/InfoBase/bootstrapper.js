@@ -1,6 +1,7 @@
 /* eslint-disable import/order */
 import "dom4";
 import "whatwg-fetch";
+import "string.prototype.replaceall/auto";
 
 import "src/common_css/common_css_index.side-effects.js";
 

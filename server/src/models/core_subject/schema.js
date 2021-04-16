@@ -67,7 +67,6 @@ const schema = `
     level: String
     name: String
     old_name: String
-    is_internal_service: Boolean
     description: String
     activity_code: String
     is_active: Boolean
