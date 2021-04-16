@@ -41,7 +41,7 @@ function create_re_matcher(query, accessors, config_name) {
     !_.isUndefined(obj.id) ? obj.id : nonce + nonce_use_count++
   );
 }
-const memoized_re_matchers = _.memoize(
+export const memoized_re_matchers = _.memoize(
   create_re_matcher,
   (query, accessors, config_name) => query + config_name
 );
