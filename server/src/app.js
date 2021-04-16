@@ -1,9 +1,7 @@
 import { ApolloServer } from "apollo-server-express";
-import body_parser from "body-parser";
 import compression from "compression";
 import cors from "cors";
 import express from "express";
-import expressGraphQL from "express-graphql";
 import depthLimit from "graphql-depth-limit";
 
 import { connect_db, get_db_connection_status } from "./db_utils.js";
@@ -22,8 +20,6 @@ connect_db().catch((err) => {
 
 const app = express();
 
-//TODO: figure out if we need this anymore, since apollo seems to work without it?
-// app.use(body_parser.json({ limit: "50mb" }));
 app.use(compression());
 app.use(
   cors({
