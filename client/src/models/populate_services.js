@@ -157,14 +157,14 @@ export const api_load_has_services = (subject) => {
       case "dept":
         return {
           is_loaded: has_services_is_loaded,
-          id: subject.id,
+          id: String(subject.id),
           query: get_subject_has_services_query("org", "org_id"),
           response_data_accessor: (response) => response.data.root.org,
         };
       case "program":
         return {
           is_loaded: has_services_is_loaded,
-          id: subject.id,
+          id: String(subject.id),
           query: get_subject_has_services_query("program", "id"),
           response_data_accessor: (response) => {
             return response.data.root.program;
@@ -240,7 +240,7 @@ export const useServices = (query_options) => {
   const is_gov = subject.id === "gov";
   const variables = {
     lang,
-    id: subject.id,
+    id: String(subject.id),
   };
 
   const query = get_services_query(query_options);
