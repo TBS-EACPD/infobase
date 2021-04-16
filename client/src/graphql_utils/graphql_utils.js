@@ -53,9 +53,6 @@ export const get_api_url = async () => {
 
 // Makes our GET requests tolerant of long queries, sufficient but may not work for arbitrarily long queries
 export const query_length_tolerant_fetch = async (uri, options) => {
-  // important, this regex lazy matches up to and including FIRST ? occurence, which (in a URI)
-  // should be where the query string starts. I've complicated it slightly just in case there's ever a ? IN
-  // the query string (well, that'd be an encoding error anyway)
   const query = options.body;
   const query_hash = string_hash(query);
 
@@ -67,7 +64,6 @@ export const query_length_tolerant_fetch = async (uri, options) => {
     body: undefined,
     headers: {
       ...options.headers,
-      // "encoded-compressed-query": compressToBase64(query),
       "gql-query": query,
     },
   };
