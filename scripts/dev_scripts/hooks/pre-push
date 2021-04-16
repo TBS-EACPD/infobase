@@ -15,3 +15,5 @@ if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remo
   echo "Double underscore and archived branches can only be pushed to the archive (private) remote!"
   exit 1
 fi
+
+npm run check_format .
