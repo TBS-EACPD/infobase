@@ -112,25 +112,6 @@ jobs:
           command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.js
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
-  format_check:
-    docker:
-      - image: eaadtbs/ib-ci-build:1.3
-        <<: *dockerhub_auth
-    working_directory: "~/InfoBase"
-    steps:
-      - checkout:
-          path: "~/InfoBase"
-
-      - restore_cache:
-          keys:
-            - top-level-dependencies-{{ checksum "package-lock.json" }}
-      - run: 
-          command: |
-            [ -e "node_modules" ] ||  npm ci
-
-      - run: npm run check_format .
-
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
       - image: eaadtbs/ib-ci-build:1.3
@@ -384,9 +365,6 @@ jobs:
 
 workflows:
   version: 2
-  format_check:
-    jobs:
-      - format_check
 
   test_email_backend:
     jobs:
