@@ -16,7 +16,7 @@ const variable_string = JSON.stringify(variables_val);
 const query_object = [{ query, variables: variable_string }];
 
 describe("convert_GET_with_query_to_POST", function () {
-  it("Mutates a GET with an encoded-compressed-query header in to a standard POST with the uncompressed query in its body", () => {
+  it("Mutates a GET with an gql-query header in to a standard POST with the query in its body", () => {
     const GET_with_compressed_query = {
       method: "GET",
       headers: {
