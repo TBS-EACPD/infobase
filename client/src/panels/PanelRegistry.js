@@ -62,14 +62,18 @@ class PanelRegistry {
     const { key, full_key, level, title, is_static } = instance;
 
     if (!_.includes(subjects, level)) {
-      throw `panel ${key}'s level (${level}) is not valid; level is required and must correspond to a valid subject.`;
+      throw new Error(
+        `panel ${key}'s level (${level}) is not valid; level is required and must correspond to a valid subject.`
+      );
     }
     if (!is_static && _.isUndefined(title)) {
-      throw `panel ${key}'s title is undefined; title is required, unless the panel is "static"`;
+      throw new Error(
+        `panel ${key}'s title is undefined; title is required, unless the panel is "static"`
+      );
     }
 
     if (full_key in panels) {
-      throw `panel ${instance.key} has already been defined`;
+      throw new Error(`panel ${instance.key} has already been defined`);
     }
 
     panels[full_key] = instance;

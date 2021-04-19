@@ -178,7 +178,7 @@ export const generate_href = (url) =>
 export function cached_property(elementDescriptor) {
   const { kind, key, descriptor } = elementDescriptor;
   if (kind !== "method") {
-    throw Error("@cached_property decorator can only be used on methods");
+    throw new Error("@cached_property decorator can only be used on methods");
   }
   const og_method = descriptor.value;
   const cache_name = `_${key}_cached_val`;
@@ -196,7 +196,7 @@ export function bound(elementDescriptor) {
   //see https://github.com/mbrowne/bound-decorator/blob/master/src/bound.js
   const { kind, key, descriptor } = elementDescriptor;
   if (kind !== "method") {
-    throw Error("@bound decorator can only be used on methods");
+    throw new Error("@bound decorator can only be used on methods");
   }
   const method = descriptor.value;
   const initializer =

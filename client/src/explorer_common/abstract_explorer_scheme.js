@@ -260,7 +260,7 @@ export class AbstractExplorerScheme {
   }
 
   get_base_hierarchy_selector() {
-    throw "NotImplemented";
+    throw new Error("NotImplemented");
   }
 
   @cached_property

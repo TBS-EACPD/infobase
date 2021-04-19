@@ -69,7 +69,7 @@ const dummy_event_obj = _.chain(["SUBAPP", "SUBJECT_GUID", "MISC1", "MISC2"])
 
 function log_standard_event(dims) {
   if (!initialized) {
-    throw "analytics is uninitialized";
+    throw new Error("analytics is uninitialized");
   }
 
   const send_obj = {
@@ -89,7 +89,7 @@ function log_standard_event(dims) {
 
 function log_page_view(page) {
   if (!initialized) {
-    throw "analytics is uninitialized";
+    throw new Error("analytics is uninitialized");
   }
 
   ga("set", "page", page);

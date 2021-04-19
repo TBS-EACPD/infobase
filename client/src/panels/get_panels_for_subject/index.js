@@ -40,7 +40,7 @@ export function get_panels_for_subject(subject) {
             const panel_obj = PanelRegistry.lookup(key, subject.level);
 
             if (!panel_obj && is_dev) {
-              throw `${key} is not a valid panel`;
+              throw new Error(`${key} is not a valid panel`);
             }
 
             return panel_obj && key;

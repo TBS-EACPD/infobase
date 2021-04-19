@@ -158,7 +158,7 @@ export class App extends React.Component {
                 <Route
                   path="/error-boundary-test"
                   component={() => {
-                    throw "This route throws errors!";
+                    throw new Error("This route throws errors!");
                   }}
                 />
                 <Route path="/metadata/:data_source?" component={MetaData} />

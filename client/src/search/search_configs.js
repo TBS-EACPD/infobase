@@ -127,7 +127,9 @@ const make_orgs_search_config = (options) => {
       case "without_data":
         return Dept.depts_without_data();
       default:
-        throw `Error: make_orgs_search_config option orgs_to_include is an enum, {"all", "with_data", "without_data"}. Given value of "${orgs_to_include}" is invalid.`;
+        throw new Error(
+          `Error: make_orgs_search_config option orgs_to_include is an enum, {"all", "with_data", "without_data"}. Given value of "${orgs_to_include}" is invalid.`
+        );
     }
   })();
   const get_data = () =>
