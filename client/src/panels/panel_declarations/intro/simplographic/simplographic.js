@@ -136,7 +136,7 @@ export const declare_simplographic_panel = () =>
           return (
             <div {...this_row_props}>
               <div
-                className="fcol-md-3"
+                className="col-12 col-lg-3"
                 style={{ flexDirection: "column", justifyContent: "center" }}
               >
                 <div
@@ -151,7 +151,7 @@ export const declare_simplographic_panel = () =>
                 </div>
               </div>
               <section
-                className="fcol-md-9"
+                className="col-12 col-lg-9"
                 style={{ flexDirection: "column" }}
               >
                 <div

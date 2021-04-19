@@ -113,11 +113,11 @@ class HistTPTypes extends React.Component {
     );
 
     return (
-      <div className="frow middle-xs">
-        <div className={`fcol-md-${text_split}`}>
+      <div className="row align-items-center">
+        <div className={`col-12 col-lg-${text_split}`}>
           <div className="medium-panel-text">{text}</div>
         </div>
-        <div className={`fcol-md-${12 - text_split}`}>{content}</div>
+        <div className={`col-12 col-lg-${12 - text_split}`}>{content}</div>
       </div>
     );
   }
@@ -311,8 +311,8 @@ class DetailedHistTPItems extends React.Component {
             ))}
           </select>
         </div>
-        <div className="frow">
-          <div className="fcol-md-4">
+        <div className="row">
+          <div className="col-12 col-lg-4">
             <StandardLegend
               items={legend_items}
               onClick={(id) =>
@@ -333,7 +333,7 @@ class DetailedHistTPItems extends React.Component {
               }
             />
           </div>
-          <div className="fcol-md-8" style={{ position: "relative" }}>
+          <div className="col-12 col-lg-8" style={{ position: "relative" }}>
             {get_line_graph}
           </div>
         </div>

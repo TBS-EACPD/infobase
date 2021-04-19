@@ -119,9 +119,9 @@ class PlannedProgramResources extends React.Component {
     return (
       <div>
         <div className="medium-panel-text mrgn-bttm-lg">{text}</div>
-        <div className="frow">
+        <div className="row">
           {!is_a11y_mode && (
-            <div className="fcol-md-4" style={{ width: "100%" }}>
+            <div className="col-12 col-lg-4" style={{ width: "100%" }}>
               <StandardLegend
                 items={_.map(programs, ({ label }) => ({
                   label,
@@ -140,7 +140,7 @@ class PlannedProgramResources extends React.Component {
               />
             </div>
           )}
-          <div className="fcol-md-8">
+          <div className="col-12 col-lg-8">
             <WrappedNivoBar
               data={data_by_year}
               keys={Object.keys(graph_data)}

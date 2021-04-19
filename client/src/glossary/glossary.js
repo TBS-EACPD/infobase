@@ -76,7 +76,7 @@ const table_links_by_tag = _.chain(tables)
 //id tag is there for legacy styles
 const Glossary_ = ({ active_key, items_by_letter }) => (
   <div id="#glossary-key">
-    <div className="fcol-sm-12 fcol-md-8 offset-lg-2 font-large">
+    <div className="col-md-12 col-12 col-lg-8 offset-lg-2 font-large">
       {!is_a11y_mode && (
         <div id="glossary_search" className="org_list font-xlarge mrgn-bttm-lg">
           <GlossarySearch />

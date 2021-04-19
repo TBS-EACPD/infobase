@@ -67,12 +67,12 @@ function render_non_col_content({ node }) {
             ({ term, def }, ix) =>
               !_.isEmpty(def) && (
                 <Fragment key={ix}>
-                  <hr className="fcol-md-12" />
-                  <dt className="fcol-md-2" style={{ paddingLeft: 0 }}>
+                  <hr className="col-12 col-lg-12" />
+                  <dt className="col-12 col-lg-2" style={{ paddingLeft: 0 }}>
                     {term}
                   </dt>
                   <dd
-                    className="fcol-md-10"
+                    className="col-12 col-lg-10"
                     style={{ paddingRight: "10px", paddingLeft: 0 }}
                   >
                     {def}

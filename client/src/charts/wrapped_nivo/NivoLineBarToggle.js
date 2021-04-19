@@ -181,11 +181,11 @@ export class NivoLineBarToggle extends React.Component {
     };
 
     return (
-      <div className="frow">
+      <div className="row">
         {!is_a11y_mode && (
           <div
             className={classNames(
-              `fcol-xs-12 fcol-md-${legend_col_full_size}`,
+              `col-12 col-lg-${legend_col_full_size}`,
               legend_col_class
             )}
             style={{ width: "100%", position: "relative" }}
@@ -230,7 +230,7 @@ export class NivoLineBarToggle extends React.Component {
         )}
         <div
           className={classNames(
-            `fcol-xs-12 fcol-md-${graph_col_full_size}`,
+            `col-12 col-lg-${graph_col_full_size}`,
             graph_col_class
           )}
           style={{ width: "100%", position: "relative" }}

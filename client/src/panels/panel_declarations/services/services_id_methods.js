@@ -100,7 +100,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
 
   return (
     <div className={"col-container"}>
-      <div className="fcol-md-6 p-20">
+      <div className="col-12 col-lg-6 p-20">
         <TM className="double-pie-text" k="sin_sub_title" el="h4" />
         {is_a11y_mode ? (
           <DisplayTable data={sin_data} column_configs={column_configs} />
@@ -115,7 +115,7 @@ const ServicesIdMethodsPanel = ({ panel_args }) => {
           />
         )}
       </div>
-      <div className="fcol-md-6 p-20">
+      <div className="col-12 col-lg-6 p-20">
         <TM className="double-pie-text" k="cra_sub_title" el="h4" />
         {is_a11y_mode ? (
           <DisplayTable data={cra_data} column_configs={column_configs} />

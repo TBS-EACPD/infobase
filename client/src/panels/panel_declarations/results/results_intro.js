@@ -40,12 +40,12 @@ const ResultsIntroPanel = ({
   const summary_text_args = { subject, is_gov, ...summary_result_counts };
 
   return (
-    <div className="frow middle-xs">
-      <div className="fcol-md-7 medium-panel-text">
+    <div className="row align-items-center">
+      <div className="col-12 col-lg-7 medium-panel-text">
         <TM k="results_intro_text" />
       </div>
       {!is_a11y_mode && (
-        <div className="fcol-md-5">
+        <div className="col-12 col-lg-5">
           <div
             style={{
               padding: "20px",
@@ -62,7 +62,7 @@ const ResultsIntroPanel = ({
           </div>
         </div>
       )}
-      <div className="fcol-md-12 medium-panel-text">
+      <div className="col-12 col-lg-12 medium-panel-text">
         {has_current_dp && (
           <TM
             k="dp_summary_text"

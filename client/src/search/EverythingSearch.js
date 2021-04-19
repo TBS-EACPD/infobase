@@ -183,7 +183,7 @@ const EverythingSearch = withRouter(
       );
 
       return (
-        <div className="fcol-md-12 p-0">
+        <div className="col-12 col-lg-12 p-0">
           <SearchConfigTypeahead
             placeholder={placeholder}
             search_configs={this.get_search_configs()}

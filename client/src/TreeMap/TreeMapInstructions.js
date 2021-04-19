@@ -14,8 +14,8 @@ export class TreeMapInstructions extends React.Component {
   render() {
     return (
       <Fragment>
-        <div className="frow">
-          <div className="fcol-sm-12 fcol-md-12">
+        <div className="row">
+          <div className="col-md-12 col-12 col-lg-12">
             <div
               className="explore_description"
               dangerouslySetInnerHTML={{

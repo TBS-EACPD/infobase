@@ -150,16 +150,16 @@ export const declare_internal_services_panel = () =>
                 }}
               />
             </div>
-            <div className="frow md-middle">
+            <div className="row md-middle">
               {!is_a11y_mode && (
-                <div className="fcol-md-3">
+                <div className="col-12 col-lg-3">
                   <StandardLegend
                     items={legend_items}
                     LegendCheckBoxProps={{ isSolidBox: true }}
                   />
                 </div>
               )}
-              <div className="fcol-md-9">
+              <div className="col-12 col-lg-9">
                 <GraphOverlay>
                   <WrappedNivoBar
                     data={bar_data}

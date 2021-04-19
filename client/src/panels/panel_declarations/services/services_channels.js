@@ -161,9 +161,9 @@ class ServicesChannelsPanel extends React.Component {
             column_configs={services_channels_column_configs}
           />
         ) : (
-          <div className="frow">
+          <div className="row">
             <div
-              className="fcol-md-12"
+              className="col-12 col-lg-12"
               style={{
                 textAlign: "center",
                 fontWeight: 700,
@@ -172,7 +172,7 @@ class ServicesChannelsPanel extends React.Component {
             >
               <TM className="medium-panel-text" k="services_channels_title" />
             </div>
-            <div className="fcol-md-4">
+            <div className="col-12 col-lg-4">
               <StandardLegend
                 items={_.chain(services)
                   .map(({ service_id, name }) => ({
@@ -208,7 +208,7 @@ class ServicesChannelsPanel extends React.Component {
                 }
               />
             </div>
-            <div className="fcol-md-8">
+            <div className="col-12 col-lg-8">
               <WrappedNivoBar
                 data={services_channel_nivo_data}
                 custom_table={
@@ -263,7 +263,7 @@ class ServicesChannelsPanel extends React.Component {
           />
         ) : (
           <HeightClippedGraph clipHeight={300}>
-            <div style={{ marginTop: "50px" }} className="fcol-md-12">
+            <div style={{ marginTop: "50px" }} className="col-12 col-lg-12">
               <div style={{ textAlign: "center" }}>
                 <TM
                   style={{ fontWeight: 700 }}

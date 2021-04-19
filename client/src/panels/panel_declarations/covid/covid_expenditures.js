@@ -94,13 +94,13 @@ const SummaryTab = ({ args: panel_args, data }) => {
   );
 
   return (
-    <div className="frow middle-xs">
+    <div className="row align-items-center">
       <TM
         k={`covid_expenditures_overview_tab_text`}
         args={text_args}
-        className="medium-panel-text fcol-xs-12"
+        className="medium-panel-text col-12"
       />
-      <div className="fcol-sm-12">
+      <div className="col-md-12">
         <TM k={`covid_top_spending_orgs`} el={"h3"} />
         <SummaryTabPie
           data={top_spending_orgs}
@@ -108,7 +108,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
           reverse_layout={false}
         />
       </div>
-      <div className="fcol-xs-12">
+      <div className="col-12">
         <TM k={`covid_top_spending_measures`} el={"h3"} />
         <MediaQuery minWidth={breakpoints.minMediumDevice}>
           {(matches) => (
