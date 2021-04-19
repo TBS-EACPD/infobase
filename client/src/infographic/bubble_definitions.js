@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { prefetch_services } from "src/models/populate_services.js";
 import { create_text_maker } from "src/models/text.js";
 
 import { services_feature_flag } from "src/core/injected_build_constants.ts";
@@ -63,7 +62,6 @@ const base_configs = [
     title: text_maker("services_title"),
     description: text_maker("services_desc"),
     Icon: IconServices,
-    prefetch: () => prefetch_services,
   },
   {
     id: "results",

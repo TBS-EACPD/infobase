@@ -21,7 +21,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesTypesPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
-    subject,
+    org_id: subject.id,
     summary_name: "service_type_summary",
     query_fragment: `
     service_type_summary {
