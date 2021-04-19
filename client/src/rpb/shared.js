@@ -82,7 +82,7 @@ const ReportDatasets = ({ table, subject }) => {
     <span key={"datasets_header"} className="fancy-ul__title">
       <TextMaker text_key="metadata" />
     </span>,
-    <span key={table.id} className="row">
+    <span key={table.id} className="row m-0">
       <span>{table.name}</span>
       <a
         target="_blank"
@@ -102,7 +102,7 @@ const ReportDatasets = ({ table, subject }) => {
     ..._.chain(table.source)
       .map((source) => {
         return all_sources[source].open_data ? (
-          <span key={table.id} className="row">
+          <span key={table.id} className="row m-0">
             <a href={"#metadata/" + source}>{all_sources[source].title}</a>
             <a
               target="_blank"
