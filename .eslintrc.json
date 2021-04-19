@@ -12,6 +12,7 @@
         { "args": "none" }
     ],
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
+    "no-throw-literal": "error",
     "lodash/no-double-unwrap": ["error"],
     "lodash/no-unbound-this": ["error"],
     "lodash/unwrap": ["error"],
