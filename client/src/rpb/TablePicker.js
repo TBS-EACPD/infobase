@@ -214,7 +214,7 @@ class TaggedItemCloud extends React.Component {
           <div className="item-title centerer">{display}</div>
           <div className="item-card-mat">
             <div>
-              <div className="item-card-footer row">
+              <div className="item-card-footer row m-0">
                 <div className="item-tag-container">
                   <span className="sr-only">
                     <u>
