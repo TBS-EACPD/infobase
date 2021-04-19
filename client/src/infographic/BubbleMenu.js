@@ -44,13 +44,12 @@ const BubbleMenu = ({ items, active_item_id }) => {
     return (
       <div style={{ position: "relative" }}>
         <nav className="bubble-menu">
-          {_.map(items, ({ id, title, description, href, Icon, prefetch }) => (
+          {_.map(items, ({ id, title, description, href, Icon }) => (
             <a
               className={classNames(
                 "centerer bubble-button",
                 id === active_item_id && "active"
               )}
-              onMouseEnter={() => prefetch && prefetch()}
               href={href}
               key={id}
             >
