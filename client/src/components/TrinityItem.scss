@@ -17,11 +17,7 @@ $smallMargin: 10px;
   &:hover, &:focus {
     background-color: $tertiaryColor;
   }
-
-  @media(min-width: $minExtraSmallDevice) {
-    flex-basis: 23%;
-    max-width: 23%;
-  }
+  
   @media(min-width: $minSmallDevice) {
     flex-basis: 30%;
     max-width: 24%;
@@ -51,9 +47,6 @@ $smallMargin: 10px;
   }
   @media(max-width: $maxMediumDevice) {
     font-size: 1.15em;
-  }
-  @media(max-width: $minSmallDevice) {
-    font-size: 0.79em;
   }
 }
 
