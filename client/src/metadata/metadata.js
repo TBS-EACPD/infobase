@@ -54,7 +54,7 @@ export default class MetaData extends React.Component {
                   {_.map(
                     source.items,
                     ({ key, id, text, inline_link, external_link }) => (
-                      <span key={key || id} className="frow">
+                      <span key={key || id} className="row">
                         {inline_link ? (
                           <a
                             title={text_maker("rpb_link_text")}
@@ -80,7 +80,7 @@ export default class MetaData extends React.Component {
                     )
                   )}
                 </FancyUL>
-                <div className="frow">
+                <div className="row">
                   <span style={{ alignSelf: "center" }}>
                     <TM k="refresh_freq" /> {source.frequency}
                   </span>

@@ -64,8 +64,8 @@ const PageDetails = withRouter(
       } = this.props;
 
       return (
-        <div className="pagedetails frow">
-          <div className="fcol-md-8 fcol-sm-12">
+        <div className="pagedetails row">
+          <div className="col-12 col-lg-8 col-md-12">
             <button
               className="btn btn-ib-primary"
               onClick={() =>
@@ -99,7 +99,7 @@ const PageDetails = withRouter(
             on_close_callback={() => toggleSurvey(false)}
           />
 
-          <div className="pagedetails__version-number fcol-md-4 fcol-sm-6">
+          <div className="pagedetails__version-number col-12 col-lg-4 col-md-6">
             <VersionNumber />
           </div>
         </div>

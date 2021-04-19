@@ -271,10 +271,10 @@ program_SOBJ_warning:
   en: |
     <div>
       <div class="row" style="margin: 0;">
-        <div class="fcol-md-4 key_concept_term">
+        <div class="col-12 col-lg-4 key_concept_term">
           Totals for all Program expenditures do not match the total government spending
         </div>
-        <div class="fcol-md-8 key_concept_def"> 
+        <div class="col-12 col-lg-8 key_concept_def"> 
           Data for Program expenditures by Standard Object are not available for the Canadian Security Intelligence Service and the Communication Security Establishment. As such, totals for all Program expenditures do not match the total government spending.
         </div>
       </div>
@@ -282,10 +282,10 @@ program_SOBJ_warning:
   fr: |
     <div>
       <div class="row" style="margin: 0;">
-        <div class="fcol-md-4 key_concept_term">
+        <div class="col-12 col-lg-4 key_concept_term">
           Les totaux de toutes les dépenses de programmes ne correspondent pas aux dépenses totales du gouvernement
         </div>
-        <div class="fcol-md-8 key_concept_def"> 
+        <div class="col-12 col-lg-8 key_concept_def"> 
           Les données pour les dépenses de programme par article courant ne sont pas disponibles pour le Service Canadien du renseignement de sécurité et le Centre de la sécurité des télécommunications. À ce titre, les totaux de toutes les dépenses de programmes ne correspondent pas aux dépenses totales du gouvernement.
         </div>
       </div>

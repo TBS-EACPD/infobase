@@ -19,8 +19,8 @@ const LabeledTombstone = ({ labels_and_items }) => (
   <dl className="row tombstone-data-list">
     {_.map(labels_and_items, ([label, item], ix) => (
       <Fragment key={ix}>
-        <dt className="fcol-md-2">{label}</dt>
-        <dd className="fcol-md-10">{item}</dd>
+        <dt className="col-12 col-lg-2">{label}</dt>
+        <dd className="col-12 col-lg-10">{item}</dd>
         {ix !== _.size(labels_and_items) - 1 && (
           <hr style={{ width: "100%" }} />
         )}

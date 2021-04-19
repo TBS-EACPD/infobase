@@ -53,7 +53,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
 
   return (
     <div className={"col-container"}>
-      <div className="services-standards-gauge-container fcol-md-6 p-20">
+      <div className="services-standards-gauge-container col-12 col-lg-6 p-20">
         <TM className="double-pie-text" k="has_standards_text" el="h4" />
         {is_a11y_mode ? (
           <DisplayTable
@@ -95,7 +95,7 @@ const ServicesStandardsPanel = ({ panel_args }) => {
           />
         </h2>
       </div>
-      <div className="services-standards-gauge-container fcol-md-6 p-20">
+      <div className="services-standards-gauge-container col-12 col-lg-6 p-20">
         <TM className="double-pie-text" k="target_met_text" el="h4" />
         {is_a11y_mode ? (
           <DisplayTable

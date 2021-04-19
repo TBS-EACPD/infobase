@@ -200,8 +200,8 @@ export class Canada extends React.Component {
       })
     );
     return (
-      <div className="frow no-container">
-        <div className="fcol-md-3">
+      <div className="row no-container">
+        <div className="col-12 col-lg-3">
           <StandardLegend
             title={text_maker("legend")}
             items={legend_items}
@@ -225,7 +225,7 @@ export class Canada extends React.Component {
             />
           </div>
         </div>
-        <div className="fcol-md-9" style={{ position: "relative" }}>
+        <div className="col-12 col-lg-9" style={{ position: "relative" }}>
           {years.length > 1 && (
             <div
               style={{

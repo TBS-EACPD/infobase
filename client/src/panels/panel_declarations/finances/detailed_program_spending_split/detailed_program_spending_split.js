@@ -146,8 +146,8 @@ class HistoricalProgramBars extends React.Component {
             <TM k="historical_prog_title" />
           </strong>
         </div>
-        <div className="frow">
-          <div className="fcol-md-4" style={{ width: "100%" }}>
+        <div className="row">
+          <div className="col-12 col-lg-4" style={{ width: "100%" }}>
             <StandardLegend
               items={_.chain(data)
                 .sortBy(({ data }) => _.last(data) || 0)
@@ -173,7 +173,7 @@ class HistoricalProgramBars extends React.Component {
               }
             />
           </div>
-          <div className="fcol-md-8">
+          <div className="col-12 col-lg-8">
             <GraphOverlay>
               <WrappedNivoBar
                 data={graph_data}
@@ -330,8 +330,8 @@ class DetailedProgramSplit extends React.Component {
             <TM k="so_spend_by_prog" />
           </strong>
         </div>
-        <div className="frow">
-          <div className="fcol-md-3" style={{ width: "100%" }}>
+        <div className="row">
+          <div className="col-12 col-lg-3" style={{ width: "100%" }}>
             <label>
               <TM k="filter_by_so" />
               <Select
@@ -360,7 +360,7 @@ class DetailedProgramSplit extends React.Component {
               />
             )}
           </div>
-          <div className="fcol-md-9" style={{ width: "100%" }}>
+          <div className="col-12 col-lg-9" style={{ width: "100%" }}>
             <GraphOverlay>
               <WrappedNivoHBar
                 data={graph_ready_data}

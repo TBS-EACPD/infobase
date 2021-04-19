@@ -44,8 +44,8 @@ export default class InfoLab extends React.Component {
             {text_maker("lab_intro_survey_button")}
           </button>
         </div>
-        <div className="frow">
-          <div className="fcol-md-6 fcol-sm-12">
+        <div className="row">
+          <div className="col-12 col-lg-6 col-md-12">
             <div className="lab-content">
               <CardLeftImage
                 tmf={text_maker}
@@ -63,7 +63,7 @@ export default class InfoLab extends React.Component {
               />
             </div>
           </div>
-          <div className="fcol-md-6 fcol-sm-12">
+          <div className="col-12 col-lg-6 col-md-12">
             <div className="lab-content">
               <CardLeftImage
                 tmf={text_maker}

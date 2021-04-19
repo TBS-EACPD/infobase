@@ -113,7 +113,7 @@ const HomeLayout = (props) => (
     </div>
 
     <div className="container">
-      <div className="home-trinity-container frow">
+      <div className="home-trinity-container row">
         <TrinityItem
           href="#orgs/gov/gov/infograph/financial"
           svg={
@@ -169,8 +169,8 @@ const HomeLayout = (props) => (
           title={<TM k="home_results_title" />}
         />
       </div>
-      <div className="frow featured-home-cols">
-        <div className="fcol-md-7 featured-home-cols__additional">
+      <div className="row featured-home-cols">
+        <div className="col-12 col-lg-7 featured-home-cols__additional">
           <div className="col-content">
             <CardLeftImage
               tmf={home_tm}
@@ -203,7 +203,7 @@ const HomeLayout = (props) => (
             />
           </div>
         </div>
-        <div className="fcol-md-5 featured-home-cols__primary">
+        <div className="col-12 col-lg-5 featured-home-cols__primary">
           <h2>
             <TM k="featured_data_title" />
           </h2>
@@ -238,7 +238,7 @@ const HomeLayout = (props) => (
     </div>
 
     <div className="container">
-      <div className="frow">
+      <div className="row">
         <SubAppLayout />
       </div>
     </div>
@@ -249,8 +249,8 @@ const SubAppLayout = (props) => (
   <div className="home-root">
     <div className="container">
       <div className="xtralinks">
-        <div className="frow">
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+        <div className="row">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -265,7 +265,7 @@ const SubAppLayout = (props) => (
               link_href="#partition"
             />
           </div>
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -280,7 +280,7 @@ const SubAppLayout = (props) => (
               link_href="#compare_estimates"
             />
           </div>
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -296,8 +296,8 @@ const SubAppLayout = (props) => (
             />
           </div>
         </div>
-        <div className="frow">
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+        <div className="row">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -312,7 +312,7 @@ const SubAppLayout = (props) => (
               link_href="#treemap"
             />
           </div>
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -323,7 +323,7 @@ const SubAppLayout = (props) => (
               link_href="#tag-explorer"
             />
           </div>
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={
@@ -338,7 +338,7 @@ const SubAppLayout = (props) => (
               link_href="#rpb"
             />
           </div>
-          <div className="fcol-md-3 fcol-sm-6 linkcard">
+          <div className="col-12 col-lg-3 col-md-6 linkcard">
             <CardTopImage
               tmf={home_tm}
               svg={

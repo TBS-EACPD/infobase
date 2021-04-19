@@ -532,9 +532,9 @@ export default class TreeMapper extends React.Component {
               </button>
               <TreeMapInstructions />
               {actual_to_planned_gap_year && <GapYearWarning />}
-              <div className="frow">
-                <div className="fcol-md-10">
-                  <div className="frow">
+              <div className="row">
+                <div className="col-12 col-lg-10">
+                  <div className="row">
                     <div
                       className="TreeMap__TopBar"
                       style={{ minHeight: `${topbar_height}px` }}
@@ -569,7 +569,7 @@ export default class TreeMapper extends React.Component {
                       viz_height={app_height - topbar_height}
                     />
                   </div>
-                  <div className="frow">
+                  <div className="row">
                     <TreeMapLegend
                       perspective={perspective}
                       legend_cols={get_legend_cols(
@@ -589,7 +589,7 @@ export default class TreeMapper extends React.Component {
                   </div>
                 </div>
                 <div
-                  className="fcol-md-2 TreeMap__SideBar"
+                  className="col-12 col-lg-2 TreeMap__SideBar"
                   style={{ padding: "0px", minHeight: `${app_height + 9}px` }}
                 >
                   <TreeMapSidebar

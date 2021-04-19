@@ -246,10 +246,10 @@ class PercentageViz extends React.Component {
 
     return (
       <Fragment>
-        <div className="frow">
-          <div className="fcol-md-1 fcol-xs-0" />
+        <div className="row">
+          <div className="col-12 col-lg-1 " />
           <div
-            className="fcol-md-4 fcol-xs-12"
+            className="col-12 col-lg-4 "
             style={{
               display: "flex",
               flexDirection: "column",
@@ -281,8 +281,8 @@ class PercentageViz extends React.Component {
               <TM k="drr_summary_stats" args={new_summary_text_args} />
             </div>
           </div>
-          <div className="fcol-md-1 fcol-xs-0" />
-          <div className="fcol-md-6 fcol-xs-12 medium-panel-text">
+          <div className="col-12 col-lg-1 " />
+          <div className="col-12 col-lg-6  medium-panel-text">
             <WrappedNivoPie
               data={graph_data}
               graph_height="300px"
@@ -326,13 +326,13 @@ export const DrrSummary = ({
 
   return (
     <Fragment>
-      <div className="frow middle-xs between-md">
-        <div className="fcol-xs-12 medium-panel-text">
+      <div className="row align-items-center justify-content-lg-between">
+        <div className="col-12 medium-panel-text">
           <TM k="drr_summary_text_intro" args={summary_text_args} />
         </div>
       </div>
-      <div className="frow middle-xs between-md">
-        <div className="fcol-md-7 fcol-xs-12 medium-panel-text">
+      <div className="row align-items-center justify-content-lg-between">
+        <div className="col-12 col-lg-7  medium-panel-text">
           <div style={{ padding: "10px" }}>
             <TM k="result_status_explanation" />
             <table>
@@ -351,15 +351,15 @@ export const DrrSummary = ({
             </table>
           </div>
         </div>
-        <div className="fcol-md-5 fcol-xs-12">
+        <div className="col-12 col-lg-5 ">
           <div style={{ padding: "30px" }}>
             <StatusGrid {...counts} />
           </div>
         </div>
       </div>
       <div className="panel-separator" style={{ marginTop: "0px" }} />
-      <div className="frow middle-xs between-md">
-        <div className={"fcol-xs-12"}>
+      <div className="row align-items-center justify-content-lg-between">
+        <div className={"col-12"}>
           <PercentageViz
             summary_text_args={summary_text_args}
             counts={counts}

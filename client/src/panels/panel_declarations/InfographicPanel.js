@@ -197,7 +197,7 @@ const StdPanel = ({ children, containerAlign, ...panelProps }) => {
       return (
         <div
           className={classNames(
-            `fcol-xs-12 fcol-md-${size}`,
+            `col-12 col-lg-${size}`,
             isText && "medium-panel-text",
             !_.isUndefined(extraClasses) && extraClasses
           )}
@@ -213,7 +213,7 @@ const StdPanel = ({ children, containerAlign, ...panelProps }) => {
 
   return (
     <InfographicPanel {...panelProps}>
-      <div className={`frow ${containerAlign || "middle"}-xs`}>
+      <div className={`row ${containerAlign || "middle"}-xs`}>
         {mapped_children}
       </div>
     </InfographicPanel>

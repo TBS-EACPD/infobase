@@ -204,9 +204,9 @@ export const SelectPage = ({
     <tr className="page-selector-controls">
       <td colSpan={num_col}>
         <div style={{ padding: "10px" }}>
-          <div className="frow">
+          <div className="row">
             <div
-              className="fcol-xs-12 d-flex justify-content-center"
+              className="col-12 d-flex justify-content-center"
               style={{ flexWrap: "wrap" }}
             >
               {_.map(page_options, (page_num, index) => (

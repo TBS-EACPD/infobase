@@ -156,8 +156,8 @@ class SobjLine extends React.Component {
     })();
 
     return (
-      <div className="frow">
-        <div className="fcol-md-4">
+      <div className="row">
+        <div className="col-12 col-lg-4">
           <StandardLegend
             items={legend_items}
             onClick={(id) => {
@@ -180,7 +180,7 @@ class SobjLine extends React.Component {
           />
         </div>
         <div
-          className="fcol-md-8"
+          className="col-12 col-lg-8"
           style={{ position: "relative", marginTop: "10px" }}
         >
           {get_line_graph}

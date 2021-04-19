@@ -94,29 +94,29 @@ export class TreeMapLegend extends React.Component {
     return (
       <Fragment>
         <div
-          className="frow"
+          className="row"
           style={{ marginLeft: "0px", marginRight: "0px", width: "100%" }}
         >
-          <div className="fcol-sm-5">
+          <div className="col-md-5">
             <div
-              className="frow"
+              className="row"
               style={{ marginLeft: "0px", marginRight: "0px" }}
             >
               <div
-                className="fcol-sm-4"
+                className="col-md-4"
                 style={{ textAlign: "right", paddingRight: "0px" }}
               >
                 {proportional_block()}
               </div>
-              <div className="fcol-sm-8">
+              <div className="col-md-8">
                 {`${text_maker("treemap_legend_text")} ${
                   size_controls[perspective]
                 }.`}
               </div>
             </div>
           </div>
-          <div className="fcol-sm-7">
-            <div className="frow" style={{ textAlign: "center" }}>
+          <div className="col-md-7">
+            <div className="row" style={{ textAlign: "center" }}>
               <svg width={`${legend_cols.length * 60 + 10}`} height="50">
                 <g className="mutLegendGroup" transform="translate(0,0)">
                   <rect
@@ -132,7 +132,7 @@ export class TreeMapLegend extends React.Component {
                 </g>
               </svg>
             </div>
-            <div className="frow" style={{ textAlign: "center" }}>
+            <div className="row" style={{ textAlign: "center" }}>
               <span style={{ paddingTop: "40px", paddingBottom: "40px" }}>
                 {legend_measure_text}
               </span>

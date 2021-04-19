@@ -185,8 +185,8 @@ const SummaryTab = ({ args: panel_args, data }) => {
   })();
 
   return (
-    <div className="frow middle-xs">
-      <div className="fcol-xs-12 fcol-md-6 medium-panel-text">
+    <div className="row align-items-center">
+      <div className="col-12 col-lg-6 medium-panel-text">
         <TM
           k={`covid_estimates_summary_text_${subject.level}`}
           args={{ ...panel_args, ...additional_text_args }}
@@ -210,7 +210,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
           ))}
         </ul>
       </div>
-      <div className="fcol-xs-12 fcol-md-6">
+      <div className="col-12 col-lg-6">
         {!is_a11y_mode && (
           <StandardLegend
             items={legend_items}
