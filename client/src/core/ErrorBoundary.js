@@ -65,7 +65,7 @@ export class ErrorBoundary extends React.Component {
       testing_for_stale_client: false,
     });
 
-    throw new Error(this.state.error);
+    throw this.state.error;
   }
   render() {
     const { error, testing_for_stale_client } = this.state;
