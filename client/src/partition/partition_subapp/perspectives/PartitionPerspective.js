@@ -19,7 +19,9 @@ export class PartitionPerspective {
     );
 
     if (required_arg_is_missing) {
-      throw `Partition diagram perspective ${args.name} is missing required arguments.`;
+      throw new Error(
+        `Partition diagram perspective ${args.name} is missing required arguments.`
+      );
     } else {
       const optional_args = {
         data_wrapper_node_rules: args.data_wrapper_node_rules || false,

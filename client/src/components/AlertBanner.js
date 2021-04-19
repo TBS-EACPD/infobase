@@ -12,7 +12,9 @@ export const AlertBanner = ({
   style,
 }) => {
   if (banner_class && !_.includes(banner_classes, banner_class)) {
-    throw `AlertBanner received invalid banner_class prop of ${banner_class}`;
+    throw new Error(
+      `AlertBanner received invalid banner_class prop of ${banner_class}`
+    );
   }
 
   const banner_class_name = `alert-${banner_class || "info"}`;

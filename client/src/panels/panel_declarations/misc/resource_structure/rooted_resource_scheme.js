@@ -47,7 +47,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
     switch (subject.level) {
       case "tag": {
         if (!subject.is_lowest_level_tag) {
-          throw "Only lowest_level_tag tags allowed here";
+          throw new Error("Only lowest_level_tag tags allowed here");
         }
 
         return _.chain(subject.programs)

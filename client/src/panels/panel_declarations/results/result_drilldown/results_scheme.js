@@ -34,7 +34,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
           status_key_whitelist: [], //reset filtering when doc changes
         };
       case "set_doc_REJECTED":
-        throw `Ensure loaded for ${state.doc} results failed!`;
+        throw new Error(`Ensure loaded for ${state.doc} results failed!`);
       case "status_click":
         return {
           ...state,

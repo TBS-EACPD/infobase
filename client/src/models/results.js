@@ -245,25 +245,25 @@ const ResultCounts = {
   data: null,
   get_dept_counts(org_id) {
     if (_.isEmpty(this.data)) {
-      throw results_counts_not_loaded_error;
+      throw new Error(results_counts_not_loaded_error);
     }
     return _.chain(this.data).find({ id: org_id.toString() }).value();
   },
   get_gov_counts() {
     if (_.isEmpty(this.data)) {
-      throw results_counts_not_loaded_error;
+      throw new Error(results_counts_not_loaded_error);
     }
     return _.chain(this.data).find({ id: "total" }).value();
   },
   get_data() {
     if (_.isEmpty(this.data)) {
-      throw results_counts_not_loaded_error;
+      throw new Error(results_counts_not_loaded_error);
     }
     return this.data;
   },
   set_data(data) {
     if (!_.isEmpty(this.data)) {
-      throw "data has already been set";
+      throw new Error("data has already been set");
     }
     this.data = data;
   },
@@ -279,19 +279,19 @@ const GranularResultCounts = {
   data: null,
   get_subject_counts(subject_id) {
     if (_.isEmpty(this.data)) {
-      throw granular_results_counts_not_loaded_error;
+      throw new Error(granular_results_counts_not_loaded_error);
     }
     return _.chain(this.data).find({ id: subject_id }).value();
   },
   get_data() {
     if (_.isEmpty(this.data)) {
-      throw granular_results_counts_not_loaded_error;
+      throw new Error(granular_results_counts_not_loaded_error);
     }
     return this.data;
   },
   set_data(data) {
     if (!_.isEmpty(this.data)) {
-      throw "data has already been set";
+      throw new Error("data has already been set");
     }
     this.data = data;
   },
@@ -318,7 +318,9 @@ const get_doc_name = (doc_type, year) => {
   if (doc_type === "drr" && lang === "fr") {
     return `rapport sur les résultats ministériels de ${run_template(year)}`;
   }
-  throw "Error: document type should be 'dp' or 'drr' and lang should be 'en' or 'fr'";
+  throw new Error(
+    "Error: document type should be 'dp' or 'drr' and lang should be 'en' or 'fr'"
+  );
 };
 
 const build_doc_info_objects = (doc_type, docs) =>

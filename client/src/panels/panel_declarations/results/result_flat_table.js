@@ -58,7 +58,9 @@ const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   } else if (parent.data.type === "dr" || parent.data.type === "result") {
     return get_actual_parent(parent, full_results_hierarchy);
   } else {
-    throw `Result component ${indicator_node} has no (sub)program or CR parent`;
+    throw new Error(
+      `Result component ${indicator_node} has no (sub)program or CR parent`
+    );
   }
 };
 

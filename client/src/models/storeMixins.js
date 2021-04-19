@@ -43,7 +43,9 @@ export const exstensibleStoreMixin = (superclass) => {
       if (target_member) {
         completeAssign(target_member, extension_object);
       } else {
-        throw `Can not extend ${id} on ${this}, ${id} is not a registered member`;
+        throw new Error(
+          `Can not extend ${id} on ${this}, ${id} is not a registered member`
+        );
       }
     }
     static extend_or_register(id, object) {
@@ -125,21 +127,29 @@ export const CanHaveServerData = (data_types) => (superclass) => {
         if (store_value_is_unset) {
           this._has_data[data_type] = has_data;
         } else {
-          throw `"${data_type}" has_data already set with value of "${store_value}" for this instance`;
+          throw new Error(
+            `"${data_type}" has_data already set with value of "${store_value}" for this instance`
+          );
         }
       } else {
-        throw `"${data_type}" is not a valid API data type for this subject`;
+        throw new Error(
+          `"${data_type}" is not a valid API data type for this subject`
+        );
       }
     }
     has_data(data_type) {
       if (_.includes(this._API_data_types, data_type)) {
         if (_.isNull(this._has_data[data_type])) {
-          throw `"has data" status for data type "${data_type}" has yet to be loaded!`;
+          throw new Error(
+            `"has data" status for data type "${data_type}" has yet to be loaded!`
+          );
         } else {
           return this._has_data[data_type];
         }
       } else {
-        throw `"${data_type}" is not a valid API data type for this subject`;
+        throw new Error(
+          `"${data_type}" is not a valid API data type for this subject`
+        );
       }
     }
   };
