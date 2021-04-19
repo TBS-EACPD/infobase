@@ -2,6 +2,12 @@ import _ from "lodash";
 import React from "react";
 import MediaQuery from "react-responsive";
 
+import {
+  create_text_maker_component,
+  CardTopImage,
+  ContainerEscapeHatch,
+} from "src/components/index.js";
+
 import { highlightColor } from "src/core/color_defs.js";
 
 import {
@@ -27,12 +33,6 @@ import {
 
 import { get_static_url } from "src/request_utils.js";
 import { EverythingSearch } from "src/search/EverythingSearch.js";
-
-import {
-  create_text_maker_component,
-  CardTopImage,
-  ContainerEscapeHatch,
-} from "../components/index.js";
 
 import { featured_content_items } from "./home-data.js";
 
@@ -95,7 +95,7 @@ const HomeLayout = (props) => (
           <GovInfographicLinkItem
             href="#orgs/gov/gov/infograph/financial"
             svg={
-              <IconExpend
+              <IconFinancesAlt
                 width="100%"
                 color="#FFFFFF"
                 alternate_color={false}
@@ -104,9 +104,20 @@ const HomeLayout = (props) => (
             title={<TM k="home_finance_title" />}
           />
           <GovInfographicLinkItem
+            href="#orgs/gov/gov/infograph/covid"
+            svg={
+              <IconHelpAlt
+                width="100%"
+                color="#FFFFFF"
+                alternate_color={false}
+              />
+            }
+            title={<TM k="covid" />}
+          />
+          <GovInfographicLinkItem
             href="#orgs/gov/gov/infograph/people"
             svg={
-              <IconPeople
+              <IconEmployeesAlt
                 width="100%"
                 color="#FFFFFF"
                 alternate_color={false}
@@ -114,10 +125,23 @@ const HomeLayout = (props) => (
             }
             title={<TM k="home_ppl_title" />}
           />
+          {services_feature_flag && (
+            <GovInfographicLinkItem
+              href="#orgs/gov/gov/infograph/services"
+              svg={
+                <IconServicesHome
+                  width="100%"
+                  color="#FFFFFF"
+                  alternate_color={false}
+                />
+              }
+              title={<TM k="home_services_title" />}
+            />
+          )}
           <GovInfographicLinkItem
             href="#orgs/gov/gov/infograph/results"
             svg={
-              <IconResults
+              <IconClipboardAlt
                 width="100%"
                 color="#FFFFFF"
                 alternate_color={false}
@@ -199,7 +223,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconStructure
+                <IconHierarchy
                   width="100%"
                   color="#2C70C9"
                   alternate_color={false}
@@ -214,7 +238,7 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconHierarchy
+                <IconCompareEstimates
                   width="100%"
                   color="#2C70C9"
                   alternate_color={false}
@@ -257,7 +281,11 @@ const SubAppLayout = (props) => (
             <CardTopImage
               tmf={home_tm}
               svg={
-                <IconDPs width="100%" color="#2C70C9" alternate_color={false} />
+                <IconResultsReport
+                  width="100%"
+                  color="#2C70C9"
+                  alternate_color={false}
+                />
               }
               title_key="home_diff_title"
               text_key="home_diff_text"
