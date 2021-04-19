@@ -8,11 +8,11 @@ export default function define_resource_models(model_singleton) {
       Object.assign(this, obj);
     }
     static model_name() {
-      throw `
+      throw new Error(`
         Error: bad OOP alert, don't use HeadcountModels class directly.
         Need to create a new class extending it that overwrites the static 
         model_name() function with one that returns the name of the actual model.
-      `;
+      `);
     }
     static get_model_name() {
       try {

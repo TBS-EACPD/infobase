@@ -227,7 +227,7 @@ export default function ({ models, loaders }) {
     } else if (subject instanceof Program) {
       id_val = subject.program_id;
     } else {
-      throw "bad subject";
+      throw new Error("bad subject");
     }
     let records = await result_by_subj_loader.load(id_val);
 
