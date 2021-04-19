@@ -4,6 +4,7 @@ node_modules
 client/app/
 client/build/
 client/build_prod/
+client/storybook-static
 */transpiled_build/
 */coverage/
 
