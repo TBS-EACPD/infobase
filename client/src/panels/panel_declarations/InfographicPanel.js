@@ -213,7 +213,7 @@ const StdPanel = ({ children, containerAlign, ...panelProps }) => {
 
   return (
     <InfographicPanel {...panelProps}>
-      <div className={`row ${containerAlign || "middle"}-xs`}>
+      <div className={`row align-items-${containerAlign || "center"}`}>
         {mapped_children}
       </div>
     </InfographicPanel>

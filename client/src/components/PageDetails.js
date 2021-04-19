@@ -64,8 +64,8 @@ const PageDetails = withRouter(
       } = this.props;
 
       return (
-        <div className="pagedetails row">
-          <div className="col-12 col-lg-8 col-md-12">
+        <div className="pagedetails row ml-0 mr-0">
+          <div className="col-12 col-lg-8 col-md-12 p-0">
             <button
               className="btn btn-ib-primary"
               onClick={() =>
