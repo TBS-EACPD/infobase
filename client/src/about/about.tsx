@@ -4,8 +4,7 @@ import React from "react";
 import { IconGrid } from "src/components/IconGrid/IconGrid.js";
 
 import { TM } from "src/components/index.js";
-
-import { LabeledTable } from "src/components/LabeledTable.js";
+import { LabeledTable } from "src/components/LabeledTable";
 
 import { create_text_maker } from "src/models/text.js";
 
@@ -44,7 +43,10 @@ const tech_icon_list = _.chain([
   .map((SVG) => ({ svg: <SVG alternate_color={false} width="1.25em" /> }))
   .value();
 
-export default class About extends React.Component {
+interface AboutProps {
+  toggleSurvey: () => void;
+}
+export default class About extends React.Component<AboutProps, {}> {
   render() {
     const { toggleSurvey } = this.props;
 

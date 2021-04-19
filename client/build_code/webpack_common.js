@@ -47,7 +47,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
   return [
     {
       test: (module_name) =>
-        /\.js$/.test(module_name) && !/\.side-effects\.js$/.test(module_name),
+        /\.(js|ts|tsx)$/.test(module_name) &&
+        !/\.side-effects\.js$/.test(module_name),
       exclude: /node_modules/,
       use: js_module_loader_rules,
       sideEffects: false,
@@ -64,9 +65,17 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       sideEffects: true,
     },
     {
+      test: /\.(ts|tsx)$/,
+      use: [
+        {
+          loader: "ts-loader",
+        },
+      ],
+    },
+    {
       // node modules that specifically require transpilation...
       include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror|d3-scale|@nivo\/bar|@nivo\/circle-packing|@nivo\/core|@nivo\/line|@nivo\/pie|)/,
-      test: /\.js$/,
+      test: /\.(js)$/,
       use: js_module_loader_rules,
     },
     {
@@ -269,6 +278,7 @@ function create_config({
     resolve: {
       fallback: { assert: false },
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
+      extensions: [".ts", ".js", ".tsx"],
     },
   };
 }
