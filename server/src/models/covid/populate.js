@@ -56,7 +56,9 @@ export default async function ({ models }) {
         .uniq()
         .thru((calendar_month) => {
           if (calendar_month.length > 1) {
-            throw `covid_expenditures.csv contains more than one uniqe calendar_month (${calendar_month}) for ${fiscal_year}`;
+            throw new Error(
+              `covid_expenditures.csv contains more than one uniqe calendar_month (${calendar_month}) for ${fiscal_year}`
+            );
           } else {
             return _.first(calendar_month) - 1;
           }
