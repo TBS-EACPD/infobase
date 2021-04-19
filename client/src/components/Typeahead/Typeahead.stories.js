@@ -3,8 +3,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { memoized_re_matchers } from "src/search/search_configs.js";
-
 import { Typeahead } from "./Typeahead.js";
 
 const NA = "North America";
@@ -48,7 +46,7 @@ const data = [
 ];
 
 const filter = (query, datum) =>
-  memoized_re_matchers(query, ["title"], "countries")(datum);
+  _.includes(_.lowerCase(datum.title), _.lowerCase(query));
 
 class TypeaheadWrapper extends React.Component {
   constructor(props) {
