@@ -1,4 +1,57 @@
 import _ from "lodash";
+import React from "react";
+
+import { create_text_maker_component } from "src/components/index.js";
+
+import { services_feature_flag } from "src/core/injected_build_constants.js";
+
+import {
+  IconFinancesAlt,
+  IconEmployeesAlt,
+  IconClipboardAlt,
+  IconHelpAlt,
+  IconServicesHome,
+} from "src/icons/icons.js";
+
+import home_text_bundle from "./home.yaml";
+
+const { TM } = create_text_maker_component(home_text_bundle);
+
+const infographic_link_items = _.compact([
+  {
+    href: "#orgs/gov/gov/infograph/financial",
+    svg: (
+      <IconFinancesAlt width="100%" color="#FFFFFF" alternate_color={false} />
+    ),
+    title: <TM k="home_finance_title" />,
+  },
+  {
+    href: "#orgs/gov/gov/infograph/covid",
+    svg: <IconHelpAlt width="100%" color="#FFFFFF" alternate_color={false} />,
+    title: <TM k="covid" />,
+  },
+  {
+    href: "#orgs/gov/gov/infograph/people",
+    svg: (
+      <IconEmployeesAlt width="100%" color="#FFFFFF" alternate_color={false} />
+    ),
+    title: <TM k="home_ppl_title" />,
+  },
+  services_feature_flag && {
+    href: "#orgs/gov/gov/infograph/services",
+    svg: (
+      <IconServicesHome width="100%" color="#FFFFFF" alternate_color={false} />
+    ),
+    title: <TM k="home_services_title" />,
+  },
+  {
+    href: "#orgs/gov/gov/infograph/results",
+    svg: (
+      <IconClipboardAlt width="100%" color="#FFFFFF" alternate_color={false} />
+    ),
+    title: <TM k="home_results_title" />,
+  },
+]);
 
 const featured_content_items = _.compact([
   {
@@ -35,4 +88,4 @@ const featured_content_items = _.compact([
   },
 ]);
 
-export { featured_content_items };
+export { infographic_link_items, featured_content_items };
