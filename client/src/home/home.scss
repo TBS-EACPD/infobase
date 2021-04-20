@@ -75,13 +75,13 @@ $smallMargin: 10px;
   }
 }
 
-.gov-infographic-links {
+.home-infographic-links {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-.gov-infographic-link-item {
+.home-infographic-link-item {
   @include unstyled-link;
   background-color: darken( $tertiaryColor, 10% );
   border-radius: $standardBorderRadius;
@@ -109,7 +109,7 @@ $smallMargin: 10px;
     margin-bottom: $smallMargin;
   }
 }
-.gov-infographic-link-item__title {
+.home-infographic-link-item__title {
   font-size: 1.75em;
   padding-top: 8px;
   margin-top: auto;
@@ -122,7 +122,7 @@ $smallMargin: 10px;
     width: 100%; /* IE fix */
   }
 }
-.gov-infographic-link-item__icon {
+.home-infographic-link-item__icon {
   width: 40%;
   height: 100%;
   margin-bottom: $smallMargin;
@@ -140,24 +140,33 @@ $smallMargin: 10px;
   }
 }
 
+.home-featured-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-.featured-content-list.list-group > .list-group-item {
-  background-color: lighten($tertiaryColor, 37%);
+  & > .list-group {
+    margin-bottom: $smallMargin;
 
-  &:hover:not(.active), &:focus:not(.active) {
-    color: $textColor;
-    background-color: $backgroundColor;
-  }
-
-  &.active a {
-    color: lighten($tertiaryColor, 37%);
+    & > .list-group-item {
+      background-color: lighten($tertiaryColor, 37%);
+    
+      &:hover:not(.active), &:focus:not(.active) {
+        color: $textColor;
+        background-color: $backgroundColor;
+      }
+    
+      &.active a {
+        color: lighten($tertiaryColor, 37%);
+      }
+    }
   }
 }
-
 .badge.badge--is-new {
   background-color: $highlightColor; 
   color: $textLightColor;
   font-size: 16px;
+  height: 1.5em;
 }
 
 
