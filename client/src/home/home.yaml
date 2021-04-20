@@ -1,4 +1,4 @@
-welcome:
+home_title:
   en: GC InfoBase
   fr: InfoBase du GC
 
@@ -13,10 +13,6 @@ home_desc_meta_attr:
 home_search_bar_title:
   en: Search
   fr: Recherche
-
-check_home_link:
-  en: Check it out!
-  fr: Consultez-le!
 
 home_a11y_desc:
   en: Text-only GC InfoBase home for improved accessibility
@@ -36,6 +32,7 @@ home_a11y_non_a11y_redirect_warning:
 home_gov_infograph:
   en: Government infographics
   fr: Infographies sur le gouvernement
+
 
 ## Subapps section
 subapps_title:

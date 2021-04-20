@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React from "react";
-import MediaQuery from "react-responsive";
 
 import {
   create_text_maker_component,
@@ -39,155 +38,144 @@ export default class Home extends React.Component {
         route_key="start"
         description={home_tm("home_desc_meta_attr")}
       >
-        <MediaQuery minWidth={992}>
-          {(is_large) => (
-            <ContainerEscapeHatch>
-              <HomeLayout
-                is_large={is_large}
-                featured_content_items={featured_content_items}
-              />
-            </ContainerEscapeHatch>
-          )}
-        </MediaQuery>
+        <ContainerEscapeHatch>
+          <div className="home-root">
+            <div
+              className="intro-box"
+              style={{
+                backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
+              }}
+            >
+              <header className="container">
+                <h1>
+                  <TM k="home_title" />
+                </h1>
+                <h2 style={{ marginTop: 0 }}>
+                  <TM k="home_sub_title" />
+                </h2>
+                <div className="flagline">
+                  <IconFlagLine
+                    width="100%"
+                    color="#FFFFFF"
+                    alternate_color={false}
+                  />
+                </div>
+                <div className="home-search-box">
+                  <EverythingSearch />
+                </div>
+              </header>
+            </div>
+
+            <div className="container">
+              <div className="row home-featured-row">
+                <div className="col-lg-7 gov-infographic-links">
+                  {_.map(
+                    infographic_link_items,
+                    ({ href, svg, title, description }, ix) => (
+                      <a
+                        key={ix}
+                        href={href}
+                        className="gov-infographic-link-item"
+                        title={description}
+                      >
+                        <div className="gov-infographic-link-item__title">
+                          {title}
+                        </div>
+                        <div className="gov-infographic-link-item__icon">
+                          {svg}
+                        </div>
+                      </a>
+                    )
+                  )}
+                </div>
+
+                <div className="col-lg-5 featured-home-col">
+                  <h2>
+                    <TM k="featured_data_title" />
+                  </h2>
+                  <ul className="featured-content-list list-group">
+                    {_.map(
+                      featured_content_items,
+                      ({ text_key, href, is_link_out, is_new }, ix) => (
+                        <li
+                          key={ix}
+                          className="list-group-item list-group-item--home d-flex justify-content-between"
+                        >
+                          <a
+                            href={_.has(href, lang) ? href[lang] : href}
+                            target={is_link_out ? "_blank" : "_self"}
+                            rel={is_link_out ? "noopener noreferrer" : ""}
+                          >
+                            <TM k={text_key} />
+                          </a>
+                          {is_new && (
+                            <span className="badge badge--is-new">
+                              <TM k={"new"} />
+                            </span>
+                          )}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="intro-box break-box"
+              style={{
+                backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                borderBottom: `5px solid ${highlightColor}`,
+              }}
+            >
+              <header className="container">
+                <h2 className="h1">
+                  <TM k="subapps_title" />
+                </h2>
+                <h3 className="h2">
+                  <TM k="subapps_text" />
+                </h3>
+              </header>
+            </div>
+            <div className="container">
+              <div className="row">
+                <div className="home-root">
+                  <div className="container">
+                    <div className="subapp-linkcards">
+                      {_.chain(subapp_items)
+                        .chunk(3)
+                        .map((subapp_items, ix) => (
+                          <div key={ix} className="row">
+                            {_.map(
+                              subapp_items,
+                              ({ svg, title_key, text_key, href }, ix) => (
+                                <div
+                                  key={ix}
+                                  className="col-lg-3 col-md-6 subapp-linkcard"
+                                >
+                                  <CardTopImage
+                                    tmf={home_tm}
+                                    svg={svg}
+                                    title_key={title_key}
+                                    text_key={text_key}
+                                    link_href={href}
+                                  />
+                                </div>
+                              )
+                            )}
+                          </div>
+                        ))
+                        .value()}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ContainerEscapeHatch>
       </StandardRouteContainer>
     );
   }
 }
-
-const HomeLayout = (props) => (
-  <div className="home-root">
-    <div
-      className="intro-box"
-      style={{
-        backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
-      }}
-    >
-      <header className="container">
-        <h1>
-          <TM k="welcome" />
-        </h1>
-        <h2 style={{ marginTop: 0 }}>
-          <TM k="home_sub_title" />
-        </h2>
-        <div className="flagline">
-          <IconFlagLine width="100%" color="#FFFFFF" alternate_color={false} />
-        </div>
-        <div className="home-search-box">
-          <EverythingSearch />
-        </div>
-      </header>
-    </div>
-
-    <div className="container">
-      <div className="row home-featured-row">
-        <div className="col-lg-7 gov-infographic-links">
-          {_.map(
-            infographic_link_items,
-            ({ href, svg, title, description }, ix) => (
-              <GovInfographicLinkItem
-                key={ix}
-                href={href}
-                svg={svg}
-                title={title}
-                description={description}
-              />
-            )
-          )}
-        </div>
-        <div className="col-lg-5 featured-home-col">
-          <h2>
-            <TM k="featured_data_title" />
-          </h2>
-          <FeaturedContent items={props.featured_content_items} />
-        </div>
-      </div>
-    </div>
-
-    <div
-      className="intro-box break-box"
-      style={{
-        backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
-        paddingTop: "10px",
-        paddingBottom: "10px",
-        borderBottom: `5px solid ${highlightColor}`,
-      }}
-    >
-      <header className="container">
-        <h2 className="h1">
-          <TM k="subapps_title" />
-        </h2>
-        <h3 className="h2">
-          <TM k="subapps_text" />
-        </h3>
-      </header>
-    </div>
-
-    <div className="container">
-      <div className="row">
-        <div className="home-root">
-          <div className="container">
-            <div className="subapp-linkcards">
-              {_.chain(subapp_items)
-                .chunk(3)
-                .map((subapp_items, ix) => (
-                  <div key={ix} className="row">
-                    {_.map(
-                      subapp_items,
-                      ({ svg, title_key, text_key, href }, ix) => (
-                        <div
-                          key={ix}
-                          className="col-lg-3 col-md-6 subapp-linkcard"
-                        >
-                          <CardTopImage
-                            tmf={home_tm}
-                            svg={svg}
-                            title_key={title_key}
-                            text_key={text_key}
-                            link_href={href}
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
-                ))
-                .value()}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-const GovInfographicLinkItem = ({ svg, title, description, href, onClick }) => (
-  <a
-    href={href}
-    className="gov-infographic-link-item"
-    onClick={onClick}
-    title={description}
-  >
-    <div className="gov-infographic-link-item__title">{title}</div>
-    <div className="gov-infographic-link-item__icon">{svg}</div>
-  </a>
-);
-
-const FeaturedContent = ({ items }) => (
-  <ul className="featured-content-list list-group">
-    {_.map(items, ({ text_key, href, is_link_out, is_new }) => (
-      <li className="list-group-item list-group-item--home d-flex justify-content-between">
-        <a
-          href={_.has(href, lang) ? href[lang] : href}
-          target={is_link_out ? "_blank" : "_self"}
-          rel={is_link_out ? "noopener noreferrer" : ""}
-        >
-          <TM k={text_key} />
-        </a>
-        {is_new && (
-          <span className="badge badge--is-new">
-            <TM k={"new"} />
-          </span>
-        )}
-      </li>
-    ))}
-  </ul>
-);
