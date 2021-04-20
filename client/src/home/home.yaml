@@ -2,51 +2,67 @@ welcome:
   en: GC InfoBase
   fr: InfoBase du GC
 
-home_finance_title:
-  en: Finances
-  fr: Finances
-
-home_ppl_title:
-  en: People
-  fr: Personnel
-
-home_services_title:
-  en: Services
-  fr: Services
-
-home_results_title:
-  en: Results
-  fr: Résultats
-
 home_sub_title:
   en: An interactive tool, transforming complex federal data into simple visual stories for Canadians
   fr: Un outil interactif, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens.
 
-subapps_title:
-  en: Tools
-  fr: Outils
-
-subapps_text:
-  en: Additional tools and sub-applications to explore the data through different lenses
-  fr: Outils et sous-applications supplémentaires en permettant explorer les données selon diverses optiques
-
-dp_home_text:
-  en: The 2021-22 Departmental Plans were tabled on February 26th, 2021. Explore the data to see upcoming departmental priorities
-  fr: Les rapports sur les plans ministériels de 2020-2021 ont été déposés le 25 février 2021. Consultez les données pour voir les priorités ministérielles à venir
-
-drr_home_text:
-  en: The 2019-20 Departmental Results Reports were tabled on December 7th, 2020. Explore the data to see how departments performed against their plans
-  fr: Les rapports sur les résultats ministériels de 2019-2020 ont été déposés le 7 décembre 2020. Consultez les données pour voir le rendement des ministères par rapport aux prévisions.
-
+home_desc_meta_attr:
+  en: The best place to find answers about the federal government like how much is being spent, employee demographics and government results. We use visuals to make complex data a simple story. 
+  fr: Meilleur endroit pour trouver des réponses sur le gouvernement fédéral, comme le montant des dépenses, le profil démographique des employés et les résultats obtenus. Nous utilisons des graphiques pour faire un récit simple de données complexes. 
 
 home_search_bar_title:
   en: Search
   fr: Recherche
 
+check_home_link:
+  en: Check it out!
+  fr: Consultez-le!
+
+## Infographic link text
+home_finance_title:
+  en: Finances
+  fr: Finances
+home_finance_desc:
+  en: Learn about government finances
+  fr: Apprendre au sujet des finances du gouvernement
+
+home_covid_desc:
+  en: TODO
+  fr: TODO
+
+home_ppl_title:
+  en: People
+  fr: Personnel
+home_ppl_desc:
+  en: Learn about government people management
+  fr: Apprendre au sujet de la gestion des personnes du gouvernement
+
+home_services_title:
+  en: Services
+  fr: Services
+home_services_desc:
+  en: Learn about government services
+  fr: En savoir plus sur les services gouvernementaux
+
+home_results_title:
+  en: Results
+  fr: Résultats
+home_results_desc:
+  en: Learn about government results reporting
+  fr: Apprendre au sujet des rapports des résultats du gouvernement
+
+
+## Subapps section
+subapps_title:
+  en: Tools
+  fr: Outils
+subapps_text:
+  en: Additional tools and sub-applications to explore the data through different lenses
+  fr: Outils et sous-applications supplémentaires en permettant explorer les données selon diverses optiques
+
 estimates_comp_home_title:
   en: Estimates Comparison
   fr: Comparaison des budgets principal de dépenses
-
 estimates_comp_home_text:
   transform: [handlebars]
   en: See how the government's initial {{est_in_year}} spending plan compares to the initial plan for {{est_last_year}}
@@ -55,30 +71,16 @@ estimates_comp_home_text_supps:
   en: See how the government's recent supplementary spending plan compares to the initial plan
   fr: Voir comment le plan de dépenses supplémentaire du gouvernement compare à leur plan principal
 
-featured_data_title:
-  en: Featured Content
-  fr: Contenu en vedette
-
 explorer_home_title: 
   en: Tag Explorer
   fr: Explorer les étiquettes
-
 explorer_home_text: 
   en: Explore data from your area of interest by organization, program, or keyword "tag"
   fr: Recherche par organisation, programme ou mot clé pour étudier les données dans le domaine qui vous intéresse
 
-other_ways_of_exploring_title:
-  en: Other ways to explore the data
-  fr: Autres moyens d'exploration des données
-
-dashboard_home:
-  en: Search by topic to build your own customized dashboard
-  fr: Recherche par sujet pour bâtir un tableau de bord personnalisé
-
 home_build_a_report: 
   en: Report Builder
   fr: Outil de création de rapport
-
 report_builder_home_desc:
   en: Create a customized and exportable report of the data you want to analyze
   fr: Créer un rapport adapté et exportable sur les données que vous voulez analyser
@@ -86,7 +88,6 @@ report_builder_home_desc:
 igoc_home_title:
   en: List of Organizations (A to Z)
   fr: Liste des organisations (A à Z)
-
 igoc_home_desc:
   en: Consult a comprehensive listing of federal organizations and interests
   fr: Une liste exhaustive des organisations et intérêts fédéraux
@@ -94,7 +95,6 @@ igoc_home_desc:
 glossary_home_title:
   en: Glossary
   fr: Glossaire
-
 glossary_home_desc:
   en: Search a list of definitions for terms used in GC InfoBase
   fr: Liste interrogeable des définitions pour les termes employés dans InfoBase du GC
@@ -102,52 +102,22 @@ glossary_home_desc:
 metadata_home_title:
   en: Datasets
   fr: Données
-
 metadata_home_desc: 
   en: Find information on, and external links to, GC InfoBase's data sources
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
-whats_new:
-  en: What's new?
-  fr: Quoi de neuf?
-
-home_featured_row_title:
-  en: Featured content
-  fr: Contenu en vedette
-
-home_explore_row_title:
-  en: Search and build
-  fr: Chercher et construire
-
-home_misc_row_title:
-  en: Helpful resources 
-  fr: Ressources utiles
-
-about_home_title:
-  en: About Us
-  fr: À propos de nous
-
-about_home_desc:
-  en: Learn more about our team, principles, data, and technology!
-  fr: En apprendre d'avantage sur notre équipe, nos principes, nos données et technologies!
-
-check_home_link:
-  en: Check it out!
-  fr: Consultez-le!
-
-home_desc_meta_attr:
-  en: The best place to find answers about the federal government like how much is being spent, employee demographics and government results. We use visuals to make complex data a simple story. 
-  fr: Meilleur endroit pour trouver des réponses sur le gouvernement fédéral, comme le montant des dépenses, le profil démographique des employés et les résultats obtenus. Nous utilisons des graphiques pour faire un récit simple de données complexes. 
-
 home_diff_title:
   en: Indicator text comparisons
   fr: Comparaison de texte des indicateurs
-
 home_diff_text:
   en: Compare text portions of indicators between the most recent two departmental plans
   fr: Comparer entre elles des portions de texte d’indicateurs dans les deux plans ministériels les plus récents
 
-## Featured content titles
+
+## Featured content section
+featured_data_title:
+  en: Featured Content
+  fr: Contenu en vedette
 
 quick_link_people_2020:
   en: March 2020 Employee Headcounts and Demographics
