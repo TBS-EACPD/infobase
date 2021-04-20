@@ -10,10 +10,7 @@ import {
 
 import { highlightColor } from "src/core/color_defs.js";
 
-import {
-  lang,
-  services_feature_flag,
-} from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
@@ -23,18 +20,13 @@ import {
   IconHierarchy,
   IconTag,
   IconReport,
-  IconFinancesAlt,
-  IconEmployeesAlt,
-  IconClipboardAlt,
-  IconHelpAlt,
-  IconServicesHome,
   IconFlagLine,
 } from "src/icons/icons.js";
 
 import { get_static_url } from "src/request_utils.js";
 import { EverythingSearch } from "src/search/EverythingSearch.js";
 
-import { featured_content_items } from "./home-data.js";
+import { infographic_link_items, featured_content_items } from "./home-data.js";
 
 import home_text_bundle from "./home.yaml";
 import "./home.scss";
@@ -92,63 +84,14 @@ const HomeLayout = (props) => (
     <div className="container">
       <div className="row home-featured-row">
         <div className="col-lg-7 gov-infographic-links">
-          <GovInfographicLinkItem
-            href="#orgs/gov/gov/infograph/financial"
-            svg={
-              <IconFinancesAlt
-                width="100%"
-                color="#FFFFFF"
-                alternate_color={false}
-              />
-            }
-            title={<TM k="home_finance_title" />}
-          />
-          <GovInfographicLinkItem
-            href="#orgs/gov/gov/infograph/covid"
-            svg={
-              <IconHelpAlt
-                width="100%"
-                color="#FFFFFF"
-                alternate_color={false}
-              />
-            }
-            title={<TM k="covid" />}
-          />
-          <GovInfographicLinkItem
-            href="#orgs/gov/gov/infograph/people"
-            svg={
-              <IconEmployeesAlt
-                width="100%"
-                color="#FFFFFF"
-                alternate_color={false}
-              />
-            }
-            title={<TM k="home_ppl_title" />}
-          />
-          {services_feature_flag && (
+          {_.map(infographic_link_items, ({ href, svg, title }, ix) => (
             <GovInfographicLinkItem
-              href="#orgs/gov/gov/infograph/services"
-              svg={
-                <IconServicesHome
-                  width="100%"
-                  color="#FFFFFF"
-                  alternate_color={false}
-                />
-              }
-              title={<TM k="home_services_title" />}
+              key={ix}
+              href={href}
+              svg={svg}
+              title={title}
             />
-          )}
-          <GovInfographicLinkItem
-            href="#orgs/gov/gov/infograph/results"
-            svg={
-              <IconClipboardAlt
-                width="100%"
-                color="#FFFFFF"
-                alternate_color={false}
-              />
-            }
-            title={<TM k="home_results_title" />}
-          />
+          ))}
         </div>
         <div className="col-lg-5 featured-home-col">
           <h2>
