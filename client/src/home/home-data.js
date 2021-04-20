@@ -103,7 +103,7 @@ const subapp_items = _.compact([
     svg: <IconHierarchy width="100%" color="#2C70C9" alternate_color={false} />,
     title_key: "igoc_home_title",
     text_key: "igoc_home_desc",
-    link_href: "#igoc",
+    href: "#igoc",
   },
   {
     svg: (
@@ -115,19 +115,19 @@ const subapp_items = _.compact([
     ),
     title_key: "estimates_comp_home_title",
     text_key: "estimates_comp_home_text_supps",
-    link_href: "#compare_estimates",
+    href: "#compare_estimates",
   },
   {
     svg: <IconTag width="100%" color="#2C70C9" alternate_color={false} />,
     title_key: "explorer_home_title",
     text_key: "explorer_home_text",
-    link_href: "#tag-explorer",
+    href: "#tag-explorer",
   },
   {
     svg: <IconReport width="100%" color="#2C70C9" alternate_color={false} />,
     title_key: "home_build_a_report",
     text_key: "report_builder_home_desc",
-    link_href: "#rpb",
+    href: "#rpb",
   },
   {
     svg: (
@@ -135,7 +135,7 @@ const subapp_items = _.compact([
     ),
     title_key: "home_diff_title",
     text_key: "home_diff_text",
-    link_href: "#diff",
+    href: "#diff",
   },
 ]);
 

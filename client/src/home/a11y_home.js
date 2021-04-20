@@ -75,11 +75,10 @@ const Home = (props) => {
         {_.map(subapp_items, ({ href, title_key, text_key }) => (
           <section>
             <h3>
-              <a href={href}>
+              <a href={href} aria-label={text_maker(text_key)}>
                 <TM k={title_key} />
               </a>
             </h3>
-            <TM k={text_key} />
           </section>
         ))}
       </section>
