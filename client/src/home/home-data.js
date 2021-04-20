@@ -3,7 +3,10 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/index.js";
 
-import { services_feature_flag } from "src/core/injected_build_constants.js";
+import {
+  services_feature_flag,
+  is_a11y_mode,
+} from "src/core/injected_build_constants.js";
 
 import {
   IconFinancesAlt,
@@ -11,6 +14,11 @@ import {
   IconClipboardAlt,
   IconHelpAlt,
   IconServicesHome,
+  IconResultsReport,
+  IconCompareEstimates,
+  IconHierarchy,
+  IconTag,
+  IconReport,
 } from "src/icons/icons.js";
 
 import home_text_bundle from "./home.yaml";
@@ -93,4 +101,45 @@ const featured_content_items = _.compact([
   },
 ]);
 
-export { infographic_link_items, featured_content_items };
+const subapp_items = _.compact([
+  {
+    svg: <IconHierarchy width="100%" color="#2C70C9" alternate_color={false} />,
+    title_key: "igoc_home_title",
+    text_key: "igoc_home_desc",
+    link_href: "#igoc",
+  },
+  {
+    svg: (
+      <IconCompareEstimates
+        width="100%"
+        color="#2C70C9"
+        alternate_color={false}
+      />
+    ),
+    title_key: "estimates_comp_home_title",
+    text_key: "estimates_comp_home_text_supps",
+    link_href: "#compare_estimates",
+  },
+  {
+    svg: <IconTag width="100%" color="#2C70C9" alternate_color={false} />,
+    title_key: "explorer_home_title",
+    text_key: "explorer_home_text",
+    link_href: "#tag-explorer",
+  },
+  {
+    svg: <IconReport width="100%" color="#2C70C9" alternate_color={false} />,
+    title_key: "home_build_a_report",
+    text_key: "report_builder_home_desc",
+    link_href: "#rpb",
+  },
+  {
+    svg: (
+      <IconResultsReport width="100%" color="#2C70C9" alternate_color={false} />
+    ),
+    title_key: "home_diff_title",
+    text_key: "home_diff_text",
+    link_href: "#diff",
+  },
+]);
+
+export { infographic_link_items, featured_content_items, subapp_items };
