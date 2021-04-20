@@ -14,19 +14,16 @@ import { lang } from "src/core/injected_build_constants.js";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import {
-  IconResultsReport,
-  IconCompareEstimates,
-  IconHierarchy,
-  IconTag,
-  IconReport,
-  IconFlagLine,
-} from "src/icons/icons.js";
+import { IconFlagLine } from "src/icons/icons.js";
 
 import { get_static_url } from "src/request_utils.js";
 import { EverythingSearch } from "src/search/EverythingSearch.js";
 
-import { infographic_link_items, featured_content_items } from "./home-data.js";
+import {
+  infographic_link_items,
+  featured_content_items,
+  subapp_items,
+} from "./home-data.js";
 
 import home_text_bundle from "./home.yaml";
 import "./home.scss";
@@ -127,7 +124,36 @@ const HomeLayout = (props) => (
 
     <div className="container">
       <div className="row">
-        <SubAppLayout />
+        <div className="home-root">
+          <div className="container">
+            <div className="subapp-linkcards">
+              {_.chain(subapp_items)
+                .chunk(3)
+                .map((subapp_items, ix) => (
+                  <div key={ix} className="row">
+                    {_.map(
+                      subapp_items,
+                      ({ svg, title_key, text_key, link_href }, ix) => (
+                        <div
+                          key={ix}
+                          className="col-lg-3 col-md-6 subapp-linkcard"
+                        >
+                          <CardTopImage
+                            tmf={home_tm}
+                            svg={svg}
+                            title_key={title_key}
+                            text_key={text_key}
+                            link_href={link_href}
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                ))
+                .value()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -164,88 +190,4 @@ const FeaturedContent = ({ items }) => (
       </li>
     ))}
   </ul>
-);
-
-const SubAppLayout = (props) => (
-  <div className="home-root">
-    <div className="container">
-      <div className="subapp-linkcards">
-        <div className="row">
-          <div className="col-lg-3 col-md-6 subapp-linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconHierarchy
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
-              }
-              title_key="igoc_home_title"
-              text_key="igoc_home_desc"
-              link_href="#igoc"
-            />
-          </div>
-          <div className="col-lg-3 col-md-6 subapp-linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconCompareEstimates
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
-              }
-              title_key="estimates_comp_home_title"
-              text_key="estimates_comp_home_text_supps"
-              link_href="#compare_estimates"
-            />
-          </div>
-          <div className="col-12 col-lg-3 col-md-6 subapp-linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconTag width="100%" color="#2C70C9" alternate_color={false} />
-              }
-              title_key="explorer_home_title"
-              text_key="explorer_home_text"
-              link_href="#tag-explorer"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 col-md-6 subapp-linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconReport
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
-              }
-              title_key="home_build_a_report"
-              text_key="report_builder_home_desc"
-              link_href="#rpb"
-            />
-          </div>
-          <div className="col-12 col-lg-3 col-md-6 subapp-linkcard">
-            <CardTopImage
-              tmf={home_tm}
-              svg={
-                <IconResultsReport
-                  width="100%"
-                  color="#2C70C9"
-                  alternate_color={false}
-                />
-              }
-              title_key="home_diff_title"
-              text_key="home_diff_text"
-              link_href="#diff"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 );
