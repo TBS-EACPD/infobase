@@ -11,13 +11,9 @@ import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { infographic_link_items, featured_content_items } from "./home-data.js";
 
-import home_text2 from "./a11y-home.yaml";
-import home_text1 from "./home.yaml";
+import home_text from "./home.yaml";
 
-const { text_maker, TM } = create_text_maker_component([
-  home_text1,
-  home_text2,
-]);
+const { text_maker, TM } = create_text_maker_component([home_text]);
 
 const Home = (props) => {
   const {
@@ -44,7 +40,7 @@ const Home = (props) => {
       )}
       <section>
         <h2>
-          <TM k="home_a11y_gov_infograph" />
+          <TM k="home_gov_infograph" />
         </h2>
         <ul>
           {_.map(infographic_link_items, ({ href, description }, ix) => (
@@ -56,7 +52,7 @@ const Home = (props) => {
       </section>
       <section>
         <h2>
-          <TM k="home_a11y_subject_section_title" />
+          <TM k="subapps_text" />
         </h2>
 
         <section>
