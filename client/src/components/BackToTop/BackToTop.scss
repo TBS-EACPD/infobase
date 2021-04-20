@@ -26,7 +26,7 @@
     bottom: 30px;
   }
 
-  @media(max-width: $maxMediumDevice) {
+  @media(max-width: $maxSmallDevice) {
     width: 90%;
     margin-left: 5%;
     position: fixed;
