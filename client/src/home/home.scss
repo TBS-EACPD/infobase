@@ -79,13 +79,12 @@ $smallMargin: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
 .gov-infographic-link-item {
   @include unstyled-link;
   background-color: darken( $tertiaryColor, 10% );
   border-radius: $standardBorderRadius;
-  margin-bottom: $smallMargin;
   cursor: pointer;
 
   display: flex;
@@ -100,12 +99,14 @@ $smallMargin: 10px;
   @media(min-width: $minExtraSmallDevice) {
     flex-basis: 40%;
     max-width: 40%;
+    margin: $smallMargin;
   }
   @media(max-width: $maxExtraSmallDevice) {
     flex-flow: row-reverse;
     justify-content: space-around;
     flex-basis: 100%;
     max-width: 100%;
+    margin-bottom: $smallMargin;
   }
 }
 .gov-infographic-link-item__title {
