@@ -84,14 +84,18 @@ const HomeLayout = (props) => (
     <div className="container">
       <div className="row home-featured-row">
         <div className="col-lg-7 gov-infographic-links">
-          {_.map(infographic_link_items, ({ href, svg, title }, ix) => (
-            <GovInfographicLinkItem
-              key={ix}
-              href={href}
-              svg={svg}
-              title={title}
-            />
-          ))}
+          {_.map(
+            infographic_link_items,
+            ({ href, svg, title, description }, ix) => (
+              <GovInfographicLinkItem
+                key={ix}
+                href={href}
+                svg={svg}
+                title={title}
+                description={description}
+              />
+            )
+          )}
         </div>
         <div className="col-lg-5 featured-home-col">
           <h2>
@@ -129,8 +133,13 @@ const HomeLayout = (props) => (
   </div>
 );
 
-const GovInfographicLinkItem = ({ svg, title, href, onClick }) => (
-  <a href={href} className="gov-infographic-link-item" onClick={onClick}>
+const GovInfographicLinkItem = ({ svg, title, description, href, onClick }) => (
+  <a
+    href={href}
+    className="gov-infographic-link-item"
+    onClick={onClick}
+    title={description}
+  >
     <div className="gov-infographic-link-item__title">{title}</div>
     <div className="gov-infographic-link-item__icon">{svg}</div>
   </a>

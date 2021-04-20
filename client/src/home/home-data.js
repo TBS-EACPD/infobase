@@ -15,7 +15,7 @@ import {
 
 import home_text_bundle from "./home.yaml";
 
-const { TM } = create_text_maker_component(home_text_bundle);
+const { TM, text_maker } = create_text_maker_component(home_text_bundle);
 
 const infographic_link_items = _.compact([
   {
@@ -24,11 +24,13 @@ const infographic_link_items = _.compact([
       <IconFinancesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: <TM k="home_finance_title" />,
+    description: text_maker("home_finance_desc"),
   },
   {
     href: "#orgs/gov/gov/infograph/covid",
     svg: <IconHelpAlt width="100%" color="#FFFFFF" alternate_color={false} />,
     title: <TM k="covid" />,
+    description: text_maker("home_covid_desc"),
   },
   {
     href: "#orgs/gov/gov/infograph/people",
@@ -36,6 +38,7 @@ const infographic_link_items = _.compact([
       <IconEmployeesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: <TM k="home_ppl_title" />,
+    description: text_maker("home_ppl_desc"),
   },
   services_feature_flag && {
     href: "#orgs/gov/gov/infograph/services",
@@ -43,6 +46,7 @@ const infographic_link_items = _.compact([
       <IconServicesHome width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: <TM k="home_services_title" />,
+    description: text_maker("home_services_desc"),
   },
   {
     href: "#orgs/gov/gov/infograph/results",
@@ -50,6 +54,7 @@ const infographic_link_items = _.compact([
       <IconClipboardAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: <TM k="home_results_title" />,
+    description: text_maker("home_results_desc"),
   },
 ]);
 
