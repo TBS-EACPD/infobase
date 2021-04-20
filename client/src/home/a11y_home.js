@@ -9,7 +9,11 @@ import {
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { infographic_link_items, featured_content_items } from "./home-data.js";
+import {
+  infographic_link_items,
+  featured_content_items,
+  subapp_items,
+} from "./home-data.js";
 
 import home_text from "./home.yaml";
 
@@ -52,59 +56,32 @@ const Home = (props) => {
       </section>
       <section>
         <h2>
+          <TM k="featured_data_title" />
+        </h2>
+        <ul>
+          {_.map(featured_content_items, ({ text_key, href }) => (
+            <li key={text_key}>
+              <a href={href}>
+                <TM k={text_key} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h2>
           <TM k="subapps_text" />
         </h2>
-
-        <section>
-          <h3>
-            <a href="#igoc/">
-              <TM k="igoc_home_title" />
-            </a>
-          </h3>
-          <TM k="igoc_home_desc" />
-        </section>
-
-        <section>
-          <h3>
-            <a href="#resource-explorer/">
-              <TM k="explorer_home_title" />
-            </a>
-          </h3>
-          <TM k="explorer_home_text" />
-        </section>
-
-        <section>
-          <h3>
-            <a href="#rpb/">
-              <TM k="home_build_a_report" />
-            </a>
-          </h3>
-          <TM k="report_builder_home_desc" />
-        </section>
-
-        <section>
-          <h3>
-            <a href={"#diff/"}>
-              <TM k="home_diff_title" />
-            </a>
-          </h3>
-          <TM k="home_diff_text" />
-        </section>
-
-        <section>
-          <h3>
-            <TM k="featured_data_title" />
-          </h3>
-          <ul>
-            {_.map(featured_content_items, ({ text_key, href }) => (
-              <li key={text_key}>
-                <a href={href}>
-                  <TM k={text_key} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
+        {_.map(subapp_items, ({ href, title_key, text_key }) => (
+          <section>
+            <h3>
+              <a href={href}>
+                <TM k={title_key} />
+              </a>
+            </h3>
+            <TM k={text_key} />
+          </section>
+        ))}
       </section>
     </StandardRouteContainer>
   );
