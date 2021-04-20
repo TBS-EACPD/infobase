@@ -133,7 +133,7 @@ const HomeLayout = (props) => (
                   <div key={ix} className="row">
                     {_.map(
                       subapp_items,
-                      ({ svg, title_key, text_key, link_href }, ix) => (
+                      ({ svg, title_key, text_key, href }, ix) => (
                         <div
                           key={ix}
                           className="col-lg-3 col-md-6 subapp-linkcard"
@@ -143,7 +143,7 @@ const HomeLayout = (props) => (
                             svg={svg}
                             title_key={title_key}
                             text_key={text_key}
-                            link_href={link_href}
+                            link_href={href}
                           />
                         </div>
                       )
