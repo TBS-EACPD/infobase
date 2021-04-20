@@ -31,7 +31,7 @@ export const set_pinned_content_local_storage = (local_storage_name, value) => {
     localStorage.setItem(local_storage_name, value);
 };
 
-export class PinnedContent extends React.Component {
+class _PinnedContent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -84,7 +84,7 @@ export class PinnedContent extends React.Component {
 
   componentDidMount() {
     this.set_is_pinned(this.is_pinned);
-    !is_a11y_mode && this.update_content_height();
+    this.update_content_height();
   }
 
   componentWillUnmount() {
@@ -95,7 +95,7 @@ export class PinnedContent extends React.Component {
     const { content_height } = this.state;
     const { children } = this.props;
 
-    return !is_a11y_mode ? (
+    return (
       <ReactResizeDetector handleWidth>
         {({ width }) => (
           <InView>
@@ -176,12 +176,20 @@ export class PinnedContent extends React.Component {
           </InView>
         )}
       </ReactResizeDetector>
-    ) : (
-      children
     );
   }
 }
-PinnedContent.defaultProps = {
+_PinnedContent.defaultProps = {
   height_update_delay: 1000,
   default_pin_state: has_local_storage,
 };
+
+export class PinnedContent extends React.Component {
+  render() {
+    return is_a11y_mode ? (
+      this.props.children
+    ) : (
+      <_PinnedContent {...this.props} />
+    );
+  }
+}
