@@ -84,7 +84,7 @@ export class PinnedContent extends React.Component {
 
   componentDidMount() {
     this.set_is_pinned(this.is_pinned);
-    this.update_content_height();
+    !is_a11y_mode && this.update_content_height();
   }
 
   componentWillUnmount() {
