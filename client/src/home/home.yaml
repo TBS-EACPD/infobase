@@ -33,43 +33,9 @@ home_a11y_non_a11y_redirect_warning:
     Les pages sans équivalent textuel servent à visualiser des données et ne constituent pas la seule présentation de ces données dans InfoBase du GC.
     Toute information présentée sur la page à partir de laquelle vous avez été redirigé se trouve dans le [générateur de rapports](#rpb).
 
-## Infographic link text
 home_gov_infograph:
   en: Government infographics
   fr: Infographies sur le gouvernement
-
-home_finance_title:
-  en: Finances
-  fr: Finances
-home_finance_desc:
-  en: Learn about government finances
-  fr: Apprendre au sujet des finances du gouvernement
-
-home_covid_desc:
-  en: TODO
-  fr: TODO
-
-home_ppl_title:
-  en: People
-  fr: Personnel
-home_ppl_desc:
-  en: Learn about government people management
-  fr: Apprendre au sujet de la gestion des personnes du gouvernement
-
-home_services_title:
-  en: Services
-  fr: Services
-home_services_desc:
-  en: Learn about government services
-  fr: En savoir plus sur les services gouvernementaux
-
-home_results_title:
-  en: Results
-  fr: Résultats
-home_results_desc:
-  en: Learn about government results reporting
-  fr: Apprendre au sujet des rapports des résultats du gouvernement
-
 
 ## Subapps section
 subapps_title:

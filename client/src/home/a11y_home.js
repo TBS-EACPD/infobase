@@ -47,9 +47,11 @@ const Home = (props) => {
           <TM k="home_gov_infograph" />
         </h2>
         <ul>
-          {_.map(infographic_link_items, ({ href, description }, ix) => (
+          {_.map(infographic_link_items, ({ href, title, description }, ix) => (
             <li key={ix}>
-              <a href={href}>{description}</a>
+              <a href={href} aria-label={description}>
+                {title}
+              </a>
             </li>
           ))}
         </ul>

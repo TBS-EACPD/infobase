@@ -18,9 +18,11 @@ import {
   IconReport,
 } from "src/icons/icons.js";
 
-import home_text_bundle from "./home.yaml";
+import infographic_sections_text_bundle from "src/infographic/bubble_definitions.yaml";
 
-const { TM, text_maker } = create_text_maker_component(home_text_bundle);
+const { text_maker } = create_text_maker_component([
+  infographic_sections_text_bundle,
+]);
 
 const infographic_link_items = _.compact([
   {
@@ -28,38 +30,38 @@ const infographic_link_items = _.compact([
     svg: (
       <IconFinancesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
-    title: <TM k="home_finance_title" />,
-    description: text_maker("home_finance_desc"),
+    title: text_maker("financial_title"),
+    description: text_maker("financial_desc"),
   },
   {
     href: "#orgs/gov/gov/infograph/covid",
     svg: <IconHelpAlt width="100%" color="#FFFFFF" alternate_color={false} />,
-    title: <TM k="covid" />,
-    description: text_maker("home_covid_desc"),
+    title: text_maker("covid"),
+    description: text_maker("covid_desc"),
   },
   {
     href: "#orgs/gov/gov/infograph/people",
     svg: (
       <IconEmployeesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
-    title: <TM k="home_ppl_title" />,
-    description: text_maker("home_ppl_desc"),
+    title: text_maker("people_title"),
+    description: text_maker("people_desc"),
   },
   services_feature_flag && {
     href: "#orgs/gov/gov/infograph/services",
     svg: (
       <IconServicesHome width="100%" color="#FFFFFF" alternate_color={false} />
     ),
-    title: <TM k="home_services_title" />,
-    description: text_maker("home_services_desc"),
+    title: text_maker("results_title"),
+    description: text_maker("results_desc"),
   },
   {
     href: "#orgs/gov/gov/infograph/results",
     svg: (
       <IconClipboardAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
-    title: <TM k="home_results_title" />,
-    description: text_maker("home_results_desc"),
+    title: text_maker("services_title"),
+    description: text_maker("services_desc"),
   },
 ]);
 
