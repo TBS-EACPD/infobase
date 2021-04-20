@@ -4,7 +4,7 @@ of the advanced search for mobile */
 @import 'src/common_css/common-variables';
 
 .infographic-search-container > div > a.btn {
-  @media(max-width:$maxMediumDevice){
+  @media(max-width:$maxLargeDevice){
       display: inline-block;
       width: auto;
       padding: 10px;
@@ -53,7 +53,7 @@ of the advanced search for mobile */
 }
 
 
-@media(min-width: $minLargeDevice){
+@media(min-width: $minExtraLargeDevice){
   .super-wide-container-parent{
     display:flex; 
     flex-direction:column; 
@@ -61,7 +61,7 @@ of the advanced search for mobile */
   }
 }
 
-@media(min-width: $minLargeDevice){
+@media(min-width: $minExtraLargeDevice){
   .super-wide-container {
     width: 90vw; 
     overflow-x: visible;

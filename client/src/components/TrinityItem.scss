@@ -18,12 +18,12 @@ $smallMargin: 10px;
     background-color: $tertiaryColor;
   }
   
-  @media(min-width: $minSmallDevice) {
+  @media(min-width: $minMediumDevice) {
     flex-basis: 30%;
     max-width: 24%;
   }
 
-  @media(max-width: $maxSmallDevice) {
+  @media(max-width: $maxMediumDevice) {
     flex-flow: row-reverse;
     justify-content: space-around;
     &:first-child {
@@ -42,10 +42,10 @@ $smallMargin: 10px;
   text-transform: uppercase;
   color: $textLightColor;
 
-  @media(min-width: $minSmallDevice) {
+  @media(min-width: $minMediumDevice) {
     width: 100%; /* IE fix */
   }
-  @media(max-width: $maxMediumDevice) {
+  @media(max-width: $maxLargeDevice) {
     font-size: 1.15em;
   }
 }
@@ -55,7 +55,7 @@ $smallMargin: 10px;
   height: 100%;
   margin-bottom: $smallMargin;
 
-  @media(max-width: $maxSmallDevice) {
+  @media(max-width: $maxMediumDevice) {
     width: 5em;
     height: 5em;
     margin: $smallMargin;

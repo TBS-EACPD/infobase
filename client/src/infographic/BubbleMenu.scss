@@ -45,7 +45,7 @@
   background-size: 100%;
 }
 
-@media (min-width: $minMediumDevice){
+@media (min-width: $minLargeDevice){
   .bubble-menu {
     display: flex;
     flex-direction:row;
@@ -75,7 +75,7 @@
 }
 
 
-@media (max-width: $maxMediumDevice){
+@media (max-width: $maxLargeDevice){
   .bubble-menu {
     display: flex;
     flex-direction: column;

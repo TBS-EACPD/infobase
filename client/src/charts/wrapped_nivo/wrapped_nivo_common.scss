@@ -3,10 +3,10 @@
 .nivo-tooltip {
   width: 100%;
   border-collapse: collapse;
-  @media(min-width: $minSmallDevice){
+  @media(min-width: $minMediumDevice){
     font-size: inherit;
   }
-  @media(max-width: $maxSmallDevice){
+  @media(max-width: $maxMediumDevice){
     font-size: 14px;
   }
 }

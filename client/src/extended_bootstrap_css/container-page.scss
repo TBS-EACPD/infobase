@@ -9,7 +9,7 @@
   padding: 1.15rem;
   line-height: 0;
 }
-@media(max-width: $maxSmallDevice){
+@media(max-width: $maxMediumDevice){
   #ib-site-header {
     padding: 20px 0 0 0;
     line-height: normal;
@@ -22,7 +22,7 @@
   max-height: 25px;
   width: 100%;
 }
-@media(min-width: $minExtraSmallDevice){
+@media(min-width: $minSmallDevice){
   .canada-logo {
     max-height: 40px;
     max-width: 50vw;
@@ -69,14 +69,14 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   & > a {
-    @media(min-width:$minSmallDevice){
+    @media(min-width:$minMediumDevice){
       margin-left: 10px;
     }
   }
-  @media(max-width:$minMediumDevice) and (min-width:$minSmallDevice){
+  @media(max-width:$minLargeDevice) and (min-width:$minMediumDevice){
     justify-content: flex-start;
   }
-  @media(max-width: $maxSmallDevice){
+  @media(max-width: $maxMediumDevice){
     justify-content: space-between;
   }
 }

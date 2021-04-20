@@ -41,16 +41,16 @@
       Fixes Safari-specific bug, does nothing on other browsers. 
       Only needed on larger screens. 
     */
-    @media (min-width:$minLargeDevice){
+    @media (min-width:$minExtraLargeDevice){
       content: none!important;
     }
   }
   
   .panel-heading {
-    @media (min-width:$minLargeDevice){
+    @media (min-width:$minExtraLargeDevice){
       padding: 15px 15px 12px; /* bootstrap default is 10 15 */
     }
-    @media (max-width:$maxLargeDevice){
+    @media (max-width:$maxExtraLargeDevice){
       /* on mobile, we need way less padding */
       padding-top: 10px;
       padding-bottom: 10px;

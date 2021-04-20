@@ -156,7 +156,7 @@ export class WrappedNivoCircleProportion extends React.Component {
         tooltip_container_class="proportional-bubble-tooltip"
         TooltipContentComponent={({ tooltip_item }) => (
           <Fragment>
-            <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+            <MediaQuery minDeviceWidth={breakpoints.minMediumDevice}>
               <td className="nivo-tooltip__label">{tooltip_item.name}</td>
               <td className="nivo-tooltip__value">
                 {value_formatter(tooltip_item.value)}
@@ -167,7 +167,7 @@ export class WrappedNivoCircleProportion extends React.Component {
                 )})`}
               </td>
             </MediaQuery>
-            <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+            <MediaQuery maxDeviceWidth={breakpoints.maxMediumDevice}>
               <td>
                 <div className="nivo-tooltip__label ">{tooltip_item.name}</div>
                 <div className="nivo-tooltip__value">

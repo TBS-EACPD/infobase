@@ -22,7 +22,7 @@
 .estimates-checkbox-row {
   display: flex;
   flex-direction: row;
-  @media (max-width: $maxMediumDevice){
+  @media (max-width: $maxLargeDevice){
     flex-direction: column;
   }
   justify-content: space-evenly;

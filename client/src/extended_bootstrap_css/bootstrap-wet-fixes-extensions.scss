@@ -86,12 +86,12 @@ hr {
   padding-top: 10px;
   line-height: 1.4375 !important;
 
-  @media (min-width:$minLargeDevice){
+  @media (min-width:$minExtraLargeDevice){
     max-width: 600px !important;
     line-height: 1.6em;
   }
-  @media (min-width:$minMediumDevice) and (max-width: $maxLargeDevice) { max-width: 60vw !important }
-  @media (max-width:$maxMediumDevice){ max-width: 90vw !important }
+  @media (min-width:$minLargeDevice) and (max-width: $maxExtraLargeDevice) { max-width: 60vw !important }
+  @media (max-width:$maxLargeDevice){ max-width: 90vw !important }
 
   & a, a:visited {
     color: $buttonSecondaryColor;
@@ -166,7 +166,7 @@ legend {
 }
 
 
-@media(max-width: $maxLargeDevice) {
+@media(max-width: $maxExtraLargeDevice) {
   main.container {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -275,7 +275,7 @@ div.label {
   font-size: 0.8em;
   line-height: normal;
 }
-@media(min-width: $minSmallDevice) {
+@media(min-width: $minMediumDevice) {
   .huge-panel-text {
     font-size: 1.8em;
     line-height: 2.2em;
@@ -470,7 +470,7 @@ ol.breadcrumb {
 }
 
 dl.dl-horizontal.dl-long-terms {
-  @media(min-width:$minSmallDevice){
+  @media(min-width:$minMediumDevice){
     > dt {
       // default set by bootstrap is 160px
       width: 250px;
@@ -483,7 +483,7 @@ dl.dl-horizontal.dl-long-terms {
 }
 
 dl.dl-horizontal.dl-really-long-terms {
-  @media(min-width:$minSmallDevice){
+  @media(min-width:$minMediumDevice){
     > dt {
       // default set by bootstrap is 160px
       width: 300px;
@@ -636,7 +636,7 @@ ol.breadcrumb > li:last-child > :last-child {
   text-align: center;
   padding-bottom: 1rem;
 }
-@media (min-width: $minSmallDevice) {
+@media (min-width: $minMediumDevice) {
   #wb-lng > a.lang-switcher {
     font-weight: 200;
     font-size: 1.5rem;

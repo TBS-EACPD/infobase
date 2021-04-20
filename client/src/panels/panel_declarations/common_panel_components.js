@@ -60,7 +60,7 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
 const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
   "user_enabled_pinning_key_concepts";
 const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
-  <MediaQuery maxWidth={breakpoints.maxMediumDevice}>
+  <MediaQuery maxWidth={breakpoints.maxLargeDevice}>
     {(matches) => (
       <PinnedContent
         local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}

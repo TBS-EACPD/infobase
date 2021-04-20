@@ -29,7 +29,7 @@
     border-bottom-left-radius: $standardBorderRadius;
   }
 
-  @media(min-width:$minMediumDevice){
+  @media(min-width:$minLargeDevice){
     display: flex;
     align-items: stretch;
     justify-content: flex-start; 
@@ -56,7 +56,7 @@
     }
   }
   
-  @media(max-width:$maxMediumDevice){
+  @media(max-width:$maxLargeDevice){
     display: flex;
     flex-direction: column;
   

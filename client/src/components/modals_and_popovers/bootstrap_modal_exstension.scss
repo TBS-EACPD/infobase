@@ -11,7 +11,7 @@ $margin: 30px;
 }
 
 // Additional
-@media(min-width: $minSmallDevice){
+@media(min-width: $minMediumDevice){
   .modal-dialog--left {
     margin-left: $margin;
   }
@@ -40,10 +40,10 @@ $margin: 30px;
 
 .modal-responsive {
   width: 800px;
-  @media(min-width: $maxLargeDevice){
+  @media(min-width: $maxExtraLargeDevice){
     width: 1140px;
   }
-  @media(max-width:  $minSmallDevice){
+  @media(max-width:  $minMediumDevice){
     width: 300px;
   }
 }

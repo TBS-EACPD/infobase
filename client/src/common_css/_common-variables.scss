@@ -28,10 +28,10 @@ $highlightDarkColor: #B12320;
 
 /*media breakpoints, default to min-width queries whenever possible*/
 /*keep ../core/breakpoint_defs.js in sync with these*/
-$minExtraSmallDevice: 576px;
-$minSmallDevice: 768px;
-$minMediumDevice: 992px;
-$minLargeDevice: 1200px;
+$minSmallDevice: 576px;
+$minMediumDevice: 768px;
+$minLargeDevice: 992px;
+$minExtraLargeDevice: 1200px;
 /*media breakpoints -1 for max-width queries*/
 /*
 .98px is used for styling consistancy reasons.
@@ -43,10 +43,10 @@ width that lied between 575px and 576px).
 Now, it should not be possible (by likelyhood) for any device to take on 0 media queries.
 .98 is also used because safari has a rounding bug causing
 .99 to treated as an exact value*/
-$maxExtraSmallDevice: 575.98px;
-$maxSmallDevice: 767.98px;
-$maxMediumDevice: 991.98px;
-$maxLargeDevice: 1199.98px;
+$maxSmallDevice: 575.98px;
+$maxMediumDevice: 767.98px;
+$maxLargeDevice: 991.98px;
+$maxExtraLargeDevice: 1199.98px;
 
 
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/

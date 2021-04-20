@@ -93,7 +93,7 @@ dl.indicator-item__dl dt+dd {
   padding-bottom: 10px;
 }
 
-@media(min-width: $minSmallDevice){
+@media(min-width: $minMediumDevice){
   dl.indicator-item__dl > dd,
   dl.indicator-item__dl > dt {
     margin-bottom:0;
