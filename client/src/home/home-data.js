@@ -47,18 +47,18 @@ const infographic_link_items = _.compact([
     title: text_maker("people_title"),
     description: text_maker("people_desc"),
   },
-  services_feature_flag && {
-    href: "#orgs/gov/gov/infograph/services",
-    svg: (
-      <IconServicesHome width="100%" color="#FFFFFF" alternate_color={false} />
-    ),
-    title: text_maker("results_title"),
-    description: text_maker("results_desc"),
-  },
   {
     href: "#orgs/gov/gov/infograph/results",
     svg: (
       <IconClipboardAlt width="100%" color="#FFFFFF" alternate_color={false} />
+    ),
+    title: text_maker("results_title"),
+    description: text_maker("results_desc"),
+  },
+  services_feature_flag && {
+    href: "#orgs/gov/gov/infograph/services",
+    svg: (
+      <IconServicesHome width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: text_maker("services_title"),
     description: text_maker("services_desc"),
