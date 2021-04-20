@@ -61,8 +61,8 @@ const Home = (props) => {
           <TM k="featured_data_title" />
         </h2>
         <ul>
-          {_.map(featured_content_items, ({ text_key, href }) => (
-            <li key={text_key}>
+          {_.map(featured_content_items, ({ text_key, href }, ix) => (
+            <li key={ix}>
               <a href={href}>
                 <TM k={text_key} />
               </a>
@@ -74,15 +74,15 @@ const Home = (props) => {
         <h2>
           <TM k="subapps_text" />
         </h2>
-        {_.map(subapp_items, ({ href, title_key, text_key }) => (
-          <section>
-            <h3>
+        <ul>
+          {_.map(subapp_items, ({ href, title_key, text_key }, ix) => (
+            <li key={ix}>
               <a href={href} aria-label={text_maker(text_key)}>
                 <TM k={title_key} />
               </a>
-            </h3>
-          </section>
-        ))}
+            </li>
+          ))}
+        </ul>
       </section>
     </StandardRouteContainer>
   );
