@@ -45,6 +45,10 @@ of the advanced search for mobile */
   justify-content: center;
   display: flex;
   font-size: 1.2em;
+
+  @media (max-width: $maxSmallDevice) {
+    flex: 1;
+  }
 }
 
 .infograph-panel-container {

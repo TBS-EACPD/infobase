@@ -7,7 +7,7 @@ table.tombstone-table {
 table.tombstone-table > tbody > tr > td {
   border: none;
   border-bottom: 1px $separatorColor solid;
-  padding: 5px 0;
+  padding: 5px;
 }
 table.tombstone-table > tbody > tr:last-child > td {
   border: none !important;
