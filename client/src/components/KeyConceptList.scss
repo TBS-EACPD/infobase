@@ -1,7 +1,7 @@
 @import 'src/common_css/common-variables';
 
 .key_concept_term {
-  @media (min-width: $minMediumDevice) {
+  @media (min-width: $minLargeDevice) {
     border-bottom: 1px solid $separatorColor;
   }
   display: flex;

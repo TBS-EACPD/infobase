@@ -9,7 +9,7 @@
   align-items: baseline;
   justify-content: space-between;
 
-  @media (max-width: $maxSmallDevice) {
+  @media (max-width: $maxMediumDevice) {
     flex-direction: column;
   }
 
@@ -17,7 +17,7 @@
     background-color: $backgroundColor;
     border-radius: $standardBorderRadius;
     padding: 3px;
-    @media (min-width: $minLargeDevice) {
+    @media (min-width: $minExtraLargeDevice) {
       text-align: center;
     }
   }

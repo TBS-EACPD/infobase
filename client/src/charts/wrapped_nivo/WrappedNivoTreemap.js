@@ -66,10 +66,10 @@ export class WrappedNivoTreemap extends React.Component {
   render() {
     return (
       <Fragment>
-        <MediaQuery maxWidth={breakpoints.maxExtraSmallDevice}>
+        <MediaQuery maxWidth={breakpoints.maxSmallDevice}>
           <_WrappedNivoTreemap {...this.props} height={200} width={200} />
         </MediaQuery>
-        <MediaQuery minWidth={breakpoints.minExtraSmallDevice}>
+        <MediaQuery minWidth={breakpoints.minSmallDevice}>
           <_WrappedNivoTreemap {...this.props} height={400} width={400} />
         </MediaQuery>
       </Fragment>

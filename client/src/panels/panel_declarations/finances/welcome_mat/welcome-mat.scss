@@ -26,7 +26,7 @@
 
 // Mixins
 @mixin lg-panel($percent) {
-  @media (min-width: $minMediumDevice){
+  @media (min-width: $minLargeDevice){
     padding: 5px;
     /* nested flex containers for cross browser (safari doesn't let children of flex use height:100% properly) support */
     display: flex;
@@ -40,19 +40,19 @@
 }
 
 @mixin lg-hide {
-  @media (min-width: $minMediumDevice){
+  @media (min-width: $minLargeDevice){
     width: 0px;
     height: 0px;
     overflow: hidden;
     visibility: hidden;
   }
-  @media (max-width: $maxMediumDevice){
+  @media (max-width: $maxLargeDevice){
     display: show;
   }
 }
 
 @mixin sm-hide {
-  @media (max-width: $maxMediumDevice){
+  @media (max-width: $maxLargeDevice){
     display: none;
   }
 }
@@ -66,7 +66,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  @media (max-width: $maxMediumDevice){
+  @media (max-width: $maxLargeDevice){
     flex-direction:column;
   }
 }
@@ -74,7 +74,7 @@
 .mat-grid__row--sm-hide { @include sm-hide; }
 
 .mat-grid__sm-panel {
-  @media (max-width: $maxMediumDevice){
+  @media (max-width: $maxLargeDevice){
     width : 100%;
     padding: 5px;
   }
@@ -121,7 +121,7 @@
   }
   &.mat-grid__inner-panel--medium {
     font-size: 1.6em;
-    @media (max-width: $maxLargeDevice){
+    @media (max-width: $maxExtraLargeDevice){
       font-size: 1.4em;
     }
   }

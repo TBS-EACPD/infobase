@@ -27,7 +27,7 @@
   text-align: center !important;
   padding: 10px;
 
-  @media(max-width: $maxSmallDevice) {
+  @media(max-width: $maxMediumDevice) {
     min-height: 275px;
     padding: 0px;
   }
@@ -35,11 +35,11 @@
 
 .top-img-card__top {
   padding: 20px;
-  @media(max-width: $maxExtraSmallDevice) {
+  @media(max-width: $maxSmallDevice) {
     padding: 0px;
     height: 100px;
   }
-  @media(min-width: $minExtraSmallDevice) {
+  @media(min-width: $minSmallDevice) {
     height: 150px;
     width: 100%;
   }

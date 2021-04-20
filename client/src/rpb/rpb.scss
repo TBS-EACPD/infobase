@@ -15,7 +15,7 @@ li.select-list-item {
   margin: 5px 0;
 }
 
-@media(min-width: $minMediumDevice){
+@media(min-width: $minLargeDevice){
   .md-half-width{
     min-width: 50%;
     display: inline-block;

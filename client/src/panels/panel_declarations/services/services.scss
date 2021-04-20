@@ -3,7 +3,7 @@
 .col-container {
   display: flex;
   flex-direction: row;
-  @media (max-width: $maxMediumDevice){
+  @media (max-width: $maxLargeDevice){
     flex-direction: column;
   }
 }

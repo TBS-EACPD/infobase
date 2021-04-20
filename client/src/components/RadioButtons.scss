@@ -9,7 +9,7 @@
   font-weight: $mediumFontWeight;
   background-color: inherit;
 
-  @media(max-width: $maxExtraSmallDevice){
+  @media(max-width: $maxSmallDevice){
     flex-direction: column;
   }
 }
@@ -44,7 +44,7 @@
 }
 
 %pseduo-separator-common {
-  @media(min-width: $minExtraSmallDevice){
+  @media(min-width: $minSmallDevice){
     content: "";
     border: solid $buttonPrimaryColor;
     position: absolute;

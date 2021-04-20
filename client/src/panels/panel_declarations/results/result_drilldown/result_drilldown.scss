@@ -1,7 +1,7 @@
 @import "src/common_css/common-variables";
 
 .status-icon-array {
-  @media(max-width: $maxExtraSmallDevice){
+  @media(max-width: $maxSmallDevice){
     display: flex;
     flex-wrap: wrap;
   }

@@ -3,13 +3,13 @@
 .icon-block {
     font-size: 1.8em;
   
-    @media(min-width: $minMediumDevice){
+    @media(min-width: $minLargeDevice){
       float: right;
       padding-left: 1.2em;
       max-width: 5em;
     }
   
-    @media(max-width:$maxMediumDevice){
+    @media(max-width:$maxLargeDevice){
       margin: 1.2em auto;
       text-align: center;
     }

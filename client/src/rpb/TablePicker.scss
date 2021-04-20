@@ -8,7 +8,7 @@
   margin-right: -5px;
 }
 
-@media (min-width: $minMediumDevice) { 
+@media (min-width: $minLargeDevice) { 
   .item-cloud-col {
     padding-left: 6px;
     padding-right: 6px;
@@ -18,7 +18,7 @@
   }
 }
 
-@media (max-width: $maxMediumDevice) { 
+@media (max-width: $maxLargeDevice) { 
   .item-cloud-col > div > div {
     margin: 10px;
   }

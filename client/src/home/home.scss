@@ -49,7 +49,7 @@ $smallMargin: 10px;
 
 
 .featured-home-cols {
-  @media(max-width: $maxMediumDevice) {
+  @media(max-width: $maxLargeDevice) {
     flex-direction: column-reverse; 
   }
 }
@@ -62,7 +62,7 @@ $smallMargin: 10px;
     height: auto;
     width: 100%;  
 
-    @media(min-width: $minLargeDevice) {
+    @media(min-width: $minExtraLargeDevice) {
       width: 95%;
     }  
 
@@ -73,19 +73,19 @@ $smallMargin: 10px;
   }
 }
 .featured-home-cols__primary {
-  @media(max-width: $maxMediumDevice){
+  @media(max-width: $maxLargeDevice){
     margin-bottom: $smallMargin;
   }
 
   & > h2:first-child {
     margin-top: 0px;
-    @media(max-width: $maxExtraSmallDevice) {
+    @media(max-width: $maxSmallDevice) {
       margin-top: $smallMargin;
     }
   }
   & > h2:not(:first-child) {
     margin-top: $largeMargin/2;
-    @media(max-width: $maxExtraSmallDevice) {
+    @media(max-width: $maxSmallDevice) {
       margin-top: $smallMargin;
     }
   }
@@ -130,14 +130,14 @@ li.list-group-item--home {
 .home-trinity-container {
   margin-top: $largeMargin;
   margin-bottom: $largeMargin;
-  @media(max-width: $maxSmallDevice) {
+  @media(max-width: $maxMediumDevice) {
     margin-top: $smallMargin;
     margin-bottom: $smallMargin;
   }
 
   justify-content: space-between;
   
-  @media(max-width: $maxSmallDevice) {
+  @media(max-width: $maxMediumDevice) {
     flex-direction: column;
   }
 }
@@ -149,7 +149,7 @@ li.list-group-item--home {
 
 .xtralinks {
   padding-top: $largeMargin;
-  @media(max-width: $maxExtraSmallDevice){
+  @media(max-width: $maxSmallDevice){
     padding-top: $smallMargin;
   }
   

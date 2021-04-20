@@ -97,7 +97,7 @@ const DefaultTooltip = ({ tooltip_items, formatter }) => (
     tooltip_items={tooltip_items}
     TooltipContentComponent={({ tooltip_item }) => (
       <Fragment>
-        <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+        <MediaQuery minDeviceWidth={breakpoints.minMediumDevice}>
           <td className="nivo-tooltip__label">
             {tooltip_item.name || tooltip_item.id}
           </td>
@@ -108,7 +108,7 @@ const DefaultTooltip = ({ tooltip_items, formatter }) => (
             }}
           />
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+        <MediaQuery maxDeviceWidth={breakpoints.maxMediumDevice}>
           <td>
             <div className="nivo-tooltip__label">
               {tooltip_item.name || tooltip_item.id}
@@ -131,7 +131,7 @@ const DefaultPercentTooltip = ({ tooltip_items, formatter, total }) => (
     tooltip_items={tooltip_items}
     TooltipContentComponent={({ tooltip_item }) => (
       <Fragment>
-        <MediaQuery minDeviceWidth={breakpoints.minSmallDevice}>
+        <MediaQuery minDeviceWidth={breakpoints.minMediumDevice}>
           <td className="nivo-tooltip__label">
             {
               /* TODO: standardize our chart APIs on either label or name. 
@@ -152,7 +152,7 @@ const DefaultPercentTooltip = ({ tooltip_items, formatter, total }) => (
             }}
           />
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={breakpoints.maxSmallDevice}>
+        <MediaQuery maxDeviceWidth={breakpoints.maxMediumDevice}>
           <td>
             <div className="nivo-tooltip__label">
               {tooltip_item.name || tooltip_item.label || tooltip_item.id}

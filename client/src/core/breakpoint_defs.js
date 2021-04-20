@@ -6,10 +6,10 @@ import _ from "lodash";
 
 // base breakpoints
 const base_breakpoints = {
-  extraSmallDevice: 576,
-  smallDevice: 768,
-  mediumDevice: 992,
-  largeDevice: 1200,
+  smallDevice: 576,
+  mediumDevice: 768,
+  largeDevice: 992,
+  extraLargeDevice: 1200,
 };
 
 // Note max breakpoints are base breakpoints -0.02

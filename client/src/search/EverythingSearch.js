@@ -91,7 +91,7 @@ const SearchOptions = ({ option_checkboxes }) => (
             alternate_color="false"
           />
         </div>
-        <MediaQuery minWidth={breakpoints.minSmallDevice}>
+        <MediaQuery minWidth={breakpoints.minMediumDevice}>
           <span>{text_maker("options")}</span>
         </MediaQuery>
       </div>

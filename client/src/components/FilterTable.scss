@@ -31,7 +31,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   height: 40px;
   width: 40px;
 
-  @media(max-width: $maxMediumDevice) and (min-width: $minSmallDevice){
+  @media(max-width: $maxLargeDevice) and (min-width: $minMediumDevice){
     left: -57px;
   }
 }
@@ -50,7 +50,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   font-size: 3em; 
 }
 
-@media(min-width: $minLargeDevice){
+@media(min-width: $minExtraLargeDevice){
   .filter-table {
     width: 100%;
     margin: 0 auto;
@@ -81,7 +81,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
 }
 
-@media(max-width: $maxLargeDevice){
+@media(max-width: $maxExtraLargeDevice){
   .filter-table {
     flex-direction: column;
   }
@@ -120,7 +120,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
 }
 
-@media(max-width: $maxExtraSmallDevice){
+@media(max-width: $maxSmallDevice){
   .filter-table__item {
     padding: 0px !important;
   }

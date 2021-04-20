@@ -92,7 +92,7 @@ li.tabbed-controls__label--disabled {
   padding: 15px 35px 0px 35px;
   background-color: $backgroundColor;
 
-  @media(max-width: $maxMediumDevice){
+  @media(max-width: $maxLargeDevice){
     padding-right: 0px;
     padding-left: 0px;
   }
