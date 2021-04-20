@@ -32,12 +32,7 @@ export class BackToTop extends React.Component {
 
     this.footer_observer = new IntersectionObserver((entries, observer) => {
       this.setState({
-        caught_by_footer: is_mobile()
-          ? window.innerWidth > 600
-            ? window.pageYOffset + window.innerHeight >=
-              this.page_footer.offsetTop
-            : entries[0].isIntersecting
-          : entries[0].isIntersecting,
+        caught_by_footer: entries[0].isIntersecting,
       });
     });
     this.footer_observer.observe(this.page_footer);
