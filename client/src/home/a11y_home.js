@@ -9,7 +9,7 @@ import {
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { featured_content_items } from "./home-data.js";
+import { infographic_link_items, featured_content_items } from "./home-data.js";
 
 import home_text2 from "./a11y-home.yaml";
 import home_text1 from "./home.yaml";
@@ -47,26 +47,11 @@ const Home = (props) => {
           <TM k="home_a11y_gov_infograph" />
         </h2>
         <ul>
-          <li>
-            <a href="#orgs/gov/gov/infograph/financial">
-              <TM k="home_a11y_gov_fin" />
-            </a>
-          </li>
-          <li>
-            <a href="#orgs/gov/gov/infograph/people">
-              <TM k="home_a11y_gov_ppl" />
-            </a>
-          </li>
-          <li>
-            <a href="#orgs/gov/gov/infograph/services">
-              <TM k="home_a11y_gov_services" />
-            </a>
-          </li>
-          <li>
-            <a href="#orgs/gov/gov/infograph/results">
-              <TM k="home_a11y_gov_results" />
-            </a>
-          </li>
+          {_.map(infographic_link_items, ({ href, description }, ix) => (
+            <li key={ix}>
+              <a href={href}>{description}</a>
+            </li>
+          ))}
         </ul>
       </section>
       <section>
