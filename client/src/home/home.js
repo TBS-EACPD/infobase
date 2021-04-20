@@ -68,20 +68,20 @@ export default class Home extends React.Component {
 
             <div className="container">
               <div className="row home-featured-row">
-                <div className="col-lg-7 gov-infographic-links">
+                <div className="col-lg-7 home-infographic-links">
                   {_.map(
                     infographic_link_items,
                     ({ href, svg, title, description }, ix) => (
                       <a
                         key={ix}
                         href={href}
-                        className="gov-infographic-link-item"
+                        className="home-infographic-link-item"
                         title={description}
                       >
-                        <div className="gov-infographic-link-item__title">
+                        <div className="home-infographic-link-item__title">
                           {title}
                         </div>
-                        <div className="gov-infographic-link-item__icon">
+                        <div className="home-infographic-link-item__icon">
                           {svg}
                         </div>
                       </a>
@@ -89,11 +89,11 @@ export default class Home extends React.Component {
                   )}
                 </div>
 
-                <div className="col-lg-5 featured-home-col">
+                <div className="col-lg-5 home-featured-content">
                   <h2>
                     <TM k="featured_data_title" />
                   </h2>
-                  <ul className="featured-content-list list-group">
+                  <ul className="list-group">
                     {_.map(
                       featured_content_items,
                       ({ text_key, href, is_link_out, is_new }, ix) => (
