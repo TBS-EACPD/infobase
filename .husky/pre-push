@@ -2,8 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 
-#!/bin/sh
-
 # Prevent branches starting with dunderscores from being pushed to the public remote ("origin"),
 # allow them to push to the private/archive remote ("archive")
 
