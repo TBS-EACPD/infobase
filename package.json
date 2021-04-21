@@ -6,7 +6,6 @@
     "check_format": "prettier --check",
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
-    "init_hooks": "sh scripts/dev_scripts/init_hooks.sh",
     "infobase_tmux_init": "npm run tmux_env",
     "tmux_env": "sh scripts/dev_scripts/tmux_env.sh",
     "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh",
