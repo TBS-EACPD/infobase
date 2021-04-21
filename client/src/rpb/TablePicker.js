@@ -214,40 +214,42 @@ class TaggedItemCloud extends React.Component {
           <div className="item-title centerer">{display}</div>
           <div className="item-card-mat">
             <div>
-              <div className="item-card-footer row m-0">
-                <div className="item-tag-container">
-                  <span className="sr-only">
-                    <u>
-                      <TextMaker text_key="covered_concepts" />
-                    </u>
-                  </span>
-                  <div className="item-tags">
-                    {_.chain(item_tag_linkage)
-                      .filter({ item_id: id })
-                      .map(({ tag_id }) => _.find(tags, { id: tag_id }))
-                      .map(({ id, active }) => (
-                        <div
-                          key={id}
-                          className={classNames(
-                            active && "active",
-                            active && "active",
-                            "tag-badge",
-                            "tag-badge--solid"
-                          )}
-                        >
-                          <TextMaker text_key={id} />
-                        </div>
-                      ))
-                      .value()}
+              <div className="item-card-footer row">
+                <div className="col-12">
+                  <div className="item-tag-container">
+                    <span className="sr-only">
+                      <u>
+                        <TextMaker text_key="covered_concepts" />
+                      </u>
+                    </span>
+                    <div className="item-tags">
+                      {_.chain(item_tag_linkage)
+                        .filter({ item_id: id })
+                        .map(({ tag_id }) => _.find(tags, { id: tag_id }))
+                        .map(({ id, active }) => (
+                          <div
+                            key={id}
+                            className={classNames(
+                              active && "active",
+                              active && "active",
+                              "tag-badge",
+                              "tag-badge--solid"
+                            )}
+                          >
+                            <TextMaker text_key={id} />
+                          </div>
+                        ))
+                        .value()}
+                    </div>
                   </div>
-                </div>
-                <div className="item-select text-right w-100">
-                  <button
-                    onClick={() => onSelectItem(id)}
-                    className="btn btn-ib-primary btn-xs"
-                  >
-                    <TextMaker text_key="select_table" />
-                  </button>
+                  <div className="item-select text-right w-100">
+                    <button
+                      onClick={() => onSelectItem(id)}
+                      className="btn btn-ib-primary btn-xs"
+                    >
+                      <TextMaker text_key="select_table" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
