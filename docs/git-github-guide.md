@@ -85,6 +85,7 @@ make sure that the remote branch and the local branch are of the same name, and 
 ## Other tips 
 The best way to learn more about git is Google. Stack Overflow is full of answers to specific git questions, but be cautious because some "secret git tricks", when you don't really understand them, can cause troubles in a shared repo.
 
+* fixing the same merge conflicts every time your rebase? Read about and enable rerere (this article's decent https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67)
 * Diffs
     * Diffs are a way of displaying the difference between two snapshots (commits) of a repo. 
     * Diffs can be applied to single files as well 
