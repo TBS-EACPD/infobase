@@ -200,7 +200,7 @@ export class Canada extends React.Component {
       })
     );
     return (
-      <div className="row no-container">
+      <div className="row">
         <div className="col-12 col-lg-3">
           <StandardLegend
             title={text_maker("legend")}
