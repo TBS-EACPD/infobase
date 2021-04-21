@@ -82,21 +82,23 @@ export default class MetaData extends React.Component {
                     )
                   )}
                 </FancyUL>
-                <div className="row m-0">
-                  <span style={{ alignSelf: "center" }}>
-                    <TM k="refresh_freq" /> {source.frequency}
-                  </span>
-                  {source.open_data && (
-                    <a
-                      style={{ marginLeft: "auto" }} //fix a flexbox bug
-                      className="btn btn-ib-primary"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={source.open_data[lang]}
-                    >
-                      <TM k="open_data_link" />
-                    </a>
-                  )}
+                <div className="row">
+                  <div className="col-12 d-flex">
+                    <span style={{ alignSelf: "center" }}>
+                      <TM k="refresh_freq" /> {source.frequency}
+                    </span>
+                    {source.open_data && (
+                      <a
+                        style={{ marginLeft: "auto" }} //fix a flexbox bug
+                        className="btn btn-ib-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={source.open_data[lang]}
+                      >
+                        <TM k="open_data_link" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Panel>
             </div>
