@@ -9,7 +9,8 @@
     "init_hooks": "sh scripts/dev_scripts/init_hooks.sh",
     "infobase_tmux_init": "npm run tmux_env",
     "tmux_env": "sh scripts/dev_scripts/tmux_env.sh",
-    "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh"
+    "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh",
+    "prepare": "husky install"
   },
   "authors": [
     "Alex Cousineau-Leduc",
@@ -27,6 +28,7 @@
     "eslint-plugin-node": "^11.0.0",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "husky": "^6.0.0"
   }
 }
