@@ -1,2 +1,0 @@
-#!/bin/sh
-sh scripts/dev_scripts/init_hooks.sh 
