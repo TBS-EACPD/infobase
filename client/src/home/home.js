@@ -113,7 +113,7 @@ const HomeLayout = (props) => (
     </div>
 
     <div className="container">
-      <div className="home-trinity-container row">
+      <div className="home-trinity-container row" style={{ padding: "0 15px" }}>
         <TrinityItem
           href="#orgs/gov/gov/infograph/financial"
           svg={
