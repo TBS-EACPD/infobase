@@ -1,0 +1,23 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+
+#!/bin/sh
+
+# Prevent branches starting with dunderscores from being pushed to the public remote ("origin"),
+# allow them to push to the private/archive remote ("archive")
+
+remote="$1"
+url="$2"
+
+IFS=' ' # set field seperator to space, needed to properly read in the supplied args from stdin below (see git docs)
+read local_ref local_sha remote_ref remote_sha
+
+local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
+
+if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remote != "archive" ]]; then
+  echo "Double underscore and archived branches can only be pushed to the archive (private) remote!"
+  exit 1
+fi
+
+npm run check_format .
