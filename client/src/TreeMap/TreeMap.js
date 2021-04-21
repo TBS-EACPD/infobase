@@ -584,7 +584,10 @@ export default class TreeMapper extends React.Component {
                       n_legend_vals={n_legend_vals}
                     />
                   </div>
-                  <div className="explore_description">
+                  <div
+                    className="explore_description"
+                    style={{ marginTop: "30px" }}
+                  >
                     <a href="#rpb">{text_maker("rbp_link_text")}</a>
                   </div>
                 </div>

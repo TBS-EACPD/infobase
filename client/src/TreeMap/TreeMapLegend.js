@@ -104,7 +104,7 @@ export class TreeMapLegend extends React.Component {
             >
               <div
                 className="col-md-4"
-                style={{ textAlign: "right", paddingRight: "0px" }}
+                style={{ textAlign: "center", paddingRight: "0px" }}
               >
                 {proportional_block()}
               </div>
@@ -116,7 +116,7 @@ export class TreeMapLegend extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <div className="row" style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" }}>
               <svg width={`${legend_cols.length * 60 + 10}`} height="50">
                 <g className="mutLegendGroup" transform="translate(0,0)">
                   <rect
@@ -132,7 +132,7 @@ export class TreeMapLegend extends React.Component {
                 </g>
               </svg>
             </div>
-            <div className="row" style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" }}>
               <span style={{ paddingTop: "40px", paddingBottom: "40px" }}>
                 {legend_measure_text}
               </span>
