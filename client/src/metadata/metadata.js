@@ -54,28 +54,30 @@ export default class MetaData extends React.Component {
                   {_.map(
                     source.items,
                     ({ key, id, text, inline_link, external_link }) => (
-                      <span key={key || id} className="row m-0">
-                        {inline_link ? (
-                          <a
-                            title={text_maker("rpb_link_text")}
-                            href={inline_link}
-                            style={{ alignSelf: "center" }}
-                          >
-                            {text}
-                          </a>
-                        ) : (
-                          <span style={{ alignSelf: "center" }}>{text}</span>
-                        )}
-                        {external_link && (
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-                            href={external_link}
-                          >
-                            <TM k="open_data_link" />
-                          </a>
-                        )}
+                      <span key={key || id} className="row">
+                        <div className="col-12 d-flex">
+                          {inline_link ? (
+                            <a
+                              title={text_maker("rpb_link_text")}
+                              href={inline_link}
+                              style={{ alignSelf: "center" }}
+                            >
+                              {text}
+                            </a>
+                          ) : (
+                            <span style={{ alignSelf: "center" }}>{text}</span>
+                          )}
+                          {external_link && (
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
+                              href={external_link}
+                            >
+                              <TM k="open_data_link" />
+                            </a>
+                          )}
+                        </div>
                       </span>
                     )
                   )}

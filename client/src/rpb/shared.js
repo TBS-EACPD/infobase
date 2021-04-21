@@ -82,16 +82,18 @@ const ReportDatasets = ({ table, subject }) => {
     <span key={"datasets_header"} className="fancy-ul__title">
       <TextMaker text_key="metadata" />
     </span>,
-    <span key={table.id} className="row m-0">
-      <span>{table.name}</span>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-        href={table.link[lang]}
-      >
-        <TextMaker text_key="open_data_link" />
-      </a>
+    <span key={table.id} className="row">
+      <div className="col-12 d-flex">
+        <span>{table.name}</span>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
+          href={table.link[lang]}
+        >
+          <TextMaker text_key="open_data_link" />
+        </a>
+      </div>
     </span>,
   ];
 
@@ -102,16 +104,18 @@ const ReportDatasets = ({ table, subject }) => {
     ..._.chain(table.source)
       .map((source) => {
         return all_sources[source].open_data ? (
-          <span key={table.id} className="row m-0">
-            <a href={"#metadata/" + source}>{all_sources[source].title}</a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-              href={all_sources[source].open_data[lang]}
-            >
-              <TextMaker text_key="open_data_link" />
-            </a>
+          <span key={table.id} className="row">
+            <div className="col-12 d-flex">
+              <a href={"#metadata/" + source}>{all_sources[source].title}</a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
+                href={all_sources[source].open_data[lang]}
+              >
+                <TextMaker text_key="open_data_link" />
+              </a>
+            </div>
           </span>
         ) : (
           false
