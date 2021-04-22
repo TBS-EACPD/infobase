@@ -249,6 +249,9 @@ const get_summary_query = (query_options) => {
     root(lang: $lang) {
       ${query_by_level[subject.level]} {
         service_summary {
+          service_general_stats {
+            number_of_services
+          }  
           ${query_fragment}
         }
       }
@@ -259,7 +262,7 @@ const get_summary_query = (query_options) => {
 
 export const useSummaryServices = (query_options) => {
   const time_at_request = Date.now();
-  const { subject, summary_name } = query_options;
+  const { subject } = query_options;
   const query = get_summary_query(query_options);
   const res = useQuery(query, {
     variables: {
@@ -278,7 +281,7 @@ export const useSummaryServices = (query_options) => {
   }
   if (!loading) {
     const level = get_query_appropirate_level(subject);
-    return { ...res, data: data.root[level].service_summary[summary_name] };
+    return { ...res, data: data.root[level].service_summary };
   }
   return res;
 };

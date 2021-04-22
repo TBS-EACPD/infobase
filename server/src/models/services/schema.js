@@ -18,8 +18,13 @@ const schema = `
   }
   type ServiceSummary{
     id: String
+    service_general_stats: ServiceGeneralStats
     service_type_summary: [ServiceTypeSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
+  }
+  type ServiceGeneralStats{
+    id: String
+    number_of_services: Float
   }
   type ServiceTypeSummary{
     id: String
@@ -116,6 +121,9 @@ export default function ({ models, loaders }) {
     services_by_program_id,
     org_id_loader,
     prog_id_loader,
+    service_general_stats_for_gov,
+    service_general_stats_for_dept,
+    service_general_stats_for_program,
     service_types_summary_for_gov,
     service_types_summary_for_dept,
     service_types_summary_for_program,
@@ -136,6 +144,7 @@ export default function ({ models, loaders }) {
   const resolvers = {
     Gov: {
       service_summary: () => ({
+        service_general_stats: service_general_stats_for_gov.load("gov"),
         service_type_summary: service_types_summary_for_gov.load("gov"),
         service_digital_status_summary: service_digital_status_summary_for_gov.load(
           "gov"
@@ -145,6 +154,7 @@ export default function ({ models, loaders }) {
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
       service_summary: ({ org_id }) => ({
+        service_general_stats: service_general_stats_for_dept.load(org_id),
         service_type_summary: service_types_summary_for_dept.load(org_id),
         service_digital_status_summary: service_digital_status_summary_for_dept.load(
           org_id
@@ -155,6 +165,9 @@ export default function ({ models, loaders }) {
     Program: {
       services: ({ program_id }) => services_by_program_id.load(program_id),
       service_summary: ({ program_id }) => ({
+        service_general_stats: service_general_stats_for_program.load(
+          program_id
+        ),
         service_type_summary: service_types_summary_for_program.load(
           program_id
         ),

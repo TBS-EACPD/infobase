@@ -1,7 +1,10 @@
 import _ from "lodash";
 import mongoose from "mongoose";
 
-import { create_resource_by_foreignkey_attr_dataloader } from "../loader_utils.js";
+import {
+  create_resource_by_id_attr_dataloader,
+  create_resource_by_foreignkey_attr_dataloader,
+} from "../loader_utils.js";
 import {
   pkey_type,
   parent_fkey_type,
@@ -87,6 +90,10 @@ export default function (model_singleton) {
     service_report: [ServiceReportSchema],
   });
 
+  const ServiceGeneralStatsSchema = mongoose.Schema({
+    id: pkey_type(),
+    number_of_services: { type: Number },
+  });
   const ServiceTypeSummarySchema = mongoose.Schema({
     id: pkey_type(),
     subject_id: parent_fkey_type(),
@@ -115,6 +122,15 @@ export default function (model_singleton) {
   };
   define_models_w_same_schema(
     [
+      "GovServiceGeneralStats",
+      "DeptServiceGeneralStats",
+      "ProgramServiceGeneralStats",
+    ],
+    ServiceGeneralStatsSchema
+  );
+
+  define_models_w_same_schema(
+    [
       "GovServiceTypeSummary",
       "DeptServiceTypeSummary",
       "ProgramServiceTypeSummary",
@@ -138,6 +154,9 @@ export default function (model_singleton) {
     GovServiceDigitalStatusSummary,
     DeptServiceDigitalStatusSummary,
     ProgramServiceDigitalStatusSummary,
+    GovServiceGeneralStats,
+    DeptServiceGeneralStats,
+    ProgramServiceGeneralStats,
   } = model_singleton.models;
 
   const define_loaders_w_same_fk_attr = (schemas_and_names, fk_attr) =>
@@ -157,6 +176,18 @@ export default function (model_singleton) {
     services_by_program_id: create_resource_by_foreignkey_attr_dataloader(
       Service,
       "program_ids"
+    ),
+    service_general_stats_for_gov: create_resource_by_id_attr_dataloader(
+      GovServiceGeneralStats,
+      "id"
+    ),
+    service_general_stats_for_dept: create_resource_by_id_attr_dataloader(
+      DeptServiceGeneralStats,
+      "id"
+    ),
+    service_general_stats_for_program: create_resource_by_id_attr_dataloader(
+      ProgramServiceGeneralStats,
+      "id"
     ),
     ...define_loaders_w_same_fk_attr(
       [
