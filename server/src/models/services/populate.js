@@ -21,6 +21,9 @@ export default async function ({ models }) {
     Service,
     ServiceReport,
     StandardReport,
+    GovServiceGeneralStats,
+    DeptServiceGeneralStats,
+    ProgramServiceGeneralStats,
     GovServiceTypeSummary,
     DeptServiceTypeSummary,
     ProgramServiceTypeSummary,
@@ -181,6 +184,7 @@ export default async function ({ models }) {
       ),
     })
   );
+
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_ids, (program_id) => {
       result[program_id] = result[program_id]
@@ -189,6 +193,24 @@ export default async function ({ models }) {
     });
     return result;
   };
+  const gov_general_stats = [
+    { id: "gov", number_of_services: service_rows.length },
+  ];
+  const dept_general_stats = _.chain(service_rows)
+    .groupBy("org_id")
+    .map((services, org_id) => ({
+      id: org_id,
+      number_of_services: services.length,
+    }))
+    .value();
+  const program_general_stats = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .map((services, org_id) => ({
+      id: org_id,
+      number_of_services: services.length,
+    }))
+    .value();
+
   const service_types_lookup = _.chain(
     get_standard_csv_file_rows("service_types_lookup.csv")
   )
@@ -264,5 +286,8 @@ export default async function ({ models }) {
     ProgramServiceDigitalStatusSummary.insertMany(
       program_service_digital_summary
     ),
+    GovServiceGeneralStats.insertMany(gov_general_stats),
+    DeptServiceGeneralStats.insertMany(dept_general_stats),
+    ProgramServiceGeneralStats.insertMany(program_general_stats),
   ]);
 }

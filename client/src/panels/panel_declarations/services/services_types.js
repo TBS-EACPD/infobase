@@ -22,7 +22,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ServicesTypesPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
-    summary_name: "service_type_summary",
     query_fragment: `
     service_type_summary {
       id
@@ -33,17 +32,18 @@ const ServicesTypesPanel = ({ subject }) => {
   if (loading) {
     return <span>loading</span>;
   }
-  const max_type = _.maxBy(data, "value");
+  const { service_general_stats, service_type_summary } = data;
+  const max_type = _.maxBy(service_type_summary, "value");
 
   return (
     <div>
       <TM
         args={{
-          num_of_types: data.length,
+          num_of_types: service_type_summary.length,
           subject,
           max_type: max_type.label,
           max_type_count: max_type.value,
-          num_of_services: data.length,
+          num_of_services: service_general_stats.number_of_services,
         }}
         className="medium-panel-text"
         k={
@@ -54,7 +54,7 @@ const ServicesTypesPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={data}
+          data={service_type_summary}
           column_configs={{
             label: {
               index: 0,
@@ -70,7 +70,7 @@ const ServicesTypesPanel = ({ subject }) => {
       ) : (
         <WrappedNivoPie
           id={"label"}
-          data={data}
+          data={service_type_summary}
           include_percent={false}
           is_money={false}
         />

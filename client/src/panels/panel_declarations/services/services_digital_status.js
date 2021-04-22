@@ -38,7 +38,6 @@ const colors = scaleOrdinal().range([
 const ServicesDigitalStatusPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
-    summary_name: "service_digital_status_summary",
     query_fragment: `
     service_digital_status_summary {
       key_desc
@@ -51,7 +50,8 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
   if (loading) {
     return <span>loading</span>;
   }
-  const processed_data = _.map(data, (row) => ({
+  const { service_general_stats, service_digital_status_summary } = data;
+  const processed_data = _.map(service_digital_status_summary, (row) => ({
     ...row,
     key_desc: text_maker(row.key_desc),
     [can_online]: row.can_online,
@@ -97,12 +97,16 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
         args={{
           is_most_and_least_same:
             most_digital_component.key === least_digital_component.key,
-          num_of_services: data.length,
+          num_of_services: service_general_stats.number_of_services,
           subject_name: subject.name,
           most_digital_name: text_maker(most_digital_component.key),
-          most_digital_pct: most_digital_component[can_online] / data.length,
+          most_digital_pct:
+            most_digital_component[can_online] /
+            service_general_stats.number_of_services,
           least_digital_name: text_maker(least_digital_component.key),
-          least_digital_pct: least_digital_component[can_online] / data.length,
+          least_digital_pct:
+            least_digital_component[can_online] /
+            service_general_stats.number_of_services,
         }}
       />
       {is_a11y_mode ? (
