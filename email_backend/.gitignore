@@ -7,4 +7,4 @@ npm-debug*
 coverage/
 *credentials*.json
 transpiled_build/
-scripts/data_management/CSVs/
+data_extracts/
