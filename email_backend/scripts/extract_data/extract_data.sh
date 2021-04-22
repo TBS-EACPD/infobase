@@ -32,7 +32,6 @@ if [ $is_prod ]; then
   source scripts/util/set_transient_secrets.sh # these trap EXIT to handle their own cleanup
 fi
 
-mkdir -p ./scripts/extract_data/CSVs
 babel-node -e 'require("./scripts/extract_data/generate_csv.js").write_csvs()'
 
 if [ $is_prod ]; then

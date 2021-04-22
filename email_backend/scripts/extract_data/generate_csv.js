@@ -102,11 +102,13 @@ export async function get_csv_strings() {
 
 export async function write_csvs() {
   const csv_strings = await extractor();
+
+  const output_dir = `data_extracts/${new Date().toISOString()}`;
+  fs.mkdirSync(output_dir, { recursive: true });
+
   _.forEach(csv_strings, (csv, template_name) => {
-    const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
-    fs.writeFile(`./scripts/extract_data/CSVs/${file_name}`, csv, function (
-      err
-    ) {
+    const file_name = `${output_dir}/${template_name}.csv`;
+    fs.writeFile(file_name, csv, function (err) {
       console.log(err || `Successfully saved ${file_name}.`);
     });
   });

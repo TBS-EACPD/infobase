@@ -1,12 +1,13 @@
-const test_target = !process.env.TEST_AGAINST_TRANSPILIED
-  ? "src"
-  : "transpiled_build";
 const reporters = !process.env.DO_NOT_PRINT_COVERAGE
   ? ["json", "text"]
   : ["json"];
 
 module.exports = {
-  rootDir: `../${test_target}`,
+  rootDir: `./`,
+  modulePathIgnorePatterns: [
+    "node_modules",
+    process.env.TEST_AGAINST_TRANSPILIED ? "src" : "transpiled_build",
+  ],
   coverageReporters: reporters,
   collectCoverageFrom: ["<rootDir>/**/*.js"],
   coveragePathIgnorePatterns: [
