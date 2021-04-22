@@ -93,6 +93,15 @@ export default function (model_singleton) {
     ...bilingual_str("label"),
     value: { type: Number },
   });
+  const ServiceDigitalStatusSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    key_desc: str_type,
+    key: str_type,
+    subject_id: parent_fkey_type(),
+    can_online: { type: Number },
+    cannot_online: { type: Number },
+    not_applicable: { type: Number },
+  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
@@ -112,12 +121,23 @@ export default function (model_singleton) {
     ],
     ServiceTypeSummarySchema
   );
+  define_models_w_same_schema(
+    [
+      "GovServiceDigitalStatusSummary",
+      "DeptServiceDigitalStatusSummary",
+      "ProgramServiceDigitalStatusSummary",
+    ],
+    ServiceDigitalStatusSummarySchema
+  );
 
   const {
     Service,
     GovServiceTypeSummary,
     DeptServiceTypeSummary,
     ProgramServiceTypeSummary,
+    GovServiceDigitalStatusSummary,
+    DeptServiceDigitalStatusSummary,
+    ProgramServiceDigitalStatusSummary,
   } = model_singleton.models;
 
   const define_loaders_w_same_fk_attr = (schemas_and_names, fk_attr) =>
@@ -151,6 +171,23 @@ export default function (model_singleton) {
         {
           schema: ProgramServiceTypeSummary,
           name: "service_types_summary_for_program",
+        },
+      ],
+      "subject_id"
+    ),
+    ...define_loaders_w_same_fk_attr(
+      [
+        {
+          schema: GovServiceDigitalStatusSummary,
+          name: "service_digital_status_summary_for_gov",
+        },
+        {
+          schema: DeptServiceDigitalStatusSummary,
+          name: "service_digital_status_summary_for_dept",
+        },
+        {
+          schema: ProgramServiceDigitalStatusSummary,
+          name: "service_digital_status_summary_for_program",
         },
       ],
       "subject_id"

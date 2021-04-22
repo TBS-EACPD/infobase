@@ -19,12 +19,22 @@ const schema = `
   type ServiceSummary{
     id: String
     service_type_summary: [ServiceTypeSummary]
+    service_digital_status_summary: [ServiceDigitalStatusSummary]
   }
   type ServiceTypeSummary{
     id: String
     subject_id: String
     label: String
     value: Float
+  }
+  type ServiceDigitalStatusSummary{
+    id: String
+    key: String
+    key_desc: String
+    subject_id: String
+    can_online: Float
+    cannot_online: Float
+    not_applicable: Float
   }
   type ServiceReport{
     service_id: String
@@ -109,6 +119,9 @@ export default function ({ models, loaders }) {
     service_types_summary_for_gov,
     service_types_summary_for_dept,
     service_types_summary_for_program,
+    service_digital_status_summary_for_gov,
+    service_digital_status_summary_for_dept,
+    service_digital_status_summary_for_program,
   } = loaders;
 
   const org_has_services = async (org_id) => {
@@ -124,12 +137,18 @@ export default function ({ models, loaders }) {
     Gov: {
       service_summary: () => ({
         service_type_summary: service_types_summary_for_gov.load("gov"),
+        service_digital_status_summary: service_digital_status_summary_for_gov.load(
+          "gov"
+        ),
       }),
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
       service_summary: ({ org_id }) => ({
         service_type_summary: service_types_summary_for_dept.load(org_id),
+        service_digital_status_summary: service_digital_status_summary_for_dept.load(
+          org_id
+        ),
       }),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
@@ -137,6 +156,9 @@ export default function ({ models, loaders }) {
       services: ({ program_id }) => services_by_program_id.load(program_id),
       service_summary: ({ program_id }) => ({
         service_type_summary: service_types_summary_for_program.load(
+          program_id
+        ),
+        service_digital_status_summary: service_digital_status_summary_for_program.load(
           program_id
         ),
       }),
