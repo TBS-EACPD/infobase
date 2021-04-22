@@ -14,7 +14,15 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
   }
 };
 export default async function ({ models }) {
-  const { ServiceStandard, Service, ServiceReport, StandardReport } = models;
+  const {
+    ServiceStandard,
+    Service,
+    ServiceReport,
+    StandardReport,
+    GovServiceTypeSummary,
+    DeptServiceTypeSummary,
+    ProgramServiceTypeSummary,
+  } = models;
 
   const service_report_rows = _.map(
     get_standard_csv_file_rows("service-report.csv"),
@@ -89,6 +97,7 @@ export default async function ({ models }) {
 
       service_type_en,
       service_type_fr,
+      service_type_code,
       scope_en,
       scope_fr,
       designations_en,
@@ -143,6 +152,7 @@ export default async function ({ models }) {
       ...multi_value_string_fields_to_arrays({
         service_type_en,
         service_type_fr,
+        service_type_code,
         scope_en,
         scope_fr,
         designations_en,
@@ -166,11 +176,70 @@ export default async function ({ models }) {
       ),
     })
   );
+  const service_types_lookup = _.chain(
+    get_standard_csv_file_rows("service_types_lookup.csv")
+  )
+    .map(({ code, en, fr }) => [code, { en, fr }])
+    .fromPairs()
+    .value();
+  const gov_type_summary = _.chain(service_rows)
+    .flatMap("service_type_code")
+    .countBy()
+    .map((value, type_code) => ({
+      id: `${type_code}_${value}`,
+      subject_id: "gov",
+      label_en: service_types_lookup[type_code].en,
+      label_fr: service_types_lookup[type_code].fr,
+      value,
+    }))
+    .value();
+  const dept_type_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap((services, org_id) =>
+      _.chain(services)
+        .flatMap("service_type_code")
+        .countBy()
+        .map((value, type_code) => ({
+          id: `${org_id}_${type_code}_${value}`,
+          subject_id: org_id,
+          label_en: service_types_lookup[type_code].en,
+          label_fr: service_types_lookup[type_code].fr,
+          value,
+        }))
+        .value()
+    )
+    .value();
+  const program_type_summary = _.chain(service_rows)
+    .reduce((result, service) => {
+      _.forEach(service.program_ids, (program_id) => {
+        result[program_id] = result[program_id]
+          ? _.concat(result[program_id], service)
+          : [service];
+      });
+      return result;
+    }, {})
+    .flatMap((services, program_id) =>
+      _.chain(services)
+        .flatMap("service_type_code")
+        .countBy()
+        .map((value, type_code) => ({
+          id: `${program_id}_${type_code}_${value}`,
+          subject_id: program_id,
+          label_en: service_types_lookup[type_code].en,
+          label_fr: service_types_lookup[type_code].fr,
+          value,
+        }))
+        .value()
+    )
+    .value();
 
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
     ServiceStandard.insertMany(service_standard_rows),
     Service.insertMany(service_rows),
+    GovServiceTypeSummary.insertMany(gov_type_summary),
+    DeptServiceTypeSummary.insertMany(dept_type_summary),
+    ProgramServiceTypeSummary.insertMany(program_type_summary),
   ]);
 }

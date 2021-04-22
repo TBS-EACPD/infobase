@@ -12,6 +12,7 @@ const schema = `
     has_services: Boolean
   }
   extend type Program{
+    service_summary: ServiceSummary
     services: [Service]
     has_services: Boolean
   }
@@ -21,6 +22,7 @@ const schema = `
   }
   type ServiceTypeSummary{
     id: String
+    subject_id: String
     label: String
     value: Float
   }
@@ -104,6 +106,9 @@ export default function ({ models, loaders }) {
     services_by_program_id,
     org_id_loader,
     prog_id_loader,
+    service_types_summary_for_gov,
+    service_types_summary_for_dept,
+    service_types_summary_for_program,
   } = loaders;
 
   const org_has_services = async (org_id) => {
@@ -114,34 +119,27 @@ export default function ({ models, loaders }) {
     const has_service = await Service.findOne({ program_ids: program_id });
     return !_.isNull(has_service);
   };
-  const get_service_type_summary = async (lang, org_id) => {
-    const services = await Service.find(org_id && { org_id });
-    return _.chain(services)
-      .flatMap(`service_type_${lang}`)
-      .countBy()
-      .map((value, type) => ({
-        id: `${type}_${value}`,
-        [`label_${lang}`]: type,
-        value,
-      }))
-      .value();
-  };
 
   const resolvers = {
     Gov: {
-      service_summary: (_x, __x, { lang }) => ({
-        service_type_summary: get_service_type_summary(lang),
+      service_summary: () => ({
+        service_type_summary: service_types_summary_for_gov.load("gov"),
       }),
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
-      service_summary: ({ org_id }, _x, { lang }) => ({
-        service_type_summary: get_service_type_summary(lang, org_id),
+      service_summary: ({ org_id }) => ({
+        service_type_summary: service_types_summary_for_dept.load(org_id),
       }),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
     Program: {
       services: ({ program_id }) => services_by_program_id.load(program_id),
+      service_summary: ({ program_id }) => ({
+        service_type_summary: service_types_summary_for_program.load(
+          program_id
+        ),
+      }),
       has_services: ({ program_id }) => program_has_services(program_id),
     },
     ServiceTypeSummary: {
