@@ -104,7 +104,9 @@ export async function write_csvs() {
   const csv_strings = await extractor();
   _.forEach(csv_strings, (csv, template_name) => {
     const file_name = `${template_name}_emails_${new Date().getTime()}.csv`;
-    fs.writeFile(`./data_management/CSVs/${file_name}`, csv, function (err) {
+    fs.writeFile(`./scripts/extract_data/CSVs/${file_name}`, csv, function (
+      err
+    ) {
       console.log(err || `Successfully saved ${file_name}.`);
     });
   });
