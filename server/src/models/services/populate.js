@@ -195,48 +195,26 @@ export default async function ({ models }) {
     .map(({ code, en, fr }) => [code, { en, fr }])
     .fromPairs()
     .value();
-  const gov_type_summary = _.chain(service_rows)
-    .flatMap("service_type_code")
-    .countBy()
-    .map((value, type_code) => ({
-      id: `${type_code}_${value}`,
-      subject_id: "gov",
-      label_en: service_types_lookup[type_code].en,
-      label_fr: service_types_lookup[type_code].fr,
-      value,
-    }))
-    .value();
+  const populate_type_summary = (services, subject_id) =>
+    _.chain(services)
+      .flatMap("service_type_code")
+      .countBy()
+      .map((value, type_code) => ({
+        id: `${subject_id}_${type_code}_${value}`,
+        subject_id,
+        label_en: service_types_lookup[type_code].en,
+        label_fr: service_types_lookup[type_code].fr,
+        value,
+      }))
+      .value();
+  const gov_type_summary = populate_type_summary(service_rows, "gov");
   const dept_type_summary = _.chain(service_rows)
     .groupBy("org_id")
-    .flatMap((services, org_id) =>
-      _.chain(services)
-        .flatMap("service_type_code")
-        .countBy()
-        .map((value, type_code) => ({
-          id: `${org_id}_${type_code}_${value}`,
-          subject_id: org_id,
-          label_en: service_types_lookup[type_code].en,
-          label_fr: service_types_lookup[type_code].fr,
-          value,
-        }))
-        .value()
-    )
+    .flatMap(populate_type_summary)
     .value();
   const program_type_summary = _.chain(service_rows)
     .reduce(group_by_program_id, {})
-    .flatMap((services, program_id) =>
-      _.chain(services)
-        .flatMap("service_type_code")
-        .countBy()
-        .map((value, type_code) => ({
-          id: `${program_id}_${type_code}_${value}`,
-          subject_id: program_id,
-          label_en: service_types_lookup[type_code].en,
-          label_fr: service_types_lookup[type_code].fr,
-          value,
-        }))
-        .value()
-    )
+    .flatMap(populate_type_summary)
     .value();
   const get_current_status_count = (services, key, value) =>
     _.countBy(services, `${key}_status`)[value] || 0;
