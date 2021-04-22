@@ -4,5 +4,5 @@ module.exports = {
   ...common_config_rules,
 
   testRegex: "\\.integration-test\\.js$",
-  coverageDirectory: "../coverage/integration_test_coverage",
+  coverageDirectory: "coverage/integration_test_coverage",
 };
