@@ -5,9 +5,9 @@ import _ from "lodash";
 
 import mongoose from "mongoose";
 
-import { connect_db } from "../src/db_utils/connect_db";
-import { make_mongoose_model_from_original_template } from "../src/db_utils/log_email_and_meta_to_db";
-import { get_templates } from "../src/template_utils";
+import { connect_db } from "../../src/db_utils/connect_db";
+import { make_mongoose_model_from_original_template } from "../../src/db_utils/log_email_and_meta_to_db";
+import { get_templates } from "../../src/template_utils";
 
 const templates = get_templates();
 async function extractor() {

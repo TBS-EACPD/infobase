@@ -38,11 +38,11 @@
     "unit_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "end_to_end_tests": "jest --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
     "end_to_end_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
-    "prod_deploy": "sh deploy_scripts/prod_deploy_email_backend_function.sh",
+    "prod_deploy": "sh scripts/deploy/prod_deploy_email_backend_function.sh",
     "merge_coverage_reports": "merge-coverage-reports --report ./coverage/*/coverage-final.json",
     "create_coverage_shield_badge": "create-coverage-shield-badge --report ./coverage/coverage-final.json > ./coverage/coverage-shield-badge.svg",
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018",
-    "extract_emails": "mkdir -p ./data_management/CSVs; babel-node -e 'require(\"./data_management/generate_csv.js\").write_csvs()'",
+    "extract_emails": "mkdir -p ./scripts/data_management/CSVs; babel-node -e 'require(\"./scripts/data_management/generate_csv.js\").write_csvs()'",
     "integration_tests": "jest --coverage --forceExit --detectOpenHandles --silent --runInBand --config jest_configs/integration_tests.config.js"
   },
   "authors": [

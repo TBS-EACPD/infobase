@@ -58,7 +58,7 @@ A completed template is just a set of key-value pairs corresponding to all the f
 Currently, its up to clients to consume, display, and properly complete/submit received email templates.
 
 ## Spam mitigation
-In deploy_scripts/prod_deploy_email_backend_function.sh, we set a max-instance of one Google Cloud Function (see Google Cloud docs on max-instances, it's in beta and has caveats). One GCF is sufficient for our current needs, makes it easier for the backend to have a memory of who's recently sent email through it, and in the worst case acts as a capacity-based throttle on any attempt to seriously spam us.
+In scripts/prod_deploy_email_backend_function.sh, we set a max-instance of one Google Cloud Function (see Google Cloud docs on max-instances, it's in beta and has caveats). One GCF is sufficient for our current needs, makes it easier for the backend to have a memory of who's recently sent email through it, and in the worst case acts as a capacity-based throttle on any attempt to seriously spam us.
 Additionally, before actually sending a valid email out, /submit_email checks wether the client has already sent three emails within the last minute. If a client has sent more than three emails in the last minute, it gets put "in timeout" and can't send further email for a minute. For the remaining lifetime of the Google Cloud Function instance, this client is limited to one email a minute.
 
 Clients are identified by the IP of their request and, if it exists in the completed template, a special template field with key `"client_id"`.
