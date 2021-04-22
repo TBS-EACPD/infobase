@@ -15,10 +15,10 @@ import { select } from "d3-selection";
 import "d3-selection-multi";
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants";
 
 import { separatorColor } from "src/core/color_defs.js";
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants";
 
 import graphRegistry from "src/charts/graphRegistry.js";
 

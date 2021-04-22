@@ -16,14 +16,14 @@ import {
   SmartDisplayTable,
 } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text.js";
 
 import { year_templates } from "src/models/years.js";
 
 import { formats } from "src/core/format.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { Canada } from "src/charts/canada/index.js";
 import { get_static_url, make_request } from "src/request_utils.js";

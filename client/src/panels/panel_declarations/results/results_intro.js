@@ -9,7 +9,7 @@ import { create_text_maker_component } from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import { get_source_links } from "src/metadata/data_sources.js";
 

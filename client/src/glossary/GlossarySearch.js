@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants";
 
 import { glossary_href } from "src/link_utils.js";
 

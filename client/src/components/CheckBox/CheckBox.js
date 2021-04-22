@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 import { backgroundColor, primaryColor } from "src/core/color_defs.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconCheckmark } from "src/icons/icons.js";
 import "./CheckBox.scss";

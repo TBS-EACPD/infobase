@@ -4,7 +4,7 @@ import React from "react";
 
 import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants";
 
 import { IconEyeOpen, IconEyeClosed } from "src/icons/icons.js";
 

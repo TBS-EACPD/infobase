@@ -1,6 +1,6 @@
-import { is_dev, is_dev_link } from "./injected_build_constants.js";
+import { is_dev, is_dev_link } from "./injected_build_constants";
 
-const assign_to_dev_helper_namespace = (dev_helpers) => {
+const assign_to_dev_helper_namespace = (dev_helpers: Object) => {
   if (!(is_dev || is_dev_link)) {
     return null;
   }

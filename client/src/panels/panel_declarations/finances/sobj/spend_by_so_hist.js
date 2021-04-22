@@ -8,7 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 
@@ -17,7 +17,7 @@ import {
   newIBDarkCategoryColors,
 } from "src/core/color_schemes.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 

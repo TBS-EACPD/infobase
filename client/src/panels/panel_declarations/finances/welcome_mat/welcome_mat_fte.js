@@ -11,7 +11,7 @@ import {
 
 import { tertiaryColor } from "src/core/color_defs.js";
 import { newIBCategoryColors } from "src/core/color_schemes.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass.js";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";

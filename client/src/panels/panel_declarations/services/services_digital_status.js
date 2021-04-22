@@ -17,7 +17,7 @@ import {
   highlightOrangeColor,
   separatorColor,
 } from "src/core/color_defs.js";
-import { is_a11y_mode, lang } from "src/core/injected_build_constants.js";
+import { is_a11y_mode, lang } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index.js";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";

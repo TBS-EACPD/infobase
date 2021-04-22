@@ -1,10 +1,10 @@
 import _ from "lodash";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.js";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { formats } from "src/core/format.js";
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants";
 
-import { businessConstants } from "./businessConstants.js";
+import { businessConstants } from "./businessConstants";
 import { Program, CRSO } from "./organizational_entities.js";
 import { trivial_text_maker, run_template } from "./text.js";
 

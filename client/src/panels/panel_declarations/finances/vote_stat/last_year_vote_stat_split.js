@@ -9,7 +9,7 @@ import {
 
 import { year_templates } from "src/models/years.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 

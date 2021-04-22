@@ -7,7 +7,7 @@ import {
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index.js";
 

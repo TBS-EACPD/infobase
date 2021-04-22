@@ -14,8 +14,8 @@ import { make_unique_func, make_unique } from "src/general_utils.js";
 import { sources as all_sources } from "src/metadata/data_sources.js";
 import { get_static_url, make_request } from "src/request_utils.js";
 
-import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.js";
-import { lang } from "./injected_build_constants.js";
+import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
+import { lang } from "./injected_build_constants";
 
 import {
   attach_dimensions,

@@ -1,4 +1,4 @@
-import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants.js";
+import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants";
 
 import { log_standard_event } from "./core/analytics.js";
 

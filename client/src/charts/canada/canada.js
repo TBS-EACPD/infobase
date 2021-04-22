@@ -10,7 +10,7 @@ import {
   Select,
 } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text.js";
 
 import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";

@@ -17,7 +17,7 @@ import {
   GraphOverlay,
 } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants";
 import FootNote from "src/models/footnotes/footnotes.js";
 
 import { Subject } from "src/models/subject.js";
@@ -32,7 +32,7 @@ import {
 } from "src/core/color_schemes.js";
 import { formats } from "src/core/format.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 

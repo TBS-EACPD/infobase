@@ -14,7 +14,7 @@ import {
   LogInteractionEvents,
 } from "src/components/index.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconCopyLink } from "src/icons/icons.js";
 

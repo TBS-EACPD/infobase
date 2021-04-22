@@ -1,4 +1,4 @@
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants";
 
 // temporary, for dev purposes. Can be dropped/cleaned up after when we finally publish expenditures
 export const COVID_EXPENDITUES_FLAG = false;

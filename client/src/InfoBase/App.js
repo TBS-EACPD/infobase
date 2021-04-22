@@ -15,11 +15,7 @@ import { DevFip } from "src/core/DevFip.js";
 import { EasyAccess } from "src/core/EasyAccess.js";
 import { ErrorBoundary } from "src/core/ErrorBoundary.js";
 import { has_local_storage } from "src/core/feature_detection.js";
-import {
-  lang,
-  is_a11y_mode,
-  is_dev,
-} from "src/core/injected_build_constants.js";
+import { lang, is_a11y_mode, is_dev } from "src/core/injected_build_constants";
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "src/core/NavComponents.js";
 import { RedirectHeader } from "src/core/RedirectHeader.js";

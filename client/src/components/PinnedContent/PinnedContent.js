@@ -8,7 +8,7 @@ import { create_text_maker } from "src/models/text.js";
 
 import { backgroundColor } from "src/core/color_defs.js";
 import { has_local_storage } from "src/core/feature_detection.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconPin, IconUnpin } from "src/icons/icons.js";
 

@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 import { nest } from "d3-collection";
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants";
 
 import { Subject } from "src/models/subject.js";
 import { trivial_text_maker, run_template } from "src/models/text.js";
