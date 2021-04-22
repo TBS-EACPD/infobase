@@ -10,7 +10,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import {
   secondaryColor,
@@ -21,11 +21,6 @@ import { is_a11y_mode, lang } from "src/core/injected_build_constants.js";
 
 import { StandardLegend } from "src/charts/legends/index.js";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
-
-import {
-  digital_status_keys,
-  digital_status_query_fragment,
-} from "./shared.js";
 
 import text from "./services.yaml";
 
@@ -41,26 +36,28 @@ const colors = scaleOrdinal().range([
 ]);
 
 const ServicesDigitalStatusPanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: digital_status_query_fragment,
+    summary_name: "service_digital_status_summary",
+    query_fragment: `
+    service_digital_status_summary {
+      key_desc
+      key
+      can_online
+      cannot_online
+      not_applicable
+    }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
-  const get_current_status_count = (key, value) =>
-    _.countBy(data, `${key}_status`)[value] || 0;
-
-  const processed_data = _.chain(digital_status_keys)
-    .map((key) => ({
-      id: text_maker(`${key}_desc`),
-      key,
-      [can_online]: get_current_status_count(key, true),
-      [cannot_online]: get_current_status_count(key, false),
-      [not_applicable]: get_current_status_count(key, null),
-    }))
-    .sortBy(can_online)
-    .value();
+  const processed_data = _.map(data, (row) => ({
+    ...row,
+    key_desc: text_maker(row.key_desc),
+    [can_online]: row.can_online,
+    [cannot_online]: row.cannot_online,
+    [not_applicable]: row.not_applicable,
+  }));
 
   const most_digital_component = _.maxBy(processed_data, can_online);
   const least_digital_component = _.minBy(processed_data, can_online);
@@ -112,7 +109,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
         <DisplayTable
           data={processed_data}
           column_configs={{
-            id: {
+            key_desc: {
               index: 0,
               is_searchable: true,
               header: text_maker("client_interaction_point"),
@@ -148,7 +145,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
           <WrappedNivoHBar
             data={processed_data}
             is_money={false}
-            indexBy={"id"}
+            indexBy={"key_desc"}
             keys={[can_online, cannot_online, not_applicable]}
             colors={(d) => colors(d.id)}
             bttm_axis={{

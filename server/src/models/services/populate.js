@@ -2,6 +2,8 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
+import { digital_status_keys } from "./constants.js";
+
 const multi_value_string_fields_to_arrays = (list_fields, seperator = "<>") =>
   _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
 const convert_to_bool_or_null = (value, true_val, false_val) => {
@@ -22,6 +24,9 @@ export default async function ({ models }) {
     GovServiceTypeSummary,
     DeptServiceTypeSummary,
     ProgramServiceTypeSummary,
+    GovServiceDigitalStatusSummary,
+    DeptServiceDigitalStatusSummary,
+    ProgramServiceDigitalStatusSummary,
   } = models;
 
   const service_report_rows = _.map(
@@ -117,33 +122,33 @@ export default async function ({ models }) {
       collects_fees: convert_to_bool_or_null(collects_fees, "Yes", "No"),
       account_reg_digital_status: convert_to_bool_or_null(
         account_reg_digital_status,
-        "Enabled",
-        "Not Enabled"
+        "ENABLED",
+        "NOT_ENABLED"
       ),
       authentication_status: convert_to_bool_or_null(
         authentication_status,
-        "Enabled",
-        "Not Enabled"
+        "ENABLED",
+        "NOT_ENABLED"
       ),
       application_digital_status: convert_to_bool_or_null(
         application_digital_status,
-        "Enabled",
-        "Not Enabled"
+        "ENABLED",
+        "NOT_ENABLED"
       ),
       decision_digital_status: convert_to_bool_or_null(
         decision_digital_status,
-        "Enabled",
-        "Not Enabled"
+        "ENABLED",
+        "NOT_ENABLED"
       ),
       issuance_digital_status: convert_to_bool_or_null(
         issuance_digital_status,
-        "Enabled",
-        "Not Enabled"
+        "ENABLED",
+        "NOT_ENABLED"
       ),
       issue_res_digital_status: convert_to_bool_or_null(
         issue_res_digital_status,
-        "Enabled",
-        "Not Enabled"
+        "ENABLED",
+        "NOT_ENABLED"
       ),
       program_ids: _.chain(program_ids)
         .split("<>")
@@ -176,6 +181,14 @@ export default async function ({ models }) {
       ),
     })
   );
+  const group_by_program_id = (result, service) => {
+    _.forEach(service.program_ids, (program_id) => {
+      result[program_id] = result[program_id]
+        ? _.concat(result[program_id], service)
+        : [service];
+    });
+    return result;
+  };
   const service_types_lookup = _.chain(
     get_standard_csv_file_rows("service_types_lookup.csv")
   )
@@ -210,14 +223,7 @@ export default async function ({ models }) {
     )
     .value();
   const program_type_summary = _.chain(service_rows)
-    .reduce((result, service) => {
-      _.forEach(service.program_ids, (program_id) => {
-        result[program_id] = result[program_id]
-          ? _.concat(result[program_id], service)
-          : [service];
-      });
-      return result;
-    }, {})
+    .reduce(group_by_program_id, {})
     .flatMap((services, program_id) =>
       _.chain(services)
         .flatMap("service_type_code")
@@ -232,6 +238,40 @@ export default async function ({ models }) {
         .value()
     )
     .value();
+  const get_current_status_count = (services, key, value) =>
+    _.countBy(services, `${key}_status`)[value] || 0;
+  const populate_digital_summary_key = (services, subject_id, level, key) => ({
+    id: `${level}_${subject_id}_${key}`,
+    key_desc: `${key}_desc`,
+    key,
+    subject_id,
+    can_online: get_current_status_count(services, key, true),
+    cannot_online: get_current_status_count(services, key, false),
+    not_applicable: get_current_status_count(services, key, null),
+  });
+
+  const gov_service_digital_summary = _.chain(digital_status_keys)
+    .map((key) => populate_digital_summary_key(service_rows, "gov", "gov", key))
+    .sortBy("can_online")
+    .value();
+  const dept_service_digital_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap((services, org_id) =>
+      _.flatMap(digital_status_keys, (key) =>
+        populate_digital_summary_key(services, org_id, "dept", key)
+      )
+    )
+    .sortBy("can_online")
+    .value();
+  const program_service_digital_summary = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .flatMap((services, program_id) =>
+      _.flatMap(digital_status_keys, (key) =>
+        populate_digital_summary_key(services, program_id, "program", key)
+      )
+    )
+    .sortBy("can_online")
+    .value();
 
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
@@ -241,5 +281,10 @@ export default async function ({ models }) {
     GovServiceTypeSummary.insertMany(gov_type_summary),
     DeptServiceTypeSummary.insertMany(dept_type_summary),
     ProgramServiceTypeSummary.insertMany(program_type_summary),
+    GovServiceDigitalStatusSummary.insertMany(gov_service_digital_summary),
+    DeptServiceDigitalStatusSummary.insertMany(dept_service_digital_summary),
+    ProgramServiceDigitalStatusSummary.insertMany(
+      program_service_digital_summary
+    ),
   ]);
 }

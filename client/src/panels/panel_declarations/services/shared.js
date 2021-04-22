@@ -18,14 +18,6 @@ const digital_status_keys = [
   "issuance_digital",
   "issue_res_digital",
 ];
-const digital_status_query_fragment = `
-account_reg_digital_status
-authentication_status
-application_digital_status
-decision_digital_status
-issuance_digital_status
-issue_res_digital_status
-`;
 const delivery_channels_keys = [
   "phone_inquiry",
   "other_application",
@@ -77,7 +69,6 @@ const available_icons = {
 
 export {
   digital_status_keys,
-  digital_status_query_fragment,
   delivery_channels_keys,
   delivery_channels_query_fragment,
   available_keys,
