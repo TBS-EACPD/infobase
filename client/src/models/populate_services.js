@@ -234,13 +234,20 @@ const get_services_query = (query_options) => {
   return query_lookup_by_subject_level[subject.level](service_fragments);
 };
 
+const get_query_appropirate_level = (subject) =>
+  subject.level === "dept" ? "org" : subject.level;
+
 const get_summary_query = (query_options) => {
-  const { org_id, query_fragment } = query_options;
-  const is_gov = org_id === "gov";
+  const { subject, query_fragment } = query_options;
+  const query_by_level = {
+    gov: "gov",
+    dept: `org(org_id: "${subject.id}")`,
+    program: `program(id: "${subject.id}")`,
+  };
   return gql`
   query($lang: String!) {
     root(lang: $lang) {
-      ${is_gov ? "gov" : `org(org_id: "${org_id}")`} {
+      ${query_by_level[subject.level]} {
         service_summary {
           ${query_fragment}
         }
@@ -252,7 +259,7 @@ const get_summary_query = (query_options) => {
 
 export const useSummaryServices = (query_options) => {
   const time_at_request = Date.now();
-  const { org_id, summary_name } = query_options;
+  const { subject, summary_name } = query_options;
   const query = get_summary_query(query_options);
   const res = useQuery(query, {
     variables: {
@@ -270,7 +277,7 @@ export const useSummaryServices = (query_options) => {
     throw new Error(error);
   }
   if (!loading) {
-    const level = org_id === "gov" ? "gov" : "org";
+    const level = get_query_appropirate_level(subject);
     return { ...res, data: data.root[level].service_summary[summary_name] };
   }
   return res;

@@ -89,6 +89,7 @@ export default function (model_singleton) {
 
   const ServiceTypeSummarySchema = mongoose.Schema({
     id: pkey_type(),
+    subject_id: parent_fkey_type(),
     ...bilingual_str("label"),
     value: { type: Number },
   });
@@ -98,10 +99,35 @@ export default function (model_singleton) {
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
 
-  // Summary schemas
-  model_singleton.define_model("ServiceTypeSummary", ServiceTypeSummarySchema);
+  const define_models_w_same_schema = (names, schema) => {
+    _.forEach(names, (name) => {
+      model_singleton.define_model(name, schema);
+    });
+  };
+  define_models_w_same_schema(
+    [
+      "GovServiceTypeSummary",
+      "DeptServiceTypeSummary",
+      "ProgramServiceTypeSummary",
+    ],
+    ServiceTypeSummarySchema
+  );
 
-  const { Service } = model_singleton.models;
+  const {
+    Service,
+    GovServiceTypeSummary,
+    DeptServiceTypeSummary,
+    ProgramServiceTypeSummary,
+  } = model_singleton.models;
+
+  const define_loaders_w_same_fk_attr = (schemas_and_names, fk_attr) =>
+    _.chain(schemas_and_names)
+      .map(({ schema, name }) => [
+        name,
+        create_resource_by_foreignkey_attr_dataloader(schema, fk_attr),
+      ])
+      .fromPairs()
+      .value();
 
   const loaders = {
     services_by_org_id: create_resource_by_foreignkey_attr_dataloader(
@@ -111,6 +137,23 @@ export default function (model_singleton) {
     services_by_program_id: create_resource_by_foreignkey_attr_dataloader(
       Service,
       "program_ids"
+    ),
+    ...define_loaders_w_same_fk_attr(
+      [
+        {
+          schema: GovServiceTypeSummary,
+          name: "service_types_summary_for_gov",
+        },
+        {
+          schema: DeptServiceTypeSummary,
+          name: "service_types_summary_for_dept",
+        },
+        {
+          schema: ProgramServiceTypeSummary,
+          name: "service_types_summary_for_program",
+        },
+      ],
+      "subject_id"
     ),
   };
   _.each(loaders, (val, key) => model_singleton.define_loader(key, val));
