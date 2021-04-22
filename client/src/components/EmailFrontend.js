@@ -169,17 +169,16 @@ class EmailFrontend extends React.Component {
       ({ form_type }, key) => key === "meta" || !form_type
     );
 
-    const all_required_user_fields_are_filled = _.chain(user_fields)
+    const all_required_user_fields_are_filled = _(user_fields)
       .omitBy((field) => !field.required)
       .keys()
       .every(
         (required_field_key) =>
           !_.isUndefined(completed_template[required_field_key]) &&
           !_.isEmpty(completed_template[required_field_key])
-      )
-      .value();
+      );
 
-    const all_connected_user_fields_are_filled = _.chain(user_fields)
+    const all_connected_user_fields_are_filled = _(user_fields)
       .toPairs()
       .filter(
         ([field_name, field_val]) =>
@@ -192,8 +191,7 @@ class EmailFrontend extends React.Component {
       )
       .every(
         ([field_name, field_val]) => !_.isEmpty(completed_template[field_name])
-      )
-      .value();
+      );
 
     const ready_to_send =
       all_required_user_fields_are_filled &&

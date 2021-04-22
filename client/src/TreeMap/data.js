@@ -133,15 +133,17 @@ function prep_nodes(node, perspective, get_changes) {
     }
     if (!node.ftes) {
       // ok this is terrible but I swear to god nothing I tried that was more concise worked
-      node.ftes = _.chain(children)
-        .reduce(function (memo, item) {
+      node.ftes = _.reduce(
+        children,
+        function (memo, item) {
           if (item.ftes) {
             return memo + item.ftes;
           } else {
             return memo;
           }
-        }, 0)
-        .value();
+        },
+        0
+      );
     }
     if (get_changes) {
       perspective === "drf_ftes"

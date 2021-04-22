@@ -36,10 +36,9 @@ function all_children_hidden(header) {
 
 function calc_col_span(header) {
   if (header.children) {
-    return _.chain(header.children)
+    return _(header.children)
       .map(calc_col_span)
-      .reduce((x, y) => x + y)
-      .value();
+      .reduce((x, y) => x + y);
   }
   if (header.hidden) {
     return 0;

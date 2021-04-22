@@ -73,20 +73,15 @@ function get_footnotes_for_votestat_item({ desc, org_id, votenum }) {
 }
 
 const prior_in_year_doc_filter = (item) =>
-  _.chain(ordered_est_docs)
+  _(ordered_est_docs)
     .takeWhile((est_doc) => est_doc !== current_doc_code)
-    .includes(item.est_doc_code)
-    .value();
+    .includes(item.est_doc_code);
 const get_comparision_value = (group) =>
   current_doc_is_mains
-    ? _.chain(group)
+    ? _(group)
         .filter((item) => item.est_doc_code === "MAINS")
         .sumBy(last_year_col)
-        .value()
-    : _.chain(group)
-        .filter(prior_in_year_doc_filter)
-        .sumBy(this_year_col)
-        .value();
+    : _(group).filter(prior_in_year_doc_filter).sumBy(this_year_col);
 
 const reduce_by_current_doc_dim = (rows) =>
   _.chain(rows)
@@ -98,10 +93,9 @@ const reduce_by_current_doc_dim = (rows) =>
         dept: first.dept,
         desc: first.desc,
         votenum: first.votenum,
-        current_value: _.chain(group)
+        current_value: _(group)
           .filter({ est_doc_code: current_doc_code })
-          .sumBy(this_year_col)
-          .value(),
+          .sumBy(this_year_col),
         comparison_value: get_comparision_value(group),
         _rows: group,
       };

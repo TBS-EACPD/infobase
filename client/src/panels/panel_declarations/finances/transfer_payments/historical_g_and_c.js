@@ -182,11 +182,10 @@ class DetailedHistTPItems extends React.Component {
       .fromPairs()
       .value();
 
-    const max_value = _.chain(prepped_rows)
+    const max_value = _(prepped_rows)
       .map((row) => _.map(exp_years, (yr) => row[yr]))
       .flatten()
-      .max()
-      .value();
+      .max();
 
     const raw_data = _.flatMap(graph_series, (value) => value);
 
@@ -440,11 +439,10 @@ export const declare_historical_g_and_c_panel = () =>
               const max_payment = _.maxBy(avgs, "value");
 
               const max_type = transfer_payments[max_payment.type].text;
-              const has_transfer_payments = _.chain(rolled_up_transfer_payments)
+              const has_transfer_payments = _(rolled_up_transfer_payments)
                 .values()
                 .flatten()
-                .some((value) => value !== 0)
-                .value();
+                .some((value) => value !== 0);
 
               const rows = _.chain(orgTransferPayments.q(dept).data)
                 .sortBy("{{pa_last_year}}exp")

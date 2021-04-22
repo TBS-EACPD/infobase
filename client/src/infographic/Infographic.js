@@ -314,8 +314,7 @@ class InfoGraph_ extends React.Component {
       (subject_panels_by_bubble_id) => {
         const subject_bubble_defs = _.filter(
           get_bubble_defs(subject),
-          ({ id }) =>
-            _.chain(subject_panels_by_bubble_id).keys().includes(id).value()
+          ({ id }) => _(subject_panels_by_bubble_id).keys().includes(id)
         );
 
         const common_new_state = {
@@ -378,7 +377,7 @@ const Infographic = ({
   },
   history: { replace },
 }) => {
-  const is_level_valid = _.chain(Subject).keys().includes(level).value();
+  const is_level_valid = _(Subject).keys().includes(level);
   if (!is_level_valid) {
     return redirect_with_msg(
       text_maker("invalid_redirect_home", { param: level }),

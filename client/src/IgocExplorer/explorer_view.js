@@ -27,10 +27,9 @@ function get_org_count(node) {
   } else if (_.isEmpty(node.children)) {
     return 0;
   } else {
-    return _.chain(node.children)
+    return _(node.children)
       .map((child) => get_org_count(child))
-      .sum()
-      .value();
+      .sum();
   }
 }
 

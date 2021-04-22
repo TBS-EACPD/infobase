@@ -37,7 +37,7 @@ export class InsertRuntimeFooterLinks extends React.Component {
       "#footer_survey_link_area"
     );
 
-    const links_to_insert = _.chain(footer_link_items)
+    const links_to_insert = _(footer_link_items)
       .map(
         ({ id, href, text }) =>
           `<li><a ${
@@ -47,8 +47,7 @@ export class InsertRuntimeFooterLinks extends React.Component {
       .reduce(
         (memo, link_html) => memo + link_html,
         this.state.static_footer_links
-      )
-      .value();
+      );
 
     footer_survey_link_ul.innerHTML = links_to_insert;
 

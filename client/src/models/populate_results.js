@@ -108,7 +108,7 @@ export const subject_has_results = (subject) => {
 
 let _api_subject_ids_with_loaded_results = {};
 const results_fields_fragment = (docs_to_load) =>
-  _.chain(docs_to_load)
+  _(docs_to_load)
     .map(
       (doc) => `
 ${doc}_results: results(doc: "${doc}") {
@@ -157,8 +157,7 @@ ${doc}_results: results(doc: "${doc}") {
       (memo, fragment) => `
 ${memo}
 ${fragment}`
-    )
-    .value();
+    );
 const program_results_fragment = (docs_to_load) => `
 id
 ${results_fields_fragment(docs_to_load)}
@@ -437,7 +436,7 @@ query($lang: String!) {
         level
 ${
   // Weird indentation ahead, so that the template output has the right spacing
-  _.chain(result_doc_keys)
+  _(result_doc_keys)
     .map((doc_key) =>
       /drr/.test(doc_key)
         ? `
@@ -454,7 +453,6 @@ ${
       (memo, fragment) => `${memo}
 ${fragment}`
     )
-    .value()
 }
       }
     }

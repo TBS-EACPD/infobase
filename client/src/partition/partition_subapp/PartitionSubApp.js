@@ -262,7 +262,7 @@ export class PartitionSubApp {
   // Where the actual search happens
   search_actual(query) {
     const search_tree = this.current_perspective.hierarchy_factory();
-    const deburred_query = _.chain(query).trim().deburr().lowerCase().value();
+    const deburred_query = _(query).thru(_.trim).thru(_.deburr).lowerCase();
 
     const search_matching = [];
     let nonunique_dont_fade_arrays = [];

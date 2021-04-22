@@ -37,13 +37,12 @@ class ServicesChannelsPanel extends React.Component {
     const median_3_values = _.chain(services)
       .map((service) => ({
         id: service.id,
-        value: _.chain(delivery_channels_keys)
+        value: _(delivery_channels_keys)
           .map((key) =>
             _.map(service.service_report, (report) => report[`${key}_count`])
           )
           .flatten()
-          .max()
-          .value(),
+          .max(),
       }))
       .filter("value")
       .sortBy("value")
@@ -69,10 +68,9 @@ class ServicesChannelsPanel extends React.Component {
     const { max_vol_service_name, max_vol_service_value } = _.chain(services)
       .map(({ name, service_report }) => ({
         max_vol_service_name: name,
-        max_vol_service_value: _.chain(delivery_channels_keys)
+        max_vol_service_value: _(delivery_channels_keys)
           .map((key) => _.sumBy(service_report, `${key}_count`))
-          .sum()
-          .value(),
+          .sum(),
       }))
       .maxBy("max_vol_service_value")
       .value();
@@ -84,10 +82,9 @@ class ServicesChannelsPanel extends React.Component {
       .map((key) => ({
         max_vol_channel_key: key,
         max_vol_channel_name: text_maker(key),
-        max_vol_channel_value: _.chain(services)
+        max_vol_channel_value: _(services)
           .map(({ service_report }) => _.sumBy(service_report, `${key}_count`))
-          .sum()
-          .value(),
+          .sum(),
       }))
       .maxBy("max_vol_channel_value")
       .value();

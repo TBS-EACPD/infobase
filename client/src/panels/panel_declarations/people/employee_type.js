@@ -93,15 +93,13 @@ export const declare_employee_type_panel = () =>
 
         const common_text_args = calculate_common_text_args(panel_args);
 
-        const sum_emp_first_active_year = _.chain(panel_args)
+        const sum_emp_first_active_year = _(panel_args)
           .map((type) => type.data[common_text_args.first_active_year_index])
-          .sum()
-          .value();
+          .sum();
 
-        const sum_emp_last_active_year = _.chain(panel_args)
+        const sum_emp_last_active_year = _(panel_args)
           .map((type) => type.data[common_text_args.last_active_year_index])
-          .sum()
-          .value();
+          .sum();
 
         const student_first_active_year_pct = student_data
           ? student_data[common_text_args.first_active_year_index] /

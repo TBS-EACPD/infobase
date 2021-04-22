@@ -231,12 +231,12 @@ export class DisplayTable extends React.Component {
     };
 
     const clean_search_string = (search_string) =>
-      _.chain(search_string).deburr().toLower().trim().value();
+      _(search_string).thru(_.deburr).thru(_.toLower).trim();
     const is_number_string_date = (val) =>
       _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter((row) =>
-        _.chain(row)
+        _(row)
           .map((column_value, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
             const col_search_value =
@@ -252,7 +252,6 @@ export class DisplayTable extends React.Component {
             );
           })
           .every()
-          .value()
       )
       .thru((unsorted_array) => {
         if (_.has(col_configs_with_defaults, sort_by)) {

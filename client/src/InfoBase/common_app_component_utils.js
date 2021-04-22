@@ -9,14 +9,13 @@ import { retry_promise } from "src/general_utils.js";
 // Link tags for stylesheets should all have non null sheet properties
 const linked_stylesheets_loaded = () => {
   try {
-    const linked_style_sheets_have_loaded = _.chain(
+    const linked_style_sheets_have_loaded = _(
       document.head.querySelectorAll(
         `link[rel='stylesheet'][href^='${cdn_url}']`
       )
     )
       .map(_.identity)
-      .every((link_tag) => !_.isNull(link_tag.sheet))
-      .value();
+      .every((link_tag) => !_.isNull(link_tag.sheet));
     return linked_style_sheets_have_loaded;
   } catch (e) {
     // Some versions of FireFox throw a security error on accessing cssRules from a non-local styleSheet

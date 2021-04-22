@@ -47,14 +47,16 @@ const TooltipActivator = _.isUndefined(MutationObserver)
                 _.isEmpty(current_tooltip_nodes)
               ) &&
               (previous_tooltip_nodes.length !== current_tooltip_nodes.length ||
-                !_.chain(previous_tooltip_nodes)
+                !_(previous_tooltip_nodes)
                   .zip(current_tooltip_nodes)
-                  .find(
-                    (nodes_to_compare) =>
-                      nodes_to_compare[0] !== nodes_to_compare[1]
+                  .thru((current_tooltip_nodes) =>
+                    _.find(
+                      current_tooltip_nodes,
+                      (nodes_to_compare) =>
+                        nodes_to_compare[0] !== nodes_to_compare[1]
+                    )
                   )
-                  .isUndefined()
-                  .value());
+                  .isUndefined());
 
             if (tooltip_nodes_have_changed) {
               this.setState({ current_tooltip_nodes });
@@ -89,15 +91,14 @@ const TooltipActivator = _.isUndefined(MutationObserver)
           const outgoing_tooltips = [];
 
           this.tooltip_instances.forEach((tooltip_instance) => {
-            const is_remaining_tooltip = _.chain(current_tooltip_nodes)
+            const is_remaining_tooltip = _(current_tooltip_nodes)
               .map((node) =>
                 compare_current_node_and_tooltip_instance(
                   node,
                   tooltip_instance
                 )
               )
-              .some()
-              .value();
+              .some();
 
             if (is_remaining_tooltip) {
               remaining_tooltips.push(tooltip_instance);

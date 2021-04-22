@@ -29,12 +29,11 @@ const { ex_levels } = businessConstants;
 
 const calculate_funcs_by_level = {
   gov: (orgEmployeeExLvl, gov) => {
-    const gov_five_year_total_head_count = _.chain(
+    const gov_five_year_total_head_count = _(
       orgEmployeeExLvl.q().gov_grouping()
     )
       .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
-      .value();
+      .reduce((sum, val) => sum + val, 0);
 
     // assuming gov roll up has data in every ex (and non-ex) group... safe because if it didn't then those groups would be dropped?
     return {
@@ -64,10 +63,9 @@ const calculate_funcs_by_level = {
   dept: (orgEmployeeExLvl, dept) => {
     const ex_level_data = orgEmployeeExLvl.q(dept).data;
 
-    const has_non_ex_only = _.chain(ex_level_data)
+    const has_non_ex_only = _(ex_level_data)
       .filter(({ ex_lvl }) => ex_lvl !== "Non-EX")
-      .isEmpty()
-      .value();
+      .isEmpty();
 
     return {
       has_non_ex_only,
@@ -108,10 +106,9 @@ export const declare_employee_executive_level_panel = () =>
             return {
               ...calculate_common_text_args(series),
               subject,
-              avg_num_non_ex: _.chain(series)
+              avg_num_non_ex: _(series)
                 .first(({ label }) => label === "Non-EX")
-                .thru(({ data }) => _.mean(data))
-                .value(),
+                .thru(({ data }) => _.mean(data)),
             };
           } else {
             const ex_only_series = _.filter(

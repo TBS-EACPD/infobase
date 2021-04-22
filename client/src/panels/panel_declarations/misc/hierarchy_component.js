@@ -53,10 +53,9 @@ const hierarchical_some = (node, predicate) => {
   if (predicate_func(node)) {
     return true;
   } else if (!_.isEmpty(node.children)) {
-    return _.chain(node.children)
+    return _(node.children)
       .map((child) => hierarchical_some(child, predicate_func))
-      .some()
-      .value();
+      .some();
   } else {
     return false;
   }

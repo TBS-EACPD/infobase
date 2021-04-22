@@ -131,10 +131,9 @@ export default function ({ models, loaders }) {
       covid_measures: (_x, { fiscal_year }) =>
         CovidMeasure.find({}).then((measures) =>
           _.filter(measures, ({ related_org_ids }) =>
-            _.chain(related_org_ids)
+            _(related_org_ids)
               .thru(optional_fiscal_year_filter(fiscal_year))
               .some(({ org_ids }) => !_.isEmpty(org_ids))
-              .value()
           )
         ),
       covid_measure: (_x, { covid_measure_id }) =>
@@ -171,10 +170,9 @@ export default function ({ models, loaders }) {
           .load(queried_org_id)
           .then((measures) =>
             _.filter(measures, ({ related_org_ids }) =>
-              _.chain(related_org_ids)
+              _(related_org_ids)
                 .thru(optional_fiscal_year_filter(fiscal_year))
                 .some(({ org_ids }) => _.includes(org_ids, queried_org_id))
-                .value()
             )
           ),
     },

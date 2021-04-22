@@ -26,19 +26,17 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
 
         const exp_pa_last_year = "{{pa_last_year}}exp";
 
-        const gov_tp = _.chain(
+        const gov_tp = _(
           orgTransferPayments.payment_type_ids([exp_pa_last_year], false)
         )
           .map((payment_type) => _.sum(payment_type))
-          .sum()
-          .value();
+          .sum();
 
-        const org_tp = _.chain(
+        const org_tp = _(
           orgTransferPayments.payment_type_ids([exp_pa_last_year], subject.id)
         )
           .map((payment_type) => _.sum(payment_type))
-          .sum()
-          .value();
+          .sum();
 
         const dept_spending = programSpending.q(subject).sum(exp_pa_last_year);
 

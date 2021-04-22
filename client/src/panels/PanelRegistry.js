@@ -41,7 +41,7 @@ class PanelRegistry {
   static is_registered_panel_key(test_key) {
     return _.chain(panels)
       .keys(panels)
-      .join()
+      .thru(_.join)
       .thru((all_panel_keys) =>
         RegExp(`,${test_key}:.+,`).test(`,${all_panel_keys},`)
       )

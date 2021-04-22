@@ -560,12 +560,11 @@ export class PartitionDiagram {
             ? link_target_id_ancestry_chunks
             : lowest_node_id_ancestry_chunks;
 
-        const target_link_is_in_branch_of_lowest_node = _.chain(
+        const target_link_is_in_branch_of_lowest_node = _(
           shorter_of_the_id_chunks
         )
           .map((id_chunk, ix) => id_chunk === longer_of_the_id_chunks[ix])
-          .reduce((memo, bool) => memo && bool, true)
-          .value();
+          .reduce((memo, bool) => memo && bool, true);
 
         return target_link_is_in_branch_of_lowest_node;
       })
@@ -764,10 +763,9 @@ export class PartitionDiagram {
     );
   }
   are_any_children_magnified() {
-    return _.chain(this.data.root.children)
+    return _(this.data.root.children)
       .map((node) => node.magnified)
-      .some()
-      .value();
+      .some();
   }
   remove_unmagnify_all_button() {
     this.unmagnify_all_popup.remove();

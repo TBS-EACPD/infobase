@@ -48,12 +48,11 @@ const calculate_funcs_by_level = {
       },
     ];
 
-    const gov_five_year_total_head_count = _.chain(
+    const gov_five_year_total_head_count = _(
       orgEmployeeAgeGroup.q().gov_grouping()
     )
       .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
-      .value();
+      .reduce((sum, val) => sum + val, 0);
 
     const age_group = _.map(age_groups, ({ text: age_range }) => {
       const yearly_values = people_years.map(

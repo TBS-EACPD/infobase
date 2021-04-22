@@ -259,10 +259,9 @@ export default function ({ models }) {
       );
 
       avg_shares = _.map(dimension_values, (dimension) => {
-        const dimension_all_years_total = _.chain(flat_headcount_data)
+        const dimension_all_years_total = _(flat_headcount_data)
           .filter((d) => d.dimension === dimension)
-          .reduce((total, d) => total + d.headcount, 0)
-          .value();
+          .reduce((total, d) => total + d.headcount, 0);
 
         const avg_share = dimension_all_years_total / all_years_total;
 
@@ -358,10 +357,9 @@ export default function ({ models }) {
       .value();
 
     const avg_headcount =
-      _.chain(people_years)
+      _(people_years)
         .map((key) => totals[key] || 0)
-        .sum()
-        .value() / active_year_count;
+        .sum() / active_year_count;
 
     const avg_share = avg_headcount / total_avg_headcount;
 

@@ -31,12 +31,9 @@ const calculate_funcs_by_level = {
   gov: function (gov) {
     const { orgEmployeeFol } = this.tables;
 
-    const gov_five_year_total_head_count = _.chain(
-      orgEmployeeFol.q().gov_grouping()
-    )
+    const gov_five_year_total_head_count = _(orgEmployeeFol.q().gov_grouping())
       .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
-      .value();
+      .reduce((sum, val) => sum + val, 0);
 
     return _.chain(fol)
       .values()

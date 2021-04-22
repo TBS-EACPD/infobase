@@ -42,7 +42,7 @@ Subject.get_by_guid = function get_by_guid(guid) {
 // Duplicate keys in all lower case, for legacy reasons
 _.each(Subject, (subject_item, key) => {
   const lower_case_key = _.toLower(key);
-  if (_.chain(Subject).keys().indexOf(lower_case_key).value() === -1) {
+  if (_(Subject).keys().indexOf(lower_case_key) === -1) {
     Subject[lower_case_key] = subject_item;
   }
 });

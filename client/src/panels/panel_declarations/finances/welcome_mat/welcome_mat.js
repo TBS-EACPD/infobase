@@ -848,10 +848,9 @@ function render({ title, calculations, footnotes, glossary_keys, sources }) {
 
 //assumes programSpending/12 are loaded
 function has_hist_data(subject, q6) {
-  return _.chain(exp_cols)
+  return _(exp_cols)
     .map((yr) => q6.sum(yr) || 0)
-    .some()
-    .value();
+    .some();
 }
 
 function has_planning_data(subject, q6) {
@@ -870,10 +869,9 @@ function has_planning_data(subject, q6) {
 
   return (
     has_dp &&
-    _.chain(planning_years)
+    _(planning_years)
       .map((yr) => q6.sum(yr) || 0)
       .some()
-      .value()
   );
 }
 

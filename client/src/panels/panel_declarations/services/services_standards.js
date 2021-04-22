@@ -23,12 +23,11 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ServicesStandardsPanel = ({ panel_args }) => {
   const { services } = panel_args;
 
-  const has_standards_count = _.chain(services)
+  const has_standards_count = _(services)
     .countBy("standards")
     .filter((value, key) => key)
     .map()
-    .sum()
-    .value();
+    .sum();
   const total_flat_standards = _.chain(services)
     .flatMap("standards")
     .reject(({ target_type }) => target_type === "Other type of target")

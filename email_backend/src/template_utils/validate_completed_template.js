@@ -1,18 +1,17 @@
 import _ from "lodash";
 
 const verify_required_fields_present = (field_templates, completed_fields) =>
-  _.chain(field_templates)
+  _(field_templates)
     .pickBy(_.property("required"))
     .keys()
     .map((required_key) => completed_fields[required_key])
-    .every()
-    .value();
+    .every();
 
 const verify_values_are_expected_and_match_value_types = (
   field_templates,
   completed_fields
 ) =>
-  _.chain(completed_fields)
+  _(completed_fields)
     .map((submitted_value, field_key) => {
       const expected_type = _.get(field_templates, `${field_key}.value_type`);
       const is_required = _.get(field_templates, `${field_key}.required`);
@@ -53,8 +52,7 @@ const verify_values_are_expected_and_match_value_types = (
         return false; //unexpected field in completed_fields
       }
     })
-    .every()
-    .value();
+    .every();
 
 const validate_completed_template = (original_template, completed_template) => {
   const field_templates = _.omit(original_template, "meta");

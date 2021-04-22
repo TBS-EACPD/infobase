@@ -113,10 +113,9 @@ class SobjLine extends React.Component {
 
     const get_line_graph = (() => {
       const is_data_empty = _.isEmpty(spending_data) && _.isEmpty(raw_data);
-      const max_y = _.chain(data)
+      const max_y = _(data)
         .map((row) => _.max(row.data))
-        .max()
-        .value();
+        .max();
       const empty_data_nivo_props = is_data_empty && {
         data: [
           {

@@ -132,7 +132,7 @@ export const declare_results_intro_panel = () =>
             };
           } else {
             return {
-              num_crs: _.chain(subject.crsos)
+              num_crs: _(subject.crsos)
                 .map(({ id }) =>
                   _.get(
                     GranularResultCounts.get_subject_counts(id),
@@ -140,9 +140,8 @@ export const declare_results_intro_panel = () =>
                   )
                 )
                 .compact()
-                .size()
-                .value(),
-              num_programs: _.chain(subject.programs)
+                .size(),
+              num_programs: _(subject.programs)
                 .map(({ id }) =>
                   _.get(
                     GranularResultCounts.get_subject_counts(id),
@@ -150,8 +149,7 @@ export const declare_results_intro_panel = () =>
                   )
                 )
                 .compact()
-                .size()
-                .value(),
+                .size(),
               ...ResultCounts.get_dept_counts(subject.id),
             };
           }

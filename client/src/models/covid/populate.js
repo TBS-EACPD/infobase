@@ -48,14 +48,13 @@ export const api_load_years_with_covid_data = (subject) => {
         if (level === "dept") {
           subject.set_has_data(
             "covid",
-            !_.chain(years_with_covid_data)
+            !_(years_with_covid_data)
               .thru(({ years_with_estimates, years_with_expenditures }) =>
                 COVID_EXPENDITUES_FLAG
                   ? [...years_with_estimates, ...years_with_expenditures]
                   : years_with_estimates
               )
               .isEmpty()
-              .value()
           );
         }
 

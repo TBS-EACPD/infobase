@@ -45,10 +45,9 @@ const results_resource_fragment = (subject, doc) => {
 };
 
 const isDeptWithoutResults = (subject) =>
-  _.chain(subject.programs)
+  _(subject.programs)
     .map((prog) => _.isEmpty(Result.get_entity_results(prog.id)))
-    .every()
-    .value();
+    .every();
 
 const row_to_drr_status_counts = (counts_row, drr_key) =>
   _.chain(ordered_status_keys)

@@ -207,21 +207,19 @@ const EverythingSearch = withRouter(
       !_.isEmpty(option_node.child_options);
     option_node_should_be_displayed = (option_node, option_key) => {
       if (this.option_node_is_parent(option_node)) {
-        return _.chain(option_node.child_options)
+        return _(option_node.child_options)
           .map(this.option_node_should_be_displayed)
-          .some()
-          .value();
+          .some();
       } else {
-        return _.chain(this.state).keys().includes(option_key).value();
+        return _(this.state).keys().includes(option_key);
       }
     };
     option_node_to_component = (option_node, option_key) => {
       if (this.option_node_should_be_displayed(option_node, option_key)) {
         if (this.option_node_is_parent(option_node)) {
-          const has_checked_child_option = _.chain(option_node.child_options)
+          const has_checked_child_option = _(option_node.child_options)
             .map((_child_node, child_key) => this.state[child_key])
-            .some()
-            .value();
+            .some();
 
           return (
             <div key={option_key} style={{ width: "100%" }}>

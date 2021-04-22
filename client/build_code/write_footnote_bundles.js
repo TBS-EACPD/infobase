@@ -71,7 +71,7 @@ function populate_stores(parsed_models) {
 
     //ESTIMATES footnotes bundle
     const topics = obj.topic_keys.split(",").map((key) => key.replace(" ", ""));
-    if (!_.chain(topics).intersection(estimate_topics).isEmpty().value()) {
+    if (!_(topics).intersection(estimate_topics).isEmpty()) {
       estimate_footnotes.push(obj);
     }
 

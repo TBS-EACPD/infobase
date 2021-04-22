@@ -252,11 +252,10 @@ class RPB extends React.Component {
 
     const zero_filter_func =
       this.state.columns &&
-      _.chain(this.state.columns)
+      _(this.state.columns)
         .map((nick) => this.state.columns[nick])
         .compact()
-        .isEmpty()
-        .value();
+        .isEmpty();
 
     const flat_data =
       !_.isEmpty(table_data) &&

@@ -215,32 +215,28 @@ export default async function ({ models }) {
       .map("covid_measure_id")
       .value(),
     measure_counts: {
-      with_authorities: _.chain(covid_estimates_rows)
+      with_authorities: _(covid_estimates_rows)
         .filter({ fiscal_year })
         .map("covid_measure_id")
         .uniq()
-        .size()
-        .value(),
-      with_spending: _.chain(covid_expenditures_rows)
+        .size(),
+      with_spending: _(covid_expenditures_rows)
         .filter({ fiscal_year })
         .map("covid_measure_id")
         .uniq()
-        .size()
-        .value(),
+        .size(),
     },
     org_counts: {
-      with_authorities: _.chain(covid_estimates_rows)
+      with_authorities: _(covid_estimates_rows)
         .filter({ fiscal_year })
         .map("org_id")
         .uniq()
-        .size()
-        .value(),
-      with_spending: _.chain(covid_expenditures_rows)
+        .size(),
+      with_spending: _(covid_expenditures_rows)
         .filter({ fiscal_year })
         .map("org_id")
         .uniq()
-        .size()
-        .value(),
+        .size(),
     },
   }));
 

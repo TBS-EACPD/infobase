@@ -66,11 +66,10 @@ export const declare_dp_rev_split_panel = () =>
           value: q.sum(col),
         }));
 
-        const has_special_vals = _.chain(data)
+        const has_special_vals = _(data)
           .filter(({ col }) => _.endsWith(col, "spa") || _.endsWith(col, "rev"))
           .map("value")
-          .some()
-          .value();
+          .some();
 
         if (!has_special_vals) {
           return false;

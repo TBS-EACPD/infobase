@@ -62,7 +62,7 @@ function ensure_loaded({
   );
 
   const check_for_panel_dependency = (dependency_key) =>
-    _.chain(panel_set).map(dependency_key).some().value();
+    _(panel_set).map(dependency_key).some();
 
   const should_load_results =
     results || check_for_panel_dependency("requires_results");

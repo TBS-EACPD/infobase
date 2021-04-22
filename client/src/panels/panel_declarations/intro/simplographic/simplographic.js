@@ -63,10 +63,7 @@ export const declare_simplographic_panel = () =>
           "{{ppl_last_year}}",
           Gov
         );
-        const total_employees = _.chain(employee_by_prov)
-          .values()
-          .sum()
-          .value();
+        const total_employees = _(employee_by_prov).values().sum();
         const ncr_employees = employee_by_prov.ncr;
         const empl_count_ncr_ratio = ncr_employees / total_employees;
 

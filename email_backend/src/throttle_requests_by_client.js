@@ -7,7 +7,7 @@ const recent_client_log = {};
 const throttle_requests_by_client = (client) => {
   let this_client_is_in_timeout = false;
 
-  if (_.chain(recent_client_log).keys().includes(client).value()) {
+  if (_(recent_client_log).keys().includes(client)) {
     const log = recent_client_log[client];
     log.requests += 1;
 

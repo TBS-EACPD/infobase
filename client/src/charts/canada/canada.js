@@ -50,7 +50,7 @@ class CanadaGraphBarLegend extends React.Component {
         year: run_template(years[ix]),
         value: prov
           ? data[prov]
-          : alt_totals_by_year?.[ix] || _.chain(data).values().sum().value(),
+          : alt_totals_by_year?.[ix] || _(data).values().sum(),
       }))
       .reverse()
       .value();

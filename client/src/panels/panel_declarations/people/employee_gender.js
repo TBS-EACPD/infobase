@@ -31,12 +31,11 @@ const calculate_funcs_by_level = {
   gov: function (gov) {
     const { orgEmployeeGender } = this.tables;
 
-    const gov_five_year_total_head_count = _.chain(
+    const gov_five_year_total_head_count = _(
       orgEmployeeGender.q().gov_grouping()
     )
       .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
-      .value();
+      .reduce((sum, val) => sum + val, 0);
 
     return _.chain(gender)
       .values()

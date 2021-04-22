@@ -37,10 +37,9 @@ const formatter = formats["big_int_raw"];
 const { provinces } = businessConstants;
 
 const prepare_data_for_a11y_table = (data) => {
-  const all_year_headcount_total = _.chain(data)
+  const all_year_headcount_total = _(data)
     .map((row) => sum(_.values(row)))
-    .reduce((sum, value) => sum + value, 0)
-    .value();
+    .reduce((sum, value) => sum + value, 0);
   const table_data = _.chain(provinces)
     .map((val, key) => ({ key, label: val.text }))
     .reject(({ key }) => _.includes(["qclessncr", "onlessncr"], key))
@@ -84,9 +83,7 @@ class ProvPanel extends React.Component {
     const { panel_args, subject } = calculations;
     const { data } = panel_args;
 
-    const employees_by_year = _.map(data, (year) =>
-      _.chain(year).values().sum().value()
-    );
+    const employees_by_year = _.map(data, (year) => _(year).values().sum());
 
     const first_active_year_index = _.findIndex(
       employees_by_year,
@@ -177,7 +174,7 @@ class ProvPanel extends React.Component {
 }
 
 const calculate_common = (data) => {
-  const max = _.chain(data).last().values().max().value();
+  const max = _(data).thru(_.last).values().max();
   const color_scale = scaleLinear().domain([0, max]).range([0.2, 1]);
 
   return {

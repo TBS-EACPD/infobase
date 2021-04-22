@@ -82,10 +82,9 @@ export default class TagExplorer extends React.Component {
       params: { hierarchy_scheme, period },
     } = match;
 
-    hierarchy_scheme = _.chain(hierarchy_scheme_configs)
+    hierarchy_scheme = _(hierarchy_scheme_configs)
       .map("id")
       .includes(hierarchy_scheme)
-      .value()
       ? hierarchy_scheme
       : default_scheme_id;
 

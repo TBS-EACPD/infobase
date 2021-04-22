@@ -296,7 +296,8 @@ export class Typeahead extends React.Component {
   handle_input_change = (event) => {
     const input_value = event.target.value;
 
-    const cleaned_input_value = _.chain(input_value).trim().deburr().value();
+    const cleaned_input_value = _(input_value).thru(_.trim).deburr();
+
     this.debounced_on_query(cleaned_input_value);
 
     this.setState({

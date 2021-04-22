@@ -211,12 +211,11 @@ describe("results data", function () {
         (value) => (value === 0 ? null : value)
       );
 
-    const result_counts_match = _.chain(dept_result_counts_result.data.root)
+    const result_counts_match = _(dept_result_counts_result.data.root)
       .mapValues(combine_docs_and_rekey)
       .every((counts) =>
         _.isEqual(counts_by_dept_code[counts.subject_id], counts)
-      )
-      .value();
+      );
 
     return expect(result_counts_match).toEqual(true);
   });

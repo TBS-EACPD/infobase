@@ -17,7 +17,7 @@ import {
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
 const get_re_matcher = (accessors, reg_exps) => (obj) =>
-  _.chain(accessors)
+  _(accessors)
     .map((accessor) => (_.isString(accessor) ? obj[accessor] : accessor(obj)))
     .some((str) => {
       if (!_.isString(str)) {
@@ -26,8 +26,7 @@ const get_re_matcher = (accessors, reg_exps) => (obj) =>
         str = _.deburr(str);
         return _.every(reg_exps, (re) => str.match(re));
       }
-    })
-    .value();
+    });
 
 function create_re_matcher(query, accessors, config_name) {
   const reg_exps = query_to_reg_exps(query);

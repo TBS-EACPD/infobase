@@ -186,10 +186,9 @@ export const declare_late_results_warning_panel = () =>
             ...late_panel_config,
 
             calculate: (subject) =>
-              _.chain(docs_with_late_orgs)
+              _(docs_with_late_orgs)
                 .flatMap("late_results_orgs")
-                .includes(level === "dept" ? subject.id : subject.dept.id)
-                .value(),
+                .includes(level === "dept" ? subject.id : subject.dept.id),
             render() {
               const per_doc_inner_content = (result_doc) => (
                 <TM

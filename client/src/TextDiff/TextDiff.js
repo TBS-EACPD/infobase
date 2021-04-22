@@ -170,11 +170,10 @@ const process_indicators = (matched_indicators, indicator_status) => {
     })
     .filter(
       (row) =>
-        !_.chain(indicator_status)
+        !_(indicator_status)
           .map((status_row) => status_row.active && status_row.id)
           .intersection(row.status)
           .isEmpty()
-          .value()
     )
     .value();
   return processed_indicators;

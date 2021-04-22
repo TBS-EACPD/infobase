@@ -14,7 +14,7 @@ export function create_re_matcher(query, accessors) {
   );
 
   return (obj) =>
-    _.chain(accessors)
+    _(accessors)
       .map((accessor) => (_.isString(accessor) ? obj[accessor] : accessor(obj)))
       .some((str) => {
         if (!_.isString(str)) {
@@ -23,6 +23,5 @@ export function create_re_matcher(query, accessors) {
           str = _.deburr(str);
           return _.every(reg_exps, (re) => str.match(re));
         }
-      })
-      .value();
+      });
 }

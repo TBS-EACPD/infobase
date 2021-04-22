@@ -83,7 +83,7 @@ export const declare_links_to_rpb_panel = () =>
           return {
             ...common_panel_config,
             calculate(subject) {
-              return !_.chain(subject.tables).compact().isEmpty().value();
+              return !_(subject.tables).compact().isEmpty();
             },
 
             render({ title, calculations }) {

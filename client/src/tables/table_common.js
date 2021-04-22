@@ -203,11 +203,10 @@ const is_revenue = (so_num) => +so_num > 19;
 const last_year_col = "{{pa_last_year}}";
 
 const sum_last_year_exp = (rows) =>
-  _.chain(rows)
+  _(rows)
     .map((row) => row[last_year_col])
     .filter(_.isNumber)
-    .reduce((acc, item) => acc + item, 0)
-    .value();
+    .reduce((acc, item) => acc + item, 0);
 
 //given rows of std-obj-expenditure rows,  sums it up to return gross expenditures, net expenditures and revenue
 const rows_to_rev_split = (rows) => {

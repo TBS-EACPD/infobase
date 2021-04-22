@@ -98,7 +98,7 @@ export default class PartitionRoute extends React.Component {
       remapped_data_types[props.match.params.data_type] ||
       props.match.params.data_type;
 
-    const route_data_type_and_perspective_combination_is_valid = !_.chain(
+    const route_data_type_and_perspective_combination_is_valid = !_(
       this.all_perspectives
     )
       .filter(
@@ -106,8 +106,7 @@ export default class PartitionRoute extends React.Component {
           perspective.data_type === route_data_type &&
           perspective.id === route_perspective
       )
-      .isEmpty()
-      .value();
+      .isEmpty();
 
     if (route_data_type_and_perspective_combination_is_valid) {
       return {
