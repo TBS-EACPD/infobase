@@ -84,8 +84,8 @@ export const get_gov_panels = (subject) => ({
     declare_employee_gender_panel(),
   ],
   services: services_feature_flag && [
-    declare_services_types_panel(),
-    // declare_services_digital_status_panel(),
+    // declare_services_types_panel(),
+    declare_services_digital_status_panel(),
     // declare_services_id_methods_panel(),
     // declare_high_application_volume_panel(),
     // declare_top10_website_visits_panel(),
