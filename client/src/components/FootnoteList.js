@@ -106,7 +106,7 @@ const FootnoteSublist = ({ footnotes }) => (
 const sort_footnotes = (footnotes) =>
   _.chain(footnotes)
     .sortBy(({ topic_keys }) =>
-      _.chain(topic_keys).thru(topic_keys_to_plain_text).join(" ").value()
+      _(topic_keys).thru(topic_keys_to_plain_text).join(" ")
     )
     .sortBy(({ topic_keys }) => -topic_keys.length)
     .sortBy(({ year1, year2 }) => -(year2 || year1 || Infinity))

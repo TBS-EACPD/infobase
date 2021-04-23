@@ -59,10 +59,9 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
   const last_year_data = _.last(transfer_payment_data);
   const last_year_data_per_capita = _.last(per_capita_data);
 
-  const subject_total_value = _.chain(last_year_data)
+  const subject_total_value = _(last_year_data)
     .values()
-    .reduce((accumulator, value) => accumulator + value, 0)
-    .value();
+    .reduce((accumulator, value) => accumulator + value, 0);
 
   const [largest_total_prov_code, largest_total_value] = _.chain(last_year_data)
     .toPairs()

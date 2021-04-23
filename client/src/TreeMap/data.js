@@ -454,22 +454,19 @@ function get_data_vs(
           name: desc,
           amount: parseInt(filter_var) // chaining ternary statements, why the heck not???????
             ? get_changes
-              ? _.chain(rows)
+              ? _(rows)
                   .filter({ votestattype: parseInt(filter_var) })
-                  .sumBy(header_col(perspective, year_2))
-                  .value() -
-                _.chain(rows)
+                  .sumBy(header_col(perspective, year_2)) -
+                _(rows)
                   .filter({ votestattype: parseInt(filter_var) })
                   .sumBy(header_col(perspective, year_1))
-                  .value()
-              : _.chain(rows)
+              : _(rows)
                   .filter({ votestattype: parseInt(filter_var) })
                   .sumBy(header_col(perspective, year))
-                  .value()
             : get_changes
             ? _.sumBy(rows, header_col(perspective, year_2)) -
               _.sumBy(rows, header_col(perspective, year_1))
-            : _.chain(rows).sumBy(header_col(perspective, year)).value(),
+            : _.sumBy(rows, header_col(perspective, year)),
         }))
         .filter(has_non_zero_or_non_zero_children)
         .value(),

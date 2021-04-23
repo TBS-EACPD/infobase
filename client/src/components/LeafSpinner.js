@@ -46,10 +46,7 @@ export const LeafSpinner = ({ config_name }) => {
     },
   };
 
-  const default_config_name = _.chain(leaf_spinner_configs)
-    .keys()
-    .first()
-    .value();
+  const default_config_name = _(leaf_spinner_configs).keys().first();
 
   const {
     outer_positioning,

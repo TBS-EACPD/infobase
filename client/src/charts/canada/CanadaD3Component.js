@@ -97,10 +97,9 @@ export class CanadaD3Component {
     const graph_dispatcher = this.dispatch;
 
     const data_has_ncr_broken_out = _.some(data, (row) =>
-      _.chain(row)
+      _(row)
         .keys()
         .some((key) => /^ncr$|^.*lessncr$/.test(key))
-        .value()
     );
     if (data_has_ncr_broken_out) {
       _.each(["on", "qc"], (prov_key) =>

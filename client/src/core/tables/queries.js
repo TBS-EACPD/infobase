@@ -169,14 +169,13 @@ class Queries {
       cols.push(gp_colname);
       vals[gp_colname] = [];
       var sum =
-        _.chain(vals[gross_percentage])
+        _(vals[gross_percentage])
           .filter(function (val) {
             return val >= 0;
           })
           .reduce(function (x, y) {
             return x + y;
-          })
-          .value() + 1;
+          }) + 1;
       _.each(vals[gross_percentage], function (val, i, list) {
         vals[gp_colname][i] = val / sum;
       });

@@ -58,11 +58,10 @@ const get_default_state_from_props = (props) => {
 
   const sort_by = unsorted_initial
     ? null
-    : _.chain(col_configs_with_defaults)
+    : _(col_configs_with_defaults)
         .pickBy((col) => col.is_sortable)
         .keys()
-        .first()
-        .value();
+        .first();
 
   const searches = _.chain(col_configs_with_defaults)
     .pickBy((col) => col.is_searchable)
