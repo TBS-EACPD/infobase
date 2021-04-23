@@ -10,7 +10,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import { newIBCategoryColors } from "src/core/color_schemes.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
@@ -23,72 +23,35 @@ import "./services.scss";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIdMethodsPanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: `service_report {
-      cra_business_ids_collected
-      sin_collected
-    }
-`,
+    query_fragment: `
+    service_id_methods_summary {
+      id
+      method
+      label
+      value
+    }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
-  const get_id_method_count = (method) =>
-    _.reduce(
-      data,
-      (sum, service) => {
-        const service_id_count = _.countBy(service.service_report, method);
-        return {
-          true: sum.true + service_id_count.true || sum.true,
-          false: sum.false + service_id_count.false || sum.false,
-          null: sum.null + service_id_count.null || sum.null,
-        };
-      },
-      {
-        true: 0,
-        false: 0,
-        null: 0,
-      }
-    );
+  const { service_id_methods_summary } = data;
+  const sin_data = _.chain(service_id_methods_summary)
+    .filter({ method: "sin" })
+    .map((row) => ({
+      ...row,
+      label: text_maker(row.label),
+    }))
+    .value();
+  const cra_data = _.chain(service_id_methods_summary)
+    .filter({ method: "cra" })
+    .map((row) => ({
+      ...row,
+      label: text_maker(row.label),
+    }))
+    .value();
 
-  const sin_count = get_id_method_count("sin_collected");
-  const cra_count = get_id_method_count("cra_business_ids_collected");
-
-  const sin_data = [
-    {
-      id: "uses_identifier",
-      label: text_maker("uses_sin_as_identifier"),
-      value: sin_count.true,
-    },
-    {
-      id: "does_not_identifier",
-      label: text_maker("does_not_use_sin_as_identifier"),
-      value: sin_count.false,
-    },
-    {
-      id: "na",
-      label: text_maker("sin_not_applicable"),
-      value: sin_count.null,
-    },
-  ];
-  const cra_data = [
-    {
-      id: "uses_identifier",
-      label: text_maker("uses_cra_as_identifier"),
-      value: cra_count.true,
-    },
-    {
-      id: "does_not_identifier",
-      label: text_maker("does_not_use_cra_as_identifier"),
-      value: cra_count.false,
-    },
-    {
-      id: "na",
-      label: text_maker("cra_not_applicable"),
-      value: cra_count.null,
-    },
-  ];
   const colors = scaleOrdinal()
     .domain(["uses_identifier", "does_not_identifier", "na"])
     .range(_.take(newIBCategoryColors, 3));

@@ -21,6 +21,9 @@ const schema = `
     service_general_stats: ServiceGeneralStats
     service_type_summary: [ServiceTypeSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
+    service_id_methods_summary: [ServiceIdMethodsSummary]
+    service_standards_summary: [ServiceStandardsSummary]
+    service_fees_summary: [ServiceFeesSummary]
   }
   type ServiceGeneralStats{
     id: String
@@ -40,6 +43,26 @@ const schema = `
     can_online: Float
     cannot_online: Float
     not_applicable: Float
+  }
+  type ServiceIdMethodsSummary{
+    id: String
+    method: String
+    subject_id: String
+    label: String
+    value: Float
+  }
+  type ServiceStandardsSummary{
+    id: String
+    subject_id: String
+    services_w_standards_count: Float
+    standards_count: Float
+    met_standards_count: Float
+  }
+  type ServiceFeesSummary{
+    id: String
+    subject_id: String
+    label: String
+    value: Float
   }
   type ServiceReport{
     service_id: String
@@ -130,6 +153,15 @@ export default function ({ models, loaders }) {
     service_digital_status_summary_for_gov,
     service_digital_status_summary_for_dept,
     service_digital_status_summary_for_program,
+    service_id_methods_summary_for_gov,
+    service_id_methods_summary_for_dept,
+    service_id_methods_summary_for_program,
+    service_standards_summary_for_gov,
+    service_standards_summary_for_dept,
+    service_standards_summary_for_program,
+    service_fees_summary_for_gov,
+    service_fees_summary_for_dept,
+    service_fees_summary_for_program,
   } = loaders;
 
   const org_has_services = async (org_id) => {
@@ -149,6 +181,13 @@ export default function ({ models, loaders }) {
         service_digital_status_summary: service_digital_status_summary_for_gov.load(
           "gov"
         ),
+        service_id_methods_summary: service_id_methods_summary_for_gov.load(
+          "gov"
+        ),
+        service_standards_summary: service_standards_summary_for_gov.load(
+          "gov"
+        ),
+        service_fees_summary: service_fees_summary_for_gov.load("gov"),
       }),
     },
     Org: {
@@ -159,6 +198,13 @@ export default function ({ models, loaders }) {
         service_digital_status_summary: service_digital_status_summary_for_dept.load(
           org_id
         ),
+        service_id_methods_summary: service_id_methods_summary_for_dept.load(
+          org_id
+        ),
+        service_standards_summary: service_standards_summary_for_dept.load(
+          org_id
+        ),
+        service_fees_summary: service_fees_summary_for_dept.load(org_id),
       }),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
@@ -174,6 +220,13 @@ export default function ({ models, loaders }) {
         service_digital_status_summary: service_digital_status_summary_for_program.load(
           program_id
         ),
+        service_id_methods_summary: service_id_methods_summary_for_program.load(
+          program_id
+        ),
+        service_standards_summary: service_standards_summary_for_program.load(
+          program_id
+        ),
+        service_fees_summary: service_fees_summary_for_program.load(program_id),
       }),
       has_services: ({ program_id }) => program_has_services(program_id),
     },

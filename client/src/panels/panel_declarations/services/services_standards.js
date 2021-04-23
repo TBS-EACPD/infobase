@@ -9,7 +9,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.js";
 
@@ -21,37 +21,30 @@ import "./services.scss";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesStandardsPanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: `standards {  
-      target_type
-      standard_report {
-        lower
-        count
-        met_count
-        is_target_met
-      }
+    query_fragment: `
+    service_standards_summary {
+      id
+      standards_count
+      met_standards_count
+      services_w_standards_count
     }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
+  const {
+    service_general_stats: { number_of_services },
+    service_standards_summary,
+  } = data;
 
-  const has_standards_count = _.chain(data)
-    .countBy("standards")
-    .filter((value, key) => key)
-    .map()
-    .sum()
-    .value();
-  const total_flat_standards = _.chain(data)
-    .flatMap("standards")
-    .reject(({ target_type }) => target_type === "Other type of target")
-    .flatMap("standard_report")
-    .filter("count" || "lower" || "met_count")
-    .value();
-  const standards_met_count = _.countBy(total_flat_standards, "is_target_met");
-  const standards_met_value = standards_met_count.true || 0;
-  const standards_not_met_value = standards_met_count.false || 0;
+  const {
+    services_w_standards_count,
+    standards_count,
+    met_standards_count,
+  } = service_standards_summary[0];
+  const not_met_standards_count = standards_count - met_standards_count;
 
   const common_column_configs = {
     value: {
@@ -74,13 +67,15 @@ const ServicesStandardsPanel = ({ subject }) => {
             data={[
               {
                 id: text_maker("no_standards"),
-                value: data.length - has_standards_count,
-                pct: (data.length - has_standards_count) / data.length || 0,
+                value: number_of_services - services_w_standards_count,
+                pct:
+                  (number_of_services - services_w_standards_count) /
+                    number_of_services || 0,
               },
               {
                 id: text_maker("has_standards"),
-                value: has_standards_count,
-                pct: has_standards_count / data.length || 0,
+                value: services_w_standards_count,
+                pct: services_w_standards_count / number_of_services || 0,
               },
             ]}
             column_configs={{
@@ -93,8 +88,8 @@ const ServicesStandardsPanel = ({ subject }) => {
           />
         ) : (
           <Gauge
-            value={has_standards_count}
-            total_value={data.length}
+            value={services_w_standards_count}
+            total_value={number_of_services}
             show_pct={false}
           />
         )}
@@ -102,7 +97,8 @@ const ServicesStandardsPanel = ({ subject }) => {
           <TM
             k="gauge_has_standards_text"
             args={{
-              has_standards_pct: has_standards_count / data.length || 0,
+              has_standards_pct:
+                services_w_standards_count / number_of_services || 0,
             }}
           />
         </h2>
@@ -121,20 +117,20 @@ const ServicesStandardsPanel = ({ subject }) => {
             data={[
               {
                 id: text_maker("target_met_false"),
-                value: standards_not_met_value,
-                pct: standards_not_met_value / total_flat_standards.length || 0,
+                value: not_met_standards_count,
+                pct: not_met_standards_count / standards_count || 0,
               },
               {
                 id: text_maker("target_met_true"),
-                value: standards_met_value,
-                pct: standards_met_value / total_flat_standards.length || 0,
+                value: met_standards_count || 0,
+                pct: (met_standards_count || 0) / standards_count || 0,
               },
             ]}
           />
         ) : (
           <Gauge
-            value={standards_met_value}
-            total_value={total_flat_standards.length}
+            value={met_standards_count || 0}
+            total_value={standards_count}
             show_pct={false}
           />
         )}
@@ -143,7 +139,7 @@ const ServicesStandardsPanel = ({ subject }) => {
             k="gauge_standards_met_text"
             args={{
               standards_met_pct:
-                standards_met_value / total_flat_standards.length || 0,
+                (met_standards_count || 0) / standards_count || 0,
             }}
           />
         </h2>
