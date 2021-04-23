@@ -109,6 +109,26 @@ export default function (model_singleton) {
     cannot_online: { type: Number },
     not_applicable: { type: Number },
   });
+  const ServiceIdMethodsSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    subject_id: parent_fkey_type(),
+    method: str_type,
+    label: str_type,
+    value: { type: Number },
+  });
+  const ServiceStandardsSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    subject_id: parent_fkey_type(),
+    services_w_standards_count: { type: Number },
+    standards_count: { type: Number },
+    met_standards_count: { type: Number },
+  });
+  const ServiceFeesSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    subject_id: parent_fkey_type(),
+    label: str_type,
+    value: { type: Number },
+  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
@@ -145,18 +165,51 @@ export default function (model_singleton) {
     ],
     ServiceDigitalStatusSummarySchema
   );
+  define_models_w_same_schema(
+    [
+      "GovServiceIdMethodsSummary",
+      "DeptServiceIdMethodsSummary",
+      "ProgramServiceIdMethodsSummary",
+    ],
+    ServiceIdMethodsSummarySchema
+  );
+  define_models_w_same_schema(
+    [
+      "GovServiceStandardsSummary",
+      "DeptServiceStandardsSummary",
+      "ProgramServiceStandardsSummary",
+    ],
+    ServiceStandardsSummarySchema
+  );
+  define_models_w_same_schema(
+    [
+      "GovServiceFeesSummary",
+      "DeptServiceFeesSummary",
+      "ProgramServiceFeesSummary",
+    ],
+    ServiceFeesSummarySchema
+  );
 
   const {
     Service,
+    GovServiceGeneralStats,
+    DeptServiceGeneralStats,
+    ProgramServiceGeneralStats,
     GovServiceTypeSummary,
     DeptServiceTypeSummary,
     ProgramServiceTypeSummary,
     GovServiceDigitalStatusSummary,
     DeptServiceDigitalStatusSummary,
     ProgramServiceDigitalStatusSummary,
-    GovServiceGeneralStats,
-    DeptServiceGeneralStats,
-    ProgramServiceGeneralStats,
+    GovServiceIdMethodsSummary,
+    DeptServiceIdMethodsSummary,
+    ProgramServiceIdMethodsSummary,
+    GovServiceStandardsSummary,
+    DeptServiceStandardsSummary,
+    ProgramServiceStandardsSummary,
+    GovServiceFeesSummary,
+    DeptServiceFeesSummary,
+    ProgramServiceFeesSummary,
   } = model_singleton.models;
 
   const define_loaders_w_same_fk_attr = (schemas_and_names, fk_attr) =>
@@ -219,6 +272,57 @@ export default function (model_singleton) {
         {
           schema: ProgramServiceDigitalStatusSummary,
           name: "service_digital_status_summary_for_program",
+        },
+      ],
+      "subject_id"
+    ),
+    ...define_loaders_w_same_fk_attr(
+      [
+        {
+          schema: GovServiceIdMethodsSummary,
+          name: "service_id_methods_summary_for_gov",
+        },
+        {
+          schema: DeptServiceIdMethodsSummary,
+          name: "service_id_methods_summary_for_dept",
+        },
+        {
+          schema: ProgramServiceIdMethodsSummary,
+          name: "service_id_methods_summary_for_program",
+        },
+      ],
+      "subject_id"
+    ),
+    ...define_loaders_w_same_fk_attr(
+      [
+        {
+          schema: GovServiceStandardsSummary,
+          name: "service_standards_summary_for_gov",
+        },
+        {
+          schema: DeptServiceStandardsSummary,
+          name: "service_standards_summary_for_dept",
+        },
+        {
+          schema: ProgramServiceStandardsSummary,
+          name: "service_standards_summary_for_program",
+        },
+      ],
+      "subject_id"
+    ),
+    ...define_loaders_w_same_fk_attr(
+      [
+        {
+          schema: GovServiceFeesSummary,
+          name: "service_fees_summary_for_gov",
+        },
+        {
+          schema: DeptServiceFeesSummary,
+          name: "service_fees_summary_for_dept",
+        },
+        {
+          schema: ProgramServiceFeesSummary,
+          name: "service_fees_summary_for_program",
         },
       ],
       "subject_id"

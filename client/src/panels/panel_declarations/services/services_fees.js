@@ -9,7 +9,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
@@ -20,27 +20,27 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesFeesPanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: `collects_fees`,
+    query_fragment: `
+    service_fees_summary {
+      id
+      label
+      value
+    }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
+  const {
+    service_general_stats: { number_of_services },
+    service_fees_summary,
+  } = data;
 
-  const service_charges_fees = _.countBy(data, "collects_fees");
-  const processed_data = [
-    {
-      id: "fees",
-      label: text_maker("service_charges_fees"),
-      value: service_charges_fees.true || 0,
-    },
-    {
-      id: "no_fees",
-      label: text_maker("service_does_not_charge_fees"),
-      value: service_charges_fees.false || 0,
-    },
-  ];
+  const processed_fees_summary = _.map(service_fees_summary, (row) => ({
+    ...row,
+    label: text_maker(row.label),
+  }));
   return (
     <div>
       <TM
@@ -51,14 +51,16 @@ const ServicesFeesPanel = ({ subject }) => {
         }
         args={{
           subject_name: subject.name,
-          services_count: data.length,
-          charge_fees_count: service_charges_fees.true || 0,
+          services_count: number_of_services,
+          charge_fees_count: _.find(service_fees_summary, {
+            label: "service_charges_fees",
+          }).value,
         }}
         className="medium-panel-text"
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={processed_data}
+          data={processed_fees_summary}
           column_configs={{
             label: {
               index: 0,
@@ -71,7 +73,7 @@ const ServicesFeesPanel = ({ subject }) => {
           }}
         />
       ) : (
-        <WrappedNivoPie data={processed_data} is_money={false} />
+        <WrappedNivoPie data={processed_fees_summary} is_money={false} />
       )}
     </div>
   );

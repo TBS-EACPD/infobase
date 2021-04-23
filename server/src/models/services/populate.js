@@ -30,6 +30,15 @@ export default async function ({ models }) {
     GovServiceDigitalStatusSummary,
     DeptServiceDigitalStatusSummary,
     ProgramServiceDigitalStatusSummary,
+    GovServiceIdMethodsSummary,
+    DeptServiceIdMethodsSummary,
+    ProgramServiceIdMethodsSummary,
+    GovServiceStandardsSummary,
+    DeptServiceStandardsSummary,
+    ProgramServiceStandardsSummary,
+    GovServiceFeesSummary,
+    DeptServiceFeesSummary,
+    ProgramServiceFeesSummary,
   } = models;
 
   const service_report_rows = _.map(
@@ -273,11 +282,141 @@ export default async function ({ models }) {
     .sortBy("can_online")
     .value();
 
+  const get_id_method_count = (services, subject_id) =>
+    _.chain(["sin_collected", "cra_business_ids_collected"])
+      .map((method) =>
+        _.reduce(
+          services,
+          (sum, service) => {
+            const service_id_count = _.countBy(service.service_report, method);
+            return {
+              method,
+              true: sum.true + service_id_count.true || sum.true,
+              false: sum.false + service_id_count.false || sum.false,
+              null: sum.null + service_id_count.null || sum.null,
+            };
+          },
+          {
+            true: 0,
+            false: 0,
+            null: 0,
+          }
+        )
+      )
+      .reduce((result, row) => {
+        const method = row.method === "sin_collected" ? "sin" : "cra";
+        const uses_identifier_key = `uses_${method}_as_identifier`;
+        const does_not_use_identifier_key = `does_not_use_${method}_as_identifier`;
+        const not_applicable_key = `${method}_not_applicable`;
+        result.push({
+          id: `${subject_id}_${uses_identifier_key}`,
+          method,
+          subject_id,
+          label: uses_identifier_key,
+          value: row.true,
+        });
+        result.push({
+          id: `${subject_id}_${does_not_use_identifier_key}`,
+          method,
+          subject_id,
+          label: does_not_use_identifier_key,
+          value: row.false,
+        });
+        result.push({
+          id: `${subject_id}_${not_applicable_key}`,
+          method,
+          subject_id,
+          label: not_applicable_key,
+          value: row.null,
+        });
+        return result;
+      }, [])
+      .value();
+
+  const gov_id_methods_summary = get_id_method_count(service_rows, "gov");
+  const dept_id_methods_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap((services, org_id) => get_id_method_count(services, org_id))
+    .value();
+  const program_id_methods_summary = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .flatMap((services, program_id) =>
+      get_id_method_count(services, program_id)
+    )
+    .value();
+
+  const get_services_w_standards_count = (services) =>
+    _.chain(services)
+      .countBy("standards")
+      .filter((value, key) => key)
+      .map()
+      .sum()
+      .value();
+  const get_processed_standards = (services) =>
+    _.chain(services)
+      .flatMap("standards")
+      .reject(({ target_type }) => target_type === "Other type of target")
+      .flatMap("standard_report")
+      .filter("count" || "lower" || "met_count")
+      .value();
+  const get_final_standards_summary = (services, subject_id) => {
+    const services_w_standards_count = get_services_w_standards_count(services);
+    const processed_standards = get_processed_standards(services);
+    return {
+      id: `${subject_id}_standards_summary`,
+      subject_id,
+      services_w_standards_count,
+      standards_count: processed_standards.length,
+      met_standards_count: _.countBy(processed_standards, "is_target_met").true,
+    };
+  };
+  const gov_standards_summary = [
+    get_final_standards_summary(service_rows, "gov"),
+  ];
+  const dept_standards_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap(get_final_standards_summary)
+    .value();
+  const program_standards_summary = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .flatMap(get_final_standards_summary)
+    .value();
+
+  const get_fees_summary = (services, subject_id) => {
+    const fees_count = _.countBy(services, "collects_fees");
+    return [
+      {
+        id: `${subject_id}_fees`,
+        subject_id,
+        label: "service_charges_fees",
+        value: fees_count.true || 0,
+      },
+      {
+        id: `${subject_id}_no_fees`,
+        subject_id,
+        label: "service_does_not_charge_fees",
+        value: fees_count.false || 0,
+      },
+    ];
+  };
+  const gov_fees_summary = get_fees_summary(service_rows, "gov");
+  const dept_fees_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap(get_fees_summary)
+    .value();
+  const program_fees_summary = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .flatMap(get_fees_summary)
+    .value();
+
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
     ServiceStandard.insertMany(service_standard_rows),
     Service.insertMany(service_rows),
+    GovServiceGeneralStats.insertMany(gov_general_stats),
+    DeptServiceGeneralStats.insertMany(dept_general_stats),
+    ProgramServiceGeneralStats.insertMany(program_general_stats),
     GovServiceTypeSummary.insertMany(gov_type_summary),
     DeptServiceTypeSummary.insertMany(dept_type_summary),
     ProgramServiceTypeSummary.insertMany(program_type_summary),
@@ -286,8 +425,14 @@ export default async function ({ models }) {
     ProgramServiceDigitalStatusSummary.insertMany(
       program_service_digital_summary
     ),
-    GovServiceGeneralStats.insertMany(gov_general_stats),
-    DeptServiceGeneralStats.insertMany(dept_general_stats),
-    ProgramServiceGeneralStats.insertMany(program_general_stats),
+    GovServiceIdMethodsSummary.insertMany(gov_id_methods_summary),
+    DeptServiceIdMethodsSummary.insertMany(dept_id_methods_summary),
+    ProgramServiceIdMethodsSummary.insertMany(program_id_methods_summary),
+    GovServiceStandardsSummary.insertMany(gov_standards_summary),
+    DeptServiceStandardsSummary.insertMany(dept_standards_summary),
+    ProgramServiceStandardsSummary.insertMany(program_standards_summary),
+    GovServiceFeesSummary.insertMany(gov_fees_summary),
+    DeptServiceFeesSummary.insertMany(dept_fees_summary),
+    ProgramServiceFeesSummary.insertMany(program_fees_summary),
   ]);
 }
