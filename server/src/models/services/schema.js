@@ -25,6 +25,7 @@ const schema = `
     service_standards_summary: [ServiceStandardsSummary]
     service_fees_summary: [ServiceFeesSummary]
     top_services_application_vol_summary: [TopServicesApplicationVolSummary]
+    service_high_volume_summary: [ServiceHighVolumeSummary]
   }
   type ServiceGeneralStats{
     id: String
@@ -69,9 +70,13 @@ const schema = `
     id: String
     service_id: String
     subject_id: String
-    name: String,
+    name: String
     value: Float
-
+  }
+  type ServiceHighVolumeSummary{
+    id: String
+    subject_id: String
+    total_volume: Float
   }
   type ServiceReport{
     service_id: String
@@ -146,7 +151,7 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const { Service } = models;
+  const { Service, GovServicesHighVolumeSummary } = models;
 
   const {
     services_by_org_id,
@@ -199,6 +204,7 @@ export default function ({ models, loaders }) {
           "gov"
         ),
         service_fees_summary: service_fees_summary_for_gov.load("gov"),
+        service_high_volume_summary: GovServicesHighVolumeSummary.find(),
       }),
     },
     Org: {

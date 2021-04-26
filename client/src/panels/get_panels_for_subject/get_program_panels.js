@@ -78,8 +78,8 @@ export const get_program_panels = (subject) =>
         // declare_services_digital_status_panel(),// done
         // declare_services_id_methods_panel(),// done
         // declare_services_channels_panel(), // done
-        declare_top10_services_application_volume_panel(), // done
-        // declare_top10_website_visits_panel(),
+        // declare_top10_services_application_volume_panel(), // done
+        declare_top10_website_visits_panel(),
         // declare_services_fees_panel(),// done
         // declare_services_standards_panel(),// done
       ],
