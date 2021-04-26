@@ -41,6 +41,7 @@ export default async function ({ models }) {
     ProgramServiceFeesSummary,
     DeptTopServicesApplicationVolSummary,
     ProgramTopServicesApplicationVolSummary,
+    GovServicesHighVolumeSummary,
   } = models;
 
   const service_report_rows = _.map(
@@ -441,6 +442,26 @@ export default async function ({ models }) {
     .flatMap(get_top_application_vol_summary)
     .value();
 
+  const gov_services_high_volume_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .map((services, org_id) => ({
+      id: org_id,
+      subject_id: org_id,
+      total_volume: _.sumBy(services, ({ service_report }) =>
+        _.reduce(
+          delivery_channels_keys,
+          (sum, key) =>
+            sum + _.chain(service_report).sumBy(key).toNumber().value() || 0,
+          0
+        )
+      ),
+    }))
+    // 45,000+ volume is considered "high volume"
+    .reject(({ total_volume }) => total_volume <= 45000)
+    .sortBy("total_volume")
+    .reverse()
+    .value();
+
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
@@ -472,5 +493,6 @@ export default async function ({ models }) {
     ProgramTopServicesApplicationVolSummary.insertMany(
       program_top_application_vol_summary
     ),
+    GovServicesHighVolumeSummary.insertMany(gov_services_high_volume_summary),
   ]);
 }

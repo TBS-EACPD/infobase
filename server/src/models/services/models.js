@@ -136,11 +136,20 @@ export default function (model_singleton) {
     ...bilingual_str("name"),
     value: { type: Number },
   });
+  const ServicesHighVolumeSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    subject_id: parent_fkey_type(),
+    total_volume: { type: Number },
+  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
+  model_singleton.define_model(
+    "GovServicesHighVolumeSummary",
+    ServicesHighVolumeSummarySchema
+  );
 
   const define_models_w_same_schema = (names, schema) => {
     _.forEach(names, (name) => {

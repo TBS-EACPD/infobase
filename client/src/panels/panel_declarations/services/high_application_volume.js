@@ -10,14 +10,9 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import { Subject } from "src/models/subject.js";
-
-import {
-  delivery_channels_keys,
-  delivery_channels_query_fragment,
-} from "./shared.js";
 
 import text from "./services.yaml";
 
@@ -25,32 +20,20 @@ const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const HighApplicationVolumePanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: delivery_channels_query_fragment,
+    query_fragment: `
+    service_high_volume_summary {
+      id
+      subject_id
+      total_volume
+    }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
-
-  const processed_data = _.chain(data)
-    .groupBy("org_id")
-    .map((org_services, org_id) => ({
-      org_id,
-      total_volume: _.sumBy(org_services, (service) =>
-        _.reduce(
-          delivery_channels_keys,
-          (sum, key) =>
-            sum + _.sumBy(service.service_report, `${key}_count`) || 0,
-          0
-        )
-      ),
-    }))
-    // 45,000+ volume is considered "high volume"
-    .reject(({ total_volume }) => total_volume <= 45000)
-    .sortBy("total_volume")
-    .reverse()
-    .value();
+  const { service_high_volume_summary } = data;
+  const highest_volume_dept = service_high_volume_summary[0];
 
   const column_configs = {
     org_id: {
@@ -77,14 +60,14 @@ const HighApplicationVolumePanel = ({ subject }) => {
         className="medium-panel-text"
         k="high_application_volume_text"
         args={{
-          num_of_high_volume_depts: processed_data.length,
-          highest_volume_dept: Dept.lookup(processed_data[0].org_id).name,
-          highest_volume_value: processed_data[0].total_volume,
+          num_of_high_volume_depts: service_high_volume_summary.length,
+          highest_volume_dept: Dept.lookup(highest_volume_dept.org_id).name,
+          highest_volume_value: highest_volume_dept.total_volume,
         }}
       />
       <DisplayTable
         unsorted_initial={true}
-        data={processed_data}
+        data={service_high_volume_summary}
         column_configs={column_configs}
       />
     </HeightClippedGraph>
