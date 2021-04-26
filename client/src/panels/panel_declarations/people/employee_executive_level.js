@@ -106,9 +106,10 @@ export const declare_employee_executive_level_panel = () =>
             return {
               ...calculate_common_text_args(series),
               subject,
-              avg_num_non_ex: _(series)
+              avg_num_non_ex: _.chain(series)
                 .first(({ label }) => label === "Non-EX")
-                .thru(({ data }) => _.mean(data)),
+                .thru(({ data }) => _.mean(data))
+                .value(),
             };
           } else {
             const ex_only_series = _.filter(
