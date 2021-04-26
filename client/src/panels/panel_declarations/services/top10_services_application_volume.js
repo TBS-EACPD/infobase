@@ -12,18 +12,13 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes.ts";
 import { formatter } from "src/core/format.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
-
-import {
-  delivery_channels_keys,
-  delivery_channels_query_fragment,
-} from "./shared.js";
 
 import text from "./services.yaml";
 
@@ -35,34 +30,30 @@ const volume_formatter = (val) =>
   formatter("compact", val, { raw: true, noMoney: true });
 
 const Top10ServicesApplicationVolumePanel = ({ subject }) => {
-  const { loading, data } = useServices({
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: `
-    id
-    name
-    ${delivery_channels_query_fragment}
-    `,
+    query_fragment: `
+    top_services_application_vol_summary {
+      id
+      service_id
+      name
+      value
+    }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
+  const {
+    service_general_stats: { number_of_services },
+    top_services_application_vol_summary,
+  } = data;
+  const processed_data = _.map(top_services_application_vol_summary, (row) => ({
+    ...row,
+    [total_volume]: row.value,
+  }));
 
-  const processed_data = _.chain(data)
-    .map(({ id, service_report }) => ({
-      id,
-      [total_volume]: _.reduce(
-        delivery_channels_keys,
-        (sum, key) => sum + _.sumBy(service_report, `${key}_count`) || 0,
-        0
-      ),
-    }))
-    .filter(total_volume)
-    .sortBy(total_volume)
-    .takeRight(10)
-    .value();
-
-  const data_name_lookup = _.chain(data)
-    .map(({ id, name }) => [id, name])
+  const data_name_lookup = _.chain(processed_data)
+    .map(({ service_id, name }) => [service_id, name])
     .fromPairs()
     .value();
 
@@ -99,9 +90,10 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
         className="medium-panel-text"
         k="top10_services_volume_text"
         args={{
-          highest_service_name: data_name_lookup[_.last(data).id],
+          highest_service_name:
+            data_name_lookup[_.last(processed_data).service_id],
           highest_service_value: _.last(processed_data)[total_volume],
-          num_of_services: processed_data.length,
+          num_of_services: number_of_services,
         }}
       />
       {is_a11y_mode ? (
@@ -110,7 +102,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
         <Fragment>
           <MediaQuery minWidth={992}>
             <WrappedNivoHBar
-              indexBy={"id"}
+              indexBy={"service_id"}
               custom_table={table_content}
               keys={[total_volume]}
               isInteractive={true}
@@ -119,7 +111,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
               label={(d) => volume_formatter(d.value)}
               data={processed_data}
               is_money={false}
-              colors={(d) => colors(d.id)}
+              colors={(d) => colors(d.service_id)}
               padding={0.1}
               enableGridY={false}
               enableGridX={false}
