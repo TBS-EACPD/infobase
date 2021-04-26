@@ -84,13 +84,13 @@ export const get_gov_panels = (subject) => ({
     declare_employee_gender_panel(),
   ],
   services: services_feature_flag && [
-    // declare_services_types_panel(),
-    // declare_services_digital_status_panel(),
-    // declare_services_id_methods_panel(),
-    // declare_high_application_volume_panel(),
+    // declare_services_types_panel(), // done
+    // declare_services_digital_status_panel(), // done
+    // declare_services_id_methods_panel(), // done
+    declare_high_application_volume_panel(),
     // declare_top10_website_visits_panel(),
-    declare_services_fees_panel(),
-    // declare_services_standards_panel(),
+    // declare_services_fees_panel(), // done
+    // declare_services_standards_panel(), // done
   ],
   results: [
     declare_results_key_concepts_panel(),
