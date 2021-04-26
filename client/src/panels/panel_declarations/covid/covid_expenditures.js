@@ -202,12 +202,11 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat),
     };
 
-    const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _.chain(
+    const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _(
       pre_sorted_rows
     )
       .sortBy("total_exp")
-      .last()
-      .value();
+      .last();
 
     return (
       <Fragment>
@@ -257,10 +256,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     const {
       measure_name: largest_measure_name,
       total_exp: largest_measure_exp,
-    } = _.chain(pre_sorted_rows_with_measure_names)
-      .sortBy("total_exp")
-      .last()
-      .value();
+    } = _(pre_sorted_rows_with_measure_names).sortBy("total_exp").last();
 
     const subject_level = panel_args.subject.level;
     const text_args = {

@@ -370,7 +370,9 @@ export const query_gov_covid_summary = query_logging_wrapper(
         },
       })
       .then((response) =>
-        _.chain(response).get("data.root.gov.covid_summary").first().value()
+        _(response)
+          .thru((resp) => _.get(resp, "data.root.gov.covid_summary"))
+          .first()
       )
 );
 export const query_org_covid_summary = query_logging_wrapper(
@@ -398,7 +400,9 @@ export const query_org_covid_summary = query_logging_wrapper(
         },
       })
       .then((response) =>
-        _.chain(response).get("data.root.org.covid_summary").first().value()
+        _(response)
+          .thru((resp) => _.get(resp, "data.root.org.covid_summary"))
+          .first()
       )
 );
 

@@ -32,7 +32,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      selected_year: _.chain(YearsWithCovidData.lookup("gov"))
+      selected_year: _(YearsWithCovidData.lookup("gov"))
         .thru(({ years_with_estimates, years_with_expenditures }) =>
           COVID_EXPENDITUES_FLAG
             ? [...years_with_estimates, ...years_with_expenditures]
@@ -40,8 +40,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
         )
         .uniq()
         .sortBy()
-        .last()
-        .value(),
+        .last(),
       summaries_by_year: null,
     };
   }

@@ -63,11 +63,10 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     .values()
     .reduce((accumulator, value) => accumulator + value, 0);
 
-  const [largest_total_prov_code, largest_total_value] = _.chain(last_year_data)
+  const [largest_total_prov_code, largest_total_value] = _(last_year_data)
     .toPairs()
     .sortBy(([prov_code, value]) => value)
-    .last()
-    .value();
+    .last();
   const largest_total_prov = provinces[largest_total_prov_code].text;
   const le_largest_total_prov = le_provinces[largest_total_prov_code].text;
   const de_largest_total_prov = de_provinces[largest_total_prov_code].text;
@@ -78,11 +77,10 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     largest_per_capita_prov_code,
     largest_per_capita_value,
   ] = show_per_capita_data
-    ? _.chain(last_year_data_per_capita)
+    ? _(last_year_data_per_capita)
         .toPairs()
         .sortBy(([prov_code, value]) => value)
         .last()
-        .value()
     : [false, false];
   const largest_per_capita_prov =
     show_per_capita_data && provinces[largest_per_capita_prov_code].text;

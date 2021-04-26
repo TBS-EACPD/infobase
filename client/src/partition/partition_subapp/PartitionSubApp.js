@@ -167,15 +167,14 @@ export class PartitionSubApp {
       this.current_data_type
     );
 
-    this.current_perspective = _.chain(this.all_perspectives)
+    this.current_perspective = _(this.all_perspectives)
       .filter((perspective) => {
         return (
           perspective.id === this.current_perspective_id &&
           perspective.data_type === this.current_data_type
         );
       })
-      .head()
-      .value();
+      .head();
 
     this.update_diagram_notes(this.current_perspective.diagram_note_content);
 

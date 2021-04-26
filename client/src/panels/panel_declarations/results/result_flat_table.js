@@ -359,7 +359,7 @@ export const declare_results_table_panel = () =>
           .filter(had_doc_data)
           .value();
 
-        const last_drr_doc = _.chain(docs_with_data).sort().last().value();
+        const last_drr_doc = _(docs_with_data).sort().last();
 
         if (_.isEmpty(docs_with_data)) {
           return false;

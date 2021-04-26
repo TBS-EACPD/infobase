@@ -235,7 +235,7 @@ function populate_crso_tags(rows) {
     const instance = CRSO.create_and_register({
       dept,
       id: row[id],
-      activity_code: _.chain(row[id]).split("-").last().value(),
+      activity_code: _(row[id]).split("-").last(),
       name: row[title],
       description: row[desc],
       is_active: !!+row[is_active],

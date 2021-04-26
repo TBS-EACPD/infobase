@@ -91,11 +91,10 @@ const get_docs_with_data = (subject, level) => {
     return false;
   }
 
-  const latest_doc_with_data = _.chain(result_docs_in_tabling_order)
+  const latest_doc_with_data = _(result_docs_in_tabling_order)
     .map("doc_key")
     .intersection(docs_with_data)
-    .last()
-    .value();
+    .last();
 
   return { docs_with_data, latest_doc_with_data };
 };

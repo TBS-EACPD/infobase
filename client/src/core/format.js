@@ -282,8 +282,7 @@ const types_to_format = {
     const year_int = parseInt(year);
     return `${year_int}-${lang === "en" ? year_int - 2000 + 1 : year_int + 1}`;
   },
-  fiscal_year_to_year: (fiscal_year) =>
-    _.chain(fiscal_year).split("-").head().value(),
+  fiscal_year_to_year: (fiscal_year) => _(fiscal_year).split("-").head(),
 };
 
 const formatter = (format, val, options) => {

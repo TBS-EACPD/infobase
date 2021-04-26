@@ -22,7 +22,10 @@ const page_visit_increment = 1;
 const survey_campaign_end_date = new Date(2021, 2, 26).getTime(); // Reminder: months are 0-indexed, years and days aren't
 
 const get_path_root = (path) =>
-  _.chain(path).replace(/^\//, "").split("/").first().value();
+  _(path)
+    .thru((path) => _.replace(path, /^\//, ""))
+    .split("/")
+    .first();
 
 const miliseconds_in_five_minutes = 60 * 5 * 1000;
 const miliseconds_in_a_half_year = 60 * 60 * 24 * (365 / 2) * 1000;

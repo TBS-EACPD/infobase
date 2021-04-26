@@ -339,15 +339,14 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
 
-    const [largest_dept_id, largest_dept_auth] = _.chain(data)
+    const [largest_dept_id, largest_dept_auth] = _(data)
       .groupBy("org_id")
       .mapValues((data) =>
         _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
       )
       .toPairs()
       .sortBy(([org_id, total]) => total)
-      .last()
-      .value();
+      .last();
 
     return (
       <Fragment>
@@ -440,15 +439,14 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
 
-    const [largest_measure_id, largest_measure_auth] = _.chain(pre_sorted_data)
+    const [largest_measure_id, largest_measure_auth] = _(pre_sorted_data)
       .groupBy("measure_id")
       .map((rows, measure_id) => [
         measure_id,
         _.reduce(rows, (memo, { total }) => memo + total, 0),
       ])
       .sortBy(([_measure_id, total]) => total)
-      .last()
-      .value();
+      .last();
 
     return (
       <Fragment>

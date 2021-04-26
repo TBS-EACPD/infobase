@@ -313,18 +313,15 @@ function get_data_so(
           so_num: so,
           amount: _.filter(org_sobj_table.q(org).data, { so_num: so }).length
             ? get_changes
-              ? _.chain(org_sobj_table.q(org).data)
-                  .filter({ so_num: so })
-                  .head()
-                  .value()[header_col(perspective, year_2)] -
-                _.chain(org_sobj_table.q(org).data)
-                  .filter({ so_num: so })
-                  .head()
-                  .value()[header_col(perspective, year_1)]
-              : _.chain(org_sobj_table.q(org).data)
-                  .filter({ so_num: so })
-                  .head()
-                  .value()[header_col(perspective, year)]
+              ? _(org_sobj_table.q(org).data).filter({ so_num: so }).head()[
+                  header_col(perspective, year_2)
+                ] -
+                _(org_sobj_table.q(org).data).filter({ so_num: so }).head()[
+                  header_col(perspective, year_1)
+                ]
+              : _(org_sobj_table.q(org).data).filter({ so_num: so }).head()[
+                  header_col(perspective, year)
+                ]
             : 0,
         }))
         .filter((n) => has_non_zero_or_non_zero_children(n, perspective))

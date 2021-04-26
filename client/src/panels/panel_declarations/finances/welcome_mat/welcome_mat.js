@@ -154,7 +154,7 @@ const WelcomeMat = (props) => {
 
   const [oldest_hist_year, latest_hist_year] = _.map(
     [oldest_hist_spend_data.year, latest_hist_spend_data.year],
-    (fiscal_year) => _.chain(fiscal_year).split("-").head().parseInt().value()
+    (fiscal_year) => _(fiscal_year).split("-").thru(_.head).parseInt()
   );
   const current_year = _.parseInt(
     run_template("{{current_fiscal_year_short_first}}")
