@@ -6,4 +6,12 @@ const digital_status_keys = [
   "issuance_digital",
   "issue_res_digital",
 ];
-export { digital_status_keys };
+const delivery_channels_keys = [
+  "phone_inquiry_count",
+  "other_application_count",
+  "live_application_count",
+  "mail_application_count",
+  "online_application_count",
+];
+
+export { digital_status_keys, delivery_channels_keys };
