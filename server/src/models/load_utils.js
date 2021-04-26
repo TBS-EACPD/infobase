@@ -24,7 +24,9 @@ function get_standard_csv_file_rows(file_name) {
 
   // Not using _.snakeCase because we don't want it's behaviour of adding new _'s on case changes
   const file_with_snake_case_headers = _.replace(file, /^.+\n/, (header_row) =>
-    _.chain(header_row).replace(" ", "_").toLower().value()
+    _(header_row)
+      .thru((header_row) => _.replace(header_row, " ", "_"))
+      .toLower()
   );
 
   const rows = csvParse(file_with_snake_case_headers).map((row) =>

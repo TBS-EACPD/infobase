@@ -173,7 +173,7 @@ function populate_glossary(lines) {
     def_col,
     translation_col,
   ];
-  _.chain(lines)
+  _(lines)
     .filter((line) => !_.isEmpty(line[markdown_def]))
     .each((line) => {
       GlossaryEntry.register(
@@ -185,8 +185,7 @@ function populate_glossary(lines) {
           line[translation]
         )
       );
-    })
-    .value();
+    });
 }
 
 function create_tag_branches(program_tag_types) {
@@ -300,13 +299,12 @@ function populate_program_tag_linkages(programs_m2m_tags) {
 
 function process_lookups(data) {
   //convert the csv's to rows and drop their headers
-  _.chain(data)
+  _(data)
     .omit("global_footnotes") //global footnotes already has its header dropped
     .each((csv_str, key) => {
       data[key] = csvParseRows(_.trim(csv_str));
       data[key].shift(); // drop the header
-    })
-    .value();
+    });
 
   //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
   populate_igoc_models({

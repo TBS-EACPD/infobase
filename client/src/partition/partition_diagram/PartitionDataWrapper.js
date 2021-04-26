@@ -158,7 +158,7 @@ export class PartitionDataWrapper {
         children = node.children;
       }
 
-      _.chain(children)
+      _(children)
         .difference(node.children)
         .filter((node) => node.value !== "collapsed")
         .each((child) => {
@@ -167,8 +167,7 @@ export class PartitionDataWrapper {
               d.children = this.process_node_children_for_compression(d);
             }
           });
-        })
-        .value();
+        });
 
       node.children = children;
 

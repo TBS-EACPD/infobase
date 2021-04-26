@@ -208,7 +208,7 @@ query($lang: String!) {
 
 const extract_flat_data_from_hierarchical_response = (response) => {
   const serviceStandards = [];
-  const services = _.chain(_.isArray(response) ? response : [response])
+  const services = _(_.isArray(response) ? response : [response])
     .map((resp) => resp.services)
     .compact()
     .flatten(true)
@@ -216,8 +216,7 @@ const extract_flat_data_from_hierarchical_response = (response) => {
       _.each(service.standards, (standard) =>
         serviceStandards.push(_.omit(standard, "__typename"))
       )
-    )
-    .value();
+    );
   return { services, serviceStandards };
 };
 

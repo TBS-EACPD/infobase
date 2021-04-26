@@ -21,7 +21,7 @@ const vote_stat_query = function (vote_or_stat, cut_off) {
   var cut_off_counter = 0;
   var dept = this.dept || true;
 
-  return _.chain(this.table.voted_stat(undefined, dept, false)[vote_or_stat])
+  return _(this.table.voted_stat(undefined, dept, false)[vote_or_stat])
     .map(_.clone)
     .flatten()
     .sortBy(function (d) {
@@ -33,17 +33,18 @@ const vote_stat_query = function (vote_or_stat, cut_off) {
       total += d.total;
       return -d.total;
     })
-    .each(function (d) {
-      d.percent = d.total / total;
-    })
+    .thru((data) =>
+      _.each(data, function (d) {
+        d.percent = d.total / total;
+      })
+    )
     .each(function (d) {
       if (!cut_off) {
         return;
       }
       cut_off_counter += d.percent;
       d.cut_off = cut_off_counter >= cut_off ? true : false;
-    })
-    .value();
+    });
 };
 
 export default {

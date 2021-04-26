@@ -167,15 +167,14 @@ export class Table extends mix().with(staticStoreMixin) {
     }
 
     //eslint-disable-next-line
-    const to_chain = _.chain(this.flat_headers);
+    const to_chain = _(this.flat_headers);
 
     to_chain
       .filter((col) => !_.isUndefined(col.formula))
       .each((col) => {
         var formula = col.formula;
         col.formula = (data) => formula(this, data);
-      })
-      .value();
+      });
 
     to_chain
       .filter(function (col) {
@@ -198,8 +197,7 @@ export class Table extends mix().with(staticStoreMixin) {
           return data;
         };
         col.formula.default = true;
-      })
-      .value();
+      });
 
     this.keys = to_chain
       .filter(function (h) {

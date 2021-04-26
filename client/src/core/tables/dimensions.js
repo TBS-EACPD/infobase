@@ -199,7 +199,7 @@ it will use the dimension_key attribute as the extra property on the table.data 
 const enhanced_tables_by_id = {};
 export function fill_dimension_columns(table) {
   if (!enhanced_tables_by_id[table.id]) {
-    _.chain(table.dimensions)
+    _(table.dimensions)
       .reject("exclude_from_rpb")
       .each((dim_obj) => {
         const dim_key = dim_obj.title_key;
@@ -207,8 +207,7 @@ export function fill_dimension_columns(table) {
         _.each(table.data, (row) => {
           row[dim_key] = bound_filter_func(row);
         });
-      })
-      .value();
+      });
 
     enhanced_tables_by_id[table.id] = true;
   }

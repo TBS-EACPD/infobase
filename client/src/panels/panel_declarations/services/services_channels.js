@@ -65,20 +65,19 @@ class ServicesChannelsPanel extends React.Component {
     const { active_services } = this.state;
     const { services, subject } = panel_args;
 
-    const { max_vol_service_name, max_vol_service_value } = _.chain(services)
+    const { max_vol_service_name, max_vol_service_value } = _(services)
       .map(({ name, service_report }) => ({
         max_vol_service_name: name,
         max_vol_service_value: _(delivery_channels_keys)
           .map((key) => _.sumBy(service_report, `${key}_count`))
           .sum(),
       }))
-      .maxBy("max_vol_service_value")
-      .value();
+      .maxBy("max_vol_service_value");
     const {
       max_vol_channel_key,
       max_vol_channel_name,
       max_vol_channel_value,
-    } = _.chain(delivery_channels_keys)
+    } = _(delivery_channels_keys)
       .map((key) => ({
         max_vol_channel_key: key,
         max_vol_channel_name: text_maker(key),
@@ -86,8 +85,7 @@ class ServicesChannelsPanel extends React.Component {
           .map(({ service_report }) => _.sumBy(service_report, `${key}_count`))
           .sum(),
       }))
-      .maxBy("max_vol_channel_value")
-      .value();
+      .maxBy("max_vol_channel_value");
 
     const services_channel_nivo_data = _.map(delivery_channels_keys, (key) => ({
       id: text_maker(key),
