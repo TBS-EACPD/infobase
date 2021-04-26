@@ -266,10 +266,11 @@ export const declare_late_actual_resources_panel = get_declare_late_resources_pa
   depts_with_late_actual_resources
 );
 
-const depts_with_late_planned_resources = _(result_docs_in_tabling_order)
+const depts_with_late_planned_resources = _.chain(result_docs_in_tabling_order)
   .filter(({ doc_type }) => doc_type === "dp")
-  .thru(_.last)
-  .get("late_resources_orgs");
+  .last()
+  .get("late_resources_orgs")
+  .value();
 export const declare_late_planned_resources_panel = get_declare_late_resources_panel(
   "planned",
   depts_with_late_planned_resources

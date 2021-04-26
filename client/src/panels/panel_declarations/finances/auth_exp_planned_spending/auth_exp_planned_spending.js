@@ -377,10 +377,11 @@ const calculate = function (subject, options) {
     auth_values[last_shared_index] - exp_values[last_shared_index];
 
   const get_five_year_auth_average = (auth_or_exp) =>
-    _(std_years)
+    _.chain(std_years)
       .map((year) => orgVoteStatPa.q(query_subject).sum([year + auth_or_exp]))
-      .thru(_.sum)
-      .divide(std_years.length);
+      .sum()
+      .divide(std_years.length)
+      .value();
 
   const additional_info = {
     five_year_auth_average: get_five_year_auth_average("auth"),

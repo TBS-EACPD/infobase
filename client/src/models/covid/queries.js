@@ -477,12 +477,11 @@ export const query_top_covid_spending = query_logging_wrapper(
               top_spending_measures,
               ({ name, covid_data }) => ({
                 name,
-                spending: _(covid_data)
-                  .thru(_.first)
-                  .thru((covid_datum) =>
-                    _.get(covid_datum, "covid_expenditures")
-                  )
-                  .reduce((memo, { vote, stat }) => memo + vote + stat, 0),
+                spending: _.chain(covid_data)
+                  .first()
+                  .get("covid_expenditures")
+                  .reduce((memo, { vote, stat }) => memo + vote + stat, 0)
+                  .value(),
               })
             ),
           }))

@@ -230,7 +230,7 @@ export class DisplayTable extends React.Component {
     };
 
     const clean_search_string = (search_string) =>
-      _(search_string).thru(_.deburr).thru(_.toLower).trim();
+      _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val) =>
       _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)

@@ -89,7 +89,8 @@ const get_est_doc_list_plain_text = (est_docs) =>
     .thru(array_to_grammatical_list)
     .value();
 
-const get_plain_string = (string) => _(string).thru(_.deburr).lowerCase();
+const get_plain_string = (string) =>
+  _.chain(string).deburr().lowerCase().value();
 const string_sort_func = (a, b) => {
   const plain_a = get_plain_string(a);
   const plain_b = get_plain_string(b);
@@ -128,9 +129,10 @@ const roll_up_flat_measure_data_by_property = (
       // could get this from the key arg to the predicate, but may lose the original type in the process
       // since the key value will have been converted to a string (happens with fiscal_year below, but we
       // know that should be an int so can just covert back ourselves)
-      const roll_up_value = _(roll_up_group)
-        .thru(_.first)
-        .get(roll_up_property);
+      const roll_up_value = _.chain(roll_up_group)
+        .first()
+        .get(roll_up_property)
+        .value();
 
       return _.chain(roll_up_group)
         .groupBy("fiscal_year")

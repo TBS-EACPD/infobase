@@ -5,7 +5,7 @@ import { lang } from "src/core/injected_build_constants.js";
 import { run_template } from "./text.js";
 
 const fiscal_year_to_year = (fy_string) =>
-  _(fy_string).split("-").thru(_.first).toNumber() || null;
+  _.chain(fy_string).split("-").first().toNumber().value() || null;
 
 const year_to_fiscal_year = (year) => {
   if (year) {
@@ -79,7 +79,12 @@ const actual_to_planned_gap_year = _.chain(year_templates)
     _.first(planning_years),
   ])
   .map((fiscal_year) =>
-    _(fiscal_year).thru(run_template).split("-").thru(_.first).parseInt()
+    _.chain(fiscal_year)
+      .thru(run_template)
+      .split("-")
+      .first()
+      .parseInt()
+      .value()
   )
   .thru(([last_pa_year, first_planning_year]) => {
     if (first_planning_year - last_pa_year == 2) {

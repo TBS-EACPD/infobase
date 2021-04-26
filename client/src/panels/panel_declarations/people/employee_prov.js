@@ -174,7 +174,7 @@ class ProvPanel extends React.Component {
 }
 
 const calculate_common = (data) => {
-  const max = _(data).thru(_.last).values().max();
+  const max = _.chain(data).last().values().max().value();
   const color_scale = scaleLinear().domain([0, max]).range([0.2, 1]);
 
   return {
