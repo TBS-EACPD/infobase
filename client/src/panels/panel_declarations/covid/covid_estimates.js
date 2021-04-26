@@ -300,7 +300,9 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             ..._.chain(est_docs)
               .map((est_doc) => [
                 est_doc,
-                _.chain(vs_group).find({ est_doc }).get("value", 0).value(),
+                _(vs_group)
+                  .thru((vs_group) => _.find(vs_group, { est_doc }))
+                  .get("value", 0),
               ])
               .fromPairs()
               .value(),
@@ -400,7 +402,9 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             ..._.chain(est_docs)
               .map((est_doc) => [
                 est_doc,
-                _.chain(vs_group).find({ est_doc }).get("value", 0).value(),
+                _(vs_group)
+                  .thru((vs_group) => _.find(vs_group, { est_doc }))
+                  .get("value", 0),
               ])
               .fromPairs()
               .value(),

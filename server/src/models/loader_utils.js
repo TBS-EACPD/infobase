@@ -11,21 +11,26 @@ const deep_and_complete_group_by = (attr_path, ids, rows) => {
 
   const get_rows_that_matched_on_id = (id) =>
     _.filter(rows, (row) =>
-      _.chain(keys_in_attr_path)
-        .reduce((documents, attr) => {
-          if (documents.isMongooseArray) {
-            return _.flatMap(
-              documents.toObject(),
-              (document) => document[attr]
-            );
-          } else if (_.isArray(documents)) {
-            return _.flatMap(documents, (document) => document[attr]);
-          } else {
-            return documents[attr];
-          }
-        }, row)
+      _(keys_in_attr_path)
+        .thru((keys_in_attr_path) =>
+          _.reduce(
+            keys_in_attr_path,
+            (documents, attr) => {
+              if (documents.isMongooseArray) {
+                return _.flatMap(
+                  documents.toObject(),
+                  (document) => document[attr]
+                );
+              } else if (_.isArray(documents)) {
+                return _.flatMap(documents, (document) => document[attr]);
+              } else {
+                return documents[attr];
+              }
+            },
+            row
+          )
+        )
         .includes(id)
-        .value()
     );
 
   const groups_of_all_matches_by_id = _.chain(ids)

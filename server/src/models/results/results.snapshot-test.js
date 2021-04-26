@@ -177,7 +177,7 @@ describe("results data", function () {
       _.mapValues(
         {
           subject_id: dept_query_response.id,
-          ..._.chain(drr_docs_to_test)
+          ..._(drr_docs_to_test)
             .flatMap((drr_doc) =>
               _.chain(dept_query_response[drr_doc])
                 .omit("indicators_dp")
@@ -191,9 +191,8 @@ describe("results data", function () {
                 ...drr_doc_counts,
               }),
               {}
-            )
-            .value(),
-          ..._.chain(dp_docs_to_test)
+            ),
+          ..._(dp_docs_to_test)
             .flatMap((dp_doc) => ({
               [`${dp_doc}_results`]: dept_query_response[dp_doc].results,
               [`${dp_doc}_indicators`]: dept_query_response[dp_doc]
@@ -205,8 +204,7 @@ describe("results data", function () {
                 ...dp_doc_counts,
               }),
               {}
-            )
-            .value(),
+            ),
         },
         (value) => (value === 0 ? null : value)
       );

@@ -62,7 +62,7 @@ const infobase_open_data_page = {
     "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
 };
 
-const sources = _.chain([
+const sources = _([
   {
     key: "PA",
     title: tm("pa_title"),
@@ -249,8 +249,7 @@ const sources = _.chain([
   },
 ])
   .compact()
-  .reduce((sources, source) => ({ ...sources, [source.key]: source }), {})
-  .value();
+  .reduce((sources, source) => ({ ...sources, [source.key]: source }), {});
 
 const get_source_links = (source_keys) =>
   _.chain(source_keys)

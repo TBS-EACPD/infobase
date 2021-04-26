@@ -237,10 +237,9 @@ function extract_flat_data_from_results_hierarchies(
   const crawl_hierachy_level = (subject_node) =>
     _.each(subject_node, (subject) => {
       _.each(
-        _.chain(subject)
+        _(subject)
           .pickBy((value, key) => /(drr|dp)[0-9][0-9]_results/.test(key))
-          .reduce((memo, doc_results) => [...memo, ...doc_results], [])
-          .value(),
+          .reduce((memo, doc_results) => [...memo, ...doc_results], []),
         (result) => {
           results.push({
             id: result.id,

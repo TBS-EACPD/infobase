@@ -396,14 +396,13 @@ export const declare_drr_summary_panel = () =>
             case "dept":
               return ResultCounts.get_dept_counts(subject.id);
             case "crso":
-              return _.chain([subject.id, ..._.map(subject.programs, "id")])
+              return _([subject.id, ..._.map(subject.programs, "id")])
                 .map((id) => GranularResultCounts.get_subject_counts(id))
                 .reduce(
                   (accumulator, counts) =>
                     _.mergeWith(accumulator, counts, _.add),
                   {}
-                )
-                .value();
+                );
             case "program":
               return GranularResultCounts.get_subject_counts(subject.id);
           }
