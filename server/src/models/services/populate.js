@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
-import { digital_status_keys } from "./constants.js";
+import { digital_status_keys, delivery_channels_keys } from "./constants.js";
 
 const multi_value_string_fields_to_arrays = (list_fields, seperator = "<>") =>
   _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
@@ -39,6 +39,8 @@ export default async function ({ models }) {
     GovServiceFeesSummary,
     DeptServiceFeesSummary,
     ProgramServiceFeesSummary,
+    DeptTopServicesApplicationVolSummary,
+    ProgramTopServicesApplicationVolSummary,
   } = models;
 
   const service_report_rows = _.map(
@@ -409,6 +411,36 @@ export default async function ({ models }) {
     .flatMap(get_fees_summary)
     .value();
 
+  const get_top_application_vol_summary = (services, subject_id) => {
+    return _.chain(services)
+      .flatMap(({ id, name_en, name_fr, service_report }) => ({
+        id: `${subject_id}_${id}`,
+        service_id: id,
+        subject_id,
+        name_en,
+        name_fr,
+        value: _.reduce(
+          delivery_channels_keys,
+          (sum, key) =>
+            sum + (_.chain(service_report).sumBy(key).toNumber().value() || 0),
+          0
+        ),
+      }))
+      .filter("value")
+      .sortBy("value")
+      .takeRight(10)
+      .value();
+  };
+
+  const dept_top_application_vol_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap(get_top_application_vol_summary)
+    .value();
+  const program_top_application_vol_summary = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .flatMap(get_top_application_vol_summary)
+    .value();
+
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
@@ -434,5 +466,11 @@ export default async function ({ models }) {
     GovServiceFeesSummary.insertMany(gov_fees_summary),
     DeptServiceFeesSummary.insertMany(dept_fees_summary),
     ProgramServiceFeesSummary.insertMany(program_fees_summary),
+    DeptTopServicesApplicationVolSummary.insertMany(
+      dept_top_application_vol_summary
+    ),
+    ProgramTopServicesApplicationVolSummary.insertMany(
+      program_top_application_vol_summary
+    ),
   ]);
 }

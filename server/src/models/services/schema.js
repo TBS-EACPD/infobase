@@ -24,6 +24,7 @@ const schema = `
     service_id_methods_summary: [ServiceIdMethodsSummary]
     service_standards_summary: [ServiceStandardsSummary]
     service_fees_summary: [ServiceFeesSummary]
+    top_services_application_vol_summary: [TopServicesApplicationVolSummary]
   }
   type ServiceGeneralStats{
     id: String
@@ -63,6 +64,14 @@ const schema = `
     subject_id: String
     label: String
     value: Float
+  }
+  type TopServicesApplicationVolSummary{
+    id: String
+    service_id: String
+    subject_id: String
+    name: String,
+    value: Float
+
   }
   type ServiceReport{
     service_id: String
@@ -162,6 +171,8 @@ export default function ({ models, loaders }) {
     service_fees_summary_for_gov,
     service_fees_summary_for_dept,
     service_fees_summary_for_program,
+    top_services_application_vol_summary_for_dept,
+    top_services_application_vol_summary_for_program,
   } = loaders;
 
   const org_has_services = async (org_id) => {
@@ -205,6 +216,9 @@ export default function ({ models, loaders }) {
           org_id
         ),
         service_fees_summary: service_fees_summary_for_dept.load(org_id),
+        top_services_application_vol_summary: top_services_application_vol_summary_for_dept.load(
+          org_id
+        ),
       }),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
@@ -227,11 +241,17 @@ export default function ({ models, loaders }) {
           program_id
         ),
         service_fees_summary: service_fees_summary_for_program.load(program_id),
+        top_services_application_vol_summary: top_services_application_vol_summary_for_program.load(
+          program_id
+        ),
       }),
       has_services: ({ program_id }) => program_has_services(program_id),
     },
     ServiceTypeSummary: {
       label: bilingual_field("label"),
+    },
+    TopServicesApplicationVolSummary: {
+      name: bilingual_field("name"),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),
