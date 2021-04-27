@@ -7,8 +7,8 @@ import {
   ContainerEscapeHatch,
 } from "src/components/index.js";
 
-import { lang } from "src/core/injected_build_constants.js";
 import { highlightColor } from "src/core/color_defs.js";
+import { lang } from "src/core/injected_build_constants.js";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
