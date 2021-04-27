@@ -4,6 +4,8 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 
 import { digital_status_keys, delivery_channels_keys } from "./constants.js";
 
+const online_inquiry_count = "online_inquiry_count";
+
 const multi_value_string_fields_to_arrays = (list_fields, seperator = "<>") =>
   _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
 const convert_to_bool_or_null = (value, true_val, false_val) => {
@@ -42,6 +44,9 @@ export default async function ({ models }) {
     DeptTopServicesApplicationVolSummary,
     ProgramTopServicesApplicationVolSummary,
     GovServicesHighVolumeSummary,
+    GovTopServicesWebsiteVisitsSummary,
+    DeptTopServicesWebsiteVisitsSummary,
+    ProgramTopServicesWebsiteVisitsSummary,
   } = models;
 
   const service_report_rows = _.map(
@@ -462,6 +467,57 @@ export default async function ({ models }) {
     .reverse()
     .value();
 
+  const post_process_website_visits = (data) =>
+    _.chain(data)
+      .filter("website_visits_count")
+      .sortBy("website_visits_count")
+      .takeRight(10)
+      .value();
+
+  const gov_top_website_visits_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .map((org_services, org_id) => ({
+      id: `gov_${org_id}`,
+      subject_id: org_id,
+      website_visits_count: _.sumBy(
+        org_services,
+        ({ service_report }) =>
+          _.chain(service_report)
+            .sumBy(online_inquiry_count)
+            .toNumber()
+            .value() || 0
+      ),
+    }))
+    .thru(post_process_website_visits)
+    .value();
+
+  const get_top_website_visits_summary = (services, subject_id) =>
+    _.chain(services)
+      .flatMap(({ id, name_en, name_fr, service_report }) => ({
+        id: `${subject_id}_${id}`,
+        subject_id,
+        service_id: id,
+        service_name_en: name_en,
+        service_name_fr: name_fr,
+        website_visits_count:
+          _.chain(service_report)
+            .sumBy(online_inquiry_count)
+            .toNumber()
+            .value() || 0,
+      }))
+      .value();
+
+  const dept_top_website_visits_summary = _.chain(service_rows)
+    .groupBy("org_id")
+    .flatMap(get_top_website_visits_summary)
+    .thru(post_process_website_visits)
+    .value();
+  const program_top_website_visits_summary = _.chain(service_rows)
+    .reduce(group_by_program_id, {})
+    .flatMap(get_top_website_visits_summary)
+    .thru(post_process_website_visits)
+    .value();
+
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
@@ -494,5 +550,14 @@ export default async function ({ models }) {
       program_top_application_vol_summary
     ),
     GovServicesHighVolumeSummary.insertMany(gov_services_high_volume_summary),
+    GovTopServicesWebsiteVisitsSummary.insertMany(
+      gov_top_website_visits_summary
+    ),
+    DeptTopServicesWebsiteVisitsSummary.insertMany(
+      dept_top_website_visits_summary
+    ),
+    ProgramTopServicesWebsiteVisitsSummary.insertMany(
+      program_top_website_visits_summary
+    ),
   ]);
 }

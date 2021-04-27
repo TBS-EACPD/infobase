@@ -26,6 +26,7 @@ const schema = `
     service_fees_summary: [ServiceFeesSummary]
     top_services_application_vol_summary: [TopServicesApplicationVolSummary]
     service_high_volume_summary: [ServiceHighVolumeSummary]
+    top_services_website_visits_summary: [TopServicesWebsiteVisitsSummary]
   }
   type ServiceGeneralStats{
     id: String
@@ -77,6 +78,13 @@ const schema = `
     id: String
     subject_id: String
     total_volume: Float
+  }
+  type TopServicesWebsiteVisitsSummary{
+    id: String
+    subject_id: String
+    service_id: String
+    service_name: String
+    website_visits_count: Float
   }
   type ServiceReport{
     service_id: String
@@ -151,7 +159,11 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const { Service, GovServicesHighVolumeSummary } = models;
+  const {
+    Service,
+    GovServicesHighVolumeSummary,
+    GovTopServicesWebsiteVisitsSummary,
+  } = models;
 
   const {
     services_by_org_id,
@@ -178,6 +190,8 @@ export default function ({ models, loaders }) {
     service_fees_summary_for_program,
     top_services_application_vol_summary_for_dept,
     top_services_application_vol_summary_for_program,
+    top_services_website_visits_summary_for_dept,
+    top_services_website_visits_summary_for_program,
   } = loaders;
 
   const org_has_services = async (org_id) => {
@@ -205,6 +219,7 @@ export default function ({ models, loaders }) {
         ),
         service_fees_summary: service_fees_summary_for_gov.load("gov"),
         service_high_volume_summary: GovServicesHighVolumeSummary.find(),
+        top_services_website_visits_summary: GovTopServicesWebsiteVisitsSummary.find(),
       }),
     },
     Org: {
@@ -223,6 +238,9 @@ export default function ({ models, loaders }) {
         ),
         service_fees_summary: service_fees_summary_for_dept.load(org_id),
         top_services_application_vol_summary: top_services_application_vol_summary_for_dept.load(
+          org_id
+        ),
+        top_services_website_visits_summary: top_services_website_visits_summary_for_dept.load(
           org_id
         ),
       }),
@@ -250,6 +268,9 @@ export default function ({ models, loaders }) {
         top_services_application_vol_summary: top_services_application_vol_summary_for_program.load(
           program_id
         ),
+        top_services_website_visits_summary: top_services_website_visits_summary_for_program.load(
+          program_id
+        ),
       }),
       has_services: ({ program_id }) => program_has_services(program_id),
     },
@@ -258,6 +279,9 @@ export default function ({ models, loaders }) {
     },
     TopServicesApplicationVolSummary: {
       name: bilingual_field("name"),
+    },
+    TopServicesWebsiteVisitsSummary: {
+      service_name: bilingual_field("service_name"),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),
