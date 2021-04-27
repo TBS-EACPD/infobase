@@ -2,49 +2,81 @@
 
 See https://github.com/TBS-EACPD/infobase/issues/777 for initial debate
 
-The general organization of the InfoBase client's source code follows a recursive pattern of "utils", "components", and "thematic" directories.
-Util and component directories are for rusable code/components, scoped to the theme of their parent directory (globablly usable if in the top-level).
-Thematic directories group by, and narrow down the purpose of, their child utils/components directories, modules, and further thematic directories.
+Proposal: a recursive directory structure based on four types of directories
+  1) `utils`
+    * generic dir name
+    * fully reusable utils (i.e. no indirect coupling to other modules, no implicit dependencies/assumptions about app state, etc)
+    * (?) probably no sub-directories
+  2) `components`
+    * generic dir name
+    * fully reusable components (i.e. no indirect coupling to other modules, no implicit dependencies/assumptions about app state, etc)
+    * (?) probably only one layer of sub-directories, to group component modules
+  3) `platform`
+    * generic dir name
+    * sets of utils/components/functionality, generally reusable but allowed to:
+      1) have strong assumptions
+        * e.g. assume that the page has a `#header` node
+      2) have implicit dependencies
+        * e.g. depend on some non-explicit one-time initialization step
+      2) have module level state (e.g. top level `let`), or use the singleton pattern
+    * (?) could have it's own thematic sub-directories, since a "platform" could be built of many modules/sub-platforms
+  4) thematic sub-directories
+    * unique, self-descriptive name
+    * may have its own `utils`/`components`/`platform`/thematic sub-directories
+    * intentionally a bit vague, sort of a know-it-when-you-see-it
+      * maybe because it represents some specific piece of the actual app
+        * e.g. the `routes` dir and the contained per-route thematic dirs under it
+      * maybe just because it helps with organization/solidifies core concepts
+        * e.g. `src/charts` content's could probably be tossed in the root `components` dir, or `src/models`'s in `platform`, but both are "weighty" enough concepts to stand up on their own
 
-TODO: some sort of clarification on how to determine what's a "theme" worth having a thematic sub-directory... or maybe it's just a "do what feels right" thing?
-
-TODO: I'm using "system(s)" a lot, might want to formalize that idea and make sure I'm consistent about it
-
-Proposed:
+Sketch of proposed structure:
 * `/client/src/`
   * `./utils/`
-    * generally reusable utils (i.e. no strong coupling to other systems, no implicit dependencies/assumptions about app state, etc.)
+    * globally reusable utils 
+    * `./request_utils.js`
   * `./components/`
-    * generally reusable components (i.e. no strong coupling to other systems, no implicit dependencies/assumptions about app state, etc)
-    * sub-directories for families of modules, e.g.
+    * globally reusable components
     * `./SomeComponent/`
       * `./SomeComponent.js`
       * `./SomeComponent.scss`
-      * .etc
-  * `./platform/` (Or foundation/domain/systems?)
-    * very important, place to put general InfoBase-wide utils/components/systems that meet any of the following criteria:
-      1) modules that colocate utilities and components that are often/necessarily imported together
-      2) hold state in a singleton or in the module (e.g. top level `let`)
-      3) have dependencies on side effects (e.g. assume that the page has a #header selector, require )
+  * `./platform/`
+    * sets of related utils/components/functionality, especially for code meeting any of the following criteria:
+      1) have strong assumptions/implicit dependencies
+        * e.g. assume that the page has a `#header` node, depend on some non-explicit one-time initialization step, etc
+      2) have module level state (e.g. top level `let`), or use the singleton pattern
+      3) modules that collocate utilities and components that are often/necessarily imported together
+    * `./Search/`
+    * `./analytics.js`
   * `./InfoBase/`
     * application entry point, e.g. the application bootstrapper, the React Router configuration, etc.
     * `./components/`
-      * route-agnostic navigation components, ErrorBoundary, etc.
+      * pre-router components like `ErrorBoundary`, etc.
+        * or would many of those be "platform" code??
     * `./index_html/`
       * templates and data for the generation of index html files
+  * `./models/`
+    * `./platform/`
+      * `./ensure_loaded.js`
+    * `./subjects/`
+    * `./tables/`
   * `./routes/`
-    * all routes, e.g. `infographic`, `metadata`, etc.
+    * `./platform/`
+      * `./StandardRouteContainer.js` and other route/nav components?
+    * `./Infographic/`
+      * `./utils/`
+        * `./infographic_link.js`
+      * `./Infographic.js`
+        * the route module, clearly belongs at the root of this dir
+      * `./PanelFilterControl.js`
+        * not a generally reusable component, or part of some self-contained system 
+        * highly coupled to `./Infographic.js` itself, could be inlined in it but kept separate for organization reasons
+        * so it should also live in the root of this dir, rather in a `./components` sub-dir, right? 
   * `./panels/`
     * all the panels
     * utils like `declare_panels`
     * could potentially be a thematic sub-directory of the infographic route dir, but might warrant an exception because of it's size/depth (plus, technically used by two routes if we count the panel inventory, ha)
   * `./charts/`
-    * could potentially be a thematic sub-directory of the top-level `components` dir, but might warrant an exception for... TODO reasons
-  * `./models/`
-    * TODO: tighten up definition on this, sort out the distinctions from `platform/` (if necessary, these might all properly belong as sub-dirs/modules of that) 
-    * `./tables/`
-    * `./ensure_loaded.js`
   * `./static/`
-    * global css, svg, yaml, png
+    * global css, svgs, pngs, etc
   * `./constants/` (TODO: or "theme"? Some constants/configs will likely come from other places like `injected_build_constants.js` and models?)
     * colors, breakpoints, etc.
