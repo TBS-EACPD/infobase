@@ -141,6 +141,13 @@ export default function (model_singleton) {
     subject_id: parent_fkey_type(),
     total_volume: { type: Number },
   });
+  const TopServicesWebsiteVisitsSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    subject_id: parent_fkey_type(), // no dataloader for gov, must load all
+    service_id: str_type, // only for dept, program
+    ...bilingual_str("service_name"), // only for dept, program
+    website_visits_count: { type: Number },
+  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
@@ -212,7 +219,14 @@ export default function (model_singleton) {
     ],
     TopServicesApplicationVolSummarySchema
   );
-
+  define_models_w_same_schema(
+    [
+      "GovTopServicesWebsiteVisitsSummary",
+      "DeptTopServicesWebsiteVisitsSummary",
+      "ProgramTopServicesWebsiteVisitsSummary",
+    ],
+    TopServicesWebsiteVisitsSummarySchema
+  );
   const {
     Service,
     GovServiceGeneralStats,
@@ -235,6 +249,8 @@ export default function (model_singleton) {
     ProgramServiceFeesSummary,
     DeptTopServicesApplicationVolSummary,
     ProgramTopServicesApplicationVolSummary,
+    DeptTopServicesWebsiteVisitsSummary,
+    ProgramTopServicesWebsiteVisitsSummary,
   } = model_singleton.models;
 
   const define_loaders_w_same_fk_attr = (schemas_and_names, fk_attr) =>
@@ -361,6 +377,19 @@ export default function (model_singleton) {
         {
           schema: ProgramTopServicesApplicationVolSummary,
           name: "top_services_application_vol_summary_for_program",
+        },
+      ],
+      "subject_id"
+    ),
+    ...define_loaders_w_same_fk_attr(
+      [
+        {
+          schema: DeptTopServicesWebsiteVisitsSummary,
+          name: "top_services_website_visits_summary_for_dept",
+        },
+        {
+          schema: ProgramTopServicesWebsiteVisitsSummary,
+          name: "top_services_website_visits_summary_for_program",
         },
       ],
       "subject_id"
