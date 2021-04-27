@@ -1,7 +1,5 @@
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
 
-[Lighthouse CI](https://infobase-lhci.herokuapp.com/app/projects)
-
 *(Le Français suit)*
 
 # GC InfoBase Mono-Repo
