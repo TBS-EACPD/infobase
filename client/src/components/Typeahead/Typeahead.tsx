@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, { ChangeEvent, Fragment } from "react";
+import React, { ChangeEvent, KeyboardEvent, Fragment } from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
 import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
@@ -335,17 +335,17 @@ export class Typeahead extends React.Component<
     });
   };
 
-  handle_up_arrow = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  handle_up_arrow = (e: KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     this.show_menu &&
       this.setState({ selection_cursor: this.previous_selection_cursor });
   };
-  handle_down_arrow = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  handle_down_arrow = (e: KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     this.show_menu &&
       this.setState({ selection_cursor: this.next_selection_cursor });
   };
-  handle_enter_key = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  handle_enter_key = (e: KeyboardEvent<HTMLInputElement>) => {
     if (this.show_menu) {
       e.preventDefault();
 
@@ -358,7 +358,7 @@ export class Typeahead extends React.Component<
       }
     }
   };
-  handle_key_down = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  handle_key_down = (e: KeyboardEvent<HTMLInputElement>) => {
     switch (e.keyCode) {
       case 38: //up arrow
         this.handle_up_arrow(e);
