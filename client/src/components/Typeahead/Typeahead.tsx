@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { ChangeEvent, Fragment } from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
 import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
@@ -28,31 +28,55 @@ const virtualized_cell_measure_cache = new CellMeasurerCache({
 */
 const default_selection_cursor = -1;
 
-/*
-  Required props:
-    on_query: callback, called with debounce on input change. Responsible for updating the query_value and results props
+interface ResultProps {
+  header?: string | React.Component;
+  on_select: () => void;
+  content: string | React.Component;
+  plain_text: string;
+}
 
-    query_value: string, required. The query value currently used by the parent, not necessarily the same as the typeahead's internal input_value state
+interface TypeaheadProps {
+  on_query: (str: string) => void;
+  query_value: string;
+  results: ResultProps[];
 
-    results: [{
-      header: string || component, optional. Non-option content to render above the result in the typeahead list,
-      on_select: callback, required,
-      content: string || component, required. Inner content for rendering,
-      plain_text: string, required. Specifically for use in a11y readout,
-    }]
-*/
+  min_length: number;
+  placeholder: string;
+  on_query_debounce_time: number;
+  additional_a11y_description?: string;
+  utility_buttons?: Boolean | (React.FC | React.Component)[];
+}
 
-export class Typeahead extends React.Component {
-  constructor(props) {
+interface TypeaheadState {
+  input_value: string;
+  may_show_menu: Boolean;
+  selection_cursor: number;
+  results?: ResultProps[];
+}
+
+export class Typeahead extends React.Component<
+  TypeaheadProps,
+  TypeaheadState,
+  {}
+> {
+  menu_id: string;
+
+  private typeahead_ref = React.createRef<HTMLDivElement>();
+  private virtualized_list_ref = React.createRef<any>();
+
+  public static defaultProps = {
+    placeholder: text_maker("search"),
+    min_length: 3,
+    on_query_debounce_time: 300,
+  };
+
+  constructor(props: TypeaheadProps) {
     super(props);
-
-    this.typeahead_ref = React.createRef();
-    this.virtualized_list_ref = React.createRef();
 
     this.menu_id = _.uniqueId("typeahead-");
 
     this.state = {
-      input_value: this.props.query_value,
+      input_value: props.query_value,
       may_show_menu: false,
       selection_cursor: default_selection_cursor,
     };
@@ -76,7 +100,10 @@ export class Typeahead extends React.Component {
     document.body.removeEventListener("click", this.handle_window_click);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(
+    nextProps: TypeaheadProps,
+    prevState: TypeaheadState
+  ) {
     const { results: next_results } = nextProps;
     const { results: prev_results } = prevState;
 
@@ -91,7 +118,7 @@ export class Typeahead extends React.Component {
       return null;
     }
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: TypeaheadProps, prevState: TypeaheadState) {
     const { selection_cursor } = this.state;
     const { selection_cursor: prev_selection_cursor } = prevState;
 
@@ -164,7 +191,7 @@ export class Typeahead extends React.Component {
         )}
         {this.show_menu && (
           <AutoSizer>
-            {({ width }) => (
+            {({ width }: any) => (
               <ReactResizeDetector
                 handleWidth
                 onResize={() => {
@@ -185,11 +212,10 @@ export class Typeahead extends React.Component {
                     rowCount={results.length || 1}
                     rowRenderer={({
                       index: result_index,
-                      isScrolling,
                       key,
                       parent,
                       style,
-                    }) => (
+                    }: any) => (
                       <CellMeasurer
                         cache={virtualized_cell_measure_cache}
                         columnIndex={0}
@@ -259,9 +285,10 @@ export class Typeahead extends React.Component {
   }
 
   get active_item() {
-    return this.typeahead_ref.current.querySelector(
-      ".typeahead__result--active"
-    );
+    const active_item: HTMLElement | null = this.typeahead_ref.current
+      ? this.typeahead_ref.current.querySelector(".typeahead__result--active")
+      : null;
+    return active_item;
   }
 
   get previous_selection_cursor() {
@@ -285,15 +312,18 @@ export class Typeahead extends React.Component {
     }
   }
 
-  handle_window_click = (e) => {
-    if (!this.typeahead_ref.current.contains(e.target)) {
+  handle_window_click = (e: MouseEvent) => {
+    if (
+      this.typeahead_ref.current &&
+      !this.typeahead_ref.current.contains(e.target as Node)
+    ) {
       this.setState({ may_show_menu: false });
     }
   };
 
   handle_input_focus = () => this.setState({ may_show_menu: true });
 
-  handle_input_change = (event) => {
+  handle_input_change = (event: ChangeEvent<HTMLInputElement>) => {
     const input_value = event.target.value;
 
     const cleaned_input_value = _.chain(input_value).trim().deburr().value();
@@ -305,17 +335,17 @@ export class Typeahead extends React.Component {
     });
   };
 
-  handle_up_arrow = (e) => {
+  handle_up_arrow = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     this.show_menu &&
       this.setState({ selection_cursor: this.previous_selection_cursor });
   };
-  handle_down_arrow = (e) => {
+  handle_down_arrow = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     this.show_menu &&
       this.setState({ selection_cursor: this.next_selection_cursor });
   };
-  handle_enter_key = (e) => {
+  handle_enter_key = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (this.show_menu) {
       e.preventDefault();
 
@@ -328,7 +358,7 @@ export class Typeahead extends React.Component {
       }
     }
   };
-  handle_key_down = (e) => {
+  handle_key_down = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.keyCode) {
       case 38: //up arrow
         this.handle_up_arrow(e);
@@ -342,9 +372,3 @@ export class Typeahead extends React.Component {
     }
   };
 }
-
-Typeahead.defaultProps = {
-  placeholder: text_maker("search"),
-  min_length: 3,
-  on_query_debounce_time: 300,
-};

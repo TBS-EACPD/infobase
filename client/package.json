@@ -50,6 +50,7 @@
     "@types/lodash": "^4.14.162",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/react-virtualized": "^9.21.11",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
