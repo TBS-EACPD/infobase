@@ -117,7 +117,7 @@ export default async function ({ models }) {
 
       service_type_en,
       service_type_fr,
-      service_type_code,
+      service_type_ids,
       scope_en,
       scope_fr,
       designations_en,
@@ -172,7 +172,7 @@ export default async function ({ models }) {
       ...multi_value_string_fields_to_arrays({
         service_type_en,
         service_type_fr,
-        service_type_code,
+        service_type_ids,
         scope_en,
         scope_fr,
         designations_en,
@@ -231,7 +231,7 @@ export default async function ({ models }) {
     .value();
   const populate_type_summary = (services, subject_id) =>
     _.chain(services)
-      .flatMap("service_type_code")
+      .flatMap("service_type_ids")
       .countBy()
       .map((value, type_code) => ({
         id: `${subject_id}_${type_code}_${value}`,
