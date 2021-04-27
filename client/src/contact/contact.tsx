@@ -10,7 +10,11 @@ import contact_us_bundle from "./contact.yaml";
 
 const text_maker = create_text_maker(contact_us_bundle);
 
-export default class Contact extends React.Component {
+interface ContactProps {
+  toggleSurvey: () => void;
+}
+
+export default class Contact extends React.Component<ContactProps, {}> {
   render() {
     const { toggleSurvey } = this.props;
 

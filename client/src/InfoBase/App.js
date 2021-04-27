@@ -43,7 +43,7 @@ const PartitionRoute = retrying_react_lazy(() =>
 );
 const About = retrying_react_lazy(() => import("src/about/about.tsx"));
 
-const Contact = retrying_react_lazy(() => import("src/contact/contact.js"));
+const Contact = retrying_react_lazy(() => import("src/contact/contact.tsx"));
 const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ.js"));
 const MetaData = retrying_react_lazy(() => import("src/metadata/metadata.js"));
 const IgocExplorer = retrying_react_lazy(() =>
