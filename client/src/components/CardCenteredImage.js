@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { TM } from "./TextMaker.js";
+import { TM } from "./TextMaker.tsx";
 
 import "./CardCenteredImage.scss";
 

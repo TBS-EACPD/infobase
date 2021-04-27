@@ -9,6 +9,9 @@ const {
 const LANG = "en";
 
 module.exports = {
+  core: {
+    builder: "webpack5",
+  },
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -30,6 +33,11 @@ module.exports = {
 
     resolve: {
       ...config.resolve,
+      fallback: {
+        ...config.resolve.fallback,
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("stream-browserify"),
+      },
       modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
     },
 

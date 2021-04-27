@@ -41,7 +41,7 @@ const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home.js"));
 const PartitionRoute = retrying_react_lazy(() =>
   import("src/partition/partition_subapp/PartitionRoute.js")
 );
-const About = retrying_react_lazy(() => import("src/about/about.js"));
+const About = retrying_react_lazy(() => import("src/about/about.tsx"));
 
 const Contact = retrying_react_lazy(() => import("src/contact/contact.js"));
 const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ.js"));

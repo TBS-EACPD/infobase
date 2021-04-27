@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "outDir": "./nonexistent/",
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports" : true,
+    "esModuleInterop" : true,
+    "module": "esnext",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "noEmit": false,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "typeRoots": [
+      "node_modules/@types/",
+      "./src/types/"
+    ]
+  },
+  "include": [
+      "./src/"
+  ],
+  "exclude": [
+    //without an outDir and an ignore, we get this problem: https://github.com/microsoft/TypeScript/issues/14538
+    "./nonexistent"
+  ]
+}

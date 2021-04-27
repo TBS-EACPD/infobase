@@ -12,7 +12,7 @@ import { formats } from "src/core/format.js";
 
 import { text_abbrev } from "src/general_utils.js";
 
-import { TextMaker, TM } from "./TextMaker.js";
+import { TextMaker, TM } from "./TextMaker.tsx";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
