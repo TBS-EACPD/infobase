@@ -12,7 +12,7 @@ import {
   create_text_maker_component,
 } from "src/components/index.js";
 
-import { useServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services.js";
 import { Subject } from "src/models/subject.js";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes.js";
@@ -38,47 +38,30 @@ const volume_formatter = (val) =>
 const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const { subject } = panel_args;
   const is_gov = subject.level === "gov";
-  const { loading, data } = useServices({
+  const id_key = is_gov ? "subject_id" : "service_id";
+  const { loading, data } = useSummaryServices({
     subject,
-    service_fragments: `
-    name
-    service_report{
-      ${website_visits_key}_count
+    query_fragment: `
+    top_services_website_visits_summary {
+      id
+      subject_id
+      service_id
+      service_name
+      website_visits_count
     }`,
   });
   if (loading) {
     return <span>loading</span>;
   }
-  const preprocessed_data = is_gov
-    ? _.chain(data)
-        .groupBy("org_id")
-        .map((org_services, org_id) => {
-          const dept = Dept.lookup(org_id);
-          return {
-            id: org_id,
-            name: dept ? dept.name : "",
-            [total_volume]: _.sumBy(
-              org_services,
-              ({ service_report }) =>
-                _.sumBy(service_report, `${website_visits_key}_count`) || 0
-            ),
-          };
-        })
-        .value()
-    : _.map(data, ({ id, name, service_report }) => ({
-        id,
-        name,
-        [total_volume]:
-          _.sumBy(service_report, `${website_visits_key}_count`) || 0,
-      }));
+  const { top_services_website_visits_summary } = data;
+  const processed_data = _.map(top_services_website_visits_summary, (row) => ({
+    ...row,
+    id: row[id_key],
+    name: is_gov ? Dept.lookup(row[id_key]).name : row.service_name,
+    [total_volume]: row.website_visits_count,
+  }));
 
-  const processed_data = _.chain(preprocessed_data)
-    .filter(total_volume)
-    .sortBy(total_volume)
-    .takeRight(10)
-    .value();
-
-  const data_name_lookup = _.chain(data)
+  const data_name_lookup = _.chain(processed_data)
     .map(({ id, name }) => [id, name])
     .fromPairs()
     .value();
