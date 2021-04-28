@@ -2,7 +2,7 @@
   "name": "infobase-email-backend",
   "main": "transpiled_build/index.js",
   "engines": {
-    "node": "^10.0"
+    "node": "14"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

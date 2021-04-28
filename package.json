@@ -1,6 +1,9 @@
 {
   "name": "infobase-monorepo",
   "description": "",
+  "engines": {
+    "node": "14"
+  },
   "scripts": {
     "autoformat": "prettier --write .",
     "check_format": "prettier --check",

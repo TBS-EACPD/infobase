@@ -22,8 +22,8 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 ## Getting Started
 
 ### Pre-requisite:
-- node@12.14.1 (`npm install -g n && n 12.14.1`)
-- npm@6.4.1 (`npm install -g npm@6.4.1`)
+- node@14.x (latest long term support) (`npm install -g n && n lts`)
+- npm@6.x (`npm install -g npm@6`)
 - Git
 
 ### First time setup
