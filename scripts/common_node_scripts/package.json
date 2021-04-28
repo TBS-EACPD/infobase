@@ -9,6 +9,7 @@
   "engines": {
     "node": "14"
   },
+  "type": "module",
   "dependencies": {
     "fs-extra": "^8.1.0",
     "istanbul-api": "^2.1.6",

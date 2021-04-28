@@ -1,10 +1,7 @@
 #!/usr/bin/env node
-const yargs = require("yargs");
-const {
-  createCoverageMap,
-  createCoverageSummary,
-} = require("istanbul-lib-coverage");
-const fs = require("fs-extra");
+import fs from "fs-extra";
+import coverage from "istanbul-lib-coverage";
+import yargs from "yargs";
 
 const get_svg_string = (coverage_status_color, coverage_percent) => `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108" height="20">
@@ -46,10 +43,10 @@ function create_coverage_shield_badge() {
   }).argv;
 
   const coverage_report_file = fs.readJsonSync(argv.report);
-  const map = createCoverageMap({});
+  const map = coverage.createCoverageMap({});
   map.merge(coverage_report_file);
 
-  const coverage_summary = createCoverageSummary();
+  const coverage_summary = coverage.createCoverageSummary();
   map.files().forEach(function (file) {
     const file_coverage = map.fileCoverageFor(file);
     const file_summary = file_coverage.toSummary();
