@@ -29,6 +29,15 @@ export const LeafSpinner = ({ config_name }) => {
       },
       svg_modifier: _.identity,
     },
+    inline_panel: {
+      outer_positioning: "relative",
+      spinner_container_style: {
+        transform: "scale(0.35)",
+        position: "absolute",
+        top: "8px",
+      },
+      svg_modifier: _.identity,
+    },
     small_inline: {
       outer_positioning: "relative",
       spinner_container_style: {

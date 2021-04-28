@@ -8,6 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   DisplayTable,
   create_text_maker_component,
+  SpinnerWrapper,
 } from "src/components/index.js";
 
 import { useServices } from "src/models/populate_services.js";
@@ -65,7 +66,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   const [active_services, set_active_services] = useState(median_3_values);
 
   if (loading) {
-    return <span>loading</span>;
+    return <SpinnerWrapper config_name="inline_panel" />;
   }
   const { max_vol_service_name, max_vol_service_value } = _.chain(data)
     .map(({ name, service_report }) => ({

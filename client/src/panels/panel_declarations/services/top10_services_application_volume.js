@@ -10,6 +10,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   DisplayTable,
   create_text_maker_component,
+  SpinnerWrapper,
 } from "src/components/index.js";
 
 import { useSummaryServices } from "src/models/populate_services.js";
@@ -41,7 +42,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <span>loading</span>;
+    return <SpinnerWrapper config_name="inline_panel" />;
   }
   const {
     service_general_stats: { number_of_services },
