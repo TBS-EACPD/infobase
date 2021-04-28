@@ -4,8 +4,15 @@ import React from "react";
 
 import "./AlertBanner.scss";
 
+interface AlertBannerProps {
+  children: React.ReactNode;
+  banner_class: string;
+  additional_class_names: string;
+  style: Object;
+}
+
 const banner_classes = ["info", "success", "warning", "danger"];
-export const AlertBanner = ({
+export const AlertBanner: React.FC<AlertBannerProps> = ({
   children,
   banner_class,
   additional_class_names,
