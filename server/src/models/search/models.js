@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { create_re_matcher } from "./search_utils";
+import { create_re_matcher } from "./search_utils.js";
 
 export default function define_core_subjects(model_singleton) {
   const { models } = model_singleton;

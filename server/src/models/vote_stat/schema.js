@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 //import { estimates_years, previous_year, public_account_years } from '../constants';
-import { en_fr } from "../schema_utils";
+import { en_fr } from "../schema_utils.js";
 
 const schema = `
 

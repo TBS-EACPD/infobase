@@ -1,7 +1,3 @@
-import _ from "lodash";
-
-import { en_fr } from "../schema_utils";
-
 const schema = `
   extend type Root {
     all_subject_search(query:String!): [SubjectI]

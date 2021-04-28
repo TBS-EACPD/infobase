@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { bilingual_field } from "../schema_utils";
+import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
   extend type Org{

@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { estimates_years, public_account_years } from "../constants";
+import { estimates_years, public_account_years } from "../constants.js";
 
 function flatten_pa_records(records) {
   return _.chain(records)

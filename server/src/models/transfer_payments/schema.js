@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { en_fr } from "../schema_utils";
+import { en_fr } from "../schema_utils.js";
 
 const schema = `
   extend type Org {

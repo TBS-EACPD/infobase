@@ -4,7 +4,7 @@ import {
   public_account_years_auth_exp,
   estimates_years,
   public_account_years,
-} from "../constants";
+} from "../constants.js";
 import {
   get_standard_csv_file_rows,
   create_program_id,

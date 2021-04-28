@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { people_years } from "../constants";
+import { people_years } from "../constants.js";
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
 import {

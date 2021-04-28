@@ -1,4 +1,4 @@
-const _ = require("lodash");
+import _ from "lodash";
 
 const fragments = `
 fragment sobj_info on StandardObjectData {

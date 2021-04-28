@@ -4,6 +4,8 @@ import cors from "cors";
 import express from "express";
 import depthLimit from "graphql-depth-limit";
 
+import _ from "lodash";
+
 import { connect_db, get_db_connection_status } from "./db_utils.js";
 import { create_models, get_schema_deps } from "./models/index.js";
 import {
@@ -85,4 +87,4 @@ async function start_apollo() {
   return server;
 }
 
-module.exports = { app, start_apollo };
+export { app, start_apollo };
