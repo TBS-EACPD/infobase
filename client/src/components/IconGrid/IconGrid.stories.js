@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconGrid } from "./IconGrid.js";
+import { IconGrid } from "./IconGrid";
 
 import {
   IconHTML,
