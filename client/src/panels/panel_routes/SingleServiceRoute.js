@@ -31,7 +31,7 @@ const SingleServiceRoute = (props) => {
   } = props;
   const { loading, data: service } = useSingleService(service_id);
   if (loading) {
-    return <span>loading</span>;
+    return <SpinnerWrapper config_name="sub_route" />;
   }
   const subject = Subject.Dept.lookup(subject_id);
 

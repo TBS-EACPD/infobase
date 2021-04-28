@@ -5,7 +5,11 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { create_text_maker_component, FancyUL } from "src/components/index.js";
+import {
+  create_text_maker_component,
+  FancyUL,
+  SpinnerWrapper,
+} from "src/components/index.js";
 
 import { useServices } from "src/models/populate_services.js";
 
@@ -26,7 +30,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
     `,
   });
   if (loading) {
-    return <span>loading</span>;
+    return <SpinnerWrapper config_name="inline_panel" />;
   }
 
   const includes_lowercase = (value, query) =>
