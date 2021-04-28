@@ -22,19 +22,28 @@ Incorrect: `import "./foo/bar.ts"` or `import "./foo/bar.tsx"`
 Correct: `import "./foo/bar"` where bar is file type `.ts`/`.tsx`
 
 ## Node modules
-Not all modules that are downloaded using npm are guaranteed to support typescript out of the box as it will depend if the original package was written in typescript. Fear not! As VSCode should alert you if you the package you are using has no type support. Hovering over the error will provide you more information on how to solve missing type support. Often, packages will have a seperate type definition module that you can download using npm to fill the type gap. These files generally start with `@types`. The image below shows an example of a missing type definition for a package and the appropriate solution:
+Not all modules that are downloaded using npm are guaranteed to support typescript out of the box as it will depend if the original package was written in typescript. 
+
+Fear not! As VSCode should alert you if you the package you are using has no type support. Hovering over the error will provide you more information on how to solve missing type support. Often, packages will have a seperate type definition module that you can download using npm to fill the type gap. These files generally start with `@types`. The image below shows an example of a missing type definition for a package and the appropriate solution:
+![image](https://user-images.githubusercontent.com/25855114/116449361-1803ea00-a828-11eb-86dd-c4b031a41620.png)
+
 
 ## Lodash
 As mentioned in the JS tips and styles guideline doc, lodash is a a commonly used package in InfoBase for generic data manipulation. However Lodash is one of these packages written in javascript, but fortunately has a type definition extention `@types/lodash`.
+
 In some cases, you may run into odd typings for return values by lodash.
+
 For example, if using the lodash [mapValues](https://lodash.com/docs/4.17.15#mapValues) method on an object, the expected return is `{[keys: string]: boolean}` even if that's not what we want! In this case, there might be some sort of error on variable usage somewhere in the code that will trace back to a lodash usage.
 Because lodash is designed for very general use cases, there are many type overrides that determine the input and outputs that a function should provide.
 To view these overrides to see why a type might not be matching, `command + left click` on a lodash method to open up the type overrides that are being used.
 Observe below the different type overrides for `mapValues` and why passing and object as an argument results in a return expectation of `{[keys: string]: boolean}`
+![image](https://user-images.githubusercontent.com/25855114/116449491-39fd6c80-a828-11eb-816e-73cf8fe27d71.png)
+
 
 ## React
 Here are some tips I took from [here](https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680)
-Not all of it is applicable to Infobase (since they're already implemented), but these ones look to be helpful:
+
+Not all of it is exactly applicable to Infobase (like not using constructor), but these ones seem to be helpful:
 - Don't use the public accessor since all members within classes are public by default
 - Don't use the private accessor since it won't actually make classes private in runtime
 - Don't use the protected accessor since there should already be a better patterns to be using supplied by React (for example `Higher Order Components`)
