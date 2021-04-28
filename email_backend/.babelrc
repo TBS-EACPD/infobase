@@ -1,6 +1,8 @@
+// for Jest, which is lacking usable esModule support
 {
   "plugins": [
-    "@babel/plugin-transform-modules-commonjs"
+    "@babel/plugin-transform-modules-commonjs",
+    "babel-plugin-transform-import-meta"
   ],
   "presets": [
       ["@babel/preset-env", { "targets": { "node": "14" } }]

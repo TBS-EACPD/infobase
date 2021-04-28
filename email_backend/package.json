@@ -1,9 +1,10 @@
 {
   "name": "infobase-email-backend",
-  "main": "transpiled_build/index.js",
+  "main": "src/index.js",
   "engines": {
     "node": "14"
   },
+  "type": "module",
   "dependencies": {
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
@@ -16,24 +17,19 @@
     "nodemailer": "^6.2.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
     "@babel/core": "^7",
-    "@babel/node": "^7",
     "@babel/plugin-transform-modules-commonjs": "^7.3.1",
     "@babel/preset-env": "^7.3.1",
     "axios": "^0.21.1",
-    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-transform-import-meta": "^2.0.0",
     "common-node-scripts": "file:../scripts/common_node_scripts",
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "prebuild": "rm -rf transpiled_build",
-    "build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
-    "start:transpiled": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec npm run build && babel-node transpiled_build/index.js",
-    "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec babel-node src/index.js",
-    "start:debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec babel-node --inspect-brk src/index.js",
+    "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec node src/index.js",
+    "start:debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec node --inspect-brk src/index.js",
     "unit_tests": "jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "unit_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit  --config jest_configs/unit_tests.config.js",
     "end_to_end_tests": "jest --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",

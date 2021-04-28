@@ -9,14 +9,14 @@ import {
   get_db_connection_status,
   connect_db,
   log_email_and_meta_to_db,
-} from "./db_utils";
-import { get_transport_config, get_email_config } from "./email_utils";
+} from "./db_utils/index.js";
+import { get_transport_config, get_email_config } from "./email_utils/index.js";
 import {
   get_templates,
   validate_completed_template,
   make_email_subject_from_completed_template,
   make_email_body_from_completed_template,
-} from "./template_utils";
+} from "./template_utils/index.js";
 
 import { throttle_requests_by_client } from "./throttle_requests_by_client.js";
 
