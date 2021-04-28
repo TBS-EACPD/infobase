@@ -36,7 +36,7 @@ const HighApplicationVolumePanel = ({ subject }) => {
   const highest_volume_dept = service_high_volume_summary[0];
 
   const column_configs = {
-    org_id: {
+    subject_id: {
       index: 0,
       header: text_maker("org"),
       is_searchable: true,
@@ -61,7 +61,7 @@ const HighApplicationVolumePanel = ({ subject }) => {
         k="high_application_volume_text"
         args={{
           num_of_high_volume_depts: service_high_volume_summary.length,
-          highest_volume_dept: Dept.lookup(highest_volume_dept.org_id).name,
+          highest_volume_dept: Dept.lookup(highest_volume_dept.subject_id).name,
           highest_volume_value: highest_volume_dept.total_volume,
         }}
       />
