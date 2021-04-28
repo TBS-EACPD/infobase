@@ -1,7 +1,22 @@
 import _ from "lodash";
 import React from "react";
 
-const CardList = ({ elements }) => (
+interface CardListElementChildProps {
+  display: string | React.ReactNode;
+  href: string;
+}
+
+interface CardListElementProps {
+  display: string | React.ReactNode;
+  href: string;
+  children: CardListElementChildProps[];
+}
+
+interface CardListProps {
+  elements: CardListElementProps[];
+}
+
+const CardList: React.FC<CardListProps> = ({ elements }) => (
   <div>
     <ul className="list-unstyled">
       {_.chain(elements)

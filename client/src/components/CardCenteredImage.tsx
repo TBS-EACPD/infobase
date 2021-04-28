@@ -1,11 +1,21 @@
 import classNames from "classnames";
 import React from "react";
 
-import { TM } from "./TextMaker.tsx";
+import { TM, TMProps } from "./TextMaker";
 
 import "./CardCenteredImage.scss";
 
-const CardCenteredImage = ({
+interface CardCenteredImageProps {
+  img_src?: string;
+  title_key: string;
+  text_key: string;
+  link_key?: string;
+  link_href: string;
+  text_args: Object;
+  tmf: TMProps["tmf"];
+}
+
+const CardCenteredImage: React.FC<CardCenteredImageProps> = ({
   img_src,
   title_key,
   text_key,
