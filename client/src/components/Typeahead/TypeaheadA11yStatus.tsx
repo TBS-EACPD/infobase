@@ -15,7 +15,7 @@ interface DelayedRenderProps {
 
 interface DelayedRenderState {
   children: any;
-  debounced: Boolean;
+  debounced: boolean;
 }
 
 class DelayedRender extends React.Component<

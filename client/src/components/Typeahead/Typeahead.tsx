@@ -44,12 +44,12 @@ interface TypeaheadProps {
   placeholder: string;
   on_query_debounce_time: number;
   additional_a11y_description?: string;
-  utility_buttons?: Boolean | (React.FC | React.Component)[];
+  utility_buttons?: boolean | (React.FC | React.Component)[];
 }
 
 interface TypeaheadState {
   input_value: string;
-  may_show_menu: Boolean;
+  may_show_menu: boolean;
   selection_cursor: number;
   results?: ResultProps[];
 }
