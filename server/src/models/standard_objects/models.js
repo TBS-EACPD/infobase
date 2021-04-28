@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { public_account_years } from "../constants";
+import { public_account_years } from "../constants.js";
 
 /* flattens out the years */
 

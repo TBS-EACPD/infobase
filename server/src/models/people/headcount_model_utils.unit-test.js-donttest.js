@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { camel_case_to_snake_case } from "./headcount_model_utils.js";
 
 describe("Headcount Model Utilities", function () {

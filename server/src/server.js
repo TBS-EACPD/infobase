@@ -1,8 +1,4 @@
-const _ = require("lodash");
-
-global._ = _;
-
-const { app, start_apollo } = require("./app");
+import { app, start_apollo } from "./app.js";
 
 // let's set the port on which the server will run
 app.set("port", 1337);

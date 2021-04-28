@@ -1,21 +1,21 @@
 import { makeExecutableSchema } from "graphql-tools";
 import _ from "lodash";
 
-import core_subject from "./core_subject";
-import covid from "./covid";
-import resources from "./finances";
+import core_subject from "./core_subject/index.js";
+import covid from "./covid/index.js";
+import resources from "./finances/index.js";
 import model_singleton from "./model_singleton.js";
-import results from "./results";
+import results from "./results/index.js";
 import root_schema from "./schema_root.js";
 
 //each sub-module is included here
-import services from "./services";
-// import sobjs from './standard_objects';
-// import people from './people';
-// import search from './search';
-// import vote_stat from './vote_stat';
-// import transfer_payments from './transfer_payments';
-// import transfer_payments_loc from './transfer_payments_loc';
+import services from "./services/index.js";
+// import sobjs from './standard_objects/index.js';
+// import people from './people/index.js';
+// import search from './search/index.js';
+// import vote_stat from './vote_stat/index.js';
+// import transfer_payments from './transfer_payments/index.js';
+// import transfer_payments_loc from './transfer_payments_loc/index.js';
 
 //the order of sub_module_defs controls the order of model creation and database population, which potentially matters
 const sub_module_defs = _.compact([

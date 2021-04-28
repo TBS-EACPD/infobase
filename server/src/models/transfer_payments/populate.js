@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { public_account_years_auth_exp } from "../constants";
+import { public_account_years_auth_exp } from "../constants.js";
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
 export default function ({ models }) {

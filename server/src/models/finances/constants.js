@@ -4,7 +4,7 @@ import {
   public_account_years,
   planning_years,
   public_account_years_auth_exp,
-} from "../constants";
+} from "../constants.js";
 
 export const financial_cols = public_account_years_auth_exp.concat([
   "pa_last_year_planned",

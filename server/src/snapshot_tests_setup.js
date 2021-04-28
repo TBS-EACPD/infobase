@@ -1,7 +1,7 @@
-const { graphql } = require("graphql");
+import { graphql } from "graphql";
 
-const { connect_db } = require("./db_utils.js");
-const { create_schema, create_models } = require("./models/index.js");
+import { connect_db } from "./db_utils.js";
+import { create_schema, create_models } from "./models/index.js";
 
 connect_db();
 create_models();

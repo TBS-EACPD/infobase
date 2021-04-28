@@ -1,8 +1,4 @@
-import { encode } from "querystring";
-
 import _ from "lodash";
-
-import { compressToBase64 } from "lz-string";
 
 import {
   convert_GET_with_query_to_POST,

@@ -1,5 +1,3 @@
-const _ = require("lodash");
-
 const org_query = `
 query MyQuery($lang: String!, $dept_code: String!){
   root(lang: $lang){
