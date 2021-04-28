@@ -1,10 +1,12 @@
 import { readdirSync, readFileSync } from "fs";
-import path from "path";
+import { fileURLToPath } from "url";
 
 import _ from "lodash";
 
 const get_templates = () => {
-  const templates_path = path.join(__dirname, "../../templates");
+  const templates_path = fileURLToPath(
+    new URL("../../templates", import.meta.url)
+  );
 
   const json_template_names = _.chain(readdirSync(templates_path))
     .filter((file_name) => /\.json$/.test(file_name))

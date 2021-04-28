@@ -24,9 +24,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7",
-    "@babel/plugin-transform-modules-commonjs": "^7.3.1",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.3.1",
     "axios": "^0.21.1",
+    "babel-plugin-transform-import-meta": "^2.0.0",
     "common-node-scripts": "file:../scripts/common_node_scripts",
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
