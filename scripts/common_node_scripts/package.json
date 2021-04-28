@@ -6,6 +6,9 @@
     "merge-coverage-reports": "./coverage_management/merge_coverage_reports.js",
     "create-coverage-shield-badge": "./coverage_management/create_coverage_shield_badge.js"
   },
+  "engines": {
+    "node": "14"
+  },
   "dependencies": {
     "fs-extra": "^8.1.0",
     "istanbul-api": "^2.1.6",

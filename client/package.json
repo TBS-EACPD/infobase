@@ -2,6 +2,9 @@
   "name": "infobase-client",
   "description": "",
   "license": "MIT",
+  "engines": {
+    "node": "14"
+  },
   "sideEffects": false,
   "scripts": {
     "IB_base": "node build_code/copy_static_assets.js",

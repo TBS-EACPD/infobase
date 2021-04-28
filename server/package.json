@@ -7,7 +7,7 @@
     "build": "transpilied_build"
   },
   "engines": {
-    "node": "^10.0"
+    "node": "14"
   },
   "dependencies": {
     "apollo-server": "^2.22.2",

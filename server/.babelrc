@@ -3,6 +3,6 @@
     "@babel/plugin-transform-modules-commonjs"
   ],
   "presets": [
-      ["@babel/preset-env", { "targets": { "node": "10.18.1" } }]
+      ["@babel/preset-env", { "targets": { "node": "14" } }]
     ]
 }
