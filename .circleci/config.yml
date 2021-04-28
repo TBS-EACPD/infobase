@@ -190,7 +190,7 @@ jobs:
             - ./test-data
             - ./package.json
             - ./.prettierignore
-            - ./prettier.config.js
+            - ./prettier.config.cjs
             
             - ./client/build
             - ./client/browser-tests
