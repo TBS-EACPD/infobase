@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
