@@ -260,6 +260,38 @@ const get_summary_query = (query_options) => {
   `;
 };
 
+export const useSingleService = (service_id) => {
+  const time_at_request = Date.now();
+  const query = gql`
+  query($lang: String!) {
+    root(lang: $lang) {
+      service(id: "${service_id}"){
+        ${all_service_fragments}
+      }
+    }
+  }
+  `;
+  const res = useQuery(query, {
+    variables: {
+      lang,
+    },
+  });
+  const { loading, error, data } = res;
+  if (error) {
+    const resp_time = Date.now() - time_at_request;
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `Service, took ${resp_time} ms - ${error.toString()}`,
+    });
+    throw new Error(error);
+  }
+  if (!loading) {
+    return { ...res, data: data.root.service };
+  }
+  return res;
+};
+
 export const useSummaryServices = (query_options) => {
   const time_at_request = Date.now();
   const { subject } = query_options;
