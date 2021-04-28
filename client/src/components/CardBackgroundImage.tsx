@@ -1,10 +1,20 @@
 import React from "react";
 
-import { TM } from "./TextMaker.tsx";
+import { TM, TMProps } from "./TextMaker";
 
 import "./CardBackgroundImage.scss";
 
-const CardBackgroundImage = ({
+interface CardBackgroundImageProps {
+  img_src?: string;
+  title_key: string;
+  text_key: string;
+  link_key: string;
+  link_href: string;
+  text_args: Object;
+  tmf: TMProps["tmf"];
+}
+
+const CardBackgroundImage: React.FC<CardBackgroundImageProps> = ({
   img_src,
   title_key,
   text_key,
