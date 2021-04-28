@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
