@@ -46,6 +46,7 @@
     "@nivo/treemap": "^0.67.0",
     "@types/d3-scale": "^3.2.2",
     "@types/dompurify": "^2.2.1",
+    "@types/d3-dsv": "^2.0.1",
     "@types/js-yaml": "^3.12.5",
     "@types/lodash": "^4.14.162",
     "@types/react": "^16.9.53",

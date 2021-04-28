@@ -27,24 +27,90 @@ import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
+/* {
+        column_key: {
+          index: 0, <- (integer) Zero indexed, order of column. Required
+          header: "Organization", <- (string) Name of column. Required
+          is_sortable: true, <- (boolean) Default to true
+          is_summable: true, <- (boolean) Default to false
+          is_searchable: true, <- (boolean) Default to false
+          initial_visible: true, <- (boolean) Default to true
+          formatter:
+            "big_int" <- (string) If it's string, auto formats using types_to_format
+            OR
+            (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
+          raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for sorting/searching/csv string. Default to value
+          sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
+          sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
+          sum_initial_value: 0 <- (number) Default to 0
+          visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
+        },
+      }
+      */
+
+interface ColumnKeyProps {
+  index: number;
+  header: string;
+  is_sortable: boolean;
+  is_summable: boolean;
+  is_searchable: boolean;
+  initial_visible: boolean;
+  formatter?: string | Function;
+  raw_formatter: (val: any) => string;
+  sum_func?: Function;
+  sort_func: Function;
+  sum_initial_value: number;
+  visibility_toggleable?: boolean;
+}
+
+interface ColumnConfigProps {
+  [keys: string]: ColumnKeyProps;
+}
+
+interface DisplayTableProps {
+  unsorted_initial: string | null;
+  column_configs: ColumnConfigProps;
+  page_size_increment: number;
+  table_name: string;
+  data: Array<Object>;
+  util_components: { [keys: string]: any };
+  enable_pagination: boolean;
+  page_size_num_options_max: number;
+  disable_column_select: boolean;
+}
+
+interface DisplayTableState {
+  page_size: number;
+  current_page: number;
+  show_pagination_load_spinner: boolean;
+  sort_by: string | null;
+  descending: boolean;
+  initial_props: DisplayTableProps;
+  visible_col_keys: string[];
+  searches: { [keys: string]: string };
+}
+
+interface DisplayTableData {
+  [key: string]: string | number | Date;
+}
 
 const column_config_defaults = {
   initial_visible: true,
   is_sortable: true,
   is_summable: false,
   is_searchable: false,
-  sum_func: (sum, value) => sum + value,
+  sum_func: (sum: number, value: number) => sum + value,
   raw_formatter: _.identity,
   sum_initial_value: 0,
 };
-const get_col_configs_with_defaults = (column_configs) =>
-  _.mapValues(column_configs, (supplied_column_config) => ({
+const get_col_configs_with_defaults = (column_configs: ColumnConfigProps) =>
+  _.mapValues(column_configs, (supplied_column_config: ColumnKeyProps) => ({
     // Set visibility_toggleable default based off index
     visibility_toggleable: supplied_column_config.index !== 0,
     ...column_config_defaults,
     ...supplied_column_config,
   }));
-const get_default_state_from_props = (props) => {
+const get_default_state_from_props = (props: DisplayTableProps) => {
   const { unsorted_initial, column_configs } = props;
 
   const col_configs_with_defaults = get_col_configs_with_defaults(
@@ -84,18 +150,31 @@ const get_default_state_from_props = (props) => {
   - 1st column cannot be toggled off by user
   - Total row color is set to $textLightColor, see total_color
 */
-class _DisplayTable extends React.Component {
-  constructor(props) {
-    super(props);
+export class _DisplayTable extends React.Component<
+  DisplayTableProps,
+  DisplayTableState
+> {
+  private first_data_ref = React.createRef<HTMLTableDataCellElement>();
 
-    this.first_data_ref = React.createRef();
+  public static defaultProps = {
+    page_size_increment: 100,
+    enable_pagination: true,
+    page_size_num_options_max: 5,
+  };
+
+  constructor(props: DisplayTableProps) {
+    super(props);
 
     this.state = {
       ...get_default_state_from_props(props),
       current_page: 0,
+      show_pagination_load_spinner: false,
     };
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(
+    nextProps: DisplayTableProps,
+    prevState: DisplayTableState
+  ) {
     if (nextProps !== prevState.initial_props) {
       const new_default_state = get_default_state_from_props(nextProps);
 
@@ -122,7 +201,7 @@ class _DisplayTable extends React.Component {
     }
   }
 
-  change_page_size = (new_page_size) =>
+  change_page_size = (new_page_size: number) =>
     this.state.page_size !== new_page_size &&
     this.setState({
       show_pagination_load_spinner: true,
@@ -130,7 +209,7 @@ class _DisplayTable extends React.Component {
       current_page: 0,
     });
 
-  change_page = (page) =>
+  change_page = (page: number) =>
     this.state.current_page !== page &&
     this.setState({
       show_pagination_load_spinner: true,
@@ -142,7 +221,7 @@ class _DisplayTable extends React.Component {
     1
   );
 
-  componentDidUpdate(prev_props, prev_state) {
+  componentDidUpdate() {
     const { show_pagination_load_spinner } = this.state;
     if (show_pagination_load_spinner) {
       // TODO: find a better work around than using debounce
@@ -166,26 +245,7 @@ class _DisplayTable extends React.Component {
     const {
       table_name, // Optional: Name of table
       data, // [ {column_key: 134} ]
-      column_configs /* {
-        column_key: {
-          index: 0, <- (integer) Zero indexed, order of column. Required
-          header: "Organization", <- (string) Name of column. Required
-          is_sortable: true, <- (boolean) Default to true
-          is_summable: true, <- (boolean) Default to false
-          is_searchable: true, <- (boolean) Default to false
-          initial_visible: true, <- (boolean) Default to true
-          formatter:
-            "big_int" <- (string) If it's string, auto formats using types_to_format
-            OR
-            (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
-          raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for sorting/searching/csv string. Default to value
-          sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
-          sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
-          sum_initial_value: 0 <- (number) Default to 0
-          visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
-        },
-      }
-      */,
+      column_configs,
       page_size_increment,
       util_components,
       enable_pagination,
@@ -220,7 +280,7 @@ class _DisplayTable extends React.Component {
       </tbody>
     );
 
-    const determine_text_align = (row, col) => {
+    const determine_text_align = (row: DisplayTableData, col: string) => {
       const current_col_formatter = col_configs_with_defaults[col].formatter;
       const current_col_raw_formatter =
         col_configs_with_defaults[col].raw_formatter;
@@ -230,14 +290,14 @@ class _DisplayTable extends React.Component {
         : "left";
     };
 
-    const clean_search_string = (search_string) =>
+    const clean_search_string = (search_string: string | number | Date) =>
       _.chain(search_string).deburr().toLower().trim().value();
-    const is_number_string_date = (val) =>
+    const is_number_string_date = (val: number | string | Date) =>
       _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter((row) =>
         _.chain(row)
-          .map((column_value, column_key) => {
+          .map((column_value: string | number | Date, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
             const col_search_value =
               col_config && col_config.raw_formatter
@@ -255,13 +315,14 @@ class _DisplayTable extends React.Component {
           .value()
       )
       .thru((unsorted_array) => {
-        if (_.has(col_configs_with_defaults, sort_by)) {
+        if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
           const sorting_config = col_configs_with_defaults[sort_by];
           return sorting_config.sort_func
-            ? _.map(unsorted_array).sort((a, b) =>
-                sorting_config.sort_func(a[sort_by], b[sort_by], descending)
-              )
-            : _.sortBy(unsorted_array, (row) =>
+            ? _.map(unsorted_array).sort((
+                a: { [key: string]: any },
+                b: { [key: string]: any } //can't use interface DisplayTableData here??
+              ) => sorting_config.sort_func(a[sort_by], b[sort_by], descending))
+            : _.sortBy(unsorted_array, (row: DisplayTableData) =>
                 is_number_string_date(
                   sorting_config.raw_formatter(row[sort_by])
                 ) /*Please Leave On: sorting data containing BOTH string and date is not consistent 
@@ -275,16 +336,21 @@ class _DisplayTable extends React.Component {
       })
       .tap(descending ? _.reverse : _.noop)
       .value();
-
-    const total_row = _.reduce(
+    console.log(sorted_filtered_data);
+    const total_row: { [key: string]: number } = _.reduce(
       sorted_filtered_data,
-      (totals, row) =>
-        _.mapValues(totals, (total, col_key) =>
+      (
+        totals,
+        row: any //can't use interface Displaytable here too?
+      ) =>
+        _.mapValues(totals, (total: number, col_key) =>
           col_configs_with_defaults[col_key].sum_func(total, row[col_key])
         ),
       _.chain(col_configs_with_defaults)
-        .pickBy((col) => col.is_summable)
-        .mapValues((col) => col.sum_initial_value)
+        .toPairs()
+        .filter(([key, col]) => col.is_summable)
+        .map(([key, col]) => [key, col.sum_initial_value])
+        .fromPairs() //had to do this to/from pair hack because over type overriding to object key:boolean pairs
         .value()
     );
     const is_total_exist = !_.isEmpty(total_row);
@@ -299,11 +365,11 @@ class _DisplayTable extends React.Component {
       visible_col_keys
     );
     const csv_string = _.chain(visible_ordered_col_keys)
-      .map((key) => col_configs_with_defaults[key].header)
+      .map((key: string) => col_configs_with_defaults[key].header)
       .thru((header_row) => [header_row])
       .concat(
-        _.map(sorted_filtered_data, (row) =>
-          _.map(visible_ordered_col_keys, (key) =>
+        _.map(sorted_filtered_data, (row: DisplayTableData) =>
+          _.map(visible_ordered_col_keys, (key: string) =>
             col_configs_with_defaults[key].raw_formatter(row[key])
           )
         )
@@ -331,12 +397,12 @@ class _DisplayTable extends React.Component {
           key="columnToggleUtil"
           columns={
             <LegendList
-              items={_.map(all_ordered_col_keys, (key) => ({
+              items={_.map(all_ordered_col_keys, (key: string) => ({
                 id: key,
                 label: col_configs_with_defaults[key].header,
                 active: _.includes(visible_ordered_col_keys, key),
               }))}
-              onClick={(clicked_key) => {
+              onClick={(clicked_key: string) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
                     visible_col_keys: toggle_list(
@@ -422,7 +488,10 @@ class _DisplayTable extends React.Component {
                       <button
                         tabIndex={0}
                         className={"skip-to-data"}
-                        onClick={() => this.first_data_ref.current.focus()}
+                        onClick={() =>
+                          this.first_data_ref.current &&
+                          this.first_data_ref.current.focus()
+                        }
                       >
                         {text_maker("skip_to_data")}
                       </button>
@@ -433,15 +502,18 @@ class _DisplayTable extends React.Component {
               </tr>
             )}
             <tr className="table-header">
-              {_.map(visible_ordered_col_keys, (column_key, row_index) => (
-                <th key={row_index} className={"center-text"}>
-                  {col_configs_with_defaults[column_key].header}
-                </th>
-              ))}
+              {_.map(
+                visible_ordered_col_keys,
+                (column_key: string, row_index) => (
+                  <th key={row_index} className={"center-text"}>
+                    {col_configs_with_defaults[column_key].header}
+                  </th>
+                )
+              )}
             </tr>
             {_.some(col_configs_with_defaults, "is_sortable") && (
               <tr className="table-header">
-                {_.map(visible_ordered_col_keys, (column_key) => {
+                {_.map(visible_ordered_col_keys, (column_key: string) => {
                   const sortable =
                     col_configs_with_defaults[column_key].is_sortable;
                   const searchable =
@@ -477,7 +549,7 @@ class _DisplayTable extends React.Component {
                           placeHolder={text_maker("filter_data")}
                           a11y_label={text_maker("filter_data")}
                           defaultValue={current_search_input}
-                          updateCallback={(search_value) => {
+                          updateCallback={(search_value: string) => {
                             const updated_searches = _.mapValues(
                               searches,
                               (value, key) =>
@@ -520,50 +592,56 @@ class _DisplayTable extends React.Component {
               <NoDataMessage />
             ) : (
               <tbody>
-                {_.map(paginated_data[current_page], (row, row_index) => (
-                  <tr key={row_index}>
-                    {_.map(visible_ordered_col_keys, (col_key, col_index) => (
-                      <td
-                        style={{
-                          fontSize: "14px",
-                          textAlign: determine_text_align(row, col_key),
-                        }}
-                        key={col_key}
-                        tabIndex={-1}
-                        ref={
-                          col_index === 0 && row_index === 0
-                            ? this.first_data_ref
-                            : null
-                        }
-                      >
-                        {col_configs_with_defaults[col_key].formatter ? (
-                          _.isString(
-                            col_configs_with_defaults[col_key].formatter
-                          ) ? (
-                            <Format
-                              type={
+                {_.map(
+                  paginated_data[current_page],
+                  (row: DisplayTableData, row_index) => (
+                    <tr key={row_index}>
+                      {_.map(
+                        visible_ordered_col_keys,
+                        (col_key: string, col_index) => (
+                          <td
+                            style={{
+                              fontSize: "14px",
+                              textAlign: determine_text_align(row, col_key),
+                            }}
+                            key={col_key}
+                            tabIndex={-1}
+                            ref={
+                              col_index === 0 && row_index === 0
+                                ? this.first_data_ref
+                                : null
+                            }
+                          >
+                            {col_configs_with_defaults[col_key].formatter ? (
+                              _.isString(
                                 col_configs_with_defaults[col_key].formatter
-                              }
-                              content={row[col_key]}
-                            />
-                          ) : (
-                            col_configs_with_defaults[col_key].formatter(
+                              ) ? (
+                                <Format
+                                  type={
+                                    col_configs_with_defaults[col_key].formatter
+                                  }
+                                  content={row[col_key]}
+                                />
+                              ) : (
+                                col_configs_with_defaults[col_key].formatter(
+                                  row[col_key]
+                                )
+                              )
+                            ) : (
                               row[col_key]
-                            )
-                          )
-                        ) : (
-                          row[col_key]
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
+                            )}
+                          </td>
+                        )
+                      )}
+                    </tr>
+                  )
+                )}
                 {is_total_exist && (
                   <tr key="total_row" className="total-row">
                     <td className="total_color">{text_maker("total")}</td>
                     {_.chain(visible_ordered_col_keys)
                       .tail()
-                      .map((col_key) => (
+                      .map((col_key: string) => (
                         <td
                           className="total_color"
                           style={{
@@ -623,14 +701,14 @@ class _DisplayTable extends React.Component {
     );
   }
 }
-_DisplayTable.defaultProps = {
-  page_size_increment: 100,
-  enable_pagination: true,
-  page_size_num_options_max: 5,
-};
+
+interface SmartDisplayTableProps extends DisplayTableProps {
+  show_search?: boolean;
+  show_sort?: boolean;
+}
 
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
-export class DisplayTable extends React.Component {
+export class SmartDisplayTable extends React.Component<SmartDisplayTableProps> {
   render() {
     const { data, show_search, show_sort, column_configs } = this.props;
     const col_configs_with_defaults = get_col_configs_with_defaults(

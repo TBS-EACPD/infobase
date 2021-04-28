@@ -14,7 +14,7 @@ export const LegendList = ({
 
   // pass-through props for internal CheckBox component; see CheckBox for options, defaults
   onClick,
-  LegendCheckBoxProps,
+  props,
 }) => (
   <ul
     className={classNames(
@@ -27,7 +27,7 @@ export const LegendList = ({
       <li key={id} className={is_a11y_mode ? "checkbox" : "legend-list__item"}>
         <CheckBox
           onClick={onClick}
-          {...LegendCheckBoxProps}
+          {...props}
           id={id}
           color={color}
           label={label}
