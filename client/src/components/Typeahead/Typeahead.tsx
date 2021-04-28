@@ -64,7 +64,7 @@ export class Typeahead extends React.Component<
   private typeahead_ref = React.createRef<HTMLDivElement>();
   private virtualized_list_ref = React.createRef<any>();
 
-  public static defaultProps = {
+  static defaultProps = {
     placeholder: text_maker("search"),
     min_length: 3,
     on_query_debounce_time: 300,

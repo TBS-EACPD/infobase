@@ -3,9 +3,9 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text";
 
-import text from "./Typeahead.yaml";
-
 import { ResultProps } from "./Typeahead";
+
+import text from "./Typeahead.yaml";
 
 const text_maker = create_text_maker(text);
 
