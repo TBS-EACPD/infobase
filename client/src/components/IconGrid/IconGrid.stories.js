@@ -13,7 +13,7 @@ import {
   IconBaselineCloud,
 } from "src/icons/icons.js";
 
-import { IconGrid } from "./IconGrid.js";
+import { IconGrid } from "./IconGrid";
 
 export default {
   title: "IconGrid",
