@@ -5,6 +5,7 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
+  SpinnerWrapper,
   DisplayTable,
   create_text_maker_component,
 } from "src/components/index.js";
@@ -29,7 +30,7 @@ const HighApplicationVolumePanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <span>loading</span>;
+    return <SpinnerWrapper config_name="inline_panel" />;
   }
   const { service_high_volume_summary } = data;
   const highest_volume_dept = service_high_volume_summary[0];
