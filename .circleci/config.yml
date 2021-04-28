@@ -169,16 +169,6 @@ jobs:
             - server/node_modules
             - scripts/common_node_scripts/node_modules
           key: server-dependencies-{{ checksum "server/package-lock.json" }}
-      - restore_cache:
-          keys:
-            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}
-      - run:
-          command: |
-            [ -f "server/transpiled_build/app.js" ] || (cd server && npm run build)
-      - save_cache:
-          paths:
-            - server/transpiled_build
-          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}
 
       - persist_to_workspace:
           root: ./
@@ -198,7 +188,6 @@ jobs:
             - ./client/node_modules
             - ./client/package.json
 
-            - ./server/transpiled_build
             - ./server/src
             - ./server/deploy_scripts
             - ./server/.gcloudignore
@@ -206,7 +195,6 @@ jobs:
             - ./server/node_modules
             - ./server/package.json
             - ./server/package-lock.json
-            - ./server/.babelrc
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
@@ -230,7 +218,7 @@ jobs:
           name: start_api_server
           command: (cd server && npm run start)
           background: true
-      - run: (cd server && npm run snapshot_tests) # the end to end snapshot tests, run against un-transpiled src for more useful coverage stats
+      - run: (cd server && npm run snapshot_tests)
 
       # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
       - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
@@ -261,7 +249,7 @@ jobs:
           background: true
       - run: 
           name: start_api_server
-          command: (cd server && npm run start:transpiled) # run server end to end tests against the transpiled src, to be closer to production
+          command: (cd server && npm run start)
           background: true
       - run: (cd server && export TEST_AGAINST_TRANSPILIED='true' && npm run snapshot_tests)
 
@@ -317,8 +305,8 @@ jobs:
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
 
-      # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
-      - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
+      # Checksum all JS files in src, used to determine if the function needs to be redeployed
+      - run: find ./server/src -name "*.js" | xargs cksum > server-checksums.txt
 
       # Use this cached file to tell if the api needs to be redeployed (if on a new branch, if function code's changed, or if server node modules have changed)
       - restore_cache:
