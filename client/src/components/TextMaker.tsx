@@ -34,7 +34,7 @@ const TextMaker = ({
     dangerouslySetInnerHTML: { __html: html },
   });
 };
-interface TMProps {
+export interface TMProps {
   tmf?: (key: string, args?: any) => string;
   k: string;
   el?: string;
