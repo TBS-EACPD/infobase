@@ -263,6 +263,7 @@ export default function (model_singleton) {
       .value();
 
   const loaders = {
+    service_loader: create_resource_by_id_attr_dataloader(Service, "id"),
     services_by_org_id: create_resource_by_foreignkey_attr_dataloader(
       Service,
       "org_id"

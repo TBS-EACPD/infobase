@@ -12,10 +12,9 @@ import {
   SpinnerWrapper,
 } from "src/components/index.js";
 
-import { Service } from "src/models/services.js";
+import { useSingleService } from "src/models/populate_services.js";
 import { Subject } from "src/models/subject.js";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { infograph_href_template } from "src/link_utils.js";
@@ -24,65 +23,46 @@ import text from "./SingleServiceRoute.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 
-export default class SingleServiceRoute extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true, service: null };
+const SingleServiceRoute = (props) => {
+  const {
+    match: {
+      params: { service_id, subject_id },
+    },
+  } = props;
+  const { loading, data: service } = useSingleService(service_id);
+  if (loading) {
+    return <span>loading</span>;
   }
-  componentDidMount() {
-    const {
-      match: {
-        params: { subject_id },
-      },
-    } = this.props;
-    const subject = Subject.Dept.lookup(subject_id);
+  const subject = Subject.Dept.lookup(subject_id);
 
-    ensure_loaded({
-      subject: subject,
-      has_services: true,
-      services: true,
-    }).then(() => {
-      this.setState({ loading: false });
-    });
-  }
-  render() {
-    const {
-      match: {
-        params: { service_id, subject_id },
-      },
-    } = this.props;
+  return (
+    <StandardRouteContainer
+      title={text_maker("single_service_route_title")}
+      breadcrumbs={[
+        <a
+          key="service_route"
+          href={infograph_href_template(subject, "services")}
+        >
+          {subject.name}
+        </a>,
+        text_maker("single_service_route_title"),
+      ]}
+      description={text_maker("single_service_route_desc")}
+      route_key="single_service_route"
+    >
+      {loading ? (
+        <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+      ) : (
+        <div>
+          <h1>{service.name}</h1>
+          <ServiceOverview service={service} />
+          <ServiceDigitalStatus service={service} />
+          <ServiceChannels service={service} />
+          <ServiceStandards service={service} />
+        </div>
+      )}
+    </StandardRouteContainer>
+  );
+};
 
-    const { loading } = this.state;
-    const subject = Subject.Dept.lookup(subject_id);
-    const service = Service.lookup(service_id);
-
-    return (
-      <StandardRouteContainer
-        title={text_maker("single_service_route_title")}
-        breadcrumbs={[
-          <a
-            key="service_route"
-            href={infograph_href_template(subject, "services")}
-          >
-            {subject.name}
-          </a>,
-          text_maker("single_service_route_title"),
-        ]}
-        description={text_maker("single_service_route_desc")}
-        route_key="single_service_route"
-      >
-        {loading ? (
-          <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
-        ) : (
-          <div>
-            <h1>{service.name}</h1>
-            <ServiceOverview service={service} />
-            <ServiceDigitalStatus service={service} />
-            <ServiceChannels service={service} />
-            <ServiceStandards service={service} />
-          </div>
-        )}
-      </StandardRouteContainer>
-    );
-  }
-}
+export default SingleServiceRoute;

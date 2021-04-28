@@ -3,6 +3,9 @@ import _ from "lodash";
 import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
+  extend type Root{
+    service(id: String!): Service
+  }
   extend type Gov{
     service_summary: ServiceSummary
   }
@@ -166,6 +169,7 @@ export default function ({ models, loaders }) {
   } = models;
 
   const {
+    service_loader,
     services_by_org_id,
     services_by_program_id,
     org_id_loader,
@@ -204,6 +208,10 @@ export default function ({ models, loaders }) {
   };
 
   const resolvers = {
+    Root: {
+      service: (_x, { id }) => service_loader.load(id),
+    },
+
     Gov: {
       service_summary: () => ({
         service_general_stats: service_general_stats_for_gov.load("gov"),
