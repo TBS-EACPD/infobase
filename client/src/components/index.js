@@ -39,7 +39,7 @@ export { GlossaryIcon, GlossaryItem } from "./glossary_components.js";
 export { CardList } from "./CardList.js";
 export { LabeledTable } from "./LabeledTable.tsx";
 export { FootnoteList } from "./FootnoteList.js";
-export { AlertBanner } from "./AlertBanner.js";
+export { AlertBanner } from "./AlertBanner";
 export { FancyUL } from "./FancyUL.js";
 export { DropdownMenu } from "./DropdownMenu.js";
 export { PinnedContent } from "./PinnedContent/PinnedContent.js";
