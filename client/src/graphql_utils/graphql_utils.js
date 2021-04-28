@@ -1,4 +1,5 @@
 import {
+  createHttpLink,
   InMemoryCache,
   ApolloClient,
   graphql as apollo_connect,
@@ -75,7 +76,8 @@ let client = null;
 export function get_client() {
   if (!client) {
     client = new ApolloClient({
-      link: new BatchHttpLink({
+      link: createHttpLink({
+        //new BatchHttpLink({
         uri: prod_api_url, // query_length_tolerant_fetch replaces the uri on the fly, switches to appropriate local uri in dev
         fetchOptions: { method: "POST" },
         fetch: query_length_tolerant_fetch,
