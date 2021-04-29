@@ -2,7 +2,12 @@ import React from "react";
 
 import "./LabeledBox.scss";
 
-export class LabeledBox extends React.Component {
+interface LabeledBoxProps {
+  label: string | React.ReactNode;
+  children: string | React.ReactNode;
+}
+
+export class LabeledBox extends React.Component<LabeledBoxProps, {}> {
   render() {
     const { label, children } = this.props;
 
