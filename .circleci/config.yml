@@ -103,6 +103,7 @@ jobs:
     docker:
       - image: eaadtbs/ib-ci-build:1.4
         <<: *dockerhub_auth
+    resource_class: medium+
     working_directory: "~/InfoBase"
     steps:
       - checkout:
