@@ -3,7 +3,21 @@ import React from "react";
 
 import "./RadioButtons.scss";
 
-export const RadioButtons = ({ options, onChange }) => (
+interface OptionsProps {
+  display: string | React.ReactNode;
+  id: string;
+  active: boolean;
+}
+
+interface RadioButtonsProps {
+  options: OptionsProps[];
+  onChange: (id: string) => void;
+}
+
+export const RadioButtons: React.FC<RadioButtonsProps> = ({
+  options,
+  onChange,
+}) => (
   <div className="radio-buttons">
     {options.map(({ display, id, active }) => (
       <button

@@ -8,7 +8,7 @@ export { TagCloud } from "./TagCloud.js";
 export { TabLoadingWrapper, TabLoadingSpinner } from "./TabLoadingWrapper.js";
 export { EmailFrontend } from "./EmailFrontend.js";
 export { HeightClipper } from "./HeightClipper/HeightClipper.js";
-export { RadioButtons } from "./RadioButtons.js";
+export { RadioButtons } from "./RadioButtons";
 export { Select } from "./Select";
 export { SortDirections } from "./SortDirection.js";
 export { TabbedControls, TabbedContent } from "./TabbedContent.js";
