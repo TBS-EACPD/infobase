@@ -3,7 +3,11 @@ import React, { Fragment } from "react";
 
 import "./Tombstones.scss";
 
-const UnlabeledTombstone = ({ items }) => (
+interface UnlabeledTombstoneProps {
+  items: (string | React.ReactNode)[];
+}
+
+const UnlabeledTombstone: React.FC<UnlabeledTombstoneProps> = ({ items }) => (
   <table className="tombstone-table">
     <tbody>
       {_.map(items, (item, ix) => (
@@ -15,7 +19,16 @@ const UnlabeledTombstone = ({ items }) => (
   </table>
 );
 
-const LabeledTombstone = ({ labels_and_items }) => (
+interface LabeledTombstoneProps {
+  labels_and_items: [
+    string | React.ReactNode,
+    string | string[] | React.ReactNode
+  ][];
+}
+
+const LabeledTombstone: React.FC<LabeledTombstoneProps> = ({
+  labels_and_items,
+}) => (
   <dl className="row tombstone-data-list">
     {_.map(labels_and_items, ([label, item], ix) => (
       <Fragment key={ix}>
