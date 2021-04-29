@@ -30,7 +30,7 @@ function main() {
   // first arg is the istanbul.config (false sets it to default), second is an overwrites object
   const report_config = istanbul.config.loadFile(false, {
     reporting: {
-      "report-istanbul.config": {
+      "report-config": {
         text: { file: "coverage-final.txt" },
       },
     },
