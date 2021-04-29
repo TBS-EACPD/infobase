@@ -14,7 +14,7 @@ export { SortDirections } from "./SortDirection.js";
 export { TabbedControls, TabbedContent } from "./TabbedContent.js";
 export { LabeledBox } from "./LabeledBox.js";
 export { TextMaker, TM } from "./TextMaker.tsx";
-export { TwoLevelSelect } from "./TwoLevelSelect.js";
+export { TwoLevelSelect } from "./TwoLevelSelect";
 export { CardTopImage } from "./CardTopImage.js";
 export { CardLeftImage } from "./CardLeftImage.js";
 export { CardCenteredImage } from "./CardCenteredImage.js";
