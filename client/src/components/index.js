@@ -40,7 +40,7 @@ export { CardList } from "./CardList";
 export { LabeledTable } from "./LabeledTable.tsx";
 export { FootnoteList } from "./FootnoteList.js";
 export { AlertBanner } from "./AlertBanner";
-export { FancyUL } from "./FancyUL.js";
+export { FancyUL } from "./FancyUL";
 export { DropdownMenu } from "./DropdownMenu.js";
 export { PinnedContent } from "./PinnedContent/PinnedContent.js";
 
