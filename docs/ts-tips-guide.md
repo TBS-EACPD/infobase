@@ -1,4 +1,4 @@
-Typescript was newly introducted into Infobase in early 2021 and is under a process of migration. Likewise, newly added files ideally will also be built in typescript to save on the migration process.
+Typescript was newly introducted into Infobase in early 2021 and is under a process of migration. Likewise, newly added files ideally will also be built in typescript to save on the migration process. (However, if there are dependencies js dependencies, we may want to build it as js before migrating - see migration section)
 
 ## Table of Contents
 - [Basics](#basics)
@@ -6,6 +6,7 @@ Typescript was newly introducted into Infobase in early 2021 and is under a proc
 - [Node modules](#node-modules)
 - [Lodash](#lodash)
 - [React](#react)
+- [Migration](#migration)
 
 ## Basics
 These will be used in most cases of development of the front end Infobase
@@ -57,3 +58,7 @@ Not all of it is exactly applicable to Infobase (like not using constructor), bu
 - Don't use enum because it can't be used with babel and produces unnecessary boilerplate code
 
 When using default props, move it from the outside to a static class variable: `static defaultProps = {...}`
+
+
+## Migration
+When migrating typescript files, the best place to start is from the bottom up as it will ensure that there will be no type conflicts going upwards (if we started with files with dependencies, type conflicts may arise when the dependencies are ported to typescript). Thus, look for files that don't have any js dependencies as choice for migration.
