@@ -27,7 +27,7 @@ export { StatelessDetails, Details } from "./Details.js";
 export { SpinnerWrapper } from "./SpinnerWrapper.js";
 export { KeyConceptList } from "./KeyConceptList.js";
 export { BackToTop } from "./BackToTop/BackToTop.js";
-export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones.js";
+export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
 export { Panel } from "./Panel.js";
 export { ShareButton } from "./ShareButton.js";
 export { WriteToClipboard } from "./WriteToClipboard.js";
