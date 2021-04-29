@@ -5,7 +5,27 @@ import React from "react";
   [ { id: group1, display: "Group 1", children : [ { id, display } , ... ] }, ... ]	
 */
 
-const TwoLevelSelect = ({
+interface OptionsProps {
+  id: string | number;
+  display: string;
+}
+
+interface GroupedOptionsProps extends OptionsProps {
+  children: OptionsProps[];
+}
+
+interface TwoSelectProps {
+  id: string;
+  selected: string | number;
+  grouped_options: GroupedOptionsProps[];
+  onSelect: (val: string) => void;
+
+  className?: string;
+  disabled?: boolean;
+  style?: Object;
+}
+
+const TwoLevelSelect: React.FC<TwoSelectProps> = ({
   style,
   id,
   selected,
