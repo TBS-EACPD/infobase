@@ -195,6 +195,7 @@ jobs:
             - ./server/node_modules
             - ./server/package.json
             - ./server/package-lock.json
+            - ./server/.babelrc
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
