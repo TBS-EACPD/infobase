@@ -9,9 +9,10 @@ interface OptionsProps {
 interface SelectProps {
   id: string;
   selected: string | number;
-  className?: string;
   options: OptionsProps[];
   onSelect: (val: string) => void;
+
+  className?: string;
   disabled?: boolean;
   style?: Object;
   title?: string;
