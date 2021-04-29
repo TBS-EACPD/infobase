@@ -14,6 +14,13 @@ These will be used in most cases of development of the front end Infobase
 
 [Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) - In most cases, interface will be used to define the prop types that are accepted by a component
 
+
+
+**Note: frequently check your terminal pane running webpack. This should always be free of typescript errors! Webpack will still build the code anyways, and may still work fine despite the errors.**
+
+In terms of file extensions, label the files containing React JSX as a `.tsx` file while the other files can be labelled as `.ts`
+
+
 ## Importing modules
 Typescript by nature does not allow you to import a file with endings `.ts` and `.tsx`, however, webpack will automatically search for these files so that we don't have to provide a file type declaration.
 
@@ -41,7 +48,7 @@ Observe below the different type overrides for `mapValues` and why passing and o
 
 
 ## React
-Here are some tips I took from [here](https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680)
+Here are some tips taken from [here](https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680)
 
 Not all of it is exactly applicable to Infobase (like not using constructor), but these ones seem to be helpful:
 - Don't use the public accessor since all members within classes are public by default
