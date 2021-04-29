@@ -33,7 +33,7 @@ export { ShareButton } from "./ShareButton.js";
 export { WriteToClipboard } from "./WriteToClipboard.js";
 export { PDFGenerator } from "./PDFGenerator.js";
 export { CountdownCircle } from "./CountdownCircle.js";
-export { Countdown } from "./Countdown.js";
+export { Countdown } from "./Countdown";
 export { LogInteractionEvents } from "./LogInteractionEvents.js";
 export { GlossaryIcon, GlossaryItem } from "./glossary_components.js";
 export { CardList } from "./CardList";

@@ -1,7 +1,17 @@
 import React from "react";
 
-export class Countdown extends React.Component {
-  constructor(props) {
+interface CountdownProps {
+  time: number;
+}
+
+interface CountdownState {
+  remaining_time: number;
+}
+
+export class Countdown extends React.Component<CountdownProps, CountdownState> {
+  countdown_timeouts: ReturnType<typeof setTimeout>[];
+
+  constructor(props: CountdownProps) {
     super(props);
     this.countdown_timeouts = [];
     this.state = { remaining_time: props.time };
