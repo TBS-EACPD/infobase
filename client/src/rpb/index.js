@@ -8,7 +8,7 @@ import { withRouter } from "react-router";
 
 import { SpinnerWrapper, LabeledBox } from "src/components/index.js";
 
-import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal.js";
+import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
 
 import Footnote from "src/models/footnotes/footnotes.js";
 

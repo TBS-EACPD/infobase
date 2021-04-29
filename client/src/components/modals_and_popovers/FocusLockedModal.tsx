@@ -7,8 +7,19 @@ import FocusLock from "react-focus-lock";
 
 import "./bootstrap_modal_exstension.scss";
 
-export class FocusLockedModal extends React.Component {
-  constructor(props) {
+interface FocusLockedModalProps {
+  mounted: boolean;
+  children: React.ReactNode;
+  additional_dialog_class: string | Object;
+  on_exit: () => void;
+  aria_label: string;
+}
+
+export class FocusLockedModal extends React.Component<
+  FocusLockedModalProps,
+  {}
+> {
+  constructor(props: FocusLockedModalProps) {
     super(props);
   }
 
@@ -41,7 +52,3 @@ export class FocusLockedModal extends React.Component {
     );
   }
 }
-
-FocusLockedModal.propTypes = {
-  aria_label: PropTypes.string.isRequired,
-};
