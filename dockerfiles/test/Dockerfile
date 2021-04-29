@@ -1,8 +1,4 @@
-# by :13.0.1 at least, alpine-node started coming with old versions of chromium and mongodb installed
-# No luck upgrading or uninstalling them, and they were breaking testcafe and cleanup_dev_dbs.sh respectively
-# 12.9.0 was the previous image I built from/knew to be good, not necessarily the latest pre-funny buisness
-# ... can't stay locked to this forever though
-FROM mhart/alpine-node:12.9.0 
+FROM mhart/alpine-node:14
 
 ENV SERVICE_USER test-image-user
 ENV SERVICE_HOME /home/${SERVICE_USER}
@@ -27,8 +23,13 @@ USER root
 RUN apk add --no-cache \
   udev \
   xvfb \
-  chromium \
-  mongodb
+  chromium
+# mongodb not not available in alpine apk repositories post 3.9, switch back to old repo and install from there
+# TODO check if this is still necessary in the future 
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main' >> /etc/apk/repositories && \
+  echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/community' >> /etc/apk/repositories && \
+  apk update && \
+  apk add mongodb yaml-cpp=0.6.2-r2
 
 # create default mongodb data directory and give the $USER access
 RUN mkdir -p /data/db && chown -R ${SERVICE_USER} /data/db

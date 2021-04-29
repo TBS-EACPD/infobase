@@ -1,9 +1,4 @@
-# by :13.0.1 at least, alpine-node started coming with old versions of chromium and mongodb installed
-# No luck upgrading or uninstalling them, and they were breaking testcafe and cleanup_dev_dbs.sh respectively
-# 12.9.0 was the previous image I built from/knew to be good, not necessarily the latest pre-funny buisness
-# ... can't stay locked to this forever though
-# The problem really only effected the container used for testing, but keeping build locked to the same version for consistency
-FROM mhart/alpine-node:12.9.0 
+FROM mhart/alpine-node:14
 
 ENV SERVICE_USER build-image-user
 ENV SERVICE_HOME /home/${SERVICE_USER}
