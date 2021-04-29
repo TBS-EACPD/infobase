@@ -23,7 +23,7 @@ function getNormalizedEntry(
   } else if (obj.hasOwnProperty(lang)) {
     return { text: (obj as BilingualBusinessConceptTextValue)[lang] };
   } else {
-    throw "shouldn't happen";
+    throw Error("shouldn't happen");
   }
 }
 
