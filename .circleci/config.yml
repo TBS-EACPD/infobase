@@ -23,7 +23,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
-      - image: eaadtbs/ib-ci-build:v1.4
+      - image: eaadtbs/ib-ci-build:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -65,7 +65,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_links:
     docker:
-      - image: eaadtbs/ib-ci-test:v1.4
+      - image: eaadtbs/ib-ci-test:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -101,7 +101,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
-      - image: eaadtbs/ib-ci-build:1.3
+      - image: eaadtbs/ib-ci-build:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -200,7 +200,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_server:
     docker:
-      - image: eaadtbs/ib-ci-test:v1.4
+      - image: eaadtbs/ib-ci-test:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -232,7 +232,7 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
-      - image: eaadtbs/ib-ci-test:1.2
+      - image: eaadtbs/ib-ci-test:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -269,7 +269,7 @@ jobs:
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-test:v1.4
+      - image: eaadtbs/ib-ci-test:1.4
         <<: *dockerhub_auth
     steps:
       - attach_workspace:
