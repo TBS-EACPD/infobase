@@ -1,8 +1,24 @@
 import _ from "lodash";
-import React from "react";
+import React, { ChangeEvent } from "react";
+
+interface OptionsProps {
+  id: string | number;
+  display: string;
+}
+
+interface SelectProps {
+  id: string;
+  selected: string | number;
+  className?: string;
+  options: OptionsProps[];
+  onSelect: (val: string) => void;
+  disabled?: boolean;
+  style?: Object;
+  title?: string;
+}
 
 //expects options to be of the form [ { id, display } ]
-const Select = ({
+const Select: React.FC<SelectProps> = ({
   id,
   selected,
   className,
