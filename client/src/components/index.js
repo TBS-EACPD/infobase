@@ -20,7 +20,7 @@ export { CardLeftImage } from "./CardLeftImage";
 export { CardCenteredImage } from "./CardCenteredImage";
 export { CardBackgroundImage } from "./CardBackgroundImage";
 export { DebouncedTextInput } from "./DebouncedTextInput.js";
-export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
+export { ContainerEscapeHatch } from "./ContainerEscapeHatch";
 export { FilterTable } from "./FilterTable.js";
 export { CheckBox } from "./CheckBox/CheckBox.js";
 export { StatelessDetails, Details } from "./Details.js";
