@@ -103,7 +103,6 @@ jobs:
     docker:
       - image: eaadtbs/ib-ci-build:1.4
         <<: *dockerhub_auth
-    resource_class: medium+
     working_directory: "~/InfoBase"
     steps:
       - checkout:
@@ -151,7 +150,7 @@ jobs:
             - prod-build-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 4096 -c "none")
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 900 -c "none")
       - save_cache:
           paths:
             - client/build
