@@ -1,6 +1,6 @@
 {
   "name": "infobase-email-backend",
-  "main": "transpiled_build/index.cjs",
+  "main": "transpiled_build/index.js",
   "engines": {
     "node": "14"
   },
@@ -41,7 +41,9 @@
     "integration_tests": "jest --coverage --forceExit --detectOpenHandles --silent --runInBand --config jest_configs/integration_tests.config.js",
     "extract_data:dev": "sh ./scripts/extract_data/extract_data.sh -m dev",
     "extract_data:prod": "sh ./scripts/extract_data/extract_data.sh -m prod",
-    "prod_build": "rm -rf transpiled_build && babel src/ --out-dir transpiled_build --copy-files --ignore node_modules"
+    "preprod_build": "rm -rf transpiled_build",
+    "prod_build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
+    "postprod_build": "echo '{\n  \"type\": \"commonjs\"\n}' > transpiled_build/package.json"
   },
   "authors": [
     "Stephen O'Neil"

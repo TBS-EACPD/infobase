@@ -1,7 +1,7 @@
 {
   "name": "infobase-server",
   "description": "",
-  "main": "transpiled_build/index.cjs",
+  "main": "transpiled_build/index.js",
   "engines": {
     "node": "14"
   },
@@ -60,7 +60,9 @@
     "populate_db:debug": "nodemon --watch ../data -e csv --exec node --inspect src/populate_db.js",
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27017",
     "update_outage_info": "gsutil cp ./outage_msg.json gs://ib-outage-bucket/",
-    "prod_build": "rm -rf transpiled_build && babel src/ --out-dir transpiled_build --copy-files --ignore node_modules"
+    "preprod_build": "rm -rf transpiled_build",
+    "prod_build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
+    "postprod_build": "echo '{\n  \"type\": \"commonjs\"\n}' > transpiled_build/package.json"
   },
   "authors": [
     "Alex Cousineau-Leduc",
