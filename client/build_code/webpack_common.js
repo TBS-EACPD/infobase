@@ -1,11 +1,10 @@
-const std_lib_path = require("path");
-
-const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
-const CircularDependencyPlugin = require("circular-dependency-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
-const _ = require("lodash");
-const TerserPlugin = require("terser-webpack-plugin");
-const webpack = require("webpack");
+import { BundleStatsWebpackPlugin } from "bundle-stats-webpack-plugin";
+import CircularDependencyPlugin from "circular-dependency-plugin";
+import ESLintPlugin from "eslint-webpack-plugin";
+import _ from "lodash";
+import TerserPlugin from "terser-webpack-plugin";
+import webpack from "webpack";
+import { fileURLToPath } from "url";
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -122,7 +121,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       use: [
         { loader: "json-loader" },
         {
-          loader: "./node_loaders/yaml-lang-loader.js",
+          loader: "./build_code/yaml-lang-loader.cjs",
           options: { lang: language },
         },
       ],
@@ -277,13 +276,13 @@ function create_config({
     devtool: !is_prod_build ? "eval-source-map" : is_ci ? "source-map" : false,
     resolve: {
       fallback: { assert: false },
-      modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
+      modules: [
+        fileURLToPath(new URL(`../`, import.meta.url)),
+        "node_modules/",
+      ],
       extensions: [".ts", ".js", ".tsx"],
     },
   };
 }
 
-module.exports = exports = {
-  create_config,
-  get_rules,
-};
+export { create_config, get_rules };

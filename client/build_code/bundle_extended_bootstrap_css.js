@@ -1,11 +1,9 @@
-/* eslint-disable no-console */
-const webpack = require("webpack");
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import FilterChunkWebpackPlugin from "filter-chunk-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import webpack from "webpack";
 
-function bundle_extended_bootstrap_css(output_path) {
-  const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-  const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-  const FilterChunkWebpackPlugin = require("filter-chunk-webpack-plugin");
-
+export function bundle_extended_bootstrap_css(output_path) {
   const config = {
     name: "container page css bundle",
     mode: "production",
@@ -42,5 +40,3 @@ function bundle_extended_bootstrap_css(output_path) {
     }
   });
 }
-
-module.exports = exports = { bundle_extended_bootstrap_css };

@@ -1,14 +1,13 @@
-const std_lib_path = require("path");
-const webpack = require("@storybook/react/node_modules/webpack");
+import { fileURLToPath } from "url";
 
-const { get_rules } = require("../build_code/webpack_common.js");
-const {
-  bundle_extended_bootstrap_css,
-} = require("../build_code/bundle_extended_bootstrap_css.js");
+import webpack from "@storybook/react/node_modules/webpack";
+
+import { get_rules } from "../build_code/webpack_common.js";
+import { bundle_extended_bootstrap_css } from "../build_code/bundle_extended_bootstrap_css.js";
 
 const LANG = "en";
 
-module.exports = {
+export default {
   core: {
     builder: "webpack5",
   },
@@ -38,7 +37,10 @@ module.exports = {
         crypto: require.resolve("crypto-browserify"),
         stream: require.resolve("stream-browserify"),
       },
-      modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
+      modules: [
+        fileURLToPath(new URL("../", import.meta.url)),
+        "node_modules/",
+      ],
     },
 
     plugins: [
