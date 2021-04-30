@@ -1,4 +1,3 @@
-// for Jest, which is lacking usable esModule support
 {
   "plugins": [
     "@babel/plugin-transform-modules-commonjs",

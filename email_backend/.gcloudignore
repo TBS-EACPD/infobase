@@ -5,5 +5,5 @@
 # explicitly include just what's actually required in the cloud function
 !/package.json
 !/package-lock.json
-!/src/**
+!/transpiled_build/**
 !/templates/**

@@ -6,4 +6,5 @@
 npm-debug*
 coverage/
 *credentials*.json
+transpiled_build/
 data_extracts/
