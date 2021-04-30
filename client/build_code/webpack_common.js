@@ -122,7 +122,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       use: [
         { loader: "json-loader" },
         {
-          loader: "./node_loaders/yaml-lang-loader.js",
+          loader: "./build_code/loaders/yaml-lang-loader.js",
           options: { lang: language },
         },
       ],
