@@ -1,5 +1,5 @@
-const d3_dsv = require("d3-dsv");
-const _ = require("lodash");
+import d3_dsv from "d3-dsv";
+import _ from "lodash";
 
 // models/results has no dependencies
 let all_footnotes,
@@ -132,7 +132,7 @@ function footnotes_to_csv_string(footnote_objs, lang) {
   return d3_dsv.csvFormat(lang_specific_records);
 }
 
-function get_footnote_file_defs(file_obj, lang) {
+export function get_footnote_file_defs(file_obj, lang) {
   populate_stores(file_obj);
 
   return {
@@ -147,5 +147,3 @@ function get_footnote_file_defs(file_obj, lang) {
     estimates: footnotes_to_csv_string(estimate_footnotes, lang),
   };
 }
-
-module.exports = exports = { get_footnote_file_defs };

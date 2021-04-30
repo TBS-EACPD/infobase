@@ -1,24 +1,17 @@
-/* eslint-disable no-console */
+import fs from "fs";
 
-//fse just adds the ability to do 'cp -r' to the regular filesystem tools for node
-const fs = require("fs");
+import { fileURLToPath } from "url";
 
-const path = require("path");
+import d3_dsv from "d3-dsv";
+import fse from "fs-extra"; //fse just adds the ability to do 'cp -r' to the regular filesystem tools for node
+import gitsha from "git-bundle-sha";
+import Handlebars from "handlebars";
+import _ from "lodash";
 
-const d3_dsv = require("d3-dsv");
-const fse = require("fs-extra");
-const gitsha = require("git-bundle-sha");
-const Handlebars = require("handlebars");
-const _ = require("lodash");
+import { index_lang_lookups } from "../src/InfoBase/index_data.js"; // eslint-disable-line node/no-unpublished-import
 
-global._ = _; //global is the 'window' on the node environment
-
-const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
-
-const {
-  bundle_extended_bootstrap_css,
-} = require("./bundle_extended_bootstrap_css.js");
-const { get_footnote_file_defs } = require("./write_footnote_bundles.js");
+import { bundle_extended_bootstrap_css } from "./bundle_extended_bootstrap_css.js";
+import { get_footnote_file_defs } from "./write_footnote_bundles.js";
 
 const build_dir_name = process.env.BUILD_DIR || "build";
 
@@ -276,7 +269,9 @@ function build_proj(PROJ) {
   console.log("\n done copying static assets \n");
 
   console.log("\n bundling extended bootstrap css... \n");
-  bundle_extended_bootstrap_css(path.resolve(__dirname, `../${app_dir}`));
+  bundle_extended_bootstrap_css(
+    fileURLToPath(new URL(`../${app_dir}`, import.meta.url))
+  );
 }
 
 build_proj(IB);

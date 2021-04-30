@@ -1,13 +1,11 @@
-/* eslint-disable no-console */
-const path = require("path");
+import { fileURLToPath } from "url";
 
-const gitsha = require("git-bundle-sha");
+import gitsha from "git-bundle-sha";
+import ip from "ip";
+import _ from "lodash";
+import webpack from "webpack";
 
-const ip = require("ip");
-const _ = require("lodash");
-const webpack = require("webpack");
-
-const { create_config } = require("./webpack_common.js");
+import { create_config } from "./webpack_common.js";
 
 const build_dir_name = process.env.BUILD_DIR || "build";
 const args = process.argv;
@@ -37,7 +35,9 @@ const main_client = choose("main_client");
 const app = a11y_client || main_client;
 
 const common_output_options = {
-  path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
+  path: fileURLToPath(
+    new URL(`../${build_dir_name}/InfoBase/app/`, import.meta.url)
+  ),
 };
 const options_by_app = {
   a11y_client: {
@@ -81,7 +81,7 @@ gitsha(function (err, commit_sha) {
 
   const config = langs.map((lang) =>
     create_config({
-      context: path.resolve(__dirname, `..`),
+      context: fileURLToPath(new URL("..", import.meta.url)),
       entry: ["@babel/polyfill", "./src/InfoBase/root.js"],
       output: app_options.get_output(lang),
       commit_sha,
