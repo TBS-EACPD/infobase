@@ -11,6 +11,8 @@ echo "USE_REMOTE_DB: '1'" >> ./envs.yaml
 
 source ../scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
 
+./deploy_scripts/build.sh
+
 gcloud functions deploy $CIRCLE_BRANCH --entry-point app --stage-bucket api-staging-bucket --runtime nodejs14 --trigger-http --env-vars-file ./envs.yaml
 gcloud alpha functions add-iam-policy-binding $CIRCLE_BRANCH --member allUsers --role roles/cloudfunctions.invoker
 

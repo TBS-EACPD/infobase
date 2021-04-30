@@ -1,4 +1,4 @@
-// entry-point, for both dev and GCF
+// entry-point for GCF
 
 import { run_email_backend } from "./email_backend.js";
 

@@ -6,6 +6,7 @@
 npm-debug*
 coverage
 *credentials*.json
+transpiled_build/
 
 # for old local dev dbs, might still be generated if checking out an old commit
 mongo/mongo.log
