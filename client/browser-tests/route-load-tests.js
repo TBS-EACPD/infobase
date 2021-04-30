@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-import fs from "fs";
+const fs = require("fs");
 
-import _ from "lodash";
-import rimraf from "rimraf";
-import createTestCafe from "testcafe";
-import yargs from "yargs";
+const _ = require("lodash");
+const rimraf = require("rimraf");
+const createTestCafe = require("testcafe");
+const yargs = require("yargs");
 
-import { route_load_tests_config } from "./route-load-tests-config.js";
+const { route_load_tests_config } = require("./route-load-tests-config.js");
 
 const get_options_from_args = () => {
   const argv = yargs
