@@ -1,9 +1,11 @@
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import FilterChunkWebpackPlugin from "filter-chunk-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import webpack from "webpack";
+/* eslint-disable no-console */
+const webpack = require("webpack");
 
-export function bundle_extended_bootstrap_css(output_path) {
+function bundle_extended_bootstrap_css(output_path) {
+  const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+  const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+  const FilterChunkWebpackPlugin = require("filter-chunk-webpack-plugin");
+
   const config = {
     name: "container page css bundle",
     mode: "production",
@@ -40,3 +42,5 @@ export function bundle_extended_bootstrap_css(output_path) {
     }
   });
 }
+
+module.exports = exports = { bundle_extended_bootstrap_css };

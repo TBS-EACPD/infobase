@@ -1,4 +1,4 @@
-export const index_lang_lookups = {
+const index_lang_lookups = {
   open_data_text: {
     en:
       "If you wish to leave JavaScript turned off, you can find all of the GC InfoBase's data on open data through the following links.",
@@ -162,3 +162,6 @@ export const index_lang_lookups = {
     fr: "Version graphique",
   },
 };
+
+// Used by copy_static_asset, which is still commonJS for now
+module.exports = { index_lang_lookups }; //eslint-disable-line import/no-commonjs

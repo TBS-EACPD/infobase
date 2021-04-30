@@ -1,4 +1,4 @@
-export const route_load_tests_config = [
+module.exports.route_load_tests_config = [
   {
     name: "Always failing route, to test error boundary",
     route: "error-boundary-test",
