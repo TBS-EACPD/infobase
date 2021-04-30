@@ -1,4 +1,4 @@
-Typescript was newly introducted into Infobase in early 2021 and is under a process of migration. Likewise, newly added files ideally will also be built in typescript to save on the migration process. (However, if there are dependencies js dependencies, we may want to build it as js before migrating - see migration section)
+Typescript was newly introducted to Infobase in early 2021 and is under a process of migration. Likewise, newly added files ideally will also be built in typescript to save on the migration process. (However, if there are js dependencies, we may want to create it as js file before migrating it - see migration section)
 
 ## Table of Contents
 - [Basics](#basics)
@@ -9,11 +9,11 @@ Typescript was newly introducted into Infobase in early 2021 and is under a proc
 - [Migration](#migration)
 
 ## Basics
-These will be used in most cases of development of the front end Infobase
+These will be used in most cases of development on the front end of Infobase
 
 [Variable Types](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 
-[Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) - In most cases, interface will be used to define the prop types that are accepted by a component
+[Interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) - In most cases, interfaces will be used to define the prop types that are accepted by a component
 
 
 
