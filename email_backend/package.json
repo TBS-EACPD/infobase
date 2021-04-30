@@ -40,10 +40,7 @@
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018",
     "integration_tests": "jest --coverage --forceExit --detectOpenHandles --silent --runInBand --config jest_configs/integration_tests.config.js",
     "extract_data:dev": "sh ./scripts/extract_data/extract_data.sh -m dev",
-    "extract_data:prod": "sh ./scripts/extract_data/extract_data.sh -m prod",
-    "preprod_build": "rm -rf transpiled_build",
-    "prod_build": "babel src/ --out-dir transpiled_build --copy-files --ignore node_modules",
-    "postprod_build": "echo '{\n  \"type\": \"commonjs\"\n}' > transpiled_build/package.json"
+    "extract_data:prod": "sh ./scripts/extract_data/extract_data.sh -m prod"
   },
   "authors": [
     "Stephen O'Neil"
