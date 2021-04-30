@@ -306,8 +306,9 @@ jobs:
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
 
-      # Checksum all JS files in src, used to determine if the function needs to be redeployed
-      - run: find ./server/src -name "*.js" | xargs cksum > server-checksums.txt
+      # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
+      - run: (cd server && npm run prod_build)
+      - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums.txt
 
       # Use this cached file to tell if the api needs to be redeployed (if on a new branch, if function code's changed, or if server node modules have changed)
       - restore_cache:
