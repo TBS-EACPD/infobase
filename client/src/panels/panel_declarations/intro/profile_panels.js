@@ -12,7 +12,7 @@ import {
 
 import { Subject } from "src/models/subject.js";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import * as general_utils from "src/general_utils.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";

@@ -6,11 +6,11 @@ import { create_text_maker_component } from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
 
-import { highlightColor } from "src/core/color_defs.js";
+import { highlightColor } from "src/core/color_defs.ts";
 
 import { lang } from "src/core/injected_build_constants.ts";
 
-import { IconAttentionTriangle } from "src/icons/icons.js";
+import { IconAttentionTriangle } from "src/icons/icons.tsx";
 
 import text from "./hierarchy_panels.yaml";
 

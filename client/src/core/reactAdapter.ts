@@ -1,11 +1,14 @@
 import _ from "lodash";
+import React from "react";
 import ReactDOM from "react-dom";
 
 class ReactContentRenderer {
+  nodes: (Element | DocumentFragment)[];
+
   constructor() {
     this.nodes = [];
   }
-  render(component, node) {
+  render(component: React.ReactElement, node: Element | DocumentFragment) {
     ReactDOM.render(component, node);
     this.nodes.push(node);
   }

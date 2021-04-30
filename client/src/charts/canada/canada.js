@@ -13,7 +13,7 @@ import {
 import { businessConstants } from "src/models/businessConstants.ts";
 import { run_template } from "src/models/text.js";
 
-import { secondaryColor, tertiaryColor } from "src/core/color_defs.js";
+import { secondaryColor, tertiaryColor } from "src/core/color_defs.ts";
 
 import { StandardLegend } from "src/charts/legends/index.js";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";

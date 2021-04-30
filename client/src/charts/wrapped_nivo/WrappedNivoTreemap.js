@@ -2,7 +2,7 @@ import { TreeMapHtml } from "@nivo/treemap";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { breakpoints } from "src/core/breakpoint_defs.js";
+import { breakpoints } from "src/core/breakpoint_defs.ts";
 
 import "./WrappedNivoTreemap.scss";
 

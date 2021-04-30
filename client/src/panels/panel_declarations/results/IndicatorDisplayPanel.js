@@ -17,7 +17,7 @@ import { lang } from "src/core/injected_build_constants.ts";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 
-import { IconCopyLink } from "src/icons/icons.js";
+import { IconCopyLink } from "src/icons/icons.tsx";
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 
 import { IndicatorDisplay } from "./result_components.js";

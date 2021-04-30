@@ -1,13 +1,13 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { textLightColor } from "src/core/color_defs.js";
-import { is_IE } from "src/core/feature_detection.js";
+import { textLightColor } from "src/core/color_defs.ts";
+import { is_IE } from "src/core/feature_detection.ts";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconDownload } from "src/icons/icons.js";
-import { get_static_url } from "src/request_utils.js";
+import { IconDownload } from "src/icons/icons.tsx";
+import { get_static_url } from "src/request_utils.ts";
 
 import { create_text_maker_component } from "./misc_util_components.js";
 import { SpinnerWrapper } from "./SpinnerWrapper.js";

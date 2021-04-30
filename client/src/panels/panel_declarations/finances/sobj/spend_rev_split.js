@@ -9,8 +9,8 @@ import {
 
 import { create_text_maker_component } from "src/components/index.js";
 
-import { highlightColor, secondaryColor } from "src/core/color_defs.js";
-import { formats } from "src/core/format.js";
+import { highlightColor, secondaryColor } from "src/core/color_defs.ts";
+import { formats } from "src/core/format.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

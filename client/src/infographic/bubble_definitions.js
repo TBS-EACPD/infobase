@@ -15,7 +15,7 @@ import {
   IconClipboard,
   IconTag,
   IconHelp,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 import { infograph_href_template } from "./infographic_link.js";
 

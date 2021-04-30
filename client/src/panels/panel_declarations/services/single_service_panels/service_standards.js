@@ -13,14 +13,14 @@ import {
 
 import FootNote from "src/models/footnotes/footnotes.js";
 
-import { newIBCategoryColors } from "src/core/color_schemes.js";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import {
   IconAttention,
   IconCheck,
   IconNotApplicable,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

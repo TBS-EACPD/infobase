@@ -9,8 +9,8 @@ import {
   actual_to_planned_gap_year,
 } from "src/models/years.js";
 
-import { tertiaryColor } from "src/core/color_defs.js";
-import { newIBCategoryColors } from "src/core/color_schemes.js";
+import { tertiaryColor } from "src/core/color_defs.ts";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 import { Table } from "src/core/TableClass.js";
 

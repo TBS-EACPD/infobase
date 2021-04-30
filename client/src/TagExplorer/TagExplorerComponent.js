@@ -13,7 +13,7 @@ import {
 import { GlossaryEntry } from "src/models/glossary.js";
 import { run_template } from "src/models/text.js";
 
-import { tertiaryColor, primaryColor } from "src/core/color_defs.js";
+import { tertiaryColor, primaryColor } from "src/core/color_defs.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

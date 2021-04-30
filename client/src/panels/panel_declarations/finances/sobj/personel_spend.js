@@ -13,7 +13,7 @@ import { businessConstants } from "src/models/businessConstants.ts";
 import { run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 
-import { primaryColor } from "src/core/color_defs.js";
+import { primaryColor } from "src/core/color_defs.ts";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
 

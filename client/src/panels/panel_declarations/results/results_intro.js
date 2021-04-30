@@ -13,7 +13,7 @@ import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { get_source_links } from "src/metadata/data_sources.js";
 
-import { get_static_url } from "src/request_utils.js";
+import { get_static_url } from "src/request_utils.ts";
 
 import {
   ResultCounts,

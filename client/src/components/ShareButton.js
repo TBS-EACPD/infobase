@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { textLightColor, tertiaryColor } from "src/core/color_defs.js";
+import { textLightColor, tertiaryColor } from "src/core/color_defs.ts";
 
 import {
   IconShare,
@@ -10,7 +10,7 @@ import {
   IconTwitter,
   IconReddit,
   IconEmail,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 import { StatelessModal } from "./modals_and_popovers/index.js";
 

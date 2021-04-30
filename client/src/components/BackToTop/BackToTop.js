@@ -5,7 +5,7 @@ import "intersection-observer";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { is_mobile } from "src/core/feature_detection.js";
+import { is_mobile } from "src/core/feature_detection.ts";
 
 import "./BackToTop.scss";
 

@@ -13,7 +13,7 @@ import {
 import { run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 
-import { textGreen, textRed } from "src/core/color_defs.js";
+import { textGreen, textRed } from "src/core/color_defs.ts";
 
 import { get_source_links } from "src/metadata/data_sources.js";
 

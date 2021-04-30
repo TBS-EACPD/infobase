@@ -9,9 +9,9 @@ import {
   textColor,
   secondaryColor,
   backgroundColor,
-} from "src/core/color_defs.js";
+} from "src/core/color_defs.ts";
 
-import { IconZoomIn, IconZoomOut } from "src/icons/icons.js";
+import { IconZoomIn, IconZoomOut } from "src/icons/icons.tsx";
 
 import {
   create_text_maker_component_with_nivo_common,

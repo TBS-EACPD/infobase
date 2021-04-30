@@ -7,13 +7,13 @@ import MediaQuery from "react-responsive";
 
 import { SmartDisplayTable } from "src/components/index.js";
 
-import { breakpoints } from "src/core/breakpoint_defs.js";
+import { breakpoints } from "src/core/breakpoint_defs.ts";
 
-import { textColor } from "src/core/color_defs.js";
+import { textColor } from "src/core/color_defs.ts";
 
-import { newIBCategoryColors } from "src/core/color_schemes.js";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import {
   InteractiveGraph,

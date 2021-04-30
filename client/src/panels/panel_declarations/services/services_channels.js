@@ -12,7 +12,7 @@ import {
 
 import { Service } from "src/models/services.js";
 
-import { infobase_colors } from "src/core/color_schemes.js";
+import { infobase_colors } from "src/core/color_schemes.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";

@@ -4,7 +4,7 @@ import _ from "lodash";
 import { lang } from "src/core/injected_build_constants.ts";
 
 import { sanitized_marked } from "src/general_utils.js";
-import { get_static_url, make_request } from "src/request_utils.js";
+import { get_static_url, make_request } from "src/request_utils.ts";
 
 import { populate_global_footnotes } from "./footnotes/populate_footnotes.js";
 import { GlossaryEntry } from "./glossary.js";

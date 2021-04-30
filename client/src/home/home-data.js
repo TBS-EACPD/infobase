@@ -17,7 +17,7 @@ import {
   IconTag,
   IconReport,
   IconTreemap,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 import infographic_sections_text_bundle from "src/infographic/bubble_definitions.yaml";
 

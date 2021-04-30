@@ -5,7 +5,7 @@ import { TabLoadingWrapper } from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.ts";
 
-import { array_to_grammatical_list } from "src/core/format.js";
+import { array_to_grammatical_list } from "src/core/format.ts";
 import { lang } from "src/core/injected_build_constants.ts";
 
 import { ToggleVoteStatProvider } from "./covid_common_components.js";

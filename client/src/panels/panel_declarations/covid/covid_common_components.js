@@ -3,9 +3,9 @@ import React, { Fragment } from "react";
 
 import { TabbedControls, CheckBox, LinkStyled } from "src/components/index.js";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
-import { IconQuestion } from "src/icons/icons.js";
+import { IconQuestion } from "src/icons/icons.tsx";
 
 import { scroll_to_covid_key_concepts } from "./covid_key_concepts.js";
 

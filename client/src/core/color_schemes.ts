@@ -1,7 +1,7 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
-import * as color_defs from "./color_defs.js";
+import * as color_defs from "./color_defs.ts";
 
 const newIBCategoryColors = [
   "#206BBD", // blue
@@ -56,10 +56,10 @@ const sequentialPurples = [
   "#673C8F",
 ];
 
-// this is here instead of in color_defs.js because it's a data-dependent color
+// this is here instead of in color_defs because it's a data-dependent color
 const NA_color = _.last(newIBCategoryColors); // color_defs.tertiaryColor
 
-const infobase_colors = (options) => scaleOrdinal().range(newIBCategoryColors);
+const infobase_colors = () => scaleOrdinal().range(newIBCategoryColors);
 
 export {
   newIBCategoryColors,

@@ -4,8 +4,8 @@ import _ from "lodash";
 import { businessConstants } from "src/models/businessConstants.ts";
 import * as Results from "src/models/results.js";
 
-import { newIBCategoryColors } from "src/core/color_schemes.js";
-import { formats } from "src/core/format.js";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
+import { formats } from "src/core/format.ts";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";

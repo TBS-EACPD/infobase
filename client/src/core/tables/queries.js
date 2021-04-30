@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { Subject } from "src/models/subject.js";
 
-import * as FORMAT from "src/core/format.js";
+import * as FORMAT from "src/core/format.ts";
 import { lang } from "src/core/injected_build_constants.ts";
 
 // #Queries

@@ -6,8 +6,8 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { newIBCategoryColors } from "src/core/color_schemes.js";
-import { formats } from "src/core/format.js";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
+import { formats } from "src/core/format.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { StandardLegend } from "src/charts/legends/index.js";

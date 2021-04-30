@@ -8,7 +8,7 @@ import {
   LinkStyled,
 } from "src/components/index.js";
 
-import { separatorColor } from "src/core/color_defs.js";
+import { separatorColor } from "src/core/color_defs.ts";
 
 import text from "./TableOfContents.yaml";
 

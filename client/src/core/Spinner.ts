@@ -14,6 +14,4 @@ const spinner_configs = {
   },
 };
 
-Spinner.__configs = spinner_configs;
-
 export { Spinner, spinner_configs };

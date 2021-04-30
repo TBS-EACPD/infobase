@@ -10,7 +10,7 @@ import {
   build_date,
 } from "src/core/injected_build_constants.ts";
 
-import { IconGitHub } from "src/icons/icons.js";
+import { IconGitHub } from "src/icons/icons.tsx";
 
 import { EmailFrontend } from "./EmailFrontend.js";
 import { ExternalLink } from "./misc_util_components.js";

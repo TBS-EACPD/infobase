@@ -1,10 +1,11 @@
 import classNames from "classnames";
 import React from "react";
 
-import { backgroundColor, primaryColor } from "src/core/color_defs.js";
+import { backgroundColor, primaryColor } from "src/core/color_defs.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconCheckmark } from "src/icons/icons.js";
+import { IconCheckmark } from "src/icons/icons.tsx";
+
 import "./CheckBox.scss";
 
 export class CheckBox extends React.Component {

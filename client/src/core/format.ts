@@ -94,10 +94,21 @@ const result_percent_formatter = {
   }),
 };
 
-const compact = (precision, val, lang, options) => {
+interface OptionsProps {
+  precision: number;
+  raw: boolean;
+  noMoney: boolean;
+}
+
+const compact = (
+  precision: number,
+  val: number,
+  lang: LangType,
+  options: OptionsProps
+) => {
   precision = precision || 0;
 
-  const abbrev = {
+  const abbrev: { [key: number]: { [key: string]: string } } = {
     1000000000: { en: "B", fr: "G" },
     1000000: { en: "M", fr: "M" },
     1000: { en: "K", fr: "k" },
@@ -105,11 +116,11 @@ const compact = (precision, val, lang, options) => {
   };
 
   const abs = Math.abs(val);
-  const [symbol, new_val] = (() => {
+  const [symbol, new_val] = ((): [string, number] => {
     if (val === 0) {
       return ["", 0];
     } else {
-      const compacted = _.times(3, (i) => {
+      const compacted: ([string, number] | undefined)[] = _.times(3, (i) => {
         //can't break out of a lodash loop
         const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
         if (abs >= breakpoint) {
@@ -121,8 +132,8 @@ const compact = (precision, val, lang, options) => {
         return !_.isUndefined(pair);
       });
 
-      return defined_compacted.length > 0
-        ? defined_compacted[0]
+      return defined_compacted.length! > 0 //have to use the ! because TS thinks filter can return null/
+        ? defined_compacted[0]!
         : [abbrev[999][lang], val];
     }
   })();
@@ -147,12 +158,17 @@ const compact = (precision, val, lang, options) => {
   }
 };
 
-const compact_written = (precision, val, lang, options) => {
+const compact_written = (
+  precision: number,
+  val: number,
+  lang: LangType,
+  options: OptionsProps
+) => {
   // the rules for this are going to be different from compact(),
   // emphasizing readability.
   // specifically, small numbers are treated differently
 
-  const abbrevs = {
+  const abbrevs: { [keys: number]: { [key: string]: string } } = {
     1000000000: { en: " billion", fr: " milliards" },
     1000000: { en: " million", fr: " millions" },
     1000: { en: " thousand", fr: " milliers" },
@@ -161,9 +177,9 @@ const compact_written = (precision, val, lang, options) => {
 
   const abs = Math.abs(val);
 
-  const [rtn, abbrev] = (() => {
+  const [rtn, abbrev] = ((): [string, string] => {
     if (abs >= 50000) {
-      const compacted = _.times(3, (i) => {
+      const compacted: ([string, string] | undefined)[] = _.times(3, (i) => {
         //can't break out of a lodash loop
         const breakpoint = 1000000000 / Math.pow(10, i * 3); //checking 1B, 1M, and 1K
         precision = i === 2 && precision < 2 ? 0 : precision;
@@ -179,7 +195,7 @@ const compact_written = (precision, val, lang, options) => {
         return !_.isUndefined(pair);
       });
 
-      return defined_compacted[0];
+      return defined_compacted[0]!;
     } else {
       precision = precision < 2 ? 0 : precision;
       return [
@@ -198,7 +214,12 @@ const compact_written = (precision, val, lang, options) => {
   }
 };
 
-const percentage = (precision, val, lang, options) => {
+const percentage = (
+  precision: number,
+  val: number,
+  lang: LangType,
+  options: OptionsProps
+) => {
   precision = precision || 0;
   const rtn = percent_formatter[lang][precision].format(val);
   if (options.raw) {
@@ -208,11 +229,16 @@ const percentage = (precision, val, lang, options) => {
   }
 };
 
-const smart_percentage = (min_precision, val, lang, options) => {
+const smart_percentage = (
+  min_precision: number,
+  val: number,
+  lang: LangType,
+  options: OptionsProps
+) => {
   const one_significant_figure_of_precision =
-    val !== 0 &&
-    Math.abs(val * 100) < 1 &&
-    _.replace(val * 100, /(^.*\.)(0*[1-9]?)(.*)/, "$2").length;
+    val !== 0 && Math.abs(val * 100) < 1
+      ? _.replace(_.toString(val * 100), /(^.*\.)(0*[1-9]?)(.*)/, "$2").length
+      : 0;
 
   const max_precision = percent_formatter[lang].length - 1;
 
@@ -230,28 +256,32 @@ const smart_percentage = (min_precision, val, lang, options) => {
   }
 };
 
-const types_to_format = {
-  compact: (val, lang, options) =>
+const types_to_format: { [key: string]: Function } = {
+  compact: (val: number, lang: LangType, options: OptionsProps) =>
     compact(options.precision, val, lang, options),
   compact1: _.curry(compact)(1),
   compact2: _.curry(compact)(2),
-  compact_written: (val, lang, options) =>
+  compact_written: (val: number, lang: LangType, options: OptionsProps) =>
     compact_written(options.precision, val, lang, options),
   compact1_written: _.curry(compact_written)(1),
   compact2_written: _.curry(compact_written)(2),
-  percentage: (val, lang, options) =>
+  percentage: (val: number, lang: LangType, options: OptionsProps) =>
     percentage(options.precision, val, lang, options),
   percentage1: _.curry(percentage)(1),
   percentage2: _.curry(percentage)(2),
   smart_percentage1: _.curry(smart_percentage)(1),
   smart_percentage2: _.curry(smart_percentage)(2),
-  result_percentage: (val, lang) =>
+  result_percentage: (val: number, lang: LangType) =>
     result_percent_formatter[lang].format(val / 100),
-  result_num: (val, lang) => result_number_formatter[lang].format(val),
-  decimal1: (val, lang, options) => number_formatter[lang][1].format(val),
-  decimal2: (val, lang, options) => number_formatter[lang][2].format(val),
-  decimal: (val, lang, options) => number_formatter[lang][3].format(val),
-  big_int: (val, lang, options) => {
+  result_num: (val: number, lang: LangType) =>
+    result_number_formatter[lang].format(val),
+  decimal1: (val: number, lang: LangType) =>
+    number_formatter[lang][1].format(val),
+  decimal2: (val: number, lang: LangType) =>
+    number_formatter[lang][2].format(val),
+  decimal: (val: number, lang: LangType) =>
+    number_formatter[lang][3].format(val),
+  big_int: (val: number, lang: LangType, options: OptionsProps) => {
     const rtn = number_formatter[lang][0].format(val);
 
     if (options.raw) {
@@ -260,14 +290,14 @@ const types_to_format = {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
-  int: (val) => val,
-  ordinal: (val) => val,
-  str: (val) => val,
-  boolean: (val) => val,
-  "wide-str": (val) => val,
-  "short-str": (val) => val,
-  date: (val) => val,
-  dollar: (val, lang, options) => {
+  int: (val: number) => val,
+  ordinal: (val: number) => val,
+  str: (val: number) => val,
+  boolean: (val: number) => val,
+  "wide-str": (val: number) => val,
+  "short-str": (val: number) => val,
+  date: (val: number) => val,
+  dollar: (val: number, lang: LangType, options: OptionsProps) => {
     options.precision = options.precision || 2;
 
     const rtn = money_formatter[lang][options.precision].format(val);
@@ -278,15 +308,21 @@ const types_to_format = {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
-  year_to_fiscal_year: (year) => {
+  year_to_fiscal_year: (year: string) => {
     const year_int = parseInt(year);
     return `${year_int}-${lang === "en" ? year_int - 2000 + 1 : year_int + 1}`;
   },
-  fiscal_year_to_year: (fiscal_year) =>
+  fiscal_year_to_year: (fiscal_year: string) =>
     _.chain(fiscal_year).split("-").head().value(),
 };
 
-const formatter = (format, val, options) => {
+type generic_value = (string | number)[] | Object | string | number;
+
+const formatter = (
+  format: string,
+  val: generic_value,
+  options?: Partial<OptionsProps>
+): generic_value => {
   options = options || {};
   if (_.has(types_to_format, format)) {
     if (_.isArray(val)) {
@@ -306,9 +342,12 @@ const formatter = (format, val, options) => {
 };
 
 // formats can be either an array of formats (of equal length to vals) or one format one which will be applied to all values
-const list_formatter = (formats, vals) =>
-  _.map(vals, (value, ix) =>
-    !_.isArray(formats)
+const list_formatter = (
+  formats: string | string[],
+  vals: (string | number)[]
+) =>
+  _.map(vals, (value, ix: number) =>
+    _.isArray(formats)
       ? formatter(formats[ix], value)
       : formatter(formats, value)
   );
@@ -318,11 +357,12 @@ const formats = _.chain(types_to_format)
   .flatMap((formatter_key) => [
     [
       formatter_key,
-      (val, options = {}) => formatter(formatter_key, val, options),
+      (val: generic_value, options = {}) =>
+        formatter(formatter_key, val, options),
     ],
     [
       `${formatter_key}_raw`,
-      (val, options = {}) =>
+      (val: generic_value, options = {}) =>
         formatter(formatter_key, val, { ...options, raw: true }),
     ],
   ])
@@ -331,7 +371,7 @@ const formats = _.chain(types_to_format)
 
 // the distinction of formatter vs list_formatter vs formats and how they deal with values vs lists of values is very tedious,
 // I think this whole setup would be more usable if all formatters were standalone utils like this func. That cleanup's a TODO
-const array_to_grammatical_list = (items) => {
+const array_to_grammatical_list = (items: string[]) => {
   const and_et = {
     en: "and",
     fr: "et",

@@ -10,7 +10,7 @@ import {
   TagCloud,
 } from "src/components/index.js";
 
-import { tertiaryColor } from "src/core/color_defs.js";
+import { tertiaryColor } from "src/core/color_defs.ts";
 import { Table } from "src/core/TableClass.js";
 
 import { SelectAllControl } from "src/charts/legends/index.js";

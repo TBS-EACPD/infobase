@@ -16,7 +16,7 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconCopyLink } from "src/icons/icons.js";
+import { IconCopyLink } from "src/icons/icons.tsx";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
 

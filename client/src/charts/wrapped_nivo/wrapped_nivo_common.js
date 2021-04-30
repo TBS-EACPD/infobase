@@ -8,18 +8,18 @@ import {
   StatelessModal,
 } from "src/components/index.js";
 
-import { breakpoints } from "src/core/breakpoint_defs.js";
+import { breakpoints } from "src/core/breakpoint_defs.ts";
 import {
   secondaryColor,
   backgroundColor,
   textColor,
-} from "src/core/color_defs.js";
-import { is_IE } from "src/core/feature_detection.js";
-import { formats } from "src/core/format.js";
+} from "src/core/color_defs.ts";
+import { is_IE } from "src/core/feature_detection.ts";
+import { formats } from "src/core/format.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { get_formatter, infobase_colors_smart } from "src/charts/shared.js";
-import { IconTable } from "src/icons/icons.js";
+import { IconTable } from "src/icons/icons.tsx";
 
 import graph_text from "./wrapped_nivo_common.yaml";
 import "./wrapped_nivo_common.scss";
