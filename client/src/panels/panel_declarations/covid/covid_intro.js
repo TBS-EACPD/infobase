@@ -4,12 +4,12 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
+import { TabLoadingSpinner } from "src/components/index.js";
+
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import { query_gov_covid_summaries } from "src/models/covid/queries.js";
 
 import { Subject } from "src/models/subject.js";
-
-import { TabLoadingSpinner } from "src/components";
 
 import { get_source_links } from "src/metadata/data_sources.js";
 

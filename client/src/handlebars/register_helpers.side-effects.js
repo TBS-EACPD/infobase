@@ -2,7 +2,7 @@ import Handlebars from "handlebars/dist/cjs/handlebars.js";
 import _ from "lodash";
 
 import React from "react";
-import ReactDOMServer from "react-dom/server";
+import ReactDOMServer from "react-dom/server.browser.js";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 

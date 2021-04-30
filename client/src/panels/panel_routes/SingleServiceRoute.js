@@ -12,8 +12,8 @@ import {
   SpinnerWrapper,
 } from "src/components/index.js";
 
-import { Service } from "src/models/services";
-import { Subject } from "src/models/subject";
+import { Service } from "src/models/services.js";
+import { Subject } from "src/models/subject.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { StandardRouteContainer } from "src/core/NavComponents.js";

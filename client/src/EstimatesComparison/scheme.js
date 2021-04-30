@@ -19,7 +19,7 @@ import {
   bound,
 } from "src/general_utils.js";
 
-import EstimatesExplorerComponent from "./EstimatesExplorerComponent";
+import EstimatesExplorerComponent from "./EstimatesExplorerComponent.js";
 import {
   text_maker,
   TM,

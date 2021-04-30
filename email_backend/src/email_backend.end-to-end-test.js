@@ -73,12 +73,12 @@ nodemailer.createTransport.mockImplementation((transport_config) => {
 });
 
 // not going to run a db for these end to end tests, mock away attempts to use it
-jest.mock("./db_utils");
+jest.mock("./db_utils/index.js");
 import {
   connect_db,
   get_db_connection_status,
   log_email_and_meta_to_db,
-} from "./db_utils";
+} from "./db_utils/index.js";
 connect_db.mockImplementation(() => Promise.resolve());
 get_db_connection_status.mockImplementation(() => "connected");
 const mock_log_email_and_meta_to_db = log_email_and_meta_to_db.mockImplementation(

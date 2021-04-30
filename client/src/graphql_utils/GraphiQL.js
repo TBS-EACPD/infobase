@@ -4,7 +4,7 @@
 import fetch from "isomorphic-fetch";
 import React from "react";
 
-import GraphiQL from "graphiql";
+import GraphiQL from "graphiql/dist/index.js";
 
 import _ from "lodash";
 

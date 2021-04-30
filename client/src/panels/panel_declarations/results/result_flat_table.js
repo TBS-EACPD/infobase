@@ -23,7 +23,7 @@ import { toggle_list } from "src/general_utils.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";
 import { get_source_links } from "src/metadata/data_sources.js";
 
-import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
+import IndicatorDisplayPanel from "./IndicatorDisplayPanel.js";
 
 import { StatusIconTable, large_status_icons } from "./result_components.js";
 

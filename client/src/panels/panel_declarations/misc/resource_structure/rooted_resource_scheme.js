@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
