@@ -16,7 +16,7 @@ import {
 import { CheckBox } from "./CheckBox/CheckBox.js";
 import { create_text_maker_component } from "./misc_util_components.js";
 
-import { SpinnerWrapper } from "./SpinnerWrapper";
+import { SpinnerWrapper } from "./SpinnerWrapper.js";
 
 import text from "./EmailFrontend.yaml";
 

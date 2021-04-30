@@ -1,6 +1,5 @@
+import _ from "lodash";
 import React from "react";
-
-import { IconGrid } from "./IconGrid.js";
 
 import {
   IconHTML,
@@ -13,6 +12,8 @@ import {
   IconGraphQL,
   IconBaselineCloud,
 } from "src/icons/icons.js";
+
+import { IconGrid } from "./IconGrid.js";
 
 export default {
   title: "IconGrid",

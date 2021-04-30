@@ -3,7 +3,7 @@ import {
   ApolloClient,
   graphql as apollo_connect,
 } from "@apollo/client";
-import { BatchHttpLink } from "@apollo/client/link/batch-http";
+import { BatchHttpLink } from "@apollo/client/link/batch-http/index.js";
 
 import _ from "lodash";
 import React from "react";

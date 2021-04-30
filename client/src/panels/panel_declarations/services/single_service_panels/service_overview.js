@@ -7,7 +7,7 @@ import {
   available_icons,
   available_keys,
   delivery_channels_keys,
-} from "src/panels/panel_declarations/services/shared";
+} from "src/panels/panel_declarations/services/shared.js";
 
 import {
   DisplayTable,

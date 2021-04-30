@@ -1,4 +1,4 @@
-const index_lang_lookups = {
+export const index_lang_lookups = {
   open_data_text: {
     en:
       "If you wish to leave JavaScript turned off, you can find all of the GC InfoBase's data on open data through the following links.",
@@ -162,6 +162,3 @@ const index_lang_lookups = {
     fr: "Version graphique",
   },
 };
-
-// Used by copy_static_asset, node only supports commonjs syntax
-module.exports = { index_lang_lookups };

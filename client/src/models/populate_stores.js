@@ -9,7 +9,7 @@ import { get_static_url, make_request } from "src/request_utils.js";
 import { populate_global_footnotes } from "./footnotes/populate_footnotes.js";
 import { GlossaryEntry } from "./glossary.js";
 import { Subject } from "./subject.js";
-import { trivial_text_maker } from "./text";
+import { trivial_text_maker } from "./text.js";
 
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
