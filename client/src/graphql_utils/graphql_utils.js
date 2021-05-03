@@ -1,9 +1,9 @@
 import {
-  createHttpLink,
   InMemoryCache,
   ApolloClient,
   graphql as apollo_connect,
 } from "@apollo/client";
+import { BatchHttpLink } from "@apollo/client/link/batch-http";
 
 import _ from "lodash";
 import React from "react";
@@ -75,15 +75,18 @@ let client = null;
 export function get_client() {
   if (!client) {
     client = new ApolloClient({
-      link: createHttpLink({
+      link: new BatchHttpLink({
         uri: prod_api_url, // query_length_tolerant_fetch replaces the uri on the fly, switches to appropriate local uri in dev
         fetch: query_length_tolerant_fetch,
       }),
       cache: new InMemoryCache({
         typePolicies: {
+          // keyfields: [] is for singletons
+          // merge: true is for denormalized "namespacing" fields
           Root: {
             keyFields: [],
           },
+          ServiceSummary: { merge: true },
         },
       }),
       defaultOptions: {
