@@ -234,7 +234,7 @@ export default function ({ models, loaders }) {
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
       service_summary: ({ org_id }) => ({
-        id: `Dept:${org_id}`,
+        id: `Org:${org_id}`,
         service_general_stats: service_general_stats_for_dept.load(org_id),
         service_type_summary: service_types_summary_for_dept.load(org_id),
         service_digital_status_summary: service_digital_status_summary_for_dept.load(
