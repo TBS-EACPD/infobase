@@ -66,8 +66,7 @@
         ]          
       }
     ],
-    "import/no-commonjs": 2,
-    "import/extensions": ["error", "always"]
+    "import/no-commonjs": 2
   },
   "settings": {
     "import/resolver":{
