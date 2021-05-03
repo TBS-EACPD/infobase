@@ -60,6 +60,7 @@ const PrivacyStatement = retrying_react_lazy(() =>
   import("src/PrivacyStatement/PrivacyStatement.js")
 );
 const TextDiff = retrying_react_lazy(() => import("src/TextDiff/TextDiff.js"));
+const TreeMap = retrying_react_lazy(() => import("src/TreeMap/TreeMap.js"));
 const IsolatedPanel = retrying_react_lazy(() =>
   import("src/panels/panel_routes/IsolatedPanel.js")
 );
@@ -213,6 +214,12 @@ export class App extends React.Component {
                   path="/graphiql/:encoded_query?/:encoded_variables?"
                   component={GraphiQL}
                 />
+                {!is_a11y_mode && (
+                  <Route
+                    path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
+                    component={TreeMap}
+                  />
+                )}
                 <Route path="/survey" component={Survey} />
                 {is_a11y_mode && (
                   <Route
