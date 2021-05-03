@@ -249,6 +249,7 @@ const get_summary_query = (query_options) => {
     root(lang: $lang) {
       ${query_by_level[subject.level]} {
         service_summary {
+          id
           service_general_stats {
             number_of_services
           }  

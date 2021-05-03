@@ -86,7 +86,6 @@ export function get_client() {
           Root: {
             keyFields: [],
           },
-          ServiceSummary: { merge: true },
         },
       }),
       defaultOptions: {
