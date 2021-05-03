@@ -1,22 +1,44 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React from "react";
+import React, { BaseSyntheticEvent } from "react";
 
-import "./DropdownMenu.scss";
 import { trivial_text_maker } from "src/models/text";
 
-export class DropdownMenu extends React.Component {
-  constructor(props) {
+import "./DropdownMenu.scss";
+
+interface DropdownMenuProps {
+  dropdown_content: React.ReactNode;
+  opened_button_class_name: string;
+  closed_button_class_name: string;
+  dropdown_trigger_txt: React.ReactNode | string;
+  dropdown_content_class_name?: string;
+  button_description?: string;
+  dropdown_a11y_txt?: string;
+}
+
+type DropdownMenuState = {
+  is_open: boolean;
+};
+
+export class DropdownMenu extends React.Component<
+  DropdownMenuProps,
+  DropdownMenuState
+> {
+  dropdown_ref = React.createRef<HTMLDivElement>();
+  toggle_dropdown_button = React.createRef<HTMLDivElement>();
+  dropdown_area = React.createRef<HTMLDivElement>();
+
+  constructor(props: DropdownMenuProps) {
     super(props);
     this.state = {
       is_open: false,
     };
-
-    this.dropdown_ref = React.createRef();
   }
-  handleWindowClick = (e) => {
+
+  handleWindowClick = (e: MouseEvent) => {
     const { is_open } = this.state;
-    if (is_open && !this.dropdown_ref.current.contains(e.target)) {
+    const dropdown_node = this.dropdown_ref.current;
+    if (is_open && dropdown_node && !dropdown_node.contains(e.target as Node)) {
       this.setState({ is_open: false });
     }
   };
@@ -25,13 +47,18 @@ export class DropdownMenu extends React.Component {
     window.addEventListener("click", this.handleWindowClick);
   }
 
-  componentDidUpdate(prev_props, prev_state) {
+  componentDidUpdate(
+    prev_props: DropdownMenuProps,
+    prev_state: DropdownMenuState
+  ) {
     const { is_open } = this.state;
-    if (is_open && !prev_state.is_open) {
-      this.refs.dropdown_area.focus();
+    const dropdown_area_node = this.dropdown_area.current;
+    if (is_open && !prev_state.is_open && dropdown_area_node) {
+      dropdown_area_node.focus();
     }
   }
-  toggle_dropdown = (e) => {
+  toggle_dropdown = (e: BaseSyntheticEvent) => {
+    console.log(e);
     if (!this.state.is_open) {
       e.stopPropagation();
     }
@@ -40,7 +67,10 @@ export class DropdownMenu extends React.Component {
         return { is_open: !prev_state.is_open };
       },
       () => {
-        !this.state.is_open && this.refs.toggle_dropdown_button.focus();
+        const toggle_dropdown_button_node = this.toggle_dropdown_button.current;
+        if (!this.state.is_open && toggle_dropdown_button_node) {
+          toggle_dropdown_button_node.focus();
+        }
       }
     );
   };
@@ -58,7 +88,9 @@ export class DropdownMenu extends React.Component {
 
     const aria_label = dropdown_a11y_txt
       ? dropdown_a11y_txt
-      : _.isString(dropdown_trigger_txt) && dropdown_trigger_txt;
+      : _.isString(dropdown_trigger_txt)
+      ? dropdown_trigger_txt
+      : undefined;
 
     return (
       <div
