@@ -3,7 +3,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { SmartDisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index.js";
 
 import {
   textColor,

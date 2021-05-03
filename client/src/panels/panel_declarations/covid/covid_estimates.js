@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   TabbedContent,
   TabLoadingSpinner,
-  SmartDisplayTable,
+  DisplayTable,
 } from "src/components/index.js";
 
 import {
@@ -361,7 +361,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           className="medium-panel-text"
         />
         <ToggleVoteStat />
-        <SmartDisplayTable
+        <DisplayTable
           data={_.map(pre_sorted_dept_data, (row) =>
             _.pick(row, _.keys(column_configs))
           )}
@@ -462,7 +462,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           className="medium-panel-text"
         />
         <ToggleVoteStat />
-        <SmartDisplayTable
+        <DisplayTable
           data={_.map(pre_sorted_data, (row) =>
             _.pick(row, _.keys(column_configs))
           )}

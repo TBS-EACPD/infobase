@@ -10,7 +10,7 @@ import {
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
 import {
-  SmartDisplayTable,
+  DisplayTable,
   default_dept_name_sort_func,
 } from "src/components/index.js";
 

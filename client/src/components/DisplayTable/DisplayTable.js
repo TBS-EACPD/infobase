@@ -623,7 +623,7 @@ class _DisplayTable extends React.Component {
     );
   }
 }
-DisplayTable.defaultProps = {
+_DisplayTable.defaultProps = {
   page_size_increment: 100,
   enable_pagination: true,
   page_size_num_options_max: 5,
@@ -648,11 +648,11 @@ export class DisplayTable extends React.Component {
       })
     );
     return (
-      <DisplayTable
+      <_DisplayTable
         {...this.props}
         column_configs={smart_column_configs}
         enable_pagination={
-          _.size(data) > DisplayTable.defaultProps.page_size_increment
+          _.size(data) > _DisplayTable.defaultProps.page_size_increment
         }
       />
     );

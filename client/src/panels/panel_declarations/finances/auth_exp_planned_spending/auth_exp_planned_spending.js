@@ -10,6 +10,8 @@ import {
   create_text_maker_component,
   Details,
   GraphOverlay,
+  RadioButtons,
+  DisplayTable,
 } from "src/components/index.js";
 
 import FootNote from "src/models/footnotes/footnotes.js";
@@ -26,6 +28,7 @@ import {
 } from "src/core/color_defs.ts";
 import { newIBCategoryColors } from "src/core/color_schemes.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { formats } from "src/core/format.ts";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";

@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
+import { DisplayTable, GraphOverlay } from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.ts";
 import { run_template } from "src/models/text.js";

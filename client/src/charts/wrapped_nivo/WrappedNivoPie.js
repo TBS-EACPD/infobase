@@ -4,7 +4,7 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { Format, SmartDisplayTable } from "src/components/index.js";
+import { Format, DisplayTable } from "src/components/index.js";
 
 import { newIBCategoryColors } from "src/core/color_schemes.ts";
 import { formats } from "src/core/format.ts";

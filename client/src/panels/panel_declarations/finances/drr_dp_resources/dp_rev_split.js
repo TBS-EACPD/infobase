@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   create_text_maker_component,
   Format,
-  SmartDisplayTable,
+  DisplayTable,
 } from "src/components/index.js";
 
 import { run_template } from "src/models/text.js";
@@ -136,7 +136,7 @@ export const declare_dp_rev_split_panel = () =>
 
         return (
           <InfographicPanel {...{ title, footnotes, sources, glossary_keys }}>
-            <SmartDisplayTable
+            <DisplayTable
               table_name={text_maker("dp_rev_split_title")}
               data={table_data}
               column_configs={column_configs}

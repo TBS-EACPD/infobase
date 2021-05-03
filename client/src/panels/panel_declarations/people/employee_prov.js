@@ -11,7 +11,7 @@ import {
 
 import {
   create_text_maker_component,
-  SmartDisplayTable,
+  DisplayTable,
 } from "src/components/index.js";
 
 import { businessConstants } from "src/models/businessConstants.ts";

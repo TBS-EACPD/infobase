@@ -8,7 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   create_text_maker_component,
   default_dept_name_sort_func,
-  SmartDisplayTable,
+  DisplayTable,
 } from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";

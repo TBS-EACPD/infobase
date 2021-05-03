@@ -8,7 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   TabbedContent,
   TabLoadingSpinner,
-  SmartDisplayTable,
+  DisplayTable,
 } from "src/components/index.js";
 
 import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
@@ -221,7 +221,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           className="medium-panel-text"
         />
         <ToggleVoteStat />
-        <SmartDisplayTable
+        <DisplayTable
           data={pre_sorted_rows}
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
@@ -284,7 +284,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           className="medium-panel-text"
         />
         <ToggleVoteStat />
-        <SmartDisplayTable
+        <DisplayTable
           data={pre_sorted_rows_with_measure_names}
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
