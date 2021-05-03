@@ -58,7 +58,6 @@ export class DropdownMenu extends React.Component<
     }
   }
   toggle_dropdown = (e: BaseSyntheticEvent) => {
-    console.log(e);
     if (!this.state.is_open) {
       e.stopPropagation();
     }
