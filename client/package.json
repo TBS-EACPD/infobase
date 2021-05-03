@@ -129,6 +129,7 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
+    "@babel/preset-typescript": "^7.13.0",
     "@storybook/addon-a11y": "^6.2",
     "@storybook/addon-actions": "^6.2",
     "@storybook/addon-console": "^1.2.3",
