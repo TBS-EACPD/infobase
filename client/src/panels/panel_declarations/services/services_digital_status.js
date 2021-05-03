@@ -41,6 +41,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     subject,
     query_fragment: `
     service_digital_status_summary {
+      id
       key_desc
       key
       can_online

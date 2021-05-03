@@ -248,8 +248,11 @@ const get_summary_query = (query_options) => {
   query($lang: String!) {
     root(lang: $lang) {
       ${query_by_level[subject.level]} {
+        id
         service_summary {
+          id
           service_general_stats {
+            id
             number_of_services
           }  
           ${query_fragment}
