@@ -13,7 +13,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   create_text_maker_component,
   Select,
-  SmartDisplayTable,
+  DisplayTable,
   GraphOverlay,
 } from "src/components/index.js";
 

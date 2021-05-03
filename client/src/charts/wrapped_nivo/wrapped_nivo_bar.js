@@ -3,7 +3,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import _ from "lodash";
 import React from "react";
 
-import { SmartDisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index.js";
 
 import { textColor } from "src/core/color_defs.ts";
 

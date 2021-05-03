@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 
 import MediaQuery from "react-responsive";
 
-import { SmartDisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.ts";
 

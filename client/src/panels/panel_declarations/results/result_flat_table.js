@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import {
   SpinnerWrapper,
-  SmartDisplayTable,
+  DisplayTable,
   sort_func_template,
   ModalButton,
 } from "src/components/index.js";

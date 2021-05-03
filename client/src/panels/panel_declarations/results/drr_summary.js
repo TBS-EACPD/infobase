@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { SmartDisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index.js";
 
 import * as Results from "src/models/results.js";
 

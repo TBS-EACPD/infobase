@@ -8,7 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import {
   create_text_maker_component,
-  SmartDisplayTable,
+  DisplayTable,
   GraphOverlay,
 } from "src/components/index.js";
 
