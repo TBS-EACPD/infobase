@@ -95,6 +95,13 @@ home_diff_text:
   en: Compare text portions of indicators between the most recent two departmental plans
   fr: Comparer entre elles des portions de texte d’indicateurs dans les deux plans ministériels les plus récents
 
+treemap_title:
+  en: Treemap Explorer
+  fr: Carte proportionelle
+treemap_text:
+  en: Compare organizations by how much they spend and how many people they employ
+  fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
+
 
 ## Featured content section
 featured_data_title:
