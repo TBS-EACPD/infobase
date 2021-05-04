@@ -21,7 +21,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
   const { loading, data } = useServices({
     subject,
-    service_fragments: `
+    query_fragments: `
     name
     id
     org_id

@@ -225,13 +225,13 @@ export const api_load_has_services = (subject) => {
     });
 };
 const get_services_query = (query_options) => {
-  const { subject, service_fragments } = query_options;
+  const { subject, query_fragments } = query_options;
   const query_lookup_by_subject_level = {
     gov: all_services_query,
     dept: dept_services_query,
     program: program_services_query,
   };
-  return query_lookup_by_subject_level[subject.level](service_fragments);
+  return query_lookup_by_subject_level[subject.level](query_fragments);
 };
 
 const get_query_appropirate_level = (subject) =>

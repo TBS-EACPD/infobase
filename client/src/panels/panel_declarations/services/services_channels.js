@@ -35,7 +35,7 @@ const colors = infobase_colors();
 const ServicesChannelsPanel = ({ subject }) => {
   const { loading, data } = useServices({
     subject,
-    service_fragments: `
+    query_fragments: `
     id
     name
     ${delivery_channels_query_fragment}
