@@ -8,7 +8,7 @@ import {
   sha,
   previous_sha,
   build_date,
-} from "src/core/injected_build_constants";
+} from "src/core/injected_build_constants.ts";
 
 import { IconGitHub } from "src/icons/icons.js";
 

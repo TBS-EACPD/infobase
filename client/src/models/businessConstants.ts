@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 interface BusinessConceptTextValue {
   text: string;

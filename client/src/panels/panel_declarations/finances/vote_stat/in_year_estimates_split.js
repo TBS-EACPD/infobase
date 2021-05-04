@@ -8,7 +8,7 @@ import {
   Col,
 } from "src/panels/panel_declarations/InfographicPanel.js";
 
-import { businessConstants } from "src/models/businessConstants";
+import { businessConstants } from "src/models/businessConstants.ts";
 
 import {
   highlightColor,
@@ -16,7 +16,7 @@ import {
   textColor,
 } from "src/core/color_defs.js";
 import { formats } from "src/core/format.js";
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
 

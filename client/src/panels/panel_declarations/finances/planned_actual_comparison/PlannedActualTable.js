@@ -2,7 +2,7 @@ import React from "react";
 
 import { Format, TM } from "src/components/index.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 export const PlannedActualTable = ({
   planned_ftes,

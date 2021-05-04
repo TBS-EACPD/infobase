@@ -76,7 +76,7 @@ Our (un)official (and somewhat incomplete) rules for code style:
 * Globals
   * Currently, all app globals are set as a constant value which is injected by `WebPack`. We don't do this in general, preferring modular code.
   * If you really think there is a valid reason to set a global, it must be injected from `build_code/webpack_common.js` inside the `DefinePlugin` function. From there, a runtime constant must be created and exported from `src/core/inject_build_constants.ts`
-  * In order to access the globals, you can import the constants from `src/core/inject_build_constants.ts` like so: `import { const_name } from "src/core/injected_build_constants"`
+  * In order to access the globals, you can import the constants from `src/core/inject_build_constants.ts` like so: `import { const_name } from "src/core/injected_build_constants.ts"`
   * Since these globals are injected during runtime, they are all immutable, not being able to be store new data
 
 

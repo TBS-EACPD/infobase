@@ -15,7 +15,7 @@ import { run_template } from "src/models/text.js";
 
 import { year_templates } from "src/models/years.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 import { Table } from "src/core/TableClass.js";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";

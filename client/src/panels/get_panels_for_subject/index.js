@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { PanelRegistry } from "src/panels/PanelRegistry.js";
 
-import { is_dev } from "src/core/injected_build_constants";
+import { is_dev } from "src/core/injected_build_constants.ts";
 
 const panel_loading_promises = (subject) => {
   switch (subject.level) {

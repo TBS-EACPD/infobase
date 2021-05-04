@@ -3,7 +3,7 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { services_feature_flag } from "src/core/injected_build_constants";
+import { services_feature_flag } from "src/core/injected_build_constants.ts";
 
 import {
   IconInfo,

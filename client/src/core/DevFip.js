@@ -1,6 +1,6 @@
 import React from "react";
 
-import { is_dev_link } from "src/core/injected_build_constants";
+import { is_dev_link } from "src/core/injected_build_constants.ts";
 
 export class DevFip extends React.Component {
   componentDidMount() {

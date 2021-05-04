@@ -7,7 +7,7 @@ import { SpinnerWrapper, DlItem, CheckBox } from "src/components/index.js";
 
 import { Subject } from "src/models/subject.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

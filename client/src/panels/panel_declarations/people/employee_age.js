@@ -14,7 +14,7 @@ import {
   GraphOverlay,
 } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants";
+import { businessConstants } from "src/models/businessConstants.ts";
 import { Subject } from "src/models/subject.js";
 import { run_template } from "src/models/text.js";
 
@@ -22,7 +22,7 @@ import { year_templates } from "src/models/years.js";
 
 import { formats } from "src/core/format.js";
 
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { NivoLineBarToggle } from "src/charts/wrapped_nivo/index.js";
 

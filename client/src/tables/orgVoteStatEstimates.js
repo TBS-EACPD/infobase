@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 import _ from "lodash";
 
 import * as FORMAT from "src/core/format.js";
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import {
   vote_stat_dimension,

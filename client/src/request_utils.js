@@ -1,4 +1,4 @@
-import { cdn_url, sha } from "src/core/injected_build_constants";
+import { cdn_url, sha } from "src/core/injected_build_constants.ts";
 
 //no URL should start with "./" or "/"
 export const get_static_url = (url, version_query) => {

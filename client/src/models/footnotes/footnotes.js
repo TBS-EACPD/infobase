@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { mix, staticStoreMixin } from "src/models/storeMixins.js";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
 
 const footnotes_by_id = {};
 

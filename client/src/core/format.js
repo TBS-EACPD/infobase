@@ -3,7 +3,7 @@
 //  site.scss also establishes the widths for displaying each of the data types
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 const number_formatter = {
   en: _.map(

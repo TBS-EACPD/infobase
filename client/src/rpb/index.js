@@ -16,7 +16,7 @@ import { Subject } from "src/models/subject.js";
 
 import { log_standard_event } from "src/core/analytics.js";
 import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import {
   StandardRouteContainer,

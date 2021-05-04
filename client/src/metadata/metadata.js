@@ -7,7 +7,7 @@ import {
   Panel,
 } from "src/components/index.js";
 
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import {
   StandardRouteContainer,

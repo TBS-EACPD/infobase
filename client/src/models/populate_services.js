@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import _ from "lodash";
 
 import { log_standard_event } from "src/core/analytics.js";
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 

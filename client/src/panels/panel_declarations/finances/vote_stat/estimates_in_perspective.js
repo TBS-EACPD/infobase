@@ -11,7 +11,7 @@ import FootNote from "src/models/footnotes/footnotes.js";
 
 import { Subject } from "src/models/subject.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index.js";
 

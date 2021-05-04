@@ -8,7 +8,7 @@ import { trivial_text_maker } from "src/models/text.js";
 
 import { primaryColor, backgroundColor } from "src/core/color_defs.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import "./BubbleMenu.scss";
 

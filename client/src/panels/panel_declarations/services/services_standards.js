@@ -11,7 +11,7 @@ import {
 
 import { Service } from "src/models/services.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import Gauge from "src/charts/gauge.js";
 

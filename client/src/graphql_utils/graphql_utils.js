@@ -12,13 +12,13 @@ import string_hash from "string-hash";
 
 import { log_standard_event } from "src/core/analytics.js";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
 import {
   sha,
   local_ip,
   is_dev,
   is_ci,
-} from "src/core/injected_build_constants";
+} from "src/core/injected_build_constants.ts";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 

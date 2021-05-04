@@ -8,7 +8,7 @@ import { CheckBox, DropdownMenu } from "src/components/index.js";
 import { create_text_maker } from "src/models/text.js";
 
 import { breakpoints } from "src/core/breakpoint_defs.js";
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { IconGear } from "src/icons/icons.js";
 

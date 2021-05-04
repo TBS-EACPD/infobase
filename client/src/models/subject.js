@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
 
 import { CovidMeasure } from "./covid/CovidMeasure.js";
 import { YearsWithCovidData } from "./covid/YearsWithCovidData.js";

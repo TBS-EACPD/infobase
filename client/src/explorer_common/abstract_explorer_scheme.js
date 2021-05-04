@@ -5,7 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import redux_promise_middleware from "redux-promise-middleware";
 import { createSelector } from "reselect";
 
-import { is_dev } from "src/core/injected_build_constants";
+import { is_dev } from "src/core/injected_build_constants.ts";
 
 import { cached_property, bound } from "src/general_utils.js";
 

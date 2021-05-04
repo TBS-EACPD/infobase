@@ -1,7 +1,7 @@
 import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants";
+import { businessConstants } from "src/models/businessConstants.ts";
 import { Subject } from "src/models/subject.js";
 
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools.js";

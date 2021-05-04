@@ -7,7 +7,7 @@ import {
   AlertBanner,
 } from "src/components/index.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import * as general_utils from "src/general_utils.js";
 

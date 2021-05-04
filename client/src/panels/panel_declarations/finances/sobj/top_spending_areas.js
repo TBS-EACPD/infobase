@@ -10,7 +10,7 @@ import {
 
 import { create_text_maker_component } from "src/components/index.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 import * as table_common from "src/tables/table_common.js";

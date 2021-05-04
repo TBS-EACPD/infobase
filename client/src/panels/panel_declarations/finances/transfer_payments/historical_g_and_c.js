@@ -6,13 +6,13 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { SmartDisplayTable, GraphOverlay } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants";
+import { businessConstants } from "src/models/businessConstants.ts";
 import { run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 
 import { infobase_colors } from "src/core/color_schemes.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 

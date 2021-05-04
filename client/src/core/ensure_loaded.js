@@ -18,7 +18,7 @@ import {
   api_load_services,
 } from "src/models/populate_services.js";
 
-import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
+import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.ts";
 import { Table } from "./TableClass.js";
 
 const load_tables = (table_set) =>

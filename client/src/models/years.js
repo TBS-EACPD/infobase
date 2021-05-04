@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { run_template } from "./text.js";
 
