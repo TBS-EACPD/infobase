@@ -3,7 +3,7 @@
 //  site.scss also establishes the widths for displaying each of the data types
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
 const number_formatter = {
   en: _.map(
@@ -108,7 +108,7 @@ const compact = (
 ) => {
   precision = precision || 0;
 
-  const abbrev: { [key: number]: { [key: string]: string } } = {
+  const abbrev: { [key: number]: LangDict<string> } = {
     1000000000: { en: "B", fr: "G" },
     1000000: { en: "M", fr: "M" },
     1000: { en: "K", fr: "k" },
@@ -168,7 +168,7 @@ const compact_written = (
   // emphasizing readability.
   // specifically, small numbers are treated differently
 
-  const abbrevs: { [keys: number]: { [key: string]: string } } = {
+  const abbrevs: { [keys: number]: LangDict<string> } = {
     1000000000: { en: " billion", fr: " milliards" },
     1000000: { en: " million", fr: " millions" },
     1000: { en: " thousand", fr: " milliers" },
