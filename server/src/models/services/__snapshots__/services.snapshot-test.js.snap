@@ -1,5 +1,396 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`services data All service summary for org 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "service_summary": Object {
+          "id": "Org:326",
+          "service_digital_status_summary": Array [
+            Object {
+              "can_online": 1,
+              "cannot_online": 0,
+              "id": "dept_326_decision_digital",
+              "key": "decision_digital",
+              "key_desc": "decision_digital_desc",
+              "not_applicable": 5,
+              "subject_id": "326",
+            },
+            Object {
+              "can_online": 2,
+              "cannot_online": 1,
+              "id": "dept_326_account_reg_digital",
+              "key": "account_reg_digital",
+              "key_desc": "account_reg_digital_desc",
+              "not_applicable": 3,
+              "subject_id": "326",
+            },
+            Object {
+              "can_online": 2,
+              "cannot_online": 1,
+              "id": "dept_326_authentication",
+              "key": "authentication",
+              "key_desc": "authentication_desc",
+              "not_applicable": 3,
+              "subject_id": "326",
+            },
+            Object {
+              "can_online": 2,
+              "cannot_online": 0,
+              "id": "dept_326_issuance_digital",
+              "key": "issuance_digital",
+              "key_desc": "issuance_digital_desc",
+              "not_applicable": 4,
+              "subject_id": "326",
+            },
+            Object {
+              "can_online": 3,
+              "cannot_online": 0,
+              "id": "dept_326_application_digital",
+              "key": "application_digital",
+              "key_desc": "application_digital_desc",
+              "not_applicable": 3,
+              "subject_id": "326",
+            },
+            Object {
+              "can_online": 4,
+              "cannot_online": 0,
+              "id": "dept_326_issue_res_digital",
+              "key": "issue_res_digital",
+              "key_desc": "issue_res_digital_desc",
+              "not_applicable": 2,
+              "subject_id": "326",
+            },
+          ],
+          "service_fees_summary": Array [
+            Object {
+              "id": "326_fees",
+              "label": "service_charges_fees",
+              "subject_id": "326",
+              "value": 0,
+            },
+            Object {
+              "id": "326_no_fees",
+              "label": "service_does_not_charge_fees",
+              "subject_id": "326",
+              "value": 6,
+            },
+          ],
+          "service_general_stats": Object {
+            "id": "326",
+            "number_of_services": 6,
+          },
+          "service_high_volume_summary": null,
+          "service_id_methods_summary": Array [
+            Object {
+              "id": "326_uses_sin_as_identifier",
+              "label": "uses_sin_as_identifier",
+              "method": "sin",
+              "subject_id": "326",
+              "value": 0,
+            },
+            Object {
+              "id": "326_does_not_use_sin_as_identifier",
+              "label": "does_not_use_sin_as_identifier",
+              "method": "sin",
+              "subject_id": "326",
+              "value": 0,
+            },
+            Object {
+              "id": "326_sin_not_applicable",
+              "label": "sin_not_applicable",
+              "method": "sin",
+              "subject_id": "326",
+              "value": 6,
+            },
+            Object {
+              "id": "326_uses_cra_as_identifier",
+              "label": "uses_cra_as_identifier",
+              "method": "cra",
+              "subject_id": "326",
+              "value": 0,
+            },
+            Object {
+              "id": "326_does_not_use_cra_as_identifier",
+              "label": "does_not_use_cra_as_identifier",
+              "method": "cra",
+              "subject_id": "326",
+              "value": 0,
+            },
+            Object {
+              "id": "326_cra_not_applicable",
+              "label": "cra_not_applicable",
+              "method": "cra",
+              "subject_id": "326",
+              "value": 6,
+            },
+          ],
+          "service_standards_summary": Array [
+            Object {
+              "id": "326_standards_summary",
+              "met_standards_count": 4,
+              "services_w_standards_count": 1,
+              "standards_count": 4,
+              "subject_id": "326",
+            },
+          ],
+          "service_type_summary": Array [
+            Object {
+              "id": "326_hr_2",
+              "label": "Human Resources Management",
+              "subject_id": "326",
+              "value": 2,
+            },
+            Object {
+              "id": "326_comm_1",
+              "label": "Communications Services",
+              "subject_id": "326",
+              "value": 1,
+            },
+            Object {
+              "id": "326_adv_1",
+              "label": "Advisory Services",
+              "subject_id": "326",
+              "value": 1,
+            },
+            Object {
+              "id": "326_mgnt_1",
+              "label": "Management and Oversight Services",
+              "subject_id": "326",
+              "value": 1,
+            },
+            Object {
+              "id": "326_resource_1",
+              "label": "Resources",
+              "subject_id": "326",
+              "value": 1,
+            },
+            Object {
+              "id": "326_reg_1",
+              "label": "Regulatory Compliance and Enforcement",
+              "subject_id": "326",
+              "value": 1,
+            },
+            Object {
+              "id": "326_its_1",
+              "label": "Information Technology Services",
+              "subject_id": "326",
+              "value": 1,
+            },
+          ],
+          "top_services_application_vol_summary": Array [
+            Object {
+              "id": "326_1350",
+              "name": "Classification Accreditation",
+              "service_id": "1350",
+              "subject_id": "326",
+              "value": 13,
+            },
+            Object {
+              "id": "326_1349",
+              "name": "Open Government Database and Information Requests",
+              "service_id": "1349",
+              "subject_id": "326",
+              "value": 92,
+            },
+            Object {
+              "id": "326_1094",
+              "name": "People Management Information/Data Request Service",
+              "service_id": "1094",
+              "subject_id": "326",
+              "value": 420,
+            },
+            Object {
+              "id": "326_1348",
+              "name": "Treasury Board of Canada Secretariat’s Claims Office",
+              "service_id": "1348",
+              "subject_id": "326",
+              "value": 2014,
+            },
+            Object {
+              "id": "326_1297",
+              "name": "ATIP Online Request Service",
+              "service_id": "1297",
+              "subject_id": "326",
+              "value": 3289,
+            },
+            Object {
+              "id": "326_1114",
+              "name": "Public Enquiries",
+              "service_id": "1114",
+              "subject_id": "326",
+              "value": 5359,
+            },
+          ],
+          "top_services_website_visits_summary": null,
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`services data All service summary for program 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "program": Object {
+        "service_summary": Object {
+          "id": null,
+          "service_digital_status_summary": Array [
+            Object {
+              "can_online": 0,
+              "cannot_online": 0,
+              "id": "program_TBC-BXB01_account_reg_digital",
+              "key": "account_reg_digital",
+              "key_desc": "account_reg_digital_desc",
+              "not_applicable": 1,
+              "subject_id": "TBC-BXB01",
+            },
+            Object {
+              "can_online": 1,
+              "cannot_online": 0,
+              "id": "program_TBC-BXB01_authentication",
+              "key": "authentication",
+              "key_desc": "authentication_desc",
+              "not_applicable": 0,
+              "subject_id": "TBC-BXB01",
+            },
+            Object {
+              "can_online": 1,
+              "cannot_online": 0,
+              "id": "program_TBC-BXB01_application_digital",
+              "key": "application_digital",
+              "key_desc": "application_digital_desc",
+              "not_applicable": 0,
+              "subject_id": "TBC-BXB01",
+            },
+            Object {
+              "can_online": 1,
+              "cannot_online": 0,
+              "id": "program_TBC-BXB01_decision_digital",
+              "key": "decision_digital",
+              "key_desc": "decision_digital_desc",
+              "not_applicable": 0,
+              "subject_id": "TBC-BXB01",
+            },
+            Object {
+              "can_online": 1,
+              "cannot_online": 0,
+              "id": "program_TBC-BXB01_issuance_digital",
+              "key": "issuance_digital",
+              "key_desc": "issuance_digital_desc",
+              "not_applicable": 0,
+              "subject_id": "TBC-BXB01",
+            },
+            Object {
+              "can_online": 1,
+              "cannot_online": 0,
+              "id": "program_TBC-BXB01_issue_res_digital",
+              "key": "issue_res_digital",
+              "key_desc": "issue_res_digital_desc",
+              "not_applicable": 0,
+              "subject_id": "TBC-BXB01",
+            },
+          ],
+          "service_fees_summary": Array [
+            Object {
+              "id": "TBC-BXB01_fees",
+              "label": "service_charges_fees",
+              "subject_id": "TBC-BXB01",
+              "value": 0,
+            },
+            Object {
+              "id": "TBC-BXB01_no_fees",
+              "label": "service_does_not_charge_fees",
+              "subject_id": "TBC-BXB01",
+              "value": 1,
+            },
+          ],
+          "service_general_stats": Object {
+            "id": "TBC-BXB01",
+            "number_of_services": 1,
+          },
+          "service_high_volume_summary": null,
+          "service_id_methods_summary": Array [
+            Object {
+              "id": "TBC-BXB01_uses_sin_as_identifier",
+              "label": "uses_sin_as_identifier",
+              "method": "sin",
+              "subject_id": "TBC-BXB01",
+              "value": 0,
+            },
+            Object {
+              "id": "TBC-BXB01_does_not_use_sin_as_identifier",
+              "label": "does_not_use_sin_as_identifier",
+              "method": "sin",
+              "subject_id": "TBC-BXB01",
+              "value": 0,
+            },
+            Object {
+              "id": "TBC-BXB01_sin_not_applicable",
+              "label": "sin_not_applicable",
+              "method": "sin",
+              "subject_id": "TBC-BXB01",
+              "value": 1,
+            },
+            Object {
+              "id": "TBC-BXB01_uses_cra_as_identifier",
+              "label": "uses_cra_as_identifier",
+              "method": "cra",
+              "subject_id": "TBC-BXB01",
+              "value": 0,
+            },
+            Object {
+              "id": "TBC-BXB01_does_not_use_cra_as_identifier",
+              "label": "does_not_use_cra_as_identifier",
+              "method": "cra",
+              "subject_id": "TBC-BXB01",
+              "value": 0,
+            },
+            Object {
+              "id": "TBC-BXB01_cra_not_applicable",
+              "label": "cra_not_applicable",
+              "method": "cra",
+              "subject_id": "TBC-BXB01",
+              "value": 1,
+            },
+          ],
+          "service_standards_summary": Array [
+            Object {
+              "id": "TBC-BXB01_standards_summary",
+              "met_standards_count": 4,
+              "services_w_standards_count": 1,
+              "standards_count": 4,
+              "subject_id": "TBC-BXB01",
+            },
+          ],
+          "service_type_summary": Array [
+            Object {
+              "id": "TBC-BXB01_adv_1",
+              "label": "Advisory Services",
+              "subject_id": "TBC-BXB01",
+              "value": 1,
+            },
+          ],
+          "top_services_application_vol_summary": Array [
+            Object {
+              "id": "TBC-BXB01_1348",
+              "name": "Treasury Board of Canada Secretariat’s Claims Office",
+              "service_id": "1348",
+              "subject_id": "TBC-BXB01",
+              "value": 2014,
+            },
+          ],
+          "top_services_website_visits_summary": null,
+        },
+      },
+    },
+  },
+}
+`;
+
 exports[`services data All services and standards for org 1`] = `
 Object {
   "data": Object {
@@ -7,13 +398,15 @@ Object {
       "org": Object {
         "services": Array [
           Object {
-            "account_reg_digital_status": false,
-            "application_digital_status": true,
-            "authentication_status": false,
+            "account_reg_digital_status": null,
+            "application_digital_status": null,
+            "authentication_status": null,
             "collects_fees": false,
             "decision_digital_status": null,
-            "description": "This service enables institutions subject to the Access to Information Act and the Privacy Act to receive and respond to Access to Information and Privacy (ATIP) requests, including fees collected electronically (where applicable).",
-            "digital_enablement_comment": "This service does not use the decision interaction point.",
+            "description": "The Office of the Chief Human Resources Officer (OCHRO) issues accreditation to classification advisors in the Core Public Administration (CPA) who have completed the Organization and Classification (OC) learning program as stated in the OC learning curriculum and in accordance with section 6.2.3 of the Policy on Classification.   
+
+The classification accreditation responds to the requirement of the Policy on Classification that allows the Deputy Head to sub-delegate the authority to make classification decision only to accredited advisors. The OCHRO provides advice on the assessment of accreditation applications and assesses the applications once completed.",
+            "digital_enablement_comment": "The following client interaction points are available through email or online (GConnex): requests for advice and guidance; accreditation submissions; follow-up questions and actions; and issuance of accreditation certificates.",
             "feedback_channels": Array [
               "Telephone",
               "Email",
@@ -21,23 +414,27 @@ Object {
               "Online",
             ],
             "first_active_year": "2018",
-            "id": "1297",
+            "id": "1350",
             "is_active": true,
-            "issuance_digital_status": true,
-            "issue_res_digital_status": true,
+            "issuance_digital_status": null,
+            "issue_res_digital_status": null,
             "last_active_year": null,
-            "last_gender_analysis": "2017.0",
-            "name": "ATIP Online Request Service",
+            "last_gender_analysis": null,
+            "name": "Classification Accreditation",
             "org": Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
             "program_ids": Array [
-              "TBC-ISS07",
+              "TBC-BXC01",
+              "TBC-ISS04",
             ],
             "programs": Array [
               Object {
-                "name": "Information Technology Services - Treasury Board Secretariat",
+                "name": "Compensation and Labour Relations",
+              },
+              Object {
+                "name": "Human Resources Management Services - Treasury Board Secretariat",
               },
             ],
             "scope": Array [
@@ -47,27 +444,26 @@ Object {
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
-                "mail_application_count": null,
-                "online_application_count": 3289,
+                "mail_application_count": 8,
+                "online_application_count": 1,
                 "online_inquiry_count": null,
-                "other_application_count": null,
+                "other_application_count": 4,
                 "phone_inquiry_count": null,
-                "service_id": "1297",
+                "service_id": "1350",
                 "service_report_comment": null,
                 "sin_collected": null,
                 "year": "2018",
               },
             ],
             "service_type": Array [
-              "Information Technology Services",
-              "Regulatory Compliance and Enforcement",
+              "Human Resources Management",
             ],
             "standards": Array [],
             "target_groups": Array [
               "Internal to Government",
             ],
             "urls": Array [
-              "https://www.canada.ca/en/treasury-board-secretariat/services/access-information-privacy/access-information/request-information.html",
+              "",
             ],
           },
           Object {
@@ -327,15 +723,15 @@ Object {
             },
             "org_id": "326",
             "program_ids": Array [
-              "TBC-BXC03",
               "TBC-ISS04",
+              "TBC-BXC03",
             ],
             "programs": Array [
               Object {
-                "name": "People Management Policies and Initiatives",
+                "name": "Human Resources Management Services - Treasury Board Secretariat",
               },
               Object {
-                "name": "Human Resources Management Services - Treasury Board Secretariat",
+                "name": "People Management Policies and Initiatives",
               },
             ],
             "scope": Array [
@@ -357,8 +753,8 @@ Object {
               },
             ],
             "service_type": Array [
-              "Management and Oversight Services",
               "Human Resources Management",
+              "Management and Oversight Services",
             ],
             "standards": Array [],
             "target_groups": Array [
@@ -433,15 +829,13 @@ Object {
             ],
           },
           Object {
-            "account_reg_digital_status": null,
-            "application_digital_status": null,
-            "authentication_status": null,
+            "account_reg_digital_status": false,
+            "application_digital_status": true,
+            "authentication_status": false,
             "collects_fees": false,
             "decision_digital_status": null,
-            "description": "The Office of the Chief Human Resources Officer (OCHRO) issues accreditation to classification advisors in the Core Public Administration (CPA) who have completed the Organization and Classification (OC) learning program as stated in the OC learning curriculum and in accordance with section 6.2.3 of the Policy on Classification.   
-
-The classification accreditation responds to the requirement of the Policy on Classification that allows the Deputy Head to sub-delegate the authority to make classification decision only to accredited advisors. The OCHRO provides advice on the assessment of accreditation applications and assesses the applications once completed.",
-            "digital_enablement_comment": "The following client interaction points are available through email or online (GConnex): requests for advice and guidance; accreditation submissions; follow-up questions and actions; and issuance of accreditation certificates.",
+            "description": "This service enables institutions subject to the Access to Information Act and the Privacy Act to receive and respond to Access to Information and Privacy (ATIP) requests, including fees collected electronically (where applicable).",
+            "digital_enablement_comment": "This service does not use the decision interaction point.",
             "feedback_channels": Array [
               "Telephone",
               "Email",
@@ -449,27 +843,23 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "Online",
             ],
             "first_active_year": "2018",
-            "id": "1350",
+            "id": "1297",
             "is_active": true,
-            "issuance_digital_status": null,
-            "issue_res_digital_status": null,
+            "issuance_digital_status": true,
+            "issue_res_digital_status": true,
             "last_active_year": null,
-            "last_gender_analysis": null,
-            "name": "Classification Accreditation",
+            "last_gender_analysis": "2017.0",
+            "name": "ATIP Online Request Service",
             "org": Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
             "program_ids": Array [
-              "TBC-BXC01",
-              "TBC-ISS04",
+              "TBC-ISS07",
             ],
             "programs": Array [
               Object {
-                "name": "Compensation and Labour Relations",
-              },
-              Object {
-                "name": "Human Resources Management Services - Treasury Board Secretariat",
+                "name": "Information Technology Services - Treasury Board Secretariat",
               },
             ],
             "scope": Array [
@@ -479,26 +869,27 @@ The classification accreditation responds to the requirement of the Policy on Cl
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
-                "mail_application_count": 8,
-                "online_application_count": 1,
+                "mail_application_count": null,
+                "online_application_count": 3289,
                 "online_inquiry_count": null,
-                "other_application_count": 4,
+                "other_application_count": null,
                 "phone_inquiry_count": null,
-                "service_id": "1350",
+                "service_id": "1297",
                 "service_report_comment": null,
                 "sin_collected": null,
                 "year": "2018",
               },
             ],
             "service_type": Array [
-              "Human Resources Management",
+              "Regulatory Compliance and Enforcement",
+              "Information Technology Services",
             ],
             "standards": Array [],
             "target_groups": Array [
               "Internal to Government",
             ],
             "urls": Array [
-              "",
+              "https://www.canada.ca/en/treasury-board-secretariat/services/access-information-privacy/access-information/request-information.html",
             ],
           },
         ],
@@ -677,6 +1068,82 @@ Object {
               "https://www.canada.ca/en/treasury-board-secretariat/topics/pay/phoenix-pay-system/phoenix.html",
             ],
           },
+        ],
+      },
+    },
+  },
+}
+`;
+
+exports[`services data Single service 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "service": Object {
+        "account_reg_digital_status": null,
+        "application_digital_status": null,
+        "authentication_status": null,
+        "collects_fees": false,
+        "decision_digital_status": null,
+        "description": "Answers queries from the general public, as well as federal government employees.",
+        "digital_enablement_comment": "This service does not use these client interaction points.",
+        "feedback_channels": Array [
+          "Other",
+        ],
+        "first_active_year": "2018",
+        "id": "1114",
+        "is_active": true,
+        "issuance_digital_status": null,
+        "issue_res_digital_status": null,
+        "last_active_year": null,
+        "last_gender_analysis": null,
+        "name": "Public Enquiries",
+        "org": Object {
+          "name": "Treasury Board of Canada Secretariat",
+        },
+        "org_id": "326",
+        "program_ids": Array [
+          "TBC-ISS02",
+        ],
+        "programs": Array [
+          Object {
+            "name": "Communications Services - Treasury Board Secretariat",
+          },
+        ],
+        "scope": Array [
+          "External Service",
+        ],
+        "service_report": Array [
+          Object {
+            "cra_business_ids_collected": null,
+            "live_application_count": null,
+            "mail_application_count": 17,
+            "online_application_count": null,
+            "online_inquiry_count": null,
+            "other_application_count": 4731,
+            "phone_inquiry_count": 611,
+            "service_id": "1114",
+            "service_report_comment": null,
+            "sin_collected": null,
+            "year": "2018",
+          },
+        ],
+        "service_type": Array [
+          "Communications Services",
+        ],
+        "standards": Array [],
+        "target_groups": Array [
+          "Economic Segments",
+          "Environmental",
+          "Foreign Entities",
+          "Non-Profit Institutions and Organizations",
+          "Persons",
+          "Provinces, Territories and Communities",
+        ],
+        "urls": Array [
+          "https://www.canada.ca/en/treasury-board-secretariat.html",
+          "https://www.canada.ca/en/treasury-board-secretariat/corporate/contact.html",
+          "https://open.canada.ca/en/forms/contact-us",
         ],
       },
     },
