@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
@@ -41,29 +41,33 @@ const ServicesChannelsPanel = ({ subject }) => {
     ${delivery_channels_query_fragment}
     `,
   });
-  const median_3_values = _.chain(data)
-    .map((service) => ({
-      id: service.id,
-      value: _.chain(delivery_channels_keys)
-        .map((key) =>
-          _.map(service.service_report, (report) => report[`${key}_count`])
+
+  const [active_services, set_active_services] = useState();
+  useEffect(() => {
+    const median_3_values = _.chain(data)
+      .map((service) => ({
+        id: service.id,
+        value: _.chain(delivery_channels_keys)
+          .map((key) =>
+            _.map(service.service_report, (report) => report[`${key}_count`])
+          )
+          .flatten()
+          .max()
+          .value(),
+      }))
+      .filter("value")
+      .sortBy("value")
+      .map("id")
+      .thru((processed_services) =>
+        _.times(3, (i) =>
+          _.nth(processed_services, _.floor(processed_services.length / 2) - i)
         )
-        .flatten()
-        .max()
-        .value(),
-    }))
-    .filter("value")
-    .sortBy("value")
-    .map("id")
-    .thru((processed_services) =>
-      _.times(3, (i) =>
-        _.nth(processed_services, _.floor(processed_services.length / 2) - i)
       )
-    )
-    .map((id) => [id, true])
-    .fromPairs()
-    .value();
-  const [active_services, set_active_services] = useState(median_3_values);
+      .map((id) => [id, true])
+      .fromPairs()
+      .value();
+    set_active_services(median_3_values);
+  }, [data]);
 
   if (loading) {
     return <SpinnerWrapper config_name="inline_panel" />;
