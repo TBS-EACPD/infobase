@@ -7,8 +7,8 @@ export const is_dev = typeof IS_DEV !== "undefined" && IS_DEV;
 
 export const is_ci = typeof IS_CI !== "undefined" && IS_CI;
 
-export const lang =
-  typeof APPLICATION_LANGUAGE !== "undefined" && APPLICATION_LANGUAGE;
+export const lang: LangType =
+  (typeof APPLICATION_LANGUAGE !== "undefined" && APPLICATION_LANGUAGE) || "en";
 
 export const long_sha = typeof SHA !== "undefined" && SHA;
 

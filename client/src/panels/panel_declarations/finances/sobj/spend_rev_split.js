@@ -12,7 +12,7 @@ import { create_text_maker_component } from "src/components/index.js";
 import { highlightColor, secondaryColor } from "src/core/color_defs.js";
 import { formats } from "src/core/format.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
 import * as table_common from "src/tables/table_common.js";

@@ -7,7 +7,7 @@ import { CountdownCircle } from "src/components/CountdownCircle.js";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import "./bootstrap_modal_exstension.scss";
 import "./FixedPopover.scss";

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import { TM } from "src/components/TextMaker.tsx";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 /*props: 
   maxChildrenHeight as an INT of pixels,

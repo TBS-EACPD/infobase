@@ -24,7 +24,7 @@ import {
   TextAbbrev,
 } from "src/components/index.js";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 

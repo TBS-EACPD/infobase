@@ -12,9 +12,9 @@ import {
   Details,
 } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants.ts";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

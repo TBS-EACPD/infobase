@@ -48,7 +48,7 @@ import {
   declare_high_application_volume_panel,
 } from "src/panels/panel_declarations/index.js";
 
-import { services_feature_flag } from "src/core/injected_build_constants.js";
+import { services_feature_flag } from "src/core/injected_build_constants.ts";
 
 export const get_gov_panels = (subject) => ({
   intro: [declare_simplographic_panel()],

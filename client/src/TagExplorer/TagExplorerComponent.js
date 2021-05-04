@@ -15,7 +15,7 @@ import { run_template } from "src/models/text.js";
 
 import { tertiaryColor, primaryColor } from "src/core/color_defs.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { Explorer } from "src/explorer_common/explorer_components.js";
 import { get_root } from "src/explorer_common/hierarchy_tools.js";

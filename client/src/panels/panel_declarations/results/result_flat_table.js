@@ -12,12 +12,12 @@ import {
   ModalButton,
 } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants.ts";
 import * as Results from "src/models/results.js";
 import { Indicator } from "src/models/results.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { toggle_list } from "src/general_utils.js";
 import { infograph_href_template } from "src/infographic/infographic_link.js";

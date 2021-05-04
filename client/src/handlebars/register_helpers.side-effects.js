@@ -10,7 +10,7 @@ import { Subject } from "src/models/subject.js";
 import { trivial_text_maker, run_template } from "src/models/text.js";
 
 import { formats, array_to_grammatical_list } from "src/core/format.js";
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { IconQuestion } from "src/icons/icons.js";
 

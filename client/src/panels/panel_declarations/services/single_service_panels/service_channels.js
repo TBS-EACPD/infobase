@@ -11,7 +11,7 @@ import {
 } from "src/components/index.js";
 
 import { infobase_colors } from "src/core/color_schemes.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
 

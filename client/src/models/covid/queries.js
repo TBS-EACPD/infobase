@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import {
   get_client,

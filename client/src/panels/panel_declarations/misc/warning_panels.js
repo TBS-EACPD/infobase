@@ -16,7 +16,7 @@ import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results.js";
 import { Subject } from "src/models/subject.js";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import text from "./warning_panels.yaml";
 

@@ -8,7 +8,7 @@ import { create_text_maker } from "src/models/text.js";
 import {
   lang,
   services_feature_flag,
-} from "src/core/injected_build_constants.js";
+} from "src/core/injected_build_constants.ts";
 
 //circular dependency hack..
 import { Table } from "src/core/TableClass.js";

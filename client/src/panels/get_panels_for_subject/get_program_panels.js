@@ -44,7 +44,7 @@ import {
 } from "src/panels/panel_declarations/index.js";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { services_feature_flag } from "src/core/injected_build_constants.js";
+import { services_feature_flag } from "src/core/injected_build_constants.ts";
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_program_panels = (subject) =>

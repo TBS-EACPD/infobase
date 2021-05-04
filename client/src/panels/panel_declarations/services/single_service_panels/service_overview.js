@@ -19,7 +19,7 @@ import { Subject } from "src/models/subject.js";
 
 import { backgroundColor } from "src/core/color_defs.js";
 import { formatter } from "src/core/format.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import Gauge from "src/charts/gauge.js";
 

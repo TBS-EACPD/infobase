@@ -8,7 +8,7 @@ import { Subject } from "src/models/subject.js";
 
 import { highlightColor } from "src/core/color_defs.js";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { IconAttentionTriangle } from "src/icons/icons.js";
 

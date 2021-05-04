@@ -1,7 +1,7 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants.ts";
 import * as Results from "src/models/results.js";
 
 import { newIBCategoryColors } from "src/core/color_schemes.js";

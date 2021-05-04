@@ -18,7 +18,7 @@ import { Subject } from "src/models/subject.js";
 
 import { log_standard_event } from "src/core/analytics.js";
 import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 import { redirect_with_msg } from "src/core/RedirectHeader.js";

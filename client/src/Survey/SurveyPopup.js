@@ -10,7 +10,7 @@ import {
 
 import { log_standard_event } from "src/core/analytics.js";
 import { tertiaryColor } from "src/core/color_defs.js";
-import { is_dev, is_dev_link } from "src/core/injected_build_constants.js";
+import { is_dev, is_dev_link } from "src/core/injected_build_constants.ts";
 
 import { IconFeedback } from "src/icons/icons.js";
 

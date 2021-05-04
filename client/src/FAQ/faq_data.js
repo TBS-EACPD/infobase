@@ -2,7 +2,7 @@ import { csvParse } from "d3-dsv";
 import _ from "lodash";
 import marked from "marked";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 /* eslint-disable no-restricted-imports */
 import faq_csv_string from "../../../data/faq.csv";

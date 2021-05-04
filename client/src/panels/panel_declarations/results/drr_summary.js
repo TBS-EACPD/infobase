@@ -9,7 +9,7 @@ import { SmartDisplayTable } from "src/components/index.js";
 
 import * as Results from "src/models/results.js";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.js";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { IconArray } from "src/charts/IconArray.js";
 import { StandardLegend } from "src/charts/legends/index.js";

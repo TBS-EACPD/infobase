@@ -9,7 +9,7 @@ import {
 
 import { GraphOverlay } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants.ts";
 import { run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 

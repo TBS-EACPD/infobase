@@ -5,7 +5,7 @@ import { Subject } from "src/models/subject.js";
 import { run_template } from "src/models/text.js";
 import { fiscal_year_to_year } from "src/models/years.js";
 
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { sanitized_marked } from "src/general_utils.js";
 

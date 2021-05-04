@@ -19,7 +19,7 @@ import {
   lang,
   is_a11y_mode,
   is_dev,
-} from "src/core/injected_build_constants.js";
+} from "src/core/injected_build_constants.ts";
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
 import { ReactUnmounter } from "src/core/NavComponents.js";
 import { RedirectHeader } from "src/core/RedirectHeader.js";

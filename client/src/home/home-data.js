@@ -3,7 +3,7 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/index.js";
 
-import { services_feature_flag } from "src/core/injected_build_constants.js";
+import { services_feature_flag } from "src/core/injected_build_constants.ts";
 
 import {
   IconFinancesAlt,

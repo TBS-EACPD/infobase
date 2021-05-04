@@ -3,10 +3,10 @@ import React from "react";
 
 import { TabLoadingWrapper } from "src/components/index.js";
 
-import { businessConstants } from "src/models/businessConstants.js";
+import { businessConstants } from "src/models/businessConstants.ts";
 
 import { array_to_grammatical_list } from "src/core/format.js";
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { ToggleVoteStatProvider } from "./covid_common_components.js";
 

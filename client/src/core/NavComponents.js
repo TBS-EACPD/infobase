@@ -7,7 +7,7 @@ import { AlertBanner } from "src/components/index.js";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.js";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { IconHome } from "src/icons/icons.js";
 import { index_lang_lookups } from "src/InfoBase/index_data.js";

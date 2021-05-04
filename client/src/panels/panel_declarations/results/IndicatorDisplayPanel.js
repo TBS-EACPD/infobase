@@ -13,7 +13,7 @@ import {
 import { Indicator } from "src/models/results.js";
 
 import { log_standard_event } from "src/core/analytics.js";
-import { lang } from "src/core/injected_build_constants.js";
+import { lang } from "src/core/injected_build_constants.ts";
 
 import { get_client } from "src/graphql_utils/graphql_utils.js";
 

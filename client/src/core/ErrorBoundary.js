@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { lang, sha, is_dev } from "src/core/injected_build_constants.js";
+import { lang, sha, is_dev } from "src/core/injected_build_constants.ts";
 
 import { IconNotAvailable } from "src/icons/icons.js";
 
