@@ -42,7 +42,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     `,
   });
 
-  const [active_services, set_active_services] = useState();
+  const [active_services, set_active_services] = useState({});
   useEffect(() => {
     const median_3_values = _.chain(data)
       .map((service) => ({
