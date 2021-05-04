@@ -13,6 +13,14 @@
   "commonjs": true,
   "es6": true
   },
+  "overrides": [
+    {
+        "files": ["*.ts", "*.tsx"],
+        "rules": {
+            "no-undef": "off"
+        }
+    }
+  ],
   "rules": {
     "no-prototype-builtins":"off", //common TS pattern
     "no-use-before-define":"off",
