@@ -6,10 +6,7 @@ import { lang } from "src/core/injected_build_constants";
 interface BusinessConceptTextValue {
   text: string;
 }
-interface BilingualBusinessConceptTextValue {
-  en: string;
-  fr: string;
-}
+type BilingualBusinessConceptTextValue = LangDict<string>;
 
 type RawBusinessConceptInputTextValue =
   | BilingualBusinessConceptTextValue
@@ -40,68 +37,79 @@ function normalizeBilinguals(
   return _.mapValues(entries, (entry) => getNormalizedEntry(entry));
 }
 
-export const sos: {
-  [key: number]: BusinessConceptTextValue;
-} = normalizeBilinguals({
-  1: {
-    text: "Personnel",
+type StdObjEntry = { text: string; so_num: number };
+
+export const sos = _.mapValues<
+  { [key: number]: LangDict<string> },
+  { [key: number]: StdObjEntry }
+>(
+  {
+    1: {
+      en: "Personnel",
+      fr: "Personnel",
+    },
+    2: {
+      en: "Transportation and Telecommunications",
+      fr: "Transports et communications",
+    },
+    3: {
+      en: "Information",
+      fr: "Information",
+    },
+    4: {
+      en: "Professional and Special Services",
+      fr: "Services professionnels et spéciaux",
+    },
+    5: {
+      en: "Rentals",
+      fr: "Location",
+    },
+    6: {
+      en: "Purchased Repair and Maintenance",
+      fr: "Achat de services de réparation et d'entretien",
+    },
+    7: {
+      en: "Utilities, Materials and Supplies",
+      fr: "Services publics, fournitures et approvisionnements",
+    },
+    8: {
+      en: "Acquisition of Land, Buildings, and Works",
+      fr: "Acquisition de terrains, de bâtiments et d'ouvrages",
+    },
+    9: {
+      en: "Acquisition of Machinery and Equipment",
+      fr: "Acquisition de machines et de matériel",
+    },
+    10: {
+      en: "Transfer Payments",
+      fr: "Paiements de transfert",
+    },
+    11: {
+      en: "Public Debt Charges",
+      fr: "Frais de la dette",
+    },
+    12: {
+      en: "Other Subsidies and Payments",
+      fr: "Autres subventions et paiements",
+    },
+    20: {
+      en: "Revenues",
+      fr: "Revenus",
+    },
+    21: {
+      en: "External Revenues",
+      fr: "Revenus externes",
+    },
+    22: {
+      en: "Internal Revenues",
+      fr: "Revenus internes",
+    },
   },
-  2: {
-    en: "Transportation and Telecommunications",
-    fr: "Transports et communications",
-  },
-  3: {
-    text: "Information",
-  },
-  4: {
-    en: "Professional and Special Services",
-    fr: "Services professionnels et spéciaux",
-  },
-  5: {
-    en: "Rentals",
-    fr: "Location",
-  },
-  6: {
-    en: "Purchased Repair and Maintenance",
-    fr: "Achat de services de réparation et d'entretien",
-  },
-  7: {
-    en: "Utilities, Materials and Supplies",
-    fr: "Services publics, fournitures et approvisionnements",
-  },
-  8: {
-    en: "Acquisition of Land, Buildings, and Works",
-    fr: "Acquisition de terrains, de bâtiments et d'ouvrages",
-  },
-  9: {
-    en: "Acquisition of Machinery and Equipment",
-    fr: "Acquisition de machines et de matériel",
-  },
-  10: {
-    en: "Transfer Payments",
-    fr: "Paiements de transfert",
-  },
-  11: {
-    en: "Public Debt Charges",
-    fr: "Frais de la dette",
-  },
-  12: {
-    en: "Other Subsidies and Payments",
-    fr: "Autres subventions et paiements",
-  },
-  20: {
-    en: "Revenues",
-    fr: "Revenus",
-  },
-  21: {
-    en: "External Revenues",
-    fr: "Revenus externes",
-  },
-  22: {
-    en: "Internal Revenues",
-    fr: "Revenus internes",
-  },
-});
+  (val: BilingualBusinessConceptTextValue, key) => ({
+    text: val[lang],
+    so_num: key,
+  })
+);
 
 export const tenure = normalizeBilinguals({
   ind: {
@@ -484,59 +492,67 @@ export const result_statuses = normalizeBilinguals({
   },
 });
 
-export const months = normalizeBilinguals({
-  0: {
-    text: "",
+type MonthEntry = { text: string; ix: number };
+export const months = _.mapValues<
+  { [key: number]: LangDict<string> },
+  { [key: number]: MonthEntry }
+>(
+  {
+    0: {
+      en: "",
+      fr: "",
+    },
+    1: {
+      en: "January",
+      fr: "Janvier",
+    },
+    2: {
+      en: "February",
+      fr: "Février",
+    },
+    3: {
+      en: "March",
+      fr: "Mars",
+    },
+    4: {
+      en: "April",
+      fr: "Avril",
+    },
+    5: {
+      en: "May",
+      fr: "Mai",
+    },
+    6: {
+      en: "June",
+      fr: "Juin",
+    },
+    7: {
+      en: "July",
+      fr: "Juillet",
+    },
+    8: {
+      en: "August",
+      fr: "Août",
+    },
+    9: {
+      en: "September",
+      fr: "Septembre",
+    },
+    10: {
+      en: "October",
+      fr: "Octobre",
+    },
+    11: {
+      en: "November",
+      fr: "Novembre",
+    },
+    12: {
+      en: "December",
+      fr: "Décembre",
+    },
   },
-  1: {
-    en: "January",
-    fr: "Janvier",
-  },
-  2: {
-    en: "February",
-    fr: "Février",
-  },
-  3: {
-    en: "March",
-    fr: "Mars",
-  },
-  4: {
-    en: "April",
-    fr: "Avril",
-  },
-  5: {
-    en: "May",
-    fr: "Mai",
-  },
-  6: {
-    en: "June",
-    fr: "Juin",
-  },
-  7: {
-    en: "July",
-    fr: "Juillet",
-  },
-  8: {
-    en: "August",
-    fr: "Août",
-  },
-  9: {
-    en: "September",
-    fr: "Septembre",
-  },
-  10: {
-    en: "October",
-    fr: "Octobre",
-  },
-  11: {
-    en: "November",
-    fr: "Novembre",
-  },
-  12: {
-    en: "December",
-    fr: "Décembre",
-  },
-});
+  (val, key) => ({ text: val[lang], ix: key })
+);
 
 export const population_groups = normalizeBilinguals({
   fps: {
