@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import _ from "lodash";
-import PropTypes from "prop-types";
 import React from "react";
 
 import "./FancyUL.scss";

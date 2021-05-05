@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { ChangeEvent } from "react";
+import React from "react";
 
 interface OptionsProps {
   id: string | number;
