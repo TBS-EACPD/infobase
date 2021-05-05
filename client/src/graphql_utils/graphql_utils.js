@@ -133,34 +133,3 @@ export const query_logging_wrapper = (
       throw error;
     });
 };
-
-const InnerLoadingHoc = ({ Component, data_to_props }) => (props) => {
-  if (props.data.loading) {
-    return <div> Loading ... </div>;
-  } else {
-    return (
-      <Component
-        data={data_to_props(props.data)}
-        gql_props={{
-          refetch: props.data.refetch,
-          variables: props.data.variables,
-        }}
-      />
-    );
-  }
-};
-
-//for use in development only
-export const LoadingHoc = ({
-  Component,
-  query,
-  data_to_props = _.identity,
-  variables,
-}) =>
-  apollo_connect(query, {
-    options: variables ? { variables } : {},
-  })(InnerLoadingHoc({ Component, data_to_props }));
-
-assign_to_dev_helper_namespace({
-  query_api: (query) => client.query({ query }),
-});
