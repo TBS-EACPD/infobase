@@ -91,15 +91,15 @@ export function get_client() {
   return client;
 }
 
-const make_query_promise = (
-  query_name,
-  query,
-  expect_resolved_response = true
-) => (variables) => {
+const make_query_promise = (query_name, query, expect_resolved_response) => (
+  variables
+) => {
   const time_at_request = Date.now();
+
   return query({ ...variables, _query_name: query_name })
     .then((resolved_response) => {
       const resp_time = Date.now() - time_at_request;
+
       if (!expect_resolved_response || !_.isEmpty(resolved_response)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
@@ -119,13 +119,65 @@ const make_query_promise = (
     })
     .catch((error) => {
       const resp_time = Date.now() - time_at_request;
+
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
         MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
       });
+
       throw error;
     });
+};
+
+const make_query_hook = (query_name, query, expect_resolved_response) => (
+  variables
+) => {
+  // TODO does this actually make sense to use when calculating resp_time? What's the execution flow of this hook?
+  const time_at_request = Date.now();
+
+  const { loading, error, data } = useQuery(query, {
+    variables: {
+      ...variables,
+      _query_name: query_name,
+    },
+  });
+
+  // TODO query_maker should accept a resolver function, use that here and rewrite make_query_promise to use it too
+  const resolved_response = loading && data.root.service;
+
+  if (error) {
+    const resp_time = Date.now() - time_at_request;
+
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
+    });
+
+    throw new Error(error);
+  } else if (!loading) {
+    const resp_time = Date.now() - time_at_request;
+
+    if (!expect_resolved_response || !_.isEmpty(resolved_response)) {
+      // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_SUCCESS",
+        MISC2: `${query_name}, took ${resp_time} ms`,
+      });
+    } else {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_UNEXPECTED",
+        MISC2: `${query_name}, took ${resp_time} ms`,
+      });
+    }
+
+    return { loading, error, data: resolved_response || data };
+  }
+
+  return { loading, error, data };
 };
 
 export const query_maker = (
@@ -139,6 +191,9 @@ export const query_maker = (
       query,
       expect_resolved_response
     ),
-    [`use${_.chain(query_name).camelCase().upperFirst().value()}`]: "TODO",
+    [`use${_.chain(query_name)
+      .camelCase()
+      .upperFirst()
+      .value()}`]: make_query_hook(query_name, query, expect_resolved_response),
   };
 };
