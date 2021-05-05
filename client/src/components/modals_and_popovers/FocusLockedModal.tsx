@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import DOMPurify from "dompurify";
-import PropTypes from "prop-types";
 import React from "react";
 import { Modal } from "react-bootstrap";
 import FocusLock from "react-focus-lock";
