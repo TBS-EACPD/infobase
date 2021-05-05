@@ -11,10 +11,7 @@ interface ContainerEscapeHatchProps {
   children: React.ReactNode;
 }
 
-class ContainerEscapeHatch extends React.Component<
-  ContainerEscapeHatchProps,
-  {}
-> {
+class ContainerEscapeHatch extends React.Component<ContainerEscapeHatchProps> {
   outer_container_escape_hatch: React.RefObject<HTMLDivElement>;
   inner_container_escape_hatch: React.RefObject<HTMLDivElement>;
 
