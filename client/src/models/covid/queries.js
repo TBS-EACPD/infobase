@@ -3,10 +3,7 @@ import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants.ts";
 
-import {
-  get_client,
-  query_logging_wrapper,
-} from "src/graphql_utils/graphql_utils.js";
+import { get_client, query_maker } from "src/graphql_utils/graphql_utils.js";
 
 const client = get_client();
 
@@ -16,12 +13,13 @@ const years_with_covid_data = `
     years_with_expenditures
   }
 `;
-export const query_gov_years_with_covid_data = query_logging_wrapper(
-  "gov_years_with_covid_data",
-  ({ ...logging_variables }) =>
-    client
-      .query({
-        query: gql`
+export const {
+  query_gov_years_with_covid_data,
+  useGovYearsWithCovidData,
+} = query_maker("gov_years_with_covid_data", ({ ...logging_variables }) =>
+  client
+    .query({
+      query: gql`
           query($lang: String!) {
             root(lang: $lang) {
               gov {
@@ -31,16 +29,17 @@ export const query_gov_years_with_covid_data = query_logging_wrapper(
             }
           }
         `,
-        variables: {
-          lang,
-          ...logging_variables,
-        },
-      })
-      .then((response) =>
-        _.get(response, "data.root.gov.years_with_covid_data")
-      )
+      variables: {
+        lang,
+        ...logging_variables,
+      },
+    })
+    .then((response) => _.get(response, "data.root.gov.years_with_covid_data"))
 );
-export const query_org_years_with_covid_data = query_logging_wrapper(
+export const {
+  query_org_years_with_covid_data,
+  useOrgYearsWithCovidData,
+} = query_maker(
   "org_years_with_covid_data",
   ({ org_id, ...logging_variables }) =>
     client
@@ -66,7 +65,7 @@ export const query_org_years_with_covid_data = query_logging_wrapper(
       )
 );
 
-export const query_all_covid_measures = query_logging_wrapper(
+export const { query_all_covid_measures, useAllCovidMeasures } = query_maker(
   "all_covid_measures",
   ({ ...logging_variables }) =>
     client
@@ -94,8 +93,11 @@ const covid_estimates_fields = `
   vote
   stat
 `;
-export const query_all_covid_estimates_by_measure_id = query_logging_wrapper(
-  "all_covid_estimates_by_measure",
+export const {
+  query_all_covid_estimates_by_measure_id,
+  useAllCovidEstimatesByMeasureId,
+} = query_maker(
+  "all_covid_estimates_by_measure_id",
   ({ fiscal_year, ...logging_variables }) =>
     client
       .query({
@@ -138,8 +140,11 @@ export const query_all_covid_estimates_by_measure_id = query_logging_wrapper(
           .value()
       )
 );
-export const query_org_covid_estimates_by_measure_id = query_logging_wrapper(
-  "org_covid_estimates_by_measure",
+export const {
+  query_org_covid_estimates_by_measure_id,
+  useOrgCovidEstimatesByMeasureId,
+} = query_maker(
+  "org_covid_estimates_by_measure_id",
   ({ org_id, fiscal_year, ...logging_variables }) =>
     client
       .query({
@@ -191,8 +196,11 @@ const covid_expenditures_fields = `
   vote
   stat
 `;
-export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
-  "all_covid_expenditures_by_measure",
+export const {
+  query_all_covid_expenditures_by_measure_id,
+  useAllCovidExpendituresByMeasureId,
+} = query_maker(
+  "all_covid_expenditures_by_measure_id",
   ({ fiscal_year, ...logging_variables }) =>
     client
       .query({
@@ -235,8 +243,11 @@ export const query_all_covid_expenditures_by_measure_id = query_logging_wrapper(
           .value()
       )
 );
-export const query_org_covid_expenditures_by_measure_id = query_logging_wrapper(
-  "org_covid_expenditures_by_measure",
+export const {
+  query_org_covid_expenditures_by_measure_id,
+  useOrgCovidExpendituresByMeasureId,
+} = query_maker(
+  "org_covid_expenditures_by_measure_id",
   ({ org_id, fiscal_year, ...logging_variables }) =>
     client
       .query({
@@ -297,7 +308,7 @@ const common_covid_summary_fields = `
     ${covid_expenditures_fields}
   }
 `;
-export const query_gov_covid_summaries = query_logging_wrapper(
+export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker(
   "gov_covid_summaries",
   ({ ...logging_variables }) =>
     client
@@ -321,7 +332,7 @@ export const query_gov_covid_summaries = query_logging_wrapper(
       })
       .then((response) => _.get(response, "data.root.gov.covid_summary"))
 );
-export const query_org_covid_summaries = query_logging_wrapper(
+export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker(
   "org_covid_summaries",
   ({ org_id, ...logging_variables }) =>
     client
@@ -346,7 +357,7 @@ export const query_org_covid_summaries = query_logging_wrapper(
       })
       .then((response) => _.get(response, "data.root.org.covid_summary"))
 );
-export const query_gov_covid_summary = query_logging_wrapper(
+export const { query_gov_covid_summary, useGovCovidSummary } = query_maker(
   "gov_covid_summary",
   ({ fiscal_year, ...logging_variables }) =>
     client
@@ -373,7 +384,7 @@ export const query_gov_covid_summary = query_logging_wrapper(
         _.chain(response).get("data.root.gov.covid_summary").first().value()
       )
 );
-export const query_org_covid_summary = query_logging_wrapper(
+export const { query_org_covid_summary, useOrgCovidSummary } = query_maker(
   "org_covid_summary",
   ({ org_id, fiscal_year, ...logging_variables }) =>
     client
@@ -402,7 +413,7 @@ export const query_org_covid_summary = query_logging_wrapper(
       )
 );
 
-export const query_top_covid_spending = query_logging_wrapper(
+export const { query_top_covid_spending, useTopCovidSpending } = query_maker(
   "top_covid_spending",
   ({ fiscal_year, top_x = 4, ...logging_variables }) =>
     client

@@ -1,18 +1,12 @@
-import {
-  InMemoryCache,
-  ApolloClient,
-  graphql as apollo_connect,
-} from "@apollo/client";
+import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index.js";
 
 import _ from "lodash";
-import React from "react";
 
 import string_hash from "string-hash";
 
 import { log_standard_event } from "src/core/analytics.js";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
 import {
   sha,
   local_ip,
@@ -97,7 +91,7 @@ export function get_client() {
   return client;
 }
 
-export const query_logging_wrapper = (
+const make_query_promise = (
   query_name,
   query,
   expect_resolved_response = true
@@ -132,4 +126,19 @@ export const query_logging_wrapper = (
       });
       throw error;
     });
+};
+
+export const query_maker = (
+  query_name,
+  query,
+  expect_resolved_response = true
+) => {
+  return {
+    [`query_${query_name}`]: make_query_promise(
+      query_name,
+      query,
+      expect_resolved_response
+    ),
+    [`use${_.chain(query_name).camelCase().upperFirst().value()}`]: "TODO",
+  };
 };
