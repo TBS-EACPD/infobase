@@ -17,7 +17,7 @@ export const {
 } = query_maker({
   query_name: "gov_years_with_covid_data",
   query: gql`
-    query($lang: String!) {
+    query($lang: String! = "${lang}") {
       root(lang: $lang) {
         gov {
           id
@@ -35,7 +35,7 @@ export const {
 } = query_maker({
   query_name: "org_years_with_covid_data",
   query: gql`
-  query($lang: String!, $org_id: String!) {
+  query($lang: String! = "${lang}", $org_id: String!) {
     root(lang: $lang) {
       org(org_id: $org_id) {
         id
@@ -51,7 +51,7 @@ export const {
 export const { query_all_covid_measures, useAllCovidMeasures } = query_maker({
   query_name: "all_covid_measures",
   query: gql`
-    query($lang: String!) {
+    query($lang: String! = "${lang}") {
       root(lang: $lang) {
         covid_measures {
           id
@@ -74,7 +74,7 @@ export const {
 } = query_maker({
   query_name: "all_covid_estimates_by_measure_id",
   query: gql`
-  query($lang: String!, $fiscal_year: Int) {
+  query($lang: String! = "${lang}", $fiscal_year: Int) {
     root(lang: $lang) {
       covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
         id
@@ -111,7 +111,7 @@ export const {
 } = query_maker({
   query_name: "org_covid_estimates_by_measure_id",
   query: gql`
-  query($lang: String!, $org_id: String!, $fiscal_year: Int) {
+  query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
     root(lang: $lang) {
       org(org_id: $org_id) {
         id
@@ -156,7 +156,7 @@ export const {
 } = query_maker({
   query_name: "all_covid_expenditures_by_measure_id",
   query: gql`
-  query($lang: String!, $fiscal_year: Int) {
+  query($lang: String! = "${lang}", $fiscal_year: Int) {
     root(lang: $lang) {
       covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
          id
@@ -193,7 +193,7 @@ export const {
 } = query_maker({
   query_name: "org_covid_expenditures_by_measure_id",
   query: gql`
-  query($lang: String!, $org_id: String!, $fiscal_year: Int) {
+  query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
     root(lang: $lang) {
       org(org_id: $org_id) {
         id
@@ -244,7 +244,7 @@ const common_covid_summary_fields = `
 export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker({
   query_name: "gov_covid_summaries",
   query: gql`
-  query($lang: String!) {
+  query($lang: String! = "${lang}") {
     root(lang: $lang) {
       gov {
         id
@@ -261,7 +261,7 @@ export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker({
 export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
   query_name: "org_covid_summaries",
   query: gql`
-  query($lang: String!, $org_id: String!) {
+  query($lang: String! = "${lang}", $org_id: String!) {
     root(lang: $lang) {
       org(org_id: $org_id) {
         id
@@ -278,7 +278,7 @@ export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
 export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
   query_name: "gov_covid_summary",
   query: gql`
-  query($lang: String!, $fiscal_year: Int!) {
+  query($lang: String! = "${lang}", $fiscal_year: Int!) {
     root(lang: $lang) {
       gov {
         id
@@ -295,7 +295,7 @@ export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
 export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
   query_name: "org_covid_summary",
   query: gql`
-  query($lang: String!, $org_id: String!, $fiscal_year: Int!) {
+  query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int!) {
     root(lang: $lang) {
       org(org_id: $org_id) {
         id
@@ -313,7 +313,7 @@ export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
 export const { query_top_covid_spending, useTopCovidSpending } = query_maker({
   query_name: "top_covid_spending",
   query: gql`
-  query($lang: String!, $top_x: Int!, $fiscal_year: Int!) {
+  query($lang: String! = "${lang}", $top_x: Int!, $fiscal_year: Int!) {
     root(lang: $lang) {
       gov {
         id

@@ -12,7 +12,6 @@ import {
   local_ip,
   is_dev,
   is_ci,
-  lang,
 } from "src/core/injected_build_constants.ts";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
@@ -104,9 +103,8 @@ const make_query_promise = (
     .query({
       query: query,
       variables: {
-        lang,
-        _query_name: query_name,
         ...variables,
+        _query_name: query_name,
       },
     })
     .then(response_resolver)
@@ -154,9 +152,8 @@ const make_query_hook = (
 
   const { loading, error, data } = useQuery(query, {
     variables: {
-      lang,
-      _query_name: query_name,
       ...variables,
+      _query_name: query_name,
     },
   });
 
