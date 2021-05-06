@@ -8,7 +8,26 @@ import { IconCheckmark } from "src/icons/icons";
 
 import "./CheckBox.scss";
 
-export class CheckBox extends React.Component {
+export interface CheckBoxProps {
+  disabled?: boolean; // greys out checkbox and make it non-clickable if true
+  onClick: Function; // (id) => {}
+  id: string | number;
+  label: string; // required text for checkbox
+  active: boolean; // required, equivalent of 'checked'
+  color?: string; // defaults to primaryColor
+  isSolidBox: boolean; // defaults to false
+  container_style?: Object; // style for div, containing checkbox and label
+  checkbox_style?: Object; // style for checkbox
+  label_style?: Object; // style for label
+  checkmark_vertical_align: number; // defaults to 0.1
+}
+
+export class CheckBox extends React.Component<CheckBoxProps> {
+  static defaultProps = {
+    isSolidBox: false,
+    color: primaryColor,
+    checkmark_vertical_align: 0.1,
+  };
   handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
@@ -18,16 +37,16 @@ export class CheckBox extends React.Component {
   render() {
     const {
       id,
-      label, //required text for checkbox
-      active, //required, equivalent of 'checked'
-      onClick, //(id) => {}
-      color, //defaults to primaryColor
-      isSolidBox, //defaults to false
-      container_style, //style for div, containing checkbox and label
-      checkbox_style, //style for checkbox
-      label_style, //style for label
-      checkmark_vertical_align, //defaults to 0.1
-      disabled, //greys out checkbox and make it non-clickable if true
+      label,
+      active,
+      onClick,
+      color,
+      isSolidBox,
+      container_style,
+      checkbox_style,
+      label_style,
+      checkmark_vertical_align,
+      disabled,
     } = this.props;
 
     if (is_a11y_mode) {
@@ -49,8 +68,8 @@ export class CheckBox extends React.Component {
         <div
           style={{
             display: "flex",
-            pointerEvents: disabled && "none",
-            opacity: disabled && 0.4,
+            pointerEvents: disabled ? "none" : undefined,
+            opacity: disabled ? 0.4 : undefined,
             ...container_style,
           }}
         >
@@ -97,8 +116,3 @@ export class CheckBox extends React.Component {
     }
   }
 }
-CheckBox.defaultProps = {
-  isSolidBox: false,
-  color: primaryColor,
-  checkmark_vertical_align: 0.1,
-};
