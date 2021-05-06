@@ -68,7 +68,7 @@ const query_as_get_with_query_header = async (uri, options) => {
   return fetch(uriWithVersionAndQueryHash, new_options).catch((error) => {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "API_QUERY_FAILURE",
+      MISC1: "APOLLO_FETCH_ERROR",
       MISC2: `Initial batch fetch error: ${error.toString()}`,
     });
 
@@ -81,11 +81,12 @@ export function get_client() {
   if (!client) {
     client = new ApolloClient({
       link: new BatchHttpLink({
-        uri: prod_api_url, // query_length_tolerant_fetch replaces the uri on the fly, switches to appropriate local uri in dev
-        fetch: query_as_get_with_query_header,
-        // small hack, the method is overridden to GET by query_length_tolerant_fetch for caching, but need BatchHttpLink
+        // query_as_get_with_query_header replaces the uri on the fly, switches to appropriate local uri in dev
+        uri: prod_api_url,
+        // the fetchOptions method is overridden to GET by query_as_get_with_query_header for caching, but need BatchHttpLink
         // to think we're using POST for the batching behaviour we want
         fetchOptions: { method: "POST" },
+        fetch: query_as_get_with_query_header,
       }),
       cache: new InMemoryCache({
         typePolicies: {
@@ -160,7 +161,7 @@ const make_query_hook = (
   response_resolver,
   expect_not_empty
 ) => (variables) => {
-  // TODO does this actually make sense to use when calculating resp_time? What's the execution flow of this hook?
+  // TODO this time_at_request is useless for logging, ha
   const time_at_request = Date.now();
 
   const { loading, error, data } = useQuery(query, {
@@ -170,20 +171,10 @@ const make_query_hook = (
     },
   });
 
-  if (error) {
+  const resolved_response = !loading && !error ? response_resolver(data) : data;
+
+  if (!loading && !error) {
     const resp_time = Date.now() - time_at_request;
-
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "API_QUERY_FAILURE",
-      MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
-    });
-
-    throw new Error(error);
-  } else if (!loading) {
-    const resp_time = Date.now() - time_at_request;
-
-    const resolved_response = response_resolver(data);
 
     if (!expect_not_empty || !_.isEmpty(resolved_response)) {
       // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
@@ -199,11 +190,19 @@ const make_query_hook = (
         MISC2: `${query_name}, took ${resp_time} ms`,
       });
     }
+  } else if (error) {
+    const resp_time = Date.now() - time_at_request;
 
-    return { loading, error, data: resolved_response };
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
+    });
+
+    throw new Error(error);
   }
 
-  return { loading, error, data };
+  return { loading, error, data: resolved_response };
 };
 
 export const query_maker = ({
