@@ -164,17 +164,7 @@ class TPMap extends React.Component {
     const { loading, population_data } = this.state;
 
     if (loading) {
-      return (
-        <div
-          style={{
-            position: "relative",
-            height: "80px",
-            marginBottom: "-10px",
-          }}
-        >
-          <SpinnerWrapper config_name={"sub_route"} />
-        </div>
-      );
+      return <SpinnerWrapper config_name={"inline_panel"} />;
     } else {
       const {
         subject,
