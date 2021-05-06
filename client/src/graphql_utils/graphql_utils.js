@@ -106,9 +106,7 @@ export function get_client() {
   return client;
 }
 
-const make_query_promise = (query_name, query, response_resolver) => (
-  variables
-) => {
+const make_query_promise = (query_name, query, resolver) => (variables) => {
   const time_at_request = Date.now();
 
   return get_client()
@@ -119,7 +117,7 @@ const make_query_promise = (query_name, query, response_resolver) => (
         _query_name: query_name,
       },
     })
-    .then(response_resolver)
+    .then(resolver)
     .then((resolved_response) => {
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
@@ -142,9 +140,7 @@ const make_query_promise = (query_name, query, response_resolver) => (
     });
 };
 
-const make_query_hook = (query_name, query, response_resolver) => (
-  variables
-) => {
+const make_query_hook = (query_name, query, resolver) => (variables) => {
   const [time_at_request, set_time_at_request] = useState(Date.now()); // eslint-disable-line no-unused-vars
 
   const { loading, error, data } = useQuery(query, {
@@ -160,19 +156,7 @@ const make_query_hook = (query_name, query, response_resolver) => (
       error,
       data,
     };
-  } else if (!error) {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "API_QUERY_SUCCESS",
-      MISC2: `${query_name}, took ${Date.now() - time_at_request} ms`,
-    });
-
-    return {
-      loading,
-      error,
-      data: response_resolver(data),
-    };
-  } else {
+  } else if (error) {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_QUERY_FAILURE",
@@ -182,21 +166,38 @@ const make_query_hook = (query_name, query, response_resolver) => (
     });
 
     throw new Error(error);
+  } else {
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_SUCCESS",
+      MISC2: `${query_name}, took ${Date.now() - time_at_request} ms`,
+    });
+
+    return {
+      loading,
+      error,
+      data: resolver(data),
+    };
   }
 };
 
-export const query_maker = ({
-  query_name,
-  query,
-  response_resolver = _.identity,
-}) => ({
-  [`query_${query_name}`]: make_query_promise(
-    query_name,
-    query,
-    response_resolver
-  ),
-  [`use${_.chain(query_name)
+export const query_maker = ({ query_name, query, resolver = _.identity }) => {
+  if (!query_name) {
+    throw new Error(
+      "All queries must have (unique) names, for logging purposes."
+    );
+  }
+
+  const promise_key = `query_${query_name}`;
+
+  const hook_key = _.chain(query_name)
     .camelCase()
     .upperFirst()
-    .value()}`]: make_query_hook(query_name, query, response_resolver),
-});
+    .thru((pascal_case_name) => `use${pascal_case_name}`)
+    .value();
+
+  return {
+    [promise_key]: make_query_promise(query_name, query, resolver),
+    [hook_key]: make_query_hook(query_name, query, resolver),
+  };
+};
