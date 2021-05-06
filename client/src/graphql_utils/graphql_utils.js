@@ -65,42 +65,15 @@ const query_as_get_with_query_header = async (uri, options) => {
     },
   };
 
-  const query_info = _.chain(query)
-    .thru(JSON.parse)
-    .map("variables._query_name")
-    .thru(
-      (batched_query_names) =>
-        `${batched_query_names.length} batched queries: [${_.join(
-          batched_query_names,
-          ", "
-        )}]`
-    )
-    .value();
-  const time_at_request = Date.now();
-
-  return fetch(uriWithVersionAndQueryHash, new_options)
-    .then((response) => {
-      const resp_time = Date.now() - time_at_request;
-
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_SUCCESS",
-        MISC2: `Batch hash ${query_hash}, took ${resp_time} ms. ${query_info}`,
-      });
-
-      return response;
-    })
-    .catch((error) => {
-      const resp_time = Date.now() - time_at_request;
-
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `Batch hash ${query_hash}, took ${resp_time} ms - ${error.toString()}. ${query_info}`,
-      });
-
-      throw error;
+  return fetch(uriWithVersionAndQueryHash, new_options).catch((error) => {
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `Initial batch fetch error: ${error.toString()}`,
     });
+
+    throw error;
+  });
 };
 
 let client = null;
@@ -131,31 +104,127 @@ export function get_client() {
   return client;
 }
 
-export const query_maker = ({
+const make_query_promise = (
   query_name,
   query,
-  response_resolver = _.identity,
-}) => ({
-  [`query_${query_name}`]: (variables) =>
-    get_client()
-      .query({
-        query: query,
-        variables: {
-          ...variables,
-          _query_name: query_name,
-        },
-      })
-      .then(response_resolver),
-  [`use${_.chain(query_name).camelCase().upperFirst().value()}`]: (
-    variables
-  ) => {
-    const { loading, error, data } = useQuery(query, {
+  response_resolver,
+  expect_not_empty
+) => (variables) => {
+  const time_at_request = Date.now();
+
+  return get_client()
+    .query({
+      query: query,
       variables: {
         ...variables,
         _query_name: query_name,
       },
+    })
+    .then(response_resolver)
+    .then((resolved_response) => {
+      const resp_time = Date.now() - time_at_request;
+
+      if (!expect_not_empty || !_.isEmpty(resolved_response)) {
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `${query_name}, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `${query_name}, took ${resp_time} ms`,
+        });
+      }
+
+      return resolved_response;
+    })
+    .catch((error) => {
+      const resp_time = Date.now() - time_at_request;
+
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
+      });
+
+      throw error;
+    });
+};
+
+const make_query_hook = (
+  query_name,
+  query,
+  response_resolver,
+  expect_not_empty
+) => (variables) => {
+  // TODO does this actually make sense to use when calculating resp_time? What's the execution flow of this hook?
+  const time_at_request = Date.now();
+
+  const { loading, error, data } = useQuery(query, {
+    variables: {
+      ...variables,
+      _query_name: query_name,
+    },
+  });
+
+  if (error) {
+    const resp_time = Date.now() - time_at_request;
+
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "API_QUERY_FAILURE",
+      MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
     });
 
-    return { loading, error, data: loading ? data : response_resolver(data) };
-  },
+    throw new Error(error);
+  } else if (!loading) {
+    const resp_time = Date.now() - time_at_request;
+
+    const resolved_response = response_resolver(data);
+
+    if (!expect_not_empty || !_.isEmpty(resolved_response)) {
+      // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_SUCCESS",
+        MISC2: `${query_name}, took ${resp_time} ms`,
+      });
+    } else {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_UNEXPECTED",
+        MISC2: `${query_name}, took ${resp_time} ms`,
+      });
+    }
+
+    return { loading, error, data: resolved_response };
+  }
+
+  return { loading, error, data };
+};
+
+export const query_maker = ({
+  query_name,
+  query,
+  response_resolver = _.identity,
+  expect_not_empty = true,
+}) => ({
+  [`query_${query_name}`]: make_query_promise(
+    query_name,
+    query,
+    response_resolver,
+    expect_not_empty
+  ),
+  [`use${_.chain(query_name)
+    .camelCase()
+    .upperFirst()
+    .value()}`]: make_query_hook(
+    query_name,
+    query,
+    response_resolver,
+    expect_not_empty
+  ),
 });
