@@ -12,6 +12,7 @@ import {
   local_ip,
   is_dev,
   is_ci,
+  lang,
 } from "src/core/injected_build_constants.ts";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
@@ -91,16 +92,28 @@ export function get_client() {
   return client;
 }
 
-const make_query_promise = (query_name, query, expect_resolved_response) => (
-  variables
-) => {
+const make_query_promise = (
+  query_name,
+  query,
+  response_resolver,
+  expect_not_empty
+) => (variables) => {
   const time_at_request = Date.now();
 
-  return query({ ...variables, _query_name: query_name })
+  return get_client()
+    .query({
+      query: query,
+      variables: {
+        lang,
+        _query_name: query_name,
+        ...variables,
+      },
+    })
+    .then(response_resolver)
     .then((resolved_response) => {
       const resp_time = Date.now() - time_at_request;
 
-      if (!expect_resolved_response || !_.isEmpty(resolved_response)) {
+      if (!expect_not_empty || !_.isEmpty(resolved_response)) {
         // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", ""),
@@ -130,21 +143,22 @@ const make_query_promise = (query_name, query, expect_resolved_response) => (
     });
 };
 
-const make_query_hook = (query_name, query, expect_resolved_response) => (
-  variables
-) => {
+const make_query_hook = (
+  query_name,
+  query,
+  response_resolver,
+  expect_not_empty
+) => (variables) => {
   // TODO does this actually make sense to use when calculating resp_time? What's the execution flow of this hook?
   const time_at_request = Date.now();
 
   const { loading, error, data } = useQuery(query, {
     variables: {
-      ...variables,
+      lang,
       _query_name: query_name,
+      ...variables,
     },
   });
-
-  // TODO query_maker should accept a resolver function, use that here and rewrite make_query_promise to use it too
-  const resolved_response = loading && data.root.service;
 
   if (error) {
     const resp_time = Date.now() - time_at_request;
@@ -159,7 +173,9 @@ const make_query_hook = (query_name, query, expect_resolved_response) => (
   } else if (!loading) {
     const resp_time = Date.now() - time_at_request;
 
-    if (!expect_resolved_response || !_.isEmpty(resolved_response)) {
+    const resolved_response = response_resolver(data);
+
+    if (!expect_not_empty || !_.isEmpty(resolved_response)) {
       // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
@@ -174,26 +190,31 @@ const make_query_hook = (query_name, query, expect_resolved_response) => (
       });
     }
 
-    return { loading, error, data: resolved_response || data };
+    return { loading, error, data: resolved_response };
   }
 
   return { loading, error, data };
 };
 
-export const query_maker = (
+export const query_maker = ({
   query_name,
   query,
-  expect_resolved_response = true
-) => {
-  return {
-    [`query_${query_name}`]: make_query_promise(
-      query_name,
-      query,
-      expect_resolved_response
-    ),
-    [`use${_.chain(query_name)
-      .camelCase()
-      .upperFirst()
-      .value()}`]: make_query_hook(query_name, query, expect_resolved_response),
-  };
-};
+  response_resolver = _.identity,
+  expect_not_empty = true,
+}) => ({
+  [`query_${query_name}`]: make_query_promise(
+    query_name,
+    query,
+    response_resolver,
+    expect_not_empty
+  ),
+  [`use${_.chain(query_name)
+    .camelCase()
+    .upperFirst()
+    .value()}`]: make_query_hook(
+    query_name,
+    query,
+    response_resolver,
+    expect_not_empty
+  ),
+});
