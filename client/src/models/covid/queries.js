@@ -35,15 +35,15 @@ export const {
 } = query_maker({
   query_name: "org_years_with_covid_data",
   query: gql`
-  query($lang: String! = "${lang}", $org_id: String!) {
-    root(lang: $lang) {
-      org(org_id: $org_id) {
-        id
-        ${years_with_covid_data}
+    query($lang: String! = "${lang}", $org_id: String!) {
+      root(lang: $lang) {
+        org(org_id: $org_id) {
+          id
+          ${years_with_covid_data}
+        }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.get(response, "data.root.org.years_with_covid_data"),
 });
@@ -74,23 +74,23 @@ export const {
 } = query_maker({
   query_name: "all_covid_estimates_by_measure_id",
   query: gql`
-  query($lang: String! = "${lang}", $fiscal_year: Int) {
-    root(lang: $lang) {
-      covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
-        id
-
-        covid_data(fiscal_year: $fiscal_year) {
-          fiscal_year
-
-          covid_estimates {
-            org_id
-            ${covid_estimates_fields}
+    query($lang: String! = "${lang}", $fiscal_year: Int) {
+      root(lang: $lang) {
+        covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+          id
+  
+          covid_data(fiscal_year: $fiscal_year) {
+            fiscal_year
+  
+            covid_estimates {
+              org_id
+              ${covid_estimates_fields}
+            }
           }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response)
       .get("data.root.covid_estimates_by_measure")
@@ -111,26 +111,26 @@ export const {
 } = query_maker({
   query_name: "org_covid_estimates_by_measure_id",
   query: gql`
-  query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
-    root(lang: $lang) {
-      org(org_id: $org_id) {
-        id
-        covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+    query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
+      root(lang: $lang) {
+        org(org_id: $org_id) {
           id
-
-          covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
-            fiscal_year
-
-            covid_estimates {
-              org_id
-              ${covid_estimates_fields}
+          covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+            id
+  
+            covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
+              fiscal_year
+  
+              covid_estimates {
+                org_id
+                ${covid_estimates_fields}
+              }
             }
           }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response)
       .get("data.root.org.covid_estimates_by_measure")
@@ -156,23 +156,23 @@ export const {
 } = query_maker({
   query_name: "all_covid_expenditures_by_measure_id",
   query: gql`
-  query($lang: String! = "${lang}", $fiscal_year: Int) {
-    root(lang: $lang) {
-      covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
-         id
-
-         covid_data(fiscal_year: $fiscal_year) {
-           fiscal_year
-
-           covid_expenditures {
-             org_id
-             ${covid_expenditures_fields}
+    query($lang: String! = "${lang}", $fiscal_year: Int) {
+      root(lang: $lang) {
+        covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+           id
+  
+           covid_data(fiscal_year: $fiscal_year) {
+             fiscal_year
+  
+             covid_expenditures {
+               org_id
+               ${covid_expenditures_fields}
+             }
            }
-         }
+        }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response)
       .get("data.root.covid_expenditures_by_measure")
@@ -193,26 +193,26 @@ export const {
 } = query_maker({
   query_name: "org_covid_expenditures_by_measure_id",
   query: gql`
-  query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
-    root(lang: $lang) {
-      org(org_id: $org_id) {
-        id
-        covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+    query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
+      root(lang: $lang) {
+        org(org_id: $org_id) {
           id
-
-          covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
-            fiscal_year
-
-            covid_expenditures {
-              org_id
-              ${covid_expenditures_fields}
+          covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+            id
+  
+            covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
+              fiscal_year
+  
+              covid_expenditures {
+                org_id
+                ${covid_expenditures_fields}
+              }
             }
           }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response)
       .get("data.root.org.covid_expenditures_by_measure")
@@ -244,68 +244,68 @@ const common_covid_summary_fields = `
 export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker({
   query_name: "gov_covid_summaries",
   query: gql`
-  query($lang: String! = "${lang}") {
-    root(lang: $lang) {
-      gov {
-        id
-        covid_summary {
-          ${common_covid_summary_fields}
+    query($lang: String! = "${lang}") {
+      root(lang: $lang) {
+        gov {
+          id
+          covid_summary {
+            ${common_covid_summary_fields}
+          }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.get(response, "data.root.gov.covid_summary"),
 });
 export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
   query_name: "org_covid_summaries",
   query: gql`
-  query($lang: String! = "${lang}", $org_id: String!) {
-    root(lang: $lang) {
-      org(org_id: $org_id) {
-        id
-        covid_summary {
-          ${common_covid_summary_fields}
+    query($lang: String! = "${lang}", $org_id: String!) {
+      root(lang: $lang) {
+        org(org_id: $org_id) {
+          id
+          covid_summary {
+            ${common_covid_summary_fields}
+          }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.get(response, "data.root.org.covid_summary"),
 });
 export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
   query_name: "gov_covid_summary",
   query: gql`
-  query($lang: String! = "${lang}", $fiscal_year: Int!) {
-    root(lang: $lang) {
-      gov {
-        id
-        covid_summary(fiscal_year: $fiscal_year) {
-          ${common_covid_summary_fields}
+    query($lang: String! = "${lang}", $fiscal_year: Int!) {
+      root(lang: $lang) {
+        gov {
+          id
+          covid_summary(fiscal_year: $fiscal_year) {
+            ${common_covid_summary_fields}
+          }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response).get("data.root.gov.covid_summary").first().value(),
 });
 export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
   query_name: "org_covid_summary",
   query: gql`
-  query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int!) {
-    root(lang: $lang) {
-      org(org_id: $org_id) {
-        id
-        covid_summary(fiscal_year: $fiscal_year) {
-          ${common_covid_summary_fields}
+    query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int!) {
+      root(lang: $lang) {
+        org(org_id: $org_id) {
+          id
+          covid_summary(fiscal_year: $fiscal_year) {
+            ${common_covid_summary_fields}
+          }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response).get("data.root.org.covid_summary").first().value(),
 });
@@ -313,44 +313,44 @@ export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
 export const { query_top_covid_spending, useTopCovidSpending } = query_maker({
   query_name: "top_covid_spending",
   query: gql`
-  query($lang: String! = "${lang}", $top_x: Int!, $fiscal_year: Int!) {
-    root(lang: $lang) {
-      gov {
-        id
-        covid_summary(fiscal_year: $fiscal_year) {
+    query($lang: String! = "${lang}", $top_x: Int! = 4, $fiscal_year: Int!) {
+      root(lang: $lang) {
+        gov {
           id
-          fiscal_year
-
-          top_spending_orgs(top_x: $top_x) {
+          covid_summary(fiscal_year: $fiscal_year) {
             id
-            name
-
-            covid_summary(fiscal_year: $fiscal_year) {
-              fiscal_year
-
-              covid_expenditures {
-                ${covid_expenditures_fields}
+            fiscal_year
+  
+            top_spending_orgs(top_x: $top_x) {
+              id
+              name
+  
+              covid_summary(fiscal_year: $fiscal_year) {
+                fiscal_year
+  
+                covid_expenditures {
+                  ${covid_expenditures_fields}
+                }
               }
             }
-          }
-          top_spending_measures(top_x: $top_x) {
-            id
-            name
-
-            covid_data(fiscal_year: $fiscal_year) {
-              fiscal_year
-        
-              covid_expenditures {
-                org_id
-                ${covid_expenditures_fields}
+            top_spending_measures(top_x: $top_x) {
+              id
+              name
+  
+              covid_data(fiscal_year: $fiscal_year) {
+                fiscal_year
+          
+                covid_expenditures {
+                  org_id
+                  ${covid_expenditures_fields}
+                }
               }
             }
           }
         }
       }
     }
-  }
-`,
+  `,
   response_resolver: (response) =>
     _.chain(response)
       .get("data.root.gov.covid_summary")
