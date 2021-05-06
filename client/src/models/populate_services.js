@@ -215,11 +215,10 @@ export const api_load_has_services = (subject) => {
       return Promise.resolve();
     })
     .catch(function (error) {
-      const resp_time = Date.now() - time_at_request;
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
-        MISC2: `Has services, took ${resp_time} ms - ${error.toString()}`,
+        MISC2: `Has services, took ${time_at_request} ms - ${error.toString()}`,
       });
       throw error;
     });
@@ -281,11 +280,10 @@ export const useSingleService = (service_id) => {
   });
   const { loading, error, data } = res;
   if (error) {
-    const resp_time = Date.now() - time_at_request;
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_QUERY_FAILURE",
-      MISC2: `Service, took ${resp_time} ms - ${error.toString()}`,
+      MISC2: `Service, took ${time_at_request} ms - ${error.toString()}`,
     });
     throw new Error(error);
   }
@@ -306,11 +304,10 @@ export const useSummaryServices = (query_options) => {
   });
   const { loading, error, data } = res;
   if (error) {
-    const resp_time = Date.now() - time_at_request;
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_QUERY_FAILURE",
-      MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
+      MISC2: `Services, took ${time_at_request} ms - ${error.toString()}`,
     });
     throw new Error(error);
   }
@@ -334,11 +331,10 @@ export const useServices = (query_options) => {
   const res = useQuery(query, { variables });
   const { loading, error, data } = res;
   if (error) {
-    const resp_time = Date.now() - time_at_request;
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_QUERY_FAILURE",
-      MISC2: `Services, took ${resp_time} ms - ${error.toString()}`,
+      MISC2: `Services, took ${time_at_request} ms - ${error.toString()}`,
     });
     throw new Error(error);
   }
