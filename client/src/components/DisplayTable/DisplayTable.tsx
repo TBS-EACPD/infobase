@@ -27,40 +27,20 @@ import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
-/* {
-        column_key: {
-          index: 0, <- (integer) Zero indexed, order of column. Required
-          header: "Organization", <- (string) Name of column. Required
-          is_sortable: true, <- (boolean) Default to true
-          is_summable: true, <- (boolean) Default to false
-          is_searchable: true, <- (boolean) Default to false
-          initial_visible: true, <- (boolean) Default to true
-          formatter:
-            "big_int" <- (string) If it's string, auto formats using types_to_format
-            OR
-            (value) => <span> {value} </span>, <- (function)  If it's function, column value is passed in
-          raw_formatter: (value) => Dept.lookup(value).name <- (function) Actual raw value from data. Used for sorting/searching/csv string. Default to value
-          sum_func: (sum, value) => ... <- (function) Custom sum func. Default to sum + value
-          sort_func: (a, b) => ... <- (function) Custom sort func. Default to _.sortBy
-          sum_initial_value: 0 <- (number) Default to 0
-          visibility_toggleable: true <- (boolean) Defaults to false for index 0, true for all other indexes.
-        },
-      }
-      */
 
 interface ColumnKeyProps {
-  index: number;
-  header: string;
-  is_sortable: boolean;
-  is_summable: boolean;
-  is_searchable: boolean;
-  initial_visible: boolean;
-  formatter?: string | Function;
-  raw_formatter: (val: any) => string;
-  sum_func?: Function;
-  sort_func: Function;
-  sum_initial_value: number;
-  visibility_toggleable?: boolean;
+  index: number; // Zero indexed, order of column
+  header: string; // Name of column
+  is_sortable: boolean; // Default to true
+  is_summable: boolean; // Default to false
+  is_searchable: boolean; // Default to false
+  initial_visible: boolean; // Default to trues
+  formatter: string | Function; // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
+  raw_formatter: (val: any) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
+  sum_func: Function; // e.g.: (sum, value) => ... Default to sum + value
+  sort_func: Function; // e.g.: (a,b) => ... Default to _.sortBy
+  sum_initial_value: number; // Default to 0
+  visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes
 }
 
 interface ColumnConfigProps {
@@ -68,19 +48,19 @@ interface ColumnConfigProps {
 }
 
 interface DisplayTableProps {
-  unsorted_initial: string | null;
-  column_configs: ColumnConfigProps;
-  page_size_increment: number;
-  table_name: string;
   data: Array<Object>;
-  util_components: { [keys: string]: any };
-  enable_pagination: boolean;
-  page_size_num_options_max: number;
-  disable_column_select: boolean;
+  column_configs: ColumnConfigProps;
+  unsorted_initial?: boolean;
+  page_size_increment?: number;
+  table_name?: string;
+  util_components?: { [keys: string]: any };
+  enable_pagination?: boolean;
+  page_size_num_options_max?: number;
+  disable_column_select?: boolean;
 }
 
 interface DisplayTableState {
-  page_size: number;
+  page_size?: number;
   current_page: number;
   show_pagination_load_spinner: boolean;
   sort_by: string | null;
@@ -154,7 +134,7 @@ export class _DisplayTable extends React.Component<
   DisplayTableProps,
   DisplayTableState
 > {
-  private first_data_ref = React.createRef<HTMLTableDataCellElement>();
+  private first_data_ref = React.createRef<HTMLTableCellElement>();
 
   public static defaultProps = {
     page_size_increment: 100,
@@ -336,7 +316,7 @@ export class _DisplayTable extends React.Component<
       })
       .tap(descending ? _.reverse : _.noop)
       .value();
-    console.log(sorted_filtered_data);
+
     const total_row: { [key: string]: number } = _.reduce(
       sorted_filtered_data,
       (
@@ -397,11 +377,13 @@ export class _DisplayTable extends React.Component<
           key="columnToggleUtil"
           columns={
             <LegendList
-              items={_.map(all_ordered_col_keys, (key: string) => ({
-                id: key,
-                label: col_configs_with_defaults[key].header,
-                active: _.includes(visible_ordered_col_keys, key),
-              }))}
+              items={_.map(all_ordered_col_keys, (key: string) => {
+                return {
+                  id: key,
+                  label: col_configs_with_defaults[key].header,
+                  active: _.includes(visible_ordered_col_keys, key),
+                };
+              })}
               onClick={(clicked_key: string) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({

@@ -2,11 +2,25 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { CheckBox } from "src/components/CheckBox/CheckBox";
+import { CheckBox, CheckBoxProps } from "src/components/CheckBox/CheckBox";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import "./LegendList.scss";
+
+export interface LegendItemProps {
+  active: boolean;
+  id: string | number;
+  label: string;
+  color?: string;
+}
+
+interface LegendListProps {
+  isHorizontal?: boolean;
+  items: LegendItemProps[];
+  onClick: Function;
+  checkBoxProps?: CheckBoxProps;
+}
 
 export const LegendList = ({
   isHorizontal = false,
@@ -14,8 +28,8 @@ export const LegendList = ({
 
   // pass-through props for internal CheckBox component; see CheckBox for options, defaults
   onClick,
-  props,
-}) => (
+  checkBoxProps,
+}: LegendListProps) => (
   <ul
     className={classNames(
       "list-unstyled",
@@ -26,9 +40,9 @@ export const LegendList = ({
     {_.map(items, ({ color, label, id, active }) => (
       <li key={id} className={is_a11y_mode ? "checkbox" : "legend-list__item"}>
         <CheckBox
-          onClick={onClick}
-          {...props}
+          {...checkBoxProps}
           id={id}
+          onClick={onClick}
           color={color}
           label={label}
           active={active}
