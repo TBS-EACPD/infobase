@@ -36,6 +36,7 @@ export const declare_covid_key_concepts_panel = () =>
               COVID_EXPENDITUES_FLAG && "up_to_date",
               COVID_EXPENDITUES_FLAG && "spent",
               COVID_EXPENDITUES_FLAG && "other_expenditure_reporting",
+              COVID_EXPENDITUES_FLAG && "what_info_do_orgs_provide",
               COVID_EXPENDITUES_FLAG && "implementation_status",
               COVID_EXPENDITUES_FLAG && "auth_but_no_exp",
               "missing_measures",
