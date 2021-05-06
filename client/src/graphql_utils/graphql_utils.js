@@ -2,6 +2,7 @@ import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index.js";
 
 import _ from "lodash";
+import { useState } from "react";
 
 import string_hash from "string-hash";
 
@@ -68,8 +69,8 @@ const query_as_get_with_query_header = async (uri, options) => {
   return fetch(uriWithVersionAndQueryHash, new_options).catch((error) => {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "APOLLO_FETCH_ERROR",
-      MISC2: `Initial batch fetch error: ${error.toString()}`,
+      MISC1: "API_CONNECTION_ERROR",
+      MISC2: error.toString(),
     });
 
     throw error;
@@ -120,23 +121,21 @@ const make_query_promise = (query_name, query, response_resolver) => (
     })
     .then(response_resolver)
     .then((resolved_response) => {
-      const resp_time = Date.now() - time_at_request;
-
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_SUCCESS",
-        MISC2: `${query_name}, took ${resp_time} ms`,
+        MISC2: `${query_name}, took ${Date.now() - time_at_request} ms`,
       });
 
       return resolved_response;
     })
     .catch((error) => {
-      const resp_time = Date.now() - time_at_request;
-
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
         MISC1: "API_QUERY_FAILURE",
-        MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
+        MISC2: `${query_name}, took ${
+          Date.now() - time_at_request
+        } ms - ${error.toString()}`,
       });
 
       throw error;
@@ -146,8 +145,7 @@ const make_query_promise = (query_name, query, response_resolver) => (
 const make_query_hook = (query_name, query, response_resolver) => (
   variables
 ) => {
-  // TODO this time_at_request is useless for logging, ha
-  const time_at_request = Date.now();
+  const [time_at_request, set_time_at_request] = useState(Date.now()); // eslint-disable-line no-unused-vars
 
   const { loading, error, data } = useQuery(query, {
     variables: {
@@ -156,31 +154,35 @@ const make_query_hook = (query_name, query, response_resolver) => (
     },
   });
 
-  if (!loading && !error) {
-    const resp_time = Date.now() - time_at_request;
-
+  if (loading) {
+    return {
+      loading,
+      error,
+      data,
+    };
+  } else if (!error) {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_QUERY_SUCCESS",
-      MISC2: `${query_name}, took ${resp_time} ms`,
+      MISC2: `${query_name}, took ${Date.now() - time_at_request} ms`,
     });
-  } else if (error) {
-    const resp_time = Date.now() - time_at_request;
 
+    return {
+      loading,
+      error,
+      data: response_resolver(data),
+    };
+  } else {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_QUERY_FAILURE",
-      MISC2: `${query_name}, took ${resp_time} ms - ${error.toString()}`,
+      MISC2: `${query_name}, took ${
+        Date.now() - time_at_request
+      } ms - ${error.toString()}`,
     });
 
     throw new Error(error);
   }
-
-  return {
-    loading,
-    error,
-    data: loading ? data : response_resolver(data),
-  };
 };
 
 export const query_maker = ({
