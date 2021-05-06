@@ -26,7 +26,7 @@ export const {
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.get(response, "data.root.gov.years_with_covid_data"),
 });
 export const {
@@ -44,7 +44,7 @@ export const {
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.get(response, "data.root.org.years_with_covid_data"),
 });
 
@@ -60,7 +60,7 @@ export const { query_all_covid_measures, useAllCovidMeasures } = query_maker({
       }
     }
   `,
-  response_resolver: (response) => _.get(response, "data.root.covid_measures"),
+  resolver: (response) => _.get(response, "data.root.covid_measures"),
 });
 
 const covid_estimates_fields = `
@@ -91,7 +91,7 @@ export const {
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response)
       .get("data.root.covid_estimates_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
@@ -131,7 +131,7 @@ export const {
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response)
       .get("data.root.org.covid_estimates_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
@@ -173,7 +173,7 @@ export const {
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response)
       .get("data.root.covid_expenditures_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
@@ -213,7 +213,7 @@ export const {
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response)
       .get("data.root.org.covid_expenditures_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
@@ -255,8 +255,7 @@ export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker({
       }
     }
   `,
-  response_resolver: (response) =>
-    _.get(response, "data.root.gov.covid_summary"),
+  resolver: (response) => _.get(response, "data.root.gov.covid_summary"),
 });
 export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
   query_name: "org_covid_summaries",
@@ -272,8 +271,7 @@ export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
       }
     }
   `,
-  response_resolver: (response) =>
-    _.get(response, "data.root.org.covid_summary"),
+  resolver: (response) => _.get(response, "data.root.org.covid_summary"),
 });
 export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
   query_name: "gov_covid_summary",
@@ -289,7 +287,7 @@ export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response).get("data.root.gov.covid_summary").first().value(),
 });
 export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
@@ -306,7 +304,7 @@ export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response).get("data.root.org.covid_summary").first().value(),
 });
 
@@ -351,7 +349,7 @@ export const { query_top_covid_spending, useTopCovidSpending } = query_maker({
       }
     }
   `,
-  response_resolver: (response) =>
+  resolver: (response) =>
     _.chain(response)
       .get("data.root.gov.covid_summary")
       .first()
