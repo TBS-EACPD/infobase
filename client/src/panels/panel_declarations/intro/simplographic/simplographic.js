@@ -9,14 +9,14 @@ import { create_text_maker_component } from "src/components/index.js";
 import { ResultCounts, current_drr_key } from "src/models/results.js";
 import { Subject } from "src/models/subject.js";
 
-import { is_mobile } from "src/core/feature_detection.js";
+import { is_mobile } from "src/core/feature_detection.ts";
 
 import {
   IconFinances,
   IconEmployees,
   IconHierarchy,
   IconClipboard,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 import { infograph_href_template, rpb_link } from "src/link_utils.js";
 

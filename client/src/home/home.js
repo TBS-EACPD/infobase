@@ -7,15 +7,15 @@ import {
   ContainerEscapeHatch,
 } from "src/components/index.js";
 
-import { highlightColor } from "src/core/color_defs.js";
+import { highlightColor } from "src/core/color_defs.ts";
 
 import { lang } from "src/core/injected_build_constants.ts";
 
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
-import { IconFlagLine } from "src/icons/icons.js";
+import { IconFlagLine } from "src/icons/icons.tsx";
 
-import { get_static_url } from "src/request_utils.js";
+import { get_static_url } from "src/request_utils.ts";
 import { EverythingSearch } from "src/search/EverythingSearch.js";
 
 import {

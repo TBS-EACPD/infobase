@@ -20,7 +20,7 @@ import {
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
-import { breakpoints } from "src/core/breakpoint_defs.js";
+import { breakpoints } from "src/core/breakpoint_defs.ts";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 

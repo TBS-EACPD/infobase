@@ -15,7 +15,7 @@ import { year_templates } from "src/models/years.js";
 import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
-} from "src/core/color_schemes.js";
+} from "src/core/color_schemes.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

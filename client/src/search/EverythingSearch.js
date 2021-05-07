@@ -7,10 +7,10 @@ import { CheckBox, DropdownMenu } from "src/components/index.js";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { breakpoints } from "src/core/breakpoint_defs.js";
+import { breakpoints } from "src/core/breakpoint_defs.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconGear } from "src/icons/icons.js";
+import { IconGear } from "src/icons/icons.tsx";
 
 import { smart_href_template } from "src/link_utils.js";
 
@@ -76,20 +76,16 @@ const SearchOptions = ({ option_checkboxes }) => (
       <div
         style={{
           whiteSpace: "nowrap",
+          display: "inline-flex",
+          alignItems: "center",
         }}
       >
         <div
           style={{
             display: "inline-block",
-            marginRight: "21px",
           }}
         >
-          <IconGear
-            height="1px"
-            width="1px"
-            svg_style={{ verticalAlign: "14px" }}
-            alternate_color="false"
-          />
+          <IconGear height="21px" width="21px" alternate_color="false" />
         </div>
         <MediaQuery minWidth={breakpoints.minMediumDevice}>
           <span>{text_maker("options")}</span>

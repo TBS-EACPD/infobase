@@ -5,7 +5,7 @@ import React from "react";
 
 import { SmartDisplayTable } from "src/components/index.js";
 
-import { textColor } from "src/core/color_defs.js";
+import { textColor } from "src/core/color_defs.ts";
 
 import {
   nivo_common_text_maker,

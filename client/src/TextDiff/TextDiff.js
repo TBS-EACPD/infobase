@@ -29,7 +29,7 @@ import {
   successDarkColor,
   failDarkColor,
   infoDarkColor,
-} from "src/core/color_defs.js";
+} from "src/core/color_defs.ts";
 
 import { ensure_loaded } from "src/core/ensure_loaded.js";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";

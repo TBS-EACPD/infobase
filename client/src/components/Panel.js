@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { textLightColor } from "src/core/color_defs.js";
+import { textLightColor } from "src/core/color_defs.ts";
 
 import { Details } from "./Details.js";
 import { FootnoteList } from "./FootnoteList.js";

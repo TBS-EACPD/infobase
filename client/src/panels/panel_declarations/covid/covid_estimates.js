@@ -19,8 +19,8 @@ import {
 } from "src/models/covid/queries.js";
 import { Subject } from "src/models/subject.js";
 
-import { textColor } from "src/core/color_defs.js";
-import { infobase_colors } from "src/core/color_schemes.js";
+import { textColor } from "src/core/color_defs.ts";
+import { infobase_colors } from "src/core/color_schemes.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

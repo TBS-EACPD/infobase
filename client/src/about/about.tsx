@@ -20,7 +20,7 @@ import {
   IconSass,
   IconGraphQL,
   IconBaselineCloud,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 import about_text_bundle from "./about.yaml";
 import "./about.scss";

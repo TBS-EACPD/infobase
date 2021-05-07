@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { buttonPrimaryColor } from "src/core/color_defs.js";
+import { buttonPrimaryColor } from "src/core/color_defs.ts";
 
-import { is_IE } from "src/core/feature_detection.js";
+import { is_IE } from "src/core/feature_detection.ts";
 
 import { Countdown } from "./Countdown.tsx";
 import "./CountdownCircle.scss";

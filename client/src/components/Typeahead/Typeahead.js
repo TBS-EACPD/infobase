@@ -8,7 +8,7 @@ import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList.js";
 import { create_text_maker_component } from "src/components/misc_util_components.js";
 
-import { IconSearch } from "src/icons/icons.js";
+import { IconSearch } from "src/icons/icons.tsx";
 
 import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
 

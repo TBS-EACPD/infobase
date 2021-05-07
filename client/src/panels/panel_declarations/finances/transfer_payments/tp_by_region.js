@@ -21,12 +21,12 @@ import { run_template } from "src/models/text.js";
 
 import { year_templates } from "src/models/years.js";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { Canada } from "src/charts/canada/index.js";
-import { get_static_url, make_request } from "src/request_utils.js";
+import { get_static_url, make_request } from "src/request_utils.ts";
 
 import text from "./tp_by_region.yaml";
 

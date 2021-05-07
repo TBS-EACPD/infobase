@@ -12,7 +12,7 @@ import {
 
 import { make_unique_func, make_unique } from "src/general_utils.js";
 import { sources as all_sources } from "src/metadata/data_sources.js";
-import { get_static_url, make_request } from "src/request_utils.js";
+import { get_static_url, make_request } from "src/request_utils.ts";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.ts";
 import { lang } from "./injected_build_constants.ts";

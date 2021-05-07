@@ -9,7 +9,7 @@ import { lang } from "src/core/injected_build_constants.ts";
 
 import { sanitized_marked } from "src/general_utils.js";
 
-import { get_static_url, make_request } from "src/request_utils.js";
+import { get_static_url, make_request } from "src/request_utils.ts";
 
 import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
 import FootNote from "./footnotes.js";

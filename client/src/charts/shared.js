@@ -2,9 +2,9 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants.ts";
 
-import { NA_color } from "src/core/color_schemes.js";
+import { NA_color } from "src/core/color_schemes.ts";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

@@ -9,7 +9,7 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { is_mobile } from "src/core/feature_detection.js";
+import { is_mobile } from "src/core/feature_detection.ts";
 
 import { smaller_items_text } from "./data.js";
 

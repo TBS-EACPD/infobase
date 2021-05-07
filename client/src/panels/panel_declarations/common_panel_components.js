@@ -12,7 +12,7 @@ import {
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { breakpoints } from "src/core/breakpoint_defs.js";
+import { breakpoints } from "src/core/breakpoint_defs.ts";
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>

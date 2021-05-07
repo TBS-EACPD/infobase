@@ -4,11 +4,11 @@ import { GlossaryEntry } from "src/models/glossary.js";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { backgroundColor, primaryColor } from "src/core/color_defs.js";
+import { backgroundColor, primaryColor } from "src/core/color_defs.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconQuestion } from "src/icons/icons.js";
+import { IconQuestion } from "src/icons/icons.tsx";
 import { glossary_href } from "src/link_utils.js";
 
 const GlossaryTooltipWrapper = ({ id, children, no_bottom_border }) =>

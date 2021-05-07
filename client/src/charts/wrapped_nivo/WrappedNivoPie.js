@@ -6,8 +6,8 @@ import React from "react";
 
 import { Format, SmartDisplayTable } from "src/components/index.js";
 
-import { newIBCategoryColors } from "src/core/color_schemes.js";
-import { formats } from "src/core/format.js";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
+import { formats } from "src/core/format.ts";
 
 import { TabularLegend } from "src/charts/legends/index.js";
 

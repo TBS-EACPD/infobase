@@ -14,7 +14,7 @@ import { businessConstants } from "src/models/businessConstants.ts";
 import { run_template } from "src/models/text.js";
 import { year_templates } from "src/models/years.js";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import { NivoLineBarToggle } from "src/charts/wrapped_nivo/index.js";
 

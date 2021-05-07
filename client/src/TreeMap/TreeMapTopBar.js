@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { IconArrow } from "src/icons/icons.js";
+import { IconArrow } from "src/icons/icons.tsx";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";

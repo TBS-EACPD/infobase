@@ -17,7 +17,7 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants.ts";
 
-import { separatorColor } from "src/core/color_defs.js";
+import { separatorColor } from "src/core/color_defs.ts";
 import { lang } from "src/core/injected_build_constants.ts";
 
 import graphRegistry from "src/charts/graphRegistry.js";

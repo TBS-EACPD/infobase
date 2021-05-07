@@ -16,7 +16,7 @@ import {
   secondaryColor,
   highlightOrangeColor,
   separatorColor,
-} from "src/core/color_defs.js";
+} from "src/core/color_defs.ts";
 import { is_a11y_mode, lang } from "src/core/injected_build_constants.ts";
 
 import { StandardLegend } from "src/charts/legends/index.js";

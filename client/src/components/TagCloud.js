@@ -4,9 +4,9 @@ import React from "react";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 
-import { backgroundColor } from "src/core/color_defs.js";
+import { backgroundColor } from "src/core/color_defs.ts";
 
-import { IconCheckmark } from "src/icons/icons.js";
+import { IconCheckmark } from "src/icons/icons.tsx";
 
 import { GlossaryIcon } from "./glossary_components.js";
 

@@ -14,8 +14,8 @@ import {
   highlightColor,
   secondaryColor,
   textColor,
-} from "src/core/color_defs.js";
-import { formats } from "src/core/format.js";
+} from "src/core/color_defs.ts";
+import { formats } from "src/core/format.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";

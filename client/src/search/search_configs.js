@@ -5,7 +5,7 @@ import { GlossaryEntry } from "src/models/glossary.js";
 import { Subject } from "src/models/subject.js";
 import { trivial_text_maker } from "src/models/text.js";
 
-import { textColor } from "src/core/color_defs.js";
+import { textColor } from "src/core/color_defs.ts";
 import { Table } from "src/core/TableClass.js";
 
 import {

@@ -8,7 +8,7 @@ import {
   create_text_maker,
 } from "src/models/text.js";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import { text_abbrev } from "src/general_utils.js";
 

@@ -6,11 +6,11 @@ import ReactResizeDetector from "react-resize-detector/build/withPolyfill.js";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { backgroundColor } from "src/core/color_defs.js";
-import { has_local_storage } from "src/core/feature_detection.js";
+import { backgroundColor } from "src/core/color_defs.ts";
+import { has_local_storage } from "src/core/feature_detection.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconPin, IconUnpin } from "src/icons/icons.js";
+import { IconPin, IconUnpin } from "src/icons/icons.tsx";
 
 import text from "./PinnedContent.yaml";
 

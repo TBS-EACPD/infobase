@@ -6,7 +6,7 @@ import { TM } from "src/components/index.js";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { primaryColor, backgroundColor } from "src/core/color_defs.js";
+import { primaryColor, backgroundColor } from "src/core/color_defs.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

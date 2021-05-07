@@ -25,8 +25,8 @@ import {
   tertiaryColor,
   textColor,
   highlightColor,
-} from "src/core/color_defs.js";
-import { newIBCategoryColors } from "src/core/color_schemes.js";
+} from "src/core/color_defs.ts";
+import { newIBCategoryColors } from "src/core/color_schemes.ts";
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { StandardLegend } from "src/charts/legends/index.js";

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { primaryColor, secondaryColor } from "src/core/color_defs.js";
+import { primaryColor, secondaryColor } from "src/core/color_defs.ts";
 
 import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
 import "./LeafSpinner.scss";

@@ -17,8 +17,8 @@ import {
   primaryColor,
   textColor,
   backgroundColor,
-} from "src/core/color_defs.js";
-import { formats } from "src/core/format.js";
+} from "src/core/color_defs.ts";
+import { formats } from "src/core/format.ts";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
 

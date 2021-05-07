@@ -16,7 +16,7 @@ import {
   IconAttention,
   IconNotApplicable,
   IconClock,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
 
 import { TM, text_maker } from "./result_text_provider.js";
 

@@ -21,10 +21,10 @@ import {
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
-} from "src/core/color_schemes.js";
-import { is_mobile } from "src/core/feature_detection.js";
+} from "src/core/color_schemes.ts";
+import { is_mobile } from "src/core/feature_detection.ts";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 import { StandardRouteContainer } from "src/core/NavComponents.js";
 
 import { infograph_href_template } from "src/infographic/infographic_link.js";

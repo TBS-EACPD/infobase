@@ -10,7 +10,8 @@ import {
   IconGlossary,
   IconDataset,
   IconQuestion,
-} from "src/icons/icons.js";
+} from "src/icons/icons.tsx";
+
 import "./NavComponents.scss";
 
 export class EasyAccess extends React.Component {

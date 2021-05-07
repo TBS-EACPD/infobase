@@ -6,9 +6,9 @@ import {
   successDarkColor,
   highlightDark,
   warnDarkColor,
-} from "src/core/color_defs.js";
+} from "src/core/color_defs.ts";
 
-import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons.js";
+import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons.tsx";
 
 const digital_status_keys = [
   "account_reg_digital",

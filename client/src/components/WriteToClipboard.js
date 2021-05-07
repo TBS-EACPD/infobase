@@ -4,11 +4,11 @@ import React, { Fragment } from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { tertiaryColor, textLightColor } from "src/core/color_defs.js";
+import { tertiaryColor, textLightColor } from "src/core/color_defs.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
-import { IconCopy } from "src/icons/icons.js";
+import { IconCopy } from "src/icons/icons.tsx";
 
 import { FixedPopover } from "./modals_and_popovers/index.js";
 

@@ -19,7 +19,7 @@ import { run_template } from "src/models/text.js";
 
 import { year_templates } from "src/models/years.js";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 

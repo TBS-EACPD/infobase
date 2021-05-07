@@ -3,9 +3,9 @@ import React, { Fragment } from "react";
 
 import { create_text_maker } from "src/models/text.js";
 
-import { backgroundColor } from "src/core/color_defs.js";
+import { backgroundColor } from "src/core/color_defs.ts";
 
-import { formats } from "src/core/format.js";
+import { formats } from "src/core/format.ts";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
