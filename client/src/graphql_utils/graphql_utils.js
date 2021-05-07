@@ -106,6 +106,19 @@ export function get_client() {
   return client;
 }
 
+const log_query_success = (query_name, response_time) =>
+  log_standard_event({
+    SUBAPP: window.location.hash.replace("#", ""),
+    MISC1: "API_QUERY_SUCCESS",
+    MISC2: `${query_name}, took ${response_time} ms`,
+  });
+const log_query_failure = (query_name, response_time, error) =>
+  log_standard_event({
+    SUBAPP: window.location.hash.replace("#", ""),
+    MISC1: "API_QUERY_FAILURE",
+    MISC2: `${query_name}, took ${response_time} ms - ${error.toString()}`,
+  });
+
 const query_promise_factory = (query_name, query, resolver) => (variables) => {
   const time_at_request = Date.now();
 
@@ -117,24 +130,13 @@ const query_promise_factory = (query_name, query, resolver) => (variables) => {
         _query_name: query_name,
       },
     })
-    .then(resolver)
-    .then((resolved_response) => {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_SUCCESS",
-        MISC2: `${query_name}, took ${Date.now() - time_at_request} ms`,
-      });
+    .then((response) => {
+      log_query_success(query_name, Date.now() - time_at_request);
 
-      return resolved_response;
+      return resolver(response);
     })
     .catch((error) => {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `${query_name}, took ${
-          Date.now() - time_at_request
-        } ms - ${error.toString()}`,
-      });
+      log_query_failure(query_name, Date.now() - time_at_request, error);
 
       throw error;
     });
@@ -157,21 +159,11 @@ const query_hook_factory = (query_name, query, resolver) => (variables) => {
       data,
     };
   } else if (error) {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "API_QUERY_FAILURE",
-      MISC2: `${query_name}, took ${
-        Date.now() - time_at_request
-      } ms - ${error.toString()}`,
-    });
+    log_query_failure(query_name, Date.now() - time_at_request, error);
 
     throw new Error(error);
   } else {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "API_QUERY_SUCCESS",
-      MISC2: `${query_name}, took ${Date.now() - time_at_request} ms`,
-    });
+    log_query_success(query_name, Date.now() - time_at_request);
 
     return {
       loading,
