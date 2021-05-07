@@ -3,7 +3,7 @@ import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
 
-import { DebouncedTextInput } from "src/components/DebouncedTextInput";
+import { DebouncedTextInput } from "src/components/DebouncedTextInput/DebouncedTextInput.js";
 import {
   create_text_maker_component,
   Format,
