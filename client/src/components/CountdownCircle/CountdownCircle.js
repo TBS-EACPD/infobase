@@ -5,7 +5,7 @@ import { buttonPrimaryColor } from "src/core/color_defs.js";
 
 import { is_IE } from "src/core/feature_detection.js";
 
-import { Countdown } from "./Countdown.js";
+import { Countdown } from "../Countdown/Countdown.js";
 import "./CountdownCircle.scss";
 
 const split_value_and_units = (size) => {
