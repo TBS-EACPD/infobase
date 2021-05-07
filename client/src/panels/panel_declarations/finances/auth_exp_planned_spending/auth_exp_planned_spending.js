@@ -27,8 +27,8 @@ import {
   highlightColor,
 } from "src/core/color_defs.ts";
 import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 import { formats } from "src/core/format.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants.ts";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
@@ -390,7 +390,7 @@ class LapseByVotesGraph extends React.Component {
               .reverse()
               .value()}
             raw_data={get_lapse_raw_data(is_showing_lapse_pct)}
-            colorBy={(d) => colors(d.id)}
+            colors={(d) => colors(d.id)}
             margin={{
               top: 10,
               right: 30,
