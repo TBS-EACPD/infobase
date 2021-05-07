@@ -380,13 +380,11 @@ export class _DisplayTable extends React.Component<
             <LegendList
               items={_.map<any, LegendItemProps>(
                 all_ordered_col_keys,
-                (key: string) => {
-                  return {
-                    id: key,
-                    label: col_configs_with_defaults[key].header,
-                    active: _.includes(visible_ordered_col_keys, key),
-                  };
-                }
+                (key: string) => ({
+                  id: key,
+                  label: col_configs_with_defaults[key].header,
+                  active: _.includes(visible_ordered_col_keys, key),
+                })
               )}
               onClick={(clicked_key: string) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
