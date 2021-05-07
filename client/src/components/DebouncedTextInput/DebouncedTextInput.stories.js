@@ -1,33 +1,17 @@
-import React, { useState } from "react";
+import _ from "lodash";
+import React from "react";
 
-import { DebouncedTextInput } from "./DebouncedTextInput";
+import { DebouncedTextInput } from "./DebouncedTextInput.js";
 
 export default {
-  title: "Input/DebouncedTextInput",
+  title: "DebouncedTextInput",
   component: DebouncedTextInput,
 };
 
-const Template = (args) => {
-  const [text, setText] = useState("");
-
-  function updateCallback(value) {
-    setText(value);
-    console.log("Text has been changed to " + value);
-  }
-
-  return (
-    <>
-      <DebouncedTextInput {...args} updateCallback={updateCallback} />
-      <div>{text}</div>
-    </>
-  );
-};
+// not sure if the component works or not
+const Template = (args) => <DebouncedTextInput {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  a11y_label: "Label",
-  placeHolder: "Write something",
-  defaultValue: "",
-  debounceTime: 2000,
-  inputClassName: "",
+  placeholder: "Placeholder",
 };
