@@ -11,7 +11,7 @@ import {
 import { SortDirections } from "src/components/SortDirection";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper";
 
-import { LegendList } from "src/charts/legends/LegendList";
+import { LegendList, LegendItemProps } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
 
@@ -343,12 +343,13 @@ export class _DisplayTable extends React.Component<
     const visible_ordered_col_keys = _.intersection(
       all_ordered_col_keys,
       visible_col_keys
-    );
+    ) as string[];
+
     const csv_string = _.chain(visible_ordered_col_keys)
       .map((key: string) => col_configs_with_defaults[key].header)
       .thru((header_row) => [header_row])
       .concat(
-        _.map(sorted_filtered_data, (row: DisplayTableData) =>
+        _.map<any, string[]>(sorted_filtered_data, (row: DisplayTableData) =>
           _.map(visible_ordered_col_keys, (key: string) =>
             col_configs_with_defaults[key].raw_formatter(row[key])
           )
@@ -377,13 +378,16 @@ export class _DisplayTable extends React.Component<
           key="columnToggleUtil"
           columns={
             <LegendList
-              items={_.map(all_ordered_col_keys, (key: string) => {
-                return {
-                  id: key,
-                  label: col_configs_with_defaults[key].header,
-                  active: _.includes(visible_ordered_col_keys, key),
-                };
-              })}
+              items={_.map<any, LegendItemProps>(
+                all_ordered_col_keys,
+                (key: string) => {
+                  return {
+                    id: key,
+                    label: col_configs_with_defaults[key].header,
+                    active: _.includes(visible_ordered_col_keys, key),
+                  };
+                }
+              )}
               onClick={(clicked_key: string) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
@@ -594,24 +598,32 @@ export class _DisplayTable extends React.Component<
                                 : null
                             }
                           >
-                            {col_configs_with_defaults[col_key].formatter ? (
-                              _.isString(
-                                col_configs_with_defaults[col_key].formatter
-                              ) ? (
-                                <Format
-                                  type={
-                                    col_configs_with_defaults[col_key].formatter
-                                  }
-                                  content={row[col_key]}
-                                />
-                              ) : (
-                                col_configs_with_defaults[col_key].formatter(
-                                  row[col_key]
-                                )
-                              )
-                            ) : (
-                              row[col_key]
-                            )}
+                            {(() => {
+                              const col_formatter =
+                                col_configs_with_defaults[col_key].formatter;
+                              const col_formatter_is_string = _.isString(
+                                col_formatter
+                              );
+                              const col_formatter_is_fn = _.isFunction(
+                                col_formatter
+                              );
+                              if (col_formatter) {
+                                if (col_formatter_is_string) {
+                                  return (
+                                    <Format
+                                      type={col_formatter}
+                                      content={row[col_key]}
+                                    />
+                                  );
+                                } else if (col_formatter_is_fn) {
+                                  return (col_formatter as Function)(
+                                    row[col_key]
+                                  );
+                                }
+                              } else {
+                                return row[col_key];
+                              }
+                            })()}
                           </td>
                         )
                       )}
@@ -634,26 +646,23 @@ export class _DisplayTable extends React.Component<
                           {(() => {
                             const has_total_row = total_row[col_key];
                             if (has_total_row) {
-                              const has_formatter =
+                              const col_formatter =
                                 col_configs_with_defaults[col_key].formatter;
-                              if (has_formatter) {
+                              if (col_formatter) {
                                 const is_formatter_string = _.isString(
-                                  col_configs_with_defaults[col_key].formatter
+                                  col_formatter
                                 );
                                 if (is_formatter_string) {
                                   return (
                                     <Format
-                                      type={
-                                        col_configs_with_defaults[col_key]
-                                          .formatter
-                                      }
+                                      type={col_formatter}
                                       content={total_row[col_key]}
                                     />
                                   );
                                 } else {
-                                  return col_configs_with_defaults[
-                                    col_key
-                                  ].formatter(total_row[col_key]);
+                                  return (col_formatter as Function)(
+                                    total_row[col_key]
+                                  );
                                 }
                               } else {
                                 return total_row[col_key];
