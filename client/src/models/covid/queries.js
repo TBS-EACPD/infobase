@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants.ts";
 
-import { query_maker } from "src/graphql_utils/graphql_utils.js";
+import { query_factory } from "src/graphql_utils/graphql_utils.js";
 
 const years_with_covid_data = `
   years_with_covid_data {
@@ -14,7 +14,7 @@ const years_with_covid_data = `
 export const {
   query_gov_years_with_covid_data,
   useGovYearsWithCovidData,
-} = query_maker({
+} = query_factory({
   query_name: "gov_years_with_covid_data",
   query: gql`
     query($lang: String! = "${lang}") {
@@ -32,7 +32,7 @@ export const {
 export const {
   query_org_years_with_covid_data,
   useOrgYearsWithCovidData,
-} = query_maker({
+} = query_factory({
   query_name: "org_years_with_covid_data",
   query: gql`
     query($lang: String! = "${lang}", $org_id: String!) {
@@ -48,7 +48,7 @@ export const {
     _.get(response, "data.root.org.years_with_covid_data"),
 });
 
-export const { query_all_covid_measures, useAllCovidMeasures } = query_maker({
+export const { query_all_covid_measures, useAllCovidMeasures } = query_factory({
   query_name: "all_covid_measures",
   query: gql`
     query($lang: String! = "${lang}") {
@@ -71,7 +71,7 @@ const covid_estimates_fields = `
 export const {
   query_all_covid_estimates_by_measure_id,
   useAllCovidEstimatesByMeasureId,
-} = query_maker({
+} = query_factory({
   query_name: "all_covid_estimates_by_measure_id",
   query: gql`
     query($lang: String! = "${lang}", $fiscal_year: Int) {
@@ -108,7 +108,7 @@ export const {
 export const {
   query_org_covid_estimates_by_measure_id,
   useOrgCovidEstimatesByMeasureId,
-} = query_maker({
+} = query_factory({
   query_name: "org_covid_estimates_by_measure_id",
   query: gql`
     query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
@@ -153,7 +153,7 @@ const covid_expenditures_fields = `
 export const {
   query_all_covid_expenditures_by_measure_id,
   useAllCovidExpendituresByMeasureId,
-} = query_maker({
+} = query_factory({
   query_name: "all_covid_expenditures_by_measure_id",
   query: gql`
     query($lang: String! = "${lang}", $fiscal_year: Int) {
@@ -190,7 +190,7 @@ export const {
 export const {
   query_org_covid_expenditures_by_measure_id,
   useOrgCovidExpendituresByMeasureId,
-} = query_maker({
+} = query_factory({
   query_name: "org_covid_expenditures_by_measure_id",
   query: gql`
     query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int) {
@@ -241,7 +241,10 @@ const common_covid_summary_fields = `
     ${covid_expenditures_fields}
   }
 `;
-export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker({
+export const {
+  query_gov_covid_summaries,
+  useGovCovidSummaries,
+} = query_factory({
   query_name: "gov_covid_summaries",
   query: gql`
     query($lang: String! = "${lang}") {
@@ -257,7 +260,10 @@ export const { query_gov_covid_summaries, useGovCovidSummaries } = query_maker({
   `,
   resolver: (response) => _.get(response, "data.root.gov.covid_summary"),
 });
-export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
+export const {
+  query_org_covid_summaries,
+  useOrgCovidSummaries,
+} = query_factory({
   query_name: "org_covid_summaries",
   query: gql`
     query($lang: String! = "${lang}", $org_id: String!) {
@@ -273,7 +279,7 @@ export const { query_org_covid_summaries, useOrgCovidSummaries } = query_maker({
   `,
   resolver: (response) => _.get(response, "data.root.org.covid_summary"),
 });
-export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
+export const { query_gov_covid_summary, useGovCovidSummary } = query_factory({
   query_name: "gov_covid_summary",
   query: gql`
     query($lang: String! = "${lang}", $fiscal_year: Int!) {
@@ -290,7 +296,7 @@ export const { query_gov_covid_summary, useGovCovidSummary } = query_maker({
   resolver: (response) =>
     _.chain(response).get("data.root.gov.covid_summary").first().value(),
 });
-export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
+export const { query_org_covid_summary, useOrgCovidSummary } = query_factory({
   query_name: "org_covid_summary",
   query: gql`
     query($lang: String! = "${lang}", $org_id: String!, $fiscal_year: Int!) {
@@ -308,7 +314,7 @@ export const { query_org_covid_summary, useOrgCovidSummary } = query_maker({
     _.chain(response).get("data.root.org.covid_summary").first().value(),
 });
 
-export const { query_top_covid_spending, useTopCovidSpending } = query_maker({
+export const { query_top_covid_spending, useTopCovidSpending } = query_factory({
   query_name: "top_covid_spending",
   query: gql`
     query($lang: String! = "${lang}", $top_x: Int! = 4, $fiscal_year: Int!) {

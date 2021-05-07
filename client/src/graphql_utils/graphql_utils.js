@@ -106,7 +106,7 @@ export function get_client() {
   return client;
 }
 
-const make_query_promise = (query_name, query, resolver) => (variables) => {
+const query_promise_factory = (query_name, query, resolver) => (variables) => {
   const time_at_request = Date.now();
 
   return get_client()
@@ -140,7 +140,7 @@ const make_query_promise = (query_name, query, resolver) => (variables) => {
     });
 };
 
-const make_query_hook = (query_name, query, resolver) => (variables) => {
+const query_hook_factory = (query_name, query, resolver) => (variables) => {
   const [time_at_request, set_time_at_request] = useState(Date.now()); // eslint-disable-line no-unused-vars
 
   const { loading, error, data } = useQuery(query, {
@@ -181,7 +181,7 @@ const make_query_hook = (query_name, query, resolver) => (variables) => {
   }
 };
 
-export const query_maker = ({ query_name, query, resolver = _.identity }) => {
+export const query_factory = ({ query_name, query, resolver = _.identity }) => {
   if (!query_name) {
     throw new Error(
       "All queries must have (unique) names, for logging purposes."
@@ -197,7 +197,7 @@ export const query_maker = ({ query_name, query, resolver = _.identity }) => {
     .value();
 
   return {
-    [promise_key]: make_query_promise(query_name, query, resolver),
-    [hook_key]: make_query_hook(query_name, query, resolver),
+    [promise_key]: query_promise_factory(query_name, query, resolver),
+    [hook_key]: query_hook_factory(query_name, query, resolver),
   };
 };
