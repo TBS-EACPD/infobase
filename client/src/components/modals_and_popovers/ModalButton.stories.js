@@ -8,16 +8,14 @@ export default {
   component: ModalButton,
 };
 
-const Template = (args) => (
-  <ModalButton {...args} />
-);
+const Template = (args) => <ModalButton {...args} />;
 
-const children = <div>Body</div>
+const children = <div>Body</div>;
 
 export const Basic = Template.bind({});
 Basic.args = {
-    children,
-    button_text: "Button Text",
-    show_modal: true,
-    title: "Title",
+  children,
+  button_text: "Button Text",
+  show_modal: true,
+  title: "Title",
 };

@@ -8,15 +8,13 @@ export default {
   component: FocusLockedModal,
 };
 
-const Template = (args) => (
-  <FocusLockedModal {...args} />
-);
+const Template = (args) => <FocusLockedModal {...args} />;
 
-const children = <div>Hi</div>
+const children = <div>Hi</div>;
 
 export const Basic = Template.bind({});
 Basic.args = {
-    children,
-    mounted: true,
-    on_exit: true,
+  children,
+  mounted: true,
+  on_exit: true,
 };

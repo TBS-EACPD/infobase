@@ -8,13 +8,8 @@ export default {
   component: FixedPopover,
 };
 
-
 // not sure if the component works or not
-const Template = (args) => (
-  <FixedPopover {...args} />
-);
-
-
+const Template = (args) => <FixedPopover {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {

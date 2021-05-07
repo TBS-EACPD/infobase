@@ -8,14 +8,12 @@ export default {
   component: AlertBanner,
 };
 
-const Template = (args) => (
-  <AlertBanner {...args} />
-);
+const Template = (args) => <AlertBanner {...args} />;
 
-const children = <div>Children</div>
+const children = <div>Children</div>;
 
 export const Basic = Template.bind({});
 Basic.args = {
-    children,
-    banner_class: "info",
+  children,
+  banner_class: "info",
 };
