@@ -8,13 +8,8 @@ export default {
   component: DebouncedTextInput,
 };
 
-
 // not sure if the component works or not
-const Template = (args) => (
-  <DebouncedTextInput {...args} />
-);
-
-
+const Template = (args) => <DebouncedTextInput {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
