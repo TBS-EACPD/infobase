@@ -17,16 +17,13 @@
     "Taewan Kang"
   ],
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-lodash": "^7.1.0",
     "eslint-plugin-node": "^11.0.0",
-    "pg": "^7.12.1",
-    "pg-hstore": "^2.3.3",
-    "prettier": "^2.0.5",
-    "husky": "^6.0.0"
+    "husky": "^6.0.0",
+    "prettier": "^2.0.5"
   }
 }
