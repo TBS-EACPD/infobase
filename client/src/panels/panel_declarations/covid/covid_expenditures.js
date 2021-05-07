@@ -109,14 +109,17 @@ const SummaryTab = ({ args: panel_args, data }) => {
         />
       </div>
       <div className="col-12">
-        <TM k={`covid_top_spending_measures`} el={"h3"} />
         <MediaQuery minWidth={breakpoints.minLargeDevice}>
           {(matches) => (
-            <SummaryTabPie
-              data={top_spending_measures}
-              other_items_label={text_maker("covid_all_other_measures")}
-              reverse_layout={!!matches}
-            />
+            <Fragment>
+              {matches && <hr />}
+              <TM k={`covid_top_spending_measures`} el={"h3"} />
+              <SummaryTabPie
+                data={top_spending_measures}
+                other_items_label={text_maker("covid_all_other_measures")}
+                reverse_layout={!!matches}
+              />
+            </Fragment>
           )}
         </MediaQuery>
       </div>
