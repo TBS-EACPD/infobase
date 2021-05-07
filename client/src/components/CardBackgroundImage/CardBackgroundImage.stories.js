@@ -8,13 +8,10 @@ export default {
   component: CardBackgroundImage,
 };
 
-
 // not sure if the component works or not
-const Template = (args) => (
-  <CardBackgroundImage {...args} />
-);
+const Template = (args) => <CardBackgroundImage {...args} />;
 
-const text_args = <div>Text_Args</div>
+const text_args = <div>Text_Args</div>;
 
 // Doesn't work for some reason, has to do with TM in CardBackgroundImage.js
 // export const Basic = Template.bind({});

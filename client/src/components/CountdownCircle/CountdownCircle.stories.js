@@ -8,13 +8,8 @@ export default {
   component: CountdownCircle,
 };
 
-
 // not sure if the component works or not
-const Template = (args) => (
-  <CountdownCircle {...args} />
-);
-
-
+const Template = (args) => <CountdownCircle {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {

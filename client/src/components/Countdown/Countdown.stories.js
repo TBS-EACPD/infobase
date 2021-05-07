@@ -8,15 +8,10 @@ export default {
   component: Countdown,
 };
 
-
 // not sure if the component works or not
-const Template = (args) => (
-  <Countdown {...args} />
-);
-
-
+const Template = (args) => <Countdown {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  time: 10
+  time: 10,
 };
