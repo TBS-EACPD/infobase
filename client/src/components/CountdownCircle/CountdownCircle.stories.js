@@ -15,4 +15,8 @@ export const Basic = Template.bind({});
 Basic.args = {
   time: 10000,
   size: "20em",
+  color: "blue",
+  stroke_width: "20em",
+  show_numbers: true,
+  on_end_callback: "on_end_callback",
 };
