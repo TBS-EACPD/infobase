@@ -104,8 +104,8 @@
 "CCRA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",91666,91666,0,160629,160629,,62735.00,62735.10,,119852,119852.00,,94882,94882,
 "CCRA","S",999,"Spending of revenues received through the conduct of its operations pursuant to section 60 of the Canada Revenue Agency Act","Dépenses des recettes résultant de la poursuite des opérations en vertu de l'article 60 de la Loi sur l'Agence du revenu du Canada",169032577,169032577,0,163733679,163733679,,166387494.00,166387494.17,,182105000,182105000.00,,189819164,189819164,
 "CDC",1,1,"Operating/Program","Fonctionnement/Programme",3731258,3723258,0,3783194,3773193,0,3934160.00,3924160.00,0,4054782,3979440.00,0,3967223,3967223,0
-"CEAA",1,1,"Operating/Program","Fonctionnement/Programme",29156074,27579392,0,38348293,35361771,0,36634525.00,36373415.00,0,50597197,44050777.00,0,53850300,49805530,0
-"CEAA",5,3,"Grants & Contributions","Subventions et Contributions",,,,,,,,,,,,,14525184,7388432,0
+"CEAA",1,1,"Operating/Program","Fonctionnement/Programme",29156074,27579392,0,38348293,35361771,0,36634525.00,36373415.00,0,50597197,44050777.00,0,53850300,49805531,0
+"CEAA",5,3,"Grants & Contributions","Subventions et Contributions",,,,,,,,,,,,,14525184,7388431,0
 "CEAA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",1636910,1636910,0,3326229,3326229,,3448745.00,3448745.10,,3513244,3513244.00,,6252935,6252935,
 "CEAA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",111,0,111,111,,,,,,,,,,,
 "CEO",1,1,"Operating/Program","Fonctionnement/Programme",31294526,29376133,0,30713703,28287648,0,32302382.00,31903703.00,0,33820175,32244015.00,0,47065240,41497127,0
@@ -115,7 +115,7 @@
 "CEO","S",999,"Salary of the Chief Electoral Officer","Traitement du directeur général des élections",344565,344565,0,232832,232832,,199026.00,199026.36,,362427,362427.00,,332653,332653,
 "CEO","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",1065,1065,0,656,656,,183.00,182.77,,13361,13361.00,,666,666,
 "CFDC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",95453551,95453551,0,97453551,97453551,0,103572036.00,103572036.00,0,101898978,101898978.00,0,109378949,109378949,0
-"CFGB",1,1,"Operating/Program","Fonctionnement/Programme",6452536,5595299,0,6467559,5383550,0,7183457.00,6179818.00,0,6547882,5709819.00,0,6563033,5723312,0
+"CFGB",1,1,"Operating/Program","Fonctionnement/Programme",6452536,5595299,0,6467559,5383550,0,7183457.00,6179818.00,0,6547882,5709819.00,0,6563033,5723311,0
 "CFGB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",656299,656299,0,602252,602252,,545546.00,545545.90,,599856,599856.00,,652573,652573,
 "CFGB","S",999,"Payments to the Canadian Securities regulation Regime Transition Office","Paiements au Bureau de transition vers un régime canadien de réglementation des valeurs mobilières",,,,,,,1093.00,1092.80,,214,214.00,,,,
 "CFIA",1,1,"Operating/Program","Fonctionnement/Programme",567540946,560358513,0,596002535,576458091,0,611123508.00,594596763.00,0,610678989,596495919.00,0,637909878,593506878,0
@@ -242,7 +242,7 @@
 "CTAIB","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",3418391,3418391,0,3314521,3314521,,3444743.00,3444742.85,,3328645,3328645.00,,3696718,3696718,
 "CTAIB","S",999,"Expenditures pursuant to Paragraph 29.1(1) of Financial Administration Act","Dépenses aux termes du paragraphe 29.1(1) de la Loi sur la gestion des finances publiques",35690,35690,0,70592,70592,,119911.00,119911.44,,23773,23773.00,,27862,27862,
 "CTAIB","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",13311,3637,9674,20195,9675,10520,32597.00,10520.00,22077,60228,22077.00,38151,88873,38152,50721
-"EA",1,1,"Operating/Program","Fonctionnement/Programme",1601369913,1529980770,0,1665866604,1533816561,0,1787682635.00,1660201820.00,0,1899480046,1820952057.00,0,2000308597,1883363261,0
+"EA",1,1,"Operating/Program","Fonctionnement/Programme",1601369913,1529980770,0,1665866604,1533816561,0,1787682635.00,1660201820.00,0,1899480046,1820952057.00,0,2000308597,1883363260,0
 "EA",5,2,"Capital","Capital",180759813,135740375,0,213417219,158503511,0,195149445.00,139961958.00,0,171605134,132196816.00,0,130319951,108543093,0
 "EA",10,3,"Grants & Contributions","Subventions et Contributions",3938481338,3834875859,0,4251965821,4073558164,0,4596025963.00,4306311566.00,0,4864121914,4581142014.00,0,4970141490,4674051462,0
 "EA",15,1,"Operating/Program","Fonctionnement/Programme",64507724,64032147,0,64706000,62385033,0,66273000.00,65625437.00,0,69540997,69540997.00,0,68874000,68493656,0
@@ -262,7 +262,7 @@
 "EA","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",248173,248173,0,250500,250500,,253200.00,253200.00,,258000,258000.00,,201736,201736,
 "EA","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",3747716,1233188,2514528,4572788,2000000,2058260,3521831.00,,1463571,3568049,3348002.00,220047,1825541,1755463,70078
 "EC",1,1,"Operating/Program","Fonctionnement/Programme",743871139,683915798,0,750844255,715399847,0,837506257.00,815673987.00,0,837419975,819039469.00,0,896856534,870607881,0
-"EC",5,2,"Capital","Capital",84386878,61845115,0,73872049,57787760,0,84574595.00,64208758.00,0,92041019,81320972.00,0,109541298,95510340,0
+"EC",5,2,"Capital","Capital",84386878,61845115,0,73872049,57787760,0,84574595.00,64208758.00,0,92041019,81320972.00,0,109541298,95510341,0
 "EC",10,3,"Grants & Contributions","Subventions et Contributions",119225980,118530623,0,149433359,148617669,0,309276888.00,200135164.00,0,640599746,402863651.00,0,791612951,481634380,0
 "EC",15,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,467882,0,0
 "EC",20,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,198215,0,0
@@ -358,7 +358,7 @@
 "GG","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",2049489,2049489,0,1969157,1969157,,2021739.00,2021739.11,,1872747,1872747.00,,1979693,1979693,
 "GG","S",999,"Salary of the Governor General","Traitement du gouverneur général",285804,285804,0,289042,289042,,293119.00,293118.75,,295600,295600.00,,306067,306067,
 "GG","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",6457,3421,3036,3695,3036,659,5157.00,5157.21,,,,,12843,12843,
-"GSC",1,1,"Operating/Program","Fonctionnement/Programme",1775974752,1684654681,0,2005220938,1930668064,0,2382567749.00,2231626713.00,0,2677702916,2539734203.00,0,2826113338,2589977547,0
+"GSC",1,1,"Operating/Program","Fonctionnement/Programme",1775974752,1684654681,0,2005220938,1930668064,0,2382567749.00,2231626713.00,0,2677702916,2539734203.00,0,2826113338,2589977548,0
 "GSC",5,2,"Capital","Capital",1327296947,1057647220,0,1399493452,1187447922,0,1552612676.00,1297049674.00,0,1300638311,1220797156.00,0,1401557485,1086103659,0
 "GSC",10,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,852323,0,0
 "GSC",15,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,,,,71193744,0,0
@@ -435,8 +435,8 @@
 "HRSD","S",999,"Energy Cost Benefit","Prestation liée au coût de l'énergie",-250,-250,0,,,,-125.00,-125.00,,,,,-125,-125,
 "HRSD","S",999,"Guaranteed Income Supplement Payments (Old Age Security Act)","Versements du Supplément de revenu garanti (Loi sur la sécurité de la vieillesse)",9921659952,9921659952,0,10922423837,10922423837,,11658538967.84,11658538967.84,,12404699571,12404699571.00,,13007928280,13007928280,
 "HRSD","S",999,"Old Age Security payments (Old Age Security Act)","Versements de la Sécurité de la vieillesse (Loi sur la sécurité de la vieillesse)",35050472599,35050472599,0,36749167282,36749167282,,38409875247.00,38409875246.99,,40424123826,40424123826.00,,42706488728,42706488728,
-"HRSD","S",999,"Payments for the Canada Emergency Response Benefit pursuant to the Public Health Events of National Concern Payments Act","Paiements pour la Prestation canadienne d'urgence en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national",,,,,,,,,,,,,4755547878,4755547878,
 "HRSD","S",999,"Payments of compensation respecting government employees (Government Employees Compensation Act) and merchant seamen (Merchant Seamen Compensation Act)","Paiements d'indemnités à des agents de l'État (Loi sur l'indemnisation des agents de l'État) et à des marins marchands (Loi sur l'indemnisation des marins marchands)",29653765,29653765,0,40229133,40229133,,33449719.00,33449719.24,,31625283,31625283.00,,29245290,29245290,
+"HRSD","S",999,"Payments pursuant to the Public Health Events of National Concern Payments Act","Paiements en vertu de la Loi sur les paiements relatifs aux événements de santé publique d'intérêt national",,,,,,,,,,,,,4755547878,4755547878,
 "HRSD","S",999,"Payments related to the direct financing arrangement under the Apprentice Loans Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi sur les prêts aux apprentis",1650327,1650327,0,3684676,3684676,,2933298.00,2933298.55,,2635167,2635167.00,,2182482,2182482,
 "HRSD","S",999,"Payments related to the direct financing arrangement under the Canada Student Financial Assistance Act","Paiements liés aux modalités de financement direct accordés en vertu de la Loi fédérale sur l'aide financière aux étudiants",618363897,618363897,0,662379311,662379311,,797826410.00,797826409.72,,964748868,964748868.00,,934933044,934933044,
 "HRSD","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",506805,506805,0,188471,188471,,823191.00,823190.93,,104453,104453.00,,884244,884244,
@@ -453,7 +453,7 @@
 "IDRC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",183478242,183478242,0,149205625,147474006,0,139951886.00,139951886.00,0,140366150,140366150.00,0,142907117,142907117,0
 "IJC",1,1,"Operating/Program","Fonctionnement/Programme",6515840,6132731,0,6727679,5986508,0,9866742.00,6924451.00,0,12754437,8008046.00,0,11177071,8404880,0
 "IJC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",485992,485992,0,464115,464115,,494837.00,494837.45,,494559,494559.00,,526799,526799,
-"INAC",1,1,"Operating/Program","Fonctionnement/Programme",1486190289,1264223992,0,996549309,871749610,0,952086512.00,757396283.00,0,1034469316,801731425.00,0,3327271854,2480236428,0
+"INAC",1,1,"Operating/Program","Fonctionnement/Programme",1486190289,1264223992,0,996549309,871749610,0,952086512.00,757396283.00,0,1034469316,801731425.00,0,3327271854,2480236427,0
 "INAC",5,2,"Capital","Capital",57702846,57134402,0,55425958,47675818,0,52015211.00,28783127.00,0,25464612,17373082.00,0,9426629,5917332,0
 "INAC",7,4,"Debt Forgiveness","Radiation de dettes",,,,,,,526408.00,523804.00,0,,,,,,
 "INAC",9,4,"Debt Forgiveness","Radiation de dettes",,,,,,,100115.00,100114.00,0,,,,,,
@@ -561,7 +561,7 @@
 "LDC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",,,,,,,,,,14546,14546.00,,96534,96534,
 "LP",1,1,"Operating/Program","Fonctionnement/Programme",37754035,37110432,0,37899035,37871853,0,43754877.00,41112174.00,0,43409962,42881490.00,0,45702995,44227876,0
 "LP","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",4508192,4508192,0,4569814,4569814,,4519938.00,4519937.95,,4647901,4647901.00,,5051268,5051268,
-"MPCC",1,1,"Operating/Program","Fonctionnement/Programme",5418346,5031875,0,4496858,3748700,0,4454113.00,4175963.00,0,4585790,4373110.00,0,4580279,4309491,0
+"MPCC",1,1,"Operating/Program","Fonctionnement/Programme",5418346,5031875,0,4496858,3748700,0,4454113.00,4175963.00,0,4585790,4373110.00,0,4580279,4309492,0
 "MPCC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",375364,375364,0,370830,370830,,359735.00,359735.31,,402395,402395.00,,421740,421740,
 "MPCC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",287,0,287,376,,89,154.00,,65,115,,50,50,,
 "NAC",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",54897056,54897056,0,135309431,135309431,0,141324356.00,141324356.00,0,35439021,35439021.00,0,35270142,35270142,0
@@ -686,7 +686,7 @@
 "PBO",1,1,"Operating/Program","Fonctionnement/Programme",,,,,,,,,,6983524,5046675.00,0,7016482,5418118,0
 "PBO",3,1,"Operating/Program","Fonctionnement/Programme",,,,,,,2201031.00,1819087.00,0,,,,,,
 "PBO","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",,,,,,,166066.00,166066.29,,384730,384730.00,,505386,505386,
-"PCA",1,1,"Operating/Program","Fonctionnement/Programme",986022622,837886384,145403966,1252024806,992212261,257559545,1570653928.00,1140076058.00,343673818,1678279963,1182151723.00,475071026,1932377321,1219082782,193217371
+"PCA",1,1,"Operating/Program","Fonctionnement/Programme",986022622,837886384,145403966,1252024806,992212261,257559545,1570653928.00,1140076058.00,343673818,1678279963,1182151723.00,475071026,1932377321,1219082783,193217371
 "PCA",5,9,"Other","Autre",500000,500000,0,500000,500000,0,25545821.00,25545821.00,0,44007000,44007000.00,0,26323000,26323000,0
 "PCA","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",50198150,50198150,0,50864137,50864137,,51595808.00,51595808.14,,63337755,63337755.00,,58532629,58532629,
 "PCA","S",999,"Expenditures equivalent to revenues resulting from the conduct of operations pursuant to section 20 of the Parks Canada Agency Act","Dépenses qui équivalent aux revenus résultant de la poursuite des opérations en vertu de l'article 20 de la Loi sur l'Agence Parcs Canada",163136474,147545873,15590601,166348040,148116653,18231387,121405446.00,99815122.57,21590323,196038118,170827686.00,25210432,196329322,176336244,19993078
@@ -785,7 +785,7 @@
 "TBC",5,6,"Treasury Board Central","Crédit du Conseil du Trésor",750000000,0,0,635642771,0,0,530274898.00,0.00,0,620803211,0.00,0,431434416,0,0
 "TBC",10,6,"Treasury Board Central","Crédit du Conseil du Trésor",2090470,0,0,693000,0,0,693000.00,0.00,0,209653633,0.00,0,87762568,0,0
 "TBC",15,6,"Treasury Board Central","Crédit du Conseil du Trésor",,,,0,0,0,0.00,0.00,0,0,0.00,0,0,0,0
-"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor",2719270604,2690624377,0,2460070604,2406697551,0,3274680578.00,3164665468.00,0,2952919397,2739639374.00,0,2667910100,2633550310,0
+"TBC",20,6,"Treasury Board Central","Crédit du Conseil du Trésor",2719270604,2690624377,0,2460070604,2406697551,0,3274680578.00,3164665468.00,0,2952919397,2739639374.00,0,2667910100,2633550311,0
 "TBC",25,6,"Treasury Board Central","Crédit du Conseil du Trésor",451599384,0,0,504827064,0,0,222997692.00,0.00,0,317905008,0.00,0,348704061,0,0
 "TBC",30,6,"Treasury Board Central","Crédit du Conseil du Trésor",747466679,0,0,922128220,0,0,249426761.00,0.00,0,496255966,0.00,0,333471728,0,0
 "TBC",33,6,"Treasury Board Central","Crédit du Conseil du Trésor",108778145,0,0,73858716,0,0,42220019.00,0.00,0,,,,,,
