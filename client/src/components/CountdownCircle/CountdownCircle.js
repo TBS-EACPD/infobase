@@ -5,6 +5,7 @@ import { buttonPrimaryColor } from "src/core/color_defs";
 
 import { is_IE } from "src/core/feature_detection";
 
+// eslint-disable-next-line no-restricted-imports
 import { Countdown } from "../Countdown/Countdown.js";
 import "./CountdownCircle.scss";
 
