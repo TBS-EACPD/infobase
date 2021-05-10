@@ -23,7 +23,7 @@ export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput.js";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
 export { FilterTable } from "./FilterTable.js";
 export { CheckBox } from "./CheckBox/CheckBox.js";
-export { StatelessDetails, Details } from "./Details.js";
+export { StatelessDetails, Details } from "./Details/Details.js";
 export { SpinnerWrapper } from "./SpinnerWrapper.js";
 export { KeyConceptList } from "./KeyConceptList.js";
 export { BackToTop } from "./BackToTop/BackToTop.js";

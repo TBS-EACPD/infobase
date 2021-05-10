@@ -4,7 +4,7 @@ import React from "react";
 
 import { textLightColor } from "src/core/color_defs.js";
 
-import { Details } from "./Details.js";
+import { Details } from "./Details/Details.js";
 import { FootnoteList } from "./FootnoteList.js";
 import { GlossaryItem } from "./glossary_components.js";
 import { create_text_maker_component } from "./misc_util_components.js";

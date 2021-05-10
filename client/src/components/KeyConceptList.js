@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { Details } from "./Details.js";
+import { Details } from "./Details/Details.js";
 import "./KeyConceptList.scss";
 
 const KeyConceptList = ({ question_answer_pairs, compact = true }) => (
