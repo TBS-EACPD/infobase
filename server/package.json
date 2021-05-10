@@ -17,7 +17,7 @@
     "graphql": "^14.1.1",
     "graphql-depth-limit": "^1.1.0",
     "graphql-tools": "^2.24.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "lz-string": "^1.4.4",
     "md5": "^2.2.1",
     "mongoose": "^5.10.12"
