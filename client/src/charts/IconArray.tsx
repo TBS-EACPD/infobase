@@ -1,9 +1,20 @@
 import _ from "lodash";
 import React from "react";
 
-export class IconArray extends React.Component {
+interface IconArrayItem {
+  [key: string]: any;
+}
+
+interface IconArrayProps {
+  render_item: Function;
+  items: IconArrayItem[];
+  heightFirst?: boolean;
+}
+
+export class IconArray extends React.Component<IconArrayProps> {
   render() {
     const { render_item, items, heightFirst } = this.props;
+    console.log(items);
 
     const rendered_items = _.map(items, (item, ix) => (
       <div
