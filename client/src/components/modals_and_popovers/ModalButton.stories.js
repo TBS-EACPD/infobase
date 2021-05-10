@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ModalButton } from "./ModalButton";
+import { ModalButton } from "./ModalButton.js";
 
 export default {
-  title: "modals and popovers/ModalButton",
+  title: "ModalButton",
   component: ModalButton,
 };
 

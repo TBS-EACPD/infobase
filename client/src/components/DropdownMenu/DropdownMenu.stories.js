@@ -1,9 +1,10 @@
+import _ from "lodash";
 import React from "react";
 
-import { DropdownMenu } from "./DropdownMenu";
+import { DropdownMenu } from "./DropdownMenu.tsx";
 
 export default {
-  title: "Dropdown/DropdownMenu",
+  title: "DropdownMenu",
   component: DropdownMenu,
 };
 
@@ -15,8 +16,8 @@ Basic.args = {
   // text
   dropdown_content,
   button_description: "Button",
-  dropdown_trigger_txt: "Trigger Text",
-  dropdown_a11y_txt: "Accessibility Text",
+  dropdown_trigger_text: "Trigger Text",
+  dropdown_a11y_text: "Accessibility Text",
 
   // css
   opened_button_class_name: "",
