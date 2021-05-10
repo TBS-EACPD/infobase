@@ -1,7 +1,3 @@
-covid_expenditures_panel_title:
-  en: Estimated Expenditures by COVID-19 Measure
-  fr: Dépenses estimées par mesure au titre de la COVID-19
-
 covid_expenditures_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |

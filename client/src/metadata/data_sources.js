@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
-import { GlossaryEntry } from "src/models/glossary.js";
+import { create_text_maker_component } from "src/components/index.js";
 
-import { create_text_maker } from "src/models/text.js";
+import { GlossaryEntry } from "src/models/glossary.js";
 
 import {
   lang,
@@ -18,7 +18,10 @@ import { rpb_link } from "src/rpb/rpb_link.js";
 import data_source_text from "./data_sources.yaml";
 import freq_text from "./frequencies.yaml";
 
-const tm = create_text_maker([data_source_text, freq_text]);
+const { text_maker, TM } = create_text_maker_component([
+  data_source_text,
+  freq_text,
+]);
 
 // BIG HACK WARNING on desc_from_glossary_keys and tables_from_source_key, due to a circular dependency and sloppy timing,
 // neither can be used on-module-load. Any source declarations using these functions need to call them inside getters
@@ -65,8 +68,8 @@ const infobase_open_data_page = {
 const sources = _.chain([
   {
     key: "PA",
-    title: tm("pa_title"),
-    frequency: tm("yearly"),
+    title: text_maker("pa_title"),
+    frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
       en: "http://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/index-eng.html",
@@ -81,8 +84,8 @@ const sources = _.chain([
   },
   {
     key: "ESTIMATES",
-    title: tm("estimates_title"),
-    frequency: tm("quarterly"),
+    title: text_maker("estimates_title"),
+    frequency: text_maker("quarterly"),
     open_data: infobase_open_data_page,
     report_link: {
       en:
@@ -99,14 +102,14 @@ const sources = _.chain([
   },
   {
     key: "CFMRS",
-    title: tm("cfmrs_title"),
+    title: text_maker("cfmrs_title"),
     open_data: {
       en:
         "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
       fr:
         "http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
     },
-    frequency: tm("yearly"),
+    frequency: text_maker("yearly"),
     get description() {
       return desc_from_glossary_keys("CFMRS");
     },
@@ -116,8 +119,8 @@ const sources = _.chain([
   },
   {
     key: "RPS",
-    title: tm("rps_title"),
-    frequency: tm("yearly"),
+    title: text_maker("rps_title"),
+    frequency: text_maker("yearly"),
     get description() {
       return desc_from_glossary_keys("PEOPLE_DATA");
     },
@@ -127,8 +130,8 @@ const sources = _.chain([
   },
   {
     key: "DP",
-    title: tm("dp_title"),
-    frequency: tm("yearly"),
+    title: text_maker("dp_title"),
+    frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
       en:
@@ -143,7 +146,7 @@ const sources = _.chain([
       return _.map(tables_from_source_key("DP"), table_to_row_item).concat([
         {
           id: "dp_results",
-          text: tm("dp_results_item_name"),
+          text: text_maker("dp_results_item_name"),
           inline_link:
             "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)",
         },
@@ -152,8 +155,8 @@ const sources = _.chain([
   },
   {
     key: "DRR",
-    title: tm("drr_title"),
-    frequency: tm("yearly"),
+    title: text_maker("drr_title"),
+    frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
       en:
@@ -168,7 +171,7 @@ const sources = _.chain([
       return _.map(tables_from_source_key("DRR"), table_to_row_item).concat([
         {
           id: "drr_results",
-          text: tm("drr_results_item_name"),
+          text: text_maker("drr_results_item_name"),
           inline_link:
             "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)",
         },
@@ -177,33 +180,33 @@ const sources = _.chain([
   },
   {
     key: "IGOC",
-    title: tm("igoc_source_title"),
-    frequency: tm("yearly"),
+    title: text_maker("igoc_source_title"),
+    frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
-    description: tm("igoc_source_desc"),
+    description: text_maker("igoc_source_desc"),
     items: [
       {
         id: "igoc",
-        text: tm("igoc_item_name"),
+        text: text_maker("igoc_item_name"),
         inline_link: "#igoc",
       },
     ],
   },
   {
     key: "RTP",
-    title: tm("transfer_payments_source_title"),
-    frequency: tm("yearly"),
+    title: text_maker("transfer_payments_source_title"),
+    frequency: text_maker("yearly"),
     open_data: {
       en:
         "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
       fr:
         "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
     },
-    description: tm("transfer_payments_source_desc"),
+    description: text_maker("transfer_payments_source_desc"),
     items: [
       {
         id: "rtp",
-        text: tm("transfer_payments_source_title"),
+        text: text_maker("transfer_payments_source_title"),
         inline_link: rpb_link({
           table: "orgTransferPaymentsRegion",
           mode: "details",
@@ -213,13 +216,13 @@ const sources = _.chain([
   },
   services_feature_flag && {
     key: "SERVICES",
-    title: tm("services_title"),
-    frequency: tm("yearly"),
-    description: tm("services_desc"),
+    title: text_maker("services_title"),
+    frequency: text_maker("yearly"),
+    description: text_maker("services_desc"),
     items: [
       {
         id: "service",
-        text: tm("service_inventory"),
+        text: text_maker("service_inventory"),
         external_link:
           lang === "en"
             ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
@@ -228,10 +231,10 @@ const sources = _.chain([
     ],
   },
   {
-    key: "COVID_AUTH",
-    title: tm("covid_auth_title"),
-    frequency: tm("as_needed"),
-    description: tm("covid_auth_desc"),
+    key: "COVID",
+    title: text_maker("covid_title"),
+    frequency: text_maker("as_needed"),
+    description: <TM k="covid_desc" />,
     open_data: {
       en:
         "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
@@ -241,9 +244,15 @@ const sources = _.chain([
     items: [
       {
         id: "covid_auth_panel",
-        text: tm("covid_measure_spending_auth"),
+        text: text_maker("covid_measure_spending_auth"),
         inline_link:
           "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+      },
+      {
+        id: "covid_exp_panel",
+        text: text_maker("covid_expenditures_estimated_exp"),
+        inline_link:
+          "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
       },
     ],
   },

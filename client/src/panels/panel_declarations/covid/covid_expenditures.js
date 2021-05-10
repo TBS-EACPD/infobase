@@ -25,6 +25,7 @@ import { breakpoints } from "src/core/breakpoint_defs.ts";
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+import { get_source_links } from "src/metadata/data_sources.js";
 
 import {
   YearSelectionTabs,
@@ -439,9 +440,9 @@ export const declare_covid_expenditures_panel = () =>
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
-      title: text_maker("covid_expenditures_panel_title"),
+      title: text_maker("covid_expenditures_estimated_exp"),
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
-      source: (subject) => [],
+      source: () => get_source_links(["COVID"]),
       calculate: (subject, options) => {
         if (!COVID_EXPENDITUES_FLAG) {
           return false;
