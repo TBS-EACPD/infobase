@@ -2,8 +2,6 @@ import _ from "lodash";
 
 import { Gov } from "src/models/organizational_entities.js";
 
-import { COVID_EXPENDITUES_FLAG } from "./covid_config.js";
-
 import { CovidMeasure } from "./CovidMeasure.js";
 import {
   query_gov_years_with_covid_data,
@@ -49,11 +47,10 @@ export const api_load_years_with_covid_data = (subject) => {
           subject.set_has_data(
             "covid",
             !_.chain(years_with_covid_data)
-              .thru(({ years_with_estimates, years_with_expenditures }) =>
-                COVID_EXPENDITUES_FLAG
-                  ? [...years_with_estimates, ...years_with_expenditures]
-                  : years_with_estimates
-              )
+              .thru(({ years_with_estimates, years_with_expenditures }) => [
+                ...years_with_estimates,
+                ...years_with_expenditures,
+              ])
               .isEmpty()
               .value()
           );

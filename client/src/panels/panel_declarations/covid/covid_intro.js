@@ -6,7 +6,6 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { TabLoadingSpinner } from "src/components/index.js";
 
-import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import { query_gov_covid_summaries } from "src/models/covid/queries.js";
 
 import { Subject } from "src/models/subject.js";
@@ -33,11 +32,10 @@ class CovidIntroPanelDyanmicText extends React.Component {
     this.state = {
       loading: true,
       selected_year: _.chain(YearsWithCovidData.lookup("gov"))
-        .thru(({ years_with_estimates, years_with_expenditures }) =>
-          COVID_EXPENDITUES_FLAG
-            ? [...years_with_estimates, ...years_with_expenditures]
-            : years_with_estimates
-        )
+        .thru(({ years_with_estimates, years_with_expenditures }) => [
+          ...years_with_estimates,
+          ...years_with_expenditures,
+        ])
         .uniq()
         .sortBy()
         .last()
@@ -52,9 +50,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
         summaries_by_year: _.chain(covid_summaries)
           .map(({ fiscal_year, covid_estimates, covid_expenditures }) => [
             fiscal_year,
-            COVID_EXPENDITUES_FLAG
-              ? { covid_estimates, covid_expenditures }
-              : { covid_estimates },
+            { covid_estimates, covid_expenditures },
           ])
           .filter(([_fiscal_year, summaries]) => !_.isEmpty(summaries))
           .fromPairs()
@@ -166,7 +162,7 @@ export const declare_covid_intro_panel = () =>
           }}
         >
           <div className="medium-panel-text">
-            {COVID_EXPENDITUES_FLAG && <TM k="covid_intro_static_text" />}
+            <TM k="covid_intro_static_text" />
             <CovidIntroPanelDyanmicText panel_args={panel_args} />
           </div>
         </InfographicPanel>

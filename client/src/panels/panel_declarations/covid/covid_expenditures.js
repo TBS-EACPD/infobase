@@ -11,7 +11,6 @@ import {
   DisplayTable,
 } from "src/components/index.js";
 
-import { COVID_EXPENDITUES_FLAG } from "src/models/covid/covid_config.js";
 import {
   query_gov_covid_summaries,
   query_top_covid_spending,
@@ -25,7 +24,6 @@ import { breakpoints } from "src/core/breakpoint_defs.ts";
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link.js";
-import { get_source_links } from "src/metadata/data_sources.js";
 
 import {
   YearSelectionTabs,
@@ -110,17 +108,14 @@ const SummaryTab = ({ args: panel_args, data }) => {
         />
       </div>
       <div className="col-12">
+        <TM k={`covid_top_spending_measures`} el={"h3"} />
         <MediaQuery minWidth={breakpoints.minLargeDevice}>
           {(matches) => (
-            <Fragment>
-              {matches && <hr />}
-              <TM k={`covid_top_spending_measures`} el={"h3"} />
-              <SummaryTabPie
-                data={top_spending_measures}
-                other_items_label={text_maker("covid_all_other_measures")}
-                reverse_layout={!!matches}
-              />
-            </Fragment>
+            <SummaryTabPie
+              data={top_spending_measures}
+              other_items_label={text_maker("covid_all_other_measures")}
+              reverse_layout={!!matches}
+            />
           )}
         </MediaQuery>
       </div>
@@ -440,14 +435,10 @@ export const declare_covid_expenditures_panel = () =>
     panel_config_func: (level_name, panel_key) => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
-      title: text_maker("covid_expenditures_estimated_exp"),
+      title: text_maker("covid_expenditures_panel_title"),
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
-      source: () => get_source_links(["COVID"]),
+      source: (subject) => [],
       calculate: (subject, options) => {
-        if (!COVID_EXPENDITUES_FLAG) {
-          return false;
-        }
-
         const years_with_expenditures = YearsWithCovidData.lookup(subject.id)
           ?.years_with_expenditures;
         return (
