@@ -14,6 +14,11 @@ const children = <div>Children</div>;
 
 export const Basic = Template.bind({});
 Basic.args = {
+  // text
   children,
-  banner_class: "info",
+
+  // css
+  banner_class: "banner_class",
+  additional_banner_class: "additional_banner_class",
+  style: "style",
 };
