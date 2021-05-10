@@ -13,7 +13,7 @@ const _ = require("lodash");
 
 global._ = _; //global is the 'window' on the node environment
 
-const { index_lang_lookups } = require("../src/InfoBase/index_data.js");
+const { index_lang_lookups } = require("../src/InfoBase/index_data.ts");
 
 const {
   bundle_extended_bootstrap_css,

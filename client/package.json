@@ -5,7 +5,7 @@
   "sideEffects": false,
   "scripts": {
     "IB_base": "node build_code/copy_static_assets.js",
-    "IB_base_watch": "nodemon --exitcrash --watch ../data --watch build_code --watch src/extended_bootstrap_css --watch src/png --watch src/svg --watch src/InfoBase/index.hbs.html --watch src/InfoBase/index_data.js -e csv,js,css,scss,png,svg build_code/copy_static_assets.js",
+    "IB_base_watch": "nodemon --exitcrash --watch ../data --watch build_code --watch src/extended_bootstrap_css --watch src/png --watch src/svg --watch src/InfoBase/index.hbs.html --watch src/InfoBase/index_data.ts -e csv,js,css,scss,png,svg build_code/copy_static_assets.js",
     "IB_base_debug": "node --inspect-brk build_code/copy_static_assets.js",
     "IB_q": "node build_code/webpack_starter.js EN main_client",
     "IB_q_both": "node build_code/webpack_starter.js EN FR main_client",
