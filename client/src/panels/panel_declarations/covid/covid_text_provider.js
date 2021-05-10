@@ -7,7 +7,6 @@ import {
   COVID_DATE_LAST_UPDATED,
   COVID_CURRENT_YEAR,
   COVID_NEXT_YEAR,
-  COVID_EXPENDITUES_FLAG,
 } from "src/models/covid/covid_config.js";
 
 import common_covid_lang from "./covid_common_lang.yaml";
@@ -27,7 +26,6 @@ export const covid_create_text_maker_component = (text) => {
       COVID_DATE_LAST_UPDATED,
       COVID_CURRENT_YEAR,
       COVID_NEXT_YEAR,
-      COVID_EXPENDITUES_FLAG,
     });
 
   const ExtendedTM = (props) => <TM tmf={extended_text_maker} {...props} />;
