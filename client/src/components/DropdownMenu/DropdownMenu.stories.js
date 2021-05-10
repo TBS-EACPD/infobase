@@ -4,7 +4,7 @@ import React from "react";
 import { DropdownMenu } from "./DropdownMenu.js";
 
 export default {
-  title: "DropdownMenu",
+  title: "Dropdown/DropdownMenu",
   component: DropdownMenu,
 };
 

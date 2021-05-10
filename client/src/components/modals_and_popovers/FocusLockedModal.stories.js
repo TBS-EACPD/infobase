@@ -27,5 +27,5 @@ Basic.args = {
   on_exit: true,
 
   // css
-  additional_dialogue_class: "additional_dialogue_class",
+  additional_dialogue_class: "",
 };
