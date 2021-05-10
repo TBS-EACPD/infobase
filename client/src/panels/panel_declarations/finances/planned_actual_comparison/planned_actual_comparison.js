@@ -1,16 +1,16 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes.js";
+import FootNote from "src/models/footnotes/footnotes";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
-import { PlannedActualTable } from "./PlannedActualTable.js";
+import { PlannedActualTable } from "./PlannedActualTable";
 
 import text from "./planned_actual_comparison.yaml";
 

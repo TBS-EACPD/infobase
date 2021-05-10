@@ -46,9 +46,9 @@ import {
   declare_gocographic_panel,
   declare_personnel_spend_panel,
   declare_high_application_volume_panel,
-} from "src/panels/panel_declarations/index.js";
+} from "src/panels/panel_declarations/index";
 
-import { services_feature_flag } from "src/core/injected_build_constants.ts";
+import { services_feature_flag } from "src/core/injected_build_constants";
 
 export const get_gov_panels = (subject) => ({
   intro: [declare_simplographic_panel()],

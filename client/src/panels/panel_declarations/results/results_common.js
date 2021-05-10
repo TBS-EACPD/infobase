@@ -1,16 +1,16 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import * as Results from "src/models/results.js";
+import { businessConstants } from "src/models/businessConstants";
+import * as Results from "src/models/results";
 
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { formats } from "src/core/format.ts";
+import { newIBCategoryColors } from "src/core/color_schemes";
+import { formats } from "src/core/format";
 
-import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common.js";
-import { infograph_href_template } from "src/infographic/infographic_link.js";
+import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common";
+import { infograph_href_template } from "src/infographic/infographic_link";
 
-import { text_maker } from "./result_text_provider.js";
+import { text_maker } from "./result_text_provider";
 
 const {
   Result,

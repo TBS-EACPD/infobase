@@ -2,9 +2,9 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { TM } from "src/components/TextMaker.tsx";
+import { TM } from "src/components/TextMaker";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 /*props: 
   maxChildrenHeight as an INT of pixels,

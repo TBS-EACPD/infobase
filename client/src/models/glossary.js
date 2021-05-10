@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import { sanitized_marked } from "src/general_utils.js";
+import { sanitized_marked } from "src/general_utils";
 
-import { mix, staticStoreMixin } from "./storeMixins.js";
-import { trivial_text_maker } from "./text.js";
+import { mix, staticStoreMixin } from "./storeMixins";
+import { trivial_text_maker } from "./text";
 
 class GlossaryEntry extends mix().with(staticStoreMixin) {
   constructor(id, title, def_text, translation) {

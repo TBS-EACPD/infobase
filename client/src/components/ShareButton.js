@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { textLightColor, tertiaryColor } from "src/core/color_defs.ts";
+import { textLightColor, tertiaryColor } from "src/core/color_defs";
 
 import {
   IconShare,
@@ -10,9 +10,9 @@ import {
   IconTwitter,
   IconReddit,
   IconEmail,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
-import { StatelessModal } from "./modals_and_popovers/index.js";
+import { StatelessModal } from "./modals_and_popovers/index";
 
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";

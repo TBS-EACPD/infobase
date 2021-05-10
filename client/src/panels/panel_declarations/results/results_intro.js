@@ -2,18 +2,18 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
-import { get_static_url } from "src/request_utils.ts";
+import { get_static_url } from "src/request_utils";
 
 import {
   ResultCounts,
@@ -21,7 +21,7 @@ import {
   result_docs,
   current_drr_key,
   current_dp_key,
-} from "./results_common.js";
+} from "./results_common";
 
 import text from "./results_intro_text.yaml";
 

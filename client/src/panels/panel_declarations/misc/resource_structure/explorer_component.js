@@ -1,16 +1,16 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { TabbedControls } from "src/components/index.js";
+import { TabbedControls } from "src/components/index";
 
-import { run_template } from "src/models/text.js";
+import { run_template } from "src/models/text";
 
-import { Explorer } from "src/explorer_common/explorer_components.js";
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
-import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
-import { infograph_href_template } from "src/link_utils.js";
+import { Explorer } from "src/explorer_common/explorer_components";
+import { get_root } from "src/explorer_common/hierarchy_tools";
+import { get_col_defs } from "src/explorer_common/resource_explorer_common";
+import { infograph_href_template } from "src/link_utils";
 
-import { actual_year, planning_year, TM } from "./utils.js";
+import { actual_year, planning_year, TM } from "./utils";
 
 import "src/explorer_common/explorer-styles.scss";
 

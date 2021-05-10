@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { AutoAccordion } from "./Accordions.js";
+import { AutoAccordion } from "./Accordions";
 
 export default {
   title: "Accordion",

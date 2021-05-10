@@ -1,16 +1,16 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { textLightColor } from "src/core/color_defs.ts";
-import { is_IE } from "src/core/feature_detection.ts";
+import { textLightColor } from "src/core/color_defs";
+import { is_IE } from "src/core/feature_detection";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { IconDownload } from "src/icons/icons.tsx";
-import { get_static_url } from "src/request_utils.ts";
+import { IconDownload } from "src/icons/icons";
+import { get_static_url } from "src/request_utils";
 
-import { create_text_maker_component } from "./misc_util_components.js";
-import { SpinnerWrapper } from "./SpinnerWrapper.js";
+import { create_text_maker_component } from "./misc_util_components";
+import { SpinnerWrapper } from "./SpinnerWrapper";
 
 import text from "./PDFGenerator.yaml";
 

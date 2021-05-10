@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { year_templates } from "src/models/years.js";
+import { year_templates } from "src/models/years";
 
 import text from "./TagExplorer.yaml";
 

@@ -1,14 +1,14 @@
 import _ from "lodash";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { Dept } from "./organizational_entities.js";
+import { Dept } from "./organizational_entities";
 import {
   mix,
   exstensibleStoreMixin,
   PluralSingular,
   SubjectMixin,
-} from "./storeMixins.js";
+} from "./storeMixins";
 
 const extensible_subject_store = () =>
   mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);

@@ -1,21 +1,18 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import FootNote from "src/models/footnotes/footnotes.js";
+import FootNote from "src/models/footnotes/footnotes";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index";
 
-import { TM, text_maker } from "./vote_stat_text_provider.js";
+import { TM, text_maker } from "./vote_stat_text_provider";
 const { Gov } = Subject;
 const est_in_year_col = "{{est_in_year}}_estimates";
 

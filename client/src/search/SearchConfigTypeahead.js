@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import { Typeahead } from "src/components/index.js";
+import { Typeahead } from "src/components/index";
 
-import { log_standard_event } from "src/core/analytics.js";
+import { log_standard_event } from "src/core/analytics";
 
-import { InfoBaseHighlighter } from "src/search/search_utils.js";
+import { InfoBaseHighlighter } from "src/search/search_utils";
 
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {

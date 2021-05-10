@@ -4,15 +4,15 @@
 import fetch from "isomorphic-fetch";
 import React from "react";
 
-import GraphiQL from "graphiql/dist/index.js";
+import GraphiQL from "graphiql/dist/index";
 
 import _ from "lodash";
 
-import { SpinnerWrapper, ContainerEscapeHatch } from "src/components/index.js";
-import { log_standard_event } from "src/core/analytics.js";
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { SpinnerWrapper, ContainerEscapeHatch } from "src/components/index";
+import { log_standard_event } from "src/core/analytics";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { get_api_url } from "./graphql_utils.js";
+import { get_api_url } from "./graphql_utils";
 import "graphiql/graphiql.css";
 
 const defaults = {

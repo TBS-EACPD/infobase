@@ -2,12 +2,12 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import { TrivialTM as TM, Format } from "src/components/index.js";
+import { TrivialTM as TM, Format } from "src/components/index";
 
-import { run_template } from "src/models/text.js";
-import { year_templates } from "src/models/years.js";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
-import { Table } from "src/core/TableClass.js";
+import { Table } from "src/core/TableClass";
 
 const is_planning_year = (year) =>
   _.includes(year_templates.planning_years, year);

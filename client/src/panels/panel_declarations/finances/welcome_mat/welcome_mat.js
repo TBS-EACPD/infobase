@@ -6,22 +6,22 @@ import {
   get_planned_fte_source_link,
   get_planned_spending_source_link,
   declare_panel,
-} from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+} from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component, Format } from "src/components/index.js";
+import { create_text_maker_component, Format } from "src/components/index";
 
-import { run_template } from "src/models/text.js";
+import { run_template } from "src/models/text";
 
-import { year_templates } from "src/models/years.js";
+import { year_templates } from "src/models/years";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
-import { Table } from "src/core/TableClass.js";
+import { is_a11y_mode } from "src/core/injected_build_constants";
+import { Table } from "src/core/TableClass";
 
-import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
+import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
-import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending.js";
-import { format_and_get_fte } from "./welcome_mat_fte.js";
+import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending";
+import { format_and_get_fte } from "./welcome_mat_fte";
 
 import text from "./welcome_mat.yaml";
 import "./welcome-mat.scss";

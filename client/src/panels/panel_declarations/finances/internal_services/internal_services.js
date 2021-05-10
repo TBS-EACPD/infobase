@@ -1,24 +1,24 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   GraphOverlay,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
-import { run_template } from "src/models/text.js";
-import { year_templates } from "src/models/years.js";
+import { Subject } from "src/models/subject";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
-import { infobase_colors } from "src/core/color_schemes.ts";
+import { infobase_colors } from "src/core/color_schemes";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend } from "src/charts/legends/index.js";
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend } from "src/charts/legends/index";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import text from "./internal_services.yaml";
 

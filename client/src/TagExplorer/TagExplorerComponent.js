@@ -8,28 +8,28 @@ import {
   TabbedControls,
   AlertBanner,
   GlossaryIcon,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { GlossaryEntry } from "src/models/glossary.js";
-import { run_template } from "src/models/text.js";
+import { GlossaryEntry } from "src/models/glossary";
+import { run_template } from "src/models/text";
 
-import { tertiaryColor, primaryColor } from "src/core/color_defs.ts";
+import { tertiaryColor, primaryColor } from "src/core/color_defs";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { Explorer } from "src/explorer_common/explorer_components.js";
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
-import { get_col_defs } from "src/explorer_common/resource_explorer_common.js";
-import { infograph_href_template } from "src/link_utils.js";
+import { Explorer } from "src/explorer_common/explorer_components";
+import { get_root } from "src/explorer_common/hierarchy_tools";
+import { get_col_defs } from "src/explorer_common/resource_explorer_common";
+import { infograph_href_template } from "src/link_utils";
 
-import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
+import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs";
 import {
   text_maker,
   TM,
   planning_year,
   actual_year,
   year_to_route_arg_map,
-} from "./utils.js";
+} from "./utils";
 
 const children_grouper = (node, children) => {
   if (node.root) {

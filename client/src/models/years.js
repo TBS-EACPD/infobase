@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { run_template } from "./text.js";
+import { run_template } from "./text";
 
 const fiscal_year_to_year = (fy_string) =>
   _.chain(fy_string).split("-").first().toNumber().value() || null;

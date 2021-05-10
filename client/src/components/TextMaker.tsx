@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
 interface TextMakerProps {
   text_maker_func?: (key: string, args?: any) => string;

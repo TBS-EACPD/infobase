@@ -1,10 +1,10 @@
-import { WrappedNivoBar, WrappedNivoHBar } from "./wrapped_nivo_bar.js";
-import { WrappedNivoCircleProportion } from "./WrappedNivoCircleProportion.js";
-import { WrappedNivoLine } from "./WrappedNivoLine.js";
-import { WrappedNivoPie } from "./WrappedNivoPie.js";
-import { WrappedNivoTreemap } from "./WrappedNivoTreemap.js";
+import { WrappedNivoBar, WrappedNivoHBar } from "./wrapped_nivo_bar";
+import { WrappedNivoCircleProportion } from "./WrappedNivoCircleProportion";
+import { WrappedNivoLine } from "./WrappedNivoLine";
+import { WrappedNivoPie } from "./WrappedNivoPie";
+import { WrappedNivoTreemap } from "./WrappedNivoTreemap";
 
-export { NivoLineBarToggle } from "./NivoLineBarToggle.js";
+export { NivoLineBarToggle } from "./NivoLineBarToggle";
 
 export {
   WrappedNivoBar,

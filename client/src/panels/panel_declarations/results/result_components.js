@@ -1,24 +1,20 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  HeightClipper,
-  FilterTable,
-  AlertBanner,
-} from "src/components/index.js";
+import { HeightClipper, FilterTable, AlertBanner } from "src/components/index";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import * as general_utils from "src/general_utils.js";
+import * as general_utils from "src/general_utils";
 
 import {
   IconCheck,
   IconAttention,
   IconNotApplicable,
   IconClock,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
-import { TM, text_maker } from "./result_text_provider.js";
+import { TM, text_maker } from "./result_text_provider";
 
 import {
   status_key_to_glossary_key,
@@ -28,7 +24,7 @@ import {
   get_result_doc_keys,
   result_docs,
   result_color_scale,
-} from "./results_common.js";
+} from "./results_common";
 
 import "./result_components.scss";
 

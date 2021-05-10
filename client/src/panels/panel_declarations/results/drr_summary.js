@@ -2,24 +2,24 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { DisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index";
 
-import * as Results from "src/models/results.js";
+import * as Results from "src/models/results";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { IconArray } from "src/charts/IconArray.js";
-import { StandardLegend } from "src/charts/legends/index.js";
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
+import { IconArray } from "src/charts/IconArray";
+import { StandardLegend } from "src/charts/legends/index";
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
-import { toggle_list } from "src/general_utils.js";
-import { get_source_links } from "src/metadata/data_sources.js";
+import { toggle_list } from "src/general_utils";
+import { get_source_links } from "src/metadata/data_sources";
 
-import { TM, text_maker } from "./drr_summary_text.js";
-import { large_status_icons } from "./result_components.js";
+import { TM, text_maker } from "./drr_summary_text";
+import { large_status_icons } from "./result_components";
 import {
   row_to_drr_status_counts,
   ResultCounts,
@@ -28,7 +28,7 @@ import {
   filter_and_genericize_doc_counts,
   result_statuses,
   result_color_scale,
-} from "./results_common.js";
+} from "./results_common";
 
 import "./drr_summary.scss";
 

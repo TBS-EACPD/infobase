@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { IconArrow } from "src/icons/icons.tsx";
+import { IconArrow } from "src/icons/icons";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";

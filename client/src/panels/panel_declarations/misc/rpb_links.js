@@ -1,14 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component, CardList } from "src/components/index.js";
+import { create_text_maker_component, CardList } from "src/components/index";
 
-import { Table } from "src/core/TableClass.js";
+import { Table } from "src/core/TableClass";
 
-import { rpb_link } from "src/rpb/rpb_link.js";
+import { rpb_link } from "src/rpb/rpb_link";
 
 import text from "./rpb_links.yaml";
 

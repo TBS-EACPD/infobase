@@ -2,11 +2,11 @@ import { TreeMapHtml } from "@nivo/treemap";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { breakpoints } from "src/core/breakpoint_defs.ts";
+import { breakpoints } from "src/core/breakpoint_defs";
 
 import "./WrappedNivoTreemap.scss";
 
-import { DefaultTooltip } from "./wrapped_nivo_common.js";
+import { DefaultTooltip } from "./wrapped_nivo_common";
 
 class _WrappedNivoTreemap extends React.Component {
   render() {

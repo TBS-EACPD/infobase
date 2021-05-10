@@ -1,13 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
 import {
   COVID_DATE_LAST_UPDATED,
   COVID_CURRENT_YEAR,
   COVID_NEXT_YEAR,
-} from "src/models/covid/covid_config.js";
+} from "src/models/covid/covid_config";
 
 import common_covid_lang from "./covid_common_lang.yaml";
 

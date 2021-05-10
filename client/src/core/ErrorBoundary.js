@@ -2,13 +2,13 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { lang, sha, is_dev } from "src/core/injected_build_constants.ts";
+import { lang, sha, is_dev } from "src/core/injected_build_constants";
 
-import { IconNotAvailable } from "src/icons/icons.tsx";
+import { IconNotAvailable } from "src/icons/icons";
 
-import { get_static_url, make_request } from "src/request_utils.ts";
+import { get_static_url, make_request } from "src/request_utils";
 
-import { log_standard_event } from "./analytics.js";
+import { log_standard_event } from "./analytics";
 
 const NoIndex = () =>
   ReactDOM.createPortal(

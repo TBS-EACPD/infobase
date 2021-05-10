@@ -3,27 +3,27 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "src/explorer_common/hierarchy_tools.js";
+} from "src/explorer_common/hierarchy_tools";
 import {
   get_resources_for_subject,
   create_sort_func_selector,
-} from "src/explorer_common/resource_explorer_common.js";
+} from "src/explorer_common/resource_explorer_common";
 import {
   cached_property,
   bound,
   shallowEqualObjectsOverKeys,
   sanitized_dangerous_inner_html,
-} from "src/general_utils.js";
+} from "src/general_utils";
 
-import SingleTagResourceExplorerComponent from "./explorer_component.js";
+import SingleTagResourceExplorerComponent from "./explorer_component";
 
-import { planning_year, actual_year } from "./utils.js";
+import { planning_year, actual_year } from "./utils";
 
 function create_rooted_resource_hierarchy({ year, root_subject }) {
   const get_resources = (subject) => get_resources_for_subject(subject, year);

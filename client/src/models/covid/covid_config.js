@@ -1,4 +1,4 @@
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
 // legacy, these config constants should now primarily come from the API along with the data (and will vary by year),
 // drop them once we get the chance to rewrite the current set of FAQs which are the only place still using them

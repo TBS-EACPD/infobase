@@ -1,11 +1,11 @@
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { get_static_url, make_request } from "src/request_utils.ts";
+import { get_static_url, make_request } from "src/request_utils";
 
-import { Subject } from "./subject.js";
+import { Subject } from "./subject";
 
 const { Tag } = Subject;
 

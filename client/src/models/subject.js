@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
-import { CovidMeasure } from "./covid/CovidMeasure.js";
-import { YearsWithCovidData } from "./covid/YearsWithCovidData.js";
+import { CovidMeasure } from "./covid/CovidMeasure";
+import { YearsWithCovidData } from "./covid/YearsWithCovidData";
 import {
   Gov,
   Dept,
@@ -12,9 +12,9 @@ import {
   InstForm,
   Ministry,
   Minister,
-} from "./organizational_entities.js";
-import { Result, Indicator } from "./results.js";
-import { Tag } from "./tags.js";
+} from "./organizational_entities";
+import { Result, Indicator } from "./results";
+import { Tag } from "./tags";
 
 const Subject = {
   Gov,

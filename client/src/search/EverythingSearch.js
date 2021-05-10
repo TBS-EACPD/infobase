@@ -3,16 +3,16 @@ import React from "react";
 import MediaQuery from "react-responsive";
 import { withRouter } from "react-router";
 
-import { CheckBox, DropdownMenu } from "src/components/index.js";
+import { CheckBox, DropdownMenu } from "src/components/index";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { breakpoints } from "src/core/breakpoint_defs.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { breakpoints } from "src/core/breakpoint_defs";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { IconGear } from "src/icons/icons.tsx";
+import { IconGear } from "src/icons/icons";
 
-import { smart_href_template } from "src/link_utils.js";
+import { smart_href_template } from "src/link_utils";
 
 import {
   make_orgs_search_config,
@@ -24,8 +24,8 @@ import {
   who_we_help as who_we_help_search_config,
   datasets as table_search_config,
   glossary_lite as glossary_lite_search_config,
-} from "./search_configs.js";
-import { SearchConfigTypeahead } from "./SearchConfigTypeahead.js";
+} from "./search_configs";
+import { SearchConfigTypeahead } from "./SearchConfigTypeahead";
 
 import text from "./EverythingSearch.yaml";
 import "./EverythingSearch.scss";

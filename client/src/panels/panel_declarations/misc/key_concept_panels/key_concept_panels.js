@@ -1,13 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
-import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
 import {
   create_text_maker_component,
   KeyConceptList,
-} from "src/components/index.js";
+} from "src/components/index";
 
 import common_lang from "./common_questions.yaml";
 import fin_lang from "./financial_questions.yaml";

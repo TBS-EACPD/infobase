@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { CheckBox } from "src/components/index.js";
+import { CheckBox } from "src/components/index";
 import "./TabularLegend.scss";
 
 export const TabularLegend = ({

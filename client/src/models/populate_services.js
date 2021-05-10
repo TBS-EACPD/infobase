@@ -2,10 +2,10 @@ import { gql, useQuery } from "@apollo/client";
 
 import _ from "lodash";
 
-import { log_standard_event } from "src/core/analytics.js";
-import { lang } from "src/core/injected_build_constants.ts";
+import { log_standard_event } from "src/core/analytics";
+import { lang } from "src/core/injected_build_constants";
 
-import { get_client } from "src/graphql_utils/graphql_utils.js";
+import { get_client } from "src/graphql_utils/graphql_utils";
 
 const all_service_fragments = `
       id

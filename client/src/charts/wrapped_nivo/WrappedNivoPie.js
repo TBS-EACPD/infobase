@@ -4,12 +4,12 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { Format, DisplayTable } from "src/components/index.js";
+import { Format, DisplayTable } from "src/components/index";
 
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { formats } from "src/core/format.ts";
+import { newIBCategoryColors } from "src/core/color_schemes";
+import { formats } from "src/core/format";
 
-import { TabularLegend } from "src/charts/legends/index.js";
+import { TabularLegend } from "src/charts/legends/index";
 
 import {
   nivo_common_text_maker,
@@ -17,7 +17,7 @@ import {
   general_default_props,
   infobase_colors_smart,
   get_formatter,
-} from "./wrapped_nivo_common.js";
+} from "./wrapped_nivo_common";
 
 import "./WrappedNivoPie.scss";
 

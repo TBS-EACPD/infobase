@@ -1,12 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { TM } from "src/components/index.js";
+import { TM } from "src/components/index";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
 import text from "./gov_related.yaml";
 

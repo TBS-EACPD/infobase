@@ -2,18 +2,18 @@ import _ from "lodash";
 import React from "react";
 
 import text from "src/panels/panel_declarations/services/services.yaml";
-import { delivery_channels_keys } from "src/panels/panel_declarations/services/shared.js";
+import { delivery_channels_keys } from "src/panels/panel_declarations/services/shared";
 
 import {
   create_text_maker_component,
   Panel,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { infobase_colors } from "src/core/color_schemes.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { infobase_colors } from "src/core/color_schemes";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

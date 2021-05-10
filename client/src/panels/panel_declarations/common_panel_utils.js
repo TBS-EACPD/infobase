@@ -1,8 +1,8 @@
-import { PanelRegistry } from "src/panels/PanelRegistry.js";
+import { PanelRegistry } from "src/panels/PanelRegistry";
 
-import { Table } from "src/core/TableClass.js";
+import { Table } from "src/core/TableClass";
 
-import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
+import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
 const declare_panel = ({ panel_key, levels, panel_config_func }) => {
   if (!PanelRegistry.is_registered_panel_key(panel_key)) {

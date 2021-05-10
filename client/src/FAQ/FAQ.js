@@ -5,14 +5,14 @@ import {
   LabeledTable,
   create_text_maker_component,
   FancyUL,
-} from "src/components/index.js";
+} from "src/components/index";
 
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
-} from "src/core/NavComponents.js";
+} from "src/core/NavComponents";
 
-import { faq_data } from "./faq_data.js";
+import { faq_data } from "./faq_data";
 
 import text from "./FAQ.yaml";
 

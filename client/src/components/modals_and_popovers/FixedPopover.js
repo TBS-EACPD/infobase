@@ -3,11 +3,11 @@ import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-import { CountdownCircle } from "src/components/CountdownCircle.js";
+import { CountdownCircle } from "src/components/CountdownCircle";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import "./bootstrap_modal_exstension.scss";
 import "./FixedPopover.scss";

@@ -22,13 +22,13 @@ export {
   declare_vote_stat_split_panel,
   declare_welcome_mat_panel,
   declare_tp_by_region_panel,
-} from "./finances/index.js";
+} from "./finances/index";
 
 export {
   declare_profile_panel,
   declare_description_panel,
   declare_simplographic_panel,
-} from "./intro/index.js";
+} from "./intro/index";
 
 export {
   declare_financial_key_concepts_panel,
@@ -55,7 +55,7 @@ export {
   declare_tags_of_interest_panel,
   declare_tag_progs_by_dept_panel,
   declare_related_tags_panel,
-} from "./misc/index.js";
+} from "./misc/index";
 
 export {
   declare_employee_age_panel,
@@ -66,7 +66,7 @@ export {
   declare_employee_prov_panel,
   declare_employee_totals_panel,
   declare_employee_type_panel,
-} from "./people/index.js";
+} from "./people/index";
 
 export {
   declare_results_intro_panel,
@@ -75,14 +75,14 @@ export {
   declare_drr_summary_panel,
   declare_gov_drr_panel,
   declare_gov_dp_panel,
-} from "./results/index.js";
+} from "./results/index";
 
 export {
   declare_covid_key_concepts_panel,
   declare_covid_intro_panel,
   declare_covid_estimates_panel,
   declare_covid_expenditures_panel,
-} from "./covid/index.js";
+} from "./covid/index";
 export {
   declare_provided_services_list_panel,
   declare_services_types_panel,
@@ -94,4 +94,4 @@ export {
   declare_top10_services_application_volume_panel,
   declare_top10_website_visits_panel,
   declare_high_application_volume_panel,
-} from "./services/index.js";
+} from "./services/index";

@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { services_feature_flag } from "src/core/injected_build_constants.ts";
+import { services_feature_flag } from "src/core/injected_build_constants";
 
 import {
   IconInfo,
@@ -15,9 +15,9 @@ import {
   IconClipboard,
   IconTag,
   IconHelp,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
-import { infograph_href_template } from "./infographic_link.js";
+import { infograph_href_template } from "./infographic_link";
 
 import text from "./bubble_definitions.yaml";
 

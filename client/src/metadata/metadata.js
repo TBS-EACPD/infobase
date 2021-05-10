@@ -5,16 +5,16 @@ import {
   create_text_maker_component,
   FancyUL,
   Panel,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
-} from "src/core/NavComponents.js";
+} from "src/core/NavComponents";
 
-import { sources } from "./data_sources.js";
+import { sources } from "./data_sources";
 
 import metadata_text from "./metadata.yaml";
 

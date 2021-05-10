@@ -3,15 +3,15 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { DisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index";
 
 import {
   textColor,
   secondaryColor,
   backgroundColor,
-} from "src/core/color_defs.ts";
+} from "src/core/color_defs";
 
-import { IconZoomIn, IconZoomOut } from "src/icons/icons.tsx";
+import { IconZoomIn, IconZoomOut } from "src/icons/icons";
 
 import {
   create_text_maker_component_with_nivo_common,
@@ -20,7 +20,7 @@ import {
   DefaultTooltip,
   get_formatter,
   fix_legend_symbols,
-} from "./wrapped_nivo_common.js";
+} from "./wrapped_nivo_common";
 
 import text from "./WrappedNivoLine.yaml";
 

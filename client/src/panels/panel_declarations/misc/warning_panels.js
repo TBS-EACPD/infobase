@@ -1,22 +1,22 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
 import {
   create_text_maker_component,
   AlertBanner,
   KeyConceptList,
   MultiColumnList,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes.js";
+import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
-import * as Results from "src/models/results.js";
-import { Subject } from "src/models/subject.js";
+import * as Results from "src/models/results";
+import { Subject } from "src/models/subject";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
 import text from "./warning_panels.yaml";
 

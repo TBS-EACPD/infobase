@@ -2,15 +2,15 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { highlightColor } from "src/core/color_defs.ts";
+import { highlightColor } from "src/core/color_defs";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { IconAttentionTriangle } from "src/icons/icons.tsx";
+import { IconAttentionTriangle } from "src/icons/icons";
 
 import text from "./hierarchy_panels.yaml";
 

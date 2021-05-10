@@ -1,10 +1,10 @@
 import _ from "lodash";
 
-import { Table } from "./core/TableClass.js";
-import { infograph_href_template } from "./infographic/infographic_link.js";
-import { GlossaryEntry } from "./models/glossary.js";
-import { Subject } from "./models/subject.js";
-import { rpb_link } from "./rpb/rpb_link.js";
+import { Table } from "./core/TableClass";
+import { infograph_href_template } from "./infographic/infographic_link";
+import { GlossaryEntry } from "./models/glossary";
+import { Subject } from "./models/subject";
+import { rpb_link } from "./rpb/rpb_link";
 
 const { Gov, Dept, CRSO, Program, Tag } = Subject;
 const subject_classes_with_infographics = [

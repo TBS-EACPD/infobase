@@ -41,10 +41,10 @@ import {
   declare_spending_in_tag_perspective_panel,
   declare_vote_stat_split_panel,
   declare_top_spending_areas_panel,
-} from "src/panels/panel_declarations/index.js";
+} from "src/panels/panel_declarations/index";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { services_feature_flag } from "src/core/injected_build_constants.ts";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { services_feature_flag } from "src/core/injected_build_constants";
 
 // To be safe, ensure all used has_<data> checks are loaded
 export const get_program_panels = (subject) =>

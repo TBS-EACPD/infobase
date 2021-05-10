@@ -1,4 +1,4 @@
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 const { Dept } = Subject;
 
 export const sort_func_template = (a_name, b_name) => {

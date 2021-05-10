@@ -2,38 +2,38 @@ import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
 
-import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index.js";
-import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/panels/panel_declarations/common_panel_components.js";
-import { PanelRegistry } from "src/panels/PanelRegistry.js";
-import { PanelRenderer } from "src/panels/PanelRenderer.js";
+import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index";
+import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/panels/panel_declarations/common_panel_components";
+import { PanelRegistry } from "src/panels/PanelRegistry";
+import { PanelRenderer } from "src/panels/PanelRenderer";
 
 import {
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent.js";
+import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { log_standard_event } from "src/core/analytics.js";
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { log_standard_event } from "src/core/analytics";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
-import { redirect_with_msg } from "src/core/RedirectHeader.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
+import { redirect_with_msg } from "src/core/RedirectHeader";
 
-import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils.js";
+import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils";
 
-import { EverythingSearch } from "src/search/EverythingSearch.js";
+import { EverythingSearch } from "src/search/EverythingSearch";
 
-import { get_bubble_defs } from "./bubble_definitions.js";
-import { BubbleMenu } from "./BubbleMenu.js";
+import { get_bubble_defs } from "./bubble_definitions";
+import { BubbleMenu } from "./BubbleMenu";
 
-import { infograph_href_template } from "./infographic_link.js";
+import { infograph_href_template } from "./infographic_link";
 
-import PanelFilterControl from "./PanelFilterControl.js";
-import TableOfContents from "./TableOfContents.js";
+import PanelFilterControl from "./PanelFilterControl";
+import TableOfContents from "./TableOfContents";
 
 import text from "./Infographic.yaml";
 import "./Infographic.scss";

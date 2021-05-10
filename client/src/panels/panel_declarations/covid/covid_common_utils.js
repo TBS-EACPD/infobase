@@ -1,16 +1,16 @@
 import _ from "lodash";
 import React from "react";
 
-import { TabLoadingWrapper } from "src/components/index.js";
+import { TabLoadingWrapper } from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
+import { businessConstants } from "src/models/businessConstants";
 
-import { array_to_grammatical_list } from "src/core/format.ts";
-import { lang } from "src/core/injected_build_constants.ts";
+import { array_to_grammatical_list } from "src/core/format";
+import { lang } from "src/core/injected_build_constants";
 
-import { ToggleVoteStatProvider } from "./covid_common_components.js";
+import { ToggleVoteStatProvider } from "./covid_common_components";
 
-import { covid_create_text_maker_component } from "./covid_text_provider.js";
+import { covid_create_text_maker_component } from "./covid_text_provider";
 
 const { text_maker } = covid_create_text_maker_component();
 

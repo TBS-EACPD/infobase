@@ -1,12 +1,12 @@
 import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import { Subject } from "src/models/subject.js";
+import { businessConstants } from "src/models/businessConstants";
+import { Subject } from "src/models/subject";
 
-import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools.js";
+import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools";
 
-import { igoc_tmf as text_maker } from "./igoc_explorer_text.js";
+import { igoc_tmf as text_maker } from "./igoc_explorer_text";
 
 const { Dept, InstForm } = Subject;
 

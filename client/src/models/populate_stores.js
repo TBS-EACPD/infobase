@@ -1,15 +1,15 @@
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { sanitized_marked } from "src/general_utils.js";
-import { get_static_url, make_request } from "src/request_utils.ts";
+import { sanitized_marked } from "src/general_utils";
+import { get_static_url, make_request } from "src/request_utils";
 
-import { populate_global_footnotes } from "./footnotes/populate_footnotes.js";
-import { GlossaryEntry } from "./glossary.js";
-import { Subject } from "./subject.js";
-import { trivial_text_maker } from "./text.js";
+import { populate_global_footnotes } from "./footnotes/populate_footnotes";
+import { GlossaryEntry } from "./glossary";
+import { Subject } from "./subject";
+import { trivial_text_maker } from "./text";
 
 const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 

@@ -1,15 +1,15 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { TabbedControls, CheckBox, LinkStyled } from "src/components/index.js";
+import { TabbedControls, CheckBox, LinkStyled } from "src/components/index";
 
-import { formats } from "src/core/format.ts";
+import { formats } from "src/core/format";
 
-import { IconQuestion } from "src/icons/icons.tsx";
+import { IconQuestion } from "src/icons/icons";
 
-import { scroll_to_covid_key_concepts } from "./covid_key_concepts.js";
+import { scroll_to_covid_key_concepts } from "./covid_key_concepts";
 
-import { covid_create_text_maker_component } from "./covid_text_provider.js";
+import { covid_create_text_maker_component } from "./covid_text_provider";
 
 const { TM } = covid_create_text_maker_component();
 

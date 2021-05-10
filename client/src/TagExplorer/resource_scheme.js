@@ -3,29 +3,29 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import { trivial_text_maker as text_maker } from "src/models/text.js";
+import { trivial_text_maker as text_maker } from "src/models/text";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "src/explorer_common/hierarchy_tools.js";
+} from "src/explorer_common/hierarchy_tools";
 import {
   create_sort_func_selector,
   get_resources_for_subject,
-} from "src/explorer_common/resource_explorer_common.js";
+} from "src/explorer_common/resource_explorer_common";
 import {
   cached_property,
   bound,
   shallowEqualObjectsExceptKeys,
   sanitized_dangerous_inner_html,
-} from "src/general_utils.js";
+} from "src/general_utils";
 
-import { infograph_href_template } from "src/link_utils.js";
+import { infograph_href_template } from "src/link_utils";
 
-import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs.js";
-import { related_tags_row } from "./tag_hierarchy_utils.js";
-import TagExplorerComponent from "./TagExplorerComponent.js";
+import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs";
+import { related_tags_row } from "./tag_hierarchy_utils";
+import TagExplorerComponent from "./TagExplorerComponent";
 
 function create_resource_hierarchy({ hierarchy_scheme, year }) {
   const hierarchy_scheme_config = hierarchy_scheme_configs[hierarchy_scheme];

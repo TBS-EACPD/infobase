@@ -2,11 +2,11 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { secondaryColor, tertiaryColor } from "src/core/color_defs.ts";
+import { secondaryColor, tertiaryColor } from "src/core/color_defs";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { IconEyeOpen, IconEyeClosed } from "src/icons/icons.tsx";
+import { IconEyeOpen, IconEyeClosed } from "src/icons/icons";
 
 import "./FilterTable.scss";
 

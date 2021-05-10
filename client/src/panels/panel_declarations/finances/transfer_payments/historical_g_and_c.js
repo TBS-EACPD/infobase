@@ -1,26 +1,26 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { DisplayTable, GraphOverlay } from "src/components/index.js";
+import { DisplayTable, GraphOverlay } from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import { run_template } from "src/models/text.js";
-import { year_templates } from "src/models/years.js";
+import { businessConstants } from "src/models/businessConstants";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
-import { infobase_colors } from "src/core/color_schemes.ts";
+import { infobase_colors } from "src/core/color_schemes";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 
-import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 
-import { toggle_list } from "src/general_utils.js";
+import { toggle_list } from "src/general_utils";
 
-import { text_maker, TM } from "./gnc_text_provider.js";
+import { text_maker, TM } from "./gnc_text_provider";
 
 const { transfer_payments } = businessConstants;
 const { std_years } = year_templates;

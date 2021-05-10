@@ -5,11 +5,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, Transition } from "react-transition-group";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { textLightColor } from "src/core/color_defs.ts";
+import { textLightColor } from "src/core/color_defs";
 
-import { IconChevron } from "src/icons/icons.tsx";
+import { IconChevron } from "src/icons/icons";
 
 import "./Accordions.scss";
 

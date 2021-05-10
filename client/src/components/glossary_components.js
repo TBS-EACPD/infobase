@@ -1,15 +1,15 @@
 import React from "react";
 
-import { GlossaryEntry } from "src/models/glossary.js";
+import { GlossaryEntry } from "src/models/glossary";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { backgroundColor, primaryColor } from "src/core/color_defs.ts";
+import { backgroundColor, primaryColor } from "src/core/color_defs";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { IconQuestion } from "src/icons/icons.tsx";
-import { glossary_href } from "src/link_utils.js";
+import { IconQuestion } from "src/icons/icons";
+import { glossary_href } from "src/link_utils";
 
 const GlossaryTooltipWrapper = ({ id, children, no_bottom_border }) =>
   is_a11y_mode ? (

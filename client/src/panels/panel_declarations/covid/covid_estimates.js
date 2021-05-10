@@ -1,14 +1,14 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
 import {
   query_gov_covid_summaries,
@@ -16,26 +16,26 @@ import {
   query_org_covid_summary,
   query_all_covid_estimates_by_measure_id,
   query_org_covid_estimates_by_measure_id,
-} from "src/models/covid/queries.js";
-import { Subject } from "src/models/subject.js";
+} from "src/models/covid/queries";
+import { Subject } from "src/models/subject";
 
-import { textColor } from "src/core/color_defs.ts";
-import { infobase_colors } from "src/core/color_schemes.ts";
+import { textColor } from "src/core/color_defs";
+import { infobase_colors } from "src/core/color_schemes";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend } from "src/charts/legends/index.js";
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend } from "src/charts/legends/index";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+import { infograph_options_href_template } from "src/infographic/infographic_link";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
 import {
   AboveTabFootnoteList,
   CellTooltip,
   YearSelectionTabs,
-} from "./covid_common_components.js";
+} from "./covid_common_components";
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
@@ -45,8 +45,8 @@ import {
   string_sort_func,
   roll_up_flat_measure_data_by_property,
   get_est_doc_list_plain_text,
-} from "./covid_common_utils.js";
-import { covid_create_text_maker_component } from "./covid_text_provider.js";
+} from "./covid_common_utils";
+import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates.yaml";
 

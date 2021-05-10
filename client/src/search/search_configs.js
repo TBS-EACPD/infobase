@@ -1,18 +1,18 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { GlossaryEntry } from "src/models/glossary.js";
-import { Subject } from "src/models/subject.js";
-import { trivial_text_maker } from "src/models/text.js";
+import { GlossaryEntry } from "src/models/glossary";
+import { Subject } from "src/models/subject";
+import { trivial_text_maker } from "src/models/text";
 
-import { textColor } from "src/core/color_defs.ts";
-import { Table } from "src/core/TableClass.js";
+import { textColor } from "src/core/color_defs";
+import { Table } from "src/core/TableClass";
 
 import {
   query_to_reg_exps,
   highlight_search_match,
   InfoBaseHighlighter,
-} from "./search_utils.js";
+} from "./search_utils";
 
 const { Dept, Gov, Program, Tag, CRSO } = Subject;
 

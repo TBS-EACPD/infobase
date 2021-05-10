@@ -2,7 +2,7 @@
 
 import React, { Fragment } from "react";
 
-import { PinnedContent } from "./PinnedContent.js";
+import { PinnedContent } from "./PinnedContent";
 
 const PinnedContentTemplate = ({ focusId }) => (
   <Fragment>

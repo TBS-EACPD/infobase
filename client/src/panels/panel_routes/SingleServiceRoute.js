@@ -5,19 +5,19 @@ import {
   ServiceChannels,
   ServiceStandards,
   ServiceDigitalStatus,
-} from "src/panels/panel_declarations/services/index.js";
+} from "src/panels/panel_declarations/services/index";
 
 import {
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { useSingleService } from "src/models/populate_services.js";
-import { Subject } from "src/models/subject.js";
+import { useSingleService } from "src/models/populate_services";
+import { Subject } from "src/models/subject";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { infograph_href_template } from "src/link_utils.js";
+import { infograph_href_template } from "src/link_utils";
 
 import text from "./SingleServiceRoute.yaml";
 

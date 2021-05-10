@@ -5,22 +5,22 @@ import {
   create_text_maker_component,
   CardTopImage,
   ContainerEscapeHatch,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { highlightColor } from "src/core/color_defs.ts";
-import { lang } from "src/core/injected_build_constants.ts";
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { highlightColor } from "src/core/color_defs";
+import { lang } from "src/core/injected_build_constants";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { IconFlagLine } from "src/icons/icons.tsx";
+import { IconFlagLine } from "src/icons/icons";
 
-import { get_static_url } from "src/request_utils.ts";
-import { EverythingSearch } from "src/search/EverythingSearch.js";
+import { get_static_url } from "src/request_utils";
+import { EverythingSearch } from "src/search/EverythingSearch";
 
 import {
   infographic_link_items,
   featured_content_items,
   subapp_items,
-} from "./home-data.js";
+} from "./home-data";
 
 import home_text_bundle from "./home.yaml";
 import "./home.scss";

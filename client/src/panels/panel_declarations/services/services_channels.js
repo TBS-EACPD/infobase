@@ -1,31 +1,28 @@
 import _ from "lodash";
 import React, { useState, useEffect } from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   DisplayTable,
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { useServices } from "src/models/populate_services.js";
+import { useServices } from "src/models/populate_services";
 
-import { infobase_colors } from "src/core/color_schemes.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { infobase_colors } from "src/core/color_schemes";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
-import {
-  WrappedNivoBar,
-  WrappedNivoPie,
-} from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
+import { WrappedNivoBar, WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
 import {
   delivery_channels_keys,
   delivery_channels_query_fragment,
-} from "./shared.js";
+} from "./shared";
 
 import text from "./services.yaml";
 

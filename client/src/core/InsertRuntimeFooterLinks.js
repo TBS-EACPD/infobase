@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { index_lang_lookups } from "src/InfoBase/index_data.js";
+import { index_lang_lookups } from "src/InfoBase/index_data";
 
 const footer_link_items = _.compact([
   {

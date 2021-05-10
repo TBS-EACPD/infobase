@@ -2,21 +2,21 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { get_client_id, log_standard_event } from "src/core/analytics.js";
+import { get_client_id, log_standard_event } from "src/core/analytics";
 
-import { textRed } from "src/core/color_defs.ts";
-import { has_local_storage } from "src/core/feature_detection.ts";
-import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants.ts";
+import { textRed } from "src/core/color_defs";
+import { has_local_storage } from "src/core/feature_detection";
+import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
 import {
   get_email_template,
   send_completed_email_template,
-} from "src/email_backend_utils.js";
+} from "src/email_backend_utils";
 
-import { CheckBox } from "./CheckBox/CheckBox.js";
-import { create_text_maker_component } from "./misc_util_components.js";
+import { CheckBox } from "./CheckBox/CheckBox";
+import { create_text_maker_component } from "./misc_util_components";
 
-import { SpinnerWrapper } from "./SpinnerWrapper.js";
+import { SpinnerWrapper } from "./SpinnerWrapper";
 
 import text from "./EmailFrontend.yaml";
 

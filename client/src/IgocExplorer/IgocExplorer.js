@@ -2,18 +2,18 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme.js";
+import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 
-import { filter_hierarchy } from "src/explorer_common/hierarchy_tools.js";
-import { cached_property, bound } from "src/general_utils.js";
+import { filter_hierarchy } from "src/explorer_common/hierarchy_tools";
+import { cached_property, bound } from "src/general_utils";
 
 //drilldown stuff
 
-import { ExplorerForIgoc } from "./explorer_view.js";
-import { create_igoc_hierarchy } from "./hierarchies.js";
-import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text.js";
+import { ExplorerForIgoc } from "./explorer_view";
+import { create_igoc_hierarchy } from "./hierarchies";
+import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text";
 
 import "./IgocExplorer.scss";
 

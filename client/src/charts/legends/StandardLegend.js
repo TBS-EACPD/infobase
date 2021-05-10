@@ -1,8 +1,8 @@
 import React from "react";
 
-import { tertiaryColor } from "src/core/color_defs.ts";
+import { tertiaryColor } from "src/core/color_defs";
 
-import { LegendList } from "./LegendList.js";
+import { LegendList } from "./LegendList";
 
 import "./StandardLegend.scss";
 

@@ -1,13 +1,13 @@
 import React from "react";
 
-import { SpinnerWrapper } from "src/components/index.js";
+import { SpinnerWrapper } from "src/components/index";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
+import { ensure_loaded } from "src/core/ensure_loaded";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { EstimatesExplorer } from "./scheme.js";
-import { text_maker, TM } from "./utils.js";
+import { EstimatesExplorer } from "./scheme";
+import { text_maker, TM } from "./utils";
 
 import "./EstimatesComparison.scss";
 

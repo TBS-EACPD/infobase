@@ -1,12 +1,12 @@
 import _ from "lodash";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
-import { formats } from "src/core/format.ts";
-import { lang } from "src/core/injected_build_constants.ts";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { formats } from "src/core/format";
+import { lang } from "src/core/injected_build_constants";
 
-import { businessConstants } from "./businessConstants.ts";
-import { Program, CRSO } from "./organizational_entities.js";
-import { trivial_text_maker, run_template } from "./text.js";
+import { businessConstants } from "./businessConstants";
+import { Program, CRSO } from "./organizational_entities";
+import { trivial_text_maker, run_template } from "./text";
 
 const { months } = businessConstants;
 const { year_to_fiscal_year } = formats;

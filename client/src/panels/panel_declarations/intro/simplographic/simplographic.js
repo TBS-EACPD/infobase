@@ -1,24 +1,24 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { ResultCounts, current_drr_key } from "src/models/results.js";
-import { Subject } from "src/models/subject.js";
+import { ResultCounts, current_drr_key } from "src/models/results";
+import { Subject } from "src/models/subject";
 
-import { is_mobile } from "src/core/feature_detection.ts";
+import { is_mobile } from "src/core/feature_detection";
 
 import {
   IconFinances,
   IconEmployees,
   IconHierarchy,
   IconClipboard,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
-import { infograph_href_template, rpb_link } from "src/link_utils.js";
+import { infograph_href_template, rpb_link } from "src/link_utils";
 
 import simplographic_text from "./simplographic.yaml";
 import "./simplographic.scss";

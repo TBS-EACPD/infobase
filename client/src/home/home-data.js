@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { services_feature_flag } from "src/core/injected_build_constants.ts";
+import { services_feature_flag } from "src/core/injected_build_constants";
 
 import {
   IconFinancesAlt,
@@ -17,7 +17,7 @@ import {
   IconTag,
   IconReport,
   IconTreemap,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
 import infographic_sections_text_bundle from "src/infographic/bubble_definitions.yaml";
 

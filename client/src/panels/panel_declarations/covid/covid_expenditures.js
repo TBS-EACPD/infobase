@@ -2,41 +2,41 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
 import {
   query_gov_covid_summaries,
   query_top_covid_spending,
   query_all_covid_expenditures_by_measure_id,
   query_org_covid_expenditures_by_measure_id,
-} from "src/models/covid/queries.js";
-import { Subject } from "src/models/subject.js";
+} from "src/models/covid/queries";
+import { Subject } from "src/models/subject";
 
-import { breakpoints } from "src/core/breakpoint_defs.ts";
+import { breakpoints } from "src/core/breakpoint_defs";
 
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+import { infograph_options_href_template } from "src/infographic/infographic_link";
 
 import {
   YearSelectionTabs,
   AboveTabFootnoteList,
-} from "./covid_common_components.js";
+} from "./covid_common_components";
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
   string_sort_func,
   roll_up_flat_measure_data_by_property,
   get_date_last_updated_text,
-} from "./covid_common_utils.js";
-import { covid_create_text_maker_component } from "./covid_text_provider.js";
+} from "./covid_common_utils";
+import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_expenditures.yaml";
 

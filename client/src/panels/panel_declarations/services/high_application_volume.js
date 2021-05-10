@@ -1,18 +1,18 @@
 import React from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   SpinnerWrapper,
   DisplayTable,
   create_text_maker_component,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
 import text from "./services.yaml";
 
