@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/misc_util_components.js";
 
 import { GlossaryEntry } from "src/models/glossary.js";
 
