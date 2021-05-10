@@ -633,7 +633,7 @@ export const declare_covid_estimates_panel = () =>
       title: text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
-      source: (subject) => get_source_links(["COVID_AUTH"]),
+      source: () => get_source_links(["COVID"]),
       calculate: function (subject, options) {
         const years_with_estimates = YearsWithCovidData.lookup(subject.id)
           ?.years_with_estimates;

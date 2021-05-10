@@ -61,9 +61,16 @@ services_desc:
   en: Provision of a specific final output that addresses one or more needs of an intended recipient and contributes to the achievement of an outcome.
   fr: Extrant final précis qui comble un ou plusieurs besoins d’un bénéficiaire visé et qui contribue à l’obtention d’un résultat.
 
-covid_auth_title: 
-  en: COVID Authorities
-  fr: Autorisations au titre de la COVID
-covid_auth_desc:
-  en: Spending on the COVID-19 response has been authorized through legislation passed by Parliament. Throughout the year, financial requirements are presented to Parliament in a series of Estimates documents. To promote transparency, COVID-19 spending authorities presented in the Estimates have been aligned to measures from Canada’s COVID-19 Economic Response Plan.
-  fr: Les dépenses engagées dans la lutte contre la COVID-19 ont été autorisées aux termes des lois adoptées par le Parlement. Les besoins financiers sont présentés au Parlement tout au long de l’exercice financier sous la forme d’une série de documents budgétaires des dépenses. Dans un souci de transparence, les autorisations de dépenser liées à la pandémie qui figurent dans les budgets des dépenses ont été alignées avec les mesures du Plan d’intervention économique du Canada pour répondre à la COVID-19.
+covid_title: 
+  en: COVID-19 Authorities and Expenditures
+  fr: Autorisations et dépenses liées à la COVID-19
+covid_desc:
+  transform: [handlebars,markdown]
+  en: |
+    Spending on the government’s COVID-19 response has been authorized through legislation passed by Parliament. Throughout the year, financial requirements are presented to Parliament in a series of Estimates documents. To promote transparency, COVID-19 spending authorities presented in the Estimates have been aligned to measures from Canada’s COVID-19 Economic Response Plan.  
+    
+    On an exceptional basis, federal departments, agencies and Crown corporations are estimating and reporting their expenditures related to Canada’s COVID-19 response to the Treasury Board Secretariat. These estimated expenditures represent the cash payments that have been made to suppliers for goods and services or to grants and contributions recipients. These estimated expenditures have not been audited and are subject to change. Final expenditures for 2020-21 will be reported in the Public Accounts of Canada 2021 (expected Fall 2021).
+  fr: |
+    Les dépenses du gouvernement au titre de la COVID-19 ont été autorisées par des lois dûment adoptées par le Parlement. Les besoins sont présentés au Parlement dans des documents budgétaires tout au long de l'exercice financier, Dans un souci de transparence, les autorisations de dépenser liées à la pandémie, qui sont inscrites dans les budgets supplémentaires des dépenses, correspondent aux mesures du Plan d'intervention économique du Canada pour répondre à la COVID‑19.  
+    
+    À titre exceptionnel, les ministères et organismes fédéraux, ainsi que les sociétés d'État, estiment leurs dépenses au titre de la COVID-19 et les déclarent au Secrétariat du Conseil du Trésor. Ces dépenses estimées correspondent aux paiements en espèces versés aux fournisseurs de biens et de services ou aux bénéficiaires de subventions et de contributions. Cette estimation des dépenses n’a pas été vérifiée et peut changer. Les dépenses finales pour 2020-21 seront présentées dans les Comptes publics du Canada de 2021 (attendus à l'automne 2021).
