@@ -19,12 +19,12 @@
     {
         "files": ["*.ts", "*.tsx"],
         "rules": {
-            "no-undef": "off",
-            "import/extensions": "off"
+          "no-undef": "off"
         }
-    }
-  ],
-  "rules": {
+      }
+    ],
+    "rules": {
+    "import/extensions": "off",
     "no-prototype-builtins":"off", //common TS pattern
     "no-use-before-define":"off",
     "no-restricted-imports": ["error", {"patterns": ["../*"]}],
