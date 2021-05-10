@@ -18,7 +18,7 @@ Basic.args = {
   children,
 
   // css
-  banner_class: "banner_class",
-  additional_banner_class: "additional_banner_class",
-  style: "style",
+  banner_class: "",
+  additional_banner_class: "",
+  style: {},
 };

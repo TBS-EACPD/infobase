@@ -4,7 +4,7 @@ import React from "react";
 import { Details } from "./Details.js";
 
 export default {
-  title: "Details",
+  title: "Dropdown/Details",
   component: Details,
 };
 

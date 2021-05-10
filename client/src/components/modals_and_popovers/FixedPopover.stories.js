@@ -30,8 +30,8 @@ Basic.args = {
   max_body_height: "3em",
 
   // css
-  dialog_position: "dialog_position",
-  additional_dialog_position: "additional_dialog_position",
+  dialog_position: "",
+  additional_dialog_position: "",
 
   // clock
   auto_close_time: 1000,

@@ -4,7 +4,7 @@ import React from "react";
 import { DebouncedTextInput } from "./DebouncedTextInput.js";
 
 export default {
-  title: "DebouncedTextInput",
+  title: "Input/DebouncedTextInput",
   component: DebouncedTextInput,
 };
 
@@ -13,5 +13,5 @@ const Template = (args) => <DebouncedTextInput {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  placeholder: "Placeholder",
+  placeHolder: "Write something",
 };
