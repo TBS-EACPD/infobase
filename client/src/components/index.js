@@ -41,7 +41,7 @@ export { LabeledTable } from "./LabeledTable";
 export { FootnoteList } from "./FootnoteList";
 export { AlertBanner } from "./AlertBanner/AlertBanner";
 export { FancyUL } from "./FancyUL";
-export { DropdownMenu } from "./DropdownMenu";
+export { DropdownMenu } from "./DropdownMenu/DropdownMenu";
 export { PinnedContent } from "./PinnedContent/PinnedContent";
 
 export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
