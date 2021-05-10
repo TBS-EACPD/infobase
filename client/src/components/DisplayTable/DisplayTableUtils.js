@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { DropdownMenu } from "src/components/DropdownMenu.js";
+import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu.js";
 import { create_text_maker_component } from "src/components/misc_util_components.js";
 import { WriteToClipboard } from "src/components/WriteToClipboard.js";
 
