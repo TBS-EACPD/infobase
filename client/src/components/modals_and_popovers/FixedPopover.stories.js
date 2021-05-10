@@ -8,19 +8,31 @@ export default {
   component: FixedPopover,
 };
 
-// not sure if the component works or not
 const Template = (args) => <FixedPopover {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  title: "Title",
   show: true,
+
+  // text
+  title: "Title",
   body: "Body",
   header: "Header",
   subtitle: "Subtitle",
-  footer: "footer",
+  footer: "Footer",
+
+  // booleans
   restore_focus: false,
-  max_body_height: "3em",
-  close_button_in_header: true,
+  close_button_in_header: false,
   close_text: false,
+
+  // dimensions
+  max_body_height: "3em",
+
+  // css
+  dialog_position: "dialog_position",
+  additional_dialog_position: "additional_dialog_position",
+
+  // clock
+  auto_close_time: 1000,
 };
