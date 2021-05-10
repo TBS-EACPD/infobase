@@ -23,7 +23,7 @@ export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch";
 export { FilterTable } from "./FilterTable";
 export { CheckBox } from "./CheckBox/CheckBox";
-export { StatelessDetails, Details } from "./Details";
+export { StatelessDetails, Details } from "./Details/Details";
 export { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
 export { KeyConceptList } from "./KeyConceptList";
 export { BackToTop } from "./BackToTop/BackToTop";
