@@ -29,7 +29,9 @@ const SingleServiceRoute = (props) => {
       params: { service_id, subject_id },
     },
   } = props;
-  const { loading, data: service } = useSingleService(service_id);
+  const { loading, data: service } = useSingleService({
+    id: service_id,
+  });
   if (loading) {
     return <SpinnerWrapper config_name="sub_route" />;
   }
