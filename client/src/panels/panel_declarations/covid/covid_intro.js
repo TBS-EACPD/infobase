@@ -162,7 +162,6 @@ export const declare_covid_intro_panel = () =>
           }}
         >
           <div className="medium-panel-text">
-            <TM k="covid_intro_static_text" />
             <CovidIntroPanelDyanmicText panel_args={panel_args} />
           </div>
         </InfographicPanel>
