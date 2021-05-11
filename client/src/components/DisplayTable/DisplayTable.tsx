@@ -47,7 +47,7 @@ interface ColumnConfigProps {
   [keys: string]: ColumnKeyProps;
 }
 
-interface DisplayTableProps {
+interface _DisplayTableProps {
   data: Array<Object>;
   column_configs: ColumnConfigProps;
   unsorted_initial?: boolean;
@@ -59,13 +59,13 @@ interface DisplayTableProps {
   disable_column_select?: boolean;
 }
 
-interface DisplayTableState {
+interface _DisplayTableState {
   page_size?: number;
   current_page: number;
   show_pagination_load_spinner: boolean;
   sort_by: string | null;
   descending: boolean;
-  initial_props: DisplayTableProps;
+  initial_props: _DisplayTableProps;
   visible_col_keys: string[];
   searches: { [keys: string]: string };
 }
@@ -90,7 +90,7 @@ const get_col_configs_with_defaults = (column_configs: ColumnConfigProps) =>
     ...column_config_defaults,
     ...supplied_column_config,
   }));
-const get_default_state_from_props = (props: DisplayTableProps) => {
+const get_default_state_from_props = (props: _DisplayTableProps) => {
   const { unsorted_initial, column_configs } = props;
 
   const col_configs_with_defaults = get_col_configs_with_defaults(
@@ -131,8 +131,8 @@ const get_default_state_from_props = (props: DisplayTableProps) => {
   - Total row color is set to $textLightColor, see total_color
 */
 export class _DisplayTable extends React.Component<
-  DisplayTableProps,
-  DisplayTableState
+  _DisplayTableProps,
+  _DisplayTableState
 > {
   private first_data_ref = React.createRef<HTMLTableCellElement>();
 
@@ -140,9 +140,10 @@ export class _DisplayTable extends React.Component<
     page_size_increment: 100,
     enable_pagination: true,
     page_size_num_options_max: 5,
+    unsorted_initial: true,
   };
 
-  constructor(props: DisplayTableProps) {
+  constructor(props: _DisplayTableProps) {
     super(props);
 
     this.state = {
@@ -152,8 +153,8 @@ export class _DisplayTable extends React.Component<
     };
   }
   static getDerivedStateFromProps(
-    nextProps: DisplayTableProps,
-    prevState: DisplayTableState
+    nextProps: _DisplayTableProps,
+    prevState: _DisplayTableState
   ) {
     if (nextProps !== prevState.initial_props) {
       const new_default_state = get_default_state_from_props(nextProps);
@@ -691,13 +692,13 @@ export class _DisplayTable extends React.Component<
   }
 }
 
-interface SmartDisplayTableProps extends DisplayTableProps {
+interface DisplayTableProps extends _DisplayTableProps {
   show_search?: boolean;
   show_sort?: boolean;
 }
 
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
-export class SmartDisplayTable extends React.Component<SmartDisplayTableProps> {
+export class DisplayTable extends React.Component<DisplayTableProps> {
   render() {
     const { data, show_search, show_sort, column_configs } = this.props;
     const col_configs_with_defaults = get_col_configs_with_defaults(
@@ -725,6 +726,3 @@ export class SmartDisplayTable extends React.Component<SmartDisplayTableProps> {
     );
   }
 }
-DisplayTable.defaultProps = {
-  unsorted_initial: true,
-};
