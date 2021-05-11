@@ -11,7 +11,7 @@ import {
 import { SortDirections } from "src/components/SortDirection";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper";
 
-import { LegendList, LegendItemProps } from "src/charts/legends/LegendList";
+import { LegendList } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
 
@@ -48,12 +48,12 @@ interface ColumnConfigProps {
 }
 
 interface _DisplayTableProps {
-  data: Array<Object>;
+  data: DisplayTableData[];
   column_configs: ColumnConfigProps;
   unsorted_initial?: boolean;
   page_size_increment?: number;
   table_name?: string;
-  util_components?: { [keys: string]: any };
+  util_components?: { [keys: string]: React.ReactElement };
   enable_pagination?: boolean;
   page_size_num_options_max?: number;
   disable_column_select?: boolean;
@@ -69,7 +69,6 @@ interface _DisplayTableState {
   visible_col_keys: string[];
   searches: { [keys: string]: string };
 }
-
 interface DisplayTableData {
   [key: string]: string | number | Date;
 }
@@ -299,14 +298,15 @@ export class _DisplayTable extends React.Component<
         if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
           const sorting_config = col_configs_with_defaults[sort_by];
           return sorting_config.sort_func
-            ? _.map(unsorted_array).sort((
-                a: { [key: string]: any },
-                b: { [key: string]: any } //can't use interface DisplayTableData here??
-              ) => sorting_config.sort_func(a[sort_by], b[sort_by], descending))
+            ? _.map(
+                unsorted_array
+              ).sort((a: DisplayTableData, b: DisplayTableData) =>
+                sorting_config.sort_func(a[sort_by], b[sort_by], descending)
+              )
             : _.sortBy(unsorted_array, (row: DisplayTableData) =>
                 is_number_string_date(
                   sorting_config.raw_formatter(row[sort_by])
-                ) /*Please Leave On: sorting data containing BOTH string and date is not consistent 
+                ) /*Please Leave On: sorting data containing BOTH string and date is not consistent
                  It's probably trying to cast string into date object and if that fails, it probably stops sorting.
                  Better off just building a sort function to handle it*/
                   ? sorting_config.raw_formatter(row[sort_by])
@@ -318,12 +318,9 @@ export class _DisplayTable extends React.Component<
       .tap(descending ? _.reverse : _.noop)
       .value();
 
-    const total_row: { [key: string]: number } = _.reduce(
+    const total_row = _.reduce<DisplayTableData, { [key: string]: number }>(
       sorted_filtered_data,
-      (
-        totals,
-        row: any //can't use interface Displaytable here too?
-      ) =>
+      (totals, row: DisplayTableData) =>
         _.mapValues(totals, (total: number, col_key) =>
           col_configs_with_defaults[col_key].sum_func(total, row[col_key])
         ),
@@ -340,7 +337,7 @@ export class _DisplayTable extends React.Component<
       .map(({ index }, key) => [index, key])
       .sortBy(_.first)
       .map(_.last)
-      .value();
+      .value() as string[];
     const visible_ordered_col_keys = _.intersection(
       all_ordered_col_keys,
       visible_col_keys
@@ -350,7 +347,7 @@ export class _DisplayTable extends React.Component<
       .map((key: string) => col_configs_with_defaults[key].header)
       .thru((header_row) => [header_row])
       .concat(
-        _.map<any, string[]>(sorted_filtered_data, (row: DisplayTableData) =>
+        _.map(sorted_filtered_data, (row: DisplayTableData) =>
           _.map(visible_ordered_col_keys, (key: string) =>
             col_configs_with_defaults[key].raw_formatter(row[key])
           )
@@ -379,14 +376,11 @@ export class _DisplayTable extends React.Component<
           key="columnToggleUtil"
           columns={
             <LegendList
-              items={_.map<any, LegendItemProps>(
-                all_ordered_col_keys,
-                (key: string) => ({
-                  id: key,
-                  label: col_configs_with_defaults[key].header,
-                  active: _.includes(visible_ordered_col_keys, key),
-                })
-              )}
+              items={_.map(all_ordered_col_keys, (key: string) => ({
+                id: key,
+                label: col_configs_with_defaults[key].header,
+                active: _.includes(visible_ordered_col_keys, key),
+              }))}
               onClick={(clicked_key: string) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
