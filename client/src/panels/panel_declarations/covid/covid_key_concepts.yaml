@@ -30,7 +30,7 @@ covid_questions_missing_measures_a:
   fr: |
     La portée actuelle est axée sur les mesures du Plan d’intervention économique pour répondre à la COVID-19 qui font partie des autorisations
     prévues inscrites dans les budgets des dépenses. Les budgets des dépenses ont pour principal objectif de faciliter l'étude par le Parlement
-    des projets de loi de crédits, qui sont les instruments juridiques permettant d'autoriser certains paiements, si bien que les mesures
+    des projets de loi de crédits, qui sont toutes les instruments juridiques permettant d'autoriser certains paiements, si bien que les mesures
     liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses. Par exemple, sont exclues de ces données :
       * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
         * En date du 31 mars 2021, l'estimation des dépenses pour ces programmes est la suivante:
@@ -99,7 +99,7 @@ covid_questions_implementation_status_a:
 
 covid_questions_auth_but_no_exp_q:
   en: Why do some organizations and measures have spending authorities but no expenditures? Why do others have estimated expenditures either below or above their spending authorities? 
-  fr: Pour quelle raison certaines organisations et certaines mesures sont-elles associées à des autorisations de dépenses? Pourquoi l'estimation des dépenses d'autres pays est-elle inférieure ou supérieure à leurs dépenses?
+  fr: Pourquoi certaines organisations et mesures ont-elles des autorisations de dépenser, mais pas de dépenses? Pourquoi d'autres ont-elles des dépenses estimées inférieures ou supérieures aux autorisations de dépenser?
 covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
