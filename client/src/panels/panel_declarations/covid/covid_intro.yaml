@@ -2,11 +2,6 @@ covid_intro_panel_title:
   en: Introduction to the Government's COVID-19 Response
   fr: Présentation de la réponse du gouvernement à la COVID-19
 
-
-#####
-# OGGO-ALIGNED INTRO
-#####
-
 covid_intro_static_text:
     en: |
       With the unprecedented scale and impact of COVID-19, Parliament has prioritized measures responding to COVID-19.
@@ -42,39 +37,3 @@ covid_intro_exp:
     (c'est-à-dire les chapitres 1 et 2 de {{ext_link "l'Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}).
     Cette estimation des dépenses ne représente pas l'état d'avancement de la mise en œuvre ou les résultats obtenus pour une mesure donnée.
     Les organisations exécutantes (ministères, organismes et sociétés d'État) sont les mieux placées pour parler de l'état d'avancement de la mise en œuvre d’une mesure donnée. 
-
-#####
-# PRE_OGGO INTRO, may return to some or all of this version at a future time
-#####
-
-old_covid_intro_static_text:
-  transform: [handlebars,markdown]
-  en: |
-    Since March 2020, the Government of Canada has put in place temporary measures to mitigate the impacts of the COVID-19 pandemic on Canadians, businesses and organizations.
-    These measures form {{ext_link "Canada’s COVID-19 Economic Response Plan (ERP)" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}},
-    with further details available in the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}.
-    Additional information, notably for direct health and economic supports, are also presented in the {{ext_link "Estimates" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/covid-19-planned-expenditures.html"}}.  
-
-    GC InfoBase seeks to provide additional information on amounts presented in the {{gl_tt "Estimates" "EST_PROC"}}. For COVID-19, it reports total Estimates authorities,
-    but on a measure basis as per the COVID-19 Economic Response Plan (ERP), including associated expenditures where available. Given its focus on the Estimates,
-    GC InfoBase does not currently cover the whole of Canada’s COVID-19 Economic Response Plan.
-  fr: |
-    Depuis mars 2020, le gouvernement du Canada a mis en place des mesures temporaires pour atténuer les impacts de la pandémie de la COVID-19 sur les Canadiens, les entreprises et les
-    organisations. Ces mesures figurent dans
-    {{ext_link "le Plan d’intervention économique du Canada pour répondre à la COVID-19 (PRO)" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}}
-    et vous trouverez plus de détails dans {{ext_link "l'Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}.
-    Bon nombre de ces mesures, notamment pour les soutiens sanitaires et économiques directs, figurent aussi dans
-    {{ext_link "les budgets des dépenses" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/budgets-supplementaires/budget-supplementaire-depenses-c-2020-2021/covid-19-depenses-prevues.html"}}.  
-
-    InfoBase du GC entend apporter un complément d'information aux montants inscrits dans les budgets des dépenses. Pour la COVID-19, InfoBase indique le total des autorisations budgétaires
-    par mesure, prévu dans le Plan d'intervention économique pour répondre à la COVID-19, ainsi que les dépenses connexes le cas échéant. Étant donné que InfoBase du GC est axée sur les
-    budgets des dépenses, elle ne couvre pas à l'heure actuelle la totalité du Plan d'intervention économique du Canada pour la COVID-19.  
-
-old_covid_intro_dynamic_text:
-  transform: [handlebars,markdown]
-  en: |
-    In **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, as of **{{date_last_updated_text}}**, **{{orgs_with_authorities}}** organizations
-    across the Government of Canada have been granted authorities to spend in support of the **{{measures_with_authorities}}** COVID-19 measures presented in the Estimates.
-  fr: |
-    En **{{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}}**, à partir de **{{date_last_updated_text}}**, **{{orgs_with_authorities}}** organisations gouvernementales ont reçu l'autorisation de dépenser pour financer
-    **{{measures_with_authorities}}** mesures au titre de la COVID-19 figurant dans les budgets des dépenses.
