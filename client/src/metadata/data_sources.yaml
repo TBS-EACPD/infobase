@@ -67,10 +67,29 @@ covid_title:
 covid_desc:
   transform: [handlebars,markdown]
   en: |
-    Spending on the government’s COVID-19 response has been authorized through legislation passed by Parliament. Throughout the year, financial requirements are presented to Parliament in a series of Estimates documents. To promote transparency, COVID-19 spending authorities presented in the Estimates have been aligned to measures from Canada’s COVID-19 Economic Response Plan.  
-    
-    On an exceptional basis, federal departments, agencies and Crown corporations are estimating and reporting their expenditures related to Canada’s COVID-19 response to the Treasury Board Secretariat. These estimated expenditures represent the cash payments that have been made to suppliers for goods and services or to grants and contributions recipients. These estimated expenditures have not been audited and are subject to change. Final expenditures for 2020-21 will be reported in the Public Accounts of Canada 2021 (expected Fall 2021).
+    Recognizing the unprecedented scale and pace of the spending response to COVID-19, the Treasury Board Secretariat
+    undertook to collect data on funding authorities and expenditures.  
+
+    The Estimates present COVID-19 spending authorities on the basis of measures announced in
+    {{ext_link "Canada's COVID-19 Economic Response Plan" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}},
+    as set out in Chapters 1 and 2 of the Fall Economic Statement, 2020.  
+
+    Since March 2020, federal departments, agencies and Crown corporations have been estimating and reporting expenditures related to the COVID-19 response.  
+
+    Estimated expenditures represent cash payments made to suppliers for goods and services, or to recipients of grants and contributions.
+    Reported data has not been audited. A reconciliation of the estimated expenditures will be conducted at year end to align with final
+    expenditures reported in the Public Accounts of Canada 2021 which will likely be tabled in Parliament in Fall 2021.
   fr: |
-    Les dépenses du gouvernement au titre de la COVID-19 ont été autorisées par des lois dûment adoptées par le Parlement. Les besoins sont présentés au Parlement dans des documents budgétaires tout au long de l'exercice financier, Dans un souci de transparence, les autorisations de dépenser liées à la pandémie, qui sont inscrites dans les budgets supplémentaires des dépenses, correspondent aux mesures du Plan d'intervention économique du Canada pour répondre à la COVID‑19.  
-    
-    À titre exceptionnel, les ministères et organismes fédéraux, ainsi que les sociétés d'État, estiment leurs dépenses au titre de la COVID-19 et les déclarent au Secrétariat du Conseil du Trésor. Ces dépenses estimées correspondent aux paiements en espèces versés aux fournisseurs de biens et de services ou aux bénéficiaires de subventions et de contributions. Cette estimation des dépenses n’a pas été vérifiée et peut changer. Les dépenses finales pour 2020-21 seront présentées dans les Comptes publics du Canada de 2021 (attendus à l'automne 2021).
+    Reconnaissant l'ampleur et la fréquence sans précédent des dépenses en réponse à la COVID-19, le Secrétariat du Conseil du Trésor a
+    entrepris de recueillir des données sur les autorisations de crédits et les dépenses.  
+
+    Les autorisations de dépenser au titre de la COVID-19 sont inscrites dans les budgets des dépenses selon les mesures annoncées dans le
+    {{ext_link "Plan d'intervention économique du Canada pour répondre à la COVID-19" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}},
+    tel qu’indiqué aux chapitres 1 et 2 de l'Énoncé économique de l'automne 2020.  
+
+    Depuis mars 2020, les ministères, les organismes et les sociétés d'État du gouvernement fédéral estiment et déclarent les dépenses en réponse à la COVID-19.  
+
+    L'estimation des dépenses correspond aux paiements en espèces effectués aux fournisseurs de biens et de services, ou aux bénéficiaires de subventions et de
+    contributions. Les données déclarées n'ont pas été vérifiées. Un rapprochement des dépenses estimées sera effectué à la fin de l’exercice pour qu'elles
+    concordent avec le calcul définitif des dépenses finales déclarée dans les Comptes publics du Canada 2021, qui seront probablement déposés au Parlement à
+    l'automne 2021.
