@@ -22,4 +22,7 @@ covid_intro_exp:
     on measures announced in {{ext_link "Canada’s COVID-19 Economic Response Plan" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}} (ERP),
     as set out in Chapters 1 and 2 of the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}.
   fr: |
-    COVID_TEXT_TODO
+    En date du **{{date_last_updated_text}}**, les organisations fédérales avaient estimé à **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
+    le total des dépenses liées aux mesures annoncées dans le 
+    {{ext_link "Plan d'intervention économique du Canada pour répondre  à la COVID-19" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}},
+    tel qu’indiqué aux chapitres 1 et 2 de l'{{ext_link "Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}.
