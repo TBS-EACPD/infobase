@@ -18,16 +18,8 @@ covid_intro_est:
 covid_intro_exp:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year fiscal_year}}**, as of **{{date_last_updated_text}}**, federal organizations reported **total estimated
-    expenditures of {{fmt_compact1_written gov_covid_expenditures_in_year}}** against COVID-19 measures, which correspond with the measures announced as part of the
-    {{ext_link "COVID-19 Economic Response Plan (ERP)" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}}
-    (i.e., Chapters 1 and 2 of the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}).
-    These estimated expenditures do not represent the implementation status or results achieved for a measure.
-    Implementing organizations (departments, agencies, and Crown corporations) are best positioned to speak to the implementation status of a measure.
+    As of **{{date_last_updated_text}}**, federal organizations reported spending an estimated total of **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
+    on measures announced in {{ext_link "Canada’s COVID-19 Economic Response Plan" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}} (ERP),
+    as set out in Chapters 1 and 2 of the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}.
   fr: |
-    En **{{fmt_year_to_fiscal_year fiscal_year}}**, à partir du **{{date_last_updated_text}}**, les organisations fédérales avaient déclaré des **dépenses
-    estimées totalisant {{fmt_compact1_written gov_covid_expenditures_in_year}}** pour les mesures liées à la pandémie, qui correspondent aux mesures annoncées dans le cadre du
-    {{ext_link "Plan d’intervention économique pour répondre à la COVID-19 (PRO)" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}}
-    (c'est-à-dire les chapitres 1 et 2 de {{ext_link "l'Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}).
-    Cette estimation des dépenses ne représente pas l'état d'avancement de la mise en œuvre ou les résultats obtenus pour une mesure donnée.
-    Les organisations exécutantes (ministères, organismes et sociétés d'État) sont les mieux placées pour parler de l'état d'avancement de la mise en œuvre d’une mesure donnée. 
+    COVID_TEXT_TODO
