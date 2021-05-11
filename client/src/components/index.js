@@ -21,7 +21,7 @@ export { CardCenteredImage } from "./CardCenteredImage.js";
 export { CardBackgroundImage } from "./CardBackgroundImage/CardBackgroundImage.js";
 export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput.js";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
-export { FilterTable } from "./FilterTable.js";
+export { FilterTable } from "./FilterTable/FilterTable.js";
 export { CheckBox } from "./CheckBox/CheckBox.js";
 export { StatelessDetails, Details } from "./Details/Details.js";
 export { SpinnerWrapper } from "./SpinnerWrapper.js";
