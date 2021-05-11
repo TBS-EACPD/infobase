@@ -1,6 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
+// eslint-disable-next-line no-restricted-imports
+import text from "../ShareButton.yaml";
+
+import { trivial_text_maker } from "src/models/text.js";
+
 import { CardBackgroundImage } from "./CardBackgroundImage.js";
 
 export default {
@@ -11,18 +16,18 @@ export default {
 // not sure if the component works or not
 const Template = (args) => <CardBackgroundImage {...args} />;
 
-const text_args = <div>Text_Args</div>;
-
 export const Basic = Template.bind({});
 Basic.args = {
   img_src: "",
   link_href: "",
+  tmf: trivial_text_maker,
 
   // keys don't work
-  // title_key: "",
-  // text_key: "",
-  // link_key: "",
+  title_key: "new",
+  text_key: "survey",
+  link_key: "performance",
 
   // text
-  text_args,
+  text_args: "",
+
 };
