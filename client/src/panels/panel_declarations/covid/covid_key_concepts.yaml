@@ -13,15 +13,15 @@ covid_questions_up_to_date_a:
     for determining how best to identify the appropriate estimated expenditures and, if required, to provide any subsequent explanation on the amounts and corresponding activities.
     {{gt "covid_above_tab_data_org_websites_note"}}
   fr: |
-    Ces données sont à jour jusqu'en {{COVID_DATE_LAST_UPDATED}} inclusivement.
-    Dépenses estimées sont fondés sur des estimations qui pourraient être légèrement modifiées lors de périodes ultérieures et qui n'ont pas été vérifiées.
+    Ces données sont à jour jusqu'au {{COVID_DATE_LAST_UPDATED}} inclusivement.
+    Les dépenses estimées sont fondées sur des estimations qui pourraient être légèrement modifiées lors de périodes ultérieures et qui n'ont pas été vérifiées.
     Il incombe aux organisations de déterminer la meilleure façon d’estimer leurs dépenses et, s’il y a lieu, de fournir ultérieurement toute
     explication requise sur les montants et les activités correspondantes. 
     {{gt "covid_above_tab_data_org_websites_note"}}
 
 covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the data?
-  fr: Pourquoi certaines mesures du plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?
+  fr: Pourquoi certaines mesures du Plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?
 covid_questions_missing_measures_a:
   transform: [handlebars,markdown]
   en: |
@@ -41,7 +41,7 @@ covid_questions_missing_measures_a:
   fr: |
     La portée actuelle est axée sur les mesures du Plan d’intervention économique pour répondre à la COVID-19 qui font partie des autorisations
     prévues inscrites dans les budgets des dépenses. Les budgets des dépenses ont pour principal objectif de faciliter l'étude par le Parlement
-    des projets de loi de crédits, qui sont les instruments juridiques permettant d'autoriser certains paiements, ainsi que  toutes les mesures
+    des projets de loi de crédits, qui sont les instruments juridiques permettant d'autoriser certains paiements, si bien que les mesures
     liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses. Par exemple, sont exclues de ces données :
       * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
         * En date du 31 mars 2021, l'estimation des dépenses pour ces programmes est la suivante:
@@ -98,7 +98,7 @@ covid_questions_what_info_do_orgs_provide_a:
     Compte tenu du contexte extraordinaire de la pandémie, les efforts du SCT pour recueillir l’estimation de dépenses liées au Plan
     d’intervention économique du Canada pour répondre à la COVID-19 ont été faits à titre exceptionnel.
 
-    La capacité de suivre de manière efficace les dépenses attribuables à la COVID-19 varie, selon l’organisations, basé sur les
+    La capacité de suivre de manière efficace les dépenses attribuables à la COVID-19 varie, selon l’organisation, basée sur les
     processus internes et les méthodologies utilisées pour la collecte des données et dépenses estimatives ainsi que la capacité
     des divers systèmes financier. Les dépenses déclarées représentent les meilleures estimations de la direction, ne sont pas
     vérifiées et peuvent être modifiées au cours des prochaines soumissions. 
@@ -165,7 +165,7 @@ covid_questions_accruals_a:
 
 covid_questions_auth_but_no_exp_q:
   en: Why do some organizations and measures have spending authorities but no expenditures? Why do others have estimated expenditures either below or above their spending authorities? 
-  fr: Pour quelle raison certaines organisations et certaines mesures ont-elles un pouvoir de dépenser, mais pas de dépenses? Pourquoi l'estimation des dépenses d'autres pays est-elle inférieure ou supérieure à leurs dépenses?
+  fr: Pour quelle raison certaines organisations et certaines mesures sont-elles associées à des autorisations de dépenses? Pourquoi l'estimation des dépenses d'autres pays est-elle inférieure ou supérieure à leurs dépenses?
 covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
