@@ -1,9 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-// eslint-disable-next-line no-restricted-imports
-import text from "../ShareButton.yaml";
-
 import { trivial_text_maker } from "src/models/text.js";
 
 import { CardBackgroundImage } from "./CardBackgroundImage.js";
