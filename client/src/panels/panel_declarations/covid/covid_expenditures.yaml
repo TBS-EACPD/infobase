@@ -15,42 +15,82 @@ covid_expenditures_above_tab_footnote_list:
       {{gt "covid_above_tab_data_org_websites_note"}}
     * COVID_TEXT_TODO
     
+#####
+# GARBAGE ALERT: thanks to some last minute rewrites, this panel's pre-2021-22 text is a bit of a hash, tells a narative that only makese sense
+# with the particular measur distribution pre-2021 (i.e. vast majority of spending through ESDC on the CERB)... 2021-22 and onward text will need
+# to be edited to align somewhat, while staying more flexible, once 2021-22 data becomes available
+#####
 
 covid_expenditures_overview_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{date_last_updated_text}}**, it is estimated that **{{fmt_compact1_written gov_covid_expenditures_in_year}}** has been spent towards implementing the
-    government's response to the COVID-19 pandemic in **{{fmt_year_to_fiscal_year selected_year}}**. By organization, the largest portion of this
-    (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}**) was spent by **{{top_spending_org_name}}**.
-    By COVID-19 Measure, the largest portion (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
-    was spent on "**{{top_spending_measure_name}}**".
+    {{#compare selected_year 2021 operator=">=" }}
+      As of **{{date_last_updated_text}}**, it is estimated that **{{fmt_compact1_written gov_covid_expenditures_in_year}}** has been spent towards implementing the
+      government's response to the COVID-19 pandemic in **{{fmt_year_to_fiscal_year selected_year}}**. By organization, the largest portion of this
+      (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}**) was spent by **{{top_spending_org_name}}**.
+      By COVID-19 Measure, the largest portion (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
+      was spent on "**{{top_spending_measure_name}}**".
+    {{else}}
+      In **{{fmt_year_to_fiscal_year selected_year}}**, federal government organizations spent an estimated
+      **{{fmt_compact1_written gov_covid_expenditures_in_year}}** on measures responding to the COVID-19 pandemic.
+      **{{top_spending_org_name}}** accounts for the largest portion
+      (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}** by organization) of this expenditure, for payments
+      of the **{{top_spending_measure_name}}**
+      (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}** by measure).
+    {{/compare}}
   fr: |
-    Au **{{date_last_updated_text}}**, on estime que **{{fmt_compact1_written gov_covid_expenditures_in_year}}** ont été consacrés à la mise en œuvre des mesures prises par le
-    gouvernement pour lutter contre la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**. Par organisation, la plus grande partie de ces dépenses
-    (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
-    a été consacrée à « **{{top_spending_measure_name}}** ».
+    {{#compare selected_year 2021 operator=">=" }}
+      Au **{{date_last_updated_text}}**, on estime que **{{fmt_compact1_written gov_covid_expenditures_in_year}}** ont été consacrés à la mise en œuvre des mesures prises par le
+      gouvernement pour lutter contre la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**. Par organisation, la plus grande partie de ces dépenses
+      (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
+      a été consacrée à « **{{top_spending_measure_name}}** ».
+    {{else}}
+      CORONA_TEXT_TODO
+    {{/compare}}
 
 covid_expenditures_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{date_last_updated_text}}**, it is estimated that the organization with the largest COVID-19 related expenditures in **{{fmt_year_to_fiscal_year selected_year}}** is **{{largest_dept.name}}**,
-    with **{{fmt_compact1_written largest_dept_exp}}** spent. This represents **{{fmt_percentage2 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** of the government's total
-    **{{fmt_year_to_fiscal_year selected_year}}** COVID-19 expenditures.
+    {{#compare selected_year 2021 operator=">=" }}
+      As of **{{date_last_updated_text}}**, it is estimated that the organization with the largest COVID-19 related expenditures in **{{fmt_year_to_fiscal_year selected_year}}** is **{{largest_dept.name}}**,
+      with **{{fmt_compact1_written largest_dept_exp}}** spent. This represents **{{fmt_percentage1 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** of the government's total
+      **{{fmt_year_to_fiscal_year selected_year}}** COVID-19 expenditures.
+    {{else}}
+      In **{{fmt_year_to_fiscal_year selected_year}}**, **{{largest_dept.name}}** accounted for the largest share
+      (**{{fmt_percentage1 (divide largest_dept_exp gov_covid_expenditures_in_year)}}**) of estimated expenditures,
+      with **{{fmt_compact1_written largest_dept_exp}}** spent. 
+    {{/compare}}
   fr: |
-    Au **{{date_last_updated_text}}**, on estime que l'organisation ayant le plus de dépenses liées à la COVID-19 pour 2020-2021 est **{{le_dept largest_dept}}**,
-    qui a dépensé **{{fmt_compact1_written largest_dept_exp}}**, soit **{{fmt_percentage2 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** du total des
-    dépenses du gouvernement au titre de la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
+    {{#compare selected_year 2021 operator=">=" }}
+      Au **{{date_last_updated_text}}**, on estime que l'organisation ayant le plus de dépenses liées à la COVID-19 pour **{{fmt_year_to_fiscal_year selected_year}}**
+      est **{{le_dept largest_dept}}**, qui a dépensé **{{fmt_compact1_written largest_dept_exp}}**, soit 
+      **{{fmt_percentage1 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** du total des
+      dépenses du gouvernement au titre de la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
+    {{else}}
+      CORONA_TEXT_TODO
+    {{/compare}}
 
 covid_expenditures_measure_tab_text_gov:
   transform: [handlebars,markdown]
   en: |
-    As of **{{date_last_updated_text}}**, it is estimated that the COVID-19 measure with the largest COVID-19 related expenditures in **{{fmt_year_to_fiscal_year selected_year}}** is "**{{largest_measure_name}}**",
-    with **{{fmt_compact1_written largest_measure_exp}}** spent. This represents **{{fmt_percentage2 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** of the government's total
-    **{{fmt_year_to_fiscal_year selected_year}}** COVID-19 expenditures.
+    {{#compare selected_year 2021 operator=">=" }}
+      As of **{{date_last_updated_text}}**, it is estimated that the COVID-19 measure with the largest COVID-19 related expenditures in **{{fmt_year_to_fiscal_year selected_year}}** is "**{{largest_measure_name}}**",
+      with **{{fmt_compact1_written largest_measure_exp}}** spent. This represents **{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** of the government's total
+      **{{fmt_year_to_fiscal_year selected_year}}** COVID-19 expenditures.
+    {{else}}
+      In **{{fmt_year_to_fiscal_year selected_year}}**, the **{{largest_measure_name}}** accounted for the largest share 
+      (**{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}**) of estimated expenditures,
+      **{{fmt_compact1_written largest_measure_exp}}** spent.
+    {{/compare}}
   fr: |
-    Au **{{date_last_updated_text}}**, on estime que la mesure liée à la COVID-19 affichant les dépenses les plus importantes en **{{fmt_year_to_fiscal_year selected_year}}** est « **{{largest_measure_name}}** »,
-    qui a coûté **{{fmt_compact1_written largest_measure_exp}}** soit **{{fmt_percentage2 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** du total des
-    dépenses du gouvernement au titre de la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
+    {{#compare selected_year 2021 operator=">=" }}
+      Au **{{date_last_updated_text}}**, on estime que la mesure liée à la COVID-19 affichant les dépenses les plus importantes en **{{fmt_year_to_fiscal_year selected_year}}** est « **{{largest_measure_name}}** »,
+      qui a coûté **{{fmt_compact1_written largest_measure_exp}}** soit **{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** du total des
+      dépenses du gouvernement au titre de la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
+    {{else}}
+      CORONA_TEXT_TODO
+    {{/compare}}
+
 covid_expenditures_measure_tab_text_dept:
   transform: [handlebars,markdown]
   en: |
