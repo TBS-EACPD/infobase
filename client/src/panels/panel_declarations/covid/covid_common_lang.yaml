@@ -15,8 +15,8 @@ covid_above_tab_footnote_title:
     Important:
 covid_above_tab_limited_measure_note:
   transform: [handlebars]
-  en: Only measures that are presented in the {{gl_tt "Estimates" "EST_PROC"}} are displayed below. As a result, a portion of Canada’s COVID-19 Economic Response Plan (ERP) has not been captured. For more details, see the FAQ item "Why are some measures of the Government’s COVID response plan missing from the data?"
-  fr: Seules les mesures figurant dans les {{gl_tt "budgets des dépenses" "EST_PROC"}} sont affichées ci-dessous. Par conséquent, une partie du Plan d’intervention économique du Canada pour répondre à la COVID-19 (PRO) n'a pas été prise en compte. Pour plus de détails, consultez la FAQ "Pourquoi certaines mesures du plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?"
+  en: The measures displayed below are consistent with those presented in the Estimates, which exclude some measures announced in Canada's COVID-19 Economic Response Plan. For more details, see the FAQ item, “Why are some measures of the Government's COVID-19 response plan missing from the data?”
+  fr: COVID_TEXT_TODO
 covid_above_tab_data_org_websites_note:
   transform: [handlebars]
   en: More recent or more detailed information may be available directly from individual federal organizations.

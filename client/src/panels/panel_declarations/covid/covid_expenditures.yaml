@@ -1,27 +1,19 @@
 covid_expenditures_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * Given the extraordinary context of the pandemic, the Treasury Board Secretariat (TBS) has reached out to organizations to gather spending data related
-      to COVID-19, recognizing that the ability to effectively track expenditures attributable to the COVID-19 response varies greatly by
-      measure, and by organization. For more details, see the FAQ item "Where does the Government normally report expenditure information (COVID, non-COVID)?"
+    * Recognizing the unprecedented scale and pace of the spending response to COVID-19, the Treasury Board Secretariat (TBS) undertook to
+      gather spending data from government organizations.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
-    * The full details of the data reported to TBS by organizations can be found on
-      {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
-      For more details, see the FAQ item “What information are organizations providing to TBS”
-    * {{gt "covid_above_tab_data_org_websites_note"}}
-    * Final expenditures for {{fmt_year_to_fiscal_year selected_year}} will be reported in the Public Accounts of Canada {{next_year}}
-      (expected Fall {{next_year}}). The current reporting of expenditures related to Canada’s COVID-19 Economic Response Plan (ERP) have not been audited.
+    * All data reported to TBS by organizations can be found on {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
+      {{gt "covid_above_tab_data_org_websites_note"}}
+    * Reported data has not been audited. A reconciliation of the estimated expenditures will be conducted at year end to align with final
+      expenditures reported in the Public Accounts of Canada {{next_year}} which will likely be tabled in Parliament in Fall {{next_year}}.
   fr: |
-    * Compte tenu du contexte extraordinaire de la pandémie,
-      le Secrétariat du Conseil du Trésor (le Secrétariat) s'est adressé aux organisations pour recueillir des données sur les dépenses au titre de la COVID-19,
-      reconnaissant que la capacité de suivre efficacement les dépenses attribuables aux interventions liées à la pandémie varie grandement selon la mesure et l'organisation.
-      Pour plus de détails, consultez la FAQ "Où le gouvernement déclare-t-il habituellement ses dépenses (COVID, non-COVID)?"
+    * COVID_TEXT_TODO
     * {{{gt "covid_above_tab_limited_measure_note"}}}
-    * Les détails complets des données fournies au SCT par les organisations se trouve sur
-      {{ext_link "Données ouvertes" "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
-    * {{gt "covid_above_tab_data_org_websites_note"}}
-    * Les dépenses finales pour {{fmt_year_to_fiscal_year selected_year}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{next_year}}).
-      Les présents rapports sur les dépenses engagées dans le cadre du Plan d'intervention économique du Canada pour répondre à la COVID-19 (PRP) n'ont pas été vérifiés.
+    * COVID_TEXT_TODO
+      {{gt "covid_above_tab_data_org_websites_note"}}
+    * COVID_TEXT_TODO
     
 
 covid_expenditures_overview_tab_text:
