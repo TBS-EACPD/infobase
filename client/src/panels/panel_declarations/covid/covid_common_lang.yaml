@@ -16,7 +16,7 @@ covid_above_tab_footnote_title:
 covid_above_tab_limited_measure_note:
   transform: [handlebars]
   en: The measures displayed below are consistent with those presented in the Estimates, which exclude some measures announced in Canada's COVID-19 Economic Response Plan. For more details, see the FAQ item, “Why are some measures of the Government's COVID-19 response plan missing from the data?”
-  fr: COVID_TEXT_TODO
+  fr: Les mesures affichées ci-dessous correspondent à celles figurant dans les budgets des dépenses, qui excluent certaines mesures annoncées dans le Plan d'intervention économique du Canada pour répondre à la COVID-19. Pour plus de détails, consultez la rubrique de la FAQ intitulée, « Pourquoi certaines mesures du plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données? »
 covid_above_tab_data_org_websites_note:
   transform: [handlebars]
   en: More recent or more detailed information may be available directly from individual federal organizations.

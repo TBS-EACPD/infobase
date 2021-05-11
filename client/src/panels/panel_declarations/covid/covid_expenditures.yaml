@@ -9,16 +9,18 @@ covid_expenditures_above_tab_footnote_list:
     * Reported data has not been audited. A reconciliation of the estimated expenditures will be conducted at year end to align with final
       expenditures reported in the Public Accounts of Canada {{next_year}} which will likely be tabled in Parliament in Fall {{next_year}}.
   fr: |
-    * COVID_TEXT_TODO
+    * Compte tenu du contexte extraordinaire de la pandémie, le Secrétariat du Conseil du Trésor (SCT) a entrepris de recueillir des données
+      sur les dépenses auprès des organisations gouvernementales.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
-    * COVID_TEXT_TODO
+    * Toutes les données fournies au SCT par les organisations se trouve sur {{ext_link "Données ouvertes" "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
       {{gt "covid_above_tab_data_org_websites_note"}}
-    * COVID_TEXT_TODO
+    * Les données déclarées n'ont pas été vérifiées. Un rapprochement des dépenses estimées sera effectué à la fin de l’exercice pour qu'elles
+      concordent avec le calcul définitif des dépenses finales déclarée dans les Comptes publics du Canada 2021, qui seront probablement déposés au Parlement à l'automne 2021.
     
 #####
 # GARBAGE ALERT: thanks to some last minute rewrites, this panel's pre-2021-22 text is a bit of a hash, tells a narative that only makese sense
-# with the particular measur distribution pre-2021 (i.e. vast majority of spending through ESDC on the CERB)... 2021-22 and onward text will need
-# to be edited to align somewhat, while staying more flexible, once 2021-22 data becomes available
+# (and uses grammar that is only correct) with the particular measure distribution pre-2021 (i.e. vast majority of spending through ESDC on the CERB), ugh.
+# 2021-22 and onward text will need to be edited to align somewhat, while staying more flexible, once 2021-22 data becomes available
 #####
 
 covid_expenditures_overview_tab_text:
@@ -40,12 +42,14 @@ covid_expenditures_overview_tab_text:
     {{/compare}}
   fr: |
     {{#compare selected_year 2021 operator=">=" }}
-      Au **{{date_last_updated_text}}**, on estime que **{{fmt_compact1_written gov_covid_expenditures_in_year}}** ont été consacrés à la mise en œuvre des mesures prises par le
-      gouvernement pour lutter contre la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**. Par organisation, la plus grande partie de ces dépenses
-      (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**)
-      a été consacrée à « **{{top_spending_measure_name}}** ».
+      TODO, not used yet and likely to be rewritten before use. Wasn't previously translated correctly anyway
     {{else}}
-      CORONA_TEXT_TODO
+      En **{{fmt_year_to_fiscal_year selected_year}}**, les organisations du gouvernement fédéral ont dépensé un montant estimé à 
+      **{{fmt_compact1_written gov_covid_expenditures_in_year}}** pour les mesures en réponse à la pandémie de COVID-19.
+      **{{top_spending_org_name}}** a assumé la plus grande partie
+      (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}** par organisation) 
+      de ces dépenses aux fins des paiments pour la **{{top_spending_measure_name}}**
+      (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}** par mesure).
     {{/compare}}
 
 covid_expenditures_department_tab_text:
@@ -67,7 +71,8 @@ covid_expenditures_department_tab_text:
       **{{fmt_percentage1 (divide largest_dept_exp gov_covid_expenditures_in_year)}}** du total des
       dépenses du gouvernement au titre de la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
     {{else}}
-      CORONA_TEXT_TODO
+      En **{{fmt_year_to_fiscal_year selected_year}}**, **{{largest_dept.name}}** a assumé la plus grande partie des dépenses estimées 
+      (**{{fmt_percentage1 (divide largest_dept_exp gov_covid_expenditures_in_year)}}**), ayant dépensé à lui seul **{{fmt_compact1_written largest_dept_exp}}**. 
     {{/compare}}
 
 covid_expenditures_measure_tab_text_gov:
@@ -79,7 +84,7 @@ covid_expenditures_measure_tab_text_gov:
       **{{fmt_year_to_fiscal_year selected_year}}** COVID-19 expenditures.
     {{else}}
       In **{{fmt_year_to_fiscal_year selected_year}}**, the **{{largest_measure_name}}** accounted for the largest share 
-      (**{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}**) of estimated expenditures,
+      (**{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}**) of estimated expenditures, with
       **{{fmt_compact1_written largest_measure_exp}}** spent.
     {{/compare}}
   fr: |
@@ -88,7 +93,9 @@ covid_expenditures_measure_tab_text_gov:
       qui a coûté **{{fmt_compact1_written largest_measure_exp}}** soit **{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}** du total des
       dépenses du gouvernement au titre de la COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
     {{else}}
-      CORONA_TEXT_TODO
+      En **{{fmt_year_to_fiscal_year selected_year}}**, la **{{largest_measure_name}}** constituait la plus grande partie
+      (**{{fmt_percentage1 (divide largest_measure_exp gov_covid_expenditures_in_year)}}**) des dépenses estimées, dont
+      **{{fmt_compact1_written largest_measure_exp}}** ont été dépensés.
     {{/compare}}
 
 covid_expenditures_measure_tab_text_dept:
