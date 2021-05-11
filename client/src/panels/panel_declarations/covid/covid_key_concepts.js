@@ -34,11 +34,9 @@ export const declare_covid_key_concepts_panel = () =>
               "up_to_date",
               "spent",
               "other_expenditure_reporting",
-              "what_info_do_orgs_provide",
               "implementation_status",
               "auth_but_no_exp",
               "missing_measures",
-              "accruals",
             ])
               .compact()
               .map((key) => [

@@ -1,23 +1,12 @@
-#####
-# OGGO-ALIGNED FAQS
-#####
-
 covid_questions_up_to_date_q:
   en: Are these values up to date? 
   fr: Ces valeurs sont-elles à jour?
 covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
   en: |
-    This data is current up to and including {{COVID_DATE_LAST_UPDATED}}.
-    Estimated expenditures are based on estimates that may be slightly modified in subsequent periods, and have not been audited. Organizations are responsible
-    for determining how best to identify the appropriate estimated expenditures and, if required, to provide any subsequent explanation on the amounts and corresponding activities.
-    {{gt "covid_above_tab_data_org_websites_note"}}
+    Yes. This data is the current most current available and reflects information available as of {{COVID_DATE_LAST_UPDATED}}.
   fr: |
-    Ces données sont à jour jusqu'au {{COVID_DATE_LAST_UPDATED}} inclusivement.
-    Les dépenses estimées sont fondées sur des estimations qui pourraient être légèrement modifiées lors de périodes ultérieures et qui n'ont pas été vérifiées.
-    Il incombe aux organisations de déterminer la meilleure façon d’estimer leurs dépenses et, s’il y a lieu, de fournir ultérieurement toute
-    explication requise sur les montants et les activités correspondantes. 
-    {{gt "covid_above_tab_data_org_websites_note"}}
+    Oui. Ces données sont les plus récentes et correspondent aux renseignements à notre disposition le {{COVID_DATE_LAST_UPDATED}}.
 
 covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the data?
@@ -55,64 +44,20 @@ covid_questions_missing_measures_a:
     pour venir en aide aux Canadiens et aux entreprises qui éprouvent des difficultés en raison de la pandémie de COVID-19 sont affichés en ligne.
 
 covid_questions_other_expenditure_reporting_q:
-  en: Where does the Government normally report expenditure information (COVID, non-COVID)?
-  fr: Où le gouvernement déclare-t-il habituellement ses dépenses (COVID, non-COVID)?
+  en: Where does the government normally report expenditure information, in general and for COVID-19 spending measures?
+  fr: Où le gouvernement déclare-t-il habituellement son information sur les dépenses en général et celles au titre de la COVID-19?
 covid_questions_other_expenditure_reporting_a:
   transform: [handlebars,markdown]
   en: |
-    Typically, reporting on government expenditures is done on a monthly basis through the Department of Finance’s Fiscal Monitor, quarterly by departments and annually
-    through the Annual Financial Report and the Public Accounts. Given the extraordinary context of the pandemic, the Treasury Board Secretariat (TBS) has reached out to
-    organizations to gather spending data related to COVID-19, recognizing that the ability to effectively track expenditures attributable to the COVID-19
-    response varies greatly by measure, and by organization. Final expenditures for {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} will be reported in the Public
-    Accounts of Canada {{COVID_NEXT_YEAR}} (expected Fall {{COVID_NEXT_YEAR}}).
+    In general, reporting on government expenditures is done monthly through the Department of Finance’s Fiscal Monitor, quarterly by departments,
+    and annually through the Annual Financial Report and the Public Accounts.  
+
+    Expenditures related to COVID-19 will be included in the amounts reported in the Public Accounts of Canada for the fiscal year. 
   fr: |
-    En règle générale, les rapports sur les dépenses gouvernementales sont présentés une fois par mois dans La revue financière du ministère des Finances, à chaque
-    trimestre par les ministères et une fois par an dans le Rapport financier annuel et les Comptes publics. Compte tenu du contexte extraordinaire de la pandémie,
-    le Secrétariat du Conseil du Trésor (le Secrétariat) s'est adressé aux organisations pour recueillir des données sur les dépenses au titre de la COVID-19,
-    reconnaissant que la capacité de suivre efficacement les dépenses attribuables aux interventions liées à la pandémie varie grandement selon la mesure et l'organisation.
-    Les dépenses finales pour {{fmt_year_to_fiscal_year COVID_CURRENT_YEAR}} figureront dans les Comptes publics du Canada (publication prévue à l'automne {{COVID_NEXT_YEAR}}).
+    En règle générale, les rapports sur les dépenses gouvernementales sont présentés une fois par mois dans La revue financière du ministère des
+    Finances, à chaque trimestre par les ministères et une fois par an dans le Rapport financier annuel et les Comptes publics.  
 
-covid_questions_what_info_do_orgs_provide_q:
-  en: What information are organizations providing to TBS?
-  fr: Quelle information est fournie au SCT par les organisations?
-covid_questions_what_info_do_orgs_provide_a:
-  transform: [handlebars,markdown]
-  en: |
-    Given the extraordinary context of the pandemic, TBS efforts to collect estimated expenditures related to Canada’s COVID-19 Economic
-    Response Plan have been done on an exceptional basis. 
-
-    The ability to effectively track COVID-19 expenditures varies greatly by organization based on internal processes and the different
-    methodologies used for the collection of data and estimated expenditures as well as the capabilities of varying financial systems.
-    Reported amounts are based on departmental manager’s best estimates, are unaudited and subject to change in subsequent submissions. 
-
-    Expenditures by Type reporting collects estimated expenditures for all expenditures related to the federal government’s response to
-    COVID-19 including announced measures as well as additional resources committed to support the response.
-
-    Expenditures by Measure reporting collects estimated expenditure data for measures as announced by the federal government in Canada’s
-    COVID-19 Economic Response Plan.
-
-    Organizations are responsible for determining how best to identify the appropriate expenditures and, if required, to provide any
-    subsequent explanation on the amounts and corresponding activities. The full details of the data reported to TBS by organizations
-    can be found on {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
-  fr: |
-    Compte tenu du contexte extraordinaire de la pandémie, les efforts du SCT pour recueillir l’estimation de dépenses liées au Plan
-    d’intervention économique du Canada pour répondre à la COVID-19 ont été faits à titre exceptionnel.
-
-    La capacité de suivre de manière efficace les dépenses attribuables à la COVID-19 varie, selon l’organisation, basée sur les
-    processus internes et les méthodologies utilisées pour la collecte des données et dépenses estimatives ainsi que la capacité
-    des divers systèmes financier. Les dépenses déclarées représentent les meilleures estimations de la direction, ne sont pas
-    vérifiées et peuvent être modifiées au cours des prochaines soumissions. 
-
-    Les rapports sur les Dépenses par type comprennent toutes les dépenses estimées liées à la réponse du gouvernement fédéral
-    a la COVID-19, y compris les mesures annoncées ainsi que les ressources additionnelles engagées pour supporter la réponse.
-
-    Les rapports sur les Dépenses par mesure recueillent des données estimées sur les dépenses pour les mesures annoncées par
-    le gouvernement fédéral dans le Plan d’intervention économique pour répondre à la COVID-19 au Canada.
-
-    Il incombe aux organisations de déterminer la meilleure façon d’identifier les dépenses appropriées et, au besoin, de fournir
-    toute explication ultérieure sur les montants et les activités correspondantes. Les détails complets des données fournies au
-    SCT par les organisations se trouve sur {{ext_link "Données ouvertes" "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
-
+    COVID_TEXT_TODO
 
 covid_questions_spent_q:
   en: What are expenditures? What has to happen for dollars to be considered “spent”?
@@ -120,7 +65,7 @@ covid_questions_spent_q:
 covid_questions_spent_a:
   transform: [handlebars,markdown]
   en: |
-    Expenditures are recorded when cash payments are made from the consolidated revenue fund (e.g. for goods, services, grants, contributions etc.)
+    Expenditures are recorded when cash payments are made from the Consolidated Revenue Fund (e.g. for goods, services, grants, contributions etc.)
     against authorities provided through statutory legislation or appropriation bills for the Estimates. Expenditures do not reflect financial commitments
     made by implementing organizations (departments and agencies) for which an actual payment has not been issued.  
 
@@ -139,29 +84,18 @@ covid_questions_spent_a:
     lien avec les mesures d'intervention qui ne sont pas encore comptabilisés.
 
 covid_questions_implementation_status_q:
-  en: What do expenditures to date mean for the status of implementation of the Government’s COVID response plan?
-  fr: Que signifie « dépenses à ce jour » dans l'état d’avancement de la mise en œuvre du plan d'intervention du gouvernement lié à la COVID-19? 
+  en: What are estimated “expenditures to date”? 
+  fr: Que signifie « dépenses à ce jour »? 
 covid_questions_implementation_status_a:
   en: |
-    The estimated expenditures to date indicate the cash payments that have been made to suppliers for goods and services or to grants and contributions recipients. 
-    They do not represent the implementation status or results achieved for a measure. Implementing organizations (departments, agencies, and Crown corporations)
-    are best positioned to speak to the implementation status of a measure.
+    The estimated “expenditures to date” indicate the cash payments that have been made to suppliers for goods and services, or to recipients of grants and
+    contributions. They do not represent the implementation status, nor the results achieved for a measure. The responsible organizations (departments,
+    agencies and Crown corporations) are best positioned to speak to the implementation status of a measure. 
   fr: |
-    Par « estimation des dépenses à ce jour », on entend les paiements en espèces qui ont été versés aux fournisseurs pour des biens et des services, et non
-    l'état d'avancement de la mise en œuvre ou les résultats obtenus pour une mesure donnée. Les organisations exécutantes (ministères, organismes et sociétés d'État)
-    sont les mieux placées pour parler de l'état d'avancement de la mise en œuvre d’une mesure.  
- 
-#TODO ugh, the most appropriate year for this text won't always be clear (it should probably stay 2021 for some amount of 2021-22?), should it stay hardcoded?
-covid_questions_accruals_q:
-  en: Will there be COVID-19 accruals at year-end?
-  fr: Y aura-t-il des charges à payer au titre de COVID-19 à la fin de l’exercice financier?
-covid_questions_accruals_a:
-  en: |
-    Like any other program that spans over March 31, 2021, some accruals for COVID-19 programs will be necessary.
-    Note that accruals will not be reported with the cash based estimated expenditures presented now or at year-end.
-  fr: |
-    Comme tout autre programme qui s'étend au-delà du 31 mars 2021, il faudra comptabiliser certaines charges à payer pour les programmes liés à la COVID-19.
-    Prière de retenir que les charges à payer ne seront pas déclarées avec les estimations de dépenses en espèces présentées maintenant ou à la fin de l'exercice.
+    Par « estimation des dépenses à ce jour », on entend les paiements en espèces qui ont été versés aux fournisseurs pour des biens et des services ou
+    les bénéficiaires de subventions et de contributions. Ce n’est pas l'état d'avancement de la mise en œuvre ou les résultats obtenus pour une mesure
+    donnée. Les organisations responsables (ministères, organismes et sociétés d'État) sont les mieux placées pour parler de l'état d'avancement de la
+    mise en œuvre d’une mesure donnée.  
 
 covid_questions_auth_but_no_exp_q:
   en: Why do some organizations and measures have spending authorities but no expenditures? Why do others have estimated expenditures either below or above their spending authorities? 
@@ -169,23 +103,22 @@ covid_questions_auth_but_no_exp_q:
 covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
-    While many spending authorities were authorized earlier in the fiscal year, either through statutory legislation, such as the _Public Health Events 
-    of National Concern Payments Act_ or the appropriation act for Supplementary Estimates (B), others were only presented in Supplementary Estimates 
-    (C) in February 2021, for which final voted authority is only expected by the end of March. For these measures, organizations may not have had
-    recorded payments as of {{COVID_DATE_LAST_UPDATED}}.  
+    Depending on when and how payments are authorized, there may be a delay between approval of the spending authorities and the organization’s ability
+    to make the cash expenditure. For example, the measures listed in Supplementary Estimates (C), and which require a voted authority, may not yet have
+    recorded all expenditures on the reporting date of {{COVID_DATE_LAST_UPDATED}}.  
 
-    In comparing COVID-19 authorities and estimated expenditures, in some cases, the funding source of a measure is completely aligned with the authorities
-    presented in the Estimates. In other cases, funding can include other sources of funds – for example, the use of existing resources and/or transfer of
-    funds between organizations. As a result, in limited circumstances, estimated expenditures may be greater than the authorities for a measure. Conversely,
-    a measure may be fully implemented without fully expending available authorities, as authorities are “up to” amounts.
+    For some measures, organizations may reflect other sources of funds – for example, other existing resources or funds transferred from another
+    organization – in the expenditures attributed to that measure. As a result, estimated expenditures may be greater than the authorities reported in the Estimates.  
+
+    Organizations may also be able to implement initiatives without expending the full amount of the “up to” authorities. 
   fr: |
-    Alors que de nombreuses autorisations de dépenses ont été accordées plus tôt au cours de l'exercice, soit par une loi habilitante, comme la 
-    _Loi sur les paiements relatifs aux événements de santé publique d'intérêt national_, soit par la loi de crédits pour le budget supplémentaire (B),
-    d'autres n'ont été inscrites qu'en février 2021 dans le budget supplémentaire (C), pour lequel l'autorisation votée finale n'est attendue qu'à la fin du mois de mars.
-    Pour ces mesures, il se peut que les organisations n'aient pas eu de paiements enregistrés en date du {{COVID_DATE_LAST_UPDATED}}.  
+    Selon la date et le mode d’autorisation des paiements, il peut y avoir un délai entre l'approbation des autorisations de dépenser et la capacité de
+    l'organisation à payer la dépense en espèces. Il se peut, par exemple, que les dépenses à la date de déclaration du {{COVID_DATE_LAST_UPDATED}}
+    n’aient pas toutes été comptabilisées pour les mesures inscrites au budget supplémentaire des dépenses (C) requérant une autorisation votée.  
 
-    En comparant les autorisations au titre de la COVID-19 et l’estimation des dépenses, il arrive dans certains cas que la source de financement d'une mesure
-    donnée corresponde parfaitement aux autorisations figurant dans les budgets des dépenses. Dans d'autres cas, le financement peut inclure d'autres sources de
-    fonds, comme l'utilisation de ressources existantes ou le transfert de fonds entre organisations. Par conséquent, dans certaines circonstances, il se peut
-    que l'estimation des dépenses soit supérieure aux autorisations pour une mesure donnée. Inversement, il se peut que la mise en œuvre d'une mesure soit achevée
-    sans que les autorisations soient épuisées, car les autorisations sont un plafond. 
+    Dans certains cas, une organisation peut indiquer une autre source de financement pour les dépenses consacrées à une mesure donnée. Ce pourrait être,
+    par exemple, d'autres ressources existantes ou des fonds transférés d'une autre organisation. Par conséquent, les dépenses estimées peuvent être
+    supérieures aux autorisations figurant dans les budgets des dépenses.  
+
+    Il se peut aussi qu'une organisation soit en mesure de mettre en œuvre une initiative sans dépenser le plein montant du plafond autorisé.
+    
