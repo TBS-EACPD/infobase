@@ -2,12 +2,6 @@ covid_intro_panel_title:
   en: Introduction to the Government's COVID-19 Response
   fr: Présentation de la réponse du gouvernement à la COVID-19
 
-covid_intro_static_text:
-    en: |
-      With the unprecedented scale and impact of COVID-19, Parliament has prioritized measures responding to COVID-19.
-    fr: |
-      Compte tenu de l'ampleur et de l'impact sans précédent de la COVID-19, le Parlement a accordé la priorité aux mesures en réponse à la pandémie.
-
 covid_intro_est:
   transform: [handlebars,markdown]
   en: |
