@@ -8,7 +8,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import "./LegendList.scss";
 
-export interface LegendItemProps {
+interface LegendItemProps {
   active: boolean;
   id: string | number;
   label: string;
