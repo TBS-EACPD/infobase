@@ -139,12 +139,43 @@ export const useServicesList = (subject, query_variables) =>
     query($lang: String! = "${lang}", $id: String!) {
       root(lang: $lang) {
         ${query_by_level[subject.level]} {
+          id
           services: services {
             org_id
             id
             name
             service_type
             description
+          }
+        }
+      }
+    }
+  `,
+    resolver: (response) =>
+      _.get(response, `root.${resolver_by_level[subject.level]}.services`),
+  });
+
+export const useServicesChannels = (subject, query_variables) =>
+  useQueryWrapper({
+    query_name: `${subject.level}_services_channels`,
+    query_variables,
+    query: gql`
+    query($lang: String! = "${lang}", $id: String!) {
+      root(lang: $lang) {
+        ${query_by_level[subject.level]} {
+          id
+          services: services {
+            org_id
+            id
+            name
+            service_report {
+              phone_inquiry_count
+              online_inquiry_count
+              online_application_count
+              live_application_count
+              mail_application_count
+              other_application_count
+            }          
           }
         }
       }

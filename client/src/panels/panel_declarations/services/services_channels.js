@@ -11,7 +11,7 @@ import {
   SpinnerWrapper,
 } from "src/components/index";
 
-import { useServices } from "src/models/populate_services";
+import { useServicesChannels } from "src/models/services/queries";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -19,10 +19,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 import { WrappedNivoBar, WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
-import {
-  delivery_channels_keys,
-  delivery_channels_query_fragment,
-} from "./shared";
+import { delivery_channels_keys } from "./shared";
 
 import text from "./services.yaml";
 
@@ -30,13 +27,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const colors = infobase_colors();
 
 const ServicesChannelsPanel = ({ subject }) => {
-  const { loading, data } = useServices({
-    subject,
-    query_fragments: `
-    id
-    name
-    ${delivery_channels_query_fragment}
-    `,
+  const { loading, data } = useServicesChannels(subject, {
+    id: String(subject.id),
   });
 
   const [active_services, set_active_services] = useState({});

@@ -25,16 +25,6 @@ const delivery_channels_keys = [
   "mail_application",
   "online_application",
 ];
-const delivery_channels_query_fragment = `
-service_report {
-  phone_inquiry_count
-  online_inquiry_count
-  online_application_count
-  live_application_count
-  mail_application_count
-  other_application_count
-}
-`;
 const available_keys = {
   true: "yes",
   false: "no",
@@ -70,7 +60,6 @@ const available_icons = {
 export {
   digital_status_keys,
   delivery_channels_keys,
-  delivery_channels_query_fragment,
   available_keys,
   available_icons,
 };
