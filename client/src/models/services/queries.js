@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
 import {
   query_promise_factory,
   useQueryWrapper,
-} from "src/graphql_utils/graphql_utils.js";
+} from "src/graphql_utils/graphql_utils";
 
 const all_service_fragments = `
       id

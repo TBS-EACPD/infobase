@@ -13,7 +13,7 @@ import {
   api_load_results_counts,
   subject_has_results,
 } from "src/models/populate_results";
-import { api_load_has_services } from "src/models/populate_services";
+import { api_load_has_services } from "src/models/services/populate";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { Table } from "./TableClass";

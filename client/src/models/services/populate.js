@@ -1,7 +1,4 @@
-import {
-  query_org_has_services,
-  query_program_has_services,
-} from "./queries.js";
+import { query_org_has_services, query_program_has_services } from "./queries";
 
 export const api_load_has_services = (subject) => {
   const level = subject && subject.level;

@@ -12,7 +12,7 @@ import {
   SpinnerWrapper,
 } from "src/components/index";
 
-import { useSingleService } from "src/models/populate_services";
+import { useSingleService } from "src/models/services/queries";
 import { Subject } from "src/models/subject";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
