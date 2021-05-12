@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
@@ -13,20 +12,16 @@ const Template = (args) => <RadioButtons {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  // options: {[
-  //   {
-  //     display: "Option 1",
-  //     id: "1",
-  //     active: true,
-  //   },
-  //   {
-  //     display: "Option 2",
-  //     id: "2",
-  //     active: true,
-  //   },
-  // ]},
-  options: {},
-  // display: "",
-  // id: "",
-  // active: true,
+  options: [
+    {
+      display: "Option 1",
+      id: "1",
+      active: false,
+    },
+    {
+      display: "Option 2",
+      id: "2",
+      active: false,
+    },
+  ],
 };
