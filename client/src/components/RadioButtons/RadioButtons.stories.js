@@ -4,7 +4,7 @@ import React from "react";
 import { RadioButtons } from "./RadioButtons.tsx";
 
 export default {
-  title: "RadioButton",
+  title: "Input/RadioButton",
   component: RadioButtons,
 };
 
