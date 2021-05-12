@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
@@ -20,9 +19,9 @@ Basic.args = {
   otherHeaderContent: "",
   children,
   sources: "",
-  // glossary doesn't work
-  // glossary_keys: "glossary keys",
-  footnotes: "",
+  id: 1,
+  glossary_keys: {},
+  footnotes: [],
   isOpen: true,
   style: {},
 };

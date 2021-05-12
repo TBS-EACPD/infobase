@@ -4,9 +4,13 @@ import React from "react";
 
 import { textLightColor } from "src/core/color_defs";
 
+// eslint-disable-next-line no-restricted-imports
 import { Details } from "../Details/Details.js";
+// eslint-disable-next-line no-restricted-imports
 import { FootnoteList } from "../FootnoteList.js";
+// eslint-disable-next-line no-restricted-imports
 import { GlossaryItem } from "../glossary_components.js";
+// eslint-disable-next-line no-restricted-imports
 import { create_text_maker_component } from "../misc_util_components.js";
 
 import text from "./Panel.yaml";
