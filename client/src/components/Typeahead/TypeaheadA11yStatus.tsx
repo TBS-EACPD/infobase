@@ -3,13 +3,28 @@ import React from "react";
 
 import { create_text_maker } from "src/models/text";
 
+import { ResultProps } from "./Typeahead";
+
 import text from "./Typeahead.yaml";
 
 const text_maker = create_text_maker(text);
 
-class DelayedRender extends React.Component {
-  constructor() {
-    super();
+interface DelayedRenderProps {
+  children: any;
+}
+
+interface DelayedRenderState {
+  children: any;
+  debounced: boolean;
+}
+
+class DelayedRender extends React.Component<
+  DelayedRenderProps,
+  DelayedRenderState,
+  {}
+> {
+  constructor(props: DelayedRenderProps) {
+    super(props);
 
     this.state = {
       debounced: false,
@@ -19,7 +34,10 @@ class DelayedRender extends React.Component {
   debounceUpdate = _.debounce(() => {
     this.setState({ debounced: false });
   }, 1400);
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(
+    nextProps: DelayedRenderProps,
+    prevState: DelayedRenderState
+  ) {
     const { children: prev_children } = prevState;
     const { children: next_children } = nextProps;
 
@@ -42,7 +60,10 @@ class DelayedRender extends React.Component {
   componentDidMount() {
     this.debounceUpdate();
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(
+    prevProps: DelayedRenderProps,
+    prevState: DelayedRenderState
+  ) {
     const { children: prev_children } = prevState;
     const { children, debounced } = this.state;
 
@@ -65,7 +86,13 @@ class DelayedRender extends React.Component {
   }
 }
 
-export const TypeaheadA11yStatus = ({
+interface TypeaheadA11yStatusProps {
+  selection_cursor: number;
+  min_length: number;
+  results: ResultProps[];
+}
+
+export const TypeaheadA11yStatus: React.FC<TypeaheadA11yStatusProps> = ({
   selection_cursor,
   min_length,
   results,
@@ -85,7 +112,7 @@ export const TypeaheadA11yStatus = ({
       // Cases where focus is still on the typeahead input, testing shows the status message update
       // often gets cut off by re-reading the input value, a slight delay fixes that
       return (
-        <DelayedRender min_length={min_length}>
+        <DelayedRender>
           {_.isEmpty(results) && text_maker("no_matches_found")}
           {results.length > 0 &&
             text_maker("menu_with_results_status", {

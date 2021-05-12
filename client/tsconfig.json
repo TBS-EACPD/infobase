@@ -9,6 +9,7 @@
     "allowSyntheticDefaultImports" : true,
     "esModuleInterop" : true,
     "module": "esnext",
+    "target": "ES5",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
