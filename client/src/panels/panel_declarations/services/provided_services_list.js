@@ -11,7 +11,7 @@ import {
   SpinnerWrapper,
 } from "src/components/index";
 
-import { useServices } from "src/models/populate_services";
+import { useServicesList } from "src/models/services/queries";
 
 import text from "./services.yaml";
 
@@ -19,15 +19,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
-  const { loading, data } = useServices({
-    subject,
-    query_fragments: `
-    name
-    id
-    org_id
-    service_type
-    description
-    `,
+  const { loading, data } = useServicesList(subject, {
+    id: String(subject.id),
   });
   if (loading) {
     return <SpinnerWrapper config_name="inline_panel" />;

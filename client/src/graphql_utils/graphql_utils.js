@@ -1,7 +1,6 @@
 import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
 
-import _ from "lodash";
 import { useState } from "react";
 
 import string_hash from "string-hash";
@@ -119,7 +118,14 @@ const log_query_failure = (query_name, response_time, error) =>
     MISC2: `${query_name}, took ${response_time} ms - ${error.toString()}`,
   });
 
-const query_promise_factory = (query_name, query, resolver) => (variables) => {
+export const query_promise_factory = ({ query_name, query, resolver }) => (
+  variables
+) => {
+  if (!query_name) {
+    throw new Error(
+      "All queries must have (unique) names, for logging purposes."
+    );
+  }
   const time_at_request = Date.now();
 
   return get_client()
@@ -142,12 +148,22 @@ const query_promise_factory = (query_name, query, resolver) => (variables) => {
     });
 };
 
-const query_hook_factory = (query_name, query, resolver) => (variables) => {
+export const useQueryWrapper = ({
+  query_name,
+  query,
+  query_variables,
+  resolver,
+}) => {
+  if (!query_name) {
+    throw new Error(
+      "All queries must have (unique) names, for logging purposes."
+    );
+  }
   const [time_at_request, set_time_at_request] = useState(Date.now()); // eslint-disable-line no-unused-vars
 
   const { loading, error, data } = useQuery(query, {
     variables: {
-      ...variables,
+      ...query_variables,
       _query_name: query_name,
     },
   });
@@ -171,25 +187,4 @@ const query_hook_factory = (query_name, query, resolver) => (variables) => {
       data: resolver(data),
     };
   }
-};
-
-export const query_factory = ({ query_name, query, resolver = _.identity }) => {
-  if (!query_name) {
-    throw new Error(
-      "All queries must have (unique) names, for logging purposes."
-    );
-  }
-
-  const promise_key = `query_${query_name}`;
-
-  const hook_key = _.chain(query_name)
-    .camelCase()
-    .upperFirst()
-    .thru((pascal_case_name) => `use${pascal_case_name}`)
-    .value();
-
-  return {
-    [promise_key]: query_promise_factory(query_name, query, resolver),
-    [hook_key]: query_hook_factory(query_name, query, resolver),
-  };
 };
