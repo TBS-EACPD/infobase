@@ -161,19 +161,16 @@ export const useQueryWrapper = ({
   }
   const [time_at_request, set_time_at_request] = useState(Date.now()); // eslint-disable-line no-unused-vars
 
-  const { loading, error, data } = useQuery(query, {
+  const res = useQuery(query, {
     variables: {
       ...query_variables,
       _query_name: query_name,
     },
   });
+  const { loading, error, data } = res;
 
   if (loading) {
-    return {
-      loading,
-      error,
-      data,
-    };
+    return res;
   } else if (error) {
     log_query_failure(query_name, Date.now() - time_at_request, error);
 
@@ -182,8 +179,7 @@ export const useQueryWrapper = ({
     log_query_success(query_name, Date.now() - time_at_request);
 
     return {
-      loading,
-      error,
+      ...res,
       data: resolver(data),
     };
   }
