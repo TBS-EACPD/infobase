@@ -17,14 +17,23 @@
   },
   "overrides": [
     {
-        "files": ["*.ts", "*.tsx"],
-        "rules": {
-          "no-undef": "off"
-        }
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
       }
-    ],
+    },
+    {
+      "files": ["*.ts","*.tsx", "*.js"],
+      "rules": {
+        "import/extensions": ["error", {
+          "js": "never",
+          "ts": "never",
+          "tsx": "never"
+        }]
+      }
+    }
+  ],
     "rules": {
-    "import/extensions": "off",
     "no-prototype-builtins":"off", //common TS pattern
     "no-use-before-define":"off",
     "no-restricted-imports": ["error", {"patterns": ["../*"]}],
