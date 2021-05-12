@@ -59,7 +59,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
     .value();
 
   const column_configs = {
-    id: {
+    service_id: {
       index: 0,
       header: text_maker("service_name"),
       is_searchable: true,
