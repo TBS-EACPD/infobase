@@ -9,7 +9,7 @@ export { TabLoadingWrapper, TabLoadingSpinner } from "./TabLoadingWrapper";
 export { EmailFrontend } from "./EmailFrontend";
 export { HeightClipper } from "./HeightClipper/HeightClipper";
 export { RadioButtons } from "./RadioButton/RadioButtons";
-export { Select } from "./Select";
+export { Select } from "./Select/Select";
 export { SortDirections } from "./SortDirection";
 export { TabbedControls, TabbedContent } from "./TabbedContent/TabbedContent";
 export { LabeledBox } from "./LabeledBox";
