@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { TM } from "./TextMaker.tsx";
+// eslint-disable-next-line no-restricted-imports
+import { TM } from "../TextMaker.tsx";
 
 import "./CardCenteredImage.scss";
 
