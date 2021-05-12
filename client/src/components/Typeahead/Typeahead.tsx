@@ -191,7 +191,7 @@ export class Typeahead extends React.Component<
         )}
         {this.show_menu && (
           <AutoSizer>
-            {({ width }: any) => (
+            {({ width }) => (
               <ReactResizeDetector
                 handleWidth
                 onResize={() => {
