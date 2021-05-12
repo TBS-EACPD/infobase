@@ -17,7 +17,7 @@ export { TextMaker, TM } from "./TextMaker";
 export { TwoLevelSelect } from "./TwoLevelSelect";
 export { CardTopImage } from "./CardTopImage";
 export { CardLeftImage } from "./CardLeftImage";
-export { CardCenteredImage } from "./CardCenteredImage";
+export { CardCenteredImage } from "./CardCenteredImage/CardCenteredImage";
 export { CardBackgroundImage } from "./CardBackgroundImage/CardBackgroundImage";
 export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch";
