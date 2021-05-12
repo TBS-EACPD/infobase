@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TreeMapControls } from "./TreeMapControls.js";
+import { TreeMapControls } from "./TreeMapControls";
 import "./TreeMap.scss";
 
 export class TreeMapSidebar extends React.Component {

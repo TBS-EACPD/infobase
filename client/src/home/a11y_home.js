@@ -2,18 +2,15 @@ import _ from "lodash";
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import {
-  create_text_maker_component,
-  AlertBanner,
-} from "src/components/index.js";
+import { create_text_maker_component, AlertBanner } from "src/components/index";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
 import {
   infographic_link_items,
   featured_content_items,
   subapp_items,
-} from "./home-data.js";
+} from "./home-data";
 
 import home_text from "./home.yaml";
 

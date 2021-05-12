@@ -1,19 +1,19 @@
 import _ from "lodash";
 import React from "react";
 
-import { PanelRegistry } from "src/panels/PanelRegistry.js";
+import { PanelRegistry } from "src/panels/PanelRegistry";
 
 import {
   create_text_maker_component,
   Details,
   LabeledBox,
   TagCloud,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { tertiaryColor } from "src/core/color_defs.ts";
-import { Table } from "src/core/TableClass.js";
+import { tertiaryColor } from "src/core/color_defs";
+import { Table } from "src/core/TableClass";
 
-import { SelectAllControl } from "src/charts/legends/index.js";
+import { SelectAllControl } from "src/charts/legends/index";
 
 import text from "./PanelFilterControl.yaml";
 

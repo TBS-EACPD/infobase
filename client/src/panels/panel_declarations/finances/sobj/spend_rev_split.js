@@ -1,21 +1,18 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { highlightColor, secondaryColor } from "src/core/color_defs.ts";
-import { formats } from "src/core/format.ts";
+import { highlightColor, secondaryColor } from "src/core/color_defs";
+import { formats } from "src/core/format";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
-import * as table_common from "src/tables/table_common.js";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import * as table_common from "src/tables/table_common";
 
 import text from "./spend_rev_split.yaml";
 

@@ -1,14 +1,14 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { DropdownMenu } from "src/components/DropdownMenu.js";
-import { create_text_maker_component } from "src/components/misc_util_components.js";
-import { WriteToClipboard } from "src/components/WriteToClipboard.js";
+import { DropdownMenu } from "src/components/DropdownMenu";
+import { create_text_maker_component } from "src/components/misc_util_components";
+import { WriteToClipboard } from "src/components/WriteToClipboard";
 
-import { backgroundColor } from "src/core/color_defs.ts";
-import { is_IE } from "src/core/feature_detection.ts";
+import { backgroundColor } from "src/core/color_defs";
+import { is_IE } from "src/core/feature_detection";
 
-import { IconCopy, IconDownload } from "src/icons/icons.tsx";
+import { IconCopy, IconDownload } from "src/icons/icons";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";

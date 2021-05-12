@@ -1,6 +1,6 @@
-import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants.ts";
+import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants";
 
-import { log_standard_event } from "./core/analytics.js";
+import { log_standard_event } from "./core/analytics";
 
 const email_backend_url =
   is_dev && !is_ci

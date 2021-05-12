@@ -4,18 +4,18 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { formats } from "src/core/format.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { newIBCategoryColors } from "src/core/color_schemes";
+import { formats } from "src/core/format";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend } from "src/charts/legends/index.js";
-import { toggle_list } from "src/general_utils.js";
+import { StandardLegend } from "src/charts/legends/index";
+import { toggle_list } from "src/general_utils";
 
-import { WrappedNivoBar } from "././wrapped_nivo_bar.js";
-import { infobase_colors_smart } from "./wrapped_nivo_common.js";
-import { WrappedNivoLine } from "./WrappedNivoLine.js";
+import { WrappedNivoBar } from "././wrapped_nivo_bar";
+import { infobase_colors_smart } from "./wrapped_nivo_common";
+import { WrappedNivoLine } from "./WrappedNivoLine";
 
 import text from "./NivoLineBarToggle.yaml";
 

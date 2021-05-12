@@ -8,19 +8,19 @@ import {
   SpinnerWrapper,
   WriteToClipboard,
   create_text_maker_component,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Indicator } from "src/models/results.js";
+import { Indicator } from "src/models/results";
 
-import { log_standard_event } from "src/core/analytics.js";
-import { lang } from "src/core/injected_build_constants.ts";
+import { log_standard_event } from "src/core/analytics";
+import { lang } from "src/core/injected_build_constants";
 
-import { get_client } from "src/graphql_utils/graphql_utils.js";
+import { get_client } from "src/graphql_utils/graphql_utils";
 
-import { IconCopyLink } from "src/icons/icons.tsx";
-import { infograph_options_href_template } from "src/infographic/infographic_link.js";
+import { IconCopyLink } from "src/icons/icons";
+import { infograph_options_href_template } from "src/infographic/infographic_link";
 
-import { IndicatorDisplay } from "./result_components.js";
+import { IndicatorDisplay } from "./result_components";
 
 import text from "./IndicatorDisplayPanel.yaml";
 

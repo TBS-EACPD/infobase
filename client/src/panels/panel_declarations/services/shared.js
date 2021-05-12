@@ -1,14 +1,14 @@
 import React from "react";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
 import {
   successDarkColor,
   highlightDark,
   warnDarkColor,
-} from "src/core/color_defs.ts";
+} from "src/core/color_defs";
 
-import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons.tsx";
+import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons";
 
 const digital_status_keys = [
   "account_reg_digital",

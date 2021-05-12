@@ -7,16 +7,16 @@ import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import { AlertBanner, TagCloud } from "src/components/index.js";
+import { AlertBanner, TagCloud } from "src/components/index";
 
-import { Table } from "src/core/TableClass.js";
+import { Table } from "src/core/TableClass";
 
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
+import { TextMaker, text_maker } from "./rpb_text_provider";
 import {
   categories,
   concepts_by_category,
   concept_filter,
-} from "./table_picker_concept_filter.js";
+} from "./table_picker_concept_filter";
 import "./TablePicker.scss";
 
 const BrokenLinkBanner = () => (

@@ -9,18 +9,14 @@ import {
   create_text_maker_component,
   Panel,
   FilterTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes.js";
+import FootNote from "src/models/footnotes/footnotes";
 
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { newIBCategoryColors } from "src/core/color_schemes";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import {
-  IconAttention,
-  IconCheck,
-  IconNotApplicable,
-} from "src/icons/icons.tsx";
+import { IconAttention, IconCheck, IconNotApplicable } from "src/icons/icons";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

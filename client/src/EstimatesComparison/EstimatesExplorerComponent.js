@@ -10,23 +10,23 @@ import {
   LabeledBox,
   CheckBox,
   Details,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
+import { businessConstants } from "src/models/businessConstants";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { Explorer } from "src/explorer_common/explorer_components.js";
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
-import { infograph_href_template, rpb_link } from "src/link_utils.js";
-import { sources } from "src/metadata/data_sources.js";
+import { Explorer } from "src/explorer_common/explorer_components";
+import { get_root } from "src/explorer_common/hierarchy_tools";
+import { infograph_href_template, rpb_link } from "src/link_utils";
+import { sources } from "src/metadata/data_sources";
 
 import {
   text_maker,
   TM,
   current_doc_is_mains,
   current_sups_letter,
-} from "./utils.js";
+} from "./utils";
 
 const { estimates_docs } = businessConstants;
 

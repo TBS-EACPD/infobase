@@ -6,17 +6,17 @@ import {
   ShareButton,
   WriteToClipboard,
   FootnoteList,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { secondaryColor } from "src/core/color_defs.ts";
+import { secondaryColor } from "src/core/color_defs";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { IconCopyLink } from "src/icons/icons.tsx";
+import { IconCopyLink } from "src/icons/icons";
 
-import { sources as all_sources } from "src/metadata/data_sources.js";
+import { sources as all_sources } from "src/metadata/data_sources";
 
-import { TextMaker } from "./rpb_text_provider.js";
+import { TextMaker } from "./rpb_text_provider";
 
 const ReportDetails = ({
   table,

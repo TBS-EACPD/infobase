@@ -3,18 +3,18 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
 
-import { AlertBanner } from "src/components/index.js";
+import { AlertBanner } from "src/components/index";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { IconHome } from "src/icons/icons.tsx";
+import { IconHome } from "src/icons/icons";
 
-import { index_lang_lookups } from "src/InfoBase/index_data.js";
+import { index_lang_lookups } from "src/InfoBase/index_data";
 
-import { log_page_view } from "./analytics.js";
-import { reactAdapter } from "./reactAdapter.ts";
+import { log_page_view } from "./analytics";
+import { reactAdapter } from "./reactAdapter";
 
 import "./NavComponents.scss";
 

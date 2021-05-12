@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
 import text from "./Typeahead.yaml";
 

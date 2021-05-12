@@ -6,7 +6,7 @@ import {
   trivial_text_maker,
   year_templates,
   businessConstants,
-} from "./table_common.js";
+} from "./table_common";
 
 import text from "./orgTransferPayments.yaml";
 

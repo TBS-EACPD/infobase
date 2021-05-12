@@ -5,15 +5,15 @@ import React, { Fragment } from "react";
 
 import MediaQuery from "react-responsive";
 
-import { DisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index";
 
-import { breakpoints } from "src/core/breakpoint_defs.ts";
+import { breakpoints } from "src/core/breakpoint_defs";
 
-import { textColor } from "src/core/color_defs.ts";
+import { textColor } from "src/core/color_defs";
 
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
+import { newIBCategoryColors } from "src/core/color_schemes";
 
-import { formats } from "src/core/format.ts";
+import { formats } from "src/core/format";
 
 import {
   InteractiveGraph,
@@ -21,7 +21,7 @@ import {
   general_default_props,
   get_formatter,
   TooltipFactory,
-} from "./wrapped_nivo_common.js";
+} from "./wrapped_nivo_common";
 
 import text from "./WrappedNivoCircleProportion.yaml";
 import "./WrappedNivoCircleProportion.scss";

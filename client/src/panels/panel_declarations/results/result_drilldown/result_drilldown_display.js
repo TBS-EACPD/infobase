@@ -6,15 +6,15 @@ import { createSelector } from "reselect";
 import {
   StatusIconTable,
   InlineStatusIconList,
-} from "src/panels/panel_declarations/results/result_components.js";
+} from "src/panels/panel_declarations/results/result_components";
 import {
   TM,
   text_maker,
-} from "src/panels/panel_declarations/results/result_text_provider.js";
+} from "src/panels/panel_declarations/results/result_text_provider";
 import {
   Indicator,
   result_docs,
-} from "src/panels/panel_declarations/results/results_common.js";
+} from "src/panels/panel_declarations/results/results_common";
 
 import {
   DlItem,
@@ -22,14 +22,14 @@ import {
   SpinnerWrapper,
   Format,
   TextAbbrev,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { lang, is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { Explorer } from "src/explorer_common/explorer_components.js";
+import { Explorer } from "src/explorer_common/explorer_components";
 
-import { get_root } from "src/explorer_common/hierarchy_tools.js";
-import { infograph_href_template } from "src/infographic/infographic_link.js";
+import { get_root } from "src/explorer_common/hierarchy_tools";
+import { infograph_href_template } from "src/infographic/infographic_link";
 
 import {
   get_type_name,
@@ -37,7 +37,7 @@ import {
   spending_header,
   fte_header,
   ResultCounts as ResultCountsComponent,
-} from "./result_displays.js";
+} from "./result_displays";
 import "./result_drilldown.scss";
 
 const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {

@@ -2,21 +2,21 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   DisplayTable,
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services.js";
+import { useSummaryServices } from "src/models/populate_services";
 
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { newIBCategoryColors } from "src/core/color_schemes";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 
 import text from "./services.yaml";
 import "./services.scss";

@@ -1,16 +1,16 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
-import { TrivialTM } from "src/components/index.js";
+import { TrivialTM } from "src/components/index";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
 import {
   IconInfo,
   IconGlossary,
   IconDataset,
   IconQuestion,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
 import "./NavComponents.scss";
 

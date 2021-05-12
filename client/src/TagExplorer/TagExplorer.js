@@ -1,23 +1,18 @@
 import _ from "lodash";
 import React from "react";
 
-import { SpinnerWrapper } from "src/components/index.js";
+import { SpinnerWrapper } from "src/components/index";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
 import {
   hierarchy_scheme_configs,
   default_scheme_id,
-} from "./hierarchy_scheme_configs.js";
-import { ResourceScheme } from "./resource_scheme.js";
+} from "./hierarchy_scheme_configs";
+import { ResourceScheme } from "./resource_scheme";
 
-import {
-  text_maker,
-  TM,
-  route_arg_to_year_map,
-  planning_year,
-} from "./utils.js";
+import { text_maker, TM, route_arg_to_year_map, planning_year } from "./utils";
 
 import "src/explorer_common/explorer-styles.scss";
 

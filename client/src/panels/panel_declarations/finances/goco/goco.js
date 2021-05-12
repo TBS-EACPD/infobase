@@ -2,26 +2,26 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   DisplayTable,
   GraphOverlay,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { textColor } from "src/core/color_defs.ts";
-import { newIBCategoryColors } from "src/core/color_schemes.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
-import { Table } from "src/core/TableClass.js";
+import { textColor } from "src/core/color_defs";
+import { newIBCategoryColors } from "src/core/color_schemes";
+import { is_a11y_mode } from "src/core/injected_build_constants";
+import { Table } from "src/core/TableClass";
 
-import { StandardLegend } from "src/charts/legends/index.js";
-import { get_formatter } from "src/charts/shared.js";
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend } from "src/charts/legends/index";
+import { get_formatter } from "src/charts/shared";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import text from "./goco.yaml";
 

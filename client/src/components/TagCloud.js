@@ -2,13 +2,13 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { GlossaryEntry } from "src/models/glossary.js";
+import { GlossaryEntry } from "src/models/glossary";
 
-import { backgroundColor } from "src/core/color_defs.ts";
+import { backgroundColor } from "src/core/color_defs";
 
-import { IconCheckmark } from "src/icons/icons.tsx";
+import { IconCheckmark } from "src/icons/icons";
 
-import { GlossaryIcon } from "./glossary_components.js";
+import { GlossaryIcon } from "./glossary_components";
 
 import "./TagCloud.scss";
 

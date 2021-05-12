@@ -1,15 +1,15 @@
 import React from "react";
 
-import { HeaderNotification } from "src/components/HeaderNotification.js";
+import { HeaderNotification } from "src/components/HeaderNotification";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
 import {
   get_session_storage_w_expiry,
   set_session_storage_w_expiry,
-} from "src/general_utils.js";
+} from "src/general_utils";
 
-import { log_standard_event } from "./analytics.js";
+import { log_standard_event } from "./analytics";
 
 const redirect_with_msg = (
   msg,

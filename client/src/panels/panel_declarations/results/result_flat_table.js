@@ -1,41 +1,41 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   SpinnerWrapper,
   DisplayTable,
   sort_func_template,
   ModalButton,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import * as Results from "src/models/results.js";
-import { Indicator } from "src/models/results.js";
+import { businessConstants } from "src/models/businessConstants";
+import * as Results from "src/models/results";
+import { Indicator } from "src/models/results";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { lang } from "src/core/injected_build_constants.ts";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { lang } from "src/core/injected_build_constants";
 
-import { toggle_list } from "src/general_utils.js";
-import { infograph_href_template } from "src/infographic/infographic_link.js";
-import { get_source_links } from "src/metadata/data_sources.js";
+import { toggle_list } from "src/general_utils";
+import { infograph_href_template } from "src/infographic/infographic_link";
+import { get_source_links } from "src/metadata/data_sources";
 
-import IndicatorDisplayPanel from "./IndicatorDisplayPanel.js";
+import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
 
-import { StatusIconTable, large_status_icons } from "./result_components.js";
+import { StatusIconTable, large_status_icons } from "./result_components";
 
-import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies.js";
-import { TM, text_maker } from "./result_text_provider.js";
+import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies";
+import { TM, text_maker } from "./result_text_provider";
 import {
   ResultCounts,
   GranularResultCounts,
   result_docs,
   result_statuses,
   indicator_text_functions,
-} from "./results_common.js";
+} from "./results_common";
 
 import "./result_flat_table.scss";
 

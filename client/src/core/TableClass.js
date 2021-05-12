@@ -2,27 +2,27 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { mix, staticStoreMixin } from "src/models/storeMixins.js";
-import { Subject } from "src/models/subject.js";
+import { mix, staticStoreMixin } from "src/models/storeMixins";
+import { Subject } from "src/models/subject";
 import {
   trivial_text_maker,
   run_template,
   create_text_maker,
-} from "src/models/text.js";
+} from "src/models/text";
 
-import { make_unique_func, make_unique } from "src/general_utils.js";
-import { sources as all_sources } from "src/metadata/data_sources.js";
-import { get_static_url, make_request } from "src/request_utils.ts";
+import { make_unique_func, make_unique } from "src/general_utils";
+import { sources as all_sources } from "src/metadata/data_sources";
+import { get_static_url, make_request } from "src/request_utils";
 
-import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.ts";
-import { lang } from "./injected_build_constants.ts";
+import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
+import { lang } from "./injected_build_constants";
 
 import {
   attach_dimensions,
   fill_dimension_columns,
   trivial_dimension,
-} from "./tables/dimensions.js";
-import { query_adapter } from "./tables/queries.js";
+} from "./tables/dimensions";
+import { query_adapter } from "./tables/queries";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 const { Dept } = Subject;

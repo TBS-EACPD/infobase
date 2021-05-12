@@ -1,10 +1,10 @@
 import React from "react";
 
-import { TextMaker } from "src/components/index.js";
+import { TextMaker } from "src/components/index";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
 import privacy_text_bundle from "./PrivacyStatement.yaml";
 

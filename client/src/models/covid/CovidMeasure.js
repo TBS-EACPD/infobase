@@ -5,8 +5,8 @@ import {
   staticStoreMixin,
   PluralSingular,
   SubjectMixin,
-} from "src/models/storeMixins.js";
-import { trivial_text_maker } from "src/models/text.js";
+} from "src/models/storeMixins";
+import { trivial_text_maker } from "src/models/text";
 
 class CovidMeasure extends mix().with(
   staticStoreMixin,

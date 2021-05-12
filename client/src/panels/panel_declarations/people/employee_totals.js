@@ -1,26 +1,19 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import { run_template } from "src/models/text.js";
-import { year_templates } from "src/models/years.js";
+import { businessConstants } from "src/models/businessConstants";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
-import {
-  primaryColor,
-  textColor,
-  backgroundColor,
-} from "src/core/color_defs.ts";
-import { formats } from "src/core/format.ts";
+import { primaryColor, textColor, backgroundColor } from "src/core/color_defs";
+import { formats } from "src/core/format";
 
-import { WrappedNivoLine } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 
 import text from "./employee_totals.yaml";
 

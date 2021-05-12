@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { run_template, create_text_maker } from "src/models/text.js";
+import { run_template, create_text_maker } from "src/models/text";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";

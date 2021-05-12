@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 import "./bootstrap_modal_exstension.scss";
 
 export class StatelessModal extends React.Component {

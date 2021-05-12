@@ -1,20 +1,20 @@
-import Handlebars from "handlebars/dist/cjs/handlebars.js";
+import Handlebars from "handlebars/dist/cjs/handlebars";
 import _ from "lodash";
 
 import React from "react";
-import ReactDOMServer from "react-dom/server.browser.js";
+import ReactDOMServer from "react-dom/server.browser";
 
-import { GlossaryEntry } from "src/models/glossary.js";
+import { GlossaryEntry } from "src/models/glossary";
 
-import { Subject } from "src/models/subject.js";
-import { trivial_text_maker, run_template } from "src/models/text.js";
+import { Subject } from "src/models/subject";
+import { trivial_text_maker, run_template } from "src/models/text";
 
-import { formats, array_to_grammatical_list } from "src/core/format.ts";
-import { lang } from "src/core/injected_build_constants.ts";
+import { formats, array_to_grammatical_list } from "src/core/format";
+import { lang } from "src/core/injected_build_constants";
 
-import { IconQuestion } from "src/icons/icons.tsx";
+import { IconQuestion } from "src/icons/icons";
 
-import { infograph_href_template, glossary_href } from "src/link_utils.js";
+import { infograph_href_template, glossary_href } from "src/link_utils";
 
 _.each(formats, (format, key) => {
   Handlebars.registerHelper(

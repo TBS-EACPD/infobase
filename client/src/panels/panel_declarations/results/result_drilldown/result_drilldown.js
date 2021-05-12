@@ -1,23 +1,23 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
-import { text_maker } from "src/panels/panel_declarations/results/result_text_provider.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+import { text_maker } from "src/panels/panel_declarations/results/result_text_provider";
 import {
   ResultCounts,
   GranularResultCounts,
   result_docs,
   result_docs_in_tabling_order,
-} from "src/panels/panel_declarations/results/results_common.js";
+} from "src/panels/panel_declarations/results/results_common";
 
-import { SpinnerWrapper } from "src/components/index.js";
+import { SpinnerWrapper } from "src/components/index";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
+import { ensure_loaded } from "src/core/ensure_loaded";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
-import ResultsExplorer from "./results_scheme.js";
+import ResultsExplorer from "./results_scheme";
 
 class SingleSubjResultsContainer extends React.Component {
   constructor(props) {

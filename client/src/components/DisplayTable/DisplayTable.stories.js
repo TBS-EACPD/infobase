@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DisplayTable } from "./DisplayTable.js";
+import { DisplayTable } from "./DisplayTable";
 
 export default {
   title: "Tables/DisplayTable",

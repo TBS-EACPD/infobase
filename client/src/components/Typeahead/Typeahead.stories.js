@@ -3,7 +3,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { Typeahead } from "./Typeahead.js";
+import { Typeahead } from "./Typeahead";
 
 const NA = "North America";
 const SA = "South America";

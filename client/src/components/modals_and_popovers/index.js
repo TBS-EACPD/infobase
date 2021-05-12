@@ -1,3 +1,3 @@
-export { StatelessModal } from "./StatelessModal.js";
-export { FixedPopover } from "./FixedPopover.js";
-export { ModalButton } from "./ModalButton.js";
+export { StatelessModal } from "./StatelessModal";
+export { FixedPopover } from "./FixedPopover";
+export { ModalButton } from "./ModalButton";

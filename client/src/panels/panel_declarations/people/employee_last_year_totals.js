@@ -1,18 +1,15 @@
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
-import { year_templates } from "src/models/years.js";
+import { year_templates } from "src/models/years";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index";
 
 import text2 from "src/common_text/common_lang.yaml";
 

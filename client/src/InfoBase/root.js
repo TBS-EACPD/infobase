@@ -1,4 +1,4 @@
-import pre_load from "./pre_load.js";
+import pre_load from "./pre_load";
 
 const kill_spinner = pre_load();
 import("./bootstrapper.js").then(({ bootstrapper }) => {

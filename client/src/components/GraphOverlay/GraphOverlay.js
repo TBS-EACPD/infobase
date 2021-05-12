@@ -2,11 +2,11 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import MediaQuery from "react-responsive";
 
-import { create_text_maker_component } from "src/components/misc_util_components.js";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { IconRotatePhone, IconExpandWindowWidth } from "src/icons/icons.tsx";
+import { IconRotatePhone, IconExpandWindowWidth } from "src/icons/icons";
 
-import { hide_graph_overlay } from "src/InfoBase/AppState.js";
+import { hide_graph_overlay } from "src/InfoBase/AppState";
 
 import text from "./GraphOverlay.yaml";
 import "./GraphOverlay.scss";

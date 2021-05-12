@@ -3,9 +3,9 @@ import { ResponsiveBar } from "@nivo/bar";
 import _ from "lodash";
 import React from "react";
 
-import { DisplayTable } from "src/components/index.js";
+import { DisplayTable } from "src/components/index";
 
-import { textColor } from "src/core/color_defs.ts";
+import { textColor } from "src/core/color_defs";
 
 import {
   nivo_common_text_maker,
@@ -13,7 +13,7 @@ import {
   general_default_props,
   get_formatter,
   fix_legend_symbols,
-} from "./wrapped_nivo_common.js";
+} from "./wrapped_nivo_common";
 
 const bar_table = (
   data,

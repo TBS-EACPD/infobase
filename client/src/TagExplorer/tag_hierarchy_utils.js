@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import { HeightClipper } from "src/components/index.js";
+import { HeightClipper } from "src/components/index";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { infograph_href_template } from "src/link_utils.js";
+import { infograph_href_template } from "src/link_utils";
 
 export const related_tags_row = (related_tags, subject_type) => {
   const term =

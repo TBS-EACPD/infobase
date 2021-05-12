@@ -2,7 +2,7 @@
 
 import React, { Fragment } from "react";
 
-import { BackToTop } from "./BackToTop.js";
+import { BackToTop } from "./BackToTop";
 
 const BackToTopTemplate = ({ focusId }) => (
   <Fragment>

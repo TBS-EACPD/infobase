@@ -1,11 +1,11 @@
 import { csvParse } from "d3-dsv";
-import Handlebars from "handlebars/dist/cjs/handlebars.js";
+import Handlebars from "handlebars/dist/cjs/handlebars";
 import _ from "lodash";
 import marked from "marked";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
-import { is_mobile } from "src/core/feature_detection.ts";
-import { lang } from "src/core/injected_build_constants.ts";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { is_mobile } from "src/core/feature_detection";
+import { lang } from "src/core/injected_build_constants";
 
 import a11y_lang from "src/common_text/a11y_lang.yaml";
 import common_lang from "src/common_text/common_lang.yaml";

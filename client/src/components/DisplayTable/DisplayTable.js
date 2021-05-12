@@ -3,17 +3,17 @@ import { csvFormatRows } from "d3-dsv";
 import _ from "lodash";
 import React from "react";
 
-import { DebouncedTextInput } from "src/components/DebouncedTextInput.js";
+import { DebouncedTextInput } from "src/components/DebouncedTextInput";
 import {
   create_text_maker_component,
   Format,
-} from "src/components/misc_util_components.js";
-import { SortDirections } from "src/components/SortDirection.js";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
+} from "src/components/misc_util_components";
+import { SortDirections } from "src/components/SortDirection";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper";
 
-import { LegendList } from "src/charts/legends/LegendList.js";
+import { LegendList } from "src/charts/legends/LegendList";
 
-import { toggle_list } from "src/general_utils.js";
+import { toggle_list } from "src/general_utils";
 
 import {
   DisplayTableCopyCsv,
@@ -21,7 +21,7 @@ import {
   DisplayTableColumnToggle,
   SelectPage,
   SelectPageSize,
-} from "./DisplayTableUtils.js";
+} from "./DisplayTableUtils";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";

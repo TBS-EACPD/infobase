@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Format } from "src/components/index.js";
+import { Format } from "src/components/index";
 
-import { successDarkColor } from "src/core/color_defs.ts";
+import { successDarkColor } from "src/core/color_defs";
 
 import "./gauge.scss";
 

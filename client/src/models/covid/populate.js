@@ -1,14 +1,14 @@
 import _ from "lodash";
 
-import { Gov } from "src/models/organizational_entities.js";
+import { Gov } from "src/models/organizational_entities";
 
-import { CovidMeasure } from "./CovidMeasure.js";
+import { CovidMeasure } from "./CovidMeasure";
 import {
   query_gov_years_with_covid_data,
   query_org_years_with_covid_data,
   query_all_covid_measures,
-} from "./queries.js";
-import { YearsWithCovidData } from "./YearsWithCovidData.js";
+} from "./queries";
+import { YearsWithCovidData } from "./YearsWithCovidData";
 
 const _subject_ids_with_loaded_years_with_covid_data = {};
 export const api_load_years_with_covid_data = (subject) => {

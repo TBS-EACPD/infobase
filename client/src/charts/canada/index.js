@@ -1,3 +1,3 @@
-import { Canada } from "./canada.js";
+import { Canada } from "./canada";
 
 export { Canada };

@@ -7,12 +7,12 @@ import {
   DisplayTable,
   Details,
   DropdownMenu,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
-import { ReportDetails, ReportDatasets } from "./shared.js";
+import { TextMaker, text_maker } from "./rpb_text_provider";
+import { ReportDetails, ReportDatasets } from "./shared";
 
 const { Dept } = Subject;
 

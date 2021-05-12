@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
 import {
   mix,
@@ -8,7 +8,7 @@ import {
   PluralSingular,
   SubjectMixin,
   CanHaveServerData,
-} from "./storeMixins.js";
+} from "./storeMixins";
 
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);

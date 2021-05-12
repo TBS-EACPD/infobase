@@ -1,19 +1,19 @@
 import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
-import { BatchHttpLink } from "@apollo/client/link/batch-http/index.js";
+import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
 
 import _ from "lodash";
 import { useState } from "react";
 
 import string_hash from "string-hash";
 
-import { log_standard_event } from "src/core/analytics.js";
+import { log_standard_event } from "src/core/analytics";
 
 import {
   sha,
   local_ip,
   is_dev,
   is_ci,
-} from "src/core/injected_build_constants.ts";
+} from "src/core/injected_build_constants";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 

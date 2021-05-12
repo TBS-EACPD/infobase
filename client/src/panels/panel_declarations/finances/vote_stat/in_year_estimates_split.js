@@ -2,25 +2,18 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import { businessConstants } from "src/models/businessConstants.ts";
+import { businessConstants } from "src/models/businessConstants";
 
-import {
-  highlightColor,
-  secondaryColor,
-  textColor,
-} from "src/core/color_defs.ts";
-import { formats } from "src/core/format.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { highlightColor, secondaryColor, textColor } from "src/core/color_defs";
+import { formats } from "src/core/format";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
-import { text_maker, TM } from "./vote_stat_text_provider.js";
+import { text_maker, TM } from "./vote_stat_text_provider";
 
 const { estimates_docs } = businessConstants;
 const est_in_year_col = "{{est_in_year}}_estimates";

@@ -6,13 +6,13 @@ import {
   run_template,
   trivial_text_maker,
   create_text_maker,
-} from "src/models/text.js";
+} from "src/models/text";
 
-import { formats } from "src/core/format.ts";
+import { formats } from "src/core/format";
 
-import { text_abbrev } from "src/general_utils.js";
+import { text_abbrev } from "src/general_utils";
 
-import { TextMaker, TM } from "./TextMaker.tsx";
+import { TextMaker, TM } from "./TextMaker";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 

@@ -6,43 +6,40 @@ import React from "react";
 import {
   HeightClippedGraph,
   TspanLineWrapper,
-} from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+} from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   Select,
   DisplayTable,
   GraphOverlay,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import FootNote from "src/models/footnotes/footnotes.js";
+import { businessConstants } from "src/models/businessConstants";
+import FootNote from "src/models/footnotes/footnotes";
 
-import { Subject } from "src/models/subject.js";
-import { run_template } from "src/models/text.js";
-import { year_templates } from "src/models/years.js";
+import { Subject } from "src/models/subject";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
-import { highlightColor, textColor } from "src/core/color_defs.ts";
+import { highlightColor, textColor } from "src/core/color_defs";
 import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
   infobase_colors,
-} from "src/core/color_schemes.ts";
-import { formats } from "src/core/format.ts";
+} from "src/core/color_schemes";
+import { formats } from "src/core/format";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index.js";
+import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 
-import {
-  WrappedNivoBar,
-  WrappedNivoHBar,
-} from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoBar, WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
-import { toggle_list } from "src/general_utils.js";
-import { infograph_href_template } from "src/infographic/infographic_link.js";
+import { toggle_list } from "src/general_utils";
+import { infograph_href_template } from "src/infographic/infographic_link";
 
 import text from "./detailed_program_spending_split.yaml";
 

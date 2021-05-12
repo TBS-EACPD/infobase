@@ -6,20 +6,20 @@ import MediaQuery from "react-responsive";
 import {
   create_text_maker_component,
   StatelessModal,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { breakpoints } from "src/core/breakpoint_defs.ts";
+import { breakpoints } from "src/core/breakpoint_defs";
 import {
   secondaryColor,
   backgroundColor,
   textColor,
-} from "src/core/color_defs.ts";
-import { is_IE } from "src/core/feature_detection.ts";
-import { formats } from "src/core/format.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+} from "src/core/color_defs";
+import { is_IE } from "src/core/feature_detection";
+import { formats } from "src/core/format";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_formatter, infobase_colors_smart } from "src/charts/shared.js";
-import { IconTable } from "src/icons/icons.tsx";
+import { get_formatter, infobase_colors_smart } from "src/charts/shared";
+import { IconTable } from "src/icons/icons";
 
 import graph_text from "./wrapped_nivo_common.yaml";
 import "./wrapped_nivo_common.scss";

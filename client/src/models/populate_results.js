@@ -2,10 +2,10 @@ import { gql } from "@apollo/client";
 
 import _ from "lodash";
 
-import { log_standard_event } from "src/core/analytics.js";
-import { lang } from "src/core/injected_build_constants.ts";
+import { log_standard_event } from "src/core/analytics";
+import { lang } from "src/core/injected_build_constants";
 
-import { get_client } from "src/graphql_utils/graphql_utils.js";
+import { get_client } from "src/graphql_utils/graphql_utils";
 
 import {
   Indicator,
@@ -14,7 +14,7 @@ import {
   ResultCounts,
   GranularResultCounts,
   get_result_doc_keys,
-} from "./results.js";
+} from "./results";
 
 const result_doc_keys = get_result_doc_keys();
 

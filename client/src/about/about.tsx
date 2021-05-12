@@ -3,12 +3,12 @@ import React from "react";
 
 import { IconGrid } from "src/components/IconGrid/IconGrid";
 
-import { TM } from "src/components/index.js";
+import { TM } from "src/components/index";
 import { LabeledTable } from "src/components/LabeledTable";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
 import {
   IconHTML,
@@ -20,7 +20,7 @@ import {
   IconSass,
   IconGraphQL,
   IconBaselineCloud,
-} from "src/icons/icons.tsx";
+} from "src/icons/icons";
 
 import about_text_bundle from "./about.yaml";
 import "./about.scss";

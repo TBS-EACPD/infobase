@@ -1,18 +1,18 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
-import { Subject } from "src/models/subject.js";
-import { run_template } from "src/models/text.js";
-import { fiscal_year_to_year } from "src/models/years.js";
+import { Subject } from "src/models/subject";
+import { run_template } from "src/models/text";
+import { fiscal_year_to_year } from "src/models/years";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { sanitized_marked } from "src/general_utils.js";
+import { sanitized_marked } from "src/general_utils";
 
-import { get_static_url, make_request } from "src/request_utils.ts";
+import { get_static_url, make_request } from "src/request_utils";
 
-import { get_dynamic_footnotes } from "./dynamic_footnotes.js";
-import FootNote from "./footnotes.js";
+import { get_dynamic_footnotes } from "./dynamic_footnotes";
+import FootNote from "./footnotes";
 
 import footnote_topic_text from "./footnote_topics.yaml";
 

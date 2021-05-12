@@ -1,17 +1,17 @@
 import _ from "lodash";
 import React, { useState } from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   FancyUL,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { useServices } from "src/models/populate_services.js";
+import { useServices } from "src/models/populate_services";
 
 import text from "./services.yaml";
 

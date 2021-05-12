@@ -5,17 +5,17 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import redux_promise_middleware from "redux-promise-middleware";
 import { createSelector } from "reselect";
 
-import { is_dev } from "src/core/injected_build_constants.ts";
+import { is_dev } from "src/core/injected_build_constants";
 
-import { cached_property, bound } from "src/general_utils.js";
+import { cached_property, bound } from "src/general_utils";
 
 import {
   filter_hierarchy,
   toggleExpandedFlat,
   ensureVisibility,
   sort_hierarchy,
-} from "./hierarchy_tools.js";
-import { substr_search_generator } from "./search_tools.js";
+} from "./hierarchy_tools";
+import { substr_search_generator } from "./search_tools";
 
 const initial_root_state = {
   query: "",

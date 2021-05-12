@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
 import "./TabbedContent.scss";
 

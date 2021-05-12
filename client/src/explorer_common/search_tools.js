@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { GlossaryEntry } from "src/models/glossary.js";
+import { GlossaryEntry } from "src/models/glossary";
 
-import { escapeRegExp } from "src/general_utils.js";
+import { escapeRegExp } from "src/general_utils";
 
 function node_to_match_tokens(node) {
   const {

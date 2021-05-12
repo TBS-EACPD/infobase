@@ -1,15 +1,15 @@
 import _ from "lodash";
 import { createSelector } from "reselect";
 
-import { is_dev } from "src/core/injected_build_constants.ts";
+import { is_dev } from "src/core/injected_build_constants";
 
 import {
   filter_hierarchy,
   toggleExpandedFlat,
   ensureVisibility,
   sort_hierarchy,
-} from "./hierarchy_tools.js";
-import { substr_search_generator } from "./search_tools.js";
+} from "./hierarchy_tools";
+import { substr_search_generator } from "./search_tools";
 
 const initial_root_state = {
   scheme_key: "results",

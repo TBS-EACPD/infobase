@@ -1,15 +1,15 @@
 import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
-import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common.js";
+import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common";
 
-import * as Results from "src/models/results.js";
-import { Subject } from "src/models/subject.js";
+import * as Results from "src/models/results";
+import { Subject } from "src/models/subject";
 
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
-} from "src/explorer_common/hierarchy_tools.js";
+} from "src/explorer_common/hierarchy_tools";
 
 const { Dept } = Subject;
 const { Result } = Results;

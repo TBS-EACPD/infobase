@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { buttonPrimaryColor } from "src/core/color_defs.ts";
+import { buttonPrimaryColor } from "src/core/color_defs";
 
-import { is_IE } from "src/core/feature_detection.ts";
+import { is_IE } from "src/core/feature_detection";
 
-import { Countdown } from "./Countdown.tsx";
+import { Countdown } from "./Countdown";
 import "./CountdownCircle.scss";
 
 const split_value_and_units = (size) => {

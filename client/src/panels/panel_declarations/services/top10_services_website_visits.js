@@ -3,26 +3,26 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   DisplayTable,
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services.js";
-import { Subject } from "src/models/subject.js";
+import { useSummaryServices } from "src/models/populate_services";
+import { Subject } from "src/models/subject";
 
-import { newIBLightCategoryColors } from "src/core/color_schemes.ts";
-import { formatter } from "src/core/format.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { newIBLightCategoryColors } from "src/core/color_schemes";
+import { formatter } from "src/core/format";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
-import { infograph_href_template } from "src/link_utils.js";
+import { infograph_href_template } from "src/link_utils";
 
 import text from "./services.yaml";
 

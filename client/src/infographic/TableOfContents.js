@@ -6,9 +6,9 @@ import {
   create_text_maker_component,
   UnlabeledTombstone,
   LinkStyled,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { separatorColor } from "src/core/color_defs.ts";
+import { separatorColor } from "src/core/color_defs";
 
 import text from "./TableOfContents.yaml";
 

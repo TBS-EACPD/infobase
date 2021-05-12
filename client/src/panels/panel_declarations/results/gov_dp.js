@@ -1,28 +1,28 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   default_dept_name_sort_func,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
-import { LateDepartmentsBanner } from "./result_components.js";
+import { LateDepartmentsBanner } from "./result_components";
 import {
   ResultCounts,
   filter_and_genericize_doc_counts,
   current_dp_key,
   result_docs,
   link_to_results_infograph,
-} from "./results_common.js";
+} from "./results_common";
 
 import text from "./gov_dp.yaml";
 

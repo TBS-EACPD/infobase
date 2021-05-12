@@ -1,14 +1,14 @@
 import _ from "lodash";
 
-import FootNote from "src/models/footnotes/footnotes.js";
+import FootNote from "src/models/footnotes/footnotes";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace.ts";
-import { is_dev } from "src/core/injected_build_constants.ts";
-import { Table } from "src/core/TableClass.js";
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { is_dev } from "src/core/injected_build_constants";
+import { Table } from "src/core/TableClass";
 
-import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link.js";
+import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
 const subjects = _.keys(Subject);
 

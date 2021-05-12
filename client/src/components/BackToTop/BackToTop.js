@@ -3,9 +3,9 @@ import React from "react";
 
 import "intersection-observer";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { is_mobile } from "src/core/feature_detection.ts";
+import { is_mobile } from "src/core/feature_detection";
 
 import "./BackToTop.scss";
 

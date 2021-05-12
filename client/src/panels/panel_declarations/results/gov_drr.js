@@ -1,22 +1,22 @@
 import _ from "lodash";
 import React from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   DisplayTable,
   default_dept_name_sort_func,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
-import { DrrSummary } from "./drr_summary.js";
-import { TM, text_maker } from "./drr_summary_text.js";
-import { LateDepartmentsBanner } from "./result_components.js";
+import { DrrSummary } from "./drr_summary";
+import { TM, text_maker } from "./drr_summary_text";
+import { LateDepartmentsBanner } from "./result_components";
 import {
   row_to_drr_status_counts,
   ResultCounts,
@@ -24,7 +24,7 @@ import {
   result_docs,
   current_drr_key,
   link_to_results_infograph,
-} from "./results_common.js";
+} from "./results_common";
 
 const { Gov, Dept } = Subject;
 

@@ -10,32 +10,32 @@ import React from "react";
 import {
   SpinnerWrapper,
   create_text_maker_component,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { run_template } from "src/models/text.js";
+import { run_template } from "src/models/text";
 
-import { actual_to_planned_gap_year } from "src/models/years.js";
+import { actual_to_planned_gap_year } from "src/models/years";
 
 import {
   sequentialBlues,
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
-} from "src/core/color_schemes.ts";
-import { is_mobile } from "src/core/feature_detection.ts";
+} from "src/core/color_schemes";
+import { is_mobile } from "src/core/feature_detection";
 
-import { formats } from "src/core/format.ts";
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { formats } from "src/core/format";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { infograph_href_template } from "src/infographic/infographic_link.js";
+import { infograph_href_template } from "src/infographic/infographic_link";
 
-import { get_data, load_data } from "./data.js";
+import { get_data, load_data } from "./data";
 
-import { TreeMapInstructions } from "./TreeMapInstructions.js";
-import { TreeMapLegend } from "./TreeMapLegend.js";
-import { TreeMapSidebar } from "./TreeMapSidebar.js";
-import { TreeMapTopbar } from "./TreeMapTopBar.js";
-import { TreeMap } from "./TreeMapViz.js";
+import { TreeMapInstructions } from "./TreeMapInstructions";
+import { TreeMapLegend } from "./TreeMapLegend";
+import { TreeMapSidebar } from "./TreeMapSidebar";
+import { TreeMapTopbar } from "./TreeMapTopBar";
+import { TreeMap } from "./TreeMapViz";
 
 import treemap_text from "./TreeMap.yaml";
 

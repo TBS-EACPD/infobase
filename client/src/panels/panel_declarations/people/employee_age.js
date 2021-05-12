@@ -2,31 +2,28 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   TabbedContent,
   GraphOverlay,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import { Subject } from "src/models/subject.js";
-import { run_template } from "src/models/text.js";
+import { businessConstants } from "src/models/businessConstants";
+import { Subject } from "src/models/subject";
+import { run_template } from "src/models/text";
 
-import { year_templates } from "src/models/years.js";
+import { year_templates } from "src/models/years";
 
-import { formats } from "src/core/format.ts";
+import { formats } from "src/core/format";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { NivoLineBarToggle } from "src/charts/wrapped_nivo/index.js";
+import { NivoLineBarToggle } from "src/charts/wrapped_nivo/index";
 
-import { calculate_common_text_args } from "./calculate_common_text_args.js";
+import { calculate_common_text_args } from "./calculate_common_text_args";
 
 import text from "./employee_age.yaml";
 

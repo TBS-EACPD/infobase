@@ -3,7 +3,7 @@ import React from "react";
 import {
   create_text_maker_component,
   TextMaker as StandardTextMaker,
-} from "src/components/index.js";
+} from "src/components/index";
 
 import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
 

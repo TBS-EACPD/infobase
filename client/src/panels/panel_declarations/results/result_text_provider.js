@@ -1,4 +1,4 @@
-import { create_text_maker_component } from "src/components/index.js";
+import { create_text_maker_component } from "src/components/index";
 
 import drilldown_text from "./result_drilldown/result_drilldown.yaml";
 

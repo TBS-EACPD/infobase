@@ -1,13 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
-import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components.js";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
+import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 
-import { KeyConceptList } from "src/components/index.js";
+import { KeyConceptList } from "src/components/index";
 
-import { covid_create_text_maker_component } from "./covid_text_provider.js";
+import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import covid_questions from "./covid_key_concepts.yaml";
 

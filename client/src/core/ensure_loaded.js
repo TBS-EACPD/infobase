@@ -1,22 +1,22 @@
 import _ from "lodash";
 
-import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry.js";
+import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry";
 
 import {
   api_load_years_with_covid_data,
   api_load_all_covid_measures,
-} from "src/models/covid/populate.js";
-import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes.js";
-import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups.js";
+} from "src/models/covid/populate";
+import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
+import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups";
 import {
   api_load_results_bundle,
   api_load_results_counts,
   subject_has_results,
-} from "src/models/populate_results.js";
-import { api_load_has_services } from "src/models/populate_services.js";
+} from "src/models/populate_results";
+import { api_load_has_services } from "src/models/populate_services";
 
-import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace.ts";
-import { Table } from "./TableClass.js";
+import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
+import { Table } from "./TableClass";
 
 const load_tables = (table_set) =>
   Promise.all(

@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 
 import { withRouter } from "react-router-dom";
 
-import { SafeJSURL } from "src/general_utils.js";
+import { SafeJSURL } from "src/general_utils";
 
-import { StatelessModal } from "./StatelessModal.js";
+import { StatelessModal } from "./StatelessModal";
 
 class ModalButton_ extends React.Component {
   constructor(props) {

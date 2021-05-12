@@ -7,11 +7,11 @@ import "d3-selection-multi";
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { is_mobile } from "src/core/feature_detection.ts";
+import { is_mobile } from "src/core/feature_detection";
 
-import { smaller_items_text } from "./data.js";
+import { smaller_items_text } from "./data";
 
 import text from "./TreeMap.yaml";
 

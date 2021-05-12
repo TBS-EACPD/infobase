@@ -6,15 +6,15 @@ import {
   digital_status_keys,
   available_icons,
   available_keys,
-} from "src/panels/panel_declarations/services/shared.js";
+} from "src/panels/panel_declarations/services/shared";
 
 import {
   create_text_maker_component,
   Panel,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes.js";
+import FootNote from "src/models/footnotes/footnotes";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

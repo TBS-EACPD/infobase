@@ -2,20 +2,20 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { TextPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   HeightClipper,
   CardList,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { infograph_href_template } from "src/infographic/infographic_link.js";
+import { infograph_href_template } from "src/infographic/infographic_link";
 
-import { HierarchyDeadElementIcon } from "./hierarchy_component.js";
+import { HierarchyDeadElementIcon } from "./hierarchy_component";
 
 import hierarchy_text from "./hierarchy_panels.yaml";
 import text from "./tags_related_to_subject_panels.yaml";

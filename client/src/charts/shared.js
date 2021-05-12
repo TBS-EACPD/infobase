@@ -1,12 +1,12 @@
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants.ts";
+import { businessConstants } from "src/models/businessConstants";
 
-import { NA_color } from "src/core/color_schemes.ts";
+import { NA_color } from "src/core/color_schemes";
 
-import { formats } from "src/core/format.ts";
+import { formats } from "src/core/format";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 export const infobase_colors_smart = (col_scale) => (label) => {
   if (_.includes(businessConstants.NA_values, label)) {

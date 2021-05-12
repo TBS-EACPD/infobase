@@ -6,34 +6,34 @@ import React, { Fragment } from "react";
 //re-usable view stuff
 import { withRouter } from "react-router";
 
-import { SpinnerWrapper, LabeledBox } from "src/components/index.js";
+import { SpinnerWrapper, LabeledBox } from "src/components/index";
 
-import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal.tsx";
+import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
 
-import Footnote from "src/models/footnotes/footnotes.js";
+import Footnote from "src/models/footnotes/footnotes";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { log_standard_event } from "src/core/analytics.js";
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { log_standard_event } from "src/core/analytics";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import {
   StandardRouteContainer,
   LangSynchronizer,
-} from "src/core/NavComponents.js";
-import { Table } from "src/core/TableClass.js";
+} from "src/core/NavComponents";
+import { Table } from "src/core/TableClass";
 
 //specific view stuff
 
 //misc app stuff
-import { SafeJSURL } from "src/general_utils.js";
+import { SafeJSURL } from "src/general_utils";
 
-import { GranularView } from "./granular_view.js";
-import { rpb_link } from "./rpb_link.js";
-import { TextMaker, text_maker } from "./rpb_text_provider.js";
-import { ShareReport } from "./shared.js";
-import { AccessibleTablePicker, TablePicker } from "./TablePicker.js";
+import { GranularView } from "./granular_view";
+import { rpb_link } from "./rpb_link";
+import { TextMaker, text_maker } from "./rpb_text_provider";
+import { ShareReport } from "./shared";
+import { AccessibleTablePicker, TablePicker } from "./TablePicker";
 import "./rpb.scss";
 
 const sub_app_name = "_rpb";

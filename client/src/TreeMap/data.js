@@ -1,11 +1,11 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { Table } from "src/core/TableClass.js";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { Table } from "src/core/TableClass";
 
 import treemap_text from "./TreeMap.yaml";
 

@@ -1,16 +1,16 @@
 import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
-import ReactResizeDetector from "react-resize-detector/build/withPolyfill.js";
+import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
 import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 
-import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList.js";
-import { create_text_maker_component } from "src/components/misc_util_components.js";
+import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { IconSearch } from "src/icons/icons.tsx";
+import { IconSearch } from "src/icons/icons";
 
-import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus.js";
+import { TypeaheadA11yStatus } from "./TypeaheadA11yStatus";
 
 import text from "./Typeahead.yaml";
 import "./Typeahead.scss";

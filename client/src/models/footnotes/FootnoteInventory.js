@@ -1,12 +1,12 @@
 import React from "react";
 
-import { FootnoteList, SpinnerWrapper } from "src/components/index.js";
+import { FootnoteList, SpinnerWrapper } from "src/components/index";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import FootNote from "./footnotes.js";
+import FootNote from "./footnotes";
 
-import { load_footnotes_bundle } from "./populate_footnotes.js";
+import { load_footnotes_bundle } from "./populate_footnotes";
 
 export default class FootnoteInventory extends React.Component {
   constructor() {

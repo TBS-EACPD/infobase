@@ -1,17 +1,12 @@
 import _ from "lodash";
 
-import {
-  Gov,
-  Dept,
-  CRSO,
-  Program,
-} from "src/models/organizational_entities.js";
-import { result_docs_in_tabling_order } from "src/models/results.js";
-import { create_text_maker, run_template } from "src/models/text.js";
+import { Gov, Dept, CRSO, Program } from "src/models/organizational_entities";
+import { result_docs_in_tabling_order } from "src/models/results";
+import { create_text_maker, run_template } from "src/models/text";
 import {
   actual_to_planned_gap_year,
   fiscal_year_to_year,
-} from "src/models/years.js";
+} from "src/models/years";
 
 import text from "./dynamic_footnotes.yaml";
 

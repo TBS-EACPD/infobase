@@ -6,13 +6,13 @@ import {
   FixedPopover,
   create_text_maker_component,
   EmailFrontend,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { log_standard_event } from "src/core/analytics.js";
-import { tertiaryColor } from "src/core/color_defs.ts";
-import { is_dev, is_dev_link } from "src/core/injected_build_constants.ts";
+import { log_standard_event } from "src/core/analytics";
+import { tertiaryColor } from "src/core/color_defs";
+import { is_dev, is_dev_link } from "src/core/injected_build_constants";
 
-import { IconFeedback } from "src/icons/icons.tsx";
+import { IconFeedback } from "src/icons/icons";
 
 import text from "./SurveyPopup.yaml";
 

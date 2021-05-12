@@ -1,21 +1,21 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   Format,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { run_template } from "src/models/text.js";
-import { year_templates } from "src/models/years.js";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
-import { textGreen, textRed } from "src/core/color_defs.ts";
+import { textGreen, textRed } from "src/core/color_defs";
 
-import { get_source_links } from "src/metadata/data_sources.js";
+import { get_source_links } from "src/metadata/data_sources";
 
 import text from "./dp_rev_split.yaml";
 

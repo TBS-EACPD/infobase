@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { mix, staticStoreMixin } from "src/models/storeMixins.js";
+import { mix, staticStoreMixin } from "src/models/storeMixins";
 
 class YearsWithCovidData extends mix().with(staticStoreMixin) {
   static create_and_register(subject_id, years_with_covid_data) {

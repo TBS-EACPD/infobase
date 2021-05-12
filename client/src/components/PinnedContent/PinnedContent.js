@@ -2,15 +2,15 @@ import _ from "lodash";
 import React from "react";
 import { InView } from "react-intersection-observer";
 import "intersection-observer";
-import ReactResizeDetector from "react-resize-detector/build/withPolyfill.js";
+import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
-import { create_text_maker } from "src/models/text.js";
+import { create_text_maker } from "src/models/text";
 
-import { backgroundColor } from "src/core/color_defs.ts";
-import { has_local_storage } from "src/core/feature_detection.ts";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { backgroundColor } from "src/core/color_defs";
+import { has_local_storage } from "src/core/feature_detection";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { IconPin, IconUnpin } from "src/icons/icons.tsx";
+import { IconPin, IconUnpin } from "src/icons/icons";
 
 import text from "./PinnedContent.yaml";
 

@@ -10,18 +10,18 @@ import result_text from "src/panels/panel_declarations/results/result_components
 import {
   Result,
   indicator_text_functions,
-} from "src/panels/panel_declarations/results/results_common.js";
+} from "src/panels/panel_declarations/results/results_common";
 
 import {
   Select,
   Panel,
   create_text_maker_component,
   SpinnerWrapper,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { result_docs } from "src/models/results.js";
+import { result_docs } from "src/models/results";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
 import {
   primaryColor,
@@ -29,14 +29,14 @@ import {
   successDarkColor,
   failDarkColor,
   infoDarkColor,
-} from "src/core/color_defs.ts";
+} from "src/core/color_defs";
 
-import { ensure_loaded } from "src/core/ensure_loaded.js";
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { ensure_loaded } from "src/core/ensure_loaded";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardRouteContainer } from "src/core/NavComponents.js";
+import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { LegendList } from "src/charts/legends/index.js";
+import { LegendList } from "src/charts/legends/index";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

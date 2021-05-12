@@ -3,30 +3,27 @@ import { scaleLinear } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils.js";
-import {
-  StdPanel,
-  Col,
-} from "src/panels/panel_declarations/InfographicPanel.js";
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
   SpinnerWrapper,
   TabbedContent,
   DisplayTable,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import { run_template } from "src/models/text.js";
+import { businessConstants } from "src/models/businessConstants";
+import { run_template } from "src/models/text";
 
-import { year_templates } from "src/models/years.js";
+import { year_templates } from "src/models/years";
 
-import { formats } from "src/core/format.ts";
+import { formats } from "src/core/format";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { Canada } from "src/charts/canada/index.js";
-import { get_static_url, make_request } from "src/request_utils.ts";
+import { Canada } from "src/charts/canada/index";
+import { get_static_url, make_request } from "src/request_utils";
 
 import text from "./tp_by_region.yaml";
 

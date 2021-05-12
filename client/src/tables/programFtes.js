@@ -1,12 +1,7 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import {
-  Subject,
-  trivial_text_maker,
-  m,
-  year_templates,
-} from "./table_common.js";
+import { Subject, trivial_text_maker, m, year_templates } from "./table_common";
 
 import text from "./programFtes.yaml";
 

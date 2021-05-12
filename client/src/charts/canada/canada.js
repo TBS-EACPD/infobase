@@ -8,19 +8,19 @@ import {
   create_text_maker_component,
   GraphOverlay,
   Select,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants.ts";
-import { run_template } from "src/models/text.js";
+import { businessConstants } from "src/models/businessConstants";
+import { run_template } from "src/models/text";
 
-import { secondaryColor, tertiaryColor } from "src/core/color_defs.ts";
+import { secondaryColor, tertiaryColor } from "src/core/color_defs";
 
-import { StandardLegend } from "src/charts/legends/index.js";
-import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index.js";
+import { StandardLegend } from "src/charts/legends/index";
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
-import { hex_to_rgb } from "src/general_utils.js";
+import { hex_to_rgb } from "src/general_utils";
 
-import { CanadaD3Component } from "./CanadaD3Component.js";
+import { CanadaD3Component } from "./CanadaD3Component";
 
 import text from "./canada.yaml";
 

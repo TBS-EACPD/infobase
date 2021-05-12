@@ -6,33 +6,29 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
-import { HeaderNotification } from "src/components/HeaderNotification.js";
-import { PageDetails } from "src/components/PageDetails.js";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
+import { HeaderNotification } from "src/components/HeaderNotification";
+import { PageDetails } from "src/components/PageDetails";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper";
 
-import { initialize_analytics } from "src/core/analytics.js";
-import { DevFip } from "src/core/DevFip.ts";
-import { EasyAccess } from "src/core/EasyAccess.js";
-import { ErrorBoundary } from "src/core/ErrorBoundary.js";
-import { has_local_storage } from "src/core/feature_detection.ts";
-import {
-  lang,
-  is_a11y_mode,
-  is_dev,
-} from "src/core/injected_build_constants.ts";
-import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks.js";
-import { ReactUnmounter } from "src/core/NavComponents.js";
-import { RedirectHeader } from "src/core/RedirectHeader.js";
+import { initialize_analytics } from "src/core/analytics";
+import { DevFip } from "src/core/DevFip";
+import { EasyAccess } from "src/core/EasyAccess";
+import { ErrorBoundary } from "src/core/ErrorBoundary";
+import { has_local_storage } from "src/core/feature_detection";
+import { lang, is_a11y_mode, is_dev } from "src/core/injected_build_constants";
+import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
+import { ReactUnmounter } from "src/core/NavComponents";
+import { RedirectHeader } from "src/core/RedirectHeader";
 
-import { TooltipActivator } from "src/glossary/TooltipActivator.js";
-import { SurveyPopup } from "src/Survey/SurveyPopup.js";
+import { TooltipActivator } from "src/glossary/TooltipActivator";
+import { SurveyPopup } from "src/Survey/SurveyPopup";
 
-import { app_reducer } from "./AppState.js";
+import { app_reducer } from "./AppState";
 
 import {
   ensure_linked_stylesheets_load,
   retrying_react_lazy,
-} from "./common_app_component_utils.js";
+} from "./common_app_component_utils";
 
 import "./App.scss";
 

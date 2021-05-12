@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants.ts";
+import { lang } from "src/core/injected_build_constants";
 
-import { query_factory } from "src/graphql_utils/graphql_utils.js";
+import { query_factory } from "src/graphql_utils/graphql_utils";
 
 const years_with_covid_data = `
   years_with_covid_data {

@@ -1,7 +1,7 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
-import * as color_defs from "./color_defs.ts";
+import * as color_defs from "./color_defs";
 
 const newIBCategoryColors = [
   "#206BBD", // blue

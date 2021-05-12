@@ -8,11 +8,11 @@ import {
   HeightClipper,
   PinnedContent,
   AutoAccordion,
-} from "src/components/index.js";
+} from "src/components/index";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { breakpoints } from "src/core/breakpoint_defs.ts";
+import { breakpoints } from "src/core/breakpoint_defs";
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>

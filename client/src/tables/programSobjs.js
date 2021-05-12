@@ -1,12 +1,12 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject.js";
+import { Subject } from "src/models/subject";
 
 import {
   trivial_text_maker,
   year_templates,
   businessConstants,
-} from "./table_common.js";
+} from "./table_common";
 
 import text from "./programSobjs.yaml";
 

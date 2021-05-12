@@ -2,13 +2,13 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { TM } from "src/components/index.js";
+import { TM } from "src/components/index";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { primaryColor, backgroundColor } from "src/core/color_defs.ts";
+import { primaryColor, backgroundColor } from "src/core/color_defs";
 
-import { is_a11y_mode } from "src/core/injected_build_constants.ts";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import "./BubbleMenu.scss";
 
