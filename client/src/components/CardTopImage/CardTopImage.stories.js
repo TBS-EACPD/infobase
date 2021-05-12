@@ -3,24 +3,25 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { CardLeftImage } from "./CardLeftImage.tsx";
+import { CardTopImage } from "./CardTopImage.tsx";
 
 export default {
-  title: "CardLeftImage",
-  component: CardLeftImage,
+  title: "CardTopImage",
+  component: CardTopImage,
 };
 
-const Template = (args) => <CardLeftImage {...args} />;
+const Template = (args) => <CardTopImage {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
   img_src: "",
   link_href: "",
+  link_open_in_new_tab: "",
   tmf: trivial_text_maker,
   text_args: "",
 
   // keys
   title_key: "new",
   text_key: "survey",
-  button_text_key: "performance",
+  link_key: "performance",
 };
