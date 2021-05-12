@@ -85,11 +85,15 @@ export class DropdownMenu extends React.Component<
     } = this.props;
     const { is_open } = this.state;
 
-    const aria_label = dropdown_a11y_txt
-      ? dropdown_a11y_txt
-      : _.isString(dropdown_trigger_txt)
-      ? dropdown_trigger_txt
-      : undefined;
+    const aria_label = (() => {
+      if (dropdown_a11y_txt) {
+        return dropdown_a11y_txt;
+      } else if (_.isString(dropdown_trigger_txt)) {
+        return dropdown_trigger_txt;
+      } else {
+        return undefined;
+      }
+    })();
 
     return (
       <div
