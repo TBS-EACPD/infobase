@@ -14,7 +14,6 @@ interface IconArrayProps {
 export class IconArray extends React.Component<IconArrayProps> {
   render() {
     const { render_item, items, heightFirst } = this.props;
-    console.log(items);
 
     const rendered_items = _.map(items, (item, ix) => (
       <div
