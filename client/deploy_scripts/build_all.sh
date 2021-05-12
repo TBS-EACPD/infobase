@@ -44,7 +44,7 @@ else
   function print_captured_output {
     kill -9 $spinner_pid
   
-    [ -f $scratch/ib_prod_en_build_out ] && cat $scratch/ib_prod_en_build_out3
+    [ -f $scratch/ib_prod_en_build_out ] && cat $scratch/ib_prod_en_build_out
     [ -f $scratch/ib_prod_en_build_err ] && cat $scratch/ib_prod_en_build_err
   
     [ -f $scratch/ib_prod_fr_build_out ] && cat $scratch/ib_prod_fr_build_out

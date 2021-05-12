@@ -8,7 +8,7 @@ source ./deploy_scripts/create_prod_env_vars.sh
 npm ci
 
 #build everything
-./deploy_scripts/build_all.sh -c "none"
+./deploy_scripts/build_all.sh
 
 #push build to staging dir of GCloud bucket
 export GCLOUD_BUCKET_URL=$STAGING_BUCKET
