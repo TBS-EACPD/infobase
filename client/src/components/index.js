@@ -16,7 +16,7 @@ export { LabeledBox } from "./LabeledBox";
 export { TextMaker, TM } from "./TextMaker";
 export { TwoLevelSelect } from "./TwoLevelSelect";
 export { CardTopImage } from "./CardTopImage";
-export { CardLeftImage } from "./CardLeftImage";
+export { CardLeftImage } from "./CardLeftImage/CardLeftImage";
 export { CardCenteredImage } from "./CardCenteredImage/CardCenteredImage";
 export { CardBackgroundImage } from "./CardBackgroundImage/CardBackgroundImage";
 export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput";
