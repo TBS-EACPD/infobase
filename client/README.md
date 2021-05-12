@@ -36,29 +36,27 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 0. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
 1. `npm ci` to get node modules (skip if node modules are upto date)
 2. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
-3. `npm run IB_q` to webpack the source code (`IB_q` builds quickly, requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11/safari/mobile)\*
+3. `npm run IB_q_both` to webpack the source code (`IB_q_both` builds both EN an FR versions, relatively quickly, but requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11 and other legacy browsers)\*
 
-\* `IB_q` and `IB_dev` are not the only flavours of build. See package.json for a list of all build comands
+\* `IB_q_both` and `IB_dev` are not the only flavours of build. See package.json for a list of all build commands
 
 ### Visiting a local build
-0. prerequisites: 1) follow the build steps above, 2) follow the steps up through spinning up a local GC InfoBase API from the [server README](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md)
+0. prerequisites: 1) follow the build steps above, 2) follow the steps up through spinning up a local GraphQL API server from the [server README](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md)
 1. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
 2. `npm run serve-loopback` to start a server in GC InfoBase directory, localhost only
 3. open a browser and paste `localhost:8080/build/InfoBase/index-eng.html` in the address bar
 
-Note: if you use `npm run serve` you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. IB_q, or equivalent, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
+Note: if you use `npm run serve` instead you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. `IB_q`, or equivalent builds, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
 
 ### TMUX to automate build
-Once you have all of the environment set up for InfoBase development, you can follow the steps below to automate all of the build process in in one terminal screen using tmux (an alternative terminal multiplexer)
-1. Install Homebrew (skip if you already have Homebrew): `cd /usr/local && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew`
+Once you have all of the environment set up for InfoBase development, you can follow the steps below to automate all of the build process in in one terminal screen using tmux (terminal multiplexer)
+1. Install Homebrew (skip if you already have Homebrew, aren't on a Mac, or already have tmux): `cd /usr/local && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew`
 2. Install tmux: `brew install tmux`
 3. Download/copy this [tmux config file](https://github.com/Stephen-ONeil/.dotfiles/blob/master/common/tmux/.tmux.conf), put it into your user folder (`~` directory)
-4. Make sure you're on the root directory of InfoBase, and run: `npm run infobase_tmux_init`
-5. Wait for everything to finish running. Once everything is running, you should be able to visit the local site.
+4. Make sure you're on the root directory of InfoBase, and run: `npm run tmux_env`
+5. Wait for everything to finish running. Once everything is running, you should be able to visit the local site
 
-Killing tmux sessions:
-- `exit` to exit session
-- `tmux kill-server` will reset by killing all tmux sessions.
+Note: closing the terminal will not kill the tmux session. To kill the session, run `tmux kill-session -t IB`. Re-running `npm run tmux_env` when an InfoBase tmux session already exists will reconnect you to the existing session, rather than starting a new one. If you wan a fresh restart, with the full scripted start up process, you must first kill any existing InfoBase sessions. 
 
 ## Tests
 
