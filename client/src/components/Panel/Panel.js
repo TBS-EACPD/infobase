@@ -2,16 +2,12 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { textLightColor } from "src/core/color_defs.js";
+import { Details } from "src/components/Details/Details.js";
+import { FootnoteList } from "src/components/FootnoteList.js";
+import { GlossaryItem } from "src/components/glossary_components.js";
+import { create_text_maker_component } from "src/components/misc_util_components.js";
 
-// eslint-disable-next-line no-restricted-imports
-import { Details } from "../Details/Details.js";
-// eslint-disable-next-line no-restricted-imports
-import { FootnoteList } from "../FootnoteList.js";
-// eslint-disable-next-line no-restricted-imports
-import { GlossaryItem } from "../glossary_components.js";
-// eslint-disable-next-line no-restricted-imports
-import { create_text_maker_component } from "../misc_util_components.js";
+import { textLightColor } from "src/core/color_defs.js";
 
 import text from "./Panel.yaml";
 import "./Panel.scss";

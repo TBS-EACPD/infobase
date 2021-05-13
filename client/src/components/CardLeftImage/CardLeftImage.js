@@ -1,7 +1,6 @@
 import React from "react";
 
-// eslint-disable-next-line no-restricted-imports
-import { TM } from "../TextMaker.tsx";
+import { TM } from "src/components/TextMaker.tsx";
 
 import "./CardLeftImage.scss";
 
