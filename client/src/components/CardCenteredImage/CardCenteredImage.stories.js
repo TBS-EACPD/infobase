@@ -10,7 +10,6 @@ export default {
   component: CardCenteredImage,
 };
 
-// not sure if the component works or not
 const Template = (args) => <CardCenteredImage {...args} />;
 
 export const Basic = Template.bind({});
@@ -19,7 +18,7 @@ Basic.args = {
   link_href: "",
   tmf: trivial_text_maker,
 
-  // keys don't work
+  // keys
   title_key: "new",
   text_key: "survey",
   link_key: "performance",
