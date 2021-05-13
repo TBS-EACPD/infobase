@@ -8,7 +8,7 @@ import {
   create_text_maker_component,
   Format,
 } from "src/components/misc_util_components";
-import { SortDirections } from "src/components/SortDirection";
+import { SortDirections } from "src/components/SortDirection/SortDirection";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
 
 import { LegendList } from "src/charts/legends/LegendList";
