@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TM, TMProps } from "../TextMaker";
+import { TM, TMProps } from "src/components/TextMaker";
 
 import "./CardBackgroundImage.scss";
 

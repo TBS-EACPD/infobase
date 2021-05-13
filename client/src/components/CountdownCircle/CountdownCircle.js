@@ -1,12 +1,12 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { buttonPrimaryColor } from "src/core/color_defs";
+import { Countdown } from "src/components/Countdown/Countdown.js";
+
+import { buttonPrimaryColor } from "src/core/color_defs.js";
 
 import { is_IE } from "src/core/feature_detection";
 
-// eslint-disable-next-line no-restricted-imports
-import { Countdown } from "../Countdown/Countdown.js";
 import "./CountdownCircle.scss";
 
 interface CountdownCircleProps {
