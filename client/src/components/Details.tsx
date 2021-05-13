@@ -6,7 +6,23 @@ import { lang } from "src/core/injected_build_constants";
 
 import "./Details.scss";
 
-export const StatelessDetails = ({
+interface CommonDetailsProps {
+  summary_content: React.ReactElement;
+  content: React.ReactElement;
+  persist_content?: boolean;
+}
+interface StatelessDetailsProps extends CommonDetailsProps {
+  on_click: React.MouseEventHandler<HTMLButtonElement>;
+  is_open: boolean;
+}
+interface DetailsProps extends CommonDetailsProps {
+  initial_open?: boolean;
+}
+interface DetailsState {
+  is_open: boolean;
+}
+
+export const StatelessDetails: React.FC<StatelessDetailsProps> = ({
   summary_content,
   content,
   persist_content,
@@ -58,8 +74,8 @@ export const StatelessDetails = ({
   );
 };
 
-export class Details extends React.Component {
-  constructor(props) {
+export class Details extends React.Component<DetailsProps, DetailsState> {
+  constructor(props: DetailsProps) {
     super(props);
     this.state = {
       is_open: props.initial_open || false,
