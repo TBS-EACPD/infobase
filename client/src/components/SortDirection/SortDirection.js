@@ -2,6 +2,7 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
+// eslint-disable-next-line import/no-unresolved
 import "./SortDirection.scss";
 
 interface SortDirectionProps {
