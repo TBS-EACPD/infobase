@@ -24,7 +24,7 @@ export { ContainerEscapeHatch } from "./ContainerEscapeHatch.js";
 export { FilterTable } from "./FilterTable/FilterTable.js";
 export { CheckBox } from "./CheckBox/CheckBox.js";
 export { StatelessDetails, Details } from "./Details/Details.js";
-export { SpinnerWrapper } from "./SpinnerWrapper.js";
+export { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper.js";
 export { KeyConceptList } from "./KeyConceptList.js";
 export { BackToTop } from "./BackToTop/BackToTop.js";
 export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones.js";

@@ -9,7 +9,7 @@ import {
   Format,
 } from "src/components/misc_util_components.js";
 import { SortDirections } from "src/components/SortDirection.js";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper.js";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
 

@@ -3,7 +3,8 @@ import React from "react";
 
 import { Spinner, spinner_configs } from "src/core/Spinner.js";
 
-import { LeafSpinner } from "./LeafSpinner.js";
+// eslint-disable-next-line no-restricted-imports
+import { LeafSpinner } from "../LeafSpinner.js";
 
 export class SpinnerWrapper extends React.Component {
   render() {
