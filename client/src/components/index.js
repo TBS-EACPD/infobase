@@ -10,7 +10,7 @@ export { EmailFrontend } from "./EmailFrontend.js";
 export { HeightClipper } from "./HeightClipper/HeightClipper.js";
 export { RadioButtons } from "./RadioButtons/RadioButtons.js";
 export { Select } from "./Select/Select.js";
-export { SortDirections } from "./SortDirection.js";
+export { SortDirections } from "./SortDirection/SortDirection.js";
 export { TabbedControls, TabbedContent } from "./TabbedContent.js";
 export { LabeledBox } from "./LabeledBox.js";
 export { TextMaker, TM } from "./TextMaker.tsx";

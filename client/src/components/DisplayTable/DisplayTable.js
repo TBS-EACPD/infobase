@@ -8,7 +8,7 @@ import {
   create_text_maker_component,
   Format,
 } from "src/components/misc_util_components.js";
-import { SortDirections } from "src/components/SortDirection.js";
+import { SortDirections } from "src/components/SortDirection/SortDirection.js";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper.js";
 
 import { LegendList } from "src/charts/legends/LegendList.js";
