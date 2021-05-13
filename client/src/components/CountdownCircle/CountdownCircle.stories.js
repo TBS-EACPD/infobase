@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import { CountdownCircle } from "./CountdownCircle.js";
@@ -8,7 +7,6 @@ export default {
   component: CountdownCircle,
 };
 
-// not sure if the component works or not
 const Template = (args) => <CountdownCircle {...args} />;
 
 export const Basic = Template.bind({});
