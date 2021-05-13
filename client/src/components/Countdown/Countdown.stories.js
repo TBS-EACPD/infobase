@@ -8,7 +8,6 @@ export default {
   component: Countdown,
 };
 
-// not sure if the component works or not
 const Template = (args) => <Countdown {...args} />;
 
 export const Basic = Template.bind({});
