@@ -1,18 +1,39 @@
 import React from "react";
 import { List } from "react-virtualized";
+import type { ListProps } from "react-virtualized";
 
-export class AutoHeightVirtualList extends React.Component {
-  constructor(props) {
+interface AutoHeightVirtualListProps extends ListProps {
+  list_ref: React.RefObject<any>;
+  max_height: number;
+}
+
+interface AutoHeightVirtualListState {
+  list_height: number;
+}
+
+export class AutoHeightVirtualList extends React.Component<
+  AutoHeightVirtualListProps,
+  AutoHeightVirtualListState
+> {
+  list_ref: React.RefObject<any>;
+  static defaultProps = {
+    max_height: 400,
+  };
+
+  constructor(props: AutoHeightVirtualListProps) {
     super(props);
 
-    this.list_ref = this.props.list_ref || React.createRef();
+    this.list_ref = props.list_ref || React.createRef();
 
     this.state = {
       list_height: props.max_height,
     };
   }
 
-  componentDidUpdate(prev_props, prev_state) {
+  componentDidUpdate(
+    prev_props: AutoHeightVirtualListProps,
+    prev_state: AutoHeightVirtualListState
+  ) {
     const { max_height } = this.props;
 
     if (this.list_ref && this.list_ref.current) {
@@ -40,7 +61,3 @@ export class AutoHeightVirtualList extends React.Component {
     );
   }
 }
-
-AutoHeightVirtualList.defaultProps = {
-  max_height: 400,
-};
