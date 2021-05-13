@@ -13,9 +13,7 @@ const Template = (args) => <SortDirection {...args} />;
 export const Basic = Template.bind({});
 Basic.args = {
   className: "",
-  style: {
-    color: "blue",
-  },
+  style: {},
   active: true,
   sortDirection: "",
 };
