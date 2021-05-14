@@ -39,6 +39,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
             },
           ],
           "@babel/preset-react",
+          "@babel/preset-typescript",
         ],
       },
     },
@@ -63,14 +64,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       //NIVO_TODO: Temporary workaround for bug from Nivo. Will need to delete this as it gets fixed in newer versions
       test: /react-spring/,
       sideEffects: true,
-    },
-    {
-      test: /\.(ts|tsx)$/,
-      use: [
-        {
-          loader: "ts-loader",
-        },
-      ],
     },
     {
       // node modules that specifically require transpilation...
