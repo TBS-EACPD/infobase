@@ -160,6 +160,7 @@ function get_plugins({
     new ESLintPlugin({ extensions: ["js", "ts", "tsx"] }),
     new ForkTsCheckerWebpackPlugin({
       tsconfig: "tsconfig.json",
+      async: false, // async (in watch mode) spits out type errors asap, and they get lost among other webpack output. Disabled, they're always at the end and easy to see
     }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,

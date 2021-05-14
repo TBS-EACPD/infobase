@@ -103,7 +103,7 @@ interface OptionsProps {
 }
 
 const compact = (
-  precision: string,
+  precision: number,
   val: number,
   lang: LangType,
   options: OptionsProps
