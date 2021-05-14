@@ -5,7 +5,7 @@ import {
   primaryColor,
   secondaryColor,
   tertiaryColor,
-} from "../../core/color_defs.js";
+} from "src/core/color_defs.js";
 
 import { SortDirection } from "./SortDirection.js";
 
