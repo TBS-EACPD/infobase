@@ -2,7 +2,6 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-// eslint-disable-next-line import/no-unresolved
 import "./SortDirection.scss";
 
 export const SortDirection = ({ sortDirection, active }) => (
