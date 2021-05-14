@@ -3,6 +3,7 @@ const std_lib_path = require("path");
 const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
 const CircularDependencyPlugin = require("circular-dependency-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const _ = require("lodash");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
@@ -157,6 +158,9 @@ function get_plugins({
       LOCAL_IP: JSON.stringify(local_ip),
     }),
     new ESLintPlugin({ extensions: ["js", "ts", "tsx"] }),
+    new ForkTsCheckerWebpackPlugin({
+      tsconfig: "tsconfig.json",
+    }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ module: webpackModuleRecord, paths, compilation }) {
