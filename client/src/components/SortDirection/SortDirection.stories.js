@@ -1,19 +1,38 @@
-import _ from "lodash";
 import React from "react";
 
-import { SortDirection } from "./SortDirection";
+// eslint-disable-next-line no-restricted-imports
+import {
+  primaryColor,
+  secondaryColor,
+  tertiaryColor,
+} from "../../core/color_defs.js";
+
+import { SortDirection } from "./SortDirection.js";
 
 export default {
   title: "SortDirection",
   component: SortDirection,
+  parameters: {
+    backgrounds: {
+      default: "navy blue",
+      values: [
+        { name: "navy blue", value: primaryColor },
+        { name: "blue", value: secondaryColor },
+        { name: "grey", value: tertiaryColor },
+      ],
+    },
+  },
 };
 
 const Template = (args) => <SortDirection {...args} />;
 
-export const Basic = Template.bind({});
-Basic.args = {
-  className: "",
-  style: {},
+export const Ascending = Template.bind({});
+export const Descending = Template.bind({});
+Ascending.args = {
   active: true,
-  sortDirection: "",
+  sortDirection: "ASC",
+};
+Descending.args = {
+  active: true,
+  sortDirection: "DESC",
 };
