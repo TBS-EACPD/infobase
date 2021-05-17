@@ -4,7 +4,15 @@ import React, { Fragment } from "react";
 import { Details } from "./Details";
 import "./KeyConceptList.scss";
 
-const KeyConceptList = ({ question_answer_pairs, compact = true }) => (
+interface KeyConceptListProps {
+  question_answer_pairs: React.ReactElement[][];
+  compact: boolean;
+}
+
+const KeyConceptList = ({
+  question_answer_pairs,
+  compact = true,
+}: KeyConceptListProps) => (
   <div>
     <div>
       {_.map(question_answer_pairs, ([question, answer], ix) => (
