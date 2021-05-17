@@ -1,6 +1,6 @@
 import _ from "lodash";
-import React from "react";
 import ReactDOM from "react-dom";
+import React from "react";
 
 import { TM } from "src/components/TextMaker";
 
@@ -11,13 +11,32 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
   children : JSX (content to be clipped), 
   clipHeight: css height string,
 */
-export class HeightClipper extends React.Component {
-  constructor() {
-    super();
+interface HeightClipperProps {
+  clipHeight: number;
+  children: React.ReactElement;
+  allowReclip: boolean;
+  buttonTextKey: string;
+  gradientClasses: string;
+}
+interface HeightClipperState {
+  exceedsHeight: boolean;
+  shouldClip: boolean;
+}
+export class HeightClipper extends React.Component<
+  HeightClipperProps,
+  HeightClipperState
+> {
+  main: React.RefObject<HTMLDivElement>;
+  content: React.RefObject<HTMLDivElement>;
+
+  constructor(props: HeightClipperProps) {
+    super(props);
     this.state = {
-      exceedsHeight: null,
+      exceedsHeight: false,
       shouldClip: true,
     };
+    this.main = React.createRef();
+    this.content = React.createRef();
   }
   componentDidMount() {
     this.measureHeightAndUpdateState();
@@ -25,7 +44,7 @@ export class HeightClipper extends React.Component {
   componentDidUpdate() {
     this.measureHeightAndUpdateState();
 
-    const height_clipper_node = ReactDOM.findDOMNode(this);
+    const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
     const untabbable_children_node = height_clipper_node.querySelector(
       ".untabbable_children"
     );
@@ -34,55 +53,56 @@ export class HeightClipper extends React.Component {
     // do not want any of that node's children to be tab-selectable
     // if no .untabbable_children div, then need to reset the tabindex/focusable attributes of the height clipper children
     if (untabbable_children_node) {
-      _.map(untabbable_children_node.querySelectorAll("*"), _.identity).forEach(
-        (node) => {
-          if (
-            !_.isUndefined(node.tabIndex) &&
-            !_.isNull(node.tabIndex) &&
-            node.tabIndex >= 0
-          ) {
-            const tabindex_attr = node.getAttribute("tabindex");
-            if (tabindex_attr) {
-              node.setAttribute("prev-tabindex", tabindex_attr);
-            }
-
-            node.setAttribute("tabindex", "-999");
+      _.map<Element, HTMLElement>(
+        untabbable_children_node.querySelectorAll("*"),
+        _.identity
+      ).forEach((node: HTMLElement) => {
+        if (
+          !_.isUndefined(node.tabIndex) &&
+          !_.isNull(node.tabIndex) &&
+          node.tabIndex >= 0
+        ) {
+          const tabindex_attr = node.getAttribute("tabindex");
+          if (tabindex_attr) {
+            node.setAttribute("prev-tabindex", tabindex_attr);
           }
-        }
-      );
 
-      _.map(
+          node.setAttribute("tabindex", "-999");
+        }
+      });
+
+      _.map<Element, HTMLElement>(
         untabbable_children_node.querySelectorAll("svg"),
         _.identity
-      ).forEach((node) => node.setAttribute("focusable", "false"));
+      ).forEach((node: HTMLElement) => node.setAttribute("focusable", "false"));
     } else {
-      _.map(
+      _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll('[tabindex="-999"]'),
         _.identity
-      ).forEach((node) => node.removeAttribute("tabindex"));
+      ).forEach((node: HTMLElement) => node.removeAttribute("tabindex"));
 
-      _.map(
+      _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll("[prev-tabindex]"),
         _.identity
-      ).forEach((node) => {
-        const previous_tabindex = node.getAttribute("prev-tabindex");
+      ).forEach((node: HTMLElement) => {
+        const previous_tabindex = node.getAttribute("prev-tabindex")!;
         node.setAttribute("tabindex", previous_tabindex);
         node.removeAttribute("prev-tabindex");
       });
 
-      _.map(
+      _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll("svg"),
         _.identity
-      ).forEach((node) => node.removeAttribute("focusable"));
+      ).forEach((node: HTMLElement) => node.removeAttribute("focusable"));
     }
   }
   measureHeightAndUpdateState() {
-    const { main } = this.refs;
     if (
-      main &&
+      this.main &&
+      this.main.current &&
       !this.state.exceedsHeight &&
       this.state.shouldClip &&
-      main.offsetHeight > this.props.clipHeight
+      this.main.current.offsetHeight > this.props.clipHeight
     ) {
       this.setState({ exceedsHeight: true });
     }
@@ -105,11 +125,11 @@ export class HeightClipper extends React.Component {
       children
     ) : (
       <div
-        ref="main"
+        ref={this.main}
         style={{
           position: "relative",
-          maxHeight: isClipped && pixelClipHeight,
-          overflow: isClipped && "hidden",
+          maxHeight: isClipped ? pixelClipHeight : undefined,
+          overflow: isClipped ? "hidden" : undefined,
         }}
       >
         {isClipped && (
@@ -139,7 +159,7 @@ export class HeightClipper extends React.Component {
               }}
               onClick={() => {
                 this.setState({ shouldClip: false }, () => {
-                  this.refs.content.focus();
+                  this.content.current!.focus();
                 });
               }}
             >
@@ -147,7 +167,7 @@ export class HeightClipper extends React.Component {
             </button>
           </div>
         )}
-        <div aria-hidden={isClipped} tabIndex={-1} ref="content">
+        <div aria-hidden={isClipped} tabIndex={-1} ref={this.content}>
           <div className={isClipped ? "untabbable_children" : ""}>
             {children}
           </div>
