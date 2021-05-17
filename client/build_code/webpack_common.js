@@ -33,7 +33,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           [
             "@babel/preset-env",
             {
-              useBuiltIns: false,
+              useBuiltIns: "usage",
+              corejs: { version: "3.12", proposals: true },
               modules: false,
               targets: target_ie11 ? "IE 11" : "last 2 Chrome versions",
               forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
@@ -68,7 +69,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       // node modules that specifically require transpilation...
-      include: /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror|d3-scale|@nivo\/bar|@nivo\/circle-packing|@nivo\/core|@nivo\/line|@nivo\/pie|)/,
+      include:
+        /node_modules\/(graphiql|graphql-language-service-.*|codemirror-graphql|codemirror|d3-scale|@nivo\/bar|@nivo\/circle-packing|@nivo\/core|@nivo\/line|@nivo\/pie|)/,
       test: /\.(js)$/,
       use: js_module_loader_rules,
     },
