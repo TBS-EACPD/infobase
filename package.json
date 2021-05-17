@@ -24,6 +24,6 @@
     "eslint-plugin-lodash": "^7.1.0",
     "eslint-plugin-node": "^11.0.0",
     "husky": "^6.0.0",
-    "prettier": "^2.0.5"
+    "prettier": "2.0.5"
   }
 }
