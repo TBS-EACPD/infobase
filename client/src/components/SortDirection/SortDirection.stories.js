@@ -1,11 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-// eslint-disable-next-line no-restricted-imports
-import {
-  primaryColor,
-  secondaryColor,
-  tertiaryColor,
-} from "src/core/color_defs.js";
+import { primaryColor, secondaryColor } from "src/core/color_defs.js";
 
 import { SortDirection } from "./SortDirection.js";
 
@@ -18,21 +13,26 @@ export default {
       values: [
         { name: "navy blue", value: primaryColor },
         { name: "blue", value: secondaryColor },
-        { name: "grey", value: tertiaryColor },
       ],
     },
   },
 };
 
-const Template = (args) => <SortDirection {...args} />;
+const Template = (args) => {
+  const [is_active1, set_active1] = useState(false);
+  const [is_active2, set_active2] = useState(false);
+  return (
+    <div
+      onClick={() => {
+        set_active2(!is_active2);
+        set_active1(is_active2);
+      }}
+    >
+      <SortDirection sortDirection="ASC" active={is_active1} {...args} />
+      <SortDirection sortDirection="DESC" active={is_active2} {...args} />
+    </div>
+  );
+};
 
-export const Ascending = Template.bind({});
-export const Descending = Template.bind({});
-Ascending.args = {
-  active: true,
-  sortDirection: "ASC",
-};
-Descending.args = {
-  active: true,
-  sortDirection: "DESC",
-};
+export const Basic = Template.bind({});
+Basic.args = {};
