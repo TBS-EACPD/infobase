@@ -3,7 +3,7 @@ import React from "react";
 
 import {
   create_text_maker_component,
-  CardTopImage,
+  CardImage,
   ContainerEscapeHatch,
 } from "src/components/index";
 
@@ -153,7 +153,7 @@ export default class Home extends React.Component {
                                   key={ix}
                                   className="col-lg-3 col-md-6 subapp-linkcard"
                                 >
-                                  <CardTopImage
+                                  <CardImage
                                     tmf={home_tm}
                                     svg={svg}
                                     title_key={title_key}
