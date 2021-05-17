@@ -23,8 +23,8 @@
     "axios": "^0.21.1",
     "babel-plugin-transform-import-meta": "^2.0.0",
     "common-node-scripts": "file:../scripts/common_node_scripts",
-    "jest": "^25.1.0",
-    "jest-cli": "^25.1.0",
+    "jest": "^26.0.0",
+    "jest-cli": "^26.0.0",
     "nodemon": "^2.0.6"
   },
   "scripts": {
