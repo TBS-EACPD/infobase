@@ -155,6 +155,7 @@
     "nodemon": "^2.0.2",
     "null-loader": "^4.0.1",
     "patch-package": "^6.4.5",
+    "postcss": "^8.0.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.29.0",
     "sass-loader": "^10.0.5",
