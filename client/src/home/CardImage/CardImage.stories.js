@@ -2,14 +2,14 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text.js";
 
-import { CardTopImage } from "./CardTopImage.tsx";
+import { CardImage } from "./CardImage.js";
 
 export default {
-  title: "CardTopImage",
-  component: CardTopImage,
+  title: "CardImage",
+  component: CardImage,
 };
 
-const Template = (args) => <CardTopImage {...args} />;
+const Template = (args) => <CardImage {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
