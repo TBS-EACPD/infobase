@@ -28,11 +28,10 @@ const Template = (args) => {
         set_active1(is_active2);
       }}
     >
-      <SortDirection sortDirection="ASC" active={is_active1} {...args} />
-      <SortDirection sortDirection="DESC" active={is_active2} {...args} />
+      <SortDirection sortDirection="ASC" active={is_active1} />
+      <SortDirection sortDirection="DESC" active={is_active2} />
     </div>
   );
 };
 
 export const Basic = Template.bind({});
-Basic.args = {};
