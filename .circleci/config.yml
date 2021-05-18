@@ -140,7 +140,11 @@ jobs:
             while true; do
               sleep 5
               echo "====="
-              ps -eo pgrp,comm,vsz,rss,%mem,cmd:1000 | sort -k 5 -nr
+              ps -eo pgrp,comm,vsz,rss,%mem,cmd:1000 |\
+                # skip header line, then sort by %mem
+                (read -r; printf "%s\n" "$REPLY"; sort -k 5 -nr) |\
+                # format vsz and rss, originally in kilobytes, as more friendly memory units 
+                numfmt --header --from-unit=1024 --to=iec --field 3,4
               echo "====="
             done 
           background: true
