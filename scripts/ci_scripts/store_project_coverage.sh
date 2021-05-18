@@ -3,8 +3,6 @@
 
 set -e # will exit if any command has non-zero exit value
 
-source ~/InfoBase/scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
-
 project=$1
 sha=$(echo "$CIRCLE_SHA1" | cut -c 1-7)
 
@@ -17,5 +15,3 @@ gsutil cp ./coverage/coverage-shield-badge.svg $GCLOUD_ALL_COVERAGE_BUCKET_URL/$
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage-badge.svg
 gsutil cp ./coverage/coverage-final.txt $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage.txt
 gsutil setmeta -h "Cache-Control:no-cache" $GCLOUD_ALL_COVERAGE_BUCKET_URL/$CIRCLE_BRANCH-$project-coverage.txt
-
-source ~/InfoBase/scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
