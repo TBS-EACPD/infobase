@@ -3,8 +3,6 @@ set -e
 
 echo "Starting dev link bucket cleanup..."
 
-source ~/InfoBase/scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-start"
-
 active_branches=$(git branch -r | sed -E 's/(.*\/)(.*)/\2/g')
 
 # favicon.ico is arbitrary, just looking for any file present in the true dev link dir
@@ -32,5 +30,3 @@ if [[ ! -z "$inactive_branches_with_live_dev_links" ]]; then
 else 
   echo "No stale dev links to clobber"
 fi
-
-source ~/InfoBase/scripts/ci_scripts/redact_env_vars_from_logging.sh "redact-end"
