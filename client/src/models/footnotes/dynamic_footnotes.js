@@ -75,6 +75,10 @@ const get_dynamic_footnotes = () => {
         .filter((doc) => doc[late_org_property].length > 0)
         .value();
 
+      // might make more sense for this validation to happen for results doc configs in /models/results.js, but
+      // for now doing it here to catch exempt orgs in PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC too. TODO, maybe
+      // move PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC in to the results models file, apply (some of) the results
+      // config validation to it? A little hacky either way
       const EXEMPT_ORGS = [151];
       const docs_with_late_expempt_orgs = _.chain(docs_with_late_orgs)
         .map(({ [late_org_property]: late_orgs, doc_type, year }) => ({
