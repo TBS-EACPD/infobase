@@ -14,7 +14,7 @@ import { StandardLegend } from "src/charts/legends/index";
 
 import { infobase_colors_smart } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/WrappedNivoBar/wrapped_nivo_bar";
-import { WrappedNivoLine } from "src/charts/wrapped_nivo/WrappedNivoLine";
+import { WrappedNivoLine } from "src/charts/wrapped_nivo/WrappedNivoLine/WrappedNivoLine";
 import { toggle_list } from "src/general_utils";
 
 import text from "./NivoLineBarToggle.yaml";
