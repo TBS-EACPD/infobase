@@ -75,6 +75,31 @@ const get_dynamic_footnotes = () => {
         .filter((doc) => doc[late_org_property].length > 0)
         .value();
 
+      const EXEMPT_ORGS = [151];
+      const docs_with_late_expempt_orgs = _.chain(docs_with_late_orgs)
+        .map(({ [late_org_property]: late_orgs, doc_type, year }) => ({
+          late_orgs,
+          doc_type,
+          year,
+        }))
+        .filter(
+          ({ late_orgs }) =>
+            !_.chain(late_orgs).intersection(EXEMPT_ORGS).isEmpty().value()
+        )
+        .value();
+      if (!_.isEmpty(docs_with_late_expempt_orgs)) {
+        throw new Error(
+          `Org(s) ${EXEMPT_ORGS.join(
+            ", "
+          )} are exempt from being considered "late" for results reporting. ` +
+            `The following results doc config(s) incorrectly include one or more exempt orgs in their ${late_org_property} field: ` +
+            _.chain(docs_with_late_expempt_orgs)
+              .map(({ doc_type, year }) => `${doc_type} ${year}`)
+              .join(", ")
+              .value()
+        );
+      }
+
       const gov_footnotes = _.map(
         docs_with_late_orgs,
         ({ [late_org_property]: late_orgs, doc_type, year }) => ({
