@@ -21,7 +21,7 @@ import {
   general_default_props,
   get_formatter,
   TooltipFactory,
-} from "../wrapped_nivo_common";
+} from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 import text from "./WrappedNivoCircleProportion.yaml";
 import "./WrappedNivoCircleProportion.scss";
