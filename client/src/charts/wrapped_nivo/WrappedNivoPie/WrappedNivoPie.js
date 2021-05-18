@@ -17,7 +17,7 @@ import {
   general_default_props,
   infobase_colors_smart,
   get_formatter,
-} from "../wrapped_nivo_common";
+} from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 import "./WrappedNivoPie.scss";
 
