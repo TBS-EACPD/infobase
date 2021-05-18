@@ -9,21 +9,34 @@ import { is_mobile } from "src/core/feature_detection";
 
 import "./BackToTop.scss";
 
-export class BackToTop extends React.Component {
-  constructor(props) {
+interface BackToTopProps {
+  focus: Function;
+}
+interface BackToTopState {
+  show_back_to_top: boolean;
+  caught_by_footer: boolean;
+}
+
+export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
+  page_header: HTMLElement | null | undefined;
+  page_footer: HTMLElement | null | undefined;
+  header_observer: IntersectionObserver | undefined;
+  footer_observer: IntersectionObserver | undefined;
+  button_ref: React.RefObject<HTMLButtonElement>;
+
+  constructor(props: BackToTopProps) {
     super(props);
 
     this.state = {
       show_back_to_top: false,
       caught_by_footer: false,
     };
-
     this.button_ref = React.createRef();
   }
 
   componentDidMount() {
-    this.page_header = document.getElementById("ib-site-header-area");
-    this.page_footer = document.getElementById("wb-info");
+    this.page_header = document.getElementById("ib-site-header-area")!;
+    this.page_footer = document.getElementById("wb-info")!;
 
     this.header_observer = new IntersectionObserver((entries, observer) => {
       this.setState({ show_back_to_top: entries[0].intersectionRatio <= 0 });
@@ -38,8 +51,8 @@ export class BackToTop extends React.Component {
     this.footer_observer.observe(this.page_footer);
   }
   componentWillUnmount() {
-    this.header_observer.unobserve(this.page_header);
-    this.footer_observer.unobserve(this.page_footer);
+    this.header_observer!.unobserve(this.page_header!);
+    this.footer_observer!.unobserve(this.page_footer!);
   }
 
   handleClick() {
@@ -62,14 +75,14 @@ export class BackToTop extends React.Component {
         )}
         style={{
           top: caught_by_footer
-            ? `${this.page_footer.offsetTop - 50}px`
+            ? `${this.page_footer!.offsetTop - 50}px`
             : "auto",
           opacity:
             caught_by_footer && is_mobile() && window.innerWidth <= 600
               ? 0
               : undefined,
         }}
-        tabIndex="-1"
+        tabIndex={-1}
         onClick={() => this.handleClick()}
       >
         {trivial_text_maker("back_to_top")}
