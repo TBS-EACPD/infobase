@@ -11,7 +11,8 @@ RUN apk update && apk upgrade && \
     bash \
     curl \
     ca-certificates \
-    python
+    python \
+    procps
 USER ${SERVICE_USER}
 RUN curl -sSL https://sdk.cloud.google.com | bash && \
   exec sh && \
