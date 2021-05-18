@@ -140,7 +140,13 @@ jobs:
             while true; do
               sleep 5
               echo "====="
-              ps -eo pgrp,comm,vsz,rss,%mem,cmd:1000 --sort %mem
+              ps -eo pgrp,comm,vsz,rss,%mem,cmd:1000 --sort %mem |\
+                awk '{
+                  if (NR==1) printf "%10s %20s %10s %10s %5s %s", $1, $2, $3, $4, $5, $6;
+                  else printf "%10s %20s %10s %10s %5s", $1, $2, $3/1024, $4/1024, $5;
+                  $1=$2=$3=$4=$5="";
+                  print $0;
+                }'
               echo "====="
             done 
           background: true
