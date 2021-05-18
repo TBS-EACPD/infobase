@@ -140,7 +140,7 @@ jobs:
             while true; do
               sleep 5
               echo "====="
-              ps -eo comm,vsz,rss | sort -k 3 -nr
+              ps -eo pgrp,comm,vsz,rss,cmd:1000 | sort -k 4 -nr
               echo "====="
             done 
           background: true
