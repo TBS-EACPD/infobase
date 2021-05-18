@@ -397,7 +397,7 @@ const dp_docs = build_doc_info_objects("dp", [
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2021-2022.html",
     late_results_orgs: [],
-    late_resources_orgs: [151],
+    late_resources_orgs: [],
   },
 ]);
 const result_docs = {
