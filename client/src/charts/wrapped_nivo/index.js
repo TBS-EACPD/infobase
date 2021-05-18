@@ -2,7 +2,7 @@ import {
   WrappedNivoBar,
   WrappedNivoHBar,
 } from "./WrappedNivoBar/wrapped_nivo_bar";
-import { WrappedNivoCircleProportion } from "./WrappedNivoCircleProportion";
+import { WrappedNivoCircleProportion } from "./WrappedNivoCircleProportion/WrappedNivoCircleProportion";
 import { WrappedNivoLine } from "./WrappedNivoLine";
 import { WrappedNivoPie } from "./WrappedNivoPie/WrappedNivoPie";
 import { WrappedNivoTreemap } from "./WrappedNivoTreemap";
