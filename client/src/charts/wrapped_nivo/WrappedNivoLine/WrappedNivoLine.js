@@ -11,8 +11,6 @@ import {
   backgroundColor,
 } from "src/core/color_defs";
 
-import { IconZoomIn, IconZoomOut } from "src/icons/icons";
-
 import {
   create_text_maker_component_with_nivo_common,
   InteractiveGraph,
@@ -20,7 +18,8 @@ import {
   DefaultTooltip,
   get_formatter,
   fix_legend_symbols,
-} from "./wrapped_nivo_common";
+} from "src/charts/wrapped_nivo/wrapped_nivo_common";
+import { IconZoomIn, IconZoomOut } from "src/icons/icons";
 
 import text from "./WrappedNivoLine.yaml";
 
