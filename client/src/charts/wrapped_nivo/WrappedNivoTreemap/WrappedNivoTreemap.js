@@ -6,7 +6,7 @@ import { breakpoints } from "src/core/breakpoint_defs";
 
 import "./WrappedNivoTreemap.scss";
 
-import { DefaultTooltip } from "./wrapped_nivo_common";
+import { DefaultTooltip } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 class _WrappedNivoTreemap extends React.Component {
   render() {
