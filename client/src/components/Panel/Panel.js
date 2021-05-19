@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import { Details } from "src/components/Details/Details.js";
-import { FootnoteList } from "src/components/FootnoteList.js";
+import { FootnoteList } from "src/components/FootnoteList/FootnoteList.js";
 import { GlossaryItem } from "src/components/glossary_components.js";
 import { create_text_maker_component } from "src/components/misc_util_components.js";
 

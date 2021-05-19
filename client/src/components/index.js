@@ -77,7 +77,7 @@ export { LogInteractionEvents } from "./LogInteractionEvents.js";
 export { GlossaryIcon, GlossaryItem } from "./glossary_components.js";
 export { CardList } from "./CardList/CardList.js";
 export { LabeledTable } from "./LabeledTable.tsx";
-export { FootnoteList } from "./FootnoteList.js";
+export { FootnoteList } from "./FootnoteList/FootnoteList.js";
 export { AlertBanner } from "./AlertBanner/AlertBanner.js";
 export { FancyUL } from "./FancyUL/FancyUL.jsncyUL.js";
 export { DropdownMenu } from "./DropdownMenu/DropdownMenu.js";

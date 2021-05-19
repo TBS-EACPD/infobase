@@ -1,12 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
+import { FancyUL } from "src/components/FancyUL/FancyUL.js";
+
 import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
 import { create_text_maker } from "src/models/text";
 
 import { sanitized_dangerous_inner_html } from "src/general_utils";
-
-import { FancyUL } from "./FancyUL/FancyUL.js";
 
 import footnote_list_text from "./FootnoteList.yaml";
 import "./FootnoteList.scss";
