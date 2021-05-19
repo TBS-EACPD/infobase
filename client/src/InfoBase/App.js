@@ -32,49 +32,49 @@ import {
 
 import "./App.scss";
 
-const Home = retrying_react_lazy(() => import("src/home/home.js"));
-const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home.js"));
-const About = retrying_react_lazy(() => import("src/about/about.tsx"));
-const Contact = retrying_react_lazy(() => import("src/contact/contact.tsx"));
-const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ.js"));
-const MetaData = retrying_react_lazy(() => import("src/metadata/metadata.js"));
+const Home = retrying_react_lazy(() => import("src/home/home"));
+const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home"));
+const About = retrying_react_lazy(() => import("src/about/about"));
+const Contact = retrying_react_lazy(() => import("src/contact/contact"));
+const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ"));
+const MetaData = retrying_react_lazy(() => import("src/metadata/metadata"));
 const IgocExplorer = retrying_react_lazy(() =>
-  import("src/IgocExplorer/IgocExplorer.js")
+  import("src/IgocExplorer/IgocExplorer")
 );
 const TagExplorer = retrying_react_lazy(() =>
-  import("src/TagExplorer/TagExplorer.js")
+  import("src/TagExplorer/TagExplorer")
 );
-const Glossary = retrying_react_lazy(() => import("src/glossary/glossary.js"));
-const ReportBuilder = retrying_react_lazy(() => import("src/rpb/index.js"));
+const Glossary = retrying_react_lazy(() => import("src/glossary/glossary"));
+const ReportBuilder = retrying_react_lazy(() => import("src/rpb/index"));
 const Infographic = retrying_react_lazy(() =>
-  import("src/infographic/Infographic.js")
+  import("src/infographic/Infographic")
 );
 const EstimatesComparison = retrying_react_lazy(() =>
-  import("src/EstimatesComparison/EstimatesComparison.js")
+  import("src/EstimatesComparison/EstimatesComparison")
 );
 const PrivacyStatement = retrying_react_lazy(() =>
-  import("src/PrivacyStatement/PrivacyStatement.js")
+  import("src/PrivacyStatement/PrivacyStatement")
 );
-const TextDiff = retrying_react_lazy(() => import("src/TextDiff/TextDiff.js"));
-const TreeMap = retrying_react_lazy(() => import("src/TreeMap/TreeMap.js"));
+const TextDiff = retrying_react_lazy(() => import("src/TextDiff/TextDiff"));
+const TreeMap = retrying_react_lazy(() => import("src/TreeMap/TreeMap"));
 const IsolatedPanel = retrying_react_lazy(() =>
-  import("src/panels/panel_routes/IsolatedPanel.js")
+  import("src/panels/panel_routes/IsolatedPanel")
 );
 const PanelInventory = retrying_react_lazy(() =>
-  import("src/panels/panel_routes/PanelInventory.js")
+  import("src/panels/panel_routes/PanelInventory")
 );
 const GraphiQL = retrying_react_lazy(() =>
-  import("src/graphql_utils/GraphiQL.js")
+  import("src/graphql_utils/GraphiQL")
 );
 const FootnoteInventory = retrying_react_lazy(() =>
-  import("src/models/footnotes/FootnoteInventory.js")
+  import("src/models/footnotes/FootnoteInventory")
 );
 
 const Survey = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Survey" */ "src/Survey/Survey.js")
+  import(/* webpackChunkName: "Survey" */ "src/Survey/Survey")
 );
 const SingleServiceRoute = retrying_react_lazy(() =>
-  import("../panels/panel_routes/SingleServiceRoute.js")
+  import("../panels/panel_routes/SingleServiceRoute")
 );
 
 const store = createStore(app_reducer);
@@ -103,7 +103,7 @@ export class App extends React.Component {
   componentDidMount() {
     if (!is_dev) {
       axios
-        .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
+        .get("https://storage.googleapis.com/ib-outage-bucket/outage_msgon")
         .then((res) => {
           const data = res.data;
           if (data.outage) {
