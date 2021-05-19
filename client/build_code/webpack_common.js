@@ -203,7 +203,7 @@ function get_plugins({
   ]);
 }
 
-function get_optimizations(is_prod_build, produce_stats) {
+function get_optimizations(is_prod_build, is_ci, produce_stats) {
   if (is_prod_build) {
     return {
       ...(produce_stats && {
@@ -213,7 +213,10 @@ function get_optimizations(is_prod_build, produce_stats) {
         chunkIds: "named",
       }),
       minimize: true,
-      minimizer: [new TerserPlugin({ parallel: true })],
+      // Terser spawns one worker per core, but is unable to accurately detect cores in CircleCI,
+      // results in spawning too many workers and draining memory resources
+      // When running in CI, hard code number of threads (picked by trial and error for balance of speed vs memory use)
+      minimizer: [new TerserPlugin({ parallel: !is_ci || 5 })],
       splitChunks: {
         maxAsyncRequests: 20,
         chunks: "async",
@@ -271,7 +274,7 @@ function create_config({
       stats_baseline,
       stats_no_compare,
     }),
-    optimization: get_optimizations(is_prod_build, produce_stats),
+    optimization: get_optimizations(is_prod_build, is_ci, produce_stats),
     devtool: !is_prod_build ? "eval-source-map" : is_ci ? "source-map" : false,
     resolve: {
       fallback: { assert: false },
