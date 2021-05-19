@@ -11,6 +11,4 @@ export default {
 const Template = (args) => <WrappedNivoTreemap {...args} />;
 
 export const Basic = Template.bind({});
-Basic.args = {
-  title: "WrappedNivoTreemap",
-};
+Basic.args = {};

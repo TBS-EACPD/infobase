@@ -11,6 +11,4 @@ export default {
 const Template = (args) => <WrappedNivoPie {...args} />;
 
 export const Basic = Template.bind({});
-Basic.args = {
-  title: "WrappedNivoPie",
-};
+Basic.args = {};
