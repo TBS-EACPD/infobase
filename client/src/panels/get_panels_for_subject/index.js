@@ -7,23 +7,23 @@ import { is_dev } from "src/core/injected_build_constants";
 const panel_loading_promises = (subject) => {
   switch (subject.level) {
     case "gov":
-      return import("./get_gov_panels.js").then(({ get_gov_panels }) =>
+      return import("./get_gov_panels").then(({ get_gov_panels }) =>
         get_gov_panels(subject)
       );
     case "dept":
-      return import("./get_dept_panels.js").then(({ get_dept_panels }) =>
+      return import("./get_dept_panels").then(({ get_dept_panels }) =>
         get_dept_panels(subject)
       );
     case "crso":
-      return import("./get_crso_panels.js").then(({ get_crso_panels }) =>
+      return import("./get_crso_panels").then(({ get_crso_panels }) =>
         get_crso_panels(subject)
       );
     case "tag":
-      return import("./get_tag_panels.js").then(({ get_tag_panels }) =>
+      return import("./get_tag_panels").then(({ get_tag_panels }) =>
         get_tag_panels(subject)
       );
     case "program":
-      return import("./get_program_panels.js").then(({ get_program_panels }) =>
+      return import("./get_program_panels").then(({ get_program_panels }) =>
         get_program_panels(subject)
       );
   }
