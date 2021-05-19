@@ -11,6 +11,4 @@ export default {
 const Template = (args) => <WrappedNivoCircleProportion {...args} />;
 
 export const Basic = Template.bind({});
-Basic.args = {
-  title: "WrappedNivoCircleProportion",
-};
+Basic.args = {};
