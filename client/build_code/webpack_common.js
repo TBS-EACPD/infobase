@@ -215,8 +215,7 @@ function get_optimizations(is_prod_build, is_ci, produce_stats) {
       minimize: true,
       // Terser spawns one worker per core, but is unable to accurately detect cores in CircleCI,
       // results in spawning too many workers and draining memory resources
-      // When running in CI, hard code number of threads (picked by trial and error for balance of speed vs memory use)
-      minimizer: [new TerserPlugin({ parallel: !is_ci || 5 })],
+      minimizer: [new TerserPlugin({ parallel: !is_ci })],
       splitChunks: {
         maxAsyncRequests: 20,
         chunks: "async",
