@@ -1,6 +1,6 @@
 import React from "react";
 
-import { RadioButtons } from "./RadioButtons.tsx";
+import { RadioButtons } from "./RadioButtons";
 
 export default {
   title: "Input/RadioButton",

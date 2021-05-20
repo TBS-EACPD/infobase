@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { FootnoteList } from "./FootnoteList.js";
+import { FootnoteList } from "./FootnoteList";
 
 export default {
   title: "FootnoteList",

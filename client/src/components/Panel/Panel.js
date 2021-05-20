@@ -2,12 +2,12 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { Details } from "src/components/Details/Details.js";
-import { FootnoteList } from "src/components/FootnoteList/FootnoteList.js";
-import { GlossaryItem } from "src/components/glossary_components.js";
-import { create_text_maker_component } from "src/components/misc_util_components.js";
+import { Details } from "src/components/Details/Details";
+import { FootnoteList } from "src/components/FootnoteList/FootnoteList";
+import { GlossaryItem } from "src/components/glossary_components";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { textLightColor } from "src/core/color_defs.js";
+import { textLightColor } from "src/core/color_defs";
 
 import text from "./Panel.yaml";
 import "./Panel.scss";

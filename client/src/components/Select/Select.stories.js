@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Select } from "./Select.tsx";
+import { Select } from "./Select";
 
 export default {
   title: "Select",

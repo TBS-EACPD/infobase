@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CountdownCircle } from "./CountdownCircle.js";
+import { CountdownCircle } from "./CountdownCircle";
 
 export default {
   title: "CountdownCircle",
