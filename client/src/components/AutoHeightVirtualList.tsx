@@ -1,10 +1,24 @@
 import React from "react";
-import { List } from "react-virtualized";
-import type { ListProps } from "react-virtualized";
+import { List, CellMeasurerCache } from "react-virtualized";
 
-interface AutoHeightVirtualListProps extends ListProps {
+interface AutoHeightVirtualListProps {
   list_ref: React.RefObject<any>;
-  max_height: number;
+  max_height?: number;
+  className: string;
+  role: string;
+  id: string;
+  ariaExpanded: boolean;
+  width: number;
+  scrollToIndex: number;
+  deferredMeasurementCache: CellMeasurerCache;
+  rowHeight: number | ((params: { index: number }) => number);
+  rowCount: number;
+  rowRenderer: ({
+    index: result_index,
+    key,
+    parent,
+    style,
+  }: any) => JSX.Element;
 }
 
 interface AutoHeightVirtualListState {
@@ -26,7 +40,7 @@ export class AutoHeightVirtualList extends React.Component<
     this.list_ref = props.list_ref || React.createRef();
 
     this.state = {
-      list_height: props.max_height,
+      list_height: props.max_height!,
     };
   }
 
@@ -40,10 +54,10 @@ export class AutoHeightVirtualList extends React.Component<
       this.list_ref.current.Grid.measureAllCells();
       const list_height = this.list_ref.current.Grid.getTotalRowsHeight();
       if (list_height !== this.state.list_height) {
-        if (list_height < max_height) {
+        if (list_height < max_height!) {
           this.setState({ list_height: list_height });
-        } else if (this.state.list_height < max_height) {
-          this.setState({ list_height: max_height });
+        } else if (this.state.list_height < max_height!) {
+          this.setState({ list_height: max_height! });
         }
       }
     }
