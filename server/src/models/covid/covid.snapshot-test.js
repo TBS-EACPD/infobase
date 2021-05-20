@@ -45,6 +45,7 @@ query ($lang: String = "en") {
     covid_measures {
       id
       name
+      is_in_estimates
 
       ${years_with_covid_data}
 
