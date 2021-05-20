@@ -1,11 +1,13 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu.js";
+import { WriteToClipboard } from "src/components/WriteToClipboard";
 
-import { WriteToClipboard } from "src/components/WriteToClipboard.js";
-
-import { create_text_maker_component } from "src/components/misc_util_components.js";
+import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
+import {
+  create_text_maker_component,
+  create_text_maker_component,
+} from "src/components/misc_util_components";
 
 import { backgroundColor } from "src/core/color_defs";
 import { is_IE } from "src/core/feature_detection";
