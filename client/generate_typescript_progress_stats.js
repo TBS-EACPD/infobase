@@ -61,5 +61,6 @@ const final = _.chain(recordsByName)
   })
   .sortBy("name")
   .value();
-
+  
 fs.writeFileSync("./typescript_progress_stats.csv", d3_dsv.csvFormat(final));
+fs.rmSync("./dependencies.json");
