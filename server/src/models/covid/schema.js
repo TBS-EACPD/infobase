@@ -38,7 +38,6 @@ const schema = `
     id: String
 
     name: String
-    is_in_estimates: Boolean
 
     years_with_covid_data: YearsWithCovidData
     covid_data(fiscal_year: Int, org_id: String): [CovidData]
