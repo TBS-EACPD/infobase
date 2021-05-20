@@ -136,3 +136,7 @@ covid_expenditures_stat:
 covid_expenditures_voted:
   en: Estimated Voted Expenditures
   fr: Dépenses votées estimées
+
+covid_toggle_estimate_measure_filter:
+  en: TODO
+  fr: TODO
