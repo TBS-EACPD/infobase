@@ -13,24 +13,28 @@ const Template = (args) => <FootnoteList {...args} />;
 // not completed yet
 const footnotes = [
   {
-    display: "Display 1",
-    href: "",
-    children: [
-      { display: "Child 1", href: "" },
-      { display: "Child 2", href: "" },
-      { display: "Child 3", href: "" },
-    ],
+    text: "text1",
+    year1: "",
+    year2: "",
+    topic_keys: 1,
+    subject: {
+      name: "name1",
+      plural: "plural1",
+    },
   },
   {
-    display: "Display 2",
-    href: "",
-    children: [
-      { display: "Child 1", href: "" },
-      { display: "Child 2", href: "" },
-      { display: "Child 3", href: "" },
-    ],
+    text: "text2",
+    year1: "",
+    year2: "",
+    topic_keys: 2,
+    subject: {
+      name: "name2",
+      plural: "plural2",
+    },
   },
 ];
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {
+  footnotes,
+};
