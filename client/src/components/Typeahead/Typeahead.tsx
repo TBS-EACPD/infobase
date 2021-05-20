@@ -203,7 +203,7 @@ export class Typeahead extends React.Component<
                     className="typeahead__dropdown"
                     role="listbox"
                     id={this.menu_id}
-                    aria-expanded={this.show_menu}
+                    ariaExpanded={this.show_menu}
                     width={width}
                     list_ref={this.virtualized_list_ref}
                     scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
