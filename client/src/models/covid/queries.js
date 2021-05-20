@@ -144,6 +144,7 @@ export const {
 });
 
 const covid_expenditures_fields = `
+  is_in_estimates
   vote
   stat
 `;

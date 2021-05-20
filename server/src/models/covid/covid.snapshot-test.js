@@ -7,6 +7,7 @@ const estimates_fields = `
 `;
 const expenditures_fields = `
   month_last_updated
+  is_in_estimates
   vote
   stat
 `;

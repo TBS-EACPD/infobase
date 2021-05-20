@@ -13,6 +13,7 @@ const expenditures_fields = `
   id: String
 
   month_last_updated: Int
+  is_in_estimates: Boolean
   vote: Float
   stat: Float
 `;

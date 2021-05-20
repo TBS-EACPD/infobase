@@ -22,6 +22,7 @@ export default async function ({ models }) {
       // so for now it's dropped and rolled up here
       ..._.omit(row, ["is_budgetary", "calendar_month"]),
       month_last_updated: +row.calendar_month,
+      is_in_estimates: row.is_in_estimates === "1",
       vote: +row.vote,
       stat: +row.stat,
     }))
@@ -35,8 +36,9 @@ export default async function ({ models }) {
         (memo, row) => ({
           vote: memo.vote + row.vote,
           stat: memo.stat + row.stat,
+          is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
         }),
-        { vote: 0, stat: 0 }
+        { vote: 0, stat: 0, is_in_estimates: true }
       ),
     }))
     .map()
@@ -134,8 +136,9 @@ export default async function ({ models }) {
             (memo, row) => ({
               vote: memo.vote + row.vote,
               stat: memo.stat + row.stat,
+              is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
             }),
-            { vote: 0, stat: 0 }
+            { vote: 0, stat: 0, is_in_estimates: true }
           )
           .assign({
             month_last_updated:
@@ -172,8 +175,9 @@ export default async function ({ models }) {
         (memo, row) => ({
           vote: memo.vote + row.vote,
           stat: memo.stat + row.stat,
+          is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
         }),
-        { vote: 0, stat: 0 }
+        { vote: 0, stat: 0, is_in_estimates: true }
       )
       .assign({
         month_last_updated:
