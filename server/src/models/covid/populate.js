@@ -109,6 +109,7 @@ export default async function ({ models }) {
 
       return new CovidMeasure({
         ...row,
+        is_in_estimates: row.is_in_estimates === "1",
         related_org_ids,
         covid_data,
       });
