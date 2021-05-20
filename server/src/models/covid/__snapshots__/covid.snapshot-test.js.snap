@@ -62,6 +62,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "133",
@@ -72,6 +73,7 @@ Object {
                   "vote": 3,
                 },
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "326",
@@ -82,6 +84,7 @@ Object {
                   "vote": 4,
                 },
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "552",
@@ -169,6 +172,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "133",
@@ -179,6 +183,7 @@ Object {
                   "vote": 3,
                 },
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "326",
@@ -189,6 +194,7 @@ Object {
                   "vote": 4,
                 },
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "552",
@@ -208,6 +214,7 @@ Object {
               2021,
             ],
             "years_with_expenditures": Array [
+              2019,
               2020,
             ],
           },
@@ -267,7 +274,30 @@ Object {
                   "vote": 0,
                 },
               ],
-              "covid_expenditures": Array [],
+              "covid_expenditures": Array [
+                Object {
+                  "is_in_estimates": false,
+                  "month_last_updated": 3,
+                  "org": Object {
+                    "id": "133",
+                    "name": "National Defence",
+                  },
+                  "org_id": "133",
+                  "stat": 2,
+                  "vote": 3,
+                },
+                Object {
+                  "is_in_estimates": false,
+                  "month_last_updated": 3,
+                  "org": Object {
+                    "id": "552",
+                    "name": "Polar Knowledge Canada",
+                  },
+                  "org_id": "552",
+                  "stat": 6,
+                  "vote": 6,
+                },
+              ],
               "fiscal_year": 2020,
             },
             Object {
@@ -285,6 +315,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 5,
                   "org": Object {
                     "id": "552",
@@ -354,7 +385,30 @@ Object {
                   "vote": 0,
                 },
               ],
-              "covid_expenditures": Array [],
+              "covid_expenditures": Array [
+                Object {
+                  "is_in_estimates": false,
+                  "month_last_updated": 3,
+                  "org": Object {
+                    "id": "133",
+                    "name": "National Defence",
+                  },
+                  "org_id": "133",
+                  "stat": 2,
+                  "vote": 3,
+                },
+                Object {
+                  "is_in_estimates": false,
+                  "month_last_updated": 3,
+                  "org": Object {
+                    "id": "552",
+                    "name": "Polar Knowledge Canada",
+                  },
+                  "org_id": "552",
+                  "stat": 6,
+                  "vote": 6,
+                },
+              ],
               "fiscal_year": 2020,
             },
           ],
@@ -364,6 +418,7 @@ Object {
               2021,
             ],
             "years_with_expenditures": Array [
+              2020,
               2021,
             ],
           },
@@ -395,6 +450,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "133",
@@ -405,6 +461,7 @@ Object {
                   "vote": 0,
                 },
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "326",
@@ -462,6 +519,7 @@ Object {
               ],
               "covid_expenditures": Array [
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "133",
@@ -472,6 +530,7 @@ Object {
                   "vote": 0,
                 },
                 Object {
+                  "is_in_estimates": true,
                   "month_last_updated": 3,
                   "org": Object {
                     "id": "326",
@@ -531,15 +590,16 @@ Object {
               },
             ],
             "covid_expenditures": Object {
+              "is_in_estimates": false,
               "month_last_updated": 3,
-              "stat": 13,
-              "vote": 12,
+              "stat": 21,
+              "vote": 21,
             },
             "fiscal_year": 2020,
             "measure_counts": Array [
               Object {
                 "with_authorities": 3,
-                "with_spending": 2,
+                "with_spending": 3,
               },
             ],
             "org_counts": Array [
@@ -550,8 +610,8 @@ Object {
             ],
             "top_spending_measures": Array [
               Object {
-                "id": "COV001",
-                "name": "measure 1",
+                "id": "COV002",
+                "name": "measure 2",
               },
             ],
             "top_spending_orgs": Array [
@@ -560,12 +620,12 @@ Object {
                 "org_id": "552",
               },
               Object {
-                "name": "Treasury Board of Canada Secretariat",
-                "org_id": "326",
-              },
-              Object {
                 "name": "National Defence",
                 "org_id": "133",
+              },
+              Object {
+                "name": "Treasury Board of Canada Secretariat",
+                "org_id": "326",
               },
             ],
           },
@@ -583,6 +643,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
+              "is_in_estimates": true,
               "month_last_updated": 5,
               "stat": 999,
               "vote": 7,
@@ -639,15 +700,16 @@ Object {
               },
             ],
             "covid_expenditures": Object {
+              "is_in_estimates": false,
               "month_last_updated": 3,
-              "stat": 13,
-              "vote": 12,
+              "stat": 21,
+              "vote": 21,
             },
             "fiscal_year": 2020,
             "measure_counts": Array [
               Object {
                 "with_authorities": 3,
-                "with_spending": 2,
+                "with_spending": 3,
               },
             ],
             "org_counts": Array [
@@ -658,8 +720,8 @@ Object {
             ],
             "top_spending_measures": Array [
               Object {
-                "id": "COV001",
-                "name": "measure 1",
+                "id": "COV002",
+                "name": "measure 2",
               },
             ],
             "top_spending_orgs": Array [
@@ -668,12 +730,12 @@ Object {
                 "org_id": "552",
               },
               Object {
-                "name": "Treasury Board of Canada Secretariat",
-                "org_id": "326",
-              },
-              Object {
                 "name": "National Defence",
                 "org_id": "133",
+              },
+              Object {
+                "name": "Treasury Board of Canada Secretariat",
+                "org_id": "326",
               },
             ],
           },
@@ -695,6 +757,7 @@ Object {
             2021,
           ],
           "years_with_expenditures": Array [
+            2019,
             2020,
             2021,
           ],
@@ -730,9 +793,10 @@ Object {
               },
             ],
             "covid_expenditures": Object {
+              "is_in_estimates": false,
               "month_last_updated": 3,
-              "stat": 4,
-              "vote": 3,
+              "stat": 6,
+              "vote": 6,
             },
             "fiscal_year": 2020,
           },
@@ -745,6 +809,7 @@ Object {
               },
             ],
             "covid_expenditures": Object {
+              "is_in_estimates": true,
               "month_last_updated": 5,
               "stat": 0,
               "vote": 0,
@@ -773,9 +838,10 @@ Object {
               },
             ],
             "covid_expenditures": Object {
+              "is_in_estimates": false,
               "month_last_updated": 3,
-              "stat": 4,
-              "vote": 3,
+              "stat": 6,
+              "vote": 6,
             },
             "fiscal_year": 2020,
           },
@@ -830,6 +896,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
+                    "is_in_estimates": true,
                     "month_last_updated": 3,
                     "org": Object {
                       "id": "133",
@@ -881,6 +948,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
+                    "is_in_estimates": true,
                     "month_last_updated": 3,
                     "org": Object {
                       "id": "133",
@@ -900,6 +968,7 @@ Object {
                 2021,
               ],
               "years_with_expenditures": Array [
+                2019,
                 2020,
               ],
             },
@@ -919,7 +988,19 @@ Object {
                     "vote": 99,
                   },
                 ],
-                "covid_expenditures": Array [],
+                "covid_expenditures": Array [
+                  Object {
+                    "is_in_estimates": false,
+                    "month_last_updated": 3,
+                    "org": Object {
+                      "id": "133",
+                      "name": "National Defence",
+                    },
+                    "org_id": "133",
+                    "stat": 2,
+                    "vote": 3,
+                  },
+                ],
                 "fiscal_year": 2020,
               },
             ],
@@ -939,7 +1020,19 @@ Object {
                     "vote": 99,
                   },
                 ],
-                "covid_expenditures": Array [],
+                "covid_expenditures": Array [
+                  Object {
+                    "is_in_estimates": false,
+                    "month_last_updated": 3,
+                    "org": Object {
+                      "id": "133",
+                      "name": "National Defence",
+                    },
+                    "org_id": "133",
+                    "stat": 2,
+                    "vote": 3,
+                  },
+                ],
                 "fiscal_year": 2020,
               },
             ],
@@ -949,6 +1042,7 @@ Object {
                 2021,
               ],
               "years_with_expenditures": Array [
+                2020,
                 2021,
               ],
             },
@@ -970,6 +1064,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
+                    "is_in_estimates": true,
                     "month_last_updated": 3,
                     "org": Object {
                       "id": "133",
@@ -1017,6 +1112,7 @@ Object {
                 ],
                 "covid_expenditures": Array [
                   Object {
+                    "is_in_estimates": true,
                     "month_last_updated": 3,
                     "org": Object {
                       "id": "133",
@@ -1097,6 +1193,7 @@ Object {
             2021,
           ],
           "years_with_expenditures": Array [
+            2019,
             2020,
           ],
         },
@@ -1127,6 +1224,7 @@ Object {
             2021,
           ],
           "years_with_expenditures": Array [
+            2019,
             2020,
           ],
         },

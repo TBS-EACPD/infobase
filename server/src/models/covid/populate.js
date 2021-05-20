@@ -13,24 +13,15 @@ export default async function ({ models }) {
     })
   );
 
-  const temporarily_filtered_covid_expenditures_data = _.chain(
-    get_standard_csv_file_rows("covid_expenditures.csv")
-  )
-    .filter(
-      ({ fiscal_year, is_in_estimates }) =>
-        fiscal_year !== "2019" && is_in_estimates === "1"
-    )
-    .map((row) => _.omit(row, "is_in_estimates"))
-    .value();
-
   const covid_expenditures_rows = _.chain(
-    temporarily_filtered_covid_expenditures_data
+    get_standard_csv_file_rows("covid_expenditures.csv")
   )
     .map((row) => ({
       // covid_expenditures.csv contains the bud/non-bud split, but the client doesn't use it yet and supporting it creates lots of room for error,
       // so for now it's dropped and rolled up here
       ..._.omit(row, ["is_budgetary", "calendar_month"]),
       month_last_updated: +row.calendar_month,
+      is_in_estimates: row.is_in_estimates === "1",
       vote: +row.vote,
       stat: +row.stat,
     }))
@@ -44,15 +35,16 @@ export default async function ({ models }) {
         (memo, row) => ({
           vote: memo.vote + row.vote,
           stat: memo.stat + row.stat,
+          is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
         }),
-        { vote: 0, stat: 0 }
+        { vote: 0, stat: 0, is_in_estimates: true }
       ),
     }))
     .map()
     .value();
 
   const covid_expenditures_month_last_updated_by_fiscal_year = _.chain(
-    temporarily_filtered_covid_expenditures_data
+    get_standard_csv_file_rows("covid_expenditures.csv")
   )
     .groupBy("fiscal_year")
     .mapValues((rows, fiscal_year) =>
@@ -142,8 +134,9 @@ export default async function ({ models }) {
             (memo, row) => ({
               vote: memo.vote + row.vote,
               stat: memo.stat + row.stat,
+              is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
             }),
-            { vote: 0, stat: 0 }
+            { vote: 0, stat: 0, is_in_estimates: true }
           )
           .assign({
             month_last_updated:
@@ -180,8 +173,9 @@ export default async function ({ models }) {
         (memo, row) => ({
           vote: memo.vote + row.vote,
           stat: memo.stat + row.stat,
+          is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
         }),
-        { vote: 0, stat: 0 }
+        { vote: 0, stat: 0, is_in_estimates: true }
       )
       .assign({
         month_last_updated:

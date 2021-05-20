@@ -21,6 +21,7 @@ const covid_estimates_fields = {
 };
 const covid_expenditures_fields = {
   month_last_updated: number_type,
+  is_in_estimates: Boolean,
   vote: number_type,
   stat: number_type,
 };
