@@ -16,9 +16,6 @@
     "istanbul-lib-coverage": "^2.0.5",
     "yargs": "^14.2.0"
   },
-  "scripts": {
-    "preinstall": "[ -e 'node_modules' ] || (mkdir node_modules && npm install) # to work as a local dependency, common_node_scripts needs its node_modules installed before it is 'installed' by any local requier-ers, this enforces that (with just the small annoyance of maybe running install twice if directly working in common_node_scripts"
-  },
   "author": "Stephen O'Neil",
   "license": "MIT"
 }

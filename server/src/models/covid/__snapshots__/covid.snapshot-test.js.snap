@@ -10,7 +10,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -40,7 +40,7 @@ Object {
                   "vote": 9,
                 },
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -97,7 +97,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -107,7 +107,7 @@ Object {
                   "vote": 0,
                 },
               ],
-              "covid_expenditures": Array [],
+              "covid_expenditures": CoreDocumentArray [],
               "fiscal_year": 2021,
             },
           ],
@@ -117,7 +117,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -147,7 +147,7 @@ Object {
                   "vote": 9,
                 },
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -203,11 +203,11 @@ Object {
             },
           ],
           "years_with_covid_data": Object {
-            "years_with_estimates": Array [
+            "years_with_estimates": CoreMongooseArray [
               2020,
               2021,
             ],
-            "years_with_expenditures": Array [
+            "years_with_expenditures": CoreMongooseArray [
               2020,
             ],
           },
@@ -217,7 +217,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -325,7 +325,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -401,11 +401,11 @@ Object {
             },
           ],
           "years_with_covid_data": Object {
-            "years_with_estimates": Array [
+            "years_with_estimates": CoreMongooseArray [
               2020,
               2021,
             ],
-            "years_with_expenditures": Array [
+            "years_with_expenditures": CoreMongooseArray [
               2020,
               2021,
             ],
@@ -416,7 +416,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -463,7 +463,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -473,7 +473,7 @@ Object {
                   "vote": 9,
                 },
               ],
-              "covid_expenditures": Array [],
+              "covid_expenditures": CoreDocumentArray [],
               "fiscal_year": 2021,
             },
           ],
@@ -483,7 +483,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -529,11 +529,11 @@ Object {
             },
           ],
           "years_with_covid_data": Object {
-            "years_with_estimates": Array [
+            "years_with_estimates": CoreMongooseArray [
               2020,
               2021,
             ],
-            "years_with_expenditures": Array [
+            "years_with_expenditures": CoreMongooseArray [
               2020,
             ],
           },
@@ -551,9 +551,9 @@ Object {
       "gov": Object {
         "all_year_summaries": Array [
           Object {
-            "covid_estimates": Array [
+            "covid_estimates": CoreDocumentArray [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 1007,
                 "vote": 1107,
               },
@@ -579,13 +579,13 @@ Object {
               "vote": 21,
             },
             "fiscal_year": 2020,
-            "measure_counts": Array [
+            "measure_counts": CoreDocumentArray [
               Object {
                 "with_authorities": 3,
                 "with_spending": 3,
               },
             ],
-            "org_counts": Array [
+            "org_counts": CoreDocumentArray [
               Object {
                 "with_authorities": 4,
                 "with_spending": 3,
@@ -613,9 +613,9 @@ Object {
             ],
           },
           Object {
-            "covid_estimates": Array [
+            "covid_estimates": CoreDocumentArray [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 999,
                 "vote": 9,
               },
@@ -631,13 +631,13 @@ Object {
               "vote": 7,
             },
             "fiscal_year": 2021,
-            "measure_counts": Array [
+            "measure_counts": CoreDocumentArray [
               Object {
                 "with_authorities": 3,
                 "with_spending": 1,
               },
             ],
-            "org_counts": Array [
+            "org_counts": CoreDocumentArray [
               Object {
                 "with_authorities": 3,
                 "with_spending": 1,
@@ -659,9 +659,9 @@ Object {
         ],
         "one_year_summary": Array [
           Object {
-            "covid_estimates": Array [
+            "covid_estimates": CoreDocumentArray [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 1007,
                 "vote": 1107,
               },
@@ -687,13 +687,13 @@ Object {
               "vote": 21,
             },
             "fiscal_year": 2020,
-            "measure_counts": Array [
+            "measure_counts": CoreDocumentArray [
               Object {
                 "with_authorities": 3,
                 "with_spending": 3,
               },
             ],
-            "org_counts": Array [
+            "org_counts": CoreDocumentArray [
               Object {
                 "with_authorities": 4,
                 "with_spending": 3,
@@ -733,11 +733,11 @@ Object {
     "root": Object {
       "gov": Object {
         "years_with_covid_data": Object {
-          "years_with_estimates": Array [
+          "years_with_estimates": CoreMongooseArray [
             2020,
             2021,
           ],
-          "years_with_expenditures": Array [
+          "years_with_expenditures": CoreMongooseArray [
             2020,
             2021,
           ],
@@ -755,9 +755,9 @@ Object {
       "org": Object {
         "all_year_summaries": Array [
           Object {
-            "covid_estimates": Array [
+            "covid_estimates": CoreDocumentArray [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 8,
                 "vote": 1107,
               },
@@ -780,9 +780,9 @@ Object {
             "fiscal_year": 2020,
           },
           Object {
-            "covid_estimates": Array [
+            "covid_estimates": CoreDocumentArray [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 0,
                 "vote": 9,
               },
@@ -798,9 +798,9 @@ Object {
         "name": "National Defence",
         "one_year_summary": Array [
           Object {
-            "covid_estimates": Array [
+            "covid_estimates": CoreDocumentArray [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 8,
                 "vote": 1107,
               },
@@ -841,7 +841,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -892,7 +892,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -938,11 +938,11 @@ Object {
               },
             ],
             "years_with_covid_data": Object {
-              "years_with_estimates": Array [
+              "years_with_estimates": CoreMongooseArray [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": Array [
+              "years_with_expenditures": CoreMongooseArray [
                 2020,
               ],
             },
@@ -952,7 +952,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -983,7 +983,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1009,11 +1009,11 @@ Object {
               },
             ],
             "years_with_covid_data": Object {
-              "years_with_estimates": Array [
+              "years_with_estimates": CoreMongooseArray [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": Array [
+              "years_with_expenditures": CoreMongooseArray [
                 2020,
                 2021,
               ],
@@ -1024,7 +1024,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1051,7 +1051,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1071,7 +1071,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1097,11 +1097,11 @@ Object {
               },
             ],
             "years_with_covid_data": Object {
-              "years_with_estimates": Array [
+              "years_with_estimates": CoreMongooseArray [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": Array [
+              "years_with_expenditures": CoreMongooseArray [
                 2020,
               ],
             },
@@ -1113,7 +1113,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1130,11 +1130,11 @@ Object {
             "id": "COV003",
             "name": "measure 3",
             "years_with_covid_data": Object {
-              "years_with_estimates": Array [
+              "years_with_estimates": CoreMongooseArray [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": Array [
+              "years_with_expenditures": CoreMongooseArray [
                 2020,
               ],
             },
@@ -1158,21 +1158,21 @@ Object {
       },
       "has_data": Object {
         "years_with_covid_data": Object {
-          "years_with_estimates": Array [
+          "years_with_estimates": CoreMongooseArray [
             2020,
             2021,
           ],
-          "years_with_expenditures": Array [
+          "years_with_expenditures": CoreMongooseArray [
             2020,
           ],
         },
       },
       "only_has_estimates": Object {
         "years_with_covid_data": Object {
-          "years_with_estimates": Array [
+          "years_with_estimates": CoreMongooseArray [
             2020,
           ],
-          "years_with_expenditures": Array [],
+          "years_with_expenditures": CoreMongooseArray [],
         },
       },
     },
@@ -1188,11 +1188,11 @@ Object {
         "id": "COV001",
         "name": "measure 1",
         "years_with_covid_data": Object {
-          "years_with_estimates": Array [
+          "years_with_estimates": CoreMongooseArray [
             2020,
             2021,
           ],
-          "years_with_expenditures": Array [
+          "years_with_expenditures": CoreMongooseArray [
             2020,
           ],
         },

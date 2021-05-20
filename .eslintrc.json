@@ -4,7 +4,7 @@
     "import",
     "lodash"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": [ "eslint:recommended" , "plugin:import/warnings", "plugin:import/errors"],
   "rules": {
     "no-unused-vars": [

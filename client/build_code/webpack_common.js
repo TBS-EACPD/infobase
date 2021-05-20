@@ -33,7 +33,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           [
             "@babel/preset-env",
             {
-              useBuiltIns: false,
+              useBuiltIns: "usage",
+              corejs: { version: "3.12", proposals: true },
               modules: false,
               targets: target_ie11 ? "IE 11" : "last 2 Chrome versions",
               forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying

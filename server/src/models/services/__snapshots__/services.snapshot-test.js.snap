@@ -407,7 +407,7 @@ Object {
 
 The classification accreditation responds to the requirement of the Policy on Classification that allows the Deputy Head to sub-delegate the authority to make classification decision only to accredited advisors. The OCHRO provides advice on the assessment of accreditation applications and assesses the applications once completed.",
             "digital_enablement_comment": "The following client interaction points are available through email or online (GConnex): requests for advice and guidance; accreditation submissions; follow-up questions and actions; and issuance of accreditation certificates.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Telephone",
               "Email",
               "Postal Mail",
@@ -425,7 +425,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-BXC01",
               "TBC-ISS04",
             ],
@@ -437,10 +437,10 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "Human Resources Management Services - Treasury Board Secretariat",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "Internal Enterprise Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -455,14 +455,14 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Human Resources Management",
             ],
-            "standards": Array [],
-            "target_groups": Array [
+            "standards": CoreDocumentArray [],
+            "target_groups": CoreMongooseArray [
               "Internal to Government",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "",
             ],
           },
@@ -474,7 +474,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "decision_digital_status": null,
             "description": "Answers queries from the general public, as well as federal government employees.",
             "digital_enablement_comment": "This service does not use these client interaction points.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Other",
             ],
             "first_active_year": "2018",
@@ -489,7 +489,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-ISS02",
             ],
             "programs": Array [
@@ -497,10 +497,10 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "Communications Services - Treasury Board Secretariat",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "External Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -515,11 +515,11 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Communications Services",
             ],
-            "standards": Array [],
-            "target_groups": Array [
+            "standards": CoreDocumentArray [],
+            "target_groups": CoreMongooseArray [
               "Economic Segments",
               "Environmental",
               "Foreign Entities",
@@ -527,7 +527,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "Persons",
               "Provinces, Territories and Communities",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "https://www.canada.ca/en/treasury-board-secretariat.html",
               "https://www.canada.ca/en/treasury-board-secretariat/corporate/contact.html",
               "https://open.canada.ca/en/forms/contact-us",
@@ -541,7 +541,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "decision_digital_status": true,
             "description": "This service is in place to compensate employees who have incurred expenses or financial losses because of the implementation of the Phoenix pay system.",
             "digital_enablement_comment": "This service does not use online account registration and enrolment.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Telephone",
               "Email",
             ],
@@ -557,7 +557,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-BXB01",
             ],
             "programs": Array [
@@ -565,10 +565,10 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "Financial Management Policies and Initiatives",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "Internal Enterprise Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -583,21 +583,21 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Advisory Services",
             ],
-            "standards": Array [
+            "standards": CoreDocumentArray [
               Object {
                 "channel": "Other",
                 "last_gcss_tool_year": "2017",
                 "name": "Acknowledge the receipt of all claims within one business day.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1361",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -617,12 +617,12 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "last_gcss_tool_year": "2017",
                 "name": "Provide a recommendation within 10 business days.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1577",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -642,12 +642,12 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "last_gcss_tool_year": "2017",
                 "name": "Provide a recommendation within 60 business days for claims related to income taxes and benefits.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1578",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -667,12 +667,12 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "last_gcss_tool_year": "2017",
                 "name": "Provide a recommendation within 60 business days for very complex claims.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1579",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -688,11 +688,11 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "urls": null,
               },
             ],
-            "target_groups": Array [
+            "target_groups": CoreMongooseArray [
               "Internal to Government",
               "Persons",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "https://www.canada.ca/en/treasury-board-secretariat/topics/pay/phoenix-pay-system/phoenix.html",
             ],
           },
@@ -704,7 +704,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "decision_digital_status": null,
             "description": "Provide human resources data engineering and analytics services for corporate reporting and employer accountabilities",
             "digital_enablement_comment": "This service is internal to government. For online requests, clients must have a Government of Canada email account, and must register online. No monetary payments are required from clients. At any point in time, client may also email a generic mailbox for any questions they may have regarding their requests and/or making requests in general. This service does not use online decision and issuance functions.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Telephone",
               "In-Person",
               "Email",
@@ -722,7 +722,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-ISS04",
               "TBC-BXC03",
             ],
@@ -734,10 +734,10 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "People Management Policies and Initiatives",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "Internal Enterprise Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -752,15 +752,15 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Human Resources Management",
               "Management and Oversight Services",
             ],
-            "standards": Array [],
-            "target_groups": Array [
+            "standards": CoreDocumentArray [],
+            "target_groups": CoreMongooseArray [
               "Internal to Government",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "https://publiservice.ochro-bdprh.tbs-sct.gc.ca/pimart-oragip/home-eng.aspx",
             ],
           },
@@ -772,7 +772,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "decision_digital_status": null,
             "description": "The Open Government Portal provides a mechanism for members of the public to request data and information to be included in the Open Government Portal.",
             "digital_enablement_comment": "This service does not use online authentication, application, decision or issuance functions.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Email",
             ],
             "first_active_year": "2018",
@@ -787,7 +787,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-ISS07",
             ],
             "programs": Array [
@@ -795,10 +795,10 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "Information Technology Services - Treasury Board Secretariat",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "External Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -813,18 +813,18 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Resources",
             ],
-            "standards": Array [],
-            "target_groups": Array [
+            "standards": CoreDocumentArray [],
+            "target_groups": CoreMongooseArray [
               "Environmental",
               "Internal to Government",
               "Non-Profit Institutions and Organizations",
               "Persons",
               "Provinces, Territories and Communities",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "https://open.canada.ca/en/forms/suggest-dataset",
             ],
           },
@@ -836,7 +836,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
             "decision_digital_status": null,
             "description": "This service enables institutions subject to the Access to Information Act and the Privacy Act to receive and respond to Access to Information and Privacy (ATIP) requests, including fees collected electronically (where applicable).",
             "digital_enablement_comment": "This service does not use the decision interaction point.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Telephone",
               "Email",
               "Postal Mail",
@@ -854,7 +854,7 @@ The classification accreditation responds to the requirement of the Policy on Cl
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-ISS07",
             ],
             "programs": Array [
@@ -862,10 +862,10 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "Information Technology Services - Treasury Board Secretariat",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "Internal Enterprise Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -880,15 +880,15 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Regulatory Compliance and Enforcement",
               "Information Technology Services",
             ],
-            "standards": Array [],
-            "target_groups": Array [
+            "standards": CoreDocumentArray [],
+            "target_groups": CoreMongooseArray [
               "Internal to Government",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "https://www.canada.ca/en/treasury-board-secretariat/services/access-information-privacy/access-information/request-information.html",
             ],
           },
@@ -913,7 +913,7 @@ Object {
             "decision_digital_status": true,
             "description": "This service is in place to compensate employees who have incurred expenses or financial losses because of the implementation of the Phoenix pay system.",
             "digital_enablement_comment": "This service does not use online account registration and enrolment.",
-            "feedback_channels": Array [
+            "feedback_channels": CoreMongooseArray [
               "Telephone",
               "Email",
             ],
@@ -929,7 +929,7 @@ Object {
               "name": "Treasury Board of Canada Secretariat",
             },
             "org_id": "326",
-            "program_ids": Array [
+            "program_ids": CoreMongooseArray [
               "TBC-BXB01",
             ],
             "programs": Array [
@@ -937,10 +937,10 @@ Object {
                 "name": "Financial Management Policies and Initiatives",
               },
             ],
-            "scope": Array [
+            "scope": CoreMongooseArray [
               "Internal Enterprise Service",
             ],
-            "service_report": Array [
+            "service_report": CoreDocumentArray [
               Object {
                 "cra_business_ids_collected": null,
                 "live_application_count": null,
@@ -955,21 +955,21 @@ Object {
                 "year": "2018",
               },
             ],
-            "service_type": Array [
+            "service_type": CoreMongooseArray [
               "Advisory Services",
             ],
-            "standards": Array [
+            "standards": CoreDocumentArray [
               Object {
                 "channel": "Other",
                 "last_gcss_tool_year": "2017",
                 "name": "Acknowledge the receipt of all claims within one business day.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1361",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -989,12 +989,12 @@ Object {
                 "last_gcss_tool_year": "2017",
                 "name": "Provide a recommendation within 10 business days.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1577",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -1014,12 +1014,12 @@ Object {
                 "last_gcss_tool_year": "2017",
                 "name": "Provide a recommendation within 60 business days for claims related to income taxes and benefits.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1578",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -1039,12 +1039,12 @@ Object {
                 "last_gcss_tool_year": "2017",
                 "name": "Provide a recommendation within 60 business days for very complex claims.",
                 "other_type_comment": "The service standard is administered by email.",
-                "rtp_urls": Array [
+                "rtp_urls": CoreMongooseArray [
                   "",
                 ],
                 "service_id": "1348",
                 "standard_id": "1579",
-                "standard_report": Array [
+                "standard_report": CoreDocumentArray [
                   Object {
                     "count": 0,
                     "is_target_met": true,
@@ -1060,11 +1060,11 @@ Object {
                 "urls": null,
               },
             ],
-            "target_groups": Array [
+            "target_groups": CoreMongooseArray [
               "Internal to Government",
               "Persons",
             ],
-            "urls": Array [
+            "urls": CoreMongooseArray [
               "https://www.canada.ca/en/treasury-board-secretariat/topics/pay/phoenix-pay-system/phoenix.html",
             ],
           },
@@ -1087,7 +1087,7 @@ Object {
         "decision_digital_status": null,
         "description": "Answers queries from the general public, as well as federal government employees.",
         "digital_enablement_comment": "This service does not use these client interaction points.",
-        "feedback_channels": Array [
+        "feedback_channels": CoreMongooseArray [
           "Other",
         ],
         "first_active_year": "2018",
@@ -1102,7 +1102,7 @@ Object {
           "name": "Treasury Board of Canada Secretariat",
         },
         "org_id": "326",
-        "program_ids": Array [
+        "program_ids": CoreMongooseArray [
           "TBC-ISS02",
         ],
         "programs": Array [
@@ -1110,10 +1110,10 @@ Object {
             "name": "Communications Services - Treasury Board Secretariat",
           },
         ],
-        "scope": Array [
+        "scope": CoreMongooseArray [
           "External Service",
         ],
-        "service_report": Array [
+        "service_report": CoreDocumentArray [
           Object {
             "cra_business_ids_collected": null,
             "live_application_count": null,
@@ -1128,11 +1128,11 @@ Object {
             "year": "2018",
           },
         ],
-        "service_type": Array [
+        "service_type": CoreMongooseArray [
           "Communications Services",
         ],
-        "standards": Array [],
-        "target_groups": Array [
+        "standards": CoreDocumentArray [],
+        "target_groups": CoreMongooseArray [
           "Economic Segments",
           "Environmental",
           "Foreign Entities",
@@ -1140,7 +1140,7 @@ Object {
           "Persons",
           "Provinces, Territories and Communities",
         ],
-        "urls": Array [
+        "urls": CoreMongooseArray [
           "https://www.canada.ca/en/treasury-board-secretariat.html",
           "https://www.canada.ca/en/treasury-board-secretariat/corporate/contact.html",
           "https://open.canada.ca/en/forms/contact-us",
