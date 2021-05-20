@@ -11,9 +11,24 @@ export default {
 
 const Template = (args) => <SpinnerWrapper {...args} />;
 
+export const Initial = Template.bind({});
+export const Route = Template.bind({});
+export const SubRoute = Template.bind({});
 export const SmallInline = Template.bind({});
-export const BasicLeaf = Template.bind({});
+export const TabbedContent = Template.bind({});
 export const NonLeafSpinner = Template.bind({});
+
+Initial.args = {
+  config_name: "initial",
+};
+
+Route.args = {
+  config_name: "route",
+};
+
+SubRoute.args = {
+  config_name: "sub_route",
+};
 
 SmallInline.args = {
   config_name: "small_inline",
@@ -34,7 +49,7 @@ SmallInline.decorators = [
       <div className="outer-container" style={{ position: "relative" }}>
         <div
           className="inner-container"
-          style={{ position: "absolute", left: "2em", padding: "2em 0em" }}
+          style={{ position: "absolute", left: "2em", top: "2em" }}
         >
           <Story />
         </div>
@@ -43,10 +58,8 @@ SmallInline.decorators = [
   },
 ];
 
-BasicLeaf.args = {
-  // config_name: "tabbed_content",
-  scale: 10,
-  use_leaf_spinner: true,
+TabbedContent.args = {
+  config_name: "tabbed_content",
 };
 
 NonLeafSpinner.args = {

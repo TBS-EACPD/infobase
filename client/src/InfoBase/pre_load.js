@@ -1,4 +1,5 @@
 import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
+// eslint-disable-next-line import/no-unresolved
 import "src/components/LeafSpinner.scss";
 
 export default function () {
