@@ -112,7 +112,6 @@ Object {
             },
           ],
           "id": "COV001",
-          "is_in_estimates": true,
           "name": "measure 1",
           "one_year_covid_data": Array [
             Object {
@@ -300,7 +299,6 @@ Object {
             },
           ],
           "id": "COV002",
-          "is_in_estimates": true,
           "name": "measure 2",
           "one_year_covid_data": Array [
             Object {
@@ -437,7 +435,6 @@ Object {
             },
           ],
           "id": "COV003",
-          "is_in_estimates": false,
           "name": "measure 3",
           "one_year_covid_data": Array [
             Object {
