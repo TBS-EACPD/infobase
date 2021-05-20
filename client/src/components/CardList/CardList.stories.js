@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { CardList } from "./CardList.js";
+import { CardList } from "./CardList";
 
 export default {
   title: "CardList",

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FocusLockedModal } from "./FocusLockedModal.js";
+import { FocusLockedModal } from "./FocusLockedModal";
 
 export default {
   title: "FocusLockedModal",

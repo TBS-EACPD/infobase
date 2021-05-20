@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { primaryColor, secondaryColor } from "src/core/color_defs.js";
+import { primaryColor, secondaryColor } from "src/core/color_defs";
 
-import { SortDirection } from "./SortDirection.js";
+import { SortDirection } from "./SortDirection";
 
 export default {
   title: "SortDirection",

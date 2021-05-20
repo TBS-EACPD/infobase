@@ -1,8 +1,8 @@
 import React from "react";
 
-import { trivial_text_maker } from "src/models/text.js";
+import { trivial_text_maker } from "src/models/text";
 
-import { CardImage } from "./CardImage.js";
+import { CardImage } from "./CardImage";
 
 export default {
   title: "CardImage",

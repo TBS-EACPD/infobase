@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Countdown } from "./Countdown.js";
+import { Countdown } from "./Countdown";
 
 export default {
   title: "Countdown",
