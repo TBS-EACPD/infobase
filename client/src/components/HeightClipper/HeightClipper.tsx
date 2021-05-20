@@ -1,6 +1,6 @@
 import _ from "lodash";
-import ReactDOM from "react-dom";
 import React from "react";
+import ReactDOM from "react-dom";
 
 import { TM } from "src/components/TextMaker";
 
