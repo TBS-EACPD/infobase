@@ -9,6 +9,7 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
+  CheckBox,
 } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
@@ -43,6 +44,51 @@ import text from "./covid_expenditures.yaml";
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const panel_key = "covid_expenditures_panel";
+
+class ToggleEstimatesMeasuresFilterProvider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter_non_estimates_measures:
+        !!this.props.initial_filter_non_estimates_measures,
+    };
+  }
+  toggle_filter_non_estimates_measures = () =>
+    this.setState({
+      filter_non_estimates_measures: !this.state.filter_non_estimates_measures,
+    });
+  render() {
+    const { filter_non_estimates_measures } = this.state;
+    const { Inner, inner_props } = this.props;
+
+    const ToggleEstimatesMeasuresFilter = () => (
+      <CheckBox
+        active={filter_non_estimates_measures}
+        onClick={this.toggle_filter_non_estimates_measures}
+        label={<TM k="covid_toggle_estimate_measure_filter" />}
+        container_style={{ justifyContent: "flex-end", marginBottom: "-15px" }}
+      />
+    );
+
+    return (
+      <Inner
+        {...{
+          ...inner_props,
+          filter_non_estimates_measures,
+          ToggleEstimatesMeasuresFilter,
+        }}
+      />
+    );
+  }
+}
+const wrap_with_measure_filter_and_vote_stat_controls =
+  (Component) => (props) =>
+    (
+      <ToggleEstimatesMeasuresFilterProvider
+        Inner={wrap_with_vote_stat_controls(Component)}
+        inner_props={props}
+      />
+    );
 
 const SummaryTab = ({ args: panel_args, data }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
@@ -165,8 +211,15 @@ const get_common_column_configs = (show_vote_stat) => ({
   },
 });
 
-const ByDepartmentTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
+  ({
+    filter_non_estimates_measures,
+    ToggleEstimatesMeasuresFilter,
+    show_vote_stat,
+    ToggleVoteStat,
+    args: panel_args,
+    data,
+  }) => {
     const pre_sorted_rows = get_expenditures_by_index(data, "org_id");
 
     const column_configs = {
@@ -210,7 +263,16 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           }}
           className="medium-panel-text"
         />
-        <ToggleVoteStat />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          <ToggleEstimatesMeasuresFilter />
+          <ToggleVoteStat />
+        </div>
         <DisplayTable
           data={pre_sorted_rows}
           column_configs={column_configs}
@@ -223,8 +285,15 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
   }
 );
 
-const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
+  ({
+    filter_non_estimates_measures,
+    ToggleEstimatesMeasuresFilter,
+    show_vote_stat,
+    ToggleVoteStat,
+    args: panel_args,
+    data,
+  }) => {
     const pre_sorted_rows_with_measure_names = _.chain(
       get_expenditures_by_index(data, "measure_id")
     )
@@ -272,7 +341,16 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           args={text_args}
           className="medium-panel-text"
         />
-        <ToggleVoteStat />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          <ToggleEstimatesMeasuresFilter />
+          <ToggleVoteStat />
+        </div>
         <DisplayTable
           data={pre_sorted_rows_with_measure_names}
           column_configs={column_configs}

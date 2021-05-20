@@ -52,6 +52,7 @@ export const { query_all_covid_measures, useAllCovidMeasures } = query_factory({
         covid_measures {
           id
           name
+          is_in_estimates
         }
       }
     }
