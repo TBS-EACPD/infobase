@@ -32,7 +32,6 @@ SubRoute.args = {
 
 SmallInline.args = {
   config_name: "small_inline",
-  scale: 1,
 };
 SmallInline.parameters = {
   backgrounds: {
