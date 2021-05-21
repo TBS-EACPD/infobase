@@ -12,7 +12,7 @@ interface CommonDetailsProps {
   persist_content?: boolean;
 }
 interface StatelessDetailsProps extends CommonDetailsProps {
-  on_click: React.MouseEventHandler<HTMLButtonElement>;
+  on_click: React.ReactEventHandler<HTMLButtonElement>;
   is_open: boolean;
 }
 interface DetailsProps extends CommonDetailsProps {
