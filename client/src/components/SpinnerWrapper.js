@@ -10,7 +10,10 @@ export class SpinnerWrapper extends React.Component {
     return !this.props.use_leaf_spinner ? (
       <div ref="main" />
     ) : (
-      <LeafSpinner config_name={this.props.config_name} />
+      <LeafSpinner
+        config_name={this.props.config_name}
+        spinner_scale={this.props.scale}
+      />
     );
   }
 

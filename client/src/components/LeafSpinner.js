@@ -6,7 +6,7 @@ import { primaryColor, secondaryColor } from "src/core/color_defs";
 import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
 import "./LeafSpinner.scss";
 
-export const LeafSpinner = ({ config_name }) => {
+export const LeafSpinner = ({ config_name, spinner_scale }) => {
   const default_spinner_config_form = (scale) => ({
     outer_positioning: "default",
     spinner_container_style: {
@@ -17,6 +17,7 @@ export const LeafSpinner = ({ config_name }) => {
   });
 
   const leaf_spinner_configs = {
+    no_config_name: default_spinner_config_form(spinner_scale),
     initial: default_spinner_config_form(2),
     route: default_spinner_config_form(2),
     sub_route: default_spinner_config_form(2),
