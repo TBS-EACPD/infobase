@@ -2,12 +2,19 @@ import _ from "lodash";
 import React from "react";
 
 import { CheckBox } from "src/components/index";
+
+import { StaticLegendItemType } from "./LegendItemType";
 import "./TabularLegend.scss";
 
+interface TabularLegendProps {
+  items: StaticLegendItemType[];
+  get_right_content: (item: StaticLegendItemType) => React.ReactNode;
+}
+
 export const TabularLegend = ({
-  items, // [ { id, label, color }]
-  get_right_content, //item => react element
-}) => (
+  items,
+  get_right_content,
+}: TabularLegendProps) => (
   <ul className="list-unstyled">
     {_.map(items, (item) => (
       <li key={item.id} className="tabular-legend__list-el">
