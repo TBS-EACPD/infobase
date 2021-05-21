@@ -4,7 +4,6 @@ import React from "react";
 
 import { lang } from "src/core/injected_build_constants";
 
-// eslint-disable-next-line import/no-unresolved
 import "./TabbedContent.scss";
 
 export class TabbedControls extends React.Component {
