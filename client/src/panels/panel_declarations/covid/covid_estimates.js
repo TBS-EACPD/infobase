@@ -171,9 +171,11 @@ const SummaryTab = ({ args: panel_args, data }) => {
       <div className="col-12 col-lg-6">
         {!is_a11y_mode && (
           <StandardLegend
-            items={legend_items}
-            isHorizontal={true}
-            LegendCheckBoxProps={{ isSolidBox: true }}
+            legendListProps={{
+              items: legend_items,
+              isHorizontal: true,
+              checkBoxProps: { isSolidBox: true },
+            }}
           />
         )}
         {graph_content}

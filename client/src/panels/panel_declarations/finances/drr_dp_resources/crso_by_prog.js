@@ -123,19 +123,22 @@ class PlannedProgramResources extends React.Component {
           {!is_a11y_mode && (
             <div className="col-12 col-lg-4" style={{ width: "100%" }}>
               <StandardLegend
-                items={_.map(programs, ({ label }) => ({
-                  label,
-                  id: label,
-                  active: _.includes(active_programs, label),
-                  color: colors(label),
-                }))}
-                onClick={(id) => {
-                  !(
-                    active_programs.length === 1 && active_programs.includes(id)
-                  ) &&
-                    this.setState({
-                      active_programs: toggle_list(active_programs, id),
-                    });
+                legendListProps={{
+                  items: _.map(programs, ({ label }) => ({
+                    label,
+                    id: label,
+                    active: _.includes(active_programs, label),
+                    color: colors(label),
+                  })),
+                  onClick: (id) => {
+                    !(
+                      active_programs.length === 1 &&
+                      active_programs.includes(id)
+                    ) &&
+                      this.setState({
+                        active_programs: toggle_list(active_programs, id),
+                      });
+                  },
                 }}
               />
             </div>

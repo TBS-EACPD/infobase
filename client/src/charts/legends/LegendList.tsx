@@ -6,25 +6,20 @@ import { CheckBox, CheckBoxProps } from "src/components/CheckBox/CheckBox";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import type { LegendItemType } from "./LegendItemType";
+
 import "./LegendList.scss";
 
-interface LegendItemProps {
-  active: boolean;
-  id: string | number;
-  label: string;
-  color?: string;
-}
-
-interface LegendListProps {
+export interface LegendListProps {
   isHorizontal?: boolean;
-  items: LegendItemProps[];
+  items: LegendItemType[];
   onClick: Function;
   checkBoxProps?: CheckBoxProps;
 }
 
 export const LegendList = ({
   isHorizontal = false,
-  items, //required: [ {active, id, label, color} ]
+  items,
 
   // pass-through props for internal CheckBox component; see CheckBox for options, defaults
   onClick,

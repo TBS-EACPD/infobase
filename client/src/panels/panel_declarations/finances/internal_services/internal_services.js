@@ -154,8 +154,10 @@ export const declare_internal_services_panel = () =>
               {!is_a11y_mode && (
                 <div className="col-12 col-lg-3">
                   <StandardLegend
-                    items={legend_items}
-                    LegendCheckBoxProps={{ isSolidBox: true }}
+                    legendListProps={{
+                      items: legend_items,
+                      checkBoxProps: { isSolidBox: true },
+                    }}
                   />
                 </div>
               )}

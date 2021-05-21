@@ -177,21 +177,22 @@ const ServicesChannelsPanel = ({ subject }) => {
           </div>
           <div className="col-12 col-lg-4">
             <StandardLegend
-              items={_.chain(data)
-                .map(({ id, name }) => ({
-                  id,
-                  label: name,
-                  color: colors(name),
-                  active: active_services[id],
-                }))
-                .sortBy("label")
-                .value()}
-              onClick={(id) =>
-                set_active_services({
-                  ...active_services,
-                  [id]: !active_services[id],
-                })
-              }
+              legendListProps={{
+                items: _.chain(data)
+                  .map(({ id, name }) => ({
+                    id,
+                    label: name,
+                    color: colors(name),
+                    active: active_services[id],
+                  }))
+                  .sortBy("label")
+                  .value(),
+                onClick: (id) =>
+                  set_active_services({
+                    ...active_services,
+                    [id]: !active_services[id],
+                  }),
+              }}
               Controls={
                 <SelectAllControl
                   SelectAllOnClick={() =>

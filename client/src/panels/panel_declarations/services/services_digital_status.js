@@ -137,16 +137,17 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
       ) : (
         <Fragment>
           <StandardLegend
-            items={_.map(
-              [can_online, cannot_online, not_applicable],
-              (key) => ({
-                id: key,
-                label: key,
-                color: colors(key),
-              })
-            )}
-            isHorizontal
-            LegendCheckBoxProps={{ isSolidBox: true }}
+            legendListProps={{
+              items: _.map(
+                [can_online, cannot_online, not_applicable],
+                (key) => ({
+                  id: key,
+                  label: key,
+                  color: colors(key),
+                })
+              ),
+              LegendCheckBoxProps: { isSolidBox: true },
+            }}
           />
           <WrappedNivoHBar
             data={processed_data}

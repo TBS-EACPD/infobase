@@ -192,17 +192,19 @@ export class NivoLineBarToggle extends React.Component {
           >
             <StandardLegend
               title={legend_title}
-              items={_.map(data, ({ label }) => ({
-                label,
-                active: _.includes(selected, label),
-                id: label,
-                color: colors(label),
-              }))}
-              onClick={(label) => {
-                !(selected.length === 1 && selected.includes(label)) &&
-                  this.setState({
-                    selected: toggle_list(selected, label),
-                  });
+              legendListProps={{
+                onClick: (label) => {
+                  !(selected.length === 1 && selected.includes(label)) &&
+                    this.setState({
+                      selected: toggle_list(selected, label),
+                    });
+                },
+                items: _.map(data, ({ label }) => ({
+                  label,
+                  active: _.includes(selected, label),
+                  id: label,
+                  color: colors(label),
+                })),
               }}
               Controls={
                 !disable_toggle && (

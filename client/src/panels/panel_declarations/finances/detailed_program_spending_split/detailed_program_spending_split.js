@@ -146,21 +146,23 @@ class HistoricalProgramBars extends React.Component {
         <div className="row">
           <div className="col-12 col-lg-4" style={{ width: "100%" }}>
             <StandardLegend
-              items={_.chain(data)
-                .sortBy(({ data }) => _.last(data) || 0)
-                .reverse()
-                .map(({ label, id }) => ({
-                  label,
-                  active: _.includes(selected, id),
-                  id,
-                  color: colors(label),
-                }))
-                .value()}
-              onClick={(id) => {
-                !(selected.length === 1 && selected.includes(id)) &&
-                  this.setState({
-                    selected: toggle_list(selected, id),
-                  });
+              legendListProps={{
+                items: _.chain(data)
+                  .sortBy(({ data }) => _.last(data) || 0)
+                  .reverse()
+                  .map(({ label, id }) => ({
+                    label,
+                    active: _.includes(selected, id),
+                    id,
+                    color: colors(label),
+                  }))
+                  .value(),
+                onClick: (id) => {
+                  !(selected.length === 1 && selected.includes(id)) &&
+                    this.setState({
+                      selected: toggle_list(selected, id),
+                    });
+                },
               }}
               Controls={
                 <SelectAllControl
@@ -352,8 +354,10 @@ class DetailedProgramSplit extends React.Component {
             </label>
             {legend_items && (
               <StandardLegend
-                items={legend_items}
-                LegendCheckBoxProps={{ isSolidBox: true }}
+                legendListProps={{
+                  items: legend_items,
+                  checkBoxProps: { isSolidBox: true },
+                }}
               />
             )}
           </div>

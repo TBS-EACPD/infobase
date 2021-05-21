@@ -258,19 +258,21 @@ class PercentageViz extends React.Component {
           >
             {!is_a11y_mode && (
               <StandardLegend
-                items={_.chain(all_data)
-                  .map(({ label, id }) => ({
-                    label: label,
-                    active: _.includes(selected, id),
-                    id,
-                    color: result_color_scale(id),
-                  }))
-                  .value()}
-                onClick={(id) => {
-                  !(selected.length === 1 && selected.includes(id)) &&
-                    this.setState({
-                      selected: toggle_list(selected, id),
-                    });
+                legendListProps={{
+                  items: _.chain(all_data)
+                    .map(({ label, id }) => ({
+                      label: label,
+                      active: _.includes(selected, id),
+                      id,
+                      color: result_color_scale(id),
+                    }))
+                    .value(),
+                  onClick: (id) => {
+                    !(selected.length === 1 && selected.includes(id)) &&
+                      this.setState({
+                        selected: toggle_list(selected, id),
+                      });
+                  },
                 }}
               />
             )}
