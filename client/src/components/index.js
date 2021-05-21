@@ -11,7 +11,7 @@ export { HeightClipper } from "./HeightClipper/HeightClipper";
 export { RadioButtons } from "./RadioButtons";
 export { Select } from "./Select";
 export { SortDirections } from "./SortDirection";
-export { TabbedControls, TabbedContent } from "./TabbedContent";
+export { TabbedControls, TabbedContent } from "./TabbedContent/TabbedContent";
 export { LabeledBox } from "./LabeledBox";
 export { TextMaker, TM } from "./TextMaker";
 export { TwoLevelSelect } from "./TwoLevelSelect";
