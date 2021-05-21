@@ -9,13 +9,15 @@ remote="$1"
 url="$2"
 
 IFS=' ' # set field seperator to space, needed to properly read in the supplied args from stdin below (see git docs)
-read local_ref local_sha remote_ref remote_sha
-
-local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
-
-if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remote != "archive" ]]; then
-  echo "Double underscore and archived branches can only be pushed to the archive (private) remote!"
-  exit 1
-fi
+read local_ref local_sha remote_ref remote_sha && (
+  # short circuited if read fails, which it will if the push was already rejected (e.g. git knows it's "behind" the remote)
+  # important because if this hook fails early, git's rejection error etc get swallowed up by a generic husky error, oof
+  local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
+  
+  if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remote != "archive" ]]; then
+    echo "Double underscore and archived branches can only be pushed to the archive (private) remote!"
+    exit 1
+  fi
+)
 
 npm run check_format .
