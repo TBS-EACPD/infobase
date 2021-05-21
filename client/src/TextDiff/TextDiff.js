@@ -575,22 +575,22 @@ export default class TextDiffApp extends React.Component {
             </label>
             <LegendList
               items={indicator_status}
-              LegendCheckBoxProps={{
+              onClick={(id) => {
+                const copy_indicator_status = _.map(indicator_status, (row) =>
+                  row.id === id
+                    ? {
+                        ...row,
+                        active: !row.active,
+                      }
+                    : row
+                );
+                this.setState({
+                  indicator_status: copy_indicator_status,
+                  indicator_status_changed: true,
+                });
+              }}
+              checkBoxProps={{
                 checkmark_vertical_align: 6,
-                onClick: (id) => {
-                  const copy_indicator_status = _.map(indicator_status, (row) =>
-                    row.id === id
-                      ? {
-                          ...row,
-                          active: !row.active,
-                        }
-                      : row
-                  );
-                  this.setState({
-                    indicator_status: copy_indicator_status,
-                    indicator_status_changed: true,
-                  });
-                },
               }}
             />
           </div>
