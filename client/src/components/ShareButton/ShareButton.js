@@ -12,7 +12,7 @@ import {
   IconEmail,
 } from "src/icons/icons";
 
-import { StatelessModal } from "./modals_and_popovers/index";
+import { StatelessModal } from "../modals_and_popovers/index";
 
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";

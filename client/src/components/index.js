@@ -29,7 +29,7 @@ export { KeyConceptList } from "./KeyConceptList";
 export { BackToTop } from "./BackToTop/BackToTop";
 export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
 export { Panel } from "./Panel";
-export { ShareButton } from "./ShareButton";
+export { ShareButton } from "./ShareButton/ShareButton";
 export { WriteToClipboard } from "./WriteToClipboard";
 export { PDFGenerator } from "./PDFGenerator";
 export { CountdownCircle } from "./CountdownCircle";
