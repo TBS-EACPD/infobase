@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import _ from "lodash";
 import React from "react";
 
 import { backgroundColor, primaryColor } from "src/core/color_defs";
@@ -10,10 +11,10 @@ import "./CheckBox.scss";
 
 export interface CheckBoxProps {
   disabled?: boolean; // greys out checkbox and make it non-clickable if true
-  onClick: Function; // (id) => {}
-  id: string | number;
+  onClick?: Function; // (id) => {}
+  id?: string | number;
   label: string; // required text for checkbox
-  active: boolean; // required, equivalent of 'checked'
+  active?: boolean; // required, equivalent of 'checked'
   color?: string; // defaults to primaryColor
   isSolidBox: boolean; // defaults to false
   container_style?: Object; // style for div, containing checkbox and label
@@ -48,6 +49,9 @@ export class CheckBox extends React.Component<CheckBoxProps> {
       checkmark_vertical_align,
       disabled,
     } = this.props;
+    if (!isSolidBox && (_.isUndefined(active) || !onClick)) {
+      throw new Error("Non solid CheckBox requires 'active', 'onClick'");
+    }
 
     if (is_a11y_mode) {
       return (
