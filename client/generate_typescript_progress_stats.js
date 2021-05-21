@@ -12,11 +12,11 @@ This script is to be run in the client/ dir and requires a dependencies.json fil
 
 const fs = require("fs");
 
+const d3_dsv = require("d3-dsv");
 const _ = require("lodash");
 
 const excludedRe = /\.yaml|\.scss|\.css|\.csv/;
 const isTypescriptRe = /\.ts|\.tsx/;
-const d3_dsv = require("d3-dsv");
 
 const recordsByName = {};
 
@@ -61,6 +61,6 @@ const final = _.chain(recordsByName)
   })
   .sortBy("name")
   .value();
-  
+
 fs.writeFileSync("./typescript_progress_stats.csv", d3_dsv.csvFormat(final));
 fs.rmSync("./dependencies.json");
