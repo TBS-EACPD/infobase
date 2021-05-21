@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ShareButton } from "./ShareButton.js";
+import { ShareButton } from "./ShareButton";
 
 export default {
   title: "ShareButton",
