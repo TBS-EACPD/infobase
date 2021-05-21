@@ -2,7 +2,15 @@ import React from "react";
 
 import { TrivialTM } from "src/components/index";
 
-export const SelectAllControl = ({ SelectAllOnClick, SelectNoneOnClick }) => (
+interface SelectAllControlProps {
+  SelectAllOnClick: React.ReactEventHandler<HTMLButtonElement>;
+  SelectNoneOnClick: React.ReactEventHandler<HTMLButtonElement>;
+}
+
+export const SelectAllControl = ({
+  SelectAllOnClick,
+  SelectNoneOnClick,
+}: SelectAllControlProps) => (
   <div role="group" style={{ display: "flex", flexDirection: "row" }}>
     <div style={{ lineHeight: 2 }}>
       <TrivialTM k="select" />:
