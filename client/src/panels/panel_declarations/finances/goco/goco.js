@@ -453,9 +453,11 @@ class Goco extends React.Component {
             style={{ padding: "10px 25px 10px 25px" }}
           >
             <StandardLegend
-              items={legend_items}
-              isHorizontal={true}
-              LegendCheckBoxProps={{ isSolidBox: true }}
+              legendListProps={{
+                items: legend_items,
+                isHorizontal: true,
+                checkBoxProps: { isSolidBox: true },
+              }}
             />
           </div>
           <div>

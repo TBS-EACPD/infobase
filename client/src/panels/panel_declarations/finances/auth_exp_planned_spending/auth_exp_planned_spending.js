@@ -195,21 +195,23 @@ class AuthExpPlannedSpendingGraph extends React.Component {
         <div style={{ padding: "10px 25px 0px 97px" }}>
           {!is_a11y_mode && (
             <StandardLegend
-              isHorizontal={true}
-              items={legend_items}
-              onClick={(label) => {
-                const key_corresponding_to_label = _.find(data_series, {
-                  label,
-                }).key;
+              legendListProps={{
+                isHorizontal: true,
+                items: legend_items,
+                onClick: (label) => {
+                  const key_corresponding_to_label = _.find(data_series, {
+                    label,
+                  }).key;
 
-                this.setState({
-                  active_series: {
-                    ...active_series,
-                    [key_corresponding_to_label]:
-                      !active_series[key_corresponding_to_label] ||
-                      !has_multiple_active_series,
-                  },
-                });
+                  this.setState({
+                    active_series: {
+                      ...active_series,
+                      [key_corresponding_to_label]:
+                        !active_series[key_corresponding_to_label] ||
+                        !has_multiple_active_series,
+                    },
+                  });
+                },
               }}
             />
           )}
@@ -334,20 +336,21 @@ class LapseByVotesGraph extends React.Component {
 
         <div className="fcol-md-3">
           <StandardLegend
-            items={_.map(queried_votes, ({ desc }) => ({
-              id: desc,
-              label: desc,
-              active: active_votes[desc],
-              color: colors(desc),
-            }))}
-            onClick={(vote_desc) =>
-              this.setState({
-                active_votes: {
-                  ...active_votes,
-                  [vote_desc]: !active_votes[vote_desc],
-                },
-              })
-            }
+            legendListProps={{
+              items: _.map(queried_votes, ({ desc }) => ({
+                id: desc,
+                label: desc,
+                active: active_votes[desc],
+                color: colors(desc),
+              })),
+              onClick: (vote_desc) =>
+                this.setState({
+                  active_votes: {
+                    ...active_votes,
+                    [vote_desc]: !active_votes[vote_desc],
+                  },
+                }),
+            }}
             Controls={
               <SelectAllControl
                 key="SelectAllControl"

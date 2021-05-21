@@ -87,15 +87,16 @@ class HistTPTypes extends React.Component {
       <Fragment>
         {!is_a11y_mode && (
           <StandardLegend
-            items={legend_items}
-            isHorizontal={true}
-            onClick={(id) =>
-              !(
-                !!filtered_series[tp_type_name(id)] &&
-                _.size(filtered_series) === 1
-              ) &&
-              this.setState({ active_types: toggle_list(active_types, id) })
-            }
+            legendListProps={{
+              items: legend_items,
+              isHorizontal: true,
+              onClick: (id) =>
+                !(
+                  !!filtered_series[tp_type_name(id)] &&
+                  _.size(filtered_series) === 1
+                ) &&
+                this.setState({ active_types: toggle_list(active_types, id) }),
+            }}
           />
         )}
         <div style={{ position: "relative" }}>
@@ -314,13 +315,16 @@ class DetailedHistTPItems extends React.Component {
         <div className="row">
           <div className="col-12 col-lg-4">
             <StandardLegend
-              items={legend_items}
-              onClick={(id) =>
-                !(active_indices.length == 1 && active_indices.includes(id)) &&
-                this.setState({
-                  active_indices: toggle_list(active_indices, id),
-                })
-              }
+              legendListProps={{
+                items: legend_items,
+                onClick: (id) =>
+                  !(
+                    active_indices.length == 1 && active_indices.includes(id)
+                  ) &&
+                  this.setState({
+                    active_indices: toggle_list(active_indices, id),
+                  }),
+              }}
               Controls={
                 <SelectAllControl
                   key="SelectAllControl"

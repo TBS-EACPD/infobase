@@ -204,8 +204,10 @@ export class Canada extends React.Component {
         <div className="col-12 col-lg-3">
           <StandardLegend
             title={text_maker("legend")}
-            items={legend_items}
-            LegendCheckBoxProps={{ isSolidBox: true }}
+            legendListProps={{
+              items: legend_items,
+              checkBoxProps: { isSolidBox: true },
+            }}
           />
           <div
             className="standard-legend-container"

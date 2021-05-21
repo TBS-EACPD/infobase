@@ -156,15 +156,17 @@ class SobjLine extends React.Component {
       <div className="row">
         <div className="col-12 col-lg-4">
           <StandardLegend
-            items={legend_items}
-            onClick={(id) => {
-              !(
-                spending_data.length === 1 &&
-                spending_data.map((o) => o.id).includes(id)
-              ) &&
-                this.setState({
-                  active_sobjs: toggle_list(active_sobjs, id),
-                });
+            legendListProps={{
+              items: legend_items,
+              onClick: (id) => {
+                !(
+                  spending_data.length === 1 &&
+                  spending_data.map((o) => o.id).includes(id)
+                ) &&
+                  this.setState({
+                    active_sobjs: toggle_list(active_sobjs, id),
+                  });
+              },
             }}
             Controls={
               <SelectAllControl

@@ -2,21 +2,21 @@ import React from "react";
 
 import { tertiaryColor } from "src/core/color_defs";
 
-import { LegendList } from "./LegendList";
+import { LegendList, LegendListProps } from "./LegendList";
 
 import "./StandardLegend.scss";
 
+interface StandardLegendProps {
+  title: string;
+  Controls: React.ReactNode;
+  legendListProps: LegendListProps;
+}
+
 export const StandardLegend = ({
   title,
-  items, //required: [ {active, id, label, color} ]
-
-  isHorizontal,
-
-  onClick,
-  LegendCheckBoxProps,
-
   Controls,
-}) => (
+  legendListProps: { items, isHorizontal, onClick, checkBoxProps },
+}: StandardLegendProps) => (
   <div className="standard-legend-container">
     <div
       style={{ maxHeight: "400px", display: "flex", flexDirection: "column" }}
@@ -38,7 +38,7 @@ export const StandardLegend = ({
             isHorizontal,
 
             onClick,
-            LegendCheckBoxProps,
+            checkBoxProps,
           }}
         />
       </div>
