@@ -107,7 +107,7 @@ interface CommonStatelessPullDownAccordionProps {
   max_height: number | string;
   title: string;
   children: React.ReactElement;
-  onToggle: React.MouseEventHandler<HTMLElement>;
+  onToggle: React.ReactEventHandler<HTMLElement>;
 }
 interface StatelessPullDownAccordionProps
   extends CommonStatelessPullDownAccordionProps {
