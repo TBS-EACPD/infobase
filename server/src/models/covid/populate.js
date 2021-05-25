@@ -28,16 +28,28 @@ export default async function ({ models }) {
     .groupBy(({ org_id, fiscal_year, covid_measure_id }) =>
       _.join([org_id, fiscal_year, covid_measure_id], "__")
     )
-    .map((rolled_up_rows) => ({
-      ..._.first(rolled_up_rows),
+    .map((grouped_rows) => ({
+      ..._.first(grouped_rows),
       ..._.reduce(
-        rolled_up_rows,
-        (memo, row) => ({
-          vote: memo.vote + row.vote,
-          stat: memo.stat + row.stat,
-          is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
-        }),
-        { vote: 0, stat: 0, is_in_estimates: true }
+        grouped_rows,
+        (roll_up, row) => {
+          if (
+            roll_up.is_in_estimates &&
+            roll_up.is_in_estimates !== row.is_in_estimates
+          ) {
+            throw new Error(
+              "When rolling up bud/non-bud split rows from covid_expenditures.csv, encountered grouped rows" +
+                "with disagreeing is_in_estimates values. Unexpected. See list of assumptions here: TODO, link to PR"
+            );
+          }
+
+          return {
+            vote: roll_up.vote + row.vote,
+            stat: roll_up.stat + row.stat,
+            is_in_estimates: roll_up.is_in_estimates || row.is_in_estimates,
+          };
+        },
+        { vote: 0, stat: 0 }
       ),
     }))
     .map()
@@ -134,9 +146,8 @@ export default async function ({ models }) {
             (memo, row) => ({
               vote: memo.vote + row.vote,
               stat: memo.stat + row.stat,
-              is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
             }),
-            { vote: 0, stat: 0, is_in_estimates: true }
+            { vote: 0, stat: 0 }
           )
           .assign({
             month_last_updated:
@@ -173,9 +184,8 @@ export default async function ({ models }) {
         (memo, row) => ({
           vote: memo.vote + row.vote,
           stat: memo.stat + row.stat,
-          is_in_estimates: memo.is_in_estimates && row.is_in_estimates, // IS_IN_EXPENDITURES_TODO non-final/risky logic
         }),
-        { vote: 0, stat: 0, is_in_estimates: true }
+        { vote: 0, stat: 0 }
       )
       .assign({
         month_last_updated:
