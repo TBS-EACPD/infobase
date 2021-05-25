@@ -4,7 +4,7 @@ import { WrappedNivoLine } from "./WrappedNivoLine";
 import { WrappedNivoPie } from "./WrappedNivoPie";
 import { WrappedNivoTreemap } from "./WrappedNivoTreemap";
 
-export { NivoLineBarToggle } from "./NivoLineBarToggle";
+export { NivoLineBarToggle } from "./NivoLineBarToggle/NivoLineBarToggle";
 
 export {
   WrappedNivoBar,
