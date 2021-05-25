@@ -13,7 +13,6 @@ const expenditures_fields = `
   id: String
 
   month_last_updated: Int
-  is_in_estimates: Boolean
   vote: Float
   stat: Float
 `;
@@ -64,6 +63,8 @@ const schema = `
   type CovidExpenditures {
     org_id: String
     org: Org
+
+    is_in_estimates: Boolean
 
     ${expenditures_fields}
   }

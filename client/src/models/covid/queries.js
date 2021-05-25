@@ -52,7 +52,6 @@ export const { query_all_covid_measures, useAllCovidMeasures } = query_factory({
         covid_measures {
           id
           name
-          is_in_estimates
         }
       }
     }
@@ -144,7 +143,6 @@ export const {
 });
 
 const covid_expenditures_fields = `
-  is_in_estimates
   vote
   stat
 `;
@@ -164,6 +162,9 @@ export const {
   
              covid_expenditures {
                org_id
+
+               is_in_estimates
+               
                ${covid_expenditures_fields}
              }
            }
@@ -203,6 +204,9 @@ export const {
   
               covid_expenditures {
                 org_id
+
+                is_in_estimates
+
                 ${covid_expenditures_fields}
               }
             }

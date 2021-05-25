@@ -7,7 +7,6 @@ const estimates_fields = `
 `;
 const expenditures_fields = `
   month_last_updated
-  is_in_estimates
   vote
   stat
 `;
@@ -29,6 +28,8 @@ const measure_covid_data = `
       id
       name
     }
+
+    is_in_estimates
   
     ${expenditures_fields}
   }

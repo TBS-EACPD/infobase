@@ -590,7 +590,6 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "is_in_estimates": false,
               "month_last_updated": 3,
               "stat": 21,
               "vote": 21,
@@ -643,7 +642,6 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "is_in_estimates": true,
               "month_last_updated": 5,
               "stat": 999,
               "vote": 7,
@@ -700,7 +698,6 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "is_in_estimates": false,
               "month_last_updated": 3,
               "stat": 21,
               "vote": 21,
@@ -793,7 +790,6 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "is_in_estimates": false,
               "month_last_updated": 3,
               "stat": 6,
               "vote": 6,
@@ -809,7 +805,6 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "is_in_estimates": true,
               "month_last_updated": 5,
               "stat": 0,
               "vote": 0,
@@ -838,7 +833,6 @@ Object {
               },
             ],
             "covid_expenditures": Object {
-              "is_in_estimates": false,
               "month_last_updated": 3,
               "stat": 6,
               "vote": 6,
