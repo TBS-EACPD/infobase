@@ -218,8 +218,17 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
-    data,
+    data: raw_data,
   }) => {
+    const data = _.chain(raw_data)
+      .thru((data) =>
+        !filter_non_estimates_measures
+          ? data
+          : _.filter(data, "is_in_estimates")
+      )
+      .thru((data) => roll_up_flat_measure_data_by_property(data, "org_id"))
+      .value();
+
     const pre_sorted_rows = get_expenditures_by_index(data, "org_id");
 
     const column_configs = {
@@ -292,8 +301,17 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
-    data,
+    data: raw_data,
   }) => {
+    const data = _.chain(raw_data)
+      .thru((data) =>
+        !filter_non_estimates_measures
+          ? data
+          : _.filter(data, "is_in_estimates")
+      )
+      .thru((data) => roll_up_flat_measure_data_by_property(data, "measure_id"))
+      .value();
+
     const pre_sorted_rows_with_measure_names = _.chain(
       get_expenditures_by_index(data, "measure_id")
     )
@@ -379,28 +397,25 @@ const tab_content_configs = [
     load_data: ({ selected_year }) =>
       query_all_covid_expenditures_by_measure_id({
         fiscal_year: selected_year,
-      }).then((data) => roll_up_flat_measure_data_by_property(data, "org_id")),
+      }),
     TabContent: ByDepartmentTab,
   },
   {
     key: "measure",
     subject_types: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
-    load_data: ({ subject, selected_year }) =>
-      (() => {
-        if (subject.subject_type === "dept") {
-          return query_org_covid_expenditures_by_measure_id({
-            org_id: String(subject.id),
-            fiscal_year: selected_year,
-          });
-        } else {
-          return query_all_covid_expenditures_by_measure_id({
-            fiscal_year: selected_year,
-          });
-        }
-      })().then((data) =>
-        roll_up_flat_measure_data_by_property(data, "measure_id")
-      ),
+    load_data: ({ subject, selected_year }) => {
+      if (subject.subject_type === "dept") {
+        return query_org_covid_expenditures_by_measure_id({
+          org_id: String(subject.id),
+          fiscal_year: selected_year,
+        });
+      } else {
+        return query_all_covid_expenditures_by_measure_id({
+          fiscal_year: selected_year,
+        });
+      }
+    },
     TabContent: ByMeasureTab,
   },
 ];
