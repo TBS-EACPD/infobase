@@ -1,10 +1,16 @@
 import React from "react";
 
-import { AlertBanner } from "./AlertBanner";
+import { AlertBanner, banner_classes } from "./AlertBanner";
 
 export default {
   title: "AlertBanner",
   component: AlertBanner,
+  argTypes: {
+    banner_class: {
+      type: "radio",
+      options: banner_classes,
+    },
+  },
 };
 
 const Template = (args) => <AlertBanner {...args} />;
@@ -18,7 +24,5 @@ Basic.args = {
   children,
 
   // css
-  banner_class: "",
-  additional_banner_class: "",
   style: {},
 };
