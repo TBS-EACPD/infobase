@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FancyUL } from "./FancyUL.tsx";
+import { FancyUL } from "./FancyUL";
 
 export default {
   title: "FancyUL",

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DebouncedTextInput } from "./DebouncedTextInput.js";
+import { DebouncedTextInput } from "./DebouncedTextInput";
 
 export default {
   title: "Input/DebouncedTextInput",

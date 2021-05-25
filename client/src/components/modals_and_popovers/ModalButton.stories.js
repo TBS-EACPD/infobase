@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ModalButton } from "./ModalButton.js";
+import { ModalButton } from "./ModalButton";
 
 export default {
   title: "ModalButton",

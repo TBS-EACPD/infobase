@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FixedPopover } from "./FixedPopover.js";
+import { FixedPopover } from "./FixedPopover";
 
 export default {
   title: "FixedPopover",

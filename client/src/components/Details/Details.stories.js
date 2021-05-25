@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Details } from "./Details.js";
+import { Details } from "./Details";
 
 export default {
   title: "Dropdown/Details",
