@@ -77,7 +77,7 @@ export const declare_gov_drr_panel = () =>
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: true,
-      footnotes: ["RESULTS_COUNTS", "DRR"],
+      footnotes: ["RESULTS", "DRR"],
       title: text_maker("gov_drr_summary_title", {
         year: result_docs[current_drr_key].year,
       }),

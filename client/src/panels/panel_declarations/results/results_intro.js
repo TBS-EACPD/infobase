@@ -98,7 +98,7 @@ export const declare_results_intro_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: level === "gov",
       requires_granular_result_counts: level !== "gov",
-      footnotes: ["RESULTS_COUNTS", "RESULTS", "DRR", "DP"],
+      footnotes: ["RESULTS", "DRR", "DP"],
       source: (subject) => get_source_links(["DP", "DRR"]),
       title: text_maker("results_intro_title"),
       calculate: (subject) => {

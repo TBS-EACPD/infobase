@@ -387,7 +387,7 @@ export const declare_drr_summary_panel = () =>
     panel_config_func: (level, panel_key) => ({
       requires_result_counts: level === "dept",
       requires_granular_result_counts: level !== "dept",
-      footnotes: ["RESULTS_COUNTS", "RESULTS"],
+      footnotes: ["RESULTS", "DRR"],
       source: (subject) => get_source_links(["DRR"]),
       title: text_maker("drr_summary_title", { year: current_drr_year }),
       calculate(subject) {

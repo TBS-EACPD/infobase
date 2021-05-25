@@ -330,7 +330,7 @@ export const declare_results_table_panel = () =>
     panel_key: "results_flat_table",
     levels: ["dept", "crso", "program"],
     panel_config_func: (level, panel_key) => ({
-      footnotes: ["DRR"],
+      footnotes: ["RESULTS", "DRR"],
       depends_on: ["programSpending", "programFtes"],
       source: (subject) => get_source_links(["DRR"]),
       requires_result_counts: level === "dept",
