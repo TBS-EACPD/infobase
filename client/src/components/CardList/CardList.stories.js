@@ -12,21 +12,20 @@ const Template = (args) => <CardList {...args} />;
 
 const elements = [
   {
-    display: "Display 1",
-    href: "",
+    display: "Non-link Title",
     children: [
-      { display: "Child 1", href: "" },
-      { display: "Child 2", href: "" },
-      { display: "Child 3", href: "" },
+      { display: "Non-link Title 1" },
+      { display: "Non-link Title 2" },
+      { display: "Non-link Title 3" },
     ],
   },
   {
-    display: "Display 2",
-    href: "",
+    display: "Title with href",
+    href: "#",
     children: [
-      { display: "Child 1", href: "" },
-      { display: "Child 2", href: "" },
-      { display: "Child 3", href: "" },
+      { display: "Href 1", href: "#" },
+      { display: "Href 2", href: "#" },
+      { display: "Href 3", href: "#" },
     ],
   },
 ];
