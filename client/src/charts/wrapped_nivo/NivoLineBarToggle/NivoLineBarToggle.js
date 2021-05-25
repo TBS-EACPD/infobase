@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports */
 import classNames from "classnames";
 
 import { scaleOrdinal } from "d3-scale";
@@ -13,9 +14,9 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend } from "src/charts/legends/index";
 import { toggle_list } from "src/general_utils";
 
-import { WrappedNivoBar } from "././wrapped_nivo_bar";
-import { infobase_colors_smart } from "./wrapped_nivo_common";
-import { WrappedNivoLine } from "./WrappedNivoLine";
+import { WrappedNivoBar } from "../wrapped_nivo_bar";
+import { infobase_colors_smart } from "../wrapped_nivo_common";
+import { WrappedNivoLine } from "../WrappedNivoLine";
 
 import text from "./NivoLineBarToggle.yaml";
 
