@@ -4,13 +4,13 @@ import { sha } from "src/core/injected_build_constants";
 let initialized = false;
 
 //tool to create totally random IDs
-const uuid = function b(a) {
+const uuid = function b(a?: number | string) {
   return a
-    ? (a ^ ((Math.random() * 16) >> (a / 4))).toString(16)
-    : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);
+    ? (Number(a) ^ ((Math.random() * 16) >> (Number(a) / 4))).toString(16)
+    : String(1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);
 };
 
-const dimensions = {
+const dimensions: { [key: string]: string } = {
   CLIENT_ID: "dimension1",
   HIT_ID: "dimension2",
   HIT_TIME: "dimension3",
@@ -23,7 +23,7 @@ const dimensions = {
   SHA: "dimension16",
 };
 
-let client_id;
+let client_id: string;
 const get_client_id = () => {
   if (!initialized || _.isUndefined(client_id)) {
     /* eslint-disable-next-line no-console */
@@ -42,13 +42,13 @@ function initialize_analytics() {
   ga("set", "anonymizeIp", true);
 
   ga((tracker) => {
-    client_id = tracker.get("clientId");
-    tracker.set(dimensions.CLIENT_ID, client_id);
-    tracker.set(dimensions.DEV, String(is_dev));
-    tracker.set(dimensions.SHA, sha);
+    client_id = tracker!.get("clientId");
+    tracker!.set(dimensions.CLIENT_ID, client_id);
+    tracker!.set(dimensions.DEV, String(is_dev));
+    tracker!.set(dimensions.SHA, sha);
 
-    const originalBuildHitTask = tracker.get("buildHitTask");
-    tracker.set("buildHitTask", (model) => {
+    const originalBuildHitTask = tracker!.get("buildHitTask");
+    tracker!.set("buildHitTask", (model: UniversalAnalytics.Model) => {
       model.set(dimensions.HIT_ID, uuid(), true);
       model.set(dimensions.HIT_TIME, String(+new Date()), true);
       model.set(dimensions.HIT_TYPE, model.get("hitType"), true);
@@ -67,7 +67,7 @@ const dummy_event_obj = _.chain(["SUBAPP", "SUBJECT_GUID", "MISC1", "MISC2"])
   .fromPairs()
   .value();
 
-function log_standard_event(dims) {
+function log_standard_event(dims: { [key: string]: string }) {
   if (!initialized) {
     throw new Error("analytics is uninitialized");
   }
@@ -87,7 +87,7 @@ function log_standard_event(dims) {
   ga("send", send_obj);
 }
 
-function log_page_view(page) {
+function log_page_view(page: string) {
   if (!initialized) {
     throw new Error("analytics is uninitialized");
   }
