@@ -34,7 +34,7 @@ export { Countdown } from "./Countdown/Countdown";
 export { LogInteractionEvents } from "./LogInteractionEvents";
 export { GlossaryIcon, GlossaryItem } from "./glossary_components";
 export { CardList } from "./CardList/CardList";
-export { LabeledTable } from "./LabeledTable";
+export { LabeledTable } from "./LabeledTable/LabeledTable";
 export { FootnoteList } from "./FootnoteList/FootnoteList";
 export { AlertBanner } from "./AlertBanner/AlertBanner";
 export { FancyUL } from "./FancyUL/FancyUL";
