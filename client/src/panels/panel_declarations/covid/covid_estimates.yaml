@@ -83,6 +83,21 @@ covid_estimates_vote:
   en: Voted Authorities
   fr: Autorisations votées
 
+
+covid_supps_a_2021_note:
+  en: |
+    The $20.16 billion identified in the Supplementary Estimates (A) for COVID-19 includes approximately $6.02 billion that has been reprofiled from 2020-21.  
+
+    This amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22. The voted authorities for 2020-21 will be reported as
+    frozen allotments in the 2021 Public Accounts.
+  fr: |
+    Les 20,16 milliards au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 6,02 milliard de
+    dollars qui ont été reportés de 2020-2021.  
+
+    Ce montant a été initialement approuvé en 2020-2021, mais a ensuite été reporté à 2021-2022. Les autorisations votées pour 2020-2021 seront inscrites
+    en tant qu’affectations bloquées dans les Comptes publics 2021.
+
+
 covid_estimates_COV082_2020_tooltip:
   transform: [handlebars,markdown]
   en: |

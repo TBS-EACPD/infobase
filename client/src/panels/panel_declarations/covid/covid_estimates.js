@@ -66,6 +66,12 @@ const tooltips_by_topic = {
       topic_ids: ["MAINS"],
       text: text_maker("covid_mains_2021_note"),
     },
+    {
+      fiscal_years: [2021],
+      subject_ids: ["gov"],
+      topic_ids: ["SEA"],
+      text: text_maker("covid_supps_a_2021_note"),
+    },
   ],
   measure: [
     {
