@@ -3,12 +3,12 @@ import JSURL from "jsurl";
 import _ from "lodash";
 import marked from "marked";
 
-export const sanitize_html = (markup) => {
+export const sanitize_html = (markup: string | Node) => {
   // a little tedious, but this is the safe way to enforce safe usage of target="_blank" with DOMPurify
   // note: add and then pop the hook, don't want the side effect of leaving hooks on DOMPurify (ugh)
 
   DOMPurify.addHook("afterSanitizeAttributes", function (node) {
-    if (node?.target) {
+    if (node) {
       node.setAttribute("target", "_blank");
       node.setAttribute("rel", "noopener noreferrer");
     }
@@ -23,14 +23,14 @@ export const sanitize_html = (markup) => {
   return sanitized_markup;
 };
 
-export const sanitized_marked = (markdown) =>
+export const sanitized_marked = (markdown: string) =>
   sanitize_html(marked(markdown, { sanitize: false, gfm: true }));
 
-export const sanitized_dangerous_inner_html = (html) => ({
+export const sanitized_dangerous_inner_html = (html: string) => ({
   __html: sanitize_html(html),
 });
 
-export const text_abbrev = function (text, length) {
+export const text_abbrev = function (text: string, length: number) {
   const length_value = _.isFunction(length) ? length() : length || 60;
 
   return text.length > length_value
@@ -45,7 +45,11 @@ export const make_unique_func = function () {
   };
 };
 
-export const set_session_storage_w_expiry = (key, value, ttl = 5000) => {
+export const set_session_storage_w_expiry = (
+  key: string,
+  value: string,
+  ttl = 5000
+) => {
   const now = new Date().getTime();
   const item = {
     value: value,
@@ -53,7 +57,7 @@ export const set_session_storage_w_expiry = (key, value, ttl = 5000) => {
   };
   sessionStorage.setItem(key, JSON.stringify(item));
 };
-export const get_session_storage_w_expiry = (key) => {
+export const get_session_storage_w_expiry = (key: string) => {
   const itemStr = sessionStorage.getItem(key);
 
   if (!itemStr) {
@@ -74,19 +78,31 @@ export const get_session_storage_w_expiry = (key) => {
 // consider replacing with _.uniqueId
 export const make_unique = make_unique_func();
 
-export const escapeRegExp = function (str) {
+export const escapeRegExp = function (str: string) {
   /* eslint-disable no-useless-escape */
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 };
 
-export const shallowEqualObjectsOverKeys = (obj1, obj2, keys_to_compare) =>
+type ObjectAny = {
+  [key: string]: any;
+};
+
+export const shallowEqualObjectsOverKeys = (
+  obj1: ObjectAny,
+  obj2: ObjectAny,
+  keys_to_compare: string[]
+) =>
   _.reduce(
     keys_to_compare,
     (memo, key) => memo && obj1[key] === obj2[key],
     true
   );
 
-export const shallowEqualObjectsExceptKeys = (obj1, obj2, keys_to_ignore) => {
+export const shallowEqualObjectsExceptKeys = (
+  obj1: ObjectAny,
+  obj2: ObjectAny,
+  keys_to_ignore: string[]
+) => {
   return _.isEqualWith(
     obj1,
     obj2,
@@ -94,11 +110,15 @@ export const shallowEqualObjectsExceptKeys = (obj1, obj2, keys_to_ignore) => {
   );
 };
 
-export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
+export const retry_promise = (
+  promise_to_try: Function,
+  retries = 2,
+  interval = 500
+) => {
   return new Promise((resolve, reject) => {
     promise_to_try()
       .then(resolve)
-      .catch((error) =>
+      .catch((error: Error) =>
         setTimeout(() => {
           if (retries === 0) {
             reject(error);
@@ -117,17 +137,21 @@ export const retry_promise = (promise_to_try, retries = 2, interval = 500) => {
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 // "This is an assign function that copies full descriptors"
 // Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
-export function completeAssign(target, ...sources) {
+export function completeAssign(target: any, ...sources: any[]) {
   sources.forEach((source) => {
-    let descriptors = Object.keys(source).reduce((descriptors, key) => {
-      descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
-      return descriptors;
-    }, {});
+    let descriptors = Object.keys(source).reduce(
+      (descriptors: { [key: string]: PropertyDescriptor }, key) => {
+        descriptors[key] = Object.getOwnPropertyDescriptor(source, key)!;
+        return descriptors;
+      },
+      {}
+    );
     // by default, Object.assign copies enumerable Symbols too
     Object.getOwnPropertySymbols(source).forEach((sym) => {
       let descriptor = Object.getOwnPropertyDescriptor(source, sym);
-      if (descriptor.enumerable) {
-        descriptors[sym] = descriptor;
+      if (descriptor && descriptor.enumerable) {
+        // Typescript bug that symbol cannot be used as index: https://github.com/microsoft/TypeScript/issues/1863
+        descriptors[(sym as unknown) as string] = descriptor;
       }
     });
     Object.defineProperties(target, descriptors);
@@ -136,7 +160,7 @@ export function completeAssign(target, ...sources) {
 }
 
 //copied from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-export const hex_to_rgb = (hex) => {
+export const hex_to_rgb = (hex: string) => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
@@ -154,8 +178,9 @@ export const hex_to_rgb = (hex) => {
 };
 
 // JSURL's use of ~'s is problematic in some cases, use ".-.-" pattern instead. Also handle a bunch of weird JSURL issues seen in logs
-const make_jsurl_safe = (jsurl_string) => _.replace(jsurl_string, /~/g, ".-.-");
-const pre_parse_safe_jsurl = (safe_jsurl_string) =>
+const make_jsurl_safe = (jsurl_string: string) =>
+  _.replace(jsurl_string, /~/g, ".-.-");
+const pre_parse_safe_jsurl = (safe_jsurl_string: string) =>
   !_.isEmpty(safe_jsurl_string) &&
   _.chain(safe_jsurl_string)
     .replace(/.-.-/g, "~")
@@ -165,24 +190,32 @@ const pre_parse_safe_jsurl = (safe_jsurl_string) =>
     ) // closing paren often dropped for some reason, again might be url detection in email clients
     .value();
 export const SafeJSURL = {
-  parse: (safe_jsurl_string) =>
+  parse: (safe_jsurl_string: string) =>
     JSURL.parse(pre_parse_safe_jsurl(safe_jsurl_string)),
-  stringify: (json) => make_jsurl_safe(JSURL.stringify(json)),
-  tryParse: (safe_jsurl_string) =>
+  stringify: (json: { [key: string]: any }) =>
+    make_jsurl_safe(JSURL.stringify(json)),
+  tryParse: (safe_jsurl_string: string) =>
     JSURL.tryParse(pre_parse_safe_jsurl(safe_jsurl_string)),
 };
 
-export const generate_href = (url) =>
+export const generate_href = (url: string) =>
   url.startsWith("http") ? url : `https://${url}`;
 
-export function cached_property(elementDescriptor) {
+interface ElementDescriptor {
+  kind: string;
+  key: string;
+  descriptor: PropertyDescriptor;
+  extras?: [{ [key: string]: any }];
+}
+
+export function cached_property(elementDescriptor: ElementDescriptor) {
   const { kind, key, descriptor } = elementDescriptor;
   if (kind !== "method") {
     throw new Error("@cached_property decorator can only be used on methods");
   }
   const og_method = descriptor.value;
   const cache_name = `_${key}_cached_val`;
-  function new_method() {
+  function new_method(this: any) {
     if (!this[cache_name]) {
       this[cache_name] = og_method.call(this);
     }
@@ -192,7 +225,7 @@ export function cached_property(elementDescriptor) {
   return elementDescriptor;
 }
 
-export function bound(elementDescriptor) {
+export function bound(elementDescriptor: ElementDescriptor) {
   //see https://github.com/mbrowne/bound-decorator/blob/master/src/bound.js
   const { kind, key, descriptor } = elementDescriptor;
   if (kind !== "method") {
@@ -202,12 +235,12 @@ export function bound(elementDescriptor) {
   const initializer =
     // check for private method
     typeof key === "object"
-      ? function () {
+      ? function (this: any) {
           return method.bind(this);
         }
       : // For public and symbol-keyed methods (which are technically public),
         // we defer method lookup until construction to respect the prototype chain.
-        function () {
+        function (this: any) {
           return this[key].bind(this);
         };
 
@@ -229,5 +262,5 @@ export function bound(elementDescriptor) {
 //this is ideal for a list of id's in a piece of state that are often toggled
 // toggle_list([1,2,3],1) => [2,3]
 // toggle_list([1,2,3],4) => [1,2,3,4]
-export const toggle_list = (arr, el) =>
+export const toggle_list = (arr: any[], el: any) =>
   _.includes(arr, el) ? _.without(arr, el) : arr.concat([el]);
