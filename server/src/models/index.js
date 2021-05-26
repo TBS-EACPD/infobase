@@ -7,9 +7,9 @@ import resources from "./finances/index.js";
 import model_singleton from "./model_singleton.js";
 import results from "./results/index.js";
 import root_schema from "./schema_root.js";
+//import services from "./services/index.js";
 
-//each sub-module is included here
-import services from "./services/index.js";
+// unused models, mostly still using the pre-mongoDB approach
 // import sobjs from './standard_objects/index.js';
 // import people from './people/index.js';
 // import search from './search/index.js';
@@ -23,7 +23,7 @@ const sub_module_defs = _.compact([
   results,
   resources,
   covid,
-  services,
+  //services,
   // pses,
   // sobjs,
   // search,
