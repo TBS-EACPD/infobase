@@ -137,6 +137,7 @@
     "@types/react-virtualized": "^9.21.11",
     "@types/jsurl": "^1.2.29",
     "@types/marked": "^2.0.3",
+    "@types/react-router": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-loader": "^8.1.0",

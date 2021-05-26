@@ -25,7 +25,7 @@ interface IconProps {
   width?: number | string;
   height?: number | string;
   svg_style?: Object;
-  inline?: number;
+  inline?: boolean;
   aria_hide?: boolean;
 
   viewbox_width?: number | string;
