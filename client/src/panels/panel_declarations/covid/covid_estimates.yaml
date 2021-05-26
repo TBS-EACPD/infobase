@@ -91,6 +91,7 @@ covid_mains_2021_note:
     Les 22,7 milliards au titre de la COVID-19 figurant dans le budget principal des dépenses incluent un montant d'environ 0,6 milliard de dollars qui est hors la portée 
     du plan d'intervention économique.
 covid_supps_a_2021_note:
+  transform: [markdown]
   en: |
     The $20.16 billion identified in the Supplementary Estimates (A) for COVID-19 includes approximately $6.02 billion that has been reprofiled from 2020-21.  
 
