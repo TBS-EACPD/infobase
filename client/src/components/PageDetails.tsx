@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter, RouteComponentProps } from "react-router";
 
 import { create_text_maker } from "src/models/text";
 
@@ -49,8 +49,20 @@ class VersionNumber extends React.Component {
   }
 }
 
+interface PageDetailsProps extends RouteComponentProps {
+  toggleSurvey: Function;
+  showSurvey: boolean;
+  non_survey_routes: string[];
+}
+interface PageDetailsState {
+  showReportProblem: boolean;
+}
+
 const PageDetails = withRouter(
-  class PageDetails extends React.Component {
+  class PageDetails extends React.Component<
+    PageDetailsProps,
+    PageDetailsState
+  > {
     state = {
       showReportProblem: false,
     };
