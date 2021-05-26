@@ -84,6 +84,7 @@ covid_estimates_vote:
   fr: Autorisations votées
 
 covid_mains_2021_note:
+  transform: [markdown]
   en: |
     The 22.7 billion identified in the Main Estimates for COVID-19 includes approximately $0.6 billion that is outside the scope
     of Canada’s COVID-19 Economic Response Plan (ERP).
