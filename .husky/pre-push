@@ -1,23 +1,27 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-
-# Prevent branches starting with dunderscores from being pushed to the public remote ("origin"),
-# allow them to push to the private/archive remote ("archive")
-
 remote="$1"
 url="$2"
 
-IFS=' ' # set field seperator to space, needed to properly read in the supplied args from stdin below (see git docs)
-read local_ref local_sha remote_ref remote_sha && (
-  # short circuited if read fails, which it will if the push was already rejected (e.g. git knows it's "behind" the remote)
-  # important because if this hook fails early, git's rejection error etc get swallowed up by a generic husky error, oof
-  local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
-  
-  if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remote != "archive" ]]; then
-    echo "Double underscore and archived branches can only be pushed to the archive (private) remote!"
-    exit 1
-  fi
-)
+# set field seperator to space, needed to properly read in the supplied args from stdin below (see git docs)
+IFS=' ' 
+# Funky and not clearly documented, but git checks if the push will be rejected before this hook runs, and doesn't provide the standard
+# arguments if it's already going to be rejected. On top of that, husky swallows up most of the rejection message and prints its own less
+# useful (and misleading) error if this script exits with an unexpected error. If we know the push is already being rejected (i.e. read fails)
+# then the the most useful thing is to exit with an ok status here (push is rejected anyway)
+read local_ref local_sha remote_ref remote_sha || exit 0
 
+
+# prevent branches starting with dunderscores from being pushed to the public remote ("origin"),
+# allow them to push to the private/archive remote ("archive")
+local_branch_name=$(echo "$local_ref" | sed "s/refs\/heads\///")
+
+if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remote != "archive" ]]; then
+  echo -e "\033[0;31mDouble underscore and archived branches can only be pushed to the archive (private) remote!\033[0m"
+  exit 1
+fi
+
+
+# run prettier check
 npm run check_format .
