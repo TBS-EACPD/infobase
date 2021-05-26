@@ -14,9 +14,9 @@ interface StatelessModalProps {
   header?: React.ReactNode;
   body: React.ReactNode;
   footer?: React.ReactNode;
-  close_text: string;
+  close_text?: string;
   include_close_button_in_header: boolean;
-  additional_dialog_class_name: string;
+  additional_dialog_class_name?: string;
 }
 
 export class StatelessModal extends React.Component<StatelessModalProps> {
