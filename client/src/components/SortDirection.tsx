@@ -4,7 +4,19 @@ import { trivial_text_maker } from "src/models/text";
 
 import "./SortDirection.scss";
 
-export const SortDirection = ({ sortDirection, active }) => (
+interface SortDirectionProps {
+  sortDirection: string;
+  active: boolean;
+}
+interface SortDirectionsProps {
+  asc: boolean;
+  desc: boolean;
+}
+
+export const SortDirection = ({
+  sortDirection,
+  active,
+}: SortDirectionProps) => (
   <button
     className="SortIndicator"
     style={{
@@ -26,7 +38,7 @@ export const SortDirection = ({ sortDirection, active }) => (
   </button>
 );
 
-export const SortDirections = ({ asc, desc }) => (
+export const SortDirections = ({ asc, desc }: SortDirectionsProps) => (
   <div className="text-nowrap">
     <SortDirection sortDirection="ASC" active={asc} />
     <SortDirection sortDirection="DESC" active={desc} />
