@@ -22,7 +22,7 @@ export { FilterTable } from "./FilterTable/FilterTable";
 export { CheckBox } from "./CheckBox/CheckBox";
 export { StatelessDetails, Details } from "./Details/Details";
 export { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
-export { KeyConceptList } from "./KeyConceptList";
+export { KeyConceptList } from "./KeyConceptList/KeyConceptList";
 export { BackToTop } from "./BackToTop/BackToTop";
 export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
 export { Panel } from "./Panel/Panel";
