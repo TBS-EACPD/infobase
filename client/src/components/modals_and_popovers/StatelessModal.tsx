@@ -6,10 +6,24 @@ import { Modal } from "react-bootstrap";
 import { trivial_text_maker } from "src/models/text";
 import "./bootstrap_modal_exstension.scss";
 
-export class StatelessModal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface StatelessModalProps {
+  on_close_callback: Function;
+  show: boolean;
+  title: string | React.ReactNode;
+  subtitle?: string;
+  header?: React.ReactNode;
+  body: React.ReactNode;
+  footer?: React.ReactNode;
+  close_text: string;
+  include_close_button_in_header: boolean;
+  additional_dialog_class_name: string;
+}
+
+export class StatelessModal extends React.Component<StatelessModalProps> {
+  static defaultProps = {
+    close_text: _.upperFirst(trivial_text_maker("close")),
+    include_close_button_in_header: false,
+  };
   componentWillUnmount() {
     this.closeModal();
   }
@@ -25,8 +39,8 @@ export class StatelessModal extends React.Component {
       body,
       footer,
       close_text,
-      close_button_in_header,
-      additional_dialog_class,
+      include_close_button_in_header,
+      additional_dialog_class_name,
     } = this.props;
 
     const default_header = (
@@ -42,7 +56,10 @@ export class StatelessModal extends React.Component {
       </div>
     );
 
-    const common_layout = (content, include_close_button) => (
+    const common_layout = (
+      content: React.ReactNode,
+      include_close_button: boolean
+    ) => (
       <div className="modal-dialog__header-footer-layout">
         {
           content || (
@@ -58,19 +75,22 @@ export class StatelessModal extends React.Component {
     );
     const header_content = common_layout(
       header || default_header,
-      close_button_in_header
+      include_close_button_in_header
     );
     const footer_content =
       footer ||
-      (!close_button_in_header &&
-        common_layout(footer || <div />, !close_button_in_header));
+      (!include_close_button_in_header &&
+        common_layout(footer || <div />, !include_close_button_in_header));
 
     return (
       <Modal
         show={show}
         size="xl"
         onHide={this.closeModal}
-        dialogClassName={classNames(`modal-dialog`, additional_dialog_class)}
+        dialogClassName={classNames(
+          `modal-dialog`,
+          additional_dialog_class_name
+        )}
         centered
       >
         <div>
@@ -80,12 +100,8 @@ export class StatelessModal extends React.Component {
           {body && <Modal.Body>{body}</Modal.Body>}
           {footer_content && <Modal.Footer>{footer_content}</Modal.Footer>}
         </div>
-        <div tabIndex="0" onFocus={this.closeModal} />
+        <div tabIndex={0} onFocus={this.closeModal} />
       </Modal>
     );
   }
 }
-StatelessModal.defaultProps = {
-  close_text: _.upperFirst(trivial_text_maker("close")),
-  close_button_in_header: false,
-};
