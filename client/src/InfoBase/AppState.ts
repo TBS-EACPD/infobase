@@ -2,7 +2,7 @@ import { lang } from "src/core/injected_build_constants";
 
 export const app_reducer = (
   state = { lang: lang, is_showing_graph_overlay: true },
-  { type, payload }
+  { type, payload }: { [key: string]: string }
 ) => {
   switch (type) {
     case "graph_overlay":
