@@ -14,7 +14,7 @@ export { SortDirections } from "./SortDirection/SortDirection";
 export { TabbedControls, TabbedContent } from "./TabbedContent/TabbedContent";
 export { LabeledBox } from "./LabeledBox/LabeledBox";
 export { TextMaker, TM } from "./TextMaker";
-export { TwoLevelSelect } from "./TwoLevelSelect";
+export { TwoLevelSelect } from "./TwoLevelSelect/TwoLevelSelect";
 export { CardImage } from "src/home/CardImage/CardImage";
 export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch";
