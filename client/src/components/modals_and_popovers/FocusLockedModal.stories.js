@@ -3,7 +3,7 @@ import React from "react";
 import { FocusLockedModal } from "./FocusLockedModal";
 
 export default {
-  title: "FocusLockedModal",
+  title: "modals and popovers/FocusLockedModal",
   component: FocusLockedModal,
 };
 

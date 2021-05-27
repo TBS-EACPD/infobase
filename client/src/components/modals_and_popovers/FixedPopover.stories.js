@@ -1,13 +1,25 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { FixedPopover } from "./FixedPopover";
 
 export default {
-  title: "FixedPopover",
+  title: "modals and popovers/FixedPopover",
   component: FixedPopover,
 };
 
-const Template = (args) => <FixedPopover {...args} />;
+const Template = (args) => {
+  return (
+    <Fragment>
+      <div id="ib-site-header-area" />
+      <div style={{ height: "500vh" }}> Scroll down... </div>
+      <div
+        id="wb-info"
+        style={{ height: "300px", borderTop: "2px black solid" }}
+      />
+      <FixedPopover {...args} />
+    </Fragment>
+  );
+};
 
 export const Basic = Template.bind({});
 Basic.args = {

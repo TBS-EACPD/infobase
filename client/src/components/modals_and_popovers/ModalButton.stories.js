@@ -3,7 +3,7 @@ import React from "react";
 import { ModalButton } from "./ModalButton";
 
 export default {
-  title: "ModalButton",
+  title: "modals and popovers/ModalButton",
   component: ModalButton,
 };
 
