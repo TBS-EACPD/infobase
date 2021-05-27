@@ -3,14 +3,14 @@ covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
     * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_tt "spending authorities" "AUTH"}} sought in
-      {{gov_tabled_est_docs_in_year_text}} for {{fmt_year_to_fiscal_year selected_year}} and align with the total COVID-19 Economic Response Plan (ERP)
+      {{gov_tabled_est_docs_in_year_text}} for {{fmt_year_to_fiscal_year selected_year}} and align with the COVID-19 Economic Response Plan (ERP)
       presented in Budget 2021.
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
   fr: |
-    * Le Parlement doit approuver toutes les dépenses du gouvernement. Ces chiffres sont ceux des nouvelles {{gl_tt "autorisations de dépenses" "AUTH"}} au titre
-      de la COVID-19 qui sont inscrites dans {{gov_tabled_est_docs_in_year_text}} pour {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan d'intervention
-      économique pour répondre à la COVID-19 présenté dans le budget 2021. SUPPS_TODO (need this finalized, the French drops the "total" reference)
+    * L'approbation du Parlement est requise pour toutes les dépenses du gouvernement. Ces chiffres représentent les nouvelles {{gl_tt "autorisations de dépenser" "AUTH"}}
+      au titre de COVID-19 qui figurent dans {{gov_tabled_est_docs_in_year_text}} pour l'exercice {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan
+      d’intervention économique du Canada pour répondre à la COVID-19, présenté dans le budget 2021.
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
 
