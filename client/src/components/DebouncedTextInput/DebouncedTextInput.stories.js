@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { DebouncedTextInput } from "./DebouncedTextInput";
 
@@ -7,9 +7,16 @@ export default {
   component: DebouncedTextInput,
 };
 
-const Template = (args) => <DebouncedTextInput {...args} />;
+const Template = (args) => {
+  function updateCallback(value) {}
+
+  return <DebouncedTextInput {...args} {...updateCallback} />;
+};
 
 export const Basic = Template.bind({});
 Basic.args = {
+  a11y_label: "Label",
   placeHolder: "Write something",
+  debounceTime: 10000,
+  inputClassName: "search input-sm",
 };
