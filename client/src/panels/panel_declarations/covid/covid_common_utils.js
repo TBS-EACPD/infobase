@@ -78,7 +78,7 @@ const get_est_doc_list_plain_text = (est_docs) =>
     .sortBy(get_est_doc_order)
     .groupBy((est_doc) => /^SE[A-Z]$/.test(est_doc))
     .flatMap((est_docs, is_supps_group) => {
-      if (!is_supps_group || est_docs.length === 1) {
+      if (is_supps_group === "false") {
         return _.map(est_docs, get_est_doc_name);
       } else {
         return text_maker("supps_list", {
