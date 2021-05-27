@@ -24,14 +24,16 @@ covid_estimates_COV082_2020_tooltip:
     These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information
     {{ext_link "online" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/frozen-allotments-voted-authorities.html"}}.  
 
-     A portion of the Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22. The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
+    A portion of the Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22. The voted authorities
+    for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
-    SUPPS_TODO text has changed a bit  
-
-    Comprend les cinq milliards de dollars pour les vaccins qui ont été approuvés dans le budget supplémentaire des dépenses (B) 2020-2021, mais qui ont ensuite été reportés à 2021-2022.
+    Le budget principal des dépenses comprend 5 milliards de dollars pour les vaccins qui ont été approuvés dans le budget supplémentaire des dépenses (B) 2020-2021, mais qui ont ensuite été reportés à 2021-2022.
     Ces autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires
     {{ext_link "en ligne" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/budgets-supplementaires/budget-supplementaire-depenses-c-2020-2021/affectations-bloquees-autorisations-votees.html"}}
     relatifs au Budget supplémentaire des dépenses (C) 2020-2021.
+
+    Une partie du montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021, mais a ensuite été reportée à 2021-2022. Ces autorisations
+    votées de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics 2021.
 
 covid_estimates_COV115_2020_tooltip:
   transform: [handlebars,markdown]
@@ -40,9 +42,7 @@ covid_estimates_COV115_2020_tooltip:
     These voted authorities were reported as frozen allotments in the 2020-21 Supplementary Estimates (C) supplemental information
     {{ext_link "online" "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/supplementary-estimates/supplementary-estimates-c-2020-21/frozen-allotments-voted-authorities.html"}}.
   fr: |
-    SUPPS_TODO text has changed a bit (not in what was sent to translation, but should get same paragraph 1 change as COV082 tooltip)
-
-    Comprend 500 millions de dollars pour les EPI qui ont été approuvés dans le budget supplémentaire des dépenses (B) 2020-2021, mais qui ont ensuite été reportés à 2021-2022.
+    Le budget principal des dépenses comprend 500 millions de dollars pour les EPI qui ont été approuvés dans le budget supplémentaire des dépenses (B) 2020-2021, mais qui ont ensuite été reportés à 2021-2022.
     Ces autorisations votées ont été inscrites comme affectations bloquées dans les renseignements supplémentaires
     {{ext_link "en ligne" "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/budgets-supplementaires/budget-supplementaire-depenses-c-2020-2021/affectations-bloquees-autorisations-votees.html"}}
     relatifs au Budget supplémentaire des dépenses (C) 2020-2021.
@@ -53,10 +53,8 @@ covid_estimates_supps_a_partial_reprofile_2020_tooltip:
     A portion of the Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22. 
     The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
-    SUPPS_TODO text has changed a bit  
-
-    Une partie de ce montant a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022. 
-    Ces autorisations votées de 2020-2021 seraient inscrites comme affectations bloquées dans les Comptes Publics du 2021.
+    Une partie du montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021, mais a ensuite été reportée à 2021-2022.
+    Ces autorisations votées de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics du 2021.
 
 covid_estimates_supps_a_full_reprofile_2020_tooltip:
   transform: [markdown]
@@ -64,7 +62,5 @@ covid_estimates_supps_a_full_reprofile_2020_tooltip:
     The Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22.
     The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
-    SUPPS_TODO text has changed a bit  
-
-    Ce montant a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022.
-    Ces autorisations votées de 2020-2021 seraient inscrites comme affectations bloquées dans les Comptes Publics du 2021.
+    Le montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022.
+    Ces autorisations votées de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics 2021.
