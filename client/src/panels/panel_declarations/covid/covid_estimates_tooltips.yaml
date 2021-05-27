@@ -45,16 +45,16 @@ covid_estimates_2020_partial_reprofile_tooltip:
   transform: [markdown]
   en: |
     A portion of this amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22. 
-    The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts
+    The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
     Une partie de ce montant a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022. 
-    Ces autorisations votées de 2020-2021 seraient inscrites comme affectations bloquées dans les Comptes Publics du 2021
+    Ces autorisations votées de 2020-2021 seraient inscrites comme affectations bloquées dans les Comptes Publics du 2021.
 
 covid_estimates_2020_full_reprofile_tooltip:
   transform: [markdown]
   en: |
     This amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22.
-    The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts
+    The voted authorities for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
     Ce montant a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022.
-    Ces autorisations votées de 2020-2021 seraient inscrites comme affectations bloquées dans les Comptes Publics du 2021
+    Ces autorisations votées de 2020-2021 seraient inscrites comme affectations bloquées dans les Comptes Publics du 2021.
