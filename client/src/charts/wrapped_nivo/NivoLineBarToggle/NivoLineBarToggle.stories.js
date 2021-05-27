@@ -19,7 +19,7 @@ Basic.args = {
   legend_title: "Legend Title",
   bar: true,
   graph_options: {
-    ticks: ["2000", "2001", "2002", "2003", "2004"],
+    ticks: ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"],
     y_axis: "y-axis",
   },
   get_colors: () =>
@@ -29,22 +29,22 @@ Basic.args = {
     {
       active: true,
       data: [1001, 2003, 1998, 347, 800],
-      label: "group 1",
+      label: "Group 1",
     },
     {
       active: true,
       data: [609, 343, 888, 2456, 2232],
-      label: "group 2",
+      label: "Group 2",
     },
     {
       active: true,
       data: [2000, 3000, 3333, 778, 1500],
-      label: "group 3",
+      label: "Group 3",
     },
     {
       active: true,
       data: [900, 877, 2009, 2700, 777],
-      label: "group 4",
+      label: "Group 4",
     },
   ],
   disable_toggle: false,
