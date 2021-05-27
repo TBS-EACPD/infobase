@@ -39,7 +39,7 @@ const tooltips_by_topic = {
     {
       fiscal_years: [2021],
       subject_ids: ["*"],
-      topic_ids: ["COV043", "COV113", "COV118", "COV145"],
+      topic_ids: ["COV043", "COV113", "COV118", "COV145", "COV204"],
       text: text_maker("covid_estimates_2020_partial_reprofile_tooltip"),
     },
     {
@@ -73,7 +73,6 @@ const tooltips_by_topic = {
         "COV141",
         "COV153",
         "COV154",
-        "COV204",
         "COV231",
       ],
       text: text_maker("covid_estimates_2020_full_reprofile_tooltip"),
