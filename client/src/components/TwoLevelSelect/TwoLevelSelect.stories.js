@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { TwoLevelSelect } from "./TwoLevelSelect";
 
@@ -7,7 +7,16 @@ export default {
   component: TwoLevelSelect,
 };
 
-const Template = (args) => <TwoLevelSelect {...args} />;
+const Template = (args) => {
+  // I don't think the initial value of selected matters
+  const [selected, setSelected] = useState("0");
+
+  function onSelect(value) {
+    setSelected(value);
+  }
+
+  return <TwoLevelSelect {...args} {...onSelect} />;
+};
 
 const grouped_options = [
   {
@@ -44,9 +53,7 @@ export const Basic = Template.bind({});
 Basic.args = {
   style: {},
   id: "",
-  // selected,
   className: "",
   grouped_options,
-  // onSelect,
   disabled: false,
 };
