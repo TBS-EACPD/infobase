@@ -8,7 +8,7 @@ import { createStore } from "redux";
 
 import { HeaderNotification } from "src/components/HeaderNotification";
 import { PageDetails } from "src/components/PageDetails";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
 
 import { initialize_analytics } from "src/core/analytics";
 import { DevFip } from "src/core/DevFip";
