@@ -18,5 +18,5 @@ Basic.args = {
   a11y_label: "Label",
   placeHolder: "Write something",
   debounceTime: 10000,
-  inputClassName: "search input-sm",
+  inputClassName: "",
 };
