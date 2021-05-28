@@ -146,6 +146,7 @@ const schema = `
   type ServiceStandard{
     standard_id: String
     service_id: String
+    random: String
 
     name: String
 
