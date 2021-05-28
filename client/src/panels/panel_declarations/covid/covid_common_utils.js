@@ -167,8 +167,11 @@ const get_date_last_updated_text = (fiscal_year, month_last_updated) => {
     }
   })();
 
-  // little quirk of Date, day zero of a given month returns the last day of the prior month
-  const end_of_month_date = new Date(calendar_year, month_last_updated + 1, 0);
+  // two quirks of Date...
+  //  1) month is 0 indexed, even though year and day aren't
+  //  2) day zero of a given month returns the last day of the prior month
+  // ... so even though our month_last_updated is NOT zero indexed, "day zero" of month_last_updated gives what we want
+  const end_of_month_date = new Date(calendar_year, month_last_updated, 0);
 
   return new Intl.DateTimeFormat(`${lang}-CA`, {
     year: "numeric",

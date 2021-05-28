@@ -21,7 +21,7 @@ export default async function ({ models }) {
       // covid_expenditures.csv contains the bud/non-bud split, but the client doesn't use it yet and supporting it creates lots of room for error,
       // so for now it's dropped and rolled up here
       ..._.omit(row, ["is_budgetary", "calendar_month"]),
-      month_last_updated: +row.calendar_month - 1,
+      month_last_updated: +row.calendar_month,
       vote: +row.vote,
       stat: +row.stat,
     }))
@@ -56,7 +56,7 @@ export default async function ({ models }) {
               `covid_expenditures.csv contains more than one uniqe calendar_month (${calendar_month}) for ${fiscal_year}`
             );
           } else {
-            return _.first(calendar_month) - 1;
+            return _.first(calendar_month);
           }
         })
         .value()
