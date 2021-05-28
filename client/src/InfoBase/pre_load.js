@@ -1,5 +1,5 @@
 import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
-import "src/components/LeafSpinner.scss";
+import "src/components/SpinnerWrapper/LeafSpinner.scss";
 
 export default function () {
   const app_el = document.querySelector("#app");
