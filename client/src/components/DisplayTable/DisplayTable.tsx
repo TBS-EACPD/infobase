@@ -9,7 +9,7 @@ import {
   Format,
 } from "src/components/misc_util_components";
 import { SortDirections } from "src/components/SortDirection";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
 
 import { LegendList } from "src/charts/legends/LegendList";
 
