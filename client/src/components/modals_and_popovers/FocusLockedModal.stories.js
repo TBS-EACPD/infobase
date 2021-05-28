@@ -1,4 +1,5 @@
-import React from "react";
+import _ from "lodash";
+import React, { Fragment } from "react";
 
 import { FocusLockedModal } from "./FocusLockedModal";
 
@@ -7,9 +8,20 @@ export default {
   component: FocusLockedModal,
 };
 
-const Template = (args) => <FocusLockedModal {...args} />;
+const Template = (args) => {
+  return (
+    <Fragment>
+      <div id="ib-site-header-area" />
+      <div style={{ height: "500vh" }}> Switch mounted control to focus </div>
+      <div
+        id="wb-info"
+        style={{ height: "300px", borderTop: "2px black solid" }}
+      />
+      <FocusLockedModal {...args} />
+    </Fragment>
+  );
+};
 
-const children = <div>Children</div>;
 const aria_label = {
   en: "English",
   fr: "Francais",
@@ -18,12 +30,14 @@ const aria_label = {
 export const Basic = Template.bind({});
 Basic.args = {
   // text
-  children,
+  children: "Focused Modal",
   aria_label,
 
   // booleans
-  mounted: true,
-  on_exit: true,
+  mounted: false,
+
+  // functions
+  // on_exit
 
   // css
   additional_dialogue_class: "",
