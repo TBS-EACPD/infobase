@@ -27,7 +27,7 @@ export { BackToTop } from "./BackToTop/BackToTop";
 export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
 export { Panel } from "./Panel/Panel";
 export { ShareButton } from "./ShareButton/ShareButton";
-export { WriteToClipboard } from "./WriteToClipboard";
+export { WriteToClipboard } from "./WriteToClipboard/WriteToClipboard";
 export { PDFGenerator } from "./PDFGenerator";
 export { CountdownCircle } from "./CountdownCircle/CountdownCircle";
 export { Countdown } from "./Countdown/Countdown";

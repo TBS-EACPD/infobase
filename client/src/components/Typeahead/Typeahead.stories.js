@@ -107,3 +107,9 @@ BasicTypeahead.args = {
   min_length: 2,
   data,
 };
+
+export const HeaderTypeahead = TypeaheadTemplate.bind({});
+HeaderTypeahead.args = {
+  min_length: 2,
+  data,
+};
