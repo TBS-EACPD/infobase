@@ -12,7 +12,7 @@ export const sort_func_template = (a_name, b_name) => {
 
 export const default_subject_name_sort_func = (
   subject_class,
-  subject_id_a,
+  subject_id_a_B,
   subject_id_b
 ) => {
   if (subject_class && subject_id_a && subject_id_b) {
