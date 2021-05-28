@@ -9,6 +9,7 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
+  AlertBanner,
 } from "src/components/index";
 
 import {
@@ -393,6 +394,13 @@ class CovidExpendituresPanel extends React.Component {
               on_select_year={this.on_select_year}
               selected_year={selected_year}
             />
+            {selected_year === 2021 && (
+              <AlertBanner banner_class={"warning"}>
+                {
+                  "Warning: 2021 expenditures here are just a copy of 2020 expenditures, to facilitate early development work"
+                }
+              </AlertBanner>
+            )}
             <AboveTabFootnoteList subject={panel_args.subject}>
               <TM
                 k="covid_expenditures_above_tab_footnote_list"
