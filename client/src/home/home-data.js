@@ -68,18 +68,20 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "covid_expenditures_estimated_exp_2021",
+    href:
+      "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
+    is_new: "true",
+  },
+  {
     text_key: "supps_a",
     href: "#compare_estimates",
     is_new: "true",
   },
   {
-    text_key: "covid_expenditures_estimated_exp",
-    href: "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
-    is_new: "true",
-  },
-  {
     text_key: "covid_measure_spending_auth",
-    href: "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+    href:
+      "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
   },
   {
     text_key: "quick_link_people_2020",
@@ -91,7 +93,8 @@ const featured_content_items = _.compact([
   },
   {
     text_key: "quick_link_main_estimates",
-    href: "#rpb/.-.-(table.-.-'orgVoteStatEstimates.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7best_last_year_4*7d*7d_estimates.-.-'*7b*7best_last_year_3*7d*7d_estimates.-.-'*7b*7best_last_year_2*7d*7d_estimates.-.-'*7b*7best_last_year*7d*7d_estimates.-.-'*7b*7best_in_year*7d*7d_estimates))",
+    href:
+      "#rpb/.-.-(table.-.-'orgVoteStatEstimates.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7best_last_year_4*7d*7d_estimates.-.-'*7b*7best_last_year_3*7d*7d_estimates.-.-'*7b*7best_last_year_2*7d*7d_estimates.-.-'*7b*7best_last_year*7d*7d_estimates.-.-'*7b*7best_in_year*7d*7d_estimates))",
   },
   {
     text_key: "quick_link_DRR_1920",
