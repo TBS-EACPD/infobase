@@ -1,47 +1,52 @@
+import { useArgs } from "@storybook/client-api";
 import React from "react";
 
-import { CountdownCircle } from "src/components/CountdownCircle/CountdownCircle";
+import { StatelessDetails } from "./Details";
 
-import { Details } from "./Details";
+import { Timer } from "./Timer";
 
 export default {
   title: "Dropdown/Details",
-  component: Details,
+  component: StatelessDetails,
+
+  // Restricting the control of booleans
+  argTypes: {
+    persist_content: {
+      control: "",
+    },
+    is_open: {
+      control: "",
+    },
+  },
+
+  // Need decorators to use useArgs()
+  decorators: [(Story) => <div>{Story()}</div>],
 };
 
-// time: 10000,
-// size: "20em",
-// color: "blue",
-// stroke_width: "1em",
-// show_numbers: true,
-
 const Template = (args) => {
+  const [_, updateArgs] = useArgs();
+
+  const on_click = () => {
+    updateArgs({ ...args, is_open: !args.is_open });
+  };
+
   return (
-    <div>
-      <Details {...args} />
-      <CountdownCircle {...args} />
-    </div>
+    <>
+      <StatelessDetails {...args} on_click={on_click} />
+      <Timer persist_content={args.persist_content} is_open={args.is_open} />
+    </>
   );
 };
 
-const summary_content = <div>Summary</div>;
-const content = <div>Content</div>;
+const summary_content = "Summary";
 
 export const PersistContent = Template.bind({});
 PersistContent.args = {
-  // Details
   is_open: false,
   summary_content,
   persist_content: true,
-  content,
-
-  // CountdownCircle
-  time: 10000,
-  size: "20em",
-  color: "red",
-  stroke_width: "1em",
-  show_numbers: true,
-  on_end_callback: "",
+  content:
+    "Persist Content: Children are hidden but present, so the timer runs even if this closes.",
 };
 
 export const NonPersistContent = Template.bind({});
@@ -49,13 +54,6 @@ NonPersistContent.args = {
   is_open: false,
   summary_content,
   persist_content: false,
-  content,
-
-  // CountdownCircle
-  time: 10000,
-  size: "20em",
-  color: "red",
-  stroke_width: "1em",
-  show_numbers: true,
-  on_end_callback: "",
+  content:
+    "Non-Persist Content: Children are unrendered, so the timer will stop when this closes.",
 };
