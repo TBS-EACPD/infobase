@@ -156,10 +156,8 @@ export const declare_employee_age_panel = () =>
         // Options for NivoLineBarToggle React components
         const age_group_options = {
           legend_title: text_maker("age_group"),
-          bar: true,
           graph_options: {
             ticks: ticks,
-            y_axis: text_maker("employees"),
             formatter: formats.big_int_raw,
           },
           initial_graph_mode: "bar_grouped",
@@ -167,10 +165,8 @@ export const declare_employee_age_panel = () =>
         };
         const avg_age_options = {
           legend_title: text_maker("legend"),
-          bar: false,
           graph_options: {
             ticks: ticks,
-            y_axis: text_maker("avgage"),
             formatter: formats.int,
           },
           disable_toggle: true,

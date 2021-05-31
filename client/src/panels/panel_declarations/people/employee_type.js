@@ -127,10 +127,8 @@ export const declare_employee_type_panel = () =>
               <NivoLineBarToggle
                 {...{
                   legend_title: text_maker("employee_type"),
-                  bar: true,
                   graph_options: {
                     ticks: ticks,
-                    y_axis: text_maker("employees"),
                     formatter: formats.big_int_raw,
                   },
                   initial_graph_mode: "bar_stacked",

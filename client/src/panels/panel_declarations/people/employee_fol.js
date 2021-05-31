@@ -136,9 +136,7 @@ export const declare_employee_fol_panel = () =>
               <NivoLineBarToggle
                 {...{
                   legend_title: text_maker("FOL"),
-                  bar: true,
                   graph_options: {
-                    y_axis: text_maker("employees"),
                     ticks: ticks,
                     formatter: formats.big_int_raw,
                   },

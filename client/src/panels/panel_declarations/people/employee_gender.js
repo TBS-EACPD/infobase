@@ -141,9 +141,7 @@ export const declare_employee_gender_panel = () =>
               <NivoLineBarToggle
                 {...{
                   legend_title: text_maker("employee_gender"),
-                  bar: true,
                   graph_options: {
-                    y_axis: text_maker("employees"),
                     ticks: ticks,
                     formatter: formats.big_int_raw,
                   },

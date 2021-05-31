@@ -171,9 +171,7 @@ export const declare_employee_executive_level_panel = () =>
               <NivoLineBarToggle
                 {...{
                   legend_title: text_maker("ex_level"),
-                  bar: true,
                   graph_options: {
-                    y_axis: text_maker("employees"),
                     ticks: ticks,
                     formatter: formats.big_int_raw,
                   },
