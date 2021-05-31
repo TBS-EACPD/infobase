@@ -38,8 +38,7 @@ const graph_keys = _.chain(graph_data).first().omit("index_key").keys().value();
 
 const [blue, teal] = newIBCategoryColors;
 
-export const NivoBar = Template.bind({});
-NivoBar.args = {
+const common_args = {
   data: graph_data,
   keys: graph_keys,
   indexBy: "index_key",
@@ -53,17 +52,8 @@ NivoBar.args = {
   disable_table_view: false,
 };
 
+export const NivoBar = Template.bind({});
+NivoBar.args = common_args;
+
 export const NivoHBar = HTemplate.bind({});
-NivoHBar.args = {
-  data: graph_data,
-  keys: graph_keys,
-  indexBy: "index_key",
-  colors: [blue, teal],
-  is_money: false,
-  remove_left_axis: false,
-  remove_bottom_axis: false,
-  enableLabel: false,
-  enableGridX: true,
-  enableGridY: true,
-  disable_table_view: false,
-};
+NivoHBar.args = common_args;
