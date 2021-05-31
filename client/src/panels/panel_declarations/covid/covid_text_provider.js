@@ -3,11 +3,7 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/index";
 
-import {
-  COVID_DATE_LAST_UPDATED,
-  COVID_CURRENT_YEAR,
-  COVID_NEXT_YEAR,
-} from "src/models/covid/covid_config";
+import { COVID_DATE_LAST_UPDATED } from "src/models/covid/covid_config";
 
 import common_covid_lang from "./covid_common_lang.yaml";
 
@@ -24,8 +20,6 @@ export const covid_create_text_maker_component = (text) => {
     text_maker(key, {
       ...args,
       COVID_DATE_LAST_UPDATED,
-      COVID_CURRENT_YEAR,
-      COVID_NEXT_YEAR,
     });
 
   const ExtendedTM = (props) => <TM tmf={extended_text_maker} {...props} />;
