@@ -394,7 +394,7 @@ Handlebars.registerHelper("gt", function (context, other_arg) {
 
 // {{rt "key"}} -> runs template
 Handlebars.registerHelper("rt", function (context) {
-  return run_template(context);
+  return run_template(context, this);
 });
 
 // taken from [this recipe](http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/)
