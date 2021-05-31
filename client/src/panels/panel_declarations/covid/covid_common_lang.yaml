@@ -53,3 +53,18 @@ supps_list:
       ({{fmt_array_to_grammatical_list supps_letters}})
     {{/compare}}
 
+covid_erp_source:
+  transform: [handlebars]
+  en: |
+    {{#compare selected_year 2021 operator=">=" }}
+    {{ext_link (rt "Budget {{selected_year}}") (rt "https://www.budget.gc.ca/{{selected_year}}/home-accueil-en.html")}}
+    {{else}}
+    Chapters 1 and 2 of the {{ext_link "Fall Economic Statement 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-en.html"}}
+    {{/compare}}
+  fr: |
+    {{#compare selected_year 2021 operator=">=" }}
+    le {{ext_link (rt "budget {{selected_year}}") (rt "https://www.budget.gc.ca/{{selected_year}}/home-accueil-fr.html")}}
+    {{else}}
+    les chapitres 1 et 2 de l'{{ext_link "Énoncé économique de l'automne 2020" "https://www.budget.gc.ca/fes-eea/2020/report-rapport/toc-tdm-fr.html"}}
+    {{/compare}}
+  

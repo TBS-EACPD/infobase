@@ -84,7 +84,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
               k="covid_intro_est"
               args={{
                 ...panel_args,
-                fiscal_year: selected_year,
+                selected_year,
                 gov_tabled_est_docs_in_year_text: _.chain(covid_estimates)
                   .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
                   .thru(get_est_doc_list_plain_text)
@@ -104,7 +104,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
                 k="covid_intro_exp"
                 args={{
                   ...panel_args,
-                  fiscal_year: selected_year,
+                  selected_year,
                   date_last_updated_text: get_date_last_updated_text(
                     selected_year,
                     covid_expenditures.month_last_updated
