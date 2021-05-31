@@ -1,9 +1,4 @@
-import { scaleOrdinal } from "d3-scale";
 import React from "react";
-
-import { newIBCategoryColors } from "src/core/color_schemes";
-
-import { infobase_colors_smart } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 import { NivoLineBarToggle } from "./NivoLineBarToggle";
 
@@ -17,13 +12,9 @@ const Template = (args) => <NivoLineBarToggle {...args} />;
 export const Basic = Template.bind({});
 Basic.args = {
   legend_title: "Legend Title",
-  bar: true,
   graph_options: {
     ticks: ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"],
-    y_axis: "y-axis",
   },
-  get_colors: () =>
-    infobase_colors_smart(scaleOrdinal().range(newIBCategoryColors)),
   initial_graph_mode: "bar_grouped",
   data: [
     {
