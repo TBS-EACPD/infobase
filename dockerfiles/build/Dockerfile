@@ -12,20 +12,14 @@ RUN apk update && apk upgrade && \
     curl \
     ca-certificates \
     python \
-    procps
+    procps \
+    openssh
 USER ${SERVICE_USER}
 RUN curl -sSL https://sdk.cloud.google.com | bash && \
   exec sh && \
   gcloud init
 ENV PATH $SERVICE_HOME/google-cloud-sdk/bin:$PATH
 USER root
-
-# image specific
-RUN apk add --no-cache --virtual .gyp \
-  make \
-  openssh \
-  g++ \
-  && apk del .gyp
 
 USER    ${SERVICE_USER}
 WORKDIR ${SERVICE_HOME}
