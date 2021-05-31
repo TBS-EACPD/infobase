@@ -1,16 +1,10 @@
 import _ from "lodash";
 import React from "react";
 
-import { create_text_maker, run_template } from "src/models/text";
-
-import { year_templates } from "src/models/years";
-
-import { formats } from "src/core/format";
+import { primaryColor } from "src/core/color_defs";
+import { newIBCategoryColors } from "src/core/color_schemes";
 
 import { WrappedNivoLine } from "./WrappedNivoLine";
-
-import text from "./WrappedNivoLine.yaml";
-const { text_maker, TM } = create_text_maker(text);
 
 export default {
   title: "charts/WrappedNivoLine",
@@ -19,51 +13,72 @@ export default {
 
 const Template = (args) => <WrappedNivoLine {...args} />;
 
-// Working on parameters
-// const { people_years } = year_templates;
+const graph_data = [
+  {
+    id: "Group 1",
+    data: [
+      { x: "Year 1", y: 2008 },
+      { x: "Year 2", y: 1278 },
+      { x: "Year 3", y: 909 },
+    ],
+  },
+  {
+    id: "Group 2",
+    data: [
+      { x: "Year 2", y: 1278 },
+      { x: "Year 3", y: 909 },
+      { x: "Year 4", y: 2998 },
+      { x: "Year 5", y: 1900 },
+    ],
+  },
+  {
+    id: "Group 3",
+    data: [
+      { x: "Year 5", y: 2008 },
+      { x: "Year 6", y: 1278 },
+    ],
+  },
+  {
+    id: "Group 4",
+    data: [
+      { x: "Year 3", y: 128 },
+      { x: "Year 4", y: 3878 },
+      { x: "Year 5", y: 2769 },
+      { x: "Year 6", y: 1111 },
+    ],
+  },
+];
 
-// const series = _.chain(data)
-//   .filter(({ label }) => _.includes(selected, label))
-//   .map(({ label, data }) => [label, data])
-//   .fromPairs()
-//   .value();
-
-// const testData = ["label1", "label2", "label3", "label4", "label5"];
-// const ticks = _.map(people_years, (y) => `${run_template(y)}`);
-
-// const graph_options = {
-//   ticks: ticks,
-//   y_axis: text_maker("employees"),
-//   formatter: formats.big_int_raw,
-// },
-
-// const selected = _.chain(props.data)
-// .filter(({ active }) => _.isUndefined(active) || active)
-// .map(({ label }) => label)
-// .value(),
-
-// const data_formatter_line = _.map(series, (data_array, data_label) => ({
-//   id: data_label,
-//   data: _.map(data_array, (spending_value, tick_index) => ({
-//     x: graph_options.ticks[tick_index],
-//     y: spending_value,
-//   })),
-// }));
-
-// const data = _.map(testData, (label, index) => ({}));
+const [
+  blue,
+  teal,
+  orange,
+  purple,
+  light_green,
+  dark_teal,
+] = newIBCategoryColors;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  // data: data_formatter_line,
-  margin: {
-    top: 30,
-    right: 20,
-    bottom: 65,
-    left: 65,
-  },
-  bttm_axis: {
-    tickSize: 3,
-    tickRotation: -45,
-    tickPadding: 10,
+  data: graph_data,
+  colors: [blue, teal, orange, purple],
+  is_money: false,
+  remove_left_axis: false,
+  remove_bottom_axis: false,
+  enableLabel: false,
+  enableGridX: true,
+  enableGridY: true,
+  disable_table_view: false,
+  enableSlices: "x",
+  pointColor: primaryColor,
+  pointSize: 10,
+  xScale: { type: "point" },
+  yScale: {
+    max: 4000,
+    min: 0,
+    stacked: false,
+    toggle: false,
+    type: "linear",
+    zoomed: false,
   },
 };
