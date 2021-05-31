@@ -36,7 +36,7 @@ const graph_data = [
 
 const graph_keys = _.chain(graph_data).first().omit("index_key").keys().value();
 
-const [blue, teal, ...rest] = newIBCategoryColors;
+const [blue, teal] = newIBCategoryColors;
 
 export const NivoBar = Template.bind({});
 NivoBar.args = {
@@ -47,7 +47,6 @@ NivoBar.args = {
   is_money: false,
   remove_left_axis: false,
   remove_bottom_axis: false,
-  add_top_axis: false,
   enableLabel: false,
   enableGridX: true,
   enableGridY: true,
@@ -63,7 +62,6 @@ NivoHBar.args = {
   is_money: false,
   remove_left_axis: false,
   remove_bottom_axis: false,
-  add_top_axis: false,
   enableLabel: false,
   enableGridX: true,
   enableGridY: true,
