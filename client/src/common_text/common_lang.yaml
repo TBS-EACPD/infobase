@@ -739,6 +739,13 @@ covid_measure_spending_auth:
 covid_expenditures_estimated_exp:
   en: Estimated Expenditures by COVID-19 Measure
   fr: Dépenses estimées par mesure au titre de la COVID-19
+covid_expenditures_estimated_exp_2021:
+  transform: [handlebars]
+  en: |
+    {{fmt_year_to_fiscal_year 2021}} {{{gt "covid_expenditures_estimated_exp"}}}
+  fr: |
+    {{{gt "covid_expenditures_estimated_exp"}}} {{fmt_year_to_fiscal_year 2021}}
+    
 
 
 ##################################
