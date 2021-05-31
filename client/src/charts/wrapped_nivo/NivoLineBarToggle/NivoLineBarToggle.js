@@ -12,8 +12,8 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/wrapped_nivo_bar";
 import { infobase_colors_smart } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/WrappedNivoBar/wrapped_nivo_bar";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/WrappedNivoLine";
 import { toggle_list } from "src/general_utils";
 

@@ -1,4 +1,7 @@
-import { WrappedNivoBar, WrappedNivoHBar } from "./wrapped_nivo_bar";
+import {
+  WrappedNivoBar,
+  WrappedNivoHBar,
+} from "./WrappedNivoBar/wrapped_nivo_bar";
 import { WrappedNivoCircleProportion } from "./WrappedNivoCircleProportion";
 import { WrappedNivoLine } from "./WrappedNivoLine";
 import { WrappedNivoPie } from "./WrappedNivoPie";

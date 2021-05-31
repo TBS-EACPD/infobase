@@ -13,7 +13,7 @@ import {
   general_default_props,
   get_formatter,
   fix_legend_symbols,
-} from "./wrapped_nivo_common";
+} from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 const bar_table = (
   data,
