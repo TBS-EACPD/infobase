@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { primaryColor } from "src/core/color_defs";
 import { newIBCategoryColors } from "src/core/color_schemes";
 
 import { WrappedNivoLine } from "./WrappedNivoLine";
@@ -49,18 +48,19 @@ const graph_data = [
   },
 ];
 
-const [
-  blue,
-  teal,
-  orange,
-  purple,
-  light_green,
-  dark_teal,
-] = newIBCategoryColors;
+const raw_graph_data = _.chain(graph_data)
+  .map((row) => _.map(row.data, (point) => point.y))
+  .flatten()
+  .value();
+
+console.log(raw_graph_data);
+
+const [blue, teal, orange, purple] = newIBCategoryColors;
 
 export const Basic = Template.bind({});
 Basic.args = {
   data: graph_data,
+  raw_data: raw_graph_data,
   colors: [blue, teal, orange, purple],
   is_money: false,
   remove_left_axis: false,
@@ -69,16 +69,4 @@ Basic.args = {
   enableGridX: true,
   enableGridY: true,
   disable_table_view: false,
-  enableSlices: "x",
-  pointColor: primaryColor,
-  pointSize: 10,
-  xScale: { type: "point" },
-  yScale: {
-    max: 4000,
-    min: 0,
-    stacked: false,
-    toggle: false,
-    type: "linear",
-    zoomed: false,
-  },
 };
