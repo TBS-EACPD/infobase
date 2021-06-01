@@ -31,8 +31,8 @@ jobs:
           path: "~/InfoBase"
       - restore_cache:
           keys:
-            - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
-            - top-level-dependencies-{{ checksum "package-lock.json" }}
+            - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
+            - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
       - run: 
           command: |
             [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
@@ -43,11 +43,11 @@ jobs:
           paths:
             - email_backend/node_modules
             - scripts/common_node_scripts/node_modules
-          key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}
+          key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
       - save_cache:
           paths:
             - node_modules
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
 
       - run: (cd email_backend && npm run unit_tests)
 
@@ -84,7 +84,7 @@ jobs:
       # Use checksum of branch list to tell if the dev DBs need to be cleaned up
       - restore_cache:
           keys:
-            - dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
+            - dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
       - run:
           command: |
             if [ ! -f "./dev-dbs-clean-for-these-branches.txt" ]; then
@@ -95,7 +95,7 @@ jobs:
       - save_cache:
           paths:
             - ./dev-dbs-clean-for-these-branches.txt
-          key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}
+          key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
 
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
@@ -110,20 +110,20 @@ jobs:
 
       - restore_cache:
           keys:
-            - top-level-dependencies-{{ checksum "package-lock.json" }}
+            - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
       - run: 
           command: |
             [ -e "node_modules" ] ||  npm ci
       - save_cache:
           paths:
             - node_modules
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
 
       - run: ./scripts/ci_scripts/create_envs.sh
 
       - restore_cache:
           keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}
+            - client-dependencies-{{ checksum "client/package-lock.json" }}-v2
       - run: 
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
@@ -131,7 +131,7 @@ jobs:
           paths:
             - client/node_modules
             - scripts/common_node_scripts/node_modules
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}
+          key: client-dependencies-{{ checksum "client/package-lock.json" }}-v2
 
       - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
@@ -153,20 +153,20 @@ jobs:
 
       - restore_cache:
           keys:
-            - prod-build-{{ .Branch }}-{{ .Revision }}
+            - prod-build-{{ .Branch }}-{{ .Revision }}-v2
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "none")
       - save_cache:
           paths:
             - client/build
-          key: prod-build-{{ .Branch }}-{{ .Revision }}
+          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
       
       - run: cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y
 
       - restore_cache:
           keys:
-            - server-dependencies-{{ checksum "server/package-lock.json" }}
+            - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
       - run: 
           command: |
             [ -e "server/node_modules" ] || (cd server && npm ci)
@@ -174,18 +174,18 @@ jobs:
           paths:
             - server/node_modules
             - scripts/common_node_scripts/node_modules
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}
+          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
 
       - restore_cache:
           keys:
-            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}
+            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
       - run:
           command: |
             [ -f "server/transpiled_build/app.js" ] || (cd server && ./deploy_scripts/build.sh)
       - save_cache:
           paths:
             - server/transpiled_build
-          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}
+          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
 
       - persist_to_workspace:
           root: ./
@@ -301,7 +301,7 @@ jobs:
       # Use this cached file to tell if the data needs to be loaded to mongodb (if on a new branch or if data has changed)
       - restore_cache:
           keys:
-            - data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums.txt" }}
+            - data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums.txt" }}-v2
       - run:
           command: |
             [ -f "./this-data-is-deployed.txt" ] || (cd server && npm run populate_db:remote)
@@ -309,7 +309,7 @@ jobs:
       - save_cache:
           paths:
             - ./this-data-is-deployed.txt
-          key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}
+          key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}-v2
 
 
   # Note: the image used for this job is provided by google
@@ -330,7 +330,7 @@ jobs:
       # Use this cached file to tell if the api needs to be redeployed (if on a new branch, if function code's changed, or if server node modules have changed)
       - restore_cache:
           keys:
-            - api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
+            - api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
       - run:
           command: |
             [ -f "./this-api-is-deployed.txt" ] || (cd server && ./deploy_scripts/ci_deploy_function.sh)
@@ -338,7 +338,7 @@ jobs:
       - save_cache:
           paths:
             - ./this-api-is-deployed.txt
-          key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}
+          key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
 
 
   # Note: the image used for this job is provided by google
