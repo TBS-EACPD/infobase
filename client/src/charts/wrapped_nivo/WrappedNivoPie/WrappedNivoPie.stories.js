@@ -51,4 +51,5 @@ Basic.args = {
   sort_legend: false,
   include_percent: true,
   is_money: false,
+  reverse_layout: false,
 };
