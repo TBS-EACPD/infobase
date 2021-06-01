@@ -1,10 +1,10 @@
 FROM mhart/alpine-node:14
 
-ENV SERVICE_USER build-image-user
+ENV SERVICE_USER service-user
 ENV SERVICE_HOME /home/${SERVICE_USER}
 
-# common
 RUN adduser -h ${SERVICE_HOME} -s /sbin/nologin -u 1000 -D ${SERVICE_USER}
+
 RUN apk update && apk upgrade && \
   apk add --no-cache \
     git \
@@ -14,13 +14,12 @@ RUN apk update && apk upgrade && \
     python \
     procps \
     openssh
+
 USER ${SERVICE_USER}
+
 RUN curl -sSL https://sdk.cloud.google.com | bash && \
   exec sh && \
   gcloud init
 ENV PATH $SERVICE_HOME/google-cloud-sdk/bin:$PATH
-USER root
 
-USER    ${SERVICE_USER}
-WORKDIR ${SERVICE_HOME}
 VOLUME  ${SERVICE_HOME}
