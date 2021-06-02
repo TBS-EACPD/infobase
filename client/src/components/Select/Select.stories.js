@@ -1,16 +1,31 @@
+import { useArgs } from "@storybook/client-api";
 import React from "react";
 
 import { Select } from "./Select";
 
 export default {
-  title: "Select",
+  title: "Input/Select",
   component: Select,
+  argTypes: {
+    selected: {
+      defaultValue: "",
+    },
+  },
 };
 
-const Template = (args) => <Select {...args} />;
+const Template = (args) => {
+  const [_, updateArgs] = useArgs();
+  function onSelect(value) {
+    updateArgs({ ...args, selected: value });
+    console.log("Option " + value + " has been chosen. ");
+  }
+
+  return <Select {...args} onSelect={onSelect} />;
+};
 
 export const Basic = Template.bind({});
 Basic.args = {
+  id: 1,
   className: "",
   options: [
     {
@@ -22,8 +37,7 @@ Basic.args = {
       display: "Option 2",
     },
   ],
-  selected: 0,
   disabled: false,
   style: {},
-  title: "",
+  title: "Hi",
 };

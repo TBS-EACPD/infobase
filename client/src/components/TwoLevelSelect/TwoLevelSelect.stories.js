@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { TwoLevelSelect } from "./TwoLevelSelect";
 
 export default {
-  title: "TwoLevelSelect",
+  title: "Input/TwoLevelSelect",
   component: TwoLevelSelect,
 };
 

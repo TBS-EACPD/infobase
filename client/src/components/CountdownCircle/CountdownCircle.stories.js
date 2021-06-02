@@ -1,5 +1,4 @@
-import { useArgs } from "@storybook/client-api";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { CountdownCircle } from "./CountdownCircle";
 
@@ -10,7 +9,6 @@ export default {
 
 const Template = (args) => {
   const [end, setEnd] = useState(false);
-  const [_, updateArgs] = useArgs();
 
   function on_end_callback() {
     console.log("Time is up! Click the button to try again.");
