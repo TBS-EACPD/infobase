@@ -10,7 +10,7 @@ import { IconDownload } from "src/icons/icons";
 import { get_static_url } from "src/request_utils";
 
 import { create_text_maker_component } from "./misc_util_components";
-import { SpinnerWrapper } from "./SpinnerWrapper";
+import { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
 
 import text from "./PDFGenerator.yaml";
 

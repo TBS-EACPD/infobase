@@ -213,9 +213,11 @@ function get_optimizations(is_prod_build, is_ci, produce_stats) {
         chunkIds: "named",
       }),
       minimize: true,
-      // Terser spawns one worker per core, but is unable to accurately detect cores in CircleCI,
-      // results in spawning too many workers and draining memory resources
-      minimizer: [new TerserPlugin({ parallel: !is_ci })],
+      // Terser's parallel behaviour is to spawn one worker per core, but 1) it is unable to accurately detect cores in CircleCI and 2), for local
+      // prod builds, this can deplete resources when multiple builds are run in parallel themselves (the standard behaviour for local prod builds).
+      // Disabling parallel builds makes the least common use of prod builds slightly slower, but makes the other uses more stable (and potentially
+      // faster, in the case of resource depletion)
+      minimizer: [new TerserPlugin({ parallel: false })],
       splitChunks: {
         maxAsyncRequests: 20,
         chunks: "async",

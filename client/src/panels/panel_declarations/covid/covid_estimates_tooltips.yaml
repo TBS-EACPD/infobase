@@ -2,10 +2,10 @@
 covid_mains_2021_note:
   transform: [markdown]
   en: |
-    The 22.7 billion identified in the Main Estimates for COVID-19 includes approximately $0.6 billion that is outside the scope
+    The $22.7 billion identified in the Main Estimates for COVID-19 includes approximately $0.6 billion that is outside the scope
     of Canada’s COVID-19 Economic Response Plan (ERP).
   fr: |
-    Les 22,7 milliards au titre de la COVID-19 figurant dans le budget principal des dépenses incluent un montant d'environ 0,6 milliard de dollars qui est hors la portée 
+    Les 22,7 milliards de dollars au titre de la COVID-19 figurant dans le budget principal des dépenses incluent un montant d'environ 0,6 milliard de dollars qui est hors la portée 
     du plan d'intervention économique.
 
 covid_supps_a_2021_note:
@@ -13,7 +13,7 @@ covid_supps_a_2021_note:
   en: |
     The $20.16 billion identified in the Supplementary Estimates (A) for COVID-19 includes approximately $6.02 billion that has been reprofiled from 2020-21.
   fr: |
-    Les 20,16 milliards au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 6,02 milliard de
+    Les 20,16 milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 6,02 milliard de
     dollars qui ont été reportés de 2020-2021.
 
 # Measure table tooltips

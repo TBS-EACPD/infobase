@@ -11,11 +11,11 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
-import { toggle_list } from "src/general_utils";
 
-import { WrappedNivoBar } from "././wrapped_nivo_bar";
-import { infobase_colors_smart } from "./wrapped_nivo_common";
-import { WrappedNivoLine } from "./WrappedNivoLine";
+import { infobase_colors_smart } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/WrappedNivoBar/wrapped_nivo_bar";
+import { WrappedNivoLine } from "src/charts/wrapped_nivo/WrappedNivoLine";
+import { toggle_list } from "src/general_utils";
 
 import text from "./NivoLineBarToggle.yaml";
 

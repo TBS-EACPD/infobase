@@ -16,7 +16,7 @@ import {
 import { CheckBox } from "./CheckBox/CheckBox";
 import { create_text_maker_component } from "./misc_util_components";
 
-import { SpinnerWrapper } from "./SpinnerWrapper";
+import { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
 
 import text from "./EmailFrontend.yaml";
 
