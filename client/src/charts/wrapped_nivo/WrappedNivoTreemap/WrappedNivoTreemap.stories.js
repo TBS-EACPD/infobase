@@ -14,34 +14,90 @@ export default {
   component: WrappedNivoTreemap,
 };
 
-const graph_data_total = _.sumBy(graph_data, function (o) {
-  return o.value;
-});
-
-const graph_data = [
-  {
-    dept: "000",
-    desc: "Group 1",
-    id: 0,
-    total: graph_data_total,
-    total_of: "idk",
-    value: 32432432,
-  },
-  {
-    dept: "001",
-    desc: "Group 2",
-    id: 0,
-    total: graph_data_total,
-    total_of: "idk",
-    value: 908432,
-  },
+const graph_data_values = [
+  32432432,
+  2324234,
+  6456354,
+  3456456,
+  23746845,
+  8723476,
 ];
+
+const graph_data_total_amt = _.sum(graph_data_values);
+
+const graph_data = {
+  children: [
+    {
+      dept: "124",
+      desc: "Description 1",
+      id: 0,
+      total: graph_data_total_amt,
+      total_of: "Group 1",
+      value: graph_data_values[0],
+    },
+    {
+      dept: "124",
+      desc: "Description 2",
+      id: 1,
+      total: graph_data_total_amt,
+      total_of: "Group 2",
+      value: graph_data_values[1],
+    },
+    {
+      dept: "128",
+      desc: "Description 3",
+      id: 2,
+      total: graph_data_total_amt,
+      total_of: "Group 2",
+      value: graph_data_values[2],
+    },
+    {
+      dept: "128",
+      desc: "Description 4",
+      id: 3,
+      total: graph_data_total_amt,
+      total_of: "Group 1",
+      value: graph_data_values[3],
+    },
+    {
+      dept: "128",
+      desc: "Description 5",
+      id: 4,
+      total: graph_data_total_amt,
+      total_of: "Group 1",
+      value: graph_data_values[4],
+    },
+    {
+      dept: "128",
+      desc: "Description 6",
+      id: 5,
+      total: graph_data_total_amt,
+      total_of: "Group 1",
+      value: graph_data_values[5],
+    },
+  ],
+  color: "white",
+  name: "root",
+};
 
 const d3_scale = scaleOrdinal(newIBLightCategoryColors);
 const color_scale = (vs) =>
   function (d) {
     return d3_scale(text_func(vs, d, ""));
   };
+// const scale = scaleOrdinal()
+//   .domain(
+//     _.reverse(
+//       _.sortBy(graph_data.children, function (o) {
+//         return o.value;
+//       })
+//     )
+//   )
+//   .range(newIBLightCategoryColors);
+// const color_scale = (item) =>
+//   function (o) {
+//     return scale(o);
+//   };
 
 const { Dept } = Subject;
 
@@ -65,5 +121,5 @@ Basic.args = {
   colorScale: color_scale,
   value_string: "value",
   formatter: formats.compact1,
-  label_id: "id",
+  label_id: "desc",
 };
