@@ -53,8 +53,6 @@ const raw_graph_data = _.chain(graph_data)
   .flatten()
   .value();
 
-console.log(raw_graph_data);
-
 const [blue, teal, orange, purple] = newIBCategoryColors;
 
 export const Basic = Template.bind({});
