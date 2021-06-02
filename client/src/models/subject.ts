@@ -16,7 +16,22 @@ import {
 import { Result, Indicator } from "./results";
 import { Tag } from "./tags";
 
-const Subject = {
+const Subject: {
+  [key: string]:
+    | typeof Gov
+    | typeof Dept
+    | typeof CRSO
+    | typeof Program
+    | typeof InstForm
+    | typeof Ministry
+    | typeof Minister
+    | typeof Tag
+    | typeof Result
+    | typeof Indicator
+    | typeof CovidMeasure
+    | typeof YearsWithCovidData
+    | ((guid: string) => any);
+} = {
   Gov,
   Dept,
   CRSO,
@@ -29,14 +44,13 @@ const Subject = {
   Indicator,
   CovidMeasure,
   YearsWithCovidData,
-};
-
-Subject.get_by_guid = function get_by_guid(guid) {
-  if (!_.isString(guid)) {
-    return null;
-  }
-  let [model_type, model_id] = guid.split("_");
-  return Subject[model_type] && Subject[model_type].lookup(model_id);
+  get_by_guid: (guid: string) => {
+    if (!_.isString(guid)) {
+      return null;
+    }
+    let [model_type, model_id] = guid.split("_");
+    return Subject[model_type] && (Subject[model_type] as any).lookup(model_id);
+  },
 };
 
 // Duplicate keys in all lower case, for legacy reasons

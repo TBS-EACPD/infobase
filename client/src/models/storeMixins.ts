@@ -4,29 +4,30 @@ import { completeAssign } from "src/general_utils";
 
 class BaseClass {}
 class MixinBuilder {
-  constructor(superclass) {
+  superclass: any;
+  constructor(superclass: any) {
     this.superclass = superclass;
   }
-  with(...mixins) {
+  with(...mixins: any[]) {
     return mixins.reduce((c, mixin) => mixin(c), this.superclass);
   }
 }
 
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
-export const mix = (superclass) => new MixinBuilder(superclass);
+export const mix = (superclass: any) => new MixinBuilder(superclass);
 
-export const staticStoreMixin = (superclass) => {
+export const staticStoreMixin = (superclass: any) => {
   const _storeMap = new Map();
   const baseclass = superclass || BaseClass;
   return class extends baseclass {
-    static register(id, instance) {
+    static register(id: string, instance: any) {
       _storeMap.set(+id || id, instance);
     }
-    static lookup(id) {
+    static lookup(id: string) {
       return _storeMap.get(+id || id);
     }
     static get_all() {
-      return _.uniqBy(Array.from(_storeMap.values()));
+      return _.uniq(Array.from(_storeMap.values()));
     }
     static get __store__() {
       return _storeMap;
@@ -34,11 +35,11 @@ export const staticStoreMixin = (superclass) => {
   };
 };
 
-export const exstensibleStoreMixin = (superclass) => {
+export const exstensibleStoreMixin = (superclass: any) => {
   const baseclass = superclass || BaseClass;
   const baseclassWithStaticStore = staticStoreMixin(baseclass);
   return class extends baseclassWithStaticStore {
-    static extend(id, extension_object) {
+    static extend(id: string, extension_object: { [key: string]: any }) {
       const target_member = this.lookup(id);
       if (target_member) {
         completeAssign(target_member, extension_object);
@@ -48,7 +49,7 @@ export const exstensibleStoreMixin = (superclass) => {
         );
       }
     }
-    static extend_or_register(id, object) {
+    static extend_or_register(id: string, object: any) {
       if (this.lookup(id)) {
         this.extend(id, object);
       } else {
@@ -58,19 +59,23 @@ export const exstensibleStoreMixin = (superclass) => {
   };
 };
 
-export const PluralSingular = (superclass) => {
+export const PluralSingular = (superclass: any) => {
   const baseclass = superclass || BaseClass;
   return class extends baseclass {
-    singular(context) {
-      return this.__singular__ ? this.__singular__ : this.constructor.singular;
+    singular() {
+      return this.__singular__
+        ? this.__singular__
+        : (this.constructor as { [key: string]: any }).singular;
     }
-    plural(context) {
-      return this.__plural__ ? this.__plural__ : this.constructor.plural;
+    plural() {
+      return this.__plural__
+        ? this.__plural__
+        : (this.constructor as { [key: string]: any }).plural;
     }
   };
 };
 
-export const SubjectMixin = (superclass) => {
+export const SubjectMixin = (superclass: any) => {
   const baseclass = superclass || BaseClass;
   return class SubjectMixin extends baseclass {
     constructor() {
@@ -79,7 +84,11 @@ export const SubjectMixin = (superclass) => {
       const required_constructor_keys = ["subject_type", "singular", "plural"];
       const missing_required_constructor_properties = _.filter(
         required_constructor_keys,
-        (key) => _.chain(this.constructor).get(key).isUndefined().value()
+        (key: string) =>
+          _.chain(this.constructor as { [key: string]: any })
+            .get(key)
+            .isUndefined()
+            .value()
       );
 
       if (!_.isEmpty(missing_required_constructor_properties)) {
@@ -97,9 +106,9 @@ export const SubjectMixin = (superclass) => {
       return this.level + "_" + this.id;
     }
     get level() {
-      return this.constructor.subject_type;
+      return (this.constructor as { [key: string]: any }).subject_type;
     }
-    is(comparator) {
+    is(comparator: string | { [key: string]: any }) {
       if (_.isString(comparator)) {
         return this.level === comparator;
       }
@@ -108,7 +117,9 @@ export const SubjectMixin = (superclass) => {
   };
 };
 
-export const CanHaveServerData = (data_types) => (superclass) => {
+export const CanHaveServerData = (data_types: string[]) => (
+  superclass: any
+) => {
   const baseclass = superclass || BaseClass;
   return class SubjectMixin extends baseclass {
     constructor() {
@@ -119,7 +130,7 @@ export const CanHaveServerData = (data_types) => (superclass) => {
         .fromPairs()
         .value();
     }
-    set_has_data(data_type, has_data) {
+    set_has_data(data_type: string, has_data: boolean) {
       if (_.includes(this._API_data_types, data_type)) {
         const store_value = this._has_data[data_type];
 
@@ -137,7 +148,7 @@ export const CanHaveServerData = (data_types) => (superclass) => {
         );
       }
     }
-    has_data(data_type) {
+    has_data(data_type: string) {
       if (_.includes(this._API_data_types, data_type)) {
         if (_.isNull(this._has_data[data_type])) {
           throw new Error(
