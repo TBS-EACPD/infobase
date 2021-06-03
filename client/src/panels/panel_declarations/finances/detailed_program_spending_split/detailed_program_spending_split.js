@@ -294,7 +294,6 @@ class DetailedProgramSplit extends React.Component {
 
     // Increase height of the graph region for y-axis labels to have sufficient room
     // This is required to corretly display the labels when too many programs are present
-    // const divHeight = 650 * (graph_ready_data.length / 30) * 2 + 40;
     const divHeight = Math.max(
       650 * (graph_ready_data.length / 30) * 2,
       80 // "magic" minimum height for the graph to render as desired
@@ -405,7 +404,6 @@ class DetailedProgramSplit extends React.Component {
                             fontSize: "11px",
                           }}
                         >
-                          {console.log("")}
                           <TspanLineWrapper text={tick.value} width={40} />
                         </text>
                       </a>
