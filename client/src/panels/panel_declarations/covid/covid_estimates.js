@@ -489,7 +489,6 @@ class CovidEstimatesPanel extends React.Component {
             <StandardLegend
               items={legend_items}
               isHorizontal={true}
-              LegendCheckBoxProps={{ isSolidBox: true }}
               onClick={(label) => {
                 !(this.state.selected.length === 1 && this.state.selected.includes(label)) &&
                   this.setState({
