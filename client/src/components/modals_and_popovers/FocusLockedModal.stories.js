@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { FocusLockedModal } from "./FocusLockedModal";

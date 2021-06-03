@@ -1,7 +1,6 @@
-import _ from "lodash";
 import React from "react";
 
-import { CardBackgroundImage } from "./CardBackgroundImage.js";
+import { CardBackgroundImage } from "./CardBackgroundImage";
 
 export default {
   title: "CardBackgroundImage",
