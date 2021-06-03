@@ -14,7 +14,7 @@ class MixinBuilder {
 }
 
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
-export const mix = (superclass: any) => new MixinBuilder(superclass);
+export const mix = (superclass?: any) => new MixinBuilder(superclass);
 
 export const staticStoreMixin = (superclass: any) => {
   const _storeMap = new Map();
