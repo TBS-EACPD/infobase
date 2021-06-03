@@ -2,7 +2,7 @@ import React from "react";
 import { List, CellMeasurerCache } from "react-virtualized";
 
 interface AutoHeightVirtualListProps {
-  list_ref: React.RefObject<any>;
+  list_ref: React.RefObject<any>; //cannot use List from react-virtualized because it doesn't have "getTotalRowsHeight"
   max_height?: number;
   className: string;
   role: string;
