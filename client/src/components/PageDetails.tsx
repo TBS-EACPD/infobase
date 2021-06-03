@@ -50,7 +50,7 @@ class VersionNumber extends React.Component {
 }
 
 interface PageDetailsProps extends RouteComponentProps {
-  toggleSurvey: Function;
+  toggleSurvey: (is_open?: boolean) => void;
   showSurvey: boolean;
   non_survey_routes: string[];
 }

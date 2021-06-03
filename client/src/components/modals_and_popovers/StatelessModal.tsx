@@ -7,7 +7,7 @@ import { trivial_text_maker } from "src/models/text";
 import "./bootstrap_modal_exstension.scss";
 
 interface StatelessModalProps {
-  on_close_callback: Function;
+  on_close_callback: () => void;
   show: boolean;
   title: string | React.ReactNode;
   subtitle?: string;
