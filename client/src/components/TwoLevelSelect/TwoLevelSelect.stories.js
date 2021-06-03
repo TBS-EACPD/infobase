@@ -12,10 +12,11 @@ const Template = (args) => {
   const [selected, setSelected] = useState("0");
 
   function onSelect(value) {
+    console.log(value + " has been chosen.");
     setSelected(value);
   }
 
-  return <TwoLevelSelect {...args} {...onSelect} />;
+  return <TwoLevelSelect {...args} onSelect={onSelect} />;
 };
 
 const grouped_options = [
@@ -23,29 +24,29 @@ const grouped_options = [
     children: [
       {
         display: "Option 1",
-        id: "option11",
+        id: "Label 1 Option 1",
       },
       {
         display: "Option 2",
-        id: "option12",
+        id: "Label 1 Option 2",
       },
     ],
     display: "Label1",
-    id: "label_id1",
+    id: "Label 1",
   },
   {
     children: [
       {
         display: "Option 1",
-        id: "option21",
+        id: "Label 2 Option 1",
       },
       {
         display: "Option 2",
-        id: "option22",
+        id: "Label 2 Option 2",
       },
     ],
     display: "Label2",
-    id: "label_id2",
+    id: "Label 2",
   },
 ];
 

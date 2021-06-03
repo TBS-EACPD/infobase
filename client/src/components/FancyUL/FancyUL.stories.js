@@ -1,7 +1,6 @@
-import _ from "lodash";
 import React from "react";
 
-import { FancyUL } from "./FancyUL.tsx";
+import { FancyUL } from "./FancyUL";
 
 export default {
   title: "FancyUL",
@@ -10,7 +9,7 @@ export default {
 
 const Template = (args) => <FancyUL {...args} />;
 
-const children = <div>Children</div>;
+const children = ["Child 1", "Child 2", "Child 3"];
 
 export const Basic = Template.bind({});
 Basic.args = {
