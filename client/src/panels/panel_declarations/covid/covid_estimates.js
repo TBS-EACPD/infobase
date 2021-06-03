@@ -59,31 +59,6 @@ const colors = infobase_colors();
 
 const panel_key = "covid_estimates_panel";
 
-const tooltips_by_topic = {
-  est_doc_total: [
-    {
-      fiscal_years: [2021],
-      subject_ids: ["gov"],
-      topic_ids: ["MAINS"],
-      text: text_maker("covid_mains_2021_note"),
-    },
-  ],
-  measure: [
-    {
-      fiscal_years: [2020, 2021],
-      subject_ids: ["gov", 280],
-      topic_ids: ["COV082"],
-      text: text_maker("covid_estimates_COV082_2020_tooltip"),
-    },
-    {
-      fiscal_years: [2020, 2021],
-      subject_ids: ["gov", 280],
-      topic_ids: ["COV115"],
-      text: text_maker("covid_estimates_COV115_2020_tooltip"),
-    },
-  ],
-};
-
 const vs_type_ordering = { vote: 1, stat: 2, both: 3 };
 const get_vs_type_name = (vs_type) =>
   _.includes(["vote", "stat"], vs_type)
