@@ -10,7 +10,7 @@ import { is_mobile } from "src/core/feature_detection";
 import "./BackToTop.scss";
 
 interface BackToTopProps {
-  focus: Function;
+  focus: () => void;
 }
 interface BackToTopState {
   show_back_to_top: boolean;
