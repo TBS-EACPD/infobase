@@ -16,7 +16,11 @@ const Template = (args) => {
 };
 
 const svg = (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-300 50 1200 1200">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="-300 50 1200 1200"
+    onClick={() => console.log("Clicked!")}
+  >
     <path
       d="M300,69a230.14,230.14,0,1,1-89.91,18.14A229.56,229.56,0,0,1,300,69m0-23C159.72,46,46,159.72,46,300S159.72,554,300,554,554,440.28,554,300,440.28,46,300,46Z"
       fill="#2C70C9"
