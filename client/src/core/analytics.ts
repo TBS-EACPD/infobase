@@ -4,11 +4,9 @@ import { sha } from "src/core/injected_build_constants";
 let initialized = false;
 
 //tool to create totally random IDs
-const uuid = function b(a?: number | string) {
-  return a
-    ? (Number(a) ^ ((Math.random() * 16) >> (Number(a) / 4))).toString(16)
-    : String(1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);
-};
+const uuid = () =>
+  Math.random().toString(36).substring(2, 15) +
+  Math.random().toString(36).substring(2, 15);
 
 const dimensions: { [key: string]: string } = {
   CLIENT_ID: "dimension1",
@@ -42,19 +40,21 @@ function initialize_analytics() {
   ga("set", "anonymizeIp", true);
 
   ga((tracker) => {
-    client_id = tracker!.get("clientId");
-    tracker!.set(dimensions.CLIENT_ID, client_id);
-    tracker!.set(dimensions.DEV, String(is_dev));
-    tracker!.set(dimensions.SHA, sha);
+    if (tracker !== undefined) {
+      client_id = tracker.get("clientId");
+      tracker.set(dimensions.CLIENT_ID, client_id);
+      tracker.set(dimensions.DEV, String(is_dev));
+      tracker.set(dimensions.SHA, sha);
 
-    const originalBuildHitTask = tracker!.get("buildHitTask");
-    tracker!.set("buildHitTask", (model: UniversalAnalytics.Model) => {
-      model.set(dimensions.HIT_ID, uuid(), true);
-      model.set(dimensions.HIT_TIME, String(+new Date()), true);
-      model.set(dimensions.HIT_TYPE, model.get("hitType"), true);
+      const originalBuildHitTask = tracker.get("buildHitTask");
+      tracker.set("buildHitTask", (model: UniversalAnalytics.Model) => {
+        model.set(dimensions.HIT_ID, uuid(), true);
+        model.set(dimensions.HIT_TIME, String(+new Date()), true);
+        model.set(dimensions.HIT_TYPE, model.get("hitType"), true);
 
-      originalBuildHitTask(model);
-    });
+        originalBuildHitTask(model);
+      });
+    }
   });
 
   initialized = true;

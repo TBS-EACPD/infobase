@@ -133,7 +133,32 @@ export const retry_promise = (
       );
   });
 };
-
+interface completeAssignInterface {
+  completeAssign<TObject, TSource>(
+    object: TObject,
+    source: TSource
+  ): TObject & TSource;
+  completeAssign<TObject, TSource1, TSource2>(
+    object: TObject,
+    source1: TSource1,
+    source2: TSource2
+  ): TObject & TSource1 & TSource2;
+  completeAssign<TObject, TSource1, TSource2, TSource3>(
+    object: TObject,
+    source1: TSource1,
+    source2: TSource2,
+    source3: TSource3
+  ): TObject & TSource1 & TSource2 & TSource3;
+  completeAssign<TObject, TSource1, TSource2, TSource3, TSource4>(
+    object: TObject,
+    source1: TSource1,
+    source2: TSource2,
+    source3: TSource3,
+    source4: TSource4
+  ): TObject & TSource1 & TSource2 & TSource3 & TSource4;
+  completeAssign<TObject>(object: TObject): TObject;
+  completeAssign(object: any, ...otherArgs: any[]): any;
+}
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 // "This is an assign function that copies full descriptors"
 // Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
@@ -262,5 +287,5 @@ export function bound(elementDescriptor: ElementDescriptor) {
 //this is ideal for a list of id's in a piece of state that are often toggled
 // toggle_list([1,2,3],1) => [2,3]
 // toggle_list([1,2,3],4) => [1,2,3,4]
-export const toggle_list = (arr: any[], el: any) =>
+export const toggle_list = <Type>(arr: Type[], el: Type): Type[] =>
   _.includes(arr, el) ? _.without(arr, el) : arr.concat([el]);
