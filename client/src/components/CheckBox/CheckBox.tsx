@@ -11,15 +11,15 @@ import "./CheckBox.scss";
 
 export interface CheckBoxProps {
   disabled?: boolean; // greys out checkbox and make it non-clickable if true
-  onClick?: Function; // (id) => {}
+  onClick?: (id: string | number) => void; // (id) => {}
   id?: string | number;
   label: string; // required text for checkbox
   active?: boolean; // required, equivalent of 'checked'
   color?: string; // defaults to primaryColor
   isSolidBox: boolean; // defaults to false
-  container_style?: Object; // style for div, containing checkbox and label
-  checkbox_style?: Object; // style for checkbox
-  label_style?: Object; // style for label
+  container_style?: React.CSSProperties; // style for div, containing checkbox and label
+  checkbox_style?: React.CSSProperties; // style for checkbox
+  label_style?: React.CSSProperties; // style for label
   checkmark_vertical_align: number; // defaults to 0.1
 }
 
@@ -32,7 +32,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
   handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
-      onClick(id);
+      onClick(id!);
     }
   };
   render() {
@@ -107,7 +107,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
               onKeyDown={(e) =>
                 (e.keyCode === 13 || e.keyCode === 32) &&
                 !disabled &&
-                onClick(id)
+                onClick(id!)
               }
             >
               {label}
