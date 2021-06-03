@@ -3,7 +3,6 @@ import React from "react";
 
 import {
   create_text_maker_component,
-  CardImage,
   ContainerEscapeHatch,
 } from "src/components/index";
 
@@ -15,6 +14,8 @@ import { IconFlagLine } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";
 import { EverythingSearch } from "src/search/EverythingSearch";
+
+import { CardImage } from "./CardImage/CardImage";
 
 import {
   infographic_link_items,
