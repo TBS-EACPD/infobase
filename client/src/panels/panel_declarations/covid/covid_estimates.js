@@ -318,7 +318,10 @@ class CovidEstimatesPanel extends React.Component {
       loading: true,
       summary_by_fiscal_year: null,
       selected_year: _.last(props.panel_args.years),
-      selected: [text_maker(`covid_estimates_stat`), text_maker(`covid_estimates_vote`)]
+      selected: [
+        text_maker(`covid_estimates_stat`),
+        text_maker(`covid_estimates_vote`),
+      ],
     };
 
     this.SummaryTab = this.SummaryTab.bind(this);
@@ -340,13 +343,13 @@ class CovidEstimatesPanel extends React.Component {
 
   SummaryTab = ({ args: panel_args, data }) => {
     const { subject, selected_year } = panel_args;
-  
+
     const graph_index_key = "index_key";
-  
+
     const sorted_data = _.sortBy(data, ({ est_doc }) =>
       get_est_doc_order(est_doc)
     );
-  
+
     const graph_data = _.chain(sorted_data)
       .map(({ est_doc, stat, vote }) => ({
         [graph_index_key]: get_est_doc_name(est_doc),
@@ -355,21 +358,20 @@ class CovidEstimatesPanel extends React.Component {
       }))
       .value();
 
-
     const filtered_graph_data = _.chain(graph_data)
-    .first()
-    .pick(graph_index_key, ...this.state.selected)
-    .value()
+      .first()
+      .pick(graph_index_key, ...this.state.selected)
+      .value();
 
-    const graph_data_arr=[]
-    graph_data_arr.push(filtered_graph_data)
+    const graph_data_arr = [];
+    graph_data_arr.push(filtered_graph_data);
 
     const graph_keys = _.chain(graph_data)
       .first()
       .omit(graph_index_key)
       .keys()
       .value();
-      
+
     const legend_items = _.map(graph_keys, (key) => ({
       id: key,
       label: key,
@@ -377,7 +379,6 @@ class CovidEstimatesPanel extends React.Component {
       color: colors(key),
     }));
 
-  
     const graph_content = (
       <WrappedNivoBar
         data={graph_data_arr}
@@ -391,7 +392,8 @@ class CovidEstimatesPanel extends React.Component {
           left: 40,
         }}
         bttm_axis={{
-          format: (d) => (_.words(d).length > 3 ? d.substring(0, 20) + "..." : d),
+          format: (d) =>
+            _.words(d).length > 3 ? d.substring(0, 20) + "..." : d,
           tickSize: 3,
           tickRotation: -45,
           tickPadding: 10,
@@ -412,7 +414,7 @@ class CovidEstimatesPanel extends React.Component {
         }}
       />
     );
-  
+
     const additional_text_args = (() => {
       if (subject.level === "gov") {
         return {
@@ -426,13 +428,13 @@ class CovidEstimatesPanel extends React.Component {
           (memo, { stat, vote }) => memo + vote + stat,
           0
         );
-  
+
         return {
           dept_covid_estimates_in_year,
         };
       }
     })();
-  
+
     return (
       <div className="row align-items-center">
         <div className="col-12 col-lg-6 medium-panel-text">
@@ -454,7 +456,12 @@ class CovidEstimatesPanel extends React.Component {
                   el="span"
                   style={{ display: "inline-block" }}
                 />
-                {get_tooltip("est_doc_total", selected_year, subject.id, est_doc)}
+                {get_tooltip(
+                  "est_doc_total",
+                  selected_year,
+                  subject.id,
+                  est_doc
+                )}
               </li>
             ))}
           </ul>
@@ -465,7 +472,10 @@ class CovidEstimatesPanel extends React.Component {
               items={legend_items}
               isHorizontal={true}
               onClick={(label) => {
-                !(this.state.selected.length === 1 && this.state.selected.includes(label)) &&
+                !(
+                  this.state.selected.length === 1 &&
+                  this.state.selected.includes(label)
+                ) &&
                   this.setState({
                     selected: toggle_list(this.state.selected, label),
                   });
