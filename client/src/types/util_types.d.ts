@@ -4,7 +4,7 @@
 // https://github.com/microsoft/TypeScript/issues/25987#issuecomment-441224690
 export type KnownKeys<T> = {
   [K in keyof T]: string extends K ? never : number extends K ? never : K;
-} extends { [_ in keyof T]: infer U }
+} extends { [_ in keyof T]: infer U } // eslint-disable-line no-unused-vars
   ? {} extends U
     ? never
     : U
