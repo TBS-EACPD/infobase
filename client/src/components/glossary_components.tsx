@@ -40,14 +40,14 @@ const GlossaryTooltipWrapper: React.FC<GlossaryTooltipWrapperProps> = ({
   is_a11y_mode ? (
     <a
       href={glossary_href(id)}
-      title={is_a11y_mode ? trivial_text_maker("glossary_link_title") : null}
+      title={trivial_text_maker("glossary_link_title")}
     >
       {children}
     </a>
   ) : (
     <span
       className="nowrap glossary-tippy-link"
-      style={{ borderBottom: no_bottom_border ? "none" : "initial" }}
+      style={no_bottom_border ? { borderBottom: "none" } : undefined}
       tabIndex={0}
       data-ibtt-glossary-key={id}
       data-toggle="tooltip"
@@ -59,8 +59,6 @@ const GlossaryTooltipWrapper: React.FC<GlossaryTooltipWrapperProps> = ({
 export const GlossaryIcon: React.FC<GlossaryIconProps> = ({
   id,
   alternate_text,
-  arrow_selector,
-  inner_selector,
   icon_color,
   icon_alt_color,
 }) => (
