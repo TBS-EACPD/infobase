@@ -28,7 +28,7 @@ interface GlossaryIconProps {
 
 interface GlossaryItemProps {
   id: string;
-  alternate_text: string;
+  alternate_text?: string;
   item_class: string;
 }
 
