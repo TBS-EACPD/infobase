@@ -80,7 +80,12 @@ export class WrappedNivoPie extends React.Component {
       percentage: row.value / graph_total,
       value: row.value,
     }));
-    const value_formatter = get_formatter(is_money, text_formatter, true, true);
+    const value_formatter = get_formatter(
+      is_money,
+      text_formatter,
+      true,
+      false
+    );
     const column_configs = {
       label: {
         index: 0,
