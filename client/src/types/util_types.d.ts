@@ -10,27 +10,12 @@ export type KnownKeys<T> = {
     : U
   : never;
 
-// based on https://github.com/microsoft/TypeScript/issues/31153#issuecomment-487894895
-export type WithoutIndexTypes<T> = KnownKeys<T> extends infer U
-  ? [U] extends [keyof T]
-    ? Pick<T, U>
-    : never
-  : never;
+export type WithoutIndexTypes<T> = Pick<T, KnownKeys<T>>;
 
-// based on https://github.com/microsoft/TypeScript/issues/31153#issuecomment-487894895
+// from https://stackoverflow.com/a/54827898
 // TODO revisit the need for this once we have negated types https://github.com/Microsoft/TypeScript/pull/29317
 // See for motivation: https://github.com/TBS-EACPD/infobase/pull/1121
-export type IndexTypeSafeOmit<T, K extends keyof T> = Omit<
-  WithoutIndexTypes<T>,
-  K
-> &
-  (string extends K // preserve wildcard string index type
-    ? {}
-    : string extends keyof T
-    ? { [n: string]: T[Exclude<keyof T, number>] }
-    : {}) &
-  (number extends K // preserve wildcard number index type
-    ? {}
-    : number extends keyof T
-    ? { [n: number]: T[Exclude<keyof T, string>] }
-    : {});
+// TLDR: the built in Omit will lose a lot of type information when used on something with an index type
+// e.g. if a type has [key: string]: any then Omit will swallow ALL OTHER string-keyed properties...
+// SafeOmit does not, only omits what you tell it to
+export type SafeOmit<T, K extends PropertyKey> = { [P in keyof T as Exclude<P, K>]: T[P] };
