@@ -1,18 +1,29 @@
-import { useArgs } from "@storybook/client-api";
-import React, { Fragment } from "react";
+import React from "react";
 
-import { Tombstones } from "./Tombstones";
+import { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
 
 export default {
   title: "Tombstones",
-  component: Tombstones,
+  component: UnlabeledTombstone,
 };
 
-const Template = (args) => {
-  return <Tombstones {...args} />;
+const UnlabeledTemplate = (args) => {
+  return <UnlabeledTombstone {...args} />;
 };
 
-export const UnlabeledTombstone = Template.bind({});
-UnlabeledTombstone.args = {
+export const UnlabeledTombstones = UnlabeledTemplate.bind({});
+UnlabeledTombstones.args = {
   items: ["Item 1", "Item 2"],
+};
+
+const LabeledTemplate = (args) => {
+  return <LabeledTombstone {...args} />;
+};
+
+export const LabeledTombstones = LabeledTemplate.bind({});
+LabeledTombstones.args = {
+  labels_and_items: [
+    ["Label 1", "Item 1"],
+    ["Label 2", "Item 2"],
+  ],
 };
