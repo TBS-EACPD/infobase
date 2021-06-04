@@ -1,5 +1,8 @@
 node_modules
 
+# TEMPORARY... prettier 2.0 doesn't understand TypeScript's `as` keyword AND had a // prettier-ignore bug, ha
+client/src/types/util_types.d.ts
+
 # generated stuff
 client/app/
 client/build/
