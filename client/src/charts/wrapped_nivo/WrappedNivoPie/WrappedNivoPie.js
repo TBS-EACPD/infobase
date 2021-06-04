@@ -100,7 +100,7 @@ export class WrappedNivoPie extends React.Component {
       percentage: {
         index: 2,
         header: nivo_common_text_maker("percentage"),
-        formatter: (value) => formats.percentage_raw(value),
+        formatter: (value) => formats.percentage1_raw(value),
       },
     };
 
