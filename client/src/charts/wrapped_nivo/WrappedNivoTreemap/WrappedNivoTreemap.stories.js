@@ -60,7 +60,7 @@ const graph_data = {
       value: graph_data_values[3],
     },
     {
-      dept: "128",
+      dept: "46",
       desc: "Description 5",
       id: 4,
       total: graph_data_total_amt,
@@ -68,7 +68,7 @@ const graph_data = {
       value: graph_data_values[4],
     },
     {
-      dept: "128",
+      dept: "237",
       desc: "Description 6",
       id: 5,
       total: graph_data_total_amt,
@@ -85,19 +85,6 @@ const color_scale = (vs) =>
   function (d) {
     return d3_scale(text_func(vs, d, ""));
   };
-// const scale = scaleOrdinal()
-//   .domain(
-//     _.reverse(
-//       _.sortBy(graph_data.children, function (o) {
-//         return o.value;
-//       })
-//     )
-//   )
-//   .range(newIBLightCategoryColors);
-// const color_scale = (item) =>
-//   function (o) {
-//     return scale(o);
-//   };
 
 const { Dept } = Subject;
 
@@ -118,8 +105,7 @@ const Template = (args) => <WrappedNivoTreemap {...args} />;
 export const Basic = Template.bind({});
 Basic.args = {
   data: graph_data,
-  colorScale: color_scale,
-  value_string: "value",
+  colorScale: d3_scale,
   formatter: formats.compact1,
   label_id: "desc",
 };
