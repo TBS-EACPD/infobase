@@ -13,9 +13,11 @@ export type KnownKeys<T> = {
 export type WithoutIndexTypes<T> = Pick<T, KnownKeys<T>>;
 
 // from https://stackoverflow.com/a/54827898
-// TODO revisit the need for this once we have negated types https://github.com/Microsoft/TypeScript/pull/29317
 // See for motivation: https://github.com/TBS-EACPD/infobase/pull/1121
 // TLDR: the built in Omit will lose a lot of type information when used on something with an index type
 // e.g. if a type has [key: string]: any then Omit will swallow ALL OTHER string-keyed properties...
 // SafeOmit does not, only omits what you tell it to
+// TODO revisit the need for this once we have negated types https://github.com/Microsoft/TypeScript/pull/29317
+// TODO drop prettier-ignore after prettier is updated past 2.0 (it doesn't understand TypeScript's "as" keyword in 2.0, does by 2.3 at least)
+// prettier-ignore
 export type SafeOmit<T, K extends PropertyKey> = { [P in keyof T as Exclude<P, K>]: T[P] };
