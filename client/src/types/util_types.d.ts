@@ -19,7 +19,7 @@ export type WithoutIndexTypes<T> = KnownKeys<T> extends infer U
 
 // based on https://github.com/microsoft/TypeScript/issues/31153#issuecomment-487894895
 // TODO revisit the need for this once we have negated types https://github.com/Microsoft/TypeScript/pull/29317
-// See for motivation: TODO link to PR here
+// See for motivation: https://github.com/TBS-EACPD/infobase/pull/1121
 export type IndexTypeSafeOmit<T, K extends keyof T> = Omit<
   WithoutIndexTypes<T>,
   K
