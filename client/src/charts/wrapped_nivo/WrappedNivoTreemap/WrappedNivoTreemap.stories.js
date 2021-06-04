@@ -32,7 +32,6 @@ const graph_data = {
       desc: "Description 1",
       id: 0,
       total: graph_data_total_amt,
-      total_of: "Group 1",
       value: graph_data_values[0],
     },
     {
@@ -40,7 +39,6 @@ const graph_data = {
       desc: "Description 2",
       id: 1,
       total: graph_data_total_amt,
-      total_of: "Group 2",
       value: graph_data_values[1],
     },
     {
@@ -48,7 +46,6 @@ const graph_data = {
       desc: "Description 3",
       id: 2,
       total: graph_data_total_amt,
-      total_of: "Group 2",
       value: graph_data_values[2],
     },
     {
@@ -56,7 +53,6 @@ const graph_data = {
       desc: "Description 4",
       id: 3,
       total: graph_data_total_amt,
-      total_of: "Group 1",
       value: graph_data_values[3],
     },
     {
@@ -64,7 +60,6 @@ const graph_data = {
       desc: "Description 5",
       id: 4,
       total: graph_data_total_amt,
-      total_of: "Group 1",
       value: graph_data_values[4],
     },
     {
@@ -72,7 +67,6 @@ const graph_data = {
       desc: "Description 6",
       id: 5,
       total: graph_data_total_amt,
-      total_of: "Group 1",
       value: graph_data_values[5],
     },
   ],
@@ -81,10 +75,10 @@ const graph_data = {
 };
 
 const d3_scale = scaleOrdinal(newIBLightCategoryColors);
-const color_scale = (vs) =>
-  function (d) {
-    return d3_scale(text_func(vs, d, ""));
-  };
+// const color_scale = (vs) =>
+//   function (d) {
+//     return d3_scale(text_func(vs, d, ""));
+//   };
 
 const { Dept } = Subject;
 
