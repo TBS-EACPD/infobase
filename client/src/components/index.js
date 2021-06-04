@@ -26,7 +26,7 @@ export { StatelessDetails, Details } from "./Details/Details";
 export { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
 export { KeyConceptList } from "./KeyConceptList/KeyConceptList";
 export { BackToTop } from "./BackToTop/BackToTop";
-export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
+export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones/Tombstones";
 export { Panel } from "./Panel/Panel";
 export { ShareButton } from "./ShareButton/ShareButton";
 export { WriteToClipboard } from "./WriteToClipboard/WriteToClipboard";
