@@ -37,17 +37,15 @@ import {
   roll_up_flat_measure_data_by_property,
   get_est_doc_list_plain_text,
 } from "./covid_common_utils";
-import SummaryTabComponent from "./covid_estimates_summay_tab";
+import SummaryTabComponent from "./covid_estimates_summary_tab";
 import { get_tooltip } from "./covid_estimates_tooltips";
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates.yaml";
 
-
 const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
-
 
 const panel_key = "covid_estimates_panel";
 
@@ -304,9 +302,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
 );
 
 const SummaryTab = ({ args: panel_args, data }) => {
-  return (
-    <SummaryTabComponent panel_args={panel_args} data={data} />
-  )
+  return <SummaryTabComponent panel_args={panel_args} data={data} />;
 };
 
 const tab_content_configs = [
@@ -372,7 +368,6 @@ class CovidEstimatesPanel extends React.Component {
       summary_by_fiscal_year: null,
       selected_year: _.last(props.panel_args.years),
     };
-
   }
   componentDidMount() {
     query_gov_covid_summaries().then((covid_summaries) =>
