@@ -80,16 +80,12 @@ const graph_data = {
   name: "root",
 };
 
-const sorted_children = _.reverse(
-  _.sortBy(graph_data.children, function (o) {
-    return o.value;
-  })
-);
+const sorted_children = _.chain(graph_data.children)
+  .sortBy(graph_data.children, (child) => child.value)
+  .reverse()
+  .value();
 
-const domain = [];
-_.forEach(sorted_children, function (child) {
-  _.concat(domain, child.value);
-});
+const domain = _.map(sorted_children, (child) => child.value);
 
 const scale = scaleOrdinal().domain(domain).range(newIBLightCategoryColors);
 
