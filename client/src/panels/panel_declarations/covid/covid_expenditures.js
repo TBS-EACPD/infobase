@@ -88,6 +88,17 @@ const wrap_with_measure_filter_and_vote_stat_controls =
         inner_props={props}
       />
     );
+const TableControlLayout = ({ children }) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    }}
+  >
+    {children}
+  </div>
+);
 
 const SummaryTab = ({ args: panel_args, data }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
@@ -274,16 +285,10 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
           }}
           className="medium-panel-text"
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
+        <TableControlLayout>
           <MeasuresFilterControls />
           <ToggleVoteStat />
-        </div>
+        </TableControlLayout>
         <DisplayTable
           data={
             measure_filter_state ? estimates_filtered_sorted_rows : sorted_rows
@@ -361,16 +366,10 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
           args={text_args}
           className="medium-panel-text"
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
+        <TableControlLayout>
           <MeasuresFilterControls />
           <ToggleVoteStat />
-        </div>
+        </TableControlLayout>
         <DisplayTable
           data={
             measure_filter_state ? estimates_filtered_sorted_rows : sorted_rows
