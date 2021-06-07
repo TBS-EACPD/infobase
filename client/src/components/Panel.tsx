@@ -26,6 +26,46 @@ interface PanelGlossaryProps {
   keys: string[];
 }
 
+interface Constructor {
+  plural: string;
+  singular: string;
+  subject_type: string;
+}
+interface Subject {
+  constructor: Constructor;
+  description: string;
+  guid: string;
+  has_planned_spending: boolean;
+  id: string;
+  is: (comparator: any) => boolean;
+  legal_title: string;
+  level: string;
+  lookup: Function;
+  name: string;
+  plural: string;
+  singular: string;
+  subject_type: string;
+}
+interface Footnote {
+  id: string;
+  subject: Subject;
+  text: string;
+  topic_keys: string[];
+  year1: number;
+}
+interface PanelProps {
+  allowOverflow: boolean;
+  title: string;
+  otherHeaderContent: string;
+  children: React.ReactNode;
+  sources: Link[];
+  glossary_keys: string[];
+  footnotes: Footnote[];
+}
+
+interface PanelState {
+  isOpen: boolean;
+}
 const PanelSource: React.FC<PanelSourceProps> = ({ links }) => {
   if (_.isEmpty(links)) {
     return null;
@@ -77,46 +117,6 @@ singular: "Government of Canada"
 subject_type: "gov"
 */
 
-interface Constructor {
-  plural: string;
-  singular: string;
-  subject_type: string;
-}
-interface Subject {
-  constructor: Constructor;
-  description: string;
-  guid: string;
-  has_planned_spending: boolean;
-  id: string;
-  is: (comparator: any) => boolean;
-  legal_title: string;
-  level: string;
-  lookup: Function;
-  name: string;
-  plural: string;
-  singular: string;
-  subject_type: string;
-}
-interface Footnote {
-  id: string;
-  subject: Subject;
-  text: string;
-  topic_keys: string[];
-  year1: number;
-}
-interface PanelProps {
-  allowOverflow: boolean;
-  title: string;
-  otherHeaderContent: string;
-  children: React.ReactNode;
-  sources: Link[];
-  glossary_keys: string[];
-  footnotes: Footnote[];
-}
-
-interface PanelState {
-  isOpen: boolean;
-}
 export class Panel extends React.Component<PanelProps, PanelState> {
   constructor(props: any) {
     super(props);
