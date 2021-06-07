@@ -1,33 +1,37 @@
-import _ from "lodash";
 import React from "react";
 
-import { TabbedContent } from "./TabbedContent";
+import { TabContent } from "./TabContent";
 import { TabLoadingWrapper } from "./TabLoadingWrapper";
 
 export default {
   title: "TabLoadingWrapper",
   component: TabLoadingWrapper,
-  argTypes: {},
 };
 
 const Template = (args) => {
-  // function load_data(data) {
-  //   return data ? data : "Null";
-  // }
-
-  const promise = new Promise((resolve, reject) => {
-    const data = "Some data";
-    resolve(data);
-  });
+  const promise = () =>
+    new Promise((resolve, reject) => {
+      const data = "This is the TabLoadingWrapper component.";
+      setTimeout(() => resolve(data), 5000);
+    });
 
   return (
-    <TabLoadingWrapper
-      {...args}
-      load_data={promise}
-      TabbedContent={<TabbedContent {...args} data={promise} />}
-    />
+    <div>
+      <TabLoadingWrapper
+        {...args}
+        load_data={promise}
+        TabContent={TabContent}
+      />
+      <button
+        onClick={() => {
+          window.location.reload();
+          console.log("Page refreshed");
+        }}
+      >
+        Click to Refresh
+      </button>
+    </div>
   );
 };
 
 export const Basic = Template.bind({});
-Basic.args = {};
