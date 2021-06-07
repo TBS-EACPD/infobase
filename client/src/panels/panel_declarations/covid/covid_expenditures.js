@@ -45,26 +45,25 @@ const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const panel_key = "covid_expenditures_panel";
 
-class ToggleEstimatesMeasuresFilterProvider extends React.Component {
+class MeasuresFilterControlsProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter_non_estimates_measures:
-        !!this.props.initial_filter_non_estimates_measures,
+      measure_filter_state: !!this.props.initial_measure_filter_state,
     };
   }
-  toggle_filter_non_estimates_measures = () =>
+  toggle_measure_filter_state = () =>
     this.setState({
-      filter_non_estimates_measures: !this.state.filter_non_estimates_measures,
+      measure_filter_state: !this.state.measure_filter_state,
     });
   render() {
-    const { filter_non_estimates_measures } = this.state;
+    const { measure_filter_state } = this.state;
     const { Inner, inner_props } = this.props;
 
-    const ToggleEstimatesMeasuresFilter = () => (
+    const MeasuresFilterControls = () => (
       <CheckBox
-        active={filter_non_estimates_measures}
-        onClick={this.toggle_filter_non_estimates_measures}
+        active={measure_filter_state}
+        onClick={this.toggle_measure_filter_state}
         label={<TM k="covid_toggle_estimate_measure_filter" />}
         container_style={{ justifyContent: "flex-end", marginBottom: "-15px" }}
       />
@@ -74,8 +73,8 @@ class ToggleEstimatesMeasuresFilterProvider extends React.Component {
       <Inner
         {...{
           ...inner_props,
-          filter_non_estimates_measures,
-          ToggleEstimatesMeasuresFilter,
+          measure_filter_state,
+          MeasuresFilterControls,
         }}
       />
     );
@@ -84,7 +83,7 @@ class ToggleEstimatesMeasuresFilterProvider extends React.Component {
 const wrap_with_measure_filter_and_vote_stat_controls =
   (Component) => (props) =>
     (
-      <ToggleEstimatesMeasuresFilterProvider
+      <MeasuresFilterControlsProvider
         Inner={wrap_with_vote_stat_controls(Component)}
         inner_props={props}
       />
@@ -213,8 +212,8 @@ const get_common_column_configs = (show_vote_stat) => ({
 
 const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
   ({
-    filter_non_estimates_measures,
-    ToggleEstimatesMeasuresFilter,
+    measure_filter_state,
+    MeasuresFilterControls,
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
@@ -282,14 +281,12 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
             justifyContent: "flex-end",
           }}
         >
-          <ToggleEstimatesMeasuresFilter />
+          <MeasuresFilterControls />
           <ToggleVoteStat />
         </div>
         <DisplayTable
           data={
-            filter_non_estimates_measures
-              ? estimates_filtered_sorted_rows
-              : sorted_rows
+            measure_filter_state ? estimates_filtered_sorted_rows : sorted_rows
           }
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
@@ -303,8 +300,8 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
 
 const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
   ({
-    filter_non_estimates_measures,
-    ToggleEstimatesMeasuresFilter,
+    measure_filter_state,
+    MeasuresFilterControls,
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
@@ -371,14 +368,12 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
             justifyContent: "flex-end",
           }}
         >
-          <ToggleEstimatesMeasuresFilter />
+          <MeasuresFilterControls />
           <ToggleVoteStat />
         </div>
         <DisplayTable
           data={
-            filter_non_estimates_measures
-              ? estimates_filtered_sorted_rows
-              : sorted_rows
+            measure_filter_state ? estimates_filtered_sorted_rows : sorted_rows
           }
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
