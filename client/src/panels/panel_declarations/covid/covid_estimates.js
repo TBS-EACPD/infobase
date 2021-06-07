@@ -19,15 +19,6 @@ import {
 } from "src/models/covid/queries";
 import { Subject } from "src/models/subject";
 
-import { textColor } from "src/core/color_defs";
-import { infobase_colors } from "src/core/color_schemes";
-
-import { is_a11y_mode } from "src/core/injected_build_constants";
-
-import { StandardLegend } from "src/charts/legends/index";
-import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-
-import { toggle_list } from "src/general_utils";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
 import { get_source_links } from "src/metadata/data_sources";
@@ -46,16 +37,17 @@ import {
   roll_up_flat_measure_data_by_property,
   get_est_doc_list_plain_text,
 } from "./covid_common_utils";
+import SummaryTabComponent from "./covid_estimates_summay_tab";
 import { get_tooltip } from "./covid_estimates_tooltips";
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates.yaml";
 
+
 const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
-const colors = infobase_colors();
 
 const panel_key = "covid_estimates_panel";
 
@@ -311,6 +303,67 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
   }
 );
 
+const SummaryTab = ({ args: panel_args, data }) => {
+  return (
+    <SummaryTabComponent panel_args={panel_args} data={data} />
+  )
+};
+
+const tab_content_configs = [
+  {
+    key: "summary",
+    levels: ["gov", "dept"],
+    label: text_maker("summary_tab_label"),
+    load_data: ({ subject, selected_year }) =>
+      (() => {
+        if (subject.level === "dept") {
+          return query_org_covid_summary({
+            org_id: String(subject.id),
+            fiscal_year: selected_year,
+          });
+        } else {
+          return query_gov_covid_summary({
+            fiscal_year: selected_year,
+          });
+        }
+      })().then((covid_summary) => _.get(covid_summary, "covid_estimates")),
+    TabContent: SummaryTab,
+  },
+  {
+    key: "department",
+    levels: ["gov"],
+    label: text_maker("by_department_tab_label"),
+    load_data: ({ selected_year }) =>
+      query_all_covid_estimates_by_measure_id({
+        fiscal_year: selected_year,
+      }).then((data) =>
+        roll_up_flat_measure_data_by_property(data, "org_id", "est_doc")
+      ),
+    TabContent: ByDepartmentTab,
+  },
+  {
+    key: "measure",
+    levels: ["gov", "dept"],
+    label: text_maker("by_measure_tab_label"),
+    load_data: ({ subject, selected_year }) =>
+      (() => {
+        if (subject.level === "dept") {
+          return query_org_covid_estimates_by_measure_id({
+            org_id: String(subject.id),
+            fiscal_year: selected_year,
+          });
+        } else {
+          return query_all_covid_estimates_by_measure_id({
+            fiscal_year: selected_year,
+          });
+        }
+      })().then((data) =>
+        roll_up_flat_measure_data_by_property(data, "measure_id", "est_doc")
+      ),
+    TabContent: ByMeasureTab,
+  },
+];
+
 class CovidEstimatesPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -318,13 +371,8 @@ class CovidEstimatesPanel extends React.Component {
       loading: true,
       summary_by_fiscal_year: null,
       selected_year: _.last(props.panel_args.years),
-      selected: [
-        text_maker(`covid_estimates_stat`),
-        text_maker(`covid_estimates_vote`),
-      ],
     };
 
-    this.SummaryTab = this.SummaryTab.bind(this);
   }
   componentDidMount() {
     query_gov_covid_summaries().then((covid_summaries) =>
@@ -340,208 +388,6 @@ class CovidEstimatesPanel extends React.Component {
       })
     );
   }
-
-  SummaryTab = ({ args: panel_args, data }) => {
-    const { subject, selected_year } = panel_args;
-
-    const graph_index_key = "index_key";
-
-    const sorted_data = _.sortBy(data, ({ est_doc }) =>
-      get_est_doc_order(est_doc)
-    );
-
-    const graph_data = _.chain(sorted_data)
-      .map(({ est_doc, stat, vote }) => ({
-        [graph_index_key]: get_est_doc_name(est_doc),
-        [text_maker(`covid_estimates_stat`)]: stat,
-        [text_maker(`covid_estimates_vote`)]: vote,
-      }))
-      .value();
-
-    const filtered_graph_data = _.chain(graph_data)
-      .first()
-      .pick(graph_index_key, ...this.state.selected)
-      .value();
-
-    const graph_data_arr = [];
-    graph_data_arr.push(filtered_graph_data);
-
-    const graph_keys = _.chain(graph_data)
-      .first()
-      .omit(graph_index_key)
-      .keys()
-      .value();
-
-    const legend_items = _.map(graph_keys, (key) => ({
-      id: key,
-      label: key,
-      active: _.includes(this.state.selected, key),
-      color: colors(key),
-    }));
-
-    const graph_content = (
-      <WrappedNivoBar
-        data={graph_data_arr}
-        keys={graph_keys}
-        indexBy={graph_index_key}
-        colors={(d) => colors(d.id)}
-        margin={{
-          top: 50,
-          right: 40,
-          bottom: 120,
-          left: 40,
-        }}
-        bttm_axis={{
-          format: (d) =>
-            _.words(d).length > 3 ? d.substring(0, 20) + "..." : d,
-          tickSize: 3,
-          tickRotation: -45,
-          tickPadding: 10,
-        }}
-        graph_height="450px"
-        enableGridX={false}
-        remove_left_axis={true}
-        theme={{
-          axis: {
-            ticks: {
-              text: {
-                fontSize: 12,
-                fill: textColor,
-                fontWeight: "550",
-              },
-            },
-          },
-        }}
-      />
-    );
-
-    const additional_text_args = (() => {
-      if (subject.level === "gov") {
-        return {
-          covid_est_pct_of_all_est:
-            panel_args[`gov_covid_estimates_in_year`] /
-            panel_args[`gov_total_estimates_in_year`],
-        };
-      } else {
-        const dept_covid_estimates_in_year = _.reduce(
-          sorted_data,
-          (memo, { stat, vote }) => memo + vote + stat,
-          0
-        );
-
-        return {
-          dept_covid_estimates_in_year,
-        };
-      }
-    })();
-
-    return (
-      <div className="row align-items-center">
-        <div className="col-12 col-lg-6 medium-panel-text">
-          <TM
-            k={`covid_estimates_summary_text_${subject.level}`}
-            args={{ ...panel_args, ...additional_text_args }}
-          />
-          <TM k={"covid_estimates_by_release_title"} />
-          <ul>
-            {_.map(sorted_data, ({ est_doc, vote, stat }) => (
-              <li key={est_doc}>
-                <TM
-                  k={"covid_estimates_by_release"}
-                  args={{
-                    est_doc_name: get_est_doc_name(est_doc),
-                    est_doc_glossary_key: get_est_doc_glossary_key(est_doc),
-                    total: vote + stat,
-                  }}
-                  el="span"
-                  style={{ display: "inline-block" }}
-                />
-                {get_tooltip(
-                  "est_doc_total",
-                  selected_year,
-                  subject.id,
-                  est_doc
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="col-12 col-lg-6">
-          {!is_a11y_mode && (
-            <StandardLegend
-              items={legend_items}
-              isHorizontal={true}
-              onClick={(label) => {
-                !(
-                  this.state.selected.length === 1 &&
-                  this.state.selected.includes(label)
-                ) &&
-                  this.setState({
-                    selected: toggle_list(this.state.selected, label),
-                  });
-              }}
-            />
-          )}
-          {graph_content}
-        </div>
-      </div>
-    );
-  };
-
-  tab_content_configs = [
-    {
-      key: "summary",
-      levels: ["gov", "dept"],
-      label: text_maker("summary_tab_label"),
-      load_data: ({ subject, selected_year }) =>
-        (() => {
-          if (subject.level === "dept") {
-            return query_org_covid_summary({
-              org_id: String(subject.id),
-              fiscal_year: selected_year,
-            });
-          } else {
-            return query_gov_covid_summary({
-              fiscal_year: selected_year,
-            });
-          }
-        })().then((covid_summary) => _.get(covid_summary, "covid_estimates")),
-      TabContent: this.SummaryTab,
-    },
-    {
-      key: "department",
-      levels: ["gov"],
-      label: text_maker("by_department_tab_label"),
-      load_data: ({ selected_year }) =>
-        query_all_covid_estimates_by_measure_id({
-          fiscal_year: selected_year,
-        }).then((data) =>
-          roll_up_flat_measure_data_by_property(data, "org_id", "est_doc")
-        ),
-      TabContent: ByDepartmentTab,
-    },
-    {
-      key: "measure",
-      levels: ["gov", "dept"],
-      label: text_maker("by_measure_tab_label"),
-      load_data: ({ subject, selected_year }) =>
-        (() => {
-          if (subject.level === "dept") {
-            return query_org_covid_estimates_by_measure_id({
-              org_id: String(subject.id),
-              fiscal_year: selected_year,
-            });
-          } else {
-            return query_all_covid_estimates_by_measure_id({
-              fiscal_year: selected_year,
-            });
-          }
-        })().then((data) =>
-          roll_up_flat_measure_data_by_property(data, "measure_id", "est_doc")
-        ),
-      TabContent: ByMeasureTab,
-    },
-  ];
 
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
@@ -582,7 +428,7 @@ class CovidEstimatesPanel extends React.Component {
       };
 
       const tabbed_content_props = get_tabbed_content_props(
-        this.tab_content_configs,
+        tab_content_configs,
         extended_panel_args
       );
 
