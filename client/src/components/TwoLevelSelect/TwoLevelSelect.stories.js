@@ -8,8 +8,7 @@ export default {
 };
 
 const Template = (args) => {
-  // I don't think the initial value of selected matters
-  const [selected, setSelected] = useState("0");
+  const [selected, setSelected] = useState("");
 
   function onSelect(value) {
     console.log(value + " has been chosen.");

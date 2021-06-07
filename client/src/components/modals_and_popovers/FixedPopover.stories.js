@@ -62,7 +62,6 @@ Timer.args = {
   body: "Hover over the modal before it goes away!",
   header: "FixedPopover Header",
   subtitle: "Subtitle",
-  // footer: "Footer",
   close_text: "Close Text",
 
   // booleans

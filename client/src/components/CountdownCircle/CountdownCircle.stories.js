@@ -22,8 +22,6 @@ const Template = (args) => {
         <button
           onClick={() => {
             setEnd(!end);
-
-            // Don't want to reset the page like this, but the timer won't reset by changing the time props
             window.location.reload();
           }}
         >

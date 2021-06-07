@@ -20,9 +20,6 @@ const children =
 
 export const Basic = Template.bind({});
 Basic.args = {
-  // text
   children,
-
-  // css
   style: {},
 };

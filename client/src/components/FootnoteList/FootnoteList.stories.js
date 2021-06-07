@@ -9,7 +9,7 @@ export default {
 
 const Template = (args) => <FootnoteList {...args} />;
 
-// not completed yet
+// having issues with inputing year1 and year2 values
 const footnotes = [
   {
     text: "text1",
