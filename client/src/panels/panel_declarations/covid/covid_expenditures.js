@@ -9,7 +9,7 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
-  CheckBox,
+  Select,
 } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
@@ -45,35 +45,59 @@ const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const panel_key = "covid_expenditures_panel";
 
+const measure_filter_options = [
+  {
+    id: "all",
+    display: text_maker("covid_toggle_filter_all"),
+  },
+  { id: "in", display: text_maker("covid_toggle_filter_in") },
+  { id: "out", display: text_maker("covid_toggle_filter_out") },
+];
+const measure_filters = {
+  all: _.identity,
+  in: (data) => _.filter(data, "is_in_estimates"),
+  out: (data) => _.filter(data, ({ is_in_estimates }) => !is_in_estimates),
+};
 class MeasuresFilterControlsProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      measure_filter_state: !!this.props.initial_measure_filter_state,
+      selected_measure_filter: _.first(measure_filter_options).id,
     };
   }
-  toggle_measure_filter_state = () =>
+  onSelect = (id) =>
     this.setState({
-      measure_filter_state: !this.state.measure_filter_state,
+      selected_measure_filter: id,
     });
   render() {
-    const { measure_filter_state } = this.state;
+    const { selected_measure_filter } = this.state;
     const { Inner, inner_props } = this.props;
 
+    const id = _.uniqueId();
     const MeasuresFilterControls = () => (
-      <CheckBox
-        active={measure_filter_state}
-        onClick={this.toggle_measure_filter_state}
-        label={<TM k="covid_toggle_estimate_measure_filter" />}
-        container_style={{ justifyContent: "flex-end", marginBottom: "-15px" }}
-      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <label htmlFor={id} className="font-small bold">
+          {text_maker("covid_expenditures_measure_filter")}
+        </label>
+        <Select
+          id={id}
+          onSelect={this.onSelect}
+          selected={selected_measure_filter}
+          options={measure_filter_options}
+        />
+      </div>
     );
 
     return (
       <Inner
         {...{
           ...inner_props,
-          measure_filter_state,
+          selected_measure_filter,
           MeasuresFilterControls,
         }}
       />
@@ -94,6 +118,7 @@ const TableControlLayout = ({ children }) => (
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
+      marginBottom: "-15px",
     }}
   >
     {children}
@@ -223,26 +248,22 @@ const get_common_column_configs = (show_vote_stat) => ({
 
 const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
   ({
-    measure_filter_state,
+    selected_measure_filter,
     MeasuresFilterControls,
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
     data: raw_data,
   }) => {
-    const { all: sorted_rows, in_estimates: estimates_filtered_sorted_rows } =
-      _.chain(raw_data)
-        .thru((data) => ({
-          all: data,
-          in_estimates: _.filter(data, "is_in_estimates"),
-        }))
-        .mapValues((data) =>
-          roll_up_flat_measure_data_by_property(data, "org_id")
-        )
-        .mapValues((rolled_up_data) =>
-          get_expenditures_by_index(rolled_up_data, "org_id")
-        )
-        .value();
+    const rows_by_measure_filter_option = _.chain(raw_data)
+      .thru((data) => _.mapValues(measure_filters, (filter) => filter(data)))
+      .mapValues((data) =>
+        roll_up_flat_measure_data_by_property(data, "org_id")
+      )
+      .mapValues((rolled_up_data) =>
+        get_expenditures_by_index(rolled_up_data, "org_id")
+      )
+      .value();
 
     const column_configs = {
       org_id: {
@@ -268,7 +289,7 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
     };
 
     const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _.chain(
-      sorted_rows
+      rows_by_measure_filter_option.all
     )
       .sortBy("total_exp")
       .last()
@@ -290,9 +311,7 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
           <ToggleVoteStat />
         </TableControlLayout>
         <DisplayTable
-          data={
-            measure_filter_state ? estimates_filtered_sorted_rows : sorted_rows
-          }
+          data={rows_by_measure_filter_option[selected_measure_filter]}
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
           disable_column_select={true}
@@ -305,32 +324,28 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
 
 const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
   ({
-    measure_filter_state,
+    selected_measure_filter,
     MeasuresFilterControls,
     show_vote_stat,
     ToggleVoteStat,
     args: panel_args,
     data: raw_data,
   }) => {
-    const { all: sorted_rows, in_estimates: estimates_filtered_sorted_rows } =
-      _.chain(raw_data)
-        .thru((data) => ({
-          all: data,
-          in_estimates: _.filter(data, "is_in_estimates"),
-        }))
-        .mapValues((data) =>
-          roll_up_flat_measure_data_by_property(data, "measure_id")
+    const rows_by_measure_filter_option = _.chain(raw_data)
+      .thru((data) => _.mapValues(measure_filters, (filter) => filter(data)))
+      .mapValues((data) =>
+        roll_up_flat_measure_data_by_property(data, "measure_id")
+      )
+      .mapValues((rolled_up_data) =>
+        _.map(
+          get_expenditures_by_index(rolled_up_data, "measure_id"),
+          ({ measure_id, ...row }) => ({
+            ...row,
+            measure_name: CovidMeasureStore.lookup(measure_id).name,
+          })
         )
-        .mapValues((rolled_up_data) =>
-          _.map(
-            get_expenditures_by_index(rolled_up_data, "measure_id"),
-            ({ measure_id, ...row }) => ({
-              ...row,
-              measure_name: CovidMeasureStore.lookup(measure_id).name,
-            })
-          )
-        )
-        .value();
+      )
+      .value();
 
     const column_configs = {
       measure_name: {
@@ -344,7 +359,10 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
     const {
       measure_name: largest_measure_name,
       total_exp: largest_measure_exp,
-    } = _.chain(sorted_rows).sortBy("total_exp").last().value();
+    } = _.chain(rows_by_measure_filter_option.all)
+      .sortBy("total_exp")
+      .last()
+      .value();
     const subject_type = panel_args.subject.subject_type;
     const text_args = {
       ...panel_args,
@@ -352,7 +370,7 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
       largest_measure_exp,
       ...(subject_type === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
-          sorted_rows,
+          rows_by_measure_filter_option.all,
           (memo, { vote, stat }) => memo + vote + stat,
           0
         ),
@@ -371,9 +389,7 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
           <ToggleVoteStat />
         </TableControlLayout>
         <DisplayTable
-          data={
-            measure_filter_state ? estimates_filtered_sorted_rows : sorted_rows
-          }
+          data={rows_by_measure_filter_option[selected_measure_filter]}
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
           disable_column_select={true}
