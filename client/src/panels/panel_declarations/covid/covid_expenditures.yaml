@@ -137,6 +137,17 @@ covid_expenditures_voted:
   en: Estimated Voted Expenditures
   fr: Dépenses votées estimées
 
-covid_toggle_estimate_measure_filter:
-  en: Limit to measures with authorities
+covid_expenditures_measure_filter:
+  en: |
+    Show expenditures from:
+  fr: |
+    TODO
+covid_toggle_filter_all:
+  en: All measures
+  fr: TODO
+covid_toggle_filter_in:
+  en: Measures presented in the Estimates
+  fr: TODO
+covid_toggle_filter_out:
+  en: Measures not presented in the Estimates
   fr: TODO
