@@ -220,16 +220,19 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
     args: panel_args,
     data: raw_data,
   }) => {
-    const data = _.chain(raw_data)
-      .thru((data) =>
-        !filter_non_estimates_measures
-          ? data
-          : _.filter(data, "is_in_estimates")
-      )
-      .thru((data) => roll_up_flat_measure_data_by_property(data, "org_id"))
-      .value();
-
-    const pre_sorted_rows = get_expenditures_by_index(data, "org_id");
+    const { all: sorted_rows, in_estimates: estimates_filtered_sorted_rows } =
+      _.chain(raw_data)
+        .thru((data) => ({
+          all: data,
+          in_estimates: _.filter(data, "is_in_estimates"),
+        }))
+        .mapValues((data) =>
+          roll_up_flat_measure_data_by_property(data, "org_id")
+        )
+        .mapValues((rolled_up_data) =>
+          get_expenditures_by_index(rolled_up_data, "org_id")
+        )
+        .value();
 
     const column_configs = {
       org_id: {
@@ -255,7 +258,7 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
     };
 
     const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _.chain(
-      pre_sorted_rows
+      sorted_rows
     )
       .sortBy("total_exp")
       .last()
@@ -283,7 +286,11 @@ const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
           <ToggleVoteStat />
         </div>
         <DisplayTable
-          data={pre_sorted_rows}
+          data={
+            filter_non_estimates_measures
+              ? estimates_filtered_sorted_rows
+              : sorted_rows
+          }
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
           disable_column_select={true}
@@ -303,23 +310,25 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
     args: panel_args,
     data: raw_data,
   }) => {
-    const data = _.chain(raw_data)
-      .thru((data) =>
-        !filter_non_estimates_measures
-          ? data
-          : _.filter(data, "is_in_estimates")
-      )
-      .thru((data) => roll_up_flat_measure_data_by_property(data, "measure_id"))
-      .value();
-
-    const pre_sorted_rows_with_measure_names = _.chain(
-      get_expenditures_by_index(data, "measure_id")
-    )
-      .map(({ measure_id, ...row }) => ({
-        ...row,
-        measure_name: CovidMeasureStore.lookup(measure_id).name,
-      }))
-      .value();
+    const { all: sorted_rows, in_estimates: estimates_filtered_sorted_rows } =
+      _.chain(raw_data)
+        .thru((data) => ({
+          all: data,
+          in_estimates: _.filter(data, "is_in_estimates"),
+        }))
+        .mapValues((data) =>
+          roll_up_flat_measure_data_by_property(data, "measure_id")
+        )
+        .mapValues((rolled_up_data) =>
+          _.map(
+            get_expenditures_by_index(rolled_up_data, "measure_id"),
+            ({ measure_id, ...row }) => ({
+              ...row,
+              measure_name: CovidMeasureStore.lookup(measure_id).name,
+            })
+          )
+        )
+        .value();
 
     const column_configs = {
       measure_name: {
@@ -333,11 +342,7 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
     const {
       measure_name: largest_measure_name,
       total_exp: largest_measure_exp,
-    } = _.chain(pre_sorted_rows_with_measure_names)
-      .sortBy("total_exp")
-      .last()
-      .value();
-
+    } = _.chain(sorted_rows).sortBy("total_exp").last().value();
     const subject_type = panel_args.subject.subject_type;
     const text_args = {
       ...panel_args,
@@ -345,15 +350,15 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
       largest_measure_exp,
       ...(subject_type === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
-          data,
+          sorted_rows,
           (memo, { vote, stat }) => memo + vote + stat,
           0
         ),
       }),
     };
+
     return (
       <Fragment>
-        {subject_type === "dept"}
         <TM
           k={`covid_expenditures_measure_tab_text_${subject_type}`}
           args={text_args}
@@ -370,7 +375,11 @@ const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
           <ToggleVoteStat />
         </div>
         <DisplayTable
-          data={pre_sorted_rows_with_measure_names}
+          data={
+            filter_non_estimates_measures
+              ? estimates_filtered_sorted_rows
+              : sorted_rows
+          }
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
           disable_column_select={true}
