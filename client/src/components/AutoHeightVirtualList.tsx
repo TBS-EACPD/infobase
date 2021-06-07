@@ -2,7 +2,9 @@ import React from "react";
 import { List } from "react-virtualized";
 import type { ListProps } from "react-virtualized";
 
-interface AutoHeightVirtualListProps extends Omit<ListProps, "height"> {
+import { SafeOmit } from "src/types/util_types.d";
+
+interface AutoHeightVirtualListProps extends SafeOmit<ListProps, "height"> {
   list_ref: React.RefObject<any>; //cannot use List from react-virtualized because it doesn't have "getTotalRowsHeight"
   max_height?: number;
 }
@@ -53,12 +55,11 @@ export class AutoHeightVirtualList extends React.Component<
     return (
       <List
         {...this.props}
-        rowHeight={this.props.rowHeight}
-        rowCount={this.props.rowCount}
-        width={this.props.width}
-        rowRenderer={this.props.rowRenderer}
-        ref={this.list_ref}
-        height={this.state.list_height}
+        {...{
+          ...this.props,
+          ref: this.list_ref,
+          height: this.state.list_height,
+        }}
       />
     );
   }
