@@ -44,6 +44,8 @@ import programVoteStat from "src/tables/programVoteStat";
 
 import { get_client } from "src/graphql_utils/graphql_utils";
 
+import { runtime_polyfills } from "./runtime_polyfills";
+
 const table_defs = [
   orgVoteStatPa,
   orgSobjs,
@@ -73,36 +75,38 @@ const load_fonts = () =>
 function bootstrapper(App, app_reducer, done) {
   load_fonts();
 
-  populate_stores().then(() => {
-    _.each(table_defs, (table_def) => Table.create_and_register(table_def));
+  runtime_polyfills()
+    .then(populate_stores)
+    .then(() => {
+      _.each(table_defs, (table_def) => Table.create_and_register(table_def));
 
-    const history = createHashHistory({ hashType: "noslash" });
+      const history = createHashHistory({ hashType: "noslash" });
 
-    const middleware = routerMiddleware(history);
+      const middleware = routerMiddleware(history);
 
-    const store = createStore(
-      combineReducers({
-        app: app_reducer,
-        router: connectRouter(history),
-      }),
-      applyMiddleware(middleware)
-    );
+      const store = createStore(
+        combineReducers({
+          app: app_reducer,
+          router: connectRouter(history),
+        }),
+        applyMiddleware(middleware)
+      );
 
-    const client = get_client();
-    done();
+      const client = get_client();
+      done();
 
-    ReactDOM.render(
-      <ApolloProvider client={client}>
-        <Provider store={store}>
-          {/* ConnectedRouter will use the store from Provider automatically */}
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </Provider>
-      </ApolloProvider>,
-      document.getElementById("app")
-    );
-  });
+      ReactDOM.render(
+        <ApolloProvider client={client}>
+          <Provider store={store}>
+            {/* ConnectedRouter will use the store from Provider automatically */}
+            <ConnectedRouter history={history}>
+              <App />
+            </ConnectedRouter>
+          </Provider>
+        </ApolloProvider>,
+        document.getElementById("app")
+      );
+    });
 }
 
 export { bootstrapper };
