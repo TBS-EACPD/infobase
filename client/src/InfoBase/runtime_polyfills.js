@@ -2,7 +2,7 @@ import { shouldPolyfill as should_polyfill_numberformat } from "@formatjs/intl-n
 
 import { lang } from "src/core/injected_build_constants";
 
-async function intl_numberfotmat() {
+async function intl_numberformat() {
   if (!should_polyfill_numberformat()) {
     return;
   }
@@ -16,4 +16,4 @@ async function intl_numberfotmat() {
   }
 }
 
-export const runtime_polyfills = () => Promise.all([intl_numberfotmat]);
+export const runtime_polyfills = () => Promise.all([intl_numberformat()]);
