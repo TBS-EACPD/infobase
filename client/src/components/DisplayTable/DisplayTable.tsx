@@ -381,7 +381,7 @@ export class _DisplayTable extends React.Component<
                 label: col_configs_with_defaults[key].header,
                 active: _.includes(visible_ordered_col_keys, key),
               }))}
-              onClick={(clicked_key: string | number) => {
+              onClick={(clicked_key: string) => {
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
                     visible_col_keys: toggle_list(

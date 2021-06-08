@@ -21,6 +21,7 @@ export const TabularLegend = ({
         <CheckBox
           // using CheckBox without any onClick, and with isSolid makes solid squares with styling otherwise
           // consistent with other legends; a bit of a hack but it's how all the legends get their icon styles ATM
+          id={item.id}
           color={item.color}
           label={item.label}
           isSolidBox={true}

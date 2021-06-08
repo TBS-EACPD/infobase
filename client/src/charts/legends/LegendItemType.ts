@@ -1,5 +1,5 @@
 export interface StaticLegendItemType {
-  id: string | number;
+  id: string;
   label: string;
   color?: string;
 }
