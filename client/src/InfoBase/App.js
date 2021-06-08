@@ -69,10 +69,7 @@ const GraphiQL = retrying_react_lazy(() =>
 const FootnoteInventory = retrying_react_lazy(() =>
   import("src/models/footnotes/FootnoteInventory")
 );
-
-const Survey = retrying_react_lazy(() =>
-  import(/* webpackChunkName: "Survey" */ "src/Survey/Survey")
-);
+const Survey = retrying_react_lazy(() => import("src/Survey/Survey"));
 const SingleServiceRoute = retrying_react_lazy(() =>
   import("../panels/panel_routes/SingleServiceRoute")
 );
