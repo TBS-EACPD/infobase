@@ -11,8 +11,8 @@ import "./CheckBox.scss";
 
 export interface CheckBoxProps {
   disabled?: boolean; // greys out checkbox and make it non-clickable if true
-  onClick?: (id: string | number) => void; // (id) => {}
-  id?: string | number;
+  onClick?: (id: string) => void; // (id) => {}
+  id: string;
   label: string; // required text for checkbox
   active?: boolean; // required, equivalent of 'checked'
   color?: string; // defaults to primaryColor
@@ -32,7 +32,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
   handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
-      onClick(id!);
+      onClick(id);
     }
   };
   render() {
