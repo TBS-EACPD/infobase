@@ -1,0 +1,13 @@
+diff --git a/node_modules/@types/jsurl/index.d.ts b/node_modules/@types/jsurl/index.d.ts
+index 2b1f0fb..86d4c54 100644
+--- a/node_modules/@types/jsurl/index.d.ts
++++ b/node_modules/@types/jsurl/index.d.ts
+@@ -3,6 +3,8 @@
+ // Definitions by: Alexey Gorshkov <https://github.com/agorshkov23>
+ // Definitions: https://github.com/agorshkov23/DefinitelyTyped
+ 
++export = JSURL;
++
+ interface UrlQuery {
+     clear: () => void;
+ }
