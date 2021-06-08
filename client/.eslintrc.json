@@ -43,7 +43,8 @@
     "react/no-string-refs": [ "off" ],
     "react/display-name": [ "off" ],
     "react/no-find-dom-node": [ "off" ],
-    "react/no-children-prop": [ "off" ]
+    "react/no-children-prop": [ "off" ],
+    "@typescript-eslint/no-redeclare": ["error"]
   },
   "settings": {
     "react": {

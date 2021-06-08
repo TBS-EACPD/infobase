@@ -133,36 +133,37 @@ export const retry_promise = (
       );
   });
 };
-interface completeAssignInterface {
-  completeAssign<TObject, TSource>(
-    object: TObject,
-    source: TSource
-  ): TObject & TSource;
-  completeAssign<TObject, TSource1, TSource2>(
-    object: TObject,
-    source1: TSource1,
-    source2: TSource2
-  ): TObject & TSource1 & TSource2;
-  completeAssign<TObject, TSource1, TSource2, TSource3>(
-    object: TObject,
-    source1: TSource1,
-    source2: TSource2,
-    source3: TSource3
-  ): TObject & TSource1 & TSource2 & TSource3;
-  completeAssign<TObject, TSource1, TSource2, TSource3, TSource4>(
-    object: TObject,
-    source1: TSource1,
-    source2: TSource2,
-    source3: TSource3,
-    source4: TSource4
-  ): TObject & TSource1 & TSource2 & TSource3 & TSource4;
-  completeAssign<TObject>(object: TObject): TObject;
-  completeAssign(object: any, ...otherArgs: any[]): any;
-}
-// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-// "This is an assign function that copies full descriptors"
-// Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
-export function completeAssign(target: any, ...sources: any[]) {
+
+/*
+  From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+  "This is an assign function that copies full descriptors"
+  It's also copied lodash type signatue from _.assign 
+  Here, used to preserve getters (like d3-selection.event), as opposed to Object.assign which just copies the value once (null for most)
+*/
+export function completeAssign<TObject, TSource>(
+  object: TObject,
+  source: TSource
+): TObject & TSource;
+export function completeAssign<TObject, TSource1, TSource2>(
+  object: TObject,
+  source1: TSource1,
+  source2: TSource2
+): TObject & TSource1 & TSource2;
+export function completeAssign<TObject, TSource1, TSource2, TSource3>(
+  object: TObject,
+  source1: TSource1,
+  source2: TSource2,
+  source3: TSource3
+): TObject & TSource1 & TSource2 & TSource3;
+export function completeAssign<TObject, TSource1, TSource2, TSource3, TSource4>(
+  object: TObject,
+  source1: TSource1,
+  source2: TSource2,
+  source3: TSource3,
+  source4: TSource4
+): TObject & TSource1 & TSource2 & TSource3 & TSource4;
+export function completeAssign<TObject>(object: TObject): TObject;
+export function completeAssign(target: any, ...sources: any[]): any {
   sources.forEach((source) => {
     let descriptors = Object.keys(source).reduce(
       (descriptors: { [key: string]: PropertyDescriptor }, key) => {
