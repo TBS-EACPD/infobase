@@ -32,7 +32,6 @@ const money_formatter = {
       new Intl.NumberFormat("en-CA", {
         style: "currency",
         currency: "CAD",
-        currencyDisplay: "narrowSymbol",
         minimumFractionDigits: ix,
         maximumFractionDigits: ix,
       })
@@ -43,7 +42,6 @@ const money_formatter = {
       new Intl.NumberFormat("fr-CA", {
         style: "currency",
         currency: "CAD",
-        currencyDisplay: "narrowSymbol",
         minimumFractionDigits: ix,
         maximumFractionDigits: ix,
       })
