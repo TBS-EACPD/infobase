@@ -13,7 +13,7 @@ import "./LegendList.scss";
 export interface LegendListProps {
   isHorizontal?: boolean;
   items: LegendItemType[];
-  onClick: (id: string | number) => void;
+  onClick: (id: string) => void;
   checkBoxProps?: CheckBoxProps;
 }
 
