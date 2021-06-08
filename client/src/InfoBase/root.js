@@ -4,7 +4,7 @@ const kill_spinner = pre_load();
 
 import("./runtime_polyfills")
   .then(({ runtime_polyfills }) => runtime_polyfills())
-  .then(
+  .then(() =>
     Promise.all([
       import("./bootstrapper"),
       import("./App"),
