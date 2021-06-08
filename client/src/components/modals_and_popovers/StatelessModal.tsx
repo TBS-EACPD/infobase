@@ -9,7 +9,7 @@ import "./bootstrap_modal_exstension.scss";
 interface StatelessModalProps {
   on_close_callback: () => void;
   show: boolean;
-  title: string | React.ReactNode;
+  title: React.ReactNode;
   subtitle?: string;
   header?: React.ReactNode;
   body: React.ReactNode;

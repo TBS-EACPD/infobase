@@ -36,6 +36,7 @@
     "rules": {
     "no-prototype-builtins":"off", //common TS pattern
     "no-use-before-define":"off",
+    "no-redeclare": "off", // Need to use @typescript-eslint/no-redeclare for ts overloading
     "no-restricted-imports": ["error", {"patterns": ["../*"]}],
     "react/jsx-uses-vars": 1,
     "react/jsx-no-target-blank": [ "off"],
