@@ -135,7 +135,7 @@ const StatelessPullDownAccordion = ({
       {isExpanded ? (
         <AccordionEnterExit
           className="pull-down-accordion-body"
-          style={{ paddingTosp: "5px" }}
+          style={{ paddingTop: "5px" }}
           expandDuration={600}
           collapseDuration={600}
           max_height={max_height}
