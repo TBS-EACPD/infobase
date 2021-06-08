@@ -35,7 +35,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
             {
               useBuiltIns: false,
               modules: false,
-              targets: target_ie11 ? "IE 11" : "last 2 Chrome versions",
+              targets: target_ie11
+                ? ["ie 11", "Safari 7"]
+                : "last 2 Chrome versions",
               forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
             },
           ],
