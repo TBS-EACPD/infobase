@@ -36,7 +36,6 @@ export const StandardLegend = ({
           {...{
             items,
             isHorizontal,
-
             onClick,
             checkBoxProps,
           }}

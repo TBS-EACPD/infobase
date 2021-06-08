@@ -596,21 +596,23 @@ class SummaryTabComponent extends React.Component {
         <div className="col-12 col-lg-6">
           {!is_a11y_mode && (
             <StandardLegend
-              items={_.map(this.graph_keys, (key) => ({
-                id: key,
-                label: key,
-                active: _.includes(this.state.selected, key),
-                color: colors(key),
-              }))}
-              isHorizontal={true}
-              onClick={(label) => {
-                !(
-                  this.state.selected.length === 1 &&
-                  this.state.selected.includes(label)
-                ) &&
-                  this.setState({
-                    selected: toggle_list(this.state.selected, label),
-                  });
+              legendListProps={{
+                items: _.map(this.graph_keys, (key) => ({
+                  id: key,
+                  label: key,
+                  active: _.includes(this.state.selected, key),
+                  color: colors(key),
+                })),
+                isHorizontal: true,
+                onClick: (label) => {
+                  !(
+                    this.state.selected.length === 1 &&
+                    this.state.selected.includes(label)
+                  ) &&
+                    this.setState({
+                      selected: toggle_list(this.state.selected, label),
+                    });
+                },
               }}
             />
           )}
