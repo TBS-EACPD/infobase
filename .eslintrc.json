@@ -11,7 +11,6 @@
         "warn",
         { "args": "none" }
     ],
-    "no-redeclare": "off",
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
     "no-throw-literal": "error",
     "lodash/no-double-unwrap": ["error"],
