@@ -1,9 +1,17 @@
 import _ from "lodash";
 import React from "react";
 
-import { log_standard_event } from "src/core/analytics";
+// eslint-disable-next-line import/extensions
+import { log_standard_event } from "src/core/analytics.js";
 
-export const LogInteractionEvents = ({
+interface LogInterationEventsProps {
+  event_type: string;
+  event_details: string;
+  style: { display: string };
+  children: React.ReactElement;
+}
+
+export const LogInteractionEvents: React.FC<LogInterationEventsProps> = ({
   event_type,
   event_details,
   style,
