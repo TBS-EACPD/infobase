@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 // eslint-disable-next-line import/extensions
+// eslint-disable-next-line import/no-unresolved
 import { log_standard_event } from "src/core/analytics.js";
 
 interface LogInterationEventsProps {
