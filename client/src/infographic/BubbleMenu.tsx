@@ -12,21 +12,33 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import "./BubbleMenu.scss";
 
-const BubbleMenu = ({ items, active_item_id }) => {
+interface ItemProps {
+  Icon: Function;
+  description: string;
+  href: string;
+  id: string;
+  title: string;
+}
+interface BubbleMenuProps {
+  items: ItemProps[];
+  active_item_id: string;
+}
+
+function handleOnClick() {
+  let z = document.getElementById("infographic-explanation-focus")?.focus();
+  if (!z) {
+    throw new Error();
+  }
+  return z;
+}
+const BubbleMenu: React.FC<BubbleMenuProps> = ({ items, active_item_id }) => {
   if (is_a11y_mode) {
     return (
       <nav aria-label={trivial_text_maker("dataset_navigation")}>
         <ul>
           {_.map(items, ({ id, title, description, href }) => (
             <li key={id}>
-              <a
-                onClick={() =>
-                  document
-                    .getElementById("infographic-explanation-focus")
-                    .focus()
-                }
-                href={href}
-              >
+              <a onClick={handleOnClick} href={href}>
                 {title}
                 {id === active_item_id && (
                   <span>
