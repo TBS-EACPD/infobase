@@ -17,18 +17,18 @@ import { TextMaker, TM } from "./TextMaker";
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
 interface ExternalLinkProps {
-  children: any;
-  href: any;
-  title: any;
+  children: Object;
+  href: string;
+  title: string;
 }
 
 interface FormatProps {
-  type: any;
-  content: any;
+  type: number;
+  content: string;
   style?: Object;
-  className?: any;
-  in_parenthesis: any;
-  prefix: any;
+  className: string;
+  in_parenthesis: boolean;
+  prefix: boolean;
 }
 
 interface YearProps {
@@ -60,10 +60,6 @@ interface TrivialTextMakerProps {
   template_str?: string;
 }
 
-type create_text_maker_component_text = {
-  text: string;
-};
-
 interface DlItemProps {
   term: string;
   def: string;
@@ -78,7 +74,7 @@ interface MultiColumnListProps {
 }
 
 interface LinkStyledProps {
-  on_click?: (key: string, args?: any) => string;
+  on_click: (event: any) => any;
   className: string;
   style: Object;
   children: Array<string>;
@@ -120,7 +116,6 @@ class Format extends React.PureComponent<FormatProps> {
       <span
         style={style}
         className={className}
-
         // Apparently dangerouslySetInnerHTML doesn't work for ts
         // dangerouslySetInnerHTML={{
         //   __html: formatted_content,
@@ -159,9 +154,7 @@ const TrivialTextMaker = (props: TrivialTextMakerProps) => (
     template_str={props.template_str}
   />
 );
-const create_text_maker_component = (
-  text: create_text_maker_component_text
-) => {
+const create_text_maker_component = (text: Object) => {
   const text_maker = create_text_maker(text);
   return {
     text_maker,
@@ -186,14 +179,13 @@ const DlItem = (props: DlItemProps) => (
   </Fragment>
 );
 
-// column count default value was 2, not sure if we can set a default value in ts
-const MultiColumnList = (props: MultiColumnListProps) => (
+const MultiColumnList = (props: MultiColumnListProps, column_count = 2) => (
   <div
     className={props.className}
     style={{ display: "flex", flexDirection: "row" }}
   >
     {_.chain(props.list_items)
-      .chunk(_.ceil(props.list_items.length / props.column_count))
+      .chunk(_.ceil(props.list_items.length / column_count))
       .map((list_chunk, ix) => (
         <ul key={ix} className={props.ul_class}>
           {_.map(list_chunk, (list_item, ix) => (
@@ -211,10 +203,8 @@ const LinkStyled = (props: LinkStyledProps) => (
   <a
     role="link"
     tabIndex={0}
-    // throws an error for some reason
-    // onClick={props.on_click}
-    // onKeyDown={(e) => e.keyCode === 13 && props.on_click(e)}
-
+    onClick={props.on_click}
+    onKeyDown={(e) => e.keyCode === 13 && props.on_click(e)}
     className={classNames("link-styled", props.className)}
     style={props.style}
   >
