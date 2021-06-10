@@ -4,12 +4,12 @@
 
 set -e # will exit if any command has non-zero exit value
 
-read -p "Please provide a one sentence deploy message for the team slack:
+read -p "Provide a one sentence reason for this deploy, for the slack alert:
 > " DEPLOY_MESSAGE
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 while [ $CURRENT_BRANCH != 'master' ]; do
-  read -p "You are not on master, do you really mean to deploy from $CURRENT_BRANCH? [YES/oops]:" yn
+  read -p "You are not on master, do you really mean to deploy from $CURRENT_BRANCH? [YES/oops]: >" yn
   case $yn in
     [YES]* ) break;;
     [oops]* ) exit;;
@@ -24,7 +24,7 @@ CURRENT_SHA=$(git rev-parse HEAD | cut -c1-7)
 NEW_PROD_MDB_NAME=$DB_SUFFIX$CURRENT_SHA
 
 while [ $CURRENT_SHA != $REMOTE_MASTER_SHA ]; do
-  read -p "You are deploying from a commit that does not match the head of origin/master. Do you want to continue? [YES/oops]:" yn
+  read -p "You are deploying from a commit that does not match the head of origin/master. Do you want to continue? [YES/oops]: >" yn
   case $yn in
     [YES]* ) break;;
     [oops]* ) exit;;
@@ -53,7 +53,7 @@ SLACK_ALERT_DIFF_LINK="<$GITHUB_LINK|$CURRENT_SHA>"
 sh scripts/prod_scripts/slack_deploy_alert.sh "
 $SLACK_ALERT_DIFF_LINK: STARTED!\\n
 By: $(git config user.name)\\n
-Message: $DEPLOY_MESSAGE
+Reason for deploying: \"$DEPLOY_MESSAGE\"
 "
 
 function safe_deploy_exit_alert {
