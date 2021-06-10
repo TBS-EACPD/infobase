@@ -48,7 +48,9 @@ GITHUB_LINK="https://github.com/TBS-EACPD/infobase/compare/$PREVIOUS_DEPLOY_SHA.
 sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': STARTED! View changes: '$GITHUB_LINK'"
 
 function incomplete_deploy_alert {
-  sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': EXITED! No changes to the production site."
+  if [[ $? != 0 ]]; then
+    sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': EXITED! No changes to the production site."
+  fi
 }
 trap incomplete_deploy_alert EXIT
 
