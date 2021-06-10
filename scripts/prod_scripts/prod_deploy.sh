@@ -4,9 +4,12 @@
 
 set -e # will exit if any command has non-zero exit value
 
+read -p "Please provide a one sentence deploy message for the team slack:
+> " DEPLOY_MESSAGE
+
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 while [ $CURRENT_BRANCH != 'master' ]; do
-  read -p "You are not on master, do you really mean to deploy from $CURRENT_BRANCH? [YES/oops]" yn
+  read -p "You are not on master, do you really mean to deploy from $CURRENT_BRANCH? [YES/oops]:" yn
   case $yn in
     [YES]* ) break;;
     [oops]* ) exit;;
@@ -21,7 +24,7 @@ CURRENT_SHA=$(git rev-parse HEAD | cut -c1-7)
 NEW_PROD_MDB_NAME=$DB_SUFFIX$CURRENT_SHA
 
 while [ $CURRENT_SHA != $REMOTE_MASTER_SHA ]; do
-  read -p "You are deploying from a commit that does not match the head of origin/master. Do you want to continue? [YES/oops]" yn
+  read -p "You are deploying from a commit that does not match the head of origin/master. Do you want to continue? [YES/oops]:" yn
   case $yn in
     [YES]* ) break;;
     [oops]* ) exit;;
@@ -45,7 +48,12 @@ PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha | cut -c1-7)
 
 GITHUB_LINK="https://github.com/TBS-EACPD/infobase/compare/$PREVIOUS_DEPLOY_SHA...$CURRENT_SHA"  && [[ -z $PREVIOUS_DEPLOY_SHA ]] && GITHUB_LINK="https://github.com/TBS-EACPD/infobase/commit/$CURRENT_SHA"
 
-sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': STARTED! View changes: '$GITHUB_LINK'"
+sh scripts/prod_scripts/slack_deploy_alert.sh "
+'$CURRENT_SHA': STARTED!\\n
+By: '$(git config user.name)'\\n
+Message: '$DEPLOY_MESSAGE'\\n
+View changes: '$GITHUB_LINK'
+"
 
 function safe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
