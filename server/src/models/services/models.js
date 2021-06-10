@@ -148,6 +148,19 @@ export default function (model_singleton) {
     ...bilingual_str("service_name"), // only for dept, program
     website_visits_count: { type: Number },
   });
+  const GovServiceSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    service_general_stats: ServiceGeneralStatsSchema,
+    service_type_summary: [ServiceTypeSummarySchema],
+    service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
+    service_id_methods_summary: [ServiceIdMethodsSummarySchema],
+    service_standards_summary: [ServiceStandardsSummarySchema],
+    service_fees_summary: [ServiceFeesSummarySchema],
+    service_high_volume_summary: [ServicesHighVolumeSummarySchema],
+    top_services_website_visits_summary: [
+      TopServicesWebsiteVisitsSummarySchema,
+    ],
+  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
@@ -157,6 +170,7 @@ export default function (model_singleton) {
     "GovServicesHighVolumeSummary",
     ServicesHighVolumeSummarySchema
   );
+  model_singleton.define_model("GovServiceSummary", GovServiceSummarySchema);
 
   const define_models_w_same_schema = (names, schema) => {
     _.forEach(names, (name) => {
@@ -164,52 +178,28 @@ export default function (model_singleton) {
     });
   };
   define_models_w_same_schema(
-    [
-      "GovServiceGeneralStats",
-      "DeptServiceGeneralStats",
-      "ProgramServiceGeneralStats",
-    ],
+    ["DeptServiceGeneralStats", "ProgramServiceGeneralStats"],
     ServiceGeneralStatsSchema
   );
 
   define_models_w_same_schema(
-    [
-      "GovServiceTypeSummary",
-      "DeptServiceTypeSummary",
-      "ProgramServiceTypeSummary",
-    ],
+    ["DeptServiceTypeSummary", "ProgramServiceTypeSummary"],
     ServiceTypeSummarySchema
   );
   define_models_w_same_schema(
-    [
-      "GovServiceDigitalStatusSummary",
-      "DeptServiceDigitalStatusSummary",
-      "ProgramServiceDigitalStatusSummary",
-    ],
+    ["DeptServiceDigitalStatusSummary", "ProgramServiceDigitalStatusSummary"],
     ServiceDigitalStatusSummarySchema
   );
   define_models_w_same_schema(
-    [
-      "GovServiceIdMethodsSummary",
-      "DeptServiceIdMethodsSummary",
-      "ProgramServiceIdMethodsSummary",
-    ],
+    ["DeptServiceIdMethodsSummary", "ProgramServiceIdMethodsSummary"],
     ServiceIdMethodsSummarySchema
   );
   define_models_w_same_schema(
-    [
-      "GovServiceStandardsSummary",
-      "DeptServiceStandardsSummary",
-      "ProgramServiceStandardsSummary",
-    ],
+    ["DeptServiceStandardsSummary", "ProgramServiceStandardsSummary"],
     ServiceStandardsSummarySchema
   );
   define_models_w_same_schema(
-    [
-      "GovServiceFeesSummary",
-      "DeptServiceFeesSummary",
-      "ProgramServiceFeesSummary",
-    ],
+    ["DeptServiceFeesSummary", "ProgramServiceFeesSummary"],
     ServiceFeesSummarySchema
   );
   define_models_w_same_schema(
@@ -221,7 +211,6 @@ export default function (model_singleton) {
   );
   define_models_w_same_schema(
     [
-      "GovTopServicesWebsiteVisitsSummary",
       "DeptTopServicesWebsiteVisitsSummary",
       "ProgramTopServicesWebsiteVisitsSummary",
     ],
@@ -229,22 +218,17 @@ export default function (model_singleton) {
   );
   const {
     Service,
-    GovServiceGeneralStats,
+    GovServiceSummary,
     DeptServiceGeneralStats,
     ProgramServiceGeneralStats,
-    GovServiceTypeSummary,
     DeptServiceTypeSummary,
     ProgramServiceTypeSummary,
-    GovServiceDigitalStatusSummary,
     DeptServiceDigitalStatusSummary,
     ProgramServiceDigitalStatusSummary,
-    GovServiceIdMethodsSummary,
     DeptServiceIdMethodsSummary,
     ProgramServiceIdMethodsSummary,
-    GovServiceStandardsSummary,
     DeptServiceStandardsSummary,
     ProgramServiceStandardsSummary,
-    GovServiceFeesSummary,
     DeptServiceFeesSummary,
     ProgramServiceFeesSummary,
     DeptTopServicesApplicationVolSummary,
@@ -272,8 +256,8 @@ export default function (model_singleton) {
       Service,
       "program_ids"
     ),
-    service_general_stats_for_gov: create_resource_by_id_attr_dataloader(
-      GovServiceGeneralStats,
+    service_summary_for_gov: create_resource_by_id_attr_dataloader(
+      GovServiceSummary,
       "id"
     ),
     service_general_stats_for_dept: create_resource_by_id_attr_dataloader(
@@ -286,10 +270,6 @@ export default function (model_singleton) {
     ),
     ...define_loaders_w_same_fk_attr(
       [
-        {
-          schema: GovServiceTypeSummary,
-          name: "service_types_summary_for_gov",
-        },
         {
           schema: DeptServiceTypeSummary,
           name: "service_types_summary_for_dept",
@@ -304,10 +284,6 @@ export default function (model_singleton) {
     ...define_loaders_w_same_fk_attr(
       [
         {
-          schema: GovServiceDigitalStatusSummary,
-          name: "service_digital_status_summary_for_gov",
-        },
-        {
           schema: DeptServiceDigitalStatusSummary,
           name: "service_digital_status_summary_for_dept",
         },
@@ -320,10 +296,6 @@ export default function (model_singleton) {
     ),
     ...define_loaders_w_same_fk_attr(
       [
-        {
-          schema: GovServiceIdMethodsSummary,
-          name: "service_id_methods_summary_for_gov",
-        },
         {
           schema: DeptServiceIdMethodsSummary,
           name: "service_id_methods_summary_for_dept",
@@ -338,10 +310,6 @@ export default function (model_singleton) {
     ...define_loaders_w_same_fk_attr(
       [
         {
-          schema: GovServiceStandardsSummary,
-          name: "service_standards_summary_for_gov",
-        },
-        {
           schema: DeptServiceStandardsSummary,
           name: "service_standards_summary_for_dept",
         },
@@ -354,10 +322,6 @@ export default function (model_singleton) {
     ),
     ...define_loaders_w_same_fk_attr(
       [
-        {
-          schema: GovServiceFeesSummary,
-          name: "service_fees_summary_for_gov",
-        },
         {
           schema: DeptServiceFeesSummary,
           name: "service_fees_summary_for_dept",

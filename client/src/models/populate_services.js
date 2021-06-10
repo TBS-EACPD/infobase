@@ -253,7 +253,7 @@ const get_summary_query = (query_options) => {
           service_general_stats {
             id
             number_of_services
-          }  
+          }
           ${query_fragment}
         }
       }

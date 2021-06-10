@@ -23,7 +23,7 @@ const sub_module_defs = _.compact([
   results,
   resources,
   covid,
-  process.env.USE_TEST_DATA && services,
+  services,
   // pses,
   // sobjs,
   // search,
