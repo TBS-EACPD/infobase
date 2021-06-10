@@ -203,10 +203,7 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
-
-        {/* ---- FAQ PANEL ---- */}
         <FAQPanel q_a_keys={q_a_keys} />
-
         <div
           style={{
             marginBottom: "15px",
