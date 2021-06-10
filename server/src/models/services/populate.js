@@ -23,28 +23,21 @@ export default async function ({ models }) {
     Service,
     ServiceReport,
     StandardReport,
-    GovServiceGeneralStats,
+    GovServiceSummary,
     DeptServiceGeneralStats,
     ProgramServiceGeneralStats,
-    GovServiceTypeSummary,
     DeptServiceTypeSummary,
     ProgramServiceTypeSummary,
-    GovServiceDigitalStatusSummary,
     DeptServiceDigitalStatusSummary,
     ProgramServiceDigitalStatusSummary,
-    GovServiceIdMethodsSummary,
     DeptServiceIdMethodsSummary,
     ProgramServiceIdMethodsSummary,
-    GovServiceStandardsSummary,
     DeptServiceStandardsSummary,
     ProgramServiceStandardsSummary,
-    GovServiceFeesSummary,
     DeptServiceFeesSummary,
     ProgramServiceFeesSummary,
     DeptTopServicesApplicationVolSummary,
     ProgramTopServicesApplicationVolSummary,
-    GovServicesHighVolumeSummary,
-    GovTopServicesWebsiteVisitsSummary,
     DeptTopServicesWebsiteVisitsSummary,
     ProgramTopServicesWebsiteVisitsSummary,
   } = models;
@@ -210,9 +203,6 @@ export default async function ({ models }) {
     });
     return result;
   };
-  const gov_general_stats = [
-    { id: "gov", number_of_services: service_rows.length },
-  ];
   const dept_general_stats = _.chain(service_rows)
     .groupBy("org_id")
     .map((services, org_id) => ({
@@ -246,7 +236,6 @@ export default async function ({ models }) {
         value,
       }))
       .value();
-  const gov_type_summary = populate_type_summary(service_rows, "gov");
   const dept_type_summary = _.chain(service_rows)
     .groupBy("org_id")
     .flatMap(populate_type_summary)
@@ -267,10 +256,6 @@ export default async function ({ models }) {
     not_applicable: get_current_status_count(services, key, null),
   });
 
-  const gov_service_digital_summary = _.chain(digital_status_keys)
-    .map((key) => populate_digital_summary_key(service_rows, "gov", "gov", key))
-    .sortBy("can_online")
-    .value();
   const dept_service_digital_summary = _.chain(service_rows)
     .groupBy("org_id")
     .flatMap((services, org_id) =>
@@ -341,7 +326,6 @@ export default async function ({ models }) {
       }, [])
       .value();
 
-  const gov_id_methods_summary = get_id_method_count(service_rows, "gov");
   const dept_id_methods_summary = _.chain(service_rows)
     .groupBy("org_id")
     .flatMap((services, org_id) => get_id_method_count(services, org_id))
@@ -378,9 +362,6 @@ export default async function ({ models }) {
       met_standards_count: _.countBy(processed_standards, "is_target_met").true,
     };
   };
-  const gov_standards_summary = [
-    get_final_standards_summary(service_rows, "gov"),
-  ];
   const dept_standards_summary = _.chain(service_rows)
     .groupBy("org_id")
     .flatMap(get_final_standards_summary)
@@ -407,7 +388,6 @@ export default async function ({ models }) {
       },
     ];
   };
-  const gov_fees_summary = get_fees_summary(service_rows, "gov");
   const dept_fees_summary = _.chain(service_rows)
     .groupBy("org_id")
     .flatMap(get_fees_summary)
@@ -517,30 +497,48 @@ export default async function ({ models }) {
     .flatMap(get_top_website_visits_summary)
     .thru(post_process_website_visits)
     .value();
+  const gov_summary = [
+    {
+      id: "gov",
+      service_general_stats: {
+        id: "gov",
+        number_of_services: service_rows.length,
+      },
+      service_type_summary: populate_type_summary(service_rows, "gov"),
+      service_digital_status_summary: _.chain(digital_status_keys)
+        .map((key) =>
+          populate_digital_summary_key(service_rows, "gov", "gov", key)
+        )
+        .sortBy("can_online")
+        .value(),
+      service_id_methods_summary: get_id_method_count(service_rows, "gov"),
+      service_standards_summary: [
+        get_final_standards_summary(service_rows, "gov"),
+      ],
+      service_fees_summary: get_fees_summary(service_rows, "gov"),
+      service_high_volume_summary: gov_services_high_volume_summary,
+      top_services_website_visits_summary: gov_top_website_visits_summary,
+    },
+  ];
 
   return await Promise.all([
+    GovServiceSummary.insertMany(gov_summary),
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
     ServiceStandard.insertMany(service_standard_rows),
     Service.insertMany(service_rows),
-    GovServiceGeneralStats.insertMany(gov_general_stats),
     DeptServiceGeneralStats.insertMany(dept_general_stats),
     ProgramServiceGeneralStats.insertMany(program_general_stats),
-    GovServiceTypeSummary.insertMany(gov_type_summary),
     DeptServiceTypeSummary.insertMany(dept_type_summary),
     ProgramServiceTypeSummary.insertMany(program_type_summary),
-    GovServiceDigitalStatusSummary.insertMany(gov_service_digital_summary),
     DeptServiceDigitalStatusSummary.insertMany(dept_service_digital_summary),
     ProgramServiceDigitalStatusSummary.insertMany(
       program_service_digital_summary
     ),
-    GovServiceIdMethodsSummary.insertMany(gov_id_methods_summary),
     DeptServiceIdMethodsSummary.insertMany(dept_id_methods_summary),
     ProgramServiceIdMethodsSummary.insertMany(program_id_methods_summary),
-    GovServiceStandardsSummary.insertMany(gov_standards_summary),
     DeptServiceStandardsSummary.insertMany(dept_standards_summary),
     ProgramServiceStandardsSummary.insertMany(program_standards_summary),
-    GovServiceFeesSummary.insertMany(gov_fees_summary),
     DeptServiceFeesSummary.insertMany(dept_fees_summary),
     ProgramServiceFeesSummary.insertMany(program_fees_summary),
     DeptTopServicesApplicationVolSummary.insertMany(
@@ -548,10 +546,6 @@ export default async function ({ models }) {
     ),
     ProgramTopServicesApplicationVolSummary.insertMany(
       program_top_application_vol_summary
-    ),
-    GovServicesHighVolumeSummary.insertMany(gov_services_high_volume_summary),
-    GovTopServicesWebsiteVisitsSummary.insertMany(
-      gov_top_website_visits_summary
     ),
     DeptTopServicesWebsiteVisitsSummary.insertMany(
       dept_top_website_visits_summary

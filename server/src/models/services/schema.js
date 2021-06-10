@@ -162,11 +162,7 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const {
-    Service,
-    GovServicesHighVolumeSummary,
-    GovTopServicesWebsiteVisitsSummary,
-  } = models;
+  const { Service, GovServiceSummary } = models;
 
   const {
     service_loader,
@@ -174,22 +170,17 @@ export default function ({ models, loaders }) {
     services_by_program_id,
     org_id_loader,
     prog_id_loader,
-    service_general_stats_for_gov,
+    service_summary_for_gov, //TODO dataloader not working
     service_general_stats_for_dept,
     service_general_stats_for_program,
-    service_types_summary_for_gov,
     service_types_summary_for_dept,
     service_types_summary_for_program,
-    service_digital_status_summary_for_gov,
     service_digital_status_summary_for_dept,
     service_digital_status_summary_for_program,
-    service_id_methods_summary_for_gov,
     service_id_methods_summary_for_dept,
     service_id_methods_summary_for_program,
-    service_standards_summary_for_gov,
     service_standards_summary_for_dept,
     service_standards_summary_for_program,
-    service_fees_summary_for_gov,
     service_fees_summary_for_dept,
     service_fees_summary_for_program,
     top_services_application_vol_summary_for_dept,
@@ -211,25 +202,33 @@ export default function ({ models, loaders }) {
     Root: {
       service: (_x, { id }) => service_loader.load(id),
     },
-
     Gov: {
-      service_summary: () => ({
-        id: "gov",
-        service_general_stats: service_general_stats_for_gov.load("gov"),
-        service_type_summary: service_types_summary_for_gov.load("gov"),
-        service_digital_status_summary: service_digital_status_summary_for_gov.load(
-          "gov"
-        ),
-        service_id_methods_summary: service_id_methods_summary_for_gov.load(
-          "gov"
-        ),
-        service_standards_summary: service_standards_summary_for_gov.load(
-          "gov"
-        ),
-        service_fees_summary: service_fees_summary_for_gov.load("gov"),
-        service_high_volume_summary: GovServicesHighVolumeSummary.find(),
-        top_services_website_visits_summary: GovTopServicesWebsiteVisitsSummary.find(),
-      }),
+      service_summary: async () => {
+        const service_summary = await GovServiceSummary.find();
+        const {
+          id,
+          service_general_stats,
+          service_type_summary,
+          service_digital_status_summary,
+          service_id_methods_summary,
+          service_standards_summary,
+          service_fees_summary,
+          service_high_volume_summary,
+          top_services_website_visits_summary,
+        } = _.first(service_summary);
+
+        return {
+          id,
+          service_general_stats,
+          service_type_summary,
+          service_digital_status_summary,
+          service_id_methods_summary,
+          service_standards_summary,
+          service_fees_summary,
+          service_high_volume_summary,
+          top_services_website_visits_summary,
+        };
+      },
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
