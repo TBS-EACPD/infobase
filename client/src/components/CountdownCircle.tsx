@@ -8,15 +8,34 @@ import { is_IE } from "src/core/feature_detection";
 import { Countdown } from "./Countdown";
 import "./CountdownCircle.scss";
 
-const split_value_and_units = (size) => {
+interface CountdownCircleProps {
+  time: number;
+  size: string;
+  color: string;
+  stroke_width: string;
+  show_numbers: boolean;
+  on_end_callback: () => void;
+}
+interface CountdownCircleState {
+  countdown_circle_instance_id: string;
+}
+const split_value_and_units = (size: string) => {
   const unit = /[a-z]+$/.exec(size);
-  const value = size.replace(unit, "");
-  return [value, unit];
+  if (unit) {
+    const unitStr = unit[0];
+    const value = size.replace(unitStr, "");
+    return [value, unitStr];
+  } else {
+    return [];
+  }
 };
 
-export class CountdownCircle extends React.Component {
-  constructor() {
-    super();
+export class CountdownCircle extends React.Component<
+  CountdownCircleProps,
+  CountdownCircleState
+> {
+  constructor(props: CountdownCircleProps) {
+    super(props);
     this.state = {
       countdown_circle_instance_id: _.uniqueId("countdown-circle-instance-"),
     };
@@ -30,16 +49,14 @@ export class CountdownCircle extends React.Component {
       show_numbers,
       on_end_callback,
     } = this.props;
-
     const { countdown_circle_instance_id } = this.state;
 
     const time_in_seconds = time / 1000;
 
     const [stroke_value, stroke_unit] = split_value_and_units(stroke_width);
-
     const [size_value, size_unit] = split_value_and_units(size);
-    const circle_position = `${size_value / 2}${size_unit}`;
-    const circle_radius_value = size_value / 2.33;
+    const circle_position = `${+size_value / 2}${size_unit}`;
+    const circle_radius_value = +size_value / 2.33;
     const circle_radius = `${circle_radius_value}${size_unit}`;
     const circle_circumference = `${
       2 * Math.PI * circle_radius_value
@@ -103,7 +120,7 @@ export class CountdownCircle extends React.Component {
             <circle
               r={stroke_width}
               cx={circle_position}
-              cy={`${2 * stroke_value}${stroke_unit}`}
+              cy={`${2 * +stroke_value}${stroke_unit}`}
               fill={color}
             />
           )}
@@ -111,10 +128,10 @@ export class CountdownCircle extends React.Component {
       </div>
     );
   }
+  static defaultProps = {
+    size: "3em",
+    color: buttonPrimaryColor,
+    stroke_width: "2px",
+    show_numbers: false,
+  };
 }
-CountdownCircle.defaultProps = {
-  size: "3em",
-  color: buttonPrimaryColor,
-  stroke_width: "2px",
-  show_numbers: false,
-};
