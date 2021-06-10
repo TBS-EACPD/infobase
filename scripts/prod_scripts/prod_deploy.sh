@@ -48,16 +48,17 @@ PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha | cut -c1-7)
 
 GITHUB_LINK="https://github.com/TBS-EACPD/infobase/compare/$PREVIOUS_DEPLOY_SHA...$CURRENT_SHA"  && [[ -z $PREVIOUS_DEPLOY_SHA ]] && GITHUB_LINK="https://github.com/TBS-EACPD/infobase/commit/$CURRENT_SHA"
 
+SLACK_ALERT_DIFF_LINK="<$GITHUB_LINK|$CURRENT_SHA>"
+
 sh scripts/prod_scripts/slack_deploy_alert.sh "
-'$CURRENT_SHA': STARTED!\\n
-By: '$(git config user.name)'\\n
-Message: '$DEPLOY_MESSAGE'\\n
-View changes: '$GITHUB_LINK'
+$SLACK_ALERT_DIFF_LINK: STARTED!\\n
+By: $(git config user.name)\\n
+Message: $DEPLOY_MESSAGE
 "
 
 function safe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
-    sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': EARLY EXIT! No changes to the production site."
+    sh scripts/prod_scripts/slack_deploy_alert.sh "$SLACK_ALERT_DIFF_LINK: EARLY EXIT! No changes to the production site."
   fi
 }
 trap safe_deploy_exit_alert EXIT
@@ -80,4 +81,4 @@ mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --eval "const new_prod_db_name = '$NEW_PROD_MDB_NAME';" \
   scripts/prod_scripts/mongo_post_deploy_cleanup.js
 
-sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': FINISHED! Changes are live."
+sh scripts/prod_scripts/slack_deploy_alert.sh "$SLACK_ALERT_DIFF_LINK: FINISHED! Changes are live."
