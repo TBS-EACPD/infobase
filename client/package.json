@@ -48,7 +48,6 @@
     "@nivo/line": "^0.67.0",
     "@nivo/pie": "^0.67.0",
     "@nivo/treemap": "^0.67.0",
-    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
     "clipboard-polyfill": "^2.8.1",

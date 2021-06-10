@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import _ from "lodash";
 import React, { Suspense } from "react";
 import { Provider } from "react-redux";
@@ -99,18 +97,17 @@ export class App extends React.Component {
 
   componentDidMount() {
     if (!is_dev) {
-      axios
-        .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
-        .then((res) => {
-          const data = res.data;
-          if (data.outage) {
+      fetch("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
+        .then((response) => response.json())
+        .then(({ outage, ...outage_msg_by_lang }) => {
+          if (outage) {
             this.setState({
               showNotification: true,
-              outage_msg: data[lang],
+              outage_msg: outage_msg_by_lang[lang],
             });
           }
         })
-        .catch(); // noop
+        .catch(); // noop, risky to let this throw since it's effectively only tested in prod (TODO, write test). Don't want an outage message issue to itself become an effective outage
     }
   }
 
