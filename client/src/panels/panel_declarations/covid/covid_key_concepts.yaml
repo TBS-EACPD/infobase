@@ -18,7 +18,8 @@ covid_questions_missing_measures_a:
     The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments
     for authorizing certain payments annually, and therefore not all COVID-19 related measures fall within its scope. For instance, excluded from the data are:
       * Measures legislated through the _Income Tax Act_ such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
-        * As of March 31, 2021, estimated expenditures for these programs are as follows:
+        * As of April 30, 2021, 2021-22 estimated expenditures for the Canada Emergency Wage Subsidy are $3.8 billion.
+        * As of March 31, 2021, 2020-21 estimated expenditures for these programs are as follows:
           * Canada Emergency Wage Subsidy $73.5 billion
           * Enhanced GST Credit $5.2 billion
           * Enhanced Canada Child Benefit $1.9 billion
@@ -33,7 +34,8 @@ covid_questions_missing_measures_a:
     des projets de loi de crédits, qui sont toutes les instruments juridiques permettant d'autoriser certains paiements, si bien que les mesures
     liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses. Par exemple, sont exclues de ces données :
       * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
-        * En date du 31 mars 2021, l'estimation des dépenses pour ces programmes est la suivante:
+        * En date du 30 avril 2021, l'estimation des dépenses pour la Subvention salariale d’urgence du Canada pour 2021-2022 est 3,8 milliards de dollars.
+        * En date du 31 mars 2021, l'estimation des dépenses pour 2020-2021 pour ces programmes est la suivante:
           * Subvention salariale d’urgence du Canada 73,5 milliards de dollars
           * Augmentation du crédit pour TPS 5,2 milliards de dollars
           * Allocation Canadienne pour enfants 1,9 milliard de dollars
@@ -104,8 +106,8 @@ covid_questions_auth_but_no_exp_a:
   transform: [handlebars,markdown]
   en: |
     Depending on when and how payments are authorized, there may be a delay between approval of the spending authorities and the organization’s ability
-    to make the cash expenditure. For example, the measures listed in Supplementary Estimates (C), and which require a voted authority, may not yet have
-    recorded all expenditures on the reporting date of {{COVID_DATE_LAST_UPDATED}}.  
+    to make the cash expenditure. For example, the measures listed in the 2020-21 Supplementary Estimates (C), and which require a voted authority, may not yet have
+    recorded all expenditures on the reporting date of February 28, 2021.  
 
     For some measures, organizations may reflect other sources of funds – for example, other existing resources or funds transferred from another
     organization – in the expenditures attributed to that measure. As a result, estimated expenditures may be greater than the authorities reported in the Estimates.  
@@ -113,8 +115,8 @@ covid_questions_auth_but_no_exp_a:
     Organizations may also be able to implement initiatives without expending the full amount of the “up to” authorities. 
   fr: |
     Selon la date et le mode d’autorisation des paiements, il peut y avoir un délai entre l'approbation des autorisations de dépenser et la capacité de
-    l'organisation à payer la dépense en espèces. Il se peut, par exemple, que les dépenses à la date de déclaration du {{COVID_DATE_LAST_UPDATED}}
-    n’aient pas toutes été comptabilisées pour les mesures inscrites au budget supplémentaire des dépenses (C) requérant une autorisation votée.  
+    l'organisation à payer la dépense en espèces. Il se peut, par exemple, que les dépenses à la date de déclaration du 28 février 2021
+    n’aient pas toutes été comptabilisées pour les mesures inscrites au budget supplémentaire des dépenses (C) pour 2020-2021 requérant une autorisation votée.  
 
     Dans certains cas, une organisation peut indiquer une autre source de financement pour les dépenses consacrées à une mesure donnée. Ce pourrait être,
     par exemple, d'autres ressources existantes ou des fonds transférés d'une autre organisation. Par conséquent, les dépenses estimées peuvent être
