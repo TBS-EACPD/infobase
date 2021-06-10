@@ -1,10 +1,20 @@
 import React from "react";
 
-import { TM } from "src/components/TextMaker";
+import { TM, TMProps } from "src/components/TextMaker";
 
 import "./CardImage.scss";
 
-const CardImage = ({
+interface CardImageProps {
+  svg?: string;
+  title_key: string;
+  text_key: string;
+  link_href: string;
+  link_open_in_new_tab?: boolean;
+  text_args: Object;
+  tmf: TMProps["tmf"];
+}
+
+const CardImage: React.FC<CardImageProps> = ({
   svg,
   title_key,
   text_key,
