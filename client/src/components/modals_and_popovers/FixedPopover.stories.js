@@ -21,10 +21,15 @@ const Template = (args) => {
   return (
     <Fragment>
       <div id="ib-site-header-area" />
-      <div style={{ height: "500vh" }}> Scroll down... </div>
-      {args.show ? null : (
-        <button onClick={on_close_callback}>Click to open modal</button>
-      )}
+      <div style={{ height: "500vh" }}>
+        {" "}
+        Scroll down...
+        <div>
+          {args.show ? null : (
+            <button onClick={on_close_callback}>Click to open modal</button>
+          )}
+        </div>
+      </div>
       <div
         id="wb-info"
         style={{ height: "300px", borderTop: "2px black solid" }}

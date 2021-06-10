@@ -2,8 +2,6 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
-import Info from "src/svg/backbanner.svg";
-
 import { CardImage } from "./CardImage";
 
 export default {
@@ -18,7 +16,7 @@ const Template = (args) => {
 const svg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="-300 50 1200 1200"
+    viewBox="-700 50 2000 2000"
     onClick={() => console.log("Clicked!")}
   >
     <path
@@ -35,13 +33,12 @@ const svg = (
 export const Basic = Template.bind({});
 Basic.args = {
   svg,
-  link_href: "",
-  link_open_in_new_tab: "",
+  link_href: "#",
+  link_open_in_new_tab: true,
   tmf: trivial_text_maker,
-  text_args: "",
+  text_args: {},
 
   // keys
   title_key: "new",
   text_key: "survey",
-  link_key: "performance",
 };

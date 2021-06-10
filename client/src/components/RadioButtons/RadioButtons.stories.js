@@ -7,6 +7,7 @@ export default {
   component: RadioButtons,
 };
 
+// TODO Implement the props in more completeness
 const Template = (args) => <RadioButtons {...args} />;
 
 export const Basic = Template.bind({});

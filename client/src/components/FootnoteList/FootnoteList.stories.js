@@ -1,6 +1,12 @@
 import React from "react";
 
+import { TextMaker } from "src/components/index";
+
+import { create_text_maker } from "src/models/text";
+
 import { FootnoteList } from "./FootnoteList";
+
+import footnoteList_text from "./FootnoteList.yaml";
 
 export default {
   title: "FootnoteList",

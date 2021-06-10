@@ -7,6 +7,7 @@ export default {
   component: Panel,
 };
 
+// TODO Implement the props in more completeness
 const Template = (args) => <Panel {...args} />;
 
 const children = <div>Children</div>;

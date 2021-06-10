@@ -22,7 +22,7 @@ import {
 import { FilterTable } from "./FilterTable";
 
 export default {
-  title: "Tables/FilterTable",
+  title: "Input/FilterTable",
   component: FilterTable,
 };
 
