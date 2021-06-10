@@ -1,16 +1,18 @@
 covid_questions_up_to_date_q:
   en: Are these values up to date? 
   fr: Ces valeurs sont-elles à jour?
+# REQUIRES MANUAL REFRESH ON NEW DATA
 covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
   en: |
-    Yes. This data is the current most current available and reflects information available as of {{COVID_DATE_LAST_UPDATED}}.
+    Yes. This data is the current most current available and reflects information available as of April 30, 2021.
   fr: |
-    Oui. Ces données sont les plus récentes et correspondent aux renseignements à notre disposition le {{COVID_DATE_LAST_UPDATED}}.
+    Oui. Ces données sont les plus récentes et correspondent aux renseignements à notre disposition le 30 avril 2021.
 
 covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the data?
   fr: Pourquoi certaines mesures du Plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?
+# REQUIRES MANUAL REFRESH ON NEW DATA
 covid_questions_missing_measures_a:
   transform: [handlebars,markdown]
   en: |

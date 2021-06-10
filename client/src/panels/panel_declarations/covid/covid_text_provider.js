@@ -1,9 +1,6 @@
 import _ from "lodash";
-import React from "react";
 
 import { create_text_maker_component } from "src/components/index";
-
-import { COVID_DATE_LAST_UPDATED } from "src/models/covid/covid_config";
 
 import common_covid_lang from "./covid_common_lang.yaml";
 
@@ -14,18 +11,5 @@ export const covid_create_text_maker_component = (text) => {
     ? [...text, common_covid_lang]
     : [text, common_covid_lang];
 
-  const { text_maker, TM } = create_text_maker_component(extended_text_bundle);
-
-  const extended_text_maker = (key, args) =>
-    text_maker(key, {
-      ...args,
-      COVID_DATE_LAST_UPDATED,
-    });
-
-  const ExtendedTM = (props) => <TM tmf={extended_text_maker} {...props} />;
-
-  return {
-    text_maker: extended_text_maker,
-    TM: ExtendedTM,
-  };
+  return create_text_maker_component(extended_text_bundle);
 };
