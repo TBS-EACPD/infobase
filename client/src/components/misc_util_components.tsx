@@ -23,12 +23,12 @@ interface ExternalLinkProps {
 }
 
 interface FormatProps {
-  type: number;
-  content: string;
+  type: string | Function;
+  content: string | number | Date;
   style?: Object;
-  className: string;
-  in_parenthesis: boolean;
-  prefix: boolean;
+  className?: string;
+  in_parenthesis?: boolean;
+  prefix?: boolean;
 }
 
 interface YearProps {
@@ -102,15 +102,15 @@ class Format extends React.PureComponent<FormatProps> {
       prefix,
     } = this.props;
 
-    const formatted_content = _.chain(content)
-      .thru(formats[type])
-      .thru((content) =>
-        prefix ? `<span>${prefix}${content}</span>` : content
-      )
-      .thru((content) =>
-        in_parenthesis ? `<span>(${content})</span>` : content
-      )
-      .value();
+    // const formatted_content = _.chain(content)
+    //   .thru(formats[type])
+    //   .thru((content) =>
+    //     prefix ? `<span>${prefix}${content}</span>` : content
+    //   )
+    //   .thru((content) =>
+    //     in_parenthesis ? `<span>(${content})</span>` : content
+    //   )
+    //   .value();
 
     return (
       <span
