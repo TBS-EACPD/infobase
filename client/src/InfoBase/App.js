@@ -100,7 +100,7 @@ export class App extends React.Component {
   componentDidMount() {
     if (!is_dev) {
       axios
-        .get("https://storage.googleapis.com/ib-outage-bucket/outage_msgon")
+        .get("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
         .then((res) => {
           const data = res.data;
           if (data.outage) {
@@ -109,7 +109,8 @@ export class App extends React.Component {
               outage_msg: data[lang],
             });
           }
-        });
+        })
+        .catch(); // noop
     }
   }
 
