@@ -19,8 +19,8 @@ const Template = (args) => <FootnoteList {...args} />;
 const footnotes = [
   {
     text: "text1",
-    year1: "",
-    year2: "",
+    year1: "2002",
+    year2: "2003",
     topic_keys: 1,
     subject: {
       name: "name1",
