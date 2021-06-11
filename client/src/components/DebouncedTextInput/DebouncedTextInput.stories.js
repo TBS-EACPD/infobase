@@ -18,7 +18,11 @@ const Template = (args) => {
   return (
     <>
       <DebouncedTextInput {...args} updateCallback={updateCallback} />
-      <div>{text}</div>
+      <div>
+        To demonstrate the debounced feature in this story, the debounced text
+        will appear below once you type something:
+        <div>{text}</div>
+      </div>
     </>
   );
 };
