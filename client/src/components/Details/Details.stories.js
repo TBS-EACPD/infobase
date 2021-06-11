@@ -47,6 +47,8 @@ const Template = (args) => {
   return (
     <>
       <StatelessDetails {...args} on_click={on_click} />
+
+      {/* TODO Implement the timer into children because the Timer resets whenever you toggle is_open, regardless of persist_content prop */}
       <Timer persist_content={args.persist_content} is_open={args.is_open} />
     </>
   );

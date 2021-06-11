@@ -6,7 +6,7 @@ import { create_text_maker } from "src/models/text";
 
 import { FootnoteList } from "./FootnoteList";
 
-import footnoteList_text from "./FootnoteList.yaml";
+import footnote_list_text from "./FootnoteList.yaml";
 
 export default {
   title: "FootnoteList",
