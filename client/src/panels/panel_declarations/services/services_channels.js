@@ -183,7 +183,9 @@ const ServicesChannelsPanel = ({ subject }) => {
                     id,
                     label: name,
                     color: colors(name),
-                    active: active_services[id],
+                    active: _.isUndefined(active_services[id])
+                      ? false
+                      : active_services[id],
                   }))
                   .sortBy("label")
                   .value(),

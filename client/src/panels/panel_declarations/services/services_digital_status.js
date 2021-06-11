@@ -146,7 +146,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
                   color: colors(key),
                 })
               ),
-              LegendCheckBoxProps: { isSolidBox: true },
+              checkBoxProps: { isSolidBox: true },
             }}
           />
           <WrappedNivoHBar
