@@ -6,8 +6,8 @@ import { log_standard_event } from "src/core/analytics";
 interface LogInterationEventsProps {
   event_type: string;
   event_details: string;
-  style: { display: string };
-  children: React.ReactElement;
+  style: React.CSSProperties;
+  children: React.ReactNode;
 }
 
 export const LogInteractionEvents: React.FC<LogInterationEventsProps> = ({
