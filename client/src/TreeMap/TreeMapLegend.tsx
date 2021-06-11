@@ -12,7 +12,11 @@ import "./TreeMap.scss";
 
 const text_maker = create_text_maker([treemap_text]);
 
-const size_controls = {
+interface size_controls_props {
+  [joe: string]: string;
+}
+
+const size_controls: size_controls_props = {
   drf: text_maker("expenditures_lower"),
   drf_ftes: text_maker("fte"),
   tp: text_maker("SOBJ10_lower"),
@@ -59,7 +63,7 @@ const proportional_block = () => (
   </svg>
 );
 
-const legend_block = (val, col, ix) => (
+const legend_block = (val: string, col: string, ix: number) => (
   <g
     key={ix}
     className="legendCells"
@@ -85,9 +89,18 @@ const legend_block = (val, col, ix) => (
   </g>
 );
 
-export class TreeMapLegend extends React.Component {
-  constructor() {
-    super();
+interface ColProps {
+  col: string;
+  val: string;
+}
+interface TreeMapLegendProps {
+  perspective: string;
+  legend_cols: ColProps[];
+  legend_measure_text: string;
+}
+export class TreeMapLegend extends React.Component<TreeMapLegendProps> {
+  constructor(props: TreeMapLegendProps) {
+    super(props);
   }
   render() {
     const { perspective, legend_cols, legend_measure_text } = this.props;
