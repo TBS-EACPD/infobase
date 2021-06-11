@@ -72,7 +72,7 @@ function unsafe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
     sh scripts/prod_scripts/slack_deploy_alert.sh "
 '$SLACK_ALERT_DIFF_LINK': LATE EXIT! UH OH! Prod site may or may not be updated, but post-deploy cleanup not properly complete!\\n
-Should probably run a client rollback, fix any issues, and then run a fresh prod deploy to clean things up.
+If the live site HAS changed, you should probably roll back now. Either way, fix any issues and then run a fresh prod deploy to clean things up.
 "
   fi
 }
