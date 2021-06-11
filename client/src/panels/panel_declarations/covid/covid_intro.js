@@ -69,6 +69,10 @@ class CovidIntroPanelDyanmicText extends React.Component {
       const { covid_estimates, covid_expenditures } =
         summaries_by_year[selected_year];
 
+      const est_docs_in_year = _.chain(covid_estimates)
+        .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
+        .value();
+
       return (
         <Fragment>
           <YearSelectionTabs
@@ -85,10 +89,10 @@ class CovidIntroPanelDyanmicText extends React.Component {
               args={{
                 ...panel_args,
                 selected_year,
-                gov_tabled_est_docs_in_year_text: _.chain(covid_estimates)
-                  .reduce((est_docs, { est_doc }) => [...est_docs, est_doc], [])
-                  .thru(get_est_doc_list_plain_text)
-                  .value(),
+                gov_tabled_est_docs_in_year_text: get_est_doc_list_plain_text(
+                  est_docs_in_year
+                ),
+                est_docs_in_year_are_plural: est_docs_in_year.length > 1,
                 gov_covid_estimates_in_year: _.reduce(
                   covid_estimates,
                   (memo, { vote, stat }) => memo + vote + stat,
