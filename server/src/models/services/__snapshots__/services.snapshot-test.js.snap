@@ -6,7 +6,7 @@ Object {
     "root": Object {
       "org": Object {
         "service_summary": Object {
-          "id": "Org:326",
+          "id": "326",
           "service_digital_status_summary": Array [
             Object {
               "can_online": 1,
@@ -223,7 +223,7 @@ Object {
               "value": 5359,
             },
           ],
-          "top_services_website_visits_summary": null,
+          "top_services_website_visits_summary": Array [],
         },
       },
     },
@@ -237,7 +237,7 @@ Object {
     "root": Object {
       "program": Object {
         "service_summary": Object {
-          "id": null,
+          "id": "TBC-BXB01",
           "service_digital_status_summary": Array [
             Object {
               "can_online": 0,
@@ -383,7 +383,7 @@ Object {
               "value": 2014,
             },
           ],
-          "top_services_website_visits_summary": null,
+          "top_services_website_visits_summary": Array [],
         },
       },
     },
