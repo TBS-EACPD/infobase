@@ -161,90 +161,54 @@ export default function (model_singleton) {
       TopServicesWebsiteVisitsSummarySchema,
     ],
   });
+  const OrgServiceSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    service_general_stats: ServiceGeneralStatsSchema,
+    service_type_summary: [ServiceTypeSummarySchema],
+    service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
+    service_id_methods_summary: [ServiceIdMethodsSummarySchema],
+    top_services_application_vol_summary: [
+      TopServicesApplicationVolSummarySchema,
+    ],
+    top_services_website_visits_summary: [
+      TopServicesWebsiteVisitsSummarySchema,
+    ],
+    service_fees_summary: [ServiceFeesSummarySchema],
+    service_standards_summary: [ServiceStandardsSummarySchema],
+  });
+  const ProgramServiceSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    service_general_stats: ServiceGeneralStatsSchema,
+    service_type_summary: [ServiceTypeSummarySchema],
+    service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
+    service_id_methods_summary: [ServiceIdMethodsSummarySchema],
+    top_services_application_vol_summary: [
+      TopServicesApplicationVolSummarySchema,
+    ],
+    top_services_website_visits_summary: [
+      TopServicesWebsiteVisitsSummarySchema,
+    ],
+    service_fees_summary: [ServiceFeesSummarySchema],
+    service_standards_summary: [ServiceStandardsSummarySchema],
+  });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
   model_singleton.define_model("StandardReport", StandardReportSchema);
   model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
-  model_singleton.define_model(
-    "GovServicesHighVolumeSummary",
-    ServicesHighVolumeSummarySchema
-  );
   model_singleton.define_model("GovServiceSummary", GovServiceSummarySchema);
-
-  const define_models_w_same_schema = (names, schema) => {
-    _.forEach(names, (name) => {
-      model_singleton.define_model(name, schema);
-    });
-  };
-  define_models_w_same_schema(
-    ["DeptServiceGeneralStats", "ProgramServiceGeneralStats"],
-    ServiceGeneralStatsSchema
+  model_singleton.define_model("OrgServiceSummary", OrgServiceSummarySchema);
+  model_singleton.define_model(
+    "ProgramServiceSummary",
+    ProgramServiceSummarySchema
   );
 
-  define_models_w_same_schema(
-    ["DeptServiceTypeSummary", "ProgramServiceTypeSummary"],
-    ServiceTypeSummarySchema
-  );
-  define_models_w_same_schema(
-    ["DeptServiceDigitalStatusSummary", "ProgramServiceDigitalStatusSummary"],
-    ServiceDigitalStatusSummarySchema
-  );
-  define_models_w_same_schema(
-    ["DeptServiceIdMethodsSummary", "ProgramServiceIdMethodsSummary"],
-    ServiceIdMethodsSummarySchema
-  );
-  define_models_w_same_schema(
-    ["DeptServiceStandardsSummary", "ProgramServiceStandardsSummary"],
-    ServiceStandardsSummarySchema
-  );
-  define_models_w_same_schema(
-    ["DeptServiceFeesSummary", "ProgramServiceFeesSummary"],
-    ServiceFeesSummarySchema
-  );
-  define_models_w_same_schema(
-    [
-      "DeptTopServicesApplicationVolSummary",
-      "ProgramTopServicesApplicationVolSummary",
-    ],
-    TopServicesApplicationVolSummarySchema
-  );
-  define_models_w_same_schema(
-    [
-      "DeptTopServicesWebsiteVisitsSummary",
-      "ProgramTopServicesWebsiteVisitsSummary",
-    ],
-    TopServicesWebsiteVisitsSummarySchema
-  );
   const {
     Service,
     GovServiceSummary,
-    DeptServiceGeneralStats,
-    ProgramServiceGeneralStats,
-    DeptServiceTypeSummary,
-    ProgramServiceTypeSummary,
-    DeptServiceDigitalStatusSummary,
-    ProgramServiceDigitalStatusSummary,
-    DeptServiceIdMethodsSummary,
-    ProgramServiceIdMethodsSummary,
-    DeptServiceStandardsSummary,
-    ProgramServiceStandardsSummary,
-    DeptServiceFeesSummary,
-    ProgramServiceFeesSummary,
-    DeptTopServicesApplicationVolSummary,
-    ProgramTopServicesApplicationVolSummary,
-    DeptTopServicesWebsiteVisitsSummary,
-    ProgramTopServicesWebsiteVisitsSummary,
+    OrgServiceSummary,
+    ProgramServiceSummary,
   } = model_singleton.models;
-
-  const define_loaders_w_same_fk_attr = (schemas_and_names, fk_attr) =>
-    _.chain(schemas_and_names)
-      .map(({ schema, name }) => [
-        name,
-        create_resource_by_foreignkey_attr_dataloader(schema, fk_attr),
-      ])
-      .fromPairs()
-      .value();
 
   const loaders = {
     service_loader: create_resource_by_id_attr_dataloader(Service, "id"),
@@ -256,108 +220,17 @@ export default function (model_singleton) {
       Service,
       "program_ids"
     ),
-    service_summary_for_gov: create_resource_by_id_attr_dataloader(
+    gov_service_summary_loader: create_resource_by_id_attr_dataloader(
       GovServiceSummary,
       "id"
     ),
-    service_general_stats_for_dept: create_resource_by_id_attr_dataloader(
-      DeptServiceGeneralStats,
+    org_service_summary_loader: create_resource_by_id_attr_dataloader(
+      OrgServiceSummary,
       "id"
     ),
-    service_general_stats_for_program: create_resource_by_id_attr_dataloader(
-      ProgramServiceGeneralStats,
+    program_service_summary_loader: create_resource_by_id_attr_dataloader(
+      ProgramServiceSummary,
       "id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptServiceTypeSummary,
-          name: "service_types_summary_for_dept",
-        },
-        {
-          schema: ProgramServiceTypeSummary,
-          name: "service_types_summary_for_program",
-        },
-      ],
-      "subject_id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptServiceDigitalStatusSummary,
-          name: "service_digital_status_summary_for_dept",
-        },
-        {
-          schema: ProgramServiceDigitalStatusSummary,
-          name: "service_digital_status_summary_for_program",
-        },
-      ],
-      "subject_id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptServiceIdMethodsSummary,
-          name: "service_id_methods_summary_for_dept",
-        },
-        {
-          schema: ProgramServiceIdMethodsSummary,
-          name: "service_id_methods_summary_for_program",
-        },
-      ],
-      "subject_id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptServiceStandardsSummary,
-          name: "service_standards_summary_for_dept",
-        },
-        {
-          schema: ProgramServiceStandardsSummary,
-          name: "service_standards_summary_for_program",
-        },
-      ],
-      "subject_id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptServiceFeesSummary,
-          name: "service_fees_summary_for_dept",
-        },
-        {
-          schema: ProgramServiceFeesSummary,
-          name: "service_fees_summary_for_program",
-        },
-      ],
-      "subject_id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptTopServicesApplicationVolSummary,
-          name: "top_services_application_vol_summary_for_dept",
-        },
-        {
-          schema: ProgramTopServicesApplicationVolSummary,
-          name: "top_services_application_vol_summary_for_program",
-        },
-      ],
-      "subject_id"
-    ),
-    ...define_loaders_w_same_fk_attr(
-      [
-        {
-          schema: DeptTopServicesWebsiteVisitsSummary,
-          name: "top_services_website_visits_summary_for_dept",
-        },
-        {
-          schema: ProgramTopServicesWebsiteVisitsSummary,
-          name: "top_services_website_visits_summary_for_program",
-        },
-      ],
-      "subject_id"
     ),
   };
   _.each(loaders, (val, key) => model_singleton.define_loader(key, val));

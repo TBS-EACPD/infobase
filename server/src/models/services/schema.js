@@ -162,7 +162,7 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const { Service, GovServiceSummary } = models;
+  const { Service } = models;
 
   const {
     service_loader,
@@ -170,23 +170,9 @@ export default function ({ models, loaders }) {
     services_by_program_id,
     org_id_loader,
     prog_id_loader,
-    service_summary_for_gov, //TODO dataloader not working
-    service_general_stats_for_dept,
-    service_general_stats_for_program,
-    service_types_summary_for_dept,
-    service_types_summary_for_program,
-    service_digital_status_summary_for_dept,
-    service_digital_status_summary_for_program,
-    service_id_methods_summary_for_dept,
-    service_id_methods_summary_for_program,
-    service_standards_summary_for_dept,
-    service_standards_summary_for_program,
-    service_fees_summary_for_dept,
-    service_fees_summary_for_program,
-    top_services_application_vol_summary_for_dept,
-    top_services_application_vol_summary_for_program,
-    top_services_website_visits_summary_for_dept,
-    top_services_website_visits_summary_for_program,
+    gov_service_summary_loader,
+    org_service_summary_loader,
+    program_service_summary_loader,
   } = loaders;
 
   const org_has_services = async (org_id) => {
@@ -203,85 +189,91 @@ export default function ({ models, loaders }) {
       service: (_x, { id }) => service_loader.load(id),
     },
     Gov: {
-      service_summary: async () => {
-        const service_summary = await GovServiceSummary.find();
-        const {
-          id,
-          service_general_stats,
-          service_type_summary,
-          service_digital_status_summary,
-          service_id_methods_summary,
-          service_standards_summary,
-          service_fees_summary,
-          service_high_volume_summary,
-          top_services_website_visits_summary,
-        } = _.first(service_summary);
-
-        return {
-          id,
-          service_general_stats,
-          service_type_summary,
-          service_digital_status_summary,
-          service_id_methods_summary,
-          service_standards_summary,
-          service_fees_summary,
-          service_high_volume_summary,
-          top_services_website_visits_summary,
-        };
-      },
+      service_summary: () =>
+        gov_service_summary_loader
+          .load("gov")
+          .then(
+            ({
+              id,
+              service_general_stats,
+              service_type_summary,
+              service_digital_status_summary,
+              service_id_methods_summary,
+              service_standards_summary,
+              service_fees_summary,
+              service_high_volume_summary,
+              top_services_website_visits_summary,
+            }) => ({
+              id,
+              service_general_stats,
+              service_type_summary,
+              service_digital_status_summary,
+              service_id_methods_summary,
+              service_standards_summary,
+              service_fees_summary,
+              service_high_volume_summary,
+              top_services_website_visits_summary,
+            })
+          ),
     },
     Org: {
       services: ({ org_id }) => services_by_org_id.load(org_id),
-      service_summary: ({ org_id }) => ({
-        id: `Org:${org_id}`,
-        service_general_stats: service_general_stats_for_dept.load(org_id),
-        service_type_summary: service_types_summary_for_dept.load(org_id),
-        service_digital_status_summary: service_digital_status_summary_for_dept.load(
-          org_id
-        ),
-        service_id_methods_summary: service_id_methods_summary_for_dept.load(
-          org_id
-        ),
-        service_standards_summary: service_standards_summary_for_dept.load(
-          org_id
-        ),
-        service_fees_summary: service_fees_summary_for_dept.load(org_id),
-        top_services_application_vol_summary: top_services_application_vol_summary_for_dept.load(
-          org_id
-        ),
-        top_services_website_visits_summary: top_services_website_visits_summary_for_dept.load(
-          org_id
-        ),
-      }),
+      service_summary: ({ org_id }) =>
+        org_service_summary_loader
+          .load(org_id)
+          .then(
+            ({
+              id,
+              service_general_stats,
+              service_type_summary,
+              service_digital_status_summary,
+              service_id_methods_summary,
+              top_services_application_vol_summary,
+              top_services_website_visits_summary,
+              service_fees_summary,
+              service_standards_summary,
+            }) => ({
+              id,
+              service_general_stats,
+              service_type_summary,
+              service_digital_status_summary,
+              service_id_methods_summary,
+              top_services_application_vol_summary,
+              top_services_website_visits_summary,
+              service_fees_summary,
+              service_standards_summary,
+            })
+          ),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
     Program: {
       services: ({ program_id }) => services_by_program_id.load(program_id),
-      service_summary: ({ program_id }) => ({
-        Program: `Program:${program_id}`,
-        service_general_stats: service_general_stats_for_program.load(
-          program_id
-        ),
-        service_type_summary: service_types_summary_for_program.load(
-          program_id
-        ),
-        service_digital_status_summary: service_digital_status_summary_for_program.load(
-          program_id
-        ),
-        service_id_methods_summary: service_id_methods_summary_for_program.load(
-          program_id
-        ),
-        service_standards_summary: service_standards_summary_for_program.load(
-          program_id
-        ),
-        service_fees_summary: service_fees_summary_for_program.load(program_id),
-        top_services_application_vol_summary: top_services_application_vol_summary_for_program.load(
-          program_id
-        ),
-        top_services_website_visits_summary: top_services_website_visits_summary_for_program.load(
-          program_id
-        ),
-      }),
+      service_summary: ({ program_id }) =>
+        program_service_summary_loader
+          .load(program_id)
+          .then(
+            ({
+              id,
+              service_general_stats,
+              service_type_summary,
+              service_digital_status_summary,
+              service_id_methods_summary,
+              top_services_application_vol_summary,
+              top_services_website_visits_summary,
+              service_fees_summary,
+              service_standards_summary,
+            }) => ({
+              id,
+              service_general_stats,
+              service_type_summary,
+              service_digital_status_summary,
+              service_id_methods_summary,
+              top_services_application_vol_summary,
+              top_services_website_visits_summary,
+              service_fees_summary,
+              service_standards_summary,
+            })
+          ),
       has_services: ({ program_id }) => program_has_services(program_id),
     },
     ServiceTypeSummary: {
