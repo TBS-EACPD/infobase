@@ -66,14 +66,17 @@ trap safe_deploy_exit_alert EXIT
 (cd server && sh deploy_scripts/prod_deploy_data.sh)
 (cd server && sh deploy_scripts/prod_deploy_function.sh)
 
-(cd client && sh deploy_scripts/prod_deploy_client.sh)
+(cd client && sh deploy_scripts/prod_build_client.sh)
+(cd client && sh deploy_scripts/prod_stage_client.sh)
 
 function unsafe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
-    sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': LATE EXIT! UH OH! Prod site updated, but post-deploy cleanup may be incomplete!"
+    sh scripts/prod_scripts/slack_deploy_alert.sh "'$CURRENT_SHA': LATE EXIT! UH OH! Prod site may or may not be updated, but post-deploy cleanup not complete!"
   fi
 }
 trap unsafe_deploy_exit_alert EXIT
+
+(cd client && sh deploy_scripts/prod_deploy_staged_client.sh)
 
 # --eval seems to be the go-to way to passing args in to a JS mongo script
 mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
