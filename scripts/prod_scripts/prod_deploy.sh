@@ -43,8 +43,7 @@ elif [[ $CURRENT_PROD_MDB_NAME = $NEW_PROD_MDB_NAME ]] ; then
   exit
 fi
 
-CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
-PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha | cut -c1-7)
+PREVIOUS_DEPLOY_SHA=$(sh scripts/prod_scripts/get_current_deploy_sha.sh)
 
 GITHUB_LINK="https://github.com/TBS-EACPD/infobase/compare/$PREVIOUS_DEPLOY_SHA...$CURRENT_SHA"  && [[ -z $PREVIOUS_DEPLOY_SHA ]] && GITHUB_LINK="https://github.com/TBS-EACPD/infobase/commit/$CURRENT_SHA"
 
