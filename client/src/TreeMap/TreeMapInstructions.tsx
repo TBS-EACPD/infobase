@@ -7,9 +7,14 @@ import "./TreeMap.scss";
 
 const text_maker = create_text_maker([treemap_text]);
 
-export class TreeMapInstructions extends React.Component {
-  constructor() {
-    super();
+// Purpose of DummyProp is to avoid argument error with super() since it expects at least one argument
+interface DummyProp {
+  dummy: true;
+}
+
+export class TreeMapInstructions extends React.Component<DummyProp> {
+  constructor(prop: DummyProp) {
+    super(prop);
   }
   render() {
     return (
