@@ -57,7 +57,10 @@ Reason for deploying: $DEPLOY_MESSAGE
 
 function safe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
-    sh scripts/prod_scripts/slack_deploy_alert.sh "$SLACK_ALERT_DIFF_LINK: EARLY EXIT! No changes to the production site."
+    sh scripts/prod_scripts/slack_deploy_alert.sh "
+$SLACK_ALERT_DIFF_LINK: EARLY EXIT!\\n
+No changes to the production site.
+"
   fi
 }
 trap safe_deploy_exit_alert EXIT
@@ -71,7 +74,8 @@ trap safe_deploy_exit_alert EXIT
 function unsafe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
     sh scripts/prod_scripts/slack_deploy_alert.sh "
-'$SLACK_ALERT_DIFF_LINK': LATE EXIT! UH OH! Prod site may or may not be updated, but post-deploy cleanup not properly complete!\\n
+'$SLACK_ALERT_DIFF_LINK': LATE EXIT! UH OH!\\n
+Prod site may or may not be updated, but post-deploy cleanup not properly complete!\\n
 If the live site HAS changed, you should probably roll back now. Either way, fix any issues and then run a fresh prod deploy to clean things up.
 "
   fi
@@ -86,4 +90,7 @@ mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --eval "const new_prod_db_name = '$NEW_PROD_MDB_NAME';" \
   scripts/prod_scripts/mongo_post_deploy_cleanup.js
 
-sh scripts/prod_scripts/slack_deploy_alert.sh "$SLACK_ALERT_DIFF_LINK: FINISHED! Changes are live."
+sh scripts/prod_scripts/slack_deploy_alert.sh "
+$SLACK_ALERT_DIFF_LINK: FINISHED!\\n
+Changes are live.
+"

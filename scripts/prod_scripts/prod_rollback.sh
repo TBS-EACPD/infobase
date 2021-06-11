@@ -13,7 +13,7 @@ read -p "Provide a one sentence reason for this rollback, for the slack alert:
 PRE_ROLLBACK_SHA=$(sh scripts/prod_scripts/get_current_deploy_sha.sh)
 
 sh scripts/prod_scripts/slack_deploy_alert.sh "
-$PRE_ROLLBACK_SHA: Performing prod rollback!
+$PRE_ROLLBACK_SHA: Performing prod rollback!\\n
 By: $(git config user.name)\\n
 Reason for rollback: $ROLLBACK_MESSAGE
 "
@@ -38,4 +38,7 @@ mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
 
 POST_ROLLBACK_SHA=$(sh scripts/prod_scripts/get_current_deploy_sha.sh)
 
-sh scripts/prod_scripts/slack_deploy_alert.sh "$PRE_ROLLBACK_SHA: Rollback complete! Returned prod site to $POST_ROLLBACK_SHA"
+sh scripts/prod_scripts/slack_deploy_alert.sh "
+$PRE_ROLLBACK_SHA: Rollback complete!\\n
+Returned prod site to $POST_ROLLBACK_SHA
+"
