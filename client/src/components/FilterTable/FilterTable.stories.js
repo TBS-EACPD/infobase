@@ -1,164 +1,88 @@
+import { useArgs } from "@storybook/client-api";
 import _ from "lodash";
 import React from "react";
-
-import { create_full_results_hierarchy } from "src/panels/panel_declarations/results/result_drilldown/result_hierarchies";
-
-import { text_maker } from "src/panels/panel_declarations/results/result_text_provider";
-
-import {
-  status_key_to_glossary_key,
-  ordered_status_keys,
-  result_color_scale,
-} from "src/panels/panel_declarations/results/results_common";
-
-import { toggle_list } from "src/general_utils";
-import {
-  IconCheck,
-  IconAttention,
-  IconNotApplicable,
-  IconClock,
-} from "src/icons/icons";
 
 import { FilterTable } from "./FilterTable";
 
 export default {
   title: "Input/FilterTable",
   component: FilterTable,
+
+  // Need decorators to use useArgs()
+  decorators: [(Story) => <div>{Story()}</div>],
 };
 
-const Template = (args) => <FilterTable {...args} />;
+const Template = (args) => {
+  const [_, updateArgs] = useArgs();
 
-const active_list = [];
-const status_active_list = [];
-const subject = "subject";
-const last_drr_doc = "last_drr_doc";
+  function click_callback(key) {
+    const updateItems = args.items;
+    updateItems[parseInt(key)]["count"] =
+      updateItems[parseInt(key)]["count"] + 1;
 
-const result_status_icon_components = (status, width) => {
-  const icons = {
-    met: (
-      <IconCheck
-        key="met"
-        title={text_maker("met")}
-        color={result_color_scale("met")}
-        width={width}
-        svg_style={{ verticalAlign: "0em" }}
-        alternate_color={false}
-        inline={false}
-      />
-    ),
-    not_met: (
-      <IconAttention
-        key="not_met"
-        title={text_maker("not_met")}
-        color={result_color_scale("not_met")}
-        width={width}
-        svg_style={{ verticalAlign: "0em" }}
-        alternate_color={false}
-        inline={false}
-      />
-    ),
-    not_available: (
-      <IconNotApplicable
-        key="not_available"
-        title={text_maker("not_available")}
-        color={result_color_scale("not_available")}
-        width={width}
-        svg_style={{ verticalAlign: "0em" }}
-        alternate_color={false}
-        inline={false}
-      />
-    ),
-    future: (
-      <IconClock
-        key="future"
-        title={text_maker("future")}
-        color={result_color_scale("future")}
-        width={width}
-        svg_style={{ verticalAlign: "0em" }}
-        alternate_color={false}
-        inline={false}
-      />
-    ),
-  };
-  return icons[status];
-};
-
-const make_status_icons = (width) => {
-  return _.chain(ordered_status_keys)
-    .map((status_key) => [
-      status_key,
-      result_status_icon_components(status_key, width),
-    ])
-    .fromPairs()
-    .value();
-};
-
-const large_status_icons = make_status_icons("41px");
-
-const get_actual_parent = (indicator_node, full_results_hierarchy) => {
-  const parent = _.find(full_results_hierarchy, {
-    id: indicator_node.parent_id,
-  });
-  if (_.includes(["cr", "program"], parent.data.type)) {
-    return parent;
-  } else if (parent.data.type === "dr" || parent.data.type === "result") {
-    return get_actual_parent(parent, full_results_hierarchy);
-  } else {
-    throw new Error(
-      `Result component ${indicator_node} has no (sub)program or CR parent`
+    console.log(
+      updateItems[parseInt(key)]["text"] +
+        " has been clicked " +
+        updateItems[parseInt(key)]["count"] +
+        " time(s) now."
     );
+
+    updateArgs({ ...args, items: updateItems });
   }
+  return <FilterTable {...args} click_callback={click_callback} />;
 };
 
-const get_indicators = (subject, doc) => {
-  const full_results_hierarchy = create_full_results_hierarchy({
-    subject_guid: subject.guid,
-    doc,
-    allow_no_result_branches: false,
-  });
-  return _.chain(full_results_hierarchy)
-    .filter((node) => node.data.type === "indicator")
-    .map((indicator_node) => ({
-      ...indicator_node.data,
-      parent_node: get_actual_parent(indicator_node, full_results_hierarchy),
-    }))
-    .value();
-};
-
-const flat_indicators = get_indicators(subject, last_drr_doc);
-const icon_counts = _.countBy(
-  flat_indicators,
-  ({ indicator }) => indicator.status_key
+const svg = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-700 50 2000 2000">
+    <path
+      d="M300,69a230.14,230.14,0,1,1-89.91,18.14A229.56,229.56,0,0,1,300,69m0-23C159.72,46,46,159.72,46,300S159.72,554,300,554,554,440.28,554,300,440.28,46,300,46Z"
+      fill="#2C70C9"
+    />
+    <path
+      d="M365.88,417c-22.95,46.35-53.92,69.46-72.39,73.14-17.38,3.47-26.16-12.29-24.29-53.88,1.89-50.06,3.43-82,4.65-126.85.34-18.13-.85-24.11-7.36-22.81-7.61,1.52-18.59,14.43-26.31,26.7l-6.4-6.63c19.14-34.3,53.7-67.73,74.34-71.84,19-3.79,23,13.48,22.11,62.78-1.44,40.95-2.88,81.89-4.43,122.29-.77,16,2.92,20.31,7.8,19.34,3.81-.76,13.15-7.71,26-28.33ZM323.93,144.16c3.68,18.47-4.81,38.23-23.27,41.91-15.21,3-27-5.34-30.5-22.72-3.14-15.75,3.82-37.47,25-41.69C310.91,118.52,321.11,130,323.93,144.16Z"
+      fill="#2C70C9"
+    />
+  </svg>
 );
 
-const toggle_status_status_key = (status_key) =>
-  this.setState({
-    status_active_list: toggle_list(status_active_list, status_key),
-  });
-
-const items = _.map(ordered_status_keys, (status_key) => ({
-  key: status_key,
-  active: active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
-  count: icon_counts[status_key] || 0,
-  text: (
-    <span
-      className="link-unstyled"
-      tabIndex={-1}
-      aria-hidden="true"
-      data-toggle="tooltip"
-      data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
-    >
-      {text_maker(status_key)}
-    </span>
-  ),
-  aria_text: text_maker(status_key),
-  icon: large_status_icons[status_key],
-}));
+const items = [
+  {
+    active: true,
+    count: 0,
+    text: "Option 1",
+    aria_text: "",
+    icon: svg,
+    key: "0",
+  },
+  {
+    active: true,
+    count: 0,
+    text: "Option 2",
+    aria_text: "",
+    icon: svg,
+    key: "1",
+  },
+  {
+    active: true,
+    count: 0,
+    text: "Option 3",
+    aria_text: "",
+    icon: svg,
+    key: "2",
+  },
+  {
+    active: true,
+    count: 0,
+    text: "Option 4",
+    aria_text: "",
+    icon: svg,
+    key: "3",
+  },
+];
 
 export const Basic = Template.bind({});
 Basic.args = {
   items,
   item_component_order: ["count", "icon", "text"],
-  click_callback: (status_key) => toggle_status_status_key(status_key),
-  show_eyes_override: active_list.length === ordered_status_keys.length,
+  show_eyes_override: true,
 };
