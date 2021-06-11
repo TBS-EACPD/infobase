@@ -11,17 +11,17 @@ covid_intro_est:
     {{ext_link "Canada’s COVID-19 Economic Response Plan" "https://www.canada.ca/en/department-finance/economic-response-plan.html"}} (ERP).
     These are “up to” authorities in recognition of the urgency and uncertainty in which these measures were brought forward in the pandemic context.  
   fr: |
-    Le {{gov_tabled_est_docs_in_year_text}} pour **{{fmt_year_to_fiscal_year selected_year}}** **totalise
-    {{fmt_compact1_written gov_covid_estimates_in_year}} en autorisations de dépenses** {{#if auth_total_note}}{{icon_tooltip auth_total_note}}{{/if}} prévues 
-    des organisations fédérales consacrées aux mesures annoncées dans le 
+    Le{{#if est_docs_in_year_are_plural}}s{{/if}} {{gov_tabled_est_docs_in_year_text}} pour **{{fmt_year_to_fiscal_year selected_year}}**
+    prévoient accorder un **total de {{fmt_compact1_written gov_covid_estimates_in_year}} en autorisations de dépenser**
+    {{#if auth_total_note}}{{icon_tooltip auth_total_note}}{{/if}} aux organisations de l'administration fédérale du Canada pour financer les mesures annoncées dans le
     {{ext_link "Plan d'intervention économique du Canada pour répondre  à la COVID-19" "https://www.canada.ca/fr/ministere-finances/plan-intervention-economique.html"}}.
-    Il s'agit du plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude dans lesquelles ces mesures ont été prises en réponse à la pandémie.  
+    Il s'agit du plafond de dépenses autorisées en reconnaissance de l'urgence et de l'incertitude dans lesquelles ces mesures ont été prises en réponse à la pandémie.    
 
 covid_intro_exp:
   transform: [handlebars,markdown]
   en: |
-    As of **{{date_last_updated_text}}**, federal organizations reported spending an estimated total of **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
+    As of **{{date_last_updated_text}}**, federal organizations **reported spending an estimated total of {{fmt_compact1_written gov_covid_expenditures_in_year}}**
     on COVID-19 ERP measures in **{{fmt_year_to_fiscal_year selected_year}}**.
   fr: |
-    En date du **{{date_last_updated_text}}**, les organisations fédérales avaient estimé à **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
-    le total des dépenses liées aux COVID_TODO
+    En date du **{{date_last_updated_text}}**, les organisations fédérales ont **estimé à {{fmt_compact1_written gov_covid_expenditures_in_year}}
+    le total des dépenses** au titre des mesures du PIE pour 2020-2021.

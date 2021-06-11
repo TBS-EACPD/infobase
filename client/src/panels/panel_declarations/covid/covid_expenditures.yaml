@@ -42,7 +42,11 @@ covid_expenditures_overview_tab_text:
     {{/compare}}
   fr: |
     {{#compare selected_year 2021 operator=">=" }}
-      TODO, not used yet and likely to be rewritten before use. Wasn't previously translated correctly anyway
+      En date du **{{date_last_updated_text}}**, on estime que **{{fmt_compact1_written gov_covid_expenditures_in_year}}**
+      ont été consacrés à la mise en œuvre des interventions gouvernementales dans la lutte contre à la pandémie de COVID-19 en **{{fmt_year_to_fiscal_year selected_year}}**.
+      Une ventilation par organisation révèle que la plus grande partie de cette somme (**{{fmt_percentage1 (divide top_spending_org_amount gov_covid_expenditures_in_year)}}**)
+      a été dépensée par **{{top_spending_org_name}}**. Pour ce qui est de la ventilation par mesure prises en réponse à la COVID-19, on constate que la plus grande partie
+      des fonds (**{{fmt_percentage1 (divide top_spending_measure_amount gov_covid_expenditures_in_year)}}**) ont été consacrés à « **{{top_spending_measure_name}}** ».
     {{else}}
       En **{{fmt_year_to_fiscal_year selected_year}}**, les organisations du gouvernement fédéral ont dépensé un montant estimé à 
       **{{fmt_compact1_written gov_covid_expenditures_in_year}}** pour les mesures en réponse à la pandémie de COVID-19.
