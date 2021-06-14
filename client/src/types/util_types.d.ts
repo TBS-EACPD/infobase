@@ -18,4 +18,6 @@ export type WithoutIndexTypes<T> = Pick<T, KnownKeys<T>>;
 // e.g. if a type has [key: string]: any then Omit will swallow ALL OTHER string-keyed properties...
 // SafeOmit does not, only omits what you tell it to
 // TODO revisit the need for this once we have negated types https://github.com/Microsoft/TypeScript/pull/29317
-export type SafeOmit<T, K extends PropertyKey> = { [P in keyof T as Exclude<P, K>]: T[P] };
+export type SafeOmit<T, K extends PropertyKey> = {
+  [P in keyof T as Exclude<P, K>]: T[P];
+};
