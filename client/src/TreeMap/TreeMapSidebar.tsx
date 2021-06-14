@@ -3,31 +3,33 @@ import React from "react";
 import { TreeMapControls } from "./TreeMapControls";
 import "./TreeMap.scss";
 
-interface LocationProps {
+export interface LocationProps {
   hash: string;
   pathname: string;
   search: string;
 }
-interface TreeMapSideBarProps {
+
+export interface HistoryProps {
+  action: string;
+  block: Function;
+  createHref: Function;
+  go: Function;
+  goBack: Function;
+  goForward: Function;
+  length: number;
+  listen: Function;
+  location: LocationProps;
+  push: (arg: string) => void;
+  replace: Function;
+}
+export interface TreeMapSideBarProps {
   perspective: string;
   color_var: string;
   year: string;
   filter_var: string;
-  get_changes: string;
-  location: LocationProps;
-  history: {
-    action: string;
-    block: Function;
-    createHref: Function;
-    go: Function;
-    goBack: Function;
-    goForward: Function;
-    length: number;
-    listen: Function;
-    location: LocationProps;
-    push: Function;
-    replace: Function;
-  };
+  get_changes?: string;
+  location?: LocationProps;
+  history?: HistoryProps;
 }
 export class TreeMapSidebar extends React.Component<TreeMapSideBarProps> {
   constructor(props: TreeMapSideBarProps) {
