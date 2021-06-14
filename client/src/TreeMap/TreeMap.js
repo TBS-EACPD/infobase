@@ -34,7 +34,7 @@ import { get_data, load_data } from "./data";
 import { TreeMapInstructions } from "./TreeMapInstructions";
 import { TreeMapLegend } from "./TreeMapLegend";
 import { TreeMapSidebar } from "./TreeMapSidebar";
-import { TreeMapTopbar } from "./TreeMapTopBar";
+import { TreeMapTopbar } from "./TreeMapTopbar";
 import { TreeMap } from "./TreeMapViz";
 
 import treemap_text from "./TreeMap.yaml";

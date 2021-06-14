@@ -16,7 +16,7 @@ const BreadcrumbArrow = (
   <IconArrow svg_style={{ verticalAlign: "0.1em" }} inline={true} />
 );
 
-interface TreeMapTopBarProps {
+interface TreeMapTopbarProps {
   history: {
     action: string;
     block: Function;
@@ -38,8 +38,8 @@ interface TreeMapTopBarProps {
   org_route: [];
   setRouteCallback: Function;
 }
-export class TreeMapTopBar extends React.Component<TreeMapTopBarProps> {
-  constructor(props: TreeMapTopBarProps) {
+export class TreeMapTopbar extends React.Component<TreeMapTopbarProps> {
+  constructor(props: TreeMapTopbarProps) {
     super(props);
   }
   handleClick(ix: number) {
