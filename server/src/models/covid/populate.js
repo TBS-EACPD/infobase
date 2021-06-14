@@ -3,12 +3,8 @@ import _ from "lodash";
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
 export default async function ({ models }) {
-  const {
-    YearsWithCovidData,
-    CovidMeasure,
-    CovidGovSummary,
-    CovidOrgSummary,
-  } = models;
+  const { YearsWithCovidData, CovidMeasure, CovidGovSummary, CovidOrgSummary } =
+    models;
 
   const covid_estimates_rows = _.map(
     get_standard_csv_file_rows("covid_estimates.csv"),

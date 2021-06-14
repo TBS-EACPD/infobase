@@ -11,12 +11,10 @@ const years_with_covid_data = `
     years_with_expenditures
   }
 `;
-export const {
-  query_gov_years_with_covid_data,
-  useGovYearsWithCovidData,
-} = query_factory({
-  query_name: "gov_years_with_covid_data",
-  query: gql`
+export const { query_gov_years_with_covid_data, useGovYearsWithCovidData } =
+  query_factory({
+    query_name: "gov_years_with_covid_data",
+    query: gql`
     query($lang: String! = "${lang}") {
       root(lang: $lang) {
         gov {
@@ -26,15 +24,13 @@ export const {
       }
     }
   `,
-  resolver: (response) =>
-    _.get(response, "data.root.gov.years_with_covid_data"),
-});
-export const {
-  query_org_years_with_covid_data,
-  useOrgYearsWithCovidData,
-} = query_factory({
-  query_name: "org_years_with_covid_data",
-  query: gql`
+    resolver: (response) =>
+      _.get(response, "data.root.gov.years_with_covid_data"),
+  });
+export const { query_org_years_with_covid_data, useOrgYearsWithCovidData } =
+  query_factory({
+    query_name: "org_years_with_covid_data",
+    query: gql`
     query($lang: String! = "${lang}", $org_id: String!) {
       root(lang: $lang) {
         org(org_id: $org_id) {
@@ -44,9 +40,9 @@ export const {
       }
     }
   `,
-  resolver: (response) =>
-    _.get(response, "data.root.org.years_with_covid_data"),
-});
+    resolver: (response) =>
+      _.get(response, "data.root.org.years_with_covid_data"),
+  });
 
 export const { query_all_covid_measures, useAllCovidMeasures } = query_factory({
   query_name: "all_covid_measures",
@@ -241,12 +237,10 @@ const common_covid_summary_fields = `
     ${covid_expenditures_fields}
   }
 `;
-export const {
-  query_gov_covid_summaries,
-  useGovCovidSummaries,
-} = query_factory({
-  query_name: "gov_covid_summaries",
-  query: gql`
+export const { query_gov_covid_summaries, useGovCovidSummaries } =
+  query_factory({
+    query_name: "gov_covid_summaries",
+    query: gql`
     query($lang: String! = "${lang}") {
       root(lang: $lang) {
         gov {
@@ -258,14 +252,12 @@ export const {
       }
     }
   `,
-  resolver: (response) => _.get(response, "data.root.gov.covid_summary"),
-});
-export const {
-  query_org_covid_summaries,
-  useOrgCovidSummaries,
-} = query_factory({
-  query_name: "org_covid_summaries",
-  query: gql`
+    resolver: (response) => _.get(response, "data.root.gov.covid_summary"),
+  });
+export const { query_org_covid_summaries, useOrgCovidSummaries } =
+  query_factory({
+    query_name: "org_covid_summaries",
+    query: gql`
     query($lang: String! = "${lang}", $org_id: String!) {
       root(lang: $lang) {
         org(org_id: $org_id) {
@@ -277,8 +269,8 @@ export const {
       }
     }
   `,
-  resolver: (response) => _.get(response, "data.root.org.covid_summary"),
-});
+    resolver: (response) => _.get(response, "data.root.org.covid_summary"),
+  });
 export const { query_gov_covid_summary, useGovCovidSummary } = query_factory({
   query_name: "gov_covid_summary",
   query: gql`

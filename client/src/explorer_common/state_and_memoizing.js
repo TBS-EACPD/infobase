@@ -114,16 +114,14 @@ function root_reducer(state = initial_root_state, action) {
 }
 
 //receives the whole state, but only returns the 'root' slice
-const map_state_to_root_props_from_memoized_funcs = ({
-  is_filtering,
-  get_flat_nodes,
-  get_base_hierarchy,
-}) => (entire_state) => ({
-  ...entire_state.root,
-  is_filtering: is_filtering(entire_state),
-  flat_nodes: get_flat_nodes(entire_state),
-  base_hierarchy: get_base_hierarchy(entire_state),
-});
+const map_state_to_root_props_from_memoized_funcs =
+  ({ is_filtering, get_flat_nodes, get_base_hierarchy }) =>
+  (entire_state) => ({
+    ...entire_state.root,
+    is_filtering: is_filtering(entire_state),
+    flat_nodes: get_flat_nodes(entire_state),
+    base_hierarchy: get_base_hierarchy(entire_state),
+  });
 
 const map_dispatch_to_root_props = (dispatch) => {
   const set_query = (query) => {

@@ -322,7 +322,8 @@ export class AbstractExplorerScheme {
 
   @cached_property
   get_fully_filtered_hierarchy_selector() {
-    const get_query_filtered_hierarchy = this.get_query_filtered_hierarchy_selector();
+    const get_query_filtered_hierarchy =
+      this.get_query_filtered_hierarchy_selector();
     const get_filter_func = this.get_filter_func_selector();
     return createSelector(
       [get_query_filtered_hierarchy, get_filter_func],
@@ -334,7 +335,8 @@ export class AbstractExplorerScheme {
 
   @cached_property
   get_sorted_filtered_hierarchy_selector() {
-    const get_fully_filtered_hierarchy = this.get_fully_filtered_hierarchy_selector();
+    const get_fully_filtered_hierarchy =
+      this.get_fully_filtered_hierarchy_selector();
     const get_sort_func = this.get_sort_func_selector();
     return createSelector(
       [get_fully_filtered_hierarchy, get_sort_func],
@@ -353,7 +355,8 @@ export class AbstractExplorerScheme {
     const sort_func = get_sort_func(state);
 
     if (this._should_completely_recompute_flat_nodes(state)) {
-      const get_sorted_filtered_h7y = this.get_sorted_filtered_hierarchy_selector();
+      const get_sorted_filtered_h7y =
+        this.get_sorted_filtered_hierarchy_selector();
       flat_nodes = get_sorted_filtered_h7y(state);
     } else if (
       this.oldState.root.userCollapsed !== state.root.userCollapsed ||

@@ -15,11 +15,8 @@ const { TM, text_maker } = create_text_maker_component(text);
 
 class _GraphOverlay extends React.Component {
   render() {
-    const {
-      children,
-      is_showing_graph_overlay,
-      hide_graph_overlay,
-    } = this.props;
+    const { children, is_showing_graph_overlay, hide_graph_overlay } =
+      this.props;
 
     return (
       <div style={{ position: "relative" }}>

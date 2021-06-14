@@ -26,9 +26,8 @@ import {
 import home_text_bundle from "./home.yaml";
 import "./home.scss";
 
-const { text_maker: home_tm, TM } = create_text_maker_component(
-  home_text_bundle
-);
+const { text_maker: home_tm, TM } =
+  create_text_maker_component(home_text_bundle);
 
 export default class Home extends React.Component {
   render() {

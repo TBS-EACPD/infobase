@@ -119,9 +119,10 @@ function ensure_loaded({
     ? load_footnotes_bundle(footnotes_subject)
     : Promise.resolve();
 
-  const horizontal_initiative_lookups_prom = should_load_horizontal_initiative_lookups
-    ? load_horizontal_initiative_lookups()
-    : Promise.resolve();
+  const horizontal_initiative_lookups_prom =
+    should_load_horizontal_initiative_lookups
+      ? load_horizontal_initiative_lookups()
+      : Promise.resolve();
 
   const years_with_covid_data_prom = should_load_years_with_covid_data
     ? api_load_years_with_covid_data(subject)

@@ -48,68 +48,66 @@ const estimates_split_calculate = function (subject) {
   return calculations;
 };
 
-const estimates_split_render_w_text_key = (text_key) => ({
-  title,
-  calculations,
-  footnotes,
-  sources,
-}) => {
-  const { panel_args } = calculations;
-  const { in_year_estimates_split } = panel_args;
-  const estimate_data = _.map(in_year_estimates_split, ([tick, data]) => ({
-    label: tick,
-    [tick]: data,
-  }));
+const estimates_split_render_w_text_key =
+  (text_key) =>
+  ({ title, calculations, footnotes, sources }) => {
+    const { panel_args } = calculations;
+    const { in_year_estimates_split } = panel_args;
+    const estimate_data = _.map(in_year_estimates_split, ([tick, data]) => ({
+      label: tick,
+      [tick]: data,
+    }));
 
-  const content = (
-    <WrappedNivoBar
-      data={estimate_data}
-      keys={_.map(estimate_data, "label")}
-      label_format={(d) => <tspan y={-10}>{formats.compact2_raw(d)}</tspan>}
-      isInteractive={false}
-      enableLabel={true}
-      indexBy="label"
-      colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
-      margin={{
-        top: 50,
-        right: 40,
-        bottom: 120,
-        left: 40,
-      }}
-      bttm_axis={{
-        format: (d) => (_.words(d).length > 3 ? d.substring(0, 20) + "..." : d),
-        tickSize: 3,
-        tickRotation: -45,
-        tickPadding: 10,
-      }}
-      graph_height="450px"
-      enableGridX={false}
-      remove_left_axis={true}
-      theme={{
-        axis: {
-          ticks: {
-            text: {
-              fontSize: 12,
-              fill: textColor,
-              fontWeight: "550",
+    const content = (
+      <WrappedNivoBar
+        data={estimate_data}
+        keys={_.map(estimate_data, "label")}
+        label_format={(d) => <tspan y={-10}>{formats.compact2_raw(d)}</tspan>}
+        isInteractive={false}
+        enableLabel={true}
+        indexBy="label"
+        colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
+        margin={{
+          top: 50,
+          right: 40,
+          bottom: 120,
+          left: 40,
+        }}
+        bttm_axis={{
+          format: (d) =>
+            _.words(d).length > 3 ? d.substring(0, 20) + "..." : d,
+          tickSize: 3,
+          tickRotation: -45,
+          tickPadding: 10,
+        }}
+        graph_height="450px"
+        enableGridX={false}
+        remove_left_axis={true}
+        theme={{
+          axis: {
+            ticks: {
+              text: {
+                fontSize: 12,
+                fill: textColor,
+                fontWeight: "550",
+              },
             },
           },
-        },
-      }}
-    />
-  );
+        }}
+      />
+    );
 
-  return (
-    <StdPanel {...{ title, sources, footnotes }}>
-      <Col isText size={6}>
-        <TM k={text_key} args={panel_args} />
-      </Col>
-      <Col isGraph={is_a11y_mode} size={6}>
-        {content}
-      </Col>
-    </StdPanel>
-  );
-};
+    return (
+      <StdPanel {...{ title, sources, footnotes }}>
+        <Col isText size={6}>
+          <TM k={text_key} args={panel_args} />
+        </Col>
+        <Col isGraph={is_a11y_mode} size={6}>
+          {content}
+        </Col>
+      </StdPanel>
+    );
+  };
 
 const common_panel_config = {
   machinery_footnotes: false,

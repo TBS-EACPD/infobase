@@ -23,10 +23,8 @@ export default {
   tags: ["PEOPLE", "GEO", "FPS", "ANNUAL"],
 
   link: {
-    en:
-      "http://open.canada.ca/data/en/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa",
-    fr:
-      "http://ouvert.canada.ca/data/fr/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa",
+    en: "http://open.canada.ca/data/en/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa",
+    fr: "http://ouvert.canada.ca/data/fr/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa",
   },
 
   name: {

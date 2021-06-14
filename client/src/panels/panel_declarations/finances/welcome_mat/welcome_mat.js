@@ -483,11 +483,8 @@ const WelcomeMat = (props) => {
     //full-width,
     //5 yrs ago, last year, this year, graph
     //text about hist-diff
-    const {
-      spend_plan_1,
-      latest_year_hist_spend_diff,
-      spend_latest_year,
-    } = calcs;
+    const { spend_plan_1, latest_year_hist_spend_diff, spend_latest_year } =
+      calcs;
 
     const current_hist_years_apart =
       _.parseInt(_.split(latest_hist_spend_data.year, "-")) -
@@ -1045,11 +1042,8 @@ export const declare_welcome_mat_panel = () =>
               ...depends_on,
             ],
             calculate(subject) {
-              const {
-                programSpending,
-                programFtes,
-                orgVoteStatEstimates,
-              } = this.tables;
+              const { programSpending, programFtes, orgVoteStatEstimates } =
+                this.tables;
               const q6 = programSpending.q(subject);
               const q12 = programFtes.q(subject);
 

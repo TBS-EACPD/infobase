@@ -44,32 +44,29 @@ const common_cal = (programs, programSobjs) => {
   return top_3_sos.concat(remainder);
 };
 
-const render_w_options = ({ text_key }) => ({
-  title,
-  calculations,
-  footnotes,
-  sources,
-}) => {
-  const { panel_args } = calculations;
-  const { top_3_sos_and_remainder, text_calculations } = panel_args;
+const render_w_options =
+  ({ text_key }) =>
+  ({ title, calculations, footnotes, sources }) => {
+    const { panel_args } = calculations;
+    const { top_3_sos_and_remainder, text_calculations } = panel_args;
 
-  const graph_data = top_3_sos_and_remainder.map((d) => ({
-    label: d["label"],
-    id: d["label"],
-    value: d["value"],
-  }));
+    const graph_data = top_3_sos_and_remainder.map((d) => ({
+      label: d["label"],
+      id: d["label"],
+      value: d["value"],
+    }));
 
-  return (
-    <StdPanel {...{ title, footnotes, sources }}>
-      <Col isText size={5}>
-        <TM k={text_key} args={text_calculations} />
-      </Col>
-      <Col isGraph={!is_a11y_mode} size={7}>
-        <WrappedNivoPie data={graph_data} graph_height="450px" />
-      </Col>
-    </StdPanel>
-  );
-};
+    return (
+      <StdPanel {...{ title, footnotes, sources }}>
+        <Col isText size={5}>
+          <TM k={text_key} args={text_calculations} />
+        </Col>
+        <Col isGraph={!is_a11y_mode} size={7}>
+          <WrappedNivoPie data={graph_data} graph_height="450px" />
+        </Col>
+      </StdPanel>
+    );
+  };
 
 export const declare_top_spending_areas_panel = () =>
   declare_panel({

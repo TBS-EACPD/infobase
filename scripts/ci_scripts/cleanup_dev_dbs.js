@@ -6,8 +6,10 @@ const meta_db_names = ["admin", "local"];
 
 const dbs_to_retain = active_db_names.concat(meta_db_names);
 
-const all_dev_db_names = db.adminCommand({ listDatabases: 1, nameOnly: true })
-  .databases;
+const all_dev_db_names = db.adminCommand({
+  listDatabases: 1,
+  nameOnly: true,
+}).databases;
 
 let nothing_to_drop = true;
 for (i = 0; i < all_dev_db_names.length; i++) {

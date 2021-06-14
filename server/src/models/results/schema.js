@@ -128,15 +128,8 @@ ${_.reduce(
 `;
 
 export default function ({ models, loaders }) {
-  const {
-    Org,
-    Crso,
-    Program,
-    Result,
-    ResultCount,
-    Indicator,
-    PIDRLink,
-  } = models;
+  const { Org, Crso, Program, Result, ResultCount, Indicator, PIDRLink } =
+    models;
 
   const {
     prog_dept_code_loader,

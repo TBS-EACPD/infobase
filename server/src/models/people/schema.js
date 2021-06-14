@@ -164,9 +164,8 @@ export default function ({ models }) {
         subject.dept_code
       );
     } else if (subject.level === "gov") {
-      records = headcount_models_by_name_in_schema[
-        model_name
-      ].get_gov_records();
+      records =
+        headcount_models_by_name_in_schema[model_name].get_gov_records();
     }
 
     return _.chain(records)
@@ -193,9 +192,8 @@ export default function ({ models }) {
         subject.dept_code
       );
     } else if (subject.level === "gov") {
-      records = headcount_models_by_name_in_schema[
-        model_name
-      ].get_gov_records();
+      records =
+        headcount_models_by_name_in_schema[model_name].get_gov_records();
     }
 
     records = _.filter(

@@ -98,10 +98,8 @@ export default function (model_singleton) {
     Result,
     "subject_id"
   );
-  const indicator_by_result_loader = create_resource_by_foreignkey_attr_dataloader(
-    Indicator,
-    "result_id"
-  );
+  const indicator_by_result_loader =
+    create_resource_by_foreignkey_attr_dataloader(Indicator, "result_id");
   const program_link_loader = create_resource_by_foreignkey_attr_dataloader(
     PIDRLink,
     "program_id"

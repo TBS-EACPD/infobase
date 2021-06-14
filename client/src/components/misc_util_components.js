@@ -24,14 +24,8 @@ const ExternalLink = ({ children, href, title }) => (
 
 class Format extends React.PureComponent {
   render() {
-    const {
-      type,
-      content,
-      style,
-      className,
-      in_parenthesis,
-      prefix,
-    } = this.props;
+    const { type, content, style, className, in_parenthesis, prefix } =
+      this.props;
 
     const formatted_content = _.chain(content)
       .thru(formats[type])

@@ -18,10 +18,8 @@ import { reactAdapter } from "./reactAdapter";
 
 import "./NavComponents.scss";
 
-const {
-  page_title: default_title,
-  meta_description: default_description,
-} = index_lang_lookups;
+const { page_title: default_title, meta_description: default_description } =
+  index_lang_lookups;
 
 //note: This must be manually kept consistent with index.hbs.html
 let is_initial_markup_cleared = false;

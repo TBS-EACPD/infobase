@@ -68,12 +68,8 @@ const PageDetails = withRouter(
     };
     render() {
       const { showReportProblem } = this.state;
-      const {
-        location,
-        toggleSurvey,
-        showSurvey,
-        non_survey_routes,
-      } = this.props;
+      const { location, toggleSurvey, showSurvey, non_survey_routes } =
+        this.props;
 
       return (
         <div className="pagedetails row ml-0 mr-0">

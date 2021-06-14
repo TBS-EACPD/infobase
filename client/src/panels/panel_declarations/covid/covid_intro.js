@@ -66,9 +66,8 @@ class CovidIntroPanelDyanmicText extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const { covid_estimates, covid_expenditures } = summaries_by_year[
-        selected_year
-      ];
+      const { covid_estimates, covid_expenditures } =
+        summaries_by_year[selected_year];
 
       return (
         <Fragment>

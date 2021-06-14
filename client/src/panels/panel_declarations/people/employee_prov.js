@@ -70,13 +70,8 @@ class ProvPanel extends React.Component {
     };
   }
   render() {
-    const {
-      title,
-      calculations,
-      footnotes,
-      sources,
-      level,
-    } = this.props.render_args;
+    const { title, calculations, footnotes, sources, level } =
+      this.props.render_args;
 
     const { panel_args, subject } = calculations;
     const { data } = panel_args;

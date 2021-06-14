@@ -146,7 +146,8 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                       tabIndex="0"
                       onClick={(evt) => {
                         evt.preventDefault();
-                        document.body.scrollTop = document.documentElement.scrollTop = 0;
+                        document.body.scrollTop =
+                          document.documentElement.scrollTop = 0;
                         document.getElementById("app-focus-root").focus();
                       }}
                     >

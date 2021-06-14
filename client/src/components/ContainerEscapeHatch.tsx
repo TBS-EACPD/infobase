@@ -23,10 +23,10 @@ class ContainerEscapeHatch extends React.Component<ContainerEscapeHatchProps> {
   }
 
   adjust_to_full_page_width = () => {
-    const outer_container_escape_hatch = this.outer_container_escape_hatch
-      .current;
-    const inner_container_escape_hatch = this.inner_container_escape_hatch
-      .current;
+    const outer_container_escape_hatch =
+      this.outer_container_escape_hatch.current;
+    const inner_container_escape_hatch =
+      this.inner_container_escape_hatch.current;
 
     if (outer_container_escape_hatch && inner_container_escape_hatch) {
       const screen_width = document.body.clientWidth;

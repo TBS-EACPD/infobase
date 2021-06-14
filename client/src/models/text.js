@@ -183,70 +183,72 @@ const combine_bundles = (bundles) => {
 };
 const combined_global_bundle = combine_bundles(global_bundles);
 
-const _create_text_maker = (deps = template_store) => (key, context = {}) => {
-  // 1. lookup the key to get the text object
-  // 2. note that by the time this function gets called, we've already stripped out language
-  // 3. loop over the transform attribute on the text object
-  //    and apply the requested transform i.e. handlebars
-  //    and markdown
-  if (!_.isObject(context)) {
-    context = {};
-  }
-  if (deps.__text_maker_func__) {
-    context.__text_maker_func__ = deps.__text_maker_func__;
-  } else {
-    context.__text_maker_func__ = trivial_text_maker; /* eslint-disable-line no-use-before-define */
-  }
-
-  const text_obj = deps[key];
-
-  if (_.isUndefined(text_obj)) {
-    throw new Error(`undefined text_maker key "${key}"`);
-  }
-
-  if (_.isString(text_obj)) {
-    return text_obj;
-  }
-
-  let rtn = text_obj.text;
-  _.each(text_obj.transform, (transform) => {
-    if (transform === "handlebars") {
-      if (!text_obj.handlebars_compiled) {
-        text_obj.text = Handlebars.compile(rtn);
-        text_obj.handlebars_compiled = true;
-      }
-      rtn = run_template(rtn, context);
-    } else if (transform === "markdown") {
-      rtn = marked(rtn, { sanitize: false, gfm: true });
-    } else if (transform === "embeded-markdown") {
-      const temp_dom_node = document.createElement("div");
-
-      temp_dom_node.innerHTML = rtn;
-
-      const embedded_markdown_nodes = temp_dom_node.querySelectorAll(
-        ".embeded-markdown"
-      );
-
-      if (embedded_markdown_nodes.length) {
-        _.map(embedded_markdown_nodes, _.idenity).forEach(
-          (node) =>
-            (node.innerHTML = marked(node.innerHTML, {
-              sanitize: false,
-              gfm: true,
-            }))
-        );
-      }
-
-      rtn = temp_dom_node.innerHTML;
+const _create_text_maker =
+  (deps = template_store) =>
+  (key, context = {}) => {
+    // 1. lookup the key to get the text object
+    // 2. note that by the time this function gets called, we've already stripped out language
+    // 3. loop over the transform attribute on the text object
+    //    and apply the requested transform i.e. handlebars
+    //    and markdown
+    if (!_.isObject(context)) {
+      context = {};
     }
-  });
-  if (_.has(text_obj, "outside_html")) {
-    rtn = Handlebars.compile(text_obj.outside_html)({
-      content: rtn,
+    if (deps.__text_maker_func__) {
+      context.__text_maker_func__ = deps.__text_maker_func__;
+    } else {
+      context.__text_maker_func__ =
+        trivial_text_maker; /* eslint-disable-line no-use-before-define */
+    }
+
+    const text_obj = deps[key];
+
+    if (_.isUndefined(text_obj)) {
+      throw new Error(`undefined text_maker key "${key}"`);
+    }
+
+    if (_.isString(text_obj)) {
+      return text_obj;
+    }
+
+    let rtn = text_obj.text;
+    _.each(text_obj.transform, (transform) => {
+      if (transform === "handlebars") {
+        if (!text_obj.handlebars_compiled) {
+          text_obj.text = Handlebars.compile(rtn);
+          text_obj.handlebars_compiled = true;
+        }
+        rtn = run_template(rtn, context);
+      } else if (transform === "markdown") {
+        rtn = marked(rtn, { sanitize: false, gfm: true });
+      } else if (transform === "embeded-markdown") {
+        const temp_dom_node = document.createElement("div");
+
+        temp_dom_node.innerHTML = rtn;
+
+        const embedded_markdown_nodes =
+          temp_dom_node.querySelectorAll(".embeded-markdown");
+
+        if (embedded_markdown_nodes.length) {
+          _.map(embedded_markdown_nodes, _.idenity).forEach(
+            (node) =>
+              (node.innerHTML = marked(node.innerHTML, {
+                sanitize: false,
+                gfm: true,
+              }))
+          );
+        }
+
+        rtn = temp_dom_node.innerHTML;
+      }
     });
-  }
-  return rtn;
-};
+    if (_.has(text_obj, "outside_html")) {
+      rtn = Handlebars.compile(text_obj.outside_html)({
+        content: rtn,
+      });
+    }
+    return rtn;
+  };
 
 const create_text_maker = (bundles) => {
   if (_.isEmpty(bundles)) {

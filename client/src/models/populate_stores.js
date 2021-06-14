@@ -221,14 +221,7 @@ function populate_program_tags(tag_rows) {
 
 function populate_crso_tags(rows) {
   const [id, dept_code, title, desc, is_active, is_drf, is_internal_service] = [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
+    0, 1, 2, 3, 4, 5, 6, 7,
   ];
   _.each(rows, (row) => {
     const dept = Dept.lookup(row[dept_code]);

@@ -81,9 +81,8 @@ import {
 } from "./db_utils/index.js";
 connect_db.mockImplementation(() => Promise.resolve());
 get_db_connection_status.mockImplementation(() => "connected");
-const mock_log_email_and_meta_to_db = log_email_and_meta_to_db.mockImplementation(
-  () => Promise.resolve()
-);
+const mock_log_email_and_meta_to_db =
+  log_email_and_meta_to_db.mockImplementation(() => Promise.resolve());
 
 import { run_email_backend } from "./email_backend.js";
 beforeAll((done) => {
@@ -147,9 +146,8 @@ describe("End-to-end tests for email_backend endpoints", () => {
   });
 
   it("/email_template returns status 400 for an invalid invalid template_name", async () => {
-    const {
-      status: bad_template_name_status,
-    } = await make_email_template_request("zzz_unlikely_name");
+    const { status: bad_template_name_status } =
+      await make_email_template_request("zzz_unlikely_name");
 
     return expect(bad_template_name_status).toBe(400);
   });
@@ -166,19 +164,18 @@ describe("End-to-end tests for email_backend endpoints", () => {
   });
 
   it("/submit_email returns status 400 when a non-existant or invalid template is submitted", async () => {
-    const {
-      status: bad_template_name_status,
-    } = await make_submit_email_request(
-      "zzz_unlikely_name",
-      completed_test_template
+    const { status: bad_template_name_status } =
+      await make_submit_email_request(
+        "zzz_unlikely_name",
+        completed_test_template
+      );
+    const { status: invalid_template_status } = await make_submit_email_request(
+      test_template_name,
+      { bleh: "bleh" }
     );
-    const {
-      status: invalid_template_status,
-    } = await make_submit_email_request(test_template_name, { bleh: "bleh" });
 
     return expect([bad_template_name_status, invalid_template_status]).toEqual([
-      400,
-      400,
+      400, 400,
     ]);
   });
 

@@ -224,9 +224,8 @@ StdPanel.propTypes = {
     const { children } = props;
 
     const are_children_valid = (children) => {
-      const filtered_and_flattened_children = flatten_and_filter_children(
-        children
-      );
+      const filtered_and_flattened_children =
+        flatten_and_filter_children(children);
 
       return _.every(filtered_and_flattened_children, { type: Col });
     };

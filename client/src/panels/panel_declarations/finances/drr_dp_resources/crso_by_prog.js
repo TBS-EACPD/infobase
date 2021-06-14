@@ -28,60 +28,58 @@ import text from "./crso_by_prog.yaml";
 const { planning_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const render_resource_type = (is_fte) => ({
-  title,
-  calculations,
-  footnotes,
-}) => {
-  const { panel_args, subject } = calculations;
+const render_resource_type =
+  (is_fte) =>
+  ({ title, calculations, footnotes }) => {
+    const { panel_args, subject } = calculations;
 
-  const sources = [
-    is_fte
-      ? get_planned_fte_source_link(subject)
-      : get_planned_spending_source_link(subject),
-  ];
+    const sources = [
+      is_fte
+        ? get_planned_fte_source_link(subject)
+        : get_planned_spending_source_link(subject),
+    ];
 
-  const { exp_data, fte_data } = panel_args;
+    const { exp_data, fte_data } = panel_args;
 
-  //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
-  const all_program_names = _.chain(exp_data).map("label").uniq().value();
-  const colors = infobase_colors();
-  _.each(all_program_names, (name) => colors(name));
+    //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
+    const all_program_names = _.chain(exp_data).map("label").uniq().value();
+    const colors = infobase_colors();
+    _.each(all_program_names, (name) => colors(name));
 
-  const first_year_program_count = _.chain(exp_data)
-    .zip(fte_data)
-    .filter(
-      ([{ data: exp_data }, { data: fte_data }]) =>
-        exp_data[0] !== 0 || fte_data[0] !== 0
-    )
-    .value().length;
+    const first_year_program_count = _.chain(exp_data)
+      .zip(fte_data)
+      .filter(
+        ([{ data: exp_data }, { data: fte_data }]) =>
+          exp_data[0] !== 0 || fte_data[0] !== 0
+      )
+      .value().length;
 
-  const text = (
-    <TM
-      k="crso_by_prog_exp_or_ftes"
-      args={{
-        subject,
-        first_year_program_count,
-        is_fte: is_fte,
-        ...panel_args,
-      }}
-    />
-  );
-
-  return (
-    <InfographicPanel {...{ title, sources, footnotes }}>
-      <PlannedProgramResources
-        programs={_.sortBy(
-          is_fte ? fte_data : exp_data,
-          ({ data }) => -sum(data)
-        )}
-        colors={colors}
-        text={text}
-        is_fte={is_fte}
+    const text = (
+      <TM
+        k="crso_by_prog_exp_or_ftes"
+        args={{
+          subject,
+          first_year_program_count,
+          is_fte: is_fte,
+          ...panel_args,
+        }}
       />
-    </InfographicPanel>
-  );
-};
+    );
+
+    return (
+      <InfographicPanel {...{ title, sources, footnotes }}>
+        <PlannedProgramResources
+          programs={_.sortBy(
+            is_fte ? fte_data : exp_data,
+            ({ data }) => -sum(data)
+          )}
+          colors={colors}
+          text={text}
+          is_fte={is_fte}
+        />
+      </InfographicPanel>
+    );
+  };
 
 class PlannedProgramResources extends React.Component {
   constructor(props) {

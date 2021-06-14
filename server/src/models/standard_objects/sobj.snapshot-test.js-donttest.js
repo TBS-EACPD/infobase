@@ -66,10 +66,8 @@ describe("SOBJ data", function () {
   it("org-level sobj top-3 should sum up to all data", async () => {
     const vars = { dept_code: "AGR" };
     const { data } = await execQuery(org_query, vars);
-    const {
-      top_n_with_other,
-      pa_last_year_data,
-    } = data.root.org.standard_object_data;
+    const { top_n_with_other, pa_last_year_data } =
+      data.root.org.standard_object_data;
     const sum_top = _.sumBy(top_n_with_other, "amount");
     const sum_all = _.sumBy(pa_last_year_data, "amount");
     expect(sum_top).toBeCloseTo(sum_all);

@@ -23,13 +23,8 @@ export class FocusLockedModal extends React.Component<
   }
 
   render() {
-    const {
-      mounted,
-      children,
-      additional_dialog_class,
-      on_exit,
-      aria_label,
-    } = this.props;
+    const { mounted, children, additional_dialog_class, on_exit, aria_label } =
+      this.props;
 
     const cleaned_aria_label = DOMPurify.sanitize(aria_label, {
       ALLOWED_TAGS: [],

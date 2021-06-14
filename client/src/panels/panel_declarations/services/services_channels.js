@@ -79,21 +79,18 @@ const ServicesChannelsPanel = ({ subject }) => {
     }))
     .maxBy("max_vol_service_value")
     .value();
-  const {
-    max_vol_channel_key,
-    max_vol_channel_name,
-    max_vol_channel_value,
-  } = _.chain(delivery_channels_keys)
-    .map((key) => ({
-      max_vol_channel_key: key,
-      max_vol_channel_name: text_maker(key),
-      max_vol_channel_value: _.chain(data)
-        .map(({ service_report }) => _.sumBy(service_report, `${key}_count`))
-        .sum()
-        .value(),
-    }))
-    .maxBy("max_vol_channel_value")
-    .value();
+  const { max_vol_channel_key, max_vol_channel_name, max_vol_channel_value } =
+    _.chain(delivery_channels_keys)
+      .map((key) => ({
+        max_vol_channel_key: key,
+        max_vol_channel_name: text_maker(key),
+        max_vol_channel_value: _.chain(data)
+          .map(({ service_report }) => _.sumBy(service_report, `${key}_count`))
+          .sum()
+          .value(),
+      }))
+      .maxBy("max_vol_channel_value")
+      .value();
 
   const services_channel_nivo_data = _.map(delivery_channels_keys, (key) => ({
     id: text_maker(key),

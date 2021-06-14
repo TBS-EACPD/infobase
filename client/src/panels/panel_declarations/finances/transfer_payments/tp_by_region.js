@@ -72,16 +72,14 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
   const largest_total_percent = largest_total_value / subject_total_value;
 
   const show_per_capita_data = !_.isEmpty(per_capita_data);
-  const [
-    largest_per_capita_prov_code,
-    largest_per_capita_value,
-  ] = show_per_capita_data
-    ? _.chain(last_year_data_per_capita)
-        .toPairs()
-        .sortBy(([prov_code, value]) => value)
-        .last()
-        .value()
-    : [false, false];
+  const [largest_per_capita_prov_code, largest_per_capita_value] =
+    show_per_capita_data
+      ? _.chain(last_year_data_per_capita)
+          .toPairs()
+          .sortBy(([prov_code, value]) => value)
+          .last()
+          .value()
+      : [false, false];
   const largest_per_capita_prov =
     show_per_capita_data && provinces[largest_per_capita_prov_code].text;
   const le_largest_per_capita_prov =

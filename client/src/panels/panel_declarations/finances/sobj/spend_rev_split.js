@@ -28,11 +28,8 @@ const text_keys_by_level = {
 function render({ title, calculations, footnotes, sources }) {
   const { panel_args, subject } = calculations;
   const { text_calculations } = panel_args;
-  const {
-    last_year_gross_exp,
-    last_year_net_exp,
-    last_year_rev,
-  } = text_calculations;
+  const { last_year_gross_exp, last_year_net_exp, last_year_rev } =
+    text_calculations;
 
   const series = [last_year_gross_exp, last_year_rev];
   const _ticks = ["gross", "revenues"];

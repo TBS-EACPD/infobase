@@ -116,12 +116,8 @@ class CanadaGraph extends React.PureComponent {
     this._render();
   }
   _render() {
-    const {
-      graph_args,
-      prov_select_callback,
-      data,
-      selected_year_index,
-    } = this.props;
+    const { graph_args, prov_select_callback, data, selected_year_index } =
+      this.props;
     const { color_scale, years, formatter } = graph_args;
 
     const graph_area_sel = select(
@@ -180,13 +176,8 @@ export class Canada extends React.Component {
   render() {
     const { prov, selected_year_index } = this.state;
     const { graph_args } = this.props;
-    const {
-      data,
-      alt_totals_by_year,
-      color_scale,
-      years,
-      formatter,
-    } = graph_args;
+    const { data, alt_totals_by_year, color_scale, years, formatter } =
+      graph_args;
     const legend_items = _.map(
       color_scale.ticks(5).reverse(),
       (tick, idx, ticks) => ({

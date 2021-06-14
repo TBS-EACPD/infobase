@@ -92,9 +92,8 @@ const get_col_configs_with_defaults = (column_configs: ColumnConfigProps) =>
 const get_default_state_from_props = (props: _DisplayTableProps) => {
   const { unsorted_initial, column_configs } = props;
 
-  const col_configs_with_defaults = get_col_configs_with_defaults(
-    column_configs
-  );
+  const col_configs_with_defaults =
+    get_col_configs_with_defaults(column_configs);
 
   const visible_col_keys = _.chain(col_configs_with_defaults)
     .pickBy((col) => col.initial_visible)
@@ -242,9 +241,8 @@ export class _DisplayTable extends React.Component<
       show_pagination_load_spinner,
     } = this.state;
 
-    const col_configs_with_defaults = get_col_configs_with_defaults(
-      column_configs
-    );
+    const col_configs_with_defaults =
+      get_col_configs_with_defaults(column_configs);
     const NoDataMessage = () => (
       <tbody>
         <tr>
@@ -298,10 +296,9 @@ export class _DisplayTable extends React.Component<
         if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
           const sorting_config = col_configs_with_defaults[sort_by];
           return sorting_config.sort_func
-            ? _.map(
-                unsorted_array
-              ).sort((a: DisplayTableData, b: DisplayTableData) =>
-                sorting_config.sort_func(a[sort_by], b[sort_by], descending)
+            ? _.map(unsorted_array).sort(
+                (a: DisplayTableData, b: DisplayTableData) =>
+                  sorting_config.sort_func(a[sort_by], b[sort_by], descending)
               )
             : _.sortBy(unsorted_array, (row: DisplayTableData) =>
                 is_number_string_date(
@@ -594,12 +591,10 @@ export class _DisplayTable extends React.Component<
                             {(() => {
                               const col_formatter =
                                 col_configs_with_defaults[col_key].formatter;
-                              const col_formatter_is_string = _.isString(
-                                col_formatter
-                              );
-                              const col_formatter_is_fn = _.isFunction(
-                                col_formatter
-                              );
+                              const col_formatter_is_string =
+                                _.isString(col_formatter);
+                              const col_formatter_is_fn =
+                                _.isFunction(col_formatter);
                               if (col_formatter) {
                                 if (col_formatter_is_string) {
                                   return (
@@ -642,9 +637,8 @@ export class _DisplayTable extends React.Component<
                               const col_formatter =
                                 col_configs_with_defaults[col_key].formatter;
                               if (col_formatter) {
-                                const is_formatter_string = _.isString(
-                                  col_formatter
-                                );
+                                const is_formatter_string =
+                                  _.isString(col_formatter);
                                 if (is_formatter_string) {
                                   return (
                                     <Format
@@ -695,9 +689,8 @@ interface DisplayTableProps extends _DisplayTableProps {
 export class DisplayTable extends React.Component<DisplayTableProps> {
   render() {
     const { data, show_search, show_sort, column_configs } = this.props;
-    const col_configs_with_defaults = get_col_configs_with_defaults(
-      column_configs
-    );
+    const col_configs_with_defaults =
+      get_col_configs_with_defaults(column_configs);
 
     const showing_sort = show_sort || _.size(data) > 2;
     const showing_search = show_search || _.size(data) > 5;

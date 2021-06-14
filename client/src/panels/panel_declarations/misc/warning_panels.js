@@ -262,17 +262,16 @@ const depts_with_late_actual_resources = _.chain(result_docs_in_tabling_order)
   .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs)
   .uniq()
   .value();
-export const declare_late_actual_resources_panel = get_declare_late_resources_panel(
-  "actual",
-  depts_with_late_actual_resources
-);
+export const declare_late_actual_resources_panel =
+  get_declare_late_resources_panel("actual", depts_with_late_actual_resources);
 
 const depts_with_late_planned_resources = _.chain(result_docs_in_tabling_order)
   .filter(({ doc_type }) => doc_type === "dp")
   .last()
   .get("late_resources_orgs")
   .value();
-export const declare_late_planned_resources_panel = get_declare_late_resources_panel(
-  "planned",
-  depts_with_late_planned_resources
-);
+export const declare_late_planned_resources_panel =
+  get_declare_late_resources_panel(
+    "planned",
+    depts_with_late_planned_resources
+  );

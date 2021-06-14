@@ -127,10 +127,8 @@ export const declare_employee_executive_level_panel = () =>
               sum_exec
             );
 
-            const {
-              first_active_year_index,
-              last_active_year_index,
-            } = common_text_args;
+            const { first_active_year_index, last_active_year_index } =
+              common_text_args;
 
             const avg_num_employees =
               _.reduce(

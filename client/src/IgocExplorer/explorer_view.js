@@ -145,31 +145,32 @@ const get_children_grouper = createSelector(
 
 const get_non_col_content_func = createSelector(
   _.property("grouping"),
-  (grouping) => ({ node }) => {
-    const {
-      data: { subject },
-    } = node;
+  (grouping) =>
+    ({ node }) => {
+      const {
+        data: { subject },
+      } = node;
 
-    return (
-      <div>
-        {subject && (
-          <div>
-            <SubjectFields {...{ grouping, subject }} />
-          </div>
-        )}
-        {subject && (
-          <div className="ExplorerNode__BRLinkContainer">
-            <a
-              className="btn btn-xs btn-ib-primary"
-              href={infograph_href_template(subject)}
-            >
-              <TM k="see_infographic" />
-            </a>
-          </div>
-        )}
-      </div>
-    );
-  }
+      return (
+        <div>
+          {subject && (
+            <div>
+              <SubjectFields {...{ grouping, subject }} />
+            </div>
+          )}
+          {subject && (
+            <div className="ExplorerNode__BRLinkContainer">
+              <a
+                className="btn btn-xs btn-ib-primary"
+                href={infograph_href_template(subject)}
+              >
+                <TM k="see_infographic" />
+              </a>
+            </div>
+          )}
+        </div>
+      );
+    }
 );
 
 class ExplorerForIgoc extends React.Component {
@@ -232,8 +233,9 @@ class ExplorerForIgoc extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    const org_count = _.countBy(flat_nodes, (node) => _.isEmpty(node.children))
-      .true;
+    const org_count = _.countBy(flat_nodes, (node) =>
+      _.isEmpty(node.children)
+    ).true;
 
     const explorer_config = {
       children_grouper: get_children_grouper({ grouping }),

@@ -67,9 +67,10 @@ export default function (model_singleton) {
       const codes_in_map_view = _.uniqBy(filtered_records, "location_code").map(
         (rec) => rec.location_code
       );
-      const filtered_transfer_payment_records = all_transfer_payment_records.filter(
-        (rec) => codes_in_map_view.includes(rec.location_code)
-      );
+      const filtered_transfer_payment_records =
+        all_transfer_payment_records.filter((rec) =>
+          codes_in_map_view.includes(rec.location_code)
+        );
       return filtered_transfer_payment_records;
     }
   }

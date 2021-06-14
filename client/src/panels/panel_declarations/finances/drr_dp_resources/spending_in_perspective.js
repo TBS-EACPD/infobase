@@ -38,9 +38,8 @@ class SpendInTagPerspective extends React.Component {
 
     const { active_tag_index } = this.state;
 
-    const { tag: active_tag, amount: active_tag_exp } = tag_exps[
-      active_tag_index
-    ];
+    const { tag: active_tag, amount: active_tag_exp } =
+      tag_exps[active_tag_index];
 
     const data = [
       {

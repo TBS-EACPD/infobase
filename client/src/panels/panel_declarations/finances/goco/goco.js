@@ -41,12 +41,8 @@ class Goco extends React.Component {
     };
   }
   render() {
-    const {
-      child_graph,
-      clicked_spending,
-      clicked_fte,
-      clicked_id,
-    } = this.state;
+    const { child_graph, clicked_spending, clicked_fte, clicked_id } =
+      this.state;
     const programSpending = Table.lookup("programSpending");
     const programFtes = Table.lookup("programFtes");
     const spend_col = "{{pa_last_year}}exp";

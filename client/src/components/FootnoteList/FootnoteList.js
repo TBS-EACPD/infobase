@@ -154,14 +154,11 @@ const FootnoteList = ({ footnotes }) => {
     is_real_footnote
   );
 
-  const {
-    true: class_wide_footnotes,
-    false: instance_specific_footnotes,
-  } = _.groupBy(real_footnotes, ({ subject }) => subject_is_class(subject));
+  const { true: class_wide_footnotes, false: instance_specific_footnotes } =
+    _.groupBy(real_footnotes, ({ subject }) => subject_is_class(subject));
 
-  const class_footnotes_grouped_and_sorted = group_and_sort_footnotes(
-    class_wide_footnotes
-  );
+  const class_footnotes_grouped_and_sorted =
+    group_and_sort_footnotes(class_wide_footnotes);
   const instance_footnotes_grouped_and_sorted = group_and_sort_footnotes(
     instance_specific_footnotes
   );

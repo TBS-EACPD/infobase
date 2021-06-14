@@ -24,9 +24,8 @@ import { IconTable } from "src/icons/icons";
 import graph_text from "./wrapped_nivo_common.yaml";
 import "./wrapped_nivo_common.scss";
 
-const { text_maker: nivo_common_text_maker } = create_text_maker_component(
-  graph_text
-);
+const { text_maker: nivo_common_text_maker } =
+  create_text_maker_component(graph_text);
 const create_text_maker_component_with_nivo_common = (additional_text) =>
   create_text_maker_component([graph_text, additional_text]);
 
