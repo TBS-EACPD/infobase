@@ -476,6 +476,7 @@ export default async function ({ models }) {
         .value(),
     }))
     .value();
+
   return await Promise.all([
     ServiceReport.insertMany(service_report_rows),
     StandardReport.insertMany(standard_report_rows),
