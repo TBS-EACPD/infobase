@@ -79,16 +79,11 @@ const Template = (args) => {
   );
 };
 
-const aria_label = {
-  en: "English",
-  fr: "Francais",
-};
-
 export const Basic = Template.bind({});
 Basic.args = {
   // text
-  children: "Focused Modal",
-  aria_label,
+  children: <div>Focused Modal</div>,
+  aria_label: "",
 
   // booleans
   mounted: false,

@@ -16,7 +16,7 @@ const Template = (args) => {
 const svg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="-700 50 2000 2000"
+    viewBox="-700 -100 2000 2000"
     onClick={() => console.log("Clicked!")}
   >
     <path
