@@ -24,4 +24,4 @@ fi
 
 
 # run prettier check
-npm run check_format .
+npm run prettier_check .
