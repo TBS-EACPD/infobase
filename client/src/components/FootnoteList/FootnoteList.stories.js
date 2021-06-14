@@ -21,7 +21,7 @@ const footnotes = [
     text: "text1",
     year1: "",
     year2: "",
-    topic_keys: 1,
+    topic_keys: null,
     subject: {
       name: "name1",
       plural: "plural1",
@@ -31,7 +31,7 @@ const footnotes = [
     text: "text2",
     year1: "",
     year2: "",
-    topic_keys: 2,
+    topic_keys: null,
     subject: {
       name: "name2",
       plural: "plural2",
