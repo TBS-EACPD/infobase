@@ -15,12 +15,12 @@ export default {
 
 const Template = (args) => <FootnoteList {...args} />;
 
-// having issues with inputing year1 and year2 values
+// having issues with inputing year1 and year2 values, seems to be a textmaker handlebar issue
 const footnotes = [
   {
     text: "text1",
-    year1: "2002",
-    year2: "2003",
+    year1: "",
+    year2: "",
     topic_keys: 1,
     subject: {
       name: "name1",
