@@ -19,8 +19,6 @@ client/browser-tests/temp-route-tests-*
 # Prettier seems to want to format everything, just being defensive...
 *.yaml
 *.yml
-*.scss
-*.css
 *.html
 *.json
 *.graphql
