@@ -1,7 +1,7 @@
-@import './common-variables';
+@import "./common-variables";
 
 svg {
- overflow : hidden;
+  overflow: hidden;
 }
 
 div.tick,
@@ -10,7 +10,6 @@ div.tick,
   font-size: 85%;
   font-weight: $mediumFontWeight;
 }
-
 
 .axis > path,
 .axis > line {
@@ -28,19 +27,18 @@ div.tick,
   fill: $textColor;
 }
 
-
 .tick {
   font-size: 12px;
   font-weight: $mediumFontWeight;
 }
 
 .tick > text {
-  font-size: 12px!important;
+  font-size: 12px !important;
   font-weight: $mediumFontWeight;
 }
 
 .axis-label {
-  font-size: 13px!important;
+  font-size: 13px !important;
   font-weight: $mediumFontWeight;
   text-anchor: start;
 }

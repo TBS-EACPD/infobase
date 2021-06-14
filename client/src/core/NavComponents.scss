@@ -1,9 +1,9 @@
 @import "src/common_css/common-variables";
 
-
 a.nav-item {
   color: $textColor !important;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: $tertiaryColor !important;
     text-decoration: none;
   }

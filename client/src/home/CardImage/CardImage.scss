@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 /* top-img-card 
 
@@ -27,7 +27,7 @@
   text-align: center !important;
   padding: 10px;
 
-  @media(max-width: $maxMediumDevice) {
+  @media (max-width: $maxMediumDevice) {
     min-height: 275px;
     padding: 0px;
   }
@@ -35,11 +35,11 @@
 
 .top-img-card__top {
   padding: 20px;
-  @media(max-width: $maxSmallDevice) {
+  @media (max-width: $maxSmallDevice) {
     padding: 0px;
     height: 100px;
   }
-  @media(min-width: $minSmallDevice) {
+  @media (min-width: $minSmallDevice) {
     height: 150px;
     width: 100%;
   }
@@ -66,8 +66,9 @@
   color: $textColor;
 }
 
-.top-img-card-container[href]{
-  &:hover, &:focus {
+.top-img-card-container[href] {
+  &:hover,
+  &:focus {
     & > .top-img-card {
       background-color: lighten($tertiaryColor, 30%) !important;
     }

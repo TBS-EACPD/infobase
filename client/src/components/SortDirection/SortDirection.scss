@@ -1,10 +1,15 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .SortIndicator {
   @include unstyled-button;
-  background-color: rgba(0, 0, 0, 0); /* IE issue, doesn't inherit background color properly */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /* IE issue, doesn't inherit background color properly */
 
   &:focus {
-    border: 1px dotted white;   
+    border: 1px dotted white;
   }
 }

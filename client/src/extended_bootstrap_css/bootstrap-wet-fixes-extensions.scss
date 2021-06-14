@@ -5,7 +5,8 @@ html {
   font-size: 10px;
   -webkit-tap-highlight-color: transparent;
   -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%; }
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -13,7 +14,8 @@ body {
   line-height: 1.4375;
   color: $textColor;
   background-color: $backgroundColor;
-  margin: 0; }
+  margin: 0;
+}
 
 h1 {
   border-bottom: 3px solid $highlightColor;
@@ -42,8 +44,7 @@ hr {
   opacity: 1;
   font-size: 14px !important;
 
-  &[data-placement=bottom]{
-
+  &[data-placement="bottom"] {
     & > .tippy-arrow {
       top: -6px;
       border-width: 0px 6px 6px 6px;
@@ -58,7 +59,7 @@ hr {
     }
   }
 
-  &[data-placement=top] {
+  &[data-placement="top"] {
     top: -5px !important;
 
     & > .tippy-arrow {
@@ -86,26 +87,33 @@ hr {
   padding-top: 10px;
   line-height: 1.4375 !important;
 
-  @media (min-width:$minExtraLargeDevice){
+  @media (min-width: $minExtraLargeDevice) {
     max-width: 600px !important;
     line-height: 1.6em;
   }
-  @media (min-width:$minLargeDevice) and (max-width: $maxExtraLargeDevice) { max-width: 60vw !important }
-  @media (max-width:$maxLargeDevice){ max-width: 90vw !important }
+  @media (min-width: $minLargeDevice) and (max-width: $maxExtraLargeDevice) {
+    max-width: 60vw !important;
+  }
+  @media (max-width: $maxLargeDevice) {
+    max-width: 90vw !important;
+  }
 
-  & a, a:visited {
+  & a,
+  a:visited {
     color: $buttonSecondaryColor;
     text-decoration: none;
   }
-  & a:hover,a:focus {
+  & a:hover,
+  a:focus {
     color: $buttonPrimaryColor;
     text-decoration: underline;
   }
 }
 
-.pop.in, .fade.in {
+.pop.in,
+.fade.in {
   opacity: 1;
-  visibility: visible; 
+  visibility: visible;
 }
 
 .glossary-tippy-link,
@@ -162,11 +170,10 @@ legend {
 }
 
 .wb-sl {
-  z-index: 0 !important; 
+  z-index: 0 !important;
 }
 
-
-@media(max-width: $maxExtraLargeDevice) {
+@media (max-width: $maxExtraLargeDevice) {
   main.container {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -179,7 +186,7 @@ legend {
 }
 
 div#app:focus {
-  outline: none!important;
+  outline: none !important;
 }
 
 /* fonts */
@@ -193,7 +200,7 @@ h2 {
   margin-top: 20px;
 }
 #app {
-  font-size: 90%
+  font-size: 90%;
 }
 
 .font-large {
@@ -212,7 +219,6 @@ h2 {
   font-size: 90%;
 }
 
-
 .uppercase {
   text-transform: uppercase;
 }
@@ -225,7 +231,11 @@ h2 {
 }
 
 .gradient {
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.75));
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.75)
+  );
 }
 table.border,
 table.border > tbody > tr > td {
@@ -236,28 +246,26 @@ table.border > tbody > tr > td {
 }
 .right-border {
   border-right: 1px solid $separatorColor;
-}                   
+}
 .input-sm {
-height: 25px;
-font-size: 12px;
-line-height: 1;
+  height: 25px;
+  font-size: 12px;
+  line-height: 1;
 }
 div.label {
   border: none;
   line-height: 1.5;
-  color: $textColor
+  color: $textColor;
 }
 .border-bottom {
- border-bottom: 1px solid $separatorColor;
+  border-bottom: 1px solid $separatorColor;
 }
 .paddng-bttm-md {
   padding-bottom: 10px;
 }
 .line {
-  width : 100%
+  width: 100%;
 }
-
-
 
 .huge-panel-text {
   font-size: 1.8em;
@@ -275,7 +283,7 @@ div.label {
   font-size: 0.8em;
   line-height: normal;
 }
-@media(min-width: $minMediumDevice) {
+@media (min-width: $minMediumDevice) {
   .huge-panel-text {
     font-size: 1.8em;
     line-height: 2.2em;
@@ -308,7 +316,7 @@ div.label {
   color: $primaryColor !important;
   border-radius: $standardBorderRadius;
 
-  &--with-icon{
+  &--with-icon {
     @extend .btn-ib-light--reversed;
     border-color: $primaryColor;
     path {
@@ -324,7 +332,7 @@ div.label {
   border: 2px solid $backgroundColor;
   color: $backgroundColor;
   border-radius: $standardBorderRadius;
-  
+
   &:focus,
   &:active,
   &:hover {
@@ -332,7 +340,7 @@ div.label {
     color: $primaryColor !important;
   }
 
-  &--with-icon{
+  &--with-icon {
     @extend .btn-ib-light;
     path {
       fill: $backgroundColor;
@@ -342,30 +350,30 @@ div.label {
     &:focus,
     &:active,
     &:hover {
-      border-color: $primaryColor;;
+      border-color: $primaryColor;
       path {
-      fill: $primaryColor;
-      stroke: $primaryColor;
-    }
+        fill: $primaryColor;
+        stroke: $primaryColor;
+      }
     }
   }
 }
 a.btn-ib-primary {
   color: inherit;
 }
-.btn-ib-primary { 
-   background-color: $backgroundColor;
-   border: 2px solid $buttonPrimaryColor;
-   color: $buttonPrimaryColor !important;
-   border-radius: $standardBorderRadius;
+.btn-ib-primary {
+  background-color: $backgroundColor;
+  border: 2px solid $buttonPrimaryColor;
+  color: $buttonPrimaryColor !important;
+  border-radius: $standardBorderRadius;
 }
 .btn-ib-primary:hover,
 .btn-ib-primary:active,
-.btn-ib-primary:focus { 
+.btn-ib-primary:focus {
   background-color: $buttonPrimaryColor;
   color: $backgroundColor !important;
 }
-.btn-ib-primary.btn-ib-primary--selected { 
+.btn-ib-primary.btn-ib-primary--selected {
   background-color: $buttonPrimaryColor;
   color: $backgroundColor !important;
 }
@@ -385,7 +393,6 @@ a.btn-ib-primary {
   border-bottom-right-radius: $standardBorderRadius;
 }
 
-
 .btn-ib-toggle {
   border: 2px solid $buttonPrimaryColor;
   border-radius: $standardBorderRadius;
@@ -397,7 +404,6 @@ a.btn-ib-primary {
 .btn-ib-toggle.btn-ib-toggle--off {
   background-color: $backgroundColor;
   color: $buttonPrimaryColor;
-
 }
 
 .list-group {
@@ -415,12 +421,12 @@ a.btn-ib-primary {
 li.list-group-item {
   border-width: 1px 0px 1px 0px;
   &:first-child {
-    border-top-color: rgba(0,0,0,0);
+    border-top-color: rgba(0, 0, 0, 0);
     border-top-left-radius: $standardBorderRadius;
     border-top-right-radius: $standardBorderRadius;
   }
   &:last-child {
-    border-bottom-color: rgba(0,0,0,0);
+    border-bottom-color: rgba(0, 0, 0, 0);
     border-bottom-left-radius: $standardBorderRadius;
     border-bottom-right-radius: $standardBorderRadius;
   }
@@ -435,25 +441,25 @@ li.list-group-item {
 }
 
 /* for table striped header */
-.table-striped>tbody>tr:nth-child(odd) {
-  background-color:lighten($tertiaryColor, 40%);
+.table-striped > tbody > tr:nth-child(odd) {
+  background-color: lighten($tertiaryColor, 40%);
 }
 
-.table-striped>tbody>tr:nth-child(even) {
+.table-striped > tbody > tr:nth-child(even) {
   background-color: lighten($tertiaryColor, 20%);
 }
 
 /* for default table header */
-.table>thead>tr>th {
+.table > thead > tr > th {
   border-bottom: 1px solid $separatorColor;
 }
 
-
-ol, ul {
+ol,
+ul {
   margin-bottom: 12px;
 }
 
-li.checkbox > label{
+li.checkbox > label {
   font-weight: $mediumFontWeight;
 }
 
@@ -470,7 +476,7 @@ ol.breadcrumb {
 }
 
 dl.dl-horizontal.dl-long-terms {
-  @media(min-width:$minMediumDevice){
+  @media (min-width: $minMediumDevice) {
     > dt {
       // default set by bootstrap is 160px
       width: 250px;
@@ -483,7 +489,7 @@ dl.dl-horizontal.dl-long-terms {
 }
 
 dl.dl-horizontal.dl-really-long-terms {
-  @media(min-width:$minMediumDevice){
+  @media (min-width: $minMediumDevice) {
     > dt {
       // default set by bootstrap is 160px
       width: 300px;
@@ -514,57 +520,139 @@ dl.dl-no-bold-dts {
   content: "" !important;
 }
 
-.alert--is-bordered { 
-border-width: 2px 2px 2px 8px;
-border-bottom-right-radius: $standardBorderRadius;
-border-top-right-radius: $standardBorderRadius;
+.alert--is-bordered {
+  border-width: 2px 2px 2px 8px;
+  border-bottom-right-radius: $standardBorderRadius;
+  border-top-right-radius: $standardBorderRadius;
 }
-.alert { 
-background-color: $backgroundColor;
+.alert {
+  background-color: $backgroundColor;
 }
 
-.label-default, .label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active, .label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active, .label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, .label-info, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .alert-info, .label-warning, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .alert-warning, .label-danger, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active, .alert-danger {
-  color: $textColor; }
+.label-default,
+.label-default[href]:hover,
+.label-default[href]:focus,
+.label-default[href]:active,
+.label-primary,
+.label-primary[href]:hover,
+.label-primary[href]:focus,
+.label-primary[href]:active,
+.label-success,
+.label-success[href]:hover,
+.label-success[href]:focus,
+.label-success[href]:active,
+.alert-success,
+.label-info,
+.label-info[href]:hover,
+.label-info[href]:focus,
+.label-info[href]:active,
+.alert-info,
+.label-warning,
+.label-warning[href]:hover,
+.label-warning[href]:focus,
+.label-warning[href]:active,
+.alert-warning,
+.label-danger,
+.label-danger[href]:hover,
+.label-danger[href]:focus,
+.label-danger[href]:active,
+.alert-danger {
+  color: $textColor;
+}
 
-.label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active {
-  text-decoration: underline; }
+.label-default[href]:hover,
+.label-default[href]:focus,
+.label-default[href]:active,
+.label-primary[href]:hover,
+.label-primary[href]:focus,
+.label-primary[href]:active,
+.label-success[href]:hover,
+.label-success[href]:focus,
+.label-success[href]:active,
+.label-info[href]:hover,
+.label-info[href]:focus,
+.label-info[href]:active,
+.label-warning[href]:hover,
+.label-warning[href]:focus,
+.label-warning[href]:active,
+.label-danger[href]:hover,
+.label-danger[href]:focus,
+.label-danger[href]:active {
+  text-decoration: underline;
+}
 
-.label-default, .label-default[href]:hover, .label-default[href]:focus, .label-default[href]:active {
+.label-default,
+.label-default[href]:hover,
+.label-default[href]:focus,
+.label-default[href]:active {
   background: $backgroundColor;
-  border-color: $separatorColor; }
+  border-color: $separatorColor;
+}
 
-.label-primary, .label-primary[href]:hover, .label-primary[href]:focus, .label-primary[href]:active {
+.label-primary,
+.label-primary[href]:hover,
+.label-primary[href]:focus,
+.label-primary[href]:active {
   background: $backgroundColor;
-  border-color: $primaryColor; }
+  border-color: $primaryColor;
+}
 
-.label-success, .label-success[href]:hover, .label-success[href]:focus, .label-success[href]:active, .alert-success, details.alert.alert-success, details.alert[open].alert-success {
+.label-success,
+.label-success[href]:hover,
+.label-success[href]:focus,
+.label-success[href]:active,
+.alert-success,
+details.alert.alert-success,
+details.alert[open].alert-success {
   background: $successLightColor;
-  border-color: $successDarkColor; }
+  border-color: $successDarkColor;
+}
 
-.label-info, .label-info[href]:hover, .label-info[href]:focus, .label-info[href]:active, .alert-info, details.alert.alert-info, details.alert[open].alert-info {
+.label-info,
+.label-info[href]:hover,
+.label-info[href]:focus,
+.label-info[href]:active,
+.alert-info,
+details.alert.alert-info,
+details.alert[open].alert-info {
   background: $infoLightColor;
-  border-color: $infoDarkColor; }
+  border-color: $infoDarkColor;
+}
 
-.label-warning, .label-warning[href]:hover, .label-warning[href]:focus, .label-warning[href]:active, .alert-warning, details.alert.alert-warning, details.alert[open].alert-warning {
+.label-warning,
+.label-warning[href]:hover,
+.label-warning[href]:focus,
+.label-warning[href]:active,
+.alert-warning,
+details.alert.alert-warning,
+details.alert[open].alert-warning {
   background: $warnLightColor;
-  border-color: $warnDarkColor; }
+  border-color: $warnDarkColor;
+}
 
-.label-danger, .label-danger[href]:hover, .label-danger[href]:focus, .label-danger[href]:active, .alert-danger, details.alert.alert-danger, details.alert[open].alert-danger {
+.label-danger,
+.label-danger[href]:hover,
+.label-danger[href]:focus,
+.label-danger[href]:active,
+.alert-danger,
+details.alert.alert-danger,
+details.alert[open].alert-danger {
   background: $backgroundColor;
-  border-color: $failDarkColor; }
+  border-color: $failDarkColor;
+}
 
 .card {
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: none; 
- }
-
+  border: none;
+}
 
 // Link styles from flat redesign
 a {
   text-decoration: none;
   color: $linkColor;
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     color: $linkFocusColor;
   }
   &:visited {
@@ -591,24 +679,27 @@ ol.breadcrumb > li:last-child > :last-child {
   border-radius: $standardBorderRadius;
   box-shadow: none !important;
   opacity: 1;
-  background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
+  background: none 0% 0% / auto repeat scroll padding-box border-box
+    rgb(255, 255, 255);
   background-color: lighten($tertiaryColor, 37%);
 }
 .form-control.input-lg:focus {
   background-color: $backgroundColor;
 }
 
-
-#app, .app-font {
-  font-family: 'Roboto', sans-serif;
+#app,
+.app-font {
+  font-family: "Roboto", sans-serif;
   font-weight: $mediumFontWeight;
 }
 
-#wb-bc, #breadcrumb-trail, .easy-access, #wb-lng {
-  font-family: 'Roboto', sans-serif;
+#wb-bc,
+#breadcrumb-trail,
+.easy-access,
+#wb-lng {
+  font-family: "Roboto", sans-serif;
   font-weight: $lightFontWeight;
 }
-
 
 .form-control {
   max-width: 100%;
@@ -621,7 +712,6 @@ ol.breadcrumb > li:last-child > :last-child {
     font-size: 18px;
   }
 }
-
 
 #wb-lng {
   display: block;
@@ -642,7 +732,6 @@ ol.breadcrumb > li:last-child > :last-child {
     font-size: 1.5rem;
   }
 }
-
 
 #wb-bc {
   background-color: $backgroundColor !important;

@@ -2,108 +2,107 @@
 
 /* Panel extensions */
 .panel {
-    box-shadow: 0 0 transparent;
-  }
-  .panel.panel-overflow {
-    overflow: visible;
-  
-    /* .panel has a $standardBorderRadius border, so when overflow is visible we need to correct for the corners of the inside of the panel */
-    $adjustmentBorderRadius: $standardBorderRadius*0.8;
-    & > .panel-heading { 
-      border-top-left-radius: $adjustmentBorderRadius;
-      border-top-right-radius: $adjustmentBorderRadius;
-    }
-    & > .panel-body {
-      border-bottom-left-radius: $adjustmentBorderRadius;
-      border-bottom-right-radius: $adjustmentBorderRadius;
-    }
-  }
-  .panel-body > .row > .source {
-    opacity: 0.8;
-  }
-  
-  .panel-title {
-    margin: -0.25em 0 !important;
-    font-size: 18px;
-  }
-  
-  .panel-sub-title {
-    margin-top: 3px;
-    font-weight: 400;
-    opacity: 0.8;
-  }
-  
+  box-shadow: 0 0 transparent;
+}
+.panel.panel-overflow {
+  overflow: visible;
 
-  .panel-body {
-    padding: 10px;
+  /* .panel has a $standardBorderRadius border, so when overflow is visible we need to correct for the corners of the inside of the panel */
+  $adjustmentBorderRadius: $standardBorderRadius * 0.8;
+  & > .panel-heading {
+    border-top-left-radius: $adjustmentBorderRadius;
+    border-top-right-radius: $adjustmentBorderRadius;
+  }
+  & > .panel-body {
+    border-bottom-left-radius: $adjustmentBorderRadius;
+    border-bottom-right-radius: $adjustmentBorderRadius;
+  }
+}
+.panel-body > .row > .source {
+  opacity: 0.8;
+}
 
-    /* 
+.panel-title {
+  margin: -0.25em 0 !important;
+  font-size: 18px;
+}
+
+.panel-sub-title {
+  margin-top: 3px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.panel-body {
+  padding: 10px;
+
+  /* 
       Fixes Safari-specific bug, does nothing on other browsers. 
       Only needed on larger screens. 
     */
-    @media (min-width:$minExtraLargeDevice){
-      content: none!important;
-    }
+  @media (min-width: $minExtraLargeDevice) {
+    content: none !important;
   }
-  
-  .panel-heading {
-    @media (min-width:$minExtraLargeDevice){
-      padding: 15px 15px 12px; /* bootstrap default is 10 15 */
-    }
-    @media (max-width:$maxExtraLargeDevice){
-      /* on mobile, we need way less padding */
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-right: 1rem;
-      padding-left: 1rem;
-    }
-  }
-  
-  .panel.panel-info.panel-flat {
-    margin-bottom: 23px;
-    background-color: $backgroundColor;
-    border-radius: $standardBorderRadius;
-    border: 2px solid $primaryColor;
-  }
+}
 
-  .panel.panel-info.panel-flat > .panel-heading {
-    color: $backgroundColor;
-    background-color: $primaryColor;
+.panel-heading {
+  @media (min-width: $minExtraLargeDevice) {
+    padding: 15px 15px 12px; /* bootstrap default is 10 15 */
   }
-  
-  section.panel {
-    background-color: $primaryColor;
-    border-radius: $standardBorderRadius;
-    border: 2px solid $primaryColor;
-    overflow:hidden
+  @media (max-width: $maxExtraLargeDevice) {
+    /* on mobile, we need way less padding */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
-  
-  section.panel  > .panel-heading {
-    color: $backgroundColor;
-    background-color: inherit;
-    border: none;
-    display: inline-flex;
-    width: 100%;
-  }
-  
-  section.panel > .panel-body {
-    background-color: $backgroundColor;
-  }
+}
 
-  .panel-heading-utils {
-    width: 20px;
-    height: 20px;
-  }
-  button.panel-heading-utils {
-    background-color: Transparent;
-    border: none;
-    margin-right: 5px;
-    padding: 0;
+.panel.panel-info.panel-flat {
+  margin-bottom: 23px;
+  background-color: $backgroundColor;
+  border-radius: $standardBorderRadius;
+  border: 2px solid $primaryColor;
+}
 
-    &:active {
-      transform: scale(1.15);
-    }
+.panel.panel-info.panel-flat > .panel-heading {
+  color: $backgroundColor;
+  background-color: $primaryColor;
+}
+
+section.panel {
+  background-color: $primaryColor;
+  border-radius: $standardBorderRadius;
+  border: 2px solid $primaryColor;
+  overflow: hidden;
+}
+
+section.panel > .panel-heading {
+  color: $backgroundColor;
+  background-color: inherit;
+  border: none;
+  display: inline-flex;
+  width: 100%;
+}
+
+section.panel > .panel-body {
+  background-color: $backgroundColor;
+}
+
+.panel-heading-utils {
+  width: 20px;
+  height: 20px;
+}
+button.panel-heading-utils {
+  background-color: Transparent;
+  border: none;
+  margin-right: 5px;
+  padding: 0;
+
+  &:active {
+    transform: scale(1.15);
   }
+}
 
 .panel-separator {
   margin: 20px 60px 20px 60px;

@@ -1,9 +1,9 @@
-@import '../../../common_css/common-variables';
+@import "../../../common_css/common-variables";
 
 .col-container {
   display: flex;
   flex-direction: row;
-  @media (max-width: $maxLargeDevice){
+  @media (max-width: $maxLargeDevice) {
     flex-direction: column;
   }
 }

@@ -1,13 +1,13 @@
 @import "src/common_css/common-variables";
 
 .status-icon-array {
-  @media(max-width: $maxSmallDevice){
+  @media (max-width: $maxSmallDevice) {
     display: flex;
     flex-wrap: wrap;
   }
 }
 
 .indicator-container-container {
-  padding-right:10px;
-  padding-top:10px;
+  padding-right: 10px;
+  padding-top: 10px;
 }

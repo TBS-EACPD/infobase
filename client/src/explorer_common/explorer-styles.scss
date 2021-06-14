@@ -1,7 +1,6 @@
 /* base styles */
 @import "src/common_css/common-variables";
 
-
 /* styles totally outside the explorer */
 .search-clear-container {
   border: 1px solid $separatorColor;
@@ -15,20 +14,17 @@
   border-radius: $standardBorderRadius;
 }
 
-
 .loading-overlay {
-  z-index:50;
-  background-color: rgba($tertiaryColor,0.2);
+  z-index: 50;
+  background-color: rgba($tertiaryColor, 0.2);
   height: 100%;
   width: 100%;
-  position:absolute;
+  position: absolute;
   display: flex;
   flex-direction: row;
-  justify-content : center;
+  justify-content: center;
   align-items: flex-start;
 }
-
-
 
 /* resource-explorer */
 .hierarchy-selection {
@@ -55,10 +51,10 @@
   background-color: lighten($tertiaryColor, 50%);
   color: $textColor;
   padding: 10px;
-  
+
   /* make the <button> act like a div */
-  display: block; 
-  min-width:100%;
+  display: block;
+  min-width: 100%;
   text-align: left;
   border-radius: 0;
 
@@ -69,43 +65,41 @@
 .hierarchy-selection-item.active {
   background-color: lighten($tertiaryColor, 30%);
 }
-.hierarchy-selection-item:not(:last-child){
+.hierarchy-selection-item:not(:last-child) {
   border-bottom: 1px solid $primaryColor;
 }
 
-@media(min-width:$minLargeDevice){
+@media (min-width: $minLargeDevice) {
   .hierarchy-selection-item {
     display: flex;
     align-items: stretch;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     padding: 0;
   }
 
   .hierarchy-selection-item > .hierarchy-selection-item__header,
   .hierarchy-selection-item > .hierarchy-selection-item__description {
     padding: 15px 10px 15px 25px;
-
   }
 
   .hierarchy-selection-item > .hierarchy-selection-item__header {
     flex: 0 0 30%;
     width: 100%;
-    max-width:100%;
+    max-width: 100%;
     font-size: 1.2em;
     border-right: 1px solid $primaryColor;
   }
 
   .hierarchy-selection-item > .hierarchy-selection-item__description {
     width: 100%;
-    max-width:100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 }
 
-
-@media(max-width:$maxLargeDevice){
+@media (max-width: $maxLargeDevice) {
   .hierarchy-selection-items {
     display: flex;
     flex-direction: column;
@@ -120,7 +114,6 @@
     font-size: 1.2em;
     font-weight: $heavyFontWeight;
   }
-
 }
 
 .hierarchy-selection-item:last-child {

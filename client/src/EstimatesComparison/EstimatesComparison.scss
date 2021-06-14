@@ -1,28 +1,27 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .LastYearEstimatesSection {
-    border-top: 1px solid $separatorColor;
-    font-size: 0.8em;
+  border-top: 1px solid $separatorColor;
+  font-size: 0.8em;
   & > div {
     max-width: 650px;
   }
 }
-
 
 .DiffFilterViewAlert {
   font-size: 1.2em;
   text-align: center;
   font-weight: bold;
   border-radius: $standardBorderRadius;
-  background-color: rgba(0,0,0,0.15);
-  padding: 10px 0; 
-  margin-bottom:5px;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+  margin-bottom: 5px;
 }
 
 .estimates-checkbox-row {
   display: flex;
   flex-direction: row;
-  @media (max-width: $maxLargeDevice){
+  @media (max-width: $maxLargeDevice) {
     flex-direction: column;
   }
   justify-content: space-evenly;

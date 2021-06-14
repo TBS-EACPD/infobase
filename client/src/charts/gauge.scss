@@ -17,7 +17,7 @@
   right: 20%;
   bottom: 0;
   top: 40%;
-  background-color: lighten($tertiaryColor, 37%);;
+  background-color: lighten($tertiaryColor, 37%);
   border-radius: 50%/100% 100% 0 0;
 }
 .gauge_percentage {
@@ -25,7 +25,7 @@
   top: -1px;
   right: -1px;
   bottom: 0;
-  background-color: lighten($tertiaryColor, 30%);;
+  background-color: lighten($tertiaryColor, 30%);
   width: 100%;
   transform-origin: bottom center;
 }

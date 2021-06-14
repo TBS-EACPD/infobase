@@ -1,9 +1,9 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .igoc-checkbox-and-count-row {
   display: flex;
   flex-direction: row;
-  @media (max-width: $maxLargeDevice){
+  @media (max-width: $maxLargeDevice) {
     flex-direction: column;
   }
 

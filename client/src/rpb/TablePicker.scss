@@ -1,14 +1,14 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .item-cloud-row {
   min-height: 300px;
-  margin-bottom: 100px;  
+  margin-bottom: 100px;
   padding: 0;
   margin-left: -5px;
   margin-right: -5px;
 }
 
-@media (min-width: $minLargeDevice) { 
+@media (min-width: $minLargeDevice) {
   .item-cloud-col {
     padding-left: 6px;
     padding-right: 6px;
@@ -18,12 +18,11 @@
   }
 }
 
-@media (max-width: $maxLargeDevice) { 
+@media (max-width: $maxLargeDevice) {
   .item-cloud-col > div > div {
     margin: 10px;
   }
 }
-
 
 .item-card {
   border-width: 2px;
@@ -45,14 +44,13 @@
   padding: 0px;
   margin-bottom: 2px;
   font-weight: $mediumFontWeight;
-  text-align:center;
+  text-align: center;
   color: $textLightColor;
   background-color: $primaryColor;
   border-color: $primaryColor;
   border-radius: $standardBorderRadius $standardBorderRadius 0 0;
   height: fit-content;
 }
-
 
 .item-card > .item-title.active {
   font-weight: $mediumFontWeight;
@@ -68,7 +66,6 @@
   justify-content: space-between;
   min-height: 50px;
   padding-top: 10px;
-
 }
 
 .item-tag-container {
@@ -80,7 +77,6 @@
   width: 110px;
   min-height: 35px;
 }
-
 
 .item-card .item-description {
   padding: 10px;
@@ -135,5 +131,4 @@
   max-height: 1px;
   opacity: 0.01;
   transition: max-height 500ms ease-out, opacity 500ms ease-out;
-
 }

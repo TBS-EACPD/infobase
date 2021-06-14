@@ -25,14 +25,14 @@ li.tabbed-controls__label {
   padding: 5px 20px 3px 20px;
   margin-left: -2px;
   margin-right: 1px;
-  border-top-left-radius: $standardBorderRadius*3;
-  border-top-right-radius: $standardBorderRadius*3;
+  border-top-left-radius: $standardBorderRadius * 3;
+  border-top-right-radius: $standardBorderRadius * 3;
   border: 1px solid change-color($color: $backgroundColor, $alpha: 0.5);
   background-color: $primaryColor;
   transition: background-color 125ms ease, border-radius 250ms ease;
   color: $backgroundColor;
-  height: 28px;	
-  padding-bottom: 200%;	
+  height: 28px;
+  padding-bottom: 200%;
   margin-bottom: -200%;
   cursor: pointer;
 
@@ -45,8 +45,9 @@ li.tabbed-controls__label {
   }
 }
 
-li.tabbed-controls__label:not(.tabbed-controls__label--disabled){
-  &:hover, &:focus {
+li.tabbed-controls__label:not(.tabbed-controls__label--disabled) {
+  &:hover,
+  &:focus {
     @include active-tab-mixin;
   }
 }
@@ -65,8 +66,8 @@ li.tabbed-controls__label--active {
 
 li.tabbed-controls__label--disabled {
   @include disabled-tab-mixin;
-  border-top-left-radius: $standardBorderRadius*3;
-  border-top-right-radius: $standardBorderRadius*3;
+  border-top-left-radius: $standardBorderRadius * 3;
+  border-top-right-radius: $standardBorderRadius * 3;
   cursor: not-allowed;
 
   & > .tabbed-controls__label-text {
@@ -80,7 +81,6 @@ li.tabbed-controls__label--disabled {
   border-top: 1px solid $primaryColor;
 }
 
-
 .tabbed-content {
   margin: 0px -10px;
 }
@@ -92,7 +92,7 @@ li.tabbed-controls__label--disabled {
   padding: 15px 35px 0px 35px;
   background-color: $backgroundColor;
 
-  @media(max-width: $maxLargeDevice){
+  @media (max-width: $maxLargeDevice) {
     padding-right: 0px;
     padding-left: 0px;
   }

@@ -6,28 +6,28 @@
 }
 
 .typeahead__search-bar {
-    display: flex;
-    border: 2px $tertiaryColor solid;
-    border-radius: 1rem;
-    height: 4.5rem;
-    padding: 0 1rem;
-    background: $backgroundColor;
+  display: flex;
+  border: 2px $tertiaryColor solid;
+  border-radius: 1rem;
+  height: 4.5rem;
+  padding: 0 1rem;
+  background: $backgroundColor;
 
-    & > input {
-        width: 100%;
-        font-size: 18px;
-        border: 0;
-        outline: none;
+  & > input {
+    width: 100%;
+    font-size: 18px;
+    border: 0;
+    outline: none;
 
-        &::-ms-clear {
-          display: none;
-          width: 0;
-          height: 0;
-        }
+    &::-ms-clear {
+      display: none;
+      width: 0;
+      height: 0;
     }
+  }
 }
 .typeahead__icon-container {
-  display: flex; 
+  display: flex;
   align-items: center;
 }
 
@@ -44,7 +44,7 @@
   border: 1px solid $separatorColor;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: $standardBorderRadius;
-  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .typeahead__header {
@@ -58,23 +58,23 @@
   border-top: 1px solid $separatorColor;
 }
 
-.typeahead__result {	
-  padding: 3px 20px;	
-  font-size: 1.4em;	
-  line-height: 1.8em;	
-  cursor: pointer;	
+.typeahead__result {
+  padding: 3px 20px;
+  font-size: 1.4em;
+  line-height: 1.8em;
+  cursor: pointer;
   display: block;
   color: $linkColor;
 
-  border-top: 1px solid $separatorColor;	
+  border-top: 1px solid $separatorColor;
 
   &--active,
   &--active,
   &:focus,
   &:hover {
-      background-color: lighten($tertiaryColor, 30%);
-      color: $linkFocusColor;
-      text-decoration: underline;
+    background-color: lighten($tertiaryColor, 30%);
+    color: $linkFocusColor;
+    text-decoration: underline;
   }
 
   & > * {
@@ -82,7 +82,7 @@
     padding: 3px 20px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;	
+    white-space: normal;
   }
 }
 

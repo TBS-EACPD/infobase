@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 $controlsColor: $primaryColor;
 $controlsColorLighter: lighten($controlsColor, 20%);
@@ -20,9 +20,8 @@ $controlsColorLighter: lighten($controlsColor, 20%);
 .filter-table__item:hover,
 .filter-table__item:focus,
 .filter-table__item:active {
-  background-color: lighten( $tertiaryColor, 30% );
+  background-color: lighten($tertiaryColor, 30%);
 }
-
 
 .filter-table__eye {
   height: 10px;
@@ -31,7 +30,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   height: 40px;
   width: 40px;
 
-  @media(max-width: $maxLargeDevice) and (min-width: $minMediumDevice){
+  @media (max-width: $maxLargeDevice) and (min-width: $minMediumDevice) {
     left: -57px;
   }
 }
@@ -47,10 +46,10 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   padding: 7px 0px;
 }
 .filter-table__count {
-  font-size: 3em; 
+  font-size: 3em;
 }
 
-@media(min-width: $minExtraLargeDevice){
+@media (min-width: $minExtraLargeDevice) {
   .filter-table {
     width: 100%;
     margin: 0 auto;
@@ -81,7 +80,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
 }
 
-@media(max-width: $maxExtraLargeDevice){
+@media (max-width: $maxExtraLargeDevice) {
   .filter-table {
     flex-direction: column;
   }
@@ -120,7 +119,7 @@ $controlsColorLighter: lighten($controlsColor, 20%);
   }
 }
 
-@media(max-width: $maxSmallDevice){
+@media (max-width: $maxSmallDevice) {
   .filter-table__item {
     padding: 0px !important;
   }

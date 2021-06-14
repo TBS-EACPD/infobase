@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .labeled-box {
   margin-bottom: 10px;
@@ -24,7 +24,7 @@
   border-radius: 0 $standardBorderRadius $standardBorderRadius 0;
   background-color: $backgroundColor;
   padding: 10px 10px 10px 10px;
-  & > .row{
+  & > .row {
     margin: 0px;
   }
 }
@@ -38,7 +38,7 @@
 .labeled-box-content > div {
   width: 100%;
 }
-@media (min-width: $minLargeDevice){
+@media (min-width: $minLargeDevice) {
   .labeled-box-label {
     width: 18%;
     border-radius: $standardBorderRadius 0px 0px $standardBorderRadius;
@@ -51,7 +51,7 @@
     width: 82%;
   }
 }
-@media (max-width: $maxLargeDevice){
+@media (max-width: $maxLargeDevice) {
   .labeled-box-label {
     width: 100%;
   }

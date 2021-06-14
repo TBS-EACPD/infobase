@@ -1,15 +1,15 @@
 //Constants should be kept up to date with respective def files found in src/core/ folder!
 
 /*color constants*/
-$primaryColor: #26374A;
-$secondaryColor: #2C70C9;
+$primaryColor: #26374a;
+$secondaryColor: #2c70c9;
 $tertiaryColor: #8c949e; /* this one is used lots at varying alpha/darkness levels, should stay grey */
 
 $backgroundColor: #fff;
 $highlightColor: #da3a38;
 $separatorColor: #bbc1c9;
 
-$buttonPrimaryColor: #2C70C9;
+$buttonPrimaryColor: #2c70c9;
 $buttonSecondaryColor: #76a4df;
 
 $textColor: #333;
@@ -23,8 +23,7 @@ $linkVisitedColor: #7834bc;
 
 $highlightPaleColor: #ffa8a8;
 $highlightOrangeColor: #e89a40;
-$highlightDarkColor: #B12320;
-
+$highlightDarkColor: #b12320;
 
 /*media breakpoints, default to min-width queries whenever possible*/
 /*keep ../core/breakpoint_defs in sync with these*/
@@ -48,7 +47,6 @@ $maxMediumDevice: 767.98px;
 $maxLargeDevice: 991.98px;
 $maxExtraLargeDevice: 1199.98px;
 
-
 /* dark and light colours don't have enough contrast between them for text, so don't use them that way! Use black text on light, or (check contrast) white text on dark*/
 $successLightColor: #cbedbd;
 $successDarkColor: #45a64d;
@@ -59,8 +57,7 @@ $warnDarkColor: #fdb84c;
 $infoLightColor: #f2f6fc;
 $infoDarkColor: $buttonPrimaryColor; // setting these to so we don't have too many shades of blue, if the buttons change colour this should be set to a nice "info" blue
 
-
-$fontFamily: 'Roboto', sans-serif;
+$fontFamily: "Roboto", sans-serif;
 $lightFontWeight: 300;
 $mediumFontWeight: 400;
 $heavyFontWeight: 700;
@@ -79,14 +76,18 @@ $standardBorderRadius: 10px;
 @mixin unstyled-list {
   padding-left: 0;
   list-style: none;
-  &> li {
+  & > li {
     padding-left: 0;
     list-style: none;
   }
 }
 @mixin unstyled-link {
-    &, &:link, &:visited, &:hover, &:focus {
-      color: inherit;
-      text-decoration: inherit;
+  &,
+  &:link,
+  &:visited,
+  &:hover,
+  &:focus {
+    color: inherit;
+    text-decoration: inherit;
   }
 }

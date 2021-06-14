@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .skip-to-data {
   color: $textColor;
@@ -8,12 +8,12 @@
   padding: 0;
   border: 0;
 }
-.skip-to-data:focus, .skip-to-data:active {
+.skip-to-data:focus,
+.skip-to-data:active {
   height: auto;
   width: auto;
   overflow: auto;
 }
-
 
 td {
   background-color: inherit;
@@ -41,8 +41,9 @@ td {
   justify-content: center;
   height: 350px;
 }
-.total_color, .total_color * {
-  color: $textLightColor !important
+.total_color,
+.total_color * {
+  color: $textLightColor !important;
 }
 
 table.display-table {
@@ -56,7 +57,8 @@ table.display-table > thead > tr {
   &:not(:last-child) > th {
     border-bottom: none;
   }
-  & > th, td {
+  & > th,
+  td {
     border-top: none;
 
     color: $textLightColor;
@@ -104,6 +106,6 @@ table.display-table:not(.no-total-row) > tbody > tr > td {
   border-right: 1px solid $separatorColor !important;
 }
 
-::placeholder{
+::placeholder {
   font-weight: normal;
 }

@@ -1,6 +1,10 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 /* Styles for height clipped bar graphs */
 .clipped-graph-gradient {
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)) !important;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  ) !important;
 }

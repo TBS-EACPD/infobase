@@ -10,7 +10,7 @@
 }
 
 .infobase-pie.infobase-pie--horizontal {
-  @media (min-width:$minLargeDevice){
+  @media (min-width: $minLargeDevice) {
     flex-direction: row;
     &.infobase-pie--reverse {
       flex-direction: row-reverse;
@@ -18,7 +18,7 @@
 
     justify-content: space-around;
 
-    & > .infobase-pie__graph{
+    & > .infobase-pie__graph {
       flex: 0 1 50%;
     }
     & > .infobase-pie__graph > * {

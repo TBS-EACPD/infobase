@@ -12,7 +12,7 @@
   font-size: 1.2em;
   color: $backgroundColor;
   cursor: pointer;
-  text-align: center; 
+  text-align: center;
 }
 
 .pull-down-accordion-header {
@@ -22,9 +22,10 @@
   & > button {
     @include unstyled-button;
     color: $backgroundColor;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: $tertiaryColor;
     }
   }

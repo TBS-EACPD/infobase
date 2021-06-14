@@ -1,14 +1,14 @@
 /* Adjusts different property sizes 
 of the advanced search for mobile */
 
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .infographic-search-container > div > a.btn {
-  @media(max-width:$maxLargeDevice){
-      display: inline-block;
-      width: auto;
-      padding: 10px;
-      margin-top: 5px;
+  @media (max-width: $maxLargeDevice) {
+    display: inline-block;
+    width: auto;
+    padding: 10px;
+    margin-top: 5px;
   }
 }
 .remove-bullet-points {
@@ -56,26 +56,24 @@ of the advanced search for mobile */
   margin-bottom: 5px;
 }
 
-
-@media(min-width: $minExtraLargeDevice){
-  .super-wide-container-parent{
-    display:flex; 
-    flex-direction:column; 
+@media (min-width: $minExtraLargeDevice) {
+  .super-wide-container-parent {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
 }
 
-@media(min-width: $minExtraLargeDevice){
+@media (min-width: $minExtraLargeDevice) {
   .super-wide-container {
-    width: 90vw; 
+    width: 90vw;
     overflow-x: visible;
   }
 }
 
-@media( min-width: 1600px ){
+@media (min-width: 1600px) {
   .super-wide-container {
-    width: 85vw; 
+    width: 85vw;
     overflow-x: visible;
   }
 }
-
