@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
+import { DropdownMenu } from "src/components/DropdownMenu";
 import { create_text_maker_component } from "src/components/misc_util_components";
-import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboard";
+import { WriteToClipboard } from "src/components/WriteToClipboard";
 
 import { backgroundColor } from "src/core/color_defs";
 import { is_IE } from "src/core/feature_detection";

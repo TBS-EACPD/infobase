@@ -2,8 +2,6 @@ import * as clipboard from "clipboard-polyfill";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { FixedPopover } from "src/components/modals_and_popovers/index";
-
 import { create_text_maker } from "src/models/text";
 
 import { tertiaryColor, textLightColor } from "src/core/color_defs";
@@ -11,6 +9,8 @@ import { tertiaryColor, textLightColor } from "src/core/color_defs";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconCopy } from "src/icons/icons";
+
+import { FixedPopover } from "./modals_and_popovers/index";
 
 import text from "./WriteToClipboard.yaml";
 

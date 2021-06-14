@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
-import { HeaderNotification } from "src/components/HeaderNotification/HeaderNotification";
+import { HeaderNotification } from "src/components/HeaderNotification";
 import { PageDetails } from "src/components/PageDetails";
 import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
 

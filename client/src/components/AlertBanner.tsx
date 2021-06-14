@@ -11,8 +11,7 @@ interface AlertBannerProps {
   style: Object;
 }
 
-export const banner_classes = ["info", "success", "warning", "danger"];
-
+const banner_classes = ["info", "success", "warning", "danger"];
 export const AlertBanner: React.FC<AlertBannerProps> = ({
   children,
   banner_class,

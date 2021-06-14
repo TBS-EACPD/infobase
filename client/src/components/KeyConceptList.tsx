@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { Details } from "src/components/Details/Details";
+import { Details } from "./Details";
 import "./KeyConceptList.scss";
 
 interface KeyConceptListProps {
