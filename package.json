@@ -2,8 +2,8 @@
   "name": "infobase-monorepo",
   "description": "",
   "scripts": {
-    "autoformat": "prettier --write .",
-    "check_format": "prettier --check",
+    "prettier_write": "prettier --write",
+    "prettier_check": "prettier --check",
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
     "infobase_tmux_init": "npm run tmux_env",
