@@ -21,6 +21,8 @@ const footnotes = [
     text: "text1",
     year1: "",
     year2: "",
+
+    // TODO: topic_keys should be an array of strings (text keys from footnote_topics.yaml)
     topic_keys: null,
     subject: {
       name: "name1",
@@ -31,6 +33,8 @@ const footnotes = [
     text: "text2",
     year1: "",
     year2: "",
+
+    // TODO: topic_keys should be an array of strings (text keys from footnote_topics.yaml)
     topic_keys: null,
     subject: {
       name: "name2",
