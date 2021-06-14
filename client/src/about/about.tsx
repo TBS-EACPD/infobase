@@ -4,7 +4,7 @@ import React from "react";
 import { IconGrid } from "src/components/IconGrid/IconGrid";
 
 import { TM } from "src/components/index";
-import { LabeledTable } from "src/components/LabeledTable";
+import { LabeledTable } from "src/components/LabeledTable/LabeledTable";
 
 import { create_text_maker } from "src/models/text";
 

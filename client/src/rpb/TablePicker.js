@@ -1,4 +1,4 @@
-import "src/components/LabeledBox.scss";
+import "src/components/LabeledBox/LabeledBox.scss";
 import classNames from "classnames";
 import { select } from "d3-selection";
 import "d3-transition";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HeaderNotification } from "src/components/HeaderNotification";
+import { HeaderNotification } from "src/components/HeaderNotification/HeaderNotification";
 
 import { trivial_text_maker } from "src/models/text";
 

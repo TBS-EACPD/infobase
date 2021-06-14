@@ -1,20 +1,20 @@
 import React from "react";
 
-import { TM, TMProps } from "./TextMaker";
+import { TM, TMProps } from "src/components/TextMaker";
 
-import "./CardTopImage.scss";
+import "./CardImage.scss";
 
-interface CardTopImageProps {
+interface CardImageProps {
   svg?: string;
   title_key: string;
   text_key: string;
-  link_open_in_new_tab?: boolean;
   link_href: string;
+  link_open_in_new_tab?: boolean;
   text_args: Object;
   tmf: TMProps["tmf"];
 }
 
-const CardTopImage: React.FC<CardTopImageProps> = ({
+const CardImage: React.FC<CardImageProps> = ({
   svg,
   title_key,
   text_key,
@@ -43,4 +43,4 @@ const CardTopImage: React.FC<CardTopImageProps> = ({
   </a>
 );
 
-export { CardTopImage };
+export { CardImage };

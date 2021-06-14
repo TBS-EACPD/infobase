@@ -3,7 +3,6 @@ import React from "react";
 
 import {
   create_text_maker_component,
-  CardTopImage,
   ContainerEscapeHatch,
 } from "src/components/index";
 
@@ -15,6 +14,8 @@ import { IconFlagLine } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";
 import { EverythingSearch } from "src/search/EverythingSearch";
+
+import { CardImage } from "./CardImage/CardImage";
 
 import {
   infographic_link_items,
@@ -153,7 +154,7 @@ export default class Home extends React.Component {
                                   key={ix}
                                   className="col-lg-3 col-md-6 subapp-linkcard"
                                 >
-                                  <CardTopImage
+                                  <CardImage
                                     tmf={home_tm}
                                     svg={svg}
                                     title_key={title_key}

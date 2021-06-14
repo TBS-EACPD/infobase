@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-import { CountdownCircle } from "src/components/CountdownCircle";
+import { CountdownCircle } from "src/components/CountdownCircle/CountdownCircle";
 
 import { trivial_text_maker } from "src/models/text";
 

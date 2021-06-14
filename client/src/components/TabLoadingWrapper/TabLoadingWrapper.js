@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
+import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
 
 const TabLoadingSpinner = () => (
   <div
