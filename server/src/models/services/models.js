@@ -148,7 +148,7 @@ export default function (model_singleton) {
     ...bilingual_str("service_name"), // only for dept, program
     website_visits_count: { type: Number },
   });
-  const GovServiceSummarySchema = mongoose.Schema({
+  const common_service_fields = {
     id: pkey_type(),
     service_general_stats: ServiceGeneralStatsSchema,
     service_type_summary: [ServiceTypeSummarySchema],
@@ -156,40 +156,26 @@ export default function (model_singleton) {
     service_id_methods_summary: [ServiceIdMethodsSummarySchema],
     service_standards_summary: [ServiceStandardsSummarySchema],
     service_fees_summary: [ServiceFeesSummarySchema],
-    service_high_volume_summary: [ServicesHighVolumeSummarySchema],
     top_services_website_visits_summary: [
       TopServicesWebsiteVisitsSummarySchema,
     ],
+  };
+
+  const GovServiceSummarySchema = mongoose.Schema({
+    ...common_service_fields,
+    service_high_volume_summary: [ServicesHighVolumeSummarySchema],
   });
   const OrgServiceSummarySchema = mongoose.Schema({
-    id: pkey_type(),
-    service_general_stats: ServiceGeneralStatsSchema,
-    service_type_summary: [ServiceTypeSummarySchema],
-    service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
-    service_id_methods_summary: [ServiceIdMethodsSummarySchema],
+    ...common_service_fields,
     top_services_application_vol_summary: [
       TopServicesApplicationVolSummarySchema,
     ],
-    top_services_website_visits_summary: [
-      TopServicesWebsiteVisitsSummarySchema,
-    ],
-    service_fees_summary: [ServiceFeesSummarySchema],
-    service_standards_summary: [ServiceStandardsSummarySchema],
   });
   const ProgramServiceSummarySchema = mongoose.Schema({
-    id: pkey_type(),
-    service_general_stats: ServiceGeneralStatsSchema,
-    service_type_summary: [ServiceTypeSummarySchema],
-    service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
-    service_id_methods_summary: [ServiceIdMethodsSummarySchema],
+    ...common_service_fields,
     top_services_application_vol_summary: [
       TopServicesApplicationVolSummarySchema,
     ],
-    top_services_website_visits_summary: [
-      TopServicesWebsiteVisitsSummarySchema,
-    ],
-    service_fees_summary: [ServiceFeesSummarySchema],
-    service_standards_summary: [ServiceStandardsSummarySchema],
   });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
