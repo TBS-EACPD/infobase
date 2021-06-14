@@ -1,14 +1,13 @@
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
-[![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
 
-*(le Français suit)*
+_(le Français suit)_
 
-InfoBase API
-========
+# InfoBase API
 
 GraphQL API for InfoBase data.
 
 ## Table of Contents
+
 - [InfoBase API](#infobase-api)
   - [Table of Contents](#table-of-contents)
   - [Getting started](#getting-started)
@@ -21,10 +20,10 @@ GraphQL API for InfoBase data.
     - [Mongodb Atlas](#mongodb-atlas)
     - [Google Cloud Function](#google-cloud-function)
 
-
 ## Getting started
 
 ### Running the API server locally
+
 1. Install node ^9.0.0, npm ^5.7.1, and mongo
 2. open a shell in `/server`
 3. `npm run mongod`, either background this process or open another shell in `/server` for further steps
@@ -36,37 +35,39 @@ GraphQL API for InfoBase data.
 ## Tests
 
 ### Snapshot tests
+
 Not great, but better than nothing. These tests largely run preconfigured GraphQL queries against the local GraphQL server and ensure that the reponse matches a response snapshot committed in to the repo along side the relevant model. Note that these snapshots use a separate set of testing data found in `../test-data`, meaning that snapshots aren't made stale by generic data updates. On the other hand, the test data must be updated periodically to ensure it contains all important edge cases, after which the testing snapshots need to be regenerated (and the test snapshots should be checked manually to confirm correctness).
 
 Snapshot tests can be run by following the steps in "Running the API server locally" followed by running `npm test`.
 
-
 ## File structure
 
 ### models/
-* models are organized by topic (e.g. finance) in `src/models/`
-* each `src/models/<model_name>/` will contain 
+
+- models are organized by topic (e.g. finance) in `src/models/`
+- each `src/models/<model_name>/` will contain
   1. The model definitions (`models.js`)
   2. Code to populate the models, usually fetching csv strings from `../data/` (`populate.js`)
   3. Schema definitions, both the schema string and the resolvers (`schema.js`)
-    * This is the most complicated part, schema strings can use the `extend` keyword to add fields to other types
-    * resolvers are merged deeply together so no need for special extend keywords
-
+  - This is the most complicated part, schema strings can use the `extend` keyword to add fields to other types
+  - resolvers are merged deeply together so no need for special extend keywords
 
 ## Cloud stuff
 
 ### Mongodb Atlas
+
 In production, we use a MongoDB Atlas hosted database. This has little relevance to the source code, outside of `src/db_utils.js`.
 
 ### Google Cloud Function
+
 The production environment for the express/GraphQL server is a Google Cloud Function. This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 8 because that is what GCFs run.
 
-L'interface de programmation d'applications (API) d'InfoBase du GC
-========
+# L'interface de programmation d'applications (API) d'InfoBase du GC
 
 Une interface de programmation d'applications GraphQL pour les données d'InfoBase du GC.
 
 ## Table des matières
+
 - [L'interface de programmation d'applications (API) d'InfoBase du GC](#linterface-de-programmation-dapplications-api-de-linfobase)
   - [Commencer](#commencer)
     - [Lancer le serveur de l'API](#lancer-le-serveur-de-lapi)
@@ -77,7 +78,7 @@ Une interface de programmation d'applications GraphQL pour les données d'InfoBa
   - [Outils infonuagiques](#outils-infonuagiques)
     - [Mongodb Atlas](#mongodb-atlas-1)
     - [Fonction Google Cloud](#fonction-google-cloud)
-    
+
 ## Commencer
 
 ### Lancer le serveur de l'API
@@ -102,13 +103,10 @@ Vous pouvez lancer les test snapshot par suivre les étapes au-dessus et ensuite
 
 ### fichier models/
 
-* les modèles sont organisés par sujet dans le fichier `src/models/`
-* chaque fichier `src/models/<nom de modèle>/` contient
-  i. Les définitions des modèles (`models.js`)
-  ii. Code qui se populent les modèles par aller chercher des chaînes en forme csv dans le fichier `../data/` (`populate.js`)
-  iii. Les définitions du schéma (la chaînes du schéma et les résolveurs) (`schema.js`)
-    * Ceci est la partie le plus compliqué. Les chaînes du schéma peut utiliser le mot-clé `extend` pour ajouter des champs aux autres types
-    * Les résolveurs sont fusionnés de façon profond, on n'a pas besoin d'utiliser le mot-clé `extend`
+- les modèles sont organisés par sujet dans le fichier `src/models/`
+- chaque fichier `src/models/<nom de modèle>/` contient i. Les définitions des modèles (`models.js`) ii. Code qui se populent les modèles par aller chercher des chaînes en forme csv dans le fichier `../data/` (`populate.js`) iii. Les définitions du schéma (la chaînes du schéma et les résolveurs) (`schema.js`)
+  - Ceci est la partie le plus compliqué. Les chaînes du schéma peut utiliser le mot-clé `extend` pour ajouter des champs aux autres types
+  - Les résolveurs sont fusionnés de façon profond, on n'a pas besoin d'utiliser le mot-clé `extend`
 
 ## Outils infonuagiques
 
@@ -118,4 +116,4 @@ Dans l'environnement de production, on utilise une base de données MongoDB Atla
 
 ### Fonction Google Cloud
 
-L'environnement de production pour le serveur express/GraphQL est une fonction Google Cloud. Celui n'affectait pas beaucoup dans le code, mais quelques optimisations ont été faites et décisions ont été prises avec une environnement sans serveur à l'esprit. 
+L'environnement de production pour le serveur express/GraphQL est une fonction Google Cloud. Celui n'affectait pas beaucoup dans le code, mais quelques optimisations ont été faites et décisions ont été prises avec une environnement sans serveur à l'esprit.

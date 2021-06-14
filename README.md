@@ -1,19 +1,19 @@
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
 
-*(Le Français suit)*
+_(Le Français suit)_
 
 # GC InfoBase Mono-Repo
 
-GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. Since 
-its creation in 2013, GC InfoBase has been recognized as the authoritative source of Government expenditure information by the Parliamentary Budget Officer (PBO) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) Observatory of Public Sector Innovation (OPSI). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
+GC InfoBase is an interactive data-visualization tool, transforming complex federal data into simple visual stories for Canadians. Since its creation in 2013, GC InfoBase has been recognized as the authoritative source of Government expenditure information by the Parliamentary Budget Officer (PBO) and was identified as a public sector innovation by the Organisation for Economic Co-operation and Development (OECD) Observatory of Public Sector Innovation (OPSI). The tool contains years’ worth of federal government data, bringing together information previously scattered across over 500 government reports.
 
 The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html), where our [about page](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#about) contains further details on who we are and what we do.
 
-This repository contains the following projects: 
-  1) GC InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
-  2) GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
-  2) GC InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
-  
+This repository contains the following projects:
+
+1. GC InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
+2. GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
+3. GC InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
+
 See the README.md files in those respective directories for more details on each project.
 
 ## License
@@ -32,9 +32,9 @@ Le site en direct est [ici](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.
 
 Ce dépôt est divisé en trois:
 
-1) l'outil InfoBase (dans le fichier [/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
-2) l'interface de programmation d'applications (API) (dans le fichier [/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
-3) l'application dorsale pour lancer des courriels (dans le fichier [/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
+1. l'outil InfoBase (dans le fichier [/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
+2. l'interface de programmation d'applications (API) (dans le fichier [/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
+3. l'application dorsale pour lancer des courriels (dans le fichier [/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
 
 Veuillez liser le fichier « README.md » dans chancune de ces fichiers pour connaisser plus de détails.
 
@@ -45,4 +45,3 @@ Sauf indication contraire, le code source de ce projet est protégé par le droi
 Le mot-symbole « Canada » et les éléments graphiques connexes liés à cette distribution sont protégés en vertu des lois portant sur les marques de commerce et le droit d'auteur. Aucune autorisation n'est accordée pour leur utilisation à l'extérieur des paramètres du programme de coordination de l'image de marque du gouvernement du Canada. Pour obtenir davantage de renseignements à ce sujet, veuillez consulter les [Exigences pour l'image de marque](https://www.canada.ca/fr/secretariat-conseil-tresor/sujets/communications-gouvernementales/exigences-image-marque.html).
 
 Tous les données dans `data/` sont visées par la [Licence du gouvernement ouvert – Canada](https://ouvert.canada.ca/fr/licence-du-gouvernement-ouvert-canada). Veuillez consulter le site [Données](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html#metadata) pour trouver les liens vers les données ouvertes.
-

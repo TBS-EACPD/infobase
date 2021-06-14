@@ -1,27 +1,26 @@
 {
   "root": true,
-  "plugins": [
-    "import",
-    "lodash"
-  ],
+  "plugins": ["import", "lodash"],
   "parser": "babel-eslint",
-  "extends": [ "eslint:recommended" , "plugin:import/warnings", "plugin:import/errors"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/warnings",
+    "plugin:import/errors"
+  ],
   "rules": {
-    "no-unused-vars": [
-        "warn",
-        { "args": "none" }
-    ],
+    "no-unused-vars": ["warn", { "args": "none" }],
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
     "no-throw-literal": "error",
     "lodash/no-double-unwrap": ["error"],
     "lodash/no-unbound-this": ["error"],
     "lodash/unwrap": ["error"],
     "import/order": [
-      "warn", { 
+      "warn",
+      {
         "newlines-between": "always-and-inside-groups",
         "alphabetize": {
           "order": "asc",
-          "caseInsensitive": true 
+          "caseInsensitive": true
         },
         "groups": [
           "builtin",
@@ -31,7 +30,7 @@
           ["sibling", "index"]
         ],
         // We can group imports further by adding rules here, the order they're defined in breaks ties when group and position are equal
-        "pathGroups":[
+        "pathGroups": [
           {
             "pattern": "./*.yaml",
             "group": "index",
@@ -51,7 +50,6 @@
             "pattern": "src/models/**",
             "group": "internal",
             "position": "before"
-
           },
           {
             "pattern": "src/core/**",
@@ -63,16 +61,16 @@
             "group": "internal",
             "position": "before"
           }
-        ]          
+        ]
       }
     ],
     "import/no-commonjs": 2,
     "import/extensions": ["error", "always"]
   },
   "settings": {
-    "import/resolver":{
+    "import/resolver": {
       "node": {
-        "moduleDirectory": ["./","node_modules/"]
+        "moduleDirectory": ["./", "node_modules/"]
       }
     },
     "lodash": {
