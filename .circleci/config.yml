@@ -4,22 +4,20 @@ dockerhub_auth: &dockerhub_auth
     password: $DOCKERHUB_PASSWORD
 
 # yaml fragment for deploy filters
-deploy_filter: &deploy_filter 
+deploy_filter: &deploy_filter
   filters:
     branches:
       ignore:
         - /__.*/
-archive_filter: &archive_filter 
+archive_filter: &archive_filter
   filters:
     branches:
       ignore:
         - /__.*/
         - /archived__.*/
 
-
 version: 2
 jobs:
-
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
@@ -33,10 +31,10 @@ jobs:
           keys:
             - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
             - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
-      - run: 
+      - run:
           command: |
             [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
-      - run: 
+      - run:
           command: |
             [ -e "node_modules" ] || npm ci
       - save_cache:
@@ -53,14 +51,13 @@ jobs:
 
       - run: (cd email_backend && npm run end_to_end_tests)
 
-     # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
+      # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
       - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
 
       - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-      
+
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
       - run: (cd email_backend && ../scripts/ci_scripts/store_project_coverage.sh email_backend)
-
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_links:
@@ -97,7 +94,6 @@ jobs:
             - ./dev-dbs-clean-for-these-branches.txt
           key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
 
-
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
@@ -111,7 +107,7 @@ jobs:
       - restore_cache:
           keys:
             - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
-      - run: 
+      - run:
           command: |
             [ -e "node_modules" ] ||  npm ci
       - save_cache:
@@ -124,7 +120,7 @@ jobs:
       - restore_cache:
           keys:
             - client-dependencies-{{ checksum "client/package-lock.json" }}-v2
-      - run: 
+      - run:
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
       - save_cache:
@@ -148,7 +144,7 @@ jobs:
                   print $0;
                 }'
               echo "====="
-            done 
+            done
           background: true
 
       - restore_cache:
@@ -161,13 +157,13 @@ jobs:
           paths:
             - client/build
           key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
-      
+
       - run: cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y
 
       - restore_cache:
           keys:
             - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
-      - run: 
+      - run:
           command: |
             [ -e "server/node_modules" ] || (cd server && npm ci)
       - save_cache:
@@ -198,7 +194,7 @@ jobs:
             - ./package.json
             - ./.prettierignore
             - ./prettier.config.cjs
-            
+
             - ./client/build
             - ./client/browser-tests
             - ./client/deploy_scripts
@@ -215,7 +211,6 @@ jobs:
             - ./server/package-lock.json
             - ./server/.babelrc
 
-
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_server:
     docker:
@@ -229,11 +224,11 @@ jobs:
 
       - run: (cd server && npm run unit_tests)
 
-      - run: 
+      - run:
           name: mongod
           command: mongod
           background: true
-      - run: 
+      - run:
           name: start_api_server
           command: (cd server && npm run start)
           background: true
@@ -246,7 +241,6 @@ jobs:
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
       - run: (cd server && ../scripts/ci_scripts/store_project_coverage.sh server)
-      
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
@@ -261,12 +255,12 @@ jobs:
 
       # repeats some of the server tests, because these fail fast and short-curcuit us before the long-running browser tests
       - run: (cd server && npm run unit_tests)
-      
-      - run: 
+
+      - run:
           name: mongod
           command: mongod
           background: true
-      - run: 
+      - run:
           name: start_api_server
           command: (cd server && npm run start)
           background: true
@@ -275,14 +269,13 @@ jobs:
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
-      - run: 
+      - run:
           name: start_http_server
           command: (cd client && npm run ci_serve)
           background: true
       - run: (cd client && npm run ci_route_load_tests)
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
-
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   deploy_data:
@@ -310,7 +303,6 @@ jobs:
           paths:
             - ./this-data-is-deployed.txt
           key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}-v2
-
 
   # Note: the image used for this job is provided by google
   deploy_server:
@@ -340,7 +332,6 @@ jobs:
             - ./this-api-is-deployed.txt
           key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
 
-
   # Note: the image used for this job is provided by google
   deploy_client:
     working_directory: "~/InfoBase"
@@ -354,8 +345,6 @@ jobs:
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
       - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi # only saving master stats right now since they're somewhat large files (~1 mb each)
-
-
 
 workflows:
   version: 2
