@@ -12,8 +12,11 @@ client/storybook-static
 # Can remove this line once that's fixed
 client/browser-tests/temp-route-tests-*
 
+# TODO Prettier doesn't know our yaml contains markdown, I think some of it's auto formatting might strip meaningful
+# whitespace (e.g. double space at end of line to indicate new paragraph). TODO try formatting again, carefully check changes
+client/src/**/*.yaml
 
-# Prettier seems to want to format everything, just being defensive...
-*.yaml
-*.yml
-*.html
+# TODO This should just be the index.hbs.html, more readable and editable with formatting but less optimized output.
+# Maybe add minification of the index html to build base, then let prettier format this file (minification of those files
+# might be a bit of headache in dev, might warrant separate dev and prod build base commands)
+client/src/**/*.html
