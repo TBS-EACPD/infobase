@@ -13,14 +13,36 @@ const text_maker = create_text_maker([treemap_text]);
 const top_level_title = `${text_maker("government_stats")}`;
 
 const BreadcrumbArrow = (
-  <IconArrow svg_style={{ verticalAlign: "0.1em" }} inline="true" />
+  <IconArrow svg_style={{ verticalAlign: "0.1em" }} inline={true} />
 );
 
-export class TreeMapTopbar extends React.Component {
-  constructor() {
-    super();
+interface TreeMapTopBarProps {
+  history: {
+    action: string;
+    block: Function;
+    createHref: Function;
+    go: Function;
+    goBack: Function;
+    goForward: Function;
+    length: number;
+    listen: Function;
+    location: {
+      hash: string;
+      pathname: string;
+      search: string;
+      state: undefined;
+    };
+    push: Function;
+    replace: Function;
+  };
+  org_route: [];
+  setRouteCallback: Function;
+}
+export class TreeMapTopBar extends React.Component<TreeMapTopBarProps> {
+  constructor(props: TreeMapTopBarProps) {
+    super(props);
   }
-  handleClick(ix) {
+  handleClick(ix: number) {
     this.props.setRouteCallback(this.props.org_route.slice(0, ix + 1), true);
   }
   render() {
@@ -49,12 +71,12 @@ export class TreeMapTopbar extends React.Component {
               </li>
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 <span
-                  tabIndex="0"
+                  tabIndex={0}
                   dangerouslySetInnerHTML={{ __html: top_level_title }}
                   onClick={() => {
                     this.handleClick(-1);
                   }}
-                  onKeyDown={() => {
+                  onKeyDown={(event) => {
                     if (event.keyCode != 13) {
                       return;
                     }
@@ -70,12 +92,12 @@ export class TreeMapTopbar extends React.Component {
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 {
                   <span
-                    tabIndex="0"
+                    tabIndex={0}
                     dangerouslySetInnerHTML={{ __html: display }}
                     onClick={() => {
                       this.handleClick(ix);
                     }}
-                    onKeyDown={() => {
+                    onKeyDown={(event) => {
                       if (event.keyCode != 13) {
                         return;
                       }
