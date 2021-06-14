@@ -10,7 +10,6 @@
   background-color: $backgroundColor;
 }
 
-
 .ExplorerNode {
   padding-top: 12px;
   padding-bottom: 6px;
@@ -24,16 +23,12 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  
 
   border-color: $separatorColor;
   background-color: rgba($separatorColor, 0.05);
 
   font-size: 12pt;
 }
-
-
-
 
 .ExplorerNode--search-match {
   border-color: $successDarkColor;
@@ -45,7 +40,6 @@
   flex: 1 1 auto;
 }
 
-
 /* this is the clickable portion, what is seen when collapsed */
 .ExplorerNode__RowContainer:not(.ExplorerNode__RowContainer--no-click) {
   cursor: pointer;
@@ -56,48 +50,51 @@
   flex: 0 0 45px; /* never grow or shrink, and set the default flex width */
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;
 
-  &:not(.ExplorerNode__ExpanderContainer--no-expand){
-    cursor:pointer;
+  &:not(.ExplorerNode__ExpanderContainer--no-expand) {
+    cursor: pointer;
   }
 }
 
 /* to be combined with .button-unstyled */
 .ExplorerNode__Expander {
-  border: 1px solid rgba(0,0,0,0);
-  background-color: rgba(0,0,0,0); /*make bg transparent because of common css issue*/
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /*make bg transparent because of common css issue*/
 
-  text-decoration:none;
+  text-decoration: none;
   font-size: 12px;
   padding-top: 3px;
   /* define an invisible border so that :focus/:active doesn't make ancestor elements change size*/
 }
 
-// .explorer-node-inner-collapsible-content { 
+// .explorer-node-inner-collapsible-content {
 /*
   Supplementary, non-column based content
-*/ 
+*/
 .ExplorerNode__SuppContent {
   margin-top: 5px;
 }
 
-
 //bottom-right link container
 //good for quick infographic links
-.ExplorerNode__BRLinkContainer { 
+.ExplorerNode__BRLinkContainer {
   text-align: right;
   padding: 1px 10px 2px 0px;
 }
 
-.ExplorerNode__List { 
+.ExplorerNode__List {
   @include unstyled-list;
 }
 
-
 // .explorer-collapsible-children-container {
 .ExplorerNodeContainer__ChildrenContainer {
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .ExplorerNodeContainer__ChildrenList,
@@ -105,7 +102,6 @@
   margin: 5px 0;
   padding-left: 0;
   list-style: none;
-
 }
 
 .ExplorerNodeContainer__ChildrenGroupHeader {
@@ -113,7 +109,6 @@
   font-weight: 700;
   font-size: 12pt;
 }
- 
 
 .ExplorerRow {
   display: flex;
@@ -124,9 +119,8 @@
 }
 
 .ExplorerRow_Cell {
-  width: "100%"; /* IE */ 
+  width: "100%"; /* IE */
 }
-
 
 .ExplorerHeader {
   padding-top: 5px;
@@ -137,5 +131,4 @@
     background-color: $secondaryColor;
     color: $backgroundColor;
   }
-
 }

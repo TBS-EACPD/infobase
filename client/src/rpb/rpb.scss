@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .rpb-modal-container {
   background-color: white;
@@ -15,17 +15,17 @@ li.select-list-item {
   margin: 5px 0;
 }
 
-@media(min-width: $minLargeDevice){
-  .md-half-width{
+@media (min-width: $minLargeDevice) {
+  .md-half-width {
     min-width: 50%;
     display: inline-block;
     padding-left: 20px;
-    padding-right: 10px; 
+    padding-right: 10px;
   }
 }
 
 .rpb-option-fancy-ul {
-  padding: 14px 15px 12px 20px; 
+  padding: 14px 15px 12px 20px;
   width: 100%;
   margin-bottom: 0px;
 }

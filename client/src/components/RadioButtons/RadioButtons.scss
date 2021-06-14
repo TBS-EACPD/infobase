@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .radio-buttons {
   display: inline-flex;
@@ -9,7 +9,7 @@
   font-weight: $mediumFontWeight;
   background-color: inherit;
 
-  @media(max-width: $maxSmallDevice){
+  @media (max-width: $maxSmallDevice) {
     flex-direction: column;
   }
 }
@@ -38,13 +38,14 @@
   cursor: default;
   font-weight: $mediumFontWeight;
 
-  &:after, &:before {
+  &:after,
+  &:before {
     display: none;
   }
 }
 
 %pseduo-separator-common {
-  @media(min-width: $minSmallDevice){
+  @media (min-width: $minSmallDevice) {
     content: "";
     border: solid $buttonPrimaryColor;
     position: absolute;
@@ -62,10 +63,9 @@
   left: -1px;
 }
 
-
 .radio-buttons__option:not(.radio-buttons__option--active):hover,
 .radio-buttons__option:not(.radio-buttons__option--active):active,
-.radio-buttons__option:not(.radio-buttons__option--active):focus { 
+.radio-buttons__option:not(.radio-buttons__option--active):focus {
   background-color: change-color($color: $buttonPrimaryColor, $alpha: 0.75);
   color: $backgroundColor !important;
   border-radius: 10px; // this component's hacky styling is brittle to border radius changes, so it's not using the standardBorderRadius var; has to be manually updated

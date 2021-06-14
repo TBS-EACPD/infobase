@@ -1,6 +1,6 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
-@media (max-width: $maxExtraLargeDevice){
+@media (max-width: $maxExtraLargeDevice) {
   .about-government-intro-grid {
     margin: 0px !important;
   }

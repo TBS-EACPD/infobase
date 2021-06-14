@@ -1,11 +1,11 @@
 @import "src/common_css/common-variables";
 
-.leaf-spinner-container{
-    left: 50%;
-    margin-left:-50px;
-    top: 50%;
-    margin-top: -50px;
-    z-index: 9000;
+.leaf-spinner-container {
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+  z-index: 9000;
 }
 
 .faded-background--true {
@@ -21,22 +21,23 @@
 }
 
 .leaf-spinner-outer-circle {
-  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite ;
-  -ms-animation: leaf-spinner-rotate-reverse 2s linear infinite ;
-  -moz-animation: leaf-spinner-rotate-reverse 2s linear infinite ;
-  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite ;
-  animation: leaf-spinner-rotate-reverse 2s linear infinite ; 
+  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  -ms-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  -moz-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  animation: leaf-spinner-rotate-reverse 2s linear infinite;
 }
 
 .leaf-spinner-inner-circle {
-  -webkit-animation: leaf-spinner-rotate 2s linear infinite  ;
-  -ms-animation: leaf-spinner-rotate 2s linear infinite ;
-  -moz-animation: leaf-spinner-rotate 2s linear infinite ;
-  -o-animation: leaf-spinner-rotate 2s linear infinite ;
-  animation: leaf-spinner-rotate 2s linear infinite ; 
+  -webkit-animation: leaf-spinner-rotate 2s linear infinite;
+  -ms-animation: leaf-spinner-rotate 2s linear infinite;
+  -moz-animation: leaf-spinner-rotate 2s linear infinite;
+  -o-animation: leaf-spinner-rotate 2s linear infinite;
+  animation: leaf-spinner-rotate 2s linear infinite;
 }
 
-.leaf-spinner-outer-circle, .leaf-spinner-inner-circle {
+.leaf-spinner-outer-circle,
+.leaf-spinner-inner-circle {
   -webkit-transform-origin: center center;
   -ms-transform-origin: center center;
   -moz-transform-origin: center center;

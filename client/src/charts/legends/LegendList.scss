@@ -6,7 +6,7 @@
   justify-content: space-around;
 
   &.legend-list--horizontal {
-    @media(min-width: $minSmallDevice){
+    @media (min-width: $minSmallDevice) {
       flex-direction: row;
     }
   }

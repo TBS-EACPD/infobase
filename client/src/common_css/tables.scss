@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .table-dark-blue > thead > tr {
   background-color: $secondaryColor;
@@ -31,29 +31,31 @@
   color: $textLightColor;
 }
 
-.table-dark-blue:not(.no-total-row) > tbody > tr:last-child > td:not(:last-child) {
+.table-dark-blue:not(.no-total-row)
+  > tbody
+  > tr:last-child
+  > td:not(:last-child) {
   border-right: 1px solid $separatorColor !important;
 }
 
-.table-dark-bordered, 
-.table-dark-bordered>tbody>tr>td, 
-.table-dark-bordered>tbody>tr>th,
-.table-dark-bordered>tfoot>tr>td,
-.table-dark-bordered>tfoot>tr>th,
-.table-dark-bordered>thead>tr>td,
-.table-dark-bordered>thead>tr>th {
-  border: 0px solid rgba(0,0,0,0);
+.table-dark-bordered,
+.table-dark-bordered > tbody > tr > td,
+.table-dark-bordered > tbody > tr > th,
+.table-dark-bordered > tfoot > tr > td,
+.table-dark-bordered > tfoot > tr > th,
+.table-dark-bordered > thead > tr > td,
+.table-dark-bordered > thead > tr > th {
+  border: 0px solid rgba(0, 0, 0, 0);
   border-collapse: separate;
   min-width: 102px;
   border-spacing: 5px;
   font-weight: $heavyFontWeight;
 }
 
-
 table.table-blue > thead > tr > th {
   background-color: $secondaryColor;
   color: $backgroundColor;
-  font-weight : $mediumFontWeight;
+  font-weight: $mediumFontWeight;
   border: none;
   font-size: 13px;
 }
@@ -62,18 +64,17 @@ tr.background-blue > td {
   color: $backgroundColor;
 }
 
-
-table.infobase-table > thead > tr > th, 
+table.infobase-table > thead > tr > th,
 table.infobase-table > tbody > tr > td {
-padding: 8px;
-vertical-align: top;
-} 
+  padding: 8px;
+  vertical-align: top;
+}
 table.infobase-table > thead > tr > th {
   text-align: center;
 }
 
 tr.total-row {
-  font-weight : bold;
+  font-weight: bold;
 }
 tr.odd {
   background-color: lighten($tertiaryColor, 20%);
@@ -97,7 +98,7 @@ td.key-col-cell {
   font-weight: bold;
   text-align: left;
 }
-.left-text_plain{
+.left-text_plain {
   text-align: left;
 }
 .right-text {
@@ -109,6 +110,6 @@ td.key-col-cell {
 }
 
 /* for wide tables */
-.sidescroll { 
+.sidescroll {
   overflow-x: auto;
 }

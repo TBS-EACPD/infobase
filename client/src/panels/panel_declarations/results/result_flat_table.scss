@@ -1,22 +1,28 @@
 .results-flat-table > div > div > table {
   width: 100%;
   position: relative;
-  & > tbody > tr > td:first-child { // subject
+  & > tbody > tr > td:first-child {
+    // subject
     width: 23%;
   }
-  & > tbody > tr > td:nth-child(2) { // indicator
+  & > tbody > tr > td:nth-child(2) {
+    // indicator
     width: 30%;
   }
-  & > tbody > tr > td:nth-child(3) { // target
+  & > tbody > tr > td:nth-child(3) {
+    // target
     width: 15%;
   }
-  & > tbody > tr > td:nth-child(4) { // actual result
+  & > tbody > tr > td:nth-child(4) {
+    // actual result
     width: 15%;
   }
-  & > tbody > tr > td:nth-child(5) { // Date to achieve
+  & > tbody > tr > td:nth-child(5) {
+    // Date to achieve
     width: 15%;
   }
-  & > tbody > tr > td:nth-child(6) { // status icon
+  & > tbody > tr > td:nth-child(6) {
+    // status icon
     min-width: 60px;
     width: 2%;
   }

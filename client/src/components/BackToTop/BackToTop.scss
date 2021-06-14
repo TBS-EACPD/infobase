@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .back-to-top {
   display: inline-block;
@@ -7,7 +7,7 @@
   padding: 5px;
   border-radius: $standardBorderRadius;
   right: 30px;
-  transition: background-color .3s, opacity .5s, visibility .5s;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
@@ -16,17 +16,17 @@
     opacity: 1;
     visibility: visible;
   }
-  
+
   &.back-to-top--caught {
     position: absolute;
   }
-  
+
   &.back-to-top--fixed {
     position: fixed;
     bottom: 30px;
   }
 
-  @media(max-width: $maxSmallDevice) {
+  @media (max-width: $maxSmallDevice) {
     width: 90%;
     margin-left: 5%;
     position: fixed;

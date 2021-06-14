@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 /* 
   The parts of the old grid-system.css, as used by welcome-mat, rewritten in BEM and SASS
@@ -26,7 +26,7 @@
 
 // Mixins
 @mixin lg-panel($percent) {
-  @media (min-width: $minLargeDevice){
+  @media (min-width: $minLargeDevice) {
     padding: 5px;
     /* nested flex containers for cross browser (safari doesn't let children of flex use height:100% properly) support */
     display: flex;
@@ -40,19 +40,19 @@
 }
 
 @mixin lg-hide {
-  @media (min-width: $minLargeDevice){
+  @media (min-width: $minLargeDevice) {
     width: 0px;
     height: 0px;
     overflow: hidden;
     visibility: hidden;
   }
-  @media (max-width: $maxLargeDevice){
+  @media (max-width: $maxLargeDevice) {
     display: show;
   }
 }
 
 @mixin sm-hide {
-  @media (max-width: $maxLargeDevice){
+  @media (max-width: $maxLargeDevice) {
     display: none;
   }
 }
@@ -66,29 +66,49 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  @media (max-width: $maxLargeDevice){
-    flex-direction:column;
+  @media (max-width: $maxLargeDevice) {
+    flex-direction: column;
   }
 }
 
-.mat-grid__row--sm-hide { @include sm-hide; }
+.mat-grid__row--sm-hide {
+  @include sm-hide;
+}
 
 .mat-grid__sm-panel {
-  @media (max-width: $maxLargeDevice){
-    width : 100%;
+  @media (max-width: $maxLargeDevice) {
+    width: 100%;
     padding: 5px;
   }
 }
 
-.mat-grid__lg-panel15 { @include lg-panel(15%); }
-.mat-grid__lg-panel30 { @include lg-panel(30%); }
-.mat-grid__lg-panel20 { @include lg-panel(20%); }
-.mat-grid__lg-panel40 { @include lg-panel(40%); }
-.mat-grid__lg-panel45 { @include lg-panel(45%); }
-.mat-grid__lg-panel50 { @include lg-panel(50%); }
-.mat-grid__lg-panel55 { @include lg-panel(55%); }
-.mat-grid__lg-panel80 { @include lg-panel(80%); }
-.mat-grid__lg-panel100 { @include lg-panel(100%); }
+.mat-grid__lg-panel15 {
+  @include lg-panel(15%);
+}
+.mat-grid__lg-panel30 {
+  @include lg-panel(30%);
+}
+.mat-grid__lg-panel20 {
+  @include lg-panel(20%);
+}
+.mat-grid__lg-panel40 {
+  @include lg-panel(40%);
+}
+.mat-grid__lg-panel45 {
+  @include lg-panel(45%);
+}
+.mat-grid__lg-panel50 {
+  @include lg-panel(50%);
+}
+.mat-grid__lg-panel55 {
+  @include lg-panel(55%);
+}
+.mat-grid__lg-panel80 {
+  @include lg-panel(80%);
+}
+.mat-grid__lg-panel100 {
+  @include lg-panel(100%);
+}
 
 .mat-grid__title {
   padding: 10px;
@@ -121,15 +141,14 @@
   }
   &.mat-grid__inner-panel--medium {
     font-size: 1.6em;
-    @media (max-width: $maxExtraLargeDevice){
+    @media (max-width: $maxExtraLargeDevice) {
       font-size: 1.4em;
     }
   }
 
-  &.mat-grid__inner-panel--large-hide { 
+  &.mat-grid__inner-panel--large-hide {
     @include lg-hide;
   }
-
 }
 
 // this class doesn't follow BEM, but its usage is mixed up anyway

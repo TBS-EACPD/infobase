@@ -9,26 +9,24 @@
   padding: 1.15rem;
   line-height: 0;
 }
-@media(max-width: $maxMediumDevice){
+@media (max-width: $maxMediumDevice) {
   #ib-site-header {
     padding: 20px 0 0 0;
     line-height: normal;
   }
 }
 
-
 .canada-logo {
   height: auto;
   max-height: 25px;
   width: 100%;
 }
-@media(min-width: $minSmallDevice){
+@media (min-width: $minSmallDevice) {
   .canada-logo {
     max-height: 40px;
     max-width: 50vw;
   }
 }
-
 
 .ib-site-header-logo:after {
   bottom: 0;
@@ -39,7 +37,6 @@
   left: 0;
 }
 
-
 .a11y-version-link {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
@@ -48,7 +45,8 @@
   position: absolute;
   width: 1px;
 }
-.a11y-version-link:focus, .a11y-version-link:active {
+.a11y-version-link:focus,
+.a11y-version-link:active {
   clip: rect(auto, auto, auto, auto);
   height: inherit;
   margin: inherit;
@@ -59,7 +57,6 @@
   text-decoration: none;
 }
 
-
 .easy-access > a {
   white-space: nowrap;
 }
@@ -69,21 +66,21 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   & > a {
-    @media(min-width:$minMediumDevice){
+    @media (min-width: $minMediumDevice) {
       margin-left: 10px;
     }
   }
-  @media(max-width:$minLargeDevice) and (min-width:$minMediumDevice){
+  @media (max-width: $minLargeDevice) and (min-width: $minMediumDevice) {
     justify-content: flex-start;
   }
-  @media(max-width: $maxMediumDevice){
+  @media (max-width: $maxMediumDevice) {
     justify-content: space-between;
   }
 }
 
 #banner-container {
   font-size: 90%;
-  
+
   & > .alert {
     margin-bottom: 15px;
   }
@@ -94,7 +91,9 @@
 }
 
 .bonus-footer-landscape {
-  background: $primaryColor url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png) no-repeat right bottom;
+  background: $primaryColor
+    url(https://www.canada.ca/etc/designs/canada/wet-boew/assets/landscape.png)
+    no-repeat right bottom;
 }
 
 .bonus-footer-list {

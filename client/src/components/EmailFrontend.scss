@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .email-backend-form {
   margin-top: 3px;
@@ -28,10 +28,10 @@
 .email-backend-form__send-btn--sending {
   background-color: $secondaryColor;
 
-  &  > div > .leaf-spinner-container {
-    top: 0px!important;
-    left: 50%!important;
-    transform: scale(0.3)!important;
+  & > div > .leaf-spinner-container {
+    top: 0px !important;
+    left: 50% !important;
+    transform: scale(0.3) !important;
   }
 }
 

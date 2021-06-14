@@ -1,26 +1,26 @@
 @import "src/common_css/common-variables";
 
 .quadrant-dl > div:first-child {
-  float:left;
+  float: left;
   border-bottom: none;
   border-right: none;
 }
 
 .quadrant-dl > div:nth-child(2) {
-  float:right;
+  float: right;
   border-bottom: none;
 }
 
 .quadrant-dl > div:nth-child(3) {
-  float:left;
+  float: left;
   border-right: none;
 }
 
 .quadrant-dl > div:nth-child(4) {
-  float:right;  
+  float: right;
 }
 
-.quadrant-dl{
+.quadrant-dl {
   overflow: visible;
   margin: 0;
 }
@@ -51,7 +51,7 @@
   order: 1;
   align-items: center;
   justify-content: center;
-  font-size : 40px;
+  font-size: 40px;
   margin-bottom: 0px;
 }
 
@@ -75,28 +75,27 @@ ul.indicator-list > li:not(:first-child) {
 
 .indicator-item__header {
   font-size: 1.2em;
-  text-align:center;
-  margin-top: 10px; 
+  text-align: center;
+  margin-top: 10px;
   padding-right: 2rem;
   padding-left: 2rem;
 }
 
 /* mostly resetting bootstrap's normalization of dd/dt */
 
-
 dl.indicator-item__dl {
   margin-bottom: 0;
   padding: 5px;
 }
 
-dl.indicator-item__dl dt+dd {
+dl.indicator-item__dl dt + dd {
   padding-bottom: 10px;
 }
 
-@media(min-width: $minMediumDevice){
+@media (min-width: $minMediumDevice) {
   dl.indicator-item__dl > dd,
   dl.indicator-item__dl > dt {
-    margin-bottom:0;
+    margin-bottom: 0;
   }
 
   dl.indicator-item__dl > dt:first-of-type,
@@ -118,7 +117,10 @@ dl.indicator-item__dl dt+dd {
   font-size: 60%;
 }
 
-.status-icon-table--met-icon, .status-icon-table--not-met-icon, .status-icon-table--na-icon, .status-icon-table--future-icon {
+.status-icon-table--met-icon,
+.status-icon-table--not-met-icon,
+.status-icon-table--na-icon,
+.status-icon-table--future-icon {
   margin: 0px;
 }
 

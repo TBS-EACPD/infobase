@@ -1,12 +1,15 @@
 @import "common-variables";
 
-div.int{width: 95px;text-align:center;}
+div.int {
+  width: 95px;
+  text-align: center;
+}
 div.big_int,
-div.decimal, 
+div.decimal,
 div.short-str,
 div.decimal1 {
   width: 100px;
-  text-align:right;
+  text-align: right;
 }
 div.str {
   width: 150px;
@@ -17,18 +20,18 @@ div.wide-str {
 }
 div.percentage {
   width: 90px;
-  text-align:center;
+  text-align: center;
 }
 div.percentage1 {
   width: 100px;
-  text-align:right;
+  text-align: right;
 }
 div.date {
   width: 90px;
 }
 div.ordinal {
   width: 150px;
-  text-align:center;
+  text-align: center;
 }
 
 .nav-header {
@@ -58,21 +61,19 @@ div.ordinal {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=);
 }
 
-
 /* utility class. Apply class to a container if you want its content (no matter what kind) centered */
 .centerer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width:100%;
+  width: 100%;
 }
-
 
 .btn-responsive-fixed-width {
   margin-left: auto;
   min-width: 150px;
   align-self: center;
-  @media (max-width:$maxMediumDevice) {
+  @media (max-width: $maxMediumDevice) {
     max-width: 150px;
   }
 }
@@ -87,7 +88,7 @@ div.ordinal {
   text-overflow: ellipsis;
   width: 80%;
   white-space: nowrap;
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
 .text-overflow > span {
   font-weight: normal;
@@ -98,7 +99,8 @@ a.source-link {
   font-weight: bold;
 }
 
-span.glossary-link, a.glossary-link {
+span.glossary-link,
+a.glossary-link {
   font-weight: bold;
 }
 
@@ -107,7 +109,18 @@ body {
   background-color: $backgroundColor;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-weight: $lightFontWeight;
   font-family: $fontFamily;
 
@@ -120,7 +133,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   }
 }
 
-b, strong, .heavy-weight {
+b,
+strong,
+.heavy-weight {
   font-weight: $heavyFontWeight;
 }
 
@@ -137,14 +152,16 @@ b, strong, .heavy-weight {
   text-decoration: none;
   color: $linkColor;
   background-color: transparent;
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     color: $linkFocusColor;
   }
 }
 
 .span-hover {
   cursor: pointer;
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     opacity: 0.5;
   }
 }
@@ -155,7 +172,9 @@ b, strong, .heavy-weight {
 }
 
 .text-only-page-root {
-  h2, h3, h4 {
+  h2,
+  h3,
+  h4 {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 0.8em;
@@ -178,7 +197,8 @@ b, strong, .heavy-weight {
   border-radius: 0px $standardBorderRadius/2 $standardBorderRadius/2 0px;
   border-style: solid;
   border-width: 1px 1px 1px 3px;
-  border-color: lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%) $secondaryColor;
+  border-color: lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%)
+    lighten($tertiaryColor, 20%) $secondaryColor;
 
   &.tag-badge--solid {
     background-color: lighten($tertiaryColor, 20%);

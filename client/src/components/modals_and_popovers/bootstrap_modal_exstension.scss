@@ -1,17 +1,17 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 $margin: 30px;
 
 // Overwrites
 .modal-backdrop {
-  background-color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .modal-dialog {
   margin-top: $margin;
 }
 
 // Additional
-@media(min-width: $minMediumDevice){
+@media (min-width: $minMediumDevice) {
   .modal-dialog--left {
     margin-left: $margin;
   }
@@ -34,16 +34,16 @@ $margin: 30px;
   align-items: center;
 
   & > svg {
-    margin-right: 0.5em
+    margin-right: 0.5em;
   }
 }
 
 .modal-responsive {
   width: 800px;
-  @media(min-width: $maxExtraLargeDevice){
+  @media (min-width: $maxExtraLargeDevice) {
     width: 1140px;
   }
-  @media(max-width:  $minMediumDevice){
+  @media (max-width: $minMediumDevice) {
     width: 300px;
   }
 }

@@ -1,8 +1,8 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 .tag-cloud-main {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
@@ -32,7 +32,7 @@
 
   &:only-child {
     padding: 3px 15px;
-    border-radius: $standardBorderRadius;;
+    border-radius: $standardBorderRadius;
   }
 }
 
@@ -41,7 +41,7 @@
   background-color: $buttonPrimaryColor;
   padding-right: 3px;
   border-radius: 0px $standardBorderRadius $standardBorderRadius 0px;
-  border:none;
+  border: none;
   color: $textLightColor;
 
   // Fix inconsistent sub-pixel white gaps in IE11

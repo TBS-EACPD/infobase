@@ -3,7 +3,7 @@ body.modal-open.modal-open--allow-scroll {
   padding-right: 0px !important;
 }
 
-.modal[modal-without-backdrop=true] {
+.modal[modal-without-backdrop="true"] {
   overflow: visible;
   width: 100%;
   height: 1px;

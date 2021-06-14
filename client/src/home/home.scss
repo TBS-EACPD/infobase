@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 $largeMargin: 40px;
 $smallMargin: 10px;
@@ -65,11 +65,10 @@ $smallMargin: 10px;
   position: relative;
 }
 
-
 .home-featured-row {
   margin-top: $largeMargin;
   margin-bottom: $largeMargin;
-  @media(max-width: $maxMediumDevice){
+  @media (max-width: $maxMediumDevice) {
     margin-top: $smallMargin;
     margin-bottom: $smallMargin;
   }
@@ -83,7 +82,7 @@ $smallMargin: 10px;
 }
 .home-infographic-link-item {
   @include unstyled-link;
-  background-color: darken( $tertiaryColor, 10% );
+  background-color: darken($tertiaryColor, 10%);
   border-radius: $standardBorderRadius;
   cursor: pointer;
 
@@ -92,16 +91,17 @@ $smallMargin: 10px;
   align-items: center;
   justify-content: space-between;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $tertiaryColor;
   }
 
-  @media(min-width: $minSmallDevice) {
+  @media (min-width: $minSmallDevice) {
     flex-basis: 40%;
     max-width: 40%;
     margin: $smallMargin;
   }
-  @media(max-width: $maxSmallDevice) {
+  @media (max-width: $maxSmallDevice) {
     flex-flow: row-reverse;
     justify-content: space-around;
     flex-basis: 100%;
@@ -118,7 +118,7 @@ $smallMargin: 10px;
   text-transform: uppercase;
   color: $textLightColor;
 
-  @media(min-width: $minSmallDevice) {
+  @media (min-width: $minSmallDevice) {
     width: 100%; /* IE fix */
   }
 }
@@ -127,7 +127,7 @@ $smallMargin: 10px;
   height: 100%;
   margin-bottom: $smallMargin;
 
-  @media(max-width: $maxSmallDevice) {
+  @media (max-width: $maxSmallDevice) {
     width: 5em;
     height: 5em;
     margin: $smallMargin;
@@ -150,12 +150,13 @@ $smallMargin: 10px;
 
     & > .list-group-item {
       background-color: lighten($tertiaryColor, 37%);
-    
-      &:hover:not(.active), &:focus:not(.active) {
+
+      &:hover:not(.active),
+      &:focus:not(.active) {
         color: $textColor;
         background-color: $backgroundColor;
       }
-    
+
       &.active a {
         color: lighten($tertiaryColor, 37%);
       }
@@ -163,19 +164,18 @@ $smallMargin: 10px;
   }
 }
 .badge.badge--is-new {
-  background-color: $highlightColor; 
+  background-color: $highlightColor;
   color: $textLightColor;
   font-size: 16px;
   height: 1.5em;
 }
 
-
 .subapp-linkcards {
   padding-top: $largeMargin;
-  @media(max-width: $maxSmallDevice){
+  @media (max-width: $maxSmallDevice) {
     padding-top: $smallMargin;
   }
-  
+
   & > .row {
     justify-content: space-around;
   }

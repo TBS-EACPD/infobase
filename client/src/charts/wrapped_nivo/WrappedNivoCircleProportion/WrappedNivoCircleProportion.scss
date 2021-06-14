@@ -1,7 +1,7 @@
 @import "src/common_css/common-variables";
 
 .proportional-bubble-tooltip {
-  @media(min-width: $minMediumDevice){
+  @media (min-width: $minMediumDevice) {
     width: 400px;
   }
 }

@@ -1,16 +1,13 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
-
-
-.text-diff__text-part--added{
+.text-diff__text-part--added {
   color: $textColor;
-  background-color: rgba($successDarkColor,0.3);
+  background-color: rgba($successDarkColor, 0.3);
 }
 
-
-.text-diff__text-part--removed{
+.text-diff__text-part--removed {
   color: $textColor;
-  background-color: rgba($failDarkColor,0.3);
+  background-color: rgba($failDarkColor, 0.3);
   text-decoration: line-through;
 }
 
@@ -24,7 +21,10 @@
   margin-bottom: 10px;
 }
 
-.text-diff__indicator_no_diff, .text-diff__indicator_desc_changed, .text-diff__indicator_removed, .text-diff__indicator_added {
+.text-diff__indicator_no_diff,
+.text-diff__indicator_desc_changed,
+.text-diff__indicator_removed,
+.text-diff__indicator_added {
   border-width: 2px 2px 2px 4px;
   border-style: solid;
   padding: 2px 2px 2px 4px;

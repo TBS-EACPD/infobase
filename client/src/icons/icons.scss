@@ -1,4 +1,3 @@
-
 svg.icon-svg {
   display: inline-block;
   overflow: visible;
@@ -12,24 +11,24 @@ svg.icon-svg {
   pointer-events: none;
 }
 
-.icon-stroke:not(.icon-fill){
+.icon-stroke:not(.icon-fill) {
   fill: none;
 }
-.icon-fill:not(.icon-stroke){
+.icon-fill:not(.icon-stroke) {
   stroke: none;
 }
-.services_home_1{
+.services_home_1 {
   fill: none;
-  stroke:#FFFFFF;
+  stroke: #ffffff;
   stroke-width: 5;
   stroke-linejoin: round;
 }
-.services_home_2{
-  fill:#FFFFFF;
+.services_home_2 {
+  fill: #ffffff;
 }
-.services_home_3{
-  fill: #DA3A38;
-  stroke: #FFFFFF;
+.services_home_3 {
+  fill: #da3a38;
+  stroke: #ffffff;
   stroke-width: 2;
   stroke-linejoin: bevel;
 }

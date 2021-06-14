@@ -1,11 +1,11 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 /* styles from bootstrap */
 
 $borderColor: transparent;
 
 .IBDetails {
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
   display: block;
 
   border-radius: $standardBorderRadius;

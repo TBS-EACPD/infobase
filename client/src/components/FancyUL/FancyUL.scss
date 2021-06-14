@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 ul.fancy-ul {
   margin-bottom: 20px;
@@ -29,7 +29,7 @@ ul.fancy-ul {
       display: flex;
       justify-content: center;
       font-size: 18px;
-      font-weight: $heavyFontWeight; 
+      font-weight: $heavyFontWeight;
     }
   }
 }

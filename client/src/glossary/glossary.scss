@@ -1,10 +1,9 @@
-@import 'src/common_css/common-variables';
-
+@import "src/common_css/common-variables";
 
 dt.glossary-dt {
   font-size: 1.4em;
 
-  &:not(:first-child){
+  &:not(:first-child) {
     border-top: 1px solid $separatorColor;
     margin-top: 15px;
     padding-top: 5px;
@@ -22,7 +21,7 @@ dt.glossary-dt {
 .glossary-top-link {
   position: absolute;
   overflow: hidden;
-  clip: rect(1px,1px,1px,1px);
+  clip: rect(1px, 1px, 1px, 1px);
 }
 
 .glossary-top-link:hover {
@@ -32,5 +31,4 @@ dt.glossary-dt {
 .glossary-top-link:focus {
   overflow: inherit;
   position: inherit;
-  
 }

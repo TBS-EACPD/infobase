@@ -1,4 +1,4 @@
-@import 'src/common_css/common-variables';
+@import "src/common_css/common-variables";
 
 $indent: 2em;
 $spacing: 10px;
@@ -14,8 +14,8 @@ $spacing: 10px;
 .footnote-list__item {
   font-size: 14px;
   margin: $spacing 0px $spacing $indent;
-  
-  &:not(:first-child)::before{
+
+  &:not(:first-child)::before {
     content: "";
     display: block;
     border-top: 1px solid $separatorColor;
@@ -26,7 +26,7 @@ $spacing: 10px;
 
 // Set uniform margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
 .footnote-list__note > * {
-  margin: 0px 0px $spacing/2 0px
+  margin: 0px 0px $spacing/2 0px;
 }
 
 .footnote-list__meta_container {
