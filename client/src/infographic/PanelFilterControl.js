@@ -38,9 +38,8 @@ export default class PanelFilterControl extends React.Component {
     };
   }
   static getDerivedStateFromProps(nextProps, prevState) {
-    const potentially_new_table_tag_state = get_default_table_tag_state(
-      nextProps
-    );
+    const potentially_new_table_tag_state =
+      get_default_table_tag_state(nextProps);
 
     const next_table_ids = _.keys(potentially_new_table_tag_state);
     const prev_table_ids = _.keys(prevState.table_tags);

@@ -211,52 +211,37 @@ Handlebars.registerHelper("will_change_to", function (val, formatter, context) {
 Handlebars.registerHelper("will_change_by", function (val, formatter, context) {
   return en_master_change(val, formatter, "by", "future");
 });
-Handlebars.registerHelper("fr_changed_to", function (
-  val,
-  genre,
-  nombre,
-  formatter,
-  context
-) {
-  return fr_master_change(val, formatter, "to", "past", genre, nombre);
-});
-Handlebars.registerHelper("fr_changed_by", function (
-  val,
-  genre,
-  nombre,
-  formatter,
-  context
-) {
-  return fr_master_change(val, formatter, "by", "past", genre, nombre);
-});
+Handlebars.registerHelper(
+  "fr_changed_to",
+  function (val, genre, nombre, formatter, context) {
+    return fr_master_change(val, formatter, "to", "past", genre, nombre);
+  }
+);
+Handlebars.registerHelper(
+  "fr_changed_by",
+  function (val, genre, nombre, formatter, context) {
+    return fr_master_change(val, formatter, "by", "past", genre, nombre);
+  }
+);
 // Dom code:
-Handlebars.registerHelper("fr_changing_by", function (
-  val,
-  genre,
-  nombre,
-  formatter,
-  context
-) {
-  return fr_master_change(val, formatter, "ing", "past", genre, nombre);
-});
-Handlebars.registerHelper("fr_will_change_by", function (
-  val,
-  genre,
-  nombre,
-  formatter,
-  context
-) {
-  return fr_master_change(val, formatter, "by", "future", genre, nombre);
-});
-Handlebars.registerHelper("fr_will_change_to", function (
-  val,
-  genre,
-  nombre,
-  formatter,
-  context
-) {
-  return fr_master_change(val, formatter, "to", "future", genre, nombre);
-});
+Handlebars.registerHelper(
+  "fr_changing_by",
+  function (val, genre, nombre, formatter, context) {
+    return fr_master_change(val, formatter, "ing", "past", genre, nombre);
+  }
+);
+Handlebars.registerHelper(
+  "fr_will_change_by",
+  function (val, genre, nombre, formatter, context) {
+    return fr_master_change(val, formatter, "by", "future", genre, nombre);
+  }
+);
+Handlebars.registerHelper(
+  "fr_will_change_to",
+  function (val, genre, nombre, formatter, context) {
+    return fr_master_change(val, formatter, "to", "future", genre, nombre);
+  }
+);
 
 // Two value change helpers (Ex. "increased/decreased from val1 to val2")
 const two_value_change_map = {
@@ -363,41 +348,36 @@ const fr_master_two_value_change = function (
   }
   return new Handlebars.SafeString(return_value);
 };
-Handlebars.registerHelper("two_value_changed_to", function (
-  val1,
-  val2,
-  formatter,
-  context
-) {
-  return en_master_two_value_change(val1, val2, formatter, "to", "past");
-});
-Handlebars.registerHelper("fr_two_value_changed_to", function (
-  val1,
-  val2,
-  genre,
-  nombre,
-  formatter,
-  context
-) {
-  return fr_master_two_value_change(
-    val1,
-    val2,
-    formatter,
-    "to",
-    "past",
-    genre,
-    nombre
-  );
-});
+Handlebars.registerHelper(
+  "two_value_changed_to",
+  function (val1, val2, formatter, context) {
+    return en_master_two_value_change(val1, val2, formatter, "to", "past");
+  }
+);
+Handlebars.registerHelper(
+  "fr_two_value_changed_to",
+  function (val1, val2, genre, nombre, formatter, context) {
+    return fr_master_two_value_change(
+      val1,
+      val2,
+      formatter,
+      "to",
+      "past",
+      genre,
+      nombre
+    );
+  }
+);
 
 // Helper to expand positive negative values to "[+/-]abs(value)"
-Handlebars.registerHelper("plus_or_minus_val", function (
-  val,
-  formatter,
-  context
-) {
-  return (val >= 0 ? "+" : "-") + Handlebars.helpers[formatter](Math.abs(val));
-});
+Handlebars.registerHelper(
+  "plus_or_minus_val",
+  function (val, formatter, context) {
+    return (
+      (val >= 0 ? "+" : "-") + Handlebars.helpers[formatter](Math.abs(val))
+    );
+  }
+);
 
 // {{gt "key"}} -> looks up the key and returns
 // the correct language
@@ -603,22 +583,22 @@ Handlebars.registerHelper("stripes", function (index) {
   return index % 2 == 0 ? "even" : "odd";
 });
 
-Handlebars.registerHelper("icon_tooltip", function glossary_tooltip(
-  popup_text
-) {
-  const raw_icon_html = ReactDOMServer.renderToStaticMarkup(
-    <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
-  );
+Handlebars.registerHelper(
+  "icon_tooltip",
+  function glossary_tooltip(popup_text) {
+    const raw_icon_html = ReactDOMServer.renderToStaticMarkup(
+      <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
+    );
 
-  // our svg icons include embeded style nodes using * selectors, which in particular mess up the resulting output of
-  // text maker's markdown parsing, need to escape
-  const selective_markdown_escaped_icon_html = raw_icon_html.replace(
-    /\*/g,
-    "\\*"
-  );
+    // our svg icons include embeded style nodes using * selectors, which in particular mess up the resulting output of
+    // text maker's markdown parsing, need to escape
+    const selective_markdown_escaped_icon_html = raw_icon_html.replace(
+      /\*/g,
+      "\\*"
+    );
 
-  return new Handlebars.SafeString(
-    `<span
+    return new Handlebars.SafeString(
+      `<span
       style="display: inline-flex;"
       class="nowrap link-unstyled"
       tabindex="0"
@@ -630,8 +610,9 @@ Handlebars.registerHelper("icon_tooltip", function glossary_tooltip(
     >
       ${selective_markdown_escaped_icon_html}
     </span>`
-  );
-});
+    );
+  }
+);
 
 // register a handlebars helper for creating glossary links
 // If a markdown link is written accordingly:
@@ -680,13 +661,13 @@ Handlebars.registerHelper("infograph_link", function (subject) {
   return new Handlebars.SafeString(str);
 });
 
-Handlebars.registerHelper("metadata_source_link", function (
-  link_text,
-  source_key
-) {
-  const str = `<a href=${"#metadata/" + source_key}>${link_text}</a>`;
-  return new Handlebars.SafeString(str);
-});
+Handlebars.registerHelper(
+  "metadata_source_link",
+  function (link_text, source_key) {
+    const str = `<a href=${"#metadata/" + source_key}>${link_text}</a>`;
+    return new Handlebars.SafeString(str);
+  }
+);
 
 Handlebars.registerHelper("infograph_res_link", function (subject, text) {
   const href = infograph_href_template(subject, "results");

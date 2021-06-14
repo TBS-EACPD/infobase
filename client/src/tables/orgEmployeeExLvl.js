@@ -21,10 +21,8 @@ export default {
   tags: ["PEOPLE", "FPS", "EX_LVL", "ANNUAL"],
 
   link: {
-    en:
-      "http://open.canada.ca/data/en/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96",
-    fr:
-      "http://ouvert.canada.ca/data/fr/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96",
+    en: "http://open.canada.ca/data/en/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96",
+    fr: "http://ouvert.canada.ca/data/fr/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96",
   },
 
   name: {

@@ -33,9 +33,8 @@ export const declare_resource_structure_panel = () =>
         const has_actual_data = has_some_program_spending_for_year(
           `${actual_year}exp`
         );
-        const has_planning_data = has_some_program_spending_for_year(
-          planning_year
-        );
+        const has_planning_data =
+          has_some_program_spending_for_year(planning_year);
 
         return (
           (has_planning_data || has_actual_data) && {

@@ -42,9 +42,8 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
   };
 };
 
-const wrap_with_vote_stat_controls = (Component) => (props) => (
-  <ToggleVoteStatProvider Inner={Component} inner_props={props} />
-);
+const wrap_with_vote_stat_controls = (Component) => (props) =>
+  <ToggleVoteStatProvider Inner={Component} inner_props={props} />;
 
 // TODO these est doc utils should move to somewhere central, maybe in models
 const get_est_doc_name = (est_doc) =>

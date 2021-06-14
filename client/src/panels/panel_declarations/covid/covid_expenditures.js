@@ -50,10 +50,8 @@ const SummaryTab = ({ args: panel_args, data }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
   const { top_spending_orgs, top_spending_measures } = data;
 
-  const {
-    name: top_spending_org_name,
-    spending: top_spending_org_amount,
-  } = _.first(top_spending_orgs);
+  const { name: top_spending_org_name, spending: top_spending_org_amount } =
+    _.first(top_spending_orgs);
   const {
     name: top_spending_measure_name,
     spending: top_spending_measure_amount,
@@ -368,9 +366,8 @@ class CovidExpendituresPanel extends React.Component {
     if (loading) {
       return <TabLoadingSpinner />;
     } else {
-      const { month_last_updated, vote, stat } = summary_by_fiscal_year[
-        selected_year
-      ];
+      const { month_last_updated, vote, stat } =
+        summary_by_fiscal_year[selected_year];
 
       const gov_covid_expenditures_in_year = vote + stat;
 
@@ -385,11 +382,8 @@ class CovidExpendituresPanel extends React.Component {
         gov_covid_expenditures_in_year,
       };
 
-      const {
-        tab_keys,
-        tab_labels,
-        tab_pane_contents,
-      } = get_tabbed_content_props(tab_content_configs, extended_panel_args);
+      const { tab_keys, tab_labels, tab_pane_contents } =
+        get_tabbed_content_props(tab_content_configs, extended_panel_args);
 
       return (
         <Fragment>
@@ -439,8 +433,9 @@ export const declare_covid_expenditures_panel = () =>
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: (subject, options) => {
-        const years_with_expenditures = YearsWithCovidData.lookup(subject.id)
-          ?.years_with_expenditures;
+        const years_with_expenditures = YearsWithCovidData.lookup(
+          subject.id
+        )?.years_with_expenditures;
         return (
           !_.isEmpty(years_with_expenditures) && {
             years: years_with_expenditures,

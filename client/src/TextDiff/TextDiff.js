@@ -460,12 +460,8 @@ export default class TextDiffApp extends React.Component {
   }
 
   render() {
-    const {
-      loading,
-      subject,
-      processed_indicators,
-      indicator_status,
-    } = this.state;
+    const { loading, subject, processed_indicators, indicator_status } =
+      this.state;
 
     const { history } = this.props;
 

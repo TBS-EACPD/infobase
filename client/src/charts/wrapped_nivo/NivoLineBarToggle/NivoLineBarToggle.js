@@ -216,9 +216,10 @@ export class NivoLineBarToggle extends React.Component {
                         this.graph_modes,
                         graph_mode
                       );
-                      const name_of_next_graph_mode = this.graph_modes[
-                        (current_mode_index + 1) % this.graph_modes.length
-                      ];
+                      const name_of_next_graph_mode =
+                        this.graph_modes[
+                          (current_mode_index + 1) % this.graph_modes.length
+                        ];
                       this.setState({
                         graph_mode: name_of_next_graph_mode,
                       });

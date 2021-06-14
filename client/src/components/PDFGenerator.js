@@ -46,20 +46,14 @@ export class PDFGenerator extends React.Component {
 
   lazy_load_heavy_dependencies() {
     // these node modules are huge and ony needed if/when a user actually goes to download a panel. Lazy loaded to save ~700KiB until needed
-    import(
-      "./PDFGenerator_lazy_loaded_dependencies.side-effects"
-    ).then((dependencies) => this.setState({ dependencies }));
+    import("./PDFGenerator_lazy_loaded_dependencies.side-effects").then(
+      (dependencies) => this.setState({ dependencies })
+    );
   }
 
   generate_and_download_pdf({ jsPDF, qrcode, html2canvas }) {
-    const {
-      dom_element,
-      target_id,
-      link,
-      include_footer,
-      title,
-      file_name,
-    } = this.props;
+    const { dom_element, target_id, link, include_footer, title, file_name } =
+      this.props;
 
     const element_to_print =
       !dom_element && target_id
@@ -271,12 +265,8 @@ export class PDFGenerator extends React.Component {
 
   render() {
     const { generating_pdf } = this.state;
-    const {
-      button_class_name,
-      icon_color,
-      icon_alternate_color,
-      icon_size,
-    } = this.props;
+    const { button_class_name, icon_color, icon_alternate_color, icon_size } =
+      this.props;
 
     return (
       !is_IE() && (

@@ -125,9 +125,8 @@ class EmailFrontend extends React.Component {
         ({ form_type }, key) => key === "meta" || form_type
       );
 
-      const values_for_automatic_fields = get_values_for_automatic_fields(
-        automatic_fields
-      );
+      const values_for_automatic_fields =
+        get_values_for_automatic_fields(automatic_fields);
 
       send_completed_email_template(template_name, {
         ...completed_template,

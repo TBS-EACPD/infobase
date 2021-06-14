@@ -12,12 +12,8 @@ import "./FilterTable.scss";
 
 export class FilterTable extends React.Component {
   render() {
-    const {
-      items,
-      item_component_order,
-      click_callback,
-      show_eyes_override,
-    } = this.props;
+    const { items, item_component_order, click_callback, show_eyes_override } =
+      this.props;
 
     const nothing_is_filtered = _.reduce(
       items,

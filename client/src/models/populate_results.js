@@ -378,13 +378,8 @@ export function api_load_results_bundle(subject, result_docs) {
         });
       }
 
-      const {
-        results,
-        indicators,
-        pi_dr_links,
-      } = extract_flat_data_from_results_hierarchies(
-        hierarchical_response_data
-      );
+      const { results, indicators, pi_dr_links } =
+        extract_flat_data_from_results_hierarchies(hierarchical_response_data);
 
       _.each(results, (obj) => Result.create_and_register(obj));
       _.each(indicators, (obj) => Indicator.create_and_register(obj));

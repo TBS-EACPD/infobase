@@ -126,13 +126,14 @@ describe("log_email_and_meta_to_db", () => {
 
   it("Builds a mongoose model from the original template, constructs and saves a valid record based on the completed template", async () => {
     // The model.create call at the end of log_email_and_meta_to_db has been mocked out and replaced with model.validate
-    const final_record_object_validated_against_constructed_model = await log_email_and_meta_to_db(
-      request,
-      template_name,
-      original_template,
-      completed_template,
-      email_config
-    );
+    const final_record_object_validated_against_constructed_model =
+      await log_email_and_meta_to_db(
+        request,
+        template_name,
+        original_template,
+        completed_template,
+        email_config
+      );
 
     return expect(
       final_record_object_validated_against_constructed_model

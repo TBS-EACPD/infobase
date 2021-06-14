@@ -422,9 +422,8 @@ class CovidEstimatesPanel extends React.Component {
         gov_latest_tabled_est_doc_in_year_text: get_est_doc_name(
           gov_latest_tabled_est_doc_in_year
         ),
-        gov_latest_tabled_est_doc_in_year_glossary_key: get_est_doc_glossary_key(
-          gov_latest_tabled_est_doc_in_year
-        ),
+        gov_latest_tabled_est_doc_in_year_glossary_key:
+          get_est_doc_glossary_key(gov_latest_tabled_est_doc_in_year),
         gov_covid_estimates_in_year: _.reduce(
           summary_by_fiscal_year[selected_year],
           (memo, { vote, stat }) => memo + vote + stat,
@@ -635,8 +634,9 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: () => get_source_links(["COVID"]),
       calculate: function (subject, options) {
-        const years_with_estimates = YearsWithCovidData.lookup(subject.id)
-          ?.years_with_estimates;
+        const years_with_estimates = YearsWithCovidData.lookup(
+          subject.id
+        )?.years_with_estimates;
         return (
           !_.isEmpty(years_with_estimates) && { years: years_with_estimates }
         );

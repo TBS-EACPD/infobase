@@ -65,10 +65,11 @@ const validate_completed_template = (original_template, completed_template) => {
     completed_fields
   );
 
-  const values_are_expected_and_match_value_types = verify_values_are_expected_and_match_value_types(
-    field_templates,
-    completed_fields
-  );
+  const values_are_expected_and_match_value_types =
+    verify_values_are_expected_and_match_value_types(
+      field_templates,
+      completed_fields
+    );
 
   return required_fields_present && values_are_expected_and_match_value_types;
 };

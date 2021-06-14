@@ -26,10 +26,8 @@ export default {
   },
 
   title: {
-    en:
-      "Expenditures by Standard Object from {{pa_last_year_5}} to {{pa_last_year}} ($)",
-    fr:
-      "Dépenses par article courant de {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
+    en: "Expenditures by Standard Object from {{pa_last_year_5}} to {{pa_last_year}} ($)",
+    fr: "Dépenses par article courant de {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
   },
 
   add_cols: function () {

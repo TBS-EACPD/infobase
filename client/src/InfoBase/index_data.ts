@@ -1,30 +1,23 @@
 const index_lang_lookups = {
   open_data_text: {
-    en:
-      "If you wish to leave JavaScript turned off, you can find all of the GC InfoBase's data on open data through the following links.",
-    fr:
-      "Si vous souhaitez laisser JavaScript désactivé, vous trouveriez les liens vers les données ouvertes ci-dessous.",
+    en: "If you wish to leave JavaScript turned off, you can find all of the GC InfoBase's data on open data through the following links.",
+    fr: "Si vous souhaitez laisser JavaScript désactivé, vous trouveriez les liens vers les données ouvertes ci-dessous.",
   },
   open_data_title: {
     en: "Financial, Results and Budget data: ",
-    fr:
-      "Les données financières et les données relatives aux résultats et au budget : ",
+    fr: "Les données financières et les données relatives aux résultats et au budget : ",
   },
   open_data_HR_title: {
     en: "People Management Data: ",
     fr: "Données relatives à la gestion des personnes : ",
   },
   open_data_link: {
-    en:
-      "https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
-    fr:
-      "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+    en: "https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+    fr: "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
   },
   open_data_HR_link: {
-    en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html",
-    fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html",
+    en: "https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html",
+    fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html",
   },
   page_title: {
     en: "GC InfoBase",
@@ -47,10 +40,8 @@ const index_lang_lookups = {
     fr: "fr",
   },
   meta_description: {
-    en:
-      "The GC InfoBase is the government’s interactive data-visualization tool, which transforms complex financial, people, and results data into simple, visual stories. Discover how much the federal government spent, how many people we employed, and what results we achieved.",
-    fr:
-      "L’InfoBase du GC est un outil interactif de visualisation des données qui traduit visuellement en termes simples l’information gouvernementale sur les finances, les résultats et la gestion des personnes. Trouver combien le gouvernement fédéral a dépensé, combien de personne il emploi et quels sont les résultats qu’il a accomplis.",
+    en: "The GC InfoBase is the government’s interactive data-visualization tool, which transforms complex financial, people, and results data into simple, visual stories. Discover how much the federal government spent, how many people we employed, and what results we achieved.",
+    fr: "L’InfoBase du GC est un outil interactif de visualisation des données qui traduit visuellement en termes simples l’information gouvernementale sur les finances, les résultats et la gestion des personnes. Trouver combien le gouvernement fédéral a dépensé, combien de personne il emploi et quels sont les résultats qu’il a accomplis.",
   },
   other_lang_name: {
     en: "Français",

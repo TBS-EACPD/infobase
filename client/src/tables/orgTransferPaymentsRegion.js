@@ -15,10 +15,8 @@ export default {
   tags: ["TP_GEO", "SOBJ10"],
 
   link: {
-    en:
-      "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-    fr:
-      "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+    en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+    fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
   },
 
   name: {

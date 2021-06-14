@@ -21,10 +21,8 @@ export default {
   tags: ["PEOPLE", "FPS", "AGE", "ANNUAL", "SUPPRESSED_DATA"],
 
   link: {
-    en:
-      "http://open.canada.ca/data/en/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
-    fr:
-      "http://ouvert.canada.ca/data/fr/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
+    en: "http://open.canada.ca/data/en/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
+    fr: "http://ouvert.canada.ca/data/fr/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
   },
 
   name: {

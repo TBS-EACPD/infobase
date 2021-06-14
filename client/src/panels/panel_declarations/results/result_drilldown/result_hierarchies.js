@@ -180,9 +180,8 @@ export function create_full_results_hierarchy({
     }
   });
 
-  const unfiltered_flat_nodes = convert_d3_hierarchy_to_explorer_hierarchy(
-    d3_hierarchy
-  );
+  const unfiltered_flat_nodes =
+    convert_d3_hierarchy_to_explorer_hierarchy(d3_hierarchy);
 
   //eliminate all nodes without result-descendants
   const flat_nodes = filter_hierarchy(

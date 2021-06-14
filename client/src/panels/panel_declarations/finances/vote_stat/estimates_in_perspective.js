@@ -43,11 +43,8 @@ export const declare_estimates_in_perspective_panel = () =>
 
       render({ title, calculations, footnotes, sources }) {
         const { panel_args } = calculations;
-        const {
-          subject,
-          gov_tabled_est_in_year,
-          dept_tabled_est_in_year,
-        } = panel_args;
+        const { subject, gov_tabled_est_in_year, dept_tabled_est_in_year } =
+          panel_args;
 
         footnotes = _.concat(
           new FootNote({

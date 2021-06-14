@@ -59,10 +59,8 @@ export default {
   },
 
   title: {
-    en:
-      "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($)",
-    fr:
-      "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
+    en: "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($)",
+    fr: "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
   },
 
   add_cols: function () {
@@ -116,10 +114,8 @@ export default {
             fr: "Autorisations budgétaires disponibles pour l'emploi",
           },
           description: {
-            en:
-              "Corresponds to the authorities provided by Parliament, including transfers from other organizations or adjustments that are made during the year.",
-            fr:
-              "Correspondent aux autorisations accordées par le Parlement, y compris les transferts provenant d’autres organisations ou les rajustements qui ont été effectués au cours de l’exercice.",
+            en: "Corresponds to the authorities provided by Parliament, including transfers from other organizations or adjustments that are made during the year.",
+            fr: "Correspondent aux autorisations accordées par le Parlement, y compris les transferts provenant d’autres organisations ou les rajustements qui ont été effectués au cours de l’exercice.",
           },
         },
         {
@@ -130,10 +126,8 @@ export default {
             fr: "Dépenses",
           },
           description: {
-            en:
-              "Corresponds to the funds spent against authorities available that year.",
-            fr:
-              "Correspondent aux dépenses effectuées aux termes de autorisations disponibles cette année-là.",
+            en: "Corresponds to the funds spent against authorities available that year.",
+            fr: "Correspondent aux dépenses effectuées aux termes de autorisations disponibles cette année-là.",
           },
         },
         {

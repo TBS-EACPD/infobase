@@ -121,9 +121,8 @@ describe("get_log_objects_for_request", function () {
       ],
     };
 
-    const [log_object1, log_object2] = get_log_objects_for_request(
-      POST_request
-    );
+    const [log_object1, log_object2] =
+      get_log_objects_for_request(POST_request);
 
     expect(log_object1.origin).toEqual("test");
     expect(log_object1.method).toEqual("POST");

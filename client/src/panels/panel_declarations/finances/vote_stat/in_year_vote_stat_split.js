@@ -14,34 +14,30 @@ const voted = text_maker("voted");
 const stat = text_maker("stat");
 const main_col = "{{est_in_year}}_estimates";
 
-const render_w_options = ({ graph_col, text_col, text_key }) => ({
-  title,
-  calculations,
-  footnotes,
-  sources,
-  glossary_keys,
-}) => {
-  const { panel_args } = calculations;
-  const { vote_stat_est_in_year, text_calculations } = panel_args;
+const render_w_options =
+  ({ graph_col, text_col, text_key }) =>
+  ({ title, calculations, footnotes, sources, glossary_keys }) => {
+    const { panel_args } = calculations;
+    const { vote_stat_est_in_year, text_calculations } = panel_args;
 
-  const data = _.map(vote_stat_est_in_year, (data_set) => ({
-    ...data_set,
-    id: data_set.label,
-  }));
+    const data = _.map(vote_stat_est_in_year, (data_set) => ({
+      ...data_set,
+      id: data_set.label,
+    }));
 
-  return (
-    <StdPanel {...{ title, sources, footnotes, glossary_keys }}>
-      <Col isText size={text_col}>
-        <TM k={text_key} args={text_calculations} />
-      </Col>
-      {!is_a11y_mode && (
-        <Col isGraph size={graph_col}>
-          <WrappedNivoPie data={data} />
+    return (
+      <StdPanel {...{ title, sources, footnotes, glossary_keys }}>
+        <Col isText size={text_col}>
+          <TM k={text_key} args={text_calculations} />
         </Col>
-      )}
-    </StdPanel>
-  );
-};
+        {!is_a11y_mode && (
+          <Col isGraph size={graph_col}>
+            <WrappedNivoPie data={data} />
+          </Col>
+        )}
+      </StdPanel>
+    );
+  };
 
 const get_vote_stat_est_in_year = (table, subject) => {
   const voted_stat = table.voted_stat(main_col, subject, true);

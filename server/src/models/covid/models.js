@@ -94,22 +94,19 @@ export default function (model_singleton) {
   model_singleton.define_model("CovidGovSummary", CovidGovSummarySchema);
   model_singleton.define_model("CovidOrgSummary", CovidOrgSummarySchema);
 
-  const {
-    CovidMeasure,
-    YearsWithCovidData,
-    CovidGovSummary,
-    CovidOrgSummary,
-  } = model_singleton.models;
+  const { CovidMeasure, YearsWithCovidData, CovidGovSummary, CovidOrgSummary } =
+    model_singleton.models;
 
   const loaders = {
     covid_measure_loader: create_resource_by_id_attr_dataloader(
       CovidMeasure,
       "covid_measure_id"
     ),
-    covid_measures_by_related_org_ids_loader: create_resource_by_foreignkey_attr_dataloader(
-      CovidMeasure,
-      "related_org_ids.org_ids"
-    ),
+    covid_measures_by_related_org_ids_loader:
+      create_resource_by_foreignkey_attr_dataloader(
+        CovidMeasure,
+        "related_org_ids.org_ids"
+      ),
     years_with_covid_data_loader: create_resource_by_foreignkey_attr_dataloader(
       YearsWithCovidData,
       "subject_id"

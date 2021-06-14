@@ -42,10 +42,8 @@ import "./result_flat_table.scss";
 const { current_drr_key } = Results;
 const { months } = businessConstants;
 
-const {
-  indicator_target_text,
-  indicator_actual_text,
-} = indicator_text_functions;
+const { indicator_target_text, indicator_actual_text } =
+  indicator_text_functions;
 
 const current_drr_year = result_docs[current_drr_key].year;
 

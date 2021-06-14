@@ -177,7 +177,7 @@ export function completeAssign(target: any, ...sources: any[]): any {
       let descriptor = Object.getOwnPropertyDescriptor(source, sym);
       if (descriptor && descriptor.enumerable) {
         // Typescript bug that symbol cannot be used as index: https://github.com/microsoft/TypeScript/issues/1863
-        descriptors[(sym as unknown) as string] = descriptor;
+        descriptors[sym as unknown as string] = descriptor;
       }
     });
     Object.defineProperties(target, descriptors);

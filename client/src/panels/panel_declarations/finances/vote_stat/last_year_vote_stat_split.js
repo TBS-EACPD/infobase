@@ -14,34 +14,30 @@ import { text_maker, TM } from "./vote_stat_text_provider";
 
 const { std_years } = year_templates;
 
-const render_w_options = ({ text_key, graph_col, text_col }) => ({
-  title,
-  calculations,
-  sources,
-  footnotes,
-  glossary_keys,
-}) => {
-  const { panel_args } = calculations;
-  const { vote_stat, text_calculations } = panel_args;
+const render_w_options =
+  ({ text_key, graph_col, text_col }) =>
+  ({ title, calculations, sources, footnotes, glossary_keys }) => {
+    const { panel_args } = calculations;
+    const { vote_stat, text_calculations } = panel_args;
 
-  const data = _.map(vote_stat, (data_set) => ({
-    ...data_set,
-    id: data_set.label,
-  }));
+    const data = _.map(vote_stat, (data_set) => ({
+      ...data_set,
+      id: data_set.label,
+    }));
 
-  return (
-    <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
-      <Col isText size={text_col}>
-        <TM k={text_key} args={text_calculations} />
-      </Col>
-      {!is_a11y_mode && (
-        <Col isGraph size={graph_col}>
-          <WrappedNivoPie data={data} />
+    return (
+      <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
+        <Col isText size={text_col}>
+          <TM k={text_key} args={text_calculations} />
         </Col>
-      )}
-    </StdPanel>
-  );
-};
+        {!is_a11y_mode && (
+          <Col isGraph size={graph_col}>
+            <WrappedNivoPie data={data} />
+          </Col>
+        )}
+      </StdPanel>
+    );
+  };
 
 export const declare_vote_stat_split_panel = () =>
   declare_panel({

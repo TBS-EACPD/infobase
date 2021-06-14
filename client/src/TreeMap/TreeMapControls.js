@@ -154,13 +154,8 @@ export class TreeMapControls extends React.Component {
   }
 
   render() {
-    const {
-      perspective,
-      color_var,
-      year,
-      filter_var,
-      get_changes,
-    } = this.props;
+    const { perspective, color_var, year, filter_var, get_changes } =
+      this.props;
     return (
       <div className="treemap-controls">
         <TreeMapLabeledBox label={text_maker("treemap_display_value_label")}>

@@ -23,10 +23,8 @@ export default class TableOfContents extends React.Component {
   }
   on_click = () => this.setState({ is_open: !this.state.is_open });
   render() {
-    const {
-      panel_titles_by_key,
-      scroll_to_panel_when_all_loading_done,
-    } = this.props;
+    const { panel_titles_by_key, scroll_to_panel_when_all_loading_done } =
+      this.props;
 
     const { is_open } = this.state;
 

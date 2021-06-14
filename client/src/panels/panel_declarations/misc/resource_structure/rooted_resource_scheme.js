@@ -134,9 +134,8 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
     }
   });
 
-  const unfiltered_flat_nodes = convert_d3_hierarchy_to_explorer_hierarchy(
-    d3_hierarchy
-  );
+  const unfiltered_flat_nodes =
+    convert_d3_hierarchy_to_explorer_hierarchy(d3_hierarchy);
 
   //only allow nodes that are programs with planned spending data (and their descendants)
   const flat_nodes = filter_hierarchy(

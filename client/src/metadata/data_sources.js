@@ -56,10 +56,8 @@ function table_to_row_item(table) {
 }
 
 const infobase_open_data_page = {
-  en:
-    "http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
-  fr:
-    "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+  en: "http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
+  fr: "https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f",
 };
 
 const sources = _.chain([
@@ -85,10 +83,8 @@ const sources = _.chain([
     frequency: text_maker("quarterly"),
     open_data: infobase_open_data_page,
     report_link: {
-      en:
-        "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
-      fr:
-        "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
     },
     get description() {
       return desc_from_glossary_keys("MAINS", "SUPPS");
@@ -101,10 +97,8 @@ const sources = _.chain([
     key: "CFMRS",
     title: text_maker("cfmrs_title"),
     open_data: {
-      en:
-        "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
-      fr:
-        "http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
+      en: "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
+      fr: "http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
     },
     frequency: text_maker("yearly"),
     get description() {
@@ -131,10 +125,8 @@ const sources = _.chain([
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
-      en:
-        "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
-      fr:
-        "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
     },
     get description() {
       return desc_from_glossary_keys("DP");
@@ -156,10 +148,8 @@ const sources = _.chain([
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
     report_link: {
-      en:
-        "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
-      fr:
-        "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
+      en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
+      fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
     },
     get description() {
       return desc_from_glossary_keys("DRR");
@@ -194,10 +184,8 @@ const sources = _.chain([
     title: text_maker("transfer_payments_source_title"),
     frequency: text_maker("yearly"),
     open_data: {
-      en:
-        "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-      fr:
-        "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+      en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+      fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
     },
     description: text_maker("transfer_payments_source_desc"),
     items: [
@@ -233,10 +221,8 @@ const sources = _.chain([
     frequency: text_maker("as_needed"),
     description: <TM k="covid_desc" />,
     open_data: {
-      en:
-        "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
-      fr:
-        "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
+      en: "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
+      fr: "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e",
     },
     items: [
       {

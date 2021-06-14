@@ -39,11 +39,8 @@ const ServicesStandardsPanel = ({ subject }) => {
     service_standards_summary,
   } = data;
 
-  const {
-    services_w_standards_count,
-    standards_count,
-    met_standards_count,
-  } = service_standards_summary[0];
+  const { services_w_standards_count, standards_count, met_standards_count } =
+    service_standards_summary[0];
   const not_met_standards_count = standards_count - met_standards_count;
 
   const common_column_configs = {
