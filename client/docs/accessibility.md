@@ -28,21 +28,22 @@ The InfoBase text-only version can be accessed at http://tbs-sct.gc.ca/ems-sgd/e
 
 Additional strategies toward different aspects accessibility of main website include:
 
-* Ensuring text/background colours meet WCAG AA contrast ratio thresholds
-* Avoiding the use of colour alone (i.e., without text labels) to indicate information. If colours are used, colourblind-safe colour schemes are used (e.g. in the Treemap colour scales)
-* Keyboard-only navigation of all pages is supported through the addition of tab-navigation to elements that don't natively support it
-* The site should adapt gracefully to enlarging text and font sizes
-* Alt text / transcriptions are added to images and video (where they occur)
-* Using [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) to indicate functionality when the element is performing a different role, e.g. when a link is styled to look like a button. In theory these can help screen readers interpret the page, but older SR hardware may not recognize these and we can't 100% rely on them (which is why there is the fallback text-only version of the site)
+- Ensuring text/background colours meet WCAG AA contrast ratio thresholds
+- Avoiding the use of colour alone (i.e., without text labels) to indicate information. If colours are used, colourblind-safe colour schemes are used (e.g. in the Treemap colour scales)
+- Keyboard-only navigation of all pages is supported through the addition of tab-navigation to elements that don't natively support it
+- The site should adapt gracefully to enlarging text and font sizes
+- Alt text / transcriptions are added to images and video (where they occur)
+- Using [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) to indicate functionality when the element is performing a different role, e.g. when a link is styled to look like a button. In theory these can help screen readers interpret the page, but older SR hardware may not recognize these and we can't 100% rely on them (which is why there is the fallback text-only version of the site)
 
 ## Potential improvements
 
 Currently, there is no text-only version of 2 sub-applications (assuming that the functionality of the text-only versions is equal to that of the standard versions):
-* The government at a glance partition diagram
-* The treemap explorer
+
+- The government at a glance partition diagram
+- The treemap explorer
 
 Other potential improvements:
 
-* It may be possible to produce tabular versions of these sub-applications, or linking to the report builder for that data.
-* Tabular versions of infographic tables could be accessible from the main page, i.e. flipping back and forth could be supported.
-* Improved use of semantic markup (using elements such as sections and headers) could improve screen reader usability.
+- It may be possible to produce tabular versions of these sub-applications, or linking to the report builder for that data.
+- Tabular versions of infographic tables could be accessible from the main page, i.e. flipping back and forth could be supported.
+- Improved use of semantic markup (using elements such as sections and headers) could improve screen reader usability.

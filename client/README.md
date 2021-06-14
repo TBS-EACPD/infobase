@@ -1,15 +1,15 @@
 [![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)
 
-*(le Français suit)*
+_(le Français suit)_
 
-GC InfoBase
-========
+# GC InfoBase
 
 Client-side code and content for the GC InfoBase. / Code et contenu pour le côté client d'InfoBase du GC.
 
-*(Le Français suit)*
+_(Le Français suit)_
 
 ## Table of Contents
+
 - [GC InfoBase](#gc-infobase)
   - [Getting Started](#getting-started)
     - [First time setup](#first-time-setup)
@@ -22,17 +22,20 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 ## Getting Started
 
 ### Pre-requisite:
+
 - node@14.x (latest long term support) (`npm install -g n && n lts`)
 - npm@6.x (`npm install -g npm@6`)
 - Git
 
 ### First time setup
+
 1. Have npm, node, and git installed
-2. Open a terminal and go to the directory where you want to store the project, e.g. `cd ~/Documents` 
+2. Open a terminal and go to the directory where you want to store the project, e.g. `cd ~/Documents`
 3. `git clone https://github.com/TBS-EACPD/InfoBase.git`
 4. In the root directory `./InfoBase`, run `npm install && cd client && npm install && cd ../server && npm install && cd ../email_backend && npm install && cd ..`
 
 ### Building GC InfoBase
+
 0. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
 1. `npm ci` to get node modules (skip if node modules are upto date)
 2. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
@@ -41,6 +44,7 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 \* `IB_q_both` and `IB_dev` are not the only flavours of build. See package.json for a list of all build commands
 
 ### Visiting a local build
+
 0. prerequisites: 1) follow the build steps above, 2) follow the steps up through spinning up a local GraphQL API server from the [server README](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md)
 1. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
 2. `npm run serve-loopback` to start a server in GC InfoBase directory, localhost only
@@ -49,34 +53,34 @@ Client-side code and content for the GC InfoBase. / Code et contenu pour le côt
 Note: if you use `npm run serve` instead you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. `IB_q`, or equivalent builds, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
 
 ### TMUX to automate build
+
 Once you have all of the environment set up for InfoBase development, you can follow the steps below to automate all of the build process in in one terminal screen using tmux (terminal multiplexer)
+
 1. Install Homebrew (skip if you already have Homebrew, aren't on a Mac, or already have tmux): `cd /usr/local && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew`
 2. Install tmux: `brew install tmux`
 3. Download/copy this [tmux config file](https://github.com/Stephen-ONeil/.dotfiles/blob/master/common/tmux/.tmux.conf), put it into your user folder (`~` directory)
 4. Make sure you're on the root directory of InfoBase, and run: `npm run tmux_env`
 5. Wait for everything to finish running. Once everything is running, you should be able to visit the local site
 
-Note: closing the terminal will not kill the tmux session. To kill the session, run `tmux kill-session -t IB`. Re-running `npm run tmux_env` when an InfoBase tmux session already exists will reconnect you to the existing session, rather than starting a new one. If you wan a fresh restart, with the full scripted start up process, you must first kill any existing InfoBase sessions. 
+Note: closing the terminal will not kill the tmux session. To kill the session, run `tmux kill-session -t IB`. Re-running `npm run tmux_env` when an InfoBase tmux session already exists will reconnect you to the existing session, rather than starting a new one. If you wan a fresh restart, with the full scripted start up process, you must first kill any existing InfoBase sessions.
 
 ## Tests
 
 ### Browser tests
 
 #### Route load tests
-Route load tests are a quick and dirty form of fairly basic coverage. They just ensure that all routes are able to load without throwing an error. 
+
+Route load tests are a quick and dirty form of fairly basic coverage. They just ensure that all routes are able to load without throwing an error.
+
 1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
 2. Have an active `npm run serve-loopback` process
 3. `npm run route_load_tests`
 
 New route load tests can be added in `browser-tests/route-load-tests-config.js`.
 
+# InfoBase du GC
 
-
-InfoBase du GC
-========
-
-
-## Table des matières 
+## Table des matières
 
 - [InfoBase du GC](#infobase-du-gc)
   - [Commencer](#commencer)
@@ -90,11 +94,13 @@ InfoBase du GC
 ## Commencer
 
 ### Première installation
+
 1. InfoBase du GC nécessite l'installation de `npm`, `node`, et `git`
 2. Démarrez un commande d'exécution et naviguez au chemin d’accès ou vous voulez placer le projet, p. ex. `cd ~/Documents`
 3. `git clone https://github.com/TBS-EACPD/InfoBase.git`
 
 ### Lancez la compilation d'InfoBase du GC
+
 0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire d'InfoBase du GC, p. ex. `cd ~/Documents/infobase/client`
 1. `npm ci` pour télécharger les modules node.
 2. `npm run IB_base_watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
@@ -122,4 +128,3 @@ Les tests de chargement fournissent une couverture de test de la forme « quick-
 3. `npm run route_load_tests`
 
 Vous pouvez ajouter les tests additionnels dans le fichier `browser-tests/route-load-tests-config.js`.
-

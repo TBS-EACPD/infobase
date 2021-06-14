@@ -20,8 +20,3 @@ client/browser-tests/temp-route-tests-*
 *.yaml
 *.yml
 *.html
-*.json
-*.graphql
-*.gql
-*.md
-*.babelrc

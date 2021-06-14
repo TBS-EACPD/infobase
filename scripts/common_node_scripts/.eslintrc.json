@@ -1,8 +1,6 @@
 {
-  "plugins": [
-    "node"
-  ],
-  "extends": [ "../../.eslintrc.json", "plugin:node/recommended" ],
+  "plugins": ["node"],
+  "extends": ["../../.eslintrc.json", "plugin:node/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalDecorators": true
@@ -14,7 +12,7 @@
     "node": true
   },
   "rules": {
-      "node/no-unsupported-features": ["error", {"ignores": ["modules"]}],
-      "no-console": 0
+    "node/no-unsupported-features": ["error", { "ignores": ["modules"] }],
+    "no-console": 0
   }
 }

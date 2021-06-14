@@ -1,4 +1,5 @@
 # Directory Structure
+
 Listed are the modules/directories that will be encountered in the client `src` folder and their purposes
 
 ## Most important/likely to be referenced
@@ -28,7 +29,7 @@ Listed are the modules/directories that will be encountered in the client `src` 
 - `infographic`: this is where the files for the main app exist (Clicking into Finances/Covid/People/Results leads to the main app)
 - `InfoLab`: files where "InfoLab" sub app is stored
 - `metadata`: TODO
-- `models`: files containing "standard classes". Except it also like a phonebook for these classes 
+- `models`: files containing "standard classes". Except it also like a phonebook for these classes
 - `panels`: this is where panels for `infographic` are stored
 - `partition`: this is where files for the "Partition diagram" subapp exist. (See "The government at a glance" subapp for example)
 - `png`: png images stored here
@@ -37,7 +38,7 @@ Listed are the modules/directories that will be encountered in the client `src` 
 - `rpb`: this is where files for the "Report Builder" subapp exist
 - `search`: this is for search specifc components. (See the search bar on the home page or the glossary page)
 - `Survey`: this is for the survey specific components (See feedback/report a problem button at the bottom of the pages). Also contains the "survey" page/router
-- `svg`: this is where raw svg icons are stored - anything that needs to be rendered before JavaScript is loaded is stored here.  Also see `icons`
+- `svg`: this is where raw svg icons are stored - anything that needs to be rendered before JavaScript is loaded is stored here. Also see `icons`
 - `tables`: this is where the meta data for tables in `rpb` is stored
 - `TagExplorer`: this is where files for the "Tag Explorer" subapp exist
 - `TextDiff`: this is where files for the experimental subapp "Indicator Text Comparison Tool" exists. (Visit InfoLab on website to find this)

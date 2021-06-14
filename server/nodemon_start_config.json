@@ -3,5 +3,5 @@
     "restart": "kill-port 1337",
     "crash": "kill-port 1337"
   },
- "delay": "1500"
+  "delay": "1500"
 }

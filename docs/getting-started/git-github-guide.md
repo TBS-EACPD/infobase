@@ -1,18 +1,19 @@
 Never heard of git? Want a light refresher? [Here's a random article I googled up just now](https://medium.freecodecamp.org/what-is-git-and-how-to-use-it-c341b049ae61). Hopefully though, someone from the team has given you one or two git crash-courses by now.
 
 ## Table of Contents
-  - [Basic contribution workflow](#basic-contribution-workflow)
-  - [Using git on the command line](#using-git-on-the-command-line)
-    - [Terminology](#terminology)
-    - [The staging area](#the-staging-area)
-    - [Committing](#committing)
-    - [Branches](#branches)
-    - [Pushing and pulling](#pushing-and-pulling)
-    - [Other tips](#other-tips)
-      - [Branch naming](#branch-naming)
-      - [Branch scope](#branch-scope)
-  - [GitHub](#github)
-    - [Tips for using GitHub](#tips-for-using-github)
+
+- [Basic contribution workflow](#basic-contribution-workflow)
+- [Using git on the command line](#using-git-on-the-command-line)
+  - [Terminology](#terminology)
+  - [The staging area](#the-staging-area)
+  - [Committing](#committing)
+  - [Branches](#branches)
+  - [Pushing and pulling](#pushing-and-pulling)
+  - [Other tips](#other-tips)
+    - [Branch naming](#branch-naming)
+    - [Branch scope](#branch-scope)
+- [GitHub](#github)
+  - [Tips for using GitHub](#tips-for-using-github)
 
 # Basic contribution workflow
 
@@ -28,8 +29,8 @@ The basic workflow for making contributions to the repo. If you aren't familiar 
 1. Once finalized, passing in CI, and approved, you can go ahead and merge it into master! Click the big green button on GitHub (make sure the button's in rebase mode, we don't actually merge 'round here).
 1. Delete the branch on GitHub. There will be an option to do this after you merge it.
 
-
 # Using git on the command line
+
 This is a **review** of some core concepts of git and of some of the most frequently used git commands. Supplement this with plenty of your own googling! There are also some tips and a couple best-practices in here. It's a bit scatter shot since it's had multiple authors contribute to it years apart, so feel free to ask questions/for clarification from whoever's around!
 
 When you see something between angle brackets in a code example, do not type the angle brackets, they're just placeholders for your own arguments.
@@ -42,25 +43,25 @@ hash/SHA: the long string of alpha-numeric characters that define a commit. SHAs
 
 HEAD: a short way to refer to the last commit on the current branch. When you commit to a specific branch, you change that branch's head to point to the new commit. `HEAD~1` , `HEAD~2`, ... `HEAD~n` are quick ways to refer the commit n commits before HEAD. In many commands, you can use the name of a branch to refer to its HEAD commit.
 
-
 ## The staging area
 
-Changes must be 'staged' before they can be added to a commit. Git is aware of all modifications made within a repo as they happen, but it treats staged and unstaged changes very differently. 
+Changes must be 'staged' before they can be added to a commit. Git is aware of all modifications made within a repo as they happen, but it treats staged and unstaged changes very differently.
 
-`git status` is the command you will be using most. It will tell you what branch you are on, what files are *staged* for committing and what files are modified but not staged.
+`git status` is the command you will be using most. It will tell you what branch you are on, what files are _staged_ for committing and what files are modified but not staged.
 
-`git add <file>` adds that file or its *changes* (meaning you use `add` to update files too) to the staging area. You can also add entire directories (`git add <dir>`) or simply add all current changes (`git add -A`).
+`git add <file>` adds that file or its _changes_ (meaning you use `add` to update files too) to the staging area. You can also add entire directories (`git add <dir>`) or simply add all current changes (`git add -A`).
 
 `git rm`, `git mv` do what `rm` and `mv` usually do, but also add that rename or removal to the staging area.
 
 Staging let's you select changes file-by-file for inclusion within your next commit (or next `git stash`). As stated, staged and unstaged changes are treated very differently by git (for example, if you switch branches with unstaged changes then these changes, where applicable, will be present within the branch you change to; on the other hand you will not be permitted to change branches when your staging area has anything in it). It will all make more sense with use/googling as you encounter these discrepancies.
 
 ## Committing
+
 To commit is to take your current staged changes and to identify them as a discrete patch on to what was the HEAD commit at the time of committing. This new commit becomes the next HEAD of whatever branch you were on, representing the new state of the repo in that branch. Alongside the changes made in them, commits contain metadata (commit author, time stamp, etc.) Commits can (and **should**) be accompanied by a commit message.
 
-  `git commit -m "<your comment here>"`
-  
-  your commit message should describe (preferably in the present tense) what your changes are doing.
+`git commit -m "<your comment here>"`
+
+your commit message should describe (preferably in the present tense) what your changes are doing.
 
 In practice, a commit should generally be the smallest chunk of work that can stand on its own. Good commit modularity and communication save time later on, and leave you with a more useful repo history!
 
@@ -78,39 +79,40 @@ To create a new branch, run `git branch -b <branch-name>`, and then switch to it
 
 `git pull origin <branch>` will merge in the updates from the remote branch. Always use `git pull --rebase` as it will avoid introducing useless merge commits that clutter history (although you may then need to --force your next push). By the way, rebasing is an important concept! Ask us in person, preferably when we've got a whiteboard on hand.
 
-`git push origin <branch>` will upload your commits on your current branch to the repo on that current branch. 
+`git push origin <branch>` will upload your commits on your current branch to the repo on that current branch.
 
 make sure that the remote branch and the local branch are of the same name, and that your local branch is strictly ahead of the remote branch. Unlike `git pull`, `git push` will not attempt to merge if your local branch is behind the remote version in some way.
 
-## Other tips 
+## Other tips
+
 The best way to learn more about git is Google. Stack Overflow is full of answers to specific git questions, but be cautious because some "secret git tricks", when you don't really understand them, can cause troubles in a shared repo.
 
-* fixing the same merge conflicts every time your rebase? Read about and enable rerere (this article's decent https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67)
-* Diffs
-    * Diffs are a way of displaying the difference between two snapshots (commits) of a repo. 
-    * Diffs can be applied to single files as well 
-    * They are a list of additions/deletions
-    * Want to see all differences within the repo between two commits? 
-      *  `git diff SHA1 SHA2` will show which additions/deletions need to be applied to SHA1 in order to 'become' SHA2
-      *  `git diff SHA` will default to `git diff SHA HEAD
-      *  `git diff` will default to `git diff HEAD <current_directory_state>` i.e. what you've changed and not committed.
-      *  `git diff --name-only SHA1 SHA2` will just list affected files
-    * Want to see the changes introduced by a commit ? `git show SHA` 
-* `git log`
-    * `git log` will display all the linear history for the commit (or branch) you're looking at
-    * **2 dot log= set minus** `git log EXCLUDE..INCLUDE` will show the commits in INCLUDE's history  'set minus' the commits in EXCLUDE's history. 
-    * **3 dot log= symmetric difference** `git log A...B`will show all the commits that are in (A but not in B) OR  (B but not in A).
-    * `git log -p <file>` can show a specific file's history. It will show entire diffs for each commit.
-    * similarly, `git log follow <file>` will list the commits modifying that file, but without the diffs
-* Git troubles?
-    * revert back to HEAD : `git reset --hard HEAD` will bring everything back to the original commit state
-    * `git reset --soft HEAD` will unstage changes, without modifying any files.
-* if a command tells you to re-run it with --force or -f, there is probably something risky going on. If you are not confident in your git skills, this is a good time to phone a friend!
-* if you've deleted or modified a file that you want to revert to the current commit, **and it isn't staged**, you can use git checkout <file>.
-* if you've deleted or modified a file that you want to revert to the current commit **and it's staged**, use git checkout HEAD <file>
-* if you've forgotten a small thing or screwed something up on a commit you just made, **and it's not pushed to the repo**, you can use `git commit --amend` to add staged changes in to the current commit.
-* be careful if you ever amend/collapse or delete commits that are already pushed to the remote repo. It will necessitate a --force push and may cause jam-ups with anyone else working from the same branch
-* if you want a copy of an old file from another commit, you can use `git show <commit>:<file> > <new_temp_file>`  (the > is input redirection). Here `<commit>` is the first 6 characters of a commit's hash. To compare to the last commit, use HEAD as a shortcut to the hash. 
+- fixing the same merge conflicts every time your rebase? Read about and enable rerere (this article's decent https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67)
+- Diffs
+  - Diffs are a way of displaying the difference between two snapshots (commits) of a repo.
+  - Diffs can be applied to single files as well
+  - They are a list of additions/deletions
+  - Want to see all differences within the repo between two commits?
+    - `git diff SHA1 SHA2` will show which additions/deletions need to be applied to SHA1 in order to 'become' SHA2
+    - `git diff SHA` will default to `git diff SHA HEAD
+    - `git diff` will default to `git diff HEAD <current_directory_state>` i.e. what you've changed and not committed.
+    - `git diff --name-only SHA1 SHA2` will just list affected files
+  - Want to see the changes introduced by a commit ? `git show SHA`
+- `git log`
+  - `git log` will display all the linear history for the commit (or branch) you're looking at
+  - **2 dot log= set minus** `git log EXCLUDE..INCLUDE` will show the commits in INCLUDE's history 'set minus' the commits in EXCLUDE's history.
+  - **3 dot log= symmetric difference** `git log A...B`will show all the commits that are in (A but not in B) OR (B but not in A).
+  - `git log -p <file>` can show a specific file's history. It will show entire diffs for each commit.
+  - similarly, `git log follow <file>` will list the commits modifying that file, but without the diffs
+- Git troubles?
+  - revert back to HEAD : `git reset --hard HEAD` will bring everything back to the original commit state
+  - `git reset --soft HEAD` will unstage changes, without modifying any files.
+- if a command tells you to re-run it with --force or -f, there is probably something risky going on. If you are not confident in your git skills, this is a good time to phone a friend!
+- if you've deleted or modified a file that you want to revert to the current commit, **and it isn't staged**, you can use git checkout <file>.
+- if you've deleted or modified a file that you want to revert to the current commit **and it's staged**, use git checkout HEAD <file>
+- if you've forgotten a small thing or screwed something up on a commit you just made, **and it's not pushed to the repo**, you can use `git commit --amend` to add staged changes in to the current commit.
+- be careful if you ever amend/collapse or delete commits that are already pushed to the remote repo. It will necessitate a --force push and may cause jam-ups with anyone else working from the same branch
+- if you want a copy of an old file from another commit, you can use `git show <commit>:<file> > <new_temp_file>` (the > is input redirection). Here `<commit>` is the first 6 characters of a commit's hash. To compare to the last commit, use HEAD as a shortcut to the hash.
 
 ### Branch naming
 
@@ -119,7 +121,7 @@ Pick names that are short and descriptive. "budget_est_sunburst" instead of "new
 Some organizations use slashes or parentheses with prefixes denoting the contributor or the category, e.g. "feat/improve-legends". We don't organize our branches that way, and slashes will screw up the dev links, so don't use them.
 
 If you're working on a branch that shouldn't be public for one reason or another, start the branch name with double underscores (`__`). A pre-push git hook will prevent you from pushing a `__*`branch to the public repo and CI won't create a dev link for it.
-   
+
 ### Branch scope
 
 Generally, branches should be a single feature. If you think it might be possible that we will want to merge only part of a branch, but not the rest, that might be a good indication that it should be a separate branch. If it starts to involve large numbers of different files, either it should be multiple branches you're doing some kind of code refactor. In that case, for your own sanity it would be wise to finish and merge that branch as quickly as possible, so it doesn't get out of date and difficult to merge.
@@ -136,6 +138,6 @@ You can authenticate more seamlessly using an SSH key or a GitHub [Personal Acce
 
 Pull requests on GitHub allow us to organize contributions and protect our master branch.
 
-**Rule one of InfoBase, don't make commits on the master branch.** <sub>Unless you need to. For reasons.</sub> 
+**Rule one of InfoBase, don't make commits on the master branch.** <sub>Unless you need to. For reasons.</sub>
 
 If you're not sure, it's always better to make a separate branch and a pull request. Even for small changes, pull requests allow us to keep a record of what was done and for people to discuss it.
