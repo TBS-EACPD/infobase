@@ -4,10 +4,42 @@ import React, { Fragment } from "react";
 
 import { run_template, create_text_maker } from "src/models/text";
 
+import {
+  LocationProps,
+  TreeMapSideBarProps,
+  HistoryProps,
+} from "./TreeMapSidebar";
+
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
 
 const text_maker = create_text_maker([treemap_text]);
+
+interface year_to_year_changes_props {
+  [index: string]: string;
+}
+
+interface year_changes_props {
+  [index: string]: string[];
+}
+
+interface years_props {
+  [index: string]: string[];
+}
+
+interface TreeMapLabeledBoxProps {
+  label: string;
+  children: React.ReactElement;
+}
+
+interface TreeMapRadioButtonsProps {
+  options: {
+    display: string;
+    id: string;
+    active: boolean;
+  }[];
+  onChange: Function;
+}
 
 const all_years = [
   "pa_last_year_5",
@@ -27,7 +59,7 @@ const all_year_changes = [
   "pa_last_year_2:pa_last_year",
 ];
 
-const year_to_year_changes = {
+const year_to_year_changes: year_to_year_changes_props = {
   pa_last_year_5: "pa_last_year_5:pa_last_year_4",
   pa_last_year_4: "pa_last_year_4:pa_last_year_3",
   pa_last_year_3: "pa_last_year_3:pa_last_year_2",
@@ -38,7 +70,7 @@ const year_to_year_changes = {
   planning_year_3: "pa_last_year",
 };
 
-const year_changes = {
+const year_changes: year_changes_props = {
   drf: all_year_changes,
   drf_ftes: all_year_changes,
   tp: all_year_changes,
@@ -46,7 +78,7 @@ const year_changes = {
   so: all_year_changes.slice(2, 4),
 };
 
-const years = {
+const years: years_props = {
   drf: all_years,
   drf_ftes: all_years,
   tp: all_years.slice(0, 5),
@@ -94,7 +126,11 @@ const so_type_controls = [
   { id: "3", display: text_maker("revenues") },
 ];
 
-function create_new_path(cur_params, new_param, new_val) {
+function create_new_path(
+  cur_params: TreeMapSideBarProps,
+  new_param: string,
+  new_val: string
+) {
   let new_perspective = cur_params.perspective; // default
   let new_color_var = cur_params.color_var;
   let new_filter_var = cur_params.filter_var;
@@ -128,12 +164,12 @@ function create_new_path(cur_params, new_param, new_val) {
   return new_path;
 }
 
-export class TreeMapControls extends React.Component {
-  constructor() {
-    super();
+export class TreeMapControls extends React.Component<TreeMapSideBarProps> {
+  constructor(props: TreeMapSideBarProps) {
+    super(props);
   }
 
-  handle_click(key, value) {
+  handle_click(key: string, value: string) {
     const {
       perspective,
       color_var,
@@ -148,7 +184,7 @@ export class TreeMapControls extends React.Component {
       key,
       value
     );
-    if (location.pathname !== new_path) {
+    if (location && history && location.pathname !== new_path) {
       history.push(new_path);
     }
   }
@@ -171,7 +207,7 @@ export class TreeMapControls extends React.Component {
                 display,
                 active: id === perspective,
               }))}
-              onChange={(id) => {
+              onChange={(id: string) => {
                 this.handle_click("perspective", id);
               }}
             />
@@ -183,17 +219,17 @@ export class TreeMapControls extends React.Component {
               options={[
                 {
                   id: "single_year",
-                  active: !get_changes,
+                  active: get_changes === "",
                   display: text_maker("single_year"),
                 },
                 {
                   id: "year_changes",
-                  active: get_changes,
+                  active: get_changes !== "",
                   display: text_maker("year_changes"),
                 },
               ]}
-              onChange={(id) => {
-                this.handle_click("get_changes", id === "year_changes");
+              onChange={(id: string) => {
+                this.handle_click("get_changes", String(id === "year_changes"));
               }}
             />
           </div>
@@ -218,7 +254,7 @@ export class TreeMapControls extends React.Component {
                       active: id === year,
                     }))
               }
-              onChange={(id) => {
+              onChange={(id: string) => {
                 this.handle_click("year", id);
               }}
             />
@@ -233,7 +269,7 @@ export class TreeMapControls extends React.Component {
                   display,
                   active: (!filter_var && id === "All") || id === filter_var,
                 }))}
-                onChange={(id) => {
+                onChange={(id: string) => {
                   this.handle_click("filter_var", id);
                 }}
               />
@@ -249,7 +285,7 @@ export class TreeMapControls extends React.Component {
                   display,
                   active: id === color_var,
                 }))}
-                onChange={(id) => {
+                onChange={(id: string) => {
                   this.handle_click("color_var", id);
                 }}
               />
@@ -266,7 +302,7 @@ export class TreeMapControls extends React.Component {
                     display,
                     active: (!filter_var && id === "All") || id === filter_var,
                   }))}
-                  onChange={(id) => {
+                  onChange={(id: string) => {
                     this.handle_click("filter_var", id);
                   }}
                 />
@@ -283,7 +319,7 @@ export class TreeMapControls extends React.Component {
                   display,
                   active: (!filter_var && id === "All") || id === filter_var,
                 }))}
-                onChange={(id) => {
+                onChange={(id: string) => {
                   this.handle_click("filter_var", id);
                 }}
               />
@@ -295,7 +331,7 @@ export class TreeMapControls extends React.Component {
   }
 }
 
-class TreeMapLabeledBox extends React.Component {
+class TreeMapLabeledBox extends React.Component<TreeMapLabeledBoxProps> {
   render() {
     const { label, children } = this.props;
 
@@ -310,7 +346,10 @@ class TreeMapLabeledBox extends React.Component {
   }
 }
 
-const TreeMapRadioButtons = ({ options, onChange }) => (
+const TreeMapRadioButtons = ({
+  options,
+  onChange,
+}: TreeMapRadioButtonsProps) => (
   <div className="treemap-options">
     {options.map(({ display, id, active }) => (
       <button
