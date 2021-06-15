@@ -558,7 +558,7 @@ export class _DisplayTable extends React.Component<
                   }}
                   colSpan={_.size(visible_ordered_col_keys)}
                 >
-                  <LeafSpinner ref="spinner" config_name="tabbed_content" />
+                  <LeafSpinner config_name="tabbed_content" />
                 </td>
               </tr>
             </tbody>
