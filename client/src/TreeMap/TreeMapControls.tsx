@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 
 import { run_template, create_text_maker } from "src/models/text";
 
-import { TreeMapSideBarProps } from "./TreeMapSideBar";
+import { TreeMapSideBarProps } from "./TreeMapSidebar";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
