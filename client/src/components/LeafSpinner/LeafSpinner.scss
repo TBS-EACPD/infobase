@@ -13,24 +13,8 @@
   height: 100px;
 }
 
-.leaf-spinner-outer-circle {
-  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite;
-  -ms-animation: leaf-spinner-rotate-reverse 2s linear infinite;
-  -moz-animation: leaf-spinner-rotate-reverse 2s linear infinite;
-  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite;
-  animation: leaf-spinner-rotate-reverse 2s linear infinite;
-}
-
-.leaf-spinner-inner-circle {
-  -webkit-animation: leaf-spinner-rotate 2s linear infinite;
-  -ms-animation: leaf-spinner-rotate 2s linear infinite;
-  -moz-animation: leaf-spinner-rotate 2s linear infinite;
-  -o-animation: leaf-spinner-rotate 2s linear infinite;
-  animation: leaf-spinner-rotate 2s linear infinite;
-}
-
-.leaf-spinner-outer-circle,
-.leaf-spinner-inner-circle {
+.leaf-spinner__outer-circle,
+.leaf-spinner__inner-circle {
   -webkit-transform-origin: center center;
   -ms-transform-origin: center center;
   -moz-transform-origin: center center;
@@ -44,45 +28,18 @@
   left: 0;
 }
 
-.leaf-spinner-center {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 1;
-}
-
-.leaf-spinner-outer-circle-path {
-  stroke-dasharray: 50;
-  stroke-linecap: round;
-}
-
-.leaf-spinner-inner-circle-path {
-  stroke-dasharray: 30;
-  stroke-dashoffset: 0;
-  stroke-linecap: round;
-}
-
-@-webkit-keyframes leaf-spinner-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
+.leaf-spinner__outer-circle {
+  & > circle {
+    stroke-dasharray: 50;
+    stroke-linecap: round;
   }
-}
 
-@keyframes leaf-spinner-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  -ms-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  -moz-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  -webkit-animation: leaf-spinner-rotate-reverse 2s linear infinite;
+  animation: leaf-spinner-rotate-reverse 2s linear infinite;
 }
-
 @-webkit-keyframes leaf-spinner-rotate-reverse {
   100% {
     -webkit-transform: rotate(-360deg);
@@ -92,7 +49,6 @@
     transform: rotate(-360deg);
   }
 }
-
 @keyframes leaf-spinner-rotate-reverse {
   100% {
     -webkit-transform: rotate(-360deg);
@@ -100,5 +56,37 @@
     -moz-transform: rotate(-360deg);
     -o-transform: rotate(-360deg);
     transform: rotate(-360deg);
+  }
+}
+
+.leaf-spinner__inner-circle {
+  & > circle {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+  }
+
+  -webkit-animation: leaf-spinner-rotate 2s linear infinite;
+  -ms-animation: leaf-spinner-rotate 2s linear infinite;
+  -moz-animation: leaf-spinner-rotate 2s linear infinite;
+  -o-animation: leaf-spinner-rotate 2s linear infinite;
+  animation: leaf-spinner-rotate 2s linear infinite;
+}
+@-webkit-keyframes leaf-spinner-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes leaf-spinner-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
