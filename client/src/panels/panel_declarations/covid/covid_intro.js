@@ -89,9 +89,8 @@ class CovidIntroPanelDyanmicText extends React.Component {
               args={{
                 ...panel_args,
                 selected_year,
-                gov_tabled_est_docs_in_year_text: get_est_doc_list_plain_text(
-                  est_docs_in_year
-                ),
+                gov_tabled_est_docs_in_year_text:
+                  get_est_doc_list_plain_text(est_docs_in_year),
                 est_docs_in_year_are_plural: est_docs_in_year.length > 1,
                 gov_covid_estimates_in_year: _.reduce(
                   covid_estimates,
