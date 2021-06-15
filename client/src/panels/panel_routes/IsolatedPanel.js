@@ -3,7 +3,7 @@ import React from "react";
 import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index";
 import { PanelRenderer } from "src/panels/PanelRenderer";
 
-import { SpinnerWrapper } from "src/components/index";
+import { LeafSpinner } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 import { create_text_maker } from "src/models/text";
@@ -73,7 +73,7 @@ export default class IsolatedPanel extends React.Component {
   render() {
     const { loading, subject, panel_key } = this.state;
     if (loading) {
-      return <SpinnerWrapper config_name={"sub_route"} />;
+      return <LeafSpinner config_name={"sub_route"} />;
     } else {
       return (
         <StandardRouteContainer

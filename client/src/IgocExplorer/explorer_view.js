@@ -3,7 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import { createSelector } from "reselect";
 
-import { SpinnerWrapper, DlItem, CheckBox } from "src/components/index";
+import { LeafSpinner, DlItem, CheckBox } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 
@@ -330,7 +330,7 @@ class ExplorerForIgoc extends React.Component {
           {loading && (
             <div className="loading-overlay">
               <div style={{ height: "200px", position: "relative" }}>
-                <SpinnerWrapper config_name={"sub_route"} />
+                <LeafSpinner config_name={"sub_route"} />
               </div>
             </div>
           )}

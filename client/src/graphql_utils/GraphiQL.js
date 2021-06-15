@@ -8,7 +8,7 @@ import GraphiQL from "graphiql/dist/index";
 
 import _ from "lodash";
 
-import { SpinnerWrapper, ContainerEscapeHatch } from "src/components/index";
+import { LeafSpinner, ContainerEscapeHatch } from "src/components/index";
 import { log_standard_event } from "src/core/analytics";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
@@ -104,7 +104,7 @@ export default class _GraphiQL extends React.Component {
         description={""}
         route_key="_graphiql"
       >
-        {_.isNull(fetcher) && <SpinnerWrapper />}
+        {_.isNull(fetcher) && <LeafSpinner />}
         {!_.isNull(fetcher) && (
           <ContainerEscapeHatch>
             <div

@@ -5,7 +5,7 @@ import React from "react";
 
 import {
   Panel,
-  SpinnerWrapper,
+  LeafSpinner,
   WriteToClipboard,
   create_text_maker_component,
 } from "src/components/index";
@@ -142,7 +142,7 @@ export default class IndicatorDisplayPanel extends React.Component {
     );
 
     return loading ? (
-      <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+      <LeafSpinner ref="spinner" config_name={"sub_route"} />
     ) : (
       <Panel
         title={indicator.name}

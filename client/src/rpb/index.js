@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 //re-usable view stuff
 import { withRouter } from "react-router";
 
-import { SpinnerWrapper, LabeledBox } from "src/components/index";
+import { LeafSpinner, LabeledBox } from "src/components/index";
 
 import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
 
@@ -373,7 +373,7 @@ class RPB extends React.Component {
           </div>
         </LabeledBox>
         {this.state.loading ? (
-          <SpinnerWrapper config_name={"route"} />
+          <LeafSpinner config_name={"route"} />
         ) : (
           <Fragment>
             {table ? (
@@ -511,7 +511,7 @@ export default class ReportBuilder extends React.Component {
       >
         <AnalyticsSynchronizer {...url_state} />
         {this.state.loading ? (
-          <SpinnerWrapper config_name={"route"} />
+          <LeafSpinner config_name={"route"} />
         ) : (
           <RPB state={url_state} />
         )}

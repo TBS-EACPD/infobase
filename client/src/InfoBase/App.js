@@ -6,7 +6,7 @@ import { createStore } from "redux";
 
 import { HeaderNotification } from "src/components/HeaderNotification/HeaderNotification";
 import { PageDetails } from "src/components/PageDetails";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { initialize_analytics } from "src/core/analytics";
 import { DevFip } from "src/core/DevFip";
@@ -139,7 +139,7 @@ export class App extends React.Component {
             {has_local_storage && <SurveyPopup />}
             <ReactUnmounter />
             <TooltipActivator />
-            <Suspense fallback={<SpinnerWrapper config_name={"route"} />}>
+            <Suspense fallback={<LeafSpinner config_name={"route"} />}>
               <Switch>
                 <Route
                   path="/error-boundary-test"

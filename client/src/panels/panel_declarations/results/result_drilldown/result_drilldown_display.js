@@ -19,7 +19,7 @@ import {
 import {
   DlItem,
   TabbedControls,
-  SpinnerWrapper,
+  LeafSpinner,
   Format,
   TextAbbrev,
 } from "src/components/index";
@@ -243,7 +243,7 @@ export default class ResultsExplorerDisplay extends React.Component {
           marginBottom: "-70px",
         }}
       >
-        <SpinnerWrapper config_name={"tabbed_content"} />
+        <LeafSpinner config_name={"tabbed_content"} />
       </div>
     );
 
@@ -363,7 +363,7 @@ export default class ResultsExplorerDisplay extends React.Component {
             {loading_query && (
               <div className="loading-overlay">
                 <div style={{ height: "200px", position: "relative" }}>
-                  <SpinnerWrapper config_name={"tabbed_content"} />
+                  <LeafSpinner config_name={"tabbed_content"} />
                 </div>
               </div>
             )}

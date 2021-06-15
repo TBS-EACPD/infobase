@@ -5,7 +5,7 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils"
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
-  SpinnerWrapper,
+  LeafSpinner,
   DisplayTable,
   create_text_maker_component,
 } from "src/components/index";
@@ -30,7 +30,7 @@ const HighApplicationVolumePanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <SpinnerWrapper config_name="inline_panel" />;
+    return <LeafSpinner config_name="inline_panel" />;
   }
   const { service_high_volume_summary } = data;
   const highest_volume_dept = service_high_volume_summary[0];

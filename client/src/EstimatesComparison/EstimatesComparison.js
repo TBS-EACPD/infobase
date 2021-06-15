@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SpinnerWrapper } from "src/components/index";
+import { LeafSpinner } from "src/components/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
@@ -46,7 +46,7 @@ export default class EstimatesComparison extends React.Component {
 
     let content;
     if (this.state.loading) {
-      content = <SpinnerWrapper config_name={"sub_route"} />;
+      content = <LeafSpinner config_name={"sub_route"} />;
     } else {
       content = this.explorer_instance.to_react_element({ history });
     }

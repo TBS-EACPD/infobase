@@ -16,7 +16,7 @@ import {
   Select,
   Panel,
   create_text_maker_component,
-  SpinnerWrapper,
+  LeafSpinner,
 } from "src/components/index";
 
 import { result_docs } from "src/models/results";
@@ -592,7 +592,7 @@ export default class TextDiffApp extends React.Component {
           </div>
         </div>
         {loading ? (
-          <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+          <LeafSpinner ref="spinner" config_name={"sub_route"} />
         ) : (
           <div>
             <h2>{text_maker("list_of_indicators")}</h2>

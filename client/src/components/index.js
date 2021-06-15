@@ -23,7 +23,7 @@ export { ContainerEscapeHatch } from "./ContainerEscapeHatch";
 export { FilterTable } from "./FilterTable/FilterTable";
 export { CheckBox } from "./CheckBox/CheckBox";
 export { StatelessDetails, Details } from "./Details/Details";
-export { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
+export { LeafSpinner } from "./LeafSpinner/LeafSpinner";
 export { KeyConceptList } from "./KeyConceptList/KeyConceptList";
 export { BackToTop } from "./BackToTop/BackToTop";
 export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones/Tombstones";

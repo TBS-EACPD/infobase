@@ -7,7 +7,7 @@ import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index"
 import { PanelRegistry } from "src/panels/PanelRegistry";
 import { PanelRenderer } from "src/panels/PanelRenderer";
 
-import { SpinnerWrapper } from "src/components/index";
+import { LeafSpinner } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 import { create_text_maker } from "src/models/text";
@@ -237,7 +237,7 @@ export default class PanelInventory extends React.Component {
 
     let content;
     if (initial_loading || loading) {
-      content = <SpinnerWrapper config_name={"sub_route"} />;
+      content = <LeafSpinner config_name={"sub_route"} />;
     } else {
       const { subject, panel, related_panels } = get_derived_props(this.props);
 

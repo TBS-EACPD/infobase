@@ -7,10 +7,7 @@ import {
   ServiceDigitalStatus,
 } from "src/panels/panel_declarations/services/index";
 
-import {
-  create_text_maker_component,
-  SpinnerWrapper,
-} from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { useSingleService } from "src/models/populate_services";
 import { Subject } from "src/models/subject";
@@ -31,7 +28,7 @@ const SingleServiceRoute = (props) => {
   } = props;
   const { loading, data: service } = useSingleService(service_id);
   if (loading) {
-    return <SpinnerWrapper config_name="sub_route" />;
+    return <LeafSpinner config_name="sub_route" />;
   }
   const subject = Subject.Dept.lookup(subject_id);
 
@@ -51,7 +48,7 @@ const SingleServiceRoute = (props) => {
       route_key="single_service_route"
     >
       {loading ? (
-        <SpinnerWrapper ref="spinner" config_name={"sub_route"} />
+        <LeafSpinner ref="spinner" config_name={"sub_route"} />
       ) : (
         <div>
           <h1>{service.name}</h1>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FootnoteList, SpinnerWrapper } from "src/components/index";
+import { FootnoteList, LeafSpinner } from "src/components/index";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
 
@@ -37,7 +37,7 @@ export default class FootnoteInventory extends React.Component {
         description={null}
         route_key={"footnote_inventory"}
       >
-        {loading && <SpinnerWrapper config_name={"sub_route"} />}
+        {loading && <LeafSpinner config_name={"sub_route"} />}
         {!loading && <FootnoteList footnotes={FootNote.get_all_flat()} />}
       </StandardRouteContainer>
     );

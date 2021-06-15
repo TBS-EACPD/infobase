@@ -6,7 +6,7 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils"
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
-  SpinnerWrapper,
+  LeafSpinner,
   DisplayTable,
   sort_func_template,
   ModalButton,
@@ -270,7 +270,7 @@ class ResultsTable extends React.Component {
             marginBottom: "-10px",
           }}
         >
-          <SpinnerWrapper config_name={"tabbed_content"} />
+          <LeafSpinner config_name={"tabbed_content"} />
         </div>
       );
     } else {

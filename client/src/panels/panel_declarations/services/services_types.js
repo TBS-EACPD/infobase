@@ -5,7 +5,7 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils"
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
-  SpinnerWrapper,
+  LeafSpinner,
   DisplayTable,
   create_text_maker_component,
 } from "src/components/index";
@@ -31,7 +31,7 @@ const ServicesTypesPanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <SpinnerWrapper config_name="inline_panel" />;
+    return <LeafSpinner config_name="inline_panel" />;
   }
   const { service_general_stats, service_type_summary } = data;
   const max_type = _.maxBy(service_type_summary, "value");

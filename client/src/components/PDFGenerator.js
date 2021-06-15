@@ -9,8 +9,8 @@ import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 import { IconDownload } from "src/icons/icons";
 import { get_static_url } from "src/request_utils";
 
+import { LeafSpinner } from "./LeafSpinner/LeafSpinner";
 import { create_text_maker_component } from "./misc_util_components";
-import { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
 
 import text from "./PDFGenerator.yaml";
 
@@ -286,7 +286,7 @@ export class PDFGenerator extends React.Component {
             </button>
           )}
           {generating_pdf && (
-            <SpinnerWrapper
+            <LeafSpinner
               config_name={"small_inline"}
               title={text_maker("downloading_pdf")}
               alt={text_maker("downloading_pdf")}

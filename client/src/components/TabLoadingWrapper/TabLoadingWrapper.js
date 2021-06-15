@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 const TabLoadingSpinner = () => (
   <div
@@ -10,7 +10,7 @@ const TabLoadingSpinner = () => (
       marginBottom: "-10px",
     }}
   >
-    <SpinnerWrapper config_name={"tabbed_content"} />
+    <LeafSpinner config_name={"tabbed_content"} />
   </div>
 );
 
