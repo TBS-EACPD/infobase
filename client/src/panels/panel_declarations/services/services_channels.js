@@ -8,7 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   DisplayTable,
   create_text_maker_component,
-  SpinnerWrapper,
+  LeafSpinner,
 } from "src/components/index";
 
 import { useServices } from "src/models/populate_services";
@@ -67,7 +67,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   }, [data]);
 
   if (loading) {
-    return <SpinnerWrapper config_name="inline_panel" />;
+    return <LeafSpinner config_name="inline_panel" />;
   }
   const { max_vol_service_name, max_vol_service_value } = _.chain(data)
     .map(({ name, service_report }) => ({

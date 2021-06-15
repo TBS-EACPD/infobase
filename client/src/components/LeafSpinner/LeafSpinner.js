@@ -4,7 +4,8 @@ import React from "react";
 import { primaryColor, secondaryColor } from "src/core/color_defs";
 
 import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
-import "src/components/SpinnerWrapper/LeafSpinner.scss";
+
+import "./LeafSpinner.scss";
 
 export const LeafSpinner = ({ config_name }) => {
   const default_spinner_config_form = (scale) => ({

@@ -14,9 +14,8 @@ import {
 } from "src/email_backend_utils";
 
 import { CheckBox } from "./CheckBox/CheckBox";
+import { LeafSpinner } from "./LeafSpinner/LeafSpinner";
 import { create_text_maker_component } from "./misc_util_components";
-
-import { SpinnerWrapper } from "./SpinnerWrapper/SpinnerWrapper";
 
 import text from "./EmailFrontend.yaml";
 
@@ -305,7 +304,7 @@ class EmailFrontend extends React.Component {
       <div className="email-backend-form">
         {loading && (
           <div style={{ height: "100px", position: "relative" }}>
-            <SpinnerWrapper config_name="tabbed_content" />
+            <LeafSpinner config_name="tabbed_content" />
           </div>
         )}
         {!loading && (
@@ -380,7 +379,7 @@ class EmailFrontend extends React.Component {
                   {!awaiting_backend_response &&
                     text_maker("email_frontend_send")}
                   {awaiting_backend_response && (
-                    <SpinnerWrapper config_name="small_inline" />
+                    <LeafSpinner config_name="small_inline" />
                   )}
                 </button>
               }

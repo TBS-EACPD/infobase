@@ -10,7 +10,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   DisplayTable,
   create_text_maker_component,
-  SpinnerWrapper,
+  LeafSpinner,
 } from "src/components/index";
 
 import { useSummaryServices } from "src/models/populate_services";
@@ -42,7 +42,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <SpinnerWrapper config_name="inline_panel" />;
+    return <LeafSpinner config_name="inline_panel" />;
   }
   const {
     service_general_stats: { number_of_services },

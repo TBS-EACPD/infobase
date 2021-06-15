@@ -8,7 +8,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
-  SpinnerWrapper,
+  LeafSpinner,
   TabbedContent,
   DisplayTable,
 } from "src/components/index";
@@ -159,7 +159,7 @@ class TPMap extends React.Component {
     const { loading, population_data } = this.state;
 
     if (loading) {
-      return <SpinnerWrapper config_name={"inline_panel"} />;
+      return <LeafSpinner config_name={"inline_panel"} />;
     } else {
       const {
         subject,

@@ -9,7 +9,7 @@ import {
   Format,
 } from "src/components/misc_util_components";
 import { SortDirections } from "src/components/SortDirection/SortDirection";
-import { SpinnerWrapper } from "src/components/SpinnerWrapper/SpinnerWrapper";
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { LegendList } from "src/charts/legends/LegendList";
 
@@ -558,7 +558,7 @@ export class _DisplayTable extends React.Component<
                   }}
                   colSpan={_.size(visible_ordered_col_keys)}
                 >
-                  <SpinnerWrapper ref="spinner" config_name="tabbed_content" />
+                  <LeafSpinner ref="spinner" config_name="tabbed_content" />
                 </td>
               </tr>
             </tbody>

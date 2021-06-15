@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { SpinnerWrapper } from "src/components/index";
+import { LeafSpinner } from "src/components/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { StandardRouteContainer } from "src/core/NavComponents";
@@ -69,7 +69,7 @@ export default class TagExplorer extends React.Component {
       return (
         <StandardRouteContainer {...route_container_args}>
           {header}
-          <SpinnerWrapper config_name={"route"} />
+          <LeafSpinner config_name={"route"} />
         </StandardRouteContainer>
       );
     }

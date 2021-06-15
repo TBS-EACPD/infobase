@@ -7,10 +7,7 @@ import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/panels/panel_declar
 import { PanelRegistry } from "src/panels/PanelRegistry";
 import { PanelRenderer } from "src/panels/PanelRenderer";
 
-import {
-  create_text_maker_component,
-  SpinnerWrapper,
-} from "src/components/index";
+import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 
@@ -211,7 +208,7 @@ class InfoGraph_ extends React.Component {
         </div>
         <div>
           <div>
-            {loading && <SpinnerWrapper config_name={"route"} />}
+            {loading && <LeafSpinner config_name={"route"} />}
             {!loading && (
               <BubbleMenu
                 items={subject_bubble_defs}

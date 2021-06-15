@@ -2,14 +2,14 @@ import React from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs";
 
-import { SpinnerWrapper } from "./SpinnerWrapper";
+import { LeafSpinner } from "./LeafSpinner";
 
 export default {
-  title: "SpinnerWrapper",
-  component: SpinnerWrapper,
+  title: "LeafSpinner",
+  component: LeafSpinner,
 };
 
-const Template = (args) => <SpinnerWrapper {...args} />;
+const Template = (args) => <LeafSpinner {...args} />;
 export const Initial = Template.bind({});
 export const Route = Template.bind({});
 export const SubRoute = Template.bind({});

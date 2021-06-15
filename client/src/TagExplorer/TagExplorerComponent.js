@@ -3,7 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
-  SpinnerWrapper,
+  LeafSpinner,
   KeyConceptList,
   TabbedControls,
   AlertBanner,
@@ -210,7 +210,7 @@ export default class TagExplorerComponent extends React.Component {
           {loading && (
             <div className="loading-overlay">
               <div style={{ height: "200px", position: "relative" }}>
-                <SpinnerWrapper config_name={"sub_route"} />
+                <LeafSpinner config_name={"sub_route"} />
               </div>
             </div>
           )}

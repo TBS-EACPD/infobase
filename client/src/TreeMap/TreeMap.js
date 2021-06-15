@@ -7,10 +7,7 @@ import "d3-transition";
 import _ from "lodash";
 import React from "react";
 
-import {
-  SpinnerWrapper,
-  create_text_maker_component,
-} from "src/components/index";
+import { LeafSpinner, create_text_maker_component } from "src/components/index";
 
 import { run_template } from "src/models/text";
 
@@ -518,7 +515,7 @@ export default class TreeMapper extends React.Component {
         route_key={"treemap"}
       >
         {loading || !data ? (
-          <SpinnerWrapper ref="spinner" config_name={"route"} />
+          <LeafSpinner ref="spinner" config_name={"route"} />
         ) : (
           <div>
             <div className="TreeMap__Wrapper">

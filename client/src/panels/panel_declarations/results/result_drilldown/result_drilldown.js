@@ -11,7 +11,7 @@ import {
   result_docs_in_tabling_order,
 } from "src/panels/panel_declarations/results/results_common";
 
-import { SpinnerWrapper } from "src/components/index";
+import { LeafSpinner } from "src/components/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
@@ -53,7 +53,7 @@ class SingleSubjResultsContainer extends React.Component {
             marginBottom: "-10px",
           }}
         >
-          <SpinnerWrapper config_name={"tabbed_content"} />
+          <LeafSpinner config_name={"tabbed_content"} />
         </div>
       );
     } else {

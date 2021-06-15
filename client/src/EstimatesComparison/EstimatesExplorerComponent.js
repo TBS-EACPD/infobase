@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  SpinnerWrapper,
+  LeafSpinner,
   FootnoteList,
   Format,
   RadioButtons,
@@ -275,7 +275,7 @@ export default class EstimatesExplorerComponent extends React.Component {
           {loading && (
             <div className="loading-overlay">
               <div style={{ height: "200px", position: "relative" }}>
-                <SpinnerWrapper config_name={"sub_route"} />
+                <LeafSpinner config_name={"sub_route"} />
               </div>
             </div>
           )}
