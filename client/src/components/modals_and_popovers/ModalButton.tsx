@@ -6,8 +6,21 @@ import { SafeJSURL } from "src/general_utils";
 
 import { StatelessModal } from "./StatelessModal";
 
-class ModalButton_ extends React.Component {
-  constructor(props) {
+interface ModalButtonProps {
+  show_condition: { name: string; value: string };
+  match: { params: { options: string } };
+  button_text: string;
+  title: string;
+  children: string | React.ReactNode;
+  aria_label: string;
+}
+
+type ModalButtonState = {
+  show_modal: boolean;
+};
+
+class ModalButton_ extends React.Component<ModalButtonProps, ModalButtonState> {
+  constructor(props: ModalButtonProps) {
     super(props);
 
     const {
@@ -22,12 +35,6 @@ class ModalButton_ extends React.Component {
     this.state = {
       show_modal:
         show_condition &&
-        /*
-          show_condition: {
-            name: string
-            value: any
-          }
-         */
         options_object[show_condition.name] &&
         show_condition.value === options_object[show_condition.name],
     };
@@ -54,7 +61,7 @@ class ModalButton_ extends React.Component {
           title={title}
           body={children}
           on_close_callback={this.toggle_modal}
-          additional_dialog_class={"modal-responsive"}
+          additional_dialog_class_name={"modal-responsive"}
         />
       </Fragment>
     );
