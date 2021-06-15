@@ -13,27 +13,30 @@ export default {
 };
 
 const Template = (args) => {
-  const [_, updateArgs] = useArgs();
+  const [_x, updateArgs] = useArgs();
 
-  function click_callback(key) {
-    const updateItems = args.items;
-    updateItems[parseInt(key)]["count"] =
-      updateItems[parseInt(key)]["count"] + 1;
-
+  const click_callback = (clicked_item_key) => {
     console.log(
-      updateItems[parseInt(key)]["text"] +
-        " has been clicked " +
-        updateItems[parseInt(key)]["count"] +
-        " time(s) now."
+      `${clicked_item_key} item has been clicked, consumer's callback fires.` +
+        "Example callback here toggles the clicked item, but actual behaviour is up to the consumer as this component itself is stateless"
     );
 
-    updateArgs({ ...args, items: updateItems });
-  }
+    updateArgs({
+      ...args,
+      items: _.map(args.items, ({ key, active, ...rest }) => ({
+        key,
+        active: key === clicked_item_key ? !active : active,
+        ...rest,
+      })),
+    });
+  };
+
   return <VisibilityControl {...args} click_callback={click_callback} />;
 };
 
-const svg = (
+const get_icon = (key) => (
   <svg
+    key={key}
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
@@ -49,44 +52,21 @@ const svg = (
   </svg>
 );
 
-const items = [
-  {
+const items = _.chain()
+  .range(4)
+  .map((key) => ({
     active: true,
-    count: 0,
-    text: "Option 1",
+    count: _.random(0, 100),
+    text: `Option ${key}`,
     aria_text: "",
-    icon: svg,
-    key: "0",
-  },
-  {
-    active: true,
-    count: 0,
-    text: "Option 2",
-    aria_text: "",
-    icon: svg,
-    key: "1",
-  },
-  {
-    active: true,
-    count: 0,
-    text: "Option 3",
-    aria_text: "",
-    icon: svg,
-    key: "2",
-  },
-  {
-    active: true,
-    count: 0,
-    text: "Option 4",
-    aria_text: "",
-    icon: svg,
-    key: "3",
-  },
-];
+    icon: get_icon(key),
+    key: key,
+  }))
+  .value();
 
 export const Basic = Template.bind({});
 Basic.args = {
   items,
   item_component_order: ["count", "icon", "text"],
-  show_eyes_override: true,
+  show_eyes_override: false,
 };
