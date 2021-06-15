@@ -78,7 +78,7 @@ Timer.args = {
 
   // css
   dialog_position: "",
-  additional_dialog_position: "",
+  additional_dialog_class: "",
 
   // clock
   auto_close_time: 1000,

@@ -20,8 +20,32 @@ import "./FixedPopover.scss";
 // FixedPopover should stop hacking over top of Bootstrap's Modal sooner rather than later too.
 // (TODO, but likely only after we've updated to Bootstrap 4)
 
-export class FixedPopover extends React.Component {
-  constructor(props) {
+interface FixedPopoverProps {
+  show: boolean;
+  title: string;
+  body: string;
+  header: string;
+  subtitle: string;
+  footer: string;
+  close_text: string;
+  restore_focus: boolean;
+  close_button_in_header: boolean;
+  max_body_height: string;
+  auto_close_time: number;
+  dialog_position: string;
+  additional_dialog_class: string;
+  on_close_callback: () => void;
+}
+
+type FixedPopoverState = {
+  timeout_stopped: boolean;
+};
+
+export class FixedPopover extends React.Component<
+  FixedPopoverProps,
+  FixedPopoverState
+> {
+  constructor(props: FixedPopoverProps) {
     super(props);
 
     this.state = { timeout_stopped: false };
@@ -43,22 +67,27 @@ export class FixedPopover extends React.Component {
     document.body.classList.remove("modal-open--allow-scroll");
     this.setState({ timeout_stopped: false });
 
-    this.props.on_close_callback();
+    const { on_close_callback = _.noop } = this.props;
+
+    on_close_callback();
   };
+
   render() {
     const {
+      // if the popup gets too tall, it will be cut-off (and possibly non-interactable for it) on mobile
+      // 40vh is a bit arbitrary as a default, but leaves room for long header/footer content
+      max_body_height = "40vh",
       show,
       title,
       subtitle,
       header,
       body,
-      max_body_height,
       footer,
-      dialog_position,
+      dialog_position = "left",
       additional_dialog_class,
-      auto_close_time,
-      close_text,
-      close_button_in_header,
+      auto_close_time = false,
+      close_text = _.upperFirst(trivial_text_maker("close")),
+      close_button_in_header = false,
       restore_focus,
     } = this.props;
 
@@ -101,7 +130,10 @@ export class FixedPopover extends React.Component {
       </div>
     );
 
-    const common_layout = (content, include_close_button) => (
+    const common_layout = (
+      content: string | React.ReactNode,
+      include_close_button: boolean
+    ) => (
       <div className="modal-dialog__header-footer-layout">
         {
           content || (
@@ -162,19 +194,8 @@ export class FixedPopover extends React.Component {
             </Modal.Footer>
           )}
         </div>
-        <div tabIndex="0" onFocus={this.closeModal} />
+        <div tabIndex={0} onFocus={this.closeModal} />
       </Modal>
     );
   }
 }
-FixedPopover.defaultProps = {
-  dialog_position: "left",
-  auto_close_time: false,
-  close_text: _.upperFirst(trivial_text_maker("close")),
-  close_button_in_header: false,
-  on_close_callback: _.noop,
-
-  // if the popup gets too tall, it will be cut-off (and possibly non-interactable for it) on mobile
-  // 40vh is a bit arbitrary as a default, but leaves room for long header/footer content
-  max_body_height: "40vh",
-};
