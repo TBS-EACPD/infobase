@@ -142,7 +142,7 @@ export default function (model_singleton) {
     total_volume: { type: Number },
   });
   const TopServicesWebsiteVisitsSummarySchema = mongoose.Schema({
-    id: pkey_type(),
+    id: sparse_pkey_type(),
     subject_id: parent_fkey_type(), // no dataloader for gov, must load all
     service_id: str_type, // only for dept, program
     ...bilingual_str("service_name"), // only for dept, program
