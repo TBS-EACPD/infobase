@@ -3,8 +3,7 @@ import React from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs";
 
-import leaf_loading_spinner from "src/svg/leaf-loading-spinner.svg";
-
+import leaf_loading_spinner from "./leaf-spinner.svg";
 import "./LeafSpinner.scss";
 
 export const LeafSpinner = ({ config_name }) => {
