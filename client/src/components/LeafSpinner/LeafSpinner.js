@@ -3,7 +3,7 @@ import React from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs";
 
-import leaf_loading_spinner from "./leaf-spinner.svg";
+import leaf_loading_spinner from "./LeafSpinner.svg";
 import "./LeafSpinner.scss";
 
 export const LeafSpinner = ({ config_name }) => {
@@ -50,8 +50,7 @@ export const LeafSpinner = ({ config_name }) => {
         svg
           .replace(`stroke="${primaryColor}"`, 'stroke="#FFF"')
           .replace(`stroke="${secondaryColor}"`, 'stroke="#FFF"')
-          .replace('fill="#FF0000"', 'fill="#FFF"')
-          .replace("faded-background--true", "faded-background--false"),
+          .replace('fill="#FF0000"', 'fill="#FFF"'),
     },
   };
 
