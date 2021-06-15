@@ -13,9 +13,18 @@ import "./TreeMap.scss";
 const text_maker = create_text_maker([treemap_text]);
 
 interface size_controls_props {
-  [joe: string]: string;
+  [index: string]: string;
 }
 
+interface ColProps {
+  col: string;
+  val: string;
+}
+interface TreeMapLegendProps {
+  perspective: string;
+  legend_cols: ColProps[];
+  legend_measure_text: string;
+}
 const size_controls: size_controls_props = {
   drf: text_maker("expenditures_lower"),
   drf_ftes: text_maker("fte"),
@@ -89,15 +98,6 @@ const legend_block = (val: string, col: string, ix: number) => (
   </g>
 );
 
-interface ColProps {
-  col: string;
-  val: string;
-}
-interface TreeMapLegendProps {
-  perspective: string;
-  legend_cols: ColProps[];
-  legend_measure_text: string;
-}
 export class TreeMapLegend extends React.Component<TreeMapLegendProps> {
   constructor(props: TreeMapLegendProps) {
     super(props);

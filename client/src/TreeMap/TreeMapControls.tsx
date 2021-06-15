@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 
 import { run_template, create_text_maker } from "src/models/text";
 
-import { TreeMapSideBarProps } from "./TreeMapSidebar";
+import { TreeMapSidebarProps } from "./TreeMapSidebar";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
@@ -123,7 +123,7 @@ const so_type_controls = [
 ];
 
 function create_new_path(
-  cur_params: TreeMapSideBarProps,
+  cur_params: TreeMapSidebarProps,
   new_param: string,
   new_val: string
 ) {
@@ -160,8 +160,8 @@ function create_new_path(
   return new_path;
 }
 
-export class TreeMapControls extends React.Component<TreeMapSideBarProps> {
-  constructor(props: TreeMapSideBarProps) {
+export class TreeMapControls extends React.Component<TreeMapSidebarProps> {
+  constructor(props: TreeMapSidebarProps) {
     super(props);
   }
 

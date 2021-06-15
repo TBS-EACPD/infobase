@@ -22,7 +22,7 @@ export interface HistoryProps {
   push: (arg: string) => void;
   replace: Function;
 }
-export interface TreeMapSideBarProps {
+export interface TreeMapSidebarProps {
   perspective: string;
   color_var: string;
   year: string;
@@ -31,8 +31,8 @@ export interface TreeMapSideBarProps {
   location?: LocationProps;
   history?: HistoryProps;
 }
-export class TreeMapSidebar extends React.Component<TreeMapSideBarProps> {
-  constructor(props: TreeMapSideBarProps) {
+export class TreeMapSidebar extends React.Component<TreeMapSidebarProps> {
+  constructor(props: TreeMapSidebarProps) {
     super(props);
   }
   render() {
