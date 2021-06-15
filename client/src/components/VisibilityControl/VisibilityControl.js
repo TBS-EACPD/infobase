@@ -8,9 +8,9 @@ import { lang } from "src/core/injected_build_constants";
 
 import { IconEyeOpen, IconEyeClosed } from "src/icons/icons";
 
-import "./FilterTable.scss";
+import "./VisibilityControl.scss";
 
-export class FilterTable extends React.Component {
+export class VisibilityControl extends React.Component {
   render() {
     const { items, item_component_order, click_callback, show_eyes_override } =
       this.props;
@@ -21,17 +21,17 @@ export class FilterTable extends React.Component {
       true
     );
     return (
-      <div className="filter-table">
+      <div className="visibility-control">
         {_.map(items, (item) => {
           const item_components = {
             count: !_.isUndefined(item.count) && (
-              <div className="filter-table__count_area" key="count">
-                <span className="filter-table__count">{item.count}</span>
+              <div className="visibility-control__count_area" key="count">
+                <span className="visibility-control__count">{item.count}</span>
               </div>
             ),
             icon: !_.isUndefined(item.icon) && item.icon,
             text: !_.isUndefined(item.text) && (
-              <div className="filter-table__text" key="text">
+              <div className="visibility-control__text" key="text">
                 {item.text}
               </div>
             ),
@@ -42,8 +42,8 @@ export class FilterTable extends React.Component {
               aria-pressed={!item.is_filtered}
               onClick={() => click_callback(item.key)}
               className={classNames(
-                "filter-table__item",
-                item.active && "filter-table__item--active"
+                "visibility-control__item",
+                item.active && "visibility-control__item--active"
               )}
               key={item.key}
               aria-label={
@@ -55,10 +55,10 @@ export class FilterTable extends React.Component {
             >
               <div
                 className={classNames(
-                  "filter-table__eye",
+                  "visibility-control__eye",
                   item.active
-                    ? "filter-table__eye--open"
-                    : "filter-table__eye--closed"
+                    ? "visibility-control__eye--open"
+                    : "visibility-control__eye--closed"
                 )}
                 aria-hidden="true"
                 style={{
@@ -82,7 +82,7 @@ export class FilterTable extends React.Component {
                   />
                 )}
               </div>
-              <div className="filter-table__components">
+              <div className="visibility-control__components">
                 {_.map(
                   item_component_order,
                   (component) => item_components[component]

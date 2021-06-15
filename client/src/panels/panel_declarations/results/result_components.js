@@ -1,7 +1,11 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { HeightClipper, FilterTable, AlertBanner } from "src/components/index";
+import {
+  HeightClipper,
+  VisibilityControl,
+  AlertBanner,
+} from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -313,7 +317,7 @@ const StatusIconTable = ({
 }) => (
   <div>
     <div className="status-icon-table">
-      <FilterTable
+      <VisibilityControl
         items={_.map(ordered_status_keys, (status_key) => ({
           key: status_key,
           active:
