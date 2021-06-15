@@ -4,12 +4,12 @@ import _ from "lodash";
 import React from "react";
 
 import { DebouncedTextInput } from "src/components/DebouncedTextInput/DebouncedTextInput";
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 import {
   create_text_maker_component,
   Format,
 } from "src/components/misc_util_components";
 import { SortDirections } from "src/components/SortDirection/SortDirection";
-import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { LegendList } from "src/charts/legends/LegendList";
 
