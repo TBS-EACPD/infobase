@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 //https://gist.github.com/guglielmo/16d880a6615da7f502116220cb551498
 
 import { interpolateRgbBasis } from "d3-interpolate";

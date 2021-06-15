@@ -4,11 +4,7 @@ import React, { Fragment } from "react";
 
 import { run_template, create_text_maker } from "src/models/text";
 
-import {
-  LocationProps,
-  TreeMapSideBarProps,
-  HistoryProps,
-} from "./TreeMapSidebar";
+import { TreeMapSideBarProps } from "./TreeMapSideBar";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
