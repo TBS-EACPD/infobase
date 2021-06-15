@@ -20,7 +20,7 @@ export { TextMaker, TM } from "./TextMaker";
 export { TwoLevelSelect } from "./TwoLevelSelect/TwoLevelSelect";
 export { DebouncedTextInput } from "./DebouncedTextInput/DebouncedTextInput";
 export { ContainerEscapeHatch } from "./ContainerEscapeHatch";
-export { FilterTable } from "./FilterTable/FilterTable";
+export { VisibilityControl } from "./VisibilityControl/VisibilityControl";
 export { CheckBox } from "./CheckBox/CheckBox";
 export { StatelessDetails, Details } from "./Details/Details";
 export { LeafSpinner } from "./LeafSpinner/LeafSpinner";

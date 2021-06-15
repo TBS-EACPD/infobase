@@ -8,7 +8,7 @@ import {
   DisplayTable,
   create_text_maker_component,
   Panel,
-  FilterTable,
+  VisibilityControl,
 } from "src/components/index";
 
 import FootNote from "src/models/footnotes/footnotes";
@@ -199,7 +199,7 @@ export class ServiceStandards extends React.Component {
           <Fragment>
             <TM className="medium-panel-text" k="service_standards_text" />
             {!is_a11y_mode && (
-              <FilterTable
+              <VisibilityControl
                 items={_.map(standard_statuses, (status_key) => ({
                   key: status_key,
                   count: _.countBy(data, "is_target_met")[status_key] || 0,

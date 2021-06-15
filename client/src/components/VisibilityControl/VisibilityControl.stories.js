@@ -2,11 +2,11 @@ import { useArgs } from "@storybook/client-api";
 import _ from "lodash";
 import React from "react";
 
-import { FilterTable } from "./FilterTable";
+import { VisibilityControl } from "./VisibilityControl";
 
 export default {
-  title: "Input/FilterTable",
-  component: FilterTable,
+  title: "Input/VisibilityControl",
+  component: VisibilityControl,
 
   // Need decorators to use useArgs()
   decorators: [(Story) => <div>{Story()}</div>],
@@ -29,7 +29,7 @@ const Template = (args) => {
 
     updateArgs({ ...args, items: updateItems });
   }
-  return <FilterTable {...args} click_callback={click_callback} />;
+  return <VisibilityControl {...args} click_callback={click_callback} />;
 };
 
 const svg = (
