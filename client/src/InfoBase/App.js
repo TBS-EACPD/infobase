@@ -5,8 +5,8 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from "redux";
 
 import { HeaderNotification } from "src/components/HeaderNotification/HeaderNotification";
-import { PageDetails } from "src/components/PageDetails";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
+import { PageDetails } from "src/components/PageDetails";
 
 import { initialize_analytics } from "src/core/analytics";
 import { DevFip } from "src/core/DevFip";
