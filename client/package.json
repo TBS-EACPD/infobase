@@ -99,7 +99,6 @@
     "redux": "^3.7.1",
     "redux-promise-middleware": "^6.1.0",
     "reselect": "^3.0.1",
-    "spin.js": "^4.0.0",
     "stream-browserify": "^3.0.0",
     "string-hash": "^1.1.3",
     "string.prototype.replaceall": "^1.0.5",
