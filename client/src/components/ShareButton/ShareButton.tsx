@@ -19,7 +19,13 @@ import "./ShareButton.scss";
 
 const text_maker = create_text_maker(text);
 
-const CommonSocialMediaShareButton = ({ complete_url, media_icon }) => (
+const CommonSocialMediaShareButton = ({
+  complete_url,
+  media_icon,
+}: {
+  complete_url: string;
+  media_icon: React.ReactNode;
+}) => (
   <a
     href={complete_url}
     target="_blank"
@@ -29,16 +35,32 @@ const CommonSocialMediaShareButton = ({ complete_url, media_icon }) => (
     {media_icon}
   </a>
 );
-export class ShareButton extends React.Component {
-  constructor(props) {
-    super();
 
+export interface ShareButtonProps {
+  button_class_name: string;
+  button_description: string;
+  icon_alternate_color: string | boolean;
+  icon_color: string;
+  icon_size: number | string;
+  title: string;
+  url: string;
+}
+
+interface ShareButtonState {
+  showModal: boolean;
+}
+export class ShareButton extends React.Component<
+  ShareButtonProps,
+  ShareButtonState
+> {
+  constructor(props: ShareButtonProps) {
+    super(props);
     this.state = {
       showModal: false,
     };
   }
 
-  toggleModal(bool) {
+  toggleModal(bool: boolean) {
     this.setState({ showModal: bool });
   }
 
@@ -133,10 +155,9 @@ export class ShareButton extends React.Component {
       </Fragment>
     );
   }
+  static defaultProps = {
+    button_description: text_maker("share"),
+    icon_color: textLightColor,
+    icon_alternate_color: false,
+  };
 }
-
-ShareButton.defaultProps = {
-  button_description: text_maker("share"),
-  icon_color: textLightColor,
-  icon_alternate_color: false,
-};
