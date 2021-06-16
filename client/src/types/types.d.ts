@@ -9,3 +9,7 @@ declare module "*.csv" {
   let val: string;
   export default val;
 }
+declare module "*.svg" {
+  let val: string;
+  export default val;
+}
