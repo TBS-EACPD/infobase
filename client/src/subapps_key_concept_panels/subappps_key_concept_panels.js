@@ -19,6 +19,7 @@ export const declare_estimates_comparison_key_concepts_panel = () =>
           "how_to_use",
           "question_4",
         ],
+        is_initially_expanded: true,
         background_color: primaryColor,
       }),
     }),
