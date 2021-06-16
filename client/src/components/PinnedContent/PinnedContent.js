@@ -16,23 +16,65 @@ import text from "./PinnedContent.yaml";
 
 const text_maker = create_text_maker(text);
 
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
 export const get_pinned_content_local_storage = (local_storage_name) => {
   try {
     return has_local_storage && local_storage_name
       ? JSON.parse(localStorage.getItem(local_storage_name))
       : null;
+=======
+export const get_pinned_content_local_storage = (
+  local_storage_name: string
+) => {
+  try {
+    if (has_local_storage) {
+      const storedString = localStorage.getItem(local_storage_name);
+      if (storedString !== null) {
+        return JSON.parse(storedString);
+      }
+    } else {
+      return null;
+    }
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
   } catch {
     return null;
   }
 };
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
 export const set_pinned_content_local_storage = (local_storage_name, value) => {
+=======
+export const set_pinned_content_local_storage = (
+  local_storage_name: string,
+  value: boolean
+) => {
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
   has_local_storage &&
     local_storage_name &&
     localStorage.setItem(local_storage_name, value);
 };
 
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
 class _PinnedContent extends React.Component {
   constructor(props) {
+=======
+interface PinnedContentProps {
+  children?: React.ReactNode;
+  default_pin_state?: boolean;
+  height_update_delay?: number;
+  local_storage_name?: string;
+}
+
+interface PinnedContentState {
+  is_pinned_local_storage_mirror: boolean | null;
+  content_height?: string | number;
+}
+class _PinnedContent extends React.Component<
+  PinnedContentProps,
+  PinnedContentState
+> {
+  content_ref: React.RefObject<HTMLDivElement>;
+  constructor(props: PinnedContentProps) {
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
     super(props);
 
     this.content_ref = React.createRef();
@@ -55,8 +97,18 @@ class _PinnedContent extends React.Component {
         : default_pin_state;
     }
   }
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
   set_is_pinned = (is_pinned) => {
     set_pinned_content_local_storage(this.props.local_storage_name, is_pinned);
+=======
+  set_is_pinned = (is_pinned: boolean) => {
+    if (this.props.local_storage_name) {
+      set_pinned_content_local_storage(
+        this.props.local_storage_name,
+        is_pinned
+      );
+    }
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
     this.setState({ is_pinned_local_storage_mirror: is_pinned });
   };
 
@@ -77,13 +129,23 @@ class _PinnedContent extends React.Component {
   update_content_height = _.debounce(
     () =>
       this.setState({
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
         content_height: this.content_ref.current.clientHeight,
+=======
+        content_height: this.content_ref.current?.clientHeight,
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
       }),
     this.props.height_update_delay
   );
 
   componentDidMount() {
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
     this.set_is_pinned(this.is_pinned);
+=======
+    if (this.is_pinned) {
+      this.set_is_pinned(this.is_pinned);
+    }
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
     this.update_content_height();
   }
 
@@ -178,6 +240,13 @@ class _PinnedContent extends React.Component {
       </ReactResizeDetector>
     );
   }
+<<<<<<< HEAD:client/src/components/PinnedContent/PinnedContent.js
+=======
+  static defaultProps = {
+    height_update_delay: 1000,
+    default_pin_state: has_local_storage,
+  };
+>>>>>>> 8177f7d82... prettier formatting:client/src/components/PinnedContent/PinnedContent.tsx
 }
 _PinnedContent.defaultProps = {
   height_update_delay: 1000,
