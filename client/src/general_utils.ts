@@ -39,7 +39,7 @@ export const text_abbrev = function (text: string, length: number) {
 };
 
 export const make_unique_func = function () {
-  var val = 0;
+  let val = 0;
   return function () {
     return ++val;
   };
@@ -83,14 +83,10 @@ export const escapeRegExp = function (str: string) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 };
 
-type ObjectAny = {
-  [key: string]: any;
-};
-
-export const shallowEqualObjectsOverKeys = (
-  obj1: ObjectAny,
-  obj2: ObjectAny,
-  keys_to_compare: string[]
+export const shallowEqualObjectsOverKeys = <Type, Key extends keyof Type>(
+  obj1: Type,
+  obj2: Type,
+  keys_to_compare: Key[]
 ) =>
   _.reduce(
     keys_to_compare,
@@ -98,10 +94,10 @@ export const shallowEqualObjectsOverKeys = (
     true
   );
 
-export const shallowEqualObjectsExceptKeys = (
-  obj1: ObjectAny,
-  obj2: ObjectAny,
-  keys_to_ignore: string[]
+export const shallowEqualObjectsExceptKeys = <Type, Key extends keyof Type>(
+  obj1: Type,
+  obj2: Type,
+  keys_to_ignore: Key[]
 ) => {
   return _.isEqualWith(
     obj1,
@@ -110,11 +106,11 @@ export const shallowEqualObjectsExceptKeys = (
   );
 };
 
-export const retry_promise = (
-  promise_to_try: Function,
+export const retry_promise = <T>(
+  promise_to_try: () => Promise<T>,
   retries = 2,
   interval = 500
-) => {
+): Promise<T> => {
   return new Promise((resolve, reject) => {
     promise_to_try()
       .then(resolve)
@@ -163,9 +159,10 @@ export function completeAssign<TObject, TSource1, TSource2, TSource3, TSource4>(
   source4: TSource4
 ): TObject & TSource1 & TSource2 & TSource3 & TSource4;
 export function completeAssign<TObject>(object: TObject): TObject;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function completeAssign(target: any, ...sources: any[]): any {
   sources.forEach((source) => {
-    let descriptors = Object.keys(source).reduce(
+    const descriptors = Object.keys(source).reduce(
       (descriptors: { [key: string]: PropertyDescriptor }, key) => {
         descriptors[key] = Object.getOwnPropertyDescriptor(source, key)!;
         return descriptors;
@@ -174,7 +171,7 @@ export function completeAssign(target: any, ...sources: any[]): any {
     );
     // by default, Object.assign copies enumerable Symbols too
     Object.getOwnPropertySymbols(source).forEach((sym) => {
-      let descriptor = Object.getOwnPropertyDescriptor(source, sym);
+      const descriptor = Object.getOwnPropertyDescriptor(source, sym);
       if (descriptor && descriptor.enumerable) {
         // Typescript bug that symbol cannot be used as index: https://github.com/microsoft/TypeScript/issues/1863
         descriptors[sym as unknown as string] = descriptor;
@@ -188,12 +185,12 @@ export function completeAssign(target: any, ...sources: any[]): any {
 //copied from https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 export const hex_to_rgb = (hex: string) => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
         r: parseInt(result[1], 16),
