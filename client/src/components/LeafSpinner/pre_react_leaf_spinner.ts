@@ -4,6 +4,12 @@ import "./LeafSpinner.scss";
 export const start_spinner = () => {
   const app_el = document.querySelector("#app");
 
+  if (app_el === null) {
+    throw new Error(
+      "start_spinner interacts with the DOM imperatively and requires a #app node to exist. No #app found!"
+    );
+  }
+
   const spinner_container = document.createElement("div");
   spinner_container.className = "leaf-spinner-container";
   spinner_container.setAttribute(
