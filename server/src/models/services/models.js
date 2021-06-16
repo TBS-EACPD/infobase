@@ -130,7 +130,7 @@ export default function (model_singleton) {
     value: { type: Number },
   });
   const TopServicesApplicationVolSummarySchema = mongoose.Schema({
-    id: pkey_type(),
+    id: sparse_pkey_type(),
     service_id: parent_fkey_type(),
     subject_id: parent_fkey_type(),
     ...bilingual_str("name"),
