@@ -4,7 +4,9 @@
     "../.eslintrc.json",
     "plugin:import/typescript",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "env": {
@@ -36,8 +38,8 @@
   "rules": {
     "no-prototype-builtins": "off", //common TS pattern
     "no-use-before-define": "off",
-    "no-redeclare": "off", // Need to use @typescript-eslint/no-redeclare for ts overloading
     "no-restricted-imports": ["error", { "patterns": ["../*"] }],
+
     "react/jsx-uses-vars": 1,
     "react/jsx-no-target-blank": ["off"],
     "react/prop-types": ["off"],
@@ -45,6 +47,8 @@
     "react/display-name": ["off"],
     "react/no-find-dom-node": ["off"],
     "react/no-children-prop": ["off"],
+
+    "no-redeclare": "off", // Need to use @typescript-eslint/no-redeclare for ts overloading
     "@typescript-eslint/no-redeclare": ["error"]
   },
   "settings": {
