@@ -10,7 +10,7 @@ interface CardImageProps {
   text_key: string;
   link_href: string;
   link_open_in_new_tab?: boolean;
-  text_args: Object;
+  text_args?: Record<string, unknown>;
   tmf: TMProps["tmf"];
 }
 
