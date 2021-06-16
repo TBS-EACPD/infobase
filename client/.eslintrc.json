@@ -2,6 +2,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "extends": [
     "../.eslintrc.json",
+    "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
   ],
@@ -53,6 +54,9 @@
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
       }
     }
   },
