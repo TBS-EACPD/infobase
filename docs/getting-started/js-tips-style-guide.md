@@ -38,9 +38,9 @@ Our (un)official (and somewhat incomplete) rules for code style:
 
 - Pay attention to our linter rules! Most linter warnings can be fixed automatically, but it will be better overall if you get in to the habit of writing in the linter-passing style from the start
 - <u>Arrow functions</u>
-  - returning an object literal with ES6 arrow functions : Wrap it in parentheses ` arr.map( val => ({ n: n, n_sq : n*n }) )`
+  - returning an object literal with ES6 arrow functions : Wrap it in parentheses `arr.map( val => ({ n: n, n_sq : n*n }) )`
     - without the parentheses, the parser doesn't know whether the curly brackets are a block expression or an object literal.
-  - Should I use `=> value` or `=> { return value; } ` ?
+  - Should I use `=> value` or `=> { return value; }` ?
     - The first, only bother with a body on an arrow function when there are side effects or when you need more than one expression
 - Avoid array indices
   - Dealing with pairs
@@ -95,7 +95,7 @@ Our (un)official (and somewhat incomplete) rules for code style:
 - <u>Common idioms </u>
   - Falsey and Truthy values
     - Boolean values exist in javascript, but it's common to use other types of variables as booleans
-    - `if(a){ alert('true') } ` will alert true _unless_ `a` is one of the following
+    - `if(a){ alert('true') }` will alert true _unless_ `a` is one of the following
       1. `null`
       2. `undefined`
       3. `""`
@@ -104,7 +104,7 @@ Our (un)official (and somewhat incomplete) rules for code style:
       6. `NaN`
     - `!!a` can be used to coerce `a` to `true` or `false` (pretty much useless)
     - `!a` is basically shorthand for `!(!!a)` it will coerce `a` into a boolean type and reverse it.
-  - A common anti-pattern is to declare an uninitialized `let` followed by a set of `if` statements to conditionally set a value for the `let`. E.g. ` let u; if( e ){ u=5; } else { u=10;}` two alternatives: * when the cases are limited/simple, use a *ternary*: `const u = e ? 5 : 10;` * when things are more complicated, consider an _immediately invoked function_: `const u = ( () => { if (e){ return 5; } else { return 10; } })();`
+  - A common anti-pattern is to declare an uninitialized `let` followed by a set of `if` statements to conditionally set a value for the `let`. E.g. `let u; if( e ){ u=5; } else { u=10;}` two alternatives: * when the cases are limited/simple, use a *ternary*: `const u = e ? 5 : 10;` * when things are more complicated, consider an _immediately invoked function_: `const u = ( () => { if (e){ return 5; } else { return 10; } })();`
   - Since checking properties on an undefined object raises an error, you can use _short-circuiting_ to avoid errors.
     - `if(e[prop] ){ }` will bug if e is null/undefined
     - ugly: `if(e) { if(e[prop]) { ...code here } } }`

@@ -105,7 +105,8 @@ class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
 }
 
 interface CommonStatelessPullDownAccordionProps {
-  max_height: string;
+  max_height: number | string;
+  background_color: string;
   title: string;
   children: React.ReactElement;
   onToggle: React.ReactEventHandler<HTMLElement>;
