@@ -4,9 +4,7 @@
     "../.eslintrc.json",
     "plugin:import/typescript",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "env": {
@@ -14,13 +12,18 @@
     "commonjs": true,
     "es6": true
   },
+  "rules": {
+    "no-use-before-define": "off",
+    "no-restricted-imports": ["error", { "patterns": ["../*"] }],
+    "react/jsx-uses-vars": 1,
+    "react/jsx-no-target-blank": ["off"],
+    "react/prop-types": ["off"],
+    "react/no-string-refs": ["off"],
+    "react/display-name": ["off"],
+    "react/no-find-dom-node": ["off"],
+    "react/no-children-prop": ["off"]
+  },
   "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "no-undef": "off"
-      }
-    },
     {
       "files": ["*.ts", "*.tsx", "*.js"],
       "rules": {
@@ -33,24 +36,21 @@
           }
         ]
       }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "no-redeclare": "off", // Need to use @typescript-eslint/no-redeclare for ts overloading
+        "@typescript-eslint/no-redeclare": ["error"],
+
+        "no-prototype-builtins": "off" //common TS pattern
+      }
     }
   ],
-  "rules": {
-    "no-prototype-builtins": "off", //common TS pattern
-    "no-use-before-define": "off",
-    "no-restricted-imports": ["error", { "patterns": ["../*"] }],
-
-    "react/jsx-uses-vars": 1,
-    "react/jsx-no-target-blank": ["off"],
-    "react/prop-types": ["off"],
-    "react/no-string-refs": ["off"],
-    "react/display-name": ["off"],
-    "react/no-find-dom-node": ["off"],
-    "react/no-children-prop": ["off"],
-
-    "no-redeclare": "off", // Need to use @typescript-eslint/no-redeclare for ts overloading
-    "@typescript-eslint/no-redeclare": ["error"]
-  },
   "settings": {
     "react": {
       "version": "17"
