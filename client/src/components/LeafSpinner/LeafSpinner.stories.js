@@ -15,7 +15,6 @@ export const Route = Template.bind({});
 export const SubRoute = Template.bind({});
 export const SmallInline = Template.bind({});
 export const TabbedContent = Template.bind({});
-export const NonLeafSpinner = Template.bind({});
 
 Initial.args = {
   config_name: "initial",
@@ -58,9 +57,4 @@ SmallInline.decorators = [
 
 TabbedContent.args = {
   config_name: "tabbed_content",
-};
-
-NonLeafSpinner.args = {
-  scale: 1,
-  use_leaf_spinner: false,
 };
