@@ -51,7 +51,7 @@ note: to the underlying file system, the name of a file (meaning its long `/User
 
 To move a file to a new directory, simply do
 
-`mv <file1> <dir>/ `
+`mv <file1> <dir>/`
 
 `rm <file>`
 
