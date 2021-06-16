@@ -24,7 +24,7 @@ interface IconProps {
   title?: string;
   width?: number | string;
   height?: number | string;
-  svg_style?: Object;
+  svg_style?: React.CSSProperties;
   inline?: boolean;
   aria_hide?: boolean;
 

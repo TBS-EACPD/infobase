@@ -44,10 +44,9 @@
         "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
-        "no-redeclare": "off", // Need to use @typescript-eslint/no-redeclare for ts overloading
+        "no-prototype-builtins": "off", //common TS pattern
         "@typescript-eslint/no-redeclare": ["error"],
-
-        "no-prototype-builtins": "off" //common TS pattern
+        "@typescript-eslint/explicit-module-boundary-types": "off" // TODO might want to turn this on later, but it will raise a LOT of warnings to manually lint
       }
     }
   ],
