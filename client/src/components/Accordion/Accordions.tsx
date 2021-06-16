@@ -106,6 +106,7 @@ interface CommonAccordionProps {
   title: string;
   children: React.ReactNode;
   onToggle: React.ReactEventHandler<HTMLElement>;
+  background_color: string;
 }
 
 const StatelessPullDownAccordion = ({
@@ -114,8 +115,13 @@ const StatelessPullDownAccordion = ({
   isExpanded,
   children,
   onToggle,
+  background_color,
 }: CommonAccordionProps & { isExpanded: boolean }) => (
-  <div aria-label={title} className="pull-down-accordion">
+  <div
+    aria-label={title}
+    className="pull-down-accordion"
+    style={{ backgroundColor: background_color, borderColor: background_color }}
+  >
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
       <button
         aria-label={get_accordion_label(isExpanded)}
