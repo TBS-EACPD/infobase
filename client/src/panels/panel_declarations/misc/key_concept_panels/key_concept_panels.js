@@ -33,7 +33,11 @@ export const common_panel_config = {
   calculate: _.constant(true),
 };
 
-export const curried_render = ({ q_a_keys, background_color }) =>
+export const curried_render = ({
+  q_a_keys,
+  is_initially_expanded,
+  background_color,
+}) =>
   function ({ calculations: { subject } }) {
     let rendered_q_a_keys = _.compact([
       ...q_a_keys,
@@ -41,7 +45,10 @@ export const curried_render = ({ q_a_keys, background_color }) =>
     ]);
 
     return (
-      <SomeThingsToKeepInMind background_color={background_color}>
+      <SomeThingsToKeepInMind
+        is_initially_expanded={is_initially_expanded}
+        background_color={background_color}
+      >
         <KeyConceptList
           question_answer_pairs={_.map(rendered_q_a_keys, (base_text_key) => [
             <TM key={"q"} k={base_text_key + "_q"} args={{ subject }} />,
