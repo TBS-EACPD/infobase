@@ -59,7 +59,11 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
 
 const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
   "user_enabled_pinning_key_concepts";
-const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
+const SomeThingsToKeepInMind = ({
+  children,
+  is_initially_expanded,
+  background_color,
+}) => (
   <MediaQuery maxWidth={maxLargeDevice}>
     {(matches) => (
       <PinnedContent
@@ -70,6 +74,7 @@ const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
             <AutoAccordion
               title={trivial_text_maker("infographic_faq")}
               isInitiallyExpanded={is_initially_expanded}
+              background_color={background_color}
             >
               <div
                 style={{
