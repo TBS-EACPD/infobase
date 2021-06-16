@@ -117,12 +117,17 @@ interface StatelessPullDownAccordionProps
 
 const StatelessPullDownAccordion = ({
   max_height,
+  background_color,
   title,
   isExpanded,
   children,
   onToggle,
 }: StatelessPullDownAccordionProps) => (
-  <div aria-label={title} className="pull-down-accordion">
+  <div
+    aria-label={title}
+    className="pull-down-accordion"
+    style={{ backgroundColor: background_color, borderColor: background_color }}
+  >
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
       <button
         aria-label={get_accordion_label(isExpanded)}

@@ -20,7 +20,7 @@ import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { infograph_href_template, rpb_link } from "src/link_utils";
 import { sources } from "src/metadata/data_sources";
-import { FAQPanel } from "src/subapps_key_concept_panels/FAQPanel";
+import { EstimatesComparisonFAQ } from "src/subapps_key_concept_panels/FAQPanels";
 
 import {
   text_maker,
@@ -173,13 +173,6 @@ export default class EstimatesExplorerComponent extends React.Component {
 
     const root = get_root(flat_nodes);
 
-    const q_a_keys = [
-      "how_do_estimates_work",
-      "diff_between_stat_vote",
-      "how_to_use",
-      "question_4",
-    ];
-
     const explorer_config = {
       column_defs,
       get_non_col_content,
@@ -203,7 +196,7 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
-        <FAQPanel q_a_keys={q_a_keys} />
+        <EstimatesComparisonFAQ />
         <div
           style={{
             marginBottom: "15px",

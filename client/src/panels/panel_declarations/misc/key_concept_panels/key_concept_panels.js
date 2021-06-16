@@ -9,6 +9,8 @@ import {
   KeyConceptList,
 } from "src/components/index";
 
+import est_lang from "src/EstimatesComparison/estimates_comparison_questions.yaml";
+
 import common_lang from "./common_questions.yaml";
 import fin_lang from "./financial_questions.yaml";
 import ppl_lang from "./people_questions.yaml";
@@ -21,16 +23,17 @@ const { TM } = create_text_maker_component([
   ppl_lang,
   results_lang,
   tag_lang,
+  est_lang,
 ]);
 
-const common_panel_config = {
+export const common_panel_config = {
   is_static: true,
   footnotes: false,
   source: false,
   calculate: _.constant(true),
 };
 
-const curried_render = ({ q_a_keys }) =>
+export const curried_render = ({ q_a_keys, background_color }) =>
   function ({ calculations: { subject } }) {
     let rendered_q_a_keys = _.compact([
       ...q_a_keys,
@@ -38,7 +41,7 @@ const curried_render = ({ q_a_keys }) =>
     ]);
 
     return (
-      <SomeThingsToKeepInMind>
+      <SomeThingsToKeepInMind background_color={background_color}>
         <KeyConceptList
           question_answer_pairs={_.map(rendered_q_a_keys, (base_text_key) => [
             <TM key={"q"} k={base_text_key + "_q"} args={{ subject }} />,
