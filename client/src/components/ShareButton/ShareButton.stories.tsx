@@ -1,13 +1,14 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { ShareButton } from "./ShareButton";
+import { ShareButton, ShareButtonProps } from "./ShareButton";
 
 export default {
   title: "ShareButton",
   component: ShareButton,
-};
+} as Meta;
 
-const Template = (args) => <ShareButton {...args} />;
+const Template: Story<ShareButtonProps> = (args) => <ShareButton {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
