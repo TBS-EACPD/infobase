@@ -9,6 +9,8 @@ import {
   KeyConceptList,
 } from "src/components/index";
 
+import { Gov } from "src/models/organizational_entities";
+
 import est_lang from "src/EstimatesComparison/estimates_comparison_questions.yaml";
 
 import common_lang from "./common_questions.yaml";
@@ -26,23 +28,23 @@ const { TM } = create_text_maker_component([
   est_lang,
 ]);
 
-export const common_panel_config = {
+const common_panel_config = {
   is_static: true,
   footnotes: false,
   source: false,
   calculate: _.constant(true),
 };
 
-export const curried_render = ({
-  q_a_keys,
-  is_initially_expanded,
-  background_color,
-}) =>
-  function ({ calculations: { subject } }) {
-    let rendered_q_a_keys = _.compact([
-      ...q_a_keys,
-      subject.level === "crso" && "what_are_CR",
-    ]);
+export class FAQPanel extends React.Component {
+  render() {
+    const {
+      rendered_q_a_keys,
+      is_initially_expanded,
+      background_color,
+      subject,
+    } = this.props;
+
+    let subj = _.isUndefined(subject) ? Gov : subject;
 
     return (
       <SomeThingsToKeepInMind
@@ -51,12 +53,23 @@ export const curried_render = ({
       >
         <KeyConceptList
           question_answer_pairs={_.map(rendered_q_a_keys, (base_text_key) => [
-            <TM key={"q"} k={base_text_key + "_q"} args={{ subject }} />,
-            <TM key={"a"} k={base_text_key + "_a"} args={{ subject }} />,
+            <TM key={"q"} k={base_text_key + "_q"} args={{ subj }} />,
+            <TM key={"a"} k={base_text_key + "_a"} args={{ subj }} />,
           ])}
         />
       </SomeThingsToKeepInMind>
     );
+  }
+}
+
+const curried_render = ({ q_a_keys }) =>
+  function ({ calculations: { subject } }) {
+    let rendered_q_a_keys = _.compact([
+      ...q_a_keys,
+      subject.level === "crso" && "what_are_CR",
+    ]);
+
+    return <FAQPanel rendered_q_a_keys={rendered_q_a_keys} subject={subject} />;
   };
 
 export const declare_financial_key_concepts_panel = () =>
