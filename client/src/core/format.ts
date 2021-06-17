@@ -132,7 +132,7 @@ const compact = (
     }
   })();
 
-  // for now, can't use the money formatter if we want to insert
+  // for now, can't use the money formatter_wrapper if we want to insert
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
   const rtn = number_formatter[lang][precision].format(new_val);
@@ -322,82 +322,60 @@ const types_to_format: {
     return `${val}-${lang === "en" ? val - 2000 + 1 : val + 1}`;
   },
   // legacy hack, these are outliers but the Table API/report builder uses them... this code probably won't ever be reached,
-  // values will probably be strings in these cases to the formatter wrapper function will swallow them (and use _.toString anyway)
+  // values will probably be strings in these cases to the formatter_wrapper will swallow them (and use _.toString anyway)
   // ... these are here because they need to exist in the format_key type and the exported formats object
   str: _.toString,
   "short-str": _.toString,
   "wide-str": _.toString,
 };
 
-// This is a mess, big cleanup TODO, formatters should only be able to take strings or numbers,
-// if mapping of an array or object through a formatter is needed then that should be the consumer's job
-type formatterOverload = {
-  (format: format_key, val: number | string, options: formatterOptions): string;
-  (
-    format: format_key,
-    val: (string | number)[],
-    options: formatterOptions
-  ): string[];
-  (
-    format: format_key,
-    val: { [key: string]: string | number },
-    options: formatterOptions
-  ): { [key: string]: string };
-  (format: format_key, val: any, options: formatterOptions):
-    | string
-    | string[]
-    | { [key: string]: string };
-};
-const formatter: formatterOverload = (
+type formattable =
+  | (number | string)
+  | (number | string)[]
+  | { [key: string]: string | number };
+const formatter_wrapper = (
   format: format_key,
-  val: any,
+  val: formattable,
   options: formatterOptions
 ) => {
+  const formatter = (val: number | string) =>
+    types_to_format[format](+val as number, lang, options);
+
   if (typeof val === "object") {
     if (Array.isArray(val)) {
-      return _.map(val, (v) => formatter(format, v, options));
+      return _.map(val, (v) => formatter(v));
     } else {
-      return _.mapValues(val, (v) => formatter(format, v, options));
+      return _.mapValues(val, (v) => formatter(v));
     }
   } else {
-    if (
-      format in types_to_format &&
-      (typeof val === "number" || (typeof val === "string" && !_.isNaN(+val)))
-    ) {
-      return types_to_format[format](+val as number, lang, options);
-    } else {
-      // TODO would prefer to throw here, but
-      //  1) legacy code expects this behaviour
-      //  2) some formats are in use that don't exist in types_to_format (e.g. "wide-str" and other legacy table stuff),
-      //    generally stuff that would be (string)
-      return _.toString(val);
-    }
+    return formatter(val);
   }
 };
 
-// legacyish hack here, two keys for every format, one with the suffix _raw that always has raw: true,
+// legacyish hack here, two keys for every format, one with the suffix _raw that always has the option raw: true,
 // one with no suffix that defaults to raw: false but can have that overwritten. Primarily because, at least historically
-// the generated handlebar helper versions of formats don't take options (so needed an alternate way to set raw value)
+// the generated handlebar helper versions of formats don't take options (so needed an alternate way to set raw value).
+// I think types in the legacy table definition API also use the _raw versions a lot
 const formats = _.chain(types_to_format)
   .keys()
   .flatMap((key: format_key) => [
     [
       key,
-      (val: any, options = {}) =>
-        formatter(key, val, { raw: false, ...options }),
+      (val: formattable, options: Partial<formatterOptions> = {}) =>
+        formatter_wrapper(key, val, { raw: false, ...options }),
     ],
     [
       `${key}_raw`,
-      (val: any, options = {}) =>
-        formatter(key, val, { ...options, raw: true }),
+      (val: formattable, options: Partial<formatterOptions> = {}) =>
+        formatter_wrapper(key, val, { ...options, raw: true }),
     ],
   ])
   .fromPairs()
   .value() as {
   [key in format_key | `${format_key}_raw`]: (
-    val: any,
-    options: Partial<formatterOptions>
-  ) => ReturnType<typeof formatter>;
+    val: formattable,
+    options?: Partial<formatterOptions>
+  ) => ReturnType<typeof formatter_wrapper>;
 };
 
 const array_to_grammatical_list = (items: string[]) => {
