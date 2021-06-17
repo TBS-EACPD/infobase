@@ -244,7 +244,7 @@ const smart_percentage = (
   }
 };
 
-export type format_key =
+export type FormatKey =
   | "compact"
   | "compact1"
   | "compact2"
@@ -272,7 +272,7 @@ interface formatterOptions {
   precision?: number;
 }
 const types_to_format: {
-  [key in format_key]: (
+  [key in FormatKey]: (
     val: number,
     lang: LangType,
     options: formatterOptions
@@ -323,23 +323,32 @@ const types_to_format: {
   },
   // legacy hack, these are outliers but the Table API/report builder uses them... this code probably won't ever be reached,
   // values will probably be strings in these cases to the formatter_wrapper will swallow them (and use _.toString anyway)
-  // ... these are here because they need to exist in the format_key type and the exported formats object
+  // ... these are here because they need to exist in the FormatKey type and the exported formats object
   str: _.toString,
   "short-str": _.toString,
   "wide-str": _.toString,
 };
 
-type formattable =
-  | (number | string)
+type Formattable =
+  | number
+  | string
   | (number | string)[]
-  | { [key: string]: string | number };
+  | { [key: string]: number | string };
+type Formatted<T> = T extends number | string
+  ? string
+  : T extends (number | string)[]
+  ? string[]
+  : T extends { [key: string]: number | string }
+  ? { [key: string]: string }
+  : never;
+
 const formatter_wrapper = (
-  format: format_key,
-  val: formattable,
+  format: FormatKey,
+  val: Formattable,
   options: formatterOptions
-) => {
-  const formatter = (val: number | string) =>
-    types_to_format[format](+val as number, lang, options);
+): Formatted<Formattable> => {
+  const formatter = (actual_val: number | string) =>
+    types_to_format[format](+actual_val as number, lang, options);
 
   if (typeof val === "object") {
     if (Array.isArray(val)) {
@@ -358,24 +367,24 @@ const formatter_wrapper = (
 // I think types in the legacy table definition API also use the _raw versions a lot
 const formats = _.chain(types_to_format)
   .keys()
-  .flatMap((key: format_key) => [
+  .flatMap((key: FormatKey) => [
     [
       key,
-      (val: formattable, options: Partial<formatterOptions> = {}) =>
+      (val: Formattable, options: Partial<formatterOptions> = {}) =>
         formatter_wrapper(key, val, { raw: false, ...options }),
     ],
     [
       `${key}_raw`,
-      (val: formattable, options: Partial<formatterOptions> = {}) =>
+      (val: Formattable, options: Partial<formatterOptions> = {}) =>
         formatter_wrapper(key, val, { ...options, raw: true }),
     ],
   ])
   .fromPairs()
   .value() as {
-  [key in format_key | `${format_key}_raw`]: (
-    val: formattable,
+  [key in FormatKey | `${FormatKey}_raw`]: <T>(
+    val: T,
     options?: Partial<formatterOptions>
-  ) => ReturnType<typeof formatter_wrapper>;
+  ) => Formatted<T>;
 };
 
 const array_to_grammatical_list = (items: string[]) => {
