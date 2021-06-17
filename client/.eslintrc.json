@@ -2,7 +2,6 @@
   "plugins": ["react", "@typescript-eslint"],
   "extends": [
     "../.eslintrc.json",
-    "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
   ],
@@ -40,13 +39,14 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": [
+        "plugin:import/typescript",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
         "no-prototype-builtins": "off", //common TS pattern
         "@typescript-eslint/no-redeclare": ["error"],
-        "@typescript-eslint/explicit-module-boundary-types": "off" // TODO might want to turn this on later, but it will raise a LOT of warnings to manually lint
+        "@typescript-eslint/explicit-module-boundary-types": "off" // TODO might want to turn this on later, but it will take a while to fix all the warnings
       }
     }
   ],
