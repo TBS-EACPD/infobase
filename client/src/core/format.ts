@@ -96,20 +96,12 @@ const result_percent_formatter = {
   }),
 };
 
-interface OptionsProps {
-  precision: number;
-  raw: boolean;
-  noMoney: boolean;
-}
-
 const compact = (
   precision: number,
   val: number,
   lang: LangType,
-  options: OptionsProps
+  raw: boolean
 ) => {
-  precision = precision || 0;
-
   const abbrev: { [key: number]: LangDict<string> } = {
     1000000000: { en: "B", fr: "G" },
     1000000: { en: "M", fr: "M" },
@@ -144,17 +136,12 @@ const compact = (
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
   const rtn = number_formatter[lang][precision].format(new_val);
-  let compactStr = !symbol ? rtn : `${rtn} ${symbol}`;
-  if (options.raw) {
-    return options.noMoney
-      ? compactStr
-      : lang === "fr"
-      ? `${compactStr}$`
-      : `$${compactStr}`;
+  const compactStr = !symbol ? rtn : `${rtn} ${symbol}`;
+
+  if (raw) {
+    return lang === "fr" ? `${compactStr}$` : `$${compactStr}`;
   } else {
-    return options.noMoney
-      ? `<span class='text-nowrap'>${compactStr}</span>`
-      : lang === "fr"
+    return lang === "fr"
       ? `<span class='text-nowrap'>${compactStr}$</span>`
       : `<span class='text-nowrap'>$${compactStr}</span>`;
   }
@@ -164,7 +151,7 @@ const compact_written = (
   precision: number,
   val: number,
   lang: LangType,
-  options: OptionsProps
+  raw: boolean
 ) => {
   // the rules for this are going to be different from compact(),
   // emphasizing readability.
@@ -207,7 +194,7 @@ const compact_written = (
     }
   })();
 
-  if (options.raw) {
+  if (raw) {
     return lang === "fr" ? `${rtn}${abbrev} de dollars` : `$${rtn}${abbrev}`;
   } else {
     return lang === "fr"
@@ -220,11 +207,10 @@ const percentage = (
   precision: number,
   val: number,
   lang: LangType,
-  options: OptionsProps
+  raw: boolean
 ) => {
-  precision = precision || 0;
   const rtn = percent_formatter[lang][precision].format(val);
-  if (options.raw) {
+  if (raw) {
     return rtn;
   } else {
     return `<span class='text-nowrap'>${rtn}</span>`;
@@ -235,7 +221,7 @@ const smart_percentage = (
   min_precision: number,
   val: number,
   lang: LangType,
-  options: OptionsProps
+  raw: boolean
 ) => {
   const one_significant_figure_of_precision =
     val !== 0 && Math.abs(val * 100) < 1
@@ -251,128 +237,169 @@ const smart_percentage = (
   );
 
   const rtn = percent_formatter[lang][smart_precision].format(val);
-  if (options.raw) {
+  if (raw) {
     return rtn;
   } else {
     return `<span class='text-nowrap'>${rtn}</span>`;
   }
 };
 
-const types_to_format: { [key: string]: Function } = {
-  compact: (val: number, lang: LangType, options: OptionsProps) =>
-    compact(options.precision, val, lang, options),
-  compact1: _.curry(compact)(1),
-  compact2: _.curry(compact)(2),
-  compact_written: (val: number, lang: LangType, options: OptionsProps) =>
-    compact_written(options.precision, val, lang, options),
-  compact1_written: _.curry(compact_written)(1),
-  compact2_written: _.curry(compact_written)(2),
-  percentage: (val: number, lang: LangType, options: OptionsProps) =>
-    percentage(options.precision, val, lang, options),
-  percentage1: _.curry(percentage)(1),
-  percentage2: _.curry(percentage)(2),
-  smart_percentage1: _.curry(smart_percentage)(1),
-  smart_percentage2: _.curry(smart_percentage)(2),
-  result_percentage: (val: number, lang: LangType) =>
+export type format_key =
+  | "compact"
+  | "compact1"
+  | "compact2"
+  | "compact_written"
+  | "compact1_written"
+  | "compact2_written"
+  | "percentage"
+  | "percentage1"
+  | "percentage2"
+  | "smart_percentage1"
+  | "smart_percentage2"
+  | "result_percentage"
+  | "result_num"
+  | "decimal1"
+  | "decimal2"
+  | "decimal"
+  | "big_int"
+  | "dollar"
+  | "year_to_fiscal_year"
+  | "str"
+  | "short-str"
+  | "wide-str";
+interface formatterOptions {
+  raw: boolean;
+  precision?: number;
+}
+const types_to_format: {
+  [key in format_key]: (
+    val: number,
+    lang: LangType,
+    options: formatterOptions
+  ) => string;
+} = {
+  compact: (val, lang, { raw, precision = 0 }) =>
+    compact(precision, val, lang, raw),
+  compact1: (val, lang, { raw }) => compact(1, val, lang, raw),
+  compact2: (val, lang, { raw }) => compact(2, val, lang, raw),
+  compact_written: (val, lang, { raw, precision = 0 }) =>
+    compact_written(precision, val, lang, raw),
+  compact1_written: (val, lang, { raw }) => compact_written(1, val, lang, raw),
+  compact2_written: (val, lang, { raw }) => compact_written(2, val, lang, raw),
+  percentage: (val, lang, { raw, precision = 0 }) =>
+    percentage(precision, val, lang, raw),
+  percentage1: (val, lang, { raw }) => percentage(1, val, lang, raw),
+  percentage2: (val, lang, { raw }) => percentage(2, val, lang, raw),
+  smart_percentage1: (val, lang, { raw }) =>
+    smart_percentage(1, val, lang, raw),
+  smart_percentage2: (val, lang, { raw }) =>
+    smart_percentage(2, val, lang, raw),
+  result_percentage: (val, lang) =>
     result_percent_formatter[lang].format(val / 100),
-  result_num: (val: number, lang: LangType) =>
-    result_number_formatter[lang].format(val),
-  decimal1: (val: number, lang: LangType) =>
-    number_formatter[lang][1].format(val),
-  decimal2: (val: number, lang: LangType) =>
-    number_formatter[lang][2].format(val),
-  decimal: (val: number, lang: LangType) =>
-    number_formatter[lang][3].format(val),
-  big_int: (val: number, lang: LangType, options: OptionsProps) => {
+  result_num: (val, lang) => result_number_formatter[lang].format(val),
+  decimal1: (val, lang) => number_formatter[lang][1].format(val),
+  decimal2: (val, lang) => number_formatter[lang][2].format(val),
+  decimal: (val, lang) => number_formatter[lang][3].format(val),
+  big_int: (val, lang, { raw }) => {
     const rtn = number_formatter[lang][0].format(val);
 
-    if (options.raw) {
+    if (raw) {
       return rtn;
     } else {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
-  int: (val: number) => val,
-  ordinal: (val: number) => val,
-  str: (val: number) => val,
-  boolean: (val: number) => val,
-  "wide-str": (val: number) => val,
-  "short-str": (val: number) => val,
-  date: (val: number) => val,
-  dollar: (val: number, lang: LangType, options: OptionsProps) => {
-    options.precision = options.precision || 2;
+  dollar: (val, lang, { raw, precision = 2 }) => {
+    const rtn = money_formatter[lang][precision].format(val);
 
-    const rtn = money_formatter[lang][options.precision].format(val);
-
-    if (options.raw) {
+    if (raw) {
       return rtn;
     } else {
       return `<span class='text-nowrap'>${rtn}</span>`;
     }
   },
-  year_to_fiscal_year: (year: string) => {
-    const year_int = parseInt(year);
-    return `${year_int}-${lang === "en" ? year_int - 2000 + 1 : year_int + 1}`;
+  year_to_fiscal_year: (val) => {
+    return `${val}-${lang === "en" ? val - 2000 + 1 : val + 1}`;
   },
-  fiscal_year_to_year: (fiscal_year: string) =>
-    _.chain(fiscal_year).split("-").head().value(),
+  // legacy hack, these are outliers but the Table API/report builder uses them... this code probably won't ever be reached,
+  // values will probably be strings in these cases to the formatter wrapper function will swallow them (and use _.toString anyway)
+  // ... these are here because they need to exist in the format_key type and the exported formats object
+  str: _.toString,
+  "short-str": _.toString,
+  "wide-str": _.toString,
 };
 
-type generic_value = (string | number)[] | Object | string | number;
-
-const formatter = (
-  format: string,
-  val: generic_value,
-  options?: Partial<OptionsProps>
-): generic_value => {
-  options = options || {};
-  if (_.has(types_to_format, format)) {
-    if (_.isArray(val)) {
+// This is a mess, big cleanup TODO, formatters should only be able to take strings or numbers,
+// if mapping of an array or object through a formatter is needed then that should be the consumer's job
+type formatterOverload = {
+  (format: format_key, val: number | string, options: formatterOptions): string;
+  (
+    format: format_key,
+    val: (string | number)[],
+    options: formatterOptions
+  ): string[];
+  (
+    format: format_key,
+    val: { [key: string]: string | number },
+    options: formatterOptions
+  ): { [key: string]: string };
+  (format: format_key, val: any, options: formatterOptions):
+    | string
+    | string[]
+    | { [key: string]: string };
+};
+const formatter: formatterOverload = (
+  format: format_key,
+  val: any,
+  options: formatterOptions
+) => {
+  if (typeof val === "object") {
+    if (Array.isArray(val)) {
       return _.map(val, (v) => formatter(format, v, options));
-    } else if (_.isObject(val)) {
-      return _.chain(val)
-        .map((v, k) => [k, formatter(format, v, options)])
-        .fromPairs()
-        .value();
-    } else if (_.isNaN(+val) && _.isString(val)) {
-      return val;
     } else {
-      return types_to_format[format](val, lang, options);
+      return _.mapValues(val, (v) => formatter(format, v, options));
+    }
+  } else {
+    if (
+      format in types_to_format &&
+      (typeof val === "number" || (typeof val === "string" && !_.isNaN(+val)))
+    ) {
+      return types_to_format[format](+val as number, lang, options);
+    } else {
+      // TODO would prefer to throw here, but
+      //  1) legacy code expects this behaviour
+      //  2) some formats are in use that don't exist in types_to_format (e.g. "wide-str" and other legacy table stuff),
+      //    generally stuff that would be (string)
+      return _.toString(val);
     }
   }
-  return val;
 };
 
-// formats can be either an array of formats (of equal length to vals) or one format one which will be applied to all values
-const list_formatter = (
-  formats: string | string[],
-  vals: (string | number)[]
-) =>
-  _.map(vals, (value, ix: number) =>
-    _.isArray(formats)
-      ? formatter(formats[ix], value)
-      : formatter(formats, value)
-  );
-
+// legacyish hack here, two keys for every format, one with the suffix _raw that always has raw: true,
+// one with no suffix that defaults to raw: false but can have that overwritten. Primarily because, at least historically
+// the generated handlebar helper versions of formats don't take options (so needed an alternate way to set raw value)
 const formats = _.chain(types_to_format)
   .keys()
-  .flatMap((formatter_key) => [
+  .flatMap((key: format_key) => [
     [
-      formatter_key,
-      (val: generic_value, options = {}) =>
-        formatter(formatter_key, val, options),
+      key,
+      (val: any, options = {}) =>
+        formatter(key, val, { raw: false, ...options }),
     ],
     [
-      `${formatter_key}_raw`,
-      (val: generic_value, options = {}) =>
-        formatter(formatter_key, val, { ...options, raw: true }),
+      `${key}_raw`,
+      (val: any, options = {}) =>
+        formatter(key, val, { ...options, raw: true }),
     ],
   ])
   .fromPairs()
-  .value();
+  .value() as {
+  [key in format_key | `${format_key}_raw`]: (
+    val: any,
+    options: Partial<formatterOptions>
+  ) => ReturnType<typeof formatter>;
+};
 
-// the distinction of formatter vs list_formatter vs formats and how they deal with values vs lists of values is very tedious,
-// I think this whole setup would be more usable if all formatters were standalone utils like this func. That cleanup's a TODO
 const array_to_grammatical_list = (items: string[]) => {
   const and_et = {
     en: "and",
@@ -392,4 +419,4 @@ const array_to_grammatical_list = (items: string[]) => {
   }
 };
 
-export { formatter, list_formatter, formats, array_to_grammatical_list };
+export { formats, array_to_grammatical_list };

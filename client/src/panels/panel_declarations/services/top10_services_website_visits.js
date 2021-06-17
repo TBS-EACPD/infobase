@@ -17,7 +17,7 @@ import { useSummaryServices } from "src/models/populate_services";
 import { Subject } from "src/models/subject";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
-import { formatter } from "src/core/format";
+import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
@@ -34,7 +34,7 @@ const colors = scaleOrdinal().range(_.at(newIBLightCategoryColors, [0]));
 const website_visits_key = "online_inquiry";
 const total_volume = text_maker(website_visits_key);
 const volume_formatter = (val) =>
-  formatter("compact", val, { raw: true, noMoney: true });
+  formats.compact(val, { raw: true }).replace("$", "");
 
 const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const { subject } = panel_args;

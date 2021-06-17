@@ -1,7 +1,7 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import * as FORMAT from "src/core/format";
+import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
 import {
@@ -183,11 +183,15 @@ export default {
         })
         .map(function (row) {
           if (format) {
-            if (add_percentage) {
-              return FORMAT.list_formatter(["", "big-int", "percentage"], row);
-            } else {
-              return FORMAT.list_formatter(["", "big-int"], row);
-            }
+            return _.chain([
+              _.identity,
+              formats["big-int"],
+              add_percentage && formats["percentage"],
+            ])
+              .compact()
+              .zip(row)
+              .map(([formatter, value]) => formatter(value))
+              .value();
           }
           return row;
         })
