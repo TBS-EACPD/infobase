@@ -122,13 +122,16 @@ const compact = (
         }
       });
 
-      const defined_compacted = _.filter(compacted, (pair) => {
-        return !_.isUndefined(pair);
-      });
+      const defined_compacted = _.filter(
+        compacted,
+        (pair) => !_.isUndefined(pair)
+      );
 
-      return defined_compacted.length! > 0 //have to use the ! because TS thinks filter can return null/
-        ? defined_compacted[0]!
-        : [abbrev[999][lang], val];
+      if (typeof defined_compacted[0] !== "undefined") {
+        return defined_compacted[0];
+      } else {
+        return [abbrev[999][lang], val];
+      }
     }
   })();
 
@@ -184,7 +187,10 @@ const compact_written = (
         return !_.isUndefined(pair);
       });
 
-      return defined_compacted[0]!;
+      // ... this code is a real pile of crap. Refactor a TODO, in the meantime just wanted to note that the pre-TS code assumed
+      // this would never return undefined, so encoding that assumption in the types here
+      // ...not that I trust this code further than I can throw an error
+      return defined_compacted[0] as [string, string];
     } else {
       precision = precision < 2 ? 0 : precision;
       return [
