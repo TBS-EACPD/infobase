@@ -16,7 +16,7 @@ import {
 import { useSummaryServices } from "src/models/populate_services";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
-import { formatter } from "src/core/format";
+import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
@@ -28,7 +28,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const colors = scaleOrdinal().range(_.at(newIBLightCategoryColors, [0]));
 const total_volume = text_maker("applications_and_calls");
 const volume_formatter = (val) =>
-  formatter("compact", val, { raw: true, noMoney: true });
+  formats.compact(val, { raw: true }).replace("$", "");
 
 const Top10ServicesApplicationVolumePanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({

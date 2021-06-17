@@ -18,7 +18,7 @@ import {
 import { Subject } from "src/models/subject";
 
 import { backgroundColor } from "src/core/color_defs";
-import { formatter } from "src/core/format";
+import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
@@ -193,14 +193,13 @@ export class ServiceOverview extends React.Component {
           </dd>
           <dt>{text_maker("applications_and_calls")}</dt>
           <dd>
-            {formatter("big_int", applications_and_calls, {
+            {formats["big_int"](applications_and_calls, {
               raw: true,
             })}
           </dd>
           <dt>{text_maker("online_inquiry")}</dt>
           <dd>
-            {formatter(
-              "big_int",
+            {formats["big_int"](
               _.sumBy(service.service_report, "online_inquiry_count"),
               {
                 raw: true,
