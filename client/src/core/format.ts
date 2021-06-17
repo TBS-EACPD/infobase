@@ -361,11 +361,11 @@ const formatter_wrapper = (
   }
 };
 
-// legacyish hack here, two keys for every format, one with the suffix _raw that always has the option raw: true,
+// legacy-ish hack here, two keys for every format, one with the suffix _raw that always has the option raw: true,
 // one with no suffix that defaults to raw: false but can have that overwritten. Primarily because, at least historically
 // the generated handlebar helper versions of formats don't take options (so needed an alternate way to set raw value).
 // I think types in the legacy table definition API also use the _raw versions a lot
-const formats = _.chain(types_to_format)
+export const formats = _.chain(types_to_format)
   .keys()
   .flatMap((key: FormatKey) => [
     [
@@ -381,13 +381,16 @@ const formats = _.chain(types_to_format)
   ])
   .fromPairs()
   .value() as {
-  [key in FormatKey | `${FormatKey}_raw`]: <T>(
+  // Important note, this is what the rest of src will see formats as. The other typing is just for internal consistency.
+  // Little trick here too, unlike formatter_wrapper, we can actually lean on the generic nature of Formatted here, couldn't
+  // in the actual formatter_wrapper type signature as it requires extending a type, which causes type uncertainty within the function body
+  [key in FormatKey | `${FormatKey}_raw`]: <T extends Formattable>(
     val: T,
     options?: Partial<formatterOptions>
   ) => Formatted<T>;
 };
 
-const array_to_grammatical_list = (items: string[]) => {
+export const array_to_grammatical_list = (items: string[]) => {
   const and_et = {
     en: "and",
     fr: "et",
@@ -405,5 +408,3 @@ const array_to_grammatical_list = (items: string[]) => {
       .value();
   }
 };
-
-export { formats, array_to_grammatical_list };
