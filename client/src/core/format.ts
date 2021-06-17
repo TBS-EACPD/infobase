@@ -342,11 +342,16 @@ type Formatted<T> = T extends number | string
   ? { [key: string]: string }
   : never;
 
-const formatter_wrapper = (
+function formatter_wrapper<T extends Formattable>(
+  format: FormatKey,
+  val: T,
+  options: formatterOptions
+): Formatted<T>;
+function formatter_wrapper(
   format: FormatKey,
   val: Formattable,
   options: formatterOptions
-): Formatted<Formattable> => {
+): Formatted<Formattable> {
   const formatter = (actual_val: number | string) =>
     types_to_format[format](+actual_val as number, lang, options);
 
@@ -359,7 +364,7 @@ const formatter_wrapper = (
   } else {
     return formatter(val);
   }
-};
+}
 
 // legacy-ish hack here, two keys for every format, one with the suffix _raw that always has the option raw: true,
 // one with no suffix that defaults to raw: false but can have that overwritten. Primarily because, at least historically
@@ -381,9 +386,7 @@ export const formats = _.chain(types_to_format)
   ])
   .fromPairs()
   .value() as {
-  // Important note, this is what the rest of src will see formats as. The other typing is just for internal consistency.
-  // Little trick here too, unlike formatter_wrapper, we can actually lean on the generic nature of Formatted here, couldn't
-  // in the actual formatter_wrapper type signature as it requires extending a type, which causes type uncertainty within the function body
+  // note, this is what the rest of src will see formats as. The other typing is just for internal consistency
   [key in FormatKey | `${FormatKey}_raw`]: <T extends Formattable>(
     val: T,
     options?: Partial<formatterOptions>
