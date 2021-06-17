@@ -160,7 +160,7 @@ function get_plugins({
       IS_CI: JSON.stringify(is_ci),
       LOCAL_IP: JSON.stringify(local_ip),
     }),
-    new ESLintPlugin({ extensions: ["js", "ts", "tsx"] }),
+    //new ESLintPlugin({ extensions: ["js", "ts", "tsx"] }),
     new ForkTsCheckerWebpackPlugin({
       async: true,
       typescript: { configFile: "tsconfig.json" },
