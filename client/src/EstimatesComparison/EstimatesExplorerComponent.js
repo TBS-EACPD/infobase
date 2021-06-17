@@ -2,6 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import { FAQPanel } from "src/panels/panel_declarations/misc/key_concept_panels/key_concept_panels";
+
 import {
   LeafSpinner,
   FootnoteList,
@@ -14,13 +16,14 @@ import {
 
 import { businessConstants } from "src/models/businessConstants";
 
+import { primaryColor } from "src/core/color_defs";
+
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { infograph_href_template, rpb_link } from "src/link_utils";
 import { sources } from "src/metadata/data_sources";
-import { EstimatesComparisonFAQ } from "src/subapps_key_concept_panels/FAQPanels";
 
 import {
   text_maker,
@@ -182,6 +185,13 @@ export default class EstimatesExplorerComponent extends React.Component {
       col_click,
     };
 
+    const q_a_keys = [
+      "how_do_estimates_work",
+      "diff_between_stat_vote",
+      "how_to_use",
+      "question_4",
+    ];
+
     return (
       <div>
         <div className="medium-panel-text mrgn-tp-lg">
@@ -196,7 +206,11 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
-        <EstimatesComparisonFAQ />
+        <FAQPanel
+          rendered_q_a_keys={q_a_keys}
+          is_initially_expanded={true}
+          background_color={primaryColor}
+        />
         <div
           style={{
             marginBottom: "15px",
