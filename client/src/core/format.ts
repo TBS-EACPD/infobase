@@ -3,6 +3,9 @@
 //  site.scss also establishes the widths for displaying each of the data types
 import _ from "lodash";
 
+import { identity } from "react-virtualized/dist/es/Masonry";
+import { string } from "yargs";
+
 import { lang } from "src/core/injected_build_constants";
 
 const number_formatter = {
@@ -135,7 +138,7 @@ const compact = (
     }
   })();
 
-  // for now, can't use the money formatter_wrapper if we want to insert
+  // for now, can't use the money format_wrapper if we want to insert
   // custom symbols in the string. There is an experimental
   // formatToParts function that may be useful in the future
   const rtn = number_formatter[lang][precision].format(new_val);
@@ -250,7 +253,7 @@ const smart_percentage = (
   }
 };
 
-export type FormatKey =
+type NumberFormatKey =
   | "compact"
   | "compact1"
   | "compact2"
@@ -269,19 +272,18 @@ export type FormatKey =
   | "decimal"
   | "big_int"
   | "dollar"
-  | "year_to_fiscal_year"
-  | "str"
-  | "short-str"
-  | "wide-str";
-interface formatterOptions {
+  | "year_to_fiscal_year";
+
+interface FormatterOptions {
   raw: boolean;
   precision?: number;
 }
+
 const types_to_format: {
-  [key in FormatKey]: (
+  [key in NumberFormatKey]: (
     val: number,
     lang: LangType,
-    options: formatterOptions
+    options: FormatterOptions
   ) => string;
 } = {
   compact: (val, lang, { raw, precision = 0 }) =>
@@ -327,12 +329,6 @@ const types_to_format: {
   year_to_fiscal_year: (val) => {
     return `${val}-${lang === "en" ? val - 2000 + 1 : val + 1}`;
   },
-  // legacy hack, these are outliers but the Table API/report builder uses them... this code probably won't ever be reached,
-  // values will probably be strings in these cases to the formatter_wrapper will swallow them (and use _.toString anyway)
-  // ... these are here because they need to exist in the FormatKey type and the exported formats object
-  str: _.toString,
-  "short-str": _.toString,
-  "wide-str": _.toString,
 };
 
 type Formattable =
@@ -348,18 +344,21 @@ type Formatted<T> = T extends number | string
   ? { [key: string]: string }
   : never;
 
-function formatter_wrapper<T extends Formattable>(
-  format: FormatKey,
+function format_wrapper<T extends Formattable>(
+  format: NumberFormatKey,
   val: T,
-  options: formatterOptions
+  options: FormatterOptions
 ): Formatted<T>;
-function formatter_wrapper(
-  format: FormatKey,
+function format_wrapper(
+  format: NumberFormatKey,
   val: Formattable,
-  options: formatterOptions
+  options: FormatterOptions
 ): Formatted<Formattable> {
   const formatter = (actual_val: number | string) =>
-    types_to_format[format](+actual_val as number, lang, options);
+    typeof actual_val === "number" ||
+    (typeof actual_val === "string" && !_.isNaN(+actual_val))
+      ? types_to_format[format](+actual_val as number, lang, options)
+      : _.toString(actual_val); // TODO would prefer to throw in this case, but some legacy code likely depends on this. Check
 
   if (typeof val === "object") {
     if (Array.isArray(val)) {
@@ -372,32 +371,50 @@ function formatter_wrapper(
   }
 }
 
-// legacy-ish hack here, two keys for every format, one with the suffix _raw that always has the option raw: true,
-// one with no suffix that defaults to raw: false but can have that overwritten. Primarily because, at least historically
-// the generated handlebar helper versions of formats don't take options (so needed an alternate way to set raw value).
-// I think types in the legacy table definition API also use the _raw versions a lot
-export const formats = _.chain(types_to_format)
+const number_formats = _.chain(types_to_format)
   .keys()
-  .flatMap((key: FormatKey) => [
+  .flatMap((key: NumberFormatKey) => [
+    // legacy-ish hack here, two keys for every format, one with the suffix _raw that always has the option raw: true,
+    // one with no suffix that defaults to raw: false but can have that overwritten. Primarily because, at least historically
+    // the generated handlebar helper versions of formats don't take options (so needed an alternate way to set raw value).
+    // I think types in the legacy table definition API also use the _raw versions a lot
     [
       key,
-      (val: Formattable, options: Partial<formatterOptions> = {}) =>
-        formatter_wrapper(key, val, { raw: false, ...options }),
+      (val: Formattable, options: Partial<FormatterOptions> = {}) =>
+        format_wrapper(key, val, { raw: false, ...options }),
     ],
     [
       `${key}_raw`,
-      (val: Formattable, options: Partial<formatterOptions> = {}) =>
-        formatter_wrapper(key, val, { ...options, raw: true }),
+      (val: Formattable, options: Partial<FormatterOptions> = {}) =>
+        format_wrapper(key, val, { ...options, raw: true }),
     ],
   ])
   .fromPairs()
   .value() as {
-  // note, this is what the rest of src will see formats as. The other typing is just for internal consistency
-  [key in FormatKey | `${FormatKey}_raw`]: <T extends Formattable>(
+  [key in NumberFormatKey | `${NumberFormatKey}_raw`]: <T extends Formattable>(
     val: T,
-    options?: Partial<formatterOptions>
+    options?: Partial<FormatterOptions>
   ) => Formatted<T>;
 };
+
+// legacy, exist primarily for the Table API/RPB, where columns may have these types and expec a corresponding format to exist (but do nothing)
+// TODO either before or after the Table API is dropped/the RPB is refactored, remove these
+const legacy_string_format_keys = ["str", "short-str", "wide-str"] as const;
+type LegacyStringNumberFormatKeys = typeof legacy_string_format_keys[number]; // "str" | "short-str" | "wide-str"
+const legacy_string_formats = _.chain(legacy_string_format_keys)
+  .flatMap((key) => [
+    [key, _.identity],
+    [`${key}_raw`, _.identity],
+  ])
+  .fromPairs()
+  .value() as {
+  [key in
+    | LegacyStringNumberFormatKeys
+    | `${LegacyStringNumberFormatKeys}_raw`]: identity;
+};
+
+export const formats = { ...number_formats, ...legacy_string_formats };
+export type FormatKey = [keyof typeof formats][number];
 
 export const array_to_grammatical_list = (items: string[]) => {
   const and_et = {
