@@ -1,3 +1,4 @@
 {
-    "baseUrl": "http://localhost:8080/build/InfoBase/index-eng.html"
+    "video": false,
+    "ignoreTestFiles" : "**/ignoredTestFiles/*.js"
 }
