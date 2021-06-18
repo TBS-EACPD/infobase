@@ -98,7 +98,13 @@ export default async function ({ models }) {
       decision_digital_status,
       issuance_digital_status,
       issue_res_digital_status,
+      // last_accessibility_review,
+      // last_improve_from_feedback,
 
+      // recipient_type_en,
+      // recipient_type_fr,
+      // accessibility_assessors_en,
+      // accessibility_assessors_fr,
       service_type_en,
       service_type_fr,
       service_type_ids,
@@ -154,6 +160,10 @@ export default async function ({ models }) {
         .map((id) => `${dept_code}-${id}`)
         .value(),
       ...multi_value_string_fields_to_arrays({
+        // recipient_type_en,
+        // recipient_type_fr,
+        // accessibility_assessors_en,
+        // accessibility_assessors_fr,
         service_type_en,
         service_type_fr,
         service_type_ids,

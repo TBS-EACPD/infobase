@@ -65,11 +65,15 @@ export default function (model_singleton) {
     program_ids: [sparse_parent_fkey_type()],
     first_active_year: str_type,
     last_active_year: str_type,
+    // last_accessibility_review: str_type, // for 2020-21 collection, exists in 2019-20 but empty
+    // last_improve_from_feedback: str_type, // for 2020-21 collection, exists in 2019-20 but empty
     is_active: { type: Boolean },
 
     ...bilingual_str("name"),
     ...bilingual_str("description"),
     ...bilingual("service_type", [str_type]),
+    // ...bilingual("recipient_type", [str_type]), // for 2020-21 collection, exists in 2019-20 but empty
+    // ...bilingual("accessibility_assessors", [str_type]), // for 2020-21 collection, exists in 2019-20 but empty
     ...bilingual("scope", [str_type]),
     ...bilingual("designations", [str_type]),
     ...bilingual("target_groups", [str_type]),
