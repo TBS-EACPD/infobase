@@ -14,7 +14,7 @@ interface ContactProps {
   toggleSurvey: () => void;
 }
 
-export default class Contact extends React.Component<ContactProps, {}> {
+export default class Contact extends React.Component<ContactProps, never> {
   render() {
     const { toggleSurvey } = this.props;
 

@@ -7,7 +7,7 @@ interface LabeledBoxProps {
   children: string | React.ReactNode;
 }
 
-export class LabeledBox extends React.Component<LabeledBoxProps, {}> {
+export class LabeledBox extends React.Component<LabeledBoxProps, never> {
   render() {
     const { label, children } = this.props;
 
