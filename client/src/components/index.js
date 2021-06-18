@@ -42,6 +42,7 @@ export { AlertBanner } from "./AlertBanner/AlertBanner";
 export { FancyUL } from "./FancyUL/FancyUL";
 export { DropdownMenu } from "./DropdownMenu/DropdownMenu";
 export { PinnedContent } from "./PinnedContent/PinnedContent";
+export { FAQPanel } from "./FAQPanel/FAQPanel";
 
 export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
 export {
