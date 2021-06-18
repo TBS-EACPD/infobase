@@ -47,6 +47,7 @@ export { FancyUL } from "./FancyUL/FancyUL";
 export { DropdownMenu } from "./DropdownMenu/DropdownMenu";
 export { PinnedContent } from "./PinnedContent/PinnedContent";
 export { IconGrid } from "./IconGrid/IconGrid";
+export { FAQPanel } from "./FAQPanel/FAQPanel";
 
 export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
 export {

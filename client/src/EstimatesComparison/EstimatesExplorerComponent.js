@@ -2,9 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { FAQPanel } from "src/panels/panel_declarations/misc/key_concept_panels/key_concept_panels";
-
 import {
+  FAQPanel,
   LeafSpinner,
   FootnoteList,
   Format,
