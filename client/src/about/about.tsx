@@ -46,7 +46,7 @@ const tech_icon_list = _.chain([
 interface AboutProps {
   toggleSurvey: () => void;
 }
-export default class About extends React.Component<AboutProps, {}> {
+export default class About extends React.Component<AboutProps, never> {
   render() {
     const { toggleSurvey } = this.props;
 
