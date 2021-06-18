@@ -94,26 +94,43 @@ jobs:
             - ./dev-dbs-clean-for-these-branches.txt
           key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
 
+  lighthouse:
+    working_directory: "~/InfoBase"
+    docker:
+      - image: markhobson/node-chrome:latest
+        <<: *dockerhub_auth
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run: ./scripts/ci_scripts/setup_lighthouse_env.sh
+      - run: ./scripts/ci_scripts/cleanup_lighthouse_db.sh
+      - run:
+          name: lhci autorun
+          command: node ./node_modules/@lhci/cli/src/cli.js autorun --config ./scripts/ci_scripts/lighthouserc.js
+
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
       - image: eaadtbs/ib-ci-build:2.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
+    environment:
+      CYPRESS_CACHE_FOLDER: "~/InfoBase/.cache/Cypress"
     steps:
       - checkout:
           path: "~/InfoBase"
 
       - restore_cache:
           keys:
-            - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
+            - top-level-dependencies-{{ checksum "package-lock.json" }}-v3
       - run:
           command: |
             [ -e "node_modules" ] ||  npm ci
       - save_cache:
           paths:
             - node_modules
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
+            - ./.cache
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v3
 
       - run: ./scripts/ci_scripts/create_envs.sh
 
@@ -192,11 +209,16 @@ jobs:
             - ./node_modules
             - ./scripts
 
+            - ./.cache/Cypress
+
             - ./data
             - ./test-data
             - ./package.json
             - ./.prettierignore
             - ./prettier.config.cjs
+            - ./cypress.json
+
+            - ./cypress
 
             - ./client/build
             - ./client/browser-tests
@@ -248,9 +270,11 @@ jobs:
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
-      - image: eaadtbs/ib-ci-test:2.0
+      - image: eaadtbs/ib-ci-cypress:latest
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
+    environment:
+      CYPRESS_CACHE_FOLDER: "~/InfoBase/.cache/Cypress"
     steps:
       - attach_workspace:
           at: ./
@@ -276,8 +300,8 @@ jobs:
           name: start_http_server
           command: (cd client && npm run ci_serve)
           background: true
-      - run: (cd client && npm run ci_route_load_tests)
-
+      #- run: (cd client && npm run ci_route_load_tests)
+      - run: npm run cypress:run
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
@@ -351,7 +375,6 @@ jobs:
 
 workflows:
   version: 2
-
   test_email_backend:
     jobs:
       - test_email_backend
