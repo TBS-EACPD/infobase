@@ -4,17 +4,14 @@ import React from "react";
 import { trivial_text_maker } from "src/models/text";
 
 interface TextMakerProps {
-  text_maker_func?: (key: string, args?: any) => string;
+  text_maker_func?: (key: string, args?: Record<string, unknown>) => string;
   text_key: string;
   el?: string;
-  args?: Object;
-  style?: Object;
+  args?: Record<string, unknown>;
+  style?: Record<string, unknown>;
   className?: string;
-  template_str?: string;
 }
 
-// I think eslint is wrong here
-/* disable-eslint react/jsx-no-danger-children */
 const TextMaker = ({
   text_maker_func,
   text_key,
@@ -22,7 +19,6 @@ const TextMaker = ({
   args,
   style,
   className,
-  template_str,
 }: TextMakerProps) => {
   const tm_func = _.isFunction(text_maker_func)
     ? text_maker_func
@@ -35,13 +31,12 @@ const TextMaker = ({
   });
 };
 export interface TMProps {
-  tmf?: (key: string, args?: any) => string;
+  tmf?: (key: string, args?: Record<string, unknown>) => string;
   k: string;
   el?: string;
-  args?: Object;
-  style?: Object;
+  args?: Record<string, unknown>;
+  style?: Record<string, unknown>;
   className?: string;
-  template_str?: string;
 }
 //shorthand for the above
 const TM = (props: TMProps) => (
@@ -52,7 +47,6 @@ const TM = (props: TMProps) => (
     text_maker_func={props.tmf}
     style={props.style}
     className={props.className}
-    template_str={props.template_str}
   />
 );
 
