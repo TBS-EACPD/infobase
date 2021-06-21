@@ -3,6 +3,8 @@ import JSURL from "jsurl";
 import _ from "lodash";
 import marked from "marked";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export const sanitize_html = (markup: string | Node) => {
   // a little tedious, but this is the safe way to enforce safe usage of target="_blank" with DOMPurify
   // note: add and then pop the hook, don't want the side effect of leaving hooks on DOMPurify (ugh)
@@ -159,7 +161,6 @@ export function completeAssign<TObject, TSource1, TSource2, TSource3, TSource4>(
   source4: TSource4
 ): TObject & TSource1 & TSource2 & TSource3 & TSource4;
 export function completeAssign<TObject>(object: TObject): TObject;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function completeAssign(target: any, ...sources: any[]): any {
   sources.forEach((source) => {
     const descriptors = Object.keys(source).reduce(
