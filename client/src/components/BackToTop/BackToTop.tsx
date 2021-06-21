@@ -35,24 +35,35 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
   }
 
   componentDidMount() {
-    this.page_header = document.getElementById("ib-site-header-area")!;
-    this.page_footer = document.getElementById("wb-info")!;
+    this.page_header = document.getElementById("ib-site-header-area");
+    this.page_footer = document.getElementById("wb-info");
 
-    this.header_observer = new IntersectionObserver((entries, observer) => {
+    this.header_observer = new IntersectionObserver((entries) => {
       this.setState({ show_back_to_top: entries[0].intersectionRatio <= 0 });
     });
-    this.header_observer.observe(this.page_header);
+    if (this.page_header && this.header_observer) {
+      this.header_observer.observe(this.page_header);
+    }
 
-    this.footer_observer = new IntersectionObserver((entries, observer) => {
+    this.footer_observer = new IntersectionObserver((entries) => {
       this.setState({
         caught_by_footer: entries[0].isIntersecting,
       });
     });
-    this.footer_observer.observe(this.page_footer);
+    if (this.page_footer && this.footer_observer) {
+      this.footer_observer.observe(this.page_footer);
+    }
   }
   componentWillUnmount() {
-    this.header_observer!.unobserve(this.page_header!);
-    this.footer_observer!.unobserve(this.page_footer!);
+    if (
+      this.page_header &&
+      this.header_observer &&
+      this.page_footer &&
+      this.footer_observer
+    ) {
+      this.header_observer.unobserve(this.page_header);
+      this.footer_observer.unobserve(this.page_footer);
+    }
   }
 
   handleClick() {
@@ -74,9 +85,10 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
           caught_by_footer && "back-to-top--caught"
         )}
         style={{
-          top: caught_by_footer
-            ? `${this.page_footer!.offsetTop - 50}px`
-            : "auto",
+          top:
+            caught_by_footer && this.page_footer
+              ? `${this.page_footer.offsetTop - 50}px`
+              : "auto",
           opacity:
             caught_by_footer && is_mobile() && window.innerWidth <= 600
               ? 0
