@@ -11,7 +11,7 @@ interface ContentItem {
 interface LabeledTableProps {
   title: string;
   contents: Array<ContentItem>;
-  TitleComponent?: any;
+  TitleComponent?: React.ComponentType;
 }
 
 export const LabeledTable = (props: LabeledTableProps) => (
