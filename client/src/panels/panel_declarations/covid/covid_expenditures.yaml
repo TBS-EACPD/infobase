@@ -7,7 +7,8 @@ covid_expenditures_above_tab_footnote_list:
       {{gt "covid_above_tab_data_org_websites_note"}}
     * Reported data has not been audited. A reconciliation of the estimated expenditures will be conducted at year end to align with final
       expenditures reported in the Public Accounts of Canada {{next_year}} which will likely be tabled in Parliament in Fall {{next_year}}.
-    * COVID_TODO estimated expenditures scope explanation
+    * COVID_TODO estimated expenditures scope explanation. Is the only exception the Employment Insurance Benefits measure expenditures? Tax and Liquidity are considered 
+      credits, etc, not expenditures, right?
   fr: |
     * Compte tenu du contexte extraordinaire de la pandémie, le Secrétariat du Conseil du Trésor (SCT) a entrepris de recueillir des données
       sur les dépenses auprès des organisations gouvernementales.
@@ -21,7 +22,6 @@ covid_expenditures_above_tab_footnote_list:
 #####
 # GARBAGE ALERT: thanks to some last minute rewrites, this panel's pre-2021-22 text is a bit of a hash, tells a narative that only makese sense
 # (and uses grammar that is only correct) with the particular measure distribution pre-2021 (i.e. vast majority of spending through ESDC on the CERB), ugh.
-# 2021-22 and onward text will need to be edited to align somewhat, while staying more flexible, once 2021-22 data becomes available
 #####
 
 covid_expenditures_overview_tab_text:
