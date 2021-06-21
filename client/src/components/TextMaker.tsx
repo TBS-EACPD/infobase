@@ -8,7 +8,7 @@ interface TextMakerProps {
   text_key: string;
   el?: string;
   args?: Record<string, unknown>;
-  style?: Record<string, unknown>;
+  style?: React.CSSProperties;
   className?: string;
 }
 
@@ -35,7 +35,7 @@ export interface TMProps {
   k: string;
   el?: string;
   args?: Record<string, unknown>;
-  style?: Record<string, unknown>;
+  style?: React.CSSProperties;
   className?: string;
 }
 //shorthand for the above
