@@ -7,14 +7,21 @@ covid_estimates_above_tab_footnote_list:
       presented in {{{gt "covid_erp_source"}}}.
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments for authorizing
-      certain payments annually, and therefore not all COVID-19 related measures fall within its scope.
+      certain payments annually, and therefore not all COVID-19 related measures fall within its scope. For instance, excluded from the Estimates are:
+      * Measures legislated through the _Income Tax Act_ such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
+      * Employment Insurance Benefits that are paid out of the Employment Insurance Operating Account; and
+      * Liquidity measures such as the Canada Emergency Business Account, and the Business Credit Availability Program. 
   fr: |
     * L'approbation du Parlement est requise pour toutes les dépenses du gouvernement. Ces chiffres représentent les nouvelles {{gl_tt "autorisations de dépenser" "AUTH"}}
       au titre de COVID-19 qui figurent dans {{gov_tabled_est_docs_in_year_text}} pour l'exercice {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan
       d’intervention économique du Canada pour répondre à la COVID-19, présenté dans {{{gt "covid_erp_source"}}}.
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
     * Les budgets des dépenses ont pour principal objectif de faciliter l'étude par le Parlement des projets de loi de crédits, qui sont toutes les instruments
-      juridiques permettant d'autoriser certains paiements, si bien que les mesures liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses.
+      juridiques permettant d'autoriser certains paiements, si bien que les mesures liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses. Par exemple,
+      sont exclus du Budget des dépenses :
+      * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
+      * les prestations d'assurance-emploi versées à même le Compte des opérations de l'assurance-emploi
+      * les mesures relatives aux liquidités telles que le Compte d'urgence pour les entreprises canadiennes et le Programme de crédit aux entreprises.
 
 
 covid_estimates_summary_text_gov:

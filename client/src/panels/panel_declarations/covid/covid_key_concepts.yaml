@@ -9,26 +9,6 @@ covid_questions_up_to_date_a:
   fr: |
     Oui. Ces données sont les plus récentes et correspondent aux renseignements à notre disposition le 31 août 2021.
 
-covid_questions_missing_measures_q:
-  en: Why are some measures of the Government’s COVID response plan missing from the data?
-  fr: Pourquoi certaines mesures du Plan d'intervention économique du gouvernement pour répondre à la COVID-19 ne figurent-elles pas dans les données?
-covid_questions_missing_measures_a:
-  transform: [handlebars,markdown]
-  en: |
-    COVID_TODO explain new scope, why it is this way:
-      * Employment Insurance Benefits that are paid out of the Employment Insurance Operating Account; and
-      * Liquidity measures such as the Canada Emergency Business Account, and the Business Credit Availability Program. 
-    
-    More information related to the {{ext_link "benefits and services" "https://www.canada.ca/en/services/benefits/covid19-emergency-benefits.html"}} provided by the Government of Canada
-    to help Canadians and businesses facing hardship as a result of the global COVID-19 outbreak are available online.
-  fr: |
-    COVID_TODO :
-      * les prestations d'assurance-emploi versées à même le Compte des opérations de l'assurance-emploi
-      * les mesures relatives aux liquidités telles que le Compte d'urgence pour les entreprises canadiennes et le Programme de crédit aux entreprises.
-
-    De plus amples renseignements sur les {{ext_link "prestations et services" "https://www.canada.ca/fr/services/prestations/covid-19-prestations-urgence.html"}} offerts par le gouvernement du Canada
-    pour venir en aide aux Canadiens et aux entreprises qui éprouvent des difficultés en raison de la pandémie de COVID-19 sont affichés en ligne.
-
 covid_questions_other_expenditure_reporting_q:
   en: Where does the government normally report expenditure information, in general and for COVID-19 spending measures?
   fr: Où le gouvernement déclare-t-il habituellement son information sur les dépenses en général et celles au titre de la COVID-19?

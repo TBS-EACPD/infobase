@@ -44,10 +44,6 @@ export const declare_covid_key_concepts_panel = () =>
               "covid_questions_auth_but_no_exp_q",
               "covid_questions_auth_but_no_exp_a",
             ],
-            [
-              "covid_questions_missing_measures_q",
-              "covid_questions_missing_measures_a",
-            ],
             ["different_org_names_q", "different_org_names_a"],
           ]}
           TM={TM}
