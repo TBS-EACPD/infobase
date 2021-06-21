@@ -22,7 +22,7 @@ interface TwoSelectProps {
 
   className?: string;
   disabled?: boolean;
-  style?: Object;
+  style?: React.CSSProperties;
 }
 
 const TwoLevelSelect: React.FC<TwoSelectProps> = ({
