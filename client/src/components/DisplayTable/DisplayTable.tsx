@@ -37,7 +37,7 @@ interface ColumnKeyProps {
   initial_visible: boolean; // Default to trues
   formatter: string | Function; // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
   raw_formatter: (val: any) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
-  sum_func: Function; // e.g.: (sum, value) => ... Default to sum + value
+  sum_func: (sum: number, value: number) => number; // e.g.: (sum, value) => ... Default to sum + value
   sort_func: Function; // e.g.: (a,b) => ... Default to _.sortBy
   sum_initial_value: number; // Default to 0
   visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes

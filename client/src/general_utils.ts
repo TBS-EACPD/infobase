@@ -164,7 +164,10 @@ export function completeAssign(target: any, ...sources: any[]): any {
   sources.forEach((source) => {
     const descriptors = Object.keys(source).reduce(
       (descriptors: { [key: string]: PropertyDescriptor }, key) => {
-        descriptors[key] = Object.getOwnPropertyDescriptor(source, key)!;
+        const descriptor = Object.getOwnPropertyDescriptor(source, key);
+        if (descriptor) {
+          descriptors[key] = descriptor;
+        }
         return descriptors;
       },
       {}
@@ -215,7 +218,7 @@ const pre_parse_safe_jsurl = (safe_jsurl_string: string) =>
 export const SafeJSURL = {
   parse: (safe_jsurl_string: string) =>
     JSURL.parse(pre_parse_safe_jsurl(safe_jsurl_string)),
-  stringify: (json: { [key: string]: any }) =>
+  stringify: (json: { [key: string]: string }) =>
     make_jsurl_safe(JSURL.stringify(json)),
   tryParse: (safe_jsurl_string: string) =>
     JSURL.tryParse(pre_parse_safe_jsurl(safe_jsurl_string)),
@@ -223,12 +226,15 @@ export const SafeJSURL = {
 
 export const generate_href = (url: string) =>
   url.startsWith("http") ? url : `https://${url}`;
-
 interface ElementDescriptor {
   kind: string;
   key: string;
   descriptor: PropertyDescriptor;
-  extras?: [{ [key: string]: any }];
+  extras?: [ElementDescriptorExtra];
+}
+interface ElementDescriptorExtra extends ElementDescriptor {
+  placement: string;
+  initializer: (this: any) => any;
 }
 
 export function cached_property(elementDescriptor: ElementDescriptor) {

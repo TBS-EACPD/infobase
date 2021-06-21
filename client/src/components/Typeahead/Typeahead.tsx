@@ -206,6 +206,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                 {() => (
                   <AutoHeightVirtualList
                     className="typeahead__dropdown"
+                    max_height={400}
                     role="listbox"
                     id={this.menu_id}
                     ariaExpanded={this.show_menu}

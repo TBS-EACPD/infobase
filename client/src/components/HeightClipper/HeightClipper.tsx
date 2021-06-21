@@ -85,9 +85,11 @@ export class HeightClipper extends React.Component<
         height_clipper_node.querySelectorAll("[prev-tabindex]"),
         _.identity
       ).forEach((node: HTMLElement) => {
-        const previous_tabindex = node.getAttribute("prev-tabindex")!;
-        node.setAttribute("tabindex", previous_tabindex);
-        node.removeAttribute("prev-tabindex");
+        const previous_tabindex = node.getAttribute("prev-tabindex");
+        if (previous_tabindex) {
+          node.setAttribute("tabindex", previous_tabindex);
+          node.removeAttribute("prev-tabindex");
+        }
       });
 
       _.map<Element, HTMLElement>(
@@ -159,7 +161,9 @@ export class HeightClipper extends React.Component<
               }}
               onClick={() => {
                 this.setState({ shouldClip: false }, () => {
-                  this.content.current!.focus();
+                  if (this.content.current) {
+                    this.content.current.focus();
+                  }
                 });
               }}
             >
