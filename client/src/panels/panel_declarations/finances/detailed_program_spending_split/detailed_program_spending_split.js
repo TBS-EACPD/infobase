@@ -311,7 +311,10 @@ class DetailedProgramSplit extends React.Component {
       },
       legend: formatter(total),
       legendOffsetX: -60,
-      legendOffsetY: -(divHeight / (graph_ready_data.length * 2)),
+      legendOffsetY: Math.max(
+        -(divHeight / (3.3 * graph_ready_data.length)),
+        -18
+      ), // Math.max so that there would be a set value for when the graph has one bar/data point
     }));
 
     const programs_by_name = _.chain(flat_data)
