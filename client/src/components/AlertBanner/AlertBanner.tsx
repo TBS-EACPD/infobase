@@ -8,7 +8,7 @@ interface AlertBannerProps {
   children: React.ReactNode;
   banner_class: string;
   additional_class_names: string;
-  style: Record<string, unknown>;
+  style: React.CSSProperties;
 }
 
 export const banner_classes = ["info", "success", "warning", "danger"];
