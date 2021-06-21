@@ -19,6 +19,7 @@ import {
 import { Gov } from "src/models/organizational_entities";
 
 import est_lang from "src/EstimatesComparison/estimates_comparison_questions.yaml";
+import text_diff_lang from "src/TextDiff/text_diff_questions.yaml";
 
 const { TM } = create_text_maker_component([
   common_lang,
@@ -27,6 +28,7 @@ const { TM } = create_text_maker_component([
   results_lang,
   tag_lang,
   est_lang,
+  text_diff_lang,
   sample_lang,
 ]);
 
