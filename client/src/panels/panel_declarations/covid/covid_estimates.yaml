@@ -6,13 +6,15 @@ covid_estimates_above_tab_footnote_list:
       {{gov_tabled_est_docs_in_year_text}} for {{fmt_year_to_fiscal_year selected_year}} and align with the COVID-19 Economic Response Plan (ERP)
       presented in {{{gt "covid_erp_source"}}}.
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
-    * {{{gt "covid_above_tab_limited_measure_note"}}}
+    * The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments for authorizing
+      certain payments annually, and therefore not all COVID-19 related measures fall within its scope.
   fr: |
     * L'approbation du Parlement est requise pour toutes les dépenses du gouvernement. Ces chiffres représentent les nouvelles {{gl_tt "autorisations de dépenser" "AUTH"}}
       au titre de COVID-19 qui figurent dans {{gov_tabled_est_docs_in_year_text}} pour l'exercice {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan
       d’intervention économique du Canada pour répondre à la COVID-19, présenté dans {{{gt "covid_erp_source"}}}.
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
-    * {{{gt "covid_above_tab_limited_measure_note"}}}
+    * Les budgets des dépenses ont pour principal objectif de faciliter l'étude par le Parlement des projets de loi de crédits, qui sont toutes les instruments
+      juridiques permettant d'autoriser certains paiements, si bien que les mesures liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses.
 
 
 covid_estimates_summary_text_gov:
