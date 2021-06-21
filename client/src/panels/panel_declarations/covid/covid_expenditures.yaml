@@ -14,7 +14,8 @@ covid_expenditures_above_tab_footnote_list:
     * Toutes les données fournies au SCT par les organisations se trouve sur {{ext_link "Données ouvertes" "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
       {{gt "covid_above_tab_data_org_websites_note"}}
     * Les données déclarées n'ont pas été vérifiées. Un rapprochement des dépenses estimées sera effectué à la fin de l’exercice pour qu'elles
-      concordent avec le calcul définitif des dépenses finales déclarée dans les Comptes publics du Canada 2021, qui seront probablement déposés au Parlement à l'automne 2021.
+      concordent avec le calcul définitif des dépenses finales déclarée dans les Comptes publics du Canada {{next_year}}, qui seront probablement
+      déposés au Parlement à l'automne {{next_year}}.
     * COVID_TODO estimated expenditures scope explanation
     
 #####
