@@ -14,7 +14,7 @@ interface SelectProps {
 
   className?: string;
   disabled?: boolean;
-  style?: Object;
+  style?: React.CSSProperties;
   title?: string;
 }
 
