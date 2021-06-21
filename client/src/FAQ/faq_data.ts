@@ -15,7 +15,7 @@ export const faq_data = _.chain(faq_csv_string)
     qa_row.id,
     {
       q: qa_row[`q_${lang}`],
-      a: marked(qa_row[`a_${lang}`]!, { sanitize: false, gfm: true }),
+      a: marked(qa_row[`a_${lang}`] as string, { sanitize: false, gfm: true }),
     },
   ])
   .fromPairs()

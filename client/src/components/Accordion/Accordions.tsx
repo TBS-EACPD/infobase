@@ -24,22 +24,23 @@ function FirstChild(props: { children: React.ReactElement }) {
   return childrenArray[0] || null;
 }
 
-interface AccordionEnterExitProps {
+type AccordionEnterExitProps = typeof AccordionEnterExit.defaultProps & {
   opening_opacity?: number;
   closing_opacity?: number;
   expandDuration: number;
   collapseDuration: number;
-  max_height: number | string;
+  max_height: string;
   onExited?: (node: HTMLElement) => void;
   enter?: boolean;
   exit?: boolean;
   in?: boolean;
   className: string;
   style: { [key: string]: string };
-  children: React.ReactElement;
-}
+  children: React.ReactNode;
+};
+
 class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
-  defaultProps = {
+  static defaultProps = {
     max_height: "80vh",
     opening_opacity: 1e-6,
     closing_opacity: 1,
@@ -48,19 +49,19 @@ class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
     const node = ReactDOM.findDOMNode(component) as HTMLElement;
     const initialHeight = node.offsetHeight;
     select(node)
-      .style("opacity", this.props.closing_opacity!)
+      .style("opacity", this.props.closing_opacity)
       .style("max-height", initialHeight + "px")
       .transition()
       .ease(easeLinear)
       .duration(this.props.collapseDuration)
-      .style("opacity", this.props.opening_opacity!)
+      .style("opacity", this.props.opening_opacity)
       .style("max-height", "1px");
   };
   onEntering = (component: HTMLElement) => {
     const node = ReactDOM.findDOMNode(component) as HTMLElement;
     select(node)
       .style("max-height", "0px")
-      .style("opacity", this.props.opening_opacity!)
+      .style("opacity", this.props.opening_opacity)
       .transition()
       .ease(easeLinear)
       .duration(this.props.expandDuration)
@@ -104,7 +105,7 @@ class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
 }
 
 interface CommonStatelessPullDownAccordionProps {
-  max_height: number | string;
+  max_height: string;
   title: string;
   children: React.ReactElement;
   onToggle: React.ReactEventHandler<HTMLElement>;

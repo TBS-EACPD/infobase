@@ -107,7 +107,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
               onKeyDown={(e) =>
                 (e.keyCode === 13 || e.keyCode === 32) &&
                 !disabled &&
-                onClick(id!)
+                onClick(id)
               }
             >
               {label}

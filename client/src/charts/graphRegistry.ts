@@ -7,21 +7,21 @@ import { Dispatch, dispatch } from "d3-dispatch";
 import { Selection } from "d3-selection";
 import _ from "lodash";
 
-interface GraphRegistryOptions {
+interface GraphRegistryOptions<T extends Record<string, unknown>> {
   height?: number;
   alternative_svg?: string;
-  dispatch?: Dispatch<any>;
+  dispatch?: Dispatch<T>;
   events?: string[];
 }
 
-class GraphRegistry {
-  registry: GraphRegistry[];
+class GraphRegistry<T extends Record<string, unknown>> {
+  registry: GraphRegistry<T>[];
   window_width_last_updated_at: number;
-  options: GraphRegistryOptions;
+  options: GraphRegistryOptions<T>;
   outside_width: number | undefined;
   outside_height: number | undefined;
-  dispatch: Dispatch<any> | undefined;
-  render: Function | undefined;
+  dispatch: Dispatch<T> | undefined;
+  render: (options: GraphRegistryOptions<T>) => void | undefined;
   svg: Selection<SVGElement, {}, HTMLElement, any> | undefined;
   html: Selection<SVGElement, {}, HTMLElement, any> | undefined;
 
@@ -30,20 +30,19 @@ class GraphRegistry {
     this.window_width_last_updated_at = window.innerWidth;
     this.options = {};
 
-    const that = this;
     window.addEventListener(
       "hashchange",
       _.debounce(function () {
-        that.update_registry();
+        this.update_registry();
       }, 250)
     );
 
     window.addEventListener(
       "resize",
       _.debounce(function () {
-        if (that.should_graphs_update()) {
-          that.update_registry();
-          that.update_graphs();
+        if (this.should_graphs_update()) {
+          this.update_registry();
+          this.update_graphs();
         }
       }, 250)
     );
