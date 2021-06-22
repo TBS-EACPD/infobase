@@ -59,7 +59,10 @@ class DelayedRender extends React.Component<
   componentDidMount() {
     this.debounceUpdate();
   }
-  componentDidUpdate(prevState: DelayedRenderState) {
+  componentDidUpdate(
+    _prevProps: DelayedRenderProps,
+    prevState: DelayedRenderState
+  ) {
     const { children: prev_children } = prevState;
     const { children, debounced } = this.state;
 

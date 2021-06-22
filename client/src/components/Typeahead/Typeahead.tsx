@@ -123,7 +123,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
       return null;
     }
   }
-  componentDidUpdate(prevProps: TypeaheadProps, prevState: TypeaheadState) {
+  componentDidUpdate(_prevProps: TypeaheadProps, prevState: TypeaheadState) {
     const { selection_cursor } = this.state;
     const { selection_cursor: prev_selection_cursor } = prevState;
 
