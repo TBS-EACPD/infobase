@@ -20,8 +20,6 @@ interface GlossaryTooltipWrapperProps {
 interface GlossaryIconProps {
   id: string;
   alternate_text?: string;
-  arrow_selector?: string;
-  inner_selector?: string;
   icon_color?: string;
   icon_alt_color?: string;
 }
@@ -59,8 +57,6 @@ const GlossaryTooltipWrapper: React.FC<GlossaryTooltipWrapperProps> = ({
 export const GlossaryIcon: React.FC<GlossaryIconProps> = ({
   id,
   alternate_text,
-  arrow_selector,
-  inner_selector,
   icon_color,
   icon_alt_color,
 }) => (
