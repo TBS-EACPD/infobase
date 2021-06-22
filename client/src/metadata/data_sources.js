@@ -62,7 +62,7 @@ const infobase_open_data_page = {
 
 const sources = _.chain([
   {
-    key: "1 IGOC",
+    key: "IGOC",
     title: text_maker("igoc_source_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -76,7 +76,7 @@ const sources = _.chain([
     ],
   },
   {
-    key: "2 PA",
+    key: "PA",
     title: text_maker("pa_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -92,7 +92,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "3 ESTIMATES",
+    key: "ESTIMATES",
     title: text_maker("estimates_title"),
     frequency: text_maker("quarterly"),
     open_data: infobase_open_data_page,
@@ -108,7 +108,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "4 CFMRS",
+    key: "CFMRS",
     title: text_maker("cfmrs_title"),
     open_data: {
       en: "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
@@ -123,7 +123,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "5 RTP",
+    key: "RTP",
     title: text_maker("transfer_payments_source_title"),
     frequency: text_maker("yearly"),
     open_data: {
@@ -143,7 +143,7 @@ const sources = _.chain([
     ],
   },
   {
-    key: "6 DP",
+    key: "DP",
     title: text_maker("dp_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -166,7 +166,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "7 DRR",
+    key: "DRR",
     title: text_maker("drr_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -189,7 +189,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "8 RPS",
+    key: "RPS",
     title: text_maker("rps_title"),
     frequency: text_maker("yearly"),
     get description() {
@@ -200,7 +200,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "9 COVID",
+    key: "COVID",
     title: text_maker("covid_title"),
     frequency: text_maker("as_needed"),
     description: <TM k="covid_desc" />,
@@ -224,7 +224,7 @@ const sources = _.chain([
     ],
   },
   services_feature_flag && {
-    key: "10 SERVICES",
+    key: "SERVICES",
     title: text_maker("services_title"),
     frequency: text_maker("yearly"),
     description: text_maker("services_desc"),
