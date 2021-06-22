@@ -3,9 +3,6 @@
 //  site.scss also establishes the widths for displaying each of the data types
 import _ from "lodash";
 
-import { identity } from "react-virtualized/dist/es/Masonry";
-import { string } from "yargs";
-
 import { lang } from "src/core/injected_build_constants";
 
 const number_formatter = {
@@ -410,7 +407,7 @@ const legacy_string_formats = _.chain(legacy_string_format_keys)
   .value() as {
   [key in
     | LegacyStringNumberFormatKeys
-    | `${LegacyStringNumberFormatKeys}_raw`]: identity;
+    | `${LegacyStringNumberFormatKeys}_raw`]: <T>(value: T) => T;
 };
 
 export const formats = { ...number_formats, ...legacy_string_formats };
