@@ -8,7 +8,7 @@ const assign_to_dev_helper_namespace = (
   }
 
   if (!window.__DEV) {
-    window.__DEV = {} as Record<string, unknown>;
+    window.__DEV = {};
   }
 
   Object.assign(window.__DEV, dev_helpers);
