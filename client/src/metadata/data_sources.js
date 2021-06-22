@@ -62,7 +62,21 @@ const infobase_open_data_page = {
 
 const sources = _.chain([
   {
-    key: "PA",
+    key: "1 IGOC",
+    title: text_maker("igoc_source_title"),
+    frequency: text_maker("yearly"),
+    open_data: infobase_open_data_page,
+    description: text_maker("igoc_source_desc"),
+    items: [
+      {
+        id: "igoc",
+        text: text_maker("igoc_item_name"),
+        inline_link: "#igoc",
+      },
+    ],
+  },
+  {
+    key: "2 PA",
     title: text_maker("pa_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -78,7 +92,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "ESTIMATES",
+    key: "3 ESTIMATES",
     title: text_maker("estimates_title"),
     frequency: text_maker("quarterly"),
     open_data: infobase_open_data_page,
@@ -94,7 +108,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "CFMRS",
+    key: "4 CFMRS",
     title: text_maker("cfmrs_title"),
     open_data: {
       en: "http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf",
@@ -109,18 +123,27 @@ const sources = _.chain([
     },
   },
   {
-    key: "RPS",
-    title: text_maker("rps_title"),
+    key: "5 RTP",
+    title: text_maker("transfer_payments_source_title"),
     frequency: text_maker("yearly"),
-    get description() {
-      return desc_from_glossary_keys("PEOPLE_DATA");
+    open_data: {
+      en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+      fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
     },
-    get items() {
-      return _.map(tables_from_source_key("RPS"), table_to_row_item);
-    },
+    description: text_maker("transfer_payments_source_desc"),
+    items: [
+      {
+        id: "rtp",
+        text: text_maker("transfer_payments_source_title"),
+        inline_link: rpb_link({
+          table: "orgTransferPaymentsRegion",
+          mode: "details",
+        }),
+      },
+    ],
   },
   {
-    key: "DP",
+    key: "6 DP",
     title: text_maker("dp_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -143,7 +166,7 @@ const sources = _.chain([
     },
   },
   {
-    key: "DRR",
+    key: "7 DRR",
     title: text_maker("drr_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
@@ -166,57 +189,18 @@ const sources = _.chain([
     },
   },
   {
-    key: "IGOC",
-    title: text_maker("igoc_source_title"),
+    key: "8 RPS",
+    title: text_maker("rps_title"),
     frequency: text_maker("yearly"),
-    open_data: infobase_open_data_page,
-    description: text_maker("igoc_source_desc"),
-    items: [
-      {
-        id: "igoc",
-        text: text_maker("igoc_item_name"),
-        inline_link: "#igoc",
-      },
-    ],
-  },
-  {
-    key: "RTP",
-    title: text_maker("transfer_payments_source_title"),
-    frequency: text_maker("yearly"),
-    open_data: {
-      en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-      fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
+    get description() {
+      return desc_from_glossary_keys("PEOPLE_DATA");
     },
-    description: text_maker("transfer_payments_source_desc"),
-    items: [
-      {
-        id: "rtp",
-        text: text_maker("transfer_payments_source_title"),
-        inline_link: rpb_link({
-          table: "orgTransferPaymentsRegion",
-          mode: "details",
-        }),
-      },
-    ],
-  },
-  services_feature_flag && {
-    key: "SERVICES",
-    title: text_maker("services_title"),
-    frequency: text_maker("yearly"),
-    description: text_maker("services_desc"),
-    items: [
-      {
-        id: "service",
-        text: text_maker("service_inventory"),
-        external_link:
-          lang === "en"
-            ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
-            : "https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c",
-      },
-    ],
+    get items() {
+      return _.map(tables_from_source_key("RPS"), table_to_row_item);
+    },
   },
   {
-    key: "COVID",
+    key: "9 COVID",
     title: text_maker("covid_title"),
     frequency: text_maker("as_needed"),
     description: <TM k="covid_desc" />,
@@ -236,6 +220,22 @@ const sources = _.chain([
         text: text_maker("covid_expenditures_estimated_exp"),
         inline_link:
           "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
+      },
+    ],
+  },
+  services_feature_flag && {
+    key: "10 SERVICES",
+    title: text_maker("services_title"),
+    frequency: text_maker("yearly"),
+    description: text_maker("services_desc"),
+    items: [
+      {
+        id: "service",
+        text: text_maker("service_inventory"),
+        external_link:
+          lang === "en"
+            ? "https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c"
+            : "https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c",
       },
     ],
   },
