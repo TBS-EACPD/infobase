@@ -1,6 +1,6 @@
 import React from "react";
 
-import { EmailFrontend } from "src/components/EmailFrontend";
+import { EmailFrontend } from "src/components/EmailFrontend/EmailFrontend";
 
 import { create_text_maker } from "src/models/text";
 

@@ -12,7 +12,7 @@ import {
 
 import { IconGitHub } from "src/icons/icons";
 
-import { EmailFrontend } from "./EmailFrontend";
+import { EmailFrontend } from "./EmailFrontend/EmailFrontend";
 import { ExternalLink } from "./misc_util_components";
 
 import { StatelessModal } from "./modals_and_popovers/index";
