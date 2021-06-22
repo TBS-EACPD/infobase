@@ -1,44 +1,40 @@
 {
-    "plugins": [
-      "react",
-      "@typescript-eslint",
-      "cypress"
-    ],
-    "extends": [ 
-      "../.eslintrc.json", 
-      "plugin:react/recommended",
-      "plugin:cypress/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint", "cypress"],
+  "extends": [
+    "../.eslintrc.json",
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
     "commonjs": true,
     "es6": true
+  },
+  "rules": {
+    "no-prototype-builtins": "off", //common TS pattern
+    "no-use-before-define": "off",
+    "no-restricted-imports": ["error", { "patterns": ["../*"] }],
+    "react/jsx-uses-vars": 1,
+    "react/jsx-no-target-blank": ["off"],
+    "react/prop-types": ["off"],
+    "react/no-string-refs": ["off"],
+    "react/display-name": ["off"],
+    "react/no-find-dom-node": ["off"],
+    "react/no-children-prop": ["off"]
+  },
+  "settings": {
+    "react": {
+      "version": "17"
     },
-    "rules": {
-      "no-prototype-builtins":"off", //common TS pattern
-      "no-use-before-define":"off",
-      "no-restricted-imports": ["error", {"patterns": ["../*"]}],
-      "react/jsx-uses-vars": 1,
-      "react/jsx-no-target-blank": [ "off"],
-      "react/prop-types": [ "off" ],
-      "react/no-string-refs": [ "off" ],
-      "react/display-name": [ "off" ],
-      "react/no-find-dom-node": [ "off" ],
-      "react/no-children-prop": [ "off" ]
-    },
-    "settings": {
-      "react": {
-        "version": "17"
-      },
-      "import/resolver": {
-        "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        }
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    },
-    "globals": {
-      "window": true,
-      "ga": true
     }
+  },
+  "globals": {
+    "window": true,
+    "ga": true
   }
+}
