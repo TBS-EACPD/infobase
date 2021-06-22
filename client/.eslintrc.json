@@ -45,6 +45,8 @@
       ],
       "rules": {
         "no-prototype-builtins": "off", //common TS pattern
+        "@typescript-eslint/no-unused-vars": "off", // Lot of false positives on this rule. Better to use the exprimental
+        "@typescript-eslint/no-unused-vars-experimental": "warn",
         "@typescript-eslint/no-redeclare": ["error"],
         "@typescript-eslint/explicit-module-boundary-types": "off" // TODO might want to turn this on later, but it will take a while to fix all the warnings
       }
