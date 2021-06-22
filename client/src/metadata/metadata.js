@@ -28,8 +28,6 @@ export default class MetaData extends React.Component {
       },
     } = this.props;
 
-    const sorted_sources = _.sortBy(sources, (source) => source.title);
-
     return (
       <StandardRouteContainer
         title={text_maker("metadata")}
@@ -46,7 +44,7 @@ export default class MetaData extends React.Component {
           <TM k="metadata_t" />
         </p>
         <ScrollToTargetContainer target_id={data_source}>
-          {_.map(sorted_sources, (source) => (
+          {_.map(sources, (source) => (
             <div key={source.key} id={source.key}>
               <Panel title={source.title}>
                 <div>{source.description}</div>
