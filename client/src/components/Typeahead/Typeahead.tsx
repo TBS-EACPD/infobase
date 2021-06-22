@@ -1,9 +1,19 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, { ChangeEvent, KeyboardEvent, Fragment } from "react";
+import React, {
+  ChangeEvent,
+  KeyboardEvent,
+  Fragment,
+  ReactElement,
+} from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
-import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
+import {
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+  List,
+} from "react-virtualized";
 
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
 import { create_text_maker_component } from "src/components/misc_util_components";
@@ -54,19 +64,14 @@ interface TypeaheadState {
   results?: ResultProps[];
 }
 
-export class Typeahead extends React.Component<
-  TypeaheadProps,
-  TypeaheadState,
-  {}
-> {
+export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
   menu_id: string;
 
   private typeahead_ref = React.createRef<HTMLDivElement>();
-  private virtualized_list_ref = React.createRef<any>();
+  private virtualized_list_ref = React.createRef<List>();
 
   static defaultProps = {
     placeholder: text_maker("search"),
-    min_length: 3,
     on_query_debounce_time: 300,
   };
 
@@ -214,7 +219,7 @@ export class Typeahead extends React.Component<
                       key,
                       parent,
                       style,
-                    }: any) => (
+                    }): ReactElement => (
                       <CellMeasurer
                         cache={virtualized_cell_measure_cache}
                         columnIndex={0}
