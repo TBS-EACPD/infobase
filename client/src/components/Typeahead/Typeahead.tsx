@@ -184,7 +184,6 @@ export class Typeahead extends React.Component<
         </div>
         {this.show_menu && (
           <TypeaheadA11yStatus
-            min_length={min_length}
             selection_cursor={selection_cursor}
             results={results}
           />
