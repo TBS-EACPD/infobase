@@ -38,14 +38,14 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
     this.page_header = document.getElementById("ib-site-header-area");
     this.page_footer = document.getElementById("wb-info");
 
-    this.header_observer = new IntersectionObserver((entries) => {
+    this.header_observer = new IntersectionObserver((entries, _observer) => {
       this.setState({ show_back_to_top: entries[0].intersectionRatio <= 0 });
     });
     if (this.page_header && this.header_observer) {
       this.header_observer.observe(this.page_header);
     }
 
-    this.footer_observer = new IntersectionObserver((entries) => {
+    this.footer_observer = new IntersectionObserver((entries, _observer) => {
       this.setState({
         caught_by_footer: entries[0].isIntersecting,
       });
