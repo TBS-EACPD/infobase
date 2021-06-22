@@ -7,7 +7,7 @@ interface LangDict<T> {
   fr: T;
 }
 interface Window {
-  __DEV: Object;
+  __DEV: Record<string, unknown>;
 }
 
 // Global variables injected by webpack
