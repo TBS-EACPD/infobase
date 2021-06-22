@@ -2,6 +2,12 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { CheckBox } from "src/components/CheckBox/CheckBox";
+
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
+
+import { create_text_maker_component } from "src/components/misc_util_components";
+
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
 import { has_local_storage } from "src/core/feature_detection";
@@ -12,10 +18,6 @@ import {
   send_completed_email_template,
 } from "src/email_backend_utils";
 import { textRed } from "src/style_constants/index";
-
-import { CheckBox } from "./CheckBox/CheckBox";
-import { LeafSpinner } from "./LeafSpinner/LeafSpinner";
-import { create_text_maker_component } from "./misc_util_components";
 
 import text from "./EmailFrontend.yaml";
 
