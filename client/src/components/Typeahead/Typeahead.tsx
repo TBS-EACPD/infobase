@@ -72,6 +72,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
 
   static defaultProps = {
     placeholder: text_maker("search"),
+    min_length: 3,
     on_query_debounce_time: 300,
   };
 
