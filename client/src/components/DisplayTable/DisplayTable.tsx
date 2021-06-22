@@ -35,10 +35,15 @@ interface ColumnKeyProps {
   is_summable: boolean; // Default to false
   is_searchable: boolean; // Default to false
   initial_visible: boolean; // Default to trues
-  formatter: string | Function; // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
-  raw_formatter: (val: any) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
+  formatter: // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
+  string | ((val: string | number | Date) => string | React.ReactNode);
+  raw_formatter: (val: string | number | Date) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
   sum_func: (sum: number, value: number) => number; // e.g.: (sum, value) => ... Default to sum + value
-  sort_func: Function; // e.g.: (a,b) => ... Default to _.sortBy
+  sort_func: (
+    a: string | number | Date,
+    b: string | number | Date,
+    descending: boolean
+  ) => number; // e.g.: (a,b) => ... Default to _.sortBy
   sum_initial_value: number; // Default to 0
   visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes
 }
@@ -319,7 +324,10 @@ export class _DisplayTable extends React.Component<
       sorted_filtered_data,
       (totals, row: DisplayTableData) =>
         _.mapValues(totals, (total: number, col_key) =>
-          col_configs_with_defaults[col_key].sum_func(total, row[col_key])
+          col_configs_with_defaults[col_key].sum_func(
+            total,
+            row[col_key] as number
+          )
         ),
       _.chain(col_configs_with_defaults)
         .toPairs()
@@ -591,22 +599,16 @@ export class _DisplayTable extends React.Component<
                             {(() => {
                               const col_formatter =
                                 col_configs_with_defaults[col_key].formatter;
-                              const col_formatter_is_string =
-                                _.isString(col_formatter);
-                              const col_formatter_is_fn =
-                                _.isFunction(col_formatter);
                               if (col_formatter) {
-                                if (col_formatter_is_string) {
+                                if (_.isString(col_formatter)) {
                                   return (
                                     <Format
                                       type={col_formatter}
                                       content={row[col_key]}
                                     />
                                   );
-                                } else if (col_formatter_is_fn) {
-                                  return (col_formatter as Function)(
-                                    row[col_key]
-                                  );
+                                } else if (_.isFunction(col_formatter)) {
+                                  return col_formatter(row[col_key]);
                                 }
                               } else {
                                 return row[col_key];
@@ -637,19 +639,15 @@ export class _DisplayTable extends React.Component<
                               const col_formatter =
                                 col_configs_with_defaults[col_key].formatter;
                               if (col_formatter) {
-                                const is_formatter_string =
-                                  _.isString(col_formatter);
-                                if (is_formatter_string) {
+                                if (_.isString(col_formatter)) {
                                   return (
                                     <Format
                                       type={col_formatter}
                                       content={total_row[col_key]}
                                     />
                                   );
-                                } else {
-                                  return (col_formatter as Function)(
-                                    total_row[col_key]
-                                  );
+                                } else if (_.isFunction(col_formatter)) {
+                                  return col_formatter(total_row[col_key]);
                                 }
                               } else {
                                 return total_row[col_key];
