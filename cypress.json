@@ -1,4 +1,4 @@
 {
-    "video": false,
-    "ignoreTestFiles" : "**/ignoredTestFiles/*.js"
+  "video": false,
+  "ignoreTestFiles": "**/ignoredTestFiles/*.js"
 }
