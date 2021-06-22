@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React from "react";
+import React, { ReactNode } from "react";
 
 import { create_text_maker } from "src/models/text";
 
@@ -10,18 +10,17 @@ import text from "./Typeahead.yaml";
 const text_maker = create_text_maker(text);
 
 interface DelayedRenderProps {
-  children: any;
+  children: ReactNode;
 }
 
 interface DelayedRenderState {
-  children: any;
+  children: ReactNode;
   debounced: boolean;
 }
 
 class DelayedRender extends React.Component<
   DelayedRenderProps,
-  DelayedRenderState,
-  {}
+  DelayedRenderState
 > {
   constructor(props: DelayedRenderProps) {
     super(props);
@@ -60,10 +59,7 @@ class DelayedRender extends React.Component<
   componentDidMount() {
     this.debounceUpdate();
   }
-  componentDidUpdate(
-    prevProps: DelayedRenderProps,
-    prevState: DelayedRenderState
-  ) {
+  componentDidUpdate(prevState: DelayedRenderState) {
     const { children: prev_children } = prevState;
     const { children, debounced } = this.state;
 
@@ -88,13 +84,11 @@ class DelayedRender extends React.Component<
 
 interface TypeaheadA11yStatusProps {
   selection_cursor: number;
-  min_length: number;
   results: ResultProps[];
 }
 
 export const TypeaheadA11yStatus: React.FC<TypeaheadA11yStatusProps> = ({
   selection_cursor,
-  min_length,
   results,
 }) => {
   const status_content = (() => {
