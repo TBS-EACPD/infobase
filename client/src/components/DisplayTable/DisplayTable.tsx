@@ -331,7 +331,7 @@ export class _DisplayTable extends React.Component<
         ),
       _.chain(col_configs_with_defaults)
         .toPairs()
-        .filter(([key, col]) => col.is_summable)
+        .filter(([_key, col]) => col.is_summable)
         .map(([key, col]) => [key, col.sum_initial_value])
         .fromPairs() //had to do this to/from pair hack because over type overriding to object key:boolean pairs
         .value()
