@@ -11,7 +11,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
   children : JSX (content to be clipped), 
   clipHeight: css height string,
 */
-interface HeightClipperProps {
+export interface HeightClipperProps {
   clipHeight: number;
   children: React.ReactElement;
   allowReclip: boolean;
@@ -85,8 +85,9 @@ export class HeightClipper extends React.Component<
         height_clipper_node.querySelectorAll("[prev-tabindex]"),
         _.identity
       ).forEach((node: HTMLElement) => {
-        const previous_tabindex = node.getAttribute("prev-tabindex");
-        if (previous_tabindex) {
+        const temp = node.getAttribute("prev-tabidnex");
+        if (temp !== null) {
+          const previous_tabindex = temp;
           node.setAttribute("tabindex", previous_tabindex);
           node.removeAttribute("prev-tabindex");
         }
@@ -161,9 +162,7 @@ export class HeightClipper extends React.Component<
               }}
               onClick={() => {
                 this.setState({ shouldClip: false }, () => {
-                  if (this.content.current) {
-                    this.content.current.focus();
-                  }
+                  this.content.current?.focus();
                 });
               }}
             >
