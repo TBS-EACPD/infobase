@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "common-variables";
 
 div.int {
@@ -194,7 +195,8 @@ strong,
 .tag-badge {
   padding: 0.3em.6em;
   color: $textColor;
-  border-radius: 0px $standardBorderRadius/2 $standardBorderRadius/2 0px;
+  border-radius: 0px math.div($standardBorderRadius, 2)
+    math.div($standardBorderRadius, 2) 0px;
   border-style: solid;
   border-width: 1px 1px 1px 3px;
   border-color: lighten($tertiaryColor, 20%) lighten($tertiaryColor, 20%)
