@@ -2,6 +2,8 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
+import { FAQPanel } from "src/components/index";
+
 import { StandardRouteContainer } from "src/core/NavComponents";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
@@ -127,6 +129,9 @@ const IgocExplorer = ({ match }) => {
   if (_.isEmpty(grouping)) {
     grouping = "portfolio";
   }
+
+  const q_a_keys = ["what_is_portfolio", "applied_vs_legal_title"];
+
   return (
     <StandardRouteContainer
       breadcrumbs={[text_maker("igoc")]}
@@ -143,6 +148,7 @@ const IgocExplorer = ({ match }) => {
         <div style={{ marginBottom: "1.5em" }}>
           <TM k="about_inventory" />
         </div>
+        <FAQPanel rendered_q_a_keys={q_a_keys} />
         <ExplorerContainer grouping={grouping} />
       </div>
     </StandardRouteContainer>
