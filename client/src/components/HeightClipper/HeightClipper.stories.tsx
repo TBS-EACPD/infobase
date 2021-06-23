@@ -1,7 +1,7 @@
-import {Story,Meta} from "@storybook/react"
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { HeightClipper,HeightClipperProps } from "./HeightClipper";
+import { HeightClipper, HeightClipperProps } from "./HeightClipper";
 
 export default {
   title: "HeightClipper",
@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 const Template: Story<HeightClipperProps> = (args) => (
-  <HeightClipper  {...args}>
+  <HeightClipper {...args}>
     <div style={{ height: "300px", backgroundColor: "black", color: "white" }}>
       some content
     </div>
@@ -19,5 +19,5 @@ const Template: Story<HeightClipperProps> = (args) => (
 export const Reclippable = Template.bind({});
 Reclippable.args = {
   allowReclip: true,
-  clipHeight: 200
+  clipHeight: 200,
 };
