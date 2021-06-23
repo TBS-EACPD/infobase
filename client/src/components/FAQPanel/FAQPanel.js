@@ -22,6 +22,7 @@ import common_subapp_lang from "src/common_text/common_questions.yaml";
 
 import est_lang from "src/EstimatesComparison/estimates_comparison_questions.yaml";
 import igoc_lang from "src/IgocExplorer/igoc_explorer_questions.yaml";
+import table_picker_lang from "src/rpb/table_picker_questions.yaml";
 import tag_exp_lang from "src/TagExplorer/tag_explorer_questions.yaml";
 import text_diff_lang from "src/TextDiff/text_diff_questions.yaml";
 import treemap_lang from "src/TreeMap/treemap_questions.yaml";
@@ -34,6 +35,7 @@ const { TM } = create_text_maker_component([
   tag_lang,
   est_lang,
   igoc_lang,
+  table_picker_lang,
   tag_exp_lang,
   text_diff_lang,
   treemap_lang,
