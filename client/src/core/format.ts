@@ -8,7 +8,7 @@ import { lang } from "src/core/injected_build_constants";
 const number_formatter = {
   en: _.map(
     Array(4),
-    (val, ix) =>
+    (_sval, ix) =>
       new Intl.NumberFormat("en-CA", {
         style: "decimal",
         minimumFractionDigits: ix,
@@ -17,7 +17,7 @@ const number_formatter = {
   ),
   fr: _.map(
     Array(4),
-    (val, ix) =>
+    (_val, ix) =>
       new Intl.NumberFormat("fr-CA", {
         style: "decimal",
         minimumFractionDigits: ix,
@@ -28,7 +28,7 @@ const number_formatter = {
 const money_formatter = {
   en: _.map(
     Array(3),
-    (val, ix) =>
+    (_val, ix) =>
       new Intl.NumberFormat("en-CA", {
         style: "currency",
         currency: "CAD",
@@ -39,7 +39,7 @@ const money_formatter = {
   ),
   fr: _.map(
     Array(3),
-    (val, ix) =>
+    (_val, ix) =>
       new Intl.NumberFormat("fr-CA", {
         style: "currency",
         currency: "CAD",
@@ -52,7 +52,7 @@ const money_formatter = {
 const percent_formatter = {
   en: _.map(
     Array(4),
-    (val, ix) =>
+    (_val, ix) =>
       new Intl.NumberFormat("en-CA", {
         style: "percent",
         minimumFractionDigits: ix,
@@ -61,7 +61,7 @@ const percent_formatter = {
   ),
   fr: _.map(
     Array(4),
-    (val, ix) =>
+    (_val, ix) =>
       new Intl.NumberFormat("fr-CA", {
         style: "percent",
         minimumFractionDigits: ix,
@@ -126,9 +126,10 @@ const compact = (
         compacted,
         (pair) => !_.isUndefined(pair)
       );
+      const defined_compact_val = defined_compacted[0];
 
-      if (typeof defined_compacted[0] !== "undefined") {
-        return defined_compacted[0];
+      if (!_.isUndefined(defined_compact_val)) {
+        return defined_compact_val;
       } else {
         return [abbrev[999][lang], val];
       }
@@ -352,12 +353,11 @@ function format_wrapper(
   options: FormatterOptions
 ): Formatted<Formattable> {
   const formatter = (actual_val: number | string) =>
-    typeof actual_val === "number" ||
-    (typeof actual_val === "string" && !_.isNaN(+actual_val))
+    _.isNumber(actual_val) || (_.isString(actual_val) && !_.isNaN(+actual_val))
       ? types_to_format[format](+actual_val as number, lang, options)
       : _.toString(actual_val); // TODO would prefer to throw in this case, but some legacy code likely depends on this. Check
 
-  if (typeof val === "object") {
+  if (_.isObject(val)) {
     if (Array.isArray(val)) {
       return _.map(val, (v) => formatter(v));
     } else {
