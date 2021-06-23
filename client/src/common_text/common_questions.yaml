@@ -1,0 +1,10 @@
+common_faq_q:
+  en: |
+    A common FAQ question?
+  fr: |
+    A common FAQ question (french)?
+common_faq_a:
+  en: |
+    A common FAQ answer.
+  fr: |
+    A common FAQ answer in french.
