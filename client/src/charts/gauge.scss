@@ -1,8 +1,9 @@
+@use "sass:math";
 @import "../common_css/common-variables.scss";
 
 .gauge {
   position: relative;
-  border-radius: 50%/100% 100% 0 0;
+  border-radius: math.div(50%, 100%) 100% 0 0;
   overflow: hidden;
   width: 200px;
 }
@@ -18,7 +19,7 @@
   bottom: 0;
   top: 40%;
   background-color: lighten($tertiaryColor, 37%);
-  border-radius: 50%/100% 100% 0 0;
+  border-radius: math.div(50%, 100%) 100% 0 0;
 }
 .gauge_percentage {
   position: absolute;

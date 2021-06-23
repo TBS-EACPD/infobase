@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "src/common_css/common-variables";
 
 $indent: 2em;
@@ -26,7 +27,7 @@ $spacing: 10px;
 
 // Set uniform margins on whatever tags, usually p's, are wrapping the markdown produced innerHTML
 .footnote-list__note > * {
-  margin: 0px 0px $spacing/2 0px;
+  margin: 0px 0px math.div($spacing, 2) 0px;
 }
 
 .footnote-list__meta_container {
@@ -36,7 +37,7 @@ $spacing: 10px;
 
   & > .footnote-list__meta_item {
     font-size: 0.8em;
-    margin-top: $spacing/4;
+    margin-top: math.div($spacing, 4);
 
     &:not(:first-child) {
       margin-left: $spacing;
