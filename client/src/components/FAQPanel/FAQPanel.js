@@ -18,6 +18,8 @@ import {
 
 import { Gov } from "src/models/organizational_entities";
 
+import common_subapp_lang from "src/common_text/common_questions.yaml";
+
 import est_lang from "src/EstimatesComparison/estimates_comparison_questions.yaml";
 import igoc_lang from "src/IgocExplorer/igoc_explorer_questions.yaml";
 import tag_exp_lang from "src/TagExplorer/tag_explorer_questions.yaml";
@@ -35,6 +37,7 @@ const { TM } = create_text_maker_component([
   tag_exp_lang,
   text_diff_lang,
   treemap_lang,
+  common_subapp_lang,
   sample_lang,
 ]);
 
