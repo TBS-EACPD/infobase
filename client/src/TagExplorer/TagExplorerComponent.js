@@ -8,6 +8,7 @@ import {
   TabbedControls,
   AlertBanner,
   GlossaryIcon,
+  FAQPanel,
 } from "src/components/index";
 
 import { GlossaryEntry } from "src/models/glossary";
@@ -236,9 +237,15 @@ export default class TagExplorerComponent extends React.Component {
       </div>
     );
 
+    const q_a_keys = ["tag_question"];
+
     return (
       <div>
         <TM k="tag_nav_intro_text" el="div" />
+        <FAQPanel
+          rendered_q_a_keys={q_a_keys}
+          background_color={primaryColor}
+        />
         <div className="tabbed-content">
           <TabbedControls
             tab_callback={(key) => {
