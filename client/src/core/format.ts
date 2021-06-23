@@ -397,7 +397,7 @@ const number_formats = _.chain(types_to_format)
 // legacy, exist primarily for the Table API/RPB, where columns may have these types and expec a corresponding format to exist (but do nothing)
 // TODO either before or after the Table API is dropped/the RPB is refactored, remove these
 const legacy_string_format_keys = ["str", "short-str", "wide-str"] as const;
-type LegacyStringNumberFormatKeys = typeof legacy_string_format_keys[number]; // "str" | "short-str" | "wide-str"
+type LegacyStringNumberFormatKeys = typeof legacy_string_format_keys[number];
 const legacy_string_formats = _.chain(legacy_string_format_keys)
   .flatMap((key) => [
     [key, _.identity],
