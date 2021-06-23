@@ -296,11 +296,11 @@ class DetailedProgramSplit extends React.Component {
 
     // Increase height of the graph region for y-axis labels to have sufficient room
     // This is required to corretly display the labels when too many programs are present
-    const divHeight= _.chain([1000 * (graph_ready_data.length / 30) * 2,100]) // 100 is the minimum graph height
-    .max()
-    .thru(maxVal => [maxVal,1200]) // 1200 is the max graph height
-    .min()
-    .value()
+    const divHeight = _.chain([1000 * (graph_ready_data.length / 30) * 2, 100]) // 100 is the minimum graph height
+      .max()
+      .thru((maxVal) => [maxVal, 1200]) // 1200 is the max graph height
+      .min()
+      .value();
 
     const markers = _.map(graph_ready_data, ({ label, total }) => ({
       axis: "y",
