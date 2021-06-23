@@ -1,4 +1,4 @@
-import { ResponsiveBubble } from "@nivo/circle-packing";
+import { ResponsiveCirclePacking } from "@nivo/circle-packing";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
@@ -28,7 +28,7 @@ import "./WrappedNivoCircleProportion.scss";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
-// Hacky abuse of ResponsiveBubble... very fragile against nivo changes. Bonus comments left in this file to balance against that
+// Hacky abuse of ResponsiveCirclePacking... very fragile against nivo changes. Bonus comments left in this file to balance against that
 // Would be trivial to make this graph ourselves, only reason for doing it like this is to get nivo native tooltips (and even
 // then they're extra customized ones) and our common nivo graph utilities ...consider rethinking this though
 
@@ -188,7 +188,7 @@ export class WrappedNivoCircleProportion extends React.Component {
     const graph = (
       <Fragment>
         <div style={{ height: height }}>
-          <ResponsiveBubble
+          <ResponsiveCirclePacking
             root={graph_data}
             identity="name"
             value="value"
