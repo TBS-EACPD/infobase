@@ -68,6 +68,7 @@
     "diff": "^4.0.1",
     "dom4": "^2.1.4",
     "dompurify": "^2.2.6",
+    "fetch-mock": "^9.11.0",
     "graphiql": "^1.0.6",
     "graphql": "^15.4.0",
     "handlebars": "^4.7.6",
