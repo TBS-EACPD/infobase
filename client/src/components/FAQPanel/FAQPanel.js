@@ -22,6 +22,7 @@ import est_lang from "src/EstimatesComparison/estimates_comparison_questions.yam
 import igoc_lang from "src/IgocExplorer/igoc_explorer_questions.yaml";
 import tag_exp_lang from "src/TagExplorer/tag_explorer_questions.yaml";
 import text_diff_lang from "src/TextDiff/text_diff_questions.yaml";
+import treemap_lang from "src/TreeMap/treemap_questions.yaml";
 
 const { TM } = create_text_maker_component([
   common_lang,
@@ -33,6 +34,7 @@ const { TM } = create_text_maker_component([
   igoc_lang,
   tag_exp_lang,
   text_diff_lang,
+  treemap_lang,
   sample_lang,
 ]);
 
