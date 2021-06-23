@@ -7,8 +7,8 @@ import { lang } from "src/core/injected_build_constants";
 
 const number_formatter = {
   en: _.map(
-    Array(4),
-    (_sval, ix) =>
+    _.range(4),
+    (ix) =>
       new Intl.NumberFormat("en-CA", {
         style: "decimal",
         minimumFractionDigits: ix,
@@ -16,8 +16,8 @@ const number_formatter = {
       })
   ),
   fr: _.map(
-    Array(4),
-    (_val, ix) =>
+    _.range(4),
+    (ix) =>
       new Intl.NumberFormat("fr-CA", {
         style: "decimal",
         minimumFractionDigits: ix,
@@ -27,8 +27,8 @@ const number_formatter = {
 };
 const money_formatter = {
   en: _.map(
-    Array(3),
-    (_val, ix) =>
+    _.range(3),
+    (ix) =>
       new Intl.NumberFormat("en-CA", {
         style: "currency",
         currency: "CAD",
@@ -38,8 +38,8 @@ const money_formatter = {
       })
   ),
   fr: _.map(
-    Array(3),
-    (_val, ix) =>
+    _.range(3),
+    (ix) =>
       new Intl.NumberFormat("fr-CA", {
         style: "currency",
         currency: "CAD",
@@ -51,8 +51,8 @@ const money_formatter = {
 };
 const percent_formatter = {
   en: _.map(
-    Array(4),
-    (_val, ix) =>
+    _.range(4),
+    (ix) =>
       new Intl.NumberFormat("en-CA", {
         style: "percent",
         minimumFractionDigits: ix,
@@ -60,8 +60,8 @@ const percent_formatter = {
       })
   ),
   fr: _.map(
-    Array(4),
-    (_val, ix) =>
+    _.range(4),
+    (ix) =>
       new Intl.NumberFormat("fr-CA", {
         style: "percent",
         minimumFractionDigits: ix,
