@@ -21,9 +21,13 @@ class GraphRegistry<T extends Record<string, unknown>> {
   outside_width: number | undefined;
   outside_height: number | undefined;
   dispatch: Dispatch<T> | undefined;
-  render: (options: GraphRegistryOptions<T>) => void | undefined;
-  svg: Selection<SVGElement, {}, HTMLElement, any> | undefined;
-  html: Selection<SVGElement, {}, HTMLElement, any> | undefined;
+  render!: (options: GraphRegistryOptions<T>) => void | undefined;
+  svg:
+    | Selection<SVGElement, Record<string, unknown>, HTMLElement, unknown>
+    | undefined;
+  html:
+    | Selection<SVGElement, Record<string, unknown>, HTMLElement, unknown>
+    | undefined;
 
   constructor() {
     this.registry = [];
@@ -32,14 +36,14 @@ class GraphRegistry<T extends Record<string, unknown>> {
 
     window.addEventListener(
       "hashchange",
-      _.debounce(function () {
+      _.debounce(() => {
         this.update_registry();
       }, 250)
     );
 
     window.addEventListener(
       "resize",
-      _.debounce(function () {
+      _.debounce(() => {
         if (this.should_graphs_update()) {
           this.update_registry();
           this.update_graphs();
@@ -53,40 +57,54 @@ class GraphRegistry<T extends Record<string, unknown>> {
   }
 
   update_registry() {
-    const new_registry = this.registry.filter((panel_obj) =>
-      document.body.contains(panel_obj.html!.node())
-    );
+    const new_registry = this.registry.filter((panel_obj) => {
+      if (panel_obj.html) {
+        document.body.contains(panel_obj.html.node());
+      }
+    });
     this.registry = new_registry;
   }
 
   update_graphs() {
     this.window_width_last_updated_at = window.innerWidth;
+    console.log(this.registry);
 
     this.registry.forEach((panel_obj) => {
-      const html_container = panel_obj.html!.node()! as any;
+      if (panel_obj.html) {
+        const html_container = panel_obj.html.node();
+        if (html_container) {
+          panel_obj.outside_width =
+            html_container.getBoundingClientRect().width;
+          panel_obj.outside_height = panel_obj.options.height || 400;
 
-      panel_obj.outside_width = html_container.offsetWidth;
-      panel_obj.outside_height = panel_obj.options.height || 400;
-
-      // forEach directly on a nodeList has spoty support even with polyfils,
-      // mapping it through to an array first works consistently though
-      _.map(html_container.childNodes, _.identity).forEach(
-        (child: HTMLElement | undefined) => {
-          // Remove all labels associated with the graph (that is, all siblings of the svg's container).
-          if (!_.isUndefined(child) && !child!.className.includes("__svg__")) {
-            html_container.removeChild(child);
-          }
+          _.map(html_container.childNodes, _.identity).forEach(
+            (child: HTMLElement | undefined) => {
+              // Remove all labels associated with the graph (that is, all siblings of the svg's container).
+              if (
+                !_.isUndefined(child) &&
+                !child.className.includes("__svg__")
+              ) {
+                html_container.removeChild(child);
+              }
+            }
+          );
         }
-      );
-
-      panel_obj.render!(panel_obj.options);
+        // forEach directly on a nodeList has spoty support even with polyfils,
+        // mapping it through to an array first works consistently though
+        panel_obj.render(panel_obj.options);
+      }
     });
   }
 
   setup_graph_instance(
-    instance: GraphRegistry,
-    container: Selection<SVGElement, {}, HTMLElement, any>,
-    options: GraphRegistryOptions
+    instance: GraphRegistry<T>,
+    container: Selection<
+      SVGElement,
+      Record<string, unknown>,
+      HTMLElement,
+      unknown
+    >,
+    options: GraphRegistryOptions<T>
   ) {
     const base_dispatch_events = [
       "renderBegin",
@@ -111,8 +129,8 @@ class GraphRegistry<T extends Record<string, unknown>> {
     }
 
     instance.svg = container.select("svg");
-    const node = container.node() as any;
-    instance.outside_width = node.offsetWidth;
+    const node = container.node();
+    instance.outside_width = node?.getBoundingClientRect().width;
     instance.outside_height = options.height || 400;
 
     instance.html = container;
