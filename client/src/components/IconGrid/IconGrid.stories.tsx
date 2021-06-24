@@ -1,4 +1,6 @@
+import { Story, Meta } from "@storybook/react";
 import _ from "lodash";
+
 import React from "react";
 
 import {
@@ -13,12 +15,12 @@ import {
   IconBaselineCloud,
 } from "src/icons/icons";
 
-import { IconGrid } from "./IconGrid";
+import { IconGrid, IconGridProps } from "./IconGrid";
 
 export default {
   title: "IconGrid",
   component: IconGrid,
-};
+} as Meta;
 
 const tech_icon_list = _.chain([
   IconHTML,
@@ -34,7 +36,7 @@ const tech_icon_list = _.chain([
   .map((SVG) => ({ svg: <SVG alternate_color={false} width="1.25em" /> }))
   .value();
 
-const Template = (args) => <IconGrid {...args} />;
+const Template: Story<IconGridProps> = (args) => <IconGrid {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
