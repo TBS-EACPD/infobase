@@ -6,7 +6,7 @@ import { trivial_text_maker } from "src/models/text";
 
 import "./DropdownMenu.scss";
 
-interface DropdownMenuProps {
+export interface DropdownMenuProps {
   dropdown_content: React.ReactNode;
   opened_button_class_name: string;
   closed_button_class_name: string;
