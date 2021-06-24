@@ -162,7 +162,8 @@ const StatelessPullDownAccordion = ({
 StatelessPullDownAccordion.defaultProps = {
   max_height: "80vh",
 };
-interface AutoAccordionProps extends CommonStatelessPullDownAccordionProps {
+export interface AutoAccordionProps
+  extends CommonStatelessPullDownAccordionProps {
   isInitiallyExpanded: boolean;
 }
 interface AutoAccordionState {

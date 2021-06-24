@@ -1,14 +1,17 @@
+import { Story, Meta } from "@storybook/react";
 import _ from "lodash";
 import React from "react";
 
-import { AutoAccordion } from "./Accordions";
+import { AutoAccordion, AutoAccordionProps } from "./Accordions";
 
 export default {
   title: "Accordion",
   component: AutoAccordion,
-};
+} as Meta;
 
-const Template = (args) => <AutoAccordion {...args} />;
+const Template: Story<AutoAccordionProps> = (args) => (
+  <AutoAccordion {...args} />
+);
 
 const sentences = _.map(_.range(10), (num) => (
   <div key={num}>{`Sentence ${num}`}</div>
