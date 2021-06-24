@@ -1,27 +1,75 @@
 import fetchMock from "fetch-mock";
 import React from "react";
 
-import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants";
-
 import { EmailFrontend } from "./EmailFrontend";
 
 export default {
   title: "EmailFrontend",
   component: EmailFrontend,
+  argTypes: {
+    loading: {
+      defaultValue: true,
+    },
+    include_privacy: {
+      defaultValue: false,
+    },
+  },
 };
 
 const Template = (args) => {
-  // const email_backend_url =
-  //   is_dev && !is_ci ? `https://${local_ip || "127.0.0.1"}:7331` : null;
-  // : "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
-
-  // Mocks http requests made using fetch, since storybook doesn't allow server calls directly
-  // fetchMock.get(
-  //   `https://${
-  //     local_ip || "127.0.0.1"
-  //   }:7331/email_template?template_name=feedback_simplified`,
-  //   200
-  // );
+  fetchMock.mock("*", {
+    meta: {
+      subject_template:
+        "Report a problem: [${issue_type}], ${lang}, ${route}, ${sha}, ${client_id}",
+    },
+    issue_type: {
+      required: true,
+      value_type: "enums",
+      enum_values: {
+        bug: {
+          en: "Something is broken",
+          fr: "Quelque chose ne fonctionne pas",
+        },
+        typo: {
+          en: "It has a spelling or grammar mistake",
+          fr: "II y a une erreur d'orthographe ou de grammaire",
+        },
+        inaccurate: {
+          en: "The information is wrong",
+          fr: "L'information est erronée",
+        },
+        outdated: {
+          en: "The information is outdated",
+          fr: "L'information n'est plus à jour",
+        },
+        navigation: {
+          en: "I can't find what I'm looking for",
+          fr: "Je ne trouve pas ce que je cherche",
+        },
+        other: {
+          en: "Other",
+          fr: "Autre",
+        },
+      },
+      form_type: "checkbox",
+      form_label: {
+        en: "Select all that apply:",
+        fr: "Sélectionner toutes les cases qui s'appliquent :",
+      },
+    },
+    issue_details: {
+      required: true,
+      value_type: "string",
+      form_type: "textarea",
+      form_label: { en: "Details (required)", fr: "Détails (obligatoire)" },
+    },
+    sha: { required: true, value_type: "string", form_type: false },
+    route: { required: true, value_type: "string", form_type: false },
+    lang: { required: true, value_type: "string", form_type: false },
+    app_version: { required: true, value_type: "string", form_type: false },
+    client_id: { required: true, value_type: "string", form_type: false },
+    additional: { required: false, value_type: "json", form_type: false },
+  });
   const on_submitted = () => {
     console.log("Submitted");
   };
@@ -33,7 +81,4 @@ const Template = (args) => {
 };
 
 export const Basic = Template.bind({});
-Basic.args = {
-  template_name: "Template name",
-  include_privacy: true,
-};
+Basic.args = {};
