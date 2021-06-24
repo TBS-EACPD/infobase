@@ -5,8 +5,8 @@ interface TextBundle {
       | ["markdown"]
       | ["handlebars", "markdown"]
       | ["handlebars", "embeded-markdown", "markdown"]; // TODO embeded-markdown transform is legacy, hacky. Remove at some point
+    [key in ("en" | "fr" | "text")]: string;
   };
-  [(key in "en") | "fr" | "text"]: string;
 }
 declare module "*.yaml" {
   let val: TextBundle;
