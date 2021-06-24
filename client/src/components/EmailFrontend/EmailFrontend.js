@@ -119,7 +119,7 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
-    // complete automatic fields and send completed tempalte to backend after submit button is clicked
+    // complete automatic fields and send completed template to backend after submit button is clicked
     if (awaiting_backend_response && !sent_to_backend) {
       const automatic_fields = _.omitBy(
         template,
@@ -164,10 +164,9 @@ class EmailFrontend extends React.Component {
 
     const { include_privacy } = this.props;
 
-    const user_fields = _.omitBy(
-      template,
-      ({ form_type }, key) => key === "meta" || !form_type
-    );
+    const user_fields = _.omitBy(template, ({ form_type }, key) => {
+      key === "meta" || !form_type;
+    });
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
       .omitBy((field) => !field.required)
