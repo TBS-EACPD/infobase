@@ -12,7 +12,7 @@ interface SVGIconProps {
   svg: React.ReactNode;
 }
 
-interface IconGridProps {
+export interface IconGridProps {
   icons: (ImageIconProps | SVGIconProps)[];
 }
 
