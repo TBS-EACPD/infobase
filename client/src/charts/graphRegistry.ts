@@ -57,11 +57,10 @@ class GraphRegistry<T extends Record<string, unknown>> {
   }
 
   update_registry() {
-    const new_registry = this.registry.filter((panel_obj) => {
-      if (panel_obj.html) {
-        document.body.contains(panel_obj.html.node());
-      }
-    });
+    const new_registry = this.registry.filter(
+      (panel_obj) =>
+        panel_obj.html && document.body.contains(panel_obj.html.node())
+    );
     this.registry = new_registry;
   }
 
