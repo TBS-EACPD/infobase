@@ -1,13 +1,14 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { FancyUL } from "./FancyUL";
+import { FancyUL, FancyULProps } from "./FancyUL";
 
 export default {
   title: "FancyUL",
   component: FancyUL,
-};
+} as Meta;
 
-const Template = (args) => <FancyUL {...args} />;
+const Template: Story<FancyULProps> = (args) => <FancyUL {...args} />;
 
 const children = ["Child 1", "Child 2", "Child 3"];
 
@@ -16,7 +17,6 @@ Basic.args = {
   // text
   children,
   title: "Title",
-  TitleComponent: "",
 
   // css
   className: "",
