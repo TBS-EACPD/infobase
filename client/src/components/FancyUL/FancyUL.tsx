@@ -4,7 +4,7 @@ import React from "react";
 
 import "./FancyUL.scss";
 
-interface FancyULProps {
+export interface FancyULProps {
   className: string;
   title?: string;
   TitleComponent?: React.ComponentType;
