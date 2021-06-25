@@ -4,8 +4,8 @@ import type { ListProps } from "react-virtualized";
 
 import { SafeOmit } from "src/types/util_types.d";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface AutoHeightVirtualListProps extends SafeOmit<ListProps, "height"> {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   list_ref: React.RefObject<any>; //cannot use List from react-virtualized because it doesn't have "getTotalRowsHeight". Possible workaround: (this.list_ref.current.Grid as any).getTotalRowsHeight();
   max_height: number;
 }
@@ -18,6 +18,7 @@ export class AutoHeightVirtualList extends React.Component<
   AutoHeightVirtualListProps,
   AutoHeightVirtualListState
 > {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   list_ref: React.RefObject<any>;
 
   constructor(props: AutoHeightVirtualListProps) {

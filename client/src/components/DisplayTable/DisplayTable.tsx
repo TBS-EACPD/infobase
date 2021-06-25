@@ -28,6 +28,7 @@ import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+type CellValue = string | number | Date;
 interface ColumnKeyProps {
   index: number; // Zero indexed, order of column
   header: string; // Name of column
@@ -36,14 +37,10 @@ interface ColumnKeyProps {
   is_searchable: boolean; // Default to false
   initial_visible: boolean; // Default to trues
   formatter: // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
-  string | ((val: string | number | Date) => string | React.ReactNode);
-  raw_formatter: (val: string | number | Date) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
+  string | ((val: CellValue) => string | React.ReactNode);
+  raw_formatter: (val: CellValue) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
   sum_func: (sum: number, value: number) => number; // e.g.: (sum, value) => ... Default to sum + value
-  sort_func: (
-    a: string | number | Date,
-    b: string | number | Date,
-    descending: boolean
-  ) => number; // e.g.: (a,b) => ... Default to _.sortBy
+  sort_func: (a: CellValue, b: CellValue, descending: boolean) => number; // e.g.: (a,b) => ... Default to _.sortBy
   sum_initial_value: number; // Default to 0
   visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes
 }
@@ -75,7 +72,7 @@ interface _DisplayTableState {
   searches: { [keys: string]: string };
 }
 interface DisplayTableData {
-  [key: string]: string | number | Date;
+  [key: string]: CellValue;
 }
 
 const column_config_defaults = {
@@ -273,14 +270,14 @@ export class _DisplayTable extends React.Component<
         : "left";
     };
 
-    const clean_search_string = (search_string: string | number | Date) =>
+    const clean_search_string = (search_string: CellValue) =>
       _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val: number | string | Date) =>
       _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter((row) =>
         _.chain(row)
-          .map((column_value: string | number | Date, column_key) => {
+          .map((column_value: CellValue, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
             const col_search_value =
               col_config && col_config.raw_formatter
