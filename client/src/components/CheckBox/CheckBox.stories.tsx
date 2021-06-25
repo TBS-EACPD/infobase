@@ -1,13 +1,14 @@
+import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import { CheckBox } from "./CheckBox";
+import { CheckBox, CheckBoxProps } from "./CheckBox";
 
 export default {
   title: "Input/CheckBox",
   component: CheckBox,
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story<CheckBoxProps> = (args) => {
   const [is_active, set_active] = useState(true);
   return (
     <CheckBox
@@ -23,7 +24,7 @@ const Template = (args) => {
 
 export const Regular = Template.bind({});
 Regular.args = {
-  id: 1,
+  id: "1",
   color: "#26374A",
   label: "Regular checkbox",
   isSolidBox: false,
@@ -37,7 +38,7 @@ Solid.args = {
 };
 export const Styled = Template.bind({});
 Styled.args = {
-  id: 1,
+  id: "1",
   color: "#26374A",
   label: "Container, checkbox, label styled checkbox",
   isSolidBox: false,
