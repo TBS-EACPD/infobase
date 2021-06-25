@@ -1,7 +1,8 @@
 import { useArgs } from "@storybook/client-api";
+import { Story, Meta } from "@storybook/react";
 import React, { useState, useEffect } from "react";
 
-import { StatelessDetails } from "./Details";
+import { StatelessDetails, StatelessDetailsProps } from "./Details";
 
 export default {
   title: "Dropdown/Details",
@@ -19,16 +20,21 @@ export default {
 
   // Need decorators to use useArgs()
   decorators: [(Story) => <div>{Story()}</div>],
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story<StatelessDetailsProps> = (args) => {
   const [_, updateArgs] = useArgs();
 
   const on_click = () => {
     updateArgs({ ...args, is_open: !args.is_open });
   };
-
-  const Timer = ({ persist_content, is_open }) => {
+  const Timer = ({
+    persist_content,
+    is_open,
+  }: {
+    persist_content: boolean;
+    is_open: boolean;
+  }) => {
     const [time, setTime] = useState(0);
 
     useEffect(() => {
@@ -49,20 +55,27 @@ const Template = (args) => {
       <StatelessDetails {...args} on_click={on_click} />
 
       {/* TODO Implement the timer into children because the Timer resets whenever you toggle is_open, regardless of persist_content prop */}
-      <Timer persist_content={args.persist_content} is_open={args.is_open} />
+      <Timer
+        persist_content={Boolean(args.persist_content)}
+        is_open={args.is_open}
+      />
     </>
   );
 };
 
-const summary_content = "Summary";
+const summary_content = <div>Summary</div>;
 
 export const PersistContent = Template.bind({});
 PersistContent.args = {
   is_open: false,
   summary_content,
   persist_content: true,
-  content:
-    "Persist Content: Children are hidden but present, so the timer runs even if this closes.",
+  content: (
+    <div>
+      Persist Content: Children are hidden but present, so the timer runs even
+      if this closes.
+    </div>
+  ),
 };
 
 export const NonPersistContent = Template.bind({});
@@ -70,6 +83,10 @@ NonPersistContent.args = {
   is_open: false,
   summary_content,
   persist_content: false,
-  content:
-    "Non-Persist Content: Children are unrendered, so the timer will stop when this closes.",
+  content: (
+    <div>
+      Non-Persist Content: Children are unrendered, so the timer will stop when
+      this closes.
+    </div>
+  ),
 };
