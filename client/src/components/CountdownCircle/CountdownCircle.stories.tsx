@@ -1,13 +1,14 @@
+import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import { CountdownCircle } from "./CountdownCircle";
+import { CountdownCircle, CountdownCircleProps } from "./CountdownCircle";
 
 export default {
   title: "CountdownCircle",
   component: CountdownCircle,
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story<CountdownCircleProps> = (args) => {
   const [end, setEnd] = useState(false);
 
   function on_end_callback() {

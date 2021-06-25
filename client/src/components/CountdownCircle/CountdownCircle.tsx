@@ -9,7 +9,7 @@ import { is_IE } from "src/core/feature_detection";
 
 import "./CountdownCircle.scss";
 
-interface CountdownCircleProps {
+export interface CountdownCircleProps {
   time: number;
   size: string;
   color: string;
