@@ -55,13 +55,10 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
     }
   }
   componentWillUnmount() {
-    if (
-      this.page_header &&
-      this.header_observer &&
-      this.page_footer &&
-      this.footer_observer
-    ) {
+    if (this.page_header && this.header_observer) {
       this.header_observer.unobserve(this.page_header);
+    }
+    if (this.page_footer && this.footer_observer) {
       this.footer_observer.unobserve(this.page_footer);
     }
   }
