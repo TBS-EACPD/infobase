@@ -1,6 +1,6 @@
 import React from "react";
 
-interface CountdownProps {
+export interface CountdownProps {
   time: number;
 }
 
