@@ -3,8 +3,6 @@ import JSURL from "jsurl";
 import _ from "lodash";
 import marked from "marked";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export const sanitize_html = (markup: string | Node) => {
   // a little tedious, but this is the safe way to enforce safe usage of target="_blank" with DOMPurify
   // note: add and then pop the hook, don't want the side effect of leaving hooks on DOMPurify (ugh)
@@ -161,6 +159,7 @@ export function completeAssign<TObject, TSource1, TSource2, TSource3, TSource4>(
   source4: TSource4
 ): TObject & TSource1 & TSource2 & TSource3 & TSource4;
 export function completeAssign<TObject>(object: TObject): TObject;
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export function completeAssign(target: any, ...sources: any[]): any {
   sources.forEach((source) => {
     const descriptors = Object.keys(source).reduce(
@@ -190,7 +189,7 @@ export function completeAssign(target: any, ...sources: any[]): any {
 export const hex_to_rgb = (hex: string) => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+  hex = hex.replace(shorthandRegex, function (_m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
@@ -235,6 +234,7 @@ interface ElementDescriptor {
 }
 interface ElementDescriptorExtra extends ElementDescriptor {
   placement: string;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   initializer: (this: any) => any;
 }
 
@@ -245,6 +245,7 @@ export function cached_property(elementDescriptor: ElementDescriptor) {
   }
   const og_method = descriptor.value;
   const cache_name = `_${key}_cached_val`;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   function new_method(this: any) {
     if (!this[cache_name]) {
       this[cache_name] = og_method.call(this);
@@ -265,11 +266,13 @@ export function bound(elementDescriptor: ElementDescriptor) {
   const initializer =
     // check for private method
     typeof key === "object"
-      ? function (this: any) {
+      ? /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+        function (this: any) {
           return method.bind(this);
         }
       : // For public and symbol-keyed methods (which are technically public),
         // we defer method lookup until construction to respect the prototype chain.
+        /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         function (this: any) {
           return this[key].bind(this);
         };
