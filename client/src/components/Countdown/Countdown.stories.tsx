@@ -1,13 +1,14 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { Countdown } from "./Countdown";
+import { Countdown, CountdownProps } from "./Countdown";
 
 export default {
   title: "Countdown",
   component: Countdown,
-};
+} as Meta;
 
-const Template = (args) => <Countdown {...args} />;
+const Template: Story<CountdownProps> = (args) => <Countdown {...args} />;
 
 // does not respond to the change in props
 export const Basic = Template.bind({});
