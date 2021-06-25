@@ -11,7 +11,7 @@ export default {
       defaultValue: true,
     },
     include_privacy: {
-      defaultValue: false,
+      defaultValue: true,
     },
   },
 };
