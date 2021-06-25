@@ -17,7 +17,7 @@ export default {
 };
 
 const Template = (args) => {
-  fetchMock.mock("*", {
+  const template = {
     meta: {
       subject_template:
         "Report a problem: [${issue_type}], ${lang}, ${route}, ${sha}, ${client_id}",
@@ -69,7 +69,8 @@ const Template = (args) => {
     app_version: { required: true, value_type: "string", form_type: false },
     client_id: { required: true, value_type: "string", form_type: false },
     additional: { required: false, value_type: "json", form_type: false },
-  });
+  };
+  fetchMock.mock("*", template);
   const on_submitted = () => {
     console.log("Submitted");
   };
