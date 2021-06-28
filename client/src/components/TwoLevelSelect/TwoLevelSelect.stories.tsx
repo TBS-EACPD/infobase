@@ -1,16 +1,17 @@
+import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import { TwoLevelSelect } from "./TwoLevelSelect";
+import { TwoLevelSelect, TwoSelectProps } from "./TwoLevelSelect";
 
 export default {
   title: "Input/TwoLevelSelect",
   component: TwoLevelSelect,
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story<TwoSelectProps> = (args) => {
   const [selected, setSelected] = useState("");
 
-  function onSelect(value) {
+  function onSelect(value: string) {
     console.log(value + " has been chosen.");
     setSelected(value);
   }
