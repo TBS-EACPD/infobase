@@ -9,14 +9,14 @@ import "./bootstrap_modal_exstension.scss";
 interface FocusLockedModalProps {
   mounted: boolean;
   children: React.ReactNode;
-  additional_dialog_class: string | Object;
+  additional_dialog_class: string | string[];
   on_exit: () => void;
   aria_label: string;
 }
 
 export class FocusLockedModal extends React.Component<
   FocusLockedModalProps,
-  {}
+  never
 > {
   constructor(props: FocusLockedModalProps) {
     super(props);
