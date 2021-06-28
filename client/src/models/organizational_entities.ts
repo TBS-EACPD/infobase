@@ -12,13 +12,68 @@ import {
 
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
-const static_subject_store_with_server_data = (data_types) =>
+const static_subject_store_with_server_data = (data_types: string[]) =>
   mix().with(
     staticStoreMixin,
     PluralSingular,
     SubjectMixin,
     CanHaveServerData(data_types)
   );
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+type ConstructorType = { [key: string]: any };
+
+interface DeptDefinition {
+  unique_id: string;
+  dept_code: string;
+  abbr: string;
+  legal_title: string;
+  applied_title: string;
+  old_applied_title: string;
+  status: string;
+  legislation: string;
+  raw_mandate: string;
+  mandate: string;
+  pas_code: string;
+  schedule: string;
+  faa_hr: string;
+  auditor_str: string;
+  incorp_yr: string;
+  fed_ownership: string;
+  end_yr: string;
+  notes: string;
+  _dp_status: string;
+  eval_url: string;
+  website_url: string;
+  le_la: string;
+  du_de_la: string;
+  other_lang_abbr: string;
+  other_lang_applied_title: string;
+  other_lang_legal_title: string;
+}
+
+interface CRSODefinition {
+  dept: typeof Dept;
+  id: string;
+  activity_code: string;
+  name: string;
+  description: string;
+  is_active: boolean;
+  is_drf: boolean;
+  is_internal_service: boolean;
+}
+
+interface ProgramDefinition {
+  crso: typeof CRSO;
+  activity_code: string;
+  dept: typeof Dept;
+  description: string;
+  name: string;
+  old_name: string;
+  is_active: boolean;
+  is_internal_service: boolean;
+  is_fake: boolean;
+}
 
 const Gov = {
   constructor: {
@@ -31,7 +86,7 @@ const Gov = {
   plural: trivial_text_maker("goc"),
   id: "gov",
   guid: "gov_gov",
-  is(comparator) {
+  is(comparator: string | ConstructorType) {
     if (_.isString(comparator)) {
       return this.level === comparator;
     }
@@ -60,12 +115,12 @@ const Ministry = class Ministry extends static_subject_store() {
     return trivial_text_maker("ministries");
   }
 
-  static create_and_register(id, name) {
+  static create_and_register(id: string, name: string) {
     const inst = new Ministry(id, name);
     this.register(id, inst);
     return inst;
   }
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super();
     this.id = id;
     this.name = name;
@@ -79,7 +134,7 @@ const Dept = class Dept extends static_subject_store_with_server_data([
   "services",
   "covid",
 ]) {
-  static lookup(org_id) {
+  static lookup(org_id: string) {
     return super.lookup(_.isNaN(+org_id) ? org_id : +org_id);
   }
   static get subject_type() {
@@ -110,7 +165,7 @@ const Dept = class Dept extends static_subject_store_with_server_data([
     }
     return this._depts_without_data;
   }
-  static create_and_register(def) {
+  static create_and_register(def: DeptDefinition) {
     const inst = new Dept(def);
     this.register(inst.id, inst);
     if (!_.isEmpty(inst.dept_code)) {
@@ -118,7 +173,7 @@ const Dept = class Dept extends static_subject_store_with_server_data([
     }
     return inst;
   }
-  constructor(def) {
+  constructor(def: DeptDefinition) {
     super();
     Object.assign(
       this,
@@ -259,15 +314,15 @@ const CRSO = class CRSO extends static_subject_store_with_server_data([
       return trivial_text_maker("strategic_outcomes");
     }
   }
-  static get_from_id(crso_id) {
+  static get_from_id(crso_id: string) {
     return this.lookup(crso_id);
   }
-  static create_and_register(def) {
+  static create_and_register(def: CRSODefinition) {
     const inst = new CRSO(def);
     this.register(inst.id, inst);
     return inst;
   }
-  constructor(attrs) {
+  constructor(attrs: CRSODefinition) {
     super();
     Object.assign(
       this,
@@ -301,20 +356,23 @@ const Program = class Program extends static_subject_store_with_server_data([
   static get plural() {
     return trivial_text_maker("programs");
   }
-  static unique_id(dept, activity_code) {
+  static unique_id(dept: typeof Dept | string, activity_code: string) {
     //dept can be an object, a dept_code or a dept unique_id.
     const dc = _.isObject(dept) ? dept.dept_code : Dept.lookup(dept).dept_code;
     return `${dc}-${activity_code}`;
   }
-  static get_from_activity_code(dept_code, activity_code) {
+  static get_from_activity_code(
+    dept_code: typeof Dept | string,
+    activity_code: string
+  ) {
     return this.lookup(this.unique_id(dept_code, activity_code));
   }
-  static create_and_register(def) {
+  static create_and_register(def: ProgramDefinition) {
     const inst = new Program(def);
     this.register(inst.id, inst);
     return inst;
   }
-  constructor(attrs) {
+  constructor(attrs: ProgramDefinition) {
     super();
     Object.assign(
       this,
@@ -323,7 +381,10 @@ const Program = class Program extends static_subject_store_with_server_data([
       },
       attrs
     );
-    this.id = this.constructor.unique_id(this.dept, this.activity_code);
+    this.id = (this.constructor as ConstructorType).unique_id(
+      this.dept,
+      this.activity_code
+    );
   }
   get tags_by_scheme() {
     return _.groupBy(this.tags, (tag) => tag.root.id);
@@ -351,12 +412,12 @@ const Minister = class Minister extends static_subject_store() {
     return trivial_text_maker("minister");
   }
 
-  static create_and_register(id, name) {
+  static create_and_register(id: string, name: string) {
     const inst = new Minister(id, name);
     this.register(inst.id, inst);
     return inst;
   }
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super();
     this.id = id;
     this.name = name;
@@ -386,12 +447,12 @@ const InstForm = class InstForm extends static_subject_store() {
   static leaf_forms() {
     return _.filter(this.get_all(), (obj) => _.isEmpty(obj.children_forms));
   }
-  static create_and_register(id, name) {
+  static create_and_register(id: string, name: string) {
     const inst = new InstForm(id, name);
     this.register(inst.id, inst);
     return inst;
   }
-  constructor(id, name) {
+  constructor(id: string, name: string) {
     super();
     Object.assign(this, {
       id,
