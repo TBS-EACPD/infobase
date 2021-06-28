@@ -48,7 +48,7 @@ export class DropdownMenu extends React.Component<
   }
 
   componentDidUpdate(
-    prev_props: DropdownMenuProps,
+    _prev_props: DropdownMenuProps,
     prev_state: DropdownMenuState
   ) {
     const { is_open } = this.state;
