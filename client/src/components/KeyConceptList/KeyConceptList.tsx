@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { Details } from "src/components/Details/Details";
 import "./KeyConceptList.scss";
 
-interface KeyConceptListProps {
+export interface KeyConceptListProps {
   question_answer_pairs: [React.ReactElement, React.ReactElement][];
   compact: boolean;
 }
