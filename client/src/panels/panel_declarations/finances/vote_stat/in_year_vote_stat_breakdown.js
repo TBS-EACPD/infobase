@@ -30,11 +30,15 @@ const { Dept } = Subject;
 const text_func = (vs, d, break_str) => {
   if (vs == "voted") {
     return d.dept
-      ? `${Dept.lookup(d.dept).name} ${break_str}  ${d.desc}`
+      ? _.includes(d.desc, `${Dept.lookup(d.dept).name} ${break_str}  `)
+        ? d.desc
+        : `${Dept.lookup(d.dept).name} ${break_str}  ${d.desc}`
       : d.desc;
   } else {
     return d.dept
-      ? `${d.desc} ${break_str} ${Dept.lookup(d.dept).name}`
+      ? _.includes(d.desc, ` ${break_str} ${Dept.lookup(d.dept).name}`)
+        ? d.desc
+        : `${d.desc} ${break_str} ${Dept.lookup(d.dept).name}`
       : d.desc;
   }
 };
