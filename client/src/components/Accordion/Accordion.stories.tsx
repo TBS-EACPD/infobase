@@ -2,12 +2,14 @@ import { Story, Meta } from "@storybook/react";
 import _ from "lodash";
 import React from "react";
 
-import { AutoAccordion, AutoAccordionProps } from "./Accordions";
+import { AutoAccordion } from "./Accordions";
 
 export default {
   title: "Accordion",
   component: AutoAccordion,
 } as Meta;
+
+type AutoAccordionProps = React.ComponentProps<typeof AutoAccordion>;
 
 const Template: Story<AutoAccordionProps> = (args) => (
   <AutoAccordion {...args} />

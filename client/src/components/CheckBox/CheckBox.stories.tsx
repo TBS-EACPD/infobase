@@ -1,12 +1,14 @@
 import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import { CheckBox, CheckBoxProps } from "./CheckBox";
+import { CheckBox } from "./CheckBox";
 
 export default {
   title: "Input/CheckBox",
   component: CheckBox,
 } as Meta;
+
+type CheckBoxProps = React.ComponentProps<typeof CheckBox>;
 
 const Template: Story<CheckBoxProps> = (args) => {
   const [is_active, set_active] = useState(true);

@@ -18,7 +18,7 @@ interface TabbedControlsProps {
   tab_callback: (key: string) => void;
   disabled_message: string;
 }
-export interface TabbedContentProps {
+interface TabbedContentProps {
   tab_keys: string[];
   tab_labels: { [key: string]: string };
   tab_pane_contents: { [key: string]: React.ReactElement };

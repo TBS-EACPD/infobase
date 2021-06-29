@@ -11,7 +11,7 @@ interface CommonDetailsProps {
   content: React.ReactElement;
   persist_content?: boolean;
 }
-export interface StatelessDetailsProps extends CommonDetailsProps {
+interface StatelessDetailsProps extends CommonDetailsProps {
   on_click: React.ReactEventHandler<HTMLButtonElement>;
   is_open: boolean;
 }

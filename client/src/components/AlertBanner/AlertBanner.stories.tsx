@@ -1,7 +1,7 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { AlertBanner, AlertBannerProps, banner_classes } from "./AlertBanner";
+import { AlertBanner, banner_classes } from "./AlertBanner";
 
 export default {
   title: "AlertBanner",
@@ -13,6 +13,8 @@ export default {
     },
   },
 } as Meta;
+
+type AlertBannerProps = React.ComponentProps<typeof AlertBanner>;
 
 const Template: Story<AlertBannerProps> = (args) => <AlertBanner {...args} />;
 

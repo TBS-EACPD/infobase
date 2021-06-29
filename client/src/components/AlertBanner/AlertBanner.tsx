@@ -4,7 +4,7 @@ import React from "react";
 
 import "./AlertBanner.scss";
 
-export interface AlertBannerProps {
+interface AlertBannerProps {
   children: React.ReactNode;
   banner_class: string;
   additional_class_names: string;
