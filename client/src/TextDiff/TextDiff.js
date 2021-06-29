@@ -497,6 +497,8 @@ export default class TextDiffApp extends React.Component {
             args={{ previous_doc_name, current_doc_name }}
           />
         </div>
+        {/* Could have some department-specific FAQ questions? */}
+        <FAQPanel rendered_q_a_keys={q_a_keys} subject={subject} />
         <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_dept">
             <TM k="select_dept" />
@@ -593,8 +595,7 @@ export default class TextDiffApp extends React.Component {
             />
           </div>
         </div>
-        {/* Could have some department-specific FAQ questions? */}
-        <FAQPanel rendered_q_a_keys={q_a_keys} subject={subject} />
+
         {loading ? (
           <LeafSpinner ref="spinner" config_name={"sub_route"} />
         ) : (
