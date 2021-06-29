@@ -21,7 +21,7 @@ interface TabbedControlsProps {
 interface TabbedContentProps {
   tab_keys: string[];
   tab_labels: { [key: string]: string };
-  tab_pane_contents: { [key: string]: React.ReactElement };
+  tab_pane_contents: { [key: string]: React.ReactNode };
   disabled_tabs: string[];
   disabled_message: string;
 }

@@ -8,7 +8,7 @@ import "./Details.scss";
 
 interface CommonDetailsProps {
   summary_content: React.ReactElement;
-  content: React.ReactElement;
+  content: React.ReactNode;
   persist_content?: boolean;
 }
 interface StatelessDetailsProps extends CommonDetailsProps {

@@ -24,9 +24,9 @@ Basic.args = {
     EU: "Europe",
   },
   tab_pane_contents: {
-    NA: <div>Surrounded by the Arctic, Atlantic, and Pacific Oceans </div>,
-    SA: <div>Surrounded by the Atlantic and Pacific Oceans</div>,
-    EU: <div>Surrounded by the Arctic and Atlantic Oceans</div>,
+    NA: "Surrounded by the Arctic, Atlantic, and Pacific Oceans",
+    SA: "Surrounded by the Atlantic and Pacific Oceans",
+    EU: "Surrounded by the Arctic and Atlantic Oceans",
   },
   disabled_tabs: ["EU"],
   disabled_message: "",

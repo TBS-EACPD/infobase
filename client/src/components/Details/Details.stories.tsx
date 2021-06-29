@@ -72,12 +72,8 @@ PersistContent.args = {
   is_open: false,
   summary_content,
   persist_content: true,
-  content: (
-    <div>
-      Persist Content: Children are hidden but present, so the timer runs even
-      if this closes.
-    </div>
-  ),
+  content:
+    " Persist Content: Children are hidden but present, so the timer runs evenif this closes.",
 };
 
 export const NonPersistContent = Template.bind({});
@@ -85,10 +81,6 @@ NonPersistContent.args = {
   is_open: false,
   summary_content,
   persist_content: false,
-  content: (
-    <div>
-      Non-Persist Content: Children are unrendered, so the timer will stop when
-      this closes.
-    </div>
-  ),
+  content:
+    "Non-Persist Content: Children are unrendered, so the timer will stop when this closes.",
 };
