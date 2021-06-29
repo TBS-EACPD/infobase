@@ -4,23 +4,21 @@ import React, { Fragment } from "react";
 import { BackToTop } from "./BackToTop";
 
 interface TemplateProps {
-  focusId: string;
+  focusId?: string;
 }
-const BackToTopTemplate: Story<TemplateProps> = (args) => (
+const BackToTopTemplate: Story<TemplateProps> = ({ focusId }) => (
   <Fragment>
     <div id="ib-site-header-area">Header</div>
-    {{ ...args } && (
-      <input id={args.focusId} placeholder="input for focus..." />
-    )}
+    {focusId && <input id={focusId} placeholder="input for focus..." />}
     <div style={{ height: "500vh" }}> Scroll down to footer...</div>
     <div id="wb-info" style={{ height: "300px", borderTop: "2px black solid" }}>
       Footer
     </div>
     <BackToTop
       focus={() => {
-        const nullCheck = document.getElementById("#test");
-        if (nullCheck) {
-          nullCheck.focus();
+        const test_element = document.getElementById("#test");
+        if (test_element) {
+          test_element.focus();
         }
       }}
     />
