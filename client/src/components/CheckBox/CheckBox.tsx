@@ -9,7 +9,7 @@ import { IconCheckmark } from "src/icons/icons";
 
 import "./CheckBox.scss";
 
-interface CheckBoxProps {
+export interface CheckBoxProps {
   disabled?: boolean; // greys out checkbox and make it non-clickable if true
   onClick?: (id: string) => void; // (id) => {}
   id: string;
