@@ -113,6 +113,23 @@ Object {
               "covid_expenditures": Array [],
               "fiscal_year": 2021,
             },
+            Object {
+              "covid_estimates": Array [],
+              "covid_expenditures": Array [
+                Object {
+                  "is_in_estimates": true,
+                  "month_last_updated": 3,
+                  "org": Object {
+                    "id": "133",
+                    "name": "National Defence",
+                  },
+                  "org_id": "133",
+                  "stat": 0,
+                  "vote": 1,
+                },
+              ],
+              "fiscal_year": 2019,
+            },
           ],
           "id": "COV001",
           "name": "measure 1",
@@ -328,6 +345,11 @@ Object {
               ],
               "fiscal_year": 2021,
             },
+            Object {
+              "covid_estimates": Array [],
+              "covid_expenditures": Array [],
+              "fiscal_year": 2019,
+            },
           ],
           "id": "COV002",
           "name": "measure 2",
@@ -489,6 +511,11 @@ Object {
               ],
               "covid_expenditures": Array [],
               "fiscal_year": 2021,
+            },
+            Object {
+              "covid_estimates": Array [],
+              "covid_expenditures": Array [],
+              "fiscal_year": 2019,
             },
           ],
           "id": "COV003",
@@ -672,6 +699,39 @@ Object {
               },
             ],
           },
+          Object {
+            "covid_estimates": Array [],
+            "covid_expenditures": Object {
+              "month_last_updated": 3,
+              "stat": 0,
+              "vote": 1,
+            },
+            "fiscal_year": 2019,
+            "measure_counts": Array [
+              Object {
+                "with_authorities": 0,
+                "with_spending": 1,
+              },
+            ],
+            "org_counts": Array [
+              Object {
+                "with_authorities": 0,
+                "with_spending": 1,
+              },
+            ],
+            "top_spending_measures": Array [
+              Object {
+                "id": "COV001",
+                "name": "measure 1",
+              },
+            ],
+            "top_spending_orgs": Array [
+              Object {
+                "name": "National Defence",
+                "org_id": "133",
+              },
+            ],
+          },
         ],
         "one_year_summary": Array [
           Object {
@@ -811,6 +871,15 @@ Object {
             },
             "fiscal_year": 2021,
           },
+          Object {
+            "covid_estimates": Array [],
+            "covid_expenditures": Object {
+              "month_last_updated": 3,
+              "stat": 0,
+              "vote": 1,
+            },
+            "fiscal_year": 2019,
+          },
         ],
         "name": "National Defence",
         "one_year_summary": Array [
@@ -902,6 +971,23 @@ Object {
                   },
                 ],
                 "fiscal_year": 2020,
+              },
+              Object {
+                "covid_estimates": Array [],
+                "covid_expenditures": Array [
+                  Object {
+                    "is_in_estimates": true,
+                    "month_last_updated": 3,
+                    "org": Object {
+                      "id": "133",
+                      "name": "National Defence",
+                    },
+                    "org_id": "133",
+                    "stat": 0,
+                    "vote": 1,
+                  },
+                ],
+                "fiscal_year": 2019,
               },
             ],
             "id": "COV001",
