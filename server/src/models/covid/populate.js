@@ -80,7 +80,7 @@ export default async function ({ models }) {
     ...covid_estimates_rows,
     ...covid_expenditures_rows,
   ];
-  const covid_years = _.chain(covid_estimates_rows)
+  const covid_years = _.chain(all_rows_with_org_data)
     .map("fiscal_year")
     .uniq()
     .value();
