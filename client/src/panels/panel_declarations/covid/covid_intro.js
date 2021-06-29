@@ -80,24 +80,22 @@ class CovidIntroPanelDyanmicText extends React.Component {
             on_select_year={this.on_select_year}
             selected_year={selected_year}
           />
-          {!_.isEmpty(covid_estimates) && (
-            <TM
-              k="covid_intro_est"
-              args={{
-                ...panel_args,
-                selected_year,
-                gov_tabled_est_docs_in_year_text:
-                  get_est_doc_list_plain_text(est_docs_in_year),
-                est_docs_in_year_are_plural: est_docs_in_year.length > 1,
-                gov_covid_estimates_in_year: _.reduce(
-                  covid_estimates,
-                  (memo, { vote, stat }) => memo + vote + stat,
-                  0
-                ),
-                auth_total_note: null,
-              }}
-            />
-          )}
+          <TM
+            k="covid_intro_est"
+            args={{
+              ...panel_args,
+              selected_year,
+              gov_tabled_est_docs_in_year_text:
+                get_est_doc_list_plain_text(est_docs_in_year),
+              est_docs_in_year_are_plural: est_docs_in_year.length > 1,
+              gov_covid_estimates_in_year: _.reduce(
+                covid_estimates,
+                (memo, { vote, stat }) => memo + vote + stat,
+                0
+              ),
+              auth_total_note: null,
+            }}
+          />
           {!_.isUndefined(covid_expenditures) &&
             !_.isNull(covid_expenditures.month_last_updated) && (
               <TM
