@@ -1,17 +1,15 @@
 import React, { Fragment } from "react";
 
+import { FAQPanel } from "src/components/index";
+
 import { create_text_maker } from "src/models/text";
+
+import { primaryColor } from "src/core/color_defs";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
 
-import { FAQPanel } from "src/components/index";
-
-import { primaryColor } from "src/core/color_defs";
-
 const text_maker = create_text_maker([treemap_text]);
-
-// const q_a_keys = ["treemap_question"],
 
 export class TreeMapInstructions extends React.Component {
   constructor() {
