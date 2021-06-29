@@ -109,14 +109,13 @@ const planned_vote_or_stat_render = (vs) =>
     const packing_data = {
       name: "root",
       color: "white",
-      children: _.map(data, (d, i) =>
-        _.extend(_.clone(d), {
-          id: i,
-          total: total_amt,
-          total_of: text_maker(isVoted ? "all_voted_items" : "all_stat_items"),
-          desc: text_func(vs, d, "-"),
-        })
-      ),
+      children: _.map(data, (d, i) => ({
+        ...d,
+        id: i,
+        total: total_amt,
+        total_of: text_maker(isVoted ? "all_voted_items" : "all_stat_items"),
+        desc: text_func(vs, d, "-"),
+      })),
     };
 
     const show_pack = !is_a11y_mode;
