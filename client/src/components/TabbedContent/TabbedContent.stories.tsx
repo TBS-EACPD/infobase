@@ -2,12 +2,14 @@ import { Story, Meta } from "@storybook/react";
 
 import React from "react";
 
-import { TabbedContent, TabbedContentProps } from "./TabbedContent";
+import { TabbedContent } from "./TabbedContent";
 
 export default {
   title: "TabbedContent",
   component: TabbedContent,
 } as Meta;
+
+type TabbedContentProps = React.ComponentProps<typeof TabbedContent>;
 
 const Template: Story<TabbedContentProps> = (args) => (
   <TabbedContent {...args} />

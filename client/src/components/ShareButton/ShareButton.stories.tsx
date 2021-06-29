@@ -1,12 +1,14 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { ShareButton, ShareButtonProps } from "./ShareButton";
+import { ShareButton } from "./ShareButton";
 
 export default {
   title: "ShareButton",
   component: ShareButton,
 } as Meta;
+
+type ShareButtonProps = React.ComponentProps<typeof ShareButton>;
 
 const Template: Story<ShareButtonProps> = (args) => <ShareButton {...args} />;
 

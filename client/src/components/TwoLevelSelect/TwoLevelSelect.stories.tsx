@@ -1,12 +1,14 @@
 import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import { TwoLevelSelect, TwoSelectProps } from "./TwoLevelSelect";
+import { TwoLevelSelect } from "./TwoLevelSelect";
 
 export default {
   title: "Input/TwoLevelSelect",
   component: TwoLevelSelect,
 } as Meta;
+
+type TwoSelectProps = React.ComponentProps<typeof TwoLevelSelect>;
 
 const Template: Story<TwoSelectProps> = (args) => {
   const [selected, setSelected] = useState("");

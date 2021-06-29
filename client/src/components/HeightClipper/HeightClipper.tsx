@@ -11,7 +11,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
   children : JSX (content to be clipped), 
   clipHeight: css height string,
 */
-export interface HeightClipperProps {
+interface HeightClipperProps {
   clipHeight: number;
   children: React.ReactElement;
   allowReclip: boolean;

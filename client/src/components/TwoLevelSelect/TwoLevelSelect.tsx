@@ -14,7 +14,7 @@ interface GroupedOptionsProps extends OptionsProps {
   children: OptionsProps[];
 }
 
-export interface TwoSelectProps {
+interface TwoSelectProps {
   id: string;
   selected: string | number;
   grouped_options: GroupedOptionsProps[];
