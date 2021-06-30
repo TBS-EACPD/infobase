@@ -38,9 +38,9 @@ const CommonSocialMediaShareButton = ({
 
 interface ShareButtonProps {
   button_class_name: string;
-  button_description: string;
-  icon_alternate_color: string | boolean;
-  icon_color: string;
+  button_description?: string;
+  icon_alternate_color?: string | boolean;
+  icon_color?: string;
   icon_size: number | string;
   title: string;
   url: string;
