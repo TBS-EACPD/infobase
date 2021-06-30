@@ -69,6 +69,7 @@ interface _DisplayTableState {
   descending: boolean;
   initial_props: _DisplayTableProps;
   visible_col_keys: string[];
+  row_grouping: boolean;
   searches: { [keys: string]: string };
 }
 interface DisplayTableData {
@@ -150,6 +151,7 @@ export class _DisplayTable extends React.Component<
       ...get_default_state_from_props(props),
       current_page: 0,
       show_pagination_load_spinner: false,
+      row_grouping: false,
     };
   }
   static getDerivedStateFromProps(
@@ -238,6 +240,7 @@ export class _DisplayTable extends React.Component<
       descending,
       searches,
       visible_col_keys,
+      row_grouping,
       page_size,
       current_page,
       show_pagination_load_spinner,
@@ -274,51 +277,53 @@ export class _DisplayTable extends React.Component<
       _.chain(search_string).deburr().toLower().trim().value();
     const is_number_string_date = (val: number | string | Date) =>
       _.isNumber(val) || _.isString(val) || _.isDate(val);
-    const sorted_filtered_data = _.chain(data)
-      .filter((row) =>
-        _.chain(row)
-          .map((column_value: CellValue, column_key) => {
-            const col_config = col_configs_with_defaults[column_key];
-            const col_search_value =
-              col_config && col_config.raw_formatter
-                ? col_config.raw_formatter(column_value)
-                : column_value;
-            return (
-              _.isEmpty(searches[column_key]) ||
-              _.includes(
-                clean_search_string(col_search_value),
-                clean_search_string(searches[column_key])
-              )
-            );
-          })
-          .every()
-          .value()
-      )
-      .thru((unsorted_array) => {
-        if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
-          const sorting_config = col_configs_with_defaults[sort_by];
-          return sorting_config.sort_func
-            ? _.map(unsorted_array).sort(
-                (a: DisplayTableData, b: DisplayTableData) =>
-                  sorting_config.sort_func(a[sort_by], b[sort_by], descending)
-              )
-            : _.sortBy(unsorted_array, (row: DisplayTableData) =>
-                is_number_string_date(
-                  sorting_config.raw_formatter(row[sort_by])
-                ) /*Please Leave On: sorting data containing BOTH string and date is not consistent
+
+    const sorted_filtered_data = (data: DisplayTableData[]) =>
+      _.chain(data)
+        .filter((row) =>
+          _.chain(row)
+            .map((column_value: CellValue, column_key) => {
+              const col_config = col_configs_with_defaults[column_key];
+              const col_search_value =
+                col_config && col_config.raw_formatter
+                  ? col_config.raw_formatter(column_value)
+                  : column_value;
+              return (
+                _.isEmpty(searches[column_key]) ||
+                _.includes(
+                  clean_search_string(col_search_value),
+                  clean_search_string(searches[column_key])
+                )
+              );
+            })
+            .every()
+            .value()
+        )
+        .thru((unsorted_array) => {
+          if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
+            const sorting_config = col_configs_with_defaults[sort_by];
+            return sorting_config.sort_func
+              ? _.map(unsorted_array).sort(
+                  (a: DisplayTableData, b: DisplayTableData) =>
+                    sorting_config.sort_func(a[sort_by], b[sort_by], descending)
+                )
+              : _.sortBy(unsorted_array, (row: DisplayTableData) =>
+                  is_number_string_date(
+                    sorting_config.raw_formatter(row[sort_by])
+                  ) /*Please Leave On: sorting data containing BOTH string and date is not consistent
                  It's probably trying to cast string into date object and if that fails, it probably stops sorting.
                  Better off just building a sort function to handle it*/
-                  ? sorting_config.raw_formatter(row[sort_by])
-                  : Number.NEGATIVE_INFINITY
-              );
-        }
-        return unsorted_array;
-      })
-      .tap(descending ? _.reverse : _.noop)
-      .value();
+                    ? sorting_config.raw_formatter(row[sort_by])
+                    : Number.NEGATIVE_INFINITY
+                );
+          }
+          return unsorted_array;
+        })
+        .tap(descending ? _.reverse : _.noop)
+        .value();
 
     const total_row = _.reduce<DisplayTableData, { [key: string]: number }>(
-      sorted_filtered_data,
+      sorted_filtered_data(data),
       (totals, row: DisplayTableData) =>
         _.mapValues(totals, (total: number, col_key) =>
           col_configs_with_defaults[col_key].sum_func(
@@ -390,6 +395,7 @@ export class _DisplayTable extends React.Component<
                       visible_col_keys,
                       clicked_key
                     ),
+                    row_grouping: _.includes(visible_col_keys, "prgm"),
                   });
               }}
             />
@@ -405,10 +411,11 @@ export class _DisplayTable extends React.Component<
       .reverse()
       .value();
 
-    const paginated_data = _.chunk(
-      sorted_filtered_data,
-      !enable_pagination ? _.size(sorted_filtered_data) : page_size
-    );
+    const paginated_data = (data: DisplayTableData[]) =>
+      _.chunk(
+        sorted_filtered_data(data),
+        !enable_pagination ? _.size(sorted_filtered_data(data)) : page_size
+      );
 
     const number_of_pages = paginated_data.length;
 
@@ -420,6 +427,31 @@ export class _DisplayTable extends React.Component<
         num_col={_.size(visible_ordered_col_keys)}
       />
     );
+
+    const row_grouped_data = _.chain(data)
+      .groupBy("dept")
+      .map((dept_data) => {
+        return {
+          dept: dept_data[0].dept,
+          legal_title: dept_data[0].legal_title,
+          "{{pa_last_year_2}}": _.sumBy(dept_data, "{{pa_last_year_2}}"),
+          "{{pa_last_year_3}}": _.sumBy(dept_data, "{{pa_last_year_3}}"),
+          "{{pa_last_year_4}}": _.sumBy(dept_data, "{{pa_last_year_4}}"),
+          "{{pa_last_year_5}}": _.sumBy(dept_data, "{{pa_last_year_5}}"),
+          "{{pa_last_year}}": _.sumBy(dept_data, "{{pa_last_year}}"),
+          "{{planning_year_1}}": _.sumBy(dept_data, "{{planning_year_1}}"),
+          "{{planning_year_2}}": _.sumBy(dept_data, "{{planning_year_2}}"),
+          "{{planning_year_3}}": _.sumBy(dept_data, "{{planning_year_3}}"),
+        };
+      })
+      .value();
+
+    const table_data: DisplayTableData[] = row_grouping
+      ? row_grouped_data
+      : data;
+
+    const cols_with_row_grouping = ["prgm", "so", "desc", "region", "tp"];
+    const trigger_column = "prgm";
 
     return (
       <div
@@ -460,7 +492,7 @@ export class _DisplayTable extends React.Component<
                           selected={page_size}
                           on_select={this.change_page_size}
                           page_size_increment={page_size_increment}
-                          num_items={_.size(sorted_filtered_data)}
+                          num_items={_.size(sorted_filtered_data(table_data))}
                           num_options_max={page_size_num_options_max}
                         />
                       )}
@@ -574,7 +606,7 @@ export class _DisplayTable extends React.Component<
             ) : (
               <tbody>
                 {_.map(
-                  paginated_data[current_page],
+                  paginated_data(table_data)[current_page],
                   (row: DisplayTableData, row_index) => (
                     <tr key={row_index}>
                       {_.map(
@@ -663,7 +695,7 @@ export class _DisplayTable extends React.Component<
           <tfoot>{page_selector}</tfoot>
         </table>
 
-        {sorted_filtered_data.length === 0 && (
+        {sorted_filtered_data(table_data).length === 0 && (
           <TM
             k="no_data_table"
             el="div"
