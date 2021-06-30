@@ -48,7 +48,20 @@
         "@typescript-eslint/no-unused-vars": "off", // Lot of false positives on this rule. Better to use the exprimental
         "@typescript-eslint/no-unused-vars-experimental": "warn",
         "@typescript-eslint/no-redeclare": ["error"],
-        "@typescript-eslint/explicit-module-boundary-types": "off" // TODO might want to turn this on later, but it will take a while to fix all the warnings
+        "@typescript-eslint/explicit-module-boundary-types": "off", // TODO might want to turn this on later, but it will take a while to fix all the warnings
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "React.FunctionalComponent": {
+                "message": "FunctionalComponent is discouraged, prefer a plain function. See https://github.com/facebook/create-react-app/pull/8177"
+              },
+              "React.FC": {
+                "message": "FC is discouraged, prefer a plain function. See https://github.com/facebook/create-react-app/pull/8177"
+              }
+            }
+          }
+        ]
       }
     }
   ],
