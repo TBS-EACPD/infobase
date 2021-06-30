@@ -5,7 +5,7 @@ import { Details } from "src/components/Details/Details";
 import "./KeyConceptList.scss";
 
 interface KeyConceptListProps {
-  question_answer_pairs: [React.ReactElement, React.ReactNode][];
+  question_answer_pairs: [React.ReactNode, React.ReactNode][];
   compact: boolean;
 }
 

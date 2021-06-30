@@ -7,7 +7,7 @@ import { lang } from "src/core/injected_build_constants";
 import "./Details.scss";
 
 interface CommonDetailsProps {
-  summary_content: React.ReactElement;
+  summary_content: React.ReactNode;
   content: React.ReactNode;
   persist_content?: boolean;
 }
