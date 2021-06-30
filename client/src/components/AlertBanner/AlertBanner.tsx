@@ -13,12 +13,12 @@ interface AlertBannerProps {
 
 export const banner_classes = ["info", "success", "warning", "danger"];
 
-export const AlertBanner: React.FC<AlertBannerProps> = ({
+export const AlertBanner = ({
   children,
   banner_class,
   additional_class_names,
   style,
-}) => {
+}: AlertBannerProps) => {
   if (banner_class && !_.includes(banner_classes, banner_class)) {
     throw new Error(
       `AlertBanner received invalid banner_class prop of ${banner_class}`
