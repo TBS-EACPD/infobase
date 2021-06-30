@@ -54,7 +54,7 @@ interface TypeaheadProps {
   placeholder: string;
   on_query_debounce_time: number;
   additional_a11y_description?: string;
-  utility_buttons?: boolean | (React.FC | React.Component)[];
+  utility_buttons?: boolean | React.ReactNode | React.ReactNode[];
 }
 
 interface TypeaheadState {
