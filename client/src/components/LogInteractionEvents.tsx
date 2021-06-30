@@ -10,14 +10,12 @@ interface LogInterationEventsProps {
   children: React.ReactNode;
 }
 
-export const LogInteractionEvents = (
-  {
-    event_type,
-    event_details,
-    style,
-    children
-  }: LogInterationEventsProps
-) => {
+export const LogInteractionEvents = ({
+  event_type,
+  event_details,
+  style,
+  children,
+}: LogInterationEventsProps) => {
   const log_event = _.debounce(
     (event) =>
       log_standard_event({
