@@ -389,13 +389,14 @@ export class _DisplayTable extends React.Component<
                 active: _.includes(visible_ordered_col_keys, key),
               }))}
               onClick={(clicked_key: string) => {
+                const toggled_columns = toggle_list(
+                  visible_col_keys,
+                  clicked_key
+                );
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
-                    visible_col_keys: toggle_list(
-                      visible_col_keys,
-                      clicked_key
-                    ),
-                    row_grouping: _.includes(visible_col_keys, "prgm"),
+                    visible_col_keys: toggled_columns,
+                    row_grouping: !_.includes(toggled_columns, "prgm"),
                   });
               }}
             />
@@ -431,17 +432,18 @@ export class _DisplayTable extends React.Component<
     const row_grouped_data = _.chain(data)
       .groupBy("dept")
       .map((dept_data) => {
+        const summable_columns = _.keys(
+          _.omit(dept_data[0], ["dept", "prgm", "legal_title"])
+        );
+        const column_sums = summable_columns.map((col) => {
+          return _.sumBy(dept_data, col);
+        });
+        console.log(column_sums);
+        const columns = _.zipObject(summable_columns, column_sums);
         return {
           dept: dept_data[0].dept,
           legal_title: dept_data[0].legal_title,
-          "{{pa_last_year_2}}": _.sumBy(dept_data, "{{pa_last_year_2}}"),
-          "{{pa_last_year_3}}": _.sumBy(dept_data, "{{pa_last_year_3}}"),
-          "{{pa_last_year_4}}": _.sumBy(dept_data, "{{pa_last_year_4}}"),
-          "{{pa_last_year_5}}": _.sumBy(dept_data, "{{pa_last_year_5}}"),
-          "{{pa_last_year}}": _.sumBy(dept_data, "{{pa_last_year}}"),
-          "{{planning_year_1}}": _.sumBy(dept_data, "{{planning_year_1}}"),
-          "{{planning_year_2}}": _.sumBy(dept_data, "{{planning_year_2}}"),
-          "{{planning_year_3}}": _.sumBy(dept_data, "{{planning_year_3}}"),
+          ...columns,
         };
       })
       .value();
