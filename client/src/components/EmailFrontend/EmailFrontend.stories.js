@@ -10,7 +10,7 @@ export default {
 
 const Template = (args) => {
   const [template, setTemplate] = useState(args.template);
-  fetchMock.mock("*", template, { overwriteRoutes: true });
+  fetchMock.getOnce("*", template, { overwriteRoutes: true });
   const on_submitted = () => {
     console.log("Submitted");
   };
@@ -642,3 +642,39 @@ Test_Template.args = {
   loading: true,
   include_privacy: false,
 };
+
+export const Error = Template.bind({});
+Error.args = {
+  template: {
+    meta: {
+      subject_template: "[${error}]",
+    },
+    error: {
+      required: true,
+      form_type: "radio",
+      form_label: {
+        en: `An error has occured (TypeError)`,
+        fr: `Une erreur est survenue (TypeError)`,
+      },
+    },
+  },
+  loading: true,
+  include_privacy: false,
+};
+
+// meta: {
+//   subject_template:
+//     "Feedback Simplified: [${would_recommend}], [${useful_info}], ${lang}, ${route}, ${sha}, ${client_id}",
+// },
+// useful_info: {
+//   required: true,
+//   form_type: "radio",
+//   form_label: {
+//     en: "To what extent did you find the spending information on GC InfoBase useful? (1=not at all useful and 5=very useful)",
+//     fr: "Dans quelle mesure avez-vous trouvé les renseignements financiers utiles dans InfoBase du GC? (1=inutile et 5=très utile)",
+//   },
+//   value_type: "enums",
+//   },
+//   style: "horizontal",
+// },
+// },
