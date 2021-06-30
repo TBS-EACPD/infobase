@@ -39,9 +39,9 @@ const virtualized_cell_measure_cache = new CellMeasurerCache({
 const default_selection_cursor = -1;
 
 export interface ResultProps {
-  header?: string | React.Component;
+  header?: React.ReactNode;
   on_select: () => void;
-  content: string | React.Component;
+  content: React.ReactNode;
   plain_text: string;
 }
 
