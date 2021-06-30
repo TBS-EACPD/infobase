@@ -22,13 +22,15 @@ interface DetailsState {
   is_open: boolean;
 }
 
-export const StatelessDetails: React.FC<StatelessDetailsProps> = ({
-  summary_content,
-  content,
-  persist_content,
-  on_click,
-  is_open,
-}) => {
+export const StatelessDetails = (
+  {
+    summary_content,
+    content,
+    persist_content,
+    on_click,
+    is_open
+  }: StatelessDetailsProps
+) => {
   const aria_labels = {
     en: {
       open: "Content follows, activate to collapse content",

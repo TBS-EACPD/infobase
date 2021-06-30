@@ -73,7 +73,11 @@ export const spinner_configs: {
 interface LeafSpinnerProps {
   config_name: spinner_config_names;
 }
-export const LeafSpinner: React.FC<LeafSpinnerProps> = ({ config_name }) => {
+export const LeafSpinner = (
+  {
+    config_name
+  }: LeafSpinnerProps
+) => {
   const default_config_name = _.chain(spinner_configs).keys().first().value();
 
   const { outer_positioning, spinner_container_style, svg_modifier } =

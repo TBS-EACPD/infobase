@@ -90,10 +90,12 @@ interface TypeaheadA11yStatusProps {
   results: ResultProps[];
 }
 
-export const TypeaheadA11yStatus: React.FC<TypeaheadA11yStatusProps> = ({
-  selection_cursor,
-  results,
-}) => {
+export const TypeaheadA11yStatus = (
+  {
+    selection_cursor,
+    results
+  }: TypeaheadA11yStatusProps
+) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
       const selected_name = results[selection_cursor].plain_text;
