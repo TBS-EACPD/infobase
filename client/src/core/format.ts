@@ -268,6 +268,7 @@ type NumberFormatKey =
   | "decimal1"
   | "decimal2"
   | "decimal"
+  | "int"
   | "big_int"
   | "dollar"
   | "year_to_fiscal_year";
@@ -306,6 +307,7 @@ const types_to_format: {
   decimal1: (val, lang) => number_formatter[lang][1].format(val),
   decimal2: (val, lang) => number_formatter[lang][2].format(val),
   decimal: (val, lang) => number_formatter[lang][3].format(val),
+  int: (val) => _.toString(val),
   big_int: (val, lang, { raw }) => {
     const rtn = number_formatter[lang][0].format(val);
 
