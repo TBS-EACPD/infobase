@@ -67,7 +67,7 @@ class CanadaGraphBarLegend extends React.Component {
           enableLabel={true}
           label={(d) => (
             <tspan x={100} y={16}>
-              {`${d.data.year}: ${formatter(d.value)}`}
+              {`${d.data.year}: ${formatter(d.formattedValue)}`}
             </tspan>
           )}
           colors={(d) => get_graph_color(0.5)}

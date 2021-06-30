@@ -62,7 +62,9 @@ const estimates_split_render_w_text_key =
       <WrappedNivoBar
         data={estimate_data}
         keys={_.map(estimate_data, "label")}
-        label={(d) => <tspan y={-10}>{formats.compact2_raw(d)}</tspan>}
+        label={(d) => (
+          <tspan y={-10}>{formats.compact2_raw(d.formattedValue)}</tspan>
+        )}
         isInteractive={false}
         enableLabel={true}
         indexBy="label"
