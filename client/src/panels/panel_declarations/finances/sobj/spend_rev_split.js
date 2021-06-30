@@ -58,7 +58,7 @@ function render({ title, calculations, footnotes, sources }) {
             indexBy="title"
             enableLabel={true}
             isInteractive={false}
-            label_format={(d) => (
+            label={(d) => (
               <tspan y={-10}>{formats.compact1(d, { raw: true })}</tspan>
             )}
             colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}

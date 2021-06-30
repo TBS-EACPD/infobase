@@ -200,8 +200,9 @@ class Goco extends React.Component {
         const is_spending = d.id === spending_text;
 
         const value = is_spending ? d.data.actual_spending : d.data.actual_ftes;
+        const formatted_value = get_formatter(is_spending)(value || 0);
 
-        return get_formatter(is_spending)(value || 0);
+        return <tspan y={-10}>{formatted_value}</tspan>;
       };
 
       const nivo_default_props = {
@@ -212,7 +213,6 @@ class Goco extends React.Component {
         enableGridX: false,
         enableGridY: false,
         label: (d) => format_value(d),
-        label_format: (d) => <tspan y={-10}>{d}</tspan>,
         tooltip: (slice) => (
           <div style={{ color: textColor }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
