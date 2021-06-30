@@ -68,7 +68,6 @@ export class WrappedNivoBar extends React.Component {
       remove_left_axis,
       enableLabel,
       label,
-      label_format,
       is_money,
       text_formatter,
       theme,
@@ -131,7 +130,6 @@ export class WrappedNivoBar extends React.Component {
           legends={fix_legend_symbols(legends)}
           keys={_.union(keys, [""])} //extra key allows negative bar to render (only needed when 1 type of key
           //and the key takes both negative or positive values)
-          labelFormat={_.isUndefined(label_format) ? null : label_format}
           labelTextColor={textColor}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
@@ -185,7 +183,6 @@ export class WrappedNivoHBar extends React.Component {
       add_top_axis,
       enableLabel,
       label,
-      label_format,
       labelSkipWidth,
       is_money,
       text_formatter,
@@ -246,7 +243,6 @@ export class WrappedNivoHBar extends React.Component {
           layout="horizontal"
           keys={keys}
           labelTextColor={textColor}
-          labelFormat={_.isUndefined(label_format) ? null : label_format}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
           }
