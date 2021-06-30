@@ -33,6 +33,7 @@ class _WrappedNivoTreemap extends React.Component {
         borderColor={{ theme: "background" }}
         borderWidth={2}
         animate={false}
+        orientLabel={false}
         label={function (e) {
           return (
             <div

@@ -152,8 +152,8 @@ export class WrappedNivoPie extends React.Component {
             innerRadius={0.5}
             animate={false}
             borderWidth={0}
-            enableSliceLabels={false}
-            enableRadialLabels={false}
+            enableArcLabels={false}
+            enableArcLinkLabels={false}
           />
         </div>
         <div className="infobase-pie__legend">
