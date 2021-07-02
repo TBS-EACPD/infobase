@@ -103,7 +103,7 @@ export class WrappedNivoCircleProportion extends React.Component {
       margin,
       is_money,
       formatter,
-      labelSkipWidth,
+      labelsSkipRadius,
       height,
       child_value,
       child_name,
@@ -189,18 +189,15 @@ export class WrappedNivoCircleProportion extends React.Component {
       <Fragment>
         <div style={{ height: height }}>
           <ResponsiveCirclePacking
-            root={graph_data}
-            identity="name"
+            data={graph_data}
+            id="name"
             value="value"
-            colors={(d) => color_scale(d.name)}
-            borderColor="inherit:darker(1.6)"
+            colors={(d) => color_scale(d.data.name)}
+            borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
             borderWidth={0}
-            enableLabel={false}
+            enableLabels={false}
             labelTextColor={textColor}
-            labelSkipWidth={labelSkipWidth}
-            animate={true}
-            motionStiffness={90}
-            motionDamping={12}
+            labelsSkipRadius={labelsSkipRadius}
             leavesOnly={false}
             padding={0}
             nodeComponent={ProportionalNode}
