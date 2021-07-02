@@ -396,7 +396,7 @@ export class _DisplayTable extends React.Component<
                 col_configs_with_defaults[clicked_key].visibility_toggleable &&
                   this.setState({
                     visible_col_keys: toggled_columns,
-                    row_grouping: !_.includes(toggled_columns, "prgm"),
+                    row_grouping: !_.includes(toggled_columns, trigger_column),
                   });
               }}
             />
@@ -429,16 +429,30 @@ export class _DisplayTable extends React.Component<
       />
     );
 
+    const cols_with_row_grouping = [
+      "prgm",
+      "so",
+      "desc",
+      "region",
+      "tp",
+      "fol",
+    ];
+    const trigger_column = _.intersection(
+      cols_with_row_grouping,
+      _.keys(column_configs)
+    )[0];
+
     const row_grouped_data = _.chain(data)
       .groupBy("dept")
       .map((dept_data) => {
-        const summable_columns = _.keys(
-          _.omit(dept_data[0], ["dept", "prgm", "legal_title"])
-        );
+        const basic_columns = ["dept", "prgm", "legal_title", trigger_column];
+        const summable_columns = _.chain(dept_data[0])
+          .omit(basic_columns)
+          .keys()
+          .value();
         const column_sums = summable_columns.map((col) => {
           return _.sumBy(dept_data, col);
         });
-        console.log(column_sums);
         const columns = _.zipObject(summable_columns, column_sums);
         return {
           dept: dept_data[0].dept,
@@ -451,9 +465,6 @@ export class _DisplayTable extends React.Component<
     const table_data: DisplayTableData[] = row_grouping
       ? row_grouped_data
       : data;
-
-    const cols_with_row_grouping = ["prgm", "so", "desc", "region", "tp"];
-    const trigger_column = "prgm";
 
     return (
       <div
