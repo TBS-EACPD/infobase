@@ -1,11 +1,21 @@
 import fetchMock from "fetch-mock";
 import React, { useState } from "react";
 
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
+
 import { EmailFrontend } from "./EmailFrontend";
 
 export default {
   title: "EmailFrontend",
   component: EmailFrontend,
+  argTypes: {
+    loading: {
+      defaultValue: true,
+    },
+    include_privacy: {
+      defaultValue: false,
+    },
+  },
 };
 
 const Template = (args) => {
@@ -14,11 +24,19 @@ const Template = (args) => {
   const on_submitted = () => {
     console.log("Submitted");
   };
-  return (
-    <div>
-      <EmailFrontend {...args} on_submitted={on_submitted} />
-    </div>
-  );
+  if (!args.loading) {
+    return (
+      <div>
+        <EmailFrontend {...args} on_submitted={on_submitted} />
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <LeafSpinner />
+      </div>
+    );
+  }
 };
 
 export const Report_a_Problem = Template.bind({});
