@@ -14,7 +14,7 @@ import {
 
 import { Subject } from "src/models/subject";
 
-import { textColor } from "src/core/color_defs";
+import { textColor, backgroundColor } from "src/core/color_defs";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass";
@@ -200,9 +200,7 @@ class Goco extends React.Component {
         const is_spending = d.id === spending_text;
 
         const value = is_spending ? d.data.actual_spending : d.data.actual_ftes;
-        const formatted_value = get_formatter(is_spending)(value || 0);
-
-        return <tspan y={-10}>{formatted_value}</tspan>;
+        return get_formatter(is_spending)(value || 0);
       };
 
       const nivo_default_props = {
@@ -212,9 +210,16 @@ class Goco extends React.Component {
         enableLabel: true,
         enableGridX: false,
         enableGridY: false,
-        label: (d) => format_value(d),
+        label: (d) => <tspan y={-10}>{format_value(d)}</tspan>,
         tooltip: (slice) => (
-          <div style={{ color: textColor }}>
+          <div
+            style={{
+              color: textColor,
+              padding: "5px",
+              backgroundColor: backgroundColor,
+              borderRadius: "10px",
+            }}
+          >
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <tbody>
                 {slice.map((tooltip_item) => (
