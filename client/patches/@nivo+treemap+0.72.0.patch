@@ -1,3 +1,4 @@
+# Patch for treemap labels not showing up properly
 diff --git a/node_modules/@nivo/treemap/dist/nivo-treemap.es.js b/node_modules/@nivo/treemap/dist/nivo-treemap.es.js
 index 0c2e9ee..99e4b54 100644
 --- a/node_modules/@nivo/treemap/dist/nivo-treemap.es.js
