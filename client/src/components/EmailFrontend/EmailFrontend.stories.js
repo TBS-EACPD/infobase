@@ -13,7 +13,10 @@ export default {
       defaultValue: true,
     },
     include_privacy: {
-      defaultValue: false,
+      defaultValue: true,
+    },
+    all_required_user_fields_are_filled: {
+      defaultValue: true,
     },
   },
 };
@@ -21,6 +24,7 @@ export default {
 const Template = (args) => {
   const [template, setTemplate] = useState(args.template);
   fetchMock.getOnce("*", template, { overwriteRoutes: true });
+  fetchMock.postOnce("*", {}, { overwriteRoutes: true });
   const on_submitted = () => {
     console.log("Submitted");
   };

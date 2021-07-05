@@ -168,15 +168,18 @@ class EmailFrontend extends React.Component {
       key === "meta" || !form_type;
     });
 
-    const all_required_user_fields_are_filled = _.chain(user_fields)
-      .omitBy((field) => !field.required)
-      .keys()
-      .every(
-        (required_field_key) =>
-          !_.isUndefined(completed_template[required_field_key]) &&
-          !_.isEmpty(completed_template[required_field_key])
-      )
-      .value();
+    const all_required_user_fields_are_filled =
+      // specifically for storybook, will not return true
+      this.props.all_required_user_fields_are_filled ||
+      _.chain(user_fields)
+        .omitBy((field) => !field.required)
+        .keys()
+        .every(
+          (required_field_key) =>
+            !_.isUndefined(completed_template[required_field_key]) &&
+            !_.isEmpty(completed_template[required_field_key])
+        )
+        .value();
 
     const all_connected_user_fields_are_filled = _.chain(user_fields)
       .toPairs()
@@ -351,6 +354,12 @@ class EmailFrontend extends React.Component {
                   disabled={!ready_to_send}
                   onClick={(event) => {
                     event.preventDefault();
+                    console.log("All Required User Fields Are Filled");
+                    console.log(all_required_user_fields_are_filled);
+                    console.log("All Connected User Fields Are Filled");
+                    console.log(all_connected_user_fields_are_filled);
+                    console.log("Privacy Acknowledged");
+                    console.log(privacy_acknowledged);
                     if (
                       this.state.template_name === "feedback" &&
                       has_local_storage
