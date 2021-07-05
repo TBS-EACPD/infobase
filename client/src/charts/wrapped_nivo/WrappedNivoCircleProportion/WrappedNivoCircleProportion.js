@@ -1,4 +1,7 @@
-import { ResponsiveCirclePacking } from "@nivo/circle-packing";
+import {
+  ResponsiveCirclePacking,
+  useNodeMouseHandlers,
+} from "@nivo/circle-packing";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
@@ -34,9 +37,7 @@ const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
 const MIN_NODE_RADIUS = 2;
 const ProportionalNode = ({ node, style, ...handlers }) => {
-  if (style.r <= 0) {
-    return null;
-  }
+  const node_handlers = useNodeMouseHandlers(node, handlers);
 
   const {
     // these aren't values for the specific node, but for the whole graph, e.g. radius is always the outer circle radius,
@@ -54,6 +55,10 @@ const ProportionalNode = ({ node, style, ...handlers }) => {
       // ... have to assume nothing's actually animating though, otherwise there's different logic to get the final value
       value?.get?.() || value
   );
+
+  if (graph_radius <= 0) {
+    return null;
+  }
 
   const { node_radius, node_x, node_y } = (() => {
     if (!_.isEmpty(node.data.children)) {
@@ -85,11 +90,11 @@ const ProportionalNode = ({ node, style, ...handlers }) => {
     <g transform={`translate(${node_x},${node_y})`}>
       <circle
         r={node_radius}
-        {...handlers}
         fill={node.color}
         stroke={borderColor}
         strokeWidth={borderWidth}
         shapeRendering={"geometricPrecision"}
+        {...node_handlers}
       />
     </g>
   );
