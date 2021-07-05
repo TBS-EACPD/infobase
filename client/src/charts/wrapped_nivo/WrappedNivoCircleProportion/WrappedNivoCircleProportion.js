@@ -28,45 +28,43 @@ import "./WrappedNivoCircleProportion.scss";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
-// Hacky abuse of ResponsiveCirclePacking... very fragile against nivo changes. Bonus comments left in this file to balance against that
+// VERY hacky abuse of ResponsiveCirclePacking... very fragile against nivo changes. Bonus comments left in this file to balance against that
 // Would be trivial to make this graph ourselves, only reason for doing it like this is to get nivo native tooltips (and even
 // then they're extra customized ones) and our common nivo graph utilities ...consider rethinking this though
 
 const MIN_NODE_RADIUS = 2;
-const ProportionalNode = ({ node, style, handlers }) => {
+const ProportionalNode = ({ node, style, ...handlers }) => {
   if (style.r <= 0) {
     return null;
   }
 
   const {
-    // note these aren't values for the specific node, but for the whole graph, e.g. r is always the outer circle radius,
+    // these aren't values for the specific node, but for the whole graph, e.g. radius is always the outer circle radius,
     // and (x, y) is the center of the graph. Node specific values are calculated below
-    r: graph_radius,
+    radius: graph_radius,
     x: center_x,
     y: center_y,
 
-    fill,
-    color,
     borderColor,
     borderWidth,
-  } = style;
+  } = _.mapValues(
+    style,
+    (value) =>
+      // style prop values may be wrapped by react spring if they're animatable, need to unwrap the actual value
+      // ... have to assume nothing's actually animating though, otherwise there's different logic to get the final value
+      value?.get?.() || value
+  );
 
   const { node_radius, node_x, node_y } = (() => {
-    if (_.isNull(node.parent)) {
+    if (!_.isEmpty(node.data.children)) {
       return {
         node_radius: graph_radius,
         node_x: center_x,
         node_y: center_y,
       };
     } else {
-      // need to be clear here, node.value !== graph_data.value as seen below. The config data from graph_data is stored in
-      // node.data. The value in node.value is node.data.value PLUS the sum of child values
-      // ... kind of makes sense for the standard use of this graph, but still a bit of annoying hidden logic. Makes what
-      // we're doing here extra hacky
-      const proportion_ratio = node.value / node.parent.value;
-
       const node_radius = _.max([
-        graph_radius * Math.sqrt(proportion_ratio), // do the math, make the actual area proportional
+        graph_radius * Math.sqrt(node.percentage / 100), // do the math, make the actual area proportional
         MIN_NODE_RADIUS,
       ]);
 
@@ -88,7 +86,7 @@ const ProportionalNode = ({ node, style, handlers }) => {
       <circle
         r={node_radius}
         {...handlers}
-        fill={fill ? fill : color}
+        fill={node.color}
         stroke={borderColor}
         strokeWidth={borderWidth}
         shapeRendering={"geometricPrecision"}
@@ -200,7 +198,7 @@ export class WrappedNivoCircleProportion extends React.Component {
             labelsSkipRadius={labelsSkipRadius}
             leavesOnly={false}
             padding={0}
-            nodeComponent={ProportionalNode}
+            circleComponent={ProportionalNode}
             margin={margin}
             tooltip={tooltip}
           />
