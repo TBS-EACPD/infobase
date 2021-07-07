@@ -88,12 +88,13 @@ export default class MetaData extends React.Component {
                     <div
                       style={{ marginLeft: "auto" }} //fix a flexbox bug
                     >
-                      {source.original && (
+                      {source.original_link && (
                         <a
-                          className="btn btn-outline-primary border border-white"
+                          className="btn btn-ib-primary"
+                          style={{ margin: "5px" }}
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={source.original[lang]}
+                          href={source.original_link[lang]}
                         >
                           <TM k="original_report_link" />
                         </a>
