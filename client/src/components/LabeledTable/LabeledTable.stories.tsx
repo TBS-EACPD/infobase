@@ -16,6 +16,7 @@ export default {
     },
   },
 };
+
 type LabeledTableProps = React.ComponentProps<typeof LabeledTable>;
 
 const Template: Story<LabeledTableProps> = (args) => <LabeledTable {...args} />;
