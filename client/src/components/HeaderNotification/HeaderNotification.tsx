@@ -4,7 +4,19 @@ import React from "react";
 import { trivial_text_maker } from "src/models/text";
 import "./HeaderNotification.scss";
 
-export class HeaderNotification extends React.Component {
+interface HeaderNotificationProps {
+  list_of_text: string[];
+  hideNotification: () => void;
+}
+
+interface HeaderNotificationState {
+  show: boolean;
+}
+
+export class HeaderNotification extends React.Component<
+  HeaderNotificationProps,
+  HeaderNotificationState
+> {
   state = {
     show: false,
   };
