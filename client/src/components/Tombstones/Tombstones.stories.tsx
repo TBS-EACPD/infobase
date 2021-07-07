@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
 import { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
@@ -5,9 +6,11 @@ import { UnlabeledTombstone, LabeledTombstone } from "./Tombstones";
 export default {
   title: "Tombstones",
   component: UnlabeledTombstone,
-};
+} as Meta;
 
-const UnlabeledTemplate = (args) => {
+type UnlabeledTombstoneProps = React.ComponentProps<typeof UnlabeledTombstone>;
+
+const UnlabeledTemplate: Story<UnlabeledTombstoneProps> = (args) => {
   return <UnlabeledTombstone {...args} />;
 };
 
@@ -16,7 +19,9 @@ UnlabeledTombstones.args = {
   items: ["Item 1", "Item 2"],
 };
 
-const LabeledTemplate = (args) => {
+type LabeledTombstoneProps = React.ComponentProps<typeof LabeledTombstone>;
+
+const LabeledTemplate: Story<LabeledTombstoneProps> = (args) => {
   return <LabeledTombstone {...args} />;
 };
 
