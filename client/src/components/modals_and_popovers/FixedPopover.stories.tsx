@@ -1,4 +1,5 @@
 import { useArgs } from "@storybook/client-api";
+import { Story, Meta } from "@storybook/react";
 import React, { Fragment } from "react";
 
 import { FixedPopover } from "./FixedPopover";
@@ -9,9 +10,11 @@ export default {
 
   // Need decorators to use useArgs()
   decorators: [(Story) => <div>{Story()}</div>],
-};
+} as Meta;
 
-const Template = (args) => {
+type FixedPopoverProps = React.ComponentProps<typeof FixedPopover>;
+
+const Template: Story<FixedPopoverProps> = (args) => {
   const [_, updateArgs] = useArgs();
 
   function on_close_callback() {

@@ -1,4 +1,5 @@
 import { useArgs } from "@storybook/client-api";
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
 import { StatelessModal } from "./StatelessModal";
@@ -9,9 +10,11 @@ export default {
 
   // Need decorators to use useArgs()
   decorators: [(Story) => <div>{Story()}</div>],
-};
+} as Meta;
 
-const Template = (args) => {
+type StatelessModalProps = React.ComponentProps<typeof StatelessModal>;
+
+const Template: Story<StatelessModalProps> = (args) => {
   const [_, updateArgs] = useArgs();
 
   function on_close_callback() {
@@ -38,8 +41,8 @@ Basic.args = {
   subtitle: "Subtitle",
   body,
   close_text: "Close",
-  close_button_in_header: false,
-  additional_diolog_class: "",
+  include_close_button_in_header: false,
+  additional_dialog_class_name: "",
 };
 
 export const HeaderOptions = Template.bind({});
@@ -48,5 +51,5 @@ HeaderOptions.args = {
   header: "Header",
   footer: "Footer",
   body,
-  additional_diolog_class: "",
+  additional_dialog_class_name: "",
 };
