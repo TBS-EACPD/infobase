@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
 import { ModalButton } from "./ModalButton";
@@ -5,9 +6,11 @@ import { ModalButton } from "./ModalButton";
 export default {
   title: "modals and popovers/ModalButton",
   component: ModalButton,
-};
+} as Meta;
 
-const Template = (args) => <ModalButton {...args} />;
+type ModalButtonProps = React.ComponentProps<typeof ModalButton>;
+
+const Template: Story<ModalButtonProps> = (args) => <ModalButton {...args} />;
 
 const children = <div>Body</div>;
 

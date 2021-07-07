@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import React, { Fragment } from "react";
 
@@ -9,9 +10,11 @@ export default {
 
   // Need decorators to use useArgs()
   decorators: [(Story) => <div>{Story()}</div>],
-};
+} as Meta;
 
-const Template = (args) => {
+type FocusLockedModalProps = React.ComponentProps<typeof FocusLockedModal>;
+
+const Template: Story<FocusLockedModalProps> = (args) => {
   const [_, updateArgs] = useArgs();
   function on_exit() {
     console.log(args.mounted ? "Closing Modal" : "Opening Modal");
@@ -89,5 +92,5 @@ Basic.args = {
   mounted: false,
 
   // css
-  additional_dialogue_class: "",
+  additional_dialog_class: "",
 };
