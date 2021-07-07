@@ -14,8 +14,19 @@ export default async function ({ models }) {
       stat: +row.stat,
     })
   );
-  const covid_expenditures_rows = _.chain(
+
+  const temporarily_filtered_covid_expenditures_data = _.chain(
     get_standard_csv_file_rows("covid_expenditures.csv")
+  )
+    .filter(
+      ({ fiscal_year, is_in_estimates }) =>
+        fiscal_year !== "2019" && is_in_estimates === "1"
+    )
+    .map((row) => _.omit(row, "is_in_estimates"))
+    .value();
+
+  const covid_expenditures_rows = _.chain(
+    temporarily_filtered_covid_expenditures_data
   )
     .map((row) => ({
       // covid_expenditures.csv contains the bud/non-bud split, but the client doesn't use it yet and supporting it creates lots of room for error,
@@ -43,7 +54,7 @@ export default async function ({ models }) {
     .value();
 
   const covid_expenditures_month_last_updated_by_fiscal_year = _.chain(
-    get_standard_csv_file_rows("covid_expenditures.csv")
+    temporarily_filtered_covid_expenditures_data
   )
     .groupBy("fiscal_year")
     .mapValues((rows, fiscal_year) =>
