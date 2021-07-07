@@ -294,6 +294,9 @@ no_data_table:
 open_data_link:
   en: Open Data Link
   fr: Lien vers les données ouvertes
+original_report_link:
+  en: Original Report Link
+  fr: Lien de rapport d'origine
 open_data_datasets:
   en: Open Data Datasets
   fr: Données ouvertes

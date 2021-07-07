@@ -85,17 +85,30 @@ export default class MetaData extends React.Component {
                     <span style={{ alignSelf: "center" }}>
                       <TM k="refresh_freq" /> {source.frequency}
                     </span>
-                    {source.open_data && (
-                      <a
-                        style={{ marginLeft: "auto" }} //fix a flexbox bug
-                        className="btn btn-ib-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={source.open_data[lang]}
-                      >
-                        <TM k="open_data_link" />
-                      </a>
-                    )}
+                    <div
+                      style={{ marginLeft: "auto" }} //fix a flexbox bug
+                    >
+                      {source.original && (
+                        <a
+                          className="btn"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={source.original[lang]}
+                        >
+                          <TM k="original_report_link" />
+                        </a>
+                      )}
+                      {source.open_data && (
+                        <a
+                          className="btn btn-ib-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={source.open_data[lang]}
+                        >
+                          <TM k="open_data_link" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Panel>
