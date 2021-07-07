@@ -32,6 +32,10 @@ date_to_achieve:
   en: Date to achieve target
   fr: Date d’atteinte de la cible
 
+gba_plus_flag:
+  en: Supports Gender Based Analysis Plus
+  fr: TODO
+
 indicator_targets:
   en: Indicator Targets
   fr: Cibles des indicateurs
