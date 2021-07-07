@@ -94,6 +94,26 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
           </Fragment>
         )}
 
+        {+result_docs[indicator.doc].year_short >= (is_drr ? 2020 : 2021) && (
+          <Fragment>
+            <dt>
+              <TM k="gba_plus_flag" />
+            </dt>
+            <dd>
+              {(() => {
+                switch (indicator.gba_plus) {
+                  case true:
+                    return text_maker("yes");
+                  case false:
+                    return text_maker("no");
+                  default:
+                    return text_maker("not_applicable");
+                }
+              })()}
+            </dd>
+          </Fragment>
+        )}
+
         <dt>
           <TM k="date_to_achieve" />
         </dt>
