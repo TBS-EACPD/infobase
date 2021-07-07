@@ -164,7 +164,7 @@ Une évaluation globale de toutes les opérations internationales sera regroupé
 Base de référence  
 A déterminer.  
 Notes/définitions : 
-Aucun.",,,"0","new_indicator","text",0
+Aucun.",,,"0","new_indicator","text",1
 "DR-QUAL-dp19-596","DR-QUAL-186","DR-dp19-1276","Extent to which the Canadian Armed Forces is effective in domestic operations","Mesure dans laquelle les Forces armées canadiennes sont efficace dans les opérations nationales","2020","3",,,"text",,,"The Canadian Armed Forces is effective in the conduct of domestic operations","Les Forces armées canadiennes sont efficaces dans la conduite des opérations nationales","dp19",,,,,,,,"Explanation/rationale:  
 This indicator assesses the effectiveness of the Canadian Armed Forces (CAF) in conducting domestic operations using standardized criteria for success. The report will demonstrate key successes and challenges for domestic operations based on an overall assessment of key requirements. A lack of effectiveness in the conduct of domestic operations is a critical indicator of the CAF’s ability to meet its core mission. This high-level indicator could identify requirements to adjust military planning, capacity or capability within the dynamic operational environment. Such information will assist the DND/CAF in making resource allocation decisions for training demands and future force development. It will also inform future mission planning requirements and objective setting, providing insight into concurrent operation capacity.  
  
@@ -1514,7 +1514,7 @@ Base de référence:
 A déterminer.   
  
 Notes/définitions:  
-Aucun.",,,"0","unchanged","max",0
+Aucun.",,,"0","unchanged","max",1
 "DR-QUANT-dp19-4205","DR-QUANT-766","DR-dp19-1275","% of coordinated maritime, aeronautical and joint response to search and rescue incidents deemed effective","% des interventions coordonnées maritimes, aéronautiques et interarmées qui sont jugées efficaces en cas d’incident de recherche et de sauvetage","2020","3",,,"percent","100.00",,,,"dp19",,,,,,,,"Explanation/rationale:  
 Search and Rescue (SAR) missions are dependent on both the speed of response and the ability to provide effective services on arrival. This indicator measures the effectiveness of the coordination of aeronautical/ maritime and joint SAR operations by the Canadian Armed Forces (CAF). Success/failure rates will necessitate investigation of factors determining mission success. This information will assist the DND/CAF in ensuring sound planning and coordination capabilities while supporting decisions regarding existing assets, training demands, and future force development. 
  
@@ -1565,7 +1565,7 @@ Base de référence :
 À déterminer 
  
 Notes et définitions :  
-Les opérations considérées comme faisant partie de l'engagement du Commandement de la défense aérospatiale de l’Amérique du Nord (NORAD) ne sont pas incluses dans cette évaluation, car elles ne nécessitent pas de demandes d'aide et elles sont régies par des ententes binationales.",,,"0","unchanged","max",0
+Les opérations considérées comme faisant partie de l'engagement du Commandement de la défense aérospatiale de l’Amérique du Nord (NORAD) ne sont pas incluses dans cette évaluation, car elles ne nécessitent pas de demandes d'aide et elles sont régies par des ententes binationales.",,,"0","unchanged","max",1
 "DR-QUANT-dp19-4207","DR-QUANT-764","DR-dp19-1276","% of operations that meet stated objectives","% des opérations qui atteignent les objectifs fixés","2020","3",,,"percent","100.00",,,,"dp19",,,,,,,,"Explanation/rationale:  
 This indicator assesses the Canadian Armed Forces’ (CAF) ability to meet directed objectives of domestic operations, through effects created by the execution of directed and funded critical tasks.  Data supporting this indicator will help DND/CAF assess whether adequate resources are attributed to various operations, whether assets and personnel are properly prepared, and whether plans/objectives and approaches require adjustment to ensure future success.  If a critical task cannot be completed, information will be gathered to inform future decisions.  This will assist the department’s resource allocation decisions for existing assets, training demands, and future force development. This quantitative measure of performance complements the qualitative measure of effectiveness “Extent to which the Canadian Armed Forces is effective in domestic operations”.  
 Formula/calculation:                                                                                                                                                                  (The combined total # of operational objectives met / the total of operational objectives identified defined) x 100 per operation.  

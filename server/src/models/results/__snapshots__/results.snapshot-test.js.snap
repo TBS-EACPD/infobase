@@ -474,7 +474,7 @@ Notes/definitions:  Operational Objective:  A clearly defined and attainable goa
                   Object {
                     "actual_result": null,
                     "doc": "dp19",
-                    "gba_plus": false,
+                    "gba_plus": true,
                     "measure": null,
                     "methodology": "Explanation/rationale:  
 This qualitative indicator will assess the overall effectiveness of the Canadian Armed Forces (CAF) in conducting international operations using standardized criteria for success. The report will demonstrate key successes and challenges for international operations based on an overall assessment of key requirements. A lack of effectiveness in the conduct of international operations is a critical indicator of the CAF’s ability to meet its core mission. This high-level indicator could identify requirements to adjust military planning, capacity or capability within the dynamic operational environment. Such information will assist the DND/CAF in making resource allocation decisions for training demands and future force development. In addition, it will inform future mission planning requirements and objective setting, and will provide insight into concurrent operation capacity.  
@@ -565,7 +565,7 @@ Operational Objective: A clearly defined and attainable goal to be achieved. (So
                   Object {
                     "actual_result": null,
                     "doc": "dp19",
-                    "gba_plus": false,
+                    "gba_plus": true,
                     "measure": null,
                     "methodology": "Explanation/rationale:  
 This indicator illustrates the ability of the Canadian Armed Forces (CAF) to respond to Government of Canada aeronautical SAR requests. This indicator measures the percentage of aeronautical SAR mission requests fulfilled by CAF annually. The Joint Rescue Coordination Centre (JRCC) will task CAF assets for mandated aeronautical Search and Rescue (SAR) cases as appropriate. Not every case, however, requires a response by CAF aeronautical assets (for instance, when an asset from another organization is closer and available to respond). Tracking the number of SAR aeronautical responses fulfilled by the CAF against those tasked demonstrates the necessity of CAF SAR capability, the CAF’s capacity to respond (e.g. serviceability of aircraft), the nature of the operating environment (e.g. inability to safely respond due to weather conditions), and the frequency of occurrence. A low response rate to requests for SAR assistance could indicate challenges in the CAF's ability to provide a SAR capability in order to meet GC expectations. 
@@ -728,7 +728,7 @@ None.",
                   Object {
                     "actual_result": null,
                     "doc": "dp19",
-                    "gba_plus": false,
+                    "gba_plus": true,
                     "measure": null,
                     "methodology": "Explanation/rationale:  
 This indicator measures the responsiveness of the Canadian Armed Forces (CAF) to Government of Canada requests to support civil authorities in response to domestic security threats. It measures the number of domestic security operation requests fulfilled annually relative to the total number of requests received.  A low response rate to requests for assistance can reflect challenges in the CAF's ability to meet Government of Canada expectations. Such information will assist the department in allocating resources for existing assets, training demands, and future force development. 
