@@ -10,6 +10,7 @@
 //  with the array ordered by fiscal year
 //
 
+import { dispatch } from "d3-dispatch";
 import { select } from "d3-selection";
 
 import "d3-selection-multi";
@@ -19,8 +20,6 @@ import { businessConstants } from "src/models/businessConstants";
 
 import { separatorColor } from "src/core/color_defs";
 import { lang } from "src/core/injected_build_constants";
-
-import graphRegistry from "src/charts/graphRegistry";
 
 import { canada_svg } from "./canada_svg.yaml";
 
@@ -67,9 +66,55 @@ const get_province_element_id = (prov_key) => `#ca-${prov_key}`;
 
 export class CanadaD3Component {
   constructor(container, options) {
-    options.alternative_svg = canada_svg_text;
+    this.window_width_last_updated_at = window.innerWidth;
+    const select_container = select(container);
+    select_container.append("div").classed("__svg__", true);
+    select_container.select(".__svg__").html(canada_svg_text);
 
-    graphRegistry.setup_graph_instance(this, select(container), options);
+    this.svg = select_container.select("svg");
+    this.outside_width = select_container.node()?.getBoundingClientRect().width;
+    this.outside_height = 400;
+    this.html = select_container;
+    this.options = options;
+
+    const base_dispatch_events = ["dataMouseEnter", "dataMouseLeave"];
+    this.dispatch = options.dispatch = dispatch.apply(
+      this,
+      base_dispatch_events
+    );
+    window.addEventListener(
+      "resize",
+      _.debounce(() => {
+        if (this.should_graphs_update()) {
+          this.update_graphs();
+        }
+      }, 250)
+    );
+  }
+
+  should_graphs_update() {
+    return window.innerWidth !== this.window_width_last_updated_at;
+  }
+  update_graphs() {
+    this.window_width_last_updated_at = window.innerWidth;
+
+    if (this.html) {
+      const html_container = this.html.node();
+      if (html_container) {
+        this.outside_width = html_container.getBoundingClientRect().width;
+        this.outside_height = 400;
+
+        _.map(html_container.childNodes, _.identity).forEach((child) => {
+          // Remove all labels associated with the graph (that is, all siblings of the svg's container).
+          if (!_.isUndefined(child) && !child.className.includes("__svg__")) {
+            html_container.removeChild(child);
+          }
+        });
+      }
+      // forEach directly on a nodeList has spoty support even with polyfils,
+      // mapping it through to an array first works consistently though
+      this.render(this.options);
+    }
   }
 
   render(options) {
