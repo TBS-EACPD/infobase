@@ -44,6 +44,7 @@ fragment result_and_indicator_fields on Result {
     measure
     seeking_to
     target_change
+    gba_plus
 
     previous_year_target_type
     previous_year_target_min
@@ -52,6 +53,7 @@ fragment result_and_indicator_fields on Result {
     previous_year_measure
     previous_year_seeking_to
     previous_year_target_change
+    previous_year_gba_plus
 
     target_explanation
     result_explanation

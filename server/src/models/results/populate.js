@@ -47,6 +47,9 @@ export default async function ({ models }) {
         ? null
         : +indicator.target_month,
       status_key: indicator.status_key || "dp",
+      gba_plus: _.isNull(indicator.gba_plus)
+        ? null
+        : Boolean(parseInt(indicator.gba_plus)),
     }))
     .map((indicator, ix, indicator_records) => {
       const { doc, stable_id } = indicator;
@@ -70,6 +73,7 @@ export default async function ({ models }) {
               "target_max",
               "seeking_to",
               "target_change",
+              "gba_plus",
             ])
               .map((field_key) => [
                 `previous_year_${field_key}`,
