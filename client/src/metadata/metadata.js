@@ -90,7 +90,7 @@ export default class MetaData extends React.Component {
                     >
                       {source.original && (
                         <a
-                          className="btn"
+                          className="btn btn-outline-primary border border-white"
                           target="_blank"
                           rel="noopener noreferrer"
                           href={source.original[lang]}
