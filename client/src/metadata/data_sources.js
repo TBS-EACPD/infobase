@@ -80,7 +80,7 @@ const sources = _.chain([
     title: text_maker("pa_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
-    original: {
+    original_link: {
       en: "https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-eng.html",
       fr: "https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-fra.html",
     },
@@ -100,7 +100,7 @@ const sources = _.chain([
     title: text_maker("estimates_title"),
     frequency: text_maker("quarterly"),
     open_data: infobase_open_data_page,
-    original: {
+    original_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html",
     },
@@ -155,7 +155,7 @@ const sources = _.chain([
     title: text_maker("dp_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
-    original: {
+    original_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html",
     },
@@ -182,7 +182,7 @@ const sources = _.chain([
     title: text_maker("drr_title"),
     frequency: text_maker("yearly"),
     open_data: infobase_open_data_page,
-    original: {
+    original_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html",
     },
@@ -208,7 +208,7 @@ const sources = _.chain([
     key: "RPS",
     title: text_maker("rps_title"),
     frequency: text_maker("yearly"),
-    original: {
+    original_link: {
       en: "https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html",
       fr: "https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html",
     },
