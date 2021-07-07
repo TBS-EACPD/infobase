@@ -9,6 +9,7 @@ export default {
   title: "LeafSpinner",
   component: LeafSpinner,
 } as Meta;
+
 type LeafSpinnerProps = React.ComponentProps<typeof LeafSpinner>;
 
 const Template: Story<LeafSpinnerProps> = (args) => <LeafSpinner {...args} />;
