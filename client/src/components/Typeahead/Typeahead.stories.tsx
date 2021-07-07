@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import _ from "lodash";
 import React from "react";
 
@@ -43,11 +44,25 @@ const data = [
   },
 ];
 
-const filter = (query, datum) =>
-  _.includes(_.lowerCase(datum.title), _.lowerCase(query));
+const filter = (
+  query: string,
+  datum: Record<string, string | JSX.Element | ((...args: any[]) => void)>
+) => _.includes(_.lowerCase(datum.title as string), _.lowerCase(query));
 
-class TypeaheadWrapper extends React.Component {
-  constructor(props) {
+interface TypeaheadWrapperProps {
+  data: Record<string, string>[];
+  min_length: number;
+}
+
+interface TypeaheadWrapperState {
+  query: string;
+}
+
+class TypeaheadWrapper extends React.Component<
+  TypeaheadWrapperProps,
+  TypeaheadWrapperState
+> {
+  constructor(props: TypeaheadWrapperProps) {
     super(props);
 
     this.state = {
@@ -55,7 +70,7 @@ class TypeaheadWrapper extends React.Component {
     };
   }
 
-  on_query = (query_value) => this.setState({ query: query_value });
+  on_query = (query_value: string) => this.setState({ query: query_value });
 
   render() {
     const { query } = this.state;
@@ -95,12 +110,14 @@ class TypeaheadWrapper extends React.Component {
   }
 }
 
-const TypeaheadTemplate = (props) => <TypeaheadWrapper {...props} />;
+const TypeaheadTemplate: Story<TypeaheadWrapperProps> = (
+  props: TypeaheadWrapperProps
+) => <TypeaheadWrapper {...props} />;
 
 export default {
   title: "Input/Typeahead",
   component: TypeaheadTemplate,
-};
+} as Meta;
 
 export const BasicTypeahead = TypeaheadTemplate.bind({});
 BasicTypeahead.args = {
