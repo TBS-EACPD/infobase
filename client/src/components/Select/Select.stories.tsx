@@ -1,4 +1,5 @@
 import { useArgs } from "@storybook/client-api";
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
 import { Select } from "./Select";
@@ -11,11 +12,13 @@ export default {
       defaultValue: "",
     },
   },
-};
+} as Meta;
 
-const Template = (args) => {
+type SelectProps = React.ComponentProps<typeof Select>;
+
+const Template: Story<SelectProps> = (args) => {
   const [_, updateArgs] = useArgs();
-  function onSelect(value) {
+  function onSelect(value: string) {
     updateArgs({ ...args, selected: value });
     console.log("Option " + value + " has been chosen. ");
   }
@@ -25,7 +28,7 @@ const Template = (args) => {
 
 export const Basic = Template.bind({});
 Basic.args = {
-  id: 1,
+  id: "1",
   className: "",
   options: [
     {
