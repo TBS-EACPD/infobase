@@ -47,9 +47,7 @@ export default async function ({ models }) {
         ? null
         : +indicator.target_month,
       status_key: indicator.status_key || "dp",
-      gba_plus: _.isNull(indicator.gba_plus)
-        ? null
-        : Boolean(parseInt(indicator.gba_plus)),
+      gba_plus: _.isNull(indicator.gba_plus) ? null : indicator.gba_plus,
     }))
     .map((indicator, ix, indicator_records) => {
       const { doc, stable_id } = indicator;
