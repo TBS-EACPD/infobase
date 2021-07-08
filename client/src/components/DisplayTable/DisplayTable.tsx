@@ -28,7 +28,7 @@ import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-type CellValue = string | number | Date;
+export type CellValue = string | number | Date;
 interface ColumnKeyProps {
   index: number; // Zero indexed, order of column
   header: string; // Name of column
@@ -45,7 +45,7 @@ interface ColumnKeyProps {
   visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes
 }
 
-interface ColumnConfigProps {
+export interface ColumnConfigProps {
   [keys: string]: ColumnKeyProps;
 }
 
