@@ -1,13 +1,16 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { DisplayTable } from "./DisplayTable";
+import { DisplayTable, CellValue, ColumnConfigProps } from "./DisplayTable";
 
 export default {
   title: "Tables/DisplayTable",
   component: DisplayTable,
-};
+} as Meta;
 
-const Template = (args) => {
+type DisplayTableProps = React.ComponentProps<typeof DisplayTable>;
+
+const Template: Story<DisplayTableProps> = (args) => {
   return <DisplayTable {...args} />;
 };
 
@@ -18,6 +21,7 @@ const common_data = [
   { label: "United_States", price: 11 },
   { label: "United_Kingdom", price: 10 },
 ];
+
 const common_column_configs = {
   label: {
     index: 0,
@@ -27,15 +31,22 @@ const common_column_configs = {
   price: {
     index: 1,
     header: "Price",
-    is_summable: true,
+    is_sortable: true,
   },
-};
+} as unknown as ColumnConfigProps;
 
 export const Basic = Template.bind({});
 Basic.args = {
   data: common_data,
   column_configs: common_column_configs,
 };
+
+type Country =
+  | "Italy"
+  | "Korea"
+  | "Canada"
+  | "United_States"
+  | "United_Kingdom";
 
 const country_lookup = {
   Italy: "Italy",
@@ -48,13 +59,13 @@ const table_with_URL_column_configs = {
   ...common_column_configs,
   label: {
     ...common_column_configs.label,
-    formatter: (id) => (
+    formatter: (id: CellValue) => (
       <a
         href={`https://en.wikipedia.org/wiki/List_of_pizza_varieties_by_country#${id}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {country_lookup[id]}
+        {country_lookup[id as Country]}
       </a>
     ),
   },
@@ -66,7 +77,7 @@ TableWithURL.args = {
 };
 
 const custom_utils = {
-  downloadCsvUtil: null,
+  downloadCsvUtil: <></>,
   random_button: (
     <button
       key={"random_button"}
