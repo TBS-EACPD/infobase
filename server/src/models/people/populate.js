@@ -43,7 +43,6 @@ export async function populate_people_age() {
     });
   });
   // convert the string that should be int to int
-  var count = 0;
   _.each(rows, (row) => {
     _.each(years, (year) => {
       age_groups_totals_by_year[row.dimension][year] += +row[year] || 0;
