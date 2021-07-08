@@ -94,7 +94,7 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
           </Fragment>
         )}
 
-        {+result_docs[indicator.doc].year_short >= (is_drr ? 2020 : 2021) && (
+        {result_docs[indicator.doc].has_gba_plus && (
           <Fragment>
             <dt>
               <TM k="gba_plus_flag" />
