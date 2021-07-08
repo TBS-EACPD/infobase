@@ -31,7 +31,9 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
           ...state,
           data_loading: false,
           doc: payload,
-          status_key_whitelist: [], //reset filtering when doc changes
+          //reset filtering when doc changes
+          status_key_whitelist: [],
+          filter_by_gba_plus: false,
         };
       case "set_doc_REJECTED":
         throw new Error(`Ensure loaded for ${state.doc} results failed!`);
@@ -48,6 +50,11 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
           ...state,
           status_key_whitelist: [],
         };
+      case "toggle_filter_by_gba_plus":
+        return {
+          ...state,
+          filter_by_gba_plus: !state.filter_by_gba_plus,
+        };
       default:
         return state;
     }
@@ -59,6 +66,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
       data_loading: false,
       doc,
       status_key_whitelist: [],
+      filter_by_gba_plus: false,
       subject_guid: subject_guid,
     };
   }
@@ -85,19 +93,30 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
   @cached_property
   get_filter_func_selector() {
     return createSelector(
-      (state) => state.scheme.status_key_whitelist,
-      (status_key_whitelist) => {
-        if (_.isEmpty(status_key_whitelist)) {
+      (state) => state.scheme,
+      ({ status_key_whitelist, filter_by_gba_plus }) => {
+        const filter_by_status = !_.isEmpty(status_key_whitelist);
+
+        if (!filter_by_status && !filter_by_gba_plus) {
           return _.identity;
         }
+
         return (nodes) =>
           filter_hierarchy(
             nodes,
-            (node) =>
-              _.includes(
-                status_key_whitelist,
-                _.get(node, "data.indicator.status_key")
-              ),
+            (node) => {
+              const status_filter =
+                !filter_by_status ||
+                _.includes(
+                  status_key_whitelist,
+                  _.get(node, "data.indicator.status_key")
+                );
+
+              const gba_plus_filter =
+                !filter_by_gba_plus || _.get(node, "data.indicator.gba_plus");
+
+              return status_filter && gba_plus_filter;
+            },
             { leaves_only: false, markSearchResults: false }
           );
       }
@@ -134,7 +153,13 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
   @bound
   map_state_to_props(state) {
     const scheme_state = state.scheme;
-    const { status_key_whitelist, mode, data_loading, doc } = scheme_state;
+    const {
+      status_key_whitelist,
+      mode,
+      data_loading,
+      doc,
+      filter_by_gba_plus,
+    } = scheme_state;
 
     const get_subject = this.get_subject_selector();
     const get_icon_counts = this.get_icon_counts_selector();
@@ -148,6 +173,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
       subject: get_subject(state),
       icon_counts: get_icon_counts(state),
       is_status_filter_enabled: !_.isEmpty(status_key_whitelist),
+      filter_by_gba_plus,
     };
   }
 
@@ -162,15 +188,20 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
           result_docs: [doc],
         }).then(() => doc),
       });
+
     const toggle_status_status_key = (key) =>
       dispatch({ type: "status_click", payload: key });
     const clear_status_filter = () => dispatch({ type: "clear_status_filter" });
+
+    const toggle_filter_by_gba_plus = () =>
+      dispatch({ type: "toggle_filter_by_gba_plus" });
 
     return {
       ...super.map_dispatch_to_props(dispatch),
       set_doc,
       toggle_status_status_key,
       clear_status_filter,
+      toggle_filter_by_gba_plus,
     };
   }
 }

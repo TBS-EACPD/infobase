@@ -22,6 +22,7 @@ import {
   LeafSpinner,
   Format,
   TextAbbrev,
+  CheckBox,
 } from "src/components/index";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
@@ -231,6 +232,8 @@ export default class ResultsExplorerDisplay extends React.Component {
       clear_status_filter,
       is_status_filter_enabled,
       status_key_whitelist,
+      filter_by_gba_plus,
+      toggle_filter_by_gba_plus,
     } = this.props;
     const { loading_query, query } = this.state;
 
@@ -280,6 +283,16 @@ export default class ResultsExplorerDisplay extends React.Component {
                 icon_counts={icon_counts}
                 onIconClick={toggle_status_status_key}
                 onClearClick={clear_status_filter}
+              />
+            </div>
+          )}
+          {result_docs[doc].has_gba_plus && ( //GBA_TODO, styles and text finalization
+            <div>
+              <CheckBox
+                id="filter-to-gba-plus-checkbox"
+                label={"TODO filter to GBA+ indicators only"}
+                active={filter_by_gba_plus}
+                onClick={toggle_filter_by_gba_plus}
               />
             </div>
           )}
