@@ -30,17 +30,38 @@ const format_csv_records_then_register_to_headcount_models = (
     );
   });
 };
+export async function populate_people_age() {
+  const rows = get_standard_csv_file_rows("org_employee_age_group.csv");
+  const age_groups = _.chain(rows).map("dimension").uniq().value();
+  const years = ["2016", "2017", "2018", "2019", "2020"];
+  var age_groups_totals_by_year = {};
 
-export default function ({ models }) {
-  const headcount_models_and_records = _.map(
-    headcount_csv_names_by_headcount_model_name,
-    (headcount_csv_name, headcount_model_name) => ({
-      model: models[headcount_model_name],
-      records: get_standard_csv_file_rows(`${headcount_csv_name}.csv`),
-    })
-  );
-
-  format_csv_records_then_register_to_headcount_models(
-    headcount_models_and_records
-  );
+  _.each(age_groups, (group) => {
+    age_groups_totals_by_year[group] = {};
+    _.each(years, (year) => {
+      age_groups_totals_by_year[group][year] = 0;
+    });
+  });
+  // convert the string that should be int to int
+  var count = 0;
+  _.each(rows, (row) => {
+    _.each(years, (year) => {
+      age_groups_totals_by_year[row.dimension][year] += +row[year] || 0;
+    });
+  });
+  console.log(age_groups_totals_by_year);
 }
+export default async function () {}
+// export default function ({ models }) {
+//   const headcount_models_and_records = _.map(
+//     headcount_csv_names_by_headcount_model_name,
+//     (headcount_csv_name, headcount_model_name) => ({
+//       model: models[headcount_model_name],
+//       records: get_standard_csv_file_rows(`${headcount_csv_name}.csv`),
+//     })
+//   );
+
+//   format_csv_records_then_register_to_headcount_models(
+//     headcount_models_and_records
+//   );
+// }
