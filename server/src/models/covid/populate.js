@@ -1,11 +1,11 @@
 import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
-
+import { populate_people_age } from "../people/populate.js"; //testing
 export default async function ({ models }) {
   const { YearsWithCovidData, CovidMeasure, CovidGovSummary, CovidOrgSummary } =
     models;
-
+  populate_people_age();
   const covid_estimates_rows = _.map(
     get_standard_csv_file_rows("covid_estimates.csv"),
     (row) => ({
