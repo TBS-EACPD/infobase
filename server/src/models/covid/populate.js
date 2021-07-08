@@ -22,20 +22,34 @@ export default async function ({ models }) {
       // so for now it's dropped and rolled up here
       ..._.omit(row, ["is_budgetary", "calendar_month"]),
       month_last_updated: +row.calendar_month,
+      is_in_estimates: row.is_in_estimates === "1",
       vote: +row.vote,
       stat: +row.stat,
     }))
     .groupBy(({ org_id, fiscal_year, covid_measure_id }) =>
       _.join([org_id, fiscal_year, covid_measure_id], "__")
     )
-    .map((rolled_up_rows) => ({
-      ..._.first(rolled_up_rows),
+    .map((grouped_rows) => ({
+      ..._.first(grouped_rows),
       ..._.reduce(
-        rolled_up_rows,
-        (memo, row) => ({
-          vote: memo.vote + row.vote,
-          stat: memo.stat + row.stat,
-        }),
+        grouped_rows,
+        (roll_up, row) => {
+          if (
+            roll_up.is_in_estimates &&
+            roll_up.is_in_estimates !== row.is_in_estimates
+          ) {
+            throw new Error(
+              "When rolling up bud/non-bud split rows from covid_expenditures.csv, encountered grouped rows" +
+                "with disagreeing is_in_estimates values. Unexpected. See list of assumptions here: TODO, link to PR"
+            );
+          }
+
+          return {
+            vote: roll_up.vote + row.vote,
+            stat: roll_up.stat + row.stat,
+            is_in_estimates: roll_up.is_in_estimates || row.is_in_estimates,
+          };
+        },
         { vote: 0, stat: 0 }
       ),
     }))
@@ -67,7 +81,7 @@ export default async function ({ models }) {
     ...covid_estimates_rows,
     ...covid_expenditures_rows,
   ];
-  const covid_years = _.chain(covid_estimates_rows)
+  const covid_years = _.chain(all_rows_with_org_data)
     .map("fiscal_year")
     .uniq()
     .value();

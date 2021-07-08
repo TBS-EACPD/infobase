@@ -62,6 +62,8 @@ export default function (model_singleton) {
           {
             org_id: parent_fkey_type(),
 
+            is_in_estimates: Boolean,
+
             ...covid_expenditures_fields,
           },
         ],

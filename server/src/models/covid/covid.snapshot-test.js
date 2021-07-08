@@ -28,6 +28,8 @@ const measure_covid_data = `
       id
       name
     }
+
+    is_in_estimates
   
     ${expenditures_fields}
   }

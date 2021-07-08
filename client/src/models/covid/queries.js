@@ -162,6 +162,9 @@ export const {
   
              covid_expenditures {
                org_id
+
+               is_in_estimates
+               
                ${covid_expenditures_fields}
              }
            }
@@ -201,6 +204,9 @@ export const {
   
               covid_expenditures {
                 org_id
+
+                is_in_estimates
+
                 ${covid_expenditures_fields}
               }
             }

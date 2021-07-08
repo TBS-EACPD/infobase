@@ -9,6 +9,7 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
+  Select,
 } from "src/components/index";
 
 import {
@@ -45,6 +46,86 @@ const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const panel_key = "covid_expenditures_panel";
+
+const measure_filter_options = [
+  {
+    id: "all",
+    display: text_maker("covid_toggle_filter_all"),
+  },
+  { id: "in", display: text_maker("covid_toggle_filter_in") },
+  { id: "out", display: text_maker("covid_toggle_filter_out") },
+];
+const measure_filters = {
+  all: _.identity,
+  in: (data) => _.filter(data, "is_in_estimates"),
+  out: (data) => _.filter(data, ({ is_in_estimates }) => !is_in_estimates),
+};
+class MeasuresFilterControlsProvider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected_measure_filter: _.first(measure_filter_options).id,
+    };
+  }
+  onSelect = (id) =>
+    this.setState({
+      selected_measure_filter: id,
+    });
+  render() {
+    const { selected_measure_filter } = this.state;
+    const { Inner, inner_props } = this.props;
+
+    const id = _.uniqueId();
+    const MeasuresFilterControls = () => (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <label htmlFor={id} className="font-small bold">
+          {text_maker("covid_expenditures_measure_filter")}
+        </label>
+        <Select
+          id={id}
+          onSelect={this.onSelect}
+          selected={selected_measure_filter}
+          options={measure_filter_options}
+        />
+      </div>
+    );
+
+    return (
+      <Inner
+        {...{
+          ...inner_props,
+          selected_measure_filter,
+          MeasuresFilterControls,
+        }}
+      />
+    );
+  }
+}
+const wrap_with_measure_filter_and_vote_stat_controls =
+  (Component) => (props) =>
+    (
+      <MeasuresFilterControlsProvider
+        Inner={wrap_with_vote_stat_controls(Component)}
+        inner_props={props}
+      />
+    );
+const TableControlLayout = ({ children }) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginBottom: "-15px",
+    }}
+  >
+    {children}
+  </div>
+);
 
 const SummaryTab = ({ args: panel_args, data }) => {
   const { gov_covid_expenditures_in_year } = panel_args;
@@ -167,9 +248,24 @@ const get_common_column_configs = (show_vote_stat) => ({
   },
 });
 
-const ByDepartmentTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
-    const pre_sorted_rows = get_expenditures_by_index(data, "org_id");
+const ByDepartmentTab = wrap_with_measure_filter_and_vote_stat_controls(
+  ({
+    selected_measure_filter,
+    MeasuresFilterControls,
+    show_vote_stat,
+    ToggleVoteStat,
+    args: panel_args,
+    data: raw_data,
+  }) => {
+    const rows_by_measure_filter_option = _.chain(raw_data)
+      .thru((data) => _.mapValues(measure_filters, (filter) => filter(data)))
+      .mapValues((data) =>
+        roll_up_flat_measure_data_by_property(data, "org_id")
+      )
+      .mapValues((rolled_up_data) =>
+        get_expenditures_by_index(rolled_up_data, "org_id")
+      )
+      .value();
 
     const column_configs = {
       org_id: {
@@ -200,7 +296,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
     };
 
     const { org_id: largest_dept_id, total_exp: largest_dept_exp } = _.chain(
-      pre_sorted_rows
+      rows_by_measure_filter_option.all
     )
       .sortBy("total_exp")
       .last()
@@ -217,9 +313,12 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           }}
           className="medium-panel-text"
         />
-        <ToggleVoteStat />
+        <TableControlLayout>
+          <MeasuresFilterControls />
+          <ToggleVoteStat />
+        </TableControlLayout>
         <DisplayTable
-          data={pre_sorted_rows}
+          data={rows_by_measure_filter_option[selected_measure_filter]}
           column_configs={column_configs}
           table_name={text_maker("by_department_tab_label")}
           disable_column_select={true}
@@ -230,15 +329,29 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
   }
 );
 
-const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
-    const pre_sorted_rows_with_measure_names = _.chain(
-      get_expenditures_by_index(data, "measure_id")
-    )
-      .map(({ measure_id, ...row }) => ({
-        ...row,
-        measure_name: CovidMeasure.lookup(measure_id).name,
-      }))
+const ByMeasureTab = wrap_with_measure_filter_and_vote_stat_controls(
+  ({
+    selected_measure_filter,
+    MeasuresFilterControls,
+    show_vote_stat,
+    ToggleVoteStat,
+    args: panel_args,
+    data: raw_data,
+  }) => {
+    const rows_by_measure_filter_option = _.chain(raw_data)
+      .thru((data) => _.mapValues(measure_filters, (filter) => filter(data)))
+      .mapValues((data) =>
+        roll_up_flat_measure_data_by_property(data, "measure_id")
+      )
+      .mapValues((rolled_up_data) =>
+        _.map(
+          get_expenditures_by_index(rolled_up_data, "measure_id"),
+          ({ measure_id, ...row }) => ({
+            ...row,
+            measure_name: CovidMeasure.lookup(measure_id).name,
+          })
+        )
+      )
       .value();
 
     const column_configs = {
@@ -254,11 +367,10 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     const {
       measure_name: largest_measure_name,
       total_exp: largest_measure_exp,
-    } = _.chain(pre_sorted_rows_with_measure_names)
+    } = _.chain(rows_by_measure_filter_option.all)
       .sortBy("total_exp")
       .last()
       .value();
-
     const subject_level = panel_args.subject.level;
     const text_args = {
       ...panel_args,
@@ -266,23 +378,26 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       largest_measure_exp,
       ...(subject_level === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
-          data,
+          rows_by_measure_filter_option.all,
           (memo, { vote, stat }) => memo + vote + stat,
           0
         ),
       }),
     };
+
     return (
       <Fragment>
-        {subject_level === "dept"}
         <TM
           k={`covid_expenditures_measure_tab_text_${subject_level}`}
           args={text_args}
           className="medium-panel-text"
         />
-        <ToggleVoteStat />
+        <TableControlLayout>
+          <MeasuresFilterControls />
+          <ToggleVoteStat />
+        </TableControlLayout>
         <DisplayTable
-          data={pre_sorted_rows_with_measure_names}
+          data={rows_by_measure_filter_option[selected_measure_filter]}
           column_configs={column_configs}
           table_name={text_maker("by_measure_tab_label")}
           disable_column_select={true}
@@ -309,28 +424,25 @@ const tab_content_configs = [
     load_data: ({ selected_year }) =>
       query_all_covid_expenditures_by_measure_id({
         fiscal_year: selected_year,
-      }).then((data) => roll_up_flat_measure_data_by_property(data, "org_id")),
+      }),
     TabContent: ByDepartmentTab,
   },
   {
     key: "measure",
     levels: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
-    load_data: ({ subject, selected_year }) =>
-      (() => {
-        if (subject.level === "dept") {
-          return query_org_covid_expenditures_by_measure_id({
-            org_id: String(subject.id),
-            fiscal_year: selected_year,
-          });
-        } else {
-          return query_all_covid_expenditures_by_measure_id({
-            fiscal_year: selected_year,
-          });
-        }
-      })().then((data) =>
-        roll_up_flat_measure_data_by_property(data, "measure_id")
-      ),
+    load_data: ({ subject, selected_year }) => {
+      if (subject.level === "dept") {
+        return query_org_covid_expenditures_by_measure_id({
+          org_id: String(subject.id),
+          fiscal_year: selected_year,
+        });
+      } else {
+        return query_all_covid_expenditures_by_measure_id({
+          fiscal_year: selected_year,
+        });
+      }
+    },
     TabContent: ByMeasureTab,
   },
 ];

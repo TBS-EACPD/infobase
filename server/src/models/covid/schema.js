@@ -64,6 +64,8 @@ const schema = `
     org_id: String
     org: Org
 
+    is_in_estimates: Boolean
+
     ${expenditures_fields}
   }
 
