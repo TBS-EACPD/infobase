@@ -1,5 +1,6 @@
 import _ from "lodash";
 import React from "react";
+import "./metadata.scss";
 
 import {
   create_text_maker_component,
