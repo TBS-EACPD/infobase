@@ -12,14 +12,14 @@ type CardListProps = React.ComponentProps<typeof CardList>;
 
 const Template: Story<CardListProps> = (args) => <CardList {...args} />;
 
-const elements = [
+const elements: CardListElementProps[] = [
   {
     display: "Non-link Title",
     href: "#",
     children: [
-      { display: "Non-link Title 1" },
-      { display: "Non-link Title 2" },
-      { display: "Non-link Title 3" },
+      { display: "Non-link Title 1", href: "" },
+      { display: "Non-link Title 2", href: "" },
+      { display: "Non-link Title 3", href: "" },
     ],
   },
   {
@@ -31,7 +31,7 @@ const elements = [
       { display: "Href 3", href: "#" },
     ],
   },
-] as unknown as CardListElementProps[];
+];
 
 export const Basic = Template.bind({});
 Basic.args = {
