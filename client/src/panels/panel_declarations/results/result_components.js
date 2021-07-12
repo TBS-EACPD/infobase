@@ -7,7 +7,7 @@ import {
   AlertBanner,
 } from "src/components/index";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import * as general_utils from "src/general_utils";
 
@@ -17,6 +17,7 @@ import {
   IconNotApplicable,
   IconClock,
 } from "src/icons/icons";
+import { get_static_url } from "src/request_utils";
 
 import { TM, text_maker } from "./result_text_provider";
 
@@ -74,12 +75,20 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
       <dl className="dl-horizontal indicator-item__dl">
         <dt>
           <TM k="indicator" />
-        </dt>
-        <dd>
-          {indicator.name}
+          {
+            result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
+              <GBAPlusBadge />
+            )
+            //<img
+            //  alt={text_maker("gba_plus_indicator")}
+            //  src={get_static_url(`png/gba-plus-${lang}.png`)}
+            //  style={{ width: "90%" }}
+            ///>
+          }
           {should_display_new_status &&
             _.isNull(indicator.previous_year_target_type) && <NewBadge />}
-        </dd>
+        </dt>
+        <dd>{indicator.name}</dd>
 
         {show_doc && (
           <Fragment>
@@ -90,26 +99,6 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
               {`${result_docs[indicator.doc].year} ${
                 is_drr ? text_maker("drr_report") : text_maker("dp_report")
               }`}
-            </dd>
-          </Fragment>
-        )}
-
-        {result_docs[indicator.doc].has_gba_plus && (
-          <Fragment>
-            <dt>
-              <TM k="gba_plus_flag" />
-            </dt>
-            <dd>
-              {(() => {
-                switch (indicator.gba_plus) {
-                  case true:
-                    return text_maker("yes");
-                  case false:
-                    return text_maker("no");
-                  default:
-                    return text_maker("not_applicable");
-                }
-              })()}
             </dd>
           </Fragment>
         )}
@@ -442,6 +431,11 @@ function indicators_period_span_str(indicators) {
 
 const NewBadge = () => (
   <span className="badge badge--is-new-indicator">{text_maker("new")}</span>
+);
+const GBAPlusBadge = () => (
+  <span className="badge badge--is-gba-plus-indicator">
+    {text_maker("gba_plus_indicator")}
+  </span>
 );
 
 const LateDepartmentsBanner = ({ late_dept_count }) => (
