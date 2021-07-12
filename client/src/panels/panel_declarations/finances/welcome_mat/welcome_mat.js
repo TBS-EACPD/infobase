@@ -138,6 +138,7 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
               formatted amount 
           ...
         .mat-grid__lg-panel40.mat-grid__sm-panel
+        // x-small will no longer work since it will be deleted in extended_bootstrap_css
           .welcome-mat-rect.font-xsmall
 
 
