@@ -1,5 +1,5 @@
-import { Story, Meta } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
+import { Story, Meta } from "@storybook/react";
 import React, { Fragment } from "react";
 
 import { FocusLockedModal } from "./FocusLockedModal";
