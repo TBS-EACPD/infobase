@@ -30,27 +30,110 @@ const format_csv_records_then_register_to_headcount_models = (
     );
   });
 };
-export async function populate_people_age() {
-  const rows = get_standard_csv_file_rows("org_employee_age_group.csv");
-  const age_groups = _.chain(rows).map("dimension").uniq().value();
-  const years = ["2016", "2017", "2018", "2019", "2020"];
-  var age_groups_totals_by_year = {};
+export default async function ({ models }) {
+  const { EmployeeAgeGroup } = models;
 
-  _.each(age_groups, (group) => {
-    age_groups_totals_by_year[group] = {};
-    _.each(years, (year) => {
-      age_groups_totals_by_year[group][year] = 0;
-    });
-  });
-  // convert the string that should be int to int
-  _.each(rows, (row) => {
-    _.each(years, (year) => {
-      age_groups_totals_by_year[row.dimension][year] += +row[year] || 0;
-    });
-  });
-  console.log(age_groups_totals_by_year);
+  const employee_age_rows = _.chain(
+    get_standard_csv_file_rows("org_employee_age_group.csv")
+  )
+    .reject(["dept_code", "ZGOC"])
+    .map((row) => ({
+      ...row,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+      avg_share: +row.avg_share,
+    }))
+    .value();
+
+  const employee_avg_age_rows = _.map(
+    get_standard_csv_file_rows("org_employee_avg_age.csv"),
+    (row) => ({
+      dept_code: row.dept_code,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+    })
+  );
+
+  const employee_ex_lvl_rows = _.chain(
+    get_standard_csv_file_rows("org_employee_ex_lvl.csv")
+  )
+    .reject(["dept_code", "ZGOC"])
+    .map((row) => ({
+      ...row,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+      avg_share: +row.avg_share,
+    }))
+    .value();
+
+  const first_official_language_rows = _.chain(
+    get_standard_csv_file_rows("org_employee_fol.csv")
+  )
+    .reject(["dept_code", "ZGOC"])
+    .map((row) => ({
+      ...row,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+      avg_share: +row.avg_share,
+    }))
+    .value();
+
+  const employee_gender_rows = _.chain(
+    get_standard_csv_file_rows("org_employee_gender.csv")
+  )
+    .reject(["dept_code", "ZGOC"])
+    .map((row) => ({
+      ...row,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+    }))
+    .value();
+
+  const employee_region_rows = _.chain(
+    get_standard_csv_file_rows("org_employee_region.csv")
+  )
+    .reject(["dept_code", "ZGOC"])
+    .map((row) => ({
+      ...row,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+      avg_share: +row.avg_share,
+    }))
+    .value();
+
+  const employee_type_rows = _.chain(
+    get_standard_csv_file_rows("org_employee_type.csv")
+  )
+    .reject(["dept_code", "ZGOC"])
+    .map((row) => ({
+      ...row,
+      2016: +row[2016],
+      2017: +row[2017],
+      2018: +row[2018],
+      2019: +row[2019],
+      2020: +row[2020],
+      avg_share: +row.avg_share,
+    }))
+    .value();
 }
-export default async function () {}
 // export default function ({ models }) {
 //   const headcount_models_and_records = _.map(
 //     headcount_csv_names_by_headcount_model_name,

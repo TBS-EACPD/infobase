@@ -5,13 +5,13 @@ import core_subject from "./core_subject/index.js";
 import covid from "./covid/index.js";
 import resources from "./finances/index.js";
 import model_singleton from "./model_singleton.js";
+import people from "./people/index.js";
 import results from "./results/index.js";
 import root_schema from "./schema_root.js";
 import services from "./services/index.js";
 
 // unused models, mostly still using the pre-mongoDB approach
 // import sobjs from './standard_objects/index.js';
-// import people from './people/index.js';
 // import search from './search/index.js';
 // import vote_stat from './vote_stat/index.js';
 // import transfer_payments from './transfer_payments/index.js';
@@ -27,7 +27,7 @@ const sub_module_defs = _.compact([
   // pses,
   // sobjs,
   // search,
-  // people,
+  people,
   // vote_stat,
   // transfer_payments,
   // transfer_payments_loc,
