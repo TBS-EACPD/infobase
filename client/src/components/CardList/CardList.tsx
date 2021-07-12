@@ -6,7 +6,7 @@ interface CardListElementChildProps {
   href: string;
 }
 
-interface CardListElementProps {
+export interface CardListElementProps {
   display: string | React.ReactNode;
   href: string;
   children: CardListElementChildProps[];
