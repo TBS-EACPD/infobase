@@ -3,7 +3,7 @@ import React from "react";
 
 interface CardListElementChildProps {
   display: string | React.ReactNode;
-  href: string;
+  href?: string;
 }
 
 export interface CardListElementProps {
