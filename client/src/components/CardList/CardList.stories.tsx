@@ -17,9 +17,9 @@ const elements: CardListElementProps[] = [
     display: "Non-link Title",
     href: "#",
     children: [
-      { display: "Non-link Title 1", href: "" },
-      { display: "Non-link Title 2", href: "" },
-      { display: "Non-link Title 3", href: "" },
+      { display: "Non-link Title 1" },
+      { display: "Non-link Title 2" },
+      { display: "Non-link Title 3" },
     ],
   },
   {
