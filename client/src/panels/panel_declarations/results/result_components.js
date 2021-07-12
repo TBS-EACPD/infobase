@@ -75,16 +75,10 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
       <dl className="dl-horizontal indicator-item__dl">
         <dt>
           <TM k="indicator" />
-          {
-            result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
-              <GBAPlusBadge />
-            )
-            //<img
-            //  alt={text_maker("gba_plus_indicator")}
-            //  src={get_static_url(`png/gba-plus-${lang}.png`)}
-            //  style={{ width: "90%" }}
-            ///>
-          }
+          <br />
+          {result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
+            <GBAPlusBadge />
+          )}
           {should_display_new_status &&
             _.isNull(indicator.previous_year_target_type) && <NewBadge />}
         </dt>
@@ -432,11 +426,18 @@ function indicators_period_span_str(indicators) {
 const NewBadge = () => (
   <span className="badge badge--is-new-indicator">{text_maker("new")}</span>
 );
-const GBAPlusBadge = () => (
-  <span className="badge badge--is-gba-plus-indicator">
-    {text_maker("gba_plus_indicator")}
-  </span>
-);
+const GBAPlusBadge = ({ use_icon }) =>
+  use_icon ? (
+    <img
+      alt={text_maker("gba_plus_indicator")}
+      src={get_static_url(`png/gba-plus-${lang}.png`)}
+      style={{ width: "90%" }}
+    />
+  ) : (
+    <span className="badge badge--is-gba-plus-indicator">
+      {text_maker("gba_plus_indicator")}
+    </span>
+  );
 
 const LateDepartmentsBanner = ({ late_dept_count }) => (
   <AlertBanner style={{ textAlign: "center" }}>
