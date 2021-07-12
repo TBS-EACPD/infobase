@@ -46,7 +46,12 @@ const data = [
 
 const filter = (
   query: string,
-  datum: Record<string, string | JSX.Element | ((...args: any[]) => void)>
+  datum: Record<
+    string,
+    | string
+    | JSX.Element
+    | ((...args: (React.ReactNode | string | (() => void))[]) => void)
+  >
 ) => _.includes(_.lowerCase(datum.title as string), _.lowerCase(query));
 
 interface TypeaheadWrapperProps {
