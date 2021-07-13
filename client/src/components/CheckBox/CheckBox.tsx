@@ -16,11 +16,11 @@ export interface CheckBoxProps {
   label: string; // required text for checkbox
   active?: boolean; // required, equivalent of 'checked'
   color?: string; // defaults to primaryColor
-  isSolidBox: boolean; // defaults to false
+  isSolidBox?: boolean; // defaults to false
   container_style?: React.CSSProperties; // style for div, containing checkbox and label
   checkbox_style?: React.CSSProperties; // style for checkbox
   label_style?: React.CSSProperties; // style for label
-  checkmark_vertical_align: number; // defaults to 0.1
+  checkmark_vertical_align?: number; // defaults to 0.1
 }
 
 export class CheckBox extends React.Component<CheckBoxProps> {

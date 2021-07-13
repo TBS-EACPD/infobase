@@ -11,10 +11,10 @@ import "./CountdownCircle.scss";
 
 interface CountdownCircleProps {
   time: number;
-  size: string;
-  color: string;
-  stroke_width: string;
-  show_numbers: boolean;
+  size?: string;
+  color?: string;
+  stroke_width?: string;
+  show_numbers?: boolean;
   on_end_callback: () => void;
 }
 interface CountdownCircleState {
