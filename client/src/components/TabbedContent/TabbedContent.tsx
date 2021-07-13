@@ -16,7 +16,7 @@ type tab_option = {
 interface TabbedControlsProps {
   tab_options: tab_option[];
   tab_callback: (key: string) => void;
-  disabled_message: string;
+  disabled_message?: string;
 }
 interface TabbedContentProps {
   tab_keys: string[];
