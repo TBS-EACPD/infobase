@@ -24,11 +24,6 @@ export interface CheckBoxProps {
 }
 
 export class CheckBox extends React.Component<CheckBoxProps> {
-  static defaultProps = {
-    isSolidBox: false,
-    color: primaryColor,
-    checkmark_vertical_align: 0.1,
-  };
   handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
@@ -41,12 +36,12 @@ export class CheckBox extends React.Component<CheckBoxProps> {
       label,
       active,
       onClick,
-      color,
-      isSolidBox,
+      color = primaryColor,
+      isSolidBox = false,
       container_style,
       checkbox_style,
       label_style,
-      checkmark_vertical_align,
+      checkmark_vertical_align = 0.1,
       disabled,
     } = this.props;
     if (!isSolidBox && (_.isUndefined(active) || !onClick)) {
