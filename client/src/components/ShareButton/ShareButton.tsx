@@ -69,10 +69,9 @@ export class ShareButton extends React.Component<
       url,
       button_class_name,
       title,
-      button_description,
-
-      icon_color,
-      icon_alternate_color,
+      button_description = text_maker("share"),
+      icon_color = textLightColor,
+      icon_alternate_color = false,
       icon_size,
     } = this.props;
 
@@ -155,9 +154,4 @@ export class ShareButton extends React.Component<
       </Fragment>
     );
   }
-  static defaultProps = {
-    button_description: text_maker("share"),
-    icon_color: textLightColor,
-    icon_alternate_color: false,
-  };
 }
