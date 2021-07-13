@@ -115,28 +115,27 @@ jobs:
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     environment:
-      CYPRESS_CACHE_FOLDER: "~/InfoBase/.cache/Cypress"
+      CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
     steps:
       - checkout:
           path: "~/InfoBase"
 
       - restore_cache:
           keys:
-            - top-level-dependencies-{{ checksum "package-lock.json" }}-v3
+            - top-level-dependencies-{{ checksum "package-lock.json" }}-v4
       - run:
           command: |
             [ -e "node_modules" ] ||  npm ci
       - save_cache:
           paths:
             - node_modules
-            - ./.cache
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v3
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v4
 
       - run: ./scripts/ci_scripts/create_envs.sh
 
       - restore_cache:
           keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}-v2
+            - client-dependencies-{{ checksum "client/package-lock.json" }}-v3
       - run:
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
@@ -144,7 +143,8 @@ jobs:
           paths:
             - client/node_modules
             - scripts/common_node_scripts/node_modules
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}-v2
+            - client/.cache
+          key: client-dependencies-{{ checksum "client/package-lock.json" }}-v3
 
       - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
@@ -206,22 +206,20 @@ jobs:
             - ./node_modules
             - ./scripts
 
-            - ./.cache/Cypress
-
             - ./data
             - ./test-data
             - ./package.json
             - ./.prettierignore
             - ./prettier.config.cjs
-            - ./cypress.json
-
-            - ./cypress
 
             - ./client/build
             - ./client/browser-tests
             - ./client/deploy_scripts
             - ./client/node_modules
             - ./client/package.json
+            - ./client/.cache
+            - ./client/cypress.json
+            - ./client/cypress
 
             - ./server/src
             - ./server/transpiled_build
@@ -298,7 +296,7 @@ jobs:
           command: (cd client && npm run ci_serve)
           background: true
       #- run: (cd client && npm run ci_route_load_tests)
-      - run: npm run cypress:run
+      - run: (cd client && npm run cypress:run)
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test

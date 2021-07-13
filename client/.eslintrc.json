@@ -4,7 +4,8 @@
     "../.eslintrc.json",
     "plugin:import/typescript",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:cypress/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "env": {
