@@ -15,7 +15,7 @@ interface StatelessModalProps {
   body: React.ReactNode;
   footer?: React.ReactNode;
   close_text?: string;
-  include_close_button_in_header: boolean;
+  include_close_button_in_header?: boolean;
   additional_dialog_class_name?: string;
 }
 
