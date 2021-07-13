@@ -75,14 +75,16 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
       <dl className="dl-horizontal indicator-item__dl">
         <dt>
           <TM k="indicator" />
+        </dt>
+        <dd>
+          {indicator.name}
           <br />
-          {result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
-            <GBAPlusBadge />
-          )}
           {should_display_new_status &&
             _.isNull(indicator.previous_year_target_type) && <NewBadge />}
-        </dt>
-        <dd>{indicator.name}</dd>
+          {result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
+            <GBAPlusBadge use_icon={false} />
+          )}
+        </dd>
 
         {show_doc && (
           <Fragment>
@@ -431,7 +433,7 @@ const GBAPlusBadge = ({ use_icon }) =>
     <img
       alt={text_maker("gba_plus_indicator")}
       src={get_static_url(`png/gba-plus-${lang}.png`)}
-      style={{ width: "90%" }}
+      style={{ width: "130px", marginLeft: "5px" }}
     />
   ) : (
     <span className="badge badge--is-gba-plus-indicator">
