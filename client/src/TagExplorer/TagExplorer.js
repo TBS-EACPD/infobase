@@ -14,6 +14,8 @@ import { ResourceScheme } from "./resource_scheme";
 
 import { text_maker, TM, route_arg_to_year_map, planning_year } from "./utils";
 
+import "./TagExplorer.scss";
+
 import "src/explorer_common/explorer-styles.scss";
 
 class ExplorerContainer extends React.Component {
