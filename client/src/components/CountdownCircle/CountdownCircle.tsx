@@ -44,10 +44,10 @@ export class CountdownCircle extends React.Component<
   render() {
     const {
       time, // in ms
-      size,
-      color,
-      stroke_width,
-      show_numbers,
+      size = "3em",
+      color = buttonPrimaryColor,
+      stroke_width = "2px",
+      show_numbers = false,
       on_end_callback,
     } = this.props;
     const { countdown_circle_instance_id } = this.state;
@@ -129,10 +129,4 @@ export class CountdownCircle extends React.Component<
       </div>
     );
   }
-  static defaultProps = {
-    size: "3em",
-    color: buttonPrimaryColor,
-    stroke_width: "2px",
-    show_numbers: false,
-  };
 }
