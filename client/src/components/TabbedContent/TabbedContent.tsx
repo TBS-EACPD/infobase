@@ -30,14 +30,15 @@ interface TabbedContentState {
 }
 
 export class TabbedControls extends React.Component<TabbedControlsProps> {
-  static defaultProps = {
-    disabled_message: {
-      en: "Unavailable",
-      fr: "Indisponible",
-    }[lang],
-  };
   render() {
-    const { tab_options, tab_callback, disabled_message } = this.props;
+    const {
+      tab_options,
+      tab_callback,
+      disabled_message = {
+        en: "Unavailable",
+        fr: "Indisponsible",
+      }[lang],
+    } = this.props;
 
     return (
       <div className="tabbed-controls">
@@ -87,9 +88,6 @@ export class TabbedContent extends React.Component<
   TabbedContentProps,
   TabbedContentState
 > {
-  static defaultProps = {
-    disabled_tabs: [],
-  };
   constructor(props: TabbedContentProps) {
     super(props);
     this.state = {
@@ -101,7 +99,7 @@ export class TabbedContent extends React.Component<
       tab_keys,
       tab_labels,
       tab_pane_contents,
-      disabled_tabs,
+      disabled_tabs = [],
       disabled_message,
     } = this.props;
 
