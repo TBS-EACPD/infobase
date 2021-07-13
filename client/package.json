@@ -35,7 +35,9 @@
     "storybook": "STORYBOOK_A11Y=\"false\" start-storybook -p 6006",
     "storybook-a11y": "STORYBOOK_A11Y=\"true\" start-storybook -p 6007",
     "build-storybook": "STORYBOOK_A11Y=\"false\" build-storybook",
-    "build-storybook-a11y": "STORYBOOK_A11Y=\"true\" build-storybook"
+    "build-storybook-a11y": "STORYBOOK_A11Y=\"true\" build-storybook",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
@@ -49,11 +51,14 @@
     "@nivo/line": "^0.72.0",
     "@nivo/pie": "^0.72.0",
     "@nivo/treemap": "^0.72.0",
+    "axe-core": "^4.3.1",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
     "clipboard-polyfill": "^2.8.1",
     "connected-react-router": "^6.5.0",
     "crypto-browserify": "^3.12.0",
+    "cypress": "^6.9.1",
+    "cypress-axe": "^0.12.2",
     "d3-array": "^1.2.4",
     "d3-collection": "^1.0.7",
     "d3-color": "^2.0.0",

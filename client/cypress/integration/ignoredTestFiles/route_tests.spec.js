@@ -1,6 +1,6 @@
-const {
-  route_load_tests_config,
-} = require("../../fixtures/route-load-tests-config");
+const { route_load_tests_config } = import(
+  "../../fixtures/route-load-tests-config"
+);
 
 function terminalLog(violations) {
   cy.task(
