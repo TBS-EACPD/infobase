@@ -20,10 +20,6 @@ interface StatelessModalProps {
 }
 
 export class StatelessModal extends React.Component<StatelessModalProps> {
-  static defaultProps = {
-    close_text: _.upperFirst(trivial_text_maker("close")),
-    include_close_button_in_header: false,
-  };
   componentWillUnmount() {
     this.closeModal();
   }
@@ -38,8 +34,8 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
       header,
       body,
       footer,
-      close_text,
-      include_close_button_in_header,
+      close_text = _.upperFirst(trivial_text_maker("close")),
+      include_close_button_in_header = false,
       additional_dialog_class_name,
     } = this.props;
 
