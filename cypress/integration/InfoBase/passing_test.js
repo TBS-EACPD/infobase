@@ -19,15 +19,23 @@ function terminalLog(violations) {
 }
 
 describe("Passing test", () => {
+  beforeEach(() => {
+    Cypress.automation("remote:debugger:protocol", {
+      command: "Network.enable",
+      params: {},
+    });
+    Cypress.automation("remote:debugger:protocol", {
+      command: "Network.setCacheDisabled",
+      params: { cacheDisabled: true },
+    });
+  });
+
   it("Should pass", () => {
-    cy.visit("http://localhost:8080/build/InfoBase/index-eng.html");
-    cy.injectAxe();
-    cy.get('[href="#glossary"]').click();
-    cy.url().should(
-      "eq",
-      "http://localhost:8080/build/InfoBase/index-eng.html#glossary"
+    cy.intercept("/graphql?*").as("graphql");
+    cy.visit(
+      "http://localhost:8080/build/InfoBase/index-eng.html#orgs/gov/gov/infograph/covid"
     );
-    cy.get(".leaf-spinner-inner-circle").should("not.exist");
-    cy.checkA11y(null, null, terminalLog, true);
+    cy.wait("@graphql");
+    cy.get(".leaf-spinner__inner-circle").should("not.exist");
   });
 });
