@@ -3,8 +3,7 @@
   "extends": [
     "../.eslintrc.json",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:cypress/recommended"
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "env": {
