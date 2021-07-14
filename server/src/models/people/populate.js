@@ -31,108 +31,66 @@ const format_csv_records_then_register_to_headcount_models = (
   });
 };
 export default async function ({ models }) {
-  const { EmployeeAgeGroup } = models;
+  const {
+    EmployeeAgeGroup,
+    EmployeeAvgAge,
+    EmployeeExLvl,
+    EmployeeFirstOfficialLang,
+    EmployeeGender,
+    EmployeeRegion,
+    EmployeeType,
+  } = models;
 
-  const employee_age_rows = _.chain(
-    get_standard_csv_file_rows("org_employee_age_group.csv")
-  )
-    .reject(["dept_code", "ZGOC"])
-    .map((row) => ({
-      ...row,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-      avg_share: +row.avg_share,
-    }))
-    .value();
+  let employee_age_rows,
+    employee_avg_age_rows,
+    employee_ex_lvl_rows,
+    employee_fol_rows,
+    employee_gender_rows,
+    employee_region_rows,
+    employee_type_rows;
+  const process_employee_csv = (csv_name) =>
+    _.chain(get_standard_csv_file_rows(csv_name))
+      .reject(["dept_code", "ZGOC"])
+      .map(({ dept_code, dimension, ...data_columns }) => ({
+        dept_code,
+        dimension,
+        ..._.mapValues(data_columns, _.toNumber),
+      }))
+      .value();
+  try {
+    employee_age_rows = process_employee_csv("org_employee_age_group.csv");
 
-  const employee_avg_age_rows = _.map(
-    get_standard_csv_file_rows("org_employee_avg_age.csv"),
-    (row) => ({
-      dept_code: row.dept_code,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-    })
-  );
+    employee_avg_age_rows = _.chain(
+      get_standard_csv_file_rows("org_employee_avg_age.csv")
+    )
+      .map(({ dept_code, dimension, ...data_columns }) => ({
+        dept_code,
+        ..._.mapValues(data_columns, _.toNumber),
+      }))
+      .value();
 
-  const employee_ex_lvl_rows = _.chain(
-    get_standard_csv_file_rows("org_employee_ex_lvl.csv")
-  )
-    .reject(["dept_code", "ZGOC"])
-    .map((row) => ({
-      ...row,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-      avg_share: +row.avg_share,
-    }))
-    .value();
+    employee_ex_lvl_rows = process_employee_csv("org_employee_ex_lvl.csv");
 
-  const first_official_language_rows = _.chain(
-    get_standard_csv_file_rows("org_employee_fol.csv")
-  )
-    .reject(["dept_code", "ZGOC"])
-    .map((row) => ({
-      ...row,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-      avg_share: +row.avg_share,
-    }))
-    .value();
+    employee_fol_rows = process_employee_csv("org_employee_fol.csv");
 
-  const employee_gender_rows = _.chain(
-    get_standard_csv_file_rows("org_employee_gender.csv")
-  )
-    .reject(["dept_code", "ZGOC"])
-    .map((row) => ({
-      ...row,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-    }))
-    .value();
+    employee_gender_rows = process_employee_csv("org_employee_gender.csv");
 
-  const employee_region_rows = _.chain(
-    get_standard_csv_file_rows("org_employee_region.csv")
-  )
-    .reject(["dept_code", "ZGOC"])
-    .map((row) => ({
-      ...row,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-      avg_share: +row.avg_share,
-    }))
-    .value();
+    employee_region_rows = process_employee_csv("org_emplyee_region.csv");
 
-  const employee_type_rows = _.chain(
-    get_standard_csv_file_rows("org_employee_type.csv")
-  )
-    .reject(["dept_code", "ZGOC"])
-    .map((row) => ({
-      ...row,
-      2016: +row[2016],
-      2017: +row[2017],
-      2018: +row[2018],
-      2019: +row[2019],
-      2020: +row[2020],
-      avg_share: +row.avg_share,
-    }))
-    .value();
+    employee_type_rows = process_employee_csv("org_employee_type.csv");
+  } catch (err) {
+    console.log(err);
+  }
+
+  return await Promise.all([
+    EmployeeAgeGroup.insertMany(employee_age_rows),
+    EmployeeAvgAge.insertMany(employee_avg_age_rows),
+    EmployeeExLvl.insertMany(employee_ex_lvl_rows),
+    EmployeeFirstOfficialLang.insertMany(employee_fol_rows),
+    EmployeeGender.insertMany(employee_gender_rows),
+    EmployeeRegion.insertMany(employee_region_rows),
+    EmployeeType.insertMany(employee_type_rows),
+  ]);
 }
 // export default function ({ models }) {
 //   const headcount_models_and_records = _.map(
