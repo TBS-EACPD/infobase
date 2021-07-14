@@ -13,11 +13,11 @@ type tab_option = {
   is_disabled: boolean;
 };
 
-interface TabbedControlsProps {
+type TabbedControlsProps = typeof TabbedControls.defaultProps & {
   tab_options: tab_option[];
   tab_callback: (key: string) => void;
   disabled_message?: string;
-}
+};
 interface TabbedContentProps {
   tab_keys: string[];
   tab_labels: { [key: string]: string };
@@ -30,15 +30,14 @@ interface TabbedContentState {
 }
 
 export class TabbedControls extends React.Component<TabbedControlsProps> {
+  static defaultProps = {
+    disabled_message: {
+      en: "Unavailable",
+      fr: "Indisponsible",
+    }[lang],
+  };
   render() {
-    const {
-      tab_options,
-      tab_callback,
-      disabled_message = {
-        en: "Unavailable",
-        fr: "Indisponsible",
-      }[lang],
-    } = this.props;
+    const { tab_options, tab_callback, disabled_message } = this.props;
 
     return (
       <div className="tabbed-controls">
