@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 
-import { FAQPanel } from "src/components/index";
+// import { FAQPanel } from "src/components/index";
 
 import { create_text_maker } from "src/models/text";
 
-import { primaryColor } from "src/core/color_defs";
+// import { primaryColor } from "src/core/color_defs";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
@@ -16,7 +16,7 @@ export class TreeMapInstructions extends React.Component {
     super();
   }
   render() {
-    const q_a_keys = ["treemap_question"];
+    // const q_a_keys = ["treemap_question"];
 
     return (
       <Fragment>
@@ -30,10 +30,10 @@ export class TreeMapInstructions extends React.Component {
             />
           </div>
         </div>
-        <FAQPanel
+        {/* <FAQPanel
           rendered_q_a_keys={q_a_keys}
           background_color={primaryColor}
-        />
+        /> */}
       </Fragment>
     );
   }
