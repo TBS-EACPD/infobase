@@ -30,12 +30,11 @@ describe("Passing test", () => {
     });
   });
 
+  //Simple test for updated docker image
   it("Should pass", () => {
     cy.intercept("/graphql?*").as("graphql");
     cy.visit(
       "http://localhost:8080/build/InfoBase/index-eng.html#orgs/gov/gov/infograph/covid"
     );
-    cy.wait("@graphql");
-    cy.get(".leaf-spinner__inner-circle").should("not.exist");
   });
 });
