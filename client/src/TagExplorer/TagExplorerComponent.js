@@ -237,7 +237,13 @@ export default class TagExplorerComponent extends React.Component {
       </div>
     );
 
-    const q_a_keys = ["tag_question"];
+    const q_a_keys = [
+      "what_is_tagging",
+      "what_is_prog_tagging",
+      "what_tags_are_available",
+      "what_are_how_we_help",
+      "what_are_CR",
+    ];
 
     return (
       <div>
