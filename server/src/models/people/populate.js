@@ -75,7 +75,7 @@ export default async function ({ models }) {
 
     employee_gender_rows = process_employee_csv("org_employee_gender.csv");
 
-    employee_region_rows = process_employee_csv("org_emplyee_region.csv");
+    employee_region_rows = process_employee_csv("org_employee_region.csv");
 
     employee_type_rows = process_employee_csv("org_employee_type.csv");
   } catch (err) {
