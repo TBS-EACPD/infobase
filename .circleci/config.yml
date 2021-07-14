@@ -272,7 +272,7 @@ jobs:
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     environment:
-      CYPRESS_CACHE_FOLDER: "~/InfoBase/.cache/Cypress"
+      CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
     steps:
       - attach_workspace:
           at: ./
