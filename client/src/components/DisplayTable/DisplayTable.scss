@@ -63,10 +63,6 @@ table.display-table > thead > tr {
 
     color: $textLightColor;
 
-    &.center-text {
-      vertical-align: middle;
-    }
-
     & > .search {
       width: 100%;
       font-weight: $lightFontWeight;
