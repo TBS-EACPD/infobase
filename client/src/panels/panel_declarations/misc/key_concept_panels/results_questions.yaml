@@ -61,18 +61,6 @@ what_is_a_drf_a:
     * les résultats que le ministère cherche à obtenir (c.-à-d. les Résultats Ministériels);
     * la manière dont les progrès seront évalués (c.-à-d. les Indicateurs des Résultats Ministériels).
 
-what_is_a_cr_q:
-  en: What is a Core Responsibility?
-  fr: Qu’est-ce qu’une responsabilité essentielle?
-
-
-what_is_a_cr_a:
-  transform: [handlebars, markdown]
-  en: |
-    Core responsibilities describe the areas in which the department acts or has authority to operate on behalf of Canadians. A Core Responsibility corresponds to a department’s enduring function or role.
-  fr: |
-    Les responsabilités essentielles décrivent les domaines de haut niveau à l’intérieur desquels l’organisation agit ou pour lesquels elle a le pouvoir de mener ses activités au nom des Canadiens. Une responsabilité essentielle correspond à une fonction ou au rôle permanent exercé par un ministère.
-
 how_do_orgs_measure_perf_q:
   en: How do organizations measure performance?
   fr: Comment les organisations mesurent-elles le rendement?
