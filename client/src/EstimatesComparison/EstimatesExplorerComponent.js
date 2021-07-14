@@ -185,10 +185,11 @@ export default class EstimatesExplorerComponent extends React.Component {
     };
 
     const q_a_keys = [
-      "how_do_estimates_work",
-      "diff_between_stat_vote",
-      "how_to_use",
-      "question_4",
+      "what_are_mains",
+      "what_are_supps",
+      "what_are_voted_auth",
+      "what_are_stat_auth",
+      "different_org_names",
     ];
 
     return (
