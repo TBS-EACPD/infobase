@@ -20,22 +20,22 @@ import "./FixedPopover.scss";
 // FixedPopover should stop hacking over top of Bootstrap's Modal sooner rather than later too.
 // (TODO, but likely only after we've updated to Bootstrap 4)
 
-interface FixedPopoverProps {
+type FixedPopoverProps = {
   show: boolean;
   title: string;
   body: string;
   header: string;
   subtitle: string;
   footer: string;
-  close_text: string;
   restore_focus: boolean;
-  close_button_in_header: boolean;
-  max_body_height: string;
-  auto_close_time: number;
-  dialog_position: string;
   additional_dialog_class: string;
+  dialog_position: string;
+  close_text: string;
+  close_button_in_header: boolean;
   on_close_callback: () => void;
-}
+  max_body_height: string;
+  auto_close_time?: number;
+} & typeof FixedPopover.defaultProps;
 
 type FixedPopoverState = {
   timeout_stopped: boolean;
@@ -45,6 +45,16 @@ export class FixedPopover extends React.Component<
   FixedPopoverProps,
   FixedPopoverState
 > {
+  static defaultProps = {
+    dialog_position: "left",
+    close_text: _.upperFirst(trivial_text_maker("close")),
+    close_button_in_header: false,
+    on_close_callback: _.noop,
+
+    // if the popup gets too tall, it will be cut-off (and possibly non-interactable for it) on mobile
+    // 40vh is a bit arbitrary as a default, but leaves room for long header/footer content
+    max_body_height: "40vh",
+  };
   constructor(props: FixedPopoverProps) {
     super(props);
 
@@ -67,28 +77,24 @@ export class FixedPopover extends React.Component<
     document.body.classList.remove("modal-open--allow-scroll");
     this.setState({ timeout_stopped: false });
 
-    const { on_close_callback = _.noop } = this.props;
-
-    on_close_callback();
+    this.props.on_close_callback();
   };
 
   render() {
     const {
-      // if the popup gets too tall, it will be cut-off (and possibly non-interactable for it) on mobile
-      // 40vh is a bit arbitrary as a default, but leaves room for long header/footer content
-      max_body_height = "40vh",
+      max_body_height,
       show,
       title,
       subtitle,
       header,
       body,
       footer,
-      dialog_position = "left",
+      dialog_position,
       additional_dialog_class,
-      auto_close_time = false,
-      close_text = _.upperFirst(trivial_text_maker("close")),
-      close_button_in_header = false,
+      close_text,
+      close_button_in_header,
       restore_focus,
+      auto_close_time,
     } = this.props;
 
     const { timeout_stopped } = this.state;
@@ -114,7 +120,7 @@ export class FixedPopover extends React.Component<
           height: "3em",
         }}
       >
-        {auto_close_time && !timeout_stopped && (
+        {typeof auto_close_time === "number" && !timeout_stopped && (
           <CountdownCircle
             time={auto_close_time}
             show_numbers={auto_close_time >= 2000}
