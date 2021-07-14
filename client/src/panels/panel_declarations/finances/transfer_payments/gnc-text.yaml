@@ -93,7 +93,7 @@ historical_g_and_c_custom_new_row:
   text: |
     <div class='panel-separator'></div>
     <div aria-hidden='true'>
-      <div style='padding-bottom:10px'  class='center-text font-xlarge'>
+      <div style='padding-bottom:10px'  class='text-center font-xlarge'>
        <strong>{{gt "historical_g_and_c_detailed_title"}}</strong>
       </div>
       <div>

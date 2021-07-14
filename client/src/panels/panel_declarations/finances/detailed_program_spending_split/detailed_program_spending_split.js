@@ -137,7 +137,7 @@ class HistoricalProgramBars extends React.Component {
         <div className="panel-separator" />
         <div
           style={{ paddingBottom: "10px" }}
-          className="center-text font-xlarge"
+          className="text-center font-xlarge"
         >
           <strong>
             <TM k="historical_prog_title" />
@@ -328,7 +328,7 @@ class DetailedProgramSplit extends React.Component {
         <div className="panel-separator" />
         <div
           style={{ paddingBottom: "10px" }}
-          className="center-text font-xlarge"
+          className="text-center font-xlarge"
         >
           <strong>
             <TM k="so_spend_by_prog" />

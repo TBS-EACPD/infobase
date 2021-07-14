@@ -486,7 +486,7 @@ export class _DisplayTable extends React.Component<
               {_.map(
                 visible_ordered_col_keys,
                 (column_key: string, row_index) => (
-                  <th key={row_index} className={"center-text"}>
+                  <th key={row_index} className={"text-center"}>
                     {col_configs_with_defaults[column_key].header}
                   </th>
                 )
