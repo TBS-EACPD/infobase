@@ -4,6 +4,7 @@ import { withConsole } from "@storybook/addon-console";
 import { MemoryRouter } from "react-router";
 
 import "src/common_css/common_css_index.side-effects.js";
+import "src/handlebars/register_helpers.side-effects";
 
 const a11y_options = {
   element: "#root",

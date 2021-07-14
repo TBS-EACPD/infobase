@@ -2,6 +2,12 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { CheckBox } from "src/components/CheckBox/CheckBox";
+
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
+
+import { create_text_maker_component } from "src/components/misc_util_components";
+
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
 import { textRed } from "src/core/color_defs";
@@ -12,10 +18,6 @@ import {
   get_email_template,
   send_completed_email_template,
 } from "src/email_backend_utils";
-
-import { CheckBox } from "./CheckBox/CheckBox";
-import { LeafSpinner } from "./LeafSpinner/LeafSpinner";
-import { create_text_maker_component } from "./misc_util_components";
 
 import text from "./EmailFrontend.yaml";
 
@@ -117,7 +119,7 @@ class EmailFrontend extends React.Component {
       completed_template,
     } = this.state;
 
-    // complete automatic fields and send completed tempalte to backend after submit button is clicked
+    // complete automatic fields and send completed template to backend after submit button is clicked
     if (awaiting_backend_response && !sent_to_backend) {
       const automatic_fields = _.omitBy(
         template,
@@ -162,20 +164,22 @@ class EmailFrontend extends React.Component {
 
     const { include_privacy } = this.props;
 
-    const user_fields = _.omitBy(
-      template,
-      ({ form_type }, key) => key === "meta" || !form_type
-    );
+    const user_fields = _.omitBy(template, ({ form_type }, key) => {
+      key === "meta" || !form_type;
+    });
 
-    const all_required_user_fields_are_filled = _.chain(user_fields)
-      .omitBy((field) => !field.required)
-      .keys()
-      .every(
-        (required_field_key) =>
-          !_.isUndefined(completed_template[required_field_key]) &&
-          !_.isEmpty(completed_template[required_field_key])
-      )
-      .value();
+    const all_required_user_fields_are_filled =
+      // specifically for storybook, will not return true
+      this.props.all_required_user_fields_are_filled ||
+      _.chain(user_fields)
+        .omitBy((field) => !field.required)
+        .keys()
+        .every(
+          (required_field_key) =>
+            !_.isUndefined(completed_template[required_field_key]) &&
+            !_.isEmpty(completed_template[required_field_key])
+        )
+        .value();
 
     const all_connected_user_fields_are_filled = _.chain(user_fields)
       .toPairs()
@@ -350,6 +354,12 @@ class EmailFrontend extends React.Component {
                   disabled={!ready_to_send}
                   onClick={(event) => {
                     event.preventDefault();
+                    console.log("All Required User Fields Are Filled");
+                    console.log(all_required_user_fields_are_filled);
+                    console.log("All Connected User Fields Are Filled");
+                    console.log(all_connected_user_fields_are_filled);
+                    console.log("Privacy Acknowledged");
+                    console.log(privacy_acknowledged);
                     if (
                       this.state.template_name === "feedback" &&
                       has_local_storage
