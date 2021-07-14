@@ -21,19 +21,12 @@ import "./FixedPopover.scss";
 // (TODO, but likely only after we've updated to Bootstrap 4)
 
 type FixedPopoverProps = {
-  show: boolean;
-  title: string;
-  body: string;
-  header: string;
-  subtitle: string;
-  footer: string;
-  restore_focus: boolean;
-  additional_dialog_class: string;
-  dialog_position: string;
-  close_text: string;
-  close_button_in_header: boolean;
-  on_close_callback: () => void;
-  max_body_height: string;
+  title?: string;
+  subtitle?: string;
+  header?: string;
+  body?: string;
+  footer?: string;
+  additional_dialog_class?: string;
   auto_close_time?: number;
 } & typeof FixedPopover.defaultProps;
 
@@ -46,10 +39,15 @@ export class FixedPopover extends React.Component<
   FixedPopoverState
 > {
   static defaultProps = {
+    show: false,
     dialog_position: "left",
     close_text: _.upperFirst(trivial_text_maker("close")),
     close_button_in_header: false,
-    on_close_callback: _.noop,
+    on_close_callback: _.noop as () => void,
+
+    // Always restore focus in a11y mode, otherwise probably don't want to restore focus if the window could scroll
+    // since it will (unexpectedly for the user) jump the window back when focus returns.
+    restore_focus: is_a11y_mode,
 
     // if the popup gets too tall, it will be cut-off (and possibly non-interactable for it) on mobile
     // 40vh is a bit arbitrary as a default, but leaves room for long header/footer content
@@ -168,13 +166,7 @@ export class FixedPopover extends React.Component<
           additional_dialog_class
         )}
         onHide={this.closeModal}
-        restoreFocus={
-          !_.isUndefined(restore_focus)
-            ? restore_focus
-            : // don't want to restore focus if the window could scroll, since it will (unexpectedly for the user)
-              // jump the window back when focus returns. Always restore focus in a11y mode
-              is_a11y_mode
-        }
+        restoreFocus={restore_focus}
       >
         <div
           onFocus={() => this.setState({ timeout_stopped: show })}
