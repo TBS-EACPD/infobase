@@ -18,13 +18,13 @@ type TabbedControlsProps = typeof TabbedControls.defaultProps & {
   tab_callback: (key: string) => void;
   disabled_message?: string;
 };
-interface TabbedContentProps {
+type TabbedContentProps = typeof TabbedContent.defaultProps & {
   tab_keys: string[];
   tab_labels: { [key: string]: string };
   tab_pane_contents: { [key: string]: React.ReactNode };
-  disabled_tabs: string[];
+  disabled_tabs?: string[];
   disabled_message: string;
-}
+};
 interface TabbedContentState {
   open_tab_key: string;
 }
@@ -38,7 +38,6 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
   };
   render() {
     const { tab_options, tab_callback, disabled_message } = this.props;
-
     return (
       <div className="tabbed-controls">
         <ul>
@@ -87,18 +86,23 @@ export class TabbedContent extends React.Component<
   TabbedContentProps,
   TabbedContentState
 > {
+  static defaultProps = {
+    disabled_tabs: [],
+  };
+
   constructor(props: TabbedContentProps) {
     super(props);
     this.state = {
       open_tab_key: props.tab_keys[0], // Starts with first tab open
     };
   }
+
   render() {
     const {
       tab_keys,
       tab_labels,
       tab_pane_contents,
-      disabled_tabs = [],
+      disabled_tabs,
       disabled_message,
     } = this.props;
 
