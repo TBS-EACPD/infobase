@@ -4,6 +4,24 @@ import { completeAssign } from "src/general_utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+class StaticStore {
+  static register: (id: string, instance: StaticStore) => void;
+  static lookup: (id: string) => StaticStore | undefined;
+  static get_all: () => StaticStore[];
+  static __store__: Map<string, StaticStore>;
+}
+
+export const getStaticStore: () => typeof StaticStore = () => {
+  const _storeMap = new Map<string, StaticStore>();
+  StaticStore.register = (id: string, instance: StaticStore) => {
+    _storeMap.set(id, instance);
+  };
+  StaticStore.lookup = (id: string) => _storeMap.get(id);
+  StaticStore.get_all = () => _.uniq(Array.from(_storeMap.values()));
+  StaticStore.__store__ = _storeMap;
+  return StaticStore;
+};
+
 type ConstructorType = { [key: string]: any };
 
 class BaseClass {}
