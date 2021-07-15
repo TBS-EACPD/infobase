@@ -220,7 +220,6 @@ export default class ResultsExplorerDisplay extends React.Component {
       toggle_node,
       expand_all,
       collapse_all,
-      clear_expanded_collapsed,
 
       subject,
 
@@ -400,12 +399,10 @@ export default class ResultsExplorerDisplay extends React.Component {
       );
     }
 
-    const tab_on_click = (doc) =>
-      set_doc !== doc && clear_expanded_collapsed() && set_doc(doc, subject);
     return (
       <div className="tabbed-content">
         <TabbedControls
-          tab_callback={tab_on_click}
+          tab_callback={(doc) => set_doc !== doc && set_doc(doc, subject)}
           tab_options={_.map(docs_with_data, (doc_with_data) => ({
             key: doc_with_data,
             label: /drr/.test(doc_with_data) ? (
