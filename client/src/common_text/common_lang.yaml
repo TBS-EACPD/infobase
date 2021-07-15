@@ -985,6 +985,9 @@ search_no_results:
   en: Your search did not match anything
   fr: Votre recherche n'a pas de résultats
 
+filters_no_results:
+  en: Applied filters did not match anything
+  fr: GBA_TODO
 
 tagged_programs:
   en: Tagged Programs
