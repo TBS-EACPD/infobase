@@ -39,7 +39,8 @@ import {
   fte_header,
   ResultCounts as ResultCountsComponent,
 } from "./result_displays";
-import "./result_drilldown.scss";
+
+import "./result_drilldown_display.scss";
 
 const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
   return ({ node }) => {
