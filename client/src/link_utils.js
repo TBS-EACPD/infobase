@@ -23,6 +23,9 @@ const glossary_href = (subject_or_id, first_character = "#") => {
     return `${first_character}glossary/${id}`;
   }
 };
+const service_href = (org_id, service_id) => {
+  return `/dept/${org_id}/service/${service_id}`;
+};
 
 const smart_href_template = (entity, first_character) => {
   if (entity.table && entity.table.constructor === Table) {
@@ -33,6 +36,8 @@ const smart_href_template = (entity, first_character) => {
     _.includes(subject_classes_with_infographics, entity.constructor)
   ) {
     return infograph_href_template(entity, null, first_character);
+  } else if (entity.entity_type === "service") {
+    return service_href(entity.org_id, entity.id);
   } else {
     throw new Error(
       `${entity} does not belong to a class with a known href template`

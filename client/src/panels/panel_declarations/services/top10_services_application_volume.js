@@ -64,9 +64,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
       header: text_maker("service_name"),
       is_searchable: true,
       formatter: (id) => (
-        <a href={`#dept/${subject.id}/service-panels/${id}`}>
-          {data_name_lookup[id]}
-        </a>
+        <a href={`#dept/${subject.id}/service/${id}`}>{data_name_lookup[id]}</a>
       ),
       raw_formatter: (id) => data_name_lookup[id],
     },
@@ -135,9 +133,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
                     key={tick.tickIndex}
                     transform={`translate(${tick.x - 10},${tick.y})`}
                   >
-                    <a
-                      href={`#dept/${subject.id}/service-panels/${tick.value}`}
-                    >
+                    <a href={`#dept/${subject.id}/service/${tick.value}`}>
                       <text
                         style={{ fontSize: "11px" }}
                         textAnchor="end"

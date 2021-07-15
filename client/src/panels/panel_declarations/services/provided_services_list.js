@@ -73,7 +73,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
             filtered_sorted_data,
             ({ name, id, org_id, service_type, description }) => (
               <React.Fragment key={id}>
-                <a href={`#dept/${org_id}/service-panels/${id}`}>{name}</a>
+                <a href={`#dept/${org_id}/service/${id}`}>{name}</a>
                 <p>{description}</p>
                 <div
                   style={{
@@ -99,7 +99,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
                       </span>
                     ))}
                   </div>
-                  <a href={`#dept/${org_id}/service-panels/${id}`}>
+                  <a href={`#dept/${org_id}/service/${id}`}>
                     <button className="btn-ib-primary">
                       <TM k="view_service" />
                     </button>

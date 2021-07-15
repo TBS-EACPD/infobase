@@ -77,7 +77,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
           href={
             is_gov
               ? infograph_href_template(Dept.lookup(id), "services")
-              : `#dept/${subject.id}/service-panels/${id}`
+              : `#dept/${subject.id}/service/${id}`
           }
         >
           {data_name_lookup[id]}
@@ -162,7 +162,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
                               Dept.lookup(tick.value),
                               "services"
                             )
-                          : `#dept/${subject.id}/service-panels/${tick.value}`
+                          : `#dept/${subject.id}/service/${tick.value}`
                       }
                     >
                       <text
