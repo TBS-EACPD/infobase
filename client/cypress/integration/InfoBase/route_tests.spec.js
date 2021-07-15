@@ -274,8 +274,10 @@ describe("Route tests", () => {
           );
           cy.injectAxe();
           // eslint-disable-next-line cypress/no-unnecessary-waiting
-          cy.wait(5000);
-          cy.get(".leaf-spinner__inner-circle").should("not.exist");
+          cy.get("#app").children().should("not.have.length", 0);
+          cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+            "not.exist"
+          );
           cy.checkA11y(null, null, terminalLog, true);
         });
       });
