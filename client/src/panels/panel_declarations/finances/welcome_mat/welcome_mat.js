@@ -477,12 +477,6 @@ const WelcomeMat = (props) => {
       />
     );
   } else if (type === "hist_estimates") {
-    //active, non-DP org, CR or program
-    //has no FTEs
-
-    //full-width,
-    //5 yrs ago, last year, this year, graph
-    //text about hist-diff
     const { spend_plan_1, latest_year_hist_spend_diff, spend_latest_year } =
       calcs;
 
