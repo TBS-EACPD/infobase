@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { mix, staticStoreMixin } from "src/models/storeMixins";
+import { getStaticStore } from "src/models/storeMixins";
 import { Subject } from "src/models/subject";
 import {
   trivial_text_maker,
@@ -102,7 +102,7 @@ class Mapper {
   }
 }
 
-export class Table extends mix().with(staticStoreMixin) {
+export class Table extends getStaticStore() {
   static create_and_register(def) {
     const inst = new Table(def);
     this.register(inst.id, inst);
