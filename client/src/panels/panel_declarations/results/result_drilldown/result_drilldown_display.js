@@ -377,18 +377,24 @@ export default class ResultsExplorerDisplay extends React.Component {
                 </div>
               </div>
             )}
-            {_.isEmpty(root.children) && (
-              <div
-                style={{
-                  fontWeight: "500",
-                  fontSize: "1.5em",
-                  textAlign: "center",
-                }}
-              >
-                <TM k="filters_no_results" />
-              </div>
-            )}
-            <Explorer config={explorer_config} root={root} />
+            <div
+              {...(loading_query && {
+                style: { visibility: "hidden", height: "0px" },
+              })}
+            >
+              {_.isEmpty(root.children) && (
+                <div
+                  style={{
+                    fontWeight: "500",
+                    fontSize: "1.5em",
+                    textAlign: "center",
+                  }}
+                >
+                  <TM k="filters_no_results" />
+                </div>
+              )}
+              <Explorer config={explorer_config} root={root} />
+            </div>
           </div>
         </div>
       );
