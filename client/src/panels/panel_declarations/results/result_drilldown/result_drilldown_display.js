@@ -214,7 +214,6 @@ export default class ResultsExplorerDisplay extends React.Component {
       docs_with_data,
 
       flat_nodes,
-      is_filtering,
 
       set_query,
       toggle_node,
@@ -229,10 +228,12 @@ export default class ResultsExplorerDisplay extends React.Component {
       doc,
       set_doc,
       icon_counts,
-      toggle_status_status_key,
-      clear_status_filter,
+
       is_status_filter_enabled,
       status_key_whitelist,
+      toggle_status_status_key,
+      clear_status_filter,
+
       filter_by_gba_plus,
       toggle_filter_by_gba_plus,
     } = this.props;
@@ -381,7 +382,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                 </div>
               </div>
             )}
-            {is_filtering && _.isEmpty(root.children) && (
+            {_.isEmpty(root.children) && (
               <div
                 style={{
                   fontWeight: "500",
@@ -389,7 +390,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                   textAlign: "center",
                 }}
               >
-                <TM k="search_no_results" />
+                <TM k="filters_no_results" />
               </div>
             )}
             <Explorer config={explorer_config} root={root} />
