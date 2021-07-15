@@ -269,104 +269,98 @@ export default class ResultsExplorerDisplay extends React.Component {
       };
       inner_content = (
         <div>
-          <div style={{ marginTop: "10px" }}>
-            <ResultCountsComponent {...this.props} />
-          </div>
-          {/drr/.test(doc) && (
-            <div
-              style={{
-                padding: "10px 10px",
-                marginTop: "20px",
-                marginBottom: "20px",
-              }}
-            >
-              <StatusIconTable
-                active_list={status_key_whitelist}
-                icon_counts={icon_counts}
-                onIconClick={toggle_status_status_key}
-                onClearClick={clear_status_filter}
-              />
+          <div className="results-drilldown-controls">
+            <div style={{ marginTop: "10px" }}>
+              <ResultCountsComponent {...this.props} />
             </div>
-          )}
-          <div style={{ marginTop: "15px" }}>
-            <form
-              style={{ marginBottom: "15px" }}
-              onSubmit={(evt) => {
-                evt.preventDefault();
-                evt.stopPropagation();
-                set_query(evt.target.querySelector("input").value);
-                this.refs.focus_mount.focus();
-              }}
-            >
-              <input
-                aria-label={text_maker("explorer_search_is_optional")}
-                className="form-control input-lg"
-                type="text"
-                style={{ width: "100%" }}
-                placeholder={text_maker("filter_results")}
-                onChange={(evt) => this.handleQueryChange(evt.target.value)}
-                value={query}
-              />
-              {is_a11y_mode && (
-                <input
-                  type="submit"
-                  name="search"
-                  value={text_maker("explorer_search")}
+            {/drr/.test(doc) && (
+              <div
+                style={{
+                  padding: "10px 10px",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              >
+                <StatusIconTable
+                  active_list={status_key_whitelist}
+                  icon_counts={icon_counts}
+                  onIconClick={toggle_status_status_key}
+                  onClearClick={clear_status_filter}
                 />
-              )}
-            </form>
-          </div>
-          {result_docs[doc].has_gba_plus && ( //GBA_TODO, styles and text finalization
-            <CheckBox
-              id="filter-to-gba-plus-checkbox"
-              label={<TM k="gba_filter" />}
-              active={filter_by_gba_plus}
-              onClick={toggle_filter_by_gba_plus}
-              container_style={{
-                marginBottom: "15px",
-                justifyContent: "flex-end",
-              }}
-            />
-          )}
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <button
-              type="button"
-              className="btn btn-ib-primary"
-              style={{
-                flexGrow: 0.3,
-                margin: "5px 2px",
-              }}
-              onClick={() => {
-                // Inside an event handler setState batches all state changes asychronously,
-                // to ensure the spinner shows when we want it to, we need to use setTimeout to force the code
-                // to act asynchronously
-                this.setState({ loading_query: true });
-                this.expandTimout = setTimeout(() => {
-                  expand_all(root);
-                  this.setState({ loading_query: false });
-                }, 0);
-              }}
-            >
-              <span>{text_maker("expand_all")}</span>
-            </button>
-            <button
-              type="button"
-              className="btn btn-ib-primary"
-              style={{
-                flexGrow: 0.3,
-                margin: "5px 2px",
-              }}
-              onClick={() => {
-                // Same explanation as the expand all button
-                this.setState({ loading_query: true });
-                this.collapseTimout = setTimeout(() => {
-                  collapse_all(root);
-                  this.setState({ loading_query: false });
-                }, 0);
-              }}
-            >
-              <span>{text_maker("collapse_all")}</span>
-            </button>
+              </div>
+            )}
+            <div style={{ marginTop: "15px" }}>
+              <form
+                style={{ marginBottom: "15px" }}
+                onSubmit={(evt) => {
+                  evt.preventDefault();
+                  evt.stopPropagation();
+                  set_query(evt.target.querySelector("input").value);
+                  this.refs.focus_mount.focus();
+                }}
+              >
+                <input
+                  aria-label={text_maker("explorer_search_is_optional")}
+                  className="form-control input-lg"
+                  type="text"
+                  style={{ width: "100%" }}
+                  placeholder={text_maker("filter_results")}
+                  onChange={(evt) => this.handleQueryChange(evt.target.value)}
+                  value={query}
+                />
+                {is_a11y_mode && (
+                  <input
+                    type="submit"
+                    name="search"
+                    value={text_maker("explorer_search")}
+                  />
+                )}
+              </form>
+            </div>
+            {result_docs[doc].has_gba_plus && ( //GBA_TODO, styles and text finalization
+              <CheckBox
+                id="filter-to-gba-plus-checkbox"
+                label={<TM k="gba_filter" />}
+                active={filter_by_gba_plus}
+                onClick={toggle_filter_by_gba_plus}
+                container_style={{
+                  marginBottom: "15px",
+                  justifyContent: "flex-end",
+                }}
+              />
+            )}
+            <div className="results-drilldown-controls__expand-collapse">
+              <button
+                type="button"
+                className="btn btn-ib-primary"
+                onClick={() => {
+                  // Inside an event handler setState batches all state changes asychronously,
+                  // to ensure the spinner shows when we want it to, we need to use setTimeout to force the code
+                  // to act asynchronously
+                  this.setState({ loading_query: true });
+                  this.expandTimout = setTimeout(() => {
+                    expand_all(root);
+                    this.setState({ loading_query: false });
+                  }, 0);
+                }}
+              >
+                <span>{text_maker("expand_all")}</span>
+              </button>
+              <button
+                type="button"
+                className="btn btn-ib-primary"
+                onClick={() => {
+                  // Same explanation as the expand all button
+                  this.setState({ loading_query: true });
+                  this.collapseTimout = setTimeout(() => {
+                    collapse_all(root);
+                    this.setState({ loading_query: false });
+                  }, 0);
+                }}
+              >
+                <span>{text_maker("collapse_all")}</span>
+              </button>
+            </div>
           </div>
           <div
             tabIndex={-1}
