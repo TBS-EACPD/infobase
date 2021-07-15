@@ -101,6 +101,7 @@ ${_.reduce(
     measure: String
     seeking_to: String
     target_change: String
+    gba_plus: Boolean
 
     previous_year_target_type: String
     previous_year_target_min: String
@@ -109,6 +110,7 @@ ${_.reduce(
     previous_year_measure: String
     previous_year_seeking_to: String
     previous_year_target_change: String
+    previous_year_gba_plus: Boolean
 
     target_explanation: String
     result_explanation: String

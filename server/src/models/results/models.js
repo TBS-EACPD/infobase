@@ -73,6 +73,7 @@ export default function (model_singleton) {
         ...bilingual_str("measure"),
         seeking_to: str_type,
         target_change: str_type,
+        gba_plus: Boolean,
       },
       (cross_year_target_fields, field_type, field_key) => ({
         ...cross_year_target_fields,

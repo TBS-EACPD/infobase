@@ -5,9 +5,10 @@ import {
   HeightClipper,
   VisibilityControl,
   AlertBanner,
+  GlossaryTooltipWrapper,
 } from "src/components/index";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import * as general_utils from "src/general_utils";
 
@@ -17,6 +18,7 @@ import {
   IconNotApplicable,
   IconClock,
 } from "src/icons/icons";
+import { get_static_url } from "src/request_utils";
 
 import { TM, text_maker } from "./result_text_provider";
 
@@ -77,8 +79,13 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
         </dt>
         <dd>
           {indicator.name}
-          {should_display_new_status &&
-            _.isNull(indicator.previous_year_target_type) && <NewBadge />}
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            {result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
+              <GBAPlusBadge use_icon={true} />
+            )}
+            {should_display_new_status &&
+              _.isNull(indicator.previous_year_target_type) && <NewBadge />}
+          </div>
         </dd>
 
         {show_doc && (
@@ -422,6 +429,21 @@ function indicators_period_span_str(indicators) {
 
 const NewBadge = () => (
   <span className="badge badge--is-new-indicator">{text_maker("new")}</span>
+);
+const GBAPlusBadge = ({ use_icon }) => (
+  <GlossaryTooltipWrapper id="GBA_PLUS_INDICATOR" no_bottom_border={true}>
+    {use_icon ? (
+      <img
+        alt={text_maker("gba_plus")}
+        src={get_static_url(`png/gba-plus-${lang}.png`)}
+        style={{ width: "130px", marginLeft: "5px" }}
+      />
+    ) : (
+      <span className="badge badge--is-gba-plus-indicator">
+        {text_maker("gba_plus")}
+      </span>
+    )}
+  </GlossaryTooltipWrapper>
 );
 
 const LateDepartmentsBanner = ({ late_dept_count }) => (

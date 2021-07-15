@@ -345,6 +345,7 @@ const build_doc_info_objects = (doc_type, docs) =>
           primary_resource_year && run_template(primary_resource_year),
         has_resources: !_.isEmpty(resource_years),
         could_have_previous: index > 0,
+        has_gba_plus: +year_short >= (is_drr ? 2020 : 2021),
         ...doc_properties,
       };
     })

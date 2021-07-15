@@ -34,7 +34,11 @@ export { PDFGenerator } from "./PDFGenerator";
 export { CountdownCircle } from "./CountdownCircle/CountdownCircle";
 export { Countdown } from "./Countdown/Countdown";
 export { LogInteractionEvents } from "./LogInteractionEvents";
-export { GlossaryIcon, GlossaryItem } from "./glossary_components";
+export {
+  GlossaryIcon,
+  GlossaryItem,
+  GlossaryTooltipWrapper,
+} from "./glossary_components";
 export { CardList } from "./CardList/CardList";
 export { LabeledTable } from "./LabeledTable/LabeledTable";
 export { FootnoteList } from "./FootnoteList/FootnoteList";

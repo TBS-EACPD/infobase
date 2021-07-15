@@ -124,10 +124,17 @@ dl.indicator-item__dl dt + dd {
   margin: 0px;
 }
 
-.badge.badge--is-new-indicator {
+.badge.badge--is-new-indicator,
+.badge.badge--is-gba-plus-indicator {
   font-size: 12px;
   margin-left: 5px;
+  vertical-align: 0.1em;
+}
+.badge.badge--is-new-indicator {
   background-color: $highlightColor;
   color: $backgroundColor;
-  vertical-align: 0.1em;
+}
+.badge.badge--is-gba-plus-indicator {
+  background-color: $secondaryColor;
+  color: $backgroundColor;
 }

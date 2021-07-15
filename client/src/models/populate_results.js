@@ -134,6 +134,7 @@ ${doc}_results: results(doc: "${doc}") {
     target_narrative
     measure
     seeking_to
+    gba_plus
 
     previous_year_target_type
     previous_year_target_min
@@ -141,6 +142,7 @@ ${doc}_results: results(doc: "${doc}") {
     previous_year_target_narrative
     previous_year_measure
     previous_year_seeking_to
+    previous_year_gba_plus
 
     target_explanation
     result_explanation

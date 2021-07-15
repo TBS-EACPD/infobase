@@ -174,6 +174,18 @@ function populate_glossary(lines) {
     translation_col,
   ];
   _.chain(lines)
+    .thru((lines) => [
+      ...lines,
+      // GBA_TODO temporary dev glossary items
+      ["GBA_PLUS", "Gender Based Analysis Plus", "TODO", "TODO", "TODO"],
+      [
+        "GBA_PLUS_INDICATOR",
+        "Gender Based Analysis Plus Results Indicators",
+        "TODO",
+        "Gender-based Analysis Plus (GBA Plus) Indicators are Results indicators disaggregated to some specific group or groups of people or is related to the implementation of GBA Plus into activities.",
+        "TODO",
+      ],
+    ])
     .filter((line) => !_.isEmpty(line[markdown_def]))
     .each((line) => {
       GlossaryEntry.register(
