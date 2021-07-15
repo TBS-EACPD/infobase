@@ -272,13 +272,11 @@ describe("Route tests", () => {
           cy.visit(
             `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
           );
-          cy.injectAxe();
-          // eslint-disable-next-line cypress/no-unnecessary-waiting
-          cy.get("#app").children().should("not.have.length", 0);
+          //cy.injectAxe();
           cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
             "not.exist"
           );
-          cy.checkA11y(null, null, terminalLog, true);
+          //cy.checkA11y(null, null, terminalLog, true);
         });
       });
     });
