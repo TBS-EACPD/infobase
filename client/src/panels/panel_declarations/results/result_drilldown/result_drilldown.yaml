@@ -101,6 +101,5 @@ result_explanation:
 
 gba_filter:
   transform: [handlebars]
-  en: |
-    {{gl_tt "GBA Plus indicators" "GBA_PLUS_INDICATOR"}} only
+  en: Show {{gl_tt "GBA Plus indicators" "GBA_PLUS_INDICATOR"}} only
   fr: GBA_TODO
