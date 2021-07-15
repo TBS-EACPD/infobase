@@ -749,6 +749,9 @@ covid_expenditures_estimated_exp_2021:
   fr: |
     {{{gt "covid_expenditures_estimated_exp"}}} {{fmt_year_to_fiscal_year 2021}}
     
+gba_plus:
+  en: GBA Plus
+  fr: TODO
 
 
 ##################################

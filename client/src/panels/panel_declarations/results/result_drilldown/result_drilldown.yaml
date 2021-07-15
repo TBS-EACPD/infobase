@@ -98,3 +98,9 @@ target_explanation:
 result_explanation:
   en: Result explanation
   fr: Explication du résultat
+
+gba_filter:
+  transform: [handlebars]
+  en: |
+    {{gl_tt "GBA Plus indicators" "GBA_PLUS_INDICATOR"}} only
+  fr: GBA_TODO

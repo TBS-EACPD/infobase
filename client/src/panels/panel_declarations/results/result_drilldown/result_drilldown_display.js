@@ -290,7 +290,7 @@ export default class ResultsExplorerDisplay extends React.Component {
             <div>
               <CheckBox
                 id="filter-to-gba-plus-checkbox"
-                label={"TODO filter to GBA+ indicators only"}
+                label={<TM k="gba_filter" />}
                 active={filter_by_gba_plus}
                 onClick={toggle_filter_by_gba_plus}
               />

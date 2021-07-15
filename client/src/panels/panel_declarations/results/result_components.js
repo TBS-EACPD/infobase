@@ -5,6 +5,7 @@ import {
   HeightClipper,
   VisibilityControl,
   AlertBanner,
+  GlossaryTooltipWrapper,
 } from "src/components/index";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
@@ -429,18 +430,21 @@ function indicators_period_span_str(indicators) {
 const NewBadge = () => (
   <span className="badge badge--is-new-indicator">{text_maker("new")}</span>
 );
-const GBAPlusBadge = ({ use_icon }) =>
-  use_icon ? (
-    <img
-      alt={text_maker("gba_plus_indicator")}
-      src={get_static_url(`png/gba-plus-${lang}.png`)}
-      style={{ width: "130px", marginLeft: "5px" }}
-    />
-  ) : (
-    <span className="badge badge--is-gba-plus-indicator">
-      {text_maker("gba_plus_indicator")}
-    </span>
-  );
+const GBAPlusBadge = ({ use_icon }) => (
+  <GlossaryTooltipWrapper id="GBA_PLUS_INDICATOR" no_bottom_border={true}>
+    {use_icon ? (
+      <img
+        alt={text_maker("gba_plus")}
+        src={get_static_url(`png/gba-plus-${lang}.png`)}
+        style={{ width: "130px", marginLeft: "5px" }}
+      />
+    ) : (
+      <span className="badge badge--is-gba-plus-indicator">
+        {text_maker("gba_plus")}
+      </span>
+    )}
+  </GlossaryTooltipWrapper>
+);
 
 const LateDepartmentsBanner = ({ late_dept_count }) => (
   <AlertBanner style={{ textAlign: "center" }}>
