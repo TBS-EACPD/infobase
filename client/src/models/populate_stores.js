@@ -260,7 +260,6 @@ function populate_programs(rows) {
       crso,
       activity_code: row[activity_code],
       dept: Dept.lookup(row[dept_code]),
-      data: {},
       description: _.trim(
         row[desc].replace(/^<p>/i, "").replace(/<\/p>$/i, "")
       ),
