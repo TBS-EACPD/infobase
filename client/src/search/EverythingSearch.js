@@ -24,6 +24,7 @@ import {
   who_we_help as who_we_help_search_config,
   datasets as table_search_config,
   glossary_lite as glossary_lite_search_config,
+  services as services_search_config,
 } from "./search_configs";
 import { SearchConfigTypeahead } from "./SearchConfigTypeahead";
 
@@ -63,6 +64,7 @@ const search_options_hierarchy = {
   other_options: {
     label: text_maker("other_options_label"),
     child_options: {
+      include_services: { label: "Services" },
       include_glossary: { label: text_maker("glossary") },
       include_tables: { label: text_maker("metadata") },
     },
@@ -129,6 +131,7 @@ const EverythingSearch = withRouter(
         include_tags_hwh,
         include_tags_wwh,
 
+        include_services,
         include_glossary,
         include_tables,
       } = this.state;
@@ -158,6 +161,7 @@ const EverythingSearch = withRouter(
         include_tags_wwh && who_we_help_search_config,
         include_tables && table_search_config,
         include_glossary && glossary_lite_search_config,
+        include_services && services_search_config,
       ]);
     };
     onSelect = (item) => {
@@ -283,6 +287,7 @@ EverythingSearch.defaultProps = {
 
     include_crsos: true,
     include_programs: true,
+    include_services: true,
 
     include_tags_goco: true,
     include_tags_hi: true,

@@ -352,6 +352,17 @@ const crsos = {
     memoized_re_matchers(query, ["name", "activity_code"], "crsos")(datum),
 };
 
+const services = {
+  config_name: "services",
+  header_function: () => trivial_text_maker("services"),
+  name_function: (service) => service.name,
+  get_data: () => [
+    { entity_type: "service", org_id: "1", id: "136", name: "Service name 1" },
+  ],
+  filter: (query, datum) =>
+    memoized_re_matchers(query, ["name"], "services")(datum),
+};
+
 export {
   highlight_search_match,
   make_orgs_search_config,
@@ -365,4 +376,5 @@ export {
   datasets,
   glossary,
   glossary_lite,
+  services,
 };
