@@ -11,10 +11,9 @@ import results_lang from "src/panels/panel_declarations/misc/key_concept_panels/
 import tag_lang from "src/panels/panel_declarations/misc/key_concept_panels/tagging_questions.yaml";
 
 import sample_lang from "src/components/FAQPanel/FAQPanel.yaml";
-import {
-  create_text_maker_component,
-  KeyConceptList,
-} from "src/components/index";
+
+import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
 import { Gov } from "src/models/organizational_entities";
 
