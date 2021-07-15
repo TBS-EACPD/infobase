@@ -12,6 +12,8 @@ import { Indicator, result_docs } from "src/models/results";
 
 import { infograph_href_template } from "src/link_utils";
 
+import "./result_displays.scss";
+
 const type_text_keys = {
   dept: "orgs",
   cr: "core_responsibilities",
