@@ -4,11 +4,9 @@ import React, { Fragment } from "react";
 import { ButtonToolbar } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 
-import {
-  HeightClipper,
-  PinnedContent,
-  AutoAccordion,
-} from "src/components/index";
+import { AutoAccordion } from "src/components/Accordion/Accordions";
+import { HeightClipper } from "src/components/HeightClipper/HeightClipper";
+import { PinnedContent } from "src/components/PinnedContent/PinnedContent";
 
 import { trivial_text_maker } from "src/models/text";
 
