@@ -6,3 +6,13 @@
     flex-wrap: wrap;
   }
 }
+
+.results-drilldown-controls__expand-collapse {
+  display: "flex";
+  justify-content: "space-around";
+
+  & > button {
+    margin: "5px 2px";
+    flex-grow: 0.3;
+  }
+}
