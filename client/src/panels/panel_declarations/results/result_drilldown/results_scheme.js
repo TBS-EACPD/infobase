@@ -179,7 +179,11 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
 
   @bound
   map_dispatch_to_props(dispatch) {
-    const set_doc = (doc, subject) =>
+    const root_dispatches = super.map_dispatch_to_props(dispatch);
+
+    const { clear_expanded_collapsed } = root_dispatches;
+
+    const set_doc = (doc, subject) => {
       dispatch({
         type: "set_doc",
         payload: ensure_loaded({
@@ -189,15 +193,28 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
         }).then(() => doc),
       });
 
-    const toggle_status_status_key = (key) =>
-      dispatch({ type: "status_click", payload: key });
-    const clear_status_filter = () => dispatch({ type: "clear_status_filter" });
+      clear_expanded_collapsed();
+    };
 
-    const toggle_filter_by_gba_plus = () =>
+    const toggle_status_status_key = (key) => {
+      dispatch({ type: "status_click", payload: key });
+
+      clear_expanded_collapsed();
+    };
+    const clear_status_filter = () => {
+      dispatch({ type: "clear_status_filter" });
+
+      clear_expanded_collapsed();
+    };
+
+    const toggle_filter_by_gba_plus = () => {
       dispatch({ type: "toggle_filter_by_gba_plus" });
 
+      clear_expanded_collapsed();
+    };
+
     return {
-      ...super.map_dispatch_to_props(dispatch),
+      ...root_dispatches,
       set_doc,
       toggle_status_status_key,
       clear_status_filter,
