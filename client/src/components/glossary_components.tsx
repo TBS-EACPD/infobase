@@ -29,7 +29,7 @@ interface GlossaryItemProps {
   item_class: string;
 }
 
-const GlossaryTooltipWrapper = ({
+export const GlossaryTooltipWrapper = ({
   id,
   children,
   no_bottom_border,
