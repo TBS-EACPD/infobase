@@ -78,12 +78,13 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
         </dt>
         <dd>
           {indicator.name}
-          <br />
-          {should_display_new_status &&
-            _.isNull(indicator.previous_year_target_type) && <NewBadge />}
-          {result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
-            <GBAPlusBadge use_icon={false} />
-          )}
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            {result_docs[indicator.doc].has_gba_plus && indicator.gba_plus && (
+              <GBAPlusBadge use_icon={true} />
+            )}
+            {should_display_new_status &&
+              _.isNull(indicator.previous_year_target_type) && <NewBadge />}
+          </div>
         </dd>
 
         {show_doc && (
