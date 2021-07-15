@@ -181,6 +181,7 @@ export default class ResultsExplorerDisplay extends React.Component {
     super();
     this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
+    this.focus_mount_ref = React.createRef();
   }
   handleQueryChange(new_query) {
     this.setState({
@@ -296,7 +297,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                   evt.preventDefault();
                   evt.stopPropagation();
                   set_query(evt.target.querySelector("input").value);
-                  this.refs.focus_mount.focus();
+                  this.focus_mount_ref.focus();
                 }}
               >
                 <input
@@ -365,7 +366,7 @@ export default class ResultsExplorerDisplay extends React.Component {
           <div
             tabIndex={-1}
             className="explorer-focus-mount"
-            ref="focus_mount"
+            ref={this.focus_mount_ref}
             style={{ position: "relative" }}
             aria-label={text_maker("explorer_focus_mount")}
           >
