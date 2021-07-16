@@ -45,7 +45,7 @@ export interface ResultProps {
   plain_text: string;
 }
 
-interface TypeaheadProps {
+type TypeaheadProps = typeof Typeahead.defaultProps & {
   on_query: (str: string) => void;
   query_value: string;
   results: ResultProps[];
@@ -55,7 +55,7 @@ interface TypeaheadProps {
   on_query_debounce_time: number;
   additional_a11y_description?: string;
   utility_buttons?: boolean | React.ReactNode | React.ReactNode[];
-}
+};
 
 interface TypeaheadState {
   input_value: string;
