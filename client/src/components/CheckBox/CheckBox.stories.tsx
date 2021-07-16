@@ -8,7 +8,13 @@ export default {
   component: CheckBox,
 } as Meta;
 
-type CheckBoxProps = React.ComponentProps<typeof CheckBox>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type CheckBoxProps = ComponentProps<typeof CheckBox>;
 
 const Template: Story<CheckBoxProps> = (args) => {
   const [is_active, set_active] = useState(true);
