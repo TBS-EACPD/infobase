@@ -52,12 +52,6 @@ div.ordinal {
 .no-right {
   right: 0;
 }
-/* added for IE9, this adds a transparents 1x1 png file
- * so that mouseneter events can be registered on 
- * empty divs */
-.transparent_div {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=);
-}
 
 /* utility class. Apply class to a container if you want its content (no matter what kind) centered */
 .centerer {
