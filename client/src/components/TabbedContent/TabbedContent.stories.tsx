@@ -9,7 +9,13 @@ export default {
   component: TabbedContent,
 } as Meta;
 
-type TabbedContentProps = React.ComponentProps<typeof TabbedContent>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type TabbedContentProps = ComponentProps<typeof TabbedContent>;
 
 const Template: Story<TabbedContentProps> = (args) => (
   <TabbedContent {...args} />

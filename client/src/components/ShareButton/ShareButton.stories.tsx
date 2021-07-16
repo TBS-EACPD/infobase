@@ -8,7 +8,13 @@ export default {
   component: ShareButton,
 } as Meta;
 
-type ShareButtonProps = React.ComponentProps<typeof ShareButton>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type ShareButtonProps = ComponentProps<typeof ShareButton>;
 
 const Template: Story<ShareButtonProps> = (args) => <ShareButton {...args} />;
 
@@ -19,6 +25,6 @@ Basic.args = {
   title: "Title",
   button_description: "",
   icon_color: "black",
-  icon_alternate_color: "",
+  icon_alternate_color: false,
   icon_size: "2em",
 };

@@ -87,7 +87,7 @@ export class TabbedContent extends React.Component<
   TabbedContentState
 > {
   static defaultProps = {
-    disabled_tabs: [],
+    disabled_tabs: Array<string>(),
   };
 
   constructor(props: TabbedContentProps) {
