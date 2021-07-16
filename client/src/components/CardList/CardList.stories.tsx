@@ -1,7 +1,7 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import { CardList, CardListElementProps } from "./CardList";
+import { CardList } from "./CardList";
 
 export default {
   title: "CardList",
@@ -12,7 +12,7 @@ type CardListProps = React.ComponentProps<typeof CardList>;
 
 const Template: Story<CardListProps> = (args) => <CardList {...args} />;
 
-const elements: CardListElementProps[] = [
+const elements = [
   {
     display: "Non-link Title",
     href: "#",
