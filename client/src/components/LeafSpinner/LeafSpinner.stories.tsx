@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs";
@@ -7,9 +8,11 @@ import { LeafSpinner } from "./LeafSpinner";
 export default {
   title: "LeafSpinner",
   component: LeafSpinner,
-};
+} as Meta;
 
-const Template = (args) => <LeafSpinner {...args} />;
+type LeafSpinnerProps = React.ComponentProps<typeof LeafSpinner>;
+
+const Template: Story<LeafSpinnerProps> = (args) => <LeafSpinner {...args} />;
 export const Initial = Template.bind({});
 export const Route = Template.bind({});
 export const SubRoute = Template.bind({});

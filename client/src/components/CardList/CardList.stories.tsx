@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import React from "react";
 
 import { CardList } from "./CardList";
@@ -5,13 +6,16 @@ import { CardList } from "./CardList";
 export default {
   title: "CardList",
   component: CardList,
-};
+} as Meta;
 
-const Template = (args) => <CardList {...args} />;
+type CardListProps = React.ComponentProps<typeof CardList>;
+
+const Template: Story<CardListProps> = (args) => <CardList {...args} />;
 
 const elements = [
   {
     display: "Non-link Title",
+    href: "#",
     children: [
       { display: "Non-link Title 1" },
       { display: "Non-link Title 2" },

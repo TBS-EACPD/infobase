@@ -1,3 +1,4 @@
+import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs";
@@ -16,9 +17,11 @@ export default {
       ],
     },
   },
-};
+} as Meta;
 
-const Template = (args) => {
+type SortDirectionProps = React.ComponentProps<typeof SortDirection>;
+
+const Template: Story<SortDirectionProps> = (args) => {
   const [is_active1, set_active1] = useState(false);
   const [is_active2, set_active2] = useState(false);
   return (

@@ -28,28 +28,37 @@ import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-type CellValue = string | number | Date;
-interface ColumnKeyProps {
-  index: number; // Zero indexed, order of column
-  header: string; // Name of column
-  is_sortable: boolean; // Default to true
-  is_summable: boolean; // Default to false
-  is_searchable: boolean; // Default to false
-  initial_visible: boolean; // Default to trues
-  formatter: // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
-  string | ((val: CellValue) => string | React.ReactNode);
-  raw_formatter: (val: CellValue) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
-  sum_func: (sum: number, value: number) => number; // e.g.: (sum, value) => ... Default to sum + value
-  sort_func: (a: CellValue, b: CellValue, descending: boolean) => number; // e.g.: (a,b) => ... Default to _.sortBy
-  sum_initial_value: number; // Default to 0
-  visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes
-}
+const column_config_defaults = {
+  initial_visible: true,
+  is_sortable: true,
+  is_summable: false,
+  is_searchable: false,
+  sum_func: (sum: number, value: number) => sum + value,
+  raw_formatter: _.identity,
+  sum_initial_value: 0,
+};
 
-interface ColumnConfigProps {
+export type CellValue = string | number | Date;
+type ColumnKeyProps = {
+  index: number;
+  header: string;
+  is_sortable?: boolean;
+  is_summable?: boolean;
+  is_searchable?: boolean;
+  initial_visible?: boolean;
+  formatter: string | ((val: CellValue) => string | React.ReactNode);
+  raw_formatter?: (val: CellValue) => string;
+  sum_func?: (sum: number, value: number) => number;
+  sort_func: (a: CellValue, b: CellValue, descending: boolean) => number;
+  sum_initial_value?: number;
+  visibility_toggleable?: boolean;
+} & typeof column_config_defaults;
+
+export interface ColumnConfigProps {
   [keys: string]: ColumnKeyProps;
 }
 
-interface _DisplayTableProps {
+type _DisplayTableProps = typeof _DisplayTable.defaultProps & {
   data: DisplayTableData[];
   column_configs: ColumnConfigProps;
   unsorted_initial?: boolean;
@@ -59,7 +68,7 @@ interface _DisplayTableProps {
   enable_pagination?: boolean;
   page_size_num_options_max?: number;
   disable_column_select?: boolean;
-}
+};
 
 interface _DisplayTableState {
   page_size?: number;
@@ -75,15 +84,6 @@ interface DisplayTableData {
   [key: string]: CellValue;
 }
 
-const column_config_defaults = {
-  initial_visible: true,
-  is_sortable: true,
-  is_summable: false,
-  is_searchable: false,
-  sum_func: (sum: number, value: number) => sum + value,
-  raw_formatter: _.identity,
-  sum_initial_value: 0,
-};
 const get_col_configs_with_defaults = (column_configs: ColumnConfigProps) =>
   _.mapValues(column_configs, (supplied_column_config: ColumnKeyProps) => ({
     // Set visibility_toggleable default based off index
@@ -272,7 +272,7 @@ export class _DisplayTable extends React.Component<
 
     const clean_search_string = (search_string: CellValue) =>
       _.chain(search_string).deburr().toLower().trim().value();
-    const is_number_string_date = (val: number | string | Date) =>
+    const is_number_string_date = (val: number | string | Date | undefined) =>
       _.isNumber(val) || _.isString(val) || _.isDate(val);
     const sorted_filtered_data = _.chain(data)
       .filter((row) =>
@@ -285,10 +285,11 @@ export class _DisplayTable extends React.Component<
                 : column_value;
             return (
               _.isEmpty(searches[column_key]) ||
-              _.includes(
-                clean_search_string(col_search_value),
-                clean_search_string(searches[column_key])
-              )
+              (col_search_value &&
+                _.includes(
+                  clean_search_string(col_search_value),
+                  clean_search_string(searches[column_key])
+                ))
             );
           })
           .every()
@@ -297,6 +298,8 @@ export class _DisplayTable extends React.Component<
       .thru((unsorted_array) => {
         if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
           const sorting_config = col_configs_with_defaults[sort_by];
+          console.log("sorted_filtered_data");
+          console.log("sort_func:", !!sorting_config.sort_func);
           return sorting_config.sort_func
             ? _.map(unsorted_array).sort(
                 (a: DisplayTableData, b: DisplayTableData) =>
@@ -343,7 +346,7 @@ export class _DisplayTable extends React.Component<
     const visible_ordered_col_keys = _.intersection(
       all_ordered_col_keys,
       visible_col_keys
-    ) as string[];
+    );
 
     const csv_string = _.chain(visible_ordered_col_keys)
       .map((key: string) => col_configs_with_defaults[key].header)
@@ -675,10 +678,10 @@ export class _DisplayTable extends React.Component<
   }
 }
 
-interface DisplayTableProps extends _DisplayTableProps {
+type DisplayTableProps = _DisplayTableProps & {
   show_search?: boolean;
   show_sort?: boolean;
-}
+};
 
 // Wrapper component that picks column configs based on the size of data. Currently cannot pick table utils
 export class DisplayTable extends React.Component<DisplayTableProps> {
