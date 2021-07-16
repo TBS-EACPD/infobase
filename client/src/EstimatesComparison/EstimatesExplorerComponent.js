@@ -3,6 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import {
+  FAQPanel,
   LeafSpinner,
   FootnoteList,
   Format,
@@ -13,6 +14,8 @@ import {
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
+
+import { primaryColor } from "src/core/color_defs";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -181,6 +184,14 @@ export default class EstimatesExplorerComponent extends React.Component {
       col_click,
     };
 
+    const q_a_keys = [
+      "what_are_mains",
+      "what_are_supps",
+      "what_are_voted_auth",
+      "what_are_stat_auth",
+      "different_org_names",
+    ];
+
     return (
       <div>
         <div className="medium-panel-text mrgn-tp-lg">
@@ -195,6 +206,11 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
+        <FAQPanel
+          rendered_q_a_keys={q_a_keys}
+          is_initially_expanded={true}
+          background_color={primaryColor}
+        />
         <div
           style={{
             marginBottom: "15px",

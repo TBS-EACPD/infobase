@@ -1,0 +1,10 @@
+tag_question_q:
+  en: |
+    A question?
+  fr: |
+    A question (french)?
+tag_question_a:
+  en: |
+    An answer.
+  fr: |
+    An answer (french).

@@ -1,27 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
-import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
-import {
-  create_text_maker_component,
-  KeyConceptList,
-} from "src/components/index";
-
-import common_lang from "./common_questions.yaml";
-import fin_lang from "./financial_questions.yaml";
-import ppl_lang from "./people_questions.yaml";
-import results_lang from "./results_questions.yaml";
-import tag_lang from "./tagging_questions.yaml";
-
-const { TM } = create_text_maker_component([
-  common_lang,
-  fin_lang,
-  ppl_lang,
-  results_lang,
-  tag_lang,
-]);
+import { FAQPanel } from "src/components/index";
 
 const common_panel_config = {
   is_static: true,
@@ -37,16 +19,7 @@ const curried_render = ({ q_a_keys }) =>
       subject.level === "crso" && "what_are_CR",
     ]);
 
-    return (
-      <SomeThingsToKeepInMind>
-        <KeyConceptList
-          question_answer_pairs={_.map(rendered_q_a_keys, (base_text_key) => [
-            <TM key={"q"} k={base_text_key + "_q"} args={{ subject }} />,
-            <TM key={"a"} k={base_text_key + "_a"} args={{ subject }} />,
-          ])}
-        />
-      </SomeThingsToKeepInMind>
-    );
+    return <FAQPanel rendered_q_a_keys={rendered_q_a_keys} subject={subject} />;
   };
 
 export const declare_financial_key_concepts_panel = () =>

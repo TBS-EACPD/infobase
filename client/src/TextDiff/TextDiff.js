@@ -13,6 +13,7 @@ import {
 } from "src/panels/panel_declarations/results/results_common";
 
 import {
+  // FAQPanel,
   Select,
   Panel,
   create_text_maker_component,
@@ -347,6 +348,8 @@ const indicator_report = (processed_indicator) => (
   </div>
 );
 
+// const q_a_keys = ["q1", "q2", "q3", "q4"];
+
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
@@ -495,6 +498,8 @@ export default class TextDiffApp extends React.Component {
             args={{ previous_doc_name, current_doc_name }}
           />
         </div>
+        {/* Could have some department-specific FAQ questions? */}
+        {/* <FAQPanel rendered_q_a_keys={q_a_keys} subject={subject} /> */}
         <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_dept">
             <TM k="select_dept" />
@@ -591,6 +596,7 @@ export default class TextDiffApp extends React.Component {
             />
           </div>
         </div>
+
         {loading ? (
           <LeafSpinner ref="spinner" config_name={"sub_route"} />
         ) : (
