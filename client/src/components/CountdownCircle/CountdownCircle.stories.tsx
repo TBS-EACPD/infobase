@@ -8,7 +8,13 @@ export default {
   component: CountdownCircle,
 } as Meta;
 
-type CountdownCircleProps = React.ComponentProps<typeof CountdownCircle>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type CountdownCircleProps = ComponentProps<typeof CountdownCircle>;
 
 const Template: Story<CountdownCircleProps> = (args) => {
   const [end, setEnd] = useState(false);

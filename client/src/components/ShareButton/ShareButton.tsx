@@ -36,7 +36,7 @@ const CommonSocialMediaShareButton = ({
   </a>
 );
 
-interface ShareButtonProps {
+type ShareButtonProps = typeof ShareButton.defaultProps & {
   button_class_name: string;
   button_description?: string;
   icon_alternate_color?: string | boolean;
@@ -44,7 +44,7 @@ interface ShareButtonProps {
   icon_size: number | string;
   title: string;
   url: string;
-}
+};
 
 interface ShareButtonState {
   showModal: boolean;
@@ -53,6 +53,12 @@ export class ShareButton extends React.Component<
   ShareButtonProps,
   ShareButtonState
 > {
+  static defaultProps = {
+    button_description: text_maker("share"),
+    icon_color: textLightColor,
+    icon_alternate_color: false,
+  };
+
   constructor(props: ShareButtonProps) {
     super(props);
     this.state = {
@@ -70,7 +76,6 @@ export class ShareButton extends React.Component<
       button_class_name,
       title,
       button_description,
-
       icon_color,
       icon_alternate_color,
       icon_size,
@@ -155,9 +160,4 @@ export class ShareButton extends React.Component<
       </Fragment>
     );
   }
-  static defaultProps = {
-    button_description: text_maker("share"),
-    icon_color: textLightColor,
-    icon_alternate_color: false,
-  };
 }

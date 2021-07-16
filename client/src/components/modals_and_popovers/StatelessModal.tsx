@@ -6,7 +6,7 @@ import { Modal } from "react-bootstrap";
 import { trivial_text_maker } from "src/models/text";
 import "./bootstrap_modal_exstension.scss";
 
-interface StatelessModalProps {
+type StatelessModalProps = typeof StatelessModal.defaultProps & {
   on_close_callback: () => void;
   show: boolean;
   title: React.ReactNode;
@@ -15,9 +15,9 @@ interface StatelessModalProps {
   body: React.ReactNode;
   footer?: React.ReactNode;
   close_text?: string;
-  include_close_button_in_header: boolean;
+  include_close_button_in_header?: boolean;
   additional_dialog_class_name?: string;
-}
+};
 
 export class StatelessModal extends React.Component<StatelessModalProps> {
   static defaultProps = {

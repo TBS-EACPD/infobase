@@ -49,7 +49,7 @@ interface ColumnConfigProps {
   [keys: string]: ColumnKeyProps;
 }
 
-interface _DisplayTableProps {
+type _DisplayTableProps = typeof _DisplayTable.defaultProps & {
   data: DisplayTableData[];
   column_configs: ColumnConfigProps;
   unsorted_initial?: boolean;
@@ -59,7 +59,7 @@ interface _DisplayTableProps {
   enable_pagination?: boolean;
   page_size_num_options_max?: number;
   disable_column_select?: boolean;
-}
+};
 
 interface _DisplayTableState {
   page_size?: number;
