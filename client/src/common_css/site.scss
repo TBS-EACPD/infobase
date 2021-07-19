@@ -35,6 +35,7 @@ div.ordinal {
   text-align: center;
 }
 
+// in canada.js and StandardLegend.tsx (2)
 .nav-header {
   display: block;
   padding: 3px 15px;
@@ -49,6 +50,8 @@ div.ordinal {
 .success {
   background-color: $successLightColor;
 }
+
+// in DisplayTableUtils.js and EverythingSearch.js (2)
 .no-right {
   right: 0;
 }
@@ -61,6 +64,7 @@ div.ordinal {
   width: 100%;
 }
 
+// in metadata.js and shared.js (2)
 .btn-responsive-fixed-width {
   margin-left: auto;
   min-width: 150px;
@@ -70,10 +74,12 @@ div.ordinal {
   }
 }
 
+// in hierarchy_component.js and tags_related_to_subject_panel.js
 .dead-element {
   opacity: 0.75;
 }
 
+// used in scss files (4)
 .text-overflow {
   font-weight: bold;
   overflow: hidden;
@@ -87,10 +93,12 @@ div.ordinal {
   color: $textColor;
 }
 
+// in Panel.js (1)
 a.source-link {
   font-weight: bold;
 }
 
+// in Panel.js (1)
 span.glossary-link,
 a.glossary-link {
   font-weight: bold;
@@ -127,9 +135,16 @@ h6,
 
 b,
 strong,
+
+// in EstimatesExplorerComponent.js and result_displays.js (2)
 .heavy-weight {
   font-weight: $heavyFontWeight;
 }
+<<<<<<< HEAD
+=======
+
+// in glossary.js (1)
+>>>>>>> 6b45792f9 (Added comments of occurences)
 .medium-weight {
   font-weight: $mediumFontWeight;
 }
@@ -137,6 +152,7 @@ strong,
   font-weight: $lightFontWeight;
 }
 
+// in misc_util_components.js and CheckBox.tsx (2)
 .link-styled {
   cursor: pointer;
   text-decoration: none;
@@ -148,6 +164,7 @@ strong,
   }
 }
 
+// in CheckBox.tsx (1)
 .span-hover {
   cursor: pointer;
   &:focus,
@@ -156,11 +173,13 @@ strong,
   }
 }
 
+// in result_flat_table.js (1)
 .copyable-hidden {
   position: absolute;
   left: -999em;
 }
 
+// in about.tsx and contact.tsx and PrivacyStatement.js (3)
 .text-only-page-root {
   h2,
   h3,
@@ -181,6 +200,7 @@ strong,
 }
 
 // alternate to bootstrap badges
+// in FootnoteList.js and provided_services_list.js and TablePicker.js (3)
 .tag-badge {
   padding: 0.3em.6em;
   color: $textColor;
