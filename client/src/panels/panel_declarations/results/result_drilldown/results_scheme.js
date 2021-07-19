@@ -184,6 +184,8 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
     const { clear_expanded_collapsed } = root_dispatches;
 
     const set_doc = (doc, subject) => {
+      clear_expanded_collapsed();
+
       dispatch({
         type: "set_doc",
         payload: ensure_loaded({
@@ -192,25 +194,23 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
           result_docs: [doc],
         }).then(() => doc),
       });
-
-      clear_expanded_collapsed();
     };
 
     const toggle_status_status_key = (key) => {
-      dispatch({ type: "status_click", payload: key });
-
       clear_expanded_collapsed();
+
+      dispatch({ type: "status_click", payload: key });
     };
     const clear_status_filter = () => {
-      dispatch({ type: "clear_status_filter" });
-
       clear_expanded_collapsed();
+
+      dispatch({ type: "clear_status_filter" });
     };
 
     const set_filter_by_gba_plus = (filter_by_gba_plus) => {
-      dispatch({ type: "set_filter_by_gba_plus", payload: filter_by_gba_plus });
-
       clear_expanded_collapsed();
+
+      dispatch({ type: "set_filter_by_gba_plus", payload: filter_by_gba_plus });
     };
 
     return {
