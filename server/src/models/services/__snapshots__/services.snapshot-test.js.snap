@@ -7,6 +7,7 @@ Object {
       "org": Object {
         "service_summary": Object {
           "id": "326",
+          "orgs_reporting_services_summary": null,
           "service_digital_status_summary": Array [
             Object {
               "can_online": 1,
@@ -83,7 +84,6 @@ Object {
             "number_of_reporting_programs": 6,
             "number_of_services": 6,
           },
-          "service_high_volume_summary": null,
           "service_id_methods_summary": Array [
             Object {
               "id": "326_uses_sin_as_identifier",
@@ -240,6 +240,7 @@ Object {
       "program": Object {
         "service_summary": Object {
           "id": "TBC-BXB01",
+          "orgs_reporting_services_summary": null,
           "service_digital_status_summary": Array [
             Object {
               "can_online": 0,
@@ -316,7 +317,6 @@ Object {
             "number_of_reporting_programs": null,
             "number_of_services": 1,
           },
-          "service_high_volume_summary": null,
           "service_id_methods_summary": Array [
             Object {
               "id": "TBC-BXB01_uses_sin_as_identifier",

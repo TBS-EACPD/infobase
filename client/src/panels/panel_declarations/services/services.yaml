@@ -256,20 +256,19 @@ top10_services_website_visits_text:
   fr: |
     Vous trouverez ci-dessous les 10 services ayant le plus grand nombre de visites sur leur site web **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
 
-# High application volume
-high_application_volume_title:
-  en: Organizations with high volume services
-  fr: Organisations qui fournissent un grand nombre de services
-high_application_volume_text:
+# Orgs reporting services
+orgs_reporting_services_title:
+  en: Organizations reporting services
+  fr: TODO
+orgs_reporting_services_text:
   transform: [handlebars, markdown]
   en: |
-    Below are the list of organizations with **high volume** services, where their total application and telephone calls received is greater than **45,000**.
-    
-    Among **{{num_of_high_volume_depts}}** departments with high volume services, **{{highest_volume_dept}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** of applications and telephone calls received.
+    TODO
   fr: |
-    Vous trouverez ci-dessous la liste des organisations offrant un **grand nombre** de services où le total des demandes et des appels téléphoniques reçus est supérieur à **45 000**.
-    
-    Parmi les **{{num_of_high_volume_depts}}** ministères ayant un grand nombre de services, c'est **{{highest_volume_dept}}** qui a eu le plus de trafic avec **{{fmt_big_int highest_volume_value}}** demandes et appels téléphoniques reçus.
+    TODO
+number_of_services:
+  en: Number of services
+  fr: TODO
 
 # Overview
 overview_digital_status_title:

@@ -8,7 +8,7 @@ export { declare_services_digital_status_panel } from "./services_digital_status
 export { declare_services_standards_panel } from "./services_standards";
 export { declare_top10_services_application_volume_panel } from "./top10_services_application_volume";
 export { declare_top10_website_visits_panel } from "./top10_services_website_visits";
-export { declare_high_application_volume_panel } from "./high_application_volume";
+export { declare_orgs_reporting_services_panel } from "./orgs_reporting_services";
 export { ServiceOverview } from "./single_service_panels/service_overview";
 export { ServiceChannels } from "./single_service_panels/service_channels";
 export { ServiceStandards } from "./single_service_panels/service_standards";

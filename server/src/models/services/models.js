@@ -138,9 +138,10 @@ export default function (model_singleton) {
     ...bilingual_str("name"),
     value: { type: Number },
   });
-  const ServicesHighVolumeSummarySchema = mongoose.Schema({
+  const OrgsReportingServicesSummarySchema = mongoose.Schema({
     id: pkey_type(),
     subject_id: parent_fkey_type(),
+    number_of_services: { type: Number },
     total_volume: { type: Number },
   });
   const TopServicesWebsiteVisitsSummarySchema = mongoose.Schema({
@@ -165,7 +166,7 @@ export default function (model_singleton) {
 
   const GovServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
-    service_high_volume_summary: [ServicesHighVolumeSummarySchema],
+    orgs_reporting_services_summary: [OrgsReportingServicesSummarySchema],
   });
   const OrgServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
