@@ -12,7 +12,13 @@ export default {
   decorators: [(Story) => <div>{Story()}</div>],
 } as Meta;
 
-type StatelessModalProps = React.ComponentProps<typeof StatelessModal>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type StatelessModalProps = ComponentProps<typeof StatelessModal>;
 
 const Template: Story<StatelessModalProps> = (args) => {
   const [_, updateArgs] = useArgs();
