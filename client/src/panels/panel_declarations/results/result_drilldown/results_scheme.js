@@ -50,10 +50,10 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
           ...state,
           status_key_whitelist: [],
         };
-      case "toggle_filter_by_gba_plus":
+      case "set_filter_by_gba_plus":
         return {
           ...state,
-          filter_by_gba_plus: !state.filter_by_gba_plus,
+          filter_by_gba_plus: payload,
         };
       default:
         return state;
@@ -207,8 +207,8 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
       clear_expanded_collapsed();
     };
 
-    const toggle_filter_by_gba_plus = () => {
-      dispatch({ type: "toggle_filter_by_gba_plus" });
+    const set_filter_by_gba_plus = (filter_by_gba_plus) => {
+      dispatch({ type: "set_filter_by_gba_plus", payload: filter_by_gba_plus });
 
       clear_expanded_collapsed();
     };
@@ -218,7 +218,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
       set_doc,
       toggle_status_status_key,
       clear_status_filter,
-      toggle_filter_by_gba_plus,
+      set_filter_by_gba_plus,
     };
   }
 }
