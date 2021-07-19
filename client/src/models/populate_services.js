@@ -253,8 +253,10 @@ const get_summary_query = (query_options) => {
           service_general_stats {
             id
             number_of_services
+            number_of_reporting_orgs
+            number_of_reporting_programs
           }
-          ${query_fragment}
+          ${query_fragment ? query_fragment : ""}
         }
       }
     }

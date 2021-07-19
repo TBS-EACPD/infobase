@@ -1,3 +1,4 @@
+export { declare_services_intro_panel } from "./services_intro";
 export { declare_provided_services_list_panel } from "./provided_services_list";
 export { declare_services_types_panel } from "./services_types";
 export { declare_services_fees_panel } from "./services_fees";
