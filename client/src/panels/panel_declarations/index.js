@@ -84,6 +84,7 @@ export {
   declare_covid_expenditures_panel,
 } from "./covid/index";
 export {
+  declare_services_intro_panel,
   declare_provided_services_list_panel,
   declare_services_types_panel,
   declare_services_fees_panel,

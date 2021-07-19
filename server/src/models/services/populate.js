@@ -400,6 +400,14 @@ export default async function ({ models }) {
       service_general_stats: {
         id: "gov",
         number_of_services: service_rows.length,
+        number_of_reporting_orgs: _.chain(service_rows)
+          .groupBy("org_id")
+          .size()
+          .value(),
+        number_of_reporting_programs: _.chain(service_rows)
+          .reduce(group_by_program_id, {})
+          .size()
+          .value(),
       },
       service_type_summary: populate_type_summary(service_rows, "gov"),
       service_digital_status_summary: _.chain(digital_status_keys)
@@ -424,6 +432,10 @@ export default async function ({ models }) {
       service_general_stats: {
         id: org_id,
         number_of_services: services.length,
+        number_of_reporting_programs: _.chain(service_rows)
+          .reduce(group_by_program_id, {})
+          .size()
+          .value(),
       },
       service_type_summary: populate_type_summary(services, org_id),
       service_digital_status_summary: _.chain(digital_status_keys)

@@ -79,6 +79,8 @@ Object {
           ],
           "service_general_stats": Object {
             "id": "326",
+            "number_of_reporting_orgs": null,
+            "number_of_reporting_programs": 6,
             "number_of_services": 6,
           },
           "service_high_volume_summary": null,
@@ -310,6 +312,8 @@ Object {
           ],
           "service_general_stats": Object {
             "id": "TBC-BXB01",
+            "number_of_reporting_orgs": null,
+            "number_of_reporting_programs": null,
             "number_of_services": 1,
           },
           "service_high_volume_summary": null,
