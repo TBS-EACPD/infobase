@@ -182,22 +182,38 @@ export default class ResultsExplorerDisplay extends React.Component {
     this.state = { query: "" };
     this.debounced_set_query = _.debounce(this.debounced_set_query, 500);
     this.focus_mount_ref = React.createRef();
+    this.timeouts = [];
   }
   handleQueryChange(new_query) {
     this.setState({
       query: new_query,
-      loading_query: new_query.length > 3 ? true : undefined,
+      loading: new_query.length > 3 ? true : undefined,
     });
     this.debounced_set_query(new_query);
   }
   debounced_set_query(new_query) {
     this.props.set_query(new_query);
-    this.timedOutStateChange = setTimeout(() => {
+    this.set_timeout(() => {
       this.setState({
-        loading_query: false,
+        loading: false,
       });
     }, 500);
   }
+  loading_wrapped_dispatch = (dispatch_callback) => () => {
+    this.setState({ loading: true });
+
+    // little hacky. dispatch_callback's will be synchronous, and we want this component to be in a loading state while they execute,
+    // as they can sometimes run long. The gotcha is that react will batch state changes asynchronously when executed in the same event callback
+    // or lifecycle method, which squashes the first.
+    // We use a 0 second callback to bump the dispatch_callback and following loading state change in to async execution to bypass react's batching
+
+    this.set_timeout(() => {
+      dispatch_callback();
+      this.setState({ loading: false });
+    }, 0);
+  };
+  set_timeout = (callback, time) =>
+    this.timeouts.push(setTimeout(callback, time));
   clearQuery() {
     this.setState({ query: "" });
     this.props.clear_query("");
@@ -205,10 +221,8 @@ export default class ResultsExplorerDisplay extends React.Component {
   componentWillUnmount() {
     !_.isUndefined(this.debounced_set_query) &&
       this.debounced_set_query.cancel();
-    !_.isUndefined(this.timedOutStateChange) &&
-      clearTimeout(this.timedOutStateChange);
-    !_.isUndefined(this.expandTimout) && clearTimeout(this.expandTimout);
-    !_.isUndefined(this.collapseTimout) && clearTimeout(this.collapseTimout);
+
+    _.forEach(this.timeouts, clearTimeout);
   }
   render() {
     const {
@@ -235,9 +249,9 @@ export default class ResultsExplorerDisplay extends React.Component {
       clear_status_filter,
 
       filter_by_gba_plus,
-      toggle_filter_by_gba_plus,
+      set_filter_by_gba_plus,
     } = this.props;
-    const { loading_query, query } = this.state;
+    const { loading, query } = this.state;
 
     // Weird padding and margins here to get the spinner centered well and cover the "see the data" text while loading
     let inner_content = (
@@ -253,7 +267,7 @@ export default class ResultsExplorerDisplay extends React.Component {
     );
 
     if (!data_loading) {
-      const root = get_root(flat_nodes);
+      const root_node = get_root(flat_nodes);
 
       const explorer_config = {
         children_grouper: get_children_grouper({ doc }),
@@ -322,7 +336,9 @@ export default class ResultsExplorerDisplay extends React.Component {
                 id="filter-to-gba-plus-checkbox"
                 label={<TM k="gba_filter" />}
                 active={filter_by_gba_plus}
-                onClick={toggle_filter_by_gba_plus}
+                onClick={this.loading_wrapped_dispatch(() => {
+                  set_filter_by_gba_plus(!filter_by_gba_plus);
+                })}
                 container_style={{
                   marginBottom: "15px",
                   justifyContent: "flex-end",
@@ -333,30 +349,18 @@ export default class ResultsExplorerDisplay extends React.Component {
               <button
                 type="button"
                 className="btn btn-ib-primary"
-                onClick={() => {
-                  // Inside an event handler setState batches all state changes asychronously,
-                  // to ensure the spinner shows when we want it to, we need to use setTimeout to force the code
-                  // to act asynchronously
-                  this.setState({ loading_query: true });
-                  this.expandTimout = setTimeout(() => {
-                    expand_all(root);
-                    this.setState({ loading_query: false });
-                  }, 0);
-                }}
+                onClick={this.loading_wrapped_dispatch(() =>
+                  expand_all(root_node)
+                )}
               >
                 <span>{text_maker("expand_all")}</span>
               </button>
               <button
                 type="button"
                 className="btn btn-ib-primary"
-                onClick={() => {
-                  // Same explanation as the expand all button
-                  this.setState({ loading_query: true });
-                  this.collapseTimout = setTimeout(() => {
-                    collapse_all(root);
-                    this.setState({ loading_query: false });
-                  }, 0);
-                }}
+                onClick={this.loading_wrapped_dispatch(() =>
+                  collapse_all(root_node)
+                )}
               >
                 <span>{text_maker("collapse_all")}</span>
               </button>
@@ -369,7 +373,7 @@ export default class ResultsExplorerDisplay extends React.Component {
             style={{ position: "relative" }}
             aria-label={text_maker("explorer_focus_mount")}
           >
-            {loading_query && (
+            {loading && (
               <div className="loading-overlay">
                 <div style={{ height: "200px", position: "relative" }}>
                   <LeafSpinner config_name={"tabbed_content"} />
@@ -377,11 +381,11 @@ export default class ResultsExplorerDisplay extends React.Component {
               </div>
             )}
             <div
-              {...(loading_query && {
+              {...(loading && {
                 style: { visibility: "hidden", height: "0px" },
               })}
             >
-              {_.isEmpty(root.children) && (
+              {_.isEmpty(root_node.children) && (
                 <div
                   style={{
                     fontWeight: "500",
@@ -392,7 +396,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                   <TM k="filters_no_results" />
                 </div>
               )}
-              <Explorer config={explorer_config} root={root} />
+              <Explorer config={explorer_config} root={root_node} />
             </div>
           </div>
         </div>

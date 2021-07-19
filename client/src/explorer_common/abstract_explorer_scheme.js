@@ -24,12 +24,12 @@ const initial_root_state = {
   userCollapsed: [],
 };
 
-function ids_to_update(root, should_expand) {
+function ids_to_update(root_node, should_expand) {
   const get_ids_to_update = ({ isExpanded, id, children }) => [
     (should_expand && !isExpanded) || (!should_expand && isExpanded) ? id : [],
     _.map(children, get_ids_to_update),
   ];
-  return _.flattenDeep(get_ids_to_update(root));
+  return _.flattenDeep(get_ids_to_update(root_node));
 }
 
 function root_reducer(state = initial_root_state, action) {
@@ -83,24 +83,24 @@ function root_reducer(state = initial_root_state, action) {
     }
 
     case "expand_all": {
-      const { root } = payload;
+      const { root_node } = payload;
       const { userExpanded: oldExpanded } = state;
 
       return {
         ...state,
-        userExpanded: oldExpanded.concat(ids_to_update(root, true)),
+        userExpanded: oldExpanded.concat(ids_to_update(root_node, true)),
         userCollapsed: [],
       };
     }
 
     case "collapse_all": {
-      const { root } = payload;
+      const { root_node } = payload;
       const { userCollapsed: oldCollapsed } = state;
 
       return {
         ...state,
         userExpanded: [],
-        userCollapsed: oldCollapsed.concat(ids_to_update(root, false)),
+        userCollapsed: oldCollapsed.concat(ids_to_update(root_node, false)),
       };
     }
 
@@ -231,16 +231,16 @@ export class AbstractExplorerScheme {
 
     const enable_loading = () => dispatch({ type: "enable_loading" });
 
-    const expand_all = (root) =>
+    const expand_all = (root_node) =>
       dispatch({
         type: "expand_all",
-        payload: { root },
+        payload: { root_node },
       });
 
-    const collapse_all = (root) =>
+    const collapse_all = (root_node) =>
       dispatch({
         type: "collapse_all",
-        payload: { root },
+        payload: { root_node },
       });
 
     const clear_expanded_collapsed = () =>
