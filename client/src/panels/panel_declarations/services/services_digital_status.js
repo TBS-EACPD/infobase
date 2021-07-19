@@ -40,6 +40,10 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
     query_fragment: `
+    service_general_stats{
+      id
+      number_of_services
+    }
     service_digital_status_summary {
       id
       key_desc
@@ -52,7 +56,10 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
   }
-  const { service_general_stats, service_digital_status_summary } = data;
+  const {
+    service_general_stats: { number_of_services },
+    service_digital_status_summary,
+  } = data;
   const processed_data = _.map(service_digital_status_summary, (row) => ({
     ...row,
     key_desc: text_maker(row.key_desc),
@@ -99,16 +106,14 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
         args={{
           is_most_and_least_same:
             most_digital_component.key === least_digital_component.key,
-          num_of_services: service_general_stats.number_of_services,
+          num_of_services: number_of_services,
           subject_name: subject.name,
           most_digital_name: text_maker(most_digital_component.key),
           most_digital_pct:
-            most_digital_component[can_online] /
-            service_general_stats.number_of_services,
+            most_digital_component[can_online] / number_of_services,
           least_digital_name: text_maker(least_digital_component.key),
           least_digital_pct:
-            least_digital_component[can_online] /
-            service_general_stats.number_of_services,
+            least_digital_component[can_online] / number_of_services,
         }}
       />
       {is_a11y_mode ? (
