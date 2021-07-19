@@ -58,7 +58,7 @@ Basic.args = {
 
   // css
   dialog_position: "",
-  additional_dialog_position: "",
+  additional_dialog_class: "",
 };
 
 export const Timer = Template.bind({});
