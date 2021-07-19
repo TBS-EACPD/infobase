@@ -1,19 +1,19 @@
 import React, { Fragment } from "react";
 
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { SafeJSURL } from "src/general_utils";
 
 import { StatelessModal } from "./StatelessModal";
 
-interface ModalButtonProps {
+type ModalButtonProps = RouteComponentProps & {
   show_condition: { name: string; value: string };
   match: { params: { options: string } };
   button_text: string;
   title: string;
   children: string | React.ReactNode;
   aria_label: string;
-}
+};
 
 interface ModalButtonState {
   show_modal: boolean;
