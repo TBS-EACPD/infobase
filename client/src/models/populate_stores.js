@@ -177,13 +177,19 @@ function populate_glossary(lines) {
     .thru((lines) => [
       ...lines,
       // GBA_TODO temporary dev glossary items
-      ["GBA_PLUS", "Gender Based Analysis Plus", "TODO", "TODO", "TODO"],
+      [
+        "GBA_PLUS",
+        "Gender Based Analysis Plus",
+        "Analyse comparative entre les sexes plus",
+        "Gender-based analysis plus (GBA Plus) is an analytical process used to assess how different groups of women, men and gender-diverse people experience policies, programs and services based on multiple factors including race, ethnicity, religion, age, and mental or physical disability. The federal government uses GBA Plus in the development of policies, programs and legislation. GBA Plus helps the government attain better results for Canadians by being more responsive to specific needs and circumstances.",
+        "L’analyse comparative entre les sexes plus (ACS Plus) est un processus d’analyse utilisé pour cerner les répercussions des politiques, programmes et services sur des groupes diversifiés de femmes, d’hommes et de personnes non binaires en fonction de facteurs d’identité multiples incluant la race, l’origine ethnique, la religion, l’âge, et le fait de vivre avec un handicap mental ou physique. Le gouvernement fédéral utilise l’ACS Plus pour le développement de ses politiques, programmes et lois. L’ACS Plus permet l’atteinte de meilleurs résultats pour la population canadienne en répondant aux besoins spécifiques et circonstances particulières.",
+      ],
       [
         "GBA_PLUS_INDICATOR",
         "Gender Based Analysis Plus Results Indicators",
-        "TODO",
-        "Gender-based Analysis Plus (GBA Plus) Indicators are Results indicators disaggregated to some specific group or groups of people or is related to the implementation of GBA Plus into activities.",
-        "TODO",
+        "(TODO translate) Gender Based Analysis Plus Results Indicators",
+        "(TODO draft text) Gender-based Analysis Plus (GBA Plus) Indicators are Results indicators disaggregated to some specific group or groups of people or is related to the implementation of GBA Plus into activities.",
+        "TODO, finalize english and translate",
       ],
     ])
     .filter((line) => !_.isEmpty(line[markdown_def]))
