@@ -24,6 +24,5 @@ export const Basic = Template.bind({});
 Basic.args = {
   children,
   button_text: "Button Text",
-  show_modal: true,
   title: "Title",
 };
