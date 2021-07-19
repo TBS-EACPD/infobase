@@ -23,6 +23,7 @@ import {
   declare_drr_summary_panel,
 
   // shared gov, dept, program
+  declare_services_intro_panel,
   declare_services_types_panel,
   declare_services_digital_status_panel,
   declare_services_fees_panel,
@@ -119,6 +120,7 @@ export const get_dept_panels = (subject) =>
     ],
     services: services_feature_flag &&
       subject.has_data("services") && [
+        declare_services_intro_panel(),
         declare_provided_services_list_panel(),
         declare_services_types_panel(),
         declare_services_digital_status_panel(),
