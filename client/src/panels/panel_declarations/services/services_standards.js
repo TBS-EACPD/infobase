@@ -24,6 +24,10 @@ const ServicesStandardsPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
     query_fragment: `
+    service_general_stats {
+      id
+      number_of_services
+    }
     service_standards_summary {
       id
       standards_count

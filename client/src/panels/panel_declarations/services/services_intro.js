@@ -14,6 +14,10 @@ const { text_maker, TM } = create_text_maker_component(text);
 const ServicesIntroPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
+    query_fragment: `service_general_stats{
+      id
+      number_of_reporting_orgs
+    }`,
   });
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;

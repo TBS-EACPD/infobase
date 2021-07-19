@@ -34,6 +34,10 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
     query_fragment: `
+    service_general_stats {
+      id
+      number_of_services
+    }
     top_services_application_vol_summary {
       id
       service_id
