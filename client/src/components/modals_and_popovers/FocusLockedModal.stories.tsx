@@ -12,7 +12,13 @@ export default {
   decorators: [(Story) => <div>{Story()}</div>],
 } as Meta;
 
-type FocusLockedModalProps = React.ComponentProps<typeof FocusLockedModal>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type FocusLockedModalProps = ComponentProps<typeof FocusLockedModal>;
 
 const Template: Story<FocusLockedModalProps> = (args) => {
   const [_, updateArgs] = useArgs();

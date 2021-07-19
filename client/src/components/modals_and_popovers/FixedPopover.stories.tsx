@@ -12,7 +12,13 @@ export default {
   decorators: [(Story) => <div>{Story()}</div>],
 } as Meta;
 
-type FixedPopoverProps = React.ComponentProps<typeof FixedPopover>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type FixedPopoverProps = ComponentProps<typeof FixedPopover>;
 
 const Template: Story<FixedPopoverProps> = (args) => {
   const [_, updateArgs] = useArgs();

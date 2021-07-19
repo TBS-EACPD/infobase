@@ -8,7 +8,13 @@ export default {
   component: ModalButton,
 } as Meta;
 
-type ModalButtonProps = React.ComponentProps<typeof ModalButton>;
+type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
+
+type ModalButtonProps = ComponentProps<typeof ModalButton>;
 
 const Template: Story<ModalButtonProps> = (args) => <ModalButton {...args} />;
 
