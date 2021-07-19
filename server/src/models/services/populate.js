@@ -335,11 +335,12 @@ export default async function ({ models }) {
       .value();
   };
 
-  const gov_services_high_volume_summary = _.chain(service_rows)
+  const gov_orgs_reporting_services_summary = _.chain(service_rows)
     .groupBy("org_id")
     .map((services, org_id) => ({
       id: org_id,
       subject_id: org_id,
+      number_of_services: services.length,
       total_volume: _.sumBy(services, ({ service_report }) =>
         _.reduce(
           delivery_channels_keys,
@@ -349,8 +350,6 @@ export default async function ({ models }) {
         )
       ),
     }))
-    // 45,000+ volume is considered "high volume"
-    .reject(({ total_volume }) => total_volume <= 45000)
     .sortBy("total_volume")
     .reverse()
     .value();
@@ -421,7 +420,7 @@ export default async function ({ models }) {
         get_final_standards_summary(service_rows, "gov"),
       ],
       service_fees_summary: get_fees_summary(service_rows, "gov"),
-      service_high_volume_summary: gov_services_high_volume_summary,
+      orgs_reporting_services_summary: gov_orgs_reporting_services_summary,
       top_services_website_visits_summary: gov_top_website_visits_summary,
     },
   ];

@@ -28,7 +28,7 @@ const schema = `
     service_standards_summary: [ServiceStandardsSummary]
     service_fees_summary: [ServiceFeesSummary]
     top_services_application_vol_summary: [TopServicesApplicationVolSummary]
-    service_high_volume_summary: [ServiceHighVolumeSummary]
+    orgs_reporting_services_summary: [OrgsReportingServicesSummary]
     top_services_website_visits_summary: [TopServicesWebsiteVisitsSummary]
   }
   type ServiceGeneralStats{
@@ -79,9 +79,10 @@ const schema = `
     name: String
     value: Float
   }
-  type ServiceHighVolumeSummary{
+  type OrgsReportingServicesSummary{
     id: String
     subject_id: String
+    number_of_services: Float
     total_volume: Float
   }
   type TopServicesWebsiteVisitsSummary{

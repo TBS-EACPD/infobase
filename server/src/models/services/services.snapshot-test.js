@@ -124,9 +124,10 @@ service_summary{
     name
     value
   }
-  service_high_volume_summary{
+  orgs_reporting_services_summary{
     id
     subject_id
+    number_of_services
     total_volume
   }
   top_services_website_visits_summary{

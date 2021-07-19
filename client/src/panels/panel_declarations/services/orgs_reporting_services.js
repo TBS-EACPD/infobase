@@ -16,24 +16,24 @@ import { Subject } from "src/models/subject";
 
 import text from "./services.yaml";
 
-const { Dept } = Subject;
+const { Gov, Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const HighApplicationVolumePanel = ({ subject }) => {
+const OrgsReportingServicesPanel = () => {
   const { loading, data } = useSummaryServices({
-    subject,
+    subject: Gov,
     query_fragment: `
-    service_high_volume_summary {
+    orgs_reporting_services_summary {
       id
       subject_id
+      number_of_services
       total_volume
     }`,
   });
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
   }
-  const { service_high_volume_summary } = data;
-  const highest_volume_dept = service_high_volume_summary[0];
+  const { orgs_reporting_services_summary } = data;
 
   const column_configs = {
     subject_id: {
@@ -47,8 +47,13 @@ const HighApplicationVolumePanel = ({ subject }) => {
       ),
       plain_formatter: (org_id) => Dept.lookup(org_id).name,
     },
-    total_volume: {
+    number_of_services: {
       index: 1,
+      header: text_maker("number_of_services"),
+      formatter: "big_int",
+    },
+    total_volume: {
+      index: 2,
       header: text_maker("applications_and_calls"),
       is_summable: true,
       formatter: "big_int",
@@ -56,36 +61,27 @@ const HighApplicationVolumePanel = ({ subject }) => {
   };
   return (
     <HeightClippedGraph clipHeight={600}>
-      <TM
-        className="medium-panel-text"
-        k="high_application_volume_text"
-        args={{
-          num_of_high_volume_depts: service_high_volume_summary.length,
-          highest_volume_dept: Dept.lookup(highest_volume_dept.subject_id).name,
-          highest_volume_value: highest_volume_dept.total_volume,
-        }}
-      />
+      <TM k="orgs_reporting_services_text" />
       <DisplayTable
         unsorted_initial={true}
-        data={service_high_volume_summary}
+        data={orgs_reporting_services_summary}
         column_configs={column_configs}
       />
     </HeightClippedGraph>
   );
 };
 
-export const declare_high_application_volume_panel = () =>
+export const declare_orgs_reporting_services_panel = () =>
   declare_panel({
-    panel_key: "high_application_volume",
+    panel_key: "orgs_reporting_services",
     levels: ["gov"],
     panel_config_func: (level, panel_key) => ({
-      title: text_maker("high_application_volume_title"),
+      title: text_maker("orgs_reporting_services_title"),
       footnotes: false,
       render({ title, calculations, sources }) {
-        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <HighApplicationVolumePanel subject={subject} />
+            <OrgsReportingServicesPanel />
           </InfographicPanel>
         );
       },
