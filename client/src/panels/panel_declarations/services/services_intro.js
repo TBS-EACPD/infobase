@@ -16,6 +16,7 @@ const ServicesIntroPanel = ({ subject }) => {
     subject,
     query_fragment: `service_general_stats{
       id
+      number_of_services
       number_of_reporting_orgs
     }`,
   });
@@ -28,6 +29,32 @@ const ServicesIntroPanel = ({ subject }) => {
   return (
     <div className="medium-panel-text">
       <TM k="services_intro_gov" args={{ number_of_reporting_orgs }} />
+      <div className="pane-row">
+        <div className="pane-rect">
+          <span className="pane-max-width">GC reports</span>
+          <span className="large_panel_text bold">X services</span>
+        </div>
+        <div className="pane-rect">
+          <span className="pane-max-width">
+            % of High volume services which met Service Standards
+          </span>
+          <span className="large_panel_text bold">X%</span>
+        </div>
+      </div>
+      <div className="pane-row">
+        <div className="pane-rect">
+          <span className="pane-max-width">
+            % of client interaction points available online
+          </span>
+          <span className="large_panel_text bold">X%</span>
+        </div>
+        <div className="pane-rect">
+          <span className="pane-max-width">
+            % of services that are online end-to-end
+          </span>
+          <span className="large_panel_text bold">X%</span>
+        </div>
+      </div>
     </div>
   );
 };
