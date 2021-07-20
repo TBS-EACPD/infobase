@@ -31,16 +31,17 @@ const split_value_and_units = (size: string) => {
   }
 };
 
+const defaultProps = {
+  size: "3em",
+  color: buttonPrimaryColor,
+  stroke_width: "2px",
+  show_numbers: false,
+};
 export class CountdownCircle extends React.Component<
   CountdownCircleProps,
   CountdownCircleState
 > {
-  static defaultProps = {
-    size: "3em",
-    color: buttonPrimaryColor,
-    stroke_width: "2px",
-    show_numbers: false,
-  };
+  static defaultProps = defaultProps;
 
   constructor(props: CountdownCircleProps) {
     super(props);

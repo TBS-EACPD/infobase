@@ -23,12 +23,13 @@ export type CheckBoxProps = typeof CheckBox.defaultProps & {
   checkmark_vertical_align?: number;
 };
 
+const defaultProps = {
+  isSolidBox: false,
+  color: primaryColor,
+  checkmark_vertical_align: 0.1,
+};
 export class CheckBox extends React.Component<CheckBoxProps> {
-  static defaultProps = {
-    isSolidBox: false,
-    color: primaryColor,
-    checkmark_vertical_align: 0.1,
-  };
+  static defaultProps = defaultProps;
   handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {
