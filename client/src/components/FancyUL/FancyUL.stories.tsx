@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { FancyUL } from "./FancyUL";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: FancyUL,
 } as Meta;
 
-type FancyULProps = React.ComponentProps<typeof FancyUL>;
+type FancyULProps = ComponentProps<typeof FancyUL>;
 
 const Template: Story<FancyULProps> = (args) => <FancyUL {...args} />;
 

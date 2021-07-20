@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { HeightClipper } from "./HeightClipper";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: HeightClipper,
 } as Meta;
 
-type HeightClipperProps = React.ComponentProps<typeof HeightClipper>;
+type HeightClipperProps = ComponentProps<typeof HeightClipper>;
 
 const Template: Story<HeightClipperProps> = (args) => (
   <HeightClipper {...args}>
