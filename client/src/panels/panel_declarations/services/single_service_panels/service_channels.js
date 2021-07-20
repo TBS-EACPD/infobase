@@ -8,6 +8,7 @@ import { create_text_maker_component, Panel } from "src/components/index";
 
 import { infobase_colors } from "src/core/color_schemes";
 
+import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -36,8 +37,8 @@ export class ServiceChannels extends React.Component {
     const filtered_keys = _.filter(delivery_channels_keys, (key) =>
       _.reduce(
         service.service_report,
-        (previous_is_not_null, report) =>
-          previous_is_not_null || !_.isNull(report[`${key}_count`]),
+        (previous_is_not_null_or_zero, report) =>
+          previous_is_not_null_or_zero || report[`${key}_count`],
         false
       )
     );
@@ -58,6 +59,16 @@ export class ServiceChannels extends React.Component {
           args={{
             max_channel_key: max_channel_key ? text_maker(max_channel_key) : "",
             max_value: max_value,
+          }}
+        />
+        <StandardLegend
+          legendListProps={{
+            items: _.map(filtered_keys, (key) => ({
+              id: key,
+              label: text_maker(key),
+              color: colors(text_maker(key)),
+            })),
+            checkBoxProps: { isSolidBox: true },
           }}
         />
         <WrappedNivoBar
