@@ -16,23 +16,32 @@ import {
 
 export default function (model_singleton) {
   const EmployeeWholeDataSchema = mongoose.Schema({
-    dept_code: str_type,
-    dimension: str_type,
-    2016: number_type,
-    2017: number_type,
-    2018: number_type,
-    2019: number_type,
-    2020: number_type,
-    avg_share: number_type,
+    dept_code: pkey_type(),
+    data: [
+      {
+        dimension: str_type,
+        by_year: [
+          {
+            year: fyear_type(),
+            value: number_type,
+          },
+        ],
+        avg_share: number_type,
+      },
+    ],
   });
 
   const EmployeeAveragesSchema = mongoose.Schema({
-    dept_code: str_type,
-    2016: number_type,
-    2017: number_type,
-    2018: number_type,
-    2019: number_type,
-    2020: number_type,
+    dept_code: pkey_type(),
+    data: {
+      by_year: [
+        {
+          year: fyear_type(),
+          value: number_type
+        }
+      ]
+    }
+    
   });
 
   model_singleton.define_model("EmployeeAgeGroup", EmployeeWholeDataSchema);
