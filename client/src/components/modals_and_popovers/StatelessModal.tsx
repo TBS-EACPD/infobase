@@ -19,11 +19,13 @@ type StatelessModalProps = typeof StatelessModal.defaultProps & {
   additional_dialog_class_name?: string;
 };
 
+const defaultProps = {
+  close_text: _.upperFirst(trivial_text_maker("close")),
+  include_close_button_in_header: false,
+};
 export class StatelessModal extends React.Component<StatelessModalProps> {
-  static defaultProps = {
-    close_text: _.upperFirst(trivial_text_maker("close")),
-    include_close_button_in_header: false,
-  };
+  static defaultProps = defaultProps;
+
   componentWillUnmount() {
     this.closeModal();
   }

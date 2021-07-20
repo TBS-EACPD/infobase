@@ -49,15 +49,17 @@ type ShareButtonProps = typeof ShareButton.defaultProps & {
 interface ShareButtonState {
   showModal: boolean;
 }
+
+const defaultProps = {
+  button_description: text_maker("share"),
+  icon_color: textLightColor,
+  icon_alternate_color: false,
+};
 export class ShareButton extends React.Component<
   ShareButtonProps,
   ShareButtonState
 > {
-  static defaultProps = {
-    button_description: text_maker("share"),
-    icon_color: textLightColor,
-    icon_alternate_color: false,
-  };
+  static defaultProps = defaultProps;
 
   constructor(props: ShareButtonProps) {
     super(props);
