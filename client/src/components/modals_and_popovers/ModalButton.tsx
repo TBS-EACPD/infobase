@@ -11,7 +11,7 @@ type ModalButtonProps = RouteComponentProps & {
   match: { params: { options: string } };
   button_text: string;
   title: string;
-  children: string | React.ReactNode;
+  children: React.ReactNode;
   aria_label: string;
 };
 
