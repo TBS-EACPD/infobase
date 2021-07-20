@@ -27,3 +27,23 @@
   align-items: center;
   text-align: center;
 }
+.pane-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+.pane-max-width {
+  max-width: 250px;
+  text-align: center;
+}
+.pane-rect {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  background-color: lighten($tertiaryColor, 37%);
+  border: 2px solid $primaryColor;
+}
