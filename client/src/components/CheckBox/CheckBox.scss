@@ -10,8 +10,7 @@
   flex-grow: 0;
 }
 
-// in CheckBox.tsx (1)
-.span-hover {
+.checkbox-span--interactive {
   cursor: pointer;
   &:focus,
   &:hover {

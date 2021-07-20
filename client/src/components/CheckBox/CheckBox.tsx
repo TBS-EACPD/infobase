@@ -84,7 +84,10 @@ export class CheckBox extends React.Component<CheckBoxProps> {
               backgroundColor: !onClick || active ? color : "transparent",
               ...checkbox_style,
             }}
-            className={classNames("checkbox-span", onClick && "span-hover")}
+            className={classNames(
+              "checkbox-span",
+              onClick && "checkbox-span--interactive"
+            )}
             onClick={this.handleOnClick}
           >
             {!isSolidBox && (
