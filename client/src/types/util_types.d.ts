@@ -36,3 +36,9 @@ export type WithoutIndexTypes<T> = Pick<T, KnownKeys<T>>;
 export type SafeOmit<T, K extends PropertyKey> = {
   [P in keyof T as Exclude<P, K>]: T[P];
 };
+
+export type ComponentProps<T> = T extends
+  | React.ComponentType<infer P>
+  | React.Component<infer P>
+  ? JSX.LibraryManagedAttributes<T, P>
+  : never;
