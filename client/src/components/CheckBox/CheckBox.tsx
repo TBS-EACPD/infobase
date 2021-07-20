@@ -9,7 +9,7 @@ import { IconCheckmark } from "src/icons/icons";
 
 import "./CheckBox.scss";
 
-export type CheckBoxProps = typeof CheckBox.defaultProps & {
+type CheckBoxProps = typeof CheckBox.defaultProps & {
   disabled?: boolean;
   onClick?: (id: string) => void;
   id: string;
