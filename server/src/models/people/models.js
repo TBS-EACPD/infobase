@@ -37,11 +37,10 @@ export default function (model_singleton) {
       by_year: [
         {
           year: fyear_type(),
-          value: number_type
-        }
-      ]
-    }
-    
+          value: number_type,
+        },
+      ],
+    },
   });
 
   model_singleton.define_model("EmployeeAgeGroup", EmployeeWholeDataSchema);
