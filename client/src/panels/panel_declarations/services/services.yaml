@@ -6,10 +6,10 @@ services_intro_title:
 services_intro_gov:
   transform: [handlebars, markdown]
   en: |
-    The Treasury Board of Canada Secretariat (TBS) is committed to improving the transparency, accountability, and accessibility of new and evolving government digital technologies and services. 
+    **The Treasury Board of Canada Secretariat (TBS)** is committed to improving the transparency, accountability, and accessibility of new and evolving government digital technologies and {{gl_tt "services" "SERVICE"}}. 
  
-    Information on services provided by the Government of Canada has been visualized here, so that Canadians can track service performance. These visualizations include information on service standards and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
-    
+    Information on services provided by the Government of Canada has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
+        
     The GC Service Inventory currently contains service data from **{{number_of_reporting_orgs}}** departments and agencies, covering results from **{{pa_last_year_2}}** to **{{pa_last_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
