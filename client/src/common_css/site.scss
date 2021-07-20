@@ -140,14 +140,13 @@ strong,
 .heavy-weight {
   font-weight: $heavyFontWeight;
 }
-<<<<<<< HEAD
-=======
 
 // in glossary.js (1)
->>>>>>> 6b45792f9 (Added comments of occurences)
 .medium-weight {
   font-weight: $mediumFontWeight;
 }
+
+// unused
 .light-weight {
   font-weight: $lightFontWeight;
 }
@@ -161,15 +160,6 @@ strong,
   &:focus,
   &:hover {
     color: $linkFocusColor;
-  }
-}
-
-// in CheckBox.tsx (1)
-.span-hover {
-  cursor: pointer;
-  &:focus,
-  &:hover {
-    opacity: 0.5;
   }
 }
 

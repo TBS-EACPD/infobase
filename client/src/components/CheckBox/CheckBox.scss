@@ -9,3 +9,12 @@
   flex-shrink: 0;
   flex-grow: 0;
 }
+
+// in CheckBox.tsx (1)
+.span-hover {
+  cursor: pointer;
+  &:focus,
+  &:hover {
+    opacity: 0.5;
+  }
+}
