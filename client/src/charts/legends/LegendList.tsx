@@ -2,9 +2,11 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { CheckBox, CheckBoxProps } from "src/components/CheckBox/CheckBox";
+import { CheckBox } from "src/components/CheckBox/CheckBox";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
+
+import { ComponentProps } from "src/types/util_types.d";
 
 import type { LegendItemType } from "./LegendItemType";
 
@@ -14,7 +16,7 @@ export interface LegendListProps {
   isHorizontal?: boolean;
   items: LegendItemType[];
   onClick: (id: string) => void;
-  checkBoxProps?: CheckBoxProps;
+  checkBoxProps?: ComponentProps<typeof CheckBox>;
 }
 
 export const LegendList = ({
