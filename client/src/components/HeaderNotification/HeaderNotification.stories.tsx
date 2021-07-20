@@ -2,6 +2,8 @@ import { Story, Meta } from "@storybook/react";
 import _ from "lodash";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { HeaderNotification } from "./HeaderNotification";
 
 export default {
@@ -9,7 +11,7 @@ export default {
   component: HeaderNotification,
 } as Meta;
 
-type HeaderNotificationProps = React.ComponentProps<typeof HeaderNotification>;
+type HeaderNotificationProps = ComponentProps<typeof HeaderNotification>;
 
 const Template: Story<HeaderNotificationProps> = (args) => (
   <HeaderNotification {...args} />

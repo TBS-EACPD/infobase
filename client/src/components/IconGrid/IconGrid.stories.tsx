@@ -15,6 +15,8 @@ import {
   IconBaselineCloud,
 } from "src/icons/icons";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { IconGrid } from "./IconGrid";
 
 export default {
@@ -36,7 +38,7 @@ const tech_icon_list = _.chain([
   .map((SVG) => ({ svg: <SVG alternate_color={false} width="1.25em" /> }))
   .value();
 
-type IconGridProps = React.ComponentProps<typeof IconGrid>;
+type IconGridProps = ComponentProps<typeof IconGrid>;
 
 const Template: Story<IconGridProps> = (args) => <IconGrid {...args} />;
 

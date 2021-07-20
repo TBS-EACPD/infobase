@@ -2,6 +2,8 @@ import { useArgs } from "@storybook/client-api";
 import { Story, Meta } from "@storybook/react";
 import React, { useState, useEffect } from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { StatelessDetails } from "./Details";
 
 export default {
@@ -22,7 +24,7 @@ export default {
   decorators: [(Story) => <div>{Story()}</div>],
 } as Meta;
 
-type StatelessDetailsProps = React.ComponentProps<typeof StatelessDetails>;
+type StatelessDetailsProps = ComponentProps<typeof StatelessDetails>;
 
 const Template: Story<StatelessDetailsProps> = (args) => {
   const [_, updateArgs] = useArgs();

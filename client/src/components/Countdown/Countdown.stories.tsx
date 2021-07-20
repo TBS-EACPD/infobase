@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { Countdown } from "./Countdown";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: Countdown,
 } as Meta;
 
-type CountdownProps = React.ComponentProps<typeof Countdown>;
+type CountdownProps = ComponentProps<typeof Countdown>;
 
 const Template: Story<CountdownProps> = (args) => <Countdown {...args} />;
 

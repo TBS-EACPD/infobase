@@ -58,6 +58,9 @@
               },
               "React.FC": {
                 "message": "FC is discouraged, prefer a plain function. See https://github.com/facebook/create-react-app/pull/8177"
+              },
+              "React.ComponentProps": {
+                "message": "React.ComponentProps won't properly recover information about prop defaults in all cases, use the ComponentProps found in src/types/util_types.d.ts"
               }
             }
           }

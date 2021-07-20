@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { KeyConceptList } from "./KeyConceptList";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: KeyConceptList,
 } as Meta;
 
-type KeyConceptListProps = React.ComponentProps<typeof KeyConceptList>;
+type KeyConceptListProps = ComponentProps<typeof KeyConceptList>;
 
 const Template: Story<KeyConceptListProps> = (args) => (
   <KeyConceptList {...args} />
