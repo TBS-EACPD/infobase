@@ -37,6 +37,8 @@ export type SafeOmit<T, K extends PropertyKey> = {
   [P in keyof T as Exclude<P, K>]: T[P];
 };
 
+// From https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/default_props/#solution
+// More reliable than React.ComponentProps when used with components that have default prop values
 export type ComponentProps<T> = T extends
   | React.ComponentType<infer P>
   | React.Component<infer P>
