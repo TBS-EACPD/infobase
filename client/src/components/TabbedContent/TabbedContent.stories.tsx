@@ -2,18 +2,14 @@ import { Story, Meta } from "@storybook/react";
 
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { TabbedContent } from "./TabbedContent";
 
 export default {
   title: "TabbedContent",
   component: TabbedContent,
 } as Meta;
-
-type ComponentProps<T> = T extends
-  | React.ComponentType<infer P>
-  | React.Component<infer P>
-  ? JSX.LibraryManagedAttributes<T, P>
-  : never;
 
 type TabbedContentProps = ComponentProps<typeof TabbedContent>;
 
