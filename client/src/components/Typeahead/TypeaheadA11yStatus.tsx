@@ -85,15 +85,13 @@ class DelayedRender extends React.Component<
   }
 }
 
-interface TypeaheadA11yStatusProps {
-  selection_cursor: number;
-  results: ResultProps[];
-}
-
 export const TypeaheadA11yStatus = ({
   selection_cursor,
   results,
-}: TypeaheadA11yStatusProps) => {
+}: {
+  selection_cursor: number;
+  results: ResultProps[];
+}) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
       const selected_name = results[selection_cursor].plain_text;

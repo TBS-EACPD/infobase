@@ -24,27 +24,25 @@ function FirstChild(props: { children: React.ReactElement }) {
   return childrenArray[0] || null;
 }
 
-type AccordionEnterExitProps = typeof AccordionEnterExit.defaultProps & {
-  opening_opacity?: number;
-  closing_opacity?: number;
+const AccordionEnterExitDefaultProps = {
+  max_height: "80vh" as string | number,
+  opening_opacity: 1e-6 as string | number,
+  closing_opacity: 1 as string | number,
+};
+type AccordionEnterExitProps = typeof AccordionEnterExitDefaultProps & {
   expandDuration: number;
   collapseDuration: number;
-  max_height: string;
   onExited?: (node: HTMLElement) => void;
   enter?: boolean;
   exit?: boolean;
   in?: boolean;
   className: string;
-  style: { [key: string]: string };
+  style: React.CSSProperties;
   children: React.ReactNode;
 };
 
 class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
-  static defaultProps = {
-    max_height: "80vh",
-    opening_opacity: 1e-6,
-    closing_opacity: 1,
-  };
+  static defaultProps = AccordionEnterExitDefaultProps;
   onExiting = (component: HTMLElement) => {
     const node = ReactDOM.findDOMNode(component) as HTMLElement;
     const initialHeight = node.offsetHeight;
@@ -104,24 +102,20 @@ class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
   }
 }
 
-interface CommonStatelessPullDownAccordionProps {
+interface CommonAccordionProps {
   max_height: string;
   title: string;
-  children: React.ReactElement;
+  children: React.ReactNode;
   onToggle: React.ReactEventHandler<HTMLElement>;
-}
-interface StatelessPullDownAccordionProps
-  extends CommonStatelessPullDownAccordionProps {
-  isExpanded: boolean;
 }
 
 const StatelessPullDownAccordion = ({
-  max_height,
+  max_height = "80vh",
   title,
   isExpanded,
   children,
   onToggle,
-}: StatelessPullDownAccordionProps) => (
+}: CommonAccordionProps & { isExpanded: boolean }) => (
   <div aria-label={title} className="pull-down-accordion">
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
       <button
@@ -159,10 +153,7 @@ const StatelessPullDownAccordion = ({
   </div>
 );
 
-StatelessPullDownAccordion.defaultProps = {
-  max_height: "80vh",
-};
-interface AutoAccordionProps extends CommonStatelessPullDownAccordionProps {
+interface AutoAccordionProps extends CommonAccordionProps {
   isInitiallyExpanded: boolean;
 }
 interface AutoAccordionState {

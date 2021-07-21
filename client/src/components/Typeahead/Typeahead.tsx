@@ -38,21 +38,15 @@ const virtualized_cell_measure_cache = new CellMeasurerCache({
 */
 const default_selection_cursor = -1;
 
-export interface ResultProps {
-  header?: React.ReactNode;
-  on_select: () => void;
-  content: React.ReactNode;
-  plain_text: string;
-}
-
-type TypeaheadProps = typeof Typeahead.defaultProps & {
+const TypeaheadDefaultProps = {
+  placeholder: text_maker("search") as string,
+  min_length: 3,
+  on_query_debounce_time: 300,
+};
+type TypeaheadProps = typeof TypeaheadDefaultProps & {
   on_query: (str: string) => void;
   query_value: string;
   results: ResultProps[];
-
-  min_length: number;
-  placeholder: string;
-  on_query_debounce_time: number;
   additional_a11y_description?: string;
   utility_buttons?: boolean | React.ReactNode | React.ReactNode[];
 };
@@ -64,17 +58,20 @@ interface TypeaheadState {
   results?: ResultProps[];
 }
 
+export interface ResultProps {
+  header?: React.ReactNode;
+  on_select: () => void;
+  content: React.ReactNode;
+  plain_text: string;
+}
+
 export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
+  static defaultProps = TypeaheadDefaultProps;
+
   menu_id: string;
 
   private typeahead_ref = React.createRef<HTMLDivElement>();
   private virtualized_list_ref = React.createRef<List>();
-
-  static defaultProps = {
-    placeholder: text_maker("search"),
-    min_length: 3,
-    on_query_debounce_time: 300,
-  };
 
   constructor(props: TypeaheadProps) {
     super(props);
