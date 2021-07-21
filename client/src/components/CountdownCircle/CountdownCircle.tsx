@@ -9,17 +9,6 @@ import { is_IE } from "src/core/feature_detection";
 
 import "./CountdownCircle.scss";
 
-type CountdownCircleProps = typeof CountdownCircle.defaultProps & {
-  time: number;
-  size?: string;
-  color?: string;
-  stroke_width?: string;
-  show_numbers?: boolean;
-  on_end_callback: () => void;
-};
-interface CountdownCircleState {
-  countdown_circle_instance_id: string;
-}
 const split_value_and_units = (size: string) => {
   const unit = /[a-z]+$/.exec(size);
   if (unit) {
@@ -31,17 +20,27 @@ const split_value_and_units = (size: string) => {
   }
 };
 
-const defaultProps = {
+const CountdownCircleDefaultProps = {
   size: "3em",
-  color: buttonPrimaryColor,
   stroke_width: "2px",
+  color: buttonPrimaryColor,
   show_numbers: false,
 };
+
+type CountdownCircleProps = typeof CountdownCircleDefaultProps & {
+  time: number;
+  on_end_callback: () => void;
+};
+
+interface CountdownCircleState {
+  countdown_circle_instance_id: string;
+}
+
 export class CountdownCircle extends React.Component<
   CountdownCircleProps,
   CountdownCircleState
 > {
-  static defaultProps = defaultProps;
+  static defaultProps = CountdownCircleDefaultProps;
 
   constructor(props: CountdownCircleProps) {
     super(props);

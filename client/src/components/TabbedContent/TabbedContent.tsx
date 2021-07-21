@@ -6,6 +6,16 @@ import { lang } from "src/core/injected_build_constants";
 
 import "./TabbedContent.scss";
 
+const TabbedControlsDefaultProps = {
+  disabled_message: {
+    en: "Unavailable",
+    fr: "Indisponsible",
+  }[lang],
+};
+type TabbedControlsProps = typeof TabbedControlsDefaultProps & {
+  tab_options: tab_option[];
+  tab_callback: (key: string) => void;
+};
 type tab_option = {
   key: string;
   label: string;
@@ -13,32 +23,6 @@ type tab_option = {
   is_disabled: boolean;
 };
 
-type TabbedControlsProps = typeof TabbedControls.defaultProps & {
-  tab_options: tab_option[];
-  tab_callback: (key: string) => void;
-  disabled_message?: string;
-};
-type TabbedContentProps = typeof TabbedContent.defaultProps & {
-  tab_keys: string[];
-  tab_labels: { [key: string]: string };
-  tab_pane_contents: { [key: string]: React.ReactNode };
-  disabled_tabs?: string[];
-  disabled_message: string;
-};
-interface TabbedContentState {
-  open_tab_key: string;
-}
-
-const TabbedControlsDefaultProps = {
-  disabled_message: {
-    en: "Unavailable",
-    fr: "Indisponsible",
-  }[lang],
-};
-
-const TabbedContentDefaultProps = {
-  disabled_tabs: Array<string>(),
-};
 export class TabbedControls extends React.Component<TabbedControlsProps> {
   static defaultProps = TabbedControlsDefaultProps;
   render() {
@@ -82,11 +66,20 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
   }
 }
 
-/*props: 
-  tab_keys: array of keys associated with tabs,
-  tab_labels: object, tab label strings stored by tab key (corresponding to each of tabKeys),
-  tab_pane_contents: object, tab pane contents as JSX stored by tab key (corresponding to each of tabKeys),
-*/
+const TabbedContentDefaultProps = {
+  disabled_tabs: [] as string[],
+};
+type TabbedContentProps = typeof TabbedContentDefaultProps & {
+  tab_keys: string[];
+  tab_labels: { [key: string]: string };
+  tab_pane_contents: { [key: string]: React.ReactNode };
+  disabled_message: string;
+};
+
+interface TabbedContentState {
+  open_tab_key: string;
+}
+
 export class TabbedContent extends React.Component<
   TabbedContentProps,
   TabbedContentState
@@ -96,7 +89,7 @@ export class TabbedContent extends React.Component<
   constructor(props: TabbedContentProps) {
     super(props);
     this.state = {
-      open_tab_key: props.tab_keys[0], // Starts with first tab open
+      open_tab_key: props.tab_keys[0],
     };
   }
 
