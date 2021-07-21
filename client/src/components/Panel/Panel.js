@@ -52,7 +52,7 @@ const PanelGlossary = ({ keys }) => {
       <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
         {_.map(keys, (key, ix) => (
           <li key={ix} className="list-inline-item">
-            <GlossaryItem id={key} item_class="glossary-link" />
+            <GlossaryItem id={key} item_class="panel-glossary-link" />
             {ix !== last_ix && ", "}
           </li>
         ))}
