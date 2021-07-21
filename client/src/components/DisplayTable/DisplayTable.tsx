@@ -11,6 +11,8 @@ import {
 } from "src/components/misc_util_components";
 import { SortDirections } from "src/components/SortDirection/SortDirection";
 
+import { FormatKey } from "src/core/format";
+
 import { LegendList } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
@@ -28,30 +30,15 @@ import "./DisplayTable.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-type CellValue = string | number | Date;
-interface ColumnKeyProps {
-  index: number; // Zero indexed, order of column
-  header: string; // Name of column
-  is_sortable: boolean; // Default to true
-  is_summable: boolean; // Default to false
-  is_searchable: boolean; // Default to false
-  initial_visible: boolean; // Default to trues
-  formatter: // If string, supply format key (e.g.: "big_int") found in format.js. If function, column value is passed in (e.g.: (value) => <span<{value}</span>)
-  string | ((val: CellValue) => string | React.ReactNode);
-  raw_formatter: (val: CellValue) => string; // Actual raw value for data. Value from this is used for sorting/searching/csv string. Default to _.identity. (e.g.: (value) => Dept.lookup(value).name)
-  sum_func: (sum: number, value: number) => number; // e.g.: (sum, value) => ... Default to sum + value
-  sort_func: (a: CellValue, b: CellValue, descending: boolean) => number; // e.g.: (a,b) => ... Default to _.sortBy
-  sum_initial_value: number; // Default to 0
-  visibility_toggleable?: boolean; // Default to false for index 0, true for all other indexes
-}
-
-interface ColumnConfigProps {
-  [keys: string]: ColumnKeyProps;
-}
-
-type _DisplayTableProps = typeof _DisplayTable.defaultProps & {
+const _DisplayTablePropsDefaultProps = {
+  page_size_increment: 100,
+  enable_pagination: true,
+  page_size_num_options_max: 5,
+  unsorted_initial: true,
+};
+type _DisplayTableProps = typeof _DisplayTablePropsDefaultProps & {
   data: DisplayTableData[];
-  column_configs: ColumnConfigProps;
+  column_configs: ColumnConfigs;
   unsorted_initial?: boolean;
   page_size_increment?: number;
   table_name?: string;
@@ -71,24 +58,40 @@ interface _DisplayTableState {
   visible_col_keys: string[];
   searches: { [keys: string]: string };
 }
+
 interface DisplayTableData {
   [key: string]: CellValue;
 }
+// TODO: realy do not want Date to be a type in CellValue, hunt down the case(s) that require it, think about better ways to deal with this.
+// Source of a gotcha with default sorting behaviour.
+type CellValue = string | number | Date;
 
-const column_config_defaults = {
+interface ColumnConfigs {
+  [keys: string]: ColumnConfig;
+}
+
+const get_column_config_defaults = (index: number) => ({
   initial_visible: true,
   is_sortable: true,
   is_summable: false,
   is_searchable: false,
   sum_func: (sum: number, value: number) => sum + value,
-  raw_formatter: _.identity,
+  // "raw" value for some complex datasets actually requires processing, as we "raw" values are used for sorting, searching, AND the output csv string
+  raw_formatter: _.identity as (val: CellValue) => string,
   sum_initial_value: 0,
+  visibility_toggleable: index !== 0,
+});
+type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
+  index: number;
+  header: string;
+  formatter: FormatKey | ((val: CellValue) => string | React.ReactNode);
+  // TODO there's a default sort func hardcoded inside the component, not in the config defaults, and it's a bit magic
+  sort_func?: (a: CellValue, b: CellValue, descending: boolean) => number;
 };
-const get_col_configs_with_defaults = (column_configs: ColumnConfigProps) =>
-  _.mapValues(column_configs, (supplied_column_config: ColumnKeyProps) => ({
-    // Set visibility_toggleable default based off index
-    visibility_toggleable: supplied_column_config.index !== 0,
-    ...column_config_defaults,
+
+const get_col_configs_with_defaults = (column_configs: ColumnConfigs) =>
+  _.mapValues(column_configs, (supplied_column_config: ColumnConfig) => ({
+    ...get_column_config_defaults(supplied_column_config.index),
     ...supplied_column_config,
   }));
 const get_default_state_from_props = (props: _DisplayTableProps) => {
@@ -136,12 +139,7 @@ export class _DisplayTable extends React.Component<
 > {
   private first_data_ref = React.createRef<HTMLTableCellElement>();
 
-  public static defaultProps = {
-    page_size_increment: 100,
-    enable_pagination: true,
-    page_size_num_options_max: 5,
-    unsorted_initial: true,
-  };
+  static defaultProps = _DisplayTablePropsDefaultProps;
 
   constructor(props: _DisplayTableProps) {
     super(props);
@@ -296,23 +294,28 @@ export class _DisplayTable extends React.Component<
       )
       .thru((unsorted_array) => {
         if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
-          const sorting_config = col_configs_with_defaults[sort_by];
-          return sorting_config.sort_func
-            ? _.map(unsorted_array).sort(
-                (a: DisplayTableData, b: DisplayTableData) =>
-                  sorting_config.sort_func(a[sort_by], b[sort_by], descending)
-              )
-            : _.sortBy(unsorted_array, (row: DisplayTableData) =>
-                is_number_string_date(
-                  sorting_config.raw_formatter(row[sort_by])
-                ) /*Please Leave On: sorting data containing BOTH string and date is not consistent
-                 It's probably trying to cast string into date object and if that fails, it probably stops sorting.
-                 Better off just building a sort function to handle it*/
-                  ? sorting_config.raw_formatter(row[sort_by])
-                  : Number.NEGATIVE_INFINITY
-              );
+          const { sort_func, raw_formatter } =
+            col_configs_with_defaults[sort_by];
+
+          if (typeof sort_func !== "undefined") {
+            return _.map(unsorted_array).sort(
+              (a: DisplayTableData, b: DisplayTableData) =>
+                sort_func(a[sort_by], b[sort_by], descending)
+            );
+          } else {
+            /*TODO: sorting data containing BOTH string and date is not consistent
+             It's probably trying to cast string into date object and if that fails, it probably stops sorting.
+             For now, any case where that can happen should write a custom sort_func to handle it
+             ... really need to sort out the absolute mess that lead to Date being a valid CellValue type, ugh */
+            return _.sortBy(unsorted_array, (row: DisplayTableData) =>
+              is_number_string_date(raw_formatter(row[sort_by]))
+                ? raw_formatter(row[sort_by])
+                : Number.NEGATIVE_INFINITY
+            );
+          }
+        } else {
+          return unsorted_array;
         }
-        return unsorted_array;
       })
       .tap(descending ? _.reverse : _.noop)
       .value();
@@ -687,8 +690,13 @@ export class DisplayTable extends React.Component<DisplayTableProps> {
     const col_configs_with_defaults =
       get_col_configs_with_defaults(column_configs);
 
-    const showing_sort = show_sort || _.size(data) > 2;
-    const showing_search = show_search || _.size(data) > 5;
+    const showing_sort = !_.isUndefined(show_sort)
+      ? show_sort
+      : _.size(data) > 2;
+    const showing_search = !_.isUndefined(show_search)
+      ? show_search
+      : _.size(data) > 5;
+
     const smart_column_configs = _.mapValues(
       col_configs_with_defaults,
       (supplied_column_config) => ({
@@ -697,6 +705,7 @@ export class DisplayTable extends React.Component<DisplayTableProps> {
         is_sortable: supplied_column_config.is_sortable && showing_sort,
       })
     );
+
     return (
       <_DisplayTable
         {...this.props}
