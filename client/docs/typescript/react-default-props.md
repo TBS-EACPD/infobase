@@ -62,12 +62,14 @@ const SomeComponentDefaultProps = {
 ```
 
 2.  - Problem: as mentioned, there's magic inside the class component. The type `SomeComponentProps` itself still thinks the props with defaults are required, so outside of the class component declaration it isn't that useful. For an additional gotcha, the standard react utility type pattern `React.ComponentProps<typeof SomeComponentProps>` doesn't recover the desired type either!
-    - Fix: there's a pattern that does work, we have a utility type that implements it in `src/types/util_types.d.ts`, exported as `ComponentProps`. If you use that, you'll recover the type information with the correct mix of required/optional props.
+    - Fix: there's a pattern that does work, we have a utility type that implements it in `src/types/util_types.d.ts`, exported as `ComponentProps`. If you use that, you'll recover the type information with the correct mix of required/optional props
 
 ## Function Components
 
 The straightforward case. Just type it as you would any function with default values.
 
-_Do not_ use `React.FunctionalComponent` (https://github.com/facebook/create-react-app/pull/8177) or `SomeComponent.defaultProps` (set to be deprecated anyway).
+_Do not_ use `React.FunctionalComponent` (https://github.com/facebook/create-react-app/pull/8177)
 
-_Do_ use our util type `ComponentProps<typeof SomeComponent>` instead of `React.ComponentProps` if you need to reuse the prop types in an external module.
+_Do not_ use `SomeFunctionalComponent.defaultProps` (set to be deprecated, not going to get good typing)
+
+_Do_ use our util type `ComponentProps<typeof SomeComponent>` instead of `React.ComponentProps` if you need to recover the prop types in an external module
