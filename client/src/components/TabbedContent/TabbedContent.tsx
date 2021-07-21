@@ -66,16 +66,13 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
   }
 }
 
-const TabbedContentDefaultProps = {
-  disabled_tabs: [] as string[],
-};
-type TabbedContentProps = typeof TabbedContentDefaultProps & {
+type TabbedContentProps = {
   tab_keys: string[];
   tab_labels: { [key: string]: string };
   tab_pane_contents: { [key: string]: React.ReactNode };
-  disabled_message: string;
+  disabled_tabs?: string[];
+  disabled_message?: string;
 };
-
 interface TabbedContentState {
   open_tab_key: string;
 }
@@ -84,8 +81,6 @@ export class TabbedContent extends React.Component<
   TabbedContentProps,
   TabbedContentState
 > {
-  static defaultProps = TabbedContentDefaultProps;
-
   constructor(props: TabbedContentProps) {
     super(props);
     this.state = {
