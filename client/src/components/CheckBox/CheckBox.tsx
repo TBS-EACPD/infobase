@@ -9,27 +9,25 @@ import { IconCheckmark } from "src/icons/icons";
 
 import "./CheckBox.scss";
 
-type CheckBoxProps = typeof CheckBox.defaultProps & {
-  disabled?: boolean;
-  onClick?: (id: string) => void;
+const CheckBoxDefaultProps = {
+  isSolidBox: false,
+  color: primaryColor,
+  checkmark_vertical_align: 0.1 as string | number,
+};
+
+type CheckBoxProps = typeof CheckBoxDefaultProps & {
   id: string;
   label: string;
+  onClick?: (id: string) => void;
+  disabled?: boolean;
   active?: boolean;
-  color?: string;
-  isSolidBox?: boolean;
   container_style?: React.CSSProperties;
   checkbox_style?: React.CSSProperties;
   label_style?: React.CSSProperties;
-  checkmark_vertical_align?: number;
 };
 
-const defaultProps = {
-  isSolidBox: false,
-  color: primaryColor,
-  checkmark_vertical_align: 0.1,
-};
 export class CheckBox extends React.Component<CheckBoxProps> {
-  static defaultProps = defaultProps;
+  static defaultProps = CheckBoxDefaultProps;
   handleOnClick = () => {
     const { disabled, onClick, id } = this.props;
     if (!disabled && onClick) {

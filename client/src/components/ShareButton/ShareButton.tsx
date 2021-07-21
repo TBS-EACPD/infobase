@@ -36,30 +36,27 @@ const CommonSocialMediaShareButton = ({
   </a>
 );
 
-type ShareButtonProps = typeof ShareButton.defaultProps & {
-  button_class_name: string;
-  button_description?: string;
-  icon_alternate_color?: string | boolean;
-  icon_color?: string;
-  icon_size: number | string;
+const ShareButtondefaultProps = {
+  button_description: text_maker("share") as string,
+  icon_color: textLightColor,
+};
+type ShareButtonProps = typeof ShareButtondefaultProps & {
   title: string;
   url: string;
+  button_class_name: string;
+  icon_size: number | string;
+  icon_alternate_color?: string;
 };
 
 interface ShareButtonState {
   showModal: boolean;
 }
 
-const defaultProps = {
-  button_description: text_maker("share"),
-  icon_color: textLightColor,
-  icon_alternate_color: false,
-};
 export class ShareButton extends React.Component<
   ShareButtonProps,
   ShareButtonState
 > {
-  static defaultProps = defaultProps;
+  static defaultProps = ShareButtondefaultProps;
 
   constructor(props: ShareButtonProps) {
     super(props);

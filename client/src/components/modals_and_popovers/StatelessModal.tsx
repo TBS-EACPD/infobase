@@ -6,26 +6,23 @@ import { Modal } from "react-bootstrap";
 import { trivial_text_maker } from "src/models/text";
 import "./bootstrap_modal_exstension.scss";
 
-type StatelessModalProps = typeof StatelessModal.defaultProps & {
+const StatelessModalDefaultProps = {
+  close_text: _.upperFirst(trivial_text_maker("close")) as React.ReactNode,
+  include_close_button_in_header: false,
+};
+type StatelessModalProps = typeof StatelessModalDefaultProps & {
   on_close_callback: () => void;
   show: boolean;
-  title: React.ReactNode;
-  subtitle?: string;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
   header?: React.ReactNode;
-  body: React.ReactNode;
+  body?: React.ReactNode;
   footer?: React.ReactNode;
-  close_text?: string;
-  include_close_button_in_header?: boolean;
   additional_dialog_class_name?: string;
 };
 
-const defaultProps = {
-  close_text: _.upperFirst(trivial_text_maker("close")),
-  include_close_button_in_header: false,
-};
 export class StatelessModal extends React.Component<StatelessModalProps> {
-  static defaultProps = defaultProps;
-
+  static defaultProps = StatelessModalDefaultProps;
   componentWillUnmount() {
     this.closeModal();
   }
@@ -90,7 +87,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
         size="xl"
         onHide={this.closeModal}
         dialogClassName={classNames(
-          `modal-dialog`,
+          "modal-dialog",
           additional_dialog_class_name
         )}
         centered

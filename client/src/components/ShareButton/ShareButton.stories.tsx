@@ -21,6 +21,5 @@ Basic.args = {
   title: "Title",
   button_description: "",
   icon_color: "black",
-  icon_alternate_color: false,
   icon_size: "2em",
 };
