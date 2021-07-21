@@ -30,7 +30,7 @@ const PanelSource = ({ links }) => {
       <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
         {_.map(links, ({ href, html }, ix) => (
           <li key={ix} className="list-inline-item">
-            <a className="source-link" href={href}>
+            <a className="panel-source-link" href={href}>
               <span dangerouslySetInnerHTML={{ __html: html }} />
             </a>
             {ix !== last_ix && ", "}
