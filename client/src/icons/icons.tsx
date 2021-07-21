@@ -17,38 +17,24 @@ const inline_svg_default_styles = {
   verticalAlign: "-0.2em",
 };
 
-interface IconProps {
-  color?: string;
-  alternate_color?: string | boolean;
-  rotation?: number;
-  title?: string;
-  width?: number | string;
-  height?: number | string;
-  svg_style?: React.CSSProperties;
-  inline?: boolean;
-  aria_hide?: boolean;
-
-  viewbox_width?: number | string;
-  viewbox_height?: number | string;
-}
-
-interface IconWrapperProps extends IconProps {
-  ChildSVG: React.ElementType;
-}
-
-interface IconState {
+const IconWrapperDefaultProps = {
+  color: textColor,
+  alternate_color: tertiaryColor as string | boolean,
+  inline: false,
+  aria_hide: false,
+};
+type IconWrapperProps = OuterIconProps &
+  typeof IconWrapperDefaultProps & {
+    viewbox_width: number | string;
+    viewbox_height?: number | string;
+    ChildSVG: React.ElementType;
+  };
+interface IconWrapperState {
   icon_instance_id: string;
 }
 
-class _IconWrapper extends React.Component<IconWrapperProps, IconState> {
-  static defaultProps = {
-    color: textColor,
-    alternate_color: tertiaryColor,
-    inline: false,
-    aria_hide: false,
-
-    viewbox_width: 24,
-  };
+class _IconWrapper extends React.Component<IconWrapperProps, IconWrapperState> {
+  static defaultProps = IconWrapperDefaultProps;
   constructor(props: IconWrapperProps) {
     super(props);
     this.state = { icon_instance_id: _.uniqueId("icon-svg-instance-") };
@@ -61,8 +47,8 @@ class _IconWrapper extends React.Component<IconWrapperProps, IconState> {
       rotation,
       title,
       width,
-      svg_style,
       height, // if falsey will assume square using width
+      svg_style,
       inline,
       aria_hide, // for icons that are displayed next to text that repeats what the icon represents
 
@@ -124,6 +110,15 @@ class _IconWrapper extends React.Component<IconWrapperProps, IconState> {
     );
   }
 }
+
+type OuterIconProps = {
+  title?: string;
+  rotation?: number;
+  width?: number | string;
+  height?: number | string;
+  svg_style?: React.CSSProperties;
+};
+type IconProps = OuterIconProps & Partial<typeof IconWrapperDefaultProps>;
 
 const IconHome = (props: IconProps) => {
   const SVGHome = () => (
