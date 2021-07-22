@@ -15,9 +15,10 @@ export default {
     include_privacy: {
       defaultValue: true,
     },
-    all_required_user_fields_are_filled: {
-      defaultValue: true,
-    },
+    // for some reason, this is needed to activate the submit button, will always be disabled otherwise
+    // all_required_user_fields_are_filled: {
+    //   defaultValue: true,
+    // },
   },
 };
 
