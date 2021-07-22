@@ -284,7 +284,7 @@ jobs:
           name: start_http_server
           command: (cd client && npm run ci_serve)
           background: true
-      #- run: (cd client && npm run ci_route_load_tests)
+      - run: (cd client && npm run ci_route_load_tests)
       - run: (cd client && npm run cypress:run)
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
