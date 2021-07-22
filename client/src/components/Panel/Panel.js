@@ -30,7 +30,7 @@ const PanelSource = ({ links }) => {
       <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
         {_.map(links, ({ href, html }, ix) => (
           <li key={ix} className="list-inline-item">
-            <a className="panel-bold" href={href}>
+            <a className="bold" href={href}>
               <span dangerouslySetInnerHTML={{ __html: html }} />
             </a>
             {ix !== last_ix && ", "}
@@ -52,7 +52,7 @@ const PanelGlossary = ({ keys }) => {
       <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
         {_.map(keys, (key, ix) => (
           <li key={ix} className="list-inline-item">
-            <GlossaryItem id={key} item_class="panel-bold" />
+            <GlossaryItem id={key} item_class="bold" />
             {ix !== last_ix && ", "}
           </li>
         ))}

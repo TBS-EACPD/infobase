@@ -1,4 +1,5 @@
 @import "src/common_css/common-variables";
+@import "src/extended_bootstrap_css/bootstrap-wet-fixes-extensions";
 
 /* Panel extensions */
 .panel {
@@ -107,8 +108,4 @@ button.panel-heading-utils {
 .panel-separator {
   margin: 20px 60px 20px 60px;
   border-top: 1px solid rgba($separatorColor, 0.5);
-}
-
-.panel-bold {
-  font-weight: $heavyFontWeight;
 }
