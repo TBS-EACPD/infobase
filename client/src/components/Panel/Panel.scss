@@ -109,11 +109,6 @@ button.panel-heading-utils {
   border-top: 1px solid rgba($separatorColor, 0.5);
 }
 
-.panel-source-link {
-  font-weight: bold;
-}
-
-span.panel-glossary-link,
-a.panel-glossary-link {
-  font-weight: bold;
+.panel-bold {
+  font-weight: $heavyFontWeight;
 }
