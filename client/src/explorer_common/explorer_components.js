@@ -49,7 +49,6 @@ export const ExplorerHeader = ({
             }
             onClick={() => col_click(id)}
             tabIndex={0}
-            role="button"
           >
             {header_display}
             {is_sortable && (
