@@ -1,14 +1,17 @@
 import { Story, Meta } from "@storybook/react";
+import _ from "lodash";
 import React from "react";
 
-import { DisplayTable, CellValue, ColumnConfigProps } from "./DisplayTable";
+import { ComponentProps } from "src/types/util_types.d";
+
+import { DisplayTable, CellValue } from "./DisplayTable";
 
 export default {
   title: "Tables/DisplayTable",
   component: DisplayTable,
 } as Meta;
 
-type DisplayTableProps = React.ComponentProps<typeof DisplayTable>;
+type DisplayTableProps = ComponentProps<typeof DisplayTable>;
 
 const Template: Story<DisplayTableProps> = (args) => {
   return <DisplayTable {...args} />;
@@ -27,13 +30,15 @@ const common_column_configs = {
     index: 0,
     header: "Pizza type",
     is_searchable: true,
+    formatter: _.identity,
   },
   price: {
     index: 1,
     header: "Price",
     is_sortable: true,
+    formatter: _.identity,
   },
-} as unknown as ColumnConfigProps;
+};
 
 export const Basic = Template.bind({});
 Basic.args = {
@@ -41,20 +46,14 @@ Basic.args = {
   column_configs: common_column_configs,
 };
 
-type Country =
-  | "Italy"
-  | "Korea"
-  | "Canada"
-  | "United_States"
-  | "United_Kingdom";
-
-const country_lookup = {
+const country_lookup: Record<string, string> = {
   Italy: "Italy",
   Korea: "Korea",
   Canada: "Canada",
   United_States: "United States",
   United_Kingdom: "United Kingdom",
 };
+
 const table_with_URL_column_configs = {
   ...common_column_configs,
   label: {
@@ -65,7 +64,7 @@ const table_with_URL_column_configs = {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {country_lookup[id as Country]}
+        {typeof id === "string" ? country_lookup[id] : <></>}
       </a>
     ),
   },
