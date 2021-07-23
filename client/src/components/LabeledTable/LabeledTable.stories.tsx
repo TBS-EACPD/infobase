@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { LabeledTable } from "./LabeledTable";
 
 export default {
@@ -15,9 +17,9 @@ export default {
       ],
     },
   },
-};
+} as Meta;
 
-type LabeledTableProps = React.ComponentProps<typeof LabeledTable>;
+type LabeledTableProps = ComponentProps<typeof LabeledTable>;
 
 const Template: Story<LabeledTableProps> = (args) => <LabeledTable {...args} />;
 

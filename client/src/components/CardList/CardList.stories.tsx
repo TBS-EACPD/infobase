@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { CardList } from "./CardList";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: CardList,
 } as Meta;
 
-type CardListProps = React.ComponentProps<typeof CardList>;
+type CardListProps = ComponentProps<typeof CardList>;
 
 const Template: Story<CardListProps> = (args) => <CardList {...args} />;
 

@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { LabeledBox } from "./LabeledBox";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: LabeledBox,
 } as Meta;
 
-type LabeledBoxProps = React.ComponentProps<typeof LabeledBox>;
+type LabeledBoxProps = ComponentProps<typeof LabeledBox>;
 
 const Template: Story<LabeledBoxProps> = (args) => <LabeledBox {...args} />;
 
