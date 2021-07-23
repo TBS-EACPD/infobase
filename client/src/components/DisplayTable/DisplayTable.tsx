@@ -346,7 +346,7 @@ export class _DisplayTable extends React.Component<
     const visible_ordered_col_keys = _.intersection(
       all_ordered_col_keys,
       visible_col_keys
-    ) as string[];
+    );
 
     const csv_string = _.chain(visible_ordered_col_keys)
       .map((key: string) => col_configs_with_defaults[key].header)
