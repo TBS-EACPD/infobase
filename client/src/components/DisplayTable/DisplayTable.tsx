@@ -84,7 +84,7 @@ const get_column_config_defaults = (index: number) => ({
 type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
   index: number;
   header: string;
-  formatter: FormatKey | ((val: CellValue) => string | React.ReactNode);
+  formatter: FormatKey | ((val: CellValue) => React.ReactNode);
   // TODO there's a default sort func hardcoded inside the component, not in the config defaults, and it's a bit magic
   sort_func?: (a: CellValue, b: CellValue, descending: boolean) => number;
 };
