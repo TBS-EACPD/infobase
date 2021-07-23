@@ -2,6 +2,8 @@ import { useArgs } from "@storybook/client-api";
 import { Story, Meta } from "@storybook/react";
 import React, { Fragment } from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { FixedPopover } from "./FixedPopover";
 
 export default {
@@ -11,12 +13,6 @@ export default {
   // Need decorators to use useArgs()
   decorators: [(Story) => <div>{Story()}</div>],
 } as Meta;
-
-type ComponentProps<T> = T extends
-  | React.ComponentType<infer P>
-  | React.Component<infer P>
-  ? JSX.LibraryManagedAttributes<T, P>
-  : never;
 
 type FixedPopoverProps = ComponentProps<typeof FixedPopover>;
 
