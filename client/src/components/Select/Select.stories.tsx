@@ -2,6 +2,8 @@ import { useArgs } from "@storybook/client-api";
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { Select } from "./Select";
 
 export default {
@@ -14,7 +16,7 @@ export default {
   },
 } as Meta;
 
-type SelectProps = React.ComponentProps<typeof Select>;
+type SelectProps = ComponentProps<typeof Select>;
 
 const Template: Story<SelectProps> = (args) => {
   const [_, updateArgs] = useArgs();
