@@ -64,7 +64,7 @@ interface DisplayTableData {
 }
 // TODO: realy do not want Date to be a type in CellValue, hunt down the case(s) that require it, think about better ways to deal with this.
 // Source of a gotcha with default sorting behaviour.
-type CellValue = string | number | Date;
+export type CellValue = string | number | Date;
 
 interface ColumnConfigs {
   [keys: string]: ColumnConfig;
