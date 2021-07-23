@@ -3,6 +3,8 @@ import React from "react";
 
 import { primaryColor, secondaryColor } from "src/core/color_defs";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { LeafSpinner } from "./LeafSpinner";
 
 export default {
@@ -10,7 +12,7 @@ export default {
   component: LeafSpinner,
 } as Meta;
 
-type LeafSpinnerProps = React.ComponentProps<typeof LeafSpinner>;
+type LeafSpinnerProps = ComponentProps<typeof LeafSpinner>;
 
 const Template: Story<LeafSpinnerProps> = (args) => <LeafSpinner {...args} />;
 export const Initial = Template.bind({});

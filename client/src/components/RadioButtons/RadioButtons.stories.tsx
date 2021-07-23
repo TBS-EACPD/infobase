@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { RadioButtons } from "./RadioButtons";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: RadioButtons,
 } as Meta;
 
-type RadioButtonsProps = React.ComponentProps<typeof RadioButtons>;
+type RadioButtonsProps = ComponentProps<typeof RadioButtons>;
 
 // TODO Implement the props in more completeness
 const Template: Story<RadioButtonsProps> = (args) => <RadioButtons {...args} />;
