@@ -1,18 +1,14 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { ModalButton } from "./ModalButton";
 
 export default {
   title: "modals and popovers/ModalButton",
   component: ModalButton,
 } as Meta;
-
-type ComponentProps<T> = T extends
-  | React.ComponentType<infer P>
-  | React.Component<infer P>
-  ? JSX.LibraryManagedAttributes<T, P>
-  : never;
 
 type ModalButtonProps = ComponentProps<typeof ModalButton>;
 
