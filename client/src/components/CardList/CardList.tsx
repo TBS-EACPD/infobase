@@ -2,12 +2,12 @@ import _ from "lodash";
 import React from "react";
 
 interface CardListElementChildProps {
-  display: string | React.ReactNode;
+  display: React.ReactNode;
   href?: string;
 }
 
 interface CardListElementProps {
-  display: string | React.ReactNode;
+  display: React.ReactNode;
   href: string;
   children: CardListElementChildProps[];
 }

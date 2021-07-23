@@ -135,7 +135,7 @@ export class FixedPopover extends React.Component<
     );
 
     const common_layout = (
-      content: string | React.ReactNode,
+      content: React.ReactNode,
       include_close_button: boolean
     ) => (
       <div className="modal-dialog__header-footer-layout">

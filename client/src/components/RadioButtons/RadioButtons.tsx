@@ -4,7 +4,7 @@ import React from "react";
 import "./RadioButtons.scss";
 
 interface OptionsProps {
-  display: string | React.ReactNode;
+  display: React.ReactNode;
   id: string;
   active: boolean;
 }

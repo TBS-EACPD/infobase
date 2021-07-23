@@ -3,8 +3,8 @@ import React from "react";
 import "./LabeledBox.scss";
 
 interface LabeledBoxProps {
-  label: string | React.ReactNode;
-  children: string | React.ReactNode;
+  label: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export class LabeledBox extends React.Component<LabeledBoxProps, never> {

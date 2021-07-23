@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import "./Tombstones.scss";
 
 interface UnlabeledTombstoneProps {
-  items: (string | React.ReactNode)[];
+  items: React.ReactNode[];
 }
 
 const UnlabeledTombstone = ({ items }: UnlabeledTombstoneProps) => (
@@ -20,10 +20,7 @@ const UnlabeledTombstone = ({ items }: UnlabeledTombstoneProps) => (
 );
 
 interface LabeledTombstoneProps {
-  labels_and_items: [
-    string | React.ReactNode,
-    string | string[] | React.ReactNode
-  ][];
+  labels_and_items: [React.ReactNode, string[] | React.ReactNode][];
 }
 
 const LabeledTombstone = ({ labels_and_items }: LabeledTombstoneProps) => (
