@@ -108,16 +108,5 @@ export default {
     },
   },
 
-  dimensions: [
-    {
-      title_key: "horizontal",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return trivial_text_maker("fps");
-        };
-      },
-    },
-  ],
+  dimensions: [],
 };
