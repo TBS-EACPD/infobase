@@ -6,14 +6,14 @@ results_intro_title:
 results_intro_text:
   transform: [handlebars,markdown]
   en: |
-    Starting in April 2018, all organizations have migrated to a new results reporting structure based on the
+    Starting in April 2018, all organizations have migrated to a results reporting structure based on the
     {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}, consisting of a {{gl_tt "Departmental Results Framework" "DRF"}}
     and a {{gl_tt "Program Inventory" "PI"}}.
     
     Organizations are made up of {{gl_tt "Core Responsibilities" "CR"}} and {{gl_tt "Programs" "PROG"}} within each Core Responsibility. Core Responsibilities and Programs
     have {{gl_tt "results" "RESULT"}}. Progress for each result is measured by one or more {{gl_tt "indicators" "IND_RESULT"}}, each of which has a target.
   fr: |
-    Depuis avril 2018, toutes les organisations ont adopté une nouvelle structure redditionnelle, fondée sur la
+    Depuis avril 2018, toutes les organisations ont adopté une structure redditionnelle, fondée sur la
     {{ext_link "Politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}, comprenant
     le {{gl_tt "Cadre ministériel des résultats" "DRF"}} et le {{gl_tt "Répertoire des programmes" "PI"}}.
 
