@@ -72,7 +72,7 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    const column_configs = {
+    const basic_columns = {
       dept: {
         index: 0,
         header: text_maker("org"),
@@ -87,7 +87,12 @@ class GranularView extends React.Component {
         formatter: "wide-str",
         initial_visible: false,
       },
-      ..._.chain(cols)
+    };
+
+    const non_empty_columns =
+      !_.isEmpty(flat_data) &&
+      _.chain(cols)
+        .filter((col) => _.has(flat_data[0], col.nick))
         .map(
           (
             {
@@ -112,8 +117,16 @@ class GranularView extends React.Component {
           ]
         )
         .fromPairs()
-        .value(),
-    };
+        .value();
+
+    const column_configs =
+      dimension === "all"
+        ? {
+            ...basic_columns,
+            ...non_empty_columns,
+          }
+        : non_empty_columns;
+
     const table_data =
       dimension === "all"
         ? _.map(flat_data, (row) => {
