@@ -18,7 +18,6 @@ import { get_static_url, make_request } from "src/request_utils";
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { lang } from "./injected_build_constants";
 
-import { attach_dimensions, trivial_dimension } from "./tables/dimensions";
 import { query_adapter } from "./tables/queries";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
@@ -155,10 +154,6 @@ export class Table {
     //start using the table def!
     this.add_cols();
     this.add_fully_qualified_col_name(lang);
-
-    if (_.isEmpty(this.dimensions)) {
-      this.dimensions = [trivial_dimension];
-    }
 
     //eslint-disable-next-line
     const to_chain = _.chain(this.flat_headers);
@@ -413,7 +408,7 @@ export class Table {
     });
 
     this.q = query_adapter;
-    attach_dimensions(this);
+    this.dimensions = _.concat("all", this.dimensions);
   }
   //TODO: optimize and clarify this
   get_row_func() {
