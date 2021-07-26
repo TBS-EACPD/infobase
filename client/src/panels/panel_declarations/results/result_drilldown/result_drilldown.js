@@ -24,7 +24,7 @@ class SingleSubjResultsContainer extends React.Component {
     super(props);
     this.explorer_instance = new ResultsExplorer(
       this.props.subject.guid,
-      this.props.latest_doc_with_data
+      this.props.default_doc
     );
 
     this.state = {
@@ -32,12 +32,12 @@ class SingleSubjResultsContainer extends React.Component {
     };
   }
   componentDidMount() {
-    const { subject, latest_doc_with_data } = this.props;
+    const { subject, default_doc } = this.props;
 
     ensure_loaded({
       subject,
       results: true,
-      result_docs: [latest_doc_with_data],
+      result_docs: [default_doc],
     }).then(() => this.setState({ loading: false }));
   }
   render() {
@@ -91,13 +91,31 @@ const get_docs_with_data = (subject, level) => {
     return false;
   }
 
-  const latest_doc_with_data = _.chain(result_docs_in_tabling_order)
+  const docs_with_data_in_tabling_order = _.chain(result_docs_in_tabling_order)
     .map("doc_key")
     .intersection(docs_with_data)
-    .last()
     .value();
 
-  return { docs_with_data, latest_doc_with_data };
+  // TODO temporary special case (although should be future proof) to set drr19 as the default tab,
+  // done so that the (temporarily) only year with GBA Plus day is the default
+  const default_doc = (() => {
+    const drr19 = "drr19";
+
+    const has_drr19_data = _.includes(docs_with_data, drr19);
+
+    const is_pre_drr20 = !_.chain(result_docs).keys().includes("drr20").value();
+
+    if (has_drr19_data && is_pre_drr20) {
+      return drr19;
+    } else {
+      return _.last(docs_with_data_in_tabling_order);
+    }
+  })();
+
+  return {
+    docs_with_data,
+    default_doc: default_doc,
+  };
 };
 
 const get_year_range_with_data = (docs_with_data) =>
@@ -133,7 +151,7 @@ export const declare_explore_results_panel = () =>
       render({ title, calculations, sources, footnotes }) {
         const {
           subject,
-          panel_args: { docs_with_data, latest_doc_with_data },
+          panel_args: { docs_with_data, default_doc },
         } = calculations;
 
         return (
@@ -142,7 +160,7 @@ export const declare_explore_results_panel = () =>
               {...{
                 subject,
                 docs_with_data,
-                latest_doc_with_data,
+                default_doc,
               }}
             />
           </InfographicPanel>
