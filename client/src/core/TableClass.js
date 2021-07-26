@@ -18,11 +18,7 @@ import { get_static_url, make_request } from "src/request_utils";
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { lang } from "./injected_build_constants";
 
-import {
-  attach_dimensions,
-  fill_dimension_columns,
-  trivial_dimension,
-} from "./tables/dimensions";
+import { attach_dimensions, trivial_dimension } from "./tables/dimensions";
 import { query_adapter } from "./tables/queries";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
@@ -494,11 +490,6 @@ export class Table {
         this.populate_with_data(data);
         this.loaded = true;
       });
-  }
-  fill_dimension_columns() {
-    //wrap it in an instance method
-    //because of side-effects
-    fill_dimension_columns(this);
   }
 }
 

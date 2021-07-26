@@ -84,28 +84,7 @@ export default {
     return row;
   },
 
-  dimensions: [
-    {
-      title_key: "horizontal",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.ex_lvl;
-        };
-      },
-    },
-    {
-      title_key: "ex_level_condensed",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return compact_ex_level_map[row.ex_lvl];
-        };
-      },
-    },
-  ],
+  dimensions: ["ex_lvl"],
 
   queries: {
     gov_grouping: function () {
