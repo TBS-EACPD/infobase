@@ -92,18 +92,7 @@ export default {
     },
   },
 
-  dimensions: [
-    {
-      title_key: "horizontal",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.gender;
-        };
-      },
-    },
-  ],
+  dimensions: ["gender"],
 
   mapper: function (row) {
     var new_value = gender[row[1]].text;

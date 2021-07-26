@@ -100,18 +100,7 @@ export default {
     },
   },
 
-  dimensions: [
-    {
-      title_key: "horizontal",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.age;
-        };
-      },
-    },
-  ],
+  dimensions: ["age"],
 
   sort: function (mapped_rows, lang) {
     return _.sortBy(mapped_rows, function (row) {
