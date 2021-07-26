@@ -16,6 +16,9 @@ import { ReportDetails, ReportDatasets } from "./shared";
 
 class GranularView extends React.Component {
   render() {
+    console.log("\n*** GranularView - RENDER ***");
+    console.log(this.props);
+    console.log(this.state);
     const { subject, table } = this.props;
     return (
       <div>
@@ -58,10 +61,9 @@ class GranularView extends React.Component {
       flat_data,
       sorted_key_columns,
 
-      on_set_filter,
-      filters_by_dimension,
+      on_set_dimension,
       dimension,
-      filter,
+      dimensions,
     } = this.props;
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
@@ -112,58 +114,47 @@ class GranularView extends React.Component {
         .fromPairs()
         .value(),
     };
-    const table_data = _.map(flat_data, (row) => {
-      const org = Dept.store.lookup(row.dept);
-      return {
-        dept: org.name,
-        legal_title: org.legal_title ? org.legal_title : org.name,
-        ..._.chain(cols)
-          .map(({ nick }) => [nick, row[nick]])
-          .fromPairs()
-          .value(),
-      };
-    });
+    const table_data =
+      dimension === "all"
+        ? _.map(flat_data, (row) => {
+            const org = Dept.store.lookup(row.dept);
+            return {
+              dept: org.name,
+              legal_title: org.legal_title ? org.legal_title : org.name,
+              ..._.chain(cols)
+                .map(({ nick }) => [nick, row[nick]])
+                .fromPairs()
+                .value(),
+            };
+          })
+        : flat_data;
 
-    const group_filter_options = _.map(
-      filters_by_dimension,
-      (filter_by_dim) => ({
-        ...filter_by_dim,
-        children: _.sortBy(filter_by_dim.children, "display"),
-      })
-    );
     const dropdown_content = (
       <div className="group_filter_dropdown">
-        {_.map(group_filter_options, (group) => (
-          <div style={{ marginBottom: 10 }} key={group.id}>
-            <span key={group.id} style={{ fontWeight: 700 }}>
-              {group.display}
-            </span>
-            {_.map(group.children, (child) => (
-              <div key={`${group.id}_${child.filter}__${child.dimension}`}>
-                <input
-                  type={"radio"}
-                  id={`${child.filter}__${child.dimension}`}
-                  name={"rpb_group_filter"}
-                  key={`${child.filter}__${child.dimension}`}
-                  onClick={() => {
-                    on_set_filter({
-                      filter: child.filter,
-                      dimension: child.dimension,
-                    });
-                  }}
-                  defaultChecked={
-                    child.filter === filter && child.dimension === dimension
-                  }
-                />
-                <label
-                  htmlFor={`${child.filter}__${child.dimension}`}
-                  className={"normal-radio-btn-label"}
-                  key={child.display}
-                >
-                  {child.display}
-                </label>
-              </div>
-            ))}
+        {_.map(dimensions, (dim) => (
+          <div style={{ marginBottom: 10 }} key={`${dim}-div`}>
+            <div>
+              <input
+                type={"radio"}
+                id={dim}
+                name={"rpb_group_filter"}
+                key={dim}
+                onClick={() => {
+                  on_set_dimension({
+                    dimension: dim,
+                  });
+                }}
+                defaultChecked={dim === dimension}
+              />
+              <label
+                htmlFor={dim}
+                className={"normal-radio-btn-label"}
+                key={`${dim}-radio-btn-label`}
+              >
+                {/* {text_maker(dim)} */}
+                {dim}
+              </label>
+            </div>
           </div>
         ))}
       </div>

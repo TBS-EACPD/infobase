@@ -15,7 +15,7 @@ import { get_subject_by_guid } from "src/models/subjects";
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { is_a11y_mode, lang } from "src/core/injected_build_constants";
 
 import {
   StandardRouteContainer,
@@ -45,7 +45,7 @@ function get_all_data_columns_for_table(table) {
 }
 
 function get_default_dimension_for_table(table) {
-  return table.dimensions[0].title_key;
+  return table.dimensions[0];
 }
 
 //returns a the proposed new slice of state that will change when a new table is selected
@@ -56,7 +56,6 @@ function get_default_state_for_new_table(table_id) {
     table: table_id,
     columns,
     dimension: get_default_dimension_for_table(table),
-    filter: text_maker("all"),
     broken_url: false,
   };
 }
@@ -117,20 +116,9 @@ class RPB extends React.Component {
   }
 
   table_handlers = {
-    on_set_filter: ({ dimension, filter }) => {
-      this.setState((prevState, props) => {
-        return { ...prevState, dimension, filter };
-      });
-    },
-
-    on_set_dimension: (dim_key) => {
-      this.setState((prevState, props) => {
-        return {
-          ...prevState,
-          dim_key,
-          filter: text_maker("all"),
-        };
-      });
+    on_set_dimension: ({ dimension }) => {
+      console.log("on_set_dimension:", dimension);
+      this.setState({ dimension: dimension });
     },
 
     on_switch_table: (table_id) => {
@@ -172,11 +160,10 @@ class RPB extends React.Component {
       .value();
   };
 
-  get_filters_for_dim = (table, dim_key) => {
-    return _.uniq([text_maker("all"), ..._.keys(table[dim_key]("*", true))]);
-  };
-
   render() {
+    console.log("\n*** RPB - RENDER ***");
+    console.log(this.props);
+    console.log(this.state);
     const { broken_url } = this.props;
 
     const table = this.state.table && Table.store.lookup(this.state.table);
@@ -211,46 +198,15 @@ class RPB extends React.Component {
         table.tags.concat(["MACHINERY"])
       );
 
-    const dimensions =
-      this.state.table &&
-      _.chain(table.dimensions)
-        .filter("include_in_report_builder")
-        .map(({ title_key }) => ({
-          id: title_key,
-          display: text_maker(title_key),
-        }))
-        .value();
-
-    const filters =
-      table &&
-      this.state.dimension &&
-      this.get_filters_for_dim(table, this.state.dimension);
-
-    const filters_by_dimension =
-      !_.isEmpty(dimensions) &&
-      _.map(dimensions, ({ id: dim_key, display }) => ({
-        display,
-        id: dim_key,
-        children: _.map(this.get_filters_for_dim(table, dim_key), (filter) => ({
-          filter: filter,
-          dimension: dim_key,
-          display: filter,
-        })),
-      }));
+    const dimensions = this.state.table && table.dimensions;
 
     const table_data =
       this.state.table &&
       (() => {
-        table.fill_dimension_columns();
         return table.data;
       })();
 
-    const cat_filter_func =
-      this.state.filter &&
-      this.state.dimension &&
-      this.state.filter === text_maker("all")
-        ? _.constant(true)
-        : { [this.state.dimension]: this.state.filter };
+    const cat_filter_func = this.state.dimension && _.constant(true);
 
     const zero_filter_func =
       this.state.columns &&
@@ -260,24 +216,36 @@ class RPB extends React.Component {
         .isEmpty()
         .value();
 
-    const flat_data =
-      !_.isEmpty(table_data) &&
-      _.chain(table_data)
-        .filter(cat_filter_func)
-        .reject(zero_filter_func)
-        .value();
+    const flat_data = !_.isEmpty(table_data)
+      ? this.state.dimension === "all"
+        ? _.chain(table_data)
+            .filter(cat_filter_func)
+            .reject(zero_filter_func)
+            .value()
+        : _.chain(table_data)
+            .groupBy(this.state.dimension)
+            .map((dim_data) => {
+              return _.chain(all_data_columns)
+                .filter((col) => col.type !== "percentage1") // TODO: make this better
+                .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
+                .concat([
+                  [this.state.dimension, dim_data[0][this.state.dimension]],
+                ])
+                .fromPairs()
+                .value();
+            })
+            .value()
+      : [];
 
     const options = {
       table,
       subject,
       columns,
       dimensions,
-      filters,
       footnotes,
       def_ready_columns,
       all_data_columns,
       flat_data,
-      filters_by_dimension,
       sorted_key_columns,
     };
 
@@ -291,7 +259,6 @@ class RPB extends React.Component {
               return hash;
             } else {
               let state = _.cloneDeep(url_state_selector(config_str));
-              delete state.filter;
               return rpb_link(state);
             }
           }}
@@ -380,7 +347,8 @@ class RPB extends React.Component {
           <Fragment>
             {table ? (
               <GranularView
-                {...this.props.state}
+                {..._.omit(this.props.state, "dimension")}
+                {..._.pick(this.state, "dimension")}
                 {...this.table_handlers}
                 {...options}
               />
