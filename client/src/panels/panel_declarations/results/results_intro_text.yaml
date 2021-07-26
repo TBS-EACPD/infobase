@@ -28,6 +28,20 @@ results_intro_img_text:
     Les organisations ont des responsabilités essentielles auxquelles des programmes sont rattachés.
     Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
     sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
+reports_links_text:
+  transform: [handlebars,markdown]
+  en: |
+    The full text of all {{#if dp_url}}{{gl_tt "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}. {{/if}}{{#if drr_url}}{{gl_tt "Departmental Results Reports" "DRR"}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
+  fr: |
+    Les documents complets des {{#if dp_url}}{{gl_tt "plans ministériels" "DP"}} se trouvent {{ext_link "içi" dp_url "liste des plans ministériels"}}. .{{/if}}{{#if drr_url}}Les {{gl_tt "rapports sur les résultats ministériels" "DRR"}} se trouvent {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
+gba_plus_intro_text:
+  transform: [handlebars,markdown]
+  en: |
+    The federal government uses {{gl_tt "gender-based analysis plus" "GBA_PLUS"}} (GBA Plus) in the development of policies, programs and legislation.
+    Indicators from the most recent results reports, 2019-20, have been marked as {{gl_tt "supporting GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
+    {{#if is_gov}}These granular indicators and their GBA Plus markings can be found on the infographic pages for individual departments.{{/if}}
+  fr: |
+    GBA_TODO
 
 
 dp_summary_text:
@@ -73,20 +87,3 @@ drr_summary_text:
       à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un {{gl_tt "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{/if}}
-
-
-reports_links_text:
-  transform: [handlebars,markdown]
-  en: |
-    The full text of all {{#if dp_url}}{{gl_tt "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}. {{/if}}{{#if drr_url}}{{gl_tt "Departmental Results Reports" "DRR"}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
-  fr: |
-    Les documents complets des {{#if dp_url}}{{gl_tt "plans ministériels" "DP"}} se trouvent {{ext_link "içi" dp_url "liste des plans ministériels"}}. .{{/if}}{{#if drr_url}}Les {{gl_tt "rapports sur les résultats ministériels" "DRR"}} se trouvent {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}..{{/if}}
-
-gba_plus_intro_text:
-  transform: [handlebars,markdown]
-  en: |
-    The federal government uses {{gl_tt "gender-based analysis plus" "GBA_PLUS"}} (GBA Plus) in the development of policies, programs and legislation.
-    Indicators from the most recent results reports, 2019-20, have been marked as {{gl_tt "supporting GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
-    {{#if is_gov}}These granular indicators and their GBA Plus markings can be found on the infographic pages for individual departments.{{/if}}
-  fr: |
-    TODO
