@@ -92,15 +92,5 @@ export default {
         .value(),
   },
 
-  dimensions: [
-    {
-      title_key: "prov",
-      filter_func: _.constant(_.property("region")),
-      include_in_report_builder: true,
-    },
-    {
-      title_key: "prov_code",
-      filter_func: _.constant(_.property("region_code")),
-    },
-  ],
+  dimensions: ["region"],
 };
