@@ -44,7 +44,7 @@ Basic.args = {
   body,
   close_text: "Close",
   include_close_button_in_header: false,
-  additional_dialog_class_name: "",
+  additional_dialog_class: "",
 };
 
 export const HeaderOptions = Template.bind({});
@@ -53,5 +53,5 @@ HeaderOptions.args = {
   header: "Header",
   footer: "Footer",
   body,
-  additional_dialog_class_name: "",
+  additional_dialog_class: "",
 };

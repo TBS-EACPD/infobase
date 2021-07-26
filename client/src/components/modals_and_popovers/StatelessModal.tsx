@@ -18,7 +18,7 @@ type StatelessModalProps = typeof StatelessModalDefaultProps & {
   header?: React.ReactNode;
   body?: React.ReactNode;
   footer?: React.ReactNode;
-  additional_dialog_class_name?: string;
+  additional_dialog_class?: string;
 };
 
 export class StatelessModal extends React.Component<StatelessModalProps> {
@@ -39,7 +39,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
       footer,
       close_text,
       include_close_button_in_header,
-      additional_dialog_class_name,
+      additional_dialog_class,
     } = this.props;
 
     const default_header = (
@@ -86,10 +86,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
         show={show}
         size="xl"
         onHide={this.closeModal}
-        dialogClassName={classNames(
-          "modal-dialog",
-          additional_dialog_class_name
-        )}
+        dialogClassName={classNames("modal-dialog", additional_dialog_class)}
         centered
       >
         <div>

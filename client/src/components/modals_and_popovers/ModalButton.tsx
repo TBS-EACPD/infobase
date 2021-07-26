@@ -61,7 +61,7 @@ class ModalButton_ extends React.Component<ModalButtonProps, ModalButtonState> {
           title={title}
           body={children}
           on_close_callback={this.toggle_modal}
-          additional_dialog_class_name={"modal-responsive"}
+          additional_dialog_class={"modal-responsive"}
         />
       </Fragment>
     );
