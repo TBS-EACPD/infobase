@@ -164,6 +164,7 @@ class GranularView extends React.Component {
                 className={"normal-radio-btn-label"}
                 key={`${dim}-radio-btn-label`}
               >
+                {/* TODO: not sure why text_maker doesn't work for some of them */}
                 {/* {text_maker(dim)} */}
                 {dim}
               </label>

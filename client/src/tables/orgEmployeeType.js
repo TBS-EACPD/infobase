@@ -90,18 +90,7 @@ export default {
     return row;
   },
 
-  dimensions: [
-    {
-      title_key: "employee_type",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.employee_type;
-        };
-      },
-    },
-  ],
+  dimensions: ["employee_type"],
   queries: {
     gov_grouping: function () {
       return _.chain(this.table.horizontal(people_years, false))

@@ -97,16 +97,5 @@ export default {
     return row;
   },
 
-  dimensions: [
-    {
-      title_key: "horizontal",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.fol;
-        };
-      },
-    },
-  ],
+  dimensions: ["fol"],
 };

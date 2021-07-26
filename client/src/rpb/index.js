@@ -234,6 +234,7 @@ class RPB extends React.Component {
                 .fromPairs()
                 .value();
             })
+            // TODO: intially sort descending (ex_lvl is not sorted initially bc first row is missing EX 5
             .value()
       : [];
 
