@@ -58,6 +58,7 @@ class GranularView extends React.Component {
   get_table_content() {
     const {
       columns: data_columns,
+      columns,
       flat_data,
       sorted_key_columns,
 
@@ -72,26 +73,20 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    const basic_columns = {
-      dept: {
-        index: 0,
-        header: text_maker("org"),
-        is_searchable: true,
-        formatter: "wide-str",
-        visibility_toggleable: true,
-      },
-      legal_title: {
-        index: 1,
-        header: text_maker("org_legal_title"),
-        is_searchable: true,
-        formatter: "wide-str",
-        initial_visible: false,
-      },
-    };
+    // const column_configs =
+    //   dimension === "all"
+    //     ? {
+    //         ...basic_columns,
+    //         ...non_empty_columns,
+    //       }
+    //     : non_empty_columns;
+    // console.log("Dept.lookup(1)");
+    // console.log(Dept.lookup(1));
 
-    const non_empty_columns =
+    const column_configs =
       !_.isEmpty(flat_data) &&
-      _.chain(cols)
+      _.chain(sorted_key_columns)
+        .concat(columns)
         .filter((col) => _.has(flat_data[0], col.nick))
         .map(
           (
@@ -112,20 +107,13 @@ class GranularView extends React.Component {
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               is_summable:
                 is_summable && !is_matched_undefined(data_columns, nick),
+              // formatter: nick === "dept" ? "wide_str" : type,
               formatter: type,
             },
           ]
         )
         .fromPairs()
         .value();
-
-    const column_configs =
-      dimension === "all"
-        ? {
-            ...basic_columns,
-            ...non_empty_columns,
-          }
-        : non_empty_columns;
 
     const table_data =
       dimension === "all"

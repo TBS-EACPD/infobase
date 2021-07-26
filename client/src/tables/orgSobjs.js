@@ -1,10 +1,6 @@
 import _ from "lodash";
 
-import {
-  trivial_text_maker,
-  businessConstants,
-  year_templates,
-} from "./table_common";
+import { businessConstants, year_templates } from "./table_common";
 
 import text from "./orgSobjs.yaml";
 
@@ -87,39 +83,5 @@ export default {
     return row;
   },
 
-  dimensions: [
-    {
-      //TODO get rid of this one, we should only be using so_num, not so
-      title_key: "so",
-
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.so;
-        };
-      },
-    },
-    {
-      title_key: "so_cat",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          if (row.so_num > 0 && row.so_num <= 7) {
-            return trivial_text_maker("op_spending");
-          } else if (row.so_num > 7 && row.so_num <= 9) {
-            return trivial_text_maker("capital_spending");
-          } else if (row.so_num === 21 || row.so_num === 22) {
-            return trivial_text_maker("revenues");
-          }
-          return row.so;
-        };
-      },
-    },
-    {
-      title_key: "so_num",
-      filter_func: () => _.property("so_num"),
-    },
-  ],
+  dimensions: ["so"],
 };
