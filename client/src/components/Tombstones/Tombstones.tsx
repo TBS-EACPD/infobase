@@ -20,7 +20,7 @@ const UnlabeledTombstone = ({ items }: UnlabeledTombstoneProps) => (
 );
 
 interface LabeledTombstoneProps {
-  labels_and_items: [React.ReactNode, string[] | React.ReactNode][];
+  labels_and_items: [React.ReactNode, React.ReactNode][];
 }
 
 const LabeledTombstone = ({ labels_and_items }: LabeledTombstoneProps) => (
