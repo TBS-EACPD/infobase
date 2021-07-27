@@ -8,7 +8,7 @@ interface CardListElementChildProps {
 
 interface CardListElementProps {
   display: React.ReactNode;
-  href: string;
+  href?: string;
   children: CardListElementChildProps[];
 }
 
