@@ -182,9 +182,9 @@ const indicator_actual_text = (indicator) => {
 
 const indicator_previous_actual_text = (indicator) => {
   const fake_previous = {
-    target_type: indicator.previous_target_type,
-    actual_result: indicator.previous_actual_result,
-    measure: indicator.previous_measure,
+    target_type: indicator.previous_year_target_type,
+    actual_result: indicator.previous_year_actual_result,
+    measure: indicator.previous_year_measure,
   };
   return indicator_actual_text(fake_previous);
 };

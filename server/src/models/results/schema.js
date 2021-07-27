@@ -106,11 +106,12 @@ ${_.reduce(
     previous_year_target_type: String
     previous_year_target_min: String
     previous_year_target_max: String
-    previous_year_target_narrative: String
-    previous_year_measure: String
     previous_year_seeking_to: String
     previous_year_target_change: String
     previous_year_gba_plus: Boolean
+    previous_year_target_narrative: String
+    previous_year_measure: String
+    previous_year_actual_result: String
 
     target_explanation: String
     result_explanation: String
@@ -304,13 +305,16 @@ export default function ({ models, loaders }) {
       target_explanation: bilingual_field("target_explanation"),
       result_explanation: bilingual_field("result_explanation"),
       target_narrative: bilingual_field("target_narrative"),
-      previous_year_target_narrative: bilingual_field(
-        "previous_year_target_narrative"
-      ),
       actual_result: bilingual_field("actual_result"),
       methodology: bilingual_field("methodology"),
       measure: bilingual_field("measure"),
       previous_year_measure: bilingual_field("previous_year_measure"),
+      previous_year_target_narrative: bilingual_field(
+        "previous_year_target_narrative"
+      ),
+      previous_year_actual_result: bilingual_field(
+        "previous_year_actual_result"
+      ),
     },
   };
 
