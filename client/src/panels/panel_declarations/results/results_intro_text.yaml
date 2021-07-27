@@ -38,8 +38,8 @@ gba_plus_intro_text:
   transform: [handlebars,markdown]
   en: |
     The federal government uses {{gl_tt "gender-based analysis plus" "GBA_PLUS"}} (GBA Plus) in the development of policies, programs and legislation.
-    Indicators from the most recent results reports, 2019-20, have been marked as {{gl_tt "supporting GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
-    {{#if is_gov}}These indicators and their GBA Plus markings can be found on the pages for individual departments.{{/if}}
+    Indicators from the most recent results reports, **2019-20**, have been marked as {{gl_tt "supporting GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
+    These indicators and their GBA Plus markings can be found on the pages for individual organizations.
   fr: |
     GBA_TODO
 
