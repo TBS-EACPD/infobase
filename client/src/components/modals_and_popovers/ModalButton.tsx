@@ -6,9 +6,8 @@ import { SafeJSURL } from "src/general_utils";
 
 import { StatelessModal } from "./StatelessModal";
 
-type ModalButtonProps = RouteComponentProps & {
+type ModalButtonProps = RouteComponentProps<{ options: string }> & {
   show_condition: { name: string; value: string };
-  match: { params: { options: string } };
   button_text: string;
   title: string;
   children: React.ReactNode;
