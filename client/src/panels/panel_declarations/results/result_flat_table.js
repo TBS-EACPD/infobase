@@ -8,7 +8,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   LeafSpinner,
   DisplayTable,
-  sort_func_template,
+  default_sort_func,
   ModalButton,
 } from "src/components/index";
 
@@ -130,11 +130,11 @@ const indicator_table_from_list = (indicator_list, subject) => {
       is_searchable: true,
       formatter: (value) => ind_map[value].subject_link,
       raw_formatter: (value) => ind_map[value].subject_full_name,
-      sort_func: (a, b) => {
+      sort_func: (a, b, descending) => {
         if (a && b) {
           const a_name = ind_map[a].subject_full_name.toUpperCase();
           const b_name = ind_map[b].subject_full_name.toUpperCase();
-          return sort_func_template(a_name, b_name);
+          return default_sort_func(a_name, b_name, descending);
         }
         return 0;
       },
@@ -159,11 +159,11 @@ const indicator_table_from_list = (indicator_list, subject) => {
           </ModalButton>
         );
       },
-      sort_func: (a, b) => {
+      sort_func: (a, b, descending) => {
         if (a && b) {
           const a_name = ind_map[a].name.toUpperCase();
           const b_name = ind_map[b].name.toUpperCase();
-          return sort_func_template(a_name, b_name);
+          return default_sort_func(a_name, b_name, descending);
         }
         return 0;
       },
@@ -184,11 +184,11 @@ const indicator_table_from_list = (indicator_list, subject) => {
       header: text_maker("date_to_achieve"),
       formatter: (val) => fmt_plain_string_date(val),
       raw_formatter: (val) => fmt_plain_string_date(val),
-      sort_func: (a, b) => {
+      sort_func: (a, b, descending) => {
         if (a && b) {
           const a_time = date_as_number(a);
           const b_time = date_as_number(b);
-          return sort_func_template(a_time, b_time);
+          return default_sort_func(a_time, b_time, descending);
         }
         return 0;
       },

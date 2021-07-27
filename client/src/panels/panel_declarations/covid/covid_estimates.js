@@ -8,6 +8,8 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
+  default_sort_func,
+  default_dept_name_sort_func,
 } from "src/components/index";
 
 import {
@@ -42,7 +44,6 @@ import {
   get_est_doc_name,
   get_est_doc_order,
   get_est_doc_glossary_key,
-  string_sort_func,
   roll_up_flat_measure_data_by_property,
   get_est_doc_list_plain_text,
 } from "./covid_common_utils";
@@ -73,16 +74,11 @@ const get_common_column_configs = (show_vote_stat, est_docs) => ({
     is_summable: false,
     formatter: get_vs_type_name,
     raw_formatter: get_vs_type_name,
-    sort_func: (type_a, type_b) => {
+    sort_func: (type_a, type_b, descending) => {
       const order_a = vs_type_ordering[type_a];
       const order_b = vs_type_ordering[type_b];
 
-      if (order_a < order_b) {
-        return -1;
-      } else if (order_a > order_b) {
-        return 1;
-      }
-      return 0;
+      return default_sort_func(order_a, order_b, descending);
     },
     initial_visible: show_vote_stat,
   },
@@ -165,11 +161,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           );
         },
         raw_formatter: (org_id) => Dept.lookup(org_id).name,
-        sort_func: (org_id_a, org_id_b) => {
-          const org_a = Dept.lookup(org_id_a);
-          const org_b = Dept.lookup(org_id_b);
-          return string_sort_func(org_a.name, org_b.name);
-        },
+        sort_func: default_dept_name_sort_func,
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
@@ -264,11 +256,11 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             )}
           </Fragment>
         ),
-        sort_func: (id_a, id_b) =>
+        sort_func: (id_a, id_b, descending) =>
           _.chain([id_a, id_b])
             .map(CovidMeasure.lookup)
             .thru(([measure_a, measure_b]) =>
-              string_sort_func(measure_a.name, measure_b.name)
+              default_sort_func(measure_a.name, measure_b.name, descending)
             )
             .value(),
       },

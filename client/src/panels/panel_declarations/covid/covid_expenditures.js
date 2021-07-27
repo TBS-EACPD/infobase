@@ -9,6 +9,8 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
+  default_sort_func,
+  default_dept_name_sort_func,
 } from "src/components/index";
 
 import {
@@ -32,7 +34,6 @@ import {
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
-  string_sort_func,
   roll_up_flat_measure_data_by_property,
   get_date_last_updated_text,
 } from "./covid_common_utils";
@@ -190,11 +191,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           );
         },
         raw_formatter: (org_id) => Dept.lookup(org_id).name,
-        sort_func: (org_id_a, org_id_b) => {
-          const org_a = Dept.lookup(org_id_a);
-          const org_b = Dept.lookup(org_id_b);
-          return string_sort_func(org_a.name, org_b.name);
-        },
+        sort_func: default_dept_name_sort_func,
       },
       ...get_common_column_configs(show_vote_stat),
     };
@@ -246,7 +243,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         index: 0,
         header: text_maker("covid_measure"),
         is_searchable: true,
-        sort_func: (name_a, name_b) => string_sort_func(name_a, name_b),
+        sort_func: default_sort_func,
       },
       ...get_common_column_configs(show_vote_stat),
     };
