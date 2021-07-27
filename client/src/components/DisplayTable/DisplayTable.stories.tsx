@@ -46,7 +46,7 @@ Basic.args = {
   column_configs: common_column_configs,
 };
 
-const country_lookup: Record<string, string> = {
+const country_lookup = {
   Italy: "Italy",
   Korea: "Korea",
   Canada: "Canada",
@@ -58,17 +58,26 @@ const table_with_URL_column_configs = {
   ...common_column_configs,
   label: {
     ...common_column_configs.label,
-    formatter: (id: CellValue) => (
-      <a
-        href={`https://en.wikipedia.org/wiki/List_of_pizza_varieties_by_country#${id}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {country_lookup[id as string]}
-      </a>
-    ),
+    formatter: (label: CellValue) => {
+      const country_name = _.get(country_lookup, _.toString(label));
+
+      if (typeof country_name !== "undefined") {
+        return (
+          <a
+            href={`https://en.wikipedia.org/wiki/List_of_pizza_varieties_by_country#${label}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {country_name}
+          </a>
+        );
+      } else {
+        throw new Error("Shouldn't happen");
+      }
+    },
   },
 };
+
 export const TableWithURL = Template.bind({});
 TableWithURL.args = {
   data: common_data,
