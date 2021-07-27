@@ -24,7 +24,7 @@ import {
   SelectPage,
   SelectPageSize,
 } from "./DisplayTableUtils";
-import { sort_func_template } from "./sort_utils";
+import { default_sort_func } from "./sort_utils";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
@@ -79,10 +79,7 @@ const get_column_config_defaults = (index: number) => ({
     value_a: CellValue,
     value_b: CellValue,
     descending: boolean
-  ): 1 | 0 | -1 =>
-    descending
-      ? sort_func_template(value_a, value_b)
-      : sort_func_template(value_b, value_a),
+  ): 1 | 0 | -1 => default_sort_func(value_a, value_b, descending),
   sum_func: (sum: number, value: number) => sum + value,
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { TabLoadingWrapper } from "src/components/index";
+import { TabLoadingWrapper, default_sort_func } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 
@@ -50,16 +50,11 @@ const get_est_doc_name = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc][lang] : "";
 const get_est_doc_order = (est_doc) =>
   estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
-const est_doc_sort_func = (est_doc_a, est_doc_b) => {
+const est_doc_sort_func = (est_doc_a, est_doc_b, descending) => {
   const order_a = get_est_doc_order(est_doc_a);
   const order_b = get_est_doc_order(est_doc_b);
 
-  if (order_a < order_b) {
-    return -1;
-  } else if (order_a > order_b) {
-    return 1;
-  }
-  return 0;
+  return default_sort_func(order_a, order_b, descending);
 };
 const get_est_doc_glossary_key = (est_doc) =>
   ({
@@ -87,20 +82,6 @@ const get_est_doc_list_plain_text = (est_docs) =>
     })
     .thru(array_to_grammatical_list)
     .value();
-
-const get_plain_string = (string) =>
-  _.chain(string).deburr().lowerCase().value();
-const string_sort_func = (a, b) => {
-  const plain_a = get_plain_string(a);
-  const plain_b = get_plain_string(b);
-
-  if (plain_a < plain_b) {
-    return -1;
-  } else if (plain_a > plain_b) {
-    return 1;
-  }
-  return 0;
-};
 
 const summable_data_keys = ["stat", "vote"];
 const row_group_reducer = (group) => {
@@ -187,7 +168,6 @@ export {
   get_est_doc_order,
   est_doc_sort_func,
   get_est_doc_glossary_key,
-  string_sort_func,
   roll_up_flat_measure_data_by_property,
   get_date_last_updated_text,
   get_est_doc_list_plain_text,

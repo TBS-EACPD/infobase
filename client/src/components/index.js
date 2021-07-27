@@ -53,7 +53,7 @@ export {
   DisplayTable,
   default_subject_name_sort_func,
   default_dept_name_sort_func,
-  sort_func_template,
+  default_sort_func,
 } from "./DisplayTable/index";
 
 export {
