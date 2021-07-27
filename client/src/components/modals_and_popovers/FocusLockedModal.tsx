@@ -9,7 +9,7 @@ import "./bootstrap_modal_exstension.scss";
 interface FocusLockedModalProps {
   mounted: boolean;
   children: React.ReactNode;
-  additional_dialog_class: string | string[];
+  dialog_class: string | string[];
   on_exit: () => void;
   aria_label: string;
 }
@@ -23,8 +23,7 @@ export class FocusLockedModal extends React.Component<
   }
 
   render() {
-    const { mounted, children, additional_dialog_class, on_exit, aria_label } =
-      this.props;
+    const { mounted, children, dialog_class, on_exit, aria_label } = this.props;
 
     const cleaned_aria_label = DOMPurify.sanitize(aria_label, {
       ALLOWED_TAGS: [],
@@ -35,7 +34,7 @@ export class FocusLockedModal extends React.Component<
         show={mounted}
         size="xl"
         onHide={on_exit}
-        dialogClassName={classNames(`modal-dialog`, additional_dialog_class)}
+        dialogClassName={classNames(`modal-dialog`, dialog_class)}
         aria-label={cleaned_aria_label}
         centered
       >

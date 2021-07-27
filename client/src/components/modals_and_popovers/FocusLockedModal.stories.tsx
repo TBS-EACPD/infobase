@@ -94,5 +94,5 @@ Basic.args = {
   mounted: false,
 
   // css
-  additional_dialog_class: "",
+  dialog_class: undefined,
 };
