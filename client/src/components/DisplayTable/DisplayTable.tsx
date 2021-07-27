@@ -24,6 +24,7 @@ import {
   SelectPage,
   SelectPageSize,
 } from "./DisplayTableUtils";
+import { sort_func_template } from "./sort_utils";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";
@@ -62,9 +63,8 @@ interface _DisplayTableState {
 interface DisplayTableData {
   [key: string]: CellValue;
 }
-// TODO: realy do not want Date to be a type in CellValue, hunt down the case(s) that require it, think about better ways to deal with this.
-// Source of a gotcha with default sorting behaviour.
-export type CellValue = string | number | Date;
+
+export type CellValue = string | number;
 
 interface ColumnConfigs {
   [keys: string]: ColumnConfig;
@@ -75,18 +75,24 @@ const get_column_config_defaults = (index: number) => ({
   is_sortable: true,
   is_summable: false,
   is_searchable: false,
+  sort_func: (
+    value_a: CellValue,
+    value_b: CellValue,
+    descending: boolean
+  ): 1 | 0 | -1 =>
+    descending
+      ? sort_func_template(value_a, value_b)
+      : sort_func_template(value_b, value_a),
   sum_func: (sum: number, value: number) => sum + value,
-  // "raw" value for some complex datasets actually requires processing, as we "raw" values are used for sorting, searching, AND the output csv string
-  raw_formatter: _.identity as (val: CellValue) => string,
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,
+  // "raw" value for some complex datasets actually requires processing, as we use "raw" formatted values in the output csv AND for searching
+  raw_formatter: _.identity as (val: CellValue) => string,
 });
 type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
   index: number;
   header: string;
   formatter: FormatKey | ((val: CellValue) => React.ReactNode);
-  // TODO there's a default sort func hardcoded inside the component, not in the config defaults, and it's a bit magic
-  sort_func?: (a: CellValue, b: CellValue, descending: boolean) => number;
 };
 
 const get_col_configs_with_defaults = (column_configs: ColumnConfigs) =>
@@ -222,8 +228,8 @@ export class _DisplayTable extends React.Component<
 
   render() {
     const {
-      table_name, // Optional: Name of table
-      data, // [ {column_key: 134} ]
+      table_name,
+      data,
       column_configs,
       page_size_increment,
       util_components,
@@ -270,8 +276,7 @@ export class _DisplayTable extends React.Component<
 
     const clean_search_string = (search_string: CellValue) =>
       _.chain(search_string).deburr().toLower().trim().value();
-    const is_number_string_date = (val: number | string | Date) =>
-      _.isNumber(val) || _.isString(val) || _.isDate(val);
+
     const sorted_filtered_data = _.chain(data)
       .filter((row) =>
         _.chain(row)
@@ -294,30 +299,21 @@ export class _DisplayTable extends React.Component<
       )
       .thru((unsorted_array) => {
         if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
-          const { sort_func, raw_formatter } =
-            col_configs_with_defaults[sort_by];
+          const { sort_func } = col_configs_with_defaults[sort_by];
 
-          if (typeof sort_func !== "undefined") {
-            return _.map(unsorted_array).sort(
-              (a: DisplayTableData, b: DisplayTableData) =>
-                sort_func(a[sort_by], b[sort_by], descending)
-            );
-          } else {
-            /*TODO: sorting data containing BOTH string and date is not consistent
-             It's probably trying to cast string into date object and if that fails, it probably stops sorting.
-             For now, any case where that can happen should write a custom sort_func to handle it
-             ... really need to sort out the absolute mess that lead to Date being a valid CellValue type, ugh */
-            return _.sortBy(unsorted_array, (row: DisplayTableData) =>
-              is_number_string_date(raw_formatter(row[sort_by]))
-                ? raw_formatter(row[sort_by])
-                : Number.NEGATIVE_INFINITY
-            );
-          }
+          return _.map(unsorted_array).sort(
+            (row_a: DisplayTableData, row_b: DisplayTableData) =>
+              _.chain([row_a, row_b])
+                .map((row) => row[sort_by])
+                .thru(([value_a, value_b]) =>
+                  sort_func(value_a, value_b, descending)
+                )
+                .value()
+          );
         } else {
           return unsorted_array;
         }
       })
-      .tap(descending ? _.reverse : _.noop)
       .value();
 
     const total_row = _.reduce<DisplayTableData, { [key: string]: number }>(
