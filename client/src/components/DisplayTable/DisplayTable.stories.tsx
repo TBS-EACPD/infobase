@@ -76,7 +76,6 @@ TableWithURL.args = {
 };
 
 const custom_utils = {
-  downloadCsvUtil: <></>,
   random_button: (
     <button
       key={"random_button"}
