@@ -65,7 +65,9 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
   const has_previous_year_target = !_.isNull(
     indicator.previous_year_target_type
   );
-  const has_previous_year_result = false; // DRR_TODO: previous year results aren't available/in the API yet, but they should be starting with DRR19 (if not, clean this out eventually)
+  const has_previous_year_actual_result = !_.isNull(
+    indicator.previous_year_actual_result
+  );
   const dp_docs = get_result_doc_keys("dp");
   const drr_docs = get_result_doc_keys("drr");
   const should_display_new_status =
@@ -208,7 +210,7 @@ const IndicatorDisplay = ({ indicator, show_doc }) => {
           </Fragment>
         )}
 
-        {has_previous_year_result && (
+        {has_previous_year_actual_result && (
           <Fragment>
             <dt>
               <TM k="previous_year_target_result" />

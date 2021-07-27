@@ -59,7 +59,6 @@ export default function (model_singleton) {
     ...bilingual_str("target_explanation"),
     ...bilingual_str("result_explanation"),
     doc: str_type,
-    ...bilingual_str("actual_result"),
     status_key: str_type,
     ...bilingual_str("methodology"),
     // Want to populate certain indicator fields with their previous year value as available
@@ -69,11 +68,12 @@ export default function (model_singleton) {
         target_type: str_type,
         target_min: number_type,
         target_max: number_type,
-        ...bilingual_str("target_narrative"),
-        ...bilingual_str("measure"),
         seeking_to: str_type,
         target_change: str_type,
         gba_plus: Boolean,
+        ...bilingual_str("target_narrative"),
+        ...bilingual_str("measure"),
+        ...bilingual_str("actual_result"),
       },
       (cross_year_target_fields, field_type, field_key) => ({
         ...cross_year_target_fields,

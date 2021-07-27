@@ -79,7 +79,7 @@ export default async function ({ models }) {
               ])
               .fromPairs()
               .value(),
-            ..._.chain(["target_narrative", "measure"])
+            ..._.chain(["target_narrative", "measure", "actual_result"])
               .flatMap((billingual_field_key) => [
                 [
                   `previous_year_${billingual_field_key}_en`,
