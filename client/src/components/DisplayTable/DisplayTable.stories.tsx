@@ -64,7 +64,7 @@ const table_with_URL_column_configs = {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {typeof id === "string" ? country_lookup[id] : <></>}
+        {country_lookup[id as string]}
       </a>
     ),
   },
