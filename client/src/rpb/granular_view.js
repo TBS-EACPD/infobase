@@ -73,16 +73,6 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    // const column_configs =
-    //   dimension === "all"
-    //     ? {
-    //         ...basic_columns,
-    //         ...non_empty_columns,
-    //       }
-    //     : non_empty_columns;
-    // console.log("Dept.lookup(1)");
-    // console.log(Dept.lookup(1));
-
     const column_configs =
       !_.isEmpty(flat_data) &&
       _.chain(sorted_key_columns)
