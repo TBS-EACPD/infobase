@@ -60,7 +60,7 @@ Basic.args = {
 
   // css
   dialog_position: "",
-  additional_dialog_class: "",
+  additional_dialog_class: undefined,
 };
 
 export const Timer = Template.bind({});
@@ -83,7 +83,7 @@ Timer.args = {
 
   // css
   dialog_position: "",
-  additional_dialog_class: "",
+  additional_dialog_class: undefined,
 
   // clock
   auto_close_time: 1000,
