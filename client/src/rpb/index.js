@@ -117,7 +117,6 @@ class RPB extends React.Component {
 
   table_handlers = {
     on_set_dimension: ({ dimension }) => {
-      console.log("on_set_dimension:", dimension);
       this.setState({ dimension: dimension });
     },
 
@@ -165,6 +164,7 @@ class RPB extends React.Component {
     console.log(this.props);
     console.log(this.state);
     const { broken_url } = this.props;
+    const { dimension } = this.state;
 
     const table = this.state.table && Table.store.lookup(this.state.table);
 
@@ -206,7 +206,7 @@ class RPB extends React.Component {
         return table.data;
       })();
 
-    const cat_filter_func = this.state.dimension && _.constant(true);
+    const cat_filter_func = dimension && _.constant(true);
 
     const zero_filter_func =
       this.state.columns &&
@@ -216,25 +216,36 @@ class RPB extends React.Component {
         .isEmpty()
         .value();
 
+    function dimension_column_values(dim_data) {
+      if (dimension === "vote_vs_stat") {
+        return [
+          "desc",
+          dim_data[0].votestattype === 999 ? "Statutory" : "Voted",
+        ];
+      }
+      return [dimension, dim_data[0][dimension]];
+    }
+
     const flat_data = !_.isEmpty(table_data)
-      ? this.state.dimension === "all"
+      ? dimension === "all"
         ? _.chain(table_data)
             .filter(cat_filter_func)
             .reject(zero_filter_func)
             .value()
         : _.chain(table_data)
-            .groupBy(this.state.dimension)
+            .groupBy(
+              dimension === "vote_vs_stat"
+                ? (row) => row.votestattype !== 999
+                : dimension
+            ) // statutory items have votestattype 999, voted items have other number
             .map((dim_data) => {
               return _.chain(all_data_columns)
                 .filter((col) => col.type !== "percentage1") // TODO: make this better
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
-                .concat([
-                  [this.state.dimension, dim_data[0][this.state.dimension]],
-                ])
+                .concat([dimension_column_values(dim_data)])
                 .fromPairs()
                 .value();
             })
-            // TODO: intially sort descending (ex_lvl is not sorted initially bc first row is missing EX 5
             .value()
       : [];
 

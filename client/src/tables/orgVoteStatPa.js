@@ -3,12 +3,7 @@ import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
 
-import {
-  vote_stat_dimension,
-  major_vote_stat,
-  m,
-  year_templates,
-} from "./table_common";
+import { m, year_templates } from "./table_common";
 
 import text from "./orgVoteStatPa.yaml";
 
@@ -155,18 +150,8 @@ export default {
     },
   },
 
-  dimensions: [
-    {
-      title_key: "major_voted_stat",
-      include_in_report_builder: true,
-      filter_func: major_vote_stat,
-    },
-    {
-      title_key: "voted_stat",
-      include_in_report_builder: true,
-      filter_func: vote_stat_dimension,
-    },
-  ],
+  // TODO: might need to make a text key
+  dimensions: ["dept", "vote_vs_stat", "desc"],
 
   sort: function (mapped_rows, lang) {
     var grps = _.groupBy(mapped_rows, function (row) {
