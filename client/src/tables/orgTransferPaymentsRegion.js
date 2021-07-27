@@ -92,5 +92,5 @@ export default {
         .value(),
   },
 
-  dimensions: ["region"],
+  dimensions: ["dept", "region"],
 };

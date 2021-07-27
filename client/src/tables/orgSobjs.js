@@ -83,5 +83,5 @@ export default {
     return row;
   },
 
-  dimensions: ["so"],
+  dimensions: ["dept", "so"],
 };
