@@ -84,7 +84,7 @@ export default {
     return row;
   },
 
-  dimensions: ["ex_lvl"],
+  dimensions: ["dept", "ex_lvl"],
 
   queries: {
     gov_grouping: function () {

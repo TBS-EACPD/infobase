@@ -100,7 +100,7 @@ export default {
     },
   },
 
-  dimensions: ["age"],
+  dimensions: ["dept", "age"],
 
   sort: function (mapped_rows, lang) {
     return _.sortBy(mapped_rows, function (row) {
