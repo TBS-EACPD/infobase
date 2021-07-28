@@ -35,10 +35,10 @@ export class ServiceOverview extends React.Component {
       .sortBy((report) => _.toInteger(report.year))
       .reverse()
       .value()[0];
-    const flat_standard_reports = _.chain(service.standards)
-      .map(({ standard_report }) => standard_report)
-      .flatten()
-      .value();
+    const flat_standard_reports = _.flatMap(
+      service.standards,
+      "standard_report"
+    );
     const applications_and_calls = _.reduce(
       delivery_channels_keys,
       (total, key) => {
