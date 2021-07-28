@@ -41,7 +41,7 @@ export class ServiceDigitalStatus extends React.Component {
             <TM k={`${key}_desc`} />
           </Fragment>
         ),
-        raw_formatter: (key) =>
+        plain_formatter: (key) =>
           `${text_maker(key)} ${text_maker(`${key}_desc`)}}`,
       },
       digital_status: {
@@ -54,7 +54,7 @@ export class ServiceDigitalStatus extends React.Component {
             <TM style={{ marginLeft: 5 }} k={available_keys[value]} />
           </Fragment>
         ),
-        raw_formatter: (value) => available_keys[value],
+        plain_formatter: (value) => available_keys[value],
       },
     };
 

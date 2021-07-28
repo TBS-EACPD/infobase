@@ -46,7 +46,7 @@ const HighApplicationVolumePanel = ({ subject }) => {
           {Dept.lookup(org_id).name}
         </a>
       ),
-      raw_formatter: (org_id) => Dept.lookup(org_id).name,
+      plain_formatter: (org_id) => Dept.lookup(org_id).name,
       sort_func: default_dept_name_sort_func,
     },
     total_volume: {

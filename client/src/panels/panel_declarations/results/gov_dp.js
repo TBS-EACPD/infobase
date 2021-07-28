@@ -110,7 +110,8 @@ export const declare_gov_dp_panel = () =>
                 value
               ),
             sort_func: default_dept_name_sort_func,
-            raw_formatter: (value) => (value ? Dept.lookup(value).name : value),
+            plain_formatter: (value) =>
+              value ? Dept.lookup(value).name : value,
           },
           [`${current_dp_key}_results`]: {
             index: 1,

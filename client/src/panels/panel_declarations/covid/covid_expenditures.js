@@ -190,7 +190,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             </a>
           );
         },
-        raw_formatter: (org_id) => Dept.lookup(org_id).name,
+        plain_formatter: (org_id) => Dept.lookup(org_id).name,
         sort_func: default_dept_name_sort_func,
       },
       ...get_common_column_configs(show_vote_stat),

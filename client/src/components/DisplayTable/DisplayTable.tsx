@@ -83,8 +83,8 @@ const get_column_config_defaults = (index: number) => ({
   sum_func: (sum: number, value: number) => sum + value,
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,
-  // "raw" value for some complex datasets actually requires processing, as we use "raw" formatted values in the output csv AND for searching
-  raw_formatter: _.identity as (val: CellValue) => string,
+  // "plain" value for some complex datasets actually requires processing, as we use "plain" formatted values in the output csv AND for searching
+  plain_formatter: _.identity as (val: CellValue) => string,
 });
 type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
   index: number;
@@ -263,10 +263,10 @@ export class _DisplayTable extends React.Component<
 
     const determine_text_align = (row: DisplayTableData, col: string) => {
       const current_col_formatter = col_configs_with_defaults[col].formatter;
-      const current_col_raw_formatter =
-        col_configs_with_defaults[col].raw_formatter;
+      const current_col_plain_formatter =
+        col_configs_with_defaults[col].plain_formatter;
       return (_.isString(current_col_formatter) && _.isNumber(row[col])) ||
-        _.isNumber(current_col_raw_formatter(row[col]))
+        _.isNumber(current_col_plain_formatter(row[col]))
         ? "right"
         : "left";
     };
@@ -280,8 +280,8 @@ export class _DisplayTable extends React.Component<
           .map((column_value: CellValue, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
             const col_search_value =
-              col_config && col_config.raw_formatter
-                ? col_config.raw_formatter(column_value)
+              col_config && col_config.plain_formatter
+                ? col_config.plain_formatter(column_value)
                 : column_value;
             return (
               _.isEmpty(searches[column_key]) ||
@@ -347,7 +347,7 @@ export class _DisplayTable extends React.Component<
       .concat(
         _.map(sorted_filtered_data, (row: DisplayTableData) =>
           _.map(visible_ordered_col_keys, (key: string) =>
-            col_configs_with_defaults[key].raw_formatter(row[key])
+            col_configs_with_defaults[key].plain_formatter(row[key])
           )
         )
       )

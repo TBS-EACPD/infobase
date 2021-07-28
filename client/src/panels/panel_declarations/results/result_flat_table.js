@@ -163,7 +163,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
       header: text_maker("cr_or_program"),
       is_searchable: true,
       formatter: (value) => ind_map[value].subject_link,
-      raw_formatter: (value) => ind_map[value].subject_full_name,
+      plain_formatter: (value) => ind_map[value].subject_full_name,
       sort_func: (a, b, descending) => {
         if (a && b) {
           const a_name = ind_map[a].subject_full_name.toUpperCase();
@@ -193,7 +193,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
           </ModalButton>
         );
       },
-      raw_formatter: (value) => ind_map[value].name,
+      plain_formatter: (value) => ind_map[value].name,
       sort_func: (a, b, descending) => {
         if (a && b) {
           const a_name = ind_map[a].name;
@@ -217,7 +217,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
       index: 4,
       header: text_maker("date_to_achieve"),
       formatter: format_date_to_achieve,
-      raw_formatter: format_date_to_achieve,
+      plain_formatter: format_date_to_achieve,
       sort_func: sort_date_to_achieve,
     },
     status: {
@@ -231,7 +231,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
           {large_status_icons[value]}
         </Fragment>
       ),
-      raw_formatter: (value) => result_statuses[value].text,
+      plain_formatter: (value) => result_statuses[value].text,
       sort_func: (a, b, descending) => {
         if (a && b) {
           const a_name = result_statuses[a].text;

@@ -73,7 +73,7 @@ const get_common_column_configs = (show_vote_stat, est_docs) => ({
     is_searchable: true,
     is_summable: false,
     formatter: get_vs_type_name,
-    raw_formatter: get_vs_type_name,
+    plain_formatter: get_vs_type_name,
     sort_func: (type_a, type_b, descending) => {
       const order_a = vs_type_ordering[type_a];
       const order_b = vs_type_ordering[type_b];
@@ -160,7 +160,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             </a>
           );
         },
-        raw_formatter: (org_id) => Dept.lookup(org_id).name,
+        plain_formatter: (org_id) => Dept.lookup(org_id).name,
         sort_func: default_dept_name_sort_func,
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
@@ -244,7 +244,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         index: 0,
         header: text_maker("covid_measure"),
         is_searchable: true,
-        raw_formatter: get_measure_name,
+        plain_formatter: get_measure_name,
         formatter: (id) => (
           <Fragment>
             {get_measure_name(id)}

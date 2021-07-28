@@ -69,7 +69,7 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
           {data_name_lookup[id]}
         </a>
       ),
-      raw_formatter: (id) => data_name_lookup[id],
+      plain_formatter: (id) => data_name_lookup[id],
       sort_func: (id_a, id_b, descending) => {
         const name_a = data_name_lookup[id_a];
         const name_b = data_name_lookup[id_b];
