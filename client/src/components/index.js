@@ -49,12 +49,7 @@ export {
   FixedPopover,
   ModalButton,
 } from "./modals_and_popovers/index";
-export {
-  DisplayTable,
-  default_subject_name_sort_func,
-  default_dept_name_sort_func,
-  default_sort_func,
-} from "./DisplayTable/index";
+export { DisplayTable, default_sort_func } from "./DisplayTable/index";
 
 export {
   Format,
