@@ -67,13 +67,10 @@ const LimitedDataDisplay = (search, name) => (
 const org_templates = {
   header_function: () => Dept.plural,
   name_function: (org) => org.name,
-  menu_content_function: function (org, search) {
+  menu_content_function: function (org, search, name_function) {
     if (org.level === "gov") {
       return (
-        <InfoBaseHighlighter
-          search={search}
-          content={this.name_function(org)}
-        />
+        <InfoBaseHighlighter search={search} content={name_function(org)} />
       );
     }
 
@@ -302,8 +299,8 @@ const programs = {
       ["name", "old_name", "activity_code"],
       "programs"
     )(datum),
-  menu_content_function: function (program, search) {
-    const name = this.name_function(program);
+  menu_content_function: function (program, search, name_function) {
+    const name = name_function(program);
 
     if (program.old_name) {
       const reg_exps = query_to_reg_exps(search);
@@ -356,9 +353,14 @@ const services = {
   config_name: "services",
   header_function: () => trivial_text_maker("services"),
   name_function: (service) => service.name,
-  get_data: () => [
-    { entity_type: "service", org_id: "1", id: "136", name: "Service name 1" },
-  ],
+  query: `
+    service {
+      id
+      org_id
+      name
+    }
+  `,
+  queried_data_accessor: "service",
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name"], "services")(datum),
 };

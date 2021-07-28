@@ -64,7 +64,7 @@ const search_options_hierarchy = {
   other_options: {
     label: text_maker("other_options_label"),
     child_options: {
-      include_services: { label: "Services" },
+      include_services: { label: text_maker("services") },
       include_glossary: { label: text_maker("glossary") },
       include_tables: { label: text_maker("metadata") },
     },
@@ -116,6 +116,10 @@ const EverythingSearch = withRouter(
         ...props.initial_search_options,
       };
     }
+    get_gql_search_configs = () => {
+      const { include_services } = this.state;
+      return _.compact([include_services && services_search_config]);
+    };
     get_search_configs = () => {
       const { reject_gov, reject_dead_orgs } = this.props;
 
@@ -131,7 +135,6 @@ const EverythingSearch = withRouter(
         include_tags_hwh,
         include_tags_wwh,
 
-        include_services,
         include_glossary,
         include_tables,
       } = this.state;
@@ -161,7 +164,6 @@ const EverythingSearch = withRouter(
         include_tags_wwh && who_we_help_search_config,
         include_tables && table_search_config,
         include_glossary && glossary_lite_search_config,
-        include_services && services_search_config,
       ]);
     };
     onSelect = (item) => {
@@ -186,6 +188,7 @@ const EverythingSearch = withRouter(
         <div className="col-12 col-lg-12 p-0">
           <SearchConfigTypeahead
             placeholder={placeholder}
+            gql_search_configs={this.get_gql_search_configs()}
             search_configs={this.get_search_configs()}
             utility_buttons={
               !hide_utility_buttons && [

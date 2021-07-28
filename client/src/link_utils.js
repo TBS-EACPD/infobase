@@ -36,7 +36,7 @@ const smart_href_template = (entity, first_character) => {
     _.includes(subject_classes_with_infographics, entity.constructor)
   ) {
     return infograph_href_template(entity, null, first_character);
-  } else if (entity.entity_type === "service") {
+  } else if (entity.__typename === "Service") {
     return service_href(entity.org_id, entity.id);
   } else {
     throw new Error(

@@ -210,7 +210,7 @@ export class ServiceOverview extends React.Component {
           <dd>
             {_.map(all_urls, (urls, url_type) =>
               _.map(urls, (url, i) => (
-                <p key={url}>
+                <p key={_.uniqueId()}>
                   <a href={url} target="_blank" rel="noopener noreferrer">
                     {`${text_maker(url_type)} ${i + 1}`}
                   </a>

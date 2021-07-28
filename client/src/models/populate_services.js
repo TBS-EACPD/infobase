@@ -290,7 +290,7 @@ export const useSingleService = (service_id) => {
     throw new Error(error);
   }
   if (!loading) {
-    return { ...res, data: data.root.service };
+    return { ...res, data: data.root.service[0] };
   }
   return res;
 };

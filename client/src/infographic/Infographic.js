@@ -195,6 +195,7 @@ class InfoGraph_ extends React.Component {
           <EverythingSearch
             href_template={this.search_href_template}
             initial_search_options={{
+              include_services: true,
               include_orgs_normal_data: true,
               include_orgs_limited_data: true,
               include_crsos: true,
