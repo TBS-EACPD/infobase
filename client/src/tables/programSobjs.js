@@ -2,11 +2,7 @@ import _ from "lodash";
 
 import { Program } from "src/models/subjects";
 
-import {
-  trivial_text_maker,
-  year_templates,
-  businessConstants,
-} from "./table_common";
+import { year_templates, businessConstants } from "./table_common";
 
 import text from "./programSobjs.yaml";
 
@@ -104,68 +100,5 @@ export default {
     }
     this.programs.get(program_obj).push(mapped_row);
   },
-  dimensions: [
-    {
-      title_key: "so",
-      include_in_report_builder: false,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.so;
-        };
-      },
-    },
-    {
-      title_key: "so_cat",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          if (row.so_num > 0 && row.so_num <= 7) {
-            return trivial_text_maker("op_spending");
-          } else if (row.so_num > 7 && row.so_num <= 9) {
-            return trivial_text_maker("capital_spending");
-          } else if (row.so_num === 21 || row.so_num === 22) {
-            return trivial_text_maker("revenues");
-          }
-          return row.so;
-        };
-      },
-    },
-    {
-      title_key: "gov_outcome",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        var func = function (row) {
-          const prog = Program.lookup_by_dept_id_and_activity_code(
-            row.dept,
-            row.activity_code
-          );
-          const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (goco && goco.name) || trivial_text_maker("unknown");
-        };
-        return func;
-      },
-    },
-    {
-      title_key: "gov_goco",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        var func = function (row) {
-          //FIXME: this is because I found a program without a goco,
-          const prog = Program.lookup_by_dept_id_and_activity_code(
-            row.dept,
-            row.activity_code
-          );
-          const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (
-            (goco && goco.parent_tag.name) || trivial_text_maker("unknown")
-          );
-        };
-        return func;
-      },
-    },
-  ],
+  dimensions: ["dept", "prgm", "so"],
 };

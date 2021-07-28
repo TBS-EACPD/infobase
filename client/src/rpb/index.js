@@ -218,6 +218,7 @@ class RPB extends React.Component {
 
     function dimension_column_values(dim_data) {
       if (dimension === "vote_vs_stat") {
+        // TODO: maybe create new column instead of using desc column
         return [
           "desc",
           dim_data[0].votestattype === 999 ? "Statutory" : "Voted",
