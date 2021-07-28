@@ -17,7 +17,7 @@ import { LegendList } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
 
-import { default_sort_func } from "src/sort_utils";
+import { smart_sort_func } from "src/sort_utils";
 
 import {
   DisplayTableCopyCsv,
@@ -88,7 +88,7 @@ const get_column_config_defaults = (index: number) => ({
     // available for any special cases that need access to the actual cell value, not the "plain" version usually used
     cell_value_a: CellValue, // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
     cell_value_b: CellValue // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
-  ): 1 | 0 | -1 => default_sort_func(plain_a, plain_b, descending),
+  ): 1 | 0 | -1 => smart_sort_func(plain_a, plain_b, descending),
 });
 type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
   index: number;

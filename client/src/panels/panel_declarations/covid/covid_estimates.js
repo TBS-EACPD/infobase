@@ -31,7 +31,7 @@ import { toggle_list } from "src/general_utils";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
 import { get_source_links } from "src/metadata/data_sources";
-import { default_sort_func } from "src/sort_utils";
+import { smart_sort_func } from "src/sort_utils";
 
 import {
   AboveTabFootnoteList,
@@ -80,7 +80,7 @@ const get_common_column_configs = (show_vote_stat, est_docs) => ({
       const order_a = vs_type_ordering_by_name[plain_a];
       const order_b = vs_type_ordering_by_name[plain_b];
 
-      return default_sort_func(order_a, order_b, descending);
+      return smart_sort_func(order_a, order_b, descending);
     },
     initial_visible: show_vote_stat,
   },
