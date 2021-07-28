@@ -17,7 +17,7 @@ import { lang } from "src/core/injected_build_constants";
 import { toggle_list } from "src/general_utils";
 import { infograph_href_template } from "src/infographic/infographic_link";
 import { get_source_links } from "src/metadata/data_sources";
-import { default_sort_func } from "src/sort_utils";
+import { smart_sort_func } from "src/sort_utils";
 
 import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
 
@@ -131,10 +131,10 @@ const sort_date_to_achieve = (
   const [month_a, year_a] = split_date_to_achieve(cell_value_a);
   const [month_b, year_b] = split_date_to_achieve(cell_value_b);
 
-  const year_sort_value = default_sort_func(year_a, year_b, descending);
+  const year_sort_value = smart_sort_func(year_a, year_b, descending);
 
   if (year_sort_value === 0) {
-    return default_sort_func(month_a, month_b, descending);
+    return smart_sort_func(month_a, month_b, descending);
   } else {
     return year_sort_value;
   }

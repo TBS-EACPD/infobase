@@ -8,7 +8,7 @@ import { businessConstants } from "src/models/businessConstants";
 import { array_to_grammatical_list } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
-import { default_sort_func } from "src/sort_utils";
+import { smart_sort_func } from "src/sort_utils";
 
 import { ToggleVoteStatProvider } from "./covid_common_components";
 
@@ -56,7 +56,7 @@ const est_doc_sort_func = (est_doc_a, est_doc_b, descending) => {
   const order_a = get_est_doc_order(est_doc_a);
   const order_b = get_est_doc_order(est_doc_b);
 
-  return default_sort_func(order_a, order_b, descending);
+  return smart_sort_func(order_a, order_b, descending);
 };
 const get_est_doc_glossary_key = (est_doc) =>
   ({
