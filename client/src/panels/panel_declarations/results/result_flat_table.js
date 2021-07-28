@@ -95,9 +95,49 @@ const subject_link = (node) => (
   </span>
 );
 
-const date_as_number = (value) => {
-  const time = new Date(value).getTime();
-  return _.isNaN(time) ? Number.POSITIVE_INFINITY : time;
+const date_join_character = "/";
+const get_date_to_achieve = ({ target_year, target_month }) => {
+  if (_.isNumber(target_month) && _.isNumber(target_year)) {
+    return `${target_month}${date_join_character}${target_year}`;
+  } else if (_.isNumber(target_year)) {
+    return _.toString(target_year);
+  } else if (!_.isEmpty(target_year)) {
+    return text_maker(target_year); // TODO what's this case? Is it used? Might be a problem
+  } else {
+    return text_maker("unspecified");
+  }
+};
+const split_date_to_achieve = (date_to_achieve) => {
+  const split_date = _.split(date_to_achieve, date_join_character);
+
+  if (split_date.length === 2) {
+    return _.map(split_date, _.toNumber);
+  } else if (!_.isNaN(+date_to_achieve)) {
+    return [-Infinity, +date_to_achieve];
+  } else {
+    return [-Infinity, -Infinity];
+  }
+};
+const format_date_to_achieve = (date_to_achieve) => {
+  const [month, year] = split_date_to_achieve(date_to_achieve);
+
+  if (month > 0) {
+    return `${months[month].text} ${year}`;
+  } else {
+    return date_to_achieve;
+  }
+};
+const sort_date_to_achieve = (date_a, date_b, descending) => {
+  const [month_a, year_a] = split_date_to_achieve(date_a);
+  const [month_b, year_b] = split_date_to_achieve(date_b);
+
+  const year_sort_value = default_sort_func(year_a, year_b, descending);
+
+  if (year_sort_value === 0) {
+    return default_sort_func(month_a, month_b, descending);
+  } else {
+    return year_sort_value;
+  }
 };
 
 const indicator_table_from_list = (indicator_list, subject) => {
@@ -118,10 +158,6 @@ const indicator_table_from_list = (indicator_list, subject) => {
     ])
     .fromPairs()
     .value();
-  const fmt_plain_string_date = (date_obj) =>
-    _.isDate(date_obj)
-      ? `${months[date_obj.getMonth() + 1].text} ${date_obj.getFullYear()}`
-      : date_obj;
 
   const column_configs = {
     cr_or_program: {
@@ -182,16 +218,9 @@ const indicator_table_from_list = (indicator_list, subject) => {
     date_to_achieve: {
       index: 4,
       header: text_maker("date_to_achieve"),
-      formatter: (val) => fmt_plain_string_date(val),
-      raw_formatter: (val) => fmt_plain_string_date(val),
-      sort_func: (a, b, descending) => {
-        if (a && b) {
-          const a_time = date_as_number(a);
-          const b_time = date_as_number(b);
-          return default_sort_func(a_time, b_time, descending);
-        }
-        return 0;
-      },
+      formatter: format_date_to_achieve,
+      raw_formatter: format_date_to_achieve,
+      sort_func: sort_date_to_achieve,
     },
     status: {
       index: 5,
@@ -208,24 +237,12 @@ const indicator_table_from_list = (indicator_list, subject) => {
     },
   };
 
-  const get_indicator_date = ({ target_year, target_month }) => {
-    if (_.isNumber(target_month) && _.isNumber(target_year)) {
-      return new Date(target_year, target_month);
-    } else if (_.isNumber(target_year)) {
-      return target_year;
-    } else if (!_.isEmpty(target_year)) {
-      return text_maker(target_year);
-    } else {
-      return text_maker("unspecified");
-    }
-  };
-
   const table_data = _.map(indicator_list, (ind) => ({
     cr_or_program: ind.indicator.id,
     indicator: ind.indicator.id,
     target: indicator_target_text(ind.indicator),
     target_result: indicator_actual_text(ind.indicator),
-    date_to_achieve: get_indicator_date(ind.indicator),
+    date_to_achieve: get_date_to_achieve(ind.indicator),
     status: ind.indicator.status_key,
   }));
   return (
