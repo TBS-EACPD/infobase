@@ -96,47 +96,5 @@ export default {
     }
     this.programs.get(program_obj).push(mapped_row);
   },
-  dimensions: [
-    {
-      title_key: "voted_stat",
-      include_in_report_builder: true,
-      filter_func: () => _.property("vote_stat"),
-    },
-    {
-      title_key: "gov_outcome",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        var func = function (row) {
-          const prog = Program.lookup_by_dept_id_and_activity_code(
-            row.dept,
-            row.activity_code
-          );
-          const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (goco && goco.name) || trivial_text_maker("unknown");
-        };
-        return func;
-      },
-    },
-    {
-      title_key: "gov_goco",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        var func = function (row) {
-          //FIXME: this is because I found a program without a goco,
-          const prog = Program.lookup_by_dept_id_and_activity_code(
-            row.dept,
-            row.activity_code
-          );
-
-          const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
-          return (
-            (goco && goco.parent_tag.name) || trivial_text_maker("unknown")
-          );
-        };
-        return func;
-      },
-    },
-  ],
+  dimensions: ["dept", "prgm", "vote_stat"],
 };

@@ -4,12 +4,7 @@ import _ from "lodash";
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
-import {
-  vote_stat_dimension,
-  major_vote_big_stat,
-  year_templates,
-  businessConstants,
-} from "./table_common";
+import { year_templates, businessConstants } from "./table_common";
 
 import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;
@@ -222,25 +217,5 @@ export default {
     return grps[true].concat(grps[false]);
   },
 
-  dimensions: [
-    {
-      title_key: "by_estimates_doc",
-      include_in_report_builder: true,
-      filter_func: function (options) {
-        return function (d) {
-          return d.est_doc;
-        };
-      },
-    },
-    {
-      title_key: "voted_stat",
-      include_in_report_builder: true,
-      filter_func: vote_stat_dimension,
-    },
-    {
-      title_key: "major_voted_big_stat",
-      exclude_from_rpb: true,
-      filter_func: major_vote_big_stat("{{est_in_year}}_estimates"),
-    },
-  ],
+  dimensions: ["dept", "desc", "vote_vs_stat"],
 };
