@@ -82,12 +82,6 @@ service_summary{
     number_of_reporting_orgs
     number_of_reporting_programs
   }
-  service_type_summary{
-    id
-    subject_id
-    label
-    value
-  }
   service_digital_status_summary{
     id
     key
@@ -97,25 +91,12 @@ service_summary{
     cannot_online
     not_applicable
   }
-  service_id_methods_summary{
-    id
-    method
-    subject_id
-    label
-    value
-  }
   service_standards_summary{
     id
     subject_id
     services_w_standards_count
     standards_count
     met_standards_count
-  }
-  service_fees_summary{
-    id
-    subject_id
-    label
-    value
   }
   top_services_application_vol_summary{
     id
@@ -130,14 +111,6 @@ service_summary{
     number_of_services
     total_volume
   }
-  top_services_website_visits_summary{
-    id
-    subject_id
-    service_id
-    service_name
-    website_visits_count
-  }
-
 }
 `;
 

@@ -22,26 +22,16 @@ const schema = `
   type ServiceSummary{
     id: String
     service_general_stats: ServiceGeneralStats
-    service_type_summary: [ServiceTypeSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
-    service_id_methods_summary: [ServiceIdMethodsSummary]
     service_standards_summary: [ServiceStandardsSummary]
-    service_fees_summary: [ServiceFeesSummary]
     top_services_application_vol_summary: [TopServicesApplicationVolSummary]
     orgs_reporting_services_summary: [OrgsReportingServicesSummary]
-    top_services_website_visits_summary: [TopServicesWebsiteVisitsSummary]
   }
   type ServiceGeneralStats{
     id: String
     number_of_services: Float
     number_of_reporting_orgs: Float
     number_of_reporting_programs: Float
-  }
-  type ServiceTypeSummary{
-    id: String
-    subject_id: String
-    label: String
-    value: Float
   }
   type ServiceDigitalStatusSummary{
     id: String
@@ -52,25 +42,12 @@ const schema = `
     cannot_online: Float
     not_applicable: Float
   }
-  type ServiceIdMethodsSummary{
-    id: String
-    method: String
-    subject_id: String
-    label: String
-    value: Float
-  }
   type ServiceStandardsSummary{
     id: String
     subject_id: String
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float
-  }
-  type ServiceFeesSummary{
-    id: String
-    subject_id: String
-    label: String
-    value: Float
   }
   type TopServicesApplicationVolSummary{
     id: String
@@ -84,13 +61,6 @@ const schema = `
     subject_id: String
     number_of_services: Float
     total_volume: Float
-  }
-  type TopServicesWebsiteVisitsSummary{
-    id: String
-    subject_id: String
-    service_id: String
-    service_name: String
-    website_visits_count: Float
   }
   type ServiceReport{
     service_id: String
@@ -205,14 +175,8 @@ export default function ({ models, loaders }) {
         program_service_summary_loader.load(program_id),
       has_services: ({ program_id }) => program_has_services(program_id),
     },
-    ServiceTypeSummary: {
-      label: bilingual_field("label"),
-    },
     TopServicesApplicationVolSummary: {
       name: bilingual_field("name"),
-    },
-    TopServicesWebsiteVisitsSummary: {
-      service_name: bilingual_field("service_name"),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),
