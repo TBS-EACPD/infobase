@@ -442,7 +442,7 @@ const GBAPlusBadge = ({ use_icon }) => (
       />
     ) : (
       <span className="badge badge--is-gba-plus-indicator">
-        {text_maker("gba_plus")}
+        {text_maker("gba_plus_short")}
       </span>
     )}
   </GlossaryTooltipWrapper>

@@ -750,8 +750,11 @@ covid_expenditures_estimated_exp_2021:
     {{{gt "covid_expenditures_estimated_exp"}}} {{fmt_year_to_fiscal_year 2021}}
     
 gba_plus:
+  en: Gender-Based Analysis Plus (GBA Plus)
+  fr: Analyse comparative entre les sexes plus (ACS Plus)
+gba_plus_short:
   en: GBA Plus
-  fr: TODO
+  fr: ACS Plus
 
 
 ##################################
