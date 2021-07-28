@@ -985,9 +985,10 @@ search_no_results:
   en: Your search did not match anything
   fr: Votre recherche n'a pas de résultats
 
+# GBA_TODO have french confirmed
 filters_no_results:
   en: Applied filters did not match anything
-  fr: GBA_TODO
+  fr: Les filtres appliqués n'a pas de résultats
 
 tagged_programs:
   en: Tagged Programs
