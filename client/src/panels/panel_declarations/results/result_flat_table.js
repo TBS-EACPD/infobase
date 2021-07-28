@@ -125,9 +125,15 @@ const format_date_to_achieve = (date_to_achieve) => {
     return date_to_achieve;
   }
 };
-const sort_date_to_achieve = (date_a, date_b, descending) => {
-  const [month_a, year_a] = split_date_to_achieve(date_a);
-  const [month_b, year_b] = split_date_to_achieve(date_b);
+const sort_date_to_achieve = (
+  _plain_a,
+  _plain_b,
+  descending,
+  cell_value_a,
+  cell_value_b
+) => {
+  const [month_a, year_a] = split_date_to_achieve(cell_value_a);
+  const [month_b, year_b] = split_date_to_achieve(cell_value_b);
 
   const year_sort_value = default_sort_func(year_a, year_b, descending);
 
@@ -164,14 +170,6 @@ const indicator_table_from_list = (indicator_list, subject) => {
       is_searchable: true,
       formatter: (value) => ind_map[value].subject_link,
       plain_formatter: (value) => ind_map[value].subject_full_name,
-      sort_func: (a, b, descending) => {
-        if (a && b) {
-          const a_name = ind_map[a].subject_full_name.toUpperCase();
-          const b_name = ind_map[b].subject_full_name.toUpperCase();
-          return default_sort_func(a_name, b_name, descending);
-        }
-        return 0;
-      },
     },
     indicator: {
       index: 1,
@@ -194,14 +192,6 @@ const indicator_table_from_list = (indicator_list, subject) => {
         );
       },
       plain_formatter: (value) => ind_map[value].name,
-      sort_func: (a, b, descending) => {
-        if (a && b) {
-          const a_name = ind_map[a].name;
-          const b_name = ind_map[b].name;
-          return default_sort_func(a_name, b_name, descending);
-        }
-        return 0;
-      },
     },
     target: {
       index: 2,
@@ -232,14 +222,6 @@ const indicator_table_from_list = (indicator_list, subject) => {
         </Fragment>
       ),
       plain_formatter: (value) => result_statuses[value].text,
-      sort_func: (a, b, descending) => {
-        if (a && b) {
-          const a_name = result_statuses[a].text;
-          const b_name = result_statuses[b].text;
-          return default_sort_func(a_name, b_name, descending);
-        }
-        return 0;
-      },
     },
   };
 

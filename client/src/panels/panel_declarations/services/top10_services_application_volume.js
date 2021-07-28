@@ -11,7 +11,6 @@ import {
   DisplayTable,
   create_text_maker_component,
   LeafSpinner,
-  default_sort_func,
 } from "src/components/index";
 
 import { useSummaryServices } from "src/models/populate_services";
@@ -70,11 +69,6 @@ const Top10ServicesApplicationVolumePanel = ({ subject }) => {
         </a>
       ),
       plain_formatter: (id) => data_name_lookup[id],
-      sort_func: (id_a, id_b, descending) => {
-        const name_a = data_name_lookup[id_a];
-        const name_b = data_name_lookup[id_b];
-        return default_sort_func(name_a, name_b, descending);
-      },
     },
     [total_volume]: {
       index: 1,

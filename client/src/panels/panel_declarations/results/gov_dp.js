@@ -7,7 +7,6 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import {
   create_text_maker_component,
-  default_dept_name_sort_func,
   DisplayTable,
 } from "src/components/index";
 
@@ -109,7 +108,6 @@ export const declare_gov_dp_panel = () =>
               ) : (
                 value
               ),
-            sort_func: default_dept_name_sort_func,
             plain_formatter: (value) =>
               value ? Dept.lookup(value).name : value,
           },
