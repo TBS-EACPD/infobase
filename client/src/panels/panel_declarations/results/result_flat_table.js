@@ -193,15 +193,15 @@ const indicator_table_from_list = (indicator_list, subject) => {
           </ModalButton>
         );
       },
+      raw_formatter: (value) => ind_map[value].name,
       sort_func: (a, b, descending) => {
         if (a && b) {
-          const a_name = ind_map[a].name.toUpperCase();
-          const b_name = ind_map[b].name.toUpperCase();
+          const a_name = ind_map[a].name;
+          const b_name = ind_map[b].name;
           return default_sort_func(a_name, b_name, descending);
         }
         return 0;
       },
-      raw_formatter: (value) => ind_map[value].name,
     },
     target: {
       index: 2,
@@ -232,6 +232,14 @@ const indicator_table_from_list = (indicator_list, subject) => {
         </Fragment>
       ),
       raw_formatter: (value) => result_statuses[value].text,
+      sort_func: (a, b, descending) => {
+        if (a && b) {
+          const a_name = result_statuses[a].text;
+          const b_name = result_statuses[b].text;
+          return default_sort_func(a_name, b_name, descending);
+        }
+        return 0;
+      },
     },
   };
 

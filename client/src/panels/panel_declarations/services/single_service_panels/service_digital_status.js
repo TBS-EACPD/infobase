@@ -33,6 +33,7 @@ export class ServiceDigitalStatus extends React.Component {
     const column_configs = {
       overview_digital_status_desc: {
         index: 0,
+        is_sortable: false,
         header: text_maker("overview_digital_status_desc"),
         formatter: (key) => (
           <Fragment>
@@ -45,6 +46,7 @@ export class ServiceDigitalStatus extends React.Component {
       },
       digital_status: {
         index: 1,
+        is_sortable: false,
         header: text_maker("online_status"),
         formatter: (value) => (
           <Fragment>
