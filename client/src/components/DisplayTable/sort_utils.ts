@@ -1,8 +1,5 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
-const { Dept } = Subject;
-
 const get_plain_string = (string: string) =>
   _.chain(string).deburr().lowerCase().value();
 const string_sort_func = (a: string, b: string) => {
@@ -50,27 +47,3 @@ export const default_sort_func = (
     );
   }
 };
-
-interface subject_class {
-  lookup: (id: number | string) => { name: string };
-}
-
-export const default_subject_name_sort_func = (
-  subject_class: subject_class,
-  subject_id_a: number | string,
-  subject_id_b: number | string,
-  descending: boolean
-) => {
-  if (subject_class && subject_id_a && subject_id_b) {
-    const a_name = subject_class.lookup(subject_id_a).name.toUpperCase();
-    const b_name = subject_class.lookup(subject_id_b).name.toUpperCase();
-    return default_sort_func(a_name, b_name, descending);
-  }
-  return 0;
-};
-
-export const default_dept_name_sort_func = (
-  dept_id_a: number | string,
-  dept_id_b: number | string,
-  descending: boolean
-) => default_subject_name_sort_func(Dept, dept_id_a, dept_id_b, descending);
