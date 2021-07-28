@@ -13,9 +13,9 @@ results_intro_text:
     Organizations are made up of {{gl_tt "Core Responsibilities" "CR"}} and {{gl_tt "Programs" "PROG"}} within each Core Responsibility. Core Responsibilities and Programs
     have {{gl_tt "results" "RESULT"}}. Progress for each result is measured by one or more {{gl_tt "indicators" "IND_RESULT"}}, each of which has a target.
   fr: |
-    Depuis avril 2018, toutes les organisations utilisent une structure redditionnelle, fondée sur la
-    {{ext_link "Politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}, comprenant
-    le {{gl_tt "Cadre ministériel des résultats" "DRF"}} et le {{gl_tt "Répertoire des programmes" "PI"}}.
+    Depuis avril 2018, toutes les organisations utilisent une structure redditionnelle des résultats conforme à la 
+    {{ext_link "Politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}, composée 
+    d’un {{gl_tt "Cadre ministériel des résultats" "DRF"}} et d’un {{gl_tt "Répertoire des programmes" "PI"}}.
 
     Les organisations ont des {{gl_tt "responsabilités essentielles" "CR"}} auxquelles des {{gl_tt "programmes" "PROG"}} sont rattachés.
     Les responsabilités essentielles et les programmes donnent des {{gl_tt "résultats" "RESULT"}}. Pour chaque résultat, les progrès
@@ -41,7 +41,9 @@ gba_plus_intro_text:
     Indicators from the most recent results reports, **2019-20**, have been marked as {{gl_tt "supporting GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
     These indicators and their GBA Plus markings can be found on the pages for individual organizations.
   fr: |
-    GBA_TODO
+    L'{{gl_tt "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est utilisée par le gouvernement fédéral pour l'élaboration de politiques, de programmes et de lois. 
+    Dans les plus récents rapports sur les résultats (**2019-1920**), les indicateurs ont été marqués comme {{gl_tt "appuyant l'ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
+    Ces indicateurs et leur marquage ACS Plus se trouvent sur la page de chaque organisation.
 
 
 dp_summary_text:
