@@ -97,5 +97,5 @@ export default {
     return row;
   },
 
-  dimensions: ["fol"],
+  dimensions: ["dept", "fol"],
 };

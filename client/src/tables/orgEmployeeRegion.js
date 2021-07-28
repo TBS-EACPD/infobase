@@ -159,5 +159,5 @@ export default {
     },
   },
 
-  dimensions: ["region"],
+  dimensions: ["dept", "region"],
 };

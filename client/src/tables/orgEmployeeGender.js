@@ -92,7 +92,7 @@ export default {
     },
   },
 
-  dimensions: ["gender"],
+  dimensions: ["dept", "gender"],
 
   mapper: function (row) {
     var new_value = gender[row[1]].text;

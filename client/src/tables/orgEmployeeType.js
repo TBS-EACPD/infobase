@@ -90,7 +90,7 @@ export default {
     return row;
   },
 
-  dimensions: ["employee_type"],
+  dimensions: ["dept", "employee_type"],
   queries: {
     gov_grouping: function () {
       return _.chain(this.table.horizontal(people_years, false))
