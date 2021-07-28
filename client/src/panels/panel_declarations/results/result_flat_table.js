@@ -101,8 +101,6 @@ const get_date_to_achieve = ({ target_year, target_month }) => {
     return `${target_month}${date_join_character}${target_year}`;
   } else if (_.isNumber(target_year)) {
     return _.toString(target_year);
-  } else if (!_.isEmpty(target_year)) {
-    return text_maker(target_year); // TODO what's this case? Is it used? Might be a problem
   } else {
     return text_maker("unspecified");
   }
