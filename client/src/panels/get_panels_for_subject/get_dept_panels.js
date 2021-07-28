@@ -22,12 +22,8 @@ import {
 
   // shared gov, dept, program
   declare_services_intro_panel,
-  declare_services_types_panel,
   declare_services_digital_status_panel,
-  declare_services_fees_panel,
-  declare_services_id_methods_panel,
   declare_services_standards_panel,
-  declare_top10_website_visits_panel,
 
   // shared dept, program
   declare_spend_rev_split_panel,
@@ -120,13 +116,9 @@ export const get_dept_panels = (subject) =>
       subject.has_data("services") && [
         declare_services_intro_panel(),
         declare_provided_services_list_panel(),
-        declare_services_types_panel(),
         declare_services_digital_status_panel(),
-        declare_services_id_methods_panel(),
         declare_services_channels_panel(),
         declare_top10_services_application_volume_panel(),
-        declare_top10_website_visits_panel(),
-        declare_services_fees_panel(),
         declare_services_standards_panel(),
       ],
     results: subject.has_data("results") && [
