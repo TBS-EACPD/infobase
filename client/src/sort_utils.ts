@@ -30,9 +30,9 @@ const wrap_sort_with_direction = <T>(
 ) =>
   !reverse ? (a: T, b: T) => sort_func(a, b) : (a: T, b: T) => sort_func(b, a);
 
-export const smart_sort_func = (
-  a: number | string,
-  b: number | string,
+export const smart_sort_func = <T extends number | string>(
+  a: T,
+  b: T,
   reverse = false
 ) => {
   if (typeof a === "string" && typeof b === "string") {
