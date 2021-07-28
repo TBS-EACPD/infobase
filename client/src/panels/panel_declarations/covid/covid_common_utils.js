@@ -1,12 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
-import { TabLoadingWrapper, default_sort_func } from "src/components/index";
+import { TabLoadingWrapper } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 
 import { array_to_grammatical_list } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
+
+import { default_sort_func } from "src/sort_utils";
 
 import { ToggleVoteStatProvider } from "./covid_common_components";
 

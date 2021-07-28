@@ -17,6 +17,8 @@ import { LegendList } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
 
+import { default_sort_func } from "src/sort_utils";
+
 import {
   DisplayTableCopyCsv,
   DisplayTableDownloadCsv,
@@ -24,7 +26,6 @@ import {
   SelectPage,
   SelectPageSize,
 } from "./DisplayTableUtils";
-import { default_sort_func } from "./sort_utils";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTable.scss";

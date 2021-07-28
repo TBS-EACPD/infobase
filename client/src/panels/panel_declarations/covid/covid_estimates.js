@@ -8,7 +8,6 @@ import {
   TabbedContent,
   TabLoadingSpinner,
   DisplayTable,
-  default_sort_func,
 } from "src/components/index";
 
 import {
@@ -32,6 +31,7 @@ import { toggle_list } from "src/general_utils";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
 import { get_source_links } from "src/metadata/data_sources";
+import { default_sort_func } from "src/sort_utils";
 
 import {
   AboveTabFootnoteList,
