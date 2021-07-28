@@ -1,13 +1,9 @@
 export { declare_services_intro_panel } from "./services_intro";
 export { declare_provided_services_list_panel } from "./provided_services_list";
-export { declare_services_types_panel } from "./services_types";
-export { declare_services_fees_panel } from "./services_fees";
-export { declare_services_id_methods_panel } from "./services_id_methods";
 export { declare_services_channels_panel } from "./services_channels";
 export { declare_services_digital_status_panel } from "./services_digital_status";
 export { declare_services_standards_panel } from "./services_standards";
 export { declare_top10_services_application_volume_panel } from "./top10_services_application_volume";
-export { declare_top10_website_visits_panel } from "./top10_services_website_visits";
 export { declare_orgs_reporting_services_panel } from "./orgs_reporting_services";
 export { ServiceOverview } from "./single_service_panels/service_overview";
 export { ServiceChannels } from "./single_service_panels/service_channels";

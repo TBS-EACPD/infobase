@@ -38,56 +38,6 @@ filter_results_service:
   en: Filter services by name or type
   fr: Filtrer les services par nom ou par type   
 
-# Fees
-services_fees:
-  en: Service fees
-  fr: Frais de service
-services_fees_text:
-  transform: [handlebars, markdown]
-  en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{charge_fees_count}}** services charge fees.
-  fr: Sur les **{{services_count}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{charge_fees_count}}** sont payants.
-services_prog_fees_text:
-  transform: [handlebars, markdown]
-  en: Out of the **{{services_count}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{charge_fees_count}}** services charge fees.
-  fr: TODO
-service_charges_fees:
-  en: Service does charge fees
-  fr: Service payant
-service_does_not_charge_fees:
-  en: Service does not charge fees
-  fr: Service sans frais
-
-# Identification methods
-identification_methods:
-  en: Identification methods
-  fr: Méthodes d'identification
-uses_cra_as_identifier:
-  en: Uses CRA business number as an identifier
-  fr: Le numéro d'entreprise de l'ARC est utilisé comme identifiant
-uses_sin_as_identifier:
-  en: Uses Social Insurance Number as an identifier
-  fr: Le NAS est utilisé comme identifiant
-does_not_use_cra_as_identifier:
-  en: Does not use CRA business number as an identifier
-  fr: Le numéro d'entreprise de l'ARC n'est pas utilisé comme identifiant
-does_not_use_sin_as_identifier:
-  en: Does not use Social Insurance Number as an identifier
-  fr: Le NAS n'est pas utilisé comme identifiant
-sin_sub_title:
-  transform: [handlebars, markdown]
-  en: How many {{gl_tt "services" "SERVICE"}} use the **Social Insurance Number** as a standard identifier?
-  fr: Combien de services utilisent le NAS comme identifiant standard?
-cra_sub_title:
-  transform: [handlebars, markdown]
-  en: How many services use the **CRA business number** as a standard identifier?
-  fr: Combien de services utilisent le numéro d'entreprise de l'ARC comme identifiant standard?
-sin_not_applicable:
-  en: Not applicable (not a service to an individual)
-  fr: Sans objet(service non offert à un particulier)
-cra_not_applicable:
-  en: Not applicable (not a service to business)
-  fr: Sans objet (service non offert à une entreprise)
-
 # Digital Status
 services_digital_status_text:
   transform: [handlebars, markdown]
@@ -235,26 +185,6 @@ top10_services_volume_text:
     Below are the top {{num_of_services}} services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
   fr: |
     Vous trouverez ci-dessous les {{num_of_services}} services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
-top10_gov_website_visits:
-  transform: [handlebars]
-  en: Top organizations with highest website visits
-  fr: Les organisations les plus visitées sur leur site web
-top10_services_website_visits:
-  transform: [handlebars]
-  en: Top services with highest website visits
-  fr: Les services les plus visités sur leur site web
-top10_gov_website_visits_text:
-  transform: [handlebars, markdown]
-  en: |
-    Below are the top {{num_of_services}} organizations with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
-  fr: |
-    Vous trouverez ci-dessous les {{num_of_services}} organisations ayant le plus grand nombre de visites sur leur site web. **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
-top10_services_website_visits_text:
-  transform: [handlebars, markdown]
-  en: |
-    Below are the top {{num_of_services}} services with the highest website visit volume. **{{highest_volume_name}}** had the most traffic with **{{fmt_big_int highest_volume_value}}** website visits.
-  fr: |
-    Vous trouverez ci-dessous les 10 services ayant le plus grand nombre de visites sur leur site web **{{highest_volume_name}}** a connu le trafic le plus important avec **{{fmt_big_int highest_volume_value}}** visites de son site web.
 
 # Orgs reporting services
 orgs_reporting_services_title:
@@ -287,6 +217,9 @@ service_overview_title:
 related_programs:
   en: Related Programs
   fr: Programmes connexes
+services_fees:
+  en: Service fees
+  fr: Frais de service
 does_charge_fees:
   transform: [handlebars, markdown]
   en: This {{gl_tt "service" "SERVICE"}} **does** charge fees
@@ -324,6 +257,18 @@ standard_url:
 rtp_url:
   en: Real-time Performance Results Link
   fr: Lien des résultats du rendement en temps réel
+identification_methods:
+  en: Identification methods
+  fr: Méthodes d'identification
+uses_cra_as_identifier:
+  en: Uses CRA business number as an identifier
+  fr: Le numéro d'entreprise de l'ARC est utilisé comme identifiant
+uses_sin_as_identifier:
+  en: Uses Social Insurance Number as an identifier
+  fr: Le NAS est utilisé comme identifiant
+service_types:
+  en: Service Types
+  fr: Types de service
 
 # Standard
 service_standards_title:
@@ -391,21 +336,3 @@ gauge_standards_met_text:
     **{{fmt_percentage1 standards_met_pct}}** of standards' targets were met
   fr: |
     **{{fmt_percentage1 standards_met_pct}}** des cibles normalisées ont été atteintes
-# Types
-service_types:
-  en: Service Types
-  fr: Types de service
-services_types_desc:
-  transform: [handlebars, markdown]
-  en: |
-    There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} within **{{subject.name}}**. The most common service type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** department's services.
-    
-    Note that a service can have multiple types.
-  fr: |
-    Il y a **{{num_of_types}}** types différents de {{gl_tt "services" "SERVICE"}} dans **{{subject.name}}**. Le type de service le plus courant est "**{{max_type}}**", qui regroupe **{{max_type_count}} of {{num_of_services}}** services ministériels.
-    
-    Notez qu’un service peut être de plusieurs types.
-services_types_prog_desc:
-  transform: [handlebars, markdown]
-  en: There are **{{num_of_types}}** different types of {{gl_tt "services" "SERVICE"}} delivered under the **{{subject.name}}** program. The most common type is "**{{max_type}}**", making up **{{max_type_count}} of {{num_of_services}}** of the program’s services.
-  fr: TODO

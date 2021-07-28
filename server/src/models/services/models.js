@@ -96,12 +96,6 @@ export default function (model_singleton) {
     number_of_reporting_orgs: { type: Number }, // only for gov
     number_of_reporting_programs: { type: Number }, // only for gov, org
   });
-  const ServiceTypeSummarySchema = mongoose.Schema({
-    id: pkey_type(),
-    subject_id: parent_fkey_type(),
-    ...bilingual_str("label"),
-    value: { type: Number },
-  });
   const ServiceDigitalStatusSummarySchema = mongoose.Schema({
     id: pkey_type(),
     key_desc: str_type,
@@ -111,25 +105,12 @@ export default function (model_singleton) {
     cannot_online: { type: Number },
     not_applicable: { type: Number },
   });
-  const ServiceIdMethodsSummarySchema = mongoose.Schema({
-    id: pkey_type(),
-    subject_id: parent_fkey_type(),
-    method: str_type,
-    label: str_type,
-    value: { type: Number },
-  });
   const ServiceStandardsSummarySchema = mongoose.Schema({
     id: pkey_type(),
     subject_id: parent_fkey_type(),
     services_w_standards_count: { type: Number },
     standards_count: { type: Number },
     met_standards_count: { type: Number },
-  });
-  const ServiceFeesSummarySchema = mongoose.Schema({
-    id: pkey_type(),
-    subject_id: parent_fkey_type(),
-    label: str_type,
-    value: { type: Number },
   });
   const TopServicesApplicationVolSummarySchema = mongoose.Schema({
     id: sparse_pkey_type(),
@@ -144,24 +125,11 @@ export default function (model_singleton) {
     number_of_services: { type: Number },
     total_volume: { type: Number },
   });
-  const TopServicesWebsiteVisitsSummarySchema = mongoose.Schema({
-    id: sparse_pkey_type(),
-    subject_id: parent_fkey_type(), // no dataloader for gov, must load all
-    service_id: str_type, // only for dept, program
-    ...bilingual_str("service_name"), // only for dept, program
-    website_visits_count: { type: Number },
-  });
   const common_service_fields = {
     id: pkey_type(),
     service_general_stats: ServiceGeneralStatsSchema,
-    service_type_summary: [ServiceTypeSummarySchema],
     service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
-    service_id_methods_summary: [ServiceIdMethodsSummarySchema],
     service_standards_summary: [ServiceStandardsSummarySchema],
-    service_fees_summary: [ServiceFeesSummarySchema],
-    top_services_website_visits_summary: [
-      TopServicesWebsiteVisitsSummarySchema,
-    ],
   };
 
   const GovServiceSummarySchema = mongoose.Schema({
