@@ -5,10 +5,7 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import {
-  DisplayTable,
-  default_dept_name_sort_func,
-} from "src/components/index";
+import { DisplayTable } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 
@@ -128,7 +125,6 @@ export const declare_gov_drr_panel = () =>
               ) : (
                 value
               ),
-            sort_func: default_dept_name_sort_func,
             plain_formatter: (value) =>
               value ? Dept.lookup(value).name : value,
           },

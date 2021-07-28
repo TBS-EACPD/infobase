@@ -75,16 +75,19 @@ const get_column_config_defaults = (index: number) => ({
   is_sortable: true,
   is_summable: false,
   is_searchable: false,
-  sort_func: (
-    value_a: CellValue,
-    value_b: CellValue,
-    descending: boolean
-  ): 1 | 0 | -1 => default_sort_func(value_a, value_b, descending),
   sum_func: (sum: number, value: number) => sum + value,
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,
-  // "plain" value for some complex datasets actually requires processing, as we use "plain" formatted values in the output csv AND for searching
-  plain_formatter: _.identity as (val: CellValue) => string,
+  // "plain" value for some complex datasets actually requires processing, as we use "plain" formatted values in the output csv AND for searching and (by default) sorting
+  plain_formatter: _.identity as (value: CellValue) => string | number,
+  sort_func: (
+    plain_a: string | number,
+    plain_b: string | number,
+    descending: boolean,
+    // available for any special cases that need access to the actual cell value, not the "plain" version usually used
+    cell_value_a: CellValue, // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
+    cell_value_b: CellValue // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
+  ): 1 | 0 | -1 => default_sort_func(plain_a, plain_b, descending),
 });
 type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
   index: number;
@@ -296,14 +299,21 @@ export class _DisplayTable extends React.Component<
       )
       .thru((unsorted_array) => {
         if (sort_by && _.has(col_configs_with_defaults, sort_by)) {
-          const { sort_func } = col_configs_with_defaults[sort_by];
+          const { sort_func, plain_formatter } =
+            col_configs_with_defaults[sort_by];
 
           return _.map(unsorted_array).sort(
             (row_a: DisplayTableData, row_b: DisplayTableData) =>
               _.chain([row_a, row_b])
                 .map((row) => row[sort_by])
                 .thru(([value_a, value_b]) =>
-                  sort_func(value_a, value_b, descending)
+                  sort_func(
+                    plain_formatter(value_a),
+                    plain_formatter(value_b),
+                    descending,
+                    value_a,
+                    value_b
+                  )
                 )
                 .value()
           );
@@ -347,7 +357,7 @@ export class _DisplayTable extends React.Component<
       .concat(
         _.map(sorted_filtered_data, (row: DisplayTableData) =>
           _.map(visible_ordered_col_keys, (key: string) =>
-            col_configs_with_defaults[key].plain_formatter(row[key])
+            _.toString(col_configs_with_defaults[key].plain_formatter(row[key]))
           )
         )
       )

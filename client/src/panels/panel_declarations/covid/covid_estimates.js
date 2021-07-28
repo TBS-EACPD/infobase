@@ -9,7 +9,6 @@ import {
   TabLoadingSpinner,
   DisplayTable,
   default_sort_func,
-  default_dept_name_sort_func,
 } from "src/components/index";
 
 import {
@@ -60,11 +59,14 @@ const colors = infobase_colors();
 
 const panel_key = "covid_estimates_panel";
 
-const vs_type_ordering = { vote: 1, stat: 2, both: 3 };
 const get_vs_type_name = (vs_type) =>
   _.includes(["vote", "stat"], vs_type)
     ? text_maker(`covid_estimates_${vs_type}`)
     : "";
+const vs_type_ordering_by_name = _.mapKeys(
+  { vote: 1, stat: 2, both: 3 },
+  (_order, key) => get_vs_type_name(key)
+);
 
 const get_common_column_configs = (show_vote_stat, est_docs) => ({
   vs_type: {
@@ -74,9 +76,9 @@ const get_common_column_configs = (show_vote_stat, est_docs) => ({
     is_summable: false,
     formatter: get_vs_type_name,
     plain_formatter: get_vs_type_name,
-    sort_func: (type_a, type_b, descending) => {
-      const order_a = vs_type_ordering[type_a];
-      const order_b = vs_type_ordering[type_b];
+    sort_func: (plain_a, plain_b, descending) => {
+      const order_a = vs_type_ordering_by_name[plain_a];
+      const order_b = vs_type_ordering_by_name[plain_b];
 
       return default_sort_func(order_a, order_b, descending);
     },
@@ -161,7 +163,6 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           );
         },
         plain_formatter: (org_id) => Dept.lookup(org_id).name,
-        sort_func: default_dept_name_sort_func,
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
@@ -244,7 +245,6 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         index: 0,
         header: text_maker("covid_measure"),
         is_searchable: true,
-        plain_formatter: get_measure_name,
         formatter: (id) => (
           <Fragment>
             {get_measure_name(id)}
@@ -256,13 +256,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
             )}
           </Fragment>
         ),
-        sort_func: (id_a, id_b, descending) =>
-          _.chain([id_a, id_b])
-            .map(CovidMeasure.lookup)
-            .thru(([measure_a, measure_b]) =>
-              default_sort_func(measure_a.name, measure_b.name, descending)
-            )
-            .value(),
+        plain_formatter: get_measure_name,
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
     };

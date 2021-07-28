@@ -8,7 +8,6 @@ import {
   LeafSpinner,
   DisplayTable,
   create_text_maker_component,
-  default_dept_name_sort_func,
 } from "src/components/index";
 
 import { useSummaryServices } from "src/models/populate_services";
@@ -47,7 +46,6 @@ const HighApplicationVolumePanel = ({ subject }) => {
         </a>
       ),
       plain_formatter: (org_id) => Dept.lookup(org_id).name,
-      sort_func: default_dept_name_sort_func,
     },
     total_volume: {
       index: 1,

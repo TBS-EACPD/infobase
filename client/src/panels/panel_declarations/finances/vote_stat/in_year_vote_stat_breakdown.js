@@ -6,10 +6,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import {
-  DisplayTable,
-  default_dept_name_sort_func,
-} from "src/components/index";
+import { DisplayTable } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 
@@ -80,7 +77,6 @@ const planned_vote_or_stat_render = (vs) =>
           ) : (
             value
           ),
-        sort_func: default_dept_name_sort_func,
         plain_formatter: (value) => (value ? Dept.lookup(value).name : value),
       },
       voted_stat: {
