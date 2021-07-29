@@ -153,7 +153,10 @@ const get_col_defs = createSelector(
 
           return (
             /drr/.test(doc) && (
-              <div aria-hidden={true} className="status-icon-array">
+              <div
+                aria-hidden={true}
+                className="results-drilldown__status-icon-array"
+              >
                 <InlineStatusIconList
                   indicators={_.filter(
                     result
@@ -253,13 +256,11 @@ export default class ResultsExplorerDisplay extends React.Component {
     } = this.props;
     const { loading, query } = this.state;
 
-    // Weird padding and margins here to get the spinner centered well and cover the "see the data" text while loading
     let inner_content = (
       <div
         style={{
           paddingTop: "100px",
           paddingBottom: "30px",
-          marginBottom: "-70px",
         }}
       >
         <LeafSpinner config_name={"tabbed_content"} />
@@ -282,19 +283,13 @@ export default class ResultsExplorerDisplay extends React.Component {
         get_non_col_content: get_non_col_content_func({ doc }),
       };
       inner_content = (
-        <div>
+        <div className="results-drilldown">
           <div className="results-drilldown-controls">
-            <div style={{ marginTop: "10px" }}>
+            <div>
               <ResultCountsComponent {...this.props} />
             </div>
             {/drr/.test(doc) && (
-              <div
-                style={{
-                  padding: "10px 10px",
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                }}
-              >
+              <div>
                 <StatusIconTable
                   active_list={status_key_whitelist}
                   icon_counts={icon_counts}
@@ -303,9 +298,8 @@ export default class ResultsExplorerDisplay extends React.Component {
                 />
               </div>
             )}
-            <div style={{ marginTop: "15px" }}>
+            <div>
               <form
-                style={{ marginBottom: "15px" }}
                 onSubmit={(evt) => {
                   evt.preventDefault();
                   evt.stopPropagation();
@@ -314,10 +308,10 @@ export default class ResultsExplorerDisplay extends React.Component {
                 }}
               >
                 <input
-                  aria-label={text_maker("explorer_search_is_optional")}
                   className="form-control input-lg"
-                  type="text"
                   style={{ width: "100%" }}
+                  type="text"
+                  aria-label={text_maker("explorer_search_is_optional")}
                   placeholder={text_maker("filter_results")}
                   onChange={(evt) => this.handleQueryChange(evt.target.value)}
                   value={query}
@@ -331,19 +325,22 @@ export default class ResultsExplorerDisplay extends React.Component {
                 )}
               </form>
             </div>
-            {result_docs[doc].has_gba_plus && ( //GBA_TODO, styles and text finalization
-              <CheckBox
-                id="filter-to-gba-plus-checkbox"
-                label={<TM k="gba_filter" />}
-                active={filter_by_gba_plus}
-                onClick={this.loading_wrapped_dispatch(() => {
-                  set_filter_by_gba_plus(!filter_by_gba_plus);
-                })}
-                container_style={{
-                  marginBottom: "15px",
+            {result_docs[doc].has_gba_plus && (
+              <div
+                style={{
+                  display: "flex",
                   justifyContent: "flex-end",
                 }}
-              />
+              >
+                <CheckBox
+                  id="filter-to-gba-plus-checkbox"
+                  label={<TM k="gba_filter" />}
+                  active={filter_by_gba_plus}
+                  onClick={this.loading_wrapped_dispatch(() => {
+                    set_filter_by_gba_plus(!filter_by_gba_plus);
+                  })}
+                />
+              </div>
             )}
             <div className="results-drilldown-controls__expand-collapse">
               <button
@@ -380,11 +377,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                 </div>
               </div>
             )}
-            <div
-              {...(loading && {
-                style: { visibility: "hidden", height: "0px" },
-              })}
-            >
+            <div className={classNames(loading && "d-none")}>
               {_.isEmpty(root_node.children) && (
                 <div
                   style={{

@@ -96,8 +96,9 @@ const get_docs_with_data = (subject, level) => {
     .intersection(docs_with_data)
     .value();
 
-  // TODO temporary special case (although should be future proof) to set drr19 as the default tab,
+  // DRR_TODO temporary special case (although should be future proof) to set drr19 as the default tab,
   // done so that the (temporarily) only year with GBA Plus day is the default
+  // Can drop and return to just most-recent by tabling date with DRR 2020-21
   const default_doc = (() => {
     const drr19 = "drr19";
 
