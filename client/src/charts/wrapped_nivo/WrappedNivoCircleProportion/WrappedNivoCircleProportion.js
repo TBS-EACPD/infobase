@@ -120,100 +120,81 @@ export class WrappedNivoCircleProportion extends React.Component {
     const color_scale = scaleOrdinal().range(newIBCategoryColors);
     const value_formatter = get_formatter(is_money, formatter, true, false);
 
-    const graph_data = {
-      id: parent_name,
-      name: parent_name,
-      // ... nivo bubble will roll child values back up and add them to the parent value for use in the graph
-      // so we need to remove the inner portion from the total here
-      value: parent_value - child_value,
-      color: color_scale(parent_name),
-      children: child_value
-        ? [
-            {
-              id: child_name,
-              name: child_name,
-              value: child_value,
-              color: color_scale(child_name),
-            },
-          ]
-        : 0,
-    };
+    const Circles = () => {
+      // arbitrary parent values
+      const parent_radius = 35;
+      const parent_cx = 175;
+      const parent_cy = 40;
 
-    const tooltip = () => (
-      <TooltipFactory
-        tooltip_items={[
-          {
-            id: "parent",
-            name: parent_name,
-            value: parent_value,
-            shape: "circle",
-            color: color_scale(parent_name),
-          },
-          {
-            id: "child",
-            name: child_name,
-            value: child_value,
-            shape: "circle",
-            color: color_scale(child_name),
-          },
-        ]}
-        tooltip_container_class="proportional-bubble-tooltip"
-        TooltipContentComponent={({ tooltip_item }) => (
-          <Fragment>
-            <MediaQuery minDeviceWidth={minMediumDevice}>
-              <td className="nivo-tooltip__label">{tooltip_item.name}</td>
-              <td className="nivo-tooltip__value">
-                {value_formatter(tooltip_item.value)}
-              </td>
-              <td className="nivo-tooltip__value">
-                {`(${formats.smart_percentage1_raw(
-                  tooltip_item.value / parent_value
-                )})`}
-              </td>
-            </MediaQuery>
-            <MediaQuery maxDeviceWidth={maxMediumDevice}>
-              <td>
-                <div className="nivo-tooltip__label ">{tooltip_item.name}</div>
-                <div className="nivo-tooltip__value">
-                  {value_formatter(tooltip_item.value)}
-                </div>
-                <div className="nivo-tooltip__value">
-                  {`(${formats.smart_percentage1_raw(
-                    tooltip_item.value / parent_value
-                  )})`}
-                </div>
-              </td>
-            </MediaQuery>
-          </Fragment>
-        )}
-      />
-    );
+      // child circle calculations
+      const child_percent = child_value / parent_value;
+      const child_radius = parent_radius * child_percent;
+
+      return (
+        <svg viewBox="0 0 350 350">
+          <circle
+            cx={parent_cx.toString()}
+            cy={parent_cy.toString()}
+            r={parent_radius.toString()}
+            fill={color_scale(parent_name)}
+          />
+          <circle
+            cx={parent_cx.toString()}
+            cy={(parent_cy + parent_radius - child_radius).toString()}
+            r={child_radius.toString()}
+            fill={color_scale(child_name)}
+          />
+        </svg>
+      );
+    };
 
     const graph = (
       <Fragment>
         <div style={{ height: height }}>
-          <ResponsiveCirclePacking
-            data={graph_data}
-            id="name"
-            value="value"
-            colors={(d) => color_scale(d.data.name)}
-            borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-            borderWidth={0}
-            enableLabels={false}
-            labelTextColor={textColor}
-            labelsSkipRadius={labelsSkipRadius}
-            leavesOnly={false}
-            padding={0}
-            circleComponent={ProportionalNode}
-            margin={margin}
-            tooltip={tooltip}
-          />
+          <Circles />
         </div>
         <div style={{ textAlign: "center" }}>
           <TM
             k={"bubble_title"}
             args={{ outer: parent_name, inner: child_name }}
           />
+        </div>
+        <div>
+          <tr>
+            <td className="nivo-tooltip__label">{parent_name}</td>
+            <td className="nivo-tooltip__value">
+              {value_formatter(parent.value)}
+            </td>
+            <td className="nivo-tooltip__value">
+              {`(${formats.smart_percentage1_raw(
+                parent_value / parent_value
+              )})`}
+            </td>
+            <td>
+              <svg>
+                <circle
+                  cx="20"
+                  cy="75"
+                  r="10"
+                  fill={color_scale(parent_name)}
+                />
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <td className="nivo-tooltip__label">{child_name}</td>
+            <td className="nivo-tooltip__value">
+              {value_formatter(parent.value)}
+            </td>
+            <td className="nivo-tooltip__value">
+              {`(${formats.smart_percentage1_raw(child_value / parent_value)})`}
+            </td>
+            <td>
+              <svg>
+                <circle cx="20" cy="75" r="10" fill={color_scale(child_name)} />
+              </svg>
+            </td>
+          </tr>
         </div>
       </Fragment>
     );
