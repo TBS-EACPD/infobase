@@ -97,10 +97,12 @@ export default async function ({ models }) {
     }))
     .map(({ dept_code, ...values_by_year }) => ({
       dept_code,
-      by_year: _.map(values_by_year, (value, year) => ({
-        year,
-        value,
-      })),
+      data: {
+        by_year: _.map(values_by_year, (value, year) => ({
+          year,
+          value,
+        })),
+      },
     }))
     .value();
 
@@ -152,7 +154,7 @@ export default async function ({ models }) {
     EmployeeFolTotals.insertMany(employee_fol_totals),
     EmployeeGenderTotals.insertMany(employee_gender_totals),
     EmployeeRegionTotals.insertMany(employee_region_totals),
-    EmployeeTypeTotals.insertmany(employee_type_totals),
+    EmployeeTypeTotals.insertMany(employee_type_totals),
     EmployeeGovAvgs.insertMany(employee_gov_avg),
   ]);
 }
