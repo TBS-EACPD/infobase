@@ -10,10 +10,10 @@ import {
   TagCloud,
 } from "src/components/index";
 
-import { tertiaryColor } from "src/core/color_defs";
 import { Table } from "src/core/TableClass";
 
 import { SelectAllControl } from "src/charts/legends/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import text from "./PanelFilterControl.yaml";
 
@@ -117,7 +117,7 @@ export default class PanelFilterControl extends React.Component {
                 <TagCloud tags={tags} onSelectTag={this.onSelect} />
                 <div
                   style={{
-                    borderTop: `1px dashed ${tertiaryColor}`,
+                    borderTop: `1px dashed ${style_variables.tertiaryColor}`,
                     padding: "10px 0px 10px 5px",
                   }}
                 >

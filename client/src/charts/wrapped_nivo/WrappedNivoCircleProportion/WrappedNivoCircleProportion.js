@@ -10,10 +10,6 @@ import MediaQuery from "react-responsive";
 
 import { DisplayTable } from "src/components/index";
 
-import { breakpoints } from "src/core/breakpoint_defs";
-
-import { textColor } from "src/core/color_defs";
-
 import { newIBCategoryColors } from "src/core/color_schemes";
 
 import { formats } from "src/core/format";
@@ -25,9 +21,12 @@ import {
   get_formatter,
   TooltipFactory,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import text from "./WrappedNivoCircleProportion.yaml";
 import "./WrappedNivoCircleProportion.scss";
+
+const { textColor, minMediumDevice, maxMediumDevice } = style_variables;
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
@@ -159,7 +158,7 @@ export class WrappedNivoCircleProportion extends React.Component {
         tooltip_container_class="proportional-bubble-tooltip"
         TooltipContentComponent={({ tooltip_item }) => (
           <Fragment>
-            <MediaQuery minDeviceWidth={breakpoints.minMediumDevice}>
+            <MediaQuery minDeviceWidth={minMediumDevice}>
               <td className="nivo-tooltip__label">{tooltip_item.name}</td>
               <td className="nivo-tooltip__value">
                 {value_formatter(tooltip_item.value)}
@@ -170,7 +169,7 @@ export class WrappedNivoCircleProportion extends React.Component {
                 )})`}
               </td>
             </MediaQuery>
-            <MediaQuery maxDeviceWidth={breakpoints.maxMediumDevice}>
+            <MediaQuery maxDeviceWidth={maxMediumDevice}>
               <td>
                 <div className="nivo-tooltip__label ">{tooltip_item.name}</div>
                 <div className="nivo-tooltip__value">

@@ -149,6 +149,7 @@
     "core-js": "^3",
     "css-loader": "^5.0.0",
     "css-minimizer-webpack-plugin": "^1.1.5",
+    "css-modules-typescript-loader": "^4.0.1",
     "eslint": "^7.12.1",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",

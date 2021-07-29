@@ -2,9 +2,11 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { textColor, tertiaryColor } from "src/core/color_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import "./icons.scss";
+
+const { textColor, tertiaryColor } = style_variables;
 
 const svg_default_styles = {
   width: "1.5em",

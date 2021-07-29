@@ -5,8 +5,9 @@ import { GlossaryEntry } from "src/models/glossary";
 import { Subject } from "src/models/subject";
 import { trivial_text_maker } from "src/models/text";
 
-import { textColor } from "src/core/color_defs";
 import { Table } from "src/core/TableClass";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import {
   query_to_reg_exps,
@@ -182,7 +183,7 @@ const glossary = {
           fontSize: "12px",
           lineHeight: 1,
           padding: "0px 20px 20px 20px",
-          color: textColor,
+          color: style_variables.textColor,
         }}
         dangerouslySetInnerHTML={{
           __html: highlight_search_match(search, glossaryItem.definition),

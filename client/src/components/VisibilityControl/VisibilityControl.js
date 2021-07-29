@@ -2,13 +2,15 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { secondaryColor, tertiaryColor } from "src/core/color_defs";
-
 import { lang } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconEyeOpen, IconEyeClosed } from "src/icons/icons";
 
 import "./VisibilityControl.scss";
+
+const { secondaryColor, tertiaryColor } = style_variables;
 
 export class VisibilityControl extends React.Component {
   render() {

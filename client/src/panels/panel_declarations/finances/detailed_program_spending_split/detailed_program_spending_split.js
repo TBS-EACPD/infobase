@@ -24,7 +24,6 @@ import { Subject } from "src/models/subject";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { highlightColor, textColor } from "src/core/color_defs";
 import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
@@ -37,11 +36,14 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 
 import { WrappedNivoBar, WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { toggle_list } from "src/general_utils";
 import { infograph_href_template } from "src/infographic/infographic_link";
 
 import text from "./detailed_program_spending_split.yaml";
+
+const { highlightColor, textColor } = style_variables;
 
 const { std_years } = year_templates;
 

@@ -12,7 +12,7 @@ import {
 
 import { trivial_text_maker } from "src/models/text";
 
-import { breakpoints } from "src/core/breakpoint_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>
@@ -60,7 +60,7 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
 const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
   "user_enabled_pinning_key_concepts";
 const SomeThingsToKeepInMind = ({ children, is_initially_expanded }) => (
-  <MediaQuery maxWidth={breakpoints.maxLargeDevice}>
+  <MediaQuery maxWidth={style_variables.maxLargeDevice}>
     {(matches) => (
       <PinnedContent
         local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}

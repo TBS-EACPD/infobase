@@ -4,9 +4,10 @@ import React, { Fragment } from "react";
 
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
-import { textRed } from "src/core/color_defs";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import {
   get_email_template,
@@ -215,7 +216,7 @@ class EmailFrontend extends React.Component {
               <legend>
                 {field_info.form_label[lang]}
                 {field_info.required && (
-                  <span style={{ color: textRed }}>*</span>
+                  <span style={{ color: style_variables.textRed }}>*</span>
                 )}
               </legend>
               <div
@@ -271,7 +272,7 @@ class EmailFrontend extends React.Component {
               <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[lang]}
                 {connected_required && (
-                  <span style={{ color: textRed }}>*</span>
+                  <span style={{ color: style_variables.textRed }}>*</span>
                 )}
               </label>
               <textarea

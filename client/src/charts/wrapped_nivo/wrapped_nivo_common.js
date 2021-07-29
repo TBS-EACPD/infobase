@@ -8,21 +8,24 @@ import {
   StatelessModal,
 } from "src/components/index";
 
-import { breakpoints } from "src/core/breakpoint_defs";
-import {
-  secondaryColor,
-  backgroundColor,
-  textColor,
-} from "src/core/color_defs";
 import { is_IE } from "src/core/feature_detection";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { get_formatter, infobase_colors_smart } from "src/charts/shared";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 import { IconTable } from "src/icons/icons";
 
 import graph_text from "./wrapped_nivo_common.yaml";
 import "./wrapped_nivo_common.scss";
+
+const {
+  secondaryColor,
+  backgroundColor,
+  textColor,
+  minMediumDevice,
+  maxMediumDevice,
+} = style_variables;
 
 const { text_maker: nivo_common_text_maker } =
   create_text_maker_component(graph_text);
@@ -96,7 +99,7 @@ const DefaultTooltip = ({ tooltip_items, formatter }) => (
     tooltip_items={tooltip_items}
     TooltipContentComponent={({ tooltip_item }) => (
       <Fragment>
-        <MediaQuery minDeviceWidth={breakpoints.minMediumDevice}>
+        <MediaQuery minDeviceWidth={minMediumDevice}>
           <td className="nivo-tooltip__label">
             {tooltip_item.name || tooltip_item.id}
           </td>
@@ -107,7 +110,7 @@ const DefaultTooltip = ({ tooltip_items, formatter }) => (
             }}
           />
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={breakpoints.maxMediumDevice}>
+        <MediaQuery maxDeviceWidth={maxMediumDevice}>
           <td>
             <div className="nivo-tooltip__label">
               {tooltip_item.name || tooltip_item.id}
@@ -130,7 +133,7 @@ const DefaultPercentTooltip = ({ tooltip_items, formatter, total }) => (
     tooltip_items={tooltip_items}
     TooltipContentComponent={({ tooltip_item }) => (
       <Fragment>
-        <MediaQuery minDeviceWidth={breakpoints.minMediumDevice}>
+        <MediaQuery minDeviceWidth={minMediumDevice}>
           <td className="nivo-tooltip__label">
             {
               /* TODO: standardize our chart APIs on either label or name. 
@@ -151,7 +154,7 @@ const DefaultPercentTooltip = ({ tooltip_items, formatter, total }) => (
             }}
           />
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={breakpoints.maxMediumDevice}>
+        <MediaQuery maxDeviceWidth={maxMediumDevice}>
           <td>
             <div className="nivo-tooltip__label">
               {tooltip_item.name || tooltip_item.label || tooltip_item.id}

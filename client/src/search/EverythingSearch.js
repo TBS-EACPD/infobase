@@ -7,8 +7,9 @@ import { CheckBox, DropdownMenu } from "src/components/index";
 
 import { create_text_maker } from "src/models/text";
 
-import { breakpoints } from "src/core/breakpoint_defs";
 import { is_a11y_mode } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconGear } from "src/icons/icons";
 
@@ -87,7 +88,7 @@ const SearchOptions = ({ option_checkboxes }) => (
         >
           <IconGear height="21px" width="21px" alternate_color="false" />
         </div>
-        <MediaQuery minWidth={breakpoints.minMediumDevice}>
+        <MediaQuery minWidth={style_variables.minMediumDevice}>
           <span>{text_maker("options")}</span>
         </MediaQuery>
       </div>

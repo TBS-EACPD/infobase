@@ -18,16 +18,18 @@ import FootNote from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
-import { tertiaryColor, textColor, highlightColor } from "src/core/color_defs";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
+
+const { tertiaryColor, textColor, highlightColor } = style_variables;
 
 const { std_years, planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);

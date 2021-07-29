@@ -17,11 +17,11 @@ import {
 
 import { Subject } from "src/models/subject";
 
-import { backgroundColor } from "src/core/color_defs";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { infograph_href_template } from "src/link_utils";
 import "src/panels/panel_declarations/services/services.scss";
@@ -86,7 +86,7 @@ export class ServiceOverview extends React.Component {
                     flexDirection: "column",
                     alignItems: "center",
                     paddingBottom: "10px",
-                    backgroundColor: backgroundColor,
+                    backgroundColor: style_variables.backgroundColor,
                   }}
                   className="service-overview-rect"
                 >

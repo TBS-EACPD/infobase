@@ -23,23 +23,24 @@ import { result_docs } from "src/models/results";
 
 import { Subject } from "src/models/subject";
 
-import {
-  primaryColor,
-  warnDarkColor,
-  successDarkColor,
-  failDarkColor,
-  infoDarkColor,
-} from "src/core/color_defs";
-
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
 
 import { LegendList } from "src/charts/legends/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";
+
+const {
+  primaryColor,
+  warnDarkColor,
+  successDarkColor,
+  failDarkColor,
+  infoDarkColor,
+} = style_variables;
 
 const { indicator_target_text } = indicator_text_functions;
 const { Dept, CRSO, Program } = Subject;

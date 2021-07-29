@@ -5,8 +5,6 @@ import React from "react";
 
 import { DisplayTable } from "src/components/index";
 
-import { textColor } from "src/core/color_defs";
-
 import {
   nivo_common_text_maker,
   InteractiveGraph,
@@ -14,6 +12,7 @@ import {
   get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 const bar_table = (
   data,
@@ -130,7 +129,7 @@ export class WrappedNivoBar extends React.Component {
           legends={fix_legend_symbols(legends)}
           keys={_.union(keys, [""])} //extra key allows negative bar to render (only needed when 1 type of key
           //and the key takes both negative or positive values)
-          labelTextColor={textColor}
+          labelTextColor={style_variables.textColor}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
           }
@@ -242,7 +241,7 @@ export class WrappedNivoHBar extends React.Component {
           legends={fix_legend_symbols(legends)}
           layout="horizontal"
           keys={keys}
-          labelTextColor={textColor}
+          labelTextColor={style_variables.textColor}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
           }

@@ -6,9 +6,9 @@ import { create_text_maker_component } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 
-import { highlightColor } from "src/core/color_defs";
-
 import { lang } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconAttentionTriangle } from "src/icons/icons";
 
@@ -39,7 +39,7 @@ const { Gov } = Subject;
 export const HierarchyDeadElementIcon = () => (
   <IconAttentionTriangle
     title={text_maker("hierarchy_dead_element_icon_alt_text")}
-    color={highlightColor}
+    color={style_variables.highlightColor}
     inline={true}
     alternate_color={false}
   />

@@ -6,11 +6,13 @@ import { TM } from "src/components/index";
 
 import { trivial_text_maker } from "src/models/text";
 
-import { primaryColor, backgroundColor } from "src/core/color_defs";
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import style_variables from "src/common_style_variables/_common-variables.scss";
+
 import "./BubbleMenu.scss";
+
+const { primaryColor, backgroundColor } = style_variables;
 
 const BubbleMenu = ({ items, active_item_id }) => {
   if (is_a11y_mode) {

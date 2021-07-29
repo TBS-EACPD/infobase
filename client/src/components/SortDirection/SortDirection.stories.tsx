@@ -1,11 +1,13 @@
 import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import { primaryColor, secondaryColor } from "src/core/color_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { ComponentProps } from "src/types/util_types.d";
 
 import { SortDirection } from "./SortDirection";
+
+const { primaryColor, secondaryColor } = style_variables;
 
 export default {
   title: "SortDirection",

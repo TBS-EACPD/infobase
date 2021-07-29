@@ -1,8 +1,6 @@
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 
-import * as color_defs from "./color_defs";
-
 const newIBCategoryColors = [
   "#206BBD", // blue
   "#4abbc4", // teal
@@ -10,7 +8,7 @@ const newIBCategoryColors = [
   "#919bd4", // purple
   "#a2d173", // light green
   "#15918b", // dark teal
-  color_defs.tertiaryColor, // grey
+  "#8c949e", // grey
 ];
 
 // for contrast against dark text
@@ -56,8 +54,7 @@ const sequentialPurples = [
   "#673C8F",
 ];
 
-// this is here instead of in color_defs because it's a data-dependent color
-const NA_color = _.last(newIBCategoryColors); // color_defs.tertiaryColor
+const NA_color = _.last(newIBCategoryColors);
 
 const infobase_colors = () => scaleOrdinal().range(newIBCategoryColors);
 

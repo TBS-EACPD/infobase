@@ -6,12 +6,12 @@ import MediaQuery from "react-responsive";
 import { run_template, trivial_text_maker } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
-import { tertiaryColor } from "src/core/color_defs";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
@@ -146,7 +146,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
             axis: "x",
             value: gap_year,
             lineStyle: {
-              stroke: tertiaryColor,
+              stroke: style_variables.tertiaryColor,
               strokeWidth: 2,
               strokeDasharray: "3, 3",
             },

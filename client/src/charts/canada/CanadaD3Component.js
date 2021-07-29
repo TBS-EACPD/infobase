@@ -18,8 +18,9 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 
-import { separatorColor } from "src/core/color_defs";
 import { lang } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { canada_svg } from "./canada_svg.yaml";
 
@@ -280,7 +281,7 @@ export class CanadaD3Component {
           "border-radius": "5px",
           "text-align": "center",
           "font-size": `${scale * 22}px`,
-          "background-color": separatorColor,
+          "background-color": style_variables.separatorColor,
         });
 
         const prov_name = get_province_display_name(prov_key, scale);

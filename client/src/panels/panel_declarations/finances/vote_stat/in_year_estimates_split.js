@@ -7,13 +7,15 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import { businessConstants } from "src/models/businessConstants";
 
-import { highlightColor, secondaryColor, textColor } from "src/core/color_defs";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
+
+const { highlightColor, secondaryColor, textColor } = style_variables;
 
 const { estimates_docs } = businessConstants;
 const est_in_year_col = "{{est_in_year}}_estimates";
