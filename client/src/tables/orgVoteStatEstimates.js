@@ -217,5 +217,5 @@ export default {
     return grps[true].concat(grps[false]);
   },
 
-  dimensions: ["dept", "desc", "vote_vs_stat"],
+  dimensions: ["dept", "desc", "est_doc", "vote_vs_stat"],
 };
