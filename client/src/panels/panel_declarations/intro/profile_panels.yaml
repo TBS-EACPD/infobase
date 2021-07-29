@@ -1,25 +1,3 @@
-hi_name:
-  en: Horizontal Initiative
-  fr: Initiative horizontale
-hi_lead_dept:
-  en: Lead department
-  fr: Ministère responsable
-hi_start_year:
-  en: Started year
-  fr: Annéé de début
-hi_end_year:
-  en: Ending year
-  fr: Année de fin
-hi_total_allocated_amount:
-  en: Total allocated amount
-  fr: Montant total alloué
-hi_website:
-  en: Website
-  fr: Site web
-hi_dr_link:
-  en: Most recent report
-  fr: Dernier rapport
-
 program_desc_title:
   en: Program Description
   fr: Description du Programme 
