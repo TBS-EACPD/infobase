@@ -252,19 +252,6 @@ const who_we_help = {
     memoized_re_matchers(query, ["name"], "who_we_help")(datum),
 };
 
-const horizontal_initiative = {
-  config_name: "horizontal_initiative",
-  header_function: () => `${Tag.plural} - ${Tag.tag_roots.HI.name}`,
-  name_function: _.property("name"),
-  get_data: () =>
-    _.chain(Tag.get_all())
-      .filter((tag) => tag.root.id === "HI")
-      .filter("is_lowest_level_tag")
-      .value(),
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name"], "horizontal_initiative")(datum),
-};
-
 const datasets = {
   config_name: "datasets",
   header_function: () => trivial_text_maker("build_a_report"),
@@ -360,7 +347,6 @@ export {
   crsos,
   programs,
   gocos,
-  horizontal_initiative,
   how_we_help,
   who_we_help,
   datasets,
