@@ -2,11 +2,7 @@
 // of the table spec
 import _ from "lodash";
 
-import {
-  trivial_text_maker,
-  year_templates,
-  businessConstants,
-} from "./table_common";
+import { year_templates, businessConstants } from "./table_common";
 
 import text from "./orgTransferPayments.yaml";
 
@@ -99,44 +95,7 @@ export default {
     });
   },
 
-  dimensions: [
-    {
-      title_key: "payment_types_v_s",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          var type = row.type;
-          if (
-            row.tp.substring(0, 3) === "(S)" ||
-            row.tp.substring(0, 3) === "(L)"
-          ) {
-            return type + " - " + trivial_text_maker("stat");
-          } else {
-            return type + " - " + trivial_text_maker("voted");
-          }
-        };
-      },
-    },
-    {
-      title_key: "payment_types",
-      include_in_report_builder: true,
-
-      filter_func: function (options) {
-        return function (row) {
-          return row.type;
-        };
-      },
-    },
-    {
-      title_key: "payment_type_ids",
-      filter_func: function (options) {
-        return function (row) {
-          return row.type_id;
-        };
-      },
-    },
-  ],
+  dimensions: ["dept", "type", "tp", "vote_vs_stat"],
 
   queries: {
     types: function () {

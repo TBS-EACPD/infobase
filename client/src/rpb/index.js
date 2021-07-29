@@ -15,7 +15,7 @@ import { get_subject_by_guid } from "src/models/subjects";
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";
-import { is_a11y_mode, lang } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import {
   StandardRouteContainer,
@@ -163,7 +163,7 @@ class RPB extends React.Component {
     console.log("\n*** RPB - RENDER ***");
     console.log(this.props);
     console.log(this.state);
-    const { broken_url } = this.props;
+    const { broken_url, table: table_name } = this.props.state;
     const { dimension } = this.state;
 
     const table = this.state.table && Table.store.lookup(this.state.table);
@@ -218,6 +218,12 @@ class RPB extends React.Component {
 
     function dimension_column_values(dim_data) {
       if (dimension === "vote_vs_stat") {
+        if (table_name === "orgTransferPayments") {
+          return [
+            "type",
+            !_.includes(dim_data[0].tp, "(S) ") ? "Statutory" : "Voted",
+          ];
+        }
         // TODO: maybe create new column instead of using desc column
         return [
           "desc",
@@ -236,7 +242,9 @@ class RPB extends React.Component {
         : _.chain(table_data)
             .groupBy(
               dimension === "vote_vs_stat"
-                ? (row) => row.votestattype !== 999
+                ? table_name === "orgTransferPayments"
+                  ? (row) => !_.includes(row.tp, "(S) ")
+                  : (row) => row.votestattype !== 999
                 : dimension
             ) // statutory items have votestattype 999, voted items have other number
             .map((dim_data) => {
