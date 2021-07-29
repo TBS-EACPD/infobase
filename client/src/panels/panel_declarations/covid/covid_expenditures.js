@@ -19,9 +19,8 @@ import {
 } from "src/models/covid/queries";
 import { Subject } from "src/models/subject";
 
-import { breakpoints } from "src/core/breakpoint_defs";
-
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
@@ -106,7 +105,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
       </div>
       <div className="col-12">
         <TM k={`covid_top_spending_measures`} el={"h3"} />
-        <MediaQuery minWidth={breakpoints.minLargeDevice}>
+        <MediaQuery minWidth={style_variables.minLargeDevice}>
           {(matches) => (
             <SummaryTabPie
               data={top_spending_measures}

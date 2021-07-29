@@ -8,9 +8,9 @@ import {
   FootnoteList,
 } from "src/components/index";
 
-import { secondaryColor } from "src/core/color_defs";
-
 import { lang } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconCopyLink } from "src/icons/icons";
 
@@ -140,12 +140,12 @@ const ShareReport = () => (
     <ShareButton
       button_class_name={"rpb-heading-utils"}
       url={window.location.href}
-      icon_color={secondaryColor}
+      icon_color={style_variables.secondaryColor}
     />
     <WriteToClipboard
       button_class_name={"rpb-heading-utils"}
       text_to_copy={window.location.href}
-      icon_color={secondaryColor}
+      icon_color={style_variables.secondaryColor}
       IconComponent={IconCopyLink}
     />
   </div>

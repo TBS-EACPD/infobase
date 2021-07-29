@@ -5,8 +5,9 @@ import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
 import { create_text_maker_component } from "src/components/misc_util_components";
 import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboard";
 
-import { backgroundColor } from "src/core/color_defs";
 import { is_IE } from "src/core/feature_detection";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconCopy, IconDownload } from "src/icons/icons";
 
@@ -21,7 +22,7 @@ export const DisplayTableCopyCsv = ({ csv_string }) => (
     button_class_name={"display_table__util-icon"}
     button_description={text_maker("copy_table_data_desc")}
     IconComponent={IconCopy}
-    icon_color={backgroundColor}
+    icon_color={style_variables.backgroundColor}
   />
 );
 
@@ -57,7 +58,7 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
       >
         <IconDownload
           title={text_maker("download_table_data_desc")}
-          color={backgroundColor}
+          color={style_variables.backgroundColor}
         />
       </button>
     )}

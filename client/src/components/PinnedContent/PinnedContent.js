@@ -6,9 +6,10 @@ import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
 import { create_text_maker } from "src/models/text";
 
-import { backgroundColor } from "src/core/color_defs";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconPin, IconUnpin } from "src/icons/icons";
 
@@ -154,7 +155,7 @@ class _PinnedContent extends React.Component {
                               height="25px"
                               width="25px"
                               svg_style={{ verticalAlign: "Top" }}
-                              color={backgroundColor}
+                              color={style_variables.backgroundColor}
                               alternate_color="false"
                             />
                           ) : (
@@ -162,7 +163,7 @@ class _PinnedContent extends React.Component {
                               height="25px"
                               width="25px"
                               svg_style={{ verticalAlign: "Top" }}
-                              color={backgroundColor}
+                              color={style_variables.backgroundColor}
                               alternate_color="false"
                             />
                           )}

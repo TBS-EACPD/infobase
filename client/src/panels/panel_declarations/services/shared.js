@@ -2,13 +2,11 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
-import {
-  successDarkColor,
-  highlightDark,
-  warnDarkColor,
-} from "src/core/color_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons";
+
+const { successDarkColor, highlightDark, warnDarkColor } = style_variables;
 
 const digital_status_keys = [
   "account_reg_digital",

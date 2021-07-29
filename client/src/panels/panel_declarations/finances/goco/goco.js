@@ -14,7 +14,6 @@ import {
 
 import { Subject } from "src/models/subject";
 
-import { textColor, backgroundColor } from "src/core/color_defs";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass";
@@ -22,8 +21,11 @@ import { Table } from "src/core/TableClass";
 import { StandardLegend } from "src/charts/legends/index";
 import { get_formatter } from "src/charts/shared";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import text from "./goco.yaml";
+
+const { textColor, backgroundColor } = style_variables;
 
 const { Tag } = Subject;
 

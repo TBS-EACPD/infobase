@@ -6,12 +6,6 @@ import React from "react";
 import { DisplayTable } from "src/components/index";
 
 import {
-  textColor,
-  secondaryColor,
-  backgroundColor,
-} from "src/core/color_defs";
-
-import {
   create_text_maker_component_with_nivo_common,
   InteractiveGraph,
   general_default_props,
@@ -19,9 +13,13 @@ import {
   get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+import style_variables from "src/common_style_variables/_common-variables.scss";
+
 import { IconZoomIn, IconZoomOut } from "src/icons/icons";
 
 import text from "./WrappedNivoLine.yaml";
+
+const { textColor, secondaryColor, backgroundColor } = style_variables;
 
 const { text_maker } = create_text_maker_component_with_nivo_common(text);
 

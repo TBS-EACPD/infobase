@@ -2,7 +2,7 @@ import React from "react";
 
 import { Format } from "src/components/index";
 
-import { successDarkColor } from "src/core/color_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import "./gauge.scss";
 
@@ -39,5 +39,5 @@ export default class Gauge extends React.Component {
 }
 Gauge.defaultProps = {
   show_pct: true,
-  color: successDarkColor,
+  color: style_variables.successDarkColor,
 };

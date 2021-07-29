@@ -3,7 +3,8 @@ import "dom4";
 import "whatwg-fetch";
 import "string.prototype.replaceall/auto";
 
-import "src/common_css/common_css_index.side-effects";
+import "./site.scss";
+import "./utils.scss";
 
 import "src/handlebars/register_helpers.side-effects";
 

@@ -4,7 +4,7 @@ import { StatelessModal } from "src/components/modals_and_popovers/index";
 
 import { create_text_maker } from "src/models/text";
 
-import { textLightColor, tertiaryColor } from "src/core/color_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import {
   IconShare,
@@ -16,6 +16,8 @@ import {
 
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";
+
+const { textLightColor, tertiaryColor } = style_variables;
 
 const text_maker = create_text_maker(text);
 

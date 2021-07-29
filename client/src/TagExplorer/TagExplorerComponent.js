@@ -13,9 +13,9 @@ import {
 import { GlossaryEntry } from "src/models/glossary";
 import { run_template } from "src/models/text";
 
-import { tertiaryColor, primaryColor } from "src/core/color_defs";
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
@@ -30,6 +30,8 @@ import {
   actual_year,
   year_to_route_arg_map,
 } from "./utils";
+
+const { tertiaryColor, primaryColor } = style_variables;
 
 const children_grouper = (node, children) => {
   if (node.root) {

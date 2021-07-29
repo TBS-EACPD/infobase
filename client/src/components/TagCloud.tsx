@@ -4,7 +4,7 @@ import React from "react";
 
 import { GlossaryEntry } from "src/models/glossary";
 
-import { backgroundColor } from "src/core/color_defs";
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconCheckmark } from "src/icons/icons";
 
@@ -34,7 +34,7 @@ export const TagCloud = ({ tags, onSelectTag }: TagCloudProps) => (
         <button role="checkbox" aria-checked={!!active}>
           {active && (
             <IconCheckmark
-              color={backgroundColor}
+              color={style_variables.backgroundColor}
               width={10}
               height={10}
               svg_style={{ verticalAlign: "0.1px" }}

@@ -2,11 +2,13 @@ import { TreeMapHtml } from "@nivo/treemap";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { breakpoints } from "src/core/breakpoint_defs";
+import { DefaultTooltip } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import "./WrappedNivoTreemap.scss";
 
-import { DefaultTooltip } from "src/charts/wrapped_nivo/wrapped_nivo_common";
+const { minSmallDevice, maxSmallDevice } = style_variables;
 
 class _WrappedNivoTreemap extends React.Component {
   render() {
@@ -67,10 +69,10 @@ export class WrappedNivoTreemap extends React.Component {
   render() {
     return (
       <Fragment>
-        <MediaQuery maxWidth={breakpoints.maxSmallDevice}>
+        <MediaQuery maxWidth={maxSmallDevice}>
           <_WrappedNivoTreemap {...this.props} height={200} width={200} />
         </MediaQuery>
-        <MediaQuery minWidth={breakpoints.minSmallDevice}>
+        <MediaQuery minWidth={minSmallDevice}>
           <_WrappedNivoTreemap {...this.props} height={400} width={400} />
         </MediaQuery>
       </Fragment>

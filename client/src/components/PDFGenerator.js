@@ -1,10 +1,11 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { textLightColor } from "src/core/color_defs";
 import { is_IE } from "src/core/feature_detection";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
+
+import style_variables from "src/common_style_variables/_common-variables.scss";
 
 import { IconDownload } from "src/icons/icons";
 import { get_static_url } from "src/request_utils";
@@ -298,6 +299,6 @@ export class PDFGenerator extends React.Component {
   }
 }
 PDFGenerator.defaultProps = {
-  icon_color: textLightColor,
+  icon_color: style_variables.textLightColor,
   icon_alternate_color: false,
 };

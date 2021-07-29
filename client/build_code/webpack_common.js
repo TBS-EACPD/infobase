@@ -13,6 +13,9 @@ const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
 const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
 const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
 
+// going with the convention that any variable-exporting scss module should be suffixed with "variables"
+const scss_variable_module_pattern = /variables\.scss$/;
+
 const get_rules = ({ language, target_ie11, is_prod_build }) => {
   const js_module_loader_rules = [
     {
@@ -71,21 +74,29 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       // up to dependencies to declare sideEffects true/false in their package.json
     },
     {
-      test: /\.scss$/,
+      test: (module_name) =>
+        /\.scss$/.test(module_name) &&
+        !scss_variable_module_pattern.test(module_name),
       use: [
-        { loader: "style-loader" }, // creates style nodes from JS strings
-        { loader: "css-loader" }, // translates CSS into CommonJS
-        {
-          // compiles Sass to CSS
-          loader: "sass-loader",
-          options: {
-            sassOptions: {
-              fiber: false,
-            },
-          },
-        },
+        { loader: "style-loader" }, // third, uses JS string imports, inserts styles in to DOM as load side effect
+        { loader: "css-loader" }, // second, translates CSS into CommonJS modules
+        { loader: "sass-loader" }, // first, compiles Sass to CSS
       ],
       sideEffects: true,
+    },
+    {
+      // unlike other scss modules, don't inject in to DOM (no style-loader), generate types (css-modules-typescript-loader)
+      test: scss_variable_module_pattern,
+      use: [
+        { loader: "css-modules-typescript-loader" },
+        {
+          loader: "css-loader",
+          options: {
+            modules: true,
+          },
+        },
+        { loader: "sass-loader" },
+      ],
     },
     {
       test: /\.csv$/,
