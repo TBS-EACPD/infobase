@@ -58,7 +58,6 @@ class GranularView extends React.Component {
   get_table_content() {
     const {
       columns: data_columns,
-      columns,
       flat_data,
       sorted_key_columns,
 
@@ -73,10 +72,30 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    const column_configs =
-      !_.isEmpty(flat_data) &&
-      _.chain(sorted_key_columns)
-        .concat(columns)
+    const dim_all_or_dept = dimension === "all" || dimension === "dept";
+
+    const dept_and_legal_cols = dim_all_or_dept
+      ? {
+          dept: {
+            index: 0,
+            header: text_maker("org"),
+            is_searchable: true,
+            formatter: "wide-str",
+            visibility_toggleable: true,
+          },
+          legal_title: {
+            index: 1,
+            header: text_maker("org_legal_title"),
+            is_searchable: true,
+            formatter: "wide-str",
+            initial_visible: false,
+          },
+        }
+      : {};
+
+    const column_configs = {
+      ...dept_and_legal_cols,
+      ..._.chain(cols)
         .filter((col) => _.has(flat_data[0], col.nick))
         .map(
           (
@@ -97,28 +116,27 @@ class GranularView extends React.Component {
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               is_summable:
                 is_summable && !is_matched_undefined(data_columns, nick),
-              // formatter: nick === "dept" ? "wide_str" : type,
-              formatter: type,
+              formatter: nick === "dept" ? "wide-str" : type,
             },
           ]
         )
         .fromPairs()
-        .value();
+        .value(),
+    };
 
-    const table_data =
-      dimension === "all"
-        ? _.map(flat_data, (row) => {
-            const org = Dept.store.lookup(row.dept);
-            return {
-              dept: org.name,
-              legal_title: org.legal_title ? org.legal_title : org.name,
-              ..._.chain(cols)
-                .map(({ nick }) => [nick, row[nick]])
-                .fromPairs()
-                .value(),
-            };
-          })
-        : flat_data;
+    const table_data = dim_all_or_dept
+      ? _.map(flat_data, (row) => {
+          const org = Dept.store.lookup(row.dept);
+          return {
+            dept: org.name,
+            legal_title: org.legal_title ? org.legal_title : org.name,
+            ..._.chain(cols)
+              .map(({ nick }) => [nick, row[nick]])
+              .fromPairs()
+              .value(),
+          };
+        })
+      : flat_data;
 
     const dropdown_content = (
       <div className="group_filter_dropdown">
