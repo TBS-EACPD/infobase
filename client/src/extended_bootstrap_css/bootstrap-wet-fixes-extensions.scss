@@ -25,6 +25,91 @@ hr {
   border-color: $separatorColor;
 }
 
+/* tippys */
+.tippy-arrow {
+  width: 12px;
+  height: 6px;
+  color: $primaryColor;
+}
+
+.tippy-arrow::before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tippy-box {
+  opacity: 1;
+  font-size: 14px !important;
+
+  &[data-placement="bottom"] {
+    & > .tippy-arrow {
+      top: -6px;
+      border-width: 0px 6px 6px 6px;
+      border-bottom-color: rgba($primaryColor, 1);
+    }
+
+    & > .tippy-arrow::before {
+      left: 0;
+      border-width: 0 8px 8px;
+      border-bottom-color: initial;
+      transform-origin: center bottom;
+    }
+  }
+
+  &[data-placement="top"] {
+    top: -5px !important;
+
+    & > .tippy-arrow {
+      bottom: -6px;
+      border-width: 6px 6px 0px 6px;
+      border-top-color: rgba($primaryColor, 1);
+    }
+
+    & > .tippy-arrow::before {
+      left: 0;
+      border-width: 8px 8px 0;
+      border-top-color: initial;
+      transform-origin: center top;
+    }
+  }
+}
+
+.tippy-content {
+  color: $textLightColor;
+  background-color: rgba($primaryColor, 1);
+  text-align: left !important;
+  border: none;
+  padding: 1px 20px;
+  border-radius: $standardBorderRadius;
+  padding-top: 10px;
+  line-height: 1.4375 !important;
+
+  @media (min-width: $minExtraLargeDevice) {
+    max-width: 600px !important;
+    line-height: 1.6em;
+  }
+  @media (min-width: $minLargeDevice) and (max-width: $maxExtraLargeDevice) {
+    max-width: 60vw !important;
+  }
+  @media (max-width: $maxLargeDevice) {
+    max-width: 90vw !important;
+  }
+
+  & a,
+  a:visited {
+    color: $buttonSecondaryColor;
+    text-decoration: none;
+  }
+  & a:hover,
+  a:focus {
+    color: $buttonPrimaryColor;
+    text-decoration: underline;
+  }
+}
+
 .pop.in,
 .fade.in {
   opacity: 1;
