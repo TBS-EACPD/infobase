@@ -5,6 +5,7 @@ client/app/
 client/build/
 client/build_prod/
 client/storybook-static
+client/src/**/*.scss.d.ts
 */transpiled_build/
 */coverage/
 
