@@ -38,7 +38,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
               targets: target_ie11
                 ? ["ie 11", "Safari 7"]
                 : "last 2 Chrome versions",
-              forceAllTransforms: is_prod_build, // need to forceAllTransforms when uglifying
+              forceAllTransforms: is_prod_build, // need to forceAllTransforms when minifying
             },
           ],
           "@babel/preset-react",
@@ -61,11 +61,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       test: /\.side-effects\.js$/,
       exclude: /node_modules/,
       use: js_module_loader_rules,
-      sideEffects: true,
-    },
-    {
-      //NIVO_TODO: Temporary workaround for bug from Nivo. Will need to delete this as it gets fixed in newer versions
-      test: /react-spring/,
       sideEffects: true,
     },
     {
