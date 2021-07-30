@@ -73,7 +73,6 @@ const OrgsReportingServicesPanel = () => {
           className="medium-panel-text"
           k="orgs_reporting_services_text"
           args={{
-            most_recent_year: "2019-20",
             number_of_depts: orgs_reporting_services_summary.length,
             number_of_applications: _.sumBy(
               orgs_reporting_services_summary,

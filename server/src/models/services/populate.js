@@ -4,8 +4,6 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 
 import { digital_status_keys, delivery_channels_keys } from "./constants.js";
 
-const online_inquiry_count = "online_inquiry_count";
-
 const multi_value_string_fields_to_arrays = (list_fields, seperator = "<>") =>
   _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
 const convert_to_bool_or_null = (value, true_val, false_val) => {
