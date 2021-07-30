@@ -24,19 +24,23 @@ const ServicesIntroPanel = ({ subject }) => {
     return <LeafSpinner config_name="inline_panel" />;
   }
   const {
-    service_general_stats: { number_of_reporting_orgs },
+    service_general_stats: { number_of_services, number_of_reporting_orgs },
   } = data;
   return (
     <div className="medium-panel-text">
       <TM k="services_intro_gov" args={{ number_of_reporting_orgs }} />
       <div className="pane-row">
         <div className="pane-rect">
-          <span className="pane-max-width">GC reports</span>
-          <span className="large_panel_text bold">X services</span>
+          <span className="pane-max-width">
+            GC reports{/* SI_TODO until text for all levels */}
+          </span>
+          <span className="large_panel_text">
+            <TM k="number_value_of_services" args={{ number_of_services }} />
+          </span>
         </div>
         <div className="pane-rect">
           <span className="pane-max-width">
-            % of High volume services which met Service Standards
+            <TM k="pct_of_met_high_vol_services" />
           </span>
           <span className="large_panel_text bold">X%</span>
         </div>
@@ -44,13 +48,13 @@ const ServicesIntroPanel = ({ subject }) => {
       <div className="pane-row">
         <div className="pane-rect">
           <span className="pane-max-width">
-            % of client interaction points available online
+            <TM k="pct_of_client_interaction_pts_online" />
           </span>
           <span className="large_panel_text bold">X%</span>
         </div>
         <div className="pane-rect">
           <span className="pane-max-width">
-            % of services that are online end-to-end
+            <TM k="pct_of_online_end_services" />
           </span>
           <span className="large_panel_text bold">X%</span>
         </div>
