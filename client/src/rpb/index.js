@@ -160,11 +160,8 @@ class RPB extends React.Component {
   };
 
   render() {
-    console.log("\n*** RPB - RENDER ***");
-    console.log(this.props);
-    console.log(this.state);
     const { broken_url, table: table_name } = this.props.state;
-    const { dimension } = this.state;
+    const { columns: data_columns, dimension } = this.state;
 
     const table = this.state.table && Table.store.lookup(this.state.table);
 
@@ -176,9 +173,7 @@ class RPB extends React.Component {
 
     const columns =
       !_.isEmpty(all_data_columns) &&
-      _.filter(all_data_columns, ({ nick }) =>
-        _.includes(this.state.columns, nick)
-      );
+      _.filter(all_data_columns, ({ nick }) => _.includes(data_columns, nick));
 
     const sorted_key_columns =
       this.state.table && this.get_key_columns_for_table(table);
@@ -209,9 +204,9 @@ class RPB extends React.Component {
     const cat_filter_func = dimension && _.constant(true);
 
     const zero_filter_func =
-      this.state.columns &&
-      _.chain(this.state.columns)
-        .map((nick) => this.state.columns[nick])
+      data_columns &&
+      _.chain(data_columns)
+        .map((nick) => data_columns[nick])
         .compact()
         .isEmpty()
         .value();

@@ -11,14 +11,13 @@ import {
 
 import { Dept } from "src/models/subjects";
 
+import { lang } from "src/core/injected_build_constants";
+
 import { TextMaker, text_maker } from "./rpb_text_provider";
 import { ReportDetails, ReportDatasets } from "./shared";
 
 class GranularView extends React.Component {
   render() {
-    console.log("\n*** GranularView - RENDER ***");
-    console.log(this.props);
-    console.log(this.state);
     const { subject, table } = this.props;
     return (
       <div>
@@ -111,7 +110,11 @@ class GranularView extends React.Component {
             nick,
             {
               index: idx + 2,
-              header: fully_qualified_name,
+              header:
+                (nick === "desc" || nick === "type") &&
+                dimension === "vote_vs_stat"
+                  ? text_maker("votestat_item")
+                  : fully_qualified_name,
               is_searchable:
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               is_summable:
@@ -166,8 +169,10 @@ class GranularView extends React.Component {
                         ? "votestat_item"
                         : dim
                     )
-                  : _.find(sorted_key_columns, ["nick", dim])
-                      .fully_qualified_name}
+                  : dim === "dept"
+                  ? text_maker("org")
+                  : _.find(sorted_key_columns, ["nick", dim]).header[lang] ||
+                    _.find(sorted_key_columns, ["nick", dim]).header["en"]}
               </label>
             </div>
           </div>
