@@ -79,6 +79,7 @@ service_summary{
   service_general_stats {
     id
     number_of_services
+    number_of_online_enabled_services
     number_of_reporting_orgs
     number_of_reporting_programs
   }
