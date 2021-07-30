@@ -30,6 +30,7 @@ const schema = `
   type ServiceGeneralStats{
     id: String
     number_of_services: Float
+    number_of_online_enabled_services: Float
     number_of_reporting_orgs: Float
     number_of_reporting_programs: Float
   }

@@ -265,12 +265,31 @@ export default async function ({ models }) {
     .reverse()
     .value();
 
+  const get_number_of_online_enabled_services = (services) =>
+    _.reduce(
+      services,
+      (sum, service) => {
+        const is_online_enabled_service = _.reduce(
+          digital_status_keys,
+          (is_online_enabled_service, key) =>
+            is_online_enabled_service
+              ? is_online_enabled_service
+              : service[`${key}_status`],
+          false
+        );
+        return is_online_enabled_service ? sum + 1 : sum;
+      },
+      0
+    );
+
   const gov_summary = [
     {
       id: "gov",
       service_general_stats: {
         id: "gov",
         number_of_services: service_rows.length,
+        number_of_online_enabled_services:
+          get_number_of_online_enabled_services(service_rows),
         number_of_reporting_orgs: _.chain(service_rows)
           .groupBy("org_id")
           .size()
@@ -280,12 +299,9 @@ export default async function ({ models }) {
           .size()
           .value(),
       },
-      service_digital_status_summary: _.chain(digital_status_keys)
-        .map((key) =>
-          populate_digital_summary_key(service_rows, "gov", "gov", key)
-        )
-        .sortBy("can_online")
-        .value(),
+      service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
+        populate_digital_summary_key(service_rows, "gov", "gov", key)
+      ),
       service_standards_summary: [
         get_final_standards_summary(service_rows, "gov"),
       ],
@@ -299,17 +315,16 @@ export default async function ({ models }) {
       service_general_stats: {
         id: org_id,
         number_of_services: services.length,
+        number_of_online_enabled_services:
+          get_number_of_online_enabled_services(services),
         number_of_reporting_programs: _.chain(service_rows)
           .reduce(group_by_program_id, {})
           .size()
           .value(),
       },
-      service_digital_status_summary: _.chain(digital_status_keys)
-        .flatMap((key) =>
-          populate_digital_summary_key(services, org_id, "dept", key)
-        )
-        .sortBy("can_online")
-        .value(),
+      service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
+        populate_digital_summary_key(services, org_id, "dept", key)
+      ),
       service_standards_summary: get_final_standards_summary(services, org_id),
       top_services_application_vol_summary: get_top_application_vol_summary(
         services,
@@ -324,13 +339,12 @@ export default async function ({ models }) {
       service_general_stats: {
         id: program_id,
         number_of_services: services.length,
+        number_of_online_enabled_services:
+          get_number_of_online_enabled_services(services),
       },
-      service_digital_status_summary: _.chain(digital_status_keys)
-        .flatMap((key) =>
-          populate_digital_summary_key(services, program_id, "program", key)
-        )
-        .sortBy("can_online")
-        .value(),
+      service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
+        populate_digital_summary_key(services, program_id, "program", key)
+      ),
       service_standards_summary: get_final_standards_summary(
         services,
         program_id
