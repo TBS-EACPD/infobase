@@ -2,6 +2,29 @@
 services_intro_title:
   en: Introduction to services
   fr: TODO
+number_value_of_services:
+  transform: [handlebars, markdown]
+  en: |
+    **{{number_of_services}} services**
+  fr: |
+    **{{number_of_services}} services**
+pct_of_met_high_vol_services:
+  transform: [handlebars, markdown]
+  en: |
+    % of {{gl_tt "High Volume Services" "HIGH_VOL_SERVICES"}} which met Service Standards
+  fr: |
+    TODO
+pct_of_client_interaction_pts_online:
+  en: |
+    % of client interaction points available online
+  fr: |
+    TODO
+pct_of_online_end_services:
+  en: |
+    % of services that are online end-to-end
+  fr: |
+    TODO
+
 # TODO to change handling year
 services_intro_gov:
   transform: [handlebars, markdown]
@@ -192,10 +215,8 @@ orgs_reporting_services_title:
   fr: TODO
 orgs_reporting_services_text:
   transform: [handlebars, markdown]
-  en: |
-    TODO
-  fr: |
-    TODO
+  en: In **{{most_recent_year}}, {{number_of_depts}}** departments and agencies of the Government of Canada reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
+  fr: TODO
 number_of_services:
   en: Number of services
   fr: TODO
