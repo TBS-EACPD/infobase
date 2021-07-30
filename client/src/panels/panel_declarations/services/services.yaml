@@ -33,7 +33,7 @@ services_intro_gov:
  
     Information on services provided by the Government of Canada has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
-    The GC Service Inventory currently contains service data from **{{number_of_reporting_orgs}}** departments and agencies, covering results from **{{pa_last_year_2}}** to **{{pa_last_year}}**
+    The GC Service Inventory currently contains service data from **{{number_of_reporting_orgs}}** departments and agencies, covering results from **{{services_year_2}}** to **{{services_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
@@ -215,7 +215,7 @@ orgs_reporting_services_title:
   fr: TODO
 orgs_reporting_services_text:
   transform: [handlebars, markdown]
-  en: In **{{most_recent_year}}, {{number_of_depts}}** departments and agencies of the Government of Canada reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
+  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of the Government of Canada reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
   fr: TODO
 number_of_services:
   en: Number of services
