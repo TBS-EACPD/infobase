@@ -217,18 +217,13 @@ class RPB extends React.Component {
         .value();
 
     function dimension_column_values(dim_data) {
+      const voted = text_maker("voted");
+      const stat = text_maker("stat");
       if (dimension === "vote_vs_stat") {
         if (table_name === "orgTransferPayments") {
-          return [
-            "type",
-            !_.includes(dim_data[0].tp, "(S) ") ? "Statutory" : "Voted",
-          ];
+          return ["type", !_.includes(dim_data[0].tp, "(S) ") ? stat : voted];
         }
-        // TODO: maybe create new column instead of using desc column
-        return [
-          "desc",
-          dim_data[0].votestattype === 999 ? "Statutory" : "Voted",
-        ];
+        return ["desc", dim_data[0].votestattype === 999 ? stat : voted];
       }
       return [dimension, dim_data[0][dimension]];
     }
@@ -249,7 +244,7 @@ class RPB extends React.Component {
             ) // statutory items have votestattype 999, voted items have other number
             .map((dim_data) => {
               return _.chain(all_data_columns)
-                .filter((col) => col.type !== "percentage1") // TODO: make this better
+                .filter((col) => col.type !== "percentage1")
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
                 .concat([dimension_column_values(dim_data)])
                 .fromPairs()
