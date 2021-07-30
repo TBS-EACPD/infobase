@@ -21,6 +21,7 @@ import { secondaryColor, tertiaryColor } from "src/style_constants/index";
 import { CanadaD3Component } from "./CanadaD3Component";
 
 import text from "./canada.yaml";
+import "./canada.scss";
 
 const { text_maker } = create_text_maker_component(text);
 
@@ -55,7 +56,7 @@ class CanadaGraphBarLegend extends React.Component {
 
     return (
       <Fragment>
-        <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">
+        <p className="mrgn-bttm-0 mrgn-tp-0 canada-nav-header centerer">
           {province_graph_title(prov)}
         </p>
         <WrappedNivoHBar

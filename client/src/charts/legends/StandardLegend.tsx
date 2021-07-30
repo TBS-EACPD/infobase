@@ -22,7 +22,9 @@ export const StandardLegend = ({
       style={{ maxHeight: "400px", display: "flex", flexDirection: "column" }}
     >
       {title && (
-        <p className="mrgn-bttm-0 mrgn-tp-0 nav-header centerer">{title}</p>
+        <p className="mrgn-bttm-0 mrgn-tp-0 standard-legend-nav-header centerer">
+          {title}
+        </p>
       )}
       {/* have to hard code max height since overflow on IE is bugged */}
       <div
