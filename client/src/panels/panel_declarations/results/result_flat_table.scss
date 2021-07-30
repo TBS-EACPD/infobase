@@ -27,3 +27,8 @@
     width: 2%;
   }
 }
+
+.copyable-hidden {
+  position: absolute;
+  left: -999em;
+}
