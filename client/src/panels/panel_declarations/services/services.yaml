@@ -65,13 +65,13 @@ filter_results_service:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
+    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
   fr: |
-    Parmi les **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}**, **{{most_digital_name}}** est le {{gl_tt "point d'interaction" "CLIENT_INTERACTION"}} en ligne avec les clients le plus courant (**{{fmt_percentage1 most_digital_pct}}**), tandis que **{{least_digital_name}}** est le moins courant (**{{fmt_percentage1 least_digital_pct}}**).
+    TODO
 services_digital_status_prog_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{num_of_services}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
+    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
   fr: TODO
 service_digital_status_most_and_least_same_text:
   transform: [handlebars, markdown]
@@ -215,7 +215,7 @@ orgs_reporting_services_title:
   fr: TODO
 orgs_reporting_services_text:
   transform: [handlebars, markdown]
-  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of the Government of Canada reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
+  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of the **Government of Canada** reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
   fr: TODO
 number_of_services:
   en: Number of services
