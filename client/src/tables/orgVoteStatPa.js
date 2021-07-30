@@ -150,7 +150,6 @@ export default {
     },
   },
 
-  // TODO: might need to make a text key
   dimensions: ["dept", "vote_vs_stat", "desc"],
 
   sort: function (mapped_rows, lang) {

@@ -50,12 +50,12 @@ spend_area:
 spend_areas:
   en: Spending Areas
   fr: Secteurs de dépenses
-spent: 
+spent:
   en: Spent
   fr: Dépensé
 spent_up_to:
   en: Spent up to
-  fr: Dépensé jusqu'à 
+  fr: Dépensé jusqu'à
 will_spend:
   en: Will spend
   fr: Va dépenser
@@ -97,7 +97,7 @@ how_were_accountable:
   fr: Comment nous sommes structurés
 name:
   en: Name
-  fr: Nom 
+  fr: Nom
 table_name:
   en: Name of the dataset table
   fr: Nom du tableau des données
@@ -123,9 +123,9 @@ show_text_content:
 in_common:
   en: in common
   fr: en commun
-hide_content: 
+hide_content:
   en: Collapse
-  fr: Cacher le contenu 
+  fr: Cacher le contenu
 export_table:
   en: Export Table
   fr: Exporter ce tableau
@@ -139,8 +139,8 @@ finished_export_table:
   en: Exported
   fr: Exporté
 data_sources:
- en: Data sources
- fr: Sources des données
+  en: Data sources
+  fr: Sources des données
 
 definition:
   en: Definition
@@ -243,15 +243,15 @@ employed:
   fr: Employé
 employed_up_to:
   en: Employed up to
-  fr: Employé jusqu'à 
+  fr: Employé jusqu'à
 data_table_instructions:
   en: |
-   Any number in the table below can be selected to produce a government-wide table for the selected element.
-   Alternatively, <a class='horizontal_compare'>click here</a> for a comparison of this organization’s totals with all others.
+    Any number in the table below can be selected to produce a government-wide table for the selected element.
+    Alternatively, <a class='horizontal_compare'>click here</a> for a comparison of this organization’s totals with all others.
   fr: |
-   Sélectionnez les éléments de votre choix dans le tableau ci-dessous pour produire un tableau de ceux-ci pour
-   l’ensemble du gouvernement. Vous pouvez également <a class='horizontal_compare'>consulter</a> la comparaison des totaux de cet organisme avec ceux de
-   tous les autres organismes.
+    Sélectionnez les éléments de votre choix dans le tableau ci-dessous pour produire un tableau de ceux-ci pour
+    l’ensemble du gouvernement. Vous pouvez également <a class='horizontal_compare'>consulter</a> la comparaison des totaux de cet organisme avec ceux de
+    tous les autres organismes.
 description:
   en: Description
   fr: Description
@@ -318,7 +318,7 @@ the_goc:
 org:
   en: Organization
   fr: Organisation
-orgs: 
+orgs:
   en: Organizations
   fr: Organisations
 org(s):
@@ -424,7 +424,7 @@ page:
 data_for_year:
   transform: [handlebars]
   en: |
-    {{year}} {{> (lookup . 'data_label'}} 
+    {{year}} {{> (lookup . 'data_label'}}
   fr: |
     {{> (lookup . 'data_label'}} pour {{year}}
 the_NCR_full:
@@ -436,9 +436,9 @@ a11y_table_title_default:
 pie_filtered_groups_note:
   transform: [handlebars]
   en: |
-    <b>Values less than 0.1% excluded</b> 
+    <b>Values less than 0.1% excluded</b>
   fr: |
-    <b>Valeurs de moins de 0.1% exclus</b> 
+    <b>Valeurs de moins de 0.1% exclus</b>
 
 see_the_infographic:
   en: See the Infographic
@@ -601,24 +601,24 @@ program_slice_of:
   transform: [handlebars]
   en: |
     {{so_name}} component
-  fr:  |
-   composant de {{so_name}}
+  fr: |
+    composant de {{so_name}}
 crso:
   en: Core Responsibility / Strategic Outcome
   fr: Responsabilité Essentielle / Résultat Stratégique
 crsos:
   en: Core Responsibilities / Strategic Outcomes
   fr: Responsabilités Essentielles / Résultats Stratégiques
-core_resp: 
+core_resp:
   en: Core Responsibility
-  fr: Responsabilité Essentielle 
-core_resps: 
+  fr: Responsabilité Essentielle
+core_resps:
   en: Core Responsibilities
   fr: Responsabilités Essentielles
 core_responsibility:
   en: Core Responsibility
-  fr: Responsabilité Essentielle 
-core_responsibilities: 
+  fr: Responsabilité Essentielle
+core_responsibilities:
   en: Core Responsibilities
   fr: Responsabilités Essentielles
 strategic_outcome:
@@ -701,7 +701,7 @@ horizontal:
   fr: Standard
 major_voted_stat:
   en: Major Voted or Statutory Items
-  fr: Crédits législatifs et votés importants  
+  fr: Crédits législatifs et votés importants
 voted_stat:
   en: Voted / Statutory
   fr: Crédit / poste législatif
@@ -752,14 +752,13 @@ covid_expenditures_estimated_exp_2021:
     {{fmt_year_to_fiscal_year 2021}} {{{gt "covid_expenditures_estimated_exp"}}}
   fr: |
     {{{gt "covid_expenditures_estimated_exp"}}} {{fmt_year_to_fiscal_year 2021}}
-    
+
 gba_plus:
   en: Gender-Based Analysis Plus (GBA Plus)
   fr: Analyse comparative entre les sexes plus (ACS Plus)
 gba_plus_short:
   en: GBA Plus
   fr: ACS Plus
-
 
 ##################################
 # text for welcome/netflix panel
@@ -800,7 +799,6 @@ main_estimates:
     {{est_in_year}} Main Estimates
   fr: Budget principal des dépenses {{est_in_year}}
 
-
 interim_mains:
   transform: [handlebars]
   ## the {{ upsets the YAML parser, so string beginning with
@@ -815,10 +813,10 @@ tabled_estimates:
   fr: Budget des dépenses déposé mais non approuvé
 
 supps_a:
-   transform: [handlebars]
-   en: |
-     {{est_in_year}} Supplementary Estimates A
-   fr: Budget supplémentaire des dépenses (A) {{est_in_year}}
+  transform: [handlebars]
+  en: |
+    {{est_in_year}} Supplementary Estimates A
+  fr: Budget supplémentaire des dépenses (A) {{est_in_year}}
 
 supps_b:
   transform: [handlebars]
@@ -832,22 +830,16 @@ supps_c:
     {{est_last_year}} Supplementary Estimates C
   fr: Budget supplémentaire des dépenses (C) {{est_last_year}}
 
-
 help:
   en: Help
   fr: Aide
 
-
-
-
-
-
 dummy_text:
-  en: fancy text here 
-  fr: fancy text here 
+  en: fancy text here
+  fr: fancy text here
 dummy_text_long:
-  en: lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales 
-  fr: lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales 
+  en: lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales
+  fr: lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales lorem ipsum dolores ales
 
 unknown:
   en: unknown
@@ -870,7 +862,7 @@ did_you_know_share:
   fr: Partager votre contenu personnalisé en copiant l'adresse URL actuel du navigateur
 
 results_overview:
-  en: Results at a glance 
+  en: Results at a glance
   fr: Aperçu sur les résultats
 
 difference:
@@ -881,9 +873,8 @@ difference_planned_actual:
   en: Difference (Actual - Planned)
   fr: Différence (Réel - prévu)
 actual_result:
-  en: Actual result 
+  en: Actual result
   fr: Résultat réel
-
 
 MtoM_tag_warning_reporting_level_q:
   en: Reporting is only done at the Program level not by tags
@@ -963,7 +954,6 @@ MtoM_tag_warning:
       </div>
     </div>
 
-
 a11y_sort_desc:
   en: Select to sort by this field in descending order
   fr: Sélectioner pour trier par cette colonne en ordre décroissant
@@ -973,8 +963,8 @@ a11y_sort_asc:
   fr: Sélectioner pour trier par cette colonne en ordre croissant
 
 everything_search_placeholder:
-  en:  Search for organizations, programs or keywords
-  fr:  Recherche des organisations, programmes ou mot-clés
+  en: Search for organizations, programs or keywords
+  fr: Recherche des organisations, programmes ou mot-clés
 
 active:
   en: Active
@@ -1000,7 +990,6 @@ tagged_programs:
   en: Tagged Programs
   fr: Programmes étiquettés
 
-
 see_infographic:
   en: See the infographic
   fr: Voir l'infographie
@@ -1022,7 +1011,6 @@ related_tags_for_program:
   en: This program also appears under the following tags
   fr: Ce programme apparaît également sous les étiquettes suivantes
 
-
 explorer_search:
   en: Search
   fr: Recherchez
@@ -1031,17 +1019,13 @@ explorer_focus_mount:
   en: Search results below
   fr: Résultat de votre recherche ci-dessous
 
-
 explorer_search_is_optional:
   en: Optionally filter the below data using search
   fr: Vous pouvez choisir de filtrer les données ci-dessous en utilisant une barre de recherche
 
-
-
 learn_more:
   en: Learn more
   fr: En apprendre davantage
-
 
 priorities:
   en: Priorities
@@ -1055,7 +1039,6 @@ infographic_faq:
   transform: [handlebars]
   en: FAQ for this data
   fr: FAQ pour ces données
-
 
 all_orgs:
   en: All organizations
@@ -1085,7 +1068,7 @@ planned_ftes_header:
   en: |
     {{year}} Number of Planned Full Time Equivalents
   fr: |
-    Nombre d'ETP prévus pour {{year}} 
+    Nombre d'ETP prévus pour {{year}}
 
 actual_spending_header:
   transform: [handlebars]
@@ -1099,7 +1082,7 @@ actual_ftes_header:
   en: |
     {{year}} Number of Full Time Equivalents
   fr: |
-    Nombre d'ETP pour {{year}} 
+    Nombre d'ETP pour {{year}}
 
 planned_resources:
   transform: [handlebars]
@@ -1110,14 +1093,12 @@ planned_resources:
 actual_resources:
   transform: [handlebars]
   en: |
-    {{year}} Actual Resources 
+    {{year}} Actual Resources
   fr: Resources utilisées en {{year}}
-
 
 build_a_report:
   en: Build your data report
   fr: Créer votre propre rapport de données
-
 
 you_are_here:
   en: You are here
@@ -1142,49 +1123,49 @@ non_active_program:
   en: non-active program
   fr: programme non actif
 
-SOBJ1: 
-    text: Personnel
+SOBJ1:
+  text: Personnel
 SOBJ2:
-    en: Transportation and Telecommunications
-    fr: Transports et communications
-SOBJ3: 
-    text: Information
+  en: Transportation and Telecommunications
+  fr: Transports et communications
+SOBJ3:
+  text: Information
 SOBJ4:
-    en: Professional and Special Services
-    fr: Services professionnels et spéciaux
+  en: Professional and Special Services
+  fr: Services professionnels et spéciaux
 SOBJ5:
-    en: Rentals
-    fr: Location
+  en: Rentals
+  fr: Location
 SOBJ6:
-    en: Purchased Repair and Maintenance
-    fr: Achat de services de réparation et d'entretien
+  en: Purchased Repair and Maintenance
+  fr: Achat de services de réparation et d'entretien
 SOBJ7:
-    en: Utilities, Materials and Supplies
-    fr: Services publics, fournitures et approvisionnements
+  en: Utilities, Materials and Supplies
+  fr: Services publics, fournitures et approvisionnements
 SOBJ8:
-    en: Acquisition of Land, Buildings, and Works
-    fr: Acquisition de terrains, de bâtiments et d'ouvrages
-SOBJ9: 
-    en: Acquisition of Machinery and Equipment
-    fr: Acquisition de machines et de matériel
+  en: Acquisition of Land, Buildings, and Works
+  fr: Acquisition de terrains, de bâtiments et d'ouvrages
+SOBJ9:
+  en: Acquisition of Machinery and Equipment
+  fr: Acquisition de machines et de matériel
 SOBJ10:
-    en: Transfer Payments
-    fr: Paiements de transfert
+  en: Transfer Payments
+  fr: Paiements de transfert
 SOBJ11:
-    en: Public Debt Charges
-    fr: Frais de la dette
+  en: Public Debt Charges
+  fr: Frais de la dette
 SOBJ12:
-    en: Other Subsidies and Payments
-    fr: Autres subventions et paiements
+  en: Other Subsidies and Payments
+  fr: Autres subventions et paiements
 SOBJ20:
-    en: Revenues
-    fr: Revenus
+  en: Revenues
+  fr: Revenus
 SOBJ21:
-    en: External Revenues
-    fr: Revenus externes
+  en: External Revenues
+  fr: Revenus externes
 SOBJ22:
-    en: Internal Revenues
-    fr: Revenus internes
+  en: Internal Revenues
+  fr: Revenus internes
 
 arrow:
   en: Arrow
@@ -1194,10 +1175,8 @@ copy:
   en: Copy
   fr: Copier
 
-
 ## warning for missing data prior to PAs
 gap_year_warning:
   transform: [handlebars, markdown]
   en: The {{gap_year}} actual spending data will be available once the {{gap_year}} Public Accounts are tabled.
   fr: Les données pour les dépenses réelles de {{gap_year}} seront disponibles lorsque les Comptes publics de {{gap_year}} seront déposés.
-

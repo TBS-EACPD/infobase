@@ -160,9 +160,14 @@ class GranularView extends React.Component {
                 className={"normal-radio-btn-label"}
                 key={`${dim}-radio-btn-label`}
               >
-                {/* TODO: not sure why text_maker doesn't work for some of them */}
-                {/* {text_maker(dim)} */}
-                {dim}
+                {dim === "all" || dim === "vote_vs_stat" || dim === "vote_stat"
+                  ? text_maker(
+                      dim === "vote_vs_stat" || dim === "vote_stat"
+                        ? "votestat_item"
+                        : dim
+                    )
+                  : _.find(sorted_key_columns, ["nick", dim])
+                      .fully_qualified_name}
               </label>
             </div>
           </div>
