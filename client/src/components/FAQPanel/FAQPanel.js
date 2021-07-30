@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React from "react";
 
+import { secondaryColor } from "src/core/color_defs";
+
 import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
 
 import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
@@ -67,5 +69,7 @@ export class FAQPanel extends React.Component {
   }
 }
 FAQPanel.defaultProps = {
+  background_color: secondaryColor,
+  is_initially_expanded: false,
   subject: Gov,
 };
