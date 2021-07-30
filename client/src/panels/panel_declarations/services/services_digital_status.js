@@ -43,6 +43,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     service_general_stats{
       id
       number_of_services
+      number_of_online_enabled_services
     }
     service_digital_status_summary {
       id
@@ -57,7 +58,10 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     return <LeafSpinner config_name="inline_panel" />;
   }
   const {
-    service_general_stats: { number_of_services },
+    service_general_stats: {
+      number_of_services,
+      number_of_online_enabled_services,
+    },
     service_digital_status_summary,
   } = data;
   const processed_data = _.map(service_digital_status_summary, (row) => ({
@@ -67,7 +71,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     [cannot_online]: row.cannot_online,
     [not_applicable]: row.not_applicable,
   }));
-
+  // SI_TODO waiting to remove until program text
   const most_digital_component = _.maxBy(processed_data, can_online);
   const least_digital_component = _.minBy(processed_data, can_online);
   const nivo_lang_props = {
@@ -94,26 +98,39 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
 
   return (
     <div>
+      {/* SI_TODO for program level text
+        <TM
+          className="medium-panel-text"
+          k={
+            most_digital_component.key === least_digital_component.key
+              ? "service_digital_status_most_and_least_same_text"
+              : subject.level === "program"
+              ? "services_digital_status_prog_text"
+              : "services_digital_status_text"
+          }
+          args={{
+            is_most_and_least_same:
+              most_digital_component.key === least_digital_component.key,
+            num_of_services: number_of_services,
+            subject_name: subject.name,
+            most_digital_name: text_maker(most_digital_component.key),
+            most_digital_pct:
+              most_digital_component[can_online] / number_of_services,
+            least_digital_name: text_maker(least_digital_component.key),
+            least_digital_pct:
+              least_digital_component[can_online] / number_of_services,
+          }}
+        />
+      */}
       <TM
         className="medium-panel-text"
-        k={
-          most_digital_component.key === least_digital_component.key
-            ? "service_digital_status_most_and_least_same_text"
-            : subject.level === "program"
-            ? "services_digital_status_prog_text"
-            : "services_digital_status_text"
-        }
+        k="services_digital_status_text"
         args={{
-          is_most_and_least_same:
-            most_digital_component.key === least_digital_component.key,
-          num_of_services: number_of_services,
+          number_of_services,
           subject_name: subject.name,
-          most_digital_name: text_maker(most_digital_component.key),
-          most_digital_pct:
-            most_digital_component[can_online] / number_of_services,
-          least_digital_name: text_maker(least_digital_component.key),
-          least_digital_pct:
-            least_digital_component[can_online] / number_of_services,
+          number_of_online_enabled_services,
+          pct_of_online_services:
+            number_of_online_enabled_services / number_of_services,
         }}
       />
       {is_a11y_mode ? (

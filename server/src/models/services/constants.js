@@ -1,10 +1,10 @@
 const digital_status_keys = [
-  "account_reg_digital",
-  "authentication",
-  "application_digital",
-  "decision_digital",
-  "issuance_digital",
   "issue_res_digital",
+  "issuance_digital",
+  "decision_digital",
+  "application_digital",
+  "authentication",
+  "account_reg_digital",
 ];
 const delivery_channels_keys = [
   "phone_inquiry_count",
