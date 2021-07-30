@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
@@ -23,6 +24,9 @@ const OrgsReportingServicesPanel = () => {
   const { loading, data } = useSummaryServices({
     subject: Gov,
     query_fragment: `
+    service_general_stats {
+      number_of_services
+    }
     orgs_reporting_services_summary {
       id
       subject_id
@@ -33,7 +37,10 @@ const OrgsReportingServicesPanel = () => {
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
   }
-  const { orgs_reporting_services_summary } = data;
+  const {
+    orgs_reporting_services_summary,
+    service_general_stats: { number_of_services },
+  } = data;
 
   const column_configs = {
     subject_id: {
@@ -61,7 +68,21 @@ const OrgsReportingServicesPanel = () => {
   };
   return (
     <HeightClippedGraph clipHeight={600}>
-      <TM k="orgs_reporting_services_text" />
+      {
+        <TM
+          className="medium-panel-text"
+          k="orgs_reporting_services_text"
+          args={{
+            most_recent_year: "2019-20",
+            number_of_depts: orgs_reporting_services_summary.length,
+            number_of_applications: _.sumBy(
+              orgs_reporting_services_summary,
+              "total_volume"
+            ),
+            number_of_services,
+          }}
+        />
+      }
       <DisplayTable
         unsorted_initial={true}
         data={orgs_reporting_services_summary}
