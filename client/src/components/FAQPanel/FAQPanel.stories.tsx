@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
+import { ComponentProps } from "src/types/util_types.d";
+
 import { FAQPanel } from "./FAQPanel";
 
 export default {
@@ -8,7 +10,7 @@ export default {
   component: FAQPanel,
 } as Meta;
 
-type FAQPanelProps = React.ComponentProps<typeof FAQPanel>;
+type FAQPanelProps = ComponentProps<typeof FAQPanel>;
 
 const Template: Story<FAQPanelProps> = (args) => <FAQPanel {...args} />;
 
