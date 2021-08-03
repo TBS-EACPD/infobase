@@ -7,7 +7,6 @@ const digital_status_keys = [
   "account_reg_digital",
 ];
 const delivery_channels_keys = [
-  "phone_inquiry_count",
   "other_application_count",
   "live_application_count",
   "mail_application_count",
