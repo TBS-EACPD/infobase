@@ -26,7 +26,7 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const colors = scaleOrdinal().range(_.at(newIBLightCategoryColors, [0]));
-const total_volume = text_maker("applications_and_calls");
+const total_volume = text_maker("application_digital");
 const volume_formatter = (val) =>
   formats.compact(val, { raw: true }).replace("$", "");
 
