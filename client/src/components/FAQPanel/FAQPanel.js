@@ -1,8 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { secondaryColor } from "src/core/color_defs";
-
 import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
 
 import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
@@ -18,6 +16,8 @@ import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
 import { Gov } from "src/models/organizational_entities";
+
+import { secondaryColor } from "src/core/color_defs";
 
 import treemap_lang from "src/TreeMap/treemap_questions.yaml";
 
