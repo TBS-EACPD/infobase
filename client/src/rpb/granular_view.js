@@ -198,6 +198,7 @@ class GranularView extends React.Component {
         data={table_data}
         column_configs={column_configs}
         util_components={display_table_custom_util}
+        unsorted_initial={dim_all_or_dept}
       />
     );
   }
