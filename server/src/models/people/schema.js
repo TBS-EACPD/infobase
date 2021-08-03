@@ -1,5 +1,5 @@
 const employee_org_fields = `
-  dept_code: String
+  org_id: String
   data: [DataObjectWithDim]
 `;
 
@@ -69,7 +69,7 @@ const schema = `
   }
 
   type EmployeeAvgAge {
-    dept_code: String
+    org_id: String
     data: DataObjectNoDim
   }
 
@@ -121,50 +121,50 @@ export default function ({ models, loaders }) {
   } = models;
   const resolvers = {
     Org: {
-      employee_age_group: async ({ dept_code }) => {
-        return await EmployeeAgeGroup.find({ dept_code: dept_code });
+      employee_age_group: async ({ org_id }) => {
+        return await EmployeeAgeGroup.find({ org_id: org_id });
       },
-      employee_ex_lvl: async ({ dept_code }) => {
-        return await EmployeeExLvl.find({ dept_code: dept_code });
+      employee_ex_lvl: async ({ org_id }) => {
+        return await EmployeeExLvl.find({ org_id: org_id });
       },
-      employee_gender: async ({ dept_code }) => {
-        return await EmployeeGender.find({ dept_code: dept_code });
+      employee_gender: async ({ org_id }) => {
+        return await EmployeeGender.find({ org_id: org_id });
       },
-      employee_fol: async ({ dept_code }) => {
-        return await EmployeeFol.find({ dept_code: dept_code });
+      employee_fol: async ({ org_id }) => {
+        return await EmployeeFol.find({ org_id: org_id });
       },
-      employee_region: async ({ dept_code }) => {
-        return await EmployeeRegion.find({ dept_code: dept_code });
+      employee_region: async ({ org_id }) => {
+        return await EmployeeRegion.find({ org_id: org_id });
       },
-      employee_type: async ({ dept_code }) => {
-        return await EmployeeType.find({ dept_code: dept_code });
+      employee_type: async ({ org_id }) => {
+        return await EmployeeType.find({ org_id: org_id });
       },
 
-      employee_avg_age: async ({ dept_code }) => {
-        return await EmployeeAvgAge.find({ dept_code: dept_code });
+      employee_avg_age: async ({ org_id }) => {
+        return await EmployeeAvgAge.find({ org_id: org_id });
       },
     },
     Gov: {
-      employee_age_totals: async ({ dept_code }) => {
-        return await EmployeeAgeTotals.find({ dept_code: dept_code });
+      employee_age_totals: async ({ org_id }) => {
+        return await EmployeeAgeTotals.find({ org_id: org_id });
       },
-      employee_ex_lvl_totals: async ({ dept_code }) => {
-        return await EmployeeExLvlTotals.find({ dept_code: dept_code });
+      employee_ex_lvl_totals: async ({ org_id }) => {
+        return await EmployeeExLvlTotals.find({ org_id: org_id });
       },
-      employee_gender_totals: async ({ dept_code }) => {
-        return await EmployeeGenderTotals.find({ dept_code: dept_code });
+      employee_gender_totals: async ({ org_id }) => {
+        return await EmployeeGenderTotals.find({ org_id: org_id });
       },
-      employee_fol_totals: async ({ dept_code }) => {
-        return await EmployeeFolTotals.find({ dept_code: dept_code });
+      employee_fol_totals: async ({ org_id }) => {
+        return await EmployeeFolTotals.find({ org_id: org_id });
       },
-      employee_region_totals: async ({ dept_code }) => {
-        return await EmployeeRegionTotals.find({ dept_code: dept_code });
+      employee_region_totals: async ({ org_id }) => {
+        return await EmployeeRegionTotals.find({ org_id: org_id });
       },
-      employee_type_totals: async ({ dept_code }) => {
-        return await EmployeeTypeTotals.find({ dept_code: dept_code });
+      employee_type_totals: async ({ org_id }) => {
+        return await EmployeeTypeTotals.find({ org_id: org_id });
       },
-      employee_gov_avgs: async ({ dept_code }) => {
-        return await EmployeeGovAvgs.find({ dept_code: dept_code });
+      employee_gov_avgs: async ({ org_id }) => {
+        return await EmployeeGovAvgs.find({ org_id: org_id });
       },
     },
   };
