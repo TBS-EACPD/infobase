@@ -20,6 +20,7 @@ export default async function ({ models }) {
     EmployeeGovAvgs,
   } = models;
 
+  const igoc_rows = get_standard_csv_file_rows("igoc.csv");
   const process_employee_csv = (csv_name) =>
     _.chain(get_standard_csv_file_rows(csv_name))
       .reject(["dept_code", "ZGOC"])
@@ -30,7 +31,10 @@ export default async function ({ models }) {
       }))
       .groupBy("dept_code")
       .map((dept_rows, dept_code) => ({
-        dept_code,
+        org_id: _.find(
+          igoc_rows,
+          (igoc_row) => igoc_row.dept_code === dept_code
+        ).org_id,
         data: _.chain(dept_rows)
           .map(({ dept_code, dimension, avg_share, ...values_by_year }) => ({
             dimension,
@@ -91,12 +95,14 @@ export default async function ({ models }) {
   let employee_avg_age_rows = _.chain(
     get_standard_csv_file_rows("org_employee_avg_age.csv")
   )
+    .reject(["dept_code", "ZGOC"])
     .map(({ dept_code, dimension, ...data_columns }) => ({
       dept_code,
       ..._.mapValues(data_columns, _.toNumber),
     }))
     .map(({ dept_code, ...values_by_year }) => ({
-      dept_code,
+      org_id: _.find(igoc_rows, (igoc_row) => igoc_row.dept_code === dept_code)
+        .org_id,
       data: {
         by_year: _.map(values_by_year, (value, year) => ({
           year,
@@ -105,7 +111,6 @@ export default async function ({ models }) {
       },
     }))
     .value();
-
   let employee_age_totals = process_employee_data_sums(
     "org_employee_age_group.csv"
   );

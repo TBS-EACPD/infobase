@@ -16,7 +16,7 @@ import {
 
 export default function (model_singleton) {
   const EmployeePopulationDataSchema = mongoose.Schema({
-    dept_code: pkey_type(),
+    org_id: pkey_type(),
     data: [
       {
         dimension: str_type,
@@ -32,7 +32,7 @@ export default function (model_singleton) {
   });
 
   const EmployeeAvgAgeSchema = mongoose.Schema({
-    dept_code: pkey_type(),
+    org_id: pkey_type(),
     data: {
       by_year: [
         {
@@ -116,8 +116,8 @@ export default function (model_singleton) {
     EmployeeExLvlTotals,
     EmployeeFolTotals,
     EmployeeGenderTotals,
-    EmployeeRegionTotals,
+    EmployeeRegionTotals,  
     EmployeeTypeTotals,
-    EmployeeGovAvgs,
+    EmployeeGovAvgs  ,
   } = model_singleton.models;
 }
