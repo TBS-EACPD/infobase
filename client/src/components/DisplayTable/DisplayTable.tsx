@@ -695,7 +695,7 @@ export class DisplayTable extends React.Component<DisplayTableProps> {
 
     const showing_sort = !_.isUndefined(show_sort)
       ? show_sort
-      : _.size(data) > 2;
+      : _.size(data) >= 2;
     const showing_search = !_.isUndefined(show_search)
       ? show_search
       : _.size(data) > 5;
