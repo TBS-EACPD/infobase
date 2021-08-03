@@ -11,6 +11,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
   children : JSX (content to be clipped), 
   clipHeight: css height string,
 */
+
 interface HeightClipperProps {
   clipHeight: number;
   children: React.ReactElement;
@@ -28,6 +29,8 @@ export class HeightClipper extends React.Component<
 > {
   main: React.RefObject<HTMLDivElement>;
   content: React.RefObject<HTMLDivElement>;
+  debounced_mutation_callback: MutationCallback;
+  observer: MutationObserver;
 
   constructor(props: HeightClipperProps) {
     super(props);
@@ -37,7 +40,26 @@ export class HeightClipper extends React.Component<
     };
     this.main = React.createRef();
     this.content = React.createRef();
+
+    this.debounced_mutation_callback = _.debounce(
+      (mutationList: MutationRecord[], observer: MutationObserver) => {
+        this.componentDidUpdate();
+      }
+    );
+
+    this.observer = new MutationObserver(this.debounced_mutation_callback);
+
+    this.observer.observe(document, {
+      childList: true,
+      attributes: false,
+      subtree: true,
+    });
   }
+
+  componentWillUnmount() {
+    this.observer.disconnect();
+  }
+
   componentDidMount() {
     this.measureHeightAndUpdateState();
   }
@@ -74,7 +96,9 @@ export class HeightClipper extends React.Component<
       _.map<Element, HTMLElement>(
         untabbable_children_node.querySelectorAll("svg"),
         _.identity
-      ).forEach((node: HTMLElement) => node.setAttribute("focusable", "false"));
+      ).forEach((node: HTMLElement) => {
+        node.setAttribute("focusable", "false");
+      });
     } else {
       _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll('[tabindex="-999"]'),
