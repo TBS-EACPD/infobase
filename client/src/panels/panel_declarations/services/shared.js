@@ -19,7 +19,6 @@ const digital_status_keys = [
   "account_reg_digital",
 ];
 const delivery_channels_keys = [
-  "phone_inquiry",
   "other_application",
   "live_application",
   "mail_application",
@@ -27,7 +26,6 @@ const delivery_channels_keys = [
 ];
 const delivery_channels_query_fragment = `
 service_report {
-  phone_inquiry_count
   online_inquiry_count
   online_application_count
   live_application_count

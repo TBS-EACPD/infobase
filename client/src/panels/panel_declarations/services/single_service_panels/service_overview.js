@@ -39,7 +39,7 @@ export class ServiceOverview extends React.Component {
       service.standards,
       "standard_report"
     );
-    const applications_and_calls = _.reduce(
+    const applications = _.reduce(
       delivery_channels_keys,
       (total, key) => {
         const sum_for_key =
@@ -191,9 +191,9 @@ export class ServiceOverview extends React.Component {
               }
             />
           </dd>
-          <dt>{text_maker("applications_and_calls")}</dt>
+          <dt>{text_maker("application_digital")}</dt>
           <dd>
-            {formats["big_int"](applications_and_calls, {
+            {formats["big_int"](applications, {
               raw: true,
             })}
           </dd>

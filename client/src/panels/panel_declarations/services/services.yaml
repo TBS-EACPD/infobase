@@ -136,10 +136,11 @@ services_channels_title:
 single_service_channels_title:
   en: Delivery channels of this service
   fr: Modes de prestation de ce service
+# SI_TODO need to remove "enquiries" in fr
 services_channels_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
+    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications.
     
     In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** {{channel_type}}.
 
@@ -153,16 +154,17 @@ services_channels_text:
 services_channels_program_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications and enquiries.
+    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications.
 
     Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** {{channel_type}}.
     
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** {{channel_type}}, the highest among all of the services offered under this program.
   fr: TODO
+# SI_TODO need to remove "enquiries" in fr
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Delivery channels" "CHANNELS"}} that this {{gl_tt "service" "SERVICE"}} uses for handling applications and enquiries.
+    {{gl_tt "Delivery channels" "CHANNELS"}} that this {{gl_tt "service" "SERVICE"}} uses for handling applications.
     
     {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery {{gl_tt "channel" "CHANNELS"}} volume for this service.{{/if}}
   fr: |
@@ -181,18 +183,12 @@ online_application:
 other_application:
   en: Applications by other channels
   fr: Demandes par d'autres moyens
-phone_inquiry:
-  en: Telephone enquiries
-  fr: Demandes de renseignements par téléphone
 online_inquiry:
   en: Website visits
   fr: Visites sur le site web
 applications:
   en: applications
   fr: demandes
-enquiries:
-  en: enquiries
-  fr: demandes de renseignements
 
 # Top 10 volume
 top10_services_volume_title:
@@ -205,7 +201,8 @@ service_name:
 top10_services_volume_text:
   transform: [handlebars, markdown]
   en: |
-    Below are the top {{num_of_services}} services with the highest application and telephone volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications and telephone calls.
+    Below are the top {{num_of_services}} services with the highest application volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications.
+  # TODO remove Telephone enquiries for Fr
   fr: |
     Vous trouverez ci-dessous les {{num_of_services}} services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
 
@@ -266,9 +263,6 @@ service_links_text:
 service_link_text:
   en: More details (external links)
   fr: Pour en savoir plus (liens externes)
-applications_and_calls:
-  en: Applications and telephone calls
-  fr: Applications et appels téléphoniques
 service_url:
   en: Service Link
   fr: Lien de service
