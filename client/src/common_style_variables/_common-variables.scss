@@ -60,6 +60,7 @@ $heavyFontWeight: 700;
 
 $standardBorderRadius: 10px;
 
+// CSS `export:` syntax needed to import these from JS modules
 :export {
   primaryColor: $primaryColor;
   secondaryColor: $secondaryColor;

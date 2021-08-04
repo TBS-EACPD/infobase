@@ -29,7 +29,7 @@ const { text_maker } = create_text_maker_component(text);
 const { provinces } = businessConstants;
 
 const get_graph_color = (alpha) => {
-  const rgb = hex_to_rgb(style_variables.secondary_color);
+  const rgb = hex_to_rgb(style_variables.secondaryColor);
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
 };
 
