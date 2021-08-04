@@ -8,7 +8,7 @@ import React, { Fragment } from "react";
 
 import MediaQuery from "react-responsive";
 
-import { DisplayTable } from "src/components/index";
+import { DisplayTable, Format } from "src/components/index";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 
@@ -27,7 +27,9 @@ import {
 } from "src/style_constants/index";
 
 import text from "./WrappedNivoCircleProportion.yaml";
+
 import "./WrappedNivoCircleProportion.scss";
+import { TabularLegend } from "src/charts/legends";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
@@ -131,6 +133,21 @@ export class WrappedNivoCircleProportion extends React.Component {
       );
     };
 
+    const legend_items = [
+      {
+        id: parent_name,
+        label: parent_name,
+        color: color_scale(parent_name),
+        value: parent_value,
+      },
+      {
+        id: child_name,
+        label: child_name,
+        color: color_scale(child_name),
+        value: child_value,
+      },
+    ];
+
     const graph = (
       <Fragment>
         <div style={{ height: height }}>
@@ -142,7 +159,25 @@ export class WrappedNivoCircleProportion extends React.Component {
             args={{ outer: parent_name, inner: child_name }}
           />
         </div>
-        <Table />
+        <TabularLegend
+          items={legend_items}
+          get_right_content={(item) => (
+            <div>
+              <span className="infobase-pie__legend-data">
+                {value_formatter(item.value)}
+              </span>
+              {
+                <span className="infobase-pie__legend-data">
+                  <Format
+                    type="percentage1"
+                    content={item.value / (parent_value + child_value)}
+                  />
+                </span>
+              }
+            </div>
+          )}
+        />
+        {/* <Table /> */}
       </Fragment>
     );
 
