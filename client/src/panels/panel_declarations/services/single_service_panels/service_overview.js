@@ -21,7 +21,7 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { infograph_href_template } from "src/link_utils";
 import "src/panels/panel_declarations/services/services.scss";

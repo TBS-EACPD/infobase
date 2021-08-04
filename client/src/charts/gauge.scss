@@ -1,5 +1,5 @@
 @use "sass:math";
-@import "src/common_style_variables/common-variables.scss";
+@import "src/common_style_variables/common-variables.module.scss";
 
 .gauge {
   position: relative;

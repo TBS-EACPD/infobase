@@ -29,7 +29,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
 import { LegendList } from "src/charts/legends/index";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

@@ -15,8 +15,7 @@ import { run_template } from "src/models/text";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { hex_to_rgb } from "src/general_utils";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { LegendList, LegendListProps } from "./LegendList";
 

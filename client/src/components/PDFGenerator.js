@@ -5,7 +5,7 @@ import { is_IE } from "src/core/feature_detection";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { IconDownload } from "src/icons/icons";
 import { get_static_url } from "src/request_utils";

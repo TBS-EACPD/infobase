@@ -51,6 +51,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
   const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
   const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
+  const scss_module_pattern = /\.module\.scss$/;
+
   return [
     {
       test: new RegExp(js_module_suffix_pattern),
@@ -72,18 +74,39 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       test: /\.scss$/,
+      exclude: scss_module_pattern,
       use: [
         { loader: "style-loader" }, // third, uses JS string imports, inserts styles in to DOM as load side effect
         {
-          loader: "css-loader", // second, translates CSS into ESmodules, "icss" alows for export: syntax
+          loader: "css-loader", // second, translates CSS into  ES modules
           options: {
             importLoaders: 1,
-            modules: "icss",
+            modules: {
+              mode: "icss",
+            },
           },
         },
         { loader: "sass-loader" }, // first, compiles Sass to CSS
       ],
       sideEffects: true,
+    },
+    {
+      // unlike other scss modules, don't inject in to DOM (no style-loader), generate types (css-modules-typescript-loader)
+      test: scss_module_pattern,
+      use: [
+        { loader: "style-loader" }, // TODO contrary to above comment, ths only works with the style-loader present? Need to figure out why
+        { loader: "css-modules-typescript-loader" },
+        {
+          loader: "css-loader",
+          options: {
+            importLoaders: 1,
+            modules: {
+              mode: "local",
+            },
+          },
+        },
+        { loader: "sass-loader" },
+      ],
     },
     {
       test: /\.csv$/,

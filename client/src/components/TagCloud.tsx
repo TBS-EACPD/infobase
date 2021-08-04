@@ -4,7 +4,7 @@ import React from "react";
 
 import { GlossaryEntry } from "src/models/glossary";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { IconCheckmark } from "src/icons/icons";
 

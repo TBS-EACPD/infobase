@@ -20,7 +20,7 @@ import {
 import { Subject } from "src/models/subject";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 

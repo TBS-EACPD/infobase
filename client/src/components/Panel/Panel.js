@@ -7,7 +7,7 @@ import { FootnoteList } from "src/components/FootnoteList/FootnoteList";
 import { GlossaryItem } from "src/components/glossary_components";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./Panel.yaml";
 import "./Panel.scss";

@@ -17,7 +17,7 @@ import { is_a11y_mode, lang } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./services.yaml";
 

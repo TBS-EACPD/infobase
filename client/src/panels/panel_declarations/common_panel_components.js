@@ -12,7 +12,7 @@ import {
 
 import { trivial_text_maker } from "src/models/text";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>
