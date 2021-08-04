@@ -147,7 +147,7 @@
     "bundle-stats-webpack-plugin": "^2.4.0-beta.7",
     "circular-dependency-plugin": "^5.2.2",
     "core-js": "^3",
-    "css-loader": "^5.0.0",
+    "css-loader": "^6.0.0",
     "css-minimizer-webpack-plugin": "^1.1.5",
     "css-modules-typescript-loader": "^4.0.1",
     "eslint": "^7.12.1",
