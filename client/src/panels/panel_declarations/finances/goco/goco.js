@@ -21,7 +21,7 @@ import { Table } from "src/core/TableClass";
 import { StandardLegend } from "src/charts/legends/index";
 import { get_formatter } from "src/charts/shared";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./goco.yaml";
 

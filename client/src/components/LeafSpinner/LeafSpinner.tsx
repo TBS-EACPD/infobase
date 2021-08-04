@@ -2,7 +2,7 @@ import type { Property } from "csstype";
 import _ from "lodash";
 import React from "react";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import leaf_loading_spinner from "./LeafSpinner.svg";
 import "./LeafSpinner.scss";

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import "./icons.scss";
 

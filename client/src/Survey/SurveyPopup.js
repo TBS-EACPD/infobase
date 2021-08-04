@@ -12,7 +12,7 @@ import { log_standard_event } from "src/core/analytics";
 
 import { is_dev, is_dev_link } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { IconFeedback } from "src/icons/icons";
 

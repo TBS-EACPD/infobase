@@ -15,7 +15,7 @@ import { run_template } from "src/models/text";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";

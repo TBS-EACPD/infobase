@@ -9,7 +9,7 @@ import {
 import { lang } from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { IconFlagLine } from "src/icons/icons";
 

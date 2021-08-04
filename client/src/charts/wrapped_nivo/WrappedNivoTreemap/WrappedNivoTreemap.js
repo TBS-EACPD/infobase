@@ -4,7 +4,7 @@ import MediaQuery from "react-responsive";
 
 import { DefaultTooltip } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import "./WrappedNivoTreemap.scss";
 

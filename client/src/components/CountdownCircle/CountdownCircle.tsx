@@ -5,7 +5,7 @@ import { Countdown } from "src/components/Countdown/Countdown";
 
 import { is_IE } from "src/core/feature_detection";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import "./CountdownCircle.scss";
 

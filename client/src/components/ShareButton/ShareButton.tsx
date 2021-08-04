@@ -4,7 +4,7 @@ import { StatelessModal } from "src/components/modals_and_popovers/index";
 
 import { create_text_maker } from "src/models/text";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import {
   IconShare,

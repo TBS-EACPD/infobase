@@ -13,7 +13,7 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { get_formatter, infobase_colors_smart } from "src/charts/shared";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 import { IconTable } from "src/icons/icons";
 
 import graph_text from "./wrapped_nivo_common.yaml";

@@ -1,4 +1,4 @@
-@import "src/common_style_variables/common-variables";
+@import "src/common_style_variables/common-variables.module.scss";
 
 .status-icon-array {
   @media (max-width: $maxSmallDevice) {

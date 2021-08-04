@@ -1,7 +1,7 @@
 import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { ComponentProps } from "src/types/util_types.d";
 

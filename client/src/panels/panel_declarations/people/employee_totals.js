@@ -13,7 +13,7 @@ import { year_templates } from "src/models/years";
 import { formats } from "src/core/format";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./employee_totals.yaml";
 

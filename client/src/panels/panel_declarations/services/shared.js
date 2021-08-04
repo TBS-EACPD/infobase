@@ -2,7 +2,7 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons";
 

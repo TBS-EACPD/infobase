@@ -13,7 +13,7 @@ import {
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { get_source_links } from "src/metadata/data_sources";
 

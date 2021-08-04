@@ -11,7 +11,7 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/_common-variables.scss";
+import style_variables from "src/common_style_variables/common-variables.module.scss";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
 
