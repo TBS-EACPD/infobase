@@ -1,18 +1,12 @@
-import {
-  ResponsiveCirclePacking,
-  useNodeMouseHandlers,
-} from "@nivo/circle-packing";
 import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
-
-import MediaQuery from "react-responsive";
 
 import { DisplayTable, Format } from "src/components/index";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 
-import { formats } from "src/core/format";
+import { TabularLegend } from "src/charts/legends";
 
 import {
   InteractiveGraph,
@@ -29,7 +23,6 @@ import {
 import text from "./WrappedNivoCircleProportion.yaml";
 
 import "./WrappedNivoCircleProportion.scss";
-import { TabularLegend } from "src/charts/legends";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
@@ -92,44 +85,6 @@ export class WrappedNivoCircleProportion extends React.Component {
             style={{ zIndex: 1 }}
           />
         </svg>
-      );
-    };
-
-    const Table = () => {
-      return (
-        <div>
-          <tr>
-            <td className="nivo-tooltip__label">{parent_name}</td>
-            <td className="nivo-tooltip__value">
-              {value_formatter(parent.value)}
-            </td>
-            <td className="nivo-tooltip__value">
-              {`(${formats.smart_percentage1_raw(
-                parent_value / parent_value
-              )})`}
-              <svg height="50px">
-                <circle
-                  cx="20"
-                  cy="25"
-                  r="10"
-                  fill={color_scale(parent_name)}
-                />
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <td className="nivo-tooltip__label">{child_name}</td>
-            <td className="nivo-tooltip__value">
-              {value_formatter(parent.value)}
-            </td>
-            <td className="nivo-tooltip__value">
-              {`(${formats.smart_percentage1_raw(child_value / parent_value)})`}
-              <svg height="50px">
-                <circle cx="20" cy="25" r="10" fill={color_scale(child_name)} />
-              </svg>
-            </td>
-          </tr>
-        </div>
       );
     };
 
