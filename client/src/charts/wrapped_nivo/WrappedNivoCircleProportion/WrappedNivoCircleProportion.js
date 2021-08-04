@@ -58,7 +58,14 @@ export class WrappedNivoCircleProportion extends React.Component {
 
       // child circle calculations
       const child_percent = child_value / parent_value;
-      const child_radius = parent_radius * child_percent;
+
+      // precaution against smaller child_percent values
+      const true_child_radius = parent_radius * child_percent;
+      const default_child_radius = parent_radius * 0.1;
+      const child_radius =
+        true_child_radius > default_child_radius
+          ? true_child_radius
+          : default_child_radius;
 
       return (
         <svg
