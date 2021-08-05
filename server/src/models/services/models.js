@@ -97,6 +97,13 @@ export default function (model_singleton) {
     number_of_reporting_orgs: { type: Number }, // only for gov
     number_of_reporting_programs: { type: Number }, // only for gov, org
   });
+  const ServiceChannelsSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    subject_id: parent_fkey_type(),
+    year: str_type,
+    channel_id: str_type,
+    channel_value: { type: Number },
+  });
   const ServiceDigitalStatusSummarySchema = mongoose.Schema({
     id: pkey_type(),
     key_desc: str_type,
@@ -129,6 +136,7 @@ export default function (model_singleton) {
   const common_service_fields = {
     id: pkey_type(),
     service_general_stats: ServiceGeneralStatsSchema,
+    service_channels_summary: [ServiceChannelsSummarySchema],
     service_digital_status_summary: [ServiceDigitalStatusSummarySchema],
     service_standards_summary: [ServiceStandardsSummarySchema],
   };

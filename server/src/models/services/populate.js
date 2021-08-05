@@ -282,6 +282,30 @@ export default async function ({ models }) {
       0
     );
 
+  const get_service_channels_summary = (services) =>
+    _.chain(services)
+      .flatMap((service) =>
+        _.map(service.service_report, (report) => ({
+          ...report,
+          subject_id: service.org_id,
+        }))
+      )
+      .groupBy("year")
+      .flatMap((reports, year) =>
+        _.map(delivery_channels_keys, (key) => ({
+          id: `${key}_${year}_${reports[0].subject_id}`,
+          subject_id: reports[0].subject_id,
+          year,
+          channel_id: key,
+          channel_value: _.reduce(
+            reports,
+            (sum, report) => sum + _.toNumber(report[key]) || 0,
+            0
+          ),
+        }))
+      )
+      .value();
+
   const gov_summary = [
     {
       id: "gov",
@@ -299,6 +323,7 @@ export default async function ({ models }) {
           .size()
           .value(),
       },
+      service_channels_summary: get_service_channels_summary(service_rows),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
         populate_digital_summary_key(service_rows, "gov", "gov", key)
       ),
@@ -322,6 +347,7 @@ export default async function ({ models }) {
           .size()
           .value(),
       },
+      service_channels_summary: get_service_channels_summary(services),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
         populate_digital_summary_key(services, org_id, "dept", key)
       ),
@@ -342,6 +368,7 @@ export default async function ({ models }) {
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),
       },
+      service_channels_summary: get_service_channels_summary(services),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
         populate_digital_summary_key(services, program_id, "program", key)
       ),

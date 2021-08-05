@@ -18,10 +18,10 @@ const digital_status_keys = [
   "account_reg_digital",
 ];
 const delivery_channels_keys = [
-  "other_application",
-  "live_application",
-  "mail_application",
-  "online_application",
+  "other_application_count",
+  "live_application_count",
+  "mail_application_count",
+  "online_application_count",
 ];
 const delivery_channels_query_fragment = `
 service_report {
