@@ -26,6 +26,7 @@ import {
   declare_employee_gender_panel,
   declare_services_intro_panel,
   declare_services_digital_status_panel,
+  declare_services_channels_panel,
   declare_services_standards_panel,
   declare_results_intro_panel,
   declare_covid_key_concepts_panel,
@@ -84,6 +85,7 @@ export const get_gov_panels = (subject) => ({
     declare_services_intro_panel(),
     declare_orgs_reporting_services_panel(),
     declare_services_digital_status_panel(),
+    declare_services_channels_panel(),
     declare_services_standards_panel(),
   ],
   results: [

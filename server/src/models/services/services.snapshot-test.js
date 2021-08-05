@@ -83,6 +83,13 @@ service_summary{
     number_of_reporting_orgs
     number_of_reporting_programs
   }
+  service_channels_summary {
+    id
+    subject_id
+    year
+    channel_id
+    channel_value
+  }
   service_digital_status_summary{
     id
     key

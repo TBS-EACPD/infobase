@@ -22,6 +22,7 @@ const schema = `
   type ServiceSummary{
     id: String
     service_general_stats: ServiceGeneralStats
+    service_channels_summary: [ServiceChannelsSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
     top_services_application_vol_summary: [TopServicesApplicationVolSummary]
@@ -33,6 +34,13 @@ const schema = `
     number_of_online_enabled_services: Float
     number_of_reporting_orgs: Float
     number_of_reporting_programs: Float
+  }
+  type ServiceChannelsSummary{
+    id: String
+    subject_id: String
+    year: String
+    channel_id: String
+    channel_value: Float
   }
   type ServiceDigitalStatusSummary{
     id: String

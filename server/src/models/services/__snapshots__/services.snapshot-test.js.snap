@@ -8,6 +8,36 @@ Object {
         "service_summary": Object {
           "id": "326",
           "orgs_reporting_services_summary": null,
+          "service_channels_summary": Array [
+            Object {
+              "channel_id": "other_application_count",
+              "channel_value": 4735,
+              "id": "other_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+            Object {
+              "channel_id": "live_application_count",
+              "channel_value": 0,
+              "id": "live_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+            Object {
+              "channel_id": "mail_application_count",
+              "channel_value": 25,
+              "id": "mail_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+            Object {
+              "channel_id": "online_application_count",
+              "channel_value": 5816,
+              "id": "online_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+          ],
           "service_digital_status_summary": Array [
             Object {
               "can_online": 4,
@@ -121,7 +151,7 @@ Object {
               "name": "Public Enquiries",
               "service_id": "1114",
               "subject_id": "326",
-              "value": 5359,
+              "value": 4748,
             },
           ],
         },
@@ -139,6 +169,36 @@ Object {
         "service_summary": Object {
           "id": "TBC-BXB01",
           "orgs_reporting_services_summary": null,
+          "service_channels_summary": Array [
+            Object {
+              "channel_id": "other_application_count",
+              "channel_value": 0,
+              "id": "other_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+            Object {
+              "channel_id": "live_application_count",
+              "channel_value": 0,
+              "id": "live_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+            Object {
+              "channel_id": "mail_application_count",
+              "channel_value": 0,
+              "id": "mail_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+            Object {
+              "channel_id": "online_application_count",
+              "channel_value": 2014,
+              "id": "online_application_count_2018_326",
+              "subject_id": "326",
+              "year": "2018",
+            },
+          ],
           "service_digital_status_summary": Array [
             Object {
               "can_online": 1,
