@@ -93,6 +93,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       use: [
         {
           loader: "css-modules-typescript-loader",
+          options: {
+            mode: is_prod_build ? "verify" : "emit",
+          },
         },
         {
           loader: "css-loader",
