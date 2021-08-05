@@ -117,9 +117,12 @@ jobs:
 
       - run: ./scripts/ci_scripts/create_envs.sh
 
+      # need to bust the client package cache on patch changes in addition to package-lock changes
+      - run: cksum ./client/patches/* > client-patch-checksums.txt
+
       - restore_cache:
           keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}-v2
+            - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v2
       - run:
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
@@ -127,7 +130,7 @@ jobs:
           paths:
             - client/node_modules
             - scripts/common_node_scripts/node_modules
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}-v2
+          key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v2
 
       - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
