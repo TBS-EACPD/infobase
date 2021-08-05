@@ -107,6 +107,4 @@ export default {
       return [];
     },
   },
-
-  dimensions: [],
 };

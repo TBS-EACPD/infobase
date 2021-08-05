@@ -42,6 +42,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -51,6 +52,7 @@ export default {
         en: "Employee Type",
         fr: "Type d'employé",
       },
+      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -90,7 +92,6 @@ export default {
     return row;
   },
 
-  dimensions: ["dept", "employee_type"],
   queries: {
     gov_grouping: function () {
       return _.chain(this.table.horizontal(people_years, false))

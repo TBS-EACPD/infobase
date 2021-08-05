@@ -42,12 +42,14 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       type: "int",
       key: true,
       nick: "ex_lvl",
       header: trivial_text_maker("ex_level"),
+      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -83,8 +85,6 @@ export default {
     row.splice(1, 1, ex_levels[row[1]].text);
     return row;
   },
-
-  dimensions: ["dept", "ex_lvl"],
 
   queries: {
     gov_grouping: function () {

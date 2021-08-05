@@ -42,12 +42,14 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
       type: "int",
       nick: "fol",
       header: trivial_text_maker("FOL"),
+      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -96,6 +98,4 @@ export default {
     row.splice(1, 1, fol[row[1]].text);
     return row;
   },
-
-  dimensions: ["dept", "fol"],
 };
