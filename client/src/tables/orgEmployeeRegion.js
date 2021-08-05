@@ -44,6 +44,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       type: "short-str",
@@ -61,6 +62,7 @@ export default {
         en: "Geographic Region",
         fr: "Région géographique",
       },
+      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -158,6 +160,4 @@ export default {
       });
     },
   },
-
-  dimensions: ["dept", "region"],
 };

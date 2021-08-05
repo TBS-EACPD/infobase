@@ -42,12 +42,14 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
       type: "int",
       nick: "gender",
       header: trivial_text_maker("employee_gender"),
+      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -91,8 +93,6 @@ export default {
         .value();
     },
   },
-
-  dimensions: ["dept", "gender"],
 
   mapper: function (row) {
     var new_value = gender[row[1]].text;

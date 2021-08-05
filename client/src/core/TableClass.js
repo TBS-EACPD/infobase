@@ -206,6 +206,14 @@ export class Table {
         return h.nick || h.wcag;
       })
       .value();
+
+    this.get_dimensions();
+  }
+  get_dimensions() {
+    this.dimensions = _.chain(this._cols)
+      .filter("can_group_by")
+      .map((col) => col.nick)
+      .value();
   }
   get links() {
     return this.link
