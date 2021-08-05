@@ -139,26 +139,30 @@ single_service_channels_title:
 # SI_TODO need to remove "enquiries" in fr
 services_channels_text:
   transform: [handlebars, markdown]
+  en: Among the **{{fmt_big_int number_of_applications}}** applications which the **{{subject.name}}** received across **{{number_of_services}}** services, **{{fmt_big_int number_of_online_applications}}** applications were completed online, representing **{{fmt_percentage1  pct_of_online_applications}}** of all applications.
+  fr: TODO
+application_channels_by_services_text:
+  transform: [handlebars, markdown]
   en: |
     {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications.
     
-    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** {{channel_type}}.
+    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
-    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** {{channel_type}}, the highest among all of the department's services.
+    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
   fr: |
     Modes de prestation utilisés par les services pout traiter les demandes et les renseignements.
 
     À **{{subject.name}}**, le plus grand nombre de demandes a ètès gènèrè par les mode "**{{max_vol_channel_name}}**" avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
 
     Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, le plus grand nombre parmi les services du ministére.
-services_channels_program_text:
+application_channels_by_services_program_text:
   transform: [handlebars, markdown]
   en: |
     {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications.
 
-    Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** {{channel_type}}.
+    Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
     
-    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** {{channel_type}}, the highest among all of the services offered under this program.
+    The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the services offered under this program.
   fr: TODO
 # SI_TODO need to remove "enquiries" in fr
 service_channels_text:
@@ -171,22 +175,22 @@ service_channels_text:
     Les modes de prestationn utilisés par ce service pout traiter les demandes et les renseignements.
     
     {{#if max_channel_key}}Il y a eu **{{fmt_big_int max_value}} {{max_channel_key}}**, soit le plus grand nombre pour ce service.{{/if}}
-live_application:
+live_application_count:
   en: In person applications
   fr: Demandes en personne
-mail_application:
+mail_application_count:
   en: Applications by mail
   fr: Demandes par la poste
-online_application:
+online_application_count:
   en: Online applications
   fr: Demandes en ligne
-other_application:
+other_application_count:
   en: Applications by other channels
   fr: Demandes par d'autres moyens
-online_inquiry:
+online_inquiry_count:
   en: Website visits
   fr: Visites sur le site web
-applications:
+applications_count:
   en: applications
   fr: demandes
 
