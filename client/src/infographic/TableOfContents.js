@@ -8,7 +8,7 @@ import {
   LinkStyled,
 } from "src/components/index";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { separatorColor } from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./TableOfContents.yaml";
 
@@ -41,7 +41,7 @@ export default class TableOfContents extends React.Component {
             <div
               style={{
                 border: "1px solid",
-                borderColor: style_variables.separatorColor,
+                borderColor: separatorColor,
                 borderRadius: "5px",
               }}
             >

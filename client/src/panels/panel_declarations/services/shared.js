@@ -2,11 +2,13 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  successDarkColor,
+  highlightDarkColor,
+  warnDarkColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { IconX, IconCheck, IconNotApplicable } from "src/icons/icons";
-
-const { successDarkColor, highlightDark, warnDarkColor } = style_variables;
 
 const digital_status_keys = [
   "account_reg_digital",
@@ -50,7 +52,7 @@ const available_icons = {
   no: (
     <IconX
       title={trivial_text_maker("no")}
-      color={highlightDark}
+      color={highlightDarkColor}
       width={30}
       alternate_color={false}
     />

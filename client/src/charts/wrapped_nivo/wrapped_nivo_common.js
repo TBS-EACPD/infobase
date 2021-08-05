@@ -13,19 +13,17 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { get_formatter, infobase_colors_smart } from "src/charts/shared";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
-import { IconTable } from "src/icons/icons";
-
-import graph_text from "./wrapped_nivo_common.yaml";
-import "./wrapped_nivo_common.scss";
-
-const {
+import {
   secondaryColor,
   backgroundColor,
   textColor,
   minMediumDevice,
   maxMediumDevice,
-} = style_variables;
+} from "src/common_style_variables/common-variables.module.scss";
+import { IconTable } from "src/icons/icons";
+
+import graph_text from "./wrapped_nivo_common.yaml";
+import "./wrapped_nivo_common.scss";
 
 const { text_maker: nivo_common_text_maker } =
   create_text_maker_component(graph_text);

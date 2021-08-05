@@ -7,7 +7,7 @@ import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboa
 
 import { is_IE } from "src/core/feature_detection";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { backgroundColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconCopy, IconDownload } from "src/icons/icons";
 
@@ -22,7 +22,7 @@ export const DisplayTableCopyCsv = ({ csv_string }) => (
     button_class_name={"display_table__util-icon"}
     button_description={text_maker("copy_table_data_desc")}
     IconComponent={IconCopy}
-    icon_color={style_variables.backgroundColor}
+    icon_color={backgroundColor}
   />
 );
 
@@ -58,7 +58,7 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
       >
         <IconDownload
           title={text_maker("download_table_data_desc")}
-          color={style_variables.backgroundColor}
+          color={backgroundColor}
         />
       </button>
     )}

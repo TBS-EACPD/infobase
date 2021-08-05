@@ -9,7 +9,7 @@ import {
 import { lang } from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import highlightColor from "src/common_style_variables/common-variables.module.scss";
 
 import { IconFlagLine } from "src/icons/icons";
 
@@ -126,7 +126,7 @@ export default class Home extends React.Component {
                 backgroundImage: `URL(${get_static_url("svg/backbanner.svg")})`,
                 paddingTop: "10px",
                 paddingBottom: "10px",
-                borderBottom: `5px solid ${style_variables.highlightColor}`,
+                borderBottom: `5px solid ${highlightColor}`,
               }}
             >
               <header className="container">

@@ -11,7 +11,7 @@ import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { primaryColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { text_maker, TM } from "./sobj_text_provider";
 const { sos } = businessConstants;
@@ -85,7 +85,7 @@ export const declare_personnel_spend_panel = () =>
                       bottom: 50,
                       left: 65,
                     }}
-                    colors={style_variables.primaryColor}
+                    colors={primaryColor}
                   />
                 </GraphOverlay>
               </div>

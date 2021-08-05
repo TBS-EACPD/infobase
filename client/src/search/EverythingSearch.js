@@ -9,7 +9,7 @@ import { create_text_maker } from "src/models/text";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { minMediumDevice } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconGear } from "src/icons/icons";
 
@@ -88,7 +88,7 @@ const SearchOptions = ({ option_checkboxes }) => (
         >
           <IconGear height="21px" width="21px" alternate_color="false" />
         </div>
-        <MediaQuery minWidth={style_variables.minMediumDevice}>
+        <MediaQuery minWidth={minMediumDevice}>
           <span>{text_maker("options")}</span>
         </MediaQuery>
       </div>

@@ -12,7 +12,7 @@ import { log_standard_event } from "src/core/analytics";
 
 import { is_dev, is_dev_link } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { tertiaryColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconFeedback } from "src/icons/icons";
 
@@ -184,7 +184,7 @@ export const SurveyPopup = withRouter(
             <Fragment>
               <IconFeedback
                 title={text_maker("suvey_popup_header")}
-                color={style_variables.tertiaryColor}
+                color={tertiaryColor}
                 alternate_color={false}
               />
               {text_maker("suvey_popup_header")}

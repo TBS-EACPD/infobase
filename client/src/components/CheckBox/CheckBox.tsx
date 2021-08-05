@@ -4,13 +4,14 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  backgroundColor,
+  primaryColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { IconCheckmark } from "src/icons/icons";
 
 import "./CheckBox.scss";
-
-const { backgroundColor, primaryColor } = style_variables;
 
 const CheckBoxDefaultProps = {
   isSolidBox: false,

@@ -17,12 +17,13 @@ import { is_a11y_mode, lang } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  secondaryColor,
+  highlightOrangeColor,
+  separatorColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./services.yaml";
-
-const { secondaryColor, highlightOrangeColor, separatorColor } =
-  style_variables;
 
 const { text_maker, TM } = create_text_maker_component(text);
 const can_online = text_maker("can_online");

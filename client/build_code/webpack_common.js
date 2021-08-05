@@ -51,8 +51,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
   const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
   const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
-  const scss_module_pattern = /\.module\.scss$/;
-
   return [
     {
       test: new RegExp(js_module_suffix_pattern),
@@ -74,11 +72,11 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       test: /\.scss$/,
-      exclude: scss_module_pattern,
+      exclude: /\.module\.scss$/,
       use: [
-        { loader: "style-loader" }, // third, uses JS string imports, inserts styles in to DOM as load side effect
+        { loader: "style-loader" },
         {
-          loader: "css-loader", // second, translates CSS into  ES modules
+          loader: "css-loader",
           options: {
             importLoaders: 1,
             modules: {
@@ -86,22 +84,21 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
             },
           },
         },
-        { loader: "sass-loader" }, // first, compiles Sass to CSS
+        { loader: "sass-loader" },
       ],
       sideEffects: true,
     },
     {
-      // unlike other scss modules, don't inject in to DOM (no style-loader), generate types (css-modules-typescript-loader)
-      test: scss_module_pattern,
+      test: /\.module\.scss$/,
       use: [
-        { loader: "style-loader" }, // TODO contrary to above comment, ths only works with the style-loader present? Need to figure out why
-        { loader: "css-modules-typescript-loader" },
         {
           loader: "css-loader",
           options: {
             importLoaders: 1,
+            esModule: true,
             modules: {
               mode: "local",
+              namedExport: true,
             },
           },
         },

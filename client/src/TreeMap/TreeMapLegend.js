@@ -5,7 +5,7 @@ import { create_text_maker } from "src/models/text";
 
 import { formats } from "src/core/format";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { backgroundColor } from "src/common_style_variables/common-variables.module.scss";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";
@@ -121,7 +121,7 @@ export class TreeMapLegend extends React.Component {
                 <g className="mutLegendGroup" transform="translate(0,0)">
                   <rect
                     className="mutLegendBG"
-                    fill={style_variables.backgroundColor}
+                    fill={backgroundColor}
                     stroke="none"
                     width="500"
                     height="50"

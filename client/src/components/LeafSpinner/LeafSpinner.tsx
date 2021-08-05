@@ -2,12 +2,13 @@ import type { Property } from "csstype";
 import _ from "lodash";
 import React from "react";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  primaryColor,
+  secondaryColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import leaf_loading_spinner from "./LeafSpinner.svg";
 import "./LeafSpinner.scss";
-
-const { primaryColor, secondaryColor } = style_variables;
 
 interface spinner_config {
   outer_positioning: Property.Position;

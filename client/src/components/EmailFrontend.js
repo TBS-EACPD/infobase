@@ -7,7 +7,7 @@ import { get_client_id, log_standard_event } from "src/core/analytics";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { textRed } from "src/common_style_variables/common-variables.module.scss";
 
 import {
   get_email_template,
@@ -216,7 +216,7 @@ class EmailFrontend extends React.Component {
               <legend>
                 {field_info.form_label[lang]}
                 {field_info.required && (
-                  <span style={{ color: style_variables.textRed }}>*</span>
+                  <span style={{ color: textRed }}>*</span>
                 )}
               </legend>
               <div
@@ -272,7 +272,7 @@ class EmailFrontend extends React.Component {
               <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[lang]}
                 {connected_required && (
-                  <span style={{ color: style_variables.textRed }}>*</span>
+                  <span style={{ color: textRed }}>*</span>
                 )}
               </label>
               <textarea
