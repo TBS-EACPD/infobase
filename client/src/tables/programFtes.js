@@ -43,6 +43,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -66,6 +67,7 @@ export default {
         en: "Program",
         fr: "Programme",
       },
+      can_group_by: true,
     });
     _.each(std_years, (header, ix) => {
       this.add_col({
@@ -113,8 +115,6 @@ export default {
       });
     });
   },
-
-  dimensions: ["dept", "prgm"],
 
   sort: function (mapped_rows, lang) {
     return _.sortBy(mapped_rows, function (row) {

@@ -33,6 +33,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -52,6 +53,7 @@ export default {
         en: "Standard Object",
         fr: "Article courtant",
       },
+      can_group_by: true,
     });
     _.each(std_years, (header, i) => {
       this.add_col({
@@ -82,6 +84,4 @@ export default {
     }
     return row;
   },
-
-  dimensions: ["dept", "so"],
 };

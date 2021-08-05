@@ -36,6 +36,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       type: "short-str",
@@ -53,6 +54,7 @@ export default {
         en: "Geographic Region",
         fr: "Région géographique",
       },
+      can_group_by: true,
     });
     _.each(tp_by_region_years, (header, ix) => {
       this.add_col({
@@ -91,6 +93,4 @@ export default {
         .sortBy((row) => sum(_.tail(row)))
         .value(),
   },
-
-  dimensions: ["dept", "region"],
 };
