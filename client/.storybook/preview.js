@@ -3,7 +3,7 @@ import { addDecorator } from "@storybook/react";
 import { withConsole } from "@storybook/addon-console";
 import { MemoryRouter } from "react-router";
 
-import "src/common_css/common_css_index.side-effects.js";
+import "src/InfoBase/site.scss";
 
 const a11y_options = {
   element: "#root",
