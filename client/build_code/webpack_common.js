@@ -92,6 +92,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       test: /\.module\.scss$/,
       use: [
         {
+          loader: "css-modules-typescript-loader",
+        },
+        {
           loader: "css-loader",
           options: {
             importLoaders: 1,
