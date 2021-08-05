@@ -12,7 +12,7 @@ import {
   get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { textColor } from "src/common_style_variables/common-variables.module.scss";
 
 const bar_table = (
   data,
@@ -129,7 +129,7 @@ export class WrappedNivoBar extends React.Component {
           legends={fix_legend_symbols(legends)}
           keys={_.union(keys, [""])} //extra key allows negative bar to render (only needed when 1 type of key
           //and the key takes both negative or positive values)
-          labelTextColor={style_variables.textColor}
+          labelTextColor={textColor}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
           }
@@ -241,7 +241,7 @@ export class WrappedNivoHBar extends React.Component {
           legends={fix_legend_symbols(legends)}
           layout="horizontal"
           keys={keys}
-          labelTextColor={style_variables.textColor}
+          labelTextColor={textColor}
           tooltip={(d) =>
             tooltip([d], get_formatter(is_money, text_formatter, false))
           }

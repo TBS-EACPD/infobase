@@ -9,7 +9,7 @@ import { create_text_maker } from "src/models/text";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { backgroundColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconPin, IconUnpin } from "src/icons/icons";
 
@@ -155,7 +155,7 @@ class _PinnedContent extends React.Component {
                               height="25px"
                               width="25px"
                               svg_style={{ verticalAlign: "Top" }}
-                              color={style_variables.backgroundColor}
+                              color={backgroundColor}
                               alternate_color="false"
                             />
                           ) : (
@@ -163,7 +163,7 @@ class _PinnedContent extends React.Component {
                               height="25px"
                               width="25px"
                               svg_style={{ verticalAlign: "Top" }}
-                              color={style_variables.backgroundColor}
+                              color={backgroundColor}
                               alternate_color="false"
                             />
                           )}

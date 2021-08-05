@@ -9,14 +9,14 @@ interface TextBundle {
   };
 }
 declare module "*.yaml" {
-  const content: TextBundle;
-  export default content;
+  let val: TextBundle;
+  export default val;
 }
 declare module "*.csv" {
-  const content: string;
-  export default content;
+  let val: string;
+  export default val;
 }
 declare module "*.svg" {
-  const content: string;
-  export default content;
+  let val: string;
+  export default val;
 }

@@ -5,7 +5,7 @@ import { Countdown } from "src/components/Countdown/Countdown";
 
 import { is_IE } from "src/core/feature_detection";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { buttonPrimaryColor } from "src/common_style_variables/common-variables.module.scss";
 
 import "./CountdownCircle.scss";
 
@@ -23,7 +23,7 @@ const split_value_and_units = (size: string) => {
 const CountdownCircleDefaultProps = {
   size: "3em",
   stroke_width: "2px",
-  color: style_variables.buttonPrimaryColor,
+  color: buttonPrimaryColor,
   show_numbers: false,
 };
 

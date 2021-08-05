@@ -7,7 +7,7 @@ import { TransitionGroup, Transition } from "react-transition-group";
 
 import { trivial_text_maker } from "src/models/text";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { textLightColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconChevron } from "src/icons/icons";
 
@@ -145,7 +145,7 @@ const StatelessPullDownAccordion = ({
       <div className="pull-down-accordion-expander">
         <IconChevron
           title={get_accordion_label(isExpanded)}
-          color={style_variables.textLightColor}
+          color={textLightColor}
           rotation={isExpanded ? 180 : undefined}
         />
       </div>

@@ -21,12 +21,14 @@ import {
   get_formatter,
   TooltipFactory,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  textColor,
+  minMediumDevice,
+  maxMediumDevice,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./WrappedNivoCircleProportion.yaml";
 import "./WrappedNivoCircleProportion.scss";
-
-const { textColor, minMediumDevice, maxMediumDevice } = style_variables;
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 

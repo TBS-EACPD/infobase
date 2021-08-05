@@ -13,13 +13,15 @@ import {
   get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  textColor,
+  secondaryColor,
+  backgroundColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { IconZoomIn, IconZoomOut } from "src/icons/icons";
 
 import text from "./WrappedNivoLine.yaml";
-
-const { textColor, secondaryColor, backgroundColor } = style_variables;
 
 const { text_maker } = create_text_maker_component_with_nivo_common(text);
 

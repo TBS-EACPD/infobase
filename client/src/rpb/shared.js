@@ -10,7 +10,7 @@ import {
 
 import { lang } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { secondaryColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconCopyLink } from "src/icons/icons";
 
@@ -140,12 +140,12 @@ const ShareReport = () => (
     <ShareButton
       button_class_name={"rpb-heading-utils"}
       url={window.location.href}
-      icon_color={style_variables.secondaryColor}
+      icon_color={secondaryColor}
     />
     <WriteToClipboard
       button_class_name={"rpb-heading-utils"}
       text_to_copy={window.location.href}
-      icon_color={style_variables.secondaryColor}
+      icon_color={secondaryColor}
       IconComponent={IconCopyLink}
     />
   </div>

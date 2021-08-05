@@ -24,12 +24,14 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  tertiaryColor,
+  textColor,
+  highlightColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";
-
-const { tertiaryColor, textColor, highlightColor } = style_variables;
 
 const { std_years, planning_years, estimates_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);

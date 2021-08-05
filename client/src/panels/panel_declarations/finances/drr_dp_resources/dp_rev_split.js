@@ -13,13 +13,14 @@ import {
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  textGreen,
+  textRed,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { get_source_links } from "src/metadata/data_sources";
 
 import text from "./dp_rev_split.yaml";
-
-const { textGreen, textRed } = style_variables;
 
 const { text_maker } = create_text_maker_component(text);
 

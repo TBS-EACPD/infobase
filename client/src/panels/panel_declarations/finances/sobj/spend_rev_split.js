@@ -11,12 +11,13 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  highlightColor,
+  secondaryColor,
+} from "src/common_style_variables/common-variables.module.scss";
 import * as table_common from "src/tables/table_common";
 
 import text from "./spend_rev_split.yaml";
-
-const { highlightColor, secondaryColor } = style_variables;
 
 const { rows_to_rev_split } = table_common;
 

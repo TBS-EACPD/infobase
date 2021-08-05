@@ -20,7 +20,7 @@ import {
 import { Subject } from "src/models/subject";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { minLargeDevice } from "src/common_style_variables/common-variables.module.scss";
 
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
@@ -105,7 +105,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
       </div>
       <div className="col-12">
         <TM k={`covid_top_spending_measures`} el={"h3"} />
-        <MediaQuery minWidth={style_variables.minLargeDevice}>
+        <MediaQuery minWidth={minLargeDevice}>
           {(matches) => (
             <SummaryTabPie
               data={top_spending_measures}

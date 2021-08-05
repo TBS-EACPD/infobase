@@ -1,6 +1,6 @@
 import React from "react";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { tertiaryColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { LegendList, LegendListProps } from "./LegendList";
 
@@ -44,7 +44,7 @@ export const StandardLegend = ({
       {Controls && (
         <div
           style={{
-            borderTop: `1px dashed ${style_variables.tertiaryColor}`,
+            borderTop: `1px dashed ${tertiaryColor}`,
             padding: "10px 0px 10px 5px",
           }}
         >

@@ -4,13 +4,14 @@ import React from "react";
 
 import { lang } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  secondaryColor,
+  tertiaryColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { IconEyeOpen, IconEyeClosed } from "src/icons/icons";
 
 import "./VisibilityControl.scss";
-
-const { secondaryColor, tertiaryColor } = style_variables;
 
 export class VisibilityControl extends React.Component {
   render() {

@@ -15,7 +15,10 @@ import { run_template } from "src/models/text";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  secondaryColor,
+  tertiaryColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { hex_to_rgb } from "src/general_utils";
 
@@ -28,7 +31,7 @@ const { text_maker } = create_text_maker_component(text);
 const { provinces } = businessConstants;
 
 const get_graph_color = (alpha) => {
-  const rgb = hex_to_rgb(style_variables.secondaryColor);
+  const rgb = hex_to_rgb(secondaryColor);
   return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
 };
 
@@ -126,7 +129,7 @@ class CanadaGraph extends React.PureComponent {
 
     const canada_graph = new CanadaD3Component(graph_area_sel.node(), {
       main_color: get_graph_color(1),
-      secondary_color: style_variables.tertiaryColor,
+      secondary_color: tertiaryColor,
       selected_year_index,
       data,
       ticks,

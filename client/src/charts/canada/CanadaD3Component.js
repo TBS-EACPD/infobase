@@ -20,7 +20,7 @@ import { businessConstants } from "src/models/businessConstants";
 
 import { lang } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { separatorColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { canada_svg } from "./canada_svg.yaml";
 
@@ -281,7 +281,7 @@ export class CanadaD3Component {
           "border-radius": "5px",
           "text-align": "center",
           "font-size": `${scale * 22}px`,
-          "background-color": style_variables.separatorColor,
+          "background-color": separatorColor,
         });
 
         const prov_name = get_province_display_name(prov_key, scale);

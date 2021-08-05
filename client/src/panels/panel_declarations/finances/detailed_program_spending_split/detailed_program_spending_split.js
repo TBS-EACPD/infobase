@@ -36,14 +36,15 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 
 import { WrappedNivoBar, WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  highlightColor,
+  textColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { toggle_list } from "src/general_utils";
 import { infograph_href_template } from "src/infographic/infographic_link";
 
 import text from "./detailed_program_spending_split.yaml";
-
-const { highlightColor, textColor } = style_variables;
 
 const { std_years } = year_templates;
 

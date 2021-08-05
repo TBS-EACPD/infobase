@@ -8,7 +8,7 @@ import { Subject } from "src/models/subject";
 
 import { lang } from "src/core/injected_build_constants";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { highlightColor } from "src/common_style_variables/common-variables.module.scss";
 
 import { IconAttentionTriangle } from "src/icons/icons";
 
@@ -39,7 +39,7 @@ const { Gov } = Subject;
 export const HierarchyDeadElementIcon = () => (
   <IconAttentionTriangle
     title={text_maker("hierarchy_dead_element_icon_alt_text")}
-    color={style_variables.highlightColor}
+    color={highlightColor}
     inline={true}
     alternate_color={false}
   />

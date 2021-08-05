@@ -25,7 +25,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { textColor } from "src/common_style_variables/common-variables.module.scss";
 import { toggle_list } from "src/general_utils";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
@@ -514,7 +514,7 @@ class SummaryTabComponent extends React.Component {
             ticks: {
               text: {
                 fontSize: 12,
-                fill: style_variables.textColor,
+                fill: textColor,
                 fontWeight: "550",
               },
             },

@@ -13,11 +13,13 @@ import { year_templates } from "src/models/years";
 import { formats } from "src/core/format";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  primaryColor,
+  textColor,
+  backgroundColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import text from "./employee_totals.yaml";
-
-const { primaryColor, textColor, backgroundColor } = style_variables;
 
 const { months } = businessConstants;
 

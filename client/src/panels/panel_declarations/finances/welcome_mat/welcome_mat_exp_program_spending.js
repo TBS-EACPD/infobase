@@ -11,7 +11,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import { tertiaryColor } from "src/common_style_variables/common-variables.module.scss";
 
 const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
@@ -146,7 +146,7 @@ export const format_and_get_exp_program_spending = (type, subject) => {
             axis: "x",
             value: gap_year,
             lineStyle: {
-              stroke: style_variables.tertiaryColor,
+              stroke: tertiaryColor,
               strokeWidth: 2,
               strokeDasharray: "3, 3",
             },

@@ -1,13 +1,14 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import style_variables from "src/common_style_variables/common-variables.module.scss";
+import {
+  primaryColor,
+  secondaryColor,
+} from "src/common_style_variables/common-variables.module.scss";
 
 import { ComponentProps } from "src/types/util_types.d";
 
 import { LeafSpinner } from "./LeafSpinner";
-
-const { primaryColor, secondaryColor } = style_variables;
 
 export default {
   title: "LeafSpinner",

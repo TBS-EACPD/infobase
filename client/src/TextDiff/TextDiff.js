@@ -29,18 +29,16 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
 import { LegendList } from "src/charts/legends/index";
-import style_variables from "src/common_style_variables/common-variables.module.scss";
-
-import diff_text from "./TextDiff.yaml";
-import "./TextDiff.scss";
-
-const {
+import {
   primaryColor,
   warnDarkColor,
   successDarkColor,
   failDarkColor,
   infoDarkColor,
-} = style_variables;
+} from "src/common_style_variables/common-variables.module.scss";
+
+import diff_text from "./TextDiff.yaml";
+import "./TextDiff.scss";
 
 const { indicator_target_text } = indicator_text_functions;
 const { Dept, CRSO, Program } = Subject;
