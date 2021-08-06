@@ -45,44 +45,40 @@ export class WrappedNivoCircleProportion extends React.Component {
 
     const Circles = () => {
       // arbitrary parent values
-      const minX = 350;
-      const minY = 350;
-      const parent_radius = minX - 330;
-      const parent_cx = 175;
-      const parent_cy = 25;
+      const minDimension = 350;
+      const parent_radius = minDimension / 16;
+      const parent_cx = minDimension / 2;
+      const parent_cy = minDimension / 16;
 
       // child circle calculations
       const child_percent = child_value / parent_value;
 
       // precaution against smaller child_percent values
-      const true_child_radius = parent_radius * child_percent;
-      const default_child_radius = parent_radius * 0.1;
+      const true_child_radius = parent_radius * Math.sqrt(child_percent);
+      const default_child_radius = 2;
       const child_radius =
         true_child_radius > default_child_radius
           ? true_child_radius
           : default_child_radius;
 
+      // this y position will place the bottom of the inner circle just barely above the bottom of the outer circle.
+      // Easier to judge proptions than when it's centered, and the slight offset stops the the svg's edges from
+      // overlaping and looking jagged
+      const child_cy = parent_cy + parent_radius - child_radius - 1;
+
       return (
-        <svg
-          viewBox={
-            -parent_cx.toString() +
-            " " +
-            -parent_cy.toString() +
-            " " +
-            minX.toString() +
-            " " +
-            minY.toString()
-          }
-        >
+        <svg viewBox={"0 0 " + minDimension + " " + minDimension}>
           <circle
-            r={parent_radius.toString()}
+            cx={parent_cx}
+            cy={parent_cy}
+            r={parent_radius}
             fill={color_scale(parent_name)}
           />
           <circle
-            cy={(parent_radius - child_radius).toString()}
-            r={child_radius.toString()}
+            cx={parent_cx}
+            cy={child_cy}
+            r={child_radius}
             fill={color_scale(child_name)}
-            style={{ zIndex: 1 }}
           />
         </svg>
       );
@@ -125,14 +121,17 @@ export class WrappedNivoCircleProportion extends React.Component {
                 <span className="infobase-pie__legend-data">
                   <Format
                     type="percentage1"
-                    content={item.value / (parent_value + child_value)}
+                    content={
+                      item.value === parent_value
+                        ? item.value / parent_value
+                        : item.value / (parent_value + child_value)
+                    }
                   />
                 </span>
               }
             </div>
           )}
         />
-        {/* <Table /> */}
       </Fragment>
     );
 
