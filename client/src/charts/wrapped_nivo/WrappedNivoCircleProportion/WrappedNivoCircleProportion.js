@@ -45,17 +45,17 @@ export class WrappedNivoCircleProportion extends React.Component {
 
     const Circles = () => {
       // arbitrary parent values
-      const minDimension = 350;
-      const parent_radius = minDimension / 16;
+      const minDimension = 180;
+      const parent_radius = minDimension / 2;
       const parent_cx = minDimension / 2;
-      const parent_cy = minDimension / 16;
+      const parent_cy = minDimension / 2;
 
       // child circle calculations
       const child_percent = child_value / parent_value;
 
       // precaution against smaller child_percent values
       const true_child_radius = parent_radius * Math.sqrt(child_percent);
-      const default_child_radius = 2;
+      const default_child_radius = parent_radius * 0.005;
       const child_radius =
         true_child_radius > default_child_radius
           ? true_child_radius
@@ -67,20 +67,24 @@ export class WrappedNivoCircleProportion extends React.Component {
       const child_cy = parent_cy + parent_radius - child_radius - 1;
 
       return (
-        <svg viewBox={"0 0 " + minDimension + " " + minDimension}>
-          <circle
-            cx={parent_cx}
-            cy={parent_cy}
-            r={parent_radius}
-            fill={color_scale(parent_name)}
-          />
-          <circle
-            cx={parent_cx}
-            cy={child_cy}
-            r={child_radius}
-            fill={color_scale(child_name)}
-          />
-        </svg>
+        <div
+          style={{ height: minDimension, width: minDimension, margin: "auto" }}
+        >
+          <svg viewBox={"0 0 " + minDimension + " " + minDimension}>
+            <circle
+              cx={parent_cx}
+              cy={parent_cy}
+              r={parent_radius}
+              fill={color_scale(parent_name)}
+            />
+            <circle
+              cx={parent_cx}
+              cy={child_cy}
+              r={child_radius}
+              fill={color_scale(child_name)}
+            />
+          </svg>
+        </div>
       );
     };
 
