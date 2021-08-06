@@ -281,6 +281,41 @@ export default async function ({ models }) {
       },
       0
     );
+  const get_number_of_online_enabled_interaction_pts = (services) =>
+    _.reduce(
+      services,
+      (sum, service) => {
+        const number_of_online_enabled_interaction_pts = _.reduce(
+          digital_status_keys,
+          (interaction_pts_sum, key) =>
+            service[`${key}_status`]
+              ? interaction_pts_sum + 1
+              : interaction_pts_sum,
+          0
+        );
+        return sum + number_of_online_enabled_interaction_pts;
+      },
+      0
+    );
+  const get_total_interaction_pts = (services) =>
+    _.reduce(
+      services,
+      (sum, service) => {
+        const number_of_valid_interaction_pts = _.reduce(
+          digital_status_keys,
+          (interaction_pts_sum, key) =>
+            _.isNull(service[`${key}_status`])
+              ? interaction_pts_sum
+              : interaction_pts_sum + 1,
+          0
+        );
+        return sum + number_of_valid_interaction_pts;
+      },
+      0
+    );
+  const get_pct_of_online_client_interaction_pts = (services) =>
+    get_number_of_online_enabled_interaction_pts(services) /
+      get_total_interaction_pts(services) || 0;
 
   const get_service_channels_summary = (services) =>
     _.chain(services)
@@ -314,6 +349,8 @@ export default async function ({ models }) {
         number_of_services: service_rows.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(service_rows),
+        pct_of_online_client_interaction_pts:
+          get_pct_of_online_client_interaction_pts(service_rows),
         number_of_reporting_orgs: _.chain(service_rows)
           .groupBy("org_id")
           .size()
@@ -342,6 +379,8 @@ export default async function ({ models }) {
         number_of_services: services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),
+        pct_of_online_client_interaction_pts:
+          get_pct_of_online_client_interaction_pts(services),
         number_of_reporting_programs: _.chain(service_rows)
           .reduce(group_by_program_id, {})
           .size()
@@ -367,6 +406,8 @@ export default async function ({ models }) {
         number_of_services: services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),
+        pct_of_online_client_interaction_pts:
+          get_pct_of_online_client_interaction_pts(services),
       },
       service_channels_summary: get_service_channels_summary(services),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>

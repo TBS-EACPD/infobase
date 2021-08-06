@@ -2,6 +2,12 @@
 services_intro_title:
   en: Introduction to services
   fr: TODO
+subject_reports:
+  transform: [handlebars, markdown]
+  en: |
+    {{subject.name}} reports
+  fr: |
+    TODO
 number_value_of_services:
   transform: [handlebars, markdown]
   en: |
@@ -25,7 +31,6 @@ pct_of_online_end_services:
   fr: |
     TODO
 
-# TODO to change handling year
 services_intro_gov:
   transform: [handlebars, markdown]
   en: |
@@ -34,6 +39,17 @@ services_intro_gov:
     Information on services provided by the Government of Canada has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
     The GC Service Inventory currently contains service data from **{{number_of_reporting_orgs}}** departments and agencies, covering results from **{{services_year_2}}** to **{{services_year}}**
+    
+    Please provide us with any feedback on the service inventory by submitting a feedback form.
+  fr: TODO
+services_intro_dept:
+  transform: [handlebars, markdown]
+  en: |
+    **The Treasury Board of Canada Secretariat (TBS)** is committed to improving the transparency, accountability, and accessibility of new and evolving government digital technologies and {{gl_tt "services" "SERVICE"}}. 
+ 
+    Information on services provided by the Government of Canada has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
+        
+    The GC Service Inventory currently contains service data from **{{number_of_reporting_programs}}** programs, covering results from **{{services_year_2}}** to **{{services_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
