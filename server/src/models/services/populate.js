@@ -327,7 +327,7 @@ export default async function ({ models }) {
       .groupBy("year")
       .flatMap((reports, year) =>
         _.map(delivery_channels_keys, (key) => ({
-          id: `${key}_${year}_${reports[0].subject_id}`,
+          id: _.uniqueId(),
           subject_id: reports[0].subject_id,
           year,
           channel_id: key,
