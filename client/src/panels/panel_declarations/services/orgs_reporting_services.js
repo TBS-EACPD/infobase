@@ -47,7 +47,7 @@ const OrgsReportingServicesPanel = ({ subject }) => {
   const column_configs = {
     subject_id: {
       index: 0,
-      header: text_maker("org"),
+      header: is_gov ? text_maker("org") : text_maker("programs"),
       is_searchable: true,
       formatter: (subject_id) => (
         <a href={`#orgs/${subject.level}/${subject_id}/infograph/services`}>
@@ -113,7 +113,10 @@ export const declare_orgs_reporting_services_panel = () =>
     panel_key: "orgs_reporting_services",
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
-      title: text_maker("orgs_reporting_services_title"),
+      title:
+        level === "gov"
+          ? text_maker("orgs_reporting_services_title")
+          : text_maker("programs_reporting_services_title"),
       footnotes: false,
       render({ title, calculations, sources }) {
         const { subject } = calculations;
