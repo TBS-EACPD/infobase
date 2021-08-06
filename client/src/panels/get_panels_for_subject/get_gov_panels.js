@@ -26,6 +26,7 @@ import {
   declare_employee_gender_panel,
   declare_services_intro_panel,
   declare_services_digital_status_panel,
+  declare_orgs_reporting_services_panel,
   declare_services_channels_panel,
   declare_services_standards_panel,
   declare_results_intro_panel,
@@ -43,7 +44,6 @@ import {
   declare_in_year_stat_breakdown_panel,
   declare_gocographic_panel,
   declare_personnel_spend_panel,
-  declare_orgs_reporting_services_panel,
 } from "src/panels/panel_declarations/index";
 
 import { services_feature_flag } from "src/core/injected_build_constants";

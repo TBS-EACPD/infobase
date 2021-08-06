@@ -232,7 +232,11 @@ orgs_reporting_services_title:
   fr: TODO
 orgs_reporting_services_text:
   transform: [handlebars, markdown]
-  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of the **Government of Canada** reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
+  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of the **{{subject.name}}** reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
+  fr: TODO
+programs_reporting_services_text:
+  transform: [handlebars, markdown]
+  en: In **{{services_year}}, {{number_of_programs}}** programs of the **{{subject.name}}** reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** services
   fr: TODO
 number_of_services:
   en: Number of services
