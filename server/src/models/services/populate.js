@@ -245,25 +245,24 @@ export default async function ({ models }) {
       .takeRight(10)
       .value();
   };
-
-  const gov_orgs_reporting_services_summary = _.chain(service_rows)
-    .groupBy("org_id")
-    .map((services, org_id) => ({
-      id: org_id,
-      subject_id: org_id,
-      number_of_services: services.length,
-      total_volume: _.sumBy(services, ({ service_report }) =>
-        _.reduce(
-          delivery_channels_keys,
-          (sum, key) =>
-            sum + _.chain(service_report).sumBy(key).toNumber().value() || 0,
-          0
-        )
-      ),
-    }))
-    .sortBy("total_volume")
-    .reverse()
-    .value();
+  const get_orgs_reporting_services_summary = (grouped_services) =>
+    _.chain(grouped_services)
+      .map((services, org_id) => ({
+        id: org_id,
+        subject_id: org_id,
+        number_of_services: services.length,
+        total_volume: _.sumBy(services, ({ service_report }) =>
+          _.reduce(
+            delivery_channels_keys,
+            (sum, key) =>
+              sum + _.chain(service_report).sumBy(key).toNumber().value() || 0,
+            0
+          )
+        ),
+      }))
+      .sortBy("total_volume")
+      .reverse()
+      .value();
 
   const get_number_of_online_enabled_services = (services) =>
     _.reduce(
@@ -367,7 +366,9 @@ export default async function ({ models }) {
       service_standards_summary: [
         get_final_standards_summary(service_rows, "gov"),
       ],
-      orgs_reporting_services_summary: gov_orgs_reporting_services_summary,
+      orgs_reporting_services_summary: get_orgs_reporting_services_summary(
+        _.groupBy(service_rows, "org_id")
+      ),
     },
   ];
   const org_summary = _.chain(service_rows)
@@ -391,6 +392,9 @@ export default async function ({ models }) {
         populate_digital_summary_key(services, org_id, "dept", key)
       ),
       service_standards_summary: get_final_standards_summary(services, org_id),
+      orgs_reporting_services_summary: get_orgs_reporting_services_summary(
+        _.reduce(services, group_by_program_id, {})
+      ),
       top_services_application_vol_summary: get_top_application_vol_summary(
         services,
         org_id

@@ -148,6 +148,7 @@ export default function (model_singleton) {
   });
   const OrgServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
+    orgs_reporting_services_summary: [OrgsReportingServicesSummarySchema],
     top_services_application_vol_summary: [
       TopServicesApplicationVolSummarySchema,
     ],

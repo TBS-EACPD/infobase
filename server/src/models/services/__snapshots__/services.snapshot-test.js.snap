@@ -7,7 +7,44 @@ Object {
       "org": Object {
         "service_summary": Object {
           "id": "326",
-          "orgs_reporting_services_summary": null,
+          "orgs_reporting_services_summary": Array [
+            Object {
+              "id": "TBC-ISS02",
+              "number_of_services": 1,
+              "subject_id": "TBC-ISS02",
+              "total_volume": 4748,
+            },
+            Object {
+              "id": "TBC-ISS07",
+              "number_of_services": 2,
+              "subject_id": "TBC-ISS07",
+              "total_volume": 3381,
+            },
+            Object {
+              "id": "TBC-BXB01",
+              "number_of_services": 1,
+              "subject_id": "TBC-BXB01",
+              "total_volume": 2014,
+            },
+            Object {
+              "id": "TBC-ISS04",
+              "number_of_services": 2,
+              "subject_id": "TBC-ISS04",
+              "total_volume": 433,
+            },
+            Object {
+              "id": "TBC-BXC03",
+              "number_of_services": 1,
+              "subject_id": "TBC-BXC03",
+              "total_volume": 420,
+            },
+            Object {
+              "id": "TBC-BXC01",
+              "number_of_services": 1,
+              "subject_id": "TBC-BXC01",
+              "total_volume": 13,
+            },
+          ],
           "service_channels_summary": Array [
             Object {
               "channel_id": "other_application_count",

@@ -17,12 +17,12 @@ import { Subject } from "src/models/subject";
 
 import text from "./services.yaml";
 
-const { Gov, Dept } = Subject;
+const { Dept, Program } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const OrgsReportingServicesPanel = () => {
+const OrgsReportingServicesPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
-    subject: Gov,
+    subject,
     query_fragment: `
     service_general_stats {
       number_of_services
@@ -41,18 +41,20 @@ const OrgsReportingServicesPanel = () => {
     orgs_reporting_services_summary,
     service_general_stats: { number_of_services },
   } = data;
+  const is_gov = subject.level === "gov";
+  const correct_subject = is_gov ? Dept : Program;
 
   const column_configs = {
     subject_id: {
       index: 0,
       header: text_maker("org"),
       is_searchable: true,
-      formatter: (org_id) => (
-        <a href={`#orgs/dept/${org_id}/infograph/services`}>
-          {Dept.lookup(org_id).name}
+      formatter: (subject_id) => (
+        <a href={`#orgs/${subject.level}/${subject_id}/infograph/services`}>
+          {correct_subject.lookup(subject_id).name}
         </a>
       ),
-      plain_formatter: (org_id) => Dept.lookup(org_id).name,
+      plain_formatter: (subject_id) => correct_subject.lookup(subject_id).name,
     },
     number_of_services: {
       index: 1,
@@ -68,11 +70,12 @@ const OrgsReportingServicesPanel = () => {
   };
   return (
     <HeightClippedGraph clipHeight={600}>
-      {
+      {is_gov ? (
         <TM
           className="medium-panel-text"
           k="orgs_reporting_services_text"
           args={{
+            subject,
             number_of_depts: orgs_reporting_services_summary.length,
             number_of_applications: _.sumBy(
               orgs_reporting_services_summary,
@@ -81,7 +84,21 @@ const OrgsReportingServicesPanel = () => {
             number_of_services,
           }}
         />
-      }
+      ) : (
+        <TM
+          className="medium-panel-text"
+          k="programs_reporting_services_text"
+          args={{
+            subject,
+            number_of_programs: orgs_reporting_services_summary.length,
+            number_of_applications: _.sumBy(
+              orgs_reporting_services_summary,
+              "total_volume"
+            ),
+            number_of_services,
+          }}
+        />
+      )}
       <DisplayTable
         unsorted_initial={true}
         data={orgs_reporting_services_summary}
@@ -94,14 +111,15 @@ const OrgsReportingServicesPanel = () => {
 export const declare_orgs_reporting_services_panel = () =>
   declare_panel({
     panel_key: "orgs_reporting_services",
-    levels: ["gov"],
+    levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("orgs_reporting_services_title"),
       footnotes: false,
       render({ title, calculations, sources }) {
+        const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <OrgsReportingServicesPanel />
+            <OrgsReportingServicesPanel subject={subject} />
           </InfographicPanel>
         );
       },
