@@ -32,6 +32,7 @@ const schema = `
     id: String
     number_of_services: Float
     number_of_online_enabled_services: Float
+    pct_of_online_client_interaction_pts: Float
     number_of_reporting_orgs: Float
     number_of_reporting_programs: Float
   }
