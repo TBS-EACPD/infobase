@@ -89,8 +89,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     }))
     .maxBy("max_vol_channel_value")
     .value();
-  console.log(max_vol_service_name);
-  console.log(max_vol_channel_name);
+
   const services_channel_nivo_data = _.map(delivery_channels_keys, (key) => ({
     id: text_maker(key),
     ..._.chain(data)

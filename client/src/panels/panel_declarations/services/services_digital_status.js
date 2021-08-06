@@ -72,8 +72,8 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     [not_applicable]: row.not_applicable,
   }));
   // SI_TODO waiting to remove until program text
-  const most_digital_component = _.maxBy(processed_data, can_online);
-  const least_digital_component = _.minBy(processed_data, can_online);
+  // const most_digital_component = _.maxBy(processed_data, can_online);
+  // const least_digital_component = _.minBy(processed_data, can_online);
   const nivo_lang_props = {
     en: {
       margin: {
