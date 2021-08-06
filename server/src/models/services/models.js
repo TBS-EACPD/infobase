@@ -94,6 +94,7 @@ export default function (model_singleton) {
     id: pkey_type(),
     number_of_services: { type: Number },
     number_of_online_enabled_services: { type: Number },
+    pct_of_online_client_interaction_pts: { type: Number },
     number_of_reporting_orgs: { type: Number }, // only for gov
     number_of_reporting_programs: { type: Number }, // only for gov, org
   });
