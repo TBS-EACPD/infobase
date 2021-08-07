@@ -50,7 +50,11 @@ const OrgsReportingServicesPanel = ({ subject }) => {
       header: is_gov ? text_maker("org") : text_maker("programs"),
       is_searchable: true,
       formatter: (subject_id) => (
-        <a href={`#orgs/${subject.level}/${subject_id}/infograph/services`}>
+        <a
+          href={`#orgs/${
+            is_gov ? "dept" : "program"
+          }/${subject_id}/infograph/services`}
+        >
           {correct_subject.lookup(subject_id).name}
         </a>
       ),
