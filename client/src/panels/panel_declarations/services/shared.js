@@ -18,13 +18,13 @@ const digital_status_keys = [
   "authentication",
   "account_reg_digital",
 ];
-const delivery_channels_keys = [
+const application_channels_keys = [
   "other_application_count",
   "live_application_count",
   "mail_application_count",
   "online_application_count",
 ];
-const delivery_channels_query_fragment = `
+const application_channels_query_fragment = `
 service_report {
   online_inquiry_count
   online_application_count
@@ -67,8 +67,8 @@ const available_icons = {
 
 export {
   digital_status_keys,
-  delivery_channels_keys,
-  delivery_channels_query_fragment,
+  application_channels_keys,
+  application_channels_query_fragment,
   available_keys,
   available_icons,
 };

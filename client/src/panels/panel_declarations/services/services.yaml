@@ -150,10 +150,10 @@ service_name:
   en: Service name
   fr: Nom du service
 services_channels_title:
-  en: Delivery channels of services
+  en: Application channels of services  #SI_TODO Delivery to Application
   fr: Modes de prestation des services
 single_service_channels_title:
-  en: Delivery channels of this service
+  en: Application channels of this service #SI_TODO Delivery to Application
   fr: Modes de prestation de ce service
 # SI_TODO need to remove "enquiries" in fr
 services_channels_text:
@@ -163,12 +163,12 @@ services_channels_text:
 application_channels_by_services_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications.
+    Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
     
     In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
-  fr: |
+  fr: | #SI_TODO Delivery to Application
     Modes de prestation utilisés par les services pout traiter les demandes et les renseignements.
 
     À **{{subject.name}}**, le plus grand nombre de demandes a ètès gènèrè par les mode "**{{max_vol_channel_name}}**" avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
@@ -177,7 +177,7 @@ application_channels_by_services_text:
 application_channels_by_services_program_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Delivery channels" "CHANNELS"}} that {{gl_tt "services" "SERVICE"}} use for handling applications.
+    Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
 
     Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
     
@@ -187,10 +187,10 @@ application_channels_by_services_program_text:
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Delivery channels" "CHANNELS"}} that this {{gl_tt "service" "SERVICE"}} uses for handling applications.
+    Application channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications.
     
-    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest delivery {{gl_tt "channel" "CHANNELS"}} volume for this service.{{/if}}
-  fr: |
+    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest Application channels volume for this service.{{/if}}
+  fr: | #SI_TODO Delivery to Application
     Les modes de prestationn utilisés par ce service pout traiter les demandes et les renseignements.
     
     {{#if max_channel_key}}Il y a eu **{{fmt_big_int max_value}} {{max_channel_key}}**, soit le plus grand nombre pour ce service.{{/if}}

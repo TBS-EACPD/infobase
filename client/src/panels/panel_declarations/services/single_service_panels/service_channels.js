@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 import text from "src/panels/panel_declarations/services/services.yaml";
-import { delivery_channels_keys } from "src/panels/panel_declarations/services/shared";
+import { application_channels_keys } from "src/panels/panel_declarations/services/shared";
 
 import { create_text_maker_component, Panel } from "src/components/index";
 
@@ -18,7 +18,7 @@ export class ServiceChannels extends React.Component {
     const { service } = this.props;
     const colors = infobase_colors();
     const { max_channel_key, max_value } = _.reduce(
-      delivery_channels_keys,
+      application_channels_keys,
       (max_data, key) => {
         const key_count = `${key}_count`;
         const max_object_for_key = _.maxBy(service.service_report, key_count);
@@ -34,7 +34,7 @@ export class ServiceChannels extends React.Component {
       },
       { max_channel_key: "", max_value: 0 }
     );
-    const filtered_keys = _.filter(delivery_channels_keys, (key) =>
+    const filtered_keys = _.filter(application_channels_keys, (key) =>
       _.reduce(
         service.service_report,
         (previous_is_not_null_or_zero, report) =>
@@ -74,7 +74,7 @@ export class ServiceChannels extends React.Component {
         <WrappedNivoBar
           data={data}
           indexBy="label"
-          keys={_.map(delivery_channels_keys, (key) => text_maker(key))}
+          keys={_.map(application_channels_keys, (key) => text_maker(key))}
           is_money={false}
           colors={(d) => colors(d.id)}
           margin={{
