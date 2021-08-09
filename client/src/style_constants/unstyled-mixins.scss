@@ -1,0 +1,27 @@
+@mixin unstyled-button {
+  text-align: left;
+  border: none;
+  background-color: inherit;
+  outline: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+@mixin unstyled-list {
+  padding-left: 0;
+  list-style: none;
+  & > li {
+    padding-left: 0;
+    list-style: none;
+  }
+}
+@mixin unstyled-link {
+  &,
+  &:link,
+  &:visited,
+  &:hover,
+  &:focus {
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
