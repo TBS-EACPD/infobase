@@ -7,12 +7,8 @@ const _ = require("lodash");
 
 const loader_name = path.basename(__filename); // eslint-disable-line no-undef
 
-/* 
-  TODO prettier will ensure most top level sass variable definitions have no trailing white space BUT there are
-  some exemptions (e.g. variables defined inside sass control flow blocks). That's a gotcha, but probably not worth
-  accounting for right now. Reasonable for the convention within .interop.scss modules to be avoiding dynamic top level variables,
-  as that will make reasoning about common style variables more complex
-*/
+// as documented in /client/docs/style-sheets/interop-sass-modules.md, this intentionally only matches on and exports "top level" variables,
+// intenionally ignoring any sass "global" (module level) variables from inside of sass branch syntax blocks
 const sass_variable_pattern = /^\$(.*?):.*/;
 
 const get_top_level_variable_names = (content) =>
