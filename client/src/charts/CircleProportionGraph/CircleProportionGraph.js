@@ -20,13 +20,13 @@ import {
   maxMediumDevice,
 } from "src/style_constants/index";
 
-import text from "./WrappedNivoCircleProportion.yaml";
+import text from "./CircleProportionGraph.yaml";
 
-import "./WrappedNivoCircleProportion.scss";
+import "./CircleProportionGraph.scss";
 
 const { text_maker, TM } = create_text_maker_component_with_nivo_common(text);
 
-export class WrappedNivoCircleProportion extends React.Component {
+export class CircleProportionGraph extends React.Component {
   render() {
     const {
       is_money,
@@ -166,7 +166,7 @@ export class WrappedNivoCircleProportion extends React.Component {
     return <InteractiveGraph graph={graph} table={table} />;
   }
 }
-WrappedNivoCircleProportion.defaultProps = {
+CircleProportionGraph.defaultProps = {
   ...general_default_props,
   margin: { top: 15, right: 0, bottom: 15, left: 0 },
 };

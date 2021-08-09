@@ -10,7 +10,7 @@ import { Subject } from "src/models/subject";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index";
+import { CircleProportionGraph } from "src/charts/wrapped_nivo/index";
 
 import { TM, text_maker } from "./vote_stat_text_provider";
 const { Gov } = Subject;
@@ -61,7 +61,7 @@ export const declare_estimates_in_perspective_panel = () =>
             </Col>
             {!is_a11y_mode && (
               <Col isGraph size={7}>
-                <WrappedNivoCircleProportion
+                <CircleProportionGraph
                   height={250}
                   child_value={dept_tabled_est_in_year}
                   child_name={text_maker("dept_estimates", { subject })}
