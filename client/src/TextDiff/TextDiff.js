@@ -347,7 +347,7 @@ const indicator_report = (processed_indicator) => (
   </div>
 );
 
-// const q_a_keys = ["q1", "q2", "q3", "q4"];
+// const q_a_keys = [];
 
 export default class TextDiffApp extends React.Component {
   constructor(props) {

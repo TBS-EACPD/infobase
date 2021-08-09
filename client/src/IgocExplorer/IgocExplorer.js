@@ -130,7 +130,7 @@ const IgocExplorer = ({ match }) => {
     grouping = "portfolio";
   }
 
-  // const q_a_keys = ["what_is_portfolio", "applied_vs_legal_title"];
+  // const q_a_keys = [];
 
   return (
     <StandardRouteContainer
