@@ -90,7 +90,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       test: /\.module\.scss$/,
-      use: [
+      use: _.compact([
         {
           loader: "css-modules-typescript-loader",
           options: {
@@ -109,7 +109,10 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           },
         },
         { loader: "sass-loader" },
-      ],
+        {
+          loader: "./build_code/loaders/add-exports-to-sass-module-loader.js",
+        },
+      ]),
     },
     {
       test: /\.csv$/,
