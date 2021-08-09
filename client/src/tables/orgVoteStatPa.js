@@ -71,6 +71,7 @@ export default {
         hidden: true,
         nick: "dept",
         header: "",
+        can_group_by: true,
       },
       {
         type: "int",
@@ -97,6 +98,8 @@ export default {
           en: "Description",
           fr: "Description",
         },
+        can_group_by: true,
+        can_group_vs: true,
       },
     ]);
     _.each(std_years, (header, i) => {
@@ -134,6 +137,14 @@ export default {
     });
   },
 
+  group_by_vs_func: function (dimension, row = undefined) {
+    return dimension !== "vote_vs_stat"
+      ? undefined
+      : !row
+      ? true
+      : row.votestattype === 999;
+  },
+
   queries: {
     exp_auth_by_year: function (year, format) {
       format = format === undefined ? false : true;
@@ -149,8 +160,6 @@ export default {
       return this.vote_stat_query(stat_label, cut_off);
     },
   },
-
-  dimensions: ["dept", "vote_vs_stat", "desc"],
 
   sort: function (mapped_rows, lang) {
     var grps = _.groupBy(mapped_rows, function (row) {

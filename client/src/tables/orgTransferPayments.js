@@ -39,6 +39,7 @@ export default {
         hidden: true,
         nick: "dept",
         header: "",
+        can_group_by: true,
       },
       {
         type: "str",
@@ -54,6 +55,8 @@ export default {
           en: "Type",
           fr: "Type",
         },
+        can_group_by: true,
+        can_group_vs: true,
       },
       {
         type: "wide-str",
@@ -63,6 +66,7 @@ export default {
           en: "Name",
           fr: "Nom",
         },
+        can_group_by: true,
       },
     ]);
     _.each(std_years, (header, i) => {
@@ -95,7 +99,13 @@ export default {
     });
   },
 
-  dimensions: ["dept", "type", "tp", "vote_vs_stat"],
+  group_by_vs_func: function (dimension, row = undefined) {
+    return dimension !== "vote_vs_stat"
+      ? undefined
+      : !row
+      ? true
+      : _.includes(row.tp, "(S) ");
+  },
 
   queries: {
     types: function () {

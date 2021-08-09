@@ -195,6 +195,8 @@ class RPB extends React.Component {
 
     const dimensions = this.state.table && table.dimensions;
 
+    const group_by_vs_func = this.state.table && table.group_by_vs_func;
+
     const table_data =
       this.state.table &&
       (() => {
@@ -223,6 +225,8 @@ class RPB extends React.Component {
       return [dimension, dim_data[0][dimension]];
     }
 
+    const group_by_vs = !!group_by_vs_func(dimension);
+
     const flat_data = !_.isEmpty(table_data)
       ? dimension === "all"
         ? _.chain(table_data)
@@ -231,12 +235,10 @@ class RPB extends React.Component {
             .value()
         : _.chain(table_data)
             .groupBy(
-              dimension === "vote_vs_stat"
-                ? table_name === "orgTransferPayments"
-                  ? (row) => !_.includes(row.tp, "(S) ")
-                  : (row) => row.votestattype !== 999
+              group_by_vs
+                ? (row) => group_by_vs_func(dimension, row)
                 : dimension
-            ) // statutory items have votestattype 999, voted items have other number
+            )
             .map((dim_data) => {
               return _.chain(all_data_columns)
                 .filter((col) => col.type !== "percentage1")

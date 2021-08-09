@@ -30,6 +30,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -46,6 +47,7 @@ export default {
         en: "Program",
         fr: "Program",
       },
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -55,6 +57,7 @@ export default {
         en: "Voted / Stat",
         fr: "Crédit / législatif",
       },
+      can_group_by: true,
     });
     std_years.forEach((yr) => {
       this.add_col({
@@ -96,5 +99,4 @@ export default {
     }
     this.programs.get(program_obj).push(mapped_row);
   },
-  dimensions: ["dept", "prgm", "vote_stat"],
 };
