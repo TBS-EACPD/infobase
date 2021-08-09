@@ -210,22 +210,6 @@ applications_count:
   en: applications
   fr: demandes
 
-# Top 10 volume
-top10_services_volume_title:
-  transform: [handlebars]
-  en: Top services with highest application volume
-  fr: Les services les plus demandés
-service_name:
-  en: Service name
-  fr: Nom du service
-top10_services_volume_text:
-  transform: [handlebars, markdown]
-  en: |
-    Below are the top {{num_of_services}} services with the highest application volume. **{{highest_service_name}}** had the most traffic with **{{fmt_big_int highest_service_value}}** applications.
-  # TODO remove Telephone enquiries for Fr
-  fr: |
-    Vous trouverez ci-dessous les {{num_of_services}} services ayant le volume de demandes et d'appels téléphoniques le plus élevé. **{{highest_service_name}}** a connu le plus de trafic avec **{{fmt_big_int highest_service_value}}** demandes et appels téléphoniques.
-
 # Orgs reporting services
 orgs_reporting_services_title:
   en: Organizations reporting services

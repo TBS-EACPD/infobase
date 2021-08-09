@@ -121,13 +121,6 @@ export default function (model_singleton) {
     standards_count: { type: Number },
     met_standards_count: { type: Number },
   });
-  const TopServicesApplicationVolSummarySchema = mongoose.Schema({
-    id: sparse_pkey_type(),
-    service_id: parent_fkey_type(),
-    subject_id: parent_fkey_type(),
-    ...bilingual_str("name"),
-    value: { type: Number },
-  });
   const OrgsReportingServicesSummarySchema = mongoose.Schema({
     id: pkey_type(),
     subject_id: parent_fkey_type(),
@@ -149,15 +142,9 @@ export default function (model_singleton) {
   const OrgServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
     orgs_reporting_services_summary: [OrgsReportingServicesSummarySchema],
-    top_services_application_vol_summary: [
-      TopServicesApplicationVolSummarySchema,
-    ],
   });
   const ProgramServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
-    top_services_application_vol_summary: [
-      TopServicesApplicationVolSummarySchema,
-    ],
   });
 
   model_singleton.define_model("ServiceReport", ServiceReportSchema);
