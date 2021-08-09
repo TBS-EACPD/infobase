@@ -44,7 +44,8 @@ export default function (model_singleton) {
   });
 
   const EmployeeDataGovTotalsSchema = mongoose.Schema({
-    dimension: pkey_type(),
+    id: pkey_type(),
+    dimension: parent_fkey_type(),
     data: [
       {
         by_year: [
@@ -62,6 +63,7 @@ export default function (model_singleton) {
       {
         by_year: [
           {
+            id: pkey_type(),
             year: fyear_type(),
             value: number_type,
           },
@@ -116,8 +118,8 @@ export default function (model_singleton) {
     EmployeeExLvlTotals,
     EmployeeFolTotals,
     EmployeeGenderTotals,
-    EmployeeRegionTotals,  
+    EmployeeRegionTotals,
     EmployeeTypeTotals,
-    EmployeeGovAvgs  ,
+    EmployeeGovAvgs,
   } = model_singleton.models;
 }

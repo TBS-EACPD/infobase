@@ -63,6 +63,7 @@ export default async function ({ models }) {
     return _.chain(raw_data)
       .groupBy("dimension")
       .map((dimension_arr, dimension_group) => ({
+        id: dimension_group,
         dimension: dimension_group,
         data: {
           by_year: _.chain(years)
@@ -140,6 +141,7 @@ export default async function ({ models }) {
       .omit(["dept_code", "dimension"])
       .map((value, key) => ({
         by_year: {
+          id: [key][0],
           year: [key][0],
           value: value,
         },
