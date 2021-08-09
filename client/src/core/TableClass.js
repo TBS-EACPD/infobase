@@ -211,12 +211,8 @@ export class Table {
     this.get_dimensions();
   }
   get_dimensions() {
-    const cols_have_children = !_.chain(this._cols)
-      .filter((col) => _.has(col, "children"))
-      .isEmpty()
-      .value();
     const columns = _.chain(this._cols)
-      .map((col) => (cols_have_children ? col.children : col))
+      .map((col) => (_.has(col, "children") ? col.children : col))
       .flatten()
       .value();
     const can_group_vs = _.some(columns, (col) => _.has(col, "can_group_vs"));
@@ -226,6 +222,8 @@ export class Table {
       .concat(can_group_vs ? "vote_vs_stat" : "")
       .compact()
       .value();
+
+    this.dimensions.unshift("all");
   }
   get links() {
     return this.link
@@ -428,7 +426,6 @@ export class Table {
     });
 
     this.q = query_adapter;
-    this.dimensions = _.concat("all", this.dimensions);
   }
   //TODO: optimize and clarify this
   get_row_func() {
