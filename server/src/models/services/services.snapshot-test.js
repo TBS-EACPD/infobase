@@ -106,13 +106,6 @@ service_summary{
     standards_count
     met_standards_count
   }
-  top_services_application_vol_summary{
-    id
-    service_id
-    subject_id
-    name
-    value
-  }
   orgs_reporting_services_summary{
     id
     subject_id
