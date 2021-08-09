@@ -90,6 +90,5 @@ export {
   declare_applications_channels_by_services_panel,
   declare_services_digital_status_panel,
   declare_services_standards_panel,
-  declare_top10_services_application_volume_panel,
   declare_orgs_reporting_services_panel,
 } from "./services/index";
