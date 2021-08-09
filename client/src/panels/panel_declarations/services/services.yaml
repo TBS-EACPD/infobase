@@ -146,6 +146,9 @@ client_interaction_point:
   fr: Points d'interaction liés aux clients
 
 # Channels
+service_name:
+  en: Service name
+  fr: Nom du service
 services_channels_title:
   en: Delivery channels of services
   fr: Modes de prestation des services
