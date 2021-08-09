@@ -4,7 +4,6 @@ export { declare_services_channels_panel } from "./services_channels";
 export { declare_applications_channels_by_services_panel } from "./applications_channels_by_services";
 export { declare_services_digital_status_panel } from "./services_digital_status";
 export { declare_services_standards_panel } from "./services_standards";
-export { declare_top10_services_application_volume_panel } from "./top10_services_application_volume";
 export { declare_orgs_reporting_services_panel } from "./orgs_reporting_services";
 export { ServiceOverview } from "./single_service_panels/service_overview";
 export { ServiceChannels } from "./single_service_panels/service_channels";
