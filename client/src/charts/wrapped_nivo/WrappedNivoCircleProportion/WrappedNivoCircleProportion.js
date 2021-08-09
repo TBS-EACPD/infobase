@@ -70,7 +70,7 @@ export class WrappedNivoCircleProportion extends React.Component {
         <div
           style={{ height: minDimension, width: minDimension, margin: "auto" }}
         >
-          <svg viewBox={"0 0 " + minDimension + " " + minDimension}>
+          <svg viewBox={`0 0 ${minDimension} ${minDimension}`}>
             <circle
               cx={parent_cx}
               cy={parent_cy}
