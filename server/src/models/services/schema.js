@@ -25,7 +25,6 @@ const schema = `
     service_channels_summary: [ServiceChannelsSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
-    top_services_application_vol_summary: [TopServicesApplicationVolSummary]
     orgs_reporting_services_summary: [OrgsReportingServicesSummary]
   }
   type ServiceGeneralStats{
@@ -58,13 +57,6 @@ const schema = `
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float
-  }
-  type TopServicesApplicationVolSummary{
-    id: String
-    service_id: String
-    subject_id: String
-    name: String
-    value: Float
   }
   type OrgsReportingServicesSummary{
     id: String
@@ -184,9 +176,6 @@ export default function ({ models, loaders }) {
       service_summary: ({ program_id }) =>
         program_service_summary_loader.load(program_id),
       has_services: ({ program_id }) => program_has_services(program_id),
-    },
-    TopServicesApplicationVolSummary: {
-      name: bilingual_field("name"),
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),

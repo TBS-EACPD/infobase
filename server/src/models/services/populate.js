@@ -224,27 +224,6 @@ export default async function ({ models }) {
       met_standards_count: _.countBy(processed_standards, "is_target_met").true,
     };
   };
-
-  const get_top_application_vol_summary = (services, subject_id) => {
-    return _.chain(services)
-      .flatMap(({ id, name_en, name_fr, service_report }) => ({
-        id: `${subject_id}_${id}`,
-        service_id: id,
-        subject_id,
-        name_en,
-        name_fr,
-        value: _.reduce(
-          delivery_channels_keys,
-          (sum, key) =>
-            sum + (_.chain(service_report).sumBy(key).toNumber().value() || 0),
-          0
-        ),
-      }))
-      .filter("value")
-      .sortBy("value")
-      .takeRight(10)
-      .value();
-  };
   const get_orgs_reporting_services_summary = (grouped_services) =>
     _.chain(grouped_services)
       .map((services, org_id) => ({
@@ -395,10 +374,6 @@ export default async function ({ models }) {
       orgs_reporting_services_summary: get_orgs_reporting_services_summary(
         _.reduce(services, group_by_program_id, {})
       ),
-      top_services_application_vol_summary: get_top_application_vol_summary(
-        services,
-        org_id
-      ),
     }))
     .value();
   const program_summary = _.chain(service_rows)
@@ -418,10 +393,6 @@ export default async function ({ models }) {
         populate_digital_summary_key(services, program_id, "program", key)
       ),
       service_standards_summary: get_final_standards_summary(
-        services,
-        program_id
-      ),
-      top_services_application_vol_summary: get_top_application_vol_summary(
         services,
         program_id
       ),
