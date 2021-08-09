@@ -14,7 +14,6 @@ import {
   textLightColor,
 } from "src/style_constants/common-variables.module.scss";
 
-
 import text from "./WriteToClipboard.yaml";
 
 const text_maker = create_text_maker(text);

@@ -21,7 +21,6 @@ import {
   tertiaryColor,
 } from "src/style_constants/common-variables.module.scss";
 
-
 import { CanadaD3Component } from "./CanadaD3Component";
 
 import text from "./canada.yaml";

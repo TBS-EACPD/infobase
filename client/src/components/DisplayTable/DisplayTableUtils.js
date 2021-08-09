@@ -10,7 +10,6 @@ import { is_IE } from "src/core/feature_detection";
 import { IconCopy, IconDownload } from "src/icons/icons";
 import { backgroundColor } from "src/style_constants/common-variables.module.scss";
 
-
 import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";
 

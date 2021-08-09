@@ -13,7 +13,6 @@ import {
 } from "src/email_backend_utils";
 import { textRed } from "src/style_constants/common-variables.module.scss";
 
-
 import { CheckBox } from "./CheckBox/CheckBox";
 import { LeafSpinner } from "./LeafSpinner/LeafSpinner";
 import { create_text_maker_component } from "./misc_util_components";

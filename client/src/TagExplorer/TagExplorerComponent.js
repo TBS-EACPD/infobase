@@ -15,7 +15,6 @@ import { run_template } from "src/models/text";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { get_col_defs } from "src/explorer_common/resource_explorer_common";

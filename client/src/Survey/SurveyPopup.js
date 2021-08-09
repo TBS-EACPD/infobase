@@ -15,7 +15,6 @@ import { is_dev, is_dev_link } from "src/core/injected_build_constants";
 import { IconFeedback } from "src/icons/icons";
 import { tertiaryColor } from "src/style_constants/common-variables.module.scss";
 
-
 import text from "./SurveyPopup.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);

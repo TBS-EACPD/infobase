@@ -10,7 +10,6 @@ import { trivial_text_maker } from "src/models/text";
 import { IconChevron } from "src/icons/icons";
 import { textLightColor } from "src/style_constants/common-variables.module.scss";
 
-
 import "./Accordions.scss";
 
 const get_accordion_label = (isExpanded: boolean) =>

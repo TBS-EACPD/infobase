@@ -20,7 +20,6 @@ import {
   backgroundColor,
 } from "src/style_constants/common-variables.module.scss";
 
-
 import text from "./WrappedNivoLine.yaml";
 
 const { text_maker } = create_text_maker_component_with_nivo_common(text);

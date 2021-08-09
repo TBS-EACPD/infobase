@@ -10,7 +10,6 @@ import {
   tertiaryColor,
 } from "src/style_constants/common-variables.module.scss";
 
-
 import "./VisibilityControl.scss";
 
 export class VisibilityControl extends React.Component {
