@@ -25,7 +25,7 @@ import {
   textColor,
   minMediumDevice,
   maxMediumDevice,
-} from "src/style_constants/common-variables.module.scss";
+} from "src/style_constants/index";
 
 import text from "./WrappedNivoCircleProportion.yaml";
 import "./WrappedNivoCircleProportion.scss";

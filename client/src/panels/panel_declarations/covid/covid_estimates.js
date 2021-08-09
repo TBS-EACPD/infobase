@@ -30,7 +30,7 @@ import { infograph_options_href_template } from "src/infographic/infographic_lin
 
 import { get_source_links } from "src/metadata/data_sources";
 import { smart_sort_func } from "src/sort_utils";
-import { textColor } from "src/style_constants/common-variables.module.scss";
+import { textColor } from "src/style_constants/index";
 
 import {
   AboveTabFootnoteList,

@@ -1,10 +1,7 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import {
-  primaryColor,
-  secondaryColor,
-} from "src/style_constants/common-variables.module.scss";
+import { primaryColor, secondaryColor } from "src/style_constants/index";
 
 import { ComponentProps } from "src/types/util_types.d";
 

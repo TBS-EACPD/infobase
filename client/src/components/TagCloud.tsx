@@ -5,7 +5,7 @@ import React from "react";
 import { GlossaryEntry } from "src/models/glossary";
 
 import { IconCheckmark } from "src/icons/icons";
-import { backgroundColor } from "src/style_constants/common-variables.module.scss";
+import { backgroundColor } from "src/style_constants/index";
 
 import { GlossaryIcon } from "./glossary_components";
 

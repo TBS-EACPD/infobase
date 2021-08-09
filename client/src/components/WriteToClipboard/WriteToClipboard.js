@@ -9,10 +9,7 @@ import { create_text_maker } from "src/models/text";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconCopy } from "src/icons/icons";
-import {
-  tertiaryColor,
-  textLightColor,
-} from "src/style_constants/common-variables.module.scss";
+import { tertiaryColor, textLightColor } from "src/style_constants/index";
 
 import text from "./WriteToClipboard.yaml";
 

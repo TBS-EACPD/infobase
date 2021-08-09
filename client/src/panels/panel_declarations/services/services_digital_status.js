@@ -21,7 +21,7 @@ import {
   secondaryColor,
   highlightOrangeColor,
   separatorColor,
-} from "src/style_constants/common-variables.module.scss";
+} from "src/style_constants/index";
 
 import text from "./services.yaml";
 

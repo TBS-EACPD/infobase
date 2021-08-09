@@ -13,7 +13,7 @@ import { lang } from "src/core/injected_build_constants";
 import { IconCopyLink } from "src/icons/icons";
 
 import { sources as all_sources } from "src/metadata/data_sources";
-import { secondaryColor } from "src/style_constants/common-variables.module.scss";
+import { secondaryColor } from "src/style_constants/index";
 
 import { TextMaker } from "./rpb_text_provider";
 

@@ -10,7 +10,7 @@ import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconPin, IconUnpin } from "src/icons/icons";
-import { backgroundColor } from "src/style_constants/common-variables.module.scss";
+import { backgroundColor } from "src/style_constants/index";
 
 import text from "./PinnedContent.yaml";
 

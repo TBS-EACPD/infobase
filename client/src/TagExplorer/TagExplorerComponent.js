@@ -19,10 +19,7 @@ import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { get_col_defs } from "src/explorer_common/resource_explorer_common";
 import { infograph_href_template } from "src/link_utils";
-import {
-  tertiaryColor,
-  primaryColor,
-} from "src/style_constants/common-variables.module.scss";
+import { tertiaryColor, primaryColor } from "src/style_constants/index";
 
 import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs";
 import {

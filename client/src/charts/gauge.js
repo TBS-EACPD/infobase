@@ -2,7 +2,7 @@ import React from "react";
 
 import { Format } from "src/components/index";
 
-import { successDarkColor } from "src/style_constants/common-variables.module.scss";
+import { successDarkColor } from "src/style_constants/index";
 
 import "./gauge.scss";
 

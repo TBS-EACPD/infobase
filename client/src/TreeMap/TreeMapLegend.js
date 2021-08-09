@@ -5,7 +5,7 @@ import { create_text_maker } from "src/models/text";
 
 import { formats } from "src/core/format";
 
-import { backgroundColor } from "src/style_constants/common-variables.module.scss";
+import { backgroundColor } from "src/style_constants/index";
 
 import treemap_text from "./TreeMap.yaml";
 import "./TreeMap.scss";

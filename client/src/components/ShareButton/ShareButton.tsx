@@ -11,10 +11,7 @@ import {
   IconReddit,
   IconEmail,
 } from "src/icons/icons";
-import {
-  textLightColor,
-  tertiaryColor,
-} from "src/style_constants/common-variables.module.scss";
+import { textLightColor, tertiaryColor } from "src/style_constants/index";
 
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";

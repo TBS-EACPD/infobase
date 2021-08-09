@@ -20,7 +20,7 @@ import { businessConstants } from "src/models/businessConstants";
 
 import { lang } from "src/core/injected_build_constants";
 
-import { separatorColor } from "src/style_constants/common-variables.module.scss";
+import { separatorColor } from "src/style_constants/index";
 
 import { canada_svg } from "./canada_svg.yaml";
 

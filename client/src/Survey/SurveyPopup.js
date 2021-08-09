@@ -13,7 +13,7 @@ import { log_standard_event } from "src/core/analytics";
 import { is_dev, is_dev_link } from "src/core/injected_build_constants";
 
 import { IconFeedback } from "src/icons/icons";
-import { tertiaryColor } from "src/style_constants/common-variables.module.scss";
+import { tertiaryColor } from "src/style_constants/index";
 
 import text from "./SurveyPopup.yaml";
 

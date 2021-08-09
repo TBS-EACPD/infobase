@@ -20,7 +20,7 @@ import {
   textColor,
   minMediumDevice,
   maxMediumDevice,
-} from "src/style_constants/common-variables.module.scss";
+} from "src/style_constants/index";
 
 import graph_text from "./wrapped_nivo_common.yaml";
 import "./wrapped_nivo_common.scss";

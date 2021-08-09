@@ -2,10 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  textColor,
-  tertiaryColor,
-} from "src/style_constants/common-variables.module.scss";
+import { textColor, tertiaryColor } from "src/style_constants/index";
 
 import "./icons.scss";
 

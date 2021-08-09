@@ -8,7 +8,7 @@ import { TransitionGroup, Transition } from "react-transition-group";
 import { trivial_text_maker } from "src/models/text";
 
 import { IconChevron } from "src/icons/icons";
-import { textLightColor } from "src/style_constants/common-variables.module.scss";
+import { textLightColor } from "src/style_constants/index";
 
 import "./Accordions.scss";
 
