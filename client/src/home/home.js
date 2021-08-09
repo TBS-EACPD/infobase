@@ -9,7 +9,6 @@ import {
 import { lang } from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
-
 import { IconFlagLine } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";

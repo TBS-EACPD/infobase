@@ -10,7 +10,6 @@ import {
   primaryColor,
 } from "src/style_constants/common-variables.module.scss";
 
-
 import "./CheckBox.scss";
 
 const CheckBoxDefaultProps = {

@@ -16,7 +16,6 @@ import {
   tertiaryColor,
 } from "src/style_constants/common-variables.module.scss";
 
-
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";
 

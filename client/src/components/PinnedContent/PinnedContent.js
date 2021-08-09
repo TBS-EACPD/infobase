@@ -12,7 +12,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { IconPin, IconUnpin } from "src/icons/icons";
 import { backgroundColor } from "src/style_constants/common-variables.module.scss";
 
-
 import text from "./PinnedContent.yaml";
 
 const text_maker = create_text_maker(text);
