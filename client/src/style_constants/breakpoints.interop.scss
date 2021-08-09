@@ -3,7 +3,12 @@
   Difering max and min breakpoint sizes are used for consistency, with max offset by -0.02px.
   We want to avoid cases where styles from both min/max styles are applied at the same time, but also
   avoid the chance for a screen to land inbetween the min/max sizes. The offset is -0.02 because safari
-  was observed to round up with only -0.01
+  was observed to round the value up with only -0.01
+
+  TODO: would prefer to import from bootstrap directly. We intentionally hardcode against their breakpoints here, and
+  we even (independently I think, seeing as they give a different reason for it) reached the conclusion of using -0.02
+  for the max targets. Currently not, because the handful of breif attempts I made resulted in a lot of build errors (we may
+  use a different sass version than them, something to look in to later)
 */
 
 $maxBreakpointOffset: -0.02px;
@@ -19,5 +24,3 @@ $maxLargeDevice: $minLargeDevice + $maxBreakpointOffset;
 
 $minExtraLargeDevice: 1200px;
 $maxExtraLargeDevice: $minExtraLargeDevice + $maxBreakpointOffset;
-
-// TODO import and extend the bootstrap dimensions directly
