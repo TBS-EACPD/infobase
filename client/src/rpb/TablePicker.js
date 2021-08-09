@@ -138,12 +138,7 @@ class TablePicker extends React.Component {
       }))
       .value();
 
-    // const q_a_keys = [
-    //   "question1",
-    //   "question2",
-    //   "question3",
-    //   "how_to_use_table_selection",
-    // ];
+    // const q_a_keys = [];
 
     return (
       <div ref="main" id="tbp-main">

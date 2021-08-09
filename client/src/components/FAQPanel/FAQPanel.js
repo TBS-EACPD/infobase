@@ -19,14 +19,13 @@ import { Gov } from "src/models/organizational_entities";
 
 import { secondaryColor } from "src/core/color_defs";
 
-import treemap_lang from "src/TreeMap/treemap_questions.yaml";
-
 import common_subapp_lang from "./common_faq_questions.yaml";
 import est_lang from "./estimates_comparison_questions.yaml";
 import igoc_lang from "./igoc_explorer_questions.yaml";
 import table_picker_lang from "./table_picker_questions.yaml";
 import tag_exp_lang from "./tag_explorer_questions.yaml";
 import text_diff_lang from "./text_diff_questions.yaml";
+import treemap_lang from "./treemap_questions.yaml";
 
 const { TM } = create_text_maker_component([
   common_lang,
