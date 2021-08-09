@@ -25,13 +25,13 @@ import { StandardLegend } from "src/charts/legends";
 
 import { WrappedNivoPie, WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
-import { delivery_channels_keys } from "./shared";
+import { application_channels_keys } from "./shared";
 
 import text from "./services.yaml";
 
 const colors = infobase_colors();
 const { text_maker, TM } = create_text_maker_component(text);
-const channels = _.map(delivery_channels_keys, text_maker);
+const channels = _.map(application_channels_keys, text_maker);
 const { services_years } = year_templates;
 const most_recent_year = _.chain(services_years) //SI TODO how to get most recent year better?
   .map(run_template)
