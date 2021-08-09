@@ -22,7 +22,7 @@ export const StandardLegend = ({
       style={{ maxHeight: "400px", display: "flex", flexDirection: "column" }}
     >
       {title && (
-        <p className="mrgn-bttm-0 mrgn-tp-0 standard-legend-nav-header centerer">
+        <p className="mrgn-bttm-0 mrgn-tp-0 title-p--standard-legend centerer">
           {title}
         </p>
       )}

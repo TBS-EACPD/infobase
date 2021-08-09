@@ -56,7 +56,7 @@ class CanadaGraphBarLegend extends React.Component {
 
     return (
       <Fragment>
-        <p className="mrgn-bttm-0 mrgn-tp-0 canada-nav-header centerer">
+        <p className="mrgn-bttm-0 mrgn-tp-0 title-p--canada centerer">
           {province_graph_title(prov)}
         </p>
         <WrappedNivoHBar
