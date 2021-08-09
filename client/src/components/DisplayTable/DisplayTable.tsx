@@ -128,7 +128,7 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
   return {
     visible_col_keys,
     sort_by,
-    descending: false,
+    descending: !unsorted_initial,
     searches,
     initial_props: props,
     page_size: props.page_size_increment,
@@ -164,10 +164,9 @@ export class _DisplayTable extends React.Component<
     if (nextProps !== prevState.initial_props) {
       const new_default_state = get_default_state_from_props(nextProps);
 
-      const prev_sort_still_valid = _.includes(
-        new_default_state.visible_col_keys,
-        prevState.sort_by
-      );
+      const prev_sort_still_valid =
+        !nextProps.unsorted_initial &&
+        _.includes(new_default_state.visible_col_keys, prevState.sort_by);
 
       const reconciled_searches = {
         ...new_default_state.searches,

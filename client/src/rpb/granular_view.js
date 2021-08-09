@@ -73,6 +73,10 @@ class GranularView extends React.Component {
 
     const dim_all_or_dept = dimension === "all" || dimension === "dept";
 
+    function dim_vote_stat(dim) {
+      return dim === "vote_vs_stat" || dim === "vote_stat";
+    }
+
     const dept_and_legal_cols = dim_all_or_dept
       ? {
           dept: {
@@ -163,12 +167,8 @@ class GranularView extends React.Component {
                 className={"normal-radio-btn-label"}
                 key={`${dim}-radio-btn-label`}
               >
-                {dim === "all" || dim === "vote_vs_stat" || dim === "vote_stat"
-                  ? text_maker(
-                      dim === "vote_vs_stat" || dim === "vote_stat"
-                        ? "votestat_item"
-                        : dim
-                    )
+                {dim === "all" || dim_vote_stat(dim)
+                  ? text_maker(dim_vote_stat(dim) ? "votestat_item" : dim)
                   : dim === "dept"
                   ? text_maker("org")
                   : _.find(sorted_key_columns, ["nick", dim]).header[lang] ||
