@@ -4,12 +4,12 @@ import React from "react";
 
 import { lang } from "src/core/injected_build_constants";
 
+import { IconEyeOpen, IconEyeClosed } from "src/icons/icons";
 import {
   secondaryColor,
   tertiaryColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
-import { IconEyeOpen, IconEyeClosed } from "src/icons/icons";
 
 import "./VisibilityControl.scss";
 

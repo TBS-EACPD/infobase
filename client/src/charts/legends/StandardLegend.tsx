@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tertiaryColor } from "src/common_style_variables/common-variables.module.scss";
+import { tertiaryColor } from "src/style_constants/common-variables.module.scss";
 
 import { LegendList, LegendListProps } from "./LegendList";
 

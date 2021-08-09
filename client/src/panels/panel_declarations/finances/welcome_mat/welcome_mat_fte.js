@@ -11,7 +11,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import { tertiaryColor } from "src/common_style_variables/common-variables.module.scss";
+import { tertiaryColor } from "src/style_constants/common-variables.module.scss";
 
 const { std_years, planning_years } = year_templates;
 

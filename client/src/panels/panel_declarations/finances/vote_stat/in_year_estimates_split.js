@@ -16,7 +16,7 @@ import {
   highlightColor,
   secondaryColor,
   textColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
 

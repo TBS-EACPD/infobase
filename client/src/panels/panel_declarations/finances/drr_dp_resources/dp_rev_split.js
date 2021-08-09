@@ -13,12 +13,11 @@ import {
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
+import { get_source_links } from "src/metadata/data_sources";
 import {
   textGreen,
   textRed,
-} from "src/common_style_variables/common-variables.module.scss";
-
-import { get_source_links } from "src/metadata/data_sources";
+} from "src/style_constants/common-variables.module.scss";
 
 import text from "./dp_rev_split.yaml";
 

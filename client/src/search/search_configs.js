@@ -7,7 +7,7 @@ import { trivial_text_maker } from "src/models/text";
 
 import { Table } from "src/core/TableClass";
 
-import { textColor } from "src/common_style_variables/common-variables.module.scss";
+import { textColor } from "src/style_constants/common-variables.module.scss";
 
 import {
   query_to_reg_exps,

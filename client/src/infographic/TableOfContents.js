@@ -8,7 +8,7 @@ import {
   LinkStyled,
 } from "src/components/index";
 
-import { separatorColor } from "src/common_style_variables/common-variables.module.scss";
+import { separatorColor } from "src/style_constants/common-variables.module.scss";
 
 import text from "./TableOfContents.yaml";
 

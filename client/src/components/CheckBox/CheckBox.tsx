@@ -4,12 +4,12 @@ import React from "react";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import { IconCheckmark } from "src/icons/icons";
 import {
   backgroundColor,
   primaryColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
-import { IconCheckmark } from "src/icons/icons";
 
 import "./CheckBox.scss";
 

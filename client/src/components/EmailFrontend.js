@@ -7,12 +7,12 @@ import { get_client_id, log_standard_event } from "src/core/analytics";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
-import { textRed } from "src/common_style_variables/common-variables.module.scss";
-
 import {
   get_email_template,
   send_completed_email_template,
 } from "src/email_backend_utils";
+import { textRed } from "src/style_constants/common-variables.module.scss";
+
 
 import { CheckBox } from "./CheckBox/CheckBox";
 import { LeafSpinner } from "./LeafSpinner/LeafSpinner";

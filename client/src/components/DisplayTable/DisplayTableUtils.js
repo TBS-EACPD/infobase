@@ -7,9 +7,9 @@ import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboa
 
 import { is_IE } from "src/core/feature_detection";
 
-import { backgroundColor } from "src/common_style_variables/common-variables.module.scss";
-
 import { IconCopy, IconDownload } from "src/icons/icons";
+import { backgroundColor } from "src/style_constants/common-variables.module.scss";
+
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";

@@ -35,7 +35,7 @@ import {
   successDarkColor,
   failDarkColor,
   infoDarkColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";

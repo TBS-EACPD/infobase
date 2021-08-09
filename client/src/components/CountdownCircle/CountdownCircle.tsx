@@ -5,7 +5,7 @@ import { Countdown } from "src/components/Countdown/Countdown";
 
 import { is_IE } from "src/core/feature_detection";
 
-import { buttonPrimaryColor } from "src/common_style_variables/common-variables.module.scss";
+import { buttonPrimaryColor } from "src/style_constants/common-variables.module.scss";
 
 import "./CountdownCircle.scss";
 

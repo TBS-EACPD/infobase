@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import {
   textColor,
   tertiaryColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import "./icons.scss";
 
