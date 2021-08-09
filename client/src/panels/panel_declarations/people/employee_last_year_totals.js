@@ -9,7 +9,7 @@ import { year_templates } from "src/models/years";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoCircleProportion } from "src/charts/wrapped_nivo/index";
+import { CircleProportionGraph } from "src/charts/wrapped_nivo/index";
 
 import text2 from "src/common_text/common_lang.yaml";
 
@@ -69,7 +69,7 @@ export const declare_employee_last_year_totals_panel = () =>
             </Col>
             {!is_a11y_mode && (
               <Col size={7} isGraph>
-                <WrappedNivoCircleProportion
+                <CircleProportionGraph
                   height={200}
                   is_money={false}
                   child_value={dept_emp_value}

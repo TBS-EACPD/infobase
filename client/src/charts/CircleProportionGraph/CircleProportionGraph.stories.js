@@ -1,10 +1,10 @@
 import React from "react";
 
-import { WrappedNivoCircleProportion } from "./WrappedNivoCircleProportion";
+import { CircleProportionGraph } from "./CircleProportionGraph";
 
 export default {
-  title: "charts/WrappedNivoCircleProportion",
-  component: WrappedNivoCircleProportion,
+  title: "charts/CircleProportionGraph",
+  component: CircleProportionGraph,
 };
 
 const common_args = {
@@ -15,7 +15,7 @@ const common_args = {
   parent_name: "Parent",
 };
 
-const Template = (args) => <WrappedNivoCircleProportion {...args} />;
+const Template = (args) => <CircleProportionGraph {...args} />;
 
 export const Basic = Template.bind({});
 export const SmallChild = Template.bind({});
