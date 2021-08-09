@@ -147,6 +147,7 @@ export class Table {
     this["footnote-topics"].table = this["footnote-topics"].table || "*";
     this.column_counter = make_unique_func();
     this.loaded = false;
+    this.group_by_vs_func = table_def.group_by_vs_func;
 
     this.init();
   }
@@ -210,9 +211,20 @@ export class Table {
     this.get_dimensions();
   }
   get_dimensions() {
-    this.dimensions = _.chain(this._cols)
+    const cols_have_children = !_.chain(this._cols)
+      .filter((col) => _.has(col, "children"))
+      .isEmpty()
+      .value();
+    const columns = _.chain(this._cols)
+      .map((col) => (cols_have_children ? col.children : col))
+      .flatten()
+      .value();
+    const can_group_vs = _.some(columns, (col) => _.has(col, "can_group_vs"));
+    this.dimensions = _.chain(columns)
       .filter("can_group_by")
       .map((col) => col.nick)
+      .concat(can_group_vs ? "vote_vs_stat" : "")
+      .compact()
       .value();
   }
   get links() {

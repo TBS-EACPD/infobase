@@ -53,6 +53,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       type: "int",
@@ -79,6 +80,8 @@ export default {
         en: "Vote / Statutory Description",
         fr: "Crédit / Poste législatif Description",
       },
+      can_group_by: true,
+      can_group_vs: true,
     });
     this.add_col({
       type: "wide-str",
@@ -98,6 +101,7 @@ export default {
         en: "Estimates Instrument",
         fr: "Instrument des dépenses",
       },
+      can_group_by: true,
     });
     _.each(estimates_years, (yr, ix) => {
       this.add_col({
@@ -110,6 +114,14 @@ export default {
         header: yr,
       });
     });
+  },
+
+  group_by_vs_func: function (dimension, row = undefined) {
+    return dimension !== "vote_vs_stat"
+      ? undefined
+      : !row
+      ? true
+      : row.votestattype === 999;
   },
 
   mapper: function (row) {
@@ -216,6 +228,4 @@ export default {
     }
     return grps[true].concat(grps[false]);
   },
-
-  dimensions: ["dept", "desc", "est_doc", "vote_vs_stat"],
 };
