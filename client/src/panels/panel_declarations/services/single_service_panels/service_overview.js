@@ -197,7 +197,7 @@ export class ServiceOverview extends React.Component {
               raw: true,
             })}
           </dd>
-          <dt>{text_maker("online_inquiry")}</dt>
+          <dt>{text_maker("online_inquiry_count")}</dt>
           <dd>
             {formats["big_int"](
               _.sumBy(service.service_report, "online_inquiry_count"),
