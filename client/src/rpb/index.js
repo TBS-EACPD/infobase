@@ -160,7 +160,7 @@ class RPB extends React.Component {
   };
 
   render() {
-    const { broken_url, table: table_name } = this.props.state;
+    const { broken_url } = this.props.state;
     const { columns: data_columns, dimension } = this.state;
 
     const table = this.state.table && Table.store.lookup(this.state.table);
@@ -213,19 +213,24 @@ class RPB extends React.Component {
         .isEmpty()
         .value();
 
-    function dimension_column_values(dim_data) {
+    const group_by_vs = !!group_by_vs_func(dimension);
+
+    function dimension_column_values(row) {
+      if (!group_by_vs) {
+        return [dimension, row[dimension]];
+      }
       const voted = text_maker("voted");
       const stat = text_maker("stat");
-      if (dimension === "vote_vs_stat") {
-        if (table_name === "orgTransferPayments") {
-          return ["type", !_.includes(dim_data[0].tp, "(S) ") ? stat : voted];
-        }
-        return ["desc", dim_data[0].votestattype === 999 ? stat : voted];
-      }
-      return [dimension, dim_data[0][dimension]];
-    }
 
-    const group_by_vs = !!group_by_vs_func(dimension);
+      const col_name = _.chain(table._cols)
+        .map((col) => (_.has(col, "children") ? col.children : col))
+        .flatten()
+        .filter("can_group_vs")
+        .map((col) => col.nick)
+        .value();
+
+      return [col_name, group_by_vs_func(dimension, row) ? stat : voted];
+    }
 
     const flat_data = !_.isEmpty(table_data)
       ? dimension === "all"
@@ -243,7 +248,7 @@ class RPB extends React.Component {
               return _.chain(all_data_columns)
                 .filter((col) => col.type !== "percentage1")
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
-                .concat([dimension_column_values(dim_data)])
+                .concat([dimension_column_values(dim_data[0])])
                 .fromPairs()
                 .value();
             })
