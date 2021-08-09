@@ -213,7 +213,7 @@ class RPB extends React.Component {
         .isEmpty()
         .value();
 
-    const group_by_vs = !!group_by_vs_func(dimension);
+    const group_by_vs = group_by_vs_func && !!group_by_vs_func(dimension);
 
     function dimension_column_values(row) {
       if (!group_by_vs) {
