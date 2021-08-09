@@ -7,7 +7,7 @@ import { DefaultTooltip } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 import {
   minSmallDevice,
   maxSmallDevice,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import "./WrappedNivoTreemap.scss";
 

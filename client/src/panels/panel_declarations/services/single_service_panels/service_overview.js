@@ -21,9 +21,9 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
-import { backgroundColor } from "src/common_style_variables/common-variables.module.scss";
-
 import { infograph_href_template } from "src/link_utils";
+import { backgroundColor } from "src/style_constants/common-variables.module.scss";
+
 import "src/panels/panel_declarations/services/services.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);

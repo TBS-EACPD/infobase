@@ -9,12 +9,12 @@ import {
 import { lang } from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
-import highlightColor from "src/common_style_variables/common-variables.module.scss";
 
 import { IconFlagLine } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";
 import { EverythingSearch } from "src/search/EverythingSearch";
+import highlightColor from "src/style_constants/common-variables.module.scss";
 
 import { CardImage } from "./CardImage/CardImage";
 

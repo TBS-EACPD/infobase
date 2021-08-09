@@ -5,7 +5,7 @@ import React from "react";
 import {
   primaryColor,
   secondaryColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import leaf_loading_spinner from "./LeafSpinner.svg";
 import "./LeafSpinner.scss";

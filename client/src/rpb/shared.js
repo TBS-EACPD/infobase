@@ -10,11 +10,10 @@ import {
 
 import { lang } from "src/core/injected_build_constants";
 
-import { secondaryColor } from "src/common_style_variables/common-variables.module.scss";
-
 import { IconCopyLink } from "src/icons/icons";
 
 import { sources as all_sources } from "src/metadata/data_sources";
+import { secondaryColor } from "src/style_constants/common-variables.module.scss";
 
 import { TextMaker } from "./rpb_text_provider";
 

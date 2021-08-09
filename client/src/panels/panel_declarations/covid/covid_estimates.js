@@ -25,12 +25,12 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import { textColor } from "src/common_style_variables/common-variables.module.scss";
 import { toggle_list } from "src/general_utils";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
 
 import { get_source_links } from "src/metadata/data_sources";
 import { smart_sort_func } from "src/sort_utils";
+import { textColor } from "src/style_constants/common-variables.module.scss";
 
 import {
   AboveTabFootnoteList,

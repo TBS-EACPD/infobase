@@ -24,7 +24,7 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import {
   textColor,
   backgroundColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import text from "./goco.yaml";
 

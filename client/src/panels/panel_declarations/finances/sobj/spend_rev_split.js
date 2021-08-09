@@ -14,7 +14,7 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import {
   highlightColor,
   secondaryColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 import * as table_common from "src/tables/table_common";
 
 import text from "./spend_rev_split.yaml";

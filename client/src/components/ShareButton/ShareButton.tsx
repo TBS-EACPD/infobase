@@ -5,17 +5,17 @@ import { StatelessModal } from "src/components/modals_and_popovers/index";
 import { create_text_maker } from "src/models/text";
 
 import {
-  textLightColor,
-  tertiaryColor,
-} from "src/common_style_variables/common-variables.module.scss";
-
-import {
   IconShare,
   IconFacebook,
   IconTwitter,
   IconReddit,
   IconEmail,
 } from "src/icons/icons";
+import {
+  textLightColor,
+  tertiaryColor,
+} from "src/style_constants/common-variables.module.scss";
+
 
 import text from "./ShareButton.yaml";
 import "./ShareButton.scss";

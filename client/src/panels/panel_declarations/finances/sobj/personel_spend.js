@@ -11,7 +11,7 @@ import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import { primaryColor } from "src/common_style_variables/common-variables.module.scss";
+import { primaryColor } from "src/style_constants/common-variables.module.scss";
 
 import { text_maker, TM } from "./sobj_text_provider";
 const { sos } = businessConstants;

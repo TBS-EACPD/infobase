@@ -12,7 +12,7 @@ import {
   get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
-import { textColor } from "src/common_style_variables/common-variables.module.scss";
+import { textColor } from "src/style_constants/common-variables.module.scss";
 
 const bar_table = (
   data,

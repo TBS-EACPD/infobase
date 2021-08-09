@@ -11,7 +11,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import {
   primaryColor,
   backgroundColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import "./BubbleMenu.scss";
 

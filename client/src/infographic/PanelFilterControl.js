@@ -13,7 +13,7 @@ import {
 import { Table } from "src/core/TableClass";
 
 import { SelectAllControl } from "src/charts/legends/index";
-import { tertiaryColor } from "src/common_style_variables/common-variables.module.scss";
+import { tertiaryColor } from "src/style_constants/common-variables.module.scss";
 
 import text from "./PanelFilterControl.yaml";
 

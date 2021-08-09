@@ -17,7 +17,7 @@ import {
   primaryColor,
   textColor,
   backgroundColor,
-} from "src/common_style_variables/common-variables.module.scss";
+} from "src/style_constants/common-variables.module.scss";
 
 import text from "./employee_totals.yaml";
 

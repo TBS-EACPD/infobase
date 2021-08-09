@@ -8,9 +8,8 @@ import { Subject } from "src/models/subject";
 
 import { lang } from "src/core/injected_build_constants";
 
-import { highlightColor } from "src/common_style_variables/common-variables.module.scss";
-
 import { IconAttentionTriangle } from "src/icons/icons";
+import { highlightColor } from "src/style_constants/common-variables.module.scss";
 
 import text from "./hierarchy_panels.yaml";
 
