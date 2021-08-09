@@ -67,7 +67,7 @@ const OrgsReportingServicesPanel = ({ subject }) => {
     },
     total_volume: {
       index: 2,
-      header: text_maker("application_digital"),
+      header: text_maker("applications"),
       is_summable: true,
       formatter: "big_int",
     },
