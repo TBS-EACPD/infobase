@@ -1,0 +1,23 @@
+/* media breakpoints
+ 
+  Difering max and min breakpoint sizes are used for consistency, with max offset by -0.02px.
+  We want to avoid cases where styles from both min/max styles are applied at the same time, but also
+  avoid the chance for a screen to land inbetween the min/max sizes. The offset is -0.02 because safari
+  was observed to round up with only -0.01
+*/
+
+$maxBreakpointOffset: -0.02px;
+
+$minSmallDevice: 576px;
+$maxSmallDevice: $minSmallDevice + $maxBreakpointOffset;
+
+$minMediumDevice: 768px;
+$maxMediumDevice: $minMediumDevice + $maxBreakpointOffset;
+
+$minLargeDevice: 992px;
+$maxLargeDevice: $minLargeDevice + $maxBreakpointOffset;
+
+$minExtraLargeDevice: 1200px;
+$maxExtraLargeDevice: $minExtraLargeDevice + $maxBreakpointOffset;
+
+// TODO import and extend the bootstrap dimensions directly
