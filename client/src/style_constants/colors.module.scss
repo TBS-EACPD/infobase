@@ -1,0 +1,36 @@
+$primaryColor: #26374a;
+$secondaryColor: #2c70c9;
+$tertiaryColor: #8c949e; /* tertiaryColor one is used lots at varying alpha/darkness levels to meet contrast for given use cases, watch out for it */
+
+$backgroundColor: #fff;
+$highlightColor: #da3a38;
+$separatorColor: #bbc1c9;
+
+$buttonPrimaryColor: #2c70c9;
+$buttonSecondaryColor: #76a4df;
+
+$textColor: #333;
+$textLightColor: #fff;
+$textGreen: #008000;
+$textRed: #cc0000;
+
+$linkColor: #2b438c;
+$linkFocusColor: #0535d2;
+$linkVisitedColor: #7834bc;
+
+$highlightPaleColor: #ffa8a8;
+$highlightOrangeColor: #e89a40;
+$highlightDarkColor: #b12320;
+
+/* 
+  dark and light colours don't have enough contrast between them for text, so don't use them that way!
+  Use black text on light, or (check contrast) white text on dark
+*/
+$successLightColor: #cbedbd;
+$successDarkColor: #45a64d;
+$failLightColor: $highlightPaleColor;
+$failDarkColor: $highlightColor;
+$warnLightColor: #ffecce;
+$warnDarkColor: #fdb84c;
+$infoLightColor: #f2f6fc;
+$infoDarkColor: $buttonPrimaryColor;
