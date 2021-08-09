@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
-import { digital_status_keys, delivery_channels_keys } from "./constants.js";
+import { digital_status_keys, application_channels_keys } from "./constants.js";
 
 const multi_value_string_fields_to_arrays = (list_fields, seperator = "<>") =>
   _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
@@ -232,7 +232,7 @@ export default async function ({ models }) {
         number_of_services: services.length,
         total_volume: _.sumBy(services, ({ service_report }) =>
           _.reduce(
-            delivery_channels_keys,
+            application_channels_keys,
             (sum, key) =>
               sum + _.chain(service_report).sumBy(key).toNumber().value() || 0,
             0
@@ -305,7 +305,7 @@ export default async function ({ models }) {
       )
       .groupBy("year")
       .flatMap((reports, year) =>
-        _.map(delivery_channels_keys, (key) => ({
+        _.map(application_channels_keys, (key) => ({
           id: _.uniqueId(),
           subject_id: reports[0].subject_id,
           year,

@@ -19,8 +19,8 @@ import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import {
-  delivery_channels_keys,
-  delivery_channels_query_fragment,
+  application_channels_keys,
+  application_channels_query_fragment,
 } from "./shared";
 
 import text from "./services.yaml";
@@ -34,7 +34,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     query_fragments: `
     id
     name
-    ${delivery_channels_query_fragment}
+    ${application_channels_query_fragment}
     `,
   });
 
@@ -43,7 +43,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     const median_3_values = _.chain(data)
       .map((service) => ({
         id: service.id,
-        value: _.chain(delivery_channels_keys)
+        value: _.chain(application_channels_keys)
           .flatMap((key) =>
             _.map(service.service_report, (report) => report[key])
           )
@@ -70,7 +70,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   const { max_vol_service_name, max_vol_service_value } = _.chain(data)
     .map(({ name, service_report }) => ({
       max_vol_service_name: name,
-      max_vol_service_value: _.chain(delivery_channels_keys)
+      max_vol_service_value: _.chain(application_channels_keys)
         .map((key) => _.sumBy(service_report, key))
         .sum()
         .value(),
@@ -78,7 +78,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     .maxBy("max_vol_service_value")
     .value();
   const { max_vol_channel_name, max_vol_channel_value } = _.chain(
-    delivery_channels_keys
+    application_channels_keys
   )
     .map((key) => ({
       max_vol_channel_name: text_maker(key),
@@ -90,24 +90,27 @@ const ServicesChannelsPanel = ({ subject }) => {
     .maxBy("max_vol_channel_value")
     .value();
 
-  const services_channel_nivo_data = _.map(delivery_channels_keys, (key) => ({
-    id: text_maker(key),
-    ..._.chain(data)
-      .filter(({ id }) => active_services[id])
-      .map((service) => [
-        service.name,
-        _.sumBy(service.service_report, key) || 0,
-      ])
-      .fromPairs()
-      .value(),
-  }));
+  const services_channel_nivo_data = _.map(
+    application_channels_keys,
+    (key) => ({
+      id: text_maker(key),
+      ..._.chain(data)
+        .filter(({ id }) => active_services[id])
+        .map((service) => [
+          service.name,
+          _.sumBy(service.service_report, key) || 0,
+        ])
+        .fromPairs()
+        .value(),
+    })
+  );
   const services_channels_column_configs = {
     name: {
       index: 0,
       is_searchable: true,
       header: text_maker("service_name"),
     },
-    ..._.chain(delivery_channels_keys)
+    ..._.chain(application_channels_keys)
       .map((key, idx) => [key, { index: idx + 1, header: text_maker(key) }])
       .fromPairs()
       .value(),
@@ -134,7 +137,7 @@ const ServicesChannelsPanel = ({ subject }) => {
         <DisplayTable
           data={_.map(data, ({ name, service_report }) => ({
             name: name,
-            ..._.chain(delivery_channels_keys)
+            ..._.chain(application_channels_keys)
               .map((key) => [key, _.sumBy(service_report, key)])
               .fromPairs()
               .value(),
@@ -197,7 +200,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                     .filter(({ id }) => active_services[id])
                     .map(({ name, service_report }) => ({
                       name: name,
-                      ..._.chain(delivery_channels_keys)
+                      ..._.chain(application_channels_keys)
                         .map((key) => [key, _.sumBy(service_report, key)])
                         .fromPairs()
                         .value(),
@@ -227,9 +230,9 @@ const ServicesChannelsPanel = ({ subject }) => {
   );
 };
 
-export const declare_applications_channels_by_services_panel = () =>
+export const declare_application_channels_by_services_panel = () =>
   declare_panel({
-    panel_key: "applications_channels_by_services",
+    panel_key: "application_channels_by_services",
     levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("services_channels_title"),

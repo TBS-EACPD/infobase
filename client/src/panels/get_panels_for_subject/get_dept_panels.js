@@ -29,7 +29,7 @@ import {
   // shared dept, program
   declare_spend_rev_split_panel,
   declare_provided_services_list_panel,
-  declare_applications_channels_by_services_panel,
+  declare_application_channels_by_services_panel,
 
   // shared gov, dept
   declare_tp_by_region_panel,
@@ -120,7 +120,7 @@ export const get_dept_panels = (subject) =>
         declare_provided_services_list_panel(),
         declare_services_digital_status_panel(),
         declare_services_channels_panel(),
-        declare_applications_channels_by_services_panel(),
+        declare_application_channels_by_services_panel(),
         declare_services_standards_panel(),
       ],
     results: subject.has_data("results") && [

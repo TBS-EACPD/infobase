@@ -6,11 +6,11 @@ const digital_status_keys = [
   "authentication",
   "account_reg_digital",
 ];
-const delivery_channels_keys = [
+const application_channels_keys = [
   "other_application_count",
   "live_application_count",
   "mail_application_count",
   "online_application_count",
 ];
 
-export { digital_status_keys, delivery_channels_keys };
+export { digital_status_keys, application_channels_keys };

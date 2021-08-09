@@ -87,7 +87,7 @@ export {
   declare_services_intro_panel,
   declare_provided_services_list_panel,
   declare_services_channels_panel,
-  declare_applications_channels_by_services_panel,
+  declare_application_channels_by_services_panel,
   declare_services_digital_status_panel,
   declare_services_standards_panel,
   declare_orgs_reporting_services_panel,

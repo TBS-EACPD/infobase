@@ -6,7 +6,7 @@ import text from "src/panels/panel_declarations/services/services.yaml";
 import {
   available_icons,
   available_keys,
-  delivery_channels_keys,
+  application_channels_keys,
 } from "src/panels/panel_declarations/services/shared";
 
 import {
@@ -40,7 +40,7 @@ export class ServiceOverview extends React.Component {
       "standard_report"
     );
     const applications = _.reduce(
-      delivery_channels_keys,
+      application_channels_keys,
       (total, key) => {
         const sum_for_key =
           _.sumBy(service.service_report, `${key}_count`) || 0;
