@@ -9,28 +9,24 @@ const employee_gov_fields = `
 `;
 const schema = `
   extend type Org{
-    employee {
 
-      employee_age_group: [EmployeeAgeGroup]
-      employee_ex_lvl: [EmployeeExLvl]
-      employee_gender: [EmployeeGender]
-      employee_fol: [EmployeeFol]
-      employee_region: [EmployeeRegion]
-      employee_type: [EmployeeType]
-      employee_avg_age: [EmployeeAvgAge]
-    }
+    employee_age_group: [EmployeeAgeGroup]
+    employee_ex_lvl: [EmployeeExLvl]
+    employee_gender: [EmployeeGender]
+    employee_fol: [EmployeeFol]
+    employee_region: [EmployeeRegion]
+    employee_type: [EmployeeType]
+    employee_avg_age: [EmployeeAvgAge]
   }
 
   extend type Gov {
-    employee {
-      employee_age_totals: [EmployeeAgeTotals]
-      employee_ex_lvl_totals: [EmployeeExLvlTotals]
-      employee_gender_totals: [EmployeeGenderTotals]
-      employee_fol_totals: [EmployeeFolTotals]
-      employee_region_totals: [EmployeeRegionTotals]
-      employee_type_totals: [EmployeeTypeTotals]
-      employee_gov_avgs: [EmployeeGovAvgs]
-    }
+    employee_age_totals: [EmployeeAgeTotals]
+    employee_ex_lvl_totals: [EmployeeExLvlTotals]
+    employee_gender_totals: [EmployeeGenderTotals]
+    employee_fol_totals: [EmployeeFolTotals]
+    employee_region_totals: [EmployeeRegionTotals]
+    employee_type_totals: [EmployeeTypeTotals]
+    employee_gov_avgs: [EmployeeGovAvgs]
     
   }
 
@@ -80,31 +76,46 @@ const schema = `
   }
 
   type EmployeeAgeTotals {
+    id: String
     ${employee_gov_fields}
   }
 
   type EmployeeExLvlTotals  {
+    id: String 
     ${employee_gov_fields}
   }
 
   type EmployeeFolTotals  {
+    id: String
     ${employee_gov_fields}
   }
 
   type EmployeeGenderTotals  {
+    id: String
     ${employee_gov_fields}
   }
 
   type EmployeeRegionTotals  {
+    id: String
     ${employee_gov_fields}
   }
 
   type EmployeeTypeTotals  {
+    id: String
     ${employee_gov_fields}
   }
 
+  type DataObjectGovAvgs {
+    by_year: [ByYearGovAvgs]
+  }
+
+  type ByYearGovAvgs {
+    id: String
+    year: Int
+    value: Float
+  }
   type EmployeeGovAvgs {
-    data: [DataObjectNoDim]
+    data: [DataObjectGovAvgs]
   }
 `;
 
