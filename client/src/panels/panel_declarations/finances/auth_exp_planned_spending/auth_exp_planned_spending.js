@@ -28,7 +28,7 @@ import {
   tertiaryColor,
   textColor,
   highlightColor,
-} from "src/style_constants/common-variables.module.scss";
+} from "src/style_constants/index";
 
 import text from "./auth_exp_planned_spending.yaml";
 import "./auth_exp_planned_spending.scss";

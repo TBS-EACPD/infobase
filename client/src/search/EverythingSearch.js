@@ -12,7 +12,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { IconGear } from "src/icons/icons";
 
 import { smart_href_template } from "src/link_utils";
-import { minMediumDevice } from "src/style_constants/common-variables.module.scss";
+import { minMediumDevice } from "src/style_constants/index";
 
 import {
   make_orgs_search_config,

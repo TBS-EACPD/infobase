@@ -7,7 +7,7 @@ import {
   successDarkColor,
   highlightDarkColor,
   warnDarkColor,
-} from "src/style_constants/common-variables.module.scss";
+} from "src/style_constants/index";
 
 const digital_status_keys = [
   "account_reg_digital",

@@ -12,7 +12,7 @@ import {
 
 import { trivial_text_maker } from "src/models/text";
 
-import { maxLargeDevice } from "src/style_constants/common-variables.module.scss";
+import { maxLargeDevice } from "src/style_constants/index";
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>

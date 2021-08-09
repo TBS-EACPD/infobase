@@ -9,7 +9,7 @@ import { Subject } from "src/models/subject";
 import { lang } from "src/core/injected_build_constants";
 
 import { IconAttentionTriangle } from "src/icons/icons";
-import { highlightColor } from "src/style_constants/common-variables.module.scss";
+import { highlightColor } from "src/style_constants/index";
 
 import text from "./hierarchy_panels.yaml";
 

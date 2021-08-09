@@ -2,10 +2,7 @@ import type { Property } from "csstype";
 import _ from "lodash";
 import React from "react";
 
-import {
-  primaryColor,
-  secondaryColor,
-} from "src/style_constants/common-variables.module.scss";
+import { primaryColor, secondaryColor } from "src/style_constants/index";
 
 import leaf_loading_spinner from "./LeafSpinner.svg";
 import "./LeafSpinner.scss";

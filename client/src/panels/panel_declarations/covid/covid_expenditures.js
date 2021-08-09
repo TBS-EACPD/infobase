@@ -21,7 +21,7 @@ import { Subject } from "src/models/subject";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
-import { minLargeDevice } from "src/style_constants/common-variables.module.scss";
+import { minLargeDevice } from "src/style_constants/index";
 
 import {
   YearSelectionTabs,

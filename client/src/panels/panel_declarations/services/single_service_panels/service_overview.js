@@ -22,7 +22,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
 import { infograph_href_template } from "src/link_utils";
-import { backgroundColor } from "src/style_constants/common-variables.module.scss";
+import { backgroundColor } from "src/style_constants/index";
 
 import "src/panels/panel_declarations/services/services.scss";
 

@@ -4,10 +4,7 @@ import MediaQuery from "react-responsive";
 
 import { DefaultTooltip } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
-import {
-  minSmallDevice,
-  maxSmallDevice,
-} from "src/style_constants/common-variables.module.scss";
+import { minSmallDevice, maxSmallDevice } from "src/style_constants/index";
 
 import "./WrappedNivoTreemap.scss";
 

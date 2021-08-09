@@ -39,10 +39,7 @@ import { WrappedNivoBar, WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
 import { toggle_list } from "src/general_utils";
 import { infograph_href_template } from "src/infographic/infographic_link";
-import {
-  highlightColor,
-  textColor,
-} from "src/style_constants/common-variables.module.scss";
+import { highlightColor, textColor } from "src/style_constants/index";
 
 import text from "./detailed_program_spending_split.yaml";
 

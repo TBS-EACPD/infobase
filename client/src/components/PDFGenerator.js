@@ -7,7 +7,7 @@ import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconDownload } from "src/icons/icons";
 import { get_static_url } from "src/request_utils";
-import { textLightColor } from "src/style_constants/common-variables.module.scss";
+import { textLightColor } from "src/style_constants/index";
 
 import { LeafSpinner } from "./LeafSpinner/LeafSpinner";
 import { create_text_maker_component } from "./misc_util_components";

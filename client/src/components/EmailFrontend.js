@@ -11,7 +11,7 @@ import {
   get_email_template,
   send_completed_email_template,
 } from "src/email_backend_utils";
-import { textRed } from "src/style_constants/common-variables.module.scss";
+import { textRed } from "src/style_constants/index";
 
 import { CheckBox } from "./CheckBox/CheckBox";
 import { LeafSpinner } from "./LeafSpinner/LeafSpinner";

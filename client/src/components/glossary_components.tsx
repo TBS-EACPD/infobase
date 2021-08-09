@@ -8,10 +8,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconQuestion } from "src/icons/icons";
 import { glossary_href } from "src/link_utils";
-import {
-  backgroundColor,
-  primaryColor,
-} from "src/style_constants/common-variables.module.scss";
+import { backgroundColor, primaryColor } from "src/style_constants/index";
 
 interface GlossaryTooltipWrapperProps {
   id: string;

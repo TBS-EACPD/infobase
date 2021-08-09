@@ -13,7 +13,7 @@ import { IconFlagLine } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";
 import { EverythingSearch } from "src/search/EverythingSearch";
-import highlightColor from "src/style_constants/common-variables.module.scss";
+import highlightColor from "src/style_constants/index";
 
 import { CardImage } from "./CardImage/CardImage";
 
