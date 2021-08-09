@@ -72,7 +72,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       test: /\.scss$/,
-      exclude: /\.module\.scss$/,
+      exclude: /\.interop\.scss$/,
       use: [
         { loader: "style-loader" },
         {
@@ -89,8 +89,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       sideEffects: true,
     },
     {
-      test: /\.module\.scss$/,
-      use: _.compact([
+      test: /\.interop\.scss$/,
+      use: [
         {
           loader: "css-modules-typescript-loader",
           options: {
@@ -110,9 +110,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
         },
         { loader: "sass-loader" },
         {
-          loader: "./build_code/loaders/add-exports-to-sass-module-loader.js",
+          loader: "./build_code/loaders/sass-interop-loader.js",
         },
-      ]),
+      ],
     },
     {
       test: /\.csv$/,
