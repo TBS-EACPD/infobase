@@ -5,7 +5,6 @@ const CircularDependencyPlugin = require("circular-dependency-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const _ = require("lodash");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 
@@ -75,9 +74,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       test: /\.scss$/,
       exclude: /\.interop\.scss$/,
       use: [
-        is_prod_build
-          ? MiniCssExtractPlugin.loader
-          : { loader: "style-loader" },
+        { loader: "style-loader" },
         {
           loader: "css-loader",
           options: {
@@ -116,17 +113,14 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           loader: "./build_code/loaders/sass-interop-loader.js",
         },
       ],
-      sideEffects: false,
     },
     {
       test: /\.csv$/,
       use: [{ loader: "raw-loader", options: { esModule: false } }],
-      sideEffects: false,
     },
     {
       test: /\.svg$/,
       loader: "svg-inline-loader",
-      sideEffects: false,
     },
     {
       test: /\.yaml$/,
@@ -138,13 +132,11 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           options: { lang: language },
         },
       ],
-      sideEffects: false,
     },
     {
       test: /\.json$/,
       exclude: /node_modules/, // don't run on dependencies, if they're already internally loading their own json then applying the loader a second time fails (it's no longer valid json the second time)
       use: [{ loader: "json-loader" }],
-      sideEffects: false,
     },
   ];
 };
@@ -220,7 +212,6 @@ function get_plugins({
         },
       }),
     is_prod_build && new webpack.optimize.ModuleConcatenationPlugin(),
-    is_prod_build && new MiniCssExtractPlugin(),
   ]);
 }
 
