@@ -70,19 +70,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       use: js_module_loader_rules,
     },
     {
-      test: /\.css$/,
-      use: [
-        { loader: "style-loader" },
-        {
-          loader: "css-loader",
-          options: {
-            url: false,
-          },
-        },
-      ],
-      sideEffects: true,
-    },
-    {
       test: /\.scss$/,
       use: [
         { loader: "style-loader" }, // creates style nodes from JS strings
