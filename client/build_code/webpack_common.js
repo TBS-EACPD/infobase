@@ -50,15 +50,13 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
 
   return [
     {
-      test: (module_name) =>
-        /\.(js|ts|tsx)$/.test(module_name) &&
-        !/\.side-effects\.js$/.test(module_name),
-      exclude: /node_modules/,
+      test: /\.(js|ts|tsx)$/,
+      exclude: /node_modules|\.side-effects\.(js|ts|tsx)$/,
       use: js_module_loader_rules,
       sideEffects: false,
     },
     {
-      test: /\.side-effects\.js$/,
+      test: /\.side-effects\.(js|ts|tsx)$/,
       exclude: /node_modules/,
       use: js_module_loader_rules,
       sideEffects: true,
@@ -66,7 +64,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     {
       // node modules that specifically require transpilation...
       include: /node_modules\/(d3-*|@nivo\/*)/,
-      test: /\.(js)$/,
+      test: /\.(js||ts|tsx)$/,
       use: js_module_loader_rules,
     },
     {
