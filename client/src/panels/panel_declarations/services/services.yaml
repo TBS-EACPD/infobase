@@ -2,10 +2,10 @@
 services_intro_title:
   en: Introduction to services
   fr: TODO
-subject_reports:
+total_number_of_services:
   transform: [handlebars, markdown]
   en: |
-    {{subject.name}} reports
+    Total number of services in {{subject.name}}
   fr: |
     TODO
 number_value_of_services:
@@ -33,23 +33,19 @@ pct_of_online_end_services:
 
 services_intro_gov:
   transform: [handlebars, markdown]
-  en: |
-    **The Treasury Board of Canada Secretariat (TBS)** is committed to improving the transparency, accountability, and accessibility of new and evolving government digital technologies and {{gl_tt "services" "SERVICE"}}. 
- 
-    Information on services provided by the **Government of Canada** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
+  en: | 
+    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
-    The GC Service Inventory currently contains service data from **{{number_of_reporting_orgs}}** departments and agencies, covering results from **{{services_year_2}}** to **{{services_year}}**
+    The **GC Service Inventory** currently contains service data from **{{num_of_orgs_offering_services}} departments and agencies**, covering results from **{{services_year_2}}** to **{{services_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
 services_intro_dept:
   transform: [handlebars, markdown]
-  en: |
-    **The Treasury Board of Canada Secretariat (TBS)** is committed to improving the transparency, accountability, and accessibility of new and evolving government digital technologies and {{gl_tt "services" "SERVICE"}}. 
- 
-    Information on services provided by the **Government of Canada** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
+  en: | 
+    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
-    The GC Service Inventory currently contains service data from **{{number_of_reporting_programs}}** programs, covering results from **{{services_year_2}}** to **{{services_year}}**
+    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{services_year_2}}** to **{{services_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
@@ -58,16 +54,18 @@ services_intro_dept:
 list_of_provided_services_title:
   en: List of provided services
   fr: Liste des services offerts
-list_of_provided_services_desc:
+list_of_provided_services_desc_dept:
   transform: [handlebars, markdown]
   en: |
-    **{{subject_name}}** is reporting on **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
+    In **{{services_year}}, {{subject_name}}** offered **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
-    **{{subject_name}}** rend compte de **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
-list_of_provided_services_prog_desc:
+    TODO
+list_of_provided_services_desc_program:
   transform: [handlebars, markdown]
   en: |
-    There are **{{num_of_services}}** services delivered under the **{{subject_name}}** program:
+    Programs can provide one or more {{gl_tt "services" "SERVICE"}}. As well, several Programs together may offer one service.
+
+    In **{{services_year}}, {{subject_name}}** offered **{{num_of_services}}** services
   fr: TODO
 
 view_service:
@@ -81,7 +79,7 @@ filter_results_service:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** provides, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
+    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offers, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
   fr: |
     TODO
 services_digital_status_prog_text:
@@ -150,12 +148,11 @@ service_name:
   en: Service name
   fr: Nom du service
 services_channels_title:
-  en: Application channels of services  #SI_TODO Delivery to Application
-  fr: Modes de prestation des services
+  en: Applications for Services by Channel
+  fr: TODO
 single_service_channels_title:
-  en: Application channels of this service #SI_TODO Delivery to Application
-  fr: Modes de prestation de ce service
-# SI_TODO need to remove "enquiries" in fr
+  en: Application channels of this service
+  fr: TODO
 services_channels_text:
   transform: [handlebars, markdown]
   en: Among the **{{fmt_big_int number_of_applications}}** applications which the **{{subject.name}}** received across **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}, **{{fmt_big_int number_of_online_applications}}** applications were completed online, representing **{{fmt_percentage1  pct_of_online_applications}}** of all applications.
@@ -165,35 +162,28 @@ application_channels_by_services_text:
   en: |
     Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
     
-    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    In **{{subject.name}}**, the most traffic was generated through "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
-  fr: | #SI_TODO Delivery to Application
-    Modes de prestation utilisés par les services pout traiter les demandes et les renseignements.
-
-    À **{{subject.name}}**, le plus grand nombre de demandes a ètès gènèrè par les mode "**{{max_vol_channel_name}}**" avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
-
-    Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, le plus grand nombre parmi les services du ministére.
+  fr: |
+    TODO
 application_channels_by_services_program_text:
   transform: [handlebars, markdown]
   en: |
     Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
 
-    Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**" {{gl_tt "channel" "CHANNELS"}} with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    Under the **{{subject.name}}** program, the most traffic was generated through the "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
     
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the services offered under this program.
   fr: TODO
-# SI_TODO need to remove "enquiries" in fr
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
     Application channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications.
     
     {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest Application channels volume for this service.{{/if}}
-  fr: | #SI_TODO Delivery to Application
-    Les modes de prestationn utilisés par ce service pout traiter les demandes et les renseignements.
-    
-    {{#if max_channel_key}}Il y a eu **{{fmt_big_int max_value}} {{max_channel_key}}**, soit le plus grand nombre pour ce service.{{/if}}
+  fr: | 
+    TODO
 live_application_count:
   en: In person applications
   fr: Demandes en personne
@@ -213,20 +203,20 @@ applications_count:
   en: applications
   fr: demandes
 
-# Orgs reporting services
-orgs_reporting_services_title:
-  en: Organizations reporting services
+# Orgs offering services
+orgs_offering_services_title:
+  en: Organizations which offer services
   fr: TODO
-programs_reporting_services_title:
-  en: Programs reporting services
+programs_offering_services_title:
+  en: Programs in this department which offer services
   fr: TODO
-orgs_reporting_services_text:
+orgs_offering_services_text:
   transform: [handlebars, markdown]
-  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of the **{{subject.name}}** reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
+  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
   fr: TODO
-programs_reporting_services_text:
+programs_offering_services_text:
   transform: [handlebars, markdown]
-  en: In **{{services_year}}, {{number_of_programs}}** programs of the **{{subject.name}}** reported **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
+  en: In **{{services_year}}, {{number_of_programs}}** programs of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
   fr: TODO
 number_of_services:
   en: Number of services

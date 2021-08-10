@@ -95,8 +95,9 @@ export default function (model_singleton) {
     number_of_services: { type: Number },
     number_of_online_enabled_services: { type: Number },
     pct_of_online_client_interaction_pts: { type: Number },
-    number_of_reporting_orgs: { type: Number }, // only for gov
-    number_of_reporting_programs: { type: Number }, // only for gov, org
+    pct_of_standards_met_high_vol_services: { type: Number },
+    num_of_orgs_offering_services: { type: Number }, // only for gov
+    num_of_programs_offering_services: { type: Number }, // only for gov, org
   });
   const ServiceChannelsSummarySchema = mongoose.Schema({
     id: pkey_type(),
@@ -121,7 +122,7 @@ export default function (model_singleton) {
     standards_count: { type: Number },
     met_standards_count: { type: Number },
   });
-  const OrgsReportingServicesSummarySchema = mongoose.Schema({
+  const OrgsOfferingServicesSummarySchema = mongoose.Schema({
     id: pkey_type(),
     subject_id: parent_fkey_type(),
     number_of_services: { type: Number },
@@ -137,11 +138,11 @@ export default function (model_singleton) {
 
   const GovServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
-    orgs_reporting_services_summary: [OrgsReportingServicesSummarySchema],
+    orgs_offering_services_summary: [OrgsOfferingServicesSummarySchema],
   });
   const OrgServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
-    orgs_reporting_services_summary: [OrgsReportingServicesSummarySchema],
+    orgs_offering_services_summary: [OrgsOfferingServicesSummarySchema],
   });
   const ProgramServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
