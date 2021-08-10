@@ -1,1 +1,13 @@
 # Treemap FAQ keys will go here
+# Putting empty FAQ keys so I don't get Circle CI errors
+
+placeholder_q:
+  en: |
+    .
+  fr: |
+    .
+placeholder_a:
+  en: |
+    .
+  fr: |
+    . 
