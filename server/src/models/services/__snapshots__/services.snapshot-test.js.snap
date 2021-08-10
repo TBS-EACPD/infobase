@@ -7,7 +7,7 @@ Object {
       "org": Object {
         "service_summary": Object {
           "id": "326",
-          "orgs_reporting_services_summary": Array [
+          "orgs_offering_services_summary": Array [
             Object {
               "id": "TBC-ISS02",
               "number_of_services": 1,
@@ -133,9 +133,9 @@ Object {
           ],
           "service_general_stats": Object {
             "id": "326",
+            "num_of_orgs_offering_services": null,
+            "num_of_programs_offering_services": 6,
             "number_of_online_enabled_services": 4,
-            "number_of_reporting_orgs": null,
-            "number_of_reporting_programs": 6,
             "number_of_services": 6,
           },
           "service_standards_summary": Array [
@@ -161,7 +161,7 @@ Object {
       "program": Object {
         "service_summary": Object {
           "id": "TBC-BXB01",
-          "orgs_reporting_services_summary": null,
+          "orgs_offering_services_summary": null,
           "service_channels_summary": Array [
             Object {
               "channel_id": "other_application_count",
@@ -250,9 +250,9 @@ Object {
           ],
           "service_general_stats": Object {
             "id": "TBC-BXB01",
+            "num_of_orgs_offering_services": null,
+            "num_of_programs_offering_services": null,
             "number_of_online_enabled_services": 1,
-            "number_of_reporting_orgs": null,
-            "number_of_reporting_programs": null,
             "number_of_services": 1,
           },
           "service_standards_summary": Array [

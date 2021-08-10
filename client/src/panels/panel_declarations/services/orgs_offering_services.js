@@ -20,14 +20,14 @@ import text from "./services.yaml";
 const { Dept, Program } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
-const OrgsReportingServicesPanel = ({ subject }) => {
+const OrgsOfferingServicesPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({
     subject,
     query_fragment: `
     service_general_stats {
       number_of_services
     }
-    orgs_reporting_services_summary {
+    orgs_offering_services_summary {
       id
       subject_id
       number_of_services
@@ -38,7 +38,7 @@ const OrgsReportingServicesPanel = ({ subject }) => {
     return <LeafSpinner config_name="inline_panel" />;
   }
   const {
-    orgs_reporting_services_summary,
+    orgs_offering_services_summary,
     service_general_stats: { number_of_services },
   } = data;
   const is_gov = subject.level === "gov";
@@ -77,12 +77,12 @@ const OrgsReportingServicesPanel = ({ subject }) => {
       {is_gov ? (
         <TM
           className="medium-panel-text"
-          k="orgs_reporting_services_text"
+          k="orgs_offering_services_text"
           args={{
             subject,
-            number_of_depts: orgs_reporting_services_summary.length,
+            number_of_depts: orgs_offering_services_summary.length,
             number_of_applications: _.sumBy(
-              orgs_reporting_services_summary,
+              orgs_offering_services_summary,
               "total_volume"
             ),
             number_of_services,
@@ -91,12 +91,12 @@ const OrgsReportingServicesPanel = ({ subject }) => {
       ) : (
         <TM
           className="medium-panel-text"
-          k="programs_reporting_services_text"
+          k="programs_offering_services_text"
           args={{
             subject,
-            number_of_programs: orgs_reporting_services_summary.length,
+            number_of_programs: orgs_offering_services_summary.length,
             number_of_applications: _.sumBy(
-              orgs_reporting_services_summary,
+              orgs_offering_services_summary,
               "total_volume"
             ),
             number_of_services,
@@ -105,28 +105,28 @@ const OrgsReportingServicesPanel = ({ subject }) => {
       )}
       <DisplayTable
         unsorted_initial={true}
-        data={orgs_reporting_services_summary}
+        data={orgs_offering_services_summary}
         column_configs={column_configs}
       />
     </HeightClippedGraph>
   );
 };
 
-export const declare_orgs_reporting_services_panel = () =>
+export const declare_orgs_offering_services_panel = () =>
   declare_panel({
-    panel_key: "orgs_reporting_services",
+    panel_key: "orgs_offering_services",
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       title:
         level === "gov"
-          ? text_maker("orgs_reporting_services_title")
-          : text_maker("programs_reporting_services_title"),
+          ? text_maker("orgs_offering_services_title")
+          : text_maker("programs_offering_services_title"),
       footnotes: false,
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (
           <InfographicPanel title={title} sources={sources}>
-            <OrgsReportingServicesPanel subject={subject} />
+            <OrgsOfferingServicesPanel subject={subject} />
           </InfographicPanel>
         );
       },

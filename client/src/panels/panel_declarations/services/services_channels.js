@@ -33,7 +33,7 @@ const colors = infobase_colors();
 const { text_maker, TM } = create_text_maker_component(text);
 const channels = _.map(application_channels_keys, text_maker);
 const { services_years } = year_templates;
-const most_recent_year = _.chain(services_years) //SI TODO how to get most recent year better?
+const most_recent_year = _.chain(services_years) //SI_TODO how to get most recent year better?
   .map(run_template)
   .takeRight()
   .split("-")

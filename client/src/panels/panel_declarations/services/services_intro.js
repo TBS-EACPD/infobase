@@ -21,7 +21,7 @@ const ServicesIntroPanel = ({ subject }) => {
       number_of_services
       number_of_online_enabled_services
       pct_of_online_client_interaction_pts
-      number_of_reporting_orgs
+      num_of_orgs_offering_services
     }`,
   });
   if (loading) {
@@ -32,37 +32,28 @@ const ServicesIntroPanel = ({ subject }) => {
       number_of_services,
       number_of_online_enabled_services,
       pct_of_online_client_interaction_pts,
-      number_of_reporting_orgs,
-      number_of_reporting_programs,
+      num_of_orgs_offering_services,
+      num_of_programs_offering_services,
     },
   } = data;
 
   const pct_formatter = (value) => formats.percentage1_raw(value);
-  const intro_text = () => {
-    switch (subject.level) {
-      case "gov": {
-        return (
-          <TM k="services_intro_gov" args={{ number_of_reporting_orgs }} />
-        );
-      }
-      case "dept": {
-        return (
-          <TM k="services_intro_dept" args={{ number_of_reporting_programs }} />
-        );
-      }
-      case "program": {
-        return "SI_TODO";
-      }
-    }
-  };
 
   return (
     <div className="medium-panel-text">
-      {intro_text()}
+      <TM
+        k={`services_intro_${subject.level}`}
+        args={{
+          subject,
+          ...(subject.level === "gov"
+            ? { num_of_orgs_offering_services }
+            : { num_of_programs_offering_services }),
+        }}
+      />
       <div className="pane-row">
         <div className="pane-rect">
           <span className="pane-max-width">
-            <TM k="subject_reports" args={{ subject }} />
+            <TM k="total_number_of_services" args={{ subject }} />
           </span>
           <TM
             className="large_panel_text"
@@ -104,7 +95,7 @@ const ServicesIntroPanel = ({ subject }) => {
 export const declare_services_intro_panel = () =>
   declare_panel({
     panel_key: "services_intro",
-    levels: ["gov", "dept", "program"],
+    levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       title: text_maker("services_intro_title"),
       calculate: (subject) => {
