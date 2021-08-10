@@ -61,9 +61,7 @@ const IsolatedPanel = retrying_react_lazy(() =>
 const PanelInventory = retrying_react_lazy(() =>
   import("src/panels/panel_routes/PanelInventory")
 );
-const GraphiQL = retrying_react_lazy(() =>
-  import("src/graphql_utils/GraphiQL")
-);
+
 const FootnoteInventory = retrying_react_lazy(() =>
   import("src/models/footnotes/FootnoteInventory")
 );
@@ -200,10 +198,6 @@ export class App extends React.Component {
                 <Route
                   path="/footnote-inventory"
                   component={FootnoteInventory}
-                />
-                <Route
-                  path="/graphiql/:encoded_query?/:encoded_variables?"
-                  component={GraphiQL}
                 />
                 {!is_a11y_mode && (
                   <Route
