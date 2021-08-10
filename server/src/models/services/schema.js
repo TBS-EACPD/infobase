@@ -25,15 +25,15 @@ const schema = `
     service_channels_summary: [ServiceChannelsSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
-    orgs_reporting_services_summary: [OrgsReportingServicesSummary]
+    orgs_offering_services_summary: [OrgsOfferingServicesSummary]
   }
   type ServiceGeneralStats{
     id: String
     number_of_services: Float
     number_of_online_enabled_services: Float
     pct_of_online_client_interaction_pts: Float
-    number_of_reporting_orgs: Float
-    number_of_reporting_programs: Float
+    num_of_orgs_offering_services: Float
+    num_of_programs_offering_services: Float
   }
   type ServiceChannelsSummary{
     id: String
@@ -58,7 +58,7 @@ const schema = `
     standards_count: Float
     met_standards_count: Float
   }
-  type OrgsReportingServicesSummary{
+  type OrgsOfferingServicesSummary{
     id: String
     subject_id: String
     number_of_services: Float

@@ -49,8 +49,8 @@ const ProvidedServicesListPanel = ({ subject }) => {
       <TM
         k={
           subject.level === "program"
-            ? "list_of_provided_services_prog_desc"
-            : "list_of_provided_services_desc"
+            ? "list_of_provided_services_desc_program"
+            : "list_of_provided_services_desc_dept"
         }
         className="medium-panel-text"
         args={{
