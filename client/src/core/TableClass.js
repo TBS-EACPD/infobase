@@ -19,6 +19,7 @@ import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace
 import { lang } from "./injected_build_constants";
 
 import { query_adapter } from "./tables/queries";
+import { text_maker } from "src/tables/table_common";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 
@@ -225,6 +226,28 @@ export class Table {
 
     this.dimensions.unshift("all");
   }
+  // TODO: come up with better name for this function
+  get_sum_col_by_grouped_data_func() {
+    this.sum_col_by_grouped_data = function (col_nick, dimension) {
+      const { group_by_vs_func } = this;
+      return _.chain(this.data)
+        .groupBy(
+          group_by_vs_func
+            ? (row) => group_by_vs_func(dimension, row)
+            : dimension
+        )
+        .map((data_group) => {
+          const dim_name = group_by_vs_func
+            ? group_by_vs_func("vote_vs_stat", data_group[0])
+              ? text_maker("stat")
+              : text_maker("voted")
+            : data_group[0][dimension];
+          return [dim_name, _.sumBy(data_group, col_nick)];
+        })
+        .fromPairs()
+        .value();
+    };
+  }
   get links() {
     return this.link
       ? [this.link[lang]]
@@ -426,6 +449,7 @@ export class Table {
     });
 
     this.q = query_adapter;
+    this.get_sum_col_by_grouped_data_func();
   }
   //TODO: optimize and clarify this
   get_row_func() {

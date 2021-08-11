@@ -39,8 +39,12 @@ const render_w_options =
     );
   };
 
+const get_voted_stat = (table) => {
+  return table.sum_col_by_grouped_data(main_col, "vote_vs_stat");
+};
+
 const get_vote_stat_est_in_year = (table, subject) => {
-  const voted_stat = table.voted_stat(main_col, subject, true);
+  const voted_stat = get_voted_stat(table);
   return [
     { value: voted_stat[stat] || 0, label: stat },
     {
@@ -50,7 +54,7 @@ const get_vote_stat_est_in_year = (table, subject) => {
   ];
 };
 const get_text_calculations = (table, subject) => {
-  const voted_stat = table.voted_stat(main_col, subject, true);
+  const voted_stat = get_voted_stat(table);
   const q = table.q(subject);
   const stat_est_in_year = voted_stat[stat] || 0;
   const voted_est_in_year = voted_stat[voted] || 0;
