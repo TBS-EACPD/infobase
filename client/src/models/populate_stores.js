@@ -174,24 +174,6 @@ function populate_glossary(lines) {
     translation_col,
   ];
   _.chain(lines)
-    .thru((lines) => [
-      ...lines,
-      // GBA_TODO temporary dev glossary items, to be moved to pipeline
-      [
-        "GBA_PLUS",
-        "Gender-Based Analysis Plus (GBA Plus)",
-        "Analyse comparative entre les sexes plus (ACS Plus)",
-        "Gender-based analysis plus (GBA Plus) is an analytical process used to assess how different groups of women, men and gender-diverse people experience policies, programs and services based on multiple factors including race, ethnicity, religion, age, and mental or physical disability. The federal government uses GBA Plus in the development of policies, programs and legislation. GBA Plus helps the government attain better results for Canadians by being more responsive to specific needs and circumstances.",
-        "L'analyse comparative entre les sexes plus (ACS Plus) est un processus analytique utilisé pour évaluer comment différents groupes de femmes, d'hommes et de personnes de sexe différent vivent les politiques, les programmes et les services en fonction de multiples facteurs, notamment la race, l'origine ethnique, la religion, l'âge et le handicap mental ou physique. Le gouvernement fédéral utilise l'ACS Plus dans l'élaboration de politiques, de programmes et de lois. L'ACS Plus aide le gouvernement à obtenir de meilleurs résultats pour les Canadiens en étant plus réceptif à des besoins précis et à des circonstances particulières.",
-      ],
-      [
-        "GBA_PLUS_INDICATOR",
-        "Gender Based Analysis Plus (GBA Plus) Indicators",
-        "Indicateur d'analyse comparative entre les sexes Plus (ACS Plus)",
-        "A program-level indicator from a Departmental Results Report or Departmental Plan is considered to support gender-based analysis plus (GBA Plus) if it identifies an impact on one or more specific sub-population(s) or is associated with an activity that supports the analysis of impacts on different sub-populations. GBA Plus indicators from 2019-20 are explicitly marked on GC InfoBase. These indicators represent a subset of the GBA Plus indicators tracked by the Government of Canada.",
-        "Un indicateur de programme provenant d'un rapport ministériel sur les résultats ou d'un plan ministériel est réputé soutenir l'analyse comparative entre les sexes plus (ACS Plus) s'il relève un impact sur une ou plusieurs sous-populations précises ou s'il est associé à une activité qui appuie l'analyse d'impact sur différentes sous-populations. Les indicateurs ACS Plus de 2019-2020 sont indiqués explicitement dans l'InfoBase du GC. Ces indicateurs représentent un sous-ensemble des indicateurs de l'ACS Plus suivis par le gouvernement du Canada.",
-      ],
-    ])
     .filter((line) => !_.isEmpty(line[markdown_def]))
     .each((line) => {
       GlossaryEntry.register(
