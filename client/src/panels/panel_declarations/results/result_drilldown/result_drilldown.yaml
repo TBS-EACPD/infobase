@@ -99,7 +99,6 @@ result_explanation:
   en: Result explanation
   fr: Explication du résultat
 
-# GBA_TODO have french confirmed
 gba_filter:
   transform: [handlebars]
   en: Show {{gl_tt "GBA Plus indicators" "GBA_PLUS_INDICATOR"}} only
