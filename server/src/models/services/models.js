@@ -96,7 +96,7 @@ export default function (model_singleton) {
     number_of_online_enabled_services: { type: Number },
     pct_of_online_client_interaction_pts: { type: Number },
     pct_of_standards_met_high_vol_services: { type: Number },
-    num_of_orgs_offering_services: { type: Number }, // only for gov
+    num_of_subject_offering_services: { type: Number }, // only for gov
     num_of_programs_offering_services: { type: Number }, // only for gov, org
   });
   const ServiceChannelsSummarySchema = mongoose.Schema({
@@ -138,11 +138,11 @@ export default function (model_singleton) {
 
   const GovServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
-    orgs_offering_services_summary: [OrgsOfferingServicesSummarySchema],
+    subject_offering_services_summary: [OrgsOfferingServicesSummarySchema],
   });
   const OrgServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
-    orgs_offering_services_summary: [OrgsOfferingServicesSummarySchema],
+    subject_offering_services_summary: [OrgsOfferingServicesSummarySchema],
   });
   const ProgramServiceSummarySchema = mongoose.Schema({
     ...common_service_fields,
