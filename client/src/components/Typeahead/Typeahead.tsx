@@ -165,14 +165,14 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
             placeholder={placeholder}
             autoComplete="off"
             value={input_value}
-            type="search"
+            type="text"
             onFocus={this.handle_input_focus}
             onChange={this.handle_input_change}
             onKeyDown={this.handle_key_down}
             role="combobox"
             aria-autocomplete="none"
             aria-owns={this.menu_id}
-            aria-label={"search"}
+            aria-label={text_maker("explorer_search")}
             aria-describedby={`${this.menu_id}-hint`}
             aria-expanded={this.show_menu}
           />

@@ -295,6 +295,7 @@ class DetailedHistTPItems extends React.Component {
           {title_el}
           <select
             style={{ margin: "2rem 0" }}
+            aria-label={text_maker("payment_types")}
             className="form-control"
             onChange={(evt) => {
               //reset colour scale for new items
