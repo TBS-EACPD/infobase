@@ -59,11 +59,11 @@ export default function (model_singleton) {
   });
 
   const EmployeeGovAvgsSchema = mongoose.Schema({
+    id: pkey_type(),
     data: [
       {
         by_year: [
           {
-            id: pkey_type(),
             year: fyear_type(),
             value: number_type,
           },
@@ -71,55 +71,31 @@ export default function (model_singleton) {
       },
     ],
   });
-  model_singleton.define_model(
-    "EmployeeAgeGroup",
-    EmployeePopulationDataSchema
-  );
-  model_singleton.define_model("EmployeeExLvl", EmployeePopulationDataSchema);
-  model_singleton.define_model("EmployeeFol", EmployeePopulationDataSchema);
-  model_singleton.define_model("EmployeeGender", EmployeePopulationDataSchema);
-  model_singleton.define_model("EmployeeRegion", EmployeePopulationDataSchema);
-  model_singleton.define_model("EmployeeType", EmployeePopulationDataSchema);
-  model_singleton.define_model("EmployeeAvgAge", EmployeeAvgAgeSchema);
-  model_singleton.define_model(
-    "EmployeeAgeTotals",
-    EmployeeDataGovTotalsSchema
-  );
-  model_singleton.define_model(
-    "EmployeeExLvlTotals",
-    EmployeeDataGovTotalsSchema
-  );
-  model_singleton.define_model(
-    "EmployeeFolTotals",
-    EmployeeDataGovTotalsSchema
-  );
-  model_singleton.define_model(
-    "EmployeeGenderTotals",
-    EmployeeDataGovTotalsSchema
-  );
-  model_singleton.define_model(
-    "EmployeeRegionTotals",
-    EmployeeDataGovTotalsSchema
-  );
-  model_singleton.define_model(
-    "EmployeeTypeTotals",
-    EmployeeDataGovTotalsSchema
-  );
-  model_singleton.define_model("EmployeeGovAvgs", EmployeeGovAvgsSchema);
-  const {
-    EmployeeAgeGroup,
-    EmployeeExLvl,
-    EmployeeFol,
-    EmployeeGender,
-    EmployeeRegion,
-    EmployeeType,
-    EmployeeAvgAge,
-    EmployeeAgeTotals,
-    EmployeeExLvlTotals,
-    EmployeeFolTotals,
-    EmployeeGenderTotals,
-    EmployeeRegionTotals,
-    EmployeeTypeTotals,
-    EmployeeGovAvgs,
-  } = model_singleton.models;
+
+  const OrgEmployeeSummarySchema = mongoose.Schema({
+    org_id: pkey_type(),
+    employee_age_group: [EmployeePopulationDataSchema],
+    employee_ex_lvl: [EmployeePopulationDataSchema],
+    employee_fol: [EmployeePopulationDataSchema],
+    employee_gender: [EmployeePopulationDataSchema],
+    employee_region: [EmployeePopulationDataSchema],
+    employee_type: [EmployeePopulationDataSchema],
+    employee_avg_age: [EmployeeAvgAgeSchema],
+  });
+
+  const GovEmployeeSummarySchema = mongoose.Schema({
+    id: pkey_type(),
+    employee_age_totals: [EmployeeDataGovTotalsSchema],
+    employee_ex_lvl_totals: [EmployeeDataGovTotalsSchema],
+    employee_gender_totals: [EmployeeDataGovTotalsSchema],
+    employee_fol_totals: [EmployeeDataGovTotalsSchema],
+    employee_region_totals: [EmployeeDataGovTotalsSchema],
+    employee_type_totals: [EmployeeDataGovTotalsSchema],
+    employee_gov_avgs: [EmployeeGovAvgsSchema],
+  });
+
+  model_singleton.define_model("OrgEmployeeSummary", OrgEmployeeSummarySchema);
+  model_singleton.define_model("GovEmployeeSummary", GovEmployeeSummarySchema);
+
+  const { OrgEmployeeSummary, GovEmployeeSummary } = model_singleton.models;
 }
