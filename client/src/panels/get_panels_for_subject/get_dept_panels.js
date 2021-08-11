@@ -38,7 +38,7 @@ import {
   declare_historical_g_and_c_panel,
   declare_auth_exp_planned_spending_panel,
   declare_services_intro_panel,
-  declare_orgs_offering_services_panel,
+  declare_subject_offering_services_panel,
   declare_people_key_concepts_panel,
   declare_employee_totals_panel,
   declare_employee_prov_panel,
@@ -116,7 +116,7 @@ export const get_dept_panels = (subject) =>
     services: services_feature_flag &&
       subject.has_data("services") && [
         declare_services_intro_panel(),
-        declare_orgs_offering_services_panel(),
+        declare_subject_offering_services_panel(),
         declare_provided_services_list_panel(),
         declare_services_digital_status_panel(),
         declare_services_channels_panel(),

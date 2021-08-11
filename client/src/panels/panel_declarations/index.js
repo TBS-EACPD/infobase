@@ -90,5 +90,5 @@ export {
   declare_application_channels_by_services_panel,
   declare_services_digital_status_panel,
   declare_services_standards_panel,
-  declare_orgs_offering_services_panel,
+  declare_subject_offering_services_panel,
 } from "./services/index";

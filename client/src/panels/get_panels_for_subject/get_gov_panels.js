@@ -26,7 +26,7 @@ import {
   declare_employee_gender_panel,
   declare_services_intro_panel,
   declare_services_digital_status_panel,
-  declare_orgs_offering_services_panel,
+  declare_subject_offering_services_panel,
   declare_services_channels_panel,
   declare_services_standards_panel,
   declare_results_intro_panel,
@@ -83,7 +83,7 @@ export const get_gov_panels = (subject) => ({
   ],
   services: services_feature_flag && [
     declare_services_intro_panel(),
-    declare_orgs_offering_services_panel(),
+    declare_subject_offering_services_panel(),
     declare_services_digital_status_panel(),
     declare_services_channels_panel(),
     declare_services_standards_panel(),

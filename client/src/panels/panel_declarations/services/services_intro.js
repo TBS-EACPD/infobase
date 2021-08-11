@@ -21,7 +21,7 @@ const ServicesIntroPanel = ({ subject }) => {
       number_of_services
       number_of_online_enabled_services
       pct_of_online_client_interaction_pts
-      num_of_orgs_offering_services
+      num_of_subject_offering_services
     }`,
   });
   if (loading) {
@@ -32,7 +32,7 @@ const ServicesIntroPanel = ({ subject }) => {
       number_of_services,
       number_of_online_enabled_services,
       pct_of_online_client_interaction_pts,
-      num_of_orgs_offering_services,
+      num_of_subject_offering_services,
       num_of_programs_offering_services,
     },
   } = data;
@@ -46,7 +46,7 @@ const ServicesIntroPanel = ({ subject }) => {
         args={{
           subject,
           ...(subject.level === "gov"
-            ? { num_of_orgs_offering_services }
+            ? { num_of_subject_offering_services }
             : { num_of_programs_offering_services }),
         }}
       />

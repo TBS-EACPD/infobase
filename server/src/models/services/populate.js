@@ -224,7 +224,7 @@ export default async function ({ models }) {
       met_standards_count: _.countBy(processed_standards, "is_target_met").true,
     };
   };
-  const get_orgs_offering_services_summary = (grouped_services) =>
+  const get_subject_offering_services_summary = (grouped_services) =>
     _.chain(grouped_services)
       .map((services, org_id) => ({
         id: org_id,
@@ -335,7 +335,7 @@ export default async function ({ models }) {
           get_pct_of_online_client_interaction_pts(service_rows),
         pct_of_standards_met_high_vol_services:
           get_pct_of_standards_met_high_vol_services(service_rows),
-        num_of_orgs_offering_services: _.chain(service_rows)
+        num_of_subject_offering_services: _.chain(service_rows)
           .groupBy("org_id")
           .size()
           .value(),
@@ -351,7 +351,7 @@ export default async function ({ models }) {
       service_standards_summary: [
         get_final_standards_summary(service_rows, "gov"),
       ],
-      orgs_offering_services_summary: get_orgs_offering_services_summary(
+      subject_offering_services_summary: get_subject_offering_services_summary(
         _.groupBy(service_rows, "org_id")
       ),
     },
@@ -379,7 +379,7 @@ export default async function ({ models }) {
         populate_digital_summary_key(services, org_id, "dept", key)
       ),
       service_standards_summary: get_final_standards_summary(services, org_id),
-      orgs_offering_services_summary: get_orgs_offering_services_summary(
+      subject_offering_services_summary: get_subject_offering_services_summary(
         _.reduce(services, group_by_program_id, {})
       ),
     }))
