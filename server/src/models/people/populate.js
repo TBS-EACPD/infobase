@@ -3,22 +3,7 @@ import _ from "lodash";
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
 export default async function ({ models }) {
-  const {
-    EmployeeAgeGroup,
-    EmployeeExLvl,
-    EmployeeFol,
-    EmployeeGender,
-    EmployeeRegion,
-    EmployeeType,
-    EmployeeAvgAge,
-    EmployeeAgeTotals,
-    EmployeeExLvlTotals,
-    EmployeeFolTotals,
-    EmployeeGenderTotals,
-    EmployeeRegionTotals,
-    EmployeeTypeTotals,
-    EmployeeGovAvgs,
-  } = models;
+  const { OrgEmployeeSummary, GovEmployeeSummary } = models;
 
   const igoc_rows = get_standard_csv_file_rows("igoc.csv");
   const process_employee_csv = (csv_name) =>
@@ -134,34 +119,81 @@ export default async function ({ models }) {
     "org_employee_type.csv"
   );
 
-  let employee_gov_avg = {
+  let employee_gov_avgs = {
+    id: "gov",
     data: _.chain(get_standard_csv_file_rows("org_employee_avg_age.csv"))
       .filter({ dept_code: "ZGOC" })
       .head()
       .omit(["dept_code", "dimension"])
       .map((value, key) => ({
         by_year: {
-          id: [key][0],
           year: [key][0],
           value: value,
         },
       }))
       .value(),
   };
+
+  let org_id_list = _.map(employee_age_rows, "org_id"); // all the csv files should have the same list of org_ids
+
+  let org_summary = _.map(org_id_list, (org_id) => ({
+    org_id: org_id,
+    employee_age_group: {
+      org_id: org_id,
+      data: _.find(employee_age_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+    employee_ex_lvl: {
+      org_id: org_id,
+      data: _.find(employee_ex_lvl_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+    employee_fol: {
+      org_id: org_id,
+      data: _.find(employee_fol_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+    employee_gender: {
+      org_id: org_id,
+      data: _.find(employee_gender_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+    employee_region: {
+      org_id: org_id,
+      data: _.find(employee_region_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+    employee_type: {
+      org_id: org_id,
+      data: _.find(employee_type_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+    employee_avg_age: {
+      org_id: org_id,
+      data: _.find(employee_avg_age_rows, (z) => {
+        return z.org_id == org_id;
+      }).data,
+    },
+  }));
+
+  let gov_summary = {
+    id: "gov",
+    employee_age_totals: employee_age_totals,
+    employee_ex_lvl_totals: employee_ex_lvl_totals,
+    employee_gender_totals: employee_gender_totals,
+    employee_fol_totals: employee_fol_totals,
+    employee_region_totals: employee_region_totals,
+    employee_type_totals: employee_type_totals,
+    employee_gov_avgs: employee_gov_avgs,
+  };
   return await Promise.all([
-    EmployeeAgeGroup.insertMany(employee_age_rows),
-    EmployeeExLvl.insertMany(employee_ex_lvl_rows),
-    EmployeeFol.insertMany(employee_fol_rows),
-    EmployeeGender.insertMany(employee_gender_rows),
-    EmployeeRegion.insertMany(employee_region_rows),
-    EmployeeType.insertMany(employee_type_rows),
-    EmployeeAvgAge.insertMany(employee_avg_age_rows),
-    EmployeeAgeTotals.insertMany(employee_age_totals),
-    EmployeeExLvlTotals.insertMany(employee_ex_lvl_totals),
-    EmployeeFolTotals.insertMany(employee_fol_totals),
-    EmployeeGenderTotals.insertMany(employee_gender_totals),
-    EmployeeRegionTotals.insertMany(employee_region_totals),
-    EmployeeTypeTotals.insertMany(employee_type_totals),
-    EmployeeGovAvgs.insertMany(employee_gov_avg),
+    OrgEmployeeSummary.insertMany(org_summary),
+    GovEmployeeSummary.insertMany(gov_summary),
   ]);
 }

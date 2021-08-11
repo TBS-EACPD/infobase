@@ -1,41 +1,33 @@
-const employee_org_fields = `
-  org_id: String
-  data: [DataObjectWithDim]
-`;
-
-const employee_gov_fields = `
-  dimension: String
-  data: [DataObjectNoDim]
-`;
 const schema = `
   extend type Org{
-    employee: EmployeePopDataSchemas 
+    employee_summary: [OrgEmployeeSummary]
   }
 
   extend type Gov {
-    employee:EmployeeGovTotalsSchemas
+    employee_summary: [GovEmployeeSummary]
   }
-
-  type EmployeePopDataSchemas {
-    employee_age_group: [EmployeeAgeGroup]
-    employee_ex_lvl: [EmployeeExLvl]
-    employee_gender: [EmployeeGender]
-    employee_fol: [EmployeeFol]
-    employee_region: [EmployeeRegion]
-    employee_type: [EmployeeType]
+  
+  type OrgEmployeeSummary {
+    org_id: String
+    employee_age_group: [EmployeePopData]
+    employee_ex_lvl: [EmployeePopData]
+    employee_gender: [EmployeePopData]
+    employee_fol: [EmployeePopData]
+    employee_region: [EmployeePopData]
+    employee_type: [EmployeePopData]
     employee_avg_age: [EmployeeAvgAge]
   }
 
-  type EmployeeGovTotalsSchemas {
-    employee_age_totals: [EmployeeAgeTotals]
-    employee_ex_lvl_totals: [EmployeeExLvlTotals]
-    employee_gender_totals: [EmployeeGenderTotals]
-    employee_fol_totals: [EmployeeFolTotals]
-    employee_region_totals: [EmployeeRegionTotals]
-    employee_type_totals: [EmployeeTypeTotals]
+  type GovEmployeeSummary {
+    id: String
+    employee_age_totals: [EmployeeGovData]
+    employee_ex_lvl_totals: [EmployeeGovData]
+    employee_gender_totals: [EmployeeGovData]
+    employee_fol_totals: [EmployeeGovData]
+    employee_region_totals: [EmployeeGovData]
+    employee_type_totals: [EmployeeGovData]
     employee_gov_avgs: [EmployeeGovAvgs]
   }
-
   type DataObjectWithDim {
     dimension: String
     by_year: [ByYearData]
@@ -51,147 +43,37 @@ const schema = `
     value: Float
   }
 
-
-  type EmployeeAgeGroup {
-    ${employee_org_fields}
+  type EmployeePopData {
+    org_id: String
+    data: [DataObjectWithDim]
   }
 
-  type EmployeeExLvl {
-    ${employee_org_fields}
+  type EmployeeGovData{
+    dimension: String
+    data: [DataObjectNoDim]
   }
-
-  type EmployeeFol {
-    ${employee_org_fields}
-  }
-
-  type EmployeeGender {
-    ${employee_org_fields}
-  }
-
-  type EmployeeRegion {
-    ${employee_org_fields}
-  }
-
-  type EmployeeType {
-    ${employee_org_fields}
-  }
-
   type EmployeeAvgAge {
     org_id: String
     data: DataObjectNoDim
   }
 
-  type EmployeeAgeTotals {
-    id: String
-    ${employee_gov_fields}
-  }
-
-  type EmployeeExLvlTotals  {
-    id: String 
-    ${employee_gov_fields}
-  }
-
-  type EmployeeFolTotals  {
-    id: String
-    ${employee_gov_fields}
-  }
-
-  type EmployeeGenderTotals  {
-    id: String
-    ${employee_gov_fields}
-  }
-
-  type EmployeeRegionTotals  {
-    id: String
-    ${employee_gov_fields}
-  }
-
-  type EmployeeTypeTotals  {
-    id: String
-    ${employee_gov_fields}
-  }
-
-  type DataObjectGovAvgs {
-    by_year: [ByYearGovAvgs]
-  }
-
-  type ByYearGovAvgs {
-    id: String
-    year: Int
-    value: Float
-  }
   type EmployeeGovAvgs {
-    data: [DataObjectGovAvgs]
+    id: String
+    data: [DataObjectNoDim]
   }
 `;
 
 export default function ({ models, loaders }) {
-  const {
-    EmployeeAgeGroup,
-    EmployeeExLvl,
-    EmployeeFol,
-    EmployeeGender,
-    EmployeeRegion,
-    EmployeeType,
-    EmployeeAvgAge,
-    EmployeeAgeTotals,
-    EmployeeExLvlTotals,
-    EmployeeFolTotals,
-    EmployeeGenderTotals,
-    EmployeeRegionTotals,
-    EmployeeTypeTotals,
-    EmployeeGovAvgs,
-  } = models;
+  const { OrgEmployeeSummary, GovEmployeeSummary } = models;
   const resolvers = {
     Org: {
-      employee: {
-        employee_age_group: async ({ org_id }) => {
-          return await EmployeeAgeGroup.find({ org_id: org_id });
-        },
-        employee_ex_lvl: async ({ org_id }) => {
-          return await EmployeeExLvl.find({ org_id: org_id });
-        },
-        employee_gender: async ({ org_id }) => {
-          return await EmployeeGender.find({ org_id: org_id });
-        },
-        employee_fol: async ({ org_id }) => {
-          return await EmployeeFol.find({ org_id: org_id });
-        },
-        employee_region: async ({ org_id }) => {
-          return await EmployeeRegion.find({ org_id: org_id });
-        },
-        employee_type: async ({ org_id }) => {
-          return await EmployeeType.find({ org_id: org_id });
-        },
-
-        employee_avg_age: async ({ org_id }) => {
-          return await EmployeeAvgAge.find({ org_id: org_id });
-        },
+      employee_summary: async ({ org_id }) => {
+        return await OrgEmployeeSummary.find({ org_id: org_id });
       },
     },
     Gov: {
-      employee: {
-        employee_age_totals: async ({ org_id }) => {
-          return await EmployeeAgeTotals.find({ org_id: org_id });
-        },
-        employee_ex_lvl_totals: async ({ org_id }) => {
-          return await EmployeeExLvlTotals.find({ org_id: org_id });
-        },
-        employee_gender_totals: async ({ org_id }) => {
-          return await EmployeeGenderTotals.find({ org_id: org_id });
-        },
-        employee_fol_totals: async ({ org_id }) => {
-          return await EmployeeFolTotals.find({ org_id: org_id });
-        },
-        employee_region_totals: async ({ org_id }) => {
-          return await EmployeeRegionTotals.find({ org_id: org_id });
-        },
-        employee_type_totals: async ({ org_id }) => {
-          return await EmployeeTypeTotals.find({ org_id: org_id });
-        },
-        employee_gov_avgs: async ({ org_id }) => {
-          return await EmployeeGovAvgs.find({ org_id: org_id });
-        },
+      employee_summary: async ({ org_id }) => {
+        return await GovEmployeeSummary.find({ org_id: org_id });
       },
     },
   };
