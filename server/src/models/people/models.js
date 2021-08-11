@@ -98,4 +98,17 @@ export default function (model_singleton) {
   model_singleton.define_model("GovEmployeeSummary", GovEmployeeSummarySchema);
 
   const { OrgEmployeeSummary, GovEmployeeSummary } = model_singleton.models;
+
+  const loaders = {
+    org_employee_summary_loader: create_resource_by_id_attr_dataloader(
+      OrgEmployeeSummary,
+      "org_id"
+    ),
+    gov_employee_summary_loader: create_resource_by_id_attr_dataloader(
+      GovEmployeeSummary,
+      "id"
+    ),
+  };
+
+  _.each(loaders, (val, key) => model_singleton.define_loader(key, val));
 }

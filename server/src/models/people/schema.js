@@ -1,10 +1,10 @@
 const schema = `
   extend type Org{
-    employee_summary: [OrgEmployeeSummary]
+    employee_summary: OrgEmployeeSummary
   }
 
   extend type Gov {
-    employee_summary: [GovEmployeeSummary]
+    employee_summary: GovEmployeeSummary
   }
   
   type OrgEmployeeSummary {
@@ -64,17 +64,14 @@ const schema = `
 `;
 
 export default function ({ models, loaders }) {
-  const { OrgEmployeeSummary, GovEmployeeSummary } = models;
+  const { org_employee_summary_loader, gov_employee_summary_loader } = loaders;
   const resolvers = {
     Org: {
-      employee_summary: async ({ org_id }) => {
-        return await OrgEmployeeSummary.find({ org_id: org_id });
-      },
+      employee_summary: ({ org_id }) =>
+        org_employee_summary_loader.load(org_id),
     },
     Gov: {
-      employee_summary: async ({ org_id }) => {
-        return await GovEmployeeSummary.find({ org_id: org_id });
-      },
+      employee_summary: () => gov_employee_summary_loader.load("gov"),
     },
   };
   return {
