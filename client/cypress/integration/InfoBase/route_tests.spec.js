@@ -1,10 +1,10 @@
 const route_load_tests_config = [
-  /* {
+  {
     name: "Always failing route, to test error boundary",
     route: "error-boundary-test",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
     expect_to_fail: true,
-  }, */
+  },
   {
     name: "Homepage",
     route: "",
@@ -241,42 +241,36 @@ const route_load_tests_config = [
     name: "Footnote Inventory - all footnotes",
     route: "footnote-inventory",
     test_on: ["eng", "basic-eng", "fra"],
+    skipAxe: true,
   },
 ];
-
-function terminalLog(violations) {
-  cy.task(
-    "log",
-    `${violations.length} accessibility violation${
-      violations.length === 1 ? "" : "s"
-    } ${violations.length === 1 ? "was" : "were"} detected`
-  );
-  // pluck specific keys to keep the table readable
-  const violationData = violations.map(
-    ({ id, impact, description, nodes }) => ({
-      id,
-      impact,
-      description,
-      nodes: nodes.length,
-    })
-  );
-
-  cy.task("table", violationData);
-}
 
 describe("Route tests", () => {
   route_load_tests_config.map((routes) => {
     describe(`${routes.name} route`, () => {
       routes.test_on.map((app) => {
         it(`Tested on ${app}`, () => {
+          cy.on("fail", (e, test) => {
+            if (routes.expect_to_fail) {
+              console.log("Test expected to fail.");
+            } else {
+              throw e;
+            }
+          });
           cy.visit(
             `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
           );
-          //cy.injectAxe();
-          cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-            "not.exist"
-          );
-          //cy.checkA11y(null, null, terminalLog, true);
+          if (!routes.skipAxe) {
+            cy.injectAxe();
+            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+              "not.exist"
+            );
+            cy.checkA11y(null, null, cy.terminalLog, true);
+          } else {
+            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+              "not.exist"
+            );
+          }
         });
       });
     });
