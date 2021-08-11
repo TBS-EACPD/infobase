@@ -155,11 +155,20 @@ const planned_vote_or_stat_render = (vs) =>
 const planned_vote_or_stat_calculate = (vs) =>
   function (subject) {
     const { orgVoteStatEstimates } = this.tables;
+    const { group_by_vs_func } = orgVoteStatEstimates;
 
     const text = text_maker(vs);
-    const all_rows = _.chain(
-      orgVoteStatEstimates.voted_stat(main_col, false, false)[text]
-    )
+
+    const all_rows = _.chain(orgVoteStatEstimates.data)
+      .groupBy((row) => group_by_vs_func("vote_vs_stat", row))
+      .map((data_group) => [
+        group_by_vs_func("vote_vs_stat", data_group[0])
+          ? text_maker("stat")
+          : text_maker("voted"),
+        data_group,
+      ])
+      .fromPairs()
+      .get(text)
       .groupBy("dept")
       .flatMap((dept_group, dept) =>
         _.chain(dept_group)
@@ -194,7 +203,9 @@ const planned_vote_or_stat_calculate = (vs) =>
       ),
     });
     const voted_stat_est_in_year =
-      orgVoteStatEstimates.voted_stat(main_col, subject, true)[text] || 0;
+      orgVoteStatEstimates.sum_col_by_grouped_data(main_col, "vote_vs_stat")[
+        text
+      ] || 0;
 
     return { ...ret, voted_stat_est_in_year };
   };
