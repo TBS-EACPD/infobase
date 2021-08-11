@@ -385,9 +385,6 @@ const Infographic = ({
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
 
-  console.log(level);
-  console.log(subject.dept.applied_title);
-
   if (!subject) {
     if (level === "program" || level === "crso") {
       const potential_parent_dept_code = _.split(subject_id, "-")[0];
