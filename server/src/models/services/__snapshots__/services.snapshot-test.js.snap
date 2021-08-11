@@ -7,44 +7,6 @@ Object {
       "org": Object {
         "service_summary": Object {
           "id": "326",
-          "subject_offering_services_summary": Array [
-            Object {
-              "id": "TBC-ISS02",
-              "number_of_services": 1,
-              "subject_id": "TBC-ISS02",
-              "total_volume": 4748,
-            },
-            Object {
-              "id": "TBC-ISS07",
-              "number_of_services": 2,
-              "subject_id": "TBC-ISS07",
-              "total_volume": 3381,
-            },
-            Object {
-              "id": "TBC-BXB01",
-              "number_of_services": 1,
-              "subject_id": "TBC-BXB01",
-              "total_volume": 2014,
-            },
-            Object {
-              "id": "TBC-ISS04",
-              "number_of_services": 2,
-              "subject_id": "TBC-ISS04",
-              "total_volume": 433,
-            },
-            Object {
-              "id": "TBC-BXC03",
-              "number_of_services": 1,
-              "subject_id": "TBC-BXC03",
-              "total_volume": 420,
-            },
-            Object {
-              "id": "TBC-BXC01",
-              "number_of_services": 1,
-              "subject_id": "TBC-BXC01",
-              "total_volume": 13,
-            },
-          ],
           "service_channels_summary": Array [
             Object {
               "channel_id": "other_application_count",
@@ -133,8 +95,8 @@ Object {
           ],
           "service_general_stats": Object {
             "id": "326",
-            "num_of_subject_offering_services": null,
             "num_of_programs_offering_services": 6,
+            "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 4,
             "number_of_services": 6,
           },
@@ -145,6 +107,44 @@ Object {
               "services_w_standards_count": 1,
               "standards_count": 4,
               "subject_id": "326",
+            },
+          ],
+          "subject_offering_services_summary": Array [
+            Object {
+              "id": "TBC-ISS02",
+              "number_of_services": 1,
+              "subject_id": "TBC-ISS02",
+              "total_volume": 4748,
+            },
+            Object {
+              "id": "TBC-ISS07",
+              "number_of_services": 2,
+              "subject_id": "TBC-ISS07",
+              "total_volume": 3381,
+            },
+            Object {
+              "id": "TBC-BXB01",
+              "number_of_services": 1,
+              "subject_id": "TBC-BXB01",
+              "total_volume": 2014,
+            },
+            Object {
+              "id": "TBC-ISS04",
+              "number_of_services": 2,
+              "subject_id": "TBC-ISS04",
+              "total_volume": 433,
+            },
+            Object {
+              "id": "TBC-BXC03",
+              "number_of_services": 1,
+              "subject_id": "TBC-BXC03",
+              "total_volume": 420,
+            },
+            Object {
+              "id": "TBC-BXC01",
+              "number_of_services": 1,
+              "subject_id": "TBC-BXC01",
+              "total_volume": 13,
             },
           ],
         },
@@ -161,7 +161,6 @@ Object {
       "program": Object {
         "service_summary": Object {
           "id": "TBC-BXB01",
-          "subject_offering_services_summary": null,
           "service_channels_summary": Array [
             Object {
               "channel_id": "other_application_count",
@@ -250,8 +249,8 @@ Object {
           ],
           "service_general_stats": Object {
             "id": "TBC-BXB01",
-            "num_of_subject_offering_services": null,
             "num_of_programs_offering_services": null,
+            "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 1,
             "number_of_services": 1,
           },
@@ -264,6 +263,7 @@ Object {
               "subject_id": "TBC-BXB01",
             },
           ],
+          "subject_offering_services_summary": null,
         },
       },
     },
