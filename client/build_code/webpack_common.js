@@ -62,11 +62,10 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       sideEffects: true,
     },
     {
-      // node modules that specifically require transpilation...
-      include: /node_modules\/(d3-*|@nivo\/*)/,
-      test: /\.(js||ts|tsx)$/,
+      // dependencies that are lacking IE 11 support and specifically require transpilation
+      test: /node_modules\/(d3-|@nivo\/).*\.(js||ts|tsx)$/,
       use: js_module_loader_rules,
-      // moduels with side effects for these _should_ be declared in the dependency's own package.json
+      // up to dependency to declare sideEffects true/false in their package.json
     },
     {
       test: /\.scss$/,
