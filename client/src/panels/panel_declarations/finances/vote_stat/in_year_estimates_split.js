@@ -26,11 +26,9 @@ const est_in_year_col = "{{est_in_year}}_estimates";
 const estimates_split_calculate = function (subject) {
   const { orgVoteStatEstimates } = this.tables;
   const q = orgVoteStatEstimates.q(subject);
-  const dept_id = subject.subject_type === "gov" ? false : subject.id;
 
-  const in_year_estimates_split = _.chain(
-    orgVoteStatEstimates.by_estimates_doc(est_in_year_col, dept_id, false)
-  )
+  const in_year_estimates_split = _.chain(orgVoteStatEstimates.data)
+    .groupBy("est_doc")
     .toPairs()
     .sortBy(
       (est_doc_lines) => estimates_docs[est_doc_lines[1][0].est_doc_code].order
