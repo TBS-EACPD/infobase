@@ -27,7 +27,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     service_general_stats {
       number_of_services
     }
-    orgs_offering_services_summary {
+    subject_offering_services_summary {
       id
       subject_id
       number_of_services
@@ -38,7 +38,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     return <LeafSpinner config_name="inline_panel" />;
   }
   const {
-    orgs_offering_services_summary,
+    subject_offering_services_summary,
     service_general_stats: { number_of_services },
   } = data;
   const is_gov = subject.level === "gov";
@@ -77,12 +77,12 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
       {is_gov ? (
         <TM
           className="medium-panel-text"
-          k="orgs_offering_services_text"
+          k="subject_offering_services_text"
           args={{
             subject,
-            number_of_depts: orgs_offering_services_summary.length,
+            number_of_depts: subject_offering_services_summary.length,
             number_of_applications: _.sumBy(
-              orgs_offering_services_summary,
+              subject_offering_services_summary,
               "total_volume"
             ),
             number_of_services,
@@ -94,9 +94,9 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
           k="programs_offering_services_text"
           args={{
             subject,
-            number_of_programs: orgs_offering_services_summary.length,
+            number_of_programs: subject_offering_services_summary.length,
             number_of_applications: _.sumBy(
-              orgs_offering_services_summary,
+              subject_offering_services_summary,
               "total_volume"
             ),
             number_of_services,
@@ -105,21 +105,21 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
       )}
       <DisplayTable
         unsorted_initial={true}
-        data={orgs_offering_services_summary}
+        data={subject_offering_services_summary}
         column_configs={column_configs}
       />
     </HeightClippedGraph>
   );
 };
 
-export const declare_orgs_offering_services_panel = () =>
+export const declare_subject_offering_services_panel = () =>
   declare_panel({
-    panel_key: "orgs_offering_services",
+    panel_key: "subject_offering_services",
     levels: ["gov", "dept"],
     panel_config_func: (level, panel_key) => ({
       title:
         level === "gov"
-          ? text_maker("orgs_offering_services_title")
+          ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
       footnotes: false,
       render({ title, calculations, sources }) {

@@ -80,7 +80,7 @@ service_summary{
     id
     number_of_services
     number_of_online_enabled_services
-    num_of_orgs_offering_services
+    num_of_subject_offering_services
     num_of_programs_offering_services
   }
   service_channels_summary {
@@ -106,7 +106,7 @@ service_summary{
     standards_count
     met_standards_count
   }
-  orgs_offering_services_summary{
+  subject_offering_services_summary{
     id
     subject_id
     number_of_services

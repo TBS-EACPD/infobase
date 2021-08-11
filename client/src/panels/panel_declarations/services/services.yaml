@@ -36,7 +36,7 @@ services_intro_gov:
   en: | 
     Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
-    The **GC Service Inventory** currently contains service data from **{{num_of_orgs_offering_services}} departments and agencies**, covering results from **{{services_year_2}}** to **{{services_year}}**
+    The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{services_year_2}}** to **{{services_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
@@ -204,13 +204,13 @@ applications_count:
   fr: demandes
 
 # Orgs offering services
-orgs_offering_services_title:
+subject_offering_services_title:
   en: Organizations which offer services
   fr: TODO
 programs_offering_services_title:
   en: Programs in this department which offer services
   fr: TODO
-orgs_offering_services_text:
+subject_offering_services_text:
   transform: [handlebars, markdown]
   en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
   fr: TODO
