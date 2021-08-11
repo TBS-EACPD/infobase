@@ -91,6 +91,7 @@ class SpendInTagPerspective extends React.Component {
                 }}
                 selected={active_tag_index}
                 className="form-control"
+                title={text_maker("search")}
                 style={{ width: "100%" }}
               />
             </div>
