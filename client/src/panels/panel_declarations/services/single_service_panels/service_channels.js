@@ -20,10 +20,9 @@ export class ServiceChannels extends React.Component {
     const { max_channel_key, max_value } = _.reduce(
       application_channels_keys,
       (max_data, key) => {
-        const key_count = `${key}_count`;
-        const max_object_for_key = _.maxBy(service.service_report, key_count);
+        const max_object_for_key = _.maxBy(service.service_report, key);
         const max_value_for_key = max_object_for_key
-          ? max_object_for_key[key_count]
+          ? max_object_for_key[key]
           : 0;
         return max_value_for_key > max_data.max_value
           ? {
@@ -38,7 +37,7 @@ export class ServiceChannels extends React.Component {
       _.reduce(
         service.service_report,
         (previous_is_not_null_or_zero, report) =>
-          previous_is_not_null_or_zero || report[`${key}_count`],
+          previous_is_not_null_or_zero || report[key],
         false
       )
     );
@@ -46,7 +45,7 @@ export class ServiceChannels extends React.Component {
       id: `${report.service_id}_${report.year}`,
       label: report.year,
       ..._.chain(filtered_keys)
-        .map((key) => [text_maker(key), report[`${key}_count`]])
+        .map((key) => [text_maker(key), report[key]])
         .fromPairs()
         .value(),
     }));
