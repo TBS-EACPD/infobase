@@ -48,8 +48,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
   ];
 
-  const js_module_suffix_pattern = ".(js|ts|tsx)$";
-  const side_effects_suffix_pattern = `\\.side-effects\\${js_module_suffix_pattern}`;
+  const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
+  const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
   return [
     {
@@ -65,14 +65,10 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       sideEffects: true,
     },
     {
-      test: new RegExp(
-        `node_modules/(${_.join(
-          ["d3-", "@nivo/"], // patterns for dependencies that require transiplation to support IE11
-          "|"
-        )}).*${js_module_suffix_pattern}`
-      ),
+      // ensure dependencies are transpiled for IE11 support when needed
+      test: (path) => target_ie11 && /node_modules\/.*\.js$/.test(path),
       use: js_module_loader_rules,
-      // up to dependency to declare sideEffects true/false in their package.json
+      // up to dependencies to declare sideEffects true/false in their package.json
     },
     {
       test: /\.scss$/,
