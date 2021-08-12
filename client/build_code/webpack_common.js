@@ -51,6 +51,8 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
   const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
   const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
+  const interop_scss_regex = /\.interop\.scss$/;
+
   return [
     {
       test: new RegExp(js_module_suffix_pattern),
@@ -72,7 +74,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     },
     {
       test: /\.scss$/,
-      exclude: /\.interop\.scss$/,
+      exclude: interop_scss_regex,
       use: [
         { loader: "style-loader" },
         {
@@ -89,7 +91,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       sideEffects: true,
     },
     {
-      test: /\.interop\.scss$/,
+      test: interop_scss_regex,
       use: [
         {
           loader: "css-modules-typescript-loader",
