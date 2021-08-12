@@ -63,7 +63,7 @@ export const get_gov_panels = (subject) => ({
     declare_tp_by_region_panel(),
     declare_gocographic_panel(),
     declare_historical_g_and_c_panel(),
-    // declare_personnel_spend_panel(),
+    declare_personnel_spend_panel(),
   ],
   covid: [
     declare_covid_key_concepts_panel(),
