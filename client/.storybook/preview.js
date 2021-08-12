@@ -4,6 +4,7 @@ import { withConsole } from "@storybook/addon-console";
 import { MemoryRouter } from "react-router";
 
 import "src/InfoBase/site.scss";
+import "src/InfoBase/utils.scss";
 
 const a11y_options = {
   element: "#root",
