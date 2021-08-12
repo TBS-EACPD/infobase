@@ -40,7 +40,10 @@ const calculate_funcs_by_subject_type = {
       .map((gender_type) => {
         const gender_text = gender_type.text;
         const yearly_values = people_years.map(
-          (year) => orgEmployeeGender.horizontal(year, false)[gender_text]
+          (year) =>
+            orgEmployeeGender.sum_col_by_grouped_data(year, "gender")[
+              gender_text
+            ]
         );
         return {
           label: gender_text,

@@ -171,19 +171,12 @@ class TPMap extends React.Component {
         panel_args: { table: transfer_payments_table },
       } = calculations;
 
-<<<<<<< HEAD
-      const transfer_payments_by_prov = transfer_payments_table.prov_code(
-        tp_by_region_years,
-        subject.subject_type === "dept" && subject.id
-      );
-=======
       const transfer_payments_by_prov =
         transfer_payments_table.sum_col_by_grouped_data(
           tp_by_region_years,
           "region_code",
           subject
         );
->>>>>>> fixed tp_by_region and historical_g_anc_c, added subject parameter to group by util
 
       const per_capita_by_prov = _.chain(transfer_payments_by_prov)
         .omitBy((values, prov_code) =>
