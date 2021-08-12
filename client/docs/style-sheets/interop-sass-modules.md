@@ -10,7 +10,7 @@
 - use `import { ... } from "....interop.scss"` in JS/TS modules
 - if beneficial to organization, create an `index.scss` the uses `@forward "....interop.scss"` to collect multiple interop exports
   - pair it with an `index.ts` module that uses `export * from "....interop.scss"`
-  - note the `index.scss` does not use `.interiop.scss` and can't be imported from by JS/TS
+  - note the `index.scss` does not use `.interop.scss` and can't be imported from by JS/TS
   - small maintenance burden, will want to keep these in sync...
 
 ## DO-NOTs
