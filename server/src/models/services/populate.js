@@ -187,6 +187,11 @@ export default async function ({ models }) {
     });
     return result;
   };
+  const get_years_from_service_report = (services) =>
+    _.chain(services)
+      .flatMap(({ service_report }) => _.map(service_report, "year"))
+      .uniq()
+      .value();
   const get_current_status_count = (services, key, value) =>
     _.countBy(services, `${key}_status`)[value] || 0;
   const populate_digital_summary_key = (services, subject_id, level, key) => ({
@@ -328,6 +333,7 @@ export default async function ({ models }) {
       id: "gov",
       service_general_stats: {
         id: "gov",
+        years: get_years_from_service_report(service_rows),
         number_of_services: service_rows.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(service_rows),
@@ -362,6 +368,7 @@ export default async function ({ models }) {
       id: org_id,
       service_general_stats: {
         id: org_id,
+        years: get_years_from_service_report(services),
         number_of_services: services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),
@@ -390,6 +397,7 @@ export default async function ({ models }) {
       id: program_id,
       service_general_stats: {
         id: program_id,
+        years: get_years_from_service_report(services),
         number_of_services: services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),

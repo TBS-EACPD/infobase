@@ -92,6 +92,7 @@ export default function (model_singleton) {
 
   const ServiceGeneralStatsSchema = mongoose.Schema({
     id: pkey_type(),
+    years: [str_type],
     number_of_services: { type: Number },
     number_of_online_enabled_services: { type: Number },
     pct_of_online_client_interaction_pts: { type: Number },
