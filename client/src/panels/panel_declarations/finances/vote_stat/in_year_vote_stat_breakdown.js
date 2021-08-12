@@ -203,9 +203,11 @@ const planned_vote_or_stat_calculate = (vs) =>
       ),
     });
     const voted_stat_est_in_year =
-      orgVoteStatEstimates.sum_col_by_grouped_data(main_col, "vote_vs_stat")[
-        text
-      ] || 0;
+      orgVoteStatEstimates.sum_col_by_grouped_data(
+        main_col,
+        "vote_vs_stat",
+        subject
+      )[text] || 0;
 
     return { ...ret, voted_stat_est_in_year };
   };
