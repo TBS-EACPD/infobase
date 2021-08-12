@@ -10,6 +10,8 @@ import { businessConstants } from "src/models/businessConstants";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import { filter_row_by_subj } from "src/core/tables/dimensions";
+
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import {
@@ -28,6 +30,7 @@ const estimates_split_calculate = function (subject) {
   const q = orgVoteStatEstimates.q(subject);
 
   const in_year_estimates_split = _.chain(orgVoteStatEstimates.data)
+    .filter((row) => filter_row_by_subj(row, subject))
     .groupBy("est_doc")
     .toPairs()
     .sortBy(
