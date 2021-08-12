@@ -60,9 +60,9 @@ export const get_gov_panels = (subject) => ({
     declare_in_year_voted_stat_split_panel(),
     declare_in_year_stat_breakdown_panel(),
     declare_in_year_voted_breakdown_panel(),
-    // declare_tp_by_region_panel(),
-    // declare_gocographic_panel(),
-    // declare_historical_g_and_c_panel(),
+    declare_tp_by_region_panel(),
+    declare_gocographic_panel(),
+    declare_historical_g_and_c_panel(),
     // declare_personnel_spend_panel(),
   ],
   covid: [

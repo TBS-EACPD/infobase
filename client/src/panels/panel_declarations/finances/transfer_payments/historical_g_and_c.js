@@ -366,9 +366,9 @@ export const declare_historical_g_and_c_panel = () =>
             calculate(subject) {
               const { orgTransferPayments } = this.tables;
 
-              const payments = orgTransferPayments.payment_type_ids(
+              const payments = orgTransferPayments.sum_col_by_grouped_data(
                 exp_years,
-                false
+                "type_id"
               );
 
               const five_year_avg =
@@ -426,7 +426,11 @@ export const declare_historical_g_and_c_panel = () =>
               const { orgTransferPayments } = this.tables;
 
               const rolled_up_transfer_payments =
-                orgTransferPayments.payment_type_ids(exp_years, dept.id);
+                orgTransferPayments.sum_col_by_grouped_data(
+                  exp_years,
+                  "type_id",
+                  dept
+                );
 
               const five_year_avg =
                 (_.sum(rolled_up_transfer_payments.c) +

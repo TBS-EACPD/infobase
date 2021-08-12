@@ -15,13 +15,15 @@ import { make_unique_func, make_unique } from "src/general_utils";
 import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
 
+import { text_maker } from "src/tables/table_common";
+
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { lang } from "./injected_build_constants";
 
 import { query_adapter } from "./tables/queries";
-import { text_maker } from "src/tables/table_common";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
+const { Gov, Dept, Program } = Subject;
 
 function all_children_hidden(header) {
   if (header.children) {
@@ -226,23 +228,41 @@ export class Table {
 
     this.dimensions.unshift("all");
   }
-  // TODO: come up with better name for this function
+  // TODO: come up with a shorter, better name for this sum_col_by_grouped_data
   get_sum_col_by_grouped_data_func() {
-    this.sum_col_by_grouped_data = function (col_nick, dimension) {
+    this.sum_col_by_grouped_data = function (col, dimension, subject = Gov) {
       const { group_by_vs_func } = this;
+      const dim_vote_stat = dimension === "vote_vs_stat";
+      const subject_filter = (row) => {
+        switch (subject.level) {
+          case "gov": {
+            return _.identity(row);
+          }
+          case "dept": {
+            return row.dept === subject.id;
+          }
+          case "prgm": {
+            return row.program_id === subject.id;
+          }
+        }
+      };
       return _.chain(this.data)
+        .filter((row) => subject_filter(row))
         .groupBy(
-          group_by_vs_func
-            ? (row) => group_by_vs_func(dimension, row)
-            : dimension
+          dim_vote_stat ? (row) => group_by_vs_func(dimension, row) : dimension
         )
         .map((data_group) => {
-          const dim_name = group_by_vs_func
+          const dim_name = dim_vote_stat
             ? group_by_vs_func("vote_vs_stat", data_group[0])
               ? text_maker("stat")
               : text_maker("voted")
             : data_group[0][dimension];
-          return [dim_name, _.sumBy(data_group, col_nick)];
+          const summed_col = _.isArray(col)
+            ? _.chain(col)
+                .map((c) => _.sumBy(data_group, c))
+                .value()
+            : _.sumBy(data_group, col);
+          return [dim_name, summed_col];
         })
         .fromPairs()
         .value();
