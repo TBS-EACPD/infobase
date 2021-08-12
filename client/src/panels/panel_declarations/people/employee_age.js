@@ -54,7 +54,8 @@ const calculate_funcs_by_subject_type = {
 
     const age_group = _.map(age_groups, ({ text: age_range }) => {
       const yearly_values = people_years.map(
-        (year) => orgEmployeeAgeGroup.horizontal(year, false)[age_range]
+        (year) =>
+          orgEmployeeAgeGroup.sum_col_by_grouped_data(year, "age")[age_range]
       );
       return {
         label: age_range,

@@ -32,7 +32,10 @@ const calculate_funcs_by_subject_type = {
       .map((tenure_type) => {
         const tenure_text = tenure_type.text;
         const yearly_values = people_years.map(
-          (year) => orgEmployeeType.horizontal(year, false)[tenure_text]
+          (year) =>
+            orgEmployeeType.sum_col_by_grouped_data(year, "employee_type")[
+              tenure_text
+            ]
         );
         return {
           label: tenure_text,

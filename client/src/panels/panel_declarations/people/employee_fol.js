@@ -40,7 +40,8 @@ const calculate_funcs_by_subject_type = {
       .map((fol_type) => {
         const fol_text = fol_type.text;
         const yearly_values = people_years.map(
-          (year) => orgEmployeeFol.horizontal(year, false)[fol_text]
+          (year) =>
+            orgEmployeeFol.sum_col_by_grouped_data(year, "fol")[fol_text]
         );
         return {
           label: fol_text,
