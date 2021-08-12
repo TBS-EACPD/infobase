@@ -102,4 +102,4 @@ result_explanation:
 gba_filter:
   transform: [handlebars]
   en: Show {{gl_tt "GBA Plus indicators" "GBA_PLUS_INDICATOR"}} only
-  fr: Afficher uniquement les {{gl_tt "Indicateur d'ACS Plus" "GBA_PLUS_INDICATOR"}}
+  fr: Afficher uniquement les {{gl_tt "indicateurs d'ACS Plus" "GBA_PLUS_INDICATOR"}}
