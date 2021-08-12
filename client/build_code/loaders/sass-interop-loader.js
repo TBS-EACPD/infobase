@@ -1,5 +1,6 @@
-// Adds transitory :export { ... } block to sass module during webpack processing.
-// Necessary for css-loader to add exports to generated modules, and not worth the headache of managing manually
+// Adds ephemeral :export { ... } block to .interop.sass modules during webpack processing.
+// Necessary for css-loader to add exports to generated JS modules, but not worth the headache
+// of managing as hardcoded statements inside .interop.sass modules
 
 const path = require("path");
 
@@ -8,7 +9,7 @@ const _ = require("lodash");
 const loader_name = path.basename(__filename); // eslint-disable-line no-undef
 
 // as documented in /client/docs/style-sheets/interop-sass-modules.md, this intentionally only matches on and exports "top level" variables,
-// intenionally ignoring any sass "global" (module level) variables from inside of sass branch syntax blocks
+// intenionally ignoring any sass "global" (module level) variables from inside of sass branching syntax blocks (e.g. SASS ifs, loops, etc)
 const sass_variable_pattern = /^\$(.*?):.*/;
 
 const get_top_level_variable_names = (content) =>
