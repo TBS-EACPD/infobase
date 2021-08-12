@@ -104,10 +104,10 @@ export const declare_spend_rev_split_panel = () =>
             footnotes: ["SOBJ_REV"],
             calculate(subject, options) {
               const { orgSobjs } = this.tables;
-              const last_year_spend = orgSobjs.so_num(
+              const last_year_spend = orgSobjs.sum_col_by_grouped_data(
                 "{{pa_last_year}}",
-                subject.id,
-                true
+                "so_num",
+                subject
               );
               const last_year_rev =
                 (last_year_spend[22] || 0) + (last_year_spend[21] || 0);

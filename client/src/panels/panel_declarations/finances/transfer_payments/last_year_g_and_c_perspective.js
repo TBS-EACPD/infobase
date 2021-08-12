@@ -24,14 +24,21 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
         const exp_pa_last_year = "{{pa_last_year}}exp";
 
         const gov_tp = _.chain(
-          orgTransferPayments.payment_type_ids([exp_pa_last_year], false)
+          orgTransferPayments.sum_col_by_grouped_data(
+            [exp_pa_last_year],
+            "type_id"
+          )
         )
           .map((payment_type) => _.sum(payment_type))
           .sum()
           .value();
 
         const org_tp = _.chain(
-          orgTransferPayments.payment_type_ids([exp_pa_last_year], subject.id)
+          orgTransferPayments.sum_col_by_grouped_data(
+            [exp_pa_last_year],
+            "type_id",
+            subject
+          )
         )
           .map((payment_type) => _.sum(payment_type))
           .sum()

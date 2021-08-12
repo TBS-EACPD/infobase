@@ -206,7 +206,10 @@ export const declare_spend_by_so_hist_panel = () =>
           .map((sobj) => ({
             label: sobj.text,
             data: std_years.map(
-              (year) => orgSobjs.so_num(year, subject)[sobj.so_num]
+              (year) =>
+                orgSobjs.sum_col_by_grouped_data(year, "so_num", subject)[
+                  sobj.so_num
+                ]
             ),
           }))
           .filter((d) => sum(d.data))
