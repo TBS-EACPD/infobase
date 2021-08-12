@@ -56,9 +56,9 @@ export const declare_simplographic_panel = () =>
           .value();
 
         //People calcs
-        const employee_by_prov = orgEmployeeRegion.prov_code(
+        const employee_by_prov = orgEmployeeRegion.sum_col_by_grouped_data(
           "{{ppl_last_year}}",
-          Gov.instance
+          "region_code"
         );
         const total_employees = _.chain(employee_by_prov)
           .values()
