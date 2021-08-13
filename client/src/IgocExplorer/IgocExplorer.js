@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { createSelector } from "reselect";
 
-// import { FAQPanel } from "src/components/index";
+// import { StandardFAQ } from "src/components/index";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
 
@@ -148,7 +148,7 @@ const IgocExplorer = ({ match }) => {
         <div style={{ marginBottom: "1.5em" }}>
           <TM k="about_inventory" />
         </div>
-        {/* <FAQPanel rendered_q_a_keys={q_a_keys} /> */}
+        {/* <StandardFAQ rendered_q_a_keys={q_a_keys} /> */}
         <ExplorerContainer grouping={grouping} />
       </div>
     </StandardRouteContainer>

@@ -3,16 +3,16 @@ import React from "react";
 
 import { ComponentProps } from "src/types/util_types.d";
 
-import { FAQPanel } from "./FAQPanel";
+import { StandardFAQ } from "./StandardFAQ";
 
 export default {
-  title: "FAQPanel",
-  component: FAQPanel,
+  title: "StandardFAQ",
+  component: StandardFAQ,
 } as Meta;
 
-type FAQPanelProps = ComponentProps<typeof FAQPanel>;
+type StandardFAQProps = ComponentProps<typeof StandardFAQ>;
 
-const Template: Story<FAQPanelProps> = (args) => <FAQPanel {...args} />;
+const Template: Story<StandardFAQProps> = (args) => <StandardFAQ {...args} />;
 
 const q_a_keys = ["question1", "question2", "question3"];
 

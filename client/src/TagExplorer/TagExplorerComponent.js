@@ -8,7 +8,7 @@ import {
   TabbedControls,
   AlertBanner,
   GlossaryIcon,
-  FAQPanel,
+  StandardFAQ,
 } from "src/components/index";
 
 import { GlossaryEntry } from "src/models/glossary";
@@ -248,7 +248,7 @@ export default class TagExplorerComponent extends React.Component {
     return (
       <div>
         <TM k="tag_nav_intro_text" el="div" />
-        <FAQPanel
+        <StandardFAQ
           rendered_q_a_keys={q_a_keys}
           background_color={primaryColor}
         />

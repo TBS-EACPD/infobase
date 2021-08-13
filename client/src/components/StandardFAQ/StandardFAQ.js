@@ -10,14 +10,13 @@ import ppl_lang from "src/panels/panel_declarations/misc/key_concept_panels/peop
 import results_lang from "src/panels/panel_declarations/misc/key_concept_panels/results_questions.yaml";
 import tag_lang from "src/panels/panel_declarations/misc/key_concept_panels/tagging_questions.yaml";
 
-import sample_lang from "src/components/FAQPanel/FAQPanel.yaml";
-
 import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 import { create_text_maker_component } from "src/components/misc_util_components";
+import sample_lang from "src/components/StandardFAQ/StandardFAQ.yaml";
 
 import { Gov } from "src/models/organizational_entities";
 
-import { secondaryColor } from "src/core/color_defs";
+import { secondaryColor } from "src/style_constants/colors.interop.scss";
 
 import common_subapp_lang from "./common_faq_questions.yaml";
 import est_lang from "./estimates_comparison_questions.yaml";
@@ -43,7 +42,7 @@ const { TM } = create_text_maker_component([
   sample_lang,
 ]);
 
-export class FAQPanel extends React.Component {
+export class StandardFAQ extends React.Component {
   render() {
     const {
       rendered_q_a_keys,
@@ -67,7 +66,7 @@ export class FAQPanel extends React.Component {
     );
   }
 }
-FAQPanel.defaultProps = {
+StandardFAQ.defaultProps = {
   background_color: secondaryColor,
   is_initially_expanded: false,
   subject: Gov,

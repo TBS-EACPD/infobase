@@ -13,7 +13,7 @@ import {
 } from "src/panels/panel_declarations/results/results_common";
 
 import {
-  // FAQPanel,
+  // StandardFAQ,
   Select,
   Panel,
   create_text_maker_component,
@@ -498,7 +498,7 @@ export default class TextDiffApp extends React.Component {
           />
         </div>
         {/* Could have some department-specific FAQ questions? */}
-        {/* <FAQPanel rendered_q_a_keys={q_a_keys} subject={subject} /> */}
+        {/* <StandardFAQ rendered_q_a_keys={q_a_keys} subject={subject} /> */}
         <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_dept">
             <TM k="select_dept" />

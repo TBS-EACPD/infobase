@@ -8,6 +8,7 @@ import { TransitionGroup, Transition } from "react-transition-group";
 import { trivial_text_maker } from "src/models/text";
 
 import { IconChevron } from "src/icons/icons";
+import { secondaryColor } from "src/style_constants/colors.interop.scss";
 import { textLightColor } from "src/style_constants/index";
 
 import "./Accordions.scss";
@@ -115,7 +116,7 @@ const StatelessPullDownAccordion = ({
   isExpanded,
   children,
   onToggle,
-  background_color,
+  background_color = secondaryColor,
 }: CommonAccordionProps & { isExpanded: boolean }) => (
   <div
     aria-label={title}

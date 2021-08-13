@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-// import { FAQPanel } from "src/components/index";
+// import { StandardFAQ } from "src/components/index";
 
 import { create_text_maker } from "src/models/text";
 
@@ -30,7 +30,7 @@ export class TreeMapInstructions extends React.Component {
             />
           </div>
         </div>
-        {/* <FAQPanel
+        {/* <StandardFAQ
           rendered_q_a_keys={q_a_keys}
           background_color={primaryColor}
         /> */}
