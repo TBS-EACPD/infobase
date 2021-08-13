@@ -13,9 +13,8 @@ import {
   StandardFAQ,
 } from "src/components/index";
 
-import { create_text_maker_component } from "src/components/misc_util_components";
-
 import common_subapp_lang from "src/components/StandardFAQ/common_faq_questions.yaml";
+import { faq_content_maker } from "src/components/StandardFAQ/faq_utils";
 import tag_exp_lang from "src/components/StandardFAQ/tag_explorer_questions.yaml";
 
 import { GlossaryEntry } from "src/models/glossary";
@@ -244,12 +243,6 @@ export default class TagExplorerComponent extends React.Component {
       </div>
     );
 
-    const { FAQ_TM } = create_text_maker_component([
-      tag_exp_lang,
-      common_lang,
-      common_subapp_lang,
-    ]);
-
     const q_a_keys = [
       "what_is_tagging",
       "what_is_prog_tagging",
@@ -258,14 +251,15 @@ export default class TagExplorerComponent extends React.Component {
       "what_are_CR",
     ];
 
+    const faq_content = faq_content_maker(
+      { bundles: tag_exp_lang, common_lang, common_subapp_lang },
+      q_a_keys
+    );
+
     return (
       <div>
         <TM k="tag_nav_intro_text" el="div" />
-        <StandardFAQ
-          q_a_base_keys={q_a_keys}
-          TM={FAQ_TM}
-          background_color={primaryColor}
-        />
+        <StandardFAQ faq_cotent={faq_content} background_color={primaryColor} />
         <div className="tabbed-content">
           <TabbedControls
             tab_callback={(key) => {
