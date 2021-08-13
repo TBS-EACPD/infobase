@@ -63,6 +63,7 @@ export default function (model_singleton) {
     id: pkey_type(),
     org_id: parent_fkey_type(),
     program_ids: [sparse_parent_fkey_type()],
+    report_years: [str_type],
     first_active_year: str_type,
     last_active_year: str_type,
     is_active: { type: Boolean },
@@ -92,7 +93,7 @@ export default function (model_singleton) {
 
   const ServiceGeneralStatsSchema = mongoose.Schema({
     id: pkey_type(),
-    years: [str_type],
+    report_years: [str_type],
     number_of_services: { type: Number },
     number_of_online_enabled_services: { type: Number },
     pct_of_online_client_interaction_pts: { type: Number },

@@ -25,6 +25,7 @@ const application_channels_keys = [
 ];
 const application_channels_query_fragment = `
 service_report {
+  year
   online_inquiry_count
   online_application_count
   live_application_count

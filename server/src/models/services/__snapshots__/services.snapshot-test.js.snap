@@ -99,6 +99,9 @@ Object {
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 4,
             "number_of_services": 6,
+            "report_years": Array [
+              "2018",
+            ],
           },
           "service_standards_summary": Array [
             Object {
@@ -253,6 +256,9 @@ Object {
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 1,
             "number_of_services": 1,
+            "report_years": Array [
+              "2018",
+            ],
           },
           "service_standards_summary": Array [
             Object {
@@ -317,6 +323,9 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "Human Resources Management Services - Treasury Board Secretariat",
               },
             ],
+            "report_years": Array [
+              "2018",
+            ],
             "scope": Array [
               "Internal Enterprise Service",
             ],
@@ -376,6 +385,9 @@ The classification accreditation responds to the requirement of the Policy on Cl
               Object {
                 "name": "Communications Services - Treasury Board Secretariat",
               },
+            ],
+            "report_years": Array [
+              "2018",
             ],
             "scope": Array [
               "External Service",
@@ -444,6 +456,9 @@ The classification accreditation responds to the requirement of the Policy on Cl
               Object {
                 "name": "Financial Management Policies and Initiatives",
               },
+            ],
+            "report_years": Array [
+              "2018",
             ],
             "scope": Array [
               "Internal Enterprise Service",
@@ -614,6 +629,9 @@ The classification accreditation responds to the requirement of the Policy on Cl
                 "name": "People Management Policies and Initiatives",
               },
             ],
+            "report_years": Array [
+              "2018",
+            ],
             "scope": Array [
               "Internal Enterprise Service",
             ],
@@ -674,6 +692,9 @@ The classification accreditation responds to the requirement of the Policy on Cl
               Object {
                 "name": "Information Technology Services - Treasury Board Secretariat",
               },
+            ],
+            "report_years": Array [
+              "2018",
             ],
             "scope": Array [
               "External Service",
@@ -741,6 +762,9 @@ The classification accreditation responds to the requirement of the Policy on Cl
               Object {
                 "name": "Information Technology Services - Treasury Board Secretariat",
               },
+            ],
+            "report_years": Array [
+              "2018",
             ],
             "scope": Array [
               "Internal Enterprise Service",
@@ -816,6 +840,9 @@ Object {
               Object {
                 "name": "Financial Management Policies and Initiatives",
               },
+            ],
+            "report_years": Array [
+              "2018",
             ],
             "scope": Array [
               "Internal Enterprise Service",
@@ -989,6 +1016,9 @@ Object {
           Object {
             "name": "Communications Services - Treasury Board Secretariat",
           },
+        ],
+        "report_years": Array [
+          "2018",
         ],
         "scope": Array [
           "External Service",

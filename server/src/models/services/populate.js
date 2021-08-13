@@ -15,6 +15,14 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
     return null;
   }
 };
+const get_years_from_service_report = (services) =>
+  _.chain(services)
+    .flatMap(({ service_report }) => _.map(service_report, "year"))
+    .uniq()
+    .sort()
+    .reverse()
+    .value();
+
 export default async function ({ models }) {
   const {
     ServiceStandard,
@@ -85,73 +93,19 @@ export default async function ({ models }) {
 
   const service_rows = _.map(
     get_standard_csv_file_rows("services.csv"),
-    ({
-      id,
-      dept_code,
-      collects_fees,
-      is_active,
-      account_reg_digital_status,
-      authentication_status,
-      application_digital_status,
-      decision_digital_status,
-      issuance_digital_status,
-      issue_res_digital_status,
-
-      service_type_en,
-      service_type_fr,
-      service_type_ids,
-      scope_en,
-      scope_fr,
-      designations_en,
-      designations_fr,
-      target_groups_en,
-      target_groups_fr,
-      program_ids,
-      feedback_channels_en,
-      feedback_channels_fr,
-      urls_en,
-      urls_fr,
-
-      ...other_fields
-    }) => ({
-      id,
-      is_active: convert_to_bool_or_null(_.toInteger(is_active), 1, 0),
-      collects_fees: convert_to_bool_or_null(collects_fees, "Yes", "No"),
-      account_reg_digital_status: convert_to_bool_or_null(
+    (service) => {
+      const {
+        id,
+        dept_code,
+        collects_fees,
+        is_active,
         account_reg_digital_status,
-        "ENABLED",
-        "NOT_ENABLED"
-      ),
-      authentication_status: convert_to_bool_or_null(
         authentication_status,
-        "ENABLED",
-        "NOT_ENABLED"
-      ),
-      application_digital_status: convert_to_bool_or_null(
         application_digital_status,
-        "ENABLED",
-        "NOT_ENABLED"
-      ),
-      decision_digital_status: convert_to_bool_or_null(
         decision_digital_status,
-        "ENABLED",
-        "NOT_ENABLED"
-      ),
-      issuance_digital_status: convert_to_bool_or_null(
         issuance_digital_status,
-        "ENABLED",
-        "NOT_ENABLED"
-      ),
-      issue_res_digital_status: convert_to_bool_or_null(
         issue_res_digital_status,
-        "ENABLED",
-        "NOT_ENABLED"
-      ),
-      program_ids: _.chain(program_ids)
-        .split("<>")
-        .map((id) => `${dept_code}-${id}`)
-        .value(),
-      ...multi_value_string_fields_to_arrays({
+
         service_type_en,
         service_type_fr,
         service_type_ids,
@@ -161,22 +115,81 @@ export default async function ({ models }) {
         designations_fr,
         target_groups_en,
         target_groups_fr,
+        program_ids,
         feedback_channels_en,
         feedback_channels_fr,
         urls_en,
         urls_fr,
-      }),
-      ...other_fields,
 
-      standards: _.filter(
-        service_standard_rows,
-        (service_standard) => service_standard.service_id === id
-      ),
-      service_report: _.filter(
+        ...other_fields
+      } = service;
+      const service_report = _.filter(
         service_report_rows,
         (service_report) => service_report.service_id === id
-      ),
-    })
+      );
+      return {
+        id,
+        is_active: convert_to_bool_or_null(_.toInteger(is_active), 1, 0),
+        collects_fees: convert_to_bool_or_null(collects_fees, "Yes", "No"),
+        account_reg_digital_status: convert_to_bool_or_null(
+          account_reg_digital_status,
+          "ENABLED",
+          "NOT_ENABLED"
+        ),
+        authentication_status: convert_to_bool_or_null(
+          authentication_status,
+          "ENABLED",
+          "NOT_ENABLED"
+        ),
+        application_digital_status: convert_to_bool_or_null(
+          application_digital_status,
+          "ENABLED",
+          "NOT_ENABLED"
+        ),
+        decision_digital_status: convert_to_bool_or_null(
+          decision_digital_status,
+          "ENABLED",
+          "NOT_ENABLED"
+        ),
+        issuance_digital_status: convert_to_bool_or_null(
+          issuance_digital_status,
+          "ENABLED",
+          "NOT_ENABLED"
+        ),
+        issue_res_digital_status: convert_to_bool_or_null(
+          issue_res_digital_status,
+          "ENABLED",
+          "NOT_ENABLED"
+        ),
+        report_years: get_years_from_service_report([{ service_report }]),
+        program_ids: _.chain(program_ids)
+          .split("<>")
+          .map((id) => `${dept_code}-${id}`)
+          .value(),
+        ...multi_value_string_fields_to_arrays({
+          service_type_en,
+          service_type_fr,
+          service_type_ids,
+          scope_en,
+          scope_fr,
+          designations_en,
+          designations_fr,
+          target_groups_en,
+          target_groups_fr,
+          feedback_channels_en,
+          feedback_channels_fr,
+          urls_en,
+          urls_fr,
+        }),
+        ...other_fields,
+
+        standards: _.filter(
+          service_standard_rows,
+          (service_standard) => service_standard.service_id === id
+        ),
+        service_report,
+      };
+    }
   );
 
   const group_by_program_id = (result, service) => {
@@ -187,11 +200,6 @@ export default async function ({ models }) {
     });
     return result;
   };
-  const get_years_from_service_report = (services) =>
-    _.chain(services)
-      .flatMap(({ service_report }) => _.map(service_report, "year"))
-      .uniq()
-      .value();
   const get_current_status_count = (services, key, value) =>
     _.countBy(services, `${key}_status`)[value] || 0;
   const populate_digital_summary_key = (services, subject_id, level, key) => ({
@@ -333,7 +341,7 @@ export default async function ({ models }) {
       id: "gov",
       service_general_stats: {
         id: "gov",
-        years: get_years_from_service_report(service_rows),
+        report_years: get_years_from_service_report(service_rows),
         number_of_services: service_rows.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(service_rows),
@@ -368,7 +376,7 @@ export default async function ({ models }) {
       id: org_id,
       service_general_stats: {
         id: org_id,
-        years: get_years_from_service_report(services),
+        report_years: get_years_from_service_report(services),
         number_of_services: services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),
@@ -397,7 +405,7 @@ export default async function ({ models }) {
       id: program_id,
       service_general_stats: {
         id: program_id,
-        years: get_years_from_service_report(services),
+        report_years: get_years_from_service_report(services),
         number_of_services: services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(services),

@@ -1,6 +1,7 @@
 const service_fields = `
   id
   org_id
+  report_years
   org {
     name
   }
@@ -78,6 +79,7 @@ service_summary{
   id
   service_general_stats {
     id
+    report_years
     number_of_services
     number_of_online_enabled_services
     num_of_subject_offering_services

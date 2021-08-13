@@ -13,9 +13,6 @@ import {
 
 import { useSummaryServices } from "src/models/populate_services";
 
-import { run_template } from "src/models/text";
-import { year_templates } from "src/models/years";
-
 import { textColor } from "src/core/color_defs";
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -32,12 +29,6 @@ import text from "./services.yaml";
 const colors = infobase_colors();
 const { text_maker, TM } = create_text_maker_component(text);
 const channels = _.map(application_channels_keys, text_maker);
-const { services_years } = year_templates;
-const most_recent_year = _.chain(services_years) //SI_TODO how to get most recent year better?
-  .map(run_template)
-  .takeRight()
-  .split("-")
-  .value()[0];
 const application_channels_by_year_tooltip = (items, tooltip_formatter) => {
   const item = items[0];
   const item_pct =
@@ -81,6 +72,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     subject,
     query_fragment: `
     service_general_stats {
+      report_years
       number_of_services
     }
     service_channels_summary {
@@ -101,10 +93,14 @@ const ServicesChannelsPanel = ({ subject }) => {
     return <LeafSpinner config_name="inline_panel" />;
   }
   const {
-    service_general_stats: { number_of_services },
+    service_general_stats: { number_of_services, report_years },
     service_channels_summary,
   } = data;
   const application_channels_by_year_data = _.chain(service_channels_summary)
+    .map((summary) => ({
+      ...summary,
+      year: formats.year_to_fiscal_year_raw(summary.year),
+    }))
     .groupBy("year")
     .map((summary, year) => ({
       year,
@@ -129,7 +125,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   }));
   const most_recent_report_summary = _.filter(
     service_channels_summary,
-    ({ year }) => year === most_recent_year
+    ({ year }) => year === report_years[0]
   );
 
   const channel_pct_data = _.map(
@@ -158,6 +154,7 @@ const ServicesChannelsPanel = ({ subject }) => {
           number_of_services,
           subject,
           number_of_online_applications,
+          most_recent_year: report_years[0],
           pct_of_online_applications:
             number_of_online_applications / number_of_applications,
         }}
