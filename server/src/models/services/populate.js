@@ -219,16 +219,24 @@ export default async function ({ models }) {
       .map()
       .sum()
       .value();
-  const get_processed_standards = (services) =>
+  const get_processed_standards = (services, year) =>
     _.chain(services)
       .flatMap("standards")
       .reject(({ target_type }) => target_type === "Other type of target")
       .flatMap("standard_report")
-      .filter("count" || "lower" || "met_count")
+      .filter(
+        (report) =>
+          report.year === year &&
+          (report.count || report.lower || report.met_count)
+      )
       .value();
   const get_final_standards_summary = (services, subject_id) => {
     const services_w_standards_count = get_services_w_standards_count(services);
-    const processed_standards = get_processed_standards(services);
+    const most_recent_year = get_years_from_service_report(services)[0];
+    const processed_standards = get_processed_standards(
+      services,
+      most_recent_year
+    );
     return {
       id: `${subject_id}_standards_summary`,
       subject_id,
