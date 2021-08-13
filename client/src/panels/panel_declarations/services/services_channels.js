@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
@@ -9,6 +9,7 @@ import {
   DisplayTable,
   create_text_maker_component,
   LeafSpinner,
+  Select,
 } from "src/components/index";
 
 import { useSummaryServices } from "src/models/populate_services";
@@ -88,6 +89,12 @@ const ServicesChannelsPanel = ({ subject }) => {
       .fromPairs()
       .value()
   );
+  const [active_year, set_active_year] = useState("");
+  useEffect(() => {
+    if (data) {
+      set_active_year(data.service_general_stats.report_years[0]);
+    }
+  }, [data]);
 
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
@@ -128,14 +135,14 @@ const ServicesChannelsPanel = ({ subject }) => {
     ({ year }) => year === report_years[0]
   );
 
-  const channel_pct_data = _.map(
-    most_recent_report_summary,
-    ({ channel_id, channel_value }) => ({
+  const channel_pct_data = _.chain(service_channels_summary)
+    .filter(({ year }) => year === active_year)
+    .map(({ channel_id, channel_value }) => ({
       id: channel_id,
       label: text_maker(channel_id),
       value: channel_value,
-    })
-  );
+    }))
+    .value();
   const number_of_applications = _.sumBy(
     most_recent_report_summary,
     "channel_value"
@@ -207,6 +214,17 @@ const ServicesChannelsPanel = ({ subject }) => {
                 style={{ fontWeight: 700 }}
                 className="medium-panel-text"
                 k="services_channels_title"
+              />
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Select
+                id="services_channels_select"
+                selected={active_year}
+                options={_.map(report_years, (year) => ({
+                  id: year,
+                  display: formats.year_to_fiscal_year_raw(year),
+                }))}
+                onSelect={(year) => set_active_year(year)}
               />
             </div>
             <WrappedNivoPie

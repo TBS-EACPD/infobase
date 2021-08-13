@@ -8,11 +8,13 @@ import {
   DisplayTable,
   create_text_maker_component,
   LeafSpinner,
+  Select,
 } from "src/components/index";
 
 import { useServices } from "src/models/populate_services";
 
 import { infobase_colors } from "src/core/color_schemes";
+import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
@@ -27,6 +29,8 @@ import text from "./services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const colors = infobase_colors();
+const get_report_years = (data) =>
+  _.chain(data).flatMap("report_years").uniq().sort().reverse().value();
 
 const ServicesChannelsPanel = ({ subject }) => {
   const { loading, data } = useServices({
@@ -40,13 +44,20 @@ const ServicesChannelsPanel = ({ subject }) => {
   });
 
   const [active_services, set_active_services] = useState({});
+  const [active_year, set_active_year] = useState("");
+  useEffect(() => {
+    if (data) {
+      set_active_year(get_report_years(data)[0]);
+    }
+  }, [data]);
+
   useEffect(() => {
     const median_3_values = _.chain(data)
       .map((service) => ({
         id: service.id,
         service_report: _.filter(
           service.service_report,
-          (report) => report.year === service.report_years[0]
+          (report) => report.year === active_year
         ),
         value: _.chain(application_channels_keys)
           .flatMap((key) =>
@@ -67,26 +78,29 @@ const ServicesChannelsPanel = ({ subject }) => {
       .fromPairs()
       .value();
     set_active_services(median_3_values);
-  }, [data]);
+  }, [data, active_year]);
 
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
   }
-  const years = _.chain(data)
-    .flatMap("report_years")
-    .uniq()
-    .sort()
-    .reverse()
-    .value();
 
-  const filtered_data = _.map(data, (service) => ({
+  const most_recent_filtered_data = _.map(data, (service) => ({
     ...service,
     service_report: _.filter(
       service.service_report,
       (report) => report.year === service.report_years[0]
     ),
   }));
-  const { max_vol_service_name, max_vol_service_value } = _.chain(filtered_data)
+  const active_year_filtered_data = _.map(data, (service) => ({
+    ...service,
+    service_report: _.filter(
+      service.service_report,
+      (report) => report.year === active_year
+    ),
+  }));
+  const { max_vol_service_name, max_vol_service_value } = _.chain(
+    most_recent_filtered_data
+  )
     .map(({ name, service_report }) => ({
       max_vol_service_name: name,
       max_vol_service_value: _.chain(application_channels_keys)
@@ -101,7 +115,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   )
     .map((key) => ({
       max_vol_channel_name: text_maker(key),
-      max_vol_channel_value: _.chain(filtered_data)
+      max_vol_channel_value: _.chain(most_recent_filtered_data)
         .map(({ service_report }) => _.sumBy(service_report, key))
         .sum()
         .value(),
@@ -113,7 +127,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     application_channels_keys,
     (key) => ({
       id: text_maker(key),
-      ..._.chain(filtered_data)
+      ..._.chain(active_year_filtered_data)
         .filter(({ id }) => active_services[id])
         .map((service) => [
           service.name,
@@ -134,6 +148,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       .fromPairs()
       .value(),
   };
+  const report_years = get_report_years(data);
 
   return (
     <div>
@@ -146,7 +161,7 @@ const ServicesChannelsPanel = ({ subject }) => {
         }
         args={{
           subject,
-          most_recent_year: years[0],
+          most_recent_year: report_years[0],
           max_vol_service_name,
           max_vol_service_value,
           max_vol_channel_name,
@@ -155,7 +170,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={_.map(filtered_data, ({ name, service_report }) => ({
+          data={_.map(data, ({ name, service_report }) => ({
             name: name,
             ..._.chain(application_channels_keys)
               .map((key) => [key, _.sumBy(service_report, key)])
@@ -175,11 +190,22 @@ const ServicesChannelsPanel = ({ subject }) => {
             }}
           >
             <TM className="medium-panel-text" k="services_channels_title" />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Select
+                id="services_channels_select"
+                selected={active_year}
+                options={_.map(report_years, (year) => ({
+                  id: year,
+                  display: formats.year_to_fiscal_year_raw(year),
+                }))}
+                onSelect={(year) => set_active_year(year)}
+              />
+            </div>
           </div>
           <div className="col-12 col-lg-4">
             <StandardLegend
               legendListProps={{
-                items: _.chain(filtered_data)
+                items: _.chain(active_year_filtered_data)
                   .map(({ id, name }) => ({
                     id,
                     label: name,
@@ -200,7 +226,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                 <SelectAllControl
                   SelectAllOnClick={() =>
                     set_active_services(
-                      _.chain(filtered_data)
+                      _.chain(active_year_filtered_data)
                         .map(({ id }) => [id, true])
                         .fromPairs()
                         .value()
@@ -216,7 +242,7 @@ const ServicesChannelsPanel = ({ subject }) => {
               data={services_channel_nivo_data}
               custom_table={
                 <DisplayTable
-                  data={_.chain(filtered_data)
+                  data={_.chain(active_year_filtered_data)
                     .filter(({ id }) => active_services[id])
                     .map(({ name, service_report }) => ({
                       name: name,
@@ -230,7 +256,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                 />
               }
               is_money={false}
-              keys={_.map(filtered_data, "name")}
+              keys={_.map(active_year_filtered_data, "name")}
               indexBy={"id"}
               colors={(d) => colors(d.id)}
               bttm_axis={{
