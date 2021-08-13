@@ -33,6 +33,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     subject,
     query_fragments: `
     id
+    report_years
     name
     ${application_channels_query_fragment}
     `,
@@ -43,6 +44,10 @@ const ServicesChannelsPanel = ({ subject }) => {
     const median_3_values = _.chain(data)
       .map((service) => ({
         id: service.id,
+        service_report: _.filter(
+          service.service_report,
+          (report) => report.year === service.report_years[0]
+        ),
         value: _.chain(application_channels_keys)
           .flatMap((key) =>
             _.map(service.service_report, (report) => report[key])
@@ -67,7 +72,21 @@ const ServicesChannelsPanel = ({ subject }) => {
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
   }
-  const { max_vol_service_name, max_vol_service_value } = _.chain(data)
+  const years = _.chain(data)
+    .flatMap("report_years")
+    .uniq()
+    .sort()
+    .reverse()
+    .value();
+
+  const filtered_data = _.map(data, (service) => ({
+    ...service,
+    service_report: _.filter(
+      service.service_report,
+      (report) => report.year === service.report_years[0]
+    ),
+  }));
+  const { max_vol_service_name, max_vol_service_value } = _.chain(filtered_data)
     .map(({ name, service_report }) => ({
       max_vol_service_name: name,
       max_vol_service_value: _.chain(application_channels_keys)
@@ -82,7 +101,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   )
     .map((key) => ({
       max_vol_channel_name: text_maker(key),
-      max_vol_channel_value: _.chain(data)
+      max_vol_channel_value: _.chain(filtered_data)
         .map(({ service_report }) => _.sumBy(service_report, key))
         .sum()
         .value(),
@@ -94,7 +113,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     application_channels_keys,
     (key) => ({
       id: text_maker(key),
-      ..._.chain(data)
+      ..._.chain(filtered_data)
         .filter(({ id }) => active_services[id])
         .map((service) => [
           service.name,
@@ -127,6 +146,7 @@ const ServicesChannelsPanel = ({ subject }) => {
         }
         args={{
           subject,
+          most_recent_year: years[0],
           max_vol_service_name,
           max_vol_service_value,
           max_vol_channel_name,
@@ -135,7 +155,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={_.map(data, ({ name, service_report }) => ({
+          data={_.map(filtered_data, ({ name, service_report }) => ({
             name: name,
             ..._.chain(application_channels_keys)
               .map((key) => [key, _.sumBy(service_report, key)])
@@ -159,7 +179,7 @@ const ServicesChannelsPanel = ({ subject }) => {
           <div className="col-12 col-lg-4">
             <StandardLegend
               legendListProps={{
-                items: _.chain(data)
+                items: _.chain(filtered_data)
                   .map(({ id, name }) => ({
                     id,
                     label: name,
@@ -180,7 +200,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                 <SelectAllControl
                   SelectAllOnClick={() =>
                     set_active_services(
-                      _.chain(data)
+                      _.chain(filtered_data)
                         .map(({ id }) => [id, true])
                         .fromPairs()
                         .value()
@@ -196,7 +216,7 @@ const ServicesChannelsPanel = ({ subject }) => {
               data={services_channel_nivo_data}
               custom_table={
                 <DisplayTable
-                  data={_.chain(data)
+                  data={_.chain(filtered_data)
                     .filter(({ id }) => active_services[id])
                     .map(({ name, service_report }) => ({
                       name: name,
@@ -210,7 +230,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                 />
               }
               is_money={false}
-              keys={_.map(data, "name")}
+              keys={_.map(filtered_data, "name")}
               indexBy={"id"}
               colors={(d) => colors(d.id)}
               bttm_axis={{

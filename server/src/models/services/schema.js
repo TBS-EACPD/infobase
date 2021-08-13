@@ -29,7 +29,7 @@ const schema = `
   }
   type ServiceGeneralStats{
     id: String
-    years: [String]
+    report_years: [String]
     number_of_services: Float
     number_of_online_enabled_services: Float
     pct_of_online_client_interaction_pts: Float
@@ -91,6 +91,7 @@ const schema = `
     id: String
     org_id: String
     org: Org
+    report_years: [String]
     program_ids: [String]
     programs: [Program]
     first_active_year: String
