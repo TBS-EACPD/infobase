@@ -1131,8 +1131,10 @@ infographic_for:
 
 department_of:
   transform: [handlebars]
-  en: (Department of {{subject.dept.applied_title}})
-  fr: (Département de {{subject.dept.applied_title}})
+  en: |
+    {{subject.name}} ({{subject.dept.applied_title}})
+  fr: |
+    {{subject.name}} ({{subject.dept.applied_title}})
 
 ##################################
 # footer text and links
