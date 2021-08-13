@@ -25,6 +25,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     subject,
     query_fragment: `
     service_general_stats {
+      report_years
       number_of_services
     }
     subject_offering_services_summary {
@@ -39,7 +40,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
   }
   const {
     subject_offering_services_summary,
-    service_general_stats: { number_of_services },
+    service_general_stats: { report_years, number_of_services },
   } = data;
   const is_gov = subject.level === "gov";
   const correct_subject = is_gov ? Dept : Program;
@@ -74,35 +75,20 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
   };
   return (
     <HeightClippedGraph clipHeight={600}>
-      {is_gov ? (
-        <TM
-          className="medium-panel-text"
-          k="subject_offering_services_text"
-          args={{
-            subject,
-            number_of_depts: subject_offering_services_summary.length,
-            number_of_applications: _.sumBy(
-              subject_offering_services_summary,
-              "total_volume"
-            ),
-            number_of_services,
-          }}
-        />
-      ) : (
-        <TM
-          className="medium-panel-text"
-          k="programs_offering_services_text"
-          args={{
-            subject,
-            number_of_programs: subject_offering_services_summary.length,
-            number_of_applications: _.sumBy(
-              subject_offering_services_summary,
-              "total_volume"
-            ),
-            number_of_services,
-          }}
-        />
-      )}
+      <TM
+        className="medium-panel-text"
+        k={`${is_gov ? "orgs" : "programs"}_offering_services_text`}
+        args={{
+          subject,
+          most_recent_year: report_years[0],
+          number_of_subjects: subject_offering_services_summary.length,
+          number_of_applications: _.sumBy(
+            subject_offering_services_summary,
+            "total_volume"
+          ),
+          number_of_services,
+        }}
+      />
       <DisplayTable
         unsorted_initial={true}
         data={subject_offering_services_summary}

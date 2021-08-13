@@ -71,7 +71,6 @@ const year_templates = {
     "{{ppl_last_year_2_short_second}}",
     "{{ppl_last_year_short_second}}",
   ],
-  services_years: ["{{services_year_2}}", "{{services_year}}"],
 };
 
 const actual_to_planned_gap_year = _.chain(year_templates)
