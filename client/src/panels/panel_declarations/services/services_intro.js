@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
@@ -18,6 +19,7 @@ const ServicesIntroPanel = ({ subject }) => {
     subject,
     query_fragment: `service_general_stats{
       id
+      report_years
       number_of_services
       number_of_online_enabled_services
       pct_of_online_client_interaction_pts
@@ -29,6 +31,7 @@ const ServicesIntroPanel = ({ subject }) => {
   }
   const {
     service_general_stats: {
+      report_years,
       number_of_services,
       number_of_online_enabled_services,
       pct_of_online_client_interaction_pts,
@@ -45,6 +48,8 @@ const ServicesIntroPanel = ({ subject }) => {
         k={`services_intro_${subject.level}`}
         args={{
           subject,
+          from_year: _.last(report_years),
+          to_year: _.first(report_years),
           ...(subject.level === "gov"
             ? { num_of_subject_offering_services }
             : { num_of_programs_offering_services }),

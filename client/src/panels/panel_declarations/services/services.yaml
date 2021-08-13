@@ -36,7 +36,7 @@ services_intro_gov:
   en: | 
     Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
-    The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{services_year_2}}** to **{{services_year}}**
+    The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
@@ -45,7 +45,7 @@ services_intro_dept:
   en: | 
     Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
         
-    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{services_year_2}}** to **{{services_year}}**
+    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
@@ -57,7 +57,7 @@ list_of_provided_services_title:
 list_of_provided_services_desc_dept:
   transform: [handlebars, markdown]
   en: |
-    In **{{services_year}}, {{subject_name}}** offered **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
+    **{{subject_name}}** is offering **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
     TODO
 list_of_provided_services_desc_program:
@@ -65,7 +65,7 @@ list_of_provided_services_desc_program:
   en: |
     Programs can provide one or more {{gl_tt "services" "SERVICE"}}. As well, several Programs together may offer one service.
 
-    In **{{services_year}}, {{subject_name}}** offered **{{num_of_services}}** services
+    **{{subject_name}}** is offering **{{num_of_services}}** services
   fr: TODO
 
 view_service:
@@ -79,17 +79,13 @@ filter_results_service:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offers, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
+    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offered in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
   fr: |
     TODO
 services_digital_status_prog_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that are delivered under the **{{subject_name}}** program, **{{most_digital_name}}** is the most commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 most_digital_pct}}**) while **{{least_digital_name}}** is the least commonly available online {{gl_tt "client interaction point" "CLIENT_INTERACTION"}} (**{{fmt_percentage1 least_digital_pct}}**).
-  fr: TODO
-service_digital_status_most_and_least_same_text:
-  transform: [handlebars, markdown]
-  en: All of the services have the same online availability of client interaction points (**{{fmt_percentage1 least_digital_pct}}**).
+    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that are offered under the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -172,7 +168,7 @@ application_channels_by_services_program_text:
   en: |
     (SI_TODO this line is weird) Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
 
-    Under the **{{subject.name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}, the most traffic was generated through the "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    Under the **{{subject.name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, the most traffic was generated through the "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
     
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the services offered under this program.
   fr: TODO
@@ -210,13 +206,13 @@ subject_offering_services_title:
 programs_offering_services_title:
   en: Programs in this department which offer services
   fr: TODO
-subject_offering_services_text:
+orgs_offering_services_text:
   transform: [handlebars, markdown]
-  en: In **{{services_year}}, {{number_of_depts}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
+  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
   fr: TODO
 programs_offering_services_text:
   transform: [handlebars, markdown]
-  en: In **{{services_year}}, {{number_of_programs}}** programs of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
+  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** programs of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
   fr: TODO
 number_of_services:
   en: Number of services
