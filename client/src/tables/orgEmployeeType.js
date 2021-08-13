@@ -94,7 +94,9 @@ export default {
 
   queries: {
     gov_grouping: function () {
-      return _.chain(this.table.horizontal(people_years, false))
+      return _.chain(
+        this.table.sum_col_by_grouped_data(people_years, "employee_type")
+      )
         .map(function (years, key) {
           return [key].concat(years);
         })

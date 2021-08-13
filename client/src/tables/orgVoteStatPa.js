@@ -16,7 +16,11 @@ const vote_stat_query = function (vote_or_stat, cut_off) {
   var cut_off_counter = 0;
   var dept = this.dept || true;
 
-  return _.chain(this.table.voted_stat(undefined, dept, false)[vote_or_stat])
+  return _.chain(
+    this.table.sum_cols_by_grouped_data(std_years, "vote_vs_stat", dept)[
+      vote_or_stat
+    ]
+  )
     .map(_.clone)
     .flatten()
     .sortBy(function (d) {
