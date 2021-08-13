@@ -3,7 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import {
-  FAQPanel,
+  StandardFAQ,
   LeafSpinner,
   FootnoteList,
   Format,
@@ -15,14 +15,13 @@ import {
 
 import { businessConstants } from "src/models/businessConstants";
 
-import { primaryColor } from "src/core/color_defs";
-
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { infograph_href_template, rpb_link } from "src/link_utils";
 import { sources } from "src/metadata/data_sources";
+import { primaryColor } from "src/style_constants/colors.interop.scss";
 
 import {
   text_maker,
@@ -206,7 +205,7 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
-        <FAQPanel
+        <StandardFAQ
           rendered_q_a_keys={q_a_keys}
           is_initially_expanded={true}
           background_color={primaryColor}

@@ -7,7 +7,7 @@ import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import { AlertBanner, /*FAQPanel,*/ TagCloud } from "src/components/index";
+import { AlertBanner, /*StandardFAQ,*/ TagCloud } from "src/components/index";
 
 // import { primaryColor } from "src/core/color_defs";
 import { Table } from "src/core/TableClass";
@@ -149,7 +149,7 @@ class TablePicker extends React.Component {
         <p className="medium-panel-text">
           <TextMaker text_key="table_picker_top_instructions" />
         </p>
-        {/* <FAQPanel
+        {/* <StandardFAQ
           rendered_q_a_keys={q_a_keys}
           background_color={primaryColor}
         /> */}

@@ -3,7 +3,7 @@ import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
-import { FAQPanel } from "src/components/index";
+import { StandardFAQ } from "src/components/index";
 
 const common_panel_config = {
   is_static: true,
@@ -19,7 +19,9 @@ const curried_render = ({ q_a_keys }) =>
       subject.level === "crso" && "what_are_CR",
     ]);
 
-    return <FAQPanel rendered_q_a_keys={rendered_q_a_keys} subject={subject} />;
+    return (
+      <StandardFAQ rendered_q_a_keys={rendered_q_a_keys} subject={subject} />
+    );
   };
 
 export const declare_financial_key_concepts_panel = () =>
