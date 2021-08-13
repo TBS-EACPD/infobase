@@ -13,7 +13,6 @@ import {
 } from "src/panels/panel_declarations/results/results_common";
 
 import {
-  // StandardFAQ,
   Select,
   Panel,
   create_text_maker_component,
@@ -347,8 +346,6 @@ const indicator_report = (processed_indicator) => (
   </div>
 );
 
-// const q_a_keys = [];
-
 export default class TextDiffApp extends React.Component {
   constructor(props) {
     super(props);
@@ -497,8 +494,6 @@ export default class TextDiffApp extends React.Component {
             args={{ previous_doc_name, current_doc_name }}
           />
         </div>
-        {/* Could have some department-specific FAQ questions? */}
-        {/* <StandardFAQ rendered_q_a_keys={q_a_keys} subject={subject} /> */}
         <div className={classNames("medium-panel-text")}>
           <label htmlFor="select_dept">
             <TM k="select_dept" />

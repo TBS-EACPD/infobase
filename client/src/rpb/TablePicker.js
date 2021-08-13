@@ -7,9 +7,8 @@ import React, { Fragment } from "react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import { AlertBanner, /*StandardFAQ,*/ TagCloud } from "src/components/index";
+import { AlertBanner, TagCloud } from "src/components/index";
 
-// import { primaryColor } from "src/core/color_defs";
 import { Table } from "src/core/TableClass";
 
 import { TextMaker, text_maker } from "./rpb_text_provider";
@@ -138,8 +137,6 @@ class TablePicker extends React.Component {
       }))
       .value();
 
-    // const q_a_keys = [];
-
     return (
       <div ref="main" id="tbp-main">
         <h1>
@@ -149,10 +146,6 @@ class TablePicker extends React.Component {
         <p className="medium-panel-text">
           <TextMaker text_key="table_picker_top_instructions" />
         </p>
-        {/* <StandardFAQ
-          rendered_q_a_keys={q_a_keys}
-          background_color={primaryColor}
-        /> */}
         <div>
           <TaggedItemCloud
             exiting={this.state.exiting}
