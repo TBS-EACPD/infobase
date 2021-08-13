@@ -435,7 +435,7 @@ const Infographic = ({
   return (
     <StandardRouteContainer
       title={title}
-      breadcrumbs={[title]}
+      breadcrumbs={[breadcrumb_program]}
       description={desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
