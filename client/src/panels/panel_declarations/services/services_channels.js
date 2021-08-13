@@ -13,7 +13,6 @@ import {
 
 import { useSummaryServices } from "src/models/populate_services";
 
-import { textColor } from "src/core/color_defs";
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -21,6 +20,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend } from "src/charts/legends";
 
 import { WrappedNivoPie, WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import { textColor } from "src/style_constants/index";
 
 import { application_channels_keys } from "./shared";
 
