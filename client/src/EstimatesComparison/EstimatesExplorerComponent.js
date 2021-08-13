@@ -2,6 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+
 import {
   StandardFAQ,
   LeafSpinner,
@@ -12,6 +14,11 @@ import {
   CheckBox,
   Details,
 } from "src/components/index";
+
+import { create_text_maker_component } from "src/components/misc_util_components";
+import common_subapp_lang from "src/components/StandardFAQ/common_faq_questions.yaml";
+
+import est_lang from "src/components/StandardFAQ/estimates_comparison_questions.yaml";
 
 import { businessConstants } from "src/models/businessConstants";
 
@@ -183,6 +190,12 @@ export default class EstimatesExplorerComponent extends React.Component {
       col_click,
     };
 
+    const { FAQ_TM } = create_text_maker_component([
+      est_lang,
+      common_lang,
+      common_subapp_lang,
+    ]);
+
     const q_a_keys = [
       "what_are_mains",
       "what_are_supps",
@@ -206,7 +219,8 @@ export default class EstimatesExplorerComponent extends React.Component {
           <TM k="estimates_expl" />
         </div>
         <StandardFAQ
-          rendered_q_a_keys={q_a_keys}
+          q_a_base_keys={q_a_keys}
+          TM={FAQ_TM}
           is_initially_expanded={true}
           background_color={primaryColor}
         />

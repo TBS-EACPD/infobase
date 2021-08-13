@@ -2,6 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+
 import {
   LeafSpinner,
   KeyConceptList,
@@ -10,6 +12,11 @@ import {
   GlossaryIcon,
   StandardFAQ,
 } from "src/components/index";
+
+import { create_text_maker_component } from "src/components/misc_util_components";
+
+import common_subapp_lang from "src/components/StandardFAQ/common_faq_questions.yaml";
+import tag_exp_lang from "src/components/StandardFAQ/tag_explorer_questions.yaml";
 
 import { GlossaryEntry } from "src/models/glossary";
 import { run_template } from "src/models/text";
@@ -237,6 +244,12 @@ export default class TagExplorerComponent extends React.Component {
       </div>
     );
 
+    const { FAQ_TM } = create_text_maker_component([
+      tag_exp_lang,
+      common_lang,
+      common_subapp_lang,
+    ]);
+
     const q_a_keys = [
       "what_is_tagging",
       "what_is_prog_tagging",
@@ -249,7 +262,8 @@ export default class TagExplorerComponent extends React.Component {
       <div>
         <TM k="tag_nav_intro_text" el="div" />
         <StandardFAQ
-          rendered_q_a_keys={q_a_keys}
+          q_a_base_keys={q_a_keys}
+          TM={FAQ_TM}
           background_color={primaryColor}
         />
         <div className="tabbed-content">
