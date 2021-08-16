@@ -14,7 +14,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
-import { FootNote } from "src/models/footnotes/footnotes";
+import { create_footnote } from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
@@ -464,7 +464,8 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
     dept: subject,
   };
   footnotes = _.concat(
-    new FootNote({
+    create_footnote({
+      id: text_maker("actual_spending_footnote"),
       subject,
       text: text_maker("actual_spending_footnote"),
       topic_keys: ["EXP"],

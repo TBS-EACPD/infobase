@@ -5,7 +5,10 @@ import { createSelector } from "reselect";
 
 import { Format } from "src/components/index";
 
-import { FootNote, footNoteStore } from "src/models/footnotes/footnotes";
+import {
+  create_footnote,
+  get_footnotes_by_subject_and_topic,
+} from "src/models/footnotes/footnotes";
 import { glossaryEntryStore } from "src/models/glossary";
 import { Subject } from "src/models/subject";
 
@@ -61,10 +64,11 @@ function get_footnotes_for_votestat_item({ desc, org_id, votenum }) {
     );
     if (central_vote_footnote) {
       return [
-        new FootNote({
-          id: "326",
+        create_footnote({
+          id: central_vote_footnote[1](),
           text: central_vote_footnote[1](),
           subject: Dept.lookup(326),
+          topic_keys: [],
         }),
       ];
     }
@@ -203,7 +207,7 @@ function get_data_by_org(include_stat) {
             current_value,
             comparison_value
           ),
-          footnotes: footNoteStore.get_for_subject(org, ["VOTED", "STAT"]),
+          footnotes: get_footnotes_by_subject_and_topic(org, ["VOTED", "STAT"]),
           amounts_by_doc,
         },
         children: _.chain(rows)

@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { footNoteStore } from "src/models/footnotes/footnotes";
+import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { Subject } from "src/models/subject";
 
@@ -211,7 +211,9 @@ class PanelRegistry {
 
     const footnote_concepts = this.footnote_concept_keys;
 
-    return _.chain(footNoteStore.get_for_subject(subject, footnote_concepts))
+    return _.chain(
+      get_footnotes_by_subject_and_topic(subject, footnote_concepts)
+    )
       .uniqBy("text") //some footnotes are duplicated to support different topics, years, orgs, etc.
       .compact()
       .value();

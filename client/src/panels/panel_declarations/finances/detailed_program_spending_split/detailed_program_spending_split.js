@@ -18,7 +18,7 @@ import {
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import { footNoteStore } from "src/models/footnotes/footnotes";
+import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { Subject } from "src/models/subject";
 import { run_template } from "src/models/text";
@@ -520,7 +520,10 @@ export const declare_detailed_program_spending_split_panel = () =>
           .map(({ program }) => program)
           .uniqBy((program) => program.activity_code)
           .flatMap((program) =>
-            footNoteStore.get_for_subject(program, [...footnote_topics, "EXP"])
+            get_footnotes_by_subject_and_topic(program, [
+              ...footnote_topics,
+              "EXP",
+            ])
           )
           .filter()
           .value();

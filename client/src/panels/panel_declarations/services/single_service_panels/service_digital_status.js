@@ -14,7 +14,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
-import { footNoteStore } from "src/models/footnotes/footnotes";
+import { create_footnote } from "src/models/footnotes/footnotes";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -22,7 +22,7 @@ export class ServiceDigitalStatus extends React.Component {
   render() {
     const { service } = this.props;
     const footnote = service.digital_enablement_comment && [
-      footNoteStore.create_and_register({
+      create_footnote({
         id: `digital_enablement_comment_${service.id}`,
         topic_keys: ["DIGITAL_STATUS"],
         subject: service,
