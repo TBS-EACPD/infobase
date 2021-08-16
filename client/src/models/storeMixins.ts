@@ -4,13 +4,12 @@ import { completeAssign } from "src/general_utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-class StaticStore<
-  definition extends { id: string },
-  instance extends { id: string; alt_ids?: string[] }
-> {
+type InstanceBase = { id: string; alt_ids?: string[] };
+
+class StaticStore<definition, instance extends InstanceBase> {
   private store: Map<string, instance>;
-  private register = (id: string, instance: instance) => {
-    this.store.set(id, instance);
+  private register = (instance: instance) => {
+    this.store.set(instance.id, instance);
 
     _.forEach(instance.alt_ids, (id) => this.store.set(id, instance));
   };
@@ -22,12 +21,12 @@ class StaticStore<
 
   constructor(
     store: Map<string, instance>,
-    create = _.identity as (definition: definition) => instance
+    create: (definition: definition) => instance
   ) {
     this.store = store;
 
     this.create_and_register = (definition: definition) => {
-      this.register(definition.id, create(definition));
+      this.register(create(definition));
     };
   }
 
@@ -35,11 +34,8 @@ class StaticStore<
   get_all = () => _.uniq(Array.from(this.store.values()));
 }
 
-export const StaticStoreFactory = <
-  definition extends { id: string },
-  instance extends { id: string }
->(
-  create?: (definition: definition) => instance
+export const StaticStoreFactory = <definition, instance extends InstanceBase>(
+  create = _.identity as (definition: definition) => instance
 ): StaticStore<definition, instance> => {
   const store = new Map<string, instance>();
   return new StaticStore(store, create);
