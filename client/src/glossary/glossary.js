@@ -11,7 +11,7 @@ import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "src/core/NavComponents";
-import { TableStore } from "src/core/TableClass";
+import { tableStore } from "src/core/TableClass";
 
 import { rpb_link } from "src/rpb/rpb_link";
 
@@ -45,7 +45,7 @@ function get_glossary_items_by_letter() {
   return glossary_items_by_letter;
 }
 
-const tables = TableStore.get_all();
+const tables = tableStore.get_all();
 const table_links_by_tag = _.chain(tables)
   .flatMap("tags")
   .uniq()

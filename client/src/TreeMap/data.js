@@ -5,7 +5,7 @@ import { Subject } from "src/models/subject";
 import { create_text_maker } from "src/models/text";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
-import { TableStore } from "src/core/TableClass";
+import { tableStore } from "src/core/TableClass";
 
 import treemap_text from "./TreeMap.yaml";
 
@@ -191,8 +191,8 @@ function get_data_drf(
   filter_var,
   get_changes
 ) {
-  const program_ftes_table = TableStore.lookup("programFtes");
-  const program_spending_table = TableStore.lookup("programSpending");
+  const program_ftes_table = tableStore.lookup("programFtes");
+  const program_spending_table = tableStore.lookup("programSpending");
 
   const orgs = _.chain(Dept.get_all())
     .map((org) => ({
@@ -300,7 +300,7 @@ function get_data_so(
   const so_nums_to_get = parseInt(filter_var)
     ? _.filter(so_nums, (so) => so_cat(so) === parseInt(filter_var))
     : so_nums;
-  const org_sobj_table = TableStore.lookup("orgSobjs");
+  const org_sobj_table = tableStore.lookup("orgSobjs");
   const all_orgs = _.chain(Dept.get_all())
     .map((org) => ({
       subject: org,
@@ -377,7 +377,7 @@ function get_data_tp(
     filter_var &&
     filter_var !== "All" &&
     (filter_var === "g" || filter_var === "c");
-  const tp_table = TableStore.lookup("orgTransferPayments");
+  const tp_table = tableStore.lookup("orgTransferPayments");
   const all_orgs = _.chain(Dept.get_all())
     .map((org) => ({
       subject: org,
@@ -440,7 +440,7 @@ function get_data_vs(
   filter_var,
   get_changes
 ) {
-  const vote_stat_table = TableStore.lookup("orgVoteStatPa");
+  const vote_stat_table = tableStore.lookup("orgVoteStatPa");
   const orgs = _.chain(Dept.get_all())
     .map((org) => ({
       subject: org,

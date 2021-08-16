@@ -497,8 +497,8 @@ export class Table {
   }
 }
 
-export const TableStore = StaticStoreFactory(
+export const tableStore = StaticStoreFactory(
   (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
 );
 
-assign_to_dev_helper_namespace({ TableStore });
+assign_to_dev_helper_namespace({ tableStore });
