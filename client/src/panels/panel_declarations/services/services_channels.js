@@ -30,11 +30,13 @@ import text from "./services.yaml";
 const colors = infobase_colors();
 const { text_maker, TM } = create_text_maker_component(text);
 const channels = _.map(application_channels_keys, text_maker);
+const pct_formatter = formats.percentage1;
+
 const application_channels_by_year_tooltip = (items, tooltip_formatter) => {
   const item = items[0];
   const item_pct =
-    item.value / _.chain(item.data).map(_.toNumber).sum().value();
-  const pct_formatter = formats.percentage1;
+    item.value /
+    _.chain(item.data).omit("year").map().filter(_.isNumber).sum().value();
 
   return (
     <div
