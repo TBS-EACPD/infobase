@@ -4,22 +4,45 @@ import { completeAssign } from "src/general_utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-class StaticStore {
-  static register: (id: string, instance: StaticStore) => void;
-  static lookup: (id: string) => StaticStore | undefined;
-  static get_all: () => StaticStore[];
-  static __store__: Map<string, StaticStore>;
+class StaticStore<
+  definition extends { id: string },
+  instance extends { id: string; alt_ids?: string[] }
+> {
+  private store: Map<string, instance>;
+  private register = (id: string, instance: instance) => {
+    this.store.set(id, instance);
+
+    _.forEach(instance.alt_ids, (id) => this.store.set(id, instance));
+  };
+
+  create_and_register: (
+    definition: definition,
+    register: (id: string, instance: instance) => void
+  ) => void;
+
+  constructor(
+    store: Map<string, instance>,
+    create = _.identity as (definition: definition) => instance
+  ) {
+    this.store = store;
+
+    this.create_and_register = (definition: definition) => {
+      this.register(definition.id, create(definition));
+    };
+  }
+
+  lookup = (id: string) => this.store.get(id);
+  get_all = () => _.uniq(Array.from(this.store.values()));
 }
 
-export const getStaticStore: () => typeof StaticStore = () => {
-  const _storeMap = new Map<string, StaticStore>();
-  StaticStore.register = (id: string, instance: StaticStore) => {
-    _storeMap.set(id, instance);
-  };
-  StaticStore.lookup = (id: string) => _storeMap.get(id);
-  StaticStore.get_all = () => _.uniq(Array.from(_storeMap.values()));
-  StaticStore.__store__ = _storeMap;
-  return StaticStore;
+export const StaticStoreFactory = <
+  definition extends { id: string },
+  instance extends { id: string }
+>(
+  create?: (definition: definition) => instance
+): StaticStore<definition, instance> => {
+  const store = new Map<string, instance>();
+  return new StaticStore(store, create);
 };
 
 type ConstructorType = { [key: string]: any };
