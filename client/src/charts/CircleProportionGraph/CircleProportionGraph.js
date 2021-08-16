@@ -44,14 +44,10 @@ export class CircleProportionGraph extends React.Component {
       const parent_cx = viewbox_dimension / 2;
       const parent_cy = viewbox_dimension / 2;
 
-      const child_percent = child_value / parent_value;
-
-      const true_child_radius = parent_radius * Math.sqrt(child_percent);
-      const default_child_radius = parent_radius * 0.005;
-      const child_radius =
-        true_child_radius > default_child_radius
-          ? true_child_radius
-          : default_child_radius;
+      const child_radius = _.max([
+        parent_radius * Math.sqrt(child_value / parent_value),
+        viewbox_dimension * 0.01, // roughly the smallest visible child radius
+      ]);
 
       // this y position will place the bottom of the inner circle just barely above the bottom of the outer circle.
       // Easier to judge proptions than when it's centered, and the slight offset stops the the svg's edges from
