@@ -10,7 +10,7 @@ import { LeafSpinner, LabeledBox } from "src/components/index";
 
 import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
 
-import Footnote from "src/models/footnotes/footnotes";
+import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { Subject } from "src/models/subject";
 
@@ -207,7 +207,10 @@ class RPB extends React.Component {
     const footnotes =
       subject &&
       table &&
-      Footnote.get_for_subject(subject, table.tags.concat(["MACHINERY"]));
+      get_footnotes_by_subject_and_topic(
+        subject,
+        table.tags.concat(["MACHINERY"])
+      );
 
     const dimensions =
       this.state.table &&

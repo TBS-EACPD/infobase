@@ -14,10 +14,8 @@ class StaticStore<definition, instance extends StoreInstanceBase> {
     _.forEach(instance.alt_ids, (id) => this.store.set(id, instance));
   };
 
-  create_and_register: (
-    definition: definition,
-    register: (id: string, instance: instance) => void
-  ) => void;
+  create: (def: definition) => instance;
+  create_and_register: (definition: definition) => void;
 
   constructor(
     store: Map<string, instance>,
@@ -25,13 +23,15 @@ class StaticStore<definition, instance extends StoreInstanceBase> {
   ) {
     this.store = store;
 
+    this.create = create;
+
     this.create_and_register = (def: definition) => {
       this.register(create(def));
     };
   }
 
   lookup = (id: string) => this.store.get(id);
-  get_all = () => _.uniq(Array.from(this.store.values()));
+  get_all = () => _.uniq(Array.from(this.store.values())); // TODO why's a unique needed here?
 }
 
 export const StaticStoreFactory = <
@@ -43,27 +43,6 @@ export const StaticStoreFactory = <
   const store = new Map<string, instance>();
   return new StaticStore(store, create);
 };
-
-type ConstructorType = { [key: string]: any };
-
-class BaseClass {}
-class MixinBuilder {
-  superclass: any;
-  constructor(superclass: any) {
-    this.superclass = superclass;
-  }
-  with(
-    ...mixins: (
-      | typeof staticStoreMixin
-      | typeof exstensibleStoreMixin
-      | typeof PluralSingular
-      | typeof SubjectMixin
-      | ((superclass: any) => unknown)
-    )[]
-  ) {
-    return mixins.reduce((c, mixin) => mixin(c), this.superclass);
-  }
-}
 
 export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
   class SubjectMixin {
@@ -110,6 +89,27 @@ export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
 //
 // TODO legacy code below here, to be refactored on this branch
 //
+
+type ConstructorType = { [key: string]: any };
+
+class BaseClass {}
+class MixinBuilder {
+  superclass: any;
+  constructor(superclass: any) {
+    this.superclass = superclass;
+  }
+  with(
+    ...mixins: (
+      | typeof staticStoreMixin
+      | typeof exstensibleStoreMixin
+      | typeof PluralSingular
+      | typeof SubjectMixin
+      | ((superclass: any) => unknown)
+    )[]
+  ) {
+    return mixins.reduce((c, mixin) => mixin(c), this.superclass);
+  }
+}
 
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
 export const mix = (superclass?: any) => new MixinBuilder(superclass);

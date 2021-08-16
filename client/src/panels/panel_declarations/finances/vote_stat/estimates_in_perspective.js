@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import { FootNote } from "src/models/footnotes/footnotes";
+import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { Subject } from "src/models/subject";
 
@@ -47,7 +47,8 @@ export const declare_estimates_in_perspective_panel = () =>
           panel_args;
 
         footnotes = _.concat(
-          new FootNote({
+          create_footnote({
+            id: text_maker("auth_footnote"),
             subject,
             text: text_maker("auth_footnote"),
             topic_keys: ["AUTH"],
