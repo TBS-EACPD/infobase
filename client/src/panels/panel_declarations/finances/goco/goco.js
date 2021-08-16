@@ -16,7 +16,7 @@ import { Subject } from "src/models/subject";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { get_formatter } from "src/charts/shared";
@@ -43,8 +43,8 @@ class Goco extends React.Component {
   render() {
     const { child_graph, clicked_spending, clicked_fte, clicked_id } =
       this.state;
-    const programSpending = Table.lookup("programSpending");
-    const programFtes = Table.lookup("programFtes");
+    const programSpending = TableStore.lookup("programSpending");
+    const programFtes = TableStore.lookup("programFtes");
     const spend_col = "{{pa_last_year}}exp";
     const fte_col = "{{pa_last_year}}";
     const series_labels = [text_maker("spending"), text_maker("ftes")];

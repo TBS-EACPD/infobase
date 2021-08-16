@@ -1,12 +1,12 @@
 import _ from "lodash";
 
-import { getStaticStore } from "src/models/storeMixins";
+import { StaticStoreFactory } from "src/models/storeMixins";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
 const footnotes_by_id = {};
 
-export default class FootNote extends getStaticStore() {
+export default class FootNote extends StaticStoreFactory() {
   static create_and_register(def) {
     const { id } = def;
     if (footnotes_by_id[id]) {

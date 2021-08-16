@@ -5,7 +5,7 @@ import { GlossaryEntry } from "src/models/glossary";
 import { Subject } from "src/models/subject";
 import { trivial_text_maker } from "src/models/text";
 
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 
 import { textColor } from "src/style_constants/index";
 
@@ -257,7 +257,7 @@ const datasets = {
   header_function: () => trivial_text_maker("build_a_report"),
   name_function: (table) => table.title,
   get_data: () =>
-    _.chain(Table.get_all())
+    _.chain(TableStore.get_all())
       .reject("reference_table")
       .map((t) => ({
         name: t.name,

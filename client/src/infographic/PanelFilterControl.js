@@ -10,7 +10,7 @@ import {
   TagCloud,
 } from "src/components/index";
 
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 
 import { SelectAllControl } from "src/charts/legends/index";
 import { tertiaryColor } from "src/style_constants/index";
@@ -79,7 +79,7 @@ export default class PanelFilterControl extends React.Component {
     const tags = _.chain(table_tags)
       .map((active, table_id) => ({
         id: table_id,
-        label: Table.lookup(table_id).name,
+        label: TableStore.lookup(table_id).name,
         active,
       }))
       .sortBy("label")
