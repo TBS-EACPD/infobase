@@ -39,16 +39,13 @@ export class CircleProportionGraph extends React.Component {
     const value_formatter = get_formatter(is_money, formatter, true, false);
 
     const Circles = () => {
-      // arbitrary parent values
-      const minDimension = 180;
-      const parent_radius = minDimension / 2;
-      const parent_cx = minDimension / 2;
-      const parent_cy = minDimension / 2;
+      const viewbox_dimension = 180;
+      const parent_radius = viewbox_dimension / 2;
+      const parent_cx = viewbox_dimension / 2;
+      const parent_cy = viewbox_dimension / 2;
 
-      // child circle calculations
       const child_percent = child_value / parent_value;
 
-      // precaution against smaller child_percent values
       const true_child_radius = parent_radius * Math.sqrt(child_percent);
       const default_child_radius = parent_radius * 0.005;
       const child_radius =
@@ -63,9 +60,13 @@ export class CircleProportionGraph extends React.Component {
 
       return (
         <div
-          style={{ height: minDimension, width: minDimension, margin: "auto" }}
+          style={{
+            height: viewbox_dimension,
+            width: viewbox_dimension,
+            margin: "auto",
+          }}
         >
-          <svg viewBox={`0 0 ${minDimension} ${minDimension}`}>
+          <svg viewBox={`0 0 ${viewbox_dimension} ${viewbox_dimension}`}>
             <circle
               cx={parent_cx}
               cy={parent_cy}
