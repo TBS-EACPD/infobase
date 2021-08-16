@@ -45,23 +45,23 @@ const ServicesChannelsPanel = ({ subject }) => {
 
   const [active_services, set_active_services] = useState({});
   const [active_year, set_active_year] = useState("");
+  const report_years = get_report_years(data);
+  const most_recent_year = report_years[0];
+
   useEffect(() => {
-    if (data) {
-      set_active_year(get_report_years(data)[0]);
-    }
-  }, [data]);
+    set_active_year(most_recent_year);
+  }, [most_recent_year]);
 
   useEffect(() => {
     const median_3_values = _.chain(data)
       .map((service) => ({
         id: service.id,
-        service_report: _.filter(
-          service.service_report,
-          (report) => report.year === active_year
-        ),
         value: _.chain(application_channels_keys)
           .flatMap((key) =>
-            _.map(service.service_report, (report) => report[key])
+            _.map(
+              service.service_report,
+              (report) => report.year === most_recent_year && report[key]
+            )
           )
           .max()
           .value(),
@@ -78,7 +78,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       .fromPairs()
       .value();
     set_active_services(median_3_values);
-  }, [data, active_year]);
+  }, [data, most_recent_year]);
 
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
@@ -88,7 +88,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     ...service,
     service_report: _.filter(
       service.service_report,
-      (report) => report.year === service.report_years[0]
+      (report) => report.year === most_recent_year
     ),
   }));
   const active_year_filtered_data = _.map(data, (service) => ({
@@ -148,7 +148,6 @@ const ServicesChannelsPanel = ({ subject }) => {
       .fromPairs()
       .value(),
   };
-  const report_years = get_report_years(data);
 
   return (
     <div>
@@ -161,7 +160,7 @@ const ServicesChannelsPanel = ({ subject }) => {
         }
         args={{
           subject,
-          most_recent_year: report_years[0],
+          most_recent_year,
           max_vol_service_name,
           max_vol_service_value,
           max_vol_channel_name,
