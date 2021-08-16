@@ -6,7 +6,7 @@ import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import { create_text_maker_component, CardList } from "src/components/index";
 
-import { TableStore } from "src/core/TableClass";
+import { tableStore } from "src/core/TableClass";
 
 import { rpb_link } from "src/rpb/rpb_link";
 
@@ -49,7 +49,7 @@ export const declare_links_to_rpb_panel = () =>
             render({ title, calculations }) {
               const { subject } = calculations;
 
-              const list_args = _.chain(TableStore.get_all())
+              const list_args = _.chain(tableStore.get_all())
                 .reject("reference_table")
                 .groupBy(get_table_type)
                 .map((group_of_tables, table_type_title) => ({
@@ -90,7 +90,7 @@ export const declare_links_to_rpb_panel = () =>
               const { subject } = calculations;
 
               const list_args = _.chain(subject.tables)
-                .map((id) => TableStore.lookup(id))
+                .map((id) => tableStore.lookup(id))
                 .compact()
                 .groupBy(get_table_type)
                 .map((group_of_tables, table_type_title) => ({

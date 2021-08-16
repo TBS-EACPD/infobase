@@ -7,13 +7,13 @@ import { TrivialTM as TM, Format } from "src/components/index";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { TableStore } from "src/core/TableClass";
+import { tableStore } from "src/core/TableClass";
 
 const is_planning_year = (year) =>
   _.includes(year_templates.planning_years, year);
 
 const pick_table = (type) =>
-  TableStore.lookup(type === "spending" ? "programSpending" : "programFtes");
+  tableStore.lookup(type === "spending" ? "programSpending" : "programFtes");
 
 const get_rows_for_subject_from_table = _.memoize(
   (subject, type, year) => {

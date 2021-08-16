@@ -8,7 +8,7 @@ import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { TableStore } from "src/core/TableClass";
+import { tableStore } from "src/core/TableClass";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { tertiaryColor } from "src/style_constants/index";
@@ -28,7 +28,7 @@ export const format_and_get_fte = (type, subject) => {
   const historical_ticks = _.map(std_years, run_template);
   const planned_ticks = _.map(planning_years, run_template);
 
-  const programFtes = TableStore.lookup("programFtes");
+  const programFtes = tableStore.lookup("programFtes");
   const q = programFtes.q(subject);
 
   const historical_ftes = _.chain(std_years)

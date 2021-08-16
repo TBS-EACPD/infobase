@@ -6,7 +6,7 @@ import { Subject } from "src/models/subject";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { is_dev } from "src/core/injected_build_constants";
-import { TableStore } from "src/core/TableClass";
+import { tableStore } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
@@ -113,7 +113,7 @@ class PanelRegistry {
   get tables() {
     //table defs in depends_on indexed by their table ids
     return _.chain(this.depends_on)
-      .map((table_id) => [table_id, TableStore.lookup(table_id)])
+      .map((table_id) => [table_id, tableStore.lookup(table_id)])
       .fromPairs()
       .value();
   }
@@ -135,7 +135,7 @@ class PanelRegistry {
       _.some(
         this.depends_on,
         (t) =>
-          TableStore.lookup(t).depts && !TableStore.lookup(t).depts[subject.id]
+          tableStore.lookup(t).depts && !tableStore.lookup(t).depts[subject.id]
       )
     ) {
       return false;
@@ -168,7 +168,7 @@ class PanelRegistry {
       //if it's undefined we'll make one
       /* eslint-disable-next-line no-use-before-define */
       return _.chain(tables_for_panel(this.key, subject.level))
-        .map((table) => TableStore.lookup(table))
+        .map((table) => tableStore.lookup(table))
         .map((table) => {
           return {
             html: table.name,

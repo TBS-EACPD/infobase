@@ -15,7 +15,7 @@ import {
 import { api_load_has_services } from "src/models/populate_services";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
-import { TableStore } from "./TableClass";
+import { tableStore } from "./TableClass";
 
 const load_tables = (table_set) =>
   Promise.all(
@@ -49,7 +49,7 @@ function ensure_loaded({
         .value()
     )
     .uniqBy()
-    .map((table_key) => TableStore.lookup(table_key))
+    .map((table_key) => tableStore.lookup(table_key))
     .value();
 
   const panel_set = _.map(panel_keys, (key) =>
