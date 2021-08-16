@@ -102,7 +102,6 @@ export default {
           en: "Description",
           fr: "Description",
         },
-        can_group_by: true,
         can_group_vs: true,
       },
     ]);

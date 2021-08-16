@@ -66,7 +66,6 @@ export default {
           en: "Name",
           fr: "Nom",
         },
-        can_group_by: true,
       },
     ]);
     _.each(std_years, (header, i) => {
