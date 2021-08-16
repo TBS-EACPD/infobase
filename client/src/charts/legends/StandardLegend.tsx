@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tertiaryColor } from "src/style_constants/index";
+import { LegendContainer } from "./LegendContainer";
 
 import { LegendList, LegendListProps } from "./LegendList";
 
@@ -17,42 +17,14 @@ export const StandardLegend = ({
   Controls,
   legendListProps: { items, isHorizontal, onClick, checkBoxProps },
 }: StandardLegendProps) => (
-  <div className="standard-legend-container">
-    <div
-      style={{ maxHeight: "400px", display: "flex", flexDirection: "column" }}
-    >
-      {title && (
-        <p className="mrgn-bttm-0 mrgn-tp-0 title-p--standard-legend centerer">
-          {title}
-        </p>
-      )}
-      {/* have to hard code max height since overflow on IE is bugged */}
-      <div
-        style={{
-          overflowX: "hidden",
-          maxHeight: "351px",
-          msOverflowStyle: "-ms-autohiding-scrollbar",
-        }}
-      >
-        <LegendList
-          {...{
-            items,
-            isHorizontal,
-            onClick,
-            checkBoxProps,
-          }}
-        />
-      </div>
-      {Controls && (
-        <div
-          style={{
-            borderTop: `1px dashed ${tertiaryColor}`,
-            padding: "10px 0px 10px 5px",
-          }}
-        >
-          {Controls}
-        </div>
-      )}
-    </div>
-  </div>
+  <LegendContainer title={title} legend_footer={Controls}>
+    <LegendList
+      {...{
+        items,
+        isHorizontal,
+        onClick,
+        checkBoxProps,
+      }}
+    />
+  </LegendContainer>
 );
