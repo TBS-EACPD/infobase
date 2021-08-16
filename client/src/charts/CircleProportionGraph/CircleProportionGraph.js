@@ -14,11 +14,6 @@ import {
   general_default_props,
   get_formatter,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
-import {
-  textColor,
-  minMediumDevice,
-  maxMediumDevice,
-} from "src/style_constants/index";
 
 import text from "./CircleProportionGraph.yaml";
 
@@ -125,11 +120,7 @@ export class CircleProportionGraph extends React.Component {
                 <span className="infobase-pie__legend-data">
                   <Format
                     type="percentage1"
-                    content={
-                      item.value === parent_value
-                        ? item.value / parent_value
-                        : item.value / (parent_value + child_value)
-                    }
+                    content={item.value / parent_value}
                   />
                 </span>
               }
