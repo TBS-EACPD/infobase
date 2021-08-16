@@ -8,7 +8,7 @@ import {
   query_org_years_with_covid_data,
   query_all_covid_measures,
 } from "./queries";
-import { YearsWithCovidData } from "./YearsWithCovidData";
+import { yearsWithCovidDataStore } from "./YearsWithCovidData";
 
 const _subject_ids_with_loaded_years_with_covid_data = {};
 export const api_load_years_with_covid_data = (subject) => {
@@ -41,7 +41,7 @@ export const api_load_years_with_covid_data = (subject) => {
   return (
     query({ org_id: String(id) })
       .then((years_with_covid_data) => {
-        YearsWithCovidData.create_and_register(id, years_with_covid_data);
+        yearsWithCovidDataStore.create_and_register(id, years_with_covid_data);
 
         if (level === "dept") {
           subject.set_has_data(

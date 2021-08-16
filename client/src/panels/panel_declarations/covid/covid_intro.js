@@ -22,7 +22,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_intro.yaml";
 
-const { YearsWithCovidData } = Subject;
+const { yearsWithCovidDataStore } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -31,7 +31,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      selected_year: _.chain(YearsWithCovidData.lookup("gov"))
+      selected_year: _.chain(yearsWithCovidDataStore.lookup("gov"))
         .thru(({ years_with_estimates, years_with_expenditures }) => [
           ...years_with_estimates,
           ...years_with_expenditures,

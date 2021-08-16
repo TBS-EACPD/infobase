@@ -37,7 +37,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_expenditures.yaml";
 
-const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
+const { yearsWithCovidDataStore, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -424,7 +424,7 @@ export const declare_covid_expenditures_panel = () =>
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: (subject) => [],
       calculate: (subject, options) => {
-        const years_with_expenditures = YearsWithCovidData.lookup(
+        const years_with_expenditures = yearsWithCovidDataStore.lookup(
           subject.id
         )?.years_with_expenditures;
         return (
