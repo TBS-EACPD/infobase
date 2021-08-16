@@ -21,12 +21,12 @@ class StaticStore<definition, instance extends StoreInstanceBase> {
 
   constructor(
     store: Map<string, instance>,
-    create: (definition: definition) => instance
+    create: (def: definition) => instance
   ) {
     this.store = store;
 
-    this.create_and_register = (definition: definition) => {
-      this.register(create(definition));
+    this.create_and_register = (def: definition) => {
+      this.register(create(def));
     };
   }
 
@@ -38,7 +38,7 @@ export const StaticStoreFactory = <
   definition,
   instance extends StoreInstanceBase
 >(
-  create = _.identity as (definition: definition) => instance
+  create = _.identity as (def: definition) => instance
 ): StaticStore<definition, instance> => {
   const store = new Map<string, instance>();
   return new StaticStore(store, create);
