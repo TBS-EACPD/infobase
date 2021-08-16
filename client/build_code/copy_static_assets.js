@@ -107,7 +107,10 @@ const table_csvs = _.map(
 const other_csv_names_unilingual = [
   "canadian_population_estimates_by_province.csv",
 ];
-const other_csv_names_bilingual = [];
+const other_csv_names_bilingual = _.flatMap(["hi_lookups"], (name) => [
+  `${name}_en.csv`,
+  `${name}_fr.csv`,
+]);
 const other_csvs = _.map(
   [...other_csv_names_unilingual, ...other_csv_names_bilingual],
   public_dir_prefixer

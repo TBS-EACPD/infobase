@@ -7,6 +7,7 @@ import {
   api_load_all_covid_measures,
 } from "src/models/covid/populate";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
+import { load_horizontal_initiative_lookups } from "src/models/populate_horizontal_initiative_lookups";
 import {
   api_load_results_bundle,
   api_load_results_counts,
@@ -70,6 +71,12 @@ function ensure_loaded({
     requires_granular_result_counts ||
     check_for_panel_dependency("requires_granular_result_counts");
 
+  const should_load_horizontal_initiative_lookups =
+    subject &&
+    subject.level === "tag" &&
+    subject.root.id === "HI" &&
+    _.isUndefined(subject.lookups);
+
   const should_load_years_with_covid_data =
     has_covid_data ||
     years_with_covid_data ||
@@ -112,6 +119,11 @@ function ensure_loaded({
     ? load_footnotes_bundle(footnotes_subject)
     : Promise.resolve();
 
+  const horizontal_initiative_lookups_prom =
+    should_load_horizontal_initiative_lookups
+      ? load_horizontal_initiative_lookups()
+      : Promise.resolve();
+
   const years_with_covid_data_prom = should_load_years_with_covid_data
     ? api_load_years_with_covid_data(subject)
     : Promise.resolve();
@@ -128,6 +140,7 @@ function ensure_loaded({
     has_services_prom,
     granular_result_counts_prom,
     footnotes_prom,
+    horizontal_initiative_lookups_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
   ]);
