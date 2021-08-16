@@ -246,7 +246,7 @@ class RPB extends React.Component {
             )
             .map((dim_data) => {
               return _.chain(all_data_columns)
-                .filter((col) => col.type !== "percentage1")
+                .filter((col) => !_.includes(col.type, "percentage"))
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
                 .concat([dimension_column_values(dim_data[0])])
                 .fromPairs()
