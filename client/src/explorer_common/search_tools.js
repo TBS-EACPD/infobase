@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { escapeRegExp } from "src/general_utils";
 
@@ -46,7 +46,7 @@ function node_to_match_tokens(node) {
         .values()
         .concat(
           _.chain(table.tags)
-            .map((id) => GlossaryEntry.lookup(id))
+            .map((id) => glossaryEntryStore.lookup(id))
             .compact()
             .map("title")
             .value()

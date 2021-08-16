@@ -12,7 +12,7 @@ import { sanitized_marked } from "src/general_utils";
 import { get_static_url, make_request } from "src/request_utils";
 
 import { get_dynamic_footnotes } from "./dynamic_footnotes";
-import FootNote from "./footnotes";
+import { footNoteStore } from "./footnotes";
 
 import footnote_topic_text from "./footnote_topics.yaml";
 
@@ -58,7 +58,7 @@ function populate_footnotes_info(csv_str) {
     if (subject_id !== "*") {
       const subject = Subject[subject_class].lookup(subject_id);
 
-      FootNote.create_and_register({
+      footNoteStore.create_and_register({
         id: obj.id,
         subject,
         year1,
@@ -69,7 +69,7 @@ function populate_footnotes_info(csv_str) {
     } else {
       const actual_subject_class = Subject[subject_class];
 
-      FootNote.create_and_register({
+      footNoteStore.create_and_register({
         id,
         subject: actual_subject_class,
         year1,
@@ -132,7 +132,7 @@ function populate_global_footnotes(csv_str) {
   populate_footnotes_info(csv_str);
 
   _.each(get_dynamic_footnotes(), function (footnote_config) {
-    FootNote.create_and_register(footnote_config);
+    footNoteStore.create_and_register(footnote_config);
   });
 }
 

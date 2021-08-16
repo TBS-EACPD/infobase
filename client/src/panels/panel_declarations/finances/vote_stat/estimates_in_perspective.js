@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import FootNote from "src/models/footnotes/footnotes";
+import { FootNote } from "src/models/footnotes/footnotes";
 
 import { Subject } from "src/models/subject";
 

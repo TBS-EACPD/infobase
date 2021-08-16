@@ -3,7 +3,7 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { lang, services_feature_flag } from "src/core/injected_build_constants";
 
@@ -22,13 +22,12 @@ const { text_maker, TM } = create_text_maker_component([
 
 // BIG HACK WARNING on desc_from_glossary_keys and tables_from_source_key, due to a circular dependency and sloppy timing,
 // neither can be used on-module-load. Any source declarations using these functions need to call them inside getters
-// to defer calls to Table and GlossaryEntry until after both are populated
+// to defer calls to Table and glossaryEntryStore until after both are populated
 // TODO sort the general mess of this code out
 
 function desc_from_glossary_keys(...glossary_keys) {
-  const definitions = _.map(
-    glossary_keys,
-    (glossary_key) => GlossaryEntry.lookup(glossary_key).definition
+  const definitions = _.map(glossary_keys, (glossary_key) =>
+    glossaryEntryStore.lookup(glossary_key).get_compiled_definition()
   );
   return _.map(definitions, (def, ix) => (
     <div key={ix} dangerouslySetInnerHTML={{ __html: def }} />

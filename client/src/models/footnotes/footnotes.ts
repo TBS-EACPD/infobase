@@ -6,7 +6,7 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 
 const footnotes_by_id = {};
 
-export default class FootNote extends StaticStoreFactory() {
+export class FootNote {
   static create_and_register(def) {
     const { id } = def;
     if (footnotes_by_id[id]) {
@@ -57,4 +57,6 @@ export default class FootNote extends StaticStoreFactory() {
   }
 }
 
-assign_to_dev_helper_namespace({ FootNote });
+export const footNoteStore = StaticStoreFactory();
+
+assign_to_dev_helper_namespace({ footNoteStore });

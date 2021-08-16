@@ -12,7 +12,7 @@ import {
 } from "src/components/index";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 import { run_template } from "src/models/text";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -315,7 +315,7 @@ export default class TagExplorerComponent extends React.Component {
             <h2 style={{ marginBottom: "10px" }}>
               {current_category && current_category.text}
               {current_category &&
-                GlossaryEntry.lookup(current_category.id) && (
+                glossaryEntryStore.lookup(current_category.id) && (
                   <GlossaryIcon
                     id={current_category.id}
                     icon_color={tertiaryColor}

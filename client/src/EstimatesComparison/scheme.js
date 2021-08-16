@@ -5,8 +5,8 @@ import { createSelector } from "reselect";
 
 import { Format } from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes";
-import { GlossaryEntry } from "src/models/glossary";
+import { FootNote, footNoteStore } from "src/models/footnotes/footnotes";
+import { glossaryEntryStore } from "src/models/glossary";
 import { Subject } from "src/models/subject";
 
 import { tableStore } from "src/core/TableClass";
@@ -40,7 +40,7 @@ const current_doc_code = current_doc_is_mains
 const ordered_est_docs = ["MAINS", "VA", "SA", "SEA", "SEB", "SEC"];
 
 function footnote_from_glossary_item(key) {
-  return () => GlossaryEntry.lookup(key).definition;
+  return () => glossaryEntryStore.lookup(key).get_compiled_definition();
 }
 
 const central_vote_footnotes = [
@@ -203,7 +203,7 @@ function get_data_by_org(include_stat) {
             current_value,
             comparison_value
           ),
-          footnotes: FootNote.get_for_subject(org, ["VOTED", "STAT"]),
+          footnotes: footNoteStore.get_for_subject(org, ["VOTED", "STAT"]),
           amounts_by_doc,
         },
         children: _.chain(rows)

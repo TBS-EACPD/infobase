@@ -7,7 +7,7 @@ import { sanitized_marked } from "src/general_utils";
 import { get_static_url, make_request } from "src/request_utils";
 
 import { populate_global_footnotes } from "./footnotes/populate_footnotes";
-import { GlossaryEntry } from "./glossary";
+import { glossaryEntryStore } from "./glossary";
 import { Subject } from "./subject";
 import { trivial_text_maker } from "./text";
 
@@ -176,15 +176,12 @@ function populate_glossary(lines) {
   _.chain(lines)
     .filter((line) => !_.isEmpty(line[markdown_def]))
     .each((line) => {
-      GlossaryEntry.register(
-        line[key],
-        new GlossaryEntry(
-          line[key],
-          line[term],
-          line[markdown_def],
-          line[translation]
-        )
-      );
+      glossaryEntryStore.create_and_register({
+        id: line[key],
+        title: line[term],
+        raw_definition: line[markdown_def],
+        translation: line[translation],
+      });
     })
     .value();
 }

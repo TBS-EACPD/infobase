@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -64,7 +64,7 @@ export const GlossaryIcon = ({
       alternate_text ? (
         alternate_text
       ) : (
-        (GlossaryEntry.lookup(id) as GlossaryEntry).title
+        glossaryEntryStore.lookup(id)?.title
       )
     ) : (
       <IconQuestion
@@ -84,9 +84,7 @@ export const GlossaryItem = ({
 }: GlossaryItemProps) => (
   <GlossaryTooltipWrapper id={id}>
     <span className={item_class}>
-      {alternate_text
-        ? alternate_text
-        : (GlossaryEntry.lookup(id) as GlossaryEntry).title}
+      {alternate_text ? alternate_text : glossaryEntryStore.lookup(id)?.title}
     </span>
   </GlossaryTooltipWrapper>
 );

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { IconCheckmark } from "src/icons/icons";
 import { backgroundColor } from "src/style_constants/index";
@@ -41,7 +41,7 @@ export const TagCloud = ({ tags, onSelectTag }: TagCloudProps) => (
           )}
           <span style={{ marginLeft: "5px" }}>{label}</span>
         </button>
-        {GlossaryEntry.lookup(id) && (
+        {glossaryEntryStore.lookup(id) && (
           <span className="tag-button-helper" tabIndex={0}>
             <GlossaryIcon id={id} />
           </span>

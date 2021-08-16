@@ -6,7 +6,7 @@ import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import { create_text_maker_component } from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes";
+import { footNoteStore } from "src/models/footnotes/footnotes";
 
 import { get_source_links } from "src/metadata/data_sources";
 
@@ -48,7 +48,7 @@ export const declare_planned_actual_comparison_panel = () =>
           return false;
         }
 
-        const footnotes = FootNote.get_for_subject(subject, [
+        const footnotes = footNoteStore.get_for_subject(subject, [
           "DRR_EXP",
           "DRR_FTE",
         ]);
