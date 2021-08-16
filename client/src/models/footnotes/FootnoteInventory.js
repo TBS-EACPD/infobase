@@ -4,7 +4,7 @@ import { FootnoteList, LeafSpinner } from "src/components/index";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
 
-import FootNote from "./footnotes";
+import { footNoteStore } from "./footnotes";
 
 import { load_footnotes_bundle } from "./populate_footnotes";
 
@@ -38,7 +38,7 @@ export default class FootnoteInventory extends React.Component {
         route_key={"footnote_inventory"}
       >
         {loading && <LeafSpinner config_name={"sub_route"} />}
-        {!loading && <FootnoteList footnotes={FootNote.get_all_flat()} />}
+        {!loading && <FootnoteList footnotes={footNoteStore.get_all_flat()} />}
       </StandardRouteContainer>
     );
   }

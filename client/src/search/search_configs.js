@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 import { Subject } from "src/models/subject";
 import { trivial_text_maker } from "src/models/text";
 
@@ -186,12 +186,15 @@ const glossary = {
           color: textColor,
         }}
         dangerouslySetInnerHTML={{
-          __html: highlight_search_match(search, glossaryItem.definition),
+          __html: highlight_search_match(
+            search,
+            glossaryItem.get_compiled_definition()
+          ),
         }}
       />
     </Fragment>
   ),
-  get_data: () => GlossaryEntry.get_all(),
+  get_data: () => glossaryEntryStore.get_all(),
   filter: (query, datum) =>
     memoized_re_matchers(
       query,
@@ -204,7 +207,7 @@ const glossary_lite = {
   config_name: "glossary_lite",
   header_function: () => trivial_text_maker("glossary"),
   name_function: _.property("title"),
-  get_data: () => GlossaryEntry.get_all(),
+  get_data: () => glossaryEntryStore.get_all(),
   filter: (query, datum) =>
     memoized_re_matchers(
       query,
@@ -263,7 +266,7 @@ const datasets = {
         name: t.name,
         title: t.title,
         flat_tag_titles: _.chain(t.tags)
-          .map((key) => GlossaryEntry.lookup(key))
+          .map((key) => glossaryEntryStore.lookup(key))
           .compact()
           .map("title")
           .compact()

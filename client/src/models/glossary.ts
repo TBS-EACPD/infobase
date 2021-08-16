@@ -5,35 +5,44 @@ import { sanitized_marked } from "src/general_utils";
 import { StaticStoreFactory } from "./storeMixins";
 import { trivial_text_maker } from "./text";
 
-class GlossaryEntry extends StaticStoreFactory() {
-  constructor(id, title, def_text, translation) {
-    super();
-    this.id = id;
-    this.title = title;
-    this._def_text = def_text;
-    this.translation = translation;
-  }
-  get definition() {
-    /* eslint-disable-next-line no-use-before-define */
-    return compiled_definitions(this.id);
-  }
-  static query(query) {
-    return super.query(query);
-  }
-}
+type GlossaryEntryDef = {
+  id: string;
+  title: string;
+  raw_definition: string;
+  translation: string;
+};
 
-const compiled_definitions = _.memoize((glossary_id) =>
-  sanitized_marked(GlossaryEntry.lookup(glossary_id)._def_text)
+type GlossaryEntryInst = GlossaryEntryDef & {
+  get_compiled_definition: () => string;
+};
+
+const glossaryEntryStore = StaticStoreFactory<
+  GlossaryEntryDef,
+  GlossaryEntryInst
+>((def: GlossaryEntryDef) => ({
+  ...def,
+  get_compiled_definition: () => compiled_definitions(def.raw_definition),
+}));
+
+const compiled_definitions = _.memoize((raw_definition) =>
+  sanitized_marked(raw_definition)
 );
 
-const glossary_display = (item) => `<div aria-live="polite">
+const glossary_display = (item: GlossaryEntryInst) => `<div aria-live="polite">
   <div class="h6 medium-weight"> ${trivial_text_maker("definition")} : ${
   item.title
 } </div>
-  <div>${item.definition}</div>
+  <div>${item.get_compiled_definition()}</div>
 </div>`;
 
-const get_glossary_item_tooltip_html = (key) =>
-  glossary_display(GlossaryEntry.lookup(key));
+const get_glossary_item_tooltip_html = (key: string) => {
+  const glossary_entry = glossaryEntryStore.lookup(key);
 
-export { GlossaryEntry, get_glossary_item_tooltip_html };
+  if (glossary_entry) {
+    glossary_display(glossary_entry);
+  } else {
+    throw new Error(`No glossary entry with key "${key}"`);
+  }
+};
+
+export { glossaryEntryStore, get_glossary_item_tooltip_html };

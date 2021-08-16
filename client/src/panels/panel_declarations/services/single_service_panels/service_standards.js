@@ -11,7 +11,7 @@ import {
   VisibilityControl,
 } from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes";
+import { footNoteStore } from "src/models/footnotes/footnotes";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -42,7 +42,7 @@ export class ServiceStandards extends React.Component {
       .map(
         (standard) =>
           standard.other_type_comment &&
-          FootNote.create_and_register({
+          footNoteStore.create_and_register({
             id: `other_type_comment_${standard.standard_id}`,
             topic_keys: ["OTHER_TYPE_COMMENT"],
             subject: service,

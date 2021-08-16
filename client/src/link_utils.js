@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { Table } from "./core/TableClass";
 import { infograph_href_template } from "./infographic/infographic_link";
-import { GlossaryEntry } from "./models/glossary";
+import { glossaryEntryStore } from "./models/glossary";
 import { Subject } from "./models/subject";
 import { rpb_link } from "./rpb/rpb_link";
 
@@ -17,7 +17,7 @@ const subject_classes_with_infographics = [
 
 const glossary_href = (subject_or_id, first_character = "#") => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;
-  const is_valid_glossary_item = !_.isUndefined(GlossaryEntry.lookup(id));
+  const is_valid_glossary_item = !_.isUndefined(glossaryEntryStore.lookup(id));
 
   if (is_valid_glossary_item) {
     return `${first_character}glossary/${id}`;
@@ -27,7 +27,7 @@ const glossary_href = (subject_or_id, first_character = "#") => {
 const smart_href_template = (entity, first_character) => {
   if (entity.table && entity.table.constructor === Table) {
     return rpb_link({ table: entity.table.id }, first_character);
-  } else if (entity.constructor === GlossaryEntry) {
+  } else if (entity.constructor === glossaryEntryStore) {
     return glossary_href(entity, first_character);
   } else if (
     _.includes(subject_classes_with_infographics, entity.constructor)

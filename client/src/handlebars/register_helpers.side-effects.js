@@ -4,7 +4,7 @@ import _ from "lodash";
 import React from "react";
 import ReactDOMServer from "react-dom/server.browser";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { Subject } from "src/models/subject";
 import { trivial_text_maker, run_template } from "src/models/text";
@@ -633,21 +633,21 @@ Handlebars.registerHelper("gl_tt", function glossary_tooltip(display, key) {
 });
 
 Handlebars.registerHelper("gl_def", function (key) {
-  const glos_item = GlossaryEntry.lookup(key);
-  var str = glos_item.definition;
+  const glos_item = glossaryEntryStore.lookup(key);
+  var str = glos_item.get_compiled_definition();
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
 });
 
 Handlebars.registerHelper("gl_title_and_link", function (key) {
-  const glos_item = GlossaryEntry.lookup(key);
+  const glos_item = glossaryEntryStore.lookup(key);
   const str = `<a href="${glossary_href(key)}">${glos_item.title}</a>`;
   // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
   return new Handlebars.SafeString(str);
 });
 
 Handlebars.registerHelper("gl_title", function (key) {
-  const glos_item = GlossaryEntry.lookup(key);
+  const glos_item = glossaryEntryStore.lookup(key);
   const str = glos_item.title;
   return str;
 });

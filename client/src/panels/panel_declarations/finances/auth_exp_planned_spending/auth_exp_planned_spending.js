@@ -14,7 +14,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
-import FootNote from "src/models/footnotes/footnotes";
+import { FootNote } from "src/models/footnotes/footnotes";
 import { run_template } from "src/models/text";
 import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 

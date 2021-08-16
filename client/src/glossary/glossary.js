@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 
 import { create_text_maker_component, BackToTop } from "src/components/index";
 
-import { GlossaryEntry } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -23,7 +23,7 @@ import "./glossary.scss";
 const { text_maker, TM } = create_text_maker_component(glossary_text);
 
 function get_glossary_items_by_letter() {
-  const glossary_items = GlossaryEntry.get_all();
+  const glossary_items = glossaryEntryStore.get_all();
 
   const glossary_items_by_letter = _.chain(glossary_items)
     .groupBy((item) => {
@@ -126,7 +126,11 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                   </span>
                 </dt>
                 <dd>
-                  <div dangerouslySetInnerHTML={{ __html: item.definition }} />
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: item.get_compiled_definition(),
+                    }}
+                  />
 
                   <p>
                     {text_maker("glossary_translation")} {item.translation}
