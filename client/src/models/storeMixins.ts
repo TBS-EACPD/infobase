@@ -4,9 +4,9 @@ import { completeAssign } from "src/general_utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-type InstanceBase = { id: string; alt_ids?: string[] };
+type StoreInstanceBase = { id: string; alt_ids?: string[] };
 
-class StaticStore<definition, instance extends InstanceBase> {
+class StaticStore<definition, instance extends StoreInstanceBase> {
   private store: Map<string, instance>;
   private register = (instance: instance) => {
     this.store.set(instance.id, instance);
@@ -34,7 +34,10 @@ class StaticStore<definition, instance extends InstanceBase> {
   get_all = () => _.uniq(Array.from(this.store.values()));
 }
 
-export const StaticStoreFactory = <definition, instance extends InstanceBase>(
+export const StaticStoreFactory = <
+  definition,
+  instance extends StoreInstanceBase
+>(
   create = _.identity as (definition: definition) => instance
 ): StaticStore<definition, instance> => {
   const store = new Map<string, instance>();
@@ -61,6 +64,52 @@ class MixinBuilder {
     return mixins.reduce((c, mixin) => mixin(c), this.superclass);
   }
 }
+
+export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
+  class SubjectMixin {
+    private _has_data = _.chain(data_types)
+      .map((data_type) => [data_type, null])
+      .fromPairs()
+      .value();
+
+    set_has_data(data_type: string, has_data: boolean) {
+      if (_.includes(data_types, data_type)) {
+        const store_value = this._has_data[data_type];
+
+        const store_value_is_unset = _.isNull(store_value);
+        if (store_value_is_unset) {
+          this._has_data[data_type] = has_data;
+        } else {
+          throw new Error(
+            `"${data_type}" has_data already set with value of "${store_value}" for this instance`
+          );
+        }
+      } else {
+        throw new Error(
+          `"${data_type}" is not a valid API data type for this subject`
+        );
+      }
+    }
+    has_data(data_type: string) {
+      if (_.includes(data_types, data_type)) {
+        if (_.isNull(this._has_data[data_type])) {
+          throw new Error(
+            `"has data" status for data type "${data_type}" has yet to be loaded!`
+          );
+        } else {
+          return this._has_data[data_type];
+        }
+      } else {
+        throw new Error(
+          `"${data_type}" is not a valid API data type for this subject`
+        );
+      }
+    }
+  };
+
+//
+// TODO legacy code below here, to be refactored on this branch
+//
 
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
 export const mix = (superclass?: any) => new MixinBuilder(superclass);

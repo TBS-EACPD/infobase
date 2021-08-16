@@ -3,7 +3,7 @@ import _ from "lodash";
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
 import { CovidMeasure } from "./covid/CovidMeasure";
-import { YearsWithCovidData } from "./covid/YearsWithCovidData";
+import { yearsWithCovidDataStore } from "./covid/YearsWithCovidData";
 import {
   Gov,
   Dept,
@@ -29,7 +29,7 @@ const Subject: {
     | typeof Result
     | typeof Indicator
     | typeof CovidMeasure
-    | typeof YearsWithCovidData
+    | typeof yearsWithCovidDataStore
     | ((guid: string) => null);
 } = {
   Gov,
@@ -43,7 +43,7 @@ const Subject: {
   Result,
   Indicator,
   CovidMeasure,
-  YearsWithCovidData,
+  yearsWithCovidDataStore,
   get_by_guid: (guid: string) => {
     if (!_.isString(guid)) {
       return null;

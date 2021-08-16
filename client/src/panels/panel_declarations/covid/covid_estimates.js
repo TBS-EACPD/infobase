@@ -50,7 +50,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates.yaml";
 
-const { YearsWithCovidData, CovidMeasure, Dept } = Subject;
+const { yearsWithCovidDataStore, CovidMeasure, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -619,7 +619,7 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: () => get_source_links(["COVID"]),
       calculate: function (subject, options) {
-        const years_with_estimates = YearsWithCovidData.lookup(
+        const years_with_estimates = yearsWithCovidDataStore.lookup(
           subject.id
         )?.years_with_estimates;
         return (
