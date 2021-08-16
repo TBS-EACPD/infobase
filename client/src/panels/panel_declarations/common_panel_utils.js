@@ -1,6 +1,6 @@
 import { PanelRegistry } from "src/panels/PanelRegistry";
 
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
@@ -21,7 +21,7 @@ const declare_panel = ({ panel_key, levels, panel_config_func }) => {
 
 const get_planned_spending_source_link = (subject) => {
   const appropriate_subject = get_appropriate_rpb_subject(subject);
-  const table = Table.lookup("programSpending");
+  const table = TableStore.lookup("programSpending");
   return {
     html: table.name,
     href: rpb_link({
@@ -34,7 +34,7 @@ const get_planned_spending_source_link = (subject) => {
 };
 const get_planned_fte_source_link = (subject) => {
   const appropriate_subject = get_appropriate_rpb_subject(subject);
-  const table = Table.lookup("programFtes");
+  const table = TableStore.lookup("programFtes");
   return {
     html: table.name,
     href: rpb_link({

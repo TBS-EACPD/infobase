@@ -9,7 +9,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { AlertBanner, TagCloud } from "src/components/index";
 
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 
 import { TextMaker, text_maker } from "./rpb_text_provider";
 import {
@@ -66,7 +66,7 @@ class TablePicker extends React.Component {
       active_concepts: [],
     };
 
-    this.tables = _.chain(Table.get_all())
+    this.tables = _.chain(TableStore.get_all())
       .reject("reference_table")
       .map((t) => ({
         id: t.id,
@@ -78,7 +78,7 @@ class TablePicker extends React.Component {
       .value();
 
     //note that a concept without tables will not get included here.
-    this.linkage = _.chain(Table.get_all())
+    this.linkage = _.chain(TableStore.get_all())
       .reject("reference_table")
       .map((table_obj) =>
         _.map(_.filter(table_obj.tags, concept_filter), (concept) => ({

@@ -23,7 +23,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import WebFont from "webfontloader";
 
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 import { populate_stores } from "src/models/populate_stores";
 
 import orgEmployeeAgeGroup from "src/tables/orgEmployeeAgeGroup";
@@ -75,7 +75,9 @@ function bootstrapper(App, app_reducer, done) {
   load_fonts();
 
   populate_stores().then(() => {
-    _.each(table_defs, (table_def) => Table.create_and_register(table_def));
+    _.each(table_defs, (table_def) =>
+      TableStore.create_and_register(table_def)
+    );
 
     const history = createHashHistory({ hashType: "noslash" });
 

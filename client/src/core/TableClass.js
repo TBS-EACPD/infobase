@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { getStaticStore } from "src/models/storeMixins";
+import { StaticStoreFactory } from "src/models/storeMixins";
 import { Subject } from "src/models/subject";
 import {
   trivial_text_maker,
@@ -102,14 +102,7 @@ class Mapper {
   }
 }
 
-export class Table extends getStaticStore() {
-  static create_and_register(def) {
-    const inst = new Table(def);
-    this.register(inst.id, inst);
-    inst.legacy_id && this.register(inst.legacy_id, inst);
-    return inst;
-  }
-
+export class Table {
   static default_props() {
     //this will merged over with table_defs props
     return {
@@ -126,7 +119,6 @@ export class Table extends getStaticStore() {
     };
   }
   constructor(table_def) {
-    super();
     const { title: title_def, name: name_def, tags: tags_def } = table_def;
 
     const name = name_def[lang];
@@ -505,4 +497,8 @@ export class Table extends getStaticStore() {
   }
 }
 
-assign_to_dev_helper_namespace({ Table });
+export const TableStore = StaticStoreFactory(
+  (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
+);
+
+assign_to_dev_helper_namespace({ TableStore });

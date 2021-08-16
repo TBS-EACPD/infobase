@@ -2,10 +2,10 @@ import _ from "lodash";
 
 import { sanitized_marked } from "src/general_utils";
 
-import { getStaticStore } from "./storeMixins";
+import { StaticStoreFactory } from "./storeMixins";
 import { trivial_text_maker } from "./text";
 
-class GlossaryEntry extends getStaticStore() {
+class GlossaryEntry extends StaticStoreFactory() {
   constructor(id, title, def_text, translation) {
     super();
     this.id = id;

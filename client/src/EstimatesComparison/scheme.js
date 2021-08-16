@@ -9,7 +9,7 @@ import FootNote from "src/models/footnotes/footnotes";
 import { GlossaryEntry } from "src/models/glossary";
 import { Subject } from "src/models/subject";
 
-import { Table } from "src/core/TableClass";
+import { TableStore } from "src/core/TableClass";
 
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools";
@@ -128,7 +128,7 @@ const get_doc_code_breakdowns = (rows) =>
 const key_for_table_row = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
 const get_keys_in_sups = (include_stat) =>
-  _.chain(Table.lookup("orgVoteStatEstimates").data)
+  _.chain(TableStore.lookup("orgVoteStatEstimates").data)
     .thru(
       include_stat
         ? _.identity
@@ -156,7 +156,7 @@ const calculate_percent_value = (current_value, comparison_value) => {
 function get_data_by_org(include_stat) {
   const keys_in_sups = get_keys_in_sups(include_stat);
 
-  const data = _.chain(Table.lookup("orgVoteStatEstimates").data)
+  const data = _.chain(TableStore.lookup("orgVoteStatEstimates").data)
     .thru(
       include_stat
         ? _.identity
@@ -291,7 +291,7 @@ function get_data_by_item_types() {
   const keys_in_sups = get_keys_in_sups(true);
 
   const nested_data = _.chain(
-    Table.lookup("orgVoteStatEstimates").major_voted_big_stat(
+    TableStore.lookup("orgVoteStatEstimates").major_voted_big_stat(
       [this_year_col, last_year_col],
       false,
       false

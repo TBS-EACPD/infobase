@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { getStaticStore } from "src/models/storeMixins";
+import { StaticStoreFactory } from "src/models/storeMixins";
 
-class YearsWithCovidData extends getStaticStore() {
+class YearsWithCovidData extends StaticStoreFactory() {
   static create_and_register(subject_id, years_with_covid_data) {
     const inst = new YearsWithCovidData(subject_id, years_with_covid_data);
     this.register(subject_id, inst);
