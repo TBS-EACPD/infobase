@@ -80,7 +80,6 @@ export default {
         en: "Vote / Statutory Description",
         fr: "Crédit / Poste législatif Description",
       },
-      can_group_by: true,
       can_group_vs: true,
     });
     this.add_col({
