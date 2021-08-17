@@ -12,7 +12,7 @@ import {
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 import { run_template } from "src/models/text";
 
 import { year_templates } from "src/models/years";
@@ -78,7 +78,7 @@ const calculate_funcs_by_level = {
 
     const avg_age = _.chain(orgEmployeeAvgAge.q(dept).data)
       .map((row) => ({
-        label: Subject.Dept.lookup(row.dept).name,
+        label: Dept.lookup(row.dept).name,
         data: people_years.map((year) => row[year]),
         active: true,
       }))

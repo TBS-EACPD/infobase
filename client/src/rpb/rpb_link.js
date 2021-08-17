@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
+import { Gov } from "src/models/subject_index";
 
 import { SafeJSURL } from "src/general_utils";
 
@@ -39,7 +39,7 @@ const get_appropriate_rpb_subject = (subject) => {
     //rpb is useless at the crso/program level
     appropriate_subject = subject.dept;
   } else if (subject.is("tag")) {
-    appropriate_subject = Subject.Gov;
+    appropriate_subject = Gov;
   }
   return appropriate_subject;
 };

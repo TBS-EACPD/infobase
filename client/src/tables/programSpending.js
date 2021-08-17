@@ -1,6 +1,8 @@
 import _ from "lodash";
 
-import { Subject, trivial_text_maker, year_templates } from "./table_common";
+import { Program } from "src/models/subject_index";
+
+import { trivial_text_maker, year_templates } from "./table_common";
 
 import text from "./programSpending.yaml";
 
@@ -8,7 +10,6 @@ import text from "./programSpending.yaml";
 // of the table spec
 //const {spending_areas} = require('../../models/goco.js');
 
-const { Program } = Subject;
 const { std_years, planning_years } = year_templates;
 
 export default {

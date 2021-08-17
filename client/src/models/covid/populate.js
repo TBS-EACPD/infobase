@@ -8,7 +8,7 @@ import {
   query_org_years_with_covid_data,
   query_all_covid_measures,
 } from "./queries";
-import { yearsWithCovidDataStore } from "./YearsWithCovidData";
+import { yearsWithCovidDataStore } from "./yearsWithCovidDataStore";
 
 const _subject_ids_with_loaded_years_with_covid_data = {};
 export const api_load_years_with_covid_data = (subject) => {

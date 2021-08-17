@@ -11,7 +11,7 @@ import {
 
 import { create_text_maker_component, FancyUL } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Program } from "src/models/subject_index";
 
 import { formats } from "src/core/format";
 
@@ -87,7 +87,7 @@ export class ServiceOverview extends React.Component {
           <dt>{text_maker("link_to_programs")}</dt>
           <dd>
             {_.map(service.program_activity_codes, (program_id) => {
-              const program = Subject.Program.lookup(program_id);
+              const program = Program.lookup(program_id);
               return (
                 program && (
                   <p key={program_id}>

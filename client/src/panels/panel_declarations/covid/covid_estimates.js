@@ -10,6 +10,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
+import { covidMeasureStore } from "src/models/covid/CovidMeasure";
 import {
   query_gov_covid_summaries,
   query_gov_covid_summary,
@@ -17,7 +18,9 @@ import {
   query_all_covid_estimates_by_measure_id,
   query_org_covid_estimates_by_measure_id,
 } from "src/models/covid/queries";
-import { Subject } from "src/models/subject";
+import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
+
+import { Dept } from "src/models/subject_index";
 
 import { infobase_colors } from "src/core/color_schemes";
 
@@ -49,8 +52,6 @@ import { get_tooltip } from "./covid_estimates_tooltips";
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates.yaml";
-
-const { yearsWithCovidDataStore, covidMeasureStore, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 

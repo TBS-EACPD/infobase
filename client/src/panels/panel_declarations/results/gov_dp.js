@@ -10,7 +10,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { get_source_links } from "src/metadata/data_sources";
 
@@ -25,7 +25,6 @@ import {
 
 import text from "./gov_dp.yaml";
 
-const { Dept } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const current_dp_year = result_docs[current_dp_key].year;

@@ -7,8 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import { TabLoadingSpinner } from "src/components/index";
 
 import { query_gov_covid_summaries } from "src/models/covid/queries";
-
-import { Subject } from "src/models/subject";
+import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
 import { get_source_links } from "src/metadata/data_sources";
 
@@ -21,8 +20,6 @@ import {
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_intro.yaml";
-
-const { yearsWithCovidDataStore } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 

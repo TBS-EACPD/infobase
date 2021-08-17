@@ -9,12 +9,10 @@ import {
   DropdownMenu,
 } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { TextMaker, text_maker } from "./rpb_text_provider";
 import { ReportDetails, ReportDatasets } from "./shared";
-
-const { Dept } = Subject;
 
 class GranularView extends React.Component {
   render() {

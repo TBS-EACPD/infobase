@@ -6,14 +6,14 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import { create_footnote } from "src/models/footnotes/footnotes";
 
-import { Subject } from "src/models/subject";
+import { Gov } from "src/models/subject_index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { CircleProportionGraph } from "src/charts/wrapped_nivo/index";
 
 import { TM, text_maker } from "./vote_stat_text_provider";
-const { Gov } = Subject;
+
 const est_in_year_col = "{{est_in_year}}_estimates";
 
 export const declare_estimates_in_perspective_panel = () =>

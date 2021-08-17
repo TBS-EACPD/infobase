@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Gov } from "src/models/subject_index";
 
 import { lang } from "src/core/injected_build_constants";
 
@@ -14,7 +14,6 @@ import { highlightColor } from "src/style_constants/index";
 import text from "./hierarchy_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
-const { Gov } = Subject;
 
 /* 
   This component helps put a subject in context.

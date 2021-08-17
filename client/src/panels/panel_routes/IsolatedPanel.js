@@ -5,7 +5,8 @@ import { PanelRenderer } from "src/panels/PanelRenderer";
 
 import { LeafSpinner } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept, Program, Gov, CRSO } from "src/models/subject_index";
+import { tagStore } from "src/models/tags";
 import { create_text_maker } from "src/models/text";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -15,14 +16,12 @@ import text from "./IsolatedPanel.yaml";
 
 const text_maker = create_text_maker(text);
 
-const { Dept, Program, Tag, Gov, CRSO } = Subject;
-
 const get_subject = (level, id) => {
   switch (level) {
     case "dept":
       return Dept.lookup(id);
     case "tag":
-      return Tag.lookup(id);
+      return tagStore.lookup(id);
     case "program":
       return Program.lookup(id);
     case "crso":

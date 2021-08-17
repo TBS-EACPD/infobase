@@ -12,7 +12,7 @@ import {
   GraphOverlay,
 } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Tag } from "src/models/subject_index";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -24,8 +24,6 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { textColor, backgroundColor } from "src/style_constants/index";
 
 import text from "./goco.yaml";
-
-const { Tag } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
 

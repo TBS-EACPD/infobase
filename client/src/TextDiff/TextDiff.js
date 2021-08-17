@@ -21,7 +21,7 @@ import {
 
 import { result_docs } from "src/models/results";
 
-import { Subject } from "src/models/subject";
+import { Dept, CRSO, Program } from "src/models/subject_index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -41,7 +41,6 @@ import diff_text from "./TextDiff.yaml";
 import "./TextDiff.scss";
 
 const { indicator_target_text } = indicator_text_functions;
-const { Dept, CRSO, Program } = Subject;
 
 const { TM, text_maker } = create_text_maker_component([
   diff_text,

@@ -8,7 +8,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import { DisplayTable } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -21,8 +21,6 @@ import { infograph_href_template } from "src/infographic/infographic_link";
 import { text_maker, TM } from "./vote_stat_text_provider";
 
 const main_col = "{{est_in_year}}_estimates";
-
-const { Dept } = Subject;
 
 const text_func = (vs, d, break_str) => {
   if (vs == "voted") {

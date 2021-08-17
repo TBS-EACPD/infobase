@@ -1,10 +1,10 @@
 import _ from "lodash";
 
-import { Subject, trivial_text_maker, year_templates } from "./table_common";
+import { Program } from "src/models/subject_index";
+
+import { trivial_text_maker, year_templates } from "./table_common";
 
 import text from "./programVoteStat.yaml";
-
-const { Program } = Subject;
 
 const { std_years } = year_templates;
 

@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 import { LeafSpinner, DlItem, CheckBox } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { InstForm } from "src/models/subject_index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -18,8 +18,6 @@ import { infograph_href_template } from "src/link_utils";
 import { grouping_options } from "./hierarchies";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text";
 import "src/explorer_common/explorer-styles.scss";
-
-const { InstForm } = Subject;
 
 function get_org_count(node) {
   if (_.get(node, "data.type") === "org") {

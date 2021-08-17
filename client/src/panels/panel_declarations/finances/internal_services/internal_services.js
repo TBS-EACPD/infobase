@@ -9,7 +9,9 @@ import {
   GraphOverlay,
 } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Gov } from "src/models/subject_index";
+import { tagStore } from "src/models/tags";
+
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -22,7 +24,6 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import text from "./internal_services.yaml";
 
-const { Gov, Tag } = Subject;
 const { std_years } = year_templates;
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -37,7 +38,7 @@ export const declare_internal_services_panel = () =>
         const { programFtes } = this.tables;
 
         const isc_crsos = _.filter(subject.crsos, "is_internal_service");
-        const isc_tag = Tag.lookup("GOC017");
+        const isc_tag = tagStore.lookup("GOC017");
 
         const last_year_fte_col = "{{pa_last_year}}";
         const gov_fte_total = programFtes.q(Gov).sum(last_year_fte_col);

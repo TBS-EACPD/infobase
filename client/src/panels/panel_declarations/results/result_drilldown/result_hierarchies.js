@@ -3,15 +3,15 @@ import _ from "lodash";
 
 import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common";
 
+import { get_subject_by_guid } from "src/models/get_subject_by_guid";
 import * as Results from "src/models/results";
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import {
   filter_hierarchy,
   convert_d3_hierarchy_to_explorer_hierarchy,
 } from "src/explorer_common/hierarchy_tools";
 
-const { Dept } = Subject;
 const { Result } = Results;
 
 const indicator_date_sorter = (ind) =>
@@ -35,7 +35,7 @@ export function create_full_results_hierarchy({
 }) {
   const get_resources = (subject) => results_resource_fragment(subject, doc);
 
-  const root_subject = Subject.get_by_guid(subject_guid);
+  const root_subject = get_subject_by_guid(subject_guid);
   let root;
   if (root_subject) {
     const root_type = _.includes(["program", "dept", "tag"], root_subject.level)

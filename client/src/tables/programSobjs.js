@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
+import { Program } from "src/models/subject_index";
 
 import {
   trivial_text_maker,
@@ -10,7 +10,6 @@ import {
 
 import text from "./programSobjs.yaml";
 
-const { Program } = Subject;
 const { sos } = businessConstants;
 
 const { std_years } = year_templates;

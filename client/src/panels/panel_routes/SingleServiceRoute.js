@@ -10,7 +10,7 @@ import {
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { useSingleService } from "src/models/populate_services";
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
 
@@ -30,7 +30,7 @@ const SingleServiceRoute = (props) => {
   if (loading) {
     return <LeafSpinner config_name="sub_route" />;
   }
-  const subject = Subject.Dept.lookup(subject_id);
+  const subject = Dept.lookup(subject_id);
 
   return (
     <StandardRouteContainer

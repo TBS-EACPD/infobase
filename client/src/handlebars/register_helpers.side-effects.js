@@ -6,7 +6,7 @@ import ReactDOMServer from "react-dom/server.browser";
 
 import { glossaryEntryStore } from "src/models/glossary";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 import { trivial_text_maker, run_template } from "src/models/text";
 
 import { formats, array_to_grammatical_list } from "src/core/format";
@@ -507,7 +507,7 @@ const add_article_to_dept_identifier = (
 ) => {
   const dept_subject = helper_context.is("dept")
     ? helper_context
-    : Subject.Dept.lookup(helper_context);
+    : Dept.lookup(helper_context);
 
   const article = dept_subject[article_key];
 

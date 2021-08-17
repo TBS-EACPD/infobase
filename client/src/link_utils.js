@@ -3,10 +3,9 @@ import _ from "lodash";
 import { Table } from "./core/TableClass";
 import { infograph_href_template } from "./infographic/infographic_link";
 import { glossaryEntryStore } from "./models/glossary";
-import { Subject } from "./models/subject";
+import { Gov, Dept, CRSO, Program, Tag } from "./models/subject_index";
 import { rpb_link } from "./rpb/rpb_link";
 
-const { Gov, Dept, CRSO, Program, Tag } = Subject;
 const subject_classes_with_infographics = [
   Gov.constructor,
   Dept,

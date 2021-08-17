@@ -9,7 +9,8 @@ import { PanelRenderer } from "src/panels/PanelRenderer";
 
 import { LeafSpinner } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept, Program, Gov, CRSO } from "src/models/subject_index";
+import { tagStore } from "src/models/tags";
 import { create_text_maker } from "src/models/text";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -20,8 +21,6 @@ import { EverythingSearch } from "src/search/EverythingSearch";
 import panel_text from "./PanelInventory.yaml";
 
 const tm = create_text_maker(panel_text);
-
-const { Dept, Program, SpendArea, Tag, Gov, CRSO } = Subject;
 
 function url_template(subject, panel) {
   return `/panel-inventory/${subject.level}/${panel.key}/${subject.id}`;
@@ -41,15 +40,11 @@ const getSubj = (level, id) => {
       subject = Dept.lookup(id) || Dept.lookup(defaultSubjectKeys.dept);
       break;
     case "tag":
-      subject = Tag.lookup(id) || Tag.lookup(defaultSubjectKeys.tag);
+      subject = tagStore.lookup(id) || tagStore.lookup(defaultSubjectKeys.tag);
       break;
     case "program":
       subject =
         Program.lookup(id) || Program.lookup(defaultSubjectKeys.program);
-      break;
-    case "spendarea":
-      subject =
-        SpendArea.lookup(id) || SpendArea.lookup(defaultSubjectKeys.spendarea);
       break;
     case "crso":
       subject = CRSO.lookup(id) || CRSO.lookup(defaultSubjectKeys.crso);

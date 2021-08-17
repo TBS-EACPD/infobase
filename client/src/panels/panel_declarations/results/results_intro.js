@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { create_text_maker_component } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -24,8 +24,6 @@ import {
 } from "./results_common";
 
 import text from "./results_intro_text.yaml";
-
-const { Dept } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
