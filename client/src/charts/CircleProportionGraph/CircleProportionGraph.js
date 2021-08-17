@@ -55,28 +55,23 @@ export class CircleProportionGraph extends React.Component {
       const child_cy = parent_cy + parent_radius - child_radius - 1;
 
       return (
-        <div
-          style={{
-            height: viewbox_dimension,
-            width: viewbox_dimension,
-            margin: "auto",
-          }}
+        <svg
+          viewBox={`0 0 ${viewbox_dimension} ${viewbox_dimension}`}
+          style={{ height: "100%", width: "100%" }}
         >
-          <svg viewBox={`0 0 ${viewbox_dimension} ${viewbox_dimension}`}>
-            <circle
-              cx={parent_cx}
-              cy={parent_cy}
-              r={parent_radius}
-              fill={color_scale(parent_name)}
-            />
-            <circle
-              cx={parent_cx}
-              cy={child_cy}
-              r={child_radius}
-              fill={color_scale(child_name)}
-            />
-          </svg>
-        </div>
+          <circle
+            cx={parent_cx}
+            cy={parent_cy}
+            r={parent_radius}
+            fill={color_scale(parent_name)}
+          />
+          <circle
+            cx={parent_cx}
+            cy={child_cy}
+            r={child_radius}
+            fill={color_scale(child_name)}
+          />
+        </svg>
       );
     };
 
