@@ -6,7 +6,7 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 
 type FootNoteDef = {
   id: string;
-  subject: any; // TODO, either work around this or type better once other sujects are on ts
+  subject: any; // TODO, either work around this or type better once other subjects are on ts
   topic_keys: string[];
   text: string;
   year1?: number;
@@ -25,13 +25,19 @@ export const get_footnotes_by_subject_and_topic = (
 ): ReturnType<typeof create_footnote>[] => {
   const can_skip_topic_check = _.some(topics, (topic) => topic === "*");
   return _.chain(footNoteStore.get_all())
-    .filter(({ subject: footnote_subject, topic_keys }) =>
-      footnote_subject === subject && can_skip_topic_check
-        ? true
-        : _.some([...topics, "ANY", "MACHINERY"], (topic) =>
-            _.includes(topic_keys, topic)
-          )
-    )
+    .filter(({ subject: footnote_subject, topic_keys }) => {
+      // TODO weird quirk of footnote population that subject can be either an instance or a class, will cause problems if any subjects stop being classes
+      const exact_subject_match = footnote_subject.id === subject.id;
+      const class_subject_match = footnote_subject === subject.constructor;
+
+      const topic_match =
+        can_skip_topic_check ||
+        _.some([...topics, "ANY", "MACHINERY"], (topic) =>
+          _.includes(topic_keys, topic)
+        );
+
+      return (exact_subject_match || class_subject_match) && topic_match;
+    })
     .uniqBy("text")
     .value();
 };
