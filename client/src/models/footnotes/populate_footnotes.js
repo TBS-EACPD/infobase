@@ -55,29 +55,15 @@ function populate_footnotes_info(csv_str) {
 
     const text = sanitized_marked(run_template(footnote));
 
-    if (subject_id !== "*") {
-      const subject = Subject[subject_class].lookup(subject_id);
-
-      footNoteStore.create_and_register({
-        id: obj.id,
-        subject,
-        year1,
-        year2,
-        topic_keys: split_topic_keys,
-        text,
-      });
-    } else {
-      const actual_subject_class = Subject[subject_class];
-
-      footNoteStore.create_and_register({
-        id,
-        subject: actual_subject_class,
-        year1,
-        year2,
-        topic_keys: split_topic_keys,
-        text,
-      });
-    }
+    footNoteStore.create_and_register({
+      id,
+      subject_class,
+      subject_id,
+      year1,
+      year2,
+      topic_keys: split_topic_keys,
+      text,
+    });
   });
 }
 
