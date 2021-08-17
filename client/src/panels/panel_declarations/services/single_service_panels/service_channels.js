@@ -7,6 +7,7 @@ import { application_channels_keys } from "src/panels/panel_declarations/service
 import { create_text_maker_component, Panel } from "src/components/index";
 
 import { infobase_colors } from "src/core/color_schemes";
+import { formats } from "src/core/format";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
@@ -43,7 +44,7 @@ export class ServiceChannels extends React.Component {
     );
     const data = _.map(service.service_report, (report) => ({
       id: `${report.service_id}_${report.year}`,
-      label: report.year,
+      label: formats.year_to_fiscal_year_raw(report.year),
       ..._.chain(filtered_keys)
         .map((key) => [text_maker(key), report[key]])
         .fromPairs()

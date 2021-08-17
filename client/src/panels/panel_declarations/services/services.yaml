@@ -103,17 +103,17 @@ authentication_desc:
   en: Clients can authenticate online
   fr: L'authentification du client peut se faire en lignne
 decision_digital_desc:
-  en: Department can inform decisions online
-  fr: Le ministére peut transmettre ses décisions en ligne
+  en: Clients can read the department's decision online
+  fr: TODO
 issuance_digital_desc:
   en: Documentation can be issued online
   fr: La documentation peut être transmise en ligne
 issue_res_digital_desc:
-  en: Clients can provide feedback online
-  fr: Les clients peuvent faire des commentaires en ligne
+  en: Clients can resolve issues and give feedback online
+  fr: TODO
 account_reg_digital:
-  en: Registration
-  fr: Inscription
+  en: Account Registration
+  fr: TODO
 application_digital:
   en: Application
   fr: Demande
@@ -127,8 +127,8 @@ issuance_digital:
   en: Issuance
   fr: Transmission
 issue_res_digital:
-  en: Feedback
-  fr: Rétroaction
+  en: Issue Resolution and Feedback
+  fr: TODO
 can_online:
   en: Yes (can be done online)
   fr: Oui (Peut se faire en ligne)
@@ -146,8 +146,11 @@ service_name:
 services_channels_title:
   en: Applications for Services by Channel
   fr: TODO
+application_channels_by_service:
+  en: Application Channels by Service
+  fr: TODO
 single_service_channels_title:
-  en: Application channels of this service
+  en: Applications for the service
   fr: TODO
 services_channels_text:
   transform: [handlebars, markdown]
@@ -235,9 +238,9 @@ online_status:
 service_overview_title:
   en: Overview
   fr: Aperçu
-related_programs:
-  en: Related Programs
-  fr: Programmes connexes
+link_to_programs:
+  en: Link to Program(s)
+  fr: TODO
 services_fees:
   en: Service fees
   fr: Frais de service
@@ -251,10 +254,6 @@ does_not_charge_fees:
   en: This {{gl_tt "service" "SERVICE"}} **does not** charge fees
   fr: |
     {{gl_tt "service" "SERVICE"}} **sans frais**
-standards_performance_text:
-  transform: [handlebars, markdown]
-  en: Overall {{gl_tt "standards" "STANDARD"}} performance for this {{gl_tt "service" "SERVICE"}}
-  fr: Rendement global des {{gl_tt "normes" "STANDARD"}} pour ce {{gl_tt "service" "SERVICE"}}
 service_single_link_text:
   transform: [handlebars, markdown]
   en: More details on this {{gl_tt "service" "SERVICE"}} can be found **{{ext_link "here" service_url }}**
@@ -300,9 +299,11 @@ service_standards_title:
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Service standards" "STANDARD"}} are used as metrics to indicate how the {{gl_tt "service" "SERVICE"}} is doing.
+    {{gl_tt "Service standards" "STANDARD"}} reinforce government accountability by making performance transparent.
+    
+    They also help clients make time-sensitive, important decisions about accessing {{gl_tt "services" "SERVICE"}} and other expectations relating to services.
   fr: |
-    Les {{gl_tt "normes de service" "STANDARD"}} permettent de mesurer l'efficacité du {{gl_tt "service" "SERVICE"}}.
+    TODO
 no_service_standards_text:
   en: This service does not have any service standards
   fr: Ce service n'a pas de normes de service

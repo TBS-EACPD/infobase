@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React from "react";
 
 import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 import text from "src/panels/panel_declarations/services/services.yaml";
@@ -9,20 +9,13 @@ import {
   application_channels_keys,
 } from "src/panels/panel_declarations/services/shared";
 
-import {
-  DisplayTable,
-  create_text_maker_component,
-  FancyUL,
-} from "src/components/index";
+import { create_text_maker_component, FancyUL } from "src/components/index";
 
 import { Subject } from "src/models/subject";
 
 import { formats } from "src/core/format";
-import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import Gauge from "src/charts/gauge";
 import { infograph_href_template } from "src/link_utils";
-import { backgroundColor } from "src/style_constants/index";
 
 import "src/panels/panel_declarations/services/services.scss";
 
@@ -35,10 +28,6 @@ export class ServiceOverview extends React.Component {
       .sortBy((report) => _.toInteger(report.year))
       .reverse()
       .value()[0];
-    const flat_standard_reports = _.flatMap(
-      service.standards,
-      "standard_report"
-    );
     const applications = _.reduce(
       application_channels_keys,
       (total, key) => {
@@ -47,10 +36,6 @@ export class ServiceOverview extends React.Component {
         return total + sum_for_key;
       },
       0
-    );
-    const standards_met_data = _.countBy(
-      flat_standard_reports,
-      "is_target_met"
     );
     const get_uniq_flat_standard_urls = (url_field) =>
       _.chain(service.standards).flatMap(url_field).filter().uniq().value();
@@ -74,75 +59,8 @@ export class ServiceOverview extends React.Component {
               <p key={type}>{type}</p>
             ))}
           </dd>
-          {!_.isEmpty(flat_standard_reports) && (
-            <Fragment>
-              <dt>
-                <TM k={"standards_performance_text"} />
-              </dt>
-              <dd>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    paddingBottom: "10px",
-                    backgroundColor: backgroundColor,
-                  }}
-                  className="service-overview-rect"
-                >
-                  {is_a11y_mode ? (
-                    <DisplayTable
-                      util_components={{
-                        copyCsvUtil: null,
-                        downloadCsvUtil: null,
-                        columnToggleUtil: null,
-                      }}
-                      column_configs={{
-                        id: {
-                          index: 0,
-                          header: text_maker("target_met_table_text"),
-                        },
-                        value: {
-                          index: 1,
-                          header: text_maker("value"),
-                        },
-                        pct: {
-                          index: 2,
-                          header: text_maker("percentage"),
-                          formatter: "percentage1",
-                        },
-                      }}
-                      data={[
-                        {
-                          id: text_maker("target_met_false"),
-                          value: standards_met_data.false || 0,
-                          pct:
-                            standards_met_data.false /
-                              flat_standard_reports.length || 0,
-                        },
-                        {
-                          id: text_maker("target_met_true"),
-                          value: standards_met_data.true || 0,
-                          pct:
-                            standards_met_data.true /
-                              flat_standard_reports.length || 0,
-                        },
-                      ]}
-                    />
-                  ) : (
-                    <Gauge
-                      value={standards_met_data.true || 0}
-                      total_value={flat_standard_reports.length}
-                    />
-                  )}
-                </div>
-              </dd>
-            </Fragment>
-          )}
           <dt>
-            {`${text_maker("identification_methods")} (${
-              most_recent_report.year
-            })`}
+            <TM k={"identification_methods"} />
           </dt>
           <dd>
             <FancyUL>
@@ -166,7 +84,7 @@ export class ServiceOverview extends React.Component {
               )}
             </FancyUL>
           </dd>
-          <dt>{text_maker("related_programs")}</dt>
+          <dt>{text_maker("link_to_programs")}</dt>
           <dd>
             {_.map(service.program_ids, (program_id) => {
               const program = Subject.Program.lookup(program_id);
