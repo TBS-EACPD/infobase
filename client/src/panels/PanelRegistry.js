@@ -9,7 +9,7 @@ import { tableStore } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
-const subjects = _.keys(Subject);
+const subjects = _.chain(Subject).toArray().map("subject_type").value();
 
 const create_panel_key = (key, level) => `${key}:${level}`;
 

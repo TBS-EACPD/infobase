@@ -12,12 +12,12 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/components/PinnedFAQ/PinnedFAQ";
 
+import { get_subject_by_guid } from "src/models/get_subject_by_guid";
 import * as Subject from "src/models/subject_index";
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-
 import { StandardRouteContainer } from "src/core/NavComponents";
 import { redirect_with_msg } from "src/core/RedirectHeader";
 
@@ -376,7 +376,11 @@ const Infographic = ({
   },
   history: { replace },
 }) => {
-  const is_level_valid = _.chain(Subject).keys().includes(level).value();
+  const is_level_valid = _.chain(Subject)
+    .toArray()
+    .map("subject_type")
+    .includes(level)
+    .value();
   if (!is_level_valid) {
     return redirect_with_msg(
       text_maker("invalid_redirect_home", { param: level }),
@@ -384,8 +388,7 @@ const Infographic = ({
     );
   }
 
-  const SubjectModel = Subject[level];
-  const subject = SubjectModel.lookup(subject_id);
+  const subject = get_subject_by_guid(`${level}_${subject_id}`);
 
   if (!subject) {
     if (level === "program" || level === "crso") {
