@@ -7,7 +7,6 @@ import { StandardFAQ } from "src/components/index";
 import { faq_content_maker } from "src/components/StandardFAQ/faq_utils";
 
 import common_lang from "./common_questions.yaml";
-
 import fin_lang from "./financial_questions.yaml";
 import ppl_lang from "./people_questions.yaml";
 import results_lang from "./results_questions.yaml";
