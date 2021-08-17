@@ -29,5 +29,5 @@ const faq_content = faq_content_maker(
 
 export const Basic = Template.bind({});
 Basic.args = {
-  faq_content: faq_content as [React.ReactNode, React.ReactNode][], // doing this for now because faq_content_maker returns an array
+  faq_content: faq_content,
 };
