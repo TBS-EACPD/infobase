@@ -501,12 +501,13 @@ export class EstimatesExplorer extends AbstractExplorerScheme {
       };
     }
     if (type === "column_header_click") {
-      const { is_descending, sort_col } = state;
-      const clicked_col = payload;
+      const { sort_col } = state;
+      const clicked_col = payload.col_key;
+      const direction = payload.direction;
       const mods =
         clicked_col === sort_col
-          ? { is_descending: !is_descending }
-          : { is_descending: true, sort_col: clicked_col };
+          ? { is_descending: direction === "DESC" }
+          : { is_descending: direction === "DESC", sort_col: clicked_col };
       return { ...state, ...mods };
     } else {
       return state;
@@ -527,8 +528,11 @@ export class EstimatesExplorer extends AbstractExplorerScheme {
 
   @bound
   map_dispatch_to_props(dispatch) {
-    const col_click = (col_key) =>
-      dispatch({ type: "column_header_click", payload: col_key });
+    const col_click = (col_key, direction) =>
+      dispatch({
+        type: "column_header_click",
+        payload: { col_key, direction },
+      });
     const toggle_stat_filter = () => dispatch({ type: "toggle_stat_filter" });
     const toggle_legal_titles = () => dispatch({ type: "toggle_legal_titles" });
 

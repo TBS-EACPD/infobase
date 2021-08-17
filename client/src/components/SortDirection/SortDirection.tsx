@@ -7,15 +7,21 @@ import "./SortDirection.scss";
 interface SortDirectionProps {
   sortDirection: string;
   active: boolean;
+  sortFunction: CallableFunction;
+  col: string;
 }
 interface SortDirectionsProps {
   asc: boolean;
   desc: boolean;
+  sortFunction: CallableFunction;
+  col: string;
 }
 
 export const SortDirection = ({
   sortDirection,
   active,
+  sortFunction,
+  col,
 }: SortDirectionProps) => (
   <button
     className="SortIndicator"
@@ -27,6 +33,7 @@ export const SortDirection = ({
       sortDirection === "ASC" ? "a11y_sort_asc" : "a11y_sort_desc"
     )}
     aria-pressed={active}
+    onClick={() => sortFunction(col, sortDirection)}
   >
     {active
       ? sortDirection === "ASC"
@@ -38,9 +45,24 @@ export const SortDirection = ({
   </button>
 );
 
-export const SortDirections = ({ asc, desc }: SortDirectionsProps) => (
+export const SortDirections = ({
+  asc,
+  desc,
+  sortFunction,
+  col,
+}: SortDirectionsProps) => (
   <div className="text-nowrap">
-    <SortDirection sortDirection="ASC" active={asc} />
-    <SortDirection sortDirection="DESC" active={desc} />
+    <SortDirection
+      sortDirection="ASC"
+      active={asc}
+      sortFunction={sortFunction}
+      col={col}
+    />
+    <SortDirection
+      sortDirection="DESC"
+      active={desc}
+      sortFunction={sortFunction}
+      col={col}
+    />
   </div>
 );
