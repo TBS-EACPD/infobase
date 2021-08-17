@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
 import { StandardFAQ } from "src/components/index";
-import { create_text_maker_component } from "src/components/misc_util_components";
+import { faq_content_maker } from "src/components/StandardFAQ/faq_utils";
 
 import common_lang from "./common_questions.yaml";
 
@@ -12,14 +12,6 @@ import fin_lang from "./financial_questions.yaml";
 import ppl_lang from "./people_questions.yaml";
 import results_lang from "./results_questions.yaml";
 import tag_lang from "./tagging_questions.yaml";
-
-const { TM } = create_text_maker_component([
-  fin_lang,
-  ppl_lang,
-  results_lang,
-  tag_lang,
-  common_lang,
-]);
 
 const common_panel_config = {
   is_static: true,
@@ -35,13 +27,13 @@ const curried_render = ({ q_a_keys }) =>
       subject.level === "crso" && "what_are_CR",
     ]);
 
-    return (
-      <StandardFAQ
-        q_a_base_keys={rendered_q_a_keys}
-        TM={TM}
-        subject={subject}
-      />
+    const faq_content = faq_content_maker(
+      [fin_lang, ppl_lang, results_lang, tag_lang, common_lang],
+      rendered_q_a_keys,
+      subject
     );
+
+    return <StandardFAQ faq_content={faq_content} />;
   };
 
 export const declare_financial_key_concepts_panel = () =>

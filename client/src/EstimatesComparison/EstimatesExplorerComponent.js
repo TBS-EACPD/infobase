@@ -3,6 +3,7 @@ import _ from "lodash";
 import React from "react";
 
 import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+import fin_lang from "src/panels/panel_declarations/misc/key_concept_panels/financial_questions.yaml";
 
 import {
   StandardFAQ,
@@ -199,7 +200,7 @@ export default class EstimatesExplorerComponent extends React.Component {
     ];
 
     const faq_content = faq_content_maker(
-      { bundles: est_lang, common_lang, common_subapp_lang },
+      [est_lang, fin_lang, common_lang, common_subapp_lang],
       q_a_keys
     );
 

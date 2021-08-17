@@ -3,6 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+import tag_lang from "src/panels/panel_declarations/misc/key_concept_panels/tagging_questions.yaml";
 
 import {
   LeafSpinner,
@@ -252,14 +253,17 @@ export default class TagExplorerComponent extends React.Component {
     ];
 
     const faq_content = faq_content_maker(
-      { bundles: tag_exp_lang, common_lang, common_subapp_lang },
+      [tag_exp_lang, tag_lang, common_lang, common_subapp_lang],
       q_a_keys
     );
 
     return (
       <div>
         <TM k="tag_nav_intro_text" el="div" />
-        <StandardFAQ faq_cotent={faq_content} background_color={primaryColor} />
+        <StandardFAQ
+          faq_content={faq_content}
+          background_color={primaryColor}
+        />
         <div className="tabbed-content">
           <TabbedControls
             tab_callback={(key) => {
