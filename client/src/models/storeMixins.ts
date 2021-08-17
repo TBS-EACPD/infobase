@@ -31,7 +31,7 @@ class StaticStore<definition, instance extends StoreInstanceBase> {
   }
 
   lookup = (id: string) => this.store.get(id);
-  get_all = () => _.uniq(Array.from(this.store.values())); // TODO why's a unique needed here?
+  get_all = () => _.uniq(Array.from(this.store.values())); // SUBJECT_TS_TODO why's a unique needed here?
 }
 
 export const StaticStoreFactory = <
@@ -87,7 +87,7 @@ export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
   };
 
 //
-// TODO legacy code below here, to be refactored on this branch
+// SUBJECT_TS_TODO legacy code below here, to be refactored on this branch
 //
 
 type ConstructorType = { [key: string]: any };
