@@ -11,7 +11,10 @@ export const get_subject_by_guid = (guid) => {
   }
   const [type, id] = guid.split("_");
 
-  const subject = _.pickBy(Subject, (subject) => subject.subject_type === type);
+  const subject = _.chain(Subject)
+    .toArray()
+    .find(({ subject_type }) => subject_type === type)
+    .value();
 
   return subject?.lookup(id);
 };
