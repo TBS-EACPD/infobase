@@ -7,13 +7,6 @@
     flex-direction: column;
   }
 }
-.service-overview-rect {
-  background-color: lighten($tertiaryColor, 37%);
-  border: 2px solid $primaryColor;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 5px;
-}
 .identifier-item {
   display: flex;
   justify-content: space-between;

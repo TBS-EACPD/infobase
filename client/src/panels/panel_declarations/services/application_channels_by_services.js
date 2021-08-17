@@ -188,7 +188,10 @@ const ServicesChannelsPanel = ({ subject }) => {
               marginTop: "50px",
             }}
           >
-            <TM className="medium-panel-text" k="services_channels_title" />
+            <TM
+              className="medium-panel-text"
+              k="application_channels_by_service"
+            />
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Select
                 id="services_channels_select"
@@ -280,7 +283,7 @@ export const declare_application_channels_by_services_panel = () =>
     panel_key: "application_channels_by_services",
     levels: ["dept", "program"],
     panel_config_func: (level, panel_key) => ({
-      title: text_maker("services_channels_title"),
+      title: text_maker("application_channels_by_service"),
       footnotes: false,
       render({ title, calculations, sources }) {
         const { subject } = calculations;
