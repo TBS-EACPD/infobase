@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { create_text_maker } from "src/models/text";
 
@@ -8,8 +8,6 @@ import { ensure_loaded } from "src/core/ensure_loaded";
 import { tableStore } from "src/core/TableClass";
 
 import treemap_text from "./TreeMap.yaml";
-
-const { Dept } = Subject;
 
 const tm = create_text_maker([treemap_text]);
 export const smaller_items_text = tm("smaller_items_text");

@@ -11,13 +11,16 @@ import {
   DisplayTable,
 } from "src/components/index";
 
+import { covidMeasureStore } from "src/models/covid/CovidMeasure";
 import {
   query_gov_covid_summaries,
   query_top_covid_spending,
   query_all_covid_expenditures_by_measure_id,
   query_org_covid_expenditures_by_measure_id,
 } from "src/models/covid/queries";
-import { Subject } from "src/models/subject";
+import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
+
+import { Dept } from "src/models/subject_index";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
@@ -36,8 +39,6 @@ import {
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_expenditures.yaml";
-
-const { yearsWithCovidDataStore, covidMeasureStore, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 

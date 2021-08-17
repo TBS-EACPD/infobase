@@ -11,8 +11,7 @@ import { LeafSpinner, LabeledBox } from "src/components/index";
 import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-
-import { Subject } from "src/models/subject";
+import { get_subject_by_guid } from "src/models/get_subject_by_guid";
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -183,7 +182,7 @@ class RPB extends React.Component {
     const table = this.state.table && tableStore.lookup(this.state.table);
 
     const subject =
-      this.state.subject && Subject.get_by_guid(this.state.subject);
+      this.state.subject && get_subject_by_guid(this.state.subject);
 
     const all_data_columns =
       this.state.table && get_all_data_columns_for_table(table);

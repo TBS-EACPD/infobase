@@ -14,7 +14,7 @@ import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { lang } from "src/core/injected_build_constants";
 
@@ -24,7 +24,7 @@ const { TM, text_maker } = create_text_maker_component([
   text,
   dynamic_footnote_text,
 ]);
-const { Dept } = Subject;
+
 const { result_docs_in_tabling_order } = Results;
 
 const WarningPanel = ({

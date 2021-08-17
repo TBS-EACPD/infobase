@@ -11,7 +11,8 @@ import {
   CardList,
 } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Dept, Program } from "src/models/subject_index";
+import { tagStore } from "src/models/tags";
 
 import { infograph_href_template } from "src/infographic/infographic_link";
 
@@ -21,7 +22,6 @@ import hierarchy_text from "./hierarchy_panels.yaml";
 import text from "./tags_related_to_subject_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component([text, hierarchy_text]);
-const { Dept, Tag, Program } = Subject;
 
 const scheme_order = ["GOCO", "WWH", "CCOFOG", "HWH"];
 
@@ -62,7 +62,7 @@ function get_related_tag_list_args(subject) {
     .reject(([_x, group]) => _.isEmpty(group))
     .sortBy(([id, _group]) => _.indexOf(scheme_order, id))
     .map(([id, tags]) => ({
-      display: tag_root_display(Tag.lookup(id)),
+      display: tag_root_display(tagStore.lookup(id)),
       children: _.map(tags, tag_display),
     }))
     .value();
@@ -209,7 +209,7 @@ export const declare_related_tags_panel = () =>
         const list_args = _.map(
           related_tags_by_type_with_counts,
           ({ type, tag_and_counts }) => ({
-            display: tag_root_display(Tag.lookup(type)),
+            display: tag_root_display(tagStore.lookup(type)),
             children: _.map(tag_and_counts, ({ tag, count }) => ({
               href: infograph_href_template(tag),
               display: (

@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { DisplayTable } from "src/components/index";
 
-import { Subject } from "src/models/subject";
+import { Gov, Dept } from "src/models/subject_index";
 
 import { get_source_links } from "src/metadata/data_sources";
 
@@ -22,8 +22,6 @@ import {
   current_drr_key,
   link_to_results_infograph,
 } from "./results_common";
-
-const { Gov, Dept } = Subject;
 
 class GovDRR extends React.Component {
   render() {

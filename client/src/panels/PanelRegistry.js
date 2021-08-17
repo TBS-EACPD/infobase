@@ -1,8 +1,7 @@
 import _ from "lodash";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-
-import { Subject } from "src/models/subject";
+import * as Subject from "src/models/subject_index";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { is_dev } from "src/core/injected_build_constants";

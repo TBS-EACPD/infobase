@@ -10,7 +10,7 @@ import {
   get_footnotes_by_subject_and_topic,
 } from "src/models/footnotes/footnotes";
 import { glossaryEntryStore } from "src/models/glossary";
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
 
 import { tableStore } from "src/core/TableClass";
 
@@ -29,8 +29,6 @@ import {
   current_doc_is_mains,
   current_sups_letter,
 } from "./utils";
-
-const { Dept } = Subject;
 
 const biv_footnote = text_maker("biv_footnote");
 const this_year_col = "{{est_in_year}}_estimates";

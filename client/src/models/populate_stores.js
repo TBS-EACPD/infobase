@@ -8,10 +8,16 @@ import { get_static_url, make_request } from "src/request_utils";
 
 import { populate_global_footnotes } from "./footnotes/populate_footnotes";
 import { glossaryEntryStore } from "./glossary";
-import { Subject } from "./subject";
+import {
+  Ministry,
+  Program,
+  Dept,
+  CRSO,
+  Minister,
+  InstForm,
+} from "./subject_index";
+import { tagStore } from "./tags";
 import { trivial_text_maker } from "./text";
-
-const { Ministry, Program, Dept, Tag, CRSO, Minister, InstForm } = Subject;
 
 const url_id = (num) => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
 function populate_igoc_models({
@@ -189,7 +195,7 @@ function populate_glossary(lines) {
 function create_tag_branches(program_tag_types) {
   const l = lang === "en";
   _.each(program_tag_types, (row) => {
-    Tag.create_new_root({
+    tagStore.create_and_register({
       id: row[0],
       cardinality: row[1],
       name: row[l ? 2 : 3],
@@ -203,13 +209,14 @@ function populate_program_tags(tag_rows) {
   const l = lang === "en";
   const [tag_id, parent_id, name_en, name_fr, desc_en, desc_fr] = _.range(6);
   _.each(tag_rows, (row) => {
-    const parent_tag = Tag.lookup(row[parent_id]);
+    const parent_tag = tagStore.lookup(row[parent_id]);
     //HACKY: Note that parent rows must precede child rows
-    const instance = Tag.create_and_register({
+    const instance = tagStore.create_and_register({
       id: row[tag_id],
       name: row[l ? name_en : name_fr],
       description: sanitized_marked(row[l ? desc_en : desc_fr]),
       root: parent_tag.root,
+      cardinality: parent_tag.root.cardinality,
       parent_tag,
     });
     parent_tag.children_tags.push(instance);
@@ -274,7 +281,7 @@ function populate_program_tag_linkages(programs_m2m_tags) {
   _.each(programs_m2m_tags, (row) => {
     const [program_id, tagID] = row;
     const program = Program.lookup(program_id);
-    const tag = Tag.lookup(tagID);
+    const tag = tagStore.lookup(tagID);
     const tag_root_id = tag.root.id;
 
     // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down, some tagging done at the root level some at other levels, etc.)

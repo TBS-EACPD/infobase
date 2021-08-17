@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import { create_text_maker_component } from "src/components/index";
 
 import { ResultCounts, current_drr_key } from "src/models/results";
-import { Subject } from "src/models/subject";
+import { Gov, Dept } from "src/models/subject_index";
 
 import { is_mobile } from "src/core/feature_detection";
 
@@ -22,8 +22,6 @@ import { infograph_href_template, rpb_link } from "src/link_utils";
 
 import simplographic_text from "./simplographic.yaml";
 import "./simplographic.scss";
-
-const { Gov, Dept } = Subject;
 
 const { text_maker, TM } = create_text_maker_component(simplographic_text);
 

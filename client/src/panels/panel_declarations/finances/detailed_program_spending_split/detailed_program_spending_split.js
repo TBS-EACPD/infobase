@@ -19,8 +19,8 @@ import {
 
 import { businessConstants } from "src/models/businessConstants";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
+import { Program } from "src/models/subject_index";
 
-import { Subject } from "src/models/subject";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -448,10 +448,7 @@ export const declare_detailed_program_spending_split_panel = () =>
         }
 
         const flat_data = _.map(table_data, (row) => ({
-          program: Subject.Program.get_from_activity_code(
-            row.dept,
-            row.activity_code
-          ),
+          program: Program.get_from_activity_code(row.dept, row.activity_code),
           so_num: row.so_num,
           so_label: row.so,
           value: row["{{pa_last_year}}"],

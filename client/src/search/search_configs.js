@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
-import { Subject } from "src/models/subject";
+import { Dept, Gov, Program, Tag, CRSO } from "src/models/subject_index";
 import { trivial_text_maker } from "src/models/text";
 
 import { tableStore } from "src/core/TableClass";
@@ -14,8 +14,6 @@ import {
   highlight_search_match,
   InfoBaseHighlighter,
 } from "./search_utils";
-
-const { Dept, Gov, Program, Tag, CRSO } = Subject;
 
 const get_re_matcher = (accessors, reg_exps) => (obj) =>
   _.chain(accessors)

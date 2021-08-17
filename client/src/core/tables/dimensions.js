@@ -1,11 +1,9 @@
 import { nest } from "d3-collection";
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
+import { Gov } from "src/models/subject_index";
 
 import * as text_maker from "src/models/text";
-
-const { Gov } = Subject;
 
 // This module exists to  provides a common interface for querying
 // the data associated with each table

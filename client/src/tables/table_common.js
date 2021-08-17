@@ -4,7 +4,6 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 
-import { Subject } from "src/models/subject";
 import { trivial_text_maker, run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -260,7 +259,6 @@ export {
   businessConstants,
   run_template,
   m,
-  Subject,
   format,
   year_templates,
   rows_to_rev_split,

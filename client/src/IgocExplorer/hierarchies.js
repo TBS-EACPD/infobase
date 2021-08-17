@@ -2,13 +2,11 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { Subject } from "src/models/subject";
+import { Dept, InstForm } from "src/models/subject_index";
 
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools";
 
 import { igoc_tmf as text_maker } from "./igoc_explorer_text";
-
-const { Dept, InstForm } = Subject;
 
 const { population_groups } = businessConstants;
 

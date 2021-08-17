@@ -1,7 +1,9 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { Subject, trivial_text_maker, m, year_templates } from "./table_common";
+import { Program } from "src/models/subject_index";
+
+import { trivial_text_maker, m, year_templates } from "./table_common";
 
 import text from "./programFtes.yaml";
 
@@ -9,7 +11,6 @@ import text from "./programFtes.yaml";
 // of the table spec
 //
 const { std_years, planning_years } = year_templates;
-const { Program } = Subject;
 
 export default {
   text,

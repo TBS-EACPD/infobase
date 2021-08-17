@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
+import { Gov, Dept } from "src/models/subject_index";
 
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
@@ -278,12 +278,12 @@ class Queries {
 
 function query_adapter(subject) {
   //normalize different arguments API
-  if (Subject.Dept.lookup(subject)) {
+  if (Dept.lookup(subject)) {
     //patch old dept-id based API
-    subject = Subject.Dept.lookup(subject);
+    subject = Dept.lookup(subject);
   }
   // work around for new subject data structures
-  if (subject && subject === Subject.Gov) {
+  if (subject && subject === Gov) {
     subject = undefined;
   } else if (
     this.programs &&

@@ -2,7 +2,8 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { Subject } from "src/models/subject";
+import { Dept } from "src/models/subject_index";
+
 import {
   trivial_text_maker,
   run_template,
@@ -25,7 +26,6 @@ import {
 import { query_adapter } from "./tables/queries";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
-const { Dept } = Subject;
 
 function all_children_hidden(header) {
   if (header.children) {

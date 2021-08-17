@@ -2,60 +2,72 @@ import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
 
+import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
+import { make_static_store } from "src/models/utils/make_static_store";
+
 import { Dept } from "./organizational_entities";
-import {
-  mix,
-  staticStoreMixin,
-  PluralSingular,
-  SubjectMixin,
-} from "./utils/BaseSubjectFactory";
 
-const static_subject_store = () =>
-  mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
+type TagDef = {
+  id: string;
+  name: string;
+  description: string;
+  cardinality: string;
+  parent_tag?: Tag;
+  root?: Tag;
+};
 
-const tag_roots = [];
-const Tag = class Tag extends static_subject_store() {
+const tag_roots: Tag[] = [];
+export class Tag extends BaseSubjectFactory(
+  "tag",
+  trivial_text_maker("tag"),
+  trivial_text_maker("tag") + "s"
+) {
   static get tag_roots() {
     return _.chain(tag_roots)
       .map((tag_root) => [tag_root.id, tag_root])
       .fromPairs()
       .value();
   }
-  static get subject_type() {
-    return "tag";
-  }
-  static get singular() {
-    return trivial_text_maker("tag");
-  }
-  static get plural() {
-    return trivial_text_maker("tag") + "s";
-  }
-  static create_and_register(def) {
-    const inst = new Tag(def);
-    this.register(inst.id, inst);
-    return inst;
-  }
-  static create_new_root(def) {
-    const root = this.create_and_register(def);
-    root.root = root;
-    tag_roots.push(root);
-    return root;
-  }
   static get gocos_by_spendarea() {
     const goco_root = _.find(tag_roots, { id: "GOCO" });
-    return goco_root.children_tags;
+    return goco_root?.children_tags;
   }
-  constructor(attrs) {
-    super();
-    Object.assign(
-      this,
-      {
-        programs: [],
-        children_tags: [],
-      },
-      attrs
-    );
+
+  id: string;
+  name: string;
+  description: string;
+  cardinality: string;
+  root: Tag;
+
+  parent_tag?: Tag;
+
+  programs = [] as any[]; // SUBJECT_TS_TODO come back to once programs are typed
+  children_tags = [] as Tag[];
+
+  constructor({
+    id,
+    name,
+    description,
+    cardinality,
+    parent_tag,
+    root,
+  }: TagDef) {
+    super({ id });
+
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.cardinality = cardinality;
+    this.parent_tag = parent_tag;
+
+    if (typeof root === "undefined") {
+      tag_roots.push(this);
+      this.root = this;
+    } else {
+      this.root = root;
+    }
   }
+
   singular() {
     if (this.root.id === "GOCO") {
       if (this.parent_tag && _.includes(tag_roots, this.parent_tag)) {
@@ -104,34 +116,33 @@ const Tag = class Tag extends static_subject_store() {
       _.some(this.programs, (program) => !program.has_planned_spending)
     );
   }
-  tagged_by_org() {
-    return (
-      _.chain(this.programs)
-        //.filter(tagged => tagged.dept)
-        .groupBy((prog) => prog.dept.id)
-        .toPairs()
-        .map(([org_id, programs]) => {
-          return {
-            name: Dept.lookup(org_id).name,
-            programs: _.sortBy(programs, "name"),
-          };
-        })
-        .sortBy("name")
-        .value()
-    );
-  }
   get is_m2m() {
-    return this.root.cardinality === "MtoM";
+    return this.cardinality === "MtoM";
+  }
+  tagged_by_org() {
+    return _.chain(this.programs)
+      .groupBy((prog) => prog.dept.id)
+      .toPairs()
+      .map(([org_id, programs]) => {
+        return {
+          name: Dept.lookup(org_id).name,
+          programs: _.sortBy(programs, "name"),
+        };
+      })
+      .sortBy("name")
+      .value();
   }
   related_tags() {
     return _.chain(this.programs)
       .map((prog) => prog.tags)
       .flatten()
       .filter((tag) => tag.root.id === this.root.id)
-      .uniqBy()
+      .uniq()
       .without(this)
       .value();
   }
-};
+}
 
-export { Tag };
+export const tagStore = make_static_store((def: TagDef) => {
+  return new Tag(def);
+});
