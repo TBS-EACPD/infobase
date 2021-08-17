@@ -28,13 +28,13 @@ const schema = `
     employee_type_totals: [EmployeeGovData]
     employee_gov_avgs: [EmployeeGovAvgs]
   }
-  type DataObjectWithDim {
+  type DataObjectWithDimension {
     dimension: String
     by_year: [ByYearData]
     avg_share: Float
   }
 
-  type DataObjectNoDim {
+  type DataObjectNoDimension {
     by_year: [ByYearData]
   }
 
@@ -45,21 +45,21 @@ const schema = `
 
   type EmployeePopData {
     org_id: String
-    data: [DataObjectWithDim]
+    data: [DataObjectWithDimension]
+  
   }
-
   type EmployeeGovData{
     dimension: String
-    data: [DataObjectNoDim]
+    data: [DataObjectNoDimension]
   }
   type EmployeeAvgAge {
     org_id: String
-    data: DataObjectNoDim
+    data: DataObjectNoDimension
   }
 
   type EmployeeGovAvgs {
     id: String
-    data: [DataObjectNoDim]
+    data: [DataObjectNoDimension]
   }
 `;
 

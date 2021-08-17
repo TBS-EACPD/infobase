@@ -37,13 +37,9 @@ export default async function ({ models }) {
     let raw_data = get_standard_csv_file_rows(csv_name);
     let years = _.chain(raw_data[0])
       .keys()
-      .toArray()
-      .map((element) => {
-        if (!isNaN(element)) {
-          return element;
-        }
+      .filter((key) => {
+        return !isNaN(key);
       })
-      .compact()
       .value();
     return _.chain(raw_data)
       .groupBy("dimension")
@@ -66,19 +62,19 @@ export default async function ({ models }) {
       }))
       .value();
   };
-  let employee_age_rows = process_employee_csv("org_employee_age_group.csv");
+  const employee_age_rows = process_employee_csv("org_employee_age_group.csv");
 
-  let employee_ex_lvl_rows = process_employee_csv("org_employee_ex_lvl.csv");
+  const employee_ex_lvl_rows = process_employee_csv("org_employee_ex_lvl.csv");
 
-  let employee_fol_rows = process_employee_csv("org_employee_fol.csv");
+  const employee_fol_rows = process_employee_csv("org_employee_fol.csv");
 
-  let employee_gender_rows = process_employee_csv("org_employee_gender.csv");
+  const employee_gender_rows = process_employee_csv("org_employee_gender.csv");
 
-  let employee_region_rows = process_employee_csv("org_employee_region.csv");
+  const employee_region_rows = process_employee_csv("org_employee_region.csv");
 
-  let employee_type_rows = process_employee_csv("org_employee_type.csv");
+  const employee_type_rows = process_employee_csv("org_employee_type.csv");
 
-  let employee_avg_age_rows = _.chain(
+  const employee_avg_age_rows = _.chain(
     get_standard_csv_file_rows("org_employee_avg_age.csv")
   )
     .reject(["dept_code", "ZGOC"])
@@ -97,29 +93,31 @@ export default async function ({ models }) {
       },
     }))
     .value();
-  let employee_age_totals = process_employee_data_sums(
+  const employee_age_totals = process_employee_data_sums(
     "org_employee_age_group.csv"
   );
 
-  let employee_ex_lvl_totals = process_employee_data_sums(
+  const employee_ex_lvl_totals = process_employee_data_sums(
     "org_employee_ex_lvl.csv"
   );
 
-  let employee_fol_totals = process_employee_data_sums("org_employee_fol.csv");
+  const employee_fol_totals = process_employee_data_sums(
+    "org_employee_fol.csv"
+  );
 
-  let employee_gender_totals = process_employee_data_sums(
+  const employee_gender_totals = process_employee_data_sums(
     "org_employee_gender.csv"
   );
 
-  let employee_region_totals = process_employee_data_sums(
+  const employee_region_totals = process_employee_data_sums(
     "org_employee_region.csv"
   );
 
-  let employee_type_totals = process_employee_data_sums(
+  const employee_type_totals = process_employee_data_sums(
     "org_employee_type.csv"
   );
 
-  let employee_gov_avgs = {
+  const employee_gov_avgs = {
     id: "gov",
     data: _.chain(get_standard_csv_file_rows("org_employee_avg_age.csv"))
       .filter({ dept_code: "ZGOC" })
@@ -134,55 +132,42 @@ export default async function ({ models }) {
       .value(),
   };
 
-  let org_id_list = _.map(employee_age_rows, "org_id"); // all the csv files should have the same list of org_ids
+  const org_id_list = _.map(employee_ex_lvl_rows, "org_id"); // all the csv files should have the same list of org_ids
+  const find_by_org_id = (rows, org_id) =>
+    _.find(rows, (row) => row.org_id === org_id).data;
 
-  let org_summary = _.map(org_id_list, (org_id) => ({
+  const org_summary = _.map(org_id_list, (org_id) => ({
     org_id: org_id,
     employee_age_group: {
       org_id: org_id,
-      data: _.find(employee_age_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_age_rows, org_id),
     },
     employee_ex_lvl: {
       org_id: org_id,
-      data: _.find(employee_ex_lvl_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_ex_lvl_rows, org_id),
     },
     employee_fol: {
       org_id: org_id,
-      data: _.find(employee_fol_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_fol_rows, org_id),
     },
     employee_gender: {
       org_id: org_id,
-      data: _.find(employee_gender_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_gender_rows, org_id),
     },
     employee_region: {
       org_id: org_id,
-      data: _.find(employee_region_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_region_rows, org_id),
     },
     employee_type: {
       org_id: org_id,
-      data: _.find(employee_type_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_type_rows, org_id),
     },
     employee_avg_age: {
       org_id: org_id,
-      data: _.find(employee_avg_age_rows, (z) => {
-        return z.org_id == org_id;
-      }).data,
+      data: find_by_org_id(employee_avg_age_rows, org_id),
     },
   }));
-
-  let gov_summary = {
+  const gov_summary = {
     id: "gov",
     employee_age_totals: employee_age_totals,
     employee_ex_lvl_totals: employee_ex_lvl_totals,
