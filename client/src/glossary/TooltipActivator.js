@@ -133,7 +133,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
         );
       }
       render() {
-        return null;
+        return this.props.children;
       }
     };
 
