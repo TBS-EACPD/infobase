@@ -37,7 +37,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_expenditures.yaml";
 
-const { yearsWithCovidDataStore, CovidMeasure, Dept } = Subject;
+const { yearsWithCovidDataStore, covidMeasureStore, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -229,7 +229,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     )
       .map(({ measure_id, ...row }) => ({
         ...row,
-        measure_name: CovidMeasure.lookup(measure_id).name,
+        measure_name: covidMeasureStore.lookup(measure_id).name,
       }))
       .value();
 

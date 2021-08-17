@@ -8,7 +8,7 @@ import {
   staticStoreMixin,
   PluralSingular,
   SubjectMixin,
-} from "./utils/storeMixins";
+} from "./utils/BaseSubjectFactory";
 
 const static_subject_store = () =>
   mix().with(staticStoreMixin, PluralSingular, SubjectMixin);

@@ -1,14 +1,52 @@
 import _ from "lodash";
 
-export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
-  class SubjectMixin {
-    private _has_data = _.chain(data_types)
+export const BaseSubjectFactory = (
+  subject_type: string,
+  subject_singular: string,
+  subject_plural: string,
+  api_data_types = [] as string[]
+) =>
+  class BaseSubject {
+    id: string;
+    constructor({ id }: { id: string }) {
+      this.id = id;
+    }
+
+    static subject_type = subject_type;
+    get subject_type() {
+      return subject_type;
+    }
+    static level = subject_type;
+    get level() {
+      return subject_type;
+    }
+    static subject_singular = subject_singular;
+    get subject_singular() {
+      return subject_singular;
+    }
+    static subject_plural = subject_plural;
+    get subject_plural() {
+      return subject_plural;
+    }
+
+    get guid() {
+      return subject_type + "_" + this.id;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    is(comparator: string | Function) {
+      if (_.isString(comparator)) {
+        return subject_type === comparator;
+      }
+      return this.constructor === comparator;
+    }
+
+    private _has_data = _.chain(api_data_types)
       .map((data_type) => [data_type, null])
       .fromPairs()
       .value();
-
     set_has_data(data_type: string, has_data: boolean) {
-      if (_.includes(data_types, data_type)) {
+      if (_.includes(api_data_types, data_type)) {
         const store_value = this._has_data[data_type];
 
         const store_value_is_unset = _.isNull(store_value);
@@ -26,7 +64,7 @@ export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
       }
     }
     has_data(data_type: string) {
-      if (_.includes(data_types, data_type)) {
+      if (_.includes(api_data_types, data_type)) {
         if (_.isNull(this._has_data[data_type])) {
           throw new Error(
             `"has data" status for data type "${data_type}" has yet to be loaded!`

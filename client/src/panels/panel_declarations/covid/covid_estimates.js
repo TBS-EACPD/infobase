@@ -50,7 +50,7 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates.yaml";
 
-const { yearsWithCovidDataStore, CovidMeasure, Dept } = Subject;
+const { yearsWithCovidDataStore, covidMeasureStore, Dept } = Subject;
 
 const { text_maker, TM } = covid_create_text_maker_component(text);
 
@@ -202,7 +202,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
   }
 );
 
-const get_measure_name = (id) => CovidMeasure.lookup(id).name;
+const get_measure_name = (id) => covidMeasureStore.lookup(id).name;
 const ByMeasureTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
@@ -276,7 +276,8 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           k={"covid_estimates_measure_tab_text"}
           args={{
             ...panel_args,
-            largest_measure_name: CovidMeasure.lookup(largest_measure_id).name,
+            largest_measure_name:
+              covidMeasureStore.lookup(largest_measure_id).name,
             largest_measure_auth,
           }}
           className="medium-panel-text"
