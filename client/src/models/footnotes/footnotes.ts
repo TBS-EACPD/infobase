@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { StaticStoreFactory } from "src/models/storeMixins";
+import { make_static_store } from "src/models/utils/make_static_store";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
@@ -17,7 +17,7 @@ type FootNoteDef = {
 // in case additional logic is added here in the future (plus, it will cover the typing at the same time)
 export const create_footnote = (def: FootNoteDef) => def;
 
-export const footNoteStore = StaticStoreFactory(create_footnote);
+export const footNoteStore = make_static_store(create_footnote);
 
 export const get_footnotes_by_subject_and_topic = (
   subject: any,

@@ -2,13 +2,13 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { StaticStoreFactory } from "src/models/storeMixins";
 import { Subject } from "src/models/subject";
 import {
   trivial_text_maker,
   run_template,
   create_text_maker,
 } from "src/models/text";
+import { make_static_store } from "src/models/utils/make_static_store";
 
 import { make_unique_func, make_unique } from "src/general_utils";
 import { sources as all_sources } from "src/metadata/data_sources";
@@ -497,7 +497,7 @@ export class Table {
   }
 }
 
-export const tableStore = StaticStoreFactory(
+export const tableStore = make_static_store(
   (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
 );
 
