@@ -5,16 +5,16 @@ import { trivial_text_maker } from "src/models/text";
 import { Dept } from "./organizational_entities";
 import {
   mix,
-  exstensibleStoreMixin,
+  staticStoreMixin,
   PluralSingular,
   SubjectMixin,
-} from "./storeMixins";
+} from "./utils/storeMixins";
 
-const extensible_subject_store = () =>
-  mix().with(exstensibleStoreMixin, PluralSingular, SubjectMixin);
+const static_subject_store = () =>
+  mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 
 const tag_roots = [];
-const Tag = class Tag extends extensible_subject_store() {
+const Tag = class Tag extends static_subject_store() {
   static get tag_roots() {
     return _.chain(tag_roots)
       .map((tag_root) => [tag_root.id, tag_root])

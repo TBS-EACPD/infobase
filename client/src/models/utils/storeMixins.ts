@@ -1,49 +1,5 @@
 import _ from "lodash";
 
-import { completeAssign } from "src/general_utils";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-type StoreInstanceBase = { id: string; alt_ids?: string[] };
-
-class StaticStore<definition, instance extends StoreInstanceBase> {
-  private store: Map<string, instance>;
-  private register = (instance: instance) => {
-    this.store.set(instance.id, instance);
-
-    _.forEach(instance.alt_ids, (id) => this.store.set(id, instance));
-  };
-
-  create: (def: definition) => instance;
-  create_and_register: (definition: definition) => void;
-
-  constructor(
-    store: Map<string, instance>,
-    create: (def: definition) => instance
-  ) {
-    this.store = store;
-
-    this.create = create;
-
-    this.create_and_register = (def: definition) => {
-      this.register(create(def));
-    };
-  }
-
-  lookup = (id: string) => this.store.get(id);
-  get_all = () => _.uniq(Array.from(this.store.values())); // SUBJECT_TS_TODO why's a unique needed here?
-}
-
-export const StaticStoreFactory = <
-  definition,
-  instance extends StoreInstanceBase
->(
-  create = _.identity as (def: definition) => instance
-): StaticStore<definition, instance> => {
-  const store = new Map<string, instance>();
-  return new StaticStore(store, create);
-};
-
 export const CanHaveServerDataMixinFactory = (data_types: string[]) =>
   class SubjectMixin {
     private _has_data = _.chain(data_types)
@@ -101,7 +57,6 @@ class MixinBuilder {
   with(
     ...mixins: (
       | typeof staticStoreMixin
-      | typeof exstensibleStoreMixin
       | typeof PluralSingular
       | typeof SubjectMixin
       | ((superclass: any) => unknown)
@@ -130,30 +85,6 @@ export const staticStoreMixin = <T>(superclass: any) => {
     static get __store__() {
       return _storeMap;
     } //allow access to the underlying map
-  };
-};
-
-export const exstensibleStoreMixin = <T>(superclass: any) => {
-  const baseclass = superclass || BaseClass;
-  const baseclassWithStaticStore = staticStoreMixin(baseclass);
-  return class extends baseclassWithStaticStore {
-    static extend(id: string, extension_object: { [key: string]: any }) {
-      const target_member = this.lookup(id);
-      if (target_member) {
-        completeAssign(target_member, extension_object);
-      } else {
-        throw new Error(
-          `Can not extend ${id} on ${this}, ${id} is not a registered member`
-        );
-      }
-    }
-    static extend_or_register(id: string, object: T) {
-      if (this.lookup(id)) {
-        this.extend(id, object);
-      } else {
-        this.register(id, object);
-      }
-    }
   };
 };
 

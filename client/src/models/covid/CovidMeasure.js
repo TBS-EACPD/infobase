@@ -1,12 +1,12 @@
 import _ from "lodash";
 
+import { trivial_text_maker } from "src/models/text";
 import {
   mix,
   staticStoreMixin,
   PluralSingular,
   SubjectMixin,
-} from "src/models/storeMixins";
-import { trivial_text_maker } from "src/models/text";
+} from "src/models/utils/storeMixins";
 
 class CovidMeasure extends mix().with(
   staticStoreMixin,

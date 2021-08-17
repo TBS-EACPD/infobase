@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { StaticStoreFactory } from "src/models/storeMixins";
+import { make_static_store } from "src/models/utils/make_static_store";
 
 type YearsWithCovidDataDef = {
   subject_id: string;
@@ -10,7 +10,7 @@ type YearsWithCovidDataDef = {
   };
 };
 
-export const yearsWithCovidDataStore = StaticStoreFactory(
+export const yearsWithCovidDataStore = make_static_store(
   ({ subject_id, years_with_covid_data }: YearsWithCovidDataDef) => ({
     id: subject_id,
     subject_id,
