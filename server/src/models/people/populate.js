@@ -34,8 +34,8 @@ export default async function ({ models }) {
       .value();
 
   const process_employee_data_sums = (csv_name) => {
-    let raw_data = get_standard_csv_file_rows(csv_name);
-    let years = _.chain(raw_data[0])
+    const raw_data = get_standard_csv_file_rows(csv_name);
+    const years = _.chain(raw_data[0])
       .keys()
       .filter((key) => {
         return !isNaN(key);
