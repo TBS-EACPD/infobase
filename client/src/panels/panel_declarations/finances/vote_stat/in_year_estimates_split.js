@@ -10,7 +10,7 @@ import { businessConstants } from "src/models/businessConstants";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { filter_row_by_subj } from "src/core/tables/dimensions";
+import { filter_row_by_subj } from "src/core/TableClass";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 

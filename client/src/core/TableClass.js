@@ -15,17 +15,15 @@ import { make_unique_func, make_unique } from "src/general_utils";
 import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
 
+import { text_maker } from "src/tables/table_common";
+
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { lang } from "./injected_build_constants";
 
-import {
-  get_dimensions,
-  get_sum_col_by_grouped_data_func,
-} from "./tables/dimensions";
 import { query_adapter } from "./tables/queries";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
-const { Dept } = Subject;
+const { Gov, Dept } = Subject;
 
 function all_children_hidden(header) {
   if (header.children) {
@@ -66,6 +64,20 @@ function add_child(x) {
   });
   this.children = (this.children || []).concat(x);
   return this;
+}
+
+export function filter_row_by_subj(row, subject) {
+  switch (subject.level) {
+    case "gov": {
+      return _.identity(row);
+    }
+    case "dept": {
+      return row.dept === subject.id;
+    }
+    case "prgm": {
+      return row.program_id === subject.id;
+    }
+  }
 }
 
 class Mapper {
@@ -213,7 +225,7 @@ export class Table {
       })
       .value();
 
-    get_dimensions(this);
+    this.get_dimensions();
   }
   get links() {
     return this.link
@@ -238,6 +250,52 @@ export class Table {
   }
   get title() {
     return run_template(this.title_def[lang]);
+  }
+
+  get_dimensions() {
+    const columns = _.flatMap(this._cols, (col) =>
+      _.has(col, "children") ? col.children : col
+    );
+
+    const can_group_vs = _.some(columns, (col) => _.has(col, "can_group_vs"));
+
+    this.dimensions = _.chain(columns)
+      .filter("can_group_by")
+      .map((col) => col.nick)
+      .concat(can_group_vs ? "vote_vs_stat" : "")
+      .compact()
+      .value();
+
+    this.dimensions.unshift("all");
+  }
+
+  // TODO: come up with a shorter, better name for this sum_col_by_grouped_data
+  get_sum_col_by_grouped_data_func() {
+    this.sum_col_by_grouped_data = function (col, dimension, subject = Gov) {
+      const { group_by_vs_func, data } = this;
+      const dim_vote_stat = dimension === "vote_vs_stat";
+
+      return _.chain(data)
+        .filter((row) => filter_row_by_subj(row, subject))
+        .groupBy(
+          dim_vote_stat ? (row) => group_by_vs_func(dimension, row) : dimension
+        )
+        .map((data_group) => {
+          const dim_name = dim_vote_stat
+            ? group_by_vs_func("vote_vs_stat", data_group[0])
+              ? text_maker("stat")
+              : text_maker("voted")
+            : data_group[0][dimension];
+          const summed_col = _.isArray(col)
+            ? _.chain(col)
+                .map((c) => _.sumBy(data_group, c))
+                .value()
+            : _.sumBy(data_group, col);
+          return [dim_name, summed_col];
+        })
+        .fromPairs()
+        .value();
+    };
   }
 
   // input should be an array of lowest-level (i.e. exist in table.unique_headers) columns to be included
@@ -416,7 +474,7 @@ export class Table {
     });
 
     this.q = query_adapter;
-    get_sum_col_by_grouped_data_func(this);
+    this.get_sum_col_by_grouped_data_func();
   }
   //TODO: optimize and clarify this
   get_row_func() {
