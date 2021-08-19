@@ -65,7 +65,7 @@ interface DisplayTableData {
   [key: string]: CellValue;
 }
 
-export type CellValue = string | number;
+export type CellValue = string | number | undefined;
 
 interface ColumnConfigs {
   [keys: string]: ColumnConfig;
@@ -80,12 +80,12 @@ const get_column_config_defaults = (index: number) => ({
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,
   // "plain" value for some complex datasets actually requires processing, as we use "plain" formatted values in the output csv AND for searching and (by default) sorting
-  plain_formatter: _.identity as (value: CellValue) => string | number,
+  plain_formatter: _.identity as (value: CellValue) => CellValue,
   sort_func: (
-    plain_a: string | number,
-    plain_b: string | number,
+    plain_a: CellValue,
+    plain_b: CellValue,
     descending: boolean,
-    // available for any special cases that need access to the actual cell value, not the "plain" version usually used
+    // available for any special cases that need access to the actual cell value, not the "plain" version usually used be sorting
     cell_value_a: CellValue, // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
     cell_value_b: CellValue // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
   ): 1 | 0 | -1 => smart_sort_func(plain_a, plain_b, descending),
@@ -281,16 +281,15 @@ export class _DisplayTable extends React.Component<
     const sorted_filtered_data = _.chain(data)
       .filter((row) =>
         _.chain(row)
-          .map((column_value: CellValue, column_key) => {
+          .map((cell_value: CellValue, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
-            const col_search_value =
-              col_config && col_config.plain_formatter
-                ? col_config.plain_formatter(column_value)
-                : column_value;
+            const cell_search_value = clean_search_string(
+              col_config.plain_formatter(cell_value)
+            );
             return (
               _.isEmpty(searches[column_key]) ||
               _.includes(
-                clean_search_string(col_search_value),
+                cell_search_value,
                 clean_search_string(searches[column_key])
               )
             );
