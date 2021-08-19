@@ -193,9 +193,8 @@ class RPB extends React.Component {
         table.tags.concat(["MACHINERY"])
       );
 
-    const dimensions = this.state.table && table.dimensions;
-
-    const group_by_vs_func = this.state.table && table.group_by_vs_func;
+    const { dimensions, group_by_func, dimension_column_values_func } =
+      this.state.table && table;
 
     const table_data =
       this.state.table &&
@@ -213,25 +212,6 @@ class RPB extends React.Component {
         .isEmpty()
         .value();
 
-    const group_by_vs = group_by_vs_func && !!group_by_vs_func(dimension);
-
-    function dimension_column_values(row) {
-      if (!group_by_vs) {
-        return [dimension, row[dimension]];
-      }
-      const voted = text_maker("voted");
-      const stat = text_maker("stat");
-
-      const col_name = _.chain(table._cols)
-        .map((col) => (_.has(col, "children") ? col.children : col))
-        .flatten()
-        .filter("can_group_vs")
-        .map((col) => col.nick)
-        .value();
-
-      return [col_name, group_by_vs_func(dimension, row) ? stat : voted];
-    }
-
     const flat_data = !_.isEmpty(table_data)
       ? dimension === "all"
         ? _.chain(table_data)
@@ -239,16 +219,12 @@ class RPB extends React.Component {
             .reject(zero_filter_func)
             .value()
         : _.chain(table_data)
-            .groupBy(
-              group_by_vs
-                ? (row) => group_by_vs_func(dimension, row)
-                : dimension
-            )
+            .thru((table_data) => group_by_func(table_data, dimension))
             .map((dim_data) => {
               return _.chain(all_data_columns)
                 .filter((col) => !_.includes(col.type, "percentage"))
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
-                .concat([dimension_column_values(dim_data[0])])
+                .concat([dimension_column_values_func(dim_data[0], dimension)])
                 .fromPairs()
                 .value();
             })

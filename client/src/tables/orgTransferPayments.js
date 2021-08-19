@@ -56,7 +56,9 @@ export default {
           fr: "Type",
         },
         can_group_by: true,
-        can_group_vs: true,
+        group_by_vs_func: function (row) {
+          return _.includes(row.tp, "(S) ");
+        },
       },
       {
         type: "wide-str",
@@ -96,14 +98,6 @@ export default {
         },
       ]);
     });
-  },
-
-  group_by_vs_func: function (dimension, row = undefined) {
-    return dimension !== "vote_vs_stat"
-      ? undefined
-      : !row
-      ? true
-      : _.includes(row.tp, "(S) ");
   },
 
   queries: {
