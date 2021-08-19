@@ -226,6 +226,8 @@ export class Table {
       .value();
 
     this.get_dimensions();
+    this.get_group_by_func();
+    this.get_dimension_column_values_func();
   }
   get links() {
     return this.link
@@ -257,7 +259,9 @@ export class Table {
       _.has(col, "children") ? col.children : col
     );
 
-    const can_group_vs = _.some(columns, (col) => _.has(col, "can_group_vs"));
+    const can_group_vs = _.some(columns, (col) =>
+      _.has(col, "group_by_vs_func")
+    );
 
     this.dimensions = _.chain(columns)
       .filter("can_group_by")
@@ -267,6 +271,61 @@ export class Table {
       .value();
 
     this.dimensions.unshift("all");
+  }
+
+  get_vote_stat_col = () => {
+    return _.chain(this._cols)
+      .flatMap((col) => (_.has(col, "children") ? col.children : col))
+      .filter("group_by_vs_func")
+      .head()
+      .value();
+  };
+
+  get_group_by_func() {
+    this.group_by_func = (data, dimension) => {
+      if (dimension !== "vote_vs_stat") {
+        if (
+          !_.pickBy(
+            this._cols,
+            (col) => _.has(col, dimension) && col.can_group_by
+          )
+        ) {
+          throw new Error("Can not group by this column");
+        }
+        return _.groupBy(data, dimension);
+      }
+
+      const vote_stat_col = this.get_vote_stat_col();
+
+      return vote_stat_col
+        ? _.groupBy(data, (row) => vote_stat_col.group_by_vs_func(row))
+        : new Error("Can not group by Vote / Statutory item");
+    };
+  }
+
+  get_dimension_column_values_func() {
+    this.dimension_column_values_func = (row, dimension) => {
+      if (dimension !== "vote_vs_stat") {
+        return [dimension, row[dimension]];
+      }
+
+      const vote_stat_col = this.get_vote_stat_col();
+      const voted = text_maker("voted");
+      const stat = text_maker("stat");
+
+      if (!vote_stat_col) {
+        throw new Error("Can not group by Vote / Statutory item");
+      }
+
+      const col_name = _.chain(this._cols)
+        .map((col) => (_.has(col, "children") ? col.children : col))
+        .flatten()
+        .filter("group_by_vs_func")
+        .map("nick")
+        .value();
+
+      return [col_name, vote_stat_col.group_by_vs_func(row) ? stat : voted];
+    };
   }
 
   // TODO: come up with a shorter, better name for this sum_col_by_grouped_data

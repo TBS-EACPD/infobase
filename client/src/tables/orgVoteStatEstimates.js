@@ -80,7 +80,9 @@ export default {
         en: "Vote / Statutory Description",
         fr: "Crédit / Poste législatif Description",
       },
-      can_group_vs: true,
+      group_by_vs_func: function (row) {
+        return row.votestattype === 999;
+      },
     });
     this.add_col({
       type: "wide-str",
@@ -113,14 +115,6 @@ export default {
         header: yr,
       });
     });
-  },
-
-  group_by_vs_func: function (dimension, row = undefined) {
-    return dimension !== "vote_vs_stat"
-      ? undefined
-      : !row
-      ? true
-      : row.votestattype === 999;
   },
 
   mapper: function (row) {
