@@ -427,6 +427,17 @@ const Infographic = ({
     : null;
 
   const title = text_maker("infographic_for", { subject });
+  const breadcrumb_program =
+    level === "program"
+      ? [
+          {
+            title: text_maker("department_title", { subject }),
+            department: true,
+            id: subject.dept.id,
+          },
+          { title: text_maker("infographic_title", { subject }) },
+        ]
+      : [{ title: text_maker("infographic_title", { subject }) }];
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
     people: "ppl_infograph_desc_meta_attr",
@@ -435,7 +446,7 @@ const Infographic = ({
   return (
     <StandardRouteContainer
       title={title}
-      breadcrumbs={[breadcrumb_program]}
+      breadcrumbs={breadcrumb_program}
       description={desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >

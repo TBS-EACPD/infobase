@@ -1129,12 +1129,19 @@ infographic_for:
   en: Infographic for {{subject.name}}
   fr: Infographie pour {{subject.name}}
 
-department_of:
+infographic_title:
   transform: [handlebars]
   en: |
-    {{subject.name}} ({{subject.dept.applied_title}})
+    {{subject.name}}
   fr: |
-    {{subject.name}} ({{subject.dept.applied_title}})
+    {{subject.name}}
+
+department_title:
+  transform: [handlebars]
+  en: |
+    {{subject.dept.applied_title}}
+  fr: |
+    {{subject.dept.applied_title}}
 
 ##################################
 # footer text and links
