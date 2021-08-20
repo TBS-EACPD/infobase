@@ -193,8 +193,9 @@ class RPB extends React.Component {
         table.tags.concat(["MACHINERY"])
       );
 
-    const { dimensions, group_by_func, dimension_column_values_func } =
-      this.state.table && table;
+    const { dimensions, group_by_func, dimension_column_values_func } = {
+      ...table,
+    };
 
     const table_data =
       this.state.table &&
