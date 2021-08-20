@@ -138,6 +138,7 @@ class GranularView extends React.Component {
             dept: org.name,
             legal_title: org.legal_title ? org.legal_title : org.name,
             ..._.chain(cols)
+              .filter((col) => _.has(row, col.nick))
               .map(({ nick }) => [nick, row[nick]])
               .fromPairs()
               .value(),
