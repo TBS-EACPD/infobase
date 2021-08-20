@@ -164,7 +164,6 @@ export class Table {
     this["footnote-topics"].table = this["footnote-topics"].table || "*";
     this.column_counter = make_unique_func();
     this.loaded = false;
-    this.group_by_vs_func = table_def.group_by_vs_func;
 
     this.init();
   }
@@ -254,6 +253,14 @@ export class Table {
     return run_template(this.title_def[lang]);
   }
 
+  get vote_stat_col() {
+    return _.chain(this._cols)
+      .flatMap((col) => (_.has(col, "children") ? col.children : col))
+      .filter("group_by_vs_func")
+      .head()
+      .value();
+  }
+
   get_dimensions() {
     const columns = _.flatMap(this._cols, (col) =>
       _.has(col, "children") ? col.children : col
@@ -265,21 +272,13 @@ export class Table {
 
     this.dimensions = _.chain(columns)
       .filter("can_group_by")
-      .map((col) => col.nick)
+      .map("nick")
       .concat(can_group_vs ? "vote_vs_stat" : "")
       .compact()
       .value();
 
     this.dimensions.unshift("all");
   }
-
-  get_vote_stat_col = () => {
-    return _.chain(this._cols)
-      .flatMap((col) => (_.has(col, "children") ? col.children : col))
-      .filter("group_by_vs_func")
-      .head()
-      .value();
-  };
 
   get_group_by_func() {
     this.group_by_func = (data, dimension) => {
@@ -295,10 +294,8 @@ export class Table {
         return _.groupBy(data, dimension);
       }
 
-      const vote_stat_col = this.get_vote_stat_col();
-
-      return vote_stat_col
-        ? _.groupBy(data, (row) => vote_stat_col.group_by_vs_func(row))
+      return this.vote_stat_col
+        ? _.groupBy(data, (row) => this.vote_stat_col.group_by_vs_func(row))
         : new Error("Can not group by Vote / Statutory item");
     };
   }
@@ -309,39 +306,41 @@ export class Table {
         return [dimension, row[dimension]];
       }
 
-      const vote_stat_col = this.get_vote_stat_col();
-      const voted = text_maker("voted");
-      const stat = text_maker("stat");
-
-      if (!vote_stat_col) {
+      if (!this.vote_stat_col) {
         throw new Error("Can not group by Vote / Statutory item");
       }
 
+      const voted = text_maker("voted");
+      const stat = text_maker("stat");
       const col_name = _.chain(this._cols)
-        .map((col) => (_.has(col, "children") ? col.children : col))
-        .flatten()
+        .flatMap((col) => (_.has(col, "children") ? col.children : col))
         .filter("group_by_vs_func")
         .map("nick")
         .value();
 
-      return [col_name, vote_stat_col.group_by_vs_func(row) ? stat : voted];
+      return [
+        col_name,
+        this.vote_stat_col.group_by_vs_func(row) ? stat : voted,
+      ];
     };
   }
 
   // TODO: come up with a shorter, better name for this sum_col_by_grouped_data
   get_sum_col_by_grouped_data_func() {
     this.sum_col_by_grouped_data = function (col, dimension, subject = Gov) {
-      const { group_by_vs_func, data } = this;
+      const { data } = this;
       const dim_vote_stat = dimension === "vote_vs_stat";
 
       return _.chain(data)
         .filter((row) => filter_row_by_subj(row, subject))
         .groupBy(
-          dim_vote_stat ? (row) => group_by_vs_func(dimension, row) : dimension
+          dim_vote_stat
+            ? (row) => this.vote_stat_col.group_by_vs_func(row)
+            : dimension
         )
         .map((data_group) => {
           const dim_name = dim_vote_stat
-            ? group_by_vs_func("vote_vs_stat", data_group[0])
+            ? this.vote_stat_col.group_by_vs_func(data_group[0])
               ? text_maker("stat")
               : text_maker("voted")
             : data_group[0][dimension];
