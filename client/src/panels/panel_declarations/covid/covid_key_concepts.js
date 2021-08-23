@@ -1,11 +1,10 @@
 import _ from "lodash";
 import React from "react";
 
-import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 
-import { KeyConceptList } from "src/components/index";
+import { StandardFAQ } from "src/components/StandardFAQ/StandardFAQ";
 
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
@@ -28,30 +27,28 @@ export const declare_covid_key_concepts_panel = () =>
       source: false,
       calculate: _.constant(true),
       render: () => (
-        <SomeThingsToKeepInMind>
-          <KeyConceptList
-            question_answer_pairs={_.chain([
-              "up_to_date",
-              "spent",
-              "other_expenditure_reporting",
-              "implementation_status",
-              "auth_but_no_exp",
-              "missing_measures",
+        <StandardFAQ
+          faq_content={_.chain([
+            "up_to_date",
+            "spent",
+            "other_expenditure_reporting",
+            "implementation_status",
+            "auth_but_no_exp",
+            "missing_measures",
+          ])
+            .compact()
+            .map((key) => [
+              <TM key={"q"} k={`covid_questions_${key}_q`} />,
+              <TM key={"a"} k={`covid_questions_${key}_a`} />,
             ])
-              .compact()
-              .map((key) => [
-                <TM key={"q"} k={`covid_questions_${key}_q`} />,
-                <TM key={"a"} k={`covid_questions_${key}_a`} />,
-              ])
-              .concat([
-                [
-                  <TM key={"q"} k={"different_org_names_q"} />,
-                  <TM key={"a"} k={"different_org_names_a"} />,
-                ],
-              ])
-              .value()}
-          />
-        </SomeThingsToKeepInMind>
+            .concat([
+              [
+                <TM key={"q"} k={"different_org_names_q"} />,
+                <TM key={"a"} k={"different_org_names_a"} />,
+              ],
+            ])
+            .value()}
+        />
       ),
     }),
   });

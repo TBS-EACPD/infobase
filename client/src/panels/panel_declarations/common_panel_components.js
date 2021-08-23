@@ -1,16 +1,7 @@
-import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
-import { ButtonToolbar } from "react-bootstrap";
-import MediaQuery from "react-responsive";
 
-import { AutoAccordion } from "src/components/Accordion/Accordions";
 import { HeightClipper } from "src/components/HeightClipper/HeightClipper";
-import { PinnedContent } from "src/components/PinnedContent/PinnedContent";
-
-import { trivial_text_maker } from "src/models/text";
-
-import { maxLargeDevice } from "src/style_constants/index";
 
 const TspanLineWrapper = ({ text, width, line_height = 1 }) => (
   <Fragment>
@@ -57,42 +48,9 @@ const HeightClippedGraph = ({ clipHeight, children }) => {
 
 const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
   "user_enabled_pinning_key_concepts";
-const SomeThingsToKeepInMind = ({
-  children,
-  is_initially_expanded,
-  background_color,
-}) => (
-  <MediaQuery maxWidth={maxLargeDevice}>
-    {(matches) => (
-      <PinnedContent
-        local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}
-      >
-        <div className={classNames("mrgn-bttm-md")}>
-          <ButtonToolbar style={{ margin: 0 }}>
-            <AutoAccordion
-              title={trivial_text_maker("infographic_faq")}
-              isInitiallyExpanded={is_initially_expanded}
-              background_color={background_color}
-            >
-              <div
-                style={{
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                }}
-              >
-                {children}
-              </div>
-            </AutoAccordion>
-          </ButtonToolbar>
-        </div>
-      </PinnedContent>
-    )}
-  </MediaQuery>
-);
 
 export {
   HeightClippedGraph,
   TspanLineWrapper,
-  SomeThingsToKeepInMind,
   SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY,
 };
