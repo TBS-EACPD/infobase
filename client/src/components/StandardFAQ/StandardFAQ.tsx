@@ -1,10 +1,10 @@
 import React from "react";
 
-import { SomeThingsToKeepInMind } from "src/panels/panel_declarations/common_panel_components";
-
 import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 
 import { secondaryColor } from "src/style_constants/colors.interop.scss";
+
+import { SomeThingsToKeepInMind } from "./faq_utils";
 
 type StandardFAQProps = {
   faq_content: React.ReactNode[][]; // TODO: change to [React.ReactNode, React.ReactNode][] when faq_utils gets converted to ts
