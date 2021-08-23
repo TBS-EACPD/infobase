@@ -1129,27 +1129,6 @@ infographic_for:
   en: Infographic for {{subject.name}}
   fr: Infographie pour {{subject.name}}
 
-infographic_title:
-  transform: [handlebars]
-  en: |
-    {{subject.name}}
-  fr: |
-    {{subject.name}}
-
-crso_title:
-  transform: [handlebars]
-  en: |
-    {{subject.crso.name}}
-  fr: |
-    {{subject.crso.name}}
-
-department_title:
-  transform: [handlebars]
-  en: |
-    {{subject.dept.applied_title}}
-  fr: |
-    {{subject.dept.applied_title}}
-
 ##################################
 # footer text and links
 ##################################
