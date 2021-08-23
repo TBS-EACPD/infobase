@@ -435,7 +435,11 @@ const Infographic = ({
             department: true,
             id: subject.dept.id,
           },
-          { title: text_maker("crso_title", { subject }) },
+          {
+            title: text_maker("crso_title", { subject }),
+            crso: true,
+            id: subject.crso.id,
+          },
           { title: text_maker("infographic_title", { subject }) },
         ]
       : [{ title: text_maker("infographic_title", { subject }) }];

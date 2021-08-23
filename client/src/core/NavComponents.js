@@ -109,6 +109,13 @@ class BreadCrumbs extends React.Component {
                 >
                   {display.title}
                 </a>
+              ) : display.crso ? (
+                <a
+                  href={`#orgs/crso/${display.id}/infograph/results`}
+                  className="nav-item"
+                >
+                  {display.title}
+                </a>
               ) : (
                 display.title
               )}
