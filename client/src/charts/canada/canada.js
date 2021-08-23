@@ -23,8 +23,6 @@ import { CanadaD3Component } from "./CanadaD3Component";
 
 import text from "./canada.yaml";
 
-import "./canada.scss";
-
 const { text_maker } = create_text_maker_component(text);
 
 const { provinces } = businessConstants;
