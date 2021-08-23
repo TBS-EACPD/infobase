@@ -200,7 +200,6 @@ class InfoGraph_ extends React.Component {
               include_crsos: true,
               include_programs: true,
               include_tags_goco: true,
-              include_tags_hi: true,
               include_tags_hwh: true,
               include_tags_wwh: true,
             }}

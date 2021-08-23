@@ -19,7 +19,6 @@ import {
   crsos as crso_search_config,
   programs as program_search_config,
   gocos as gocos_search_config,
-  horizontal_initiative as horizontal_initiative_search_config,
   how_we_help as how_we_help_search_config,
   who_we_help as who_we_help_search_config,
   datasets as table_search_config,
@@ -55,7 +54,6 @@ const search_options_hierarchy = {
     label: text_maker("tag_categories"),
     child_options: {
       include_tags_goco: { label: text_maker("goco_tag") },
-      include_tags_hi: { label: text_maker("hi_tag") },
       include_tags_hwh: { label: text_maker("hwh_tag") },
       include_tags_wwh: { label: text_maker("wwh_tag") },
     },
@@ -125,7 +123,6 @@ const EverythingSearch = withRouter(
         include_programs,
 
         include_tags_goco,
-        include_tags_hi,
         include_tags_hwh,
         include_tags_wwh,
 
@@ -153,7 +150,6 @@ const EverythingSearch = withRouter(
         include_crsos && crso_search_config,
         include_programs && program_search_config,
         include_tags_goco && gocos_search_config,
-        include_tags_hi && horizontal_initiative_search_config,
         include_tags_hwh && how_we_help_search_config,
         include_tags_wwh && who_we_help_search_config,
         include_tables && table_search_config,
@@ -285,7 +281,6 @@ EverythingSearch.defaultProps = {
     include_programs: true,
 
     include_tags_goco: true,
-    include_tags_hi: true,
     include_tags_hwh: true,
     include_tags_wwh: true,
 
