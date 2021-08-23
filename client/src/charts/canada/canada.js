@@ -1,6 +1,6 @@
 import { select } from "d3-selection";
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React from "react";
 
 import ReactDOM from "react-dom";
 
@@ -14,6 +14,7 @@ import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text";
 
 import { StandardLegend } from "src/charts/legends/index";
+import { LegendContainer } from "src/charts/legends/LegendContainer";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 import { hex_to_rgb } from "src/general_utils";
 import { secondaryColor, tertiaryColor } from "src/style_constants/index";
@@ -21,6 +22,7 @@ import { secondaryColor, tertiaryColor } from "src/style_constants/index";
 import { CanadaD3Component } from "./CanadaD3Component";
 
 import text from "./canada.yaml";
+
 import "./canada.scss";
 
 const { text_maker } = create_text_maker_component(text);
@@ -55,10 +57,7 @@ class CanadaGraphBarLegend extends React.Component {
       .value();
 
     return (
-      <Fragment>
-        <p className="mrgn-bttm-0 mrgn-tp-0 title-p--canada centerer">
-          {province_graph_title(prov)}
-        </p>
+      <LegendContainer title={province_graph_title(prov)}>
         <WrappedNivoHBar
           data={graph_data}
           indexBy="year"
@@ -94,7 +93,7 @@ class CanadaGraphBarLegend extends React.Component {
           isInteractive={false}
           disable_table_view={true}
         />
-      </Fragment>
+      </LegendContainer>
     );
   }
 }
