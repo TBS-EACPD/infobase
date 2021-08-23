@@ -12,6 +12,7 @@ export const textColor: string;
 export const textLightColor: string;
 export const textGreen: string;
 export const textRed: string;
+export const textGray: string;
 export const linkColor: string;
 export const linkFocusColor: string;
 export const linkVisitedColor: string;
