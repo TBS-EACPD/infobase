@@ -6,11 +6,11 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils"
 import { PinnedFAQ } from "src/components/index";
 import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
 
-import common_lang from "./common_questions.yaml";
-import fin_lang from "./financial_questions.yaml";
-import ppl_lang from "./people_questions.yaml";
-import results_lang from "./results_questions.yaml";
-import tag_lang from "./tagging_questions.yaml";
+import common_faq from "src/common_text/faq/common_questions.yaml";
+import fin_faq from "src/common_text/faq/financial_questions.yaml";
+import ppl_faq from "src/common_text/faq/people_questions.yaml";
+import results_faq from "src/common_text/faq/results_questions.yaml";
+import tag_faq from "src/common_text/faq/tagging_questions.yaml";
 
 const common_panel_config = {
   is_static: true,
@@ -27,7 +27,7 @@ const curried_render = ({ q_a_keys }) =>
     ]);
 
     const question_answer_pairs = qa_pairs_maker(
-      [fin_lang, ppl_lang, results_lang, tag_lang, common_lang],
+      [fin_faq, ppl_faq, results_faq, tag_faq, common_faq],
       rendered_q_a_keys,
       subject
     );

@@ -2,10 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
-
-import fin_lang from "src/panels/panel_declarations/misc/key_concept_panels/financial_questions.yaml";
-
 import {
   PinnedFAQ,
   LeafSpinner,
@@ -16,15 +12,17 @@ import {
   CheckBox,
   Details,
 } from "src/components/index";
-import common_subapp_lang from "src/components/PinnedFAQ/common_faq_questions.yaml";
-
-import est_lang from "src/components/PinnedFAQ/estimates_comparison_questions.yaml";
+import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
+import est_faq from "src/components/PinnedFAQ/estimates_comparison_questions.yaml";
 
 import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
 
 import { businessConstants } from "src/models/businessConstants";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
+
+import common_faq from "src/common_text/faq/common_questions.yaml";
+import fin_faq from "src/common_text/faq/financial_questions.yaml";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
@@ -201,7 +199,7 @@ export default class EstimatesExplorerComponent extends React.Component {
     ];
 
     const question_answer_pairs = qa_pairs_maker(
-      [est_lang, fin_lang, common_lang, common_subapp_lang],
+      [est_faq, fin_faq, common_faq, common_subapp_faq],
       q_a_keys
     );
 
