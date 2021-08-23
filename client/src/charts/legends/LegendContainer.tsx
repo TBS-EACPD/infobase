@@ -2,7 +2,17 @@ import React from "react";
 
 import { tertiaryColor } from "src/core/color_defs";
 
-export const LegendContainer = ({ title, legend_footer, children }) => (
+export interface LegendContainerProps {
+  title: string;
+  legend_footer: React.ReactNode;
+  children: React.ReactNode;
+}
+
+export const LegendContainer = ({
+  title,
+  legend_footer,
+  children,
+}: LegendContainerProps) => (
   <div className="standard-legend-container">
     <div
       style={{ maxHeight: "400px", display: "flex", flexDirection: "column" }}
