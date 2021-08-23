@@ -2,9 +2,10 @@ import _ from "lodash";
 import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
-import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 
 import { PinnedFAQ } from "src/components/PinnedFAQ/PinnedFAQ";
+
+import common_questions from "src/common_text/faq/common_questions.yaml";
 
 import { covid_create_text_maker_component } from "./covid_text_provider";
 

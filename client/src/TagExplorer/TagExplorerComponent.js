@@ -2,10 +2,6 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
-
-import tag_lang from "src/panels/panel_declarations/misc/key_concept_panels/tagging_questions.yaml";
-
 import {
   LeafSpinner,
   KeyConceptList,
@@ -14,16 +10,19 @@ import {
   GlossaryIcon,
   PinnedFAQ,
 } from "src/components/index";
-import common_subapp_lang from "src/components/PinnedFAQ/common_faq_questions.yaml";
+import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
 
 import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
 
-import tag_exp_lang from "src/components/PinnedFAQ/tag_explorer_questions.yaml";
+import tag_exp_faq from "src/components/PinnedFAQ/tag_explorer_questions.yaml";
 
 import { GlossaryEntry } from "src/models/glossary";
 import { run_template } from "src/models/text";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
+
+import common_faq from "src/common_text/faq/common_questions.yaml";
+import tag_faq from "src/common_text/faq/tagging_questions.yaml";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
@@ -255,7 +254,7 @@ export default class TagExplorerComponent extends React.Component {
     ];
 
     const question_answer_pairs = qa_pairs_maker(
-      [tag_exp_lang, tag_lang, common_lang, common_subapp_lang],
+      [tag_exp_faq, tag_faq, common_faq, common_subapp_faq],
       q_a_keys
     );
 
