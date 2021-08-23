@@ -1136,6 +1136,13 @@ infographic_title:
   fr: |
     {{subject.name}}
 
+crso_title:
+  transform: [handlebars]
+  en: |
+    {{subject.crso.name}}
+  fr: |
+    {{subject.crso.name}}
+
 department_title:
   transform: [handlebars]
   en: |
