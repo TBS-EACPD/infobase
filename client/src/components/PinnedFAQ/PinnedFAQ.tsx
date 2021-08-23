@@ -6,19 +6,20 @@ import { secondaryColor } from "src/style_constants/colors.interop.scss";
 
 import { SomeThingsToKeepInMind } from "./faq_utils";
 
-type StandardFAQProps = {
-  faq_content: React.ReactNode[][]; // TODO: change to [React.ReactNode, React.ReactNode][] when faq_utils gets converted to ts
+type PinnedFAQProps = {
+  question_answer_pairs: React.ReactNode[][]; // TODO: change to [React.ReactNode, React.ReactNode][] when faq_utils gets converted to ts
   is_initially_expanded?: boolean;
   background_color?: string;
-} & typeof StandardFAQ.defaultProps;
+} & typeof PinnedFAQ.defaultProps;
 
-export class StandardFAQ extends React.Component<StandardFAQProps> {
+export class PinnedFAQ extends React.Component<PinnedFAQProps> {
   static defaultProps = {
     background_color: secondaryColor,
     is_initially_expanded: false,
   };
   render() {
-    const { faq_content, is_initially_expanded, background_color } = this.props;
+    const { question_answer_pairs, is_initially_expanded, background_color } =
+      this.props;
 
     return (
       <SomeThingsToKeepInMind
@@ -27,8 +28,8 @@ export class StandardFAQ extends React.Component<StandardFAQProps> {
       >
         <KeyConceptList
           question_answer_pairs={
-            // need type assertion here because faq_content_maker is js and can't return a tuple
-            faq_content as [React.ReactNode, React.ReactNode][]
+            // need type assertion here because question_answer_pairs_maker is js and can't return a tuple
+            question_answer_pairs as [React.ReactNode, React.ReactNode][]
           }
         />
       </SomeThingsToKeepInMind>

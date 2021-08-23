@@ -3,10 +3,11 @@ import _ from "lodash";
 import React from "react";
 
 import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+
 import fin_lang from "src/panels/panel_declarations/misc/key_concept_panels/financial_questions.yaml";
 
 import {
-  StandardFAQ,
+  PinnedFAQ,
   LeafSpinner,
   FootnoteList,
   Format,
@@ -15,11 +16,11 @@ import {
   CheckBox,
   Details,
 } from "src/components/index";
+import common_subapp_lang from "src/components/PinnedFAQ/common_faq_questions.yaml";
 
-import common_subapp_lang from "src/components/StandardFAQ/common_faq_questions.yaml";
+import est_lang from "src/components/PinnedFAQ/estimates_comparison_questions.yaml";
 
-import est_lang from "src/components/StandardFAQ/estimates_comparison_questions.yaml";
-import { faq_content_maker } from "src/components/StandardFAQ/faq_utils";
+import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
 
 import { businessConstants } from "src/models/businessConstants";
 
@@ -199,7 +200,7 @@ export default class EstimatesExplorerComponent extends React.Component {
       "different_org_names",
     ];
 
-    const faq_content = faq_content_maker(
+    const question_answer_pairs = qa_pairs_maker(
       [est_lang, fin_lang, common_lang, common_subapp_lang],
       q_a_keys
     );
@@ -218,8 +219,8 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text">
           <TM k="estimates_expl" />
         </div>
-        <StandardFAQ
-          faq_content={faq_content}
+        <PinnedFAQ
+          question_answer_pairs={question_answer_pairs}
           is_initially_expanded={true}
           background_color={primaryColor}
         />
