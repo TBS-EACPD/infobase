@@ -431,18 +431,18 @@ const Infographic = ({
     level === "program"
       ? [
           {
-            title: text_maker("department_title", { subject }),
+            title: subject.dept.name,
             department: true,
             id: subject.dept.id,
           },
           {
-            title: text_maker("crso_title", { subject }),
+            title: subject.crso.name,
             crso: true,
             id: subject.crso.id,
           },
-          { title: text_maker("infographic_title", { subject }) },
+          { title: subject.name },
         ]
-      : [{ title: text_maker("infographic_title", { subject }) }];
+      : [{ title: subject.name }];
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
     people: "ppl_infograph_desc_meta_attr",
