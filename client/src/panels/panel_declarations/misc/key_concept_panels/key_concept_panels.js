@@ -3,8 +3,8 @@ import React from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
-import { StandardFAQ } from "src/components/index";
-import { faq_content_maker } from "src/components/StandardFAQ/faq_utils";
+import { PinnedFAQ } from "src/components/index";
+import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
 
 import common_lang from "./common_questions.yaml";
 import fin_lang from "./financial_questions.yaml";
@@ -26,13 +26,13 @@ const curried_render = ({ q_a_keys }) =>
       subject.level === "crso" && "what_are_CR",
     ]);
 
-    const faq_content = faq_content_maker(
+    const question_answer_pairs = qa_pairs_maker(
       [fin_lang, ppl_lang, results_lang, tag_lang, common_lang],
       rendered_q_a_keys,
       subject
     );
 
-    return <StandardFAQ faq_content={faq_content} />;
+    return <PinnedFAQ question_answer_pairs={question_answer_pairs} />;
   };
 
 export const declare_financial_key_concepts_panel = () =>

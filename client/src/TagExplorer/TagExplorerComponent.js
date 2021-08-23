@@ -3,6 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import common_lang from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
+
 import tag_lang from "src/panels/panel_declarations/misc/key_concept_panels/tagging_questions.yaml";
 
 import {
@@ -11,12 +12,13 @@ import {
   TabbedControls,
   AlertBanner,
   GlossaryIcon,
-  StandardFAQ,
+  PinnedFAQ,
 } from "src/components/index";
+import common_subapp_lang from "src/components/PinnedFAQ/common_faq_questions.yaml";
 
-import common_subapp_lang from "src/components/StandardFAQ/common_faq_questions.yaml";
-import { faq_content_maker } from "src/components/StandardFAQ/faq_utils";
-import tag_exp_lang from "src/components/StandardFAQ/tag_explorer_questions.yaml";
+import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
+
+import tag_exp_lang from "src/components/PinnedFAQ/tag_explorer_questions.yaml";
 
 import { GlossaryEntry } from "src/models/glossary";
 import { run_template } from "src/models/text";
@@ -252,7 +254,7 @@ export default class TagExplorerComponent extends React.Component {
       "what_are_CR",
     ];
 
-    const faq_content = faq_content_maker(
+    const question_answer_pairs = qa_pairs_maker(
       [tag_exp_lang, tag_lang, common_lang, common_subapp_lang],
       q_a_keys
     );
@@ -260,8 +262,8 @@ export default class TagExplorerComponent extends React.Component {
     return (
       <div>
         <TM k="tag_nav_intro_text" el="div" />
-        <StandardFAQ
-          faq_content={faq_content}
+        <PinnedFAQ
+          question_answer_pairs={question_answer_pairs}
           background_color={primaryColor}
         />
         <div className="tabbed-content">

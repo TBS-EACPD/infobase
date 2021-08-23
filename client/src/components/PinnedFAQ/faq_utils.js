@@ -50,11 +50,7 @@ export const SomeThingsToKeepInMind = ({
   </MediaQuery>
 );
 
-export const faq_content_maker = (
-  text_bundles,
-  q_a_base_keys,
-  subject = Gov
-) => {
+export const qa_pairs_maker = (text_bundles, q_a_base_keys, subject = Gov) => {
   const { TM } = create_text_maker_component(text_bundles);
 
   return _.map(q_a_base_keys, (base_text_key) => [

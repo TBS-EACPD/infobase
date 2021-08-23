@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import common_questions from "src/panels/panel_declarations/misc/key_concept_panels/common_questions.yaml";
 
-import { StandardFAQ } from "src/components/StandardFAQ/StandardFAQ";
+import { PinnedFAQ } from "src/components/PinnedFAQ/PinnedFAQ";
 
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
@@ -27,8 +27,8 @@ export const declare_covid_key_concepts_panel = () =>
       source: false,
       calculate: _.constant(true),
       render: () => (
-        <StandardFAQ
-          faq_content={_.chain([
+        <PinnedFAQ
+          question_answer_pairs={_.chain([
             "up_to_date",
             "spent",
             "other_expenditure_reporting",
