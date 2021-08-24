@@ -12,10 +12,10 @@ import {
   CheckBox,
   Details,
 } from "src/components/index";
+import { create_text_maker_component } from "src/components/misc_util_components";
+
 import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
 import est_faq from "src/components/PinnedFAQ/estimates_comparison_questions.yaml";
-
-import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
 
 import { businessConstants } from "src/models/businessConstants";
 
@@ -190,18 +190,20 @@ export default class EstimatesExplorerComponent extends React.Component {
       col_click,
     };
 
-    const q_a_keys = [
-      "what_are_mains",
-      "what_are_supps",
-      "what_are_voted_auth",
-      "what_are_stat_auth",
-      "different_org_names",
+    const q_a_key_pairs = [
+      ["what_are_mains_q", "what_are_mains_a"],
+      ["what_are_supps_q", "what_are_supps_a"],
+      ["what_are_voted_auth_q", "what_are_voted_auth_a"],
+      ["what_are_stat_auth_q", "what_are_stat_auth_a"],
+      ["different_org_names_q", "different_org_names_a"],
     ];
 
-    const question_answer_pairs = qa_pairs_maker(
-      [est_faq, fin_faq, common_faq, common_subapp_faq],
-      q_a_keys
-    );
+    const { TM: FAQ_TM } = create_text_maker_component([
+      est_faq,
+      fin_faq,
+      common_faq,
+      common_subapp_faq,
+    ]);
 
     return (
       <div>
@@ -218,7 +220,8 @@ export default class EstimatesExplorerComponent extends React.Component {
           <TM k="estimates_expl" />
         </div>
         <PinnedFAQ
-          question_answer_pairs={question_answer_pairs}
+          q_a_key_pairs={q_a_key_pairs}
+          TM={FAQ_TM}
           is_initially_expanded={true}
           background_color={primaryColor}
         />
