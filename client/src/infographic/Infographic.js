@@ -430,11 +430,15 @@ const Infographic = ({
   const breadcrumb_program =
     level === "program"
       ? [
-          {
-            title: subject.dept.name,
-            department: true,
-            id: subject.dept.id,
-          },
+          <a
+            href={infograph_href_template({
+              level: "dept",
+              id: subject.dept.id,
+            })}
+            key={subject.dept.id}
+          >
+            {subject.dept.name}
+          </a>,
           {
             title: subject.crso.name,
             crso: true,
