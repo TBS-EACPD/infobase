@@ -7,8 +7,21 @@ export default async function ({ models }) {
 
   const igoc_rows = get_standard_csv_file_rows("igoc.csv");
 
-  const process_employee_csv = (csv_name) =>
-    _.chain(get_standard_csv_file_rows(csv_name))
+  const process_employee_csv = (csv_name) => {
+    const raw_data = get_standard_csv_file_rows(csv_name);
+    if (
+      (_.has(raw_data[0], "2016") &&
+        _.has(raw_data[0], "2017") &&
+        _.has(raw_data[0], "2018") &&
+        _.has(raw_data[0], "2019") &&
+        _.has(raw_data[0], "2020") &&
+        _.has(raw_data[0], "dept_code") &&
+        _.has(raw_data[0], "dimension") &&
+        _.has(raw_data[0], "avg_share")) === false
+    ) {
+      throw new Error();
+    }
+    return _.chain(raw_data)
       .reject(["dept_code", "ZGOC"])
       .map(({ dept_code, dimension, ...data_columns }) => ({
         dept_code,
@@ -33,37 +46,55 @@ export default async function ({ models }) {
           .value(),
       }))
       .value();
+  };
 
   const process_employee_data_sums = (csv_name) => {
     const raw_data = get_standard_csv_file_rows(csv_name);
+    if (
+      (_.has(raw_data[0], "2016") &&
+        _.has(raw_data[0], "2017") &&
+        _.has(raw_data[0], "2018") &&
+        _.has(raw_data[0], "2019") &&
+        _.has(raw_data[0], "2020") &&
+        _.has(raw_data[0], "dept_code") &&
+        _.has(raw_data[0], "dimension") &&
+        _.has(raw_data[0], "avg_share")) === false
+    ) {
+      throw new Error();
+    }
+
     const years = _.chain(raw_data[0])
       .keys()
       .reject((key) => {
-        return isNaN(key);
+        return _.isNaN(_.toNumber(key));
       })
       .value();
 
     return _.chain(raw_data)
       .groupBy("dimension")
-      .map((dimension_arr, dimension_group) => ({
+      .map((dimension_rows, dimension_group) => ({
         id: dimension_group,
         dimension: dimension_group,
         data: {
-          by_year: _.chain(years)
-            .map((year) => [
-              year,
-              _.sumBy(dimension_arr, (row) => _.toNumber(row[year])),
-            ])
-            .fromPairs()
-            .map((value, key) => ({
-              year: [key][0],
-              value: value,
-            }))
-            .value(),
+          by_year: _.reduce(
+            dimension_rows,
+            (sum, n) => {
+              _.map(n, (value, year) => {
+                if (_.isNaN(_.toNumber(year)) === false) {
+                  if (value != null) {
+                    sum[_.toNumber(year) - 2016].value += _.toNumber(value);
+                  }
+                }
+              });
+              return sum;
+            },
+            _.map(years, (year) => ({ year, value: 0 }))
+          ),
         },
       }))
       .value();
   };
+
   const employee_age_rows = process_employee_csv("org_employee_age_group.csv");
 
   const employee_ex_lvl_rows = process_employee_csv("org_employee_ex_lvl.csv");
@@ -139,7 +170,6 @@ export default async function ({ models }) {
   const find_by_org_id = (rows, org_id) => {
     const entry_by_org_id = _.find(rows, (row) => row.org_id === org_id);
     if (entry_by_org_id !== undefined) {
-      // make sure the org_id is in the rows
       return {
         org_id: org_id,
         data: entry_by_org_id.data,
@@ -160,7 +190,7 @@ export default async function ({ models }) {
       employee_avg_age: find_by_org_id(employee_avg_age_rows, org_id),
     }))
     .reject((row) => {
-      return row.employee_age_group === null;
+      return row.employee_age_group === null; // arbitrary prop to check if row's org_id is in the csv files
     })
     .value();
 
