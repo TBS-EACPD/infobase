@@ -1,33 +1,39 @@
 import { Story, Meta } from "@storybook/react";
 import React from "react";
 
-import common_faq from "src/common_text/faq/common_questions.yaml";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
 import { ComponentProps } from "src/types/util_types.d";
 
-import { qa_pairs_maker } from "./faq_utils";
 import { PinnedFAQ } from "./PinnedFAQ";
-
-import common_subapp_faq from "./common_faq_questions.yaml";
-import sample_faq from "./PinnedFAQ.yaml";
 
 export default {
   title: "PinnedFAQ",
   component: PinnedFAQ,
 } as Meta;
 
+const sample_faq = {
+  question1_q: { en: "Question 1?" },
+  question1_a: { en: "Answer 1" },
+  question2_q: { en: "Question 2?" },
+  question2_a: { en: "Answer 2" },
+  question3_q: { en: "Question 3?" },
+  question3_a: { en: "Answer 3" },
+};
+
 type PinnedFAQProps = ComponentProps<typeof PinnedFAQ>;
 
 const Template: Story<PinnedFAQProps> = (args) => <PinnedFAQ {...args} />;
 
-const q_a_keys = ["question1", "question2", "question3"];
-
-const question_answer_pairs = qa_pairs_maker(
-  { bundles: [sample_faq, common_faq, common_subapp_faq] },
-  q_a_keys
-);
+const q_a_key_pairs = [
+  ["question1_q", "question1_a"],
+  ["question2_q", "question2_a"],
+  ["question3_q", "question3_a"],
+];
+const { TM } = create_text_maker_component([sample_faq]);
 
 export const Basic = Template.bind({});
 Basic.args = {
-  question_answer_pairs: question_answer_pairs,
+  q_a_key_pairs: q_a_key_pairs,
+  TM: TM,
 };

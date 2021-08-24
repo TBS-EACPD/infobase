@@ -4,7 +4,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 
 import { PinnedFAQ } from "src/components/index";
-import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
 import common_faq from "src/common_text/faq/common_questions.yaml";
 import fin_faq from "src/common_text/faq/financial_questions.yaml";
@@ -19,20 +19,28 @@ const common_panel_config = {
   calculate: _.constant(true),
 };
 
-const curried_render = ({ q_a_keys }) =>
+const curried_render = ({ q_a_key_pairs }) =>
   function ({ calculations: { subject } }) {
-    let rendered_q_a_keys = _.compact([
-      ...q_a_keys,
-      subject.level === "crso" && "what_are_CR",
+    let rendered_q_a_key_pairs = _.compact([
+      ...q_a_key_pairs,
+      subject.level === "crso" && ["what_are_CR_q", "what_are_CR_a"],
     ]);
 
-    const question_answer_pairs = qa_pairs_maker(
-      [fin_faq, ppl_faq, results_faq, tag_faq, common_faq],
-      rendered_q_a_keys,
-      subject
-    );
+    const { TM } = create_text_maker_component([
+      fin_faq,
+      ppl_faq,
+      results_faq,
+      tag_faq,
+      common_faq,
+    ]);
 
-    return <PinnedFAQ question_answer_pairs={question_answer_pairs} />;
+    return (
+      <PinnedFAQ
+        q_a_key_pairs={rendered_q_a_key_pairs}
+        TM={TM}
+        subject={subject}
+      />
+    );
   };
 
 export const declare_financial_key_concepts_panel = () =>
@@ -42,15 +50,21 @@ export const declare_financial_key_concepts_panel = () =>
     panel_config_func: (level, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
-        q_a_keys: [
-          "what_is_fy",
-          "where_does_authority_come_from",
-          "what_are_mains",
-          "what_are_supps",
-          "what_are_exps",
-          "why_cant_i_see_prov_spend",
-          "what_spending_is_included",
-          level === "dept" && "different_org_names",
+        q_a_key_pairs: [
+          ["what_is_fy_q", "what_is_fy_a"],
+          [
+            "where_does_authority_come_from_q",
+            "where_does_authority_come_from_a",
+          ],
+          ["what_are_mains_q", "what_are_mains_a"],
+          ["what_are_supps_q", "what_are_supps_a"],
+          ["what_are_exps_q", "what_are_exps_a"],
+          ["why_cant_i_see_prov_spend_q", "why_cant_i_see_prov_spend_a"],
+          ["what_spending_is_included_q", "what_spending_is_included_a"],
+          level === "dept" && [
+            "different_org_names_q",
+            "different_org_names_a",
+          ],
         ],
       }),
     }),
@@ -63,13 +77,16 @@ export const declare_results_key_concepts_panel = () =>
     panel_config_func: (level, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
-        q_a_keys: [
-          "what_is_policy_on_results",
-          "what_is_diff_with_mrrs",
-          "what_is_a_drf",
-          "how_do_orgs_measure_perf",
-          "what_are_DPs_and_DRRs",
-          level === "dept" && "different_org_names",
+        q_a_key_pairs: [
+          ["what_is_policy_on_results_q", "what_is_policy_on_results_a"],
+          ["what_is_diff_with_mrrs_q", "what_is_diff_with_mrrs_a"],
+          ["what_is_a_drf_q", "what_is_a_drf_a"],
+          ["how_do_orgs_measure_perf_q", "how_do_orgs_measure_perf_a"],
+          ["what_are_DPs_and_DRRs_q", "what_are_DPs_and_DRRs_a"],
+          level === "dept" && [
+            "different_org_names_q",
+            "different_org_names_a",
+          ],
         ],
       }),
     }),
@@ -82,12 +99,15 @@ export const declare_people_key_concepts_panel = () =>
     panel_config_func: (level, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
-        q_a_keys: [
-          "who_is_fps",
-          "what_ppl_are_included",
-          "what_ppl_arent_included",
-          "where_is_data",
-          level === "dept" && "different_org_names",
+        q_a_key_pairs: [
+          ["who_is_fps_q", "who_is_fps_a"],
+          ["what_ppl_are_included_q", "what_ppl_are_included_a"],
+          ["what_ppl_arent_included_q", "what_ppl_arent_included_a"],
+          ["where_is_data_q", "where_is_data_a"],
+          level === "dept" && [
+            "different_org_names_q",
+            "different_org_names_a",
+          ],
         ],
       }),
     }),
@@ -100,12 +120,12 @@ export const declare_tagging_key_concepts_panel = () =>
     panel_config_func: (level, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
-        q_a_keys: [
-          "what_is_tagging",
-          "what_is_prog_tagging",
-          "what_tags_are_available",
-          "what_are_how_we_help",
-          "what_are_gocos",
+        q_a_key_pairs: [
+          ["what_is_tagging_q", "what_is_tagging_a"],
+          ["what_is_prog_tagging_q", "what_is_prog_tagging_a"],
+          ["what_tags_are_available_q", "what_tags_are_available_a"],
+          ["what_are_how_we_help_q", "what_are_how_we_help_a"],
+          ["what_are_gocos_q", "what_are_gocos_a"],
         ],
       }),
     }),

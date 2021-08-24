@@ -10,9 +10,9 @@ import {
   GlossaryIcon,
   PinnedFAQ,
 } from "src/components/index";
-import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
+import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { qa_pairs_maker } from "src/components/PinnedFAQ/faq_utils";
+import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
 
 import tag_exp_faq from "src/components/PinnedFAQ/tag_explorer_questions.yaml";
 
@@ -245,24 +245,27 @@ export default class TagExplorerComponent extends React.Component {
       </div>
     );
 
-    const q_a_keys = [
-      "what_is_tagging",
-      "what_is_prog_tagging",
-      "what_tags_are_available",
-      "what_are_how_we_help",
-      "what_are_CR",
+    const q_a_key_pairs = [
+      ["what_is_tagging_q", "what_is_tagging_a"],
+      ["what_is_prog_tagging_q", "what_is_prog_tagging_a"],
+      ["what_tags_are_available_q", "what_tags_are_available_a"],
+      ["what_are_how_we_help_q", "what_are_how_we_help_a"],
+      ["what_are_CR_q", "what_are_CR_a"],
     ];
 
-    const question_answer_pairs = qa_pairs_maker(
-      [tag_exp_faq, tag_faq, common_faq, common_subapp_faq],
-      q_a_keys
-    );
+    const { TM: FAQ_TM } = create_text_maker_component([
+      tag_exp_faq,
+      tag_faq,
+      common_faq,
+      common_subapp_faq,
+    ]);
 
     return (
       <div>
         <TM k="tag_nav_intro_text" el="div" />
         <PinnedFAQ
-          question_answer_pairs={question_answer_pairs}
+          q_a_key_pairs={q_a_key_pairs}
+          TM={FAQ_TM}
           background_color={primaryColor}
         />
         <div className="tabbed-content">
