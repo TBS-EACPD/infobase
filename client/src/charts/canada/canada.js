@@ -195,23 +195,13 @@ export class Canada extends React.Component {
               checkBoxProps: { isSolidBox: true },
             }}
           />
-          <div
-            className="standard-legend-container"
-            style={{
-              maxHeight: "400px",
-              width: "100%",
-              overflowY: "hidden",
-              marginTop: "10px",
-            }}
-          >
-            <CanadaGraphBarLegend
-              prov={prov}
-              data={data}
-              alt_totals_by_year={alt_totals_by_year}
-              years={years}
-              formatter={formatter}
-            />
-          </div>
+          <CanadaGraphBarLegend
+            prov={prov}
+            data={data}
+            alt_totals_by_year={alt_totals_by_year}
+            years={years}
+            formatter={formatter}
+          />
         </div>
         <div className="col-12 col-lg-9" style={{ position: "relative" }}>
           {years.length > 1 && (
