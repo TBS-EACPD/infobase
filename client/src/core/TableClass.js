@@ -103,6 +103,10 @@ class Mapper {
 }
 
 export class Table {
+  static store = make_static_store(
+    (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
+  );
+
   static default_props() {
     //this will merged over with table_defs props
     return {
@@ -497,8 +501,4 @@ export class Table {
   }
 }
 
-export const tableStore = make_static_store(
-  (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
-);
-
-assign_to_dev_helper_namespace({ tableStore });
+assign_to_dev_helper_namespace({ Table });

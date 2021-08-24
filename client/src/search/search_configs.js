@@ -6,7 +6,7 @@ import { Dept, Gov, Program, CRSO, Tag } from "src/models/subject_index";
 
 import { trivial_text_maker } from "src/models/text";
 
-import { tableStore } from "src/core/TableClass";
+import { Table } from "src/core/TableClass";
 
 import { textColor } from "src/style_constants/index";
 
@@ -259,7 +259,7 @@ const datasets = {
   header_function: () => trivial_text_maker("build_a_report"),
   name_function: (table) => table.title,
   get_data: () =>
-    _.chain(tableStore.get_all())
+    _.chain(Table.store.get_all())
       .reject("reference_table")
       .map((t) => ({
         name: t.name,

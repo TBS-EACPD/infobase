@@ -16,7 +16,7 @@ import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { tableStore } from "src/core/TableClass";
+import { Table } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
@@ -38,7 +38,7 @@ const SpendFormat = ({ amt }) => (
 const FteFormat = ({ amt }) => <Format type="big_int" content={amt} />;
 
 const get_estimates_source_link = (subject) => {
-  const table = tableStore.lookup("orgVoteStatEstimates");
+  const table = Table.store.lookup("orgVoteStatEstimates");
   return {
     html: table.name,
     href: rpb_link({
@@ -51,7 +51,7 @@ const get_estimates_source_link = (subject) => {
 };
 
 const get_historical_spending_source_link = (subject) => {
-  const table = tableStore.lookup("programSpending");
+  const table = Table.store.lookup("programSpending");
   const appropriate_subject = get_appropriate_rpb_subject(subject);
   return {
     html: table.name,
@@ -65,7 +65,7 @@ const get_historical_spending_source_link = (subject) => {
 };
 
 const get_historical_fte_source_link = (subject) => {
-  const table = tableStore.lookup("programFtes");
+  const table = Table.store.lookup("programFtes");
   const appropriate_subject = get_appropriate_rpb_subject(subject);
   return {
     html: table.name,
