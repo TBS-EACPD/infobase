@@ -13,7 +13,6 @@ import {
 import { create_text_maker_component } from "src/components/misc_util_components";
 
 import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
-
 import tag_exp_faq from "src/components/PinnedFAQ/tag_explorer_questions.yaml";
 
 import { GlossaryEntry } from "src/models/glossary";
@@ -337,13 +336,22 @@ export default class TagExplorerComponent extends React.Component {
                 <KeyConceptList
                   question_answer_pairs={_.map(
                     [
-                      "MtoM_tag_warning_reporting_level",
-                      "MtoM_tag_warning_resource_splitting",
-                      "MtoM_tag_warning_double_counting",
+                      [
+                        "MtoM_tag_warning_reporting_level_q",
+                        "MtoM_tag_warning_reporting_level_a",
+                      ],
+                      [
+                        "MtoM_tag_warning_resource_splitting_q",
+                        "MtoM_tag_warning_resource_splitting_a",
+                      ],
+                      [
+                        "MtoM_tag_warning_double_counting_q",
+                        "MtoM_tag_warning_double_counting_a",
+                      ],
                     ],
-                    (key) => [
-                      <TM key={key + "_q"} k={key + "_q"} />,
-                      <TM key={key + "_a"} k={key + "_a"} />,
+                    (pair) => [
+                      <TM key={pair[0]} k={pair[0]} />,
+                      <TM key={pair[1]} k={pair[1]} />,
                     ]
                   )}
                 />
