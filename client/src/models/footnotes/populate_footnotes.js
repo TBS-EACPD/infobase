@@ -1,7 +1,6 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
-import * as Subject from "src/models/subject_index";
 import { run_template } from "src/models/text";
 import { fiscal_year_to_year } from "src/models/years";
 

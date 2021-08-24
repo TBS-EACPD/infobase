@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
 import { Dept, Gov, Program, CRSO, Tag } from "src/models/subject_index";
-import { tagStore } from "src/models/tags";
+
 import { trivial_text_maker } from "src/models/text";
 
 import { tableStore } from "src/core/TableClass";
@@ -220,7 +220,7 @@ const gocos = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
   name_function: _.property("name"),
   get_data: () =>
-    _.chain(tagStore.get_all())
+    _.chain(Tag.store.get_all())
       .filter((tag) => tag.root.id === "GOCO")
       .filter("is_lowest_level_tag")
       .value(),
@@ -233,7 +233,7 @@ const how_we_help = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
   name_function: _.property("name"),
   get_data: () =>
-    _.chain(tagStore.get_all())
+    _.chain(Tag.store.get_all())
       .filter((tag) => tag.root.id === "HWH")
       .filter("is_lowest_level_tag")
       .value(),
@@ -246,7 +246,7 @@ const who_we_help = {
   header_function: () => `${Tag.plural} - ${Tag.tag_roots.WWH.name}`,
   name_function: _.property("name"),
   get_data: () =>
-    _.chain(tagStore.get_all())
+    _.chain(Tag.store.get_all())
       .filter((tag) => tag.root.id === "WWH")
       .filter("is_lowest_level_tag")
       .value(),

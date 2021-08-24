@@ -22,6 +22,10 @@ export class Tag extends BaseSubjectFactory(
   trivial_text_maker("tag"),
   trivial_text_maker("tag") + "s"
 ) {
+  static store = make_static_store((def: TagDef) => {
+    return new Tag(def);
+  });
+
   static get tag_roots() {
     return _.chain(tag_roots)
       .map((tag_root) => [tag_root.id, tag_root])
@@ -142,7 +146,3 @@ export class Tag extends BaseSubjectFactory(
       .value();
   }
 }
-
-export const tagStore = make_static_store((def: TagDef) => {
-  return new Tag(def);
-});

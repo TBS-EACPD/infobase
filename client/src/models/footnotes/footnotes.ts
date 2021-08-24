@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { get_subject_by_guid } from "src/models/get_subject_by_guid";
-import * as Subject from "src/models/subject_index";
+import { Subject } from "src/models/subject_index";
 import { make_static_store } from "src/models/utils/make_static_store";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";

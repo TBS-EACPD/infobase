@@ -15,6 +15,10 @@ class CovidMeasure extends BaseSubjectFactory(
   trivial_text_maker("covid_measure"),
   trivial_text_maker("covid_measures")
 ) {
+  static lookup = make_static_store(
+    (def: CovidMeasureDef) => new CovidMeasure(def)
+  );
+
   id: string;
   name: string;
   constructor(def: CovidMeasureDef) {
@@ -25,8 +29,4 @@ class CovidMeasure extends BaseSubjectFactory(
   }
 }
 
-const covidMeasureStore = make_static_store(
-  (def: CovidMeasureDef) => new CovidMeasure(def)
-);
-
-export { CovidMeasure, covidMeasureStore };
+export { CovidMeasure };

@@ -27,18 +27,20 @@ export {
   CovidMeasure,
 };
 
+export const Subject = {
+  Gov,
+  Dept,
+  CRSO,
+  Program,
+  InstForm,
+  Ministry,
+  Minister,
+  Tag,
+  Result,
+  Indicator,
+  CovidMeasure,
+};
+
 assign_to_dev_helper_namespace({
-  Subject: {
-    Gov,
-    Dept,
-    CRSO,
-    Program,
-    InstForm,
-    Ministry,
-    Minister,
-    Tag,
-    Result,
-    Indicator,
-    CovidMeasure,
-  },
+  Subject,
 });
