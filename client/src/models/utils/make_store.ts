@@ -2,7 +2,7 @@ import _ from "lodash";
 
 type StoreInstanceBase = { id: string; alt_ids?: string[] };
 
-class StaticStore<definition, instance extends StoreInstanceBase> {
+class Store<definition, instance extends StoreInstanceBase> {
   private store: Map<string, instance>;
   private register = (instance: instance) => {
     this.store.set(instance.id, instance);
@@ -30,12 +30,9 @@ class StaticStore<definition, instance extends StoreInstanceBase> {
   get_all = () => _.uniq(Array.from(this.store.values())); // SUBJECT_TS_TODO why's a unique needed here?
 }
 
-export const make_static_store = <
-  definition,
-  instance extends StoreInstanceBase
->(
+export const make_store = <definition, instance extends StoreInstanceBase>(
   create = _.identity as (def: definition) => instance
-): StaticStore<definition, instance> => {
+): Store<definition, instance> => {
   const store = new Map<string, instance>();
-  return new StaticStore(store, create);
+  return new Store(store, create);
 };
