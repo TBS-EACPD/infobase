@@ -102,7 +102,7 @@ export default {
           en: "Description",
           fr: "Description",
         },
-        group_by_vs_func: function (row) {
+        vote_vs_stat: function (row) {
           return row.votestattype === 999;
         },
       },
