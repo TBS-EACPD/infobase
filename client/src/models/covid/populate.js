@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { Gov } from "src/models/organizational_entities";
 
-import { covidMeasureStore } from "./CovidMeasure";
+import { CovidMeasure } from "./CovidMeasure";
 import {
   query_gov_years_with_covid_data,
   query_org_years_with_covid_data,
@@ -79,7 +79,7 @@ export const api_load_all_covid_measures = () => {
 
   return query_all_covid_measures().then((covid_measures) => {
     _.each(covid_measures, (covid_measure) =>
-      covidMeasureStore.create_and_register(covid_measure)
+      CovidMeasure.store.create_and_register(covid_measure)
     );
 
     _loaded_measures.loaded = true;

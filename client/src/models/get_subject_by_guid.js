@@ -1,14 +1,12 @@
 import _ from "lodash";
 
-import * as Subject from "./subject_index";
+import { Subject } from "src/models/subject_index";
 
-// SUBJECT_TS_TODO this pattern will break as subjects and stores are separated
-// (unless I decide to recombine them, in which case I'll need to work out typing here)
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+
+// SUBJECT_TS_TODO move this in to subject_index.ts once the subjects themselves all have their types sorted out
 
 export const get_subject_by_guid = (guid) => {
-  if (!_.isString(guid)) {
-    return null;
-  }
   const [type, id] = guid.split("_");
 
   const subject = _.chain(Subject)
@@ -16,5 +14,10 @@ export const get_subject_by_guid = (guid) => {
     .find(({ subject_type }) => subject_type === type)
     .value();
 
-  return subject?.lookup(id);
+  return subject && subject.store.lookup(id);
 };
+
+assign_to_dev_helper_namespace({
+  Subject,
+  get_subject_by_guid,
+});

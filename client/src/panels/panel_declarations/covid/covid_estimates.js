@@ -10,7 +10,6 @@ import {
   DisplayTable,
 } from "src/components/index";
 
-import { covidMeasureStore } from "src/models/covid/CovidMeasure";
 import {
   query_gov_covid_summaries,
   query_gov_covid_summary,
@@ -20,7 +19,7 @@ import {
 } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
-import { Dept } from "src/models/subject_index";
+import { Dept, CovidMeasure } from "src/models/subject_index";
 
 import { infobase_colors } from "src/core/color_schemes";
 
@@ -203,7 +202,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
   }
 );
 
-const get_measure_name = (id) => covidMeasureStore.lookup(id).name;
+const get_measure_name = (id) => CovidMeasure.store.lookup(id).name;
 const ByMeasureTab = wrap_with_vote_stat_controls(
   ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
@@ -278,7 +277,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
           args={{
             ...panel_args,
             largest_measure_name:
-              covidMeasureStore.lookup(largest_measure_id).name,
+              CovidMeasure.store.lookup(largest_measure_id).name,
             largest_measure_auth,
           }}
           className="medium-panel-text"
