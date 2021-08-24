@@ -427,26 +427,31 @@ const Infographic = ({
     : null;
 
   const title = text_maker("infographic_for", { subject });
-  const breadcrumb_program =
-    level === "program"
-      ? [
+  const breadcrumbs = (() => {
+    const get_breadcrumbs = (parent_subjects) =>
+      _.chain(parent_subjects)
+        .map((parent_subj) => (
           <a
-            href={infograph_href_template({
-              level: "dept",
-              id: subject.dept.id,
-            })}
-            key={subject.dept.id}
+            href={infograph_href_template(parent_subj, active_bubble_id)}
+            key={parent_subj.id}
           >
-            {subject.dept.name}
-          </a>,
-          {
-            title: subject.crso.name,
-            crso: true,
-            id: subject.crso.id,
-          },
-          { title: subject.name },
-        ]
-      : [{ title: subject.name }];
+            {parent_subj.name}
+          </a>
+        ))
+        .concat(subject.name)
+        .value();
+    switch (level) {
+      case "program": {
+        return get_breadcrumbs([subject.dept, subject.crso]);
+      }
+      case "crso": {
+        return get_breadcrumbs([subject.dept]);
+      }
+      default: {
+        return [subject.name];
+      }
+    }
+  })();
   const desc_key = {
     financial: "finance_infograph_desc_meta_attr",
     people: "ppl_infograph_desc_meta_attr",
@@ -455,7 +460,7 @@ const Infographic = ({
   return (
     <StandardRouteContainer
       title={title}
-      breadcrumbs={breadcrumb_program}
+      breadcrumbs={breadcrumbs}
       description={desc_key && text_maker(desc_key)}
       route_key={sub_app_name}
     >
