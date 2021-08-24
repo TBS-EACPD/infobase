@@ -102,21 +102,24 @@ class BreadCrumbs extends React.Component {
             <li className="infobase-home-breadcrumb-link">
               {_.isString(display) ? ( //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
                 <span dangerouslySetInnerHTML={{ __html: display }} />
-              ) : display.department ? (
-                <a
-                  href={`#orgs/dept/${display.id}/infograph/results`}
-                  className="nav-item"
-                >
-                  {display.title}
-                </a>
-              ) : display.crso ? (
-                <a
-                  href={`#orgs/crso/${display.id}/infograph/results`}
-                  className="nav-item"
-                >
-                  {display.title}
-                </a>
               ) : (
+                // ) : display.department ? (
+                //   <a
+                //     href={infograph_href_template({
+                //       level: "dept",
+                //       id: display.id,
+                //     })}
+                //     className="nav-item"
+                //   >
+                //     {display.title}
+                //   </a>
+                // ) : display.crso ? (
+                //   <a
+                //     href={`#orgs/crso/${display.id}/infograph/intro`}
+                //     className="nav-item"
+                //   >
+                //     {display.title}
+                //   </a>
                 display.title
               )}
             </li>
