@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tertiaryColor } from "src/core/color_defs";
+import { tertiaryColor } from "src/style_constants/index";
 
 export interface LegendContainerProps {
   title: string;
