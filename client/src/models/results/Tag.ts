@@ -4,7 +4,7 @@ import { Dept } from "src/models/organizational_entities";
 import { trivial_text_maker } from "src/models/text";
 
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
-import { make_static_store } from "src/models/utils/make_static_store";
+import { make_store } from "src/models/utils/make_store";
 
 type TagDef = {
   id: string;
@@ -21,7 +21,7 @@ export class Tag extends BaseSubjectFactory(
   trivial_text_maker("tag"),
   trivial_text_maker("tag") + "s"
 ) {
-  static store = make_static_store((def: TagDef) => {
+  static store = make_store((def: TagDef) => {
     return new Tag(def);
   });
 

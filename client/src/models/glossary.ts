@@ -3,7 +3,7 @@ import _ from "lodash";
 import { sanitized_marked } from "src/general_utils";
 
 import { trivial_text_maker } from "./text";
-import { make_static_store } from "./utils/make_static_store";
+import { make_store } from "./utils/make_store";
 
 type GlossaryEntryDef = {
   id: string;
@@ -12,7 +12,7 @@ type GlossaryEntryDef = {
   translation: string;
 };
 
-const glossaryEntryStore = make_static_store((def: GlossaryEntryDef) => ({
+const glossaryEntryStore = make_store((def: GlossaryEntryDef) => ({
   ...def,
   get_compiled_definition: () => compiled_definitions(def.raw_definition),
 }));

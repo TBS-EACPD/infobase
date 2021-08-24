@@ -9,7 +9,7 @@ import {
   run_template,
   create_text_maker,
 } from "src/models/text";
-import { make_static_store } from "src/models/utils/make_static_store";
+import { make_store } from "src/models/utils/make_store";
 
 import { make_unique_func, make_unique } from "src/general_utils";
 import { sources as all_sources } from "src/metadata/data_sources";
@@ -103,7 +103,7 @@ class Mapper {
 }
 
 export class Table {
-  static store = make_static_store(
+  static store = make_store(
     (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
   );
 

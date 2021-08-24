@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { get_subject_by_guid } from "src/models/get_subject_by_guid";
 import { Subject } from "src/models/subject_index";
-import { make_static_store } from "src/models/utils/make_static_store";
+import { make_store } from "src/models/utils/make_store";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
@@ -25,7 +25,7 @@ export const create_footnote = (def: FootNoteDef) => ({
       : get_subject_by_guid(`${def.subject_class}_${def.subject_id}`),
 });
 
-export const footNoteStore = make_static_store(create_footnote);
+export const footNoteStore = make_store(create_footnote);
 
 export const get_footnotes_by_subject_and_topic = (
   subject: { id: string; subject_type: string },

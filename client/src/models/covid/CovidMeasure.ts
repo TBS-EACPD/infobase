@@ -3,7 +3,7 @@ import _ from "lodash";
 import { trivial_text_maker } from "src/models/text";
 
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
-import { make_static_store } from "src/models/utils/make_static_store";
+import { make_store } from "src/models/utils/make_store";
 
 type CovidMeasureDef = {
   id: string;
@@ -15,9 +15,7 @@ class CovidMeasure extends BaseSubjectFactory(
   trivial_text_maker("covid_measure"),
   trivial_text_maker("covid_measures")
 ) {
-  static lookup = make_static_store(
-    (def: CovidMeasureDef) => new CovidMeasure(def)
-  );
+  static lookup = make_store((def: CovidMeasureDef) => new CovidMeasure(def));
 
   id: string;
   name: string;
