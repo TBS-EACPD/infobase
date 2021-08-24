@@ -56,7 +56,7 @@ export default {
           fr: "Type",
         },
         can_group_by: true,
-        group_by_vs_func: function (row) {
+        vote_vs_stat: function (row) {
           return _.includes(row.tp, "(S) ");
         },
       },

@@ -253,36 +253,68 @@ export class Table {
     return run_template(this.title_def[lang]);
   }
 
-  get vote_stat_col() {
+  // get vote_stat_col() {
+  //   return _.chain(this._cols)
+  //     .flatMap((col) => (_.has(col, "children") ? col.children : col))
+  //     .filter("group_by_vs_func")
+  //     .head()
+  //     .value();
+  // }
+  get special_dimensions() {
+    return ["vote_vs_stat"];
+  }
+  get special_dim() {
     return _.chain(this._cols)
       .flatMap((col) => (_.has(col, "children") ? col.children : col))
-      .filter("group_by_vs_func")
+      .map((col) =>
+        _.chain(col).keys().intersection(this.special_dimensions).head().value()
+      )
+      .compact()
       .head()
       .value();
   }
+
+  get_special_row_name = (row, dimension) => {
+    this.set_special_group_by(dimension);
+
+    switch (dimension) {
+      case "vote_vs_stat": {
+        const voted = text_maker("voted");
+        const stat = text_maker("stat");
+        return this[dimension](row) ? stat : voted;
+      }
+    }
+  };
+
+  set_special_group_by = (dimension) => {
+    if (!_.includes(this.special_dimensions, dimension)) {
+      throw new Error("No special grouping for this dimension");
+    }
+    const special_col = _.chain(this._cols)
+      .flatMap((col) => (_.has(col, "children") ? col.children : col))
+      .filter(dimension)
+      .head()
+      .value();
+    this[this.special_dim] = special_col[dimension];
+  };
 
   get_dimensions() {
     const columns = _.flatMap(this._cols, (col) =>
       _.has(col, "children") ? col.children : col
     );
 
-    const can_group_vs = _.some(columns, (col) =>
-      _.has(col, "group_by_vs_func")
-    );
-
     this.dimensions = _.chain(columns)
       .filter("can_group_by")
       .map("nick")
-      .concat(can_group_vs ? "vote_vs_stat" : "")
+      .concat(this.special_dim)
       .compact()
       .value();
-
     this.dimensions.unshift("all");
   }
 
   get_group_by_func() {
     this.group_by_func = (data, dimension) => {
-      if (dimension !== "vote_vs_stat") {
+      if (!_.includes(this.special_dimensions, dimension)) {
         if (
           !_.pickBy(
             this._cols,
@@ -294,56 +326,42 @@ export class Table {
         return _.groupBy(data, dimension);
       }
 
-      return this.vote_stat_col
-        ? _.groupBy(data, (row) => this.vote_stat_col.group_by_vs_func(row))
-        : new Error("Can not group by Vote / Statutory item");
+      this.set_special_group_by(dimension);
+
+      return _.groupBy(data, (row) => this[dimension](row));
     };
   }
 
   get_dimension_column_values_func() {
     this.dimension_column_values_func = (row, dimension) => {
-      if (dimension !== "vote_vs_stat") {
+      if (!_.includes(this.special_dimensions, dimension)) {
         return [dimension, row[dimension]];
       }
 
-      if (!this.vote_stat_col) {
-        throw new Error("Can not group by Vote / Statutory item");
-      }
-
-      const voted = text_maker("voted");
-      const stat = text_maker("stat");
       const col_name = _.chain(this._cols)
         .flatMap((col) => (_.has(col, "children") ? col.children : col))
-        .filter("group_by_vs_func")
+        .filter(dimension)
         .map("nick")
+        .head()
         .value();
 
-      return [
-        col_name,
-        this.vote_stat_col.group_by_vs_func(row) ? stat : voted,
-      ];
+      return [col_name, this.get_special_row_name(row, dimension)];
     };
   }
 
   // TODO: come up with a shorter, better name for this sum_col_by_grouped_data
   get_sum_col_by_grouped_data_func() {
     this.sum_col_by_grouped_data = function (col, dimension, subject = Gov) {
-      const { data } = this;
-      const dim_vote_stat = dimension === "vote_vs_stat";
+      const { data, group_by_func, dimension_column_values_func } = this;
 
       return _.chain(data)
         .filter((row) => filter_row_by_subj(row, subject))
-        .groupBy(
-          dim_vote_stat
-            ? (row) => this.vote_stat_col.group_by_vs_func(row)
-            : dimension
-        )
+        .thru((the_data) => group_by_func(the_data, dimension))
         .map((data_group) => {
-          const dim_name = dim_vote_stat
-            ? this.vote_stat_col.group_by_vs_func(data_group[0])
-              ? text_maker("stat")
-              : text_maker("voted")
-            : data_group[0][dimension];
+          const dim_name = dimension_column_values_func(
+            data_group[0],
+            dimension
+          )[1];
           const summed_col = _.isArray(col)
             ? _.chain(col)
                 .map((c) => _.sumBy(data_group, c))

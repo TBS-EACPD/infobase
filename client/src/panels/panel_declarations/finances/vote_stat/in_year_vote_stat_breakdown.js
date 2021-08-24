@@ -155,16 +155,14 @@ const planned_vote_or_stat_render = (vs) =>
 const planned_vote_or_stat_calculate = (vs) =>
   function (subject) {
     const { orgVoteStatEstimates } = this.tables;
-    const { group_by_func, vote_stat_col } = orgVoteStatEstimates;
+    const { group_by_func, get_special_row_name } = orgVoteStatEstimates;
 
     const text = text_maker(vs);
 
     const all_rows = _.chain(orgVoteStatEstimates.data)
       .thru((data) => group_by_func(data, "vote_vs_stat"))
       .map((data_group) => [
-        vote_stat_col.group_by_vs_func(data_group[0])
-          ? text_maker("stat")
-          : text_maker("voted"),
+        get_special_row_name(data_group[0], "vote_vs_stat"),
         data_group,
       ])
       .fromPairs()
