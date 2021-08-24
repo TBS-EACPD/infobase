@@ -1,5 +1,14 @@
 import _ from "lodash";
 
+/* Small pain points:
+  - would probably be nicer as just an abstract class, but can't mix abstract and static and we mainly want to enforce static properties
+  - can't cleanly enforce that the child class declares a static store property.
+    - using abstract is out
+    - can't pass a store in to the factory because it creates an error about having circular reference to the child class from the parent class
+    - something with a getter that throws unless overwritten by the child might work, but it creates a very awkward typing situtation
+
+  For now, subjects that need stores (probably all) need to remember to declare `static store = make_store(...)` themselves
+*/
 export const BaseSubjectFactory = (
   subject_type: string,
   subject_singular: string,
