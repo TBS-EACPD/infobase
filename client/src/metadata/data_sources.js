@@ -8,7 +8,7 @@ import { glossaryEntryStore } from "src/models/glossary";
 import { lang, services_feature_flag } from "src/core/injected_build_constants";
 
 //circular dependency hack..
-import { tableStore } from "src/core/TableClass";
+import { Table } from "src/core/TableClass";
 
 import { rpb_link } from "src/rpb/rpb_link";
 
@@ -35,7 +35,7 @@ function desc_from_glossary_keys(...glossary_keys) {
 }
 
 function tables_from_source_key(source_key) {
-  return _.filter(tableStore.get_all(), (table) =>
+  return _.filter(Table.store.get_all(), (table) =>
     _.includes(table.source, source_key)
   );
 }

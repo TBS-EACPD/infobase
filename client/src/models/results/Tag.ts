@@ -1,11 +1,10 @@
 import _ from "lodash";
 
+import { Dept } from "src/models/organizational_entities";
 import { trivial_text_maker } from "src/models/text";
 
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
 import { make_static_store } from "src/models/utils/make_static_store";
-
-import { Dept } from "./organizational_entities";
 
 type TagDef = {
   id: string;

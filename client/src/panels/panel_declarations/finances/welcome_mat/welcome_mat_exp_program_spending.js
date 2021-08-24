@@ -8,7 +8,7 @@ import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { tableStore } from "src/core/TableClass";
+import { Table } from "src/core/TableClass";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { tertiaryColor } from "src/style_constants/index";
@@ -17,8 +17,8 @@ const { std_years, planning_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 
 const calculate = (type, subject) => {
-  const orgVoteStatPa = tableStore.lookup("orgVoteStatPa");
-  const programSpending = tableStore.lookup("programSpending");
+  const orgVoteStatPa = Table.store.lookup("orgVoteStatPa");
+  const programSpending = Table.store.lookup("programSpending");
   const query_subject = subject.is("gov") ? undefined : subject;
   const qExp = subject.is("dept")
     ? type != "planned"

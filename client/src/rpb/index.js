@@ -21,7 +21,7 @@ import {
   StandardRouteContainer,
   LangSynchronizer,
 } from "src/core/NavComponents";
-import { tableStore } from "src/core/TableClass";
+import { Table } from "src/core/TableClass";
 
 //specific view stuff
 
@@ -50,7 +50,7 @@ function get_default_dimension_for_table(table) {
 
 //returns a the proposed new slice of state that will change when a new table is selected
 function get_default_state_for_new_table(table_id) {
-  const table = tableStore.lookup(table_id);
+  const table = Table.store.lookup(table_id);
   const columns = _.map(get_all_data_columns_for_table(table), "nick");
   return {
     table: table_id,
@@ -179,7 +179,7 @@ class RPB extends React.Component {
   render() {
     const { broken_url } = this.props;
 
-    const table = this.state.table && tableStore.lookup(this.state.table);
+    const table = this.state.table && Table.store.lookup(this.state.table);
 
     const subject =
       this.state.subject && get_subject_by_guid(this.state.subject);
@@ -310,7 +310,7 @@ class RPB extends React.Component {
               {is_a11y_mode ? (
                 <AccessibleTablePicker
                   onSelect={(id) => this.pickTable(id)}
-                  tables={_.reject(tableStore.get_all(), "reference_table")}
+                  tables={_.reject(Table.store.get_all(), "reference_table")}
                   selected={_.get(table, "id")}
                   broken_url={broken_url}
                 />

@@ -11,7 +11,7 @@ import {
   Minister,
 } from "./organizational_entities";
 import { Result, Indicator } from "./results";
-import { Tag } from "./tags";
+import { Tag } from "./results/Tag";
 
 export {
   Gov,
