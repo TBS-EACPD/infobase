@@ -226,7 +226,7 @@ export class Table {
 
     this.get_dimensions();
     this.get_group_by_func();
-    this.get_dimension_column_values_func();
+    this.get_dimension_col_values_func();
   }
   get links() {
     return this.link
@@ -253,14 +253,8 @@ export class Table {
     return run_template(this.title_def[lang]);
   }
 
-  // get vote_stat_col() {
-  //   return _.chain(this._cols)
-  //     .flatMap((col) => (_.has(col, "children") ? col.children : col))
-  //     .filter("group_by_vs_func")
-  //     .head()
-  //     .value();
-  // }
   get special_dimensions() {
+    // dimensions that do not use the default grouping
     return ["vote_vs_stat"];
   }
   get special_dim() {
@@ -274,9 +268,9 @@ export class Table {
       .value();
   }
 
-  get_special_row_name = (row, dimension) => {
+  get_special_dim_value = (row, dimension) => {
     this.set_special_group_by(dimension);
-
+    // need different case for each special dimension
     switch (dimension) {
       case "vote_vs_stat": {
         const voted = text_maker("voted");
@@ -299,11 +293,8 @@ export class Table {
   };
 
   get_dimensions() {
-    const columns = _.flatMap(this._cols, (col) =>
-      _.has(col, "children") ? col.children : col
-    );
-
-    this.dimensions = _.chain(columns)
+    this.dimensions = _.chain(this._cols)
+      .flatMap((col) => (_.has(col, "children") ? col.children : col))
       .filter("can_group_by")
       .map("nick")
       .concat(this.special_dim)
@@ -327,13 +318,12 @@ export class Table {
       }
 
       this.set_special_group_by(dimension);
-
       return _.groupBy(data, (row) => this[dimension](row));
     };
   }
 
-  get_dimension_column_values_func() {
-    this.dimension_column_values_func = (row, dimension) => {
+  get_dimension_col_values_func() {
+    this.dimension_col_values_func = (row, dimension) => {
       if (!_.includes(this.special_dimensions, dimension)) {
         return [dimension, row[dimension]];
       }
@@ -345,20 +335,20 @@ export class Table {
         .head()
         .value();
 
-      return [col_name, this.get_special_row_name(row, dimension)];
+      return [col_name, this.get_special_dim_value(row, dimension)];
     };
   }
 
   // TODO: come up with a shorter, better name for this sum_col_by_grouped_data
   get_sum_col_by_grouped_data_func() {
     this.sum_col_by_grouped_data = function (col, dimension, subject = Gov) {
-      const { data, group_by_func, dimension_column_values_func } = this;
+      const { data, group_by_func, dimension_col_values_func } = this;
 
       return _.chain(data)
         .filter((row) => filter_row_by_subj(row, subject))
         .thru((the_data) => group_by_func(the_data, dimension))
         .map((data_group) => {
-          const dim_name = dimension_column_values_func(
+          const dim_name = dimension_col_values_func(
             data_group[0],
             dimension
           )[1];

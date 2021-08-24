@@ -193,7 +193,7 @@ class RPB extends React.Component {
         table.tags.concat(["MACHINERY"])
       );
 
-    const { dimensions, group_by_func, dimension_column_values_func } = {
+    const { dimensions, group_by_func, dimension_col_values_func } = {
       ...table,
     };
 
@@ -225,7 +225,7 @@ class RPB extends React.Component {
               return _.chain(all_data_columns)
                 .filter((col) => !_.includes(col.type, "percentage"))
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
-                .concat([dimension_column_values_func(dim_data[0], dimension)])
+                .concat([dimension_col_values_func(dim_data[0], dimension)])
                 .fromPairs()
                 .value();
             })
