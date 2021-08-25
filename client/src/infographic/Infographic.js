@@ -3,13 +3,14 @@ import React from "react";
 import { Redirect } from "react-router";
 
 import { get_panels_for_subject } from "src/panels/get_panels_for_subject/index";
-import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/panels/panel_declarations/common_panel_components";
+
 import { PanelRegistry } from "src/panels/PanelRegistry";
 import { PanelRenderer } from "src/panels/PanelRenderer";
 
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
+import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/components/PinnedFAQ/PinnedFAQ";
 
 import { Subject } from "src/models/subject";
 
