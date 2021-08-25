@@ -56,6 +56,7 @@ class GranularView extends React.Component {
 
   get_table_content() {
     const {
+      table,
       columns: data_columns,
       flat_data,
       sorted_key_columns,
@@ -73,8 +74,8 @@ class GranularView extends React.Component {
 
     const dim_all_or_dept = dimension === "all" || dimension === "dept";
 
-    function dim_vote_stat(dim) {
-      return dim === "vote_vs_stat" || dim === "vote_stat";
+    function is_special_dim(dim) {
+      return _.includes(table.special_dimensions, dim);
     }
 
     const dept_and_legal_cols = dim_all_or_dept
@@ -116,8 +117,8 @@ class GranularView extends React.Component {
               index: idx + 2,
               header:
                 (nick === "desc" || nick === "type") &&
-                dimension === "vote_vs_stat"
-                  ? text_maker("votestat_item")
+                is_special_dim(dimension)
+                  ? text_maker(dimension)
                   : fully_qualified_name,
               is_searchable:
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
@@ -168,8 +169,8 @@ class GranularView extends React.Component {
                 className={"normal-radio-btn-label"}
                 key={`${dim}-radio-btn-label`}
               >
-                {dim === "all" || dim_vote_stat(dim)
-                  ? text_maker(dim_vote_stat(dim) ? "votestat_item" : dim)
+                {dim === "all" || is_special_dim(dim)
+                  ? text_maker(dim)
                   : dim === "dept"
                   ? text_maker("org")
                   : _.find(sorted_key_columns, ["nick", dim]).header[lang] ||
