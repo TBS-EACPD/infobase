@@ -97,17 +97,29 @@ class PlannedProgramResources extends React.Component {
     super(props);
     const program_labels = _.map(props.programs, "label");
     this.state = {
+      window_width_last_updated_at: window.innerWidth,
       active_programs: is_a11y_mode
         ? program_labels
         : _.take(program_labels, 3),
     };
+    window.addEventListener(
+      "resize",
+      _.debounce(() => {
+        if (this.should_graphs_update()) {
+          this.setState({ window_width_last_updated_at: window.innerWidth });
+        }
+      }, 250)
+    );
+  }
+  should_graphs_update() {
+    return window.innerWidth !== this.state.window_width_last_updated_at;
   }
   render() {
     const { text, programs, colors, is_fte, years_with_gap_year, gap_year } =
       this.props;
     const ticks = _.map(years_with_gap_year, run_template);
 
-    const { active_programs } = this.state;
+    const { active_programs, window_width_last_updated_at } = this.state;
 
     const graph_data = _.chain(programs)
       .filter(({ label }) => _.includes(active_programs, label))
@@ -124,9 +136,6 @@ class PlannedProgramResources extends React.Component {
         .fromPairs()
         .value(),
     }));
-    console.log(gap_year);
-    console.log(Object.keys(graph_data));
-    console.log(data_by_year);
 
     return (
       <div>
@@ -158,6 +167,7 @@ class PlannedProgramResources extends React.Component {
           <div className="col-12 col-lg-8">
             <WrappedNivoBar
               data={data_by_year}
+              padding={0.3}
               keys={Object.keys(graph_data)}
               indexBy="year"
               colors={(d) => colors(d.id)}
@@ -170,7 +180,9 @@ class PlannedProgramResources extends React.Component {
                       value: gap_year,
                       lineStyle: {
                         stroke: tertiaryColor,
-                        transform: "translate(27px, 0px)", // TODO
+                        transform: `translate(${
+                          0.3 * window_width_last_updated_at * 0.08 // Prob need media query to better handle
+                        }px, 0px)`,
                         strokeWidth: 2,
                         strokeDasharray: "3, 3",
                       },
