@@ -49,10 +49,13 @@ export class PinnedFAQ extends React.Component {
                     }}
                   >
                     <KeyConceptList
-                      question_answer_pairs={_.map(q_a_key_pairs, (pair) => [
-                        <TM key={"q"} k={pair[0]} args={{ subject }} />,
-                        <TM key={"a"} k={pair[1]} args={{ subject }} />,
-                      ])}
+                      question_answer_pairs={_.map(
+                        q_a_key_pairs,
+                        ([q_key, a_key]) => [
+                          <TM key={"q"} k={q_key} args={{ subject }} />,
+                          <TM key={"a"} k={a_key} args={{ subject }} />,
+                        ]
+                      )}
                     />
                   </div>
                 </AutoAccordion>

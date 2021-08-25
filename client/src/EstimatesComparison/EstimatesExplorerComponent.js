@@ -14,9 +14,6 @@ import {
 } from "src/components/index";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
-import est_faq from "src/components/PinnedFAQ/estimates_comparison_questions.yaml";
-
 import { businessConstants } from "src/models/businessConstants";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
@@ -36,6 +33,8 @@ import {
   current_doc_is_mains,
   current_sups_letter,
 } from "./utils";
+
+import est_faq from "./estimates_comparison_questions.yaml";
 
 const { estimates_docs } = businessConstants;
 
@@ -202,7 +201,6 @@ export default class EstimatesExplorerComponent extends React.Component {
       est_faq,
       fin_faq,
       common_faq,
-      common_subapp_faq,
     ]);
 
     return (
