@@ -12,9 +12,6 @@ import {
 } from "src/components/index";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import common_subapp_faq from "src/components/PinnedFAQ/common_faq_questions.yaml";
-import tag_exp_faq from "src/components/PinnedFAQ/tag_explorer_questions.yaml";
-
 import { GlossaryEntry } from "src/models/glossary";
 import { run_template } from "src/models/text";
 
@@ -37,6 +34,8 @@ import {
   actual_year,
   year_to_route_arg_map,
 } from "./utils";
+
+import tag_exp_faq from "./tag_explorer_questions.yaml";
 
 const children_grouper = (node, children) => {
   if (node.root) {
@@ -256,7 +255,6 @@ export default class TagExplorerComponent extends React.Component {
       tag_exp_faq,
       tag_faq,
       common_faq,
-      common_subapp_faq,
     ]);
 
     return (
@@ -349,9 +347,9 @@ export default class TagExplorerComponent extends React.Component {
                         "MtoM_tag_warning_double_counting_a",
                       ],
                     ],
-                    (pair) => [
-                      <TM key={pair[0]} k={pair[0]} />,
-                      <TM key={pair[1]} k={pair[1]} />,
+                    ([q_key, a_key]) => [
+                      <TM key={q_key} k={q_key} />,
+                      <TM key={a_key} k={a_key} />,
                     ]
                   )}
                 />
