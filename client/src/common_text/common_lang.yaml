@@ -647,7 +647,6 @@ wwh_tag:
   en: Who we Help
   fr: Qui aidons-nous
 
-
 departmental_results:
   en: Departmental Results
   fr: Résultat ministériel
@@ -1174,6 +1173,13 @@ arrow:
 copy:
   en: Copy
   fr: Copier
+
+##################################
+# special table dimensions
+##################################
+vote_vs_stat:
+  en: Voted / Statutory
+  fr: Crédit / poste législatif
 
 ## warning for missing data prior to PAs
 gap_year_warning:
