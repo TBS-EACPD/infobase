@@ -35,8 +35,6 @@ import {
   year_to_route_arg_map,
 } from "./utils";
 
-import tag_exp_faq from "./tag_explorer_questions.yaml";
-
 const children_grouper = (node, children) => {
   if (node.root) {
     return [{ node_group: children }];
@@ -251,11 +249,7 @@ export default class TagExplorerComponent extends React.Component {
       ["what_are_CR_q", "what_are_CR_a"],
     ];
 
-    const { TM: FAQ_TM } = create_text_maker_component([
-      tag_exp_faq,
-      tag_faq,
-      common_faq,
-    ]);
+    const { TM: FAQ_TM } = create_text_maker_component([tag_faq, common_faq]);
 
     return (
       <div>

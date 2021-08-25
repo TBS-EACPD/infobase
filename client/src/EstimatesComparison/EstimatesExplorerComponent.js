@@ -34,8 +34,6 @@ import {
   current_sups_letter,
 } from "./utils";
 
-import est_faq from "./estimates_comparison_questions.yaml";
-
 const { estimates_docs } = businessConstants;
 
 const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
@@ -197,11 +195,7 @@ export default class EstimatesExplorerComponent extends React.Component {
       ["different_org_names_q", "different_org_names_a"],
     ];
 
-    const { TM: FAQ_TM } = create_text_maker_component([
-      est_faq,
-      fin_faq,
-      common_faq,
-    ]);
+    const { TM: FAQ_TM } = create_text_maker_component([fin_faq, common_faq]);
 
     return (
       <div>
