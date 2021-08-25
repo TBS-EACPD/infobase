@@ -79,7 +79,7 @@ class BreadCrumbs extends React.Component {
     const content = (
       <ol className="breadcrumb">
         <li className="infobase-home-breadcrumb-link">
-          <a href="#start" className="nav-item">
+          <a href="#start">
             <IconHome
               title={trivial_text_maker("title")}
               inline={true}
@@ -90,7 +90,7 @@ class BreadCrumbs extends React.Component {
         </li>
         {_.map(crumbs, (display, ix) => (
           <Fragment key={ix}>
-            <li
+            {/* <li
               style={{
                 position: "relative",
                 padding: "0px 15px",
@@ -98,8 +98,9 @@ class BreadCrumbs extends React.Component {
               aria-hidden="true"
             >
               {">"}
-            </li>
+            </li> */}
             <li className="infobase-home-breadcrumb-link">
+              <span dangerouslySetInnerHTML={{ __html: " > " }} />
               {_.isString(display) ? ( //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
                 <span dangerouslySetInnerHTML={{ __html: display }} />
               ) : (
