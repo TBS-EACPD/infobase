@@ -12,7 +12,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import { create_text_maker_component } from "src/components/index";
 
 import { run_template } from "src/models/text";
-import { year_templates } from "src/models/years";
+import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -22,10 +22,12 @@ import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import { toggle_list } from "src/general_utils";
+import { tertiaryColor } from "src/style_constants/index";
 
 import text from "./crso_by_prog.yaml";
 
-const { planning_years } = year_templates;
+const { planning_years, std_years } = year_templates;
+
 const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type =
@@ -39,7 +41,14 @@ const render_resource_type =
         : get_planned_spending_source_link(subject),
     ];
 
-    const { exp_data, fte_data } = panel_args;
+    const {
+      exp_data,
+      fte_data,
+      fte_years,
+      exp_years,
+      exp_gap_year,
+      fte_gap_year,
+    } = panel_args;
 
     //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
     const all_program_names = _.chain(exp_data).map("label").uniq().value();
@@ -69,12 +78,14 @@ const render_resource_type =
     return (
       <InfographicPanel {...{ title, sources, footnotes }}>
         <PlannedProgramResources
+          years_with_gap_year={is_fte ? fte_years : exp_years}
           programs={_.sortBy(
             is_fte ? fte_data : exp_data,
             ({ data }) => -sum(data)
           )}
           colors={colors}
           text={text}
+          gap_year={is_fte ? fte_gap_year : exp_gap_year}
           is_fte={is_fte}
         />
       </InfographicPanel>
@@ -92,9 +103,9 @@ class PlannedProgramResources extends React.Component {
     };
   }
   render() {
-    const { text, programs, colors, is_fte } = this.props;
-
-    const ticks = _.map(planning_years, run_template);
+    const { text, programs, colors, is_fte, years_with_gap_year, gap_year } =
+      this.props;
+    const ticks = _.map(years_with_gap_year, run_template);
 
     const { active_programs } = this.state;
 
@@ -113,6 +124,9 @@ class PlannedProgramResources extends React.Component {
         .fromPairs()
         .value(),
     }));
+    console.log(gap_year);
+    console.log(Object.keys(graph_data));
+    console.log(data_by_year);
 
     return (
       <div>
@@ -148,6 +162,22 @@ class PlannedProgramResources extends React.Component {
               indexBy="year"
               colors={(d) => colors(d.id)}
               is_money={!is_fte}
+              {...{
+                ...(gap_year && {
+                  markers: [
+                    {
+                      axis: "x",
+                      value: gap_year,
+                      lineStyle: {
+                        stroke: tertiaryColor,
+                        transform: "translate(27px, 0px)", // TODO
+                        strokeWidth: 2,
+                        strokeDasharray: "3, 3",
+                      },
+                    },
+                  ],
+                }),
+              }}
             />
           </div>
         </div>
@@ -164,11 +194,69 @@ const get_calculate_func = (is_fte) => {
 
     const { programSpending, programFtes } = this.tables;
 
-    const total_exp = _.sumBy(planning_years, (col) =>
-      programSpending.q(subject).sum(col)
+    const queried_exp = programSpending.q(subject);
+    const queried_fte = programFtes.q(subject);
+    const get_valid_years_for_data = (data, years) =>
+      _.chain(data)
+        .reduce(
+          (sum_by_year, row) => {
+            _.each(years, (year) => {
+              sum_by_year[year] = sum_by_year[year] + row[year];
+            });
+            return sum_by_year;
+          },
+          _.chain(years)
+            .map((year) => [year, 0])
+            .fromPairs()
+            .value()
+        )
+        .pickBy((sum_by_year) => sum_by_year !== 0)
+        .keys()
+        .value();
+    const exp_historical_years = get_valid_years_for_data(
+      queried_exp.data,
+      _.map(std_years, (year) => `${year}exp`)
     );
-    const total_fte = _.sumBy(planning_years, (col) =>
-      programFtes.q(subject).sum(col)
+    const exp_planning_years = get_valid_years_for_data(
+      queried_exp.data,
+      planning_years
+    );
+    const fte_historical_years = get_valid_years_for_data(
+      queried_fte.data,
+      std_years
+    );
+    const fte_planning_years = get_valid_years_for_data(
+      queried_fte.data,
+      planning_years
+    );
+    const exp_gap_year_exists =
+      subject.has_planned_spending &&
+      _.includes(exp_historical_years, "{{pa_last_year}}exp") &&
+      _.includes(exp_planning_years, "{{planning_year_1}}");
+    const fte_gap_year_exists =
+      subject.has_planned_spending &&
+      _.includes(fte_historical_years, "{{pa_last_year}}") &&
+      _.includes(fte_planning_years, "{{planning_year_1}}");
+
+    const exp_gap_year =
+      (exp_gap_year_exists && actual_to_planned_gap_year) || null;
+    const fte_gap_year =
+      (fte_gap_year_exists && actual_to_planned_gap_year) || null;
+
+    const exp_years_with_gap_year = _.chain(exp_historical_years)
+      .concat([exp_gap_year], planning_years)
+      .compact()
+      .value();
+    const fte_years_with_gap_year = _.chain(fte_historical_years)
+      .concat([fte_gap_year], planning_years)
+      .compact()
+      .value();
+
+    const total_exp = _.sumBy(exp_years_with_gap_year, (col) =>
+      queried_exp.sum(col)
+    );
+    const total_fte = _.sumBy(fte_years_with_gap_year, (col) =>
+      queried_fte.sum(col)
     );
 
     const should_bail = is_fte ? total_fte === 0 : total_exp === 0;
@@ -180,13 +268,17 @@ const get_calculate_func = (is_fte) => {
       Both exp and fte data is returned in either case so the render can ensure consistency in the association of colour to program names
       across the two panels
     */
-    const exp_data = _.map(programSpending.q(subject).data, (row) => ({
+    const exp_data = _.map(queried_exp.data, (row) => ({
       label: row.prgm,
-      data: planning_years.map((col) => row[col]),
+      data: exp_years_with_gap_year.map((col) =>
+        _.isUndefined(row[col]) ? null : row[col]
+      ),
     }));
-    const fte_data = _.map(programFtes.q(subject).data, (row) => ({
+    const fte_data = _.map(queried_fte.data, (row) => ({
       label: row.prgm,
-      data: planning_years.map((col) => row[col]),
+      data: fte_years_with_gap_year.map((col) =>
+        _.isUndefined(row[col]) ? null : row[col]
+      ),
     }));
 
     const relevant_data = is_fte ? fte_data : exp_data;
@@ -199,6 +291,12 @@ const get_calculate_func = (is_fte) => {
     return {
       fte_data,
       exp_data,
+      exp_years: _.map(exp_years_with_gap_year, (year) =>
+        _.replace(year, "exp", "")
+      ),
+      fte_years: fte_years_with_gap_year,
+      exp_gap_year,
+      fte_gap_year,
       ..._.chain(first_year_top_2_programs)
         .flatMap(({ label, data }, ix) => [
           [`first_year_top_${ix + 1}_name`, label],

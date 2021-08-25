@@ -76,6 +76,7 @@ export class WrappedNivoBar extends React.Component {
       enableGridY,
       onMouseEnter,
       onMouseLeave,
+      markers,
       onClick,
       padding,
       borderWidth,
@@ -106,6 +107,7 @@ export class WrappedNivoBar extends React.Component {
         <ResponsiveBar
           {...{
             data,
+            markers,
             margin,
             colors,
             groupMode,
