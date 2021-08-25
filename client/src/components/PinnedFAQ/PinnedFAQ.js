@@ -1,13 +1,23 @@
+import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
+import { ButtonToolbar } from "react-bootstrap";
+import MediaQuery from "react-responsive";
+
+import { AutoAccordion } from "src/components/Accordion/Accordions";
 import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 
+import { PinnedContent } from "src/components/PinnedContent/PinnedContent";
+
 import { Gov } from "src/models/organizational_entities";
+import { trivial_text_maker } from "src/models/text";
 
 import { secondaryColor } from "src/style_constants/colors.interop.scss";
+import { maxLargeDevice } from "src/style_constants/index";
 
-import { SomeThingsToKeepInMind } from "./faq_utils";
+export const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
+  "user_enabled_pinning_key_concepts";
 
 export class PinnedFAQ extends React.Component {
   render() {
@@ -20,17 +30,37 @@ export class PinnedFAQ extends React.Component {
     } = this.props;
 
     return (
-      <SomeThingsToKeepInMind
-        is_initially_expanded={is_initially_expanded}
-        background_color={background_color}
-      >
-        <KeyConceptList
-          question_answer_pairs={_.map(q_a_key_pairs, (pair) => [
-            <TM key={"q"} k={pair[0]} args={{ subject }} />,
-            <TM key={"a"} k={pair[1]} args={{ subject }} />,
-          ])}
-        />
-      </SomeThingsToKeepInMind>
+      <MediaQuery maxWidth={maxLargeDevice}>
+        {(matches) => (
+          <PinnedContent
+            local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}
+          >
+            <div className={classNames("mrgn-bttm-md")}>
+              <ButtonToolbar style={{ margin: 0 }}>
+                <AutoAccordion
+                  title={trivial_text_maker("infographic_faq")}
+                  isInitiallyExpanded={is_initially_expanded}
+                  background_color={background_color}
+                >
+                  <div
+                    style={{
+                      paddingLeft: "10px",
+                      paddingRight: "10px",
+                    }}
+                  >
+                    <KeyConceptList
+                      question_answer_pairs={_.map(q_a_key_pairs, (pair) => [
+                        <TM key={"q"} k={pair[0]} args={{ subject }} />,
+                        <TM key={"a"} k={pair[1]} args={{ subject }} />,
+                      ])}
+                    />
+                  </div>
+                </AutoAccordion>
+              </ButtonToolbar>
+            </div>
+          </PinnedContent>
+        )}
+      </MediaQuery>
     );
   }
 }
