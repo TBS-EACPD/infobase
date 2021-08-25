@@ -29,26 +29,28 @@ export const declare_covid_key_concepts_panel = () =>
       calculate: _.constant(true),
       render: () => (
         <PinnedFAQ
-          question_answer_pairs={_.chain([
-            "up_to_date",
-            "spent",
-            "other_expenditure_reporting",
-            "implementation_status",
-            "auth_but_no_exp",
-            "missing_measures",
-          ])
-            .compact()
-            .map((key) => [
-              <TM key={"q"} k={`covid_questions_${key}_q`} />,
-              <TM key={"a"} k={`covid_questions_${key}_a`} />,
-            ])
-            .concat([
-              [
-                <TM key={"q"} k={"different_org_names_q"} />,
-                <TM key={"a"} k={"different_org_names_a"} />,
-              ],
-            ])
-            .value()}
+          q_a_key_pairs={[
+            ["covid_questions_up_to_date_q", "covid_questions_up_to_date_a"],
+            ["covid_questions_spent_q", "covid_questions_spent_a"],
+            [
+              "covid_questions_other_expenditure_reporting_q",
+              "covid_questions_other_expenditure_reporting_a",
+            ],
+            [
+              "covid_questions_implementation_status_q",
+              "covid_questions_implementation_status_a",
+            ],
+            [
+              "covid_questions_auth_but_no_exp_q",
+              "covid_questions_auth_but_no_exp_a",
+            ],
+            [
+              "covid_questions_missing_measures_q",
+              "covid_questions_missing_measures_a",
+            ],
+            ["different_org_names_q", "different_org_names_a"],
+          ]}
+          TM={TM}
         />
       ),
     }),
