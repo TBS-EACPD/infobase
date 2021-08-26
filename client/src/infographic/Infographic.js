@@ -384,9 +384,6 @@ const Infographic = ({
 
   const SubjectModel = Subject[level];
   const subject = SubjectModel.lookup(subject_id);
-  const bubble_id = _.find(get_bubble_defs(subject), { id: active_bubble_id })
-    ? active_bubble_id
-    : null;
 
   if (!subject) {
     if (level === "program" || level === "crso") {
@@ -417,10 +414,17 @@ const Infographic = ({
           return Gov;
       }
     })();
+
     return (
-      <Redirect to={infograph_href_template(subject_parent, bubble_id, "/")} />
+      <Redirect
+        to={infograph_href_template(subject_parent, active_bubble_id, "/")}
+      />
     );
   }
+
+  const bubble_id = _.find(get_bubble_defs(subject), { id: active_bubble_id })
+    ? active_bubble_id
+    : null;
 
   const title = text_maker("infographic_for", { subject });
   const desc_key = {
