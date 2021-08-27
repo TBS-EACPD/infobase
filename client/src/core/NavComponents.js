@@ -91,7 +91,9 @@ class BreadCrumbs extends React.Component {
         {_.map(crumbs, (display, ix) => (
           <Fragment key={ix}>
             <li className="infobase-home-breadcrumb-link">
-              <span dangerouslySetInnerHTML={{ __html: " > " }} />
+              <span aria-hidden={true} style={{ padding: "0px 15px" }}>
+                {">"}
+              </span>
               {_.isString(display) ? ( //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
                 <span dangerouslySetInnerHTML={{ __html: display }} />
               ) : (
