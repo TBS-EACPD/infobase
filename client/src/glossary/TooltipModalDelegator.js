@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "react-router-dom";
 
 import { ModalButton } from "src/components/index";
 
@@ -23,6 +22,7 @@ export class TooltipModalDelegator extends React.Component {
     console.log("parentNode");
     console.log(target.parentNode);
 
+    // TODO: maybe just use target.firstChild.data? serach up best practices for a11y link titles
     const link_title = "";
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
@@ -37,21 +37,23 @@ export class TooltipModalDelegator extends React.Component {
     );
 
     const replacement = (
-      //   <Router>
       <ModalButton
         title={""}
         button_text={target.firstChild.data}
-        show_condition={{ name: "tbd", value: "" }}
+        show_condition={{ name: "tbd", value: "" }} // TODO: figure out the show_condition
       >
         {children}
       </ModalButton>
-      //   </Router>
     );
 
     target.insertAdjacentElement(
       "afterend",
       ReactDOM.render(replacement, document.createElement("div"))
     );
+
+    const parent_node = target.parentNode; //TODO: handle cases with no parent node (don't think that will happen?)
+
+    parent_node.removeChild(target);
   }
 
   componentDidMount() {
