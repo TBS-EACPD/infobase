@@ -1,6 +1,7 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
+import MediaQuery from "react-responsive";
 
 import {
   get_planned_fte_source_link,
@@ -22,7 +23,19 @@ import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import { toggle_list } from "src/general_utils";
-import { tertiaryColor } from "src/style_constants/index";
+import {
+  minExtraLargeDevice,
+  maxExtraLargeDevice,
+  minLargeDevice,
+  maxLargeDevice,
+  minMediumDevice,
+  maxMediumDevice,
+  minSmallDevice,
+  maxSmallDevice,
+  minExtraSmallDevice,
+  maxExtraSmallDevice,
+  tertiaryColor,
+} from "src/style_constants/index";
 
 import text from "./crso_by_prog.yaml";
 
@@ -97,29 +110,17 @@ class PlannedProgramResources extends React.Component {
     super(props);
     const program_labels = _.map(props.programs, "label");
     this.state = {
-      window_width_last_updated_at: window.innerWidth,
       active_programs: is_a11y_mode
         ? program_labels
         : _.take(program_labels, 3),
     };
-    window.addEventListener(
-      "resize",
-      _.debounce(() => {
-        if (this.should_graphs_update()) {
-          this.setState({ window_width_last_updated_at: window.innerWidth });
-        }
-      }, 250)
-    );
-  }
-  should_graphs_update() {
-    return window.innerWidth !== this.state.window_width_last_updated_at;
   }
   render() {
     const { text, programs, colors, is_fte, years_with_gap_year, gap_year } =
       this.props;
     const ticks = _.map(years_with_gap_year, run_template);
 
-    const { active_programs, window_width_last_updated_at } = this.state;
+    const { active_programs } = this.state;
 
     const graph_data = _.chain(programs)
       .filter(({ label }) => _.includes(active_programs, label))
@@ -136,6 +137,36 @@ class PlannedProgramResources extends React.Component {
         .fromPairs()
         .value(),
     }));
+    const get_nivo_bar_graph = (gap_year_marker_x_px) => (
+      <WrappedNivoBar
+        {...{
+          ...nivo_props,
+          ...(gap_year && {
+            markers: [
+              {
+                axis: "x",
+                value: gap_year,
+                lineStyle: {
+                  stroke: tertiaryColor,
+                  transform: `translate(${gap_year_marker_x_px}px, 0px)`,
+                  strokeWidth: 2,
+                  strokeDasharray: "3, 3",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+    );
+
+    const nivo_props = {
+      data: data_by_year,
+      padding: 0.3,
+      keys: Object.keys(graph_data),
+      indexBy: "year",
+      colors: (d) => colors(d.id),
+      is_money: !is_fte,
+    };
 
     return (
       <div>
@@ -165,32 +196,30 @@ class PlannedProgramResources extends React.Component {
             </div>
           )}
           <div className="col-12 col-lg-8">
-            <WrappedNivoBar
-              data={data_by_year}
-              padding={0.3}
-              keys={Object.keys(graph_data)}
-              indexBy="year"
-              colors={(d) => colors(d.id)}
-              is_money={!is_fte}
-              {...{
-                ...(gap_year && {
-                  markers: [
-                    {
-                      axis: "x",
-                      value: gap_year,
-                      lineStyle: {
-                        stroke: tertiaryColor,
-                        transform: `translate(${
-                          0.3 * window_width_last_updated_at * 0.08 // Prob need media query to better handle
-                        }px, 0px)`,
-                        strokeWidth: 2,
-                        strokeDasharray: "3, 3",
-                      },
-                    },
-                  ],
-                }),
-              }}
-            />
+            <MediaQuery minWidth={minExtraLargeDevice}>
+              {get_nivo_bar_graph(34)}
+            </MediaQuery>
+            <MediaQuery
+              minWidth={minLargeDevice}
+              maxWidth={maxExtraLargeDevice}
+            >
+              {get_nivo_bar_graph(27)}
+            </MediaQuery>
+            <MediaQuery minWidth={minMediumDevice} maxWidth={maxLargeDevice}>
+              {get_nivo_bar_graph(31)}
+            </MediaQuery>
+            <MediaQuery minWidth={minSmallDevice} maxWidth={maxMediumDevice}>
+              {get_nivo_bar_graph(22)}
+            </MediaQuery>
+            <MediaQuery
+              minWidth={minExtraSmallDevice}
+              maxWidth={maxSmallDevice}
+            >
+              {get_nivo_bar_graph(17)}
+            </MediaQuery>
+            <MediaQuery maxWidth={maxExtraSmallDevice}>
+              {get_nivo_bar_graph(9)}
+            </MediaQuery>
           </div>
         </div>
       </div>

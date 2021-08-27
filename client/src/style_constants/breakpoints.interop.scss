@@ -13,6 +13,9 @@
 
 $maxBreakpointOffset: -0.02px;
 
+$minExtraSmallDevice: 321px;
+$maxExtraSmallDevice: $minExtraSmallDevice + $maxBreakpointOffset;
+
 $minSmallDevice: 576px;
 $maxSmallDevice: $minSmallDevice + $maxBreakpointOffset;
 
