@@ -351,12 +351,12 @@ target_met_table_text:
 gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
-    **{{fmt_percentage1 has_standards_pct}}** of services have standards
+    **{{fmt_percentage1 has_standards_pct}}** of services have standards for a total of **{{standards_count}}** service standards
   fr: |
-    **{{fmt_percentage1 has_standards_pct}}** des services ont des normes
+    TODO
 gauge_standards_met_text:
   transform: [handlebars, markdown]
   en: |
-    **{{fmt_percentage1 standards_met_pct}}** of standards' targets were met
+    **{{fmt_percentage1 standards_met_pct}}** of service standard targets were met
   fr: |
-    **{{fmt_percentage1 standards_met_pct}}** des cibles normalisées ont été atteintes
+    TODO
