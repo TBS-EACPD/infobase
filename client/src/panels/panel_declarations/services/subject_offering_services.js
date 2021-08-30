@@ -45,6 +45,10 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
   const is_gov = subject.level === "gov";
   const correct_subject = is_gov ? Dept : Program;
 
+  const cleaned_data = _.map(subject_offering_services_summary, (row) =>
+    _.omit(row, ["__typename", "id"])
+  );
+
   const column_configs = {
     subject_id: {
       index: 0,
@@ -81,17 +85,14 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
         args={{
           subject,
           most_recent_year: report_years[0],
-          number_of_subjects: subject_offering_services_summary.length,
-          number_of_applications: _.sumBy(
-            subject_offering_services_summary,
-            "total_volume"
-          ),
+          number_of_subjects: cleaned_data.length,
+          number_of_applications: _.sumBy(cleaned_data, "total_volume"),
           number_of_services,
         }}
       />
       <DisplayTable
         unsorted_initial={true}
-        data={subject_offering_services_summary}
+        data={cleaned_data}
         column_configs={column_configs}
       />
     </HeightClippedGraph>
