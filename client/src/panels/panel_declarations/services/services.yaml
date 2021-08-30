@@ -17,7 +17,7 @@ number_value_of_services:
 pct_of_met_high_vol_services:
   transform: [handlebars, markdown]
   en: |
-    % of {{gl_tt "High Volume Services" "HIGH_VOL_SERVICES"}} which met Service Standards
+    % of service standards that are met for {{subject.name}} {{gl_tt "High Volume Services" "HIGH_VOL_SERVICES"}}
   fr: |
     TODO
 pct_of_client_interaction_pts_online:
