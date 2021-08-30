@@ -21,6 +21,14 @@ const state_from_error = (error) => ({
   testing_for_stale_client: true,
 });
 
+const log_error = (error) =>
+  !is_dev &&
+  log_standard_event({
+    SUBAPP: window.location.hash.replace("#", ""),
+    MISC1: "ERROR_IN_PROD",
+    MISC2: error.toString(),
+  });
+
 export class ErrorBoundary extends React.Component {
   constructor() {
     super();
@@ -35,20 +43,19 @@ export class ErrorBoundary extends React.Component {
     return state_from_error(error);
   }
 
-  getStateFromUnhandledRejection = (event) => {
+  get_state_from_unhandled_rejection = (event) => {
     this.setState(state_from_error(event.reason));
   };
   componentDidMount() {
-    // TODO decent browser support, but not IE 11, hmm
     window.addEventListener(
       "unhandledrejection",
-      this.getStateFromUnhandledRejection
+      this.get_state_from_unhandled_rejection
     );
   }
   componentWillUnmount() {
     window.removeEventListener(
       "unhandledrejection",
-      this.getStateFromUnhandledRejection
+      this.get_state_from_unhandled_rejection
     );
   }
 
@@ -67,12 +74,17 @@ export class ErrorBoundary extends React.Component {
           window.location.reload(true);
         }
       })
-      .catch()
-      .finally(() =>
+      .catch((error) => {
+        // case where make_request for the build sha fails, log that
+        log_error(error);
+      })
+      .finally(() => {
+        log_error(this.state.error);
+
         this.setState({
           testing_for_stale_client: false,
-        })
-      );
+        });
+      });
   }
 
   render() {
@@ -84,14 +96,6 @@ export class ErrorBoundary extends React.Component {
       this.catch_stale_client_error_case();
       return null;
     } else {
-      if (!is_dev) {
-        log_standard_event({
-          SUBAPP: window.location.hash.replace("#", ""),
-          MISC1: "ERROR_IN_PROD",
-          MISC2: this.state.error.toString(),
-        });
-      }
-
       return (
         <div
           style={{
