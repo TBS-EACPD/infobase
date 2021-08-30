@@ -441,11 +441,14 @@ const Infographic = ({
         .concat(subject.name)
         .value();
     switch (level) {
-      case "program": {
-        return get_breadcrumbs([subject.dept, subject.crso]);
+      case "dept": {
+        return get_breadcrumbs([Gov]);
       }
       case "crso": {
-        return get_breadcrumbs([subject.dept]);
+        return get_breadcrumbs([Gov, subject.dept]);
+      }
+      case "program": {
+        return get_breadcrumbs([Gov, subject.dept, subject.crso]);
       }
       default: {
         return [subject.name];
