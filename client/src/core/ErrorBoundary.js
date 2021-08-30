@@ -16,6 +16,11 @@ const NoIndex = () =>
     document.head
   );
 
+const state_from_error = (error) => ({
+  error: error,
+  testing_for_stale_client: true,
+});
+
 export class ErrorBoundary extends React.Component {
   constructor() {
     super();
@@ -25,12 +30,33 @@ export class ErrorBoundary extends React.Component {
       testing_for_stale_client: false,
     };
   }
-  static getDerivedStateFromError(error) {
-    return {
-      error: error,
-      testing_for_stale_client: true,
-    };
+
+  getStateFromRejectedPromise = (event) => {
+    window.removeEventListener(
+      "unhandledrejection",
+      this.getStateFromRejectedPromise
+    );
+
+    this.setState(state_from_error(event.reason));
+  };
+  componentDidMount() {
+    // TODO decent browser support, but not IE 11, hmm
+    window.addEventListener(
+      "unhandledrejection",
+      this.getStateFromRejectedPromise
+    );
   }
+  componentWillUnmount() {
+    window.removeEventListener(
+      "unhandledrejection",
+      this.getStateFromRejectedPromise
+    );
+  }
+
+  static getDerivedStateFromError(error) {
+    return state_from_error(error);
+  }
+
   catch_stale_client_error_case() {
     const unique_query_param =
       Date.now() + Math.random().toString().replace(".", "");
@@ -52,6 +78,7 @@ export class ErrorBoundary extends React.Component {
         this.log_error_and_display_error_page();
       });
   }
+
   log_error_and_display_error_page() {
     if (!is_dev) {
       log_standard_event({
@@ -67,6 +94,7 @@ export class ErrorBoundary extends React.Component {
 
     throw this.state.error;
   }
+
   render() {
     const { error, testing_for_stale_client } = this.state;
 
