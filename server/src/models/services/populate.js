@@ -325,7 +325,7 @@ export default async function ({ models }) {
           application_channels_keys,
           (sum, key) => sum + _.last(service.service_report)[key],
           0
-        ) > 45000 // filter for high volume services
+        ) >= 45000 // filter for high volume services
     );
     const processed_standards = get_processed_standards(
       high_vol_services,
