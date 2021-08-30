@@ -31,30 +31,25 @@ export class ErrorBoundary extends React.Component {
     };
   }
 
-  getStateFromRejectedPromise = (event) => {
-    window.removeEventListener(
-      "unhandledrejection",
-      this.getStateFromRejectedPromise
-    );
+  static getDerivedStateFromError(error) {
+    return state_from_error(error);
+  }
 
+  getStateFromUnhandledRejection = (event) => {
     this.setState(state_from_error(event.reason));
   };
   componentDidMount() {
     // TODO decent browser support, but not IE 11, hmm
     window.addEventListener(
       "unhandledrejection",
-      this.getStateFromRejectedPromise
+      this.getStateFromUnhandledRejection
     );
   }
   componentWillUnmount() {
     window.removeEventListener(
       "unhandledrejection",
-      this.getStateFromRejectedPromise
+      this.getStateFromUnhandledRejection
     );
-  }
-
-  static getDerivedStateFromError(error) {
-    return state_from_error(error);
   }
 
   catch_stale_client_error_case() {
@@ -70,29 +65,14 @@ export class ErrorBoundary extends React.Component {
 
         if (!local_sha_matches_remote_sha && !is_dev) {
           window.location.reload(true);
-        } else {
-          this.log_error_and_display_error_page();
         }
       })
-      .catch(() => {
-        this.log_error_and_display_error_page();
-      });
-  }
-
-  log_error_and_display_error_page() {
-    if (!is_dev) {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "ERROR_IN_PROD",
-        MISC2: this.state.error.toString(),
-      });
-    }
-
-    this.setState({
-      testing_for_stale_client: false,
-    });
-
-    throw this.state.error;
+      .catch()
+      .finally(() =>
+        this.setState({
+          testing_for_stale_client: false,
+        })
+      );
   }
 
   render() {
@@ -104,6 +84,14 @@ export class ErrorBoundary extends React.Component {
       this.catch_stale_client_error_case();
       return null;
     } else {
+      if (!is_dev) {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "ERROR_IN_PROD",
+          MISC2: this.state.error.toString(),
+        });
+      }
+
       return (
         <div
           style={{
