@@ -317,7 +317,24 @@ export default async function ({ models }) {
       get_total_interaction_pts(services) || 0;
 
   const get_pct_of_standards_met_high_vol_services = (services) => {
-    return;
+    const most_recent_year = get_years_from_service_report(services)[0];
+    const high_vol_services = _.filter(
+      services,
+      (service) =>
+        _.reduce(
+          application_channels_keys,
+          (sum, key) => sum + _.last(service.service_report)[key],
+          0
+        ) > 45000 // filter for high volume services
+    );
+    const processed_standards = get_processed_standards(
+      high_vol_services,
+      most_recent_year
+    );
+    return (
+      _.countBy(processed_standards, "is_target_met").true /
+        processed_standards.length || 0
+    );
   };
 
   const get_service_channels_summary = (services) =>

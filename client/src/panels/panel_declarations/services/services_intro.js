@@ -22,6 +22,7 @@ const ServicesIntroPanel = ({ subject }) => {
       report_years
       number_of_services
       number_of_online_enabled_services
+      pct_of_standards_met_high_vol_services
       pct_of_online_client_interaction_pts
       num_of_subject_offering_services
     }`,
@@ -34,6 +35,7 @@ const ServicesIntroPanel = ({ subject }) => {
       report_years,
       number_of_services,
       number_of_online_enabled_services,
+      pct_of_standards_met_high_vol_services,
       pct_of_online_client_interaction_pts,
       num_of_subject_offering_services,
       num_of_programs_offering_services,
@@ -68,9 +70,11 @@ const ServicesIntroPanel = ({ subject }) => {
         </div>
         <div className="pane-rect">
           <span className="pane-max-width">
-            <TM k="pct_of_met_high_vol_services" />
+            <TM k="pct_of_met_high_vol_services" args={{ subject }} />
           </span>
-          <span className="large_panel_text bold">X%</span>
+          <span className="large_panel_text bold">
+            {pct_formatter(pct_of_standards_met_high_vol_services)}
+          </span>
         </div>
       </div>
       <div className="pane-row">
