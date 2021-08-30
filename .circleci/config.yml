@@ -284,7 +284,6 @@ jobs:
           name: start_http_server
           command: (cd client && npm run ci_serve)
           background: true
-      - run: (cd client && npm run ci_route_load_tests)
       - run: (cd client && npm run cypress:run)
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
@@ -293,8 +292,6 @@ jobs:
       - image: eaadtbs/ib-ci-test:2.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
-    environment:
-      CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
     steps:
       - attach_workspace:
           at: ./
