@@ -1,7 +1,4 @@
 import {
-  // shared dept, crso, program, tag
-  declare_profile_panel,
-
   // tag only panels
   declare_m2m_tag_warning_panel,
   declare_tag_fed_structure_panel,
@@ -17,7 +14,6 @@ export const get_tag_panels = (subject) => ({
   intro: [
     declare_tagging_key_concepts_panel(),
     declare_description_panel(),
-    declare_profile_panel(),
     declare_tag_fed_structure_panel(),
     declare_tag_progs_by_dept_panel(),
   ],

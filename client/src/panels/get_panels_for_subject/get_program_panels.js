@@ -9,10 +9,8 @@ import {
   declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
 
-  // shared dept, crso, program, tag
-  declare_profile_panel,
-
   // shared dept, crso, program
+  declare_profile_panel,
   declare_explore_results_panel,
   declare_results_table_panel,
   declare_tags_of_interest_panel,
