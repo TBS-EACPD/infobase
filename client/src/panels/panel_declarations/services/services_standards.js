@@ -107,6 +107,7 @@ const ServicesStandardsPanel = ({ subject }) => {
             <TM
               k="gauge_has_standards_text"
               args={{
+                standards_count,
                 has_standards_pct:
                   services_w_standards_count / number_of_services || 0,
               }}
