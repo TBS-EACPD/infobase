@@ -2,6 +2,7 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
@@ -79,7 +80,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
         top: 20,
         right: 10,
         bottom: 50,
-        left: 210,
+        left: 190,
       },
     },
     fr: {
@@ -90,7 +91,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
         top: 170,
         right: 10,
         bottom: 50,
-        left: 235,
+        left: 215,
       },
     },
   };
@@ -157,6 +158,34 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
             indexBy={"key_desc"}
             keys={[can_online, cannot_online, not_applicable]}
             colors={(d) => colors(d.id)}
+            left_axis={{
+              renderTick: (tick) => (
+                <g
+                  key={tick.tickIndex}
+                  transform={`translate(${tick.x},${tick.y})`}
+                >
+                  <line
+                    x1="0"
+                    x2="-5"
+                    y1="0"
+                    y2="0"
+                    style={{ strokeWidth: 1, stroke: "rgb(119 119 119)" }}
+                  ></line>
+                  <text
+                    dominantBaseline={"central"}
+                    textAnchor={"end"}
+                    transform="translate(-10,-3) rotate(0)"
+                    style={{
+                      fontFamily: "sans-serif",
+                      fontSize: "11px",
+                      fill: "rgb(51, 51, 51)",
+                    }}
+                  >
+                    <TspanLineWrapper text={tick.value} width={30} />
+                  </text>
+                </g>
+              ),
+            }}
             bttm_axis={{
               renderTick: (tick) =>
                 tick.value % 1 === 0 && (
