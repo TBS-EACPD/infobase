@@ -1,17 +1,13 @@
 import _ from "lodash";
 import mongoose from "mongoose";
 
-import {
-  create_resource_by_id_attr_dataloader,
-  create_resource_by_foreignkey_attr_dataloader,
-} from "../loader_utils.js";
+import { create_resource_by_id_attr_dataloader } from "../loader_utils.js";
 import {
   pkey_type,
   parent_fkey_type,
   fyear_type,
   number_type,
   str_type,
-  bilingual,
 } from "../model_utils.js";
 
 export default function (model_singleton) {
@@ -45,9 +41,9 @@ export default function (model_singleton) {
 
   const EmployeeDataGovTotalsSchema = mongoose.Schema({
     id: pkey_type(),
-    dimension: parent_fkey_type(),
     data: [
       {
+        dimension: parent_fkey_type(),
         by_year: [
           {
             year: fyear_type(),
@@ -85,7 +81,7 @@ export default function (model_singleton) {
 
   const GovEmployeeSummarySchema = mongoose.Schema({
     id: pkey_type(),
-    employee_age_totals: [EmployeeDataGovTotalsSchema],
+    employee_age_group_totals: [EmployeeDataGovTotalsSchema],
     employee_ex_lvl_totals: [EmployeeDataGovTotalsSchema],
     employee_gender_totals: [EmployeeDataGovTotalsSchema],
     employee_fol_totals: [EmployeeDataGovTotalsSchema],
