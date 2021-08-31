@@ -12,26 +12,31 @@ import {
 import { headcount_types } from "./utils.js";
 
 export default function (model_singleton) {
-  const OrgPeopleDataSchema = mongoose.Schema({
-    org_id: pkey_type(),
-    average_age: [
+  const average_age_fragment = {
+    year: fyear_type(),
+    value: number_type,
+  };
+
+  const headcount_data_fragment = {
+    dimension: str_type,
+    yearly_data: [
       {
         year: fyear_type(),
         value: number_type,
       },
     ],
+    avg_share: number_type,
+  };
+
+  const OrgPeopleDataSchema = mongoose.Schema({
+    org_id: pkey_type(),
+    average_age: [average_age_fragment],
     ..._.chain(headcount_types)
       .map((data_type) => [
         data_type,
         [
           {
-            dimension: str_type,
-            yearly_data: [
-              {
-                year: fyear_type(),
-                value: number_type,
-              },
-            ],
+            ...headcount_data_fragment,
             avg_share: number_type,
           },
         ],
@@ -40,29 +45,13 @@ export default function (model_singleton) {
       .value(),
   });
 
+  // TODO expect to add some additional summary stats (e.g. precalculated totals by year) to this model for convienience,
+  // but will depend on ultimate client side design/usage
   const GovPeopleSummarySchema = mongoose.Schema({
     id: pkey_type(),
-    average_age: [
-      {
-        year: fyear_type(),
-        value: number_type,
-      },
-    ],
+    average_age: [average_age_fragment],
     ..._.chain(headcount_types)
-      .map((data_type) => [
-        data_type,
-        [
-          {
-            dimension: str_type,
-            yearly_data: [
-              {
-                year: fyear_type(),
-                value: number_type,
-              },
-            ],
-          },
-        ],
-      ])
+      .map((data_type) => [data_type, [headcount_data_fragment]])
       .fromPairs()
       .value(),
   });
@@ -70,11 +59,11 @@ export default function (model_singleton) {
   model_singleton.define_model("OrgPeopleData", OrgPeopleDataSchema);
   model_singleton.define_model("GovPeopleSummary", GovPeopleSummarySchema);
 
-  const { OrgEmployeeSummary, GovPeopleSummary } = model_singleton.models;
+  const { OrgPeopleData, GovPeopleSummary } = model_singleton.models;
 
   const loaders = {
     org_people_data_loader: create_resource_by_id_attr_dataloader(
-      OrgEmployeeSummary,
+      OrgPeopleData,
       "org_id"
     ),
     gov_people_summary_loader: create_resource_by_id_attr_dataloader(

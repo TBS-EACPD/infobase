@@ -110,7 +110,7 @@ export default async function ({ models }) {
     .groupBy(({ org_id }) => org_id === "ZGOC")
     .value();
 
-  const org_summaries = _.chain({
+  const org_people_data = _.chain({
     ...headcount_datasets_by_type,
     org_average_age_rows,
   })
@@ -125,7 +125,7 @@ export default async function ({ models }) {
     }))
     .value();
 
-  const gov_summary = {
+  const gov_people_summary = {
     id: "gov",
     average_age: gov_average_age_rows,
     ..._.mapValues(headcount_datasets_by_type, (dataset) => {
@@ -155,7 +155,7 @@ export default async function ({ models }) {
   // TODO could add some checks such as asserting that the headcount tables have consistent totals by year and dept
 
   return await Promise.all([
-    OrgPeopleData.insertMany(org_summaries),
-    GovPeopleSummary.insertMany(gov_summary),
+    OrgPeopleData.insertMany(org_people_data),
+    GovPeopleSummary.insertMany(gov_people_summary),
   ]);
 }
