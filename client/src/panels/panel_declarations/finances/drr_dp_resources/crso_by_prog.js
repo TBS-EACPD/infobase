@@ -322,9 +322,23 @@ const get_calculate_func = (is_fte) => {
       ),
     }));
 
-    const relevant_data = is_fte ? fte_data : exp_data;
-    const first_year_top_2_programs = _.chain(relevant_data)
-      .sortBy(({ data }) => _.first(data))
+    const relevant_data = is_fte ? queried_fte.data : queried_exp.data;
+    const most_recent_top_2_programs = _.chain(relevant_data)
+      .flatMap((program_data) => ({
+        prgm: program_data.prgm,
+        value:
+          program_data[is_fte ? "{{pa_last_year}}" : "{{pa_last_year}}exp"],
+      }))
+      .sortBy("value")
+      .takeRight(2)
+      .reverse()
+      .value();
+    const most_recent_planned_top_2_programs = _.chain(relevant_data)
+      .flatMap((program_data) => ({
+        prgm: program_data.prgm,
+        value: program_data["{{planning_year_1}}"],
+      }))
+      .sortBy("value")
       .takeRight(2)
       .reverse()
       .value();
@@ -338,10 +352,25 @@ const get_calculate_func = (is_fte) => {
       fte_years: fte_years_with_gap_year,
       exp_gap_year,
       fte_gap_year,
-      ..._.chain(first_year_top_2_programs)
-        .flatMap(({ label, data }, ix) => [
-          [`first_year_top_${ix + 1}_name`, label],
-          [`first_year_top_${ix + 1}_value`, _.first(data)],
+      most_recent_number_of_programs: _.filter(
+        relevant_data,
+        is_fte ? "{{pa_last_year}}" : "{{pa_last_year}}exp"
+      ).length,
+      most_recent_planned_number_of_programs: _.filter(
+        relevant_data,
+        "{{planning_year_1}}"
+      ).length,
+      ..._.chain(most_recent_top_2_programs)
+        .flatMap(({ prgm, value }, ix) => [
+          [`most_recent_top_${ix + 1}_name`, prgm],
+          [`most_recent_top_${ix + 1}_value`, value],
+        ])
+        .fromPairs()
+        .value(),
+      ..._.chain(most_recent_planned_top_2_programs)
+        .flatMap(({ prgm, value }, ix) => [
+          [`most_recent_planned_top_${ix + 1}_name`, prgm],
+          [`most_recent_planned_top_${ix + 1}_value`, value],
         ])
         .fromPairs()
         .value(),
