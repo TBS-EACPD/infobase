@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`People data Gov headcount and average age data 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "gov": Object {
+        "people_data": Object {
+          "average_age": Array [
+            Object {
+              "value": 44.51151646671326,
+              "year": 2016,
+            },
+            Object {
+              "value": 44.418566229652974,
+              "year": 2017,
+            },
+            Object {
+              "value": 44.06335582638194,
+              "year": 2018,
+            },
+            Object {
+              "value": 43.678772957562586,
+              "year": 2019,
+            },
+            Object {
+              "value": 43.41636156672702,
+              "year": 2020,
+            },
+          ],
+          "type": Array [
+            Object {
+              "dimension": "cas",
+              "yearly_data": Array [
+                Object {
+                  "value": 1433,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 1002,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 1103,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 1074,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 925,
+                  "year": 2020,
+                },
+              ],
+            },
+            Object {
+              "dimension": "ind",
+              "yearly_data": Array [
+                Object {
+                  "value": 26557,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 27236,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 27864,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 29224,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 30456,
+                  "year": 2020,
+                },
+              ],
+            },
+            Object {
+              "dimension": "stu",
+              "yearly_data": Array [
+                Object {
+                  "value": 915,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 942,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 1083,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 1025,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 1071,
+                  "year": 2020,
+                },
+              ],
+            },
+            Object {
+              "dimension": "ter",
+              "yearly_data": Array [
+                Object {
+                  "value": 944,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 1073,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 1205,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 1372,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 1402,
+                  "year": 2020,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`People data Org headcount and average age data 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "org": Object {
+        "people_data": Object {
+          "average_age": Array [
+            Object {
+              "value": 44.36036384749371,
+              "year": 2016,
+            },
+            Object {
+              "value": 44.08387466564769,
+              "year": 2017,
+            },
+            Object {
+              "value": 43.91263975743794,
+              "year": 2018,
+            },
+            Object {
+              "value": 43.99603174603175,
+              "year": 2019,
+            },
+            Object {
+              "value": 43.3784125836196,
+              "year": 2020,
+            },
+          ],
+          "type": Array [
+            Object {
+              "avg_share": 0.03931927097090677,
+              "dimension": "cas",
+              "yearly_data": Array [
+                Object {
+                  "value": 300,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 198,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 183,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 184,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 177,
+                  "year": 2020,
+                },
+              ],
+            },
+            Object {
+              "avg_share": 0.8124976415984303,
+              "dimension": "ind",
+              "yearly_data": Array [
+                Object {
+                  "value": 4098,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 4280,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 4318,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 4348,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 4488,
+                  "year": 2020,
+                },
+              ],
+            },
+            Object {
+              "avg_share": 0.09705294139843781,
+              "dimension": "stu",
+              "yearly_data": Array [
+                Object {
+                  "value": 574,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 512,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 477,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 469,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 540,
+                  "year": 2020,
+                },
+              ],
+            },
+            Object {
+              "avg_share": 0.05113014603222521,
+              "dimension": "ter",
+              "yearly_data": Array [
+                Object {
+                  "value": 195,
+                  "year": 2016,
+                },
+                Object {
+                  "value": 244,
+                  "year": 2017,
+                },
+                Object {
+                  "value": 299,
+                  "year": 2018,
+                },
+                Object {
+                  "value": 291,
+                  "year": 2019,
+                },
+                Object {
+                  "value": 326,
+                  "year": 2020,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+}
+`;
