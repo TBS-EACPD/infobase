@@ -2,7 +2,8 @@
  * @type {Cypress.PluginConfig}
  */
 
-export default (on, config) => {
+// eslint-disable-next-line import/no-commonjs
+module.exports = (on, config) => {
   on("task", {
     log(message) {
       console.log(message);
