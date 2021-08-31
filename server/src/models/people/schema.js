@@ -3,79 +3,57 @@ import _ from "lodash";
 import { headcount_types } from "./utils.js";
 
 const schema = `
-  extend type Org{
-    employee_summary: OrgEmployeeSummary
+  extend type Org {
+    people_data: OrgPeopleData
   }
-
-  extend type Gov {
-    employee_summary: GovEmployeeSummary
-  }
-  
-  type OrgEmployeeSummary {
+  type OrgPeopleData {
     org_id: String
-    employee_age_group: [EmployeePopData]
-    employee_ex_lvl: [EmployeePopData]
-    employee_gender: [EmployeePopData]
-    employee_fol: [EmployeePopData]
-    employee_region: [EmployeePopData]
-    employee_type: [EmployeePopData]
-    employee_avg_age: [EmployeeAvgAge]
-  }
 
-  type GovEmployeeSummary {
-    id: String
-    employee_age_totals: [EmployeeGovData]
-    employee_ex_lvl_totals: [EmployeeGovData]
-    employee_gender_totals: [EmployeeGovData]
-    employee_fol_totals: [EmployeeGovData]
-    employee_region_totals: [EmployeeGovData]
-    employee_type_totals: [EmployeeGovData]
-    employee_gov_avgs: [EmployeeGovAvgs]
+    average_age: [YearlyData]
+
+    ${_.chain(headcount_types)
+      .map((headcount_type) => `${headcount_type}: [OrgHeadcountData]`)
+      .join("/n  ")
+      .value()}
   }
-  type DataObjectWithDimension {
+  type OrgHeadcountData {
     dimension: String
-    by_year: [ByYearData]
+    yearly_data: [YearlyData]
     avg_share: Float
   }
 
-  type DataObjectNoDimension {
-    by_year: [ByYearData]
+  extend type Gov {
+    people_data: GovPeopleSummary
+  }
+  type GovPeopleSummary {
+    id: String
+
+    average_age: [YearlyData]
+    
+    ${_.chain(headcount_types)
+      .map((headcount_type) => `${headcount_type}: [SummaryHeadcountData]`)
+      .join("/n  ")
+      .value()}
+  }
+  type SummaryHeadcountData {
+    dimension: String
+    yearly_data: [YearlyData]
   }
 
-  type ByYearData {
+  type YearlyData {
     year: Int,
     value: Float
-  }
-
-  type EmployeePopData {
-    org_id: String
-    data: [DataObjectWithDimension]
-  
-  }
-  type EmployeeGovData{
-    dimension: String
-    data: [DataObjectNoDimension]
-  }
-  type EmployeeAvgAge {
-    org_id: String
-    data: DataObjectNoDimension
-  }
-
-  type EmployeeGovAvgs {
-    id: String
-    data: [DataObjectNoDimension]
   }
 `;
 
 export default function ({ models, loaders }) {
-  const { org_employee_summary_loader, gov_employee_summary_loader } = loaders;
+  const { org_people_data_loader, gov_people_summary_loader } = loaders;
   const resolvers = {
     Org: {
-      employee_summary: ({ org_id }) =>
-        org_employee_summary_loader.load(org_id),
+      people_data: ({ org_id }) => org_people_data_loader.load(org_id),
     },
     Gov: {
-      employee_summary: () => gov_employee_summary_loader.load("gov"),
+      people_data: () => gov_people_summary_loader.load("gov"),
     },
   };
   return {

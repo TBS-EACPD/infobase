@@ -30,12 +30,13 @@ export default function (model_singleton) {
 
   const OrgPeopleDataSchema = mongoose.Schema({
     org_id: pkey_type(),
-    average_age: [average_age_fragment],
+    average_age: [{ org_id: { type: String }, ...average_age_fragment }],
     ..._.chain(headcount_types)
       .map((data_type) => [
         data_type,
         [
           {
+            org_id: { type: String },
             ...headcount_data_fragment,
             avg_share: number_type,
           },
