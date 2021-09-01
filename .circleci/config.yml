@@ -252,7 +252,7 @@ jobs:
       - run: (cd server && ../scripts/ci_scripts/store_project_coverage.sh server)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
-  test_end_to_end: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
+  test_end_to_end_cypress: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
       - image: eaadtbs/ib-ci-cypress:2.0
         <<: *dockerhub_auth
@@ -287,7 +287,7 @@ jobs:
       - run: (cd client && npm run cypress:run)
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
-  test_end_to_end_backup: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
+  test_end_to_end_testcafe: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
     docker:
       - image: eaadtbs/ib-ci-test:2.0
         <<: *dockerhub_auth
@@ -404,10 +404,10 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      - test_end_to_end:
+      - test_end_to_end_cypress:
           requires:
             - build
-      - test_end_to_end_backup:
+      - test_end_to_end_testcafe:
           requires:
             - build
       - test_server:
@@ -423,6 +423,7 @@ workflows:
           <<: *deploy_filter
       - deploy_client:
           requires:
-            - test_end_to_end
+            - test_end_to_end_cypress
+            - test_end_to_backup
             - deploy_server
           <<: *deploy_filter
