@@ -16,6 +16,7 @@ interface SelectProps {
   disabled?: boolean;
   style?: React.CSSProperties;
   title?: string;
+  ariaLabel?: string;
 }
 
 //expects options to be of the form [ { id, display } ]
@@ -28,6 +29,7 @@ const Select = ({
   disabled,
   style,
   title,
+  ariaLabel,
 }: SelectProps) => (
   <select
     style={style}
@@ -37,6 +39,7 @@ const Select = ({
     value={selected}
     onChange={(event) => onSelect(event.target.value)}
     title={title}
+    aria-label={ariaLabel}
   >
     {_.map(options, (choice) => (
       <option key={choice.id} value={choice.id}>
