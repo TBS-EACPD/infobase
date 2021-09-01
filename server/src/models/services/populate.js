@@ -22,6 +22,14 @@ const get_years_from_service_report = (services) =>
     .sort()
     .reverse()
     .value();
+const get_years_from_service_standards = (services) =>
+  _.chain(services)
+    .flatMap("standards")
+    .flatMap(({ standard_report }) => _.map(standard_report, "year"))
+    .uniq()
+    .sort()
+    .reverse()
+    .value();
 
 export default async function ({ models }) {
   const {
@@ -232,7 +240,7 @@ export default async function ({ models }) {
       .value();
   const get_final_standards_summary = (services, subject_id) => {
     const services_w_standards_count = get_services_w_standards_count(services);
-    const most_recent_year = get_years_from_service_report(services)[0];
+    const most_recent_year = get_years_from_service_standards(services)[0];
     const processed_standards = get_processed_standards(
       services,
       most_recent_year
@@ -317,7 +325,7 @@ export default async function ({ models }) {
       get_total_interaction_pts(services) || 0;
 
   const get_pct_of_standards_met_high_vol_services = (services) => {
-    const most_recent_year = get_years_from_service_report(services)[0];
+    const most_recent_year = get_years_from_service_standards(services)[0];
     const high_vol_services = _.filter(
       services,
       (service) =>
