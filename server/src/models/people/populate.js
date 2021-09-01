@@ -49,11 +49,20 @@ const validate_headcount_headers = (csv_name, csv) =>
     })
     .value();
 
-const org_id_by_dept_code = _.chain(get_standard_csv_file_rows("igoc.csv"))
-  .map(({ dept_code, org_id }) => [dept_code, org_id])
-  .fromPairs()
-  .value();
+// awkward little gotcha with the server code, the populate modules aren't written to run in the deployed cloud function environment (where, for instance,
+// the data that get_standard_csv_file_rows doesn't exist)... but the modules are still loaded and parsed because populate and run time overlap in src/models/index.js
+// SO top level code in a populate script can break the google cloud run time (... e.g. with a call to get_standard_csv_file_rows)
+// Luckily that will be caught and prevent the function from deploying, but it might be a pain to debug (you have to read multiple logs on GCloud to piece the error
+// together, for some reason). Spliting up src/models/index.js is a TODO
+const get_org_id_by_dept_code = _.memoize(() =>
+  _.chain(get_standard_csv_file_rows("igoc.csv"))
+    .map(({ dept_code, org_id }) => [dept_code, org_id])
+    .fromPairs()
+    .value()
+);
 const get_org_id_from_dept_code = (csv_name, dept_code) => {
+  const org_id_by_dept_code = get_org_id_by_dept_code();
+
   if (!_.has(org_id_by_dept_code, dept_code)) {
     throw new Error(
       `${csv_name} contains a dept_code, "${dept_code}", which could not be mapped to an org_id via the igoc`
