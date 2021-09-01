@@ -424,6 +424,6 @@ workflows:
       - deploy_client:
           requires:
             - test_end_to_end_cypress
-            - test_end_to_backup
+            - test_end_to_end_testcafe
             - deploy_server
           <<: *deploy_filter
