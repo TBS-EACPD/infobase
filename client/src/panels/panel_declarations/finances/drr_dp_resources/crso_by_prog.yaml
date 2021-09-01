@@ -25,15 +25,15 @@ crso_by_prog_exp_or_ftes:
    {{/if}}
 
 
-   {{#if most_recent_planned_top_1_name}}
-   In **{{planning_year_1}}**, {{gl_tt (pluralize most_recent_planned_number_of_programs "program")  "PROG"}}
-   {{#isEqual most_recent_planned_number_of_programs 1}}falls{{else}}fall{{/isEqual}} under this {{gt "core_resp"}}
+   {{#if first_planning_year_top_1_name}}
+   In **{{planning_year_1}}**, {{gl_tt (pluralize first_planning_year_number_of_programs "program")  "PROG"}}
+   {{#isEqual first_planning_year_number_of_programs 1}}falls{{else}}fall{{/isEqual}} under this {{gt "core_resp"}}
    {{#if is_fte}}
-   with **{{most_recent_planned_top_1_name}}** ({{fmt_big_int most_recent_planned_top_1_value}} FTEs) being the largest in terms of employment,
-   {{#if most_recent_planned_top_2_name}} followed by **{{most_recent_planned_top_2_name}}** ({{fmt_big_int most_recent_planned_top_2_value}} FTEs). {{else}}. {{/if}}
+   with **{{first_planning_year_top_1_name}}** ({{fmt_big_int first_planning_year_top_1_value}} FTEs) being the largest in terms of employment,
+   {{#if first_planning_year_top_2_name}} followed by **{{first_planning_year_top_2_name}}** ({{fmt_big_int first_planning_year_top_2_value}} FTEs). {{else}}. {{/if}}
    {{else}}
-   with **{{fmt_compact1_written most_recent_planned_top_1_name}}** ({{fmt_compact1_written most_recent_planned_top_1_value}}) being the largest in terms of spending,
-   {{#if most_recent_planned_top_2_name}} followed by **{{most_recent_planned_top_2_name}}** ({{fmt_compact1_written most_recent_planned_top_2_value}}). {{else}}. {{/if}}
+   with **{{fmt_compact1_written first_planning_year_top_1_name}}** ({{fmt_compact1_written first_planning_year_top_1_value}}) being the largest in terms of spending,
+   {{#if first_planning_year_top_2_name}} followed by **{{first_planning_year_top_2_name}}** ({{fmt_compact1_written first_planning_year_top_2_value}}). {{else}}. {{/if}}
    {{/if}}
    {{/if}}
   

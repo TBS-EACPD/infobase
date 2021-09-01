@@ -323,17 +323,20 @@ const get_calculate_func = (is_fte) => {
     }));
 
     const relevant_data = is_fte ? queried_fte.data : queried_exp.data;
+    const valid_most_recent_year = is_fte
+      ? _.last(fte_historical_years)
+      : _.last(exp_historical_years);
+
     const most_recent_top_2_programs = _.chain(relevant_data)
       .flatMap((program_data) => ({
         prgm: program_data.prgm,
-        value:
-          program_data[is_fte ? "{{pa_last_year}}" : "{{pa_last_year}}exp"],
+        value: program_data[valid_most_recent_year],
       }))
       .sortBy("value")
       .takeRight(2)
       .reverse()
       .value();
-    const most_recent_planned_top_2_programs = _.chain(relevant_data)
+    const first_planning_year_top_2_programs = _.chain(relevant_data)
       .flatMap((program_data) => ({
         prgm: program_data.prgm,
         value: program_data["{{planning_year_1}}"],
@@ -354,9 +357,9 @@ const get_calculate_func = (is_fte) => {
       fte_gap_year,
       most_recent_number_of_programs: _.filter(
         relevant_data,
-        is_fte ? "{{pa_last_year}}" : "{{pa_last_year}}exp"
+        valid_most_recent_year
       ).length,
-      most_recent_planned_number_of_programs: _.filter(
+      first_planning_year_number_of_programs: _.filter(
         relevant_data,
         "{{planning_year_1}}"
       ).length,
@@ -367,10 +370,10 @@ const get_calculate_func = (is_fte) => {
         ])
         .fromPairs()
         .value(),
-      ..._.chain(most_recent_planned_top_2_programs)
+      ..._.chain(first_planning_year_top_2_programs)
         .flatMap(({ prgm, value }, ix) => [
-          [`most_recent_planned_top_${ix + 1}_name`, prgm],
-          [`most_recent_planned_top_${ix + 1}_value`, value],
+          [`first_planning_year_top_${ix + 1}_name`, prgm],
+          [`first_planning_year_top_${ix + 1}_value`, value],
         ])
         .fromPairs()
         .value(),
