@@ -13,7 +13,7 @@ const schema = `
 
     ${_.chain(headcount_types)
       .map((headcount_type) => `${headcount_type}: [OrgHeadcountData]`)
-      .join("/n  ")
+      .join("\n  ")
       .value()}
   }
   type OrgHeadcountData {
@@ -32,7 +32,7 @@ const schema = `
     
     ${_.chain(headcount_types)
       .map((headcount_type) => `${headcount_type}: [SummaryHeadcountData]`)
-      .join("/n  ")
+      .join("\n  ")
       .value()}
   }
   type SummaryHeadcountData {
