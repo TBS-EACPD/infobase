@@ -44,7 +44,6 @@ export class ErrorBoundary extends React.Component {
   }
 
   get_state_from_unhandled_rejection = (event) => {
-    event.preventDefault();
     this.setState(state_from_error(event.reason));
   };
   componentDidMount() {
