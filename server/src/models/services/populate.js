@@ -99,9 +99,8 @@ export default async function ({ models }) {
     })
   );
 
-  const service_rows = _.map(
-    get_standard_csv_file_rows("services.csv"),
-    (service) => {
+  const service_rows = _.chain(get_standard_csv_file_rows("services.csv"))
+    .map((service) => {
       const {
         id,
         dept_code,
@@ -119,6 +118,7 @@ export default async function ({ models }) {
         service_type_ids,
         scope_en,
         scope_fr,
+        scope_ids,
         designations_en,
         designations_fr,
         target_groups_en,
@@ -180,6 +180,7 @@ export default async function ({ models }) {
           service_type_ids,
           scope_en,
           scope_fr,
+          scope_ids,
           designations_en,
           designations_fr,
           target_groups_en,
@@ -197,8 +198,9 @@ export default async function ({ models }) {
         ),
         service_report,
       };
-    }
-  );
+    })
+    .reject((service) => _.includes(service.scope_ids, "internal")) // SI_TODO This should be done on pipeline.. I think?
+    .value();
 
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_ids, (program_id) => {
