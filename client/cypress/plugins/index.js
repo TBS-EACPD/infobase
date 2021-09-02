@@ -15,5 +15,11 @@ module.exports = (on, config) => {
 
       return null;
     },
+    error(message) {
+      console.error("\x1b[31m", "ERROR:", message, "\x1b[0m");
+    },
+    warn(message) {
+      console.warn("\x1b[33m", "WARNING:", message, "\x1b[0m");
+    },
   });
 };
