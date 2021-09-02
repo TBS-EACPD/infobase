@@ -78,6 +78,7 @@ const send_completed_email_template = (template_name, completed_template) =>
     .catch(log_error_to_analytics);
 
 export {
+  email_backend_url,
   get_email_template_names,
   get_email_template,
   send_completed_email_template,
