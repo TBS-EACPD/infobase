@@ -419,7 +419,7 @@ export default async function ({ models }) {
           get_pct_of_online_client_interaction_pts(services),
         pct_of_standards_met_high_vol_services:
           get_pct_of_standards_met_high_vol_services(services),
-        num_of_programs_offering_services: _.chain(service_rows)
+        num_of_programs_offering_services: _.chain(services)
           .reduce(group_by_program_id, {})
           .size()
           .value(),
