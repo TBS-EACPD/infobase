@@ -97,7 +97,7 @@ Object {
             "id": "326",
             "num_of_programs_offering_services": 6,
             "num_of_subject_offering_services": null,
-            "number_of_online_enabled_services": 4,
+            "number_of_online_enabled_services": 3,
             "number_of_services": 6,
             "report_years": Array [
               "2018",
