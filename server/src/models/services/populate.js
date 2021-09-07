@@ -286,14 +286,27 @@ export default async function ({ models }) {
     _.reduce(
       services,
       (sum, service) => {
-        const is_online_enabled_service = _.reduce(
-          digital_status_keys,
-          (is_online_enabled_service, key) =>
-            is_online_enabled_service
-              ? is_online_enabled_service
-              : service[`${key}_status`],
-          false
-        );
+        const is_online_enabled_service = (() => {
+          const is_all_not_applicable_service = _.reduce(
+            digital_status_keys,
+            (is_not_applicable_service, key) =>
+              is_not_applicable_service
+                ? service[`${key}_status`] === null
+                : false,
+            true
+          );
+          if (is_all_not_applicable_service) {
+            return false;
+          }
+          return _.reduce(
+            digital_status_keys,
+            (is_online_enabled_service, key) =>
+              is_online_enabled_service
+                ? service[`${key}_status`] !== false
+                : false,
+            true
+          );
+        })();
         return is_online_enabled_service ? sum + 1 : sum;
       },
       0
