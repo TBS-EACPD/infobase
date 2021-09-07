@@ -46,7 +46,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
   const correct_subject = is_gov ? Dept : Program;
 
   const cleaned_data = _.map(subject_offering_services_summary, (row) =>
-    _.omit(row, ["__typename", "id"])
+    _.omit(row, ["__typename", "id", !is_gov && "total_volume"])
   );
 
   const column_configs = {
@@ -70,12 +70,14 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
       header: text_maker("number_of_services"),
       formatter: "big_int",
     },
-    total_volume: {
-      index: 2,
-      header: text_maker("applications"),
-      is_summable: true,
-      formatter: "big_int",
-    },
+    ...(is_gov && {
+      total_volume: {
+        index: 2,
+        header: text_maker("applications"),
+        is_summable: true,
+        formatter: "big_int",
+      },
+    }),
   };
   return (
     <HeightClippedGraph clipHeight={600}>
