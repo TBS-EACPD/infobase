@@ -257,19 +257,27 @@ export default async function ({ models }) {
   };
   const get_subject_offering_services_summary = (grouped_services) =>
     _.chain(grouped_services)
-      .map((services, org_id) => ({
-        id: org_id,
-        subject_id: org_id,
-        number_of_services: services.length,
-        total_volume: _.sumBy(services, ({ service_report }) =>
-          _.reduce(
-            application_channels_keys,
-            (sum, key) =>
-              sum + _.chain(service_report).sumBy(key).toNumber().value() || 0,
-            0
-          )
-        ),
-      }))
+      .map((services, org_id) => {
+        const most_recent_year = get_years_from_service_report(services)[0];
+        return {
+          id: org_id,
+          subject_id: org_id,
+          number_of_services: services.length,
+          total_volume: _.sumBy(services, ({ service_report }) =>
+            _.reduce(
+              application_channels_keys,
+              (sum, key) =>
+                sum +
+                  _.chain(service_report)
+                    .filter((report) => report.year === most_recent_year)
+                    .sumBy(key)
+                    .toNumber()
+                    .value() || 0,
+              0
+            )
+          ),
+        };
+      })
       .sortBy("total_volume")
       .reverse()
       .value();
