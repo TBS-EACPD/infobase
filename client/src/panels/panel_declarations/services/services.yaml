@@ -152,8 +152,8 @@ services_channels_title:
 distribution_of_applications_by_channel:
   en: Distribution of Service Applications by Channel
   fr: TODO
-application_channels_by_service:
-  en: Application Channels by Service
+customizable_service_graph:
+  en: Customizable Service Graph
   fr: TODO
 single_service_channels_title:
   en: Applications for the service
