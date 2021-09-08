@@ -2,12 +2,15 @@
 services_intro_title:
   en: Introduction to services
   fr: TODO
-total_number_of_services:
+gov_total_number_of_services:
   transform: [handlebars, markdown]
-  en: |
-    Total number of services in {{subject.name}}
-  fr: |
-    TODO
+  en: Total number of services in {{subject.name}}
+  fr: TODO
+dept_total_number_of_services:
+  transform: [handlebars, markdown]
+  en: Total number of services offered by {{subject.name}}
+  fr: TODO
+  
 number_value_of_services:
   transform: [handlebars, markdown]
   en: |
@@ -65,7 +68,7 @@ list_of_provided_services_desc_program:
   en: |
     Programs can provide one or more {{gl_tt "services" "SERVICE"}}. As well, several Programs together may offer one service.
 
-    **{{subject_name}}** is offering **{{num_of_services}}** services
+    **{{subject_name}}** offers **{{num_of_services}}** services
   fr: TODO
 
 view_service:
@@ -85,7 +88,7 @@ services_digital_status_text:
 services_digital_status_prog_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that are offered under the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
+    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} offered by the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -94,8 +97,8 @@ digital_status:
   en: Online status of this service
   fr: État en ligne de ce service
 account_reg_digital_desc:
-  en: Clients can register online
-  fr: Les client peuvent s'inscire en ligne
+  en: Clients can register an account online
+  fr: TODO
 application_digital_desc:
   en: Clients can apply online
   fr: Les clients peuvent présenter leur demande en ligne
@@ -106,8 +109,8 @@ decision_digital_desc:
   en: Clients can read the department's decision online
   fr: TODO
 issuance_digital_desc:
-  en: Documentation can be issued online
-  fr: La documentation peut être transmise en ligne
+  en: Clients can be issued documentation online
+  fr: TODO
 issue_res_digital_desc:
   en: Clients can resolve issues and give feedback online
   fr: TODO
@@ -146,6 +149,9 @@ service_name:
 services_channels_title:
   en: Applications for Services by Channel
   fr: TODO
+distribution_of_applications_by_channel:
+  en: Distribution of Service Applications by Channel
+  fr: TODO
 application_channels_by_service:
   en: Application Channels by Service
   fr: TODO
@@ -159,17 +165,19 @@ services_channels_text:
 application_channels_by_services_text:
   transform: [handlebars, markdown]
   en: |
-    (SI_TODO this line is weird) Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
+    Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
     
     In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}**, generated the most traffic through "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
+
+    Create your own graph by selecting specific services in the list
   fr: |
     TODO
 application_channels_by_services_program_text:
   transform: [handlebars, markdown]
   en: |
-    (SI_TODO this line is weird) Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
+    Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
 
     Under the **{{subject.name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, the most traffic was generated through the "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
     
@@ -178,9 +186,9 @@ application_channels_by_services_program_text:
 service_channels_text:
   transform: [handlebars, markdown]
   en: |
-    Application channels that this {{gl_tt "service" "SERVICE"}} uses for handling applications.
+    Channels that this {{gl_tt "service" "SERVICE"}} uses for receiving applications.
     
-    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the highest Application channels volume for this service.{{/if}}
+    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the most used application channel for this service.{{/if}}
   fr: | 
     TODO
 live_application_count:
@@ -291,7 +299,7 @@ service_types:
 services_standards_text:
   transform: [handlebars, markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{subject.name}}** had the following:
+    In **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{subject.name}}** had the following service standard performance:
   fr: TODO
 service_standards_title:
   en: Service Standards
@@ -319,9 +327,9 @@ standard_channel:
 total_business_volume:
   en: Total Business Volume
   fr: Volume d'activités total
-satisfied_business_volume:
-  en: Satisfied Business Volume
-  fr: Volume d'activités satisfaisant
+volume_target:
+  en: Volume meeting target
+  fr: TODO
 has_standards:
   en: Service has standards
   fr: Le service a des normes

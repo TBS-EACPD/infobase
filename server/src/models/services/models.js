@@ -62,7 +62,7 @@ export default function (model_singleton) {
   const ServiceSchema = mongoose.Schema({
     id: pkey_type(),
     org_id: parent_fkey_type(),
-    program_ids: [sparse_parent_fkey_type()],
+    program_activity_codes: [sparse_parent_fkey_type()],
     report_years: [str_type],
     first_active_year: str_type,
     last_active_year: str_type,
@@ -176,7 +176,7 @@ export default function (model_singleton) {
     ),
     services_by_program_id: create_resource_by_foreignkey_attr_dataloader(
       Service,
-      "program_ids"
+      "program_activity_codes"
     ),
     gov_service_summary_loader: create_resource_by_id_attr_dataloader(
       GovServiceSummary,

@@ -158,7 +158,7 @@ export class ServiceStandards extends React.Component {
       },
       is_target_met: {
         index: 4,
-        header: text_maker("status"),
+        header: text_maker("result"),
         formatter: (value) =>
           is_a11y_mode ? text_maker(value) : status_icons[value],
       },
@@ -169,7 +169,7 @@ export class ServiceStandards extends React.Component {
       },
       met_count: {
         index: 6,
-        header: text_maker("satisfied_business_volume"),
+        header: text_maker("volume_target"),
         formatter: "big_int",
       },
       standard_type: {

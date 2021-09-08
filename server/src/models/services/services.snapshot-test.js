@@ -5,7 +5,7 @@ const service_fields = `
   org {
     name
   }
-  program_ids
+  program_activity_codes
   programs {
     name
   }

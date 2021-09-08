@@ -60,7 +60,10 @@ const ServicesIntroPanel = ({ subject }) => {
       <div className="pane-row">
         <div className="pane-rect">
           <span className="pane-max-width">
-            <TM k="total_number_of_services" args={{ subject }} />
+            <TM
+              k={`${subject.level}_total_number_of_services`}
+              args={{ subject }}
+            />
           </span>
           <TM
             className="large_panel_text"

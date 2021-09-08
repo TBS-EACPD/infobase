@@ -115,15 +115,15 @@ export default async function ({ models }) {
 
         service_type_en,
         service_type_fr,
-        service_type_ids,
+        service_type_codes,
         scope_en,
         scope_fr,
-        scope_ids,
+        scope_codes,
         designations_en,
         designations_fr,
         target_groups_en,
         target_groups_fr,
-        program_ids,
+        program_activity_codes,
         feedback_channels_en,
         feedback_channels_fr,
         urls_en,
@@ -170,17 +170,17 @@ export default async function ({ models }) {
           "NOT_ENABLED"
         ),
         report_years: get_years_from_service_report([{ service_report }]),
-        program_ids: _.chain(program_ids)
+        program_activity_codes: _.chain(program_activity_codes)
           .split("<>")
           .map((id) => `${dept_code}-${id}`)
           .value(),
         ...multi_value_string_fields_to_arrays({
           service_type_en,
           service_type_fr,
-          service_type_ids,
+          service_type_codes,
           scope_en,
           scope_fr,
-          scope_ids,
+          scope_codes,
           designations_en,
           designations_fr,
           target_groups_en,
@@ -199,11 +199,11 @@ export default async function ({ models }) {
         service_report,
       };
     })
-    .reject((service) => _.includes(service.scope_ids, "internal")) // SI_TODO This should be done on pipeline.. I think?
+    .reject((service) => _.isEqual(service.scope_codes, ["internal"])) // SI_TODO This should be done on pipeline.. I think?
     .value();
 
   const group_by_program_id = (result, service) => {
-    _.forEach(service.program_ids, (program_id) => {
+    _.forEach(service.program_activity_codes, (program_id) => {
       result[program_id] = result[program_id]
         ? _.concat(result[program_id], service)
         : [service];

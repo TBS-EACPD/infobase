@@ -93,7 +93,7 @@ const schema = `
     org_id: String
     org: Org
     report_years: [String]
-    program_ids: [String]
+    program_activity_codes: [String]
     programs: [Program]
     first_active_year: String
     last_active_year: String
@@ -158,7 +158,9 @@ export default function ({ models, loaders }) {
     return !_.isNull(has_service);
   };
   const program_has_services = async (program_id) => {
-    const has_service = await Service.findOne({ program_ids: program_id });
+    const has_service = await Service.findOne({
+      program_activity_codes: program_id,
+    });
     return !_.isNull(has_service);
   };
 
@@ -182,8 +184,10 @@ export default function ({ models, loaders }) {
     },
     Service: {
       org: ({ org_id }) => org_id_loader.load(org_id),
-      programs: ({ program_ids }) =>
-        _.map(program_ids, (program_id) => prog_id_loader.load(program_id)),
+      programs: ({ program_activity_codes }) =>
+        _.map(program_activity_codes, (program_id) =>
+          prog_id_loader.load(program_id)
+        ),
       name: bilingual_field("name"),
       description: bilingual_field("description"),
       service_type: bilingual_field("service_type"),
