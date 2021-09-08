@@ -1,5 +1,15 @@
-standard_id,year,lower,count,met_count,comment_en,comment_fr,is_target_met
-1361,2018,90.0,0.0,0.0,The Claims Office does not track total annual business meeting the standards. It tracks how much was paid out per claimant.,Le Bureau des réclamations ne fait pas le suivi du nombre total d’activités qui répondent aux normes. Il fait le suivi des montants d’argent versés par réclamation.,1.0
-1577,2018,90.0,0.0,0.0,The Claims Office does not track total annual business meeting the standards. It tracks how much was paid out per claimant.,Le Bureau des réclamations ne fait pas le suivi du nombre total d’activités qui répondent aux normes. Il fait le suivi des montants d’argent versés par réclamation.,1.0
-1578,2018,90.0,0.0,0.0,The Claims Office does not track total annual business meeting the standards. It tracks how much was paid out per claimant.,Le Bureau des réclamations ne fait pas le suivi du nombre total d’activités qui répondent aux normes. Il fait le suivi des montants d’argent versés par réclamation.,1.0
-1579,2018,90.0,0.0,0.0,The Claims Office does not track total annual business meeting the standards. It tracks how much was paid out per claimant.,Le Bureau des réclamations ne fait pas le suivi du nombre total d’activités qui répondent aux normes. Il fait le suivi des montants d’argent versés par réclamation.,1.0
+standard_id,year,lower,count,met_count,is_target_met,comment_en,comment_fr
+1042,2018,80.0,3023.0,2630.0,1.0,Standard of 87% was met of enquiries received by email or written correspondence.,Norme de service respectée dans 87 % des cas pour les demandes reçues par courriel ou par correspondance écrite.
+1042,2019,,,,,,
+146,2018,80.0,2968.0,2611.0,1.0,88% target within 5 days.  For F/Y 2018/19,Norme de service de 5 jours respectée dans 88 % des cas. Pour l’exercice 2018-2019
+146,2019,,,,,,
+1032,2018,75.0,784.0,784.0,1.0,Service standard met was 100%,La norme de service a été respectée dans 100 %  des cas
+1032,2019,,,,,,
+765,2018,75.0,372.0,355.0,1.0,Service Standard met was 95.4%,"Norme de service atteinte: 95,4%"
+765,2019,,,,,,
+838,2018,,,,,,
+836,2018,,,,,,
+838,2019,,,,,N/A,N/A
+836,2019,,,,,N/A,N/A
+165,2018,100.0,28119852.0,28119852.0,1.0,The number reported is the total # of Financial Transaction reports received electronically for 2018/19,Le nombre déclaré est le nombre total de déclarations d'opérations financières reçues par voie électronique pour 2018-2019.
+165,2019,,,,,,

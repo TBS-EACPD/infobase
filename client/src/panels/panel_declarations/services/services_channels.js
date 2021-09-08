@@ -215,7 +215,7 @@ const ServicesChannelsPanel = ({ subject }) => {
               <TM
                 style={{ fontWeight: 700 }}
                 className="medium-panel-text"
-                k="services_channels_title"
+                k="distribution_of_applications_by_channel"
               />
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>

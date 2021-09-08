@@ -10,7 +10,7 @@ import { get_client } from "src/graphql_utils/graphql_utils";
 const all_service_fragments = `
       id
       org_id
-      program_ids
+      program_activity_codes
 
       first_active_year
       last_active_year
