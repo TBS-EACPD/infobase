@@ -158,6 +158,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
             indexBy={"key_desc"}
             keys={[can_online, cannot_online, not_applicable]}
             colors={(d) => colors(d.id)}
+            enableGridX={false}
             left_axis={{
               renderTick: (tick) => (
                 <g
@@ -193,6 +194,14 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
                     key={tick.tickIndex}
                     transform={`translate(${tick.x - 3.5},${tick.y + 12})`}
                   >
+                    <line
+                      x1="0"
+                      x2="0"
+                      y1="0"
+                      y2="7"
+                      transform={`translate(3,-20)`}
+                      style={{ stroke: "rgb(119, 119, 119)", strokeWidth: 1 }}
+                    />
                     <text>{tick.value}</text>
                   </g>
                 ),
