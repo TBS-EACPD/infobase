@@ -9,9 +9,18 @@ import { is_IE } from "src/core/feature_detection";
 
 import { LegendList } from "src/charts/legends/LegendList";
 
-import { IconChevron, IconCopy, IconDownload } from "src/icons/icons";
+import {
+  IconChevron,
+  IconCopy,
+  IconDownload,
+  IconFilter,
+} from "src/icons/icons";
 
-import { backgroundColor } from "src/style_constants/index";
+import {
+  backgroundColor,
+  primaryColor,
+  secondaryColor,
+} from "src/style_constants/index";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";
@@ -26,7 +35,14 @@ export const DropdownFilter = ({
   <DropdownMenu
     opened_button_class_name={"button-unstyled"}
     closed_button_class_name={"button-unstyled"}
-    dropdown_trigger_txt={<IconChevron />}
+    dropdown_trigger_txt={
+      _.reject(dropdown_filter[column_key], (col_filter) => col_filter.active)
+        .length > 0 ? (
+        <IconFilter color={secondaryColor} />
+      ) : (
+        <IconChevron color={primaryColor} />
+      )
+    }
     dropdown_content_class_name="no-right"
     dropdown_content={
       <LegendList
