@@ -123,6 +123,8 @@ class GranularView extends React.Component {
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               is_summable:
                 is_summable && !is_matched_undefined(data_columns, nick),
+              show_dropdown_filter:
+                is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               formatter: type,
             },
           ]

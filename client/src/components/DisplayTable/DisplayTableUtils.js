@@ -7,13 +7,63 @@ import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboa
 
 import { is_IE } from "src/core/feature_detection";
 
-import { IconCopy, IconDownload } from "src/icons/icons";
+import { LegendList } from "src/charts/legends/LegendList";
+
+import { IconChevron, IconCopy, IconDownload } from "src/icons/icons";
+
 import { backgroundColor } from "src/style_constants/index";
 
 import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";
 
 const { text_maker } = create_text_maker_component(text);
+
+export const DropdownFilter = ({
+  column_key,
+  set_dropdown_filter,
+  dropdown_filter,
+}) => (
+  <DropdownMenu
+    opened_button_class_name={"button-unstyled"}
+    closed_button_class_name={"button-unstyled"}
+    dropdown_trigger_txt={<IconChevron />}
+    dropdown_content_class_name="no-right"
+    dropdown_content={
+      <LegendList
+        items={dropdown_filter[column_key]}
+        onClick={(col_data) => {
+          if (col_data === "select_all") {
+            const is_select_all_enabled = !_.find(dropdown_filter[column_key], {
+              id: col_data,
+            }).active;
+            set_dropdown_filter({
+              ...dropdown_filter,
+              [column_key]: _.map(
+                dropdown_filter[column_key],
+                (col_filter) => ({
+                  ...col_filter,
+                  active: is_select_all_enabled,
+                })
+              ),
+            });
+          } else {
+            set_dropdown_filter({
+              ...dropdown_filter,
+              [column_key]: _.map(dropdown_filter[column_key], (col_filter) =>
+                col_filter.id === col_data
+                  ? {
+                      ...col_filter,
+                      active: !col_filter.active,
+                    }
+                  : col_filter
+              ),
+            });
+          }
+        }}
+      />
+    }
+  />
+);
 
 export const DisplayTableCopyCsv = ({ csv_string }) => (
   <WriteToClipboard
