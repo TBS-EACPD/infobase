@@ -143,6 +143,10 @@ hr {
   padding: 0;
   border-radius: 0;
 }
+.input-unstyled {
+  border: 0;
+  outline: none;
+}
 
 legend {
   /* reset bootstrap styles */

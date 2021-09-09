@@ -91,7 +91,7 @@ export class DropdownMenu extends React.Component<
       } else if (_.isString(dropdown_trigger_txt)) {
         return dropdown_trigger_txt;
       } else {
-        return undefined;
+        return "";
       }
     })();
 

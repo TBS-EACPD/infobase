@@ -3,6 +3,8 @@ import _ from "lodash";
 import React from "react";
 
 import { text_maker } from "src/tables/table_common";
+import "./DebouncedTextInput.scss";
+
 class DebouncedTextInput extends React.Component {
   render() {
     const {
@@ -12,6 +14,7 @@ class DebouncedTextInput extends React.Component {
       debounceTime,
       updateCallback,
       inputClassName,
+      utility_button,
     } = this.props;
 
     this.debounced_callback = _.debounce(
@@ -26,15 +29,22 @@ class DebouncedTextInput extends React.Component {
     const unique_id = _.uniqueId("input-");
 
     return (
-      <input
-        id={unique_id}
-        type="text"
-        aria_label={a11y_label || text_maker("text_input")}
-        className={classNames("form-control", inputClassName)}
-        placeholder={placeHolder || ""}
-        defaultValue={defaultValue || undefined}
-        onChange={handle_change}
-      />
+      <div className="input-bar">
+        <input
+          id={unique_id}
+          type="text"
+          aria_label={a11y_label || text_maker("text_input")}
+          className={classNames(
+            "form-control",
+            "input-unstyled",
+            inputClassName
+          )}
+          placeholder={placeHolder || ""}
+          defaultValue={defaultValue || undefined}
+          onChange={handle_change}
+        />
+        {utility_button}
+      </div>
     );
   }
   componentWillUnmount() {
