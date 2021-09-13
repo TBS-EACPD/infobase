@@ -4,6 +4,8 @@ import React, { BaseSyntheticEvent } from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
+import { tertiaryColor } from "src/style_constants/index";
+
 import "./DropdownMenu.scss";
 
 interface DropdownMenuProps {
@@ -128,10 +130,25 @@ export class DropdownMenu extends React.Component<
             "dropdown__content"
           )}
         >
-          {dropdown_content}
-          <button className="btn-ib-primary" onClick={this.toggle_dropdown}>
-            {`${trivial_text_maker("close")} ${aria_label}`}
-          </button>
+          <div
+            style={{
+              overflowX: "hidden",
+              maxHeight: "351px",
+              msOverflowStyle: "-ms-autohiding-scrollbar",
+            }}
+          >
+            {dropdown_content}
+          </div>
+          <div
+            style={{
+              borderTop: `1px dashed ${tertiaryColor}`,
+              padding: "10px 0px 10px 5px",
+            }}
+          >
+            <button className="btn-ib-primary" onClick={this.toggle_dropdown}>
+              {`${trivial_text_maker("close")} ${aria_label}`}
+            </button>
+          </div>
         </div>
       </div>
     );
