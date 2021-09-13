@@ -628,7 +628,7 @@ export class _DisplayTable extends React.Component<
             </tbody>
           )}
           {!show_pagination_load_spinner &&
-            (_.isEmpty(visible_ordered_col_keys) ? (
+            (sorted_filtered_data.length === 0 ? (
               <NoDataMessage />
             ) : (
               <tbody>
@@ -721,14 +721,6 @@ export class _DisplayTable extends React.Component<
             ))}
           <tfoot>{page_selector}</tfoot>
         </table>
-
-        {sorted_filtered_data.length === 0 && (
-          <TM
-            k="no_data_table"
-            el="div"
-            style={{ width: "100%", textAlign: "center" }}
-          />
-        )}
       </div>
     );
   }
