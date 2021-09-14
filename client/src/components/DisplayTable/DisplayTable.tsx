@@ -572,9 +572,7 @@ export class _DisplayTable extends React.Component<
                       )}
                       {searchable && (
                         <DebouncedTextInput
-                          inputClassName={`search input-sm ${
-                            show_dropdown_filter && "unstyled-input"
-                          }`}
+                          inputClassName={`search input-sm`}
                           placeHolder={text_maker("filter_data")}
                           a11y_label={text_maker("filter_data")}
                           defaultValue={current_search_input}
