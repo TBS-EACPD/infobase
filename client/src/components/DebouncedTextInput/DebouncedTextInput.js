@@ -34,6 +34,7 @@ class DebouncedTextInput extends React.Component {
           id={unique_id}
           type="text"
           aria_label={a11y_label || text_maker("text_input")}
+          style={{ width: "100%" }}
           className={classNames(
             "form-control",
             "input-unstyled",
