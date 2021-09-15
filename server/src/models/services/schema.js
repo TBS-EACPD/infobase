@@ -4,7 +4,7 @@ import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
   extend type Root{
-    service(id: String!): Service
+    service(id: String): [Service]
   }
   extend type Gov{
     service_summary: ServiceSummary
@@ -167,7 +167,7 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Root: {
-      service: (_x, { id }) => service_loader.load(id),
+      service: async (_x, { id }) => await Service.find(id ? { id } : {}), //SI_TODO need to find a way to "load all" for service loader
     },
     Gov: {
       service_summary: () => gov_service_summary_loader.load("gov"),

@@ -201,6 +201,7 @@ class InfoGraph_ extends React.Component {
             initial_search_options={{
               include_orgs_normal_data: true,
               include_orgs_limited_data: true,
+              include_services: true,
               include_crsos: true,
               include_programs: true,
               include_tags_goco: true,
