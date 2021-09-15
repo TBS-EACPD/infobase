@@ -6,9 +6,12 @@ import { Modal } from "react-bootstrap";
 import { trivial_text_maker } from "src/models/text";
 import "./bootstrap_modal_exstension.scss";
 
+type ModalSize = "sm" | "lg" | "xl";
+
 const StatelessModalDefaultProps = {
   close_text: _.upperFirst(trivial_text_maker("close")) as React.ReactNode,
   include_close_button_in_header: false,
+  size: "xl" as ModalSize,
 };
 type StatelessModalProps = typeof StatelessModalDefaultProps & {
   on_close_callback: () => void;
@@ -40,6 +43,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
       close_text,
       include_close_button_in_header,
       additional_dialog_class,
+      size,
     } = this.props;
 
     const default_header = (
@@ -84,7 +88,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
     return (
       <Modal
         show={show}
-        size="xl"
+        size={size}
         onHide={this.closeModal}
         dialogClassName={classNames("modal-dialog", additional_dialog_class)}
         centered

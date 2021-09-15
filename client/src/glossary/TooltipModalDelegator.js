@@ -40,9 +40,9 @@ export class TooltipModalDelegator extends React.Component {
     }
 
     const modal = React.createElement(StatelessModal, {
-      // not sure why, but modal only shows up when show is string
-      show: "false",
+      show: true,
       body: glossary_def.innerText, // using glossary_def gives an error
+      size: "sm",
       on_close_callback: () => toggle_modal(false),
     });
 
