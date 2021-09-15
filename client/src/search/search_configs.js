@@ -67,13 +67,10 @@ const LimitedDataDisplay = (search, name) => (
 const org_templates = {
   header_function: () => trivial_text_maker("orgs"),
   name_function: (org) => org.name,
-  menu_content_function: function (org, search) {
+  menu_content_function: function (org, search, name_function) {
     if (org.subject_type === "gov") {
       return (
-        <InfoBaseHighlighter
-          search={search}
-          content={this.name_function(org)}
-        />
+        <InfoBaseHighlighter search={search} content={name_function(org)} />
       );
     }
 
@@ -298,8 +295,8 @@ const programs = {
       ["name", "old_name", "activity_code"],
       "programs"
     )(datum),
-  menu_content_function: function (program, search) {
-    const name = this.name_function(program);
+  menu_content_function: function (program, search, name_function) {
+    const name = name_function(program);
 
     if (program.old_name) {
       const reg_exps = query_to_reg_exps(search);
@@ -347,6 +344,21 @@ const crsos = {
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name", "activity_code"], "crsos")(datum),
 };
+const services = {
+  config_name: "services",
+  header_function: () => trivial_text_maker("services"),
+  name_function: (service) => service.name,
+  query: `
+    service {
+      id
+      org_id
+      name
+    }
+  `,
+  queried_data_accessor: "service",
+  filter: (query, datum) =>
+    memoized_re_matchers(query, ["name"], "services")(datum),
+};
 
 export {
   highlight_search_match,
@@ -360,4 +372,5 @@ export {
   datasets,
   glossary,
   glossary_lite,
+  services,
 };

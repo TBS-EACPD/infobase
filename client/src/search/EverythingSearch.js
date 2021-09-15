@@ -23,6 +23,7 @@ import {
   who_we_help as who_we_help_search_config,
   datasets as table_search_config,
   glossary_lite as glossary_lite_search_config,
+  services as services_search_config,
 } from "./search_configs";
 import { SearchConfigTypeahead } from "./SearchConfigTypeahead";
 
@@ -61,6 +62,7 @@ const search_options_hierarchy = {
   other_options: {
     label: text_maker("other_options_label"),
     child_options: {
+      include_services: { label: text_maker("services") },
       include_glossary: { label: text_maker("glossary") },
       include_tables: { label: text_maker("metadata") },
     },
@@ -112,6 +114,10 @@ const EverythingSearch = withRouter(
         ...props.initial_search_options,
       };
     }
+    get_gql_search_configs = () => {
+      const { include_services } = this.state;
+      return _.compact([include_services && services_search_config]);
+    };
     get_search_configs = () => {
       const { reject_gov, reject_dead_orgs } = this.props;
 
@@ -177,6 +183,7 @@ const EverythingSearch = withRouter(
       return (
         <div className="col-12 col-lg-12 p-0">
           <SearchConfigTypeahead
+            gql_search_configs={this.get_gql_search_configs()}
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
             utility_buttons={
@@ -284,6 +291,7 @@ EverythingSearch.defaultProps = {
     include_tags_hwh: true,
     include_tags_wwh: true,
 
+    include_services: true,
     include_glossary: false,
     include_tables: false,
   },
