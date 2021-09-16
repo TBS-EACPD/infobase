@@ -43,7 +43,7 @@ gba_plus_intro_text:
   fr: |
     L'{{gl_tt "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est utilisée par le gouvernement fédéral pour l'élaboration de politiques, de programmes et de lois. 
     Dans les plus récents rapports sur les résultats (**2019-2020**), les indicateurs portent un marqueur {{gl_tt "ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
-    Ces indicateurs et leur marquage ACS Plus se trouvent sur la page de chaque organisation.
+    Ces indicateurs et le marquage ACS Plus se trouvent sur la page de chaque organisation.
 
 
 dp_summary_text:
