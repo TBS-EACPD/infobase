@@ -65,7 +65,7 @@ export default class About extends React.Component<AboutProps, never> {
             contents={[
               {
                 label: text_maker("principle_1_name"),
-                content: text_maker("principle_1_desc"),
+                content: <TM tmf={text_maker} el="div" k="principle_1_desc" />,
               },
               {
                 label: text_maker("principle_2_name"),
