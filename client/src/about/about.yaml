@@ -11,7 +11,8 @@ principle_1_name:
   fr: Uniformité
 
 principle_1_desc:
-  en: GC InfoBase facilitates the analysis of previously hard to access information by aligning data from various public reports into a consisten framework based on Volume II of the Public Accounts. We help "connect the dots".
+  transform: [handlebars, markdown]
+  en: GC InfoBase facilitates the analysis of previously hard to access information by aligning data from various public reports into a consistent framework based on Volume II of the {{gl_tt "Public Accounts" "PA"}}. We help "connect the dots".
   fr: L'InfoBase du GC facilite l'analyse de l'information, auparavant difficile d'accès, en regroupant les données de divers rapports publics dans un cadre uniforme reposant sur le volume II des Comptes publics. Elle permet de faire le lien entre les différents éléments.
 
 principle_2_name:
@@ -173,17 +174,17 @@ behind_scenes_sub_title_2:
 behind_scenes_sub_text_2:
   transform: [handlebars, markdown]
   en: |
-    Whenever possible, we align the information on GC InfoBase to the universe of organizations and concepts that are presented in Volume II of the {{gl_tt "Public Accounts" "PA"}}. As a result, organizations that are presented separately in other reports may be grouped together on GC InfoBase to match the {{gl_tt "Public Accounts" "PA"}}.
+    Whenever possible, we align the information on GC InfoBase to the universe of organizations and concepts that are presented in Volume II of the {{gl_tt "Public Accounts" "PA"}}. As a result, organizations that are presented separately in other reports may be grouped together on GC InfoBase to match the Public Accounts.
 
-    GC InfoBase may deviate from the {{gl_tt "Public Accounts" "PA"}} in cases where a legal entity is dissolved and replaced by a new entity that inherits its resources or functions. Organizations may be joined to preserve trend data, even if those organizations are presented separately in the {{gl_tt "Public Accounts" "PA"}}.
+    GC InfoBase may deviate from the Public Accounts in cases where a legal entity is dissolved and replaced by a new entity that inherits its resources or functions. Organizations may be joined to preserve trend data, even if those organizations are presented separately in the Public Accounts.
 
-    At times we may deviate from official reports in subtle ways to improve accessibility. For example, GC InfoBase preferentially displays the applied title of organizations, as opposed to their legal titles which are used in the {{gl_tt "Public Accounts" "PA"}}.
+    At times we may deviate from official reports in subtle ways to improve accessibility. For example, GC InfoBase preferentially displays the applied title of organizations, as opposed to their legal titles which are used in the Public Accounts.
   fr: |
-    Dans la mesure du possible, nous faisons en sorte que les renseignements de l'InfoBase du GC correspondent à l'univers d’organisations et de concepts du volume II des {{gl_tt "Comptes publics" "PA"}}. Ainsi, les organisations répertoriées autrement dans divers rapports peuvent être intégrées dans l'InfoBase du GC de la façon décrite dans les {{gl_tt "Comptes publics" "PA"}}.
+    Dans la mesure du possible, nous faisons en sorte que les renseignements de l'InfoBase du GC correspondent à l'univers d’organisations et de concepts du volume II des {{gl_tt "Comptes publics" "PA"}}. Ainsi, les organisations répertoriées autrement dans divers rapports peuvent être intégrées dans l'InfoBase du GC de la façon décrite dans les Comptes publics.
 
-    L'InfoBase du GC peut diverger des {{gl_tt "Comptes publics" "PA"}} dans les cas où une entité juridique est dissoute et remplacée par une nouvelle entité qui reprend ses ressources ou ses fonctions. Des organisations peuvent être regroupées pour préserver les données sur les tendances, même si ces organisations figurent séparément dans les {{gl_tt "Comptes publics" "PA"}}.
+    L'InfoBase du GC peut diverger des Comptes publics dans les cas où une entité juridique est dissoute et remplacée par une nouvelle entité qui reprend ses ressources ou ses fonctions. Des organisations peuvent être regroupées pour préserver les données sur les tendances, même si ces organisations figurent séparément dans les Comptes publics.
 
-    Il arrive parfois que l'on diverge subtilement des rapports officiels pour en améliorer la compréhension. Par exemple, l'InfoBase du GC utilise de préférence l’appellation d'usage des organisations plutôt que l’appellation juridique figurant dans les {{gl_tt "Comptes publics" "PA"}}.
+    Il arrive parfois que l'on diverge subtilement des rapports officiels pour en améliorer la compréhension. Par exemple, l'InfoBase du GC utilise de préférence l’appellation d'usage des organisations plutôt que l’appellation juridique figurant dans les Comptes publics.
 
 behind_scenes_sub_title_3:
   en: License / Credits
