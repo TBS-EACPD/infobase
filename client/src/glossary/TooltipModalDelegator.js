@@ -7,7 +7,11 @@ import { get_glossary_item_tooltip_html } from "src/models/glossary";
 import { StatelessModal } from "src/components/index";
 
 export class TooltipModalDelegator extends React.Component {
-  replaceWithModalBtn(e) {
+  constructor(props) {
+    super(props);
+    this.state = { show_modal: true };
+  }
+  replaceWithModalBtn = (e) => {
     const target =
       e.target.getAttribute("data-toggle") === "tooltip" ? e.target : undefined;
     if (!target) {
@@ -16,10 +20,6 @@ export class TooltipModalDelegator extends React.Component {
     console.log("\ntarget");
     console.log(target);
     console.dir(_.pickBy(target, (attr) => !!attr && !_.isFunction(attr)));
-    console.log("parentElement");
-    console.dir(
-      _.pickBy(target.parentElement, (attr) => !!attr && !_.isFunction(attr))
-    );
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
 
@@ -32,33 +32,43 @@ export class TooltipModalDelegator extends React.Component {
     console.dir(
       _.pickBy(glossary_def, (attr) => !!attr && !_.isFunction(attr))
     );
-    console.log("textContent:", glossary_def.textContent);
-
-    function toggle_modal(bool) {
-      console.log("toggle_modal");
-      //   this.setState({ showModal: bool });
-    }
+    // TODO: deal with the modal content
+    // console.log("textContent:", glossary_def.textContent);
 
     const modal = React.createElement(StatelessModal, {
-      show: true,
+      show: this.state.show_modal,
       body: glossary_def.innerText, // using glossary_def gives an error
       size: "sm",
-      on_close_callback: () => toggle_modal(false),
+      //   on_close_callback: () => this.closeModal(),
+      on_close_callback: this.closeModal,
     });
-
     console.log("new child");
-    console.dir(
-      _.pickBy(
-        ReactDOM.render(modal, document.createElement("span")),
-        (attr) => !!attr && !_.isFunction(attr)
-      )
-    );
+    console.log(modal);
+
+    // console.dir(
+    //   _.pickBy(
+    //     ReactDOM.render(modal, document.createElement("span")),
+    //     (attr) => !!attr && !_.isFunction(attr)
+    //   )
+    // );
 
     target.removeAttribute("data-ibtt-glossary-key");
     target.removeAttribute("data-toggle");
     target.replaceChildren(
       ReactDOM.render(modal, document.createElement("span"))
     );
+  };
+
+  //   closeModal = () => {
+  //     console.log("TooltipModalDelegator - closeModal()");
+  //     this.setState({ show_modal: false });
+  //     console.log(this.state);
+  //   };
+
+  closeModal() {
+    console.log("toggleModal");
+    console.log({ this: this });
+    this.setState({ show_modal: false });
   }
 
   componentDidMount() {
@@ -70,6 +80,7 @@ export class TooltipModalDelegator extends React.Component {
   }
 
   render() {
+    console.log("TooltipModalDelegator - render()");
     return this.props.children;
   }
 }
