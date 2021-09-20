@@ -41,9 +41,11 @@ export class HeightClipper extends React.Component<
     this.main = React.createRef();
     this.content = React.createRef();
 
-    this.debounced_mutation_callback = _.debounce(() => {
-      () => this.componentDidUpdate();
-    });
+    this.debounced_mutation_callback = _.debounce(
+      (mutationList: MutationRecord[], observer: MutationObserver) => {
+        this.componentDidUpdate();
+      }
+    );
 
     this.observer = new MutationObserver(this.debounced_mutation_callback);
 
