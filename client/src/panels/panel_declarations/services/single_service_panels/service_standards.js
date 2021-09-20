@@ -76,12 +76,11 @@ export class ServiceStandards extends React.Component {
       }
     };
     const get_target = (target_type, target) => {
+      if (_.isNull(target)) {
+        return "N/A";
+      }
       if (target_type === "Other type of target") {
-        if (_.isNull(target)) {
-          return "N/A";
-        } else {
-          return target;
-        }
+        return target;
       } else {
         if (target === 0) {
           return target;
@@ -91,6 +90,7 @@ export class ServiceStandards extends React.Component {
       }
     };
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
+    console.log(standards);
 
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report, target_type }) =>

@@ -185,6 +185,12 @@ const ServicesChannelsPanel = ({ subject }) => {
         <div className="col-12 col-lg-8">
           <WrappedNivoBar
             data={application_channels_by_year_data}
+            margin={{
+              top: 50,
+              right: 40,
+              bottom: 50,
+              left: 80,
+            }}
             keys={channels}
             tooltip={application_channels_by_year_tooltip}
             colors={(d) => colors(d.id)}
