@@ -191,6 +191,9 @@ service_channels_text:
     {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the most used application channel for this service.{{/if}}
   fr: | 
     TODO
+no_applications:
+  en: This service did not receive any applications
+  fr: TODO
 live_application_count:
   en: In person applications
   fr: Demandes en personne
