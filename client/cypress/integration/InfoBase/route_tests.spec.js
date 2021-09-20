@@ -257,15 +257,23 @@ describe("Route tests", () => {
               throw e;
             }
           });
+
           cy.visit(
             `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
           );
           if (!routes.skipAxe) {
-            cy.injectAxe();
-            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-              "not.exist"
-            );
-            cy.checkA11y(null, null, cy.terminalLog, true);
+            if (app == "eng" || app == "fra") {
+              cy.injectAxe();
+              cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+                "not.exist"
+              );
+              cy.checkA11y(
+                null,
+                { includedImpacts: ["critical"] },
+                cy.terminalLog,
+                false
+              );
+            }
           } else {
             cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
               "not.exist"
