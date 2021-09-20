@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 
 import text from "src/panels/panel_declarations/services/services.yaml";
 import { application_channels_keys } from "src/panels/panel_declarations/services/shared";
@@ -53,40 +53,48 @@ export class ServiceChannels extends React.Component {
 
     return (
       <Panel title={text_maker("single_service_channels_title")}>
-        <TM
-          k="service_channels_text"
-          className="medium-panel-text"
-          args={{
-            max_channel_key: max_channel_key ? text_maker(max_channel_key) : "",
-            max_value: max_value,
-          }}
-        />
-        <StandardLegend
-          legendListProps={{
-            items: _.map(filtered_keys, (key) => ({
-              id: key,
-              label: text_maker(key),
-              color: colors(text_maker(key)),
-            })),
-            checkBoxProps: { isSolidBox: true },
-          }}
-        />
-        <WrappedNivoBar
-          data={data}
-          indexBy="label"
-          keys={_.map(application_channels_keys, (key) => text_maker(key))}
-          is_money={false}
-          colors={(d) => colors(d.id)}
-          margin={{
-            right: 10,
-            left: 75,
-            top: 0,
-            bottom: 50,
-          }}
-          bttm_axis={{
-            tickValues: 6,
-          }}
-        />
+        {filtered_keys.length > 0 ? (
+          <Fragment>
+            <TM
+              k="service_channels_text"
+              className="medium-panel-text"
+              args={{
+                max_channel_key: max_channel_key
+                  ? text_maker(max_channel_key)
+                  : "",
+                max_value: max_value,
+              }}
+            />
+            <StandardLegend
+              legendListProps={{
+                items: _.map(filtered_keys, (key) => ({
+                  id: key,
+                  label: text_maker(key),
+                  color: colors(text_maker(key)),
+                })),
+                checkBoxProps: { isSolidBox: true },
+              }}
+            />
+            <WrappedNivoBar
+              data={data}
+              indexBy="label"
+              keys={_.map(application_channels_keys, (key) => text_maker(key))}
+              is_money={false}
+              colors={(d) => colors(d.id)}
+              margin={{
+                right: 10,
+                left: 75,
+                top: 0,
+                bottom: 50,
+              }}
+              bttm_axis={{
+                tickValues: 6,
+              }}
+            />
+          </Fragment>
+        ) : (
+          <TM className="medium-panel-text" k="no_applications" />
+        )}
       </Panel>
     );
   }
