@@ -4,6 +4,8 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { SafeJSURL } from "src/general_utils";
 
+import { secondaryColor } from "src/style_constants/index";
+
 import { StatelessModal } from "./StatelessModal";
 
 type ModalButtonProps = RouteComponentProps<{ options: string }> & {
@@ -52,7 +54,7 @@ class ModalButton_ extends React.Component<ModalButtonProps, ModalButtonState> {
           className="btn btn-link"
           onClick={this.toggle_modal}
           aria-label={aria_label}
-          style={{ color: "#0275d8" }}
+          style={{ color: secondaryColor }}
         >
           {button_text}
         </button>
