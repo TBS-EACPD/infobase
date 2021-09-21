@@ -221,7 +221,6 @@ export class Canada extends React.Component {
                 onSelect={this.year_select_callbback}
                 title={text_maker("select_year")}
                 className={"bold"}
-                ariaLabel={text_maker("selector")}
               />
             </div>
           )}
