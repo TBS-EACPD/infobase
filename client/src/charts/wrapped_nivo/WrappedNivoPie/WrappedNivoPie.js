@@ -171,7 +171,7 @@ export class WrappedNivoPie extends React.Component {
                         <span className="infobase-pie__legend-data">
                           <Format
                             type="percentage1"
-                            content={item.value / graph_total}
+                            content={item.value / graph_total || 0}
                           />
                         </span>
                       )}
