@@ -14,7 +14,12 @@ export const get_subject_by_guid = (guid) => {
     .find(({ subject_type }) => subject_type === type)
     .value();
 
-  return subject && subject.store.lookup(id);
+  return (
+    subject &&
+    (_.has(subject, "store.lookup")
+      ? subject.store.lookup(id)
+      : subject.lookup(id)) // SUBJECT_TS_TODO shim for old subjects not yet namespacing their stores
+  );
 };
 
 assign_to_dev_helper_namespace({

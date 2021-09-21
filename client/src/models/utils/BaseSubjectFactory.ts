@@ -8,6 +8,8 @@ import _ from "lodash";
     - something with a getter that throws unless overwritten by the child might work, but it creates a very awkward typing situtation
 
   For now, subjects that need stores (probably all) need to remember to declare `static store = make_store(...)` themselves
+
+  SUBJECT_TS_TODO latest TS release adds static blocks support, might solve this problem
 */
 export const BaseSubjectFactory = (
   subject_type: string,
@@ -40,14 +42,6 @@ export const BaseSubjectFactory = (
 
     get guid() {
       return subject_type + "_" + this.id;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    is(comparator: string | Function) {
-      if (_.isString(comparator)) {
-        return subject_type === comparator;
-      }
-      return this.constructor === comparator;
     }
 
     private _has_data = _.chain(api_data_types)
@@ -93,11 +87,12 @@ export const BaseSubjectFactory = (
 // SUBJECT_TS_TODO legacy code below here, to be refactored on this branch
 //
 
-type ConstructorType = { [key: string]: any };
+type ConstructorType = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 class BaseClass {}
 class MixinBuilder {
-  superclass: any;
+  superclass: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(superclass: any) {
     this.superclass = superclass;
   }
@@ -106,7 +101,7 @@ class MixinBuilder {
       | typeof staticStoreMixin
       | typeof PluralSingular
       | typeof SubjectMixin
-      | ((superclass: any) => unknown)
+      | ((superclass: any) => unknown) // eslint-disable-line @typescript-eslint/no-explicit-any
     )[]
   ) {
     return mixins.reduce((c, mixin) => mixin(c), this.superclass);
@@ -114,8 +109,9 @@ class MixinBuilder {
 }
 
 // class MyClass extends mix(MyBaseClass).with(Mixin1, Mixin2) { ... }
-export const mix = (superclass?: any) => new MixinBuilder(superclass);
+export const mix = (superclass?: any) => new MixinBuilder(superclass); // eslint-disable-line @typescript-eslint/no-explicit-any
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const staticStoreMixin = <T>(superclass: any) => {
   const _storeMap = new Map();
   const baseclass = superclass || BaseClass;
@@ -135,6 +131,7 @@ export const staticStoreMixin = <T>(superclass: any) => {
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PluralSingular = (superclass: any) => {
   const baseclass = superclass || BaseClass;
   return class extends baseclass {
@@ -151,6 +148,7 @@ export const PluralSingular = (superclass: any) => {
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SubjectMixin = (superclass: any) => {
   const baseclass = superclass || BaseClass;
   return class SubjectMixin extends baseclass {
@@ -194,6 +192,7 @@ export const SubjectMixin = (superclass: any) => {
 };
 
 export const CanHaveServerData =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (data_types: string[]) => (superclass: any) => {
     const baseclass = superclass || BaseClass;
     return class SubjectMixin extends baseclass {

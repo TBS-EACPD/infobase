@@ -19,12 +19,13 @@ const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 const calculate = (type, subject) => {
   const orgVoteStatPa = Table.store.lookup("orgVoteStatPa");
   const programSpending = Table.store.lookup("programSpending");
-  const query_subject = subject.is("gov") ? undefined : subject;
-  const qExp = subject.is("dept")
-    ? type != "planned"
-      ? orgVoteStatPa.q(query_subject)
-      : null
-    : programSpending.q(query_subject);
+  const query_subject = subject.subject_type === "gov" ? undefined : subject;
+  const qExp =
+    subject.subject_type === "dept"
+      ? type != "planned"
+        ? orgVoteStatPa.q(query_subject)
+        : null
+      : programSpending.q(query_subject);
   const exp = qExp && qExp.sum(exp_cols, { as_object: false });
 
   const qProgSpending =

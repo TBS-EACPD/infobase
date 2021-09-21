@@ -2,16 +2,15 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 
 import { CovidMeasure } from "./covid/CovidMeasure";
 import {
-  Gov,
   Dept,
   CRSO,
   Program,
   InstForm,
-  Ministry,
   Minister,
 } from "./organizational_entities";
 import { Result, Indicator } from "./results";
 import { Tag } from "./results/Tag";
+import { Gov, Ministry } from "./structure";
 
 export {
   Gov,

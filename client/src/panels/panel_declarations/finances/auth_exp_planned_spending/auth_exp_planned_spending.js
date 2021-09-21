@@ -302,7 +302,7 @@ class LapseByVotesGraph extends React.Component {
         <TM
           className="medium-panel-text"
           k={
-            subject.is("gov")
+            subject.subject_type === "gov"
               ? "gov_lapse_by_votes_text"
               : "dept_lapse_by_votes_text"
           }
@@ -446,7 +446,11 @@ class LapseByVotesGraph extends React.Component {
       <div>
         <TM
           el="h4"
-          k={subject.is("gov") ? "lapse_by_vote_type" : "lapse_by_votes"}
+          k={
+            subject.subject_type === "gov"
+              ? "lapse_by_vote_type"
+              : "lapse_by_votes"
+          }
           args={{ lapse_unit: is_showing_lapse_pct ? "%" : "$" }}
           style={{ textAlign: "center" }}
         />
@@ -526,7 +530,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
 const calculate = function (subject, options) {
   const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
-  const query_subject = subject.is("gov") ? undefined : subject;
+  const query_subject = subject.subject_type === "gov" ? undefined : subject;
   const gov_queried_subject = orgVoteStatPa.q();
   const queried_subject = orgVoteStatPa.q(query_subject);
 
@@ -669,9 +673,10 @@ const calculate = function (subject, options) {
       ...aggregated_sum,
     }))
     .value();
-  const queried_votes = subject.is("gov")
-    ? gov_aggregated_votes
-    : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
+  const queried_votes =
+    subject.subject_type === "gov"
+      ? gov_aggregated_votes
+      : _.reject(queried_subject.data, ({ votenum }) => votenum === "S");
 
   // Sum up all votes by year, take lapse percentage for each year, then take the average
   const gov_avg_lapsed_by_votes_pct = _.chain(gov_aggregated_votes)

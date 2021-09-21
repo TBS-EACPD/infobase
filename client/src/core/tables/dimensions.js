@@ -86,7 +86,7 @@ const make_horizontal_func = function (func, table) {
     //
     if (include_dept && include_dept.level === "dept") {
       include_dept = include_dept.unique_id;
-    } else if (include_dept === Gov) {
+    } else if (!include_dept || include_dept.level === "gov") {
       include_dept = false;
     }
 

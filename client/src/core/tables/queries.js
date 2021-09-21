@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Gov, Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subject_index";
 
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
@@ -283,7 +283,7 @@ function query_adapter(subject) {
     subject = Dept.lookup(subject);
   }
   // work around for new subject data structures
-  if (subject && subject === Gov) {
+  if (subject && subject.level === "gov") {
     subject = undefined;
   } else if (
     this.programs &&
