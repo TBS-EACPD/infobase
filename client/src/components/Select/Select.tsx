@@ -29,7 +29,6 @@ const Select = ({
   disabled,
   style,
   title,
-  ariaLabel,
 }: SelectProps) => (
   <select
     style={style}
@@ -39,7 +38,7 @@ const Select = ({
     value={selected}
     onChange={(event) => onSelect(event.target.value)}
     title={title}
-    aria-label={ariaLabel}
+    aria-label={title}
   >
     {_.map(options, (choice) => (
       <option key={choice.id} value={choice.id}>

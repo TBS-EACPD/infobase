@@ -124,7 +124,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v3
+            - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v2
       - run:
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
@@ -155,20 +155,20 @@ jobs:
 
       - restore_cache:
           keys:
-            - prod-build-{{ .Branch }}-{{ .Revision }}-v3
+            - prod-build-{{ .Branch }}-{{ .Revision }}-v2
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "none")
       - save_cache:
           paths:
             - client/build
-          key: prod-build-{{ .Branch }}-{{ .Revision }}-v3
+          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
 
       - run: cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y
 
       - restore_cache:
           keys:
-            - server-dependencies-{{ checksum "server/package-lock.json" }}-v3
+            - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
       - run:
           command: |
             [ -e "server/node_modules" ] || (cd server && npm ci)
@@ -176,18 +176,18 @@ jobs:
           paths:
             - server/node_modules
             - scripts/common_node_scripts/node_modules
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v3
+          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
 
       - restore_cache:
           keys:
-            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v3
+            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
       - run:
           command: |
             [ -f "server/transpiled_build/app.js" ] || (cd server && ./deploy_scripts/build.sh)
       - save_cache:
           paths:
             - server/transpiled_build
-          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v3
+          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
 
       - persist_to_workspace:
           root: ./
