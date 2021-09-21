@@ -67,6 +67,11 @@ class GranularView extends React.Component {
     } = this.props;
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
+    const dropdown_filterable_cols = _.reject(
+      sorted_key_columns,
+      ({ nick }) =>
+        nick === "dept" || nick === "prgm" || nick === "desc" || nick === "tp"
+    );
 
     const cols = [...non_dept_key_cols, ...data_columns];
     const is_matched_undefined = (column_collection, nick) =>
