@@ -1,16 +1,7 @@
 import _ from "lodash";
 
-/* Small pain points:
-  - would probably be nicer as just an abstract class, but can't mix abstract and static and we mainly want to enforce static properties
-  - can't cleanly enforce that the child class declares a static store property.
-    - using abstract is out
-    - can't pass a store in to the factory because it creates an error about having circular reference to the child class from the parent class
-    - something with a getter that throws unless overwritten by the child might work, but it creates a very awkward typing situtation
+import { Store } from "./make_store";
 
-  For now, subjects that need stores (probably all) need to remember to declare `static store = make_store(...)` themselves
-
-  SUBJECT_TS_TODO latest TS release adds static blocks support, might solve this problem
-*/
 export const BaseSubjectFactory = (
   subject_type: string,
   subject_singular: string,
@@ -27,14 +18,18 @@ export const BaseSubjectFactory = (
     get subject_type() {
       return subject_type;
     }
+
+    // TODO want to deprecate this as redundant to subject_type, but lots of legacy code to sift through for that
     static level = subject_type;
     get level() {
       return subject_type;
     }
+
     static subject_singular = subject_singular;
     get subject_singular() {
       return subject_singular;
     }
+
     static subject_plural = subject_plural;
     get subject_plural() {
       return subject_plural;
@@ -43,6 +38,19 @@ export const BaseSubjectFactory = (
     get guid() {
       return subject_type + "_" + this.id;
     }
+
+    /*
+      can't cleanly (complile time) enforce that the child class declares a static store property...
+        - using abstract is out (can't mix with or use for static methods)
+        - can't pass a store instance in to the factory because that'd be a circular reference to the child class from the parent class
+    */
+    static store = {
+      create: get_store_method_placeholder(subject_type),
+      create_and_register: get_store_method_placeholder(subject_type),
+      lookup: get_store_method_placeholder(subject_type),
+      get_all: get_store_method_placeholder(subject_type),
+      // ommit private methods from Store, TODO would be handy to have a util type for that, or at least for multi-key omits
+    } as Omit<Omit<Store<any, any>, "store">, "register">; // eslint-disable-line @typescript-eslint/no-explicit-any
 
     private _has_data = _.chain(api_data_types)
       .map((data_type) => [data_type, null])
@@ -82,6 +90,12 @@ export const BaseSubjectFactory = (
       }
     }
   };
+
+const get_store_method_placeholder = (subject_type: string) => () => {
+  throw new Error(
+    `Subject class of type "${subject_type}" does not properly implement a store property.`
+  );
+};
 
 //
 // SUBJECT_TS_TODO legacy code below here, to be refactored on this branch
