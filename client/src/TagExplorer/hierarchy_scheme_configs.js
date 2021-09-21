@@ -63,7 +63,7 @@ const min_config = {
   is_m2m: false,
   can_roll_up: true,
   get_depth_one_nodes: (year) =>
-    _.chain(Ministry.get_all())
+    _.chain(Ministry.store.get_all())
       .map((min) => ({
         id: min.guid,
         data: {

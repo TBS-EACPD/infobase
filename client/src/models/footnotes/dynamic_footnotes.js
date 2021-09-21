@@ -1,7 +1,8 @@
 import _ from "lodash";
 
-import { Gov, Dept, CRSO, Program } from "src/models/organizational_entities";
+import { Dept, CRSO, Program } from "src/models/organizational_entities";
 import { result_docs_in_tabling_order } from "src/models/results";
+import { Gov } from "src/models/structure/Gov";
 import { create_text_maker, run_template } from "src/models/text";
 import {
   actual_to_planned_gap_year,

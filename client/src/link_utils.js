@@ -6,13 +6,7 @@ import { glossaryEntryStore } from "./models/glossary";
 import { Gov, Dept, CRSO, Program, Tag } from "./models/subject_index";
 import { rpb_link } from "./rpb/rpb_link";
 
-const subject_classes_with_infographics = [
-  Gov.constructor,
-  Dept,
-  CRSO,
-  Program,
-  Tag,
-];
+const subject_classes_with_infographics = [Gov, Dept, CRSO, Program, Tag];
 
 const glossary_href = (subject_or_id, first_character = "#") => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;

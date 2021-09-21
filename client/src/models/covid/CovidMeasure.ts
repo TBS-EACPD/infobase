@@ -15,7 +15,7 @@ class CovidMeasure extends BaseSubjectFactory(
   trivial_text_maker("covid_measure"),
   trivial_text_maker("covid_measures")
 ) {
-  static lookup = make_store((def: CovidMeasureDef) => new CovidMeasure(def));
+  static store = make_store((def: CovidMeasureDef) => new CovidMeasure(def));
 
   id: string;
   name: string;

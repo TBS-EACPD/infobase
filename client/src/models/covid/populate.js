@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Gov } from "src/models/organizational_entities";
+import { Gov } from "src/models/structure/Gov";
 
 import { CovidMeasure } from "./CovidMeasure";
 import {

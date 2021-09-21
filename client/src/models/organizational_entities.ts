@@ -75,60 +75,6 @@ interface ProgramDefinition {
   is_fake: boolean;
 }
 
-const Gov = {
-  constructor: {
-    subject_type: "gov",
-    singular: trivial_text_maker("goc"),
-    plural: trivial_text_maker("goc"),
-  },
-  subject_type: "gov",
-  singular: trivial_text_maker("goc"),
-  plural: trivial_text_maker("goc"),
-  id: "gov",
-  guid: "gov_gov",
-  is(comparator: string | ConstructorType) {
-    if (_.isString(comparator)) {
-      return this.level === comparator;
-    }
-    return this.constructor === comparator;
-  },
-  level: "gov",
-  get has_planned_spending() {
-    return true;
-  },
-  lookup() {
-    return this;
-  },
-  name: trivial_text_maker("goc"),
-  description: trivial_text_maker("the_goc"),
-  legal_title: trivial_text_maker("goc"),
-};
-
-const Ministry = class Ministry extends static_subject_store() {
-  static get subject_type() {
-    return "ministry";
-  }
-  static get singular() {
-    return trivial_text_maker("ministry");
-  }
-  static get plural() {
-    return trivial_text_maker("ministries");
-  }
-
-  static create_and_register(id: string, name: string) {
-    const inst = new Ministry(id, name);
-    this.register(id, inst);
-    return inst;
-  }
-  constructor(id: string, name: string) {
-    super();
-    this.id = id;
-    this.name = name;
-    this.description = "";
-    this.orgs = [];
-  }
-};
-
 const Dept = class Dept extends static_subject_store_with_server_data([
   "results",
   "services",
@@ -465,4 +411,4 @@ const InstForm = class InstForm extends static_subject_store() {
   }
 };
 
-export { Gov, Dept, CRSO, Program, InstForm, Ministry, Minister };
+export { Dept, CRSO, Program, InstForm, Minister };

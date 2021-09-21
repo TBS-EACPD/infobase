@@ -33,7 +33,7 @@ function populate_igoc_models({
 
   //populate ministry models
   _.each(ministries, ([id, name_en, name_fr]) => {
-    Ministry.create_and_register(id, is_en ? name_en : name_fr);
+    Ministry.store.create_and_register({ id, name: is_en ? name_en : name_fr });
   });
   //populate minister models
   _.each(ministers, ([id, name_en, name_fr]) => {
@@ -142,7 +142,7 @@ function populate_igoc_models({
 
     if (!_.isEmpty(ministry_id)) {
       //create two way link to ministry
-      const ministry = Ministry.lookup(ministry_id);
+      const ministry = Ministry.store.lookup(ministry_id);
       org_instance.ministry = ministry;
       ministry.orgs.push(org_instance);
     }

@@ -8,10 +8,12 @@ class Store<definition, instance extends StoreInstanceBase> {
     this.store.set(instance.id, instance);
 
     _.forEach(instance.alt_ids, (id) => this.store.set(id, instance));
+
+    return instance;
   };
 
   create: (def: definition) => instance;
-  create_and_register: (definition: definition) => void;
+  create_and_register: (definition: definition) => instance;
 
   constructor(
     store: Map<string, instance>,
@@ -21,9 +23,7 @@ class Store<definition, instance extends StoreInstanceBase> {
 
     this.create = create;
 
-    this.create_and_register = (def: definition) => {
-      this.register(create(def));
-    };
+    this.create_and_register = (def: definition) => this.register(create(def));
   }
 
   lookup = (id: string) => this.store.get(id);
