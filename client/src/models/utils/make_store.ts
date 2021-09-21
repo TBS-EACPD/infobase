@@ -2,7 +2,7 @@ import _ from "lodash";
 
 type StoreInstanceBase = { id: string; alt_ids?: string[] };
 
-class Store<definition, instance extends StoreInstanceBase> {
+export class Store<definition, instance extends StoreInstanceBase> {
   private store: Map<string, instance>;
   private register = (instance: instance) => {
     this.store.set(instance.id, instance);
