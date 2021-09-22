@@ -92,7 +92,7 @@ class Mapper {
   map(row) {
     // remap to orgIDs
     if (row[0] !== "ZGOC") {
-      row[0] = Dept.lookup(row[0]).unique_id;
+      row[0] = Dept.store.lookup(row[0]).unique_id;
     }
     // row.slice creates a copy of an array
     return this.mapper(row.slice());

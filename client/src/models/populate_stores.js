@@ -34,6 +34,10 @@ function populate_igoc_models({
     Ministry.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
+      org_ids: _.chain(igoc_rows)
+        .filter((row) => row[18] === id) // SUBJECT_TS_TODO this stinks... maybe it's time to start actually using CSV headers, for the igoc at least
+        .map(([org_id]) => org_id)
+        .value(),
     });
   });
 
@@ -41,6 +45,10 @@ function populate_igoc_models({
     Minister.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
+      org_ids: _.chain(org_to_ministers)
+        .filter(([_org_id, minister_id]) => minister_id === id)
+        .map(([org_id]) => org_id)
+        .value(),
     });
   });
 
@@ -52,6 +60,10 @@ function populate_igoc_models({
       children_ids: _.chain(inst_forms)
         .filter(({ parent_id }) => parent_id === id)
         .map("id")
+        .value(),
+      org_ids: _.chain(igoc_rows)
+        .filter((row) => row[19] === id) // SUBJECT_TS_TODO this stinks... maybe it's time to start actually using CSV headers, for the igoc at least
+        .map(([org_id]) => org_id)
         .value(),
     });
   });
@@ -76,7 +88,7 @@ function populate_igoc_models({
       pas_code,
       schedule,
       faa_hr,
-      auditor_str,
+      auditor,
       incorp_yr,
       fed_ownership,
       end_yr,
@@ -97,7 +109,7 @@ function populate_igoc_models({
         (url_key) => url_lookup[url_id(url_key)]
       );
 
-      Dept.create_and_register({
+      Dept.store.create_and_register({
         id,
         alt_ids: [dept_code],
         dept_code,
@@ -111,7 +123,7 @@ function populate_igoc_models({
         pas_code,
         schedule,
         faa_hr,
-        auditor_str,
+        auditor,
         incorp_yr,
         fed_ownership,
         end_yr,
@@ -123,6 +135,10 @@ function populate_igoc_models({
           .filter(([org_id]) => org_id === id)
           .map(([_org_id, minister_id]) => minister_id)
           .value(),
+        table_ids: _.chain(dept_to_table_id)
+          .filter(([lookup_dept_code]) => lookup_dept_code === dept_code)
+          .map(([_dept_code, table_id]) => table_id)
+          .value(),
         eval_url,
         website_url,
         le_la: article1 || "",
@@ -133,12 +149,6 @@ function populate_igoc_models({
       });
     }
   );
-
-  //for each row in dept_to_table_id
-  //attach table_ids to org
-  _.each(dept_to_table_id, ([dept_code, table_id]) => {
-    Dept.lookup(dept_code).table_ids.push(table_id);
-  });
 }
 
 function populate_glossary(lines) {
@@ -203,7 +213,7 @@ function populate_crsos(rows) {
     0, 1, 2, 3, 4, 5, 6, 7,
   ];
   _.each(rows, (row) => {
-    const dept = Dept.lookup(row[dept_code]);
+    const dept = Dept.store.lookup(row[dept_code]);
     const instance = CRSO.create_and_register({
       dept,
       id: row[id],
@@ -238,7 +248,7 @@ function populate_programs(rows) {
     const instance = Program.create_and_register({
       crso,
       activity_code: row[activity_code],
-      dept: Dept.lookup(row[dept_code]),
+      dept: Dept.store.lookup(row[dept_code]),
       description: _.trim(
         row[desc].replace(/^<p>/i, "").replace(/<\/p>$/i, "")
       ),

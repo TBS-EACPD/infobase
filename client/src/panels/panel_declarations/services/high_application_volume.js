@@ -41,10 +41,10 @@ const HighApplicationVolumePanel = ({ subject }) => {
       is_searchable: true,
       formatter: (org_id) => (
         <a href={`#orgs/dept/${org_id}/infograph/services`}>
-          {Dept.lookup(org_id).name}
+          {Dept.store.lookup(org_id).name}
         </a>
       ),
-      plain_formatter: (org_id) => Dept.lookup(org_id).name,
+      plain_formatter: (org_id) => Dept.store.lookup(org_id).name,
     },
     total_volume: {
       index: 1,
@@ -60,7 +60,8 @@ const HighApplicationVolumePanel = ({ subject }) => {
         k="high_application_volume_text"
         args={{
           num_of_high_volume_depts: service_high_volume_summary.length,
-          highest_volume_dept: Dept.lookup(highest_volume_dept.subject_id).name,
+          highest_volume_dept: Dept.store.lookup(highest_volume_dept.subject_id)
+            .name,
           highest_volume_value: highest_volume_dept.total_volume,
         }}
       />

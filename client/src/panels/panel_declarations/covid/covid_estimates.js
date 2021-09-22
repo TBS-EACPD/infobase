@@ -149,7 +149,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
         header: text_maker("org"),
         is_searchable: true,
         formatter: (org_id) => {
-          const org = Dept.lookup(org_id);
+          const org = Dept.store.lookup(org_id);
 
           return (
             <a
@@ -161,7 +161,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
             </a>
           );
         },
-        plain_formatter: (org_id) => Dept.lookup(org_id).name,
+        plain_formatter: (org_id) => Dept.store.lookup(org_id).name,
       },
       ...get_common_column_configs(show_vote_stat, est_docs),
     };
@@ -182,7 +182,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
           k={"covid_estimates_department_tab_text"}
           args={{
             ...panel_args,
-            largest_dept_name: Dept.lookup(largest_dept_id).name,
+            largest_dept_name: Dept.store.lookup(largest_dept_id).name,
             largest_dept_auth,
           }}
           className="medium-panel-text"

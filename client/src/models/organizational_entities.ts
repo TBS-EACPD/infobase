@@ -2,6 +2,7 @@ import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
 
+import { Dept } from "./structure";
 import {
   mix,
   staticStoreMixin,
@@ -117,7 +118,9 @@ const Program = class Program extends static_subject_store_with_server_data([
   }
   static unique_id(dept: any, activity_code: string) {
     //dept can be an object, a dept_code or a dept unique_id.
-    const dc = _.isObject(dept) ? dept.dept_code : Dept.lookup(dept).dept_code;
+    const dc = _.has(dept, "dept_code")
+      ? dept.dept_code
+      : Dept.store.lookup(dept)?.dept_code;
     return `${dc}-${activity_code}`;
   }
   static get_from_activity_code(dept_code: any, activity_code: string) {

@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Dept } from "src/models/organizational_entities";
+import { Dept } from "src/models/structure";
 import { trivial_text_maker } from "src/models/text";
 
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
@@ -43,9 +43,9 @@ export class Tag extends BaseSubjectFactory(
   root: Tag;
 
   parent_tag?: Tag;
+  children_tags = [] as Tag[];
 
   programs = [] as any[]; // SUBJECT_TS_TODO come back to once programs are typed
-  children_tags = [] as Tag[];
 
   constructor({
     id,
@@ -128,7 +128,7 @@ export class Tag extends BaseSubjectFactory(
       .toPairs()
       .map(([org_id, programs]) => {
         return {
-          name: Dept.lookup(org_id).name,
+          name: Dept.store.lookup(org_id)?.name,
           programs: _.sortBy(programs, "name"),
         };
       })

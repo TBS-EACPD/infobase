@@ -57,7 +57,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
   const processed_data = _.map(top_services_website_visits_summary, (row) => ({
     ...row,
     id: row[id_key],
-    name: is_gov ? Dept.lookup(row[id_key]).name : row.service_name,
+    name: is_gov ? Dept.store.lookup(row[id_key]).name : row.service_name,
     [total_volume]: row.website_visits_count,
   }));
 
@@ -75,7 +75,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
         <a
           href={
             is_gov
-              ? infograph_href_template(Dept.lookup(id), "services")
+              ? infograph_href_template(Dept.store.lookup(id), "services")
               : `#dept/${subject.id}/service-panels/${id}`
           }
         >
@@ -158,7 +158,7 @@ const Top10WebsiteVisitsPanel = ({ panel_args }) => {
                       href={
                         is_gov
                           ? infograph_href_template(
-                              Dept.lookup(tick.value),
+                              Dept.store.lookup(tick.value),
                               "services"
                             )
                           : `#dept/${subject.id}/service-panels/${tick.value}`

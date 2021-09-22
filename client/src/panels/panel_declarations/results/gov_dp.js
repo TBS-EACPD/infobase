@@ -86,7 +86,7 @@ export const declare_gov_dp_panel = () =>
         const subj_map = _.chain(dept_counts)
           .map((row) => [
             row.id,
-            link_to_results_infograph(Dept.lookup(row.id)),
+            link_to_results_infograph(Dept.store.lookup(row.id)),
           ])
           .fromPairs()
           .value();
@@ -103,12 +103,12 @@ export const declare_gov_dp_panel = () =>
             is_searchable: true,
             formatter: (value) =>
               subj_map[value] ? (
-                <a href={subj_map[value]}> {Dept.lookup(value).name} </a>
+                <a href={subj_map[value]}> {Dept.store.lookup(value).name} </a>
               ) : (
                 value
               ),
             plain_formatter: (value) =>
-              value ? Dept.lookup(value).name : value,
+              value ? Dept.store.lookup(value).name : value,
           },
           [`${current_dp_key}_results`]: {
             index: 1,

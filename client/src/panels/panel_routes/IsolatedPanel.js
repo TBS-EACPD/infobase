@@ -19,7 +19,7 @@ const text_maker = create_text_maker(text);
 const get_subject = (level, id) => {
   switch (level) {
     case "dept":
-      return Dept.lookup(id);
+      return Dept.store.lookup(id);
     case "tag":
       return Tag.store.lookup(id);
     case "program":

@@ -83,13 +83,13 @@ export const declare_links_to_rpb_panel = () =>
           return {
             ...common_panel_config,
             calculate(subject) {
-              return !_.chain(subject.tables).compact().isEmpty().value();
+              return !_.chain(subject.table_ids).compact().isEmpty().value();
             },
 
             render({ title, calculations }) {
               const { subject } = calculations;
 
-              const list_args = _.chain(subject.tables)
+              const list_args = _.chain(subject.table_ids)
                 .map((id) => Table.store.lookup(id))
                 .compact()
                 .groupBy(get_table_type)

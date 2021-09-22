@@ -119,8 +119,8 @@ export const declare_tag_progs_by_dept_panel = () =>
         const list_args = _.chain(subject.programs)
           .groupBy((prog) => prog.dept.id)
           .map((prog_group, dept_id) => ({
-            display: <div>{Dept.lookup(dept_id).name}</div>,
-            href: infograph_href_template(Dept.lookup(dept_id)),
+            display: <div>{Dept.store.lookup(dept_id).name}</div>,
+            href: infograph_href_template(Dept.store.lookup(dept_id)),
             children: _.chain(prog_group)
               .sortBy("is_dead")
               .map((prog) => ({

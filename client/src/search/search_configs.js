@@ -99,7 +99,7 @@ const org_templates = {
       }
     })();
 
-    if (_.isEmpty(org.tables)) {
+    if (_.isEmpty(org.table_ids)) {
       return LimitedDataDisplay(search, result_name);
     } else {
       return <InfoBaseHighlighter search={search} content={result_name} />;
@@ -121,7 +121,7 @@ const make_orgs_search_config = (options) => {
   const org_data = (() => {
     switch (orgs_to_include) {
       case "all":
-        return Dept.get_all();
+        return Dept.store.get_all();
       case "with_data":
         return Dept.depts_with_data();
       case "without_data":
@@ -154,7 +154,7 @@ const make_orgs_search_config = (options) => {
 
 const all_dp_orgs = {
   ...org_templates,
-  get_data: () => _.filter(Dept.get_all(), "is_dp_org"),
+  get_data: () => _.filter(Dept.store.get_all(), "is_dp_org"),
   filter: (query, datum) =>
     memoized_re_matchers(query, org_attributes_to_match, "all_dp_orgs")(datum),
 };

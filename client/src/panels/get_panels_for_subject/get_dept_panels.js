@@ -77,7 +77,7 @@ export const get_dept_panels = (subject) =>
     has_services: services_feature_flag,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
-    financial: _.includes(subject.tables, "programSpending") && [
+    financial: _.includes(subject.table_ids, "programSpending") && [
       declare_financial_key_concepts_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
@@ -102,7 +102,7 @@ export const get_dept_panels = (subject) =>
       declare_covid_estimates_panel(),
       declare_covid_expenditures_panel(),
     ],
-    people: _.includes(subject.tables, "orgEmployeeType") && [
+    people: _.includes(subject.table_ids, "orgEmployeeType") && [
       declare_people_key_concepts_panel(),
       declare_employee_last_year_totals_panel(),
       declare_employee_totals_panel(),
@@ -137,5 +137,5 @@ export const get_dept_panels = (subject) =>
       declare_portfolio_structure_related_panel(),
       declare_tags_of_interest_panel(),
     ],
-    all_data: !_.isEmpty(subject.tables) && [declare_links_to_rpb_panel()],
+    all_data: !_.isEmpty(subject.table_ids) && [declare_links_to_rpb_panel()],
   }));

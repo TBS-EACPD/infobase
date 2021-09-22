@@ -113,7 +113,7 @@ class GranularView extends React.Component {
         .value(),
     };
     const table_data = _.map(flat_data, (row) => {
-      const org = Dept.lookup(row.dept);
+      const org = Dept.store.lookup(row.dept);
       return {
         dept: org.name,
         legal_title: org.legal_title ? org.legal_title : org.name,

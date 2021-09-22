@@ -69,7 +69,7 @@ export function create_full_results_hierarchy({
     if (node === root && !root_subject) {
       //if there is no root subject, we use all departments as children of the root.
 
-      return _.chain(Dept.get_all())
+      return _.chain(Dept.store.get_all())
         .filter("is_dp_org")
         .map((org) => ({
           id: org.guid,
@@ -92,7 +92,7 @@ export function create_full_results_hierarchy({
         const nodes_by_program_by_dept = _.chain(subject.programs)
           .groupBy((prog) => prog.dept.id)
           .map((progs, dept_id) => {
-            const org = Dept.lookup(dept_id);
+            const org = Dept.store.lookup(dept_id);
             const node_id = `${parent_id}-${org.guid}`;
             return {
               id: node_id,
