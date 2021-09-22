@@ -7,9 +7,8 @@ import { make_store } from "src/models/utils/make_store";
 type InstFormDef = {
   id: string;
   name: string;
-  parent_form?: InstForm;
-  children_forms: InstForm[];
-  orgs: any[]; // SUBJECT_TS_TODO type this once Dept type is solid
+  parent_id?: string;
+  children_ids: string[];
 };
 
 export class InstForm extends BaseSubjectFactory(
@@ -21,13 +20,23 @@ export class InstForm extends BaseSubjectFactory(
 
   id: string;
   name: string;
-  parent_form: InstForm | undefined = undefined;
-  children_forms: InstForm[] = [];
+  parent_id?: string;
+  children_ids: string[];
+
   orgs = []; // SUBJECT_TS_TODO type this once Dept type is solid
 
   constructor(def: InstFormDef) {
     super(def);
     this.id = def.id;
     this.name = def.name;
+    this.parent_id = def.parent_id;
+    this.children_ids = def.children_ids;
+  }
+
+  get parent_form() {
+    return this.parent_id && InstForm.store.lookup(this.parent_id);
+  }
+  get children_forms() {
+    return _.map(this.children_ids, InstForm.store.lookup);
   }
 }

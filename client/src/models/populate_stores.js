@@ -17,12 +17,11 @@ import {
   InstForm,
   Tag,
 } from "./subject_index";
-import { trivial_text_maker } from "./text";
 
 const url_id = (num) => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
 function populate_igoc_models({
   dept_to_table_id,
-  org_to_minister,
+  org_to_ministers,
   inst_forms,
   ministers,
   ministries,
@@ -31,59 +30,49 @@ function populate_igoc_models({
 }) {
   const is_en = lang === "en";
 
-  //populate ministry models
   _.each(ministries, ([id, name_en, name_fr]) => {
-    Ministry.store.create_and_register({ id, name: is_en ? name_en : name_fr });
+    Ministry.store.create_and_register({
+      id,
+      name: is_en ? name_en : name_fr,
+    });
   });
-  //populate minister models
+
   _.each(ministers, ([id, name_en, name_fr]) => {
-    Minister.store.create_and_register({ id, name: is_en ? name_en : name_fr });
+    Minister.store.create_and_register({
+      id,
+      name: is_en ? name_en : name_fr,
+    });
   });
 
-  //populate institutional forms hierarchy model
-  _.each(inst_forms, ([id, _parent_id, name_en, name_fr]) => {
-    InstForm.store.create_and_register({ id, name: is_en ? name_en : name_fr });
-  });
-  //once they're all created, create bi-directional parent-children links
-  _.each(inst_forms, ([id, parent_id]) => {
-    const inst = InstForm.store.lookup(id);
-    if (!_.isEmpty(parent_id)) {
-      const parent = InstForm.store.lookup(parent_id);
-      parent.children_forms.push(inst);
-      inst.parent_form = parent;
-    }
+  _.each(inst_forms, ([id, parent_id, name_en, name_fr]) => {
+    InstForm.store.create_and_register({
+      id,
+      name: is_en ? name_en : name_fr,
+      parent_id,
+      children_ids: _.chain(inst_forms)
+        .filter(({ parent_id }) => parent_id === id)
+        .map("id")
+        .value(),
+    });
   });
 
-  //populate a temporary URL store
   const url_lookup = _.chain(urls)
-    .map(([id, en, fr]) => [url_id(id), is_en ? en : fr]) //force it to be a string just in case interpreted as array
+    .map(([id, en, fr]) => [url_id(id), is_en ? en : fr])
     .fromPairs()
     .value();
 
-  //populate temporary org-to-minister store
-  //structured as [org_id, minister_id]
-  const minister_by_org_id = _.chain(org_to_minister)
-    .groupBy(0)
-    .mapValues((group, org_id) => _.map(group, 1))
-    .value();
-
-  const statuses = {
-    a: trivial_text_maker("active"),
-    t: trivial_text_maker("transferred"),
-    d: trivial_text_maker("dissolved"),
-  };
-
-  _.each(igoc_rows, (row) => {
-    const [
-      org_id,
+  _.each(
+    igoc_rows,
+    ([
+      id,
       dept_code,
       abbr,
       legal_title,
       applied_title,
       old_applied_title,
-      status,
+      status_code,
       legislation,
-      mandate,
+      raw_mandate,
       pas_code,
       schedule,
       faa_hr,
@@ -92,7 +81,7 @@ function populate_igoc_models({
       fed_ownership,
       end_yr,
       notes,
-      _dp_status,
+      dp_status_code,
       ministry_id,
       inst_form_id,
       eval_url_id,
@@ -102,62 +91,48 @@ function populate_igoc_models({
       other_lang_abbr,
       other_lang_applied_title,
       other_lang_legal_title,
-    ] = row;
+    ]) => {
+      const [eval_url, website_url] = _.map(
+        [eval_url_id, website_url_id],
+        (url_key) => url_lookup[url_id(url_key)]
+      );
 
-    const [eval_url, website_url] = _.map(
-      [eval_url_id, website_url_id],
-      (url_key) => url_lookup[url_id(url_key)]
-    );
-
-    const def_obj = {
-      unique_id: +org_id,
-      dept_code,
-      abbr,
-      legal_title,
-      applied_title,
-      old_applied_title,
-      status: statuses[status],
-      legislation,
-      raw_mandate: mandate,
-      mandate: sanitized_marked(_.trim(mandate)),
-      pas_code,
-      schedule,
-      faa_hr,
-      auditor_str,
-      incorp_yr,
-      fed_ownership,
-      end_yr,
-      notes,
-      _dp_status: +_dp_status,
-      eval_url,
-      website_url,
-      le_la: article1 || "",
-      du_de_la: article2 || "",
-      other_lang_abbr,
-      other_lang_applied_title,
-      other_lang_legal_title,
-    };
-
-    const org_instance = Dept.create_and_register(def_obj);
-
-    if (!_.isEmpty(ministry_id)) {
-      //create two way link to ministry
-      const ministry = Ministry.store.lookup(ministry_id);
-      org_instance.ministry = ministry;
-      ministry.orgs.push(org_instance);
+      Dept.create_and_register({
+        id,
+        alt_ids: [dept_code],
+        dept_code,
+        abbr,
+        legal_title,
+        applied_title,
+        old_applied_title,
+        status_code,
+        legislation,
+        raw_mandate,
+        pas_code,
+        schedule,
+        faa_hr,
+        auditor_str,
+        incorp_yr,
+        fed_ownership,
+        end_yr,
+        notes,
+        dp_status_code,
+        inst_form_id,
+        ministry_id,
+        minister_ids: _.chain(org_to_ministers)
+          .filter(([org_id]) => org_id === id)
+          .map(([_org_id, minister_id]) => minister_id)
+          .value(),
+        eval_url,
+        website_url,
+        le_la: article1 || "",
+        du_de_la: article2 || "",
+        other_lang_abbr,
+        other_lang_applied_title,
+        other_lang_legal_title,
+      });
     }
-
-    //create one way link to ministers
-    const ministers = _.map(minister_by_org_id[org_id], (minister_id) =>
-      Minister.store.lookup(minister_id)
-    );
-    org_instance.ministers = ministers;
-
-    //create two way link to inst form
-    const inst_form = InstForm.store.lookup(inst_form_id);
-    org_instance.inst_form = inst_form;
-    inst_form.orgs.push(org_instance);
-  });
+  );
 
   //for each row in dept_to_table_id
   //attach table_ids to org
@@ -223,7 +198,7 @@ function populate_program_tags(tag_rows) {
   });
 }
 
-function populate_crso_tags(rows) {
+function populate_crsos(rows) {
   const [id, dept_code, title, desc, is_active, is_drf, is_internal_service] = [
     0, 1, 2, 3, 4, 5, 6, 7,
   ];
@@ -310,24 +285,23 @@ function process_lookups(data) {
       row[0],
       _.camelCase(row[1]),
     ]),
-    org_to_minister: data["org_to_minister.csv"],
+    org_to_ministers: data["org_to_minister.csv"],
     inst_forms: data["inst_forms.csv"],
     ministers: data["ministers.csv"],
     ministries: data["ministries.csv"],
     urls: data["url_lookups.csv"],
     igoc_rows: data["igoc.csv"],
   });
-
-  populate_glossary(data[`glossary.csv`]);
+  populate_crsos(data["crso.csv"]);
+  populate_programs(data["program.csv"]);
 
   create_tag_branches(data["program_tag_types.csv"]);
   populate_program_tags(data["program_tags.csv"]);
-  populate_crso_tags(data["crso.csv"]);
-  populate_programs(data["program.csv"]);
 
   //once all programs and tags are created, link them
   populate_program_tag_linkages(data["tags_to_programs.csv"]);
 
+  populate_glossary(data[`glossary.csv`]);
   populate_global_footnotes(data.global_footnotes);
 }
 

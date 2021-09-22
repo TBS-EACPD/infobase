@@ -70,7 +70,7 @@ export function create_full_results_hierarchy({
       //if there is no root subject, we use all departments as children of the root.
 
       return _.chain(Dept.get_all())
-        .filter("dp_status")
+        .filter("is_dp_org")
         .map((org) => ({
           id: org.guid,
           data: {

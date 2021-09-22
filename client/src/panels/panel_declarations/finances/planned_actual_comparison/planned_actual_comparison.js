@@ -26,10 +26,10 @@ export const declare_planned_actual_comparison_panel = () =>
       source: (subject) => get_source_links(["DP", "DRR", "PA"]),
       calculate(subject) {
         if (subject.level === "dept") {
-          if (!subject.is_rpp_org) {
+          if (!subject.is_dp_org) {
             return false;
           }
-        } else if (!subject.dept.is_rpp_org) {
+        } else if (!subject.dept.is_dp_org) {
           return false;
         }
 

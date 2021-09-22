@@ -56,9 +56,12 @@ export const declare_profile_panel = () =>
                   ],
                   [
                     "minister",
-                    !_.isEmpty(subject.minister) &&
-                      _.chain(subject.minister)
-                        .flatMap((minister, ix) => [minister, <br key={ix} />])
+                    !_.isEmpty(subject.ministers) &&
+                      _.chain(subject.ministers)
+                        .flatMap((minister, ix) => [
+                          minister.name,
+                          <br key={ix} />,
+                        ])
                         .dropRight()
                         .value(),
                   ],
