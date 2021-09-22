@@ -508,7 +508,7 @@ const add_article_to_dept_identifier = (
   const dept_subject =
     helper_context.subject_type === "dept"
       ? helper_context
-      : Dept.lookup(helper_context);
+      : Dept.store.lookup(helper_context);
 
   const article = dept_subject[article_key];
 

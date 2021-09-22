@@ -393,7 +393,7 @@ const Infographic = ({
   if (!subject) {
     if (level === "program" || level === "crso") {
       const potential_parent_dept_code = _.split(subject_id, "-")[0];
-      const parent_dept = Dept.lookup(potential_parent_dept_code);
+      const parent_dept = Dept.store.lookup(potential_parent_dept_code);
       if (parent_dept) {
         return redirect_with_msg(
           text_maker("invalid_subject_redirect_parent_dept", {

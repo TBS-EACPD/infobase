@@ -82,7 +82,7 @@ const dept_config = {
   is_m2m: false,
   can_roll_up: true,
   get_depth_one_nodes: (year) =>
-    _.map(Dept.get_all(), (org) => get_org_nodes(org, year)),
+    _.map(Dept.store.get_all(), (org) => get_org_nodes(org, year)),
 };
 
 export const hierarchy_scheme_configs = _.chain([

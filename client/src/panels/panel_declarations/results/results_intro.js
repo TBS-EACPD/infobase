@@ -112,7 +112,7 @@ export const declare_results_intro_panel = () =>
 
             const counts_by_dept = _.chain(dept_counts)
               .map((row) => ({
-                subject: Dept.lookup(row.id),
+                subject: Dept.store.lookup(row.id),
                 counts: row,
               }))
               .map((obj) => ({ ...obj, total: sum(_.values(obj.counts)) }))

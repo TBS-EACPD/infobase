@@ -162,7 +162,7 @@ export const declare_late_results_warning_panel = () =>
                   <MultiColumnList
                     list_items={_.map(
                       result_doc.late_results_orgs,
-                      (org_id) => Dept.lookup(org_id).name
+                      (org_id) => Dept.store.lookup(org_id).name
                     )}
                     column_count={
                       lang === "en" && result_doc.late_results_orgs.length > 3
@@ -226,7 +226,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
                 <MultiColumnList
                   list_items={_.map(
                     late_orgs,
-                    (org_id) => Dept.lookup(org_id).name
+                    (org_id) => Dept.store.lookup(org_id).name
                   )}
                   column_count={lang === "en" && late_orgs.length > 3 ? 2 : 1}
                   li_class={late_orgs.length > 4 ? "font-small" : ""}

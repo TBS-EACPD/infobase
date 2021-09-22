@@ -4,11 +4,14 @@ import { trivial_text_maker } from "src/models/text";
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
 import { make_store } from "src/models/utils/make_store";
 
+import { Dept } from "./Dept";
+
 type InstFormDef = {
   id: string;
   name: string;
   parent_id?: string;
   children_ids: string[];
+  org_ids: string[];
 };
 
 export class InstForm extends BaseSubjectFactory(
@@ -22,8 +25,7 @@ export class InstForm extends BaseSubjectFactory(
   name: string;
   parent_id?: string;
   children_ids: string[];
-
-  orgs = []; // SUBJECT_TS_TODO type this once Dept type is solid
+  org_ids: string[];
 
   constructor(def: InstFormDef) {
     super(def);
@@ -31,6 +33,7 @@ export class InstForm extends BaseSubjectFactory(
     this.name = def.name;
     this.parent_id = def.parent_id;
     this.children_ids = def.children_ids;
+    this.org_ids = def.org_ids;
   }
 
   get parent_form() {
@@ -38,5 +41,9 @@ export class InstForm extends BaseSubjectFactory(
   }
   get children_forms() {
     return _.map(this.children_ids, InstForm.store.lookup);
+  }
+
+  get orgs() {
+    return _.map(this.org_ids, Dept.store.lookup);
   }
 }

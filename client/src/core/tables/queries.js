@@ -278,9 +278,9 @@ class Queries {
 
 function query_adapter(subject) {
   //normalize different arguments API
-  if (Dept.lookup(subject)) {
+  if (Dept.store.lookup(subject)) {
     //patch old dept-id based API
-    subject = Dept.lookup(subject);
+    subject = Dept.store.lookup(subject);
   }
   // work around for new subject data structures
   if (subject && subject.level === "gov") {

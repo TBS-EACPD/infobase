@@ -25,15 +25,15 @@ const main_col = "{{est_in_year}}_estimates";
 const text_func = (vs, d, break_str) => {
   if (vs == "voted") {
     return d.dept
-      ? _.includes(d.desc, `${Dept.lookup(d.dept).name} ${break_str}  `)
+      ? _.includes(d.desc, `${Dept.store.lookup(d.dept).name} ${break_str}  `)
         ? d.desc
-        : `${Dept.lookup(d.dept).name} ${break_str}  ${d.desc}`
+        : `${Dept.store.lookup(d.dept).name} ${break_str}  ${d.desc}`
       : d.desc;
   } else {
     return d.dept
-      ? _.includes(d.desc, ` ${break_str} ${Dept.lookup(d.dept).name}`)
+      ? _.includes(d.desc, ` ${break_str} ${Dept.store.lookup(d.dept).name}`)
         ? d.desc
-        : `${d.desc} ${break_str} ${Dept.lookup(d.dept).name}`
+        : `${d.desc} ${break_str} ${Dept.store.lookup(d.dept).name}`
       : d.desc;
   }
 };
@@ -55,7 +55,10 @@ const planned_vote_or_stat_render = (vs) =>
     const total_amt = sum(data, _.property(main_col));
 
     const subj_map = _.chain(top_10_rows)
-      .map((obj) => [obj.dept, infograph_href_template(Dept.lookup(obj.dept))])
+      .map((obj) => [
+        obj.dept,
+        infograph_href_template(Dept.store.lookup(obj.dept)),
+      ])
       .fromPairs()
       .value();
     const table_data = _.map(top_10_rows, (obj) => ({
@@ -71,11 +74,12 @@ const planned_vote_or_stat_render = (vs) =>
         is_searchable: true,
         formatter: (value) =>
           subj_map[value] ? (
-            <a href={subj_map[value]}>{Dept.lookup(value).name}</a>
+            <a href={subj_map[value]}>{Dept.store.lookup(value).name}</a>
           ) : (
             value
           ),
-        plain_formatter: (value) => (value ? Dept.lookup(value).name : value),
+        plain_formatter: (value) =>
+          value ? Dept.store.lookup(value).name : value,
       },
       voted_stat: {
         index: 1,

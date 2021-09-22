@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { Dept, CRSO, Program } from "src/models/organizational_entities";
+import { CRSO, Program } from "src/models/organizational_entities";
 import { result_docs_in_tabling_order } from "src/models/results";
-import { Gov } from "src/models/structure/Gov";
+import { Gov, Dept } from "src/models/structure";
 import { create_text_maker, run_template } from "src/models/text";
 import {
   actual_to_planned_gap_year,
@@ -119,7 +119,7 @@ const get_dynamic_footnotes = () => {
             ${_.reduce(
               late_orgs,
               (elements, org_id) =>
-                `${elements}<li>${Dept.lookup(org_id).name}</li>`,
+                `${elements}<li>${Dept.store.lookup(org_id).name}</li>`,
               ""
             )}
             </ul>`,
@@ -130,7 +130,7 @@ const get_dynamic_footnotes = () => {
       const dept_footnotes = _.chain(docs_with_late_orgs)
         .flatMap(({ [late_org_property]: late_orgs, doc_type, year }) =>
           _.chain(late_orgs)
-            .map(Dept.lookup)
+            .map(Dept.store.lookup)
             .flatMap(expand_dept_cr_and_programs)
             .map((subject) => ({
               subject,

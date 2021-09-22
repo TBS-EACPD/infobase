@@ -192,7 +192,7 @@ function get_data_drf(
   const program_ftes_table = Table.store.lookup("programFtes");
   const program_spending_table = Table.store.lookup("programSpending");
 
-  const orgs = _.chain(Dept.get_all())
+  const orgs = _.chain(Dept.store.get_all())
     .map((org) => ({
       subject: org,
       name: org.name,
@@ -299,7 +299,7 @@ function get_data_so(
     ? _.filter(so_nums, (so) => so_cat(so) === parseInt(filter_var))
     : so_nums;
   const org_sobj_table = Table.store.lookup("orgSobjs");
-  const all_orgs = _.chain(Dept.get_all())
+  const all_orgs = _.chain(Dept.store.get_all())
     .map((org) => ({
       subject: org,
       name: org.name,
@@ -376,7 +376,7 @@ function get_data_tp(
     filter_var !== "All" &&
     (filter_var === "g" || filter_var === "c");
   const tp_table = Table.store.lookup("orgTransferPayments");
-  const all_orgs = _.chain(Dept.get_all())
+  const all_orgs = _.chain(Dept.store.get_all())
     .map((org) => ({
       subject: org,
       name: org.name,
@@ -439,7 +439,7 @@ function get_data_vs(
   get_changes
 ) {
   const vote_stat_table = Table.store.lookup("orgVoteStatPa");
-  const orgs = _.chain(Dept.get_all())
+  const orgs = _.chain(Dept.store.get_all())
     .map((org) => ({
       subject: org,
       name: org.name,

@@ -41,7 +41,7 @@ export const declare_simplographic_panel = () =>
           .q()
           .sum("{{pa_last_year}}exp");
 
-        const federal_institutions = _.chain(Dept.get_all())
+        const federal_institutions = _.chain(Dept.store.get_all())
           //HACKY: "Active" is coming from an igoc column, we're taking advantage of "Active" being the same in Englihs and french.
           .filter("inst_form.parent_form.parent_form")
           .filter(
@@ -76,7 +76,7 @@ export const declare_simplographic_panel = () =>
           .takeRight(3)
           .reverse()
           .map((row) => ({
-            subject: Dept.lookup(row.dept),
+            subject: Dept.store.lookup(row.dept),
             desc: row.desc,
             amt: row[col],
           }))

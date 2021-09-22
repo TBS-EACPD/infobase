@@ -74,8 +74,8 @@ const get_subject_from_props = (props) => {
   if (crso_id && CRSO.lookup(crso_id)) {
     return CRSO.lookup(crso_id);
   }
-  if (org_id && Dept.lookup(org_id)) {
-    return Dept.lookup(org_id);
+  if (org_id && Dept.store.lookup(org_id)) {
+    return Dept.store.lookup(org_id);
   }
   return props.subject; // default
 };
@@ -463,7 +463,7 @@ export default class TextDiffApp extends React.Component {
 
     const { history } = this.props;
 
-    const all_depts = _.chain(Dept.get_all())
+    const all_depts = _.chain(Dept.store.get_all())
       .filter((dept) => !!dept.is_dp_org)
       .sortBy("name")
       .value();
@@ -502,7 +502,7 @@ export default class TextDiffApp extends React.Component {
             id="select_dept"
             selected={current_dept.id}
             onSelect={(id) => {
-              const new_url = this.get_new_url(Dept.lookup(id));
+              const new_url = this.get_new_url(Dept.store.lookup(id));
               history.push(new_url);
             }}
             options={_.map(all_depts, (dept) => ({
@@ -607,5 +607,5 @@ export default class TextDiffApp extends React.Component {
 }
 
 TextDiffApp.defaultProps = {
-  subject: Dept.lookup(326),
+  subject: Dept.store.lookup(326),
 };

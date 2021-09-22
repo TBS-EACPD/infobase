@@ -43,7 +43,7 @@ const grouping_options = {
   portfolio: {
     option_name: text_maker("by_ministry"),
     get_nodes: () =>
-      _.chain(Dept.get_all())
+      _.chain(Dept.store.get_all())
         .groupBy(
           (org) => _.get(org, "ministry.name") || text_maker("undef_ministry")
         )
@@ -66,7 +66,7 @@ const grouping_options = {
   inst_form: {
     option_name: text_maker("by_inst_form"),
     get_nodes: () =>
-      _.chain(Dept.get_all())
+      _.chain(Dept.store.get_all())
         .reject("is_dead")
         .groupBy("inst_form.parent_form.id")
         .map((orgs, parent_form_id) => ({
@@ -107,7 +107,7 @@ const grouping_options = {
   historical: {
     option_name: text_maker("by_historical"),
     get_nodes: () =>
-      _.chain(Dept.get_all())
+      _.chain(Dept.store.get_all())
         .filter("is_dead")
         .map((org) => org_to_node(org, "root"))
         .sortBy((node) => +node.data.subject.end_yr)
@@ -125,7 +125,7 @@ const grouping_options = {
           separate_agencies
         na
       */
-      const orgs = _.chain(Dept.get_all())
+      const orgs = _.chain(Dept.store.get_all())
         .reject("is_dead")
         .filter("pop_group_gp_key")
         .value();
@@ -180,7 +180,7 @@ const grouping_options = {
   all: {
     option_name: text_maker("all_orgs"),
     get_nodes: () =>
-      _.chain(Dept.get_all())
+      _.chain(Dept.store.get_all())
         .map((org) => org_to_node(org, "root"))
         .sortBy("data.name")
         .value(),

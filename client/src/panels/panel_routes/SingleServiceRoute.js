@@ -30,7 +30,7 @@ const SingleServiceRoute = (props) => {
   if (loading) {
     return <LeafSpinner config_name="sub_route" />;
   }
-  const subject = Dept.lookup(subject_id);
+  const subject = Dept.store.lookup(subject_id);
 
   return (
     <StandardRouteContainer

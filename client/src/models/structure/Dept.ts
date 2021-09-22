@@ -10,7 +10,7 @@ import { InstForm } from "./InstForm";
 import { Minister } from "./Minister";
 import { Ministry } from "./Ministry";
 
-type DeptDef = {
+interface DeptDef {
   id: string;
   alt_ids: string[];
   dept_code: string;
@@ -24,7 +24,7 @@ type DeptDef = {
   pas_code: string;
   schedule: string;
   faa_hr: string;
-  auditor_str: string;
+  auditor: string;
   incorp_yr: string;
   fed_ownership: string;
   end_yr: string;
@@ -33,6 +33,7 @@ type DeptDef = {
   inst_form_id: string;
   ministry_id: string;
   minister_ids: string[];
+  table_ids: string[];
   eval_url: string;
   website_url: string;
   le_la: string;
@@ -40,9 +41,16 @@ type DeptDef = {
   other_lang_abbr: string;
   other_lang_applied_title: string;
   other_lang_legal_title: string;
-};
+}
 
-// TODO rename to Org some time
+/*
+  little trick here called interface merging, works as a very helpful shorthand to save on boilerplate repetition of 
+  DeptDef (without this, the class needs to redeclare all the DeptDef types AND can't get away with using Object.assign
+  in the constructor)
+  See https://github.com/microsoft/TypeScript/issues/26792
+*/
+export interface Dept extends DeptDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
+
 export class Dept extends BaseSubjectFactory(
   "dept",
   trivial_text_maker("org"),
@@ -51,9 +59,6 @@ export class Dept extends BaseSubjectFactory(
 ) {
   static store = make_store((def: DeptDef) => new Dept(def));
 
-  // SUBJECT_TS_TODO it's a real pain to have to tripple up on the whole DeptDef thing, really need a better solution... if possible
-
-  table_ids: string[] = [];
   crsos: any[] = []; // SUBJECT_TS_TODO type this once CRSO type is solid
 
   constructor(def: DeptDef) {
@@ -98,7 +103,7 @@ export class Dept extends BaseSubjectFactory(
     // TODO: these hardcoded rules are horrible, need the pipeline to include flags somewhere so planned spending status can be managed as data
     const is_categorically_exempt = _.includes(
       ["crown_corp", "parl_ent", "spec_op_agency", "joint_enterprise"],
-      this.inst_form.id
+      this.inst_form?.id
     );
 
     const is_special_case = _.includes(
@@ -107,13 +112,6 @@ export class Dept extends BaseSubjectFactory(
     );
 
     return !(is_categorically_exempt || is_special_case);
-  }
-  get type() {
-    // not a great variable name, but too hard to fix all the instances that could exist
-    return this.inst_form.name;
-  }
-  get auditor() {
-    return this.auditor_str;
   }
   get is_dead() {
     return (
@@ -124,27 +122,17 @@ export class Dept extends BaseSubjectFactory(
     return sanitized_marked(_.trim(this.raw_mandate));
   }
 
-  get tables() {
-    return this.table_ids;
-  }
-
   get programs() {
     return _.chain(this.crsos).map("programs").flatten().compact().value();
   }
-
   get inst_form() {
     return InstForm.store.lookup(this.inst_form_id);
   }
-
   get ministry() {
     return Ministry.store.lookup(this.ministry_id);
   }
-
   get ministers() {
     return _.map(this.minister_ids, Minister.store.lookup);
-  }
-  get minister() {
-    return _.map(this.ministers, "name");
   }
 
   /*

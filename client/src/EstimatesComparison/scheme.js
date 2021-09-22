@@ -65,7 +65,7 @@ function get_footnotes_for_votestat_item({ desc, org_id, votenum }) {
         create_footnote({
           id: central_vote_footnote[1](),
           text: central_vote_footnote[1](),
-          subject: Dept.lookup(326),
+          subject: Dept.store.lookup(326),
           topic_keys: [],
         }),
       ];
@@ -168,7 +168,7 @@ function get_data_by_org(include_stat) {
     .groupBy("dept")
     .toPairs()
     .map(([org_id, rows]) => {
-      const org = Dept.lookup(org_id);
+      const org = Dept.store.lookup(org_id);
 
       let current_value = 0;
       if (current_doc_is_mains) {
@@ -270,7 +270,7 @@ const get_category_children = (rows) =>
       return {
         id: `${dept}-${votenum}-${desc}`,
         data: {
-          name: `${Dept.lookup(dept).name} - ${strip_stat_marker(desc)}`,
+          name: `${Dept.store.lookup(dept).name} - ${strip_stat_marker(desc)}`,
           comparison_value,
           current_value,
           percent_value: calculate_percent_value(
@@ -323,7 +323,9 @@ function get_data_by_item_types() {
       const is_single_item =
         _.chain(rows).map(row_identifier_func).uniq().value().length === 1;
       const name = is_single_item
-        ? `${strip_stat_marker(category)} - ${Dept.lookup(rows[0].dept).name}`
+        ? `${strip_stat_marker(category)} - ${
+            Dept.store.lookup(rows[0].dept).name
+          }`
         : strip_stat_marker(category);
 
       return {

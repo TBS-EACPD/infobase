@@ -37,7 +37,8 @@ const getSubj = (level, id) => {
   let subject;
   switch (level) {
     case "dept":
-      subject = Dept.lookup(id) || Dept.lookup(defaultSubjectKeys.dept);
+      subject =
+        Dept.store.lookup(id) || Dept.store.lookup(defaultSubjectKeys.dept);
       break;
     case "tag":
       subject =
@@ -310,16 +311,18 @@ class TestSubjectLinks extends React.Component {
           <h5>Dept</h5>
         </div>
         <div>
-          <Link to={href_template(Dept.lookup(151), panel)}>FCAC</Link>
+          <Link to={href_template(Dept.store.lookup(151), panel)}>FCAC</Link>
         </div>
         <div>
-          <Link to={href_template(Dept.lookup(94), panel)}>CSIS</Link>
+          <Link to={href_template(Dept.store.lookup(94), panel)}>CSIS</Link>
         </div>
         <div>
-          <Link to={href_template(Dept.lookup(249), panel)}>GG</Link>
+          <Link to={href_template(Dept.store.lookup(249), panel)}>GG</Link>
         </div>
         <div>
-          <Link to={href_template(Dept.lookup(219), panel)}>NCC (crown)</Link>
+          <Link to={href_template(Dept.store.lookup(219), panel)}>
+            NCC (crown)
+          </Link>
         </div>
         <div>
           <h5>CRSO</h5>
