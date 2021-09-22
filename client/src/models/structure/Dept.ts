@@ -12,7 +12,6 @@ import { Ministry } from "./Ministry";
 
 interface DeptDef {
   id: string;
-  alt_ids: string[];
   dept_code: string;
   abbr: string;
   legal_title: string;
@@ -59,7 +58,7 @@ export class Dept extends BaseSubjectFactory(
 ) {
   static store = make_store(
     (def: DeptDef) => new Dept(def),
-    (dept) => [dept.dept_code]
+    (dept) => [dept.dept_code, +dept.id]
   );
 
   crsos: any[] = []; // SUBJECT_TS_TODO type this once CRSO type is solid
@@ -81,6 +80,7 @@ export class Dept extends BaseSubjectFactory(
     // TODO: legacy, should just be using id everywhere
     return this.id;
   }
+  // SUBJECT_TS_TODO problematic getter name here, bugged
   get name() {
     return this.applied_title || this.legal_title;
   }
