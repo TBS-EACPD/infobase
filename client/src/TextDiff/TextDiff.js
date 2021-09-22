@@ -464,7 +464,7 @@ export default class TextDiffApp extends React.Component {
     const { history } = this.props;
 
     const all_depts = _.chain(Dept.get_all())
-      .filter((dept) => !!dept.dp_status)
+      .filter((dept) => !!dept.is_dp_org)
       .sortBy("name")
       .value();
     const crs_without_internal = _.filter(

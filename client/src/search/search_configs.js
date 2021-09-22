@@ -154,7 +154,7 @@ const make_orgs_search_config = (options) => {
 
 const all_dp_orgs = {
   ...org_templates,
-  get_data: () => _.filter(Dept.get_all(), "dp_status"),
+  get_data: () => _.filter(Dept.get_all(), "is_dp_org"),
   filter: (query, datum) =>
     memoized_re_matchers(query, org_attributes_to_match, "all_dp_orgs")(datum),
 };

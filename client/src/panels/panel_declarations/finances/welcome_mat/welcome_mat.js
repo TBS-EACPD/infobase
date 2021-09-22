@@ -856,11 +856,11 @@ function has_planning_data(subject, q6) {
   let has_dp;
   switch (subject.level) {
     case "dept":
-      has_dp = subject.dp_status;
+      has_dp = subject.is_dp_org;
       break;
     case "program":
     case "crso":
-      has_dp = subject.dept.dp_status;
+      has_dp = subject.dept.is_dp_org;
       break;
     case "gov":
       has_dp = true;
@@ -1068,7 +1068,7 @@ export const declare_welcome_mat_panel = () =>
                 }
               }
 
-              if (!subject.dp_status) {
+              if (!subject.is_dp_org) {
                 //for non-dp orgs, we refer to estimate authorities. Must use orgVoteStatEstimates to get amounts
                 const proper_calcs = Object.assign({}, calcs, {
                   spend_plan_1: orgVoteStatEstimates
