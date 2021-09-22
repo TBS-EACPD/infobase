@@ -72,7 +72,7 @@ const grouping_options = {
         .map((orgs, parent_form_id) => ({
           id: parent_form_id,
           data: {
-            name: InstForm.lookup(parent_form_id).name,
+            name: InstForm.store.lookup(parent_form_id).name,
             type: "inst_form",
           },
           children: _.chain(orgs)
@@ -81,7 +81,7 @@ const grouping_options = {
               id: type_id,
               data: {
                 type: "inst_form",
-                name: InstForm.lookup(type_id).name,
+                name: InstForm.store.lookup(type_id).name,
               },
               children: _.chain(orgs)
                 .map((org) => org_to_node(org, type_id))
