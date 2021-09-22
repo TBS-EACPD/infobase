@@ -10,8 +10,6 @@ import {
   CanHaveServerData,
 } from "./utils/BaseSubjectFactory";
 
-const static_subject_store = () =>
-  mix().with(staticStoreMixin, PluralSingular, SubjectMixin);
 const static_subject_store_with_server_data = (data_types: string[]) =>
   mix().with(
     staticStoreMixin,
@@ -346,69 +344,4 @@ const Program = class Program extends static_subject_store_with_server_data([
   }
 };
 
-//Currently doesnt do anything, not even link to other departments
-const Minister = class Minister extends static_subject_store() {
-  static get subject_type() {
-    return "minister";
-  }
-  static get singular() {
-    return trivial_text_maker("minister");
-  }
-  static get plural() {
-    return trivial_text_maker("minister");
-  }
-
-  static create_and_register(id: string, name: string) {
-    const inst = new Minister(id, name);
-    this.register(inst.id, inst);
-    return inst;
-  }
-  constructor(id: string, name: string) {
-    super();
-    this.id = id;
-    this.name = name;
-    this.description = "";
-  }
-};
-
-const InstForm = class InstForm extends static_subject_store() {
-  static get subject_type() {
-    return "inst_form";
-  }
-  static get singular() {
-    return trivial_text_maker("inst_form");
-  }
-  static get plural() {
-    return trivial_text_maker("inst_forms");
-  }
-  static grandparent_forms() {
-    return _.filter(this.get_all(), (obj) => _.isEmpty(obj.parent_forms));
-  }
-  static parent_forms() {
-    return _.filter(
-      this.get_all(),
-      (obj) => obj.parent_form && !_.isEmpty(obj.children_forms)
-    );
-  }
-  static leaf_forms() {
-    return _.filter(this.get_all(), (obj) => _.isEmpty(obj.children_forms));
-  }
-  static create_and_register(id: string, name: string) {
-    const inst = new InstForm(id, name);
-    this.register(inst.id, inst);
-    return inst;
-  }
-  constructor(id: string, name: string) {
-    super();
-    Object.assign(this, {
-      id,
-      name,
-      //Below will be populated by the creator
-      parent_form: null,
-      children_forms: [],
-      orgs: [],
-    });
-  }
-};
-
-export { Dept, CRSO, Program, InstForm, Minister };
+export { Dept, CRSO, Program };

@@ -131,7 +131,7 @@ const get_children_grouper = createSelector(
         .toPairs()
         .sortBy(([form_id]) => _.indexOf(inst_form_sort_order, form_id))
         .map(([form_id, node_group]) => ({
-          display: InstForm.lookup(form_id).name,
+          display: InstForm.store.lookup(form_id).name,
           node_group,
         }))
         .value();

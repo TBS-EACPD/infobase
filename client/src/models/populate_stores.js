@@ -37,18 +37,18 @@ function populate_igoc_models({
   });
   //populate minister models
   _.each(ministers, ([id, name_en, name_fr]) => {
-    Minister.create_and_register(id, is_en ? name_en : name_fr);
+    Minister.store.create_and_register({ id, name: is_en ? name_en : name_fr });
   });
 
   //populate institutional forms hierarchy model
-  _.each(inst_forms, ([id, parent_id, name_en, name_fr]) => {
-    InstForm.create_and_register(id, is_en ? name_en : name_fr);
+  _.each(inst_forms, ([id, _parent_id, name_en, name_fr]) => {
+    InstForm.store.create_and_register({ id, name: is_en ? name_en : name_fr });
   });
   //once they're all created, create bi-directional parent-children links
   _.each(inst_forms, ([id, parent_id]) => {
-    const inst = InstForm.lookup(id);
+    const inst = InstForm.store.lookup(id);
     if (!_.isEmpty(parent_id)) {
-      const parent = InstForm.lookup(parent_id);
+      const parent = InstForm.store.lookup(parent_id);
       parent.children_forms.push(inst);
       inst.parent_form = parent;
     }
@@ -149,12 +149,12 @@ function populate_igoc_models({
 
     //create one way link to ministers
     const ministers = _.map(minister_by_org_id[org_id], (minister_id) =>
-      Minister.lookup(minister_id)
+      Minister.store.lookup(minister_id)
     );
     org_instance.ministers = ministers;
 
     //create two way link to inst form
-    const inst_form = InstForm.lookup(inst_form_id);
+    const inst_form = InstForm.store.lookup(inst_form_id);
     org_instance.inst_form = inst_form;
     inst_form.orgs.push(org_instance);
   });
