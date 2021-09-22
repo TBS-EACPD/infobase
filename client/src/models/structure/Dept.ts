@@ -57,7 +57,10 @@ export class Dept extends BaseSubjectFactory(
   trivial_text_maker("orgs"),
   ["results", "services", "covid"]
 ) {
-  static store = make_store((def: DeptDef) => new Dept(def));
+  static store = make_store(
+    (def: DeptDef) => new Dept(def),
+    (dept) => [dept.dept_code]
+  );
 
   crsos: any[] = []; // SUBJECT_TS_TODO type this once CRSO type is solid
 
