@@ -111,7 +111,6 @@ function populate_igoc_models({
 
       Dept.store.create_and_register({
         id,
-        alt_ids: [dept_code],
         dept_code,
         abbr,
         legal_title,

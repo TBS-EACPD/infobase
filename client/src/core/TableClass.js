@@ -104,7 +104,8 @@ class Mapper {
 
 export class Table {
   static store = make_store(
-    (def) => new Table({ ...def, alt_ids: [def.legacy_id] })
+    (def) => new Table(def),
+    (inst) => [inst.legacy_id]
   );
 
   static default_props() {

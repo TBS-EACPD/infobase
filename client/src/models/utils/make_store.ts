@@ -1,27 +1,32 @@
 import _ from "lodash";
 
-type StoreInstanceBase = { id: string; alt_ids?: string[] };
+type StoreInstanceBase = { id: string };
 
 export class Store<definition, instance extends StoreInstanceBase> {
   private store: Map<string, instance>;
   private register = (instance: instance) => {
     this.store.set(instance.id, instance);
 
-    _.forEach(instance.alt_ids, (id) => this.store.set(id, instance));
+    this.get_alt_ids &&
+      _.forEach(this.get_alt_ids(instance), (alt_id) =>
+        this.store.set(alt_id, instance)
+      );
 
     return instance;
   };
 
   create: (def: definition) => instance;
-  create_and_register: (definition: definition) => instance;
+  create_and_register: (def: definition) => instance;
+  get_alt_ids?: (inst: instance) => string[];
 
   constructor(
     store: Map<string, instance>,
-    create: (def: definition) => instance
+    create: (def: definition) => instance,
+    get_alt_ids?: (inst: instance) => string[]
   ) {
     this.store = store;
-
     this.create = create;
+    this.get_alt_ids = get_alt_ids;
 
     this.create_and_register = (def: definition) => this.register(create(def));
   }
@@ -31,8 +36,9 @@ export class Store<definition, instance extends StoreInstanceBase> {
 }
 
 export const make_store = <definition, instance extends StoreInstanceBase>(
-  create = _.identity as (def: definition) => instance
+  create: (def: definition) => instance = _.identity,
+  get_alt_ids: (inst: instance) => string[] = () => []
 ): Store<definition, instance> => {
   const store = new Map<string, instance>();
-  return new Store(store, create);
+  return new Store(store, create, get_alt_ids);
 };
