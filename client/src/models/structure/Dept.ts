@@ -42,6 +42,8 @@ interface DeptDef {
   other_lang_legal_title: string;
 }
 
+// SUBJECT_TS_TODO consider using this trick on other subjects (or baking it in to BaseSubjectFactory,
+// although that would assume every subject wants all raw values from thir def object to exist on the final instance)
 /*
   little trick here called interface merging, works as a very helpful shorthand to save on boilerplate repetition of 
   DeptDef (without this, the class needs to redeclare all the DeptDef types AND can't get away with using Object.assign
@@ -80,7 +82,6 @@ export class Dept extends BaseSubjectFactory(
     // TODO: legacy, should just be using id everywhere
     return this.id;
   }
-  // SUBJECT_TS_TODO problematic getter name here, bugged
   get name() {
     return this.applied_title || this.legal_title;
   }

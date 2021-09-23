@@ -45,6 +45,7 @@
     "@formatjs/intl-locale": "^2.4.32",
     "@formatjs/intl-numberformat": "^7.1.4",
     "@formatjs/intl-pluralrules": "^4.0.27",
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "@nivo/bar": "^0.72.0",
     "@nivo/circle-packing": "^0.72.0",
     "@nivo/core": "^0.72.0",

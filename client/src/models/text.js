@@ -1,5 +1,6 @@
+import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import { csvParse } from "d3-dsv";
-import Handlebars from "handlebars/dist/cjs/handlebars";
+import Handlebars from "handlebars";
 import _ from "lodash";
 import marked from "marked";
 
@@ -15,6 +16,14 @@ import nav_lang from "src/common_text/nav_lang.yaml";
 import people_lang from "src/common_text/people_lang.yaml";
 import result_lang from "src/common_text/result_lang.yaml";
 import template_globals_file from "src/common_text/template_globals.csv";
+
+// Handlebars disabled protype access within templates (i.e. can't access parent properties on an object within a template) for security reasons,
+// but those concerns are really for server side use cases where an attacker can provide an arbitrary template. For our client side use case,
+// an attacker would already need code injection to provide an arbitrary template
+// Disabling prototype access in text_maker breaks a _lot_ of code. Theoretically could refactor to lift any prototype accessing up to the caller level,
+// only pass in direct arguments to templates, but it'd be a _lot_ of work and persist as an annoying gotcha rule for future devs
+export const HandlebarsWithPrototypeAccess =
+  allowInsecurePrototypeAccess(Handlebars);
 
 /* 
   TODO: some parts of this still feel hacky 
@@ -109,7 +118,7 @@ const run_template = function (s, extra_args = {}) {
   if (s) {
     let _template;
     if (_.isString(s)) {
-      _template = Handlebars.compile(_.trim(s));
+      _template = HandlebarsWithPrototypeAccess.compile(_.trim(s));
     } else {
       //it's a function -> already compiled
       _template = s;
@@ -145,7 +154,7 @@ const add_text_bundle = (text_bundle) => {
   const to_add = {};
   _.each(_.omit(text_bundle, "__file_name__"), (text_obj, key) => {
     if (text_obj.handlebars_partial) {
-      Handlebars.registerPartial(key, text_obj.text);
+      HandlebarsWithPrototypeAccess.registerPartial(key, text_obj.text);
       return;
     }
 
@@ -159,7 +168,7 @@ const add_text_bundle = (text_bundle) => {
 
     if (text_obj.pre_compile === true) {
       const hbs_content = text_obj[lang] || text_obj.text;
-      text_obj.text = Handlebars.compile(hbs_content);
+      text_obj.text = HandlebarsWithPrototypeAccess.compile(hbs_content);
       text_obj.handlebars_compiled = true;
     }
   });
@@ -215,7 +224,7 @@ const _create_text_maker =
     _.each(text_obj.transform, (transform) => {
       if (transform === "handlebars") {
         if (!text_obj.handlebars_compiled) {
-          text_obj.text = Handlebars.compile(rtn);
+          text_obj.text = HandlebarsWithPrototypeAccess.compile(rtn);
           text_obj.handlebars_compiled = true;
         }
         rtn = run_template(rtn, context);
@@ -243,7 +252,7 @@ const _create_text_maker =
       }
     });
     if (_.has(text_obj, "outside_html")) {
-      rtn = Handlebars.compile(text_obj.outside_html)({
+      rtn = HandlebarsWithPrototypeAccess.compile(text_obj.outside_html)({
         content: rtn,
       });
     }
