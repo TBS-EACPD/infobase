@@ -1,4 +1,3 @@
-import Handlebars from "handlebars/dist/cjs/handlebars";
 import _ from "lodash";
 
 import React from "react";
@@ -7,7 +6,11 @@ import ReactDOMServer from "react-dom/server.browser";
 import { glossaryEntryStore } from "src/models/glossary";
 
 import { Dept } from "src/models/subject_index";
-import { trivial_text_maker, run_template } from "src/models/text";
+import {
+  HandlebarsWithPrototypeAccess,
+  trivial_text_maker,
+  run_template,
+} from "src/models/text";
 
 import { formats, array_to_grammatical_list } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
@@ -17,14 +20,17 @@ import { IconQuestion } from "src/icons/icons";
 import { infograph_href_template, glossary_href } from "src/link_utils";
 
 _.each(formats, (format, key) => {
-  Handlebars.registerHelper(
+  HandlebarsWithPrototypeAccess.registerHelper(
     "fmt_" + key,
-    (amount) => new Handlebars.SafeString(format(amount))
+    (amount) => new HandlebarsWithPrototypeAccess.SafeString(format(amount))
   );
 });
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "fmt_array_to_grammatical_list",
-  (array) => new Handlebars.SafeString(array_to_grammatical_list(array))
+  (array) =>
+    new HandlebarsWithPrototypeAccess.SafeString(
+      array_to_grammatical_list(array)
+    )
 );
 
 const change_map = {
@@ -171,9 +177,10 @@ const en_master_change = function (val, formatter, preposition, tense) {
   const direction = calc_direction(val);
   let return_value = change_map[tense][preposition]["en"][direction];
   if (direction !== "constant" && formatter.length > 0) {
-    return_value += " " + Handlebars.helpers[formatter](Math.abs(val));
+    return_value +=
+      " " + HandlebarsWithPrototypeAccess.helpers[formatter](Math.abs(val));
   }
-  return new Handlebars.SafeString(return_value);
+  return new HandlebarsWithPrototypeAccess.SafeString(return_value);
 };
 const fr_master_change = function (
   val,
@@ -190,53 +197,69 @@ const fr_master_change = function (
   let return_value =
     change_map[temps][preposition]["fr"][direction][genre + nombre];
   if (direction !== "constant" && formatter.length > 0) {
-    return_value += " " + Handlebars.helpers[formatter](Math.abs(val));
+    return_value +=
+      " " + HandlebarsWithPrototypeAccess.helpers[formatter](Math.abs(val));
   }
-  return new Handlebars.SafeString(return_value);
+  return new HandlebarsWithPrototypeAccess.SafeString(return_value);
 };
-Handlebars.registerHelper("changed_to", function (val, formatter, context) {
-  return en_master_change(val, formatter, "to", "past");
-});
-Handlebars.registerHelper("changed_by", function (val, formatter, context) {
-  return en_master_change(val, formatter, "by", "past");
-});
+HandlebarsWithPrototypeAccess.registerHelper(
+  "changed_to",
+  function (val, formatter, context) {
+    return en_master_change(val, formatter, "to", "past");
+  }
+);
+HandlebarsWithPrototypeAccess.registerHelper(
+  "changed_by",
+  function (val, formatter, context) {
+    return en_master_change(val, formatter, "by", "past");
+  }
+);
 // Dom code:
-Handlebars.registerHelper("changing_by", function (val, formatter, context) {
-  return en_master_change(val, formatter, "ing", "past");
-});
+HandlebarsWithPrototypeAccess.registerHelper(
+  "changing_by",
+  function (val, formatter, context) {
+    return en_master_change(val, formatter, "ing", "past");
+  }
+);
 
-Handlebars.registerHelper("will_change_to", function (val, formatter, context) {
-  return en_master_change(val, formatter, "to", "future");
-});
-Handlebars.registerHelper("will_change_by", function (val, formatter, context) {
-  return en_master_change(val, formatter, "by", "future");
-});
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
+  "will_change_to",
+  function (val, formatter, context) {
+    return en_master_change(val, formatter, "to", "future");
+  }
+);
+HandlebarsWithPrototypeAccess.registerHelper(
+  "will_change_by",
+  function (val, formatter, context) {
+    return en_master_change(val, formatter, "by", "future");
+  }
+);
+HandlebarsWithPrototypeAccess.registerHelper(
   "fr_changed_to",
   function (val, genre, nombre, formatter, context) {
     return fr_master_change(val, formatter, "to", "past", genre, nombre);
   }
 );
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "fr_changed_by",
   function (val, genre, nombre, formatter, context) {
     return fr_master_change(val, formatter, "by", "past", genre, nombre);
   }
 );
 // Dom code:
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "fr_changing_by",
   function (val, genre, nombre, formatter, context) {
     return fr_master_change(val, formatter, "ing", "past", genre, nombre);
   }
 );
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "fr_will_change_by",
   function (val, genre, nombre, formatter, context) {
     return fr_master_change(val, formatter, "by", "future", genre, nombre);
   }
 );
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "fr_will_change_to",
   function (val, genre, nombre, formatter, context) {
     return fr_master_change(val, formatter, "to", "future", genre, nombre);
@@ -279,8 +302,8 @@ const two_value_change_map = {
 const two_value_calc_direction = function (val1, val2, formatter) {
   // Compare with formatting for equality, as formatting may effectively round two numbers TO equality
   // Don't format for lesser than test, as formatting may mess that up
-  return Handlebars.helpers[formatter](val1).string ===
-    Handlebars.helpers[formatter](val2).string
+  return HandlebarsWithPrototypeAccess.helpers[formatter](val1).string ===
+    HandlebarsWithPrototypeAccess.helpers[formatter](val2).string
     ? "constant"
     : val1 < val2
     ? "increase"
@@ -302,19 +325,19 @@ const en_master_two_value_change = function (
       return_value =
         two_value_change_text_components[0] +
         " " +
-        Handlebars.helpers[formatter](val1) +
+        HandlebarsWithPrototypeAccess.helpers[formatter](val1) +
         " " +
         two_value_change_text_components[1] +
         " " +
-        Handlebars.helpers[formatter](val2);
+        HandlebarsWithPrototypeAccess.helpers[formatter](val2);
     } else {
       return_value =
         two_value_change_text_components +
         " " +
-        Handlebars.helpers[formatter](val1);
+        HandlebarsWithPrototypeAccess.helpers[formatter](val1);
     }
   }
-  return new Handlebars.SafeString(return_value);
+  return new HandlebarsWithPrototypeAccess.SafeString(return_value);
 };
 const fr_master_two_value_change = function (
   val1,
@@ -334,27 +357,27 @@ const fr_master_two_value_change = function (
       return_value =
         two_value_change_text_components[0] +
         " " +
-        Handlebars.helpers[formatter](val1) +
+        HandlebarsWithPrototypeAccess.helpers[formatter](val1) +
         " " +
         two_value_change_text_components[1] +
         " " +
-        Handlebars.helpers[formatter](val2);
+        HandlebarsWithPrototypeAccess.helpers[formatter](val2);
     } else {
       return_value =
         two_value_change_text_components +
         " " +
-        Handlebars.helpers[formatter](val1);
+        HandlebarsWithPrototypeAccess.helpers[formatter](val1);
     }
   }
-  return new Handlebars.SafeString(return_value);
+  return new HandlebarsWithPrototypeAccess.SafeString(return_value);
 };
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "two_value_changed_to",
   function (val1, val2, formatter, context) {
     return en_master_two_value_change(val1, val2, formatter, "to", "past");
   }
 );
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "fr_two_value_changed_to",
   function (val1, val2, genre, nombre, formatter, context) {
     return fr_master_two_value_change(
@@ -370,91 +393,101 @@ Handlebars.registerHelper(
 );
 
 // Helper to expand positive negative values to "[+/-]abs(value)"
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "plus_or_minus_val",
   function (val, formatter, context) {
     return (
-      (val >= 0 ? "+" : "-") + Handlebars.helpers[formatter](Math.abs(val))
+      (val >= 0 ? "+" : "-") +
+      HandlebarsWithPrototypeAccess.helpers[formatter](Math.abs(val))
     );
   }
 );
 
 // {{gt "key"}} -> looks up the key and returns
 // the correct language
-Handlebars.registerHelper("gt", function (context, other_arg) {
-  //handlebars will change the "this" if a helper is called within an #each block
-  if (!_.isFunction(this.__text_maker_func__)) {
-    return other_arg.data.root.__text_maker_func__(
-      context,
-      other_arg.data.root
-    );
+HandlebarsWithPrototypeAccess.registerHelper(
+  "gt",
+  function (context, other_arg) {
+    //handlebars will change the "this" if a helper is called within an #each block
+    if (!_.isFunction(this.__text_maker_func__)) {
+      return other_arg.data.root.__text_maker_func__(
+        context,
+        other_arg.data.root
+      );
+    }
+    return this.__text_maker_func__(context, this);
   }
-  return this.__text_maker_func__(context, this);
-});
+);
 
 // {{rt "key"}} -> runs template
-Handlebars.registerHelper("rt", function (context) {
+HandlebarsWithPrototypeAccess.registerHelper("rt", function (context) {
   return run_template(context, this);
 });
 
 // taken from [this recipe](http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/)
-Handlebars.registerHelper("isEqual", function (lvalue, rvalue, options) {
-  if (lvalue === rvalue) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
+HandlebarsWithPrototypeAccess.registerHelper(
+  "isEqual",
+  function (lvalue, rvalue, options) {
+    if (lvalue === rvalue) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
   }
-});
+);
 
 // taken from [this recipe](http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/)
-Handlebars.registerHelper("compare", function (lvalue, rvalue, options) {
-  lvalue = +lvalue.toString();
-  rvalue = +rvalue.toString();
+HandlebarsWithPrototypeAccess.registerHelper(
+  "compare",
+  function (lvalue, rvalue, options) {
+    lvalue = +lvalue.toString();
+    rvalue = +rvalue.toString();
 
-  if (arguments.length < 3) {
-    throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    if (arguments.length < 3) {
+      throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    }
+
+    var operator = options.hash.operator || "==";
+
+    var operators = {
+      "==": function (l, r) {
+        return l === r;
+      },
+      "===": function (l, r) {
+        return l === r;
+      },
+      "!=": function (l, r) {
+        return l !== r;
+      },
+      "<": function (l, r) {
+        return l < r;
+      },
+      ">": function (l, r) {
+        return l > r;
+      },
+      "<=": function (l, r) {
+        return l <= r;
+      },
+      ">=": function (l, r) {
+        return l >= r;
+      },
+    };
+
+    if (!operators[operator]) {
+      throw new Error(
+        "Handlerbars Helper 'compare' doesn't know the operator " + operator
+      );
+    }
+
+    var result = operators[operator](lvalue, rvalue);
+
+    if (result) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
   }
-
-  var operator = options.hash.operator || "==";
-
-  var operators = {
-    "==": function (l, r) {
-      return l === r;
-    },
-    "===": function (l, r) {
-      return l === r;
-    },
-    "!=": function (l, r) {
-      return l !== r;
-    },
-    "<": function (l, r) {
-      return l < r;
-    },
-    ">": function (l, r) {
-      return l > r;
-    },
-    "<=": function (l, r) {
-      return l <= r;
-    },
-    ">=": function (l, r) {
-      return l >= r;
-    },
-  };
-
-  if (!operators[operator]) {
-    throw new Error(
-      "Handlerbars Helper 'compare' doesn't know the operator " + operator
-    );
-  }
-
-  var result = operators[operator](lvalue, rvalue);
-
-  if (result) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
+);
 
 // {{lang obj.some_property}} assumes
 // ```
@@ -466,7 +499,7 @@ Handlebars.registerHelper("compare", function (lvalue, rvalue, options) {
 //   and looks up the property corresponding to the
 //   current language
 //  ```
-Handlebars.registerHelper("lang", function (context) {
+HandlebarsWithPrototypeAccess.registerHelper("lang", function (context) {
   if (context && _.has(context, lang)) {
     return context[lang];
   } else if (context.text) {
@@ -476,7 +509,7 @@ Handlebars.registerHelper("lang", function (context) {
   }
 });
 
-Handlebars.registerHelper("ce_crso", (crso) => {
+HandlebarsWithPrototypeAccess.registerHelper("ce_crso", (crso) => {
   if (crso.is_cr) {
     return `cette ${trivial_text_maker("core_resp")}`;
   } else {
@@ -484,7 +517,7 @@ Handlebars.registerHelper("ce_crso", (crso) => {
   }
 });
 
-Handlebars.registerHelper("le_crso", (crso) => {
+HandlebarsWithPrototypeAccess.registerHelper("le_crso", (crso) => {
   if (crso.is_cr) {
     return `la ${trivial_text_maker("core_resp")}`;
   } else {
@@ -492,7 +525,7 @@ Handlebars.registerHelper("le_crso", (crso) => {
   }
 });
 
-Handlebars.registerHelper("du_crso", (crso) => {
+HandlebarsWithPrototypeAccess.registerHelper("du_crso", (crso) => {
   if (crso.is_cr) {
     return `de la ${trivial_text_maker("core_resp")}`;
   } else {
@@ -522,16 +555,16 @@ const add_article_to_dept_identifier = (
 
 // looks up the name for the department if passed
 // a department object
-Handlebars.registerHelper("de_dept", (context) =>
+HandlebarsWithPrototypeAccess.registerHelper("de_dept", (context) =>
   add_article_to_dept_identifier("du_de_la", "name", context)
 );
-Handlebars.registerHelper("de_dept_abbr", (context) =>
+HandlebarsWithPrototypeAccess.registerHelper("de_dept_abbr", (context) =>
   add_article_to_dept_identifier("du_de_la", "abbr", context)
 );
-Handlebars.registerHelper("le_dept", (context) =>
+HandlebarsWithPrototypeAccess.registerHelper("le_dept", (context) =>
   add_article_to_dept_identifier("le_la", "name", context)
 );
-Handlebars.registerHelper("le_dept_abbr", (context) =>
+HandlebarsWithPrototypeAccess.registerHelper("le_dept_abbr", (context) =>
   add_article_to_dept_identifier("le_la", "abbr", context)
 );
 
@@ -546,14 +579,17 @@ Handlebars.registerHelper("le_dept_abbr", (context) =>
 //     fr : "som`eurl"
 //   }
 // ```
-Handlebars.registerHelper("encodeURI", function (context, options) {
-  if (_.has(context, "en") && _.has(context, "fr")) {
-    context = context[lang];
+HandlebarsWithPrototypeAccess.registerHelper(
+  "encodeURI",
+  function (context, options) {
+    if (_.has(context, "en") && _.has(context, "fr")) {
+      context = context[lang];
+    }
+    return encodeURI(context);
   }
-  return encodeURI(context);
-});
+);
 
-Handlebars.registerHelper("debug", function (optionalValue) {
+HandlebarsWithPrototypeAccess.registerHelper("debug", function (optionalValue) {
   // eslint-disable no-console
   console.log("Current Context");
   console.log("====================");
@@ -566,25 +602,31 @@ Handlebars.registerHelper("debug", function (optionalValue) {
   }
 });
 
-Handlebars.registerHelper("halt", function () {
+HandlebarsWithPrototypeAccess.registerHelper("halt", function () {
   debugger; // eslint-disable-line no-debugger
 });
 
-Handlebars.registerHelper("callFunction", function (obj, func, options) {
-  return _.map(obj[func](), options.fn).join("");
-});
-
-Handlebars.registerHelper("fFunc", function (obj, func, options) {
-  if (obj[func]()) {
-    return options.fn;
+HandlebarsWithPrototypeAccess.registerHelper(
+  "callFunction",
+  function (obj, func, options) {
+    return _.map(obj[func](), options.fn).join("");
   }
-});
+);
 
-Handlebars.registerHelper("stripes", function (index) {
+HandlebarsWithPrototypeAccess.registerHelper(
+  "fFunc",
+  function (obj, func, options) {
+    if (obj[func]()) {
+      return options.fn;
+    }
+  }
+);
+
+HandlebarsWithPrototypeAccess.registerHelper("stripes", function (index) {
   return index % 2 == 0 ? "even" : "odd";
 });
 
-Handlebars.registerHelper(
+HandlebarsWithPrototypeAccess.registerHelper(
   "icon_tooltip",
   function glossary_tooltip(popup_text) {
     const raw_icon_html = ReactDOMServer.renderToStaticMarkup(
@@ -598,7 +640,7 @@ Handlebars.registerHelper(
       "\\*"
     );
 
-    return new Handlebars.SafeString(
+    return new HandlebarsWithPrototypeAccess.SafeString(
       `<span
       style="display: inline-flex;"
       class="nowrap link-unstyled"
@@ -620,103 +662,127 @@ Handlebars.registerHelper(
 //  `[link text]({{gl ‘keytext’}}`
 //  will produce:
 // `[link text](#glossary-key "en/fr explanation that this links to a glossary")`
-Handlebars.registerHelper("gl", function glossary_link(key) {
+HandlebarsWithPrototypeAccess.registerHelper("gl", function glossary_link(key) {
   const href = glossary_href(key);
   var str = `(${href} "${trivial_text_maker("glossary_link_title")}")`;
-  // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
-  return new Handlebars.SafeString(str);
+  // SafeString is used to avoid having to use the [HandlebarsWithPrototypeAccess triple bracket syntax](http://handlebarsjs.com/#html_escaping)
+  return new HandlebarsWithPrototypeAccess.SafeString(str);
 });
 
-Handlebars.registerHelper("gl_tt", function glossary_tooltip(display, key) {
-  return new Handlebars.SafeString(
-    `<span class="nowrap glossary-tippy-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip">${display}</span>`
-  );
-});
+HandlebarsWithPrototypeAccess.registerHelper(
+  "gl_tt",
+  function glossary_tooltip(display, key) {
+    return new HandlebarsWithPrototypeAccess.SafeString(
+      `<span class="nowrap glossary-tippy-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip">${display}</span>`
+    );
+  }
+);
 
-Handlebars.registerHelper("gl_def", function (key) {
+HandlebarsWithPrototypeAccess.registerHelper("gl_def", function (key) {
   const glos_item = glossaryEntryStore.lookup(key);
   var str = glos_item.get_compiled_definition();
-  // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
-  return new Handlebars.SafeString(str);
+  // SafeString is used to avoid having to use the [HandlebarsWithPrototypeAccess triple bracket syntax](http://handlebarsjs.com/#html_escaping)
+  return new HandlebarsWithPrototypeAccess.SafeString(str);
 });
 
-Handlebars.registerHelper("gl_title_and_link", function (key) {
-  const glos_item = glossaryEntryStore.lookup(key);
-  const str = `<a href="${glossary_href(key)}">${glos_item.title}</a>`;
-  // SafeString is used to avoid having to use the [Handlebars triple bracket syntax](http://handlebarsjs.com/#html_escaping)
-  return new Handlebars.SafeString(str);
-});
+HandlebarsWithPrototypeAccess.registerHelper(
+  "gl_title_and_link",
+  function (key) {
+    const glos_item = glossaryEntryStore.lookup(key);
+    const str = `<a href="${glossary_href(key)}">${glos_item.title}</a>`;
+    // SafeString is used to avoid having to use the [HandlebarsWithPrototypeAccess triple bracket syntax](http://handlebarsjs.com/#html_escaping)
+    return new HandlebarsWithPrototypeAccess.SafeString(str);
+  }
+);
 
-Handlebars.registerHelper("gl_title", function (key) {
+HandlebarsWithPrototypeAccess.registerHelper("gl_title", function (key) {
   const glos_item = glossaryEntryStore.lookup(key);
   const str = glos_item.title;
   return str;
 });
 
-Handlebars.registerHelper("infograph_link", function (subject) {
-  const href = infograph_href_template(subject);
-  const str = `<a href="${href}" title="${trivial_text_maker(
-    "infographic_for",
-    { subject }
-  )}">${subject.name}</a>`;
-  return new Handlebars.SafeString(str);
-});
-
-Handlebars.registerHelper(
-  "metadata_source_link",
-  function (link_text, source_key) {
-    const str = `<a href=${"#metadata/" + source_key}>${link_text}</a>`;
-    return new Handlebars.SafeString(str);
+HandlebarsWithPrototypeAccess.registerHelper(
+  "infograph_link",
+  function (subject) {
+    const href = infograph_href_template(subject);
+    const str = `<a href="${href}" title="${trivial_text_maker(
+      "infographic_for",
+      { subject }
+    )}">${subject.name}</a>`;
+    return new HandlebarsWithPrototypeAccess.SafeString(str);
   }
 );
 
-Handlebars.registerHelper("infograph_res_link", function (subject, text) {
-  const href = infograph_href_template(subject, "results");
+HandlebarsWithPrototypeAccess.registerHelper(
+  "metadata_source_link",
+  function (link_text, source_key) {
+    const str = `<a href=${"#metadata/" + source_key}>${link_text}</a>`;
+    return new HandlebarsWithPrototypeAccess.SafeString(str);
+  }
+);
 
-  const str = `<a href="${href}">${text}</a>`;
-  return new Handlebars.SafeString(str);
-});
+HandlebarsWithPrototypeAccess.registerHelper(
+  "infograph_res_link",
+  function (subject, text) {
+    const href = infograph_href_template(subject, "results");
 
-Handlebars.registerHelper("tag_link", function (tag) {
+    const str = `<a href="${href}">${text}</a>`;
+    return new HandlebarsWithPrototypeAccess.SafeString(str);
+  }
+);
+
+HandlebarsWithPrototypeAccess.registerHelper("tag_link", function (tag) {
   const href = infograph_href_template(tag);
   const str = `<a href="${href}">${tag.name}</a>`;
-  return new Handlebars.SafeString(str);
+  return new HandlebarsWithPrototypeAccess.SafeString(str);
 });
 
-Handlebars.registerHelper("pluralize", function (number, single) {
-  if (number < 2) {
-    return number + " " + single;
-  } else {
-    if (/[[]/g.test(single)) {
-      return (
-        number + " [" + single.replace(/[^a-zA-Z\u00C0-\u017F ]/g, "") + "s]"
-      );
+HandlebarsWithPrototypeAccess.registerHelper(
+  "pluralize",
+  function (number, single) {
+    if (number < 2) {
+      return number + " " + single;
     } else {
-      return number + " " + single + "s";
+      if (/[[]/g.test(single)) {
+        return (
+          number + " [" + single.replace(/[^a-zA-Z\u00C0-\u017F ]/g, "") + "s]"
+        );
+      } else {
+        return number + " " + single + "s";
+      }
     }
   }
-});
+);
 
-Handlebars.registerHelper("plural_branch", function (number, single, plural) {
-  if (number === 1) {
-    return single;
-  } else {
-    return plural;
+HandlebarsWithPrototypeAccess.registerHelper(
+  "plural_branch",
+  function (number, single, plural) {
+    if (number === 1) {
+      return single;
+    } else {
+      return plural;
+    }
   }
-});
+);
 
-Handlebars.registerHelper("divide", function (numerator, denominator) {
-  return numerator / denominator;
-});
-
-Handlebars.registerHelper("ext_link", function (display, url, title) {
-  if (url) {
-    return new Handlebars.SafeString(
-      `<a target="_blank" rel="noopener noreferrer" href="${url}" ${
-        _.isString(title) ? `title="${title}"` : ""
-      }>${display}</a>`
-    );
-  } else {
-    return display;
+HandlebarsWithPrototypeAccess.registerHelper(
+  "divide",
+  function (numerator, denominator) {
+    return numerator / denominator;
   }
-});
+);
+
+HandlebarsWithPrototypeAccess.registerHelper(
+  "ext_link",
+  function (display, url, title) {
+    if (url) {
+      return new HandlebarsWithPrototypeAccess.SafeString(
+        `<a target="_blank" rel="noopener noreferrer" href="${url}" ${
+          _.isString(title) ? `title="${title}"` : ""
+        }>${display}</a>`
+      );
+    } else {
+      return display;
+    }
+  }
+);
