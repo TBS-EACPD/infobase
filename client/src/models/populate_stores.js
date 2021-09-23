@@ -18,8 +18,10 @@ import {
   Tag,
 } from "./subject_index";
 
+const is_en = lang === "en";
+
 const url_id = (num) => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
-function populate_igoc_models({
+const populate_igoc_models = ({
   dept_to_table_id,
   org_to_ministers,
   inst_forms,
@@ -27,9 +29,7 @@ function populate_igoc_models({
   ministries,
   urls,
   igoc_rows,
-}) {
-  const is_en = lang === "en";
-
+}) => {
   _.each(ministries, ([id, name_en, name_fr]) => {
     Ministry.store.create_and_register({
       id,
@@ -148,127 +148,117 @@ function populate_igoc_models({
       });
     }
   );
-}
+};
 
-function populate_glossary(lines) {
-  let [term_col, def_col, translation_col] = [1, 3, 2];
-  if (lang === "fr") {
-    term_col++;
-    def_col++;
-    translation_col--;
-  }
-  const [key, term, markdown_def, translation] = [
-    0,
-    term_col,
-    def_col,
-    translation_col,
-  ];
-  _.chain(lines)
-    .filter((line) => !_.isEmpty(line[markdown_def]))
-    .each((line) => {
-      glossaryEntryStore.create_and_register({
-        id: line[key],
-        title: line[term],
-        raw_definition: line[markdown_def],
-        translation: line[translation],
-      });
-    })
+const populate_glossary = (rows) =>
+  _.chain(rows)
+    .map(([id, term_en, term_fr, def_en, def_fr]) => ({
+      id,
+      title: is_en ? term_en : term_fr,
+      translation: is_en ? term_fr : term_en,
+      raw_definition: is_en ? def_en : def_fr,
+    }))
+    .filter("raw_definition")
+    .each(glossaryEntryStore.create_and_register)
     .value();
-}
 
-function create_tag_branches(program_tag_types) {
-  const l = lang === "en";
-  _.each(program_tag_types, (row) => {
-    Tag.store.create_and_register({
-      id: row[0],
-      cardinality: row[1],
-      name: row[l ? 2 : 3],
-      description: row[l ? 4 : 5],
-    });
-  });
-}
+const create_tag_branches = (program_tag_types) =>
+  _.each(
+    program_tag_types,
+    ([id, cardinality, name_en, name_fr, description_en, description_fr]) => {
+      Tag.store.create_and_register({
+        id,
+        cardinality,
+        name: is_en ? name_en : name_fr,
+        description: is_en ? description_en : description_fr,
+      });
+    }
+  );
 
-function populate_program_tags(tag_rows) {
-  // assumes the parent tags will be listed first
-  const l = lang === "en";
-  const [tag_id, parent_id, name_en, name_fr, desc_en, desc_fr] = _.range(6);
-  _.each(tag_rows, (row) => {
-    const parent_tag = Tag.store.lookup(row[parent_id]);
-    //HACKY: Note that parent rows must precede child rows
-    const instance = Tag.store.create_and_register({
-      id: row[tag_id],
-      name: row[l ? name_en : name_fr],
-      description: sanitized_marked(row[l ? desc_en : desc_fr]),
-      root: parent_tag.root,
-      cardinality: parent_tag.root.cardinality,
-      parent_tag,
-    });
-    parent_tag.children_tags.push(instance);
-  });
-}
+const populate_program_tags = (tag_rows) =>
+  _.each(
+    tag_rows,
+    ([tag_id, parent_id, name_en, name_fr, desc_en, desc_fr]) => {
+      //  HACKY: Note that parent rows must precede child rows in input data
+      const parent_tag = Tag.store.lookup(parent_id);
+      const instance = Tag.store.create_and_register({
+        id: tag_id,
+        name: is_en ? name_en : name_fr,
+        description: sanitized_marked(is_en ? desc_en : desc_fr),
+        root: parent_tag.root,
+        cardinality: parent_tag.root.cardinality,
+        parent_tag,
+      });
+      parent_tag.children_tags.push(instance);
+    }
+  );
 
-function populate_crsos(rows) {
-  const [id, dept_code, title, desc, is_active, is_drf, is_internal_service] = [
-    0, 1, 2, 3, 4, 5, 6, 7,
-  ];
-  _.each(rows, (row) => {
-    const dept = Dept.store.lookup(row[dept_code]);
-    const instance = CRSO.create_and_register({
-      dept,
-      id: row[id],
-      activity_code: _.chain(row[id]).split("-").last().value(),
-      name: row[title],
-      description: row[desc],
-      is_active: !!+row[is_active],
-      is_drf: !!+row[is_drf],
-      is_internal_service: !!+row[is_internal_service],
-    });
-    dept.crsos.push(instance);
-  });
-}
+const populate_crsos = (rows) =>
+  _.each(
+    rows,
+    ([
+      id,
+      dept_code,
+      name,
+      description,
+      is_active,
+      is_drf,
+      is_internal_service,
+    ]) => {
+      const dept = Dept.store.lookup(dept_code);
+      const instance = CRSO.create_and_register({
+        dept,
+        id,
+        activity_code: _.chain(id).split("-").last().value(),
+        name,
+        description,
+        is_active: is_active === "1",
+        is_drf: is_drf === "1",
+        is_internal_service: is_internal_service === "1",
+      });
+      dept.crsos.push(instance);
+    }
+  );
 
-function populate_programs(rows) {
-  //TODO what do we use is_crown for ?
-  /* eslint-disable no-unused-vars */
-  const [
-    dept_code,
-    crso_id,
-    activity_code,
-    name,
-    old_name,
-    desc,
-    is_crown,
-    is_active,
-    is_internal_service,
-    is_fake,
-  ] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  _.each(rows, (row) => {
-    const crso = CRSO.lookup(row[crso_id]);
-    const instance = Program.create_and_register({
-      crso,
-      activity_code: row[activity_code],
-      dept: Dept.store.lookup(row[dept_code]),
-      description: _.trim(
-        row[desc].replace(/^<p>/i, "").replace(/<\/p>$/i, "")
-      ),
-      name: row[name],
-      old_name: row[old_name],
-      is_active: !!+row[is_active],
-      is_internal_service: row[is_internal_service] === "1",
-      is_fake: row[is_fake] === "1",
-    });
-    crso.programs.push(instance);
-  });
-}
+const populate_programs = (rows) =>
+  _.each(
+    rows,
+    ([
+      dept_code,
+      crso_id,
+      activity_code,
+      name,
+      old_name,
+      desc,
+      _is_crown, //TODO why do we have is_crown in the data? Goes unused, but should it be? Can just look that up through the parent org though
+      is_active,
+      is_internal_service,
+      is_fake,
+    ]) => {
+      const crso = CRSO.lookup(crso_id);
+      const instance = Program.create_and_register({
+        crso,
+        activity_code: activity_code,
+        dept: Dept.store.lookup(dept_code),
+        description: _.trim(desc.replace(/^<p>/i, "").replace(/<\/p>$/i, "")),
+        name,
+        old_name,
+        is_active: is_active === "1",
+        is_internal_service: is_internal_service === "1",
+        is_fake: is_fake === "1",
+      });
+      crso.programs.push(instance);
+    }
+  );
 
-function populate_program_tag_linkages(programs_m2m_tags) {
-  _.each(programs_m2m_tags, (row) => {
-    const [program_id, tagID] = row;
+const populate_program_tag_linkages = (programs_m2m_tags) =>
+  _.each(programs_m2m_tags, ([program_id, tagID]) => {
     const program = Program.lookup(program_id);
     const tag = Tag.store.lookup(tagID);
     const tag_root_id = tag.root.id;
 
-    // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down, some tagging done at the root level some at other levels, etc.)
+    // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down,
+    // some tagging done at the root level some at other levels, etc.)
     if (tag_root_id === "CCOFOG") {
       return;
     }
@@ -276,9 +266,8 @@ function populate_program_tag_linkages(programs_m2m_tags) {
     program.tags.push(tag);
     tag.programs.push(program);
   });
-}
 
-function process_lookups(data) {
+const process_lookups = (data) => {
   //convert the csv's to rows and drop their headers
   _.chain(data)
     .omit("global_footnotes") //global footnotes already has its header dropped
@@ -312,13 +301,9 @@ function process_lookups(data) {
 
   populate_glossary(data[`glossary.csv`]);
   populate_global_footnotes(data.global_footnotes);
-}
-
-export const populate_stores = function () {
-  // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
-  return make_request(get_static_url(`lookups_${lang}.json.js`)).then(
-    (text) => {
-      process_lookups(JSON.parse(text));
-    }
-  );
 };
+
+export const populate_stores = () =>
+  make_request(get_static_url(`lookups_${lang}.json.js`)).then((text) => {
+    process_lookups(JSON.parse(text));
+  });
