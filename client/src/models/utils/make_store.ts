@@ -37,7 +37,9 @@ export class Store<definition, instance extends StoreInstanceBase> {
   }
 
   lookup = (id: store_id_type) => this.store.get(id);
-  get_all = () => _.uniq(Array.from(this.store.values())); // SUBJECT_TS_TODO why's a unique needed here?
+
+  // uniq required due to potential use of alt_ids
+  get_all = () => _.uniq(Array.from(this.store.values()));
 }
 
 export const make_store = <definition, instance extends StoreInstanceBase>(
