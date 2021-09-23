@@ -1,6 +1,6 @@
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import { csvParse } from "d3-dsv";
-import Handlebars from "handlebars";
+import Handlebars from "handlebars/dist/cjs/handlebars";
 import _ from "lodash";
 import marked from "marked";
 
