@@ -16,7 +16,6 @@ interface SelectProps {
   disabled?: boolean;
   style?: React.CSSProperties;
   title?: string;
-  ariaLabel?: string;
 }
 
 //expects options to be of the form [ { id, display } ]
