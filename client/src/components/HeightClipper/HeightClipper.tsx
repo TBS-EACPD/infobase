@@ -1,12 +1,10 @@
 import _ from "lodash";
-import React, { Children } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 import { TM } from "src/components/TextMaker";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
-
-const app = document.querySelector("#app");
 
 /*props: 
   maxChildrenHeight as an INT of pixels,
@@ -43,18 +41,16 @@ export class HeightClipper extends React.Component<
     this.main = React.createRef();
     this.content = React.createRef();
 
-    this.debounced_mutation_callback = _.debounce(
-      (mutationList: MutationRecord[], observer: MutationObserver) => {
-        const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
-        const untabbable_children_node = height_clipper_node.querySelector(
-          ".untabbable_children"
-        );
+    this.debounced_mutation_callback = _.debounce(() => {
+      const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
+      const untabbable_children_node = height_clipper_node.querySelector(
+        ".untabbable_children"
+      );
 
-        if (untabbable_children_node) {
-          this.setFocusableFalse(untabbable_children_node);
-        }
+      if (untabbable_children_node) {
+        this.setFocusableFalse(untabbable_children_node);
       }
-    );
+    });
 
     this.observer = new MutationObserver(this.debounced_mutation_callback);
   }
@@ -66,13 +62,13 @@ export class HeightClipper extends React.Component<
   componentDidMount() {
     this.measureHeightAndUpdateState();
 
-    if (app) {
-      this.observer.observe(app, {
-        childList: true,
-        attributes: false,
-        subtree: true,
-      });
-    }
+    const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
+
+    this.observer.observe(height_clipper_node, {
+      childList: true,
+      attributes: false,
+      subtree: true,
+    });
   }
 
   componentDidUpdate() {
