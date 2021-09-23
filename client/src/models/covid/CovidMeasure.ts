@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { trivial_text_maker } from "src/models/text";
 
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";

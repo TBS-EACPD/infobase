@@ -121,8 +121,11 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup(
-            Program.unique_id(row.dept, row.activity_code)
+          const prog = Program.store.lookup(
+            Program.lookup_by_dept_and_activity_code(
+              row.dept,
+              row.activity_code
+            )
           );
           //FIXME: this is because I found a program without a goco,
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
@@ -137,8 +140,11 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup(
-            Program.unique_id(row.dept, row.activity_code)
+          const prog = Program.store.lookup(
+            Program.lookup_by_dept_and_activity_code(
+              row.dept,
+              row.activity_code
+            )
           );
           //FIXME: this is because I found a program without a goco,
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
@@ -151,8 +157,9 @@ export default {
       title_key: "goco_id",
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup(
-            Program.unique_id(row.dept, row.activity_code)
+          const prog = Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
           );
           const goco = _.first(prog.tags_by_scheme.GOCO);
           return goco && goco.id;
@@ -169,7 +176,7 @@ export default {
   },
 
   mapper: function (row) {
-    const program = Program.get_from_activity_code(row[0], row[1]);
+    const program = Program.lookup_by_dept_and_activity_code(row[0], row[1]);
 
     row.splice(2, 0, program.id);
     row.splice(3, 0, program.name);
@@ -177,7 +184,7 @@ export default {
   },
 
   process_mapped_row(mapped_row) {
-    const program_obj = Program.get_from_activity_code(
+    const program_obj = Program.lookup_by_dept_and_activity_code(
       mapped_row.dept,
       mapped_row.activity_code
     );

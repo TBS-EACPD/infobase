@@ -5,7 +5,7 @@ import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
 import { businessConstants } from "./businessConstants";
-import { Program, CRSO } from "./organizational_entities";
+import { Program, CRSO } from "./structure";
 import { trivial_text_maker, run_template } from "./text";
 
 const { months } = businessConstants;
@@ -114,8 +114,8 @@ class Result {
   }
   get subject() {
     const { subject_id } = this;
-    let program = Program.lookup(subject_id);
-    let crso = CRSO.lookup(subject_id);
+    let program = Program.store.lookup(subject_id);
+    let crso = CRSO.store.lookup(subject_id);
 
     return program || crso;
   }
@@ -132,7 +132,7 @@ class Result {
   }
   get contributing_programs() {
     return _.chain(PI_DR_Links.get_contributing_program_ids_for_result(this.id))
-      .map((prog_id) => Program.lookup(prog_id))
+      .map((prog_id) => Program.store.lookup(prog_id))
       .compact()
       .value();
   }

@@ -426,7 +426,7 @@ export const declare_historical_g_and_c_panel = () =>
               const { orgTransferPayments } = this.tables;
 
               const rolled_up_transfer_payments =
-                orgTransferPayments.payment_type_ids(exp_years, dept.unique_id);
+                orgTransferPayments.payment_type_ids(exp_years, dept.id);
 
               const five_year_avg =
                 (_.sum(rolled_up_transfer_payments.c) +

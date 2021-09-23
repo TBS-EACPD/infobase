@@ -285,7 +285,7 @@ const programs = {
   config_name: "programs",
   header_function: () => trivial_text_maker("programs"),
   name_function: program_or_crso_search_name,
-  get_data: () => Program.get_all(),
+  get_data: () => Program.store.get_all(),
   filter: (query, datum) =>
     memoized_re_matchers(
       query,
@@ -337,7 +337,7 @@ const crsos = {
   config_name: "crsos",
   header_function: () => trivial_text_maker("core_resps"),
   name_function: program_or_crso_search_name,
-  get_data: () => _.filter(CRSO.get_all(), "is_cr"),
+  get_data: () => _.filter(CRSO.store.get_all(), "is_cr"),
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name", "activity_code"], "crsos")(datum),
 };

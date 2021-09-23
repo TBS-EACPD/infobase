@@ -69,10 +69,6 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     return _.filter(Dept.store.get_all(), (dept) => _.isEmpty(dept.table_ids));
   }
 
-  get unique_id() {
-    // TODO: legacy, should just be using id everywhere
-    return this.id;
-  }
   get name() {
     return this.applied_title || this.legal_title;
   }

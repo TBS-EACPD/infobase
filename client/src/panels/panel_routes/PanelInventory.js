@@ -46,10 +46,12 @@ const getSubj = (level, id) => {
       break;
     case "program":
       subject =
-        Program.lookup(id) || Program.lookup(defaultSubjectKeys.program);
+        Program.store.lookup(id) ||
+        Program.store.lookup(defaultSubjectKeys.program);
       break;
     case "crso":
-      subject = CRSO.lookup(id) || CRSO.lookup(defaultSubjectKeys.crso);
+      subject =
+        CRSO.store.lookup(id) || CRSO.store.lookup(defaultSubjectKeys.crso);
       break;
     default:
       subject = Gov;
@@ -328,12 +330,12 @@ class TestSubjectLinks extends React.Component {
           <h5>CRSO</h5>
         </div>
         <div>
-          <Link to={href_template(CRSO.lookup("NSERC-BNR00"), panel)}>
+          <Link to={href_template(CRSO.store.lookup("NSERC-BNR00"), panel)}>
             NSERC-BNR00 (CR)
           </Link>
         </div>
         <div>
-          <Link to={href_template(CRSO.lookup("INDSC-ISS00"), panel)}>
+          <Link to={href_template(CRSO.store.lookup("INDSC-ISS00"), panel)}>
             INDSC-ISS00 (CR, Internal Services)
           </Link>
         </div>
@@ -341,17 +343,17 @@ class TestSubjectLinks extends React.Component {
           <h5>Prog</h5>
         </div>
         <div>
-          <Link to={href_template(Program.lookup("AGR-BWN08"), panel)}>
+          <Link to={href_template(Program.store.lookup("AGR-BWN08"), panel)}>
             AGR-BWN08 ({tm("non_active_program")})
           </Link>
         </div>
         <div>
-          <Link to={href_template(Program.lookup("LAC-LJO00"), panel)}>
+          <Link to={href_template(Program.store.lookup("LAC-LJO00"), panel)}>
             LAC-LJO00 ({tm("small_numbers")})
           </Link>
         </div>
         <div>
-          <Link to={href_template(Program.lookup("NCC-BSN00"), panel)}>
+          <Link to={href_template(Program.store.lookup("NCC-BSN00"), panel)}>
             NCC-BSN00 (crown)
           </Link>
         </div>

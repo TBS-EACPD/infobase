@@ -189,9 +189,7 @@ const calculate_funcs_by_level = {
   dept: function (subject) {
     const { orgEmployeeRegion } = this.tables;
     return calculate_common(
-      people_years.map((year) =>
-        orgEmployeeRegion.prov_code(year, subject.unique_id)
-      )
+      people_years.map((year) => orgEmployeeRegion.prov_code(year, subject.id))
     );
   },
 };
