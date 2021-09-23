@@ -13,11 +13,9 @@ import {
 
 import { useSummaryServices } from "src/models/populate_services";
 
-import { Subject } from "src/models/subject";
+import { Dept, Program } from "src/models/subject_index";
 
 import text from "./services.yaml";
-
-const { Dept, Program } = Subject;
 const { text_maker, TM } = create_text_maker_component(text);
 
 const OrgsOfferingServicesPanel = ({ subject }) => {
