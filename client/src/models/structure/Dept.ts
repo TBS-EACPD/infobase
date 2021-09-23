@@ -42,17 +42,10 @@ interface DeptDef {
   other_lang_legal_title: string;
 }
 
-// SUBJECT_TS_TODO consider using this trick on other subjects (or baking it in to BaseSubjectFactory,
-// although that would assume every subject wants all raw values from thir def object to exist on the final instance)
-/*
-  little trick here called interface merging, works as a very helpful shorthand to save on boilerplate repetition of 
-  DeptDef (without this, the class needs to redeclare all the DeptDef types AND can't get away with using Object.assign
-  in the constructor)
-  See https://github.com/microsoft/TypeScript/issues/26792
-*/
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface Dept extends DeptDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class Dept extends BaseSubjectFactory(
+export class Dept extends BaseSubjectFactory<DeptDef>(
   "dept",
   trivial_text_maker("org"),
   trivial_text_maker("orgs"),
@@ -67,8 +60,6 @@ export class Dept extends BaseSubjectFactory(
 
   constructor(def: DeptDef) {
     super(def);
-
-    Object.assign(this, def);
   }
 
   static depts_with_data() {

@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { Store } from "./make_store";
 
-export const BaseSubjectFactory = (
+export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
   subject_type: string,
   subject_singular: string,
   subject_plural: string,
@@ -10,8 +10,30 @@ export const BaseSubjectFactory = (
 ) =>
   class BaseSubject {
     id: string;
-    constructor({ id }: { id: string }) {
-      this.id = id;
+
+    constructor(def: SubjectDef) {
+      /*
+        Blind spot in the type system with `Object.assign` to `this` inside a constructor. Watch https://github.com/microsoft/TypeScript/issues/26792
+
+        We want this factory to create BaseSubjects that are generic against SubjectDef, which we in practice achieve with the Object.assign below...
+        but TS doesn't pick up on that yet.
+        
+        Implementing subjects must fill in this blind spot with interface merging, e.g.:
+        ```
+          interface SubjectDef {
+            ...
+          }
+          export interface Subject extends SubjectDef {} // // eslint-disable-line @typescript-eslint/no-empty-interface
+          export class Subject extends BaseSubjectFactory<SubjectDef>...
+        ```
+
+        ... the aternative is a LOT of boilerplate, effectively repeating SubjectDef block three times (interface itself, internal class property typing,
+        AND individual assignment of each property inside the class' constructor) 
+      */
+      Object.assign(this, def);
+
+      // redundant to the above, but necessary to locally fill in type system blind spot
+      this.id = def.id;
     }
 
     static subject_type = subject_type;

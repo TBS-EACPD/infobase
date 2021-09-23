@@ -14,26 +14,18 @@ type InstFormDef = {
   org_ids: string[];
 };
 
-export class InstForm extends BaseSubjectFactory(
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+export interface InstForm extends InstFormDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
+
+export class InstForm extends BaseSubjectFactory<InstFormDef>(
   "inst_form",
   trivial_text_maker("inst_form"),
   trivial_text_maker("inst_forms")
 ) {
   static store = make_store((def: InstFormDef) => new InstForm(def));
 
-  id: string;
-  name: string;
-  parent_id?: string;
-  children_ids: string[];
-  org_ids: string[];
-
   constructor(def: InstFormDef) {
     super(def);
-    this.id = def.id;
-    this.name = def.name;
-    this.parent_id = def.parent_id;
-    this.children_ids = def.children_ids;
-    this.org_ids = def.org_ids;
   }
 
   get parent_form() {
