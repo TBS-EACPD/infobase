@@ -22,8 +22,6 @@ export class Ministry extends BaseSubjectFactory<MinistryDef>(
 ) {
   static store = make_store((def: MinistryDef) => new Ministry(def));
 
-  description = ""; // SUBJECT_TS_TODO this was on the old subject, I assume for legacy reasons, but need to poke around before dropping it
-
   constructor(def: MinistryDef) {
     super(def);
   }
