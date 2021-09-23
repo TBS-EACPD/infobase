@@ -16,7 +16,7 @@ function func_key(col, include_dept, rollup) {
   // and if col is an array, a different response is returned
 
   if (include_dept && include_dept.level === "dept") {
-    include_dept = include_dept.unique_id;
+    include_dept = include_dept.id;
   } else if (include_dept === Gov) {
     include_dept = false;
   }
@@ -85,7 +85,7 @@ const make_horizontal_func = function (func, table) {
     //  ```
     //
     if (include_dept && include_dept.level === "dept") {
-      include_dept = include_dept.unique_id;
+      include_dept = include_dept.id;
     } else if (!include_dept || include_dept.level === "gov") {
       include_dept = false;
     }

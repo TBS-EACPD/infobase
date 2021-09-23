@@ -78,7 +78,7 @@ export default {
     });
   },
   mapper: function (row) {
-    const program = Program.get_from_activity_code(row[0], row[1]);
+    const program = Program.lookup_by_dept_and_activity_code(row[0], row[1]);
 
     row.splice(2, 0, program.name);
     row[3] =
@@ -86,7 +86,7 @@ export default {
     return row;
   },
   process_mapped_row(mapped_row) {
-    const program_obj = Program.get_from_activity_code(
+    const program_obj = Program.lookup_by_dept_and_activity_code(
       mapped_row.dept,
       mapped_row.activity_code
     );
@@ -108,8 +108,9 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup(
-            Program.unique_id(row.dept, row.activity_code)
+          const prog = Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
           );
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
           return (goco && goco.name) || trivial_text_maker("unknown");
@@ -124,8 +125,9 @@ export default {
       filter_func: function (options) {
         var func = function (row) {
           //FIXME: this is because I found a program without a goco,
-          const prog = Program.lookup(
-            Program.unique_id(row.dept, row.activity_code)
+          const prog = Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
           );
 
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];

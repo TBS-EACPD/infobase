@@ -58,10 +58,11 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
             is_gov ? "dept" : "program"
           }/${subject_id}/infograph/services`}
         >
-          {correct_subject.lookup(subject_id).name}
+          {correct_subject.store.lookup(subject_id).name}
         </a>
       ),
-      plain_formatter: (subject_id) => correct_subject.lookup(subject_id).name,
+      plain_formatter: (subject_id) =>
+        correct_subject.store.lookup(subject_id).name,
     },
     number_of_services: {
       index: 1,

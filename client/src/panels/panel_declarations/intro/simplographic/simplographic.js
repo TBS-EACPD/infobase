@@ -48,7 +48,7 @@ export const declare_simplographic_panel = () =>
             (org) => org.inst_form.parent_form.parent_form.id === "fed_int_gp"
           )
           .reject("end_yr")
-          .reject({ unique_id: "999" })
+          .reject({ id: "999" })
           .value();
 
         const ministries = _.chain(federal_institutions)

@@ -87,7 +87,7 @@ export class ServiceOverview extends React.Component {
           <dt>{text_maker("link_to_programs")}</dt>
           <dd>
             {_.map(service.program_activity_codes, (program_id) => {
-              const program = Program.lookup(program_id);
+              const program = Program.store.lookup(program_id);
               return (
                 program && (
                   <p key={program_id}>

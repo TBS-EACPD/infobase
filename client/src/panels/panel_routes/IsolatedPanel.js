@@ -23,9 +23,9 @@ const get_subject = (level, id) => {
     case "tag":
       return Tag.store.lookup(id);
     case "program":
-      return Program.lookup(id);
+      return Program.store.lookup(id);
     case "crso":
-      return CRSO.lookup(id);
+      return CRSO.store.lookup(id);
     default:
       return Gov;
   }

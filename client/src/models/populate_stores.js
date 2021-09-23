@@ -181,6 +181,7 @@ const populate_program_tags = (tag_rows) =>
     ([tag_id, parent_id, name_en, name_fr, desc_en, desc_fr]) => {
       //  HACKY: Note that parent rows must precede child rows in input data
       const parent_tag = Tag.store.lookup(parent_id);
+
       const instance = Tag.store.create_and_register({
         id: tag_id,
         name: is_en ? name_en : name_fr,
@@ -189,6 +190,7 @@ const populate_program_tags = (tag_rows) =>
         cardinality: parent_tag.root.cardinality,
         parent_tag,
       });
+
       parent_tag.children_tags.push(instance);
     }
   );
@@ -206,16 +208,18 @@ const populate_crsos = (rows) =>
       is_internal_service,
     ]) => {
       const dept = Dept.store.lookup(dept_code);
-      const instance = CRSO.create_and_register({
-        dept,
+
+      const instance = CRSO.store.create_and_register({
         id,
         activity_code: _.chain(id).split("-").last().value(),
+        dept,
         name,
         description,
         is_active: is_active === "1",
         is_drf: is_drf === "1",
         is_internal_service: is_internal_service === "1",
       });
+
       dept.crsos.push(instance);
     }
   );
@@ -230,30 +234,33 @@ const populate_programs = (rows) =>
       name,
       old_name,
       desc,
-      _is_crown, //TODO why do we have is_crown in the data? Goes unused, but should it be? Can just look that up through the parent org though
+      _is_crown, //TODO why do we have is_crown in the data? If it was needed it should be looked up through the parent org anyway
       is_active,
       is_internal_service,
       is_fake,
     ]) => {
-      const crso = CRSO.lookup(crso_id);
-      const instance = Program.create_and_register({
-        crso,
-        activity_code: activity_code,
+      const crso = CRSO.store.lookup(crso_id);
+
+      const instance = Program.store.create_and_register({
+        id: `${dept_code}-${activity_code}`,
+        activity_code,
         dept: Dept.store.lookup(dept_code),
-        description: _.trim(desc.replace(/^<p>/i, "").replace(/<\/p>$/i, "")),
+        crso,
         name,
         old_name,
+        description: _.trim(desc.replace(/^<p>/i, "").replace(/<\/p>$/i, "")),
         is_active: is_active === "1",
         is_internal_service: is_internal_service === "1",
         is_fake: is_fake === "1",
       });
+
       crso.programs.push(instance);
     }
   );
 
 const populate_program_tag_linkages = (programs_m2m_tags) =>
   _.each(programs_m2m_tags, ([program_id, tagID]) => {
-    const program = Program.lookup(program_id);
+    const program = Program.store.lookup(program_id);
     const tag = Tag.store.lookup(tagID);
     const tag_root_id = tag.root.id;
 

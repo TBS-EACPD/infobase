@@ -448,7 +448,10 @@ export const declare_detailed_program_spending_split_panel = () =>
         }
 
         const flat_data = _.map(table_data, (row) => ({
-          program: Program.get_from_activity_code(row.dept, row.activity_code),
+          program: Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
+          ),
           so_num: row.so_num,
           so_label: row.so,
           value: row["{{pa_last_year}}"],
