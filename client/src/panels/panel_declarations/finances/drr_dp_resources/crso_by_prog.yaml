@@ -1,13 +1,13 @@
 crso_by_prog_exp_title:
   transform: [handlebars]
-  en: Spending by Program ({{planning_year_1}} to {{planning_year_3}})
-  fr: Dépenses de programmes ({{planning_year_1}} à {{planning_year_3}})
+  en: Spending by Program
+  fr: Dépenses de programmes
 
 
 crso_by_prog_fte_title:
   transform: [handlebars]
-  en: Employment by Program ({{planning_year_1}} to {{planning_year_3}})
-  fr: Dépenses de programmes ({{planning_year_1}} à {{planning_year_3}})
+  en: Employment by Program
+  fr: Dépenses de programmes
 
 crso_by_prog_exp_or_ftes:
   transform: [handlebars,markdown]
