@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 import MediaQuery from "react-responsive";
@@ -92,10 +91,7 @@ const render_resource_type =
       <InfographicPanel {...{ title, sources, footnotes }}>
         <PlannedProgramResources
           years_with_gap_year={is_fte ? fte_years : exp_years}
-          programs={_.sortBy(
-            is_fte ? fte_data : exp_data,
-            ({ data }) => -sum(data)
-          )}
+          programs={_.sortBy(is_fte ? fte_data : exp_data, "label")}
           colors={colors}
           text={text}
           gap_year={is_fte ? fte_gap_year : exp_gap_year}
