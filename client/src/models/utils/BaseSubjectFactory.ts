@@ -63,7 +63,7 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
 
     /*
       can't cleanly (complile time) enforce that the child class declares a static store property...
-        - using abstract is out (can't mix with or use for static methods)
+        - using abstract is out (can't mix with/use for static methods)
         - can't pass a store instance in to the factory because that'd be a circular reference to the child class from the parent class
     */
     static store = {
