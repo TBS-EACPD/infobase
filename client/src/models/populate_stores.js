@@ -274,7 +274,7 @@ const populate_program_tag_linkages = (programs_m2m_tags) =>
 
 const process_lookups = ({
   global_footnotes_csv_string,
-  ...lookup_csv_Strings
+  ...lookup_csv_strings
 }) => {
   const {
     dept_code_to_csv_name,
@@ -290,7 +290,7 @@ const process_lookups = ({
     program_tags,
     tags_to_programs,
     glossary,
-  } = _.mapValues(lookup_csv_Strings, (csv_string) =>
+  } = _.mapValues(lookup_csv_strings, (csv_string) =>
     _.tail(csvParseRows(_.trim(csv_string)))
   );
 

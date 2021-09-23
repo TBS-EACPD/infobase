@@ -121,7 +121,7 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup_by_dept_and_activity_code(
+          const prog = Program.lookup_by_dept_id_and_activity_code(
             row.dept,
             row.activity_code
           );
@@ -138,7 +138,7 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup_by_dept_and_activity_code(
+          const prog = Program.lookup_by_dept_id_and_activity_code(
             row.dept,
             row.activity_code
           );
@@ -153,7 +153,7 @@ export default {
       title_key: "goco_id",
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.lookup_by_dept_and_activity_code(
+          const prog = Program.lookup_by_dept_id_and_activity_code(
             row.dept,
             row.activity_code
           );
@@ -172,7 +172,7 @@ export default {
   },
 
   mapper: function (row) {
-    const program = Program.lookup_by_dept_and_activity_code(row[0], row[1]);
+    const program = Program.lookup_by_dept_id_and_activity_code(row[0], row[1]);
 
     row.splice(2, 0, program.id);
     row.splice(3, 0, program.name);
@@ -180,7 +180,7 @@ export default {
   },
 
   process_mapped_row(mapped_row) {
-    const program_obj = Program.lookup_by_dept_and_activity_code(
+    const program_obj = Program.lookup_by_dept_id_and_activity_code(
       mapped_row.dept,
       mapped_row.activity_code
     );

@@ -53,6 +53,8 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
       can't cleanly (complile time) enforce that the child class declares a static store property...
         - using abstract is out (can't mix with/use for static methods)
         - can't pass a store instance in to the factory because that'd be a circular reference to the child class from the parent class
+      this is a middle ground. Typing to guide implementors that try to add stores and clear run time errors thrown when trying to use a store
+      on a subject that failed to implement it. 
     */
     static store = {
       create: get_store_method_placeholder(subject_type),
