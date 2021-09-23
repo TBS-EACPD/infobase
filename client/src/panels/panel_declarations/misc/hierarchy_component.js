@@ -169,8 +169,8 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
                     name: org.name,
                     current_subject: is_subject(org),
                     href: href_generator(org),
-                    dead: _.isEmpty(org.table_ids),
-                    limited_data: _.isEmpty(org.table_ids),
+                    dead: org.is_dead,
+                    limited_data: !org.has_table_data,
                   }))
                   .value(),
               }))

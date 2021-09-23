@@ -99,7 +99,7 @@ const org_templates = {
       }
     })();
 
-    if (_.isEmpty(org.table_ids)) {
+    if (!org.has_table_data) {
       return LimitedDataDisplay(search, result_name);
     } else {
       return <InfoBaseHighlighter search={search} content={result_name} />;
@@ -123,9 +123,9 @@ const make_orgs_search_config = (options) => {
       case "all":
         return Dept.store.get_all();
       case "with_data":
-        return Dept.depts_with_data();
+        return Dept.depts_with_table_data();
       case "without_data":
-        return Dept.depts_without_data();
+        return Dept.depts_without_table_data();
       default:
         throw new Error(
           `Error: make_orgs_search_config option orgs_to_include is an enum, {"all", "with_data", "without_data"}. Given value of "${orgs_to_include}" is invalid.`

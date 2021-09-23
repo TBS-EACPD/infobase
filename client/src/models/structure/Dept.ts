@@ -62,11 +62,15 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     super(def);
   }
 
-  static depts_with_data() {
-    return _.filter(Dept.store.get_all(), (dept) => !_.isEmpty(dept.table_ids));
+  static depts_with_table_data() {
+    return _.filter(Dept.store.get_all(), (dept) => dept.has_table_data);
   }
-  static depts_without_data() {
-    return _.filter(Dept.store.get_all(), (dept) => _.isEmpty(dept.table_ids));
+  static depts_without_table_data() {
+    return _.filter(Dept.store.get_all(), (dept) => !dept.has_table_data);
+  }
+
+  get has_table_data() {
+    return !_.isEmpty(this.table_ids);
   }
 
   get name() {

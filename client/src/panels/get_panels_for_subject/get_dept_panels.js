@@ -137,5 +137,5 @@ export const get_dept_panels = (subject) =>
       declare_portfolio_structure_related_panel(),
       declare_tags_of_interest_panel(),
     ],
-    all_data: !_.isEmpty(subject.table_ids) && [declare_links_to_rpb_panel()],
+    all_data: subject.has_table_data && [declare_links_to_rpb_panel()],
   }));
