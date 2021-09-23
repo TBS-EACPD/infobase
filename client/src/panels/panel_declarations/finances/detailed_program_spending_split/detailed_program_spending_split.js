@@ -448,7 +448,7 @@ export const declare_detailed_program_spending_split_panel = () =>
         }
 
         const flat_data = _.map(table_data, (row) => ({
-          program: Program.lookup_by_dept_and_activity_code(
+          program: Program.lookup_by_dept_id_and_activity_code(
             row.dept,
             row.activity_code
           ),

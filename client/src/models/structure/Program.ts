@@ -29,19 +29,13 @@ export class Program extends BaseSubjectFactory<ProgramDef>("program", [
 ]) {
   static store = make_store((def: ProgramDef) => new Program(def));
 
-  static lookup_by_dept_and_activity_code(
-    dept: string | number | Dept, // SUBJECT_TS_TODO: review use cases, may be able to scope this down
+  static lookup_by_dept_id_and_activity_code(
+    dept_id: string | number,
     activity_code: string
   ) {
-    const dept_code = (() => {
-      if (typeof dept === "string" || typeof dept === "number") {
-        return Dept.store.lookup(dept).dept_code;
-      } else if (typeof dept?.dept_code === "string") {
-        return dept.dept_code;
-      }
-    })();
-
-    return Program.store.lookup(`${dept_code}-${activity_code}`);
+    return Program.store.lookup(
+      `${Dept.store.lookup(dept_id).dept_code}-${activity_code}`
+    );
   }
 
   tags: Tag[] = [];
@@ -63,6 +57,7 @@ export class Program extends BaseSubjectFactory<ProgramDef>("program", [
   get tags_by_scheme() {
     return _.groupBy(this.tags, (tag) => tag.root.id);
   }
+
   get has_planned_spending() {
     return this.dept.has_planned_spending;
   }
