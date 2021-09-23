@@ -40,6 +40,7 @@ const children_grouper = (node, children) => {
     return [{ node_group: children }];
   }
 
+  // SUBJECT_TS_TODO might still be expecting some subjects to have plural methods that don't anymore, test carefully once site is generally operational again
   return _.chain(children)
     .groupBy((child) => child.data.subject.plural())
     .map((node_group, plural) => ({

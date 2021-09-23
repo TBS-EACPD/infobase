@@ -11,7 +11,7 @@ import {
   CardList,
 } from "src/components/index";
 
-import { Dept, Program, Tag } from "src/models/subject_index";
+import { Dept, Tag } from "src/models/subject_index";
 
 import { infograph_href_template } from "src/infographic/infographic_link";
 
@@ -82,7 +82,7 @@ export const declare_tags_of_interest_panel = () =>
       title: text_maker(title_by_level[level]),
       calculate(subject) {
         const tags_by_root = get_related_tag_list_args(subject);
-        if (subject.is_dp_org === false || _.isEmpty(tags_by_root)) {
+        if (subject.dp_status === false || _.isEmpty(tags_by_root)) {
           return false;
         }
 
@@ -119,8 +119,8 @@ export const declare_tag_progs_by_dept_panel = () =>
         const list_args = _.chain(subject.programs)
           .groupBy((prog) => prog.dept.id)
           .map((prog_group, dept_id) => ({
-            display: <div>{Dept.store.lookup(dept_id).name}</div>,
-            href: infograph_href_template(Dept.store.lookup(dept_id)),
+            display: <div>{Dept.lookup(dept_id).name}</div>,
+            href: infograph_href_template(Dept.lookup(dept_id)),
             children: _.chain(prog_group)
               .sortBy("is_dead")
               .map((prog) => ({
@@ -212,9 +212,9 @@ export const declare_related_tags_panel = () =>
             children: _.map(tag_and_counts, ({ tag, count }) => ({
               href: infograph_href_template(tag),
               display: (
-                <span>{`${tag.name} - ${count} ${Program.plural} ${text_maker(
-                  "in_common"
-                )}`}</span>
+                <span>{`${tag.name} - ${count} ${text_maker(
+                  "programs"
+                )} ${text_maker("in_common")}`}</span>
               ),
             })),
           })

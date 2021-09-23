@@ -35,11 +35,14 @@ const SubjectSubtitle = ({ subject }) => {
         })}
       />
     );
-  } else if (subject_is_class(subject) && !_.isUndefined(subject.plural)) {
+  } else if (
+    subject_is_class(subject) &&
+    !_.isUndefined(subject.subject_name)
+  ) {
     return (
       <FootnoteListSubtitle
         title={text_maker("class_footnote_title", {
-          subject_name: subject.plural,
+          subject_name: subject.subject_name,
         })}
       />
     );
@@ -89,9 +92,7 @@ const FootnoteSublist = ({ footnotes }) => (
             meta_items={_.compact([
               years_to_plain_text(year1, year2),
               ...topic_keys_to_plain_text(topic_keys),
-              subject_is_instance(subject) &&
-                _.isFunction(subject.singular) &&
-                subject.singular(),
+              subject_is_instance(subject) && subject.name,
               subject_is_instance(subject) && _.get(subject, "dept.name"),
             ])}
           />
@@ -115,10 +116,7 @@ const sort_footnotes = (footnotes) =>
 const group_and_sort_footnotes = (footnotes) =>
   _.chain(footnotes)
     .groupBy(({ subject }) => {
-      const { id, name, singular } = subject;
-
-      const subject_type =
-        subject.subject_type || _.get(subject, "constructor.subject_type");
+      const { id, name, subject_type } = subject;
 
       const subject_type_sort_importance = (() => {
         switch (subject_type) {
@@ -135,11 +133,9 @@ const group_and_sort_footnotes = (footnotes) =>
         }
       })();
 
-      const name_for_sorting_purposes = subject_is_instance(subject)
-        ? `${name}_${id}`
-        : singular;
-
-      return `${subject_type_sort_importance}_${name_for_sorting_purposes}`;
+      return `${subject_type_sort_importance}_${
+        subject_is_instance(subject) ? `${name}_${id}` : "AAAA"
+      }`;
     })
     .map((grouped_footnotes, group_name) => {
       return [grouped_footnotes, group_name];

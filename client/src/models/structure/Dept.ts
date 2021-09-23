@@ -6,6 +6,7 @@ import { make_store } from "src/models/utils/make_store";
 
 import { sanitized_marked } from "src/general_utils";
 
+import { CRSO } from "./CRSO";
 import { InstForm } from "./InstForm";
 import { Minister } from "./Minister";
 import { Ministry } from "./Ministry";
@@ -13,6 +14,7 @@ import { Ministry } from "./Ministry";
 interface DeptDef {
   id: string;
   dept_code: string;
+  crso_ids: string[];
   abbr: string;
   legal_title: string;
   applied_title: string;
@@ -45,18 +47,15 @@ interface DeptDef {
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface Dept extends DeptDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class Dept extends BaseSubjectFactory<DeptDef>(
-  "dept",
-  trivial_text_maker("org"),
-  trivial_text_maker("orgs"),
-  ["results", "services", "covid"]
-) {
+export class Dept extends BaseSubjectFactory<DeptDef>("dept", [
+  "results",
+  "services",
+  "covid",
+]) {
   static store = make_store(
     (def: DeptDef) => new Dept(def),
     (dept) => [dept.dept_code, +dept.id]
   );
-
-  crsos: any[] = []; // SUBJECT_TS_TODO type this once CRSO type is solid
 
   constructor(def: DeptDef) {
     super(def);
@@ -88,7 +87,7 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
       case "c":
         return trivial_text_maker("dissolved");
       default:
-        return ""; // SUBJECT_TS_TODO should probably throw, or maybe that validation should happen at the populate step populate_stores.js
+        return ""; // SUBJECT_TS_TODO should probably throw, or maybe that validation should happen at the populate step in populate_stores.js
     }
   }
   get is_dp_org() {
@@ -117,9 +116,16 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     return sanitized_marked(_.trim(this.raw_mandate));
   }
 
+  get crsos() {
+    return _.map(this.crso_ids, CRSO.store.lookup);
+  }
+  get program_ids() {
+    return _.map(this.programs, "id");
+  }
   get programs() {
     return _.chain(this.crsos).map("programs").flatten().compact().value();
   }
+
   get inst_form() {
     return InstForm.store.lookup(this.inst_form_id);
   }

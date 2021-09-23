@@ -118,8 +118,8 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
                   ),
                 },
                 tag.is_m2m &&
-                  !_.isEmpty(tag.related_tags()) &&
-                  related_tags_row(tag.related_tags(), "tag"),
+                  !_.isEmpty(tag.related_tags) &&
+                  related_tags_row(tag.related_tags, "tag"),
               ]),
             },
           }));

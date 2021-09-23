@@ -20,7 +20,6 @@ import {
 
 const is_en = lang === "en";
 
-const url_id = (num) => `_${num}`; //make sure the regular keys from the pipeline aren't interpreted as array indices
 const populate_igoc_models = ({
   dept_to_table_id,
   org_to_ministers,
@@ -30,7 +29,7 @@ const populate_igoc_models = ({
   urls,
   igoc_rows,
 }) => {
-  _.each(ministries, ([id, name_en, name_fr]) => {
+  _.each(ministries, ([id, name_en, name_fr]) =>
     Ministry.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
@@ -38,10 +37,10 @@ const populate_igoc_models = ({
         .filter((row) => row[18] === id) // SUBJECT_TS_TODO this stinks... maybe it's time to start actually using CSV headers, for the igoc at least
         .map(([org_id]) => org_id)
         .value(),
-    });
-  });
+    })
+  );
 
-  _.each(ministers, ([id, name_en, name_fr]) => {
+  _.each(ministers, ([id, name_en, name_fr]) =>
     Minister.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
@@ -49,10 +48,10 @@ const populate_igoc_models = ({
         .filter(([_org_id, minister_id]) => minister_id === id)
         .map(([org_id]) => org_id)
         .value(),
-    });
-  });
+    })
+  );
 
-  _.each(inst_forms, ([id, parent_id, name_en, name_fr]) => {
+  _.each(inst_forms, ([id, parent_id, name_en, name_fr]) =>
     InstForm.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
@@ -65,13 +64,8 @@ const populate_igoc_models = ({
         .filter((row) => row[19] === id) // SUBJECT_TS_TODO this stinks... maybe it's time to start actually using CSV headers, for the igoc at least
         .map(([org_id]) => org_id)
         .value(),
-    });
-  });
-
-  const url_lookup = _.chain(urls)
-    .map(([id, en, fr]) => [url_id(id), is_en ? en : fr])
-    .fromPairs()
-    .value();
+    })
+  );
 
   _.each(
     igoc_rows,
@@ -106,7 +100,11 @@ const populate_igoc_models = ({
     ]) => {
       const [eval_url, website_url] = _.map(
         [eval_url_id, website_url_id],
-        (url_key) => url_lookup[url_id(url_key)]
+        (url_key) => {
+          const url_row = _.find(urls, ([id]) => id === url_key);
+
+          return !url_row ? "" : is_en ? url_row[1] : url_row[2];
+        }
       );
 
       Dept.store.create_and_register({
@@ -274,43 +272,56 @@ const populate_program_tag_linkages = (programs_m2m_tags) =>
     tag.programs.push(program);
   });
 
-const process_lookups = (data) => {
-  //convert the csv's to rows and drop their headers
-  _.chain(data)
-    .omit("global_footnotes") //global footnotes already has its header dropped
-    .each((csv_str, key) => {
-      data[key] = csvParseRows(_.trim(csv_str));
-      data[key].shift(); // drop the header
-    })
-    .value();
+const process_lookups = ({
+  global_footnotes_csv_string,
+  ...lookup_csv_Strings
+}) => {
+  const {
+    dept_code_to_csv_name,
+    org_to_minister,
+    inst_forms,
+    ministers,
+    ministries,
+    url_lookups,
+    igoc,
+    crso,
+    program,
+    program_tag_types,
+    program_tags,
+    tags_to_programs,
+    glossary,
+  } = _.mapValues(lookup_csv_Strings, (csv_string) =>
+    _.tail(csvParseRows(_.trim(csv_string)))
+  );
 
-  //TODO: stop referring to data by the names of its csv, design an interface with copy_static_assets.js
   populate_igoc_models({
-    dept_to_table_id: _.map(data["dept_code_to_csv_name.csv"], (row) => [
+    dept_to_table_id: _.map(dept_code_to_csv_name, (row) => [
       row[0],
       _.camelCase(row[1]),
     ]),
-    org_to_ministers: data["org_to_minister.csv"],
-    inst_forms: data["inst_forms.csv"],
-    ministers: data["ministers.csv"],
-    ministries: data["ministries.csv"],
-    urls: data["url_lookups.csv"],
-    igoc_rows: data["igoc.csv"],
+    org_to_ministers: org_to_minister,
+    inst_forms: inst_forms,
+    ministers: ministers,
+    ministries: ministries,
+    urls: url_lookups,
+    igoc_rows: igoc,
   });
-  populate_crsos(data["crso.csv"]);
-  populate_programs(data["program.csv"]);
+  populate_crsos(crso);
+  populate_programs(program);
 
-  create_tag_branches(data["program_tag_types.csv"]);
-  populate_program_tags(data["program_tags.csv"]);
+  create_tag_branches(program_tag_types);
+  populate_program_tags(program_tags);
 
   //once all programs and tags are created, link them
-  populate_program_tag_linkages(data["tags_to_programs.csv"]);
+  populate_program_tag_linkages(tags_to_programs);
 
-  populate_glossary(data[`glossary.csv`]);
-  populate_global_footnotes(data.global_footnotes);
+  populate_glossary(glossary);
+
+  populate_global_footnotes(global_footnotes_csv_string);
 };
 
 export const populate_stores = () =>
+  // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
   make_request(get_static_url(`lookups_${lang}.json.js`)).then((text) => {
     process_lookups(JSON.parse(text));
   });

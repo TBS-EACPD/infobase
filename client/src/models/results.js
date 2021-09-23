@@ -100,12 +100,6 @@ class Result {
   get indicators() {
     return Indicator.lookup_by_result_id(this.id);
   }
-  singular() {
-    return trivial_text_maker("result");
-  }
-  plural() {
-    return trivial_text_maker("results");
-  }
   get level() {
     return "result";
   }
@@ -174,12 +168,6 @@ class Indicator {
   }
   get level() {
     return "indicator";
-  }
-  singular() {
-    return trivial_text_maker("indicator");
-  }
-  plural() {
-    return trivial_text_maker("indicators");
   }
   get guid() {
     return `indicator_${this.id}`;

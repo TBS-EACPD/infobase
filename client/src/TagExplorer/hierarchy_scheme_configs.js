@@ -40,8 +40,8 @@ const tag_configs = _.chain(Tag.tag_roots)
                 ),
               },
               tag.is_m2m &&
-                !_.isEmpty(tag.related_tags()) &&
-                related_tags_row(tag.related_tags(), "tag"),
+                !_.isEmpty(tag.related_tags) &&
+                related_tags_row(tag.related_tags, "tag"),
             ]),
         },
       })),

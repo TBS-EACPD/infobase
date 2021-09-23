@@ -142,7 +142,7 @@ const _HierarchyPeek = ({ root }) => (
 export const org_external_hierarchy = ({ subject, href_generator }) => {
   const is_subject = (subj) => subj === subject;
   return {
-    name: Gov.subject_plural,
+    name: text_maker("goc"),
     href: href_generator(Gov),
     children: _.isEmpty(subject.min)
       ? [
@@ -190,14 +190,13 @@ export const org_internal_hierarchy = ({
   subject,
   href_generator,
   show_dead_sos,
-  label_crsos,
 }) => ({
   name: subject.name,
   current_subject: true,
   children: _.chain(subject.crsos)
     .filter(show_dead_sos ? _.constant(true) : "is_active")
     .map((crso) => ({
-      name: (label_crsos ? crso.singular() + " : " : "") + crso.name,
+      name: crso.name,
       is_cr: crso.is_cr,
       href: crso.is_cr && href_generator(crso),
       dead: !crso.is_active,
@@ -222,7 +221,6 @@ export const program_hierarchy = ({
   show_uncles,
   show_cousins,
   show_dead_sos,
-  label_crsos,
 }) => {
   const is_subject = (subj) => subj === subject;
   const is_parent = (subj) => subj === subject.crso;
@@ -238,7 +236,7 @@ export const program_hierarchy = ({
         .sortBy(is_parent)
         .reverse()
         .map((crso) => ({
-          name: (label_crsos ? crso.singular() + " : " : "") + crso.name,
+          name: crso.name,
           href: crso.is_cr && href_generator(crso),
           dead: !crso.is_active,
           children:
@@ -271,7 +269,7 @@ export const program_hierarchy = ({
   ];
 
   return {
-    name: Gov.subject_plural,
+    name: text_maker("goc"),
     href: href_generator(Gov),
     children: ministry_node || dept_node,
   };
@@ -328,7 +326,7 @@ export const tag_hierarchy = ({
   }
 
   return {
-    name: Gov.subject_plural,
+    name: text_maker("goc"),
     children: [current_structure],
   };
 };
@@ -340,13 +338,12 @@ export const crso_hierarchy = ({
   show_uncles,
   show_cousins,
   show_dead_sos,
-  label_crsos,
 }) => {
   //From Gov to programs under CRSO
   const is_subject = (subj) => subj === subject;
 
   return {
-    name: Gov.subject_plural,
+    name: text_maker("goc"),
     href: href_generator(Gov),
     children: [
       {
@@ -389,16 +386,8 @@ export const crso_hierarchy = ({
   };
 };
 
-export const crso_pi_hierarchy = ({
-  subject,
-  href_generator,
-  show_siblings,
-  show_uncles,
-  show_cousins,
-  show_dead_sos,
-  label_crsos,
-}) => ({
-  name: Gov.subject_plural,
+export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
+  name: text_maker("goc"),
   href: href_generator(Gov),
   children: [
     {
@@ -438,19 +427,11 @@ export const crso_pi_hierarchy = ({
   ],
 });
 
-export const crso_gov_hierarchy = ({
-  subject,
-  href_generator,
-  show_siblings,
-  show_uncles,
-  show_cousins,
-  show_dead_sos,
-  label_crsos,
-}) => {
+export const crso_gov_hierarchy = ({ subject, href_generator }) => {
   const is_subject = (subj) => subj === subject;
 
   return {
-    name: Gov.subject_plural,
+    name: text_maker("goc"),
     href: href_generator(Gov),
     children: [
       {
