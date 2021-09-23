@@ -121,11 +121,9 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.store.lookup(
-            Program.lookup_by_dept_and_activity_code(
-              row.dept,
-              row.activity_code
-            )
+          const prog = Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
           );
           //FIXME: this is because I found a program without a goco,
           const goco = _.get(prog, "tags_by_scheme.GOCO[0].name");
@@ -140,11 +138,9 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.store.lookup(
-            Program.lookup_by_dept_and_activity_code(
-              row.dept,
-              row.activity_code
-            )
+          const prog = Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
           );
           //FIXME: this is because I found a program without a goco,
           const sa = _.get(prog, "tags_by_scheme.GOCO[0].parent_tag.name");
