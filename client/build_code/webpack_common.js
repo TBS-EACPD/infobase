@@ -179,8 +179,27 @@ function get_plugins({
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ module: webpackModuleRecord, paths, compilation }) {
+        /*
+          Reminder: circular dependencies aren't _necessarily_ problematic. The concern is that when they _are_ the source of a bug,
+          they can be a very hard to identify source. Best to avoid creating them, but at a certain point avoiding them can start
+          costing a lot in code organization (e.g. immagine if all the inter-linked subjects were in a single module, oof). 
+
+          If it's unavoidable _and_ you're confident it's safe, you can allow-list the cycles here. At least we have the list, if not
+          the active warnings, in case a future circular dependency bug arrises.
+
+          To my understanding, an unsafe cyclic dependency is going to be one where the cycle is hit during initial execution of either module.
+          In that case, you're likely to have run time errors saying that one import or the other is undefined (it'll probably like it's webpack related,
+          but it's not). A safe cycle, on the other hand, could be one where the members of the cycle only directly reference eachother from within exported
+          functions. By the time some module outside of the cycle imports and executes that function, the members of the cycle will have made it through 
+          their initial execution safely.
+        */
         const allowed_circular_dependencies = [
           ["src/metadata/data_sources.js", "src/core/TableClass.js"],
+          ["src/models/structure/Dept.ts", "src/models/structure/CRSO.ts"],
+          ["src/models/structure/CRSO.ts", "src/models/structure/Program.ts"],
+          ["src/models/structure/Dept.ts", "src/models/structure/InstForm.ts"],
+          ["src/models/structure/Dept.ts", "src/models/structure/Minister.ts"],
+          ["src/models/structure/Dept.ts", "src/models/structure/Ministry.ts"],
         ];
 
         const detected_circular_dependency_is_allowed = _.some(
