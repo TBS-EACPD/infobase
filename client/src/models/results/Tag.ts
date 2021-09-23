@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Dept } from "src/models/structure";
+import { Program } from "src/models/structure";
 import { trivial_text_maker } from "src/models/text";
 
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
@@ -21,11 +21,7 @@ export interface Tag extends TagDef {
 }
 
 const tag_roots: Tag[] = [];
-export class Tag extends BaseSubjectFactory<TagDef>(
-  "tag",
-  trivial_text_maker("tag"),
-  trivial_text_maker("tag") + "s"
-) {
+export class Tag extends BaseSubjectFactory<TagDef>("tag") {
   static store = make_store((def: TagDef) => {
     return new Tag(def);
   });
@@ -41,8 +37,8 @@ export class Tag extends BaseSubjectFactory<TagDef>(
     return goco_root?.children_tags;
   }
 
-  children_tags = [] as Tag[];
-  programs = [] as any[]; // SUBJECT_TS_TODO come back to once programs are typed
+  children_tags: Tag[] = [];
+  programs: Program[] = [];
 
   constructor(def: TagDef) {
     super(def);
@@ -53,36 +49,6 @@ export class Tag extends BaseSubjectFactory<TagDef>(
     }
   }
 
-  singular() {
-    if (this.root.id === "GOCO") {
-      if (this.parent_tag && _.includes(tag_roots, this.parent_tag)) {
-        return trivial_text_maker("spend_area");
-      } else {
-        return trivial_text_maker("goco");
-      }
-    } else {
-      if (!_.isEmpty(this.programs) && _.isEmpty(this.children_tags)) {
-        return trivial_text_maker("tag");
-      } else {
-        return trivial_text_maker("tag_category");
-      }
-    }
-  }
-  plural() {
-    if (this.root.id === "GOCO") {
-      if (this.parent_tag && _.includes(tag_roots, this.parent_tag)) {
-        return trivial_text_maker("spend_areas");
-      } else {
-        return trivial_text_maker("gocos");
-      }
-    } else {
-      if (!_.isEmpty(this.programs) && _.isEmpty(this.children_tags)) {
-        return trivial_text_maker("tag") + "(s)";
-      } else {
-        return trivial_text_maker("tag_categories");
-      }
-    }
-  }
   get number_of_tagged() {
     return this.programs.length;
   }
@@ -104,20 +70,7 @@ export class Tag extends BaseSubjectFactory<TagDef>(
   get is_m2m() {
     return this.cardinality === "MtoM";
   }
-  tagged_by_org() {
-    return _.chain(this.programs)
-      .groupBy((prog) => prog.dept.id)
-      .toPairs()
-      .map(([org_id, programs]) => {
-        return {
-          name: Dept.store.lookup(org_id)?.name,
-          programs: _.sortBy(programs, "name"),
-        };
-      })
-      .sortBy("name")
-      .value();
-  }
-  related_tags() {
+  get related_tags() {
     return _.chain(this.programs)
       .map((prog) => prog.tags)
       .flatten()
@@ -125,5 +78,22 @@ export class Tag extends BaseSubjectFactory<TagDef>(
       .uniq()
       .without(this)
       .value();
+  }
+
+  // TODO funky legacy junk, but search configs and the tag explorer at least use it. Should probably review and clean up
+  plural() {
+    if (this.root.id === "GOCO") {
+      if (this.parent_tag && _.includes(tag_roots, this.parent_tag)) {
+        return trivial_text_maker("spend_areas");
+      } else {
+        return trivial_text_maker("gocos");
+      }
+    } else {
+      if (!_.isEmpty(this.programs) && _.isEmpty(this.children_tags)) {
+        return trivial_text_maker("tag") + "(s)";
+      } else {
+        return trivial_text_maker("tag_categories");
+      }
+    }
   }
 }

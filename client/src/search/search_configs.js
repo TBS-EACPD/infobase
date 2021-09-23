@@ -65,7 +65,7 @@ const LimitedDataDisplay = (search, name) => (
   </span>
 );
 const org_templates = {
-  header_function: () => Dept.plural,
+  header_function: () => trivial_text_maker("orgs"),
   name_function: (org) => org.name,
   menu_content_function: function (org, search) {
     if (org.level === "gov") {

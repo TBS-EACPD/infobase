@@ -86,7 +86,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
               subject: crso,
               name: crso.name,
               resources: get_resources(crso),
-              header: crso.plural,
+              header: trivial_text_maker("core_resps"),
               defs: _.isEmpty(crso.description)
                 ? null
                 : [

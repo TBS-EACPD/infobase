@@ -1,6 +1,5 @@
 import _ from "lodash";
 
-import { trivial_text_maker } from "src/models/text";
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
 import { make_store } from "src/models/utils/make_store";
 
@@ -17,11 +16,7 @@ type InstFormDef = {
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface InstForm extends InstFormDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class InstForm extends BaseSubjectFactory<InstFormDef>(
-  "inst_form",
-  trivial_text_maker("inst_form"),
-  trivial_text_maker("inst_forms")
-) {
+export class InstForm extends BaseSubjectFactory<InstFormDef>("inst_form") {
   static store = make_store((def: InstFormDef) => new InstForm(def));
 
   constructor(def: InstFormDef) {

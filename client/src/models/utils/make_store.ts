@@ -36,7 +36,15 @@ export class Store<definition, instance extends StoreInstanceBase> {
     this.create_and_register = (def: definition) => this.register(create(def));
   }
 
-  lookup = (id: store_id_type) => this.store.get(id);
+  lookup = (id: store_id_type) => {
+    const entry = this.store.get(id);
+
+    if (typeof entry === "undefined") {
+      throw new Error(`No entry in store for id "${id}"`);
+    }
+
+    return entry;
+  };
 
   // uniq required due to potential use of alt_ids
   get_all = () => _.uniq(Array.from(this.store.values()));

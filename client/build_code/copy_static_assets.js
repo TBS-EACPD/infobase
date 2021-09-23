@@ -167,12 +167,8 @@ function make_dir_if_exists(dir_name) {
   }
 }
 
-function get_lookup_name(file_name) {
-  let str = file_name;
-  _.each(["_en", "_fr"], (lang) => {
-    str = str.split(lang).join("");
-  });
-  return _.last(str.split("/"));
+function get_file_name_without_lang_and_extension(file_path) {
+  return file_path.replace(/^.*\/(.*?)(_[ef][nr])*\..*$/, "$1");
 }
 
 function write_gitsha_file(dir) {
@@ -235,7 +231,7 @@ function build_proj(PROJ) {
     const lookup_json_str = JSON.stringify(
       _.chain(PROJ["lookups_" + lang])
         .map((file_name) => [
-          get_lookup_name(file_name),
+          get_file_name_without_lang_and_extension(file_name),
           file_to_str(file_name),
         ])
         .concat([["global_footnotes", global_footnotes]]) //these should be loaded immediately, so they're included in the base lookups file.

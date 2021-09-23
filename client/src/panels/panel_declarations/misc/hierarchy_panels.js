@@ -99,7 +99,6 @@ export const declare_program_fed_structure_panel = () =>
 
         const hierarchy = program_hierarchy({
           subject,
-          label_crsos: true,
           href_generator: infograph_href_template,
           show_siblings: false,
           show_cousins: false,
@@ -132,7 +131,6 @@ export const declare_related_program_structure_panel = () =>
 
         const hierarchy = program_hierarchy({
           subject,
-          label_crsos: true,
           href_generator: infograph_href_template,
           show_siblings: true,
           show_cousins: true,
@@ -226,7 +224,6 @@ export const declare_crso_in_gov_panel = () =>
 
         const hierarchy = crso_pi_hierarchy({
           subject,
-          label_crsos: true,
           href_generator: infograph_href_template,
         });
 
@@ -253,7 +250,6 @@ export const declare_crso_links_to_other_crso_panel = () =>
 
         const hierarchy = crso_hierarchy({
           subject,
-          label_crsos: true,
           href_generator: infograph_href_template,
         });
 

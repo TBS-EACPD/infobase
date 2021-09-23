@@ -64,7 +64,7 @@ export const GlossaryIcon = ({
       alternate_text ? (
         alternate_text
       ) : (
-        glossaryEntryStore.lookup(id)?.title
+        glossaryEntryStore.lookup(id).title
       )
     ) : (
       <IconQuestion
@@ -84,7 +84,7 @@ export const GlossaryItem = ({
 }: GlossaryItemProps) => (
   <GlossaryTooltipWrapper id={id}>
     <span className={item_class}>
-      {alternate_text ? alternate_text : glossaryEntryStore.lookup(id)?.title}
+      {alternate_text ? alternate_text : glossaryEntryStore.lookup(id).title}
     </span>
   </GlossaryTooltipWrapper>
 );

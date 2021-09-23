@@ -18,7 +18,7 @@ type FootNoteDef = {
 
 export const create_footnote = (def: FootNoteDef) => ({
   ...def,
-  // SUBJECT_TS_TODO would prefer to drop this weird subject class/instance property, but will be a pain to hunt down the code relying on it
+  // TODO would prefer to drop this weird mixed property that can be either a subject class OR a subject instance, but will be a pain to hunt down the code relying on it
   subject:
     def.subject_id === "*"
       ? Subject[def.subject_class as keyof typeof Subject] // eslint-disable-line import/namespace

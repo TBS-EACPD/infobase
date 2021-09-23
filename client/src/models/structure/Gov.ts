@@ -15,11 +15,7 @@ const invalid_gov_store_method = () => {
   );
 };
 
-class _Gov extends BaseSubjectFactory(
-  "gov",
-  trivial_text_maker("goc"),
-  trivial_text_maker("goc")
-) {
+class _Gov extends BaseSubjectFactory("gov") {
   // mocked store, note that it's not static because it will always be referenced from the one Gov instance
   store = {
     lookup: () => this,
