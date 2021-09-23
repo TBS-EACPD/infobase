@@ -10,21 +10,17 @@ type CovidMeasureDef = {
   name: string;
 };
 
-class CovidMeasure extends BaseSubjectFactory(
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+export interface CovidMeasure extends CovidMeasureDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
+
+export class CovidMeasure extends BaseSubjectFactory<CovidMeasureDef>(
   "covid_measure",
   trivial_text_maker("covid_measure"),
   trivial_text_maker("covid_measures")
 ) {
   static store = make_store((def: CovidMeasureDef) => new CovidMeasure(def));
 
-  id: string;
-  name: string;
   constructor(def: CovidMeasureDef) {
     super(def);
-
-    this.id = def.id;
-    this.name = def.name;
   }
 }
-
-export { CovidMeasure };

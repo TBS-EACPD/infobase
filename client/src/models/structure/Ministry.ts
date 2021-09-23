@@ -12,24 +12,20 @@ type MinistryDef = {
   org_ids: string[];
 };
 
-export class Ministry extends BaseSubjectFactory(
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+export interface Ministry extends MinistryDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
+
+export class Ministry extends BaseSubjectFactory<MinistryDef>(
   "ministry",
   trivial_text_maker("ministry"),
   trivial_text_maker("ministries")
 ) {
   static store = make_store((def: MinistryDef) => new Ministry(def));
 
-  id: string;
-  name: string;
-  org_ids: string[];
-
   description = ""; // SUBJECT_TS_TODO this was on the old subject, I assume for legacy reasons, but need to poke around before dropping it
 
   constructor(def: MinistryDef) {
     super(def);
-    this.id = def.id;
-    this.name = def.name;
-    this.org_ids = def.org_ids;
   }
 
   get orgs() {

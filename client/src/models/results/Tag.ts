@@ -15,8 +15,13 @@ type TagDef = {
   root?: Tag;
 };
 
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+export interface Tag extends TagDef {
+  root: Tag;
+}
+
 const tag_roots: Tag[] = [];
-export class Tag extends BaseSubjectFactory(
+export class Tag extends BaseSubjectFactory<TagDef>(
   "tag",
   trivial_text_maker("tag"),
   trivial_text_maker("tag") + "s"
@@ -36,38 +41,15 @@ export class Tag extends BaseSubjectFactory(
     return goco_root?.children_tags;
   }
 
-  id: string;
-  name: string;
-  description: string;
-  cardinality: string;
-  root: Tag;
-
-  parent_tag?: Tag;
   children_tags = [] as Tag[];
-
   programs = [] as any[]; // SUBJECT_TS_TODO come back to once programs are typed
 
-  constructor({
-    id,
-    name,
-    description,
-    cardinality,
-    parent_tag,
-    root,
-  }: TagDef) {
-    super({ id });
+  constructor(def: TagDef) {
+    super(def);
 
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.cardinality = cardinality;
-    this.parent_tag = parent_tag;
-
-    if (typeof root === "undefined") {
+    if (typeof def.root === "undefined") {
       tag_roots.push(this);
       this.root = this;
-    } else {
-      this.root = root;
     }
   }
 
