@@ -138,11 +138,9 @@ export default {
 
       filter_func: function (options) {
         var func = function (row) {
-          const prog = Program.store.lookup(
-            Program.lookup_by_dept_and_activity_code(
-              row.dept,
-              row.activity_code
-            )
+          const prog = Program.lookup_by_dept_and_activity_code(
+            row.dept,
+            row.activity_code
           );
           const goco = prog.tags_by_scheme.GOCO && prog.tags_by_scheme.GOCO[0];
           return (goco && goco.name) || trivial_text_maker("unknown");
