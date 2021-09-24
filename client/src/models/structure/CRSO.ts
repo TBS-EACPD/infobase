@@ -1,5 +1,6 @@
 import _ from "lodash";
 
+import { trivial_text_maker } from "src/models/text";
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
 import { make_store } from "src/models/utils/make_store";
 
@@ -21,10 +22,11 @@ type CRSODef = {
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface CRSO extends CRSODef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class CRSO extends BaseSubjectFactory<CRSODef>("crso", [
-  "results",
-  "services",
-]) {
+export class CRSO extends BaseSubjectFactory<CRSODef>(
+  "crso",
+  trivial_text_maker("core_resps"),
+  ["results", "services"]
+) {
   static store = make_store((def: CRSODef) => new CRSO(def));
 
   constructor(def: CRSODef) {

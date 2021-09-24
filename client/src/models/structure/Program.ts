@@ -23,10 +23,11 @@ type ProgramDef = {
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface Program extends ProgramDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class Program extends BaseSubjectFactory<ProgramDef>("program", [
-  "results",
-  "services",
-]) {
+export class Program extends BaseSubjectFactory<ProgramDef>(
+  "program",
+  trivial_text_maker("programs"),
+  ["results", "services"]
+) {
   static store = make_store((def: ProgramDef) => new Program(def));
 
   static lookup_by_dept_id_and_activity_code(
@@ -85,7 +86,10 @@ type ProgramTagDef = {
 export interface ProgramTag extends ProgramTagDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
 const root_tag_ids: string[] = [];
-export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>("tag") {
+export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
+  "tag",
+  trivial_text_maker("tags")
+) {
   static store = make_store((def: ProgramTagDef) => {
     return new ProgramTag(def);
   });

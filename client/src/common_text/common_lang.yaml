@@ -327,6 +327,9 @@ org(s):
 tag:
   en: Tag
   fr: Étiquette
+tags:
+  en: Tags
+  fr: Étiquettes
 tag_category:
   en: Tag Category
   fr: Catégorie d'étiquette
