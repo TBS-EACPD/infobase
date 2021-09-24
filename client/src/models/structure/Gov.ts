@@ -19,6 +19,7 @@ class _Gov extends BaseSubjectFactory("gov") {
   // mocked store, note that it's not static because it will always be referenced from the one Gov instance
   store = {
     lookup: () => this,
+    has: (id: string | number) => id === this.id,
     get_all: () => [this],
     create: invalid_gov_store_method,
     create_and_register: invalid_gov_store_method,

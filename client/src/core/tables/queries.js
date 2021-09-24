@@ -278,7 +278,7 @@ class Queries {
 
 function query_adapter(subject) {
   //normalize different arguments API
-  if (Dept.store.lookup(subject)) {
+  if (Dept.store.has(subject)) {
     //patch old dept-id based API
     subject = Dept.store.lookup(subject);
   }

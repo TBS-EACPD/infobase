@@ -41,7 +41,7 @@ export const TagCloud = ({ tags, onSelectTag }: TagCloudProps) => (
           )}
           <span style={{ marginLeft: "5px" }}>{label}</span>
         </button>
-        {glossaryEntryStore.lookup(id) && (
+        {glossaryEntryStore.has(id) && (
           <span className="tag-button-helper" tabIndex={0}>
             <GlossaryIcon id={id} />
           </span>

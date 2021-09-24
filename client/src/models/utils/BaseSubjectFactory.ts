@@ -60,6 +60,7 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
       create: get_store_method_placeholder(subject_type),
       create_and_register: get_store_method_placeholder(subject_type),
       lookup: get_store_method_placeholder(subject_type),
+      has: get_store_method_placeholder(subject_type),
       get_all: get_store_method_placeholder(subject_type),
       // omit private methods from Store, TODO would be handy to have a util type for that, or at least for multi-key omits
     } as Omit<Omit<Store<any, any>, "store">, "register">; // eslint-disable-line @typescript-eslint/no-explicit-any
