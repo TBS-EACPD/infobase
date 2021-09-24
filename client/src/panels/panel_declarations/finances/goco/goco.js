@@ -12,7 +12,7 @@ import {
   GraphOverlay,
 } from "src/components/index";
 
-import { Tag } from "src/models/subject_index";
+import { ProgramTag } from "src/models/subject_index";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -54,8 +54,10 @@ class Goco extends React.Component {
 
     const colors = scaleOrdinal().range(newIBCategoryColors);
 
+    const gocos_by_spendarea = ProgramTag.tag_roots_by_id["GOCO"].children_tags;
+
     const total_fte_spend = _.reduce(
-      Tag.gocos_by_spendarea,
+      gocos_by_spendarea,
       (result, sa) => {
         result[sa.id] = _.reduce(
           sa.children_tags,
@@ -83,7 +85,7 @@ class Goco extends React.Component {
       }
     );
 
-    const graph_data = _.chain(Tag.gocos_by_spendarea)
+    const graph_data = _.chain(gocos_by_spendarea)
       .map((sa) => {
         const children = _.map(sa.children_tags, (goco) => {
           const actual_spending = programSpending.q(goco).sum(spend_col);
@@ -118,7 +120,7 @@ class Goco extends React.Component {
     const spend_table_formatter = get_formatter(true, undefined, true, false);
     const fte_table_formatter = get_formatter(false, undefined, true, false);
 
-    const parent_table_data = _.map(Tag.gocos_by_spendarea, (sa) => ({
+    const parent_table_data = _.map(gocos_by_spendarea, (sa) => ({
       [sa_text]: sa.name,
       [spending_text]: total_fte_spend[sa.id].total_child_spending,
       [ftes_text]: total_fte_spend[sa.id].total_child_ftes,
@@ -148,7 +150,7 @@ class Goco extends React.Component {
       />
     );
 
-    const child_tables = _.map(Tag.gocos_by_spendarea, (sa) => {
+    const child_tables = _.map(gocos_by_spendarea, (sa) => {
       const child_table_data = _.map(sa.children_tags, (goco) => ({
         [sa_text]: goco.name,
         [spending_text]: programSpending.q(goco).sum(spend_col),
@@ -331,7 +333,7 @@ class Goco extends React.Component {
       };
 
       const tick_map = _.reduce(
-        Tag.gocos_by_spendarea,
+        gocos_by_spendarea,
         (final_result, sa) => {
           const sa_href_result = _.reduce(
             sa.children_tags,

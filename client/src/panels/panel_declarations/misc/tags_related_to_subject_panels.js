@@ -11,7 +11,7 @@ import {
   CardList,
 } from "src/components/index";
 
-import { Dept, Tag } from "src/models/subject_index";
+import { Dept, ProgramTag } from "src/models/subject_index";
 
 import { infograph_href_template } from "src/infographic/infographic_link";
 
@@ -61,7 +61,7 @@ function get_related_tag_list_args(subject) {
     .reject(([_x, group]) => _.isEmpty(group))
     .sortBy(([id, _group]) => _.indexOf(scheme_order, id))
     .map(([id, tags]) => ({
-      display: tag_root_display(Tag.store.lookup(id)),
+      display: tag_root_display(ProgramTag.store.lookup(id)),
       children: _.map(tags, tag_display),
     }))
     .value();
@@ -208,7 +208,7 @@ export const declare_related_tags_panel = () =>
         const list_args = _.map(
           related_tags_by_type_with_counts,
           ({ type, tag_and_counts }) => ({
-            display: tag_root_display(Tag.store.lookup(type)),
+            display: tag_root_display(ProgramTag.store.lookup(type)),
             children: _.map(tag_and_counts, ({ tag, count }) => ({
               href: infograph_href_template(tag),
               display: (

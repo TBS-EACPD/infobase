@@ -15,7 +15,7 @@ import {
   CRSO,
   Minister,
   InstForm,
-  Tag,
+  ProgramTag,
 } from "./subject_index";
 
 const is_en = lang === "en";
@@ -217,6 +217,13 @@ const process_lookups = ({
         id: get_program_id({ dept_code, activity_code }),
         activity_code,
         crso_id,
+        tag_ids: _.chain(tags_to_programs)
+          .filter(
+            ({ program_id, tag_id }) =>
+              program_id === get_program_id({ dept_code, activity_code })
+          )
+          .map("tag_id")
+          .value(),
         name,
         old_name,
         description: _.trim(desc.replace(/^<p>/i, "").replace(/<\/p>$/i, "")),
@@ -226,71 +233,51 @@ const process_lookups = ({
       })
   );
 
-  create_tag_branches(program_tag_types);
-  populate_program_tags(program_tags);
-  //once all programs and tags are created, link them
-  populate_program_tag_linkages(tags_to_programs);
+  _.each(
+    program_tag_types,
+    ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
+      ProgramTag.store.create_and_register({
+        id,
+        cardinality,
+        name: is_en ? name_en : name_fr,
+        description: is_en ? desc_en : desc_fr,
+        children_tag_ids: _.chain(program_tags)
+          .filter(({ parent_id }) => parent_id === id)
+          .map("tag_id")
+          .value(),
+      });
+    }
+  );
+  _.each(
+    program_tags,
+    ({ tag_id, parent_id, name_en, name_fr, desc_en, desc_fr }) =>
+      ProgramTag.store.create_and_register({
+        id: tag_id,
+        name: is_en ? name_en : name_fr,
+        description: sanitized_marked(is_en ? desc_en : desc_fr),
+        parent_tag_id: parent_id,
+        children_tag_ids: _.chain(program_tags)
+          .filter(({ parent_id }) => parent_id === tag_id)
+          .map("tag_id")
+          .value(),
+        program_ids: _.chain(tags_to_programs)
+          .filter(({ lookup_tag_id }) => lookup_tag_id === tag_id)
+          .map("tag_id")
+          .value(),
+      })
+  );
 
   populate_glossary(glossary);
 };
 
-const populate_glossary = (rows) =>
-  _.chain(rows)
-    .map(([id, term_en, term_fr, def_en, def_fr]) => ({
+const populate_glossary = (glossary) =>
+  _.chain(glossary)
+    .map(({ id, name_en, name_fr, def_en, def_fr }) => ({
       id,
-      title: is_en ? term_en : term_fr,
-      translation: is_en ? term_fr : term_en,
+      title: is_en ? name_en : name_fr,
+      translation: is_en ? name_fr : name_en,
       raw_definition: is_en ? def_en : def_fr,
     }))
     .filter("raw_definition")
     .each(glossaryEntryStore.create_and_register)
     .value();
-
-const create_tag_branches = (program_tag_types) =>
-  _.each(
-    program_tag_types,
-    ([id, cardinality, name_en, name_fr, description_en, description_fr]) => {
-      Tag.store.create_and_register({
-        id,
-        cardinality,
-        name: is_en ? name_en : name_fr,
-        description: is_en ? description_en : description_fr,
-      });
-    }
-  );
-
-const populate_program_tags = (tag_rows) =>
-  _.each(
-    tag_rows,
-    ([tag_id, parent_id, name_en, name_fr, desc_en, desc_fr]) => {
-      //  HACKY: Note that parent rows must precede child rows in input data
-      const parent_tag = Tag.store.lookup(parent_id);
-
-      const instance = Tag.store.create_and_register({
-        id: tag_id,
-        name: is_en ? name_en : name_fr,
-        description: sanitized_marked(is_en ? desc_en : desc_fr),
-        root: parent_tag.root,
-        cardinality: parent_tag.root.cardinality,
-        parent_tag,
-      });
-
-      parent_tag.children_tags.push(instance);
-    }
-  );
-
-const populate_program_tag_linkages = (programs_m2m_tags) =>
-  _.each(programs_m2m_tags, ([program_id, tagID]) => {
-    const program = Program.store.lookup(program_id);
-    const tag = Tag.store.lookup(tagID);
-    const tag_root_id = tag.root.id;
-
-    // CCOFOGs are currently disabled, they have quirks to resolve and code around (duplicated nodes as you go down,
-    // some tagging done at the root level some at other levels, etc.)
-    if (tag_root_id === "CCOFOG") {
-      return;
-    }
-
-    program.tags.push(tag);
-    tag.programs.push(program);
-  });

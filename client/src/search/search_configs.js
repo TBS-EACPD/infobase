@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
-import { Dept, Gov, Program, CRSO, Tag } from "src/models/subject_index";
+import { Dept, Gov, Program, CRSO, ProgramTag } from "src/models/subject_index";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -217,10 +217,11 @@ const glossary_lite = {
 
 const gocos = {
   config_name: "gocos",
-  header_function: () => `${Tag.plural} - ${Tag.tag_roots.GOCO.name}`,
+  header_function: () =>
+    `${ProgramTag.plural} - ${ProgramTag.tag_roots_by_id.GOCO.name}`,
   name_function: _.property("name"),
   get_data: () =>
-    _.chain(Tag.store.get_all())
+    _.chain(ProgramTag.store.get_all())
       .filter((tag) => tag.root.id === "GOCO")
       .filter("is_lowest_level_tag")
       .value(),
@@ -230,10 +231,11 @@ const gocos = {
 
 const how_we_help = {
   config_name: "how_we_help",
-  header_function: () => `${Tag.plural} - ${Tag.tag_roots.HWH.name}`,
+  header_function: () =>
+    `${ProgramTag.plural} - ${ProgramTag.tag_roots_by_id.HWH.name}`,
   name_function: _.property("name"),
   get_data: () =>
-    _.chain(Tag.store.get_all())
+    _.chain(ProgramTag.store.get_all())
       .filter((tag) => tag.root.id === "HWH")
       .filter("is_lowest_level_tag")
       .value(),
@@ -243,10 +245,11 @@ const how_we_help = {
 
 const who_we_help = {
   config_name: "who_we_help",
-  header_function: () => `${Tag.plural} - ${Tag.tag_roots.WWH.name}`,
+  header_function: () =>
+    `${ProgramTag.plural} - ${ProgramTag.tag_roots_by_id.WWH.name}`,
   name_function: _.property("name"),
   get_data: () =>
-    _.chain(Tag.store.get_all())
+    _.chain(ProgramTag.store.get_all())
       .filter((tag) => tag.root.id === "WWH")
       .filter("is_lowest_level_tag")
       .value(),
