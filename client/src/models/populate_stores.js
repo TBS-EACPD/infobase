@@ -113,11 +113,8 @@ const process_lookups = ({
   );
 
   const get_url_from_url_lookup = (url_key) => {
-    const { url_en, url_fr } = _.first(url_lookups, ({ id }) => id === url_key);
-
-    const url = is_en ? url_en : url_fr;
-
-    return url || "";
+    const url_row = _.find(url_lookups, ({ id }) => id === url_key);
+    return url_row?.[is_en ? "url_en" : "url_fr"] || "";
   };
   _.each(
     igoc,
@@ -186,7 +183,7 @@ const process_lookups = ({
       CRSO.store.create_and_register({
         id,
         activity_code: _.chain(id).split("-").last().value(),
-        dept_id: _.first(igoc, { dept_code }).org_id,
+        dept_id: _.find(igoc, { dept_code }).org_id,
         program_ids: _.chain(program)
           .filter(({ crso_id }) => crso_id === id)
           .map(get_program_id)
