@@ -67,9 +67,28 @@ export class Dept extends BaseSubjectFactory<DeptDef>("dept", [
   static depts_without_table_data() {
     return _.filter(Dept.store.get_all(), (dept) => !dept.has_table_data);
   }
-
   get has_table_data() {
     return !_.isEmpty(this.table_ids);
+  }
+
+  get crsos() {
+    return _.map(this.crso_ids, CRSO.store.lookup);
+  }
+  get program_ids() {
+    return _.map(this.programs, "id");
+  }
+  get programs() {
+    return _.chain(this.crsos).map("programs").flatten().compact().value();
+  }
+
+  get inst_form() {
+    return InstForm.store.lookup(this.inst_form_id);
+  }
+  get ministry() {
+    return Ministry.store.lookup(this.ministry_id);
+  }
+  get ministers() {
+    return _.map(this.minister_ids, Minister.store.lookup);
   }
 
   get name() {
@@ -114,26 +133,6 @@ export class Dept extends BaseSubjectFactory<DeptDef>("dept", [
   }
   get mandate() {
     return sanitized_marked(_.trim(this.raw_mandate));
-  }
-
-  get crsos() {
-    return _.map(this.crso_ids, CRSO.store.lookup);
-  }
-  get program_ids() {
-    return _.map(this.programs, "id");
-  }
-  get programs() {
-    return _.chain(this.crsos).map("programs").flatten().compact().value();
-  }
-
-  get inst_form() {
-    return InstForm.store.lookup(this.inst_form_id);
-  }
-  get ministry() {
-    return Ministry.store.lookup(this.ministry_id);
-  }
-  get ministers() {
-    return _.map(this.minister_ids, Minister.store.lookup);
   }
 
   /*
