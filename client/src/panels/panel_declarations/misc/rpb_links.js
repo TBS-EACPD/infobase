@@ -90,7 +90,7 @@ export const declare_links_to_rpb_panel = () =>
               const { subject } = calculations;
 
               const list_args = _.chain(subject.table_ids)
-                .map((id) => Table.store.lookup(id))
+                .map((id) => Table.store.has(id) && Table.store.lookup(id))
                 .compact()
                 .groupBy(get_table_type)
                 .map((group_of_tables, table_type_title) => ({

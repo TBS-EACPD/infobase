@@ -108,10 +108,13 @@ class Result {
   }
   get subject() {
     const { subject_id } = this;
-    let program = Program.store.lookup(subject_id);
-    let crso = CRSO.store.lookup(subject_id);
 
-    return program || crso;
+    const subject_is_program = Program.store.has(subject_id);
+    if (subject_is_program) {
+      return Program.store.lookup(subject_id);
+    } else {
+      return CRSO.store.lookup(subject_id);
+    }
   }
   get parent_level() {
     const subject = this.subject;
@@ -126,7 +129,9 @@ class Result {
   }
   get contributing_programs() {
     return _.chain(PI_DR_Links.get_contributing_program_ids_for_result(this.id))
-      .map((prog_id) => Program.store.lookup(prog_id))
+      .map(
+        (prog_id) => Program.store.has(prog_id) && Program.store.lookup(prog_id)
+      )
       .compact()
       .value();
   }

@@ -37,22 +37,24 @@ const getSubj = (level, id) => {
   let subject;
   switch (level) {
     case "dept":
-      subject =
-        Dept.store.lookup(id) || Dept.store.lookup(defaultSubjectKeys.dept);
+      subject = Dept.store.has(id)
+        ? Dept.store.lookup(id)
+        : Dept.store.lookup(defaultSubjectKeys.dept);
       break;
     case "tag":
-      subject =
-        ProgramTag.store.lookup(id) ||
-        ProgramTag.store.lookup(defaultSubjectKeys.tag);
+      subject = ProgramTag.store.has(id)
+        ? ProgramTag.store.lookup(id)
+        : ProgramTag.store.lookup(defaultSubjectKeys.tag);
       break;
     case "program":
-      subject =
-        Program.store.lookup(id) ||
-        Program.store.lookup(defaultSubjectKeys.program);
+      subject = Program.store.has(id)
+        ? Program.store.lookup(id)
+        : Program.store.lookup(defaultSubjectKeys.program);
       break;
     case "crso":
-      subject =
-        CRSO.store.lookup(id) || CRSO.store.lookup(defaultSubjectKeys.crso);
+      subject = CRSO.store.has(id)
+        ? CRSO.store.lookup(id)
+        : CRSO.store.lookup(defaultSubjectKeys.crso);
       break;
     default:
       subject = Gov;
