@@ -1,4 +1,4 @@
-import { csvParseRows } from "d3-dsv";
+import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants";
@@ -20,38 +20,83 @@ import {
 
 const is_en = lang === "en";
 
-const populate_igoc_models = ({
-  dept_to_table_id,
-  org_to_ministers,
-  inst_forms,
-  ministers,
-  ministries,
-  urls,
-  igoc_rows,
+// TODO, work with pipeline to clean up the headers in igoc_en.csv etc some time, strip the unwanted _en/_fr instances
+const MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS = ["igoc", "crso", "program"];
+
+export const populate_stores = () =>
+  // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
+  make_request(get_static_url(`lookups_${lang}.json.js`)).then((text) => {
+    process_lookups(JSON.parse(text));
+  });
+
+const process_lookups = ({
+  global_footnotes_csv_string,
+  ...lookup_csv_strings
 }) => {
-  _.each(ministries, ([id, name_en, name_fr]) =>
+  // outlier for the data crammed in to lookups_[lang].json, is a processed output of the coppy_static_assets script, not a direct copy of a csv
+  populate_global_footnotes(global_footnotes_csv_string);
+
+  const {
+    dept_code_to_csv_name,
+    org_to_minister,
+    inst_forms,
+    ministers,
+    ministries,
+    url_lookups,
+    igoc,
+    crso,
+    program,
+    program_tag_types,
+    program_tags,
+    tags_to_programs,
+    glossary,
+  } = _.mapValues(lookup_csv_strings, (csv_string, csv_name) =>
+    _.chain(csv_string)
+      .trim()
+      .thru((csv_string) => {
+        const csv_string_with_cleaned_headers = _.replace(
+          csv_string,
+          /^.+\n/,
+          (header_row_string) =>
+            _.chain(header_row_string)
+              .replace(" ", "_")
+              .toLower()
+              .thru((header_row_string) =>
+                _.includes(MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS, csv_name)
+                  ? _.replace(header_row_string, /"(.*?)_[ef][nr]"/g, '"$1"')
+                  : header_row_string
+              )
+              .value()
+        );
+
+        return csvParse(csv_string_with_cleaned_headers);
+      })
+      .value()
+  );
+
+  _.each(ministries, ({ id, name_en, name_fr }) =>
     Ministry.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
-      org_ids: _.chain(igoc_rows)
-        .filter((row) => row[18] === id) // SUBJECT_TS_TODO this stinks... maybe it's time to start actually using CSV headers, for the igoc at least
-        .map(([org_id]) => org_id)
+      org_ids: _.chain(igoc)
+        .filter(({ ministry }) => ministry === id)
+        .map("org_id")
         .value(),
     })
   );
 
-  _.each(ministers, ([id, name_en, name_fr]) =>
+  _.each(ministers, ({ id, name_en, name_fr }) =>
     Minister.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
-      org_ids: _.chain(org_to_ministers)
-        .filter(([_org_id, minister_id]) => minister_id === id)
-        .map(([org_id]) => org_id)
+      org_ids: _.chain(org_to_minister)
+        .filter(({ minister }) => minister === id)
+        .map("department")
         .value(),
     })
   );
 
-  _.each(inst_forms, ([id, parent_id, name_en, name_fr]) =>
+  _.each(inst_forms, ({ id, parent_id, name_en, name_fr }) =>
     InstForm.store.create_and_register({
       id,
       name: is_en ? name_en : name_fr,
@@ -60,92 +105,133 @@ const populate_igoc_models = ({
         .filter(({ parent_id }) => parent_id === id)
         .map("id")
         .value(),
-      org_ids: _.chain(igoc_rows)
-        .filter((row) => row[19] === id) // SUBJECT_TS_TODO this stinks... maybe it's time to start actually using CSV headers, for the igoc at least
-        .map(([org_id]) => org_id)
+      org_ids: _.chain(igoc)
+        .filter(({ institutional_form }) => institutional_form === id)
+        .map("org_id")
         .value(),
     })
   );
 
+  const get_url_from_url_lookup = (url_key) => {
+    const { url_en, url_fr } = _.first(url_lookups, ({ id }) => id === url_key);
+
+    const url = is_en ? url_en : url_fr;
+
+    return url || "";
+  };
   _.each(
-    igoc_rows,
-    ([
-      id,
+    igoc,
+    ({
+      org_id: id,
       dept_code,
-      abbr,
-      legal_title,
-      applied_title,
-      old_applied_title,
-      status_code,
-      legislation,
-      raw_mandate,
-      pas_code,
-      schedule,
-      faa_hr,
-      auditor,
-      incorp_yr,
-      fed_ownership,
-      end_yr,
-      notes,
-      dp_status_code,
-      ministry_id,
-      inst_form_id,
+      status: status_code,
+      enabling_instrument: legislation,
+      description: raw_mandate,
+      pas: pas_code,
+      faa_schedule_institutional: schedule,
+      faa_schedule_hr_status: faa_hr,
+      federal_ownership: fed_ownership,
+      dp_status: dp_status_code,
+      ministry: ministry_id,
+      institutional_form: inst_form_id,
       eval_url_id,
-      website_url_id,
+      dept_website_id,
       article1,
       article2,
-      other_lang_abbr,
-      other_lang_applied_title,
-      other_lang_legal_title,
-    ]) => {
-      const [eval_url, website_url] = _.map(
-        [eval_url_id, website_url_id],
-        (url_key) => {
-          const url_row = _.find(urls, ([id]) => id === url_key);
-
-          return !url_row ? "" : is_en ? url_row[1] : url_row[2];
-        }
-      );
-
+      ...unprocessed_properties
+    }) =>
       Dept.store.create_and_register({
         id,
         dept_code,
-        abbr,
-        legal_title,
-        applied_title,
-        old_applied_title,
         status_code,
         legislation,
         raw_mandate,
         pas_code,
         schedule,
         faa_hr,
-        auditor,
-        incorp_yr,
         fed_ownership,
-        end_yr,
-        notes,
         dp_status_code,
         inst_form_id,
         ministry_id,
-        minister_ids: _.chain(org_to_ministers)
-          .filter(([org_id]) => org_id === id)
-          .map(([_org_id, minister_id]) => minister_id)
+        minister_ids: _.chain(org_to_minister)
+          .filter(({ department }) => department === id)
+          .map("minister")
           .value(),
-        table_ids: _.chain(dept_to_table_id)
-          .filter(([lookup_dept_code]) => lookup_dept_code === dept_code)
-          .map(([_dept_code, table_id]) => table_id)
+        table_ids: _.chain(dept_code_to_csv_name)
+          .filter(
+            ({ dept_code: lookup_dept_code }) => lookup_dept_code === dept_code
+          )
+          .map(({ id: csv_name }) => _.camelCase(csv_name))
           .value(),
-        eval_url,
-        website_url,
+        crso_ids: _.chain(crso)
+          .filter(
+            ({ dept_code: crso_dept_code }) => crso_dept_code === dept_code
+          )
+          .map("id")
+          .value(),
+        eval_url: get_url_from_url_lookup(eval_url_id),
+        website_url: get_url_from_url_lookup(dept_website_id),
         le_la: article1 || "",
         du_de_la: article2 || "",
-        other_lang_abbr,
-        other_lang_applied_title,
-        other_lang_legal_title,
-      });
-    }
+        ...unprocessed_properties,
+      })
   );
+
+  const get_program_id = ({ dept_code, activity_code }) =>
+    `${dept_code}-${activity_code}`;
+
+  _.each(
+    crso,
+    ({ id, dept_code, name, desc, is_active, is_drf, is_internal_service }) =>
+      CRSO.store.create_and_register({
+        id,
+        activity_code: _.chain(id).split("-").last().value(),
+        dept_id: _.first(igoc, { dept_code }).org_id,
+        program_ids: _.chain(program)
+          .filter(
+            ({ crso_id: program_crso_id }) => program_crso_id === "crso_id"
+          )
+          .map(get_program_id)
+          .value().name,
+        description: desc,
+        is_active: is_active === "1",
+        is_drf: is_drf === "1",
+        is_internal_service: is_internal_service === "1",
+      })
+  );
+
+  _.each(
+    program,
+    ({
+      dept_code,
+      activity_code,
+      crso_id,
+      name,
+      old_name,
+      desc,
+      is_active,
+      is_internal_service,
+      is_fake_program,
+    }) =>
+      Program.store.create_and_register({
+        id: get_program_id({ dept_code, activity_code }),
+        activity_code,
+        crso_id,
+        name,
+        old_name,
+        description: _.trim(desc.replace(/^<p>/i, "").replace(/<\/p>$/i, "")),
+        is_active: is_active === "1",
+        is_internal_service: is_internal_service === "1",
+        is_fake: is_fake_program === "1",
+      })
+  );
+
+  create_tag_branches(program_tag_types);
+  populate_program_tags(program_tags);
+  //once all programs and tags are created, link them
+  populate_program_tag_linkages(tags_to_programs);
+
+  populate_glossary(glossary);
 };
 
 const populate_glossary = (rows) =>
@@ -193,69 +279,6 @@ const populate_program_tags = (tag_rows) =>
     }
   );
 
-const populate_crsos = (rows) =>
-  _.each(
-    rows,
-    ([
-      id,
-      dept_code,
-      name,
-      description,
-      is_active,
-      is_drf,
-      is_internal_service,
-    ]) => {
-      const dept = Dept.store.lookup(dept_code);
-
-      const instance = CRSO.store.create_and_register({
-        id,
-        activity_code: _.chain(id).split("-").last().value(),
-        dept,
-        name,
-        description,
-        is_active: is_active === "1",
-        is_drf: is_drf === "1",
-        is_internal_service: is_internal_service === "1",
-      });
-
-      dept.crsos.push(instance);
-    }
-  );
-
-const populate_programs = (rows) =>
-  _.each(
-    rows,
-    ([
-      dept_code,
-      crso_id,
-      activity_code,
-      name,
-      old_name,
-      desc,
-      _is_crown, //TODO why do we have is_crown in the data? If it was needed it should be looked up through the parent org anyway
-      is_active,
-      is_internal_service,
-      is_fake,
-    ]) => {
-      const crso = CRSO.store.lookup(crso_id);
-
-      const instance = Program.store.create_and_register({
-        id: `${dept_code}-${activity_code}`,
-        activity_code,
-        dept: Dept.store.lookup(dept_code),
-        crso,
-        name,
-        old_name,
-        description: _.trim(desc.replace(/^<p>/i, "").replace(/<\/p>$/i, "")),
-        is_active: is_active === "1",
-        is_internal_service: is_internal_service === "1",
-        is_fake: is_fake === "1",
-      });
-
-      crso.programs.push(instance);
-    }
-  );
-
 const populate_program_tag_linkages = (programs_m2m_tags) =>
   _.each(programs_m2m_tags, ([program_id, tagID]) => {
     const program = Program.store.lookup(program_id);
@@ -270,58 +293,4 @@ const populate_program_tag_linkages = (programs_m2m_tags) =>
 
     program.tags.push(tag);
     tag.programs.push(program);
-  });
-
-const process_lookups = ({
-  global_footnotes_csv_string,
-  ...lookup_csv_strings
-}) => {
-  const {
-    dept_code_to_csv_name,
-    org_to_minister,
-    inst_forms,
-    ministers,
-    ministries,
-    url_lookups,
-    igoc,
-    crso,
-    program,
-    program_tag_types,
-    program_tags,
-    tags_to_programs,
-    glossary,
-  } = _.mapValues(lookup_csv_strings, (csv_string) =>
-    _.tail(csvParseRows(_.trim(csv_string)))
-  );
-
-  populate_igoc_models({
-    dept_to_table_id: _.map(dept_code_to_csv_name, (row) => [
-      row[0],
-      _.camelCase(row[1]),
-    ]),
-    org_to_ministers: org_to_minister,
-    inst_forms: inst_forms,
-    ministers: ministers,
-    ministries: ministries,
-    urls: url_lookups,
-    igoc_rows: igoc,
-  });
-  populate_crsos(crso);
-  populate_programs(program);
-
-  create_tag_branches(program_tag_types);
-  populate_program_tags(program_tags);
-
-  //once all programs and tags are created, link them
-  populate_program_tag_linkages(tags_to_programs);
-
-  populate_glossary(glossary);
-
-  populate_global_footnotes(global_footnotes_csv_string);
-};
-
-export const populate_stores = () =>
-  // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
-  make_request(get_static_url(`lookups_${lang}.json.js`)).then((text) => {
-    process_lookups(JSON.parse(text));
   });
