@@ -69,6 +69,7 @@ const process_lookups = ({
               .value()
         );
 
+        // SUBJECT_TS_TODO check this return type's accuracy, empty cells "" or undefined? Double check downstream subject types to make sure they match reality
         return csvParse(csv_string_with_cleaned_headers);
       })
       .value()

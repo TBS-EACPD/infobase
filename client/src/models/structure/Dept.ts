@@ -32,7 +32,7 @@ interface DeptDef {
   notes: string;
   dp_status_code: string;
   inst_form_id: string;
-  ministry_id: string;
+  ministry_id?: string;
   minister_ids: string[];
   table_ids: string[];
   eval_url: string;
@@ -85,7 +85,8 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     return InstForm.store.lookup(this.inst_form_id);
   }
   get ministry() {
-    return Ministry.store.lookup(this.ministry_id);
+    // SUBJECT_TS_TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the Ministry store to hold those?
+    return this.ministry_id && Ministry.store.lookup(this.ministry_id);
   }
   get ministers() {
     return _.map(this.minister_ids, Minister.store.lookup);
