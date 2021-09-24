@@ -84,7 +84,6 @@ export class HeightClipper extends React.Component<
         this.setFocusableFalse(untabbable_children_node);
       }
     } else {
-      console.log("else");
       _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll('[tabindex="-999"]'),
         _.identity
