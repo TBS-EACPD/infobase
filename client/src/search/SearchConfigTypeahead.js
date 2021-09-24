@@ -40,7 +40,9 @@ const get_all_options = _.memoize((search_configs) =>
       })
   )
 );
-const get_gql_query = (gql_search_configs) => gql`
+const get_gql_query = (gql_search_configs) =>
+  gql_search_configs.length > 0 &&
+  gql`
   query($lang: String!) {
     root(lang: $lang) {
       ${_.reduce(
@@ -69,7 +71,10 @@ const get_config_groups = _.memoize((search_configs) =>
 
 const useSearchQuery = (gql_search_configs) => {
   const query = get_gql_query(gql_search_configs);
-  const res = useQuery(query, { variables: { lang } });
+  const res = useQuery(query, {
+    skip: gql_search_configs.length === 0,
+    variables: { lang },
+  });
   if (!res.loading) {
     const data = _.flatMap(
       gql_search_configs,
@@ -119,8 +124,6 @@ export const SearchConfigTypeahead = (props) => {
       const config_groups = get_config_groups(
         _.concat(search_configs, gql_search_configs)
       );
-      console.log(all_options);
-      console.log(config_groups);
 
       return _.chain(all_options)
         .filter(({ config_group_name, data }) =>
