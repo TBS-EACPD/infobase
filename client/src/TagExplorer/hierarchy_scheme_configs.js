@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { Tag, Ministry, Dept } from "src/models/subject_index";
+import { ProgramTag, Ministry, Dept } from "src/models/subject_index";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -10,7 +10,7 @@ import { sanitized_dangerous_inner_html } from "src/general_utils";
 
 import { related_tags_row } from "./tag_hierarchy_utils";
 
-const tag_configs = _.chain(Tag.tag_roots)
+const tag_configs = _.chain(ProgramTag.tag_roots)
   .omit(["CCOFOG"])
   .map(({ id, name, description, is_m2m, children_tags }) => ({
     id,

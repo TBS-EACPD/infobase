@@ -2,12 +2,12 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 
 import { CovidMeasure } from "./covid/CovidMeasure";
 import { Result, Indicator } from "./results";
-import { Tag } from "./results/Tag";
 import {
   Gov,
   Dept,
   CRSO,
   Program,
+  ProgramTag,
   Ministry,
   Minister,
   InstForm,
@@ -21,7 +21,7 @@ export {
   InstForm,
   Ministry,
   Minister,
-  Tag,
+  ProgramTag,
   Result,
   Indicator,
   CovidMeasure,
@@ -35,7 +35,7 @@ export const Subject = {
   InstForm,
   Ministry,
   Minister,
-  Tag,
+  ProgramTag,
   Result,
   Indicator,
   CovidMeasure,

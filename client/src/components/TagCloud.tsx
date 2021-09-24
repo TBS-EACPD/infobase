@@ -11,14 +11,14 @@ import { GlossaryIcon } from "./glossary_components";
 
 import "./TagCloud.scss";
 
-interface Tag {
+interface ProgramTag {
   active: boolean;
   id: string;
   label: string;
 }
 
 interface TagCloudProps {
-  tags: Tag[];
+  tags: ProgramTag[];
   onSelectTag: (parameter?: string) => void;
 }
 

@@ -9,7 +9,7 @@ import { PanelRenderer } from "src/panels/PanelRenderer";
 
 import { LeafSpinner } from "src/components/index";
 
-import { Dept, Program, Gov, CRSO, Tag } from "src/models/subject_index";
+import { Dept, Program, Gov, CRSO, ProgramTag } from "src/models/subject_index";
 
 import { create_text_maker } from "src/models/text";
 
@@ -42,7 +42,8 @@ const getSubj = (level, id) => {
       break;
     case "tag":
       subject =
-        Tag.store.lookup(id) || Tag.store.lookup(defaultSubjectKeys.tag);
+        ProgramTag.store.lookup(id) ||
+        ProgramTag.store.lookup(defaultSubjectKeys.tag);
       break;
     case "program":
       subject =
