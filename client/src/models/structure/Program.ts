@@ -85,7 +85,15 @@ type ProgramTagDef = {
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface ProgramTag extends ProgramTagDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
+const find_root = _.memoize(
+  (tag: ProgramTag): ProgramTag =>
+    tag.parent_tag_id
+      ? find_root(ProgramTag.store.lookup(tag.parent_tag_id))
+      : tag
+);
+
 const root_tag_ids: string[] = [];
+
 export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
   "tag",
   trivial_text_maker("tags")
@@ -113,11 +121,6 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
   }
 
   get root() {
-    const find_root = (tag: ProgramTag): ProgramTag =>
-      tag.parent_tag_id
-        ? find_root(ProgramTag.store.lookup(tag.parent_tag_id))
-        : tag;
-
     return find_root(this);
   }
   get root_id() {
@@ -156,7 +159,7 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
     );
   }
   get is_m2m() {
-    return this.root?.cardinality === "MtoM";
+    return this.root.cardinality === "MtoM";
   }
   get related_tags() {
     return _.chain(this.programs)
