@@ -188,11 +188,10 @@ const process_lookups = ({
         activity_code: _.chain(id).split("-").last().value(),
         dept_id: _.first(igoc, { dept_code }).org_id,
         program_ids: _.chain(program)
-          .filter(
-            ({ crso_id: program_crso_id }) => program_crso_id === "crso_id"
-          )
+          .filter(({ crso_id }) => crso_id === id)
           .map(get_program_id)
-          .value().name,
+          .value(),
+        name,
         description: desc,
         is_active: is_active === "1",
         is_drf: is_drf === "1",
