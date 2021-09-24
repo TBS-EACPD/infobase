@@ -40,9 +40,7 @@ const get_all_options = _.memoize((search_configs) =>
       })
   )
 );
-const get_gql_query = (gql_search_configs) =>
-  gql_search_configs.length > 0 &&
-  gql`
+const get_gql_query = (gql_search_configs) => gql`
   query($lang: String!) {
     root(lang: $lang) {
       ${_.reduce(
@@ -51,7 +49,7 @@ const get_gql_query = (gql_search_configs) =>
       ${query_result}
       ${query}
       `,
-        ``
+        `non_field`
       )}
     }
   }
