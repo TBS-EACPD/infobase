@@ -92,8 +92,10 @@ const FootnoteSublist = ({ footnotes }) => (
             meta_items={_.compact([
               years_to_plain_text(year1, year2),
               ...topic_keys_to_plain_text(topic_keys),
-              subject_is_instance(subject) && subject.name,
-              subject_is_instance(subject) && _.get(subject, "dept.name"),
+              subject && subject_is_instance(subject) && subject.name,
+              subject &&
+                subject_is_instance(subject) &&
+                _.get(subject, "dept.name"),
             ])}
           />
         </li>
