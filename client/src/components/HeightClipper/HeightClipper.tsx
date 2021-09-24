@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React from "react";
-import ReactDOM from "react-dom";
 
 import { TM } from "src/components/TextMaker";
 
@@ -29,6 +28,7 @@ export class HeightClipper extends React.Component<
 > {
   main: React.RefObject<HTMLDivElement>;
   content: React.RefObject<HTMLDivElement>;
+  untabbable_children: React.RefObject<HTMLDivElement>;
   debounced_mutation_callback: MutationCallback;
   observer: MutationObserver;
 
@@ -40,12 +40,10 @@ export class HeightClipper extends React.Component<
     };
     this.main = React.createRef();
     this.content = React.createRef();
+    this.untabbable_children = React.createRef();
 
     this.debounced_mutation_callback = _.debounce(() => {
-      const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
-      const untabbable_children_node = height_clipper_node.querySelector(
-        ".untabbable_children"
-      );
+      const untabbable_children_node = this.untabbable_children.current;
 
       if (untabbable_children_node) {
         this.setFocusableFalse(untabbable_children_node);
@@ -62,9 +60,10 @@ export class HeightClipper extends React.Component<
   componentDidMount() {
     this.measureHeightAndUpdateState();
 
-    const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
+    const untabbable_children_node = this.untabbable_children
+      .current as HTMLElement;
 
-    this.observer.observe(height_clipper_node, {
+    this.observer.observe(untabbable_children_node, {
       childList: true,
       attributes: false,
       subtree: true,
@@ -74,17 +73,18 @@ export class HeightClipper extends React.Component<
   componentDidUpdate() {
     this.measureHeightAndUpdateState();
 
-    const height_clipper_node = ReactDOM.findDOMNode(this) as HTMLElement;
-    const untabbable_children_node = height_clipper_node.querySelector(
-      ".untabbable_children"
-    );
+    const height_clipper_node = this.main.current as HTMLElement;
+    const untabbable_children_node = this.untabbable_children.current;
 
     // if the height clipper is collapsed it will have a div classed .untabbable_children,
     // do not want any of that node's children to be tab-selectable
     // if no .untabbable_children div, then need to reset the tabindex/focusable attributes of the height clipper children
-    if (untabbable_children_node) {
-      this.setFocusableFalse(untabbable_children_node);
+    if (this.state.exceedsHeight && this.state.shouldClip) {
+      if (untabbable_children_node) {
+        this.setFocusableFalse(untabbable_children_node);
+      }
     } else {
+      console.log("else");
       _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll('[tabindex="-999"]'),
         _.identity
@@ -208,7 +208,10 @@ export class HeightClipper extends React.Component<
           </div>
         )}
         <div aria-hidden={isClipped} tabIndex={-1} ref={this.content}>
-          <div className={isClipped ? "untabbable_children" : ""}>
+          <div
+            className={isClipped ? "untabbable_children" : ""}
+            ref={this.untabbable_children}
+          >
             {children}
           </div>
         </div>
