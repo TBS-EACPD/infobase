@@ -219,7 +219,7 @@ const process_lookups = ({
         crso_id,
         tag_ids: _.chain(tags_to_programs)
           .filter(
-            ({ program_id, tag_id }) =>
+            ({ program_id }) =>
               program_id === get_program_id({ dept_code, activity_code })
           )
           .map("tag_id")
@@ -235,7 +235,7 @@ const process_lookups = ({
 
   _.each(
     program_tag_types,
-    ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
+    ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) =>
       ProgramTag.store.create_and_register({
         id,
         cardinality,
@@ -245,24 +245,30 @@ const process_lookups = ({
           .filter(({ parent_id }) => parent_id === id)
           .map("tag_id")
           .value(),
-      });
-    }
+      })
   );
   _.each(
     program_tags,
-    ({ tag_id, parent_id, name_en, name_fr, desc_en, desc_fr }) =>
+    ({
+      tag_id: id,
+      parent_id: parent_tag_id,
+      name_en,
+      name_fr,
+      desc_en,
+      desc_fr,
+    }) =>
       ProgramTag.store.create_and_register({
-        id: tag_id,
+        id,
         name: is_en ? name_en : name_fr,
         description: sanitized_marked(is_en ? desc_en : desc_fr),
-        parent_tag_id: parent_id,
+        parent_tag_id,
         children_tag_ids: _.chain(program_tags)
-          .filter(({ parent_id }) => parent_id === tag_id)
+          .filter(({ parent_id }) => parent_id === id)
           .map("tag_id")
           .value(),
         program_ids: _.chain(tags_to_programs)
-          .filter(({ lookup_tag_id }) => lookup_tag_id === tag_id)
-          .map("tag_id")
+          .filter(({ tag_id }) => tag_id === id)
+          .map("program_id")
           .value(),
       })
   );
