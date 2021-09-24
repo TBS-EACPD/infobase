@@ -46,6 +46,8 @@ export class Store<definition, instance extends StoreInstanceBase> {
     return entry;
   };
 
+  has = (id: store_id_type) => this.store.has(id);
+
   // uniq required due to potential use of alt_ids
   get_all = () => _.uniq(Array.from(this.store.values()));
 }

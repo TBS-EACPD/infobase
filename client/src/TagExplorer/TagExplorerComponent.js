@@ -316,7 +316,7 @@ export default class TagExplorerComponent extends React.Component {
             <h2 style={{ marginBottom: "10px" }}>
               {current_category && current_category.text}
               {current_category &&
-                glossaryEntryStore.lookup(current_category.id) && (
+                glossaryEntryStore.has(current_category.id) && (
                   <GlossaryIcon
                     id={current_category.id}
                     icon_color={tertiaryColor}
