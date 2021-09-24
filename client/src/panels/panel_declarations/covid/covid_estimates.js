@@ -620,9 +620,9 @@ export const declare_covid_estimates_panel = () =>
       depends_on: [],
       source: () => get_source_links(["COVID"]),
       calculate: function (subject, options) {
-        const years_with_estimates = yearsWithCovidDataStore.lookup(
-          subject.id
-        )?.years_with_estimates;
+        const years_with_estimates =
+          yearsWithCovidDataStore.has(subject.id) &&
+          yearsWithCovidDataStore.lookup(subject.id).years_with_estimates;
         return (
           !_.isEmpty(years_with_estimates) && { years: years_with_estimates }
         );

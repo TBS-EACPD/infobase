@@ -16,7 +16,7 @@ const subject_classes_with_infographics = [
 
 const glossary_href = (subject_or_id, first_character = "#") => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;
-  const is_valid_glossary_item = !_.isUndefined(glossaryEntryStore.lookup(id));
+  const is_valid_glossary_item = glossaryEntryStore.has(id);
 
   if (is_valid_glossary_item) {
     return `${first_character}glossary/${id}`;

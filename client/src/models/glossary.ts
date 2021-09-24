@@ -24,16 +24,12 @@ const compiled_definitions = _.memoize((raw_definition) =>
 const get_glossary_item_tooltip_html = (key: string) => {
   const glossary_entry = glossaryEntryStore.lookup(key);
 
-  if (typeof glossary_entry !== "undefined") {
-    return `<div aria-live="polite">
+  return `<div aria-live="polite">
     <div class="h6 medium-weight"> ${trivial_text_maker("definition")} : ${
-      glossary_entry.title
-    } </div>
+    glossary_entry.title
+  } </div>
     <div>${glossary_entry.get_compiled_definition()}</div>
   </div>`;
-  } else {
-    throw new Error(`No glossary entry with key "${key}"`);
-  }
 };
 
 export { glossaryEntryStore, get_glossary_item_tooltip_html };

@@ -46,7 +46,10 @@ function node_to_match_tokens(node) {
         .values()
         .concat(
           _.chain(table.tags)
-            .map((id) => glossaryEntryStore.lookup(id))
+            .map(
+              (id) =>
+                glossaryEntryStore.has(id) && glossaryEntryStore.lookup(id)
+            )
             .compact()
             .map("title")
             .value()

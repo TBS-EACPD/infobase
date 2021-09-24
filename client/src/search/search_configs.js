@@ -268,7 +268,10 @@ const datasets = {
         name: t.name,
         title: t.title,
         flat_tag_titles: _.chain(t.tags)
-          .map((key) => glossaryEntryStore.lookup(key))
+          .map(
+            (key) =>
+              glossaryEntryStore.has(key) && glossaryEntryStore.lookup(key)
+          )
           .compact()
           .map("title")
           .compact()

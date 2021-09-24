@@ -68,13 +68,13 @@ const get_subject_from_props = (props) => {
       params: { org_id, crso_id, program_id },
     },
   } = props;
-  if (program_id && Program.store.lookup(program_id)) {
+  if (Program.store.has(program_id)) {
     return Program.store.lookup(program_id);
   }
-  if (crso_id && CRSO.store.lookup(crso_id)) {
+  if (CRSO.store.has(crso_id)) {
     return CRSO.store.lookup(crso_id);
   }
-  if (org_id && Dept.store.lookup(org_id)) {
+  if (Dept.store.has(org_id)) {
     return Dept.store.lookup(org_id);
   }
   return props.subject; // default
@@ -89,9 +89,9 @@ const subject_intro = (subject, num_indicators) => (
 const get_indicators = (subject) => {
   return _.chain(Result.get_all())
     .filter((res) => {
-      const res_subject =
-        Program.store.lookup(res.subject_id) ||
-        CRSO.store.lookup(res.subject_id);
+      const res_subject = Program.store.has(res.subject_id)
+        ? Program.store.lookup(res.subject_id)
+        : CRSO.store.lookup(res.subject_id);
       return subject.level === "dept"
         ? res_subject.dept === subject
         : res_subject === subject || res_subject.crso === subject;
@@ -527,7 +527,9 @@ export default class TextDiffApp extends React.Component {
                 : "all"
             }
             onSelect={(id) => {
-              const new_url = this.get_new_url(CRSO.store.lookup(id) || id);
+              const new_url = this.get_new_url(
+                CRSO.store.has(id) ? CRSO.store.lookup(id) : id
+              );
               history.push(new_url);
             }}
             options={_.chain(crs_without_internal)
@@ -545,7 +547,9 @@ export default class TextDiffApp extends React.Component {
             id="select_program"
             selected={subject.level === "program" ? subject.id : "all"}
             onSelect={(id) => {
-              const new_url = this.get_new_url(Program.store.lookup(id) || id);
+              const new_url = this.get_new_url(
+                Program.store.has(id) ? Program.store.lookup(id) : id
+              );
               history.push(new_url);
             }}
             options={_.chain(
