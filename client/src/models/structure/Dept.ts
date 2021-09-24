@@ -47,11 +47,11 @@ interface DeptDef {
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface Dept extends DeptDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class Dept extends BaseSubjectFactory<DeptDef>("dept", [
-  "results",
-  "services",
-  "covid",
-]) {
+export class Dept extends BaseSubjectFactory<DeptDef>(
+  "dept",
+  trivial_text_maker("orgs"),
+  ["results", "services", "covid"]
+) {
   static store = make_store(
     (def: DeptDef) => new Dept(def),
     (dept) => [dept.dept_code, +dept.id]

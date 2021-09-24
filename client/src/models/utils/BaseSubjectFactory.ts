@@ -4,6 +4,7 @@ import { Store } from "./make_store";
 
 export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
   subject_type: string,
+  subject_name: string,
   api_data_types = [] as string[]
 ) =>
   class BaseSubject {
@@ -38,15 +39,19 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
     get subject_type() {
       return subject_type;
     }
+    static subject_name = subject_name;
+    get subject_name() {
+      return subject_name;
+    }
+
+    get guid() {
+      return subject_type + "_" + this.id;
+    }
 
     // SUBJECT_TS_TODO want to deprecate this as redundant to subject_type, but lots of legacy code to sift through for that
     static level = subject_type;
     get level() {
       return subject_type;
-    }
-
-    get guid() {
-      return subject_type + "_" + this.id;
     }
 
     /*
