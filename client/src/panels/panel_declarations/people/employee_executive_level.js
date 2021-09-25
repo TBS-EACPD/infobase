@@ -42,7 +42,7 @@ const calculate_funcs_by_subject_type = {
           const ex_level_name = ex_level.text;
           const yearly_values = people_years.map(
             (year) =>
-              orgEmployeeExLvl.sum_col_by_grouped_data(year, "ex_lvl")[
+              orgEmployeeExLvl.sum_cols_by_grouped_data(year, "ex_lvl")[
                 ex_level_name
               ]
           );

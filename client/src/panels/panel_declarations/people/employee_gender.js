@@ -41,7 +41,7 @@ const calculate_funcs_by_subject_type = {
         const gender_text = gender_type.text;
         const yearly_values = people_years.map(
           (year) =>
-            orgEmployeeGender.sum_col_by_grouped_data(year, "gender")[
+            orgEmployeeGender.sum_cols_by_grouped_data(year, "gender")[
               gender_text
             ]
         );

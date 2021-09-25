@@ -83,7 +83,9 @@ export default {
 
   queries: {
     gov_grouping: function () {
-      return _.chain(this.table.sum_col_by_grouped_data(people_years, "gender"))
+      return _.chain(
+        this.table.sum_cols_by_grouped_data(people_years, "gender")
+      )
         .map(function (people_years, key) {
           return [key].concat(people_years);
         })

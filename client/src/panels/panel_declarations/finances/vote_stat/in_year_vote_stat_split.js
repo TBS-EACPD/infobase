@@ -40,7 +40,7 @@ const render_w_options =
   };
 
 const get_voted_stat = (table, subject) => {
-  return table.sum_col_by_grouped_data(main_col, "vote_vs_stat", subject);
+  return table.sum_cols_by_grouped_data(main_col, "vote_vs_stat", subject);
 };
 
 const get_vote_stat_est_in_year = (table, subject) => {
