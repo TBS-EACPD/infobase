@@ -353,9 +353,7 @@ export class Table {
             dimension
           )[1];
           const summed_col = _.isArray(col)
-            ? _.chain(col)
-                .map((c) => _.sumBy(data_group, c))
-                .value()
+            ? _.map(col, (c) => _.sumBy(data_group, c))
             : _.sumBy(data_group, col);
           return [dim_name, summed_col];
         })
