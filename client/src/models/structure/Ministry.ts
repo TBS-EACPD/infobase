@@ -21,10 +21,6 @@ export class Ministry extends BaseSubjectFactory<MinistryDef>(
 ) {
   static store = make_store((def: MinistryDef) => new Ministry(def));
 
-  constructor(def: MinistryDef) {
-    super(def);
-  }
-
   get orgs() {
     return _.map(this.org_ids, Dept.store.lookup);
   }

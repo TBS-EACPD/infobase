@@ -15,6 +15,8 @@ const invalid_gov_store_method = () => {
   );
 };
 
+const gov_id = "gov";
+
 class _Gov extends BaseSubjectFactory("gov", trivial_text_maker("goc")) {
   // mocked store, note that it's not static because it will always be referenced from the one Gov instance
   store = {
@@ -25,17 +27,11 @@ class _Gov extends BaseSubjectFactory("gov", trivial_text_maker("goc")) {
     create_and_register: invalid_gov_store_method,
   };
 
-  id: string;
+  id = gov_id;
   name = trivial_text_maker("goc");
   description = trivial_text_maker("the_goc");
   legal_title = trivial_text_maker("goc");
   has_planned_spending = true;
-
-  constructor(def: { id: string }) {
-    super(def);
-
-    this.id = def.id;
-  }
 }
 
-export const Gov = new _Gov({ id: "gov" });
+export const Gov = new _Gov({ id: gov_id });
