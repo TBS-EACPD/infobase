@@ -24,7 +24,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
         const exp_pa_last_year = "{{pa_last_year}}exp";
 
         const gov_tp = _.chain(
-          orgTransferPayments.sum_col_by_grouped_data(
+          orgTransferPayments.sum_cols_by_grouped_data(
             [exp_pa_last_year],
             "type_id"
           )
@@ -34,7 +34,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
           .value();
 
         const org_tp = _.chain(
-          orgTransferPayments.sum_col_by_grouped_data(
+          orgTransferPayments.sum_cols_by_grouped_data(
             [exp_pa_last_year],
             "type_id",
             subject

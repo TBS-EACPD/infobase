@@ -28,7 +28,7 @@ export const declare_personnel_spend_panel = () =>
         const { orgSobjs } = this.tables;
         const year_value_pairs = _.map(std_years, (year) => [
           run_template(year),
-          orgSobjs.sum_col_by_grouped_data(year, "so", subject)[sos[1].text],
+          orgSobjs.sum_cols_by_grouped_data(year, "so", subject)[sos[1].text],
         ]);
 
         const series = _.map(year_value_pairs, _.last);

@@ -88,7 +88,7 @@ export default {
 
   queries: {
     gov_grouping: () =>
-      _.chain(this.table.sum_col_by_grouped_data(tp_by_region_years, "region"))
+      _.chain(this.table.sum_cols_by_grouped_data(tp_by_region_years, "region"))
         .map((years, key) => [key].concat(years))
         .sortBy((row) => sum(_.tail(row)))
         .value(),

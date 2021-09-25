@@ -172,7 +172,7 @@ class TPMap extends React.Component {
       } = calculations;
 
       const transfer_payments_by_prov =
-        transfer_payments_table.sum_col_by_grouped_data(
+        transfer_payments_table.sum_cols_by_grouped_data(
           tp_by_region_years,
           "region_code",
           subject

@@ -187,7 +187,7 @@ const calculate_funcs_by_subject_type = {
     const { orgEmployeeRegion } = this.tables;
     return calculate_common(
       people_years.map((year) =>
-        orgEmployeeRegion.sum_col_by_grouped_data(year, "region_code")
+        orgEmployeeRegion.sum_cols_by_grouped_data(year, "region_code")
       )
     );
   },
@@ -198,7 +198,7 @@ const calculate_funcs_by_subject_type = {
       people_years.map((year) => orgEmployeeRegion.prov_code(year, subject.id))
 =======
       people_years.map((year) =>
-        orgEmployeeRegion.sum_col_by_grouped_data(year, "region_code", subject)
+        orgEmployeeRegion.sum_cols_by_grouped_data(year, "region_code", subject)
       )
 >>>>>>> fixed people panels
     );

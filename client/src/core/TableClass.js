@@ -339,9 +339,9 @@ export class Table {
     };
   }
 
-  // TODO: come up with a shorter, better name for this sum_col_by_grouped_data
-  get_sum_col_by_grouped_data_func() {
-    this.sum_col_by_grouped_data = function (col, dimension, subject = Gov) {
+  // TODO: come up with a shorter, better name for this sum_cols_by_grouped_data
+  get_sum_cols_by_grouped_data_func() {
+    this.sum_cols_by_grouped_data = function (col, dimension, subject = Gov) {
       const { data, group_by_func, dimension_col_values_func } = this;
 
       return _.chain(data)
@@ -540,7 +540,7 @@ export class Table {
     });
 
     this.q = query_adapter;
-    this.get_sum_col_by_grouped_data_func();
+    this.get_sum_cols_by_grouped_data_func();
   }
   //TODO: optimize and clarify this
   get_row_func() {
