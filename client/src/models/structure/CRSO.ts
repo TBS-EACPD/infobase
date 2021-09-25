@@ -29,10 +29,6 @@ export class CRSO extends BaseSubjectFactory<CRSODef>(
 ) {
   static store = make_store((def: CRSODef) => new CRSO(def));
 
-  constructor(def: CRSODef) {
-    super(def);
-  }
-
   get dept() {
     return Dept.store.lookup(this.dept_id);
   }

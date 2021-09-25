@@ -39,10 +39,6 @@ export class Program extends BaseSubjectFactory<ProgramDef>(
     );
   }
 
-  constructor(def: ProgramDef) {
-    super(def);
-  }
-
   get crso() {
     return CRSO.store.lookup(this.crso_id);
   }

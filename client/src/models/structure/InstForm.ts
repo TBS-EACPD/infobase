@@ -23,17 +23,12 @@ export class InstForm extends BaseSubjectFactory<InstFormDef>(
 ) {
   static store = make_store((def: InstFormDef) => new InstForm(def));
 
-  constructor(def: InstFormDef) {
-    super(def);
-  }
-
   get parent_form() {
     return this.parent_id && InstForm.store.lookup(this.parent_id);
   }
   get children_forms() {
     return _.map(this.children_ids, InstForm.store.lookup);
   }
-
   get orgs() {
     return _.map(this.org_ids, Dept.store.lookup);
   }

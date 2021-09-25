@@ -2,6 +2,8 @@ import { trivial_text_maker } from "src/models/text";
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
 import { make_store } from "src/models/utils/make_store";
 
+// SUBJECT_TS_TODO does this _really_ need to be a subject? Maybe make it a plain store
+
 type CovidMeasureDef = {
   id: string;
   name: string;
@@ -15,8 +17,4 @@ export class CovidMeasure extends BaseSubjectFactory<CovidMeasureDef>(
   trivial_text_maker("covid_measures")
 ) {
   static store = make_store((def: CovidMeasureDef) => new CovidMeasure(def));
-
-  constructor(def: CovidMeasureDef) {
-    super(def);
-  }
 }

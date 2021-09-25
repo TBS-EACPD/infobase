@@ -57,10 +57,6 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     (dept) => [dept.dept_code, +dept.id]
   );
 
-  constructor(def: DeptDef) {
-    super(def);
-  }
-
   static depts_with_table_data() {
     return _.filter(Dept.store.get_all(), (dept) => dept.has_table_data);
   }
