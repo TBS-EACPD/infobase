@@ -19,19 +19,22 @@ import {
 } from "./subject_index";
 
 const is_en = lang === "en";
+const lookups_file_name = `lookups_${lang}.json`;
 
 // TODO, work with pipeline to clean up the headers in igoc_en.csv etc some time, strip the unwanted _en/_fr instances
 const MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS = ["igoc", "crso", "program"];
 
 export const populate_stores = () =>
   // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
-  make_request(get_static_url(`lookups_${lang}.json.js`)).then((text) => {
+  make_request(get_static_url(`${lookups_file_name}.js`)).then((text) => {
     process_lookups(JSON.parse(text));
   });
 
 const process_lookups = ({
   global_footnotes_csv_string,
   ...lookup_csv_strings
+}: {
+  [x: string]: string;
 }) => {
   // outlier for the data crammed in to lookups_[lang].json, is a processed output of the coppy_static_assets script, not a direct copy of a csv
   populate_global_footnotes(global_footnotes_csv_string);
@@ -69,8 +72,10 @@ const process_lookups = ({
               .value()
         );
 
-        // SUBJECT_TS_TODO check this return type's accuracy, empty cells "" or undefined? Double check downstream subject types to make sure they match reality
-        return csvParse(csv_string_with_cleaned_headers);
+        // SUBJECT_TS_TODO mapping undefineds to empty strings here is sort of a TS/run time validation cop-out, hmm
+        return _.map(csvParse(csv_string_with_cleaned_headers), (row) =>
+          _.mapValues(row, (cell) => cell || "")
+        );
       })
       .value()
   );
@@ -113,7 +118,7 @@ const process_lookups = ({
     })
   );
 
-  const get_url_from_url_lookup = (url_key) => {
+  const get_url_from_url_lookup = (url_key: string | undefined) => {
     const url_row = _.find(url_lookups, ({ id }) => id === url_key);
     return url_row?.[is_en ? "url_en" : "url_fr"] || "";
   };
@@ -169,13 +174,25 @@ const process_lookups = ({
           .value(),
         eval_url: get_url_from_url_lookup(eval_url_id),
         website_url: get_url_from_url_lookup(dept_website_id),
-        le_la: article1 || "",
-        du_de_la: article2 || "",
-        ...unprocessed_properties,
+        le_la: article1,
+        du_de_la: article2,
+        ...(unprocessed_properties as unknown as {
+          abbr: string;
+          legal_title: string;
+          applied_title: string;
+          old_applied_title: string;
+          auditor: string;
+          incorp_yr: string;
+          end_yr: string;
+          notes: string;
+          other_lang_abbr: string;
+          other_lang_applied_title: string;
+          other_lang_legal_title: string;
+        }),
       })
   );
 
-  const get_program_id = ({ dept_code, activity_code }) =>
+  const get_program_id = (dept_code: string, activity_code: string) =>
     `${dept_code}-${activity_code}`;
 
   _.each(
@@ -184,10 +201,12 @@ const process_lookups = ({
       CRSO.store.create_and_register({
         id,
         activity_code: _.chain(id).split("-").last().value(),
-        dept_id: _.find(igoc, { dept_code }).org_id,
+        dept_id: _.find(igoc, { dept_code })?.org_id as string,
         program_ids: _.chain(program)
           .filter(({ crso_id }) => crso_id === id)
-          .map(get_program_id)
+          .map(({ dept_code, activity_code }) =>
+            get_program_id(dept_code, activity_code)
+          )
           .value(),
         name,
         description: desc,
@@ -211,13 +230,13 @@ const process_lookups = ({
       is_fake_program,
     }) =>
       Program.store.create_and_register({
-        id: get_program_id({ dept_code, activity_code }),
+        id: get_program_id(dept_code, activity_code),
         activity_code,
         crso_id,
         tag_ids: _.chain(tags_to_programs)
           .filter(
             ({ program_id }) =>
-              program_id === get_program_id({ dept_code, activity_code })
+              program_id === get_program_id(dept_code, activity_code)
           )
           .map("tag_id")
           .value(),
@@ -270,17 +289,15 @@ const process_lookups = ({
       })
   );
 
-  populate_glossary(glossary);
-};
+  _.each(glossary, ({ id, name_en, name_fr, def_en, def_fr }) => {
+    const raw_definition = is_en ? def_en : def_fr;
 
-const populate_glossary = (glossary) =>
-  _.chain(glossary)
-    .map(({ id, name_en, name_fr, def_en, def_fr }) => ({
-      id,
-      title: is_en ? name_en : name_fr,
-      translation: is_en ? name_fr : name_en,
-      raw_definition: is_en ? def_en : def_fr,
-    }))
-    .filter("raw_definition")
-    .each(glossaryEntryStore.create_and_register)
-    .value();
+    raw_definition &&
+      glossaryEntryStore.create_and_register({
+        id,
+        title: is_en ? name_en : name_fr,
+        translation: is_en ? name_fr : name_en,
+        raw_definition,
+      });
+  });
+};
