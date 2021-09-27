@@ -30,12 +30,18 @@ export class Program extends BaseSubjectFactory<ProgramDef>(
 ) {
   static store = make_store((def: ProgramDef) => new Program(def));
 
+  static make_program_id(dept_code: string, activity_code: string) {
+    return `${dept_code}-${activity_code}`;
+  }
   static lookup_by_dept_id_and_activity_code(
     dept_id: string | number,
     activity_code: string
   ) {
     return Program.store.lookup(
-      `${Dept.store.lookup(dept_id).dept_code}-${activity_code}`
+      Program.make_program_id(
+        Dept.store.lookup(dept_id).dept_code,
+        activity_code
+      )
     );
   }
 

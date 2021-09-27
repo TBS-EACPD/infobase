@@ -36,7 +36,7 @@ const process_lookups = ({
 }: {
   [x: string]: string;
 }) => {
-  // outlier for the data crammed in to lookups_[lang].json, is a processed output of the coppy_static_assets script, not a direct copy of a csv
+  // outlier for lookups json, a calculated output of the build base script, not a directly stringified csv
   populate_global_footnotes(global_footnotes_csv_string);
 
   const {
@@ -192,9 +192,6 @@ const process_lookups = ({
       })
   );
 
-  const get_program_id = (dept_code: string, activity_code: string) =>
-    `${dept_code}-${activity_code}`;
-
   _.each(
     crso,
     ({ id, dept_code, name, desc, is_active, is_drf, is_internal_service }) =>
@@ -205,7 +202,7 @@ const process_lookups = ({
         program_ids: _.chain(program)
           .filter(({ crso_id }) => crso_id === id)
           .map(({ dept_code, activity_code }) =>
-            get_program_id(dept_code, activity_code)
+            Program.make_program_id(dept_code, activity_code)
           )
           .value(),
         name,
@@ -230,13 +227,13 @@ const process_lookups = ({
       is_fake_program,
     }) =>
       Program.store.create_and_register({
-        id: get_program_id(dept_code, activity_code),
+        id: Program.make_program_id(dept_code, activity_code),
         activity_code,
         crso_id,
         tag_ids: _.chain(tags_to_programs)
           .filter(
             ({ program_id }) =>
-              program_id === get_program_id(dept_code, activity_code)
+              program_id === Program.make_program_id(dept_code, activity_code)
           )
           .map("tag_id")
           .value(),
