@@ -4,7 +4,7 @@ import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
   extend type Root{
-    services(id: String): [Service]
+    service(id: String!): Service
     search_services(name_query: String): [Service]
   }
   extend type Gov{
@@ -168,7 +168,7 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Root: {
-      services: async (_x, { id }) => await Service.find(id ? { id } : {}), //SI_TODO need to find a way to "load all" for service loader
+      service: (_x, { id }) => service_loader.load(id),
       search_services: async (_x, { name_query }) =>
         await Service.find({
           $text: { $search: `"${name_query}"` }, // Double quotes for exact phrase
