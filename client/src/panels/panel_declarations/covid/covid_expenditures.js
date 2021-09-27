@@ -11,6 +11,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
+import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
 import {
   query_gov_covid_summaries,
   query_top_covid_spending,
@@ -19,7 +20,7 @@ import {
 } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
-import { Dept, CovidMeasure } from "src/models/subject_index";
+import { Dept } from "src/models/subject_index";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
 import { infograph_options_href_template } from "src/infographic/infographic_link";
@@ -229,7 +230,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     )
       .map(({ measure_id, ...row }) => ({
         ...row,
-        measure_name: CovidMeasure.store.lookup(measure_id).name,
+        measure_name: CovidMeasureStore.lookup(measure_id).name,
       }))
       .value();
 
