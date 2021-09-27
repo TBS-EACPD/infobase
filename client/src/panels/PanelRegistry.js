@@ -252,8 +252,8 @@ function panels_with_key(key, subject_type) {
   return panels;
 }
 
-function tables_for_panel(panel_key, subject_subject_type) {
-  const panel_objs = panels_with_key(panel_key, subject_subject_type);
+function tables_for_panel(panel_key, subject_type) {
+  const panel_objs = panels_with_key(panel_key, subject_type);
   return _.chain(panel_objs).map("depends_on").flatten().uniqBy().value();
 }
 
