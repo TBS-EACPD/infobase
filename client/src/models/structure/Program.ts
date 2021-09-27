@@ -67,7 +67,7 @@ export class Program extends BaseSubjectFactory<ProgramDef>(
   }
 }
 
-// SUBJECT_TS_TODO seems like tag roots should probably be their own subjects, although would be hard to hunt down all the logic out there this might confuse
+// TODO seems like tag roots should probably be their own subjects, although would be hard to hunt down all the logic out there this might confuse
 type ProgramTagDef = {
   id: string;
   name: string;

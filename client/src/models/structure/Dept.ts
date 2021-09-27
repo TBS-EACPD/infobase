@@ -81,7 +81,7 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     return InstForm.store.lookup(this.inst_form_id);
   }
   get ministry() {
-    // SUBJECT_TS_TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the Ministry store to hold those?
+    // TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the Ministry store to hold those?
     return this.ministry_id && Ministry.store.lookup(this.ministry_id);
   }
   get ministers() {
@@ -103,7 +103,7 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
       case "c":
         return trivial_text_maker("dissolved");
       default:
-        return ""; // SUBJECT_TS_TODO should probably throw, or maybe that validation should happen at the populate step in populate_stores.js
+        return "";
     }
   }
   get is_dp_org() {
