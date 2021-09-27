@@ -37,13 +37,10 @@ const get_config_groups = _.memoize((search_configs) =>
 export const SearchConfigTypeahead = (props) => {
   const { on_select, search_configs, gql_search_configs } = props;
   const [query_value, set_query_value] = useState("");
-  const { loading, data: gql_queried_data } = useSearchQuery(
+  const { data: gql_queried_data } = useSearchQuery(
     query_value,
     gql_search_configs
   );
-  if (loading) {
-    return <LeafSpinner config_name="inline_panel" />;
-  }
 
   const on_query = (query_value) => {
     log_standard_event({
@@ -58,10 +55,9 @@ export const SearchConfigTypeahead = (props) => {
   };
   const get_search_results = () => {
     if (query_value) {
-      const all_options = _.concat(
-        get_all_options(search_configs),
-        gql_queried_data
-      );
+      const all_options = gql_queried_data
+        ? _.concat(get_all_options(search_configs), gql_queried_data)
+        : get_all_options(search_configs);
       const config_groups = get_config_groups(
         _.concat(search_configs, gql_search_configs)
       );
