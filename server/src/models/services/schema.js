@@ -4,7 +4,8 @@ import { bilingual_field } from "../schema_utils.js";
 
 const schema = `
   extend type Root{
-    service(id: String): [Service]
+    services(id: String): [Service]
+    search_services(name_query: String): [Service]
   }
   extend type Gov{
     service_summary: ServiceSummary
@@ -167,7 +168,11 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Root: {
-      service: async (_x, { id }) => await Service.find(id ? { id } : {}), //SI_TODO need to find a way to "load all" for service loader
+      services: async (_x, { id }) => await Service.find(id ? { id } : {}), //SI_TODO need to find a way to "load all" for service loader
+      search_services: async (_x, { name_query }) =>
+        await Service.find({
+          $text: { $search: `"${name_query}"` }, // Double quotes for exact phrase
+        }),
     },
     Gov: {
       service_summary: () => gov_service_summary_loader.load("gov"),
