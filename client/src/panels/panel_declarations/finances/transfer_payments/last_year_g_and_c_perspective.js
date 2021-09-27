@@ -13,8 +13,8 @@ import { text_maker, TM } from "./gnc_text_provider";
 export const declare_last_year_g_and_c_perspective_panel = () =>
   declare_panel({
     panel_key: "last_year_g_and_c_perspective",
-    levels: ["dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgTransferPayments", "programSpending"],
       footnotes: ["SOBJ10"],
       title: text_maker("last_year_g_and_c_perspective_title"),

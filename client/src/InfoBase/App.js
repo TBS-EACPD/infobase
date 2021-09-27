@@ -160,7 +160,7 @@ export class App extends React.Component {
                   component={SingleServiceRoute}
                 />
                 <Route
-                  path="/orgs/:level/:subject_id/infograph/:active_bubble_id?/:options?/"
+                  path="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
                   component={Infographic}
                 />
                 <Route path="/glossary/:active_key?" component={Glossary} />
@@ -184,15 +184,15 @@ export class App extends React.Component {
                   component={TextDiff}
                 />
                 <Route
-                  path="/panel/:level?/:subject_id?/:panel_key?"
+                  path="/panel/:subject_type?/:subject_id?/:panel_key?"
                   component={IsolatedPanel}
                 />
                 <Redirect
-                  from="/graph/:level?/:panel?/:id?"
-                  to="/panel-inventory/:level?/:panel?/:id?"
+                  from="/graph/:subject_type?/:panel?/:id?"
+                  to="/panel-inventory/:subject_type?/:panel?/:id?"
                 />
                 <Route
-                  path="/panel-inventory/:level?/:panel?/:id?"
+                  path="/panel-inventory/:subject_type?/:panel?/:id?"
                   component={PanelInventory}
                 />
                 <Route

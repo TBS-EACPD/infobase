@@ -37,10 +37,10 @@ const common_panel_config = {
 export const declare_links_to_rpb_panel = () =>
   declare_panel({
     panel_key: "links_to_rpb",
-    levels: ["gov", "dept"],
+    subject_types: ["gov", "dept"],
 
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "gov":
           return {
             ...common_panel_config,

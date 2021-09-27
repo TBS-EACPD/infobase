@@ -54,8 +54,8 @@ const dead_panel_config = {
 export const declare_dead_program_warning_panel = () =>
   declare_panel({
     panel_key: "dead_program_warning",
-    levels: ["program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["program"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...dead_panel_config,
 
       render() {
@@ -71,8 +71,8 @@ export const declare_dead_program_warning_panel = () =>
 export const declare_dead_crso_warning_panel = () =>
   declare_panel({
     panel_key: "dead_crso_warning",
-    levels: ["crso"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["crso"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...dead_panel_config,
 
       render() {
@@ -88,8 +88,8 @@ export const declare_dead_crso_warning_panel = () =>
 export const declare_m2m_tag_warning_panel = () =>
   declare_panel({
     panel_key: "m2m_warning",
-    levels: ["tag"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["tag"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...common_panel_config,
 
       calculate(subject) {
@@ -101,7 +101,7 @@ export const declare_m2m_tag_warning_panel = () =>
           <KeyConceptList
             question_answer_pairs={_.map(
               [
-                "MtoM_tag_warning_reporting_level",
+                "MtoM_tag_warning_reporting_subject_type",
                 "MtoM_tag_warning_resource_splitting",
                 "MtoM_tag_warning_double_counting",
               ],
@@ -124,8 +124,8 @@ const late_panel_config = {
 export const declare_late_results_warning_panel = () =>
   declare_panel({
     panel_key: "late_results_warning",
-    levels: ["gov", "dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => {
+    subject_types: ["gov", "dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => {
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
         .reverse()
         .filter(({ late_results_orgs }) => late_results_orgs.length > 0)
@@ -141,7 +141,7 @@ export const declare_late_results_warning_panel = () =>
         </Fragment>
       );
 
-      switch (level) {
+      switch (subject_type) {
         case "gov":
           return {
             ...late_panel_config,
@@ -188,12 +188,14 @@ export const declare_late_results_warning_panel = () =>
             calculate: (subject) =>
               _.chain(docs_with_late_orgs)
                 .flatMap("late_results_orgs")
-                .includes(level === "dept" ? subject.id : subject.dept.id)
+                .includes(
+                  subject_type === "dept" ? subject.id : subject.dept.id
+                )
                 .value(),
             render() {
               const per_doc_inner_content = (result_doc) => (
                 <TM
-                  k={`late_results_warning_${level}`}
+                  k={`late_results_warning_${subject_type}`}
                   args={{
                     result_doc_name: text_maker(`${result_doc.doc_type}_name`, {
                       year: result_doc.year,
@@ -212,9 +214,9 @@ export const declare_late_results_warning_panel = () =>
 const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
   declare_panel({
     panel_key: `late_${planned_or_actual}_resources_warning`,
-    levels: ["gov", "dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    subject_types: ["gov", "dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "gov":
           return {
             ...late_panel_config,
@@ -241,12 +243,12 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
             calculate: (subject) =>
               _.includes(
                 late_orgs,
-                level === "dept" ? subject.id : subject.dept.id
+                subject_type === "dept" ? subject.id : subject.dept.id
               ),
             render: () => (
               <WarningPanel banner_class="warning">
                 <TM
-                  k={`late_${planned_or_actual}_resources_warning_${level}`}
+                  k={`late_${planned_or_actual}_resources_warning_${subject_type}`}
                 />
               </WarningPanel>
             ),

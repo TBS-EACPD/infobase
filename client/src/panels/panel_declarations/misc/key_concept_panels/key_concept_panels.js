@@ -23,7 +23,7 @@ const curried_render = ({ q_a_key_pairs }) =>
   function ({ calculations: { subject } }) {
     let rendered_q_a_key_pairs = _.compact([
       ...q_a_key_pairs,
-      subject.level === "crso" && ["what_are_CR_q", "what_are_CR_a"],
+      subject.subject_type === "crso" && ["what_are_CR_q", "what_are_CR_a"],
     ]);
 
     const { TM } = create_text_maker_component([
@@ -46,8 +46,8 @@ const curried_render = ({ q_a_key_pairs }) =>
 export const declare_financial_key_concepts_panel = () =>
   declare_panel({
     panel_key: "financial_key_concepts",
-    levels: ["gov", "dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [
@@ -61,7 +61,7 @@ export const declare_financial_key_concepts_panel = () =>
           ["what_are_exps_q", "what_are_exps_a"],
           ["why_cant_i_see_prov_spend_q", "why_cant_i_see_prov_spend_a"],
           ["what_spending_is_included_q", "what_spending_is_included_a"],
-          level === "dept" && [
+          subject_type === "dept" && [
             "different_org_names_q",
             "different_org_names_a",
           ],
@@ -73,8 +73,8 @@ export const declare_financial_key_concepts_panel = () =>
 export const declare_results_key_concepts_panel = () =>
   declare_panel({
     panel_key: "results_key_concepts",
-    levels: ["gov", "dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [
@@ -83,7 +83,7 @@ export const declare_results_key_concepts_panel = () =>
           ["what_is_a_drf_q", "what_is_a_drf_a"],
           ["how_do_orgs_measure_perf_q", "how_do_orgs_measure_perf_a"],
           ["what_are_DPs_and_DRRs_q", "what_are_DPs_and_DRRs_a"],
-          level === "dept" && [
+          subject_type === "dept" && [
             "different_org_names_q",
             "different_org_names_a",
           ],
@@ -95,8 +95,8 @@ export const declare_results_key_concepts_panel = () =>
 export const declare_people_key_concepts_panel = () =>
   declare_panel({
     panel_key: "people_key_concepts",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [
@@ -104,7 +104,7 @@ export const declare_people_key_concepts_panel = () =>
           ["what_ppl_are_included_q", "what_ppl_are_included_a"],
           ["what_ppl_arent_included_q", "what_ppl_arent_included_a"],
           ["where_is_data_q", "where_is_data_a"],
-          level === "dept" && [
+          subject_type === "dept" && [
             "different_org_names_q",
             "different_org_names_a",
           ],
@@ -116,8 +116,8 @@ export const declare_people_key_concepts_panel = () =>
 export const declare_tagging_key_concepts_panel = () =>
   declare_panel({
     panel_key: "tagging_key_concepts",
-    levels: ["tag"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["tag"],
+    panel_config_func: (subject_type, panel_key) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [

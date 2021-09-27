@@ -48,8 +48,8 @@ const revenue_formatter = (value, custom_color = null) => (
 export const declare_dp_rev_split_panel = () =>
   declare_panel({
     panel_key: "dp_rev_split",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["programSpending"],
       title: text_maker("dp_rev_split_title"),
       machinery_footnotes: false,

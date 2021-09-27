@@ -44,10 +44,10 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
 
     const description_term = trivial_text_maker("description");
 
-    switch (subject.level) {
+    switch (subject.subject_type) {
       case "tag": {
-        if (!subject.is_lowest_level_tag) {
-          throw new Error("Only lowest_level_tag tags allowed here");
+        if (!subject.is_lowest_subject_type_tag) {
+          throw new Error("Only lowest_subject_type_tag tags allowed here");
         }
 
         return _.chain(subject.programs)
@@ -141,7 +141,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
   const flat_nodes = filter_hierarchy(
     unfiltered_flat_nodes,
     (node) =>
-      _.get(node, "data.subject.level") === "program" &&
+      _.get(node, "data.subject.subject_type") === "program" &&
       !_.isEmpty(_.get(node, "data.resources")),
     { markSearchResults: false, leaves_only: false }
   );

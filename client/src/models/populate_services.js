@@ -129,10 +129,10 @@ query($lang: String!) {
 }
 `;
 
-const get_subject_has_services_query = (level, id_arg_name) => gql`
+const get_subject_has_services_query = (subject_type, id_arg_name) => gql`
 query($lang: String! $id: String) {
   root(lang: $lang) {
-    ${level}(${id_arg_name}: $id){
+    ${subject_type}(${id_arg_name}: $id){
       id
       has_services
     }
@@ -141,7 +141,7 @@ query($lang: String! $id: String) {
 `;
 
 export const api_load_has_services = (subject) => {
-  const level = subject && subject.level;
+  const subject_type = subject && subject.subject_type;
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
     const has_services_is_loaded = (() => {
@@ -153,7 +153,7 @@ export const api_load_has_services = (subject) => {
       return true;
     })();
 
-    switch (level) {
+    switch (subject_type) {
       case "dept":
         return {
           is_loaded: has_services_is_loaded,
@@ -225,20 +225,20 @@ export const api_load_has_services = (subject) => {
 };
 const get_services_query = (query_options) => {
   const { subject, query_fragments } = query_options;
-  const query_lookup_by_subject_level = {
+  const query_lookup_by_subject_type = {
     gov: all_services_query,
     dept: dept_services_query,
     program: program_services_query,
   };
-  return query_lookup_by_subject_level[subject.level](query_fragments);
+  return query_lookup_by_subject_type[subject.subject_type](query_fragments);
 };
 
-const get_query_appropirate_level = (subject) =>
-  subject.level === "dept" ? "org" : subject.level;
+const get_query_appropirate_subject_type = (subject) =>
+  subject.subject_type === "dept" ? "org" : subject.subject_type;
 
 const get_summary_query = (query_options) => {
   const { subject, query_fragment } = query_options;
-  const query_by_level = {
+  const query_by_subject_type = {
     gov: "gov",
     dept: `org(org_id: "${subject.id}")`,
     program: `program(id: "${subject.id}")`,
@@ -246,7 +246,7 @@ const get_summary_query = (query_options) => {
   return gql`
   query($lang: String!) {
     root(lang: $lang) {
-      ${query_by_level[subject.level]} {
+      ${query_by_subject_type[subject.subject_type]} {
         id
         service_summary {
           id
@@ -314,8 +314,8 @@ export const useSummaryServices = (query_options) => {
     throw new Error(error);
   }
   if (!loading) {
-    const level = get_query_appropirate_level(subject);
-    return { ...res, data: data.root[level].service_summary };
+    const subject_type = get_query_appropirate_subject_type(subject);
+    return { ...res, data: data.root[subject_type].service_summary };
   }
   return res;
 };
@@ -341,13 +341,13 @@ export const useServices = (query_options) => {
     throw new Error(error);
   }
   if (!loading) {
-    const data_path_by_subject_level = {
+    const data_path_by_subject_type = {
       gov: (data) => data.root.orgs,
       dept: (data) => data.root.org.services,
       program: (data) => data.root.program.services,
     };
 
-    const res_data = data_path_by_subject_level[subject.level](data);
+    const res_data = data_path_by_subject_type[subject.subject_type](data);
     const services = is_gov
       ? _.chain(res_data).flatMap("services").compact().uniqBy("id").value()
       : res_data;

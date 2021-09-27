@@ -18,10 +18,10 @@ import {
 
 const result_doc_keys = get_result_doc_keys();
 
-const has_results_query = (level, id_key) => gql`
+const has_results_query = (subject_type, id_key) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
-    ${level}(${id_key}: $id) {
+    ${subject_type}(${id_key}: $id) {
       id
       has_results
     }
@@ -44,7 +44,8 @@ export const subject_has_results = (subject) => {
   } else {
     const { id } = subject;
 
-    const level = subject.level === "dept" ? "org" : subject.level;
+    const subject_type =
+      subject.subject_type === "dept" ? "org" : subject.subject_type;
 
     if (
       !_.isUndefined(subject.is_internal_service) &&
@@ -61,18 +62,19 @@ export const subject_has_results = (subject) => {
       const time_at_request = Date.now();
       const client = get_client();
 
-      const id_key = level === "org" ? "org_id" : "id";
+      const id_key = subject_type === "org" ? "org_id" : "id";
 
       return client
         .query({
-          query: has_results_query(level, id_key),
+          query: has_results_query(subject_type, id_key),
           variables: { lang: lang, id: String(id) },
           _query_name: "has_results",
         })
         .then((response) => {
           const resp_time = Date.now() - time_at_request;
 
-          const has_results = response && response.data.root[level].has_results;
+          const has_results =
+            response && response.data.root[subject_type].has_results;
 
           if (_.isBoolean(has_results)) {
             log_standard_event({
@@ -300,22 +302,26 @@ function extract_flat_data_from_results_hierarchies(
 export function api_load_results_bundle(subject, result_docs) {
   const docs_to_load = !_.isEmpty(result_docs) ? result_docs : result_doc_keys;
 
-  const level = (subject && subject.level) || "all";
+  const subject_type = (subject && subject.subject_type) || "all";
 
   const { is_loaded, id, query, response_data_accessor } = (() => {
-    const subject_is_loaded = ({ level, id }) =>
+    const subject_is_loaded = ({ subject_type, id }) =>
       _.every(docs_to_load, (doc) =>
-        _.get(_api_subject_ids_with_loaded_results, `${doc}.${level}.${id}`)
+        _.get(
+          _api_subject_ids_with_loaded_results,
+          `${doc}.${subject_type}.${id}`
+        )
       );
 
-    const all_is_loaded = () => subject_is_loaded({ level: "all", id: "all" });
+    const all_is_loaded = () =>
+      subject_is_loaded({ subject_type: "all", id: "all" });
     const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
     const crso_is_loaded = (crso) =>
       dept_is_loaded(crso.dept) || subject_is_loaded(crso);
     const program_is_loaded = (program) =>
       crso_is_loaded(program.crso) || subject_is_loaded(program);
 
-    switch (level) {
+    switch (subject_type) {
       case "program":
         return {
           is_loaded: program_is_loaded(subject),
@@ -397,7 +403,7 @@ export function api_load_results_bundle(subject, result_docs) {
         (doc) => {
           _.setWith(
             _api_subject_ids_with_loaded_results,
-            `${doc}.${level}.${id}`,
+            `${doc}.${subject_type}.${id}`,
             true,
             Object
           );

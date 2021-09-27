@@ -380,8 +380,8 @@ const get_calculate_func = (is_fte) => {
 export const declare_crso_by_prog_fte_panel = () =>
   declare_panel({
     panel_key: "crso_by_prog_fte",
-    levels: ["crso"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["crso"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: ["PLANNED_FTE", "FTE"],
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("crso_by_prog_fte_title"),
@@ -392,8 +392,8 @@ export const declare_crso_by_prog_fte_panel = () =>
 export const declare_crso_by_prog_exp_panel = () =>
   declare_panel({
     panel_key: "crso_by_prog_exp",
-    levels: ["crso"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["crso"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: ["PLANNED_EXP", "EXP"],
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("crso_by_prog_exp_title"),

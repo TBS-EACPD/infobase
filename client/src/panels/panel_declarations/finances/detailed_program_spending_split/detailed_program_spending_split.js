@@ -433,8 +433,8 @@ class DetailedProgramSplit extends React.Component {
 export const declare_detailed_program_spending_split_panel = () =>
   declare_panel({
     panel_key: "detailed_program_spending_split",
-    levels: ["dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["programSobjs", "programSpending"],
       title: text_maker("detailed_program_spending_split_title"),
       footnotes: footnote_topics,
@@ -472,7 +472,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           .value();
 
         //maps so_nums to new so_labels
-        const higher_level_mapping = (so_num) => {
+        const higher_subject_type_mapping = (so_num) => {
           if (+so_num > 19) {
             return text_maker("revenues");
           } else if (_.includes(top_3_so_nums, +so_num)) {
@@ -532,7 +532,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           text_calculations,
           top_3_so_nums,
           flat_data,
-          higher_level_mapping,
+          higher_subject_type_mapping,
           processed_spending_data,
           program_footnotes,
         };
@@ -543,7 +543,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           panel_args: {
             text_calculations,
             flat_data,
-            higher_level_mapping,
+            higher_subject_type_mapping,
             top_3_so_nums,
             processed_spending_data,
             program_footnotes,
@@ -557,7 +557,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           {
             label: text_maker("all"),
             id: text_maker("all"),
-            mapping: (so_num) => higher_level_mapping(so_num),
+            mapping: (so_num) => higher_subject_type_mapping(so_num),
           },
         ].concat(
           _.chain(flat_data)

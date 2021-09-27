@@ -43,8 +43,8 @@ const get_non_col_content = ({ node }) => {
       )}
       {
         //only tags with programs (i.e. not tags that are just group of tags) have infographics
-        (_.includes(["program", "dept", "crso"], subject.level) ||
-          (subject.level === "tag" && !_.isEmpty(subject.programs))) && (
+        (_.includes(["program", "dept", "crso"], subject.subject_type) ||
+          (subject.subject_type === "tag" && !_.isEmpty(subject.programs))) && (
           <div className="ExplorerNode__BRLinkContainer">
             <a href={infograph_href_template(subject)}>
               <TM k="see_infographic" />

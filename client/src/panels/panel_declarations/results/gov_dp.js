@@ -71,8 +71,8 @@ const DpSummary = ({
 export const declare_gov_dp_panel = () =>
   declare_panel({
     panel_key: "gov_dp",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       requires_result_counts: true,
       title: text_maker("gov_dp_summary_title", {
         year: current_dp_year,

@@ -42,8 +42,8 @@ const render_w_options =
 export const declare_vote_stat_split_panel = () =>
   declare_panel({
     panel_key: "vote_stat_split",
-    levels: ["program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["program"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["programVoteStat"],
       footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],

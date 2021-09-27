@@ -43,7 +43,7 @@ class Panel_ extends React.Component {
     const subject = context && context.subject;
 
     const file_name_context = subject
-      ? subject.level === "dept"
+      ? subject.subject_type === "dept"
         ? subject.dept_code
         : subject.id
       : "";
@@ -61,9 +61,9 @@ class Panel_ extends React.Component {
       );
 
     const share_modal_subject_fragment = subject
-      ? (subject.level === "tag" || subject.level === "gov"
+      ? (subject.subject_type === "tag" || subject.subject_type === "gov"
           ? subject.name
-          : subject.level === "dept"
+          : subject.subject_type === "dept"
           ? subject.abbr
           : `${subject.dept.abbr} - ${subject.name}`) + " — "
       : "";

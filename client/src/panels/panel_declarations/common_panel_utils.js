@@ -4,14 +4,14 @@ import { Table } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
-const declare_panel = ({ panel_key, levels, panel_config_func }) => {
+const declare_panel = ({ panel_key, subject_types, panel_config_func }) => {
   if (!PanelRegistry.is_registered_panel_key(panel_key)) {
-    levels.forEach(
-      (level) =>
+    subject_types.forEach(
+      (subject_type) =>
         new PanelRegistry({
-          level,
+          subject_type,
           key: panel_key,
-          ...panel_config_func(level, panel_key),
+          ...panel_config_func(subject_type, panel_key),
         })
     );
   }

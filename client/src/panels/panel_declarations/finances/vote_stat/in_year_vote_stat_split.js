@@ -75,9 +75,9 @@ const common_panel_config = {
 export const declare_in_year_voted_stat_split_panel = () =>
   declare_panel({
     panel_key: "in_year_voted_stat_split",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "gov":
           return {
             ...common_panel_config,

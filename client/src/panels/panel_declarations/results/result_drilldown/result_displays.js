@@ -52,19 +52,19 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
     .value();
 
   let text_key = "";
-  if (subject.level === "dept") {
+  if (subject.subject_type === "dept") {
     if (/drr/.test(doc)) {
       text_key = "result_counts_drr_dept";
     } else {
       text_key = "result_counts_dp_dept";
     }
-  } else if (subject.level === "program") {
+  } else if (subject.subject_type === "program") {
     if (/drr/.test(doc)) {
       text_key = "result_counts_drr_prog";
     } else {
       text_key = "result_counts_dp_prog";
     }
-  } else if (subject.level === "crso") {
+  } else if (subject.subject_type === "crso") {
     //we only care about CRs, which are only DP
     text_key = "result_counts_dp_cr";
   }

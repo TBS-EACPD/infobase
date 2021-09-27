@@ -385,16 +385,16 @@ const render = ({ title, calculations, footnotes, sources }) => {
 export const declare_drr_summary_panel = () =>
   declare_panel({
     panel_key: "drr_summary",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
-      requires_result_counts: level === "dept",
-      requires_granular_result_counts: level !== "dept",
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
+      requires_result_counts: subject_type === "dept",
+      requires_granular_result_counts: subject_type !== "dept",
       footnotes: ["RESULTS", "DRR"],
       source: (subject) => get_source_links(["DRR"]),
       title: text_maker("drr_summary_title", { year: current_drr_year }),
       calculate(subject) {
         const verbose_counts = (() => {
-          switch (level) {
+          switch (subject_type) {
             case "dept":
               return ResultCounts.get_dept_counts(subject.id);
             case "crso":

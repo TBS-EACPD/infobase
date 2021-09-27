@@ -21,8 +21,8 @@ const panel_key = "covid_key_concepts";
 export const declare_covid_key_concepts_panel = () =>
   declare_panel({
     panel_key,
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       is_static: true,
       footnotes: false,
       source: false,

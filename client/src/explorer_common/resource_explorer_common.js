@@ -18,7 +18,7 @@ const pick_table = (type) =>
 const get_rows_for_subject_from_table = _.memoize(
   (subject, type, year) => {
     const table = pick_table(type);
-    if (subject.level === "program") {
+    if (subject.subject_type === "program") {
       const rows_or_record = table.programs.get(subject);
       if (!rows_or_record) {
         return null;
@@ -30,7 +30,7 @@ const get_rows_for_subject_from_table = _.memoize(
       }
     } else if (
       is_planning_year(year) &&
-      _.includes(["dept", "crso"], subject.level)
+      _.includes(["dept", "crso"], subject.subject_type)
     ) {
       return table.q(subject).data;
     } else if (!_.isEmpty(subject.programs)) {
@@ -38,7 +38,7 @@ const get_rows_for_subject_from_table = _.memoize(
         .map((prog) => get_rows_for_subject_from_table(prog, type, year))
         .flatten()
         .value();
-    } else if (subject.level === "ministry") {
+    } else if (subject.subject_type === "ministry") {
       return _.chain(subject.orgs)
         .map((org) => get_rows_for_subject_from_table(org, type, year))
         .flatten(true)

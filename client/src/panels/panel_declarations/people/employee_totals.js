@@ -30,10 +30,10 @@ const { people_years, people_years_short_second } = year_templates;
 export const declare_employee_totals_panel = () =>
   declare_panel({
     panel_key: "employee_totals",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgEmployeeType"],
-      title: text_maker(level + "_employee_totals_title"),
+      title: text_maker(subject_type + "_employee_totals_title"),
       calculate(subject) {
         const { orgEmployeeType } = this.tables;
         const q = orgEmployeeType.q(subject);
@@ -85,7 +85,7 @@ export const declare_employee_totals_panel = () =>
           <StdPanel {...{ title, footnotes, sources }}>
             <Col size={4} isText>
               <TM
-                k={level + "_employee_totals_text"}
+                k={subject_type + "_employee_totals_text"}
                 args={text_calculations}
               />
             </Col>

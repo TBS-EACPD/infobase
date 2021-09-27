@@ -12,7 +12,7 @@ const rpb_link = (naive_state, first_character = "#") =>
       return {
         ...obj,
         table: table && table.is_table ? table.id : table,
-        subject: subject && subject.level ? subject.guid : subject,
+        subject: subject && subject.subject_type ? subject.guid : subject,
         columns:
           _.first(columns) && _.first(columns).nick
             ? _.map(columns, "nick")
@@ -35,8 +35,8 @@ const rpb_link = (naive_state, first_character = "#") =>
 
 const get_appropriate_rpb_subject = (subject) => {
   let appropriate_subject = subject;
-  if (_.includes(["program", "crso"], subject.level)) {
-    //rpb is useless at the crso/program level
+  if (_.includes(["program", "crso"], subject.subject_type)) {
+    //rpb is useless for the crso/program subject_type
     appropriate_subject = subject.dept;
   } else if (subject.subject_type === "tag") {
     appropriate_subject = Gov;

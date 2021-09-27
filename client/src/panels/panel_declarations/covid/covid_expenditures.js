@@ -250,12 +250,12 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .last()
       .value();
 
-    const subject_level = panel_args.subject.level;
+    const subject_subject_type = panel_args.subject.subject_type;
     const text_args = {
       ...panel_args,
       largest_measure_name,
       largest_measure_exp,
-      ...(subject_level === "dept" && {
+      ...(subject_subject_type === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
           data,
           (memo, { vote, stat }) => memo + vote + stat,
@@ -265,9 +265,9 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     };
     return (
       <Fragment>
-        {subject_level === "dept"}
+        {subject_subject_type === "dept"}
         <TM
-          k={`covid_expenditures_measure_tab_text_${subject_level}`}
+          k={`covid_expenditures_measure_tab_text_${subject_subject_type}`}
           args={text_args}
           className="medium-panel-text"
         />
@@ -287,7 +287,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
 const tab_content_configs = [
   {
     key: "summary",
-    levels: ["gov"],
+    subject_types: ["gov"],
     label: text_maker("summary_tab_label"),
     load_data: ({ selected_year }) =>
       query_top_covid_spending({ fiscal_year: selected_year }),
@@ -295,7 +295,7 @@ const tab_content_configs = [
   },
   {
     key: "department",
-    levels: ["gov"],
+    subject_types: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ selected_year }) =>
       query_all_covid_expenditures_by_measure_id({
@@ -305,11 +305,11 @@ const tab_content_configs = [
   },
   {
     key: "measure",
-    levels: ["gov", "dept"],
+    subject_types: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
     load_data: ({ subject, selected_year }) =>
       (() => {
-        if (subject.level === "dept") {
+        if (subject.subject_type === "dept") {
           return query_org_covid_expenditures_by_measure_id({
             org_id: String(subject.id),
             fiscal_year: selected_year,
@@ -416,8 +416,8 @@ class CovidExpendituresPanel extends React.Component {
 export const declare_covid_expenditures_panel = () =>
   declare_panel({
     panel_key,
-    levels: ["gov", "dept"],
-    panel_config_func: (level_name, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type_name, panel_key) => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
       title: text_maker("covid_expenditures_estimated_exp"),

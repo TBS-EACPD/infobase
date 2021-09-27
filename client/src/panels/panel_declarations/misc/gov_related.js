@@ -15,9 +15,9 @@ const text_maker = create_text_maker(text);
 export const declare_gov_related_info_panel = () =>
   declare_panel({
     panel_key: "gov_related_info",
-    levels: ["gov"],
+    subject_types: ["gov"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("gov_related_info_title"),

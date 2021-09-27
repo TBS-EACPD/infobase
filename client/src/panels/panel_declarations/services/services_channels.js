@@ -244,8 +244,8 @@ const ServicesChannelsPanel = ({ subject }) => {
 export const declare_services_channels_panel = () =>
   declare_panel({
     panel_key: "services_channels",
-    levels: ["gov", "dept", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("services_channels_title"),
       footnotes: false,
       render({ title, calculations, sources }) {

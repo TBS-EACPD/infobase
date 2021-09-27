@@ -68,7 +68,7 @@ const org_templates = {
   header_function: () => trivial_text_maker("orgs"),
   name_function: (org) => org.name,
   menu_content_function: function (org, search) {
-    if (org.level === "gov") {
+    if (org.subject_type === "gov") {
       return (
         <InfoBaseHighlighter
           search={search}

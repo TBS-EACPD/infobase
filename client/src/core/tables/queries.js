@@ -19,7 +19,7 @@ class Queries {
   constructor(table, data, subject) {
     this.table = table;
     this.lang = lang;
-    this.dept = subject && subject.level === "dept" && subject.id;
+    this.dept = subject && subject.subject_type === "dept" && subject.id;
     this.subject = subject;
     this.data = data;
     _.extend(this, table.queries);
@@ -283,12 +283,12 @@ function query_adapter(subject) {
     subject = Dept.store.lookup(subject);
   }
   // work around for new subject data structures
-  if (subject && subject.level === "gov") {
+  if (subject && subject.subject_type === "gov") {
     subject = undefined;
   } else if (
     this.programs &&
     subject &&
-    _.includes(["tag", "crso"], subject.level)
+    _.includes(["tag", "crso"], subject.subject_type)
   ) {
     const rows = _.chain(subject.programs)
       .map((program) => this.programs.get(program))
@@ -296,10 +296,10 @@ function query_adapter(subject) {
       .compact()
       .value();
     return new Queries(this, rows, subject);
-  } else if (this.programs && subject && subject.level === "program") {
+  } else if (this.programs && subject && subject.subject_type === "program") {
     const rows = this.programs.get(subject) || [];
     return new Queries(this, rows, subject);
-  } else if (this.crs && "crso" === subject.level) {
+  } else if (this.crs && "crso" === subject.subject_type) {
     const rows = this.crs.get(subject);
     return new Queries(this, rows, subject);
   }

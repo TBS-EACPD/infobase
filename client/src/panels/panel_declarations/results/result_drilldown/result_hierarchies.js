@@ -38,8 +38,11 @@ export function create_full_results_hierarchy({
   const root_subject = get_subject_by_guid(subject_guid);
   let root;
   if (root_subject) {
-    const root_type = _.includes(["program", "dept", "tag"], root_subject.level)
-      ? root_subject.level
+    const root_type = _.includes(
+      ["program", "dept", "tag"],
+      root_subject.subject_type
+    )
+      ? root_subject.subject_type
       : //it's a CRSO
       root_subject.is_cr
       ? "cr"

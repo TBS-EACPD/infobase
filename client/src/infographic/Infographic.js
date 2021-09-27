@@ -57,14 +57,14 @@ class AnalyticsSynchronizer extends React.Component {
     return !shallowEqualObjectsOverKeys(this.props, nextProps, [
       "subject",
       "active_bubble_id",
-      "level",
+      "subject_type",
     ]);
   }
 
   _logAnalytics() {
     const {
       active_bubble_id,
-      level,
+      subject_type,
       subject: { guid },
     } = this.props;
 
@@ -73,7 +73,7 @@ class AnalyticsSynchronizer extends React.Component {
     log_standard_event({
       SUBAPP: sub_app_name,
       SUBJECT_GUID: guid,
-      MISC1: level,
+      MISC1: subject_type,
       MISC2: active_bubble_id,
     });
   }
@@ -85,11 +85,11 @@ function reset_scroll() {
 const get_default_state_from_props = ({
   subject,
   active_bubble_id,
-  level,
+  subject_type,
 }) => ({
   subject,
   active_bubble_id,
-  level,
+  subject_type,
   loading: true,
   panel_filter: _.identity,
   subject_bubble_defs: null,
@@ -106,7 +106,7 @@ class InfoGraph_ extends React.Component {
     const should_reload = !shallowEqualObjectsOverKeys(nextProps, prevState, [
       "subject",
       "active_bubble_id",
-      "level",
+      "subject_type",
     ]);
 
     if (should_reload) {
@@ -253,7 +253,7 @@ class InfoGraph_ extends React.Component {
           <TableOfContents
             panel_titles_by_key={_.chain(filtered_panel_keys)
               .map((panel_key) =>
-                PanelRegistry.lookup(panel_key, subject.level)
+                PanelRegistry.lookup(panel_key, subject.subject_type)
               )
               .filter((panel) => !panel.is_static)
               .map((panel) => [panel.key, panel.get_title(subject)])
@@ -307,7 +307,7 @@ class InfoGraph_ extends React.Component {
       </div>
     );
   }
-  load({ subject, level, active_bubble_id }) {
+  load({ subject, subject_type, active_bubble_id }) {
     return get_panels_for_subject(subject).then(
       (subject_panels_by_bubble_id) => {
         const subject_bubble_defs = _.filter(
@@ -334,7 +334,7 @@ class InfoGraph_ extends React.Component {
 
           return ensure_loaded({
             panel_keys: potential_panel_keys,
-            subject_level: level,
+            subject_type,
             subject: subject,
             footnotes_for: subject,
           }).then(() => {
@@ -349,7 +349,7 @@ class InfoGraph_ extends React.Component {
               (panel_key) =>
                 PanelRegistry.lookup(
                   panel_key,
-                  level
+                  subject_type
                 ).is_panel_valid_for_subject(subject)
             );
 
@@ -372,26 +372,26 @@ const is_fake_infographic = (subject) =>
   !_.isUndefined(subject.is_fake) && subject.is_fake;
 const Infographic = ({
   match: {
-    params: { level, subject_id, active_bubble_id, options },
+    params: { subject_type, subject_id, active_bubble_id, options },
   },
   history: { replace },
 }) => {
-  const is_level_valid = _.chain(Subject)
+  const is_subject_type_valid = _.chain(Subject)
     .toArray()
     .map("subject_type")
-    .includes(level)
+    .includes(subject_type)
     .value();
-  if (!is_level_valid) {
+  if (!is_subject_type_valid) {
     return redirect_with_msg(
-      text_maker("invalid_redirect_home", { param: level }),
+      text_maker("invalid_redirect_home", { param: subject_type }),
       "#home"
     );
   }
 
-  const subject = get_subject_by_guid(`${level}_${subject_id}`);
+  const subject = get_subject_by_guid(`${subject_type}_${subject_id}`);
 
   if (!subject) {
-    if (level === "program" || level === "crso") {
+    if (subject_type === "program" || subject_type === "crso") {
       const potential_parent_dept_code = _.split(subject_id, "-")[0];
       const has_parent_dept = Dept.store.has(potential_parent_dept_code);
       if (has_parent_dept) {
@@ -411,7 +411,7 @@ const Infographic = ({
     );
   } else if (is_fake_infographic(subject)) {
     const subject_parent = (() => {
-      switch (level) {
+      switch (subject_type) {
         case "program":
           return subject.crso;
         case "crso":
@@ -446,7 +446,7 @@ const Infographic = ({
         ))
         .concat(subject.name)
         .value();
-    switch (level) {
+    switch (subject_type) {
       case "dept": {
         return get_breadcrumbs([Gov]);
       }
@@ -475,7 +475,7 @@ const Infographic = ({
     >
       <h1 dangerouslySetInnerHTML={{ __html: title }} />
       <InfoGraph_
-        level={level}
+        subject_type={subject_type}
         subject={subject}
         active_bubble_id={bubble_id}
         options={options}

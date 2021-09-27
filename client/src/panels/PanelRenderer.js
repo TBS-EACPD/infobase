@@ -12,7 +12,7 @@ export const PanelRenderer = withRouter(
     render() {
       let { subject, panel_key, history, active_bubble_id } = this.props;
 
-      const panel_obj = PanelRegistry.lookup(panel_key, subject.level);
+      const panel_obj = PanelRegistry.lookup(panel_key, subject.subject_type);
 
       const panel_options = { history };
 

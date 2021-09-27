@@ -58,13 +58,16 @@ const get_dynamic_footnotes = () => {
         }
       };
 
-      const get_text_key_for_doc_type_and_level = (doc_type, level) => {
+      const get_text_key_for_doc_type_and_subject_type = (
+        doc_type,
+        subject_type
+      ) => {
         const warning_topic =
           result_or_resource === "results"
             ? "results"
             : `${doc_type === "dp" ? "planned" : "actual"}_resources`;
 
-        return `late_${warning_topic}_warning_${level}`;
+        return `late_${warning_topic}_warning_${subject_type}`;
       };
 
       const late_org_property = `late_${result_or_resource}_orgs`;
@@ -110,9 +113,12 @@ const get_dynamic_footnotes = () => {
           subject: Gov,
           topic_keys: get_topic_keys_for_doc_type(doc_type),
           text: `<p>
-            ${text_maker(get_text_key_for_doc_type_and_level(doc_type, "gov"), {
-              result_doc_name: text_maker(`${doc_type}_name`, { year }),
-            })}
+            ${text_maker(
+              get_text_key_for_doc_type_and_subject_type(doc_type, "gov"),
+              {
+                result_doc_name: text_maker(`${doc_type}_name`, { year }),
+              }
+            )}
             </p>
             <ul>
             ${_.reduce(
@@ -135,7 +141,10 @@ const get_dynamic_footnotes = () => {
               subject,
               topic_keys: get_topic_keys_for_doc_type(doc_type),
               text: text_maker(
-                get_text_key_for_doc_type_and_level(doc_type, subject.level),
+                get_text_key_for_doc_type_and_subject_type(
+                  doc_type,
+                  subject.subject_type
+                ),
                 {
                   result_doc_name: text_maker(`${doc_type}_name`, { year }),
                 }

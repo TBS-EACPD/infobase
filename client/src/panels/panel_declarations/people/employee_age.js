@@ -32,7 +32,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { age_groups } = businessConstants;
 
-const calculate_funcs_by_level = {
+const calculate_funcs_by_subject_type = {
   gov: function (gov) {
     const { orgEmployeeAgeGroup } = this.tables;
     const { orgEmployeeAvgAge } = this.tables;
@@ -111,10 +111,10 @@ const calculate_funcs_by_level = {
 export const declare_employee_age_panel = () =>
   declare_panel({
     panel_key: "employee_age",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgEmployeeAgeGroup", "orgEmployeeAvgAge"],
-      calculate: calculate_funcs_by_level[level],
+      calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_age_title"),
       render({ title, calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
@@ -198,7 +198,10 @@ export const declare_employee_age_panel = () =>
         return (
           <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
             <Col size={12} isText>
-              <TM k={level + "_employee_age_text"} args={text_calculations} />
+              <TM
+                k={subject_type + "_employee_age_text"}
+                args={text_calculations}
+              />
             </Col>
             <Col size={12} isGraph extraClasses="zero-padding">
               <TabbedContent

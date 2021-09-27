@@ -26,7 +26,7 @@ const est_in_year_col = "{{est_in_year}}_estimates";
 const estimates_split_calculate = function (subject) {
   const { orgVoteStatEstimates } = this.tables;
   const q = orgVoteStatEstimates.q(subject);
-  const dept_id = subject.level === "gov" ? false : subject.id;
+  const dept_id = subject.subject_type === "gov" ? false : subject.id;
 
   const in_year_estimates_split = _.chain(
     orgVoteStatEstimates.by_estimates_doc(est_in_year_col, dept_id, false)
@@ -126,9 +126,9 @@ const common_panel_config = {
 export const declare_in_year_estimates_split_panel = () =>
   declare_panel({
     panel_key: "in_year_estimates_split",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "gov":
           return {
             ...common_panel_config,

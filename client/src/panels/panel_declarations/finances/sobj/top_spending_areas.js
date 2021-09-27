@@ -71,8 +71,8 @@ const render_w_options =
 export const declare_top_spending_areas_panel = () =>
   declare_panel({
     panel_key: "top_spending_areas",
-    levels: ["program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["program"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["programSobjs"],
       footnotes: ["SOBJ"],
       title: text_maker("top_spending_areas_title"),

@@ -67,7 +67,7 @@ export const HierarchyPeek = ({ root }) => {
   const limited_data_elements = has_elements_with_limited_data(root);
   const dead_elements = has_dead_elements(root);
 
-  // Legend text selection is based on the assumption that only the external org hierarchy (panel in org level about panel) can
+  // Legend text selection is based on the assumption that only the external org hierarchy (panel in org subject_type about panel) can
   // have items with limited data. If that changes, the legend text selection here will likely become inaccurate. Dealing
   // with this better's a TODO
   return (
@@ -98,7 +98,7 @@ const _HierarchyPeek = ({ root }) => (
         <span className={classNames(root.dead && "dead-element")}>
           {root.href ? (
             <a href={root.href}>
-              {root.level === "crso"
+              {root.subject_type === "crso"
                 ? root.is_cr && !root.dead
                   ? lang == "en"
                     ? `Core Responsibility : ${root.name}`
@@ -276,7 +276,7 @@ export const program_hierarchy = ({
 };
 
 /* 
-  the following is hacky because we don't know how many levels there are between a tag and government.
+  the following is hacky because we don't know how many subject_types there are between a tag and government.
 */
 export const tag_hierarchy = ({
   subject,
@@ -349,17 +349,17 @@ export const crso_hierarchy = ({
       {
         //ministry
         name: `${subject.dept.ministry.name} (${text_maker("ministry")})`,
-        level: "ministry",
+        subject_type: "ministry",
         children: [
           {
             //dept
             name: subject.dept.name,
             href: href_generator(subject.dept),
-            level: subject.dept.level,
+            subject_type: subject.dept.subject_type,
             //crso
             children: _.chain(subject.dept.crsos)
               .map((crso) => ({
-                level: crso.level,
+                subject_type: crso.subject_type,
                 name: crso.name,
                 is_cr: crso.is_cr,
                 href: crso.is_cr && href_generator(crso),
@@ -369,7 +369,7 @@ export const crso_hierarchy = ({
                 children: _.chain(crso.programs)
                   .filter((program) => !program.is_fake)
                   .map((prg) => ({
-                    level: prg.level,
+                    subject_type: prg.subject_type,
                     name: prg.name,
                     href: href_generator(prg),
                     dead: prg.is_dead,
@@ -393,17 +393,17 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
     {
       //ministry
       name: `${subject.dept.ministry.name} (${text_maker("ministry")})`,
-      level: "ministry",
+      subject_type: "ministry",
       children: [
         {
           //dept
           name: subject.dept.name,
           href: href_generator(subject.dept),
-          level: subject.dept.level,
+          subject_type: subject.dept.subject_type,
           children: [
             {
               //crso
-              level: subject.level,
+              subject_type: subject.subject_type,
               name: subject.name,
               current_subject: true,
               is_cr: subject.is_cr,
@@ -412,7 +412,7 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
               children: _.chain(subject.programs)
                 .filter((program) => !program.is_fake)
                 .map((prg) => ({
-                  level: prg.level,
+                  subject_type: prg.subject_type,
                   name: prg.name,
                   href: href_generator(prg),
                   dead: !prg.is_active,
@@ -437,18 +437,18 @@ export const crso_gov_hierarchy = ({ subject, href_generator }) => {
       {
         //ministry
         name: `${subject.dept.ministry.name} (${text_maker("ministry")})`,
-        level: "ministry",
+        subject_type: "ministry",
         children: [
           {
             //dept
             name: subject.dept.name,
             href: href_generator(subject.dept),
-            level: subject.dept.level,
+            subject_type: subject.dept.subject_type,
             //crso
             children: _.chain(subject.dept.crsos)
               .filter("is_active")
               .map((crso) => ({
-                level: crso.level,
+                subject_type: crso.subject_type,
                 name: crso.name,
                 href: crso.is_cr && href_generator(crso),
                 current_subject: is_subject(crso),

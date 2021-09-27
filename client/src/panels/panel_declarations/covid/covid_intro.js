@@ -123,8 +123,8 @@ class CovidIntroPanelDyanmicText extends React.Component {
 export const declare_covid_intro_panel = () =>
   declare_panel({
     panel_key: "covid_intro",
-    levels: ["gov", "dept"],
-    panel_config_func: (level_name, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type_name, panel_key) => ({
       requires_years_with_covid_data: true,
       footnotes: ["COVID"],
       title: text_maker("covid_intro_panel_title"),

@@ -20,8 +20,8 @@ const { std_years } = year_templates;
 export const declare_personnel_spend_panel = () =>
   declare_panel({
     panel_key: "personnel_spend",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgSobjs"],
       title: text_maker("personnel_spend_title"),
       calculate(subject, data) {

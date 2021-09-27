@@ -19,13 +19,13 @@ const { text_maker, TM } = create_text_maker_component(text);
 export const declare_planned_actual_comparison_panel = () =>
   declare_panel({
     panel_key: "planned_actual_comparison",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("planned_actual_title"),
       source: (subject) => get_source_links(["DP", "DRR", "PA"]),
       calculate(subject) {
-        if (subject.level === "dept") {
+        if (subject.subject_type === "dept") {
           if (!subject.is_dp_org) {
             return false;
           }
@@ -60,7 +60,7 @@ export const declare_planned_actual_comparison_panel = () =>
           actual_spend: actual_spend,
           actual_ftes: actual_ftes,
           program_count_last_year:
-            subject.level === "crso" &&
+            subject.subject_type === "crso" &&
             _.chain(spend_q.data)
               .zip(fte_q.data)
               .filter(
@@ -100,7 +100,7 @@ export const declare_planned_actual_comparison_panel = () =>
         return (
           <TextPanel {...{ title, footnotes, sources }}>
             <TM
-              k={`${subject.level}_planned_actual_text`}
+              k={`${subject.subject_type}_planned_actual_text`}
               args={text_calculations}
             />
             <PlannedActualTable

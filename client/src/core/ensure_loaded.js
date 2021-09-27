@@ -28,7 +28,7 @@ const load_tables = (table_set) =>
 function ensure_loaded({
   table_keys,
   panel_keys,
-  subject_level,
+  subject_type,
   subject,
   has_results,
   results,
@@ -44,7 +44,7 @@ function ensure_loaded({
   const table_set = _.chain(table_keys)
     .union(
       _.chain(panel_keys)
-        .map((key) => tables_for_panel(key, subject_level))
+        .map((key) => tables_for_panel(key, subject_type))
         .flatten()
         .value()
     )
@@ -53,7 +53,7 @@ function ensure_loaded({
     .value();
 
   const panel_set = _.map(panel_keys, (key) =>
-    PanelRegistry.lookup(key, subject_level)
+    PanelRegistry.lookup(key, subject_type)
   );
 
   const check_for_panel_dependency = (dependency_key) =>

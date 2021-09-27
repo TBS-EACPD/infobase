@@ -11,7 +11,7 @@ import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 
 const subjects = _.chain(Subject).toArray().map("subject_type").value();
 
-const create_panel_key = (key, level) => `${key}:${level}`;
+const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 
 const default_args = {
   depends_on: [],
@@ -27,11 +27,13 @@ class PanelRegistry {
     return panels;
   }
 
-  static lookup(key, level) {
-    const lookup = create_panel_key(key, level);
+  static lookup(key, subject_type) {
+    const lookup = create_panel_key(key, subject_type);
     if (is_dev && !panels[lookup]) {
       // eslint-disable-next-line no-console
-      console.error(`bad panel key - ${lookup} for level ${level}`);
+      console.error(
+        `bad panel key - ${lookup} for subject_type ${subject_type}`
+      );
       return null;
     }
     return panels[lookup];
@@ -53,16 +55,16 @@ class PanelRegistry {
     );
   }
 
-  static panels_for_level(level_name) {
-    return _.filter(panels, { level: level_name });
+  static panels_for_subject_type(subject_type_name) {
+    return _.filter(panels, { subject_type: subject_type_name });
   }
 
   static register_instance(instance) {
-    const { key, full_key, level, title, is_static } = instance;
+    const { key, full_key, subject_type, title, is_static } = instance;
 
-    if (!_.includes(subjects, level)) {
+    if (!_.includes(subjects, subject_type)) {
       throw new Error(
-        `panel ${key}'s level (${level}) is not valid; level is required and must correspond to a valid subject.`
+        `panel ${key}'s subject_type (${subject_type}) is not valid; subject_type is required and must correspond to a valid subject.`
       );
     }
     if (!is_static && _.isUndefined(title)) {
@@ -99,7 +101,7 @@ class PanelRegistry {
     this._inner_calculate = def.calculate || (() => true);
     this._inner_render = def.render;
     const to_assign = _.omit(def, ["render", "calculate"]);
-    const full_key = create_panel_key(def.key, def.level);
+    const full_key = create_panel_key(def.key, def.subject_type);
     Object.assign(this, default_args, to_assign, { full_key });
     this.constructor.register_instance(this);
 
@@ -121,15 +123,15 @@ class PanelRegistry {
     return calc_func.call(this, subject, options);
   }
   is_panel_valid_for_subject(subject, options = {}) {
-    //delegates to the proper level's calculate function
-    if (this.level !== subject.level) {
+    //delegates to the proper subject_type's calculate function
+    if (this.subject_type !== subject.subject_type) {
       return false;
     }
     // TODO: this is something panels should handle themselves. Troublesome that the PanelRegistry
     // makes this sort of check for dept tables but not CR or program tables. One way or another, this
     // will go away when we drop tables all together
     if (
-      this.level === "dept" &&
+      this.subject_type === "dept" &&
       this.missing_info !== "ok" &&
       _.some(
         this.depends_on,
@@ -167,7 +169,7 @@ class PanelRegistry {
     } else {
       //if it's undefined we'll make one
       /* eslint-disable-next-line no-use-before-define */
-      return _.chain(tables_for_panel(this.key, subject.level))
+      return _.chain(tables_for_panel(this.key, subject.subject_type))
         .map((table) => Table.store.lookup(table))
         .map((table) => {
           return {
@@ -242,16 +244,16 @@ class PanelRegistry {
   }
 }
 
-function panels_with_key(key, level) {
+function panels_with_key(key, subject_type) {
   let panels = _.filter(PanelRegistry.panels, { key });
-  if (level) {
-    panels = _.filter(panels, { level });
+  if (subject_type) {
+    panels = _.filter(panels, { subject_type });
   }
   return panels;
 }
 
-function tables_for_panel(panel_key, subject_level) {
-  const panel_objs = panels_with_key(panel_key, subject_level);
+function tables_for_panel(panel_key, subject_subject_type) {
+  const panel_objs = panels_with_key(panel_key, subject_subject_type);
   return _.chain(panel_objs).map("depends_on").flatten().uniqBy().value();
 }
 

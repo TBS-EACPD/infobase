@@ -97,7 +97,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
 
   return {
     subject,
-    is_gov: subject.level === "gov",
+    is_gov: subject.subject_type === "gov",
     subject_total_value,
 
     largest_total_prov,
@@ -168,7 +168,7 @@ class TPMap extends React.Component {
 
       const transfer_payments_by_prov = transfer_payments_table.prov_code(
         tp_by_region_years,
-        subject.level === "dept" && subject.id
+        subject.subject_type === "dept" && subject.id
       );
 
       const per_capita_by_prov = _.chain(transfer_payments_by_prov)
@@ -305,15 +305,15 @@ class TPMap extends React.Component {
 export const declare_tp_by_region_panel = () =>
   declare_panel({
     panel_key: "tp_by_region",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgTransferPaymentsRegion"],
       title: text_maker("tp_by_region_title"),
       calculate: function (subject) {
         const { orgTransferPaymentsRegion } = this.tables;
 
         if (
-          subject.level === "dept" &&
+          subject.subject_type === "dept" &&
           !_.has(orgTransferPaymentsRegion.depts, subject.id)
         ) {
           return false;

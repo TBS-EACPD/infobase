@@ -29,7 +29,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 export const declare_internal_services_panel = () =>
   declare_panel({
     panel_key: "internal_services",
-    levels: ["dept"],
+    subject_types: ["dept"],
     panel_config_func: () => ({
       depends_on: ["programFtes"],
       title: text_maker("internal_service_panel_title"),

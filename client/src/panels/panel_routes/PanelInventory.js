@@ -23,7 +23,7 @@ import panel_text from "./PanelInventory.yaml";
 const tm = create_text_maker(panel_text);
 
 function url_template(subject, panel) {
-  return `/panel-inventory/${subject.level}/${panel.key}/${subject.id}`;
+  return `/panel-inventory/${subject.subject_type}/${panel.key}/${subject.id}`;
 }
 
 const defaultSubjectKeys = {
@@ -33,9 +33,9 @@ const defaultSubjectKeys = {
   crso: "TBC-BXA00",
 };
 
-const getSubj = (level, id) => {
+const getSubj = (subject_type, id) => {
   let subject;
-  switch (level) {
+  switch (subject_type) {
     case "dept":
       subject = Dept.store.has(id)
         ? Dept.store.lookup(id)
@@ -63,7 +63,7 @@ const getSubj = (level, id) => {
 };
 
 // Bring back footnotes inventory ??
-// const link_to_footnotes = ( panel_key, level) => `#footnotes/panel/${panel_key}/${level}`;
+// const link_to_footnotes = ( panel_key, subject_type) => `#footnotes/panel/${panel_key}/${subject_type}`;
 
 function panels_of_interest(panel) {
   const { depends_on, key } = panel;
@@ -87,11 +87,11 @@ function panels_of_interest(panel) {
 
 const get_subj = createSelector(
   (props) => _.get(props, "match.params"),
-  ({ level, id }) => {
-    if (_.isEmpty(level)) {
-      level = "gov";
+  ({ subject_type, id }) => {
+    if (_.isEmpty(subject_type)) {
+      subject_type = "gov";
     }
-    return getSubj(level, id);
+    return getSubj(subject_type, id);
   }
 );
 
@@ -100,7 +100,7 @@ const get_panel_obj = createSelector(
   (props) => _.get(props, "match.params.panel"),
   (subject, panel_key) => {
     return panel_key
-      ? PanelRegistry.lookup(panel_key, subject.level)
+      ? PanelRegistry.lookup(panel_key, subject.subject_type)
       : PanelRegistry.lookup("financial_key_concepts", "gov");
   }
 );
@@ -127,7 +127,7 @@ const RelatedInfo = ({ subject, panel, related_panels }) => {
         <thead>
           <tr>
             <th> key </th>
-            <th> level </th>
+            <th> subject_type </th>
             <th> table deps </th>
             <th> notes </th>
             <th> url </th>
@@ -171,14 +171,14 @@ const RelatedInfo = ({ subject, panel, related_panels }) => {
 
 const PanelTableRow = ({ current_subject, panel, className }) => {
   const url =
-    panel.level === current_subject.level
+    panel.subject_type === current_subject.subject_type
       ? url_template(current_subject, panel)
-      : url_template(getSubj(panel.level, current_subject.id), panel);
+      : url_template(getSubj(panel.subject_type, current_subject.id), panel);
 
   return (
     <tr className={className}>
       <td>{panel.key}</td>
-      <td>{panel.level}</td>
+      <td>{panel.subject_type}</td>
       <td>{panel.depends_on.join(", ")}</td>
       <td>{panel.notes}</td>
       <td>
@@ -200,7 +200,7 @@ export default class PanelInventory extends React.Component {
   loadDeps({ subject, panel }) {
     ensure_loaded({
       panel_keys: [panel.key],
-      subject_level: subject.level,
+      subject_type: subject.subject_type,
       subject,
       footnotes_for: subject,
     }).then(() => {
@@ -255,7 +255,7 @@ export default class PanelInventory extends React.Component {
           </div>
           <div>
             <p>{`${tm("selected_subject")}: ${subject.name} (${
-              subject.level
+              subject.subject_type
             })}`}</p>
             <p>{`${tm("selected_panel")}: ${panel.key}`}</p>
           </div>

@@ -12,22 +12,22 @@ import { yearsWithCovidDataStore } from "./yearsWithCovidDataStore";
 
 const _subject_ids_with_loaded_years_with_covid_data = {};
 export const api_load_years_with_covid_data = (subject) => {
-  const { is_loaded, level, id, query } = (() => {
+  const { is_loaded, subject_type, id, query } = (() => {
     const subject_is_loaded = (id) =>
       _.get(_subject_ids_with_loaded_years_with_covid_data, id);
 
-    switch (subject.level) {
+    switch (subject.subject_type) {
       case "dept":
         return {
           is_loaded: subject_is_loaded(subject.id),
-          level: "dept",
+          subject_type: "dept",
           id: String(subject.id),
           query: query_org_years_with_covid_data,
         };
       default:
         return {
           is_loaded: subject_is_loaded("gov"),
-          level: "gov",
+          subject_type: "gov",
           id: "gov",
           query: query_gov_years_with_covid_data,
         };
@@ -46,7 +46,7 @@ export const api_load_years_with_covid_data = (subject) => {
           years_with_covid_data,
         });
 
-        if (level === "dept") {
+        if (subject_type === "dept") {
           subject.set_has_data(
             "covid",
             !_.chain(years_with_covid_data)
@@ -67,7 +67,7 @@ export const api_load_years_with_covid_data = (subject) => {
         );
       })
       // always want to make sure the gov years are also loaded, when loading for a specific dept
-      .then(() => level !== "gov" && api_load_years_with_covid_data(Gov))
+      .then(() => subject_type !== "gov" && api_load_years_with_covid_data(Gov))
   );
 };
 

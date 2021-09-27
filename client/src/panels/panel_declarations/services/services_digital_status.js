@@ -101,7 +101,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
       <TM
         className="medium-panel-text"
         k={
-          subject.level === "program"
+          subject.subject_type === "program"
             ? "services_digital_status_prog_text"
             : "services_digital_status_text"
         }
@@ -217,8 +217,8 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
 export const declare_services_digital_status_panel = () =>
   declare_panel({
     panel_key: "services_digital_status",
-    levels: ["gov", "dept", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("services_digital_status"),
       calculate: (subject) => {
         return {

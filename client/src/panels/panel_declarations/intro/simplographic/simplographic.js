@@ -28,8 +28,8 @@ const { text_maker, TM } = create_text_maker_component(simplographic_text);
 export const declare_simplographic_panel = () =>
   declare_panel({
     panel_key: "simplographic",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       requires_result_counts: true,
 

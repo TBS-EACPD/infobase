@@ -356,9 +356,9 @@ const common_panel_config = {
 export const declare_historical_g_and_c_panel = () =>
   declare_panel({
     panel_key: "historical_g_and_c",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "gov":
           return {
             ...common_panel_config,

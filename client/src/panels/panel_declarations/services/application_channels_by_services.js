@@ -154,7 +154,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       <TM
         className="medium-panel-text"
         k={
-          subject.level === "program"
+          subject.subject_type === "program"
             ? "application_channels_by_services_program_text"
             : "application_channels_by_services_text"
         }
@@ -278,8 +278,8 @@ const ServicesChannelsPanel = ({ subject }) => {
 export const declare_application_channels_by_services_panel = () =>
   declare_panel({
     panel_key: "application_channels_by_services",
-    levels: ["dept", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("customizable_service_graph"),
       footnotes: false,
       render({ title, calculations, sources }) {

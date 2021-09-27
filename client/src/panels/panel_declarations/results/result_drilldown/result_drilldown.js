@@ -65,9 +65,9 @@ class SingleSubjResultsContainer extends React.Component {
   }
 }
 
-const get_docs_with_data = (subject, level) => {
+const get_docs_with_data = (subject, subject_type) => {
   const subject_result_counts =
-    level === "dept"
+    subject_type === "dept"
       ? ResultCounts.get_dept_counts(subject.id)
       : GranularResultCounts.get_subject_counts(subject.id);
 
@@ -131,19 +131,19 @@ const get_year_range_with_data = (docs_with_data) =>
 export const declare_explore_results_panel = () =>
   declare_panel({
     panel_key: "explore_results",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: ["RESULTS", "DRR", "DP"],
       depends_on: ["programSpending", "programFtes"],
       source: (subject) => get_source_links(["DP", "DRR"]),
-      requires_result_counts: level === "dept",
-      requires_granular_result_counts: level !== "dept",
+      requires_result_counts: subject_type === "dept",
+      requires_granular_result_counts: subject_type !== "dept",
       calculate(subject) {
-        return get_docs_with_data(subject, level);
+        return get_docs_with_data(subject, subject_type);
       },
       title: (subject) => {
         const year_range_with_data = get_year_range_with_data(
-          get_docs_with_data(subject, level).docs_with_data
+          get_docs_with_data(subject, subject_type).docs_with_data
         );
         return text_maker("result_drilldown_title", {
           ...year_range_with_data,
