@@ -101,7 +101,7 @@ export const declare_m2m_tag_warning_panel = () =>
           <KeyConceptList
             question_answer_pairs={_.map(
               [
-                "MtoM_tag_warning_reporting_subject_type",
+                "MtoM_tag_warning_reporting_level",
                 "MtoM_tag_warning_resource_splitting",
                 "MtoM_tag_warning_double_counting",
               ],

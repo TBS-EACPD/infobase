@@ -472,7 +472,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           .value();
 
         //maps so_nums to new so_labels
-        const higher_subject_type_mapping = (so_num) => {
+        const higher_level_mapping = (so_num) => {
           if (+so_num > 19) {
             return text_maker("revenues");
           } else if (_.includes(top_3_so_nums, +so_num)) {
@@ -532,7 +532,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           text_calculations,
           top_3_so_nums,
           flat_data,
-          higher_subject_type_mapping,
+          higher_level_mapping,
           processed_spending_data,
           program_footnotes,
         };
@@ -543,7 +543,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           panel_args: {
             text_calculations,
             flat_data,
-            higher_subject_type_mapping,
+            higher_level_mapping,
             top_3_so_nums,
             processed_spending_data,
             program_footnotes,
@@ -557,7 +557,7 @@ export const declare_detailed_program_spending_split_panel = () =>
           {
             label: text_maker("all"),
             id: text_maker("all"),
-            mapping: (so_num) => higher_subject_type_mapping(so_num),
+            mapping: (so_num) => higher_level_mapping(so_num),
           },
         ].concat(
           _.chain(flat_data)

@@ -250,12 +250,12 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .last()
       .value();
 
-    const subject_subject_type = panel_args.subject.subject_type;
+    const subject_type = panel_args.subject.subject_type;
     const text_args = {
       ...panel_args,
       largest_measure_name,
       largest_measure_exp,
-      ...(subject_subject_type === "dept" && {
+      ...(subject_type === "dept" && {
         dept_covid_expenditures_in_year: _.reduce(
           data,
           (memo, { vote, stat }) => memo + vote + stat,
@@ -265,9 +265,9 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
     };
     return (
       <Fragment>
-        {subject_subject_type === "dept"}
+        {subject_type === "dept"}
         <TM
-          k={`covid_expenditures_measure_tab_text_${subject_subject_type}`}
+          k={`covid_expenditures_measure_tab_text_${subject_type}`}
           args={text_args}
           className="medium-panel-text"
         />

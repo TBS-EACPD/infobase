@@ -127,7 +127,7 @@ const RelatedInfo = ({ subject, panel, related_panels }) => {
         <thead>
           <tr>
             <th> key </th>
-            <th> subject_type </th>
+            <th> subject type </th>
             <th> table deps </th>
             <th> notes </th>
             <th> url </th>
