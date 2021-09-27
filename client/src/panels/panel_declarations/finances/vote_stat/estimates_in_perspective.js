@@ -19,8 +19,8 @@ const est_in_year_col = "{{est_in_year}}_estimates";
 export const declare_estimates_in_perspective_panel = () =>
   declare_panel({
     panel_key: "estimates_in_perspective",
-    levels: ["dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("estimates_perspective_title"),
       depends_on: ["orgVoteStatEstimates"],
       machinery_footnotes: false,

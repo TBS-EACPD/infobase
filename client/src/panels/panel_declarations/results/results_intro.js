@@ -93,15 +93,15 @@ const ResultsIntroPanel = ({
 export const declare_results_intro_panel = () =>
   declare_panel({
     panel_key: "results_intro",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
-      requires_result_counts: level === "gov",
-      requires_granular_result_counts: level !== "gov",
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
+      requires_result_counts: subject_type === "gov",
+      requires_granular_result_counts: subject_type !== "gov",
       footnotes: ["RESULTS", "DRR", "DP"],
       source: (subject) => get_source_links(["DP", "DRR"]),
       title: text_maker("results_intro_title"),
       calculate: (subject) => {
-        const is_gov = subject.level == "gov";
+        const is_gov = subject.subject_type == "gov";
 
         const verbose_counts = (() => {
           if (is_gov) {
@@ -127,7 +127,7 @@ export const declare_results_intro_panel = () =>
             return {
               depts_with_dps,
               depts_with_drrs,
-              ..._.omit(gov_counts, ["id", "level", "subject_id"]),
+              ..._.omit(gov_counts, ["id", "subject_type", "subject_id"]),
             };
           } else {
             return {

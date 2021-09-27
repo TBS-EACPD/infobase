@@ -487,7 +487,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
         <div className="fcol-xs-12 fcol-md-4">
           <TM
             className="medium-panel-text"
-            k={`${subject.level}_auth_exp_planned_spending_body`}
+            k={`${subject.subject_type}_auth_exp_planned_spending_body`}
             args={final_info}
           />
           {include_verbose_gap_year_explanation && additional_info.gap_year && (
@@ -498,7 +498,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
                 }
                 content={
                   <TM
-                    k={`${subject.level}_gap_explain_body`}
+                    k={`${subject.subject_type}_gap_explain_body`}
                     args={final_info}
                   />
                 }
@@ -733,8 +733,8 @@ const calculate = function (subject, options) {
 export const declare_auth_exp_planned_spending_panel = () =>
   declare_panel({
     panel_key: "auth_exp_planned_spending",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgVoteStatPa", "programSpending", "orgVoteStatEstimates"],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
       title: (subject) =>

@@ -21,8 +21,8 @@ const { text_maker, TM } = create_text_maker_component([text1, text2]);
 export const declare_employee_last_year_totals_panel = () =>
   declare_panel({
     panel_key: "employee_last_year_totals",
-    levels: ["dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgEmployeeType"],
       title: text_maker("dept_employee_last_year_totals_title"),
       calculate(subject) {

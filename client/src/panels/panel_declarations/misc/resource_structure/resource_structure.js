@@ -11,9 +11,9 @@ import { text_maker, actual_year, planning_year } from "./utils";
 export const declare_resource_structure_panel = () =>
   declare_panel({
     panel_key: "resource_structure",
-    levels: ["tag"],
+    subject_types: ["tag"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       title: text_maker("resource_structure_title"),
       depends_on: ["programSpending", "programFtes"],

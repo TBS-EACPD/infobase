@@ -19,17 +19,19 @@ const { text_maker } = covid_create_text_maker_component();
 const { estimates_docs } = businessConstants;
 
 const get_tabbed_content_props = (tab_content_configs, panel_args) => {
-  const configs_for_level = _.filter(tab_content_configs, ({ levels }) =>
-    _.includes(levels, panel_args.subject.level)
+  const configs_for_subject_type = _.filter(
+    tab_content_configs,
+    ({ subject_types }) =>
+      _.includes(subject_types, panel_args.subject.subject_type)
   );
 
   return {
-    tab_keys: _.map(configs_for_level, "key"),
-    tab_labels: _.chain(configs_for_level)
+    tab_keys: _.map(configs_for_subject_type, "key"),
+    tab_labels: _.chain(configs_for_subject_type)
       .map(({ key, label }) => [key, label])
       .fromPairs()
       .value(),
-    tab_pane_contents: _.chain(configs_for_level)
+    tab_pane_contents: _.chain(configs_for_subject_type)
       .map(({ key, load_data, TabContent }) => [
         key,
         <TabLoadingWrapper

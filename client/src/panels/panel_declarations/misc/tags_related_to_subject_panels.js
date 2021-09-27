@@ -38,7 +38,7 @@ const tag_display = (tag) => ({
 
 function get_related_tag_list_args(subject) {
   let tags_by_root_id;
-  switch (subject.level) {
+  switch (subject.subject_type) {
     case "program":
       tags_by_root_id = _.groupBy(subject.tags, "root.id");
 
@@ -67,7 +67,7 @@ function get_related_tag_list_args(subject) {
     .value();
 }
 
-const title_by_level = {
+const title_by_subject_type = {
   dept: "dept_related_tags_title",
   program: "program_tags_title",
   crso: "crso_tags_title",
@@ -76,10 +76,10 @@ const title_by_level = {
 export const declare_tags_of_interest_panel = () =>
   declare_panel({
     panel_key: "tags_of_interest",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
-      title: text_maker(title_by_level[level]),
+      title: text_maker(title_by_subject_type[subject_type]),
       calculate(subject) {
         const tags_by_root = get_related_tag_list_args(subject);
         if (subject.dp_status === false || _.isEmpty(tags_by_root)) {
@@ -94,7 +94,7 @@ export const declare_tags_of_interest_panel = () =>
         return (
           <TextPanel title={title}>
             <TM
-              k={`${subject.level}_is_tagged_with_following`}
+              k={`${subject.subject_type}_is_tagged_with_following`}
               args={{ subject }}
             />
             <CardList elements={tags_by_root} />
@@ -107,8 +107,8 @@ export const declare_tags_of_interest_panel = () =>
 export const declare_tag_progs_by_dept_panel = () =>
   declare_panel({
     panel_key: "tag_progs_by_dept",
-    levels: ["tag"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["tag"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       title: text_maker("tag_progs_by_dept_title"),
       calculate: _.constant(true),
@@ -162,9 +162,9 @@ export const declare_tag_progs_by_dept_panel = () =>
 export const declare_related_tags_panel = () =>
   declare_panel({
     panel_key: "related_tags",
-    levels: ["tag"],
+    subject_types: ["tag"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       title: text_maker("related_tags_title"),
       calculate(subject) {

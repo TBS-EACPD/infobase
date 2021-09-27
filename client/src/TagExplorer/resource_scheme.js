@@ -52,7 +52,7 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
       data: { subject },
     } = node;
 
-    switch (subject.level) {
+    switch (subject.subject_type) {
       case "tag": {
         if (subject.is_lowest_level_tag) {
           return _.chain(subject.programs)
@@ -190,7 +190,7 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
   const flat_nodes = filter_hierarchy(
     unfiltered_flat_nodes,
     (node) =>
-      _.get(node, "data.subject.level") === "program" &&
+      _.get(node, "data.subject.subject_type") === "program" &&
       !_.isEmpty(_.get(node, "data.resources")),
     { markSearchResults: false, leaves_only: false }
   );

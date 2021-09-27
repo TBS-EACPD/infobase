@@ -304,11 +304,11 @@ const SummaryTab = ({ args: panel_args, data }) => {
 const tab_content_configs = [
   {
     key: "summary",
-    levels: ["gov", "dept"],
+    subject_types: ["gov", "dept"],
     label: text_maker("summary_tab_label"),
     load_data: ({ subject, selected_year }) =>
       (() => {
-        if (subject.level === "dept") {
+        if (subject.subject_type === "dept") {
           return query_org_covid_summary({
             org_id: String(subject.id),
             fiscal_year: selected_year,
@@ -323,7 +323,7 @@ const tab_content_configs = [
   },
   {
     key: "department",
-    levels: ["gov"],
+    subject_types: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ selected_year }) =>
       query_all_covid_estimates_by_measure_id({
@@ -335,11 +335,11 @@ const tab_content_configs = [
   },
   {
     key: "measure",
-    levels: ["gov", "dept"],
+    subject_types: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
     load_data: ({ subject, selected_year }) =>
       (() => {
-        if (subject.level === "dept") {
+        if (subject.subject_type === "dept") {
           return query_org_covid_estimates_by_measure_id({
             org_id: String(subject.id),
             fiscal_year: selected_year,
@@ -528,7 +528,7 @@ class SummaryTabComponent extends React.Component {
   render() {
     const { subject, selected_year } = this.props.panel_args;
     const additional_text_args = (() => {
-      if (subject.level === "gov") {
+      if (subject.subject_type === "gov") {
         return {
           covid_est_pct_of_all_est:
             this.props.panel_args[`gov_covid_estimates_in_year`] /
@@ -551,7 +551,7 @@ class SummaryTabComponent extends React.Component {
       <div className="row align-items-center">
         <div className="col-12 col-lg-6 medium-panel-text">
           <TM
-            k={`covid_estimates_summary_text_${subject.level}`}
+            k={`covid_estimates_summary_text_${subject.subject_type}`}
             args={{ ...this.props.panel_args, ...additional_text_args }}
           />
           <TM k={"covid_estimates_by_release_title"} />
@@ -611,8 +611,8 @@ class SummaryTabComponent extends React.Component {
 export const declare_covid_estimates_panel = () =>
   declare_panel({
     panel_key,
-    levels: ["gov", "dept"],
-    panel_config_func: (level_name, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type_name, panel_key) => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
       title: text_maker("covid_measure_spending_auth"),

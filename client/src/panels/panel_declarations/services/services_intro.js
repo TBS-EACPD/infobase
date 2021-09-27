@@ -47,12 +47,12 @@ const ServicesIntroPanel = ({ subject }) => {
   return (
     <div className="medium-panel-text">
       <TM
-        k={`services_intro_${subject.level}`}
+        k={`services_intro_${subject.subject_type}`}
         args={{
           subject,
           from_year: _.last(report_years),
           to_year: _.first(report_years),
-          ...(subject.level === "gov"
+          ...(subject.subject_type === "gov"
             ? { num_of_subject_offering_services }
             : { num_of_programs_offering_services }),
         }}
@@ -61,7 +61,7 @@ const ServicesIntroPanel = ({ subject }) => {
         <div className="pane-rect">
           <span className="pane-max-width">
             <TM
-              k={`${subject.level}_total_number_of_services`}
+              k={`${subject.subject_type}_total_number_of_services`}
               args={{ subject }}
             />
           </span>
@@ -107,8 +107,8 @@ const ServicesIntroPanel = ({ subject }) => {
 export const declare_services_intro_panel = () =>
   declare_panel({
     panel_key: "services_intro",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("services_intro_title"),
       calculate: (subject) => {
         return {

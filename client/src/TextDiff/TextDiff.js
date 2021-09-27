@@ -92,7 +92,7 @@ const get_indicators = (subject) => {
       const res_subject = Program.store.has(res.subject_id)
         ? Program.store.lookup(res.subject_id)
         : CRSO.store.lookup(res.subject_id);
-      return subject.level === "dept"
+      return subject.subject_type === "dept"
         ? res_subject.dept === subject
         : res_subject === subject || res_subject.crso === subject;
     })
@@ -384,13 +384,15 @@ export default class TextDiffApp extends React.Component {
   }
 
   get_new_url(context) {
-    if (context.level === "dept") {
+    if (context.subject_type === "dept") {
       return `/diff/${context.id}`;
-    } else if (context.level === "crso") {
+    } else if (context.subject_type === "crso") {
       return `/diff/${context.dept.id}/${context.id}`;
     } else if (context === "all") {
       const { subject } = this.state;
-      return `/diff/${subject.level === "dept" ? subject.id : subject.dept.id}`;
+      return `/diff/${
+        subject.subject_type === "dept" ? subject.id : subject.dept.id
+      }`;
     } else {
       return `/diff/${context.dept.id}/${context.crso.id}/${context.id}`;
     }
@@ -469,11 +471,12 @@ export default class TextDiffApp extends React.Component {
       .sortBy("name")
       .value();
     const crs_without_internal = _.filter(
-      subject.level === "dept" ? subject.crsos : subject.dept.crsos,
+      subject.subject_type === "dept" ? subject.crsos : subject.dept.crsos,
       (cr) => cr.is_cr && !cr.is_internal_service
     );
 
-    const current_dept = subject.level === "dept" ? subject : subject.dept;
+    const current_dept =
+      subject.subject_type === "dept" ? subject : subject.dept;
 
     return (
       <StandardRouteContainer
@@ -520,9 +523,9 @@ export default class TextDiffApp extends React.Component {
             className="text-diff__selector"
             id="select_cr"
             selected={
-              subject.level === "program"
+              subject.subject_type === "program"
                 ? subject.crso.id
-                : subject.level === "crso"
+                : subject.subject_type === "crso"
                 ? subject.id
                 : "all"
             }
@@ -545,7 +548,7 @@ export default class TextDiffApp extends React.Component {
           <Select
             className="text-diff__selector"
             id="select_program"
-            selected={subject.level === "program" ? subject.id : "all"}
+            selected={subject.subject_type === "program" ? subject.id : "all"}
             onSelect={(id) => {
               const new_url = this.get_new_url(
                 Program.store.has(id) ? Program.store.lookup(id) : id
@@ -553,9 +556,9 @@ export default class TextDiffApp extends React.Component {
               history.push(new_url);
             }}
             options={_.chain(
-              subject.level === "dept"
+              subject.subject_type === "dept"
                 ? crs_without_internal
-                : subject.level === "crso"
+                : subject.subject_type === "crso"
                 ? [subject]
                 : [subject.crso]
             )

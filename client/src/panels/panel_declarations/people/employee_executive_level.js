@@ -24,7 +24,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { ex_levels } = businessConstants;
 
-const calculate_funcs_by_level = {
+const calculate_funcs_by_subject_type = {
   gov: (orgEmployeeExLvl, gov) => {
     const gov_five_year_total_head_count = _.chain(
       orgEmployeeExLvl.q().gov_grouping()
@@ -85,14 +85,17 @@ const calculate_funcs_by_level = {
 export const declare_employee_executive_level_panel = () =>
   declare_panel({
     panel_key: "employee_executive_level",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgEmployeeExLvl"],
       title: text_maker("employee_executive_level_title"),
       calculate: function (subject) {
         const { orgEmployeeExLvl } = this.tables;
 
-        return calculate_funcs_by_level[level](orgEmployeeExLvl, subject);
+        return calculate_funcs_by_subject_type[subject_type](
+          orgEmployeeExLvl,
+          subject
+        );
       },
       render({ title, calculations, footnotes, sources }) {
         const {
@@ -160,7 +163,7 @@ export const declare_employee_executive_level_panel = () =>
                 k={
                   has_non_ex_only
                     ? "all_non_executive_employee_text"
-                    : `${level}_employee_executive_level_text`
+                    : `${subject_type}_employee_executive_level_text`
                 }
                 args={text_calculations}
               />

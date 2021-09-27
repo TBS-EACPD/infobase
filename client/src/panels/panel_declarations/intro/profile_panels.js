@@ -20,11 +20,11 @@ const { sanitized_dangerous_inner_html, generate_href } = general_utils;
 export const declare_profile_panel = () =>
   declare_panel({
     panel_key: "profile",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker(`profile`),
       calculate: (subject) => {
-        switch (level) {
+        switch (subject_type) {
           case "dept":
             return (
               subject.id && {
@@ -145,8 +145,8 @@ export const declare_profile_panel = () =>
 export const declare_description_panel = () =>
   declare_panel({
     panel_key: "description",
-    levels: ["tag"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["tag"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: (subject) => !_.isEmpty(subject.description),
       title: text_maker("tag_desc_title"),

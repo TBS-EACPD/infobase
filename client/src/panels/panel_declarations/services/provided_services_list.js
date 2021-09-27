@@ -48,7 +48,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
     <div>
       <TM
         k={
-          subject.level === "program"
+          subject.subject_type === "program"
             ? "list_of_provided_services_desc_program"
             : "list_of_provided_services_desc_dept"
         }
@@ -117,8 +117,8 @@ const ProvidedServicesListPanel = ({ subject }) => {
 export const declare_provided_services_list_panel = () =>
   declare_panel({
     panel_key: "provided_services_list",
-    levels: ["dept", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("list_of_provided_services_title"),
       footnotes: false,
       render({ title, calculations, sources }) {

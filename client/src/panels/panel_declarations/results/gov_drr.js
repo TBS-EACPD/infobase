@@ -69,8 +69,8 @@ class GovDRR extends React.Component {
 export const declare_gov_drr_panel = () =>
   declare_panel({
     panel_key: "gov_drr",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       requires_result_counts: true,
       footnotes: ["RESULTS", "DRR"],
       title: text_maker("gov_drr_summary_title", {

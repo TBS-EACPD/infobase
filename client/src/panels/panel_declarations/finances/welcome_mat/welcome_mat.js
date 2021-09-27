@@ -610,14 +610,14 @@ const WelcomeMat = (props) => {
       planned_fte_diff,
     } = calcs;
 
-    const { level } = subject;
+    const { subject_type } = subject;
     let spend_summary_key;
     let fte_summary_key;
-    if (!_.includes(["crso", "program"], level)) {
-      if (level === "gov") {
+    if (!_.includes(["crso", "program"], subject_type)) {
+      if (subject_type === "gov") {
         spend_summary_key = "gov_welcome_mat_spending_summary";
         fte_summary_key = "welcome_mat_fte_summary";
-      } else if (level === "dept") {
+      } else if (subject_type === "dept") {
         spend_summary_key = "dept1_welcome_mat_spending_summary";
         fte_summary_key = "welcome_mat_fte_summary";
       }
@@ -854,7 +854,7 @@ function has_hist_data(subject, q6) {
 
 function has_planning_data(subject, q6) {
   let has_dp;
-  switch (subject.level) {
+  switch (subject.subject_type) {
     case "dept":
       has_dp = subject.is_dp_org;
       break;
@@ -1011,9 +1011,9 @@ const common_panel_config = {
 export const declare_welcome_mat_panel = () =>
   declare_panel({
     panel_key: "welcome_mat",
-    levels: ["gov", "dept", "program", "crso"],
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    subject_types: ["gov", "dept", "program", "crso"],
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "gov":
           return {
             ...common_panel_config,

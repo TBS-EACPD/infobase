@@ -19,7 +19,7 @@ function _get_flat_results(subject) {
   if (subject.is_fake) {
     return [];
   }
-  switch (subject.level) {
+  switch (subject.subject_type) {
     case "program":
       return _.chain(Result.get_entity_results(subject.id))
         .uniqBy("id")
@@ -100,7 +100,7 @@ class Result {
   get indicators() {
     return Indicator.lookup_by_result_id(this.id);
   }
-  get level() {
+  get subject_type() {
     return "result";
   }
   get guid() {
@@ -116,16 +116,16 @@ class Result {
       return CRSO.store.lookup(subject_id);
     }
   }
-  get parent_level() {
+  get parent_subject_type() {
     const subject = this.subject;
-    if (subject.level === "crso") {
+    if (subject.subject_type === "crso") {
       return subject.is_cr ? "cr" : "so";
     } else {
-      return subject.level;
+      return subject.subject_type;
     }
   }
   get is_dr() {
-    return this.parent_level === "cr";
+    return this.parent_subject_type === "cr";
   }
   get contributing_programs() {
     return _.chain(PI_DR_Links.get_contributing_program_ids_for_result(this.id))
@@ -171,7 +171,7 @@ class Indicator {
     }
     result_indexed_indicators[result_id].push(inst);
   }
-  get level() {
+  get subject_type() {
     return "indicator";
   }
   get guid() {
@@ -261,7 +261,7 @@ const ResultCounts = {
     this.data = data;
   },
   get_all_dept_counts() {
-    return _.filter(this.data, { level: "dept" });
+    return _.filter(this.data, { subject_type: "dept" });
   },
 };
 

@@ -202,8 +202,8 @@ const planned_vote_or_stat_calculate = (vs) =>
 const declare_in_year_voted_breakdown_panel = () =>
   declare_panel({
     panel_key: "in_year_voted_breakdown",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgVoteStatEstimates"],
       title: text_maker("in_year_voted_breakdown_title"),
       calculate: planned_vote_or_stat_calculate("voted"),
@@ -213,8 +213,8 @@ const declare_in_year_voted_breakdown_panel = () =>
 const declare_in_year_stat_breakdown_panel = () =>
   declare_panel({
     panel_key: "in_year_stat_breakdown",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgVoteStatEstimates"],
       title: text_maker("in_year_stat_breakdown_title"),
       calculate: planned_vote_or_stat_calculate("stat"),

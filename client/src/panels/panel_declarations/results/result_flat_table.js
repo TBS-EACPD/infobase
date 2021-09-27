@@ -82,8 +82,8 @@ const subject_link = (node) => (
       {" "}
       (
       {text_maker(
-        node.data.subject.level === "program"
-          ? node.data.subject.level
+        node.data.subject.subject_type === "program"
+          ? node.data.subject.subject_type
           : "core_resp"
       )}
       )
@@ -148,8 +148,8 @@ const indicator_table_from_list = (indicator_list, subject) => {
         subject_link: subject_link(ind.parent_node),
         subject_full_name: `${ind.parent_node.data.name} 
         ${text_maker(
-          ind.parent_node.data.subject.level === "program"
-            ? ind.parent_node.data.subject.level
+          ind.parent_node.data.subject.subject_type === "program"
+            ? ind.parent_node.data.subject.subject_type
             : "core_resp"
         )}`,
         id: ind.indicator.id,
@@ -327,19 +327,19 @@ class ResultsTable extends React.Component {
 export const declare_results_table_panel = () =>
   declare_panel({
     panel_key: "results_flat_table",
-    levels: ["dept", "crso", "program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept", "crso", "program"],
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: ["RESULTS", "DRR"],
       depends_on: ["programSpending", "programFtes"],
       source: (subject) => get_source_links(["DRR"]),
-      requires_result_counts: level === "dept",
-      requires_granular_result_counts: level !== "dept",
+      requires_result_counts: subject_type === "dept",
+      requires_granular_result_counts: subject_type !== "dept",
       title: text_maker("result_flat_table_title", {
         year: current_drr_year,
       }),
       calculate(subject) {
         const subject_result_counts =
-          level === "dept"
+          subject_type === "dept"
             ? ResultCounts.get_dept_counts(subject.id)
             : GranularResultCounts.get_subject_counts(subject.id);
 

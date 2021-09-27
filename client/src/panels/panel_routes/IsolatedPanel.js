@@ -16,8 +16,8 @@ import text from "./IsolatedPanel.yaml";
 
 const text_maker = create_text_maker(text);
 
-const get_subject = (level, id) => {
-  switch (level) {
+const get_subject = (subject_type, id) => {
+  switch (subject_type) {
     case "dept":
       return Dept.store.lookup(id);
     case "tag":
@@ -41,20 +41,20 @@ export default class IsolatedPanel extends React.Component {
   loadDeps(props) {
     const {
       match: {
-        params: { level, subject_id, panel_key },
+        params: { subject_type, subject_id, panel_key },
       },
     } = this.props;
 
-    if (!(level && subject_id && panel_key)) {
+    if (!(subject_type && subject_id && panel_key)) {
       this.setState({ loading: false, panel_key: undefined });
     } else {
-      const subject = get_subject(level, subject_id);
+      const subject = get_subject(subject_type, subject_id);
       get_panels_for_subject(subject).then(() =>
         ensure_loaded({
           subject: subject,
           has_results: true,
           panel_keys: [panel_key],
-          subject_level: subject.level,
+          subject_type: subject.subject_type,
           footnotes_for: subject,
         }).then(() => this.setState({ loading: false, subject, panel_key }))
       );

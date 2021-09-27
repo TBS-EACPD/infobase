@@ -27,9 +27,9 @@ const text_maker = create_text_maker(text);
 export const declare_portfolio_structure_intro_panel = () =>
   declare_panel({
     panel_key: "portfolio_structure_intro",
-    levels: ["dept"],
+    subject_types: ["dept"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       title: text_maker("portfolio_structure_intro_title"),
       calculate(subject) {
@@ -58,9 +58,9 @@ export const declare_portfolio_structure_intro_panel = () =>
 export const declare_portfolio_structure_related_panel = () =>
   declare_panel({
     panel_key: "portfolio_structure_related",
-    levels: ["dept"],
+    subject_types: ["dept"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       title: text_maker("portfolio_structure_related_title"),
       calculate(subject) {
@@ -88,9 +88,9 @@ export const declare_portfolio_structure_related_panel = () =>
 export const declare_program_fed_structure_panel = () =>
   declare_panel({
     panel_key: "program_fed_structure",
-    levels: ["program"],
+    subject_types: ["program"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("program_fed_structure_title"),
@@ -120,9 +120,9 @@ export const declare_program_fed_structure_panel = () =>
 export const declare_related_program_structure_panel = () =>
   declare_panel({
     panel_key: "related_program_structure",
-    levels: ["program"],
+    subject_types: ["program"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("related_program_structure_title"),
@@ -152,9 +152,9 @@ export const declare_related_program_structure_panel = () =>
 export const declare_tag_fed_structure_panel = () =>
   declare_panel({
     panel_key: "tag_fed_structure",
-    levels: ["tag"],
+    subject_types: ["tag"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("tag_fed_structure_title"),
@@ -182,9 +182,9 @@ export const declare_tag_fed_structure_panel = () =>
 export const declare_sibling_tags_panel = () =>
   declare_panel({
     panel_key: "sibling_tags",
-    levels: ["tag"],
+    subject_types: ["tag"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("sibling_tags_title"),
@@ -212,9 +212,9 @@ export const declare_sibling_tags_panel = () =>
 export const declare_crso_in_gov_panel = () =>
   declare_panel({
     panel_key: "crso_in_gov",
-    levels: ["crso"],
+    subject_types: ["crso"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       title: text_maker("crso_in_gov_title"),
       calculate: _.constant(true),
@@ -239,9 +239,9 @@ export const declare_crso_in_gov_panel = () =>
 export const declare_crso_links_to_other_crso_panel = () =>
   declare_panel({
     panel_key: "crso_links_to_other_crso",
-    levels: ["crso"],
+    subject_types: ["crso"],
 
-    panel_config_func: (level, panel_key) => ({
+    panel_config_func: (subject_type, panel_key) => ({
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("crso_links_to_other_crso_title"),

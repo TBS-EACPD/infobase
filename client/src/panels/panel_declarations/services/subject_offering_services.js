@@ -40,7 +40,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     subject_offering_services_summary,
     service_general_stats: { report_years, number_of_services },
   } = data;
-  const is_gov = subject.level === "gov";
+  const is_gov = subject.subject_type === "gov";
   const correct_subject = is_gov ? Dept : Program;
 
   const cleaned_data = _.map(subject_offering_services_summary, (row) =>
@@ -103,10 +103,10 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
 export const declare_subject_offering_services_panel = () =>
   declare_panel({
     panel_key: "subject_offering_services",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       title:
-        level === "gov"
+        subject_type === "gov"
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
       footnotes: false,

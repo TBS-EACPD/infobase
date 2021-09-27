@@ -107,8 +107,8 @@ class SpendInTagPerspective extends React.Component {
 export const declare_spending_in_tag_perspective_panel = () =>
   declare_panel({
     panel_key: "spending_in_tag_perspective",
-    levels: ["program"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["program"],
+    panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("program_spending_in_tag_perspective_title"),
       depends_on: ["programSpending"],
       calculate(subject, options) {

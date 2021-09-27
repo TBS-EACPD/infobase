@@ -69,7 +69,7 @@ function populate_footnotes_info(csv_str) {
 function load_footnotes_bundle(subject) {
   let subject_code;
   if (subject) {
-    switch (subject.level) {
+    switch (subject.subject_type) {
       case "gov":
         return Promise.resolve();
       case "dept":

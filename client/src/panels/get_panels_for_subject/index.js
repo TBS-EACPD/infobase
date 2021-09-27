@@ -5,7 +5,7 @@ import { PanelRegistry } from "src/panels/PanelRegistry";
 import { is_dev } from "src/core/injected_build_constants";
 
 const panel_loading_promises = (subject) => {
-  switch (subject.level) {
+  switch (subject.subject_type) {
     case "gov":
       return import("./get_gov_panels").then(({ get_gov_panels }) =>
         get_gov_panels(subject)
@@ -37,7 +37,7 @@ export function get_panels_for_subject(subject) {
         _.chain(panel_keys_for_area)
           .compact() //the above functions create null elements to ease using conditionals, filter them out.
           .map((key) => {
-            const panel_obj = PanelRegistry.lookup(key, subject.level);
+            const panel_obj = PanelRegistry.lookup(key, subject.subject_type);
 
             if (!panel_obj && is_dev) {
               throw new Error(`${key} is not a valid panel`);

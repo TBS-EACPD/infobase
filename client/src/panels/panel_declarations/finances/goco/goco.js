@@ -527,8 +527,8 @@ function render({ title, footnotes, sources, glossary_keys }) {
 export const declare_gocographic_panel = () =>
   declare_panel({
     panel_key: "gocographic",
-    levels: ["gov"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("gocographic_title"),
       footnotes: ["GOCO"],

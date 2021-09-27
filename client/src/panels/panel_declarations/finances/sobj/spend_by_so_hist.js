@@ -193,8 +193,8 @@ class SobjLine extends React.Component {
 export const declare_spend_by_so_hist_panel = () =>
   declare_panel({
     panel_key: "spend_by_so_hist",
-    levels: ["dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgSobjs"],
       title: text_maker("dept_fin_spend_by_so_hist_title"),
       footnotes: ["SOBJ", "EXP"],

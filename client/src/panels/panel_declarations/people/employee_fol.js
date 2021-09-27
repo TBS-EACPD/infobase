@@ -24,7 +24,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const { fol } = businessConstants;
 
-const calculate_funcs_by_level = {
+const calculate_funcs_by_subject_type = {
   gov: function (gov) {
     const { orgEmployeeFol } = this.tables;
 
@@ -73,10 +73,10 @@ const calculate_funcs_by_level = {
 export const declare_employee_fol_panel = () =>
   declare_panel({
     panel_key: "employee_fol",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgEmployeeFol"],
-      calculate: calculate_funcs_by_level[level],
+      calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_fol_title"),
       render({ title, calculations, footnotes, sources }) {
         const { panel_args, subject } = calculations;
@@ -130,7 +130,10 @@ export const declare_employee_fol_panel = () =>
         return (
           <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
             <Col size={12} isText>
-              <TM k={level + "_employee_fol_text"} args={text_calculations} />
+              <TM
+                k={subject_type + "_employee_fol_text"}
+                args={text_calculations}
+              />
             </Col>
             <Col size={12} isGraph>
               <NivoLineBarToggle

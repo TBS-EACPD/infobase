@@ -22,7 +22,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 const get_default_table_tag_state = ({ panel_keys, subject }) =>
   _.chain(panel_keys)
     .flatMap(
-      (panel_key) => PanelRegistry.lookup(panel_key, subject.level)?.depends_on
+      (panel_key) =>
+        PanelRegistry.lookup(panel_key, subject.subject_type)?.depends_on
     )
     .uniq()
     .map((table_id) => [table_id, false])
@@ -87,7 +88,8 @@ export default class PanelFilterControl extends React.Component {
 
     const static_panel_count = _.chain(panel_keys)
       .map(
-        (panel_key) => PanelRegistry.lookup(panel_key, subject.level).is_static
+        (panel_key) =>
+          PanelRegistry.lookup(panel_key, subject.subject_type).is_static
       )
       .compact()
       .value().length;
@@ -172,7 +174,7 @@ export default class PanelFilterControl extends React.Component {
 
     return (panel_keys) =>
       _.filter(panel_keys, (panel_key) => {
-        const panel = PanelRegistry.lookup(panel_key, subject.level);
+        const panel = PanelRegistry.lookup(panel_key, subject.subject_type);
         return (
           panel.is_static ||
           _.intersection(panel.depends_on, active_table_ids).length > 0

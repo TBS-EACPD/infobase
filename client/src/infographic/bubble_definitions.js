@@ -27,7 +27,7 @@ const text_maker = create_text_maker(text);
 const base_configs = [
   {
     id: "intro",
-    title: (subject) => text_maker(`about_${subject.level}_title`),
+    title: (subject) => text_maker(`about_${subject.subject_type}_title`),
     description: "Introduction",
     Icon: IconInfo,
   },

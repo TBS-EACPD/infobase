@@ -70,7 +70,7 @@ class ProvPanel extends React.Component {
     };
   }
   render() {
-    const { title, calculations, footnotes, sources, level } =
+    const { title, calculations, footnotes, sources, subject_type } =
       this.props.render_args;
 
     const { panel_args, subject } = calculations;
@@ -126,7 +126,10 @@ class ProvPanel extends React.Component {
     return (
       <StdPanel {...{ title, footnotes, sources }}>
         <Col size={12} isText>
-          <TM k={level + "_employee_prov_text"} args={text_calculations} />
+          <TM
+            k={subject_type + "_employee_prov_text"}
+            args={text_calculations}
+          />
         </Col>
         {!is_a11y_mode && (
           <Col size={12} isGraph>
@@ -179,7 +182,7 @@ const calculate_common = (data) => {
     formatter,
   };
 };
-const calculate_funcs_by_level = {
+const calculate_funcs_by_subject_type = {
   gov: function () {
     const { orgEmployeeRegion } = this.tables;
     return calculate_common(
@@ -197,13 +200,13 @@ const calculate_funcs_by_level = {
 export const declare_employee_prov_panel = () =>
   declare_panel({
     panel_key: "employee_prov",
-    levels: ["gov", "dept"],
-    panel_config_func: (level, panel_key) => ({
+    subject_types: ["gov", "dept"],
+    panel_config_func: (subject_type, panel_key) => ({
       depends_on: ["orgEmployeeRegion"],
-      calculate: calculate_funcs_by_level[level],
+      calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_prov_title"),
       render(render_args) {
-        return <ProvPanel render_args={{ ...render_args, level }} />;
+        return <ProvPanel render_args={{ ...render_args, subject_type }} />;
       },
     }),
   });

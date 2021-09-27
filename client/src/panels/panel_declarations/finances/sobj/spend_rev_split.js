@@ -20,7 +20,7 @@ const { rows_to_rev_split } = table_common;
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const text_keys_by_level = {
+const text_keys_by_subject_type = {
   dept: "dept_spend_rev_split_text",
   program: "program_spend_rev_split_text",
 };
@@ -74,7 +74,10 @@ function render({ title, calculations, footnotes, sources }) {
   return (
     <StdPanel {...{ title, footnotes, sources }}>
       <Col size={5} isText>
-        <TM k={text_keys_by_level[subject.level]} args={text_calculations} />
+        <TM
+          k={text_keys_by_subject_type[subject.subject_type]}
+          args={text_calculations}
+        />
       </Col>
       <Col size={7} isGraph>
         {graph_content}
@@ -91,9 +94,9 @@ const common_panel_config = {
 export const declare_spend_rev_split_panel = () =>
   declare_panel({
     panel_key: "spend_rev_split",
-    levels: ["dept", "program"],
-    panel_config_func: (level, panel_key) => {
-      switch (level) {
+    subject_types: ["dept", "program"],
+    panel_config_func: (subject_type, panel_key) => {
+      switch (subject_type) {
         case "dept":
           return {
             ...common_panel_config,

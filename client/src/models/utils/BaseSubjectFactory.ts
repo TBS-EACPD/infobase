@@ -48,12 +48,6 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
       return subject_type + "_" + this.id;
     }
 
-    // SUBJECT_TS_TODO want to deprecate this as redundant to subject_type, but lots of legacy code to sift through for that
-    static level = subject_type;
-    get level() {
-      return subject_type;
-    }
-
     /*
       can't cleanly (complile time) enforce that the child class declares a static store property...
         - using abstract is out (can't mix with/use for static methods)
