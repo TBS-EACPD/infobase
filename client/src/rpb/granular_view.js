@@ -75,7 +75,7 @@ class GranularView extends React.Component {
     const dim_all_or_dept = dimension === "all" || dimension === "dept";
 
     function is_special_dim(dim) {
-      return _.includes(table.special_dimensions, dim);
+      return _.includes(table.special_dims, dim);
     }
 
     const dept_and_legal_cols = dim_all_or_dept

@@ -253,18 +253,19 @@ export class Table {
     return run_template(this.title_def[lang]);
   }
 
-  get special_dimensions() {
-    // dimensions that do not use the default grouping
+  get all_special_dimensions() {
+    // dimensions from all tables that do not use the default grouping
     return ["vote_vs_stat"];
   }
-  get special_dim() {
+  // special dimensions of current table
+  get special_dims() {
     return _.chain(this._cols)
       .flatMap((col) => (_.has(col, "children") ? col.children : col))
       .map((col) =>
-        _.chain(col).keys().intersection(this.special_dimensions).head().value()
+        _.chain(col).keys().intersection(this.all_special_dimensions).value()
       )
+      .flatten()
       .compact()
-      .head()
       .value();
   }
 
@@ -281,7 +282,7 @@ export class Table {
   };
 
   set_special_group_by = (dimension) => {
-    if (!_.includes(this.special_dimensions, dimension)) {
+    if (!_.includes(this.special_dims, dimension)) {
       throw new Error("No special grouping for this dimension");
     }
     const special_col = _.chain(this._cols)
@@ -289,7 +290,7 @@ export class Table {
       .filter(dimension)
       .head()
       .value();
-    this[this.special_dim] = special_col[dimension];
+    this[dimension] = special_col[dimension];
   };
 
   get_dimensions() {
@@ -297,7 +298,7 @@ export class Table {
       .flatMap((col) => (_.has(col, "children") ? col.children : col))
       .filter("can_group_by")
       .map("nick")
-      .concat(this.special_dim)
+      .concat(this.special_dims)
       .compact()
       .value();
     this.dimensions.unshift("all");
@@ -305,7 +306,7 @@ export class Table {
 
   get_group_by_func() {
     this.group_by_func = (data, dimension) => {
-      if (!_.includes(this.special_dimensions, dimension)) {
+      if (!_.includes(this.special_dims, dimension)) {
         if (
           !_.pickBy(
             this._cols,
@@ -324,7 +325,7 @@ export class Table {
 
   get_dimension_col_values_func() {
     this.dimension_col_values_func = (row, dimension) => {
-      if (!_.includes(this.special_dimensions, dimension)) {
+      if (!_.includes(this.special_dims, dimension)) {
         return [dimension, row[dimension]];
       }
 
@@ -346,7 +347,7 @@ export class Table {
 
       return _.chain(data)
         .filter((row) => filter_row_by_subj(row, subject))
-        .thru((the_data) => group_by_func(the_data, dimension))
+        .thru((ungrouped_data) => group_by_func(ungrouped_data, dimension))
         .map((data_group) => {
           const dim_name = dimension_col_values_func(
             data_group[0],
