@@ -1,6 +1,5 @@
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
-import { CovidMeasure } from "./covid/CovidMeasure";
 import { Result, Indicator } from "./results";
 import {
   Gov,
@@ -24,7 +23,6 @@ export {
   ProgramTag,
   Result,
   Indicator,
-  CovidMeasure,
 };
 
 export const Subject = {
@@ -38,7 +36,6 @@ export const Subject = {
   ProgramTag,
   Result,
   Indicator,
-  CovidMeasure,
 };
 
 assign_to_dev_helper_namespace({
