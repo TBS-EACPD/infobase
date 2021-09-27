@@ -11,7 +11,7 @@ import { LeafSpinner, LabeledBox } from "src/components/index";
 import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-import { get_subject_by_guid } from "src/models/get_subject_by_guid";
+import { get_subject_by_guid } from "src/models/subject_index";
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";

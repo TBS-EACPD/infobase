@@ -1,8 +1,7 @@
 import _ from "lodash";
 import { createSelector } from "reselect";
 
-import { get_subject_by_guid } from "src/models/get_subject_by_guid";
-import { Indicator } from "src/models/results";
+import { Indicator, get_subject_by_guid } from "src/models/subject_index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
