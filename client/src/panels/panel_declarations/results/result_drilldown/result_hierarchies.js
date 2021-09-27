@@ -3,9 +3,8 @@ import _ from "lodash";
 
 import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common";
 
-import { get_subject_by_guid } from "src/models/get_subject_by_guid";
 import * as Results from "src/models/results";
-import { Dept } from "src/models/subject_index";
+import { Dept, get_subject_by_guid } from "src/models/subject_index";
 
 import {
   filter_hierarchy,
