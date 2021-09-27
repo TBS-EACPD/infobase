@@ -1,30 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
 import _ from "lodash";
 import React, { useState } from "react";
 
 import { Typeahead, LeafSpinner } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
-import { lang } from "src/core/injected_build_constants";
 
-import { InfoBaseHighlighter } from "src/search/search_utils";
-
-const format_data = (
-  name_function,
-  menu_content_function,
-  data,
-  config_group_name
-) => ({
-  data,
-  name: name_function(data),
-  menu_content: (search) =>
-    _.isFunction(menu_content_function) ? (
-      menu_content_function(data, search, name_function)
-    ) : (
-      <InfoBaseHighlighter search={search} content={name_function(data)} />
-    ),
-  config_group_name,
-});
+import { useSearchQuery, format_data } from "src/search/search_utils";
 
 const get_all_options = _.memoize((search_configs) =>
   _.flatMap(
@@ -40,20 +21,6 @@ const get_all_options = _.memoize((search_configs) =>
       })
   )
 );
-const get_gql_query = (gql_search_configs) => gql`
-  query($lang: String!) {
-    root(lang: $lang) {
-      ${_.reduce(
-        gql_search_configs,
-        (query_result, { query }) => `
-      ${query_result}
-      ${query}
-      `,
-        `non_field`
-      )}
-    }
-  }
-`;
 const get_config_groups = _.memoize((search_configs) =>
   _.chain(search_configs)
     .map(({ header_function, filter, config_name }, ix) => [
@@ -67,37 +34,13 @@ const get_config_groups = _.memoize((search_configs) =>
     .value()
 );
 
-const useSearchQuery = (gql_search_configs) => {
-  const query = get_gql_query(gql_search_configs);
-  const res = useQuery(query, {
-    skip: gql_search_configs.length === 0,
-    variables: { lang },
-  });
-  if (!res.loading) {
-    const data = _.flatMap(
-      gql_search_configs,
-      ({
-        queried_data_accessor,
-        name_function,
-        menu_content_function,
-        config_name,
-      }) => {
-        return _.map(res.data.root[queried_data_accessor], (row) =>
-          format_data(name_function, menu_content_function, row, config_name)
-        );
-      }
-    );
-
-    return { ...res, data };
-  }
-  return res;
-};
-
 export const SearchConfigTypeahead = (props) => {
   const { on_select, search_configs, gql_search_configs } = props;
   const [query_value, set_query_value] = useState("");
-  const { loading, data: gql_queried_data } =
-    useSearchQuery(gql_search_configs);
+  const { loading, data: gql_queried_data } = useSearchQuery(
+    query_value,
+    gql_search_configs
+  );
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
   }

@@ -348,14 +348,14 @@ const services = {
   config_name: "services",
   header_function: () => trivial_text_maker("services"),
   name_function: (service) => service.name,
-  query: `
-    service {
+  query: (query_value) => `
+    search_services(name_query: "${query_value}") {
       id
       org_id
       name
     }
   `,
-  queried_data_accessor: "service",
+  queried_data_accessor: "search_services",
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name"], "services")(datum),
 };

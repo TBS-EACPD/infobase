@@ -1,5 +1,8 @@
+import { gql, useQuery } from "@apollo/client";
 import _ from "lodash";
 import React from "react";
+
+import { lang } from "src/core/injected_build_constants";
 
 import { escapeRegExp } from "src/general_utils";
 
@@ -50,6 +53,61 @@ const split_matched_search_tokens = (search, content) => {
 
   return split_string;
 };
+const format_data = (
+  name_function,
+  menu_content_function,
+  data,
+  config_group_name
+) => ({
+  data,
+  name: name_function(data),
+  menu_content: (search) =>
+    _.isFunction(menu_content_function) ? (
+      menu_content_function(data, search, name_function)
+    ) : (
+      <InfoBaseHighlighter search={search} content={name_function(data)} />
+    ),
+  config_group_name,
+});
+
+const get_gql_query = (query_value, gql_search_configs) => gql`
+  query {
+    root(lang: "${lang}") {
+      ${_.reduce(
+        gql_search_configs,
+        (query_result, { query }) => `
+      ${query_result}
+      ${query(query_value)}
+      `,
+        `non_field`
+      )}
+    }
+  }
+`;
+const useSearchQuery = (query_value, gql_search_configs) => {
+  const query = get_gql_query(query_value, gql_search_configs);
+  const res = useQuery(query, {
+    skip: query_value.length === 0 || gql_search_configs.length === 0,
+  });
+  if (!res.loading && res.data) {
+    const data = _.flatMap(
+      gql_search_configs,
+      ({
+        queried_data_accessor,
+        name_function,
+        menu_content_function,
+        config_name,
+      }) => {
+        return _.map(res.data.root[queried_data_accessor], (row) =>
+          format_data(name_function, menu_content_function, row, config_name)
+        );
+      }
+    );
+
+    return { ...res, data };
+  }
+  return res;
+};
 
 class InfoBaseHighlighter extends React.Component {
   render() {
@@ -76,4 +134,10 @@ class InfoBaseHighlighter extends React.Component {
   }
 }
 
-export { query_to_reg_exps, highlight_search_match, InfoBaseHighlighter };
+export {
+  query_to_reg_exps,
+  highlight_search_match,
+  format_data,
+  useSearchQuery,
+  InfoBaseHighlighter,
+};

@@ -75,12 +75,13 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
 
   constructor(props: TypeaheadProps) {
     super(props);
+    const { query_value, min_length } = props;
 
     this.menu_id = _.uniqueId("typeahead-");
 
     this.state = {
-      input_value: props.query_value,
-      may_show_menu: false,
+      input_value: query_value,
+      may_show_menu: query_value.length >= min_length,
       selection_cursor: default_selection_cursor,
     };
   }
