@@ -76,7 +76,7 @@ const process_lookups = ({
       .value()
   );
 
-  _.each(ministries, ({ id, name_en, name_fr }) =>
+  _.each(ministries, ({ id, name_en, name_fr }) => {
     Ministry.store.create_and_register({
       ...required_fields({
         id,
@@ -88,10 +88,10 @@ const process_lookups = ({
         .map("org_id")
         .compact()
         .value(),
-    })
-  );
+    });
+  });
 
-  _.each(ministers, ({ id, name_en, name_fr }) =>
+  _.each(ministers, ({ id, name_en, name_fr }) => {
     Minister.store.create_and_register({
       ...required_fields({
         id,
@@ -103,10 +103,10 @@ const process_lookups = ({
         .map("department")
         .compact()
         .value(),
-    })
-  );
+    });
+  });
 
-  _.each(inst_forms, ({ id, parent_id, name_en, name_fr }) =>
+  _.each(inst_forms, ({ id, parent_id, name_en, name_fr }) => {
     InstForm.store.create_and_register({
       ...required_fields({
         id,
@@ -125,8 +125,8 @@ const process_lookups = ({
         .map("org_id")
         .compact()
         .value(),
-    })
-  );
+    });
+  });
 
   const get_url_from_url_lookup = (url_key: string | undefined) => {
     const url_row = _.find(url_lookups, ({ id }) => id === url_key);
@@ -162,7 +162,7 @@ const process_lookups = ({
       other_lang_abbr,
       other_lang_applied_title,
       other_lang_legal_title,
-    }) =>
+    }) => {
       Dept.store.create_and_register({
         ...required_fields({
           id,
@@ -214,7 +214,8 @@ const process_lookups = ({
           .map("id")
           .compact()
           .value(),
-      })
+      });
+    }
   );
 
   _.each(
@@ -316,23 +317,24 @@ const process_lookups = ({
 
   _.each(
     program_tag_types,
-    ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) =>
+    ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
       !is_ccofog_tag(id) &&
-      ProgramTag.store.create_and_register({
-        ...required_fields({
-          id,
-          name: is_en ? name_en : name_fr,
-          cardinality,
-        }),
+        ProgramTag.store.create_and_register({
+          ...required_fields({
+            id,
+            name: is_en ? name_en : name_fr,
+            cardinality,
+          }),
 
-        description_raw: is_en ? desc_en : desc_fr,
+          description_raw: is_en ? desc_en : desc_fr,
 
-        children_tag_ids: _.chain(program_tags)
-          .filter(({ parent_id }) => parent_id === id)
-          .map("tag_id")
-          .compact()
-          .value(),
-      })
+          children_tag_ids: _.chain(program_tags)
+            .filter(({ parent_id }) => parent_id === id)
+            .map("tag_id")
+            .compact()
+            .value(),
+        });
+    }
   );
   _.each(
     program_tags,
@@ -343,29 +345,30 @@ const process_lookups = ({
       name_fr,
       desc_en,
       desc_fr,
-    }) =>
+    }) => {
       !is_ccofog_tag(parent_tag_id) &&
-      ProgramTag.store.create_and_register({
-        ...required_fields({
-          id,
-          name: is_en ? name_en : name_fr,
+        ProgramTag.store.create_and_register({
+          ...required_fields({
+            id,
+            name: is_en ? name_en : name_fr,
+            parent_tag_id,
+          }),
+
+          description_raw: is_en ? desc_en : desc_fr,
+
           parent_tag_id,
-        }),
-
-        description_raw: is_en ? desc_en : desc_fr,
-
-        parent_tag_id,
-        children_tag_ids: _.chain(program_tags)
-          .filter(({ parent_id }) => parent_id === id)
-          .map("tag_id")
-          .compact()
-          .value(),
-        program_ids: _.chain(tags_to_programs)
-          .filter(({ tag_id }) => tag_id === id)
-          .map("program_id")
-          .compact()
-          .value(),
-      })
+          children_tag_ids: _.chain(program_tags)
+            .filter(({ parent_id }) => parent_id === id)
+            .map("tag_id")
+            .compact()
+            .value(),
+          program_ids: _.chain(tags_to_programs)
+            .filter(({ tag_id }) => tag_id === id)
+            .map("program_id")
+            .compact()
+            .value(),
+        });
+    }
   );
 
   _.each(glossary, ({ id, name_en, name_fr, def_en, def_fr }) => {
