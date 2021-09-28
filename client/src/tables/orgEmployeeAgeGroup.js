@@ -48,6 +48,7 @@ export default {
       key: true,
       type: "short-str",
       nick: "age",
+      show_dropdown_filter: true,
       header: {
         en: "Age Group",
         fr: "Groupe d’âge",

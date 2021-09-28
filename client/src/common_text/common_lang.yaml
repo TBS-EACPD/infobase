@@ -292,7 +292,7 @@ no_data:
   en: No data available
   fr: Aucune donnée n'est disponible
 no_data_table:
-  en: No data available for this table. Please check on any filters applied.
+  en: No data available for this table. Please check any filters applied.
   fr: Aucune donnée n'est disponible pour ce tableau. TODO
 open_data_link:
   en: Open Data Link
