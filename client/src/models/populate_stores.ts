@@ -295,10 +295,29 @@ const process_lookups = ({
     }
   );
 
-  // SUBJECT_TS_TODO not filtering CCOFOGs here right now, either add that back or get them dropped upstream to coincide with this branch
+  // TODO coordinate with pipeline to drop CCOFOGs from input data, clean this out
+  const root_tag_ids = _.map(program_tag_types, "id");
+  const parent_id_by_tag_id = _.chain(program_tags)
+    .map(({ tag_id, parent_id }) => [tag_id, parent_id])
+    .fromPairs()
+    .value();
+  const is_ccofog_tag = (id: string | undefined): boolean => {
+    if (typeof id === "undefined") {
+      throw new Error(
+        "Encountered a program tag with a parent id of undefined, this should not happen"
+      );
+    }
+    if (_.includes(root_tag_ids, id)) {
+      return id === "CCOFOG";
+    } else {
+      return is_ccofog_tag(parent_id_by_tag_id[id]);
+    }
+  };
+
   _.each(
     program_tag_types,
     ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) =>
+      !is_ccofog_tag(id) &&
       ProgramTag.store.create_and_register({
         ...required_fields({
           id,
@@ -325,6 +344,7 @@ const process_lookups = ({
       desc_en,
       desc_fr,
     }) =>
+      !is_ccofog_tag(parent_tag_id) &&
       ProgramTag.store.create_and_register({
         ...required_fields({
           id,
