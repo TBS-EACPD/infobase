@@ -14,7 +14,11 @@ const tag_configs = _.chain(ProgramTag.tag_roots)
   .map(({ id, name, description, is_m2m, children_tags }) => ({
     id,
     title: name,
-    text: description,
+    text: (
+      <div
+        dangerouslySetInnerHTML={sanitized_dangerous_inner_html(description)}
+      />
+    ),
     is_m2m,
     can_roll_up: !is_m2m,
     get_depth_one_nodes: (year) =>

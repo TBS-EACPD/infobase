@@ -136,6 +136,9 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
   get root_id() {
     return this.root.id;
   }
+  get is_root_tag() {
+    return typeof this.parent_tag_id !== "undefined";
+  }
   get parent_tag(): ProgramTag | undefined {
     return typeof this.parent_tag_id !== "undefined"
       ? ProgramTag.store.lookup(this.parent_tag_id)
