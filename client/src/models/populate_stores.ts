@@ -319,7 +319,6 @@ const process_lookups = ({
       });
     }
   );
-
   _.each(
     program_tag_types,
     ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
@@ -351,7 +350,25 @@ const process_lookups = ({
       desc_en,
       desc_fr,
     }) => {
-      !is_ccofog_tag(parent_tag_id) &&
+      if (!is_ccofog_tag(parent_tag_id)) {
+        const children_tag_ids = _.chain(program_tags)
+          .filter(({ parent_id }) => parent_id === id)
+          .map("tag_id")
+          .compact()
+          .value();
+        const program_ids = _.chain(tags_to_programs)
+          .filter(({ tag_id }) => tag_id === id)
+          .map("program_id")
+          .compact()
+          .value();
+
+        if (!_.isEmpty(children_tag_ids) && !_.isEmpty(program_ids)) {
+          throw new Error(`
+            Tag "${id}" has both child tags and program links. InfoBase assumes only leaf tags have program links!
+            Check with the data model up stream, either there's a problem there or a lot of tag related client code will need to be revisited. 
+          `);
+        }
+
         ProgramTag.store.create_and_register({
           ...required_fields({
             id,
@@ -362,17 +379,10 @@ const process_lookups = ({
           description_raw: is_en ? desc_en : desc_fr,
 
           parent_tag_id,
-          children_tag_ids: _.chain(program_tags)
-            .filter(({ parent_id }) => parent_id === id)
-            .map("tag_id")
-            .compact()
-            .value(),
-          program_ids: _.chain(tags_to_programs)
-            .filter(({ tag_id }) => tag_id === id)
-            .map("program_id")
-            .compact()
-            .value(),
+          children_tag_ids,
+          program_ids,
         });
+      }
     }
   );
 

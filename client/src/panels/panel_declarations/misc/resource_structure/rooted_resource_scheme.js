@@ -48,7 +48,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
       case "tag": {
         if (subject.has_children || !subject.has_programs) {
           throw new Error(
-            "Only leaf tags with programs allowed here (to confirm: InfoBase assumes a tag has programs ==> it is a leaf?)"
+            "Only leaf tags with programs allowed here (atm, InfoBase in general assumes tag.has_programs ==> !tag.has_children)"
           );
         }
 
