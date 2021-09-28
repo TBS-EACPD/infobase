@@ -60,6 +60,7 @@ export default {
       key: true,
       type: "str",
       nick: "so",
+      show_dropdown_filter: true,
       header: {
         en: "Standard Object",
         fr: "Article courant",

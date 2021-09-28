@@ -53,6 +53,7 @@ export default {
       key: true,
       type: "str",
       nick: "vote_stat",
+      show_dropdown_filter: true,
       header: {
         en: "Voted / Stat",
         fr: "Crédit / législatif",

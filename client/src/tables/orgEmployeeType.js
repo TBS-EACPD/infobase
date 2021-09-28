@@ -48,6 +48,7 @@ export default {
       key: true,
       type: "short-str",
       nick: "employee_type",
+      show_dropdown_filter: true,
       header: {
         en: "Employee Type",
         fr: "Type d'employé",

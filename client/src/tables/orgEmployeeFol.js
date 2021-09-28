@@ -48,6 +48,7 @@ export default {
       key: true,
       type: "int",
       nick: "fol",
+      show_dropdown_filter: true,
       header: trivial_text_maker("FOL"),
       can_group_by: true,
     });

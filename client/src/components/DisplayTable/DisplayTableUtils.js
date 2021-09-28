@@ -9,16 +9,11 @@ import { is_IE } from "src/core/feature_detection";
 
 import { LegendList } from "src/charts/legends/LegendList";
 
-import {
-  IconChevron,
-  IconCopy,
-  IconDownload,
-  IconFilter,
-} from "src/icons/icons";
+import { IconCopy, IconDownload, IconFilter } from "src/icons/icons";
 
 import {
   backgroundColor,
-  primaryColor,
+  tertiaryColor,
   secondaryColor,
 } from "src/style_constants/index";
 
@@ -36,12 +31,16 @@ export const DropdownFilter = ({
     opened_button_class_name={"button-unstyled"}
     closed_button_class_name={"button-unstyled"}
     dropdown_trigger_txt={
-      _.reject(dropdown_filter[column_key], (col_filter) => col_filter.active)
-        .length > 0 ? (
-        <IconFilter color={secondaryColor} />
-      ) : (
-        <IconChevron color={primaryColor} />
-      )
+      <IconFilter
+        color={
+          _.reject(
+            dropdown_filter[column_key],
+            (col_filter) => col_filter.active
+          ).length > 0
+            ? secondaryColor
+            : tertiaryColor
+        }
+      />
     }
     dropdown_content_class_name="no-right"
     dropdown_content={
