@@ -571,36 +571,37 @@ export class _DisplayTable extends React.Component<
                         </div>
                       )}
                       {searchable && (
-                        <DebouncedTextInput
-                          inputClassName={`search input-sm`}
-                          placeHolder={text_maker("filter_data")}
-                          a11y_label={text_maker("filter_data")}
-                          defaultValue={current_search_input}
-                          updateCallback={(search_value: string) => {
-                            const updated_searches = _.mapValues(
-                              searches,
-                              (value, key) =>
-                                key === column_key ? search_value : value
-                            );
+                        <div className="input-bar">
+                          <DebouncedTextInput
+                            inputClassName={`search input-sm input-unstyled`}
+                            style={{ width: "100%" }}
+                            placeHolder={text_maker("filter_data")}
+                            a11y_label={text_maker("filter_data")}
+                            defaultValue={current_search_input}
+                            updateCallback={(search_value: string) => {
+                              const updated_searches = _.mapValues(
+                                searches,
+                                (value, key) =>
+                                  key === column_key ? search_value : value
+                              );
 
-                            this.setState({
-                              searches: updated_searches,
-                              current_page: 0,
-                            });
-                          }}
-                          debounceTime={300}
-                          utility_button={
-                            show_dropdown_filter && (
-                              <DropdownFilter
-                                column_key={column_key}
-                                dropdown_filter={dropdown_filter}
-                                set_dropdown_filter={(
-                                  dropdown_filter: _DisplayTableState["dropdown_filter"]
-                                ) => this.setState({ dropdown_filter })}
-                              />
-                            )
-                          }
-                        />
+                              this.setState({
+                                searches: updated_searches,
+                                current_page: 0,
+                              });
+                            }}
+                            debounceTime={300}
+                          />
+                          {show_dropdown_filter && (
+                            <DropdownFilter
+                              column_key={column_key}
+                              dropdown_filter={dropdown_filter}
+                              set_dropdown_filter={(
+                                dropdown_filter: _DisplayTableState["dropdown_filter"]
+                              ) => this.setState({ dropdown_filter })}
+                            />
+                          )}
+                        </div>
                       )}
                     </td>
                   );
