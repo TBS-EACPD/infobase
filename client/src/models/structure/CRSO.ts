@@ -13,7 +13,7 @@ type CRSODef = {
   dept_id: string;
   program_ids: string[];
   name: string;
-  description: string;
+  description?: string;
   is_active: boolean;
   is_drf: boolean;
   is_internal_service: boolean;

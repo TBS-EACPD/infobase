@@ -13,35 +13,36 @@ import { Ministry } from "./Ministry";
 
 interface DeptDef {
   id: string;
-  dept_code: string;
-  crso_ids: string[];
-  abbr: string;
+  dept_code?: string;
+  abbr?: string;
   legal_title: string;
-  applied_title: string;
-  old_applied_title: string;
+  applied_title?: string;
+  old_applied_title?: string;
   status_code: string;
-  legislation: string;
-  raw_mandate: string;
-  pas_code: string;
-  schedule: string;
-  faa_hr: string;
-  auditor: string;
+  legislation?: string;
+  raw_mandate?: string;
+  pas_code?: string;
+  schedule?: string;
+  faa_hr?: string;
+  auditor?: string;
   incorp_yr: string;
-  fed_ownership: string;
-  end_yr: string;
-  notes: string;
+  fed_ownership?: string;
+  end_yr?: string;
+  notes?: string;
   dp_status_code: string;
-  inst_form_id: string;
   ministry_id?: string;
-  minister_ids: string[];
-  table_ids: string[];
-  eval_url: string;
-  website_url: string;
+  inst_form_id: string;
+  eval_url?: string;
+  website_url?: string;
   le_la: string;
   du_de_la: string;
-  other_lang_abbr: string;
-  other_lang_applied_title: string;
+  other_lang_abbr?: string;
   other_lang_legal_title: string;
+  other_lang_applied_title?: string;
+
+  minister_ids: string[];
+  table_ids: string[];
+  crso_ids: string[];
 }
 
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
@@ -54,7 +55,7 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
 ) {
   static store = make_store(
     (def: DeptDef) => new Dept(def),
-    (dept) => [dept.dept_code, +dept.id]
+    (dept) => _.compact([dept.dept_code, +dept.id])
   );
 
   static depts_with_table_data() {
