@@ -73,9 +73,6 @@ export class Program extends BaseSubjectFactory<ProgramDef>(
   get has_planned_spending() {
     return this.dept.has_planned_spending;
   }
-  get link_to_infographic() {
-    return `#orgs/program/${this.id}/infograph`;
-  }
   get is_dead() {
     return !this.is_active;
   }
@@ -156,26 +153,6 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
       return sanitized_marked(this.description_raw);
     }
   }
-  get number_of_tagged() {
-    return this.programs.length;
-  }
-  get is_lowest_level_tag() {
-    // TODO "lowest level" to me would imply be checking children_tags, not programs, but I think in practice the two are expected to be equivalent, hmm
-    // lots of code to check before cleaning this up
-    return !_.isEmpty(this.program_ids);
-  }
-  get has_planned_spending() {
-    return (
-      this.is_lowest_level_tag &&
-      _.some(this.programs, (program) => program.has_planned_spending)
-    );
-  }
-  get planned_spending_gaps() {
-    return (
-      this.is_lowest_level_tag &&
-      _.some(this.programs, (program) => !program.has_planned_spending)
-    );
-  }
   get is_m2m() {
     return this.root.cardinality === "MtoM";
   }
@@ -187,6 +164,12 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
       .uniq()
       .without(this)
       .value();
+  }
+  get has_programs() {
+    return !_.isEmpty(this.program_ids);
+  }
+  get has_planned_spending() {
+    return _.some(this.programs, (program) => program.has_planned_spending);
   }
 
   // TODO funky legacy junk, but search configs and the tag explorer at least use it. Should probably review and clean up

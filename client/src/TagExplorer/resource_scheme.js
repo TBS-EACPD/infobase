@@ -54,7 +54,7 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
 
     switch (subject.subject_type) {
       case "tag": {
-        if (subject.is_lowest_level_tag) {
+        if (subject.has_programs) {
           return _.chain(subject.programs)
             .map((prog) => ({
               id: `${parent_id}-${prog.guid}`,
