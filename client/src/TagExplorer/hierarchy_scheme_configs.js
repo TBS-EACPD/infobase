@@ -11,7 +11,6 @@ import { sanitized_dangerous_inner_html } from "src/general_utils";
 import { related_tags_row } from "./tag_hierarchy_utils";
 
 const tag_configs = _.chain(ProgramTag.tag_roots)
-  .omit(["CCOFOG"])
   .map(({ id, name, description, is_m2m, children_tags }) => ({
     id,
     title: name,

@@ -22,7 +22,7 @@ import text from "./tags_related_to_subject_panels.yaml";
 
 const { text_maker, TM } = create_text_maker_component([text, hierarchy_text]);
 
-const scheme_order = ["GOCO", "WWH", "CCOFOG", "HWH"];
+const scheme_order = ["GOCO", "WWH", "HWH"];
 
 const tag_root_display = (tag_root) => (
   <div>
