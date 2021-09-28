@@ -246,6 +246,30 @@ const process_lookups = ({
     }
   );
 
+  // TODO coordinate with pipeline to drop CCOFOGs from input data, clean this out
+  const root_tag_ids = _.map(program_tag_types, "id");
+  const parent_id_by_tag_id = _.chain(program_tags)
+    .map(({ tag_id, parent_id }) => [tag_id, parent_id])
+    .fromPairs()
+    .value();
+  const is_ccofog_tag = (id: string | undefined): boolean => {
+    if (typeof id === "undefined") {
+      throw new Error(
+        "Encountered a program tag with a parent id of undefined, this should not happen"
+      );
+    }
+    if (_.includes(root_tag_ids, id)) {
+      return id === "CCOFOG";
+    } else {
+      return is_ccofog_tag(parent_id_by_tag_id[id]);
+    }
+  };
+
+  const tags_to_programs_no_ccofog = _.filter(
+    tags_to_programs,
+    ({ tag_id }) => !is_ccofog_tag(tag_id)
+  );
+
   _.each(
     program,
     ({
@@ -284,7 +308,7 @@ const process_lookups = ({
         is_internal_service: is_internal_service === "1",
         is_fake: is_fake_program === "1",
 
-        tag_ids: _.chain(tags_to_programs)
+        tag_ids: _.chain(tags_to_programs_no_ccofog)
           .filter(
             ({ program_id }) =>
               program_id === Program.make_program_id(dept_code, activity_code)
@@ -295,25 +319,6 @@ const process_lookups = ({
       });
     }
   );
-
-  // TODO coordinate with pipeline to drop CCOFOGs from input data, clean this out
-  const root_tag_ids = _.map(program_tag_types, "id");
-  const parent_id_by_tag_id = _.chain(program_tags)
-    .map(({ tag_id, parent_id }) => [tag_id, parent_id])
-    .fromPairs()
-    .value();
-  const is_ccofog_tag = (id: string | undefined): boolean => {
-    if (typeof id === "undefined") {
-      throw new Error(
-        "Encountered a program tag with a parent id of undefined, this should not happen"
-      );
-    }
-    if (_.includes(root_tag_ids, id)) {
-      return id === "CCOFOG";
-    } else {
-      return is_ccofog_tag(parent_id_by_tag_id[id]);
-    }
-  };
 
   _.each(
     program_tag_types,
