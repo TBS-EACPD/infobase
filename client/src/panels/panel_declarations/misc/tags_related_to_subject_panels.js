@@ -13,6 +13,8 @@ import {
 
 import { Dept, ProgramTag } from "src/models/subject_index";
 
+import { sanitized_dangerous_inner_html } from "src/general_utils";
+
 import { infograph_href_template } from "src/infographic/infographic_link";
 
 import { HierarchyDeadElementIcon } from "./hierarchy_component";
@@ -27,7 +29,12 @@ const scheme_order = ["GOCO", "WWH", "HWH"];
 const tag_root_display = (tag_root) => (
   <div>
     <div>{tag_root.name}</div>
-    <div className="small-panel-text">{tag_root.description}</div>
+    <div
+      className="small-panel-text"
+      dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+        tag_root.description
+      )}
+    />
   </div>
 );
 
