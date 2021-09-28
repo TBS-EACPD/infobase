@@ -30,7 +30,7 @@ const tag_configs = _.chain(ProgramTag.tag_roots)
           is_m2m: tag.is_m2m,
           subject: tag,
           defs:
-            tag.is_lowest_level_tag &&
+            tag.has_programs &&
             _.compact([
               !_.isEmpty(tag.description) && {
                 term: trivial_text_maker("description"),

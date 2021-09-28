@@ -223,7 +223,7 @@ const gocos = {
   get_data: () =>
     _.chain(ProgramTag.store.get_all())
       .filter((tag) => tag.root.id === "GOCO")
-      .filter("is_lowest_level_tag")
+      .filter("has_programs")
       .value(),
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name"], "gocos")(datum),
@@ -237,7 +237,7 @@ const how_we_help = {
   get_data: () =>
     _.chain(ProgramTag.store.get_all())
       .filter((tag) => tag.root.id === "HWH")
-      .filter("is_lowest_level_tag")
+      .filter("has_programs")
       .value(),
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name"], "how_we_help")(datum),
@@ -251,7 +251,7 @@ const who_we_help = {
   get_data: () =>
     _.chain(ProgramTag.store.get_all())
       .filter((tag) => tag.root.id === "WWH")
-      .filter("is_lowest_level_tag")
+      .filter("has_programs")
       .value(),
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name"], "who_we_help")(datum),

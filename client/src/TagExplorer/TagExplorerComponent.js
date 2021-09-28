@@ -88,7 +88,7 @@ function render_non_col_content({ node }) {
       )}
       {(_.includes(["program", "dept"], subject.level) ||
         subject.is_cr ||
-        subject.is_lowest_level_tag) && (
+        subject.has_programs) && (
         <div className="ExplorerNode__BRLinkContainer">
           <a href={infograph_href_template(subject)}>
             <TM k="learn_more" />
