@@ -4,6 +4,8 @@ import { trivial_text_maker } from "src/models/text";
 import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
 import { make_store } from "src/models/utils/make_store";
 
+import { sanitized_marked } from "src/general_utils";
+
 import { CRSO } from "./CRSO";
 import { Dept } from "./Dept";
 
@@ -14,7 +16,7 @@ type ProgramDef = {
   tag_ids: string[];
   description: string;
   name: string;
-  old_name: string;
+  old_name?: string;
   is_active: boolean;
   is_internal_service: boolean;
   is_fake: boolean;
@@ -37,11 +39,17 @@ export class Program extends BaseSubjectFactory<ProgramDef>(
     dept_id: string | number,
     activity_code: string
   ) {
+    const { dept_code } = Dept.store.lookup(dept_id);
+
+    if (typeof dept_code === "undefined") {
+      throw new Error(`
+        Tried to look up a program with activity code "${activity_code}" for the dept "${dept_id}".
+        This department does not have a dept_code property, and therfore can't have programs.
+      `);
+    }
+
     return Program.store.lookup(
-      Program.make_program_id(
-        Dept.store.lookup(dept_id).dept_code,
-        activity_code
-      )
+      Program.make_program_id(dept_code, activity_code)
     );
   }
 
@@ -78,7 +86,7 @@ type ProgramTagDef = {
   id: string;
   name: string;
   cardinality?: string;
-  description: string;
+  description_raw?: string;
   parent_tag_id?: string;
   children_tag_ids?: string[];
   program_ids?: string[];
@@ -140,6 +148,11 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
     return _.map(this.program_ids, Program.store.lookup);
   }
 
+  get description() {
+    if (this.description_raw) {
+      return sanitized_marked(this.description_raw);
+    }
+  }
   get number_of_tagged() {
     return this.programs.length;
   }
