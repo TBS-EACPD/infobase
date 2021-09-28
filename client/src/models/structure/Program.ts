@@ -78,7 +78,6 @@ export class Program extends BaseSubjectFactory<ProgramDef>(
   }
 }
 
-// TODO seems like tag roots should probably be their own subjects, although would be hard to hunt down all the logic out there this might confuse
 type ProgramTagDef = {
   id: string;
   name: string;
@@ -144,8 +143,14 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
   get children_tags() {
     return _.map(this.children_tag_ids, ProgramTag.store.lookup);
   }
+  get has_children() {
+    return !_.isEmpty(this.children_tag_ids);
+  }
   get programs() {
     return _.map(this.program_ids, Program.store.lookup);
+  }
+  get has_programs() {
+    return !_.isEmpty(this.program_ids);
   }
 
   get description() {
@@ -165,30 +170,7 @@ export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
       .without(this)
       .value();
   }
-  get has_programs() {
-    return !_.isEmpty(this.program_ids);
-  }
   get has_planned_spending() {
     return _.some(this.programs, (program) => program.has_planned_spending);
-  }
-
-  // TODO funky legacy junk, but search configs and the tag explorer at least use it. Should probably review and clean up
-  plural() {
-    if (this.root_id === "GOCO") {
-      if (
-        this.parent_tag &&
-        _.includes(ProgramTag.tag_roots, this.parent_tag)
-      ) {
-        return trivial_text_maker("spend_areas");
-      } else {
-        return trivial_text_maker("gocos");
-      }
-    } else {
-      if (!_.isEmpty(this.programs) && _.isEmpty(this.children_tags)) {
-        return trivial_text_maker("tag") + "(s)";
-      } else {
-        return trivial_text_maker("tag_categories");
-      }
-    }
   }
 }

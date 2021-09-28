@@ -218,7 +218,7 @@ const glossary_lite = {
 const gocos = {
   config_name: "gocos",
   header_function: () =>
-    `${ProgramTag.plural} - ${ProgramTag.tag_roots_by_id.GOCO.name}`,
+    `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.GOCO.name}`,
   name_function: _.property("name"),
   get_data: () =>
     _.chain(ProgramTag.store.get_all())
@@ -232,7 +232,7 @@ const gocos = {
 const how_we_help = {
   config_name: "how_we_help",
   header_function: () =>
-    `${ProgramTag.plural} - ${ProgramTag.tag_roots_by_id.HWH.name}`,
+    `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.HWH.name}`,
   name_function: _.property("name"),
   get_data: () =>
     _.chain(ProgramTag.store.get_all())
@@ -246,7 +246,7 @@ const how_we_help = {
 const who_we_help = {
   config_name: "who_we_help",
   header_function: () =>
-    `${ProgramTag.plural} - ${ProgramTag.tag_roots_by_id.WWH.name}`,
+    `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.WWH.name}`,
   name_function: _.property("name"),
   get_data: () =>
     _.chain(ProgramTag.store.get_all())
