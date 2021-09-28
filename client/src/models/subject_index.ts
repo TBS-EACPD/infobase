@@ -43,16 +43,26 @@ export const Subject = {
 export const get_subject_by_guid = (guid: string) => {
   const [type, id] = guid.split("_");
 
-  const subject = _.chain(Subject)
+  const subject_class = _.chain(Subject)
     .values()
     .find({ subject_type: type })
     .value();
 
-  if (subject) {
-    // SUBJECT_TS_TODO temporary shim and loss of type safety until legacy Result and Indicator subjects ar ported to TS and the new Subject factory
-    return _.has(subject, "store.lookup")
-      ? (subject as any).store.lookup(id) // eslint-disable-line @typescript-eslint/no-explicit-any
-      : (subject as any).lookup(id); // eslint-disable-line @typescript-eslint/no-explicit-any
+  if (subject_class) {
+    // TODO temporary shim and loss of type safety until legacy Result and Indicator subjects ar ported to TS and the new Subject factory
+    return _.has(subject_class, "store.lookup")
+      ? (
+          subject_class as
+            | typeof Gov
+            | typeof Dept
+            | typeof CRSO
+            | typeof Program
+            | typeof InstForm
+            | typeof Ministry
+            | typeof Minister
+            | typeof ProgramTag
+        ).store.lookup(id)
+      : (subject_class as typeof Result | typeof Indicator).lookup(id);
   }
 };
 
