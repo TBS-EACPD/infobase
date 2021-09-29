@@ -16,6 +16,14 @@ table.tombstone-table > tbody > tr > td > p {
   margin: 0px;
 }
 
+div.tombstone-data-div {
+  border-bottom: 1px solid $primaryColor;
+  width: 100%;
+  display: inline-flex;
+  padding: 10px;
+  padding-left: 0px;
+}
+
 dl.tombstone-data-list {
   margin: 0;
   & > dt:first-of-type,

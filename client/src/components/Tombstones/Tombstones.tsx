@@ -1,4 +1,5 @@
-import _ from "lodash";
+import { borderBottomStyle } from "html2canvas/dist/types/css/property-descriptors/border-style";
+import _, { reduce } from "lodash";
 import React, { Fragment } from "react";
 
 import "./Tombstones.scss";
@@ -24,19 +25,16 @@ interface LabeledTombstoneProps {
 }
 
 const LabeledTombstone = ({ labels_and_items }: LabeledTombstoneProps) => (
-  <div>
+  <dl className="row tombstone-data-list">
     {_.map(labels_and_items, ([label, item], ix) => (
       <Fragment key={ix}>
-        <dl className="row tombstone-data-list">
+        <div className="tombstone-data-div">
           <dt className="col-12 col-lg-2">{label}</dt>
           <dd className="col-12 col-lg-10">{item}</dd>
-        </dl>
-        {ix !== _.size(labels_and_items) - 1 && (
-          <hr style={{ width: "100%" }} />
-        )}
+        </div>
       </Fragment>
     ))}
-  </div>
+  </dl>
 );
 
 export { UnlabeledTombstone, LabeledTombstone };
