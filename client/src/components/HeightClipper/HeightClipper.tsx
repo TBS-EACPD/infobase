@@ -26,9 +26,9 @@ export class HeightClipper extends React.Component<
   HeightClipperProps,
   HeightClipperState
 > {
-  main: React.RefObject<HTMLDivElement>;
-  content: React.RefObject<HTMLDivElement>;
-  untabbable_children: React.RefObject<HTMLDivElement>;
+  main = React.createRef<HTMLDivElement>();
+  content = React.createRef<HTMLDivElement>();
+  untabbable_children = React.createRef<HTMLDivElement>();
   debounced_mutation_callback: MutationCallback;
   observer: MutationObserver;
 
@@ -38,9 +38,6 @@ export class HeightClipper extends React.Component<
       exceedsHeight: false,
       shouldClip: true,
     };
-    this.main = React.createRef();
-    this.content = React.createRef();
-    this.untabbable_children = React.createRef();
 
     this.debounced_mutation_callback = _.debounce(() => {
       const untabbable_children_node = this.untabbable_children.current;
