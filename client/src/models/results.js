@@ -261,7 +261,7 @@ const ResultCounts = {
     this.data = data;
   },
   get_all_dept_counts() {
-    return _.filter(this.data, { subject_type: "dept" });
+    return _.filter(this.data, { level: "dept" });
   },
 };
 
