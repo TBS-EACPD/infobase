@@ -22,6 +22,10 @@ show_all:
 select_all:
   en: (Select All)
   fr: TODO
+filters_applied:
+  transform: [markdown]
+  en: _Filters applied_
+  fr: TODO
 ellipsis_end:
   transform: [handlebars]
   en: Page {{page_num}}. Click this, then move right to view more options.

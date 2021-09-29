@@ -2,11 +2,18 @@
 
 .input-bar {
   display: flex;
+  flex-direction: column;
   border: 2px $tertiaryColor solid;
   border-radius: 1rem;
-  height: 4.5rem;
   padding: 0.1rem;
   background: $backgroundColor;
+}
+.input-bar__filter-applied {
+  display: flex;
+  color: $tertiaryColor;
+  border-top: 1px $tertiaryColor solid;
+  font-size: 0.9em;
+  justify-content: center;
 }
 
 .skip-to-data {

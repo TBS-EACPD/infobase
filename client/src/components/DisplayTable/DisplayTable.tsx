@@ -17,8 +17,9 @@ import type { LegendItemType } from "src/charts/legends/LegendItemType";
 import { LegendList } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
-
+import { IconCheckmark } from "src/icons/icons";
 import { smart_sort_func } from "src/sort_utils";
+import { successDarkColor } from "src/style_constants";
 
 import {
   DropdownFilter,
@@ -548,6 +549,8 @@ export class _DisplayTable extends React.Component<
                     col_configs_with_defaults[column_key].is_searchable;
                   const show_dropdown_filter =
                     col_configs_with_defaults[column_key].show_dropdown_filter;
+                  const is_dropdown_filter_applied =
+                    _.reject(dropdown_filter[column_key], "active").length > 0;
 
                   if (show_dropdown_filter && !searchable) {
                     console.warn(
@@ -571,35 +574,55 @@ export class _DisplayTable extends React.Component<
                         </div>
                       )}
                       {searchable && (
-                        <div className="input-bar">
-                          <DebouncedTextInput
-                            inputClassName={`search input-sm input-unstyled`}
-                            style={{ width: "100%" }}
-                            placeHolder={text_maker("filter_data")}
-                            a11y_label={text_maker("filter_data")}
-                            defaultValue={current_search_input}
-                            updateCallback={(search_value: string) => {
-                              const updated_searches = _.mapValues(
-                                searches,
-                                (value, key) =>
-                                  key === column_key ? search_value : value
-                              );
+                        <div
+                          style={{
+                            height: is_dropdown_filter_applied
+                              ? "6rem"
+                              : "4.5rem",
+                            minWidth: show_dropdown_filter ? "120px" : "95px",
+                          }}
+                          className="input-bar"
+                        >
+                          <div style={{ display: "flex" }}>
+                            <DebouncedTextInput
+                              inputClassName={`search input-sm input-unstyled`}
+                              style={{ width: "100%" }}
+                              placeHolder={text_maker("filter_data")}
+                              a11y_label={text_maker("filter_data")}
+                              defaultValue={current_search_input}
+                              updateCallback={(search_value: string) => {
+                                const updated_searches = _.mapValues(
+                                  searches,
+                                  (value, key) =>
+                                    key === column_key ? search_value : value
+                                );
 
-                              this.setState({
-                                searches: updated_searches,
-                                current_page: 0,
-                              });
-                            }}
-                            debounceTime={300}
-                          />
-                          {show_dropdown_filter && (
-                            <DropdownFilter
-                              column_key={column_key}
-                              dropdown_filter={dropdown_filter}
-                              set_dropdown_filter={(
-                                dropdown_filter: _DisplayTableState["dropdown_filter"]
-                              ) => this.setState({ dropdown_filter })}
+                                this.setState({
+                                  searches: updated_searches,
+                                  current_page: 0,
+                                });
+                              }}
+                              debounceTime={300}
                             />
+                            {show_dropdown_filter && (
+                              <DropdownFilter
+                                column_key={column_key}
+                                dropdown_filter={dropdown_filter}
+                                set_dropdown_filter={(
+                                  dropdown_filter: _DisplayTableState["dropdown_filter"]
+                                ) => this.setState({ dropdown_filter })}
+                              />
+                            )}
+                          </div>
+                          {is_dropdown_filter_applied && (
+                            <div className="input-bar__filter-applied">
+                              <IconCheckmark
+                                width="1em"
+                                height="1.3em"
+                                color={successDarkColor}
+                              />
+                              <TM k="filters_applied" />
+                            </div>
                           )}
                         </div>
                       )}

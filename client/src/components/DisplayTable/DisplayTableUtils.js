@@ -33,10 +33,7 @@ export const DropdownFilter = ({
     dropdown_trigger_txt={
       <IconFilter
         color={
-          _.reject(
-            dropdown_filter[column_key],
-            (col_filter) => col_filter.active
-          ).length > 0
+          _.reject(dropdown_filter[column_key], "active").length > 0
             ? secondaryColor
             : tertiaryColor
         }
