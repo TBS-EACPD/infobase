@@ -99,9 +99,9 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     switch (this.status_code) {
       case "a":
         return trivial_text_maker("active");
-      case "b":
+      case "t":
         return trivial_text_maker("transferred");
-      case "c":
+      case "d":
         return trivial_text_maker("dissolved");
       default:
         return "";
