@@ -2,9 +2,9 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { get_glossary_item_tooltip_html } from "src/models/glossary";
-
 import { StatelessModal } from "src/components/index";
+
+import { get_glossary_item_tooltip_html } from "src/models/glossary";
 
 export class TooltipModalDelegator extends React.Component {
   constructor(props) {
