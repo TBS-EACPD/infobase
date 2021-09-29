@@ -66,7 +66,7 @@ class IgocExplorerScheme extends AbstractExplorerScheme {
         return (nodes) =>
           filter_hierarchy(
             nodes,
-            (node) => (_.get(node, "data.subject.tables.length") || 0) > 1,
+            (node) => _.get(node, "data.subject.has_table_data", false),
             { leaves_only: false, markSearchResults: false }
           );
       }
