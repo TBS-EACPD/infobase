@@ -144,7 +144,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
   return {
     name: text_maker("goc"),
     href: href_generator(Gov),
-    children: _.isEmpty(subject.min)
+    children: !subject.ministry
       ? [
           {
             name: subject.name,
@@ -156,7 +156,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
             name: `${subject.ministry.name} (${text_maker("ministry")})`,
             children: _.chain(subject.ministry.orgs)
               .filter((node) => !node.is_dead || is_subject(node))
-              .groupBy("type")
+              .groupBy("inst_form.name")
               .toPairs()
               .sortBy(([type, group]) => _.includes(group, subject))
               .reverse()
