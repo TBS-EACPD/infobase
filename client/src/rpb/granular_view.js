@@ -56,7 +56,6 @@ class GranularView extends React.Component {
 
   get_table_content() {
     const {
-      table,
       columns: data_columns,
       flat_data,
       sorted_key_columns,
@@ -65,6 +64,8 @@ class GranularView extends React.Component {
       dimension,
       dimensions,
     } = this.props;
+    console.log("GranularView - get_table_content");
+    console.log(this.props);
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
 
@@ -73,10 +74,6 @@ class GranularView extends React.Component {
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
     const dim_all_or_dept = dimension === "all" || dimension === "dept";
-
-    function is_special_dim(dim) {
-      return _.includes(table.special_dims, dim);
-    }
 
     const dept_and_legal_cols = dim_all_or_dept
       ? {
@@ -106,6 +103,7 @@ class GranularView extends React.Component {
             {
               nick,
               type,
+              custom_group_by,
               fully_qualified_name,
               is_searchable = true,
               is_summable = true,
@@ -116,8 +114,7 @@ class GranularView extends React.Component {
             {
               index: idx + 2,
               header:
-                (nick === "desc" || nick === "type") &&
-                is_special_dim(dimension)
+                custom_group_by === dimension
                   ? text_maker(dimension)
                   : fully_qualified_name,
               is_searchable:
@@ -169,7 +166,7 @@ class GranularView extends React.Component {
                 className={"normal-radio-btn-label"}
                 key={`${dim}-radio-btn-label`}
               >
-                {dim === "all" || is_special_dim(dim)
+                {dim === "all" || !_.find(sorted_key_columns, ["nick", dim])
                   ? text_maker(dim)
                   : dim === "dept"
                   ? text_maker("org")

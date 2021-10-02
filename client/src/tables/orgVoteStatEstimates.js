@@ -4,7 +4,7 @@ import _ from "lodash";
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
-import { year_templates, businessConstants } from "./table_common";
+import { text_maker, year_templates, businessConstants } from "./table_common";
 
 import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;
@@ -80,8 +80,15 @@ export default {
         en: "Vote / Statutory Description",
         fr: "Crédit / Poste législatif Description",
       },
+      custom_group_by: "vote_vs_stat",
       vote_vs_stat: function (row) {
         return row.votestattype === 999;
+      },
+      dim_col_value: function (row) {
+        return [
+          "desc",
+          text_maker(row.votestattype === 999 ? "stat" : "voted"),
+        ];
       },
     });
     this.add_col({

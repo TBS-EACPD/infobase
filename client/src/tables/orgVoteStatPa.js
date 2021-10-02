@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
 
-import { m, year_templates } from "./table_common";
+import { text_maker, m, year_templates } from "./table_common";
 
 import text from "./orgVoteStatPa.yaml";
 
@@ -102,8 +102,15 @@ export default {
           en: "Description",
           fr: "Description",
         },
+        custom_group_by: "vote_vs_stat",
         vote_vs_stat: function (row) {
           return row.votestattype === 999;
+        },
+        dim_col_value: function (row) {
+          return [
+            "desc",
+            text_maker(row.votestattype === 999 ? "stat" : "voted"),
+          ];
         },
       },
     ]);
