@@ -2,7 +2,7 @@
 // of the table spec
 import _ from "lodash";
 
-import { year_templates, businessConstants } from "./table_common";
+import { text_maker, year_templates, businessConstants } from "./table_common";
 
 import text from "./orgTransferPayments.yaml";
 
@@ -56,8 +56,15 @@ export default {
           fr: "Type",
         },
         can_group_by: true,
+        custom_group_by: "vote_vs_stat",
         vote_vs_stat: function (row) {
           return _.includes(row.tp, "(S) ");
+        },
+        dim_col_value: function (row) {
+          return [
+            "type",
+            text_maker(_.includes(row.tp, "(S) ") ? "stat" : "voted"),
+          ];
         },
       },
       {

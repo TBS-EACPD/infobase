@@ -15,8 +15,6 @@ import { make_unique_func, make_unique } from "src/general_utils";
 import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
 
-import { text_maker } from "src/tables/table_common";
-
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { lang } from "./injected_build_constants";
 
@@ -252,91 +250,68 @@ export class Table {
     return run_template(this.title_def[lang]);
   }
 
-  get all_special_dimensions() {
-    // dimensions from all tables that do not use the default grouping
-    return ["vote_vs_stat"];
-  }
-  // special dimensions of current table
-  get special_dims() {
-    return _.chain(this._cols)
-      .flatMap((col) => (_.has(col, "children") ? col.children : col))
-      .map((col) =>
-        _.chain(col).keys().intersection(this.all_special_dimensions).value()
-      )
-      .flatten()
-      .compact()
-      .value();
-  }
   get dimensions() {
+    const cols = _.flatMap(this._cols, (col) =>
+      _.has(col, "children") ? col.children : col
+    );
+    const special_dimensions = _.chain(cols).map("custom_group_by").value();
     return _.concat(
       "all",
-      _.chain(this._cols)
-        .flatMap((col) => (_.has(col, "children") ? col.children : col))
+      _.chain(cols)
         .filter("can_group_by")
         .map("nick")
-        .concat(this.special_dims)
+        .concat(special_dimensions)
         .compact()
         .value()
     );
   }
 
-  get_special_dim_value = (row, dimension) => {
-    this.set_special_group_by(dimension);
-    // need different case for each special dimension
-    switch (dimension) {
-      case "vote_vs_stat": {
-        const voted = text_maker("voted");
-        const stat = text_maker("stat");
-        return this[dimension](row) ? stat : voted;
-      }
-    }
-  };
-
-  set_special_group_by = (dimension) => {
-    if (!_.includes(this.special_dims, dimension)) {
-      throw new Error("No special grouping for this dimension");
-    }
-    const special_col = _.chain(this._cols)
-      .flatMap((col) => (_.has(col, "children") ? col.children : col))
-      .filter(dimension)
-      .head()
-      .value();
-    this[dimension] = special_col[dimension];
-  };
+  get_dimension_col(dimension) {
+    const cols = _.flatMap(this._cols, (col) =>
+      _.has(col, "children") ? col.children : col
+    );
+    return (
+      _.chain(cols)
+        .filter((col) => col.nick === dimension)
+        .head()
+        .value() || _.chain(cols).filter("custom_group_by").head().value()
+    );
+  }
 
   get_group_by_func() {
     this.group_by_func = (data, dimension) => {
-      if (!_.includes(this.special_dims, dimension)) {
-        if (
-          !_.pickBy(
-            this._cols,
-            (col) => _.has(col, dimension) && col.can_group_by
-          )
-        ) {
-          throw new Error("Can not group by this column");
-        }
+      console.log("group_by_func");
+
+      if (
+        _.chain(this._cols)
+          .flatMap((col) => (_.has(col, "children") ? col.children : col))
+          .map("nick")
+          .includes(dimension)
+          .value()
+      ) {
         return _.groupBy(data, dimension);
       }
-
-      this.set_special_group_by(dimension);
-      return _.groupBy(data, (row) => this[dimension](row));
+      return _.groupBy(data, (row) =>
+        this.get_dimension_col(dimension)[dimension](row)
+      );
     };
   }
 
   get_dimension_col_values_func() {
     this.dimension_col_values_func = (row, dimension) => {
-      if (!_.includes(this.special_dims, dimension)) {
+      const dimension_col = this.get_dimension_col(dimension);
+
+      if (
+        _.chain(this._cols)
+          .flatMap((col) => (_.has(col, "children") ? col.children : col))
+          .map("nick")
+          .includes(dimension)
+          .value()
+      ) {
         return [dimension, row[dimension]];
+      } else {
+        return dimension_col.dim_col_value(row);
       }
-
-      const col_name = _.chain(this._cols)
-        .flatMap((col) => (_.has(col, "children") ? col.children : col))
-        .filter(dimension)
-        .map("nick")
-        .head()
-        .value();
-
-      return [col_name, this.get_special_dim_value(row, dimension)];
     };
   }
 
