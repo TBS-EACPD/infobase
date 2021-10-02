@@ -224,7 +224,6 @@ export class Table {
       })
       .value();
 
-    this.get_dimensions();
     this.get_group_by_func();
     this.get_dimension_col_values_func();
   }
@@ -268,6 +267,18 @@ export class Table {
       .compact()
       .value();
   }
+  get dimensions() {
+    return _.concat(
+      "all",
+      _.chain(this._cols)
+        .flatMap((col) => (_.has(col, "children") ? col.children : col))
+        .filter("can_group_by")
+        .map("nick")
+        .concat(this.special_dims)
+        .compact()
+        .value()
+    );
+  }
 
   get_special_dim_value = (row, dimension) => {
     this.set_special_group_by(dimension);
@@ -292,17 +303,6 @@ export class Table {
       .value();
     this[dimension] = special_col[dimension];
   };
-
-  get_dimensions() {
-    this.dimensions = _.chain(this._cols)
-      .flatMap((col) => (_.has(col, "children") ? col.children : col))
-      .filter("can_group_by")
-      .map("nick")
-      .concat(this.special_dims)
-      .compact()
-      .value();
-    this.dimensions.unshift("all");
-  }
 
   get_group_by_func() {
     this.group_by_func = (data, dimension) => {
