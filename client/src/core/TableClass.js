@@ -266,6 +266,14 @@ export class Table {
     );
   }
 
+  is_special_dim(dimension) {
+    return !_.chain(this._cols)
+      .flatMap((col) => (_.has(col, "children") ? col.children : col))
+      .map("nick")
+      .includes(dimension)
+      .value();
+  }
+
   get_dimension_col(dimension) {
     const cols = _.flatMap(this._cols, (col) =>
       _.has(col, "children") ? col.children : col
@@ -280,15 +288,7 @@ export class Table {
 
   get_group_by_func() {
     this.group_by_func = (data, dimension) => {
-      console.log("group_by_func");
-
-      if (
-        _.chain(this._cols)
-          .flatMap((col) => (_.has(col, "children") ? col.children : col))
-          .map("nick")
-          .includes(dimension)
-          .value()
-      ) {
+      if (!this.is_special_dim(dimension)) {
         return _.groupBy(data, dimension);
       }
       return _.groupBy(data, (row) =>
@@ -301,13 +301,7 @@ export class Table {
     this.dimension_col_values_func = (row, dimension) => {
       const dimension_col = this.get_dimension_col(dimension);
 
-      if (
-        _.chain(this._cols)
-          .flatMap((col) => (_.has(col, "children") ? col.children : col))
-          .map("nick")
-          .includes(dimension)
-          .value()
-      ) {
+      if (!this.is_special_dim(dimension)) {
         return [dimension, row[dimension]];
       } else {
         return dimension_col.dim_col_value(row);
