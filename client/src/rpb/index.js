@@ -162,7 +162,6 @@ class RPB extends React.Component {
   render() {
     const { broken_url } = this.props.state;
     const { columns: data_columns, dimension } = this.state;
-    console.log("RPB - render()");
 
     const table = this.state.table && Table.store.lookup(this.state.table);
 
@@ -198,7 +197,6 @@ class RPB extends React.Component {
       ...table,
     };
     const dimensions = table.dimensions;
-    console.log({ table, dimensions });
 
     const table_data =
       this.state.table &&
