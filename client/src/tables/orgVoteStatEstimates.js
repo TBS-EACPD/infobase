@@ -153,14 +153,9 @@ export default {
       var filter = options.filter;
       var add_percentage = options.add_percentage || false;
       var filter_zeros = options.filter_zeros || false;
-      var compress_carry_fws = options.compress_carry_fws || false;
       var total = this.sum(col) + 1;
       var dept = this.dept || false;
-      var dimension = "by_estimates_doc";
-      if (compress_carry_fws) {
-        dimension = "by_estimates_doc_compressed";
-      }
-      return _.chain(this.table[dimension](col, dept, false))
+      return _.chain(this.table.sum_cols_by_grouped_data(col, "est_doc", dept))
         .toPairs()
         .sortBy(function (est_doc_lines) {
           var first_line = est_doc_lines[1][0];
