@@ -15,7 +15,7 @@ import {
   Minister,
   InstForm,
   ProgramTag,
-} from "./subject_index";
+} from "./subjects";
 
 const is_en = lang === "en";
 const lookups_file_name = `lookups_${lang}.json`;

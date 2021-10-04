@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";

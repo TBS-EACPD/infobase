@@ -1,7 +1,7 @@
 import { nest } from "d3-collection";
 import _ from "lodash";
 
-import { Gov } from "src/models/subject_index";
+import { Gov } from "src/models/subjects";
 
 import * as text_maker from "src/models/text";
 

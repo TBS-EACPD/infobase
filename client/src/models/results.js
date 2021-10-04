@@ -5,7 +5,7 @@ import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
 import { businessConstants } from "./businessConstants";
-import { Program, CRSO } from "./structure";
+import { Program, CRSO } from "./subjects";
 import { trivial_text_maker, run_template } from "./text";
 
 const { months } = businessConstants;

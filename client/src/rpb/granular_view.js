@@ -9,7 +9,7 @@ import {
   DropdownMenu,
 } from "src/components/index";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { TextMaker, text_maker } from "./rpb_text_provider";
 import { ReportDetails, ReportDatasets } from "./shared";

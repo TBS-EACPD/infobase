@@ -9,7 +9,7 @@ import { PanelRenderer } from "src/panels/PanelRenderer";
 
 import { LeafSpinner } from "src/components/index";
 
-import { Dept, Program, Gov, CRSO, ProgramTag } from "src/models/subject_index";
+import { Dept, Program, Gov, CRSO, ProgramTag } from "src/models/subjects";
 
 import { create_text_maker } from "src/models/text";
 

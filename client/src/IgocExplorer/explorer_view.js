@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 import { LeafSpinner, DlItem, CheckBox } from "src/components/index";
 
-import { InstForm } from "src/models/subject_index";
+import { InstForm } from "src/models/subjects";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 

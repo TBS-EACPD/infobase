@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { create_text_maker_component } from "src/components/index";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 

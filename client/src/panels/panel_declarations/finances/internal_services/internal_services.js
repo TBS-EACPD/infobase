@@ -9,7 +9,7 @@ import {
   GraphOverlay,
 } from "src/components/index";
 
-import { Gov, ProgramTag } from "src/models/subject_index";
+import { Gov, ProgramTag } from "src/models/subjects";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";

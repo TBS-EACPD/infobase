@@ -20,7 +20,7 @@ import {
 } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { infobase_colors } from "src/core/color_schemes";
 

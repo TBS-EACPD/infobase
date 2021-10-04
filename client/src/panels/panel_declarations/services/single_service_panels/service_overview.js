@@ -11,7 +11,7 @@ import {
 
 import { create_text_maker_component, FancyUL } from "src/components/index";
 
-import { Program } from "src/models/subject_index";
+import { Program } from "src/models/subjects";
 
 import { formats } from "src/core/format";
 

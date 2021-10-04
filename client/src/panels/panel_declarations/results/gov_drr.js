@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { DisplayTable } from "src/components/index";
 
-import { Gov, Dept } from "src/models/subject_index";
+import { Gov, Dept } from "src/models/subjects";
 
 import { get_source_links } from "src/metadata/data_sources";
 

@@ -14,7 +14,7 @@ import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { lang } from "src/core/injected_build_constants";
 

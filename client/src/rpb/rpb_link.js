@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Gov } from "src/models/subject_index";
+import { Gov } from "src/models/subjects";
 
 import { SafeJSURL } from "src/general_utils";
 

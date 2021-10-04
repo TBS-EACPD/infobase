@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { ProgramTag, Ministry, Dept } from "src/models/subject_index";
+import { ProgramTag, Ministry, Dept } from "src/models/subjects";
 
 import { trivial_text_maker } from "src/models/text";
 

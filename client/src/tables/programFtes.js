@@ -1,7 +1,7 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { Program } from "src/models/subject_index";
+import { Program } from "src/models/subjects";
 
 import { trivial_text_maker, m, year_templates } from "./table_common";
 
