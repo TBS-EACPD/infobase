@@ -8,7 +8,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import { DisplayTable } from "src/components/index";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { newIBLightCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";

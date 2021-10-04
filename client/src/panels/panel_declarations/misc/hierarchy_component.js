@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { Gov } from "src/models/subject_index";
+import { Gov } from "src/models/subjects";
 
 import { lang } from "src/core/injected_build_constants";
 

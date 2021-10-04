@@ -4,7 +4,7 @@ import _ from "lodash";
 import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common";
 
 import * as Results from "src/models/results";
-import { Dept, get_subject_by_guid } from "src/models/subject_index";
+import { Dept, get_subject_by_guid } from "src/models/subjects";
 
 import {
   filter_hierarchy,

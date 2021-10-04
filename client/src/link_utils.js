@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Table } from "./core/TableClass";
 import { infograph_href_template } from "./infographic/infographic_link";
 import { glossaryEntryStore } from "./models/glossary";
-import { Gov, Dept, CRSO, Program, ProgramTag } from "./models/subject_index";
+import { Gov, Dept, CRSO, Program, ProgramTag } from "./models/subjects";
 import { rpb_link } from "./rpb/rpb_link";
 
 const subject_classes_with_infographics = [

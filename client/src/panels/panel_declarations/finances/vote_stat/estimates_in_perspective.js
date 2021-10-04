@@ -6,7 +6,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import { create_footnote } from "src/models/footnotes/footnotes";
 
-import { Gov } from "src/models/subject_index";
+import { Gov } from "src/models/subjects";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 

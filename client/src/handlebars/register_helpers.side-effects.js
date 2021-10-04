@@ -5,7 +5,7 @@ import ReactDOMServer from "react-dom/server.browser";
 
 import { glossaryEntryStore } from "src/models/glossary";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 import {
   HandlebarsWithPrototypeAccess,
   trivial_text_maker,

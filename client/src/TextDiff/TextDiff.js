@@ -21,7 +21,7 @@ import {
 
 import { result_docs } from "src/models/results";
 
-import { Dept, CRSO, Program } from "src/models/subject_index";
+import { Dept, CRSO, Program } from "src/models/subjects";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { is_a11y_mode } from "src/core/injected_build_constants";

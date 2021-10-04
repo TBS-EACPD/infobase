@@ -12,7 +12,7 @@ import {
   GraphOverlay,
 } from "src/components/index";
 
-import { ProgramTag } from "src/models/subject_index";
+import { ProgramTag } from "src/models/subjects";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";

@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import {
   trivial_text_maker,

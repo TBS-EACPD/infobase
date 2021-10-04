@@ -10,7 +10,7 @@ import {
   get_footnotes_by_subject_and_topic,
 } from "src/models/footnotes/footnotes";
 import { glossaryEntryStore } from "src/models/glossary";
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { Table } from "src/core/TableClass";
 

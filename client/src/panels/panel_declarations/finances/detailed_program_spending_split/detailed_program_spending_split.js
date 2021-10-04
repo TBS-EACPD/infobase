@@ -19,7 +19,7 @@ import {
 
 import { businessConstants } from "src/models/businessConstants";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-import { Program } from "src/models/subject_index";
+import { Program } from "src/models/subjects";
 
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";

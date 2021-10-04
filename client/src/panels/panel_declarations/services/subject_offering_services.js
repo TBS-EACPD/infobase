@@ -13,7 +13,7 @@ import {
 
 import { useSummaryServices } from "src/models/populate_services";
 
-import { Dept, Program } from "src/models/subject_index";
+import { Dept, Program } from "src/models/subjects";
 
 import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);

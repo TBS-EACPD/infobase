@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Dept } from "src/models/subject_index";
+import { Dept } from "src/models/subjects";
 
 import { create_text_maker } from "src/models/text";
 

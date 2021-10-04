@@ -7,7 +7,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import { create_text_maker_component } from "src/components/index";
 
 import { ResultCounts, current_drr_key } from "src/models/results";
-import { Gov, Dept } from "src/models/subject_index";
+import { Gov, Dept } from "src/models/subjects";
 
 import { is_mobile } from "src/core/feature_detection";
 

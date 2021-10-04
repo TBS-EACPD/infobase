@@ -11,7 +11,7 @@ import {
   CardList,
 } from "src/components/index";
 
-import { Dept, ProgramTag } from "src/models/subject_index";
+import { Dept, ProgramTag } from "src/models/subjects";
 
 import { sanitized_dangerous_inner_html } from "src/general_utils";
 
