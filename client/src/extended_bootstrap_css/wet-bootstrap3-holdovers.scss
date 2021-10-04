@@ -101,21 +101,32 @@
   }
 }
 
-// WET form placeholder a11y
-input[placeholder],
-[placeholder],
-*[placeholder] {
-  color: #5c5c5c !important;
+.form-control::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: $tertiaryColor;
+}
+.form-control:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: $tertiaryColor;
+  opacity: 1;
 }
 .form-control::-moz-placeholder {
-  color: #5c5c5c !important;
+  /* Mozilla Firefox 19+ */
+  color: $tertiaryColor;
   opacity: 1;
 }
 .form-control:-ms-input-placeholder {
-  color: #5c5c5c !important;
+  /* Internet Explorer 10-11 */
+  color: $tertiaryColor;
 }
-.form-control::-webkit-input-placeholder {
-  color: #5c5c5c !important;
+.form-control::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $tertiaryColor;
+}
+
+.form-control::placeholder {
+  /* Most modern browsers support this now. */
+  color: $tertiaryColor;
 }
 
 .nowrap {
