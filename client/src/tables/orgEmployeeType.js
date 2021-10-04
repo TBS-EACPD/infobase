@@ -42,7 +42,6 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
-      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -52,7 +51,6 @@ export default {
         en: "Employee Type",
         fr: "Type d'employé",
       },
-      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -69,6 +67,7 @@ export default {
             "Correspond au personnel actif par type d'employé, au 31 mars " +
             people_years_short_second[ix],
         },
+        groupings: [],
       });
     });
     this.add_col({
@@ -84,6 +83,7 @@ export default {
         people_years
       ),
       is_summable: false,
+      groupings: [],
     });
   },
 

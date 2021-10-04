@@ -42,14 +42,12 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
-      can_group_by: true,
     });
     this.add_col({
       type: "int",
       key: true,
       nick: "ex_lvl",
       header: trivial_text_maker("ex_level"),
-      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -66,6 +64,7 @@ export default {
             "Correspond au personnel actif par direction niveaux, au 31 mars " +
             people_years_short_second[ix],
         },
+        groupings: [],
       });
     });
     this.add_col({
@@ -78,6 +77,7 @@ export default {
       },
       formula: people_five_year_percentage_formula("ex_lvl", people_years),
       is_summable: false,
+      groupings: [],
     });
   },
 
