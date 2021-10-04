@@ -36,6 +36,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      groupings: [],
     });
     this.add_col({
       type: "wide-str",
@@ -43,6 +44,7 @@ export default {
       hidden: true,
       nick: "avgage",
       header: trivial_text_maker("avgage"),
+      groupings: [],
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -73,6 +75,7 @@ export default {
           }
           return row[header];
         },
+        groupings: [],
       });
     });
   },

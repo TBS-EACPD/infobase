@@ -224,6 +224,9 @@ export class Table {
 
     this.get_group_by_func();
     this.get_dimension_col_values_func();
+
+    console.log(this.id);
+    console.log(this.dimensions);
   }
   get links() {
     return this.link
@@ -258,7 +261,7 @@ export class Table {
     return _.concat(
       "all",
       _.chain(cols)
-        .filter("can_group_by")
+        .filter((col) => col.groupings === undefined)
         .map("nick")
         .concat(special_dimensions)
         .compact()

@@ -160,6 +160,8 @@ class RPB extends React.Component {
   };
 
   render() {
+    console.log("RPB - render");
+    console.log(this.props.state);
     const { broken_url } = this.props.state;
     const { columns: data_columns, dimension } = this.state;
 
