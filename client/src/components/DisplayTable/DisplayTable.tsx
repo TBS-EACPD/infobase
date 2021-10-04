@@ -156,8 +156,6 @@ export class _DisplayTable extends React.Component<
       current_page: 0,
       show_pagination_load_spinner: false,
     };
-
-    this.sortCol = this.sortCol.bind(this);
   }
   static getDerivedStateFromProps(
     nextProps: _DisplayTableProps,
@@ -229,11 +227,10 @@ export class _DisplayTable extends React.Component<
     this.debounced_stop_loading.cancel();
   }
 
-  sortCol(column_key: string, dir: string) {
-    console.log("clicked");
+  sortCol(column_key: string, dir: boolean) {
     this.setState({
       sort_by: column_key,
-      descending: dir === "DESC",
+      descending: dir,
       current_page: 0,
     });
   }
@@ -527,8 +524,9 @@ export class _DisplayTable extends React.Component<
                           <SortDirections
                             asc={!descending && sort_by === column_key}
                             desc={descending && sort_by === column_key}
-                            sortFunction={this.sortCol}
-                            col={column_key}
+                            onDirectionClick={(dir) =>
+                              this.sortCol(column_key, dir)
+                            }
                           />
                         </div>
                       )}

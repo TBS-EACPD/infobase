@@ -54,8 +54,7 @@ export const ExplorerHeader = ({
               <SortDirections
                 asc={!is_descending && sort_col === id}
                 desc={is_descending && sort_col === id}
-                sortFunction={col_click}
-                col={id}
+                onDirectionClick={(dir) => col_click(id, dir)}
               />
             )}
           </div>
