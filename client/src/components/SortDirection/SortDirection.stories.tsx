@@ -1,4 +1,4 @@
-import { Story, Meta } from "@storybook/react";
+/* import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
 import { primaryColor, secondaryColor } from "src/style_constants/index";
@@ -40,3 +40,4 @@ const Template: Story<SortDirectionProps> = (_args) => {
 };
 
 export const Basic = Template.bind({});
+ */
