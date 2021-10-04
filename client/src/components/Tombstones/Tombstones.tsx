@@ -1,5 +1,4 @@
-import { borderBottomStyle } from "html2canvas/dist/types/css/property-descriptors/border-style";
-import _, { reduce } from "lodash";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import "./Tombstones.scss";
