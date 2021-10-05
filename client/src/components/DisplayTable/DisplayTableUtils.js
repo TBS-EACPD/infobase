@@ -1,16 +1,22 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { CellMeasurerCache, CellMeasurer } from "react-virtualized";
 
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
 import { CheckBox } from "src/components/CheckBox/CheckBox";
+import { DebouncedTextInput } from "src/components/DebouncedTextInput/DebouncedTextInput";
 import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
 import { create_text_maker_component } from "src/components/misc_util_components";
 import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboard";
 
 import { is_IE } from "src/core/feature_detection";
 
-import { IconCopy, IconDownload, IconFilter } from "src/icons/icons";
+import {
+  IconCopy,
+  IconDownload,
+  IconFilter,
+  IconSearch,
+} from "src/icons/icons";
 
 import {
   backgroundColor,
@@ -21,7 +27,7 @@ import {
 import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";
 
-const { text_maker } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component(text);
 
 const DropdownFilterVirtualizedList = ({
   column_key,
@@ -32,89 +38,119 @@ const DropdownFilterVirtualizedList = ({
     fixedWidth: true,
   });
   const virtualized_list_ref = React.createRef();
+  const [search, set_search] = useState("");
+  const cleaned_search = _.chain(search).deburr().toLower().trim().value();
+
+  const list = dropdown_filter[column_key];
+  const filtered_list = _.filter(list, ({ label }) =>
+    _.includes(_.chain(label).deburr().toLower().trim().value(), cleaned_search)
+  );
 
   return (
-    <AutoHeightVirtualList
-      className="display-table-dropdown-filter"
-      max_height={400}
-      overscanRowCount={10}
-      id={column_key}
-      width={230}
-      list_ref={virtualized_list_ref}
-      deferredMeasurementCache={virtualized_cell_measure_cache}
-      rowHeight={({ index }) => {
-        const item_num_of_chars =
-          dropdown_filter[column_key][index].label.length;
-        const row_height = (() => {
-          if (item_num_of_chars < 25) {
-            return 30;
-          }
-          if (item_num_of_chars > 70) {
-            return 90;
-          }
-          return 60;
-        })();
-        return row_height;
-      }}
-      rowCount={dropdown_filter[column_key].length}
-      rowRenderer={({ index, key, parent, style }) => {
-        const item = dropdown_filter[column_key][index];
-        return (
-          <CellMeasurer
-            cache={virtualized_cell_measure_cache}
-            columnIndex={0}
-            key={key}
-            parent={parent}
-            rowIndex={index}
-          >
-            <div style={style}>
-              <CheckBox
+    <div>
+      <div
+        style={{
+          height: "4.5rem",
+          minWidth: "95px",
+        }}
+        className="input-bar"
+      >
+        <div style={{ display: "flex" }}>
+          <IconSearch
+            color={secondaryColor}
+            alternate_color={false}
+            width="2em"
+            height="2em"
+            svg_style={{ alignSelf: "center" }}
+          />
+          <DebouncedTextInput
+            inputClassName={`search input-sm input-unstyled`}
+            style={{ width: "100%" }}
+            placeHolder={text_maker("search_list")}
+            a11y_label={text_maker("search_list")}
+            defaultValue={search}
+            updateCallback={(search_value) => set_search(search_value)}
+            debounceTime={300}
+          />
+        </div>
+      </div>
+      {filtered_list.length > 0 ? (
+        <AutoHeightVirtualList
+          className="display-table-dropdown-filter"
+          max_height={400}
+          overscanRowCount={10}
+          id={column_key}
+          width={230}
+          list_ref={virtualized_list_ref}
+          deferredMeasurementCache={virtualized_cell_measure_cache}
+          rowHeight={({ index }) => {
+            const item_num_of_chars = filtered_list[index].label.length;
+            const row_height = (() => {
+              if (item_num_of_chars < 25) {
+                return 30;
+              }
+              if (item_num_of_chars > 70) {
+                return 90;
+              }
+              return 60;
+            })();
+            return row_height;
+          }}
+          rowCount={filtered_list.length}
+          rowRenderer={({ index, key, parent, style }) => {
+            const item = filtered_list[index];
+            return (
+              <CellMeasurer
+                cache={virtualized_cell_measure_cache}
+                columnIndex={0}
                 key={key}
-                id={item.id}
-                color={item.color}
-                label={item.label}
-                active={item.active}
-                label_style={{ textAlign: "left" }}
-                onClick={(col_data) => {
-                  if (col_data === "select_all") {
-                    const is_select_all_enabled = !_.find(
-                      dropdown_filter[column_key],
-                      {
-                        id: col_data,
+                parent={parent}
+                rowIndex={index}
+              >
+                <div style={style}>
+                  <CheckBox
+                    key={key}
+                    id={item.id}
+                    color={item.color}
+                    label={item.label}
+                    active={item.active}
+                    label_style={{ textAlign: "left" }}
+                    onClick={(col_data) => {
+                      if (col_data === "select_all") {
+                        const is_select_all_enabled = !_.find(list, {
+                          id: col_data,
+                        }).active;
+                        set_dropdown_filter({
+                          ...dropdown_filter,
+                          [column_key]: _.map(list, (col_filter) => ({
+                            ...col_filter,
+                            active: is_select_all_enabled,
+                          })),
+                        });
+                      } else {
+                        set_dropdown_filter({
+                          ...dropdown_filter,
+                          [column_key]: _.map(list, (col_filter) =>
+                            col_filter.id === col_data
+                              ? {
+                                  ...col_filter,
+                                  active: !col_filter.active,
+                                }
+                              : col_filter
+                          ),
+                        });
                       }
-                    ).active;
-                    set_dropdown_filter({
-                      ...dropdown_filter,
-                      [column_key]: _.map(
-                        dropdown_filter[column_key],
-                        (col_filter) => ({
-                          ...col_filter,
-                          active: is_select_all_enabled,
-                        })
-                      ),
-                    });
-                  } else {
-                    set_dropdown_filter({
-                      ...dropdown_filter,
-                      [column_key]: _.map(
-                        dropdown_filter[column_key],
-                        (col_filter) =>
-                          col_filter.id === col_data
-                            ? {
-                                ...col_filter,
-                                active: !col_filter.active,
-                              }
-                            : col_filter
-                      ),
-                    });
-                  }
-                }}
-              />
-            </div>
-          </CellMeasurer>
-        );
-      }}
-    />
+                    }}
+                  />
+                </div>
+              </CellMeasurer>
+            );
+          }}
+        />
+      ) : (
+        <TM k="no_data" className="large_panel_text" />
+      )}
+    </div>
   );
 };
 
