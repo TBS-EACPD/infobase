@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { ProgramTag, Ministry, Dept } from "src/models/subjects";
+import { ProgramTag, Dept } from "src/models/subjects";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -66,16 +66,33 @@ const min_config = {
   is_m2m: false,
   can_roll_up: true,
   get_depth_one_nodes: (year) =>
-    _.chain(Ministry.store.get_all())
-      .map((min) => ({
-        id: min.guid,
-        data: {
-          name: min.name,
-          subject: min,
-          resources: get_resources_for_subject(min, year),
-        },
-        children: _.map(min.orgs, (org) => get_org_nodes(org, year)),
-      }))
+    _.chain(Dept.ministryStore.get_all())
+      .map(({ id, name }) => {
+        // ministry entites are no longer subject like, the code here was the only place that strongly assumed
+        // they were in the first place. TODO refactor here and in get_resources_for_subject to remove need for this shim
+        const legacy_ministry_subject_shim = {
+          id,
+          name,
+          guid: `ministry_${id}`,
+          subject_type: "ministry",
+          orgs: Dept.lookup_by_ministry_id(id),
+        };
+
+        return {
+          id: legacy_ministry_subject_shim.guid,
+          data: {
+            name,
+            subject: legacy_ministry_subject_shim,
+            resources: get_resources_for_subject(
+              legacy_ministry_subject_shim,
+              year
+            ),
+          },
+          children: _.map(legacy_ministry_subject_shim.orgs, (org) =>
+            get_org_nodes(org, year)
+          ),
+        };
+      })
       .value(),
 };
 const dept_config = {

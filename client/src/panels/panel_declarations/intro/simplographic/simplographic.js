@@ -42,7 +42,6 @@ export const declare_simplographic_panel = () =>
           .sum("{{pa_last_year}}exp");
 
         const federal_institutions = _.chain(Dept.store.get_all())
-          //HACKY: "Active" is coming from an igoc column, we're taking advantage of "Active" being the same in Englihs and french.
           .filter("inst_form.parent_form.parent_form")
           .filter(
             (org) => org.inst_form.parent_form.parent_form.id === "fed_int_gp"
