@@ -132,14 +132,14 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
     .mapValues(() => "")
     .value();
 
-  const dropdown_filter = _.chain(column_configs)
+  const dropdown_filter = _.chain(col_configs_with_defaults)
     .map((config, col_key) => ({ ...config, col_key }))
     .filter(
       (config) =>
         (config.is_searchable as boolean) &&
         (config.show_dropdown_filter as boolean)
     )
-    .map(({ col_key }) => [
+    .map(({ col_key, plain_formatter }) => [
       col_key,
       _.concat(
         [{ id: "select_all", label: text_maker("select_all"), active: true }],
@@ -147,7 +147,11 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
           .map(col_key)
           .uniq()
           .sort()
-          .map((col_data) => ({ id: col_data, label: col_data, active: true }))
+          .map((col_data) => ({
+            id: col_data,
+            label: plain_formatter(col_data),
+            active: true,
+          }))
           .value()
       ),
     ])
