@@ -108,7 +108,6 @@ export default {
       type: "wide-str",
       key: true,
       nick: "est_doc",
-      show_dropdown_filter: true,
       header: {
         en: "Estimates Instrument",
         fr: "Instrument des dépenses",

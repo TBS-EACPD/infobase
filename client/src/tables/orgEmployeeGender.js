@@ -48,7 +48,6 @@ export default {
       key: true,
       type: "int",
       nick: "gender",
-      show_dropdown_filter: true,
       header: trivial_text_maker("employee_gender"),
       can_group_by: true,
     });

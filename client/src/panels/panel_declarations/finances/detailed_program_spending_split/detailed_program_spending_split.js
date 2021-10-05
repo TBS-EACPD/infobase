@@ -231,7 +231,6 @@ class DetailedProgramSplit extends React.Component {
         program_name: {
           index: 0,
           is_searchable: true,
-          show_dropdown_filter: true,
           header: text_maker("program"),
         },
         so_label: {

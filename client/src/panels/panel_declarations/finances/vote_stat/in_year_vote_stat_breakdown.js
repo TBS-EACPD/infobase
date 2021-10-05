@@ -84,7 +84,6 @@ const planned_vote_or_stat_render = (vs) =>
       voted_stat: {
         index: 1,
         header: text_maker(isVoted ? "voted" : "stat"),
-        show_dropdown_filter: isVoted,
         is_searchable: true,
       },
       amount: {

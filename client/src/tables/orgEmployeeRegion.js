@@ -58,7 +58,6 @@ export default {
       key: true,
       type: "short-str",
       nick: "region",
-      show_dropdown_filter: true,
       header: {
         en: "Geographic Region",
         fr: "Région géographique",
