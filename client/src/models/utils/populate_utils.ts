@@ -17,7 +17,13 @@ export const enforced_required_fields = <
   };
 };
 
-export const parse_csv_string_with_undefineds_allowed = (csv_string: string) =>
+export const parse_csv_string_with_undefined_blanks = (
+  csv_string: string
+): { [x: string]: string | undefined }[] =>
   csvParse(csv_string, (row) =>
     _.mapValues(row, (value) => (value === "" ? undefined : value))
   );
+
+export type ParsedCsvWithUndefineds = ReturnType<
+  typeof parse_csv_string_with_undefined_blanks
+>;

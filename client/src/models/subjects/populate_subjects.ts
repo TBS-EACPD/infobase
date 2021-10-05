@@ -1,78 +1,28 @@
 import _ from "lodash";
 
+import {
+  ParsedCsvWithUndefineds,
+  enforced_required_fields,
+} from "src/models/utils/populate_utils";
+
 import { lang } from "src/core/injected_build_constants";
 
-import { get_static_url, make_request } from "src/request_utils";
-
-import { populate_global_footnotes } from "./footnotes/populate_footnotes";
-import { glossaryEntryStore } from "./glossary";
-import { Dept, CRSO, Program, ProgramTag } from "./subjects";
-import {
-  parse_csv_string_with_undefineds_allowed,
-  enforced_required_fields,
-} from "./utils/populate_utils";
+import { CRSO } from "./CRSO";
+import { Dept } from "./Dept";
+import { Program, ProgramTag } from "./Program";
 
 const is_en = lang === "en";
-const lookups_file_name = `lookups_${lang}.json`;
 
-// TODO, work with pipeline to clean up the headers in igoc_en.csv etc some time, strip the unwanted _en/_fr instances
-const MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS = ["igoc", "crso", "program"];
-
-export const populate_stores = () =>
-  // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
-  make_request(get_static_url(`${lookups_file_name}.js`)).then((text) => {
-    process_lookups(JSON.parse(text));
-  });
-
-const process_lookups = ({
-  global_footnotes_csv_string,
-  ...lookup_csv_strings
-}: {
-  [x: string]: string;
-}) => {
-  // outlier for lookups json, a calculated output of the build base script, not a directly stringified csv
-  populate_global_footnotes(global_footnotes_csv_string);
-
-  const {
-    dept_code_to_csv_name,
-    org_to_minister,
-    inst_forms,
-    ministers,
-    ministries,
-    url_lookups,
-    igoc,
-    crso,
-    program,
-    program_tag_types,
-    program_tags,
-    tags_to_programs,
-    glossary,
-  } = _.mapValues(lookup_csv_strings, (csv_string, csv_name) =>
-    _.chain(csv_string)
-      .trim()
-      .thru((csv_string) => {
-        const csv_string_with_cleaned_headers = _.replace(
-          csv_string,
-          /^.+\n/,
-          (header_row_string) =>
-            _.chain(header_row_string)
-              .replace(" ", "_")
-              .toLower()
-              .thru((header_row_string) =>
-                _.includes(MONOLINGUAL_CSVS_WITH_BILINGUAL_HEADERS, csv_name)
-                  ? _.replace(header_row_string, /"(.*?)_[ef][nr]"/g, '"$1"')
-                  : header_row_string
-              )
-              .value()
-        );
-
-        return parse_csv_string_with_undefineds_allowed(
-          csv_string_with_cleaned_headers
-        );
-      })
-      .value()
-  );
-
+export const populate_depts = (
+  ministries: ParsedCsvWithUndefineds,
+  ministers: ParsedCsvWithUndefineds,
+  inst_forms: ParsedCsvWithUndefineds,
+  igoc: ParsedCsvWithUndefineds,
+  url_lookups: ParsedCsvWithUndefineds,
+  org_to_minister: ParsedCsvWithUndefineds,
+  dept_code_to_csv_name: ParsedCsvWithUndefineds,
+  crso: ParsedCsvWithUndefineds
+) => {
   _.each(ministries, ({ id, name_en, name_fr }) => {
     Dept.ministryStore.create_and_register({
       ...enforced_required_fields({
@@ -104,7 +54,7 @@ const process_lookups = ({
 
   const get_url_from_url_lookup = (url_key: string | undefined) => {
     const url_row = _.find(url_lookups, ({ id }) => id === url_key);
-    return url_row?.[is_en ? "url_en" : "url_fr"] || "";
+    return url_row?.[`url_${lang}`] || "";
   };
   _.each(
     igoc,
@@ -191,7 +141,13 @@ const process_lookups = ({
       });
     }
   );
+};
 
+export const populate_crsos = (
+  crso: ParsedCsvWithUndefineds,
+  igoc: ParsedCsvWithUndefineds,
+  program: ParsedCsvWithUndefineds
+) =>
   _.each(
     crso,
     ({ id, dept_code, name, desc, is_active, is_drf, is_internal_service }) => {
@@ -221,6 +177,12 @@ const process_lookups = ({
     }
   );
 
+export const populate_programs_and_tags = (
+  program: ParsedCsvWithUndefineds,
+  program_tag_types: ParsedCsvWithUndefineds,
+  program_tags: ParsedCsvWithUndefineds,
+  tags_to_programs: ParsedCsvWithUndefineds
+) => {
   // TODO coordinate with pipeline to drop CCOFOGs from input data, clean this out
   const root_tag_ids = _.map(program_tag_types, "id");
   const parent_id_by_tag_id = _.chain(program_tags)
@@ -339,9 +301,9 @@ const process_lookups = ({
 
         if (!_.isEmpty(children_tag_ids) && !_.isEmpty(program_ids)) {
           throw new Error(`
-            Tag "${id}" has both child tags and program links. InfoBase assumes only leaf tags have program links!
-            Check with the data model up stream, either there's a problem there or a lot of tag related client code will need to be revisited. 
-          `);
+              Tag "${id}" has both child tags and program links. InfoBase assumes only leaf tags have program links!
+              Check with the data model up stream, either there's a problem there or a lot of tag related client code will need to be revisited. 
+            `);
         }
 
         ProgramTag.store.create_and_register({
@@ -360,18 +322,4 @@ const process_lookups = ({
       }
     }
   );
-
-  _.each(glossary, ({ id, name_en, name_fr, def_en, def_fr }) => {
-    const raw_definition = is_en ? def_en : def_fr;
-
-    raw_definition &&
-      glossaryEntryStore.create_and_register({
-        ...enforced_required_fields({
-          id,
-          title: is_en ? name_en : name_fr,
-          translation: is_en ? name_fr : name_en,
-          raw_definition,
-        }),
-      });
-  });
 };

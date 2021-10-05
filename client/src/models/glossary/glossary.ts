@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import { sanitized_marked } from "src/general_utils";
+import { trivial_text_maker } from "src/models/text";
+import { make_store } from "src/models/utils/make_store";
 
-import { trivial_text_maker } from "./text";
-import { make_store } from "./utils/make_store";
+import { sanitized_marked } from "src/general_utils";
 
 type GlossaryEntryDef = {
   id: string;

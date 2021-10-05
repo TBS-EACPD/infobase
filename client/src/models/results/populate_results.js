@@ -14,7 +14,7 @@ import {
   ResultCounts,
   GranularResultCounts,
   get_result_doc_keys,
-} from "./results";
+} from ".";
 
 const result_doc_keys = get_result_doc_keys();
 
