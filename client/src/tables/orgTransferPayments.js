@@ -51,7 +51,6 @@ export default {
         type: "str",
         key: true,
         nick: "type",
-        show_dropdown_filter: true,
         header: {
           en: "Type",
           fr: "Type",

@@ -48,7 +48,6 @@ export default {
       type: "int",
       key: true,
       nick: "ex_lvl",
-      show_dropdown_filter: true,
       header: trivial_text_maker("ex_level"),
       can_group_by: true,
     });
