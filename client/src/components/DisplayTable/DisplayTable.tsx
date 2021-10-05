@@ -82,7 +82,7 @@ const get_column_config_defaults = (index: number) => ({
   is_sortable: true,
   is_summable: false,
   is_searchable: false,
-  show_dropdown_filter: false,
+  show_dropdown_filter: true,
   sum_func: (sum: number, value: number) => sum + value,
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,
@@ -134,7 +134,11 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
 
   const dropdown_filter = _.chain(column_configs)
     .map((config, col_key) => ({ ...config, col_key }))
-    .filter("show_dropdown_filter")
+    .filter(
+      (config) =>
+        (config.is_searchable as boolean) &&
+        (config.show_dropdown_filter as boolean)
+    )
     .map(({ col_key }) => [
       col_key,
       _.concat(
@@ -318,11 +322,13 @@ export class _DisplayTable extends React.Component<
         _.chain(row)
           .map((cell_value: CellValue, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
+            const show_dropdown_filter =
+              col_config.is_searchable && col_config.show_dropdown_filter;
             const cell_search_value = clean_search_string(
               col_config.plain_formatter(cell_value)
             );
             const cell_dropdown_filter =
-              col_config.show_dropdown_filter &&
+              show_dropdown_filter &&
               (_.find(dropdown_filter[column_key], {
                 id: cell_value,
               }) as LegendItemType);
@@ -332,7 +338,7 @@ export class _DisplayTable extends React.Component<
                   cell_search_value,
                   clean_search_string(searches[column_key])
                 )) &&
-              (!col_config.show_dropdown_filter ||
+              (!show_dropdown_filter ||
                 (cell_dropdown_filter && cell_dropdown_filter.active))
             );
           })
@@ -548,15 +554,11 @@ export class _DisplayTable extends React.Component<
                   const searchable =
                     col_configs_with_defaults[column_key].is_searchable;
                   const show_dropdown_filter =
+                    searchable &&
                     col_configs_with_defaults[column_key].show_dropdown_filter;
                   const is_dropdown_filter_applied =
                     _.reject(dropdown_filter[column_key], "active").length > 0;
 
-                  if (show_dropdown_filter && !searchable) {
-                    console.warn(
-                      `You need to enable 'is_searchable' to use dropdown filter for column:${column_key}`
-                    );
-                  }
                   const current_search_input =
                     (searchable && searches[column_key]) || null;
 
