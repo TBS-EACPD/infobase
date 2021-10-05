@@ -87,17 +87,6 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     })
   );
 
-  get ministers() {
-    return _.map(this.minister_ids, Dept.ministerStore.lookup);
-  }
-  get ministry() {
-    // TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the Ministry store to hold those?
-    return this.ministry_id && Dept.ministryStore.lookup(this.ministry_id);
-  }
-  get inst_form() {
-    return Dept.instFormStore.lookup(this.inst_form_id);
-  }
-
   static lookup_by_minister_id(id: string) {
     return _.filter(Dept.store.get_all(), ({ minister_ids }) =>
       _.includes(minister_ids, id)
@@ -114,6 +103,19 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
       Dept.store.get_all(),
       ({ inst_form_id }) => inst_form_id === id
     );
+  }
+
+  get ministers() {
+    return _.map(this.minister_ids, Dept.ministerStore.lookup);
+  }
+  get ministry() {
+    // TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the ministry store to hold those?
+    return typeof this.ministry_id !== "undefined"
+      ? Dept.ministryStore.lookup(this.ministry_id)
+      : undefined;
+  }
+  get inst_form() {
+    return Dept.instFormStore.lookup(this.inst_form_id);
   }
 
   static depts_with_table_data() {

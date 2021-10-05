@@ -93,7 +93,7 @@ export interface ProgramTag extends ProgramTagDef {} // eslint-disable-line @typ
 
 const find_root = _.memoize(
   (tag: ProgramTag): ProgramTag =>
-    tag.parent_tag_id
+    typeof tag.parent_tag_id !== "undefined"
       ? find_root(ProgramTag.store.lookup(tag.parent_tag_id))
       : tag
 );
