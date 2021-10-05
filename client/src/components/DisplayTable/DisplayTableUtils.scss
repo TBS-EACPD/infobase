@@ -18,3 +18,11 @@ button.display_table__util-icon {
 .page-selector {
   margin: 0px 2.5px;
 }
+.display-table-dropdown-filter {
+  margin-bottom: 12px;
+  margin-top: 12px;
+  background-color: $backgroundColor;
+  border: 1px solid $separatorColor;
+  border-radius: $standardBorderRadius;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}

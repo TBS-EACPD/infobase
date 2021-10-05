@@ -1,13 +1,14 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
+import { CellMeasurerCache, CellMeasurer } from "react-virtualized";
 
+import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
+import { CheckBox } from "src/components/CheckBox/CheckBox";
 import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
 import { create_text_maker_component } from "src/components/misc_util_components";
 import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboard";
 
 import { is_IE } from "src/core/feature_detection";
-
-import { LegendList } from "src/charts/legends/LegendList";
 
 import { IconCopy, IconDownload, IconFilter } from "src/icons/icons";
 
@@ -21,6 +22,101 @@ import text from "./DisplayTable.yaml";
 import "./DisplayTableUtils.scss";
 
 const { text_maker } = create_text_maker_component(text);
+
+const DropdownFilterVirtualizedList = ({
+  column_key,
+  set_dropdown_filter,
+  dropdown_filter,
+}) => {
+  const virtualized_cell_measure_cache = new CellMeasurerCache({
+    fixedWidth: true,
+  });
+  const virtualized_list_ref = React.createRef();
+
+  return (
+    <AutoHeightVirtualList
+      className="display-table-dropdown-filter"
+      max_height={400}
+      overscanRowCount={10}
+      id={column_key}
+      width={230}
+      list_ref={virtualized_list_ref}
+      deferredMeasurementCache={virtualized_cell_measure_cache}
+      rowHeight={({ index }) => {
+        const item_num_of_chars =
+          dropdown_filter[column_key][index].label.length;
+        const row_height = (() => {
+          if (item_num_of_chars < 25) {
+            return 30;
+          }
+          if (item_num_of_chars > 70) {
+            return 90;
+          }
+          return 60;
+        })();
+        return row_height;
+      }}
+      rowCount={dropdown_filter[column_key].length}
+      rowRenderer={({ index, key, parent, style }) => {
+        const item = dropdown_filter[column_key][index];
+        return (
+          <CellMeasurer
+            cache={virtualized_cell_measure_cache}
+            columnIndex={0}
+            key={key}
+            parent={parent}
+            rowIndex={index}
+          >
+            <div style={style}>
+              <CheckBox
+                key={key}
+                id={item.id}
+                color={item.color}
+                label={item.label}
+                active={item.active}
+                label_style={{ textAlign: "left" }}
+                onClick={(col_data) => {
+                  if (col_data === "select_all") {
+                    const is_select_all_enabled = !_.find(
+                      dropdown_filter[column_key],
+                      {
+                        id: col_data,
+                      }
+                    ).active;
+                    set_dropdown_filter({
+                      ...dropdown_filter,
+                      [column_key]: _.map(
+                        dropdown_filter[column_key],
+                        (col_filter) => ({
+                          ...col_filter,
+                          active: is_select_all_enabled,
+                        })
+                      ),
+                    });
+                  } else {
+                    set_dropdown_filter({
+                      ...dropdown_filter,
+                      [column_key]: _.map(
+                        dropdown_filter[column_key],
+                        (col_filter) =>
+                          col_filter.id === col_data
+                            ? {
+                                ...col_filter,
+                                active: !col_filter.active,
+                              }
+                            : col_filter
+                      ),
+                    });
+                  }
+                }}
+              />
+            </div>
+          </CellMeasurer>
+        );
+      }}
+    />
+  );
+};
 
 export const DropdownFilter = ({
   column_key,
@@ -40,38 +136,12 @@ export const DropdownFilter = ({
       />
     }
     dropdown_content_class_name="no-right"
+    dropdown_content_style={{}}
     dropdown_content={
-      <LegendList
-        items={dropdown_filter[column_key]}
-        onClick={(col_data) => {
-          if (col_data === "select_all") {
-            const is_select_all_enabled = !_.find(dropdown_filter[column_key], {
-              id: col_data,
-            }).active;
-            set_dropdown_filter({
-              ...dropdown_filter,
-              [column_key]: _.map(
-                dropdown_filter[column_key],
-                (col_filter) => ({
-                  ...col_filter,
-                  active: is_select_all_enabled,
-                })
-              ),
-            });
-          } else {
-            set_dropdown_filter({
-              ...dropdown_filter,
-              [column_key]: _.map(dropdown_filter[column_key], (col_filter) =>
-                col_filter.id === col_data
-                  ? {
-                      ...col_filter,
-                      active: !col_filter.active,
-                    }
-                  : col_filter
-              ),
-            });
-          }
-        }}
+      <DropdownFilterVirtualizedList
+        column_key={column_key}
+        set_dropdown_filter={set_dropdown_filter}
+        dropdown_filter={dropdown_filter}
       />
     }
   />

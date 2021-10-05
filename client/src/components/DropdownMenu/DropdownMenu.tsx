@@ -8,7 +8,14 @@ import { tertiaryColor } from "src/style_constants/index";
 
 import "./DropdownMenu.scss";
 
-interface DropdownMenuProps {
+const DropdownMenuDefaultProps = {
+  dropdown_content_style: {
+    overflowX: "hidden",
+    maxHeight: "351px",
+    msOverflowStyle: "-ms-autohiding-scrollbar",
+  } as React.CSSProperties,
+};
+type DropdownMenuProps = typeof DropdownMenuDefaultProps & {
   dropdown_content: React.ReactNode;
   opened_button_class_name: string;
   closed_button_class_name: string;
@@ -16,7 +23,7 @@ interface DropdownMenuProps {
   dropdown_content_class_name?: string;
   button_description?: string;
   dropdown_a11y_txt?: string;
-}
+};
 
 type DropdownMenuState = {
   is_open: boolean;
@@ -26,6 +33,7 @@ export class DropdownMenu extends React.Component<
   DropdownMenuProps,
   DropdownMenuState
 > {
+  static defaultProps = DropdownMenuDefaultProps;
   dropdown_ref = React.createRef<HTMLDivElement>();
   toggle_dropdown_button = React.createRef<HTMLDivElement>();
   dropdown_area = React.createRef<HTMLDivElement>();
@@ -81,6 +89,7 @@ export class DropdownMenu extends React.Component<
       opened_button_class_name,
       closed_button_class_name,
       dropdown_content_class_name,
+      dropdown_content_style,
       button_description,
       dropdown_trigger_txt,
       dropdown_a11y_txt, //used if the trigger text is not a string object
@@ -130,15 +139,7 @@ export class DropdownMenu extends React.Component<
             "dropdown__content"
           )}
         >
-          <div
-            style={{
-              overflowX: "hidden",
-              maxHeight: "351px",
-              msOverflowStyle: "-ms-autohiding-scrollbar",
-            }}
-          >
-            {dropdown_content}
-          </div>
+          <div style={dropdown_content_style}>{dropdown_content}</div>
           <div
             style={{
               borderTop: `1px dashed ${tertiaryColor}`,
