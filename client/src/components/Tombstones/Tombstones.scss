@@ -16,8 +16,11 @@ table.tombstone-table > tbody > tr > td > p {
   margin: 0px;
 }
 
+div.tombstone-data-div:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 div.tombstone-data-div {
-  border-bottom: 1px solid $primaryColor;
   width: 100%;
   display: inline-flex;
   padding: 10px;
