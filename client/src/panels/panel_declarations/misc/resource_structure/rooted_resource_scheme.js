@@ -166,12 +166,11 @@ export class SingleTagResourceExplorer extends AbstractExplorerScheme {
     const { type, payload } = action;
     if (type === "column_header_click") {
       const { sort_col } = state;
-      const clicked_col = payload.col_key;
-      const is_descending_bool = payload.is_descending_bool;
+      const { col_key: clicked_col, desc } = payload;
       const mods =
         clicked_col === sort_col
-          ? { is_descending: is_descending_bool }
-          : { is_descending: is_descending_bool, sort_col: clicked_col };
+          ? { is_descending: desc }
+          : { is_descending: desc, sort_col: clicked_col };
       return { ...state, ...mods };
     } else if (type === "set_year") {
       return { ...state, year: payload };
@@ -182,10 +181,10 @@ export class SingleTagResourceExplorer extends AbstractExplorerScheme {
 
   @bound
   map_dispatch_to_props(dispatch) {
-    const col_click = (col_key, is_descending_bool) =>
+    const col_click = (col_key, desc) =>
       dispatch({
         type: "column_header_click",
-        payload: { col_key, is_descending_bool },
+        payload: { col_key, desc },
       });
     const set_year = (year) => dispatch({ type: "set_year", payload: year });
 
