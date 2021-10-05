@@ -63,14 +63,16 @@ const process_lookups = ({
               .value()
         );
 
-        return csvParse(csv_string_with_cleaned_headers);
+        return csvParse(csv_string_with_cleaned_headers, (row) =>
+          _.mapValues(row, (value) => (value === "" ? undefined : value))
+        );
       })
       .value()
   );
 
   _.each(ministries, ({ id, name_en, name_fr }) => {
     Dept.ministryStore.create_and_register({
-      ...required_fields({
+      ...enforced_required_fields({
         id,
         name: is_en ? name_en : name_fr,
       }),
@@ -79,7 +81,7 @@ const process_lookups = ({
 
   _.each(ministers, ({ id, name_en, name_fr }) => {
     Dept.ministerStore.create_and_register({
-      ...required_fields({
+      ...enforced_required_fields({
         id,
         name: is_en ? name_en : name_fr,
       }),
@@ -88,7 +90,7 @@ const process_lookups = ({
 
   _.each(inst_forms, ({ id, parent_id, name_en, name_fr }) => {
     Dept.instFormStore.create_and_register({
-      ...required_fields({
+      ...enforced_required_fields({
         id,
         name: is_en ? name_en : name_fr,
       }),
@@ -133,7 +135,7 @@ const process_lookups = ({
       other_lang_legal_title,
     }) => {
       Dept.store.create_and_register({
-        ...required_fields({
+        ...enforced_required_fields({
           id,
           legal_title,
           status_code,
@@ -191,11 +193,12 @@ const process_lookups = ({
     crso,
     ({ id, dept_code, name, desc, is_active, is_drf, is_internal_service }) => {
       CRSO.store.create_and_register({
-        ...required_fields({
+        ...enforced_required_fields({
           id,
           name,
-          description: desc,
         }),
+
+        description: desc,
         activity_code: _.chain(id).split("-").last().value(),
         dept_id: _.find(igoc, { dept_code })?.org_id as string,
         program_ids: _.chain(program)
@@ -262,7 +265,7 @@ const process_lookups = ({
       }
 
       Program.store.create_and_register({
-        ...required_fields({
+        ...enforced_required_fields({
           id: Program.make_program_id(dept_code, activity_code),
           activity_code,
           crso_id,
@@ -293,7 +296,7 @@ const process_lookups = ({
     ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
       !is_ccofog_tag(id) &&
         ProgramTag.store.create_and_register({
-          ...required_fields({
+          ...enforced_required_fields({
             id,
             name: is_en ? name_en : name_fr,
             cardinality,
@@ -339,7 +342,7 @@ const process_lookups = ({
         }
 
         ProgramTag.store.create_and_register({
-          ...required_fields({
+          ...enforced_required_fields({
             id,
             name: is_en ? name_en : name_fr,
             parent_tag_id,
@@ -360,7 +363,7 @@ const process_lookups = ({
 
     raw_definition &&
       glossaryEntryStore.create_and_register({
-        ...required_fields({
+        ...enforced_required_fields({
           id,
           title: is_en ? name_en : name_fr,
           translation: is_en ? name_fr : name_en,
@@ -370,18 +373,18 @@ const process_lookups = ({
   });
 };
 
-const required_fields = <
+const enforced_required_fields = <
   RequiredFields extends Record<string, string | undefined>
 >(
-  required_fields: RequiredFields
+  enforced_required_fields: RequiredFields
 ) => {
-  _.each(required_fields, (cell, key) => {
+  _.each(enforced_required_fields, (cell, key) => {
     if (typeof cell === "undefined") {
       throw new Error(`Required field "${key}" has an empty cell`);
     }
   });
 
-  return required_fields as unknown as {
+  return enforced_required_fields as unknown as {
     [key in keyof RequiredFields]: string;
   };
 };
