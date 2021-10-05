@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 import { LeafSpinner, DlItem, CheckBox } from "src/components/index";
 
-import { InstForm } from "src/models/subjects";
+import { Dept } from "src/models/subjects";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -127,11 +127,11 @@ const get_children_grouper = createSelector(
 
     if (grouping === "portfolio" && node.data.type === "ministry") {
       return _.chain(children)
-        .groupBy("data.subject.inst_form.id")
+        .groupBy("data.subject.inst_form_id")
         .toPairs()
         .sortBy(([form_id]) => _.indexOf(inst_form_sort_order, form_id))
         .map(([form_id, node_group]) => ({
-          display: InstForm.store.lookup(form_id).name,
+          display: Dept.instFormStore.lookup(form_id).name,
           node_group,
         }))
         .value();

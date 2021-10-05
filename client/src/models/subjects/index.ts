@@ -6,12 +6,9 @@ import { CRSO } from "./CRSO";
 import { Dept } from "./Dept";
 import { Gov } from "./Gov";
 
-import { InstForm } from "./InstForm";
-import { Minister } from "./Minister";
-import { Ministry } from "./Ministry";
 import { Program, ProgramTag } from "./Program";
 
-export { Gov, Dept, CRSO, Program, ProgramTag, Minister, Ministry, InstForm };
+export { Gov, Dept, CRSO, Program, ProgramTag };
 
 export const Subject = {
   Gov,

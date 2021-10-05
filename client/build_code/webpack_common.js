@@ -197,9 +197,6 @@ function get_plugins({
           ["src/metadata/data_sources.js", "src/core/TableClass.js"],
           ["src/models/subjects/Dept.ts", "src/models/subjects/CRSO.ts"],
           ["src/models/subjects/CRSO.ts", "src/models/subjects/Program.ts"],
-          ["src/models/subjects/Dept.ts", "src/models/subjects/InstForm.ts"],
-          ["src/models/subjects/Dept.ts", "src/models/subjects/Minister.ts"],
-          ["src/models/subjects/Dept.ts", "src/models/subjects/Ministry.ts"],
         ];
 
         const detected_circular_dependency_is_allowed = _.some(

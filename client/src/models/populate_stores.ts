@@ -7,15 +7,7 @@ import { get_static_url, make_request } from "src/request_utils";
 
 import { populate_global_footnotes } from "./footnotes/populate_footnotes";
 import { glossaryEntryStore } from "./glossary";
-import {
-  Ministry,
-  Program,
-  Dept,
-  CRSO,
-  Minister,
-  InstForm,
-  ProgramTag,
-} from "./subjects";
+import { Dept, CRSO, Program, ProgramTag } from "./subjects";
 
 const is_en = lang === "en";
 const lookups_file_name = `lookups_${lang}.json`;
@@ -77,54 +69,31 @@ const process_lookups = ({
   );
 
   _.each(ministries, ({ id, name_en, name_fr }) => {
-    Ministry.store.create_and_register({
+    Dept.ministryStore.create_and_register({
       ...required_fields({
         id,
         name: is_en ? name_en : name_fr,
       }),
-
-      org_ids: _.chain(igoc)
-        .filter(({ ministry }) => ministry === id)
-        .map("org_id")
-        .compact()
-        .value(),
     });
   });
 
   _.each(ministers, ({ id, name_en, name_fr }) => {
-    Minister.store.create_and_register({
+    Dept.ministerStore.create_and_register({
       ...required_fields({
         id,
         name: is_en ? name_en : name_fr,
       }),
-
-      org_ids: _.chain(org_to_minister)
-        .filter(({ minister }) => minister === id)
-        .map("department")
-        .compact()
-        .value(),
     });
   });
 
   _.each(inst_forms, ({ id, parent_id, name_en, name_fr }) => {
-    InstForm.store.create_and_register({
+    Dept.instFormStore.create_and_register({
       ...required_fields({
         id,
         name: is_en ? name_en : name_fr,
       }),
 
       parent_id,
-
-      children_ids: _.chain(inst_forms)
-        .filter(({ parent_id }) => parent_id === id)
-        .map("id")
-        .compact()
-        .value(),
-      org_ids: _.chain(igoc)
-        .filter(({ institutional_form }) => institutional_form === id)
-        .map("org_id")
-        .compact()
-        .value(),
     });
   });
 

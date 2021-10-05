@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { Gov } from "src/models/subjects";
+import { Gov, Dept } from "src/models/subjects";
 
 import { lang } from "src/core/injected_build_constants";
 
@@ -154,7 +154,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
       : [
           {
             name: `${subject.ministry.name} (${text_maker("ministry")})`,
-            children: _.chain(subject.ministry.orgs)
+            children: _.chain(Dept.lookup_by_ministry_id(subject.ministry_id))
               .filter((node) => !node.is_dead || is_subject(node))
               .groupBy("inst_form.name")
               .toPairs()
@@ -181,10 +181,9 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
 };
 
 /*
-  Ministry
-    org
-      CRSOs
-        programs
+  org
+    CRSOs
+      programs
 */
 export const org_internal_hierarchy = ({
   subject,
@@ -349,17 +348,17 @@ export const crso_hierarchy = ({
       {
         //ministry
         name: `${subject.dept.ministry.name} (${text_maker("ministry")})`,
-        subject_type: "ministry",
+        level: "ministry",
         children: [
           {
             //dept
             name: subject.dept.name,
             href: href_generator(subject.dept),
-            subject_type: subject.dept.subject_type,
+            level: subject.dept.subject_type,
             //crso
             children: _.chain(subject.dept.crsos)
               .map((crso) => ({
-                subject_type: crso.subject_type,
+                level: crso.subject_type,
                 name: crso.name,
                 is_cr: crso.is_cr,
                 href: crso.is_cr && href_generator(crso),
@@ -369,7 +368,7 @@ export const crso_hierarchy = ({
                 children: _.chain(crso.programs)
                   .filter((program) => !program.is_fake)
                   .map((prg) => ({
-                    subject_type: prg.subject_type,
+                    level: prg.subject_type,
                     name: prg.name,
                     href: href_generator(prg),
                     dead: prg.is_dead,
@@ -393,13 +392,13 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
     {
       //ministry
       name: `${subject.dept.ministry.name} (${text_maker("ministry")})`,
-      subject_type: "ministry",
+      level: "ministry",
       children: [
         {
           //dept
           name: subject.dept.name,
           href: href_generator(subject.dept),
-          subject_type: subject.dept.subject_type,
+          level: subject.dept.subject_type,
           children: [
             {
               //crso
@@ -412,7 +411,7 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
               children: _.chain(subject.programs)
                 .filter((program) => !program.is_fake)
                 .map((prg) => ({
-                  subject_type: prg.subject_type,
+                  level: prg.subject_type,
                   name: prg.name,
                   href: href_generator(prg),
                   dead: !prg.is_active,
@@ -437,18 +436,18 @@ export const crso_gov_hierarchy = ({ subject, href_generator }) => {
       {
         //ministry
         name: `${subject.dept.ministry.name} (${text_maker("ministry")})`,
-        subject_type: "ministry",
+        level: "ministry",
         children: [
           {
             //dept
             name: subject.dept.name,
             href: href_generator(subject.dept),
-            subject_type: subject.dept.subject_type,
+            level: subject.dept.subject_type,
             //crso
             children: _.chain(subject.dept.crsos)
               .filter("is_active")
               .map((crso) => ({
-                subject_type: crso.subject_type,
+                level: crso.subject_type,
                 name: crso.name,
                 href: crso.is_cr && href_generator(crso),
                 current_subject: is_subject(crso),

@@ -2,7 +2,7 @@ import { hierarchy } from "d3-hierarchy";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { Dept, InstForm } from "src/models/subjects";
+import { Dept } from "src/models/subjects";
 
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools";
 
@@ -68,20 +68,20 @@ const grouping_options = {
     get_nodes: () =>
       _.chain(Dept.store.get_all())
         .reject("is_dead")
-        .groupBy("inst_form.parent_form.id")
+        .groupBy("inst_form.parent_id")
         .map((orgs, parent_form_id) => ({
           id: parent_form_id,
           data: {
-            name: InstForm.store.lookup(parent_form_id).name,
+            name: Dept.instFormStore.lookup(parent_form_id).name,
             type: "inst_form",
           },
           children: _.chain(orgs)
-            .groupBy("inst_form.id")
+            .groupBy("inst_form_id")
             .map((orgs, type_id) => ({
               id: type_id,
               data: {
                 type: "inst_form",
-                name: InstForm.store.lookup(type_id).name,
+                name: Dept.instFormStore.lookup(type_id).name,
               },
               children: _.chain(orgs)
                 .map((org) => org_to_node(org, type_id))

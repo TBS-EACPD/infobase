@@ -7,9 +7,6 @@ import { make_store } from "src/models/utils/make_store";
 import { sanitized_marked } from "src/general_utils";
 
 import { CRSO } from "./CRSO";
-import { InstForm } from "./InstForm";
-import { Minister } from "./Minister";
-import { Ministry } from "./Ministry";
 
 interface DeptDef {
   id: string;
@@ -45,6 +42,25 @@ interface DeptDef {
   crso_ids: string[];
 }
 
+type MinisterDef = {
+  id: string;
+  name: string;
+};
+
+type MinistryDef = {
+  id: string;
+  name: string;
+};
+
+type InstFormDef = {
+  id: string;
+  name: string;
+  parent_id?: string;
+};
+interface InstForm extends InstFormDef {
+  parent_form?: InstForm;
+}
+
 // Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
 export interface Dept extends DeptDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
@@ -57,6 +73,48 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     (def: DeptDef) => new Dept(def),
     (dept) => _.compact([dept.dept_code, +dept.id])
   );
+
+  static ministerStore = make_store((def: MinisterDef) => def);
+  static ministryStore = make_store((def: MinistryDef) => def);
+  static instFormStore = make_store(
+    (def: InstFormDef): InstForm => ({
+      ...def,
+      get parent_form() {
+        return def.parent_id
+          ? Dept.instFormStore.lookup(def.parent_id)
+          : undefined;
+      },
+    })
+  );
+
+  get ministers() {
+    return _.map(this.minister_ids, Dept.ministerStore.lookup);
+  }
+  get ministry() {
+    // TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the Ministry store to hold those?
+    return this.ministry_id && Dept.ministryStore.lookup(this.ministry_id);
+  }
+  get inst_form() {
+    return Dept.instFormStore.lookup(this.inst_form_id);
+  }
+
+  static lookup_by_minister_id(id: string) {
+    return _.filter(Dept.store.get_all(), ({ minister_ids }) =>
+      _.includes(minister_ids, id)
+    );
+  }
+  static lookup_by_ministry_id(id: string) {
+    return _.filter(
+      Dept.store.get_all(),
+      ({ ministry_id }) => ministry_id === id
+    );
+  }
+  static lookup_by_inst_form_id(id: string) {
+    return _.filter(
+      Dept.store.get_all(),
+      ({ inst_form_id }) => inst_form_id === id
+    );
+  }
 
   static depts_with_table_data() {
     return _.filter(Dept.store.get_all(), (dept) => dept.has_table_data);
@@ -76,17 +134,6 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
   }
   get programs() {
     return _.chain(this.crsos).map("programs").flatten().compact().value();
-  }
-
-  get inst_form() {
-    return InstForm.store.lookup(this.inst_form_id);
-  }
-  get ministry() {
-    // TODO fair number of IGOC orgs have no ministry, should there be an explicit "Other" entity in the Ministry store to hold those?
-    return this.ministry_id && Ministry.store.lookup(this.ministry_id);
-  }
-  get ministers() {
-    return _.map(this.minister_ids, Minister.store.lookup);
   }
 
   get name() {
