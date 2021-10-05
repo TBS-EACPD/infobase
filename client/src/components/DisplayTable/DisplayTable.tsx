@@ -626,6 +626,7 @@ export class _DisplayTable extends React.Component<
                                 width="1em"
                                 height="1.3em"
                                 color={successDarkColor}
+                                alternate_color={false}
                               />
                               <TM k="filters_applied" />
                             </div>

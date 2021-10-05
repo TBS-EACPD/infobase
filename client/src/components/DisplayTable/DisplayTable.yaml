@@ -26,6 +26,9 @@ filters_applied:
   transform: [markdown]
   en: _Filters applied_
   fr: TODO
+search_list:
+  en: Search the list below
+  fr: TODO
 ellipsis_end:
   transform: [handlebars]
   en: Page {{page_num}}. Click this, then move right to view more options.
