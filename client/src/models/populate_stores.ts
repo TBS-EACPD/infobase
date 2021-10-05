@@ -1,4 +1,3 @@
-import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
 import { lang } from "src/core/injected_build_constants";
@@ -8,6 +7,10 @@ import { get_static_url, make_request } from "src/request_utils";
 import { populate_global_footnotes } from "./footnotes/populate_footnotes";
 import { glossaryEntryStore } from "./glossary";
 import { Dept, CRSO, Program, ProgramTag } from "./subjects";
+import {
+  parse_csv_string_with_undefineds_allowed,
+  enforced_required_fields,
+} from "./utils/populate_utils";
 
 const is_en = lang === "en";
 const lookups_file_name = `lookups_${lang}.json`;
@@ -63,8 +66,8 @@ const process_lookups = ({
               .value()
         );
 
-        return csvParse(csv_string_with_cleaned_headers, (row) =>
-          _.mapValues(row, (value) => (value === "" ? undefined : value))
+        return parse_csv_string_with_undefineds_allowed(
+          csv_string_with_cleaned_headers
         );
       })
       .value()
@@ -371,20 +374,4 @@ const process_lookups = ({
         }),
       });
   });
-};
-
-const enforced_required_fields = <
-  RequiredFields extends Record<string, string | undefined>
->(
-  enforced_required_fields: RequiredFields
-) => {
-  _.each(enforced_required_fields, (cell, key) => {
-    if (typeof cell === "undefined") {
-      throw new Error(`Required field "${key}" has an empty cell`);
-    }
-  });
-
-  return enforced_required_fields as unknown as {
-    [key in keyof RequiredFields]: string;
-  };
 };
