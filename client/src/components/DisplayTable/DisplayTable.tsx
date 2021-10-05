@@ -549,6 +549,7 @@ export class _DisplayTable extends React.Component<
             {_.some(col_configs_with_defaults, "is_sortable") && (
               <tr className="table-header">
                 {_.map(visible_ordered_col_keys, (column_key: string) => {
+                  const col_index = col_configs_with_defaults[column_key].index;
                   const sortable =
                     col_configs_with_defaults[column_key].is_sortable;
                   const searchable =
@@ -610,6 +611,9 @@ export class _DisplayTable extends React.Component<
                               <DropdownFilter
                                 column_key={column_key}
                                 dropdown_filter={dropdown_filter}
+                                dropdown_content_class_name={
+                                  col_index === 0 ? "" : "no-right"
+                                }
                                 set_dropdown_filter={(
                                   dropdown_filter: _DisplayTableState["dropdown_filter"]
                                 ) => this.setState({ dropdown_filter })}
