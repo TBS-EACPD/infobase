@@ -122,6 +122,7 @@ export const DropdownFilter = ({
   column_key,
   set_dropdown_filter,
   dropdown_filter,
+  dropdown_content_class_name = "no-right",
 }) => (
   <DropdownMenu
     opened_button_class_name={"button-unstyled"}
@@ -135,7 +136,7 @@ export const DropdownFilter = ({
         }
       />
     }
-    dropdown_content_class_name="no-right"
+    dropdown_content_class_name={dropdown_content_class_name}
     dropdown_content_style={{}}
     dropdown_content={
       <DropdownFilterVirtualizedList
