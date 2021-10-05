@@ -30,7 +30,11 @@ export const SortDirection = ({
       sortDirection === "ASC" ? "a11y_sort_asc" : "a11y_sort_desc"
     )}
     aria-pressed={active}
-    onClick={() => onDirectionClick(sortDirection === "DESC")}
+    onClick={() =>
+      onDirectionClick(
+        active ? sortDirection !== "DESC" : sortDirection === "DESC"
+      )
+    }
   >
     {active
       ? sortDirection === "ASC"

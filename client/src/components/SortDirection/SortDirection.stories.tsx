@@ -1,4 +1,4 @@
-/* import { Story, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react";
 import React, { useState } from "react";
 
 import { primaryColor, secondaryColor } from "src/style_constants/index";
@@ -26,18 +26,24 @@ type SortDirectionProps = ComponentProps<typeof SortDirection>;
 const Template: Story<SortDirectionProps> = (_args) => {
   const [is_active1, set_active1] = useState(false);
   const [is_active2, set_active2] = useState(false);
+  function onClick(sortDirection: boolean) {
+    set_active2(sortDirection);
+    set_active1(!sortDirection);
+  }
   return (
-    <div
-      onClick={() => {
-        set_active2(!is_active2);
-        set_active1(is_active2);
-      }}
-    >
-      <SortDirection sortDirection="ASC" active={is_active1} />
-      <SortDirection sortDirection="DESC" active={is_active2} />
+    <div>
+      <SortDirection
+        sortDirection="ASC"
+        active={is_active1}
+        onDirectionClick={(dir) => onClick(dir)}
+      />
+      <SortDirection
+        sortDirection="DESC"
+        active={is_active2}
+        onDirectionClick={(dir) => onClick(dir)}
+      />
     </div>
   );
 };
 
 export const Basic = Template.bind({});
- */
