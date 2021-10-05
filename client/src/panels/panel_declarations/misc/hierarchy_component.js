@@ -94,7 +94,7 @@ const _HierarchyPeek = ({ root }) => (
   <div>
     {!root.current_subject ? (
       <Fragment>
-        {root.dead && <HierarchyDeadElementIcon />}
+        {(root.dead || root.limited_data) && <HierarchyDeadElementIcon />}
         <span className={classNames(root.dead && "dead-element")}>
           {root.href ? (
             <a href={root.href}>
@@ -115,7 +115,7 @@ const _HierarchyPeek = ({ root }) => (
       </Fragment>
     ) : (
       <Fragment>
-        {root.dead && <HierarchyDeadElementIcon />}
+        {(root.dead || root.limited_data) && <HierarchyDeadElementIcon />}
         <span className={classNames(root.dead && "dead-element")}>
           {root.name}
         </span>

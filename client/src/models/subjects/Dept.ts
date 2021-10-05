@@ -172,9 +172,7 @@ export class Dept extends BaseSubjectFactory<DeptDef>(
     return !(is_categorically_exempt || is_special_case);
   }
   get is_dead() {
-    return (
-      !_.isEmpty(this.end_yr) || this.status !== trivial_text_maker("active")
-    );
+    return !_.isEmpty(this.end_yr) || this.status_code !== "a";
   }
   get mandate() {
     return sanitized_marked(_.trim(this.raw_mandate));
