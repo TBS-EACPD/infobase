@@ -24,7 +24,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import WebFont from "webfontloader";
 
 import { Table } from "src/core/TableClass";
-import { populate_stores } from "src/models/populate_stores";
+import { populate_initial_stores_from_lookups } from "src/models/populate_initial_stores_from_lookups";
 
 import orgEmployeeAgeGroup from "src/tables/orgEmployeeAgeGroup";
 import orgEmployeeAvgAge from "src/tables/orgEmployeeAvgAge";
@@ -74,7 +74,7 @@ const load_fonts = () =>
 function bootstrapper(App, app_reducer, done) {
   load_fonts();
 
-  populate_stores().then(() => {
+  populate_initial_stores_from_lookups().then(() => {
     _.each(table_defs, (table_def) =>
       Table.store.create_and_register(table_def)
     );

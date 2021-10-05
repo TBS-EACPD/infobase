@@ -1,12 +1,14 @@
 import _ from "lodash";
 
+import { businessConstants } from "src/models/businessConstants";
+
+import { Program, CRSO } from "src/models/subjects";
+
+import { trivial_text_maker, run_template } from "src/models/text";
+
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
-
-import { businessConstants } from "./businessConstants";
-import { Program, CRSO } from "./subjects";
-import { trivial_text_maker, run_template } from "./text";
 
 const { months } = businessConstants;
 const { year_to_fiscal_year } = formats;
