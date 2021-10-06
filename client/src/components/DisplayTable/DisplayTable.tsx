@@ -586,7 +586,7 @@ export class _DisplayTable extends React.Component<
                             height: is_dropdown_filter_applied
                               ? "6rem"
                               : "4.5rem",
-                            minWidth: show_dropdown_filter ? "120px" : "95px",
+                            minWidth: "155px",
                           }}
                           className="input-bar"
                         >
@@ -594,8 +594,8 @@ export class _DisplayTable extends React.Component<
                             <DebouncedTextInput
                               inputClassName={`search input-sm input-unstyled`}
                               style={{ width: "100%" }}
-                              placeHolder={text_maker("filter_data")}
-                              a11y_label={text_maker("filter_data")}
+                              placeHolder={text_maker("search_column")}
+                              a11y_label={text_maker("search_column")}
                               defaultValue={current_search_input}
                               updateCallback={(search_value: string) => {
                                 const updated_searches = _.mapValues(

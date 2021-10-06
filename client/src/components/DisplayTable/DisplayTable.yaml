@@ -26,8 +26,11 @@ filters_applied:
   transform: [markdown]
   en: _Filters applied_
   fr: TODO
-search_list:
-  en: Search the list below
+search_column:
+  en: Search column
+  fr: TODO
+search_filter_options:
+  en: Search these filter options
   fr: TODO
 ellipsis_end:
   transform: [handlebars]
