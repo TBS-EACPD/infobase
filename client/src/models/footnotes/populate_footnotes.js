@@ -10,16 +10,16 @@ import { sanitized_marked } from "src/general_utils";
 
 import { get_static_url, make_request } from "src/request_utils";
 
-import { get_dynamic_footnotes } from "./dynamic_footnotes";
+import { get_dynamic_footnote_definitions } from "./dynamic_footnotes";
 import { footNoteStore } from "./footnotes";
 
 import footnote_topic_text from "./footnote_topics.yaml";
 
 const footnote_topic_keys = _.keys(footnote_topic_text);
 
-let _loaded_dept_or_tag_codes = {};
+const _loaded_dept_or_tag_codes = {};
 
-function populate_footnotes_info(csv_str) {
+function populate_footnotes(csv_str) {
   const rows = _.map(csvParse(_.trim(csv_str)), (row) =>
     _.mapValues(row, (item) => _.trim(item))
   );
@@ -54,9 +54,13 @@ function populate_footnotes_info(csv_str) {
 
     const text = sanitized_marked(run_template(footnote));
 
+    // TODO footnote data has a somewhat legacy "subject_class" column. These should be subject_type values, and they are
+    // ... with the exception of CRSO being all-caps. Sort that out with the pipeline some time
+    const subject_type = subject_class === "CRSO" ? "crso" : subject_class;
+
     footNoteStore.create_and_register({
       id,
-      subject_class,
+      subject_type,
       subject_id,
       year1,
       year2,
@@ -107,16 +111,16 @@ function load_footnotes_bundle(subject) {
   return make_request(
     get_static_url(`footnotes/fn_${lang}_${subject_code}.json.js`)
   ).then((csv_str) => {
-    populate_footnotes_info(csv_str);
+    populate_footnotes(csv_str);
     _loaded_dept_or_tag_codes[subject_code] = true;
   });
 }
 
-//this is exposed so populate stores can take the 'global' class-level footnotes that will be used by every infograph.
+//this is exposed so populate stores can make the 'global' class-level footnotes that will be used by every infograph.
 function populate_global_footnotes(csv_str) {
-  populate_footnotes_info(csv_str);
+  populate_footnotes(csv_str);
 
-  _.each(get_dynamic_footnotes(), function (footnote_config) {
+  _.each(get_dynamic_footnote_definitions(), function (footnote_config) {
     footNoteStore.create_and_register(footnote_config);
   });
 }

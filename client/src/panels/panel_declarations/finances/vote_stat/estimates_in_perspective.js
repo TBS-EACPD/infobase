@@ -49,7 +49,8 @@ export const declare_estimates_in_perspective_panel = () =>
         footnotes = _.concat(
           create_footnote({
             id: text_maker("auth_footnote"),
-            subject,
+            subject_type: subject.subject_type,
+            subject_id: subject.id,
             text: text_maker("auth_footnote"),
             topic_keys: ["AUTH"],
           }),

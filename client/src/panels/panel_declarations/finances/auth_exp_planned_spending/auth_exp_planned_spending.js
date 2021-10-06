@@ -470,7 +470,8 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   footnotes = _.concat(
     create_footnote({
       id: text_maker("actual_spending_footnote"),
-      subject,
+      subject_type: subject.subject_type,
+      subject_id: subject.id,
       text: text_maker("actual_spending_footnote"),
       topic_keys: ["EXP"],
     }),

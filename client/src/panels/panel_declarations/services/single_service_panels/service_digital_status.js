@@ -25,7 +25,8 @@ export class ServiceDigitalStatus extends React.Component {
       create_footnote({
         id: `digital_enablement_comment_${service.id}`,
         topic_keys: ["DIGITAL_STATUS"],
-        subject: service,
+        subject_type: "service",
+        subject_id: service.id,
         text: service.digital_enablement_comment,
       }),
     ];
