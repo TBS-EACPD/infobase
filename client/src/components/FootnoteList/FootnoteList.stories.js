@@ -12,27 +12,47 @@ const Template = (args) => <FootnoteList {...args} />;
 // having issues with inputing year1 and year2 values, seems to be a textmaker handlebar issue
 const footnotes = [
   {
-    text: "text1",
-    year1: "",
-    year2: "",
-
-    // TODO: topic_keys should be an array of strings (text keys from footnote_topics.yaml)
-    topic_keys: null,
+    text: "Example footnote for all organizations, with year range",
+    year1: 2019,
+    year2: 2020,
+    topic_keys: ["PEOPLE", "AGE"],
     subject: {
-      name: "name1",
-      plural: "plural1",
+      subject_type: "dept",
+      subject_name: "Organizations",
     },
   },
   {
-    text: "text2",
-    year1: "",
-    year2: "",
-
-    // TODO: topic_keys should be an array of strings (text keys from footnote_topics.yaml)
-    topic_keys: null,
+    text: "Example footnote for specific organization, single year",
+    year1: 2020,
+    year2: 2020,
+    topic_keys: ["RESULTS", "DP"],
     subject: {
-      name: "name2",
-      plural: "plural2",
+      subject_type: "dept",
+      name: "Some specific organization",
+      id: 1,
+    },
+  },
+  {
+    text: "Second example footnote for same organization, also for a single year",
+    year1: 2019,
+    year2: null,
+    topic_keys: ["RESULTS", "DRR"],
+    subject: {
+      subject_type: "dept",
+      name: "Some specific organization",
+      id: 1,
+    },
+  },
+
+  {
+    text: "Example footnote for specific program, no year range",
+    year1: null,
+    year2: null,
+    topic_keys: ["RESULTS"],
+    subject: {
+      subject_type: "program",
+      name: "Some specific program",
+      id: 1,
     },
   },
 ];

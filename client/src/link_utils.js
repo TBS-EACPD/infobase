@@ -3,16 +3,8 @@ import _ from "lodash";
 import { Table } from "./core/TableClass";
 import { infograph_href_template } from "./infographic/infographic_link";
 import { glossaryEntryStore } from "./models/glossary";
-import { Gov, Dept, CRSO, Program, ProgramTag } from "./models/subjects";
+import { Subject } from "./models/subjects";
 import { rpb_link } from "./rpb/rpb_link";
-
-const subject_classes_with_infographics = [
-  Gov,
-  Dept,
-  CRSO,
-  Program,
-  ProgramTag,
-];
 
 const glossary_href = (subject_or_id, first_character = "#") => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;
@@ -28,9 +20,7 @@ const smart_href_template = (entity, first_character) => {
     return rpb_link({ table: entity.table.id }, first_character);
   } else if (entity.constructor === glossaryEntryStore) {
     return glossary_href(entity, first_character);
-  } else if (
-    _.includes(subject_classes_with_infographics, entity.constructor)
-  ) {
+  } else if (_.includes(Subject, entity.constructor)) {
     return infograph_href_template(entity, null, first_character);
   } else {
     throw new Error(
