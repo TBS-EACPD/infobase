@@ -39,13 +39,13 @@ export default {
         hidden: true,
         nick: "dept",
         header: "",
-        can_group_by: true,
       },
       {
         type: "str",
         hidden: true,
         key: true,
         nick: "type_id",
+        groupings: [],
       },
       {
         type: "str",
@@ -55,16 +55,18 @@ export default {
           en: "Type",
           fr: "Type",
         },
-        can_group_by: true,
-        custom_group_by: "vote_vs_stat",
-        vote_vs_stat: function (row) {
-          return _.includes(row.tp, "(S) ");
-        },
-        dim_col_value: function (row) {
-          return [
-            "type",
-            text_maker(_.includes(row.tp, "(S) ") ? "stat" : "voted"),
-          ];
+        custom_groupings: {
+          vote_vs_stat: {
+            group_by: function (row) {
+              return _.includes(row.tp, "(S) ");
+            },
+            dim_col_value: function (row) {
+              return [
+                "type",
+                text_maker(_.includes(row.tp, "(S) ") ? "stat" : "voted"),
+              ];
+            },
+          },
         },
       },
       {
@@ -75,6 +77,7 @@ export default {
           en: "Name",
           fr: "Nom",
         },
+        groupings: [],
       },
     ]);
     _.each(std_years, (header, i) => {
@@ -90,6 +93,7 @@ export default {
             en: "Corresponds to the authorities provided by Parliament, including transfers from other organizations or adjustments that are made during the year.",
             fr: "Correspondent aux autorisations accordées par le Parlement, y compris les transferts provenant d'autres organismes ou les rajustements qui ont été effectués au cours de l'exercice.",
           },
+          groupings: [],
         },
         {
           type: "big_int",
@@ -102,6 +106,7 @@ export default {
             en: "Corresponds to the funds spent against authorities available that year.",
             fr: "Correspondent aux dépenses par rapport aux autorisations disponibles cette année-là.",
           },
+          groupings: [],
         },
       ]);
     });
