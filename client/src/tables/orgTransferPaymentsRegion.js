@@ -36,7 +36,6 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
-      can_group_by: true,
     });
     this.add_col({
       type: "short-str",
@@ -45,6 +44,7 @@ export default {
       not_for_display: true,
       nick: "region_code",
       header: "",
+      groupings: [],
     });
     this.add_col({
       key: true,
@@ -54,7 +54,6 @@ export default {
         en: "Geographic Region",
         fr: "Région géographique",
       },
-      can_group_by: true,
     });
     _.each(tp_by_region_years, (header, ix) => {
       this.add_col({
@@ -65,6 +64,7 @@ export default {
           en: `Amount of transfer payment in ${header}`,
           fr: `Montant du paiement de transfert en ${header}`,
         },
+        groupings: [],
       });
     });
   },
