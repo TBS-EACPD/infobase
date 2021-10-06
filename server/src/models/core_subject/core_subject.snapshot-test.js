@@ -43,7 +43,7 @@ query IgocTestQuery ($lang: String!){
       id
       org_id
       dept_code
-      level
+      subject_type
       name
       legal_title
       applied_title

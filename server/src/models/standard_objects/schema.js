@@ -27,14 +27,14 @@ export default function ({ models }) {
   const resolvers = {
     StandardObjectData: {
       data(subject, { year, so_num }) {
-        const { level } = subject;
+        const { subject_type } = subject;
 
         let data;
-        if (level === "org") {
+        if (subject_type === "org") {
           data = OrgSobj.get_flat_records(subject.dept_code);
-        } else if (level === "gov") {
+        } else if (subject_type === "gov") {
           data = OrgSobj.get_flat_records("ZGOC");
-        } else if (level === "program") {
+        } else if (subject_type === "program") {
           data = ProgSobj.get_flat_records(subject.id);
         }
 
@@ -47,13 +47,13 @@ export default function ({ models }) {
         return data;
       },
       top_n_with_other(subject, { n, year }) {
-        const { level } = subject;
+        const { subject_type } = subject;
 
-        if (level === "org") {
+        if (subject_type === "org") {
           return OrgSobj.get_top_n_sobjs(subject.dept_code, year, n);
-        } else if (level === "gov") {
+        } else if (subject_type === "gov") {
           return OrgSobj.get_top_n_sobjs("ZGOC", year, n);
-        } else if (level === "program") {
+        } else if (subject_type === "program") {
           return ProgSobj.get_top_n_sobjs(subject.id, year, n);
         }
       },

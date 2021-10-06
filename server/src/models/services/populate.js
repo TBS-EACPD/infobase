@@ -212,8 +212,13 @@ export default async function ({ models }) {
   };
   const get_current_status_count = (services, key, value) =>
     _.countBy(services, `${key}_status`)[value] || 0;
-  const populate_digital_summary_key = (services, subject_id, level, key) => ({
-    id: `${level}_${subject_id}_${key}`,
+  const populate_digital_summary_key = (
+    services,
+    subject_id,
+    subject_type,
+    key
+  ) => ({
+    id: `${subject_type}_${subject_id}_${key}`,
     key_desc: `${key}_desc`,
     key,
     subject_id,

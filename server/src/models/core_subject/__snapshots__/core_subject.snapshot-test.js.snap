@@ -69,7 +69,6 @@ Object {
           "id": null,
         },
         "legal_title": null,
-        "level": "Org",
         "mandate": "On behalf of the people of Canada, the Canadian Armed Forces (CAF) and the Department of National Defence (DND) stand ready to perform three key roles:Protecting Canada and defending our sovereignty;Defending North America in cooperation with the United States, Canada's closest ally; andContributing to international peace and security through operations around the world, most often in partnership with allies from other countries.",
         "ministers": Array [
           Object {
@@ -347,6 +346,7 @@ Object {
             "id": "ND-AUG00",
           },
         ],
+        "subject_type": "org",
         "website_url": "www.greatlakes-seaway.com",
       },
       "org_with_auditor": Object {
