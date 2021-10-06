@@ -10,7 +10,7 @@ const schema = `
     program(id: String): Program
     gov: Gov
     crso(id: String): Crso
-    subject(level : Level!, id: String!): SubjectI
+    subject(subject_type : SubjectType!, id: String!): SubjectI
     org_search(query: String!): [Org]
     program_search(query: String!): [Program]
     crso_search(query: String!): [Crso]
@@ -21,7 +21,7 @@ const schema = `
   interface SubjectI {
     name: String
     id: String
-    level: String
+    subject_type: String
     # guid: String
   }
   # sometimes we want access to more subject fields, in these cases we'll need to use inline fragments 
@@ -30,7 +30,7 @@ const schema = `
     id: String
     org_id: String
     dept_code: String
-    level: String
+    subject_type: String
     name: String
     legal_title: String
     applied_title: String
@@ -64,7 +64,7 @@ const schema = `
   }
   type Program implements SubjectI {
     id: String
-    level: String
+    subject_type: String
     name: String
     old_name: String
     description: String
@@ -78,12 +78,12 @@ const schema = `
   type Gov {
     id: String
     name: String
-    level: String
+    subject_type: String
   }
   type Crso implements SubjectI {
     id: String
     name: String
-    level: String
+    subject_type: String
     description: String
     is_active: Boolean
 
@@ -91,11 +91,11 @@ const schema = `
     programs: [Program]
   }
 
-  enum Level {
+  enum SubjectType {
     gov
     org
-    program
     crso
+    program
   }
 
   type InstForm {
@@ -132,7 +132,7 @@ export default function ({ models, loaders, services }) {
 
   const gov = {
     guid: "gov_gov",
-    level: "gov",
+    subject_type: "gov",
     id: "gov",
     name_en: "Government",
     name_fr: "Gouvernment",
@@ -190,8 +190,8 @@ export default function ({ models, loaders, services }) {
       gov: _.constant(gov),
       program: (_x, { id }) => prog_id_loader.load(id),
       crso: (_x, { id }) => crso_id_loader.load(id),
-      subject: (_x, { level, id }) => {
-        switch (level) {
+      subject: (_x, { subject_type, id }) => {
+        switch (subject_type) {
           case "gov":
             return gov;
 
@@ -227,7 +227,7 @@ export default function ({ models, loaders, services }) {
         org.dept_code && prog_dept_code_loader.load(org.dept_code),
       crsos: ({ dept_code }) =>
         dept_code && crso_from_deptcode_loader.load(dept_code),
-      level: _.constant("Org"),
+      subject_type: _.constant("org"),
     },
     Program: {
       name: bilingual_field("name"),
@@ -235,7 +235,7 @@ export default function ({ models, loaders, services }) {
       org: (prog) => org_deptcode_loader.load(prog.dept_code),
       crso: (prog) => crso_id_loader.load(prog.crso_id),
       id: _.property("program_id"),
-      level: _.constant("Program"),
+      subject_type: _.constant("program"),
     },
     Crso: {
       name: bilingual_field("name"),
@@ -243,7 +243,7 @@ export default function ({ models, loaders, services }) {
       programs: ({ crso_id }) => prog_crso_id_loader.load(crso_id),
       org: ({ dept_code }) => org_deptcode_loader.load(dept_code),
       id: _.property("crso_id"),
-      level: _.constant("Crso"),
+      subject_type: _.constant("crso"),
     },
     InstForm: {
       name: bilingual_field("name"),
