@@ -1,6 +1,7 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
+import { Subject } from "src/models/subjects";
 import { run_template } from "src/models/text";
 import { fiscal_year_to_year } from "src/models/years";
 
@@ -17,9 +18,9 @@ import footnote_topic_text from "./footnote_topics.yaml";
 
 const footnote_topic_keys = _.keys(footnote_topic_text);
 
-const _loaded_dept_or_tag_codes = {};
+const _loaded_footnote_bundle_ids: Record<string, boolean> = {};
 
-function populate_footnotes(csv_str) {
+function populate_footnotes(csv_str: string) {
   const rows = _.map(csvParse(_.trim(csv_str)), (row) =>
     _.mapValues(row, (item) => _.trim(item))
   );
@@ -49,8 +50,8 @@ function populate_footnotes(csv_str) {
       );
     }
 
-    const year1 = fiscal_year_to_year(fyear1);
-    const year2 = fiscal_year_to_year(fyear2);
+    const year1 = fiscal_year_to_year(fyear1) || undefined;
+    const year2 = fiscal_year_to_year(fyear2) || undefined;
 
     const text = sanitized_marked(run_template(footnote));
 
@@ -70,54 +71,58 @@ function populate_footnotes(csv_str) {
   });
 }
 
-function load_footnotes_bundle(subject) {
-  let subject_code;
-  if (subject) {
-    switch (subject.subject_type) {
-      case "gov":
-        return Promise.resolve();
-      case "dept":
-        subject_code = subject.dept_code;
-        break;
-      case "program":
-        subject_code = subject.dept.dept_code;
-        break;
-      case "crso":
-        subject_code = subject.dept.dept_code;
-        break;
-      case "tag":
-        subject_code = subject.id;
-        break;
-      default:
-        subject_code = "all";
-        break;
-    }
-  } else {
-    if (subject === "estimates") {
-      subject_code = "estimates";
+function load_footnotes_bundle(
+  subject:
+    | typeof Subject.Gov
+    | InstanceType<typeof Subject["Dept" | "CRSO" | "Program" | "ProgramTag"]>
+    | "estimates"
+    | "all"
+) {
+  // TODO: not that calling this with the Gov subject results in a footnote_bundle_id of undefined and an early resolution
+  // Gov footnotes are currently loaded with the "global footnotes" in the intital lookup blob! Either move them
+  // to their own bundles to be loaded the same as the rest, or work backwards and clean up the code that's currently trying to
+  // call load_footnotes_bundle with Gov (infographics do, for one)
+
+  const footnote_bundle_id = (() => {
+    if (typeof subject === "string") {
+      if (subject === "estimates") {
+        return "estimates";
+      } else {
+        return "all";
+      }
     } else {
-      subject_code = "all";
+      if (subject instanceof Subject.Dept) {
+        return subject.dept_code;
+      } else if (
+        subject instanceof Subject.CRSO ||
+        subject instanceof Subject.Program
+      ) {
+        return subject.dept.dept_code;
+      } else if (subject instanceof Subject.ProgramTag) {
+        return subject.id;
+      }
     }
-  }
+  })();
 
   if (
-    _loaded_dept_or_tag_codes[subject_code] ||
-    _loaded_dept_or_tag_codes["all"]
+    typeof footnote_bundle_id === "undefined" ||
+    _loaded_footnote_bundle_ids["all"] ||
+    _loaded_footnote_bundle_ids[footnote_bundle_id]
   ) {
     return Promise.resolve();
   }
 
   // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
   return make_request(
-    get_static_url(`footnotes/fn_${lang}_${subject_code}.json.js`)
+    get_static_url(`footnotes/fn_${lang}_${footnote_bundle_id}.json.js`)
   ).then((csv_str) => {
     populate_footnotes(csv_str);
-    _loaded_dept_or_tag_codes[subject_code] = true;
+    _loaded_footnote_bundle_ids[footnote_bundle_id] = true;
   });
 }
 
 //this is exposed so populate stores can make the 'global' class-level footnotes that will be used by every infograph.
-function populate_global_footnotes(csv_str) {
+function populate_global_footnotes(csv_str: string) {
   populate_footnotes(csv_str);
 
   _.each(get_dynamic_footnote_definitions(), function (footnote_config) {
