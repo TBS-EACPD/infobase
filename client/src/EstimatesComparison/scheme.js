@@ -65,7 +65,8 @@ function get_footnotes_for_votestat_item({ desc, org_id, votenum }) {
         create_footnote({
           id: central_vote_footnote[1](),
           text: central_vote_footnote[1](),
-          subject: Dept.store.lookup(326),
+          subject_type: Dept.subject_type,
+          subject_id: "326",
           topic_keys: [],
         }),
       ];
