@@ -45,7 +45,6 @@ export default {
         hidden: true,
         nick: "dept",
         header: "",
-        can_group_by: true,
       },
       {
         key: true,
@@ -53,6 +52,7 @@ export default {
         type: "str",
         nick: "activity_code",
         header: "",
+        groupings: [],
       },
       {
         key: true,
@@ -60,6 +60,7 @@ export default {
         type: "str",
         nick: "program_id",
         header: "",
+        groupings: [],
       },
       {
         key: true,
@@ -69,7 +70,6 @@ export default {
           en: "Program",
           fr: "Programme",
         },
-        can_group_by: true,
       },
     ]);
     _.each(std_years, (header, ix) => {
@@ -86,6 +86,7 @@ export default {
             en: `Corresponds to the funds spent against authorities available that year.`,
             fr: `Correspondent aux dépenses effectuées aux termes de autorisations disponibles cette année-là.`,
           },
+          groupings: [],
         },
       ]);
     });
@@ -103,6 +104,7 @@ export default {
         en: `Corresponds to total planned spending for the fiscal year {{pa_last_year_planned}}, including additional funds approved by Treasury Board.`,
         fr: `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year_planned}}, y compris les fonds approuvés par le Conseil du Trésor.`,
       },
+      groupings: [],
     });
     _.each(planning_years, (header) => {
       this.add_col(header).add_child([
@@ -117,21 +119,25 @@ export default {
             en: `Corresponds to total planned spending for the fiscal year ${header}, including additional funds approved by Treasury Board.`,
             fr: `Correspondent au total des dépenses prévues pour l'exercice ${header}, y compris les fonds approuvés par le Conseil du Trésor.`,
           },
+          groupings: [],
         },
         {
           type: "big_int",
           nick: `${header}_rev`,
           hidden: true,
+          groupings: [],
         },
         {
           type: "big_int",
           nick: `${header}_spa`,
           hidden: true,
+          groupings: [],
         },
         {
           type: "big_int",
           nick: `${header}_gross`,
           hidden: true,
+          groupings: [],
         },
       ]);
     });

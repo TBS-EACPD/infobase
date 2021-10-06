@@ -43,7 +43,6 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
-      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -51,6 +50,7 @@ export default {
       type: "str",
       nick: "activity_code",
       header: "",
+      groupings: [],
     });
     this.add_col({
       key: true,
@@ -58,6 +58,7 @@ export default {
       type: "str",
       nick: "program_id",
       header: "",
+      groupings: [],
     });
     this.add_col({
       key: true,
@@ -67,7 +68,6 @@ export default {
         en: "Program",
         fr: "Programme",
       },
-      can_group_by: true,
     });
     _.each(std_years, (header, ix) => {
       this.add_col({
@@ -81,6 +81,7 @@ export default {
           en: `Corresponds to the total number of actual FTEs for the fiscal year ${header}`,
           fr: `Correspond au nombre total d'équivalents temps plein (ETP) réel pour l'exercice ${header}`,
         },
+        groupings: [],
       });
     });
 
@@ -99,6 +100,7 @@ export default {
         en: `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year_planned}}`,
         fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year_planned}}`,
       },
+      groupings: [],
     });
     _.each(planning_years, (header) => {
       this.add_col({
@@ -112,6 +114,7 @@ export default {
           en: `Corresponds to the total number of planned FTEs for the fiscal year ${header}`,
           fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice ${header}`,
         },
+        groupings: [],
       });
     });
   },

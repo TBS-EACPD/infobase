@@ -32,13 +32,13 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
-      can_group_by: true,
     });
     this.add_col({
       type: "string",
       key: true,
       hidden: true,
       nick: "activity_code",
+      groupings: [],
     });
     this.add_col({
       key: true,
@@ -48,13 +48,13 @@ export default {
         en: "Program",
         fr: "Programme",
       },
-      can_group_by: true,
     });
     this.add_col({
       key: true,
       type: "int",
       hidden: true,
       nick: "so_num",
+      groupings: [],
     });
     this.add_col({
       key: true,
@@ -64,7 +64,6 @@ export default {
         en: "Standard Object",
         fr: "Article courant",
       },
-      can_group_by: true,
     });
     std_years.forEach((yr) => {
       this.add_col({
@@ -79,6 +78,7 @@ export default {
             "Correspond aux dépenses effectuées par article courant durant l'exercice financier " +
             yr,
         },
+        groupings: [],
       });
     });
   },
