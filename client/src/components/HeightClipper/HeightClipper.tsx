@@ -22,7 +22,11 @@ interface HeightClipperState {
   exceedsHeight: boolean;
   shouldClip: boolean;
 }
-export class HeightClipper extends React.Component<
+
+export const HeightClipper = (props: HeightClipperProps) =>
+  is_a11y_mode ? props.children : <_HeightClipper {...props} />;
+
+class _HeightClipper extends React.Component<
   HeightClipperProps,
   HeightClipperState
 > {
@@ -157,9 +161,7 @@ export class HeightClipper extends React.Component<
 
     const isClipped = exceedsHeight && shouldClip;
 
-    return is_a11y_mode ? (
-      children
-    ) : (
+    return (
       <div
         ref={this.main}
         style={{
