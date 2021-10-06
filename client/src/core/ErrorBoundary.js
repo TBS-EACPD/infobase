@@ -21,13 +21,16 @@ const state_from_error = (error) => ({
   testing_for_stale_client: true,
 });
 
-const log_error = (error) =>
+const log_error = (error) => {
+  console.error(error);
+
   !is_dev &&
-  log_standard_event({
-    SUBAPP: window.location.hash.replace("#", ""),
-    MISC1: "ERROR_IN_PROD",
-    MISC2: error.toString(),
-  });
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: "ERROR_IN_PROD",
+      MISC2: error.toString(),
+    });
+};
 
 export class ErrorBoundary extends React.Component {
   constructor() {
