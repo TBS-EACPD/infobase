@@ -113,29 +113,32 @@ const DropdownFilterVirtualizedList = ({
                     label={item.label}
                     active={item.active}
                     label_style={{ textAlign: "left" }}
-                    onClick={(col_data) => {
-                      if (col_data === "select_all") {
+                    onClick={(item_id) => {
+                      if (item_id === "select_all") {
                         const is_select_all_enabled = !_.find(list, {
-                          id: col_data,
+                          id: item_id,
                         }).active;
                         set_dropdown_filter({
                           ...dropdown_filter,
-                          [column_key]: _.map(list, (col_filter) => ({
-                            ...col_filter,
+                          [column_key]: _.map(list, (item) => ({
+                            ...item,
                             active: is_select_all_enabled,
                           })),
                         });
                       } else {
+                        const is_filter_active =
+                          _.reject(list, "active").length > 0;
                         set_dropdown_filter({
                           ...dropdown_filter,
-                          [column_key]: _.map(list, (col_filter) =>
-                            col_filter.id === col_data
-                              ? {
-                                  ...col_filter,
-                                  active: !col_filter.active,
-                                }
-                              : col_filter
-                          ),
+                          [column_key]: _.map(list, (item) => {
+                            if (!is_filter_active && item.id === "select_all") {
+                              return { ...item, active: false };
+                            }
+                            if (item.id === item_id) {
+                              return { ...item, active: !item.active };
+                            }
+                            return item;
+                          }),
                         });
                       }
                     }}
