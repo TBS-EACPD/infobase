@@ -10,7 +10,7 @@ import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 
 import { PinnedContent } from "src/components/PinnedContent/PinnedContent";
 
-import { Gov } from "src/models/organizational_entities";
+import { Gov } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
 
 import { secondaryColor } from "src/style_constants/colors.interop.scss";

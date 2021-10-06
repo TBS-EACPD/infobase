@@ -86,7 +86,7 @@ function render_non_col_content({ node }) {
           )}
         </dl>
       )}
-      {(_.includes(["program", "dept"], subject.level) ||
+      {(_.includes(["program", "dept"], subject.subject_type) ||
         subject.is_cr ||
         subject.has_programs) && (
         <div className="ExplorerNode__BRLinkContainer">
