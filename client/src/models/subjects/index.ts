@@ -18,13 +18,13 @@ export const Subject = {
   ProgramTag,
 };
 
+export const get_subject_class_by_type = (subject_type: string) =>
+  _.chain(Subject).values().find({ subject_type }).value();
+
 export const get_subject_by_guid = (guid: string) => {
   const [type, id] = guid.split("_");
 
-  const subject_class = _.chain(Subject)
-    .values()
-    .find({ subject_type: type })
-    .value();
+  const subject_class = get_subject_class_by_type(type);
 
   if (subject_class) {
     return subject_class.store.lookup(id);

@@ -45,7 +45,8 @@ export class ServiceStandards extends React.Component {
           create_footnote({
             id: `other_type_comment_${standard.standard_id}`,
             topic_keys: ["OTHER_TYPE_COMMENT"],
-            subject: service,
+            subject_type: "service",
+            subject_id: service.id,
             text: standard.other_type_comment,
           })
       )
