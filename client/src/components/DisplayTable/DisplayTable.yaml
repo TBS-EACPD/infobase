@@ -32,6 +32,12 @@ search_column:
 search_filter_options:
   en: Search these filter options
   fr: TODO
+filter_data:
+  en: Filter data
+  fr: Filtrer les données
+no_data_table:
+  en: No data available for this table. Please check any filters applied.
+  fr: Aucune donnée n'est disponible pour ce tableau. TODO
 ellipsis_end:
   transform: [handlebars]
   en: Page {{page_num}}. Click this, then move right to view more options.
