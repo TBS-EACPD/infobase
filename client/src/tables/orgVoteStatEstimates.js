@@ -53,7 +53,6 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
-      can_group_by: true,
     });
     this.add_col({
       type: "int",
@@ -64,6 +63,7 @@ export default {
         en: "Vote / Statutory Number",
         fr: "Crédit / Poste législatif Numéro",
       },
+      groupings: [],
     });
     this.add_col({
       type: "int",
@@ -71,6 +71,7 @@ export default {
       hidden: true,
       nick: "votestattype",
       header: "",
+      groupings: [],
     });
     this.add_col({
       type: "wide-str",
@@ -80,15 +81,19 @@ export default {
         en: "Vote / Statutory Description",
         fr: "Crédit / Poste législatif Description",
       },
-      custom_group_by: "vote_vs_stat",
-      vote_vs_stat: function (row) {
-        return row.votestattype === 999;
-      },
-      dim_col_value: function (row) {
-        return [
-          "desc",
-          text_maker(row.votestattype === 999 ? "stat" : "voted"),
-        ];
+      groupings: [],
+      custom_groupings: {
+        vote_vs_stat: {
+          group_by: function (row) {
+            return row.votestattype === 999;
+          },
+          dim_col_value: function (row) {
+            return [
+              "desc",
+              text_maker(row.votestattype === 999 ? "stat" : "voted"),
+            ];
+          },
+        },
       },
     });
     this.add_col({
@@ -100,6 +105,7 @@ export default {
         en: "Estimates",
         fr: "Budget des dépenses",
       },
+      groupings: [],
     });
     this.add_col({
       type: "wide-str",
@@ -109,7 +115,6 @@ export default {
         en: "Estimates Instrument",
         fr: "Instrument des dépenses",
       },
-      can_group_by: true,
     });
     _.each(estimates_years, (yr, ix) => {
       this.add_col({
@@ -120,6 +125,7 @@ export default {
           fr: "Montants déposés pour " + yr,
         },
         header: yr,
+        groupings: [],
       });
     });
   },

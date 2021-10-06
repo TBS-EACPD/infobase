@@ -56,6 +56,7 @@ class GranularView extends React.Component {
 
   get_table_content() {
     const {
+      table,
       columns: data_columns,
       flat_data,
       sorted_key_columns,
@@ -103,7 +104,6 @@ class GranularView extends React.Component {
             {
               nick,
               type,
-              custom_group_by,
               fully_qualified_name,
               is_searchable = true,
               is_summable = true,
@@ -113,10 +113,13 @@ class GranularView extends React.Component {
             nick,
             {
               index: idx + 2,
-              header:
-                custom_group_by === dimension
-                  ? text_maker(dimension)
-                  : fully_qualified_name,
+              header: table.get_col_header(
+                {
+                  nick,
+                  fully_qualified_name,
+                },
+                dimension
+              ),
               is_searchable:
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               is_summable:
