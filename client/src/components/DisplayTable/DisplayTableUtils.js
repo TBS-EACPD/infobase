@@ -36,6 +36,7 @@ const DropdownFilterVirtualizedList = ({
 }) => {
   const virtualized_cell_measure_cache = new CellMeasurerCache({
     fixedWidth: true,
+    minHeight: 30,
   });
   const virtualized_list_ref = React.createRef();
   const [search, set_search] = useState("");
@@ -84,12 +85,14 @@ const DropdownFilterVirtualizedList = ({
           list_ref={virtualized_list_ref}
           deferredMeasurementCache={virtualized_cell_measure_cache}
           rowHeight={({ index }) => {
-            const item_num_of_chars = filtered_list[index].label.length;
+            const item_num_of_chars = filtered_list[index].label.length + 10;
+            const pre_calculated_row_height =
+              item_num_of_chars < 30 ? 30 : item_num_of_chars;
             const cached_row_height =
               virtualized_cell_measure_cache._cellHeightCache[`${index}-0`];
             return cached_row_height
               ? cached_row_height + 10
-              : item_num_of_chars + 10;
+              : pre_calculated_row_height;
           }}
           rowCount={filtered_list.length}
           rowRenderer={({ index, key, parent, style }) => {
