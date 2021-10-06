@@ -114,6 +114,7 @@ export class DropdownMenu extends React.Component<
         <button
           aria-haspopup="true"
           aria-expanded={is_open}
+          aria-label={aria_label}
           className={
             is_open ? opened_button_class_name : closed_button_class_name
           }

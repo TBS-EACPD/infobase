@@ -167,6 +167,7 @@ export const DropdownFilter = ({
     <DropdownMenu
       opened_button_class_name={"button-unstyled"}
       closed_button_class_name={"button-unstyled"}
+      dropdown_a11y_txt={text_maker("filter_data")}
       dropdown_trigger_txt={
         <IconFilter
           color={is_filter_active ? secondaryColor : tertiaryColor}
