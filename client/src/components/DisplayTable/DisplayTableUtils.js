@@ -157,30 +157,31 @@ export const DropdownFilter = ({
   set_dropdown_filter,
   dropdown_filter,
   dropdown_content_class_name = "no-right",
-}) => (
-  <DropdownMenu
-    opened_button_class_name={"button-unstyled"}
-    closed_button_class_name={"button-unstyled"}
-    dropdown_trigger_txt={
-      <IconFilter
-        color={
-          _.reject(dropdown_filter[column_key], "active").length > 0
-            ? secondaryColor
-            : tertiaryColor
-        }
-      />
-    }
-    dropdown_content_class_name={dropdown_content_class_name}
-    dropdown_content_style={{}}
-    dropdown_content={
-      <DropdownFilterVirtualizedList
-        column_key={column_key}
-        set_dropdown_filter={set_dropdown_filter}
-        dropdown_filter={dropdown_filter}
-      />
-    }
-  />
-);
+}) => {
+  const is_filter_active =
+    _.reject(dropdown_filter[column_key], "active").length > 0;
+  return (
+    <DropdownMenu
+      opened_button_class_name={"button-unstyled"}
+      closed_button_class_name={"button-unstyled"}
+      dropdown_trigger_txt={
+        <IconFilter
+          color={is_filter_active ? secondaryColor : tertiaryColor}
+          alternate_color={is_filter_active ? tertiaryColor : secondaryColor}
+        />
+      }
+      dropdown_content_class_name={dropdown_content_class_name}
+      dropdown_content_style={{}}
+      dropdown_content={
+        <DropdownFilterVirtualizedList
+          column_key={column_key}
+          set_dropdown_filter={set_dropdown_filter}
+          dropdown_filter={dropdown_filter}
+        />
+      }
+    />
+  );
+};
 
 export const DisplayTableCopyCsv = ({ csv_string }) => (
   <WriteToClipboard
