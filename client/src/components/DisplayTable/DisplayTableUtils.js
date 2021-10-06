@@ -67,8 +67,8 @@ const DropdownFilterVirtualizedList = ({
           <DebouncedTextInput
             inputClassName={`search input-sm input-unstyled`}
             style={{ width: "100%" }}
-            placeHolder={text_maker("search_list")}
-            a11y_label={text_maker("search_list")}
+            placeHolder={text_maker("search_filter_options")}
+            a11y_label={text_maker("search_filter_options")}
             defaultValue={search}
             updateCallback={(search_value) => set_search(search_value)}
             debounceTime={300}

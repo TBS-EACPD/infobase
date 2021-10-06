@@ -11,9 +11,6 @@ result:
 new:
   en: New
   fr: Nouveau
-filter_data:
-  en: Filter Data
-  fr: Filtrer les données
 survey:
   en: Open the survey
   fr: Ouvrir le sondage
