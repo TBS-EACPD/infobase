@@ -85,16 +85,11 @@ const DropdownFilterVirtualizedList = ({
           deferredMeasurementCache={virtualized_cell_measure_cache}
           rowHeight={({ index }) => {
             const item_num_of_chars = filtered_list[index].label.length;
-            const row_height = (() => {
-              if (item_num_of_chars < 25) {
-                return 30;
-              }
-              if (item_num_of_chars > 70) {
-                return 90;
-              }
-              return 60;
-            })();
-            return row_height;
+            const cached_row_height =
+              virtualized_cell_measure_cache._cellHeightCache[`${index}-0`];
+            return cached_row_height
+              ? cached_row_height + 10
+              : item_num_of_chars + 10;
           }}
           rowCount={filtered_list.length}
           rowRenderer={({ index, key, parent, style }) => {
