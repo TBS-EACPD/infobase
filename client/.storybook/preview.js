@@ -6,6 +6,8 @@ import { MemoryRouter } from "react-router";
 import "src/InfoBase/site.scss";
 import "src/InfoBase/utils.scss";
 
+import "src/handlebars/register_helpers.side-effects";
+
 const a11y_options = {
   element: "#root",
   options: {
