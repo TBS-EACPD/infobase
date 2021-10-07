@@ -414,7 +414,7 @@ const Infographic = ({
         case "crso":
           return subject.dept;
         default:
-          return Gov;
+          return Gov.instance;
       }
     })();
 
@@ -445,13 +445,13 @@ const Infographic = ({
         .value();
     switch (subject_type) {
       case "dept": {
-        return get_breadcrumbs([Gov]);
+        return get_breadcrumbs([Gov.instance]);
       }
       case "crso": {
-        return get_breadcrumbs([Gov, subject.dept]);
+        return get_breadcrumbs([Gov.instance, subject.dept]);
       }
       case "program": {
-        return get_breadcrumbs([Gov, subject.dept, subject.crso]);
+        return get_breadcrumbs([Gov.instance, subject.dept, subject.crso]);
       }
       default: {
         return [subject.name];

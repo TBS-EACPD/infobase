@@ -67,7 +67,10 @@ export const api_load_years_with_covid_data = (subject) => {
         );
       })
       // always want to make sure the gov years are also loaded, when loading for a specific dept
-      .then(() => subject_type !== "gov" && api_load_years_with_covid_data(Gov))
+      .then(
+        () =>
+          subject_type !== "gov" && api_load_years_with_covid_data(Gov.instance)
+      )
   );
 };
 

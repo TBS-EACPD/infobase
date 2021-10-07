@@ -17,7 +17,7 @@ function func_key(col, include_dept, rollup) {
 
   if (include_dept && include_dept.subject_type === "dept") {
     include_dept = include_dept.id;
-  } else if (include_dept === Gov) {
+  } else if (include_dept === Gov.instance) {
     include_dept = false;
   }
 

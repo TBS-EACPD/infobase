@@ -143,7 +143,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
   const is_subject = (subj) => subj === subject;
   return {
     name: text_maker("goc"),
-    href: href_generator(Gov),
+    href: href_generator(Gov.instance),
     children: !subject.ministry
       ? [
           {
@@ -269,7 +269,7 @@ export const program_hierarchy = ({
 
   return {
     name: text_maker("goc"),
-    href: href_generator(Gov),
+    href: href_generator(Gov.instance),
     children: ministry_node || dept_node,
   };
 };
@@ -343,7 +343,7 @@ export const crso_hierarchy = ({
 
   return {
     name: text_maker("goc"),
-    href: href_generator(Gov),
+    href: href_generator(Gov.instance),
     children: [
       {
         //ministry
@@ -387,7 +387,7 @@ export const crso_hierarchy = ({
 
 export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
   name: text_maker("goc"),
-  href: href_generator(Gov),
+  href: href_generator(Gov.instance),
   children: [
     {
       //ministry
@@ -431,7 +431,7 @@ export const crso_gov_hierarchy = ({ subject, href_generator }) => {
 
   return {
     name: text_maker("goc"),
-    href: href_generator(Gov),
+    href: href_generator(Gov.instance),
     children: [
       {
         //ministry

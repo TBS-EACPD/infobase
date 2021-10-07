@@ -134,7 +134,7 @@ const make_orgs_search_config = (options) => {
   })();
   const get_data = () =>
     _.chain(org_data)
-      .thru((data) => (include_gov ? [Gov].concat(data) : data))
+      .thru((data) => (include_gov ? [Gov.instance].concat(data) : data))
       .thru((data) => (reject_dead_orgs ? _.reject(data, "is_dead") : data))
       .value();
 

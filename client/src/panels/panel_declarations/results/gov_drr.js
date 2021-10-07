@@ -42,7 +42,7 @@ class GovDRR extends React.Component {
           </div>
         )}
         <DrrSummary
-          subject={Gov}
+          subject={Gov.instance}
           verbose_counts={verbose_gov_counts}
           counts={gov_counts}
           is_gov={true}

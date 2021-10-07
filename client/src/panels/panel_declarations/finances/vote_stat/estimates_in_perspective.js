@@ -26,7 +26,7 @@ export const declare_estimates_in_perspective_panel = () =>
       machinery_footnotes: false,
       calculate(subject, options) {
         const { orgVoteStatEstimates } = this.tables;
-        const gov_q = orgVoteStatEstimates.q(Gov);
+        const gov_q = orgVoteStatEstimates.q(Gov.instance);
         const dept_q = orgVoteStatEstimates.q(subject);
         const gov_tabled_est_in_year = gov_q.sum(est_in_year_col);
         const dept_tabled_est_in_year = dept_q.sum(est_in_year_col);

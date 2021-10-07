@@ -39,7 +39,7 @@ const get_appropriate_rpb_subject = (subject) => {
     //rpb is useless for the crso/program subject_type
     appropriate_subject = subject.dept;
   } else if (subject.subject_type === "tag") {
-    appropriate_subject = Gov;
+    appropriate_subject = Gov.instance;
   }
   return appropriate_subject;
 };
