@@ -57,7 +57,7 @@ const getSubj = (subject_type, id) => {
         : CRSO.store.lookup(defaultSubjectKeys.crso);
       break;
     default:
-      subject = Gov;
+      subject = Gov.instance;
   }
   return subject;
 };
@@ -310,7 +310,7 @@ class TestSubjectLinks extends React.Component {
       <div>
         <h3>{tm("test_subjects")}</h3>
         <div>
-          <Link to={href_template(Gov, panel)}>{tm("goc_total")}</Link>
+          <Link to={href_template(Gov.instance, panel)}>{tm("goc_total")}</Link>
         </div>
         <div>
           <h5>Dept</h5>

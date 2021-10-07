@@ -40,7 +40,9 @@ export const declare_internal_services_panel = () =>
         const isc_tag = ProgramTag.store.lookup("GOC017");
 
         const last_year_fte_col = "{{pa_last_year}}";
-        const gov_fte_total = programFtes.q(Gov).sum(last_year_fte_col);
+        const gov_fte_total = programFtes
+          .q(Gov.instance)
+          .sum(last_year_fte_col);
         const gov_isc_fte = programFtes.q(isc_tag).sum(last_year_fte_col);
 
         const isc = text_maker("internal_services");

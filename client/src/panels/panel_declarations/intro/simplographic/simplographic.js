@@ -58,7 +58,7 @@ export const declare_simplographic_panel = () =>
         //People calcs
         const employee_by_prov = orgEmployeeRegion.prov_code(
           "{{ppl_last_year}}",
-          Gov
+          Gov.instance
         );
         const total_employees = _.chain(employee_by_prov)
           .values()
@@ -87,7 +87,7 @@ export const declare_simplographic_panel = () =>
         });
         const org_vote_stat_pa_link = rpb_link({ table: "orgVoteStatPa" });
 
-        const results_link = infograph_href_template(Gov, "results");
+        const results_link = infograph_href_template(Gov.instance, "results");
 
         const num_results = gov_counts[`${current_drr_key}_results`];
         const num_indicators = gov_counts[`${current_drr_key}_total`];

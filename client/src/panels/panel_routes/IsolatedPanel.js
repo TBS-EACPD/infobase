@@ -27,7 +27,7 @@ const get_subject = (subject_type, id) => {
     case "crso":
       return CRSO.store.lookup(id);
     default:
-      return Gov;
+      return Gov.instance;
   }
 };
 
