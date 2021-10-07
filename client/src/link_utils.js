@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Table } from "./core/TableClass";
 import { infograph_href_template } from "./infographic/infographic_link";
 import { glossaryEntryStore } from "./models/glossary";
-import { Subject } from "./models/subjects";
+import { is_subject_instance } from "./models/subjects";
 import { rpb_link } from "./rpb/rpb_link";
 
 const glossary_href = (subject_or_id, first_character = "#") => {
@@ -20,7 +20,7 @@ const smart_href_template = (entity, first_character) => {
     return rpb_link({ table: entity.table.id }, first_character);
   } else if (entity.constructor === glossaryEntryStore) {
     return glossary_href(entity, first_character);
-  } else if (_.includes(Subject, entity.constructor)) {
+  } else if (is_subject_instance(entity)) {
     return infograph_href_template(entity, null, first_character);
   } else {
     throw new Error(

@@ -323,7 +323,7 @@ export const useSummaryServices = (query_options) => {
 export const useServices = (query_options) => {
   const time_at_request = Date.now();
   const { subject } = query_options;
-  const is_gov = subject.id === "gov";
+  const is_gov = subject.subject_type === "gov";
   const variables = {
     lang,
     id: String(subject.id),

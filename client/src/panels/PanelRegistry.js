@@ -1,15 +1,13 @@
 import _ from "lodash";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-import { Subject } from "src/models/subjects";
+import { subject_types } from "src/models/subjects";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { is_dev } from "src/core/injected_build_constants";
 import { Table } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
-
-const subjects = _.chain(Subject).toArray().map("subject_type").value();
 
 const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 
@@ -62,9 +60,12 @@ class PanelRegistry {
   static register_instance(instance) {
     const { key, full_key, subject_type, title, is_static } = instance;
 
-    if (!_.includes(subjects, subject_type)) {
+    if (!_.includes(subject_types, subject_type)) {
       throw new Error(
-        `panel ${key}'s subject_type (${subject_type}) is not valid; subject_type is required and must correspond to a valid subject.`
+        `panel ${key}'s subject_type (${subject_type}) is not valid; subject_type is required and must correspond to a valid subject (one of ${_.join(
+          subject_types,
+          ", "
+        )}).`
       );
     }
     if (!is_static && _.isUndefined(title)) {
