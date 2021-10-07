@@ -1,6 +1,9 @@
 import _ from "lodash";
 
-import { get_subject_class_by_type } from "src/models/subjects";
+import {
+  is_subject_instance,
+  get_subject_class_by_type,
+} from "src/models/subjects";
 import { make_store } from "src/models/utils/make_store";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
@@ -31,6 +34,10 @@ export const create_footnote = (def: FootNoteDef) => {
 
   return {
     ...def,
+
+    // reconcile alternate ids, such as dept codes, that may be in the input csv
+    subject_id: is_subject_instance(subject) ? subject.id : def.subject_id,
+
     // TODO would prefer to drop this weird mixed property that can be either a subject class OR a subject instance, but will be a pain to hunt down the code relying on it
     subject,
   };
