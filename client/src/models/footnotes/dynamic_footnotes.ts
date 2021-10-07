@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { result_docs_in_tabling_order } from "src/models/results";
-import { Subject } from "src/models/subjects";
+import { Gov, Dept, subject_types } from "src/models/subjects";
 import { create_text_maker, run_template } from "src/models/text";
 import {
   actual_to_planned_gap_year,
@@ -12,7 +12,6 @@ import { FootNoteDef } from "./footnotes";
 
 import text from "./dynamic_footnotes.yaml";
 
-const { Gov, Dept } = Subject;
 const text_maker = create_text_maker(text);
 
 // late DRR resources (FTE only) can happen pre-DRR if the PA tabling is early...
@@ -33,11 +32,11 @@ const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
 ];
 
 export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
-  const gap_year_footnotes = _.chain(Subject)
+  const gap_year_footnotes = _.chain(subject_types)
     .map(
-      (subject_class) =>
+      (subject_type) =>
         actual_to_planned_gap_year && {
-          subject_type: subject_class.subject_type,
+          subject_type: subject_type,
           subject_id: "*",
           topic_keys: ["EXP", "PLANNED_EXP"],
           text: text_maker("gap_year_warning", {

@@ -4,6 +4,7 @@ import React from "react";
 import { FancyUL } from "src/components/FancyUL/FancyUL";
 
 import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
+import { is_subject_class, is_subject_instance } from "src/models/subjects";
 import { create_text_maker } from "src/models/text";
 
 import { sanitized_dangerous_inner_html } from "src/general_utils";
@@ -16,18 +17,12 @@ const text_maker = create_text_maker([footnote_list_text, footnote_topic_text]);
 const is_real_footnote = ({ subject, topic_keys }) =>
   _.isObject(subject) && !_.isEmpty(topic_keys);
 
-// classes don't exist in IE, which we transpile for, so can't directly test if an object is a class or
-// an instance of a class. Need heuristics. Working from the assumption that subject instances must
-// have id's and subject classes must not
-const subject_is_class = ({ id }) => _.isUndefined(id);
-const subject_is_instance = ({ id }) => !_.isUndefined(id);
-
 const FootnoteListSubtitle = ({ title }) => (
   <div className="footnote-list__subtitle">{title}</div>
 );
 
 const SubjectSubtitle = ({ subject }) => {
-  if (subject_is_instance(subject) && !_.isUndefined(subject.name)) {
+  if (is_subject_instance(subject) && !_.isUndefined(subject.name)) {
     return (
       <FootnoteListSubtitle
         title={text_maker("subject_footnote_title", {
@@ -35,10 +30,7 @@ const SubjectSubtitle = ({ subject }) => {
         })}
       />
     );
-  } else if (
-    subject_is_class(subject) &&
-    !_.isUndefined(subject.subject_name)
-  ) {
+  } else if (is_subject_class(subject)) {
     return (
       <FootnoteListSubtitle
         title={text_maker("class_footnote_title", {
@@ -92,9 +84,9 @@ const FootnoteSublist = ({ footnotes }) => (
             meta_items={_.compact([
               years_to_plain_text(year1, year2),
               ...topic_keys_to_plain_text(topic_keys),
-              subject && subject_is_instance(subject) && subject.name,
+              subject && is_subject_instance(subject) && subject.name,
               subject &&
-                subject_is_instance(subject) &&
+                is_subject_instance(subject) &&
                 _.get(subject, "dept.name"),
             ])}
           />
@@ -136,7 +128,7 @@ const group_and_sort_footnotes = (footnotes) =>
       })();
 
       return `${subject_type_sort_importance}_${
-        subject_is_instance(subject) ? `${name}_${id}` : "AAAA"
+        is_subject_instance(subject) ? `${name}_${id}` : "AAAA"
       }`;
     })
     .map((grouped_footnotes, group_name) => {
@@ -153,7 +145,7 @@ const FootnoteList = ({ footnotes }) => {
   );
 
   const { true: class_wide_footnotes, false: instance_specific_footnotes } =
-    _.groupBy(real_footnotes, ({ subject }) => subject_is_class(subject));
+    _.groupBy(real_footnotes, ({ subject }) => is_subject_class(subject));
 
   const class_footnotes_grouped_and_sorted =
     group_and_sort_footnotes(class_wide_footnotes);

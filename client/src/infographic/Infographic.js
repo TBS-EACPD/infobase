@@ -12,7 +12,12 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/components/PinnedFAQ/PinnedFAQ";
 
-import { Subject, get_subject_by_guid } from "src/models/subjects";
+import {
+  Gov,
+  Dept,
+  subject_types,
+  get_subject_by_guid,
+} from "src/models/subjects";
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -34,8 +39,6 @@ import TableOfContents from "./TableOfContents";
 
 import text from "./Infographic.yaml";
 import "./Infographic.scss";
-
-const { Gov, Dept } = Subject;
 
 const sub_app_name = "infographic_org";
 
@@ -375,12 +378,7 @@ const Infographic = ({
   },
   history: { replace },
 }) => {
-  const is_subject_type_valid = _.chain(Subject)
-    .toArray()
-    .map("subject_type")
-    .includes(subject_type)
-    .value();
-  if (!is_subject_type_valid) {
+  if (!_.includes(subject_types, subject_type)) {
     return redirect_with_msg(
       text_maker("invalid_redirect_home", { param: subject_type }),
       "#home"

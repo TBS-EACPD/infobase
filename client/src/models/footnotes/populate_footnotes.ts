@@ -1,7 +1,7 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
-import { Subject } from "src/models/subjects";
+import { Dept, CRSO, Program, SubjectInstance } from "src/models/subjects";
 import { run_template } from "src/models/text";
 import { fiscal_year_to_year } from "src/models/years";
 
@@ -17,8 +17,6 @@ import { footNoteStore } from "./footnotes";
 import footnote_topic_text from "./footnote_topics.yaml";
 
 const footnote_topic_keys = _.keys(footnote_topic_text);
-
-const _loaded_footnote_bundle_ids: Record<string, boolean> = {};
 
 function populate_footnotes(csv_str: string) {
   const rows = _.map(csvParse(_.trim(csv_str)), (row) =>
@@ -71,18 +69,10 @@ function populate_footnotes(csv_str: string) {
   });
 }
 
-function load_footnotes_bundle(
-  subject:
-    | typeof Subject.Gov
-    | InstanceType<typeof Subject["Dept" | "CRSO" | "Program" | "ProgramTag"]>
-    | "estimates"
-    | "all"
-) {
-  // TODO: not that calling this with the Gov subject results in a footnote_bundle_id of undefined and an early resolution
-  // Gov footnotes are currently loaded with the "global footnotes" in the intital lookup blob! Either move them
-  // to their own bundles to be loaded the same as the rest, or work backwards and clean up the code that's currently trying to
-  // call load_footnotes_bundle with Gov (infographics do, for one)
+// note: gov footnotes always loaded right now, they're part of the global footnotes bundle loaded through the big lookups blob
+const _loaded_footnote_bundle_ids: Record<string, boolean> = { gov: true };
 
+function load_footnotes_bundle(subject: SubjectInstance | "estimates" | "all") {
   const footnote_bundle_id = (() => {
     if (typeof subject === "string") {
       if (subject === "estimates") {
@@ -91,14 +81,11 @@ function load_footnotes_bundle(
         return "all";
       }
     } else {
-      if (subject instanceof Subject.Dept) {
+      if (subject instanceof Dept) {
         return subject.dept_code;
-      } else if (
-        subject instanceof Subject.CRSO ||
-        subject instanceof Subject.Program
-      ) {
+      } else if (subject instanceof CRSO || subject instanceof Program) {
         return subject.dept.dept_code;
-      } else if (subject instanceof Subject.ProgramTag) {
+      } else {
         return subject.id;
       }
     }

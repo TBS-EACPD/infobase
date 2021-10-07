@@ -15,16 +15,26 @@ export type FootNoteDef = {
   year2?: number;
 };
 
-export const create_footnote = (def: FootNoteDef) => ({
-  ...def,
-  // TODO would prefer to drop this weird mixed property that can be either a subject class OR a subject instance, but will be a pain to hunt down the code relying on it
-  subject:
+export const create_footnote = (def: FootNoteDef) => {
+  const subject =
     def.subject_id === "*"
       ? get_subject_class_by_type(def.subject_type)
-      : get_subject_class_by_type(def.subject_type).store.lookup(
+      : get_subject_class_by_type(def.subject_type)?.store.lookup(
           def.subject_id
-        ),
-});
+        );
+
+  if (typeof subject === "undefined") {
+    throw new Error(
+      `Can't create footnote with subject_type "${def.subject_type}", not a valid subject type`
+    );
+  }
+
+  return {
+    ...def,
+    // TODO would prefer to drop this weird mixed property that can be either a subject class OR a subject instance, but will be a pain to hunt down the code relying on it
+    subject,
+  };
+};
 
 export const footNoteStore = make_store(create_footnote);
 
