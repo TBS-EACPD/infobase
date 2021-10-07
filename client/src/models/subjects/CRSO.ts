@@ -1,8 +1,10 @@
 import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
-import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
+
 import { make_store } from "src/models/utils/make_store";
+
+import { BaseSubjectFactory } from "./BaseSubjectFactory";
 
 import { Dept } from "./Dept";
 import { Program } from "./Program";
