@@ -1,7 +1,8 @@
 import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
-import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
+
+import { BaseSubjectFactory } from "./BaseSubjectFactory";
 
 /*
   Special case subject! Bit of slight of hand, to fit legacy assumptions Gov pretends to be both a subject class and a subject instance

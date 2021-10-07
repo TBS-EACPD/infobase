@@ -1,10 +1,12 @@
 import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
-import { BaseSubjectFactory } from "src/models/utils/BaseSubjectFactory";
+
 import { make_store } from "src/models/utils/make_store";
 
 import { sanitized_marked } from "src/general_utils";
+
+import { BaseSubjectFactory } from "./BaseSubjectFactory";
 
 import { CRSO } from "./CRSO";
 
