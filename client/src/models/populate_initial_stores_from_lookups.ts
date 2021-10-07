@@ -18,7 +18,7 @@ export const populate_initial_stores_from_lookups = () =>
   // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
   make_request(get_static_url(`lookups_${lang}.json.js`)).then((text) => {
     const {
-      global_footnotes_csv_string,
+      global_footnotes,
       ...lookup_csv_strings
     }: {
       [x: string]: string;
@@ -26,7 +26,7 @@ export const populate_initial_stores_from_lookups = () =>
 
     // outlier for lookups json, a calculated output of the build base script, not a directly stringified csv. Either way,
     // not processed the same as the rest, handled by footnote code
-    populate_global_footnotes(global_footnotes_csv_string);
+    populate_global_footnotes(global_footnotes);
 
     const {
       glossary,

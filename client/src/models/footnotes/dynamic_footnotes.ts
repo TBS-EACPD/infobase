@@ -37,7 +37,7 @@ export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
       (subject_type) =>
         actual_to_planned_gap_year && {
           subject_type: subject_type,
-          subject_id: "*",
+          subject_id: subject_type === "gov" ? Gov.instance.id : "*",
           topic_keys: ["EXP", "PLANNED_EXP"],
           text: text_maker("gap_year_warning", {
             gap_year: actual_to_planned_gap_year,
@@ -121,7 +121,7 @@ export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
         docs_with_late_orgs,
         ({ [late_org_property]: late_orgs, doc_type, year }) => ({
           subject_type: Gov.subject_type,
-          subject_id: "*",
+          subject_id: Gov.instance.id,
           topic_keys: get_topic_keys_for_doc_type(doc_type),
           text: `<p>
             ${text_maker(
