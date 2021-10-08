@@ -247,9 +247,30 @@ const route_load_tests_config = [
 
 describe("Route tests", () => {
   route_load_tests_config.map((routes) => {
-    describe(`${routes.name} route`, () => {
+    describe(`${routes.name}`, () => {
       routes.test_on.map((app) => {
-        it(`Tested on ${app}`, () => {
+        it(`Tested on index-${app}.html#${routes.route}`, () => {
+          cy.visit(
+            `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
+          );
+
+          if (!routes.skipAxe && (app == "eng" || app == "fra")) {
+            cy.injectAxe();
+            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+              "not.exist"
+            );
+            cy.checkA11y(
+              null,
+              { includedImpacts: ["critical"] },
+              cy.terminalLog,
+              false
+            );
+          } else {
+            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+              "not.exist"
+            );
+          }
+
           cy.on("fail", (e, test) => {
             if (routes.expect_to_fail) {
               console.log("Test expected to fail.");
@@ -257,28 +278,6 @@ describe("Route tests", () => {
               throw e;
             }
           });
-
-          cy.visit(
-            `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
-          );
-          if (!routes.skipAxe) {
-            if (app == "eng" || app == "fra") {
-              cy.injectAxe();
-              cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-                "not.exist"
-              );
-              cy.checkA11y(
-                null,
-                { includedImpacts: ["critical"] },
-                cy.terminalLog,
-                false
-              );
-            }
-          } else {
-            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-              "not.exist"
-            );
-          }
         });
       });
     });
