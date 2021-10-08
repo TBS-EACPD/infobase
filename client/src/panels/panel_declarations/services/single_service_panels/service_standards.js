@@ -207,17 +207,8 @@ export class ServiceStandards extends React.Component {
                   active:
                     active_statuses.length === standard_statuses.length ||
                     _.indexOf(active_statuses, status_key) !== -1,
-                  text: !is_a11y_mode ? (
-                    <span
-                      className="link-unstyled"
-                      tabIndex={0}
-                      aria-hidden="true"
-                    >
-                      {text_maker(status_key)}
-                    </span>
-                  ) : (
-                    text_maker(status_key)
-                  ),
+                  aria_text: text_maker(status_key),
+                  text: text_maker(status_key),
                   icon: status_icons[status_key],
                 }))}
                 item_component_order={["count", "icon", "text"]}

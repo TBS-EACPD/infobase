@@ -79,7 +79,7 @@ export class SearchConfigTypeahead extends React.Component {
               query_value: "",
             });
           },
-          content: <a>{result.menu_content(query_value)}</a>,
+          content: result.menu_content(query_value),
           plain_text: result.name,
         }))
         .compact()

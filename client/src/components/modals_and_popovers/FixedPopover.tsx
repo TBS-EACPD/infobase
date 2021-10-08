@@ -192,7 +192,6 @@ export class FixedPopover extends React.Component<
             </Modal.Footer>
           )}
         </div>
-        <div tabIndex={0} onFocus={this.closeModal} />
       </Modal>
     );
   }

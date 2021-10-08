@@ -96,7 +96,6 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
           {body && <Modal.Body>{body}</Modal.Body>}
           {footer_content && <Modal.Footer>{footer_content}</Modal.Footer>}
         </div>
-        <div tabIndex={0} onFocus={this.closeModal} />
       </Modal>
     );
   }

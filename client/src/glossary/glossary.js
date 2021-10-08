@@ -119,11 +119,8 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 <dt
                   className="glossary-dt"
                   id={ix === 0 ? `__${letter}` : null}
-                  tabIndex={0}
                 >
-                  <span id={item.id} tabIndex={-1}>
-                    {item.title}
-                  </span>
+                  <span id={item.id}>{item.title}</span>
                 </dt>
                 <dd>
                   <div
@@ -146,7 +143,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                   <div className="glossary-top-link-container">
                     <a
                       className="glossary-top-link"
-                      href="#"
+                      href="#glossary"
                       tabIndex="0"
                       onClick={(evt) => {
                         evt.preventDefault();

@@ -39,7 +39,6 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
               })}
               id={key + "_tab"}
               key={key + "_tab"}
-              onClick={() => !is_disabled && tab_callback(key)}
               title={is_disabled ? disabled_message : ""}
             >
               <span

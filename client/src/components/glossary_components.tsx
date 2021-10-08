@@ -45,7 +45,6 @@ export const GlossaryTooltipWrapper = ({
     <span
       className="nowrap glossary-tippy-link"
       style={no_bottom_border ? { borderBottom: "none" } : undefined}
-      tabIndex={0}
       data-ibtt-glossary-key={id}
       data-toggle="tooltip"
     >

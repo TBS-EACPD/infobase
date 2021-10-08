@@ -172,6 +172,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
             role="combobox"
             aria-autocomplete="none"
             aria-owns={this.menu_id}
+            aria-controls={this.menu_id}
             aria-label={text_maker("explorer_search")}
             aria-describedby={`${this.menu_id}-hint`}
             aria-expanded={this.show_menu}
@@ -260,10 +261,12 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                                   result_index === selection_cursor &&
                                     "typeahead__result--active"
                                 )}
+                                tabIndex={0}
                                 role="option"
                                 aria-selected={
                                   result_index === selection_cursor
                                 }
+                                onKeyPress={results[result_index].on_select}
                                 onClick={results[result_index].on_select}
                               >
                                 {results[result_index].content}

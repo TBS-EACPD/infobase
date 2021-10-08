@@ -93,16 +93,16 @@ const MultiColumnList = ({
 );
 
 const LinkStyled = ({ on_click, className, style, children }) => (
-  <a
+  <button
     role="link"
     tabIndex={0}
     onClick={on_click}
     onKeyDown={(e) => e.keyCode === 13 && on_click(e)}
-    className={classNames("link-styled", className)}
+    className={classNames("link-styled", "button-unstyled", className)}
     style={style}
   >
     {children}
-  </a>
+  </button>
 );
 
 export {

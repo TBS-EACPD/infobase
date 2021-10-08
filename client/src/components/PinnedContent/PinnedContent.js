@@ -74,13 +74,11 @@ class _PinnedContent extends React.Component {
     }
   };
 
-  update_content_height = _.debounce(
-    () =>
-      this.setState({
-        content_height: this.content_ref.current.clientHeight,
-      }),
-    this.props.height_update_delay
-  );
+  update_content_height = _.debounce(() => {
+    this.setState({
+      content_height: this.content_ref.current.clientHeight,
+    });
+  }, this.props.height_update_delay);
 
   componentDidMount() {
     this.set_is_pinned(this.is_pinned);
@@ -127,7 +125,7 @@ class _PinnedContent extends React.Component {
                       }),
                     }}
                     ref={this.content_ref}
-                    onClick={this.update_content_height}
+                    // onClick={this.update_content_height} TODO: This doesn't seem needed?
                   >
                     <div style={{ position: "relative", width: width }}>
                       {children}

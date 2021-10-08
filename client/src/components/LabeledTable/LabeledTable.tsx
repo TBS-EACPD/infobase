@@ -29,7 +29,6 @@ export const LabeledTable = (props: LabeledTableProps) => (
           className="labeled-table__item"
           key={id || ix}
           id={id}
-          tabIndex={0}
           aria-label={label}
         >
           <div className="labeled-table__item-label" aria-hidden={true}>

@@ -63,7 +63,7 @@ class ToggleVoteStatProvider extends React.Component {
     return <Inner {...{ ...inner_props, show_vote_stat, ToggleVoteStat }} />;
   }
 }
-
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 const CellTooltip = ({ tooltip_text }) => (
   <span
     style={{ display: "inline-flex" }}

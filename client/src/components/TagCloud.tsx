@@ -25,12 +25,12 @@ interface TagCloudProps {
 export const TagCloud = ({ tags, onSelectTag }: TagCloudProps) => (
   <ul className="tag-cloud-main">
     {_.map(tags, ({ id, active, label }) => (
-      <li
-        key={id}
-        className={classNames(active && "active")}
-        onClick={() => onSelectTag(id)}
-      >
-        <button role="checkbox" aria-checked={!!active}>
+      <li key={id} className={classNames(active && "active")}>
+        <button
+          role="checkbox"
+          aria-checked={!!active}
+          onClick={() => onSelectTag(id)}
+        >
           {active && (
             <IconCheckmark
               color={backgroundColor}
@@ -42,6 +42,7 @@ export const TagCloud = ({ tags, onSelectTag }: TagCloudProps) => (
           <span style={{ marginLeft: "5px" }}>{label}</span>
         </button>
         {glossaryEntryStore.has(id) && (
+          /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
           <span className="tag-button-helper" tabIndex={0}>
             <GlossaryIcon id={id} />
           </span>
