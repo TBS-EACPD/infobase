@@ -1,4 +1,5 @@
 {
   "video": false,
-  "ignoreTestFiles": "**/ignoredTestFiles/*.js"
+  "ignoreTestFiles": "**/ignoredTestFiles/*.js",
+  "screenshotOnRunFailure": false
 }
