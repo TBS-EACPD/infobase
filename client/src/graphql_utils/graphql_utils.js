@@ -1,6 +1,5 @@
 import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
-
 import _ from "lodash";
 import { useState } from "react";
 
@@ -14,6 +13,8 @@ import {
   is_dev,
   is_ci,
 } from "src/core/injected_build_constants";
+
+import { retry_promise } from "src/general_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
@@ -66,7 +67,9 @@ const query_as_get_with_query_header = async (uri, options) => {
     },
   };
 
-  return fetch(uriWithVersionAndQueryHash, new_options).catch((error) => {
+  return retry_promise(() =>
+    fetch(uriWithVersionAndQueryHash, new_options)
+  ).catch((error) => {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: "API_CONNECTION_ERROR",
