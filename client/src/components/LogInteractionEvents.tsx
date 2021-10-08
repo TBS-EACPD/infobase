@@ -30,6 +30,8 @@ export const LogInteractionEvents = ({
 
   return (
     <div
+      role="button"
+      tabIndex={-1}
       style={style}
       onClick={log_event}
       onKeyPress={(event) =>

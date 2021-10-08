@@ -1,9 +1,10 @@
 {
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "jsx-a11y"],
   "extends": [
     "../.eslintrc.json",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "env": {
@@ -20,7 +21,9 @@
     "react/no-string-refs": ["off"],
     "react/display-name": ["off"],
     "react/no-find-dom-node": ["off"],
-    "react/no-children-prop": ["off"]
+    "react/no-children-prop": ["off"],
+    "jsx-a11y/no-onchange": ["off"],
+    "jsx-a11y/label-has-associated-control": ["off"]
   },
   "overrides": [
     {

@@ -222,11 +222,7 @@ class InfoGraph_ extends React.Component {
         </div>
         <div aria-label={text_maker("main_infographic_content")}>
           {is_a11y_mode && (
-            <p
-              id="infographic-explanation-focus"
-              aria-live="polite"
-              tabIndex={0}
-            >
+            <p id="infographic-explanation-focus" aria-live="polite">
               {loading
                 ? "Loading..."
                 : text_maker("a11y_infograph_description")}
@@ -288,7 +284,7 @@ class InfoGraph_ extends React.Component {
                   {`←  ${previous_bubble.title}`}
                 </a>
               ) : (
-                <a style={{ visibility: "hidden" }}></a>
+                <div></div>
               )}
               {next_bubble ? (
                 <a
@@ -300,7 +296,7 @@ class InfoGraph_ extends React.Component {
                   {`${next_bubble.title}  →`}
                 </a>
               ) : (
-                <a style={{ visibility: "hidden" }}></a>
+                <div></div>
               )}
             </div>
             <div className="clearfix" />

@@ -47,7 +47,6 @@ export const ExplorerHeader = ({
                 ? { ...computed_col_styles[id], textAlign: "center" }
                 : computed_col_styles[id]
             }
-            tabIndex={0}
           >
             {header_display}
             {is_sortable && (
@@ -158,6 +157,7 @@ export const ExplorerNode = ({
         )}
       </div>
       <div className="ExplorerNode__ContentContainer">
+        {/* eslint-disable jsx-a11y/click-events-have-key-events */}
         <div
           className={classNames(
             "ExplorerNode__RowContainer",

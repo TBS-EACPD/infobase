@@ -4,6 +4,7 @@ import React, { Fragment } from "react";
 import "./IconGrid.scss";
 
 interface ImageIconProps {
+  alt: string;
   href: string;
   src: string;
 }
@@ -24,7 +25,7 @@ export class IconGrid extends React.Component<IconGridProps> {
         {_.map(icons, (icon, ix) =>
           "href" in icon ? (
             <a href={icon.href} key={icon.src}>
-              <img src={icon.src} />
+              <img alt={icon.alt} src={icon.src} />
             </a>
           ) : (
             <Fragment key={ix}>{icon.svg}</Fragment>

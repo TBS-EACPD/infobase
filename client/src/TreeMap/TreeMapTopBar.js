@@ -50,6 +50,7 @@ export class TreeMapTopbar extends React.Component {
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 <span
                   tabIndex="0"
+                  role="button"
                   dangerouslySetInnerHTML={{ __html: top_level_title }}
                   onClick={() => {
                     this.handleClick(-1);
@@ -71,6 +72,7 @@ export class TreeMapTopbar extends React.Component {
                 {
                   <span
                     tabIndex="0"
+                    role="button"
                     dangerouslySetInnerHTML={{ __html: display }}
                     onClick={() => {
                       this.handleClick(ix);

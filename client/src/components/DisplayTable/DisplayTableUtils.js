@@ -224,7 +224,7 @@ export const SelectPage = ({
                       : text_maker("page", { page_num: page_num })
                   }
                   role="tab"
-                  aria-selected={`${page_num - 1 === current_page}`}
+                  aria-selected={page_num - 1 === current_page}
                   dangerouslySetInnerHTML={{
                     __html: _is_ellipsis(page_options, page_num, index)
                       ? "&hellip;"
@@ -272,15 +272,18 @@ export const SelectPageSize = ({
     <form className="paginate_by_dropdown">
       <div style={{ marginBottom: 10 }}>
         {_.map(options, ({ label, value }) => (
-          <div key={value} onClick={() => on_select(value)}>
-            <input
-              type={"radio"}
-              name={radio_group_name}
-              checked={selected === value}
-              readOnly
-            />
-            <label className={"normal-radio-btn-label"}>{label}</label>
-          </div>
+          <form key={value}>
+            <label className={"normal-radio-btn-label"}>
+              <input
+                onClick={() => on_select(value)}
+                type={"radio"}
+                name={radio_group_name}
+                checked={selected === value}
+                readOnly
+              />
+              <span style={{ marginLeft: "3px" }}>{label}</span>
+            </label>
+          </form>
         ))}
       </div>
     </form>

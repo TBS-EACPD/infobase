@@ -171,6 +171,8 @@ class _HeightClipper extends React.Component<
         }}
       >
         {isClipped && (
+          /* eslint-disable jsx-a11y/click-events-have-key-events */
+          /* eslint-disable jsx-a11y/no-static-element-interactions */
           <div
             style={{
               width: "100%",

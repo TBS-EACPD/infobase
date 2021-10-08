@@ -118,6 +118,7 @@ export class DropdownMenu extends React.Component<
         >
           {dropdown_trigger_txt}
         </button>
+        {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
         <div
           tabIndex={0}
           aria-label={aria_label}

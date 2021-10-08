@@ -147,7 +147,13 @@ const StatelessPullDownAccordion = ({
         </AccordionEnterExit>
       ) : undefined}
     </TransitionGroup>
-    <div className="pull-down-accordion-footer" onClick={onToggle}>
+    <div
+      className="pull-down-accordion-footer"
+      role="button"
+      tabIndex={0}
+      onClick={onToggle}
+      onKeyPress={onToggle}
+    >
       <div className="pull-down-accordion-expander">
         <IconChevron
           title={get_accordion_label(isExpanded)}

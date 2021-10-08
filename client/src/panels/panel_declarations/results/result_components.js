@@ -360,7 +360,6 @@ const StatusIconTable = ({
               <span
                 className="link-unstyled sr-only"
                 aria-hidden="true"
-                tabIndex={0}
                 data-toggle="tooltip"
                 data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
               >
