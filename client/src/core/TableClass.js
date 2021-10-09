@@ -2,7 +2,7 @@ import { sum } from "d3-array";
 import { csvParseRows } from "d3-dsv";
 import _ from "lodash";
 
-import { Dept } from "src/models/subjects";
+import { Dept, Gov } from "src/models/subjects";
 
 import {
   trivial_text_maker,
@@ -23,7 +23,6 @@ import { lang } from "./injected_build_constants";
 import { query_adapter } from "./tables/queries";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
-const { Gov, Dept } = Subject;
 
 function all_children_hidden(header) {
   if (header.children) {
@@ -67,15 +66,15 @@ function add_child(x) {
 }
 
 export function filter_row_by_subj(row, subject) {
-  switch (subject.level) {
+  switch (subject.subject_type) {
     case "gov": {
       return _.identity(row);
     }
     case "dept": {
-      return row.dept === subject.id;
+      return row.dept == subject.id;
     }
     case "prgm": {
-      return row.program_id === subject.id;
+      return row.program_id == subject.id;
     }
   }
 }
