@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { Program } from "src/models/subjects";
 
-import { trivial_text_maker, m, year_templates } from "./table_common";
+import { m, year_templates } from "./table_common";
 
 import text from "./programFtes.yaml";
 
