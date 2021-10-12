@@ -14,7 +14,7 @@ import {
   is_ci,
 } from "src/core/injected_build_constants";
 
-import { retry_promise } from "src/general_utils";
+import { retrying_promise } from "src/general_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
@@ -67,7 +67,7 @@ const query_as_get_with_query_header = async (uri, options) => {
     },
   };
 
-  return retry_promise(() =>
+  return retrying_promise(() =>
     fetch(uriWithVersionAndQueryHash, new_options)
   ).catch((error) => {
     log_standard_event({
