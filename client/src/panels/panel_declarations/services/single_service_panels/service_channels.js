@@ -84,7 +84,7 @@ export class ServiceChannels extends React.Component {
               margin={{
                 right: 10,
                 left: 75,
-                top: 0,
+                top: 20,
                 bottom: 50,
               }}
               bttm_axis={{
