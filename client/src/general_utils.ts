@@ -108,26 +108,39 @@ export const shallowEqualObjectsExceptKeys = <Type, Key extends keyof Type>(
 
 export const retry_promise = <T>(
   promise_to_try: () => Promise<T>,
-  retries = 2,
-  interval = 500
+  options = { retries: 3, min_interval: 200, max_interval: 1000 }
 ): Promise<T> => {
-  return new Promise((resolve, reject) => {
-    promise_to_try()
-      .then(resolve)
-      .catch((error: Error) =>
-        setTimeout(() => {
-          if (retries === 0) {
-            reject(error);
-            return;
-          }
+  const { retries, min_interval, max_interval } = options;
 
-          retry_promise(promise_to_try, interval, retries - 1).then(
-            resolve,
-            reject
-          );
-        }, interval)
-      );
-  });
+  const make_retrying_promise = (
+    promise_to_try: () => Promise<T>,
+    retry_count = 0
+  ): Promise<T> => {
+    const remaining_retries = retries - retry_count;
+    const interval = _.min([
+      min_interval * Math.pow(2, retry_count),
+      max_interval,
+    ]);
+
+    return new Promise((resolve, reject) => {
+      promise_to_try()
+        .then(resolve)
+        .catch((error: Error) =>
+          setTimeout(() => {
+            if (remaining_retries === 0) {
+              reject(error);
+            } else {
+              make_retrying_promise(promise_to_try, retry_count + 1).then(
+                resolve,
+                reject
+              );
+            }
+          }, interval)
+        );
+    });
+  };
+
+  return make_retrying_promise(promise_to_try);
 };
 
 /*
