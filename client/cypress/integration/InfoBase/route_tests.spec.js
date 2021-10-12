@@ -254,26 +254,24 @@ describe("Route tests", () => {
             `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
           );
 
+          cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+            "not.exist"
+          );
+
+          //Once basic routes a11y critical issues are fix, can remove this if statement
           if (!routes.skipAxe && (app == "eng" || app == "fra")) {
             cy.injectAxe();
-            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-              "not.exist"
-            );
             cy.checkA11y(
               null,
               { includedImpacts: ["critical"] },
               cy.terminalLog,
               false
             );
-          } else {
-            cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-              "not.exist"
-            );
           }
 
           cy.on("fail", (e, test) => {
             if (routes.expect_to_fail) {
-              console.log("Test expected to fail.");
+              console.log("Test expected to fail.", e);
             } else {
               throw e;
             }
