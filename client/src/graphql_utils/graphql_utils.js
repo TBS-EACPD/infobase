@@ -67,17 +67,44 @@ const query_as_get_with_query_header = async (uri, options) => {
     },
   };
 
-  return retrying_promise(() =>
-    fetch(uriWithVersionAndQueryHash, new_options)
-  ).catch((error) => {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: "API_CONNECTION_ERROR",
-      MISC2: error.toString(),
-    });
+  const query_names = _.chain(query)
+    .thru(JSON.parse)
+    .map("variables._query_name")
+    .join(", ")
+    .value();
+  const time_at_request = Date.now();
+  const get_common_log_text = (retry_count) =>
+    `${query_hash}: [${query_names}], took ${
+      Date.now() - time_at_request
+    } ms (${retry_count} retries)`;
 
-    throw error;
-  });
+  const retries = 3;
+  return retrying_promise(
+    (retry_count) =>
+      fetch(uriWithVersionAndQueryHash, new_options).then((response) => ({
+        response,
+        retry_count,
+      })),
+    { retries }
+  )
+    .then(({ response, retry_count }) => {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_SUCCESS",
+        MISC2: `${get_common_log_text(retry_count)}`,
+      });
+
+      return response;
+    })
+    .catch((error) => {
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `${get_common_log_text(retries)} - ${error.toString()}`,
+      });
+
+      throw error;
+    });
 };
 
 let client = null;
@@ -109,22 +136,7 @@ export function get_client() {
   return client;
 }
 
-const log_query_success = (query_name, response_time) =>
-  log_standard_event({
-    SUBAPP: window.location.hash.replace("#", ""),
-    MISC1: "API_QUERY_SUCCESS",
-    MISC2: `${query_name}, took ${response_time} ms`,
-  });
-const log_query_failure = (query_name, response_time, error) =>
-  log_standard_event({
-    SUBAPP: window.location.hash.replace("#", ""),
-    MISC1: "API_QUERY_FAILURE",
-    MISC2: `${query_name}, took ${response_time} ms - ${error.toString()}`,
-  });
-
 const query_promise_factory = (query_name, query, resolver) => (variables) => {
-  const time_at_request = Date.now();
-
   return get_client()
     .query({
       query: query,
@@ -133,21 +145,10 @@ const query_promise_factory = (query_name, query, resolver) => (variables) => {
         _query_name: query_name,
       },
     })
-    .then((response) => {
-      log_query_success(query_name, Date.now() - time_at_request);
-
-      return resolver(response);
-    })
-    .catch((error) => {
-      log_query_failure(query_name, Date.now() - time_at_request, error);
-
-      throw error;
-    });
+    .then(resolver);
 };
 
 const query_hook_factory = (query_name, query, resolver) => (variables) => {
-  const [time_at_request, set_time_at_request] = useState(Date.now()); // eslint-disable-line no-unused-vars
-
   const { loading, error, data } = useQuery(query, {
     variables: {
       ...variables,
@@ -162,12 +163,8 @@ const query_hook_factory = (query_name, query, resolver) => (variables) => {
       data,
     };
   } else if (error) {
-    log_query_failure(query_name, Date.now() - time_at_request, error);
-
     throw new Error(error);
   } else {
-    log_query_success(query_name, Date.now() - time_at_request);
-
     return {
       loading,
       error,
