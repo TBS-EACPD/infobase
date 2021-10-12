@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 import _ from "lodash";
 
 import { log_standard_event } from "src/core/analytics";
-import { lang } from "src/core/injected_build_constants";
+import { is_dev, lang } from "src/core/injected_build_constants";
 
 import { get_client } from "src/graphql_utils/graphql_utils";
 
@@ -427,10 +427,6 @@ export function api_load_results_bundle(subject, result_docs) {
     });
 }
 
-let api_is_results_count_loaded = {
-  summary: false,
-  granular: false,
-};
 const load_results_counts_query = (level = "summary") => gql`
 query($lang: String!) {
   root(lang: $lang) {
@@ -466,7 +462,9 @@ ${fragment}`
 }
 `;
 export function api_load_results_counts(level = "summary") {
-  if (api_is_results_count_loaded[level]) {
+  const CountObject = level === "summary" ? ResultCounts : GranularResultCounts;
+
+  if (!_.isEmpty(CountObject.data)) {
     return Promise.resolve();
   } else {
     const time_at_request = Date.now();
@@ -535,12 +533,19 @@ export function api_load_results_counts(level = "summary") {
           };
         });
 
-        if (level === "summary") {
-          ResultCounts.set_data(mapped_rows);
-        } else if (level === "granular") {
-          GranularResultCounts.set_data(mapped_rows);
+        try {
+          CountObject.set_data(mapped_rows);
+        } catch (error) {
+          if (is_dev) {
+            throw new Error(`Results counts ${level}: ${error.toString()}`);
+          } else {
+            log_standard_event({
+              SUBAPP: window.location.hash.replace("#", ""),
+              MISC1: "WARNING_IN_PROD",
+              MISC2: `Results counts ${level}: ${error.toString()}`,
+            });
+          }
         }
-        api_is_results_count_loaded[level] = true;
 
         // if it's in the results count set, it has results data
         _.each(mapped_rows, ({ id }) => (_subject_has_results[id] = true)); // side effect
