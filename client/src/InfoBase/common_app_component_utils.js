@@ -4,7 +4,7 @@ import React from "react";
 import { log_standard_event } from "src/core/analytics";
 import { cdn_url, is_dev } from "src/core/injected_build_constants";
 
-import { retry_promise } from "src/general_utils";
+import { retrying_promise } from "src/general_utils";
 
 // Link tags for stylesheets should all have non null sheet properties
 const linked_stylesheets_loaded = () => {
@@ -42,6 +42,6 @@ const ensure_linked_stylesheets_load = () => {
 };
 
 const retrying_react_lazy = (import_promise) =>
-  React.lazy(() => retry_promise(import_promise));
+  React.lazy(() => retrying_promise(import_promise));
 
 export { ensure_linked_stylesheets_load, retrying_react_lazy };

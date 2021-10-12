@@ -106,21 +106,25 @@ export const shallowEqualObjectsExceptKeys = <Type, Key extends keyof Type>(
   );
 };
 
-export const retry_promise = <T>(
+export const retrying_promise = <T>(
   promise_to_try: () => Promise<T>,
-  options = { retries: 3, min_interval: 200, max_interval: 1000 }
+  options = {
+    retries: 3,
+    min_interval: 100,
+    max_interval: 500,
+    jitter_magnitude: 0.2,
+  }
 ): Promise<T> => {
-  const { retries, min_interval, max_interval } = options;
+  const { retries, min_interval, max_interval, jitter_magnitude } = options;
 
-  const make_retrying_promise = (
-    promise_to_try: () => Promise<T>,
-    retry_count = 0
-  ): Promise<T> => {
+  const retry_promise = (retry_count = 0): Promise<T> => {
     const remaining_retries = retries - retry_count;
+
     const interval = _.min([
       min_interval * Math.pow(2, retry_count),
       max_interval,
-    ]);
+    ]) as number;
+    const jitter = interval * _.random(-jitter_magnitude, jitter_magnitude);
 
     return new Promise((resolve, reject) => {
       promise_to_try()
@@ -130,17 +134,14 @@ export const retry_promise = <T>(
             if (remaining_retries === 0) {
               reject(error);
             } else {
-              make_retrying_promise(promise_to_try, retry_count + 1).then(
-                resolve,
-                reject
-              );
+              retry_promise(retry_count + 1).then(resolve, reject);
             }
-          }, interval)
+          }, interval + jitter)
         );
     });
   };
 
-  return make_retrying_promise(promise_to_try);
+  return retry_promise();
 };
 
 /*
