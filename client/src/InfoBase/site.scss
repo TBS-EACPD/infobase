@@ -131,6 +131,9 @@ strong,
     text-decoration: underline;
   }
 }
+.border-radius {
+  border-radius: $standardBorderRadius;
+}
 
 .text-only-page-root {
   h2,
