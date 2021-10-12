@@ -41,8 +41,8 @@ td {
   margin-bottom: 20px;
 
   &.display-table-container--with-utils {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: $standardBorderRadius;
+    border-top-right-radius: $standardBorderRadius;
     background-color: $primaryColor;
   }
 }

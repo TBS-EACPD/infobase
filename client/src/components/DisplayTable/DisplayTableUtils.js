@@ -11,12 +11,7 @@ import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboa
 
 import { is_IE } from "src/core/feature_detection";
 
-import {
-  IconCopy,
-  IconDownload,
-  IconFilter,
-  IconSearch,
-} from "src/icons/icons";
+import { IconCopy, IconDownload, IconFilter } from "src/icons/icons";
 
 import {
   backgroundColor,
@@ -50,32 +45,15 @@ const DropdownFilterVirtualizedList = ({
 
   return (
     <div>
-      <div
-        style={{
-          height: "4.5rem",
-          minWidth: "95px",
-        }}
-        className="input-bar"
-      >
-        <div style={{ display: "flex" }}>
-          <IconSearch
-            color={secondaryColor}
-            alternate_color={false}
-            width="2em"
-            height="2em"
-            svg_style={{ alignSelf: "center" }}
-          />
-          <DebouncedTextInput
-            inputClassName={`search input-sm input-unstyled`}
-            style={{ width: "100%" }}
-            placeHolder={text_maker("search_filter_options")}
-            a11y_label={text_maker("search_filter_options")}
-            defaultValue={search}
-            updateCallback={(search_value) => set_search(search_value)}
-            debounceTime={300}
-          />
-        </div>
-      </div>
+      <DebouncedTextInput
+        inputClassName={`search input-sm border-radius`}
+        style={{ width: "100%" }}
+        placeHolder={text_maker("search_filter_options")}
+        a11y_label={text_maker("search_filter_options")}
+        defaultValue={search}
+        updateCallback={(search_value) => set_search(search_value)}
+        debounceTime={300}
+      />
       {filtered_list.length > 0 ? (
         <AutoHeightVirtualList
           className="display-table-dropdown-filter"
