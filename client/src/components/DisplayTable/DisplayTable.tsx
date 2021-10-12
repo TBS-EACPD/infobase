@@ -614,7 +614,19 @@ export class _DisplayTable extends React.Component<
                             {show_dropdown_filter && (
                               <DropdownFilter
                                 column_key={column_key}
-                                dropdown_filter={dropdown_filter}
+                                dropdown_filter={{
+                                  ...dropdown_filter,
+                                  [column_key]: _.filter(
+                                    dropdown_filter[column_key],
+                                    ({ label }) =>
+                                      _.includes(
+                                        clean_search_string(label),
+                                        clean_search_string(
+                                          searches[column_key]
+                                        )
+                                      )
+                                  ),
+                                }}
                                 dropdown_content_class_name={
                                   col_index === 0 ? "" : "no-right"
                                 }
