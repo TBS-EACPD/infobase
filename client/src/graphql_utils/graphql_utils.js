@@ -1,7 +1,6 @@
 import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
 import _ from "lodash";
-import { useState } from "react";
 
 import string_hash from "string-hash";
 
