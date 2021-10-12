@@ -11,7 +11,7 @@ import {
   VisibilityControl,
 } from "src/components/index";
 
-import { create_footnote } from "src/models/footnotes/footnotes";
+import { create_fake_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -42,11 +42,8 @@ export class ServiceStandards extends React.Component {
       .map(
         (standard) =>
           standard.other_type_comment &&
-          create_footnote({
-            id: `other_type_comment_${standard.standard_id}`,
+          create_fake_footnote({
             topic_keys: ["OTHER_TYPE_COMMENT"],
-            subject_type: "service",
-            subject_id: service.id,
             text: standard.other_type_comment,
           })
       )

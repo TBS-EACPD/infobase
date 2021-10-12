@@ -8,6 +8,13 @@ import { make_store } from "src/models/utils/make_store";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
+type FakeFootNoteDef = {
+  topic_keys: string[];
+  text: string;
+  year1?: number;
+  year2?: number;
+};
+
 export type FootNoteDef = {
   id: string;
   subject_type: string;
@@ -16,6 +23,16 @@ export type FootNoteDef = {
   text: string;
   year1?: number;
   year2?: number;
+};
+
+export const create_fake_footnote = (def: FakeFootNoteDef) => {
+  const { text, topic_keys } = def;
+  if (text === undefined || topic_keys === undefined) {
+    throw new Error(
+      `Can't create fake footnote where "text" and "topic_key" is undefined`
+    );
+  }
+  return { ...def };
 };
 
 export const create_footnote = (def: FootNoteDef) => {
