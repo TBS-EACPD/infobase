@@ -40,11 +40,12 @@ const DropdownFilterVirtualizedList = ({
   });
   const virtualized_list_ref = React.createRef();
   const [search, set_search] = useState("");
-  const cleaned_search = _.chain(search).deburr().toLower().trim().value();
+  const clean_search_string = (string) =>
+    _.chain(string).deburr().toLower().trim().value();
 
   const list = dropdown_filter[column_key];
   const filtered_list = _.filter(list, ({ label }) =>
-    _.includes(_.chain(label).deburr().toLower().trim().value(), cleaned_search)
+    _.includes(clean_search_string(label), clean_search_string(search))
   );
 
   return (
