@@ -90,7 +90,6 @@ export class ServiceStandards extends React.Component {
       }
     };
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
-    console.log(standards);
 
     const data = _.chain(standards)
       .map(({ name, type, channel, standard_report, target_type }) =>
