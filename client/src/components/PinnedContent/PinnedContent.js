@@ -125,7 +125,6 @@ class _PinnedContent extends React.Component {
                       }),
                     }}
                     ref={this.content_ref}
-                    // onClick={this.update_content_height} TODO: This doesn't seem needed?
                   >
                     <div style={{ position: "relative", width: width }}>
                       {children}

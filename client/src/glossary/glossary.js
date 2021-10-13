@@ -144,7 +144,6 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                     <a
                       className="glossary-top-link"
                       href="#glossary"
-                      tabIndex="0"
                       onClick={(evt) => {
                         evt.preventDefault();
                         document.body.scrollTop =
