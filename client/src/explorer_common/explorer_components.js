@@ -157,13 +157,13 @@ export const ExplorerNode = ({
         )}
       </div>
       <div className="ExplorerNode__ContentContainer">
-        {/* eslint-disable jsx-a11y/click-events-have-key-events */}
         <div
           className={classNames(
             "ExplorerNode__RowContainer",
             noExpand && "ExplorerNode__RowContainer--no-click"
           )}
           onClick={noExpand ? null : () => onClickExpand(node)}
+          onKeyPress={noExpand ? null : () => onClickExpand(node)}
         >
           <div className="ExplorerRow">
             {_.map(column_defs, ({ id, width, get_val, val_display }, ix) => (

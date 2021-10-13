@@ -83,7 +83,7 @@ export class WriteToClipboard extends React.Component {
             </Fragment>
           }
           subtitle={modal_active && !copy_success && copy_status_message}
-          body={modal_active && copy_success && text_to_copy}
+          body={modal_active && !copy_success && text_to_copy}
           dialog_position="left"
           auto_close_time={
             !is_a11y_mode && modal_active && copy_success && 1900
