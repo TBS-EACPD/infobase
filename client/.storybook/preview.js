@@ -8,6 +8,10 @@ import "src/InfoBase/utils.scss";
 
 import "src/handlebars/register_helpers.side-effects";
 
+import { disable_analytics } from "src/core/analytics";
+
+disable_analytics();
+
 const a11y_options = {
   element: "#root",
   options: {
