@@ -1,7 +1,11 @@
 import _ from "lodash";
 
 import { sha } from "src/core/injected_build_constants";
-let initialized = false;
+
+let disabled = false;
+function disable_analytics() {
+  disabled = true;
+}
 
 //tool to create totally random IDs
 const uuid = () =>
@@ -22,17 +26,12 @@ const dimensions: { [key: string]: string } = {
 };
 
 let client_id: string;
-const get_client_id = () => {
-  if (!initialized || _.isUndefined(client_id)) {
-    /* eslint-disable-next-line no-console */
-    console.error("Error: Google Analytics has not been initialized");
-    return "uninitialized";
-  } else {
-    return client_id;
-  }
-};
-
+let initialized = false;
 function initialize_analytics() {
+  if (disabled) {
+    return;
+  }
+
   const is_dev =
     String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
 
@@ -60,6 +59,16 @@ function initialize_analytics() {
   initialized = true;
 }
 
+const get_client_id = () => {
+  if (disabled) {
+    return;
+  } else if (!initialized || _.isUndefined(client_id)) {
+    return "uninitialized";
+  } else {
+    return client_id;
+  }
+};
+
 //Google analytics doesnt do well with empty/null values for custom dimensions
 //in order for data not to be clipped from reports and extracts, we have to make sure every dimension has a value for each event
 const dummy_event_obj = _.chain(["SUBAPP", "SUBJECT_GUID", "MISC1", "MISC2"])
@@ -68,6 +77,10 @@ const dummy_event_obj = _.chain(["SUBAPP", "SUBJECT_GUID", "MISC1", "MISC2"])
   .value();
 
 function log_standard_event(dims: { [key: string]: string }) {
+  if (disabled) {
+    return;
+  }
+
   if (!initialized) {
     throw new Error("analytics is uninitialized");
   }
@@ -88,6 +101,10 @@ function log_standard_event(dims: { [key: string]: string }) {
 }
 
 function log_page_view(page: string) {
+  if (disabled) {
+    return;
+  }
+
   if (!initialized) {
     throw new Error("analytics is uninitialized");
   }
@@ -97,9 +114,10 @@ function log_page_view(page: string) {
 }
 
 export {
-  log_standard_event,
-  log_page_view,
+  disable_analytics,
   initialize_analytics,
   get_client_id,
   dimensions,
+  log_standard_event,
+  log_page_view,
 };
