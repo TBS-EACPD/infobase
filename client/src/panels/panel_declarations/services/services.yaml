@@ -66,9 +66,9 @@ list_of_provided_services_desc_dept:
 list_of_provided_services_desc_program:
   transform: [handlebars, markdown]
   en: |
-    Programs can provide one or more {{gl_tt "services" "SERVICE"}}. As well, several Programs together may offer one service.
+    Programs can have one or more {{gl_tt "services" "SERVICE"}}. As well, a service may be offered through several Programs.
 
-    **{{subject_name}}** offers **{{num_of_services}}** services
+    **{{subject_name}}** offers **{{num_of_services}}** services.
   fr: TODO
 
 view_service:
@@ -350,19 +350,19 @@ has_standards_text:
   en: How many {{gl_tt "services" "SERVICE"}} have {{gl_tt "standards" "STANDARD"}}?
   fr: Combien de {{gl_tt "services" "SERVICE"}} ont des {{gl_tt "normes" "STANDARD"}}?
 has_standards_table_text:
-  en: How many services have standards?
-  fr: Combien de services ont des normes?
+  en: How many services have service standards?
+  fr: TODO
 target_met_text:
   transform: [handlebars, markdown]
-  en: How many {{gl_tt "standards'" "STANDARD"}} targets were met?
-  fr: Combien de cibles {{gl_tt "normes de service" "STANDARD"}} ont été atteintes?
+  en: How many service {{gl_tt "standards'" "STANDARD"}} targets were met?
+  fr: TODO
 target_met_table_text:
-  en: How many standards' targets were met?
-  fr: Combien de cibles normes ont été atteintes?
+  en: How many service standards' targets were met?
+  fr: TODO
 gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
-    **{{fmt_percentage1 has_standards_pct}}** of services have standards for a total of **{{standards_count}}** service standards
+    **{{fmt_percentage1 has_standards_pct}}** of services have service standards for a total of **{{standards_count}}** service standards
   fr: |
     TODO
 gauge_standards_met_text:
