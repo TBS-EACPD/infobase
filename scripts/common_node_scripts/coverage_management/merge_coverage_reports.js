@@ -9,7 +9,7 @@ function main() {
 
   const argv = yargs.options({
     report: {
-      type: "array", // array of path strings
+      type: "array",
       desc: "Paths of json coverage report files",
       demandOption: true,
     },
