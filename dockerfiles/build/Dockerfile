@@ -19,9 +19,4 @@ RUN npm install -g npm@8
 
 USER ${SERVICE_USER}
 
-RUN curl -sSL https://sdk.cloud.google.com | bash && \
-  exec sh && \
-  gcloud init
-ENV PATH $SERVICE_HOME/google-cloud-sdk/bin:$PATH
-
 VOLUME  ${SERVICE_HOME}
