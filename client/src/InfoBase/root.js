@@ -1,3 +1,6 @@
+import "core-js";
+import "regenerator-runtime/runtime";
+
 import { start_spinner } from "src/components/LeafSpinner/pre_react_leaf_spinner";
 
 const stop_spinner = start_spinner();
