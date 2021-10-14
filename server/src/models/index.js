@@ -1,4 +1,4 @@
-import { makeExecutableSchema } from "graphql-tools";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import _ from "lodash";
 
 import core_subject from "./core_subject/index.js";
