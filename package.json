@@ -18,7 +18,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.14.2",
     "eslint": "^7.12.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-lodash": "^7.1.0",
