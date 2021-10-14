@@ -15,6 +15,8 @@ RUN apk update && apk upgrade && \
     procps \
     openssh
 
+RUN npm install -g npm@8
+
 USER ${SERVICE_USER}
 
 RUN curl -sSL https://sdk.cloud.google.com | bash && \

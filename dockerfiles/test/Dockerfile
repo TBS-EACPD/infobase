@@ -1,4 +1,4 @@
-FROM eaadtbs/ib-ci-build:2.0
+FROM eaadtbs/ib-ci-build:2.1
 
 USER root
 
