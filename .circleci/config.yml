@@ -40,7 +40,6 @@ jobs:
       - save_cache:
           paths:
             - email_backend/node_modules
-            - scripts/common_node_scripts/node_modules
           key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
       - save_cache:
           paths:
@@ -50,14 +49,6 @@ jobs:
       - run: (cd email_backend && npm run unit_tests)
 
       - run: (cd email_backend && npm run end_to_end_tests)
-
-      # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
-      - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
-
-      - run: (cd email_backend && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-
-      - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
-      - run: (cd email_backend && ../scripts/ci_scripts/store_project_coverage.sh email_backend)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_links:
@@ -69,8 +60,6 @@ jobs:
       - checkout:
           path: "~/InfoBase"
       - run: ./scripts/ci_scripts/create_envs.sh
-
-      - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
 
       # only let this job run in the true repo
       - run: if [ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]; then circleci-agent step halt; fi
@@ -131,7 +120,6 @@ jobs:
       - save_cache:
           paths:
             - client/node_modules
-            - scripts/common_node_scripts/node_modules
             - client/.cache
           key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v2
 
@@ -175,7 +163,6 @@ jobs:
       - save_cache:
           paths:
             - server/node_modules
-            - scripts/common_node_scripts/node_modules
           key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
 
       - restore_cache:
@@ -242,14 +229,6 @@ jobs:
           command: (cd server && npm run start)
           background: true
       - run: (cd server && npm run snapshot_tests)
-
-      # halt here if not on the true repo, expected that means this is running in an env without the GCloud env vars required for the following steps
-      - run: if [[ "$CIRCLE_PROJECT_REPONAME" != "infobase" ]]; then circleci step halt; fi
-
-      - run: (cd server && npm run merge_coverage_reports && npm run create_coverage_shield_badge)
-
-      - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
-      - run: (cd server && ../scripts/ci_scripts/store_project_coverage.sh server)
 
   # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_end_to_end_cypress: # slower but more in-depth than the test job. Wait until these have passed before deploying the client

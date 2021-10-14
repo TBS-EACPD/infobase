@@ -1,8 +1,0 @@
-*.DS_Store
-*.swp
-*.swo
-/node_modules
-.vscode/
-npm-debug*
-coverage
-*credentials*.json

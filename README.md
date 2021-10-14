@@ -11,8 +11,8 @@ The live site can be found [here](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/inde
 This repository contains the following projects:
 
 1. GC InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
-2. GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-server-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-server-coverage.txt)
-3. GC InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend)) [![Test coverage status badge](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage-badge.svg)](https://storage.googleapis.com/all-test-coverage/master-email_backend-coverage.txt)
+2. GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
+3. GC InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
 
 See the README.md files in those respective directories for more details on each project.
 
@@ -28,7 +28,7 @@ All data in `data/` is released under the terms of the [Open Government Licence 
 
 InfoBase du GC est un outil interactif de visualisation de données, qui traduit en termes simples l’information complexe du gouvernement fédéral au profit des Canadiens. Depuis sa création en 2013, InfoBase du GC a été reconnue par le directeur parlementaire du budget (DPB) comme étant la source d’information faisant autorité en matière de dépenses gouvernementales et est considérée comme une innovation dans le secteur public par l’Observatoire sur l’innovation dans le secteur public (OISP) de l’Organisation de coopération et de développement économiques (OCDE). L’outil contient plusieurs années de renseignements gouvernementaux, auparavant éparpillés dans plus de 500 rapports à l’échelle de la fonction publique fédérale.
 
-Le site en direct est [ici](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html). Notre page [Qui sommes-nous](http://localhost:8080/build/InfoBase/index-fra.html#about) contient les details supplémentaires sur le sujet de nous-mêmes.
+Le site en direct est [ici](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html). Notre page [Qui sommes-nous](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-fra.html#about) contient les details supplémentaires sur le sujet de nous-mêmes.
 
 Ce dépôt est divisé en trois:
 
