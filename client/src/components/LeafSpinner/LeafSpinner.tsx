@@ -1,4 +1,4 @@
-import type { Property } from "csstype";
+import { PositionProperty } from "csstype";
 import _ from "lodash";
 import React from "react";
 
@@ -8,7 +8,7 @@ import leaf_loading_spinner from "./LeafSpinner.svg";
 import "./LeafSpinner.scss";
 
 interface spinner_config {
-  outer_positioning: Property.Position;
+  outer_positioning: PositionProperty;
   spinner_container_style: React.CSSProperties;
   svg_modifier: (svg_string: string) => string;
 }
