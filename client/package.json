@@ -101,6 +101,7 @@
     "react-virtualized": "^9.22.3",
     "redux": "^3.7.1",
     "redux-promise-middleware": "^6.1.0",
+    "regenerator-runtime": "^0.13.9",
     "reselect": "^3.0.1",
     "stream-browserify": "^3.0.0",
     "string-hash": "^1.1.3",

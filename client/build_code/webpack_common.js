@@ -19,11 +19,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       loader: "babel-loader",
       options: {
         cacheDirectory: true,
-        sourceType: "unambiguous", // needed if we've still got CommonJS modules being shared by src and build_code
         plugins: [
-          "@babel/plugin-proposal-object-rest-spread",
-          "@babel/plugin-syntax-dynamic-import",
           [
+            // Note, decorators must be included BEFORE class-properties
             "@babel/plugin-proposal-decorators",
             { decoratorsBeforeExport: false },
           ],
@@ -33,13 +31,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           [
             "@babel/preset-env",
             {
-              useBuiltIns: "usage",
-              corejs: { version: "3.12", proposals: true },
-              modules: false,
-              targets: target_ie11
-                ? ["ie 11", "Safari 7"]
-                : "last 2 Chrome versions",
-              forceAllTransforms: is_prod_build, // need to forceAllTransforms when minifying
+              useBuiltIns: "entry",
+              corejs: { version: "3.18.3" },
+              targets: target_ie11 ? ["IE 11", "Safari 7"] : "defaults",
             },
           ],
           "@babel/preset-react",
