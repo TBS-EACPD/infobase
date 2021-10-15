@@ -21,6 +21,7 @@ import {
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
+import { GlossaryMenu } from "src/glossary/GlossaryMenu";
 import { TooltipActivator } from "src/glossary/TooltipActivator";
 import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
@@ -152,6 +153,7 @@ export class App extends React.Component {
           />
           {has_local_storage && <SurveyPopup />}
           <TooltipActivator />
+          <GlossaryMenu />
           <Suspense fallback={<LeafSpinner config_name={"route"} />}>
             <Switch>
               <Route
