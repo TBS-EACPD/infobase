@@ -21,11 +21,9 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
         cacheDirectory: true,
         plugins: [
           [
-            // Note, decorators must be included BEFORE class-properties
             "@babel/plugin-proposal-decorators",
             { decoratorsBeforeExport: false },
           ],
-          "@babel/plugin-proposal-class-properties",
         ],
         presets: [
           [
@@ -224,7 +222,8 @@ function get_plugins({
           NODE_ENV: JSON.stringify("production"),
         },
       }),
-    is_prod_build && new webpack.optimize.ModuleConcatenationPlugin(),
+    // TODO this currently breaks builds, yet to figure out why
+    //is_prod_build && new webpack.optimize.ModuleConcatenationPlugin(),
   ]);
 }
 
