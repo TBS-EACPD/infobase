@@ -26,7 +26,7 @@ import {
 
 import "./App.scss";
 
-const Home = React.lazy(() => import("src/home/home"));
+const Home = retrying_react_lazy(() => import("src/home/home"));
 const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home"));
 const About = retrying_react_lazy(() => import("src/about/about"));
 const Contact = retrying_react_lazy(() => import("src/contact/contact"));
