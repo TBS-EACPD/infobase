@@ -55,7 +55,7 @@ class _GraphOverlay extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  is_showing_graph_overlay: state.is_showing_graph_overlay,
+  is_showing_graph_overlay: state.app.is_showing_graph_overlay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
