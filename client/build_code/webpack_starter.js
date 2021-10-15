@@ -82,7 +82,11 @@ gitsha(function (err, commit_sha) {
   const config = langs.map((lang) =>
     create_config({
       context: path.resolve(__dirname, `..`),
-      entry: "./src/InfoBase/root.js",
+      entry: [
+        "core-js",
+        "regenerator-runtime/runtime",
+        "./src/InfoBase/root.js",
+      ],
       output: app_options.get_output(lang),
       commit_sha,
       language: lang,
