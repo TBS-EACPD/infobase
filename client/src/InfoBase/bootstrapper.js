@@ -6,6 +6,8 @@ import "string.prototype.replaceall/auto";
 import "./site.scss";
 import "./utils.scss";
 
+import { app_reducer } from "./AppState";
+
 import "src/handlebars/register_helpers.side-effects";
 
 import {
@@ -71,7 +73,7 @@ const load_fonts = () =>
     },
   });
 
-function bootstrapper(App, app_reducer, done) {
+function bootstrapper(App, done) {
   load_fonts();
 
   populate_initial_stores_from_lookups().then(() => {

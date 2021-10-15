@@ -9,7 +9,6 @@ import("./runtime_polyfills")
   .then(({ runtime_polyfills }) => runtime_polyfills())
   .then(() =>
     Promise.all([import("./bootstrapper"), import("./App")]).then(
-      ([{ bootstrapper }, { App, app_reducer }]) =>
-        bootstrapper(App, app_reducer, stop_spinner)
+      ([{ bootstrapper }, { App }]) => bootstrapper(App, stop_spinner)
     )
   );
