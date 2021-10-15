@@ -221,28 +221,26 @@ function get_plugins({
 }
 
 function get_optimizations(is_prod_build, is_ci, produce_stats) {
-  if (is_prod_build) {
-    return {
-      ...(produce_stats && {
-        // using names as ids required for clear bundle stats comparison between builds, but adds weight to output
-        // (particularily to entry point), so not desired in production builds intended for the live site
-        moduleIds: "named",
-        chunkIds: "named",
-      }),
-      minimize: true,
-      // Terser's parallel behaviour is to spawn one worker per core, but 1) it is unable to accurately detect cores in CircleCI and 2), for local
-      // prod builds, this can deplete resources when multiple builds are run in parallel themselves (the standard behaviour for local prod builds).
-      // Disabling parallel builds makes the least common use of prod builds slightly slower, but makes the other uses more stable (and potentially
-      // faster, in the case of resource depletion)
+  return {
+    ...(is_prod_build && {
+      /*
+        Terser's parallel behaviour, the default is to spawn one worker per core, but 1) it is unable to accurately detect cores in CircleCI and 2),
+        for local prod builds, this can deplete resources when multiple builds are run in parallel themselves (the standard behaviour for local prod
+        builds). Disabling parallel builds makes the least common use of prod builds slightly slower, but makes the other uses more stable (and
+        potentially faster, in the case of resource depletion)
+      */
       minimizer: [new TerserPlugin({ parallel: false })],
-      splitChunks: {
-        maxAsyncRequests: 20,
-        chunks: "async",
-      },
-    };
-  } else {
-    return {};
-  }
+    }),
+    ...(produce_stats && {
+      /*
+        Using names as ids required to make bundle stats comparison between builds possible, and identity of bundles clearer.
+        Warning: adds weight to output (particularily to entry point), so not desired in production builds intended for the live site
+        (currently used in the dev links versions though, so remember that the dev links are slightly sub-optimal)
+      */
+      moduleIds: "named",
+      chunkIds: "named",
+    }),
+  };
 }
 
 function create_config({
