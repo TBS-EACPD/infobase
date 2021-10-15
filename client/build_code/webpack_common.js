@@ -30,7 +30,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
             "@babel/preset-env",
             {
               useBuiltIns: "entry",
-              corejs: { version: "3.18.3" },
+              corejs: { version: "3.18" },
               targets: target_ie11 ? ["IE 11", "Safari 7"] : "defaults",
             },
           ],
