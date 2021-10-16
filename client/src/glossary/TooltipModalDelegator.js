@@ -23,10 +23,11 @@ export class TooltipModalDelegator extends React.Component {
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
 
-    const glossary_def_html = get_glossary_item_tooltip_html(glossary_item_key);
+    const glossary_def_html_str =
+      get_glossary_item_tooltip_html(glossary_item_key).trim();
 
     let glossary_def = document.createElement("div");
-    glossary_def.innerHTML = glossary_def_html;
+    glossary_def.innerHTML = glossary_def_html_str;
     console.log("glossary_def");
     console.log(glossary_def);
     console.dir(
@@ -39,7 +40,6 @@ export class TooltipModalDelegator extends React.Component {
       show: this.state.show_modal,
       body: glossary_def.innerText, // using glossary_def gives an error
       size: "sm",
-      //   on_close_callback: () => this.closeModal(),
       on_close_callback: this.closeModal,
     });
     console.log("new child");
@@ -66,8 +66,7 @@ export class TooltipModalDelegator extends React.Component {
   //   };
 
   closeModal() {
-    console.log("toggleModal");
-    console.log({ this: this });
+    console.log("closeModal");
     this.setState({ show_modal: false });
   }
 
