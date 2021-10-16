@@ -32,7 +32,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
               useBuiltIns: "entry",
               corejs: { version: "3.18" },
               targets: target_ie11 ? ["IE 11", "Safari 7"] : "defaults",
-              modules: false, // note: we want babel to output ES modules, webpack will sort out the final output anyway and can optimize better from ES modules
             },
           ],
           "@babel/preset-react",
