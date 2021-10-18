@@ -102,10 +102,12 @@ function load_footnotes_bundle(subject: SubjectInstance | "estimates" | "all") {
   // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
   return make_request(
     get_static_url(`footnotes/fn_${lang}_${footnote_bundle_id}.json.js`)
-  ).then((csv_str) => {
-    populate_footnotes(csv_str);
-    _loaded_footnote_bundle_ids[footnote_bundle_id] = true;
-  });
+  )
+    .then((resp) => resp.text())
+    .then((csv_str) => {
+      populate_footnotes(csv_str);
+      _loaded_footnote_bundle_ids[footnote_bundle_id] = true;
+    });
 }
 
 //this is exposed so populate stores can make the 'global' class-level footnotes that will be used by every infograph.

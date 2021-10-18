@@ -70,16 +70,13 @@ export class ErrorBoundary extends React.Component {
     // That is, reload the page without cache if the client/CDN sha's are mismatched (and the build is non-dev)
     // Otherwise, log the error (again, if non-dev) and display error component
     make_request(get_static_url("build_sha", unique_query_param))
+      .then((resp) => resp.text())
       .then((build_sha) => {
         const local_sha_matches_remote_sha = build_sha.search(`^${sha}`) !== -1;
 
         if (!local_sha_matches_remote_sha && !is_dev) {
           window.location.reload(true);
         }
-      })
-      .catch((error) => {
-        // case where make_request for the build sha fails, log that
-        log_error(error);
       })
       .finally(() => {
         log_error(this.state.error);
