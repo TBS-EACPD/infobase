@@ -11,14 +11,23 @@ export default {
 };
 
 const EmailFrontendTemplate = ({
-  return_error_on_submit,
+  return_error_on_get,
+  return_error_on_post,
   example_template,
   props,
 }) => {
   // small leak here, both email_backend_utils and here know about the email backend endpoints
   fetchMock.get(
     `${email_backend_url}/email_template?template_name=${props.template_name}`,
-    example_template,
+    () => {
+      if (return_error_on_get) {
+        throw new Error(
+          "Some sort of error occured (client side OR server side)"
+        );
+      } else {
+        return example_template;
+      }
+    },
     {
       overwriteRoutes: true,
     }
@@ -26,9 +35,14 @@ const EmailFrontendTemplate = ({
 
   fetchMock.post(
     `${email_backend_url}/submit_email`,
-    {
-      success: return_error_on_submit,
-      error_message: return_error_on_submit ? "Error message goes here" : "",
+    () => {
+      if (return_error_on_post) {
+        throw new Error(
+          "Some sort of error occured (client side OR server side)"
+        );
+      } else {
+        return { status: "200" };
+      }
     },
     {
       overwriteRoutes: true,
@@ -52,7 +66,8 @@ const EmailFrontendTemplate = ({
 
 export const ExampleTemplate = EmailFrontendTemplate.bind({});
 ExampleTemplate.args = {
-  return_error_on_submit: false,
+  return_error_on_get: false,
+  return_error_on_post: false,
   example_template: {
     meta: {
       subject_template: "Example template",

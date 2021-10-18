@@ -71,9 +71,9 @@ const query_as_get_with_query_header = async (uri, options) => {
     .value();
 
   return make_request(uriWithVersionAndQueryHash, {
-    request_log_name: `${query_hash}: [${query_names}]`,
-    success_log_name: "API_QUERY_SUCCESS",
-    error_log_name: "API_QUERY_FAILURE",
+    log_identifier: `${query_hash}: [${query_names}]`,
+    success_log_status: "API_QUERY_SUCCESS",
+    error_log_status: "API_QUERY_FAILURE",
     fetch_options: new_options,
   });
 };
