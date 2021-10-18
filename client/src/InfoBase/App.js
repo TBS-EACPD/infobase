@@ -6,7 +6,6 @@ import { HeaderNotification } from "src/components/HeaderNotification/HeaderNoti
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 import { PageDetails } from "src/components/PageDetails";
 
-import { initialize_analytics } from "src/core/analytics";
 import { DevFip } from "src/core/DevFip";
 import { EasyAccess } from "src/core/EasyAccess";
 import { ErrorBoundary } from "src/core/ErrorBoundary";
@@ -70,7 +69,6 @@ const SingleServiceRoute = retrying_react_lazy(() =>
 export class App extends React.Component {
   constructor() {
     super();
-    initialize_analytics();
 
     ensure_linked_stylesheets_load();
   }
