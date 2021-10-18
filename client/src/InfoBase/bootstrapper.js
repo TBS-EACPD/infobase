@@ -19,6 +19,7 @@ import WebFont from "webfontloader";
 
 import { populate_initial_stores_from_lookups } from "src/models/populate_initial_stores_from_lookups";
 
+import { initialize_analytics } from "src/core/analytics";
 import { Table } from "src/core/TableClass";
 
 import { get_client } from "src/graphql_utils/graphql_utils";
@@ -70,6 +71,8 @@ const load_fonts = () =>
 
 function bootstrapper(App, done) {
   load_fonts();
+
+  initialize_analytics();
 
   populate_initial_stores_from_lookups().then(() => {
     _.each(table_defs, (table_def) =>
