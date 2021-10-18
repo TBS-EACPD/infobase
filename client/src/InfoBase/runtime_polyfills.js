@@ -5,6 +5,18 @@ import { shouldPolyfill as should_polyfill_pluralrules } from "@formatjs/intl-pl
 
 import { lang } from "src/core/injected_build_constants";
 
+async function dom4() {
+  if (typeof document.append !== "function") {
+    await import("dom4");
+  }
+}
+
+async function whatwg_fetch() {
+  if (typeof fetch !== "function") {
+    await import("whatwg-fetch");
+  }
+}
+
 async function intl_getcanonicallocales() {
   if (should_polyfill_getcanonicallocales()) {
     await import("@formatjs/intl-getcanonicallocales/polyfill");
@@ -47,6 +59,8 @@ async function intl_numberformat() {
 
 export const runtime_polyfills = () =>
   Promise.all([
+    dom4(),
+    whatwg_fetch(),
     intl_getcanonicallocales(),
     intl_locale(),
     intl_pluralrules(),

@@ -1,32 +1,27 @@
-/* eslint-disable import/order */
-import "dom4";
-import "whatwg-fetch";
-import "string.prototype.replaceall/auto";
-
 import "./site.scss";
 import "./utils.scss";
 
-import { app_reducer } from "./AppState";
-
 import "src/handlebars/register_helpers.side-effects";
 
+import { ApolloProvider } from "@apollo/client";
 import {
   ConnectedRouter,
   routerMiddleware,
   connectRouter,
 } from "connected-react-router";
-import _ from "lodash";
 import { createHashHistory } from "history";
-import { ApolloProvider } from "@apollo/client";
+import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
-
 import WebFont from "webfontloader";
 
-import { Table } from "src/core/TableClass";
 import { populate_initial_stores_from_lookups } from "src/models/populate_initial_stores_from_lookups";
+
+import { Table } from "src/core/TableClass";
+
+import { get_client } from "src/graphql_utils/graphql_utils";
 
 import orgEmployeeAgeGroup from "src/tables/orgEmployeeAgeGroup";
 import orgEmployeeAvgAge from "src/tables/orgEmployeeAvgAge";
@@ -45,7 +40,7 @@ import programSobjs from "src/tables/programSobjs";
 import programSpending from "src/tables/programSpending";
 import programVoteStat from "src/tables/programVoteStat";
 
-import { get_client } from "src/graphql_utils/graphql_utils";
+import { app_reducer } from "./AppState";
 
 const table_defs = [
   orgVoteStatPa,
