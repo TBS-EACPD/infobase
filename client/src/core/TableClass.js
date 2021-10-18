@@ -488,12 +488,12 @@ export class Table {
     };
   }
   load() {
-    return make_request(get_static_url(table_id_to_csv_path(this.id))).then(
-      (data) => {
+    return make_request(get_static_url(table_id_to_csv_path(this.id)))
+      .then((resp) => resp.text())
+      .then((data) => {
         this.populate_with_data(data);
         this.loaded = true;
-      }
-    );
+      });
   }
   fill_dimension_columns() {
     //wrap it in an instance method

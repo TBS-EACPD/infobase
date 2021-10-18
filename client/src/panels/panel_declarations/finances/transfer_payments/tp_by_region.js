@@ -35,15 +35,20 @@ const { provinces, le_provinces, de_provinces } = businessConstants;
 const load_population_data = () =>
   make_request(
     get_static_url(`csv/canadian_population_estimates_by_province.csv`)
-  ).then((csv_string) =>
-    _.chain(csv_string)
-      .trim()
-      .thru(csvParseRows)
-      .tail()
-      .map(([prov_code, ...values]) => [prov_code, _.map(values, _.toInteger)])
-      .fromPairs()
-      .value()
-  );
+  )
+    .then((resp) => resp.text())
+    .then((csv_string) =>
+      _.chain(csv_string)
+        .trim()
+        .thru(csvParseRows)
+        .tail()
+        .map(([prov_code, ...values]) => [
+          prov_code,
+          _.map(values, _.toInteger),
+        ])
+        .fromPairs()
+        .value()
+    );
 
 const group_prov_data_by_year = (data_by_prov) =>
   _.chain(data_by_prov)
