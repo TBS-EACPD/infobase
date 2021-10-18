@@ -4,8 +4,6 @@ import _ from "lodash";
 
 import string_hash from "string-hash";
 
-import { log_standard_event } from "src/core/analytics";
-
 import {
   sha,
   local_ip,
@@ -13,7 +11,7 @@ import {
   is_ci,
 } from "src/core/injected_build_constants";
 
-import { retrying_promise } from "src/general_utils";
+import { make_request } from "src/request_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
@@ -71,39 +69,13 @@ const query_as_get_with_query_header = async (uri, options) => {
     .map("variables._query_name")
     .join(", ")
     .value();
-  const time_at_request = Date.now();
-  const get_common_log_text = (retry_count) =>
-    `${query_hash}: [${query_names}], took ${
-      Date.now() - time_at_request
-    } ms (${retry_count} retries)`;
 
-  const retries = 3;
-  return retrying_promise(
-    (retry_count) =>
-      fetch(uriWithVersionAndQueryHash, new_options).then((response) => ({
-        response,
-        retry_count,
-      })),
-    { retries }
-  )
-    .then(({ response, retry_count }) => {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_SUCCESS",
-        MISC2: `${get_common_log_text(retry_count)}`,
-      });
-
-      return response;
-    })
-    .catch((error) => {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "API_QUERY_FAILURE",
-        MISC2: `${get_common_log_text(retries)} - ${error.toString()}`,
-      });
-
-      throw error;
-    });
+  return make_request(uriWithVersionAndQueryHash, {
+    request_log_name: `${query_hash}: [${query_names}]`,
+    success_log_name: "API_QUERY_SUCCESS",
+    error_log_name: "API_QUERY_FAILURE",
+    fetch_options: new_options,
+  });
 };
 
 let client = null;

@@ -14,12 +14,14 @@ const RETRIES = 3;
 export const make_request = (
   url: RequestInfo,
   options: {
+    request_log_name?: string;
     success_log_name?: string;
     error_log_name?: string;
     fetch_options?: RequestInit;
   } = {}
 ) => {
   const {
+    request_log_name = url,
     success_log_name = "FETCH_SUCCESS",
     error_log_name = "FETCH_FAILURE",
     fetch_options,
@@ -27,7 +29,9 @@ export const make_request = (
 
   const time_at_request = Date.now();
   const get_common_log_text = (retry_count: number) =>
-    `${url}, took ${Date.now() - time_at_request} ms (${retry_count} retries)`;
+    `${request_log_name}, took ${
+      Date.now() - time_at_request
+    } ms (${retry_count} retries)`;
 
   return retrying_promise(
     (retry_count) =>
