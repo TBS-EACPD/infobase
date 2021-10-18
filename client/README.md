@@ -21,25 +21,25 @@ _(Le Français suit)_
 
 ## Getting Started
 
-### Pre-requisite:
+### Development pre-requisites
 
+- git
 - node@14.x (latest long term support) (`npm install -g n && n lts`)
-- npm@6.x (`npm install -g npm@6`)
-- Git
+- npm@8.x (`npm install -g npm@8`)
 
 ### First time setup
 
-1. Have npm, node, and git installed
-2. Open a terminal and go to the directory where you want to store the project, e.g. `cd ~/Documents`
-3. `git clone https://github.com/TBS-EACPD/InfoBase.git`
-4. In the root directory `./InfoBase`, run `npm install && cd client && npm install && cd ../server && npm install && cd ../email_backend && npm install && cd ..`
+1. Open a terminal and go to the directory where you want to store the project, e.g. `cd ~/Documents`
+2. `git clone https://github.com/TBS-EACPD/InfoBase.git`
+3. In the root directory `./InfoBase`, run `npm install && cd client && npm install && cd ../server && npm install && cd ../email_backend && npm install && cd ..`
 
-### Building GC InfoBase
+### Running locally
 
-0. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
-1. `npm ci` to get node modules (skip if node modules are upto date)
-2. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
-3. `npm run IB_q_both` to webpack the source code (`IB_q_both` builds both EN an FR versions, relatively quickly, but requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11 and other legacy browsers)\*
+0. Follow the steps in `InfoBase/server/README.md` to start a local backend
+1. `cd` to the `InfoBase/client` dir
+2. `npm ci`
+3. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
+4. `npm run IB_q_both` to webpack the source code (`IB_q_both` builds both EN an FR versions, relatively quickly, but requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11 and other legacy browsers)\*
 
 \* `IB_q_both` and `IB_dev` are not the only flavours of build. See package.json for a list of all build commands
 

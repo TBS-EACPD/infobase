@@ -14,13 +14,19 @@ Google Cloud Function email backend. More user-friendly and secure/configurable 
 - [Documentation of JSON email templates](#Documentation-of-JSON-email-templates)
 - [Spam mitigation](#Spam-mitigation)
 
-## Development
+### Development pre-requisites
 
-0. Install node, npm, git, and mongo. Clone the InfoBase repo
+- git
+- node@14.x (latest long term support) (`npm install -g n && n lts`)
+- npm@8.x (`npm install -g npm@8`)
+- mongo v4.4.6 (TODO double check what versions work, check if there's any major version upgrades to make, and provide some install examples)
+
+## Running locally
+
 1. `cd` to the `InfoBase/email_backend` dir
-2. Run `npm run mongod` (either background the process or run it in its own pane)
-3. Run `npm ci`
-4. Run `npm start` to start a local server on port 7331. Watches and restarts on changes in `src` or `templates`
+2. `npm run mongod` (either background the process or run it in its own pane)
+3. `npm ci`
+4. `npm start` to start a local server on port 7331. Watches and restarts on changes in `src` or `templates`
 5. In a separate window run `npm test` to run unit tests in `src` or end-to-end test agaist the local server
 
 ## Endpoints
