@@ -14,22 +14,22 @@ const RETRIES = 3;
 export const make_request = (
   url: RequestInfo,
   options: {
-    request_log_name?: string;
-    success_log_name?: string;
-    error_log_name?: string;
+    success_log_status?: string;
+    error_log_status?: string;
+    log_identifier?: string;
     fetch_options?: RequestInit;
   } = {}
 ) => {
   const {
-    request_log_name = url,
-    success_log_name = "FETCH_SUCCESS",
-    error_log_name = "FETCH_FAILURE",
+    success_log_status = "FETCH_SUCCESS",
+    error_log_status = "FETCH_FAILURE",
+    log_identifier = url,
     fetch_options,
   } = options;
 
   const time_at_request = Date.now();
   const get_common_log_text = (retry_count: number) =>
-    `${request_log_name}, took ${
+    `${log_identifier}, took ${
       Date.now() - time_at_request
     } ms (${retry_count} retries)`;
 
@@ -44,7 +44,7 @@ export const make_request = (
     .then(({ response, retry_count }) => {
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: success_log_name,
+        MISC1: success_log_status,
         MISC2: get_common_log_text(retry_count),
       });
 
@@ -55,7 +55,7 @@ export const make_request = (
 
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: error_log_name,
+        MISC1: error_log_status,
         MISC2: error.toString(),
       });
 
