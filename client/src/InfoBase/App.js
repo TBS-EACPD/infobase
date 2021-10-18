@@ -17,6 +17,7 @@ import { ReactUnmounter } from "src/core/NavComponents";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
 import { TooltipActivator } from "src/glossary/TooltipActivator";
+import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
 
 import {
@@ -89,7 +90,9 @@ export class App extends React.Component {
 
   componentDidMount() {
     if (!is_dev) {
-      fetch("https://storage.googleapis.com/ib-outage-bucket/outage_msg.json")
+      make_request(
+        "https://storage.googleapis.com/ib-outage-bucket/outage_msg.json"
+      )
         .then((response) => response.json())
         .then(({ outage, ...outage_msg_by_lang }) => {
           if (outage) {
