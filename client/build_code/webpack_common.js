@@ -62,6 +62,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     {
       // ensure dependencies are transpiled for IE11 support when needed
       test: (path) => target_ie11 && /node_modules\/.*\.js$/.test(path),
+      exclude: /node_modules\/core-js\/.*/,
       use: js_module_loader_rules,
       // up to dependencies to declare sideEffects true/false in their package.json
     },
