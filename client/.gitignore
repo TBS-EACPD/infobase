@@ -28,7 +28,6 @@ tests/*test.build.js
 /src/playground/
 /build
 /build_prod
-/browser-tests/temp-route-tests-*
 .vscode/
 build_LED
 watch
