@@ -384,9 +384,9 @@ workflows:
       - test_end_to_end_cypress:
           requires:
             - test_server
-      - test_end_to_end_testcafe:
-          requires:
-            - test_server
+      #- test_end_to_end_testcafe:
+      #    requires:
+      #      - test_server
       - deploy_data:
           requires:
             - test_server
@@ -406,5 +406,5 @@ workflows:
           requires:
             - build_storybook
             - test_end_to_end_cypress
-            - test_end_to_end_testcafe
+            #- test_end_to_end_testcafe
           <<: *deploy_filter
