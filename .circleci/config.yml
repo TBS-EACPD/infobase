@@ -324,8 +324,9 @@ jobs:
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
-      - checkout:
-          path: "~/InfoBase"
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/create_envs.sh
 
       - restore_cache:
           keys:
