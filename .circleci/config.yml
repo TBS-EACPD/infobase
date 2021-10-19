@@ -51,7 +51,7 @@ jobs:
 
   cleanup_dev_links:
     docker:
-      - image: eaadtbs/ib-ci-test:3.0
+      - image: eaadtbs/ib-ci-mongo:1.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -180,7 +180,7 @@ jobs:
 
   test_server:
     docker:
-      - image: eaadtbs/ib-ci-test:3.0
+      - image: eaadtbs/ib-ci-mongo:1.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -191,8 +191,8 @@ jobs:
       - run: (cd server && npm run unit_tests)
 
       - run:
-          name: mongod
-          command: mongod
+          name: server mongod
+          command: (cd server && npm run mongod)
           background: true
       - run:
           name: start_api_server
@@ -203,7 +203,7 @@ jobs:
 
   test_end_to_end:
     docker:
-      - image: eaadtbs/ib-ci-cypress:2.0
+      - image: eaadtbs/ib-ci-cypress:4.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     environment:
@@ -214,8 +214,8 @@ jobs:
       - run: ./scripts/ci_scripts/create_envs.sh
 
       - run:
-          name: mongod
-          command: mongod
+          name: server mongod
+          command: (cd server && npm run mongod)
           background: true
       - run: (cd server && npm run populate_db)
       - run:
@@ -239,7 +239,7 @@ jobs:
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci-test:3.0
+      - image: eaadtbs/ib-ci-mongo:1.0
         <<: *dockerhub_auth
     steps:
       - attach_workspace:
