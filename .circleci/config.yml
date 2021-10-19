@@ -18,7 +18,6 @@ archive_filter: &archive_filter
 
 version: 2
 jobs:
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   test_email_backend:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
@@ -50,7 +49,6 @@ jobs:
 
       - run: (cd email_backend && npm run end_to_end_tests)
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   cleanup_dev_links:
     docker:
       - image: eaadtbs/ib-ci-test:3.0
@@ -83,7 +81,6 @@ jobs:
             - ./dev-dbs-clean-for-these-branches.txt
           key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/build
   build:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
@@ -208,7 +205,6 @@ jobs:
             - ./server/package-lock.json
             - ./server/.babelrc
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   test_server:
     docker:
       - image: eaadtbs/ib-ci-test:3.0
@@ -231,8 +227,7 @@ jobs:
           background: true
       - run: (cd server && npm run snapshot_tests)
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
-  test_end_to_end_cypress: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
+  test_end_to_end_cypress:
     docker:
       - image: eaadtbs/ib-ci-cypress:2.0
         <<: *dockerhub_auth
@@ -244,9 +239,6 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      # repeats some of the server tests, because these fail fast and short-curcuit us before the long-running browser tests
-      - run: (cd server && npm run unit_tests)
-
       - run:
           name: mongod
           command: mongod
@@ -255,19 +247,21 @@ jobs:
           name: start_api_server
           command: (cd server && npm run start)
           background: true
-      - run: (cd server && export TEST_AGAINST_TRANSPILIED='true' && npm run snapshot_tests)
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
+
       - run:
           name: start_http_server
           command: (cd client && npm run ci_serve)
           background: true
+
       - run: (cd client && npm run cypress:run)
+
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
-  test_end_to_end_testcafe: # slower but more in-depth than the test job. Wait until these have passed before deploying the client
+  test_end_to_end_testcafe:
     docker:
       - image: eaadtbs/ib-ci-test:3.0
         <<: *dockerhub_auth
@@ -277,9 +271,6 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      # repeats some of the server tests, because these fail fast and short-curcuit us before the long-running browser tests
-      - run: (cd server && npm run unit_tests)
-
       - run:
           name: mongod
           command: mongod
@@ -288,19 +279,20 @@ jobs:
           name: start_api_server
           command: (cd server && npm run start)
           background: true
-      - run: (cd server && export TEST_AGAINST_TRANSPILIED='true' && npm run snapshot_tests)
 
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
+
       - run:
           name: start_http_server
           command: (cd client && npm run ci_serve)
           background: true
+
       - run: (cd client && npm run ci_route_load_tests)
+
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
-  # Note: the image used for this job is built from a docker file found in ../dockerfiles/test
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
@@ -327,7 +319,6 @@ jobs:
             - ./this-data-is-deployed.txt
           key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}-v2
 
-  # Note: the image used for this job is provided by google
   deploy_server:
     working_directory: "~/InfoBase"
     docker:
@@ -355,7 +346,6 @@ jobs:
             - ./this-api-is-deployed.txt
           key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
 
-  # Note: the image used for this job is provided by google
   deploy_client:
     working_directory: "~/InfoBase"
     docker:
@@ -365,10 +355,13 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
       - run: ./scripts/ci_scripts/authenticate-client-gcloud.sh
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace Replace CI API URL placeholder with branch specific API URL
-      - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
-      - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi # only saving master stats right now since they're somewhat large files (~1 mb each)
 
+      # Replace CI API URL placeholder with branch specific API URL
+      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js
+      - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
+
+      # only saving master stats right now since they're somewhat large files (~1 mb each)
+      - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
 workflows:
   version: 2
   test_email_backend:
@@ -380,19 +373,18 @@ workflows:
       - cleanup_dev_links:
           <<: *deploy_filter
 
-  # One workflow that runs all three job stages (build -> test -> deploy_data/server/client), each stage requiring
   build_test_deploy:
     jobs:
       - build
-      - test_end_to_end_cypress:
-          requires:
-            - build
-      - test_end_to_end_testcafe:
-          requires:
-            - build
       - test_server:
           requires:
             - build
+      - test_end_to_end_cypress:
+          requires:
+            - test_server
+      - test_end_to_end_testcafe:
+          requires:
+            - test_server
       - deploy_data:
           requires:
             - test_server
