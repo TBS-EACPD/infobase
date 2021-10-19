@@ -6,7 +6,7 @@ import { shouldPolyfill as should_polyfill_pluralrules } from "@formatjs/intl-pl
 import { lang } from "src/core/injected_build_constants";
 
 async function dom4() {
-  if (typeof document.append !== "function") {
+  if (typeof document.body.append !== "function") {
     await import("dom4");
   }
 }
