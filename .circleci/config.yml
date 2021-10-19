@@ -215,6 +215,7 @@ jobs:
           name: mongod
           command: mongod
           background: true
+      - run: (cd server && npm run populate_db)
       - run:
           name: start_api_server
           command: (cd server && npm run start)
@@ -247,6 +248,7 @@ jobs:
           name: mongod
           command: mongod
           background: true
+      - run: (cd server && npm run populate_db)
       - run:
           name: start_api_server
           command: (cd server && npm run start)
