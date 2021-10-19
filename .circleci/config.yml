@@ -91,6 +91,7 @@ jobs:
     working_directory: "~/InfoBase"
     environment:
       CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
+    resource_class: medium
     steps:
       - checkout:
           path: "~/InfoBase"
