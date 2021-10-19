@@ -10,13 +10,13 @@ export const get_static_url = (url: string, version_query?: string) => {
   return `${cdn_url}/${url}?v=${query_string}`;
 };
 
-const RETRIES = 3;
 export const make_request = (
   url: RequestInfo,
   options: {
     success_log_status?: string;
     error_log_status?: string;
     log_identifier?: string;
+    retries?: number;
     fetch_options?: RequestInit;
   } = {}
 ) => {
@@ -24,6 +24,7 @@ export const make_request = (
     success_log_status = "FETCH_SUCCESS",
     error_log_status = "FETCH_FAILURE",
     log_identifier = url,
+    retries = 3,
     fetch_options,
   } = options;
 
@@ -39,7 +40,7 @@ export const make_request = (
         response,
         retry_count,
       })),
-    { retries: RETRIES }
+    { retries }
   )
     .then(({ response, retry_count }) => {
       log_standard_event({
@@ -51,7 +52,7 @@ export const make_request = (
       return response;
     })
     .catch((error) => {
-      error.message = `${get_common_log_text(RETRIES)} - ${error.toString()}`;
+      error.message = `${get_common_log_text(retries)} - ${error.toString()}`;
 
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", ""),
