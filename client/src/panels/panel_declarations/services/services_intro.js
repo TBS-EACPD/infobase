@@ -8,7 +8,7 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { useSummaryServices } from "src/models/populate_services";
 
-import { formats } from "src/core/format";
+// import { formats } from "src/core/format";
 
 import text from "./services.yaml";
 
@@ -20,12 +20,14 @@ const ServicesIntroPanel = ({ subject }) => {
     query_fragment: `service_general_stats{
       id
       report_years
+      num_of_subject_offering_services
+    }`,
+    /*
       number_of_services
       number_of_online_enabled_services
       pct_of_standards_met_high_vol_services
       pct_of_online_client_interaction_pts
-      num_of_subject_offering_services
-    }`,
+    */
   });
   if (loading) {
     return <LeafSpinner config_name="inline_panel" />;
@@ -33,16 +35,16 @@ const ServicesIntroPanel = ({ subject }) => {
   const {
     service_general_stats: {
       report_years,
-      number_of_services,
-      number_of_online_enabled_services,
-      pct_of_standards_met_high_vol_services,
-      pct_of_online_client_interaction_pts,
+      // number_of_services,
+      // number_of_online_enabled_services,
+      // pct_of_standards_met_high_vol_services,
+      // pct_of_online_client_interaction_pts,
       num_of_subject_offering_services,
       num_of_programs_offering_services,
     },
   } = data;
 
-  const pct_formatter = (value) => formats.percentage1_raw(value);
+  // const pct_formatter = (value) => formats.percentage1_raw(value);
 
   return (
     <div className="medium-panel-text">
@@ -57,6 +59,7 @@ const ServicesIntroPanel = ({ subject }) => {
             : { num_of_programs_offering_services }),
         }}
       />
+      {/*
       <div className="pane-row">
         <div className="pane-rect">
           <span className="pane-max-width">
@@ -100,6 +103,7 @@ const ServicesIntroPanel = ({ subject }) => {
           </span>
         </div>
       </div>
+            */}
     </div>
   );
 };
