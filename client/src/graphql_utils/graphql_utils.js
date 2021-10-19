@@ -15,7 +15,7 @@ import { make_request } from "src/request_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
-export const get_api_url = async () => {
+export const get_api_url = _.memoize(async () => {
   if (is_ci) {
     return `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
   } else if (is_dev) {
@@ -42,7 +42,7 @@ export const get_api_url = async () => {
   } else {
     return prod_api_url;
   }
-};
+});
 
 const query_as_get_with_query_header = async (uri, options) => {
   // want GET requests for client side caching (safe to do given our cache busting scheme and read-only GraphQL API)
