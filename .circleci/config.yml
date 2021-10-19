@@ -175,33 +175,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./node_modules
-            - ./scripts
-
-            - ./data
-            - ./test-data
-            - ./package.json
-            - ./.prettierignore
-            - ./prettier.config.cjs
-
-            - ./client/{{ BUILD_DIR }}
-            - ./client/browser-tests
-            - ./client/deploy_scripts
-            - ./client/node_modules
-            - ./client/package.json
-            - ./client/.cache
-            - ./client/cypress.json
-            - ./client/cypress
-
-            - ./server/src
-            - ./server/transpiled_build
-            - ./server/deploy_scripts
-            - ./server/.gcloudignore
-            - ./server/jest_configs
-            - ./server/node_modules
-            - ./server/package.json
-            - ./server/package-lock.json
-            - ./server/.babelrc
+            - ./*
 
   test_server:
     docker:
@@ -367,8 +341,8 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./client/{{ BUILD_DIR }}/storybook
-            - ./client/{{ BUILD_DIR }}/storybook-a11y
+            - ./client/{{ $BUILD_DIR }}/storybook
+            - ./client/{{ $BUILD_DIR }}/storybook-a11y
 
   deploy_client_and_storybook:
     working_directory: "~/InfoBase"
