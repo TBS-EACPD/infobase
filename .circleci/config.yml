@@ -184,7 +184,7 @@ jobs:
             - ./.prettierignore
             - ./prettier.config.cjs
 
-            - ./client/$BUILD_DIR
+            - ./client/{{ BUILD_DIR }}
             - ./client/browser-tests
             - ./client/deploy_scripts
             - ./client/node_modules
@@ -367,8 +367,8 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./client/$BUILD_DIR/storybook
-            - ./client/$BUILD_DIR/storybook-a11y
+            - ./client/{{ BUILD_DIR }}/storybook
+            - ./client/{{ BUILD_DIR }}/storybook-a11y
 
   deploy_client_and_storybook:
     working_directory: "~/InfoBase"
