@@ -422,7 +422,7 @@ workflows:
           # for now, sticking it here to balance time/container use efficiency. Can reconsider
           # if/when end to end tests get faster or we upgrade CI plans
           requires:
-            - deploy_data
+            - deploy_server
           <<: *deploy_filter
       - deploy_client_and_storybook:
           requires:
