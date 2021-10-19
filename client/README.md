@@ -74,9 +74,9 @@ Route load tests are a quick and dirty form of fairly basic coverage. They just 
 
 1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
 2. Have an active `npm run serve-loopback` process
-3. `npm run route_load_tests`
+3. `npm run cypress:run`
 
-New route load tests can be added in `browser-tests/route-load-tests-config.js`.
+New route load tests can be added in `cypress/integration/InfoBase/route_tests.spec.js`.
 
 # InfoBase du GC
 
@@ -125,6 +125,6 @@ Les tests de chargement fournissent une couverture de test de la forme « quick-
 
 1. Construire une version complète (Exécutez `IB_prod` et `a11y_prod`)
 2. Assurez-vous qu'un processus `npm run serve-loopback` est active
-3. `npm run route_load_tests`
+3. `npm run cypress:run`
 
-Vous pouvez ajouter les tests additionnels dans le fichier `browser-tests/route-load-tests-config.js`.
+Vous pouvez ajouter les tests additionnels dans le fichier `cypress/integration/InfoBase/route_tests.spec.js`.

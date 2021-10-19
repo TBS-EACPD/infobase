@@ -25,8 +25,6 @@
     "a11y_prod_no_watch": "node build_code/webpack_starter.js EN FR TARGET-IE11 PROD NO-WATCH a11y_client",
     "a11y_prod_no_watch_en": "node --max-old-space-size=${MAX_OLD_SPACE_SIZE:-2048} build_code/webpack_starter.js EN TARGET-IE11 PROD NO-WATCH a11y_client",
     "a11y_prod_no_watch_fr": "node --max-old-space-size=${MAX_OLD_SPACE_SIZE:-2048} build_code/webpack_starter.js FR TARGET-IE11 PROD NO-WATCH a11y_client",
-    "route_load_tests": "node browser-tests/route-load-tests.js --browser chrome",
-    "ci_route_load_tests": "node browser-tests/route-load-tests.js --browser chromium --sandbox false --concurrency 8",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
     "serve": "http-server",
@@ -179,10 +177,8 @@
     "script-loader": "^0.7.0",
     "style-loader": "^3.3.0",
     "svg-inline-loader": "^0.8.0",
-    "testcafe": "^1.9.4",
     "typescript": "^4.4",
-    "webpack": "^5.9.0",
-    "yargs": "^17.2.1"
+    "webpack": "^5.9.0"
   },
   "optionalDependencies": {
     "fsevents": "^2.1.0"

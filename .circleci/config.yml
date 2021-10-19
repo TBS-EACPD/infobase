@@ -123,7 +123,8 @@ jobs:
 
       - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
-      - run: # logging memory usage, build job capable of maxing out the memory available in CircleCI
+      # logging memory usage, build job has maxed out the memory available in CircleCI in the past, good to have this around if it does again
+      - run:
           command: |
             while true; do
               sleep 5
@@ -197,9 +198,10 @@ jobs:
           name: start_api_server
           command: (cd server && npm run start)
           background: true
+
       - run: (cd server && npm run snapshot_tests)
 
-  test_end_to_end_cypress:
+  test_end_to_end:
     docker:
       - image: eaadtbs/ib-ci-cypress:2.0
         <<: *dockerhub_auth
@@ -231,39 +233,6 @@ jobs:
           background: true
 
       - run: (cd client && npm run cypress:run)
-
-      - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
-
-  test_end_to_end_testcafe:
-    docker:
-      - image: eaadtbs/ib-ci-test:3.0
-        <<: *dockerhub_auth
-    working_directory: "~/InfoBase"
-    steps:
-      - attach_workspace:
-          at: ./
-      - run: ./scripts/ci_scripts/create_envs.sh
-
-      - run:
-          name: mongod
-          command: mongod
-          background: true
-      - run: (cd server && npm run populate_db)
-      - run:
-          name: start_api_server
-          command: (cd server && npm run start)
-          background: true
-
-      - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#${CDN_URL}#.#g" ./client/$BUILD_DIR/InfoBase/*.html # Replace the CDN_URL instances in the built InfoBase so the tests will get the right files (ie. NOT just test the previous deploy)
-      - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#http://127.0.0.1:1337/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js # Replace CI API URL placeholder with local URL so these tests use the local server
-
-      - run:
-          name: start_http_server
-          command: (cd client && npm run ci_serve)
-          background: true
-
-      - run: (cd client && npm run ci_route_load_tests)
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
@@ -364,6 +333,7 @@ jobs:
 
       # only saving master stats right now since they're somewhat large files (~1 mb each)
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
+
 workflows:
   version: 2
   test_email_backend:
@@ -381,12 +351,11 @@ workflows:
       - test_server:
           requires:
             - build
-      - test_end_to_end_cypress:
+
+      - test_end_to_end:
           requires:
             - test_server
-      #- test_end_to_end_testcafe:
-      #    requires:
-      #      - test_server
+
       - deploy_data:
           requires:
             - test_server
@@ -396,15 +365,14 @@ workflows:
             - deploy_data
           <<: *deploy_filter
       - build_storybook:
-          # building and deploying storybook, conceptually, should be it's own job branch but,
-          # for now, sticking it here to balance time/container use efficiency. Can reconsider
-          # if/when end to end tests get faster or we upgrade CI plans
+          # building and deploying storybook, conceptually, should be it's own job branch but, for now,
+          # sticking it here to balance time/container use efficiency against long running test_end_to_end job
           requires:
             - deploy_server
           <<: *deploy_filter
+
       - deploy_client_and_storybook:
           requires:
             - build_storybook
-            - test_end_to_end_cypress
-            #- test_end_to_end_testcafe
+            - test_end_to_end
           <<: *deploy_filter
