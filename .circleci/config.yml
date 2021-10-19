@@ -344,8 +344,9 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./client/{{ echo $BUILD_DIR }}/InfoBase/storybook
-            - ./client/{{ echo $BUILD_DIR }}/InfoBase/storybook-a11y
+            # wildcards in place of $BUILD_DIR as I couldn't wrestle yaml/CircleCI's persist_to_workspace syntax in to working with any sort of templated path strings
+            - ./client/*/InfoBase/storybook
+            - ./client/*/InfoBase/storybook-a11y
 
   deploy_client_and_storybook:
     working_directory: "~/InfoBase"
