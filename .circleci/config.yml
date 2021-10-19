@@ -150,8 +150,6 @@ jobs:
             - client/build
           key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
 
-      - run: cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y
-
       - restore_cache:
           keys:
             - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
@@ -346,7 +344,33 @@ jobs:
             - ./this-api-is-deployed.txt
           key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
 
-  deploy_client:
+  build_storybook:
+    docker:
+      - image: eaadtbs/ib-ci-build:3.0
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+
+      - restore_cache:
+          keys:
+            - storybook-build-{{ .Branch }}-{{ .Revision }}-v2
+      - run:
+          command: |
+            [ -f "client/$BUILD_DIR/InfoBase/storybook" ] || (cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y)
+      - save_cache:
+          paths:
+            - client/build
+          key: storybook-build-{{ .Branch }}-{{ .Revision }}-v2
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./client/build/storybook
+            - ./client/build/storybook-a11y
+
+  deploy_client_and_storybook:
     working_directory: "~/InfoBase"
     docker:
       - image: google/cloud-sdk:slim
@@ -393,9 +417,16 @@ workflows:
           requires:
             - deploy_data
           <<: *deploy_filter
-      - deploy_client:
+      - build_storybook:
+          # building and deploying storybook, conceptually, should be it's own job branch but,
+          # for now, sticking it here to balance time/container use efficiency. Can reconsider
+          # if/when end to end tests get faster or we upgrade CI plans
           requires:
+            - deploy_data
+          <<: *deploy_filter
+      - deploy_client_and_storybook:
+          requires:
+            - build_storybook
             - test_end_to_end_cypress
             - test_end_to_end_testcafe
-            - deploy_server
           <<: *deploy_filter
