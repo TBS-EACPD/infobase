@@ -344,8 +344,8 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - ./client/{{ echo $BUILD_DIR }}/storybook
-            - ./client/{{ echo $BUILD_DIR }}/storybook-a11y
+            - ./client/{{ echo $BUILD_DIR }}/InfoBase/storybook
+            - ./client/{{ echo $BUILD_DIR }}/InfoBase/storybook-a11y
 
   deploy_client_and_storybook:
     working_directory: "~/InfoBase"
