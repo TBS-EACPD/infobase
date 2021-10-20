@@ -13,6 +13,7 @@ export const get_static_url = (url: string, version_query?: string) => {
 export const make_request = (
   url: RequestInfo,
   options: {
+    should_log?: boolean;
     success_log_status?: string;
     error_log_status?: string;
     log_identifier?: string;
@@ -21,6 +22,7 @@ export const make_request = (
   } = {}
 ) => {
   const {
+    should_log = true,
     success_log_status = "FETCH_SUCCESS",
     error_log_status = "FETCH_FAILURE",
     log_identifier = url,
@@ -43,22 +45,24 @@ export const make_request = (
     { retries }
   )
     .then(({ response, retry_count }) => {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: success_log_status,
-        MISC2: get_common_log_text(retry_count),
-      });
+      should_log &&
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: success_log_status,
+          MISC2: get_common_log_text(retry_count),
+        });
 
       return response;
     })
     .catch((error) => {
       error.message = `${get_common_log_text(retries)} - ${error.toString()}`;
 
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: error_log_status,
-        MISC2: error.toString(),
-      });
+      should_log &&
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: error_log_status,
+          MISC2: error.toString(),
+        });
 
       throw error;
     });

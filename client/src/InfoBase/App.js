@@ -127,7 +127,8 @@ export class App extends React.Component {
   componentDidMount() {
     if (!is_dev) {
       make_request(
-        "https://storage.googleapis.com/ib-outage-bucket/outage_msg.json"
+        "https://storage.googleapis.com/ib-outage-bucket/outage_msg.json",
+        { should_log: false }
       )
         .then((response) => response.json())
         .then(({ outage, ...outage_msg_by_lang }) => {
