@@ -163,7 +163,12 @@ export const ExplorerNode = ({
             noExpand && "ExplorerNode__RowContainer--no-click"
           )}
           onClick={noExpand ? null : () => onClickExpand(node)}
-          onKeyPress={noExpand ? null : () => onClickExpand(node)}
+          onKeyPress={
+            noExpand
+              ? null
+              : (event) =>
+                  _.includes([13, 32], event.keyCode) && onClickExpand(node)
+          }
         >
           <div className="ExplorerRow">
             {_.map(column_defs, ({ id, width, get_val, val_display }, ix) => (

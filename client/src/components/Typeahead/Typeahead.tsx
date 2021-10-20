@@ -266,7 +266,10 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                                 aria-selected={
                                   result_index === selection_cursor
                                 }
-                                onKeyPress={results[result_index].on_select}
+                                onKeyPress={(event) =>
+                                  _.includes([13, 32], event.keyCode) &&
+                                  results[result_index].on_select()
+                                }
                                 onClick={results[result_index].on_select}
                               >
                                 {results[result_index].content}

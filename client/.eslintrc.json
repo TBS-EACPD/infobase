@@ -22,8 +22,7 @@
     "react/display-name": ["off"],
     "react/no-find-dom-node": ["off"],
     "react/no-children-prop": ["off"],
-    "jsx-a11y/no-onchange": ["off"],
-    "jsx-a11y/label-has-associated-control": ["off"]
+    "jsx-a11y/no-onchange": ["off"]
   },
   "overrides": [
     {
