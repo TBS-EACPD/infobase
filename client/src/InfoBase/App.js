@@ -127,8 +127,7 @@ export class App extends React.Component {
   componentDidMount() {
     if (!is_dev) {
       make_request(
-        "https://storage.googleapis.com/ib-outage-bucket/outage_msg.json",
-        { should_log: false }
+        "https://storage.googleapis.com/ib-outage-bucket/outage_msg.json"
       )
         .then((response) => response.json())
         .then(({ outage, ...outage_msg_by_lang }) => {
@@ -139,7 +138,13 @@ export class App extends React.Component {
             });
           }
         })
-        .catch(); // noop, risky to let this throw since it's effectively only tested in prod (TODO, write test). Don't want an outage message issue to itself become an effective outage
+        .catch(
+          /* 
+            noop, risky to let this throw since it's effectively only tested in prod (TODO, write test)
+            Don't want an outage message outage to _become_ an actual outage
+          */
+          _.noop
+        );
     }
   }
 
