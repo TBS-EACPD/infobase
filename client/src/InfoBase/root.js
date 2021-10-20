@@ -1,3 +1,5 @@
+// early minimal polyfils for dynamic imports, all other polyfilling done post-spinner
+import "core-js/modules/web.dom-collections.iterator";
 import "core-js/modules/es.promise";
 
 import "src/components/LeafSpinner/LeafSpinner.scss";
