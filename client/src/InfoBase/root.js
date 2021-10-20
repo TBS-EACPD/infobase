@@ -19,7 +19,7 @@ const stop_spinner = () => {
   app_el.removeAttribute("aria-busy");
 };
 
-import("./core_polyfills")
+import("./core_polyfills.side-effects")
   .then(import("./dynamic_polyfills"))
   .then(() =>
     Promise.all([import("./bootstrapper"), import("./App")]).then(
