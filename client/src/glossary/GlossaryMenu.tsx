@@ -6,6 +6,11 @@ import { glossaryEntryStore } from "src/models/glossary";
 
 import { IconSearch, IconX } from "src/icons/icons";
 
+import { glossary_lite as glossary_search_config } from "src/search/search_configs";
+import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
+
+import { SidebarContent } from "./GlossarySidebarContent";
+
 import glossary_text from "./glossary.yaml";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -13,29 +18,6 @@ interface GlossaryMenuProps {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GlossaryMenuState {
   isOpen: boolean;
-}
-
-function get_glossary_items_by_letter() {
-  const glossary_items = glossaryEntryStore.get_all();
-
-  const glossary_items_by_letter = _.chain(glossary_items)
-    .groupBy((item) => {
-      const first_letter = item.title[0];
-      if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
-        return "E";
-      }
-      return first_letter;
-    })
-    .map((items, letter) => {
-      const sorted_items = _.sortBy(items, "title");
-      return {
-        items: sorted_items,
-        letter,
-      };
-    })
-    .sortBy("letter")
-    .value();
-  return glossary_items_by_letter;
 }
 
 export class GlossaryMenu extends React.Component<
@@ -60,7 +42,6 @@ export class GlossaryMenu extends React.Component<
   }
 
   render() {
-    const items_by_letter = get_glossary_items_by_letter();
     return (
       <div
         className={
@@ -114,21 +95,7 @@ export class GlossaryMenu extends React.Component<
             </div>
           </div>
           <div className="glossary-sidebar-content-wrapper">
-            <div className="glossary-sidebar-content">
-              {_.map(items_by_letter, ({ letter, items }) => (
-                <div>
-                  <span className="glossary-letter" key={letter}>
-                    {letter}
-                  </span>
-                  <hr />
-                  {_.map(items, (item, ix) => (
-                    <div key={ix} className="glossary-title">
-                      <span>{item.title}</span>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
+            <SidebarContent title={null} def={null} />
           </div>
         </aside>
       </div>
