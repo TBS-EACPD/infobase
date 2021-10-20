@@ -31,8 +31,7 @@ export class ServiceOverview extends React.Component {
     const applications = _.reduce(
       application_channels_keys,
       (total, key) => {
-        const sum_for_key =
-          _.sumBy(service.service_report, `${key}_count`) || 0;
+        const sum_for_key = _.sumBy(service.service_report, key) || 0;
         return total + sum_for_key;
       },
       0

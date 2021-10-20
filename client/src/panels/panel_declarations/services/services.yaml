@@ -118,8 +118,8 @@ account_reg_digital:
   en: Account Registration
   fr: TODO
 application_digital:
-  en: Application
-  fr: Demande
+  en: Applications
+  fr: Demandes
 authentication:
   en: Authentication
   fr: Authentification
