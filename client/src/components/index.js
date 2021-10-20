@@ -33,7 +33,6 @@ export { WriteToClipboard } from "./WriteToClipboard/WriteToClipboard";
 export { PDFGenerator } from "./PDFGenerator";
 export { CountdownCircle } from "./CountdownCircle/CountdownCircle";
 export { Countdown } from "./Countdown/Countdown";
-export { LogInteractionEvents } from "./LogInteractionEvents";
 export {
   GlossaryIcon,
   GlossaryItem,

@@ -11,7 +11,6 @@ import {
   ShareButton,
   WriteToClipboard,
   PDFGenerator,
-  LogInteractionEvents,
 } from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -72,47 +71,30 @@ class Panel_ extends React.Component {
     const header_utils = context && (
       <div style={{ marginLeft: "auto" }}>
         {context.panel_key && !is_a11y_mode && (
-          <LogInteractionEvents
-            event_type={"PANEL_PDF_DOWNLOADED"}
-            event_details={title}
-            style={{ display: "inline" }}
-          >
-            <PDFGenerator
-              target_id={context.panel_key}
-              file_name={file_name}
-              title={title}
-              link={panel_link}
-              button_class_name={"panel-heading-utils"}
-            />
-          </LogInteractionEvents>
+          <PDFGenerator
+            target_id={context.panel_key}
+            file_name={file_name}
+            title={title}
+            link={panel_link}
+            button_class_name={"panel-heading-utils"}
+          />
         )}
         {panel_link && (
-          <LogInteractionEvents
-            event_type={"PANEL_LINK_SHARED"}
-            event_details={title}
-            style={{ display: "inline" }}
-          >
-            <ShareButton
-              url={panel_link}
-              title={share_modal_title}
-              button_class_name={"panel-heading-utils"}
-              button_description={text_maker("panel_share_button")}
-            />
-          </LogInteractionEvents>
+          <ShareButton
+            url={panel_link}
+            title={share_modal_title}
+            button_class_name={"panel-heading-utils"}
+            button_description={text_maker("panel_share_button")}
+          />
         )}
         {!context.no_permalink && panel_link && (
-          <LogInteractionEvents
-            event_type={"PANEL_LINK_COPIED"}
-            event_details={title}
-            style={{ display: "inline" }}
-          >
-            <WriteToClipboard
-              text_to_copy={panel_link}
-              button_class_name={"panel-heading-utils"}
-              button_description={text_maker("copy_panel_link")}
-              IconComponent={IconCopyLink}
-            />
-          </LogInteractionEvents>
+          <WriteToClipboard
+            title={title}
+            text_to_copy={panel_link}
+            button_class_name={"panel-heading-utils"}
+            button_description={text_maker("copy_panel_link")}
+            IconComponent={IconCopyLink}
+          />
         )}
       </div>
     );

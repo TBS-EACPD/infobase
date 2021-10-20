@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { debounced_log_standard_event } from "src/core/analytics";
 import { is_IE } from "src/core/feature_detection";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
@@ -265,15 +266,23 @@ export class PDFGenerator extends React.Component {
 
   render() {
     const { generating_pdf } = this.state;
-    const { button_class_name, icon_color, icon_alternate_color, icon_size } =
-      this.props;
+    const {
+      button_class_name,
+      icon_color,
+      icon_alternate_color,
+      icon_size,
+      title,
+    } = this.props;
 
     return (
       !is_IE() && (
         <Fragment>
           {!generating_pdf && (
             <button
-              onClick={() => this.setState({ generating_pdf: true })}
+              onClick={() => {
+                debounced_log_standard_event("PANEL_PDF_DOWNLOADED", title);
+                this.setState({ generating_pdf: true });
+              }}
               className={button_class_name}
             >
               <IconDownload

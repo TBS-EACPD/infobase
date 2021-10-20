@@ -1,8 +1,11 @@
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { StatelessModal } from "src/components/modals_and_popovers/index";
 
 import { create_text_maker } from "src/models/text";
+
+import { debounced_log_standard_event } from "src/core/analytics";
 
 import {
   IconShare,
@@ -88,7 +91,10 @@ export class ShareButton extends React.Component<
     return (
       <Fragment>
         <button
-          onClick={() => this.toggleModal(true)}
+          onClick={() => {
+            debounced_log_standard_event("PANEL_LINK_SHARED", title);
+            this.toggleModal(true);
+          }}
           className={button_class_name}
         >
           <IconShare
