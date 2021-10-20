@@ -57,7 +57,7 @@ async function intl_numberformat() {
   }
 }
 
-export const runtime_polyfills = () =>
+export const dynamic_polyfills = () =>
   Promise.all([
     dom4(),
     whatwg_fetch(),
