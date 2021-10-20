@@ -32,7 +32,6 @@ export class WriteToClipboard extends React.Component {
       button_description,
       IconComponent,
       icon_color,
-      title,
     } = this.props;
 
     const { copy_status_message, keyboard_navigation_detected } = this.state;
@@ -44,7 +43,7 @@ export class WriteToClipboard extends React.Component {
         <button
           className={button_class_name}
           onClick={() => {
-            debounced_log_standard_event("PANEL_LINK_COPIED", title);
+            debounced_log_standard_event("WRITE_TO_CLIPBOARD", text_to_copy);
             clipboard
               .writeText(text_to_copy)
               .then(() =>
@@ -86,7 +85,13 @@ export class WriteToClipboard extends React.Component {
             </Fragment>
           }
           subtitle={modal_active && !copy_success && copy_status_message}
-          body={modal_active && !copy_success && text_to_copy}
+          body={
+            modal_active &&
+            copy_success && (
+              /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+              <div tabIndex={0}>{text_to_copy}</div>
+            )
+          }
           dialog_position="left"
           auto_close_time={
             !is_a11y_mode && modal_active && copy_success && 1900

@@ -89,7 +89,6 @@ class Panel_ extends React.Component {
         )}
         {!context.no_permalink && panel_link && (
           <WriteToClipboard
-            title={title}
             text_to_copy={panel_link}
             button_class_name={"panel-heading-utils"}
             button_description={text_maker("copy_panel_link")}

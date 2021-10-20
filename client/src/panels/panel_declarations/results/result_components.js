@@ -324,59 +324,31 @@ const StatusIconTable = ({
   onClearClick,
   active_list,
 }) => (
-  <div>
-    <div className="status-icon-table">
-      <VisibilityControl
-        items={_.map(ordered_status_keys, (status_key) => ({
-          key: status_key,
-          active:
-            active_list.length === 0 ||
-            _.indexOf(active_list, status_key) !== -1,
-          count: icon_counts[status_key] || 0,
-          text: (
-            <span
-              className="link-unstyled"
-              tabIndex={-1}
-              aria-hidden="true"
-              data-toggle="tooltip"
-              data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
-            >
-              {text_maker(status_key)}
-            </span>
-          ),
-          aria_text: text_maker(status_key),
-          icon: large_status_icons[status_key],
-        }))}
-        item_component_order={["count", "icon", "text"]}
-        click_callback={(status_key) => onIconClick(status_key)}
-        show_eyes_override={active_list.length === ordered_status_keys.length}
-      />
-    </div>
-    <table className="sr-only">
-      <thead>
-        <tr>
-          {_.map(icon_counts, (count, status_key) => (
-            <th key={status_key}>
-              <span
-                className="link-unstyled sr-only"
-                aria-hidden="true"
-                data-toggle="tooltip"
-                data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
-              >
-                {text_maker(status_key)}
-              </span>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {_.map(icon_counts, (count, status_key) => (
-            <td key={status_key}>{count}</td>
-          ))}
-        </tr>
-      </tbody>
-    </table>
+  <div className="status-icon-table">
+    <VisibilityControl
+      items={_.map(ordered_status_keys, (status_key) => ({
+        key: status_key,
+        active:
+          active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
+        count: icon_counts[status_key] || 0,
+        text: (
+          <span
+            className="link-unstyled"
+            tabIndex={-1}
+            aria-hidden="true"
+            data-toggle="tooltip"
+            data-ibtt-glossary-key={status_key_to_glossary_key[status_key]}
+          >
+            {text_maker(status_key)}
+          </span>
+        ),
+        aria_text: text_maker(status_key),
+        icon: large_status_icons[status_key],
+      }))}
+      item_component_order={["count", "icon", "text"]}
+      click_callback={(status_key) => onIconClick(status_key)}
+      show_eyes_override={active_list.length === ordered_status_keys.length}
+    />
   </div>
 );
 
