@@ -1,4 +1,4 @@
-import "core-js/stable/promise";
+import "core-js/modules/es.promise";
 
 import "src/components/LeafSpinner/LeafSpinner.scss";
 import leaf_loading_spinner from "src/components/LeafSpinner/LeafSpinner.svg";
