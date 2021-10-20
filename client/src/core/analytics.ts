@@ -134,5 +134,6 @@ export {
   get_client_id,
   dimensions,
   log_standard_event,
+  debounced_log_standard_event,
   log_page_view,
 };
