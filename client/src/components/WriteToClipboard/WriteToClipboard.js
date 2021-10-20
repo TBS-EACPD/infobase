@@ -6,6 +6,7 @@ import { FixedPopover } from "src/components/modals_and_popovers/index";
 
 import { create_text_maker } from "src/models/text";
 
+import { debounced_log_standard_event } from "src/core/analytics";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconCopy } from "src/icons/icons";
@@ -31,6 +32,7 @@ export class WriteToClipboard extends React.Component {
       button_description,
       IconComponent,
       icon_color,
+      title,
     } = this.props;
 
     const { copy_status_message, keyboard_navigation_detected } = this.state;
@@ -41,7 +43,8 @@ export class WriteToClipboard extends React.Component {
       <Fragment>
         <button
           className={button_class_name}
-          onClick={() =>
+          onClick={() => {
+            debounced_log_standard_event("PANEL_LINK_COPIED", title);
             clipboard
               .writeText(text_to_copy)
               .then(() =>
@@ -51,8 +54,8 @@ export class WriteToClipboard extends React.Component {
               )
               .catch(() =>
                 this.setState({ copy_status_message: text_maker("copy_fail") })
-              )
-          }
+              );
+          }}
           onKeyDown={() =>
             this.setState({ keyboard_navigation_detected: true })
           }

@@ -99,6 +99,21 @@ function log_standard_event(dims: { [key: string]: string }) {
 
   ga("send", send_obj);
 }
+function debounced_log_standard_event(
+  event_type: string,
+  event_details: string,
+  debounced_time = 300
+) {
+  _.debounce(
+    () =>
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: event_type,
+        MISC2: event_details,
+      }),
+    debounced_time
+  );
+}
 
 function log_page_view(page: string) {
   if (disabled) {
