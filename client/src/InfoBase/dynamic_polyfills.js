@@ -57,12 +57,11 @@ async function intl_numberformat() {
   }
 }
 
-export const dynamic_polyfills = () =>
-  Promise.all([
-    dom4(),
-    whatwg_fetch(),
-    intl_getcanonicallocales(),
-    intl_locale(),
-    intl_pluralrules(),
-    intl_numberformat(),
-  ]);
+export default Promise.all([
+  dom4(),
+  whatwg_fetch(),
+  intl_getcanonicallocales(),
+  intl_locale(),
+  intl_pluralrules(),
+  intl_numberformat(),
+]);
