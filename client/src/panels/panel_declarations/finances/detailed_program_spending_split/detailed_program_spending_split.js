@@ -336,27 +336,28 @@ class DetailedProgramSplit extends React.Component {
         </div>
         <div className="row">
           <div className="col-12 col-lg-3" style={{ width: "100%" }}>
-            <label>
+            <label htmlFor="select_so">
               <TM k="filter_by_so" />
-              <Select
-                selected={selected_program}
-                options={_.map(arrangements, ({ id, label }) => ({
-                  id,
-                  display: label,
-                }))}
-                onSelect={(id) => {
-                  this.setState({
-                    selected_program: id,
-                  });
-                }}
-                style={{
-                  display: "block",
-                  margin: "10px auto",
-                  width: "100%",
-                }}
-                className="form-control"
-              />
             </label>
+            <Select
+              id={"select_so"}
+              selected={selected_program}
+              options={_.map(arrangements, ({ id, label }) => ({
+                id,
+                display: label,
+              }))}
+              onSelect={(id) => {
+                this.setState({
+                  selected_program: id,
+                });
+              }}
+              style={{
+                display: "block",
+                margin: "10px auto",
+                width: "100%",
+              }}
+              className="form-control"
+            />
             {legend_items && (
               <StandardLegend
                 legendListProps={{

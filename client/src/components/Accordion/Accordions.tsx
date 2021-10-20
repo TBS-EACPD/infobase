@@ -1,5 +1,6 @@
 import { easeLinear } from "d3-ease";
 import { select } from "d3-selection";
+import _ from "lodash";
 import "d3-transition";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -152,7 +153,9 @@ const StatelessPullDownAccordion = ({
       role="button"
       tabIndex={0}
       onClick={onToggle}
-      onKeyPress={onToggle}
+      onKeyPress={(event) =>
+        _.includes([13, 32], event.keyCode) && onToggle(event)
+      }
     >
       <div className="pull-down-accordion-expander">
         <IconChevron
