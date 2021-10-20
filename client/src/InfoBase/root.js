@@ -20,7 +20,7 @@ const stop_spinner = () => {
 };
 
 import("./core_polyfills.side-effects")
-  .then(import("./dynamic_polyfills"))
+  .then(() => import("./dynamic_polyfills"))
   .then(() =>
     Promise.all([import("./bootstrapper"), import("./App")]).then(
       ([{ bootstrapper }, { App }]) => bootstrapper(App, stop_spinner)
