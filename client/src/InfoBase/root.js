@@ -26,8 +26,12 @@ const stop_spinner = () => {
 Promise.all([
   import("./core_polyfills.side-effects"),
   import("./dynamic_polyfills"),
-  import("./bootstrapper"),
-  import("./App"),
-]).then(([_, { dynamic_polyfills }, { bootstrapper }, { App }]) =>
-  dynamic_polyfills().then(() => bootstrapper(App, stop_spinner))
+]).then(([_, { dynamic_polyfills }]) =>
+  dynamic_polyfills().then(
+    Promise.all([import("./bootstrapper"), import("./App")]).then(
+      ([{ bootstrapper }, { App }]) =>
+        () =>
+          bootstrapper(App, stop_spinner)
+    )
+  )
 );
