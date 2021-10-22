@@ -110,19 +110,23 @@ const DropdownFilterVirtualizedList = ({
                           })),
                         });
                       } else {
-                        const is_filter_active =
-                          _.reject(list, "active").length > 0;
+                        let toggled_list = _.map(list, (item) =>
+                          item.id === item_id
+                            ? { ...item, active: !item.active }
+                            : item
+                        );
+                        const active_filtered_list = _.chain(toggled_list)
+                          .tail()
+                          .reject("active")
+                          .value();
+                        toggled_list[0] = {
+                          ...toggled_list[0],
+                          active: active_filtered_list.length === 0,
+                        };
+
                         set_dropdown_filter({
                           ...dropdown_filter,
-                          [column_key]: _.map(list, (item) => {
-                            if (!is_filter_active && item.id === "select_all") {
-                              return { ...item, active: false };
-                            }
-                            if (item.id === item_id) {
-                              return { ...item, active: !item.active };
-                            }
-                            return item;
-                          }),
+                          [column_key]: toggled_list,
                         });
                       }
                     }}
