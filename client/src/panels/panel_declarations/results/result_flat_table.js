@@ -157,7 +157,6 @@ const indicator_table_from_list = (indicator_list, subject) => {
     ])
     .fromPairs()
     .value();
-  console.log(ind_map);
 
   const column_configs = {
     cr_or_program: {
