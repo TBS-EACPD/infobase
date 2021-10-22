@@ -28,6 +28,7 @@ const DropdownFilterVirtualizedList = ({
   column_key,
   set_dropdown_filter,
   dropdown_filter,
+  column_searches,
 }) => {
   const virtualized_cell_measure_cache = new CellMeasurerCache({
     fixedWidth: true,
@@ -39,9 +40,13 @@ const DropdownFilterVirtualizedList = ({
     _.chain(string).deburr().toLower().trim().value();
 
   const list = dropdown_filter[column_key];
-  const filtered_list = _.filter(list, ({ label }) =>
-    _.includes(clean_search_string(label), clean_search_string(search))
-  );
+  const filtered_list = _.filter(list, ({ label }) => {
+    const cleaned_label = clean_search_string(label);
+    return (
+      _.includes(cleaned_label, clean_search_string(search)) &&
+      _.includes(cleaned_label, column_searches[column_key])
+    );
+  });
 
   return (
     <div>
@@ -138,6 +143,7 @@ export const DropdownFilter = ({
   column_key,
   set_dropdown_filter,
   dropdown_filter,
+  column_searches,
   dropdown_content_class_name = "no-right",
 }) => {
   const is_filter_active =
@@ -158,6 +164,7 @@ export const DropdownFilter = ({
       dropdown_content={
         <DropdownFilterVirtualizedList
           column_key={column_key}
+          column_searches={column_searches}
           set_dropdown_filter={set_dropdown_filter}
           dropdown_filter={dropdown_filter}
         />
