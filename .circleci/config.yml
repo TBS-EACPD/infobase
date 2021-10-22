@@ -37,13 +37,13 @@ jobs:
           command: |
             [ -e "node_modules" ] || npm ci
       - save_cache:
+          key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
           paths:
             - email_backend/node_modules
-          key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
       - save_cache:
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
           paths:
             - node_modules
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
 
       - run: (cd email_backend && npm run unit_tests)
 
@@ -77,9 +77,9 @@ jobs:
             fi
       - run: touch ./dev-dbs-clean-for-these-branches.txt
       - save_cache:
+          key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
           paths:
             - ./dev-dbs-clean-for-these-branches.txt
-          key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches.txt" }}-v2
 
   build:
     docker:
@@ -100,9 +100,9 @@ jobs:
           command: |
             [ -e "node_modules" ] ||  npm ci
       - save_cache:
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v4
           paths:
             - node_modules
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v4
 
       - run: ./scripts/ci_scripts/create_envs.sh
 
@@ -116,10 +116,10 @@ jobs:
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
       - save_cache:
+          key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v2
           paths:
             - client/node_modules
             - client/.cache
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums.txt" }}-v2
 
       - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
@@ -143,9 +143,9 @@ jobs:
       - restore_cache:
           key: webpack-caches-{{ .Branch }}
       - restore_cache:
-          key: eslint-caches-{{ .Branch }}
+          key: eslint-cache-{{ .Branch }}
       - restore_cache:
-          key: babel-caches-{{ .Branch }}
+          key: babel-cache-{{ .Branch }}
 
       - restore_cache:
           keys:
@@ -154,22 +154,22 @@ jobs:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "half")
       - save_cache:
+          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:
             - client/build
-          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
 
       - save_cache:
+          key: webpack-caches-{{ .Branch }}
           paths:
             - client/node_modules/.cache/webpack
-          key: webpack-caches-{{ .Branch }}
       - save_cache:
+          key: eslint-cache-{{ .Branch }}
           paths:
             - client/.eslintcache
-          key: eslint-caches-{{ .Branch }}
       - save_cache:
+          key: babel-cache-{{ .Branch }}
           paths:
             - client/node_modules/.cache/babel-loader
-          key: babel-caches-{{ .Branch }}
 
       - restore_cache:
           keys:
@@ -178,9 +178,9 @@ jobs:
           command: |
             [ -e "server/node_modules" ] || (cd server && npm ci)
       - save_cache:
+          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
           paths:
             - server/node_modules
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
 
       - restore_cache:
           keys:
@@ -278,9 +278,9 @@ jobs:
             [ -f "./this-data-is-deployed.txt" ] || (cd server && npm run populate_db:remote)
       - run: touch ./this-data-is-deployed.txt
       - save_cache:
+          key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}-v2
           paths:
             - ./this-data-is-deployed.txt
-          key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums.txt" }}-v2
 
   deploy_server:
     working_directory: "~/InfoBase"
@@ -305,9 +305,9 @@ jobs:
             [ -f "./this-api-is-deployed.txt" ] || (cd server && ./deploy_scripts/ci_deploy_function.sh)
       - run: touch ./this-api-is-deployed.txt
       - save_cache:
+          key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
           paths:
             - ./this-api-is-deployed.txt
-          key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums.txt" }}-{{ checksum "./server/package-lock.json" }}-v2
 
   build_storybook:
     docker:
@@ -326,9 +326,9 @@ jobs:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/storybook" ] || (cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y)
       - save_cache:
+          key: storybook-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:
             - client/build
-          key: storybook-build-{{ .Branch }}-{{ .Revision }}-v2
 
       - persist_to_workspace:
           root: ./
