@@ -145,12 +145,18 @@ jobs:
       - restore_cache:
           key: eslint-caches-{{ .Branch }}
       - restore_cache:
+          key: babel-caches-{{ .Branch }}
+
+      - restore_cache:
           keys:
             - prod-build-{{ .Branch }}-{{ .Revision }}-v2
-
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "half")
+      - save_cache:
+          paths:
+            - client/build
+          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
 
       - save_cache:
           paths:
@@ -162,8 +168,8 @@ jobs:
           key: eslint-caches-{{ .Branch }}
       - save_cache:
           paths:
-            - client/build
-          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
+            - client/node_modules/.cache/babel-loader
+          key: babel-caches-{{ .Branch }}
 
       - restore_cache:
           keys:
