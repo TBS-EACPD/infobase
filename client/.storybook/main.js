@@ -1,5 +1,7 @@
 const std_lib_path = require("path");
+
 const webpack = require("@storybook/react/node_modules/webpack");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const { get_rules } = require("../build_code/webpack_common.js");
 const {
@@ -50,6 +52,10 @@ module.exports = {
         // so we need a less hacky and more exstensible way to mock these constants (in general + case by case?)
         APPLICATION_LANGUAGE: JSON.stringify(LANG),
         IS_A11Y_MODE: process.env.STORYBOOK_A11Y,
+      }),
+      new ForkTsCheckerWebpackPlugin({
+        async: true,
+        typescript: { configFile: "tsconfig.json" },
       }),
       {
         // As in the real client, the extended bootstrap stylesheet is precompiled and loaded by the initial html file
