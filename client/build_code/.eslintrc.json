@@ -4,6 +4,7 @@
   },
   "globals": {
     "process": true,
-    "__dirname": true
+    "__dirname": true,
+    "__filename": true
   }
 }

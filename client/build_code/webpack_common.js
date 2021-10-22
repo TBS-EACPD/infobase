@@ -1,10 +1,11 @@
-const std_lib_path = require("path");
+const path = require("path");
 
 const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
 const CircularDependencyPlugin = require("circular-dependency-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const _ = require("lodash");
+const string_hash = require("string-hash");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 
@@ -139,7 +140,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
 };
 
 function get_plugins({
-  is_prod_build,
   language,
   a11y_client,
   commit_sha,
@@ -221,7 +221,7 @@ function get_plugins({
   ]);
 }
 
-function get_optimizations(is_prod_build, is_ci, produce_stats) {
+function get_optimizations({ is_prod_build, produce_stats }) {
   return {
     ...(is_prod_build && {
       /*
@@ -244,21 +244,23 @@ function get_optimizations(is_prod_build, is_ci, produce_stats) {
   };
 }
 
-function create_config({
-  context,
-  entry,
-  output,
-  language,
-  a11y_client,
-  commit_sha,
-  is_prod_build,
-  local_ip,
-  is_ci,
-  target_ie11,
-  produce_stats,
-  stats_baseline,
-  stats_no_compare,
-}) {
+function create_config(options) {
+  const {
+    context,
+    entry,
+    output,
+    language,
+    a11y_client,
+    commit_sha,
+    is_prod_build,
+    local_ip,
+    is_ci,
+    target_ie11,
+    produce_stats,
+    stats_baseline,
+    stats_no_compare,
+  } = options;
+
   const new_output = _.clone(output);
   new_output.publicPath = `${CDN_URL}/app/`;
   if (CDN_URL !== ".") {
@@ -272,6 +274,30 @@ function create_config({
     context,
     entry,
     output: new_output,
+    cache: {
+      type: "filesystem",
+      /*
+        hash of options used as cache identifier, excluding some that satisfy both
+          1) change too frequently for useful caching, and
+          2) don't matter to caching (no impact on webpack config itself, just passed to build via DefinePlugin,
+            and my testing shows that is independent of the caching itself)
+
+        ... this WILL require future maintenance if options/behaviour changes, might be brittle. I chose to include ALL
+        options, with only the necessary/safe exclusions, so that ideally failure just means sub-optimal caches, rather
+        than builds with mixed caches/configs
+      */
+      name: _.chain(options)
+        .omit(["commit_sha", "local_ip"])
+        .thru((build_options) => string_hash(JSON.stringify(build_options)))
+        .toString()
+        .value(),
+      buildDependencies: {
+        // a bit vaguely named, but to clarify this means the cache will bust on any changes to _this_ module itself
+        config: [__filename],
+        // docs recommend a post-install script to clear the cache, but this seems like a better method imo
+        packages: [path.resolve(__dirname, `../package-lock.json`)],
+      },
+    },
     module: {
       rules: get_rules({
         target_ie11,
@@ -281,7 +307,6 @@ function create_config({
       noParse: /\.csv$/,
     },
     plugins: get_plugins({
-      is_prod_build,
       language,
       a11y_client,
       commit_sha,
@@ -291,11 +316,11 @@ function create_config({
       stats_baseline,
       stats_no_compare,
     }),
-    optimization: get_optimizations(is_prod_build, is_ci, produce_stats),
+    optimization: get_optimizations({ is_prod_build, produce_stats }),
     devtool: !is_prod_build ? "eval-source-map" : is_ci ? "source-map" : false,
     resolve: {
       fallback: { assert: false },
-      modules: [std_lib_path.resolve(__dirname, "../"), "node_modules/"],
+      modules: [path.resolve(__dirname, "../"), "node_modules/"],
       extensions: [".ts", ".js", ".tsx"],
     },
   };
