@@ -141,11 +141,25 @@ jobs:
           background: true
 
       - restore_cache:
+          key: webpack-caches-{{ .Branch }}
+      - restore_cache:
+          key: eslint-caches-{{ .Branch }}
+      - restore_cache:
           keys:
             - prod-build-{{ .Branch }}-{{ .Revision }}-v2
+
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "half")
+
+      - save_cache:
+          paths:
+            - client/node_modules/.cache/webpack
+          key: webpack-caches-{{ .Branch }}
+      - save_cache:
+          paths:
+            - client/.eslintcache
+          key: eslint-caches-{{ .Branch }}
       - save_cache:
           paths:
             - client/build
