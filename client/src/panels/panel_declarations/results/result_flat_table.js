@@ -146,8 +146,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
       ind.indicator.id,
       {
         subject_link: subject_link(ind.parent_node),
-        subject_full_name: `${ind.parent_node.data.name} 
-        ${text_maker(
+        subject_full_name: `${ind.parent_node.data.name} ${text_maker(
           ind.parent_node.data.subject.subject_type === "program"
             ? ind.parent_node.data.subject.subject_type
             : "core_resp"
@@ -158,6 +157,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
     ])
     .fromPairs()
     .value();
+  console.log(ind_map);
 
   const column_configs = {
     cr_or_program: {
