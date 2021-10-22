@@ -83,15 +83,19 @@ export class CanadaD3Component {
       this,
       base_dispatch_events
     );
-    window.addEventListener(
-      "resize",
-      _.debounce(() => {
-        if (this.should_graphs_update()) {
-          this.update_graphs();
-        }
-      }, 250)
-    );
+
+    window.addEventListener("resize", this.handle_resize);
   }
+
+  cleanup() {
+    window.removeEventListener("resize", this.handle_resize);
+  }
+
+  handle_resize = _.debounce(() => {
+    if (this.should_graphs_update()) {
+      this.update_graphs();
+    }
+  }, 250);
 
   should_graphs_update() {
     return window.innerWidth !== this.window_width_last_updated_at;

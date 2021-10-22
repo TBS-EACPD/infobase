@@ -110,6 +110,9 @@ class CanadaGraph extends React.PureComponent {
   componentDidUpdate() {
     this._render();
   }
+  componentWillUnmount() {
+    this.graph_instance.cleanup();
+  }
   _render() {
     const { graph_args, prov_select_callback, data, selected_year_index } =
       this.props;
@@ -121,7 +124,9 @@ class CanadaGraph extends React.PureComponent {
 
     const ticks = _.map(years, (y) => `${run_template(y)}`);
 
-    const canada_graph = new CanadaD3Component(graph_area_sel.node(), {
+    this.graph_instance?.cleanup();
+
+    this.graph_instance = new CanadaD3Component(graph_area_sel.node(), {
       main_color: get_graph_color(1),
       secondary_color: tertiaryColor,
       selected_year_index,
@@ -132,11 +137,11 @@ class CanadaGraph extends React.PureComponent {
     });
 
     let active_prov = false;
-    canada_graph.dispatch.on("dataMouseEnter", (prov) => {
+    this.graph_instance.dispatch.on("dataMouseEnter", (prov) => {
       active_prov = true;
       prov_select_callback(prov);
     });
-    canada_graph.dispatch.on("dataMouseLeave", () => {
+    this.graph_instance.dispatch.on("dataMouseLeave", () => {
       _.delay(() => {
         if (!active_prov) {
           prov_select_callback(null);
@@ -145,7 +150,7 @@ class CanadaGraph extends React.PureComponent {
       active_prov = false;
     });
 
-    canada_graph.render();
+    this.graph_instance.render();
   }
 }
 
