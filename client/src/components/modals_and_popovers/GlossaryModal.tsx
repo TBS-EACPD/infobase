@@ -1,4 +1,5 @@
 import React from "react";
+
 import { StatelessModal } from "./StatelessModal";
 
 type GlossaryModalState = {
@@ -6,7 +7,7 @@ type GlossaryModalState = {
 };
 
 type GlossaryModalProps = {
-  text: String;
+  text: string;
   body: React.ReactNode;
 };
 

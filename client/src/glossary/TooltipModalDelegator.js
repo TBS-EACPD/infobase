@@ -18,8 +18,12 @@ export class TooltipModalDelegator extends React.Component {
       return;
     }
     console.log("\ntarget");
-    console.log(target);
+    // console.log(target);
     console.dir(_.pickBy(target, (attr) => !!attr && !_.isFunction(attr)));
+    // console.log(target.childNodes);
+    // console.dir(
+    //   _.pickBy(target.firstChild, (attr) => !!attr && !_.isFunction(attr))
+    // );
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
 
@@ -42,13 +46,6 @@ export class TooltipModalDelegator extends React.Component {
     });
     console.log("new child");
     console.log(modal);
-
-    // console.dir(
-    //   _.pickBy(
-    //     ReactDOM.render(modal, document.createElement("span")),
-    //     (attr) => !!attr && !_.isFunction(attr)
-    //   )
-    // );
 
     // target.removeAttribute("data-ibtt-glossary-key");
     // target.removeAttribute("data-toggle");
