@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { StatelessModal } from "src/components/index";
+import { GlossaryModal } from "src/components/index";
 
 import { get_glossary_item_tooltip_html } from "src/models/glossary";
 
@@ -28,19 +28,17 @@ export class TooltipModalDelegator extends React.Component {
 
     let glossary_def = document.createElement("div");
     glossary_def.innerHTML = glossary_def_html_str;
-    console.log("glossary_def");
-    console.log(glossary_def);
-    console.dir(
-      _.pickBy(glossary_def, (attr) => !!attr && !_.isFunction(attr))
-    );
+    // console.log("glossary_def");
+    // console.log(glossary_def);
+    // console.dir(
+    //   _.pickBy(glossary_def, (attr) => !!attr && !_.isFunction(attr))
+    // );
     // TODO: deal with the modal content
     // console.log("textContent:", glossary_def.textContent);
 
-    const modal = React.createElement(StatelessModal, {
-      show: this.state.show_modal,
+    const modal = React.createElement(GlossaryModal, {
+      text: target.innerText,
       body: glossary_def.innerText, // using glossary_def gives an error
-      size: "sm",
-      on_close_callback: this.closeModal,
     });
     console.log("new child");
     console.log(modal);
@@ -52,23 +50,12 @@ export class TooltipModalDelegator extends React.Component {
     //   )
     // );
 
-    target.removeAttribute("data-ibtt-glossary-key");
-    target.removeAttribute("data-toggle");
+    // target.removeAttribute("data-ibtt-glossary-key");
+    // target.removeAttribute("data-toggle");
     target.replaceChildren(
       ReactDOM.render(modal, document.createElement("span"))
     );
   };
-
-  //   closeModal = () => {
-  //     console.log("TooltipModalDelegator - closeModal()");
-  //     this.setState({ show_modal: false });
-  //     console.log(this.state);
-  //   };
-
-  closeModal() {
-    console.log("closeModal");
-    this.setState({ show_modal: false });
-  }
 
   componentDidMount() {
     window.addEventListener("click", this.replaceWithModalBtn);

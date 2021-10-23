@@ -30,7 +30,6 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
     this.closeModal();
   }
   closeModal = () => {
-    console.log("StatelessModal - closeModal()");
     this.props.on_close_callback();
   };
   render() {
@@ -46,8 +45,6 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
       additional_dialog_class,
       size,
     } = this.props;
-    console.log("StatelessModal - render");
-    console.log({ show });
 
     const default_header = (
       <div className="modal-dialog__title-layout">
