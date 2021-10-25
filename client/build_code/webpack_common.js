@@ -298,6 +298,7 @@ function create_config(options) {
         // docs recommend a post-install script to clear the cache, but this seems like a better method imo
         packages: [path.resolve(__dirname, `../package-lock.json`)],
       },
+      compression: is_ci ? "gzip" : false,
     },
     module: {
       rules: get_rules({
