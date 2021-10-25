@@ -2,22 +2,27 @@ import _ from "lodash";
 import React from "react";
 
 import "./GlossaryMenu.scss";
-import { glossaryEntryStore } from "src/models/glossary";
 
-import { IconSearch, IconX } from "src/icons/icons";
+import { IconX } from "src/icons/icons";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
-import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
+import { SearchConfigSidebar } from "src/search/SearchConfigSidebar";
 
 import { SidebarContent } from "./GlossarySidebarContent";
-
-import glossary_text from "./glossary.yaml";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GlossaryMenuProps {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GlossaryMenuState {
   isOpen: boolean;
+  results: ResultProps[];
+}
+
+export interface ResultProps {
+  id: string;
+  title: string;
+  translation: string;
+  raw_definition: string;
 }
 
 export class GlossaryMenu extends React.Component<
@@ -32,6 +37,7 @@ export class GlossaryMenu extends React.Component<
 
     this.state = {
       isOpen: true,
+      results: [],
     };
   }
 
@@ -40,6 +46,12 @@ export class GlossaryMenu extends React.Component<
       isOpen: false,
     });
   }
+
+  getResults = (childData: ResultProps[]) => {
+    this.setState({
+      results: childData,
+    });
+  };
 
   render() {
     return (
@@ -69,25 +81,12 @@ export class GlossaryMenu extends React.Component<
                 Glossary
               </h1>
               <div className="search-wrapper">
-                <div className="search">
-                  <div className="icon-wrapper">
-                    <span aria-hidden="true">
-                      <IconSearch
-                        width="30px"
-                        color="#2C70C9"
-                        alternate_color={false}
-                      />
-                    </span>
-                  </div>
-                  <input
-                    placeholder={"Search for a term..."}
-                    autoComplete="off"
-                    value={""}
-                    type="text"
-                    role="combobox"
-                    aria-autocomplete="none"
-                  />
-                </div>
+                <SearchConfigSidebar
+                  placeholder={"testing"}
+                  search_configs={[glossary_search_config]}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  getResults={(data: ResultProps[]) => this.getResults(data)}
+                />
               </div>
               <div className="glossary-example">
                 Example: &quot;Capital Vote&quot;
@@ -95,7 +94,11 @@ export class GlossaryMenu extends React.Component<
             </div>
           </div>
           <div className="glossary-sidebar-content-wrapper">
-            <SidebarContent title={null} def={null} />
+            <SidebarContent
+              title={null}
+              def={null}
+              results={this.state.results}
+            />
           </div>
         </aside>
       </div>
