@@ -3,7 +3,7 @@ set -e # will exit if any command has non-zero exit value
 
 #meant to be called with source, sets prod env vars
 
-export IS_PROD_RELEASE="true"
+export IS_ACTUAL_PROD_RELEASE="true"
 export BUILD_DIR="build_prod"
 export CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
 
