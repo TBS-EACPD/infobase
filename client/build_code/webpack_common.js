@@ -11,7 +11,7 @@ const webpack = require("webpack");
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
-const IS_PROD_RELEASE = process.env.IS_PROD_RELEASE || false;
+const IS_ACTUAL_PROD_RELEASE = process.env.IS_ACTUAL_PROD_RELEASE || false;
 const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
 
 const get_rules = ({ language, target_ie11, is_prod_build }) => {
@@ -161,7 +161,7 @@ function get_plugins({
       ),
       APPLICATION_LANGUAGE: JSON.stringify(language),
       IS_A11Y_MODE: !!a11y_client,
-      IS_DEV: !IS_PROD_RELEASE,
+      IS_DEV: !IS_ACTUAL_PROD_RELEASE,
       IS_DEV_LINK,
       IS_CI: JSON.stringify(is_ci),
       LOCAL_IP: JSON.stringify(local_ip),
@@ -274,7 +274,8 @@ function create_config(options) {
     context,
     entry,
     output: new_output,
-    cache: {
+    // TODO enable filesystem caching for actual prod release builds once fully confident in the caching setup
+    cache: !IS_ACTUAL_PROD_RELEASE && {
       type: "filesystem",
       /*
         hash of options used as cache identifier, excluding some that satisfy both
