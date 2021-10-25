@@ -19,14 +19,16 @@ const GlossarySearch = withRouter(
       const { history } = this.props;
 
       return (
-        <SearchConfigTypeahead
-          placeholder={glossary_placeholder}
-          search_configs={[glossary_search_config]}
-          on_select={({ id }) =>
-            history.push(glossary_href(id).replace("#", "/"))
-          }
-          min_length={2}
-        />
+        <div>
+          <SearchConfigTypeahead
+            placeholder={glossary_placeholder}
+            search_configs={[glossary_search_config]}
+            on_select={({ id }) =>
+              history.push(glossary_href(id).replace("#", "/"))
+            }
+            min_length={2}
+          />
+        </div>
       );
     }
   }
