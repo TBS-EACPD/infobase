@@ -27,17 +27,19 @@ export class TooltipModalDelegator extends React.Component {
     glossary_def.innerHTML = glossary_def_html_str;
 
     const modal = React.createElement(ModalButton, {
-      text: target.innerText,
       body: glossary_def.innerText, // using glossary_def gives an error TODO: deal with modal body
     });
 
-    const modal_container = document.createElement("span", {
-      id: "glossary_modal",
-    });
+    const modal_container = document.createElement("span");
+    modal_container.setAttribute("id", "modal_container_span");
 
     ReactDOM.render(modal, modal_container);
 
-    target.append(modal_container);
+    if (
+      !_.pickBy(target.children, (child) => child.id == "modal_container_span")
+    ) {
+      target.append(modal_container);
+    }
   };
 
   componentDidMount() {
