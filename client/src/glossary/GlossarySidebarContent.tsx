@@ -10,6 +10,7 @@ import { getOperationDefinition } from "@apollo/client/utilities";
 interface SidebarContentProps {
   title: string | null;
   def: string | null;
+  results: ResultProps[];
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SidebarContentState {
@@ -18,27 +19,11 @@ interface SidebarContentState {
   def: string | null;
 }
 
-function get_glossary_items_by_letter() {
-  const glossary_items = glossaryEntryStore.get_all();
-
-  const glossary_items_by_letter = _.chain(glossary_items)
-    .groupBy((item) => {
-      const first_letter = item.title[0];
-      if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
-        return "E";
-      }
-      return first_letter;
-    })
-    .map((items, letter) => {
-      const sorted_items = _.sortBy(items, "title");
-      return {
-        items: sorted_items,
-        letter,
-      };
-    })
-    .sortBy("letter")
-    .value();
-  return glossary_items_by_letter;
+export interface ResultProps {
+  id: string;
+  title: string;
+  translation: string;
+  raw_definition: string;
 }
 
 export class SidebarContent extends React.Component<
@@ -69,8 +54,34 @@ export class SidebarContent extends React.Component<
     });
   }
 
+  get_glossary_items_by_letter() {
+    const glossary_items =
+      this.props.results.length == 0
+        ? glossaryEntryStore.get_all()
+        : this.props.results;
+
+    const glossary_items_by_letter = _.chain(glossary_items)
+      .groupBy((item) => {
+        const first_letter = item.title[0];
+        if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
+          return "E";
+        }
+        return first_letter;
+      })
+      .map((items, letter) => {
+        const sorted_items = _.sortBy(items, "title");
+        return {
+          items: sorted_items,
+          letter,
+        };
+      })
+      .sortBy("letter")
+      .value();
+    return glossary_items_by_letter;
+  }
+
   render() {
-    const items_by_letter = get_glossary_items_by_letter();
+    const items_by_letter = this.get_glossary_items_by_letter();
     return (
       <div className="glossary-sidebar-content">
         {this.state.defOpen ? (
