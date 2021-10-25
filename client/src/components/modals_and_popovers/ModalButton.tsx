@@ -7,7 +7,6 @@ type ModalButtonState = {
 };
 
 type ModalButtonProps = {
-  text: string;
   body: React.ReactNode;
 };
 
@@ -17,26 +16,21 @@ export class ModalButton extends React.Component<
 > {
   state = { show_modal: true };
 
-  toggle_modal = () =>
-    this.setState((prev_state) => ({ show_modal: !prev_state.show_modal }));
+  close_modal = () => {
+    this.setState({ show_modal: false });
+  };
 
   render() {
-    const { text, body } = this.props;
+    const { body } = this.props;
     const { show_modal } = this.state;
-    console.log("\nModalButton - render");
-    console.log(this.props);
-    console.log(this.state);
 
     return (
-      <>
-        <button onClick={this.toggle_modal}>{text}</button>
-        <StatelessModal
-          show={show_modal}
-          size="sm"
-          body={body}
-          on_close_callback={this.toggle_modal}
-        />
-      </>
+      <StatelessModal
+        show={show_modal}
+        size="sm"
+        body={body}
+        on_close_callback={this.close_modal}
+      />
     );
   }
 }

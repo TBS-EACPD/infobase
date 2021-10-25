@@ -124,9 +124,6 @@ const TooltipActivator = _.isUndefined(MutationObserver)
             ...incoming_tooltips,
           ];
         }
-        console.log("current_tooltip_nodes, this.tooltip_instances");
-        console.log(current_tooltip_nodes);
-        console.log(this.tooltip_instances);
       }
       componentWillUnmount() {
         this.observer.disconnect();

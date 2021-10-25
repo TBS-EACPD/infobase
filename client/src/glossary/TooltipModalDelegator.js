@@ -17,13 +17,6 @@ export class TooltipModalDelegator extends React.Component {
     if (!target) {
       return;
     }
-    console.log("\ntarget");
-    // console.log(target);
-    console.dir(_.pickBy(target, (attr) => !!attr && !_.isFunction(attr)));
-    // console.log(target.childNodes);
-    // console.dir(
-    //   _.pickBy(target.firstChild, (attr) => !!attr && !_.isFunction(attr))
-    // );
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
 
@@ -32,26 +25,19 @@ export class TooltipModalDelegator extends React.Component {
 
     let glossary_def = document.createElement("div");
     glossary_def.innerHTML = glossary_def_html_str;
-    // console.log("glossary_def");
-    // console.log(glossary_def);
-    // console.dir(
-    //   _.pickBy(glossary_def, (attr) => !!attr && !_.isFunction(attr))
-    // );
-    // TODO: deal with the modal content
-    // console.log("textContent:", glossary_def.textContent);
 
     const modal = React.createElement(ModalButton, {
       text: target.innerText,
-      body: glossary_def.innerText, // using glossary_def gives an error
+      body: glossary_def.innerText, // using glossary_def gives an error TODO: deal with modal body
     });
-    console.log("new child");
-    console.log(modal);
 
-    // target.removeAttribute("data-ibtt-glossary-key");
-    // target.removeAttribute("data-toggle");
-    target.replaceChildren(
-      ReactDOM.render(modal, document.createElement("span"))
-    );
+    const modal_container = document.createElement("span", {
+      id: "glossary_modal",
+    });
+
+    ReactDOM.render(modal, modal_container);
+
+    target.append(modal_container);
   };
 
   componentDidMount() {
@@ -63,7 +49,6 @@ export class TooltipModalDelegator extends React.Component {
   }
 
   render() {
-    console.log("TooltipModalDelegator - render()");
     return this.props.children;
   }
 }
