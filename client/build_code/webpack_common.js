@@ -8,6 +8,7 @@ const _ = require("lodash");
 const string_hash = require("string-hash");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
+const { RetryChunkLoadPlugin } = require("webpack-retry-chunk-load-plugin");
 
 const CDN_URL = process.env.CDN_URL || ".";
 const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
@@ -165,6 +166,10 @@ function get_plugins({
       IS_DEV_LINK,
       IS_CI: JSON.stringify(is_ci),
       LOCAL_IP: JSON.stringify(local_ip),
+    }),
+    new RetryChunkLoadPlugin({
+      retryDelay: 100,
+      maxRetries: 3,
     }),
     new ESLintPlugin({ extensions: ["js", "ts", "tsx"], cache: true }),
     new ForkTsCheckerWebpackPlugin({
