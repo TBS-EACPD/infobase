@@ -142,10 +142,6 @@ jobs:
 
       - restore_cache:
           key: webpack-caches-{{ .Branch }}
-      - restore_cache:
-          key: eslint-cache-{{ .Branch }}
-      - restore_cache:
-          key: babel-cache-{{ .Branch }}
 
       - restore_cache:
           keys:
@@ -162,14 +158,8 @@ jobs:
           key: webpack-caches-{{ .Branch }}
           paths:
             - client/node_modules/.cache/webpack
-      - save_cache:
-          key: eslint-cache-{{ .Branch }}
-          paths:
-            - client/.eslintcache
-      - save_cache:
-          key: babel-cache-{{ .Branch }}
-          paths:
             - client/node_modules/.cache/babel-loader
+            - client/.eslintcache
 
       - restore_cache:
           keys:
