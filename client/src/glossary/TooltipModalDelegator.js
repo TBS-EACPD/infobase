@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { GlossaryModal } from "src/components/index";
+import { ModalButton } from "src/components/index";
 
 import { get_glossary_item_tooltip_html } from "src/models/glossary";
 
@@ -40,7 +40,7 @@ export class TooltipModalDelegator extends React.Component {
     // TODO: deal with the modal content
     // console.log("textContent:", glossary_def.textContent);
 
-    const modal = React.createElement(GlossaryModal, {
+    const modal = React.createElement(ModalButton, {
       text: target.innerText,
       body: glossary_def.innerText, // using glossary_def gives an error
     });

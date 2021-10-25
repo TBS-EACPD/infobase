@@ -52,8 +52,8 @@ export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
 export {
   StatelessModal,
   FixedPopover,
+  ModalButtonWithRouter,
   ModalButton,
-  GlossaryModal,
 } from "./modals_and_popovers/index";
 export { DisplayTable } from "./DisplayTable/index";
 

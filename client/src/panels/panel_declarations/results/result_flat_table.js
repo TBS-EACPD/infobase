@@ -5,7 +5,11 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { LeafSpinner, DisplayTable, ModalButton } from "src/components/index";
+import {
+  LeafSpinner,
+  DisplayTable,
+  ModalButtonWithRouter,
+} from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 import * as Results from "src/models/results";
@@ -175,7 +179,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
         const indicator = Indicator.lookup(ind_map[value].id);
 
         return (
-          <ModalButton
+          <ModalButtonWithRouter
             title={text_maker("indicator_display_title")}
             button_text={indicator.name}
             aria_label={`${
@@ -184,7 +188,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
             show_condition={{ name: "indicator", value: ind_map[value].id }}
           >
             <IndicatorDisplayPanel id={ind_map[value].id} subject={subject} />
-          </ModalButton>
+          </ModalButtonWithRouter>
         );
       },
       plain_formatter: (value) => ind_map[value].name,
