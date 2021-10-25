@@ -185,6 +185,10 @@ jobs:
             - server/transpiled_build
           key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
 
+      # TODO persist_to_workspace only works on an allow list basis which is a bother to maintain, currently seems better
+      # (if not ideally efficient) to persist everything with exclusions of large and unnecessary directories made via rm's in advance
+      - run: rm -rf client/node_modules/.cache/webpack
+
       - persist_to_workspace:
           root: ./
           paths:
