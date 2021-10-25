@@ -140,8 +140,9 @@ jobs:
             done
           background: true
 
+      - run: echo $([[ $CIRCLE_PREVIOUS_BUILD_NUM == 0 ]] && echo "master" || echo $CIRCLE_BRANCH) > webpack-cache-load-branch.txt
       - restore_cache:
-          key: webpack-caches-{{ .Branch }}
+          key: webpack-caches-{{ checksum "webpack-cache-load-branch.txt" }}
 
       - restore_cache:
           keys:
@@ -154,8 +155,9 @@ jobs:
           paths:
             - client/build
 
+      - run: echo $CIRCLE_BRANCH > webpack-cache-save-branch.txt
       - save_cache:
-          key: webpack-caches-{{ .Branch }}
+          key: webpack-caches-{{ checksum "webpack-cache-save-branch.txt" }}
           paths:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
