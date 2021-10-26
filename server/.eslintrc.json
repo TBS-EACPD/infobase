@@ -2,6 +2,7 @@
   "plugins": ["node"],
   "extends": ["../.eslintrc.json", "plugin:node/recommended"],
   "parserOptions": {
+    "requireConfigFile": false,
     "ecmaFeatures": {
       "experimentalDecorators": true
     },
