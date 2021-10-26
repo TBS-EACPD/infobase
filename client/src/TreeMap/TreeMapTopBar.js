@@ -45,7 +45,8 @@ export class TreeMapTopbar extends React.Component {
                 className="TreeMap__ZoomControl--no-zoom-out"
                 style={{ paddingRight: "10px" }}
               >
-                {text_maker("click_to_zoom_out")}:
+                {text_maker("click_to_zoom_out")}
+                {":"}
               </li>
               <li className="TreeMap__ZoomControl--has-zoom-out">
                 <span

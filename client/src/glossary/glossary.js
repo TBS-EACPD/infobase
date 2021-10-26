@@ -61,7 +61,7 @@ const table_links_by_tag = _.chain(tables)
             marginRight: "1em",
           }}
         >
-          • <a href={rpb_link({ table })}>{table.name}</a>
+          {"•"} <a href={rpb_link({ table })}>{table.name}</a>
         </li>
       ))
       .thru((list_items) => <ul>{list_items}</ul>)

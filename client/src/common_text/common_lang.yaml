@@ -2,6 +2,9 @@
 ##################################
 # General Section
 ##################################
+gcinfobase:
+  en: GC InfoBase
+  fr: InfoBase du GC
 performance:
   en: Performance
   fr: Performance

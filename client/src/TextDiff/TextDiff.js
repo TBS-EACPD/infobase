@@ -208,8 +208,9 @@ const difference_report = (diff, key) => {
         <Fragment key={iix}>
           {is_a11y_mode && part.removed && (
             <span className="text-diff__text-part--removed">
-              {" "}
-              [{text_maker("a11y_begin_removed")}]
+              {" ["}
+              {text_maker("a11y_begin_removed")}
+              {"]"}
             </span>
           )}
           <span
@@ -220,8 +221,9 @@ const difference_report = (diff, key) => {
           </span>
           {is_a11y_mode && part.removed && (
             <span className="text-diff__text-part--removed">
-              {" "}
-              [{text_maker("a11y_end_removed")}]
+              {" ["}
+              {text_maker("a11y_end_removed")}
+              {"]"}
             </span>
           )}
         </Fragment>
@@ -234,8 +236,9 @@ const difference_report = (diff, key) => {
         <Fragment key={iix}>
           {is_a11y_mode && part.added && (
             <span className="text-diff__text-part--added">
-              {" "}
-              [{text_maker("a11y_begin_added")}]
+              {" ["}
+              {text_maker("a11y_begin_added")}
+              {"]"}
             </span>
           )}
           <span
@@ -246,7 +249,9 @@ const difference_report = (diff, key) => {
           </span>
           {is_a11y_mode && part.added && (
             <span className="text-diff__text-part--added">
-              [{text_maker("a11y_end_added")}]
+              {" ["}
+              {text_maker("a11y_end_added")}
+              {"]"}
             </span>
           )}
         </Fragment>

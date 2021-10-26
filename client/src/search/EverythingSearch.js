@@ -96,7 +96,10 @@ const SearchOptions = ({ option_checkboxes }) => (
     dropdown_content_class_name="no-right"
     dropdown_content={
       <fieldset>
-        <legend>{text_maker("everything_search_description")}:</legend>
+        <legend>
+          {text_maker("everything_search_description")}
+          {":"}
+        </legend>
         <div className="everything-search-options">{option_checkboxes}</div>
       </fieldset>
     }

@@ -80,13 +80,13 @@ const subject_link = (node) => (
     </a>
     <span className="text-nowrap">
       {" "}
-      (
+      {"("}
       {text_maker(
         node.data.subject.subject_type === "program"
           ? node.data.subject.subject_type
           : "core_resp"
       )}
-      )
+      {")"}
     </span>
   </span>
 );

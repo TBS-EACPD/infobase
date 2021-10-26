@@ -14,7 +14,7 @@ export default class Gauge extends React.Component {
     return (
       <div>
         <h4 style={{ textAlign: "center" }}>
-          {gauge_value} / {total_value}
+          {gauge_value} {"/"} {total_value}
         </h4>
         <div
           style={{

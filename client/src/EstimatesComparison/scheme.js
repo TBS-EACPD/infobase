@@ -443,11 +443,21 @@ const get_column_defs = (use_legal_titles) => [
         );
 
         if (val > 0) {
-          return <Green>+{unsigned_percent_display}</Green>;
+          return (
+            <Green>
+              {"+"}
+              {unsigned_percent_display}
+            </Green>
+          );
         } else if (val === 0) {
           return unsigned_percent_display;
         } else {
-          return <Red>-{unsigned_percent_display}</Red>;
+          return (
+            <Red>
+              {"-"}
+              {unsigned_percent_display}
+            </Red>
+          );
         }
       }
     },

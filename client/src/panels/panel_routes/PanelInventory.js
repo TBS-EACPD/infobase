@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-literals */
 import _ from "lodash";
 import React from "react";
 import { Link } from "react-router-dom";

@@ -216,7 +216,7 @@ class EmailFrontend extends React.Component {
               <legend>
                 {field_info.form_label[lang]}
                 {field_info.required && (
-                  <span style={{ color: textRed }}>*</span>
+                  <span style={{ color: textRed }}>{"*"}</span>
                 )}
               </legend>
               <div
@@ -272,7 +272,7 @@ class EmailFrontend extends React.Component {
               <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[lang]}
                 {connected_required && (
-                  <span style={{ color: textRed }}>*</span>
+                  <span style={{ color: textRed }}>{"*"}</span>
                 )}
               </label>
               <textarea

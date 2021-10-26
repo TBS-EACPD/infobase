@@ -85,7 +85,7 @@ class BreadCrumbs extends React.Component {
               inline={true}
               aria_hide={true}
             />
-            InfoBase
+            {trivial_text_maker("gcinfobase")}
           </a>
         </li>
         {_.map(crumbs, (display, ix) => (

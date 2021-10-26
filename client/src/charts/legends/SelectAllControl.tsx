@@ -13,7 +13,8 @@ export const SelectAllControl = ({
 }: SelectAllControlProps) => (
   <div role="group" style={{ display: "flex", flexDirection: "row" }}>
     <div style={{ lineHeight: 2 }}>
-      <TrivialTM k="select" />:
+      <TrivialTM k="select" />
+      {":"}
     </div>
     <button
       style={{ margin: "0px 5px 0px 5px" }}
@@ -22,7 +23,7 @@ export const SelectAllControl = ({
     >
       <TrivialTM k="all" />
     </button>
-    <span style={{ lineHeight: 2 }}> | </span>
+    <span style={{ lineHeight: 2 }}> {"|"} </span>
     <button
       style={{ marginLeft: "5px" }}
       className="btn-ib-primary"
