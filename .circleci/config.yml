@@ -141,10 +141,11 @@ jobs:
           background: true
 
       - restore_cache:
-          key: has-webpack-caches-{{ .Branch }}
-      - run: echo $([[ -f "client/this-branch-has-webpack-caches" ]] && echo $CIRCLE_BRANCH || echo "master") > webpack-cache-load-target
-      - restore_cache:
-          key: webpack-caches-{{ checksum "webpack-cache-load-target" }}
+          keys:
+            # the trailing - means CircleCI will use the latest key matching up to that point
+            - webpack-caches-{{ .Branch }}-
+            # fall back to caches from master if no hits for the current branch
+            - webpack-caches-master-
 
       - restore_cache:
           keys:
@@ -157,19 +158,12 @@ jobs:
           paths:
             - client/build
 
-      - run: echo $CIRCLE_BRANCH > webpack-cache-save-target
       - save_cache:
-          key: webpack-caches-{{ checksum "webpack-cache-save-target" }}
+          key: webpack-caches-{{ .Branch }}-{{ .Revision }}
           paths:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
             - client/.eslintcache
-
-      - run: touch "client/this-branch-has-webpack-caches"
-      - save_cache:
-          key: has-webpack-caches-{{ .Branch }}
-          paths:
-            - client/this-branch-has-webpack-caches
 
       - restore_cache:
           keys:
