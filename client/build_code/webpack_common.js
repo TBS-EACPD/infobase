@@ -282,7 +282,7 @@ function create_config(options) {
     // TODO enable filesystem caching for actual prod release builds once fully confident in the caching setup
     cache: !IS_ACTUAL_PROD_RELEASE && {
       type: "filesystem",
-      compression: false,
+      compression: "gzip",
       /*
         hash of options used as cache identifier, excluding some that satisfy both
           1) change too frequently for useful caching, and

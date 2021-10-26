@@ -143,13 +143,13 @@ jobs:
       - restore_cache:
           keys:
             # the trailing - means CircleCI will use the latest key matching up to that point
-            - webpack-caches-{{ .Branch }}-
-            # fall back to caches from master if no hits for the current branch
-            - webpack-caches-master-
+            - webpack-caches-v2-{{ .Branch }}-
+            # fall back to latest caches from master if no hits for the current branch
+            - webpack-caches-v2-master-
 
       - restore_cache:
           keys:
-            - prod-build-{{ .Branch }}-{{ .Revision }}-v2
+            - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "half")
@@ -159,7 +159,7 @@ jobs:
             - client/build
 
       - save_cache:
-          key: webpack-caches-{{ .Branch }}-{{ .Revision }}
+          key: webpack-caches-v2-{{ .Branch }}-{{ .Revision }}
           paths:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
