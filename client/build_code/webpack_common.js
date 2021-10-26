@@ -249,21 +249,23 @@ function get_optimizations({ is_prod_build, produce_stats }) {
   };
 }
 
-function create_config({
-  context,
-  entry,
-  output,
-  language,
-  a11y_client,
-  commit_sha,
-  is_prod_build,
-  local_ip,
-  is_ci,
-  target_ie11,
-  produce_stats,
-  stats_baseline,
-  stats_no_compare,
-}) {
+function create_config(options) {
+  const {
+    context,
+    entry,
+    output,
+    language,
+    a11y_client,
+    commit_sha,
+    is_prod_build,
+    local_ip,
+    is_ci,
+    target_ie11,
+    produce_stats,
+    stats_baseline,
+    stats_no_compare,
+  } = options;
+
   const new_output = _.clone(output);
   new_output.publicPath = `${CDN_URL}/app/`;
   if (CDN_URL !== ".") {
@@ -271,32 +273,30 @@ function create_config({
   }
 
   return {
+    name: language,
     mode: is_prod_build ? "production" : "development",
     target: _.compact(["web", target_ie11 && "es5"]),
     context,
     entry,
     output: new_output,
-    // TODO enable filesystem caching for actual prod release builds once fully confident in the caching setup
     cache: !IS_ACTUAL_PROD_RELEASE && {
       type: "filesystem",
       compression: "gzip",
       /*
-        Hash of a subset of build options to use as the cache identifier. Need to include any that change webpack's config directly
-        but can safely ignore any that only effect optimizations and plugins.
-        ... this WILL require future maintenance if options/their effect on the final config changes. Might be brittle.
+        Currently, webpack requires users to manually version (or otherwise bust) caches when webpack/plugin configuration changes,
+        or else the cache use could potentially produce broken builds. From my testing, very few of our options produce posioned builds
+        on change BUT better safe (and slightly inefficient) than sorry. Using a hash of the build options as a cache identifier, 
+        excluding some safe/unstable options, to achieve this. 
+
+        ... this WILL require future maintenance if options/behaviour changes, might be brittle. I chose to include ALL
+        options, with only the necessary/safe exclusions, so that ideally failure just means sub-optimal caches, rather
+        than builds with mixed caches/configs.
       */
-      name: _.toString(
-        string_hash(
-          JSON.stringify({
-            context,
-            entry,
-            new_output,
-            language,
-            target_ie11,
-            is_prod_build,
-          })
-        )
-      ),
+      name: _.chain({ ...options, new_output })
+        .omit(["commit_sha", "local_ip"])
+        .thru((build_options) => string_hash(JSON.stringify(build_options)))
+        .toString()
+        .value(),
       buildDependencies: {
         // a bit vaguely named, but to clarify this means the cache will bust on any changes to _this_ module itself
         config: [__filename],

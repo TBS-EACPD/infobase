@@ -143,9 +143,7 @@ jobs:
       - restore_cache:
           keys:
             # the trailing - means CircleCI will use the latest key matching up to that point
-            - webpack-caches-v3-{{ .Branch }}-
-            # fall back to latest caches from master if no hits for the current branch
-            - webpack-caches-v3-master-
+            - webpack-caches-v5-{{ .Branch }}-
 
       - restore_cache:
           keys:
@@ -159,7 +157,7 @@ jobs:
             - client/build
 
       - save_cache:
-          key: webpack-caches-v3-{{ .Branch }}-{{ .Revision }}
+          key: webpack-caches-v5-{{ .Branch }}-{{ .Revision }}
           paths:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
@@ -187,8 +185,8 @@ jobs:
             - server/transpiled_build
           key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
 
-      # TODO persist_to_workspace only works on an allow list basis which is a bother to maintain, currently seems better
-      # (if not ideally efficient) to persist everything with exclusions of large and unnecessary directories made via rm's in advance
+      # TODO persist_to_workspace only works on an allow list basis which is a bother to maintain, currently seems better (if not ideally
+      # efficient) to persist everything with specific exclusions of large and unnecessary directories made via rm's in advance
       - run: rm -rf client/node_modules/.cache/webpack
 
       - persist_to_workspace:
