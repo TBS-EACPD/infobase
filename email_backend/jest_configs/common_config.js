@@ -3,7 +3,7 @@ const reporters = !process.env.DO_NOT_PRINT_COVERAGE
   : ["json"];
 
 export const common_config_rules = {
-  rootDir: "../",
+  roots: ["../src", "../scripts"],
   coverageReporters: reporters,
   collectCoverageFrom: [`<rootDir>/src/**/*.js`],
   coveragePathIgnorePatterns: [
