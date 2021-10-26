@@ -46,10 +46,6 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
   const test_template_name = "test_template.test";
   const completed_test_template = {
-    meta: {
-      subject_template: "Test subject: [${enums}], [${radio}], ${number}",
-    },
-
     enums: ["bug", "other"],
     radio: ["yes"],
     text: "a",

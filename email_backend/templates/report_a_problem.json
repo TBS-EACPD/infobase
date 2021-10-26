@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "subject_template": "Report a problem: [${issue_type}], ${lang}, ${route}, ${sha}, ${client_id}"
-  },
-
   "issue_type": {
     "required": true,
     "value_type": "enums",

@@ -20,8 +20,6 @@ const test_template = [
     required_automatic: "blah",
     optional_automatic: "bluh",
     email_meta: {
-      to: "<Recipient> recipient@email.com",
-      from: "<Sender> sender@email.com",
       server_time: "2020-08-04T17:23:05.258Z",
       date: "8/4/2020",
       time: "1:23:05 PM",
@@ -38,8 +36,6 @@ const test_template = [
     required_automatic: "blah",
     optional_automatic: "bluh",
     email_meta: {
-      to: "<Recipient> recipient@email.com",
-      from: "<Sender> sender@email.com",
       server_time: "2020-07-21T16:56:28.611Z",
       date: "7/21/2020",
       time: "12:56:28 PM",
@@ -55,8 +51,6 @@ const test_template = [
 
     required_automatic: "blah",
     email_meta: {
-      to: "<Recipient> recipient@email.com",
-      from: "<Sender> sender@email.com",
       server_time: "2020-07-16T18:15:16.063Z",
       date: "7/16/2020",
       time: "2:15:16 PM",

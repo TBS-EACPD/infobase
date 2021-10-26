@@ -57,18 +57,15 @@ const verify_values_are_expected_and_match_value_types = (
     .value();
 
 const validate_completed_template = (original_template, completed_template) => {
-  const field_templates = _.omit(original_template, "meta");
-  const completed_fields = _.omit(completed_template, "meta");
-
   const required_fields_present = verify_required_fields_present(
-    field_templates,
-    completed_fields
+    original_template,
+    completed_template
   );
 
   const values_are_expected_and_match_value_types =
     verify_values_are_expected_and_match_value_types(
-      field_templates,
-      completed_fields
+      original_template,
+      completed_template
     );
 
   return required_fields_present && values_are_expected_and_match_value_types;
