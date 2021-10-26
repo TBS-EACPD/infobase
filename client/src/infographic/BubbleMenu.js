@@ -29,9 +29,8 @@ const BubbleMenu = ({ items, active_item_id }) => {
               >
                 {title}
                 {id === active_item_id && (
-                  /* eslint-disable react/jsx-no-literals */
                   <span>
-                    - <TM k="you_are_here" />
+                    {"-"} <TM k="you_are_here" />
                   </span>
                 )}
               </a>
