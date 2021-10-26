@@ -282,6 +282,7 @@ function create_config(options) {
     // TODO enable filesystem caching for actual prod release builds once fully confident in the caching setup
     cache: !IS_ACTUAL_PROD_RELEASE && {
       type: "filesystem",
+      compression: false,
       /*
         hash of options used as cache identifier, excluding some that satisfy both
           1) change too frequently for useful caching, and
@@ -303,7 +304,6 @@ function create_config(options) {
         // docs recommend a post-install script to clear the cache, but this seems like a better method imo
         packages: [path.resolve(__dirname, `../package-lock.json`)],
       },
-      compression: is_ci ? "gzip" : false,
     },
     module: {
       rules: get_rules({

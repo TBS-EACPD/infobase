@@ -144,7 +144,7 @@ jobs:
           key: has-webpack-caches-{{ .Branch }}
       - run: echo $([[ -f "client/this-branch-has-webpack-caches" ]] && echo $CIRCLE_BRANCH || echo "master") > webpack-cache-load-target
       - restore_cache:
-          key: webpack-caches-{{ checksum "webpack-cache-load-target" }}-v2
+          key: webpack-caches-{{ checksum "webpack-cache-load-target" }}
 
       - restore_cache:
           keys:
@@ -159,7 +159,7 @@ jobs:
 
       - run: echo $CIRCLE_BRANCH > webpack-cache-save-target
       - save_cache:
-          key: webpack-caches-{{ checksum "webpack-cache-save-target" }}-v2
+          key: webpack-caches-{{ checksum "webpack-cache-save-target" }}
           paths:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
