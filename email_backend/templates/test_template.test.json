@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "subject_template": "Test subject: [${enums}], ${radio}, ${number}"
-  },
-
   "enums": {
     "required": true,
     "value_type": "enums",

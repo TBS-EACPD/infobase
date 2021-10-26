@@ -1,8 +1,4 @@
 {
-  "meta": {
-    "subject_template": "Feedback: [${found_info}], [${easily_nav}], [${useful_info}], [${user_type}], [${device_type}], [${familiar_info}], ${would_recommend}, ${lang}, ${route}, ${sha}, ${client_id}"
-  },
-
   "found_info": {
     "required": true,
     "form_type": "radio",

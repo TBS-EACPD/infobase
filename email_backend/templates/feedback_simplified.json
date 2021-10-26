@@ -1,7 +1,4 @@
 {
-  "meta": {
-    "subject_template": "Feedback Simplified: [${would_recommend}], [${useful_info}], ${lang}, ${route}, ${sha}, ${client_id}"
-  },
   "useful_info": {
     "required": true,
     "form_type": "radio",
