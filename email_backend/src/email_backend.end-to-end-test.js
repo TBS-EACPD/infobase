@@ -1,77 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
 
-const promise_timeout_race = (
-  promise,
-  time_limit,
-  timeout_callback = _.noop
-) => {
-  const timeout_promise = new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      clearTimeout(timeout);
-
-      timeout_callback(resolve, reject);
-    }, time_limit);
-  });
-
-  return Promise.race([promise, timeout_promise]);
-};
-
-// mocking JUST nodemailer.createTransport, from nodemailer leaving everything else with its original implementation...
-// is there a more direct way to do this?
-jest.mock("nodemailer");
-import nodemailer from "nodemailer";
-const { ...actual_nodemailer } = jest.requireActual("nodemailer");
-
-_.each(nodemailer, (member, identifier) =>
-  member.mockImplementation(actual_nodemailer[identifier])
-);
-
-const ethereal_timeout_limit = 20000;
-
-const timed_out_flag = "TIMEDOUT";
-nodemailer.createTestAccount.mockImplementation(() =>
-  promise_timeout_race(
-    actual_nodemailer.createTestAccount(),
-    ethereal_timeout_limit,
-    (resolve, reject) => resolve(timed_out_flag)
-  )
-);
-
-nodemailer.createTransport.mockImplementation((transport_config) => {
-  const alert_to_flaked_test = () =>
-    console.log(
-      `FLAKY TEST ALERT: was unable to reach ethereal within ${ethereal_timeout_limit}ms, giving up but not failing the test over it.`
-    );
-
-  if (transport_config.auth === timed_out_flag) {
-    alert_to_flaked_test();
-
-    return { sendMail: () => ({ response: "200" }) };
-  }
-
-  const transporter = actual_nodemailer.createTransport(transport_config);
-
-  return {
-    ...transporter,
-    sendMail: (options) => {
-      const send_mail_promise = transporter.sendMail(options);
-
-      const timeout_callback = (resolve, reject) => {
-        alert_to_flaked_test();
-
-        resolve({ response: "200" });
-      };
-
-      return promise_timeout_race(
-        send_mail_promise,
-        ethereal_timeout_limit,
-        timeout_callback
-      );
-    },
-  };
-});
-
 // not going to run a db for these end to end tests, mock away attempts to use it
 jest.mock("./db_utils/index.js");
 import {
@@ -179,29 +108,19 @@ describe("End-to-end tests for email_backend endpoints", () => {
     ]);
   });
 
-  // this test is flaky due to its reliance on a third party service to validate submitted emails; the services is occasionally unresponsive
-  /*
-  it(
-    "/submit_email returns status 200 and trys to log to db when a valid template is submitted",
-    async () => {
-      // note: log_email_and_meta_to_db is mocked to a noop. Not testing that logging actually works at this level,
-      // just that the server tries to call log_email_and_meta_to_db when it is expected to
-      // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
+  it("/submit_email logs to db and returns 200 when valid email submitted", async () => {
+    // note: log_email_and_meta_to_db is mocked to a noop. Not testing that logging actually works at this level,
+    // just that the server tries to call log_email_and_meta_to_db when it is expected to
+    // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
 
-      const { status: ok } = await make_submit_email_request(
-        test_template_name,
-        completed_test_template
-      );
+    const { status: ok } = await make_submit_email_request(
+      test_template_name,
+      completed_test_template
+    );
 
-      return (
-        expect(ok).toBe(200) &&
-        expect(mock_log_email_and_meta_to_db).toBeCalledOnce()
-      );
-    },
-    // timeout on the async returning, just needs to be significantly longer than ethereal_timeout_limit. Shouldn't hit the Jest level timeout as the time-constraint in this test
-    // is communications with ethereal, which is being timed out after ethereal_timeout_limit. If an ethereal_timeout_limit is hit, then this test flakes passingly (not great, but it
-    // was between that and just dropping this test altogether). Can still flake if the Jest level timeout is hit for nondeterministic system resource/event loop reasons, ah well!
-    ethereal_timeout_limit * 5
-  );
-  */
+    return (
+      expect(ok).toBe(200) &&
+      expect(mock_log_email_and_meta_to_db).toBeCalledOnce()
+    );
+  });
 });
