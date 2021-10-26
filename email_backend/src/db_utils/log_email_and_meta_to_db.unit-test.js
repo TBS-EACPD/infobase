@@ -119,10 +119,6 @@ describe("log_email_and_meta_to_db", () => {
     required_automatic: "blah",
     optional_automatic: "bluh",
   };
-  const email_config = {
-    to: "bleh@blah.ca",
-    from: "blah@bleh.com",
-  };
 
   it("Builds a mongoose model from the original template, constructs and saves a valid record based on the completed template", async () => {
     // The model.create call at the end of log_email_and_meta_to_db has been mocked out and replaced with model.validate
@@ -131,8 +127,7 @@ describe("log_email_and_meta_to_db", () => {
         request,
         template_name,
         original_template,
-        completed_template,
-        email_config
+        completed_template
       );
 
     return expect(

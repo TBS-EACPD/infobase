@@ -3,15 +3,12 @@ import mongoose from "mongoose";
 
 const required_string = { type: String, required: true };
 const meta_schema_def = {
-  to: required_string,
-  from: required_string,
   referer: required_string,
   server_time: { type: Date, required: true },
   date: required_string,
   time: required_string,
 };
-const get_meta_fields_for_log = (email_config, request) => {
-  const { to, from } = email_config;
+const get_meta_fields_for_log = (request) => {
   const {
     headers: { referer },
   } = request;
@@ -19,8 +16,6 @@ const get_meta_fields_for_log = (email_config, request) => {
   const server_time = new Date();
 
   return {
-    to,
-    from,
     referer,
     server_time,
     date: server_time.toLocaleDateString("en-CA"),
@@ -68,15 +63,14 @@ export const log_email_and_meta_to_db = async (
   request,
   template_name,
   original_template,
-  completed_template,
-  email_config
+  completed_template
 ) => {
   const model = make_mongoose_model_from_original_template({
     template_name,
     original_template,
   });
 
-  const meta_sub_doc = get_meta_fields_for_log(email_config, request);
+  const meta_sub_doc = get_meta_fields_for_log(request);
 
   return model.create({
     ...completed_template,
