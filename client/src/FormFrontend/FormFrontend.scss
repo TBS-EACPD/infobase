@@ -1,11 +1,11 @@
 @import "src/style_constants/index.scss";
 
-.email-backend-form {
+.form-backend-form {
   margin-top: 3px;
   padding-top: 8px;
 }
 
-.email-backend-form__text-label {
+.form-backend-form__text-label {
   padding-left: 35px;
   width: 100%;
 
@@ -14,18 +14,18 @@
   }
 }
 
-.email-backend-form__textarea {
+.form-backend-form__textarea {
   display: flex;
   flex-direction: column;
 }
 
-.email-backend-form__privacy-note {
+.form-backend-form__privacy-note {
   border: 1px solid $highlightColor;
   margin: 5px;
   padding: 5px;
 }
 
-.email-backend-form__send-btn--sending {
+.form-backend-form__send-btn--sending {
   background-color: $secondaryColor;
 
   & > div > .leaf-spinner-container {

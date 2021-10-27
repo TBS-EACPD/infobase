@@ -13,15 +13,16 @@ import { get_client_id, log_standard_event } from "src/core/analytics";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
-import {
-  get_email_template,
-  send_completed_email_template,
-} from "src/email_backend_utils";
 import { textRed } from "src/style_constants/index";
 
-import text from "./EmailFrontend.yaml";
+import {
+  get_form_template,
+  send_completed_form_template,
+} from "./form_backend_utils";
 
-import "./EmailFrontend.scss";
+import text from "./FormFrontend.yaml";
+
+import "./FormFrontend.scss";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
@@ -73,9 +74,9 @@ const EnumField = ({
   </div>
 );
 
-const get_field_id = (field_key) => `email_frontend_${field_key}`;
+const get_field_id = (field_key) => `form_frontend_${field_key}`;
 
-class EmailFrontend extends React.Component {
+class FormFrontend extends React.Component {
   constructor(props) {
     super(props);
 
@@ -99,7 +100,7 @@ class EmailFrontend extends React.Component {
     };
   }
   componentDidMount() {
-    get_email_template(this.state.template_name).then((template) => {
+    get_form_template(this.state.template_name).then((template) => {
       this.setState({ loading: false, template: template });
     });
 
@@ -129,7 +130,7 @@ class EmailFrontend extends React.Component {
       const values_for_automatic_fields =
         get_values_for_automatic_fields(automatic_fields);
 
-      send_completed_email_template(template_name, {
+      send_completed_form_template(template_name, {
         ...completed_template,
         ...values_for_automatic_fields,
       }).then((backend_response) => {
@@ -302,7 +303,7 @@ class EmailFrontend extends React.Component {
     };
 
     return (
-      <div className="email-backend-form">
+      <div className="form-backend-form">
         {loading && (
           <div style={{ height: "100px", position: "relative" }}>
             <LeafSpinner config_name="tabbed_content" />
@@ -314,17 +315,17 @@ class EmailFrontend extends React.Component {
               {_.map(user_fields, (field_info, key) => (
                 <div
                   key={`${`${key}_form`}`}
-                  className={`email-backend-form__${field_info.form_type}`}
+                  className={`form-backend-form__${field_info.form_type}`}
                 >
                   {get_form_for_user_field(field_info, key)}
                 </div>
               ))}
               {include_privacy && (
-                <div className="email-backend-form__privacy-note">
-                  <TM k="email_frontend_privacy_note" />
+                <div className="form-backend-form__privacy-note">
+                  <TM k="form_frontend_privacy_note" />
                   <div style={{ textAlign: "center" }}>
                     <CheckBox
-                      id={"email_frontend_privacy"}
+                      id={"form_frontend_privacy"}
                       active={privacy_acknowledged}
                       disabled={disable_forms}
                       onClick={() =>
@@ -332,7 +333,7 @@ class EmailFrontend extends React.Component {
                           privacy_acknowledged: !privacy_acknowledged,
                         })
                       }
-                      label={text_maker("email_frontend_privacy_ack")}
+                      label={text_maker("form_frontend_privacy_ack")}
                       label_style={{ fontWeight: "bold" }}
                       container_style={{ justifyContent: "center" }}
                     />
@@ -344,9 +345,9 @@ class EmailFrontend extends React.Component {
                   className={classNames(
                     "btn-sm btn btn-ib-primary",
                     awaiting_backend_response &&
-                      "email-backend-form__send-btn--sending"
+                      "form-backend-form__send-btn--sending"
                   )}
-                  title={text_maker("email_frontend_required")}
+                  title={text_maker("form_frontend_required")}
                   style={{ width: "100%" }}
                   disabled={!ready_to_send}
                   onClick={(event) => {
@@ -372,13 +373,13 @@ class EmailFrontend extends React.Component {
                   aria-label={
                     (sent_to_backend &&
                       (awaiting_backend_response
-                        ? text_maker("email_frontend_sending")
-                        : text_maker("email_frontend_sent"))) ||
-                    text_maker("email_frontend_send")
+                        ? text_maker("form_frontend_sending")
+                        : text_maker("form_frontend_sent"))) ||
+                    text_maker("form_frontend_send")
                   }
                 >
                   {!awaiting_backend_response &&
-                    text_maker("email_frontend_send")}
+                    text_maker("form_frontend_send")}
                   {awaiting_backend_response && (
                     <LeafSpinner config_name="small_inline" />
                   )}
@@ -386,7 +387,7 @@ class EmailFrontend extends React.Component {
               }
               {sent_to_backend && awaiting_backend_response && (
                 <p aria-live="polite" className="sr-only">
-                  {text_maker("email_frontend_sending")}
+                  {text_maker("form_frontend_sending")}
                 </p>
               )}
               {sent_to_backend && !awaiting_backend_response && (
@@ -394,7 +395,7 @@ class EmailFrontend extends React.Component {
                   {backend_response.success && (
                     <Fragment>
                       <p aria-live="polite">
-                        {text_maker("email_frontend_has_sent_success")}
+                        {text_maker("form_frontend_has_sent_success")}
                       </p>
                       <button
                         className="btn-sm btn btn-ib-primary"
@@ -421,14 +422,14 @@ class EmailFrontend extends React.Component {
                           });
                         }}
                       >
-                        {text_maker("email_frontend_reset")}
+                        {text_maker("form_frontend_reset")}
                       </button>
                     </Fragment>
                   )}
                   {!backend_response.success && (
                     <Fragment>
                       <div aria-live="polite">
-                        <TM k="email_frontend_has_sent_failed" el="p" />
+                        <TM k="form_frontend_has_sent_failed" el="p" />
                         {backend_response.error_message}
                       </div>
                     </Fragment>
@@ -443,9 +444,9 @@ class EmailFrontend extends React.Component {
   }
 }
 
-export { EmailFrontend };
+export { FormFrontend };
 
-EmailFrontend.defaultProps = {
+FormFrontend.defaultProps = {
   include_privacy: true,
   on_submitted: _.noop,
 };

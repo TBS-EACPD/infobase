@@ -8,7 +8,7 @@ const request_logging_options = {
   error_log_status: "EMAIL_BACKEND_ERROR",
 };
 
-const email_backend_url =
+const form_backend_url =
   is_dev && !is_ci
     ? `http://${local_ip || "127.0.0.1"}:7331`
     : "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
@@ -20,7 +20,7 @@ const log_error_to_analytics = (error_message) =>
     MISC2: error_message,
   });
 
-const format_error_as_email_template = (error_message) => ({
+const format_error_as_form_template = (error_message) => ({
   error: {
     required: "true",
     value_type: "error",
@@ -32,9 +32,9 @@ const format_error_as_email_template = (error_message) => ({
   },
 });
 
-const get_email_template_names = () =>
+const get_form_template_names = () =>
   make_request(
-    `${email_backend_url}/email_template_names`,
+    `${form_backend_url}/email_template_names`,
     request_logging_options
   )
     .then((resp) => resp.text())
@@ -42,9 +42,9 @@ const get_email_template_names = () =>
       return [];
     });
 
-const get_email_template = (template_name) =>
+const get_form_template = (template_name) =>
   make_request(
-    `${email_backend_url}/email_template?template_name=${template_name}`,
+    `${form_backend_url}/email_template?template_name=${template_name}`,
     request_logging_options
   )
     .then((resp) =>
@@ -52,13 +52,13 @@ const get_email_template = (template_name) =>
         ? resp.json()
         : resp.text().then((error) => {
             log_error_to_analytics(error);
-            return format_error_as_email_template(error);
+            return format_error_as_form_template(error);
           })
     )
-    .catch(format_error_as_email_template);
+    .catch(format_error_as_form_template);
 
-const send_completed_email_template = (template_name, completed_template) =>
-  make_request(`${email_backend_url}/submit_email`, {
+const send_completed_form_template = (template_name, completed_template) =>
+  make_request(`${form_backend_url}/submit_email`, {
     ...request_logging_options,
     fetch_options: {
       method: "POST",
@@ -86,8 +86,8 @@ const send_completed_email_template = (template_name, completed_template) =>
     }));
 
 export {
-  email_backend_url,
-  get_email_template_names,
-  get_email_template,
-  send_completed_email_template,
+  form_backend_url,
+  get_form_template_names,
+  get_form_template,
+  send_completed_form_template,
 };

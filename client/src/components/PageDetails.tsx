@@ -10,9 +10,10 @@ import {
   build_date,
 } from "src/core/injected_build_constants";
 
+import { FormFrontend } from "src/FormFrontend";
+
 import { IconGitHub } from "src/icons/icons";
 
-import { EmailFrontend } from "./EmailFrontend/EmailFrontend";
 import { ExternalLink } from "./misc_util_components";
 
 import { StatelessModal } from "./modals_and_popovers/index";
@@ -86,7 +87,7 @@ const PageDetails = withRouter(
           <StatelessModal
             title={text_maker("report_a_problem")}
             show={showReportProblem}
-            body={<EmailFrontend template_name="report_a_problem" />}
+            body={<FormFrontend template_name="report_a_problem" />}
             on_close_callback={() =>
               this.setState({ showReportProblem: false })
             }
@@ -103,7 +104,7 @@ const PageDetails = withRouter(
           <StatelessModal
             title={text_maker("feedback")}
             show={showSurvey}
-            body={<EmailFrontend top_border={false} template_name="feedback" />}
+            body={<FormFrontend top_border={false} template_name="feedback" />}
             on_close_callback={() => toggleSurvey(false)}
           />
 
