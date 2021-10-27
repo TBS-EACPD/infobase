@@ -59,7 +59,7 @@ export const make_mongoose_model_from_original_template = _.memoize(
   ({ template_name }) => template_name
 );
 
-export const log_to_db = async (
+export const write_to_db = async (
   request,
   template_name,
   original_template,
