@@ -1,5 +1,5 @@
 {
-  "name": "infobase-email-backend",
+  "name": "infobase-form-backend",
   "main": "transpiled_build/index.js",
   "engines": {
     "node": "14"
@@ -34,7 +34,7 @@
     "integration_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/integration_tests.config.js",
     "end_to_end_tests": "jest --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
     "end_to_end_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
-    "prod_deploy": "sh ./scripts/deploy/prod_deploy_email_backend_function.sh",
+    "prod_deploy": "sh ./scripts/deploy/prod_deploy_form_backend_function.sh",
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018",
     "extract_data:dev": "sh ./scripts/extract_data/extract_data.sh -m dev",
     "extract_data:prod": "sh ./scripts/extract_data/extract_data.sh -m prod"
