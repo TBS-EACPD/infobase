@@ -6,11 +6,13 @@ jest.mock("./db_utils/index.js");
 import {
   connect_db,
   get_db_connection_status,
-  log_to_db,
+  write_to_db,
 } from "./db_utils/index.js";
 connect_db.mockImplementation(() => Promise.resolve());
 get_db_connection_status.mockImplementation(() => "connected");
-const mock_log_to_db = log_to_db.mockImplementation(() => Promise.resolve());
+const mock_write_to_db = write_to_db.mockImplementation(() =>
+  Promise.resolve()
+);
 
 import { run_form_backend } from "./form_backend.js";
 beforeAll((done) => {
@@ -91,7 +93,7 @@ describe("End-to-end tests for form_backend endpoints", () => {
     return expect(template_is_valid).toBe(true);
   });
 
-  it("/submit_form returns status 400 when a non-existant or invalid template is submitted", async () => {
+  it("/submit_form does not write to DB and returns status 400 when a non-existant or invalid template is submitted", async () => {
     const { status: bad_template_name_status } = await make_submit_form_request(
       "zzz_unlikely_name",
       completed_test_template
@@ -101,14 +103,17 @@ describe("End-to-end tests for form_backend endpoints", () => {
       { bleh: "bleh" }
     );
 
-    return expect([bad_template_name_status, invalid_template_status]).toEqual([
-      400, 400,
-    ]);
+    return (
+      expect(mock_write_to_db).not.toBeCalled() &&
+      expect([bad_template_name_status, invalid_template_status]).toEqual([
+        400, 400,
+      ])
+    );
   });
 
-  it("/submit_form logs to db and returns 200 when valid form submitted", async () => {
-    // note: log_to_db is mocked to a noop. Not testing that logging actually works at this level,
-    // just that the server tries to call log_to_db when it is expected to
+  it("/submit_form writes to db and returns 200 when valid form submitted", async () => {
+    // note: write_to_db is mocked to a noop. Not testing that logging actually works at this level,
+    // just that the server tries to call write_to_db when it is expected to
     // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
 
     const { status: ok } = await make_submit_form_request(
@@ -116,6 +121,8 @@ describe("End-to-end tests for form_backend endpoints", () => {
       completed_test_template
     );
 
-    return expect(ok).toBe(200) && expect(mock_log_to_db).toBeCalledOnce();
+    return (
+      expect(mock_write_to_db).toHaveBeenCalledTimes(1) && expect(ok).toBe(200)
+    );
   });
 });

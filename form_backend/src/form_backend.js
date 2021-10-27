@@ -7,7 +7,7 @@ import _ from "lodash";
 import {
   get_db_connection_status,
   connect_db,
-  log_to_db,
+  write_to_db,
 } from "./db_utils/index.js";
 import {
   get_templates,
@@ -126,7 +126,7 @@ const make_form_backend = (templates) => {
         log_error_case(request, error_message);
         return null;
       } else {
-        await log_to_db(
+        await write_to_db(
           request,
           template_name,
           original_template,

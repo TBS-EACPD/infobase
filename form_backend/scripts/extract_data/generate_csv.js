@@ -6,7 +6,7 @@ import _ from "lodash";
 import mongoose from "mongoose";
 
 import { connect_db } from "../../src/db_utils/connect_db.js";
-import { make_mongoose_model_from_original_template } from "../../src/db_utils/log_to_db.js";
+import { make_mongoose_model_from_original_template } from "../../src/db_utils/write_to_db.js";
 import { get_templates } from "../../src/template_utils/index.js";
 
 const templates = get_templates();
