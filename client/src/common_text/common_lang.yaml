@@ -431,8 +431,8 @@ the_NCR_full:
   en: the National Capital Region (NCR)
   fr: la région de la capitale nationale (RCN)
 a11y_table_title_default:
-  en: The following table provides additional detail
-  fr: La table qui suit fournit des données additionelles
+  en: The following table provides more detail.
+  fr: TODO
 pie_filtered_groups_note:
   transform: [handlebars]
   en: |
@@ -1072,10 +1072,6 @@ services:
 service_standard:
   en: Service Standard
   fr: Norme de service
-
-service_standards:
-  en: Service Standards
-  fr: Normes de service
 
 planned_spending_header:
   transform: [handlebars]

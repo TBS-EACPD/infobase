@@ -37,18 +37,18 @@ pct_of_online_end_services:
 services_intro_gov:
   transform: [handlebars, markdown]
   en: | 
-    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
+    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. The source of these visualizations is the GC Service Inventory, which is available on the open data portal. 
         
-    The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**
+    The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
     
-    Please provide us with any feedback on the service inventory by submitting a feedback form.
+    You can provide us with feedback on the service inventory by submitting a feedback form.
   fr: TODO
 services_intro_dept:
   transform: [handlebars, markdown]
   en: | 
-    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here, so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, volumetric data on applications for these services, and service fee information. Each service has its own page, and service data has been rolled-up, or aggregated at the Program, Department and Government-wide level. The source of these visualizations, the GC Service Inventory, is available on the open data portal. 
+    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. The source of these visualizations is the GC Service Inventory which is available on the open data portal. 
         
-    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**
+    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
   fr: TODO
@@ -66,7 +66,7 @@ list_of_provided_services_desc_dept:
 list_of_provided_services_desc_program:
   transform: [handlebars, markdown]
   en: |
-    Programs can have one or more {{gl_tt "services" "SERVICE"}}. As well, a service may be offered through several Programs.
+    Programs can have one or more {{gl_tt "services" "SERVICE"}}. As well, a service may be offered through several programs.
 
     **{{subject_name}}** offers **{{num_of_services}}** services.
   fr: TODO
@@ -82,13 +82,13 @@ filter_results_service:
 services_digital_status_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offered in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
+    Among the **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offered in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services.
   fr: |
     TODO
 services_digital_status_prog_text:
   transform: [handlebars, markdown]
   en: |
-    Among the **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} offered by the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services
+    Among the **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} offered by the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services.
   fr: TODO
 services_digital_status:
   en: Online status of services
@@ -147,10 +147,10 @@ service_name:
   en: Service name
   fr: Nom du service
 services_channels_title:
-  en: Applications for Services by Channel
+  en: Applications for services by channel
   fr: TODO
-distribution_of_applications_by_channel:
-  en: Distribution of Service Applications by Channel
+application_breakdown_by_channel:
+  en: Breakdown of how clients chose to submit their application
   fr: TODO
 customizable_service_graph:
   en: Customizable Service Graph
@@ -160,7 +160,7 @@ single_service_channels_title:
   fr: TODO
 services_channels_text:
   transform: [handlebars, markdown]
-  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** received **{{fmt_big_int number_of_applications}}** applications across **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}. {{#if number_of_applications}} Of the received applications, **{{fmt_big_int number_of_online_applications}}** applications were completed online, representing **{{fmt_percentage1 pct_of_online_applications}}** of all applications. {{/if}}
+  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** received **{{fmt_big_int number_of_applications}}** applications across **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}. {{#if number_of_applications}} Of the applications received, **{{fmt_big_int number_of_online_applications}}** were completed online, representing **{{fmt_percentage1 pct_of_online_applications}}** of all applications. {{/if}}
   fr: TODO
 application_channels_by_services_text:
   transform: [handlebars, markdown]
@@ -215,14 +215,14 @@ applications_count:
 
 # Orgs offering services
 subject_offering_services_title:
-  en: Organizations which offer services
+  en: Organizations that offer services
   fr: TODO
 programs_offering_services_title:
   en: Programs in this department which offer services
   fr: TODO
 orgs_offering_services_text:
   transform: [handlebars, markdown]
-  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{number_of_services}}** {{gl_tt "services" "SERVICE"}}
+  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}
   fr: TODO
 programs_offering_services_text:
   transform: [handlebars, markdown]
@@ -238,8 +238,8 @@ applications:
 # Overview
 overview_digital_status_title:
   transform: [handlebars, markdown]
-  en: What {{gl_tt "client interaction points" "CLIENT_INTERACTION"}} of this {{gl_tt "service" "SERVICE"}} are available online?
-  fr: Quels {{gl_tt "points d'interaction liés aux clients" "CLIENT_INTERACTION"}} de ce service sont disponibles en ligne?
+  en: How can {{gl_tt "clients interact" "CLIENT_INTERACTION"}} with this {{gl_tt "service" "SERVICE"}} online?
+  fr: TODO
 overview_digital_status_desc:
   en: Online client interaction points of this service
   fr: Points d'interaction en ligne liés aux clients de ce service
@@ -250,7 +250,7 @@ service_overview_title:
   en: Overview
   fr: Aperçu
 link_to_programs:
-  en: Link to Program(s)
+  en: Link to program(s)
   fr: TODO
 services_fees:
   en: Service fees
@@ -277,7 +277,7 @@ service_link_text:
   en: More details (external links)
   fr: Pour en savoir plus (liens externes)
 service_url:
-  en: Service Link
+  en: Service link
   fr: Lien de service
 standard_url:
   en: Service Standards and Targets Link
@@ -292,10 +292,10 @@ uses_cra_as_identifier:
   en: Uses CRA business number as an identifier
   fr: Le numéro d'entreprise de l'ARC est utilisé comme identifiant
 uses_sin_as_identifier:
-  en: Uses Social Insurance Number as an identifier
+  en: Uses social insurance number as an identifier
   fr: Le NAS est utilisé comme identifiant
 service_types:
-  en: Service Types
+  en: Service types
   fr: Types de service
 
 # Standard
@@ -305,14 +305,14 @@ services_standards_text:
     In **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{subject.name}}** had the following service standard performance:
   fr: TODO
 service_standards_title:
-  en: Service Standards
+  en: Service standards
   fr: Normes de service
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Service standards" "STANDARD"}} reinforce government accountability by making performance transparent.
+    {{gl_tt "Service standards" "STANDARD"}} measure the government’s performance, which strengthens its accountability.
     
-    They also help clients make time-sensitive, important decisions about accessing {{gl_tt "services" "SERVICE"}} and other expectations relating to services.
+    They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tells them what to expect from the services.
   fr: |
     TODO
 no_service_standards_text:
@@ -357,12 +357,12 @@ target_met_text:
   en: How many service {{gl_tt "standards'" "STANDARD"}} targets were met?
   fr: TODO
 target_met_table_text:
-  en: How many service standards' targets were met?
+  en: How many service standard targets were met?
   fr: TODO
 gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
-    **{{fmt_percentage1 has_standards_pct}}** of services have service standards for a total of **{{standards_count}}** service standards
+    **{{fmt_percentage1 has_standards_pct}}** of services have service standards for a total of **{{fmt_big_int standards_count}}** service standards
   fr: |
     TODO
 gauge_standards_met_text:
