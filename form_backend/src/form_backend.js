@@ -10,6 +10,10 @@ import {
   write_to_db,
 } from "./db_utils/index.js";
 import {
+  make_slack_message_from_completed_template,
+  send_to_slack,
+} from "./slack_utils/index.js";
+import {
   get_templates,
   validate_completed_template,
 } from "./template_utils/index.js";
@@ -126,6 +130,14 @@ const make_form_backend = (templates) => {
         log_error_case(request, error_message);
         return null;
       } else {
+        send_to_slack(
+          make_slack_message_from_completed_template(
+            template_name,
+            original_template,
+            completed_template
+          )
+        ).catch((error) => log_error_case(request, error));
+
         await write_to_db(
           request,
           template_name,
