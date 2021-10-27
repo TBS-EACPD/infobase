@@ -12,7 +12,7 @@ This repository contains the following projects:
 
 1. GC InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
 2. GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
-3. GC InfoBase email backend ([/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
+3. GC InfoBase form backend ([/form_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/form_backend))
 
 See the README.md files in those respective directories for more details on each project.
 
@@ -34,7 +34,7 @@ Ce dépôt est divisé en trois:
 
 1. l'outil InfoBase (dans le fichier [/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client))
 2. l'interface de programmation d'applications (API) (dans le fichier [/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server))
-3. l'application dorsale pour lancer des courriels (dans le fichier [/email_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/email_backend))
+3. l'application dorsale pour lancer des formes (dans le fichier [/form_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/form_backend))
 
 Veuillez liser le fichier « README.md » dans chancune de ces fichiers pour connaisser plus de détails.
 
