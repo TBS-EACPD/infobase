@@ -5,12 +5,13 @@ import { withRouter } from "react-router";
 import {
   FixedPopover,
   create_text_maker_component,
-  EmailFrontend,
 } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
 
 import { is_dev, is_dev_link } from "src/core/injected_build_constants";
+
+import { FormFrontend } from "src/FormFrontend";
 
 import { IconFeedback } from "src/icons/icons";
 import { tertiaryColor } from "src/style_constants/index";
@@ -225,7 +226,7 @@ export const SurveyPopup = withRouter(
                   k="simplified_survey_header"
                   style={{ alignSelf: "center", fontSize: "1.4em" }}
                 />
-                <EmailFrontend
+                <FormFrontend
                   template_name="feedback_simplified"
                   include_privacy={false}
                   top_border={false}

@@ -1,10 +1,10 @@
 import React from "react";
 
-import { EmailFrontend } from "src/components/EmailFrontend/EmailFrontend";
-
 import { create_text_maker } from "src/models/text";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
+
+import { FormFrontend } from "src/FormFrontend";
 
 import text from "./Survey.yaml";
 
@@ -19,7 +19,7 @@ export default class Survey extends React.Component {
         route_key="_survey"
       >
         <h1>{text_maker("feedback_survey_title")}</h1>
-        <EmailFrontend template_name="feedback" top_border={false} />
+        <FormFrontend template_name="feedback" top_border={false} />
       </StandardRouteContainer>
     );
   }

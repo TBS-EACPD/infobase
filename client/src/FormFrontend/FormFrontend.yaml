@@ -1,33 +1,33 @@
-email_frontend_privacy_note:
+form_frontend_privacy_note:
   transform: [handlebars]
   en: Do not submit personal or identifying information through these forms. {{ext_link "Read our privacy policy here." "#privacy"}}
   fr: Ne soumettez pas de renseignements personnels ou qui peuvent vous identifier à l'aide de ces formulaires. {{ext_link "Lisez notre déclaration de protection des renseignements personnels ici." "#privacy"}}
-email_frontend_privacy_ack:
+form_frontend_privacy_ack:
   en: I accept
   fr: J'accepte
 
-email_frontend_send:
+form_frontend_send:
   en: Submit
   fr: Soumettre
-email_frontend_sending:
+form_frontend_sending:
   en: Sending
   fr: Envoi
-email_frontend_sent:
+form_frontend_sent:
   en: Sent
   fr: Envoyé
-email_frontend_resend:
+form_frontend_resend:
   en: Resubmit
   fr: Soumettre à nouveau
-email_frontend_has_sent_success:
+form_frontend_has_sent_success:
   en: Your report has been submitted. Thank you! To submit another report, reset this form with the following button.
   fr: Votre rapport a été soumis. Merci! Pour soumettre un autre rapport, réinitialisez ce formulaire en sélectionnant l’option « Réinitialiser ».
-email_frontend_has_sent_failed:
+form_frontend_has_sent_failed:
   en: Something has gone wrong, your report could not be submitted. To try again, resubmit this form with the above button.
   fr: Quelque chose s'est mal passé, votre rapport n'a pas pu être soumis. Pour réessayer, renvoyez ce formulaire avec le bouton ci-dessus.
-email_frontend_reset:
+form_frontend_reset:
   en: Reset
   fr: Réinitialiser
 
-email_frontend_required:
+form_frontend_required:
   en: Please complete all required fields.
   fr: S'il vous plaît remplir tous les champs requis.

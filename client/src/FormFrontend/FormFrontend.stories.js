@@ -1,24 +1,24 @@
 import fetchMock from "fetch-mock";
 import React, { useEffect } from "react";
 
-import { email_backend_url } from "src/email_backend_utils";
+import { form_backend_url } from "./form_backend_utils";
 
-import { EmailFrontend } from "./EmailFrontend";
+import { FormFrontend } from "./FormFrontend";
 
 export default {
-  title: "EmailFrontend",
-  component: EmailFrontend,
+  title: "FormFrontend",
+  component: FormFrontend,
 };
 
-const EmailFrontendTemplate = ({
+const FormFrontendTemplate = ({
   return_error_on_get,
   return_error_on_post,
   example_template,
   props,
 }) => {
-  // small leak here, both email_backend_utils and here know about the email backend endpoints
+  // small leak here, both form_backend_utils and here know about the specific form backend endpoints
   fetchMock.get(
-    `${email_backend_url}/email_template?template_name=${props.template_name}`,
+    `${form_backend_url}/email_template?template_name=${props.template_name}`,
     () => {
       if (return_error_on_get) {
         throw new Error(
@@ -34,7 +34,7 @@ const EmailFrontendTemplate = ({
   );
 
   fetchMock.post(
-    `${email_backend_url}/submit_email`,
+    `${form_backend_url}/submit_email`,
     () => {
       if (return_error_on_post) {
         throw new Error(
@@ -54,7 +54,7 @@ const EmailFrontendTemplate = ({
   });
 
   return (
-    <EmailFrontend
+    <FormFrontend
       {...props}
       on_submitted={() => {
         console.log("Submitted");
@@ -64,7 +64,7 @@ const EmailFrontendTemplate = ({
   );
 };
 
-export const ExampleTemplate = EmailFrontendTemplate.bind({});
+export const ExampleTemplate = FormFrontendTemplate.bind({});
 ExampleTemplate.args = {
   return_error_on_get: false,
   return_error_on_post: false,
