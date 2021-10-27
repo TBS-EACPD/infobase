@@ -11,6 +11,10 @@ import { get_csv_strings } from "./generate_csv";
 const test_template_name = "test_template.test";
 const test_template = [
   {
+    meta: {
+      version: "1.0",
+    },
+
     enums: ["bug", "other"],
     radio: ["yes"],
     text: "a",
@@ -27,6 +31,10 @@ const test_template = [
     },
   },
   {
+    meta: {
+      version: "1.0",
+    },
+
     enums: ["bug"],
     radio: ["no"],
     text: "b",
@@ -43,6 +51,10 @@ const test_template = [
     },
   },
   {
+    meta: {
+      version: "1.0",
+    },
+
     enums: [],
     radio: [],
     text: "b",

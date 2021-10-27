@@ -46,6 +46,10 @@ describe("End-to-end tests for email_backend endpoints", () => {
 
   const test_template_name = "test_template.test";
   const completed_test_template = {
+    meta: {
+      version: "1.0",
+    },
+
     enums: ["bug", "other"],
     radio: ["yes"],
     text: "a",

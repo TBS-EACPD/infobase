@@ -24,6 +24,10 @@ describe("log_email_and_meta_to_db", () => {
   const request = { method: "POST", headers: { referer: "http://localhost" } };
   const template_name = "test_template";
   const original_template = {
+    meta: {
+      version: "1.0",
+    },
+
     enums: {
       required: true,
       value_type: "enums",
