@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "version": "1.0"
+  },
+
   "found_info": {
     "required": true,
     "form_type": "radio",

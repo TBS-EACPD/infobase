@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "version": "1.0"
+  },
+
   "issue_type": {
     "required": true,
     "value_type": "enums",

@@ -8,6 +8,10 @@ import {
 
 describe("validate_completed_template", () => {
   const template_test_fields = {
+    meta: {
+      version: "1.0",
+    },
+
     enums: {
       required: true,
       value_type: "enums",
