@@ -7,7 +7,7 @@ import _ from "lodash";
 import {
   get_db_connection_status,
   connect_db,
-  log_email_and_meta_to_db,
+  log_to_db,
 } from "./db_utils/index.js";
 import {
   get_templates,
@@ -41,12 +41,12 @@ const log_success_case = (request) => {
   );
 };
 
-const make_email_backend = (templates) => {
-  const email_backend = express();
+const make_form_backend = (templates) => {
+  const form_backend = express();
 
-  email_backend.use(body_parser.json({ limit: "50mb" }));
-  email_backend.use(compression());
-  email_backend.use(
+  form_backend.use(body_parser.json({ limit: "50mb" }));
+  form_backend.use(compression());
+  form_backend.use(
     cors({
       origin: "*",
       methods: ["POST", "GET"],
@@ -60,14 +60,14 @@ const make_email_backend = (templates) => {
       ],
     })
   );
-  email_backend.enable("trust proxy");
+  form_backend.enable("trust proxy");
 
-  email_backend.use((request, response, next) => {
+  form_backend.use((request, response, next) => {
     console.log(`Request type: ${request.originalUrl}, ${request.method}`);
     next();
   });
 
-  email_backend.get("/email_template_names", (request, response) =>
+  form_backend.get("/form_template_names", (request, response) =>
     response.status("200").send(
       _.chain(templates)
         .keys()
@@ -76,14 +76,14 @@ const make_email_backend = (templates) => {
     )
   );
 
-  email_backend.get("/email_template", (request, response) => {
+  form_backend.get("/form_template", (request, response) => {
     const { template_name } = get_request_content(request);
 
     const requested_template = templates[template_name];
 
     if (_.isUndefined(requested_template)) {
       const error_message =
-        "Bad Request: email template request has invalid or missing `template_name` value";
+        "Bad Request: form template request has invalid or missing `template_name` value";
       response.status("400").send(error_message);
       log_error_case(request, error_message);
     } else {
@@ -92,7 +92,7 @@ const make_email_backend = (templates) => {
   });
 
   // reassert DB connection
-  email_backend.use("/submit_email", (req, res, next) => {
+  form_backend.use("/submit_form", (req, res, next) => {
     if (!_.includes(["connected", "connecting"], get_db_connection_status())) {
       console.warn("Initial MongoDB connection lost, attempting reconnection");
       connect_db().catch(console.error);
@@ -101,7 +101,7 @@ const make_email_backend = (templates) => {
     next();
   });
 
-  email_backend.post("/submit_email", async (request, response, next) => {
+  form_backend.post("/submit_form", async (request, response, next) => {
     const { template_name, completed_template } = get_request_content(request);
 
     const original_template = templates[template_name];
@@ -111,7 +111,7 @@ const make_email_backend = (templates) => {
       !validate_completed_template(original_template, completed_template)
     ) {
       const error_message =
-        "Bad Request: submitted email content either doesn't correspond to any templates, " +
+        "Bad Request: submitted form content either doesn't correspond to any templates, " +
         "or does not validate against its corresponding template";
       response.status("400").send(error_message);
       log_error_case(request, error_message);
@@ -126,7 +126,7 @@ const make_email_backend = (templates) => {
         log_error_case(request, error_message);
         return null;
       } else {
-        await log_email_and_meta_to_db(
+        await log_to_db(
           request,
           template_name,
           original_template,
@@ -146,33 +146,33 @@ const make_email_backend = (templates) => {
     }
   });
 
-  email_backend.use((err, req, res, next) => {
+  form_backend.use((err, req, res, next) => {
     console.error(err.stack);
     res.status("500").send("Internal server error");
     next(err);
   });
 
-  return email_backend;
+  return form_backend;
 };
 
-const run_email_backend = () => {
+const run_form_backend = () => {
   const templates = get_templates();
 
   // Start connecting to the db early and let it happen fully async. Attempts to write to the DB
   // before the connection is ready will buffer until the connection is made
   connect_db().catch(console.error); // Note: async func, but not awaited
 
-  const email_backend = make_email_backend(templates);
+  const form_backend = make_form_backend(templates);
 
   if (!process.env.IS_PROD_SERVER) {
-    email_backend.set("port", 7331);
-    email_backend.listen(email_backend.get("port"), () => {
-      const port = email_backend.get("port");
-      console.log(`InfoBase email backend running at http://127.0.0.1:${port}`);
+    form_backend.set("port", 7331);
+    form_backend.listen(form_backend.get("port"), () => {
+      const port = form_backend.get("port");
+      console.log(`InfoBase form backend running at http://127.0.0.1:${port}`);
     });
   }
 
-  return email_backend;
+  return form_backend;
 };
 
-export { make_email_backend, run_email_backend };
+export { make_form_backend, run_form_backend };

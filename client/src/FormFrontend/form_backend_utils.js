@@ -34,7 +34,7 @@ const format_error_as_form_template = (error_message) => ({
 
 const get_form_template_names = () =>
   make_request(
-    `${form_backend_url}/email_template_names`,
+    `${form_backend_url}/form_template_names`,
     request_logging_options
   )
     .then((resp) => resp.text())
@@ -44,7 +44,7 @@ const get_form_template_names = () =>
 
 const get_form_template = (template_name) =>
   make_request(
-    `${form_backend_url}/email_template?template_name=${template_name}`,
+    `${form_backend_url}/form_template?template_name=${template_name}`,
     request_logging_options
   )
     .then((resp) =>
@@ -58,7 +58,7 @@ const get_form_template = (template_name) =>
     .catch(format_error_as_form_template);
 
 const send_completed_form_template = (template_name, completed_template) =>
-  make_request(`${form_backend_url}/submit_email`, {
+  make_request(`${form_backend_url}/submit_form`, {
     ...request_logging_options,
     fetch_options: {
       method: "POST",
