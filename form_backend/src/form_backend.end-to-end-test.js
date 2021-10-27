@@ -1,3 +1,5 @@
+/* eslint-disable import/order */
+
 import axios from "axios";
 import _ from "lodash";
 
@@ -11,6 +13,12 @@ import {
 connect_db.mockImplementation(() => Promise.resolve());
 get_db_connection_status.mockImplementation(() => "connected");
 const mock_write_to_db = write_to_db.mockImplementation(() =>
+  Promise.resolve()
+);
+
+jest.mock("./slack_utils/index.js");
+import { send_to_slack } from "./slack_utils/index.js";
+const mock_send_to_slack = send_to_slack.mockImplementation(() =>
   Promise.resolve()
 );
 
@@ -93,7 +101,7 @@ describe("End-to-end tests for form_backend endpoints", () => {
     return expect(template_is_valid).toBe(true);
   });
 
-  it("/submit_form does not write to DB and returns status 400 when a non-existant or invalid template is submitted", async () => {
+  it("/submit_form does NOT alert slack or write to DB, returns status 400 when a non-existant or invalid template is submitted", async () => {
     const { status: bad_template_name_status } = await make_submit_form_request(
       "zzz_unlikely_name",
       completed_test_template
@@ -104,6 +112,7 @@ describe("End-to-end tests for form_backend endpoints", () => {
     );
 
     return (
+      expect(mock_send_to_slack).not.toBeCalled() &&
       expect(mock_write_to_db).not.toBeCalled() &&
       expect([bad_template_name_status, invalid_template_status]).toEqual([
         400, 400,
@@ -111,18 +120,16 @@ describe("End-to-end tests for form_backend endpoints", () => {
     );
   });
 
-  it("/submit_form writes to db and returns 200 when valid form submitted", async () => {
-    // note: write_to_db is mocked to a noop. Not testing that logging actually works at this level,
-    // just that the server tries to call write_to_db when it is expected to
-    // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
-
+  it("/submit_form alerts slack and writes to db, returns 200 when valid form submitted", async () => {
     const { status: ok } = await make_submit_form_request(
       test_template_name,
       completed_test_template
     );
 
     return (
-      expect(mock_write_to_db).toHaveBeenCalledTimes(1) && expect(ok).toBe(200)
+      expect(mock_send_to_slack).toHaveBeenCalledTimes(1) &&
+      expect(mock_write_to_db).toHaveBeenCalledTimes(1) &&
+      expect(ok).toBe(200)
     );
   });
 });
