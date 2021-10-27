@@ -20,6 +20,8 @@ function cleanup {
   unset EMAIL_BACKEND_CLIENT_ID
   unset EMAIL_BACKEND_CLIENT_SECRET
   unset EMAIL_BACKEND_REFRESH_TOKEN
+
+  unset FORM_SUBMITTED_BOT_SERVICE_LINK
 }
 trap cleanup EXIT
 
@@ -54,3 +56,6 @@ echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml
 echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> $scratch/envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
+
+export FORM_SUBMITTED_BOT_SERVICE_LINK=$(lpass show FORM_SUBMITTED_BOT_SERVICE_LINK --notes)
+echo "FORM_SUBMITTED_BOT_SERVICE_LINK: '$FORM_SUBMITTED_BOT_SERVICE_LINK'" >> $scratch/envs.yaml
