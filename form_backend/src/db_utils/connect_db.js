@@ -12,7 +12,7 @@ const get_connection_str = () => {
       .replace("{MDB_NAME}", MDB_NAME);
   } else {
     console.log("using local db");
-    return "mongodb://127.0.0.1:27018/email_backend";
+    return "mongodb://127.0.0.1:27018/form_backend";
   }
 };
 

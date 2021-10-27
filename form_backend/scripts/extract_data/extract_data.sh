@@ -1,5 +1,5 @@
 #!/bin/bash
-# must run this scripts from the email_backend dir
+# must run this scripts from the form_backend dir
 set -e # will exit if any command has non-zero exit value
 
 while getopts ":m:" opt; do

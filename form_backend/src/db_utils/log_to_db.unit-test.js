@@ -18,9 +18,9 @@ mongoose.model.mockImplementation((name, schema) => {
   return model;
 });
 
-import { log_email_and_meta_to_db } from "./log_email_and_meta_to_db.js";
+import { log_to_db } from "./log_to_db.js";
 
-describe("log_email_and_meta_to_db", () => {
+describe("log_to_db", () => {
   const request = { method: "POST", headers: { referer: "http://localhost" } };
   const template_name = "test_template";
   const original_template = {
@@ -121,9 +121,9 @@ describe("log_email_and_meta_to_db", () => {
   };
 
   it("Builds a mongoose model from the original template, constructs and saves a valid record based on the completed template", async () => {
-    // The model.create call at the end of log_email_and_meta_to_db has been mocked out and replaced with model.validate
+    // The model.create call at the end of log_to_db has been mocked out and replaced with model.validate
     const final_record_object_validated_against_constructed_model =
-      await log_email_and_meta_to_db(
+      await log_to_db(
         request,
         template_name,
         original_template,

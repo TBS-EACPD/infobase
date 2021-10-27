@@ -6,20 +6,19 @@ jest.mock("./db_utils/index.js");
 import {
   connect_db,
   get_db_connection_status,
-  log_email_and_meta_to_db,
+  log_to_db,
 } from "./db_utils/index.js";
 connect_db.mockImplementation(() => Promise.resolve());
 get_db_connection_status.mockImplementation(() => "connected");
-const mock_log_email_and_meta_to_db =
-  log_email_and_meta_to_db.mockImplementation(() => Promise.resolve());
+const mock_log_to_db = log_to_db.mockImplementation(() => Promise.resolve());
 
-import { run_email_backend } from "./email_backend.js";
+import { run_form_backend } from "./form_backend.js";
 beforeAll((done) => {
-  run_email_backend();
+  run_form_backend();
   done();
 });
 
-describe("End-to-end tests for email_backend endpoints", () => {
+describe("End-to-end tests for form_backend endpoints", () => {
   const prod_test_url =
     "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
   const local_test_url = `http://127.0.0.1:7331`;
@@ -27,16 +26,16 @@ describe("End-to-end tests for email_backend endpoints", () => {
   const test_against_prod = false;
   const test_url = test_against_prod ? prod_test_url : local_test_url;
 
-  const make_email_template_names_request = () =>
-    axios.get(`${test_url}/email_template_names`);
-  const make_email_template_request = (template_name) =>
+  const make_form_template_names_request = () =>
+    axios.get(`${test_url}/form_template_names`);
+  const make_form_template_request = (template_name) =>
     axios.get(
-      `${test_url}/email_template?template_name=${template_name}`,
+      `${test_url}/form_template?template_name=${template_name}`,
       { validateStatus: _.constant(true) } // Don't throw errors on ANY status values, will be intentionally getting some 400's
     );
-  const make_submit_email_request = (template_name, completed_template) =>
+  const make_submit_form_request = (template_name, completed_template) =>
     axios.post(
-      `${test_url}/submit_email`,
+      `${test_url}/submit_form`,
       {
         template_name,
         completed_template,
@@ -60,8 +59,8 @@ describe("End-to-end tests for email_backend endpoints", () => {
     optional_automatic: "bluh",
   };
 
-  it("/email_template_names returns an array of template names", async () => {
-    const { data: template_names } = await make_email_template_names_request();
+  it("/form_template_names returns an array of template names", async () => {
+    const { data: template_names } = await make_form_template_names_request();
 
     const template_names_is_array = _.isArray(template_names);
     const template_names_values_are_strings = _.every(
@@ -74,15 +73,15 @@ describe("End-to-end tests for email_backend endpoints", () => {
     ).toBe(true);
   });
 
-  it("/email_template returns status 400 for an invalid invalid template_name", async () => {
+  it("/form_template returns status 400 for an invalid invalid template_name", async () => {
     const { status: bad_template_name_status } =
-      await make_email_template_request("zzz_unlikely_name");
+      await make_form_template_request("zzz_unlikely_name");
 
     return expect(bad_template_name_status).toBe(400);
   });
 
-  it("/email_template returns a non-empty object when given a valid template_name", async () => {
-    const { data: template } = await make_email_template_request(
+  it("/form_template returns a non-empty object when given a valid template_name", async () => {
+    const { data: template } = await make_form_template_request(
       test_template_name
     );
 
@@ -92,13 +91,12 @@ describe("End-to-end tests for email_backend endpoints", () => {
     return expect(template_is_valid).toBe(true);
   });
 
-  it("/submit_email returns status 400 when a non-existant or invalid template is submitted", async () => {
-    const { status: bad_template_name_status } =
-      await make_submit_email_request(
-        "zzz_unlikely_name",
-        completed_test_template
-      );
-    const { status: invalid_template_status } = await make_submit_email_request(
+  it("/submit_form returns status 400 when a non-existant or invalid template is submitted", async () => {
+    const { status: bad_template_name_status } = await make_submit_form_request(
+      "zzz_unlikely_name",
+      completed_test_template
+    );
+    const { status: invalid_template_status } = await make_submit_form_request(
       test_template_name,
       { bleh: "bleh" }
     );
@@ -108,19 +106,16 @@ describe("End-to-end tests for email_backend endpoints", () => {
     ]);
   });
 
-  it("/submit_email logs to db and returns 200 when valid email submitted", async () => {
-    // note: log_email_and_meta_to_db is mocked to a noop. Not testing that logging actually works at this level,
-    // just that the server tries to call log_email_and_meta_to_db when it is expected to
+  it("/submit_form logs to db and returns 200 when valid form submitted", async () => {
+    // note: log_to_db is mocked to a noop. Not testing that logging actually works at this level,
+    // just that the server tries to call log_to_db when it is expected to
     // TODO: should we also test that the correct args are at least passed? That's currently a testing gap
 
-    const { status: ok } = await make_submit_email_request(
+    const { status: ok } = await make_submit_form_request(
       test_template_name,
       completed_test_template
     );
 
-    return (
-      expect(ok).toBe(200) &&
-      expect(mock_log_email_and_meta_to_db).toBeCalledOnce()
-    );
+    return expect(ok).toBe(200) && expect(mock_log_to_db).toBeCalledOnce();
   });
 });

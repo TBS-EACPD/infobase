@@ -1,7 +1,7 @@
 // entry-point for GCF
 
-import { run_email_backend } from "./email_backend.js";
+import { run_form_backend } from "./form_backend.js";
 
-const email_backend = (() => run_email_backend())();
+const form_backend = (() => run_form_backend())();
 
-export { email_backend };
+export { form_backend };

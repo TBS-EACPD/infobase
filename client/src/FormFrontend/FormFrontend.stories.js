@@ -18,7 +18,7 @@ const FormFrontendTemplate = ({
 }) => {
   // small leak here, both form_backend_utils and here know about the specific form backend endpoints
   fetchMock.get(
-    `${form_backend_url}/email_template?template_name=${props.template_name}`,
+    `${form_backend_url}/form_template?template_name=${props.template_name}`,
     () => {
       if (return_error_on_get) {
         throw new Error(
@@ -34,7 +34,7 @@ const FormFrontendTemplate = ({
   );
 
   fetchMock.post(
-    `${form_backend_url}/submit_email`,
+    `${form_backend_url}/submit_form`,
     () => {
       if (return_error_on_post) {
         throw new Error(
