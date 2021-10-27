@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing generate_csv.js Testing csv outputs with snapshot 1`] = `
-"\\"a\\",\\"bleh\\",\\"date\\",\\"enums\\",\\"from\\",\\"number\\",\\"optional_automatic\\",\\"radio\\",\\"referer\\",\\"required_automatic\\",\\"server_time\\",\\"text\\",\\"time\\",\\"to\\"
-1,\\"bleh\\",\\"8/4/2020\\",\\"bug, other\\",\\"<Sender> sender@email.com\\",1,\\"bluh\\",\\"yes\\",\\"http://localhost:8080/build/InfoBase/index-eng.html\\",\\"blah\\",\\"Tue, 04 Aug 2020 17:23:05 GMT\\",\\"a\\",\\"1:23:05 PM\\",\\"<Recipient> recipient@email.com\\"
-2,\\"bleh\\",\\"7/21/2020\\",\\"bug\\",\\"<Sender> sender@email.com\\",2,\\"bluh\\",\\"no\\",\\"http://localhost:8080/build/InfoBase/index-eng.html\\",\\"blah\\",\\"Tue, 21 Jul 2020 16:56:28 GMT\\",\\"b\\",\\"12:56:28 PM\\",\\"<Recipient> recipient@email.com\\"
-2,\\"bleh\\",\\"7/16/2020\\",\\"\\",\\"<Sender> sender@email.com\\",2,,\\"\\",\\"http://localhost:8080/build/InfoBase/index-eng.html\\",\\"blah\\",\\"Thu, 16 Jul 2020 18:15:16 GMT\\",\\"b\\",\\"2:15:16 PM\\",\\"<Recipient> recipient@email.com\\""
+"\\"a\\",\\"bleh\\",\\"date\\",\\"enums\\",\\"number\\",\\"optional_automatic\\",\\"radio\\",\\"referer\\",\\"required_automatic\\",\\"server_time\\",\\"text\\",\\"time\\"
+1,\\"bleh\\",\\"8/4/2020\\",\\"bug, other\\",1,\\"bluh\\",\\"yes\\",\\"http://localhost:8080/build/InfoBase/index-eng.html\\",\\"blah\\",\\"Tue, 04 Aug 2020 17:23:05 GMT\\",\\"a\\",\\"1:23:05 PM\\"
+2,\\"bleh\\",\\"7/21/2020\\",\\"bug\\",2,\\"bluh\\",\\"no\\",\\"http://localhost:8080/build/InfoBase/index-eng.html\\",\\"blah\\",\\"Tue, 21 Jul 2020 16:56:28 GMT\\",\\"b\\",\\"12:56:28 PM\\"
+2,\\"bleh\\",\\"7/16/2020\\",\\"\\",2,,\\"\\",\\"http://localhost:8080/build/InfoBase/index-eng.html\\",\\"blah\\",\\"Thu, 16 Jul 2020 18:15:16 GMT\\",\\"b\\",\\"2:15:16 PM\\""
 `;

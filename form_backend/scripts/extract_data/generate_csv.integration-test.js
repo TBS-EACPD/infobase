@@ -9,12 +9,8 @@ import { get_csv_strings } from "./generate_csv";
 
 //Make sure there is test data to work with
 const test_template_name = "test_template.test";
-const test_template = [
+const test_completed_templates = [
   {
-    meta: {
-      version: "1.0",
-    },
-
     enums: ["bug", "other"],
     radio: ["yes"],
     text: "a",
@@ -31,10 +27,6 @@ const test_template = [
     },
   },
   {
-    meta: {
-      version: "1.0",
-    },
-
     enums: ["bug"],
     radio: ["no"],
     text: "b",
@@ -51,10 +43,6 @@ const test_template = [
     },
   },
   {
-    meta: {
-      version: "1.0",
-    },
-
     enums: [],
     radio: [],
     text: "b",
@@ -80,8 +68,8 @@ beforeAll((done) => {
         template_name: test_template_name,
       });
 
-      return _.chain(test_template)
-        .map((template) => model.create(template))
+      return _.chain(test_completed_templates)
+        .map((completed_template) => model.create(completed_template))
         .thru((promises) => Promise.all(promises))
         .value();
     })
