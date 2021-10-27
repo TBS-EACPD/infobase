@@ -18,7 +18,7 @@ archive_filter: &archive_filter
 
 version: 2
 jobs:
-  test_email_backend:
+  test_form_backend:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
         <<: *dockerhub_auth
@@ -28,26 +28,26 @@ jobs:
           path: "~/InfoBase"
       - restore_cache:
           keys:
-            - email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
+            - form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
             - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
       - run:
           command: |
-            [ -e "email_backend/node_modules" ] || (cd email_backend && npm ci)
+            [ -e "form_backend/node_modules" ] || (cd form_backend && npm ci)
       - run:
           command: |
             [ -e "node_modules" ] || npm ci
       - save_cache:
-          key: email-backend-dependencies-{{ checksum "email_backend/package-lock.json" }}-v2
+          key: form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
           paths:
-            - email_backend/node_modules
+            - form_backend/node_modules
       - save_cache:
           key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
           paths:
             - node_modules
 
-      - run: (cd email_backend && npm run unit_tests)
+      - run: (cd form_backend && npm run unit_tests)
 
-      - run: (cd email_backend && npm run end_to_end_tests)
+      - run: (cd form_backend && npm run end_to_end_tests)
 
   cleanup_dev_links:
     docker:
@@ -352,9 +352,9 @@ jobs:
 
 workflows:
   version: 2
-  test_email_backend:
+  test_form_backend:
     jobs:
-      - test_email_backend
+      - test_form_backend
 
   cleanup_dev_links:
     jobs:
