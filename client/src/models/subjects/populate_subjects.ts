@@ -183,30 +183,6 @@ export const populate_programs_and_tags = (
   program_tags: ParsedCsvWithUndefineds,
   tags_to_programs: ParsedCsvWithUndefineds
 ) => {
-  // TODO coordinate with pipeline to drop CCOFOGs from input data, clean this out
-  const root_tag_ids = _.map(program_tag_types, "id");
-  const parent_id_by_tag_id = _.chain(program_tags)
-    .map(({ tag_id, parent_id }) => [tag_id, parent_id])
-    .fromPairs()
-    .value();
-  const is_ccofog_tag = (id: string | undefined): boolean => {
-    if (typeof id === "undefined") {
-      throw new Error(
-        "Encountered a program tag with a parent id of undefined, this should not happen"
-      );
-    }
-    if (_.includes(root_tag_ids, id)) {
-      return id === "CCOFOG";
-    } else {
-      return is_ccofog_tag(parent_id_by_tag_id[id]);
-    }
-  };
-
-  const tags_to_programs_no_ccofog = _.filter(
-    tags_to_programs,
-    ({ tag_id }) => !is_ccofog_tag(tag_id)
-  );
-
   _.each(
     program,
     ({
@@ -245,7 +221,7 @@ export const populate_programs_and_tags = (
         is_internal_service: is_internal_service === "1",
         is_fake: is_fake_program === "1",
 
-        tag_ids: _.chain(tags_to_programs_no_ccofog)
+        tag_ids: _.chain(tags_to_programs)
           .filter(
             ({ program_id }) =>
               program_id === Program.make_program_id(dept_code, activity_code)
@@ -259,22 +235,21 @@ export const populate_programs_and_tags = (
   _.each(
     program_tag_types,
     ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
-      !is_ccofog_tag(id) &&
-        ProgramTag.store.create_and_register({
-          ...enforced_required_fields({
-            id,
-            name: is_en ? name_en : name_fr,
-            cardinality,
-          }),
+      ProgramTag.store.create_and_register({
+        ...enforced_required_fields({
+          id,
+          name: is_en ? name_en : name_fr,
+          cardinality,
+        }),
 
-          description_raw: is_en ? desc_en : desc_fr,
+        description_raw: is_en ? desc_en : desc_fr,
 
-          children_tag_ids: _.chain(program_tags)
-            .filter(({ parent_id }) => parent_id === id)
-            .map("tag_id")
-            .compact()
-            .value(),
-        });
+        children_tag_ids: _.chain(program_tags)
+          .filter(({ parent_id }) => parent_id === id)
+          .map("tag_id")
+          .compact()
+          .value(),
+      });
     }
   );
   _.each(
@@ -287,39 +262,37 @@ export const populate_programs_and_tags = (
       desc_en,
       desc_fr,
     }) => {
-      if (!is_ccofog_tag(parent_tag_id)) {
-        const children_tag_ids = _.chain(program_tags)
-          .filter(({ parent_id }) => parent_id === id)
-          .map("tag_id")
-          .compact()
-          .value();
-        const program_ids = _.chain(tags_to_programs)
-          .filter(({ tag_id }) => tag_id === id)
-          .map("program_id")
-          .compact()
-          .value();
+      const children_tag_ids = _.chain(program_tags)
+        .filter(({ parent_id }) => parent_id === id)
+        .map("tag_id")
+        .compact()
+        .value();
+      const program_ids = _.chain(tags_to_programs)
+        .filter(({ tag_id }) => tag_id === id)
+        .map("program_id")
+        .compact()
+        .value();
 
-        if (!_.isEmpty(children_tag_ids) && !_.isEmpty(program_ids)) {
-          throw new Error(`
+      if (!_.isEmpty(children_tag_ids) && !_.isEmpty(program_ids)) {
+        throw new Error(`
               Tag "${id}" has both child tags and program links. InfoBase assumes only leaf tags have program links!
               Check with the data model up stream, either there's a problem there or a lot of tag related client code will need to be revisited. 
             `);
-        }
-
-        ProgramTag.store.create_and_register({
-          ...enforced_required_fields({
-            id,
-            name: is_en ? name_en : name_fr,
-            parent_tag_id,
-          }),
-
-          description_raw: is_en ? desc_en : desc_fr,
-
-          parent_tag_id,
-          children_tag_ids,
-          program_ids,
-        });
       }
+
+      ProgramTag.store.create_and_register({
+        ...enforced_required_fields({
+          id,
+          name: is_en ? name_en : name_fr,
+          parent_tag_id,
+        }),
+
+        description_raw: is_en ? desc_en : desc_fr,
+
+        parent_tag_id,
+        children_tag_ids,
+        program_ids,
+      });
     }
   );
 };
