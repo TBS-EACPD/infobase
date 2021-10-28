@@ -206,6 +206,9 @@ most_used_other_application_count:
   transform: [handlebars, markdown]
   en: There were **{{fmt_big_int max_value}} applications by other channels**; most clients chose to submit their applications by other channels.
   fr: TODO
+most_used_phone_application_count:
+ en: There were **{{fmt_big_int max_value}} applications by telephone**; most clients chose to submit their applications by telephone.
+ fr: TODO
 no_applications:
   en: This service did not receive any applications
   fr: TODO
