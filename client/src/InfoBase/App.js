@@ -23,8 +23,8 @@ import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
 import { GlossaryMenu } from "src/glossary/GlossaryMenu";
-import { TooltipActivator } from "src/glossary/TooltipActivator";
 import { make_request } from "src/request_utils";
+import { SidebarActivator } from "src/glossary/SideBarActivator";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
 
 import "./App.scss";
@@ -96,6 +96,8 @@ export class App extends React.Component {
   state = {
     outage_message: null,
     showSurvey: false,
+    showGlossary: false,
+    glossaryItem: {},
   };
 
   toggleSurvey = (override = null) => {
@@ -105,6 +107,16 @@ export class App extends React.Component {
       }; //add es2020 nullish coalescing when possible
     });
   };
+
+  toggleGlossary(value) {
+    this.setState({
+      showGlossary: value,
+    });
+  }
+
+  setGlossaryItem(item) {
+    this.setState({ glossaryItem: item });
+  }
 
   componentDidMount() {
     if (!is_dev) {

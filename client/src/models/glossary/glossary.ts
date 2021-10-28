@@ -21,6 +21,15 @@ const compiled_definitions = _.memoize((raw_definition) =>
   sanitized_marked(raw_definition)
 );
 
+const get_glossary_item = (key: string) => {
+  const glossary_entry = glossaryEntryStore.lookup(key);
+
+  return {
+    title: glossary_entry.title,
+    def: glossary_entry.raw_definition,
+  };
+};
+
 const get_glossary_item_tooltip_html = (key: string) => {
   const glossary_entry = glossaryEntryStore.lookup(key);
 
@@ -32,4 +41,8 @@ const get_glossary_item_tooltip_html = (key: string) => {
   </div>`;
 };
 
-export { glossaryEntryStore, get_glossary_item_tooltip_html };
+export {
+  glossaryEntryStore,
+  get_glossary_item_tooltip_html,
+  get_glossary_item,
+};
