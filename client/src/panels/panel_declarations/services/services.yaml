@@ -143,6 +143,9 @@ client_interaction_point:
   fr: Points d'interaction liés aux clients
 
 # Channels
+application_channels:
+  en: Application channels
+  fr: TODO
 service_name:
   en: Service name
   fr: Nom du service

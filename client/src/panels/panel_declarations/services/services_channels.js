@@ -171,7 +171,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       <div className="row">
         <div className="col-12 col-lg-4">
           <StandardLegend
-            title="Application channels" //SI_TODO
+            title={text_maker("application_channels")}
             legendListProps={{
               items: legend_items,
               onClick: (key) =>
