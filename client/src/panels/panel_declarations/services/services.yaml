@@ -188,12 +188,24 @@ application_channels_by_services_program_text:
   fr: TODO
 service_channels_text:
   transform: [handlebars, markdown]
-  en: |
-    Channels that this {{gl_tt "service" "SERVICE"}} uses for receiving applications.
-    
-    {{#if max_channel_key}}There were **{{fmt_big_int max_value}} {{max_channel_key}}**, which is the most used application channel for this service.{{/if}}
-  fr: | 
-    TODO
+  en: Channels that this {{gl_tt "service" "SERVICE"}} uses for receiving applications.
+  fr: TODO
+most_used_online_application_count:
+  transform: [handlebars, markdown]
+  en: There were **{{fmt_big_int max_value}} online applications**; most clients chose to submit their applications online.
+  fr: TODO
+most_used_live_application_count:
+  transform: [handlebars, markdown]
+  en: There were **{{fmt_big_int max_value}} in person applications**; most clients chose to submit their applications in person.
+  fr: TODO
+most_used_mail_application_count:
+  transform: [handlebars, markdown]
+  en: There were **{{fmt_big_int max_value}} applications by mail**; most clients chose to submit their applications by mail.
+  fr: TODO
+most_used_other_application_count:
+  transform: [handlebars, markdown]
+  en: There were **{{fmt_big_int max_value}} applications by other channels**; most clients chose to submit their applications by other channels.
+  fr: TODO
 no_applications:
   en: This service did not receive any applications
   fr: TODO
@@ -315,7 +327,7 @@ service_standards_text:
   en: |
     {{gl_tt "Service standards" "STANDARD"}} measure the government’s performance, which strengthens its accountability.
     
-    They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tells them what to expect from the services.
+    They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tell them what to expect from the services.
   fr: |
     TODO
 no_service_standards_text:

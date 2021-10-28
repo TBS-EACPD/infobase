@@ -55,16 +55,14 @@ export class ServiceChannels extends React.Component {
       <Panel title={text_maker("single_service_channels_title")}>
         {filtered_keys.length > 0 ? (
           <Fragment>
-            <TM
-              k="service_channels_text"
-              className="medium-panel-text"
-              args={{
-                max_channel_key: max_channel_key
-                  ? text_maker(max_channel_key)
-                  : "",
-                max_value: max_value,
-              }}
-            />
+            <TM k="service_channels_text" className="medium-panel-text" />
+            {max_channel_key && (
+              <TM
+                k={`most_used_${max_channel_key}`}
+                className="medium-panel-text"
+                args={{ max_value }}
+              />
+            )}
             <StandardLegend
               legendListProps={{
                 items: _.map(filtered_keys, (key) => ({
