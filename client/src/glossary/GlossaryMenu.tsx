@@ -11,11 +11,21 @@ import { SearchConfigSidebar } from "src/search/SearchConfigSidebar";
 import { SidebarContent } from "./GlossarySidebarContent";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface GlossaryMenuProps {}
+interface GlossaryMenuProps {
+  show: boolean;
+  toggle: CallableFunction;
+  item: GlossaryItem;
+  setGlossaryItem: CallableFunction;
+}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GlossaryMenuState {
-  isOpen: boolean;
+  show: boolean;
   results: ResultProps[];
+}
+
+export interface GlossaryItem {
+  title: string;
+  def: string;
 }
 
 export interface ResultProps {
@@ -36,15 +46,25 @@ export class GlossaryMenu extends React.Component<
     super(props);
 
     this.state = {
-      isOpen: true,
+      show: this.props.show,
       results: [],
     };
   }
 
-  closeMenu() {
-    this.setState({
-      isOpen: false,
-    });
+  static getDerivedStateFromProps(
+    nextProps: GlossaryMenuProps,
+    prevState: GlossaryMenuState
+  ) {
+    const { show: next_show } = nextProps;
+    const { show: prev_show } = prevState;
+
+    if (next_show !== prev_show) {
+      return {
+        show: next_show,
+      };
+    } else {
+      return null;
+    }
   }
 
   getResults = (childData: ResultProps[]) => {
@@ -53,11 +73,19 @@ export class GlossaryMenu extends React.Component<
     });
   };
 
+  closeItem() {
+    this.props.setGlossaryItem({});
+  }
+
+  openItem(item: Record<string, unknown>) {
+    this.props.setGlossaryItem(item);
+  }
+
   render() {
     return (
       <div
         className={
-          this.state.isOpen
+          this.state.show
             ? "glossary-sidebar-wrapper active"
             : "glossary-sidebar-wrapper"
         }
@@ -72,7 +100,10 @@ export class GlossaryMenu extends React.Component<
             <div className="glossary-sidebar-header">
               <div role="navigation" aria-label="Glossary navigation">
                 <div className={"close-button"}>
-                  <span className="icon" onClick={() => this.closeMenu()}>
+                  <span
+                    className="icon"
+                    onClick={() => this.props.toggle(false)}
+                  >
                     <IconX width="25px" color="white" alternate_color={false} />
                   </span>
                 </div>
@@ -95,9 +126,11 @@ export class GlossaryMenu extends React.Component<
           </div>
           <div className="glossary-sidebar-content-wrapper">
             <SidebarContent
-              title={null}
-              def={null}
+              title={this.props.item.title}
+              def={this.props.item.def}
               results={this.state.results}
+              closeItem={() => this.closeItem()}
+              openItem={(item: Record<string, unknown>) => this.openItem(item)}
             />
           </div>
         </aside>
