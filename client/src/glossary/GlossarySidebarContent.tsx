@@ -4,17 +4,16 @@ import React from "react";
 import "./GlossaryMenu.scss";
 import { glossaryEntryStore } from "src/models/glossary";
 
-import { getOperationDefinition } from "@apollo/client/utilities";
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SidebarContentProps {
   title: string | null;
   def: string | null;
   results: ResultProps[];
+  closeItem: CallableFunction;
+  openItem: CallableFunction;
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SidebarContentState {
-  defOpen: boolean;
   title: string | null;
   def: string | null;
 }
@@ -34,24 +33,34 @@ export class SidebarContent extends React.Component<
     super(props);
 
     this.state = {
-      defOpen: this.props.title ? true : false,
-      title: this.props.title,
-      def: this.props.def,
+      title: null,
+      def: null,
     };
   }
 
+  static getDerivedStateFromProps(
+    nextProps: SidebarContentProps,
+    prevState: SidebarContentState
+  ) {
+    const { title: next_title, def: next_def } = nextProps;
+    const { title: prev_title } = prevState;
+
+    if (next_title !== prev_title) {
+      return {
+        title: next_title,
+        def: next_def,
+      };
+    } else {
+      return null;
+    }
+  }
+
   closeDefinition() {
-    this.setState({
-      defOpen: false,
-    });
+    this.props.closeItem();
   }
 
   openDefinition(title: string, def: string) {
-    this.setState({
-      defOpen: true,
-      title: title,
-      def: def,
-    });
+    this.props.openItem({ title: title, def: def });
   }
 
   get_glossary_items_by_letter() {
@@ -84,7 +93,7 @@ export class SidebarContent extends React.Component<
     const items_by_letter = this.get_glossary_items_by_letter();
     return (
       <div className="glossary-sidebar-content">
-        {this.state.defOpen ? (
+        {this.state.title ? (
           <div className="defintion-wrapper">
             <div className="item-title">{this.state.title}</div>
             <div className="item-def">{this.state.def}</div>
