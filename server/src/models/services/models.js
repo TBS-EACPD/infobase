@@ -26,6 +26,7 @@ export default function (model_singleton) {
     online_application_count: { type: Number },
     live_application_count: { type: Number },
     mail_application_count: { type: Number },
+    phone_application_count: { type: Number },
     other_application_count: { type: Number },
     ...bilingual_str("service_report_comment"),
   });

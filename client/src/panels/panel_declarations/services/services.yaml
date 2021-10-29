@@ -224,6 +224,9 @@ online_application_count:
 other_application_count:
   en: Applications by other channels
   fr: Demandes par d'autres moyens
+phone_application_count:
+  en: Applications by telephone
+  fr: TODO
 online_inquiry_count:
   en: Website visits
   fr: Visites sur le site web

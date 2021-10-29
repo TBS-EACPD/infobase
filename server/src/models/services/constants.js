@@ -8,6 +8,7 @@ const digital_status_keys = [
 ];
 const application_channels_keys = [
   "other_application_count",
+  "phone_application_count",
   "live_application_count",
   "mail_application_count",
   "online_application_count",
