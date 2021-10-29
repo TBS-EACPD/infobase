@@ -4,8 +4,8 @@ import { is_dev, local_ip, is_ci } from "src/core/injected_build_constants";
 import { make_request } from "src/request_utils";
 
 const request_logging_options = {
-  success_log_status: "EMAIL_BACKEND_SUCCESS",
-  error_log_status: "EMAIL_BACKEND_ERROR",
+  success_log_status: "FORM_BACKEND_SUCCESS",
+  error_log_status: "FORM_BACKEND_ERROR",
 };
 
 const form_backend_url =

@@ -136,7 +136,7 @@ class FormFrontend extends React.Component {
       }).then((backend_response) => {
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", "") || "start",
-          MISC1: "EMAIL_FRONTEND",
+          MISC1: "FORM_FRONTEND",
           MISC2: `${template_name}: ${backend_response.error_message}`,
         });
 
