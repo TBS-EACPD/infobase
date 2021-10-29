@@ -20,7 +20,7 @@ function cleanup {
   unset MDB_USERNAME
   unset MDB_PW
 
-  unset FORM_BACKEND_SLACK_BOT_SERVICE_LINK
+  unset SLACK_BOT_SERVICE_LINK
 }
 trap cleanup EXIT
 
@@ -44,5 +44,5 @@ echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> $scratch/envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
 
-export FORM_BACKEND_SLACK_BOT_SERVICE_LINK=$(lpass show FORM_BACKEND_SLACK_BOT_SERVICE_LINK --notes)
+export SLACK_BOT_SERVICE_LINK=$(lpass show FORM_BACKEND_SLACK_BOT_SERVICE_LINK --notes)
 echo "SLACK_BOT_SERVICE_LINK: '$SLACK_BOT_SERVICE_LINK'" >> $scratch/envs.yaml
