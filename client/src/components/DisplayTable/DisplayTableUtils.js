@@ -148,7 +148,6 @@ export const DropdownFilter = ({
   set_dropdown_filter,
   dropdown_filter,
   column_searches,
-  dropdown_content_class_name = "no-right",
 }) => {
   const is_filter_active =
     _.reject(dropdown_filter[column_key], "active").length > 0;
@@ -163,8 +162,6 @@ export const DropdownFilter = ({
           alternate_color={is_filter_active ? tertiaryColor : secondaryColor}
         />
       }
-      dropdown_content_class_name={dropdown_content_class_name}
-      dropdown_content_style={{}}
       dropdown_content={
         <DropdownFilterVirtualizedList
           column_key={column_key}

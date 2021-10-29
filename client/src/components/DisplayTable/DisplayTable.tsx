@@ -630,9 +630,6 @@ export class _DisplayTable extends React.Component<
                                 column_key={column_key}
                                 dropdown_filter={dropdown_filter}
                                 column_searches={searches}
-                                dropdown_content_class_name={
-                                  col_index === 0 ? "" : "no-right"
-                                }
                                 set_dropdown_filter={(
                                   dropdown_filter: _DisplayTableState["dropdown_filter"]
                                 ) => this.setState({ dropdown_filter })}
