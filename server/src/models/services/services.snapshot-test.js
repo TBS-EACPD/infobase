@@ -43,6 +43,7 @@ const service_fields = `
     online_application_count
     live_application_count
     mail_application_count
+    phone_application_count
     other_application_count
     service_report_comment
   }

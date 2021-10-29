@@ -76,6 +76,7 @@ const schema = `
     online_application_count: Float,
     live_application_count: Float,
     mail_application_count: Float,
+    phone_application_count: Float,
     other_application_count: Float,
     service_report_comment: String
   }

@@ -45,6 +45,7 @@ const all_service_fragments = `
         online_application_count
         live_application_count
         mail_application_count
+        phone_application_count
         other_application_count
         service_report_comment
       }
