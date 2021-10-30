@@ -7,7 +7,7 @@ type ModalButtonState = {
 };
 
 type ModalButtonProps = {
-  title: React.ReactNode;
+  title?: React.ReactNode;
   body: React.ReactNode;
 };
 
@@ -29,7 +29,7 @@ export class ModalButton extends React.Component<
       <StatelessModal
         title={title}
         show={show_modal}
-        size="sm"
+        size="lg"
         body={body}
         on_close_callback={this.close_modal}
       />
