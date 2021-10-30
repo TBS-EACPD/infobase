@@ -7,6 +7,7 @@ type ModalButtonState = {
 };
 
 type ModalButtonProps = {
+  title: React.ReactNode;
   body: React.ReactNode;
 };
 
@@ -21,11 +22,12 @@ export class ModalButton extends React.Component<
   };
 
   render() {
-    const { body } = this.props;
+    const { title, body } = this.props;
     const { show_modal } = this.state;
 
     return (
       <StatelessModal
+        title={title}
         show={show_modal}
         size="sm"
         body={body}

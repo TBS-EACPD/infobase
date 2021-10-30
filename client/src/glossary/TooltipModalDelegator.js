@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 import { ModalButton } from "src/components/index";
 
-import { get_glossary_item_tooltip_html } from "src/models/glossary";
+import { glossaryEntryStore } from "src/models/glossary";
 
 export class TooltipModalDelegator extends React.Component {
   constructor(props) {
@@ -20,14 +20,17 @@ export class TooltipModalDelegator extends React.Component {
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
 
-    const glossary_def_html_str =
-      get_glossary_item_tooltip_html(glossary_item_key).trim();
-
-    let glossary_def = document.createElement("div");
-    glossary_def.innerHTML = glossary_def_html_str;
+    const glossary_entry = glossaryEntryStore.lookup(glossary_item_key);
+    const { title, raw_definition } = glossary_entry;
+    console.log({ glossary_entry });
 
     const modal = React.createElement(ModalButton, {
-      body: glossary_def.innerText, // using glossary_def gives an error TODO: deal with modal body
+      title: title,
+      body: raw_definition,
+      // TODO: link formatting doesnt work (GBA Plus)
+      // ** formatting doesn't work (Result Status)
+      // link goes off of modal
+      // use larger modal size for longer definitions? (Departmental Plan)
     });
 
     const modal_container = document.createElement("span");
@@ -51,6 +54,7 @@ export class TooltipModalDelegator extends React.Component {
   }
 
   render() {
+    // console.log(glossaryEntryStore.get_all());
     return this.props.children;
   }
 }
