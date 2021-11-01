@@ -59,7 +59,7 @@ services_intro_dept:
   fr: |
     Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement des services. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sont compilées au niveau du programme, du ministère et du gouvernement. La source des  visualisations est le Répertoire des services du GC, qui se trouve  dans le Portail de données ouvertes.
 
-    TODO
+    **Le Répertoire des services** pour **{{subject.name}}** contient actuellement des données sur les services offerts par **{{num_of_programs_offering_services}} programmes** et couvre les résultats de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**.
 
     Vous pouvez nous faire part de vos commentaires sur le  Répertoire des services en remplissant le formulaire à cette fin.
  
@@ -72,7 +72,7 @@ list_of_provided_services_desc_dept:
   en: |
     **{{subject_name}}** is offering **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
-    TODO
+    **{{subject_name}}** offre **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
 list_of_provided_services_desc_program:
   transform: [handlebars, markdown]
   en: |
@@ -247,7 +247,7 @@ other_application_count:
   fr: Demandes par d'autres moyens
 phone_application_count:
   en: Applications by telephone
-  fr: TODO
+  fr: Demandes par téléphone
 online_inquiry_count:
   en: Website visits
   fr: Visites sur le site web
