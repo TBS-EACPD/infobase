@@ -303,11 +303,15 @@ describe("Route tests", () => {
     if (!batching) {
       return route_load_tests_config;
     } else {
-      // TODO would prefer to chunk by route x test_on.length, this is just the simple version to test the basic idea
-      return _.chunk(
-        route_load_tests_config,
-        _.ceil(route_load_tests_config.length / BATCH_COUNT)
-      )[BATCH_INDEX];
+      return _.chain(route_load_tests_config)
+        .flatMap((test_config) => [
+          test_config,
+          ..._.fill(Array(test_config.test_on.length - 1), false),
+        ])
+        .chunk(_.ceil(route_load_tests_config.length / BATCH_COUNT))
+        .map(_.compact)
+        .nth(BATCH_INDEX)
+        .value();
     }
   })();
 
