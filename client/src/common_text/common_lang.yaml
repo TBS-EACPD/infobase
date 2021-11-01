@@ -7,7 +7,7 @@ performance:
   fr: Performance
 result:
   en: Result
-  fr: TODO
+  fr: Résultat
 new:
   en: New
   fr: Nouveau
@@ -432,7 +432,7 @@ the_NCR_full:
   fr: la région de la capitale nationale (RCN)
 a11y_table_title_default:
   en: The following table provides more detail.
-  fr: TODO
+  fr: Le tableau suivant donne plus de détails.
 pie_filtered_groups_note:
   transform: [handlebars]
   en: |

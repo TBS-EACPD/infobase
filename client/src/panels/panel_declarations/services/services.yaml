@@ -1,7 +1,7 @@
 # Services Intro
 services_intro_title:
   en: Introduction to services
-  fr: TODO
+  fr: Présentation des services
 gov_total_number_of_services:
   transform: [handlebars, markdown]
   en: Total number of services in {{subject.name}}
@@ -42,7 +42,12 @@ services_intro_gov:
     The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
     
     You can provide us with feedback on the service inventory by submitting a feedback form.
-  fr: TODO
+  fr: |
+    Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par le **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement d'un service donné. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sur les services sont combinées ou compilées au niveau du programme, du ministère et du gouvernement. La source des  visualisations est le Répertoire des services du GC, qui se trouve  dans le Portail de données ouvertes.
+ 
+    **Le Répertoire des services du GC** contient actuellement des données sur les services offerts par **{{num_of_subject_offering_services}} ministères et organismes** et couvre les résultats de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**.
+ 
+    Vous pouvez nous faire part de vos commentaires sur le Répertoire des services en remplissant le formulaire à cette fin.
 services_intro_dept:
   transform: [handlebars, markdown]
   en: | 
@@ -51,8 +56,13 @@ services_intro_dept:
     The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
     
     Please provide us with any feedback on the service inventory by submitting a feedback form.
-  fr: TODO
+  fr: |
+    Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement des services. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sont compilées au niveau du programme, du ministère et du gouvernement. La source des  visualisations est le Répertoire des services du GC, qui se trouve  dans le Portail de données ouvertes.
 
+    TODO
+
+    Vous pouvez nous faire part de vos commentaires sur le  Répertoire des services en remplissant le formulaire à cette fin.
+ 
 # Services list
 list_of_provided_services_title:
   en: List of provided services
@@ -69,7 +79,10 @@ list_of_provided_services_desc_program:
     Programs can have one or more {{gl_tt "services" "SERVICE"}}. As well, a service may be offered through several programs.
 
     **{{subject_name}}** offers **{{num_of_services}}** services.
-  fr: TODO
+  fr: |
+    Les programmes peuvent avoir un ou plusieurs {{gl_tt "services" "SERVICE"}}. De même, un service peut être offert par le biais de plusieurs programmes.
+
+    **{{subject_name}}** offre **{{num_of_services}}** services.
 
 view_service:
   en: Explore the service
@@ -81,15 +94,12 @@ filter_results_service:
 # Digital Status
 services_digital_status_text:
   transform: [handlebars, markdown]
-  en: |
-    Among the **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offered in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services.
-  fr: |
-    TODO
+  en: Among the **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} that **{{subject_name}}** offered in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services.
+  fr: Parmi les **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} offerts par **{{subject_name}}** en **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services sont accessibles en ligne de bout en bout, soit **{{fmt_percentage1 pct_of_online_services}}** des services.
 services_digital_status_prog_text:
   transform: [handlebars, markdown]
-  en: |
-    Among the **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} offered by the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services.
-  fr: TODO
+  en: Among the **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} offered by the **{{subject_name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services are available online end-to-end, representing **{{fmt_percentage1 pct_of_online_services}}** of all services.
+  fr: Parmi les **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} proposés par le programme **{{subject_name}}** en **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{fmt_big_int number_of_online_enabled_services}}** services est accessible en ligne de bout en bout, soit 16,7 % des services.
 services_digital_status:
   en: Online status of services
   fr: État des services en ligne
@@ -98,7 +108,7 @@ digital_status:
   fr: État en ligne de ce service
 account_reg_digital_desc:
   en: Clients can register an account online
-  fr: TODO
+  fr: Les clients peuvent créer un compte en ligne
 application_digital_desc:
   en: Clients can apply online
   fr: Les clients peuvent présenter leur demande en ligne
@@ -107,16 +117,16 @@ authentication_desc:
   fr: L'authentification du client peut se faire en lignne
 decision_digital_desc:
   en: Clients can read the department's decision online
-  fr: TODO
+  fr: Les clients peuvent lire la décision du Ministère en ligne
 issuance_digital_desc:
   en: Clients can be issued documentation online
-  fr: TODO
+  fr: Les clients peuvent obtenir de la documentation en ligne
 issue_res_digital_desc:
   en: Clients can resolve issues and give feedback online
-  fr: TODO
+  fr: Les clients peuvent résoudre des problèmes et donner leur avis en ligne
 account_reg_digital:
   en: Account Registration
-  fr: TODO
+  fr: Enregistrement du compte
 application_digital:
   en: Applications
   fr: Demandes
@@ -131,7 +141,7 @@ issuance_digital:
   fr: Transmission
 issue_res_digital:
   en: Issue Resolution and Feedback
-  fr: TODO
+  fr: Résolution du problème et commentaires
 can_online:
   en: Yes (can be done online)
   fr: Oui (Peut se faire en ligne)
@@ -145,38 +155,44 @@ client_interaction_point:
 # Channels
 application_channels:
   en: Application channels
-  fr: TODO
+  fr: Modes d’acheminement des demandes
 service_name:
   en: Service name
   fr: Nom du service
 services_channels_title:
   en: Applications for services by channel
-  fr: TODO
+  fr: Demandes de service par mode d’acheminement
 application_breakdown_by_channel:
   en: Breakdown of how clients chose to submit their application
-  fr: TODO
+  fr: Ventilation de la manière dont les clients ont choisi de présenter leur demande
 customizable_service_graph:
   en: Customizable Service Graph
-  fr: TODO
+  fr: Graphique du service personnalisable
 single_service_channels_title:
   en: Applications for the service
-  fr: TODO
+  fr: Demandes de service
 services_channels_text:
   transform: [handlebars, markdown]
   en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** received **{{fmt_big_int number_of_applications}}** applications across **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}. {{#if number_of_applications}} Of the applications received, **{{fmt_big_int number_of_online_applications}}** were completed online, representing **{{fmt_percentage1 pct_of_online_applications}}** of all applications. {{/if}}
-  fr: TODO
+  fr: En **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** a reçu **{{fmt_big_int number_of_applications}}** demandes dans **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}. {{#if number_of_applications}} Parmi les demandes reçues, **{{fmt_big_int number_of_online_applications}}** ont été remplies en ligne, soit **{{fmt_percentage1 pct_of_online_applications}}** des demandes. {{/if}}
 application_channels_by_services_text:
   transform: [handlebars, markdown]
   en: |
     Application channels that {{gl_tt "services" "SERVICE"}} use for handling applications.
     
-    In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}**, generated the most traffic through "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
+    In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** generated the most traffic through "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
 
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the department's services.
 
     Create your own graph by selecting specific services in the list
   fr: |
-    TODO
+    Modes d'acheminement utilisés par les {{gl_tt "services" "SERVICE"}} pour traiter les demandes.
+
+    En **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** a généré le plus de demandes par le biais de "**{{max_vol_channel_name}}**", avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
+
+    Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, soit le nombre le plus élevé parmi tous les services du ministère.
+
+    Créez votre propre graphique en sélectionnant des services figurant dans la liste.
 application_channels_by_services_program_text:
   transform: [handlebars, markdown]
   en: |
@@ -185,33 +201,38 @@ application_channels_by_services_program_text:
     Under the **{{subject.name}}** program in **{{fmt_year_to_fiscal_year most_recent_year}}**, the most traffic was generated through the "**{{max_vol_channel_name}}**", with a total of **{{fmt_big_int max_vol_channel_value}}** applications.
     
     The "**{{max_vol_service_name}}**" service received **{{fmt_big_int max_vol_service_value}}** applications, the highest among all of the services offered under this program.
-  fr: TODO
+  fr: |
+    Modes d'acheminement utilisés par les {{gl_tt "services" "SERVICE"}} pour traiter les demandes.
+
+    Dans le cadre du programme **{{subject.name}}** en **{{fmt_year_to_fiscal_year most_recent_year}}**, le plus grand nombre de demandes a été généré par "**{{max_vol_channel_name}}**", avec un total de **{{fmt_big_int max_vol_channel_value}}** demandes.
+
+    Le service "**{{max_vol_service_name}}**" a reçu **{{fmt_big_int max_vol_service_value}}** demandes, soit le nombre le plus élevé parmi tous les services offerts dans le cadre de ce programme.
 service_channels_text:
   transform: [handlebars, markdown]
   en: Channels that this {{gl_tt "service" "SERVICE"}} uses for receiving applications.
-  fr: TODO
+  fr: Modes d'acheminement utilisés par ce {{gl_tt "service" "SERVICE"}} pour recevoir les demandes.
 most_used_online_application_count:
   transform: [handlebars, markdown]
   en: There were **{{fmt_big_int max_value}} online applications**; most clients chose to submit their applications online.
-  fr: TODO
+  fr: Il y a eu **{{fmt_big_int max_value}} demandes en ligne**; la plupart des clients ont préféré présenter leur demande en ligne.
 most_used_live_application_count:
   transform: [handlebars, markdown]
   en: There were **{{fmt_big_int max_value}} in person applications**; most clients chose to submit their applications in person.
-  fr: TODO
+  fr: Il y a eu **{{fmt_big_int max_value}} demandes en personne**; la plupart des clients ont préféré présenter leur demande en personne.
 most_used_mail_application_count:
   transform: [handlebars, markdown]
   en: There were **{{fmt_big_int max_value}} applications by mail**; most clients chose to submit their applications by mail.
-  fr: TODO
+  fr: Il y a eu **{{fmt_big_int max_value}} demandes par la poste**; la plupart des clients ont préféré présenter leur demande par la poste.
 most_used_other_application_count:
   transform: [handlebars, markdown]
   en: There were **{{fmt_big_int max_value}} applications by other channels**; most clients chose to submit their applications by other channels.
-  fr: TODO
+  fr: Il y a eu **{{fmt_big_int max_value}} demandes par d’autres moyens**; la plupart des clients ont préféré présenter leur demande par d’autres moyens.
 most_used_phone_application_count:
  en: There were **{{fmt_big_int max_value}} applications by telephone**; most clients chose to submit their applications by telephone.
- fr: TODO
+ fr: Il y a eu **{{fmt_big_int max_value}} demandes par téléphone**; la plupart des clients ont ont préféré présenter leur demande par téléphone.
 no_applications:
   en: This service did not receive any applications
-  fr: TODO
+  fr: Ce service n'a reçu aucune demande
 live_application_count:
   en: In person applications
   fr: Demandes en personne
@@ -237,30 +258,30 @@ applications_count:
 # Orgs offering services
 subject_offering_services_title:
   en: Organizations that offer services
-  fr: TODO
+  fr: Organisations qui offrent des services
 programs_offering_services_title:
   en: Programs in this department which offer services
-  fr: TODO
+  fr: Programmes de ce ministère qui offrent des services
 orgs_offering_services_text:
   transform: [handlebars, markdown]
-  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}
-  fr: TODO
+  en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}.
+  fr: En **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** ministères et organismes du **{{subject.name}}** ont accepté **{{fmt_big_int number_of_applications}}** demandes au moyen de **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}.
 programs_offering_services_text:
   transform: [handlebars, markdown]
   en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** offered **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} via **{{number_of_subjects}}** programs
-  fr: TODO
+  fr: En **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** a offert **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} par le biais de **{{number_of_subjects}}** programmes.
 number_of_services:
   en: Number of services
-  fr: TODO
+  fr: Nombre de services
 applications:
   en: Applications
-  fr: TODO
+  fr: Demandes
 
 # Overview
 overview_digital_status_title:
   transform: [handlebars, markdown]
   en: How can {{gl_tt "clients interact" "CLIENT_INTERACTION"}} with this {{gl_tt "service" "SERVICE"}} online?
-  fr: TODO
+  fr: Comment les {{gl_tt "clients peuvent-ils interagir" "CLIENT_INTERACTION"}} en ligne avec ce {{gl_tt "service" "SERVICE"}}?
 overview_digital_status_desc:
   en: Online client interaction points of this service
   fr: Points d'interaction en ligne liés aux clients de ce service
@@ -272,7 +293,7 @@ service_overview_title:
   fr: Aperçu
 link_to_programs:
   en: Link to program(s)
-  fr: TODO
+  fr: Lien vers le ou les programmes
 services_fees:
   en: Service fees
   fr: Frais de service
@@ -324,7 +345,8 @@ services_standards_text:
   transform: [handlebars, markdown]
   en: |
     In **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{subject.name}}** had the following service standard performance:
-  fr: TODO
+  fr: |
+    Voici le rendement **{{subject.name}}** sur le plan des normes de service en **{{fmt_year_to_fiscal_year most_recent_year}}** :
 service_standards_title:
   en: Service standards
   fr: Normes de service
@@ -335,7 +357,9 @@ service_standards_text:
     
     They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tell them what to expect from the services.
   fr: |
-    TODO
+    Les {{gl_tt "normes de service" "STANDARD"}} mesurent le rendement du gouvernement, ce qui accroît la reddition de compte.
+
+    Elles aident également les clients à prendre des décisions importantes et opportunes concernant l'accès aux {{gl_tt "services" "SERVICE"}} et leur indiquent ce à quoi ils peuvent s’attendre.
 no_service_standards_text:
   en: This service does not have any service standards
   fr: Ce service n'a pas de normes de service
@@ -353,7 +377,7 @@ total_business_volume:
   fr: Volume d'activités total
 volume_target:
   en: Volume meeting target
-  fr: TODO
+  fr: Volume atteignant la cible
 has_standards:
   en: Service has standards
   fr: Le service a des normes
@@ -372,23 +396,23 @@ has_standards_text:
   fr: Combien de {{gl_tt "services" "SERVICE"}} ont des {{gl_tt "normes" "STANDARD"}}?
 has_standards_table_text:
   en: How many services have service standards?
-  fr: TODO
+  fr: Combien de services ont des normes de service?
 target_met_text:
   transform: [handlebars, markdown]
   en: How many service {{gl_tt "standards'" "STANDARD"}} targets were met?
-  fr: TODO
+  fr: Combien de cibles de normes de service ont été atteintes?
 target_met_table_text:
   en: How many service standard targets were met?
-  fr: TODO
+  fr: Combien de cibles de normes de service ont été atteintes?
 gauge_has_standards_text:
   transform: [handlebars, markdown]
   en: |
     **{{fmt_percentage1 has_standards_pct}}** of services have service standards for a total of **{{fmt_big_int standards_count}}** service standards
   fr: |
-    TODO
+    **{{fmt_percentage1 has_standards_pct}}** des services ont des normes de service, soit un total de **{{fmt_big_int standards_count}}** normes de service
 gauge_standards_met_text:
   transform: [handlebars, markdown]
   en: |
     **{{fmt_percentage1 standards_met_pct}}** of service standard targets were met
   fr: |
-    TODO
+    **{{fmt_percentage1 standards_met_pct}}** des cibles des normes de service ont été atteintes.
