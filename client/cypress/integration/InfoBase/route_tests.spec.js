@@ -308,7 +308,12 @@ describe("Route tests", () => {
           test_config,
           ..._.fill(Array(test_config.test_on.length - 1), false),
         ])
-        .chunk(_.ceil(route_load_tests_config.length / BATCH_COUNT))
+        .thru((padded_test_configs) =>
+          _.chunk(
+            padded_test_configs,
+            _.ceil(padded_test_configs.length / BATCH_COUNT)
+          )
+        )
         .map(_.compact)
         .nth(BATCH_INDEX)
         .value();
