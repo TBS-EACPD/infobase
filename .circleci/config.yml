@@ -372,6 +372,11 @@ workflows:
     jobs:
       - build
 
+      - build_storybook:
+          requires:
+            - build
+          <<: *deploy_filter
+
       - test_server:
           requires:
             - build
@@ -384,11 +389,6 @@ workflows:
               batch-count: [2]
               batch-index: [0, 1]
 
-      - build_storybook:
-          requires:
-            - test_server
-          <<: *deploy_filter
-
       - deploy_data:
           requires:
             - test_server
@@ -400,7 +400,7 @@ workflows:
 
       - deploy_client_and_storybook:
           requires:
-            - cypress_tests
             - build_storybook
+            - cypress_tests
             - deploy_server
           <<: *deploy_filter
