@@ -217,7 +217,7 @@ jobs:
 
       - run: (cd server && npm run snapshot_tests)
 
-  test_end_to_end:
+  cypress_tests:
     docker:
       - image: eaadtbs/ib-ci-cypress:4.0
         <<: *dockerhub_auth
@@ -225,10 +225,10 @@ jobs:
     environment:
       CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
     parameters:
-      TEST_BATCH_COUNT:
+      batch-count:
         type: integer
         default: 1
-      TEST_BATCH_INDEX:
+      batch-index:
         type: integer
         default: 0
     steps:
@@ -255,7 +255,7 @@ jobs:
           command: (cd client && npm run ci_serve)
           background: true
 
-      - run: (cd client && npm run cypress:run -- -e BATCH_COUNT=$TEST_BATCH_COUNT,BATCH_INDEX=$TEST_BATCH_INDEX)
+      - run: (cd client && npm run cypress:run -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
@@ -371,22 +371,23 @@ workflows:
   build_test_deploy:
     jobs:
       - build
+
       - test_server:
           requires:
             - build
 
-      - test_end_to_end:
-          name: test_end_to_end--batch_1
-          TEST_BATCH_COUNT: 2
-          TEST_BATCH_INDEX: 0
+      - cypress_tests:
           requires:
             - test_server
-      - test_end_to_end:
-          name: test_end_to_end--batch_2
-          TEST_BATCH_COUNT: 2
-          TEST_BATCH_INDEX: 1
+          matrix:
+            parameters:
+              batch-count: [2]
+              batch-index: [0, 1]
+
+      - build_storybook:
           requires:
             - test_server
+          <<: *deploy_filter
 
       - deploy_data:
           requires:
@@ -396,16 +397,10 @@ workflows:
           requires:
             - deploy_data
           <<: *deploy_filter
-      - build_storybook:
-          # building and deploying storybook, conceptually, should be it's own job branch but, for now,
-          # sticking it here to balance time/container use efficiency against long running test_end_to_end job
-          requires:
-            - deploy_server
-          <<: *deploy_filter
 
       - deploy_client_and_storybook:
           requires:
+            - cypress_tests
             - build_storybook
-            - test_end_to_end--batch_1
-            - test_end_to_end--batch_2
+            - deploy_server
           <<: *deploy_filter
