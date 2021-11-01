@@ -16,7 +16,7 @@ const d3_dsv = require("d3-dsv");
 const _ = require("lodash");
 
 const excludedRe = /\.yaml|\.scss|\.css|\.csv/;
-const isTypescriptRe = /\.ts|\.tsx/;
+const isJavaScriptRe = /\.js/;
 
 const recordsByName = {};
 
@@ -51,10 +51,10 @@ const final = _.chain(recordsByName)
   .map((node) => {
     const name = node.source;
     const allDeps = Array.from(getAllDeps(node.source));
-    const nonTsDeps = allDeps.filter((name) => !name.match(isTypescriptRe));
+    const nonTsDeps = allDeps.filter((name) => name.match(isJavaScriptRe));
     return {
       name,
-      isTs: !!name.match(isTypescriptRe),
+      isTs: !name.match(isJavaScriptRe),
       numDeps: allDeps.length,
       numNonTsDept: nonTsDeps.length,
     };
