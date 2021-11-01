@@ -224,6 +224,13 @@ jobs:
     working_directory: "~/InfoBase"
     environment:
       CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
+    parameters:
+      TEST_BATCH_COUNT:
+        type: integer
+        default: 1
+      TEST_BATCH_INDEX:
+        type: integer
+        default: 0
     steps:
       - attach_workspace:
           at: ./
@@ -248,7 +255,7 @@ jobs:
           command: (cd client && npm run ci_serve)
           background: true
 
-      - run: (cd client && npm run cypress:run)
+      - run: (cd client && npm run cypress:run -- -e BATCH_COUNT=$TEST_BATCH_COUNT,BATCH_INDEX=$TEST_BATCH_INDEX)
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
@@ -369,6 +376,13 @@ workflows:
             - build
 
       - test_end_to_end:
+          TEST_BATCH_COUNT: 2
+          TEST_BATCH_INDEX: 0
+          requires:
+            - test_server
+      - test_end_to_end:
+          TEST_BATCH_COUNT: 2
+          TEST_BATCH_INDEX: 1
           requires:
             - test_server
 
