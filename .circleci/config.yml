@@ -376,11 +376,13 @@ workflows:
             - build
 
       - test_end_to_end:
+          name: test_end_to_end--batch_1
           TEST_BATCH_COUNT: 2
           TEST_BATCH_INDEX: 0
           requires:
             - test_server
       - test_end_to_end:
+          name: test_end_to_end--batch_2
           TEST_BATCH_COUNT: 2
           TEST_BATCH_INDEX: 1
           requires:
@@ -404,5 +406,6 @@ workflows:
       - deploy_client_and_storybook:
           requires:
             - build_storybook
-            - test_end_to_end
+            - test_end_to_end--batch_1
+            - test_end_to_end--batch_2
           <<: *deploy_filter
