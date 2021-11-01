@@ -288,13 +288,13 @@ const run_tests_from_config = ({
   });
 
 describe("Route tests", () => {
-  const { BATCH_COUNT, BATCH_INDEX } = Cypress.env;
+  const { BATCH_COUNT, BATCH_INDEX } = Cypress.env();
 
   const batching = BATCH_COUNT || BATCH_INDEX;
 
   if (batching && (!_.isInteger(BATCH_COUNT) || !_.isInteger(BATCH_INDEX))) {
     throw new Error(
-      "When batching route load tests, set cypess env vars with integer values for both BATCH_COUNT and BATCH_INDEX." +
+      "When batching route load tests, set cypess env vars with integer values for both BATCH_COUNT and BATCH_INDEX. " +
         `Provided values were "${BATCH_COUNT}" and "${BATCH_INDEX}" respectively.`
     );
   }
@@ -304,7 +304,10 @@ describe("Route tests", () => {
       return route_load_tests_config;
     } else {
       // TODO would prefer to chunk by route x test_on.length, this is just the simple version to test the basic idea
-      return _.chunk(route_load_tests_config, BATCH_COUNT)[BATCH_INDEX];
+      return _.chunk(
+        route_load_tests_config,
+        _.ceil(route_load_tests_config.length / BATCH_COUNT)
+      )[BATCH_INDEX];
     }
   })();
 
