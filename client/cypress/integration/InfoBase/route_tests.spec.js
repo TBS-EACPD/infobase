@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 const route_load_tests_config = [
   {
     name: "Always failing route, to test error boundary",
@@ -241,43 +243,70 @@ const route_load_tests_config = [
     name: "Footnote Inventory - all footnotes",
     route: "footnote-inventory",
     test_on: ["eng", "basic-eng", "fra"],
-    skipAxe: true,
+    skip_axe: true,
   },
 ];
 
-describe("Route tests", () => {
-  route_load_tests_config.map((routes) => {
-    describe(`${routes.name}`, () => {
-      routes.test_on.map((app) => {
-        it(`Tested on index-${app}.html#${routes.route}`, () => {
-          cy.visit(
-            `http://localhost:8080/build/InfoBase/index-${app}.html#${routes.route}`
-          );
+const run_tests_from_config = ({
+  name,
+  route,
+  test_on,
+  expect_to_fail,
+  skip_axe,
+}) =>
+  describe(`${name}`, () => {
+    _.map(test_on, (app) => {
+      it(`Tested on index-${app}.html#${route}`, () => {
+        cy.visit(
+          `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`
+        );
 
-          cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-            "not.exist"
-          );
+        cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+          "not.exist"
+        );
 
-          //Once basic routes a11y critical issues are fix, can remove this if statement
-          if (!routes.skipAxe && (app == "eng" || app == "fra")) {
-            cy.injectAxe();
-            cy.checkA11y(
-              null,
-              { includedImpacts: ["critical"] },
-              cy.terminalLog,
-              false
-            );
+        //Once basic routes a11y critical issues are fix, can remove this if statement
+        if (!skip_axe && (app == "eng" || app == "fra")) {
+          cy.injectAxe();
+          cy.checkA11y(
+            null,
+            { includedImpacts: ["critical"] },
+            cy.terminalLog,
+            false
+          );
+        }
+
+        cy.on("fail", (e, test) => {
+          if (expect_to_fail) {
+            console.log("Test expected to fail.", e);
+          } else {
+            throw e;
           }
-
-          cy.on("fail", (e, test) => {
-            if (routes.expect_to_fail) {
-              console.log("Test expected to fail.", e);
-            } else {
-              throw e;
-            }
-          });
         });
       });
     });
   });
+
+describe("Route tests", () => {
+  const { BATCH_COUNT, BATCH_INDEX } = Cypress.env;
+
+  const batching = BATCH_COUNT || BATCH_INDEX;
+
+  if (batching && (!_.isInteger(BATCH_COUNT) || !_.isInteger(BATCH_INDEX))) {
+    throw new Error(
+      "When batching route load tests, set cypess env vars with integer values for both BATCH_COUNT and BATCH_INDEX." +
+        `Provided values were "${BATCH_COUNT}" and "${BATCH_INDEX}" respectively.`
+    );
+  }
+
+  const route_configs_to_test = (() => {
+    if (!batching) {
+      return route_load_tests_config;
+    } else {
+      // TODO would prefer to chunk by route x test_on.length, this is just the simple version to test the basic idea
+      return _.chunk(route_load_tests_config, BATCH_COUNT)[BATCH_INDEX];
+    }
+  })();
+
+  _.each(route_configs_to_test, run_tests_from_config);
 });
