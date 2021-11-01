@@ -16,7 +16,8 @@ archive_filter: &archive_filter
         - /__.*/
         - /archived__.*/
 
-version: 2
+version: 2.1
+
 jobs:
   test_form_backend:
     docker:
@@ -358,7 +359,6 @@ jobs:
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
 
 workflows:
-  version: 2
   test_form_backend:
     jobs:
       - test_form_backend
