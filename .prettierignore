@@ -6,6 +6,7 @@ client/build/
 client/build_prod/
 client/storybook-static
 client/src/**/*.scss.d.ts
+client/scripts/typescript_progress/output
 */transpiled_build/
 */coverage/
 
