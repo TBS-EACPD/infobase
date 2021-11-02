@@ -381,7 +381,13 @@ const Infographic = ({
     );
   }
 
-  const subject = get_subject_by_guid(`${subject_type}_${subject_id}`);
+  const subject = (() => {
+    try {
+      return get_subject_by_guid(`${subject_type}_${subject_id}`);
+    } catch {
+      return false;
+    }
+  })();
 
   if (!subject) {
     if (subject_type === "program" || subject_type === "crso") {
