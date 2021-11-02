@@ -65,11 +65,11 @@ No changes to the production site.
 }
 trap safe_deploy_exit_alert EXIT
 
-(cd server && sh deploy_scripts/prod_deploy_data.sh)
-(cd server && sh deploy_scripts/prod_deploy_function.sh)
+(cd server && sh scripts/deploy/prod_deploy_data.sh)
+(cd server && sh scripts/deploy/prod_deploy_function.sh)
 
-(cd client && sh deploy_scripts/prod_build_client.sh)
-(cd client && sh deploy_scripts/prod_stage_client.sh)
+(cd client && sh scripts/deploy/prod_build_client.sh)
+(cd client && sh scripts/deploy/prod_stage_client.sh)
 
 function unsafe_deploy_exit_alert {
   if [[ $? != 0 ]]; then
@@ -82,7 +82,7 @@ If the live site HAS changed, you should probably roll back now. Either way, fix
 }
 trap unsafe_deploy_exit_alert EXIT
 
-(cd client && sh deploy_scripts/prod_deploy_staged_client.sh)
+(cd client && sh scripts/deploy/prod_deploy_staged_client.sh)
 
 # --eval seems to be the go-to way to passing args in to a JS mongo script
 mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \

@@ -151,7 +151,7 @@ jobs:
             - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./deploy_scripts/build_all.sh -m 1536 -c "half")
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -m 1536 -c "half")
       - save_cache:
           key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:
@@ -180,7 +180,7 @@ jobs:
             - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
       - run:
           command: |
-            [ -f "server/transpiled_build/app.js" ] || (cd server && ./deploy_scripts/build.sh)
+            [ -f "server/transpiled_build/app.js" ] || (cd server && ./scripts/deploy/build.sh)
       - save_cache:
           paths:
             - server/transpiled_build
@@ -306,7 +306,7 @@ jobs:
             - api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v2
       - run:
           command: |
-            [ -f "./this-api-is-deployed" ] || (cd server && ./deploy_scripts/ci_deploy_function.sh)
+            [ -f "./this-api-is-deployed" ] || (cd server && ./scripts/deploy/ci_deploy_function.sh)
       - run: touch ./this-api-is-deployed
       - save_cache:
           key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v2
@@ -353,7 +353,7 @@ jobs:
 
       # Replace CI API URL placeholder with branch specific API URL
       - run: sed -i "s#hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls#https://us-central1-ib-serverless-api-dev.cloudfunctions.net/$CIRCLE_BRANCH/graphql#g" ./client/$BUILD_DIR/InfoBase/app/*.js
-      - run: (cd client && ./deploy_scripts/push_to_gcloud_bucket.sh)
+      - run: (cd client && ./scripts/deploy/push_to_gcloud_bucket.sh)
 
       # only saving master stats right now since they're somewhat large files (~1 mb each)
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
