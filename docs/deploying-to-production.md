@@ -27,7 +27,7 @@ Other notes:
   - The app needs to make cross domain requests. This must be allowed on both ends
     - client: `fetch` api with `{ mode: "cors" }`
     - server: setting cors on the bucket [exactly as in this SO answer](https://stackoverflow.com/questions/43109327/cors-setting-on-google-cloud-bucket)
-  - The cors config is in a json file and is close enough to secret that we keep it in LastPass. Edits can be made there, and they can be reapplied with `client/deploy_scripts/set_bucket_cors.sh`
+  - The cors config is in a json file and is close enough to secret that we keep it in LastPass. Edits can be made there, and they can be reapplied with `client/scripts/deploy/set_bucket_cors.sh`
 
 TODO:
 

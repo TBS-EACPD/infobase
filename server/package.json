@@ -49,7 +49,7 @@
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node src/server.js",
     "start:debug": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node --inspect ./src/server.js",
     "start:debug-brk": "nodemon --watch src --watch package-lock.json --exec node --inspect-brk ./src/server.js",
-    "transpile": "./deploy_scripts/build.sh",
+    "transpile": "./scripts/deploy/build.sh",
     "start:transpile": "node transpiled_build/server.js",
     "populate_db": "node src/populate_db.js",
     "populate_db:remote": "(export USE_REMOTE_DB=1 && node src/populate_db.js)",
