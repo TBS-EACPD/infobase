@@ -348,7 +348,7 @@ const services = {
   config_name: "services",
   header_function: () => trivial_text_maker("services"),
   name_function: (service) =>
-    `${service.name} - ${Dept.lookup(service.org_id).name}`,
+    `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
   query: (query_value) => `
     search_services(name_query: "${query_value}") {
       id
