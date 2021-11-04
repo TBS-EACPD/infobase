@@ -99,8 +99,11 @@ export class SidebarContent extends React.Component<
             <div className="item-def">{this.state.def}</div>
             <div>
               <span
+                role="button"
                 className="back-button"
                 onClick={() => this.closeDefinition()}
+                onKeyDown={() => this.closeDefinition()}
+                tabIndex={0}
               >
                 Back
               </span>
@@ -117,9 +120,14 @@ export class SidebarContent extends React.Component<
                 {_.map(items, (item, ix) => (
                   <div key={ix} className="glossary-title">
                     <span
+                      role="button"
                       onClick={() =>
                         this.openDefinition(item.title, item.raw_definition)
                       }
+                      onKeyDown={() =>
+                        this.openDefinition(item.title, item.raw_definition)
+                      }
+                      tabIndex={0}
                     >
                       {item.title}
                     </span>
