@@ -81,6 +81,12 @@ export class GlossaryMenu extends React.Component<
     this.props.setGlossaryItem(item);
   }
 
+  handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>) {
+    if (e.key === "Enter") {
+      this.props.toggle(false);
+    }
+  }
+
   render() {
     return (
       <div
@@ -104,7 +110,7 @@ export class GlossaryMenu extends React.Component<
                     role="button"
                     className="icon"
                     onClick={() => this.props.toggle(false)}
-                    onKeyDown={() => this.props.toggle(false)}
+                    onKeyDown={(e) => this.handleKeyPress(e)}
                     tabIndex={0}
                   >
                     <IconX width="25px" color="white" alternate_color={false} />
