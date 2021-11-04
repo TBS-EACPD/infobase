@@ -59,8 +59,27 @@ export class SidebarContent extends React.Component<
     this.props.closeItem();
   }
 
-  openDefinition(title: string, def: string) {
+  openDefinition(title: string | undefined, def: string | undefined) {
     this.props.openItem({ title: title, def: def });
+  }
+
+  //place holder while I get passing functions to work...
+  handleKeyPress(
+    e: React.KeyboardEvent<HTMLSpanElement>,
+    action: string,
+    item: ResultProps | null
+  ) {
+    if (e.key === "Enter") {
+      switch (action) {
+        case "close":
+          this.closeDefinition();
+          break;
+
+        case "open":
+          this.openDefinition(item?.title, item?.raw_definition);
+          break;
+      }
+    }
   }
 
   get_glossary_items_by_letter() {
@@ -102,7 +121,7 @@ export class SidebarContent extends React.Component<
                 role="button"
                 className="back-button"
                 onClick={() => this.closeDefinition()}
-                onKeyDown={() => this.closeDefinition()}
+                onKeyDown={(e) => this.handleKeyPress(e, "close", null)}
                 tabIndex={0}
               >
                 Back
@@ -124,9 +143,7 @@ export class SidebarContent extends React.Component<
                       onClick={() =>
                         this.openDefinition(item.title, item.raw_definition)
                       }
-                      onKeyDown={() =>
-                        this.openDefinition(item.title, item.raw_definition)
-                      }
+                      onKeyDown={(e) => this.handleKeyPress(e, "open", item)}
                       tabIndex={0}
                     >
                       {item.title}
