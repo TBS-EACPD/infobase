@@ -172,7 +172,8 @@ export default async function ({ models }) {
         report_years: get_years_from_service_report([{ service_report }]),
         program_activity_codes: _.chain(program_activity_codes)
           .split("<>")
-          .map((id) => `${dept_code}-${id}`)
+          .map((id) => id && `${dept_code}-${id}`)
+          .compact()
           .value(),
         ...multi_value_string_fields_to_arrays({
           service_type_en,
