@@ -22,8 +22,8 @@ import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
 import { GlossaryMenu } from "src/glossary/GlossaryMenu";
-import { make_request } from "src/request_utils";
 import { SidebarActivator } from "src/glossary/SideBarActivator";
+import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
 
 import "./App.scss";

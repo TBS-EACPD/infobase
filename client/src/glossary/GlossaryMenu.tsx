@@ -101,8 +101,11 @@ export class GlossaryMenu extends React.Component<
               <div role="navigation" aria-label="Glossary navigation">
                 <div className={"close-button"}>
                   <span
+                    role="button"
                     className="icon"
                     onClick={() => this.props.toggle(false)}
+                    onKeyDown={() => this.props.toggle(false)}
+                    tabIndex={0}
                   >
                     <IconX width="25px" color="white" alternate_color={false} />
                   </span>
