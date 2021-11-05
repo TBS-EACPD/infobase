@@ -22,54 +22,43 @@ import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { ReactUnmounter } from "src/core/NavComponents";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
-import { retrying_promise } from "src/general_utils";
-
 import { TooltipActivator } from "src/glossary/TooltipActivator";
 import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
 
 import "./App.scss";
 
-const retrying_react_lazy = (import_promise) =>
-  React.lazy(() => retrying_promise(import_promise));
-
-const Home = retrying_react_lazy(() => import("src/home/home"));
-const A11yHome = retrying_react_lazy(() => import("src/home/a11y_home"));
-const About = retrying_react_lazy(() => import("src/about/about"));
-const Contact = retrying_react_lazy(() => import("src/contact/contact"));
-const FAQ = retrying_react_lazy(() => import("src/FAQ/FAQ"));
-const MetaData = retrying_react_lazy(() => import("src/metadata/metadata"));
-const IgocExplorer = retrying_react_lazy(() =>
-  import("src/IgocExplorer/IgocExplorer")
-);
-const TagExplorer = retrying_react_lazy(() =>
-  import("src/TagExplorer/TagExplorer")
-);
-const Glossary = retrying_react_lazy(() => import("src/glossary/glossary"));
-const ReportBuilder = retrying_react_lazy(() => import("src/rpb/index"));
-const Infographic = retrying_react_lazy(() =>
-  import("src/infographic/Infographic")
-);
-const EstimatesComparison = retrying_react_lazy(() =>
+const Home = React.lazy(() => import("src/home/home"));
+const A11yHome = React.lazy(() => import("src/home/a11y_home"));
+const About = React.lazy(() => import("src/about/about"));
+const Contact = React.lazy(() => import("src/contact/contact"));
+const FAQ = React.lazy(() => import("src/FAQ/FAQ"));
+const MetaData = React.lazy(() => import("src/metadata/metadata"));
+const IgocExplorer = React.lazy(() => import("src/IgocExplorer/IgocExplorer"));
+const TagExplorer = React.lazy(() => import("src/TagExplorer/TagExplorer"));
+const Glossary = React.lazy(() => import("src/glossary/glossary"));
+const ReportBuilder = React.lazy(() => import("src/rpb/index"));
+const Infographic = React.lazy(() => import("src/infographic/Infographic"));
+const EstimatesComparison = React.lazy(() =>
   import("src/EstimatesComparison/EstimatesComparison")
 );
-const PrivacyStatement = retrying_react_lazy(() =>
+const PrivacyStatement = React.lazy(() =>
   import("src/PrivacyStatement/PrivacyStatement")
 );
-const TextDiff = retrying_react_lazy(() => import("src/TextDiff/TextDiff"));
-const TreeMap = retrying_react_lazy(() => import("src/TreeMap/TreeMap"));
-const IsolatedPanel = retrying_react_lazy(() =>
+const TextDiff = React.lazy(() => import("src/TextDiff/TextDiff"));
+const TreeMap = React.lazy(() => import("src/TreeMap/TreeMap"));
+const IsolatedPanel = React.lazy(() =>
   import("src/panels/panel_routes/IsolatedPanel")
 );
-const PanelInventory = retrying_react_lazy(() =>
+const PanelInventory = React.lazy(() =>
   import("src/panels/panel_routes/PanelInventory")
 );
 
-const FootnoteInventory = retrying_react_lazy(() =>
+const FootnoteInventory = React.lazy(() =>
   import("src/models/footnotes/FootnoteInventory")
 );
-const Survey = retrying_react_lazy(() => import("src/Survey/Survey"));
-const SingleServiceRoute = retrying_react_lazy(() =>
+const Survey = React.lazy(() => import("src/Survey/Survey"));
+const SingleServiceRoute = React.lazy(() =>
   import("../panels/panel_routes/SingleServiceRoute")
 );
 
