@@ -115,6 +115,11 @@ const make_orgs_search_config = (options) => {
     ...options,
   };
 
+  const with_or_without = (boolean) => (boolean ? "with" : "without");
+  const config_name = `orgs_${orgs_to_include}_${with_or_without(
+    include_gov
+  )}_gov_${with_or_without(!reject_dead_orgs)}_dead`;
+
   const org_data = (() => {
     switch (orgs_to_include) {
       case "all":
@@ -129,29 +134,30 @@ const make_orgs_search_config = (options) => {
         );
     }
   })();
-  const get_data = () =>
-    _.chain(org_data)
-      .thru((data) => (include_gov ? [Gov.instance].concat(data) : data))
-      .thru((data) => (reject_dead_orgs ? _.reject(data, "is_dead") : data))
-      .value();
-
-  const with_or_without = (boolean) => (boolean ? "with" : "without");
-  const config_name = `orgs_${orgs_to_include}_${with_or_without(
-    include_gov
-  )}_gov_${with_or_without(!reject_dead_orgs)}_dead`;
 
   return {
     ...org_templates,
-    get_data,
-    filter: (query, datum) =>
-      memoized_re_matchers(query, org_attributes_to_match, config_name)(datum),
     config_name,
+    query: (query) =>
+      Promise.resolve(
+        _.chain(org_data)
+          .thru((data) => (include_gov ? [Gov.instance].concat(data) : data))
+          .thru((data) => (reject_dead_orgs ? _.reject(data, "is_dead") : data))
+          .filter((org) =>
+            memoized_re_matchers(
+              query,
+              org_attributes_to_match,
+              config_name
+            )(org)
+          )
+          .value()
+      ),
   };
 };
 
 const all_dp_orgs = {
   ...org_templates,
-  get_data: () => _.filter(Dept.store.get_all(), "is_dp_org"),
+  get_data: Promise.resolve(_.filter(Dept.store.get_all(), "is_dp_org")),
   filter: (query, datum) =>
     memoized_re_matchers(query, org_attributes_to_match, "all_dp_orgs")(datum),
 };
@@ -190,26 +196,32 @@ const glossary = {
       />
     </Fragment>
   ),
-  get_data: () => glossaryEntryStore.get_all(),
-  filter: (query, datum) =>
-    memoized_re_matchers(
-      query,
-      glossary_attributes_to_match,
-      "glossary"
-    )(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
+        memoized_re_matchers(
+          query,
+          glossary_attributes_to_match,
+          "glossary"
+        )(glossary_entry)
+      )
+    ),
 };
 
 const glossary_lite = {
   config_name: "glossary_lite",
   header_function: () => trivial_text_maker("glossary"),
   name_function: _.property("title"),
-  get_data: () => glossaryEntryStore.get_all(),
-  filter: (query, datum) =>
-    memoized_re_matchers(
-      query,
-      glossary_attributes_to_match,
-      "glossary_lite"
-    )(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
+        memoized_re_matchers(
+          query,
+          glossary_attributes_to_match,
+          "glossary_lite"
+        )(glossary_entry)
+      )
+    ),
 };
 
 const gocos = {
@@ -217,13 +229,16 @@ const gocos = {
   header_function: () =>
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.GOCO.name}`,
   name_function: _.property("name"),
-  get_data: () =>
-    _.chain(ProgramTag.store.get_all())
-      .filter((tag) => tag.root.id === "GOCO")
-      .filter("has_programs")
-      .value(),
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name"], "gocos")(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(
+        ProgramTag.store.get_all(),
+        (tag) =>
+          tag.root.id === "GOCO" &&
+          tag.has_programs &&
+          memoized_re_matchers(query, ["name"], "gocos")(tag)
+      )
+    ),
 };
 
 const how_we_help = {
@@ -231,13 +246,16 @@ const how_we_help = {
   header_function: () =>
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.HWH.name}`,
   name_function: _.property("name"),
-  get_data: () =>
-    _.chain(ProgramTag.store.get_all())
-      .filter((tag) => tag.root.id === "HWH")
-      .filter("has_programs")
-      .value(),
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name"], "how_we_help")(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(
+        ProgramTag.store.get_all(),
+        (tag) =>
+          tag.root.id === "HWH" &&
+          tag.has_programs &&
+          memoized_re_matchers(query, ["name"], "how_we_help")(tag)
+      )
+    ),
 };
 
 const who_we_help = {
@@ -245,40 +263,46 @@ const who_we_help = {
   header_function: () =>
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.WWH.name}`,
   name_function: _.property("name"),
-  get_data: () =>
-    _.chain(ProgramTag.store.get_all())
-      .filter((tag) => tag.root.id === "WWH")
-      .filter("has_programs")
-      .value(),
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name"], "who_we_help")(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(
+        ProgramTag.store.get_all(),
+        (tag) =>
+          tag.root.id === "WWH" &&
+          tag.has_programs &&
+          memoized_re_matchers(query, ["name"], "who_we_help")(tag)
+      )
+    ),
 };
 
 const datasets = {
   config_name: "datasets",
   header_function: () => trivial_text_maker("build_a_report"),
   name_function: (table) => table.title,
-  get_data: () =>
-    _.chain(Table.store.get_all())
-      .reject("reference_table")
-      .map((t) => ({
-        name: t.name,
-        title: t.title,
-        flat_tag_titles: _.chain(t.tags)
-          .map(
-            (key) =>
-              glossaryEntryStore.has(key) && glossaryEntryStore.lookup(key)
-          )
-          .compact()
-          .map("title")
-          .compact()
-          .thru((titles) => titles.join(" "))
-          .value(),
-        table: t,
-      }))
-      .value(),
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name", "flat_tag_titles"], "datasets")(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.chain(Table.store.get_all())
+        .reject("reference_table")
+        .map((t) => ({
+          name: t.name,
+          title: t.title,
+          flat_tag_titles: _.chain(t.tags)
+            .map(
+              (key) =>
+                glossaryEntryStore.has(key) && glossaryEntryStore.lookup(key)
+            )
+            .compact()
+            .map("title")
+            .compact()
+            .thru((titles) => titles.join(" "))
+            .value(),
+          table: t,
+        }))
+        .filter(
+          memoized_re_matchers(query, ["name", "flat_tag_titles"], "datasets")
+        )
+        .value()
+    ),
 };
 
 const program_or_crso_search_name = ({ is_internal_service, name, dept }) =>
@@ -288,13 +312,16 @@ const programs = {
   config_name: "programs",
   header_function: () => trivial_text_maker("programs"),
   name_function: program_or_crso_search_name,
-  get_data: () => Program.store.get_all(),
-  filter: (query, datum) =>
-    memoized_re_matchers(
-      query,
-      ["name", "old_name", "activity_code"],
-      "programs"
-    )(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(Program.store.get_all(), (program) =>
+        memoized_re_matchers(
+          query,
+          ["name", "old_name", "activity_code"],
+          "programs"
+        )(program)
+      )
+    ),
   menu_content_function: function (program, search, name_function) {
     const name = name_function(program);
 
@@ -340,10 +367,18 @@ const crsos = {
   config_name: "crsos",
   header_function: () => trivial_text_maker("core_resps"),
   name_function: program_or_crso_search_name,
-  get_data: () => _.filter(CRSO.store.get_all(), "is_cr"),
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name", "activity_code"], "crsos")(datum),
+  query: (query) =>
+    Promise.resolve(
+      _.filter(
+        CRSO.store.get_all(),
+        (crso) =>
+          crso.is_cr &&
+          memoized_re_matchers(query, ["name", "activity_code"], "crsos")(crso)
+      )
+    ),
 };
+
+// TODO leaving rewriting this till after the other configs/SearchConfigTypeahead works on promises
 const services = {
   config_name: "services",
   header_function: () => trivial_text_maker("services"),
@@ -357,6 +392,7 @@ const services = {
     }
   `,
   queried_data_accessor: "search_services",
+  // TODO this filter could be identity, right? Maybe make filter optional on these configs,
   filter: (query, datum) =>
     memoized_re_matchers(query, ["name"], "services")(datum),
 };
