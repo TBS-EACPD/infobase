@@ -6,7 +6,11 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { DisplayTable, GraphOverlay } from "src/components/index";
+import {
+  DisplayTable,
+  GraphOverlay,
+  SelectAllControl,
+} from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text";
@@ -19,7 +23,7 @@ import {
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
+import { StandardLegend } from "src/charts/legends/index";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 

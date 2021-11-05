@@ -8,11 +8,11 @@ import {
   Details,
   LabeledBox,
   TagCloud,
+  SelectAllControl,
 } from "src/components/index";
 
 import { Table } from "src/core/TableClass";
 
-import { SelectAllControl } from "src/charts/legends/index";
 import { tertiaryColor } from "src/style_constants/index";
 
 import text from "./PanelFilterControl.yaml";

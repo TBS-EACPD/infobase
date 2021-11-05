@@ -9,6 +9,7 @@ import {
   create_text_maker_component,
   LeafSpinner,
   Select,
+  SelectAllControl,
 } from "src/components/index";
 
 import { useServices } from "src/models/populate_services";
@@ -17,7 +18,7 @@ import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
+import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import {

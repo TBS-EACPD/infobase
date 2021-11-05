@@ -15,6 +15,7 @@ import {
   Select,
   DisplayTable,
   GraphOverlay,
+  SelectAllControl,
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
@@ -33,7 +34,7 @@ import { formats } from "src/core/format";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
+import { StandardLegend } from "src/charts/legends/index";
 
 import { WrappedNivoBar, WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
