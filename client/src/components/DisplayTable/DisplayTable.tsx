@@ -104,8 +104,8 @@ type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
 };
 
 const get_default_dropdown_filter = _.memoize(
-  (col_configs_with_defaults: ColumnConfigs, data: DisplayTableData[]) => {
-    return _.chain(col_configs_with_defaults)
+  (col_configs_with_defaults: ColumnConfigs, data: DisplayTableData[]) =>
+    _.chain(col_configs_with_defaults)
       .map((config, col_key) => ({ ...config, col_key }))
       .filter(
         (config) =>
@@ -114,25 +114,21 @@ const get_default_dropdown_filter = _.memoize(
       )
       .map(({ col_key, plain_formatter }) => [
         col_key,
-        _.concat(
-          [{ id: "select_all", label: text_maker("select_all"), active: true }],
-          _.chain(data)
-            .map(col_key)
-            .uniq()
-            .sort()
-            .map((col_data) => ({
-              id: col_data,
-              label: (plain_formatter as (value: CellValue) => CellValue)(
-                col_data
-              ),
-              active: true,
-            }))
-            .value()
-        ),
+        _.chain(data)
+          .map(col_key)
+          .uniq()
+          .sort()
+          .map((col_data) => ({
+            id: col_data,
+            label: (plain_formatter as (value: CellValue) => CellValue)(
+              col_data
+            ),
+            active: true,
+          }))
+          .value(),
       ])
       .fromPairs()
-      .value();
-  }
+      .value()
 );
 const get_col_configs_with_defaults = (column_configs: ColumnConfigs) =>
   _.mapValues(column_configs, (supplied_column_config: ColumnConfig) => ({
@@ -563,7 +559,6 @@ export class _DisplayTable extends React.Component<
             {_.some(col_configs_with_defaults, "is_sortable") && (
               <tr className="table-header">
                 {_.map(visible_ordered_col_keys, (column_key: string) => {
-                  const col_index = col_configs_with_defaults[column_key].index;
                   const sortable =
                     col_configs_with_defaults[column_key].is_sortable;
                   const searchable =
@@ -617,6 +612,7 @@ export class _DisplayTable extends React.Component<
                                 this.setState({
                                   searches: updated_searches,
                                   dropdown_filter: get_default_dropdown_filter(
+                                    //TODO
                                     col_configs_with_defaults,
                                     data
                                   ),

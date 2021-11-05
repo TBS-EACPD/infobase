@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TrivialTM } from "src/components/index";
+import { TrivialTM } from "src/components/misc_util_components";
 
 interface SelectAllControlProps {
   SelectAllOnClick: React.ReactEventHandler<HTMLButtonElement>;

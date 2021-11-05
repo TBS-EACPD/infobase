@@ -32,6 +32,7 @@ export { WriteToClipboard } from "./WriteToClipboard/WriteToClipboard";
 export { PDFGenerator } from "./PDFGenerator";
 export { CountdownCircle } from "./CountdownCircle/CountdownCircle";
 export { Countdown } from "./Countdown/Countdown";
+export { SelectAllControl } from "./SelectAllControl";
 export {
   GlossaryIcon,
   GlossaryItem,

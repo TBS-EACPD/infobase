@@ -12,6 +12,7 @@ import {
   GraphOverlay,
   RadioButtons,
   DisplayTable,
+  SelectAllControl,
 } from "src/components/index";
 
 import { create_footnote } from "src/models/footnotes/footnotes";
@@ -22,7 +23,7 @@ import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { StandardLegend, SelectAllControl } from "src/charts/legends/index";
+import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import {
   tertiaryColor,

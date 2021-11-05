@@ -7,6 +7,7 @@ import { CheckBox } from "src/components/CheckBox/CheckBox";
 import { DebouncedTextInput } from "src/components/DebouncedTextInput/DebouncedTextInput";
 import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
 import { create_text_maker_component } from "src/components/misc_util_components";
+import { SelectAllControl } from "src/components/SelectAllControl";
 import { WriteToClipboard } from "src/components/WriteToClipboard/WriteToClipboard";
 
 import { is_IE } from "src/core/feature_detection";
@@ -40,7 +41,7 @@ const DropdownFilterVirtualizedList = ({
     _.chain(string).deburr().toLower().trim().value();
 
   const list = dropdown_filter[column_key];
-  const filtered_list = _.filter(list, ({ label }) => {
+  const filtered_list = _.filter(dropdown_filter[column_key], ({ label }) => {
     const cleaned_label = clean_search_string(label);
     return (
       _.includes(cleaned_label, clean_search_string(search)) &&
@@ -60,82 +61,82 @@ const DropdownFilterVirtualizedList = ({
         debounceTime={300}
       />
       {filtered_list.length > 0 ? (
-        <AutoHeightVirtualList
-          className="display-table-dropdown-filter"
-          max_height={400}
-          overscanRowCount={10}
-          id={column_key}
-          width={230}
-          list_ref={virtualized_list_ref}
-          deferredMeasurementCache={virtualized_cell_measure_cache}
-          rowHeight={({ index }) => {
-            const item_num_of_chars = filtered_list[index].label.length + 10;
-            const pre_calculated_row_height =
-              item_num_of_chars < 30 ? 30 : item_num_of_chars;
-            const cached_row_height =
-              virtualized_cell_measure_cache._cellHeightCache[`${index}-0`];
-            return cached_row_height
-              ? cached_row_height + 10
-              : pre_calculated_row_height;
-          }}
-          rowCount={filtered_list.length}
-          rowRenderer={({ index, key, parent, style }) => {
-            const item = filtered_list[index];
-            return (
-              <CellMeasurer
-                cache={virtualized_cell_measure_cache}
-                columnIndex={0}
-                key={key}
-                parent={parent}
-                rowIndex={index}
-              >
-                <div style={style}>
-                  <CheckBox
-                    key={key}
-                    id={item.id}
-                    color={item.color}
-                    label={item.label}
-                    active={item.active}
-                    label_style={{ textAlign: "left" }}
-                    onClick={(item_id) => {
-                      if (item_id === "select_all") {
-                        const is_select_all_enabled = !_.find(list, {
-                          id: item_id,
-                        }).active;
-                        set_dropdown_filter({
-                          ...dropdown_filter,
-                          [column_key]: _.map(list, (item) => ({
-                            ...item,
-                            active: is_select_all_enabled,
-                          })),
-                        });
-                      } else {
-                        let toggled_list = _.map(list, (item) =>
+        <div>
+          <AutoHeightVirtualList
+            className="display-table-dropdown-filter"
+            max_height={300}
+            overscanRowCount={10}
+            id={column_key}
+            width={230}
+            list_ref={virtualized_list_ref}
+            deferredMeasurementCache={virtualized_cell_measure_cache}
+            rowHeight={({ index }) => {
+              const item_num_of_chars = filtered_list[index].label.length + 10;
+              const pre_calculated_row_height =
+                item_num_of_chars < 30 ? 30 : item_num_of_chars;
+              const cached_row_height =
+                virtualized_cell_measure_cache._cellHeightCache[`${index}-0`];
+              return cached_row_height
+                ? cached_row_height + 10
+                : pre_calculated_row_height;
+            }}
+            rowCount={filtered_list.length}
+            rowRenderer={({ index, key, parent, style }) => {
+              const item = filtered_list[index];
+              return (
+                <CellMeasurer
+                  cache={virtualized_cell_measure_cache}
+                  columnIndex={0}
+                  key={key}
+                  parent={parent}
+                  rowIndex={index}
+                >
+                  <div style={style}>
+                    <CheckBox
+                      key={key}
+                      id={item.id}
+                      color={item.color}
+                      label={item.label}
+                      active={item.active}
+                      label_style={{ textAlign: "left" }}
+                      onClick={(item_id) => {
+                        const toggled_list = _.map(list, (item) =>
                           item.id === item_id
                             ? { ...item, active: !item.active }
                             : item
                         );
-                        const active_filtered_list = _.chain(toggled_list)
-                          .tail()
-                          .reject("active")
-                          .value();
-                        toggled_list[0] = {
-                          ...toggled_list[0],
-                          active: active_filtered_list.length === 0,
-                        };
-
                         set_dropdown_filter({
                           ...dropdown_filter,
                           [column_key]: toggled_list,
                         });
-                      }
-                    }}
-                  />
-                </div>
-              </CellMeasurer>
-            );
-          }}
-        />
+                      }}
+                    />
+                  </div>
+                </CellMeasurer>
+              );
+            }}
+          />
+          <SelectAllControl
+            SelectAllOnClick={() =>
+              set_dropdown_filter({
+                ...dropdown_filter,
+                [column_key]: _.map(list, (item) => ({
+                  ...item,
+                  active: true,
+                })),
+              })
+            }
+            SelectNoneOnClick={() =>
+              set_dropdown_filter({
+                ...dropdown_filter,
+                [column_key]: _.map(list, (item) => ({
+                  ...item,
+                  active: false,
+                })),
+              })
+            }
+          />
+        </div>
       ) : (
         <TM k="no_data" className="large_panel_text" />
       )}
@@ -156,6 +157,12 @@ export const DropdownFilter = ({
       opened_button_class_name={"button-unstyled"}
       closed_button_class_name={"button-unstyled"}
       dropdown_a11y_txt={text_maker("filter_data")}
+      dropdown_content_style={{
+        overflowX: "hidden",
+        maxHeight: "400px",
+        msOverflowStyle: "-ms-autohiding-scrollbar",
+        marginBottom: "10px",
+      }}
       dropdown_trigger_txt={
         <IconFilter
           color={is_filter_active ? secondaryColor : tertiaryColor}
