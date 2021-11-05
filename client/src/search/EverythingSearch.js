@@ -114,10 +114,6 @@ const EverythingSearch = withRouter(
         ...props.initial_search_options,
       };
     }
-    get_gql_search_configs = () => {
-      const { include_services } = this.state;
-      return _.compact([include_services && services_search_config]);
-    };
     get_search_configs = () => {
       const { reject_gov, reject_dead_orgs } = this.props;
 
@@ -132,6 +128,7 @@ const EverythingSearch = withRouter(
         include_tags_hwh,
         include_tags_wwh,
 
+        include_services,
         include_glossary,
         include_tables,
       } = this.state;
@@ -155,9 +152,12 @@ const EverythingSearch = withRouter(
 
         include_crsos && crso_search_config,
         include_programs && program_search_config,
+
         include_tags_goco && gocos_search_config,
         include_tags_hwh && how_we_help_search_config,
         include_tags_wwh && who_we_help_search_config,
+
+        //include_services && services_search_config,
         include_tables && table_search_config,
         include_glossary && glossary_lite_search_config,
       ]);
@@ -183,7 +183,6 @@ const EverythingSearch = withRouter(
       return (
         <div className="col-12 col-lg-12 p-0">
           <SearchConfigTypeahead
-            gql_search_configs={this.get_gql_search_configs()}
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
             utility_buttons={
