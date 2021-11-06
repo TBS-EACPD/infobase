@@ -61,7 +61,10 @@ function get_default_state_for_new_table(table_id) {
 }
 
 function naive_to_real_state(naive_state) {
+  console.log("naive_to_real_state");
   const { table } = naive_state;
+  console.log({ naive_state });
+  console.log(get_default_state_for_new_table(naive_state.table));
 
   return {
     //default state
@@ -73,6 +76,7 @@ function naive_to_real_state(naive_state) {
 }
 
 const url_state_selector = (str) => {
+  console.log("url_state_selector, str = " + str);
   const state = (() => {
     if (_.isEmpty(str)) {
       return naive_to_real_state({});
@@ -160,25 +164,26 @@ class RPB extends React.Component {
   };
 
   render() {
-    console.log("RPB - render");
+    console.log("\nRPB - render");
     console.log(this.props.state);
+    console.log(this.state);
     const { broken_url } = this.props.state;
     const { columns: data_columns, dimension } = this.state;
 
-    const table = this.state.table && Table.store.lookup(this.state.table);
+    const table = Table.store.lookup(this.state.table);
+    console.log({ table });
 
     const subject =
       this.state.subject && get_subject_by_guid(this.state.subject);
 
-    const all_data_columns =
-      this.state.table && get_all_data_columns_for_table(table);
+    const all_data_columns = get_all_data_columns_for_table(table);
 
     const columns =
       !_.isEmpty(all_data_columns) &&
       _.filter(all_data_columns, ({ nick }) => _.includes(data_columns, nick));
+    // const columns = all_data_columns;
 
-    const sorted_key_columns =
-      this.state.table && this.get_key_columns_for_table(table);
+    const sorted_key_columns = this.get_key_columns_for_table(table);
 
     const def_ready_columns =
       !_.isEmpty(columns) &&
@@ -200,11 +205,9 @@ class RPB extends React.Component {
     };
     const dimensions = table.dimensions;
 
-    const table_data =
-      this.state.table &&
-      (() => {
-        return table.data;
-      })();
+    const table_data = (() => {
+      return table.data;
+    })();
 
     const cat_filter_func = dimension && _.constant(true);
 
@@ -246,12 +249,15 @@ class RPB extends React.Component {
       flat_data,
       sorted_key_columns,
     };
+    console.log({ options });
+    console.log("document.location.hash: " + document.location.hash);
 
     return (
       <div style={{ minHeight: "800px", marginBottom: "100px" }} id="">
         <URLSynchronizer state={{ ...this.props, ...options }} />
         <LangSynchronizer
           lang_modifier={(hash) => {
+            console.log("lang_modifier, hash = " + hash);
             const config_str = hash.split("rpb/")[1];
             if (_.isEmpty(config_str)) {
               return hash;
@@ -442,6 +448,14 @@ export default class ReportBuilder extends React.Component {
     if (_.isEmpty(url_state.table)) {
       loading = false;
     }
+    !!url_state.columns &&
+      console.log(
+        url_state.columns.length != 0
+          ? "\n**** WORKING ****\n"
+          : "\n**** NOT WORKING ****\n"
+      );
+    console.log("ReportBuilder - getDerivedStateFromProps");
+    console.log({ config_str, loading, url_state });
 
     return {
       loading,
@@ -467,6 +481,9 @@ export default class ReportBuilder extends React.Component {
     }
   }
   render() {
+    console.log("ReportBuilder - render");
+    console.log(this.props);
+    console.log(this.state);
     const { url_state } = this.state;
 
     return (
