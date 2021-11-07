@@ -296,7 +296,6 @@ export class _DisplayTable extends React.Component<
       show_pagination_load_spinner,
       dropdown_filter,
     } = this.state;
-    console.log(dropdown_filter);
 
     const col_configs_with_defaults =
       get_col_configs_with_defaults(column_configs);
