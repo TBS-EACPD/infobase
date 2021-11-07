@@ -296,6 +296,7 @@ export class _DisplayTable extends React.Component<
       show_pagination_load_spinner,
       dropdown_filter,
     } = this.state;
+    console.log(dropdown_filter);
 
     const col_configs_with_defaults =
       get_col_configs_with_defaults(column_configs);
@@ -611,11 +612,13 @@ export class _DisplayTable extends React.Component<
 
                                 this.setState({
                                   searches: updated_searches,
-                                  dropdown_filter: get_default_dropdown_filter(
-                                    //TODO
-                                    col_configs_with_defaults,
-                                    data
-                                  ),
+                                  dropdown_filter: {
+                                    ...dropdown_filter,
+                                    [column_key]: get_default_dropdown_filter(
+                                      col_configs_with_defaults,
+                                      data
+                                    )[column_key],
+                                  },
                                   current_page: 0,
                                 });
                               }}
