@@ -5,7 +5,7 @@ import { Typeahead } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
 
-import { InfoBaseHighlighter } from "src/search/search_utils";
+import { SearchHighlighter } from "src/search/search_utils";
 
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
@@ -66,7 +66,7 @@ export class SearchConfigTypeahead extends React.Component {
                 content: _.isFunction(menu_content_function) ? (
                   menu_content_function(match, query_value, name_function)
                 ) : (
-                  <InfoBaseHighlighter
+                  <SearchHighlighter
                     search={query_value}
                     content={name_function(match)}
                   />
