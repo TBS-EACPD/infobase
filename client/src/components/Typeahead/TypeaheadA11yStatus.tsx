@@ -88,9 +88,11 @@ class DelayedRender extends React.Component<
 export const TypeaheadA11yStatus = ({
   selection_cursor,
   results,
+  loading_results,
 }: {
   selection_cursor: number;
   results: ResultProps[];
+  loading_results?: boolean;
 }) => {
   const status_content = (() => {
     if (selection_cursor >= 0) {
@@ -112,6 +114,7 @@ export const TypeaheadA11yStatus = ({
           {results.length > 0 &&
             text_maker("menu_with_results_status", {
               total_results: results.length,
+              loading_results,
             })}
         </DelayedRender>
       );
