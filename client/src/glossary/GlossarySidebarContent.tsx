@@ -11,7 +11,8 @@ interface SidebarContentProps {
   def: string | null;
   results: ResultProps[];
   closeItem: () => void;
-  openItem: (item: Record<string, unknown>) => void;
+  openItem: (key: string) => void;
+  showList: boolean;
 }
 
 interface SidebarContentState {
@@ -60,15 +61,15 @@ export class SidebarContent extends React.Component<
     this.props.closeItem();
   }
 
-  openDefinition(title: string | undefined, def: string | undefined) {
-    this.props.openItem({ title: title, def: def });
+  openDefinition(key: string) {
+    this.props.openItem(key);
   }
 
   //place holder while I get passing functions to work...
   handleKeyPress(
     e: React.KeyboardEvent<HTMLSpanElement>,
     action: string,
-    item: ResultProps | null
+    key: string
   ) {
     if (e.key === "Enter") {
       switch (action) {
@@ -77,7 +78,7 @@ export class SidebarContent extends React.Component<
           break;
 
         case "open":
-          this.openDefinition(item?.title, item?.raw_definition);
+          this.openDefinition(key);
           break;
       }
     }
@@ -113,7 +114,7 @@ export class SidebarContent extends React.Component<
     const items_by_letter = this.get_glossary_items_by_letter();
     return (
       <div className="glossary-sidebar-content">
-        {this.state.title ? (
+        {!this.props.showList ? (
           <div className="defintion-wrapper">
             <div className="item-title">{this.state.title}</div>
             <div className="item-def">{this.state.def}</div>
@@ -122,7 +123,7 @@ export class SidebarContent extends React.Component<
                 role="button"
                 className="back-button"
                 onClick={() => this.closeDefinition()}
-                onKeyDown={(e) => this.handleKeyPress(e, "close", null)}
+                onKeyDown={(e) => this.handleKeyPress(e, "close", "")}
                 tabIndex={0}
               >
                 <IconArrow
@@ -147,10 +148,8 @@ export class SidebarContent extends React.Component<
                   <div key={ix} className="glossary-title">
                     <span
                       role="button"
-                      onClick={() =>
-                        this.openDefinition(item.title, item.raw_definition)
-                      }
-                      onKeyDown={(e) => this.handleKeyPress(e, "open", item)}
+                      onClick={() => this.openDefinition(item.id)}
+                      onKeyDown={(e) => this.handleKeyPress(e, "open", item.id)}
                       tabIndex={0}
                     >
                       {item.title}
