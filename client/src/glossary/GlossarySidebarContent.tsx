@@ -4,6 +4,8 @@ import React from "react";
 import "./GlossaryMenu.scss";
 import { glossaryEntryStore } from "src/models/glossary";
 
+import { IconArrow } from "src/icons/icons";
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SidebarContentProps {
   title: string | null;
@@ -124,7 +126,13 @@ export class SidebarContent extends React.Component<
                 onKeyDown={(e) => this.handleKeyPress(e, "close", null)}
                 tabIndex={0}
               >
-                Back
+                <IconArrow
+                  rotation={180}
+                  width="25px"
+                  color="white"
+                  alternate_color={false}
+                />
+                {"Back"}
               </span>
             </div>
           </div>
