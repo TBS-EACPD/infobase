@@ -6,15 +6,14 @@ import { glossaryEntryStore } from "src/models/glossary";
 
 import { IconArrow } from "src/icons/icons";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SidebarContentProps {
   title: string | null;
   def: string | null;
   results: ResultProps[];
-  closeItem: CallableFunction;
-  openItem: CallableFunction;
+  closeItem: () => void;
+  openItem: (item: Record<string, unknown>) => void;
 }
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+
 interface SidebarContentState {
   title: string | null;
   def: string | null;
