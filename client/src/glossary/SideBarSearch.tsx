@@ -31,10 +31,12 @@ export class SideBarSearch extends React.Component<
     const { placeholder, on_query } = this.props;
 
     return (
-      <div>
-        <span aria-hidden="true">
-          <IconSearch width="30px" color="#2C70C9" alternate_color={false} />
-        </span>
+      <div className={"glossary__search-bar"}>
+        <div className={"glossary__icon-container"}>
+          <span aria-hidden="true">
+            <IconSearch width="30px" color="#2C70C9" alternate_color={false} />
+          </span>
+        </div>
         <DebouncedTextInput
           placeHolder={placeholder}
           updateCallback={on_query}
