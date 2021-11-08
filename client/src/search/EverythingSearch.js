@@ -157,7 +157,7 @@ const EverythingSearch = withRouter(
         include_tags_hwh && how_we_help_search_config,
         include_tags_wwh && who_we_help_search_config,
 
-        //include_services && services_search_config,
+        include_services && services_search_config,
         include_tables && table_search_config,
         include_glossary && glossary_lite_search_config,
       ]);

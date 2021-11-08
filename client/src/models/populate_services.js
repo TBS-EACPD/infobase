@@ -5,7 +5,7 @@ import _ from "lodash";
 import { log_standard_event } from "src/core/analytics";
 import { lang } from "src/core/injected_build_constants";
 
-import { get_client } from "src/graphql_utils/graphql_utils";
+import { query_factory, get_client } from "src/graphql_utils/graphql_utils";
 
 const all_service_fragments = `
       id
@@ -356,3 +356,20 @@ export const useServices = (query_options) => {
   }
   return res;
 };
+
+// TODO the other service queries should be using query_factory and this file should be renamed
+export const { query_search_services, useSearchServices } = query_factory({
+  query_name: "search_services",
+  query: gql`
+    query($lang: String! = "${lang}", $query: String!) {
+      root(lang: $lang) {
+        search_services(name_query: $query) {
+          id
+          org_id
+          name
+        }
+      }
+    }
+  `,
+  resolver: (response) => _.get(response, "data.root.search_services"),
+});
