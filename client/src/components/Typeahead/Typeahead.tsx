@@ -236,29 +236,30 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                         rowIndex={result_index}
                       >
                         <div style={style}>
-                          {_.isEmpty(results) ? (
-                            <div className="typeahead__header">
-                              {text_maker("no_matches_found")}
-                            </div>
-                          ) : (
+                          {result_index === 0 &&
+                            (loading_results || !_.isEmpty(results) ? (
+                              <div
+                                className="typeahead__header"
+                                style={{ borderTop: "none" }}
+                              >
+                                <TM
+                                  k="menu_with_results_status"
+                                  args={{
+                                    total_results: results.length,
+                                    loading_results,
+                                  }}
+                                />
+                                {loading_results && (
+                                  <LeafSpinner config_name={"inline_panel"} />
+                                )}
+                              </div>
+                            ) : (
+                              <div className="typeahead__header">
+                                {text_maker("no_matches_found")}
+                              </div>
+                            ))}
+                          {!loading_results && !_.isEmpty(results) && (
                             <Fragment key={result_index}>
-                              {result_index === 0 && (
-                                <div
-                                  className="typeahead__header"
-                                  style={{ borderTop: "none" }}
-                                >
-                                  <TM
-                                    k="menu_with_results_status"
-                                    args={{
-                                      total_results: results.length,
-                                      loading_results,
-                                    }}
-                                  />
-                                  {loading_results && (
-                                    <LeafSpinner config_name={"inline_panel"} />
-                                  )}
-                                </div>
-                              )}
                               {results[result_index].header && (
                                 <div className="typeahead__header">
                                   {results[result_index].header}
@@ -363,8 +364,6 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
   };
 
   handle_key_down = (e: KeyboardEvent<HTMLInputElement>) => {
-    // TODO not allowing keyboard navigation until ALL results are loaded is necessary, unless we undertake a large rewrite here...
-    // need to at least communicate this a bit better though
     if (this.allow_keyboard_navigation) {
       switch (e.key) {
         case "ArrowUp":

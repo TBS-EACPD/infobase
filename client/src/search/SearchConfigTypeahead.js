@@ -113,29 +113,24 @@ export class SearchConfigTypeahead extends React.Component {
     const { search_configs } = this.props;
     const { query_value, ...results_by_config_name_and_query } = this.state;
 
-    const results = _.flatMap(search_configs, ({ config_name }) =>
+    const maybe_results = _.flatMap(search_configs, ({ config_name }) =>
       _.get(results_by_config_name_and_query, `${config_name}[${query_value}]`)
     );
 
-    const [loaded_results, is_loading] = _.reduce(
-      results,
-      ([loaded_results, is_loading], result) => {
-        if (_.isUndefined(result) || result === "loading") {
-          return [loaded_results, true];
-        } else {
-          return [[...loaded_results, result], is_loading];
-        }
-      },
-      [[], false]
+    const still_loading_results = _.some(
+      maybe_results,
+      (result) => _.isUndefined(result) || result === "loading"
     );
+
+    const results = !still_loading_results ? maybe_results : [];
 
     return (
       <Typeahead
         {...this.props}
         on_query={this.on_query}
         query_value={query_value}
-        results={loaded_results}
-        loading_results={is_loading}
+        results={results}
+        loading_results={still_loading_results}
       />
     );
   }
