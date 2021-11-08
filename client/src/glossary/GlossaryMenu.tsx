@@ -10,14 +10,13 @@ import { SearchConfigSidebar } from "src/search/SearchConfigSidebar";
 
 import { SidebarContent } from "./GlossarySidebarContent";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GlossaryMenuProps {
   show: boolean;
-  toggle: CallableFunction;
+  toggle: (value: boolean) => void;
   item: GlossaryItem;
-  setGlossaryItem: CallableFunction;
+  setGlossaryItem: (arg: {}) => void;
 }
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+
 interface GlossaryMenuState {
   show: boolean;
   results: ResultProps[];
@@ -135,7 +134,6 @@ export class GlossaryMenu extends React.Component<
                 <SearchConfigSidebar
                   placeholder={"testing"}
                   search_configs={[glossary_search_config]}
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   getResults={(data: ResultProps[]) => this.getResults(data)}
                 />
               </div>
