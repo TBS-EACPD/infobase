@@ -167,7 +167,7 @@ export const ExplorerNode = ({
             noExpand
               ? null
               : (event) =>
-                  _.includes([13, 32], event.keyCode) && onClickExpand(node)
+                  _.includes(["Enter", " "], event.key) && onClickExpand(node)
           }
         >
           <div className="ExplorerRow">

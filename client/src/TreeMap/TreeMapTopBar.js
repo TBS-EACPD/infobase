@@ -56,7 +56,7 @@ export class TreeMapTopbar extends React.Component {
                     this.handleClick(-1);
                   }}
                   onKeyDown={() => {
-                    if (event.keyCode != 13) {
+                    if (event.key !== "Enter") {
                       return;
                     }
                     this.handleClick(-1);
@@ -78,7 +78,7 @@ export class TreeMapTopbar extends React.Component {
                       this.handleClick(ix);
                     }}
                     onKeyDown={() => {
-                      if (event.keyCode != 13) {
+                      if (event.key !== "Enter") {
                         return;
                       }
                       this.handleClick(ix);

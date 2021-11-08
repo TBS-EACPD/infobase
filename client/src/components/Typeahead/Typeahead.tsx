@@ -276,7 +276,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                                   result_index === selection_cursor
                                 }
                                 onKeyPress={(event) =>
-                                  _.includes([13, 32], event.keyCode) &&
+                                  _.includes(["Enter", " "], event.key) &&
                                   results[result_index].on_select()
                                 }
                                 onClick={results[result_index].on_select}
@@ -366,14 +366,14 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
     // TODO not allowing keyboard navigation until ALL results are loaded is necessary, unless we undertake a large rewrite here...
     // need to at least communicate this a bit better though
     if (this.allow_keyboard_navigation) {
-      switch (e.keyCode) {
-        case 38: //up arrow
+      switch (e.key) {
+        case "ArrowUp":
           this.handle_up_arrow(e);
           break;
-        case 40: //down arrow
+        case "ArrowDown":
           this.handle_down_arrow(e);
           break;
-        case 13: //enter key
+        case "Enter":
           this.handle_enter_key(e);
           break;
       }

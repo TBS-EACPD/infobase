@@ -256,7 +256,7 @@ export class TreeMap extends React.Component {
             transition(d);
           })
           .on("keydown", (d) => {
-            if (event.keyCode != 13) {
+            if (event.key !== "Enter") {
               return;
             }
             this.state.org_route.push(d.data.name);

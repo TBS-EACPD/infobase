@@ -97,7 +97,7 @@ const LinkStyled = ({ on_click, className, style, children }) => (
     role="link"
     tabIndex={0}
     onClick={on_click}
-    onKeyDown={(e) => e.keyCode === 13 && on_click(e)}
+    onKeyDown={(e) => e.key === "Enter" && on_click(e)}
     className={classNames("link-styled", "button-unstyled", className)}
     style={style}
   >
