@@ -16,6 +16,7 @@ import {
 } from "react-virtualized";
 
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
 import { IconSearch } from "src/icons/icons";
@@ -47,6 +48,7 @@ type TypeaheadProps = typeof TypeaheadDefaultProps & {
   on_query: (str: string) => void;
   query_value: string;
   results: ResultProps[];
+  loading_results?: boolean;
   additional_a11y_description?: string;
   utility_buttons?: boolean | React.ReactNode | React.ReactNode[];
 };
@@ -142,10 +144,11 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
   render() {
     const {
       placeholder,
-      additional_a11y_description,
       min_length,
-      utility_buttons,
       results,
+      loading_results,
+      additional_a11y_description,
+      utility_buttons,
     } = this.props;
 
     const { input_value, selection_cursor } = this.state;
@@ -194,6 +197,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
           <TypeaheadA11yStatus
             selection_cursor={selection_cursor}
             results={results}
+            loading_results={loading_results}
           />
         )}
         {this.show_menu && (
@@ -247,8 +251,12 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                                     k="menu_with_results_status"
                                     args={{
                                       total_results: results.length,
+                                      loading_results,
                                     }}
                                   />
+                                  {loading_results && (
+                                    <LeafSpinner config_name={"inline_panel"} />
+                                  )}
                                 </div>
                               )}
                               {results[result_index].header && (

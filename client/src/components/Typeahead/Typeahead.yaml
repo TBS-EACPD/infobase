@@ -23,6 +23,14 @@ selected_result:
 menu_with_results_status:
   transform: [handlebars]
   en: |
-    {{total_results}} results found
+    {{#if loading_results}}
+      Results still loading
+    {{else}}
+      {{total_results}} results found
+    {{/if}}
   fr: |
-    {{total_results}} résultats trouvés
+    {{#if loading_results}}
+      Résultats toujours en cours de chargement
+    {{else}}
+      {{total_results}} résultats trouvés
+    {{/if}}

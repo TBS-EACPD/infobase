@@ -118,8 +118,8 @@ export class SearchConfigTypeahead extends React.Component {
         {...this.props}
         on_query={this.on_query}
         query_value={query_value}
-        is_loading={is_loading}
         results={_.compact(results)}
+        loading_results={is_loading}
       />
     );
   }
