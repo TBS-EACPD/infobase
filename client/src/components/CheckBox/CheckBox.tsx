@@ -107,9 +107,7 @@ export class CheckBox extends React.Component<CheckBoxProps> {
               className="link-styled"
               onClick={this.handleOnClick}
               onKeyDown={(e) =>
-                (e.keyCode === 13 || e.keyCode === 32) &&
-                !disabled &&
-                onClick(id)
+                (e.key === " " || e.key === "Enter") && !disabled && onClick(id)
               }
             >
               {label}

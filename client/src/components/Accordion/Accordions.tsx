@@ -153,8 +153,8 @@ const StatelessPullDownAccordion = ({
       role="button"
       tabIndex={0}
       onClick={onToggle}
-      onKeyPress={(event) =>
-        _.includes([13, 32], event.keyCode) && onToggle(event)
+      onKeyDown={(event) =>
+        _.includes(["Enter", " "], event.key) && onToggle(event)
       }
     >
       <div className="pull-down-accordion-expander">

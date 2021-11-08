@@ -50,7 +50,7 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
                 onClick={() => !is_disabled && tab_callback(key)}
                 onKeyDown={(e) =>
                   !is_disabled &&
-                  _.includes([13, 32], e.keyCode) &&
+                  _.includes(["Enter", " "], e.key) &&
                   tab_callback(key)
                 }
               >
