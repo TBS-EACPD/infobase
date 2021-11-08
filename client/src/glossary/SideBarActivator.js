@@ -1,11 +1,12 @@
 import React from "react";
 
 import { get_glossary_item } from "src/models/glossary";
+import { GlossaryMenu } from "./GlossaryMenu";
 
 export class SidebarActivator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { show_sidebar: true };
+    this.state = { show_sidebar: true, showGlossary: false, glossaryItem: {} };
   }
   replaceWithModalBtn = (e) => {
     const target =
@@ -17,9 +18,9 @@ export class SidebarActivator extends React.Component {
     const glossary_item_key = target.dataset.ibttGlossaryKey;
     const glossary_item = get_glossary_item(glossary_item_key);
 
-    this.props.setGlossaryItem(glossary_item);
+    this.setGlossaryItem(glossary_item);
 
-    this.props.toggle(true);
+    this.toggleGlossary(true);
   };
 
   componentDidMount() {
@@ -30,7 +31,24 @@ export class SidebarActivator extends React.Component {
     window.removeEventListener("click", this.replaceWithModalBtn);
   }
 
+  toggleGlossary(value) {
+    this.setState({
+      showGlossary: value,
+    });
+  }
+
+  setGlossaryItem(item) {
+    this.setState({ glossaryItem: item });
+  }
+
   render() {
-    return null;
+    return (
+      <GlossaryMenu
+        show={this.state.showGlossary}
+        toggle={(value) => this.toggleGlossary(value)}
+        item={this.state.glossaryItem}
+        setGlossaryItem={(item) => this.setGlossaryItem(item)}
+      />
+    );
   }
 }
