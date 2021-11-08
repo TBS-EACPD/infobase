@@ -43,7 +43,7 @@
 
   background-color: $primaryColor;
 
-  h1.glossary-title {
+  h1.glossary-header {
     font-weight: 300;
     font-size: rem(38);
     line-height: rem(47);
@@ -117,7 +117,7 @@
 
 .glossary-sidebar-content {
   background-color: $secondaryColor;
-  height: 100%;
+  height: calc(100vh - 200px);
   padding: 15px;
   overflow: scroll;
 }
