@@ -1,8 +1,8 @@
 import React from "react";
 
-import { GlossaryMenu } from "./GlossaryMenu";
-
 import { glossaryEntryStore } from "src/models/glossary";
+
+import { GlossaryMenu } from "./GlossaryMenu";
 
 export class SidebarActivator extends React.Component {
   constructor(props) {
