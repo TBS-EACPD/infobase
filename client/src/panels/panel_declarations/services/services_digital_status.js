@@ -57,7 +57,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <LeafSpinner config_name="inline_panel" />;
+    return <LeafSpinner config_name="relative_panel" />;
   }
   const {
     service_general_stats: {

@@ -250,7 +250,7 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
                                   }}
                                 />
                                 {loading_results && (
-                                  <LeafSpinner config_name={"inline_panel"} />
+                                  <LeafSpinner config_name={"inline_small"} />
                                 )}
                               </div>
                             ) : (

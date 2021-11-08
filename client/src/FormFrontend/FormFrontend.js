@@ -381,7 +381,10 @@ class FormFrontend extends React.Component {
                   {!awaiting_backend_response &&
                     text_maker("form_frontend_send")}
                   {awaiting_backend_response && (
-                    <LeafSpinner config_name="small_inline" />
+                    <LeafSpinner
+                      config_name="relative_small"
+                      use_light_colors={true}
+                    />
                   )}
                 </button>
               }

@@ -295,11 +295,15 @@ export class PDFGenerator extends React.Component {
             </button>
           )}
           {generating_pdf && (
-            <LeafSpinner
-              config_name={"small_inline"}
+            <div
               title={text_maker("downloading_pdf")}
               alt={text_maker("downloading_pdf")}
-            />
+            >
+              <LeafSpinner
+                config_name={"relative_small"}
+                use_light_colors={true}
+              />
+            </div>
           )}
         </Fragment>
       )

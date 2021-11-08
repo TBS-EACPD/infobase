@@ -30,7 +30,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
     `,
   });
   if (loading) {
-    return <LeafSpinner config_name="inline_panel" />;
+    return <LeafSpinner config_name="relative_panel" />;
   }
 
   const includes_lowercase = (value, query) =>
