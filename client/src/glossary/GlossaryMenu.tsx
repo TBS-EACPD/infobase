@@ -2,7 +2,6 @@ import _ from "lodash";
 import React from "react";
 
 import "./GlossaryMenu.scss";
-import { glossaryEntryStore } from "src/models/glossary";
 
 import { IconX } from "src/icons/icons";
 
@@ -15,7 +14,7 @@ interface GlossaryMenuProps {
   show: boolean;
   toggle: (value: boolean) => void;
   item: ResultProps;
-  setGlossaryItem: (key: string | {}) => void;
+  setGlossaryItem: (key: string) => void;
   showList: boolean;
   setList: (value: boolean) => void;
 }
