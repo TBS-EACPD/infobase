@@ -35,54 +35,56 @@ export class SearchConfigTypeahead extends React.Component {
           .value();
 
         if (is_unloaded) {
-          query(query_value).then((matches) => {
-            const is_unloaded = _.chain(
-              this.state.results_by_config_name_and_query
-            )
-              .get(`${config_name}[${query_value}]`)
-              .isUndefined()
-              .value();
+          this.setState(
+            {
+              [config_name]: {
+                ...this.state[config_name],
+                [query_value]: "loading",
+              },
+            },
+            () =>
+              query(query_value).then((matches) => {
+                // TODO need a decent way to abort here if the component's already unmounted
 
-            if (is_unloaded) {
-              const results = _.map(matches, (match, index) => ({
-                header: index === 0 && header_function(),
-                on_select: () => {
-                  log_standard_event({
-                    SUBAPP: window.location.hash.replace("#", ""),
-                    MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-                    MISC2: `Queried: ${query_value}. Selected: ${name_function(
-                      match
-                    )}`,
-                  });
+                const results = _.map(matches, (match, index) => ({
+                  header: index === 0 && header_function(),
+                  on_select: () => {
+                    log_standard_event({
+                      SUBAPP: window.location.hash.replace("#", ""),
+                      MISC1: `TYPEAHEAD_SEARCH_SELECT`,
+                      MISC2: `Queried: ${query_value}. Selected: ${name_function(
+                        match
+                      )}`,
+                    });
 
-                  if (_.isFunction(this.props.on_select)) {
-                    this.props.on_select(match);
-                  }
+                    if (_.isFunction(this.props.on_select)) {
+                      this.props.on_select(match);
+                    }
 
-                  this.setState({
-                    query_value: "",
-                  });
-                },
-                content: _.isFunction(menu_content_function) ? (
-                  menu_content_function(match, query_value, name_function)
-                ) : (
-                  <SearchHighlighter
-                    search={query_value}
-                    content={name_function(match)}
-                  />
-                ),
-                plain_text: name_function(match),
-              }));
+                    this.setState({
+                      query_value: "",
+                    });
+                  },
+                  content: _.isFunction(menu_content_function) ? (
+                    menu_content_function(match, query_value, name_function)
+                  ) : (
+                    <SearchHighlighter
+                      search={query_value}
+                      content={name_function(match)}
+                    />
+                  ),
+                  plain_text: name_function(match),
+                }));
 
-              // TODO some risk competing promises could clober the nested state here, ugh
-              this.setState({
-                [config_name]: {
-                  ...this.state[config_name],
-                  [query_value]: results,
-                },
-              });
-            }
-          });
+                // TODO some risk competing promises could clober the nested state here, ugh
+                this.setState({
+                  [config_name]: {
+                    ...this.state[config_name],
+                    [query_value]: results,
+                  },
+                });
+              })
+          );
         }
       }
     );
@@ -109,16 +111,24 @@ export class SearchConfigTypeahead extends React.Component {
       _.get(results_by_config_name_and_query, `${config_name}[${query_value}]`)
     );
 
-    // TODO if we want to display any results early, the Typeahead will need to understand a loading state
-    // (to delay showing counts and communicate loading status)
-    const is_loading = _.some(results, _.isUndefined);
+    const [loaded_results, is_loading] = _.reduce(
+      results,
+      ([loaded_results, is_loading], result) => {
+        if (_.isUndefined(result) || result === "loading") {
+          return [loaded_results, true];
+        } else {
+          return [[...loaded_results, result], is_loading];
+        }
+      },
+      [[], false]
+    );
 
     return (
       <Typeahead
         {...this.props}
         on_query={this.on_query}
         query_value={query_value}
-        results={_.compact(results)}
+        results={loaded_results}
         loading_results={is_loading}
       />
     );
