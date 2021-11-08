@@ -81,7 +81,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   }, [data, most_recent_year]);
 
   if (loading) {
-    return <LeafSpinner config_name="inline_panel" />;
+    return <LeafSpinner config_name="relative_panel" />;
   }
 
   const most_recent_filtered_data = _.map(data, (service) => ({

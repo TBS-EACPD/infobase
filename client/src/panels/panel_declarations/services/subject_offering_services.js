@@ -34,7 +34,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     }`,
   });
   if (loading) {
-    return <LeafSpinner config_name="inline_panel" />;
+    return <LeafSpinner config_name="relative_panel" />;
   }
   const {
     subject_offering_services_summary,
