@@ -1,12 +1,18 @@
 import React from "react";
 
-import { get_glossary_item } from "src/models/glossary";
 import { GlossaryMenu } from "./GlossaryMenu";
+
+import { glossaryEntryStore } from "src/models/glossary";
 
 export class SidebarActivator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { show_sidebar: true, showGlossary: false, glossaryItem: {} };
+    this.state = {
+      show_sidebar: true,
+      showGlossary: false,
+      glossaryItem: {},
+      showList: true,
+    };
   }
   replaceWithModalBtn = (e) => {
     const target =
@@ -16,9 +22,10 @@ export class SidebarActivator extends React.Component {
     }
 
     const glossary_item_key = target.dataset.ibttGlossaryKey;
-    const glossary_item = get_glossary_item(glossary_item_key);
+    const glossary_item = glossaryEntryStore.lookup(glossary_item_key);
 
-    this.setGlossaryItem(glossary_item);
+    this.setGlossaryItem(glossary_item.id);
+    this.showList(false);
 
     this.toggleGlossary(true);
   };
@@ -37,17 +44,27 @@ export class SidebarActivator extends React.Component {
     });
   }
 
-  setGlossaryItem(item) {
-    this.setState({ glossaryItem: item });
+  setGlossaryItem(key) {
+    this.setState({
+      glossaryItem: glossaryEntryStore.lookup(key),
+      showList: false,
+    });
   }
 
+  showList(value) {
+    this.setState({
+      showList: value,
+    });
+  }
   render() {
     return (
       <GlossaryMenu
         show={this.state.showGlossary}
         toggle={(value) => this.toggleGlossary(value)}
         item={this.state.glossaryItem}
-        setGlossaryItem={(item) => this.setGlossaryItem(item)}
+        setGlossaryItem={(key) => this.setGlossaryItem(key)}
+        showList={this.state.showList}
+        setList={(value) => this.showList(value)}
       />
     );
   }

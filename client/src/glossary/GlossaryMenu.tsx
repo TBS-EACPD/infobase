@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 
 import "./GlossaryMenu.scss";
+import { glossaryEntryStore } from "src/models/glossary";
 
 import { IconX } from "src/icons/icons";
 
@@ -13,19 +14,16 @@ import { SidebarContent } from "./GlossarySidebarContent";
 interface GlossaryMenuProps {
   show: boolean;
   toggle: (value: boolean) => void;
-  item: GlossaryItem;
-  setGlossaryItem: (arg: {}) => void;
+  item: ResultProps;
+  setGlossaryItem: (key: string | {}) => void;
+  showList: boolean;
+  setList: (value: boolean) => void;
 }
 
 interface GlossaryMenuState {
   show: boolean;
   results: ResultProps[];
-  item: GlossaryItem;
-}
-
-export interface GlossaryItem {
-  title: string;
-  def: string;
+  item: ResultProps;
 }
 
 export interface ResultProps {
@@ -76,15 +74,15 @@ export class GlossaryMenu extends React.Component<
     this.setState({
       results: childData,
     });
-    this.props.setGlossaryItem({});
+    this.props.setList(true);
   };
 
   closeItem() {
-    this.props.setGlossaryItem({});
+    this.props.setList(true);
   }
 
-  openItem(item: Record<string, unknown>) {
-    this.props.setGlossaryItem(item);
+  openItem(key: string) {
+    this.props.setGlossaryItem(key);
   }
 
   handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>) {
@@ -145,10 +143,11 @@ export class GlossaryMenu extends React.Component<
           <div className="glossary-sidebar-content-wrapper">
             <SidebarContent
               title={this.state.item.title}
-              def={this.state.item.def}
+              def={this.state.item.raw_definition}
               results={this.state.results}
               closeItem={() => this.closeItem()}
-              openItem={(item: Record<string, unknown>) => this.openItem(item)}
+              openItem={(key: string) => this.openItem(key)}
+              showList={this.props.showList}
             />
           </div>
         </aside>
