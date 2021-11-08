@@ -13,8 +13,6 @@ const query_to_regexps_func = (query: string) => {
 };
 const query_to_reg_exps = _.memoize(query_to_regexps_func);
 
-// Used where Highlighter component can't be, e.g. where searched string already
-// contains markup and will need to be rendered with dangerouslySetInnerHTML
 const highlight_search_match = (search: string, content: string) => {
   const reg_exps = query_to_reg_exps(search);
 
@@ -51,7 +49,7 @@ const split_matched_search_tokens = (search: string, content: string) => {
   return split_string;
 };
 
-const InfoBaseHighlighter = ({
+const SearchHighlighter = ({
   search,
   content,
 }: {
@@ -97,7 +95,7 @@ const format_data = <Data extends unknown>(
       return menu_content_function(data, search, name_function);
     } else {
       return (
-        <InfoBaseHighlighter search={search} content={name_function(data)} />
+        <SearchHighlighter search={search} content={name_function(data)} />
       );
     }
   },
@@ -107,6 +105,6 @@ const format_data = <Data extends unknown>(
 export {
   query_to_reg_exps,
   highlight_search_match,
-  InfoBaseHighlighter,
+  SearchHighlighter,
   format_data,
 };

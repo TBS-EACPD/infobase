@@ -13,7 +13,7 @@ import { textColor } from "src/style_constants/index";
 import {
   query_to_reg_exps,
   highlight_search_match,
-  InfoBaseHighlighter,
+  SearchHighlighter,
 } from "./search_utils";
 
 const get_re_matcher = (accessors, reg_exps) => (obj) =>
@@ -58,7 +58,7 @@ const org_attributes_to_match = [
 ];
 const LimitedDataDisplay = (search, name) => (
   <span className="typeahead__grayed-out">
-    <InfoBaseHighlighter
+    <SearchHighlighter
       search={search}
       content={`${name} (${trivial_text_maker("limited_data")})`}
     />
@@ -69,9 +69,7 @@ const org_templates = {
   name_function: (org) => org.name,
   menu_content_function: function (org, search, name_function) {
     if (org.subject_type === "gov") {
-      return (
-        <InfoBaseHighlighter search={search} content={name_function(org)} />
-      );
+      return <SearchHighlighter search={search} content={name_function(org)} />;
     }
 
     const result_name = (() => {
@@ -99,7 +97,7 @@ const org_templates = {
     if (!org.has_table_data) {
       return LimitedDataDisplay(search, result_name);
     } else {
-      return <InfoBaseHighlighter search={search} content={result_name} />;
+      return <SearchHighlighter search={search} content={result_name} />;
     }
   },
 };
@@ -347,7 +345,7 @@ const programs = {
 
       if (matched_on_old_name && !matched_on_current_name) {
         return (
-          <InfoBaseHighlighter
+          <SearchHighlighter
             search={search}
             content={`${name} (${trivial_text_maker("previously_named")}: ${
               program.old_name
@@ -359,14 +357,14 @@ const programs = {
       if (program.is_dead) {
         return (
           <span className="typeahead__grayed-out">
-            <InfoBaseHighlighter
+            <SearchHighlighter
               search={search}
               content={`${name} (${trivial_text_maker("non_active_program")})`}
             />
           </span>
         );
       } else {
-        return <InfoBaseHighlighter search={search} content={name} />;
+        return <SearchHighlighter search={search} content={name} />;
       }
     }
   },
