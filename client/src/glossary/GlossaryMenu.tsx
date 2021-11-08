@@ -105,7 +105,7 @@ export class GlossaryMenu extends React.Component<
       >
         <aside
           role="dialog"
-          aria-labelledby="glossary-title"
+          aria-labelledby="glossary-header"
           className="glossary-sidebar"
           ref={this.main}
         >
@@ -124,7 +124,11 @@ export class GlossaryMenu extends React.Component<
                   </span>
                 </div>
               </div>
-              <h1 id="glossary-title" className="glossary-title" tabIndex={-1}>
+              <h1
+                id="glossary-header"
+                className="glossary-header"
+                tabIndex={-1}
+              >
                 Glossary
               </h1>
               <div className="search-wrapper">
