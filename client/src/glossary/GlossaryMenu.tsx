@@ -108,7 +108,7 @@ export class GlossaryMenu extends React.Component<
                 <div className={"close-button"}>
                   <span
                     role="button"
-                    className="icon"
+                    className="icon-wrapper"
                     onClick={() => this.props.toggle(false)}
                     onKeyDown={(e) => this.handleKeyPress(e)}
                     tabIndex={0}
