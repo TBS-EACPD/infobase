@@ -305,6 +305,12 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
     return may_show_menu && query_value.length >= min_length;
   }
 
+  get allow_keyboard_navigation() {
+    const { loading_results } = this.props;
+
+    return this.show_menu && !loading_results;
+  }
+
   get active_item() {
     const active_item: HTMLElement | null = this.typeahead_ref.current
       ? this.typeahead_ref.current.querySelector(".typeahead__result--active")
@@ -356,40 +362,40 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
     });
   };
 
-  handle_up_arrow = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    this.show_menu &&
-      this.setState({ selection_cursor: this.previous_selection_cursor });
-  };
-  handle_down_arrow = (e: KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    this.show_menu &&
-      this.setState({ selection_cursor: this.next_selection_cursor });
-  };
-  handle_enter_key = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (this.show_menu) {
-      e.preventDefault();
-
-      const active_item = this.active_item;
-
-      if (!_.isNull(active_item)) {
-        active_item.click();
-      } else if (!_.isEmpty(this.props.results)) {
-        this.setState({ selection_cursor: 0 });
+  handle_key_down = (e: KeyboardEvent<HTMLInputElement>) => {
+    // TODO not allowing keyboard navigation until ALL results are loaded is necessary, unless we undertake a large rewrite here...
+    // need to at least communicate this a bit better though
+    if (this.allow_keyboard_navigation) {
+      switch (e.keyCode) {
+        case 38: //up arrow
+          this.handle_up_arrow(e);
+          break;
+        case 40: //down arrow
+          this.handle_down_arrow(e);
+          break;
+        case 13: //enter key
+          this.handle_enter_key(e);
+          break;
       }
     }
   };
-  handle_key_down = (e: KeyboardEvent<HTMLInputElement>) => {
-    switch (e.keyCode) {
-      case 38: //up arrow
-        this.handle_up_arrow(e);
-        break;
-      case 40: //down arrow
-        this.handle_down_arrow(e);
-        break;
-      case 13: //enter key
-        this.handle_enter_key(e);
-        break;
+  handle_up_arrow = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    this.setState({ selection_cursor: this.previous_selection_cursor });
+  };
+  handle_down_arrow = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    this.setState({ selection_cursor: this.next_selection_cursor });
+  };
+  handle_enter_key = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const active_item = this.active_item;
+
+    if (!_.isNull(active_item)) {
+      active_item.click();
+    } else if (!_.isEmpty(this.props.results)) {
+      this.setState({ selection_cursor: 0 });
     }
   };
 }
