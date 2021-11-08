@@ -96,8 +96,6 @@ export class App extends React.Component {
   state = {
     outage_message: null,
     showSurvey: false,
-    showGlossary: false,
-    glossaryItem: {},
   };
 
   toggleSurvey = (override = null) => {
@@ -107,16 +105,6 @@ export class App extends React.Component {
       }; //add es2020 nullish coalescing when possible
     });
   };
-
-  toggleGlossary(value) {
-    this.setState({
-      showGlossary: value,
-    });
-  }
-
-  setGlossaryItem(item) {
-    this.setState({ glossaryItem: item });
-  }
 
   componentDidMount() {
     if (!is_dev) {
@@ -168,7 +156,6 @@ export class App extends React.Component {
             url_before_redirect_key="pre_redirected_url"
           />
           {has_local_storage && <SurveyPopup />}
-          <TooltipActivator />
           <GlossaryMenu />
           <Suspense fallback={<LeafSpinner config_name={"route"} />}>
             <Switch>
