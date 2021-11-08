@@ -13,7 +13,6 @@ class DebouncedTextInput extends React.Component {
       debounceTime,
       updateCallback,
       inputClassName,
-      style,
     } = this.props;
 
     this.debounced_callback = _.debounce(
@@ -32,8 +31,7 @@ class DebouncedTextInput extends React.Component {
         id={unique_id}
         type="text"
         aria_label={a11y_label || trivial_text_maker("text_input")}
-        className={classNames("form-control", inputClassName)}
-        style={style}
+        className={classNames(inputClassName)}
         placeholder={placeHolder || ""}
         defaultValue={defaultValue || undefined}
         onChange={handle_change}

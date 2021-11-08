@@ -86,8 +86,14 @@
   }
 
   .icon-wrapper {
+    opacity: 0.5;
     display: flex;
     align-items: center;
+  }
+
+  .icon-wrapper:hover {
+    opacity: 1;
+    cursor: pointer;
   }
 
   .icon {
@@ -153,4 +159,31 @@
 
 .defintion-wrapper {
   overflow: scroll;
+}
+
+.glossary__search-bar {
+  display: flex;
+  border: 2px $tertiaryColor solid;
+  border-radius: 1rem;
+  height: 4.5rem;
+  padding: 0 1rem;
+  background: $backgroundColor;
+  margin-top: 10px;
+
+  & > input {
+    width: 100%;
+    font-size: 18px;
+    border: 0;
+    outline: none;
+
+    &::-ms-clear {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+  }
+}
+.glossary__icon-container {
+  display: flex;
+  align-items: center;
 }
