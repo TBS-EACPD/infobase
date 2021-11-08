@@ -14,6 +14,12 @@ export class SearchConfigTypeahead extends React.Component {
     this.state = {
       query_value: "",
     };
+
+    this.is_unmounting = false;
+  }
+
+  componentWillUnmount() {
+    this.is_unmounting = true;
   }
 
   componentDidUpdate() {
@@ -44,45 +50,45 @@ export class SearchConfigTypeahead extends React.Component {
             },
             () =>
               query(query_value).then((matches) => {
-                // TODO need a decent way to abort here if the component's already unmounted
+                if (!this.is_unmounting) {
+                  const results = _.map(matches, (match, index) => ({
+                    header: index === 0 && header_function(),
+                    on_select: () => {
+                      log_standard_event({
+                        SUBAPP: window.location.hash.replace("#", ""),
+                        MISC1: `TYPEAHEAD_SEARCH_SELECT`,
+                        MISC2: `Queried: ${query_value}. Selected: ${name_function(
+                          match
+                        )}`,
+                      });
 
-                const results = _.map(matches, (match, index) => ({
-                  header: index === 0 && header_function(),
-                  on_select: () => {
-                    log_standard_event({
-                      SUBAPP: window.location.hash.replace("#", ""),
-                      MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-                      MISC2: `Queried: ${query_value}. Selected: ${name_function(
-                        match
-                      )}`,
-                    });
+                      if (_.isFunction(this.props.on_select)) {
+                        this.props.on_select(match);
+                      }
 
-                    if (_.isFunction(this.props.on_select)) {
-                      this.props.on_select(match);
-                    }
+                      this.setState({
+                        query_value: "",
+                      });
+                    },
+                    content: _.isFunction(menu_content_function) ? (
+                      menu_content_function(match, query_value, name_function)
+                    ) : (
+                      <SearchHighlighter
+                        search={query_value}
+                        content={name_function(match)}
+                      />
+                    ),
+                    plain_text: name_function(match),
+                  }));
 
-                    this.setState({
-                      query_value: "",
-                    });
-                  },
-                  content: _.isFunction(menu_content_function) ? (
-                    menu_content_function(match, query_value, name_function)
-                  ) : (
-                    <SearchHighlighter
-                      search={query_value}
-                      content={name_function(match)}
-                    />
-                  ),
-                  plain_text: name_function(match),
-                }));
-
-                // TODO some risk competing promises could clober the nested state here, ugh
-                this.setState({
-                  [config_name]: {
-                    ...this.state[config_name],
-                    [query_value]: results,
-                  },
-                });
+                  // TODO some risk competing promises could clober the nested state here, ugh
+                  this.setState({
+                    [config_name]: {
+                      ...this.state[config_name],
+                      [query_value]: results,
+                    },
+                  });
+                }
               })
           );
         }
