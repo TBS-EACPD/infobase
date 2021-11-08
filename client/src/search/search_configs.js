@@ -2,6 +2,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
+import { query_search_services } from "src/models/populate_services";
 import { Dept, Gov, Program, CRSO, ProgramTag } from "src/models/subjects";
 
 import { trivial_text_maker } from "src/models/text";
@@ -392,17 +393,7 @@ const services = {
   header_function: () => trivial_text_maker("services"),
   name_function: (service) =>
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
-  query: (query_value) => `
-    search_services(name_query: "${query_value}") {
-      id
-      org_id
-      name
-    }
-  `,
-  queried_data_accessor: "search_services",
-  // TODO this filter could be identity, right? Maybe make filter optional on these configs,
-  filter: (query, datum) =>
-    memoized_re_matchers(query, ["name"], "services")(datum),
+  query: (query) => query_search_services({ query }),
 };
 
 export {
