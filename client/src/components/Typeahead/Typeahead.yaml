@@ -24,13 +24,13 @@ menu_with_results_status:
   transform: [handlebars]
   en: |
     {{#if loading_results}}
-      Results still loading
+      Searching
     {{else}}
       {{total_results}} results found
     {{/if}}
   fr: |
     {{#if loading_results}}
-      Résultats toujours en cours de chargement
+      Recherche
     {{else}}
       {{total_results}} résultats trouvés
     {{/if}}
