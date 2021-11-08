@@ -21,6 +21,7 @@ interface GlossaryMenuProps {
 interface GlossaryMenuState {
   show: boolean;
   results: ResultProps[];
+  item: GlossaryItem;
 }
 
 export interface GlossaryItem {
@@ -48,6 +49,7 @@ export class GlossaryMenu extends React.Component<
     this.state = {
       show: this.props.show,
       results: [],
+      item: this.props.item,
     };
   }
 
@@ -55,12 +57,16 @@ export class GlossaryMenu extends React.Component<
     nextProps: GlossaryMenuProps,
     prevState: GlossaryMenuState
   ) {
-    const { show: next_show } = nextProps;
-    const { show: prev_show } = prevState;
+    const { show: next_show, item: next_item } = nextProps;
+    const { show: prev_show, item: prev_item } = prevState;
 
     if (next_show !== prev_show) {
       return {
         show: next_show,
+      };
+    } else if (next_item !== prev_item) {
+      return {
+        item: next_item,
       };
     } else {
       return null;
@@ -71,6 +77,7 @@ export class GlossaryMenu extends React.Component<
     this.setState({
       results: childData,
     });
+    this.props.setGlossaryItem({});
   };
 
   closeItem() {
@@ -135,8 +142,8 @@ export class GlossaryMenu extends React.Component<
           </div>
           <div className="glossary-sidebar-content-wrapper">
             <SidebarContent
-              title={this.props.item.title}
-              def={this.props.item.def}
+              title={this.state.item.title}
+              def={this.state.item.def}
               results={this.state.results}
               closeItem={() => this.closeItem()}
               openItem={(item: Record<string, unknown>) => this.openItem(item)}
