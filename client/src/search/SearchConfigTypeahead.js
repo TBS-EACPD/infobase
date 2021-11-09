@@ -1,9 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
+import string_hash from "string-hash";
+
 import { Typeahead } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
+
+const get_query_result_state_key = (config_name, query_value) =>
+  `${config_name}__${string_hash(query_value)}`;
 
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
@@ -22,38 +27,31 @@ export class SearchConfigTypeahead extends React.Component {
 
   componentDidUpdate() {
     const { search_configs } = this.props;
-    const { query_value, ...results_by_config_name_and_query } = this.state;
+    const { query_value } = this.state;
 
     _.each(search_configs, (search_config) => {
       const { config_name, query } = search_config;
 
-      const is_unloaded = _.chain(results_by_config_name_and_query)
-        .get(`${config_name}[${query_value}]`)
-        .isUndefined()
-        .value();
+      const is_not_loading_or_loaded = _.isUndefined(
+        this.state[get_query_result_state_key(config_name, query_value)]
+      );
 
-      if (is_unloaded) {
+      if (is_not_loading_or_loaded) {
         this.setState(
           {
-            [config_name]: {
-              ...this.state[config_name],
-              [query_value]: "loading",
-            },
+            [get_query_result_state_key(config_name, query_value)]: "loading",
           },
           () =>
             query(query_value).then(
               (matches) =>
                 !this.is_unmounting &&
-                // TODO some risk competing promises could clober the nested state here, ugh
                 this.setState({
-                  [config_name]: {
-                    ...this.state[config_name],
-                    [query_value]: this.results_from_matches(
+                  [get_query_result_state_key(config_name, query_value)]:
+                    this.results_from_matches(
                       matches,
                       query_value,
                       search_config
                     ),
-                  },
                 })
             )
         );
@@ -102,10 +100,12 @@ export class SearchConfigTypeahead extends React.Component {
 
   render() {
     const { search_configs } = this.props;
-    const { query_value, ...results_by_config_name_and_query } = this.state;
+    const { query_value } = this.state;
 
-    const maybe_results = _.flatMap(search_configs, ({ config_name }) =>
-      _.get(results_by_config_name_and_query, `${config_name}[${query_value}]`)
+    const maybe_results = _.flatMap(
+      search_configs,
+      ({ config_name }) =>
+        this.state[get_query_result_state_key(config_name, query_value)]
     );
 
     const still_loading_results = _.some(
