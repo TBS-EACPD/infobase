@@ -7,9 +7,6 @@ import { Typeahead } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
 
-const get_query_result_state_key = (config_name, query_value) =>
-  `${config_name}__${string_hash(query_value)}`;
-
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
     super(props);
@@ -33,27 +30,20 @@ export class SearchConfigTypeahead extends React.Component {
       const { config_name, query } = search_config;
 
       const is_not_loading_or_loaded = _.isUndefined(
-        this.state[get_query_result_state_key(config_name, query_value)]
+        this.get_query_result_state(config_name, query_value)
       );
 
       if (is_not_loading_or_loaded) {
-        this.setState(
-          {
-            [get_query_result_state_key(config_name, query_value)]: "loading",
-          },
-          () =>
-            query(query_value).then(
-              (matches) =>
-                !this.is_unmounting &&
-                this.setState({
-                  [get_query_result_state_key(config_name, query_value)]:
-                    this.results_from_matches(
-                      matches,
-                      query_value,
-                      search_config
-                    ),
-                })
-            )
+        this.set_query_result_state(config_name, query_value, "loading", () =>
+          query(query_value).then(
+            (matches) =>
+              !this.is_unmounting &&
+              this.set_query_result_state(
+                config_name,
+                query_value,
+                this.results_from_matches(matches, query_value, search_config)
+              )
+          )
         );
       }
     });
@@ -85,6 +75,23 @@ export class SearchConfigTypeahead extends React.Component {
     });
   };
 
+  get_query_result_state_key = (config_name, query_value) =>
+    `${config_name}__${string_hash(query_value)}`;
+  get_query_result_state = (config_name, query_value) =>
+    this.state[this.get_query_result_state_key(config_name, query_value)];
+  set_query_result_state = (
+    config_name,
+    query_value,
+    state,
+    callback = _.noop
+  ) =>
+    this.setState(
+      {
+        [this.get_query_result_state_key(config_name, query_value)]: state,
+      },
+      callback
+    );
+
   on_query = (query_value) => {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
@@ -102,10 +109,8 @@ export class SearchConfigTypeahead extends React.Component {
     const { search_configs } = this.props;
     const { query_value } = this.state;
 
-    const maybe_results = _.flatMap(
-      search_configs,
-      ({ config_name }) =>
-        this.state[get_query_result_state_key(config_name, query_value)]
+    const maybe_results = _.flatMap(search_configs, ({ config_name }) =>
+      this.get_query_result_state(config_name, query_value)
     );
 
     const still_loading_results = _.some(
