@@ -47,6 +47,10 @@ const memoized_re_matchers = _.memoize(
   (query, accessors, config_name) => query + config_name
 );
 
+const default_menu_content_function = (data, query_value, name_function) => (
+  <SearchHighlighter search={query_value} content={name_function(data)} />
+);
+
 const org_attributes_to_match = [
   "legal_title",
   "applied_title",
@@ -221,6 +225,7 @@ const glossary_lite = {
   config_name: "glossary_lite",
   header_function: () => trivial_text_maker("glossary"),
   name_function: _.property("title"),
+  menu_content_function: default_menu_content_function,
   query: (query) =>
     Promise.resolve(
       _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
@@ -238,6 +243,7 @@ const gocos = {
   header_function: () =>
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.GOCO.name}`,
   name_function: _.property("name"),
+  menu_content_function: default_menu_content_function,
   query: (query) =>
     Promise.resolve(
       _.filter(
@@ -255,6 +261,7 @@ const how_we_help = {
   header_function: () =>
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.HWH.name}`,
   name_function: _.property("name"),
+  menu_content_function: default_menu_content_function,
   query: (query) =>
     Promise.resolve(
       _.filter(
@@ -272,6 +279,7 @@ const who_we_help = {
   header_function: () =>
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.WWH.name}`,
   name_function: _.property("name"),
+  menu_content_function: default_menu_content_function,
   query: (query) =>
     Promise.resolve(
       _.filter(
@@ -288,6 +296,7 @@ const datasets = {
   config_name: "datasets",
   header_function: () => trivial_text_maker("build_a_report"),
   name_function: (table) => table.title,
+  menu_content_function: default_menu_content_function,
   query: (query) =>
     Promise.resolve(
       _.chain(Table.store.get_all())
@@ -321,16 +330,6 @@ const programs = {
   config_name: "programs",
   header_function: () => trivial_text_maker("programs"),
   name_function: program_or_crso_search_name,
-  query: (query) =>
-    Promise.resolve(
-      _.filter(Program.store.get_all(), (program) =>
-        memoized_re_matchers(
-          query,
-          ["name", "old_name", "activity_code"],
-          "programs"
-        )(program)
-      )
-    ),
   menu_content_function: function (program, search, name_function) {
     const name = name_function(program);
 
@@ -369,6 +368,16 @@ const programs = {
       }
     }
   },
+  query: (query) =>
+    Promise.resolve(
+      _.filter(Program.store.get_all(), (program) =>
+        memoized_re_matchers(
+          query,
+          ["name", "old_name", "activity_code"],
+          "programs"
+        )(program)
+      )
+    ),
 };
 
 //only include CRs because SO's have really really long names
@@ -376,6 +385,7 @@ const crsos = {
   config_name: "crsos",
   header_function: () => trivial_text_maker("core_resps"),
   name_function: program_or_crso_search_name,
+  menu_content_function: default_menu_content_function,
   query: (query) =>
     Promise.resolve(
       _.filter(
@@ -387,12 +397,12 @@ const crsos = {
     ),
 };
 
-// TODO leaving rewriting this till after the other configs/SearchConfigTypeahead works on promises
 const services = {
   config_name: "services",
   header_function: () => trivial_text_maker("services"),
   name_function: (service) =>
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
+  menu_content_function: default_menu_content_function,
   query: (query) => query_search_services({ query }),
 };
 
