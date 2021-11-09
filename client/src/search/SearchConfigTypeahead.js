@@ -5,8 +5,6 @@ import { Typeahead } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
 
-import { SearchHighlighter } from "src/search/search_utils";
-
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
     super(props);
@@ -26,75 +24,68 @@ export class SearchConfigTypeahead extends React.Component {
     const { search_configs } = this.props;
     const { query_value, ...results_by_config_name_and_query } = this.state;
 
-    _.each(
-      search_configs,
-      ({
-        config_name,
-        query,
-        header_function,
-        name_function,
-        menu_content_function,
-      }) => {
-        const is_unloaded = _.chain(results_by_config_name_and_query)
-          .get(`${config_name}[${query_value}]`)
-          .isUndefined()
-          .value();
+    _.each(search_configs, (search_config) => {
+      const { config_name, query } = search_config;
 
-        if (is_unloaded) {
-          this.setState(
-            {
-              [config_name]: {
-                ...this.state[config_name],
-                [query_value]: "loading",
-              },
+      const is_unloaded = _.chain(results_by_config_name_and_query)
+        .get(`${config_name}[${query_value}]`)
+        .isUndefined()
+        .value();
+
+      if (is_unloaded) {
+        this.setState(
+          {
+            [config_name]: {
+              ...this.state[config_name],
+              [query_value]: "loading",
             },
-            () =>
-              query(query_value).then((matches) => {
-                if (!this.is_unmounting) {
-                  const results = _.map(matches, (match, index) => ({
-                    header: index === 0 && header_function(),
-                    on_select: () => {
-                      log_standard_event({
-                        SUBAPP: window.location.hash.replace("#", ""),
-                        MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-                        MISC2: `Queried: ${query_value}. Selected: ${name_function(
-                          match
-                        )}`,
-                      });
-
-                      if (_.isFunction(this.props.on_select)) {
-                        this.props.on_select(match);
-                      }
-
-                      this.setState({
-                        query_value: "",
-                      });
-                    },
-                    content: _.isFunction(menu_content_function) ? (
-                      menu_content_function(match, query_value, name_function)
-                    ) : (
-                      <SearchHighlighter
-                        search={query_value}
-                        content={name_function(match)}
-                      />
+          },
+          () =>
+            query(query_value).then(
+              (matches) =>
+                !this.is_unmounting &&
+                // TODO some risk competing promises could clober the nested state here, ugh
+                this.setState({
+                  [config_name]: {
+                    ...this.state[config_name],
+                    [query_value]: this.results_from_matches(
+                      matches,
+                      query_value,
+                      search_config
                     ),
-                    plain_text: name_function(match),
-                  }));
-
-                  // TODO some risk competing promises could clober the nested state here, ugh
-                  this.setState({
-                    [config_name]: {
-                      ...this.state[config_name],
-                      [query_value]: results,
-                    },
-                  });
-                }
-              })
-          );
-        }
+                  },
+                })
+            )
+        );
       }
-    );
+    });
   }
+  results_from_matches = (
+    matches,
+    query_value,
+    { header_function, name_function, menu_content_function }
+  ) =>
+    _.map(matches, (match, index) => ({
+      header: index === 0 && header_function(),
+      on_select: this.get_result_on_select(query_value, name_function, match),
+      content: menu_content_function(match, query_value, name_function),
+      plain_text: name_function(match),
+    }));
+  get_result_on_select = (query_value, name_function, match) => () => {
+    log_standard_event({
+      SUBAPP: window.location.hash.replace("#", ""),
+      MISC1: `TYPEAHEAD_SEARCH_SELECT`,
+      MISC2: `Queried: ${query_value}. Selected: ${name_function(match)}`,
+    });
+
+    if (_.isFunction(this.props.on_select)) {
+      this.props.on_select(match);
+    }
+
+    this.setState({
+      query_value: "",
+    });
+  };
 
   on_query = (query_value) => {
     log_standard_event({
