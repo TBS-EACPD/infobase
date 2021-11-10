@@ -20,8 +20,6 @@
     "@babel/core": "^7",
     "@babel/preset-env": "^7.3.1",
     "babel-plugin-transform-import-meta": "^2.0.0",
-    "jest": "^27.2.5",
-    "jest-cli": "^27.2.5",
     "json2csv": "^5.0.1",
     "nodemon": "^2.0.6"
   },

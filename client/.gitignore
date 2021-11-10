@@ -25,5 +25,6 @@
 .eslintcache
 /storybook-static
 npm-debug*
+coverage
 
 scripts/typescript_progress/output
