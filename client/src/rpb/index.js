@@ -50,6 +50,7 @@ function get_default_dimension_for_table(table) {
 
 //returns a the proposed new slice of state that will change when a new table is selected
 function get_default_state_for_new_table(table_id) {
+  console.log("get_default_state_for_new_table, table_id = " + table_id);
   const table = Table.store.lookup(table_id);
   const columns = _.map(get_all_data_columns_for_table(table), "nick");
   return {
@@ -167,23 +168,25 @@ class RPB extends React.Component {
     console.log("\nRPB - render");
     console.log(this.props.state);
     console.log(this.state);
-    const { broken_url } = this.props.state;
+    const { broken_url } = this.props;
     const { columns: data_columns, dimension } = this.state;
 
-    const table = Table.store.lookup(this.state.table);
+    const table = this.state.table && Table.store.lookup(this.state.table);
     console.log({ table });
 
     const subject =
       this.state.subject && get_subject_by_guid(this.state.subject);
 
-    const all_data_columns = get_all_data_columns_for_table(table);
+    const all_data_columns =
+      this.state.table && get_all_data_columns_for_table(table);
 
     const columns =
       !_.isEmpty(all_data_columns) &&
       _.filter(all_data_columns, ({ nick }) => _.includes(data_columns, nick));
     // const columns = all_data_columns;
 
-    const sorted_key_columns = this.get_key_columns_for_table(table);
+    const sorted_key_columns =
+      this.state.table && this.get_key_columns_for_table(table);
 
     const def_ready_columns =
       !_.isEmpty(columns) &&
@@ -203,11 +206,13 @@ class RPB extends React.Component {
     const { group_by_func, dimension_col_values_func } = {
       ...table,
     };
-    const dimensions = table.dimensions;
+    const dimensions = this.state.table && table.dimensions;
 
-    const table_data = (() => {
-      return table.data;
-    })();
+    const table_data =
+      this.state.table &&
+      (() => {
+        return table.data;
+      })();
 
     const cat_filter_func = dimension && _.constant(true);
 
@@ -481,7 +486,7 @@ export default class ReportBuilder extends React.Component {
     }
   }
   render() {
-    console.log("ReportBuilder - render");
+    console.log("\nsReportBuilder - render");
     console.log(this.props);
     console.log(this.state);
     const { url_state } = this.state;
