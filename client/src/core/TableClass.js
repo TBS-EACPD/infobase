@@ -304,10 +304,6 @@ export class Table {
       if (!this.is_custom_dim(dimension)) {
         return _.groupBy(data, dimension);
       }
-      console.log("get_group_by_func");
-      console.log({ dimension });
-      console.log(this);
-      console.log(this.get_dimension_col(dimension));
       return _.groupBy(data, (row) =>
         this.get_dimension_col(dimension).custom_groupings[dimension].group_by(
           row
