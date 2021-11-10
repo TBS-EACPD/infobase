@@ -37,7 +37,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "unit_tests": "jest --coverage --forceExit --config jest_configs/unit_tests.config.js",
-    "unit_tests:debug": "node --inspect-brk ../node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js"
+    "unit_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
