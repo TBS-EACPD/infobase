@@ -20,12 +20,6 @@
     "no-console": 0
   },
   "globals": {
-    "jest": true,
-    "afterAll": true,
-    "beforeAll": true,
-    "describe": true,
-    "it": true,
-    "expect": true,
     "process": true
   }
 }

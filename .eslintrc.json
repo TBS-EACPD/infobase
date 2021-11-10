@@ -1,12 +1,15 @@
 {
   "root": true,
-  "plugins": ["import", "lodash"],
+  "plugins": ["import", "lodash", "jest"],
   "parser": "@babel/eslint-parser",
   "extends": [
     "eslint:recommended",
     "plugin:import/warnings",
     "plugin:import/errors"
   ],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
     "no-unused-vars": ["warn", { "args": "none" }],
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
