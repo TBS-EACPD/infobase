@@ -16,7 +16,7 @@ module.exports = {
     transform: {
       [code_suffix_pattern]: [
         "babel-jest",
-        { configFile: "<rootDir>/jest_configs/babel-jest.json" },
+        { configFile: "./jest_configs/babel-jest.config.js" },
       ],
       //"^.+\\.yaml$": "./src/testing/yaml-lang-transform.js",
       //"^.+\\.csv$": "./src/testing/raw-transform.js",
