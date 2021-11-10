@@ -35,7 +35,9 @@
     "build-storybook": "STORYBOOK_A11Y=\"false\" build-storybook",
     "build-storybook-a11y": "STORYBOOK_A11Y=\"true\" build-storybook",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "unit_tests": "jest --coverage --forceExit --config jest_configs/unit_tests.config.js",
+    "unit_tests:debug": "node --inspect-brk ../node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
@@ -131,6 +133,7 @@
     "@types/d3-transition": "^2.0.0",
     "@types/dompurify": "^2.2.1",
     "@types/google.analytics": "0.0.41",
+    "@types/jest": "^27.0.2",
     "@types/js-yaml": "^3.12.5",
     "@types/jsurl": "^1.2.29",
     "@types/lodash": "^4.14.162",
