@@ -27,6 +27,8 @@
     "@babel/preset-env": "^7.3.1",
     "axios": "^0.21.1",
     "babel-plugin-transform-import-meta": "^2.0.0",
+    "jest": "^27.3.1",
+    "jest-cli": "^27.3.1",
     "kill-port": "^1.5.2",
     "nodemon": "^2.0.6"
   },
@@ -42,7 +44,7 @@
     "postsnapshot_tests:debug": "(node src/populate_db.js)",
     "unit_tests": "jest --coverage --forceExit --config jest_configs/unit_tests.config.js",
     "unit_tests:watch": "jest --watch --config jest_configs/unit_tests.config.js",
-    "unit_tests:debug": "node --inspect-brk ../node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js",
+    "unit_tests:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js",
     "test": "(npm run unit_tests && npm run snapshot_tests && npm run merge_coverage_reports)",
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node src/server.js",
     "start:debug": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node --inspect ./src/server.js",
