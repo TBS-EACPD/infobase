@@ -8,8 +8,8 @@ export default {
   component: TabLoadingWrapper,
 };
 
-const Template = (args) => {
-  const promise = () =>
+const Template = (args: React.ReactNode) => {
+  const promise = (arg: React.ReactNode) =>
     new Promise((resolve, reject) => {
       const data = "This is the TabLoadingWrapper component.";
       setTimeout(() => resolve(data), 5000);
@@ -18,8 +18,10 @@ const Template = (args) => {
   return (
     <div>
       <TabLoadingWrapper
-        {...args}
-        load_data={promise}
+        args={args}
+        load_data={
+          promise as (arg: React.ReactNode) => Promise<React.ReactNode>
+        }
         TabContent={TabContent}
       />
       <button
