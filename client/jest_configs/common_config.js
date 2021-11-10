@@ -25,7 +25,10 @@ module.exports = {
     },
 
     coverageReporters: reporters,
-    collectCoverageFrom: [`<rootDir>/src/**/*${code_suffix_pattern}`],
+    collectCoverageFrom: [
+      "<rootDir>/src/**/*.{js,ts,tsx}",
+      "!<rootDir>/src/**/*.d.ts",
+    ],
     coveragePathIgnorePatterns: [
       "\\.unit-test",
       "\\.end-to-end-test",
