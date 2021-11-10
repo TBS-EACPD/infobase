@@ -65,8 +65,6 @@ class GranularView extends React.Component {
       dimension,
       dimensions,
     } = this.props;
-    // console.log("\nGranularView - get_table_content");
-    // console.log(this.props);
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
 
