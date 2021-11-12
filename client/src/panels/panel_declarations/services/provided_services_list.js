@@ -32,10 +32,11 @@ const ProvidedServicesListPanel = ({ subject }) => {
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }
+  const services = _.uniqBy(data, "id");
 
   const includes_lowercase = (value, query) =>
     _.includes(value.toLowerCase(), query.toLowerCase());
-  const filtered_sorted_data = _.chain(data)
+  const filtered_sorted_data = _.chain(services)
     .filter(
       ({ name, service_type }) =>
         includes_lowercase(name, service_query) ||
@@ -55,7 +56,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
         className="medium-panel-text"
         args={{
           subject_name: subject.name,
-          num_of_services: data.length,
+          num_of_services: services.length,
         }}
       />
       <input

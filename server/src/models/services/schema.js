@@ -5,7 +5,7 @@ import { get_search_terms_resolver } from "../search_utils.js";
 
 const schema = `
   extend type Root{
-    service(id: String!): Service
+    service(id: String!): [Service]
     search_services(search_phrase: String!): [Service]
   }
   extend type Gov{
@@ -80,12 +80,16 @@ const schema = `
     mail_application_count: Float,
     phone_application_count: Float,
     other_application_count: Float,
+    email_application_count: Float
+    fax_application_count: Float
+    phone_inquiry_and_application_count: Float
     service_report_comment: String
   }
   type StandardReport{
     standard_id: String,
     year: String,
     lower: Float,
+    upper: Float,
     count: Float,
     met_count: Float,
     is_target_met: Boolean,
@@ -95,6 +99,7 @@ const schema = `
     id: String
     org_id: String
     org: Org
+    submission_year: String
     report_years: [String]
     program_activity_codes: [String]
     programs: [Program]
@@ -106,11 +111,17 @@ const schema = `
     description: String
     service_type: [String]
     scope: [String]
+    designations: [String]
     target_groups: [String]
     feedback_channels: [String]
     urls: [String]
+    digital_identity_platforms: [String]
+    accessibility_assessors: [String]
+    recipient_type: [String]
 
     last_gender_analysis: String
+    last_accessibility_review: String
+    last_improve_from_feedback: String
 
     collects_fees: Boolean
     account_reg_digital_status: Boolean
@@ -127,16 +138,18 @@ const schema = `
   type ServiceStandard{
     standard_id: String
     service_id: String
-
     name: String
 
+    submission_year: String
+    first_active_year: String
+    last_active_year: String
     last_gcss_tool_year: String
     channel: String
     type: String
     other_type_comment: String
 
     target_type: String
-    urls: [String]
+    standard_urls: [String]
     rtp_urls: [String]
     standard_report: [StandardReport]
   }
@@ -196,11 +209,14 @@ export default function ({ models, loaders }) {
       description: bilingual_field("description"),
       service_type: bilingual_field("service_type"),
       scope: bilingual_field("scope"),
+      designations: bilingual_field("designations"),
       target_groups: bilingual_field("target_groups"),
       feedback_channels: bilingual_field("feedback_channels"),
       urls: bilingual_field("urls"),
-      //comment: bilingual_field("comment"),
       digital_enablement_comment: bilingual_field("digital_enablement_comment"),
+      digital_identity_platforms: bilingual_field("digital_identity_platforms"),
+      accessibility_assessors: bilingual_field("accessibility_assessors"),
+      recipient_type: bilingual_field("recipient_type"),
     },
     ServiceStandard: {
       name: bilingual_field("name"),
@@ -208,7 +224,7 @@ export default function ({ models, loaders }) {
       //target_comment: bilingual_field("comment"),
       channel: bilingual_field("channel"),
       type: bilingual_field("type"),
-      urls: bilingual_field("urls"),
+      standard_urls: bilingual_field("standard_urls"),
       rtp_urls: bilingual_field("rtp_urls"),
     },
     ServiceReport: {

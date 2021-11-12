@@ -40,7 +40,7 @@ export class ServiceOverview extends React.Component {
       _.chain(service.standards).flatMap(url_field).filter().uniq().value();
     const all_urls = {
       service_url: service.urls,
-      standard_url: get_uniq_flat_standard_urls("urls"),
+      standard_url: get_uniq_flat_standard_urls("standard_urls"),
       rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
     };
     return (

@@ -43,10 +43,11 @@ const ServicesChannelsPanel = ({ subject }) => {
     ${application_channels_query_fragment}
     `,
   });
+  const unique_services = _.uniqBy(data, "id");
 
   const [active_services, set_active_services] = useState({});
   const [active_year, set_active_year] = useState("");
-  const report_years = get_report_years(data);
+  const report_years = get_report_years(unique_services);
   const most_recent_year = report_years[0];
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const ServicesChannelsPanel = ({ subject }) => {
 
   useEffect(() => {
     const median_3_values = _.chain(data)
+      .uniqBy("id")
       .map((service) => ({
         id: service.id,
         value: _.chain(application_channels_keys)
@@ -85,14 +87,14 @@ const ServicesChannelsPanel = ({ subject }) => {
     return <LeafSpinner config_name="relative_panel" />;
   }
 
-  const most_recent_filtered_data = _.map(data, (service) => ({
+  const most_recent_filtered_data = _.map(unique_services, (service) => ({
     ...service,
     service_report: _.filter(
       service.service_report,
       (report) => report.year === most_recent_year
     ),
   }));
-  const active_year_filtered_data = _.map(data, (service) => ({
+  const active_year_filtered_data = _.map(unique_services, (service) => ({
     ...service,
     service_report: _.filter(
       service.service_report,
@@ -170,7 +172,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={_.map(data, ({ name, service_report }) => ({
+          data={_.map(unique_services, ({ name, service_report }) => ({
             name: name,
             ..._.chain(application_channels_keys)
               .map((key) => [key, _.sumBy(service_report, key)])

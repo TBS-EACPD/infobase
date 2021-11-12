@@ -8,72 +8,84 @@ import { lang } from "src/core/injected_build_constants";
 import { query_factory, get_client } from "src/graphql_utils/graphql_utils";
 
 const all_service_fragments = `
-      id
-      org_id
-      program_activity_codes
+  id
+  org_id
+  submission_year
+  report_years
+  program_activity_codes
+  first_active_year
+  last_active_year
+  is_active
 
-      first_active_year
-      last_active_year
-      is_active      
+  name
+  description
+  service_type
+  scope
+  designations
+  target_groups
+  feedback_channels
+  urls
+  digital_identity_platforms
+  accessibility_assessors
+  recipient_type
 
-      name
-      description
-      service_type
-      scope
-      target_groups
-      feedback_channels
-      urls
+  last_gender_analysis
+  last_accessibility_review
+  last_improve_from_feedback
 
-      last_gender_analysis
+  collects_fees
+  account_reg_digital_status
+  authentication_status
+  application_digital_status
+  decision_digital_status
+  issuance_digital_status
+  issue_res_digital_status
+  digital_enablement_comment
+  service_report {
+    service_id
+    year
+    cra_business_ids_collected
+    sin_collected
+    phone_inquiry_count
+    online_inquiry_count
+    online_application_count
+    live_application_count
+    mail_application_count
+    phone_application_count
+    other_application_count
+    email_application_count
+    fax_application_count
+    phone_inquiry_and_application_count
+    service_report_comment
+  }
 
-      collects_fees
-      account_reg_digital_status
-      authentication_status
-      application_digital_status
-      decision_digital_status
-      issuance_digital_status
-      issue_res_digital_status
-      digital_enablement_comment
+  standards {
+    standard_id
+    service_id
+    name
 
-      service_report {
-        service_id
-        year
-        cra_business_ids_collected
-        sin_collected
-        phone_inquiry_count
-        online_inquiry_count
-        online_application_count
-        live_application_count
-        mail_application_count
-        phone_application_count
-        other_application_count
-        service_report_comment
-      }
+    submission_year
+    first_active_year
+    last_active_year
+    last_gcss_tool_year
+    channel
+    type
+    other_type_comment
 
-      standards {
-        standard_id
-        service_id
-    
-        name
-    
-        last_gcss_tool_year
-        channel
-        type
-        other_type_comment
-    
-        target_type
-        urls
-        rtp_urls
-        standard_report {
-          standard_id
-          year
-          lower
-          count
-          met_count
-          is_target_met
-          standard_report_comment
-        }
-      }
+    target_type
+    standard_urls
+    rtp_urls
+    standard_report {
+      standard_id
+      year
+      lower
+      upper
+      count
+      met_count
+      is_target_met
+      standard_report_comment
+    }
+  }
   `;
 
 const program_services_query = (service_fragments) => gql`
@@ -291,7 +303,7 @@ export const useSingleService = (service_id) => {
     throw new Error(error);
   }
   if (!loading) {
-    return { ...res, data: data.root.service };
+    return { ...res, data: data.root.service[0] };
   }
   return res;
 };
