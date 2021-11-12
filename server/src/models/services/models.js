@@ -9,7 +9,6 @@ import {
   pkey_type,
   parent_fkey_type,
   sparse_parent_fkey_type,
-  sparse_pkey_type,
   str_type,
   bilingual_str,
   bilingual,
@@ -29,6 +28,9 @@ export default function (model_singleton) {
     mail_application_count: { type: Number },
     phone_application_count: { type: Number },
     other_application_count: { type: Number },
+    email_application_count: { type: Number },
+    fax_application_count: { type: Number },
+    phone_inquiry_and_application_count: { type: Number },
     ...bilingual_str("service_report_comment"),
   });
 
@@ -36,6 +38,7 @@ export default function (model_singleton) {
     standard_id: parent_fkey_type(),
     year: str_type,
     lower: { type: Number },
+    upper: { type: Number },
     count: { type: Number },
     met_count: { type: Number },
     is_target_met: { type: Boolean },
@@ -43,9 +46,11 @@ export default function (model_singleton) {
   });
 
   const ServiceStandardSchema = mongoose.Schema({
-    standard_id: sparse_pkey_type(),
+    standard_id: parent_fkey_type(),
     service_id: parent_fkey_type(),
-    //is_active: { type: Boolean },
+    submission_year: str_type,
+    first_active_year: str_type,
+    last_active_year: str_type,
 
     ...bilingual_str("name"),
 
@@ -56,20 +61,20 @@ export default function (model_singleton) {
     ...bilingual_str("other_type_comment"),
 
     //is_target_met: { type: Boolean },
-    ...bilingual("standard_urls_en", [str_type]),
+    ...bilingual("standard_urls", [str_type]),
     ...bilingual("rtp_urls", [str_type]),
     standard_report: [StandardReportSchema],
   });
 
   const ServiceSchema = make_schema_with_search_terms(
     {
-      id: pkey_type(),
+      id: parent_fkey_type(),
       org_id: parent_fkey_type(),
       program_activity_codes: [sparse_parent_fkey_type()],
+      submission_year: str_type,
       report_years: [str_type],
       first_active_year: str_type,
       last_active_year: str_type,
-      is_active: { type: Boolean },
 
       ...bilingual_str("name"),
       ...bilingual_str("description"),
@@ -79,8 +84,13 @@ export default function (model_singleton) {
       ...bilingual("target_groups", [str_type]),
       ...bilingual("feedback_channels", [str_type]),
       ...bilingual("urls", [str_type]),
+      ...bilingual("digital_identity_platforms", [str_type]),
+      ...bilingual("accessibility_assessors", [str_type]),
+      ...bilingual("recipient_type", [str_type]),
 
       last_gender_analysis: str_type,
+      last_accessibility_review: str_type,
+      last_improve_from_feedback: str_type,
 
       collects_fees: { type: Boolean },
       account_reg_digital_status: { type: Boolean },
@@ -174,7 +184,10 @@ export default function (model_singleton) {
   } = model_singleton.models;
 
   const loaders = {
-    service_loader: create_resource_by_id_attr_dataloader(Service, "id"),
+    service_loader: create_resource_by_foreignkey_attr_dataloader(
+      Service,
+      "id"
+    ),
     services_by_org_id: create_resource_by_foreignkey_attr_dataloader(
       Service,
       "org_id"

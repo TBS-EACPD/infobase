@@ -36,7 +36,7 @@ export class ServiceStandards extends React.Component {
   render() {
     const { service } = this.props;
     const { active_statuses } = this.state;
-    const standards = service.standards;
+    const standards = _.uniqBy(service.standards, "standard_id");
 
     const footnotes = _.chain(standards)
       .map(

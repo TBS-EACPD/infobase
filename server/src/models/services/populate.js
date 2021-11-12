@@ -15,6 +15,8 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
     return null;
   }
 };
+const get_years_from_services = (services) =>
+  _.chain(services).flatMap("submission_year").uniq().sort().reverse().value();
 const get_years_from_service_report = (services) =>
   _.chain(services)
     .flatMap(({ service_report }) => _.map(service_report, "year"))
@@ -42,32 +44,71 @@ export default async function ({ models }) {
     ProgramServiceSummary,
   } = models;
 
+  const urls = _.chain(get_standard_csv_file_rows("service_urls.csv"))
+    .map(
+      ({
+        dept_submissions__document__year: submission_year,
+        service: service_id,
+        category,
+        value_en,
+        value_fr,
+      }) => ({ submission_year, service_id, category, value_en, value_fr })
+    )
+    .groupBy("service_id")
+    .value();
+  const get_corresponding_urls = (
+    urls,
+    submission_year,
+    category,
+    column_name
+  ) => {
+    const corresponding_urls = _.filter(
+      urls,
+      (url) =>
+        url.submission_year === submission_year && url.category === category
+    );
+    return {
+      [`${column_name}_en`]: _.map(corresponding_urls, "value_en"),
+      [`${column_name}_fr`]: _.map(corresponding_urls, "value_fr"),
+    };
+  };
+
   const service_report_rows = _.map(
     get_standard_csv_file_rows("service-report.csv"),
     ({
-      id: standard_id,
+      service: service_id,
       cra_business_ids_collected,
       sin_collected,
-      comment: service_report_comment,
+      comment_en: service_report_comment_en,
+      comment_fr: service_report_comment_fr,
 
       ...other_fields
     }) => ({
-      standard_id,
+      service_id,
       cra_business_ids_collected: convert_to_bool_or_null(
         cra_business_ids_collected,
-        "Yes",
-        "No"
+        "YES",
+        "NO"
       ),
-      sin_collected: convert_to_bool_or_null(sin_collected, "Yes", "No"),
-      service_report_comment,
+      sin_collected: convert_to_bool_or_null(sin_collected, "YES", "NO"),
+      service_report_comment_en,
+      service_report_comment_fr,
       ...other_fields,
     })
   );
   const standard_report_rows = _.map(
     get_standard_csv_file_rows("standard-report.csv"),
-    ({ is_target_met, comment: standard_report_comment, ...other_fields }) => ({
-      is_target_met: convert_to_bool_or_null(_.toInteger(is_target_met), 1, 0),
-      standard_report_comment,
+    ({
+      is_target_met,
+      standard: standard_id,
+      comment_en: standard_report_comment_en,
+      comment_fr: standard_report_comment_fr,
+      ...other_fields
+    }) => ({
+      is_target_met: convert_to_bool_or_null(is_target_met, "TRUE", "FALSE"),
+      standard_id,
+      standard_report_comment_en,
+      standard_report_comment_fr,
       ...other_fields,
     })
   );
@@ -75,23 +116,35 @@ export default async function ({ models }) {
   const service_standard_rows = _.map(
     get_standard_csv_file_rows("standards.csv"),
     ({
-      id: standard_id,
-
-      standard_urls_en,
-      standard_urls_fr,
-      rtp_urls_en,
-      rtp_urls_fr,
-
+      dept_submissions__document__year: submission_year,
+      eternal_id: standard_id,
+      service: service_id,
+      channel__name_en: channel_en,
+      channel__name_fr: channel_fr,
+      standard_type__name_en: type_en,
+      standard_type__name_fr: type_fr,
       ...other_fields
     }) => ({
       standard_id,
-      ...multi_value_string_fields_to_arrays({
-        standard_urls_en,
-        standard_urls_fr,
-        rtp_urls_en,
-        rtp_urls_fr,
-      }),
+      service_id,
+      submission_year,
+      channel_en,
+      channel_fr,
+      type_en,
+      type_fr,
       ...other_fields,
+      ...get_corresponding_urls(
+        urls[service_id],
+        submission_year,
+        "STANDARD",
+        "standard_urls"
+      ),
+      ...get_corresponding_urls(
+        urls[service_id],
+        submission_year,
+        "RTP",
+        "rtp_urls"
+      ),
       standard_report: _.filter(
         standard_report_rows,
         (standard_report) => standard_report.standard_id === standard_id
@@ -102,10 +155,11 @@ export default async function ({ models }) {
   const service_rows = _.chain(get_standard_csv_file_rows("services.csv"))
     .map((service) => {
       const {
-        id,
-        dept_code,
+        dept_submissions__document__year: submission_year,
+        dept_id: org_id,
+        dept__tbs_dept_code: dept_code,
+        eternal_id: id,
         collects_fees,
-        is_active,
         account_reg_digital_status,
         authentication_status,
         application_digital_status,
@@ -113,22 +167,24 @@ export default async function ({ models }) {
         issuance_digital_status,
         issue_res_digital_status,
 
-        service_type_en,
-        service_type_fr,
-        service_type_codes,
-        scope_en,
-        scope_fr,
+        service_type_name_en: service_type_en,
+        service_type_name_fr: service_type_fr,
+        scope_name_en: scope_en,
+        scope_name_fr: scope_fr,
         scope_codes,
-        designations_en,
-        designations_fr,
-        target_groups_en,
-        target_groups_fr,
-        program_activity_codes,
-        feedback_channels_en,
-        feedback_channels_fr,
-        urls_en,
-        urls_fr,
-
+        designations_name_en: designations_en,
+        designations_name_fr: designations_fr,
+        target_groups_name_en: target_groups_en,
+        target_groups_name_fr: target_groups_fr,
+        programs_activity_code: program_activity_codes,
+        feedback_channels_name_en: feedback_channels_en,
+        feedback_channels_name_fr: feedback_channels_fr,
+        digital_identity_platforms_name_en: digital_identity_platforms_en,
+        digital_identity_platforms_name_fr: digital_identity_platforms_fr,
+        accessibility_assessors_name_en: accessibility_assessors_en,
+        accessibility_assessors_name_fr: accessibility_assessors_fr,
+        recipient_type_name_en: recipient_type_en,
+        recipient_type_name_fr: recipient_type_fr,
         ...other_fields
       } = service;
       const service_report = _.filter(
@@ -137,8 +193,9 @@ export default async function ({ models }) {
       );
       return {
         id,
-        is_active: convert_to_bool_or_null(_.toInteger(is_active), 1, 0),
-        collects_fees: convert_to_bool_or_null(collects_fees, "Yes", "No"),
+        submission_year,
+        org_id,
+        collects_fees: convert_to_bool_or_null(collects_fees, "TRUE", "FALSE"),
         account_reg_digital_status: convert_to_bool_or_null(
           account_reg_digital_status,
           "ENABLED",
@@ -179,7 +236,6 @@ export default async function ({ models }) {
         ...multi_value_string_fields_to_arrays({
           service_type_en,
           service_type_fr,
-          service_type_codes,
           scope_en,
           scope_fr,
           scope_codes,
@@ -189,10 +245,15 @@ export default async function ({ models }) {
           target_groups_fr,
           feedback_channels_en,
           feedback_channels_fr,
-          urls_en,
-          urls_fr,
+          digital_identity_platforms_en,
+          digital_identity_platforms_fr,
+          accessibility_assessors_en,
+          accessibility_assessors_fr,
+          recipient_type_en,
+          recipient_type_fr,
         }),
         ...other_fields,
+        ...get_corresponding_urls(urls[id], submission_year, "SERVICE", "urls"),
 
         standards: _.filter(
           service_standard_rows,
@@ -203,6 +264,7 @@ export default async function ({ models }) {
     })
     .reject((service) => _.isEqual(service.scope_codes, ["internal"])) // SI_TODO This should be done on pipeline.. I think?
     .value();
+  const most_recent_year = get_years_from_services(service_rows)[0];
 
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_activity_codes, (program_id) => {
@@ -248,10 +310,19 @@ export default async function ({ models }) {
       )
       .value();
   const get_final_standards_summary = (services, subject_id) => {
-    const services_w_standards_count = get_services_w_standards_count(services);
-    const most_recent_year = get_years_from_service_standards(services)[0];
+    const filtered_services = _.chain(services)
+      .flatMap((service) => ({
+        ...service,
+        standards: _.filter(
+          service.standards,
+          ({ submission_year }) => submission_year === most_recent_year
+        ),
+      }))
+      .value();
+    const services_w_standards_count =
+      get_services_w_standards_count(filtered_services);
     const processed_standards = get_processed_standards(
-      services,
+      filtered_services,
       most_recent_year
     );
     return {
@@ -398,42 +469,62 @@ export default async function ({ models }) {
         }))
       )
       .value();
+  const most_recent_filtered_services = _.filter(
+    service_rows,
+    ({ submission_year }) => submission_year === most_recent_year
+  );
 
   const gov_summary = [
     {
       id: "gov",
       service_general_stats: {
         id: "gov",
-        report_years: get_years_from_service_report(service_rows),
-        number_of_services: service_rows.length,
+        report_years: get_years_from_service_report(
+          most_recent_filtered_services
+        ),
+        number_of_services: most_recent_filtered_services.length,
         number_of_online_enabled_services:
-          get_number_of_online_enabled_services(service_rows),
+          get_number_of_online_enabled_services(most_recent_filtered_services),
         pct_of_online_client_interaction_pts:
-          get_pct_of_online_client_interaction_pts(service_rows),
+          get_pct_of_online_client_interaction_pts(
+            most_recent_filtered_services
+          ),
         pct_of_standards_met_high_vol_services:
-          get_pct_of_standards_met_high_vol_services(service_rows),
-        num_of_subject_offering_services: _.chain(service_rows)
+          get_pct_of_standards_met_high_vol_services(
+            most_recent_filtered_services
+          ),
+        num_of_subject_offering_services: _.chain(most_recent_filtered_services)
           .groupBy("org_id")
           .size()
           .value(),
-        num_of_programs_offering_services: _.chain(service_rows)
+        num_of_programs_offering_services: _.chain(
+          most_recent_filtered_services
+        )
           .reduce(group_by_program_id, {})
           .size()
           .value(),
       },
-      service_channels_summary: get_service_channels_summary(service_rows),
+      service_channels_summary: get_service_channels_summary(
+        most_recent_filtered_services
+      ),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
-        populate_digital_summary_key(service_rows, "gov", "gov", key)
+        populate_digital_summary_key(
+          most_recent_filtered_services,
+          "gov",
+          "gov",
+          key
+        )
       ),
       service_standards_summary: [
-        get_final_standards_summary(service_rows, "gov"),
+        get_final_standards_summary(most_recent_filtered_services, "gov"),
       ],
       subject_offering_services_summary: get_subject_offering_services_summary(
-        _.groupBy(service_rows, "org_id")
+        _.groupBy(most_recent_filtered_services, "org_id")
       ),
     },
   ];
-  const org_summary = _.chain(service_rows)
+
+  const org_summary = _.chain(most_recent_filtered_services)
     .groupBy("org_id")
     .flatMap((services, org_id) => ({
       id: org_id,
@@ -462,7 +553,7 @@ export default async function ({ models }) {
       ),
     }))
     .value();
-  const program_summary = _.chain(service_rows)
+  const program_summary = _.chain(most_recent_filtered_services)
     .reduce(group_by_program_id, {})
     .flatMap((services, program_id) => ({
       id: program_id,
