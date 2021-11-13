@@ -3,17 +3,19 @@
 //private methods have no such guarantee
 import _ from "lodash";
 
-function get_root(flat_nodes) {
+import { Node, d3Node } from "./explorer_type_utils";
+
+function get_root(flat_nodes: Node[]) {
   return _.find(flat_nodes, ({ parent_id }) => _.isEmpty(parent_id));
 }
 
-function get_leaves(flat_nodes) {
+function get_leaves(flat_nodes: Node[]) {
   return _.filter(flat_nodes, (node) => _.isEmpty(node.children));
 }
 
-function flat_descendants(node) {
+function flat_descendants(node: Node) {
   let currentWave = [node];
-  const flat_nodes = [];
+  const flat_nodes: Node[] = [];
   while (_.some(currentWave, (node) => !_.isEmpty(node.children))) {
     _.each(currentWave, (node) => {
       if (!_.isEmpty(node.children)) {
@@ -29,7 +31,10 @@ function flat_descendants(node) {
   return flat_nodes;
 }
 
-function _create_children_links(node, nodes_by_parent_id) {
+function _create_children_links(
+  node: Node,
+  nodes_by_parent_id: _.Dictionary<[Node, ...Node[]]>
+) {
   node.children = nodes_by_parent_id[node.id] || null;
   _.each(node.children, (child) =>
     _create_children_links(child, nodes_by_parent_id)
@@ -38,15 +43,15 @@ function _create_children_links(node, nodes_by_parent_id) {
 
 //mutates a node to write its children prop according to a collection of nodes indexed by parent IDs
 //will also recurse over children
-function create_children_links(flat_nodes) {
+function create_children_links(flat_nodes: Node[]) {
   const root = get_root(flat_nodes);
   const nodes_by_parent_id = _.groupBy(flat_nodes, "parent_id");
-  _create_children_links(root, nodes_by_parent_id);
+  root && _create_children_links(root, nodes_by_parent_id);
 }
 
 function filter_hierarchy(
-  flat_nodes,
-  filter_func,
+  flat_nodes: Node[],
+  filter_func: (n: Node) => boolean,
   { leaves_only = false, markSearchResults = false }
 ) {
   //filters flat-nodes or just the leaves then assembles the tree from positive search results,
@@ -72,7 +77,7 @@ function filter_hierarchy(
     .map((node) => flat_descendants(node))
     .flatten()
     .concat(positive_search_results)
-    .uniqBy()
+    .uniqBy(_.identity)
     .value();
 
   //add in ancestors of all the current nodes
@@ -90,7 +95,7 @@ function filter_hierarchy(
       }
     }
   });
-  const all_flat_nodes = _.uniqBy(new_flat_nodes);
+  const all_flat_nodes = _.uniqBy(new_flat_nodes, _.identity);
 
   //up to this point, the parent links are still accurate.
   const new_nodes = _.map(all_flat_nodes, (node) => ({
@@ -106,7 +111,7 @@ function filter_hierarchy(
 }
 
 //will mutate nodes!
-function ensureVisibility(nodes, shouldNodeBeVisible) {
+function ensureVisibility(nodes: Node[], shouldNodeBeVisible: () => boolean) {
   const nodes_by_id = _.keyBy(nodes, "id");
 
   const nodes_to_ensure_visibility = _.filter(nodes, shouldNodeBeVisible);
@@ -120,12 +125,19 @@ function ensureVisibility(nodes, shouldNodeBeVisible) {
   });
 }
 
+// TODO: figure out the toggle nodes
+type toggleNodes = {
+  toggleNode: boolean;
+  expandAllChildren: boolean;
+  collapseAllChildren: boolean;
+};
+
 //return a new set of flat nodes with new objects where nodes were updated.
 //will mutate the old set of flat nodes
 function toggleExpandedFlat(
-  flat_nodes,
-  node,
-  { toggleNode, expandAllChildren, collapseAllChildren }
+  flat_nodes: Node[],
+  node: Node,
+  { toggleNode, expandAllChildren, collapseAllChildren }: toggleNodes
 ) {
   const nodes_by_id = _.keyBy(flat_nodes, "id");
 
@@ -188,15 +200,17 @@ function toggleExpandedFlat(
 
 */
 
-const d3_to_node = (node) => ({
+const d3_to_node = (node: d3Node): Node => ({
   id: node.data.id,
   parent_id: node.parent && node.parent.data.id,
   data: node.data.data,
   isExpanded: node.data.isExpanded,
-  root: node.data.root,
+  root: node.data.root as unknown as Node,
+  children: [] as Node[],
+  parent: null as unknown as Node, // TODO: deal with this bad conversion
 });
 
-function convert_d3_hierarchy_to_explorer_hierarchy(root) {
+function convert_d3_hierarchy_to_explorer_hierarchy(root: d3Node) {
   const flat_d3_nodes = root.descendants(); //recall that descendants includes the root
 
   const new_nodes = _.map(flat_d3_nodes, d3_to_node);
@@ -215,10 +229,14 @@ function convert_d3_hierarchy_to_explorer_hierarchy(root) {
 //is_simple_parent : (ancestor, descendant) => true/false will be tested bottom-up against node's ancestors until it's true
 //is_simple_parent: (root, _ ) => true
 //
-function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter) {
+function simplify_hierarchy(
+  flat_nodes: Node[],
+  is_simple_parent: (a: Node, b: Node) => boolean,
+  bottom_layer_filter: (a: Node) => boolean
+) {
   const old_nodes_by_id = _.keyBy(flat_nodes, "id");
 
-  function get_simple_parent(node) {
+  function get_simple_parent(node: Node) {
     let suspected_simple_parent = node;
 
     while (suspected_simple_parent.parent_id) {
@@ -245,7 +263,7 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter) {
     .map((node) => _.clone(node))
     .value();
 
-  const ancestors_by_id = {};
+  const ancestors_by_id: Record<string, Node> = {};
   _.each(simple_parents, (node) => {
     let current = node;
     let done = false;
@@ -273,10 +291,13 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter) {
   return new_flat_nodes;
 }
 
-function _sort_hierarchy(node, children_transform) {
+function _sort_hierarchy(
+  node: Node,
+  children_transform: (nodes: Node[]) => Node[]
+): Node {
   const new_children = _.chain(node.children)
     .thru(children_transform)
-    .map((child) => _sort_hierarchy(child, children_transform))
+    .map((child: Node) => _sort_hierarchy(child, children_transform))
     .value();
 
   return {
@@ -286,11 +307,15 @@ function _sort_hierarchy(node, children_transform) {
 }
 
 //children_transform: [ ...node, ] => [ ...node, ] without modifying individual nodes
-function sort_hierarchy(flat_nodes, children_transform) {
+function sort_hierarchy(
+  flat_nodes: Node[],
+  children_transform: (nodes: Node[]) => Node[]
+) {
   const old_root = get_root(flat_nodes);
-  const new_root = _sort_hierarchy(old_root, children_transform);
+  const new_root = old_root && _sort_hierarchy(old_root, children_transform);
+  const flat_desc_nodes = new_root && flat_descendants(new_root);
 
-  return [new_root, ...flat_descendants(new_root)];
+  return [new_root, flat_desc_nodes];
 }
 
 export {
