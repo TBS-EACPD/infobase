@@ -195,6 +195,18 @@ jobs:
           paths:
             - ./*
 
+  test_client:
+    docker:
+      - image: eaadtbs/ib-ci-build:3.0
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/create_envs.sh
+
+      - run: (cd client && npm run unit_tests)
+
   test_server:
     docker:
       - image: eaadtbs/ib-ci-mongo:1.0
@@ -218,7 +230,7 @@ jobs:
 
       - run: (cd server && npm run snapshot_tests)
 
-  cypress_tests:
+  test_end_to_end:
     docker:
       - image: eaadtbs/ib-ci-cypress:4.0
         <<: *dockerhub_auth
@@ -377,12 +389,16 @@ workflows:
             - build
           <<: *deploy_filter
 
+      - test_client:
+          requires:
+            - build
       - test_server:
           requires:
             - build
 
-      - cypress_tests:
+      - test_end_to_end:
           requires:
+            - test_client
             - test_server
           matrix:
             parameters:
@@ -391,6 +407,7 @@ workflows:
 
       - deploy_data:
           requires:
+            - test_client
             - test_server
           <<: *deploy_filter
       - deploy_server:
@@ -401,6 +418,6 @@ workflows:
       - deploy_client_and_storybook:
           requires:
             - build_storybook
-            - cypress_tests
+            - test_end_to_end
             - deploy_server
           <<: *deploy_filter
