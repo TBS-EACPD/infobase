@@ -18,7 +18,12 @@ export class SidebarActivator extends React.Component {
   }
   replaceWithModalBtn = (e) => {
     const target =
-      e.target.getAttribute("data-toggle") === "tooltip" ? e.target : undefined;
+      e.target.getAttribute("data-toggle") === "tooltip"
+        ? e.target
+        : e.target.parentElement.getAttribute("data-toggle") === "tooltip"
+        ? e.target.parentElement
+        : undefined;
+
     if (!target) {
       return;
     }
