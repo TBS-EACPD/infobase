@@ -44,6 +44,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       type: "short-str",
@@ -52,7 +53,6 @@ export default {
       not_for_display: true,
       nick: "region_code",
       header: "",
-      groupings: [],
     });
     this.add_col({
       key: true,
@@ -62,6 +62,7 @@ export default {
         en: "Geographic Region",
         fr: "Région géographique",
       },
+      can_group_by: true,
     });
     _.each(people_years, (header, ix) => {
       this.add_col({
@@ -78,7 +79,6 @@ export default {
             "Correspond au personnel actif par région géographique, au 31 mars " +
             people_years_short_second[ix],
         },
-        groupings: [],
       });
     });
     this.add_col({
@@ -91,7 +91,6 @@ export default {
       },
       formula: people_five_year_percentage_formula("region", people_years),
       is_summable: false,
-      groupings: [],
     });
   },
 

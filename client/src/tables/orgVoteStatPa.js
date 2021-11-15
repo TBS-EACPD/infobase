@@ -75,6 +75,7 @@ export default {
         hidden: true,
         nick: "dept",
         header: "",
+        can_group_by: true,
       },
       {
         type: "int",
@@ -85,7 +86,6 @@ export default {
           en: "Number",
           fr: "Numéro",
         },
-        groupings: [],
       },
       {
         type: "int",
@@ -93,7 +93,6 @@ export default {
         hidden: true,
         nick: "votestattype",
         header: "",
-        groupings: [],
       },
       {
         type: "wide-str",
@@ -103,7 +102,6 @@ export default {
           en: "Description",
           fr: "Description",
         },
-        groupings: [],
         custom_groupings: {
           vote_vs_stat: {
             group_by: function (row) {
@@ -132,7 +130,6 @@ export default {
             en: "Corresponds to the authorities provided by Parliament, including transfers from other organizations or adjustments that are made during the year.",
             fr: "Correspondent aux autorisations accordées par le Parlement, y compris les transferts provenant d’autres organisations ou les rajustements qui ont été effectués au cours de l’exercice.",
           },
-          groupings: [],
         },
         {
           type: "big_int",
@@ -145,13 +142,11 @@ export default {
             en: "Corresponds to the funds spent against authorities available that year.",
             fr: "Correspondent aux dépenses effectuées aux termes de autorisations disponibles cette année-là.",
           },
-          groupings: [],
         },
         {
           type: "big_int",
           nick: header + "unlapsed",
           hidden: true,
-          groupings: [],
         },
       ]);
     });

@@ -267,7 +267,7 @@ export class Table {
     return _.concat(
       "all",
       _.chain(cols)
-        .filter((col) => col.groupings === undefined)
+        .filter("can_group_by")
         .map("nick")
         .concat(custom_dimensions)
         .compact()
