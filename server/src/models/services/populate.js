@@ -74,7 +74,7 @@ export default async function ({ models }) {
   };
 
   const service_report_rows = _.map(
-    get_standard_csv_file_rows("service-report.csv"),
+    get_standard_csv_file_rows("service-reports.csv"),
     ({
       service: service_id,
       cra_business_ids_collected,
@@ -97,7 +97,7 @@ export default async function ({ models }) {
     })
   );
   const standard_report_rows = _.map(
-    get_standard_csv_file_rows("standard-report.csv"),
+    get_standard_csv_file_rows("standard-reports.csv"),
     ({
       is_target_met,
       standard: standard_id,
