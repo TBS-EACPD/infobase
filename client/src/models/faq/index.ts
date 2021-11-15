@@ -1,0 +1,1 @@
+export { faqStore } from "./faq";

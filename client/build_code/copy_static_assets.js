@@ -60,6 +60,7 @@ const common_lookups = _.map(
     "url_lookups.csv",
 
     "glossary.csv",
+    "faq.csv",
   ],
   public_dir_prefixer
 );

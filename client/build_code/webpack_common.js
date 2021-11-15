@@ -114,10 +114,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       ],
     },
     {
-      test: /\.csv$/,
-      use: [{ loader: "raw-loader", options: { esModule: false } }],
-    },
-    {
       test: /\.yaml$/,
       exclude: /node_modules/, // custom loader, make sure not to hit node_modules with it
       use: [

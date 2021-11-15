@@ -4,6 +4,7 @@ import { lang } from "src/core/injected_build_constants";
 
 import { get_static_url, make_request } from "src/request_utils";
 
+import { populate_faq } from "./faq/populate_faq";
 import { populate_global_footnotes } from "./footnotes/populate_footnotes";
 import { populate_glossary } from "./glossary/populate_glossary";
 import {
@@ -32,6 +33,7 @@ export const populate_initial_stores_from_lookups = () =>
 
       const {
         glossary,
+        faq,
         org_to_minister,
         inst_forms,
         ministers,
@@ -47,6 +49,8 @@ export const populate_initial_stores_from_lookups = () =>
       } = process_lookups(lookup_csv_strings);
 
       populate_glossary(glossary);
+
+      populate_faq(faq);
 
       populate_depts(
         ministries,
