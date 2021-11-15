@@ -73,8 +73,11 @@ export function filter_row_by_subj(row, subject) {
     case "dept": {
       return row.dept == subject.id;
     }
-    case "prgm": {
+    case "program": {
       return row.program_id == subject.id;
+    }
+    default: {
+      throw new Error("Subject type is not valid.");
     }
   }
 }
@@ -274,11 +277,12 @@ export class Table {
 
   is_custom_dim(dimension) {
     return (
+      dimension !== "all" &&
       !_.chain(this._cols)
         .flatMap((col) => (_.has(col, "children") ? col.children : col))
         .map("nick")
         .includes(dimension)
-        .value() && dimension != "all"
+        .value()
     );
   }
 
@@ -324,7 +328,6 @@ export class Table {
     };
   }
 
-  // TODO: come up with a shorter, better name for this sum_cols_by_grouped_data
   get_sum_cols_by_grouped_data_func() {
     this.sum_cols_by_grouped_data = function (col, dimension, subject = Gov) {
       const { data, group_by_func, dimension_col_values_func } = this;

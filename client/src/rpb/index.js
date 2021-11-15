@@ -174,7 +174,6 @@ class RPB extends React.Component {
     const columns =
       !_.isEmpty(all_data_columns) &&
       _.filter(all_data_columns, ({ nick }) => _.includes(data_columns, nick));
-    // const columns = all_data_columns;
 
     const sorted_key_columns =
       this.state.table && this.get_key_columns_for_table(table);
