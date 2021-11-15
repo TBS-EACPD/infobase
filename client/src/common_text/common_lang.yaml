@@ -148,6 +148,9 @@ glossary_link_title:
 back_to_top:
   en: Back to top
   fr: Retour au début
+glossary_button:
+  en: Glossary
+  fr: Glossaire
 data:
   en: Data
   fr: Données
