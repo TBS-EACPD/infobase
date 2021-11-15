@@ -11,7 +11,8 @@ module.exports = {
     setupFilesAfterEnv: ["<rootDir>/jest_configs/utils/common_test_setup.js"],
     moduleNameMapper: {
       // TODO .interop.scss is going to need an exception (and maybe a rework to be test-friendly)
-      "\\.(css|scss)$": "<rootDir>/jest_configs/utils/empty_mock.js",
+      "\\.(css|scss|yaml|csv|svg)$":
+        "<rootDir>/jest_configs/utils/empty_mock.js",
     },
     transform: {
       [code_suffix_pattern]: [
@@ -33,7 +34,7 @@ module.exports = {
       "\\.unit-test",
       "\\.end-to-end-test",
       "\\.integration-test",
-      "index",
+      //"index", // TODO, we have some rascally "index" files that add new code, need to make sure those are cleaned up before we can ignore them whole sale
     ].map((pre_suffix) => pre_suffix + code_suffix_pattern),
   },
 };
