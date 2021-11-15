@@ -5,6 +5,7 @@ import "./GlossaryMenu.scss";
 import { glossaryEntryStore } from "src/models/glossary";
 
 import { IconArrow } from "src/icons/icons";
+import { InfoBaseHighlighter } from "src/search/search_utils";
 
 interface SidebarContentProps {
   title: string | null;
@@ -13,6 +14,7 @@ interface SidebarContentProps {
   closeItem: () => void;
   openItem: (key: string) => void;
   showList: boolean;
+  query: string;
 }
 
 interface SidebarContentState {
@@ -152,7 +154,10 @@ export class SidebarContent extends React.Component<
                       onKeyDown={(e) => this.handleKeyPress(e, "open", item.id)}
                       tabIndex={0}
                     >
-                      {item.title}
+                      <InfoBaseHighlighter
+                        search={this.props.query}
+                        content={item.title}
+                      />
                     </span>
                   </div>
                 ))}
