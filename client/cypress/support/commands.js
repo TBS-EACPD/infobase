@@ -17,18 +17,3 @@ Cypress.Commands.add("terminalLog", (violations) => {
 
   cy.task("table", violationData);
 });
-
-Cypress.on("window:before:load", (win) => {
-  cy.stub(win.console, "error", (msg) => {
-    if (msg.includes('No reducer provided for key "app"')) {
-      return null;
-    }
-
-    cy.now("task", "error", msg);
-    throw new Error(msg);
-  });
-
-  cy.stub(win.console, "warn", (msg) => {
-    cy.now("task", "warn", msg);
-  });
-});
