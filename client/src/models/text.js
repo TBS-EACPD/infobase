@@ -1,5 +1,4 @@
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
-import { csvParse } from "d3-dsv";
 import Handlebars from "handlebars/dist/cjs/handlebars";
 import _ from "lodash";
 import marked from "marked";
@@ -15,7 +14,7 @@ import igoc_lang from "src/common_text/igoc-lang.yaml";
 import nav_lang from "src/common_text/nav_lang.yaml";
 import people_lang from "src/common_text/people_lang.yaml";
 import result_lang from "src/common_text/result_lang.yaml";
-import template_globals_file from "src/common_text/template_globals.csv";
+import template_globals from "src/common_text/template_globals.yaml";
 
 // Handlebars disabled protype access within templates (i.e. can't access parent properties on an object within a template) for security reasons,
 // but those concerns are really for server side use cases where an attacker can provide an arbitrary template. For our client side use case,
@@ -51,51 +50,54 @@ const global_bundles = [
   a11y_lang,
 ];
 
-//this will look like { key, en, fr }
-const template_globals_parsed = csvParse(template_globals_file);
+const unwrapped_template_globals = _.mapValues(
+  template_globals,
+  (lang_wrapped) => lang_wrapped[lang]
+);
 
-const additionnal_globals = _.chain(template_globals_parsed)
-  .filter(({ key }) => key.match(/year?.?.$/))
-  .map(({ key, en, fr }) => {
-    const short_year_first = fr.slice(0, 4);
-    const short_year_second = fr.slice(5, 9);
+const derived_year_template_globals = _.chain(unwrapped_template_globals)
+  .omitBy((_value, key) => !_.includes(key, "year"))
+  .flatMap((value, key) => {
+    const { short_year_first, short_year_second } = (() => {
+      if (_.includes(key, "ppl")) {
+        const short_year_second = value.slice(-4);
+        const short_year_first = _.chain(short_year_second)
+          .thru((second_year) => +second_year - 1)
+          .toString()
+          .value();
+
+        return { short_year_first, short_year_second };
+      } else {
+        const short_year_first = value.slice(0, 4);
+        const short_year_second = _.chain(short_year_first)
+          .thru((first_year) => +first_year + 1)
+          .toString()
+          .value();
+
+        return { short_year_first, short_year_second };
+      }
+    })();
+
     return [
-      {
-        key: key + "_short_first",
-        en: short_year_first,
-        fr: short_year_first,
-      },
-      {
-        key: key + "_short_second",
-        en: short_year_second,
-        fr: short_year_second,
-      },
-      {
-        key: key + "_end_ticks",
-        en: "March 31st, " + short_year_second,
-        fr: "31 mars " + short_year_second,
-      },
+      [key + "_short_first", short_year_first],
+      [key + "_short_second", short_year_second],
+      [
+        key + "_end_ticks",
+        `${lang === "en" ? "March 31st," : "31 mars"} ${short_year_second}`,
+      ],
     ];
   })
-  .flatten()
-  .value();
-
-const full_template_global_records = [
-  ...template_globals_parsed,
-  ...additionnal_globals,
-];
-
-const app_constants = {
-  lang: lang,
-  is_mobile: is_mobile(),
-};
-
-//turn [{key,en,fr }, ... ] into a big object of { [key]: val of current lang, ... }
-const template_globals = _.chain(full_template_global_records)
-  .map(({ key, en, fr }) => [key, lang === "en" ? en : fr])
   .fromPairs()
-  .extend(app_constants)
   .value();
+
+const full_template_globals = {
+  ...unwrapped_template_globals,
+  ...derived_year_template_globals,
+  ...{
+    lang: lang,
+    is_mobile: is_mobile(),
+  },
+};
 
 //calls handlebars templates with standard args,
 // plus any others passed
@@ -113,7 +115,7 @@ const run_template = function (s, extra_args = {}) {
   }
   // build common arguments object which will be passed
   // to all templates
-  const args = _.extend({}, extra_args, template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
+  const args = _.extend({}, extra_args, full_template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
   // combine the `extra_args` with the common arguments
   if (s) {
     let _template;
