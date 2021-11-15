@@ -30,6 +30,7 @@ export default {
       hidden: true,
       nick: "dept",
       header: "",
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -37,7 +38,6 @@ export default {
       hidden: true,
       nick: "activity_code",
       header: "",
-      groupings: [],
     });
     this.add_col({
       key: true,
@@ -47,6 +47,7 @@ export default {
         en: "Program",
         fr: "Program",
       },
+      can_group_by: true,
     });
     this.add_col({
       key: true,
@@ -56,6 +57,7 @@ export default {
         en: "Voted / Stat",
         fr: "Crédit / législatif",
       },
+      can_group_by: true,
     });
     std_years.forEach((yr) => {
       this.add_col({
@@ -70,7 +72,6 @@ export default {
             "Correspond aux dépenses effectuées par rapport aux autorisations disponibles durant l'exercice financier " +
             yr,
         },
-        groupings: [],
       });
     });
   },
