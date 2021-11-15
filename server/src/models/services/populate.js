@@ -44,7 +44,7 @@ export default async function ({ models }) {
     ProgramServiceSummary,
   } = models;
 
-  const urls = _.chain(get_standard_csv_file_rows("service_urls.csv"))
+  const urls = _.chain(get_standard_csv_file_rows("service-urls.csv"))
     .map(
       ({
         dept_submissions__document__year: submission_year,
