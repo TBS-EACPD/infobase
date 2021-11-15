@@ -6,12 +6,13 @@ import "intersection-observer";
 import { trivial_text_maker } from "src/models/text";
 
 import { is_mobile } from "src/core/feature_detection";
-import { scroll_to_top } from "src/core/NavComponents";
 
 import "./BackToTop.scss";
 
 interface BackToTopProps {
-  scroll_target: HTMLElement | null | undefined;
+  focus: () => void;
+  handleClick: () => void;
+  text: string;
 }
 interface BackToTopState {
   show_back_to_top: boolean;
@@ -40,7 +41,9 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
     this.page_footer = document.getElementById("wb-info");
 
     this.header_observer = new IntersectionObserver((entries, _observer) => {
-      this.setState({ show_back_to_top: entries[0].intersectionRatio <= 0 });
+      this.setState({
+        show_back_to_top: entries[0].intersectionRatio <= 0,
+      });
     });
     if (this.page_header && this.header_observer) {
       this.header_observer.observe(this.page_header);
@@ -65,7 +68,8 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
   }
 
   handleClick() {
-    scroll_to_top(this.props.scroll_target);
+    this.props.handleClick();
+    this.props.focus();
   }
 
   render() {
@@ -94,7 +98,7 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
         tabIndex={-1}
         onClick={() => this.handleClick()}
       >
-        {trivial_text_maker("back_to_top")}
+        {trivial_text_maker(this.props.text)}
       </button>
     );
   }

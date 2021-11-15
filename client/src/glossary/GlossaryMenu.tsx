@@ -3,6 +3,8 @@ import React from "react";
 
 import "./GlossaryMenu.scss";
 
+import { lang } from "src/core/injected_build_constants";
+
 import { IconX } from "src/icons/icons";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
@@ -91,6 +93,11 @@ export class GlossaryMenu extends React.Component<
   }
 
   render() {
+    const glossary_placeholder = {
+      en: "Search for a term used in GC InfoBase",
+      fr: "Rechercher un terme utilisé dans InfoBase du GC",
+    }[lang];
+
     return (
       <div
         className={
@@ -129,7 +136,7 @@ export class GlossaryMenu extends React.Component<
               </h1>
               <div className="search-wrapper">
                 <SearchConfigSidebar
-                  placeholder={"testing"}
+                  placeholder={glossary_placeholder}
                   search_configs={[glossary_search_config]}
                   getResults={(data: ResultProps[]) => this.getResults(data)}
                 />
