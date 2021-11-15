@@ -6,13 +6,13 @@ import "core-js/modules/web.dom-collections.iterator";
 import "core-js/modules/es.promise";
 
 import "src/components/LeafSpinner/LeafSpinner.scss";
-import leaf_loading_spinner from "src/components/LeafSpinner/LeafSpinner.svg";
+import { leaf_spinner } from "src/components/LeafSpinner/leaf_spinner";
 
 // Important reminder: this initial spinner setup is pre-pollyfilling! Keep it portable
 const spinner_container = document.createElement("div");
 spinner_container.className = "leaf-spinner-container";
 spinner_container.setAttribute("style", "transform: scale(2); position: fixed");
-spinner_container.innerHTML = leaf_loading_spinner;
+spinner_container.innerHTML = leaf_spinner;
 
 const app_el = document.querySelector("#app");
 app_el.appendChild(spinner_container);

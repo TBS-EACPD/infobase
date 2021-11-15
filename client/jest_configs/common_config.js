@@ -11,8 +11,7 @@ module.exports = {
     setupFilesAfterEnv: ["<rootDir>/jest_configs/utils/common_test_setup.js"],
     moduleNameMapper: {
       // TODO .interop.scss is going to need an exception (and maybe a rework to be test-friendly)
-      "\\.(css|scss|yaml|csv|svg)$":
-        "<rootDir>/jest_configs/utils/empty_mock.js",
+      "\\.(css|scss|yaml|csv)$": "<rootDir>/jest_configs/utils/empty_mock.js",
     },
     transform: {
       [code_suffix_pattern]: [

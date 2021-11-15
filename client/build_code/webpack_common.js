@@ -118,10 +118,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
       use: [{ loader: "raw-loader", options: { esModule: false } }],
     },
     {
-      test: /\.svg$/,
-      loader: "svg-inline-loader",
-    },
-    {
       test: /\.yaml$/,
       exclude: /node_modules/, // custom loader, make sure not to hit node_modules with it
       use: [
@@ -131,11 +127,6 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
           options: { lang: language },
         },
       ],
-    },
-    {
-      test: /\.json$/,
-      exclude: /node_modules/, // don't run on dependencies, if they're already internally loading their own json then applying the loader a second time fails (it's no longer valid json the second time)
-      use: [{ loader: "json-loader" }],
     },
   ];
 };
