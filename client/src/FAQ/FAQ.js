@@ -7,12 +7,12 @@ import {
   FancyUL,
 } from "src/components/index";
 
+import { faqStore } from "src/models/faq";
+
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "src/core/NavComponents";
-
-import { faq_data } from "./faq_data";
 
 import text from "./FAQ.yaml";
 
@@ -28,9 +28,9 @@ const FAQIndex = () => (
       <h2 className="heading-unstyled">{children}</h2>
     )}
   >
-    {_.map(faq_data, ({ q }, id) => (
+    {_.map(faqStore.get_all(), ({ id, question }) => (
       <a key={id} href={`#faq/${id}`} title={text_maker("jump_to_question")}>
-        {q}
+        {question}
       </a>
     ))}
   </FancyUL>
@@ -42,10 +42,10 @@ const FAQTable = () => (
     TitleComponent={({ children }) => (
       <h2 className="heading-unstyled">{children}</h2>
     )}
-    contents={_.map(faq_data, ({ q, a }, id) => ({
+    contents={_.map(faqStore.get_all(), ({ id, question, answer }) => ({
       id: id,
-      label: q,
-      content: <div dangerouslySetInnerHTML={{ __html: a }} />,
+      label: question,
+      content: <div dangerouslySetInnerHTML={{ __html: answer }} />,
     }))}
   />
 );
