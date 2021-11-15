@@ -2,6 +2,8 @@ import React from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
 
+import { BackToTop } from "src/components";
+
 import { GlossaryMenu } from "./GlossaryMenu";
 
 export class SidebarActivator extends React.Component {
@@ -58,14 +60,25 @@ export class SidebarActivator extends React.Component {
   }
   render() {
     return (
-      <GlossaryMenu
-        show={this.state.showGlossary}
-        toggle={(value) => this.toggleGlossary(value)}
-        item={this.state.glossaryItem}
-        setGlossaryItem={(key) => this.setGlossaryItem(key)}
-        showList={this.state.showList}
-        setList={(value) => this.showList(value)}
-      />
+      <div>
+        <GlossaryMenu
+          show={this.state.showGlossary}
+          toggle={(value) => this.toggleGlossary(value)}
+          item={this.state.glossaryItem}
+          setGlossaryItem={(key) => this.setGlossaryItem(key)}
+          showList={this.state.showList}
+          setList={(value) => this.showList(value)}
+        />
+        <BackToTop
+          focus={() => {
+            document.querySelector(".glossary__search-bar > input").focus();
+          }}
+          handleClick={() => {
+            this.setState({ showGlossary: true });
+          }}
+          text={"glossary_button"}
+        />
+      </div>
     );
   }
 }
