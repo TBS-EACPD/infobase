@@ -25,6 +25,7 @@ interface GlossaryMenuState {
   show: boolean;
   results: ResultProps[];
   item: ResultProps;
+  query: string;
 }
 
 export interface ResultProps {
@@ -48,6 +49,7 @@ export class GlossaryMenu extends React.Component<
       show: this.props.show,
       results: [],
       item: this.props.item,
+      query: "",
     };
   }
 
@@ -90,6 +92,10 @@ export class GlossaryMenu extends React.Component<
     if (e.key === "Enter") {
       this.props.toggle(false);
     }
+  }
+
+  setQuery(query: string) {
+    this.setState({ query: query });
   }
 
   render() {
@@ -139,6 +145,7 @@ export class GlossaryMenu extends React.Component<
                   placeholder={glossary_placeholder}
                   search_configs={[glossary_search_config]}
                   getResults={(data: ResultProps[]) => this.getResults(data)}
+                  setQuery={(query: string) => this.setQuery(query)}
                 />
               </div>
               <div className="glossary-example">
@@ -154,6 +161,7 @@ export class GlossaryMenu extends React.Component<
               closeItem={() => this.closeItem()}
               openItem={(key: string) => this.openItem(key)}
               showList={this.props.showList}
+              query={this.state.query}
             />
           </div>
         </aside>
