@@ -15,6 +15,7 @@ export class SearchConfigSidebar extends React.Component {
   on_query = (query_value) => {
     this.setState({ query_value });
     this.props.getResults(this.results);
+    this.props.setQuery(this.state.query_value);
   };
 
   render() {
