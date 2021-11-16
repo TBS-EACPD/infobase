@@ -1,10 +1,11 @@
 const service_fields = `
   id
   org_id
-  report_years
   org {
     name
   }
+  submission_year
+  report_years
   program_activity_codes
   programs {
     name
@@ -12,17 +13,22 @@ const service_fields = `
 
   first_active_year
   last_active_year
-  is_active
 
   name
   description
   service_type
   scope
+  designations
   target_groups
   feedback_channels
   urls
+  digital_identity_platforms
+  accessibility_assessors
+  recipient_type
 
   last_gender_analysis
+  last_accessibility_review
+  last_improve_from_feedback
 
   collects_fees
   account_reg_digital_status
@@ -45,14 +51,19 @@ const service_fields = `
     mail_application_count
     phone_application_count
     other_application_count
+    email_application_count
+    fax_application_count
+    phone_inquiry_and_application_count
     service_report_comment
   }
 
   standards {
-    standard_id,
-    service_id,
-
+    standard_id
+    service_id
     name
+    submission_year
+    first_active_year
+    last_active_year
     last_gcss_tool_year
     channel
     type
@@ -60,19 +71,20 @@ const service_fields = `
 
     target_type
 
-    urls
+    standard_urls
     rtp_urls
 
     standard_report {
-      standard_id,
+      standard_id
       year
       lower
+      upper
       count
       met_count
       is_target_met
       standard_report_comment  
     }
-  },
+  }
 `;
 
 const summary_fields = `
@@ -121,7 +133,7 @@ service_summary{
 const all_services_and_standards_for_org = `
 query{
   root(lang: "en"){
-    org(org_id: "326"){
+    org(org_id: "114"){
       services{
         ${service_fields}
       }
@@ -132,7 +144,7 @@ query{
 const all_services_and_standards_for_program = `
 query{
   root(lang: "en"){
-    program(id: "TBC-BXB01"){
+    program(id: "CB-BEZ01"){
       services{
         ${service_fields}
       }
@@ -143,7 +155,7 @@ query{
 const all_summary_for_org = `
 query{
   root(lang: "en"){
-    org(org_id: "326"){
+    org(org_id: "114"){
       ${summary_fields}
     }
   }
@@ -152,7 +164,7 @@ query{
 const all_summary_for_program = `
 query{
   root(lang: "en"){
-    program(id: "TBC-BXB01"){
+    program(id: "CB-BEZ01"){
       ${summary_fields}
     }
   }
@@ -161,7 +173,7 @@ query{
 const single_service = `
 query{
   root(lang: "en"){
-    service(id: "1114"){
+    service(id: "1120"){
       ${service_fields}
     }
   }
