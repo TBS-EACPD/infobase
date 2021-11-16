@@ -4,6 +4,8 @@ export default {
   ...common_config_rules,
 
   testRegex: "\\.snapshot-test\\.js$",
-  coverageDirectory: "../coverage/snapshot_test_coverage",
+  coverageDirectory: "coverage/snapshot_tests",
+  cacheDirectory: ".cache/jest/snapshot_tests",
+
   setupTestFrameworkScriptFile: "./snapshot_tests_setup.js",
 };

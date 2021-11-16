@@ -46,9 +46,18 @@ jobs:
           paths:
             - node_modules
 
+      - restore_cache:
+          keys:
+            - form-backend-jest-cache
+
       - run: (cd form_backend && npm run unit_tests)
 
       - run: (cd form_backend && npm run end_to_end_tests)
+
+      - save_cache:
+          key: form-backend-jest-cache
+          paths:
+            - form_backend/.cache/jest
 
   cleanup_dev_links:
     docker:
@@ -118,7 +127,7 @@ jobs:
           key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
           paths:
             - client/node_modules
-            - client/.cache
+            - client/.cache/Cypress
 
       - restore_cache:
           keys:
@@ -221,7 +230,16 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
+      - restore_cache:
+          keys:
+            - client-jest-cache
+
       - run: (cd client && npm run unit_tests)
+
+      - save_cache:
+          key: client-jest-cache
+          paths:
+            - client/.cache/jest
 
   test_server:
     docker:
@@ -232,6 +250,10 @@ jobs:
       - attach_workspace:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
+
+      - restore_cache:
+          keys:
+            - server-jest-cache
 
       - run: (cd server && npm run unit_tests)
 
@@ -245,6 +267,11 @@ jobs:
           background: true
 
       - run: (cd server && npm run snapshot_tests)
+
+      - save_cache:
+          key: server-jest-cache
+          paths:
+            - server/.cache/jest
 
   test_end_to_end:
     docker:
