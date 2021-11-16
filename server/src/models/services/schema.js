@@ -70,29 +70,29 @@ const schema = `
   }
   type ServiceReport{
     service_id: String
-    year: String,
-    cra_business_ids_collected: Boolean,
-    sin_collected: Boolean,
-    phone_inquiry_count: Float,
-    online_inquiry_count: Float,
-    online_application_count: Float,
-    live_application_count: Float,
-    mail_application_count: Float,
-    phone_application_count: Float,
-    other_application_count: Float,
+    year: String
+    cra_business_ids_collected: Boolean
+    sin_collected: Boolean
+    phone_inquiry_count: Float
+    online_inquiry_count: Float
+    online_application_count: Float
+    live_application_count: Float
+    mail_application_count: Float
+    phone_application_count: Float
+    other_application_count: Float
     email_application_count: Float
     fax_application_count: Float
     phone_inquiry_and_application_count: Float
     service_report_comment: String
   }
   type StandardReport{
-    standard_id: String,
-    year: String,
-    lower: Float,
-    upper: Float,
-    count: Float,
-    met_count: Float,
-    is_target_met: Boolean,
+    standard_id: String
+    year: String
+    lower: Float
+    upper: Float
+    count: Float
+    met_count: Float
+    is_target_met: Boolean
     standard_report_comment: String
   }
   type Service{
