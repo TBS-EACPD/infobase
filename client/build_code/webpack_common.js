@@ -103,7 +103,6 @@ function get_plugins({
   is_ci,
   produce_stats,
   stats_baseline,
-  stats_no_compare,
   cdn_url,
   previous_deploy_sha,
   is_actual_prod_release,
@@ -220,7 +219,6 @@ function create_config(options) {
     force_source_map,
     produce_stats,
     stats_baseline,
-    stats_no_compare,
     cdn_url,
     is_dev_link,
     is_actual_prod_release,
@@ -250,7 +248,7 @@ function create_config(options) {
         than builds with mixed caches/configs.
       */
       name: _.chain(options)
-        .omit(["previous_deploy_sha", "commit_sha", "local_ip"])
+        .omit(["commit_sha", "previous_deploy_sha", "local_ip"])
         .thru((build_options) => string_hash(JSON.stringify(build_options)))
         .toString()
         .value(),
@@ -276,7 +274,6 @@ function create_config(options) {
       is_ci,
       produce_stats,
       stats_baseline,
-      stats_no_compare,
       cdn_url,
       previous_deploy_sha,
       is_actual_prod_release,
