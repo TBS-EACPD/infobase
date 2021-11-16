@@ -281,7 +281,7 @@ jobs:
 
       - run:
           name: start_http_server
-          command: (cd client && npm run cerve:ci)
+          command: (cd client && npm run serve:ci)
           background: true
 
       - run: (cd client && npm run cypress:run -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)
