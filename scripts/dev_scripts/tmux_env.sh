@@ -38,17 +38,17 @@ else
   tmux new-session -t "IB" \; \
     split-window -h \; \
     send-keys "cd client && $can_reach_npm && npm ci" C-m \; \
-    send-keys "npm run IB_q_both" C-m \; \
+    send-keys "npm run quick_build_bilingual" C-m \; \
     split-window -v \; \
     send-keys 'cd client' C-m \; \
-    send-keys 'while true; do npm run serve-loopback; sleep 30; done' C-m \; \
+    send-keys 'while true; do npm run serve; sleep 30; done' C-m \; \
     split-window -v \; \
     send-keys "cd server && $can_reach_npm && npm ci" C-m \; \
     send-keys "npm start" C-m \; \
     selectp -t 2 \; \
     split-window -h \; \
     send-keys 'cd client' C-m \; \
-    send-keys 'while true; do npm run IB_base_watch; sleep 30; done' C-m \; \
+    send-keys 'while true; do npm run static_build:watch; sleep 30; done' C-m \; \
     selectp -t 4 \; \
     split-window -v \; \
     send-keys 'cd server' C-m \; \

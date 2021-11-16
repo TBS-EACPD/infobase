@@ -41,7 +41,7 @@ class VersionNumber extends React.Component {
           <IconGitHub inline={true} />
         </ExternalLink>
         {build_date
-          ? ` ${text_maker("infobase_build_date", {
+          ? ` ${text_maker("infostatic_build_date", {
               build_date: build_date,
             })}`
           : ""}

@@ -189,7 +189,7 @@ jobs:
             - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -m 1536 -c "half")
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -c "half")
       - save_cache:
           key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:
@@ -281,7 +281,7 @@ jobs:
 
       - run:
           name: start_http_server
-          command: (cd client && npm run ci_serve)
+          command: (cd client && npm run cerve:ci)
           background: true
 
       - run: (cd client && npm run cypress:run -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)

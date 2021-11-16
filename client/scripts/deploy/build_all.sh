@@ -2,11 +2,9 @@
 set -e # will exit if any command has non-zero exit value 
 
 concurrency="full"
-max_old_space_size=2048
-while getopts "c:m:" opt; do
+while getopts "c:" opt; do
   case ${opt} in
     c) concurrency=$OPTARG;;
-    m) max_old_space_size=$OPTARG;;
   esac
 done
 
@@ -15,22 +13,19 @@ if [[ ! $concurrency =~ ^(full|half|none)$ ]]; then
   exit 1
 fi
 
-# the prod no-watch scripts in client/package.json will use MAX_OLD_SPACE_SIZE if it exists
-export MAX_OLD_SPACE_SIZE=$max_old_space_size
-
 [ -e $BUILD_DIR/InfoBase ] && rm -r $BUILD_DIR/InfoBase # clean up build dir
 
-npm run IB_base
+npm run static_build
 
 if [ $concurrency == "none" ]; then
   # Just running all builds one at a time, no backgrounding or output redirection
-  npm run IB_prod_no_watch_en  
+  npm run webpack_build -- PROD NO-WATCH EN
   
-  npm run IB_prod_no_watch_fr  
+  npm run webpack_build -- PROD NO-WATCH FR
   
-  npm run a11y_prod_no_watch_en  
+  npm run webpack_build -- PROD NO-WATCH EN A11Y
 
-  npm run a11y_prod_no_watch_fr 
+  npm run webpack_build -- PROD NO-WATCH FR A11Y
 else
   # Run standard and a11y builds in parallel as background processes, store thieir stdout and stderr in temp files and hold on to their pids, 
   # clean up and dump output on exit
@@ -58,10 +53,10 @@ else
   }
   trap print_captured_output EXIT
 
-  npm run IB_prod_no_watch_en > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
+  npm run webpack_build -- PROD NO-WATCH EN > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
   ib_prod_en_pid=$!
   
-  npm run IB_prod_no_watch_fr > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
+  npm run webpack_build -- PROD NO-WATCH FR > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
   ib_prod_fr_pid=$!
   
   if [ $concurrency == "half" ]; then
@@ -69,10 +64,10 @@ else
     wait $ib_prod_fr_pid
   fi
 
-  npm run a11y_prod_no_watch_en > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
+  npm run webpack_build -- PROD NO-WATCH EN A11Y > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
   a11y_prod_en_pid=$!
   
-  npm run a11y_prod_no_watch_fr > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
+  npm run webpack_build -- PROD NO-WATCH FR A11Y > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
   a11y_prod_fr_pid=$!
 
   if [ $concurrency == "half" ]; then
