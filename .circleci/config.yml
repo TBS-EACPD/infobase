@@ -82,7 +82,7 @@ jobs:
           paths:
             - ./dev-dbs-clean-for-these-branches
 
-  build:
+  checkout_and_install:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
         <<: *dockerhub_auth
@@ -93,6 +93,7 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
+      - run: ./scripts/ci_scripts/create_envs.sh
 
       - restore_cache:
           keys:
@@ -105,11 +106,8 @@ jobs:
           paths:
             - node_modules
 
-      - run: ./scripts/ci_scripts/create_envs.sh
-
       # need to bust the client package cache on patch changes in addition to package-lock changes
       - run: cksum ./client/patches/* > client-patch-checksums
-
       - restore_cache:
           keys:
             - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
@@ -122,7 +120,45 @@ jobs:
             - client/node_modules
             - client/.cache
 
-      - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
+      - restore_cache:
+          keys:
+            - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
+      - run:
+          command: |
+            [ -e "server/node_modules" ] || (cd server && npm ci)
+      - save_cache:
+          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
+          paths:
+            - server/node_modules
+
+      # transpiling the server slightly out of place for this job, not needed till the server deploy step, but
+      # the deploy job image isn't guaranteed to have the necessary environment for this
+      - restore_cache:
+          keys:
+            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
+      - run:
+          command: |
+            [ -f "server/transpiled_build/app.js" ] || (cd server && ./scripts/deploy/build.sh)
+      - save_cache:
+          paths:
+            - server/transpiled_build
+          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./*
+
+  build_client:
+    docker:
+      - image: eaadtbs/ib-ci-build:3.0
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    resource_class: medium
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/create_envs.sh
 
       # logging memory usage, build job has maxed out the memory available in CircleCI in the past, good to have this around if it does again
       - run:
@@ -140,6 +176,8 @@ jobs:
               echo "====="
             done
           background: true
+
+      - run: ./scripts/ci_scripts/get_bundle_stats_baseline.sh
 
       - restore_cache:
           keys:
@@ -163,28 +201,6 @@ jobs:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
             - client/.eslintcache
-
-      - restore_cache:
-          keys:
-            - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
-      - run:
-          command: |
-            [ -e "server/node_modules" ] || (cd server && npm ci)
-      - save_cache:
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
-          paths:
-            - server/node_modules
-
-      - restore_cache:
-          keys:
-            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
-      - run:
-          command: |
-            [ -f "server/transpiled_build/app.js" ] || (cd server && ./scripts/deploy/build.sh)
-      - save_cache:
-          paths:
-            - server/transpiled_build
-          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
 
       # TODO persist_to_workspace only works on an allow list basis which is a bother to maintain, currently seems better (if not ideally
       # efficient) to persist everything with specific exclusions of large and unnecessary directories made via rm's in advance
@@ -382,19 +398,18 @@ workflows:
 
   build_test_deploy:
     jobs:
-      - build
-
-      - build_storybook:
-          requires:
-            - build
-          <<: *deploy_filter
+      - checkout_and_install
 
       - test_client:
           requires:
-            - build
+            - checkout_and_install
       - test_server:
           requires:
-            - build
+            - checkout_and_install
+
+      - build_client:
+          requires:
+            - checkout_and_install
 
       - deploy_data:
           requires:
@@ -409,13 +424,19 @@ workflows:
           requires:
             - test_client
             - test_server
+            - build_client
           matrix:
             parameters:
               batch-count: [2]
               batch-index: [0, 1]
 
+      - build_storybook:
+          requires:
+            - build_client
+          <<: *deploy_filter
+
       - deploy_client_and_storybook:
           requires:
-            - build_storybook
             - test_end_to_end
+            - build_storybook
           <<: *deploy_filter
