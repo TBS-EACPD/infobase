@@ -7,8 +7,8 @@
   - One for a web server (running `npm run serve` in the background)
   - One for a local copy of the mongo database (running `npm run mongod`)
   - Two running the backend (from `InfoBase/server` run `npm run populate_db:watch` and `npm run start` which will keep running the background)
-  - One for a small build script (`static_build:watch`)
-  - One for the full webpack build (e.g. `quick_build_bilingual`, checked regularly linter warnings and general build errors)
+  - One for a small build script (`npm run build_static:watch`)
+  - One for the full webpack build (e.g. `npm run webpack -- EN FR`, checked regularly linter warnings and general build errors)
   - One for active use with git, npm, grep, etc.
 - Use VS Code, install the Prettier extension. This will reformat your code on save. Note that prior to each push, prettier will run automatically and warn you if there are non-prettier compliant files
 - Use Chrome for prototyping; the Chrome dev tools are still the most friendly option

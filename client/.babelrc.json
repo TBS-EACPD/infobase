@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": false }]
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": { "version": "3.18" },
+        "targets": ["IE 11", "Safari 7"]
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ]
+}

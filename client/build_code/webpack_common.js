@@ -10,7 +10,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const { RetryChunkLoadPlugin } = require("webpack-retry-chunk-load-plugin");
 
-const get_rules = ({ lang, is_prod_build }) => {
+const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
   const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
   const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
@@ -61,7 +61,7 @@ const get_rules = ({ lang, is_prod_build }) => {
         {
           loader: "css-modules-typescript-loader",
           options: {
-            mode: is_prod_build ? "verify" : "emit",
+            mode: is_actual_prod_release ? "verify" : "emit",
           },
         },
         {
@@ -232,7 +232,7 @@ function create_config(options) {
   return {
     name: lang,
     mode: is_prod_build ? "production" : "development",
-    target: _.compact(["web", is_prod_build && "es5"]),
+    target: ["web", "es5"],
     context,
     entry,
     output,
@@ -259,12 +259,14 @@ function create_config(options) {
         config: [__filename],
         // docs recommend a post-install script to clear the cache, but this seems like a better method imo
         packages: [path.resolve(__dirname, `../package-lock.json`)],
+        babel: [path.resolve(__dirname, `../.babelrc.json`)],
       },
     },
     module: {
       rules: get_rules({
         lang,
         is_prod_build,
+        is_actual_prod_release,
       }),
       noParse: /\.csv$/,
     },
