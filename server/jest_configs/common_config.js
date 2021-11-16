@@ -3,9 +3,11 @@ const reporters = !process.env.DO_NOT_PRINT_COVERAGE
   : ["json"];
 
 export const common_config_rules = {
-  rootDir: "../src",
+  rootDir: "..",
+  testPathIgnorePatterns: ["transpiled_build"],
+
   coverageReporters: reporters,
-  collectCoverageFrom: ["<rootDir>/**/*.js"],
+  collectCoverageFrom: ["<rootDir>/src/**/*.js"],
   coveragePathIgnorePatterns: [
     "\\.unit-test\\.js$",
     "\\.snapshot-test\\.js$",

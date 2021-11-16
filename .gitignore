@@ -13,4 +13,6 @@ node_modules/
 *.xls
 *.dot
 *.log
+
 local_mongo
+.cache
