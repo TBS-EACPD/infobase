@@ -14,7 +14,8 @@ function get_connection_str() {
       .replace("{MDB_NAME}", MDB_NAME);
   } else {
     console.log("using local db");
-    return "mongodb://127.0.0.1:27017/infobase";
+    const db_name = process.env.USE_TEST_DATA ? "test-data" : "real-data";
+    return `mongodb://127.0.0.1:27017/${db_name}`;
   }
 }
 
