@@ -105,7 +105,6 @@ const schema = `
     programs: [Program]
     first_active_year: String
     last_active_year: String
-    is_active: Boolean
 
     name: String
     description: String
