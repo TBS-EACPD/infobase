@@ -189,7 +189,7 @@ jobs:
             - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -c "half")
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -c "half" -o "STATS STATS-BASELINE")
       - save_cache:
           key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:

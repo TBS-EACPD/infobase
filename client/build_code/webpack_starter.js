@@ -20,6 +20,10 @@ const is_prod_build = arg_is_present("PROD");
 const force_source_map = arg_is_present("PROD_SOURCE_MAP");
 const no_watch = arg_is_present("NO-WATCH");
 
+const produce_stats = en && !is_a11y_build && arg_is_present("STATS");
+const stats_baseline = arg_is_present("STATS-BASELINE");
+const stats_no_compare = arg_is_present("STATS-NO-COMPARE");
+
 const build_dir_name = process.env.BUILD_DIR || "build";
 const cdn_url = process.env.CDN_URL || ".";
 const is_dev_link = process.env.IS_DEV_LINK || false;
@@ -33,12 +37,6 @@ const is_ci =
 const local_ip = ip.address();
 
 const app = is_a11y_build ? "a11y_client" : "main_client";
-
-// TODO would prefer these as explicit arguments, but they're used in CI 99% of the time and
-// right now that would mean piping additional arguments through the build_all.sh script that
-// CI and local prod builds share.
-const produce_stats = is_ci;
-const stats_baseline = is_ci && process.env.CIRCLE_BRANCH === "master";
 
 const common_output_options = {
   path: path.resolve(__dirname, `../${build_dir_name}/InfoBase/app/`),
@@ -79,8 +77,10 @@ console.log(`
       ? "false"
       : `true\n    forcing source map: ${force_source_map}`
   }
-  stats: ${
-    !produce_stats ? "false" : `true\n    stats baseline: ${stats_baseline}`
+  stats (en, non-A11Y only): ${
+    !produce_stats
+      ? "false"
+      : `true\n    produce baseline: ${stats_baseline}\n    compare to baseline: ${!stats_no_compare}`
   }
 `);
 
@@ -101,8 +101,9 @@ gitsha(function (err, commit_sha) {
       is_a11y_build,
       is_prod_build,
       force_source_map,
-      produce_stats,
+      produce_stats: lang === "en" && produce_stats,
       stats_baseline,
+      stats_no_compare,
       cdn_url,
       is_dev_link,
       is_actual_prod_release,
