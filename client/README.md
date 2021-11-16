@@ -38,8 +38,8 @@ _(Le Français suit)_
 0. Follow the steps in `InfoBase/server/README.md` to start a local backend
 1. `cd` to the `InfoBase/client` dir
 2. `npm ci`
-3. `npm run static_build:watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
-4. `npm run quick_build_bilingual` to webpack the source code (`quick_build_bilingual` builds both EN an FR versions, relatively quickly, but requires a browser with ES6 support)
+3. `npm run build_static:watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
+4. `npm run webpack -- EN FR` to bundle the source code
 
 ### Visiting a local build
 
@@ -48,7 +48,7 @@ _(Le Français suit)_
 2. `npm run serve` to start a server in GC InfoBase directory, localhost only
 3. open a browser and paste `localhost:8080/build/InfoBase/index-eng.html` in the address bar
 
-Note: if you use `npm run serve:open` instead you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. `quick_build`, or equivalent builds, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
+Note: if you use `npm run serve:open` instead you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. `build`, or equivalent builds, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
 
 ### TMUX to automate build
 
@@ -70,7 +70,7 @@ Note: closing the terminal will not kill the tmux session. To kill the session, 
 
 Route load tests are a quick and dirty form of fairly basic coverage. They just ensure that all routes are able to load without throwing an error.
 
-1. Do a full dev build (run both `dev_build` and `dev_build:a11y`)
+1. Do a full dev build (run both `npm run webpack -- EN FR` and `npm run webpack -- EN FR A11Y`)
 2. Have an active `npm run serve` process
 3. `npm run cypress:run`
 
@@ -101,8 +101,8 @@ New route load tests can be added in `cypress/integration/InfoBase/route_tests.s
 
 0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire d'InfoBase du GC, p. ex. `cd ~/Documents/infobase/client`
 1. `npm ci` pour télécharger les modules node.
-2. `npm run static_build:watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
-3. `npm run quick_build` pour empaqueter le code source (La commande `quick_build` compile rapidement mais vous auriez besoin d'un navigateur qui soutient ES6)
+2. `npm run build_static:watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
+3. `npm run webpack -- EN FR` pour empaqueter le code source
 
 ### Visitez une copie locale
 
@@ -111,7 +111,7 @@ New route load tests can be added in `cypress/integration/InfoBase/route_tests.s
 2. `npm run serve` pour démarrer un serveur local
 3. Démarrez un navigateur web et coller `localhost:8080/build/InfoBase/index-eng.html` dans la barre d'adresse
 
-Notez: si vous utilisez la commande `npm run serve:open` vous pouvez relier à InfoBase du GC en utilisant les autres appareils sur votre réseau local (p. ex. pour tester le site mobile) par visiter `<votre IP>:8080/build/InfoBase/index-eng.html`. Notez que, si vous changez our débranchez le réseau, votre addresse IP changerait. Vous devez redémarrer la commande `quick_build` ou l'équivalent pour mettre à jour la variable d'environnement de l'addresse IP. Ça c'est la première chose à essayer si vous avez des problèmes de connexion .
+Notez: si vous utilisez la commande `npm run serve:open` vous pouvez relier à InfoBase du GC en utilisant les autres appareils sur votre réseau local (p. ex. pour tester le site mobile) par visiter `<votre IP>:8080/build/InfoBase/index-eng.html`. Notez que, si vous changez our débranchez le réseau, votre addresse IP changerait. Vous devez redémarrer la commande `build` ou l'équivalent pour mettre à jour la variable d'environnement de l'addresse IP. Ça c'est la première chose à essayer si vous avez des problèmes de connexion .
 
 ## Tests
 
@@ -121,7 +121,7 @@ Notez: si vous utilisez la commande `npm run serve:open` vous pouvez relier à I
 
 Les tests de chargement fournissent une couverture de test de la forme « quick-and-dirty ». Ils vous assurent que tous les routes peuvent être naviguées sans générer d'erreurs.
 
-1. Construire une version complète (Exécutez `dev_build` et `dev_build:a11y`)
+1. Construire une version complète (Exécutez `webpack` et `webpack:a11y`)
 2. Assurez-vous qu'un processus `npm run serve` est active
 3. `npm run cypress:run`
 
