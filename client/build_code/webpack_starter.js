@@ -20,6 +20,7 @@ const is_prod_build = arg_is_present("PROD");
 const force_source_map = arg_is_present("PROD_SOURCE_MAP");
 const no_watch = arg_is_present("NO-WATCH");
 
+// For comparison consistency, only actually produce stats for standard client english builds
 const produce_stats = en && !is_a11y_build && arg_is_present("STATS");
 const stats_baseline = arg_is_present("STATS-BASELINE");
 const stats_no_compare = arg_is_present("STATS-NO-COMPARE");
