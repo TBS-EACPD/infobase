@@ -396,6 +396,15 @@ workflows:
           requires:
             - build
 
+      - deploy_data:
+          requires:
+            - test_server
+          <<: *deploy_filter
+      - deploy_server:
+          requires:
+            - deploy_data
+          <<: *deploy_filter
+
       - test_end_to_end:
           requires:
             - test_client
@@ -405,19 +414,8 @@ workflows:
               batch-count: [2]
               batch-index: [0, 1]
 
-      - deploy_data:
-          requires:
-            - test_client
-            - test_server
-          <<: *deploy_filter
-      - deploy_server:
-          requires:
-            - deploy_data
-          <<: *deploy_filter
-
       - deploy_client_and_storybook:
           requires:
             - build_storybook
             - test_end_to_end
-            - deploy_server
           <<: *deploy_filter
