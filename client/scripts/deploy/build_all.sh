@@ -2,9 +2,10 @@
 set -e # will exit if any command has non-zero exit value 
 
 concurrency="full"
-while getopts "c:" opt; do
+while getopts "c:o:" opt; do
   case ${opt} in
     c) concurrency=$OPTARG;;
+    o) options=$OPTARG;;
   esac
 done
 
@@ -17,15 +18,17 @@ fi
 
 npm run static_build
 
+common_build_options="PROD NO-WATCH $options"
+
 if [ $concurrency == "none" ]; then
   # Just running all builds one at a time, no backgrounding or output redirection
-  npm run webpack_build -- PROD NO-WATCH EN
+  npm run webpack_build -- $common_build_options EN
   
-  npm run webpack_build -- PROD NO-WATCH FR
+  npm run webpack_build -- $common_build_options FR
   
-  npm run webpack_build -- PROD NO-WATCH EN A11Y
+  npm run webpack_build -- $common_build_options EN A11Y
 
-  npm run webpack_build -- PROD NO-WATCH FR A11Y
+  npm run webpack_build -- $common_build_options FR A11Y
 else
   # Run standard and a11y builds in parallel as background processes, store thieir stdout and stderr in temp files and hold on to their pids, 
   # clean up and dump output on exit
@@ -53,10 +56,10 @@ else
   }
   trap print_captured_output EXIT
 
-  npm run webpack_build -- PROD NO-WATCH EN > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
+  npm run webpack_build -- $common_build_options EN > $scratch/ib_prod_en_build_out 2> $scratch/ib_prod_en_build_err &
   ib_prod_en_pid=$!
   
-  npm run webpack_build -- PROD NO-WATCH FR > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
+  npm run webpack_build -- $common_build_options FR > $scratch/ib_prod_fr_build_out 2> $scratch/ib_prod_fr_build_err &
   ib_prod_fr_pid=$!
   
   if [ $concurrency == "half" ]; then
@@ -64,10 +67,10 @@ else
     wait $ib_prod_fr_pid
   fi
 
-  npm run webpack_build -- PROD NO-WATCH EN A11Y > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
+  npm run webpack_build -- $common_build_options EN A11Y > $scratch/a11y_prod_en_build_out 2> $scratch/a11y_prod_en_build_err &
   a11y_prod_en_pid=$!
   
-  npm run webpack_build -- PROD NO-WATCH FR A11Y > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
+  npm run webpack_build -- $common_build_options FR A11Y > $scratch/a11y_prod_fr_build_out 2> $scratch/a11y_prod_fr_build_err &
   a11y_prod_fr_pid=$!
 
   if [ $concurrency == "half" ]; then

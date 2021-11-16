@@ -103,6 +103,7 @@ function get_plugins({
   is_ci,
   produce_stats,
   stats_baseline,
+  stats_no_compare,
   cdn_url,
   previous_deploy_sha,
   is_actual_prod_release,
@@ -177,7 +178,7 @@ function get_plugins({
     produce_stats &&
       new BundleStatsWebpackPlugin({
         baseline: stats_baseline,
-        compare: true,
+        compare: !stats_no_compare,
         json: true,
         outDir: "..",
       }),
@@ -219,6 +220,7 @@ function create_config(options) {
     force_source_map,
     produce_stats,
     stats_baseline,
+    stats_no_compare,
     cdn_url,
     is_dev_link,
     is_actual_prod_release,
@@ -274,6 +276,7 @@ function create_config(options) {
       is_ci,
       produce_stats,
       stats_baseline,
+      stats_no_compare,
       cdn_url,
       previous_deploy_sha,
       is_actual_prod_release,
