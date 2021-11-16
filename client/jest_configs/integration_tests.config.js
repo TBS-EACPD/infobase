@@ -7,7 +7,7 @@ const { common_config_rules } = require("./common_config");
 module.exports = {
   ...common_config_rules,
 
-  testRegex: "\\.integration-test\\.js$",
-  coverageDirectory: "coverage/integration_tests",
-  cacheDirectory: ".cache/jest/integration_tests",
+  testRegex: "\\.integration-test\\.(js|ts|tsx)$",
+  coverageDirectory: "<rootDir>/coverage/integration_tests",
+  cacheDirectory: "<rootDir>/.cache/jest/integration_tests",
 };
