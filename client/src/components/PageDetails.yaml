@@ -16,7 +16,7 @@ infobase_version_link_title:
   en: Change log for the current version
   fr: Journal des modifications pour la version actuelle
 
-infobase_build_date:
+infostatic_build_date:
   transform: [handlebars]
   en: (built {{build_date}})
   fr: (publiée {{build_date}})

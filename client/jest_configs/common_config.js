@@ -13,10 +13,7 @@ module.exports = {
       "\\.(css|scss|yaml)$": "<rootDir>/jest_configs/utils/empty_mock.js",
     },
     transform: {
-      [code_suffix_pattern]: [
-        "babel-jest",
-        { configFile: "./jest_configs/babel-jest.config.js" },
-      ],
+      [code_suffix_pattern]: ["babel-jest"],
     },
 
     coverageReporters: reporters,

@@ -10,39 +10,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const { RetryChunkLoadPlugin } = require("webpack-retry-chunk-load-plugin");
 
-const CDN_URL = process.env.CDN_URL || ".";
-const IS_DEV_LINK = process.env.IS_DEV_LINK || false;
-const IS_ACTUAL_PROD_RELEASE = process.env.IS_ACTUAL_PROD_RELEASE || false;
-const PREVIOUS_DEPLOY_SHA = process.env.PREVIOUS_DEPLOY_SHA || false;
-
-const get_rules = ({ language, target_ie11, is_prod_build }) => {
-  const js_module_loader_rules = [
-    {
-      loader: "babel-loader",
-      options: {
-        cacheDirectory: true,
-        plugins: [
-          [
-            "@babel/plugin-proposal-decorators",
-            { decoratorsBeforeExport: false },
-          ],
-        ],
-        presets: [
-          [
-            "@babel/preset-env",
-            {
-              useBuiltIns: "entry",
-              corejs: { version: "3.18" },
-              targets: target_ie11 ? ["IE 11", "Safari 7"] : "defaults",
-            },
-          ],
-          "@babel/preset-react",
-          "@babel/preset-typescript",
-        ],
-      },
-    },
-  ];
-
+const get_rules = ({ lang, is_prod_build }) => {
   const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
   const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
@@ -52,21 +20,21 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
     {
       test: new RegExp(js_module_suffix_pattern),
       exclude: new RegExp(`node_modules|${side_effects_suffix_pattern}`),
-      use: js_module_loader_rules,
+      use: "babel-loader",
       sideEffects: false,
     },
     {
       test: new RegExp(side_effects_suffix_pattern),
       exclude: /node_modules/,
-      use: js_module_loader_rules,
+      use: "babel-loader",
       sideEffects: true,
     },
     {
       // ensure dependencies are transpiled for IE11 support when needed
-      test: (path) => target_ie11 && /node_modules\/.*\.js$/.test(path),
+      test: (path) => is_prod_build && /node_modules\/.*\.js$/.test(path),
       // transpilling core-js breaks some of its feature detection, exclude it. TODO: possible other polyfills should also be excluded?
       exclude: /node_modules\/core-js\/.*/,
-      use: js_module_loader_rules,
+      use: "babel-loader",
       // up to dependencies to declare sideEffects true/false in their package.json
     },
     {
@@ -120,7 +88,7 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
         { loader: "json-loader" },
         {
           loader: "./build_code/loaders/yaml-lang-loader.js",
-          options: { lang: language },
+          options: { lang },
         },
       ],
     },
@@ -128,29 +96,33 @@ const get_rules = ({ language, target_ie11, is_prod_build }) => {
 };
 
 function get_plugins({
-  language,
-  a11y_client,
+  lang,
+  is_a11y_build,
   commit_sha,
   local_ip,
   is_ci,
   produce_stats,
   stats_baseline,
   stats_no_compare,
+  cdn_url,
+  previous_deploy_sha,
+  is_actual_prod_release,
+  is_dev_link,
 }) {
   return _.filter([
     new webpack.DefinePlugin({
-      CDN_URL: JSON.stringify(CDN_URL),
+      CDN_URL: JSON.stringify(cdn_url),
       SHA: JSON.stringify(commit_sha),
-      PREVIOUS_DEPLOY_SHA: JSON.stringify(PREVIOUS_DEPLOY_SHA || commit_sha),
+      PREVIOUS_DEPLOY_SHA: JSON.stringify(previous_deploy_sha || commit_sha),
       BUILD_DATE: JSON.stringify(
         new Date()
           .toLocaleString("en-CA", { timeZone: "America/Toronto" })
           .replace(/,.+/, "")
       ),
-      APPLICATION_LANGUAGE: JSON.stringify(language),
-      IS_A11Y_MODE: !!a11y_client,
-      IS_DEV: !IS_ACTUAL_PROD_RELEASE,
-      IS_DEV_LINK,
+      APPLICATION_LANGUAGE: JSON.stringify(lang),
+      IS_A11Y_MODE: !!is_a11y_build,
+      IS_DEV: !is_actual_prod_release,
+      IS_DEV_LINK: is_dev_link,
       IS_CI: JSON.stringify(is_ci),
       LOCAL_IP: JSON.stringify(local_ip),
     }),
@@ -206,7 +178,7 @@ function get_plugins({
     produce_stats &&
       new BundleStatsWebpackPlugin({
         baseline: stats_baseline,
-        compare: !stats_no_compare,
+        compare: true,
         json: true,
         outDir: "..",
       }),
@@ -241,32 +213,30 @@ function create_config(options) {
     context,
     entry,
     output,
-    language,
-    a11y_client,
     commit_sha,
+    lang,
+    is_a11y_build,
     is_prod_build,
-    local_ip,
-    is_ci,
-    target_ie11,
+    force_source_map,
     produce_stats,
     stats_baseline,
     stats_no_compare,
+    cdn_url,
+    is_dev_link,
+    is_actual_prod_release,
+    previous_deploy_sha,
+    is_ci,
+    local_ip,
   } = options;
 
-  const new_output = _.clone(output);
-  new_output.publicPath = `${CDN_URL}/app/`;
-  if (CDN_URL !== ".") {
-    new_output.crossOriginLoading = "anonymous";
-  }
-
   return {
-    name: language,
+    name: lang,
     mode: is_prod_build ? "production" : "development",
-    target: _.compact(["web", target_ie11 && "es5"]),
+    target: _.compact(["web", is_prod_build && "es5"]),
     context,
     entry,
-    output: new_output,
-    cache: !IS_ACTUAL_PROD_RELEASE && {
+    output,
+    cache: !is_actual_prod_release && {
       type: "filesystem",
       compression: "gzip",
       /*
@@ -279,8 +249,8 @@ function create_config(options) {
         options, with only the necessary/safe exclusions, so that ideally failure just means sub-optimal caches, rather
         than builds with mixed caches/configs.
       */
-      name: _.chain({ ...options, new_output })
-        .omit(["commit_sha", "local_ip"])
+      name: _.chain(options)
+        .omit(["previous_deploy_sha", "commit_sha", "local_ip"])
         .thru((build_options) => string_hash(JSON.stringify(build_options)))
         .toString()
         .value(),
@@ -293,24 +263,29 @@ function create_config(options) {
     },
     module: {
       rules: get_rules({
-        target_ie11,
-        language,
+        lang,
         is_prod_build,
       }),
       noParse: /\.csv$/,
     },
     plugins: get_plugins({
-      language,
-      a11y_client,
+      lang,
+      is_a11y_build,
       commit_sha,
       local_ip,
       is_ci,
       produce_stats,
       stats_baseline,
       stats_no_compare,
+      cdn_url,
+      previous_deploy_sha,
+      is_actual_prod_release,
+      is_dev_link,
     }),
     optimization: get_optimizations({ is_prod_build, produce_stats }),
-    devtool: !is_prod_build ? "eval-source-map" : is_ci ? "source-map" : false,
+    devtool: !is_prod_build
+      ? "eval-source-map"
+      : force_source_map && "source-map",
     resolve: {
       fallback: { assert: false },
       modules: [path.resolve(__dirname, "../"), "node_modules/"],

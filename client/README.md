@@ -38,19 +38,17 @@ _(Le Français suit)_
 0. Follow the steps in `InfoBase/server/README.md` to start a local backend
 1. `cd` to the `InfoBase/client` dir
 2. `npm ci`
-3. `npm run IB_base_watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
-4. `npm run IB_q_both` to webpack the source code (`IB_q_both` builds both EN an FR versions, relatively quickly, but requires a browser with ES6 support) or `npm run IB_dev` (transpiles and polyfills for testing in IE11 and other legacy browsers)\*
-
-\* `IB_q_both` and `IB_dev` are not the only flavours of build. See package.json for a list of all build commands
+3. `npm run static_build:watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
+4. `npm run quick_build_bilingual` to webpack the source code (`quick_build_bilingual` builds both EN an FR versions, relatively quickly, but requires a browser with ES6 support)
 
 ### Visiting a local build
 
 0. prerequisites: 1) follow the build steps above, 2) follow the steps up through spinning up a local GraphQL API server from the [server README](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md)
 1. Go to the client directory of your GC InfoBase repo in a terminal, e.g. `cd ~/Documents/infobase/client`
-2. `npm run serve-loopback` to start a server in GC InfoBase directory, localhost only
+2. `npm run serve` to start a server in GC InfoBase directory, localhost only
 3. open a browser and paste `localhost:8080/build/InfoBase/index-eng.html` in the address bar
 
-Note: if you use `npm run serve` instead you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. `IB_q`, or equivalent builds, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
+Note: if you use `npm run serve:open` instead you can connect from other devices on your local network (e.g. test from mobile) by visiting `<your IP>:8080/build/InfoBase/index-eng.html`. Note that your IP will change when you move networks/disconnect a network. `quick_build`, or equivalent builds, needs to be restarted to update the IP env var, so if you have issues connecting to a local build from another device that's a good first step to try.
 
 ### TMUX to automate build
 
@@ -72,8 +70,8 @@ Note: closing the terminal will not kill the tmux session. To kill the session, 
 
 Route load tests are a quick and dirty form of fairly basic coverage. They just ensure that all routes are able to load without throwing an error.
 
-1. Do a full prod build (run both `IB_prod` and `a11y_prod`)
-2. Have an active `npm run serve-loopback` process
+1. Do a full dev build (run both `dev_build` and `dev_build:a11y`)
+2. Have an active `npm run serve` process
 3. `npm run cypress:run`
 
 New route load tests can be added in `cypress/integration/InfoBase/route_tests.spec.js`.
@@ -103,17 +101,17 @@ New route load tests can be added in `cypress/integration/InfoBase/route_tests.s
 
 0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire d'InfoBase du GC, p. ex. `cd ~/Documents/infobase/client`
 1. `npm ci` pour télécharger les modules node.
-2. `npm run IB_base_watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
-3. `npm run IB_q` pour empaqueter le code source (La commande `IB_q` compile rapidement mais vous auriez besoin d'un navigateur qui soutient ES6) ou `npm run IB_dev` (appliquer les « correctifs » pour résoudre les problèmes de soutien pour les navigateurs mobiles/IE11/safari)\*
+2. `npm run static_build:watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
+3. `npm run quick_build` pour empaqueter le code source (La commande `quick_build` compile rapidement mais vous auriez besoin d'un navigateur qui soutient ES6)
 
 ### Visitez une copie locale
 
 0. Les conditions préalables: 1) suivez les étapes de compilation précédentes, 2) suivez les étapes [ici](https://github.com/TBS-EACPD/InfoBase/blob/master/server/README.md) pour démarrer l'interface de programmation d'applications
 1. Avec un commande d'exécution, naviguez au chemin d’accès de le côté client, p. ex. `cd ~/Documents/infobase/client`
-2. `npm run serve-loopback` pour démarrer un serveur local
+2. `npm run serve` pour démarrer un serveur local
 3. Démarrez un navigateur web et coller `localhost:8080/build/InfoBase/index-eng.html` dans la barre d'adresse
 
-Notez: si vous utilisez la commande `npm run serve` vous pouvez relier à InfoBase du GC en utilisant les autres appareils sur votre réseau local (p. ex. pour tester le site mobile) par visiter `<votre IP>:8080/build/InfoBase/index-eng.html`. Notez que, si vous changez our débranchez le réseau, votre addresse IP changerait. Vous devez redémarrer la commande `IB_q` ou l'équivalent pour mettre à jour la variable d'environnement de l'addresse IP. Ça c'est la première chose à essayer si vous avez des problèmes de connexion .
+Notez: si vous utilisez la commande `npm run serve:open` vous pouvez relier à InfoBase du GC en utilisant les autres appareils sur votre réseau local (p. ex. pour tester le site mobile) par visiter `<votre IP>:8080/build/InfoBase/index-eng.html`. Notez que, si vous changez our débranchez le réseau, votre addresse IP changerait. Vous devez redémarrer la commande `quick_build` ou l'équivalent pour mettre à jour la variable d'environnement de l'addresse IP. Ça c'est la première chose à essayer si vous avez des problèmes de connexion .
 
 ## Tests
 
@@ -123,8 +121,8 @@ Notez: si vous utilisez la commande `npm run serve` vous pouvez relier à InfoBa
 
 Les tests de chargement fournissent une couverture de test de la forme « quick-and-dirty ». Ils vous assurent que tous les routes peuvent être naviguées sans générer d'erreurs.
 
-1. Construire une version complète (Exécutez `IB_prod` et `a11y_prod`)
-2. Assurez-vous qu'un processus `npm run serve-loopback` est active
+1. Construire une version complète (Exécutez `dev_build` et `dev_build:a11y`)
+2. Assurez-vous qu'un processus `npm run serve` est active
 3. `npm run cypress:run`
 
 Vous pouvez ajouter les tests additionnels dans le fichier `cypress/integration/InfoBase/route_tests.spec.js`.
