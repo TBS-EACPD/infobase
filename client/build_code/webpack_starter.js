@@ -34,6 +34,9 @@ const local_ip = ip.address();
 
 const app = is_a11y_build ? "a11y_client" : "main_client";
 
+// TODO would prefer these as explicit arguments, but they're used in CI 99% of the time and
+// right now that would mean piping additional arguments through the build_all.sh script that
+// CI and local prod builds share.
 const produce_stats = is_ci;
 const stats_baseline = is_ci && process.env.CIRCLE_BRANCH === "master";
 
