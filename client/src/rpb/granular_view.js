@@ -72,7 +72,7 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    const dim_all_or_dept = grouping === "all" || grouping === "dept";
+    const dim_all_or_dept = grouping === "default" || grouping === "dept";
 
     const dept_and_legal_cols = dim_all_or_dept
       ? {
@@ -167,7 +167,7 @@ class GranularView extends React.Component {
                 className={"normal-radio-btn-label"}
                 key={`${dim}-radio-btn-label`}
               >
-                {dim === "all" || !_.find(sorted_key_columns, ["nick", dim])
+                {dim === "default" || !_.find(sorted_key_columns, ["nick", dim])
                   ? text_maker(dim)
                   : dim === "dept"
                   ? text_maker("org")

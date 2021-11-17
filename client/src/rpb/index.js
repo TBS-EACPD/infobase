@@ -215,7 +215,7 @@ class RPB extends React.Component {
         .value();
 
     const flat_data = !_.isEmpty(table_data)
-      ? grouping === "all"
+      ? grouping === "default"
         ? _.chain(table_data)
             .filter(cat_filter_func)
             .reject(zero_filter_func)
