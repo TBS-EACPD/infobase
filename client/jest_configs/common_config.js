@@ -21,6 +21,8 @@ module.exports = {
       ".*\\.d\\.ts$",
     ],
 
+    testEnvironment: "jsdom",
+
     setupFilesAfterEnv: ["<rootDir>/jest_configs/utils/common_test_setup.js"],
   },
 };
