@@ -4,6 +4,6 @@ export default {
   ...common_config_rules,
 
   testRegex: "\\.integration-test\\.js$",
-  coverageDirectory: "<rootDir>/coverage/integration_tests",
+  coverageDirectory: "<rootDir>/.coverage/integration_tests",
   cacheDirectory: "<rootDir>/.cache/jest/integration_tests",
 };
