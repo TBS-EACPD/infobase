@@ -15,14 +15,12 @@ module.exports = {
     setupFilesAfterEnv: ["<rootDir>/jest_configs/utils/common_test_setup.js"],
 
     coverageReporters: reporters,
-    collectCoverageFrom: [
-      "<rootDir>/src/**/*.{js,ts,tsx}",
-      "!<rootDir>/src/**/*.d.ts",
-    ],
+    collectCoverageFrom: ["<rootDir>/src/**/*.{js,ts,tsx}"],
     coveragePathIgnorePatterns: [
-      "\\.unit-test",
-      "\\.integration-test",
-      //"index", // TODO, we have some rascally "index" files that DO include code that should be tested, need to identify and split that out before ignoring them
-    ].map((pre_suffix) => pre_suffix + code_suffix_pattern),
+      `.*\\.unit-test${code_suffix_pattern}`,
+      `.*\\.integration-test${code_suffix_pattern}`,
+      //`.*\\/index${code_suffix_pattern}`, // TODO, we have some rascally "index" files that DO include code that should be tested, need to identify and split that out before ignoring them
+      ".*\\.d\\.ts$",
+    ],
   },
 };
