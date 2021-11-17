@@ -8,13 +8,11 @@ module.exports = {
   common_config_rules: {
     rootDir: "..",
     moduleDirectories: ["<rootDir>", "<rootDir>/node_modules"],
-    setupFilesAfterEnv: ["<rootDir>/jest_configs/utils/common_test_setup.js"],
     moduleNameMapper: {
       "\\.(css|scss|yaml)$": "<rootDir>/jest_configs/utils/empty_mock.js",
     },
-    transform: {
-      [code_suffix_pattern]: ["babel-jest"],
-    },
+
+    setupFilesAfterEnv: ["<rootDir>/jest_configs/utils/common_test_setup.js"],
 
     coverageReporters: reporters,
     collectCoverageFrom: [
