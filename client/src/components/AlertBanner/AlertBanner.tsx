@@ -5,17 +5,17 @@ import React from "react";
 import "./AlertBanner.scss";
 
 interface AlertBannerProps {
-  children: React.ReactNode;
-  banner_class: string;
-  additional_class_names: string;
-  style: React.CSSProperties;
+  children?: React.ReactNode;
+  banner_class?: string;
+  additional_class_names?: string;
+  style?: React.CSSProperties;
 }
 
 export const banner_classes = ["info", "success", "warning", "danger"];
 
 export const AlertBanner = ({
   children,
-  banner_class,
+  banner_class = "info",
   additional_class_names,
   style,
 }: AlertBannerProps) => {
@@ -25,7 +25,7 @@ export const AlertBanner = ({
     );
   }
 
-  const banner_class_name = `alert-${banner_class || "info"}`;
+  const banner_class_name = `alert-${banner_class}`;
 
   return (
     <div
