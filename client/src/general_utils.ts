@@ -211,12 +211,10 @@ const pre_parse_safe_jsurl = (safe_jsurl_string: string) =>
     ) // closing paren often dropped for some reason, again might be url detection in email clients
     .value();
 export const SafeJSURL = {
-  parse: (safe_jsurl_string: string) =>
-    JSURL.parse(pre_parse_safe_jsurl(safe_jsurl_string)),
   stringify: (json: { [key: string]: string }) =>
     make_jsurl_safe(JSURL.stringify(json)),
-  tryParse: (safe_jsurl_string: string): boolean =>
-    JSURL.tryParse(pre_parse_safe_jsurl(safe_jsurl_string)),
+  parse: (safe_jsurl_string: string): { [key: string]: string } | false =>
+    JSURL.tryParse(pre_parse_safe_jsurl(safe_jsurl_string), false),
 };
 
 export const generate_href = (url: string) =>
