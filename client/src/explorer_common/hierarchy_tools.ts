@@ -205,9 +205,8 @@ const d3_to_node = (node: d3Node): Node => ({
   parent_id: node.parent && node.parent.data.id,
   data: node.data.data,
   isExpanded: node.data.isExpanded,
-  root: node.data.root as unknown as Node,
+  root: node.data.root,
   children: [] as Node[],
-  parent: null as unknown as Node, // TODO: deal with this bad conversion
 });
 
 function convert_d3_hierarchy_to_explorer_hierarchy(root: d3Node) {
@@ -268,7 +267,8 @@ function simplify_hierarchy(
     let current = node;
     let done = false;
     while (!done) {
-      const parent_node = old_nodes_by_id[current.parent_id];
+      const parent_node =
+        current.parent_id && old_nodes_by_id[current.parent_id];
       if (!parent_node || ancestors_by_id[parent_node.id]) {
         done = true;
       } else {
