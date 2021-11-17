@@ -15,7 +15,6 @@ const all_service_fragments = `
   program_activity_codes
   first_active_year
   last_active_year
-  is_active
 
   name
   description
