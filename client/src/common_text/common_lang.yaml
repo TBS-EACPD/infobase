@@ -1175,7 +1175,7 @@ copy:
   fr: Copier
 
 ##################################
-# special table dimensions
+# special table groupings
 ##################################
 vote_vs_stat:
   en: Voted / Statutory
