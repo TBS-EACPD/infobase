@@ -61,9 +61,9 @@ class GranularView extends React.Component {
       flat_data,
       sorted_key_columns,
 
-      on_set_dimension,
-      dimension,
-      dimensions,
+      on_set_grouping,
+      grouping,
+      groupings,
     } = this.props;
 
     const non_dept_key_cols = _.reject(sorted_key_columns, { nick: "dept" });
@@ -72,7 +72,7 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    const dim_all_or_dept = dimension === "all" || dimension === "dept";
+    const dim_all_or_dept = grouping === "all" || grouping === "dept";
 
     const dept_and_legal_cols = dim_all_or_dept
       ? {
@@ -116,13 +116,13 @@ class GranularView extends React.Component {
                   nick,
                   fully_qualified_name,
                 },
-                dimension
+                grouping
               ),
               is_searchable:
                 is_searchable && !is_matched_undefined(non_dept_key_cols, nick),
               is_summable:
                 is_summable && !is_matched_undefined(data_columns, nick),
-              formatter: nick === "dept" ? "wide-str" : type,
+              formatter: type,
             },
           ]
         )
@@ -147,7 +147,7 @@ class GranularView extends React.Component {
 
     const dropdown_content = (
       <div className="group_filter_dropdown">
-        {_.map(dimensions, (dim) => (
+        {_.map(groupings, (dim) => (
           <div style={{ marginBottom: 10 }} key={`${dim}-div`}>
             <div>
               <input
@@ -156,11 +156,11 @@ class GranularView extends React.Component {
                 name={"rpb_group_filter"}
                 key={dim}
                 onClick={() => {
-                  on_set_dimension({
-                    dimension: dim,
+                  on_set_grouping({
+                    grouping: dim,
                   });
                 }}
-                defaultChecked={dim === dimension}
+                defaultChecked={dim === grouping}
               />
               <label
                 htmlFor={dim}

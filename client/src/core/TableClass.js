@@ -227,7 +227,7 @@ export class Table {
       .value();
 
     this.get_group_by_func();
-    this.get_dimension_col_values_func();
+    this.get_grouping_col_values_func();
   }
   get links() {
     return this.link
@@ -254,11 +254,11 @@ export class Table {
     return run_template(this.title_def[lang]);
   }
 
-  get dimensions() {
+  get groupings() {
     const cols = _.flatMap(this._cols, (col) =>
       _.has(col, "children") ? col.children : col
     );
-    const custom_dimensions = _.chain(cols)
+    const custom_groupings = _.chain(cols)
       .map("custom_groupings")
       .compact()
       .head()
@@ -269,77 +269,72 @@ export class Table {
       _.chain(cols)
         .filter("can_group_by")
         .map("nick")
-        .concat(custom_dimensions)
+        .concat(custom_groupings)
         .compact()
         .value()
     );
   }
 
-  is_custom_dim(dimension) {
+  is_custom_dim(grouping) {
     return (
-      dimension !== "all" &&
+      grouping !== "all" &&
       !_.chain(this._cols)
         .flatMap((col) => (_.has(col, "children") ? col.children : col))
         .map("nick")
-        .includes(dimension)
+        .includes(grouping)
         .value()
     );
   }
 
-  get_dimension_col(dimension) {
+  get_grouping_col(grouping) {
     const cols = _.flatMap(this._cols, (col) =>
       _.has(col, "children") ? col.children : col
     );
 
     return (
       _.chain(cols)
-        .filter((col) => col.nick === dimension)
+        .filter((col) => col.nick === grouping)
         .head()
         .value() ||
       _.chain(cols)
-        .filter((col) => _.has(col, `custom_groupings.${dimension}`))
+        .filter((col) => _.has(col, `custom_groupings.${grouping}`))
         .head()
         .value() || { nick: "all" }
     );
   }
 
   get_group_by_func() {
-    this.group_by_func = (data, dimension) => {
-      if (!this.is_custom_dim(dimension)) {
-        return _.groupBy(data, dimension);
+    this.group_by_func = (data, grouping) => {
+      if (!this.is_custom_dim(grouping)) {
+        return _.groupBy(data, grouping);
       }
       return _.groupBy(data, (row) =>
-        this.get_dimension_col(dimension).custom_groupings[dimension].group_by(
-          row
-        )
+        this.get_grouping_col(grouping).custom_groupings[grouping].group_by(row)
       );
     };
   }
 
-  get_dimension_col_values_func() {
-    this.dimension_col_values_func = (row, dimension) => {
-      const dimension_col = this.get_dimension_col(dimension);
+  get_grouping_col_values_func() {
+    this.grouping_col_values_func = (row, grouping) => {
+      const grouping_col = this.get_grouping_col(grouping);
 
-      if (!this.is_custom_dim(dimension)) {
-        return [dimension, row[dimension]];
+      if (!this.is_custom_dim(grouping)) {
+        return [grouping, row[grouping]];
       } else {
-        return dimension_col.custom_groupings[dimension].dim_col_value(row);
+        return grouping_col.custom_groupings[grouping].dim_col_value(row);
       }
     };
   }
 
   get_sum_cols_by_grouped_data_func() {
-    this.sum_cols_by_grouped_data = function (col, dimension, subject = Gov) {
-      const { data, group_by_func, dimension_col_values_func } = this;
+    this.sum_cols_by_grouped_data = function (col, grouping, subject = Gov) {
+      const { data, group_by_func, grouping_col_values_func } = this;
 
       return _.chain(data)
         .filter((row) => filter_row_by_subj(row, subject))
-        .thru((ungrouped_data) => group_by_func(ungrouped_data, dimension))
+        .thru((ungrouped_data) => group_by_func(ungrouped_data, grouping))
         .map((data_group) => {
-          const dim_name = dimension_col_values_func(
-            data_group[0],
-            dimension
-          )[1];
+          const dim_name = grouping_col_values_func(data_group[0], grouping)[1];
           const summed_col = _.isArray(col)
             ? _.map(col, (c) => _.sumBy(data_group, c))
             : _.sumBy(data_group, col);
@@ -350,14 +345,14 @@ export class Table {
     };
   }
 
-  get_col_header(col, dimension) {
+  get_col_header(col, grouping) {
     if (
-      !this.is_custom_dim(dimension) ||
-      col.nick !== this.get_dimension_col(dimension).nick
+      !this.is_custom_dim(grouping) ||
+      col.nick !== this.get_grouping_col(grouping).nick
     ) {
       return col.fully_qualified_name;
     }
-    return text_maker(dimension);
+    return text_maker(grouping);
   }
 
   // input should be an array of lowest-level (i.e. exist in table.unique_headers) columns to be included

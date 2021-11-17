@@ -44,8 +44,8 @@ function get_all_data_columns_for_table(table) {
     .value();
 }
 
-function get_default_dimension_for_table(table) {
-  return table.dimensions[0];
+function get_default_grouping_for_table(table) {
+  return table.groupings[0];
 }
 
 //returns a the proposed new slice of state that will change when a new table is selected
@@ -55,7 +55,7 @@ function get_default_state_for_new_table(table_id) {
   return {
     table: table_id,
     columns,
-    dimension: get_default_dimension_for_table(table),
+    grouping: get_default_grouping_for_table(table),
     broken_url: false,
   };
 }
@@ -116,8 +116,8 @@ class RPB extends React.Component {
   }
 
   table_handlers = {
-    on_set_dimension: ({ dimension }) => {
-      this.setState({ dimension: dimension });
+    on_set_grouping: ({ grouping }) => {
+      this.setState({ grouping: grouping });
     },
 
     on_switch_table: (table_id) => {
@@ -161,7 +161,7 @@ class RPB extends React.Component {
 
   render() {
     const { broken_url } = this.props;
-    const { columns: data_columns, dimension } = this.state;
+    const { columns: data_columns, grouping } = this.state;
 
     const table = this.state.table && Table.store.lookup(this.state.table);
 
@@ -193,10 +193,10 @@ class RPB extends React.Component {
         table.tags.concat(["MACHINERY"])
       );
 
-    const { group_by_func, dimension_col_values_func } = {
+    const { group_by_func, grouping_col_values_func } = {
       ...table,
     };
-    const dimensions = this.state.table && table.dimensions;
+    const groupings = this.state.table && table.groupings;
 
     const table_data =
       this.state.table &&
@@ -204,7 +204,7 @@ class RPB extends React.Component {
         return table.data;
       })();
 
-    const cat_filter_func = dimension && _.constant(true);
+    const cat_filter_func = grouping && _.constant(true);
 
     const zero_filter_func =
       data_columns &&
@@ -215,18 +215,18 @@ class RPB extends React.Component {
         .value();
 
     const flat_data = !_.isEmpty(table_data)
-      ? dimension === "all"
+      ? grouping === "all"
         ? _.chain(table_data)
             .filter(cat_filter_func)
             .reject(zero_filter_func)
             .value()
         : _.chain(table_data)
-            .thru((table_data) => group_by_func(table_data, dimension))
+            .thru((table_data) => group_by_func(table_data, grouping))
             .map((dim_data) => {
               return _.chain(all_data_columns)
                 .filter((col) => !_.includes(col.type, "percentage"))
                 .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
-                .concat([dimension_col_values_func(dim_data[0], dimension)])
+                .concat([grouping_col_values_func(dim_data[0], grouping)])
                 .fromPairs()
                 .value();
             })
@@ -237,7 +237,7 @@ class RPB extends React.Component {
       table,
       subject,
       columns,
-      dimensions,
+      groupings,
       footnotes,
       def_ready_columns,
       all_data_columns,
@@ -343,8 +343,8 @@ class RPB extends React.Component {
           <Fragment>
             {table ? (
               <GranularView
-                {..._.omit(this.props.state, "dimension")}
-                {..._.pick(this.state, "dimension")}
+                {..._.omit(this.props.state, "grouping")}
+                {..._.pick(this.state, "grouping")}
                 {...this.table_handlers}
                 {...options}
               />
