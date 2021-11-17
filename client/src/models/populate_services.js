@@ -87,17 +87,17 @@ const all_service_fragments = `
   }
   `;
 
-const program_services_query = (service_fragments) => gql`
+const program_services_query = ({ query_fragments }) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     program(id: $id) {
       id
-      services: services {
+      services {
         id
         ${
-          _.isUndefined(service_fragments)
+          _.isUndefined(query_fragments)
             ? all_service_fragments
-            : service_fragments
+            : query_fragments
         }
       }
     }
@@ -105,17 +105,17 @@ query($lang: String!, $id: String) {
 }
 `;
 
-const dept_services_query = (service_fragments) => gql`
+const dept_services_query = ({ query_fragments }) => gql`
 query($lang: String!, $id: String) {
   root(lang: $lang) {
     org(org_id: $id) {
       id
-      services: services {
+      services {
         id
         ${
-          _.isUndefined(service_fragments)
+          _.isUndefined(query_fragments)
             ? all_service_fragments
-            : service_fragments
+            : query_fragments
         }
       }
     }
@@ -123,17 +123,17 @@ query($lang: String!, $id: String) {
 }
 `;
 
-const all_services_query = (service_fragments) => gql`
+const all_services_query = ({ query_fragments, services_args }) => gql`
 query($lang: String!) {
   root(lang: $lang) {
     orgs {
-      services: services {
+      services${services_args} {
         org_id
         id
         ${
-          _.isUndefined(service_fragments)
+          _.isUndefined(query_fragments)
             ? all_service_fragments
-            : service_fragments
+            : query_fragments
         }
       }
     }
@@ -236,13 +236,13 @@ export const api_load_has_services = (subject) => {
     });
 };
 const get_services_query = (query_options) => {
-  const { subject, query_fragments } = query_options;
+  const { subject } = query_options;
   const query_lookup_by_subject_type = {
     gov: all_services_query,
     dept: dept_services_query,
     program: program_services_query,
   };
-  return query_lookup_by_subject_type[subject.subject_type](query_fragments);
+  return query_lookup_by_subject_type[subject.subject_type](query_options);
 };
 
 const get_query_appropirate_subject_type = (subject) =>
