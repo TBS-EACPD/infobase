@@ -30,9 +30,9 @@ const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
       sideEffects: true,
     },
     {
-      // ensure dependencies are transpiled for IE11 support when needed
+      // ensure dependencies are transpiled for IE11 support when needed (much slower build, so only bother in prod builds)
       test: (path) => is_prod_build && /node_modules\/.*\.js$/.test(path),
-      // transpilling core-js breaks some of its feature detection, exclude it. TODO: possible other polyfills should also be excluded?
+      // transpilling core-js breaks some of its feature detection, exclude it
       exclude: /node_modules\/core-js\/.*/,
       use: "babel-loader",
       // up to dependencies to declare sideEffects true/false in their package.json
