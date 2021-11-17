@@ -10,8 +10,6 @@ import {
 
 import { formats } from "src/core/format";
 
-import { text_abbrev } from "src/general_utils";
-
 import { TextMaker, TM } from "./TextMaker";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
@@ -50,8 +48,6 @@ class Format extends React.PureComponent {
 }
 
 const Year = ({ y }) => run_template(`{{${y}}}`);
-
-const TextAbbrev = ({ text, len }) => <div>{text_abbrev(text, len)}</div>;
 
 const TrivialTM = (props) => <TM tmf={trivial_text_maker} {...props} />;
 const TrivialTextMaker = (props) => (
@@ -111,7 +107,6 @@ export {
   TrivialTM,
   ExternalLink,
   Year,
-  TextAbbrev,
   create_text_maker_component,
   DlItem,
   MultiColumnList,

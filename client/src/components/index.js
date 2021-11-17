@@ -61,7 +61,6 @@ export {
   TrivialTM,
   ExternalLink,
   Year,
-  TextAbbrev,
   create_text_maker_component,
   DlItem,
   MultiColumnList,

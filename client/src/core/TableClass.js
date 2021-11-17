@@ -11,7 +11,6 @@ import {
 } from "src/models/text";
 import { make_store } from "src/models/utils/make_store";
 
-import { make_unique_func, make_unique } from "src/general_utils";
 import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
 
@@ -164,7 +163,10 @@ export class Table {
     this.data = [];
     this["footnote-topics"].group = this["footnote-topics"].group || "*";
     this["footnote-topics"].table = this["footnote-topics"].table || "*";
-    this.column_counter = make_unique_func();
+    this.column_counter = (() => {
+      let val = 0;
+      return () => ++val;
+    })();
     this.loaded = false;
 
     this.init();
@@ -361,15 +363,11 @@ export class Table {
   // input should be an array of lowest-level (i.e. exist in table.unique_headers) columns to be included
   // output is hash of parent columns, indexed by the input columns.
   header_structure(col_nicks) {
-    //prefix allows us to display multiple tables at once
-    //recall that html IDs shouldn't start with numbers (hence the 'a')
-    const prefix = "a" + make_unique();
-
     //get the array of ancestors for a column
     const ancestor_cols = (col) =>
       col.parent ? [...ancestor_cols(col.parent), col] : [col];
 
-    const id_for_col = (col) => prefix + (col.nick || col.wcag);
+    const id_for_col = (col) => _.uniqueId(col.nick || col.wcag);
 
     //given a col, returns the header string that points TO it.
     const header_to_col = (col) =>

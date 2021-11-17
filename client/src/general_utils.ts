@@ -30,21 +30,6 @@ export const sanitized_dangerous_inner_html = (html: string) => ({
   __html: sanitize_html(html),
 });
 
-export const text_abbrev = function (text: string, length: number) {
-  const length_value = _.isFunction(length) ? length() : length || 60;
-
-  return text.length > length_value
-    ? text.substring(0, length_value - 4) + "..."
-    : text;
-};
-
-export const make_unique_func = function () {
-  let val = 0;
-  return function () {
-    return ++val;
-  };
-};
-
 export const set_session_storage_w_expiry = (
   key: string,
   value: string,
@@ -72,15 +57,6 @@ export const get_session_storage_w_expiry = (key: string) => {
     return null;
   }
   return item.value;
-};
-
-// <div id='make_unique'></div>
-// consider replacing with _.uniqueId
-export const make_unique = make_unique_func();
-
-export const escapeRegExp = function (str: string) {
-  /* eslint-disable no-useless-escape */
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 };
 
 export const shallowEqualObjectsOverKeys = <Type, Key extends keyof Type>(
@@ -239,12 +215,13 @@ export const SafeJSURL = {
     JSURL.parse(pre_parse_safe_jsurl(safe_jsurl_string)),
   stringify: (json: { [key: string]: string }) =>
     make_jsurl_safe(JSURL.stringify(json)),
-  tryParse: (safe_jsurl_string: string) =>
+  tryParse: (safe_jsurl_string: string): boolean =>
     JSURL.tryParse(pre_parse_safe_jsurl(safe_jsurl_string)),
 };
 
 export const generate_href = (url: string) =>
   url.startsWith("http") ? url : `https://${url}`;
+
 interface ElementDescriptor {
   kind: string;
   key: string;

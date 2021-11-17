@@ -1,8 +1,7 @@
+import escapeStringRegexp from "escape-string-regexp";
 import _ from "lodash";
 
 import { glossaryEntryStore } from "src/models/glossary";
-
-import { escapeRegExp } from "src/general_utils";
 
 function node_to_match_tokens(node) {
   const {
@@ -79,7 +78,7 @@ function substr_search_generator(flat_nodes) {
     let matches_by_id;
 
     const regexps = raw_tokens.map(
-      (str) => new RegExp(escapeRegExp(str), "gi")
+      (str) => new RegExp(escapeStringRegexp(str), "gi")
     );
 
     matches_by_id = _.chain(search_nodes)
