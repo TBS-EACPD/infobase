@@ -275,7 +275,7 @@ export class Table {
     );
   }
 
-  is_custom_dim(grouping) {
+  is_custom_grouping(grouping) {
     return (
       grouping !== "default" &&
       !_.chain(this._cols)
@@ -305,7 +305,7 @@ export class Table {
 
   get_group_by_func() {
     this.group_by_func = (data, grouping) => {
-      if (!this.is_custom_dim(grouping)) {
+      if (!this.is_custom_grouping(grouping)) {
         return _.groupBy(data, grouping);
       }
       return _.groupBy(data, (row) =>
@@ -318,10 +318,10 @@ export class Table {
     this.grouping_col_values_func = (row, grouping) => {
       const grouping_col = this.get_grouping_col(grouping);
 
-      if (!this.is_custom_dim(grouping)) {
+      if (!this.is_custom_grouping(grouping)) {
         return [grouping, row[grouping]];
       } else {
-        return grouping_col.custom_groupings[grouping].dim_col_value(row);
+        return grouping_col.custom_groupings[grouping].grouping_col_value(row);
       }
     };
   }
@@ -334,11 +334,14 @@ export class Table {
         .filter((row) => filter_row_by_subj(row, subject))
         .thru((ungrouped_data) => group_by_func(ungrouped_data, grouping))
         .map((data_group) => {
-          const dim_name = grouping_col_values_func(data_group[0], grouping)[1];
+          const grouping_name = grouping_col_values_func(
+            data_group[0],
+            grouping
+          )[1];
           const summed_col = _.isArray(col)
             ? _.map(col, (c) => _.sumBy(data_group, c))
             : _.sumBy(data_group, col);
-          return [dim_name, summed_col];
+          return [grouping_name, summed_col];
         })
         .fromPairs()
         .value();
@@ -347,7 +350,7 @@ export class Table {
 
   get_col_header(col, grouping) {
     if (
-      !this.is_custom_dim(grouping) ||
+      !this.is_custom_grouping(grouping) ||
       col.nick !== this.get_grouping_col(grouping).nick
     ) {
       return col.fully_qualified_name;

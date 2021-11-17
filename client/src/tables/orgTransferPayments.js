@@ -60,7 +60,7 @@ export default {
             group_by: function (row) {
               return _.includes(row.tp, "(S) ");
             },
-            dim_col_value: function (row) {
+            grouping_col_value: function (row) {
               return [
                 "type",
                 text_maker(_.includes(row.tp, "(S) ") ? "stat" : "voted"),

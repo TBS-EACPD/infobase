@@ -72,9 +72,10 @@ class GranularView extends React.Component {
     const is_matched_undefined = (column_collection, nick) =>
       _.isUndefined(_.find(column_collection, (col) => col.nick === nick));
 
-    const dim_all_or_dept = grouping === "default" || grouping === "dept";
+    const grouping_default_or_dept =
+      grouping === "default" || grouping === "dept";
 
-    const dept_and_legal_cols = dim_all_or_dept
+    const dept_and_legal_cols = grouping_default_or_dept
       ? {
           dept: {
             index: 0,
@@ -130,7 +131,7 @@ class GranularView extends React.Component {
         .value(),
     };
 
-    const table_data = dim_all_or_dept
+    const table_data = grouping_default_or_dept
       ? _.map(flat_data, (row) => {
           const org = Dept.store.lookup(row.dept);
           return {
@@ -147,32 +148,35 @@ class GranularView extends React.Component {
 
     const dropdown_content = (
       <div className="group_filter_dropdown">
-        {_.map(groupings, (dim) => (
-          <div style={{ marginBottom: 10 }} key={`${dim}-div`}>
+        {_.map(groupings, (current_grouping) => (
+          <div style={{ marginBottom: 10 }} key={`${current_grouping}-div`}>
             <div>
               <input
                 type={"radio"}
-                id={dim}
+                id={current_grouping}
                 name={"rpb_group_filter"}
-                key={dim}
+                key={current_grouping}
                 onClick={() => {
                   on_set_grouping({
-                    grouping: dim,
+                    grouping: current_grouping,
                   });
                 }}
-                defaultChecked={dim === grouping}
+                defaultChecked={current_grouping === grouping}
               />
               <label
-                htmlFor={dim}
+                htmlFor={current_grouping}
                 className={"normal-radio-btn-label"}
-                key={`${dim}-radio-btn-label`}
+                key={`${current_grouping}-radio-btn-label`}
               >
-                {dim === "default" || !_.find(sorted_key_columns, ["nick", dim])
-                  ? text_maker(dim)
-                  : dim === "dept"
+                {current_grouping === "default" ||
+                !_.find(sorted_key_columns, ["nick", current_grouping])
+                  ? text_maker(current_grouping)
+                  : current_grouping === "dept"
                   ? text_maker("org")
-                  : _.find(sorted_key_columns, ["nick", dim]).header[lang] ||
-                    _.find(sorted_key_columns, ["nick", dim]).header["en"]}
+                  : _.find(sorted_key_columns, ["nick", current_grouping])
+                      .header[lang] ||
+                    _.find(sorted_key_columns, ["nick", current_grouping])
+                      .header["en"]}
               </label>
             </div>
           </div>

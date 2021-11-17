@@ -85,7 +85,7 @@ export default {
           group_by: function (row) {
             return row.votestattype === 999;
           },
-          dim_col_value: function (row) {
+          grouping_col_value: function (row) {
             return [
               "desc",
               text_maker(row.votestattype === 999 ? "stat" : "voted"),

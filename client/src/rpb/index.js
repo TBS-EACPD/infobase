@@ -222,11 +222,11 @@ class RPB extends React.Component {
             .value()
         : _.chain(table_data)
             .thru((table_data) => group_by_func(table_data, grouping))
-            .map((dim_data) => {
+            .map((group_data) => {
               return _.chain(all_data_columns)
                 .filter((col) => !_.includes(col.type, "percentage"))
-                .map((col) => [col.nick, _.sumBy(dim_data, col.nick)])
-                .concat([grouping_col_values_func(dim_data[0], grouping)])
+                .map((col) => [col.nick, _.sumBy(group_data, col.nick)])
+                .concat([grouping_col_values_func(group_data[0], grouping)])
                 .fromPairs()
                 .value();
             })
