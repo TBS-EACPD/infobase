@@ -13,7 +13,7 @@ const schema = `
   }
   extend type Org{
     service_summary: ServiceSummary
-    services: [Service]
+    services(submission_year: String): [Service]
     has_services: Boolean
   }
   extend type Program{
@@ -188,7 +188,17 @@ export default function ({ models, loaders }) {
       service_summary: () => gov_service_summary_loader.load("gov"),
     },
     Org: {
-      services: ({ org_id }) => services_by_org_id.load(org_id),
+      services: async ({ org_id }, { submission_year }) => {
+        if (submission_year) {
+          const args = {
+            ...(org_id && { org_id }),
+            ...(submission_year && { submission_year }),
+          };
+          return await Service.find(args);
+        } else {
+          return services_by_org_id.load(org_id);
+        }
+      },
       service_summary: ({ org_id }) => org_service_summary_loader.load(org_id),
       has_services: ({ org_id }) => org_has_services(org_id),
     },
