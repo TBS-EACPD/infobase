@@ -56,6 +56,7 @@
     "diff": "^4.0.1",
     "dom4": "^2.1.4",
     "dompurify": "^2.2.6",
+    "escape-string-regexp": "^5.0.0",
     "graphql": "^15.4.0",
     "handlebars": "^4.7.6",
     "history": "^4.7.2",
