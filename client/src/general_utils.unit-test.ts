@@ -118,31 +118,33 @@ describe("hex_to_rgb", () => {
 });
 
 describe("SafeJSURL", () => {
-  it("Contains methods for stringify, tryParse, and parse", () => {
-    expect(typeof SafeJSURL.stringify).toBe("function");
-    expect(typeof SafeJSURL.tryParse).toBe("function");
-    expect(typeof SafeJSURL.parse).toBe("function");
-    expect(_.omit(SafeJSURL, ["tryParse", "parse", "stringify"])).toBe({});
+  it("Contains methods for stringify and parse", () => {
+    expect(typeof SafeJSURL.stringify).toEqual("function");
+    expect(typeof SafeJSURL.parse).toEqual("function");
+    expect(_.omit(SafeJSURL, ["stringify", "parse"])).toEqual({});
+  });
+
+  const jsurl_test_input = {
+    a: "eh",
+    b: "bee",
+    ["lorem ipsum"]: "lorem ipsum",
+    some_url_unsafe_characters: "/?#",
+  };
+
+  it("SafeJSURL.stringify encodes dictionary of strings as URL safe string representation", () => {
+    expect(SafeJSURL.stringify(jsurl_test_input)).toEqual(
+      ".-.-(a.-.-'eh.-.-b.-.-'bee.-.-lorem*20ipsum.-.-'lorem*20ipsum.-.-some_url_unsafe_characters.-.-'*2f*3f*23)"
+    );
+  });
+  it("SafeJSURL.parse parses SafeJSURL-encoded strings back in to original object", () => {
+    expect(SafeJSURL.parse(SafeJSURL.stringify(jsurl_test_input))).toEqual(
+      jsurl_test_input
+    );
+  });
+  it("SafeJSURL.parse returns false for non-SafeJSURL-encoded strings", () => {
+    expect(SafeJSURL.parse(JSON.stringify(jsurl_test_input))).toEqual(false);
   });
 });
-// describe("SafeJSURL.stringify", () => {
-//   it("Encodes JS objects as URL safe strings", () => {
-//     expect(false).toBeTruthy();
-//   });
-// });
-// describe("SafeJSURL.tryParse", () => {
-//   it("Returns true for SafeJSURL-encoded strings", () => {
-//     expect(false).toBeTruthy();
-//   });
-//   it("Returns false for non-SafeJSURL-encoded strings", () => {
-//     expect(false).toBeTruthy();
-//   });
-// });
-// describe("SafeJSURL.parse", () => {
-//   it("Parses SafeJSURL-encoded strings in to objects", () => {
-//     expect(false).toBeTruthy();
-//   });
-// });
 
 // describe("generate_href", () => {
 //   it("should expose a function", () => {

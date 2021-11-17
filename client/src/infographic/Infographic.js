@@ -130,18 +130,7 @@ class InfoGraph_ extends React.Component {
         reset_scroll();
       }
 
-      const options = (() => {
-        try {
-          return SafeJSURL.parse(this.props.options);
-        } catch {
-          log_standard_event({
-            SUBAPP: window.location.hash.replace("#", ""),
-            MISC1: "ERROR_IN_JSURL_PARSE",
-            MISC2: this.props.options,
-          });
-          return false;
-        }
-      })();
+      const options = SafeJSURL.parse(this.props.options);
 
       options &&
         options.panel_key &&

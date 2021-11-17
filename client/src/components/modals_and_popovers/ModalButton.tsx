@@ -36,8 +36,8 @@ class ModalButton_ extends React.Component<ModalButtonProps, ModalButtonState> {
     this.state = {
       show_modal:
         show_condition &&
-        options_object[show_condition.name] &&
-        show_condition.value === options_object[show_condition.name],
+        options_object &&
+        options_object?.[show_condition.name] === show_condition.value,
     };
   }
 
