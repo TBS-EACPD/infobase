@@ -12,10 +12,10 @@ import * as format from "src/core/format";
 const m = run_template;
 const text_maker = trivial_text_maker;
 
-const vote_stat_dimension = (options) => (d) =>
+const vote_stat_grouping = (options) => (d) =>
   trivial_text_maker(parseInt(d.votenum) ? "voted" : "stat");
-const sobj_dimension = (options) => (row) => row.sobj_name;
-const lapse_item_dimension = (options) => (row) => row.lapse_item;
+const sobj_grouping = (options) => (row) => row.sobj_name;
+const lapse_item_grouping = (options) => (row) => row.lapse_item;
 
 function major_vote_stat(options) {
   var by_type_and_desc = nest()
@@ -247,9 +247,9 @@ const collapse_by_so = function (programs, table, filter) {
 const is_non_revenue = (d) => +d.so_num < 19;
 
 export {
-  vote_stat_dimension,
-  sobj_dimension,
-  lapse_item_dimension,
+  vote_stat_grouping,
+  sobj_grouping,
+  lapse_item_grouping,
   major_vote_stat,
   major_vote_big_stat,
   hist_major_vote_stat,
