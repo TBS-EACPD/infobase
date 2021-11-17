@@ -1,18 +1,14 @@
 node_modules
 
 # generated stuff
-client/app/
 client/build/
 client/build_prod/
 client/storybook-static
 client/src/**/*.scss.d.ts
 client/scripts/typescript_progress/output
 */transpiled_build/
-*/coverage/
-
-# TODO these should be ephemeral files, but they aren't always cleaned up properly when tests are run locally
-# Can remove this line once that's fixed
-client/browser-tests/temp-route-tests-*
+*/.coverage/
+*/.cache
 
 # TODO Prettier doesn't know our yaml contains markdown, I think some of it's auto formatting might strip meaningful
 # whitespace (e.g. double space at end of line to indicate new paragraph). TODO try formatting again, carefully check changes
