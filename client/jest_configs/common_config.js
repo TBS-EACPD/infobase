@@ -17,7 +17,7 @@ module.exports = {
     coveragePathIgnorePatterns: [
       `.*\\.unit-test${code_suffix_pattern}`,
       `.*\\.integration-test${code_suffix_pattern}`,
-      //`.*\\/index${code_suffix_pattern}`, // TODO, we have some rascally "index" files that DO include code that should be tested, need to identify and split that out before ignoring them
+      `.*\\.stories.tsx`,
       ".*\\.d\\.ts$",
     ],
 
