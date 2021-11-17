@@ -1,10 +1,2 @@
-*.DS_Store
-*.swp
-*.swo
-/node_modules
-.vscode/
-npm-debug*
-*credentials*.json
 transpiled_build/
 data_extracts/
-coverage
