@@ -265,7 +265,7 @@ export class Table {
       .keys()
       .value();
     return _.concat(
-      "all",
+      "default",
       _.chain(cols)
         .filter("can_group_by")
         .map("nick")
@@ -277,7 +277,7 @@ export class Table {
 
   is_custom_dim(grouping) {
     return (
-      grouping !== "all" &&
+      grouping !== "default" &&
       !_.chain(this._cols)
         .flatMap((col) => (_.has(col, "children") ? col.children : col))
         .map("nick")
@@ -299,7 +299,7 @@ export class Table {
       _.chain(cols)
         .filter((col) => _.has(col, `custom_groupings.${grouping}`))
         .head()
-        .value() || { nick: "all" }
+        .value() || { nick: "default" }
     );
   }
 
