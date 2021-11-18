@@ -2,8 +2,7 @@ import { log_standard_event } from "src/core/analytics";
 
 import { make_request } from "./request_utils";
 
-jest.mock("./core/analytics.ts");
-
+jest.mock("src/core/analytics.ts");
 const mocked_log_standard_event = log_standard_event as jest.MockedFunction<
   typeof log_standard_event
 >;
