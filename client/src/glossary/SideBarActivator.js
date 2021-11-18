@@ -23,19 +23,11 @@ const SidebarActivator = withRouter(
         glossaryItem: {},
         showList: true,
       };
+
+      this.menu_ref = React.createRef();
     }
-    replaceWithModalBtn = (e) => {
-      const target =
-        e.target.getAttribute("data-toggle") === "tooltip"
-          ? e.target
-          : e.target.parentElement.getAttribute("data-toggle") === "tooltip"
-          ? e.target.parentElement
-          : undefined;
-
-      if (!target) {
-        return;
-      }
-
+    itemClick = (e) => {
+      const target = e;
       const glossary_item_key = target.dataset.ibttGlossaryKey;
       const glossary_item = glossaryEntryStore.lookup(glossary_item_key);
 
@@ -45,12 +37,37 @@ const SidebarActivator = withRouter(
       this.toggleGlossary(true);
     };
 
+    closeSidebar = (e) => {
+      const menu_node = this.menu_ref.current;
+      console.log(menu_node);
+      console.log(e.target);
+      if (
+        this.state.showGlossary &&
+        menu_node &&
+        !menu_node.contains(e.target)
+      ) {
+        this.setState({ showGlossary: false });
+      }
+    };
+
+    handleWindowClick = (e) => {
+      e.target.getAttribute("data-toggle") === "tooltip"
+        ? this.itemClick(e.target)
+        : e.target.parentElement.getAttribute("data-toggle") === "tooltip"
+        ? this.itemClick(e.target.parentElement)
+        : this.closeSidebar(e);
+    };
+
     componentDidMount() {
-      window.addEventListener("click", this.replaceWithModalBtn);
+      window.addEventListener("click", this.handleWindowClick, {
+        capture: true,
+      });
     }
 
     componentWillUnmount() {
-      window.removeEventListener("click", this.replaceWithModalBtn);
+      window.removeEventListener("click", this.handleWindowClick, {
+        capture: true,
+      });
     }
 
     toggleGlossary(value) {
@@ -71,13 +88,14 @@ const SidebarActivator = withRouter(
         showList: value,
       });
     }
+
     render() {
       const currentPage = this.props.location.pathname;
 
       if (ROUTES_WITHOUT_GLOSSARY[currentPage]) return null;
 
       return (
-        <div>
+        <div ref={this.menu_ref}>
           <GlossaryMenu
             show={this.state.showGlossary}
             toggle={(value) => this.toggleGlossary(value)}
