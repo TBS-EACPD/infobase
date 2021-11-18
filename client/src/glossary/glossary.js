@@ -197,6 +197,7 @@ export default class Glossary extends React.Component {
                   document.documentElement.scrollTop = 0;
               }}
               text={"back_to_top"}
+              showWithScroll={true}
             />
           )}
           <Glossary_
