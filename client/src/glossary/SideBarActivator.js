@@ -39,8 +39,6 @@ const SidebarActivator = withRouter(
 
     closeSidebar = (e) => {
       const menu_node = this.menu_ref.current;
-      console.log(menu_node);
-      console.log(e.target);
       if (
         this.state.showGlossary &&
         menu_node &&
@@ -58,14 +56,26 @@ const SidebarActivator = withRouter(
         : this.closeSidebar(e);
     };
 
+    handleWindowKeyDown = (e) => {
+      if (e.code === "Enter") {
+        this.handleWindowClick(e);
+      }
+    };
+
     componentDidMount() {
       window.addEventListener("click", this.handleWindowClick, {
+        capture: true,
+      });
+      window.addEventListener("keydown", this.handleWindowKeyDown, {
         capture: true,
       });
     }
 
     componentWillUnmount() {
       window.removeEventListener("click", this.handleWindowClick, {
+        capture: true,
+      });
+      window.removeEventListener("keydown", this.handleWindowKeyDown, {
         capture: true,
       });
     }
