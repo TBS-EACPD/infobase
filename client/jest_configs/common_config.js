@@ -7,6 +7,7 @@ const code_suffix_pattern = "\\.(js|ts|tsx)$";
 module.exports = {
   common_config_rules: {
     rootDir: "..",
+    modulePaths: ["<rootDir>"],
 
     moduleNameMapper: {
       "\\.(css|scss|yaml)$": "<rootDir>/jest_configs/utils/empty_mock.js",
