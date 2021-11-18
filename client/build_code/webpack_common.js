@@ -11,6 +11,14 @@ const webpack = require("webpack");
 const { RetryChunkLoadPlugin } = require("webpack-retry-chunk-load-plugin");
 
 const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
+  const babel_loader_options = {
+    loader: "babel-loader",
+    options: {
+      // want to make sure that, even when transpiling node_modules for production, we only ever use the /client babel config
+      configFile: path.resolve(__dirname, `../.babelrc.json`),
+    },
+  };
+
   const js_module_suffix_pattern = "\\.(js|ts|tsx)$";
   const side_effects_suffix_pattern = `\\.side-effects${js_module_suffix_pattern}`;
 
@@ -20,13 +28,13 @@ const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
     {
       test: new RegExp(js_module_suffix_pattern),
       exclude: new RegExp(`node_modules|${side_effects_suffix_pattern}`),
-      use: "babel-loader",
+      use: babel_loader_options,
       sideEffects: false,
     },
     {
       test: new RegExp(side_effects_suffix_pattern),
       exclude: /node_modules/,
-      use: "babel-loader",
+      use: babel_loader_options,
       sideEffects: true,
     },
     {
@@ -34,7 +42,7 @@ const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
       test: (path) => is_prod_build && /node_modules\/.*\.js$/.test(path),
       // transpilling core-js breaks some of its feature detection, exclude it
       exclude: /node_modules\/core-js\/.*/,
-      use: "babel-loader",
+      use: babel_loader_options,
       // up to dependencies to declare sideEffects true/false in their package.json
     },
     {
