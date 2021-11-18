@@ -100,8 +100,8 @@ export class GlossaryMenu extends React.Component<
 
   render() {
     const glossary_placeholder = {
-      en: "Search for a term used in GC InfoBase",
-      fr: "Rechercher un terme utilisé dans InfoBase du GC",
+      en: "Search for a term",
+      fr: "Rechercher un terme",
     }[lang];
 
     return (
