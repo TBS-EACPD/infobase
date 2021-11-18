@@ -24,16 +24,13 @@ const { text_maker, TM } = create_text_maker_component(text);
 export class ServiceOverview extends React.Component {
   render() {
     const { service } = this.props;
-    const most_recent_report = _.chain(service.service_report)
-      .sortBy((report) => _.toInteger(report.year))
-      .reverse()
-      .value()[0];
+    const most_recent_year = service.report_years[0];
+    const most_recent_report = _.find(service.service_report, {
+      year: most_recent_year,
+    });
     const applications = _.reduce(
       application_channels_keys,
-      (total, key) => {
-        const sum_for_key = _.sumBy(service.service_report, key) || 0;
-        return total + sum_for_key;
-      },
+      (total, key) => total + (most_recent_report[key] || 0),
       0
     );
     const get_uniq_flat_standard_urls = (url_field) =>
@@ -108,20 +105,21 @@ export class ServiceOverview extends React.Component {
               }
             />
           </dd>
-          <dt>{text_maker("application_digital")}</dt>
+          <dt>
+            {text_maker("application_digital")} ({most_recent_year})
+          </dt>
           <dd>
             {formats["big_int"](applications, {
               raw: true,
             })}
           </dd>
-          <dt>{text_maker("online_inquiry_count")}</dt>
+          <dt>
+            {text_maker("online_inquiry_count")} ({most_recent_year})
+          </dt>
           <dd>
-            {formats["big_int"](
-              _.sumBy(service.service_report, "online_inquiry_count"),
-              {
-                raw: true,
-              }
-            )}
+            {formats["big_int"](most_recent_report.online_inquiry_count, {
+              raw: true,
+            })}
           </dd>
           <dt>{text_maker("service_link_text")}</dt>
           <dd>

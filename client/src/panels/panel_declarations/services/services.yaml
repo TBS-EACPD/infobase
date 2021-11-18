@@ -213,23 +213,34 @@ service_channels_text:
   fr: Modes d'acheminement utilisés par ce {{gl_tt "service" "SERVICE"}} pour recevoir les demandes.
 most_used_online_application_count:
   transform: [handlebars, markdown]
-  en: There were **{{fmt_big_int max_value}} online applications**; most clients chose to submit their applications online.
-  fr: Il y a eu **{{fmt_big_int max_value}} demandes en ligne**; la plupart des clients ont préféré présenter leur demande en ligne.
+  en: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, there were **{{fmt_big_int max_value}} online applications**; most clients chose to submit their applications online.
+  fr: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes en ligne**; la plupart des clients ont préféré présenter leur demande en ligne.
 most_used_live_application_count:
   transform: [handlebars, markdown]
-  en: There were **{{fmt_big_int max_value}} in person applications**; most clients chose to submit their applications in person.
-  fr: Il y a eu **{{fmt_big_int max_value}} demandes en personne**; la plupart des clients ont préféré présenter leur demande en personne.
+  en: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, there were **{{fmt_big_int max_value}} in person applications**; most clients chose to submit their applications in person.
+  fr: |
+    **En {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes en personne**; la plupart des clients ont préféré présenter leur demande en personne.
 most_used_mail_application_count:
   transform: [handlebars, markdown]
-  en: There were **{{fmt_big_int max_value}} applications by mail**; most clients chose to submit their applications by mail.
-  fr: Il y a eu **{{fmt_big_int max_value}} demandes par la poste**; la plupart des clients ont préféré présenter leur demande par la poste.
+  en: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, there were **{{fmt_big_int max_value}} applications by mail**; most clients chose to submit their applications by mail.
+  fr: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes par la poste**; la plupart des clients ont préféré présenter leur demande par la poste.
 most_used_other_application_count:
   transform: [handlebars, markdown]
-  en: There were **{{fmt_big_int max_value}} applications by other channels**; most clients chose to submit their applications by other channels.
-  fr: Il y a eu **{{fmt_big_int max_value}} demandes par d’autres moyens**; la plupart des clients ont préféré présenter leur demande par d’autres moyens.
+  en: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, there were **{{fmt_big_int max_value}} applications by other channels**; most clients chose to submit their applications by other channels.
+  fr: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes par d’autres moyens**; la plupart des clients ont préféré présenter leur demande par d’autres moyens.
 most_used_phone_application_count:
- en: There were **{{fmt_big_int max_value}} applications by telephone**; most clients chose to submit their applications by telephone.
- fr: Il y a eu **{{fmt_big_int max_value}} demandes par téléphone**; la plupart des clients ont ont préféré présenter leur demande par téléphone.
+  transform: [handlebars, markdown]
+  en: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, there were **{{fmt_big_int max_value}} applications by telephone**; most clients chose to submit their applications by telephone.
+  fr: |
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes par téléphone**; la plupart des clients ont ont préféré présenter leur demande par téléphone.
 no_applications:
   en: This service did not receive any applications
   fr: Ce service n'a reçu aucune demande
