@@ -7,9 +7,6 @@
     "plugin:import/warnings",
     "plugin:import/errors"
   ],
-  "env": {
-    "jest/globals": true
-  },
   "rules": {
     "no-unused-vars": ["warn", { "args": "none" }],
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
@@ -79,5 +76,13 @@
     "lodash": {
       "pragma": "_"
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*test.{js|ts|tsx}"],
+      "env": {
+        "jest/globals": true
+      }
+    }
+  ]
 }
