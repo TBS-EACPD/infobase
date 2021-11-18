@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
 
+import { with_console_error_silenced } from "src/testing_utils";
+
 import { AlertBanner } from "./AlertBanner";
 
 describe("AlertBanner", () => {
@@ -20,18 +22,10 @@ describe("AlertBanner", () => {
 
     expect(document.querySelector(".alert-info")).toBeTruthy();
   });
-  it("Throws when provided an invalid banner_class prop", () => {
-    // TODO is there a better pattern for testing thrown errors without cluttering the jest output?
-    // ... if not, then at least extract this as a test utility
-    const console_error = console.error;
-    try {
-      console.error = jest.fn();
-
+  it("Throws when provided an invalid banner_class prop", () =>
+    with_console_error_silenced(() => {
       expect(() => render(<AlertBanner banner_class="adfadf" />)).toThrow();
-    } finally {
-      console.error = console_error;
-    }
-  });
+    }));
   it("Renders with additional classes provided by the additional_class_names prop", () => {
     render(
       <AlertBanner banner_class="info" additional_class_names="test-class" />
