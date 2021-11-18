@@ -112,6 +112,7 @@ const SidebarActivator = withRouter(
               this.setState({ showGlossary: true });
             }}
             text={"glossary_button"}
+            showWithScroll={false}
           />
         </div>
       );
