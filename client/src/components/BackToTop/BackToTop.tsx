@@ -13,6 +13,7 @@ interface BackToTopProps {
   focus: () => void;
   handleClick: () => void;
   text: string;
+  showWithScroll: true;
 }
 interface BackToTopState {
   show_back_to_top: boolean;
@@ -30,25 +31,26 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
     super(props);
 
     this.state = {
-      show_back_to_top: false,
+      show_back_to_top: true,
       caught_by_footer: false,
     };
     this.button_ref = React.createRef();
   }
 
   componentDidMount() {
-    this.page_header = document.getElementById("ib-site-header-area");
-    this.page_footer = document.getElementById("wb-info");
+    if (this.props.showWithScroll) {
+      this.page_header = document.getElementById("ib-site-header-area");
 
-    this.header_observer = new IntersectionObserver((entries, _observer) => {
-      this.setState({
-        show_back_to_top: entries[0].intersectionRatio <= 0,
+      this.header_observer = new IntersectionObserver((entries, _observer) => {
+        this.setState({
+          show_back_to_top: entries[0].intersectionRatio <= 0,
+        });
       });
-    });
-    if (this.page_header && this.header_observer) {
-      this.header_observer.observe(this.page_header);
+      if (this.page_header && this.header_observer) {
+        this.header_observer.observe(this.page_header);
+      }
     }
-
+    this.page_footer = document.getElementById("wb-info");
     this.footer_observer = new IntersectionObserver((entries, _observer) => {
       this.setState({
         caught_by_footer: entries[0].isIntersecting,
