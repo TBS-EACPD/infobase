@@ -55,6 +55,10 @@ export const make_request = (
       return response;
     })
     .catch((error) => {
+      if (typeof error?.message === "undefined") {
+        error = new Error(error || "No error specified");
+      }
+
       error.message = `${get_common_log_text(retries)} - ${error.toString()}`;
 
       should_log &&
