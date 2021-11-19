@@ -12,13 +12,13 @@ import { Table } from "src/core/TableClass";
 import { textColor } from "src/style_constants/index";
 
 import {
-  phrase_to_word_regex,
+  search_phrase_to_all_words_regex,
   highlight_search_match,
   SearchHighlighter,
 } from "./search_utils";
 
 const get_re_matcher = (accessors, query) => (obj) => {
-  const regex = phrase_to_word_regex(query);
+  const regex = search_phrase_to_all_words_regex(query);
 
   return _.chain(accessors)
     .map((accessor) => (_.isString(accessor) ? obj[accessor] : accessor(obj)))
@@ -332,7 +332,7 @@ const programs = {
     const name = name_function(program);
 
     if (program.old_name) {
-      const regex = phrase_to_word_regex(search);
+      const regex = search_phrase_to_all_words_regex(search);
 
       const matched_on_current_name = _.deburr(program.name).match(regex);
       const matched_on_old_name = _.deburr(program.old_name).match(regex);

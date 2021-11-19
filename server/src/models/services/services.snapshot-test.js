@@ -175,7 +175,7 @@ query{
       id,
       name
     }
-    multi_word_search: search_services(search_phrase: "something renseignements whatever"){
+    multi_word_search: search_services(search_phrase: "d'entités renseignements"){
       id,
       name
     }
