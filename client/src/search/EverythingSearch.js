@@ -7,7 +7,10 @@ import { CheckBox, DropdownMenu } from "src/components/index";
 
 import { create_text_maker } from "src/models/text";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import {
+  is_a11y_mode,
+  services_feature_flag,
+} from "src/core/injected_build_constants";
 
 import { IconGear } from "src/icons/icons";
 
@@ -290,7 +293,7 @@ EverythingSearch.defaultProps = {
     include_tags_hwh: true,
     include_tags_wwh: true,
 
-    include_services: true,
+    ...(services_feature_flag && { include_services: true }),
     include_glossary: false,
     include_tables: false,
   },
