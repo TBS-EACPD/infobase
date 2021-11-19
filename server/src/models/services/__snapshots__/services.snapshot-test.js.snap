@@ -62,7 +62,12 @@ Object {
           "name": "Entreprises de services monétaires – Recherche d’entités inscrites",
         },
       ],
-      "multi_word_search": Array [],
+      "multi_word_search": Array [
+        Object {
+          "id": "172",
+          "name": "Demandes de renseignements d'entités déclarantes",
+        },
+      ],
       "partial_word_search": Array [
         Object {
           "id": "172",

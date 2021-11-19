@@ -176,7 +176,10 @@ export default function ({ models, loaders }) {
               .deburr()
               // eslint-disable-next-line no-useless-escape
               .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
-              .replace(" ", "|")
+              .split(" ")
+              .uniq()
+              .sortBy((word) => -word.length)
+              .reduce((pattern, word) => pattern + `(?=.*?${word})`, "^")
               .value(),
             $options: "i",
           },
