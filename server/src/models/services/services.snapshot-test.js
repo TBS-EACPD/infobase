@@ -170,9 +170,18 @@ query{
 // TODO probably search with a handful of different patterns
 const search_services = `
 query{
-  root(lang: "en"){
-    search_services(search_phrase: "TODO"){
-      ${service_fields}
+  root(lang: "fr"){
+    diacritical_search: search_services(search_phrase: "entités"){
+      id,
+      name
+    }
+    multi_word_search: search_services(search_phrase: "something renseignements whatever"){
+      id,
+      name
+    }
+    partial_word_search: search_services(search_phrase: "en"){
+      id,
+      name
     }
   }
 }`;

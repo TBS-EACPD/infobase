@@ -48,6 +48,48 @@ Object {
 }
 `;
 
+exports[`services data Searching services by name 1`] = `
+Object {
+  "data": Object {
+    "root": Object {
+      "diacritical_search": Array [
+        Object {
+          "id": "172",
+          "name": "Demandes de renseignements d'entités déclarantes",
+        },
+        Object {
+          "id": "204",
+          "name": "Entreprises de services monétaires – Recherche d’entités inscrites",
+        },
+      ],
+      "multi_word_search": Array [],
+      "partial_word_search": Array [
+        Object {
+          "id": "172",
+          "name": "Demandes de renseignements d'entités déclarantes",
+        },
+        Object {
+          "id": "204",
+          "name": "Entreprises de services monétaires – Recherche d’entités inscrites",
+        },
+        Object {
+          "id": "195",
+          "name": "Registre des entreprises de services monétaires (ESM) – Inscription te maintenance",
+        },
+        Object {
+          "id": "978",
+          "name": "Demandes de renseignements du public et des médias",
+        },
+        Object {
+          "id": "171",
+          "name": "Communications de renseignements financiers",
+        },
+      ],
+    },
+  },
+}
+`;
+
 exports[`services data Single service 1`] = `
 Object {
   "data": Object {
