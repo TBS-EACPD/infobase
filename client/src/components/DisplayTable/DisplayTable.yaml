@@ -19,9 +19,6 @@ items_per_page_description:
 show_all:
   en: Show all
   fr: Tout afficher
-select_all:
-  en: (Select All)
-  fr: TODO
 filters_applied:
   transform: [markdown]
   en: _Filters applied_

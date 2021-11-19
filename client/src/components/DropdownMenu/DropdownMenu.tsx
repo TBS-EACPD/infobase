@@ -8,14 +8,7 @@ import { tertiaryColor } from "src/style_constants/index";
 
 import "./DropdownMenu.scss";
 
-const DropdownMenuDefaultProps = {
-  dropdown_content_style: {
-    overflowX: "hidden",
-    maxHeight: "351px",
-    msOverflowStyle: "-ms-autohiding-scrollbar",
-  } as React.CSSProperties,
-};
-type DropdownMenuProps = typeof DropdownMenuDefaultProps & {
+type DropdownMenuProps = {
   dropdown_content: React.ReactNode;
   opened_button_class_name: string;
   closed_button_class_name: string;
@@ -33,7 +26,6 @@ export class DropdownMenu extends React.Component<
   DropdownMenuProps,
   DropdownMenuState
 > {
-  static defaultProps = DropdownMenuDefaultProps;
   dropdown_ref = React.createRef<HTMLDivElement>();
   toggle_dropdown_button = React.createRef<HTMLDivElement>();
   dropdown_area = React.createRef<HTMLDivElement>();
@@ -89,7 +81,6 @@ export class DropdownMenu extends React.Component<
       opened_button_class_name,
       closed_button_class_name,
       dropdown_content_class_name,
-      dropdown_content_style,
       button_description,
       dropdown_trigger_txt,
       dropdown_a11y_txt, //used if the trigger text is not a string object
@@ -140,7 +131,7 @@ export class DropdownMenu extends React.Component<
             "dropdown__content"
           )}
         >
-          <div style={dropdown_content_style}>{dropdown_content}</div>
+          {dropdown_content}
           <div
             style={{
               borderTop: `1px dashed ${tertiaryColor}`,

@@ -1,7 +1,7 @@
 @import "src/style_constants/index.scss";
 
 .dropdown {
-  position: static;
+  position: relative;
   display: inline-block;
   z-index: 1001;
   height: 100%;
