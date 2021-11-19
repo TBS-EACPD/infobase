@@ -5,7 +5,7 @@ import { bilingual_field } from "../schema_utils.js";
 const schema = `
   extend type Root{
     service(id: String!): Service
-    search_services(name_regex: String!): [Service]
+    search_services(search_phrase: String!): [Service]
   }
   extend type Gov{
     service_summary: ServiceSummary
@@ -169,12 +169,17 @@ export default function ({ models, loaders }) {
   const resolvers = {
     Root: {
       service: (_x, { id }) => service_loader.load(id),
-      search_services: async (_x, { name_regex }, { lang }) =>
-        // TODO look for a package that can check regex safety/complexity, deny overly complex input
-        // ... or maybe accepting a regex pattern is just a terrible idea, maybe take a query string
-        // and just duplicate the client's string to query regex code here for now
+      search_services: async (_x, { search_phrase }, { lang }) =>
         await Service.find({
-          [`name_${lang}`]: { $regex: name_regex },
+          [`search_text_${lang}`]: {
+            $regex: _.chain(search_phrase)
+              .deburr()
+              // eslint-disable-next-line no-useless-escape
+              .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+              .replace(" ", "|")
+              .value(),
+            $options: "i",
+          },
         }),
     },
     Gov: {

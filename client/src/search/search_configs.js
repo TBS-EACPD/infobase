@@ -12,13 +12,13 @@ import { Table } from "src/core/TableClass";
 import { textColor } from "src/style_constants/index";
 
 import {
-  query_to_regex_pattern,
+  phrase_to_word_regex,
   highlight_search_match,
   SearchHighlighter,
 } from "./search_utils";
 
 const get_re_matcher = (accessors, query) => (obj) => {
-  const regex = new RegExp(query_to_regex_pattern(query), "gi");
+  const regex = phrase_to_word_regex(query);
 
   return _.chain(accessors)
     .map((accessor) => (_.isString(accessor) ? obj[accessor] : accessor(obj)))
@@ -332,7 +332,7 @@ const programs = {
     const name = name_function(program);
 
     if (program.old_name) {
-      const regex = new RegExp(query_to_regex_pattern(search), "gi");
+      const regex = phrase_to_word_regex(search);
 
       const matched_on_current_name = _.deburr(program.name).match(regex);
       const matched_on_old_name = _.deburr(program.old_name).match(regex);
@@ -397,8 +397,7 @@ const services = {
   name_function: (service) =>
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
   menu_content_function: default_menu_content_function,
-  query: (query) =>
-    query_search_services({ name_regex: query_to_regex_pattern(query) }),
+  query: (query) => query_search_services({ search_phrase: query }),
 };
 
 export {

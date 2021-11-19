@@ -171,7 +171,7 @@ query{
 const search_services = `
 query{
   root(lang: "en"){
-    search_services(name_regex: "TODO"){
+    search_services(search_phrase: "TODO"){
       ${service_fields}
     }
   }

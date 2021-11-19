@@ -361,9 +361,9 @@ export const useServices = (query_options) => {
 export const { query_search_services, useSearchServices } = query_factory({
   query_name: "search_services",
   query: gql`
-    query($lang: String! = "${lang}", $name_regex: String!) {
+    query($lang: String! = "${lang}", $search_phrase: String!) {
       root(lang: $lang) {
-        search_services(name_regex: $name_regex) {
+        search_services(search_phrase: $search_phrase) {
           id
           org_id
           name
