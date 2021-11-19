@@ -167,6 +167,16 @@ query{
   }
 }`;
 
+// TODO probably search with a handful of different patterns
+const search_services = `
+query{
+  root(lang: "en"){
+    search_services(name_regex: "TODO"){
+      ${service_fields}
+    }
+  }
+}`;
+
 const { execQuery } = global;
 
 describe("services data", function () {
@@ -188,6 +198,10 @@ describe("services data", function () {
   });
   it("Single service", async () => {
     const data = await execQuery(single_service, {});
+    return expect(data).toMatchSnapshot();
+  });
+  it("Searching services by name", async () => {
+    const data = await execQuery(search_services, {});
     return expect(data).toMatchSnapshot();
   });
 });
