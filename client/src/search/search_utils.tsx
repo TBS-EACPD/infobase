@@ -3,22 +3,18 @@ import React from "react";
 
 import { escapeRegExp } from "src/general_utils";
 
-const query_to_regex_pattern = (query: string) =>
+const phrase_to_word_regex = (query: string, regex_options = "gi") =>
   _.chain(query)
     .deburr()
     .thru(escapeRegExp)
     .split(" ")
     .sortBy((word) => -word.length)
     .join("|")
-    .thru((pattern) => `(${pattern})(?![^<]*>)`)
+    .thru((pattern) => new RegExp(`(${pattern})(?![^<]*>)`, regex_options))
     .value();
 
 const highlight_search_match = (search: string, content: string) =>
-  _.replace(
-    content,
-    new RegExp(query_to_regex_pattern(search), "gi"),
-    "<strong>$1</strong>"
-  );
+  _.replace(content, phrase_to_word_regex(search), "<strong>$1</strong>");
 
 const SearchHighlighter = ({
   search,
@@ -29,10 +25,7 @@ const SearchHighlighter = ({
 }) => {
   const split_token = "Ø";
   const string_split_on_matched_words = _.chain(content)
-    .replace(
-      new RegExp(query_to_regex_pattern(search), "gi"),
-      `${split_token}$1${split_token}`
-    )
+    .replace(phrase_to_word_regex(search), `${split_token}$1${split_token}`)
     .split(split_token)
     .value();
 
@@ -78,7 +71,7 @@ const format_data = <Data extends unknown>(
 });
 
 export {
-  query_to_regex_pattern,
+  phrase_to_word_regex,
   highlight_search_match,
   SearchHighlighter,
   format_data,

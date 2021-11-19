@@ -70,6 +70,7 @@ export default function (model_singleton) {
     is_active: { type: Boolean },
 
     ...bilingual_str("name"),
+    ...bilingual_str("search_text"),
     ...bilingual_str("description"),
     ...bilingual("service_type", [str_type]),
     ...bilingual("scope", [str_type]),
