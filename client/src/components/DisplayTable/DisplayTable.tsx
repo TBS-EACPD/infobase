@@ -13,7 +13,6 @@ import { SortDirections } from "src/components/SortDirection/SortDirection";
 
 import { FormatKey } from "src/core/format";
 
-import type { LegendItemType } from "src/charts/legends/LegendItemType";
 import { LegendList } from "src/charts/legends/LegendList";
 
 import { toggle_list } from "src/general_utils";
@@ -62,13 +61,18 @@ interface _DisplayTableState {
   initial_props: _DisplayTableProps;
   visible_col_keys: string[];
   searches: { [keys: string]: string };
-  dropdown_filter: {
-    [col_keys: string]: LegendItemType[];
+  filter_options_by_column: {
+    [col_keys: string]: [FilterOption];
   };
 }
 
 interface DisplayTableData {
   [key: string]: CellValue;
+}
+interface FilterOption {
+  id: string;
+  label: string;
+  active: boolean;
 }
 
 export type CellValue = string | number | undefined;
@@ -103,8 +107,8 @@ type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
   formatter: FormatKey | ((val: CellValue) => React.ReactNode);
 };
 
-const get_default_dropdown_filter = _.memoize(
-  (col_configs_with_defaults: ColumnConfigs, data: DisplayTableData[]) =>
+const get_default_filter_options_by_column = _.memoize(
+  (data: DisplayTableData[], col_configs_with_defaults: ColumnConfigs) =>
     _.chain(col_configs_with_defaults)
       .map((config, col_key) => ({ ...config, col_key }))
       .filter(
@@ -159,9 +163,9 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
     .mapValues(() => "")
     .value();
 
-  const dropdown_filter = get_default_dropdown_filter(
-    col_configs_with_defaults,
-    data
+  const filter_options_by_column = get_default_filter_options_by_column(
+    data,
+    col_configs_with_defaults
   );
 
   return {
@@ -171,7 +175,7 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
     searches,
     initial_props: props,
     page_size: props.page_size_increment,
-    dropdown_filter,
+    filter_options_by_column,
   };
 };
 
@@ -294,7 +298,7 @@ export class _DisplayTable extends React.Component<
       page_size,
       current_page,
       show_pagination_load_spinner,
-      dropdown_filter,
+      filter_options_by_column,
     } = this.state;
 
     const col_configs_with_defaults =
@@ -337,11 +341,11 @@ export class _DisplayTable extends React.Component<
             const cell_search_value = clean_search_string(
               col_config.plain_formatter(cell_value)
             );
-            const cell_dropdown_filter =
+            const filter_option_for_this_cell =
               show_dropdown_filter &&
-              (_.find(dropdown_filter[column_key], {
+              (_.find(filter_options_by_column[column_key], {
                 id: cell_value,
-              }) as LegendItemType);
+              }) as FilterOption);
             return (
               (_.isEmpty(searches[column_key]) ||
                 _.includes(
@@ -349,7 +353,8 @@ export class _DisplayTable extends React.Component<
                   clean_search_string(searches[column_key])
                 )) &&
               (!show_dropdown_filter ||
-                (cell_dropdown_filter && cell_dropdown_filter.active))
+                (filter_option_for_this_cell &&
+                  filter_option_for_this_cell.active))
             );
           })
           .every()
@@ -567,7 +572,8 @@ export class _DisplayTable extends React.Component<
                     searchable &&
                     col_configs_with_defaults[column_key].show_dropdown_filter;
                   const is_dropdown_filter_applied =
-                    _.reject(dropdown_filter[column_key], "active").length > 0;
+                    _.reject(filter_options_by_column[column_key], "active")
+                      .length > 0;
 
                   const current_search_input =
                     (searchable && searches[column_key]) || null;
@@ -611,13 +617,6 @@ export class _DisplayTable extends React.Component<
 
                                 this.setState({
                                   searches: updated_searches,
-                                  dropdown_filter: {
-                                    ...dropdown_filter,
-                                    [column_key]: get_default_dropdown_filter(
-                                      col_configs_with_defaults,
-                                      data
-                                    )[column_key],
-                                  },
                                   current_page: 0,
                                 });
                               }}
@@ -626,11 +625,15 @@ export class _DisplayTable extends React.Component<
                             {show_dropdown_filter && (
                               <DropdownFilter
                                 column_key={column_key}
-                                dropdown_filter={dropdown_filter}
+                                filter_options_by_column={
+                                  filter_options_by_column
+                                }
                                 column_searches={searches}
-                                set_dropdown_filter={(
-                                  dropdown_filter: _DisplayTableState["dropdown_filter"]
-                                ) => this.setState({ dropdown_filter })}
+                                set_filter_options={(
+                                  filter_options_by_column: _DisplayTableState["filter_options_by_column"]
+                                ) =>
+                                  this.setState({ filter_options_by_column })
+                                }
                               />
                             )}
                           </div>

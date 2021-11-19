@@ -27,8 +27,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const DropdownFilterVirtualizedList = ({
   column_key,
-  set_dropdown_filter,
-  dropdown_filter,
+  set_filter_options,
+  filter_options_by_column,
   column_searches,
 }) => {
   const virtualized_cell_measure_cache = new CellMeasurerCache({
@@ -40,14 +40,17 @@ const DropdownFilterVirtualizedList = ({
   const clean_search_string = (string) =>
     _.chain(string).deburr().toLower().trim().value();
 
-  const list = dropdown_filter[column_key];
-  const filtered_list = _.filter(dropdown_filter[column_key], ({ label }) => {
-    const cleaned_label = clean_search_string(label);
-    return (
-      _.includes(cleaned_label, clean_search_string(search)) &&
-      _.includes(cleaned_label, column_searches[column_key])
-    );
-  });
+  const list = filter_options_by_column[column_key];
+  const filtered_list = _.filter(
+    filter_options_by_column[column_key],
+    ({ label }) => {
+      const cleaned_label = clean_search_string(label);
+      return (
+        _.includes(cleaned_label, clean_search_string(search)) &&
+        _.includes(cleaned_label, column_searches[column_key])
+      );
+    }
+  );
 
   return (
     <div>
@@ -105,8 +108,8 @@ const DropdownFilterVirtualizedList = ({
                             ? { ...item, active: !item.active }
                             : item
                         );
-                        set_dropdown_filter({
-                          ...dropdown_filter,
+                        set_filter_options({
+                          ...filter_options_by_column,
                           [column_key]: toggled_list,
                         });
                       }}
@@ -116,26 +119,28 @@ const DropdownFilterVirtualizedList = ({
               );
             }}
           />
-          <SelectAllControl
-            SelectAllOnClick={() =>
-              set_dropdown_filter({
-                ...dropdown_filter,
-                [column_key]: _.map(list, (item) => ({
-                  ...item,
-                  active: true,
-                })),
-              })
-            }
-            SelectNoneOnClick={() =>
-              set_dropdown_filter({
-                ...dropdown_filter,
-                [column_key]: _.map(list, (item) => ({
-                  ...item,
-                  active: false,
-                })),
-              })
-            }
-          />
+          <div style={{ marginBottom: "5px" }}>
+            <SelectAllControl
+              SelectAllOnClick={() =>
+                set_filter_options({
+                  ...filter_options_by_column,
+                  [column_key]: _.map(list, (item) => ({
+                    ...item,
+                    active: true,
+                  })),
+                })
+              }
+              SelectNoneOnClick={() =>
+                set_filter_options({
+                  ...filter_options_by_column,
+                  [column_key]: _.map(list, (item) => ({
+                    ...item,
+                    active: false,
+                  })),
+                })
+              }
+            />
+          </div>
         </div>
       ) : (
         <TM k="no_data" className="large_panel_text" />
@@ -146,23 +151,17 @@ const DropdownFilterVirtualizedList = ({
 
 export const DropdownFilter = ({
   column_key,
-  set_dropdown_filter,
-  dropdown_filter,
+  set_filter_options,
+  filter_options_by_column,
   column_searches,
 }) => {
   const is_filter_active =
-    _.reject(dropdown_filter[column_key], "active").length > 0;
+    _.reject(filter_options_by_column[column_key], "active").length > 0;
   return (
     <DropdownMenu
       opened_button_class_name={"button-unstyled"}
       closed_button_class_name={"button-unstyled"}
       dropdown_a11y_txt={text_maker("filter_data")}
-      dropdown_content_style={{
-        overflowX: "hidden",
-        maxHeight: "400px",
-        msOverflowStyle: "-ms-autohiding-scrollbar",
-        marginBottom: "10px",
-      }}
       dropdown_trigger_txt={
         <IconFilter
           color={is_filter_active ? secondaryColor : tertiaryColor}
@@ -173,8 +172,8 @@ export const DropdownFilter = ({
         <DropdownFilterVirtualizedList
           column_key={column_key}
           column_searches={column_searches}
-          set_dropdown_filter={set_dropdown_filter}
-          dropdown_filter={dropdown_filter}
+          set_filter_options={set_filter_options}
+          filter_options_by_column={filter_options_by_column}
         />
       }
     />
