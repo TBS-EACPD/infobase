@@ -12,28 +12,28 @@ import { Table } from "src/core/TableClass";
 import { textColor } from "src/style_constants/index";
 
 import {
-  query_to_reg_exps,
+  query_to_regex_pattern,
   highlight_search_match,
   SearchHighlighter,
 } from "./search_utils";
 
-const get_re_matcher = (accessors, reg_exps) => (obj) =>
-  _.chain(accessors)
+const get_re_matcher = (accessors, query) => (obj) => {
+  const regex = new RegExp(query_to_regex_pattern(query), "gi");
+
+  return _.chain(accessors)
     .map((accessor) => (_.isString(accessor) ? obj[accessor] : accessor(obj)))
     .some((str) => {
       if (!_.isString(str)) {
         return false;
       } else {
-        str = _.deburr(str);
-        return _.every(reg_exps, (re) => str.match(re));
+        return _.deburr(str).match(regex);
       }
     })
     .value();
+};
 
 function create_re_matcher(query, accessors, config_name) {
-  const reg_exps = query_to_reg_exps(query);
-
-  const re_matcher = get_re_matcher(accessors, reg_exps);
+  const re_matcher = get_re_matcher(accessors, query);
 
   const nonce = _.random(0.1, 1.1);
   let nonce_use_count = 0;
@@ -78,11 +78,9 @@ const org_templates = {
     }
 
     const result_name = (() => {
-      const reg_exps = query_to_reg_exps(search);
-
       const name_like_attribute_matched = _.find(
         ["name", "legal_title", "old_name"],
-        (attribute) => get_re_matcher([attribute], reg_exps)(org)
+        (attribute) => get_re_matcher([attribute], search)(org)
       );
 
       switch (name_like_attribute_matched) {
@@ -334,14 +332,10 @@ const programs = {
     const name = name_function(program);
 
     if (program.old_name) {
-      const reg_exps = query_to_reg_exps(search);
+      const regex = new RegExp(query_to_regex_pattern(search), "gi");
 
-      const matched_on_current_name = _.every(reg_exps, (re) =>
-        _.deburr(program.name).match(re)
-      );
-      const matched_on_old_name = _.every(reg_exps, (re) =>
-        _.deburr(program.old_name).match(re)
-      );
+      const matched_on_current_name = _.deburr(program.name).match(regex);
+      const matched_on_old_name = _.deburr(program.old_name).match(regex);
 
       if (matched_on_old_name && !matched_on_current_name) {
         return (
@@ -403,7 +397,8 @@ const services = {
   name_function: (service) =>
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
   menu_content_function: default_menu_content_function,
-  query: (query) => query_search_services({ query }),
+  query: (query) =>
+    query_search_services({ name_regex: query_to_regex_pattern(query) }),
 };
 
 export {

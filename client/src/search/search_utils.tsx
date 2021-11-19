@@ -3,51 +3,22 @@ import React from "react";
 
 import { escapeRegExp } from "src/general_utils";
 
-const query_to_regexps_func = (query: string) => {
-  const raw_tokens = _.filter(query.split(" "));
-  const reg_exps = _.map(
-    raw_tokens,
-    (token) => new RegExp(`${escapeRegExp(_.deburr(token))}(?![^<]*>)`, "gi")
+const query_to_regex_pattern = (query: string) =>
+  _.chain(query)
+    .deburr()
+    .thru(escapeRegExp)
+    .split(" ")
+    .sortBy((word) => -word.length)
+    .join("|")
+    .thru((pattern) => `(${pattern})(?![^<]*>)`)
+    .value();
+
+const highlight_search_match = (search: string, content: string) =>
+  _.replace(
+    content,
+    new RegExp(query_to_regex_pattern(search), "gi"),
+    "<strong>$1</strong>"
   );
-  return reg_exps;
-};
-const query_to_reg_exps = _.memoize(query_to_regexps_func);
-
-const highlight_search_match = (search: string, content: string) => {
-  const reg_exps = query_to_reg_exps(search);
-
-  let modified_string = _.clone(content);
-  _.each(
-    reg_exps,
-    (reg_exp) =>
-      (modified_string = modified_string.replace(
-        reg_exp,
-        (match) => `<strong>${match}</strong>`
-      ))
-  );
-
-  return modified_string;
-};
-
-const split_matched_search_tokens = (search: string, content: string) => {
-  const reg_exps = query_to_reg_exps(search);
-
-  const split_token = "Ø";
-
-  let modified_string = _.clone(content);
-  _.each(
-    reg_exps,
-    (reg_exp) =>
-      (modified_string = modified_string.replace(
-        reg_exp,
-        (match) => `${split_token}${match}${split_token}`
-      ))
-  );
-
-  const split_string = _.split(modified_string, split_token);
-
-  return split_string;
-};
 
 const SearchHighlighter = ({
   search,
@@ -56,14 +27,18 @@ const SearchHighlighter = ({
   search: string;
   content: string;
 }) => {
-  const string_split_on_matched_tokens = split_matched_search_tokens(
-    search,
-    content
-  );
+  const split_token = "Ø";
+  const string_split_on_matched_words = _.chain(content)
+    .replace(
+      new RegExp(query_to_regex_pattern(search), "gi"),
+      `${split_token}$1${split_token}`
+    )
+    .split(split_token)
+    .value();
 
   return (
     <span>
-      {_.map(string_split_on_matched_tokens, (sub_string, ix) =>
+      {_.map(string_split_on_matched_words, (sub_string, ix) =>
         ix % 2 === 0 ? (
           <span key={ix}>{sub_string}</span>
         ) : (
@@ -103,7 +78,7 @@ const format_data = <Data extends unknown>(
 });
 
 export {
-  query_to_reg_exps,
+  query_to_regex_pattern,
   highlight_search_match,
   SearchHighlighter,
   format_data,

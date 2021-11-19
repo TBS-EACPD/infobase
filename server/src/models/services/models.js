@@ -91,7 +91,6 @@ export default function (model_singleton) {
     standards: [ServiceStandardSchema],
     service_report: [ServiceReportSchema],
   });
-  ServiceSchema.index({ name_en: "text", name_fr: "text" });
 
   const ServiceGeneralStatsSchema = mongoose.Schema({
     id: pkey_type(),
