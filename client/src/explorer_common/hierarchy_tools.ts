@@ -312,10 +312,13 @@ function sort_hierarchy(
   children_transform: (nodes: Node[]) => Node[]
 ) {
   const old_root = get_root(flat_nodes);
-  const new_root = old_root && _sort_hierarchy(old_root, children_transform);
-  const flat_desc_nodes = new_root && flat_descendants(new_root);
-
-  return [new_root, flat_desc_nodes];
+  if (old_root) {
+    const new_root = _sort_hierarchy(old_root, children_transform);
+    const flat_desc_nodes = flat_descendants(new_root);
+    return [new_root, ...flat_desc_nodes];
+  } else {
+    return [] as Node[];
+  }
 }
 
 export {
