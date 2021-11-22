@@ -19,7 +19,7 @@ interface SidebarContentProps {
 
 interface SidebarContentState {
   title: string | null;
-  def: string | null;
+  def: string | "";
 }
 
 export interface ResultProps {
@@ -38,7 +38,7 @@ export class SidebarContent extends React.Component<
 
     this.state = {
       title: null,
-      def: null,
+      def: "",
     };
   }
 
@@ -119,7 +119,12 @@ export class SidebarContent extends React.Component<
         {!this.props.showList ? (
           <div className="defintion-wrapper">
             <div className="item-title">{this.state.title}</div>
-            <div className="item-def">{this.state.def}</div>
+            <div
+              className="item-def"
+              dangerouslySetInnerHTML={{
+                __html: this.state.def,
+              }}
+            />
             <div>
               <span
                 role="button"
