@@ -20,7 +20,7 @@ const SidebarActivator = withRouter(
       this.state = {
         show_sidebar: true,
         showGlossary: false,
-        glossaryItem: {},
+        glossaryItem: null,
         showList: true,
       };
 

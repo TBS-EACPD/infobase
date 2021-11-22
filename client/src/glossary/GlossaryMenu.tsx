@@ -33,6 +33,7 @@ export interface ResultProps {
   title: string;
   translation: string;
   raw_definition: string;
+  get_compiled_definition: () => string;
 }
 
 export class GlossaryMenu extends React.Component<
@@ -101,7 +102,7 @@ export class GlossaryMenu extends React.Component<
   render() {
     const glossary_placeholder = {
       en: "Search for a term",
-      fr: "Rechercher un terme",
+      fr: "Rechercher un terme utilisé dans InfoBase du GC",
     }[lang];
 
     return (
@@ -155,8 +156,8 @@ export class GlossaryMenu extends React.Component<
           </div>
           <div className="glossary-sidebar-content-wrapper">
             <SidebarContent
-              title={this.state.item.title}
-              def={this.state.item.raw_definition}
+              title={this.state.item?.title}
+              def={this.state.item?.get_compiled_definition()}
               results={this.state.results}
               closeItem={() => this.closeItem()}
               openItem={(key: string) => this.openItem(key)}
