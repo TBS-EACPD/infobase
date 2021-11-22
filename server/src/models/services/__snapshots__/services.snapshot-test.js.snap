@@ -94,24 +94,24 @@ Array [
         ],
         "partial_word_search": Array [
           Object {
-            "id": "172",
-            "name": "Demandes de renseignements d'entités déclarantes",
+            "id": "171",
+            "name": "Communications de renseignements financiers",
           },
           Object {
-            "id": "204",
-            "name": "Entreprises de services monétaires – Recherche d’entités inscrites",
+            "id": "172",
+            "name": "Demandes de renseignements d'entités déclarantes",
           },
           Object {
             "id": "195",
             "name": "Registre des entreprises de services monétaires (ESM) – Inscription te maintenance",
           },
           Object {
-            "id": "978",
-            "name": "Demandes de renseignements du public et des médias",
+            "id": "204",
+            "name": "Entreprises de services monétaires – Recherche d’entités inscrites",
           },
           Object {
-            "id": "171",
-            "name": "Communications de renseignements financiers",
+            "id": "978",
+            "name": "Demandes de renseignements du public et des médias",
           },
         ],
       },
