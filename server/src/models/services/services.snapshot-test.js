@@ -167,11 +167,27 @@ query{
   }
 }`;
 
-// TODO probably search with a handful of different patterns
-const search_services = `
+const search_services_en = `
 query{
-  root(lang: "fr"){
-    diacritical_search: search_services(search_phrase: "entités"){
+  en_root: root(lang: "en"){
+    search_by_french_word: search_services(search_phrase: "Entités"){
+      id,
+      name
+    }
+    search_by_english_word: search_services(search_phrase: "Entities"){
+      id,
+      name
+    }
+  }
+}`;
+const search_services_fr = `
+query{
+  fr_root: root(lang: "fr"){
+    diacritical_search: search_services(search_phrase: "Entités"){
+      id,
+      name
+    }
+    diacritical_free_search: search_services(search_phrase: "Entites"){
       id,
       name
     }
@@ -210,7 +226,8 @@ describe("services data", function () {
     return expect(data).toMatchSnapshot();
   });
   it("Searching services by name", async () => {
-    const data = await execQuery(search_services, {});
-    return expect(data).toMatchSnapshot();
+    const data_en = await execQuery(search_services_en, {});
+    const data_fr = await execQuery(search_services_fr, {});
+    return expect([data_en, data_fr]).toMatchSnapshot();
   });
 });
