@@ -101,11 +101,11 @@ export const LeafSpinner = ({
         style={spinner_container_style}
         dangerouslySetInnerHTML={{
           __html: use_light_colors
-            ? leaf_loading_spinner
+            ? leaf_spinner
                 .replace(`stroke="${primaryColor}"`, 'stroke="#FFF"')
                 .replace(`stroke="${secondaryColor}"`, 'stroke="#FFF"')
                 .replace('fill="#FF0000"', 'fill="#FFF"')
-            : leaf_loading_spinner,
+            : leaf_spinner,
         }}
       />
     </div>
