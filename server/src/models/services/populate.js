@@ -113,8 +113,6 @@ export default async function ({ models }) {
         issuance_digital_status,
         issue_res_digital_status,
 
-        name_en,
-        name_fr,
         service_type_en,
         service_type_fr,
         service_type_codes,
@@ -178,10 +176,6 @@ export default async function ({ models }) {
           .compact()
           .value(),
 
-        name_en,
-        name_fr,
-        search_text_en: _.deburr(name_en),
-        search_text_fr: _.deburr(name_fr),
         ...multi_value_string_fields_to_arrays({
           service_type_en,
           service_type_fr,

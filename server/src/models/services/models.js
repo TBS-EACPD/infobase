@@ -14,6 +14,7 @@ import {
   bilingual_str,
   bilingual,
 } from "../model_utils.js";
+import { make_schema_with_search_terms } from "../search_utils.js";
 
 export default function (model_singleton) {
   const ServiceReportSchema = mongoose.Schema({
@@ -60,38 +61,40 @@ export default function (model_singleton) {
     standard_report: [StandardReportSchema],
   });
 
-  const ServiceSchema = mongoose.Schema({
-    id: pkey_type(),
-    org_id: parent_fkey_type(),
-    program_activity_codes: [sparse_parent_fkey_type()],
-    report_years: [str_type],
-    first_active_year: str_type,
-    last_active_year: str_type,
-    is_active: { type: Boolean },
+  const ServiceSchema = make_schema_with_search_terms(
+    {
+      id: pkey_type(),
+      org_id: parent_fkey_type(),
+      program_activity_codes: [sparse_parent_fkey_type()],
+      report_years: [str_type],
+      first_active_year: str_type,
+      last_active_year: str_type,
+      is_active: { type: Boolean },
 
-    ...bilingual_str("name"),
-    ...bilingual_str("search_text"),
-    ...bilingual_str("description"),
-    ...bilingual("service_type", [str_type]),
-    ...bilingual("scope", [str_type]),
-    ...bilingual("designations", [str_type]),
-    ...bilingual("target_groups", [str_type]),
-    ...bilingual("feedback_channels", [str_type]),
-    ...bilingual("urls", [str_type]),
+      ...bilingual_str("name"),
+      ...bilingual_str("description"),
+      ...bilingual("service_type", [str_type]),
+      ...bilingual("scope", [str_type]),
+      ...bilingual("designations", [str_type]),
+      ...bilingual("target_groups", [str_type]),
+      ...bilingual("feedback_channels", [str_type]),
+      ...bilingual("urls", [str_type]),
 
-    last_gender_analysis: str_type,
+      last_gender_analysis: str_type,
 
-    collects_fees: { type: Boolean },
-    account_reg_digital_status: { type: Boolean },
-    authentication_status: { type: Boolean },
-    application_digital_status: { type: Boolean },
-    decision_digital_status: { type: Boolean },
-    issuance_digital_status: { type: Boolean },
-    issue_res_digital_status: { type: Boolean },
-    ...bilingual_str("digital_enablement_comment"),
-    standards: [ServiceStandardSchema],
-    service_report: [ServiceReportSchema],
-  });
+      collects_fees: { type: Boolean },
+      account_reg_digital_status: { type: Boolean },
+      authentication_status: { type: Boolean },
+      application_digital_status: { type: Boolean },
+      decision_digital_status: { type: Boolean },
+      issuance_digital_status: { type: Boolean },
+      issue_res_digital_status: { type: Boolean },
+      ...bilingual_str("digital_enablement_comment"),
+      standards: [ServiceStandardSchema],
+      service_report: [ServiceReportSchema],
+    },
+    ..._.keys(bilingual_str("name"))
+  );
 
   const ServiceGeneralStatsSchema = mongoose.Schema({
     id: pkey_type(),

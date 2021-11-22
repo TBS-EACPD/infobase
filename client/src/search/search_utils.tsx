@@ -8,7 +8,7 @@ const clean_phrase = (search_phrase: string) =>
 
 const get_length_sorted_words = (search_phrase: string) =>
   _.chain(search_phrase)
-    .split(" ")
+    .words()
     .uniq()
     .sortBy((word) => -word.length)
     .value();

@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { bilingual_field } from "../schema_utils.js";
+import { get_search_terms_resolver } from "../search_utils.js";
 
 const schema = `
   extend type Root{
@@ -169,21 +170,7 @@ export default function ({ models, loaders }) {
   const resolvers = {
     Root: {
       service: (_x, { id }) => service_loader.load(id),
-      search_services: async (_x, { search_phrase }, { lang }) =>
-        await Service.find({
-          [`search_text_${lang}`]: {
-            $regex: _.chain(search_phrase)
-              .deburr()
-              // eslint-disable-next-line no-useless-escape
-              .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
-              .split(" ")
-              .uniq()
-              .sortBy((word) => -word.length)
-              .reduce((pattern, word) => pattern + `(?=.*?${word})`, "^")
-              .value(),
-            $options: "i",
-          },
-        }),
+      search_services: get_search_terms_resolver(Service),
     },
     Gov: {
       service_summary: () => gov_service_summary_loader.load("gov"),
