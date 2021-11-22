@@ -106,9 +106,13 @@ export const make_schema_with_search_terms = (
 
 export const get_search_terms_resolver =
   (model, bilingual = false) =>
-  async (_x, { search_phrase }, { lang }) =>
-    await model.find({
-      [`${search_terms_base_key}_${bilingual ? "bi" : lang}`]: {
+  async (_x, { search_phrase }, { lang }) => {
+    const search_terms_key = `${search_terms_base_key}_${
+      bilingual ? "bi" : lang
+    }`;
+
+    const results = await model.find({
+      [search_terms_key]: {
         $regex: _.chain(search_phrase)
           .deburr()
           // optimization note: pre-lowercasing both the content and regex should be better than using a case insensitive regex in mongo
@@ -123,3 +127,9 @@ export const get_search_terms_resolver =
           .value(),
       },
     });
+
+    return _.sortBy(
+      results,
+      (result) => result?.id || result[search_terms_key]
+    );
+  };
