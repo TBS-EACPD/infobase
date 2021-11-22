@@ -1,12 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import { escapeRegExp } from "src/general_utils";
+import escapeStringRegexp from "escape-string-regexp";
 
 const get_cleaned_sorted_words = _.memoize((search_phrase: string) =>
   _.chain(search_phrase)
     .deburr()
-    .thru(escapeRegExp)
+    .thru(escapeStringRegexp)
     .words()
     .uniq()
     .sortBy((word) => -word.length)
