@@ -397,7 +397,16 @@ const services = {
   name_function: (service) =>
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
   menu_content_function: default_menu_content_function,
-  query: (query) => query_search_services({ search_phrase: query }),
+  query: (query) =>
+    _.chain(query)
+      .words()
+      .uniq()
+      .sort()
+      .join(" ")
+      .thru((cache_hit_friendly_query) =>
+        query_search_services({ search_phrase: cache_hit_friendly_query })
+      )
+      .value(),
 };
 
 export {
