@@ -86,7 +86,6 @@ const get_column_config_defaults = (index: number) => ({
   is_sortable: true,
   is_summable: false,
   is_searchable: false,
-  show_dropdown_filter: true,
   sum_func: (sum: number, value: number) => sum + value,
   sum_initial_value: 0,
   visibility_toggleable: index !== 0,
@@ -111,11 +110,7 @@ const get_default_filter_options_by_column = _.memoize(
   (data: DisplayTableData[], col_configs_with_defaults: ColumnConfigs) =>
     _.chain(col_configs_with_defaults)
       .map((config, col_key) => ({ ...config, col_key }))
-      .filter(
-        (config) =>
-          (config.is_searchable as boolean) &&
-          (config.show_dropdown_filter as boolean)
-      )
+      .filter((config) => config.is_searchable as boolean)
       .map(({ col_key, plain_formatter }) => [
         col_key,
         _.chain(data)
@@ -336,13 +331,11 @@ export class _DisplayTable extends React.Component<
         _.chain(row)
           .map((cell_value: CellValue, column_key) => {
             const col_config = col_configs_with_defaults[column_key];
-            const show_dropdown_filter =
-              col_config.is_searchable && col_config.show_dropdown_filter;
             const cell_search_value = clean_search_string(
               col_config.plain_formatter(cell_value)
             );
             const filter_option_for_this_cell =
-              show_dropdown_filter &&
+              col_config.is_searchable &&
               (_.find(filter_options_by_column[column_key], {
                 id: cell_value,
               }) as FilterOption);
@@ -352,7 +345,7 @@ export class _DisplayTable extends React.Component<
                   cell_search_value,
                   clean_search_string(searches[column_key])
                 )) &&
-              (!show_dropdown_filter ||
+              (!col_config.is_searchable ||
                 (filter_option_for_this_cell &&
                   filter_option_for_this_cell.active))
             );
@@ -568,9 +561,6 @@ export class _DisplayTable extends React.Component<
                     col_configs_with_defaults[column_key].is_sortable;
                   const searchable =
                     col_configs_with_defaults[column_key].is_searchable;
-                  const show_dropdown_filter =
-                    searchable &&
-                    col_configs_with_defaults[column_key].show_dropdown_filter;
                   const is_dropdown_filter_applied =
                     _.reject(filter_options_by_column[column_key], "active")
                       .length > 0;
@@ -622,20 +612,16 @@ export class _DisplayTable extends React.Component<
                               }}
                               debounceTime={300}
                             />
-                            {show_dropdown_filter && (
-                              <DropdownFilter
-                                column_key={column_key}
-                                filter_options_by_column={
-                                  filter_options_by_column
-                                }
-                                column_searches={searches}
-                                set_filter_options={(
-                                  filter_options_by_column: _DisplayTableState["filter_options_by_column"]
-                                ) =>
-                                  this.setState({ filter_options_by_column })
-                                }
-                              />
-                            )}
+                            <DropdownFilter
+                              column_key={column_key}
+                              filter_options_by_column={
+                                filter_options_by_column
+                              }
+                              column_searches={searches}
+                              set_filter_options={(
+                                filter_options_by_column: _DisplayTableState["filter_options_by_column"]
+                              ) => this.setState({ filter_options_by_column })}
+                            />
                           </div>
                           {is_dropdown_filter_applied && (
                             <div className="input-bar__filter-applied">
