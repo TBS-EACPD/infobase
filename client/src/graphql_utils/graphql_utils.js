@@ -15,7 +15,13 @@ import { make_request } from "src/request_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
-export const get_api_url = _.memoize(async () => {
+const poke_server = (api_url, fetch_options, query_name = "poke_server") =>
+  make_request(
+    `${api_url}?query={ root(lang: "en") { non_field } }&query_name=${query_name}`,
+    { retries: 0, fetch_options: { cache: "no-cache", ...fetch_options } }
+  );
+
+const get_api_url = _.memoize(async () => {
   if (is_ci) {
     return `hacky_target_text_for_ci_to_replace_with_test_and_deploy_time_api_urls`;
   } else if (is_dev) {
@@ -27,9 +33,10 @@ export const get_api_url = _.memoize(async () => {
     // Can't just always use local host though, or else we can't locally serve dev builds to other devices
     const controller = new AbortController();
     const id_for_test_timeout = setTimeout(() => controller.abort(), 1000);
-    return await fetch(
-      `${local_dev_api_url}?query={ root(lang: "en") { non_field } }&query_name=dev_connection_test`,
-      { signal: controller.signal }
+    return await poke_server(
+      local_dev_api_url,
+      { signal: controller.signal },
+      "dev_connection_test"
     )
       .then((response) => {
         clearTimeout(id_for_test_timeout);
@@ -43,6 +50,9 @@ export const get_api_url = _.memoize(async () => {
     return prod_api_url;
   }
 });
+
+export const wake_up_graphql_cloud_function = () =>
+  get_api_url().then((api_url) => poke_server(api_url));
 
 const query_as_get_with_query_header = async (uri, options) => {
   // want GET requests for client side caching (safe to do given our cache busting scheme and read-only GraphQL API)
