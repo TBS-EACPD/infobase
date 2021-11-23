@@ -1,7 +1,7 @@
-import _ from "lodash";
-import React from "react";
-
 import escapeStringRegexp from "escape-string-regexp";
+import _ from "lodash";
+
+import React from "react";
 
 const get_cleaned_sorted_words = _.memoize((search_phrase: string) =>
   _.chain(search_phrase)
