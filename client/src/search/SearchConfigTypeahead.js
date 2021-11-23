@@ -1,18 +1,18 @@
 import _ from "lodash";
 import React from "react";
 
-import string_hash from "string-hash";
-
 import { Typeahead } from "src/components/index";
 
 import { log_standard_event } from "src/core/analytics";
+
+import { get_simplified_search_phrase } from "./search_utils";
 
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      query_value: "",
+      search_phrase: "",
     };
 
     this.is_unmounting = false;
@@ -24,24 +24,24 @@ export class SearchConfigTypeahead extends React.Component {
 
   componentDidUpdate() {
     const { search_configs } = this.props;
-    const { query_value } = this.state;
+    const { search_phrase } = this.state;
 
     _.each(search_configs, (search_config) => {
       const { config_name, query } = search_config;
 
       const is_not_loading_or_loaded = _.isUndefined(
-        this.get_query_result_state(config_name, query_value)
+        this.get_query_result_state(config_name, search_phrase)
       );
 
       if (is_not_loading_or_loaded) {
-        this.set_query_result_state(config_name, query_value, "loading", () =>
-          query(query_value).then(
+        this.set_query_result_state(config_name, search_phrase, "loading", () =>
+          query(search_phrase).then(
             (matches) =>
               !this.is_unmounting &&
               this.set_query_result_state(
                 config_name,
-                query_value,
-                this.results_from_matches(matches, query_value, search_config)
+                search_phrase,
+                this.results_from_matches(matches, search_phrase, search_config)
               )
           )
         );
@@ -50,20 +50,20 @@ export class SearchConfigTypeahead extends React.Component {
   }
   results_from_matches = (
     matches,
-    query_value,
+    search_phrase,
     { header_function, name_function, menu_content_function }
   ) =>
     _.map(matches, (match, index) => ({
       header: index === 0 && header_function(),
-      on_select: this.get_result_on_select(query_value, name_function, match),
-      content: menu_content_function(match, query_value, name_function),
+      on_select: this.get_result_on_select(search_phrase, name_function, match),
+      content: menu_content_function(match, search_phrase, name_function),
       plain_text: name_function(match),
     }));
-  get_result_on_select = (query_value, name_function, match) => () => {
+  get_result_on_select = (search_phrase, name_function, match) => () => {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-      MISC2: `Queried: ${query_value}. Selected: ${name_function(match)}`,
+      MISC2: `Queried: ${search_phrase}. Selected: ${name_function(match)}`,
     });
 
     if (_.isFunction(this.props.on_select)) {
@@ -71,46 +71,46 @@ export class SearchConfigTypeahead extends React.Component {
     }
 
     this.setState({
-      query_value: "",
+      search_phrase: "",
     });
   };
 
-  get_query_result_state_key = (config_name, query_value) =>
-    `${config_name}__${string_hash(query_value)}`;
-  get_query_result_state = (config_name, query_value) =>
-    this.state[this.get_query_result_state_key(config_name, query_value)];
+  get_query_result_state_key = (config_name, search_phrase) =>
+    `${config_name}__${get_simplified_search_phrase(search_phrase)}`;
+  get_query_result_state = (config_name, search_phrase) =>
+    this.state[this.get_query_result_state_key(config_name, search_phrase)];
   set_query_result_state = (
     config_name,
-    query_value,
+    search_phrase,
     state,
     callback = _.noop
   ) =>
     this.setState(
       {
-        [this.get_query_result_state_key(config_name, query_value)]: state,
+        [this.get_query_result_state_key(config_name, search_phrase)]: state,
       },
       callback
     );
 
-  on_query = (query_value) => {
+  on_query = (search_phrase) => {
     log_standard_event({
       SUBAPP: window.location.hash.replace("#", ""),
       MISC1: `TYPEAHEAD_SEARCH_QUERY`,
-      MISC2: `query: ${query_value}, search_configs: ${_.map(
+      MISC2: `query: ${search_phrase}, search_configs: ${_.map(
         this.props.search_configs,
         "config_name"
       )}`,
     });
 
-    this.setState({ query_value });
+    this.setState({ search_phrase });
   };
 
   render() {
     const { search_configs } = this.props;
-    const { query_value } = this.state;
+    const { search_phrase } = this.state;
 
     const maybe_results = _.flatMap(search_configs, ({ config_name }) =>
-      this.get_query_result_state(config_name, query_value)
+      this.get_query_result_state(config_name, search_phrase)
     );
 
     const still_loading_results = _.some(
@@ -124,7 +124,7 @@ export class SearchConfigTypeahead extends React.Component {
       <Typeahead
         {...this.props}
         on_query={this.on_query}
-        query_value={query_value}
+        query_value={search_phrase}
         results={results}
         loading_results={still_loading_results}
       />

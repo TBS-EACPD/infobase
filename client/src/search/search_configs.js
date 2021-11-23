@@ -12,13 +12,14 @@ import { Table } from "src/core/TableClass";
 import { textColor } from "src/style_constants/index";
 
 import {
+  get_simplified_search_phrase,
   search_phrase_to_all_words_regex,
   highlight_search_match,
   SearchHighlighter,
 } from "./search_utils";
 
-const get_re_matcher = (accessors, query) => (obj) => {
-  const regex = search_phrase_to_all_words_regex(query);
+const get_re_matcher = (accessors, search_phrase) => (obj) => {
+  const regex = search_phrase_to_all_words_regex(search_phrase);
 
   return _.chain(accessors)
     .map((accessor) => (_.isString(accessor) ? obj[accessor] : accessor(obj)))
@@ -32,8 +33,8 @@ const get_re_matcher = (accessors, query) => (obj) => {
     .value();
 };
 
-function create_re_matcher(query, accessors, config_name) {
-  const re_matcher = get_re_matcher(accessors, query);
+function create_re_matcher(search_phrase, accessors, config_name) {
+  const re_matcher = get_re_matcher(accessors, search_phrase);
 
   const nonce = _.random(0.1, 1.1);
   let nonce_use_count = 0;
@@ -44,11 +45,12 @@ function create_re_matcher(query, accessors, config_name) {
 }
 const memoized_re_matchers = _.memoize(
   create_re_matcher,
-  (query, accessors, config_name) => query + config_name
+  (search_phrase, accessors, config_name) =>
+    get_simplified_search_phrase(search_phrase) + config_name
 );
 
-const default_menu_content_function = (data, query_value, name_function) => (
-  <SearchHighlighter search={query_value} content={name_function(data)} />
+const default_menu_content_function = (data, search_phrase, name_function) => (
+  <SearchHighlighter search={search_phrase} content={name_function(data)} />
 );
 
 const org_attributes_to_match = [
@@ -139,14 +141,14 @@ const make_orgs_search_config = (options) => {
   return {
     ...org_templates,
     config_name,
-    query: (query) =>
+    query: (search_phrase) =>
       Promise.resolve(
         _.chain(org_data)
           .thru((data) => (include_gov ? [Gov.instance].concat(data) : data))
           .thru((data) => (reject_dead_orgs ? _.reject(data, "is_dead") : data))
           .filter((org) =>
             memoized_re_matchers(
-              query,
+              search_phrase,
               org_attributes_to_match,
               config_name
             )(org)
@@ -158,14 +160,14 @@ const make_orgs_search_config = (options) => {
 
 const all_dp_orgs = {
   ...org_templates,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(
         Dept.store.get_all(),
         (org) =>
           org.is_dp_org &&
           memoized_re_matchers(
-            query,
+            search_phrase,
             org_attributes_to_match,
             "all_dp_orgs"
           )(org)
@@ -207,11 +209,11 @@ const glossary = {
       />
     </Fragment>
   ),
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
         memoized_re_matchers(
-          query,
+          search_phrase,
           glossary_attributes_to_match,
           "glossary"
         )(glossary_entry)
@@ -224,11 +226,11 @@ const glossary_lite = {
   header_function: () => trivial_text_maker("glossary"),
   name_function: _.property("title"),
   menu_content_function: default_menu_content_function,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
         memoized_re_matchers(
-          query,
+          search_phrase,
           glossary_attributes_to_match,
           "glossary_lite"
         )(glossary_entry)
@@ -242,14 +244,14 @@ const gocos = {
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.GOCO.name}`,
   name_function: _.property("name"),
   menu_content_function: default_menu_content_function,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(
         ProgramTag.store.get_all(),
         (tag) =>
           tag.root.id === "GOCO" &&
           tag.has_programs &&
-          memoized_re_matchers(query, ["name"], "gocos")(tag)
+          memoized_re_matchers(search_phrase, ["name"], "gocos")(tag)
       )
     ),
 };
@@ -260,14 +262,14 @@ const how_we_help = {
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.HWH.name}`,
   name_function: _.property("name"),
   menu_content_function: default_menu_content_function,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(
         ProgramTag.store.get_all(),
         (tag) =>
           tag.root.id === "HWH" &&
           tag.has_programs &&
-          memoized_re_matchers(query, ["name"], "how_we_help")(tag)
+          memoized_re_matchers(search_phrase, ["name"], "how_we_help")(tag)
       )
     ),
 };
@@ -278,14 +280,14 @@ const who_we_help = {
     `${ProgramTag.subject_name} - ${ProgramTag.tag_roots_by_id.WWH.name}`,
   name_function: _.property("name"),
   menu_content_function: default_menu_content_function,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(
         ProgramTag.store.get_all(),
         (tag) =>
           tag.root.id === "WWH" &&
           tag.has_programs &&
-          memoized_re_matchers(query, ["name"], "who_we_help")(tag)
+          memoized_re_matchers(search_phrase, ["name"], "who_we_help")(tag)
       )
     ),
 };
@@ -295,7 +297,7 @@ const datasets = {
   header_function: () => trivial_text_maker("build_a_report"),
   name_function: (table) => table.title,
   menu_content_function: default_menu_content_function,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.chain(Table.store.get_all())
         .reject("reference_table")
@@ -315,7 +317,11 @@ const datasets = {
           table: t,
         }))
         .filter(
-          memoized_re_matchers(query, ["name", "flat_tag_titles"], "datasets")
+          memoized_re_matchers(
+            search_phrase,
+            ["name", "flat_tag_titles"],
+            "datasets"
+          )
         )
         .value()
     ),
@@ -362,11 +368,11 @@ const programs = {
       }
     }
   },
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(Program.store.get_all(), (program) =>
         memoized_re_matchers(
-          query,
+          search_phrase,
           ["name", "old_name", "activity_code"],
           "programs"
         )(program)
@@ -380,13 +386,17 @@ const crsos = {
   header_function: () => trivial_text_maker("core_resps"),
   name_function: program_or_crso_search_name,
   menu_content_function: default_menu_content_function,
-  query: (query) =>
+  query: (search_phrase) =>
     Promise.resolve(
       _.filter(
         CRSO.store.get_all(),
         (crso) =>
           crso.is_cr &&
-          memoized_re_matchers(query, ["name", "activity_code"], "crsos")(crso)
+          memoized_re_matchers(
+            search_phrase,
+            ["name", "activity_code"],
+            "crsos"
+          )(crso)
       )
     ),
 };
@@ -397,16 +407,10 @@ const services = {
   name_function: (service) =>
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
   menu_content_function: default_menu_content_function,
-  query: (query) =>
-    _.chain(query)
-      .words()
-      .uniq()
-      .sort()
-      .join(" ")
-      .thru((cache_hit_friendly_query) =>
-        query_search_services({ search_phrase: cache_hit_friendly_query })
-      )
-      .value(),
+  query: (search_phrase) =>
+    query_search_services({
+      search_phrase: get_simplified_search_phrase(search_phrase),
+    }),
 };
 
 export {
