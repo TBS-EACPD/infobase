@@ -3,28 +3,31 @@ import React from "react";
 
 import { escapeRegExp } from "src/general_utils";
 
-const clean_phrase = (search_phrase: string) =>
-  escapeRegExp(_.deburr(search_phrase));
-
-const get_length_sorted_words = (search_phrase: string) =>
+const get_cleaned_sorted_words = _.memoize((search_phrase: string) =>
   _.chain(search_phrase)
+    .deburr()
+    .thru(escapeRegExp)
     .words()
     .uniq()
     .sortBy((word) => -word.length)
-    .value();
+    .value()
+);
+
+// optimization tip: anywhere caching/memoization on a search phrase occurs, should use the simplified version instead
+// assumption: client AND server side search patterns, by construction, are invariant under a pre-application of this simplification function
+const get_simplified_search_phrase = (search_phrase: string) =>
+  _.chain(search_phrase).thru(get_cleaned_sorted_words).join(" ").value();
 
 const search_phrase_to_all_words_regex = (search_phrase: string) =>
   _.chain(search_phrase)
-    .thru(clean_phrase)
-    .thru(get_length_sorted_words)
+    .thru(get_cleaned_sorted_words)
     .reduce((pattern, word) => pattern + `(?=.*?${word})`, "^")
     .thru((pattern) => new RegExp(pattern, "i"))
     .value();
 
 const search_phrase_to_any_word_regex = (search_phrase: string) =>
   _.chain(search_phrase)
-    .thru(clean_phrase)
-    .thru(get_length_sorted_words)
+    .thru(get_cleaned_sorted_words)
     .join("|")
     .thru((pattern) => new RegExp(`(${pattern})`, "ig"))
     .value();
@@ -94,6 +97,7 @@ const format_data = <Data extends unknown>(
 });
 
 export {
+  get_simplified_search_phrase,
   search_phrase_to_all_words_regex,
   search_phrase_to_any_word_regex,
   highlight_search_match,
