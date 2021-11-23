@@ -22,7 +22,10 @@ import { populate_initial_stores_from_lookups } from "src/models/populate_initia
 import { initialize_analytics } from "src/core/analytics";
 import { Table } from "src/core/TableClass";
 
-import { get_client } from "src/graphql_utils/graphql_utils";
+import {
+  get_client,
+  wake_up_graphql_cloud_function,
+} from "src/graphql_utils/graphql_utils";
 
 import orgEmployeeAgeGroup from "src/tables/orgEmployeeAgeGroup";
 import orgEmployeeAvgAge from "src/tables/orgEmployeeAvgAge";
@@ -73,6 +76,7 @@ function bootstrapper(App, done) {
   load_fonts();
 
   initialize_analytics();
+  wake_up_graphql_cloud_function();
 
   populate_initial_stores_from_lookups().then(() => {
     _.each(table_defs, (table_def) =>
