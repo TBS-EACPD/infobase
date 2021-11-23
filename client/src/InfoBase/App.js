@@ -61,7 +61,7 @@ const Survey = React.lazy(() => import("src/Survey/Survey"));
 const SingleServiceRoute = React.lazy(() =>
   import("../panels/panel_routes/SingleServiceRoute")
 );
-const ServiceInventory = retrying_react_lazy(() =>
+const ServiceInventory = React.lazy(() =>
   import("src/service_inventory/ServiceInventory")
 );
 
