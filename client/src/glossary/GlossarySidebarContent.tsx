@@ -22,7 +22,7 @@ interface SidebarContentProps {
 interface SidebarContentState {
   title: string | null;
   def: string | "";
-  scrollEl: string | undefined;
+  scrollEl: string;
 }
 
 export interface ResultProps {
@@ -43,7 +43,7 @@ export class SidebarContent extends React.Component<
     this.state = {
       title: null,
       def: "",
-      scrollEl: undefined,
+      scrollEl: "",
     };
   }
 
@@ -64,11 +64,13 @@ export class SidebarContent extends React.Component<
     }
   }
 
-  closeDefinition(ix: string | undefined) {
+  closeDefinition() {
     this.props.closeItem();
-    this.setState({
-      scrollEl: ix,
-    });
+    if (this.state.title) {
+      this.setState({
+        scrollEl: this.state.title.replace(/\s+/g, ""),
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -83,10 +85,10 @@ export class SidebarContent extends React.Component<
     }
   }
 
-  openDefinition(key: string, ix: string | undefined) {
-    this.props.openItem(key);
+  openDefinition(item: ResultProps) {
+    this.props.openItem(item.id);
     this.setState({
-      scrollEl: ix,
+      scrollEl: item.title.replace(/\s+/g, ""),
     });
   }
 
@@ -94,17 +96,18 @@ export class SidebarContent extends React.Component<
   handleKeyPress(
     e: React.KeyboardEvent<HTMLSpanElement>,
     action: string,
-    key: string,
-    ix: string | undefined
+    item: ResultProps | null
   ) {
     if (e.key === "Enter") {
       switch (action) {
         case "close":
-          this.closeDefinition(ix);
+          this.closeDefinition();
           break;
 
         case "open":
-          this.openDefinition(key, ix);
+          if (item) {
+            this.openDefinition(item);
+          }
           break;
       }
     }
@@ -158,17 +161,8 @@ export class SidebarContent extends React.Component<
               <span
                 role="button"
                 className="back-button"
-                onClick={() =>
-                  this.closeDefinition(this.state.title?.replace(/\s+/g, ""))
-                }
-                onKeyDown={(e) =>
-                  this.handleKeyPress(
-                    e,
-                    "close",
-                    "",
-                    this.state.title?.replace(/\s+/g, "")
-                  )
-                }
+                onClick={() => this.closeDefinition()}
+                onKeyDown={(e) => this.handleKeyPress(e, "close", null)}
                 tabIndex={0}
               >
                 <IconArrow
@@ -194,20 +188,8 @@ export class SidebarContent extends React.Component<
                     <span
                       role="button"
                       id={item.title.replace(/\s+/g, "")}
-                      onClick={() =>
-                        this.openDefinition(
-                          item.id,
-                          item.title.replace(/\s+/g, "")
-                        )
-                      }
-                      onKeyDown={(e) =>
-                        this.handleKeyPress(
-                          e,
-                          "open",
-                          item.id,
-                          item.title.replace(/\s+/g, "")
-                        )
-                      }
+                      onClick={() => this.openDefinition(item)}
+                      onKeyDown={(e) => this.handleKeyPress(e, "open", item)}
                       tabIndex={0}
                     >
                       <InfoBaseHighlighter
