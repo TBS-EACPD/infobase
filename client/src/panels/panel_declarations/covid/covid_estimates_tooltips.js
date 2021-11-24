@@ -14,34 +14,44 @@ const tooltips_by_topic = {
       fiscal_years: [2021],
       subject_ids: ["gov"],
       topic_ids: ["MAINS"],
-      text: text_maker("covid_mains_2021_note"),
+      text: text_maker("covid_2021_mains_note"),
     },
     {
       fiscal_years: [2021],
       subject_ids: ["gov"],
       topic_ids: ["SEA"],
-      text: text_maker("covid_supps_a_2021_note"),
+      text: text_maker("covid_2021_supps_a_note"),
+    },
+    {
+      fiscal_years: [2021],
+      subject_ids: ["gov"],
+      topic_ids: ["SEB"],
+      text: text_maker("covid_2021_supps_b_note"),
     },
   ],
   measure: [
     {
-      fiscal_years: [2020, 2021],
+      fiscal_years: [2021],
       subject_ids: ["gov", 280],
       topic_ids: ["COV082"],
-      text: text_maker("covid_estimates_COV082_2020_tooltip"),
+      text: text_maker(
+        "covid_estimates_2021_mains_COV082_2020_reprofile_tooltip"
+      ),
     },
     {
-      fiscal_years: [2020, 2021],
+      fiscal_years: [2021],
       subject_ids: ["gov", 280],
       topic_ids: ["COV115"],
-      text: text_maker("covid_estimates_COV115_2020_tooltip"),
+      text: text_maker(
+        "covid_estimates_2021_mains_COV115_2020_reprofile_tooltip"
+      ),
     },
     {
       fiscal_years: [2021],
       subject_ids: ["*"],
-      topic_ids: ["COV043", "COV113", "COV118", "COV145", "COV204"],
+      topic_ids: ["COV043", "COV082", "COV113", "COV118", "COV145", "COV204"],
       text: text_maker(
-        "covid_estimates_supps_a_partial_reprofile_2020_tooltip"
+        "covid_estimates_2021_supps_a_2020_partial_reprofile_tooltip"
       ),
     },
     {
@@ -77,7 +87,25 @@ const tooltips_by_topic = {
         "COV154",
         "COV231",
       ],
-      text: text_maker("covid_estimates_supps_a_full_reprofile_2020_tooltip"),
+      text: text_maker(
+        "covid_estimates_2021_supps_a_2020_full_reprofile_tooltip"
+      ),
+    },
+    {
+      fiscal_years: [2021],
+      subject_ids: ["*"],
+      topic_ids: [
+        "COV032",
+        "COV088",
+        "COV112",
+        "COV119",
+        "COV121",
+        "COV125",
+        "COV134",
+      ],
+      text: text_maker(
+        "covid_estimates_2021_supps_b_2020_full_reprofile_tooltip"
+      ),
     },
   ],
 };
