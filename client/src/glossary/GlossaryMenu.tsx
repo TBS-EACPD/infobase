@@ -102,7 +102,17 @@ export class GlossaryMenu extends React.Component<
   render() {
     const glossary_placeholder = {
       en: "Search for a term",
-      fr: "Rechercher un terme utilisé dans InfoBase du GC",
+      fr: "Rechercher un terme",
+    }[lang];
+
+    const glossary_example = {
+      en: 'Example: "Expenditures"',
+      fr: 'Exemple: "Dépenses"',
+    }[lang];
+
+    const glossary_title = {
+      en: "Glossary",
+      fr: "Glossaire",
     }[lang];
 
     return (
@@ -139,7 +149,7 @@ export class GlossaryMenu extends React.Component<
                 className="glossary-header"
                 tabIndex={-1}
               >
-                Glossary
+                {glossary_title}
               </h1>
               <div className="search-wrapper">
                 <SearchConfigSidebar
@@ -149,9 +159,7 @@ export class GlossaryMenu extends React.Component<
                   setQuery={(query: string) => this.setQuery(query)}
                 />
               </div>
-              <div className="glossary-example">
-                Example: &quot;Capital Vote&quot;
-              </div>
+              <div className="glossary-example">{glossary_example}</div>
             </div>
           </div>
           <div className="glossary-sidebar-content-wrapper">
