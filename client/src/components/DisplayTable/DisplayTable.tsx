@@ -127,7 +127,8 @@ const get_default_filter_options_by_column = _.memoize(
           .value(),
       ])
       .fromPairs()
-      .value()
+      .value(),
+  (...args) => JSON.stringify(args)
 );
 const get_col_configs_with_defaults = (column_configs: ColumnConfigs) =>
   _.mapValues(column_configs, (supplied_column_config: ColumnConfig) => ({
@@ -157,11 +158,13 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
     .pickBy((col) => col.is_searchable)
     .mapValues(() => "")
     .value();
-
+  const t0 = performance.now();
   const filter_options_by_column = get_default_filter_options_by_column(
     data,
     col_configs_with_defaults
   );
+  const t1 = performance.now();
+  console.log(t1 - t0);
 
   return {
     visible_col_keys,
