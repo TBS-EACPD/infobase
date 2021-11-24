@@ -20,6 +20,7 @@ interface SidebarContentProps {
 interface SidebarContentState {
   title: string | null;
   def: string | "";
+  scrollEl: string | null;
 }
 
 export interface ResultProps {
@@ -33,12 +34,14 @@ export class SidebarContent extends React.Component<
   SidebarContentProps,
   SidebarContentState
 > {
+  listRef = React.createRef<HTMLDivElement>();
   constructor(props: SidebarContentProps) {
     super(props);
 
     this.state = {
       title: null,
       def: "",
+      scrollEl: null,
     };
   }
 
@@ -63,15 +66,31 @@ export class SidebarContent extends React.Component<
     this.props.closeItem();
   }
 
-  openDefinition(key: string) {
-    this.props.openItem(key);
+  componentDidUpdate() {
+    if (this.state.scrollEl) {
+      const el = document.getElementById(this.state.scrollEl);
+      const scrollDiv = document.getElementById("gloss-sidebar");
+
+      if (el && scrollDiv) {
+        scrollDiv.scrollTop = el.offsetTop;
+        el.focus();
+      }
+    }
   }
 
-  //place holder while I get passing functions to work...
+  openDefinition(key: string, ix: string) {
+    this.props.openItem(key);
+    this.setState({
+      scrollEl: "gloss" + ix,
+    });
+  }
+
+  //place holder arguments while I get passing functions to work...
   handleKeyPress(
     e: React.KeyboardEvent<HTMLSpanElement>,
     action: string,
-    key: string
+    key: string,
+    ix: string
   ) {
     if (e.key === "Enter") {
       switch (action) {
@@ -80,7 +99,7 @@ export class SidebarContent extends React.Component<
           break;
 
         case "open":
-          this.openDefinition(key);
+          this.openDefinition(key, ix);
           break;
       }
     }
@@ -115,7 +134,7 @@ export class SidebarContent extends React.Component<
   render() {
     const items_by_letter = this.get_glossary_items_by_letter();
     return (
-      <div className="glossary-sidebar-content">
+      <div className="glossary-sidebar-content" id="gloss-sidebar">
         {!this.props.showList ? (
           <div className="defintion-wrapper">
             <div className="item-title">{this.state.title}</div>
@@ -130,7 +149,7 @@ export class SidebarContent extends React.Component<
                 role="button"
                 className="back-button"
                 onClick={() => this.closeDefinition()}
-                onKeyDown={(e) => this.handleKeyPress(e, "close", "")}
+                onKeyDown={(e) => this.handleKeyPress(e, "close", "", "")}
                 tabIndex={0}
               >
                 <IconArrow
@@ -155,8 +174,11 @@ export class SidebarContent extends React.Component<
                   <div key={ix} className="glossary-title">
                     <span
                       role="button"
-                      onClick={() => this.openDefinition(item.id)}
-                      onKeyDown={(e) => this.handleKeyPress(e, "open", item.id)}
+                      id={"gloss" + letter + ix}
+                      onClick={() => this.openDefinition(item.id, letter + ix)}
+                      onKeyDown={(e) =>
+                        this.handleKeyPress(e, "open", item.id, letter + ix)
+                      }
                       tabIndex={0}
                     >
                       <InfoBaseHighlighter
