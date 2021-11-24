@@ -27,9 +27,10 @@ covid_2021_supps_a_note:
 covid_2021_supps_b_note:
   transform: [markdown]
   en: |
-    TODO, text is in email but contains unreleased figures
+    The TODO billion identified in the Supplementary Estimates (B) for COVID-19 includes approximately TODO million that has been reprofiled from 2020-21.
   fr: |
-    TODO
+    Les TODO milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ TODO millions de
+    dollars qui ont été reportés de 2020-2021.
 
 # Measure table tooltips
 covid_estimates_2021_mains_COV082_2020_reprofile_tooltip:
@@ -59,25 +60,20 @@ covid_estimates_2021_mains_COV115_2020_reprofile_tooltip:
 covid_estimates_2021_supps_a_2020_partial_reprofile_tooltip:
   transform: [markdown]
   en: |
-    A portion of the Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22.  
-
+    A portion of the Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22.
     The voted authorities for the Supplementary Estimates A amounts for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
-    Une partie du montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021, mais a ensuite été reportée à 2021-2022.  
-
-    TODO
-  # Ces autorisations votées de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics du 2021.
+    Une partie du montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021, mais a ensuite été reportée à 2021-2022.
+    Ces autorisations votées pour les montants du Budget supplémentaire des dépenses A de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics du 2021.
 
 covid_estimates_2021_supps_a_2020_full_reprofile_tooltip:
   transform: [markdown]
   en: |
-    The Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22.  
-
+    The Supplementary Estimates A amount was originally approved in 2020-21, but has subsequently been reprofiled to 2021-22.
     The voted authorities for the Supplementary Estimates A amounts for 2020-21 will be reported as frozen allotments in the 2021 Public Accounts.
   fr: |
-    Le montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022.  
-
-    TODO
+    Le montant inscrit au budget supplémentaire des dépenses A a été approuvé en 2020-2021 mais a ensuite été reporté à 2021-2022.
+    Ces autorisations votées pour les montants du Budget supplémentaire des dépenses A de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics du 2021.
 
 covid_estimates_2021_supps_b_2020_full_reprofile_tooltip:
   en: |
