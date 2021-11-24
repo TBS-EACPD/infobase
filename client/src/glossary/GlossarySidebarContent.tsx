@@ -4,6 +4,8 @@ import React from "react";
 import "./GlossaryMenu.scss";
 import { glossaryEntryStore } from "src/models/glossary";
 
+import { lang } from "src/core/injected_build_constants";
+
 import { IconArrow } from "src/icons/icons";
 import { InfoBaseHighlighter } from "src/search/search_utils";
 
@@ -20,7 +22,7 @@ interface SidebarContentProps {
 interface SidebarContentState {
   title: string | null;
   def: string | "";
-  scrollEl: string | null;
+  scrollEl: string | undefined;
 }
 
 export interface ResultProps {
@@ -41,7 +43,7 @@ export class SidebarContent extends React.Component<
     this.state = {
       title: null,
       def: "",
-      scrollEl: null,
+      scrollEl: undefined,
     };
   }
 
@@ -62,8 +64,11 @@ export class SidebarContent extends React.Component<
     }
   }
 
-  closeDefinition() {
+  closeDefinition(ix: string | undefined) {
     this.props.closeItem();
+    this.setState({
+      scrollEl: ix,
+    });
   }
 
   componentDidUpdate() {
@@ -78,10 +83,10 @@ export class SidebarContent extends React.Component<
     }
   }
 
-  openDefinition(key: string, ix: string) {
+  openDefinition(key: string, ix: string | undefined) {
     this.props.openItem(key);
     this.setState({
-      scrollEl: "gloss" + ix,
+      scrollEl: ix,
     });
   }
 
@@ -90,12 +95,12 @@ export class SidebarContent extends React.Component<
     e: React.KeyboardEvent<HTMLSpanElement>,
     action: string,
     key: string,
-    ix: string
+    ix: string | undefined
   ) {
     if (e.key === "Enter") {
       switch (action) {
         case "close":
-          this.closeDefinition();
+          this.closeDefinition(ix);
           break;
 
         case "open":
@@ -132,6 +137,11 @@ export class SidebarContent extends React.Component<
   }
 
   render() {
+    const back_text = {
+      en: "Full list",
+      fr: "Liste complète",
+    }[lang];
+
     const items_by_letter = this.get_glossary_items_by_letter();
     return (
       <div className="glossary-sidebar-content" id="gloss-sidebar">
@@ -148,8 +158,17 @@ export class SidebarContent extends React.Component<
               <span
                 role="button"
                 className="back-button"
-                onClick={() => this.closeDefinition()}
-                onKeyDown={(e) => this.handleKeyPress(e, "close", "", "")}
+                onClick={() =>
+                  this.closeDefinition(this.state.title?.replace(/\s+/g, ""))
+                }
+                onKeyDown={(e) =>
+                  this.handleKeyPress(
+                    e,
+                    "close",
+                    "",
+                    this.state.title?.replace(/\s+/g, "")
+                  )
+                }
                 tabIndex={0}
               >
                 <IconArrow
@@ -158,7 +177,7 @@ export class SidebarContent extends React.Component<
                   color="white"
                   alternate_color={false}
                 />
-                {"Back"}
+                {back_text}
               </span>
             </div>
           </div>
@@ -174,10 +193,20 @@ export class SidebarContent extends React.Component<
                   <div key={ix} className="glossary-title">
                     <span
                       role="button"
-                      id={"gloss" + letter + ix}
-                      onClick={() => this.openDefinition(item.id, letter + ix)}
+                      id={item.title.replace(/\s+/g, "")}
+                      onClick={() =>
+                        this.openDefinition(
+                          item.id,
+                          item.title.replace(/\s+/g, "")
+                        )
+                      }
                       onKeyDown={(e) =>
-                        this.handleKeyPress(e, "open", item.id, letter + ix)
+                        this.handleKeyPress(
+                          e,
+                          "open",
+                          item.id,
+                          item.title.replace(/\s+/g, "")
+                        )
                       }
                       tabIndex={0}
                     >

@@ -119,7 +119,7 @@
   background-color: $secondaryColor;
   height: calc(100vh - 200px);
   padding: 15px;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .glossary-letter {
@@ -160,7 +160,7 @@
 }
 
 .defintion-wrapper {
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .glossary__search-bar {
