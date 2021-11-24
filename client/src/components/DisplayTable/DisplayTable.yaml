@@ -22,19 +22,19 @@ show_all:
 filters_applied:
   transform: [markdown]
   en: _Filters applied_
-  fr: TODO
+  fr: _Filtres utilisés_
 search_column:
   en: Search column
-  fr: TODO
+  fr: Colonne de recherche
 search_filter_options:
   en: Search these filter options
-  fr: TODO
+  fr: Recherche dans ces options de filtre
 filter_data:
   en: Filter data
   fr: Filtrer les données
 no_data_table:
   en: No data available for this table. Please check any filters applied.
-  fr: Aucune donnée n'est disponible pour ce tableau. TODO
+  fr: Aucune donnée n'est disponible pour ce tableau. Veuillez vérifier les filtres utilisés.
 ellipsis_end:
   transform: [handlebars]
   en: Page {{page_num}}. Click this, then move right to view more options.
