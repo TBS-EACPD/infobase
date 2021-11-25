@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React from "react";
 
-import { Typeahead } from "src/components/index";
-
 import { log_standard_event } from "src/core/analytics";
 
 import { get_simplified_search_phrase } from "./search_utils";
+
+import { SelectInput } from "./SelectInput";
 
 export class SearchConfigTypeahead extends React.Component {
   constructor(props) {
@@ -68,6 +68,7 @@ export class SearchConfigTypeahead extends React.Component {
       on_select: this.get_result_on_select(search_phrase, name_function, match),
       content: menu_content_function(match, search_phrase, name_function),
       plain_text: name_function(match),
+      glossary_data: match,
     }));
   get_result_on_select = (search_phrase, name_function, match) => () => {
     log_standard_event({
@@ -131,7 +132,7 @@ export class SearchConfigTypeahead extends React.Component {
     const results = !still_loading_results ? maybe_results : [];
 
     return (
-      <Typeahead
+      <SelectInput
         {...this.props}
         on_query={this.on_query}
         query_value={search_phrase}
