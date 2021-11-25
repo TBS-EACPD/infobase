@@ -7,7 +7,7 @@ import { glossaryEntryStore } from "src/models/glossary";
 import { lang } from "src/core/injected_build_constants";
 
 import { IconArrow } from "src/icons/icons";
-import { InfoBaseHighlighter } from "src/search/search_utils";
+import { SearchHighlighter } from "src/search/search_utils";
 
 interface SidebarContentProps {
   title: string | null;
@@ -192,7 +192,7 @@ export class SidebarContent extends React.Component<
                       onKeyDown={(e) => this.handleKeyPress(e, "open", item)}
                       tabIndex={0}
                     >
-                      <InfoBaseHighlighter
+                      <SearchHighlighter
                         search={this.props.query}
                         content={item.title}
                       />

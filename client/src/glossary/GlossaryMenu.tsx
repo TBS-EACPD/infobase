@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import _ from "lodash";
 import React from "react";
 
@@ -8,7 +9,8 @@ import { lang } from "src/core/injected_build_constants";
 import { IconX } from "src/icons/icons";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
-import { SearchConfigSidebar } from "src/search/SearchConfigSidebar";
+
+import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
 import { SidebarContent } from "./GlossarySidebarContent";
 
@@ -74,9 +76,17 @@ export class GlossaryMenu extends React.Component<
     }
   }
 
-  getResults = (childData: ResultProps[]) => {
+  getResults = (childData: any) => {
+    const test = _.map(childData, (data) => ({
+      id: data.glossary_data.id,
+      title: data.glossary_data.title,
+      translation: data.glossary_data.translation,
+      raw_definition: data.glossary_data.raw_defintion,
+      get_compiled_definition: data.glossary_data.get_compiled_definition,
+    }));
+
     this.setState({
-      results: childData,
+      results: test,
     });
     this.props.setList(true);
   };
@@ -152,7 +162,8 @@ export class GlossaryMenu extends React.Component<
                 {glossary_title}
               </h1>
               <div className="search-wrapper">
-                <SearchConfigSidebar
+                <SearchConfigTypeahead
+                  type={"glossary-sidebar"}
                   placeholder={glossary_placeholder}
                   search_configs={[glossary_search_config]}
                   getResults={(data: ResultProps[]) => this.getResults(data)}
