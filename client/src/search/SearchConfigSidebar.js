@@ -27,8 +27,10 @@ export class SearchConfigSidebar extends React.Component {
     const { query_value } = this.state;
 
     if (query_value) {
-      const all_options = this.get_all_options(search_configs);
+      const all_options = this.get_all_options(search_configs).then();
       const config_groups = this.get_config_groups(search_configs);
+
+      console.log(all_options);
 
       return _.chain(all_options)
         .filter(({ config_group_index, data }) =>
@@ -54,11 +56,13 @@ export class SearchConfigSidebar extends React.Component {
   }
   get_all_options = _.memoize((search_configs) =>
     _.flatMap(search_configs, (search_config, ix) =>
-      _.map(search_config.get_data(), (data) => ({
-        data,
-        name: search_config.name_function(data),
-        config_group_index: ix,
-      }))
+      search_config.query(this.state.query_value).then((matches) =>
+        _.map(matches, (data) => ({
+          data,
+          name: search_config.name_function(data),
+          config_group_index: ix,
+        }))
+      )
     )
   );
   get_config_groups = _.memoize((search_configs) =>
