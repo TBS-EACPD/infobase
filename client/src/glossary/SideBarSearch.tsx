@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars-experimental */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import _ from "lodash";
 import React from "react";
 
@@ -11,6 +13,11 @@ const SideBarSearchDefaultProps = {
 
 type SideBarSearchProps = typeof SideBarSearchDefaultProps & {
   on_query: (str: string) => void;
+  query_value: string;
+  results: any;
+  loading_results?: boolean;
+  getResults?: any;
+  setQuery?: any;
 };
 
 interface SideBarSearchState {
@@ -27,6 +34,12 @@ export class SideBarSearch extends React.Component<
     super(props);
   }
 
+  callback = (query: any) => {
+    this.props.on_query(query);
+    this.props.getResults(this.props.results);
+    this.props.setQuery(this.props.query_value);
+  };
+
   render() {
     const { placeholder, on_query } = this.props;
 
@@ -39,7 +52,7 @@ export class SideBarSearch extends React.Component<
         </div>
         <DebouncedTextInput
           placeHolder={placeholder}
-          updateCallback={on_query}
+          updateCallback={this.callback}
         />
       </div>
     );

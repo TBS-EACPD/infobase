@@ -186,6 +186,7 @@ const EverythingSearch = withRouter(
       return (
         <div className="col-12 col-lg-12 p-0">
           <SearchConfigTypeahead
+            type={"typeahead"}
             placeholder={placeholder}
             search_configs={this.get_search_configs()}
             utility_buttons={
