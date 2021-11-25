@@ -111,21 +111,40 @@ const get_default_filter_options_by_column = _.memoize(
     _.chain(col_configs_with_defaults)
       .map((config, col_key) => ({ ...config, col_key }))
       .filter((config) => config.is_searchable as boolean)
-      .map(({ col_key, plain_formatter }) => [
-        col_key,
-        _.chain(data)
-          .map(col_key)
-          .uniq()
-          .sort()
-          .map((col_data) => ({
-            id: col_data,
-            label: (plain_formatter as (value: CellValue) => CellValue)(
-              col_data
-            ),
-            active: true,
-          }))
-          .value(),
-      ])
+      .map((config) => {
+        const { col_key, plain_formatter, sort_func } = config as {
+          col_key: string;
+          plain_formatter: (value: CellValue) => CellValue;
+          sort_func: (
+            plain_a: CellValue,
+            plain_b: CellValue,
+            descending: boolean,
+            cell_value_a: CellValue,
+            cell_value_b: CellValue
+          ) => 1 | 0 | -1;
+        };
+        return [
+          col_key,
+          _.chain(data)
+            .map(col_key)
+            .uniq()
+            .sort((value_a: CellValue, value_b: CellValue) =>
+              sort_func(
+                plain_formatter(value_a),
+                plain_formatter(value_b),
+                true,
+                value_a,
+                value_b
+              )
+            )
+            .map((col_data) => ({
+              id: col_data,
+              label: plain_formatter(col_data),
+              active: true,
+            }))
+            .value(),
+        ];
+      })
       .fromPairs()
       .value(),
   (...args) => JSON.stringify(args)
@@ -158,13 +177,10 @@ const get_default_state_from_props = (props: _DisplayTableProps) => {
     .pickBy((col) => col.is_searchable)
     .mapValues(() => "")
     .value();
-  const t0 = performance.now();
   const filter_options_by_column = get_default_filter_options_by_column(
     data,
     col_configs_with_defaults
   );
-  const t1 = performance.now();
-  console.log(t1 - t0);
 
   return {
     visible_col_keys,
