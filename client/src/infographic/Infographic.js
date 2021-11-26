@@ -21,7 +21,10 @@ import {
 
 import { log_standard_event } from "src/core/analytics";
 import { ensure_loaded } from "src/core/ensure_loaded";
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import {
+  services_feature_flag,
+  is_a11y_mode,
+} from "src/core/injected_build_constants";
 import { StandardRouteContainer } from "src/core/NavComponents";
 import { redirect_with_msg } from "src/core/RedirectHeader";
 
@@ -190,7 +193,7 @@ class InfoGraph_ extends React.Component {
             initial_search_options={{
               include_orgs_normal_data: true,
               include_orgs_limited_data: true,
-              include_services: true,
+              ...(services_feature_flag && { include_services: true }),
               include_crsos: true,
               include_programs: true,
               include_tags_goco: true,
