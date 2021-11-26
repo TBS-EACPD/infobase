@@ -94,10 +94,25 @@ class GranularView extends React.Component {
         }
       : {};
 
+    const table_data = grouping_default_or_dept
+      ? _.map(flat_data, (row) => {
+          const org = Dept.store.lookup(row.dept);
+          return {
+            dept: org.name,
+            legal_title: org.legal_title ? org.legal_title : org.name,
+            ..._.chain(cols)
+              .filter((col) => _.has(row, col.nick))
+              .map(({ nick }) => [nick, row[nick]])
+              .fromPairs()
+              .value(),
+          };
+        })
+      : flat_data;
+
     const column_configs = {
       ...dept_and_legal_cols,
       ..._.chain(cols)
-        .filter((col) => _.has(flat_data[0], col.nick))
+        .filter((col) => _.has(table_data[0], col.nick))
         .map(
           (
             {
@@ -130,21 +145,6 @@ class GranularView extends React.Component {
         .fromPairs()
         .value(),
     };
-
-    const table_data = grouping_default_or_dept
-      ? _.map(flat_data, (row) => {
-          const org = Dept.store.lookup(row.dept);
-          return {
-            dept: org.name,
-            legal_title: org.legal_title ? org.legal_title : org.name,
-            ..._.chain(cols)
-              .filter((col) => _.has(row, col.nick))
-              .map(({ nick }) => [nick, row[nick]])
-              .fromPairs()
-              .value(),
-          };
-        })
-      : flat_data;
 
     const dropdown_content = (
       <div className="group_filter_dropdown">
@@ -201,7 +201,7 @@ class GranularView extends React.Component {
       <DisplayTable
         data={table_data}
         column_configs={column_configs}
-        util_components={display_table_custom_util}
+        util_components={false && display_table_custom_util} // TODO bugged when url state selects a limited number of data columns, somewhat related to issue #1301
         unsorted_initial={true}
       />
     );
