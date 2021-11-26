@@ -338,7 +338,6 @@ export default class EstimatesExplorerComponent extends React.Component {
                     ? "{{est_next_year}}_estimates"
                     : "{{est_in_year}}_estimates",
                 ],
-                dimension: "by_estimates_doc",
                 filter: estimates_docs[doc_code][lang],
               }),
             }}

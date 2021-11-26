@@ -14,8 +14,6 @@ import { make_store } from "src/models/utils/make_store";
 import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
 
-import { text_maker } from "src/tables/table_common";
-
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { lang } from "./injected_build_constants";
 
@@ -129,7 +127,6 @@ export class Table {
         group: "*",
         table: "*",
       },
-      horizontal_group_sort: _.identity,
       sort: _.identity,
       classification: "none",
       link: { en: "", fr: "" }, //some handlebar templates will crash if they don't see a link
@@ -357,7 +354,7 @@ export class Table {
     ) {
       return col.fully_qualified_name;
     }
-    return text_maker(grouping);
+    return trivial_text_maker(grouping);
   }
 
   // input should be an array of lowest-level (i.e. exist in table.unique_headers) columns to be included

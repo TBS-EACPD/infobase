@@ -1,7 +1,8 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { trivial_text_maker, year_templates } from "./table_common";
+import { trivial_text_maker } from "src/models/text";
+import { year_templates } from "src/models/years";
 
 import text from "./orgEmployeeAvgAge.yaml";
 

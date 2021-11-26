@@ -1,9 +1,8 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import { trivial_text_maker } from "src/models/text";
-
-import { text_maker, m, year_templates } from "./table_common";
+import { trivial_text_maker, run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
 
 import text from "./orgVoteStatPa.yaml";
 
@@ -110,7 +109,7 @@ export default {
             grouping_col_value: function (row) {
               return [
                 "desc",
-                text_maker(row.votestattype === 999 ? "stat" : "voted"),
+                trivial_text_maker(row.votestattype === 999 ? "stat" : "voted"),
               ];
             },
           },
@@ -156,7 +155,7 @@ export default {
     exp_auth_by_year: function (year, format) {
       format = format === undefined ? false : true;
       var vals = this.sum([year + "auth", year + "exp"], { format: format });
-      return [m(year), vals[year + "auth"], vals[year + "exp"]];
+      return [run_template(year), vals[year + "auth"], vals[year + "exp"]];
     },
     voted_items: function (cut_off) {
       this.vote_stat_query = vote_stat_query;

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 
-import { text_maker } from "src/tables/table_common";
+import { trivial_text_maker } from "src/models/text";
 
 class DebouncedTextInput extends React.Component {
   render() {
@@ -31,7 +31,7 @@ class DebouncedTextInput extends React.Component {
       <input
         id={unique_id}
         type="text"
-        aria_label={a11y_label || text_maker("text_input")}
+        aria_label={a11y_label || trivial_text_maker("text_input")}
         className={classNames("form-control", inputClassName)}
         style={style}
         placeholder={placeHolder || ""}

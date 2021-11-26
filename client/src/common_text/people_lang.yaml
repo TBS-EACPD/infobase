@@ -14,9 +14,6 @@ percentage_of_EX_employees:
 ex_level:
   en: Executive Level
   fr: Niveaux cadres supérieurs
-ex_level_condensed:
-  en: Condensed levels
-  fr: Niveaux condensés
 avgage:
   en: Average Age
   fr: Âge moyen

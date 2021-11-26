@@ -293,11 +293,52 @@ const get_category_children = (rows) =>
 function get_data_by_item_types() {
   const keys_in_sups = get_keys_in_sups(true);
 
-  const nested_data = _.chain(
-    Table.store
-      .lookup("orgVoteStatEstimates")
-      .major_voted_big_stat([this_year_col, last_year_col], false, false)
-  )
+  const nested_data = _.chain(Table.store.lookup("orgVoteStatEstimates").data)
+    .thru((rows) => {
+      const { v: vote_rows, s: stat_rows } = _.groupBy(
+        rows,
+        ({ votestattype }) => (votestattype === 999 ? "s" : "v")
+      );
+
+      const type_grouped_vote_rows = _.groupBy(vote_rows, ({ votestattype }) =>
+        text_maker(`vstype${votestattype}`)
+      );
+
+      // TODO appending (S) to stat item keys here is a legacy cary over, drop them and rewrite the rest of this file to detect stat items some other way
+      const other_stat_item_key = `(S) ${text_maker("vstype999")}`;
+      const top_description_grouped_stat_rows = _.chain(stat_rows)
+        .groupBy("desc")
+        .reduce(
+          (accumulator, grouped_rows, desc) => {
+            const group_size = grouped_rows.length;
+            const group_total = _.sumBy(grouped_rows, this_year_col);
+
+            // kind of arbitrary for deciding what a "top" stat item is, carried over from some legacy code
+            const is_top_stat_group =
+              (group_size > 30 && group_total > 30000000) ||
+              group_total > 5000000000;
+
+            if (is_top_stat_group) {
+              return { ...accumulator, [`(S) ${desc}`]: grouped_rows };
+            } else {
+              return {
+                ...accumulator,
+                [other_stat_item_key]: [
+                  ...accumulator[other_stat_item_key],
+                  ...grouped_rows,
+                ],
+              };
+            }
+          },
+          { [other_stat_item_key]: [] }
+        )
+        .value();
+
+      return {
+        ...type_grouped_vote_rows,
+        ...top_description_grouped_stat_rows,
+      };
+    })
     .toPairs()
     .map(([category, rows]) => {
       const children = get_category_children(rows, keys_in_sups);

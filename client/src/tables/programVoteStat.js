@@ -2,7 +2,9 @@ import _ from "lodash";
 
 import { Program } from "src/models/subjects";
 
-import { trivial_text_maker, year_templates } from "./table_common";
+import { trivial_text_maker } from "src/models/text";
+
+import { year_templates } from "src/models/years";
 
 import text from "./programVoteStat.yaml";
 

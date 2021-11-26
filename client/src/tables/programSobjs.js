@@ -1,8 +1,9 @@
 import _ from "lodash";
 
+import { businessConstants } from "src/models/businessConstants";
 import { Program } from "src/models/subjects";
 
-import { year_templates, businessConstants } from "./table_common";
+import { year_templates } from "src/models/years";
 
 import text from "./programSobjs.yaml";
 

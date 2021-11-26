@@ -1,12 +1,11 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
-import {
-  trivial_text_maker,
-  people_five_year_percentage_formula,
-  businessConstants,
-  year_templates,
-} from "./table_common";
+import { businessConstants } from "src/models/businessConstants";
+import { trivial_text_maker } from "src/models/text";
+import { year_templates } from "src/models/years";
+
+import { people_five_year_percentage_formula } from "./table_common";
 
 import text from "./orgEmployeeFol.yaml";
 

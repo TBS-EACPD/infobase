@@ -69,10 +69,6 @@ col_defs:
   en: Selected column definitions
   fr: Définitions des colonnes choisies
 
-dimension:
-  en: Dimension
-  fr: Dimension
-
 sort_by:
   en: Sort By
   fr: Trier par

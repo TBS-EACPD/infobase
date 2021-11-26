@@ -1,10 +1,12 @@
 import { sum } from "d3-array";
 import _ from "lodash";
 
+import { businessConstants } from "src/models/businessConstants";
+import { trivial_text_maker } from "src/models/text";
+import { year_templates } from "src/models/years";
+
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
-
-import { text_maker, year_templates, businessConstants } from "./table_common";
 
 import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;
@@ -88,7 +90,7 @@ export default {
           grouping_col_value: function (row) {
             return [
               "desc",
-              text_maker(row.votestattype === 999 ? "stat" : "voted"),
+              trivial_text_maker(row.votestattype === 999 ? "stat" : "voted"),
             ];
           },
         },

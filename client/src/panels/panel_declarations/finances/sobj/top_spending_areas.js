@@ -10,11 +10,9 @@ import { create_text_maker_component } from "src/components/index";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import * as table_common from "src/tables/table_common";
+import { is_non_revenue, collapse_by_so } from "src/tables/table_common";
 
 import text from "./top_spending_areas.yaml";
-
-const { is_non_revenue, collapse_by_so } = table_common;
 
 const { text_maker, TM } = create_text_maker_component(text);
 

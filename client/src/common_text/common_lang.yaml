@@ -692,9 +692,6 @@ alternate_view:
 horizontal:
   en: Standard
   fr: Standard
-major_voted_stat:
-  en: Major Voted or Statutory Items
-  fr: Crédits législatifs et votés importants
 voted_stat:
   en: Voted / Statutory
   fr: Crédit / poste législatif
@@ -706,9 +703,6 @@ estimates_doc:
 by_estimates_doc:
   en: By Estimates Mechanism
   fr: Par instrument des dépenses
-by_estimates_doc_compressed:
-  en: By Estimates Mechanism (aggregated carry forwards and transfers)
-  fr: Par instrument des dépenses (reports de budget et transfers agrégées)
 stat_items:
   en: Statutory Items
   fr: Postes législatifs

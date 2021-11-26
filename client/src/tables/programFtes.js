@@ -3,7 +3,9 @@ import _ from "lodash";
 
 import { Program } from "src/models/subjects";
 
-import { m, year_templates } from "./table_common";
+import { run_template } from "src/models/text";
+
+import { year_templates } from "src/models/years";
 
 import text from "./programFtes.yaml";
 
@@ -74,8 +76,8 @@ export default {
         type: "decimal2",
         nick: header,
         header: {
-          en: header + "  " + m("Actual FTEs"),
-          fr: header + "  " + m("ETP réel"),
+          en: header + "  " + run_template("Actual FTEs"),
+          fr: header + "  " + run_template("ETP réel"),
         },
         description: {
           en: `Corresponds to the total number of actual FTEs for the fiscal year ${header}`,
@@ -92,8 +94,8 @@ export default {
       */
       hidden: true,
       header: {
-        en: "{{pa_last_year_planned}} - " + m("Planned FTEs"),
-        fr: "{{pa_last_year_planned}} - " + m("ETP prévus"),
+        en: "{{pa_last_year_planned}} - " + run_template("Planned FTEs"),
+        fr: "{{pa_last_year_planned}} - " + run_template("ETP prévus"),
       },
       description: {
         en: `Corresponds to the total number of planned FTEs for the fiscal year {{pa_last_year_planned}}`,
@@ -105,8 +107,8 @@ export default {
         type: "decimal2",
         nick: header,
         header: {
-          en: header + "  " + m("Planned FTEs"),
-          fr: header + "  " + m("ETP prévus"),
+          en: header + "  " + run_template("Planned FTEs"),
+          fr: header + "  " + run_template("ETP prévus"),
         },
         description: {
           en: `Corresponds to the total number of planned FTEs for the fiscal year ${header}`,

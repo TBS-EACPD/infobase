@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import { Program } from "src/models/subjects";
 
-import { year_templates } from "./table_common";
+import { year_templates } from "src/models/years";
 
 import text from "./programSpending.yaml";
 

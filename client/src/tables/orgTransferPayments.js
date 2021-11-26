@@ -2,7 +2,9 @@
 // of the table spec
 import _ from "lodash";
 
-import { text_maker, year_templates, businessConstants } from "./table_common";
+import { businessConstants } from "src/models/businessConstants";
+import { trivial_text_maker } from "src/models/text";
+import { year_templates } from "src/models/years";
 
 import text from "./orgTransferPayments.yaml";
 
@@ -63,7 +65,9 @@ export default {
             grouping_col_value: function (row) {
               return [
                 "type",
-                text_maker(_.includes(row.tp, "(S) ") ? "stat" : "voted"),
+                trivial_text_maker(
+                  _.includes(row.tp, "(S) ") ? "stat" : "voted"
+                ),
               ];
             },
           },
