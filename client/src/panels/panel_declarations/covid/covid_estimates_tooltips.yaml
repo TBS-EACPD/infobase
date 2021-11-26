@@ -19,9 +19,9 @@ covid_2021_supps_a_note:
 covid_2021_supps_b_note:
   transform: [markdown]
   en: |
-    The TODO billion identified in the Supplementary Estimates (B) for COVID-19 includes approximately TODO million that has been reprofiled from 2020-21.
+    The $7.4 billion identified in the Supplementary Estimates (B) for COVID-19 includes approximately $143 million that has been reprofiled from 2020-21.
   fr: |
-    Les TODO milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ TODO millions de
+    Les 7,4 milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 143 millions de
     dollars qui ont été reportés de 2020-2021.
 
 # Measure table tooltips
