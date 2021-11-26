@@ -50,6 +50,7 @@ export class AutoHeightVirtualList extends React.Component<
   render() {
     return (
       <List
+        role="tabpanel"
         {...{
           ...this.props,
           ref: this.list_ref,
