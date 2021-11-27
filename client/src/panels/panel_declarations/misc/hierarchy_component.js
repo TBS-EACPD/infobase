@@ -180,12 +180,10 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
                     dead: org.is_dead,
                     limited_data: !org.has_table_data,
                   }))
-                  .thru((ministries) =>
-                    sort_by_name_current_subject_dead(ministries)
-                  )
+                  .thru((orgs) => sort_by_name_current_subject_dead(orgs))
                   .value(),
               }))
-              .sortBy("name") // TODO: maybe not?
+              .sortBy("name")
               .value(),
           },
         ],
@@ -412,7 +410,7 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
           name: subject.dept.name,
           href: href_generator(subject.dept),
           level: subject.dept.subject_type,
-          children: _.chain([
+          children: [
             {
               //crso
               subject_type: subject.subject_type,
@@ -432,9 +430,7 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
                 .thru((programs) => sort_by_name_current_subject_dead(programs))
                 .value(),
             },
-          ])
-            .thru((children) => sort_by_name_current_subject_dead(children))
-            .value(),
+          ],
         },
       ],
     },
