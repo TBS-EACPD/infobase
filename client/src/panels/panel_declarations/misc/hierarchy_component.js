@@ -63,6 +63,14 @@ const has_elements_with_limited_data = (root) =>
   hierarchical_some(root, "limited_data");
 const has_dead_elements = (root) => hierarchical_some(root, "dead");
 
+function sort_by_name_current_subject_dead(nodes) {
+  return _.chain(nodes)
+    .sortBy("name")
+    .sortBy((node) => !node.current_subject)
+    .sortBy("dead")
+    .value();
+}
+
 export const HierarchyPeek = ({ root }) => {
   const limited_data_elements = has_elements_with_limited_data(root);
   const dead_elements = has_dead_elements(root);
@@ -172,8 +180,12 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
                     dead: org.is_dead,
                     limited_data: !org.has_table_data,
                   }))
+                  .thru((ministries) =>
+                    sort_by_name_current_subject_dead(ministries)
+                  )
                   .value(),
               }))
+              .sortBy("name") // TODO: maybe not?
               .value(),
           },
         ],
@@ -206,10 +218,10 @@ export const org_internal_hierarchy = ({
           href: href_generator(prog),
           dead: !prog.is_active,
         }))
-        .sortBy("dead")
+        .thru((programs) => sort_by_name_current_subject_dead(programs))
         .value(),
     }))
-    .sortBy("dead")
+    .thru((crsos) => sort_by_name_current_subject_dead(crsos))
     .value(),
 });
 
@@ -249,13 +261,13 @@ export const program_hierarchy = ({
                     href: href_generator(prog),
                     dead: !prog.is_active,
                   }))
-                  .sortBy("dead")
-                  .reverse()
-                  .sortBy("current_subject")
-                  .reverse()
+                  .thru((programs) =>
+                    sort_by_name_current_subject_dead(programs)
+                  )
                   .value()
               : null,
         }))
+        .thru((crsos) => sort_by_name_current_subject_dead(crsos))
         .value(),
     },
   ];
@@ -301,11 +313,10 @@ export const tag_hierarchy = ({
             href: href_generator(prog),
             dead: !prog.is_active,
           }))
-          .sortBy("dead")
+          .thru((programs) => sort_by_name_current_subject_dead(programs))
           .value(),
     }))
-    .sortBy("current_subject")
-    .reverse()
+    .thru((tags) => sort_by_name_current_subject_dead(tags))
     .value();
 
   const parent_node = {
@@ -373,10 +384,12 @@ export const crso_hierarchy = ({
                     href: href_generator(prg),
                     dead: prg.is_dead,
                   }))
-                  .sortBy("dead")
+                  .thru((programs) =>
+                    sort_by_name_current_subject_dead(programs)
+                  )
                   .value(),
               }))
-              .sortBy("dead")
+              .thru((crsos) => sort_by_name_current_subject_dead(crsos))
               .value(),
           },
         ],
@@ -399,7 +412,7 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
           name: subject.dept.name,
           href: href_generator(subject.dept),
           level: subject.dept.subject_type,
-          children: [
+          children: _.chain([
             {
               //crso
               subject_type: subject.subject_type,
@@ -416,10 +429,12 @@ export const crso_pi_hierarchy = ({ subject, href_generator }) => ({
                   href: href_generator(prg),
                   dead: !prg.is_active,
                 }))
-                .sortBy("dead")
+                .thru((programs) => sort_by_name_current_subject_dead(programs))
                 .value(),
             },
-          ],
+          ])
+            .thru((children) => sort_by_name_current_subject_dead(children))
+            .value(),
         },
       ],
     },
@@ -452,6 +467,7 @@ export const crso_gov_hierarchy = ({ subject, href_generator }) => {
                 href: crso.is_cr && href_generator(crso),
                 current_subject: is_subject(crso),
               }))
+              .thru((crsos) => sort_by_name_current_subject_dead(crsos))
               .value(),
           },
         ],
