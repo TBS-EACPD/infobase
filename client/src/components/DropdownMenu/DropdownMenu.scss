@@ -3,7 +3,6 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  z-index: 1001;
   height: 100%;
 
   &--is-open {
@@ -33,6 +32,7 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
   padding: 12px 16px;
   border-radius: $standardBorderRadius;
+  z-index: 99;
 }
 .close-dropdown {
   &:hover,
