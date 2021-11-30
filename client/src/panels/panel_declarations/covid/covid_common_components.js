@@ -5,8 +5,6 @@ import { Tabs, CheckBox, LinkStyled } from "src/components/index";
 
 import { formats } from "src/core/format";
 
-import { IconQuestion } from "src/icons/icons";
-
 import { scroll_to_covid_key_concepts } from "./covid_key_concepts";
 
 import { covid_create_text_maker_component } from "./covid_text_provider";
@@ -82,25 +80,5 @@ class ToggleVoteStatProvider extends React.Component {
     return <Inner {...{ ...inner_props, show_vote_stat, ToggleVoteStat }} />;
   }
 }
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-const CellTooltip = ({ tooltip_text }) => (
-  <span
-    style={{ display: "inline-flex" }}
-    className="link-unstyled"
-    tabIndex={0}
-    aria-hidden="true"
-    data-toggle="glossary_sidebar"
-    data-ibtt-html="true"
-    data-ibtt-container="body"
-    data-ibtt-text={tooltip_text}
-  >
-    <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
-  </span>
-);
 
-export {
-  YearSelectionTabs,
-  AboveTabFootnoteList,
-  ToggleVoteStatProvider,
-  CellTooltip,
-};
+export { YearSelectionTabs, AboveTabFootnoteList, ToggleVoteStatProvider };
