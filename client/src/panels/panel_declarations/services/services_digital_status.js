@@ -12,7 +12,11 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services";
+import {
+  useServiceSummaryGov,
+  useServiceSummaryOrg,
+  useServiceSummaryProgram,
+} from "src/models/services_queries";
 
 import { is_a11y_mode, lang } from "src/core/injected_build_constants";
 
@@ -38,24 +42,12 @@ const colors = scaleOrdinal().range([
 ]);
 
 const ServicesDigitalStatusPanel = ({ subject }) => {
-  const { loading, data } = useSummaryServices({
-    subject,
-    query_fragment: `
-    service_general_stats{
-      id
-      report_years
-      number_of_services
-      number_of_online_enabled_services
-    }
-    service_digital_status_summary {
-      id
-      key_desc
-      key
-      can_online
-      cannot_online
-      not_applicable
-    }`,
-  });
+  const useSummaryServices = {
+    gov: useServiceSummaryGov,
+    dept: useServiceSummaryOrg,
+    program: useServiceSummaryProgram,
+  }[subject.subject_type];
+  const { loading, data } = useSummaryServices({ id: subject.id });
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }

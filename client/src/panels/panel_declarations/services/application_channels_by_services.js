@@ -12,7 +12,10 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
-import { useServices } from "src/models/populate_services";
+import {
+  useServicesByOrg,
+  useServicesByProgram,
+} from "src/models/services_queries";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -21,10 +24,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
-import {
-  application_channels_keys,
-  application_channels_query_fragment,
-} from "./shared";
+import { application_channels_keys } from "./shared";
 
 import text from "./services.yaml";
 
@@ -34,15 +34,11 @@ const get_report_years = (data) =>
   _.chain(data).flatMap("report_years").uniq().sort().reverse().value();
 
 const ServicesChannelsPanel = ({ subject }) => {
-  const { loading, data } = useServices({
-    subject,
-    query_fragments: `
-    id
-    report_years
-    name
-    ${application_channels_query_fragment}
-    `,
-  });
+  const useServices =
+    subject.subject_type === "program"
+      ? useServicesByProgram
+      : useServicesByOrg;
+  const { loading, data } = useServices({ id: subject.id });
   const unique_services = _.uniqBy(data, "id");
 
   const [active_services, set_active_services] = useState({});

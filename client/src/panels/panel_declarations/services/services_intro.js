@@ -6,7 +6,10 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services";
+import {
+  useServiceSummaryGov,
+  useServiceSummaryOrg,
+} from "src/models/services_queries";
 
 // import { formats } from "src/core/format";
 
@@ -15,20 +18,11 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesIntroPanel = ({ subject }) => {
-  const { loading, data } = useSummaryServices({
-    subject,
-    query_fragment: `service_general_stats{
-      id
-      report_years
-      num_of_subject_offering_services
-    }`,
-    /*
-      number_of_services
-      number_of_online_enabled_services
-      pct_of_standards_met_high_vol_services
-      pct_of_online_client_interaction_pts
-    */
-  });
+  const useSummaryServices = {
+    gov: useServiceSummaryGov,
+    dept: useServiceSummaryOrg,
+  }[subject.subject_type];
+  const { loading, data } = useSummaryServices({ id: subject.id });
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }

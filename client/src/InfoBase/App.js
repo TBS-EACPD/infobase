@@ -61,9 +61,6 @@ const Survey = React.lazy(() => import("src/Survey/Survey"));
 const SingleServiceRoute = React.lazy(() =>
   import("../panels/panel_routes/SingleServiceRoute")
 );
-const ServiceInventory = React.lazy(() =>
-  import("src/service_inventory/ServiceInventory")
-);
 
 const are_linked_stylesheets_loaded = () => {
   try {
@@ -189,7 +186,6 @@ export class App extends React.Component {
                 path="/dept/:subject_id/service/:service_id?"
                 component={SingleServiceRoute}
               />
-              <Route path="/service_inventory" component={ServiceInventory} />
               <Route
                 path="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
                 component={Infographic}

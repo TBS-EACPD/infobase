@@ -9,7 +9,11 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services";
+import {
+  useServiceSummaryGov,
+  useServiceSummaryOrg,
+  useServiceSummaryProgram,
+} from "src/models/services_queries";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -21,21 +25,12 @@ import "./services.scss";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ServicesStandardsPanel = ({ subject }) => {
-  const { loading, data } = useSummaryServices({
-    subject,
-    query_fragment: `
-    service_general_stats {
-      id
-      report_years
-      number_of_services
-    }
-    service_standards_summary {
-      id
-      standards_count
-      met_standards_count
-      services_w_standards_count
-    }`,
-  });
+  const useSummaryServices = {
+    gov: useServiceSummaryGov,
+    dept: useServiceSummaryOrg,
+    program: useServiceSummaryProgram,
+  }[subject.subject_type];
+  const { loading, data } = useSummaryServices({ id: subject.id });
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }

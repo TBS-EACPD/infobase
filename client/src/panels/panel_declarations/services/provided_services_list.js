@@ -11,7 +11,10 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { useServices } from "src/models/populate_services";
+import {
+  useServicesByOrg,
+  useServicesByProgram,
+} from "src/models/services_queries";
 
 import text from "./services.yaml";
 
@@ -19,16 +22,11 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
-  const { loading, data } = useServices({
-    subject,
-    query_fragments: `
-    name
-    id
-    org_id
-    service_type
-    description
-    `,
-  });
+  const useServices =
+    subject.subject_type === "program"
+      ? useServicesByProgram
+      : useServicesByOrg;
+  const { loading, data } = useServices({ id: subject.id });
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }

@@ -11,7 +11,10 @@ import {
   create_text_maker_component,
 } from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services";
+import {
+  useServiceSummaryGov,
+  useServiceSummaryOrg,
+} from "src/models/services_queries";
 
 import { Dept, Program } from "src/models/subjects";
 
@@ -19,20 +22,11 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const OrgsOfferingServicesPanel = ({ subject }) => {
-  const { loading, data } = useSummaryServices({
-    subject,
-    query_fragment: `
-    service_general_stats {
-      report_years
-      number_of_services
-    }
-    subject_offering_services_summary {
-      id
-      subject_id
-      number_of_services
-      total_volume
-    }`,
-  });
+  const useSummaryServices = {
+    gov: useServiceSummaryGov,
+    dept: useServiceSummaryOrg,
+  }[subject.subject_type];
+  const { loading, data } = useSummaryServices({ id: subject.id });
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }
