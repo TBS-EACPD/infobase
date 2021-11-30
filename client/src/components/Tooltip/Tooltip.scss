@@ -1,0 +1,11 @@
+@import "src/style_constants/index.scss";
+
+.react-tooltip-overrides {
+  opacity: 1 !important;
+  max-width: 500px !important;
+
+  &:hover,
+  &:focus-within {
+    visibility: visible !important;
+  }
+}

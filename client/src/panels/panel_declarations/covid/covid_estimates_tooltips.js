@@ -1,12 +1,14 @@
 import _ from "lodash";
 import React from "react";
 
-import { CellTooltip } from "./covid_common_components";
+import { Tooltip } from "src/components";
+import { IconQuestion } from "src/icons/icons";
+
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 import text from "./covid_estimates_tooltips.yaml";
 
-const { text_maker } = covid_create_text_maker_component(text);
+const { TM } = covid_create_text_maker_component(text);
 
 const tooltips_by_topic = {
   est_doc_total: [
@@ -14,19 +16,19 @@ const tooltips_by_topic = {
       fiscal_years: [2021],
       subject_ids: ["gov"],
       topic_ids: ["MAINS"],
-      text: text_maker("covid_2021_mains_note"),
+      tooltip: <TM k="covid_2021_mains_note" />,
     },
     {
       fiscal_years: [2021],
       subject_ids: ["gov"],
       topic_ids: ["SEA"],
-      text: text_maker("covid_2021_supps_a_note"),
+      tooltip: <TM k="covid_2021_supps_a_note" />,
     },
     {
       fiscal_years: [2021],
       subject_ids: ["gov"],
       topic_ids: ["SEB"],
-      text: text_maker("covid_2021_supps_b_note"),
+      tooltip: <TM k="covid_2021_supps_b_note" />,
     },
   ],
   measure: [
@@ -34,24 +36,24 @@ const tooltips_by_topic = {
       fiscal_years: [2021],
       subject_ids: ["gov", 280],
       topic_ids: ["COV082"],
-      text: text_maker(
-        "covid_estimates_2021_mains_COV082_2020_reprofile_tooltip"
+      tooltip: (
+        <TM k="covid_estimates_2021_mains_COV082_2020_reprofile_tooltip" />
       ),
     },
     {
       fiscal_years: [2021],
       subject_ids: ["gov", 280],
       topic_ids: ["COV115"],
-      text: text_maker(
-        "covid_estimates_2021_mains_COV115_2020_reprofile_tooltip"
+      tooltip: (
+        <TM k="covid_estimates_2021_mains_COV115_2020_reprofile_tooltip" />
       ),
     },
     {
       fiscal_years: [2021],
       subject_ids: ["*"],
       topic_ids: ["COV043", "COV082", "COV113", "COV118", "COV145", "COV204"],
-      text: text_maker(
-        "covid_estimates_2021_supps_a_2020_partial_reprofile_tooltip"
+      tooltip: (
+        <TM k="covid_estimates_2021_supps_a_2020_partial_reprofile_tooltip" />
       ),
     },
     {
@@ -87,8 +89,8 @@ const tooltips_by_topic = {
         "COV154",
         "COV231",
       ],
-      text: text_maker(
-        "covid_estimates_2021_supps_a_2020_full_reprofile_tooltip"
+      tooltip: (
+        <TM k="covid_estimates_2021_supps_a_2020_full_reprofile_tooltip" />
       ),
     },
     {
@@ -103,8 +105,8 @@ const tooltips_by_topic = {
         "COV125",
         "COV134",
       ],
-      text: text_maker(
-        "covid_estimates_2021_supps_b_2020_full_reprofile_tooltip"
+      tooltip: (
+        <TM k="covid_estimates_2021_supps_b_2020_full_reprofile_tooltip" />
       ),
     },
     {
@@ -127,6 +129,13 @@ const tooltips_by_topic = {
   ],
 };
 
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+const IconTooltip = ({ tooltip }) => (
+  <Tooltip tooltip_content={tooltip}>
+    <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
+  </Tooltip>
+);
+
 export const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
   _.chain(tooltips_by_topic)
     .get(topic)
@@ -142,5 +151,5 @@ export const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
           _.includes(["*", topic_id], tooltip_topic_id)
         )
     )
-    .map(({ text }) => <CellTooltip tooltip_text={text} key={text} />)
+    .map(({ tooltip }) => <IconTooltip tooltip={tooltip} key={text} />)
     .value();
