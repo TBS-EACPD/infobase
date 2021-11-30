@@ -4,8 +4,8 @@
 
 set -e # will exit if any command has non-zero exit value
 
-# not necessary to manually sync, but convienient to be immediately prompted if a lpass login is required, rather than, potentially, a few steps in
-lpass sync
+printf "lpass status: "
+lpass status
 
 read -p "Provide a one sentence reason for this deploy, for the slack alert:
 > " DEPLOY_MESSAGE
