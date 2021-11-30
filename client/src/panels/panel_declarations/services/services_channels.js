@@ -12,7 +12,11 @@ import {
   Select,
 } from "src/components/index";
 
-import { useSummaryServices } from "src/models/populate_services";
+import {
+  useServiceSummaryGov,
+  useServiceSummaryOrg,
+  useServiceSummaryProgram,
+} from "src/models/services_queries";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -71,20 +75,12 @@ const application_channels_by_year_tooltip = (items, tooltip_formatter) => {
 };
 
 const ServicesChannelsPanel = ({ subject }) => {
-  const { loading, data } = useSummaryServices({
-    subject,
-    query_fragment: `
-    service_general_stats {
-      report_years
-      number_of_services
-    }
-    service_channels_summary {
-      subject_id
-      year
-      channel_id
-      channel_value
-    }`,
-  });
+  const useSummaryServices = {
+    gov: useServiceSummaryGov,
+    dept: useServiceSummaryOrg,
+    program: useServiceSummaryProgram,
+  }[subject.subject_type];
+  const { loading, data } = useSummaryServices({ id: subject.id });
   const [active_channels, set_active_channels] = useState(
     _.chain(channels)
       .map((channel) => [channel, true])
