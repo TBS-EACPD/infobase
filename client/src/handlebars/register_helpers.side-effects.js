@@ -1,8 +1,5 @@
 import _ from "lodash";
 
-import React from "react";
-import ReactDOMServer from "react-dom/server.browser";
-
 import { glossaryEntryStore } from "src/models/glossary";
 
 import { Dept } from "src/models/subjects";
@@ -14,8 +11,6 @@ import {
 
 import { formats, array_to_grammatical_list } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
-
-import { IconQuestion } from "src/icons/icons";
 
 import { infographic_href_template, glossary_href } from "src/link_utils";
 
@@ -622,37 +617,6 @@ HandlebarsWithPrototypeAccess.registerHelper(
 HandlebarsWithPrototypeAccess.registerHelper("stripes", function (index) {
   return index % 2 == 0 ? "even" : "odd";
 });
-
-HandlebarsWithPrototypeAccess.registerHelper(
-  "icon_tooltip",
-  function glossary_tooltip(popup_text) {
-    const raw_icon_html = ReactDOMServer.renderToStaticMarkup(
-      <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
-    );
-
-    // our svg icons include embeded style nodes using * selectors, which in particular mess up the resulting output of
-    // text maker's markdown parsing, need to escape
-    const selective_markdown_escaped_icon_html = raw_icon_html.replace(
-      /\*/g,
-      "\\*"
-    );
-
-    return new HandlebarsWithPrototypeAccess.SafeString(
-      `<span
-      style="display: inline-flex;"
-      class="nowrap link-unstyled"
-      tabindex="0"
-      aria-hidden="true"
-      data-toggle="glossary_sidebar"
-      data-ibtt-html="true"
-      data-ibtt-container="body"
-      data-ibtt-text="${popup_text}"
-    >
-      ${selective_markdown_escaped_icon_html}
-    </span>`
-    );
-  }
-);
 
 // register a handlebars helper for creating glossary links
 // If a markdown link is written accordingly:
