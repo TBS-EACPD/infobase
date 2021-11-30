@@ -93,7 +93,6 @@ class CovidIntroPanelDyanmicText extends React.Component {
                   (memo, { vote, stat }) => memo + vote + stat,
                   0
                 ),
-                auth_total_note: null,
               }}
             />
           )}
