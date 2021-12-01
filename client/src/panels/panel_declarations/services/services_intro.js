@@ -9,7 +9,7 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 import {
   useServiceSummaryGov,
   useServiceSummaryOrg,
-} from "src/models/services_queries";
+} from "src/models/services/services_queries";
 
 // import { formats } from "src/core/format";
 
