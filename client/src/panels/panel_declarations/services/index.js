@@ -6,6 +6,6 @@ export { declare_services_digital_status_panel } from "./services_digital_status
 export { declare_services_standards_panel } from "./services_standards";
 export { declare_subject_offering_services_panel } from "./subject_offering_services";
 export { declare_single_service_overview_panel } from "./single_service_panels/service_overview";
-export { ServiceChannels } from "./single_service_panels/service_channels";
-export { ServiceStandards } from "./single_service_panels/service_standards";
-export { ServiceDigitalStatus } from "./single_service_panels/service_digital_status";
+export { declare_single_service_channels_panel } from "./single_service_panels/service_channels";
+export { declare_single_service_standards_panel } from "./single_service_panels/service_standards";
+export { declare_single_service_digital_status_panel } from "./single_service_panels/service_digital_status";

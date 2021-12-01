@@ -228,11 +228,7 @@ class Infographic extends React.Component {
                 panel_keys={valid_panel_keys}
                 set_panel_filter={(panel_filter) => {
                   url_replace(
-                    _.replace(
-                      infograph_href_template(subject, active_bubble_id),
-                      "#",
-                      "/"
-                    )
+                    infograph_href_template(subject, active_bubble_id, "/")
                   );
                   this.setState({ panel_filter });
                 }}

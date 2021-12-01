@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import text from "src/panels/panel_declarations/services/services.yaml";
 import { application_channels_keys } from "src/panels/panel_declarations/services/shared";
 
@@ -11,12 +12,12 @@ import { formats } from "src/core/format";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-
 const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceChannels extends React.Component {
   render() {
-    const { service } = this.props;
+    const { service, title } = this.props;
+
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
       year: most_recent_year,
@@ -53,7 +54,7 @@ export class ServiceChannels extends React.Component {
     }));
 
     return (
-      <Panel title={text_maker("single_service_channels_title")}>
+      <Panel title={title}>
         {filtered_keys.length > 0 ? (
           <Fragment>
             <TM k="service_channels_text" className="medium-panel-text" />
@@ -101,3 +102,17 @@ export class ServiceChannels extends React.Component {
     );
   }
 }
+
+export const declare_single_service_channels_panel = () =>
+  declare_panel({
+    panel_key: "single_service_channels",
+    subject_types: ["service"],
+    panel_config_func: (subject_type, panel_key) => ({
+      title: text_maker("single_service_channels_title"),
+      footnotes: false,
+      render({ title, calculations, sources }) {
+        const { subject } = calculations;
+        return <ServiceChannels service={subject} title={title} />;
+      },
+    }),
+  });

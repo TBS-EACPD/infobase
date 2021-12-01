@@ -13,10 +13,9 @@ about_program_title:
 about_tag_title:
   en: About this tag
   fr: À propos de cette étiquette
-
 about_service_title:
-  en: About this tag
-  fr: À propos de cette étiquette
+  en: About this service
+  fr: À propos de ce service
 
 financial_title:
   en: Finances
@@ -45,7 +44,7 @@ results_desc:
 
 services_title: 
   en: Services
-  fr: Services
+  fr: Services43
 services_desc:
   en : Provision of a specific final output that addresses one or more needs of an intended recipient and contributes to the achievement of an outcome.
   fr : Extrant final précis qui comble un ou plusieurs besoins d’un bénéficiaire visé et qui contribue à l’obtention d’un résultat.
