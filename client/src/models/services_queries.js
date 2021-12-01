@@ -172,7 +172,8 @@ export const { query_search_services, useSearchServices } = query_factory({
       }
     }
   `,
-  resolver: (response) => _.get(response, "data.root.search_services"),
+  resolver: (response) =>
+    _.chain(response).get("data.root.search_services").uniqBy("id").value(),
 });
 
 export const { query_single_service, useSingleService } = query_factory({

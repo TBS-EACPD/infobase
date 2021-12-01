@@ -23,14 +23,14 @@ const { text_maker } = create_text_maker_component(text);
 const SingleServiceRoute = (props) => {
   const {
     match: {
-      params: { service_id, subject_id },
+      params: { service_id },
     },
   } = props;
   const { loading, data: service } = useSingleService({ service_id });
   if (loading) {
     return <LeafSpinner config_name="sub_route" />;
   }
-  const subject = Dept.store.lookup(subject_id);
+  const subject = Dept.store.lookup(service.org_id);
 
   return (
     <StandardRouteContainer
