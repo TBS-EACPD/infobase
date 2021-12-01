@@ -182,11 +182,11 @@ query{
 const search_services_en = `
 query{
   en_root: root(lang: "en"){
-    search_by_french_word: search_services(search_phrase: "Entités"){
+    search_by_french_word: search_services(search_phrase: "Établissement"){
       id,
       name
     }
-    search_by_english_word: search_services(search_phrase: "Entities"){
+    search_by_english_word: search_services(search_phrase: "Copyright"){
       id,
       name
     }
@@ -195,19 +195,19 @@ query{
 const search_services_fr = `
 query{
   fr_root: root(lang: "fr"){
-    diacritical_search: search_services(search_phrase: "Entités"){
+    diacritical_search: search_services(search_phrase: "Établissement"){
       id,
       name
     }
-    diacritical_free_search: search_services(search_phrase: "Entites"){
+    diacritical_free_search: search_services(search_phrase: "Etablissement"){
       id,
       name
     }
-    multi_word_search: search_services(search_phrase: "d'entités renseignements"){
+    multi_word_search: search_services(search_phrase: "tarifs droit"){
       id,
       name
     }
-    partial_word_search: search_services(search_phrase: "en"){
+    partial_word_search: search_services(search_phrase: "es"){
       id,
       name
     }
