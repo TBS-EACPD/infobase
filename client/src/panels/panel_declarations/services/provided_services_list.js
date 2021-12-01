@@ -14,7 +14,7 @@ import {
 import {
   useServicesByOrg,
   useServicesByProgram,
-} from "src/models/services_queries";
+} from "src/models/services/services_queries";
 
 import text from "./services.yaml";
 

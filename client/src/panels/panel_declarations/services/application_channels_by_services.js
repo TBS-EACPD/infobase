@@ -15,7 +15,7 @@ import {
 import {
   useServicesByOrg,
   useServicesByProgram,
-} from "src/models/services_queries";
+} from "src/models/services/services_queries";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";

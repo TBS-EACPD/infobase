@@ -9,7 +9,7 @@ import {
 
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
-import { useSingleService } from "src/models/services_queries";
+import { useSingleService } from "src/models/services/services_queries";
 import { Dept } from "src/models/subjects";
 
 import { StandardRouteContainer } from "src/core/NavComponents";

@@ -7,12 +7,12 @@ import {
   api_load_all_covid_measures,
 } from "src/models/covid/populate";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
-import { api_load_has_services } from "src/models/populate_services";
 import {
   api_load_results_bundle,
   api_load_results_counts,
   subject_has_results,
 } from "src/models/results/populate_results";
+import { api_load_has_services } from "src/models/services/api_load_has_services";
 
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
 import { Table } from "./TableClass";
