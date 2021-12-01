@@ -12,11 +12,14 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/components/PinnedFAQ/PinnedFAQ";
 
+import { query_single_service } from "src/models/services/services_queries";
+
 import {
   Gov,
   Dept,
-  subject_types,
-  get_subject_by_guid,
+  class_subject_types,
+  api_subject_types,
+  get_subject_instance_by_guid,
 } from "src/models/subjects";
 
 import { log_standard_event } from "src/core/analytics";
@@ -67,17 +70,11 @@ class AnalyticsSynchronizer extends React.Component {
   }
 
   _logAnalytics() {
-    const {
-      active_bubble_id,
-      subject_type,
-      subject: { guid },
-    } = this.props;
-
-    log_standard_event;
+    const { active_bubble_id, subject_type, subject } = this.props;
 
     log_standard_event({
       SUBAPP: sub_app_name,
-      SUBJECT_GUID: guid,
+      SUBJECT_GUID: subject?.guid || subject.id,
       MISC1: subject_type,
       MISC2: active_bubble_id,
     });
@@ -102,7 +99,7 @@ const get_default_state_from_props = ({
   previous_bubble: null,
   next_bubble: null,
 });
-class InfoGraph_ extends React.Component {
+class Infographic extends React.Component {
   constructor(props) {
     super();
     this.state = get_default_state_from_props(props);
@@ -359,122 +356,211 @@ class InfoGraph_ extends React.Component {
     infograph_href_template(selected_subject, this.props.active_bubble_id, "/");
 }
 
-const is_fake_infographic = (subject) =>
-  !_.isUndefined(subject.is_fake) && subject.is_fake;
-const Infographic = ({
-  match: {
-    params: { subject_type, subject_id, active_bubble_id, options },
-  },
-  history: { replace },
-}) => {
-  if (!_.includes(subject_types, subject_type)) {
-    return redirect_with_msg(
-      text_maker("invalid_redirect_home", { param: subject_type }),
-      "#home"
-    );
+const get_default_infographic_state = (props) => {
+  const {
+    match: {
+      params: { subject_type, subject_id },
+    },
+  } = props;
+
+  return {
+    loading: true,
+    subject: undefined,
+    subject_type,
+    subject_id,
+  };
+};
+class InfographicRoute extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = get_default_infographic_state(props);
   }
 
-  const subject = (() => {
-    try {
-      return get_subject_by_guid(`${subject_type}_${subject_id}`);
-    } catch {
-      return false;
-    }
-  })();
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { subject_type: next_subject_type, subject_id: next_subject_id } =
+      get_default_infographic_state(nextProps);
 
-  if (!subject) {
-    if (subject_type === "program" || subject_type === "crso") {
-      const potential_parent_dept_code = _.split(subject_id, "-")[0];
-      const has_parent_dept = Dept.store.has(potential_parent_dept_code);
-      if (has_parent_dept) {
-        const parent_dept = Dept.store.lookup(potential_parent_dept_code);
-        return redirect_with_msg(
-          text_maker("invalid_subject_redirect_parent_dept", {
-            subject_id,
-            potential_parent_dept_code,
-          }),
-          `#orgs/dept/${parent_dept.id}/infograph/intro`
+    const { subject_type: prev_subject_type, subject_id: prev_subject_id } =
+      prevState;
+
+    if (
+      next_subject_type !== prev_subject_type ||
+      next_subject_id !== prev_subject_id
+    ) {
+      return get_default_infographic_state(nextProps);
+    } else {
+      return null;
+    }
+  }
+
+  componentDidMount() {
+    this.load_route_subject();
+  }
+  componentDidUpdate() {
+    this.load_route_subject();
+  }
+
+  load_route_subject = () => {
+    const { loading, subject_type, subject_id } = this.state;
+
+    if (loading) {
+      if (_.includes(api_subject_types, subject_type)) {
+        switch (subject_type) {
+          case "service":
+            query_single_service({ service_id: subject_id }).then((service) =>
+              this.setState({
+                loading: false,
+                subject: service,
+              })
+            );
+            break;
+          default:
+            this.setState({
+              loading: false,
+              subject: false,
+            });
+        }
+      } else if (_.includes(class_subject_types, subject_type)) {
+        this.setState({
+          loading: false,
+          subject: (() => {
+            try {
+              return get_subject_instance_by_guid(
+                `${subject_type}_${subject_id}`
+              );
+            } catch {
+              return false;
+            }
+          })(),
+        });
+      } else {
+        redirect_with_msg(
+          text_maker("invalid_redirect_home", { param: subject_type }),
+          "#home"
         );
       }
     }
-    return redirect_with_msg(
-      text_maker("invalid_redirect_home", { param: subject_id }),
-      "#home"
-    );
-  } else if (is_fake_infographic(subject)) {
-    const subject_parent = (() => {
-      switch (subject_type) {
-        case "program":
-          return subject.crso;
-        case "crso":
-          return subject.dept;
-        default:
-          return Gov.instance;
+  };
+
+  render() {
+    const { loading, subject, subject_type, subject_id } = this.state;
+
+    const {
+      match: {
+        params: { active_bubble_id, options },
+      },
+      history: { replace },
+    } = this.props;
+
+    if (loading) {
+      return <LeafSpinner config_name={"route"} />;
+    }
+
+    if (!subject) {
+      if (subject_type === "program" || subject_type === "crso") {
+        const potential_parent_dept_code = _.split(subject_id, "-")[0];
+        const has_parent_dept = Dept.store.has(potential_parent_dept_code);
+        if (has_parent_dept) {
+          const parent_dept = Dept.store.lookup(potential_parent_dept_code);
+          return redirect_with_msg(
+            text_maker("invalid_subject_redirect_parent_dept", {
+              subject_id,
+              potential_parent_dept_code,
+            }),
+            infograph_href_template(parent_dept)
+          );
+        }
       }
-    })();
+      return redirect_with_msg(
+        text_maker("invalid_redirect_home", { param: subject_id }),
+        "#home"
+      );
+    }
+
+    const is_fake_infographic =
+      !_.isUndefined(subject.is_fake) && subject.is_fake;
+    if (is_fake_infographic) {
+      const subject_parent = (() => {
+        switch (subject_type) {
+          case "program":
+            return subject.crso;
+          case "crso":
+            return subject.dept;
+          default:
+            return Gov.instance;
+        }
+      })();
+
+      return (
+        <Redirect
+          to={infograph_href_template(subject_parent, active_bubble_id, "/")}
+        />
+      );
+    }
+
+    const bubble_id = _.find(get_bubble_defs(subject), { id: active_bubble_id })
+      ? active_bubble_id
+      : null;
+
+    const breadcrumbs = _.chain(
+      (() => {
+        switch (subject_type) {
+          case "dept": {
+            return [Gov.instance];
+          }
+          case "crso": {
+            return [Gov.instance, subject.dept];
+          }
+          case "program": {
+            return [Gov.instance, subject.dept, subject.crso];
+          }
+          case "service": {
+            return [Gov.instance, Dept.store.lookup(subject.org_id)];
+          }
+          default: {
+            return [];
+          }
+        }
+      })()
+    )
+      .map((parent_subj) => (
+        <a
+          href={infograph_href_template(parent_subj, active_bubble_id)}
+          key={parent_subj.id}
+        >
+          {parent_subj.name}
+        </a>
+      ))
+      .concat(subject.name)
+      .value();
+
+    const desc_key = {
+      financial: "finance_infograph_desc_meta_attr",
+      people: "ppl_infograph_desc_meta_attr",
+      results: "results_infograph_desc_meta_attr",
+    }[bubble_id];
+
+    const title = text_maker("infographic_for", { subject });
 
     return (
-      <Redirect
-        to={infograph_href_template(subject_parent, active_bubble_id, "/")}
-      />
+      <StandardRouteContainer
+        title={title}
+        breadcrumbs={breadcrumbs}
+        description={desc_key && text_maker(desc_key)}
+        route_key={sub_app_name}
+      >
+        <h1 dangerouslySetInnerHTML={{ __html: title }} />
+        <Infographic
+          subject_type={subject_type}
+          subject={subject}
+          active_bubble_id={bubble_id}
+          options={options}
+          url_replace={replace}
+        />
+      </StandardRouteContainer>
     );
   }
+}
 
-  const bubble_id = _.find(get_bubble_defs(subject), { id: active_bubble_id })
-    ? active_bubble_id
-    : null;
-
-  const title = text_maker("infographic_for", { subject });
-  const breadcrumbs = (() => {
-    const get_breadcrumbs = (parent_subjects) =>
-      _.chain(parent_subjects)
-        .map((parent_subj) => (
-          <a
-            href={infograph_href_template(parent_subj, active_bubble_id)}
-            key={parent_subj.id}
-          >
-            {parent_subj.name}
-          </a>
-        ))
-        .concat(subject.name)
-        .value();
-    switch (subject_type) {
-      case "dept": {
-        return get_breadcrumbs([Gov.instance]);
-      }
-      case "crso": {
-        return get_breadcrumbs([Gov.instance, subject.dept]);
-      }
-      case "program": {
-        return get_breadcrumbs([Gov.instance, subject.dept, subject.crso]);
-      }
-      default: {
-        return [subject.name];
-      }
-    }
-  })();
-  const desc_key = {
-    financial: "finance_infograph_desc_meta_attr",
-    people: "ppl_infograph_desc_meta_attr",
-    results: "results_infograph_desc_meta_attr",
-  }[bubble_id];
-  return (
-    <StandardRouteContainer
-      title={title}
-      breadcrumbs={breadcrumbs}
-      description={desc_key && text_maker(desc_key)}
-      route_key={sub_app_name}
-    >
-      <h1 dangerouslySetInnerHTML={{ __html: title }} />
-      <InfoGraph_
-        subject_type={subject_type}
-        subject={subject}
-        active_bubble_id={bubble_id}
-        options={options}
-        url_replace={replace}
-      />
-    </StandardRouteContainer>
-  );
-};
-
-export { Infographic as default };
+export { InfographicRoute as default };

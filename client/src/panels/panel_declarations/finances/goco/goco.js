@@ -338,7 +338,7 @@ class Goco extends React.Component {
           const sa_href_result = _.reduce(
             sa.children_tags,
             (child_result, goco) => {
-              child_result[`${goco.name}`] = `#orgs/tag/${goco.id}/infograph`;
+              child_result[`${goco.name}`] = `#infographic/tag/${goco.id}`;
               return child_result;
             },
             {}

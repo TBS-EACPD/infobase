@@ -7,6 +7,7 @@ import { query_factory } from "src/graphql_utils/graphql_utils";
 
 const all_service_fragments = `
   id
+  subject_type
   org_id
   submission_year
   report_years
@@ -166,6 +167,7 @@ export const { query_search_services, useSearchServices } = query_factory({
       root(lang: $lang) {
         search_services(search_phrase: $search_phrase) {
           id
+          subject_type
           org_id
           name
         }
@@ -187,7 +189,7 @@ export const { query_single_service, useSingleService } = query_factory({
       }
     }
   `,
-  resolver: (response) => _.get(response, "root.service")[0],
+  resolver: (response) => _.get(response, "data.root.service")[0],
 });
 
 export const { query_services_by_gov, useServicesByGov } = query_factory({
@@ -207,7 +209,7 @@ export const { query_services_by_gov, useServicesByGov } = query_factory({
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("root.orgs")
+      .get("data.root.orgs")
       .flatMap("services")
       .compact()
       .uniqBy("id")
@@ -229,7 +231,7 @@ export const { query_services_by_org, useServicesByOrg } = query_factory({
       }
     }
     `,
-  resolver: (response) => _.get(response, "root.org.services"),
+  resolver: (response) => _.get(response, "data.root.org.services"),
 });
 
 export const { query_services_by_program, useServicesByProgram } =
@@ -248,7 +250,7 @@ export const { query_services_by_program, useServicesByProgram } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.program.services"),
+    resolver: (response) => _.get(response, "data.root.program.services"),
   });
 
 export const { query_service_summary_gov, useServiceSummaryGov } =
@@ -264,7 +266,7 @@ export const { query_service_summary_gov, useServiceSummaryGov } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.gov.service_summary"),
+    resolver: (response) => _.get(response, "data.root.gov.service_summary"),
   });
 export const { query_service_summary_org, useServiceSummaryOrg } =
   query_factory({
@@ -279,7 +281,7 @@ export const { query_service_summary_org, useServiceSummaryOrg } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.org.service_summary"),
+    resolver: (response) => _.get(response, "data.root.org.service_summary"),
   });
 export const { query_service_summary_program, useServiceSummaryProgram } =
   query_factory({
@@ -294,5 +296,6 @@ export const { query_service_summary_program, useServiceSummaryProgram } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.program.service_summary"),
+    resolver: (response) =>
+      _.get(response, "data.root.program.service_summary"),
   });

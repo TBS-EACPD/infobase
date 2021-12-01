@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { result_docs_in_tabling_order } from "src/models/results";
-import { Gov, Dept, subject_types } from "src/models/subjects";
+import { Gov, Dept, class_subject_types } from "src/models/subjects";
 import { create_text_maker, run_template } from "src/models/text";
 import {
   actual_to_planned_gap_year,
@@ -32,7 +32,7 @@ const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
 ];
 
 export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
-  const gap_year_footnotes = _.chain(subject_types)
+  const gap_year_footnotes = _.chain(class_subject_types)
     .map(
       (subject_type) =>
         actual_to_planned_gap_year && {

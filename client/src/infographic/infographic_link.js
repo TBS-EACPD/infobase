@@ -2,8 +2,12 @@ import _ from "lodash";
 
 import { SafeJSURL } from "src/general_utils";
 
-const infograph_href_template = (subj, data_area, first_character = "#") =>
-  `${first_character}orgs/${subj.subject_type}/${subj.id}/infograph/${
+const infograph_href_template = (
+  { subject_type, id },
+  data_area,
+  first_character = "#"
+) =>
+  `${first_character}infographic/${subject_type}/${id}/${
     data_area ? data_area : "intro"
   }`;
 
@@ -13,7 +17,7 @@ const infograph_options_href_template = (
   options,
   first_character = "#"
 ) =>
-  `${first_character}orgs/${subj.subject_type}/${subj.id}/infograph/${
+  `${first_character}infographic/${subj.subject_type}/${subj.id}/${
     data_area ? data_area : ""
   }/${!_.isEmpty(options) ? SafeJSURL.stringify(options) : ""}`;
 

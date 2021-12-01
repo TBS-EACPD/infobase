@@ -14,19 +14,17 @@ const glossary_href = (subject_or_id, first_character = "#") => {
     return `${first_character}glossary/${id}`;
   }
 };
-const service_href = (service_id) => {
-  return `/service/${service_id}`;
-};
 
 const smart_href_template = (entity, first_character) => {
   if (entity.table && entity.table.constructor === Table) {
     return rpb_link({ table: entity.table.id }, first_character);
   } else if (entity.constructor === glossaryEntryStore) {
     return glossary_href(entity, first_character);
-  } else if (is_subject_instance(entity)) {
+  } else if (
+    is_subject_instance(entity) ||
+    (entity?.__typename && entity?.subject_type)
+  ) {
     return infograph_href_template(entity, null, first_character);
-  } else if (entity.__typename === "Service") {
-    return service_href(entity.id);
   } else {
     throw new Error(
       `${entity} does not belong to a class with a known href template`

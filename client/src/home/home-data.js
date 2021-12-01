@@ -27,7 +27,7 @@ const { text_maker } = create_text_maker_component([
 
 const infographic_link_items = _.compact([
   {
-    href: "#orgs/gov/gov/infograph/financial",
+    href: "#infographic/gov/gov/financial",
     svg: (
       <IconFinancesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
@@ -35,13 +35,13 @@ const infographic_link_items = _.compact([
     description: text_maker("financial_desc"),
   },
   {
-    href: "#orgs/gov/gov/infograph/covid",
+    href: "#infographic/gov/gov/covid",
     svg: <IconHelpAlt width="100%" color="#FFFFFF" alternate_color={false} />,
     title: text_maker("covid"),
     description: text_maker("covid_desc"),
   },
   {
-    href: "#orgs/gov/gov/infograph/people",
+    href: "#infographic/gov/gov/people",
     svg: (
       <IconEmployeesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
@@ -49,7 +49,7 @@ const infographic_link_items = _.compact([
     description: text_maker("people_desc"),
   },
   {
-    href: "#orgs/gov/gov/infograph/results",
+    href: "#infographic/gov/gov/results",
     svg: (
       <IconClipboardAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
@@ -57,7 +57,7 @@ const infographic_link_items = _.compact([
     description: text_maker("results_desc"),
   },
   services_feature_flag && {
-    href: "#orgs/gov/gov/infograph/services",
+    href: "#infographic/gov/gov/services",
     svg: (
       <IconServicesHome width="100%" color="#FFFFFF" alternate_color={false} />
     ),
@@ -78,15 +78,15 @@ const featured_content_items = _.compact([
   },
   {
     text_key: "covid_measure_spending_auth",
-    href: "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+    href: "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
   },
   {
     text_key: "quick_link_people_2020",
-    href: "#orgs/gov/gov/infograph/people",
+    href: "#infographic/gov/gov/people",
   },
   {
     text_key: "quick_link_DP_2022",
-    href: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)",
+    href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
   },
   {
     text_key: "quick_link_main_estimates",
@@ -94,15 +94,15 @@ const featured_content_items = _.compact([
   },
   {
     text_key: "quick_link_DRR_1920",
-    href: "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)",
+    href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
   },
   {
     text_key: "quick_link_gov_spending",
-    href: "#orgs/gov/gov/infograph/financial/.-.-(panel_key.-.-'welcome_mat)",
+    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
   },
   {
     text_key: "quick_link_tp_by_region",
-    href: "#orgs/gov/gov/infograph/financial/.-.-(panel_key.-.-'tp_by_region)",
+    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'tp_by_region)",
   },
 ]);
 

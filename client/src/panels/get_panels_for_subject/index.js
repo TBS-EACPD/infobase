@@ -26,6 +26,10 @@ const panel_loading_promises = (subject) => {
       return import("./get_program_panels").then(({ get_program_panels }) =>
         get_program_panels(subject)
       );
+    case "service":
+      return import("./get_service_panels").then(({ get_service_panels }) =>
+        get_service_panels(subject)
+      );
   }
 };
 

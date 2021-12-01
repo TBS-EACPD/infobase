@@ -48,9 +48,9 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
       is_searchable: true,
       formatter: (subject_id) => (
         <a
-          href={`#orgs/${
+          href={`#infographic/${
             is_gov ? "dept" : "program"
-          }/${subject_id}/infograph/services`}
+          }/${subject_id}/services`}
         >
           {correct_subject.store.lookup(subject_id).name}
         </a>

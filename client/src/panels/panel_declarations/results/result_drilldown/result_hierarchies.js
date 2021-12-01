@@ -4,7 +4,7 @@ import _ from "lodash";
 import { results_resource_fragment } from "src/panels/panel_declarations/results/results_common";
 
 import * as Results from "src/models/results";
-import { Dept, get_subject_by_guid } from "src/models/subjects";
+import { Dept, get_subject_instance_by_guid } from "src/models/subjects";
 
 import {
   filter_hierarchy,
@@ -34,7 +34,7 @@ export function create_full_results_hierarchy({
 }) {
   const get_resources = (subject) => results_resource_fragment(subject, doc);
 
-  const root_subject = get_subject_by_guid(subject_guid);
+  const root_subject = get_subject_instance_by_guid(subject_guid);
   let root;
   if (root_subject) {
     const root_type = _.includes(

@@ -47,20 +47,13 @@ const PrivacyStatement = React.lazy(() =>
 );
 const TextDiff = React.lazy(() => import("src/TextDiff/TextDiff"));
 const TreeMap = React.lazy(() => import("src/TreeMap/TreeMap"));
-const IsolatedPanel = React.lazy(() =>
-  import("src/panels/panel_routes/IsolatedPanel")
-);
-const PanelInventory = React.lazy(() =>
-  import("src/panels/panel_routes/PanelInventory")
-);
+
+const PanelInventory = React.lazy(() => import("src/panels/PanelInventory"));
 
 const FootnoteInventory = React.lazy(() =>
   import("src/models/footnotes/FootnoteInventory")
 );
 const Survey = React.lazy(() => import("src/Survey/Survey"));
-const SingleServiceRoute = React.lazy(() =>
-  import("../panels/panel_routes/SingleServiceRoute")
-);
 
 const are_linked_stylesheets_loaded = () => {
   try {
@@ -182,12 +175,12 @@ export class App extends React.Component {
                 path="/tag-explorer/:hierarchy_scheme?/:period?"
                 component={TagExplorer}
               />
-              <Route
-                path="/service/:service_id?"
-                component={SingleServiceRoute}
+              <Redirect
+                from="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
+                to="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
               />
               <Route
-                path="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
+                path="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
                 component={Infographic}
               />
               <Route path="/glossary/:active_key?" component={Glossary} />
@@ -209,14 +202,6 @@ export class App extends React.Component {
               <Route
                 path="/diff/:org_id?/:crso_id?/:program_id?"
                 component={TextDiff}
-              />
-              <Route
-                path="/panel/:subject_type?/:subject_id?/:panel_key?"
-                component={IsolatedPanel}
-              />
-              <Redirect
-                from="/graph/:subject_type?/:panel?/:id?"
-                to="/panel-inventory/:subject_type?/:panel?/:id?"
               />
               <Route
                 path="/panel-inventory/:subject_type?/:panel?/:id?"

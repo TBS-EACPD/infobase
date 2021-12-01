@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 import text from "src/panels/panel_declarations/services/services.yaml";
 import {
@@ -138,3 +139,17 @@ export class ServiceOverview extends React.Component {
     );
   }
 }
+
+export const declare_single_service_overview_panel = () =>
+  declare_panel({
+    panel_key: "single_service_overview",
+    subject_types: ["service"],
+    panel_config_func: (subject_type, panel_key) => ({
+      title: text_maker("list_of_provided_services_title"),
+      footnotes: false,
+      render({ title, calculations, sources }) {
+        const { subject } = calculations;
+        return <ServiceOverview subject={subject} />;
+      },
+    }),
+  });
