@@ -165,10 +165,8 @@ export default function (model_singleton) {
     ...common_service_fields,
   });
 
-  model_singleton.define_model("ServiceReport", ServiceReportSchema);
-  model_singleton.define_model("StandardReport", StandardReportSchema);
-  model_singleton.define_model("ServiceStandard", ServiceStandardSchema);
   model_singleton.define_model("Service", ServiceSchema);
+
   model_singleton.define_model("GovServiceSummary", GovServiceSummarySchema);
   model_singleton.define_model("OrgServiceSummary", OrgServiceSummarySchema);
   model_singleton.define_model(
