@@ -126,7 +126,7 @@ const query_promise_factory = (query_name, query, resolver) => (variables) => {
         _query_name: query_name,
       },
     })
-    .then(resolver);
+    .then(({ data }) => resolver(data));
 };
 
 const query_hook_factory = (query_name, query, resolver) => (variables) => {
