@@ -1400,7 +1400,24 @@ Array [
   Object {
     "data": Object {
       "en_root": Object {
-        "search_by_english_word": Array [],
+        "search_by_english_word": Array [
+          Object {
+            "id": "1119",
+            "name": "Copyright Tariff Setting",
+          },
+          Object {
+            "id": "1119",
+            "name": "Copyright Tariff Setting",
+          },
+          Object {
+            "id": "1120",
+            "name": "Issuance of licences for the use of copyright works when the owner is unlocatable",
+          },
+          Object {
+            "id": "1120",
+            "name": "Issuance of licences for the use of copyright works when the owner is unlocatable",
+          },
+        ],
         "search_by_french_word": Array [],
       },
     },
@@ -1408,9 +1425,36 @@ Array [
   Object {
     "data": Object {
       "fr_root": Object {
-        "diacritical_free_search": Array [],
-        "diacritical_search": Array [],
-        "multi_word_search": Array [],
+        "diacritical_free_search": Array [
+          Object {
+            "id": "1119",
+            "name": "Établissement de tarifs liés au droit d’auteur",
+          },
+          Object {
+            "id": "1119",
+            "name": "Établissement de tarifs liés au droit d’auteur",
+          },
+        ],
+        "diacritical_search": Array [
+          Object {
+            "id": "1119",
+            "name": "Établissement de tarifs liés au droit d’auteur",
+          },
+          Object {
+            "id": "1119",
+            "name": "Établissement de tarifs liés au droit d’auteur",
+          },
+        ],
+        "multi_word_search": Array [
+          Object {
+            "id": "1119",
+            "name": "Établissement de tarifs liés au droit d’auteur",
+          },
+          Object {
+            "id": "1119",
+            "name": "Établissement de tarifs liés au droit d’auteur",
+          },
+        ],
         "partial_word_search": Array [
           Object {
             "id": "1119",
