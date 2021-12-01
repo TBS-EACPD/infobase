@@ -24,8 +24,7 @@ export const { query_gov_years_with_covid_data, useGovYearsWithCovidData } =
       }
     }
   `,
-    resolver: (response) =>
-      _.get(response, "data.root.gov.years_with_covid_data"),
+    resolver: (response) => _.get(response, "root.gov.years_with_covid_data"),
   });
 export const { query_org_years_with_covid_data, useOrgYearsWithCovidData } =
   query_factory({
@@ -40,8 +39,7 @@ export const { query_org_years_with_covid_data, useOrgYearsWithCovidData } =
       }
     }
   `,
-    resolver: (response) =>
-      _.get(response, "data.root.org.years_with_covid_data"),
+    resolver: (response) => _.get(response, "root.org.years_with_covid_data"),
   });
 
 export const { query_all_covid_measures, useAllCovidMeasures } = query_factory({
@@ -56,7 +54,7 @@ export const { query_all_covid_measures, useAllCovidMeasures } = query_factory({
       }
     }
   `,
-  resolver: (response) => _.get(response, "data.root.covid_measures"),
+  resolver: (response) => _.get(response, "root.covid_measures"),
 });
 
 const covid_estimates_fields = `
@@ -89,7 +87,7 @@ export const {
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("data.root.covid_estimates_by_measure")
+      .get("root.covid_estimates_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
         _.flatMap(covid_data, ({ fiscal_year, covid_estimates }) =>
           _.map(covid_estimates, (row) => ({
@@ -129,7 +127,7 @@ export const {
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("data.root.org.covid_estimates_by_measure")
+      .get("root.org.covid_estimates_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
         _.flatMap(covid_data, ({ fiscal_year, covid_estimates }) =>
           _.map(covid_estimates, (row) => ({
@@ -171,7 +169,7 @@ export const {
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("data.root.covid_expenditures_by_measure")
+      .get("root.covid_expenditures_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
         _.flatMap(covid_data, ({ fiscal_year, covid_expenditures }) =>
           _.map(covid_expenditures, (row) => ({
@@ -211,7 +209,7 @@ export const {
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("data.root.org.covid_expenditures_by_measure")
+      .get("root.org.covid_expenditures_by_measure")
       .flatMap(({ id: measure_id, covid_data }) =>
         _.flatMap(covid_data, ({ fiscal_year, covid_expenditures }) =>
           _.map(covid_expenditures, (row) => ({
@@ -252,7 +250,7 @@ export const { query_gov_covid_summaries, useGovCovidSummaries } =
       }
     }
   `,
-    resolver: (response) => _.get(response, "data.root.gov.covid_summary"),
+    resolver: (response) => _.get(response, "root.gov.covid_summary"),
   });
 export const { query_org_covid_summaries, useOrgCovidSummaries } =
   query_factory({
@@ -269,7 +267,7 @@ export const { query_org_covid_summaries, useOrgCovidSummaries } =
       }
     }
   `,
-    resolver: (response) => _.get(response, "data.root.org.covid_summary"),
+    resolver: (response) => _.get(response, "root.org.covid_summary"),
   });
 export const { query_gov_covid_summary, useGovCovidSummary } = query_factory({
   query_name: "gov_covid_summary",
@@ -286,7 +284,7 @@ export const { query_gov_covid_summary, useGovCovidSummary } = query_factory({
     }
   `,
   resolver: (response) =>
-    _.chain(response).get("data.root.gov.covid_summary").first().value(),
+    _.chain(response).get("root.gov.covid_summary").first().value(),
 });
 export const { query_org_covid_summary, useOrgCovidSummary } = query_factory({
   query_name: "org_covid_summary",
@@ -303,7 +301,7 @@ export const { query_org_covid_summary, useOrgCovidSummary } = query_factory({
     }
   `,
   resolver: (response) =>
-    _.chain(response).get("data.root.org.covid_summary").first().value(),
+    _.chain(response).get("root.org.covid_summary").first().value(),
 });
 
 export const { query_top_covid_spending, useTopCovidSpending } = query_factory({
@@ -349,7 +347,7 @@ export const { query_top_covid_spending, useTopCovidSpending } = query_factory({
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("data.root.gov.covid_summary")
+      .get("root.gov.covid_summary")
       .first()
       .thru(({ top_spending_orgs, top_spending_measures }) => ({
         top_spending_orgs: _.map(

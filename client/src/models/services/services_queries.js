@@ -142,7 +142,7 @@ export const { query_dept_has_services, useDeptHasServices } = query_factory({
       }
     }
   `,
-  resolver: (response) => _.get(response, "data.root.org"),
+  resolver: (response) => _.get(response, "root.org"),
 });
 export const { query_program_has_services, useProgramHasServices } =
   query_factory({
@@ -157,7 +157,7 @@ export const { query_program_has_services, useProgramHasServices } =
       }
     }
   `,
-    resolver: (response) => _.get(response, "data.root.program"),
+    resolver: (response) => _.get(response, "root.program"),
   });
 
 export const { query_search_services, useSearchServices } = query_factory({
@@ -175,7 +175,7 @@ export const { query_search_services, useSearchServices } = query_factory({
     }
   `,
   resolver: (response) =>
-    _.chain(response).get("data.root.search_services").uniqBy("id").value(),
+    _.chain(response).get("root.search_services").uniqBy("id").value(),
 });
 
 export const { query_single_service, useSingleService } = query_factory({
@@ -189,7 +189,7 @@ export const { query_single_service, useSingleService } = query_factory({
       }
     }
   `,
-  resolver: (response) => _.get(response, "data.root.service")[0],
+  resolver: (response) => _.get(response, "root.service")[0],
 });
 
 export const { query_services_by_gov, useServicesByGov } = query_factory({
@@ -209,7 +209,7 @@ export const { query_services_by_gov, useServicesByGov } = query_factory({
   `,
   resolver: (response) =>
     _.chain(response)
-      .get("data.root.orgs")
+      .get("root.orgs")
       .flatMap("services")
       .compact()
       .uniqBy("id")
@@ -231,7 +231,7 @@ export const { query_services_by_org, useServicesByOrg } = query_factory({
       }
     }
     `,
-  resolver: (response) => _.get(response, "data.root.org.services"),
+  resolver: (response) => _.get(response, "root.org.services"),
 });
 
 export const { query_services_by_program, useServicesByProgram } =
@@ -250,7 +250,7 @@ export const { query_services_by_program, useServicesByProgram } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "data.root.program.services"),
+    resolver: (response) => _.get(response, "root.program.services"),
   });
 
 export const { query_service_summary_gov, useServiceSummaryGov } =
@@ -266,7 +266,7 @@ export const { query_service_summary_gov, useServiceSummaryGov } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "data.root.gov.service_summary"),
+    resolver: (response) => _.get(response, "root.gov.service_summary"),
   });
 export const { query_service_summary_org, useServiceSummaryOrg } =
   query_factory({
@@ -281,7 +281,7 @@ export const { query_service_summary_org, useServiceSummaryOrg } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "data.root.org.service_summary"),
+    resolver: (response) => _.get(response, "root.org.service_summary"),
   });
 export const { query_service_summary_program, useServiceSummaryProgram } =
   query_factory({
@@ -296,6 +296,5 @@ export const { query_service_summary_program, useServiceSummaryProgram } =
       }
     }
     `,
-    resolver: (response) =>
-      _.get(response, "data.root.program.service_summary"),
+    resolver: (response) => _.get(response, "root.program.service_summary"),
   });
