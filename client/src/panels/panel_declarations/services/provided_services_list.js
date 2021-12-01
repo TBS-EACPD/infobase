@@ -16,9 +16,14 @@ import {
   useServicesByProgram,
 } from "src/models/services/services_queries";
 
+import { infograph_href_template } from "src//infographic/infographic_link";
+
 import text from "./services.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
+
+const service_infographic_link = (id) =>
+  infograph_href_template({ id, subject_type: "service" });
 
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
@@ -72,7 +77,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
             filtered_sorted_data,
             ({ name, id, org_id, service_type, description }) => (
               <React.Fragment key={id}>
-                <a href={`#service/${id}`}>{name}</a>
+                <a href={service_infographic_link(id)}>{name}</a>
                 <p>{description}</p>
                 <div
                   style={{
@@ -98,7 +103,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
                       </span>
                     ))}
                   </div>
-                  <a href={`#service/${id}`}>
+                  <a href={service_infographic_link(id)}>
                     <button className="btn-ib-primary">
                       <TM k="view_service" />
                     </button>

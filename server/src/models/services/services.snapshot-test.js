@@ -1,5 +1,6 @@
 const service_fields = `
   id
+  subject_type
   org_id
   org {
     name

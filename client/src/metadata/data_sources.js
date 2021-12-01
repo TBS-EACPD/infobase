@@ -171,7 +171,7 @@ const sources = _.chain([
           id: "dp_results",
           text: text_maker("dp_results_item_name"),
           inline_link:
-            "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_dp)",
+            "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
         },
       ]);
     },
@@ -198,7 +198,7 @@ const sources = _.chain([
           id: "drr_results",
           text: text_maker("drr_results_item_name"),
           inline_link:
-            "#orgs/gov/gov/infograph/results/.-.-(panel_key.-.-'gov_drr)",
+            "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
         },
       ]);
     },
@@ -232,13 +232,13 @@ const sources = _.chain([
         id: "covid_auth_panel",
         text: text_maker("covid_measure_spending_auth"),
         inline_link:
-          "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+          "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
       },
       {
         id: "covid_exp_panel",
         text: text_maker("covid_expenditures_estimated_exp"),
         inline_link:
-          "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
+          "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
       },
     ],
   },

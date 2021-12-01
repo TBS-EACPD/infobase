@@ -432,6 +432,7 @@ Object {
               "Legal",
             ],
             "standards": CoreDocumentArray [],
+            "subject_type": "service",
             "submission_year": "2018",
             "target_groups": CoreMongooseArray [
               "Economic Segments",
@@ -533,6 +534,7 @@ Object {
               "Legal",
             ],
             "standards": CoreDocumentArray [],
+            "subject_type": "service",
             "submission_year": "2019",
             "target_groups": CoreMongooseArray [
               "Economic Segments",
@@ -691,6 +693,7 @@ Object {
                 "type": "Timeliness",
               },
             ],
+            "subject_type": "service",
             "submission_year": "2018",
             "target_groups": CoreMongooseArray [
               "Persons",
@@ -849,6 +852,7 @@ Object {
                 "type": "Timeliness",
               },
             ],
+            "subject_type": "service",
             "submission_year": "2019",
             "target_groups": CoreMongooseArray [
               "Persons",
@@ -963,6 +967,7 @@ Object {
               "Legal",
             ],
             "standards": CoreDocumentArray [],
+            "subject_type": "service",
             "submission_year": "2018",
             "target_groups": CoreMongooseArray [
               "Economic Segments",
@@ -1064,6 +1069,7 @@ Object {
               "Legal",
             ],
             "standards": CoreDocumentArray [],
+            "subject_type": "service",
             "submission_year": "2019",
             "target_groups": CoreMongooseArray [
               "Economic Segments",
@@ -1222,6 +1228,7 @@ Object {
                 "type": "Timeliness",
               },
             ],
+            "subject_type": "service",
             "submission_year": "2018",
             "target_groups": CoreMongooseArray [
               "Persons",
@@ -1380,6 +1387,7 @@ Object {
                 "type": "Timeliness",
               },
             ],
+            "subject_type": "service",
             "submission_year": "2019",
             "target_groups": CoreMongooseArray [
               "Persons",
@@ -1634,6 +1642,7 @@ Object {
               "type": "Timeliness",
             },
           ],
+          "subject_type": "service",
           "submission_year": "2018",
           "target_groups": CoreMongooseArray [
             "Persons",
@@ -1792,6 +1801,7 @@ Object {
               "type": "Timeliness",
             },
           ],
+          "subject_type": "service",
           "submission_year": "2019",
           "target_groups": CoreMongooseArray [
             "Persons",

@@ -2,7 +2,7 @@ import _ from "lodash";
 import { createSelector } from "reselect";
 
 import { Indicator } from "src/models/results";
-import { get_subject_by_guid } from "src/models/subjects";
+import { get_subject_instance_by_guid } from "src/models/subjects";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
@@ -126,7 +126,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
   get_subject_selector() {
     return createSelector(
       (state) => state.scheme.subject_guid,
-      (guid) => get_subject_by_guid(guid)
+      (guid) => get_subject_instance_by_guid(guid)
     );
   }
 

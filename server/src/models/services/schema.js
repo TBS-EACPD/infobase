@@ -21,6 +21,7 @@ const schema = `
     services: [Service]
     has_services: Boolean
   }
+
   type ServiceSummary{
     id: String
     service_general_stats: ServiceGeneralStats
@@ -29,6 +30,7 @@ const schema = `
     service_standards_summary: [ServiceStandardsSummary]
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
   }
+
   type ServiceGeneralStats{
     id: String
     report_years: [String]
@@ -39,6 +41,7 @@ const schema = `
     num_of_subject_offering_services: Float
     num_of_programs_offering_services: Float
   }
+
   type ServiceChannelsSummary{
     id: String
     subject_id: String
@@ -46,6 +49,7 @@ const schema = `
     channel_id: String
     channel_value: Float
   }
+
   type ServiceDigitalStatusSummary{
     id: String
     key: String
@@ -55,6 +59,7 @@ const schema = `
     cannot_online: Float
     not_applicable: Float
   }
+
   type ServiceStandardsSummary{
     id: String
     subject_id: String
@@ -62,12 +67,14 @@ const schema = `
     standards_count: Float
     met_standards_count: Float
   }
+
   type OrgsOfferingServicesSummary{
     id: String
     subject_id: String
     number_of_services: Float
     total_volume: Float
   }
+
   type ServiceReport{
     service_id: String
     year: String
@@ -85,6 +92,7 @@ const schema = `
     phone_inquiry_and_application_count: Float
     service_report_comment: String
   }
+
   type StandardReport{
     standard_id: String
     year: String
@@ -95,8 +103,10 @@ const schema = `
     is_target_met: Boolean
     standard_report_comment: String
   }
+
   type Service{
     id: String
+    subject_type: String
     org_id: String
     org: Org
     submission_year: String
@@ -134,6 +144,7 @@ const schema = `
     standards: [ServiceStandard]
     service_report: [ServiceReport]
   }
+
   type ServiceStandard{
     standard_id: String
     service_id: String
@@ -199,6 +210,7 @@ export default function ({ models, loaders }) {
       has_services: ({ program_id }) => program_has_services(program_id),
     },
     Service: {
+      subject_type: () => "service",
       org: ({ org_id }) => org_id_loader.load(org_id),
       programs: ({ program_activity_codes }) =>
         _.map(program_activity_codes, (program_id) =>

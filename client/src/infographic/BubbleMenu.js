@@ -13,6 +13,10 @@ import { primaryColor, backgroundColor } from "src/style_constants/index";
 import "./BubbleMenu.scss";
 
 const BubbleMenu = ({ items, active_item_id }) => {
+  if (items.length === 1) {
+    return null;
+  }
+
   if (is_a11y_mode) {
     return (
       <nav aria-label={trivial_text_maker("dataset_navigation")}>
