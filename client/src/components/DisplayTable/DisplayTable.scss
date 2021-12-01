@@ -35,14 +35,23 @@ td {
   background-color: inherit;
 }
 
+.display-table-utils-header {
+  display: flex;
+  justify-content: space-between;
+  border-top-left-radius: $standardBorderRadius;
+  border-top-right-radius: $standardBorderRadius;
+  background: $primaryColor;
+}
+.display-table-footer {
+  border-bottom-left-radius: $standardBorderRadius;
+  border-bottom-right-radius: $standardBorderRadius;
+  background: $primaryColor;
+}
 .display-table-container {
   overflow-x: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 
   &.display-table-container--with-utils {
-    border-top-left-radius: $standardBorderRadius;
-    border-top-right-radius: $standardBorderRadius;
     background-color: $primaryColor;
   }
 }
