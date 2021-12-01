@@ -183,7 +183,7 @@ export class App extends React.Component {
                 component={TagExplorer}
               />
               <Route
-                path="/dept/:subject_id/service/:service_id?"
+                path="/service/:service_id?"
                 component={SingleServiceRoute}
               />
               <Route
