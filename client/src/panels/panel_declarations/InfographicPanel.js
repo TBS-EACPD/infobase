@@ -60,7 +60,9 @@ class Panel_ extends React.Component {
       );
 
     const share_modal_subject_fragment = subject
-      ? (subject.subject_type === "tag" || subject.subject_type === "gov"
+      ? (subject.subject_type === "tag" ||
+        subject.subject_type === "gov" ||
+        subject.subject_type === "service"
           ? subject.name
           : subject.subject_type === "dept"
           ? subject.abbr

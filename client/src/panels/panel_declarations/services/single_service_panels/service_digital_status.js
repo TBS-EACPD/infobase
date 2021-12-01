@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import text from "src/panels/panel_declarations/services/services.yaml";
 import {
   digital_status_keys,
@@ -20,7 +21,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceDigitalStatus extends React.Component {
   render() {
-    const { service } = this.props;
+    const { service, title } = this.props;
+
     const footnote = service.digital_enablement_comment && [
       create_fake_footnote({
         topic_keys: ["DIGITAL_STATUS"],
@@ -57,7 +59,7 @@ export class ServiceDigitalStatus extends React.Component {
     };
 
     return (
-      <Panel title={text_maker("digital_status")} footnotes={footnote}>
+      <Panel title={title} footnotes={footnote}>
         <TM className="medium-panel-text" k="overview_digital_status_title" />
         <DisplayTable
           unsorted_initial={true}
@@ -76,3 +78,17 @@ export class ServiceDigitalStatus extends React.Component {
     );
   }
 }
+
+export const declare_single_service_digital_status_panel = () =>
+  declare_panel({
+    panel_key: "single_service_digital_status",
+    subject_types: ["service"],
+    panel_config_func: (subject_type, panel_key) => ({
+      title: text_maker("digital_status"),
+      footnotes: false,
+      render({ title, calculations, sources }) {
+        const { subject } = calculations;
+        return <ServiceDigitalStatus service={subject} title={title} />;
+      },
+    }),
+  });

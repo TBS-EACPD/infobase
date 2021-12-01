@@ -2,6 +2,7 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import text from "src/panels/panel_declarations/services/services.yaml";
 
 import {
@@ -28,14 +29,17 @@ const color_scale = scaleOrdinal()
 export class ServiceStandards extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       active_statuses: standard_statuses,
     };
   }
 
   render() {
-    const { service } = this.props;
+    const { service, title } = this.props;
+
     const { active_statuses } = this.state;
+
     const standards = _.uniqBy(service.standards, "standard_id");
 
     const footnotes = _.chain(standards)
@@ -188,10 +192,7 @@ export class ServiceStandards extends React.Component {
     );
 
     return (
-      <Panel
-        title={text_maker("service_standards_title")}
-        footnotes={footnotes}
-      >
+      <Panel title={title} footnotes={footnotes}>
         {!_.isEmpty(data) ? (
           <Fragment>
             <TM className="medium-panel-text" k="service_standards_text" />
@@ -230,3 +231,17 @@ export class ServiceStandards extends React.Component {
     );
   }
 }
+
+export const declare_single_service_standards_panel = () =>
+  declare_panel({
+    panel_key: "single_service_standards",
+    subject_types: ["service"],
+    panel_config_func: (subject_type, panel_key) => ({
+      title: text_maker("service_standards_title"),
+      footnotes: false,
+      render({ title, calculations, sources }) {
+        const { subject } = calculations;
+        return <ServiceStandards service={subject} title={title} />;
+      },
+    }),
+  });

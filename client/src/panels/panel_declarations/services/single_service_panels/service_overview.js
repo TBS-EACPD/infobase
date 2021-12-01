@@ -24,7 +24,8 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceOverview extends React.Component {
   render() {
-    const { service } = this.props;
+    const { service, title } = this.props;
+
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
       year: most_recent_year,
@@ -42,7 +43,7 @@ export class ServiceOverview extends React.Component {
       rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
     };
     return (
-      <TextPanel title={text_maker("service_overview_title")}>
+      <TextPanel title={title}>
         <dl className="dl-horizontal tombstone-data-list">
           <dt>
             <TM k={"description"} />
@@ -145,11 +146,11 @@ export const declare_single_service_overview_panel = () =>
     panel_key: "single_service_overview",
     subject_types: ["service"],
     panel_config_func: (subject_type, panel_key) => ({
-      title: text_maker("list_of_provided_services_title"),
+      title: text_maker("service_overview_title"),
       footnotes: false,
       render({ title, calculations, sources }) {
         const { subject } = calculations;
-        return <ServiceOverview subject={subject} />;
+        return <ServiceOverview service={subject} title={title} />;
       },
     }),
   });
