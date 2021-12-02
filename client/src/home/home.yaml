@@ -130,8 +130,12 @@ quick_link_auth_and_exp:
 
 quick_link_gov_spending:
   en: 2019-20 Government Spending
-  fr: dépenses du gouvernement de 2019-2020
+  fr: Dépenses du gouvernement de 2019-2020
 
 quick_link_tp_by_region:
   en: Transfer payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
+
+quick_link_service_inventory_2019:
+  en: 2019-20 Serivce Inventory
+  fr: Répertoire des services 2019-2020 
