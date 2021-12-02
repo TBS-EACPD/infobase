@@ -155,7 +155,7 @@ export default async function ({ models }) {
         dept_submissions__document__year: submission_year,
         dept_id: org_id,
         dept__tbs_dept_code: dept_code,
-        eternal_id,
+        eternal_id: id,
         collects_fees,
         account_reg_digital_status,
         authentication_status,
@@ -187,12 +187,11 @@ export default async function ({ models }) {
 
       const service_report = _.filter(
         service_report_rows,
-        (service_report) => service_report.service_id === eternal_id
+        (service_report) => service_report.service_id === id
       );
 
       return {
-        id: `${eternal_id}-${submission_year}`,
-        service_id: eternal_id,
+        id,
         submission_year,
         org_id,
         collects_fees: convert_to_bool_or_null(collects_fees, "TRUE", "FALSE"),
@@ -253,21 +252,25 @@ export default async function ({ models }) {
           recipient_type_fr,
         }),
         ...other_fields,
-        ...get_corresponding_urls(
-          urls[eternal_id],
-          submission_year,
-          "SERVICE",
-          "urls"
-        ),
+        ...get_corresponding_urls(urls[id], submission_year, "SERVICE", "urls"),
 
         standards: _.filter(
           service_standard_rows,
-          (service_standard) => service_standard.service_id === eternal_id
+          (service_standard) => service_standard.service_id === id
         ),
         service_report,
       };
     })
     .reject((service) => _.isEqual(service.scope_codes, ["internal"])) // SI_TODO This should be done on pipeline.. I think?
+    // SI_TODO oof, big mess, need to refactor a lot of stuff to support multiple years of service data. For now, just take the latest submitted version
+    // (the client was, generally, doing this in a bunch of places manually already, so this is more of a cleanup than a hack for now)
+    .groupBy("id")
+    .map((service_across_years) =>
+      _.chain(service_across_years)
+        .sortBy(({ submission_year }) => _.toInteger(submission_year))
+        .last()
+        .value()
+    )
     .value();
   const most_recent_year = get_years_from_services(service_rows)[0];
 
