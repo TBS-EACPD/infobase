@@ -92,7 +92,6 @@ const summary_fields = `
 service_summary{
   id
   service_general_stats {
-    id
     report_years
     number_of_services
     number_of_online_enabled_services
@@ -100,14 +99,12 @@ service_summary{
     num_of_programs_offering_services
   }
   service_channels_summary {
-    id
     subject_id
     year
     channel_id
     channel_value
   }
   service_digital_status_summary{
-    id
     key
     key_desc
     subject_id
@@ -116,14 +113,12 @@ service_summary{
     not_applicable
   }
   service_standards_summary{
-    id
     subject_id
     services_w_standards_count
     standards_count
     met_standards_count
   }
   subject_offering_services_summary{
-    id
     subject_id
     number_of_services
     total_volume
