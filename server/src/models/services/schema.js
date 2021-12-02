@@ -5,7 +5,7 @@ import { get_search_terms_resolver } from "../search_utils.js";
 
 const schema = `
   extend type Root{
-    service(id: String!): [Service]
+    service(id: String!): Service
     search_services(search_phrase: String!): [Service]
   }
   extend type Gov{
@@ -182,7 +182,7 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Root: {
-      service: (_x, { id }) => service_loader.load(id),
+      service: (_x, { id }) => service_loader.load(id).then(_.first),
       search_services: get_search_terms_resolver(Service),
     },
     Gov: {
