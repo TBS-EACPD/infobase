@@ -155,7 +155,7 @@ export default async function ({ models }) {
         dept_submissions__document__year: submission_year,
         dept_id: org_id,
         dept__tbs_dept_code: dept_code,
-        eternal_id: id,
+        eternal_id,
         collects_fees,
         account_reg_digital_status,
         authentication_status,
@@ -184,12 +184,15 @@ export default async function ({ models }) {
         recipient_type_name_fr: recipient_type_fr,
         ...other_fields
       } = service;
+
       const service_report = _.filter(
         service_report_rows,
-        (service_report) => service_report.service_id === id
+        (service_report) => service_report.service_id === eternal_id
       );
+
       return {
-        id,
+        id: `${eternal_id}-${submission_year}`,
+        service_id: eternal_id,
         submission_year,
         org_id,
         collects_fees: convert_to_bool_or_null(collects_fees, "TRUE", "FALSE"),
@@ -250,11 +253,16 @@ export default async function ({ models }) {
           recipient_type_fr,
         }),
         ...other_fields,
-        ...get_corresponding_urls(urls[id], submission_year, "SERVICE", "urls"),
+        ...get_corresponding_urls(
+          urls[eternal_id],
+          submission_year,
+          "SERVICE",
+          "urls"
+        ),
 
         standards: _.filter(
           service_standard_rows,
-          (service_standard) => service_standard.service_id === id
+          (service_standard) => service_standard.service_id === eternal_id
         ),
         service_report,
       };
