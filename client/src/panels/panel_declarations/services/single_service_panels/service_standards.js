@@ -3,12 +3,12 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import text from "src/panels/panel_declarations/services/services.yaml";
 
 import {
   DisplayTable,
   create_text_maker_component,
-  Panel,
   VisibilityControl,
 } from "src/components/index";
 
@@ -192,7 +192,7 @@ export class ServiceStandards extends React.Component {
     );
 
     return (
-      <Panel title={title} footnotes={footnotes}>
+      <InfographicPanel title={title} footnotes={footnotes}>
         {!_.isEmpty(data) ? (
           <Fragment>
             <TM className="medium-panel-text" k="service_standards_text" />
@@ -227,7 +227,7 @@ export class ServiceStandards extends React.Component {
         ) : (
           <TM className="medium-panel-text" k="no_service_standards_text" />
         )}
-      </Panel>
+      </InfographicPanel>
     );
   }
 }

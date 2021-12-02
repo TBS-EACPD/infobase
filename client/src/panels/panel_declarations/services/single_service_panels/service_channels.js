@@ -2,10 +2,11 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import text from "src/panels/panel_declarations/services/services.yaml";
 import { application_channels_keys } from "src/panels/panel_declarations/services/shared";
 
-import { create_text_maker_component, Panel } from "src/components/index";
+import { create_text_maker_component } from "src/components/index";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -54,7 +55,7 @@ export class ServiceChannels extends React.Component {
     }));
 
     return (
-      <Panel title={title}>
+      <InfographicPanel title={title}>
         {filtered_keys.length > 0 ? (
           <Fragment>
             <TM k="service_channels_text" className="medium-panel-text" />
@@ -98,7 +99,7 @@ export class ServiceChannels extends React.Component {
         ) : (
           <TM className="medium-panel-text" k="no_applications" />
         )}
-      </Panel>
+      </InfographicPanel>
     );
   }
 }
