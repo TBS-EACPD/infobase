@@ -2,6 +2,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import text from "src/panels/panel_declarations/services/services.yaml";
 import {
   digital_status_keys,
@@ -11,7 +12,6 @@ import {
 
 import {
   create_text_maker_component,
-  Panel,
   DisplayTable,
 } from "src/components/index";
 
@@ -59,7 +59,7 @@ export class ServiceDigitalStatus extends React.Component {
     };
 
     return (
-      <Panel title={title} footnotes={footnote}>
+      <InfographicPanel title={title} footnotes={footnote}>
         <TM className="medium-panel-text" k="overview_digital_status_title" />
         <DisplayTable
           unsorted_initial={true}
@@ -74,7 +74,7 @@ export class ServiceDigitalStatus extends React.Component {
             columnToggleUtil: null,
           }}
         />
-      </Panel>
+      </InfographicPanel>
     );
   }
 }
