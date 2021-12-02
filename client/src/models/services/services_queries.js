@@ -183,7 +183,7 @@ export const { query_single_service, useSingleService } = query_factory({
   query: gql`
     query($lang: String! = "${lang}", $service_id: String!) {
       root(lang: $lang) {
-        service(id: $service_id){
+        service(service_id: $service_id){
           ${all_service_fragments}
         }
       }
@@ -199,8 +199,6 @@ export const { query_services_by_gov, useServicesByGov } = query_factory({
     root(lang: $lang) {
       orgs {
         services {
-          org_id
-          id
           ${all_service_fragments}
         }
       }
@@ -224,7 +222,6 @@ export const { query_services_by_org, useServicesByOrg } = query_factory({
         org(org_id: $id) {
           id
           services {
-            id
             ${all_service_fragments}
           }
         }
@@ -243,7 +240,6 @@ export const { query_services_by_program, useServicesByProgram } =
         program(id: $id) {
           id
           services {
-            id
             ${all_service_fragments}
           }
         }
