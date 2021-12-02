@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "version": "1.0"
+  },
+
+  "useful_info": {
+    "required": true,
+    "form_type": "radio",
+    "form_label": {
+      "en": "To what extent did you find the service inventory information on GC InfoBase useful? (1=not at all useful and 5=very useful)",
+      "fr": "Dans quelle mesure avez-vous trouvé l'information sur le Répertoire des services dans l'InfoBase du GC utile? (1=inutile et 5=très utile)"
+    },
+    "value_type": "enums",
+    "enum_values": {
+      "one": {
+        "en": "1",
+        "fr": "1"
+      },
+      "two": {
+        "en": "2",
+        "fr": "2"
+      },
+      "three": {
+        "en": "3",
+        "fr": "3"
+      },
+      "four": {
+        "en": "4",
+        "fr": "4"
+      },
+      "five": {
+        "en": "5",
+        "fr": "5"
+      }
+    },
+    "style": "horizontal"
+  },
+
+  "other_details": {
+    "required": false,
+    "value_type": "string",
+    "form_type": "textarea",
+    "form_label": {
+      "en": "We are always looking for ways to improve GC InfoBase! Please provide any other feedback about your experience.",
+      "fr": "Nous cherchons des moyens d’améliorer InfoBase du GC! Pourriez-vous nous donner d'autres commentaires sur votre expérience."
+    }
+  },
+
+  "user_type": {
+    "required": false,
+    "form_type": "checkbox",
+    "form_label": {
+      "en": "Please choose the type of user that best describes you (select all that apply):",
+      "fr": "Veuillez choisi le type d’utilisateur qui vous décrit le mieux (sélectionnez toutes les options qui s’appliquent) :"
+    },
+    "value_type": "enums",
+    "enum_values": {
+      "academic": {
+        "en": "Academic/Researcher/Student",
+        "fr": "Universitaire / étudiant / chercheur"
+      },
+      "federal": {
+        "en": "Federal public servant",
+        "fr": "Fonctionnaire fédéral"
+      },
+      "journalist": {
+        "en": "Journalist",
+        "fr": "Journaliste"
+      },
+      "public": {
+        "en": "Member of the general public",
+        "fr": "Membre du grand public"
+      },
+      "gov": {
+        "en": "Member (or staff) of the Parliament of Canada",
+        "fr": "Député (ou membre du personnel) de la Chambre des communes ou du Sénat"
+      },
+      "servant": {
+        "en": "Provincial/municipal public servant",
+        "fr": "Fonctionnaire provincial / municipal"
+      },
+      "other": {
+        "en": "Other, please specify:",
+        "fr": "Autre, veuillez préciser :"
+      }
+    }
+  },
+  "user_type_other": {
+    "required": false,
+    "value_type": "string",
+    "form_type": "textarea",
+    "form_label": {
+      "en": "",
+      "fr": ""
+    },
+    "connection": {
+      "name": "user_type",
+      "enable": "other"
+    }
+  },
+
+  "sha": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "route": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "lang": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "app_version": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "client_id": {
+    "required": true,
+    "value_type": "string",
+    "form_type": false
+  },
+  "additional": {
+    "required": false,
+    "value_type": "json",
+    "form_type": false
+  }
+}

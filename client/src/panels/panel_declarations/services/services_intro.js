@@ -1,15 +1,21 @@
 import _ from "lodash";
-import React from "react";
+import React, { useState } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component, LeafSpinner } from "src/components/index";
+import {
+  create_text_maker_component,
+  LeafSpinner,
+  StatelessModal,
+} from "src/components/index";
 
 import {
   useServiceSummaryGov,
   useServiceSummaryOrg,
 } from "src/models/services/services_queries";
+
+import { FormFrontend } from "src/FormFrontend";
 
 // import { formats } from "src/core/format";
 
@@ -23,6 +29,9 @@ const ServicesIntroPanel = ({ subject }) => {
     dept: useServiceSummaryOrg,
   }[subject.subject_type];
   const { loading, data } = useSummaryServices({ id: subject.id });
+
+  const [show_service_feedback, set_show_service_feedback] = useState(false);
+
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }
@@ -53,7 +62,22 @@ const ServicesIntroPanel = ({ subject }) => {
             : { num_of_programs_offering_services }),
         }}
       />
-      {/*
+      <p>
+        {text_maker("service_inventory_feedback_request")}{" "}
+        <button
+          onClick={() => set_show_service_feedback(true)}
+          className={"link-styled button-unstyled"}
+        >
+          {text_maker("service_inventory_feedback_button")}
+        </button>
+      </p>
+      <StatelessModal
+        title={text_maker("service_inventory_feedback_title")}
+        show={show_service_feedback}
+        body={<FormFrontend template_name="service_inventory_feedback" />}
+        on_close_callback={() => set_show_service_feedback(false)}
+      />
+      {/* SI_TODO what's this, can it be deleted?
       <div className="pane-row">
         <div className="pane-rect">
           <span className="pane-max-width">
