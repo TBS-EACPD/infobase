@@ -12,7 +12,7 @@ import {
 
 import { create_text_maker_component, FancyUL } from "src/components/index";
 
-import { Program } from "src/models/subjects";
+import { Dept, Program } from "src/models/subjects";
 
 import { formats } from "src/core/format";
 
@@ -46,16 +46,52 @@ export class ServiceOverview extends React.Component {
       <TextPanel title={title}>
         <dl className="dl-horizontal tombstone-data-list">
           <dt>
+            <TM k={"name"} />
+          </dt>
+          <dd>
+            <p>{service.name}</p>
+          </dd>
+          <dt>
             <TM k={"description"} />
           </dt>
           <dd>
             <p>{service.description}</p>
           </dd>
+          <dt>{text_maker("org")}</dt>
+          <dd>
+            {(() => {
+              const org = Dept.store.lookup(service.org_id);
+              return (
+                <a href={infograph_href_template(org, "services")}>
+                  {org.name}
+                </a>
+              );
+            })()}
+          </dd>
+          <dt>{text_maker("programs")}</dt>
+          <dd>
+            <ul>
+              {_.map(service.program_activity_codes, (program_id) => {
+                const program = Program.store.lookup(program_id);
+                return (
+                  program && (
+                    <li key={program_id}>
+                      <a href={infograph_href_template(program, "services")}>
+                        {program.name}
+                      </a>
+                    </li>
+                  )
+                );
+              })}
+            </ul>
+          </dd>
           <dt>{text_maker("service_types")}</dt>
           <dd>
-            {_.map(service.service_type, (type) => (
-              <p key={type}>{type}</p>
-            ))}
+            <ul>
+              {_.map(service.service_type, (type) => (
+                <li key={type}>{type}</li>
+              ))}
+            </ul>
           </dd>
           <dt>
             <TM k={"identification_methods"} />
@@ -81,21 +117,6 @@ export class ServiceOverview extends React.Component {
                 )
               )}
             </FancyUL>
-          </dd>
-          <dt>{text_maker("link_to_programs")}</dt>
-          <dd>
-            {_.map(service.program_activity_codes, (program_id) => {
-              const program = Program.store.lookup(program_id);
-              return (
-                program && (
-                  <p key={program_id}>
-                    <a href={infograph_href_template(program)}>
-                      {program.name}
-                    </a>
-                  </p>
-                )
-              );
-            })}
           </dd>
           <dt>{text_maker("services_fees")}</dt>
           <dd>
