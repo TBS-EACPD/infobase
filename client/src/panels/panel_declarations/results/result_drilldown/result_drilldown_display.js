@@ -264,7 +264,7 @@ export default class ResultsExplorerDisplay extends React.Component {
           paddingBottom: "30px",
         }}
       >
-        <LeafSpinner config_name={"tabbed_content"} />
+        <LeafSpinner config_name={"subroute"} />
       </div>
     );
 
@@ -373,8 +373,8 @@ export default class ResultsExplorerDisplay extends React.Component {
           >
             {loading && (
               <div className="loading-overlay">
-                <div style={{ height: "200px", position: "relative" }}>
-                  <LeafSpinner config_name={"tabbed_content"} />
+                <div style={{ height: "200px" }}>
+                  <LeafSpinner config_name={"subroute"} />
                 </div>
               </div>
             )}

@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { TabLoadingSpinner } from "src/components/index";
+import { LeafSpinner } from "src/components/index";
 
 import { query_gov_covid_summaries } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
@@ -61,7 +61,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
     const { loading, selected_year, summaries_by_year } = this.state;
 
     if (loading) {
-      return <TabLoadingSpinner />;
+      return <LeafSpinner config_name={"subroute"} />;
     } else {
       const { covid_estimates, covid_expenditures } =
         summaries_by_year[selected_year];

@@ -37,7 +37,7 @@ export default class FootnoteInventory extends React.Component {
         description={null}
         route_key={"footnote_inventory"}
       >
-        {loading && <LeafSpinner config_name={"sub_route"} />}
+        {loading && <LeafSpinner config_name={"route"} />}
         {!loading && <FootnoteList footnotes={footNoteStore.get_all()} />}
       </StandardRouteContainer>
     );

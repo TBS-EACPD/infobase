@@ -27,13 +27,16 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     dept: useServiceSummaryOrg,
   }[subject.subject_type];
   const { loading, data } = useSummaryServices({ id: subject.id });
+
   if (loading) {
-    return <LeafSpinner config_name="relative_panel" />;
+    return <LeafSpinner config_name="subroute" />;
   }
+
   const {
     subject_offering_services_summary,
     service_general_stats: { report_years, number_of_services },
   } = data;
+
   const is_gov = subject.subject_type === "gov";
   const correct_subject = is_gov ? Dept : Program;
 

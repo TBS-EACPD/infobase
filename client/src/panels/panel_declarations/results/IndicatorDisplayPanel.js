@@ -142,7 +142,7 @@ export default class IndicatorDisplayPanel extends React.Component {
     );
 
     return loading ? (
-      <LeafSpinner ref="spinner" config_name={"sub_route"} />
+      <LeafSpinner ref="spinner" config_name={"subroute"} />
     ) : (
       <Panel
         title={indicator.name}

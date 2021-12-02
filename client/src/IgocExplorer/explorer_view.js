@@ -328,7 +328,7 @@ class ExplorerForIgoc extends React.Component {
           {loading && (
             <div className="loading-overlay">
               <div style={{ height: "200px", position: "relative" }}>
-                <LeafSpinner config_name={"sub_route"} />
+                <LeafSpinner config_name={"subroute"} />
               </div>
             </div>
           )}

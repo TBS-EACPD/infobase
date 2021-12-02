@@ -33,8 +33,9 @@ const ServicesIntroPanel = ({ subject }) => {
   const [show_service_feedback, set_show_service_feedback] = useState(false);
 
   if (loading) {
-    return <LeafSpinner config_name="relative_panel" />;
+    return <LeafSpinner config_name="subroute" />;
   }
+
   const {
     service_general_stats: {
       report_years,
