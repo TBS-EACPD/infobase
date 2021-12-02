@@ -35,10 +35,7 @@ const get_years_from_service_standards = (services) =>
 
 export default async function ({ models }) {
   const {
-    ServiceStandard,
     Service,
-    ServiceReport,
-    StandardReport,
     GovServiceSummary,
     OrgServiceSummary,
     ProgramServiceSummary,
@@ -282,7 +279,6 @@ export default async function ({ models }) {
     subject_type,
     key
   ) => ({
-    id: `${subject_type}_${subject_id}_${key}`,
     key_desc: `${key}_desc`,
     key,
     subject_id,
@@ -326,7 +322,6 @@ export default async function ({ models }) {
       most_recent_year
     );
     return {
-      id: `${subject_id}_standards_summary`,
       subject_id,
       services_w_standards_count,
       standards_count: processed_standards.length,
@@ -338,7 +333,6 @@ export default async function ({ models }) {
       .map((services, org_id) => {
         const most_recent_year = get_years_from_service_report(services)[0];
         return {
-          id: org_id,
           subject_id: org_id,
           number_of_services: services.length,
           total_volume: _.sumBy(services, ({ service_report }) =>
@@ -457,7 +451,6 @@ export default async function ({ models }) {
       .groupBy("year")
       .flatMap((reports, year) =>
         _.map(application_channels_keys, (key) => ({
-          id: _.uniqueId(),
           subject_id: reports[0].subject_id,
           year,
           channel_id: key,
@@ -478,7 +471,6 @@ export default async function ({ models }) {
     {
       id: "gov",
       service_general_stats: {
-        id: "gov",
         report_years: get_years_from_service_report(
           most_recent_filtered_services
         ),
@@ -529,7 +521,6 @@ export default async function ({ models }) {
     .flatMap((services, org_id) => ({
       id: org_id,
       service_general_stats: {
-        id: org_id,
         report_years: get_years_from_service_report(services),
         number_of_services: services.length,
         number_of_online_enabled_services:
@@ -558,7 +549,6 @@ export default async function ({ models }) {
     .flatMap((services, program_id) => ({
       id: program_id,
       service_general_stats: {
-        id: program_id,
         report_years: get_years_from_service_report(services),
         number_of_services: services.length,
         number_of_online_enabled_services:

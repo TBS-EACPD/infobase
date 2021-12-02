@@ -11,70 +11,60 @@ Object {
             Object {
               "channel_id": "other_application_count",
               "channel_value": 101,
-              "id": "11",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "phone_application_count",
               "channel_value": 0,
-              "id": "12",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "live_application_count",
               "channel_value": 0,
-              "id": "13",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "mail_application_count",
               "channel_value": 0,
-              "id": "14",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "online_application_count",
               "channel_value": 0,
-              "id": "15",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "other_application_count",
               "channel_value": 0,
-              "id": "16",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "phone_application_count",
               "channel_value": 0,
-              "id": "17",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "live_application_count",
               "channel_value": 0,
-              "id": "18",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "mail_application_count",
               "channel_value": 0,
-              "id": "19",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "online_application_count",
               "channel_value": 0,
-              "id": "20",
               "subject_id": "114",
               "year": "2019",
             },
@@ -83,7 +73,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "dept_114_issue_res_digital",
               "key": "issue_res_digital",
               "key_desc": "issue_res_digital_desc",
               "not_applicable": 0,
@@ -92,7 +81,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "dept_114_issuance_digital",
               "key": "issuance_digital",
               "key_desc": "issuance_digital_desc",
               "not_applicable": 0,
@@ -101,7 +89,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "dept_114_decision_digital",
               "key": "decision_digital",
               "key_desc": "decision_digital_desc",
               "not_applicable": 0,
@@ -110,7 +97,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "dept_114_application_digital",
               "key": "application_digital",
               "key_desc": "application_digital_desc",
               "not_applicable": 0,
@@ -119,7 +105,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "dept_114_authentication",
               "key": "authentication",
               "key_desc": "authentication_desc",
               "not_applicable": 0,
@@ -128,7 +113,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "dept_114_account_reg_digital",
               "key": "account_reg_digital",
               "key_desc": "account_reg_digital_desc",
               "not_applicable": 0,
@@ -136,7 +120,6 @@ Object {
             },
           ],
           "service_general_stats": Object {
-            "id": "114",
             "num_of_programs_offering_services": 1,
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 0,
@@ -148,7 +131,6 @@ Object {
           },
           "service_standards_summary": CoreDocumentArray [
             Object {
-              "id": "114_standards_summary",
               "met_standards_count": null,
               "services_w_standards_count": 1,
               "standards_count": 0,
@@ -157,7 +139,6 @@ Object {
           ],
           "subject_offering_services_summary": CoreDocumentArray [
             Object {
-              "id": "CB-BEZ01",
               "number_of_services": 2,
               "subject_id": "CB-BEZ01",
               "total_volume": 0,
@@ -181,70 +162,60 @@ Object {
             Object {
               "channel_id": "other_application_count",
               "channel_value": 101,
-              "id": "21",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "phone_application_count",
               "channel_value": 0,
-              "id": "22",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "live_application_count",
               "channel_value": 0,
-              "id": "23",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "mail_application_count",
               "channel_value": 0,
-              "id": "24",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "online_application_count",
               "channel_value": 0,
-              "id": "25",
               "subject_id": "114",
               "year": "2018",
             },
             Object {
               "channel_id": "other_application_count",
               "channel_value": 0,
-              "id": "26",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "phone_application_count",
               "channel_value": 0,
-              "id": "27",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "live_application_count",
               "channel_value": 0,
-              "id": "28",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "mail_application_count",
               "channel_value": 0,
-              "id": "29",
               "subject_id": "114",
               "year": "2019",
             },
             Object {
               "channel_id": "online_application_count",
               "channel_value": 0,
-              "id": "30",
               "subject_id": "114",
               "year": "2019",
             },
@@ -253,7 +224,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "program_CB-BEZ01_issue_res_digital",
               "key": "issue_res_digital",
               "key_desc": "issue_res_digital_desc",
               "not_applicable": 0,
@@ -262,7 +232,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "program_CB-BEZ01_issuance_digital",
               "key": "issuance_digital",
               "key_desc": "issuance_digital_desc",
               "not_applicable": 0,
@@ -271,7 +240,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "program_CB-BEZ01_decision_digital",
               "key": "decision_digital",
               "key_desc": "decision_digital_desc",
               "not_applicable": 0,
@@ -280,7 +248,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "program_CB-BEZ01_application_digital",
               "key": "application_digital",
               "key_desc": "application_digital_desc",
               "not_applicable": 0,
@@ -289,7 +256,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "program_CB-BEZ01_authentication",
               "key": "authentication",
               "key_desc": "authentication_desc",
               "not_applicable": 0,
@@ -298,7 +264,6 @@ Object {
             Object {
               "can_online": 0,
               "cannot_online": 2,
-              "id": "program_CB-BEZ01_account_reg_digital",
               "key": "account_reg_digital",
               "key_desc": "account_reg_digital_desc",
               "not_applicable": 0,
@@ -306,7 +271,6 @@ Object {
             },
           ],
           "service_general_stats": Object {
-            "id": "CB-BEZ01",
             "num_of_programs_offering_services": null,
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 0,
@@ -318,7 +282,6 @@ Object {
           },
           "service_standards_summary": CoreDocumentArray [
             Object {
-              "id": "CB-BEZ01_standards_summary",
               "met_standards_count": null,
               "services_w_standards_count": 1,
               "standards_count": 0,

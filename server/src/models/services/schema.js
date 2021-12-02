@@ -30,9 +30,7 @@ const schema = `
     service_standards_summary: [ServiceStandardsSummary]
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
   }
-
   type ServiceGeneralStats{
-    id: String
     report_years: [String]
     number_of_services: Float
     number_of_online_enabled_services: Float
@@ -41,17 +39,13 @@ const schema = `
     num_of_subject_offering_services: Float
     num_of_programs_offering_services: Float
   }
-
   type ServiceChannelsSummary{
-    id: String
     subject_id: String
     year: String
     channel_id: String
     channel_value: Float
   }
-
   type ServiceDigitalStatusSummary{
-    id: String
     key: String
     key_desc: String
     subject_id: String
@@ -59,17 +53,13 @@ const schema = `
     cannot_online: Float
     not_applicable: Float
   }
-
   type ServiceStandardsSummary{
-    id: String
     subject_id: String
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float
   }
-
   type OrgsOfferingServicesSummary{
-    id: String
     subject_id: String
     number_of_services: Float
     total_volume: Float
