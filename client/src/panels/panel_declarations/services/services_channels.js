@@ -95,8 +95,9 @@ const ServicesChannelsPanel = ({ subject }) => {
   }, [data]);
 
   if (loading) {
-    return <LeafSpinner config_name="relative_panel" />;
+    return <LeafSpinner config_name="subroute" />;
   }
+
   const {
     service_general_stats: { number_of_services, report_years },
     service_channels_summary,

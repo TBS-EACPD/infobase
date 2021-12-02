@@ -164,7 +164,7 @@ class TPMap extends React.Component {
     const { loading, population_data } = this.state;
 
     if (loading) {
-      return <LeafSpinner config_name={"relative_panel"} />;
+      return <LeafSpinner config_name={"subroute"} />;
     } else {
       const {
         subject,

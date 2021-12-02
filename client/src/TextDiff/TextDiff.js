@@ -599,7 +599,7 @@ export default class TextDiffApp extends React.Component {
         </div>
 
         {loading ? (
-          <LeafSpinner ref="spinner" config_name={"sub_route"} />
+          <LeafSpinner ref="spinner" config_name={"route"} />
         ) : (
           <div>
             <h2>{text_maker("list_of_indicators")}</h2>

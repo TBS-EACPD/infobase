@@ -32,9 +32,11 @@ const ProvidedServicesListPanel = ({ subject }) => {
       ? useServicesByProgram
       : useServicesByOrg;
   const { loading, data: services } = useServices({ id: subject.id });
+
   if (loading) {
-    return <LeafSpinner config_name="relative_panel" />;
+    return <LeafSpinner config_name="subroute" />;
   }
+
   const includes_lowercase = (value, query) =>
     _.includes(value.toLowerCase(), query.toLowerCase());
   const filtered_sorted_data = _.chain(services)

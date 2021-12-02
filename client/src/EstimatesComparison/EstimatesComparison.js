@@ -46,7 +46,7 @@ export default class EstimatesComparison extends React.Component {
 
     let content;
     if (this.state.loading) {
-      content = <LeafSpinner config_name={"sub_route"} />;
+      content = <LeafSpinner config_name={"route"} />;
     } else {
       content = this.explorer_instance.to_react_element({ history });
     }

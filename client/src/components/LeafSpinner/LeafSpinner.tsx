@@ -11,49 +11,35 @@ interface spinner_config {
   spinner_container_style: React.CSSProperties;
 }
 
-const default_spinner_config_form = (scale: number): spinner_config => ({
-  outer_positioning_style: {
-    position: "initial",
-  },
-  spinner_container_style: {
-    transform: `scale(${scale})`,
-    position: "fixed",
-  },
-});
-
 type spinner_config_names =
-  | "initial"
   | "route"
-  | "sub_route"
-  | "tabbed_content"
-  | "relative_panel"
+  | "subroute"
+  | "subroute"
   | "relative_small"
   | "inline_small";
 
 export const spinner_configs: {
   [key in spinner_config_names]: spinner_config;
 } = {
-  initial: default_spinner_config_form(2),
-  route: default_spinner_config_form(2),
-  sub_route: default_spinner_config_form(2),
-  tabbed_content: {
+  route: {
     outer_positioning_style: {
       position: "initial",
     },
     spinner_container_style: {
-      transform: `scale(1)`,
-      position: "absolute",
-      top: "50%",
+      transform: `scale(2)`,
+      position: "fixed",
     },
   },
-  relative_panel: {
+  subroute: {
     outer_positioning_style: {
       position: "relative",
+      height: "100%",
+      minHeight: "80px",
     },
     spinner_container_style: {
-      transform: "scale(0.35)",
+      transform: "scale(1)",
       position: "absolute",
-      top: "8px",
+      top: "50%",
     },
   },
   relative_small: {

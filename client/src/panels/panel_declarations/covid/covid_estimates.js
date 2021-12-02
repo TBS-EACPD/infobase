@@ -4,11 +4,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import {
-  TabbedContent,
-  TabLoadingSpinner,
-  DisplayTable,
-} from "src/components/index";
+import { TabbedContent, LeafSpinner, DisplayTable } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
 import {
@@ -387,7 +383,7 @@ class CovidEstimatesPanel extends React.Component {
     const { panel_args } = this.props;
 
     if (loading) {
-      return <TabLoadingSpinner />;
+      return <LeafSpinner config_name={"subroute"} />;
     } else {
       const gov_tabled_est_docs_in_year = _.chain(
         summary_by_fiscal_year[selected_year]

@@ -19,22 +19,14 @@ export const SubRoute = Template.bind({});
 export const RelativeSmall = Template.bind({});
 export const TabbedContent = Template.bind({});
 
-Initial.args = {
-  config_name: "initial",
-};
-
 Route.args = {
   config_name: "route",
 };
 
-SubRoute.args = {
-  config_name: "sub_route",
+TabbedContent.args = {
+  config_name: "subroute",
 };
 
 RelativeSmall.args = {
   config_name: "relative_small",
-};
-
-TabbedContent.args = {
-  config_name: "tabbed_content",
 };

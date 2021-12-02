@@ -239,7 +239,7 @@ export default class PanelInventory extends React.Component {
 
     let content;
     if (initial_loading || loading) {
-      content = <LeafSpinner config_name={"sub_route"} />;
+      content = <LeafSpinner config_name={"route"} />;
     } else {
       const { subject, panel, related_panels } = get_derived_props(this.props);
 

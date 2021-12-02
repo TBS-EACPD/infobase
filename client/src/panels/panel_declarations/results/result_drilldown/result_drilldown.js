@@ -45,17 +45,7 @@ class SingleSubjResultsContainer extends React.Component {
     const { loading } = this.state;
 
     if (loading) {
-      return (
-        <div
-          style={{
-            position: "relative",
-            height: "80px",
-            marginBottom: "-10px",
-          }}
-        >
-          <LeafSpinner config_name={"tabbed_content"} />
-        </div>
-      );
+      return <LeafSpinner config_name={"subroute"} />;
     } else {
       return this.explorer_instance.to_react_element({
         subject,

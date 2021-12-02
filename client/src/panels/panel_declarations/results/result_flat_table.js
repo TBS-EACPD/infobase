@@ -262,17 +262,7 @@ class ResultsTable extends React.Component {
     const { loading, status_active_list } = this.state;
 
     if (loading) {
-      return (
-        <div
-          style={{
-            position: "relative",
-            height: "80px",
-            marginBottom: "-10px",
-          }}
-        >
-          <LeafSpinner config_name={"tabbed_content"} />
-        </div>
-      );
+      return <LeafSpinner config_name={"subroute"} />;
     } else {
       const flat_indicators = get_indicators(subject, last_drr_doc);
       const icon_counts = _.countBy(

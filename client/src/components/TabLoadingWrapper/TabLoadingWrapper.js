@@ -2,18 +2,6 @@ import React from "react";
 
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
-const TabLoadingSpinner = () => (
-  <div
-    style={{
-      position: "relative",
-      height: "80px",
-      marginBottom: "-10px",
-    }}
-  >
-    <LeafSpinner config_name={"tabbed_content"} />
-  </div>
-);
-
 class TabLoadingWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -38,11 +26,11 @@ class TabLoadingWrapper extends React.Component {
     const { loading, data } = this.state;
 
     if (loading) {
-      return <TabLoadingSpinner />;
+      return <LeafSpinner config_name={"subroute"} />;
     } else {
       return <TabContent args={args} data={data} />;
     }
   }
 }
 
-export { TabLoadingWrapper, TabLoadingSpinner };
+export { TabLoadingWrapper };

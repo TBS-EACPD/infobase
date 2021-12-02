@@ -31,9 +31,11 @@ const ServicesStandardsPanel = ({ subject }) => {
     program: useServiceSummaryProgram,
   }[subject.subject_type];
   const { loading, data } = useSummaryServices({ id: subject.id });
+
   if (loading) {
-    return <LeafSpinner config_name="relative_panel" />;
+    return <LeafSpinner config_name="subroute" />;
   }
+
   const {
     service_general_stats: { number_of_services, report_years },
     service_standards_summary,

@@ -304,11 +304,7 @@ class FormFrontend extends React.Component {
 
     return (
       <div className="form-backend-form">
-        {loading && (
-          <div style={{ height: "100px", position: "relative" }}>
-            <LeafSpinner config_name="tabbed_content" />
-          </div>
-        )}
+        {loading && <LeafSpinner config_name="subroute" />}
         {!loading && (
           <form>
             <fieldset>
