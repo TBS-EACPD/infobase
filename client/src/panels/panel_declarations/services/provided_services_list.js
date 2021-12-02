@@ -31,12 +31,10 @@ const ProvidedServicesListPanel = ({ subject }) => {
     subject.subject_type === "program"
       ? useServicesByProgram
       : useServicesByOrg;
-  const { loading, data } = useServices({ id: subject.id });
+  const { loading, data: services } = useServices({ id: subject.id });
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }
-  const services = _.uniqBy(data, "id");
-
   const includes_lowercase = (value, query) =>
     _.includes(value.toLowerCase(), query.toLowerCase());
   const filtered_sorted_data = _.chain(services)
