@@ -49,7 +49,7 @@ export class ServiceChannels extends React.Component {
       id: `${report.service_id}_${report.year}`,
       label: formats.year_to_fiscal_year_raw(report.year),
       ..._.chain(filtered_keys)
-        .map((key) => [text_maker(key), report[key]])
+        .map((key) => [text_maker(key), 0 + report[key]])
         .fromPairs()
         .value(),
     }));
@@ -82,7 +82,7 @@ export class ServiceChannels extends React.Component {
             <WrappedNivoBar
               data={data}
               indexBy="label"
-              keys={_.map(application_channels_keys, (key) => text_maker(key))}
+              keys={_.map(filtered_keys, (key) => text_maker(key))}
               is_money={false}
               colors={(d) => colors(d.id)}
               margin={{
