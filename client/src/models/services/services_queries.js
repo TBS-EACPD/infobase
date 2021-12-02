@@ -89,7 +89,6 @@ const all_service_fragments = `
 const all_service_summary_fragments = `
   service_summary{
     service_general_stats{
-      id
       report_years
       number_of_services
       number_of_online_enabled_services
@@ -98,15 +97,13 @@ const all_service_summary_fragments = `
       num_of_subject_offering_services
       num_of_programs_offering_services
     }
-    service_channels_summary{
-      id
+    service_channels_summary{\
       subject_id
       year
       channel_id
       channel_value
     }
     service_digital_status_summary{
-      id
       key
       key_desc
       subject_id
@@ -115,14 +112,12 @@ const all_service_summary_fragments = `
       not_applicable
     }
     service_standards_summary{
-      id
       subject_id
       services_w_standards_count
       standards_count
       met_standards_count
     }
     subject_offering_services_summary{
-      id
       subject_id
       number_of_services
       total_volume
@@ -174,8 +169,7 @@ export const { query_search_services, useSearchServices } = query_factory({
       }
     }
   `,
-  resolver: (response) =>
-    _.chain(response).get("root.search_services").uniqBy("id").value(),
+  resolver: (response) => _.get(response, "root.search_services"),
 });
 
 export const { query_single_service, useSingleService } = query_factory({
@@ -189,7 +183,7 @@ export const { query_single_service, useSingleService } = query_factory({
       }
     }
   `,
-  resolver: (response) => _.get(response, "root.service")[0],
+  resolver: (response) => _.get(response, "root.service"),
 });
 
 export const { query_services_by_gov, useServicesByGov } = query_factory({
@@ -205,13 +199,7 @@ export const { query_services_by_gov, useServicesByGov } = query_factory({
     }
   }
   `,
-  resolver: (response) =>
-    _.chain(response)
-      .get("root.orgs")
-      .flatMap("services")
-      .compact()
-      .uniqBy("id")
-      .value(),
+  resolver: (response) => _.get(response, "root.orgs.services"),
 });
 
 export const { query_services_by_org, useServicesByOrg } = query_factory({
