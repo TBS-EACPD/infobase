@@ -17,6 +17,8 @@ import { create_fake_footnote } from "src/models/footnotes/footnotes";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import { toggle_list } from "src/general_utils";
+
 import { IconAttention, IconCheck, IconNotApplicable } from "src/icons/icons";
 
 const { text_maker, TM } = create_text_maker_component(text);
@@ -211,7 +213,7 @@ export class ServiceStandards extends React.Component {
                 item_component_order={["count", "icon", "text"]}
                 click_callback={(status_key) =>
                   this.setState({
-                    active_statuses: _.toggle_list(active_statuses, status_key),
+                    active_statuses: toggle_list(active_statuses, status_key),
                   })
                 }
                 show_eyes_override={
