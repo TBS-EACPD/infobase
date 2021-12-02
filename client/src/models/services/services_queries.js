@@ -177,7 +177,7 @@ export const { query_single_service, useSingleService } = query_factory({
   query: gql`
     query($lang: String! = "${lang}", $service_id: String!) {
       root(lang: $lang) {
-        service(service_id: $service_id){
+        service(id: $service_id){
           ${all_service_fragments}
         }
       }
