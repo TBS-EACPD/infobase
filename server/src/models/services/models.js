@@ -18,7 +18,8 @@ import { make_schema_with_search_terms } from "../search_utils.js";
 export default function (model_singleton) {
   const ServiceSchema = make_schema_with_search_terms(
     {
-      id: parent_fkey_type(),
+      id: pkey_type(),
+      service_id: parent_fkey_type(),
       org_id: parent_fkey_type(),
       program_activity_codes: [sparse_parent_fkey_type()],
       submission_year: str_type,
@@ -184,7 +185,7 @@ export default function (model_singleton) {
   const loaders = {
     service_loader: create_resource_by_foreignkey_attr_dataloader(
       Service,
-      "id"
+      "service_id"
     ),
     services_by_org_id: create_resource_by_foreignkey_attr_dataloader(
       Service,

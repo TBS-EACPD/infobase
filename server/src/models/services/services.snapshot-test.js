@@ -1,5 +1,6 @@
 const service_fields = `
   id
+  service_id
   subject_type
   org_id
   org {
@@ -169,7 +170,7 @@ query{
 const single_service = `
 query{
   root(lang: "en"){
-    service(id: "1120"){
+    service(service_id: "1120"){
       ${service_fields}
     }
   }
