@@ -38,12 +38,11 @@ const ServicesChannelsPanel = ({ subject }) => {
     subject.subject_type === "program"
       ? useServicesByProgram
       : useServicesByOrg;
-  const { loading, data } = useServices({ id: subject.id });
-  const unique_services = _.uniqBy(data, "id");
+  const { loading, data: services } = useServices({ id: subject.id });
 
   const [active_services, set_active_services] = useState({});
   const [active_year, set_active_year] = useState("");
-  const report_years = get_report_years(unique_services);
+  const report_years = get_report_years(services);
   const most_recent_year = report_years[0];
 
   useEffect(() => {
@@ -51,8 +50,7 @@ const ServicesChannelsPanel = ({ subject }) => {
   }, [most_recent_year]);
 
   useEffect(() => {
-    const median_3_values = _.chain(data)
-      .uniqBy("id")
+    const median_3_values = _.chain(services)
       .map((service) => ({
         id: service.id,
         value: _.chain(application_channels_keys)
@@ -77,20 +75,20 @@ const ServicesChannelsPanel = ({ subject }) => {
       .fromPairs()
       .value();
     set_active_services(median_3_values);
-  }, [data, most_recent_year]);
+  }, [services, most_recent_year]);
 
   if (loading) {
     return <LeafSpinner config_name="relative_panel" />;
   }
 
-  const most_recent_filtered_data = _.map(unique_services, (service) => ({
+  const most_recent_filtered_data = _.map(services, (service) => ({
     ...service,
     service_report: _.filter(
       service.service_report,
       (report) => report.year === most_recent_year
     ),
   }));
-  const active_year_filtered_data = _.map(unique_services, (service) => ({
+  const active_year_filtered_data = _.map(services, (service) => ({
     ...service,
     service_report: _.filter(
       service.service_report,
@@ -168,7 +166,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={_.map(unique_services, ({ name, service_report }) => ({
+          data={_.map(services, ({ name, service_report }) => ({
             name: name,
             ..._.chain(application_channels_keys)
               .map((key) => [key, _.sumBy(service_report, key)])
