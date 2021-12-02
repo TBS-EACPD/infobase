@@ -37,26 +37,26 @@ pct_of_online_end_services:
 services_intro_gov:
   transform: [handlebars, markdown]
   en: | 
-    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. The source of these visualizations is the GC Service Inventory, which is available on the open data portal. 
+    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. 
         
     The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
   fr: |
-    Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par le **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement d'un service donné. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sur les services sont combinées ou compilées au niveau du programme, du ministère et du gouvernement. La source des  visualisations est le Répertoire des services du GC, qui se trouve  dans le Portail de données ouvertes.
+    Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par le **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement d'un service donné. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sur les services sont combinées ou compilées au niveau du programme, du ministère et du gouvernement. 
  
     **Le Répertoire des services du GC** contient actuellement des données sur les services offerts par **{{num_of_subject_offering_services}} ministères et organismes** et couvre les résultats de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**.
 services_intro_dept:
   transform: [handlebars, markdown]
   en: | 
-    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. The source of these visualizations is the GC Service Inventory which is available on the open data portal. 
+    Information on {{gl_tt "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_tt "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. 
         
     The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
   fr: |
-    Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement des services. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sont compilées au niveau du programme, du ministère et du gouvernement. La source des  visualisations est le Répertoire des services du GC, qui se trouve  dans le Portail de données ouvertes.
+    Les renseignements sur les {{gl_tt "services" "SERVICE"}} offerts par **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement des services. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_tt "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sont compilées au niveau du programme, du ministère et du gouvernement. 
 
     **Le Répertoire des services** pour **{{subject.name}}** contient actuellement des données sur les services offerts par **{{num_of_programs_offering_services}} programmes** et couvre les résultats de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**.
 
 service_inventory_feedback_request:
-  en: Please provide us with any feedback on the service inventory
+  en: Please provide us with any feedback on the Service Inventory
   fr: Vous pouvez nous faire part de vos commentaires sur le Répertoire des services
 service_inventory_feedback_button:
   en: here!
