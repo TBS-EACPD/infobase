@@ -146,6 +146,17 @@ const ServicesChannelsPanel = ({ subject }) => {
       .value(),
   };
 
+  const get_table_data_from_services = (services) =>
+    _.map(services, ({ name, service_report }) => ({
+      name: name,
+      ..._.chain(application_channels_keys)
+        // SI_TODO mapping nulls to 0 here, due to DisplayTable default sorting choking on nulls need to
+        // determine if they felt the empty vs 0 distinction was vital here and possibly revisit this fix
+        .map((key) => [key, 0 + _.sumBy(service_report, key)])
+        .fromPairs()
+        .value(),
+    }));
+
   return (
     <div>
       <TM
@@ -166,13 +177,7 @@ const ServicesChannelsPanel = ({ subject }) => {
       />
       {is_a11y_mode ? (
         <DisplayTable
-          data={_.map(services, ({ name, service_report }) => ({
-            name: name,
-            ..._.chain(application_channels_keys)
-              .map((key) => [key, _.sumBy(service_report, key)])
-              .fromPairs()
-              .value(),
-          }))}
+          data={get_table_data_from_services(services)}
           column_configs={services_channels_column_configs}
         />
       ) : (
@@ -240,13 +245,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                 <DisplayTable
                   data={_.chain(active_year_filtered_data)
                     .filter(({ id }) => active_services[id])
-                    .map(({ name, service_report }) => ({
-                      name: name,
-                      ..._.chain(application_channels_keys)
-                        .map((key) => [key, _.sumBy(service_report, key)])
-                        .fromPairs()
-                        .value(),
-                    }))
+                    .thru(get_table_data_from_services)
                     .value()}
                   column_configs={services_channels_column_configs}
                 />
