@@ -111,22 +111,28 @@ export const get_search_terms_resolver =
       bilingual ? "bi" : lang
     }`;
 
-    const results = await model.find({
-      [search_terms_key]: {
-        $regex: _.chain(search_phrase)
-          .deburr()
-          // optimization note: pre-lowercasing both the content and regex should be better than using a case insensitive regex in mongo
-          .toLower()
-          // eslint-disable-next-line no-useless-escape
-          .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
-          .words()
-          .uniq()
-          // optimization note: should exit early on first unmatched word, check for longest words first since smaller could be common partials
-          .sortBy((word) => -word.length)
-          .reduce((pattern, word) => pattern + `(?=.*?${word})`, "^")
-          .value(),
-      },
-    });
+    const mongoose_filter =
+      // optimization note: if the search phrase contains no words, revert to a find all. Running the empty regex is a huge waste of time
+      _.trim(search_phrase) === ""
+        ? {}
+        : {
+            [search_terms_key]: {
+              $regex: _.chain(search_phrase)
+                .deburr()
+                // optimization note: pre-lowercasing both the content and regex should be better than using a case insensitive regex in mongo
+                .toLower()
+                // eslint-disable-next-line no-useless-escape
+                .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+                .words()
+                .uniq()
+                // optimization note: should exit early on first unmatched word, check for longest words first since smaller could be common partials
+                .sortBy((word) => -word.length)
+                .reduce((pattern, word) => pattern + `(?=.*?${word})`, "^")
+                .value(),
+            },
+          };
+
+    const results = await model.find(mongoose_filter);
 
     return _.sortBy(
       results,
