@@ -100,6 +100,7 @@ const schema = `
     org_id: String
     org: Org
     submission_year: String
+    is_active: Boolean
     report_years: [String]
     program_activity_codes: [String]
     programs: [Program]

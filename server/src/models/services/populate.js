@@ -15,8 +15,6 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
     return null;
   }
 };
-const get_years_from_services = (services) =>
-  _.chain(services).flatMap("submission_year").uniq().sort().reverse().value();
 const get_years_from_service_report = (services) =>
   _.chain(services)
     .flatMap(({ service_report }) => _.map(service_report, "year"))
@@ -149,7 +147,15 @@ export default async function ({ models }) {
     })
   );
 
-  const service_rows = _.chain(get_standard_csv_file_rows("services.csv"))
+  const raw_service_rows = get_standard_csv_file_rows("services.csv");
+  const most_recent_submission_year = _.chain(raw_service_rows)
+    .map("dept_submissions__document__year")
+    .uniq()
+    .sort()
+    .last()
+    .value();
+
+  const service_rows = _.chain(raw_service_rows)
     .map((service) => {
       const {
         dept_submissions__document__year: submission_year,
@@ -271,8 +277,12 @@ export default async function ({ models }) {
         .last()
         .value()
     )
+    // only valid under above logic, will need to rework active status deterination in multi-year refactor
+    .each((service) => {
+      service.is_active =
+        service.submission_year === most_recent_submission_year;
+    })
     .value();
-  const most_recent_year = get_years_from_services(service_rows)[0];
 
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_activity_codes, (program_id) => {
@@ -322,7 +332,8 @@ export default async function ({ models }) {
         ...service,
         standards: _.filter(
           service.standards,
-          ({ submission_year }) => submission_year === most_recent_year
+          ({ submission_year }) =>
+            submission_year === most_recent_submission_year
         ),
       }))
       .value();
@@ -330,7 +341,7 @@ export default async function ({ models }) {
       get_services_w_standards_count(filtered_services);
     const processed_standards = get_processed_standards(
       filtered_services,
-      most_recent_year
+      most_recent_submission_year
     );
     return {
       subject_id,
@@ -342,7 +353,8 @@ export default async function ({ models }) {
   const get_subject_offering_services_summary = (grouped_services) =>
     _.chain(grouped_services)
       .map((services, org_id) => {
-        const most_recent_year = get_years_from_service_report(services)[0];
+        const most_recent_submission_year =
+          get_years_from_service_report(services)[0];
         return {
           subject_id: org_id,
           number_of_services: services.length,
@@ -352,7 +364,9 @@ export default async function ({ models }) {
               (sum, key) =>
                 sum +
                   _.chain(service_report)
-                    .filter((report) => report.year === most_recent_year)
+                    .filter(
+                      (report) => report.year === most_recent_submission_year
+                    )
                     .sumBy(key)
                     .toNumber()
                     .value() || 0,
@@ -431,7 +445,8 @@ export default async function ({ models }) {
       get_total_interaction_pts(services) || 0;
 
   const get_pct_of_standards_met_high_vol_services = (services) => {
-    const most_recent_year = get_years_from_service_standards(services)[0];
+    const most_recent_submission_year =
+      get_years_from_service_standards(services)[0];
     const high_vol_services = _.filter(
       services,
       (service) =>
@@ -443,7 +458,7 @@ export default async function ({ models }) {
     );
     const processed_standards = get_processed_standards(
       high_vol_services,
-      most_recent_year
+      most_recent_submission_year
     );
     return (
       _.countBy(processed_standards, "is_target_met").true /
@@ -475,7 +490,7 @@ export default async function ({ models }) {
       .value();
   const most_recent_filtered_services = _.filter(
     service_rows,
-    ({ submission_year }) => submission_year === most_recent_year
+    ({ submission_year }) => submission_year === most_recent_submission_year
   );
 
   const gov_summary = [
