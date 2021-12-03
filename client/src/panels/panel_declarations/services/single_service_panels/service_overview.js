@@ -57,6 +57,16 @@ export class ServiceOverview extends React.Component {
           <dd>
             <p>{service.description}</p>
           </dd>
+          {!service.is_active && (
+            <React.Fragment>
+              <dt>
+                <TM k={"status"} />
+              </dt>
+              <dd>
+                <p>{text_maker("inactive_service")}</p>
+              </dd>
+            </React.Fragment>
+          )}
           <dt>{text_maker("org")}</dt>
           <dd>
             {(() => {
