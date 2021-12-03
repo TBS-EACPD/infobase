@@ -62,7 +62,6 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     service_digital_status_summary,
   } = data;
   const processed_data = _.map(service_digital_status_summary, (row) => ({
-    ...row,
     key_desc: text_maker(row.key_desc),
     [can_online]: row.can_online,
     [cannot_online]: row.cannot_online,

@@ -167,17 +167,19 @@ const ServicesChannelsPanel = ({ subject }) => {
       />
       <div className="row">
         <div className="col-12 col-lg-4">
-          <StandardLegend
-            title={text_maker("application_channels")}
-            legendListProps={{
-              items: legend_items,
-              onClick: (key) =>
-                set_active_channels({
-                  ...active_channels,
-                  [key]: !active_channels[key],
-                }),
-            }}
-          />
+          {!is_a11y_mode && (
+            <StandardLegend
+              title={text_maker("application_channels")}
+              legendListProps={{
+                items: legend_items,
+                onClick: (key) =>
+                  set_active_channels({
+                    ...active_channels,
+                    [key]: !active_channels[key],
+                  }),
+              }}
+            />
+          )}
         </div>
         <div className="col-12 col-lg-8">
           <WrappedNivoBar
@@ -198,7 +200,10 @@ const ServicesChannelsPanel = ({ subject }) => {
       </div>
       {is_a11y_mode ? (
         <DisplayTable
-          data={channel_pct_data}
+          data={_.map(channel_pct_data, ({ label, value }) => ({
+            label,
+            value,
+          }))}
           column_configs={{
             label: {
               index: 0,
