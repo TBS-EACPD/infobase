@@ -295,6 +295,9 @@ applications:
   fr: Demandes
 
 # Overview
+inactive_service_warning:
+  en: This serivce is inactive. The information below may be limitted.
+  fr: Ce service est inactif. Les informations ci-dessous peuvent être limitées.
 overview_digital_status_title:
   transform: [handlebars, markdown]
   en: How can {{gl_tt "clients interact" "CLIENT_INTERACTION"}} with this {{gl_tt "service" "SERVICE"}} online?
