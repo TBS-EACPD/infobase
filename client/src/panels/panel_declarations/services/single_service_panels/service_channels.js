@@ -11,6 +11,8 @@ import { create_text_maker_component } from "src/components/index";
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
+import { is_a11y_mode } from "src/core/injected_build_constants";
+
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 const { text_maker, TM } = create_text_maker_component(text);
@@ -69,16 +71,18 @@ export class ServiceChannels extends React.Component {
                 }}
               />
             )}
-            <StandardLegend
-              legendListProps={{
-                items: _.map(filtered_keys, (key) => ({
-                  id: key,
-                  label: text_maker(key),
-                  color: colors(text_maker(key)),
-                })),
-                checkBoxProps: { isSolidBox: true },
-              }}
-            />
+            {!is_a11y_mode && (
+              <StandardLegend
+                legendListProps={{
+                  items: _.map(filtered_keys, (key) => ({
+                    id: key,
+                    label: text_maker(key),
+                    color: colors(text_maker(key)),
+                  })),
+                  checkBoxProps: { isSolidBox: true },
+                }}
+              />
+            )}
             <WrappedNivoBar
               data={data}
               indexBy="label"
