@@ -267,6 +267,9 @@ online_inquiry_count:
 applications_count:
   en: applications
   fr: demandes
+services_channels_select_year:
+  en: Select the period to display below
+  fr: Sélectionnez la période à afficher ci-dessous
 
 # Orgs offering services
 subject_offering_services_title:
