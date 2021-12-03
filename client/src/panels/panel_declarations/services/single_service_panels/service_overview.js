@@ -10,7 +10,11 @@ import {
   application_channels_keys,
 } from "src/panels/panel_declarations/services/shared";
 
-import { create_text_maker_component, FancyUL } from "src/components/index";
+import {
+  create_text_maker_component,
+  FancyUL,
+  AlertBanner,
+} from "src/components/index";
 
 import { Dept, Program } from "src/models/subjects";
 
@@ -44,6 +48,11 @@ export class ServiceOverview extends React.Component {
     };
     return (
       <TextPanel title={title}>
+        {!service.is_active && (
+          <AlertBanner banner_class={"danger"} style={{ textAlign: "center" }}>
+            <TM k="inactive_service_warning" />
+          </AlertBanner>
+        )}
         <dl className="dl-horizontal tombstone-data-list">
           <dt>
             <TM k={"name"} />
@@ -57,16 +66,6 @@ export class ServiceOverview extends React.Component {
           <dd>
             <p>{service.description}</p>
           </dd>
-          {!service.is_active && (
-            <React.Fragment>
-              <dt>
-                <TM k={"status"} />
-              </dt>
-              <dd>
-                <p>{text_maker("inactive_service")}</p>
-              </dd>
-            </React.Fragment>
-          )}
           <dt>{text_maker("org")}</dt>
           <dd>
             {(() => {
