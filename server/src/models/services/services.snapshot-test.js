@@ -6,6 +6,7 @@ const service_fields = `
     name
   }
   submission_year
+  is_active
   report_years
   program_activity_codes
   programs {

@@ -22,6 +22,7 @@ export default function (model_singleton) {
       org_id: parent_fkey_type(),
       program_activity_codes: [sparse_parent_fkey_type()],
       submission_year: str_type,
+      is_active: { type: Boolean },
       report_years: [str_type],
       first_active_year: str_type,
       last_active_year: str_type,
