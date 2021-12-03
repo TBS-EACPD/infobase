@@ -69,22 +69,18 @@ service_inventory_feedback_title:
 list_of_provided_services_title:
   en: List of provided services
   fr: Liste des services offerts
-list_of_provided_services_desc_dept:
+list_of_provided_services_desc:
   transform: [handlebars, markdown]
   en: |
-    **{{subject_name}}** is offering **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
+    **{{subject_name}}** is offering **{{active_count}}** {{gl_tt "services" "SERVICE"}}:
   fr: |
-    **{{subject_name}}** offre **{{num_of_services}}** {{gl_tt "services" "SERVICE"}}:
-list_of_provided_services_desc_program:
+    **{{subject_name}}** offre **{{active_count}}** {{gl_tt "services" "SERVICE"}}:
+list_of_provided_services_program_caveat:
   transform: [handlebars, markdown]
   en: |
     Programs can have one or more {{gl_tt "services" "SERVICE"}}. As well, a service may be offered through several programs.
-
-    **{{subject_name}}** offers **{{num_of_services}}** services.
   fr: |
     Les programmes peuvent avoir un ou plusieurs {{gl_tt "services" "SERVICE"}}. De même, un service peut être offert par le biais de plusieurs programmes.
-
-    **{{subject_name}}** offre **{{num_of_services}}** services.
 
 view_service:
   en: Explore the service

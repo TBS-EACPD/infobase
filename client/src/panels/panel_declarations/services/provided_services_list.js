@@ -37,6 +37,11 @@ const ProvidedServicesListPanel = ({ subject }) => {
     return <LeafSpinner config_name="subroute" />;
   }
 
+  const { active_count, inactive_count } = _.chain(services)
+    .groupBy(({ is_active }) => (is_active ? "active_count" : "inactive_count"))
+    .mapValues((services) => services.length)
+    .value();
+
   const includes_lowercase = (value, query) =>
     _.includes(value.toLowerCase(), query.toLowerCase());
   const filtered_sorted_data = _.chain(services)
@@ -50,19 +55,20 @@ const ProvidedServicesListPanel = ({ subject }) => {
     .value();
 
   return (
-    <div>
-      <TM
-        k={
-          subject.subject_type === "program"
-            ? "list_of_provided_services_desc_program"
-            : "list_of_provided_services_desc_dept"
-        }
-        className="medium-panel-text"
-        args={{
-          subject_name: subject.name,
-          num_of_services: services.length,
-        }}
-      />
+    <React.Fragment>
+      <div className="medium-panel-text">
+        {subject.subject_type === "program" && (
+          <TM k="list_of_provided_services_program_caveat" />
+        )}
+        <TM
+          k={"list_of_provided_services_desc"}
+          args={{
+            subject_name: subject.name,
+            active_count,
+            inactive_count,
+          }}
+        />
+      </div>
       <input
         aria-label={text_maker("explorer_search_is_optional")}
         className="form-control input-lg"
@@ -123,7 +129,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
           )}
         </FancyUL>
       </HeightClippedGraph>
-    </div>
+    </React.Fragment>
   );
 };
 
