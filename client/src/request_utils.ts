@@ -49,7 +49,9 @@ export const make_request = (
         log_standard_event({
           SUBAPP: window.location.hash.replace("#", ""),
           MISC1: success_log_status,
-          MISC2: get_common_log_text(retry_count),
+          MISC2: `${get_common_log_text(retry_count)}, status: ${
+            response.status
+          }`,
         });
 
       return response;
