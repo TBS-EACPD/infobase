@@ -38,11 +38,6 @@ const route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Government at a Glance",
-    route: "partition/dept/exp",
-    test_on: ["eng"],
-  },
-  {
     name: "IGOC",
     route: "igoc",
     test_on: ["eng", "basic-eng"],
@@ -68,6 +63,11 @@ const route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
+    name: "Infographic - Gov - Services",
+    route: "orgs/gov/gov/infograph/services",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
     name: "Infographic - Gov - Results",
     route: "orgs/gov/gov/infograph/results",
     test_on: ["eng", "basic-eng"],
@@ -77,6 +77,7 @@ const route_load_tests_config = [
     route: "orgs/gov/gov/infograph/related",
     test_on: ["eng", "basic-eng"],
   },
+
   {
     name: "Infographic - Gov - All data",
     route: "orgs/gov/gov/infograph/all_data",
@@ -103,6 +104,11 @@ const route_load_tests_config = [
     test_on: ["eng", "fra", "basic-eng"],
   },
   {
+    name: "Infographic - Dept - Services",
+    route: "orgs/dept/326/infograph/services",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
     name: "Infographic - Dept - Results",
     route: "orgs/dept/326/infograph/results",
     test_on: ["eng", "basic-eng"],
@@ -117,6 +123,23 @@ const route_load_tests_config = [
     route: "orgs/dept/326/infograph/all_data",
     test_on: ["eng", "basic-eng"],
   },
+
+  {
+    name: "Infographic - Crown Corp - About",
+    route: "orgs/dept/146/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Crown Corp - Finance",
+    route: "orgs/dept/146/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Crown Corp - Where can I go from here?",
+    route: "orgs/dept/146/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+
   {
     name: "Infographic - CRSO - About",
     route: "orgs/crso/TBC-BXA00/infograph/intro",
@@ -147,6 +170,7 @@ const route_load_tests_config = [
     route: "orgs/crso/TBC-BXA00/infograph/all_data",
     test_on: ["eng", "basic-eng"],
   },
+
   {
     name: "Infographic - Program - About",
     route: "orgs/program/TBC-BXC04/infograph/intro",
@@ -155,6 +179,11 @@ const route_load_tests_config = [
   {
     name: "Infographic - Program - Finance",
     route: "orgs/program/TBC-BXC04/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Services",
+    route: "orgs/program/TBC-BXC04/infograph/services",
     test_on: ["eng", "basic-eng"],
   },
   {
@@ -167,6 +196,23 @@ const route_load_tests_config = [
     route: "orgs/program/TBC-BXC04/infograph/related",
     test_on: ["eng", "basic-eng"],
   },
+
+  {
+    name: "Infographic - Inactive Program - About",
+    route: "orgs/program/PPP-AHZ00/infograph/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - Finance",
+    route: "orgs/program/PPP-AHZ00/infograph/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - Where can I go from here?",
+    route: "orgs/program/PPP-AHZ00/infograph/related",
+    test_on: ["eng", "basic-eng"],
+  },
+
   {
     name: "Infographic - Tag - About",
     route: "orgs/tag/GOC002/infograph/intro",
@@ -182,34 +228,10 @@ const route_load_tests_config = [
     route: "orgs/tag/GOC002/infograph/related",
     test_on: ["eng", "basic-eng"],
   },
+
   {
-    name: "Infographic - Crown Corp - About",
-    route: "orgs/dept/146/infograph/intro",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Infographic - Crown Corp - Finance",
-    route: "orgs/dept/146/infograph/financial",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Infographic - Crown Corp - Where can I go from here?",
-    route: "orgs/dept/146/infograph/related",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Infographic - Inactive Program - About",
-    route: "orgs/program/PPP-AHZ00/infograph/intro",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Infographic - Inactive Program - Finance",
-    route: "orgs/program/PPP-AHZ00/infograph/financial",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Infographic - Inactive Program - Where can I go from here?",
-    route: "orgs/program/PPP-AHZ00/infograph/related",
+    name: "Infographic - Service - Intro",
+    route: "infographic/service/136/intro",
     test_on: ["eng", "basic-eng"],
   },
 
