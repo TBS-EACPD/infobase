@@ -275,13 +275,13 @@ services_channels_select_year:
 subject_offering_services_title:
   en: Organizations that offer services
   fr: Organisations qui offrent des services
-programs_offering_services_title:
-  en: Programs in this department which offer services
-  fr: Programmes de ce ministère qui offrent des services
 orgs_offering_services_text:
   transform: [handlebars, markdown]
   en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** departments and agencies of **{{subject.name}}** accepted **{{fmt_big_int number_of_applications}}** applications via **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}.
   fr: En **{{fmt_year_to_fiscal_year most_recent_year}}, {{number_of_subjects}}** ministères et organismes du **{{subject.name}}** ont accepté **{{fmt_big_int number_of_applications}}** demandes au moyen de **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}}.
+programs_offering_services_title:
+  en: Programs in this department which offer services
+  fr: Programmes de ce ministère qui offrent des services
 programs_offering_services_text:
   transform: [handlebars, markdown]
   en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** offered **{{number_of_services}}** {{gl_tt "services" "SERVICE"}} via **{{number_of_subjects}}** programs
