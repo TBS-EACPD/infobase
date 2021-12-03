@@ -77,6 +77,12 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
   };
   return (
     <HeightClippedGraph clipHeight={600}>
+      {!is_gov && (
+        <TM
+          className="medium-panel-text"
+          k="list_of_provided_services_program_caveat"
+        />
+      )}
       <TM
         className="medium-panel-text"
         k={`${is_gov ? "orgs" : "programs"}_offering_services_text`}
