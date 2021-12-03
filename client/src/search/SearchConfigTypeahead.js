@@ -26,27 +26,37 @@ export class SearchConfigTypeahead extends React.Component {
     const { search_configs } = this.props;
     const { search_phrase } = this.state;
 
-    _.each(search_configs, (search_config) => {
-      const { config_name, query } = search_config;
+    if (search_phrase !== "") {
+      _.each(search_configs, (search_config) => {
+        const { config_name, query } = search_config;
 
-      const is_not_loading_or_loaded = _.isUndefined(
-        this.get_query_result_state(config_name, search_phrase)
-      );
-
-      if (is_not_loading_or_loaded) {
-        this.set_query_result_state(config_name, search_phrase, "loading", () =>
-          query(search_phrase).then(
-            (matches) =>
-              !this.is_unmounting &&
-              this.set_query_result_state(
-                config_name,
-                search_phrase,
-                this.results_from_matches(matches, search_phrase, search_config)
-              )
-          )
+        const is_not_loading_or_loaded = _.isUndefined(
+          this.get_query_result_state(config_name, search_phrase)
         );
-      }
-    });
+
+        if (is_not_loading_or_loaded) {
+          this.set_query_result_state(
+            config_name,
+            search_phrase,
+            "loading",
+            () =>
+              query(search_phrase).then(
+                (matches) =>
+                  !this.is_unmounting &&
+                  this.set_query_result_state(
+                    config_name,
+                    search_phrase,
+                    this.results_from_matches(
+                      matches,
+                      search_phrase,
+                      search_config
+                    )
+                  )
+              )
+          );
+        }
+      });
+    }
   }
   results_from_matches = (
     matches,
