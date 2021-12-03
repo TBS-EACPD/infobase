@@ -91,7 +91,11 @@ view_service:
   fr: Découvrez le service
 filter_results_service:
   en: Filter services by name or type
-  fr: Filtrer les services par nom ou par type   
+  fr: Filtrer les services par nom ou par type  
+  
+inactive_service:
+  en: Inactive
+  fr: Inactif
 
 # Digital Status
 services_digital_status_text:

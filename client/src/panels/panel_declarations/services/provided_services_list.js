@@ -46,6 +46,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
         _.find(service_type, (type) => includes_lowercase(type, service_query))
     )
     .sortBy("name")
+    .sortBy(({ is_active }) => (is_active ? -Infinity : Infinity))
     .value();
 
   return (
@@ -75,7 +76,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
         <FancyUL>
           {_.map(
             filtered_sorted_data,
-            ({ name, id, org_id, service_type, description }) => (
+            ({ name, id, description, service_type, is_active }) => (
               <React.Fragment key={id}>
                 <a href={service_infographic_link(id)}>{name}</a>
                 <p>{description}</p>
@@ -102,6 +103,14 @@ const ProvidedServicesListPanel = ({ subject }) => {
                         {type}
                       </span>
                     ))}
+                    {!is_active && (
+                      <span
+                        className="tag-badge tag-badge--red"
+                        style={{ marginRight: "1rem" }}
+                      >
+                        {text_maker("inactive_service")}
+                      </span>
+                    )}
                   </div>
                   <a href={service_infographic_link(id)}>
                     <button className="btn-ib-primary">

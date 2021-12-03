@@ -168,4 +168,8 @@ strong,
   &.tag-badge--solid {
     background-color: lighten($tertiaryColor, 20%);
   }
+  &.tag-badge--red {
+    border-color: lighten($textRed, 20%) lighten($textRed, 20%)
+      lighten($textRed, 20%) $textRed;
+  }
 }

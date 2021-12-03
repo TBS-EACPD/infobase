@@ -10,6 +10,7 @@ const all_service_fragments = `
   subject_type
   org_id
   submission_year
+  is_active
   report_years
   program_activity_codes
   first_active_year
