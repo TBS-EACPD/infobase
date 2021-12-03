@@ -320,7 +320,9 @@ class Infographic extends React.Component {
             panel_keys: potential_panel_keys,
             subject_type,
             subject: subject,
-            footnotes_for: subject,
+            // TODO, this is a monkey patch, need a good API for infographic levels to declare if/how to load footnotes, etc...
+            // Maybe make all this pre-loading the responsibility of individual get_panels_for_subject promises?
+            footnotes_for: subject_type !== "service" && subject,
           }).then(() => {
             const active_index = _.findIndex(subject_bubble_defs, {
               id: active_bubble_id,
