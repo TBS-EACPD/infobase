@@ -36,6 +36,11 @@ $tableBackgroundColor: $primaryColor;
 td {
   background-color: inherit;
 }
+
+.table-container-wrapper {
+  position: relative;
+  left: 0;
+}
 .display-table-utils {
   display: flex;
   justify-content: space-between;
@@ -49,6 +54,8 @@ td {
   &.table-utils-footer {
     border-bottom-left-radius: $standardBorderRadius;
     border-bottom-right-radius: $standardBorderRadius;
+    position: sticky;
+    left: 0;
   }
 }
 

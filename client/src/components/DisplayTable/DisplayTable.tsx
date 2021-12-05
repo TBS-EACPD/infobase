@@ -518,7 +518,7 @@ export class _DisplayTable extends React.Component<
     );
 
     return (
-      <div>
+      <div className={"table-container-wrapper"}>
         <div className={"display-table-utils table-utils-header"}>
           <div>{_.map(selectPageUtil)}</div>
           <div className={"display-table-container__utils"}>
@@ -791,9 +791,9 @@ export class _DisplayTable extends React.Component<
               ))}
             <tfoot>{page_selector}</tfoot>
           </table>
-        </div>
-        <div className={"display-table-utils table-utils-footer"}>
-          {_.map(footer_content)}
+          <div className={"display-table-utils table-utils-footer"}>
+            {_.map(footer_content)}
+          </div>
         </div>
       </div>
     );
