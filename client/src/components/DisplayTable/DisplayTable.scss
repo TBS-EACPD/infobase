@@ -1,5 +1,7 @@
 @import "src/style_constants/index.scss";
 
+$tableBackgroundColor: $primaryColor;
+
 .input-bar {
   display: flex;
   flex-direction: column;
@@ -34,25 +36,28 @@
 td {
   background-color: inherit;
 }
-
-.display-table-utils-header {
+.display-table-utils {
   display: flex;
   justify-content: space-between;
-  border-top-left-radius: $standardBorderRadius;
-  border-top-right-radius: $standardBorderRadius;
-  background: $primaryColor;
+  background: $tableBackgroundColor;
+  padding: 0.75rem;
+
+  &.table-utils-header {
+    border-top-left-radius: $standardBorderRadius;
+    border-top-right-radius: $standardBorderRadius;
+  }
+  &.table-utils-footer {
+    border-bottom-left-radius: $standardBorderRadius;
+    border-bottom-right-radius: $standardBorderRadius;
+  }
 }
-.display-table-footer {
-  border-bottom-left-radius: $standardBorderRadius;
-  border-bottom-right-radius: $standardBorderRadius;
-  background: $primaryColor;
-}
+
 .display-table-container {
   overflow-x: auto;
   margin-bottom: 0;
 
   &.display-table-container--with-utils {
-    background-color: $primaryColor;
+    background-color: $tableBackgroundColor;
   }
 }
 
@@ -76,7 +81,7 @@ table.display-table {
 }
 
 table.display-table > thead > tr {
-  background-color: $primaryColor;
+  background-color: $tableBackgroundColor;
 
   &:not(:last-child) > th {
     border-bottom: none;
