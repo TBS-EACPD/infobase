@@ -519,7 +519,7 @@ export class _DisplayTable extends React.Component<
 
     return (
       <div>
-        <div className={"display-table-utils-header"}>
+        <div className={"display-table-utils table-utils-header"}>
           <div>{_.map(selectPageUtil)}</div>
           <div className={"display-table-container__utils"}>
             {_.map(util_components_with_defaults)}
@@ -561,17 +561,6 @@ export class _DisplayTable extends React.Component<
                         justifyContent: "space-between",
                       }}
                     >
-                      {/* <div>
-                        {enable_pagination && (
-                          <SelectPageSize
-                            selected={page_size}
-                            on_select={this.change_page_size}
-                            page_size_increment={page_size_increment}
-                            num_items={_.size(sorted_filtered_data)}
-                            num_options_max={page_size_num_options_max}
-                          />
-                        )}
-                      </div> */}
                       <div className={"display-table-container__utils"}>
                         <button
                           tabIndex={0}
@@ -803,7 +792,9 @@ export class _DisplayTable extends React.Component<
             <tfoot>{page_selector}</tfoot>
           </table>
         </div>
-        <div className={"display-table-footer"}>{_.map(footer_content)}</div>
+        <div className={"display-table-utils table-utils-footer"}>
+          {_.map(footer_content)}
+        </div>
       </div>
     );
   }
