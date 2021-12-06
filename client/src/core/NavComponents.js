@@ -181,6 +181,25 @@ export class StandardRouteContainer extends React.Component {
   }
 }
 
+export const scroll_into_view_and_focus = (element) => {
+  const original_tabindex = element.getAttribute("tabindex");
+
+  element.setAttribute("tabindex", "-1");
+
+  const reset_tabindex = function () {
+    if (_.isNull(original_tabindex)) {
+      this.removeAttribute("tabindex");
+    } else {
+      this.setAttribute("tabindex", original_tabindex);
+    }
+    this.removeEvenListener("blur", reset_tabindex);
+  };
+  element.addEventListener("blur", reset_tabindex);
+
+  element.scrollIntoView();
+  element.focus();
+};
+
 export class ScrollToTargetContainer extends React.Component {
   scrollToItem() {
     const { target_id } = this.props;
@@ -188,10 +207,7 @@ export class ScrollToTargetContainer extends React.Component {
     if (!_.isEmpty(target_id) && target_id !== "__") {
       var el = document.querySelector("#" + target_id);
       if (el) {
-        setTimeout(() => {
-          scrollTo(0, el.offsetTop);
-          el.focus();
-        });
+        setTimeout(() => scroll_into_view_and_focus(el));
       }
     }
   }
