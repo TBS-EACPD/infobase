@@ -21,6 +21,7 @@ import { Dept, Program } from "src/models/subjects";
 import { formats } from "src/core/format";
 
 import { infograph_href_template } from "src/link_utils";
+import { get_source_links } from "src/metadata/data_sources";
 
 import "src/panels/panel_declarations/services/services.scss";
 
@@ -28,7 +29,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceOverview extends React.Component {
   render() {
-    const { service, title } = this.props;
+    const { service, title, sources } = this.props;
 
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
@@ -47,7 +48,7 @@ export class ServiceOverview extends React.Component {
       rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
     };
     return (
-      <TextPanel title={title}>
+      <TextPanel title={title} sources={sources}>
         {!service.is_active && (
           <AlertBanner banner_class={"danger"} style={{ textAlign: "center" }}>
             <TM k="inactive_service_warning" />
@@ -178,9 +179,12 @@ export const declare_single_service_overview_panel = () =>
     panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("service_overview_title"),
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
-        return <ServiceOverview service={subject} title={title} />;
+        return (
+          <ServiceOverview service={subject} title={title} sources={sources} />
+        );
       },
     }),
   });

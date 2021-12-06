@@ -22,6 +22,7 @@ import { is_a11y_mode, lang } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
+import { get_source_links } from "src/metadata/data_sources";
 import {
   secondaryColor,
   highlightOrangeColor,
@@ -225,6 +226,7 @@ export const declare_services_digital_status_panel = () =>
         };
       },
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

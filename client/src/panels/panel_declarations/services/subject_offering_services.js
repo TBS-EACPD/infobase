@@ -18,6 +18,8 @@ import {
 
 import { Dept, Program } from "src/models/subjects";
 
+import { get_source_links } from "src/metadata/data_sources";
+
 import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -107,6 +109,7 @@ export const declare_subject_offering_services_panel = () =>
   declare_panel({
     panel_key: "subject_offering_services",
     subject_types: ["gov", "dept"],
+    source: () => get_source_links(["SERVICES"]),
     panel_config_func: (subject_type, panel_key) => ({
       title:
         subject_type === "gov"
