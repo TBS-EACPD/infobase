@@ -37,31 +37,20 @@ td {
   background-color: inherit;
 }
 
-.table-container-wrapper {
-  position: relative;
-  left: 0;
-}
 .display-table-utils {
   display: flex;
   justify-content: space-between;
   background: $tableBackgroundColor;
   padding: 0.75rem;
-
-  &.table-utils-header {
-    border-top-left-radius: $standardBorderRadius;
-    border-top-right-radius: $standardBorderRadius;
-  }
-  &.table-utils-footer {
-    border-bottom-left-radius: $standardBorderRadius;
-    border-bottom-right-radius: $standardBorderRadius;
-    position: sticky;
-    left: 0;
-  }
+  position: sticky;
+  left: 0;
 }
 
 .display-table-container {
   overflow-x: auto;
-  margin-bottom: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: $standardBorderRadius;
 
   &.display-table-container--with-utils {
     background-color: $tableBackgroundColor;
