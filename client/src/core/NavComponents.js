@@ -181,7 +181,10 @@ export class StandardRouteContainer extends React.Component {
   }
 }
 
-export const scroll_into_view_and_focus = (element) => {
+export const scroll_into_view_and_focus = (
+  element,
+  scroll_into_view_options = {}
+) => {
   const original_tabindex = element.getAttribute("tabindex");
 
   element.setAttribute("tabindex", "-1");
@@ -196,7 +199,7 @@ export const scroll_into_view_and_focus = (element) => {
   };
   element.addEventListener("blur", reset_tabindex);
 
-  element.scrollIntoView();
+  element.scrollIntoView(scroll_into_view_options);
   element.focus();
 };
 
