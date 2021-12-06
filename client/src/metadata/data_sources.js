@@ -244,7 +244,7 @@ const sources = _.chain([
   },
   services_feature_flag && {
     key: "SERVICES",
-    title: text_maker("services_title"),
+    title: text_maker("service_inventory"),
     frequency: text_maker("yearly"),
     description: text_maker("services_desc"),
     items: [
