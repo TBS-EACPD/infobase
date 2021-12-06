@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
 
-import { AlertBanner } from "src/components/index";
+import { AlertBanner } from "src/components/AlertBanner/AlertBanner";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -203,8 +203,11 @@ export const scroll_into_view_and_focus = (
   element.focus();
 };
 
-export const scroll_to_top = (behaviour = "auto") =>
-  scroll_into_view_and_focus(document.getElementById("app-focus-root"), {
+export const scroll_to_top = (
+  top_element = document.getElementById("app-focus-root"),
+  behaviour = "auto"
+) =>
+  scroll_into_view_and_focus(top_element, {
     behaviour,
     block: "start",
     inline: "nearest",
