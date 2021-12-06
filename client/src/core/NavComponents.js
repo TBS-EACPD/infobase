@@ -195,7 +195,7 @@ export const scroll_into_view_and_focus = (
     } else {
       this.setAttribute("tabindex", original_tabindex);
     }
-    this.removeEvenListener("blur", reset_tabindex);
+    this.removeEventListener("blur", reset_tabindex);
   };
   element.addEventListener("blur", reset_tabindex);
 
