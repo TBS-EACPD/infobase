@@ -16,6 +16,7 @@ import {
 } from "src/models/services/services_queries";
 
 import { FormFrontend } from "src/FormFrontend";
+import { get_source_links } from "src/metadata/data_sources";
 
 // import { formats } from "src/core/format";
 
@@ -139,6 +140,7 @@ export const declare_services_intro_panel = () =>
         };
       },
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

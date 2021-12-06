@@ -15,11 +15,13 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import { get_source_links } from "src/metadata/data_sources";
+
 const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceChannels extends React.Component {
   render() {
-    const { service, title } = this.props;
+    const { service, title, sources } = this.props;
 
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
@@ -57,7 +59,7 @@ export class ServiceChannels extends React.Component {
     }));
 
     return (
-      <InfographicPanel title={title}>
+      <InfographicPanel title={title} sources={sources}>
         {filtered_keys.length > 0 ? (
           <Fragment>
             <TM k="service_channels_text" className="medium-panel-text" />
@@ -115,9 +117,12 @@ export const declare_single_service_channels_panel = () =>
     panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("single_service_channels_title"),
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
-        return <ServiceChannels service={subject} title={title} />;
+        return (
+          <ServiceChannels service={subject} title={title} sources={sources} />
+        );
       },
     }),
   });

@@ -23,6 +23,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import { get_source_links } from "src/metadata/data_sources";
 
 import { application_channels_keys } from "./shared";
 
@@ -276,6 +277,7 @@ export const declare_application_channels_by_services_panel = () =>
   declare_panel({
     panel_key: "application_channels_by_services",
     subject_types: ["dept", "program"],
+    source: () => get_source_links(["SERVICES"]),
     panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("customizable_service_graph"),
       footnotes: false,

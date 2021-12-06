@@ -20,6 +20,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { toggle_list } from "src/general_utils";
 
 import { IconAttention, IconCheck, IconNotApplicable } from "src/icons/icons";
+import { get_source_links } from "src/metadata/data_sources";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -38,7 +39,7 @@ export class ServiceStandards extends React.Component {
   }
 
   render() {
-    const { service, title } = this.props;
+    const { service, title, sources } = this.props;
 
     const { active_statuses } = this.state;
 
@@ -194,7 +195,7 @@ export class ServiceStandards extends React.Component {
     );
 
     return (
-      <InfographicPanel title={title} footnotes={footnotes}>
+      <InfographicPanel title={title} sources={sources} footnotes={footnotes}>
         {!_.isEmpty(data) ? (
           <Fragment>
             <TM className="medium-panel-text" k="service_standards_text" />
@@ -241,9 +242,12 @@ export const declare_single_service_standards_panel = () =>
     panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("service_standards_title"),
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
-        return <ServiceStandards service={subject} title={title} />;
+        return (
+          <ServiceStandards service={subject} title={title} sources={sources} />
+        );
       },
     }),
   });

@@ -17,6 +17,7 @@ import {
 } from "src/models/services/services_queries";
 
 import { infograph_href_template } from "src//infographic/infographic_link";
+import { get_source_links } from "src/metadata/data_sources";
 
 import text from "./services.yaml";
 
@@ -140,6 +141,7 @@ export const declare_provided_services_list_panel = () =>
     panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("list_of_provided_services_title"),
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

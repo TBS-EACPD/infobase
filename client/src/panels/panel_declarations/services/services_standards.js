@@ -19,6 +19,8 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
 
+import { get_source_links } from "src/metadata/data_sources";
+
 import text from "./services.yaml";
 import "./services.scss";
 
@@ -169,6 +171,7 @@ export const declare_services_standards_panel = () =>
         };
       },
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

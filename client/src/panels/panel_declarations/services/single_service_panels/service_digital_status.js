@@ -17,11 +17,13 @@ import {
 
 import { create_fake_footnote } from "src/models/footnotes/footnotes";
 
+import { get_source_links } from "src/metadata/data_sources";
+
 const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceDigitalStatus extends React.Component {
   render() {
-    const { service, title } = this.props;
+    const { service, title, sources } = this.props;
 
     const footnote = service.digital_enablement_comment && [
       create_fake_footnote({
@@ -59,7 +61,7 @@ export class ServiceDigitalStatus extends React.Component {
     };
 
     return (
-      <InfographicPanel title={title} footnotes={footnote}>
+      <InfographicPanel title={title} sources={sources} footnotes={footnote}>
         <TM className="medium-panel-text" k="overview_digital_status_title" />
         <DisplayTable
           unsorted_initial={true}
@@ -86,9 +88,16 @@ export const declare_single_service_digital_status_panel = () =>
     panel_config_func: (subject_type, panel_key) => ({
       title: text_maker("digital_status"),
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
-        return <ServiceDigitalStatus service={subject} title={title} />;
+        return (
+          <ServiceDigitalStatus
+            service={subject}
+            title={title}
+            sources={sources}
+          />
+        );
       },
     }),
   });
