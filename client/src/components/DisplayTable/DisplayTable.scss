@@ -50,9 +50,10 @@ td {
   overflow-x: auto;
   margin-top: 20px;
   margin-bottom: 20px;
-  border-radius: $standardBorderRadius;
 
   &.display-table-container--with-utils {
+    border-top-left-radius: $standardBorderRadius;
+    border-top-right-radius: $standardBorderRadius;
     background-color: $tableBackgroundColor;
   }
 }

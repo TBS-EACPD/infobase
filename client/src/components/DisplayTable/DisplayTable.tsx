@@ -479,17 +479,15 @@ export class _DisplayTable extends React.Component<
       ),
     };
 
-    const selectPageUtil = {
-      selectPageUtil: enable_pagination && (
-        <SelectPageSize
-          selected={page_size}
-          on_select={this.change_page_size}
-          page_size_increment={page_size_increment}
-          num_items={_.size(sorted_filtered_data)}
-          num_options_max={page_size_num_options_max}
-        />
-      ),
-    };
+    const selectPageUtil = enable_pagination && (
+      <SelectPageSize
+        selected={page_size}
+        on_select={this.change_page_size}
+        page_size_increment={page_size_increment}
+        num_items={_.size(sorted_filtered_data)}
+        num_options_max={page_size_num_options_max}
+      />
+    );
 
     const util_components_with_defaults = _.chain({
       ...util_components_default,
@@ -525,7 +523,7 @@ export class _DisplayTable extends React.Component<
         )}
       >
         <div className={"display-table-utils"}>
-          <div>{_.map(selectPageUtil)}</div>
+          <div>{selectPageUtil}</div>
           <div className={"display-table-container__utils"}>
             {_.map(util_components_with_defaults)}
           </div>
@@ -784,9 +782,7 @@ export class _DisplayTable extends React.Component<
             ))}
           <tfoot>{page_selector}</tfoot>
         </table>
-        <div className={"display-table-utils"}>
-          {_.map(footer_content)}
-        </div>
+        <div className={"display-table-utils"}>{_.map(footer_content)}</div>
       </div>
     );
   }
