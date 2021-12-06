@@ -109,13 +109,13 @@ export const declare_subject_offering_services_panel = () =>
   declare_panel({
     panel_key: "subject_offering_services",
     subject_types: ["gov", "dept"],
-    source: () => get_source_links(["SERVICES"]),
     panel_config_func: (subject_type, panel_key) => ({
       title:
         subject_type === "gov"
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
       footnotes: false,
+      source: () => get_source_links(["SERVICES"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (
