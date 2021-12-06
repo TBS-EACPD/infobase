@@ -14,14 +14,7 @@ const BackToTopTemplate: Story<TemplateProps> = ({ focusId }) => (
     <div id="wb-info" style={{ height: "300px", borderTop: "2px black solid" }}>
       Footer
     </div>
-    <BackToTop
-      focus={() => {
-        const test_element = document.getElementById("#test");
-        if (test_element) {
-          test_element.focus();
-        }
-      }}
-    />
+    <BackToTop scroll_target={document.getElementById("#test")} />
   </Fragment>
 );
 

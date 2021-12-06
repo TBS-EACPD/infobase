@@ -6,11 +6,12 @@ import "intersection-observer";
 import { trivial_text_maker } from "src/models/text";
 
 import { is_mobile } from "src/core/feature_detection";
+import { scroll_to_top } from "src/core/NavComponents";
 
 import "./BackToTop.scss";
 
 interface BackToTopProps {
-  focus: () => void;
+  scroll_target: HTMLElement | null | undefined;
 }
 interface BackToTopState {
   show_back_to_top: boolean;
@@ -64,8 +65,7 @@ export class BackToTop extends React.Component<BackToTopProps, BackToTopState> {
   }
 
   handleClick() {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-    this.props.focus();
+    scroll_to_top(this.props.scroll_target);
   }
 
   render() {
