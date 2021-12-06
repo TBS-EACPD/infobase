@@ -368,35 +368,7 @@ jobs:
           paths:
             - ./this-api-is-deployed
 
-  build_storybook:
-    docker:
-      - image: eaadtbs/ib-ci-build:3.0
-        <<: *dockerhub_auth
-    working_directory: "~/InfoBase"
-    steps:
-      - attach_workspace:
-          at: ./
-      - run: ./scripts/ci_scripts/create_envs.sh
-
-      - restore_cache:
-          keys:
-            - storybook-build-{{ .Branch }}-{{ .Revision }}-v2
-      - run:
-          command: |
-            [ -f "client/$BUILD_DIR/InfoBase/storybook" ] || (cd client && npm run build-storybook -- -o $BUILD_DIR/InfoBase/storybook && npm run build-storybook-a11y -- -o $BUILD_DIR/InfoBase/storybook-a11y)
-      - save_cache:
-          key: storybook-build-{{ .Branch }}-{{ .Revision }}-v2
-          paths:
-            - client/build
-
-      - persist_to_workspace:
-          root: ./
-          paths:
-            # wildcards in place of $BUILD_DIR as I couldn't wrestle yaml/CircleCI's persist_to_workspace syntax in to working with any sort of templated path strings
-            - ./client/*/InfoBase/storybook
-            - ./client/*/InfoBase/storybook-a11y
-
-  deploy_client_and_storybook:
+  deploy_client:
     working_directory: "~/InfoBase"
     docker:
       - image: google/cloud-sdk:slim
@@ -457,14 +429,8 @@ workflows:
               batch-count: [2]
               batch-index: [0, 1]
 
-      - build_storybook:
-          requires:
-            - build_client
-          <<: *deploy_filter
-
-      - deploy_client_and_storybook:
+      - deploy_client:
           requires:
             - deploy_server
             - test_end_to_end
-            - build_storybook
           <<: *deploy_filter

@@ -306,5 +306,4 @@ function create_config(options) {
 
 module.exports = exports = {
   create_config,
-  get_rules,
 };
