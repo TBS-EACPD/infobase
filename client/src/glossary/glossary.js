@@ -10,6 +10,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
+  scroll_into_view_and_focus,
 } from "src/core/NavComponents";
 import { Table } from "src/core/TableClass";
 
@@ -101,8 +102,8 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                 onClick={(evt) => {
                   evt.preventDefault();
                   const el = document.getElementById(`__${letter}`);
-                  el.scrollIntoView({ behavior: "instant" });
-                  el.focus();
+
+                  scroll_into_view_and_focus(el, { behavior: "instant" });
                 }}
               >
                 {letter}

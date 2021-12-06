@@ -28,7 +28,10 @@ import {
   services_feature_flag,
   is_a11y_mode,
 } from "src/core/injected_build_constants";
-import { StandardRouteContainer } from "src/core/NavComponents";
+import {
+  StandardRouteContainer,
+  scroll_into_view_and_focus,
+} from "src/core/NavComponents";
 import { redirect_with_msg } from "src/core/RedirectHeader";
 
 import { shallowEqualObjectsOverKeys, SafeJSURL } from "src/general_utils";
@@ -160,8 +163,7 @@ class Infographic extends React.Component {
           false
         );
 
-        linked_to_panel.scrollIntoView();
-        linked_to_panel.focus();
+        scroll_into_view_and_focus(linked_to_panel);
       }
     }
   }, 100);

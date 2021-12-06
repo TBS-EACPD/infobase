@@ -5,6 +5,8 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils"
 
 import { PinnedFAQ } from "src/components/PinnedFAQ/PinnedFAQ";
 
+import { scroll_into_view_and_focus } from "src/core/NavComponents";
+
 import common_questions from "src/common_text/faq/common_questions.yaml";
 
 import { covid_create_text_maker_component } from "./covid_text_provider";
@@ -63,8 +65,7 @@ export const scroll_to_covid_key_concepts = () => {
   const covid_key_concept_panel = document.querySelector(`#${panel_key}`);
 
   if (!_.isNull(covid_key_concept_panel)) {
-    window.scrollTo(0, covid_key_concept_panel.offsetTop);
-    covid_key_concept_panel.focus();
+    scroll_into_view_and_focus(covid_key_concept_panel);
 
     // Ok, this is where it gets more brittle/hacky. Leaking up a bunch of knowledge about SomeThingsToKeepInMind/AutoAccordion
     // implementation. Should fail softly if those change, and as long as they don't it's a solid UX improvement
