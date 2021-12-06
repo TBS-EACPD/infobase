@@ -11,6 +11,7 @@ import {
   StandardRouteContainer,
   ScrollToTargetContainer,
   scroll_into_view_and_focus,
+  scroll_to_top,
 } from "src/core/NavComponents";
 import { Table } from "src/core/TableClass";
 
@@ -147,9 +148,7 @@ const Glossary_ = ({ active_key, items_by_letter }) => (
                       href="#glossary"
                       onClick={(evt) => {
                         evt.preventDefault();
-                        document.body.scrollTop =
-                          document.documentElement.scrollTop = 0;
-                        document.getElementById("app-focus-root").focus();
+                        scroll_to_top();
                       }}
                     >
                       {text_maker("back_to_top")}
@@ -186,15 +185,7 @@ export default class Glossary extends React.Component {
           <TM k="glossary" />
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          {!is_a11y_mode && (
-            <BackToTop
-              focus={() => {
-                document
-                  .querySelector("#glossary_search > div > div > input")
-                  .focus();
-              }}
-            />
-          )}
+          {!is_a11y_mode && <BackToTop />}
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}
