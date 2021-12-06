@@ -2,10 +2,12 @@
 set -e # will exit if any command has non-zero exit value 
 
 concurrency="full"
+max_old_space_size=2048
 while getopts "c:o:" opt; do
   case ${opt} in
     c) concurrency=$OPTARG;;
     o) options=$OPTARG;;
+    m) max_old_space_size=$OPTARG;;
   esac
 done
 
@@ -13,6 +15,9 @@ if [[ ! $concurrency =~ ^(full|half|none)$ ]]; then
   echo "Concurrency options, -c, are full, half, or none"
   exit 1
 fi
+
+# calls to npm run webpack... use this env var when set
+export MAX_OLD_SPACE_SIZE=$max_old_space_size
 
 [ -e $BUILD_DIR/InfoBase ] && rm -r $BUILD_DIR/InfoBase # clean up build dir
 
