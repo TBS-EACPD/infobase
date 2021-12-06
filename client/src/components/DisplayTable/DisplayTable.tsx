@@ -518,282 +518,274 @@ export class _DisplayTable extends React.Component<
     );
 
     return (
-      <div className={"table-container-wrapper"}>
-        <div className={"display-table-utils table-utils-header"}>
+      <div
+        className={classNames(
+          "display-table-container",
+          util_components_with_defaults && "display-table-container--with-utils"
+        )}
+      >
+        <div className={"display-table-utils"}>
           <div>{_.map(selectPageUtil)}</div>
           <div className={"display-table-container__utils"}>
             {_.map(util_components_with_defaults)}
           </div>
         </div>
-        <div
+        <table
           className={classNames(
-            "display-table-container",
-            util_components_with_defaults &&
-              "display-table-container--with-utils"
+            "table",
+            "display-table",
+            !is_total_exist && "no-total-row"
           )}
         >
-          <table
-            className={classNames(
-              "table",
-              "display-table",
-              !is_total_exist && "no-total-row"
-            )}
-          >
-            <caption className="sr-only">
-              <div>
-                {!_.isEmpty(table_name) ? (
-                  table_name
-                ) : (
-                  <TM k="a11y_table_title_default" />
-                )}
-              </div>
-            </caption>
-            <thead>
-              {util_components_with_defaults && (
-                <tr>
-                  <td
-                    style={{ padding: "8px 8px 0px 8px" }}
-                    colSpan={_.size(visible_col_keys)}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div className={"display-table-container__utils"}>
-                        <button
-                          tabIndex={0}
-                          className={"skip-to-data"}
-                          onClick={() =>
-                            this.first_data_ref.current &&
-                            this.first_data_ref.current.focus()
-                          }
-                        >
-                          {text_maker("skip_to_data")}
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+          <caption className="sr-only">
+            <div>
+              {!_.isEmpty(table_name) ? (
+                table_name
+              ) : (
+                <TM k="a11y_table_title_default" />
               )}
-              <tr className="table-header">
-                {_.map(
-                  visible_ordered_col_keys,
-                  (column_key: string, row_index) => (
-                    <th key={row_index} className={"text-center"}>
-                      {col_configs_with_defaults[column_key].header}
-                    </th>
-                  )
-                )}
+            </div>
+          </caption>
+          <thead>
+            {util_components_with_defaults && (
+              <tr>
+                <td
+                  style={{ padding: "8px 8px 0px 8px" }}
+                  colSpan={_.size(visible_col_keys)}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div className={"display-table-container__utils"}>
+                      <button
+                        tabIndex={0}
+                        className={"skip-to-data"}
+                        onClick={() =>
+                          this.first_data_ref.current &&
+                          this.first_data_ref.current.focus()
+                        }
+                      >
+                        {text_maker("skip_to_data")}
+                      </button>
+                    </div>
+                  </div>
+                </td>
               </tr>
-              {_.some(col_configs_with_defaults, "is_sortable") && (
-                <tr className="table-header">
-                  {_.map(visible_ordered_col_keys, (column_key: string) => {
-                    const sortable =
-                      col_configs_with_defaults[column_key].is_sortable;
-                    const searchable =
-                      col_configs_with_defaults[column_key].is_searchable;
-                    const is_dropdown_filter_applied =
-                      _.reject(filter_options_by_column[column_key], "active")
-                        .length > 0;
+            )}
+            <tr className="table-header">
+              {_.map(
+                visible_ordered_col_keys,
+                (column_key: string, row_index) => (
+                  <th key={row_index} className={"text-center"}>
+                    {col_configs_with_defaults[column_key].header}
+                  </th>
+                )
+              )}
+            </tr>
+            {_.some(col_configs_with_defaults, "is_sortable") && (
+              <tr className="table-header">
+                {_.map(visible_ordered_col_keys, (column_key: string) => {
+                  const sortable =
+                    col_configs_with_defaults[column_key].is_sortable;
+                  const searchable =
+                    col_configs_with_defaults[column_key].is_searchable;
+                  const is_dropdown_filter_applied =
+                    _.reject(filter_options_by_column[column_key], "active")
+                      .length > 0;
 
-                    const current_search_input =
-                      (searchable && searches[column_key]) || null;
+                  const current_search_input =
+                    (searchable && searches[column_key]) || null;
 
-                    return (
-                      <td key={column_key} style={{ textAlign: "center" }}>
-                        {sortable && (
-                          <div>
-                            <SortDirections
-                              asc={!descending && sort_by === column_key}
-                              desc={descending && sort_by === column_key}
-                              onDirectionClick={(dir) =>
-                                this.sortCol(column_key, dir)
+                  return (
+                    <td key={column_key} style={{ textAlign: "center" }}>
+                      {sortable && (
+                        <div>
+                          <SortDirections
+                            asc={!descending && sort_by === column_key}
+                            desc={descending && sort_by === column_key}
+                            onDirectionClick={(dir) =>
+                              this.sortCol(column_key, dir)
+                            }
+                          />
+                        </div>
+                      )}
+                      {searchable && (
+                        <div
+                          style={{
+                            height: is_dropdown_filter_applied
+                              ? "6rem"
+                              : "4.5rem",
+                            minWidth: "155px",
+                          }}
+                          className="input-bar"
+                        >
+                          <div style={{ display: "flex" }}>
+                            <DebouncedTextInput
+                              inputClassName={`search input-sm input-unstyled`}
+                              style={{ width: "100%" }}
+                              placeHolder={text_maker("search_column")}
+                              a11y_label={text_maker("search_column")}
+                              defaultValue={current_search_input}
+                              updateCallback={(search_value: string) => {
+                                const updated_searches = _.mapValues(
+                                  searches,
+                                  (value, key) =>
+                                    key === column_key ? search_value : value
+                                );
+
+                                this.setState({
+                                  searches: updated_searches,
+                                  current_page: 0,
+                                });
+                              }}
+                              debounceTime={300}
+                            />
+                            <DropdownFilter
+                              column_key={column_key}
+                              filter_options_by_column={
+                                filter_options_by_column
                               }
+                              column_searches={searches}
+                              set_filter_options={(
+                                filter_options_by_column: _DisplayTableState["filter_options_by_column"]
+                              ) => this.setState({ filter_options_by_column })}
                             />
                           </div>
-                        )}
-                        {searchable && (
-                          <div
-                            style={{
-                              height: is_dropdown_filter_applied
-                                ? "6rem"
-                                : "4.5rem",
-                              minWidth: "155px",
-                            }}
-                            className="input-bar"
-                          >
-                            <div style={{ display: "flex" }}>
-                              <DebouncedTextInput
-                                inputClassName={`search input-sm input-unstyled`}
-                                style={{ width: "100%" }}
-                                placeHolder={text_maker("search_column")}
-                                a11y_label={text_maker("search_column")}
-                                defaultValue={current_search_input}
-                                updateCallback={(search_value: string) => {
-                                  const updated_searches = _.mapValues(
-                                    searches,
-                                    (value, key) =>
-                                      key === column_key ? search_value : value
-                                  );
-
-                                  this.setState({
-                                    searches: updated_searches,
-                                    current_page: 0,
-                                  });
-                                }}
-                                debounceTime={300}
+                          {is_dropdown_filter_applied && (
+                            <div className="input-bar__filter-applied">
+                              <IconCheckmark
+                                width="1em"
+                                height="1.3em"
+                                color={successDarkColor}
+                                alternate_color={false}
                               />
-                              <DropdownFilter
-                                column_key={column_key}
-                                filter_options_by_column={
-                                  filter_options_by_column
-                                }
-                                column_searches={searches}
-                                set_filter_options={(
-                                  filter_options_by_column: _DisplayTableState["filter_options_by_column"]
-                                ) =>
-                                  this.setState({ filter_options_by_column })
-                                }
-                              />
+                              <TM k="filters_applied" />
                             </div>
-                            {is_dropdown_filter_applied && (
-                              <div className="input-bar__filter-applied">
-                                <IconCheckmark
-                                  width="1em"
-                                  height="1.3em"
-                                  color={successDarkColor}
-                                  alternate_color={false}
-                                />
-                                <TM k="filters_applied" />
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              )}
-              {page_selector}
-            </thead>
-            {show_pagination_load_spinner && (
-              <tbody>
-                <tr>
-                  <td
-                    style={{
-                      color: "white",
-                      position: "relative",
-                      height: "100px",
-                    }}
-                    colSpan={_.size(visible_ordered_col_keys)}
-                  >
-                    <LeafSpinner config_name="subroute" />
-                  </td>
-                </tr>
-              </tbody>
+                          )}
+                        </div>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
             )}
-            {!show_pagination_load_spinner &&
-              (sorted_filtered_data.length === 0 ? (
-                <NoDataMessage />
-              ) : (
-                <tbody>
-                  {_.map(
-                    paginated_data[current_page],
-                    (row: DisplayTableData, row_index) => (
-                      <tr key={row_index}>
-                        {_.map(
-                          visible_ordered_col_keys,
-                          (col_key: string, col_index) => (
-                            <td
-                              style={{
-                                fontSize: "14px",
-                                textAlign: determine_text_align(row, col_key),
-                              }}
-                              key={col_key}
-                              tabIndex={-1}
-                              ref={
-                                col_index === 0 && row_index === 0
-                                  ? this.first_data_ref
-                                  : null
-                              }
-                            >
-                              {(() => {
-                                const col_formatter =
-                                  col_configs_with_defaults[col_key].formatter;
-                                if (col_formatter) {
-                                  if (_.isString(col_formatter)) {
-                                    return (
-                                      <Format
-                                        type={col_formatter}
-                                        content={row[col_key]}
-                                      />
-                                    );
-                                  } else if (_.isFunction(col_formatter)) {
-                                    return col_formatter(row[col_key]);
-                                  }
-                                } else {
-                                  return row[col_key];
-                                }
-                              })()}
-                            </td>
-                          )
-                        )}
-                      </tr>
-                    )
-                  )}
-                  {is_total_exist && (
-                    <tr key="total_row" className="total-row">
-                      <td className="total_color">{text_maker("total")}</td>
-                      {_.chain(visible_ordered_col_keys)
-                        .tail()
-                        .map((col_key: string) => (
+            {page_selector}
+          </thead>
+          {show_pagination_load_spinner && (
+            <tbody>
+              <tr>
+                <td
+                  style={{
+                    color: "white",
+                    position: "relative",
+                    height: "100px",
+                  }}
+                  colSpan={_.size(visible_ordered_col_keys)}
+                >
+                  <LeafSpinner config_name="subroute" />
+                </td>
+              </tr>
+            </tbody>
+          )}
+          {!show_pagination_load_spinner &&
+            (sorted_filtered_data.length === 0 ? (
+              <NoDataMessage />
+            ) : (
+              <tbody>
+                {_.map(
+                  paginated_data[current_page],
+                  (row: DisplayTableData, row_index) => (
+                    <tr key={row_index}>
+                      {_.map(
+                        visible_ordered_col_keys,
+                        (col_key: string, col_index) => (
                           <td
-                            className="total_color"
                             style={{
-                              textAlign: determine_text_align(
-                                total_row,
-                                col_key
-                              ),
+                              fontSize: "14px",
+                              textAlign: determine_text_align(row, col_key),
                             }}
                             key={col_key}
+                            tabIndex={-1}
+                            ref={
+                              col_index === 0 && row_index === 0
+                                ? this.first_data_ref
+                                : null
+                            }
                           >
                             {(() => {
-                              const has_total_row = total_row[col_key];
-                              if (has_total_row) {
-                                const col_formatter =
-                                  col_configs_with_defaults[col_key].formatter;
-                                if (col_formatter) {
-                                  if (_.isString(col_formatter)) {
-                                    return (
-                                      <Format
-                                        type={col_formatter}
-                                        content={total_row[col_key]}
-                                      />
-                                    );
-                                  } else if (_.isFunction(col_formatter)) {
-                                    return col_formatter(total_row[col_key]);
-                                  }
-                                } else {
-                                  return total_row[col_key];
+                              const col_formatter =
+                                col_configs_with_defaults[col_key].formatter;
+                              if (col_formatter) {
+                                if (_.isString(col_formatter)) {
+                                  return (
+                                    <Format
+                                      type={col_formatter}
+                                      content={row[col_key]}
+                                    />
+                                  );
+                                } else if (_.isFunction(col_formatter)) {
+                                  return col_formatter(row[col_key]);
                                 }
                               } else {
-                                return "";
+                                return row[col_key];
                               }
                             })()}
                           </td>
-                        ))
-                        .value()}
+                        )
+                      )}
                     </tr>
-                  )}
-                </tbody>
-              ))}
-            <tfoot>{page_selector}</tfoot>
-          </table>
-          <div className={"display-table-utils table-utils-footer"}>
-            {_.map(footer_content)}
-          </div>
+                  )
+                )}
+                {is_total_exist && (
+                  <tr key="total_row" className="total-row">
+                    <td className="total_color">{text_maker("total")}</td>
+                    {_.chain(visible_ordered_col_keys)
+                      .tail()
+                      .map((col_key: string) => (
+                        <td
+                          className="total_color"
+                          style={{
+                            textAlign: determine_text_align(total_row, col_key),
+                          }}
+                          key={col_key}
+                        >
+                          {(() => {
+                            const has_total_row = total_row[col_key];
+                            if (has_total_row) {
+                              const col_formatter =
+                                col_configs_with_defaults[col_key].formatter;
+                              if (col_formatter) {
+                                if (_.isString(col_formatter)) {
+                                  return (
+                                    <Format
+                                      type={col_formatter}
+                                      content={total_row[col_key]}
+                                    />
+                                  );
+                                } else if (_.isFunction(col_formatter)) {
+                                  return col_formatter(total_row[col_key]);
+                                }
+                              } else {
+                                return total_row[col_key];
+                              }
+                            } else {
+                              return "";
+                            }
+                          })()}
+                        </td>
+                      ))
+                      .value()}
+                  </tr>
+                )}
+              </tbody>
+            ))}
+          <tfoot>{page_selector}</tfoot>
+        </table>
+        <div className={"display-table-utils"}>
+          {_.map(footer_content)}
         </div>
       </div>
     );
