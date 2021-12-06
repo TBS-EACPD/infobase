@@ -24,7 +24,8 @@ export const PanelRenderer = withRouter(
         return null;
       }
       return (
-        <div id={panel_key}>
+        /* -1 tab index necessary for direct panel links to (consistently) manage focus in a keyboard nav friendly way */
+        <div id={panel_key} tabIndex="-1">
           <Provider
             value={{
               active_bubble_id,
