@@ -5,10 +5,11 @@ import {
   StatelessDetails,
   create_text_maker_component,
   UnlabeledTombstone,
-  LinkStyled,
 } from "src/components/index";
 
 import { separatorColor } from "src/style_constants/index";
+
+import { infograph_options_href_template } from "./infographic_link";
 
 import text from "./TableOfContents.yaml";
 
@@ -23,8 +24,7 @@ export default class TableOfContents extends React.Component {
   }
   on_click = () => this.setState({ is_open: !this.state.is_open });
   render() {
-    const { panel_titles_by_key, scroll_to_panel_when_all_loading_done } =
-      this.props;
+    const { subject, active_bubble_id, panel_titles_by_key } = this.props;
 
     const { is_open } = this.state;
 
@@ -47,14 +47,16 @@ export default class TableOfContents extends React.Component {
             >
               <UnlabeledTombstone
                 items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
-                  <LinkStyled
+                  <a
                     key={panel_key}
-                    on_click={() =>
-                      scroll_to_panel_when_all_loading_done(panel_key)
-                    }
+                    href={infograph_options_href_template(
+                      subject,
+                      active_bubble_id,
+                      { panel_key }
+                    )}
                   >
                     {panel_title}
-                  </LinkStyled>
+                  </a>
                 ))}
               />
             </div>

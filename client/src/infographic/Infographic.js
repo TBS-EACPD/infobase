@@ -235,6 +235,8 @@ class Infographic extends React.Component {
               />
             )}
           <TableOfContents
+            subject={subject}
+            active_bubble_id={active_bubble_id}
             panel_titles_by_key={_.chain(filtered_panel_keys)
               .map((panel_key) =>
                 PanelRegistry.lookup(panel_key, subject.subject_type)
@@ -243,9 +245,6 @@ class Infographic extends React.Component {
               .map((panel) => [panel.key, panel.get_title(subject)])
               .fromPairs()
               .value()}
-            scroll_to_panel_when_all_loading_done={
-              this.scroll_to_panel_when_all_loading_done
-            }
           />
           {!loading &&
             _.map(filtered_panel_keys, (panel_key) => (
