@@ -3,7 +3,7 @@ set -e # will exit if any command has non-zero exit value
 
 concurrency="full"
 max_old_space_size=2048
-while getopts "c:o:" opt; do
+while getopts "c:o:m:" opt; do
   case ${opt} in
     c) concurrency=$OPTARG;;
     o) options=$OPTARG;;
