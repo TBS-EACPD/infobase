@@ -1,5 +1,4 @@
 /build
 /build_prod
 .eslintcache
-/storybook-static
 scripts/typescript_progress/output
