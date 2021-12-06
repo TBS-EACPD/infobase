@@ -31,6 +31,7 @@ import {
 import {
   StandardRouteContainer,
   scroll_into_view_and_focus,
+  scroll_to_top,
 } from "src/core/NavComponents";
 import { redirect_with_msg } from "src/core/RedirectHeader";
 
@@ -84,7 +85,7 @@ class AnalyticsSynchronizer extends React.Component {
   }
 }
 function reset_scroll() {
-  window.scrollTo(0, 0);
+  scroll_to_top();
 }
 
 const get_default_state_from_props = ({

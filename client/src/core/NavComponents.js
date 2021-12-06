@@ -149,8 +149,8 @@ const HeaderBanner = withRouter(
 export class StandardRouteContainer extends React.Component {
   componentDidMount() {
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
-    //therefore, this component being unmounts/remounted implies a change between routes, which should always re-scroll
-    window.scrollTo(0, 0);
+    //therefore, this component being unmounted/remounted implies a change between routes, which should always re-scroll
+    scroll_to_top();
   }
   render() {
     const {
@@ -202,6 +202,13 @@ export const scroll_into_view_and_focus = (
   element.scrollIntoView(scroll_into_view_options);
   element.focus();
 };
+
+export const scroll_to_top = (behaviour = "auto") =>
+  scroll_into_view_and_focus(document.getElementById("app-focus-root"), {
+    behaviour,
+    block: "start",
+    inline: "nearest",
+  });
 
 export class ScrollToTargetContainer extends React.Component {
   scrollToItem() {
