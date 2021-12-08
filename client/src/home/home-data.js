@@ -68,6 +68,11 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "quick_link_people_2021",
+    href: "#infographic/gov/gov/people",
+    is_new: "true",
+  },
+  {
     text_key: "quick_link_service_inventory_2019",
     href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
     is_new: "true",
@@ -84,10 +89,6 @@ const featured_content_items = _.compact([
   {
     text_key: "covid_measure_spending_auth",
     href: "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
-  },
-  {
-    text_key: "quick_link_people_2020",
-    href: "#infographic/gov/gov/people",
   },
   {
     text_key: "quick_link_DP_2022",
