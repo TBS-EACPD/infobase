@@ -192,10 +192,14 @@ export class SidebarContent extends React.Component<
                       onKeyDown={(e) => this.handleKeyPress(e, "open", item)}
                       tabIndex={0}
                     >
-                      <SearchHighlighter
-                        search={this.props.query}
-                        content={item.title}
-                      />
+                      {this.props.query ? (
+                        <SearchHighlighter
+                          search={this.props.query}
+                          content={item.title}
+                        />
+                      ) : (
+                        item.title
+                      )}
                     </span>
                   </div>
                 ))}
