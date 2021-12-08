@@ -406,10 +406,6 @@ workflows:
           requires:
             - checkout_and_install
 
-      - build_client:
-          requires:
-            - checkout_and_install
-
       - deploy_data:
           requires:
             - test_server
@@ -419,10 +415,13 @@ workflows:
             - deploy_data
           <<: *deploy_filter
 
-      - test_end_to_end:
+      - build_client:
           requires:
             - test_client
             - test_server
+
+      - test_end_to_end:
+          requires:
             - build_client
           matrix:
             parameters:
