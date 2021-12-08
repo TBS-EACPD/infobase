@@ -281,6 +281,14 @@ const run_tests_from_config = ({
         cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
           "not.exist"
         );
+        cy.wait(1000); // temporary hack to make sure long-tail spinners are all caught and waited on
+        cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
+          "not.exist"
+        );
+
+        // Unconfirmed, but some errors that can be caught by the error boundary may skate by cypress. For an extra
+        // sanity check, make sure we've not wound up on the error boundary at the end of the base loading test
+        cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist");
 
         //Once basic routes a11y critical issues are fix, can remove this if statement
         if (!skip_axe && (app == "eng" || app == "fra")) {
