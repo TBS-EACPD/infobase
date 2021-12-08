@@ -10,7 +10,7 @@ import { IconX } from "src/icons/icons";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
 
-import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
+import { MemoSearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
 import { SidebarContent } from "./GlossarySidebarContent";
 
@@ -162,7 +162,7 @@ export class GlossaryMenu extends React.Component<
                 {glossary_title}
               </h1>
               <div className="search-wrapper">
-                <SearchConfigTypeahead
+                <MemoSearchConfigTypeahead
                   type={"glossary-sidebar"}
                   placeholder={glossary_placeholder}
                   search_configs={[glossary_search_config]}
