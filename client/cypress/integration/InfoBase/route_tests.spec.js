@@ -278,17 +278,31 @@ const run_tests_from_config = ({
           `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`
         );
 
-        cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-          "not.exist"
-        );
-        cy.wait(1000); // temporary hack to make sure long-tail spinners are all caught and waited on
-        cy.get(".leaf-spinner__inner-circle", { timeout: 10000 }).should(
-          "not.exist"
-        );
-
-        // Unconfirmed, but some errors that can be caught by the error boundary may skate by cypress. For an extra
-        // sanity check, make sure we've not wound up on the error boundary at the end of the base loading test
-        cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist");
+        // Spinner(s) should eventually end. Subsequent spinners may appear; recursively wait for all spinners to start and end
+        const spinner_selector = ".leaf-spinner__inner-circle";
+        const wait_on_all_spinners = () =>
+          // eslint-disable-next-line cypress/no-unnecessary-waiting
+          cy
+            .get(spinner_selector, { timeout: 10000 })
+            .should("not.exist")
+            // Wait before checking that no new spinners have started. If this _wasn't_ necessary, then the initial not.exist assertion
+            // would have been sufficient, but there's cases where a new spinner takes a split second to render
+            .wait(250) // Note: if any routes with lots of loading layers start flaking, may need to increase this (or optimzie those routes!)
+            .then(() =>
+              cy.document().then((document) => {
+                if (document.querySelector(spinner_selector)) {
+                  return wait_on_all_spinners();
+                } else {
+                  // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
+                  // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
+                  // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
+                  return cy
+                    .get("#error-boundary-icon", { timeout: 0 })
+                    .should("not.exist");
+                }
+              })
+            );
+        wait_on_all_spinners();
 
         //Once basic routes a11y critical issues are fix, can remove this if statement
         if (!skip_axe && (app == "eng" || app == "fra")) {
