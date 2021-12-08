@@ -137,8 +137,10 @@ export class SearchConfigTypeahead extends React.Component {
         on_query={this.on_query}
         query_value={search_phrase}
         results={results}
-        loading_results={still_loading_results}
+        still_loading_results={still_loading_results}
       />
     );
   }
 }
+
+export const MemoSearchConfigTypeahead = React.memo(SearchConfigTypeahead);

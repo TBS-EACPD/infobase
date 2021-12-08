@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars-experimental */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import _ from "lodash";
 import React from "react";
 
 import { DebouncedTextInput } from "src/components";
@@ -14,34 +11,42 @@ const SideBarSearchDefaultProps = {
 type SideBarSearchProps = typeof SideBarSearchDefaultProps & {
   on_query: (str: string) => void;
   query_value: string;
-  results: any;
+  results: [];
   loading_results?: boolean;
-  getResults?: any;
-  setQuery?: any;
+  getResults?: (data: []) => void;
+  setQuery?: (query: string) => void;
 };
 
-interface SideBarSearchState {
-  input_value: string;
-}
-
-export class SideBarSearch extends React.Component<
-  SideBarSearchProps,
-  SideBarSearchState
-> {
+export class SideBarSearch extends React.Component<SideBarSearchProps> {
   static defaultProps = SideBarSearchDefaultProps;
 
   constructor(props: SideBarSearchProps) {
     super(props);
   }
 
-  callback = (query: any) => {
+  callback = (query: string) => {
     this.props.on_query(query);
-    this.props.getResults(this.props.results);
-    this.props.setQuery(this.props.query_value);
   };
 
+  componentDidUpdate() {
+    if (!this.props.loading_results) {
+      if (this.props.getResults && this.props.setQuery) {
+        this.props.getResults(this.props.results);
+        this.props.setQuery(this.props.query_value);
+      }
+    }
+  }
+
+  shouldComponentUpdate(nextProps: Record<string, unknown>) {
+    if (nextProps.loading_results !== this.props.loading_results) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
-    const { placeholder, on_query } = this.props;
+    const { placeholder } = this.props;
 
     return (
       <div className={"glossary__search-bar"}>
