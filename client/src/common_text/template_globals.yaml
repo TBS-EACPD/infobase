@@ -71,20 +71,20 @@ planning_year_3:
   fr: 2023-2024
 
 ppl_last_year:
+  en: March 2021
+  fr: mars 2021
+ppl_last_year_2:
   en: March 2020
   fr: mars 2020
-ppl_last_year_2:
+ppl_last_year_3:
   en: March 2019
   fr: mars 2019
-ppl_last_year_3:
+ppl_last_year_4:
   en: March 2018
   fr: mars 2018
-ppl_last_year_4:
+ppl_last_year_5:
   en: March 2017
   fr: mars 2017
-ppl_last_year_5:
-  en: March 2016
-  fr: mars 2016
 
 mains_date:
   en: February 25th
