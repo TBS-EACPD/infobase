@@ -27,10 +27,6 @@ export const populate_initial_stores_from_lookups = () =>
         [x: string]: string;
       } = JSON.parse(text);
 
-      // outlier for lookups json, a calculated output of the build base script, not a directly stringified csv. Either way,
-      // not processed the same as the rest, handled by footnote code
-      populate_global_footnotes(global_footnotes);
-
       const {
         glossary,
         faq,
@@ -71,6 +67,11 @@ export const populate_initial_stores_from_lookups = () =>
         program_tags,
         tags_to_programs
       );
+
+      // outlier for lookups json, a calculated output of the build base script, not a directly stringified csv. Either way,
+      // not processed the same as the rest, handled by footnote code
+      // Populate last, dynamic run-time footnotes may require Subjects to already be populated
+      populate_global_footnotes(global_footnotes);
     });
 
 // TODO, work with pipeline to clean up the headers in igoc_en.csv etc some time, strip the unwanted _en/_fr instances
