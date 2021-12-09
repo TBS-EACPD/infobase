@@ -68,27 +68,6 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
     [cannot_online]: row.cannot_online,
     [not_applicable]: row.not_applicable,
   }));
-  const nivo_lang_props = {
-    en: {
-      margin: {
-        top: 20,
-        right: 10,
-        bottom: 50,
-        left: 190,
-      },
-    },
-    fr: {
-      left_axis: {
-        tickRotation: 45,
-      },
-      margin: {
-        top: 170,
-        right: 10,
-        bottom: 50,
-        left: 215,
-      },
-    },
-  };
 
   return (
     <div>
@@ -169,7 +148,7 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
                   <text
                     dominantBaseline={"central"}
                     textAnchor={"end"}
-                    transform="translate(-10,-3) rotate(0)"
+                    transform="translate(-10,-15) rotate(0)"
                     style={{
                       fontFamily: "sans-serif",
                       fontSize: "11px",
@@ -206,7 +185,12 @@ const ServicesDigitalStatusPanel = ({ subject }) => {
                   </g>
                 ),
             }}
-            {...nivo_lang_props[lang]}
+            margin={{
+              top: 20,
+              right: 10,
+              bottom: 50,
+              left: 190,
+            }}
           />
         </Fragment>
       )}
