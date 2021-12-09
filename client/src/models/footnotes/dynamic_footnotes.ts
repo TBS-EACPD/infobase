@@ -21,8 +21,8 @@ const text_maker = create_text_maker(text);
 export const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
   doc_type: "drr",
   year: run_template("{{pa_last_year}}"),
-  late_results_orgs: [],
-  late_resources_orgs: [],
+  late_results_orgs: [] as string[],
+  late_resources_orgs: [] as string[],
 };
 
 const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
