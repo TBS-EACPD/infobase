@@ -73,6 +73,21 @@ const featured_content_items = _.compact([
     is_new: "true",
   },
   {
+    text_key: "quick_link_gov_spending",
+    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
+    is_new: "true",
+  },
+  {
+    text_key: "quick_link_spending_by_program",
+    href: "#treemap/drf/spending/All/pa_last_year",
+    is_new: "true",
+  },
+  {
+    text_key: "quick_link_ftes_by_program",
+    href: "#treemap/drf_ftes/ftes/All/pa_last_year",
+    is_new: "true",
+  },
+  {
     text_key: "quick_link_service_inventory_2019",
     href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
     is_new: "true",
@@ -95,16 +110,8 @@ const featured_content_items = _.compact([
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
   },
   {
-    text_key: "quick_link_main_estimates",
-    href: "#rpb/.-.-(table.-.-'orgVoteStatEstimates.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7best_last_year_4*7d*7d_estimates.-.-'*7b*7best_last_year_3*7d*7d_estimates.-.-'*7b*7best_last_year_2*7d*7d_estimates.-.-'*7b*7best_last_year*7d*7d_estimates.-.-'*7b*7best_in_year*7d*7d_estimates))",
-  },
-  {
     text_key: "quick_link_DRR_1920",
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
-  },
-  {
-    text_key: "quick_link_gov_spending",
-    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
   },
   {
     text_key: "quick_link_tp_by_region",

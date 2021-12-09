@@ -129,8 +129,8 @@ quick_link_auth_and_exp:
   fr: Autorisations et dépenses de 2017-2018
 
 quick_link_gov_spending:
-  en: 2019-20 Government Spending
-  fr: Dépenses du gouvernement de 2019-2020
+  en: 2020-21 Government Spending
+  fr: Dépenses du gouvernement de 2020-2021
 
 quick_link_tp_by_region:
   en: Transfer payments by recipient region
@@ -139,3 +139,11 @@ quick_link_tp_by_region:
 quick_link_service_inventory_2019:
   en: 2019-20 Service Inventory
   fr: Répertoire des services 2019-2020 
+
+quick_link_spending_by_program:
+  en: 2020-21 Spending by Program
+  fr: Dépenses par Programme de 2020-2021
+
+quick_link_ftes_by_program:
+  en: 2020-21 Full-Time Equivalents (FTEs) by Program
+  fr: Équivalents temps plein (ETP) par programme de 2020-2021
