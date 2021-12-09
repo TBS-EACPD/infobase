@@ -9,7 +9,24 @@ import { secondaryColor, tertiaryColor } from "src/style_constants/index";
 
 import "./VisibilityControl.scss";
 
-export class VisibilityControl extends React.Component {
+interface VisibilityControlProps {
+  items: itemInterface[];
+  item_component_order: Record<string, unknown>;
+  click_callback: (key: string) => void;
+  show_eyes_override: boolean;
+}
+
+interface itemInterface {
+  active: boolean;
+  aria_text: string;
+  count: number;
+  key: string;
+  icon: HTMLElement;
+  text: HTMLElement;
+  is_filtered: boolean;
+}
+
+export class VisibilityControl extends React.Component<VisibilityControlProps> {
   render() {
     const { items, item_component_order, click_callback, show_eyes_override } =
       this.props;
@@ -22,7 +39,9 @@ export class VisibilityControl extends React.Component {
     return (
       <div className="visibility-control">
         {_.map(items, (item) => {
-          const item_components = {
+          const item_components: {
+            [key: string]: boolean | JSX.Element | Element;
+          } = {
             count: !_.isUndefined(item.count) && (
               <div className="visibility-control__count_area" key="count">
                 <span className="visibility-control__count">{item.count}</span>
@@ -84,7 +103,7 @@ export class VisibilityControl extends React.Component {
               <div className="visibility-control__components">
                 {_.map(
                   item_component_order,
-                  (component) => item_components[component]
+                  (component: string) => item_components[component]
                 )}
               </div>
             </button>
