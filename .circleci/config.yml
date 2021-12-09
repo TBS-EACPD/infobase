@@ -396,29 +396,25 @@ workflows:
       - test_client:
           requires:
             - checkout_and_install
-      - test_server:
-          requires:
-            - checkout_and_install
-
       - build_client:
           requires:
             - test_client
-            - test_server
+
+      - test_server:
+          requires:
+            - checkout_and_install
       - deploy_data:
           requires:
-            - test_client
             - test_server
           <<: *deploy_filter
       - deploy_server:
           requires:
-            - test_client
             - test_server
           <<: *deploy_filter
 
       - test_end_to_end:
           requires:
-            - deploy_data
-            - deploy_server
+            - test_server
             - build_client
           matrix:
             parameters:
@@ -427,5 +423,7 @@ workflows:
 
       - deploy_client:
           requires:
+            - deploy_data
+            - deploy_server
             - test_end_to_end
           <<: *deploy_filter
