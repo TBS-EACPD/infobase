@@ -295,7 +295,7 @@ applications:
 
 # Overview
 inactive_service_warning:
-  en: This serivce is inactive. The information below may be limitted.
+  en: This service is inactive. The information below may be limitted.
   fr: Ce service est inactif. Les informations ci-dessous peuvent être limitées.
 overview_digital_status_title:
   transform: [handlebars, markdown]
