@@ -263,7 +263,7 @@ const ServicesChannelsPanel = ({ subject }) => {
                 top: 15,
                 right: 60,
                 bottom: 120,
-                left: 60,
+                left: 75,
               }}
             />
           </div>
