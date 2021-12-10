@@ -204,7 +204,7 @@ export const scroll_into_view_and_focus = (
 };
 
 export const scroll_to_top = (
-  top_element = document.getElementById("app-focus-root"),
+  top_element = document.getElementById("ib-site-header-area"),
   behaviour = "auto"
 ) =>
   scroll_into_view_and_focus(top_element, {
