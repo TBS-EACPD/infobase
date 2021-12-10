@@ -18,6 +18,11 @@ pa_last_year_5:
   en: 2016-17
   fr: 2016-2017
 
+# should always be in-sync with pa_last_year?
+pa_last_year_planned:
+  en: 2020-21
+  fr: 2020-2021
+
 tp_region_last_year:
   en: 2019-20
   fr: 2019-2020
@@ -56,9 +61,7 @@ est_last_year_5:
   en: 2016-17
   fr: 2016-2017
 
-pa_last_year_planned:
-  en: 2019-20
-  fr: 2019-2020
+
 
 planning_year_1:
   en: 2021-22
