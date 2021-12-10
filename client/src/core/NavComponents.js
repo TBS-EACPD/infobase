@@ -4,7 +4,10 @@ import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
 
 import { AlertBanner } from "src/components/AlertBanner/AlertBanner";
+import { MultiColumnList } from "src/components/misc_util_components";
 
+import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
+import { Dept } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
@@ -146,6 +149,44 @@ const HeaderBanner = withRouter(
   }
 );
 
+const TemporaryPublicAccountsBanner = () => {
+  const route_filter = (match, history) =>
+    /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
+
+  const late_orgs =
+    PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
+  const column_count = late_orgs.length > 3 ? 3 : 2;
+  const li_class = column_count > 2 ? "font-small" : "";
+
+  const banner_content = (
+    <Fragment>
+      {
+        {
+          en: "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
+          fr: "Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
+        }[lang]
+      }
+      <MultiColumnList
+        list_items={_.map(
+          late_orgs,
+          (org_id) => Dept.store.lookup(org_id).name
+        )}
+        column_count={column_count}
+        li_class={li_class}
+      />
+    </Fragment>
+  );
+
+  return (
+    <HeaderBanner
+      route_filter={route_filter}
+      banner_content={banner_content}
+      banner_class="warning"
+      additional_class_names="medium-panel-text"
+    />
+  );
+};
+
 export class StandardRouteContainer extends React.Component {
   componentDidMount() {
     //unless a route's component is sufficiently complicated, it should never unmount/remount a StandardRouteContainer
@@ -169,6 +210,7 @@ export class StandardRouteContainer extends React.Component {
         <DocumentDescription description_str={description} />
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
+        <TemporaryPublicAccountsBanner />
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
         {!is_a11y_mode && (
