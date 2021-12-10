@@ -225,10 +225,7 @@ export class App extends React.Component {
                 path="/start"
                 render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
               />
-              <Route
-                path="/"
-                render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
-              />
+              <Redirect from="/" to="/start" />
             </Switch>
             <PageDetails
               showSurvey={showSurvey}
