@@ -35,6 +35,9 @@ filter_data:
 no_data_table:
   en: No data available for this table. Please check any filters applied.
   fr: Aucune donnée n'est disponible pour ce tableau. Veuillez vérifier les filtres utilisés.
+table_pagination:
+  en: Table pagination
+  fr: Pagination des tableaux
 ellipsis_end:
   transform: [handlebars]
   en: Page {{page_num}}. Click this, then move right to view more options.
