@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 
 import { lang } from "src/core/injected_build_constants";
 
@@ -11,7 +11,7 @@ import "./VisibilityControl.scss";
 
 interface VisibilityControlProps {
   items: itemInterface[];
-  item_component_order: Record<string, unknown>;
+  item_component_order: ("count" | "icon" | "text")[];
   click_callback: (key: string) => void;
   show_eyes_override: boolean;
 }
@@ -21,10 +21,12 @@ interface itemInterface {
   aria_text: string;
   count: number;
   key: string;
-  icon: HTMLElement;
-  text: HTMLElement;
+  icon: React.ReactNode;
+  text: string;
   is_filtered: boolean;
 }
+
+type itemType = "count" | "icon" | "text";
 
 export class VisibilityControl extends React.Component<VisibilityControlProps> {
   render() {
@@ -40,7 +42,7 @@ export class VisibilityControl extends React.Component<VisibilityControlProps> {
       <div className="visibility-control">
         {_.map(items, (item) => {
           const item_components: {
-            [key: string]: boolean | JSX.Element | Element;
+            [key in itemType]: React.ReactNode;
           } = {
             count: !_.isUndefined(item.count) && (
               <div className="visibility-control__count_area" key="count">
@@ -101,10 +103,9 @@ export class VisibilityControl extends React.Component<VisibilityControlProps> {
                 )}
               </div>
               <div className="visibility-control__components">
-                {_.map(
-                  item_component_order,
-                  (component: string) => item_components[component]
-                )}
+                {_.map(item_component_order, (component, index: number) => (
+                  <Fragment key={index}>{item_components[component]}</Fragment>
+                ))}
               </div>
             </button>
           );
