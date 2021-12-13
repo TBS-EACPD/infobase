@@ -435,9 +435,9 @@ export const SelectPageSize = ({
 
   const dropdown_content = (
     <form className="paginate_by_dropdown">
-      <div style={{ marginBottom: 10 }}>
+      <ul className="list-unstyled" style={{ marginBottom: 10 }}>
         {_.map(options, ({ label, value }) => (
-          <form key={value}>
+          <li key={value}>
             <label className={"normal-radio-btn-label"}>
               <input
                 onClick={() => on_select(value)}
@@ -448,9 +448,9 @@ export const SelectPageSize = ({
               />
               <span style={{ marginLeft: "3px" }}>{label}</span>
             </label>
-          </form>
+          </li>
         ))}
-      </div>
+      </ul>
     </form>
   );
 
