@@ -297,12 +297,15 @@ const run_tests_from_config = ({
             );
         wait_on_all_spinners();
 
-        //Once basic routes a11y critical issues are fix, can remove this if statement
-        if (!skip_axe && (app == "eng" || app == "fra")) {
+        if (
+          !skip_axe &&
+          /* TODO fix all axe warning on the a11y routes, drop the next line */
+          !/basic-/.test(app)
+        ) {
           cy.injectAxe();
           cy.checkA11y(
             null,
-            { includedImpacts: ["critical"] },
+            { includedImpacts: ["critical", "serious", "moderate"] },
             cy.terminalLog,
             false
           );
