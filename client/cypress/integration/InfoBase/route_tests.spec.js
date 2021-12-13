@@ -256,12 +256,6 @@ const route_load_tests_config = [
     route: "diff/326",
     test_on: ["eng", "basic-eng"],
   },
-  {
-    name: "Footnote Inventory - all footnotes",
-    route: "footnote-inventory",
-    test_on: ["eng", "basic-eng", "fra"],
-    skip_axe: true,
-  },
 ];
 
 const run_tests_from_config = ({

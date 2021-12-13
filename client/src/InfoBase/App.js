@@ -50,9 +50,6 @@ const TreeMap = React.lazy(() => import("src/TreeMap/TreeMap"));
 
 const PanelInventory = React.lazy(() => import("src/panels/PanelInventory"));
 
-const FootnoteInventory = React.lazy(() =>
-  import("src/models/footnotes/FootnoteInventory")
-);
 const Survey = React.lazy(() => import("src/Survey/Survey"));
 
 const are_linked_stylesheets_loaded = () => {
@@ -207,7 +204,6 @@ export class App extends React.Component {
                 path="/panel-inventory/:subject_type?/:panel?/:id?"
                 component={PanelInventory}
               />
-              <Route path="/footnote-inventory" component={FootnoteInventory} />
               {!is_a11y_mode && (
                 <Route
                   path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
