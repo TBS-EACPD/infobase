@@ -18,7 +18,7 @@ import {
   useServiceSummaryProgram,
 } from "src/models/services/services_queries";
 
-import { is_a11y_mode, lang } from "src/core/injected_build_constants";
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";

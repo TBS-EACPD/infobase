@@ -113,10 +113,11 @@ const ServicesChannelsPanel = ({ subject }) => {
   )
     .map((key) => ({
       max_vol_channel_name: text_maker(key),
-      max_vol_channel_value: _.chain(most_recent_filtered_data)
-        .map(({ service_report }) => _.sumBy(service_report, key))
-        .sum()
-        .value(),
+      max_vol_channel_value:
+        _.chain(most_recent_filtered_data)
+          .map(({ service_report }) => _.sumBy(service_report, key))
+          .sum()
+          .value() || 0,
     }))
     .maxBy("max_vol_channel_value")
     .value();
@@ -160,22 +161,30 @@ const ServicesChannelsPanel = ({ subject }) => {
 
   return (
     <div>
-      <TM
-        className="medium-panel-text"
-        k={
-          subject.subject_type === "program"
-            ? "application_channels_by_services_program_text"
-            : "application_channels_by_services_text"
-        }
-        args={{
-          subject,
-          most_recent_year,
-          max_vol_service_name,
-          max_vol_service_value,
-          max_vol_channel_name,
-          max_vol_channel_value,
-        }}
-      />
+      {max_vol_service_value === 0 && max_vol_channel_value === 0 ? (
+        <TM
+          className="medium-panel-text"
+          k="empty_application_channels_by_services"
+          args={{ subject }}
+        />
+      ) : (
+        <TM
+          className="medium-panel-text"
+          k={
+            subject.subject_type === "program"
+              ? "application_channels_by_services_program_text"
+              : "application_channels_by_services_text"
+          }
+          args={{
+            subject,
+            most_recent_year,
+            max_vol_service_name,
+            max_vol_service_value,
+            max_vol_channel_name,
+            max_vol_channel_value,
+          }}
+        />
+      )}
       {is_a11y_mode ? (
         <DisplayTable
           data={get_table_data_from_services(services)}
