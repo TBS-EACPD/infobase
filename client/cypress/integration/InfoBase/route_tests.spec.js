@@ -9,7 +9,7 @@ const route_load_tests_config = [
   },
   {
     name: "Homepage",
-    route: "",
+    route: "start",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
   },
   {
@@ -242,8 +242,7 @@ const route_load_tests_config = [
   },
   {
     name: "Report Builder - Report",
-    route:
-      "rpb/~(columns~(~'thisyearexpenditures)~subject~'gov_gov~'dimension~'major_voted_stat~table~'orgVoteStatQfr~sort_col~'dept~descending~false~filter~'All)",
+    route: "rpb/.-.-(table.-.-'orgEmployeeType)",
     test_on: ["eng", "basic-eng"],
   },
   {
