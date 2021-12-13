@@ -148,39 +148,36 @@ class GranularView extends React.Component {
 
     const dropdown_content = (
       <div className="group_filter_dropdown">
-        {_.map(groupings, (current_grouping) => (
-          <div style={{ marginBottom: 10 }} key={`${current_grouping}-div`}>
-            <div>
-              <input
-                type={"radio"}
-                id={current_grouping}
-                name={"rpb_group_filter"}
-                key={current_grouping}
-                onClick={() => {
-                  on_set_grouping({
-                    grouping: current_grouping,
-                  });
-                }}
-                defaultChecked={current_grouping === grouping}
-              />
-              <label
-                htmlFor={current_grouping}
-                className={"normal-radio-btn-label"}
-                key={`${current_grouping}-radio-btn-label`}
-              >
-                {current_grouping === "default" ||
-                !_.find(sorted_key_columns, ["nick", current_grouping])
-                  ? text_maker(current_grouping)
-                  : current_grouping === "dept"
-                  ? text_maker("org")
-                  : _.find(sorted_key_columns, ["nick", current_grouping])
-                      .header[lang] ||
-                    _.find(sorted_key_columns, ["nick", current_grouping])
-                      .header["en"]}
-              </label>
+        {_.map(groupings, (current_grouping) => {
+          const group_id = `rpb_group_filter_${current_grouping}`;
+          return (
+            <div style={{ marginBottom: 10 }} key={`${current_grouping}-div`}>
+              <div>
+                <input
+                  id={group_id}
+                  type={"radio"}
+                  onClick={() => {
+                    on_set_grouping({
+                      grouping: current_grouping,
+                    });
+                  }}
+                  defaultChecked={current_grouping === grouping}
+                />
+                <label htmlFor={group_id} className={"normal-radio-btn-label"}>
+                  {current_grouping === "default" ||
+                  !_.find(sorted_key_columns, ["nick", current_grouping])
+                    ? text_maker(current_grouping)
+                    : current_grouping === "dept"
+                    ? text_maker("org")
+                    : _.find(sorted_key_columns, ["nick", current_grouping])
+                        .header[lang] ||
+                      _.find(sorted_key_columns, ["nick", current_grouping])
+                        .header["en"]}
+                </label>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
 
