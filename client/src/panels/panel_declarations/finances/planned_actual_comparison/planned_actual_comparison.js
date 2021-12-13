@@ -6,6 +6,7 @@ import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import { create_text_maker_component } from "src/components/index";
 
+import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { get_source_links } from "src/metadata/data_sources";
@@ -26,11 +27,25 @@ export const declare_planned_actual_comparison_panel = () =>
       source: (subject) => get_source_links(["DP", "DRR", "PA"]),
       calculate(subject) {
         if (subject.subject_type === "dept") {
-          if (!subject.is_dp_org) {
+          if (
+            !subject.is_dp_org ||
+            _.includes(
+              PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs,
+              subject.id
+            )
+          ) {
             return false;
           }
-        } else if (!subject.dept.is_dp_org) {
-          return false;
+        } else {
+          if (
+            !subject.dept.is_dp_org ||
+            _.includes(
+              PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs,
+              subject.dept.id
+            )
+          ) {
+            return false;
+          }
         }
 
         const { programSpending, programFtes } = this.tables;
