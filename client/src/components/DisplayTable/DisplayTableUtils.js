@@ -373,6 +373,8 @@ export const SelectPage = ({
             <div
               className="col-12 d-flex justify-content-center"
               style={{ flexWrap: "wrap" }}
+              role="tablist"
+              aria-label={text_maker("table_pagination")}
             >
               {_.map(page_options, (page_num, index) => (
                 <button
