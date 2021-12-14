@@ -92,7 +92,7 @@ export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
       // for now doing it here to catch exempt orgs in PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC too. TODO, maybe
       // move PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC in to the results models file, apply (some of) the results
       // config validation to it? A little hacky either way
-      const EXEMPT_ORGS = [151];
+      const EXEMPT_ORGS = ["151"];
       const docs_with_late_expempt_orgs = _.chain(docs_with_late_orgs)
         .map(({ [late_org_property]: late_orgs, doc_type, year }) => ({
           late_orgs,
