@@ -253,7 +253,6 @@ const WelcomeMat = (props) => {
   );
   const planned_trend = <TM k="3_year_trend" />;
   const no_hist_spending = <TM k="no_historical_spending__new" />;
-  // const no_hist_ftes = <TM k="no_historical_fte__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />;
 
   const fte_graph = format_and_get_fte(type, subject);
@@ -923,16 +922,6 @@ function get_calcs(subject, q6, q12) {
     true
   );
 
-  const oldest_hist_fte_data = get_non_zero_data_year(
-    hist_fte_data,
-    actual_history_years
-  );
-  const latest_hist_fte_data = get_non_zero_data_year(
-    hist_fte_data,
-    actual_history_years,
-    true
-  );
-
   const spend_latest_year = latest_hist_spend_data.value;
   const spend_plan_1 = _.first(planned_spend_data);
   const spend_plan_3 = _.last(planned_spend_data);
@@ -942,6 +931,23 @@ function get_calcs(subject, q6, q12) {
     oldest_hist_spend_data.value;
   const planned_spend_diff =
     (spend_plan_3 - spend_latest_year) / spend_latest_year;
+
+  // Use FTEs from latest years with planned spending. They're in the same column under the same year heading (latest_hist_year_text)
+  // so they should be in sync... assuming that there can't be a case where there's a year with 0 spending and non-0 FTEs (in which case
+  // the years from oldest_hist_spend_data etc are the wrong ones)
+  const get_data_by_historical_year = (data, year) =>
+    _.chain(actual_history_years)
+      .indexOf(year)
+      .thru((index) => ({ year, value: data[index] }))
+      .value();
+  const oldest_hist_fte_data = get_data_by_historical_year(
+    hist_fte_data,
+    oldest_hist_spend_data.year
+  );
+  const latest_hist_fte_data = get_data_by_historical_year(
+    hist_fte_data,
+    latest_hist_spend_data.year
+  );
 
   const fte_latest_year = latest_hist_fte_data.value;
   const fte_plan_1 = _.first(planned_fte_data);
