@@ -81,7 +81,13 @@ const org_templates = {
 
     const result_name = (() => {
       const name_like_attribute_matched = _.find(
-        ["name", "legal_title", "old_name"],
+        [
+          "name",
+          "legal_title",
+          "old_name",
+          "other_lang_applied_title",
+          "other_lang_legal_title",
+        ],
         (attribute) => get_re_matcher([attribute], search)(org)
       );
 
@@ -94,6 +100,10 @@ const org_templates = {
           return `${org.name} (${trivial_text_maker("previously_named")}: ${
             org.old_name
           })`;
+        case "other_lang_applied_title":
+          return `${org.name} (${org.other_lang_applied_title})`;
+        case "other_lang_legal_title":
+          return `${org.name} (${org.other_lang_legal_title})`;
         default:
           return org.name;
       }
