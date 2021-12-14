@@ -988,7 +988,6 @@ CB,org_vote_stat_estimates
 CBC,org_vote_stat_estimates
 CBSA,org_vote_stat_estimates
 CC,org_vote_stat_estimates
-CCC,org_vote_stat_estimates
 CCMD,org_vote_stat_estimates
 CCOHS,org_vote_stat_estimates
 CCRA,org_vote_stat_estimates
@@ -1013,6 +1012,7 @@ CNEDA,org_vote_stat_estimates
 CNMI,org_vote_stat_estimates
 CPC,org_vote_stat_estimates
 CPCC,org_vote_stat_estimates
+CRRF,org_vote_stat_estimates
 CRTC,org_vote_stat_estimates
 CSA,org_vote_stat_estimates
 CSC,org_vote_stat_estimates
@@ -1026,6 +1026,7 @@ EDC,org_vote_stat_estimates
 ERC,org_vote_stat_estimates
 FBCL,org_vote_stat_estimates
 FCAC,org_vote_stat_estimates
+FEDNO,org_vote_stat_estimates
 FEDSO,org_vote_stat_estimates
 FIN,org_vote_stat_estimates
 FJA,org_vote_stat_estimates
@@ -1078,6 +1079,7 @@ OSEO,org_vote_stat_estimates
 OSFI,org_vote_stat_estimates
 PBO,org_vote_stat_estimates
 PCA,org_vote_stat_estimates
+PCAN,org_vote_stat_estimates
 PCC,org_vote_stat_estimates
 PCO,org_vote_stat_estimates
 PHAC,org_vote_stat_estimates
