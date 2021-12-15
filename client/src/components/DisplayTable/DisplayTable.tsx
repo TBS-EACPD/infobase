@@ -521,25 +521,18 @@ export class _DisplayTable extends React.Component<
         )}
       >
         <div className={"display-table-utils"}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className={"display-table-container__utils"}>
             {util_components_with_defaults && (
-              <div className={"display-table-container__utils"}>
-                <button
-                  tabIndex={0}
-                  className={"skip-to-data"}
-                  onClick={() =>
-                    this.first_data_ref.current &&
-                    this.first_data_ref.current.focus()
-                  }
-                >
-                  {text_maker("skip_to_data")}
-                </button>
-              </div>
+              <button
+                tabIndex={0}
+                className={"skip-to-data"}
+                onClick={() =>
+                  this.first_data_ref.current &&
+                  this.first_data_ref.current.focus()
+                }
+              >
+                {text_maker("skip_to_data")}
+              </button>
             )}
             {selectPageUtil}
           </div>
