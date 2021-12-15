@@ -11,7 +11,7 @@ import "./VisibilityControl.scss";
 
 interface VisibilityControlProps {
   items: itemInterface[];
-  item_component_order: ("count" | "icon" | "text")[];
+  item_component_order: itemType[];
   click_callback: (key: string) => void;
   show_eyes_override: boolean;
 }
@@ -45,7 +45,7 @@ export class VisibilityControl extends React.Component<VisibilityControlProps> {
             [key in itemType]: React.ReactNode;
           } = {
             count: !_.isUndefined(item.count) && (
-              <div className="visibility-control__count_area" key="count">
+              <div className="visibility-control__count_area">
                 <span className="visibility-control__count">{item.count}</span>
               </div>
             ),
