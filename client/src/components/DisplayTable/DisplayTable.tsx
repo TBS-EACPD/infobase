@@ -497,8 +497,6 @@ export class _DisplayTable extends React.Component<
       .reverse()
       .value();
 
-    const footer_content = {};
-
     const paginated_data = _.chunk(
       sorted_filtered_data,
       !enable_pagination ? _.size(sorted_filtered_data) : page_size
@@ -523,7 +521,28 @@ export class _DisplayTable extends React.Component<
         )}
       >
         <div className={"display-table-utils"}>
-          <div>{selectPageUtil}</div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            {util_components_with_defaults && (
+              <div className={"display-table-container__utils"}>
+                <button
+                  tabIndex={0}
+                  className={"skip-to-data"}
+                  onClick={() =>
+                    this.first_data_ref.current &&
+                    this.first_data_ref.current.focus()
+                  }
+                >
+                  {text_maker("skip_to_data")}
+                </button>
+              </div>
+            )}
+            {selectPageUtil}
+          </div>
           <div className={"display-table-container__utils"}>
             {_.map(util_components_with_defaults)}
           </div>
@@ -545,34 +564,6 @@ export class _DisplayTable extends React.Component<
             </div>
           </caption>
           <thead>
-            {util_components_with_defaults && (
-              <tr>
-                <td
-                  style={{ padding: "8px 8px 0px 8px" }}
-                  colSpan={_.size(visible_col_keys)}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div className={"display-table-container__utils"}>
-                      <button
-                        tabIndex={0}
-                        className={"skip-to-data"}
-                        onClick={() =>
-                          this.first_data_ref.current &&
-                          this.first_data_ref.current.focus()
-                        }
-                      >
-                        {text_maker("skip_to_data")}
-                      </button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            )}
             <tr className="table-header">
               {_.map(
                 visible_ordered_col_keys,
@@ -782,7 +773,6 @@ export class _DisplayTable extends React.Component<
             ))}
           <tfoot>{page_selector}</tfoot>
         </table>
-        <div className={"display-table-utils"}>{_.map(footer_content)}</div>
       </div>
     );
   }
