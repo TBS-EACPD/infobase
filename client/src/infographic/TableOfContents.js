@@ -8,6 +8,7 @@ import {
 } from "src/components/index";
 
 import { separatorColor } from "src/style_constants/index";
+import { with_console_error_silenced } from "src/testing_utils";
 
 import { infograph_options_href_template } from "./infographic_link";
 
@@ -22,6 +23,7 @@ export default class TableOfContents extends React.Component {
       is_open: false,
     };
   }
+
   on_click = () => this.setState({ is_open: !this.state.is_open });
   render() {
     const { subject, active_bubble_id, panel_titles_by_key } = this.props;
@@ -54,6 +56,12 @@ export default class TableOfContents extends React.Component {
                       active_bubble_id,
                       { panel_key }
                     )}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(panel_key).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
                   >
                     {panel_title}
                   </a>
