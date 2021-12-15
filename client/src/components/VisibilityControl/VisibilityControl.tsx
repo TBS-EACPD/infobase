@@ -51,9 +51,7 @@ export class VisibilityControl extends React.Component<VisibilityControlProps> {
             ),
             icon: !_.isUndefined(item.icon) && item.icon,
             text: !_.isUndefined(item.text) && (
-              <div className="visibility-control__text" key="text">
-                {item.text}
-              </div>
+              <div className="visibility-control__text">{item.text}</div>
             ),
           };
 
