@@ -15,6 +15,9 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
     return null;
   }
 };
+const TODO_convert = (counts) =>
+  counts === "no_data" || counts === "not_applicable" ? null : counts;
+
 const get_years_from_service_report = (services) =>
   _.chain(services)
     .flatMap(({ service_report }) => _.map(service_report, "year"))
@@ -76,20 +79,44 @@ export default async function ({ models }) {
       sin_collected,
       comment_en: service_report_comment_en,
       comment_fr: service_report_comment_fr,
-
+      phone_inquiry_and_application_count,
+      phone_inquiry_count,
+      online_inquiry_count,
+      phone_application_count,
+      online_application_count,
+      live_application_count,
+      mail_application_count,
+      email_application_count,
+      fax_application_count,
+      other_application_count,
       ...other_fields
-    }) => ({
-      service_id,
-      cra_business_ids_collected: convert_to_bool_or_null(
-        cra_business_ids_collected,
-        "YES",
-        "NO"
-      ),
-      sin_collected: convert_to_bool_or_null(sin_collected, "YES", "NO"),
-      service_report_comment_en,
-      service_report_comment_fr,
-      ...other_fields,
-    })
+    }) => {
+      return {
+        service_id,
+        cra_business_ids_collected: convert_to_bool_or_null(
+          cra_business_ids_collected,
+          "YES",
+          "NO"
+        ),
+        sin_collected: convert_to_bool_or_null(sin_collected, "YES", "NO"),
+        service_report_comment_en,
+        service_report_comment_fr,
+        // TODO
+        phone_inquiry_and_application_count: TODO_convert(
+          phone_inquiry_and_application_count
+        ),
+        phone_inquiry_count: TODO_convert(phone_inquiry_count),
+        online_inquiry_count: TODO_convert(online_inquiry_count),
+        phone_application_count: TODO_convert(phone_application_count),
+        online_application_count: TODO_convert(online_application_count),
+        live_application_count: TODO_convert(live_application_count),
+        mail_application_count: TODO_convert(mail_application_count),
+        email_application_count: TODO_convert(email_application_count),
+        fax_application_count: TODO_convert(fax_application_count),
+        other_application_count: TODO_convert(other_application_count),
+        ...other_fields,
+      };
+    }
   );
   const standard_report_rows = _.map(
     get_standard_csv_file_rows("standard-reports.csv"),
@@ -155,12 +182,16 @@ export default async function ({ models }) {
     .last()
     .value();
 
+  const dept_id_by_dept_code = _.chain(get_standard_csv_file_rows("igoc.csv"))
+    .map(({ org_id, dept_code }) => [dept_code, org_id])
+    .fromPairs()
+    .value();
+
   const filtered_service_rows = _.chain(raw_service_rows)
     .map((service) => {
       const {
         dept_submissions__document__year: submission_year,
-        dept_id: org_id,
-        dept__tbs_dept_code: dept_code,
+        dept_code,
         eternal_id: id,
         collects_fees,
         account_reg_digital_status,
@@ -199,7 +230,7 @@ export default async function ({ models }) {
       return {
         id,
         submission_year,
-        org_id,
+        org_id: dept_id_by_dept_code[dept_code],
         collects_fees: convert_to_bool_or_null(collects_fees, "TRUE", "FALSE"),
         account_reg_digital_status: convert_to_bool_or_null(
           account_reg_digital_status,
