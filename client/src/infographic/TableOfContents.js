@@ -8,7 +8,6 @@ import {
 } from "src/components/index";
 
 import { separatorColor } from "src/style_constants/index";
-import { with_console_error_silenced } from "src/testing_utils";
 
 import { infograph_options_href_template } from "./infographic_link";
 
@@ -22,6 +21,41 @@ export default class TableOfContents extends React.Component {
     this.state = {
       is_open: false,
     };
+  }
+
+  componentDidMount() {
+    const { subject, active_bubble_id } = this.props;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const panel_key = entry.target.parentElement.getAttribute("id");
+          const href = document.querySelector(
+            `a[href="${infograph_options_href_template(
+              subject,
+              active_bubble_id,
+              { panel_key }
+            )}"]`
+          );
+          if (href) {
+            if (entry.intersectionRatio > 0.5) {
+              href.classList.add("active");
+            } else {
+              document;
+              href.classList.remove("active");
+            }
+          }
+        });
+      },
+      { threshold: [0, 0.5] }
+    );
+
+    setTimeout(() => {
+      const test = document.getElementsByClassName("panel");
+      for (const section of test) {
+        observer.observe(section);
+      }
+    }, 3000);
   }
 
   on_click = () => this.setState({ is_open: !this.state.is_open });
@@ -44,12 +78,18 @@ export default class TableOfContents extends React.Component {
               style={{
                 border: "1px solid",
                 borderColor: separatorColor,
-                borderRadius: "5px",
+                position: "fixed",
+                left: "5px",
+                top: "150px",
+                backgroundColor: "white",
+                zIndex: "999",
+                boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
               }}
             >
               <UnlabeledTombstone
                 items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
                   <a
+                    className={"toc_link"}
                     key={panel_key}
                     href={infograph_options_href_template(
                       subject,

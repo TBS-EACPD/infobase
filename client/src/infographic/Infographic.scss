@@ -77,3 +77,11 @@ of the advanced search for mobile */
     overflow-x: visible;
   }
 }
+
+.toc_link {
+  font-size: 10px;
+}
+
+.toc_link.active {
+  font-size: 15px;
+}
