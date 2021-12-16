@@ -68,35 +68,65 @@ Object {
               "subject_id": "114",
               "year": "2019",
             },
+            Object {
+              "channel_id": "other_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "phone_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "live_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "mail_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "online_application_count",
+              "channel_value": 9,
+              "subject_id": "114",
+              "year": "2020",
+            },
           ],
           "service_digital_status_summary": Array [
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "issue_res_digital",
               "key_desc": "issue_res_digital_desc",
               "not_applicable": 0,
               "subject_id": "114",
             },
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "issuance_digital",
               "key_desc": "issuance_digital_desc",
               "not_applicable": 0,
               "subject_id": "114",
             },
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "decision_digital",
               "key_desc": "decision_digital_desc",
               "not_applicable": 0,
               "subject_id": "114",
             },
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "application_digital",
               "key_desc": "application_digital_desc",
               "not_applicable": 0,
@@ -104,27 +134,28 @@ Object {
             },
             Object {
               "can_online": 0,
-              "cannot_online": 2,
+              "cannot_online": 1,
               "key": "authentication",
               "key_desc": "authentication_desc",
-              "not_applicable": 0,
+              "not_applicable": 1,
               "subject_id": "114",
             },
             Object {
               "can_online": 0,
-              "cannot_online": 2,
+              "cannot_online": 1,
               "key": "account_reg_digital",
               "key_desc": "account_reg_digital_desc",
-              "not_applicable": 0,
+              "not_applicable": 1,
               "subject_id": "114",
             },
           ],
           "service_general_stats": Object {
             "num_of_programs_offering_services": 1,
             "num_of_subject_offering_services": null,
-            "number_of_online_enabled_services": 0,
+            "number_of_online_enabled_services": 1,
             "number_of_services": 2,
-            "report_years": Array [
+            "report_years": CoreMongooseArray [
+              "2020",
               "2019",
               "2018",
             ],
@@ -141,7 +172,7 @@ Object {
             Object {
               "number_of_services": 2,
               "subject_id": "CB-BEZ01",
-              "total_volume": 0,
+              "total_volume": 9,
             },
           ],
         },
@@ -219,35 +250,65 @@ Object {
               "subject_id": "114",
               "year": "2019",
             },
+            Object {
+              "channel_id": "other_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "phone_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "live_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "mail_application_count",
+              "channel_value": 0,
+              "subject_id": "114",
+              "year": "2020",
+            },
+            Object {
+              "channel_id": "online_application_count",
+              "channel_value": 9,
+              "subject_id": "114",
+              "year": "2020",
+            },
           ],
           "service_digital_status_summary": Array [
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "issue_res_digital",
               "key_desc": "issue_res_digital_desc",
               "not_applicable": 0,
               "subject_id": "CB-BEZ01",
             },
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "issuance_digital",
               "key_desc": "issuance_digital_desc",
               "not_applicable": 0,
               "subject_id": "CB-BEZ01",
             },
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "decision_digital",
               "key_desc": "decision_digital_desc",
               "not_applicable": 0,
               "subject_id": "CB-BEZ01",
             },
             Object {
-              "can_online": 0,
-              "cannot_online": 2,
+              "can_online": 1,
+              "cannot_online": 1,
               "key": "application_digital",
               "key_desc": "application_digital_desc",
               "not_applicable": 0,
@@ -255,27 +316,28 @@ Object {
             },
             Object {
               "can_online": 0,
-              "cannot_online": 2,
+              "cannot_online": 1,
               "key": "authentication",
               "key_desc": "authentication_desc",
-              "not_applicable": 0,
+              "not_applicable": 1,
               "subject_id": "CB-BEZ01",
             },
             Object {
               "can_online": 0,
-              "cannot_online": 2,
+              "cannot_online": 1,
               "key": "account_reg_digital",
               "key_desc": "account_reg_digital_desc",
-              "not_applicable": 0,
+              "not_applicable": 1,
               "subject_id": "CB-BEZ01",
             },
           ],
           "service_general_stats": Object {
             "num_of_programs_offering_services": null,
             "num_of_subject_offering_services": null,
-            "number_of_online_enabled_services": 0,
+            "number_of_online_enabled_services": 1,
             "number_of_services": 2,
-            "report_years": Array [
+            "report_years": CoreMongooseArray [
+              "2020",
               "2019",
               "2018",
             ],
@@ -303,13 +365,13 @@ Object {
       "org": Object {
         "services": Array [
           Object {
-            "accessibility_assessors": Array [
-              "",
+            "accessibility_assessors": CoreMongooseArray [
+              "Not Applicable",
             ],
             "account_reg_digital_status": false,
             "application_digital_status": false,
             "authentication_status": false,
-            "collects_fees": false,
+            "collects_fees": null,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada is an economic regulatory body empowered to establish, at the request of an interested party, the royalties to be paid for the use of copyrighted subject-matter, when the administration of such copyright is entrusted to a collective society.",
             "designations": Array [
@@ -346,10 +408,11 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": Array [
-              "",
+            "recipient_type": CoreMongooseArray [
+              "Client-based Services",
             ],
-            "report_years": Array [
+            "report_years": CoreMongooseArray [
+              "2020",
               "2019",
               "2018",
             ],
@@ -391,35 +454,52 @@ Object {
                 "sin_collected": null,
                 "year": "2019",
               },
+              Object {
+                "cra_business_ids_collected": null,
+                "email_application_count": 21,
+                "fax_application_count": null,
+                "live_application_count": null,
+                "mail_application_count": null,
+                "online_application_count": null,
+                "online_inquiry_count": null,
+                "other_application_count": null,
+                "phone_application_count": null,
+                "phone_inquiry_and_application_count": null,
+                "phone_inquiry_count": null,
+                "service_id": "1119",
+                "service_report_comment": "The Board received 21 proposed tariffs via email.",
+                "sin_collected": null,
+                "year": "2020",
+              },
             ],
-            "service_type": Array [
-              "Legal",
+            "service_type": CoreMongooseArray [
+              "Agreements, Permissions, Inspections, Rulings",
             ],
             "standards": Array [],
             "subject_type": "service",
-            "submission_year": "2019",
-            "target_groups": Array [
+            "submission_year": "2020",
+            "target_groups": CoreMongooseArray [
               "Economic Segments",
             ],
-            "urls": Array [
-              "https://cb-cda.gc.ca/tariffs-tarifs/index-e.html",
+            "urls": CoreMongooseArray [
+              "https://cb-cda.gc.ca/en/cases-tariffs",
             ],
           },
           Object {
-            "accessibility_assessors": Array [
-              "",
+            "accessibility_assessors": CoreMongooseArray [
+              "WCAG 2.0 AA standard",
             ],
-            "account_reg_digital_status": false,
-            "application_digital_status": false,
-            "authentication_status": false,
-            "collects_fees": false,
-            "decision_digital_status": false,
+            "account_reg_digital_status": null,
+            "application_digital_status": true,
+            "authentication_status": null,
+            "collects_fees": null,
+            "decision_digital_status": true,
             "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
             "designations": Array [
               "None",
             ],
-            "digital_enablement_comment": null,
-            "digital_identity_platforms": Array [
+            "digital_enablement_comment": "Currently applications can only be submitted online - no account required.",
+            "digital_identity_platforms": CoreMongooseArray [
               "",
             ],
             "feedback_channels": Array [
@@ -430,8 +510,8 @@ Object {
             "first_active_year": "2018",
             "id": "1120",
             "is_active": true,
-            "issuance_digital_status": false,
-            "issue_res_digital_status": false,
+            "issuance_digital_status": true,
+            "issue_res_digital_status": true,
             "last_accessibility_review": null,
             "last_active_year": null,
             "last_gender_analysis": null,
@@ -449,10 +529,11 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": Array [
-              "",
+            "recipient_type": CoreMongooseArray [
+              "Client-based Services",
             ],
-            "report_years": Array [
+            "report_years": CoreMongooseArray [
+              "2020",
               "2019",
               "2018",
             ],
@@ -494,9 +575,26 @@ Object {
                 "sin_collected": null,
                 "year": "2019",
               },
+              Object {
+                "cra_business_ids_collected": null,
+                "email_application_count": null,
+                "fax_application_count": null,
+                "live_application_count": null,
+                "mail_application_count": null,
+                "online_application_count": 9,
+                "online_inquiry_count": null,
+                "other_application_count": null,
+                "phone_application_count": null,
+                "phone_inquiry_and_application_count": null,
+                "phone_inquiry_count": null,
+                "service_id": "1120",
+                "service_report_comment": null,
+                "sin_collected": null,
+                "year": "2020",
+              },
             ],
-            "service_type": Array [
-              "Legal",
+            "service_type": CoreMongooseArray [
+              "Agreements, Permissions, Inspections, Rulings",
             ],
             "standards": Array [
               Object {
@@ -512,12 +610,13 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": false,
+                    "is_target_met": null,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
                     "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
-1073,2019,,100.00,,,,,",
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
                     "upper": 100,
                     "year": "2018",
                   },
@@ -540,12 +639,13 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": false,
+                    "is_target_met": null,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
                     "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
-1073,2019,,100.00,,,,,",
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
                     "upper": 100,
                     "year": "2018",
                   },
@@ -555,14 +655,43 @@ Object {
                 "target_type": null,
                 "type": "Timeliness",
               },
+              Object {
+                "channel": "Email",
+                "first_active_year": "2018",
+                "last_active_year": null,
+                "last_gcss_tool_year": null,
+                "name": "Licences are issued within 45 days once the file is considered complete",
+                "other_type_comment": null,
+                "rtp_urls": CoreMongooseArray [],
+                "service_id": "1120",
+                "standard_id": "1073",
+                "standard_report": CoreDocumentArray [
+                  Object {
+                    "count": 4,
+                    "is_target_met": null,
+                    "lower": 70,
+                    "met_count": 2,
+                    "standard_id": "1073",
+                    "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
+                    "upper": 100,
+                    "year": "2018",
+                  },
+                ],
+                "standard_urls": CoreMongooseArray [],
+                "submission_year": "2020",
+                "target_type": null,
+                "type": "Timeliness",
+              },
             ],
             "subject_type": "service",
-            "submission_year": "2019",
-            "target_groups": Array [
+            "submission_year": "2020",
+            "target_groups": CoreMongooseArray [
               "Persons",
             ],
-            "urls": Array [
-              "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
+            "urls": CoreMongooseArray [
+              "https://cb-cda.gc.ca/en/unlocatable-owners",
             ],
           },
         ],
@@ -579,13 +708,13 @@ Object {
       "program": Object {
         "services": Array [
           Object {
-            "accessibility_assessors": Array [
-              "",
+            "accessibility_assessors": CoreMongooseArray [
+              "Not Applicable",
             ],
             "account_reg_digital_status": false,
             "application_digital_status": false,
             "authentication_status": false,
-            "collects_fees": false,
+            "collects_fees": null,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada is an economic regulatory body empowered to establish, at the request of an interested party, the royalties to be paid for the use of copyrighted subject-matter, when the administration of such copyright is entrusted to a collective society.",
             "designations": Array [
@@ -622,10 +751,11 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": Array [
-              "",
+            "recipient_type": CoreMongooseArray [
+              "Client-based Services",
             ],
-            "report_years": Array [
+            "report_years": CoreMongooseArray [
+              "2020",
               "2019",
               "2018",
             ],
@@ -667,35 +797,52 @@ Object {
                 "sin_collected": null,
                 "year": "2019",
               },
+              Object {
+                "cra_business_ids_collected": null,
+                "email_application_count": 21,
+                "fax_application_count": null,
+                "live_application_count": null,
+                "mail_application_count": null,
+                "online_application_count": null,
+                "online_inquiry_count": null,
+                "other_application_count": null,
+                "phone_application_count": null,
+                "phone_inquiry_and_application_count": null,
+                "phone_inquiry_count": null,
+                "service_id": "1119",
+                "service_report_comment": "The Board received 21 proposed tariffs via email.",
+                "sin_collected": null,
+                "year": "2020",
+              },
             ],
-            "service_type": Array [
-              "Legal",
+            "service_type": CoreMongooseArray [
+              "Agreements, Permissions, Inspections, Rulings",
             ],
             "standards": Array [],
             "subject_type": "service",
-            "submission_year": "2019",
-            "target_groups": Array [
+            "submission_year": "2020",
+            "target_groups": CoreMongooseArray [
               "Economic Segments",
             ],
-            "urls": Array [
-              "https://cb-cda.gc.ca/tariffs-tarifs/index-e.html",
+            "urls": CoreMongooseArray [
+              "https://cb-cda.gc.ca/en/cases-tariffs",
             ],
           },
           Object {
-            "accessibility_assessors": Array [
-              "",
+            "accessibility_assessors": CoreMongooseArray [
+              "WCAG 2.0 AA standard",
             ],
-            "account_reg_digital_status": false,
-            "application_digital_status": false,
-            "authentication_status": false,
-            "collects_fees": false,
-            "decision_digital_status": false,
+            "account_reg_digital_status": null,
+            "application_digital_status": true,
+            "authentication_status": null,
+            "collects_fees": null,
+            "decision_digital_status": true,
             "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
             "designations": Array [
               "None",
             ],
-            "digital_enablement_comment": null,
-            "digital_identity_platforms": Array [
+            "digital_enablement_comment": "Currently applications can only be submitted online - no account required.",
+            "digital_identity_platforms": CoreMongooseArray [
               "",
             ],
             "feedback_channels": Array [
@@ -706,8 +853,8 @@ Object {
             "first_active_year": "2018",
             "id": "1120",
             "is_active": true,
-            "issuance_digital_status": false,
-            "issue_res_digital_status": false,
+            "issuance_digital_status": true,
+            "issue_res_digital_status": true,
             "last_accessibility_review": null,
             "last_active_year": null,
             "last_gender_analysis": null,
@@ -725,10 +872,11 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": Array [
-              "",
+            "recipient_type": CoreMongooseArray [
+              "Client-based Services",
             ],
-            "report_years": Array [
+            "report_years": CoreMongooseArray [
+              "2020",
               "2019",
               "2018",
             ],
@@ -770,9 +918,26 @@ Object {
                 "sin_collected": null,
                 "year": "2019",
               },
+              Object {
+                "cra_business_ids_collected": null,
+                "email_application_count": null,
+                "fax_application_count": null,
+                "live_application_count": null,
+                "mail_application_count": null,
+                "online_application_count": 9,
+                "online_inquiry_count": null,
+                "other_application_count": null,
+                "phone_application_count": null,
+                "phone_inquiry_and_application_count": null,
+                "phone_inquiry_count": null,
+                "service_id": "1120",
+                "service_report_comment": null,
+                "sin_collected": null,
+                "year": "2020",
+              },
             ],
-            "service_type": Array [
-              "Legal",
+            "service_type": CoreMongooseArray [
+              "Agreements, Permissions, Inspections, Rulings",
             ],
             "standards": Array [
               Object {
@@ -788,12 +953,13 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": false,
+                    "is_target_met": null,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
                     "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
-1073,2019,,100.00,,,,,",
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
                     "upper": 100,
                     "year": "2018",
                   },
@@ -816,12 +982,13 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": false,
+                    "is_target_met": null,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
                     "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
-1073,2019,,100.00,,,,,",
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
                     "upper": 100,
                     "year": "2018",
                   },
@@ -831,14 +998,43 @@ Object {
                 "target_type": null,
                 "type": "Timeliness",
               },
+              Object {
+                "channel": "Email",
+                "first_active_year": "2018",
+                "last_active_year": null,
+                "last_gcss_tool_year": null,
+                "name": "Licences are issued within 45 days once the file is considered complete",
+                "other_type_comment": null,
+                "rtp_urls": CoreMongooseArray [],
+                "service_id": "1120",
+                "standard_id": "1073",
+                "standard_report": CoreDocumentArray [
+                  Object {
+                    "count": 4,
+                    "is_target_met": null,
+                    "lower": 70,
+                    "met_count": 2,
+                    "standard_id": "1073",
+                    "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
+                    "upper": 100,
+                    "year": "2018",
+                  },
+                ],
+                "standard_urls": CoreMongooseArray [],
+                "submission_year": "2020",
+                "target_type": null,
+                "type": "Timeliness",
+              },
             ],
             "subject_type": "service",
-            "submission_year": "2019",
-            "target_groups": Array [
+            "submission_year": "2020",
+            "target_groups": CoreMongooseArray [
               "Persons",
             ],
-            "urls": Array [
-              "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
+            "urls": CoreMongooseArray [
+              "https://cb-cda.gc.ca/en/unlocatable-owners",
             ],
           },
         ],
@@ -909,20 +1105,20 @@ Object {
   "data": Object {
     "root": Object {
       "service": Object {
-        "accessibility_assessors": Array [
-          "",
+        "accessibility_assessors": CoreMongooseArray [
+          "WCAG 2.0 AA standard",
         ],
-        "account_reg_digital_status": false,
-        "application_digital_status": false,
-        "authentication_status": false,
-        "collects_fees": false,
-        "decision_digital_status": false,
+        "account_reg_digital_status": null,
+        "application_digital_status": true,
+        "authentication_status": null,
+        "collects_fees": null,
+        "decision_digital_status": true,
         "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
         "designations": Array [
           "None",
         ],
-        "digital_enablement_comment": null,
-        "digital_identity_platforms": Array [
+        "digital_enablement_comment": "Currently applications can only be submitted online - no account required.",
+        "digital_identity_platforms": CoreMongooseArray [
           "",
         ],
         "feedback_channels": Array [
@@ -933,8 +1129,8 @@ Object {
         "first_active_year": "2018",
         "id": "1120",
         "is_active": true,
-        "issuance_digital_status": false,
-        "issue_res_digital_status": false,
+        "issuance_digital_status": true,
+        "issue_res_digital_status": true,
         "last_accessibility_review": null,
         "last_active_year": null,
         "last_gender_analysis": null,
@@ -952,10 +1148,11 @@ Object {
             "name": "Copyright Tariff Setting and Issuance of Licences",
           },
         ],
-        "recipient_type": Array [
-          "",
+        "recipient_type": CoreMongooseArray [
+          "Client-based Services",
         ],
-        "report_years": Array [
+        "report_years": CoreMongooseArray [
+          "2020",
           "2019",
           "2018",
         ],
@@ -997,9 +1194,26 @@ Object {
             "sin_collected": null,
             "year": "2019",
           },
+          Object {
+            "cra_business_ids_collected": null,
+            "email_application_count": null,
+            "fax_application_count": null,
+            "live_application_count": null,
+            "mail_application_count": null,
+            "online_application_count": 9,
+            "online_inquiry_count": null,
+            "other_application_count": null,
+            "phone_application_count": null,
+            "phone_inquiry_and_application_count": null,
+            "phone_inquiry_count": null,
+            "service_id": "1120",
+            "service_report_comment": null,
+            "sin_collected": null,
+            "year": "2020",
+          },
         ],
-        "service_type": Array [
-          "Legal",
+        "service_type": CoreMongooseArray [
+          "Agreements, Permissions, Inspections, Rulings",
         ],
         "standards": Array [
           Object {
@@ -1015,12 +1229,13 @@ Object {
             "standard_report": Array [
               Object {
                 "count": 4,
-                "is_target_met": false,
+                "is_target_met": null,
                 "lower": 70,
                 "met_count": 2,
                 "standard_id": "1073",
                 "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
-1073,2019,,100.00,,,,,",
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
                 "upper": 100,
                 "year": "2018",
               },
@@ -1043,12 +1258,13 @@ Object {
             "standard_report": Array [
               Object {
                 "count": 4,
-                "is_target_met": false,
+                "is_target_met": null,
                 "lower": 70,
                 "met_count": 2,
                 "standard_id": "1073",
                 "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
-1073,2019,,100.00,,,,,",
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
                 "upper": 100,
                 "year": "2018",
               },
@@ -1058,14 +1274,43 @@ Object {
             "target_type": null,
             "type": "Timeliness",
           },
+          Object {
+            "channel": "Email",
+            "first_active_year": "2018",
+            "last_active_year": null,
+            "last_gcss_tool_year": null,
+            "name": "Licences are issued within 45 days once the file is considered complete",
+            "other_type_comment": null,
+            "rtp_urls": CoreMongooseArray [],
+            "service_id": "1120",
+            "standard_id": "1073",
+            "standard_report": CoreDocumentArray [
+              Object {
+                "count": 4,
+                "is_target_met": null,
+                "lower": 70,
+                "met_count": 2,
+                "standard_id": "1073",
+                "standard_report_comment": "For 2018-2019: 31 applications were filed, 4 licences were issued and 7 applications were denied. Other includes copyright owners found, files on hold and requests abandoned. 
+1073,2019,,100.0,,,,,
+1073,2020,70.0,100.0,9.0,9.0,1.0,",
+                "upper": 100,
+                "year": "2018",
+              },
+            ],
+            "standard_urls": CoreMongooseArray [],
+            "submission_year": "2020",
+            "target_type": null,
+            "type": "Timeliness",
+          },
         ],
         "subject_type": "service",
-        "submission_year": "2019",
-        "target_groups": Array [
+        "submission_year": "2020",
+        "target_groups": CoreMongooseArray [
           "Persons",
         ],
-        "urls": Array [
-          "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
+        "urls": CoreMongooseArray [
+          "https://cb-cda.gc.ca/en/unlocatable-owners",
         ],
       },
     },
