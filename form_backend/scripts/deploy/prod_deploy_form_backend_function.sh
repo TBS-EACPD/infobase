@@ -2,6 +2,8 @@
 # must run this scripts in the form_backend dir
 set -e # will exit if any command has non-zero exit value
 
+npm ci
+
 source scripts/util/set_prod_env_vars.sh
 source scripts/util/set_transient_secrets.sh # these trap EXIT to handle their own cleanup
 

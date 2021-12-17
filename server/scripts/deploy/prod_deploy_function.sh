@@ -2,6 +2,8 @@
 # must run this scripts/deploy in root of api project
 set -e # will exit if any command has non-zero exit value
 
+npm ci
+
 source scripts/deploy/set_prod_env_vars.sh
 source scripts/deploy/set_transient_function_secrets.sh # these trap EXIT to handle their own cleanup
 
