@@ -2,6 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { useMediaQuery } from "react-responsive";
+
 import {
   run_template,
   trivial_text_maker,
@@ -9,6 +11,8 @@ import {
 } from "src/models/text";
 
 import { formats } from "src/core/format";
+
+import { maxSmallDevice } from "src/style_constants/index";
 
 import { TextMaker, TM } from "./TextMaker";
 
@@ -71,22 +75,38 @@ const MultiColumnList = ({
   className,
   ul_class,
   li_class,
-}) => (
-  <div className={className} style={{ display: "flex", flexDirection: "row" }}>
-    {_.chain(list_items)
-      .chunk(_.ceil(list_items.length / column_count))
-      .map((list_chunk, ix) => (
-        <ul key={ix} className={ul_class}>
-          {_.map(list_chunk, (list_item, ix) => (
-            <li key={ix} className={li_class}>
-              {list_item}
-            </li>
-          ))}
-        </ul>
-      ))
-      .value()}
-  </div>
-);
+  responsive = true,
+}) => {
+  const is_small_screen = useMediaQuery({
+    query: `(max-width: ${maxSmallDevice})`,
+  });
+  return (
+    <div
+      className={className}
+      style={{ display: "flex", flexDirection: "row" }}
+    >
+      {_.chain(list_items)
+        .thru((list_items) => {
+          if (responsive && is_small_screen) {
+            return [list_items];
+          } else {
+            const column_length = _.ceil(list_items.length / column_count);
+            return _.chunk(list_items, column_length);
+          }
+        })
+        .map((list_chunk, ix) => (
+          <ul key={ix} className={ul_class}>
+            {_.map(list_chunk, (list_item, ix) => (
+              <li key={ix} className={li_class}>
+                {list_item}
+              </li>
+            ))}
+          </ul>
+        ))
+        .value()}
+    </div>
+  );
+};
 
 const LinkStyled = ({ on_click, className, style, children }) => (
   <button
