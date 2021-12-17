@@ -20,6 +20,9 @@ export default class TableOfContents extends React.Component {
     super(props);
     this.state = {
       is_open: false,
+      active_panel: null,
+      previous_href: null,
+      active_href: null,
     };
   }
 
@@ -30,19 +33,23 @@ export default class TableOfContents extends React.Component {
       (entries) => {
         entries.forEach((entry) => {
           const panel_key = entry.target.parentElement.getAttribute("id");
-          const href = document.querySelector(
-            `a[href="${infograph_options_href_template(
-              subject,
-              active_bubble_id,
-              { panel_key }
-            )}"]`
-          );
+          const query = `a[href="${infograph_options_href_template(
+            subject,
+            active_bubble_id,
+            { panel_key }
+          )}"]`;
+
+          const href = document.querySelector(query);
           if (href) {
             if (entry.intersectionRatio > 0.5) {
               href.classList.add("active");
-            } else {
-              document;
-              href.classList.remove("active");
+
+              const temp = this.state.active_href;
+              this.setState({
+                active_href: href,
+                previous_href: temp,
+              });
+              this.state.previous_href?.classList.remove("active");
             }
           }
         });
@@ -51,9 +58,9 @@ export default class TableOfContents extends React.Component {
     );
 
     setTimeout(() => {
-      const test = document.getElementsByClassName("panel");
-      for (const section of test) {
-        observer.observe(section);
+      const panels = document.getElementsByClassName("panel");
+      for (const el of panels) {
+        observer.observe(el);
       }
     }, 3000);
   }
