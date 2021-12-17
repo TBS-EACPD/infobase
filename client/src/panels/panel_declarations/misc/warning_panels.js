@@ -222,19 +222,23 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
             ...late_panel_config,
 
             calculate: () => !_.isEmpty(late_orgs),
-            render: () => (
-              <WarningPanel center_text={false} banner_class="warning">
-                <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
-                <MultiColumnList
-                  list_items={_.map(
-                    late_orgs,
-                    (org_id) => Dept.store.lookup(org_id).name
-                  )}
-                  column_count={lang === "en" && late_orgs.length > 3 ? 2 : 1}
-                  li_class={late_orgs.length > 4 ? "font-small" : ""}
-                />
-              </WarningPanel>
-            ),
+            render: () => {
+              const column_count = late_orgs.length > 3 ? 3 : 2;
+              const li_class = column_count > 2 ? "font-small" : "";
+              return (
+                <WarningPanel center_text={false} banner_class="warning">
+                  <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
+                  <MultiColumnList
+                    list_items={_.map(
+                      late_orgs,
+                      (org_id) => Dept.store.lookup(org_id).name
+                    )}
+                    column_count={column_count}
+                    li_class={li_class}
+                  />
+                </WarningPanel>
+              );
+            },
           };
         default:
           return {
