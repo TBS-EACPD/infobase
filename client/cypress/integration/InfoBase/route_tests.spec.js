@@ -5,7 +5,7 @@ const route_load_tests_config = [
     name: "Always failing route, to test error boundary",
     route: "error-boundary-test",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
-    expect_to_fail: true,
+    expect_error_boundary: true,
   },
   {
     name: "Homepage",
@@ -276,11 +276,15 @@ const wait_on_all_spinners = () =>
         )
     );
 
+const cy_get_error_boundary = () =>
+  cy.get("#error-boundary-icon", { timeout: 0 });
+// For error boundary tests
+const is_on_error_boundary = () => cy_get_error_boundary().should("exist");
 // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
 // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
 // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
 const is_not_on_error_boundary = () =>
-  cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist");
+  cy_get_error_boundary().should("not.exist");
 
 // Meta test of the route load config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
 const is_on_target_route = (target_url) => cy.url().should("eq", target_url);
@@ -296,28 +300,40 @@ const axe_scan = () =>
     )
   );
 
-const run_tests_from_config = ({ name, route, test_on, expect_to_fail }) =>
+const run_tests_from_config = ({
+  name,
+  route,
+  test_on,
+  expect_error_boundary,
+}) =>
   describe(`${name}`, () => {
     _.map(test_on, (app) => {
       it(`Tested on index-${app}.html#${route}`, () => {
-        cy.on("fail", (e, test) => {
-          if (expect_to_fail) {
-            console.log("Test expected to fail.", e);
-          } else {
-            throw e;
-          }
-        });
-
         const target_url = `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`;
 
-        cy.visit(target_url)
-          .then(wait_on_all_spinners)
-          .then(is_not_on_error_boundary)
-          .then(() => is_on_target_route(target_url))
-          .then(
-            /* TODO fix all critical axe warnings on the a11y routes, drop the filter on basic builds */
-            () => !/basic-/.test(app) && axe_scan()
-          );
+        if (expect_error_boundary) {
+          // To catch whatever error triggered this error boundary, otherwise this would fail even if it
+          // results in the expected error boundary
+          cy.on("fail", (e, test) => {
+            console.log(
+              "This test was expected to fail. It did, with the following error",
+              e
+            );
+          });
+
+          cy.visit(target_url)
+            .then(wait_on_all_spinners)
+            .then(is_on_error_boundary);
+        } else {
+          cy.visit(target_url)
+            .then(wait_on_all_spinners)
+            .then(is_not_on_error_boundary)
+            .then(() => is_on_target_route(target_url))
+            .then(
+              /* TODO fix all critical axe warnings on the a11y routes, drop the filter on basic builds */
+              () => !/basic-/.test(app) && axe_scan()
+            );
+        }
       });
     });
   });
