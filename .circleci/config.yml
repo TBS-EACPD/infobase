@@ -305,7 +305,7 @@ jobs:
           command: (cd client && npm run serve:ci)
           background: true
 
-      - run: (cd client && npm run cypress:run -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)
+      - run: (cd client && npm run cypress -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
