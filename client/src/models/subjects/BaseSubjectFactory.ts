@@ -75,9 +75,9 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
         const store_value_is_unset = _.isNull(store_value);
         if (store_value_is_unset) {
           this._has_data[data_type] = has_data;
-        } else {
+        } else if (store_value !== has_data) {
           throw new Error(
-            `"${data_type}" has_data already set with value of "${store_value}" for this instance`
+            `"${data_type}" has_data already set with value of "${store_value}" for this instance, can not be changed to "${has_data}"`
           );
         }
       } else {
