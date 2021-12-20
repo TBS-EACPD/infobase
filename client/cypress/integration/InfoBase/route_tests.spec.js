@@ -276,13 +276,27 @@ const wait_on_all_spinners = () =>
         )
     );
 
-const run_tests_from_config = ({
-  name,
-  route,
-  test_on,
-  expect_to_fail,
-  skip_axe,
-}) =>
+// Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
+// sanity check, make sure we've not wound up on the error boundary at the end of all loading states
+// TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
+const is_not_on_error_boundary = () =>
+  cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist");
+
+// Meta test of the route load config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
+const is_on_target_route = (target_url) => cy.url().should("eq", target_url);
+
+const axe_scan = () =>
+  cy.injectAxe().then(() =>
+    cy.checkA11y(
+      null,
+      // TODO expand to include serious impacts, fix those, then expand to include moderate as well
+      { includedImpacts: ["critical"] },
+      cy.terminalLog,
+      false
+    )
+  );
+
+const run_tests_from_config = ({ name, route, test_on, expect_to_fail }) =>
   describe(`${name}`, () => {
     _.map(test_on, (app) => {
       it(`Tested on index-${app}.html#${route}`, () => {
@@ -298,29 +312,11 @@ const run_tests_from_config = ({
 
         cy.visit(target_url)
           .then(wait_on_all_spinners)
-          .then(() =>
-            // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
-            // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
-            // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
-            cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist")
-          )
-          .then(() =>
-            // Meta test of the route load config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
-            cy.url().should("eq", target_url)
-          )
+          .then(is_not_on_error_boundary)
+          .then(() => is_on_target_route(target_url))
           .then(
-            () =>
-              !skip_axe &&
-              /* TODO fix all axe warning on the a11y routes, drop the next line */
-              !/basic-/.test(app) &&
-              cy.injectAxe().then(() =>
-                cy.checkA11y(
-                  null,
-                  { includedImpacts: ["critical"] }, // TODO expand to include serious, fix those, then expand to include moderate as well
-                  cy.terminalLog,
-                  false
-                )
-              )
+            /* TODO fix all critical axe warnings on the a11y routes, drop the filter on basic builds */
+            () => !/basic-/.test(app) && axe_scan()
           );
       });
     });
