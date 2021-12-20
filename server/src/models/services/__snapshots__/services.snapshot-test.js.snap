@@ -133,7 +133,7 @@ Object {
             Object {
               "met_standards_count": null,
               "services_w_standards_count": 1,
-              "standards_count": 0,
+              "standards_count": 1,
               "subject_id": "114",
             },
           ],
@@ -284,7 +284,7 @@ Object {
             Object {
               "met_standards_count": null,
               "services_w_standards_count": 1,
-              "standards_count": 0,
+              "standards_count": 1,
               "subject_id": "CB-BEZ01",
             },
           ],
