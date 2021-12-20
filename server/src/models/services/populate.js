@@ -556,53 +556,82 @@ export default async function ({ models }) {
 
   const org_summary = _.chain(filtered_service_rows)
     .groupBy("org_id")
-    .flatMap((services, org_id) => ({
-      id: org_id,
-      service_general_stats: {
-        report_years: get_years_from_service_report(services),
-        number_of_services: services.length,
-        number_of_online_enabled_services:
-          get_number_of_online_enabled_services(services),
-        pct_of_online_client_interaction_pts:
-          get_pct_of_online_client_interaction_pts(services),
-        pct_of_standards_met_high_vol_services:
-          get_pct_of_standards_met_high_vol_services(services),
-        num_of_programs_offering_services: _.chain(services)
-          .reduce(group_by_program_id, {})
-          .size()
-          .value(),
-      },
-      service_channels_summary: get_service_channels_summary(services),
-      service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
-        populate_digital_summary_key(services, org_id, "dept", key)
-      ),
-      service_standards_summary: get_final_standards_summary(services, org_id),
-      subject_offering_services_summary: get_subject_offering_services_summary(
-        _.reduce(services, group_by_program_id, {})
-      ),
-    }))
+    .flatMap((services, org_id) => {
+      const most_recent_year_for_this_org = _.chain(services)
+        .sortBy(({ submission_year }) => _.toInteger(submission_year))
+        .last()
+        .value().submission_year;
+      const filtered_services = _.filter(services, {
+        submission_year: most_recent_year_for_this_org,
+      });
+      return {
+        id: org_id,
+        service_general_stats: {
+          report_years: get_years_from_service_report(filtered_services),
+          number_of_services: filtered_services.length,
+          number_of_online_enabled_services:
+            get_number_of_online_enabled_services(filtered_services),
+          pct_of_online_client_interaction_pts:
+            get_pct_of_online_client_interaction_pts(filtered_services),
+          pct_of_standards_met_high_vol_services:
+            get_pct_of_standards_met_high_vol_services(filtered_services),
+          num_of_programs_offering_services: _.chain(filtered_services)
+            .reduce(group_by_program_id, {})
+            .size()
+            .value(),
+        },
+        service_channels_summary:
+          get_service_channels_summary(filtered_services),
+        service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
+          populate_digital_summary_key(filtered_services, org_id, "dept", key)
+        ),
+        service_standards_summary: get_final_standards_summary(
+          filtered_services,
+          org_id
+        ),
+        subject_offering_services_summary:
+          get_subject_offering_services_summary(
+            _.reduce(filtered_services, group_by_program_id, {})
+          ),
+      };
+    })
     .value();
   const program_summary = _.chain(filtered_service_rows)
     .reduce(group_by_program_id, {})
-    .flatMap((services, program_id) => ({
-      id: program_id,
-      service_general_stats: {
-        report_years: get_years_from_service_report(services),
-        number_of_services: services.length,
-        number_of_online_enabled_services:
-          get_number_of_online_enabled_services(services),
-        pct_of_online_client_interaction_pts:
-          get_pct_of_online_client_interaction_pts(services),
-      },
-      service_channels_summary: get_service_channels_summary(services),
-      service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
-        populate_digital_summary_key(services, program_id, "program", key)
-      ),
-      service_standards_summary: get_final_standards_summary(
-        services,
-        program_id
-      ),
-    }))
+    .flatMap((services, program_id) => {
+      const most_recent_year_for_this_program = _.chain(services)
+        .sortBy(({ submission_year }) => _.toInteger(submission_year))
+        .last()
+        .value().submission_year;
+      const filtered_services = _.filter(services, {
+        submission_year: most_recent_year_for_this_program,
+      });
+      return {
+        id: program_id,
+        service_general_stats: {
+          report_years: get_years_from_service_report(filtered_services),
+          number_of_services: filtered_services.length,
+          number_of_online_enabled_services:
+            get_number_of_online_enabled_services(filtered_services),
+          pct_of_online_client_interaction_pts:
+            get_pct_of_online_client_interaction_pts(filtered_services),
+        },
+        service_channels_summary:
+          get_service_channels_summary(filtered_services),
+        service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
+          populate_digital_summary_key(
+            filtered_services,
+            program_id,
+            "program",
+            key
+          )
+        ),
+        service_standards_summary: get_final_standards_summary(
+          filtered_services,
+          program_id
+        ),
+      };
+    })
     .value();
 
   return await Promise.all([
