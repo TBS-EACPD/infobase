@@ -264,12 +264,12 @@ const run_tests_from_config = ({
   expect_to_fail,
   skip_axe,
 }) =>
-  describe(`${name}`, () => {
+  describe(`${name}`, async () => {
     _.map(test_on, (app) => {
       it(`Tested on index-${app}.html#${route}`, () => {
-        cy.visit(
-          `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`
-        );
+        const target_url = `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`;
+
+        cy.visit(target_url);
 
         // Spinner(s) should eventually end. Subsequent spinners may appear; recursively wait for all spinners to start and end
         const spinner_selector = ".leaf-spinner__inner-circle";
@@ -285,17 +285,18 @@ const run_tests_from_config = ({
               cy.document().then((document) => {
                 if (document.querySelector(spinner_selector)) {
                   return wait_on_all_spinners();
-                } else {
-                  // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
-                  // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
-                  // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
-                  return cy
-                    .get("#error-boundary-icon", { timeout: 0 })
-                    .should("not.exist");
                 }
               })
             );
-        wait_on_all_spinners();
+        await wait_on_all_spinners();
+
+        // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
+        // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
+        // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
+        cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist");
+
+        // Meta test of the routel oad config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
+        cy.url().should("eq", target_url);
 
         if (
           !skip_axe &&
