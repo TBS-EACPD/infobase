@@ -72,9 +72,10 @@ list_of_provided_services_title:
 list_of_provided_services_desc:
   transform: [handlebars, markdown]
   en: |
-    **{{subject_name}}** is offering **{{active_count}}** {{gl_tt "services" "SERVICE"}}:
+    **{{subject_name}}** is offering **{{active_count}}** active {{gl_tt "services" "SERVICE"}}:
+  # SI_TODO on "actif"
   fr: |
-    **{{subject_name}}** offre **{{active_count}}** {{gl_tt "services" "SERVICE"}}:
+    **{{subject_name}}** offre **{{active_count}}** actif {{gl_tt "services" "SERVICE"}}:      
 list_of_provided_services_program_caveat:
   transform: [handlebars, markdown]
   en: |
