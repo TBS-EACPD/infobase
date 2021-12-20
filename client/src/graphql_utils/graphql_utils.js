@@ -52,7 +52,9 @@ const get_api_url = _.memoize(async () => {
 });
 
 export const wake_up_graphql_cloud_function = () =>
-  get_api_url().then((api_url) => poke_server(api_url));
+  get_api_url()
+    .then((api_url) => poke_server(api_url))
+    .catch(_.noop);
 
 const query_as_get_with_query_header = async (uri, options) => {
   // want GET requests for client side caching (safe to do given our cache busting scheme and read-only GraphQL API)
