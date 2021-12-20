@@ -183,7 +183,7 @@ const route_load_tests_config = [
   },
   {
     name: "Infographic - Program - Services",
-    route: "orgs/program/TBC-BXC04/infograph/services",
+    route: "orgs/program/TBC-BXB03/infograph/services",
     test_on: ["eng", "basic-eng"],
   },
   {
