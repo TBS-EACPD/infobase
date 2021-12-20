@@ -257,6 +257,25 @@ const route_load_tests_config = [
   },
 ];
 
+const spinner_selector = ".leaf-spinner__inner-circle";
+// Spinner(s) should eventually end. Subsequent spinners may appear; recursively wait for all spinners to start and end
+const wait_on_all_spinners = () =>
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy
+    .get(spinner_selector, { timeout: 10000 })
+    .should("not.exist")
+    // Wait before checking that no new spinners have started. If this _wasn't_ necessary, then the initial not.exist assertion
+    // would have been sufficient, but there's cases where a new spinner takes a split second to render
+    .wait(250) // Note: if any routes with lots of loading layers start flaking, may need to increase this (or optimzie those routes!)
+    .then(() =>
+      cy
+        .document()
+        .then(
+          (document) =>
+            document.querySelector(spinner_selector) && wait_on_all_spinners()
+        )
+    );
+
 const run_tests_from_config = ({
   name,
   route,
@@ -264,54 +283,9 @@ const run_tests_from_config = ({
   expect_to_fail,
   skip_axe,
 }) =>
-  describe(`${name}`, async () => {
+  describe(`${name}`, () => {
     _.map(test_on, (app) => {
       it(`Tested on index-${app}.html#${route}`, () => {
-        const target_url = `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`;
-
-        cy.visit(target_url);
-
-        // Spinner(s) should eventually end. Subsequent spinners may appear; recursively wait for all spinners to start and end
-        const spinner_selector = ".leaf-spinner__inner-circle";
-        const wait_on_all_spinners = () =>
-          // eslint-disable-next-line cypress/no-unnecessary-waiting
-          cy
-            .get(spinner_selector, { timeout: 10000 })
-            .should("not.exist")
-            // Wait before checking that no new spinners have started. If this _wasn't_ necessary, then the initial not.exist assertion
-            // would have been sufficient, but there's cases where a new spinner takes a split second to render
-            .wait(250) // Note: if any routes with lots of loading layers start flaking, may need to increase this (or optimzie those routes!)
-            .then(() =>
-              cy.document().then((document) => {
-                if (document.querySelector(spinner_selector)) {
-                  return wait_on_all_spinners();
-                }
-              })
-            );
-        await wait_on_all_spinners();
-
-        // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
-        // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
-        // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
-        cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist");
-
-        // Meta test of the routel oad config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
-        cy.url().should("eq", target_url);
-
-        if (
-          !skip_axe &&
-          /* TODO fix all axe warning on the a11y routes, drop the next line */
-          !/basic-/.test(app)
-        ) {
-          cy.injectAxe();
-          cy.checkA11y(
-            null,
-            { includedImpacts: ["critical"] }, // TODO expand to include serious, fix those, then expand to include moderate as well
-            cy.terminalLog,
-            false
-          );
-        }
-
         cy.on("fail", (e, test) => {
           if (expect_to_fail) {
             console.log("Test expected to fail.", e);
@@ -319,6 +293,35 @@ const run_tests_from_config = ({
             throw e;
           }
         });
+
+        const target_url = `http://localhost:8080/build/InfoBase/index-${app}.html#${route}`;
+
+        cy.visit(target_url)
+          .then(wait_on_all_spinners)
+          .then(() =>
+            // Seems some errors that can be caught by the error boundary may skate by cypress. For an extra
+            // sanity check, make sure we've not wound up on the error boundary at the end of all loading states
+            // TODO: try and better identify what case causes this, see if we can make cypress see and display them directly
+            cy.get("#error-boundary-icon", { timeout: 0 }).should("not.exist")
+          )
+          .then(() =>
+            // Meta test of the route load config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
+            cy.url().should("eq", target_url)
+          )
+          .then(
+            () =>
+              !skip_axe &&
+              /* TODO fix all axe warning on the a11y routes, drop the next line */
+              !/basic-/.test(app) &&
+              cy.injectAxe().then(() =>
+                cy.checkA11y(
+                  null,
+                  { includedImpacts: ["critical"] }, // TODO expand to include serious, fix those, then expand to include moderate as well
+                  cy.terminalLog,
+                  false
+                )
+              )
+          );
       });
     });
   });
