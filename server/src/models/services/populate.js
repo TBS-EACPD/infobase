@@ -148,14 +148,14 @@ export default async function ({ models }) {
   );
 
   const raw_service_rows = get_standard_csv_file_rows("services.csv");
-  const most_recent_submission_year = _.chain(raw_service_rows)
+  const absolute_most_recent_submission_year = _.chain(raw_service_rows)
     .map("dept_submissions__document__year")
     .uniq()
     .sort()
     .last()
     .value();
 
-  const service_rows = _.chain(raw_service_rows)
+  const filtered_service_rows = _.chain(raw_service_rows)
     .map((service) => {
       const {
         dept_submissions__document__year: submission_year,
@@ -271,6 +271,7 @@ export default async function ({ models }) {
     // SI_TODO oof, big mess, need to refactor a lot of stuff to support multiple years of service data. For now, just take the latest submitted version
     // (the client was, generally, doing this in a bunch of places manually already, so this is more of a cleanup than a hack for now)
     .groupBy("id")
+    // Filter by relatively most recent services (e.g.: absolute most recent year could be 2020 but a service may not have submitted in 2020, hence relatively most recent year is 2019)
     .map((service_across_years) =>
       _.chain(service_across_years)
         .sortBy(({ submission_year }) => _.toInteger(submission_year))
@@ -280,7 +281,7 @@ export default async function ({ models }) {
     // only valid under above logic, will need to rework active status deterination in multi-year refactor
     .each((service) => {
       service.is_active =
-        service.submission_year === most_recent_submission_year;
+        service.submission_year === absolute_most_recent_submission_year;
     })
     .value();
 
@@ -327,6 +328,9 @@ export default async function ({ models }) {
       )
       .value();
   const get_final_standards_summary = (services, subject_id) => {
+    const most_recent_submission_year =
+      get_years_from_service_standards(services)[0];
+
     const filtered_services = _.chain(services)
       .flatMap((service) => ({
         ...service,
@@ -488,9 +492,10 @@ export default async function ({ models }) {
         }))
       )
       .value();
-  const most_recent_filtered_services = _.filter(
-    service_rows,
-    ({ submission_year }) => submission_year === most_recent_submission_year
+  const absolute_most_recent_year_filtered_services = _.filter(
+    filtered_service_rows,
+    ({ submission_year }) =>
+      submission_year === absolute_most_recent_submission_year
   );
 
   const gov_summary = [
@@ -498,51 +503,58 @@ export default async function ({ models }) {
       id: "gov",
       service_general_stats: {
         report_years: get_years_from_service_report(
-          most_recent_filtered_services
+          absolute_most_recent_year_filtered_services
         ),
-        number_of_services: most_recent_filtered_services.length,
+        number_of_services: absolute_most_recent_year_filtered_services.length,
         number_of_online_enabled_services:
-          get_number_of_online_enabled_services(most_recent_filtered_services),
+          get_number_of_online_enabled_services(
+            absolute_most_recent_year_filtered_services
+          ),
         pct_of_online_client_interaction_pts:
           get_pct_of_online_client_interaction_pts(
-            most_recent_filtered_services
+            absolute_most_recent_year_filtered_services
           ),
         pct_of_standards_met_high_vol_services:
           get_pct_of_standards_met_high_vol_services(
-            most_recent_filtered_services
+            absolute_most_recent_year_filtered_services
           ),
-        num_of_subject_offering_services: _.chain(most_recent_filtered_services)
+        num_of_subject_offering_services: _.chain(
+          absolute_most_recent_year_filtered_services
+        )
           .groupBy("org_id")
           .size()
           .value(),
         num_of_programs_offering_services: _.chain(
-          most_recent_filtered_services
+          absolute_most_recent_year_filtered_services
         )
           .reduce(group_by_program_id, {})
           .size()
           .value(),
       },
       service_channels_summary: get_service_channels_summary(
-        most_recent_filtered_services
+        absolute_most_recent_year_filtered_services
       ),
       service_digital_status_summary: _.flatMap(digital_status_keys, (key) =>
         populate_digital_summary_key(
-          most_recent_filtered_services,
+          absolute_most_recent_year_filtered_services,
           "gov",
           "gov",
           key
         )
       ),
       service_standards_summary: [
-        get_final_standards_summary(most_recent_filtered_services, "gov"),
+        get_final_standards_summary(
+          absolute_most_recent_year_filtered_services,
+          "gov"
+        ),
       ],
       subject_offering_services_summary: get_subject_offering_services_summary(
-        _.groupBy(most_recent_filtered_services, "org_id")
+        _.groupBy(absolute_most_recent_year_filtered_services, "org_id")
       ),
     },
   ];
 
-  const org_summary = _.chain(most_recent_filtered_services)
+  const org_summary = _.chain(filtered_service_rows)
     .groupBy("org_id")
     .flatMap((services, org_id) => ({
       id: org_id,
@@ -570,7 +582,7 @@ export default async function ({ models }) {
       ),
     }))
     .value();
-  const program_summary = _.chain(most_recent_filtered_services)
+  const program_summary = _.chain(filtered_service_rows)
     .reduce(group_by_program_id, {})
     .flatMap((services, program_id) => ({
       id: program_id,
@@ -594,7 +606,7 @@ export default async function ({ models }) {
     .value();
 
   return await Promise.all([
-    Service.insertMany(service_rows),
+    Service.insertMany(filtered_service_rows),
     GovServiceSummary.insertMany(gov_summary),
     OrgServiceSummary.insertMany(org_summary),
     ProgramServiceSummary.insertMany(program_summary),
