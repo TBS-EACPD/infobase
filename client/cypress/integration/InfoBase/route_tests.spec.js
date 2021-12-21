@@ -8,10 +8,21 @@ const route_load_tests_config = [
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
     expect_error_boundary: true,
   },
+
   {
     name: "Homepage",
     route: "start",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
+  },
+  {
+    name: "Glossary",
+    route: "glossary",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Datasets",
+    route: "metadata",
+    test_on: ["eng", "basic-eng"],
   },
   {
     name: "About",
@@ -19,13 +30,19 @@ const route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Treemap Explorer",
-    route: "treemap",
-    test_on: ["eng"],
+    name: "FAQ",
+    route: "faq",
+    test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Datasets",
-    route: "metadata",
+    name: "Privacy",
+    route: "privacy",
+    test_on: ["eng", "basic-eng"],
+  },
+
+  {
+    name: "IGOC",
+    route: "igoc",
     test_on: ["eng", "basic-eng"],
   },
   {
@@ -34,15 +51,32 @@ const route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Glossary",
-    route: "glossary",
+    name: "Tag Explorer",
+    route: "tag-explorer",
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "IGOC",
-    route: "igoc",
+    name: "Report Builder - Table Picker",
+    route: "rpb/.-.-(subject.-.-'gov_gov.-.-columns.-.-false)",
     test_on: ["eng", "basic-eng"],
   },
+  {
+    name: "Report Builder - Report",
+    route:
+      "rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Treemap Explorer",
+    route: "treemap",
+    test_on: ["eng"],
+  },
+  {
+    name: "Indicator text comparison - TBS",
+    route: "diff/326",
+    test_on: ["eng", "basic-eng"],
+  },
+
   {
     name: "Infographic - Gov - About",
     route: "infographic/gov/gov/intro",
@@ -78,12 +112,12 @@ const route_load_tests_config = [
     route: "infographic/gov/gov/related",
     test_on: ["eng", "basic-eng"],
   },
-
   {
     name: "Infographic - Gov - All data",
     route: "infographic/gov/gov/all_data",
     test_on: ["eng", "basic-eng"],
   },
+
   {
     name: "Infographic - Dept - About",
     route: "infographic/dept/326/intro",
@@ -233,30 +267,6 @@ const route_load_tests_config = [
   {
     name: "Infographic - Service - Intro",
     route: "infographic/service/136/intro",
-    test_on: ["eng", "basic-eng"],
-  },
-
-  {
-    name: "Report Builder - Table Picker",
-    route: "rpb/.-.-(subject.-.-'gov_gov.-.-columns.-.-false)",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
-    name: "Report Builder - Report",
-    route:
-      "rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))",
-    test_on: ["eng", "basic-eng"],
-  },
-
-  {
-    name: "Tag Explorer",
-    route: "tag-explorer",
-    test_on: ["eng", "basic-eng"],
-  },
-
-  {
-    name: "Indicator text comparison - TBS",
-    route: "diff/326",
     test_on: ["eng", "basic-eng"],
   },
 ];
