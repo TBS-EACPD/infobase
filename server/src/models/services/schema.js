@@ -32,6 +32,7 @@ const schema = `
   }
   type ServiceGeneralStats{
     report_years: [String]
+    standard_years: [String]
     number_of_services: Float
     number_of_online_enabled_services: Float
     pct_of_standards_met_high_vol_services: Float
@@ -55,6 +56,7 @@ const schema = `
   }
   type ServiceStandardsSummary{
     subject_id: String
+    year: String
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float

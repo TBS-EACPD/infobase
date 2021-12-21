@@ -229,7 +229,7 @@ const ServicesChannelsPanel = ({ subject }) => {
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Select
                 id="services_channels_select"
-                title={text_maker("services_channels_select_year")}
+                title={text_maker("select_period")}
                 selected={active_year}
                 options={_.map(report_years, (year) => ({
                   id: year,

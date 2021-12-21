@@ -94,6 +94,7 @@ service_summary{
   id
   service_general_stats {
     report_years
+    standard_years
     number_of_services
     number_of_online_enabled_services
     num_of_subject_offering_services
@@ -115,6 +116,7 @@ service_summary{
   }
   service_standards_summary{
     subject_id
+    year
     services_w_standards_count
     standards_count
     met_standards_count

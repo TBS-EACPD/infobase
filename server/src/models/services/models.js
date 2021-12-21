@@ -110,6 +110,7 @@ export default function (model_singleton) {
     id: pkey_type(),
     service_general_stats: {
       report_years: [str_type],
+      standard_years: [str_type],
       number_of_services: { type: Number },
       number_of_online_enabled_services: { type: Number },
       pct_of_online_client_interaction_pts: { type: Number },
@@ -138,6 +139,7 @@ export default function (model_singleton) {
     service_standards_summary: [
       {
         subject_id: parent_fkey_type(),
+        year: str_type,
         services_w_standards_count: { type: Number },
         standards_count: { type: Number },
         met_standards_count: { type: Number },

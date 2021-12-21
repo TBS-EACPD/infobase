@@ -668,6 +668,7 @@ export type ServiceGeneralStats = {
   pct_of_online_client_interaction_pts?: Maybe<Scalars['Float']>;
   pct_of_standards_met_high_vol_services?: Maybe<Scalars['Float']>;
   report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
+  standard_years?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type ServiceReport = {
@@ -713,6 +714,7 @@ export type ServiceStandardsSummary = {
   services_w_standards_count?: Maybe<Scalars['Float']>;
   standards_count?: Maybe<Scalars['Float']>;
   subject_id?: Maybe<Scalars['String']>;
+  year?: Maybe<Scalars['String']>;
 };
 
 export type ServiceSummary = {

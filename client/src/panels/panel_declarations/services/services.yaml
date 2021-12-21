@@ -274,9 +274,6 @@ online_inquiry_count:
 applications_count:
   en: applications
   fr: demandes
-services_channels_select_year:
-  en: Select the period to display below
-  fr: Sélectionnez la période à afficher ci-dessous
 
 # Orgs offering services
 subject_offering_services_title:
@@ -370,9 +367,9 @@ service_types:
 services_standards_text:
   transform: [handlebars, markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year most_recent_year}}**, **{{subject.name}}** had the following service standard performance:
+    **{{subject.name}}** had the following service standard performance:
   fr: |
-    Voici le rendement **{{subject.name}}** sur le plan des normes de service en **{{fmt_year_to_fiscal_year most_recent_year}}** :
+    Voici le rendement **{{subject.name}}** sur le plan des normes de service:
 service_standards_title:
   en: Service standards
   fr: Normes de service

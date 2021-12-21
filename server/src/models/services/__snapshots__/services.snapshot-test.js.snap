@@ -159,6 +159,9 @@ Object {
               "2019",
               "2018",
             ],
+            "standard_years": CoreMongooseArray [
+              "2018",
+            ],
           },
           "service_standards_summary": Array [
             Object {
@@ -166,6 +169,7 @@ Object {
               "services_w_standards_count": 1,
               "standards_count": 1,
               "subject_id": "114",
+              "year": "2018",
             },
           ],
           "subject_offering_services_summary": Array [
@@ -341,6 +345,9 @@ Object {
               "2019",
               "2018",
             ],
+            "standard_years": CoreMongooseArray [
+              "2018",
+            ],
           },
           "service_standards_summary": Array [
             Object {
@@ -348,6 +355,7 @@ Object {
               "services_w_standards_count": 1,
               "standards_count": 1,
               "subject_id": "CB-BEZ01",
+              "year": "2018",
             },
           ],
           "subject_offering_services_summary": null,
@@ -610,7 +618,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": null,
+                    "is_target_met": false,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
@@ -639,7 +647,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": null,
+                    "is_target_met": false,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
@@ -668,7 +676,7 @@ Object {
                 "standard_report": CoreDocumentArray [
                   Object {
                     "count": 4,
-                    "is_target_met": null,
+                    "is_target_met": false,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
@@ -953,7 +961,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": null,
+                    "is_target_met": false,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
@@ -982,7 +990,7 @@ Object {
                 "standard_report": Array [
                   Object {
                     "count": 4,
-                    "is_target_met": null,
+                    "is_target_met": false,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
@@ -1011,7 +1019,7 @@ Object {
                 "standard_report": CoreDocumentArray [
                   Object {
                     "count": 4,
-                    "is_target_met": null,
+                    "is_target_met": false,
                     "lower": 70,
                     "met_count": 2,
                     "standard_id": "1073",
@@ -1229,7 +1237,7 @@ Object {
             "standard_report": Array [
               Object {
                 "count": 4,
-                "is_target_met": null,
+                "is_target_met": false,
                 "lower": 70,
                 "met_count": 2,
                 "standard_id": "1073",
@@ -1258,7 +1266,7 @@ Object {
             "standard_report": Array [
               Object {
                 "count": 4,
-                "is_target_met": null,
+                "is_target_met": false,
                 "lower": 70,
                 "met_count": 2,
                 "standard_id": "1073",
@@ -1287,7 +1295,7 @@ Object {
             "standard_report": CoreDocumentArray [
               Object {
                 "count": 4,
-                "is_target_met": null,
+                "is_target_met": false,
                 "lower": 70,
                 "met_count": 2,
                 "standard_id": "1073",
