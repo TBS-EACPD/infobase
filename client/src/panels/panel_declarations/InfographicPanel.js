@@ -17,7 +17,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconCopyLink } from "src/icons/icons";
 
-import { infograph_options_href_template } from "src/infographic/infographic_link";
+import { infograph_href_template } from "src/infographic/infographic_link";
 
 import text from "./InfographicPanel.yaml";
 
@@ -49,12 +49,12 @@ class Panel_ extends React.Component {
     const file_name = `${file_name_context}_${title}.pdf`;
     const panel_link =
       context &&
-      infograph_options_href_template(subject, context.active_bubble_id, {
+      infograph_href_template(subject, context.active_bubble_id, {
         panel_key: context.panel_key,
       }) &&
       window.location.href.replace(
         window.location.hash,
-        infograph_options_href_template(subject, context.active_bubble_id, {
+        infograph_href_template(subject, context.active_bubble_id, {
           panel_key: context.panel_key,
         })
       );
