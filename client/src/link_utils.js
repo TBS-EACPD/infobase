@@ -24,7 +24,7 @@ const smart_href_template = (entity, first_character) => {
     is_subject_instance(entity) ||
     (entity?.__typename && entity?.subject_type)
   ) {
-    return infograph_href_template(entity, null, first_character);
+    return infograph_href_template(entity, null, {}, first_character);
   } else {
     throw new Error(
       `${entity} does not belong to a class with a known href template`

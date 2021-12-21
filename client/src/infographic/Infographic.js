@@ -231,7 +231,7 @@ class Infographic extends React.Component {
                 panel_keys={valid_panel_keys}
                 set_panel_filter={(panel_filter) => {
                   url_replace(
-                    infograph_href_template(subject, active_bubble_id, "/")
+                    infograph_href_template(subject, active_bubble_id, {}, "/")
                   );
                   this.setState({ panel_filter });
                 }}
@@ -312,7 +312,12 @@ class Infographic extends React.Component {
             _.chain(subject_panels_by_bubble_id).keys().first().value() || null;
 
           this.props.url_replace(
-            infograph_href_template(subject, fallback_bubble_for_subject, "/")
+            infograph_href_template(
+              subject,
+              fallback_bubble_for_subject,
+              {},
+              "/"
+            )
           );
         } else {
           const potential_panel_keys =
@@ -353,7 +358,12 @@ class Infographic extends React.Component {
     );
   }
   search_href_template = (selected_subject) =>
-    infograph_href_template(selected_subject, this.props.active_bubble_id, "/");
+    infograph_href_template(
+      selected_subject,
+      this.props.active_bubble_id,
+      {},
+      "/"
+    );
 }
 
 const get_default_infographic_state = (props) => {
@@ -494,7 +504,12 @@ class InfographicRoute extends React.Component {
 
       return (
         <Redirect
-          to={infograph_href_template(subject_parent, active_bubble_id, "/")}
+          to={infograph_href_template(
+            subject_parent,
+            active_bubble_id,
+            {},
+            "/"
+          )}
         />
       );
     }
