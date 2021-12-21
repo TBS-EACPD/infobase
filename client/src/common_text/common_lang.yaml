@@ -258,6 +258,9 @@ data_table_instructions:
     Sélectionnez les éléments de votre choix dans le tableau ci-dessous pour produire un tableau de ceux-ci pour
     l’ensemble du gouvernement. Vous pouvez également <a class='horizontal_compare'>consulter</a> la comparaison des totaux de cet organisme avec ceux de
     tous les autres organismes.
+select_period:
+  en: Select the period to display below
+  fr: Sélectionnez la période à afficher ci-dessous
 description:
   en: Description
   fr: Description

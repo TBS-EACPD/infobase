@@ -1,4 +1,5 @@
-import React from "react";
+import _ from "lodash";
+import React, { useState, useEffect } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -7,6 +8,7 @@ import {
   DisplayTable,
   create_text_maker_component,
   LeafSpinner,
+  Select,
 } from "src/components/index";
 
 import {
@@ -15,6 +17,7 @@ import {
   useServiceSummaryProgram,
 } from "src/models/services/queries";
 
+import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
@@ -31,18 +34,26 @@ const ServicesStandardsPanel = ({ subject }) => {
     program: useServiceSummaryProgram,
   }[subject.subject_type];
   const { loading, data } = useSummaryServices({ id: subject.id });
+  const [active_year, set_active_year] = useState("");
 
-  if (loading) {
+  useEffect(() => {
+    if (data) {
+      const most_recent_year = data.service_general_stats.standard_years[0];
+      set_active_year(most_recent_year);
+    }
+  }, [data]);
+
+  if (loading || !active_year) {
     return <LeafSpinner config_name="subroute" />;
   }
 
   const {
-    service_general_stats: { number_of_services, report_years },
+    service_general_stats: { number_of_services, standard_years },
     service_standards_summary,
   } = data;
 
   const { services_w_standards_count, standards_count, met_standards_count } =
-    service_standards_summary[0];
+    _.find(service_standards_summary, { year: active_year });
   const not_met_standards_count = standards_count - met_standards_count;
 
   const common_column_configs = {
@@ -59,11 +70,21 @@ const ServicesStandardsPanel = ({ subject }) => {
 
   return (
     <div>
-      <div style={{ marginBottom: "30px" }}>
+      <div style={{ marginBottom: "30px", textAlign: "center" }}>
         <TM
           className="medium-panel-text"
           k="services_standards_text"
-          args={{ most_recent_year: report_years[0], subject }}
+          args={{ most_recent_year: standard_years[0], subject }}
+        />
+        <Select
+          id="services_standards_select_year"
+          title={text_maker("select_period")}
+          selected={active_year}
+          options={_.map(standard_years, (year) => ({
+            id: year,
+            display: formats.year_to_fiscal_year_raw(year),
+          }))}
+          onSelect={(year) => set_active_year(year)}
         />
       </div>
       <div className={"col-container"}>

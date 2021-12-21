@@ -226,6 +226,10 @@ export default async function ({ models }) {
         service_report_rows,
         (service_report) => service_report.service_id === id
       );
+      const standards = _.filter(
+        service_standard_rows,
+        (service_standard) => service_standard.service_id === id
+      );
 
       return {
         id,
@@ -290,11 +294,7 @@ export default async function ({ models }) {
         }),
         ...other_fields,
         ...get_corresponding_urls(urls[id], submission_year, "SERVICE", "urls"),
-
-        standards: _.filter(
-          service_standard_rows,
-          (service_standard) => service_standard.service_id === id
-        ),
+        standards,
         service_report,
       };
     })
@@ -359,31 +359,31 @@ export default async function ({ models }) {
       )
       .value();
   const get_final_standards_summary = (services, subject_id) => {
-    const most_recent_submission_year =
-      get_years_from_service_standards(services)[0];
-
-    const filtered_services = _.chain(services)
-      .flatMap((service) => ({
+    const standard_years = get_years_from_service_standards(services);
+    return _.map(standard_years, (year) => {
+      const services_for_this_year = _.flatMap(services, (service) => ({
         ...service,
         standards: _.filter(
           service.standards,
-          ({ submission_year }) =>
-            submission_year === most_recent_submission_year
+          ({ submission_year }) => submission_year === year
         ),
-      }))
-      .value();
-    const services_w_standards_count =
-      get_services_w_standards_count(filtered_services);
-    const processed_standards = get_processed_standards(
-      filtered_services,
-      most_recent_submission_year
-    );
-    return {
-      subject_id,
-      services_w_standards_count,
-      standards_count: processed_standards.length,
-      met_standards_count: _.countBy(processed_standards, "is_target_met").true,
-    };
+      }));
+      const services_w_standards_count = get_services_w_standards_count(
+        services_for_this_year
+      );
+      const processed_standards = get_processed_standards(
+        services_for_this_year,
+        year
+      );
+      return {
+        subject_id,
+        year,
+        services_w_standards_count,
+        standards_count: processed_standards.length,
+        met_standards_count: _.countBy(processed_standards, "is_target_met")
+          .true,
+      };
+    });
   };
   const get_subject_offering_services_summary = (grouped_services) =>
     _.chain(grouped_services)
@@ -536,6 +536,9 @@ export default async function ({ models }) {
         report_years: get_years_from_service_report(
           absolute_most_recent_year_filtered_services
         ),
+        standard_years: get_years_from_service_standards(
+          absolute_most_recent_year_filtered_services
+        ),
         number_of_services: absolute_most_recent_year_filtered_services.length,
         number_of_online_enabled_services:
           get_number_of_online_enabled_services(
@@ -573,12 +576,10 @@ export default async function ({ models }) {
           key
         )
       ),
-      service_standards_summary: [
-        get_final_standards_summary(
-          absolute_most_recent_year_filtered_services,
-          "gov"
-        ),
-      ],
+      service_standards_summary: get_final_standards_summary(
+        absolute_most_recent_year_filtered_services,
+        "gov"
+      ),
       subject_offering_services_summary: get_subject_offering_services_summary(
         _.groupBy(absolute_most_recent_year_filtered_services, "org_id")
       ),
@@ -599,6 +600,7 @@ export default async function ({ models }) {
         id: org_id,
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
+          standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
             get_number_of_online_enabled_services(filtered_services),
@@ -641,6 +643,7 @@ export default async function ({ models }) {
         id: program_id,
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
+          standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
             get_number_of_online_enabled_services(filtered_services),
