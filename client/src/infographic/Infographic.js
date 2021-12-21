@@ -42,7 +42,7 @@ import { EverythingSearch } from "src/search/EverythingSearch";
 import { get_bubble_defs } from "./bubble_definitions";
 import { BubbleMenu } from "./BubbleMenu";
 
-import { infograph_href_template } from "./infographic_link";
+import { infographic_href_template } from "./infographic_href_template";
 
 import PanelFilterControl from "./PanelFilterControl";
 import TableOfContents from "./TableOfContents";
@@ -231,7 +231,12 @@ class Infographic extends React.Component {
                 panel_keys={valid_panel_keys}
                 set_panel_filter={(panel_filter) => {
                   url_replace(
-                    infograph_href_template(subject, active_bubble_id, {}, "/")
+                    infographic_href_template(
+                      subject,
+                      active_bubble_id,
+                      {},
+                      "/"
+                    )
                   );
                   this.setState({ panel_filter });
                 }}
@@ -265,7 +270,7 @@ class Infographic extends React.Component {
               {previous_bubble ? (
                 <a
                   className="previous_bubble_link btn btn-lg btn-ib-primary"
-                  href={infograph_href_template(subject, previous_bubble.id)}
+                  href={infographic_href_template(subject, previous_bubble.id)}
                   onClick={reset_scroll}
                   style={{ textDecoration: "none" }}
                 >
@@ -277,7 +282,7 @@ class Infographic extends React.Component {
               {next_bubble ? (
                 <a
                   className="next_bubble_link btn btn-lg btn-ib-primary"
-                  href={infograph_href_template(subject, next_bubble.id)}
+                  href={infographic_href_template(subject, next_bubble.id)}
                   onClick={reset_scroll}
                   style={{ textDecoration: "none" }}
                 >
@@ -312,7 +317,7 @@ class Infographic extends React.Component {
             _.chain(subject_panels_by_bubble_id).keys().first().value() || null;
 
           this.props.url_replace(
-            infograph_href_template(
+            infographic_href_template(
               subject,
               fallback_bubble_for_subject,
               {},
@@ -358,7 +363,7 @@ class Infographic extends React.Component {
     );
   }
   search_href_template = (selected_subject) =>
-    infograph_href_template(
+    infographic_href_template(
       selected_subject,
       this.props.active_bubble_id,
       {},
@@ -478,7 +483,7 @@ class InfographicRoute extends React.Component {
               subject_id,
               potential_parent_dept_code,
             }),
-            infograph_href_template(parent_dept)
+            infographic_href_template(parent_dept)
           );
         }
       }
@@ -504,7 +509,7 @@ class InfographicRoute extends React.Component {
 
       return (
         <Redirect
-          to={infograph_href_template(
+          to={infographic_href_template(
             subject_parent,
             active_bubble_id,
             {},
@@ -541,7 +546,7 @@ class InfographicRoute extends React.Component {
     )
       .map((parent_subj) => (
         <a
-          href={infograph_href_template(parent_subj, active_bubble_id)}
+          href={infographic_href_template(parent_subj, active_bubble_id)}
           key={parent_subj.id}
         >
           {parent_subj.name}

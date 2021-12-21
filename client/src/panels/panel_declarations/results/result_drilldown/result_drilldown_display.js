@@ -29,7 +29,7 @@ import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 import { Explorer } from "src/explorer_common/explorer_components";
 
 import { get_root } from "src/explorer_common/hierarchy_tools";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import {
   get_type_name,
@@ -101,7 +101,7 @@ const get_non_col_content_func = createSelector(_.property("doc"), (doc) => {
         )}
         {_.includes(["program", "dept", "cr"], type) && (
           <div className="ExplorerNode__BRLinkContainer">
-            <a href={infograph_href_template(subject)}>
+            <a href={infographic_href_template(subject)}>
               <TM k="see_infographic" />
             </a>
           </div>

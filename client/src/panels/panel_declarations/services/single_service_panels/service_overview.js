@@ -20,7 +20,7 @@ import { Dept, Program } from "src/models/subjects";
 
 import { formats } from "src/core/format";
 
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 import { get_source_links } from "src/metadata/data_sources";
 
 import "src/panels/panel_declarations/services/services.scss";
@@ -72,7 +72,7 @@ export class ServiceOverview extends React.Component {
             {(() => {
               const org = Dept.store.lookup(service.org_id);
               return (
-                <a href={infograph_href_template(org, "services")}>
+                <a href={infographic_href_template(org, "services")}>
                   {org.name}
                 </a>
               );
@@ -86,7 +86,7 @@ export class ServiceOverview extends React.Component {
                 return (
                   program && (
                     <li key={program_id}>
-                      <a href={infograph_href_template(program, "services")}>
+                      <a href={infographic_href_template(program, "services")}>
                         {program.name}
                       </a>
                     </li>

@@ -23,7 +23,7 @@ import fin_faq from "src/common_text/faq/financial_questions.yaml";
 
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
-import { infograph_href_template, rpb_link } from "src/link_utils";
+import { infographic_href_template, rpb_link } from "src/link_utils";
 import { sources } from "src/metadata/data_sources";
 import { primaryColor } from "src/style_constants/colors.interop.scss";
 
@@ -110,7 +110,7 @@ const get_non_col_content = ({ node }) => {
       )}
       {subject && (
         <div className="ExplorerNode__BRLinkContainer">
-          <a href={infograph_href_template(subject)}>
+          <a href={infographic_href_template(subject)}>
             <TM k="infographic_for" args={{ subject }} />
           </a>
         </div>

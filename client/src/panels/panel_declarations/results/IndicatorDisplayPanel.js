@@ -18,7 +18,7 @@ import { lang } from "src/core/injected_build_constants";
 import { get_client } from "src/graphql_utils/graphql_utils";
 
 import { IconCopyLink } from "src/icons/icons";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import { IndicatorDisplay } from "./result_components";
 
@@ -136,7 +136,7 @@ export default class IndicatorDisplayPanel extends React.Component {
 
     const panel_link = window.location.href.replace(
       window.location.hash,
-      infograph_href_template(subject, "results", {
+      infographic_href_template(subject, "results", {
         indicator: id,
       })
     );

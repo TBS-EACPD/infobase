@@ -17,7 +17,7 @@ import { lang } from "src/core/injected_build_constants";
 
 import { IconQuestion } from "src/icons/icons";
 
-import { infograph_href_template, glossary_href } from "src/link_utils";
+import { infographic_href_template, glossary_href } from "src/link_utils";
 
 _.each(formats, (format, key) => {
   HandlebarsWithPrototypeAccess.registerHelper(
@@ -704,7 +704,7 @@ HandlebarsWithPrototypeAccess.registerHelper("gl_title", function (key) {
 HandlebarsWithPrototypeAccess.registerHelper(
   "infograph_link",
   function (subject) {
-    const href = infograph_href_template(subject);
+    const href = infographic_href_template(subject);
     const str = `<a href="${href}" title="${trivial_text_maker(
       "infographic_for",
       { subject }
@@ -724,7 +724,7 @@ HandlebarsWithPrototypeAccess.registerHelper(
 HandlebarsWithPrototypeAccess.registerHelper(
   "infograph_res_link",
   function (subject, text) {
-    const href = infograph_href_template(subject, "results");
+    const href = infographic_href_template(subject, "results");
 
     const str = `<a href="${href}">${text}</a>`;
     return new HandlebarsWithPrototypeAccess.SafeString(str);
@@ -732,7 +732,7 @@ HandlebarsWithPrototypeAccess.registerHelper(
 );
 
 HandlebarsWithPrototypeAccess.registerHelper("tag_link", function (tag) {
-  const href = infograph_href_template(tag);
+  const href = infographic_href_template(tag);
   const str = `<a href="${href}">${tag.name}</a>`;
   return new HandlebarsWithPrototypeAccess.SafeString(str);
 });

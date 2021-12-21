@@ -5,7 +5,7 @@ import { HeightClipper } from "src/components/index";
 
 import { trivial_text_maker } from "src/models/text";
 
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 
 export const related_tags_row = (related_tags, subject_type) => {
   const term =
@@ -17,7 +17,9 @@ export const related_tags_row = (related_tags, subject_type) => {
     <ul className="ExplorerNode__List">
       {_.map(related_tags, (related_tag) => (
         <li key={related_tag.id}>
-          <a href={infograph_href_template(related_tag)}>{related_tag.name}</a>
+          <a href={infographic_href_template(related_tag)}>
+            {related_tag.name}
+          </a>
         </li>
       ))}
     </ul>

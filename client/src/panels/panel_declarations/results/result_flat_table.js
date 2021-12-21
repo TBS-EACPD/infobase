@@ -15,7 +15,7 @@ import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang } from "src/core/injected_build_constants";
 
 import { toggle_list } from "src/general_utils";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { get_source_links } from "src/metadata/data_sources";
 import { smart_sort_func } from "src/sort_utils";
 
@@ -75,7 +75,7 @@ const get_indicators = (subject, doc) => {
 
 const subject_link = (node) => (
   <span>
-    <a href={infograph_href_template(node.data.subject, "results")}>
+    <a href={infographic_href_template(node.data.subject, "results")}>
       {node.data.name}
     </a>
     <span className="text-nowrap">

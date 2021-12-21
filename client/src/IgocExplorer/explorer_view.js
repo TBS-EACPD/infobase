@@ -13,7 +13,7 @@ import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 
 import { sanitized_dangerous_inner_html } from "src/general_utils";
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 
 import { grouping_options } from "./hierarchies";
 import { igoc_tmf as text_maker, TM } from "./igoc_explorer_text";
@@ -160,7 +160,7 @@ const get_non_col_content_func = createSelector(
             <div className="ExplorerNode__BRLinkContainer">
               <a
                 className="btn btn-xs btn-ib-primary"
-                href={infograph_href_template(subject)}
+                href={infographic_href_template(subject)}
               >
                 <TM k="see_infographic" />
               </a>

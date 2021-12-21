@@ -18,7 +18,7 @@ import {
   IconClipboard,
 } from "src/icons/icons";
 
-import { infograph_href_template, rpb_link } from "src/link_utils";
+import { infographic_href_template, rpb_link } from "src/link_utils";
 
 import simplographic_text from "./simplographic.yaml";
 import "./simplographic.scss";
@@ -87,7 +87,7 @@ export const declare_simplographic_panel = () =>
         });
         const org_vote_stat_pa_link = rpb_link({ table: "orgVoteStatPa" });
 
-        const results_link = infograph_href_template(Gov.instance, "results");
+        const results_link = infographic_href_template(Gov.instance, "results");
 
         const num_results = gov_counts[`${current_drr_key}_results`];
         const num_indicators = gov_counts[`${current_drr_key}_total`];
