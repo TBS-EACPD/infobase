@@ -67,7 +67,6 @@ export default function (model_singleton) {
           ...bilingual_str("type"),
           ...bilingual_str("other_type_comment"),
 
-          //is_target_met: { type: Boolean },
           ...bilingual("standard_urls", [str_type]),
           ...bilingual("rtp_urls", [str_type]),
           standard_report: [
