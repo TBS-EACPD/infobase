@@ -237,12 +237,13 @@ const route_load_tests_config = [
 
   {
     name: "Report Builder - Table Picker",
-    route: "rpb",
+    route: "rpb/.-.-(subject.-.-'gov_gov.-.-columns.-.-false)",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Report Builder - Report",
-    route: "rpb/.-.-(table.-.-'orgEmployeeType)",
+    route:
+      "rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))",
     test_on: ["eng", "basic-eng"],
   },
   {
