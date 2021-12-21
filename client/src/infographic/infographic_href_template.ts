@@ -12,4 +12,4 @@ export const infographic_href_template = (
 ) =>
   `${first_character}infographic/${subject_type}/${id}${
     !_.isNull(data_area) ? `/${data_area}` : ""
-  }}${!_.isEmpty(options) ? `/${SafeJSURL.stringify(options)}` : ""}`;
+  }${!_.isEmpty(options) ? `/${SafeJSURL.stringify(options)}` : ""}`;
