@@ -288,7 +288,8 @@ const is_not_on_error_boundary = () =>
   cy_get_error_boundary().should("not.exist");
 
 // Meta test of the route load config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
-const is_on_target_route = (target_url) => cy.url().should("eq", target_url);
+const is_on_expected_route = (expected_route_pattern) =>
+  cy.url().should((url) => expect(url).to.match(expected_route_pattern));
 
 const axe_scan = () =>
   cy.injectAxe().then(() =>
@@ -304,6 +305,7 @@ const axe_scan = () =>
 const run_tests_from_config = ({
   name,
   route,
+  expected_route_pattern = new RegExp(`.*#${route}$`),
   test_on,
   expect_error_boundary,
 }) =>
@@ -329,7 +331,7 @@ const run_tests_from_config = ({
           cy.visit(target_url)
             .then(wait_on_all_spinners)
             .then(is_not_on_error_boundary)
-            .then(() => is_on_target_route(target_url))
+            .then(() => is_on_expected_route(expected_route_pattern))
             .then(
               /* TODO fix all critical axe warnings on the a11y routes, drop the filter on basic builds */
               () => !/basic-/.test(app) && axe_scan()
