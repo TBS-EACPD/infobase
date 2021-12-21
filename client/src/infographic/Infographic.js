@@ -308,6 +308,7 @@ class Infographic extends React.Component {
         };
 
         if (!_.has(subject_panels_by_bubble_id, active_bubble_id)) {
+          // TODO sync with URL, setting active_bubble_id to null (WITHOUT going in to an infinite loop here, ha)
           this.setState({
             ...common_new_state,
             next_bubble: null,

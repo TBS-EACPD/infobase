@@ -3,6 +3,7 @@ import _ from "lodash";
 import {
   is_subject_instance,
   get_subject_class_by_type,
+  ClassSubjectType,
 } from "src/models/subjects";
 import { make_store } from "src/models/utils/make_store";
 
@@ -17,7 +18,7 @@ type FakeFootNoteDef = {
 
 export type FootNoteDef = {
   id: string;
-  subject_type: string;
+  subject_type: ClassSubjectType; // TODO footnotes currently only work for class subjects, make allowances for API only subjects later
   subject_id: string;
   topic_keys: string[];
   text: string;

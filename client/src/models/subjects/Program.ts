@@ -24,14 +24,19 @@ type ProgramDef = {
   is_fake: boolean;
 };
 
-// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor, pending future TS features
 export interface Program extends ProgramDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class Program extends BaseSubjectFactory<ProgramDef>(
-  "program",
-  trivial_text_maker("programs"),
-  ["results", "services"]
-) {
+// Another quirk with BaseSubjectFactory, subject_type's mustbe const and provided in the generic type and value arguments, pending future TS features
+const program_subject_type = "program" as const;
+
+export class Program extends BaseSubjectFactory<
+  ProgramDef,
+  typeof program_subject_type
+>(program_subject_type, trivial_text_maker("programs"), [
+  "results",
+  "services",
+]) {
   static store = make_store((def: ProgramDef) => new Program(def));
 
   static make_program_id(dept_code: string, activity_code: string) {
@@ -90,7 +95,7 @@ type ProgramTagDef = {
   program_ids?: string[];
 };
 
-// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor, pending future TS features
 export interface ProgramTag extends ProgramTagDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
 const find_root = _.memoize(
@@ -102,10 +107,13 @@ const find_root = _.memoize(
 
 const root_tag_ids: string[] = [];
 
-export class ProgramTag extends BaseSubjectFactory<ProgramTagDef>(
-  "tag",
-  trivial_text_maker("tags")
-) {
+// Another quirk with BaseSubjectFactory, subject_type's mustbe const and provided in the generic type and value arguments, pending future TS features
+const program_tag_subject_type = "tag" as const;
+
+export class ProgramTag extends BaseSubjectFactory<
+  ProgramTagDef,
+  typeof program_tag_subject_type
+>(program_tag_subject_type, trivial_text_maker("tags")) {
   static store = make_store((def: ProgramTagDef) => {
     return new ProgramTag(def);
   });
