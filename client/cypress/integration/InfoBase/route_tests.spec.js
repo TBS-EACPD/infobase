@@ -186,11 +186,6 @@ const route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Infographic - CRSO - People",
-    route: "infographic/crso/TBC-BXA00/people",
-    test_on: ["eng", "basic-eng"],
-  },
-  {
     name: "Infographic - CRSO - Results",
     route: "infographic/crso/TBC-BXA00/results",
     test_on: ["eng", "basic-eng"],
