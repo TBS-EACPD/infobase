@@ -307,47 +307,50 @@ class Infographic extends React.Component {
           subject_bubble_defs,
         };
 
-        if (!_.has(subject_panels_by_bubble_id, active_bubble_id)) {
-          // TODO sync with URL, setting active_bubble_id to null (WITHOUT going in to an infinite loop here, ha)
+        if (active_bubble_id) {
+          if (!_.has(subject_panels_by_bubble_id, active_bubble_id)) {
+            this.props.url_replace(infograph_href_template(subject, null, "/"));
+          } else {
+            const potential_panel_keys =
+              subject_panels_by_bubble_id[active_bubble_id];
+
+            return ensure_loaded({
+              panel_keys: potential_panel_keys,
+              subject_type,
+              subject: subject,
+              // TODO, this is a monkey patch, need a good API for infographic levels to declare if/how to load footnotes, etc...
+              // Maybe make all this pre-loading the responsibility of individual get_panels_for_subject promises?
+              footnotes_for: subject_type !== "service" && subject,
+            }).then(() => {
+              const active_index = _.findIndex(subject_bubble_defs, {
+                id: active_bubble_id,
+              });
+              const next_bubble = subject_bubble_defs[active_index + 1];
+              const previous_bubble = subject_bubble_defs[active_index - 1];
+
+              const valid_panel_keys = _.filter(
+                potential_panel_keys,
+                (panel_key) =>
+                  PanelRegistry.lookup(
+                    panel_key,
+                    subject_type
+                  ).is_panel_valid_for_subject(subject)
+              );
+
+              this.setState({
+                ...common_new_state,
+                next_bubble,
+                previous_bubble,
+                valid_panel_keys,
+              });
+            });
+          }
+        } else {
           this.setState({
             ...common_new_state,
             next_bubble: null,
             previous_bubble: null,
             valid_panel_keys: null,
-          });
-        } else {
-          const potential_panel_keys =
-            subject_panels_by_bubble_id[active_bubble_id];
-
-          return ensure_loaded({
-            panel_keys: potential_panel_keys,
-            subject_type,
-            subject: subject,
-            // TODO, this is a monkey patch, need a good API for infographic levels to declare if/how to load footnotes, etc...
-            // Maybe make all this pre-loading the responsibility of individual get_panels_for_subject promises?
-            footnotes_for: subject_type !== "service" && subject,
-          }).then(() => {
-            const active_index = _.findIndex(subject_bubble_defs, {
-              id: active_bubble_id,
-            });
-            const next_bubble = subject_bubble_defs[active_index + 1];
-            const previous_bubble = subject_bubble_defs[active_index - 1];
-
-            const valid_panel_keys = _.filter(
-              potential_panel_keys,
-              (panel_key) =>
-                PanelRegistry.lookup(
-                  panel_key,
-                  subject_type
-                ).is_panel_valid_for_subject(subject)
-            );
-
-            this.setState({
-              ...common_new_state,
-              next_bubble,
-              previous_bubble,
-              valid_panel_keys,
-            });
           });
         }
       }
