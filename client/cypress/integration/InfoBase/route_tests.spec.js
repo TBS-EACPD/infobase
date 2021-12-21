@@ -289,7 +289,9 @@ const is_not_on_error_boundary = () =>
 
 // Meta test of the route load config, unexpected redirects are a sign of a bad target url and, therefore, a likely false positive test
 const is_on_expected_route = (expected_route_pattern) =>
-  cy.url().should((url) => expect(url).to.match(expected_route_pattern));
+  cy
+    .url({ timeout: 0 })
+    .should((url) => expect(url).to.match(expected_route_pattern));
 
 const axe_scan = () =>
   cy.injectAxe().then(() =>
