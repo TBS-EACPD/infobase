@@ -21,11 +21,14 @@ type CRSODef = {
   is_internal_service: boolean;
 };
 
-// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor, pending future TS features
 export interface CRSO extends CRSODef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class CRSO extends BaseSubjectFactory<CRSODef>(
-  "crso",
+// Another quirk with BaseSubjectFactory, subject_type's mustbe const and provided in the generic type and value arguments, pending future TS features
+const crso_subject_type = "crso" as const;
+
+export class CRSO extends BaseSubjectFactory<CRSODef, typeof crso_subject_type>(
+  crso_subject_type,
   trivial_text_maker("core_resps"),
   ["results", "services"]
 ) {

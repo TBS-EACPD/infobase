@@ -2,8 +2,14 @@ import _ from "lodash";
 
 import { Store } from "src/models/utils/make_store";
 
-export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
-  subject_type: string,
+export const BaseSubjectFactory = <
+  SubjectDef extends { id: string },
+  // Watch https://github.com/microsoft/TypeScript/issues/30680
+  // For now, up to callers to provide the subject type value twice, and declare it const,
+  // so that the returned subject class has the correct type information for the important subject_type identifier
+  SubjectType extends string
+>(
+  subject_type: SubjectType,
   subject_name: string,
   api_data_types = [] as string[]
 ) =>
@@ -35,7 +41,7 @@ export const BaseSubjectFactory = <SubjectDef extends { id: string }>(
       this.id = def.id;
     }
 
-    static subject_type = subject_type;
+    static subject_type: SubjectType = subject_type;
     get subject_type() {
       return subject_type;
     }

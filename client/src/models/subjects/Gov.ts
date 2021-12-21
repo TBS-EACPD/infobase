@@ -8,7 +8,10 @@ import { BaseSubjectFactory } from "./BaseSubjectFactory";
 
 const gov_id = "gov";
 
-export class Gov extends BaseSubjectFactory("gov", trivial_text_maker("goc")) {
+export class Gov extends BaseSubjectFactory(
+  "gov" as const,
+  trivial_text_maker("goc")
+) {
   static store = (() => {
     const store = make_store((def: { id: string }) => new Gov(def));
     store.create_and_register({ id: gov_id });

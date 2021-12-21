@@ -1,7 +1,14 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
-import { Dept, CRSO, Program, SubjectInstance } from "src/models/subjects";
+import {
+  Dept,
+  CRSO,
+  Program,
+  class_subject_types,
+  is_class_subject_types,
+  SubjectClassInstance,
+} from "src/models/subjects";
 import { run_template } from "src/models/text";
 import { fiscal_year_to_year } from "src/models/years";
 
@@ -57,6 +64,13 @@ function populate_footnotes(csv_str: string) {
     // ... with the exception of CRSO being all-caps. Sort that out with the pipeline some time
     const subject_type = subject_class === "CRSO" ? "crso" : subject_class;
 
+    // TODO footnotes currently only work for class subjects, expand to allow for API only subjects
+    if (!is_class_subject_types(subject_type)) {
+      throw new Error(
+        `Invalid subject type "${subject_type}" for footnote "${id}", options are ${class_subject_types}`
+      );
+    }
+
     footNoteStore.create_and_register({
       id,
       subject_type,
@@ -72,7 +86,9 @@ function populate_footnotes(csv_str: string) {
 // note: gov footnotes always loaded right now, they're part of the global footnotes bundle loaded through the big lookups blob
 const _loaded_footnote_bundle_ids: Record<string, boolean> = { gov: true };
 
-function load_footnotes_bundle(subject: SubjectInstance | "estimates" | "all") {
+function load_footnotes_bundle(
+  subject: SubjectClassInstance | "estimates" | "all"
+) {
   const footnote_bundle_id = (() => {
     if (typeof subject === "string") {
       if (subject === "estimates") {

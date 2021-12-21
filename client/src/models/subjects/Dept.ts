@@ -63,11 +63,14 @@ interface InstForm extends InstFormDef {
   parent_form?: InstForm;
 }
 
-// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor
+// Interface merging to fill in type system blind spot, see note on Object.assign(this, def) in BaseSubjectFactory's constructor, pending future TS features
 export interface Dept extends DeptDef {} // eslint-disable-line @typescript-eslint/no-empty-interface
 
-export class Dept extends BaseSubjectFactory<DeptDef>(
-  "dept",
+// Another quirk with BaseSubjectFactory, subject_type's mustbe const and provided in the generic type and value arguments, pending future TS features
+const dept_subject_type = "dept" as const;
+
+export class Dept extends BaseSubjectFactory<DeptDef, typeof dept_subject_type>(
+  dept_subject_type,
   trivial_text_maker("orgs"),
   ["results", "services", "covid"]
 ) {
