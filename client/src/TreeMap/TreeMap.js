@@ -24,7 +24,7 @@ import { is_mobile } from "src/core/feature_detection";
 import { formats } from "src/core/format";
 import { StandardRouteContainer } from "src/core/NavComponents";
 
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import { get_data, load_data } from "./data";
 
@@ -53,7 +53,7 @@ function generate_infograph_href(d, data_area) {
   if (d.data.subject) {
     return `
     <div style="padding-top: 10px">
-      <a class="TM_Tooltip__link" href=${infograph_href_template(
+      <a class="TM_Tooltip__link" href=${infographic_href_template(
         d.data.subject,
         data_area
       )} >

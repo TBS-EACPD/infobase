@@ -8,7 +8,7 @@ import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import { text_maker } from "./result_text_provider";
 
@@ -29,7 +29,7 @@ const {
 const { result_statuses } = businessConstants;
 
 const link_to_results_infograph = (subject) =>
-  infograph_href_template(subject, "results");
+  infographic_href_template(subject, "results");
 
 const results_resource_fragment = (subject, doc) => {
   const doc_resource_year = result_docs[doc].primary_resource_year;

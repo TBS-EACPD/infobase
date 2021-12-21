@@ -19,7 +19,7 @@ import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStor
 import { Dept } from "src/models/subjects";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { get_source_links } from "src/metadata/data_sources";
 import { minLargeDevice } from "src/style_constants/index";
 
@@ -176,7 +176,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 
           return (
             <a
-              href={infograph_href_template(org, "covid", {
+              href={infographic_href_template(org, "covid", {
                 panel_key,
               })}
             >

@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { Table } from "./core/TableClass";
-import { infograph_href_template } from "./infographic/infographic_link";
+import { infographic_href_template } from "./infographic/infographic_href_template";
 import { glossaryEntryStore } from "./models/glossary";
 import { is_subject_instance } from "./models/subjects";
 import { rpb_link } from "./rpb/rpb_link";
@@ -24,7 +24,7 @@ const smart_href_template = (entity, first_character) => {
     is_subject_instance(entity) ||
     (entity?.__typename && entity?.subject_type)
   ) {
-    return infograph_href_template(entity, null, {}, first_character);
+    return infographic_href_template(entity, null, {}, first_character);
   } else {
     throw new Error(
       `${entity} does not belong to a class with a known href template`
@@ -33,7 +33,7 @@ const smart_href_template = (entity, first_character) => {
 };
 
 export {
-  infograph_href_template,
+  infographic_href_template,
   rpb_link,
   glossary_href,
   smart_href_template,

@@ -10,7 +10,7 @@ import {
 
 import { Indicator, result_docs } from "src/models/results";
 
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 
 import "./result_displays.scss";
 
@@ -134,7 +134,7 @@ export const ResultNodeContent = ({
         <ul>
           {_.map(contributing_programs, (prog) => (
             <li key={prog.id}>
-              <a href={infograph_href_template(prog)}>{prog.name}</a>
+              <a href={infographic_href_template(prog)}>{prog.name}</a>
             </li>
           ))}
         </ul>

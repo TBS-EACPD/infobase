@@ -8,7 +8,7 @@ import { HeightClipper } from "src/components/index";
 
 import { create_text_maker } from "src/models/text";
 
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import {
   HierarchyPeek,
@@ -45,7 +45,7 @@ export const declare_portfolio_structure_intro_panel = () =>
               <HierarchyPeek
                 root={org_external_hierarchy({
                   subject,
-                  href_generator: infograph_href_template,
+                  href_generator: infographic_href_template,
                 })}
               />
             </HeightClipper>
@@ -72,7 +72,7 @@ export const declare_portfolio_structure_related_panel = () =>
 
         const hierarchy_view = org_internal_hierarchy({
           subject,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
           show_dead_sos: true,
         });
 
@@ -99,7 +99,7 @@ export const declare_program_fed_structure_panel = () =>
 
         const hierarchy = program_hierarchy({
           subject,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
           show_siblings: false,
           show_cousins: false,
           show_uncles: false,
@@ -131,7 +131,7 @@ export const declare_related_program_structure_panel = () =>
 
         const hierarchy = program_hierarchy({
           subject,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
           show_siblings: true,
           show_cousins: true,
           show_uncles: true,
@@ -165,7 +165,7 @@ export const declare_tag_fed_structure_panel = () =>
           subject,
           showSiblings: false,
           showChildren: false,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
         });
 
         return (
@@ -195,7 +195,7 @@ export const declare_sibling_tags_panel = () =>
           subject,
           showSiblings: true,
           showChildren: false,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
         });
 
         return (
@@ -224,7 +224,7 @@ export const declare_crso_in_gov_panel = () =>
 
         const hierarchy = crso_pi_hierarchy({
           subject,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
         });
 
         return (
@@ -250,7 +250,7 @@ export const declare_crso_links_to_other_crso_panel = () =>
 
         const hierarchy = crso_hierarchy({
           subject,
-          href_generator: infograph_href_template,
+          href_generator: infographic_href_template,
         });
 
         return (

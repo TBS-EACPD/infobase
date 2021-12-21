@@ -23,7 +23,7 @@ import tag_faq from "src/common_text/faq/tagging_questions.yaml";
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { get_col_defs } from "src/explorer_common/resource_explorer_common";
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 import { tertiaryColor, primaryColor } from "src/style_constants/index";
 
 import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs";
@@ -90,7 +90,7 @@ function render_non_col_content({ node }) {
         subject.is_cr ||
         subject.has_programs) && (
         <div className="ExplorerNode__BRLinkContainer">
-          <a href={infograph_href_template(subject)}>
+          <a href={infographic_href_template(subject)}>
             <TM k="learn_more" />
           </a>
         </div>

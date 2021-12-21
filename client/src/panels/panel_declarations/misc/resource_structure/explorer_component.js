@@ -8,7 +8,7 @@ import { run_template } from "src/models/text";
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { get_col_defs } from "src/explorer_common/resource_explorer_common";
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 
 import { actual_year, planning_year, TM } from "./utils";
 
@@ -46,7 +46,7 @@ const get_non_col_content = ({ node }) => {
         (_.includes(["program", "dept", "crso"], subject.subject_type) ||
           (subject.subject_type === "tag" && !_.isEmpty(subject.programs))) && (
           <div className="ExplorerNode__BRLinkContainer">
-            <a href={infograph_href_template(subject)}>
+            <a href={infographic_href_template(subject)}>
               <TM k="see_infographic" />
             </a>
           </div>

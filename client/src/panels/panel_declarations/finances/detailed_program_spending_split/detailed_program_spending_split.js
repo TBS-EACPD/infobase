@@ -39,7 +39,7 @@ import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar, WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
 import { toggle_list } from "src/general_utils";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { highlightColor, textColor } from "src/style_constants/index";
 
 import text from "./detailed_program_spending_split.yaml";
@@ -400,7 +400,7 @@ class DetailedProgramSplit extends React.Component {
                       <a
                         href={
                           programs_by_name[tick.value]
-                            ? infograph_href_template(
+                            ? infographic_href_template(
                                 programs_by_name[tick.value]
                               )
                             : null

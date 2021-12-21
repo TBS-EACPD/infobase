@@ -16,7 +16,7 @@ import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoTreemap } from "src/charts/wrapped_nivo/index";
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
 
@@ -57,7 +57,7 @@ const planned_vote_or_stat_render = (vs) =>
     const subj_map = _.chain(top_10_rows)
       .map((obj) => [
         obj.dept,
-        infograph_href_template(Dept.store.lookup(obj.dept)),
+        infographic_href_template(Dept.store.lookup(obj.dept)),
       ])
       .fromPairs()
       .value();

@@ -17,7 +17,7 @@ import {
   IconHelp,
 } from "src/icons/icons";
 
-import { infograph_href_template } from "./infographic_link";
+import { infographic_href_template } from "./infographic_href_template";
 
 import text from "./bubble_definitions.yaml";
 
@@ -95,7 +95,7 @@ const get_bubble_defs = (subject) =>
         }
         return option;
       }),
-      href: infograph_href_template(subject, base.id),
+      href: infographic_href_template(subject, base.id),
     }))
     .value();
 

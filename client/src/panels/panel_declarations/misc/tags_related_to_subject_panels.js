@@ -15,7 +15,7 @@ import { Dept, ProgramTag } from "src/models/subjects";
 
 import { sanitized_dangerous_inner_html } from "src/general_utils";
 
-import { infograph_href_template } from "src/infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import { HierarchyDeadElementIcon } from "./hierarchy_component";
 
@@ -39,7 +39,7 @@ const tag_root_display = (tag_root) => (
 );
 
 const tag_display = (tag) => ({
-  href: infograph_href_template(tag),
+  href: infographic_href_template(tag),
   display: tag.name,
 });
 
@@ -127,7 +127,7 @@ export const declare_tag_progs_by_dept_panel = () =>
           .groupBy((prog) => prog.dept.id)
           .map((prog_group, dept_id) => ({
             display: <div>{Dept.store.lookup(dept_id).name}</div>,
-            href: infograph_href_template(Dept.store.lookup(dept_id)),
+            href: infographic_href_template(Dept.store.lookup(dept_id)),
             children: _.chain(prog_group)
               .sortBy("is_dead")
               .map((prog) => ({
@@ -137,7 +137,7 @@ export const declare_tag_progs_by_dept_panel = () =>
                     <span
                       className={classNames(prog.is_dead && "dead-element")}
                     >
-                      <a href={infograph_href_template(prog)}>{prog.name}</a>
+                      <a href={infographic_href_template(prog)}>{prog.name}</a>
                     </span>
                   </Fragment>
                 ),
@@ -217,7 +217,7 @@ export const declare_related_tags_panel = () =>
           ({ type, tag_and_counts }) => ({
             display: tag_root_display(ProgramTag.store.lookup(type)),
             children: _.map(tag_and_counts, ({ tag, count }) => ({
-              href: infograph_href_template(tag),
+              href: infographic_href_template(tag),
               display: (
                 <span>{`${tag.name} - ${count} ${text_maker(
                   "programs"

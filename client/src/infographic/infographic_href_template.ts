@@ -4,9 +4,9 @@ import { SubjectLike } from "src/models/subjects";
 
 import { SafeJSURL } from "src/general_utils";
 
-export const infograph_href_template = (
+export const infographic_href_template = (
   { subject_type, id }: SubjectLike,
-  data_area = "intro",
+  data_area: string | null = null,
   options: Record<string, string> = {},
   first_character: "#" | "/" = "#"
 ) =>

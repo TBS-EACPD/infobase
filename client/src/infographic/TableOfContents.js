@@ -9,7 +9,7 @@ import {
 
 import { separatorColor } from "src/style_constants/index";
 
-import { infograph_href_template } from "./infographic_link";
+import { infographic_href_template } from "./infographic_href_template";
 
 import text from "./TableOfContents.yaml";
 
@@ -49,7 +49,7 @@ export default class TableOfContents extends React.Component {
                 items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
                   <a
                     key={panel_key}
-                    href={infograph_href_template(subject, active_bubble_id, {
+                    href={infographic_href_template(subject, active_bubble_id, {
                       panel_key,
                     })}
                   >

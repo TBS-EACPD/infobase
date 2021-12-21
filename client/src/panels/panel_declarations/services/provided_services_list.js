@@ -16,7 +16,8 @@ import {
   useServicesByProgram,
 } from "src/models/services/services_queries";
 
-import { infograph_href_template } from "src//infographic/infographic_link";
+import { infographic_href_template } from "src/infographic/infographic_href_template";
+
 import { get_source_links } from "src/metadata/data_sources";
 
 import text from "./services.yaml";
@@ -24,7 +25,7 @@ import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const service_infographic_link = (id) =>
-  infograph_href_template({ id, subject_type: "service" });
+  infographic_href_template({ id, subject_type: "service" });
 
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");

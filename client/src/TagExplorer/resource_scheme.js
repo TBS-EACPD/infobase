@@ -21,7 +21,7 @@ import {
   sanitized_dangerous_inner_html,
 } from "src/general_utils";
 
-import { infograph_href_template } from "src/link_utils";
+import { infographic_href_template } from "src/link_utils";
 
 import { hierarchy_scheme_configs } from "./hierarchy_scheme_configs";
 import { related_tags_row } from "./tag_hierarchy_utils";
@@ -66,7 +66,7 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
                   {
                     term: text_maker("org"),
                     def: (
-                      <a href={infograph_href_template(prog.dept)}>
+                      <a href={infographic_href_template(prog.dept)}>
                         {prog.dept.name}
                       </a>
                     ),
