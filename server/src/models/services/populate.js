@@ -127,7 +127,7 @@ export default async function ({ models }) {
       comment_fr: standard_report_comment_fr,
       ...other_fields
     }) => ({
-      is_target_met: convert_to_bool_or_null(is_target_met, "TRUE", "FALSE"),
+      is_target_met: convert_to_bool_or_null(is_target_met, "1.0", "0.0"),
       standard_id,
       standard_report_comment_en,
       standard_report_comment_fr,
