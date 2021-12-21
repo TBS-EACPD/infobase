@@ -13,7 +13,7 @@ const infograph_href_template = (
 
 const infograph_options_href_template = (
   subj,
-  data_area,
+  data_area = "intro",
   options,
   first_character = "#"
 ) =>
