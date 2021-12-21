@@ -195,11 +195,6 @@ const route_load_tests_config = [
     route: "infographic/crso/TBC-BXA00/related",
     test_on: ["eng", "basic-eng"],
   },
-  {
-    name: "Infographic - CRSO - All data",
-    route: "infographic/crso/TBC-BXA00/all_data",
-    test_on: ["eng", "basic-eng"],
-  },
 
   {
     name: "Infographic - Program - About",
