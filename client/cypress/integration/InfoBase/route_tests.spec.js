@@ -1,3 +1,4 @@
+import escapeStringRegexp from "escape-string-regexp";
 import _ from "lodash";
 
 const route_load_tests_config = [
@@ -246,11 +247,13 @@ const route_load_tests_config = [
       "rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))",
     test_on: ["eng", "basic-eng"],
   },
+
   {
     name: "Tag Explorer",
     route: "tag-explorer",
     test_on: ["eng", "basic-eng"],
   },
+
   {
     name: "Indicator text comparison - TBS",
     route: "diff/326",
@@ -307,7 +310,7 @@ const axe_scan = () =>
 const run_tests_from_config = ({
   name,
   route,
-  expected_route_pattern = new RegExp(`.*#${route}$`),
+  expected_route_pattern = new RegExp(`.*#${escapeStringRegexp(route)}$`),
   test_on,
   expect_error_boundary,
 }) =>
