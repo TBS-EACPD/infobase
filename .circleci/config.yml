@@ -65,6 +65,7 @@ commands:
             - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
 
 jobs:
+  # TODO consider expanding lint job to check prettier and typing as well, relevant: https://github.com/prettier/prettier/issues/5853
   lint:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
