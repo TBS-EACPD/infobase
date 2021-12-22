@@ -63,20 +63,15 @@ export class ServiceStandards extends React.Component {
       count,
       met_count
     ) => {
-      if (is_target_met) {
-        if (
-          target_type !== "Other type of target" &&
-          !lower &&
-          !count &&
-          !met_count
-        ) {
-          return "no_data";
-        } else {
-          return "met";
-        }
-      } else {
-        return "not_met";
+      if (
+        target_type !== "Other type of target" &&
+        !lower &&
+        !count &&
+        !met_count
+      ) {
+        return "no_data";
       }
+      return is_target_met ? "met" : "not_met";
     };
     const get_target = (target_type, target) => {
       if (_.isNull(target)) {
