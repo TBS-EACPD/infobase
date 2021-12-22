@@ -71,7 +71,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(std_years, (header, ix) => {
+    _.each(std_years, (header) => {
       this.add_col({
         type: "decimal2",
         nick: header,
@@ -118,7 +118,7 @@ export default {
     });
   },
 
-  sort: function (mapped_rows, lang) {
+  sort: function (mapped_rows) {
     return _.sortBy(mapped_rows, function (row) {
       return [row.goco_gov, row.goco];
     });

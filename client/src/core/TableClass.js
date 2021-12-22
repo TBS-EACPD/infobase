@@ -587,7 +587,7 @@ export class Table {
           row_obj[key] = 0;
         }
       });
-      _.toPairs(row_obj).forEach(([key, val]) => {
+      _.toPairs(row_obj).forEach(([key, _val]) => {
         const col = this.col_from_nick(key);
         if (col.formula && _.isUndefined(col.formula.default)) {
           row_obj[key] = col.formula(row_obj);

@@ -38,11 +38,11 @@ const get_api_url = _.memoize(async () => {
       { signal: controller.signal },
       "dev_connection_test"
     )
-      .then((response) => {
+      .then((_response) => {
         clearTimeout(id_for_test_timeout);
         return local_dev_api_url;
       })
-      .catch((error) => {
+      .catch((_error) => {
         clearTimeout(id_for_test_timeout);
         return "http://127.0.0.1:1337/graphql";
       });

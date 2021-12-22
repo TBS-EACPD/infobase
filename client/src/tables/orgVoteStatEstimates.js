@@ -116,7 +116,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(estimates_years, (yr, ix) => {
+    _.each(estimates_years, (yr) => {
       this.add_col({
         type: "dollar",
         nick: yr + "_estimates",
@@ -206,7 +206,7 @@ export default {
     },
   },
 
-  sort: function (mapped_rows, lang) {
+  sort: function (mapped_rows) {
     var grps = _.groupBy(mapped_rows, function (row) {
       return _.isNumber(row.votenum);
     });

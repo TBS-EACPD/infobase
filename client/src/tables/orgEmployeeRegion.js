@@ -99,7 +99,7 @@ export default {
     return row;
   },
 
-  sort: function (mapped_rows, lang) {
+  sort: function (mapped_rows) {
     return _.sortBy(mapped_rows, function (row) {
       if (row.region === provinces.abroad.text) {
         return "Z";

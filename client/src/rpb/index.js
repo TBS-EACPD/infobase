@@ -121,7 +121,7 @@ class RPB extends React.Component {
     },
 
     on_switch_table: (table_id) => {
-      this.setState((prevState, props) => {
+      this.setState((prevState) => {
         return {
           ...prevState,
           ...get_default_state_for_new_table(table_id),

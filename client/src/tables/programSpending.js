@@ -72,7 +72,7 @@ export default {
         can_group_by: true,
       },
     ]);
-    _.each(std_years, (header, ix) => {
+    _.each(std_years, (header) => {
       //TODO: the col definitions here are copied from orgVoteStatPa, either change them or make it DRY
       this.add_col(header).add_child([
         {
@@ -137,7 +137,7 @@ export default {
     });
   },
 
-  sort: function (mapped_rows, lang) {
+  sort: function (mapped_rows) {
     return _.sortBy(mapped_rows, function (row) {
       return row.prgm;
     });

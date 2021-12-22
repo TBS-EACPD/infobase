@@ -33,7 +33,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
         this.tooltip_instances = [];
 
         this.debounced_mutation_callback = _.debounce(
-          (mutationList, observer) => {
+          (_mutationList, _observer) => {
             const previous_tooltip_nodes = _.map(
               this.tooltip_instances,
               (tooltip_instance) => tooltip_instance.node

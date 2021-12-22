@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { make_store } from "src/models/utils/make_store";
 
 type YearsWithCovidDataDef = {

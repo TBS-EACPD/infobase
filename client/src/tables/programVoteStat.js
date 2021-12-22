@@ -77,7 +77,7 @@ export default {
       });
     });
   },
-  sort: function (rows, lang) {
+  sort: function (rows) {
     return _.sortBy(rows, function (row) {
       return row.so_num;
     });

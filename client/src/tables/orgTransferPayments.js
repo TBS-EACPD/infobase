@@ -84,7 +84,7 @@ export default {
         },
       },
     ]);
-    _.each(std_years, (header, i) => {
+    _.each(std_years, (header) => {
       this.add_col(header).add_child([
         {
           type: "big_int",
@@ -120,7 +120,7 @@ export default {
     },
   },
 
-  sort: function (mapped_rows, lang) {
+  sort: function (mapped_rows) {
     return _.sortBy(mapped_rows, function (row) {
       return [row.type, row.tp];
     });

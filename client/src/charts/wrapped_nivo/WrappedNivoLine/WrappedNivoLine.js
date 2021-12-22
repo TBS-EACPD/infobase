@@ -120,7 +120,7 @@ export class WrappedNivoLine extends React.Component {
     const lines_with_dashed_overlaps = ({ lineGenerator, xScale, yScale }) =>
       _.map(
         line_segments,
-        ({ id, data, total_overlaps, z_index, overlaps_below }, index) => {
+        ({ id, data, total_overlaps, overlaps_below }, index) => {
           const gap_between_points = xScale(data[1].x) - xScale(data[0].x);
           const dash_size = gap_between_points / (total_overlaps + 1) / 2;
           return (
