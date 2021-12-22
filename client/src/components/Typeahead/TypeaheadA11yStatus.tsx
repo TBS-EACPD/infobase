@@ -1,9 +1,10 @@
 import _ from "lodash";
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
+import React from "react";
 
 import { create_text_maker } from "src/models/text";
 
-import { ResultProps } from "./Typeahead";
+import type { ResultProps } from "./Typeahead";
 
 import text from "./Typeahead.yaml";
 

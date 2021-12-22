@@ -11,7 +11,7 @@ import {
 } from "src/components/misc_util_components";
 import { SortDirections } from "src/components/SortDirection/SortDirection";
 
-import { FormatKey } from "src/core/format";
+import type { FormatKey } from "src/core/format";
 
 import { LegendList } from "src/charts/legends/LegendList";
 

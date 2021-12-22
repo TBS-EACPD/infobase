@@ -1,19 +1,11 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, {
-  ChangeEvent,
-  KeyboardEvent,
-  Fragment,
-  ReactElement,
-} from "react";
+import type { ChangeEvent, KeyboardEvent, ReactElement } from "react";
+import React, { Fragment } from "react";
 import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
 
-import {
-  AutoSizer,
-  CellMeasurer,
-  CellMeasurerCache,
-  List,
-} from "react-virtualized";
+import type { List } from "react-virtualized";
+import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 
 import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";

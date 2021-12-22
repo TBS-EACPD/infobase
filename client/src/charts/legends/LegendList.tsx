@@ -6,7 +6,7 @@ import { CheckBox } from "src/components/CheckBox/CheckBox";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { ComponentProps } from "src/types/util_types.d";
+import type { ComponentProps } from "src/types/util_types.d";
 
 import type { LegendItemType } from "./LegendItemType";
 

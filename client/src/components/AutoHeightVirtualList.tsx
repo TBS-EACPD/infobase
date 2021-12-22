@@ -2,7 +2,7 @@ import React from "react";
 import { List } from "react-virtualized";
 import type { ListProps } from "react-virtualized";
 
-import { SafeOmit } from "src/types/util_types.d";
+import type { SafeOmit } from "src/types/util_types.d";
 
 interface AutoHeightVirtualListProps extends SafeOmit<ListProps, "height"> {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

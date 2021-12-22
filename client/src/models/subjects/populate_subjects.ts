@@ -1,9 +1,7 @@
 import _ from "lodash";
 
-import {
-  ParsedCsvWithUndefineds,
-  enforced_required_fields,
-} from "src/models/utils/populate_utils";
+import type { ParsedCsvWithUndefineds } from "src/models/utils/populate_utils";
+import { enforced_required_fields } from "src/models/utils/populate_utils";
 
 import { lang } from "src/core/injected_build_constants";
 

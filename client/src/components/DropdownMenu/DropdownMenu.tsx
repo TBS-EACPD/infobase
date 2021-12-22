@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, { BaseSyntheticEvent } from "react";
+import type { BaseSyntheticEvent } from "react";
+import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 

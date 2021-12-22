@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { Store } from "src/models/utils/make_store";
+import type { Store } from "src/models/utils/make_store";
 
 export const BaseSubjectFactory = <
   SubjectDef extends { id: string },
