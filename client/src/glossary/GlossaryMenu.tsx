@@ -91,10 +91,10 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
           <div className="glossary-sidebar-header-wrapper" ref={this.header}>
             <div className="glossary-sidebar-header">
               <div role="navigation" aria-label="Glossary navigation">
-                <div className={"close-button"}>
+                <div className={"glossary-sb-close-button"}>
                   <span
                     role="button"
-                    className="icon-wrapper"
+                    className="glossary-sb-icon-wrapper"
                     onClick={() => this.props.toggle(false)}
                     onKeyDown={(e) => this.handleKeyPress(e)}
                     tabIndex={0}
@@ -110,7 +110,7 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
               >
                 {glossary_title}
               </h1>
-              <div className="search-wrapper">
+              <div className="glossary-sb-search-wrapper">
                 <MemoSearchConfigTypeahead
                   type={"glossary-sidebar"}
                   placeholder={glossary_placeholder}
@@ -119,7 +119,7 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
                   setQuery={this.props.setQuery}
                 />
               </div>
-              <div className="glossary-example">{glossary_example}</div>
+              <div className="glossary-sb-example">{glossary_example}</div>
             </div>
           </div>
           <div className="glossary-sidebar-content-wrapper">
