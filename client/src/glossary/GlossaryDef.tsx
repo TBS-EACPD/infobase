@@ -49,10 +49,10 @@ export class GlossaryDef extends React.Component<
     }[lang];
 
     return (
-      <div className="defintion-wrapper">
-        <div className="item-title">{this.props.title}</div>
+      <div className="glossary-sb-defintion-wrapper">
+        <div className="glossary-sb-item-title">{this.props.title}</div>
         <div
-          className="item-def"
+          className="glossary-sb-item-def"
           dangerouslySetInnerHTML={{
             __html: this.props.def,
           }}
@@ -60,7 +60,7 @@ export class GlossaryDef extends React.Component<
         <div>
           <span
             role="button"
-            className="back-button"
+            className="glossary-sb-back-button"
             onClick={() => this.props.closeItem()}
             onKeyDown={(e) => this.handleKeyPress(e)}
             tabIndex={0}
