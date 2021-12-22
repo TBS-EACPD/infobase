@@ -12,7 +12,8 @@ import { glossary_lite as glossary_search_config } from "src/search/search_confi
 
 import { MemoSearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
-import { SidebarContent } from "./GlossarySidebarContent";
+import { GlossaryDef } from "./GlossaryDef";
+import { GlossaryList } from "./GlossaryList";
 
 interface GlossaryMenuProps {
   show: boolean;
@@ -21,13 +22,10 @@ interface GlossaryMenuProps {
   setGlossaryItem: (key: string) => void;
   showList: boolean;
   setList: (value: boolean) => void;
-}
-
-interface GlossaryMenuState {
-  show: boolean;
   results: ResultProps[];
-  item: ResultProps;
   query: string;
+  setQuery: (query: string) => void;
+  setResults: (data: ResultProps[]) => void;
 }
 
 export interface ResultProps {
@@ -38,58 +36,13 @@ export interface ResultProps {
   get_compiled_definition: () => string;
 }
 
-export class GlossaryMenu extends React.Component<
-  GlossaryMenuProps,
-  GlossaryMenuState
-> {
+export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
   main = React.createRef<HTMLDivElement>();
   header = React.createRef<HTMLDivElement>();
 
   constructor(props: GlossaryMenuProps) {
     super(props);
-
-    this.state = {
-      show: this.props.show,
-      results: [],
-      item: this.props.item,
-      query: "",
-    };
   }
-
-  static getDerivedStateFromProps(
-    nextProps: GlossaryMenuProps,
-    prevState: GlossaryMenuState
-  ) {
-    const { show: next_show, item: next_item } = nextProps;
-    const { show: prev_show, item: prev_item } = prevState;
-
-    if (next_show !== prev_show) {
-      return {
-        show: next_show,
-      };
-    } else if (next_item !== prev_item) {
-      return {
-        item: next_item,
-      };
-    } else {
-      return null;
-    }
-  }
-
-  getResults = (childData: any) => {
-    const test = _.map(childData, (data) => ({
-      id: data.glossary_data.id,
-      title: data.glossary_data.title,
-      translation: data.glossary_data.translation,
-      raw_definition: data.glossary_data.raw_defintion,
-      get_compiled_definition: data.glossary_data.get_compiled_definition,
-    }));
-
-    this.setState({
-      results: test,
-    });
-    this.props.setList(true);
-  };
 
   closeItem() {
     this.props.setList(true);
@@ -103,10 +56,6 @@ export class GlossaryMenu extends React.Component<
     if (e.key === "Enter") {
       this.props.toggle(false);
     }
-  }
-
-  setQuery(query: string) {
-    this.setState({ query: query });
   }
 
   render() {
@@ -128,7 +77,7 @@ export class GlossaryMenu extends React.Component<
     return (
       <div
         className={
-          this.state.show
+          this.props.show
             ? "glossary-sidebar-wrapper active"
             : "glossary-sidebar-wrapper"
         }
@@ -166,23 +115,29 @@ export class GlossaryMenu extends React.Component<
                   type={"glossary-sidebar"}
                   placeholder={glossary_placeholder}
                   search_configs={[glossary_search_config]}
-                  getResults={(data: ResultProps[]) => this.getResults(data)}
-                  setQuery={(query: string) => this.setQuery(query)}
+                  getResults={this.props.setResults}
+                  setQuery={this.props.setQuery}
                 />
               </div>
               <div className="glossary-example">{glossary_example}</div>
             </div>
           </div>
           <div className="glossary-sidebar-content-wrapper">
-            <SidebarContent
-              title={this.state.item?.title}
-              def={this.state.item?.get_compiled_definition()}
-              results={this.state.results}
-              closeItem={() => this.closeItem()}
-              openItem={(key: string) => this.openItem(key)}
-              showList={this.props.showList}
-              query={this.state.query}
-            />
+            <div className="glossary-sidebar-content" id="gloss-sidebar">
+              {!this.props.showList ? (
+                <GlossaryDef
+                  closeItem={() => this.closeItem()}
+                  title={this.props.item.title}
+                  def={this.props.item.get_compiled_definition()}
+                />
+              ) : (
+                <GlossaryList
+                  openItem={(item) => this.openItem(item)}
+                  query={this.props.query}
+                  items_by_letter={this.props.results}
+                />
+              )}
+            </div>
           </div>
         </aside>
       </div>
