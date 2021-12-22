@@ -13,6 +13,17 @@ deploy_filter: &deploy_filter
 version: 2.1
 
 jobs:
+  lint:
+    docker:
+      - image: eaadtbs/ib-ci-build:3.0
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - checkout:
+          path: "~/InfoBase"
+      - run:
+          command: npm run eslint
+
   test_form_backend:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
@@ -380,6 +391,10 @@ jobs:
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
 
 workflows:
+  lint:
+    jobs:
+      - lint
+
   test_form_backend:
     jobs:
       - test_form_backend
