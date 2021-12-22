@@ -43,7 +43,7 @@ export const GlossaryTooltipWrapper = ({
     </a>
   ) : (
     <span
-      className="nowrap glossary-tippy-link"
+      className="nowrap glossary-sidebar-link"
       style={no_bottom_border ? { borderBottom: "none" } : undefined}
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       tabIndex={0}
