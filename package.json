@@ -4,8 +4,8 @@
   "scripts": {
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write --loglevel warn .",
-    "eslint": "npx eslint .",
-    "eslint:fix": "npx eslint --fix .",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint --fix .",
     "posteslint:fix": "npm run prettier:write",
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",

@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { Parser } from "json2csv";
+import { Parser } from "json2csv"; // eslint-disable-line node/no-unpublished-import
 import _ from "lodash";
 
 import mongoose from "mongoose";
