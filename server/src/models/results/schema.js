@@ -6,7 +6,7 @@ import { bilingual_field } from "../schema_utils.js";
 import { drr_docs, dp_docs } from "./results_common.js";
 
 const schema = `
-  extend type Root {
+  extend type Root { 
     indicator(id: String): Indicator
   }
   
@@ -145,38 +145,6 @@ export default function ({ models, loaders }) {
     indicator_id_loader,
   } = loaders;
 
-  async function get_all_target_counts(levels) {
-    return await ResultCount.find({ level: { $in: levels } });
-  }
-
-  async function get_gov_target_counts(doc) {
-    const orgs = await Org.find({});
-
-    return await get_org_target_counts(orgs, doc);
-  }
-
-  //this should take 6 DB queries, but the first 2 can be done in paralel
-  async function get_org_target_counts(orgs, doc) {
-    const dept_codes = _.chain(orgs).map("dept_code").compact().value();
-
-    if (_.isEmpty(dept_codes)) {
-      return null;
-    }
-
-    const [crsos, progs] = await Promise.all([
-      crso_from_deptcode_loader.loadMany(dept_codes),
-      prog_dept_code_loader.loadMany(dept_codes),
-    ]);
-
-    return await get_target_counts(
-      _.uniq([
-        ..._.chain(crsos).flatten().map("crso_id").filter().value(),
-        ..._.chain(progs).flatten().map("program_id").filter().value(),
-      ]),
-      doc
-    );
-  }
-
   async function get_target_counts(cr_or_program_ids, doc) {
     // turns [ [ { [attr]: val, ... }, undef ... ], undef ... ] into [ val, ... ] w/out undefs
     const flatmap_to_attr = (list_of_lists, attr) =>
@@ -231,6 +199,38 @@ export default function ({ models, loaders }) {
       records = _.filter(records, { doc });
     }
     return records;
+  }
+
+  async function get_all_target_counts(levels) {
+    return await ResultCount.find({ level: { $in: levels } });
+  }
+
+  //this should take 6 DB queries, but the first 2 can be done in paralel
+  async function get_org_target_counts(orgs, doc) {
+    const dept_codes = _.chain(orgs).map("dept_code").compact().value();
+
+    if (_.isEmpty(dept_codes)) {
+      return null;
+    }
+
+    const [crsos, progs] = await Promise.all([
+      crso_from_deptcode_loader.loadMany(dept_codes),
+      prog_dept_code_loader.loadMany(dept_codes),
+    ]);
+
+    return await get_target_counts(
+      _.uniq([
+        ..._.chain(crsos).flatten().map("crso_id").filter().value(),
+        ..._.chain(progs).flatten().map("program_id").filter().value(),
+      ]),
+      doc
+    );
+  }
+
+  async function get_gov_target_counts(doc) {
+    const orgs = await Org.find({});
+
+    return await get_org_target_counts(orgs, doc);
   }
 
   const subject_has_results = async (subject_id) => {
