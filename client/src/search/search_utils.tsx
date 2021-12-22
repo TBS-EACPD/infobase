@@ -70,7 +70,7 @@ const SearchHighlighter = ({
   );
 };
 
-const format_data = <Data extends unknown>(
+const format_data = <Data,>(
   name_function: (data: Data) => string,
   menu_content_function:
     | undefined
