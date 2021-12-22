@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 
 import { withRouter } from "react-router-dom";
@@ -22,6 +23,8 @@ const SidebarActivator = withRouter(
         showGlossary: false,
         glossaryItem: null,
         showList: true,
+        results: [],
+        query: "",
       };
 
       this.menu_ref = React.createRef();
@@ -93,10 +96,56 @@ const SidebarActivator = withRouter(
       });
     }
 
-    showList(value) {
+    setList(value) {
       this.setState({
         showList: value,
       });
+    }
+
+    setQuery(query) {
+      this.setState({ query: query });
+    }
+
+    setResults = (childData) => {
+      const test = _.map(childData, (data) => ({
+        id: data.glossary_data.id,
+        title: data.glossary_data.title,
+        translation: data.glossary_data.translation,
+        raw_definition: data.glossary_data.raw_defintion,
+        get_compiled_definition: data.glossary_data.get_compiled_definition,
+      }));
+
+      this.setState({
+        results: test,
+      });
+      this.setList(true);
+    };
+
+    get_glossary_items_by_letter() {
+      console.log(this.state.query);
+      const glossary_items =
+        this.state.results.length == 0 || this.state.query == ""
+          ? glossaryEntryStore.get_all()
+          : this.state.results;
+
+      const glossary_items_by_letter = _.chain(glossary_items)
+        .groupBy((item) => {
+          const first_letter = item.title[0];
+          if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
+            return "E";
+          }
+          return first_letter;
+        })
+        .map((items, letter) => {
+          const sorted_items = _.sortBy(items, "title");
+          return {
+            items: sorted_items,
+            letter,
+          };
+        })
+        .sortBy("letter")
+        .value();
+      return glossary_items_by_letter;
     }
 
     render() {
@@ -112,7 +161,11 @@ const SidebarActivator = withRouter(
             item={this.state.glossaryItem}
             setGlossaryItem={(key) => this.setGlossaryItem(key)}
             showList={this.state.showList}
-            setList={(value) => this.showList(value)}
+            setList={(value) => this.setList(value)}
+            setResults={(data) => this.setResults(data)}
+            setQuery={(query) => this.setQuery(query)}
+            results={this.get_glossary_items_by_letter()}
+            query={this.state.query}
           />
           <BackToTop
             focus={() => {
