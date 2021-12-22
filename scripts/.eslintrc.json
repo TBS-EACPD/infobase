@@ -1,0 +1,25 @@
+{
+  "plugins": ["node"],
+  "extends": ["../.eslintrc.json", "plugin:node/recommended"],
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaFeatures": {
+      "experimentalDecorators": true
+    },
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      { "ignores": ["modules"] }
+    ],
+    "no-console": 0
+  },
+  "globals": {
+    "process": true
+  }
+}
