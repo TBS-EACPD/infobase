@@ -2,8 +2,10 @@
   "name": "infobase-monorepo",
   "description": "",
   "scripts": {
-    "prettier_write": "prettier --write",
-    "prettier_check": "prettier --check",
+    "prettier": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "eslint": "npx eslint form_backend/src; npx eslint server/src; npx eslint client/src",
+    "eslint:fix": "npx eslint --fix form_backend/src; npx eslint --fix server/src; npx eslint --fix client/src",
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
     "infobase_tmux_init": "npm run tmux_env",
