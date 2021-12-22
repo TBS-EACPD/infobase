@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { SubjectLike } from "src/models/subjects";
+import type { SubjectLike } from "src/models/subjects";
 
 import { SafeJSURL } from "src/general_utils";
 
