@@ -3,7 +3,7 @@
   "description": "",
   "scripts": {
     "prettier": "prettier --check .",
-    "prettier:write": "prettier --write .",
+    "prettier:write": "prettier --write --loglevel warn .",
     "eslint": "npx eslint form_backend/src; npx eslint server/src; npx eslint client/src",
     "eslint:fix": "npx eslint --fix form_backend/src; npx eslint --fix server/src; npx eslint --fix client/src",
     "posteslint:fix": "npm run prettier:write",
