@@ -117,15 +117,15 @@ hr {
   visibility: visible;
 }
 
-.glossary-tippy-link,
-.glossary-tippy-link:visited {
+.glossary-sidebar-link,
+.glossary-sidebar-link:visited {
   text-decoration: none;
   border-bottom: 1px dotted $textColor;
   transition: width 2s;
   opacity: 0.8;
 }
 
-.glossary-tippy-link:hover {
+.glossary-sidebar-link:hover {
   cursor: pointer;
 }
 

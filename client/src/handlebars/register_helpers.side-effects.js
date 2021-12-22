@@ -670,7 +670,7 @@ HandlebarsWithPrototypeAccess.registerHelper(
   "gl_tt",
   function glossary_tooltip(display, key) {
     return new HandlebarsWithPrototypeAccess.SafeString(
-      `<span class="nowrap glossary-tippy-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip">${display}</span>`
+      `<span class="nowrap glossary-sidebar-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip">${display}</span>`
     );
   }
 );
