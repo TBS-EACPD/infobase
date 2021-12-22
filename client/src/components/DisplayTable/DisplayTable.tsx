@@ -96,8 +96,8 @@ const get_column_config_defaults = (index: number) => ({
     plain_b: CellValue,
     descending: boolean,
     // available for any special cases that need access to the actual cell value, not the "plain" version usually used be sorting
-    cell_value_a: CellValue, // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
-    cell_value_b: CellValue // eslint-disable-line @typescript-eslint/no-unused-vars-experimental
+    _cell_value_a: CellValue,
+    _cell_value_b: CellValue
   ): 1 | 0 | -1 => smart_sort_func(plain_a, plain_b, descending),
 });
 type ColumnConfig = Partial<ReturnType<typeof get_column_config_defaults>> & {
