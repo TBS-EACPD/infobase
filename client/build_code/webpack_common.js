@@ -138,14 +138,11 @@ function get_plugins({
       retryDelay: 100,
       maxRetries: 3,
     }),
-    // Skip eslint and TS checks in CI. These are run outside webpack in a static analysis job, don't need to repeat in the build job
-    !is_ci &&
-      new ESLintPlugin({ extensions: ["js", "ts", "tsx"], cache: true }),
-    !is_ci &&
-      new ForkTsCheckerWebpackPlugin({
-        async: true,
-        typescript: { configFile: "tsconfig.json" },
-      }),
+    new ESLintPlugin({ extensions: ["js", "ts", "tsx"], cache: true }),
+    new ForkTsCheckerWebpackPlugin({
+      async: true,
+      typescript: { configFile: "tsconfig.json" },
+    }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ paths, compilation }) {
