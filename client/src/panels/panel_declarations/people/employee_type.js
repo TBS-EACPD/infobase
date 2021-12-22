@@ -25,7 +25,7 @@ const { people_years } = year_templates;
 const { tenure } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: function (gov) {
+  gov: function () {
     const { orgEmployeeType } = this.tables;
     return _.chain(tenure)
       .values()
@@ -70,7 +70,7 @@ export const declare_employee_type_panel = () =>
   declare_panel({
     panel_key: "employee_type",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       depends_on: ["orgEmployeeType"],
       title: text_maker("employee_type_title"),
       glossary_keys: [

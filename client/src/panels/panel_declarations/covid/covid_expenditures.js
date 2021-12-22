@@ -415,13 +415,13 @@ export const declare_covid_expenditures_panel = () =>
   declare_panel({
     panel_key,
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type_name, panel_key) => ({
+    panel_config_func: () => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
       title: text_maker("covid_expenditures_estimated_exp"),
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: () => get_source_links(["COVID"]),
-      calculate: (subject, options) => {
+      calculate: (subject) => {
         const years_with_expenditures = yearsWithCovidDataStore.lookup(
           subject.id
         )?.years_with_expenditures;

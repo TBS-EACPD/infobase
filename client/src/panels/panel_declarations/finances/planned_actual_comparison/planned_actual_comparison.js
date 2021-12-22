@@ -21,10 +21,10 @@ export const declare_planned_actual_comparison_panel = () =>
   declare_panel({
     panel_key: "planned_actual_comparison",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("planned_actual_title"),
-      source: (subject) => get_source_links(["DP", "DRR", "PA"]),
+      source: () => get_source_links(["DP", "DRR", "PA"]),
       calculate(subject) {
         if (subject.subject_type === "dept") {
           if (

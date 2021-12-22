@@ -36,7 +36,7 @@ function populate_stores(parsed_models) {
     crso_deptcodes[id] = dept_code;
   });
 
-  _.each(programs, ({ dept_code, activity_code, crso_id }) => {
+  _.each(programs, ({ dept_code, activity_code }) => {
     const prog_id = `${dept_code}-${activity_code}`;
     program_deptcodes[prog_id] = dept_code;
   });
@@ -50,7 +50,7 @@ function populate_stores(parsed_models) {
 
   //initialize all depts and tags to have empty array of footnotes
   footnotes_by_deptcode = _.chain(depts)
-    .map(({ org_id, dept_code }) => [dept_code, []])
+    .map(({ dept_code }) => [dept_code, []])
     .fromPairs()
     .value();
 

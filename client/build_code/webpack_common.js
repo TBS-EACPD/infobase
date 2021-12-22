@@ -145,7 +145,7 @@ function get_plugins({
     }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
-      onDetected({ module: webpackModuleRecord, paths, compilation }) {
+      onDetected({ paths, compilation }) {
         /*
           Reminder: circular dependencies aren't _necessarily_ problematic. The concern is that when they _are_ the source of a bug,
           they can be a very hard to identify source. Best to avoid creating them, but at a certain point avoiding them can start

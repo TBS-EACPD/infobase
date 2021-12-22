@@ -29,13 +29,13 @@ export const declare_simplographic_panel = () =>
   declare_panel({
     panel_key: "simplographic",
     subject_types: ["gov"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       footnotes: false,
       requires_result_counts: true,
 
       depends_on: ["orgVoteStatPa", "orgEmployeeRegion"],
       title: text_maker("simplographic_title"),
-      calculate(dept) {
+      calculate() {
         const { orgVoteStatPa, orgEmployeeRegion } = this.tables;
         const gov_exp_pa_last_year = orgVoteStatPa
           .q()

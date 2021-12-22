@@ -124,7 +124,7 @@ export const declare_covid_intro_panel = () =>
   declare_panel({
     panel_key: "covid_intro",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type_name, panel_key) => ({
+    panel_config_func: () => ({
       requires_years_with_covid_data: true,
       footnotes: ["COVID"],
       title: text_maker("covid_intro_panel_title"),

@@ -24,7 +24,7 @@ export const declare_covid_key_concepts_panel = () =>
   declare_panel({
     panel_key,
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       is_static: true,
       footnotes: false,
       source: false,

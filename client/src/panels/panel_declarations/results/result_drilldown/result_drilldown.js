@@ -122,10 +122,10 @@ export const declare_explore_results_panel = () =>
   declare_panel({
     panel_key: "explore_results",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR", "DP"],
       depends_on: ["programSpending", "programFtes"],
-      source: (subject) => get_source_links(["DP", "DRR"]),
+      source: () => get_source_links(["DP", "DRR"]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       calculate(subject) {

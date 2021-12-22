@@ -109,7 +109,7 @@ export const declare_subject_offering_services_panel = () =>
   declare_panel({
     panel_key: "subject_offering_services",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       title:
         subject_type === "gov"
           ? text_maker("subject_offering_services_title")

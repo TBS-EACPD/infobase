@@ -70,11 +70,11 @@ export const declare_top_spending_areas_panel = () =>
   declare_panel({
     panel_key: "top_spending_areas",
     subject_types: ["program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["programSobjs"],
       footnotes: ["SOBJ"],
       title: text_maker("top_spending_areas_title"),
-      calculate(subject, options) {
+      calculate(subject) {
         if (_.isEmpty(this.tables.programSobjs.programs.get(subject))) {
           return false;
         }

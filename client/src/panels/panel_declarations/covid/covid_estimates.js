@@ -169,7 +169,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
         _.reduce(data, (memo, { vote, stat }) => memo + vote + stat, 0)
       )
       .toPairs()
-      .sortBy(([org_id, total]) => total)
+      .sortBy(([_org_id, total]) => total)
       .last()
       .value();
 
@@ -609,14 +609,14 @@ export const declare_covid_estimates_panel = () =>
   declare_panel({
     panel_key,
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type_name, panel_key) => ({
+    panel_config_func: () => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
       title: text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
       source: () => get_source_links(["COVID"]),
-      calculate: function (subject, options) {
+      calculate: function (subject) {
         const years_with_estimates =
           yearsWithCovidDataStore.has(subject.id) &&
           yearsWithCovidDataStore.lookup(subject.id).years_with_estimates;

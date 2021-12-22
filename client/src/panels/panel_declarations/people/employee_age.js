@@ -33,7 +33,7 @@ const { people_years } = year_templates;
 const { age_groups } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: function (gov) {
+  gov: function () {
     const { orgEmployeeAgeGroup } = this.tables;
     const { orgEmployeeAvgAge } = this.tables;
 
@@ -113,7 +113,7 @@ export const declare_employee_age_panel = () =>
   declare_panel({
     panel_key: "employee_age",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       depends_on: ["orgEmployeeAgeGroup", "orgEmployeeAvgAge"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_age_title"),

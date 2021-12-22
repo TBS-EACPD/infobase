@@ -406,7 +406,7 @@ class Goco extends React.Component {
               onMouseLeave={(child_node, e) =>
                 handleHover(child_node, e.target, node.data.children)
               }
-              onClick={(child_node, e) =>
+              onClick={(child_node) =>
                 window.open(tick_map[child_node.indexValue], "_blank")
               }
               graph_height="500px"
@@ -528,7 +528,7 @@ export const declare_gocographic_panel = () =>
   declare_panel({
     panel_key: "gocographic",
     subject_types: ["gov"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("gocographic_title"),
       footnotes: ["GOCO"],

@@ -121,7 +121,7 @@ const get_children_grouper = createSelector(_.identity, () => {
     return _.chain(children)
       .groupBy("data.type")
       .toPairs()
-      .sortBy(([type_key, group]) => !_.includes(["dr", "result"], type_key)) //make results show up first
+      .sortBy(([type_key, _group]) => !_.includes(["dr", "result"], type_key)) //make results show up first
       .map(([type_key, node_group]) => ({
         display: get_type_name(type_key),
         node_group,

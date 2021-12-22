@@ -117,10 +117,9 @@ export const fte_header = createSelector(
 
 export const ResultNodeContent = ({
   node: {
-    data: { result, contributing_programs, result_subject, indicators },
+    data: { contributing_programs },
     children: indicator_nodes,
   },
-  doc,
 }) => (
   <div className="indicator-container-container">
     <div className="indicator-container">

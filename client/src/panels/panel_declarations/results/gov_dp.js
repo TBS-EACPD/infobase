@@ -72,7 +72,7 @@ export const declare_gov_dp_panel = () =>
   declare_panel({
     panel_key: "gov_dp",
     subject_types: ["gov"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       requires_result_counts: true,
       title: text_maker("gov_dp_summary_title", {
         year: current_dp_year,
@@ -133,7 +133,7 @@ export const declare_gov_dp_panel = () =>
         };
       },
       footnotes: ["RESULTS", "DP"],
-      source: (subject) => get_source_links(["DP"]),
+      source: () => get_source_links(["DP"]),
       render({ title, calculations, sources, footnotes }) {
         const {
           panel_args: {

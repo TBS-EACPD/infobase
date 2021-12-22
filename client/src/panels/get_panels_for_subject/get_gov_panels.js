@@ -48,7 +48,7 @@ import {
 
 import { services_feature_flag } from "src/core/injected_build_constants";
 
-export const get_gov_panels = (subject) => ({
+export const get_gov_panels = () => ({
   intro: [declare_simplographic_panel()],
   financial: [
     declare_financial_key_concepts_panel(),

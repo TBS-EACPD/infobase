@@ -43,12 +43,12 @@ export const declare_vote_stat_split_panel = () =>
   declare_panel({
     panel_key: "vote_stat_split",
     subject_types: ["program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["programVoteStat"],
       footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
       title: text_maker("vote_stat_split_title"),
-      calculate(subject, options) {
+      calculate(subject) {
         const { programVoteStat } = this.tables;
 
         const vote_stat = _.map(

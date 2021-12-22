@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { StatelessModal } from "src/components/modals_and_popovers/index";

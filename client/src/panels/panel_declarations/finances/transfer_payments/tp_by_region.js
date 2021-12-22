@@ -68,7 +68,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
 
   const [largest_total_prov_code, largest_total_value] = _.chain(last_year_data)
     .toPairs()
-    .sortBy(([prov_code, value]) => value)
+    .sortBy(([_prov_code, value]) => value)
     .last()
     .value();
   const largest_total_prov = provinces[largest_total_prov_code].text;
@@ -81,7 +81,7 @@ const get_text_args = (subject, transfer_payment_data, per_capita_data) => {
     show_per_capita_data
       ? _.chain(last_year_data_per_capita)
           .toPairs()
-          .sortBy(([prov_code, value]) => value)
+          .sortBy(([_prov_code, value]) => value)
           .last()
           .value()
       : [false, false];
@@ -313,7 +313,7 @@ export const declare_tp_by_region_panel = () =>
   declare_panel({
     panel_key: "tp_by_region",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["orgTransferPaymentsRegion"],
       title: text_maker("tp_by_region_title"),
       calculate: function (subject) {

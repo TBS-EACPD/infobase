@@ -151,7 +151,8 @@ export const TextPanel = (props) => {
 */
 
 //Dummy component that will be remapped to flexboxgrid columns
-const Col = ({ children, size }) => null;
+// TS TODO, Col should take props { children, size }
+const Col = () => null;
 Col.propTypes = {
   size: PropTypes.number.isRequired,
   isText: PropTypes.bool,

@@ -25,7 +25,7 @@ const { people_years } = year_templates;
 const { gender } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: function (gov) {
+  gov: function () {
     const { orgEmployeeGender } = this.tables;
 
     const gov_five_year_total_head_count = _.chain(
@@ -77,7 +77,7 @@ export const declare_employee_gender_panel = () =>
   declare_panel({
     panel_key: "employee_gender",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       depends_on: ["orgEmployeeGender"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_gender_title"),

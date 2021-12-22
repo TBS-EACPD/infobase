@@ -70,13 +70,13 @@ export const declare_gov_drr_panel = () =>
   declare_panel({
     panel_key: "gov_drr",
     subject_types: ["gov"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       requires_result_counts: true,
       footnotes: ["RESULTS", "DRR"],
       title: text_maker("gov_drr_summary_title", {
         year: result_docs[current_drr_key].year,
       }),
-      source: (subject) => get_source_links(["DRR"]),
+      source: () => get_source_links(["DRR"]),
 
       calculate() {
         const verbose_gov_counts = ResultCounts.get_gov_counts();

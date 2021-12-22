@@ -93,14 +93,14 @@ export const declare_spend_rev_split_panel = () =>
   declare_panel({
     panel_key: "spend_rev_split",
     subject_types: ["dept", "program"],
-    panel_config_func: (subject_type, panel_key) => {
+    panel_config_func: (subject_type) => {
       switch (subject_type) {
         case "dept":
           return {
             ...common_panel_config,
             depends_on: ["orgSobjs"],
             footnotes: ["SOBJ_REV"],
-            calculate(subject, options) {
+            calculate(subject) {
               const { orgSobjs } = this.tables;
               const last_year_spend = orgSobjs.sum_cols_by_grouped_data(
                 "{{pa_last_year}}",
@@ -136,7 +136,7 @@ export const declare_spend_rev_split_panel = () =>
           return {
             ...common_panel_config,
             depends_on: ["programSobjs"],
-            calculate(subject, options) {
+            calculate(subject) {
               const { programSobjs } = this.tables;
               const prog_rows = programSobjs.programs.get(subject);
               const rev_split = rows_to_rev_split(prog_rows);

@@ -21,7 +21,7 @@ export const declare_profile_panel = () =>
   declare_panel({
     panel_key: "profile",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       title: text_maker(`profile`),
       calculate: (subject) => {
         switch (subject_type) {
@@ -130,7 +130,7 @@ export const declare_profile_panel = () =>
 
             return [label, item];
           })
-          .filter(([label, item]) => item)
+          .filter(([_label, item]) => item)
           .value();
 
         return (
@@ -146,7 +146,7 @@ export const declare_description_panel = () =>
   declare_panel({
     panel_key: "description",
     subject_types: ["tag"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       footnotes: false,
       calculate: (subject) => !_.isEmpty(subject.description),
       title: text_maker("tag_desc_title"),
