@@ -74,6 +74,11 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
       fr: "Glossaire",
     }[lang];
 
+    const glossary_navigation = {
+      en: "Close glossary",
+      fr: "Fermé le glossaire",
+    }[lang];
+
     return (
       <div
         className={
@@ -90,7 +95,7 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
         >
           <div className="glossary-sidebar-header-wrapper" ref={this.header}>
             <div className="glossary-sidebar-header">
-              <div role="navigation" aria-label="Glossary navigation">
+              <div role="navigation" aria-label={glossary_navigation}>
                 <div className={"glossary-sb-close-button"}>
                   <span
                     role="button"

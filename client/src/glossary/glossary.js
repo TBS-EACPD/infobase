@@ -3,8 +3,6 @@ import React, { Fragment } from "react";
 
 import { create_text_maker_component, BackToTop } from "src/components/index";
 
-import { glossaryEntryStore } from "src/models/glossary";
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import {
@@ -17,35 +15,14 @@ import {
 import { rpb_link } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
+import { get_glossary_items_by_letter } from "./glossary_utils";
+
 import { GlossarySearch } from "./GlossarySearch";
 
 import glossary_text from "./glossary.yaml";
 import "./glossary.scss";
 
 const { text_maker, TM } = create_text_maker_component(glossary_text);
-
-function get_glossary_items_by_letter() {
-  const glossary_items = glossaryEntryStore.get_all();
-
-  const glossary_items_by_letter = _.chain(glossary_items)
-    .groupBy((item) => {
-      const first_letter = item.title[0];
-      if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
-        return "E";
-      }
-      return first_letter;
-    })
-    .map((items, letter) => {
-      const sorted_items = _.sortBy(items, "title");
-      return {
-        items: sorted_items,
-        letter,
-      };
-    })
-    .sortBy("letter")
-    .value();
-  return glossary_items_by_letter;
-}
 
 const tables = Table.store.get_all();
 const table_links_by_tag = _.chain(tables)
