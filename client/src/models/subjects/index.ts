@@ -10,8 +10,6 @@ import { Program, ProgramTag } from "./Program";
 
 export { Gov, Dept, CRSO, Program, ProgramTag };
 
-Dept.subject_type;
-
 const Subjects = { Gov, Dept, CRSO, Program, ProgramTag };
 
 export const api_subject_types = ["service"] as const;
