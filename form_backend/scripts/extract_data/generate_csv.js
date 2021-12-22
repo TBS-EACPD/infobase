@@ -33,7 +33,7 @@ async function extractor() {
         if (collection.length > 0) {
           const template_name = _.keys(templates)[index];
 
-          const flattened_form_logs = _.map(collection, function (sub, ind) {
+          const flattened_form_logs = _.map(collection, function (sub) {
             return _.chain(
               _.reduce(
                 sub._doc,
