@@ -80,7 +80,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
   declare_panel({
     panel_key: "in_year_voted_stat_split",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => {
+    panel_config_func: (subject_type) => {
       switch (subject_type) {
         case "gov":
           return {

@@ -10,7 +10,7 @@ import {
   declare_resource_structure_panel,
 } from "src/panels/panel_declarations/index";
 
-export const get_tag_panels = (subject) => ({
+export const get_tag_panels = () => ({
   intro: [
     declare_tagging_key_concepts_panel(),
     declare_description_panel(),

@@ -47,7 +47,7 @@ export const declare_financial_key_concepts_panel = () =>
   declare_panel({
     panel_key: "financial_key_concepts",
     subject_types: ["gov", "dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [
@@ -74,7 +74,7 @@ export const declare_results_key_concepts_panel = () =>
   declare_panel({
     panel_key: "results_key_concepts",
     subject_types: ["gov", "dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [
@@ -96,7 +96,7 @@ export const declare_people_key_concepts_panel = () =>
   declare_panel({
     panel_key: "people_key_concepts",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [
@@ -117,7 +117,7 @@ export const declare_tagging_key_concepts_panel = () =>
   declare_panel({
     panel_key: "tagging_key_concepts",
     subject_types: ["tag"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       ...common_panel_config,
       render: curried_render({
         q_a_key_pairs: [

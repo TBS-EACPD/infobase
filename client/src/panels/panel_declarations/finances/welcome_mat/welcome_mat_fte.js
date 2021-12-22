@@ -67,7 +67,7 @@ export const format_and_get_fte = (type, subject) => {
 
   const graph_data = _.chain(series_labels)
     .zip([historical_graph_data, planned_graph_data])
-    .filter(([id, formatted_data_array]) => formatted_data_array.length > 0)
+    .filter(([_id, formatted_data_array]) => formatted_data_array.length > 0)
     .map(([id, data]) => ({ id, data }))
     .value();
 

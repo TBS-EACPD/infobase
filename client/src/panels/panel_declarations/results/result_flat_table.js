@@ -317,10 +317,10 @@ export const declare_results_table_panel = () =>
   declare_panel({
     panel_key: "results_flat_table",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR"],
       depends_on: ["programSpending", "programFtes"],
-      source: (subject) => get_source_links(["DRR"]),
+      source: () => get_source_links(["DRR"]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       title: text_maker("result_flat_table_title", {

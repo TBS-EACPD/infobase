@@ -25,7 +25,7 @@ const { people_years } = year_templates;
 const { ex_levels } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: (orgEmployeeExLvl, gov) => {
+  gov: (orgEmployeeExLvl) => {
     const gov_five_year_total_head_count = _.chain(
       orgEmployeeExLvl.q().gov_grouping()
     )
@@ -89,7 +89,7 @@ export const declare_employee_executive_level_panel = () =>
   declare_panel({
     panel_key: "employee_executive_level",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       depends_on: ["orgEmployeeExLvl"],
       title: text_maker("employee_executive_level_title"),
       calculate: function (subject) {

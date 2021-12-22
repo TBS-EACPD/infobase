@@ -154,7 +154,7 @@ function create_rooted_resource_hierarchy({ year, root_subject }) {
 export class SingleTagResourceExplorer extends AbstractExplorerScheme {
   Component = SingleTagResourceExplorerComponent;
 
-  constructor(subject, has_planning_data, has_actual_data) {
+  constructor(subject, has_planning_data) {
     super();
     this.subject = subject;
     this.initial_scheme_state = {

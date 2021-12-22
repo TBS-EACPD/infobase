@@ -529,7 +529,7 @@ const render = function ({ calculations, footnotes, sources, glossary_keys }) {
   );
 };
 
-const calculate = function (subject, options) {
+const calculate = function (subject) {
   const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
 
   const query_subject = subject.subject_type === "gov" ? undefined : subject;
@@ -592,7 +592,7 @@ const calculate = function (subject, options) {
             series.untrimmed_year_templates
           )
             .zip(series.untrimmed_values)
-            .dropWhile(([year_template, value]) => !value)
+            .dropWhile(([_year_template, value]) => !value)
             .unzip()
             .value();
 
@@ -736,7 +736,7 @@ export const declare_auth_exp_planned_spending_panel = () =>
   declare_panel({
     panel_key: "auth_exp_planned_spending",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["orgVoteStatPa", "programSpending", "orgVoteStatEstimates"],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
       title: (subject) =>

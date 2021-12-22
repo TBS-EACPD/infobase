@@ -242,7 +242,7 @@ const IndicatorList = ({ indicators }) => (
 const QuadrantDefList = ({ defs }) => (
   <div>
     <dl className="quadrant-dl">
-      {defs.map(({ key, val }, ix) => (
+      {defs.map(({ key, val }) => (
         <div key={key} className="number-box">
           <dt>{key}</dt>
           <dd>
@@ -318,12 +318,7 @@ const make_status_icons = (width) => {
 const large_status_icons = make_status_icons("41px");
 const status_icons = make_status_icons("25px");
 
-const StatusIconTable = ({
-  icon_counts,
-  onIconClick,
-  onClearClick,
-  active_list,
-}) => (
+const StatusIconTable = ({ icon_counts, onIconClick, active_list }) => (
   <div className="status-icon-table">
     <VisibilityControl
       items={_.map(ordered_status_keys, (status_key) => ({

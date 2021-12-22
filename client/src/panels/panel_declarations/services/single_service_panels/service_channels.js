@@ -114,7 +114,7 @@ export const declare_single_service_channels_panel = () =>
   declare_panel({
     panel_key: "single_service_channels",
     subject_types: ["service"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("single_service_channels_title"),
       footnotes: false,
       source: () => get_source_links(["SERVICES"]),

@@ -94,7 +94,7 @@ const Pane = ({ size, children, is_header, noPadding }) => (
 
 const HeaderPane = (props) => <Pane is_header {...props} />;
 
-const PaneItem = ({ hide_a11y, children, textSize, hide_lg }) => (
+const PaneItem = ({ children, textSize, hide_lg }) => (
   <div
     className={classNames(
       "mat-grid__inner-panel",
@@ -1018,7 +1018,7 @@ export const declare_welcome_mat_panel = () =>
   declare_panel({
     panel_key: "welcome_mat",
     subject_types: ["gov", "dept", "program", "crso"],
-    panel_config_func: (subject_type, panel_key) => {
+    panel_config_func: (subject_type) => {
       switch (subject_type) {
         case "gov":
           return {

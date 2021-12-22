@@ -55,7 +55,7 @@ export const declare_dead_program_warning_panel = () =>
   declare_panel({
     panel_key: "dead_program_warning",
     subject_types: ["program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       ...dead_panel_config,
 
       render() {
@@ -72,7 +72,7 @@ export const declare_dead_crso_warning_panel = () =>
   declare_panel({
     panel_key: "dead_crso_warning",
     subject_types: ["crso"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       ...dead_panel_config,
 
       render() {
@@ -89,7 +89,7 @@ export const declare_m2m_tag_warning_panel = () =>
   declare_panel({
     panel_key: "m2m_warning",
     subject_types: ["tag"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       ...common_panel_config,
 
       calculate(subject) {
@@ -125,7 +125,7 @@ export const declare_late_results_warning_panel = () =>
   declare_panel({
     panel_key: "late_results_warning",
     subject_types: ["gov", "dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => {
+    panel_config_func: (subject_type) => {
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
         .reverse()
         .filter(({ late_results_orgs }) => late_results_orgs.length > 0)
@@ -215,7 +215,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
   declare_panel({
     panel_key: `late_${planned_or_actual}_resources_warning`,
     subject_types: ["gov", "dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => {
+    panel_config_func: (subject_type) => {
       switch (subject_type) {
         case "gov":
           return {

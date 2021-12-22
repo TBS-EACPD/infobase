@@ -3,7 +3,7 @@
  */
 
 // eslint-disable-next-line import/no-commonjs
-module.exports = (on, config) => {
+module.exports = (on) => {
   on("task", {
     log(message) {
       console.log(message);

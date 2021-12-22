@@ -239,7 +239,7 @@ export const declare_single_service_standards_panel = () =>
   declare_panel({
     panel_key: "single_service_standards",
     subject_types: ["service"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("service_standards_title"),
       footnotes: false,
       source: () => get_source_links(["SERVICES"]),

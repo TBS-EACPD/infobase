@@ -108,10 +108,10 @@ export const declare_spending_in_tag_perspective_panel = () =>
   declare_panel({
     panel_key: "spending_in_tag_perspective",
     subject_types: ["program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("program_spending_in_tag_perspective_title"),
       depends_on: ["programSpending"],
-      calculate(subject, options) {
+      calculate(subject) {
         if (is_a11y_mode) {
           //turn off this panel in a11y mode
           return false;

@@ -13,7 +13,7 @@ export const declare_resource_structure_panel = () =>
     panel_key: "resource_structure",
     subject_types: ["tag"],
 
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       footnotes: false,
       title: text_maker("resource_structure_title"),
       depends_on: ["programSpending", "programFtes"],

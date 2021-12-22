@@ -31,7 +31,7 @@ export const declare_employee_totals_panel = () =>
   declare_panel({
     panel_key: "employee_totals",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       depends_on: ["orgEmployeeType"],
       title: text_maker(subject_type + "_employee_totals_title"),
       calculate(subject) {

@@ -381,7 +381,7 @@ export const declare_crso_by_prog_fte_panel = () =>
   declare_panel({
     panel_key: "crso_by_prog_fte",
     subject_types: ["crso"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       footnotes: ["PLANNED_FTE", "FTE"],
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("crso_by_prog_fte_title"),
@@ -393,7 +393,7 @@ export const declare_crso_by_prog_exp_panel = () =>
   declare_panel({
     panel_key: "crso_by_prog_exp",
     subject_types: ["crso"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       footnotes: ["PLANNED_EXP", "EXP"],
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("crso_by_prog_exp_title"),

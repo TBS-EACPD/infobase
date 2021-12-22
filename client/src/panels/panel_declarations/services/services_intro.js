@@ -132,7 +132,7 @@ export const declare_services_intro_panel = () =>
   declare_panel({
     panel_key: "services_intro",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("services_intro_title"),
       calculate: (subject) => {
         return {

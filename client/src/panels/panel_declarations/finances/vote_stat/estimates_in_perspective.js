@@ -20,11 +20,11 @@ export const declare_estimates_in_perspective_panel = () =>
   declare_panel({
     panel_key: "estimates_in_perspective",
     subject_types: ["dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("estimates_perspective_title"),
       depends_on: ["orgVoteStatEstimates"],
       machinery_footnotes: false,
-      calculate(subject, options) {
+      calculate(subject) {
         const { orgVoteStatEstimates } = this.tables;
         const gov_q = orgVoteStatEstimates.q(Gov.instance);
         const dept_q = orgVoteStatEstimates.q(subject);

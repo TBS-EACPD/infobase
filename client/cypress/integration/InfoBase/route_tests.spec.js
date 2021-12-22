@@ -322,7 +322,7 @@ const run_tests_from_config = ({
         if (expect_error_boundary) {
           // To catch whatever error triggered this error boundary, otherwise this would fail even if it
           // results in the expected error boundary
-          cy.on("fail", (e, test) => {
+          cy.on("fail", (e) => {
             console.log(
               "This test was expected to fail. It did, with the following error",
               e

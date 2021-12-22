@@ -31,38 +31,36 @@ export class PinnedFAQ extends React.Component {
 
     return (
       <MediaQuery maxWidth={maxLargeDevice}>
-        {(matches) => (
-          <PinnedContent
-            local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}
-          >
-            <div className={classNames("mrgn-bttm-md")}>
-              <ButtonToolbar style={{ margin: 0 }}>
-                <AutoAccordion
-                  title={trivial_text_maker("infographic_faq")}
-                  isInitiallyExpanded={is_initially_expanded}
-                  background_color={background_color}
+        <PinnedContent
+          local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}
+        >
+          <div className={classNames("mrgn-bttm-md")}>
+            <ButtonToolbar style={{ margin: 0 }}>
+              <AutoAccordion
+                title={trivial_text_maker("infographic_faq")}
+                isInitiallyExpanded={is_initially_expanded}
+                background_color={background_color}
+              >
+                <div
+                  style={{
+                    paddingLeft: "10px",
+                    paddingRight: "10px",
+                  }}
                 >
-                  <div
-                    style={{
-                      paddingLeft: "10px",
-                      paddingRight: "10px",
-                    }}
-                  >
-                    <KeyConceptList
-                      question_answer_pairs={_.map(
-                        q_a_key_pairs,
-                        ([q_key, a_key]) => [
-                          <TM key={"q"} k={q_key} args={{ subject }} />,
-                          <TM key={"a"} k={a_key} args={{ subject }} />,
-                        ]
-                      )}
-                    />
-                  </div>
-                </AutoAccordion>
-              </ButtonToolbar>
-            </div>
-          </PinnedContent>
-        )}
+                  <KeyConceptList
+                    question_answer_pairs={_.map(
+                      q_a_key_pairs,
+                      ([q_key, a_key]) => [
+                        <TM key={"q"} k={q_key} args={{ subject }} />,
+                        <TM key={"a"} k={a_key} args={{ subject }} />,
+                      ]
+                    )}
+                  />
+                </div>
+              </AutoAccordion>
+            </ButtonToolbar>
+          </div>
+        </PinnedContent>
       </MediaQuery>
     );
   }

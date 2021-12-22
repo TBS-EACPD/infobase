@@ -102,9 +102,9 @@ const StatusGrid = (props) => {
   const is_single_indicator = _.some(props, (value) => value === total);
 
   const data = _.chain(props)
-    .pickBy((val, key) => val > 0 || is_single_indicator)
+    .pickBy((val) => val > 0 || is_single_indicator)
     .toPairs()
-    .groupBy(([key, val]) => key)
+    .groupBy(([key, _val]) => key)
     .map((amounts, status_key) => {
       const key_total = _.sumBy(amounts, 1);
       return {
@@ -167,7 +167,7 @@ const StatusGrid = (props) => {
           {_.chain(viz_data)
             .groupBy("status_key")
             .map((group, status_key) => [group, status_key])
-            .sortBy(([group, status_key]) => icon_order[status_key])
+            .sortBy(([_group, status_key]) => icon_order[status_key])
             .map(([group, status_key]) => (
               <IconArray
                 key={status_key}
@@ -386,11 +386,11 @@ export const declare_drr_summary_panel = () =>
   declare_panel({
     panel_key: "drr_summary",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       footnotes: ["RESULTS", "DRR"],
-      source: (subject) => get_source_links(["DRR"]),
+      source: () => get_source_links(["DRR"]),
       title: text_maker("drr_summary_title", { year: current_drr_year }),
       calculate(subject) {
         const verbose_counts = (() => {

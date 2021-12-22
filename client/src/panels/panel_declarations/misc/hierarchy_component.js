@@ -166,7 +166,7 @@ export const org_external_hierarchy = ({ subject, href_generator }) => {
               .filter((node) => !node.is_dead || is_subject(node))
               .groupBy("inst_form.name")
               .toPairs()
-              .sortBy(([type, group]) => _.includes(group, subject))
+              .sortBy(([_type, group]) => _.includes(group, subject))
               .reverse()
               .map(([type, orgs]) => ({
                 name: type,
@@ -339,14 +339,7 @@ export const tag_hierarchy = ({
   };
 };
 
-export const crso_hierarchy = ({
-  subject,
-  href_generator,
-  show_siblings,
-  show_uncles,
-  show_cousins,
-  show_dead_sos,
-}) => {
+export const crso_hierarchy = ({ subject, href_generator }) => {
   //From Gov to programs under CRSO
   const is_subject = (subj) => subj === subject;
 

@@ -202,7 +202,7 @@ export const declare_services_digital_status_panel = () =>
   declare_panel({
     panel_key: "services_digital_status",
     subject_types: ["gov", "dept", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("services_digital_status"),
       calculate: (subject) => {
         return {

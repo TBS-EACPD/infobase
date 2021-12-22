@@ -22,7 +22,7 @@ export const declare_employee_last_year_totals_panel = () =>
   declare_panel({
     panel_key: "employee_last_year_totals",
     subject_types: ["dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["orgEmployeeType"],
       title: text_maker("dept_employee_last_year_totals_title"),
       calculate(subject) {

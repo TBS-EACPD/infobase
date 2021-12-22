@@ -114,7 +114,7 @@ export const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
   _.chain(tooltips_by_topic)
     .get(topic)
     .filter(
-      ({ fiscal_years, subject_ids, measure_ids, topic_ids }) =>
+      ({ fiscal_years, subject_ids, topic_ids }) =>
         _.some(fiscal_years, (tooltip_fiscal_year) =>
           _.includes(["*", selected_year], tooltip_fiscal_year)
         ) &&

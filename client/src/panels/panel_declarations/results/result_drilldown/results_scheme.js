@@ -143,7 +143,7 @@ export default class ResultsExplorer extends AbstractExplorerScheme {
         return _.chain(Indicator.get_flat_indicators(subject))
           .filter({ doc: doc })
           .groupBy("status_key")
-          .mapValues((group, status_key) => group.length)
+          .mapValues((group) => group.length)
           .value();
       }
     );

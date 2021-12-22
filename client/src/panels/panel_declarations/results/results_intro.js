@@ -94,11 +94,11 @@ export const declare_results_intro_panel = () =>
   declare_panel({
     panel_key: "results_intro",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: (subject_type) => ({
       requires_result_counts: subject_type === "gov",
       requires_granular_result_counts: subject_type !== "gov",
       footnotes: ["RESULTS", "DRR", "DP"],
-      source: (subject) => get_source_links(["DP", "DRR"]),
+      source: () => get_source_links(["DP", "DRR"]),
       title: text_maker("results_intro_title"),
       calculate: (subject) => {
         const is_gov = subject.subject_type == "gov";

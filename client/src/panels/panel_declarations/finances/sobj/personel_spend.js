@@ -21,10 +21,10 @@ export const declare_personnel_spend_panel = () =>
   declare_panel({
     panel_key: "personnel_spend",
     subject_types: ["gov"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["orgSobjs"],
       title: text_maker("personnel_spend_title"),
-      calculate(subject, data) {
+      calculate(subject) {
         const { orgSobjs } = this.tables;
         const year_value_pairs = _.map(std_years, (year) => [
           run_template(year),

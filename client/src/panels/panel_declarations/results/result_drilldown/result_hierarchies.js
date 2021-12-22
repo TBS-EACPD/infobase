@@ -15,7 +15,7 @@ const { Result } = Results;
 
 const indicator_date_sorter = (ind) =>
   ind.target_year ? ind.target_year + ind.target_month / 12 : Infinity;
-function result_to_node(result, parent_id, doc) {
+function result_to_node(result, parent_id) {
   return {
     data: {
       type: result.is_dr ? "dr" : "result",
@@ -27,11 +27,7 @@ function result_to_node(result, parent_id, doc) {
   };
 }
 
-export function create_full_results_hierarchy({
-  subject_guid,
-  doc,
-  allow_no_result_branches,
-}) {
+export function create_full_results_hierarchy({ subject_guid, doc }) {
   const get_resources = (subject) => results_resource_fragment(subject, doc);
 
   const root_subject = get_subject_instance_by_guid(subject_guid);

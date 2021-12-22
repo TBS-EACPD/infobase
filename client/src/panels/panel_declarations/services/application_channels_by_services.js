@@ -286,7 +286,7 @@ export const declare_application_channels_by_services_panel = () =>
   declare_panel({
     panel_key: "application_channels_by_services",
     subject_types: ["dept", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       title: text_maker("customizable_service_graph"),
       footnotes: false,
       source: () => get_source_links(["SERVICES"]),

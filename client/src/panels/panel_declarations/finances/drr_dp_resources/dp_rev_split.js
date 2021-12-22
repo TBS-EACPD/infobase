@@ -37,7 +37,7 @@ const spending_formatter = (value) => (
   />
 );
 
-const revenue_formatter = (value, custom_color = null) => (
+const revenue_formatter = (value) => (
   <Format
     style={{ color: textRed }}
     type={"compact2_written"}
@@ -49,13 +49,13 @@ export const declare_dp_rev_split_panel = () =>
   declare_panel({
     panel_key: "dp_rev_split",
     subject_types: ["dept", "crso", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
+    panel_config_func: () => ({
       depends_on: ["programSpending"],
       title: text_maker("dp_rev_split_title"),
       machinery_footnotes: false,
       footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],
-      source: (subject) => get_source_links(["DP"]),
+      source: () => get_source_links(["DP"]),
       calculate(subject) {
         const { programSpending } = this.tables;
         const q = programSpending.q(subject);

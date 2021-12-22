@@ -361,13 +361,13 @@ export const declare_historical_g_and_c_panel = () =>
   declare_panel({
     panel_key: "historical_g_and_c",
     subject_types: ["gov", "dept"],
-    panel_config_func: (subject_type, panel_key) => {
+    panel_config_func: (subject_type) => {
       switch (subject_type) {
         case "gov":
           return {
             ...common_panel_config,
 
-            calculate(subject) {
+            calculate() {
               const { orgTransferPayments } = this.tables;
 
               const payments = orgTransferPayments.sum_cols_by_grouped_data(
