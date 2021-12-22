@@ -11,6 +11,76 @@ import {
 const doc_keys = [...drr_docs, ...dp_docs];
 const valid_doc_filter = ({ doc }) => _.includes(doc_keys, doc);
 
+const counts_from_indicators = (indicators) =>
+  _.chain(indicators)
+    .map(({ doc, result_id, status_key }) => ({
+      [`${doc}_results`]: result_id,
+      [`${doc}_indicators${status_key === "dp" ? "" : `_${status_key}`}`]: 1,
+    }))
+    .thru((indicator_count_fragments) => {
+      const count_keys = _.chain(indicator_count_fragments)
+        .flatMap(_.keys)
+        .uniq()
+        .value();
+
+      return _.chain(indicator_count_fragments)
+        .reduce(
+          (memo, count_fragment) => {
+            _.each(count_fragment, (value, key) =>
+              _.isArray(memo[key]) ? memo[key].push(value) : memo[key]++
+            );
+            return memo;
+          },
+          _.chain(count_keys)
+            .map((key) => (_.endsWith(key, "_results") ? [key, []] : [key, 0]))
+            .fromPairs()
+            .value()
+        )
+        .mapValues((value) => (_.isArray(value) ? _.uniq(value).length : value))
+        .value();
+    })
+    .value();
+
+const get_result_count_records = (results, indicators) => {
+  const indicators_by_result_id = _.groupBy(indicators, "result_id");
+
+  const gov_row = {
+    subject_id: "total",
+    level: "all",
+    ...counts_from_indicators(indicators),
+  };
+
+  const igoc_rows = get_standard_csv_file_rows("igoc.csv");
+  const dept_rows = _.chain(results)
+    .groupBy(({ subject_id }) => _.split(subject_id, "-")[0])
+    .mapValues((results) =>
+      _.flatMap(results, ({ result_id }) => indicators_by_result_id[result_id])
+    )
+    .map((indicators, dept_code) => ({
+      subject_id: _.find(
+        igoc_rows,
+        (igoc_row) => igoc_row.dept_code === dept_code
+      ).org_id,
+      level: "dept",
+      ...counts_from_indicators(indicators),
+    }))
+    .value();
+
+  const crso_or_prog_rows = _.chain(results)
+    .groupBy("subject_id")
+    .mapValues((results) =>
+      _.flatMap(results, ({ result_id }) => indicators_by_result_id[result_id])
+    )
+    .map((indicators, subject_id) => ({
+      subject_id,
+      level: "crso_or_program",
+      ...counts_from_indicators(indicators),
+    }))
+    .value();
+
+  return [gov_row, ...dept_rows, ...crso_or_prog_rows];
+};
+
 export default async function ({ models }) {
   const { Result, ResultCount, Indicator, PIDRLink } = models;
 
@@ -116,73 +186,3 @@ export default async function ({ models }) {
   await Indicator.insertMany(indicator_records);
   return await PIDRLink.insertMany(pi_dr_links);
 }
-
-const get_result_count_records = (results, indicators) => {
-  const indicators_by_result_id = _.groupBy(indicators, "result_id");
-
-  const gov_row = {
-    subject_id: "total",
-    level: "all",
-    ...counts_from_indicators(indicators),
-  };
-
-  const igoc_rows = get_standard_csv_file_rows("igoc.csv");
-  const dept_rows = _.chain(results)
-    .groupBy(({ subject_id }) => _.split(subject_id, "-")[0])
-    .mapValues((results) =>
-      _.flatMap(results, ({ result_id }) => indicators_by_result_id[result_id])
-    )
-    .map((indicators, dept_code) => ({
-      subject_id: _.find(
-        igoc_rows,
-        (igoc_row) => igoc_row.dept_code === dept_code
-      ).org_id,
-      level: "dept",
-      ...counts_from_indicators(indicators),
-    }))
-    .value();
-
-  const crso_or_prog_rows = _.chain(results)
-    .groupBy("subject_id")
-    .mapValues((results) =>
-      _.flatMap(results, ({ result_id }) => indicators_by_result_id[result_id])
-    )
-    .map((indicators, subject_id) => ({
-      subject_id,
-      level: "crso_or_program",
-      ...counts_from_indicators(indicators),
-    }))
-    .value();
-
-  return [gov_row, ...dept_rows, ...crso_or_prog_rows];
-};
-
-const counts_from_indicators = (indicators) =>
-  _.chain(indicators)
-    .map(({ doc, result_id, status_key }) => ({
-      [`${doc}_results`]: result_id,
-      [`${doc}_indicators${status_key === "dp" ? "" : `_${status_key}`}`]: 1,
-    }))
-    .thru((indicator_count_fragments) => {
-      const count_keys = _.chain(indicator_count_fragments)
-        .flatMap(_.keys)
-        .uniq()
-        .value();
-
-      return _.chain(indicator_count_fragments)
-        .reduce(
-          (memo, count_fragment) => {
-            _.each(count_fragment, (value, key) =>
-              _.isArray(memo[key]) ? memo[key].push(value) : memo[key]++
-            );
-            return memo;
-          },
-          _.chain(count_keys)
-            .map((key) => (_.endsWith(key, "_results") ? [key, []] : [key, 0]))
-            .fromPairs()
-            .value()
-        )
-        .mapValues((value) => (_.isArray(value) ? _.uniq(value).length : value))
-        .value();
-    })
-    .value();

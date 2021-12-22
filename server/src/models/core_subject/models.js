@@ -12,6 +12,29 @@ import {
   parent_fkey_type,
 } from "../model_utils.js";
 
+const create_searcher = (model) => async (query, lang) => {
+  const records = await model.find(
+    {
+      $text: {
+        $search: query,
+        $language: lang === "en" ? "english" : "french",
+        $caseSensitive: false,
+        $diacriticSensitive: false,
+      },
+    },
+    { score: { $meta: "textScore" } }
+  );
+
+  return _.chain(records)
+    .map((row) => ({
+      record: row,
+      score: row._doc.score,
+    }))
+    .sortBy("score")
+    .reverse()
+    .value();
+};
+
 export default function define_core_subjects(model_singleton) {
   const OrgSchema = new mongoose.Schema({
     org_id: pkey_type(),
@@ -178,26 +201,3 @@ export default function define_core_subjects(model_singleton) {
   model_singleton.define_service("search_crsos", search_crsos);
   model_singleton.define_service("search_subjects", search_subjects);
 }
-
-const create_searcher = (model) => async (query, lang) => {
-  const records = await model.find(
-    {
-      $text: {
-        $search: query,
-        $language: lang === "en" ? "english" : "french",
-        $caseSensitive: false,
-        $diacriticSensitive: false,
-      },
-    },
-    { score: { $meta: "textScore" } }
-  );
-
-  return _.chain(records)
-    .map((row) => ({
-      record: row,
-      score: row._doc.score,
-    }))
-    .sortBy("score")
-    .reverse()
-    .value();
-};
