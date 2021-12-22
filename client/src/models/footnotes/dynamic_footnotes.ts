@@ -8,7 +8,7 @@ import {
   fiscal_year_to_year,
 } from "src/models/years";
 
-import { FootNoteDef } from "./footnotes";
+import type { FootNoteDef } from "./footnotes";
 
 import text from "./dynamic_footnotes.yaml";
 

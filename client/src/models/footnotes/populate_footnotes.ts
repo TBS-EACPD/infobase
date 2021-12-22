@@ -1,13 +1,13 @@
 import { csvParse } from "d3-dsv";
 import _ from "lodash";
 
+import type { SubjectClassInstance } from "src/models/subjects";
 import {
   Dept,
   CRSO,
   Program,
   class_subject_types,
   is_class_subject_types,
-  SubjectClassInstance,
 } from "src/models/subjects";
 import { run_template } from "src/models/text";
 import { fiscal_year_to_year } from "src/models/years";

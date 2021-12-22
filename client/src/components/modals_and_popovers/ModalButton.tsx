@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import type { RouteComponentProps } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import { SafeJSURL } from "src/general_utils";
 

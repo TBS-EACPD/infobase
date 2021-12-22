@@ -2,7 +2,8 @@ import React from "react";
 
 import { LegendContainer } from "./LegendContainer";
 
-import { LegendList, LegendListProps } from "./LegendList";
+import type { LegendListProps } from "./LegendList";
+import { LegendList } from "./LegendList";
 
 import "./StandardLegend.scss";
 

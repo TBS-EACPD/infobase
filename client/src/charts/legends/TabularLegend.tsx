@@ -3,7 +3,7 @@ import React from "react";
 
 import { CheckBox } from "src/components/index";
 
-import { StaticLegendItemType } from "./LegendItemType";
+import type { StaticLegendItemType } from "./LegendItemType";
 import "./TabularLegend.scss";
 
 interface TabularLegendProps {

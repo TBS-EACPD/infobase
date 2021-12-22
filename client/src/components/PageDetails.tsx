@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React from "react";
-import { withRouter, RouteComponentProps } from "react-router";
+import type { RouteComponentProps } from "react-router";
+import { withRouter } from "react-router";
 
 import { create_text_maker } from "src/models/text";
 
