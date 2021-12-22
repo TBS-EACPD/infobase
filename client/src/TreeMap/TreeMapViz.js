@@ -36,7 +36,7 @@ export class TreeMap extends React.Component {
     this.setState({ org_route: [...this.props.org_route] });
     this._update();
   }
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     if (
       this.props.perspective !== nextProps.perspective ||
       this.props.year !== nextProps.year ||
@@ -291,7 +291,7 @@ export class TreeMap extends React.Component {
             )
           )
           .attr("tabindex", "0")
-          .on("mouseenter focus", function (d) {
+          .on("mouseenter focus", function () {
             select(this).selectAll(".TM_TooltipContainer").remove();
             setTimeout(() => {
               selectAll(".TM_TooltipContainer").remove();
@@ -303,7 +303,7 @@ export class TreeMap extends React.Component {
               tool.call(tooltip_render, year);
             }, 300);
           })
-          .on("mouseleave", function (d) {
+          .on("mouseleave", function () {
             select(this).selectAll(".TM_TooltipContainer").remove();
           })
           .call(treemap_node_content_container);

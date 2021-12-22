@@ -182,7 +182,7 @@ class FormFrontend extends React.Component {
     const all_connected_user_fields_are_filled = _.chain(user_fields)
       .toPairs()
       .filter(
-        ([field_name, field_val]) =>
+        ([_field_name, field_val]) =>
           _.includes(_.keys(field_val), "connection") &&
           _.includes(_.keys(completed_template), field_val.connection.name) &&
           _.includes(
@@ -191,7 +191,7 @@ class FormFrontend extends React.Component {
           )
       )
       .every(
-        ([field_name, field_val]) => !_.isEmpty(completed_template[field_name])
+        ([field_name, _field_val]) => !_.isEmpty(completed_template[field_name])
       )
       .value();
 

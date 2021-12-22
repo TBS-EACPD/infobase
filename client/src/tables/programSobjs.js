@@ -83,7 +83,7 @@ export default {
       });
     });
   },
-  sort(rows, lang) {
+  sort(rows) {
     return _.sortBy(rows, (row) => row.so_num);
   },
   mapper(row) {

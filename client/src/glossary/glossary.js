@@ -73,7 +73,7 @@ const table_links_by_tag = _.chain(tables)
   .value();
 
 //id tag is there for legacy styles
-const Glossary_ = ({ active_key, items_by_letter }) => (
+const Glossary_ = ({ items_by_letter }) => (
   <div id="#glossary-key">
     <div className="col-md-12 col-12 col-lg-8 offset-lg-2 font-large">
       {!is_a11y_mode && (

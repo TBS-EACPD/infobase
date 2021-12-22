@@ -54,7 +54,7 @@ const central_vote_footnotes = [
   [40, _.constant(biv_footnote)],
 ];
 
-function get_footnotes_for_votestat_item({ desc, org_id, votenum }) {
+function get_footnotes_for_votestat_item({ org_id, votenum }) {
   if (+org_id === 326) {
     const central_vote_footnote = _.find(
       central_vote_footnotes,

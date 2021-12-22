@@ -17,18 +17,7 @@ import { secondaryColor } from "src/style_constants/index";
 
 import { TextMaker } from "./rpb_text_provider";
 
-const ReportDetails = ({
-  table,
-  dimension,
-  filter,
-  preferDeptBreakout,
-  mode,
-  subject,
-  columns,
-  preferTable,
-  def_ready_columns,
-  footnotes,
-}) => {
+const ReportDetails = ({ table, def_ready_columns, footnotes }) => {
   const { title: table_title, description: table_description } = table;
 
   return (
@@ -77,7 +66,7 @@ const ReportDetails = ({
   );
 };
 
-const ReportDatasets = ({ table, subject }) => {
+const ReportDatasets = ({ table }) => {
   const dataset_spans = table.link[lang] && [
     <span key={"datasets_header"} className="fancy-ul__title">
       <TextMaker text_key="metadata" />

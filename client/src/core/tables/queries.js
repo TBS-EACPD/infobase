@@ -177,7 +177,7 @@ class Queries {
             return x + y;
           })
           .value() + 1;
-      _.each(vals[gross_percentage], function (val, i, list) {
+      _.each(vals[gross_percentage], function (val, i, _list) {
         vals[gp_colname][i] = val / sum;
       });
     }
@@ -222,28 +222,18 @@ class Queries {
     return all_vals;
   }
 
-  get_row(criteria, options = {}) {
-    //
-    // * `col` : either a string or an array of strings for several columns
-    // * `val` :
-    // * `options` :
-    //
+  get_row(criteria) {
     var each_mapped_obj = (obj) =>
       _.every(
-        _.toPairs(criteria).map(([key, val]) => obj[key] === criteria[key])
+        _.toPairs(criteria).map(([key, _val]) => obj[key] === criteria[key])
       );
     return _.find(this.data, each_mapped_obj);
   }
 
-  get_rows(criteria, options) {
-    //
-    // * `col` : either a string or an array of strings for several columns
-    // * `val` :
-    // * `options` :
-    //
+  get_rows(criteria) {
     var each_mapped_obj = (obj) =>
       _.every(
-        _.toPairs(criteria).map(([key, val]) => {
+        _.toPairs(criteria).map(([key, _val]) => {
           if (_.isArray(criteria[key])) {
             return _.includes(criteria[key], obj[key]);
           } else {

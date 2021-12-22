@@ -57,7 +57,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(tp_by_region_years, (header, ix) => {
+    _.each(tp_by_region_years, (header) => {
       this.add_col({
         type: "big_int",
         nick: header,
@@ -76,7 +76,7 @@ export default {
     return [org_id, prov_code, prov_text, ...values];
   },
 
-  sort: (mapped_rows, lang) =>
+  sort: (mapped_rows) =>
     _.sortBy(mapped_rows, (row) => {
       if (row.region === provinces.abroad.text) {
         return "Z";

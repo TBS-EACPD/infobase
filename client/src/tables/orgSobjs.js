@@ -56,7 +56,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(std_years, (header, i) => {
+    _.each(std_years, (header) => {
       this.add_col({
         type: "dollar",
         nick: header,
@@ -73,7 +73,7 @@ export default {
     });
   },
 
-  sort: function (rows, lang) {
+  sort: function (rows) {
     return _.sortBy(rows, function (row) {
       return row.so_num;
     });

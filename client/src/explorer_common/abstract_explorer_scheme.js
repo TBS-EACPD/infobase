@@ -140,7 +140,7 @@ export class AbstractExplorerScheme {
     if (this.scheme_reducer) {
       return this.scheme_reducer;
     }
-    return (state = {}, action) => state;
+    return (state = {}, _action) => state;
   }
   get_initial_scheme_state() {
     //shorthand for subclasses
@@ -315,7 +315,7 @@ export class AbstractExplorerScheme {
   get_sort_func_selector() {
     // override to filter based on scheme state
     // unlike functions passed to _.sortBy, this function takes a list and must return a new sorted list
-    return (state) => {
+    return (_state) => {
       return (nodes) => nodes;
     };
   }

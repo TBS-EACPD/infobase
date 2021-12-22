@@ -204,64 +204,64 @@ const fr_master_change = function (
 };
 HandlebarsWithPrototypeAccess.registerHelper(
   "changed_to",
-  function (val, formatter, context) {
+  function (val, formatter) {
     return en_master_change(val, formatter, "to", "past");
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "changed_by",
-  function (val, formatter, context) {
+  function (val, formatter) {
     return en_master_change(val, formatter, "by", "past");
   }
 );
 // Dom code:
 HandlebarsWithPrototypeAccess.registerHelper(
   "changing_by",
-  function (val, formatter, context) {
+  function (val, formatter) {
     return en_master_change(val, formatter, "ing", "past");
   }
 );
 
 HandlebarsWithPrototypeAccess.registerHelper(
   "will_change_to",
-  function (val, formatter, context) {
+  function (val, formatter) {
     return en_master_change(val, formatter, "to", "future");
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "will_change_by",
-  function (val, formatter, context) {
+  function (val, formatter) {
     return en_master_change(val, formatter, "by", "future");
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "fr_changed_to",
-  function (val, genre, nombre, formatter, context) {
+  function (val, genre, nombre, formatter) {
     return fr_master_change(val, formatter, "to", "past", genre, nombre);
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "fr_changed_by",
-  function (val, genre, nombre, formatter, context) {
+  function (val, genre, nombre, formatter) {
     return fr_master_change(val, formatter, "by", "past", genre, nombre);
   }
 );
 // Dom code:
 HandlebarsWithPrototypeAccess.registerHelper(
   "fr_changing_by",
-  function (val, genre, nombre, formatter, context) {
+  function (val, genre, nombre, formatter) {
     return fr_master_change(val, formatter, "ing", "past", genre, nombre);
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "fr_will_change_by",
-  function (val, genre, nombre, formatter, context) {
+  function (val, genre, nombre, formatter) {
     return fr_master_change(val, formatter, "by", "future", genre, nombre);
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "fr_will_change_to",
-  function (val, genre, nombre, formatter, context) {
+  function (val, genre, nombre, formatter) {
     return fr_master_change(val, formatter, "to", "future", genre, nombre);
   }
 );
@@ -373,13 +373,13 @@ const fr_master_two_value_change = function (
 };
 HandlebarsWithPrototypeAccess.registerHelper(
   "two_value_changed_to",
-  function (val1, val2, formatter, context) {
+  function (val1, val2, formatter) {
     return en_master_two_value_change(val1, val2, formatter, "to", "past");
   }
 );
 HandlebarsWithPrototypeAccess.registerHelper(
   "fr_two_value_changed_to",
-  function (val1, val2, genre, nombre, formatter, context) {
+  function (val1, val2, genre, nombre, formatter) {
     return fr_master_two_value_change(
       val1,
       val2,
@@ -395,7 +395,7 @@ HandlebarsWithPrototypeAccess.registerHelper(
 // Helper to expand positive negative values to "[+/-]abs(value)"
 HandlebarsWithPrototypeAccess.registerHelper(
   "plus_or_minus_val",
-  function (val, formatter, context) {
+  function (val, formatter) {
     return (
       (val >= 0 ? "+" : "-") +
       HandlebarsWithPrototypeAccess.helpers[formatter](Math.abs(val))
@@ -579,15 +579,12 @@ HandlebarsWithPrototypeAccess.registerHelper("le_dept_abbr", (context) =>
 //     fr : "som`eurl"
 //   }
 // ```
-HandlebarsWithPrototypeAccess.registerHelper(
-  "encodeURI",
-  function (context, options) {
-    if (_.has(context, "en") && _.has(context, "fr")) {
-      context = context[lang];
-    }
-    return encodeURI(context);
+HandlebarsWithPrototypeAccess.registerHelper("encodeURI", function (context) {
+  if (_.has(context, "en") && _.has(context, "fr")) {
+    context = context[lang];
   }
-);
+  return encodeURI(context);
+});
 
 HandlebarsWithPrototypeAccess.registerHelper("debug", function (optionalValue) {
   // eslint-disable no-console

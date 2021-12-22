@@ -208,7 +208,7 @@ class TaggedItemCloud extends React.Component {
       noItemsMessage,
     } = this.props;
 
-    const flat_items = _.map(items, ({ display, id, description }) => (
+    const flat_items = _.map(items, ({ display, id }) => (
       <div key={id}>
         <div className="item-card">
           <div className="item-title centerer">{display}</div>
@@ -261,7 +261,7 @@ class TaggedItemCloud extends React.Component {
     const item_column_count = 3;
     const items_split = _.chain(flat_items)
       .map((item, ix) => ({ item, ix }))
-      .groupBy(({ item, ix }) => ix % item_column_count)
+      .groupBy(({ ix }) => ix % item_column_count)
       .map((group) => _.map(group, "item"))
       // placeholder groups containing empty divs added so that exiting groups' columns will transition out
       .thru((item_split) =>

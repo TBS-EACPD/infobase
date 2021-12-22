@@ -224,7 +224,7 @@ export class CanadaD3Component {
 
     svg
       .selectAll(".province")
-      .each(function (d) {
+      .each(function (_d) {
         var that = select(this);
         var prov_key = that.attr("id").split("-")[1];
         select(this).datum(prov_key);
@@ -266,7 +266,7 @@ export class CanadaD3Component {
       .on("focus", dispatch_mouseEnter)
       .on("mouseleave", dispatch_mouseLeave)
       .on("blur", dispatch_mouseLeave)
-      .each(function (prov_key, i) {
+      .each(function (prov_key) {
         const label = svg.selectAll("g.label").filter(function () {
           return select(this).attr("id") === `ca-${prov_key}--label`;
         });
@@ -297,7 +297,7 @@ export class CanadaD3Component {
           .attr("class", "label-value")
           .style("margin-bottom", "0px");
       });
-    html.selectAll("p.label-value").each(function (prov_key, i) {
+    html.selectAll("p.label-value").each(function (prov_key) {
       select(this).html(formatter(selected_year_data[prov_key] || 0));
     });
 

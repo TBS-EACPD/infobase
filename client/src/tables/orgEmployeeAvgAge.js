@@ -106,7 +106,7 @@ export default {
   },
 
   details: {
-    prepare_total: function (col_objs, raw_data) {
+    prepare_total: function () {
       return [];
     },
   },

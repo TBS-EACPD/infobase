@@ -33,7 +33,7 @@ const get_re_matcher = (accessors, search_phrase) => (obj) => {
     .value();
 };
 
-function create_re_matcher(search_phrase, accessors, config_name) {
+function create_re_matcher(search_phrase, accessors) {
   const re_matcher = get_re_matcher(accessors, search_phrase);
 
   const nonce = _.random(0.1, 1.1);

@@ -38,7 +38,7 @@ export const ExplorerHeader = ({
   return (
     <div className="ExplorerHeader ExplorerHeader--blue">
       <div className="ExplorerRow">
-        {_.map(column_defs, ({ id, style, header_display }, ix) => (
+        {_.map(column_defs, ({ id, header_display }, ix) => (
           <div
             key={id}
             className="ExplorerRow__Cell"
@@ -126,9 +126,7 @@ export const ExplorerNode = ({
   node,
   mod_class,
   node: {
-    id,
     isExpanded,
-    data,
     data: { noExpand },
   },
   depth,

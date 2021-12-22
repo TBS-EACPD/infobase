@@ -150,7 +150,7 @@ const HeaderBanner = withRouter(
 );
 
 const TemporaryPublicAccountsBanner = () => {
-  const route_filter = (match, history) =>
+  const route_filter = (match, _history) =>
     /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
 
   const late_orgs =

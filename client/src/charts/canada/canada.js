@@ -66,7 +66,7 @@ class CanadaGraphBarLegend extends React.Component {
               {`${d.data.year}: ${formatter(d.formattedValue)}`}
             </tspan>
           )}
-          colors={(d) => get_graph_color(0.5)}
+          colors={(_d) => get_graph_color(0.5)}
           margin={{
             top: 40,
             right: 30,

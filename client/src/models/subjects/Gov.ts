@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { trivial_text_maker } from "src/models/text";
 
 import { make_store } from "src/models/utils/make_store";

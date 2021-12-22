@@ -125,7 +125,7 @@ function ensureVisibility(nodes, shouldNodeBeVisible) {
 function toggleExpandedFlat(
   flat_nodes,
   node,
-  { toggleNode, expandAllChildren, collapseAllChildren }
+  { expandAllChildren, collapseAllChildren }
 ) {
   const nodes_by_id = _.keyBy(flat_nodes, "id");
 

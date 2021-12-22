@@ -32,7 +32,7 @@ function get_org_count(node) {
   }
 }
 
-const SubjectFields = ({ subject, grouping }) => (
+const SubjectFields = ({ subject }) => (
   <div style={{ marginTop: "2em" }}>
     <dl className="dl-horizontal dl-no-bold-dts dl-really-long-terms">
       {subject.applied_title && (

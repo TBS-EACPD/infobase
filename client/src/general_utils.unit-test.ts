@@ -1,21 +1,21 @@
 import _ from "lodash";
 
 import {
-  sanitize_html,
-  sanitized_marked,
-  sanitized_dangerous_inner_html,
-  set_session_storage_w_expiry,
-  get_session_storage_w_expiry,
-  shallowEqualObjectsOverKeys,
-  shallowEqualObjectsExceptKeys,
-  retrying_promise,
-  completeAssign,
+  //sanitize_html,
+  //sanitized_marked,
+  //sanitized_dangerous_inner_html,
+  //set_session_storage_w_expiry,
+  //get_session_storage_w_expiry,
+  //shallowEqualObjectsOverKeys,
+  //shallowEqualObjectsExceptKeys,
+  //retrying_promise,
+  //completeAssign,
   hex_to_rgb,
   SafeJSURL,
-  generate_href,
-  cached_property,
-  bound,
-  toggle_list,
+  //generate_href,
+  //cached_property,
+  //bound,
+  //toggle_list,
 } from "./general_utils";
 
 // describe("sanitize_html", () => {
