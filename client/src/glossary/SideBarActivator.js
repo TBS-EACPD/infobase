@@ -35,7 +35,7 @@ const SidebarActivator = withRouter(
       const glossary_item = glossaryEntryStore.lookup(glossary_item_key);
 
       this.setGlossaryItem(glossary_item.id);
-      this.showList(false);
+      this.setList(false);
 
       this.toggleGlossary(true);
     };
@@ -122,7 +122,6 @@ const SidebarActivator = withRouter(
     };
 
     get_glossary_items_by_letter() {
-      console.log(this.state.query);
       const glossary_items =
         this.state.results.length == 0 || this.state.query == ""
           ? glossaryEntryStore.get_all()
