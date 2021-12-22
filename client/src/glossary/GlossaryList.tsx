@@ -70,12 +70,12 @@ export class GlossaryList extends React.Component<
       <div>
         {_.map(items_by_letter, ({ letter, items }) => (
           <div key={letter}>
-            <span className="glossary-letter" key={letter}>
+            <span className="glossary-sb-letter" key={letter}>
               {letter}
             </span>
             <hr />
             {_.map(items, (item, ix) => (
-              <div key={ix} className="glossary-title">
+              <div key={ix} className="glossary-sb-title">
                 <span
                   role="button"
                   id={item.title.replace(/\s+/g, "")}

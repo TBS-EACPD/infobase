@@ -11,23 +11,15 @@
   z-index: 1006;
 
   box-shadow: -3px 0px 4px rgba(0, 0, 0, 0.2);
+}
 
-  .glossary-sidebar {
-    background-color: $primaryColor;
-    color: $textLightColor;
-    font-size: 14px;
+.glossary-sidebar {
+  background-color: $primaryColor;
+  color: $textLightColor;
+  font-size: 14px;
 
-    width: 100%;
-    height: 100%;
-
-    .glossary-loading-content {
-      padding: 20px;
-    }
-
-    .loading {
-      opacity: 0.2;
-    }
-  }
+  width: 100%;
+  height: 100%;
 }
 
 .glossary-sidebar-wrapper.active {
@@ -42,73 +34,73 @@
   padding: 20px;
 
   background-color: $primaryColor;
+}
 
-  h1.glossary-header {
-    font-weight: 300;
-    font-size: rem(38);
-    line-height: rem(47);
+h1.glossary-header {
+  font-weight: 300;
+  font-size: rem(38);
+  line-height: rem(47);
 
-    margin: 0;
-    padding: 0;
-  }
+  margin: 0;
+  padding: 0;
+}
 
-  .glossary-example {
-    font-style: italic;
-    margin-top: 10px;
-  }
+.glossary-sb-example {
+  font-style: italic;
+  margin-top: 10px;
+}
 
-  .search-wrapper {
-    position: relative;
+.glossary-sb-search-wrapper {
+  position: relative;
+  outline: none;
+}
+
+.glossary-sb-search {
+  display: flex;
+  border: 2px $tertiaryColor solid;
+  border-radius: 1rem;
+  height: 3.5rem;
+  margin-top: 10px;
+  padding: 0 1rem;
+  background: $backgroundColor;
+
+  & > input {
+    width: 100%;
+    font-size: 16px;
+    border: 0;
     outline: none;
-  }
 
-  .search {
-    display: flex;
-    border: 2px $tertiaryColor solid;
-    border-radius: 1rem;
-    height: 3.5rem;
-    margin-top: 10px;
-    padding: 0 1rem;
-    background: $backgroundColor;
-
-    & > input {
-      width: 100%;
-      font-size: 16px;
-      border: 0;
-      outline: none;
-
-      &::-ms-clear {
-        display: none;
-        width: 0;
-        height: 0;
-      }
+    &::-ms-clear {
+      display: none;
+      width: 0;
+      height: 0;
     }
   }
+}
 
-  .icon-wrapper {
-    opacity: 0.5;
-    display: flex;
-    align-items: center;
-  }
+.glossary-sb-icon-wrapper {
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+}
 
-  .icon-wrapper:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
+.glossary-sb-icon-wrapper:hover {
+  opacity: 1;
+  cursor: pointer;
+}
 
-  .icon {
-    opacity: 0.5;
-  }
+.glossary-sb-icon {
+  opacity: 0.5;
+}
 
-  .icon:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
+.glossary-sb-icon:hover {
+  opacity: 1;
+  cursor: pointer;
+}
 
-  .close-button {
-    display: flex;
-    justify-content: flex-end;
-  }
+.glossary-sb-close-button {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .glossary-sidebar-content-wrapper {
@@ -122,44 +114,44 @@
   overflow-y: auto;
 }
 
-.glossary-letter {
+.glossary-sb-letter {
   font-size: 20px;
   font-weight: 500;
 }
 
-.glossary-title {
+.glossary-sb-title {
   margin-bottom: 10px;
 }
 
-.glossary-title:hover {
+.glossary-sb-title:hover {
   cursor: pointer;
   text-decoration-line: underline;
 }
 
-.glossary-title:last-child {
+.glossary-sb-title:last-child {
   margin-bottom: 25px;
 }
 
-.item-title {
+.glossary-sb-item-title {
   font-size: 23px;
   margin-bottom: 10px;
   font-weight: 500;
 }
 
-.item-def {
+.glossary-sb-item-def {
   margin-bottom: 10px;
 }
 
-.back-button:hover {
+.glossary-sb-back-button:hover {
   cursor: pointer;
   text-decoration-line: underline;
 }
 
-.back-button {
+.glossary-sb-back-button {
   font-size: 16px;
 }
 
-.defintion-wrapper {
+.glossary-sb-defintion-wrapper {
   overflow-y: auto;
 }
 
