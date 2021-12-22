@@ -65,8 +65,7 @@ commands:
             - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
 
 jobs:
-  # TODO consider expanding lint job to check prettier and typing as well, relevant: https://github.com/prettier/prettier/issues/5853
-  lint:
+  static_analysis:
     docker:
       - image: eaadtbs/ib-ci-build:3.0
         <<: *dockerhub_auth
@@ -84,14 +83,18 @@ jobs:
           keys:
             - repo-wide-lint-cache-{{ .Branch }}
             - repo-wide-lint-cache-master
-
       - run:
           command: npm run eslint
-
       - save_cache:
           key: repo-wide-lint-cache-{{ .Branch }}
           paths:
             - .eslintcache
+
+      - run:
+          command: npm run prettier
+
+      - run:
+          command: cd client && npx tsc --noEmit
 
   test_form_backend:
     docker:
@@ -409,9 +412,9 @@ jobs:
       - run: if [[ $CIRCLE_BRANCH = master ]]; then ./scripts/ci_scripts/store_bundle_stats.sh; fi
 
 workflows:
-  lint:
+  static_analysis:
     jobs:
-      - lint
+      - static_analysis
 
   test_form_backend:
     jobs:
