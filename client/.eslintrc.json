@@ -47,7 +47,11 @@
       ],
       "rules": {
         "no-prototype-builtins": "off", //common TS pattern
-        "@typescript-eslint/no-unused-vars": "warn",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          { "argsIgnorePattern": "^_.+" }
+        ],
         "@typescript-eslint/no-redeclare": ["error"],
         "@typescript-eslint/explicit-module-boundary-types": "off", // TODO might want to turn this on later, but it will take a while to fix all the warnings
         "@typescript-eslint/ban-types": [

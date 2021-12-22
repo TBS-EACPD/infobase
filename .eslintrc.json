@@ -8,7 +8,7 @@
     "plugin:import/errors"
   ],
   "rules": {
-    "no-unused-vars": ["warn", { "args": "none" }],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_.+" }],
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
     "no-throw-literal": "error",
     "lodash/no-double-unwrap": ["error"],
