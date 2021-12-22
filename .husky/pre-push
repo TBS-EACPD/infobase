@@ -21,6 +21,3 @@ if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remo
   echo -e "\033[0;31mDouble underscore and archived branches can only be pushed to the archive (private) remote!\033[0m"
   exit 1
 fi
-
-# Prevent pushing if prettier is unhappy
-npm run prettier
