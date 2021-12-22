@@ -1,7 +1,7 @@
 import { throttle_requests_by_client } from "./throttle_requests_by_client.js";
 
 const promise_timeout = (time) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _reject) => {
     setTimeout(() => resolve(time), time);
   });
 };
