@@ -21,8 +21,19 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
+
+      - restore_cache:
+          keys:
+            - repo-wide-lint-cache-{{ .Branch }}
+            - repo-wide-lint-cache-master
+
       - run:
           command: npm run eslint
+
+      - save_cache:
+          key: repo-wide-lint-cache-{{ .Branch }}
+          paths:
+            - .eslintcache
 
   test_form_backend:
     docker:
