@@ -106,7 +106,7 @@ export default async function ({ models }) {
   const { true: gov_average_age_rows, false: org_average_age_rows } = _.chain(
     get_standard_csv_file_rows("org_employee_avg_age.csv")
   )
-    .flatMap(({ dept_code, dimension: _dimension, ...values_by_year }) =>
+    .flatMap(({ dept_code, dimension, ...values_by_year }) =>
       _.map(values_by_year, (value, year) => ({
         org_id:
           dept_code === "ZGOC"
