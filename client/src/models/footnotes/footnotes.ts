@@ -1,9 +1,9 @@
 import _ from "lodash";
 
+import type { ClassSubjectType } from "src/models/subjects";
 import {
   is_subject_instance,
   get_subject_class_by_type,
-  ClassSubjectType,
 } from "src/models/subjects";
 import { make_store } from "src/models/utils/make_store";
 
