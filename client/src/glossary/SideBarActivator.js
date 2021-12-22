@@ -7,6 +7,8 @@ import { glossaryEntryStore } from "src/models/glossary";
 
 import { BackToTop } from "src/components";
 
+import { get_glossary_items_by_letter } from "./glossary_utils";
+
 import { GlossaryMenu } from "./GlossaryMenu";
 
 const ROUTES_WITHOUT_GLOSSARY = {
@@ -121,32 +123,6 @@ const SidebarActivator = withRouter(
       this.setList(true);
     };
 
-    get_glossary_items_by_letter() {
-      const glossary_items =
-        this.state.results.length == 0 || this.state.query == ""
-          ? glossaryEntryStore.get_all()
-          : this.state.results;
-
-      const glossary_items_by_letter = _.chain(glossary_items)
-        .groupBy((item) => {
-          const first_letter = item.title[0];
-          if (_.includes(["É", "È", "Ê", "Ë"], first_letter)) {
-            return "E";
-          }
-          return first_letter;
-        })
-        .map((items, letter) => {
-          const sorted_items = _.sortBy(items, "title");
-          return {
-            items: sorted_items,
-            letter,
-          };
-        })
-        .sortBy("letter")
-        .value();
-      return glossary_items_by_letter;
-    }
-
     render() {
       const currentPage = this.props.location.pathname;
 
@@ -163,7 +139,7 @@ const SidebarActivator = withRouter(
             setList={(value) => this.setList(value)}
             setResults={(data) => this.setResults(data)}
             setQuery={(query) => this.setQuery(query)}
-            results={this.get_glossary_items_by_letter()}
+            results={get_glossary_items_by_letter(this.state.results)}
             query={this.state.query}
           />
           <BackToTop
