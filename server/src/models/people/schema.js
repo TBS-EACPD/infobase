@@ -46,7 +46,7 @@ const schema = `
   }
 `;
 
-export default function ({ models, loaders }) {
+export default function ({ loaders }) {
   const { org_people_data_loader, gov_people_summary_loader } = loaders;
   const resolvers = {
     Org: {

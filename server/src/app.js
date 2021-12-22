@@ -70,7 +70,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, _next) {
   console.error(err.stack);
   res.status(500).send("Internal server error");
 });

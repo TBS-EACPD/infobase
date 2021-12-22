@@ -92,19 +92,19 @@ const schema = `
 export default function ({ models }) {
   const { PAVoteStat, EstimatesVoteStat, ProgramVoteStat } = models;
 
-  function get_pa_vs_data_for_org(org, { year }) {
+  function get_pa_vs_data_for_org(org) {
     let flat_records = PAVoteStat.get_flat_dept_records(org.dept_code);
 
     return { org, flat_records };
   }
 
-  function get_estimates_data_for_org(org, { year }) {
+  function get_estimates_data_for_org(org) {
     let flat_records = EstimatesVoteStat.get_flat_dept_records(org.dept_code);
 
     return { org, flat_records };
   }
 
-  function get_dept_pa_info({ org, flat_records }) {
+  function get_dept_pa_info({ flat_records }) {
     const yearly_totals = _.chain(flat_records)
       .groupBy("year")
       .map((group, year) => ({
@@ -119,7 +119,7 @@ export default function ({ models }) {
     };
   }
 
-  function get_dept_estimates_info({ org, flat_records }) {
+  function get_dept_estimates_info({ flat_records }) {
     const yearly_totals = _.chain(flat_records)
       .groupBy("year")
       .map((group, year) => ({
@@ -140,7 +140,7 @@ export default function ({ models }) {
     },
 
     PAVoteStat: {
-      data: ({ org, flat_records }, { year }) =>
+      data: ({ flat_records }, { year }) =>
         year
           ? _.chain(flat_records)
               .filter({ year })
@@ -151,7 +151,7 @@ export default function ({ models }) {
     },
     PaVoteStatRecord: { name: en_fr("name_en", "name_fr") },
     EstimatesVoteStat: {
-      data: ({ org, flat_records }, { year }) =>
+      data: ({ flat_records }, { year }) =>
         year
           ? _.chain(flat_records).filter({ year }).filter("amount").value()
           : flat_records,

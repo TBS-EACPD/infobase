@@ -113,7 +113,7 @@ const schema = `
   }
 `;
 
-export default function ({ models, loaders }) {
+export default function ({ loaders }) {
   const {
     orgVoteStatPa_loader,
     orgVoteStatEstimates_loader,
