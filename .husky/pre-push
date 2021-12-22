@@ -22,6 +22,5 @@ if [[ ($local_branch_name =~ ^__ || $local_branch_name =~ ^archived__ ) && $remo
   exit 1
 fi
 
-
-# run prettier check
-npm run prettier_check .
+# Prevent pushing if prettier is unhappy
+npm run prettier
