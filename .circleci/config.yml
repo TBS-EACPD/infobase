@@ -3,12 +3,58 @@ dockerhub_auth: &dockerhub_auth
     username: $DOCKERHUB_USERNAME
     password: $DOCKERHUB_PASSWORD
 
-# yaml fragment for deploy filters
 deploy_filter: &deploy_filter
   filters:
     branches:
       ignore:
         - /__.*/
+
+top_level_install: &top_level_install
+  - restore_cache:
+      keys:
+        - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
+  - run:
+      command: |
+        [ -e "node_modules" ] || npm ci
+  - save_cache:
+      key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
+      paths:
+        - node_modules
+form_backend_install: &form_backend_install
+  - restore_cache:
+      keys:
+        - form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
+  - run:
+      command: |
+        [ -e "form_backend/node_modules" ] || (cd form_backend && npm ci)
+  - save_cache:
+      key: form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
+      paths:
+        - form_backend/node_modules
+server_install: &server_install
+  - restore_cache:
+      keys:
+        - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
+  - run:
+      command: |
+        [ -e "server/node_modules" ] || (cd server && npm ci)
+  - save_cache:
+      key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
+      paths:
+        - server/node_modules
+client_install: &client_install
+  - run: cksum ./client/patches/* > client-patch-checksums # need to bust the client package cache on patch changes in addition to package-lock changes
+  - restore_cache:
+      keys:
+        - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
+  - run:
+      command: |
+        [ -e "client/node_modules" ] || (cd client && npm ci)
+  - save_cache:
+      key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
+      paths:
+        - client/node_modules
+        - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
 
 version: 2.1
 
@@ -21,6 +67,11 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
+
+      - <<: *top_level_install
+      - <<: *form_backend_install
+      - <<: *server_install
+      - <<: *client_install
 
       - restore_cache:
           keys:
@@ -43,24 +94,9 @@ jobs:
     steps:
       - checkout:
           path: "~/InfoBase"
-      - restore_cache:
-          keys:
-            - form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
-            - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
-      - run:
-          command: |
-            [ -e "form_backend/node_modules" ] || (cd form_backend && npm ci)
-      - run:
-          command: |
-            [ -e "node_modules" ] || npm ci
-      - save_cache:
-          key: form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
-          paths:
-            - form_backend/node_modules
-      - save_cache:
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
-          paths:
-            - node_modules
+
+      - <<: *top_level_install
+      - <<: *form_backend_install
 
       - restore_cache:
           keys:
@@ -112,49 +148,15 @@ jobs:
       - image: eaadtbs/ib-ci-build:3.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
-    environment:
-      CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
     resource_class: medium
     steps:
       - checkout:
           path: "~/InfoBase"
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      - restore_cache:
-          keys:
-            - top-level-dependencies-{{ checksum "package-lock.json" }}-v4
-      - run:
-          command: |
-            [ -e "node_modules" ] ||  npm ci
-      - save_cache:
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v4
-          paths:
-            - node_modules
-
-      # need to bust the client package cache on patch changes in addition to package-lock changes
-      - run: cksum ./client/patches/* > client-patch-checksums
-      - restore_cache:
-          keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
-      - run:
-          command: |
-            [ -e "client/node_modules" ] || (cd client && npm ci)
-      - save_cache:
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
-          paths:
-            - client/node_modules
-            - client/.cache/Cypress
-
-      - restore_cache:
-          keys:
-            - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
-      - run:
-          command: |
-            [ -e "server/node_modules" ] || (cd server && npm ci)
-      - save_cache:
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
-          paths:
-            - server/node_modules
+      - <<: *top_level_install
+      - <<: *client_install
+      - <<: *server_install
 
       # transpiling the server slightly out of place for this job, not needed till the server deploy step, but
       # the deploy job image isn't guaranteed to have the necessary environment for this
@@ -294,8 +296,6 @@ jobs:
       - image: eaadtbs/ib-ci-cypress:4.0
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
-    environment:
-      CYPRESS_CACHE_FOLDER: "~/InfoBase/client/.cache/Cypress"
     parameters:
       batch-count:
         type: integer
