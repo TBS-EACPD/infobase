@@ -376,13 +376,9 @@ service_standards_title:
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_sidebar_link "Service standards" "STANDARD"}} measure the government’s performance, which strengthens its accountability.
-    
-    They also help clients make timely, important decisions about accessing {{gl_sidebar_link "services" "SERVICE"}} and tell them what to expect from the services.
+    {{gl_tt "Service standards" "STANDARD"}} measure the government’s performance, which strengthens its accountability. They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tell them what to expect from the services.
   fr: |
-    Les {{gl_sidebar_link "normes de service" "STANDARD"}} mesurent le rendement du gouvernement, ce qui accroît la reddition de compte.
-
-    Elles aident également les clients à prendre des décisions importantes et opportunes concernant l'accès aux {{gl_sidebar_link "services" "SERVICE"}} et leur indiquent ce à quoi ils peuvent s’attendre.
+    Les {{gl_tt "normes de service" "STANDARD"}} mesurent le rendement du gouvernement, ce qui accroît la reddition de compte. Elles aident également les clients à prendre des décisions importantes et opportunes concernant l'accès aux {{gl_tt "services" "SERVICE"}} et leur indiquent ce à quoi ils peuvent s’attendre.
 no_service_standards_text:
   en: This service does not have any service standards
   fr: Ce service n'a pas de normes de service
