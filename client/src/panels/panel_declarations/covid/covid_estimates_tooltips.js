@@ -129,13 +129,6 @@ const tooltips_by_topic = {
   ],
 };
 
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-const IconTooltip = ({ tooltip }) => (
-  <Tooltip tooltip_content={tooltip}>
-    <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
-  </Tooltip>
-);
-
 export const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
   _.chain(tooltips_by_topic)
     .get(topic)
@@ -151,5 +144,9 @@ export const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
           _.includes(["*", topic_id], tooltip_topic_id)
         )
     )
-    .map(({ tooltip }) => <IconTooltip tooltip={tooltip} key={text} />)
+    .map(({ tooltip }, ix) => (
+      <Tooltip tooltip_content={tooltip} key={ix}>
+        <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
+      </Tooltip>
+    ))
     .value();

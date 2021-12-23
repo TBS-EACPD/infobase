@@ -11,6 +11,7 @@ type TooltipProps = {
   id: string;
   tooltip_position: "fixed" | "follow";
   tooltip_content: React.ReactNode;
+  screen_reader_alt: React.ReactNode;
   disable: boolean;
 };
 
@@ -25,12 +26,12 @@ export const Tooltip = ({
   <React.Fragment>
     <span data-tip data-for={id} tabIndex={0}>
       {children}
+      <span className="sr-only">{tooltip_content}</span>
     </span>
-
     <ReactTooltip
       id={id}
-      role="status"
       className="react-tooltip-overrides"
+      aria-hidden="true"
       backgroundColor={primaryColor}
       border={true}
       disable={disable}
