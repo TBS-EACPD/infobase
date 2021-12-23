@@ -362,6 +362,15 @@ uses_sin_as_identifier:
 service_types:
   en: Service types
   fr: Types de service
+last_accessibility_review:
+  en: Last accessibility review
+  fr: TODO
+last_improve_from_feedback:
+  en: Last improve from feedback
+  fr: TODO
+last_gender_analysis:
+  en: Last gender analysis
+  fr: TODO
 
 # Standard
 services_standards_text:
