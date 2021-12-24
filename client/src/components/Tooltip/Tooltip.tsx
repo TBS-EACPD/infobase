@@ -20,7 +20,6 @@ export const Tooltip = ({
   id = _.uniqueId("tooltip"),
   tooltip_position = "fixed",
   tooltip_content,
-  disable = false,
 }: TooltipProps) => (
   /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
   <React.Fragment>
@@ -34,8 +33,7 @@ export const Tooltip = ({
       aria-hidden="true"
       backgroundColor={primaryColor}
       border={true}
-      disable={disable}
-      /* found effect: solid | float to be mostly confusing for what this does, so effectively renamed in wrapper API*/
+      /* found `effect: "solid" | "float"` to be confusing naming for the positioning behaviour, just renaming it effectively*/
       effect={tooltip_position === "fixed" ? "solid" : "float"}
       /* delays to give time for mouse to enter the tooltip, which will hold it open, in case it contains links etc */
       delayHide={250}
