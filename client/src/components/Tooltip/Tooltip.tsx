@@ -8,11 +8,9 @@ import "./Tooltip.scss";
 
 type TooltipProps = {
   children: React.ReactNode;
-  id: string;
-  tooltip_position: "fixed" | "follow";
   tooltip_content: React.ReactNode;
-  screen_reader_alt: React.ReactNode;
-  disable: boolean;
+  id?: string;
+  tooltip_position?: "fixed" | "follow";
 };
 
 export const Tooltip = ({
