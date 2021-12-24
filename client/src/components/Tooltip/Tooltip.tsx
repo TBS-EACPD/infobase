@@ -9,24 +9,24 @@ import "./Tooltip.scss";
 type TooltipProps = {
   children: React.ReactNode;
   tooltip_content: React.ReactNode;
-  id?: string;
+  tooltip_id?: string;
   tooltip_position?: "fixed" | "follow";
 };
 
 export const Tooltip = ({
   children,
-  id = _.uniqueId("tooltip"),
+  tooltip_id = _.uniqueId("tooltip"),
   tooltip_position = "fixed",
   tooltip_content,
 }: TooltipProps) => (
   /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
   <React.Fragment>
-    <span data-tip data-for={id} tabIndex={0}>
+    <span data-tip data-for={tooltip_id} tabIndex={0}>
       {children}
       <span className="sr-only">{tooltip_content}</span>
     </span>
     <ReactTooltip
-      id={id}
+      id={tooltip_id}
       className="react-tooltip-overrides"
       aria-hidden="true"
       backgroundColor={primaryColor}
