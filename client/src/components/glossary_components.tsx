@@ -48,7 +48,7 @@ export const GlossaryTooltipWrapper = ({
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       tabIndex={0}
       data-ibtt-glossary-key={id}
-      data-toggle="tooltip"
+      data-toggle="glossary_sidebar"
     >
       {children}
     </span>

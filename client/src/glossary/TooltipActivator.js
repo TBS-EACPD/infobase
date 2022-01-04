@@ -39,7 +39,7 @@ const TooltipActivator = _.isUndefined(MutationObserver)
               (tooltip_instance) => tooltip_instance.node
             );
             const current_tooltip_nodes =
-              document.querySelectorAll("[data-toggle=tooltip]") || [];
+              document.querySelectorAll("[data-toggle=glossary_sidebar]") || [];
 
             const tooltip_nodes_have_changed =
               !(

@@ -89,7 +89,7 @@ const CellTooltip = ({ tooltip_text }) => (
     className="link-unstyled"
     tabIndex={0}
     aria-hidden="true"
-    data-toggle="tooltip"
+    data-toggle="glossary_sidebar"
     data-ibtt-html="true"
     data-ibtt-container="body"
     data-ibtt-text={tooltip_text}
