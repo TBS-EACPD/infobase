@@ -3,9 +3,13 @@ import React from "react";
 
 import "./GlossaryMenu.scss";
 
-import { lang } from "src/core/injected_build_constants";
+import { create_text_maker_component } from "src/components/index";
 
 import { IconArrow } from "src/icons/icons";
+
+import glossary_text from "./glossary.yaml";
+
+const { text_maker } = create_text_maker_component(glossary_text);
 
 interface SidebarContentProps {
   title: string;
@@ -43,11 +47,6 @@ export class GlossaryDef extends React.Component<
   }
 
   render() {
-    const back_text = {
-      en: "Full list",
-      fr: "Liste complète",
-    }[lang];
-
     return (
       <div className="glossary-sb-defintion-wrapper">
         <div className="glossary-sb-item-title">{this.props.title}</div>
@@ -71,7 +70,7 @@ export class GlossaryDef extends React.Component<
               color="white"
               alternate_color={false}
             />
-            {back_text}
+            {text_maker("back_text")}
           </span>
         </div>
       </div>
