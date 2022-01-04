@@ -55,7 +55,7 @@ const SidebarActivator = withRouter(
     };
 
     handleWindowClick = (e) => {
-      const target = e.target.closest("[data-toggle=tooltip]");
+      const target = e.target.closest("[data-toggle=glossary_sidebar]");
       target ? this.itemClick(target) : this.closeSidebar(e);
     };
 

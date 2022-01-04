@@ -643,7 +643,7 @@ HandlebarsWithPrototypeAccess.registerHelper(
       class="nowrap link-unstyled"
       tabindex="0"
       aria-hidden="true"
-      data-toggle="tooltip"
+      data-toggle="glossary_sidebar"
       data-ibtt-html="true"
       data-ibtt-container="body"
       data-ibtt-text="${popup_text}"
@@ -670,7 +670,7 @@ HandlebarsWithPrototypeAccess.registerHelper(
   "gl_tt",
   function glossary_tooltip(display, key) {
     return new HandlebarsWithPrototypeAccess.SafeString(
-      `<span class="nowrap glossary-sidebar-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="tooltip">${display}</span>`
+      `<span class="nowrap glossary-sidebar-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="glossary_sidebar">${display}</span>`
     );
   }
 );
