@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 import { glossaryEntryStore } from "src/models/glossary";
 
-import { BackToTop } from "src/components";
+import { SidebarButton } from "src/components";
 
 import { get_glossary_items_by_letter } from "./glossary_utils";
 
@@ -142,15 +142,9 @@ const SidebarActivator = withRouter(
             results={get_glossary_items_by_letter(this.state.results)}
             query={this.state.query}
           />
-          <BackToTop
-            focus={() => {
-              document.querySelector(".glossary__search-bar > input").focus();
-            }}
-            handleClick={() => {
-              this.setState({ showGlossary: true });
-            }}
-            text={"glossary_button"}
-            showWithScroll={false}
+          <SidebarButton
+            open_sidebar={() => this.toggleGlossary(true)}
+            left={false}
           />
         </div>
       );

@@ -16,6 +16,8 @@ export { StatelessDetails, Details } from "./Details/Details";
 export { LeafSpinner } from "./LeafSpinner/LeafSpinner";
 export { KeyConceptList } from "./KeyConceptList/KeyConceptList";
 export { BackToTop } from "./BackToTop/BackToTop";
+export { FloatingButton } from "./FloatingButton/FloatingButton";
+export { SidebarButton } from "./SidebarButton/SidebarButton";
 export { UnlabeledTombstone, LabeledTombstone } from "./Tombstones/Tombstones";
 export { Panel } from "./Panel/Panel";
 export { ShareButton } from "./ShareButton/ShareButton";
