@@ -40,6 +40,7 @@ const SidebarActivator = withRouter(
       this.setList(false);
 
       this.toggleGlossary(true);
+      document.querySelector(`.glossary__search-bar > input`).focus();
     };
 
     closeSidebar = (e) => {
@@ -54,11 +55,8 @@ const SidebarActivator = withRouter(
     };
 
     handleWindowClick = (e) => {
-      e.target.getAttribute("data-toggle") === "tooltip"
-        ? this.itemClick(e.target)
-        : e.target.parentElement.getAttribute("data-toggle") === "tooltip"
-        ? this.itemClick(e.target.parentElement)
-        : this.closeSidebar(e);
+      const target = e.target.closest("[data-toggle=tooltip]");
+      target ? this.itemClick(target) : this.closeSidebar(e);
     };
 
     handleWindowKeyDown = (e) => {
@@ -145,6 +143,9 @@ const SidebarActivator = withRouter(
           <SidebarButton
             open_sidebar={() => this.toggleGlossary(true)}
             left={false}
+            focus={() =>
+              document.querySelector(`.glossary__search-bar > input`).focus()
+            }
           />
         </div>
       );
