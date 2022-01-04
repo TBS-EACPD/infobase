@@ -13,3 +13,23 @@ glossary_translation:
 glossary_related_data:
   en: 'Related Data:'
   fr: 'Données connexes :'
+
+glossary_placeholder: 
+  en: "Search for a term"
+  fr: "Rechercher un terme"
+
+glossary_example:
+  en: 'Example: "Expenditures"'
+  fr: 'Exemple: "Dépenses"'
+
+glossary_title:
+  en: "Glossary"
+  fr: "Glossaire"
+
+glossary_navigation:
+  en: "Close glossary"
+  fr: "Fermé le glossaire"
+
+back_text:
+  en: "Full list"
+  fr: "Liste complète"
