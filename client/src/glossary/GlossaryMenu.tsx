@@ -4,7 +4,7 @@ import React from "react";
 
 import "./GlossaryMenu.scss";
 
-import { lang } from "src/core/injected_build_constants";
+import { create_text_maker_component } from "src/components/index";
 
 import { IconX } from "src/icons/icons";
 
@@ -14,6 +14,10 @@ import { MemoSearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
 import { GlossaryDef } from "./GlossaryDef";
 import { GlossaryList } from "./GlossaryList";
+
+import glossary_text from "./glossary.yaml";
+
+const { text_maker } = create_text_maker_component(glossary_text);
 
 interface GlossaryMenuProps {
   show: boolean;
@@ -59,26 +63,6 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
   }
 
   render() {
-    const glossary_placeholder = {
-      en: "Search for a term",
-      fr: "Rechercher un terme",
-    }[lang];
-
-    const glossary_example = {
-      en: 'Example: "Expenditures"',
-      fr: 'Exemple: "Dépenses"',
-    }[lang];
-
-    const glossary_title = {
-      en: "Glossary",
-      fr: "Glossaire",
-    }[lang];
-
-    const glossary_navigation = {
-      en: "Close glossary",
-      fr: "Fermé le glossaire",
-    }[lang];
-
     return (
       <div
         className={
@@ -95,7 +79,10 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
         >
           <div className="glossary-sidebar-header-wrapper" ref={this.header}>
             <div className="glossary-sidebar-header">
-              <div role="navigation" aria-label={glossary_navigation}>
+              <div
+                role="navigation"
+                aria-label={text_maker("glossary_navigation")}
+              >
                 <div className={"glossary-sb-close-button"}>
                   <span
                     role="button"
@@ -113,18 +100,20 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
                 className="glossary-header"
                 tabIndex={-1}
               >
-                {glossary_title}
+                {text_maker("glossary_title")}
               </h1>
               <div className="glossary-sb-search-wrapper">
                 <MemoSearchConfigTypeahead
                   type={"glossary-sidebar"}
-                  placeholder={glossary_placeholder}
+                  placeholder={text_maker("glossary_placeholder")}
                   search_configs={[glossary_search_config]}
                   getResults={this.props.setResults}
                   setQuery={this.props.setQuery}
                 />
               </div>
-              <div className="glossary-sb-example">{glossary_example}</div>
+              <div className="glossary-sb-example">
+                {text_maker("glossary_example")}
+              </div>
             </div>
           </div>
           <div className="glossary-sidebar-content-wrapper">
