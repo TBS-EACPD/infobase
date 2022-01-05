@@ -29,35 +29,25 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
     const { tab_options, tab_callback, disabled_message } = this.props;
     return (
       <div className="tabbed-controls">
-        <ul className="tabbed-controls__tab-container">
+        <div className="tabbed-controls__tab-list">
           {_.map(tab_options, ({ key, label, is_open, is_disabled }) => (
-            <li
+            <button
               key={key + "_tab"}
+              aria-pressed={is_open}
+              onClick={() => !is_disabled && tab_callback(key)}
+              aria-disabled={is_disabled}
+              title={is_disabled ? disabled_message : ""}
               className={classNames({
+                "button-unstyled": true,
                 "tabbed-controls__tab": true,
                 "tabbed-controls__tab--active": !!is_open,
                 "tabbed-controls__tab--disabled": !!is_disabled,
               })}
-              title={is_disabled ? disabled_message : ""}
             >
-              <span
-                tabIndex={0}
-                className="tabbed-controls__label"
-                role="button"
-                aria-pressed={is_open}
-                aria-disabled={is_disabled}
-                onClick={() => !is_disabled && tab_callback(key)}
-                onKeyDown={(e) =>
-                  !is_disabled &&
-                  _.includes(["Enter", " "], e.key) &&
-                  tab_callback(key)
-                }
-              >
-                {label}
-              </span>
-            </li>
+              <span className="tabbed-controls__label">{label}</span>
+            </button>
           ))}
-        </ul>
+        </div>
         <div className="tabbed-controls__bottom-border" />
       </div>
     );
