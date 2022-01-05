@@ -14,17 +14,16 @@
   color: $textColor;
 }
 
-.tabbed-controls__tab-container {
+.tabbed-controls__tab-list {
   position: relative;
   z-index: 1;
   overflow: hidden;
+  margin: 0px 12px 12px 12px;
 }
 
 .tabbed-controls__tab {
   display: inline-block;
   padding: 5px 20px 3px 20px;
-  margin-left: -2px;
-  margin-right: 1px;
   border-top-left-radius: $standardBorderRadius * 3;
   border-top-right-radius: $standardBorderRadius * 3;
   border: 1px solid change-color($color: $backgroundColor, $alpha: 0.5);
