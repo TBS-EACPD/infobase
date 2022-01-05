@@ -32,18 +32,17 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
         <ul>
           {_.map(tab_options, ({ key, label, is_open, is_disabled }) => (
             <li
-              className={classNames({
-                "tabbed-controls__label": true,
-                "tabbed-controls__label--active": !!is_open,
-                "tabbed-controls__label--disabled": !!is_disabled,
-              })}
-              id={key + "_tab"}
               key={key + "_tab"}
+              className={classNames({
+                "tabbed-controls__tab": true,
+                "tabbed-controls__tab--active": !!is_open,
+                "tabbed-controls__tab--disabled": !!is_disabled,
+              })}
               title={is_disabled ? disabled_message : ""}
             >
               <span
                 tabIndex={0}
-                className="tabbed-controls__label-text"
+                className="tabbed-controls__label"
                 role="button"
                 aria-pressed={is_open}
                 aria-disabled={is_disabled}

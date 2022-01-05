@@ -20,7 +20,7 @@
   overflow: hidden;
 }
 
-li.tabbed-controls__label {
+li.tabbed-controls__tab {
   display: inline-block;
   padding: 5px 20px 3px 20px;
   margin-left: -2px;
@@ -36,7 +36,7 @@ li.tabbed-controls__label {
   margin-bottom: -200%;
   cursor: pointer;
 
-  & > .tabbed-controls__label-text {
+  & > .tabbed-controls__label {
     text-decoration: none !important;
     color: inherit !important;
     cursor: pointer;
@@ -45,32 +45,32 @@ li.tabbed-controls__label {
   }
 }
 
-li.tabbed-controls__label:not(.tabbed-controls__label--disabled) {
+li.tabbed-controls__tab:not(.tabbed-controls__tab--disabled) {
   &:hover,
   &:focus {
     @include active-tab-mixin;
   }
 }
 
-li.tabbed-controls__label--active {
+li.tabbed-controls__tab--active {
   @include active-tab-mixin;
   border-top-left-radius: $standardBorderRadius;
   border-top-right-radius: $standardBorderRadius;
   cursor: default;
 
-  & > .tabbed-controls__label-text {
+  & > .tabbed-controls__label {
     cursor: default;
     font-weight: $heavyFontWeight;
   }
 }
 
-li.tabbed-controls__label--disabled {
+li.tabbed-controls__tab--disabled {
   @include disabled-tab-mixin;
   border-top-left-radius: $standardBorderRadius * 3;
   border-top-right-radius: $standardBorderRadius * 3;
   cursor: not-allowed;
 
-  & > .tabbed-controls__label-text {
+  & > .tabbed-controls__label {
     cursor: not-allowed;
   }
 }
