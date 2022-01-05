@@ -29,7 +29,7 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
     const { tab_options, tab_callback, disabled_message } = this.props;
     return (
       <div className="tabbed-controls">
-        <ul>
+        <ul className="tabbed-controls__tab-container">
           {_.map(tab_options, ({ key, label, is_open, is_disabled }) => (
             <li
               key={key + "_tab"}
