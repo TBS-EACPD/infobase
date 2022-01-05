@@ -14,13 +14,13 @@
   color: $textColor;
 }
 
-.tabbed-controls > ul {
+.tabbed-controls__tab-container {
   position: relative;
   z-index: 1;
   overflow: hidden;
 }
 
-li.tabbed-controls__tab {
+.tabbed-controls__tab {
   display: inline-block;
   padding: 5px 20px 3px 20px;
   margin-left: -2px;
@@ -45,14 +45,14 @@ li.tabbed-controls__tab {
   }
 }
 
-li.tabbed-controls__tab:not(.tabbed-controls__tab--disabled) {
+.tabbed-controls__tab:not(.tabbed-controls__tab--disabled) {
   &:hover,
   &:focus {
     @include active-tab-mixin;
   }
 }
 
-li.tabbed-controls__tab--active {
+.tabbed-controls__tab--active {
   @include active-tab-mixin;
   border-top-left-radius: $standardBorderRadius;
   border-top-right-radius: $standardBorderRadius;
@@ -64,7 +64,7 @@ li.tabbed-controls__tab--active {
   }
 }
 
-li.tabbed-controls__tab--disabled {
+.tabbed-controls__tab--disabled {
   @include disabled-tab-mixin;
   border-top-left-radius: $standardBorderRadius * 3;
   border-top-right-radius: $standardBorderRadius * 3;
