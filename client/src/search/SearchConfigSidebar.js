@@ -66,7 +66,7 @@ export class SearchConfigSidebar extends React.Component {
     )
   );
   get_config_groups = _.memoize((search_configs) =>
-    _.map(search_configs, (search_config, ix) => ({
+    _.map(search_configs, (search_config) => ({
       group_header: search_config.header_function(),
       group_filter: search_config.filter,
     }))
