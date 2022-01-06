@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import _ from "lodash";
 import React from "react";
 
 import "./GlossaryMenu.scss";
@@ -10,7 +8,7 @@ import { IconX } from "src/icons/icons";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
 
-import { MemoSearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
+import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
 import { GlossaryDef } from "./GlossaryDef";
 import { GlossaryList } from "./GlossaryList";
@@ -67,26 +65,26 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
       <div
         className={
           this.props.show
-            ? "glossary-sidebar-wrapper active"
-            : "glossary-sidebar-wrapper"
+            ? "glossary-sb__wrapper active"
+            : "glossary-sb__wrapper"
         }
       >
         <aside
           role="dialog"
           aria-labelledby="glossary-header"
-          className="glossary-sidebar"
+          className="glossary-sb"
           ref={this.main}
         >
-          <div className="glossary-sidebar-header-wrapper" ref={this.header}>
-            <div className="glossary-sidebar-header">
+          <div className="glossary-sb__header-wrapper" ref={this.header}>
+            <div className="glossary-sb__header">
               <div
                 role="navigation"
                 aria-label={text_maker("glossary_navigation")}
               >
-                <div className={"glossary-sb-close-button"}>
+                <div className={"glossary-sb__close-button"}>
                   <span
                     role="button"
-                    className="glossary-sb-icon-wrapper"
+                    className="glossary-sb__icon-wrapper"
                     onClick={() => this.props.toggle(false)}
                     onKeyDown={(e) => this.handleKeyPress(e)}
                     tabIndex={0}
@@ -97,13 +95,13 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
               </div>
               <h1
                 id="glossary-header"
-                className="glossary-header"
+                className="glossary-sb__header"
                 tabIndex={-1}
               >
                 {text_maker("glossary_title")}
               </h1>
-              <div className="glossary-sb-search-wrapper">
-                <MemoSearchConfigTypeahead
+              <div className="glossary-sb__search-wrapper">
+                <SearchConfigTypeahead
                   type={"glossary-sidebar"}
                   placeholder={text_maker("glossary_placeholder")}
                   search_configs={[glossary_search_config]}
@@ -111,13 +109,13 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
                   setQuery={this.props.setQuery}
                 />
               </div>
-              <div className="glossary-sb-example">
+              <div className="glossary-sb__example">
                 {text_maker("glossary_example")}
               </div>
             </div>
           </div>
-          <div className="glossary-sidebar-content-wrapper">
-            <div className="glossary-sidebar-content" id="gloss-sidebar">
+          <div className="glossary-sb__content-wrapper">
+            <div className="glossary-sb__content" id="gloss-sidebar">
               {!this.props.showList ? (
                 <GlossaryDef
                   closeItem={() => this.closeItem()}

@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import "./GlossaryMenu.scss";
@@ -48,10 +47,10 @@ export class GlossaryDef extends React.Component<
 
   render() {
     return (
-      <div className="glossary-sb-defintion-wrapper">
-        <div className="glossary-sb-item-title">{this.props.title}</div>
+      <div className="glossary-sb__defintion-wrapper">
+        <div className="glossary-sb__item-title">{this.props.title}</div>
         <div
-          className="glossary-sb-item-def"
+          className="glossary-sb__item-def"
           dangerouslySetInnerHTML={{
             __html: this.props.def,
           }}
@@ -59,7 +58,7 @@ export class GlossaryDef extends React.Component<
         <div>
           <span
             role="button"
-            className="glossary-sb-back-button"
+            className="glossary-sb__back-button"
             onClick={() => this.props.closeItem()}
             onKeyDown={(e) => this.handleKeyPress(e)}
             tabIndex={0}
