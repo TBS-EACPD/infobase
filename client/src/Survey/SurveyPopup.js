@@ -183,7 +183,7 @@ export const SurveyPopup = withRouter(
           title={
             <Fragment>
               <IconFeedback
-                title={text_maker("suvey_popup_header")}
+                aria_label={text_maker("suvey_popup_header")}
                 color={tertiaryColor}
                 alternate_color={false}
               />

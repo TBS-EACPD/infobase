@@ -60,7 +60,7 @@ export class WriteToClipboard extends React.Component {
           }
         >
           <IconComponent
-            title={button_description}
+            aria_label={button_description}
             color={icon_color}
             alternate_color={false}
           />

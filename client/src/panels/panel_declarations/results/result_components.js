@@ -260,7 +260,7 @@ const result_status_icon_components = (status, width) => {
     met: (
       <IconCheck
         key="met"
-        title={text_maker("met")}
+        aria_label={text_maker("met")}
         color={result_color_scale("met")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -271,7 +271,7 @@ const result_status_icon_components = (status, width) => {
     not_met: (
       <IconAttention
         key="not_met"
-        title={text_maker("not_met")}
+        aria_label={text_maker("not_met")}
         color={result_color_scale("not_met")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -282,7 +282,7 @@ const result_status_icon_components = (status, width) => {
     not_available: (
       <IconNotApplicable
         key="not_available"
-        title={text_maker("not_available")}
+        aria_label={text_maker("not_available")}
         color={result_color_scale("not_available")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}
@@ -293,7 +293,7 @@ const result_status_icon_components = (status, width) => {
     future: (
       <IconClock
         key="future"
-        title={text_maker("future")}
+        aria_label={text_maker("future")}
         color={result_color_scale("future")}
         width={width}
         svg_style={{ verticalAlign: "0em" }}

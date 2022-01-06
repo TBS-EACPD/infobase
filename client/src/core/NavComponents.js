@@ -84,7 +84,7 @@ class BreadCrumbs extends React.Component {
         <li className="infobase-home-breadcrumb-link">
           <a href="#start">
             <IconHome
-              title={trivial_text_maker("title")}
+              aria_label={trivial_text_maker("title")}
               inline={true}
               aria_hide={true}
             />

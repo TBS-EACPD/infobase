@@ -159,7 +159,7 @@ const StatelessPullDownAccordion = ({
     >
       <div className="pull-down-accordion-expander">
         <IconChevron
-          title={get_accordion_label(isExpanded)}
+          aria_label={get_accordion_label(isExpanded)}
           color={textLightColor}
           rotation={isExpanded ? 180 : undefined}
         />

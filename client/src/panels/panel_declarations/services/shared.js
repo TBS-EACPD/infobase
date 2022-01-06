@@ -43,7 +43,7 @@ const available_keys = {
 const available_icons = {
   yes: (
     <IconCheck
-      title={trivial_text_maker("yes")}
+      aria_label={trivial_text_maker("yes")}
       color={successDarkColor}
       width={30}
       alternate_color={false}
@@ -51,7 +51,7 @@ const available_icons = {
   ),
   no: (
     <IconX
-      title={trivial_text_maker("no")}
+      aria_label={trivial_text_maker("no")}
       color={highlightDarkColor}
       width={30}
       alternate_color={false}
@@ -59,7 +59,7 @@ const available_icons = {
   ),
   not_applicable: (
     <IconNotApplicable
-      title={trivial_text_maker("not_applicable")}
+      aria_label={trivial_text_maker("not_applicable")}
       color={warnDarkColor}
       width={30}
       alternate_color={false}

@@ -286,7 +286,7 @@ export class PDFGenerator extends React.Component {
               className={button_class_name}
             >
               <IconDownload
-                title={text_maker("download_pdf")}
+                aria_label={text_maker("download_pdf")}
                 color={icon_color}
                 alternate_color={icon_alternate_color}
                 width={icon_size}
