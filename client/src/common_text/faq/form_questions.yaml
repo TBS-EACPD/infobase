@@ -1,0 +1,23 @@
+sample_q:
+  en: |
+    sample q
+  fr: |
+    sample q (fr)
+
+sample_a:
+  en: |
+    answer
+  fr: |
+    answer (fr)
+
+ftes_q:
+  en: |
+    ftes wrong?
+  fr: |
+    ftes wrong (fr)
+
+ftes_a:
+  en: |
+    answer
+  fr: |
+    answer (fr)
