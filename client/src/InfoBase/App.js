@@ -21,7 +21,7 @@ import {
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
-import { SidebarActivator } from "src/glossary/SideBarActivator";
+import { GlossaryMenuController } from "src/glossary/GlossaryMenuController";
 import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
 
@@ -151,7 +151,8 @@ export class App extends React.Component {
             url_before_redirect_key="pre_redirected_url"
           />
           {has_local_storage && <SurveyPopup />}
-          <GlossaryMenu />
+          <GlossaryMenuController />
+
           <Suspense fallback={<LeafSpinner config_name={"route"} />}>
             <Switch>
               <Route

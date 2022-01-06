@@ -16,8 +16,8 @@ const ROUTES_WITHOUT_GLOSSARY = {
   "/glossary": true,
 };
 
-const SidebarActivator = withRouter(
-  class SidebarActivator extends React.Component {
+const GlossaryMenuController = withRouter(
+  class GlossaryMenuController extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -153,4 +153,4 @@ const SidebarActivator = withRouter(
   }
 );
 
-export { SidebarActivator };
+export { GlossaryMenuController };
