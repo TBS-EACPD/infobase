@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import "./GlossaryMenu.scss";
@@ -30,7 +29,7 @@ export class SidebarContent extends React.Component<SidebarContentProps> {
 
   render() {
     return (
-      <div className="glossary-sidebar-content" id="gloss-sidebar">
+      <div className="glossary-sb__content" id="gloss-sidebar">
         {!this.props.showList ? (
           <GlossaryDef
             closeItem={this.props.closeItem}

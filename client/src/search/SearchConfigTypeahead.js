@@ -142,5 +142,3 @@ export class SearchConfigTypeahead extends React.Component {
     );
   }
 }
-
-export const MemoSearchConfigTypeahead = React.memo(SearchConfigTypeahead);

@@ -49,8 +49,8 @@ export class SideBarSearch extends React.Component<SideBarSearchProps> {
     const { placeholder } = this.props;
 
     return (
-      <div className={"glossary__search-bar"}>
-        <div className={"glossary__icon-container"}>
+      <div className={"glossary-sb__search-bar"}>
+        <div className={"glossary-sb__icon-container"}>
           <span aria-hidden="true">
             <IconSearch width="30px" color="#2C70C9" alternate_color={false} />
           </span>
