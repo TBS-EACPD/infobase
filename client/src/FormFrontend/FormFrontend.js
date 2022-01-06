@@ -3,16 +3,20 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { CheckBox } from "src/components/CheckBox/CheckBox";
-
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
+
+import { PinnedFAQ } from "src/components/PinnedFAQ/PinnedFAQ";
 
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
+import form_faq from "src/common_text/faq/form_questions.yaml";
+
+import { primaryColor } from "src/style_constants/colors.interop.scss";
 import { textRed } from "src/style_constants/index";
 
 import {
@@ -91,6 +95,7 @@ class FormFrontend extends React.Component {
     this.state = {
       template_name: props.template_name,
       loading: true,
+      faq_acknowledged: false,
       privacy_acknowledged: !props.include_privacy,
       sent_to_backend: false,
       awaiting_backend_response: false,
@@ -155,6 +160,7 @@ class FormFrontend extends React.Component {
   render() {
     const {
       loading,
+      faq_acknowledged,
       privacy_acknowledged,
       sent_to_backend,
       awaiting_backend_response,
@@ -198,6 +204,7 @@ class FormFrontend extends React.Component {
     const ready_to_send =
       all_required_user_fields_are_filled &&
       all_connected_user_fields_are_filled &&
+      faq_acknowledged &&
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&
@@ -302,141 +309,174 @@ class FormFrontend extends React.Component {
       }
     };
 
+    const q_a_key_pairs = [
+      ["sample_q", "sample_a"],
+      ["ftes_q", "ftes_a"],
+    ];
+
+    const { TM: FAQ_TM } = create_text_maker_component([form_faq]);
+
     return (
       <div className="form-backend-form">
         {loading && <LeafSpinner config_name="subroute" />}
         {!loading && (
-          <form>
-            <fieldset>
-              {_.map(user_fields, (field_info, key) => (
-                <div
-                  key={`${`${key}_form`}`}
-                  className={`form-backend-form__${field_info.form_type}`}
-                >
-                  {get_form_for_user_field(field_info, key)}
-                </div>
-              ))}
-              {include_privacy && (
-                <div className="form-backend-form__privacy-note">
-                  <TM k="form_frontend_privacy_note" />
-                  <div style={{ textAlign: "center" }}>
-                    <CheckBox
-                      id={"form_frontend_privacy"}
-                      active={privacy_acknowledged}
-                      disabled={disable_forms}
-                      onClick={() =>
-                        this.setState({
-                          privacy_acknowledged: !privacy_acknowledged,
-                        })
-                      }
-                      label={text_maker("form_frontend_privacy_ack")}
-                      label_style={{ fontWeight: "bold" }}
-                      container_style={{ justifyContent: "center" }}
-                    />
+          <div>
+            <div className="form_faq">
+              <TM k="form_frontend_faq_note" />
+              <PinnedFAQ
+                q_a_key_pairs={q_a_key_pairs}
+                TM={FAQ_TM}
+                is_initially_expanded={true}
+                background_color={primaryColor}
+              />
+              <CheckBox
+                id={"form_frontend_faq"}
+                active={faq_acknowledged}
+                disabled={disable_forms}
+                onClick={() =>
+                  this.setState({
+                    faq_acknowledged: !faq_acknowledged,
+                  })
+                }
+                label={text_maker("form_frontend_faq_ack")}
+                label_style={{ fontWeight: "bold" }}
+                container_style={{ justifyContent: "center" }}
+              />
+            </div>
+            <form>
+              <fieldset>
+                {_.map(user_fields, (field_info, key) => (
+                  <div
+                    key={`${`${key}_form`}`}
+                    className={`form-backend-form__${field_info.form_type}`}
+                  >
+                    {get_form_for_user_field(field_info, key)}
                   </div>
-                </div>
-              )}
-              {
-                <button
-                  className={classNames(
-                    "btn-sm btn btn-ib-primary",
-                    awaiting_backend_response &&
-                      "form-backend-form__send-btn--sending"
-                  )}
-                  title={text_maker("form_frontend_required")}
-                  style={{ width: "100%" }}
-                  disabled={!ready_to_send}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    if (
-                      this.state.template_name === "feedback" &&
-                      has_local_storage
-                    ) {
-                      localStorage.setItem(
-                        `infobase_survey_popup_deactivated`,
-                        "true"
-                      );
-                      localStorage.setItem(
-                        `infobase_survey_popup_deactivated_since`,
-                        Date.now()
-                      );
-                    }
-                    this.setState({
-                      awaiting_backend_response: true,
-                      backend_response: {},
-                    });
-                  }}
-                  aria-label={
-                    (sent_to_backend &&
-                      (awaiting_backend_response
-                        ? text_maker("form_frontend_sending")
-                        : text_maker("form_frontend_sent"))) ||
-                    text_maker("form_frontend_send")
-                  }
-                >
-                  {!awaiting_backend_response &&
-                    text_maker("form_frontend_send")}
-                  {awaiting_backend_response && (
-                    <LeafSpinner
-                      config_name="relative_small"
-                      use_light_colors={true}
-                    />
-                  )}
-                </button>
-              }
-              {sent_to_backend && awaiting_backend_response && (
-                <p aria-live="polite" className="sr-only">
-                  {text_maker("form_frontend_sending")}
-                </p>
-              )}
-              {sent_to_backend && !awaiting_backend_response && (
-                <Fragment>
-                  {backend_response.success && (
-                    <Fragment>
-                      <p aria-live="polite">
-                        {text_maker("form_frontend_has_sent_success")}
-                      </p>
-                      <button
-                        className="btn-sm btn btn-ib-primary"
-                        style={{ float: "right" }}
-                        onClick={(event) => {
-                          event.preventDefault();
-
-                          _.chain(user_fields)
-                            .pickBy(({ form_type }) => form_type === "textarea")
-                            .forEach(
-                              (field_info, key) =>
-                                (document.getElementById(
-                                  get_field_id(key)
-                                ).value = "")
-                            )
-                            .value();
-
+                ))}
+                {include_privacy && (
+                  <div className="form-backend-form__privacy-note">
+                    <TM k="form_frontend_privacy_note" />
+                    <div style={{ textAlign: "center" }}>
+                      <CheckBox
+                        id={"form_frontend_privacy"}
+                        active={privacy_acknowledged}
+                        disabled={disable_forms}
+                        onClick={() =>
                           this.setState({
-                            ...this.state,
-                            sent_to_backend: false,
-                            awaiting_backend_response: false,
-                            backend_response: {},
-                            completed_template: {},
-                          });
-                        }}
-                      >
-                        {text_maker("form_frontend_reset")}
-                      </button>
-                    </Fragment>
-                  )}
-                  {!backend_response.success && (
-                    <Fragment>
-                      <div aria-live="polite">
-                        <TM k="form_frontend_has_sent_failed" el="p" />
-                        {backend_response.error_message}
-                      </div>
-                    </Fragment>
-                  )}
-                </Fragment>
-              )}
-            </fieldset>
-          </form>
+                            privacy_acknowledged: !privacy_acknowledged,
+                          })
+                        }
+                        label={text_maker("form_frontend_privacy_ack")}
+                        label_style={{ fontWeight: "bold" }}
+                        container_style={{ justifyContent: "center" }}
+                      />
+                    </div>
+                  </div>
+                )}
+                {
+                  <button
+                    className={classNames(
+                      "btn-sm btn btn-ib-primary",
+                      awaiting_backend_response &&
+                        "form-backend-form__send-btn--sending"
+                    )}
+                    title={text_maker("form_frontend_required")}
+                    style={{ width: "100%" }}
+                    disabled={!ready_to_send}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      if (
+                        this.state.template_name === "feedback" &&
+                        has_local_storage
+                      ) {
+                        localStorage.setItem(
+                          `infobase_survey_popup_deactivated`,
+                          "true"
+                        );
+                        localStorage.setItem(
+                          `infobase_survey_popup_deactivated_since`,
+                          Date.now()
+                        );
+                      }
+                      this.setState({
+                        awaiting_backend_response: true,
+                        backend_response: {},
+                      });
+                    }}
+                    aria-label={
+                      (sent_to_backend &&
+                        (awaiting_backend_response
+                          ? text_maker("form_frontend_sending")
+                          : text_maker("form_frontend_sent"))) ||
+                      text_maker("form_frontend_send")
+                    }
+                  >
+                    {!awaiting_backend_response &&
+                      text_maker("form_frontend_send")}
+                    {awaiting_backend_response && (
+                      <LeafSpinner
+                        config_name="relative_small"
+                        use_light_colors={true}
+                      />
+                    )}
+                  </button>
+                }
+                {sent_to_backend && awaiting_backend_response && (
+                  <p aria-live="polite" className="sr-only">
+                    {text_maker("form_frontend_sending")}
+                  </p>
+                )}
+                {sent_to_backend && !awaiting_backend_response && (
+                  <Fragment>
+                    {backend_response.success && (
+                      <Fragment>
+                        <p aria-live="polite">
+                          {text_maker("form_frontend_has_sent_success")}
+                        </p>
+                        <button
+                          className="btn-sm btn btn-ib-primary"
+                          style={{ float: "right" }}
+                          onClick={(event) => {
+                            event.preventDefault();
+
+                            _.chain(user_fields)
+                              .pickBy(
+                                ({ form_type }) => form_type === "textarea"
+                              )
+                              .forEach(
+                                (field_info, key) =>
+                                  (document.getElementById(
+                                    get_field_id(key)
+                                  ).value = "")
+                              )
+                              .value();
+
+                            this.setState({
+                              ...this.state,
+                              sent_to_backend: false,
+                              awaiting_backend_response: false,
+                              backend_response: {},
+                              completed_template: {},
+                            });
+                          }}
+                        >
+                          {text_maker("form_frontend_reset")}
+                        </button>
+                      </Fragment>
+                    )}
+                    {!backend_response.success && (
+                      <Fragment>
+                        <div aria-live="polite">
+                          <TM k="form_frontend_has_sent_failed" el="p" />
+                          {backend_response.error_message}
+                        </div>
+                      </Fragment>
+                    )}
+                  </Fragment>
+                )}
+              </fieldset>
+            </form>
+          </div>
         )}
       </div>
     );
