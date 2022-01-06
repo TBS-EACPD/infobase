@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React from "react";
+import React, { useState } from "react";
 
 import { lang } from "src/core/injected_build_constants";
 
@@ -111,3 +111,66 @@ export class TabbedContent extends React.Component<
     );
   }
 }
+
+export const Tabs = <TabKeys extends string[]>({
+  tabs,
+  tab_callback,
+  open_tab_key,
+  children,
+}: {
+  tabs: {
+    key: TabKeys[number];
+    label: string;
+    is_disabled?: boolean;
+    disabled_message?: string;
+  }[];
+  open_tab_key: TabKeys[number];
+  tab_callback: (tab_key: TabKeys[number]) => void;
+  children: React.ReactNode;
+}) => {
+  const [id] = useState(_.uniqueId());
+  const get_panel_id = (key: TabKeys[number]) => `tab_panel_${key}_${id}`;
+
+  // TODO needs some fancy custom keyboard navigation controls as per the role="tablist" spec
+  return (
+    <div className="tabbed-content">
+      <div className="tabbed-controls">
+        <div role="tablist" className="tabbed-controls__tab-list">
+          {_.map(tabs, ({ key, label, is_disabled, disabled_message }) => (
+            <button
+              key={key + "_tab"}
+              role="tab"
+              aria-controls={get_panel_id(key)}
+              aria-selected={key === open_tab_key}
+              onClick={() => !is_disabled && tab_callback(key)}
+              aria-disabled={is_disabled}
+              title={is_disabled ? disabled_message : ""}
+              className={classNames(
+                "button-unstyled",
+                "tabbed-controls__tab",
+                key === open_tab_key && "tabbed-controls__tab--active",
+                !!is_disabled && "tabbed-controls__tab--disabled"
+              )}
+            >
+              <span className="tabbed-controls__label">{label}</span>
+            </button>
+          ))}
+        </div>
+        <div className="tabbed-controls__bottom-border" />
+      </div>
+      {_.map(tabs, ({ key }) => (
+        <section
+          key={key}
+          role="tabpanel"
+          id={get_panel_id(open_tab_key)}
+          className={classNames(
+            "tabbed-content__pane",
+            key !== open_tab_key && "hidden"
+          )}
+        >
+          {key === open_tab_key && children}
+        </section>
+      ))}
+    </div>
+  );
+};
