@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 
 import "./GlossaryMenu.scss";
@@ -63,11 +64,10 @@ export class GlossaryMenu extends React.Component<GlossaryMenuProps> {
   render() {
     return (
       <div
-        className={
-          this.props.show
-            ? "glossary-sb__wrapper active"
-            : "glossary-sb__wrapper"
-        }
+        className={classNames(
+          "glossary-sb__wrapper",
+          this.props.show && "active"
+        )}
       >
         <aside
           role="dialog"
