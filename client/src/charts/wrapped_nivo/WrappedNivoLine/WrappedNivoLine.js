@@ -223,13 +223,13 @@ export class WrappedNivoLine extends React.Component {
         >
           {this.state.y_scale_zoomed ? (
             <IconZoomOut
-              title={text_maker("zoom_out")}
+              aria_label={text_maker("zoom_out")}
               color={secondaryColor}
               alternate_color={backgroundColor}
             />
           ) : (
             <IconZoomIn
-              title={text_maker("zoom_in")}
+              aria_label={text_maker("zoom_in")}
               color={secondaryColor}
               alternate_color={backgroundColor}
             />

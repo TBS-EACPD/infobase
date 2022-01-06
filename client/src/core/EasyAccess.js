@@ -28,7 +28,7 @@ const EasyAccess_ = () => (
   <Fragment>
     <a href="#glossary" className="link-unstyled nav-item">
       <IconGlossary
-        title={trivial_text_maker("glossary")}
+        aria_label={trivial_text_maker("glossary")}
         inline={true}
         aria_hide={true}
       />
@@ -38,7 +38,7 @@ const EasyAccess_ = () => (
     </a>
     <a href="#metadata" className="link-unstyled nav-item">
       <IconDataset
-        title={trivial_text_maker("metadata")}
+        aria_label={trivial_text_maker("metadata")}
         inline={true}
         aria_hide={true}
       />
@@ -48,7 +48,7 @@ const EasyAccess_ = () => (
     </a>
     <a href="#about" className="link-unstyled nav-item">
       <IconInfo
-        title={trivial_text_maker("about_title")}
+        aria_label={trivial_text_maker("about_title")}
         inline={true}
         aria_hide={true}
       />
@@ -58,7 +58,7 @@ const EasyAccess_ = () => (
     </a>
     <a href="#faq" className="link-unstyled nav-item">
       <IconQuestion
-        title={trivial_text_maker("faq_title")}
+        aria_label={trivial_text_maker("faq_title")}
         inline={true}
         aria_hide={true}
       />

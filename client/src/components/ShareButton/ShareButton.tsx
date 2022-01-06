@@ -97,7 +97,7 @@ export class ShareButton extends React.Component<
           className={button_class_name}
         >
           <IconShare
-            title={button_description}
+            aria_label={button_description}
             color={icon_color}
             alternate_color={icon_alternate_color}
             width={icon_size}
@@ -110,7 +110,7 @@ export class ShareButton extends React.Component<
           title={
             <Fragment>
               <IconShare
-                title={text_maker("share")}
+                aria_label={text_maker("share")}
                 color={tertiaryColor}
                 alternate_color={false}
               />
@@ -125,7 +125,7 @@ export class ShareButton extends React.Component<
                 media_icon={
                   <IconFacebook
                     {...common_icon_props}
-                    title={`${text_maker("share_on")} Facebook`}
+                    aria_label={`${text_maker("share_on")} Facebook`}
                   />
                 }
               />
@@ -134,7 +134,7 @@ export class ShareButton extends React.Component<
                 media_icon={
                   <IconTwitter
                     {...common_icon_props}
-                    title={`${text_maker("share_on")} Twitter`}
+                    aria_label={`${text_maker("share_on")} Twitter`}
                   />
                 }
               />
@@ -143,7 +143,7 @@ export class ShareButton extends React.Component<
                 media_icon={
                   <IconReddit
                     {...common_icon_props}
-                    title={`${text_maker("share_on")} Reddit`}
+                    aria_label={`${text_maker("share_on")} Reddit`}
                   />
                 }
               />
@@ -152,7 +152,7 @@ export class ShareButton extends React.Component<
                 media_icon={
                   <IconEmail
                     {...common_icon_props}
-                    title={text_maker("share_via_email")}
+                    aria_label={text_maker("share_via_email")}
                   />
                 }
               />

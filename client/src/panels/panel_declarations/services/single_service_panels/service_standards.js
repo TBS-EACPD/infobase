@@ -128,7 +128,7 @@ export class ServiceStandards extends React.Component {
 
     const get_icon_props = (status) => ({
       key: status,
-      title: text_maker(status),
+      aria_label: text_maker(status),
       color: color_scale(status),
       width: 38,
       vertical_align: "0em",

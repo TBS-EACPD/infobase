@@ -207,7 +207,7 @@ class InteractiveGraph extends React.Component {
               onClick={() => this.setState({ show_table: !show_table })}
             >
               <IconTable
-                title={nivo_common_text_maker("show_table")}
+                aria_label={nivo_common_text_maker("show_table")}
                 color={secondaryColor}
                 alternate_color={backgroundColor}
               />

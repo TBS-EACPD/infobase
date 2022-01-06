@@ -36,7 +36,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export const HierarchyDeadElementIcon = () => (
   <IconAttentionTriangle
-    title={text_maker("hierarchy_dead_element_icon_alt_text")}
+    aria_label={text_maker("hierarchy_dead_element_icon_alt_text")}
     color={highlightColor}
     inline={true}
     alternate_color={false}

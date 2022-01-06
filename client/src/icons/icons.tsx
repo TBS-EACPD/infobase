@@ -45,7 +45,7 @@ class _IconWrapper extends React.Component<IconWrapperProps, IconWrapperState> {
       color,
       alternate_color,
       rotation,
-      title,
+      aria_label,
       width,
       height, // if falsey will assume square using width
       svg_style,
@@ -78,8 +78,8 @@ class _IconWrapper extends React.Component<IconWrapperProps, IconWrapperState> {
         className={classNames("icon-svg", inline && "icon-svg--inline")}
         style={svg_styles}
         viewBox={`0 0 ${viewbox_width} ${viewbox_height || viewbox_width}`}
-        aria-hidden={aria_hide || !title}
-        aria-label={title}
+        aria-hidden={aria_hide || !aria_label}
+        aria-label={aria_label}
       >
         {alternate_color && (
           <style
@@ -112,7 +112,7 @@ class _IconWrapper extends React.Component<IconWrapperProps, IconWrapperState> {
 }
 
 type OuterIconProps = {
-  title?: string;
+  aria_label?: string;
   rotation?: number;
   width?: number | string;
   height?: number | string;

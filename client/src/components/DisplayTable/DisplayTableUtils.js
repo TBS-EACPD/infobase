@@ -221,7 +221,7 @@ export const DisplayTableDownloadCsv = ({ csv_string, table_name }) => (
         className={"display_table__util-icon"}
       >
         <IconDownload
-          title={text_maker("download_table_data_desc")}
+          aria_label={text_maker("download_table_data_desc")}
           color={backgroundColor}
         />
       </button>
