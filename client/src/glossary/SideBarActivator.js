@@ -40,7 +40,7 @@ const SidebarActivator = withRouter(
       this.setList(false);
 
       this.toggleGlossary(true);
-      document.querySelector(`.glossary__search-bar > input`).focus();
+      document.querySelector(`.glossary-sb__search-bar > input`).focus();
     };
 
     closeSidebar = (e) => {
@@ -144,7 +144,7 @@ const SidebarActivator = withRouter(
             open_sidebar={() => this.toggleGlossary(true)}
             left={false}
             focus={() =>
-              document.querySelector(`.glossary__search-bar > input`).focus()
+              document.querySelector(`.glossary-sb__search-bar > input`).focus()
             }
           />
         </div>
