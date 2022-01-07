@@ -398,7 +398,7 @@ export default class ResultsExplorerDisplay extends React.Component {
     }
 
     return (
-      <div className="tabbed-content">
+      <div className="ib-tabs">
         <TabbedControls
           tab_callback={(doc) => set_doc !== doc && set_doc(doc, subject)}
           tab_options={_.map(docs_with_data, (doc_with_data) => ({
@@ -417,7 +417,7 @@ export default class ResultsExplorerDisplay extends React.Component {
             is_open: doc_with_data === doc,
           }))}
         />
-        <div className="tabbed-content__pane">{inner_content}</div>
+        <div className="ib-tabs__tab-panel">{inner_content}</div>
       </div>
     );
   }

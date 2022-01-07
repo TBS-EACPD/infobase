@@ -14,14 +14,14 @@
   color: $textColor;
 }
 
-.tabbed-controls__tab-list {
+.ib-tabs__tab-list {
   position: relative;
   z-index: 1;
   overflow: hidden;
   margin: 0px 12px 12px 12px;
 }
 
-.tabbed-controls__tab {
+.ib-tabs__tab {
   display: inline-block;
   padding: 5px 20px 3px 20px;
   border-top-left-radius: $standardBorderRadius * 3;
@@ -35,7 +35,7 @@
   margin-bottom: -200%;
   cursor: pointer;
 
-  & > .tabbed-controls__label {
+  & > .ib-tabs__tab-label {
     text-decoration: none !important;
     color: inherit !important;
     cursor: pointer;
@@ -44,43 +44,43 @@
   }
 }
 
-.tabbed-controls__tab:not(.tabbed-controls__tab--disabled) {
+.ib-tabs__tab:not(.ib-tabs__tab--disabled) {
   &:hover,
   &:focus {
     @include active-tab-mixin;
   }
 }
 
-.tabbed-controls__tab--active {
+.ib-tabs__tab--active {
   @include active-tab-mixin;
   border-top-left-radius: $standardBorderRadius;
   border-top-right-radius: $standardBorderRadius;
   cursor: default;
 
-  & > .tabbed-controls__label {
+  & > .ib-tabs__tab-label {
     cursor: default;
     font-weight: $heavyFontWeight;
   }
 }
 
-.tabbed-controls__tab--disabled {
+.ib-tabs__tab--disabled {
   @include disabled-tab-mixin;
   border-top-left-radius: $standardBorderRadius * 3;
   border-top-right-radius: $standardBorderRadius * 3;
   cursor: not-allowed;
 
-  & > .tabbed-controls__label {
+  & > .ib-tabs__tab-label {
     cursor: not-allowed;
   }
 }
 
-.tabbed-controls__bottom-border {
+.ib-tabs__tab_bottom-border {
   position: relative;
   top: -13px;
   border-top: 1px solid $primaryColor;
 }
 
-.tabbed-content__pane {
+.ib-tabs__tab-panel {
   position: relative;
   margin: 0px 15px;
   top: -13px;
