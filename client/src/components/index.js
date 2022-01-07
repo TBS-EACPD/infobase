@@ -5,7 +5,6 @@ export {
   AutoAccordion,
 } from "./Accordion/Accordions";
 export { TagCloud } from "./TagCloud";
-export { TabLoadingWrapper } from "./TabLoadingWrapper/TabLoadingWrapper";
 export { HeightClipper } from "./HeightClipper/HeightClipper";
 export { RadioButtons } from "./RadioButtons/RadioButtons";
 export { Select } from "./Select/Select";
