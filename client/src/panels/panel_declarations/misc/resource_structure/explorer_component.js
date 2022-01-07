@@ -107,7 +107,7 @@ export default class SingleTagResourceExplorerComponent extends React.Component 
     const tab_on_click = (year) => set_year !== year && set_year(year);
 
     return (
-      <div className="tabbed-content">
+      <div className="ib-tabs">
         <TabbedControls
           tab_callback={tab_on_click}
           tab_options={_.compact([
@@ -133,7 +133,7 @@ export default class SingleTagResourceExplorerComponent extends React.Component 
             },
           ])}
         />
-        <div className="tabbed-content__pane">{inner_content}</div>
+        <div className="ib-tabs__tab-panel">{inner_content}</div>
       </div>
     );
   }

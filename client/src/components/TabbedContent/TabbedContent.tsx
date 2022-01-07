@@ -28,8 +28,8 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
   render() {
     const { tab_options, tab_callback, disabled_message } = this.props;
     return (
-      <div className="tabbed-controls">
-        <div className="tabbed-controls__tab-list">
+      <div className="ib-tabs__tab-list-container">
+        <div className="ib-tabs__tab-list">
           {_.map(tab_options, ({ key, label, is_open, is_disabled }) => (
             <button
               key={key + "_tab"}
@@ -39,16 +39,16 @@ export class TabbedControls extends React.Component<TabbedControlsProps> {
               title={is_disabled ? disabled_message : ""}
               className={classNames({
                 "button-unstyled": true,
-                "tabbed-controls__tab": true,
-                "tabbed-controls__tab--active": !!is_open,
-                "tabbed-controls__tab--disabled": !!is_disabled,
+                "ib-tabs__tab": true,
+                "ib-tabs__tab--active": !!is_open,
+                "ib-tabs__tab--disabled": !!is_disabled,
               })}
             >
-              <span className="tabbed-controls__label">{label}</span>
+              <span className="ib-tabs__tab-label">{label}</span>
             </button>
           ))}
         </div>
-        <div className="tabbed-controls__bottom-border" />
+        <div className="ib-tabs__tab_bottom-border" />
       </div>
     );
   }
@@ -75,12 +75,12 @@ export const Tabs = <TabKeys extends string[]>({
 
   // TODO needs some fancy custom keyboard navigation controls as per the role="tablist" spec
   return (
-    <div className="tabbed-content" id={id}>
-      <div className="tabbed-controls">
-        <div role="tablist" className="tabbed-controls__tab-list">
+    <div className="ib-tabs" id={id}>
+      <div className="ib-tabs__tab-list-container">
+        <div role="tablist" className="ib-tabs__tab-list">
           {_.map(tabs, ({ key, label, is_disabled, disabled_message }) => (
             <button
-              key={key + "_tab"}
+              key={key}
               role="tab"
               aria-controls={get_panel_id(key)}
               aria-selected={key === open_tab_key}
@@ -89,16 +89,16 @@ export const Tabs = <TabKeys extends string[]>({
               title={is_disabled ? disabled_message : ""}
               className={classNames(
                 "button-unstyled",
-                "tabbed-controls__tab",
-                key === open_tab_key && "tabbed-controls__tab--active",
-                !!is_disabled && "tabbed-controls__tab--disabled"
+                "ib-tabs__tab",
+                key === open_tab_key && "ib-tabs__tab--active",
+                !!is_disabled && "ib-tabs__tab--disabled"
               )}
             >
-              <span className="tabbed-controls__label">{label}</span>
+              <span className="ib-tabs__tab-label">{label}</span>
             </button>
           ))}
         </div>
-        <div className="tabbed-controls__bottom-border" />
+        <div className="ib-tabs__tab_bottom-border" />
       </div>
       {_.map(tabs, ({ key }) => (
         <section
@@ -106,7 +106,7 @@ export const Tabs = <TabKeys extends string[]>({
           role="tabpanel"
           id={get_panel_id(open_tab_key)}
           className={classNames(
-            "tabbed-content__pane",
+            "ib-tabs__tab-panel",
             key !== open_tab_key && "hidden"
           )}
         >

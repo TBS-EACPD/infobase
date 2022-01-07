@@ -259,7 +259,7 @@ export default class TagExplorerComponent extends React.Component {
           TM={FAQ_TM}
           background_color={primaryColor}
         />
-        <div className="tabbed-content">
+        <div className="ib-tabs">
           <TabbedControls
             tab_callback={(key) => {
               const route_base = window.location.href.split("#")[0];
@@ -294,7 +294,7 @@ export default class TagExplorerComponent extends React.Component {
               },
             ]}
           />
-          <div className="tabbed-content__pane">
+          <div className="ib-tabs__tab-panel">
             <div>
               <ul className="nav nav-justified nav-pills">
                 {_.map(all_category_props, (props) => (
