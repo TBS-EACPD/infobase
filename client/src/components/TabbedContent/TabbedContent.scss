@@ -35,43 +35,43 @@
   margin-bottom: -200%;
   cursor: pointer;
 
-  & > .ib-tabs__tab-label {
-    text-decoration: none !important;
-    color: inherit !important;
-    cursor: pointer;
-    font-size: 15.6px;
-    font-weight: $mediumFontWeight;
+  &:not(.ib-tabs__tab--disabled) {
+    &:hover,
+    &:focus {
+      @include active-tab-mixin;
+    }
   }
-}
 
-.ib-tabs__tab:not(.ib-tabs__tab--disabled) {
-  &:hover,
-  &:focus {
+  &.ib-tabs__tab--active {
     @include active-tab-mixin;
-  }
-}
-
-.ib-tabs__tab--active {
-  @include active-tab-mixin;
-  border-top-left-radius: $standardBorderRadius;
-  border-top-right-radius: $standardBorderRadius;
-  cursor: default;
-
-  & > .ib-tabs__tab-label {
+    border-top-left-radius: $standardBorderRadius;
+    border-top-right-radius: $standardBorderRadius;
     cursor: default;
-    font-weight: $heavyFontWeight;
+
+    & > .ib-tabs__tab-label {
+      cursor: default;
+      font-weight: $heavyFontWeight;
+    }
+  }
+
+  &.ib-tabs__tab--disabled {
+    @include disabled-tab-mixin;
+    border-top-left-radius: $standardBorderRadius * 3;
+    border-top-right-radius: $standardBorderRadius * 3;
+    cursor: not-allowed;
+
+    & > .ib-tabs__tab-label {
+      cursor: not-allowed;
+    }
   }
 }
 
-.ib-tabs__tab--disabled {
-  @include disabled-tab-mixin;
-  border-top-left-radius: $standardBorderRadius * 3;
-  border-top-right-radius: $standardBorderRadius * 3;
-  cursor: not-allowed;
-
-  & > .ib-tabs__tab-label {
-    cursor: not-allowed;
-  }
+.ib-tabs__tab-label {
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: pointer;
+  font-size: 15.6px;
+  font-weight: $mediumFontWeight;
 }
 
 .ib-tabs__tab_bottom-border {
