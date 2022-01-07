@@ -158,6 +158,7 @@ export class ServiceStandards extends React.Component {
       year: {
         index: 1,
         header: text_maker("year"),
+        is_searchable: true,
       },
       target: {
         index: 2,
