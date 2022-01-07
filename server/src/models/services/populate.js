@@ -275,9 +275,15 @@ export default async function ({ models }) {
           .map((id) => id && `${dept_code}-${id}`)
           .compact()
           .value(),
-        last_accessibility_review: _.toInteger(last_accessibility_review),
-        last_improve_from_feedback: _.toInteger(last_improve_from_feedback),
-        last_gender_analysis: _.toInteger(last_gender_analysis),
+        last_accessibility_review: last_accessibility_review
+          ? _.toInteger(last_accessibility_review)
+          : last_accessibility_review,
+        last_improve_from_feedback: last_improve_from_feedback
+          ? _.toInteger(last_improve_from_feedback)
+          : last_improve_from_feedback,
+        last_gender_analysis: last_gender_analysis
+          ? _.toInteger(last_gender_analysis)
+          : last_gender_analysis,
 
         ...multi_value_string_fields_to_arrays({
           service_type_en,
