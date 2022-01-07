@@ -91,4 +91,11 @@
     padding-right: 0px;
     padding-left: 0px;
   }
+
+  &.ib-tabs__tab-panel--hidden {
+    visibility: hidden;
+    margin: 0px;
+    padding: 0px;
+    height: 0px;
+  }
 }

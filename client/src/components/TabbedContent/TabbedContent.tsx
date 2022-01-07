@@ -62,7 +62,7 @@ export const Tabs = <TabKeys extends string[]>({
 }: {
   tabs: {
     key: TabKeys[number];
-    label: string;
+    label: React.ReactNode;
     is_disabled?: boolean;
     disabled_message?: string;
   }[];
@@ -70,8 +70,8 @@ export const Tabs = <TabKeys extends string[]>({
   tab_open_callback: (tab_key: TabKeys[number]) => void;
   children: React.ReactNode;
 }) => {
-  const [id] = useState(_.uniqueId());
-  const get_panel_id = (key: TabKeys[number]) => `tab_panel_${key}_${id}`;
+  const [id] = useState(_.uniqueId("ib-tabs"));
+  const get_panel_id = (key: TabKeys[number]) => `${id}__panel-${key}`;
 
   // TODO needs some fancy custom keyboard navigation controls as per the role="tablist" spec
   return (
@@ -107,7 +107,7 @@ export const Tabs = <TabKeys extends string[]>({
           id={get_panel_id(open_tab_key)}
           className={classNames(
             "ib-tabs__tab-panel",
-            key !== open_tab_key && "hidden"
+            key !== open_tab_key && "ib-tabs__tab-panel--hidden"
           )}
         >
           {key === open_tab_key && children}
