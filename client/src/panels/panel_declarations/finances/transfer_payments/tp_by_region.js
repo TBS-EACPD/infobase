@@ -263,31 +263,29 @@ class TPMap extends React.Component {
           <Col size={12} isGraph>
             {!is_a11y_mode && (
               <StatefulTabs
-                tab_keys={["transfer_payments", "transfer_payments_per_capita"]}
-                disabled_tabs={_.compact([
-                  !text_args.show_per_capita_data &&
-                    "transfer_payments_per_capita",
-                ])}
-                disabled_message={text_maker("tp_no_data_hover_label")}
-                tab_labels={{
-                  transfer_payments: text_maker("transfer_payments"),
-                  transfer_payments_per_capita: text_maker(
-                    "transfer_payments_per_capita"
-                  ),
-                }}
-                tab_pane_contents={{
-                  transfer_payments: (
-                    <TransferPaymentsByRegionGraph
-                      data={transfer_payment_data}
-                    />
-                  ),
-                  transfer_payments_per_capita: (
-                    <TransferPaymentsByRegionGraph
-                      data={per_capita_data}
-                      alt_totals_by_year={per_capita_totals}
-                    />
-                  ),
-                }}
+                tabs={[
+                  {
+                    key: "transfer_payments",
+                    label: text_maker("transfer_payments"),
+                    content: (
+                      <TransferPaymentsByRegionGraph
+                        data={transfer_payment_data}
+                      />
+                    ),
+                  },
+                  {
+                    key: "transfer_payments_per_capita",
+                    label: text_maker("transfer_payments_per_capita"),
+                    is_disabled: !text_args.show_per_capita_data,
+                    disabled_message: text_maker("tp_no_data_hover_label"),
+                    content: (
+                      <TransferPaymentsByRegionGraph
+                        data={per_capita_data}
+                        alt_totals_by_year={per_capita_totals}
+                      />
+                    ),
+                  },
+                ]}
               />
             )}
             {is_a11y_mode && (

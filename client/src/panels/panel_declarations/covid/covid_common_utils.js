@@ -25,25 +25,21 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
       _.includes(subject_types, panel_args.subject.subject_type)
   );
 
-  return {
-    tab_keys: _.map(configs_for_subject_type, "key"),
-    tab_labels: _.chain(configs_for_subject_type)
-      .map(({ key, label }) => [key, label])
-      .fromPairs()
-      .value(),
-    tab_pane_contents: _.chain(configs_for_subject_type)
-      .map(({ key, load_data, TabContent }) => [
-        key,
+  return _.map(
+    configs_for_subject_type,
+    ({ key, label, load_data, TabContent }) => ({
+      key,
+      label,
+      content: (
         <TabLoadingWrapper
           args={panel_args}
           load_data={load_data}
           TabContent={TabContent}
           key={key}
-        />,
-      ])
-      .fromPairs()
-      .value(),
-  };
+        />
+      ),
+    })
+  );
 };
 
 const wrap_with_vote_stat_controls = (Component) => (props) =>
