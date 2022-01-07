@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import {
   LeafSpinner,
   KeyConceptList,
-  TabbedControls,
+  Tabs,
   AlertBanner,
   GlossaryIcon,
   PinnedFAQ,
@@ -259,99 +259,95 @@ export default class TagExplorerComponent extends React.Component {
           TM={FAQ_TM}
           background_color={primaryColor}
         />
-        <div className="ib-tabs">
-          <TabbedControls
-            tab_callback={(key) => {
-              const route_base = window.location.href.split("#")[0];
-
-              const new_route = {
-                [actual_year]: `#tag-explorer/${hierarchy_scheme}/actual`,
-                [planning_year]: `#tag-explorer/${hierarchy_scheme}/planned`,
-              }[key];
-
-              window.location.href = `${route_base}${new_route}`;
-            }}
-            tab_options={[
-              {
-                key: actual_year,
-                label: (
-                  <TM
-                    k="actual_resources"
-                    args={{ year: run_template(actual_year) }}
-                  />
-                ),
-                is_open: year === actual_year,
-              },
-              {
-                key: planning_year,
-                label: (
-                  <TM
-                    k="planned_resources"
-                    args={{ year: run_template(planning_year) }}
-                  />
-                ),
-                is_open: year === planning_year,
-              },
-            ]}
-          />
-          <div className="ib-tabs__tab-panel">
-            <div>
-              <ul className="nav nav-justified nav-pills">
-                {_.map(all_category_props, (props) => (
-                  <li
-                    key={props.id}
-                    className={classNames(props.active && "active", "nav-item")}
-                  >
-                    <a
-                      className="nav-link"
-                      href={`#tag-explorer/${props.id}/${year_to_route_arg_map[year]}`}
-                    >
-                      {props.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <h2 style={{ marginBottom: "10px" }}>
-              {current_category && current_category.text}
-              {current_category &&
-                glossaryEntryStore.has(current_category.id) && (
-                  <GlossaryIcon
-                    id={current_category.id}
-                    icon_color={tertiaryColor}
-                    icon_alt_color={primaryColor}
-                  />
-                )}
-            </h2>
-            {current_category.is_m2m && (
-              <AlertBanner banner_class="danger">
-                <KeyConceptList
-                  question_answer_pairs={_.map(
-                    [
-                      [
-                        "MtoM_tag_warning_reporting_level_q",
-                        "MtoM_tag_warning_reporting_level_a",
-                      ],
-                      [
-                        "MtoM_tag_warning_resource_splitting_q",
-                        "MtoM_tag_warning_resource_splitting_a",
-                      ],
-                      [
-                        "MtoM_tag_warning_double_counting_q",
-                        "MtoM_tag_warning_double_counting_a",
-                      ],
-                    ],
-                    ([q_key, a_key]) => [
-                      <TM key={q_key} k={q_key} />,
-                      <TM key={a_key} k={a_key} />,
-                    ]
-                  )}
+        <Tabs
+          open_tab_key={year}
+          tabs={[
+            {
+              key: actual_year,
+              label: (
+                <TM
+                  k="actual_resources"
+                  args={{ year: run_template(actual_year) }}
                 />
-              </AlertBanner>
-            )}
-            <div>{inner_content}</div>
+              ),
+            },
+            {
+              key: planning_year,
+              label: (
+                <TM
+                  k="planned_resources"
+                  args={{ year: run_template(planning_year) }}
+                />
+              ),
+            },
+          ]}
+          tab_open_callback={(key) => {
+            const route_base = window.location.href.split("#")[0];
+
+            const new_route = {
+              [actual_year]: `#tag-explorer/${hierarchy_scheme}/actual`,
+              [planning_year]: `#tag-explorer/${hierarchy_scheme}/planned`,
+            }[key];
+
+            window.location.href = `${route_base}${new_route}`;
+          }}
+        >
+          <div>
+            <ul className="nav nav-justified nav-pills">
+              {_.map(all_category_props, (props) => (
+                <li
+                  key={props.id}
+                  className={classNames(props.active && "active", "nav-item")}
+                >
+                  <a
+                    className="nav-link"
+                    href={`#tag-explorer/${props.id}/${year_to_route_arg_map[year]}`}
+                  >
+                    {props.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+          <h2 style={{ marginBottom: "10px" }}>
+            {current_category && current_category.text}
+            {current_category &&
+              glossaryEntryStore.has(current_category.id) && (
+                <GlossaryIcon
+                  id={current_category.id}
+                  icon_color={tertiaryColor}
+                  icon_alt_color={primaryColor}
+                />
+              )}
+          </h2>
+          {current_category.is_m2m && (
+            <AlertBanner banner_class="danger">
+              <KeyConceptList
+                question_answer_pairs={_.map(
+                  [
+                    [
+                      "MtoM_tag_warning_reporting_level_q",
+                      "MtoM_tag_warning_reporting_level_a",
+                    ],
+                    [
+                      "MtoM_tag_warning_resource_splitting_q",
+                      "MtoM_tag_warning_resource_splitting_a",
+                    ],
+                    [
+                      "MtoM_tag_warning_double_counting_q",
+                      "MtoM_tag_warning_double_counting_a",
+                    ],
+                  ],
+                  ([q_key, a_key]) => [
+                    <TM key={q_key} k={q_key} />,
+                    <TM key={a_key} k={a_key} />,
+                  ]
+                )}
+              />
+            </AlertBanner>
+          )}
+          <div>{inner_content}</div>
+        </Tabs>
       </div>
     );
   }

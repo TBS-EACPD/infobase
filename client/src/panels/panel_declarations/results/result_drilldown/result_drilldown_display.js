@@ -18,7 +18,7 @@ import {
 
 import {
   DlItem,
-  TabbedControls,
+  Tabs,
   LeafSpinner,
   Format,
   CheckBox,
@@ -398,27 +398,26 @@ export default class ResultsExplorerDisplay extends React.Component {
     }
 
     return (
-      <div className="ib-tabs">
-        <TabbedControls
-          tab_callback={(doc) => set_doc !== doc && set_doc(doc, subject)}
-          tab_options={_.map(docs_with_data, (doc_with_data) => ({
-            key: doc_with_data,
-            label: /drr/.test(doc_with_data) ? (
-              <TM
-                k="DRR_results_option_title"
-                args={{ doc_year: result_docs[doc_with_data].year }}
-              />
-            ) : (
-              <TM
-                k="DP_results_option_title"
-                args={{ doc_year: result_docs[doc_with_data].year }}
-              />
-            ),
-            is_open: doc_with_data === doc,
-          }))}
-        />
-        <div className="ib-tabs__tab-panel">{inner_content}</div>
-      </div>
+      <Tabs
+        open_tab_key={doc}
+        tabs={_.map(docs_with_data, (doc_with_data) => ({
+          key: doc_with_data,
+          label: /drr/.test(doc_with_data) ? (
+            <TM
+              k="DRR_results_option_title"
+              args={{ doc_year: result_docs[doc_with_data].year }}
+            />
+          ) : (
+            <TM
+              k="DP_results_option_title"
+              args={{ doc_year: result_docs[doc_with_data].year }}
+            />
+          ),
+        }))}
+        tab_open_callback={(doc) => set_doc !== doc && set_doc(doc, subject)}
+      >
+        {inner_content}
+      </Tabs>
     );
   }
 }

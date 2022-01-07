@@ -1,7 +1,7 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React from "react";
 
-import { TabbedControls, CheckBox, LinkStyled } from "src/components/index";
+import { Tabs, CheckBox, LinkStyled } from "src/components/index";
 
 import { formats } from "src/core/format";
 
@@ -13,20 +13,29 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 const { TM } = covid_create_text_maker_component();
 
-const YearSelectionTabs = ({ years, on_select_year, selected_year }) =>
-  years.length > 1 && (
-    <TabbedControls
-      tab_options={_.map(years, (year) => ({
+const YearSelectionTabs = ({
+  years,
+  on_select_year,
+  selected_year,
+  children,
+}) =>
+  years.length > 1 ? (
+    <Tabs
+      open_tab_key={selected_year}
+      tabs={_.map(years, (year) => ({
         key: year,
         label: formats.year_to_fiscal_year(year),
-        is_open: year === selected_year,
       }))}
-      tab_callback={on_select_year}
-    />
+      tab_open_callback={on_select_year}
+    >
+      {children}
+    </Tabs>
+  ) : (
+    children
   );
 
 const AboveTabFootnoteList = ({ children }) => (
-  <Fragment>
+  <div className="medium-panel-text text">
     <TM k={"covid_above_tab_footnote_title"} className="bold" el="span" />
     <div style={{ lineHeight: "normal" }}>
       {children}
@@ -35,7 +44,7 @@ const AboveTabFootnoteList = ({ children }) => (
       </LinkStyled>
       <TM k={"covid_above_tab_footnote_item"} el="p" />
     </div>
-  </Fragment>
+  </div>
 );
 
 class ToggleVoteStatProvider extends React.Component {
