@@ -1,7 +1,7 @@
 import _ from "lodash";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import { TabLoadingWrapper } from "src/components/index";
+import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { businessConstants } from "src/models/businessConstants";
 
@@ -18,6 +18,24 @@ const { text_maker } = covid_create_text_maker_component();
 
 const { estimates_docs } = businessConstants;
 
+const TabLoadingWrapper = ({ panel_args, load_data, TabContent }) => {
+  const [loading, set_loading] = useState(true);
+  const [data, set_data] = useState([]);
+
+  useEffect(() => {
+    loading &&
+      load_data(panel_args).then((data) => {
+        set_data(data);
+        set_loading(false);
+      });
+  });
+
+  if (loading) {
+    return <LeafSpinner config_name={"subroute"} />;
+  } else {
+    return <TabContent args={panel_args} data={data} />;
+  }
+};
 const get_tabbed_content_props = (tab_content_configs, panel_args) => {
   const configs_for_subject_type = _.filter(
     tab_content_configs,
@@ -32,10 +50,9 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
       label,
       content: (
         <TabLoadingWrapper
-          args={panel_args}
+          panel_args={panel_args}
           load_data={load_data}
           TabContent={TabContent}
-          key={key}
         />
       ),
     })
