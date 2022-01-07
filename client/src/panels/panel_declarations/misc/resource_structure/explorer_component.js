@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { TabbedControls } from "src/components/index";
+import { Tabs } from "src/components/index";
 
 import { run_template } from "src/models/text";
 
@@ -107,34 +107,32 @@ export default class SingleTagResourceExplorerComponent extends React.Component 
     const tab_on_click = (year) => set_year !== year && set_year(year);
 
     return (
-      <div className="ib-tabs">
-        <TabbedControls
-          tab_callback={tab_on_click}
-          tab_options={_.compact([
-            has_actual_data && {
-              label: (
-                <TM
-                  k="actual_resources"
-                  args={{ year: run_template(actual_year) }}
-                />
-              ),
-              key: actual_year,
-              is_open: year === actual_year,
-            },
-            has_planning_data && {
-              key: planning_year,
-              label: (
-                <TM
-                  k="planned_resources"
-                  args={{ year: run_template(planning_year) }}
-                />
-              ),
-              is_open: year === planning_year,
-            },
-          ])}
-        />
-        <div className="ib-tabs__tab-panel">{inner_content}</div>
-      </div>
+      <Tabs
+        open_tab_key={year}
+        tabs={_.compact([
+          has_actual_data && {
+            key: actual_year,
+            label: (
+              <TM
+                k="actual_resources"
+                args={{ year: run_template(actual_year) }}
+              />
+            ),
+          },
+          has_planning_data && {
+            key: planning_year,
+            label: (
+              <TM
+                k="planned_resources"
+                args={{ year: run_template(planning_year) }}
+              />
+            ),
+          },
+        ])}
+        tab_open_callback={tab_on_click}
+      >
+        {inner_content}
+      </Tabs>
     );
   }
 }

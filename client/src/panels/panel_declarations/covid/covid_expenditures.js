@@ -377,20 +377,17 @@ class CovidExpendituresPanel extends React.Component {
       );
 
       return (
-        <Fragment>
-          <div className="medium-panel-text text">
-            <YearSelectionTabs
-              years={panel_args.years}
-              on_select_year={this.on_select_year}
-              selected_year={selected_year}
+        <YearSelectionTabs
+          years={panel_args.years}
+          on_select_year={this.on_select_year}
+          selected_year={selected_year}
+        >
+          <AboveTabFootnoteList subject={panel_args.subject}>
+            <TM
+              k="covid_expenditures_above_tab_footnote_list"
+              args={extended_panel_args}
             />
-            <AboveTabFootnoteList subject={panel_args.subject}>
-              <TM
-                k="covid_expenditures_above_tab_footnote_list"
-                args={extended_panel_args}
-              />
-            </AboveTabFootnoteList>
-          </div>
+          </AboveTabFootnoteList>
           {/* 
             key={selected_year} below is to force a re-render on year change, as React doesn't compare deep enough
             to see the corresponding prop changes in tabbed_content_props itself 
@@ -402,7 +399,7 @@ class CovidExpendituresPanel extends React.Component {
             </Fragment>
           )}
           {tabs.length > 1 && <StatefulTabs tabs={tabs} key={selected_year} />}
-        </Fragment>
+        </YearSelectionTabs>
       );
     }
   }
