@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { TabbedContent, LeafSpinner, DisplayTable } from "src/components/index";
+import { StatefulTabs, LeafSpinner, DisplayTable } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
 import {
@@ -438,7 +438,7 @@ class CovidEstimatesPanel extends React.Component {
             key={selected_year} below is to force a re-render on year change, as React doesn't compare deep enough
             to see the corresponding prop changes in tabbed_content_props itself 
           */}
-          <TabbedContent {...tabbed_content_props} key={selected_year} />
+          <StatefulTabs {...tabbed_content_props} key={selected_year} />
         </Fragment>
       );
     }

@@ -12,7 +12,6 @@ export { Select } from "./Select/Select";
 export { SortDirections } from "./SortDirection/SortDirection";
 export {
   TabbedControls,
-  TabbedContent,
   Tabs,
   StatefulTabs,
 } from "./TabbedContent/TabbedContent";
