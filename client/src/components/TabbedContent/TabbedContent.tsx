@@ -2,57 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { useState } from "react";
 
-import { lang } from "src/core/injected_build_constants";
-
 import "./TabbedContent.scss";
-
-const TabbedControlsDefaultProps = {
-  disabled_message: {
-    en: "Unavailable",
-    fr: "Indisponsible",
-  }[lang],
-};
-type TabbedControlsProps = typeof TabbedControlsDefaultProps & {
-  tab_options: tab_option[];
-  tab_callback: (key: string) => void;
-};
-type tab_option = {
-  key: string;
-  label: string;
-  is_open: boolean;
-  is_disabled: boolean;
-};
-
-export class TabbedControls extends React.Component<TabbedControlsProps> {
-  static defaultProps = TabbedControlsDefaultProps;
-  render() {
-    const { tab_options, tab_callback, disabled_message } = this.props;
-    return (
-      <div className="ib-tabs__tab-list-container">
-        <div className="ib-tabs__tab-list">
-          {_.map(tab_options, ({ key, label, is_open, is_disabled }) => (
-            <button
-              key={key + "_tab"}
-              aria-pressed={is_open}
-              onClick={() => !is_disabled && tab_callback(key)}
-              aria-disabled={is_disabled}
-              title={is_disabled ? disabled_message : ""}
-              className={classNames({
-                "button-unstyled": true,
-                "ib-tabs__tab": true,
-                "ib-tabs__tab--active": !!is_open,
-                "ib-tabs__tab--disabled": !!is_disabled,
-              })}
-            >
-              <span className="ib-tabs__tab-label">{label}</span>
-            </button>
-          ))}
-        </div>
-        <div className="ib-tabs__tab_bottom-border" />
-      </div>
-    );
-  }
-}
 
 export const Tabs = <TabKeys extends string[]>({
   tabs,
