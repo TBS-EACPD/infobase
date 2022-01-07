@@ -200,6 +200,9 @@ export default async function ({ models }) {
         decision_digital_status,
         issuance_digital_status,
         issue_res_digital_status,
+        last_accessibility_review,
+        last_improve_from_feedback,
+        last_gender_analysis,
 
         service_type_name_en: service_type_en,
         service_type_name_fr: service_type_fr,
@@ -272,6 +275,9 @@ export default async function ({ models }) {
           .map((id) => id && `${dept_code}-${id}`)
           .compact()
           .value(),
+        last_accessibility_review: _.toInteger(last_accessibility_review),
+        last_improve_from_feedback: _.toInteger(last_improve_from_feedback),
+        last_gender_analysis: _.toInteger(last_gender_analysis),
 
         ...multi_value_string_fields_to_arrays({
           service_type_en,
