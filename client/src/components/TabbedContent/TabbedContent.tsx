@@ -117,37 +117,20 @@ export const Tabs = <TabKeys extends string[]>({
   );
 };
 
-export const StatefulTabs = <TabKeys extends string[]>({
-  tab_keys,
-  tab_labels,
-  tab_pane_contents,
-  disabled_tabs,
-  disabled_message,
+export const StatefulTabs = ({
+  tabs,
 }: {
-  tab_keys: TabKeys;
-  tab_labels: { [key in TabKeys[number]]: string };
-  tab_pane_contents: { [key in TabKeys[number]]: React.ReactNode };
-  disabled_tabs?: TabKeys[number][];
-  disabled_message?: string;
+  tabs: {
+    key: string;
+    label: string;
+    is_disabled?: boolean;
+    disabled_message?: string;
+    content: React.ReactNode;
+  }[];
 }) => {
   const [open_tab_key, set_open_tab_key] = useState(
-    tab_keys[0] as TabKeys[number]
+    _.chain(tabs).map("key").first().value()
   );
-
-  const tabs = _.map<
-    TabKeys[number],
-    {
-      key: TabKeys[number];
-      label: string;
-      is_disabled?: boolean;
-      disabled_message?: string;
-    }
-  >(tab_keys, (key) => ({
-    key,
-    label: tab_labels[key],
-    is_disabled: _.includes(disabled_tabs, key),
-    disabled_message,
-  }));
 
   return (
     <Tabs
@@ -155,7 +138,7 @@ export const StatefulTabs = <TabKeys extends string[]>({
       open_tab_key={open_tab_key}
       tab_open_callback={set_open_tab_key}
     >
-      {tab_pane_contents[open_tab_key]}
+      {_.find(tabs, { key: open_tab_key })?.content}
     </Tabs>
   );
 };

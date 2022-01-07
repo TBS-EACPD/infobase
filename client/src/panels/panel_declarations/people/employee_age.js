@@ -206,27 +206,30 @@ export const declare_employee_age_panel = () =>
             </Col>
             <Col size={12} isGraph>
               <StatefulTabs
-                tab_keys={["age_group", "avgage"]}
-                tab_labels={{
-                  age_group: text_maker("age_group"),
-                  avgage: text_maker("avgage"),
-                }}
-                tab_pane_contents={{
-                  age_group: (
-                    <div id={"emp_age_tab_pane"}>
-                      <GraphOverlay>
-                        <NivoLineBarToggle {...age_group_options} />
-                      </GraphOverlay>
-                      <div className="clearfix"></div>
-                    </div>
-                  ),
-                  avgage: (
-                    <div id={"emp_age_tab_pane"}>
-                      <NivoLineBarToggle {...avg_age_options} />
-                      <div className="clearfix"></div>
-                    </div>
-                  ),
-                }}
+                tabs={[
+                  {
+                    key: "age_group",
+                    label: text_maker("age_group"),
+                    content: (
+                      <div id={"emp_age_tab_pane"}>
+                        <GraphOverlay>
+                          <NivoLineBarToggle {...age_group_options} />
+                        </GraphOverlay>
+                        <div className="clearfix"></div>
+                      </div>
+                    ),
+                  },
+                  {
+                    key: "avgage",
+                    label: text_maker("avgage"),
+                    content: (
+                      <div id={"emp_age_tab_pane"}>
+                        <NivoLineBarToggle {...avg_age_options} />
+                        <div className="clearfix"></div>
+                      </div>
+                    ),
+                  },
+                ]}
               />
             </Col>
           </StdPanel>
