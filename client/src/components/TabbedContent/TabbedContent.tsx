@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import "./TabbedContent.scss";
 
-export const Tabs = <TabKeys extends string[]>({
+export const TabbedContent = <TabKeys extends string[]>({
   tabs,
   tab_open_callback,
   open_tab_key,
@@ -67,7 +67,7 @@ export const Tabs = <TabKeys extends string[]>({
   );
 };
 
-export const StatefulTabs = ({
+export const TabbedContentStateful = ({
   tabs,
 }: {
   tabs: {
@@ -83,12 +83,12 @@ export const StatefulTabs = ({
   );
 
   return (
-    <Tabs
+    <TabbedContent
       tabs={tabs}
       open_tab_key={open_tab_key}
       tab_open_callback={set_open_tab_key}
     >
       {_.find(tabs, { key: open_tab_key })?.content}
-    </Tabs>
+    </TabbedContent>
   );
 };

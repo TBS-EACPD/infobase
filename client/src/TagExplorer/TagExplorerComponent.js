@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import {
   LeafSpinner,
   KeyConceptList,
-  Tabs,
+  TabbedContent,
   AlertBanner,
   GlossaryIcon,
   PinnedFAQ,
@@ -259,7 +259,7 @@ export default class TagExplorerComponent extends React.Component {
           TM={FAQ_TM}
           background_color={primaryColor}
         />
-        <Tabs
+        <TabbedContent
           open_tab_key={year}
           tabs={[
             {
@@ -347,7 +347,7 @@ export default class TagExplorerComponent extends React.Component {
             </AlertBanner>
           )}
           <div>{inner_content}</div>
-        </Tabs>
+        </TabbedContent>
       </div>
     );
   }

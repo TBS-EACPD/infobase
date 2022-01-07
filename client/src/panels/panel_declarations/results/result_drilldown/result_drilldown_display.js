@@ -18,7 +18,7 @@ import {
 
 import {
   DlItem,
-  Tabs,
+  TabbedContent,
   LeafSpinner,
   Format,
   CheckBox,
@@ -398,7 +398,7 @@ export default class ResultsExplorerDisplay extends React.Component {
     }
 
     return (
-      <Tabs
+      <TabbedContent
         open_tab_key={doc}
         tabs={_.map(docs_with_data, (doc_with_data) => ({
           key: doc_with_data,
@@ -417,7 +417,7 @@ export default class ResultsExplorerDisplay extends React.Component {
         tab_open_callback={(doc) => set_doc !== doc && set_doc(doc, subject)}
       >
         {inner_content}
-      </Tabs>
+      </TabbedContent>
     );
   }
 }

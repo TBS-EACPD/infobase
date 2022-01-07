@@ -10,7 +10,10 @@ export { HeightClipper } from "./HeightClipper/HeightClipper";
 export { RadioButtons } from "./RadioButtons/RadioButtons";
 export { Select } from "./Select/Select";
 export { SortDirections } from "./SortDirection/SortDirection";
-export { Tabs, StatefulTabs } from "./TabbedContent/TabbedContent";
+export {
+  TabbedContent,
+  TabbedContentStateful,
+} from "./TabbedContent/TabbedContent";
 export { LabeledBox } from "./LabeledBox/LabeledBox";
 export { TextMaker, TM } from "./TextMaker";
 export { TwoLevelSelect } from "./TwoLevelSelect/TwoLevelSelect";

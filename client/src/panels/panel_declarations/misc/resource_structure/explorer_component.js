@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { Tabs } from "src/components/index";
+import { TabbedContent } from "src/components/index";
 
 import { run_template } from "src/models/text";
 
@@ -107,7 +107,7 @@ export default class SingleTagResourceExplorerComponent extends React.Component 
     const tab_on_click = (year) => set_year !== year && set_year(year);
 
     return (
-      <Tabs
+      <TabbedContent
         open_tab_key={year}
         tabs={_.compact([
           has_actual_data && {
@@ -132,7 +132,7 @@ export default class SingleTagResourceExplorerComponent extends React.Component 
         tab_open_callback={tab_on_click}
       >
         {inner_content}
-      </Tabs>
+      </TabbedContent>
     );
   }
 }
