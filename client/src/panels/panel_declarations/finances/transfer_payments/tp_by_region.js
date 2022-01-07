@@ -9,7 +9,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import {
   create_text_maker_component,
   LeafSpinner,
-  StatefulTabs,
+  TabbedContentStateful,
   DisplayTable,
 } from "src/components/index";
 
@@ -262,7 +262,7 @@ class TPMap extends React.Component {
           </Col>
           <Col size={12} isGraph>
             {!is_a11y_mode && (
-              <StatefulTabs
+              <TabbedContentStateful
                 tabs={[
                   {
                     key: "transfer_payments",
