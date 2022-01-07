@@ -30,10 +30,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
       : suspendedServicesForOrg;
   const services = getServicesQuery({ id: subject.id });
 
-  const { active_count, inactive_count } = _.chain(services)
-    .groupBy(({ is_active }) => (is_active ? "active_count" : "inactive_count"))
-    .mapValues((services) => services.length)
-    .value();
+  const does_active_service_exist = _.filter(services, "is_active").length > 0;
 
   const includes_lowercase = (value, query) =>
     _.includes(value.toLowerCase(), query.toLowerCase());
@@ -57,8 +54,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
           k={"list_of_provided_services_desc"}
           args={{
             subject_name: subject.name,
-            active_count: active_count || 0,
-            inactive_count,
+            num_of_services: services.length || 0,
           }}
         />
       </div>
@@ -102,7 +98,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
                         {type}
                       </span>
                     ))}
-                    {!is_active && (
+                    {does_active_service_exist && !is_active && (
                       <span
                         className="tag-badge tag-badge--red"
                         style={{ marginRight: "1rem" }}
