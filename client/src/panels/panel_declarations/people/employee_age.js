@@ -204,7 +204,7 @@ export const declare_employee_age_panel = () =>
                 args={text_calculations}
               />
             </Col>
-            <Col size={12} isGraph extraClasses="zero-padding">
+            <Col size={12} isGraph>
               <StatefulTabs
                 tab_keys={["age_group", "avgage"]}
                 tab_labels={{
