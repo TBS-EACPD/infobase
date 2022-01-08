@@ -8,7 +8,7 @@ form_frontend_privacy_ack:
 
 ## TODO
 form_frontend_faq_note:
-  en: Please read the FAQ before submitting
+  en: Please read and acknowledge the FAQ before submitting
   fr: TODO
 form_frontend_faq_ack:
   en: I acknowledge that I read the FAQ

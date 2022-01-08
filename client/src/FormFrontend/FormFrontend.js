@@ -215,6 +215,8 @@ class FormFrontend extends React.Component {
       (sent_to_backend && backend_response.success) ||
       awaiting_backend_response;
 
+    const required_asterisk = <span style={{ color: textRed }}>*</span>;
+
     const get_form_for_user_field = (field_info, field_key) => {
       switch (field_info.form_type) {
         case "checkbox":
@@ -223,9 +225,7 @@ class FormFrontend extends React.Component {
             <fieldset style={{ marginBottom: "1rem" }}>
               <legend>
                 {field_info.form_label[lang]}
-                {field_info.required && (
-                  <span style={{ color: textRed }}>*</span>
-                )}
+                {field_info.required && required_asterisk}
               </legend>
               <div
                 className={classNames({
@@ -279,9 +279,7 @@ class FormFrontend extends React.Component {
             <Fragment>
               <label htmlFor={get_field_id(field_key)}>
                 {field_info.form_label[lang]}
-                {connected_required && (
-                  <span style={{ color: textRed }}>*</span>
-                )}
+                {connected_required && required_asterisk}
               </label>
               <textarea
                 style={{ marginBottom: "1rem" }}
@@ -322,7 +320,10 @@ class FormFrontend extends React.Component {
         {!loading && (
           <form>
             <div className="form_faq">
-              <TM k="form_frontend_faq_note" />
+              <div style={{ fontWeight: 700 }}>
+                {text_maker("form_frontend_faq_note")}
+                {required_asterisk}
+              </div>
               <PinnedFAQ
                 q_a_key_pairs={q_a_key_pairs}
                 TM={FAQ_TM}
