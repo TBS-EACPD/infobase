@@ -23,7 +23,7 @@ export const TabbedContent = <TabKeys extends string[]>({
 }) => {
   const [id] = useState(_.uniqueId("ib-tabs"));
 
-  // hash the key, it might contain non-id-safe characters, e.g. {. TODO maybe make a generic id-escape util
+  // hashing the key value because it might contain non-id-safe characters such as "{". TODO maybe make a generic id-escape util
   const get_panel_id = (key: TabKeys[number]) =>
     `${id}__panel-${string_hash(key)}`;
 
@@ -38,6 +38,36 @@ export const TabbedContent = <TabKeys extends string[]>({
               role="tab"
               aria-controls={get_panel_id(key)}
               aria-selected={key === open_tab_key}
+              tabIndex={key === open_tab_key ? 0 : -1} // as per spec, navigation between tabs uses arrow keys, not tab navigation
+              onKeyDown={(e) => {
+                if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                  // TODO hmm, leaves out screen readers from knowing about disabled tabs... only one place those are used right now to be fair, maybe drop the concept?
+                  const next_tab = _.chain(tabs)
+                    .filter(
+                      ({ is_disabled }) =>
+                        _.isUndefined(is_disabled) || !is_disabled
+                    )
+                    .thru((tabs) =>
+                      e.key === "ArrowLeft" ? _.reverse(tabs) : tabs
+                    )
+                    .thru((target_tabs) => {
+                      const current_index = _.findIndex(
+                        target_tabs,
+                        ({ key }) => key === open_tab_key
+                      );
+
+                      if (current_index + 1 < target_tabs.length) {
+                        return target_tabs[current_index + 1];
+                      } else {
+                        return target_tabs[0];
+                      }
+                    })
+                    .value();
+
+                  tab_open_callback(next_tab.key);
+                  // TODO focus management
+                }
+              }}
               onClick={() => !is_disabled && tab_open_callback(key)}
               aria-disabled={is_disabled}
               title={is_disabled ? disabled_message : ""}
