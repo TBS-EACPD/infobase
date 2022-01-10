@@ -7,13 +7,6 @@
   color: $textColor;
 }
 
-@mixin disabled-tab-mixin {
-  border: 1px solid $primaryColor;
-  background-color: $tertiaryColor;
-  transition: background-color 200ms ease, border-radius 400ms ease;
-  color: $textColor;
-}
-
 .ib-tabs__tab-list {
   position: relative;
   z-index: 1;
@@ -35,11 +28,9 @@
   margin-bottom: -200%;
   cursor: pointer;
 
-  &:not(.ib-tabs__tab--disabled) {
-    &:hover,
-    &:focus {
-      @include active-tab-mixin;
-    }
+  &:hover,
+  &:focus {
+    @include active-tab-mixin;
   }
 
   &.ib-tabs__tab--active {
@@ -51,17 +42,6 @@
     & > .ib-tabs__tab-label {
       cursor: default;
       font-weight: $heavyFontWeight;
-    }
-  }
-
-  &.ib-tabs__tab--disabled {
-    @include disabled-tab-mixin;
-    border-top-left-radius: $standardBorderRadius * 3;
-    border-top-right-radius: $standardBorderRadius * 3;
-    cursor: not-allowed;
-
-    & > .ib-tabs__tab-label {
-      cursor: not-allowed;
     }
   }
 

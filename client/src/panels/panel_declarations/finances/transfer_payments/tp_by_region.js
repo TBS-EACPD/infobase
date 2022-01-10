@@ -261,43 +261,46 @@ class TPMap extends React.Component {
             {!is_a11y_mode && <TM k="tp_by_region_graph_usage" />}
           </Col>
           <Col size={12} isGraph>
-            {!is_a11y_mode && (
-              <TabbedContentStateful
-                tabs={[
-                  {
-                    key: "transfer_payments",
-                    label: text_maker("transfer_payments"),
-                    content: (
-                      <TransferPaymentsByRegionGraph
-                        data={transfer_payment_data}
-                      />
-                    ),
-                  },
-                  {
-                    key: "transfer_payments_per_capita",
-                    label: text_maker("transfer_payments_per_capita"),
-                    is_disabled: !text_args.show_per_capita_data,
-                    disabled_message: text_maker("tp_no_data_hover_label"),
-                    content: (
-                      <TransferPaymentsByRegionGraph
-                        data={per_capita_data}
-                        alt_totals_by_year={per_capita_totals}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            )}
+            {!is_a11y_mode &&
+              (!text_args.show_per_capita_data ? (
+                <TransferPaymentsByRegionGraph data={transfer_payment_data} />
+              ) : (
+                <TabbedContentStateful
+                  tabs={[
+                    {
+                      key: "transfer_payments",
+                      label: text_maker("transfer_payments"),
+                      content: (
+                        <TransferPaymentsByRegionGraph
+                          data={transfer_payment_data}
+                        />
+                      ),
+                    },
+                    {
+                      key: "transfer_payments_per_capita",
+                      label: text_maker("transfer_payments_per_capita"),
+                      content: (
+                        <TransferPaymentsByRegionGraph
+                          data={per_capita_data}
+                          alt_totals_by_year={per_capita_totals}
+                        />
+                      ),
+                    },
+                  ]}
+                />
+              ))}
             {is_a11y_mode && (
               <Fragment>
                 <DisplayTable
                   column_configs={get_column_configs(false)}
                   data={format_a11y_data(transfer_payments_by_prov)}
                 />
-                <DisplayTable
-                  column_configs={get_column_configs(true)}
-                  data={format_a11y_data(per_capita_by_prov)}
-                />
+                {text_args.show_per_capita_data && (
+                  <DisplayTable
+                    column_configs={get_column_configs(true)}
+                    data={format_a11y_data(per_capita_by_prov)}
+                  />
+                )}
               </Fragment>
             )}
           </Col>

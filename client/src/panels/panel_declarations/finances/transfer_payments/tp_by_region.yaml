@@ -39,7 +39,3 @@ transfer_payments_per_capita:
 per_capita:
   en: per capita
   fr: par habitant
-
-tp_no_data_hover_label:
-  en: The per capita view is not applicable for the available data
-  fr: La vue par habitant n'est pas applicable aux données disponibles
