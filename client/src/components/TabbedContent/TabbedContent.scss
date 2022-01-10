@@ -64,14 +64,20 @@
       cursor: not-allowed;
     }
   }
-}
 
-.ib-tabs__tab-label {
-  text-decoration: none !important;
-  color: inherit !important;
-  cursor: pointer;
-  font-size: 15.6px;
-  font-weight: $mediumFontWeight;
+  & > .ib-tabs__tab-label {
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer;
+    font-size: 15.6px;
+    font-weight: $mediumFontWeight;
+  }
+  &:focus > .ib-tabs__tab-label {
+    outline: $primaryColor auto 1px;
+    @media (-webkit-min-device-pixel-ratio: 0) {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+  }
 }
 
 .ib-tabs__tab_bottom-border {
