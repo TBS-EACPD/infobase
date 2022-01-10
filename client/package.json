@@ -115,6 +115,7 @@
     "@types/react-router": "^5.1.14",
     "@types/react-router-dom": "^5.1.8",
     "@types/react-virtualized": "^9.21.11",
+    "@types/string-hash": "^1.1.1",
     "@typescript-eslint/eslint-plugin": "^5.8",
     "@typescript-eslint/parser": "^5.8",
     "axe-core": "^4.3.1",

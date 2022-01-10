@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import _ from "lodash";
 import React, { useState } from "react";
+import string_hash from "string-hash";
 
 import "./TabbedContent.scss";
 
@@ -21,7 +22,10 @@ export const TabbedContent = <TabKeys extends string[]>({
   children: React.ReactNode;
 }) => {
   const [id] = useState(_.uniqueId("ib-tabs"));
-  const get_panel_id = (key: TabKeys[number]) => `${id}__panel-${key}`;
+
+  // hash the key, it might contain non-id-safe characters, e.g. {. TODO maybe make a generic id-escape util
+  const get_panel_id = (key: TabKeys[number]) =>
+    `${id}__panel-${string_hash(key)}`;
 
   // TODO needs some fancy custom keyboard navigation controls as per the role="tablist" spec
   return (
@@ -54,7 +58,7 @@ export const TabbedContent = <TabKeys extends string[]>({
         <section
           key={key}
           role="tabpanel"
-          id={get_panel_id(open_tab_key)}
+          id={get_panel_id(key)}
           className={classNames(
             "ib-tabs__tab-panel",
             key !== open_tab_key && "ib-tabs__tab-panel--hidden"
