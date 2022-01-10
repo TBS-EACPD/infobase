@@ -177,7 +177,7 @@ single_service_channels_title:
 services_channels_text:
   transform: [handlebars, markdown]
   en: In **{{fmt_year_to_fiscal_year most_recent_year}}, {{subject.name}}** offered **{{fmt_big_int number_of_services}}** {{gl_tt "services" "SERVICE"}} and received **{{fmt_big_int number_of_applications}}** applications. {{#if number_of_applications}} Of the applications received, **{{fmt_big_int number_of_online_applications}}** were completed online, representing **{{fmt_percentage1 pct_of_online_applications}}** of all applications. {{/if}}
-  fr: TODO {{#if number_of_applications}} Parmi les demandes reçues, **{{fmt_big_int number_of_online_applications}}** ont été remplies en ligne, soit **{{fmt_percentage1 pct_of_online_applications}}** des demandes. {{/if}}
+  fr: SI_TODO {{#if number_of_applications}} Parmi les demandes reçues, **{{fmt_big_int number_of_online_applications}}** ont été remplies en ligne, soit **{{fmt_percentage1 pct_of_online_applications}}** des demandes. {{/if}}
 empty_application_channels_by_services:
   transform: [handlebars, markdown]
   en: |
@@ -364,13 +364,13 @@ service_types:
   fr: Types de service
 last_accessibility_review:
   en: Last accessibility review
-  fr: TODO
+  fr: SI_TODO
 last_improve_from_feedback:
   en: Last improve from feedback
-  fr: TODO
+  fr: SI_TODO
 last_gender_analysis:
   en: Last gender analysis
-  fr: TODO
+  fr: SI_TODO
 
 # Standard
 services_standards_text:
