@@ -15,7 +15,7 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
     return null;
   }
 };
-const TODO_convert = (counts) =>
+const no_data_or_na_to_null = (counts) =>
   counts === "no_data" || counts === "not_applicable" ? null : counts;
 
 const get_years_from_service_report = (services) =>
@@ -101,19 +101,20 @@ export default async function ({ models }) {
         sin_collected: convert_to_bool_or_null(sin_collected, "YES", "NO"),
         service_report_comment_en,
         service_report_comment_fr,
-        // TODO
-        phone_inquiry_and_application_count: TODO_convert(
+        phone_inquiry_and_application_count: no_data_or_na_to_null(
           phone_inquiry_and_application_count
         ),
-        phone_inquiry_count: TODO_convert(phone_inquiry_count),
-        online_inquiry_count: TODO_convert(online_inquiry_count),
-        phone_application_count: TODO_convert(phone_application_count),
-        online_application_count: TODO_convert(online_application_count),
-        live_application_count: TODO_convert(live_application_count),
-        mail_application_count: TODO_convert(mail_application_count),
-        email_application_count: TODO_convert(email_application_count),
-        fax_application_count: TODO_convert(fax_application_count),
-        other_application_count: TODO_convert(other_application_count),
+        phone_inquiry_count: no_data_or_na_to_null(phone_inquiry_count),
+        online_inquiry_count: no_data_or_na_to_null(online_inquiry_count),
+        phone_application_count: no_data_or_na_to_null(phone_application_count),
+        online_application_count: no_data_or_na_to_null(
+          online_application_count
+        ),
+        live_application_count: no_data_or_na_to_null(live_application_count),
+        mail_application_count: no_data_or_na_to_null(mail_application_count),
+        email_application_count: no_data_or_na_to_null(email_application_count),
+        fax_application_count: no_data_or_na_to_null(fax_application_count),
+        other_application_count: no_data_or_na_to_null(other_application_count),
         ...other_fields,
       };
     }
