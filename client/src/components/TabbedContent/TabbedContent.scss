@@ -72,7 +72,7 @@
     font-size: 15.6px;
     font-weight: $mediumFontWeight;
   }
-  &:focus > .ib-tabs__tab-label {
+  &:focus-visible > .ib-tabs__tab-label {
     outline: $primaryColor auto 1px;
     @media (-webkit-min-device-pixel-ratio: 0) {
       outline: -webkit-focus-ring-color auto 1px;
