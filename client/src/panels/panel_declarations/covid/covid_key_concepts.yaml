@@ -5,9 +5,9 @@ covid_questions_up_to_date_q:
 covid_questions_up_to_date_a:
   transform: [handlebars,markdown]
   en: |
-    Yes. This data is the current most current available and reflects information available as of October 31, 2021.
+    Yes. This data is the current most current available and reflects information available as of November 30, 2021.
   fr: |
-    Oui. Ces données sont les plus récentes et correspondent aux renseignements à notre disposition le 31 octobre 2021.
+    Oui. Ces données sont les plus récentes et correspondent aux renseignements à notre disposition le 30 novembre 2021.
 
 covid_questions_missing_measures_q:
   en: Why are some measures of the Government’s COVID response plan missing from the data?
@@ -20,7 +20,7 @@ covid_questions_missing_measures_a:
     The main purpose of the Estimates is to support Parliament’s consideration of the appropriation bills, which are the legal instruments
     for authorizing certain payments annually, and therefore not all COVID-19 related measures fall within its scope. For instance, excluded from the data are:
       * Measures legislated through the _Income Tax Act_ such as the Canada Emergency Wage Subsidy, the enhanced GST Credit, and the Canada Child Benefit;
-        * As of October 31, 2021, 2021-22 estimated expenditures for the Canada Emergency Wage Subsidy are $17.3 billion.
+        * As of November 30, 2021, 2021-22 estimated expenditures for the Canada Emergency Wage Subsidy are $19.1 billion.
         * As of March 31, 2021, 2020-21 estimated expenditures for these programs are as follows:
           * Canada Emergency Wage Subsidy $79.3 billion
           * Enhanced GST Credit $5.4 billion
@@ -36,7 +36,7 @@ covid_questions_missing_measures_a:
     des projets de loi de crédits, qui sont toutes les instruments juridiques permettant d'autoriser certains paiements, si bien que les mesures
     liées à la COVID-19 ne sont pas inscrites aux budgets des dépenses. Par exemple, sont exclues de ces données :
       * les mesures prévues par la _Loi de l'impôt sur le revenu_, comme la Subvention salariale d’urgence du Canada, l’Augmentation du crédit pour TPS et l’Allocation canadienne pour enfants
-        * En date du 31 octobre 2021, l'estimation des dépenses pour la Subvention salariale d’urgence du Canada pour 2021-2022 est 17,3 milliards de dollars.
+        * En date du 30 novembre 2021, l'estimation des dépenses pour la Subvention salariale d’urgence du Canada pour 2021-2022 est 19,1 milliards de dollars.
         * En date du 31 mars 2021, l'estimation des dépenses pour 2020-2021 pour ces programmes est la suivante:
           * Subvention salariale d’urgence du Canada 79,3 milliards de dollars
           * Augmentation du crédit pour TPS 5,4 milliards de dollars
