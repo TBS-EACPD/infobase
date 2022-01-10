@@ -41,25 +41,25 @@ export const TabbedContent = <TabKeys extends string[]>({
               tabIndex={key === open_tab_key ? 0 : -1} // as per spec, navigation between tabs uses arrow keys, not tab navigation
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-                  const next_tab = _.chain(tabs)
-                    .thru((tabs) =>
-                      e.key === "ArrowLeft" ? _.reverse(tabs) : tabs
-                    )
-                    .thru((target_tabs) => {
-                      const current_index = _.findIndex(
-                        target_tabs,
-                        ({ key }) => key === open_tab_key
-                      );
+                  const next_key = (() => {
+                    const target_tabs = _.map(tabs, "key");
+                    if (e.key === "ArrowLeft") {
+                      target_tabs.reverse();
+                    }
 
-                      if (current_index + 1 < target_tabs.length) {
-                        return target_tabs[current_index + 1];
-                      } else {
-                        return target_tabs[0];
-                      }
-                    })
-                    .value();
+                    const current_index = _.findIndex(
+                      target_tabs,
+                      (key) => key === open_tab_key
+                    );
 
-                  tab_open_callback(next_tab.key);
+                    if (current_index + 1 < target_tabs.length) {
+                      return target_tabs[current_index + 1];
+                    } else {
+                      return target_tabs[0];
+                    }
+                  })();
+
+                  tab_open_callback(next_key);
                   // TODO focus management
                 }
               }}
