@@ -14,8 +14,6 @@ export const TabbedContent = <TabKeys extends string[]>({
   tabs: {
     key: TabKeys[number];
     label: React.ReactNode;
-    is_disabled?: boolean;
-    disabled_message?: string;
   }[];
   open_tab_key: TabKeys[number];
   tab_open_callback: (tab_key: TabKeys[number]) => void;
@@ -32,7 +30,7 @@ export const TabbedContent = <TabKeys extends string[]>({
     <div className="ib-tabs" id={id}>
       <div className="ib-tabs__tab-list-container">
         <div role="tablist" className="ib-tabs__tab-list">
-          {_.map(tabs, ({ key, label, is_disabled, disabled_message }) => (
+          {_.map(tabs, ({ key, label }) => (
             <button
               key={key}
               role="tab"
@@ -41,12 +39,7 @@ export const TabbedContent = <TabKeys extends string[]>({
               tabIndex={key === open_tab_key ? 0 : -1} // as per spec, navigation between tabs uses arrow keys, not tab navigation
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-                  // TODO hmm, leaves out screen readers from knowing about disabled tabs... only one place those are used right now to be fair, maybe drop the concept?
                   const next_tab = _.chain(tabs)
-                    .filter(
-                      ({ is_disabled }) =>
-                        _.isUndefined(is_disabled) || !is_disabled
-                    )
                     .thru((tabs) =>
                       e.key === "ArrowLeft" ? _.reverse(tabs) : tabs
                     )
@@ -68,14 +61,11 @@ export const TabbedContent = <TabKeys extends string[]>({
                   // TODO focus management
                 }
               }}
-              onClick={() => !is_disabled && tab_open_callback(key)}
-              aria-disabled={is_disabled}
-              title={is_disabled ? disabled_message : ""}
+              onClick={() => tab_open_callback(key)}
               className={classNames(
                 "button-unstyled",
                 "ib-tabs__tab",
-                key === open_tab_key && "ib-tabs__tab--active",
-                !!is_disabled && "ib-tabs__tab--disabled"
+                key === open_tab_key && "ib-tabs__tab--active"
               )}
             >
               <span className="ib-tabs__tab-label">{label}</span>
@@ -107,8 +97,6 @@ export const TabbedContentStateful = ({
   tabs: {
     key: string;
     label: string;
-    is_disabled?: boolean;
-    disabled_message?: string;
     content: React.ReactNode;
   }[];
 }) => {
