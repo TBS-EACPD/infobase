@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import string_hash from "string-hash";
 
 import "./TabbedContent.scss";
@@ -22,12 +22,24 @@ export const TabbedContent = <TabKeys extends string[]>({
   children: React.ReactNode;
 }) => {
   const [id] = useState(_.uniqueId("ib-tabs"));
+  const is_arrow_key_navigating = useRef(false);
 
   // hashing the key value because it might contain non-id-safe characters such as "{". TODO maybe make a generic id-escape util
   const get_panel_id = (key: TabKeys[number]) =>
     `${id}__panel-${string_hash(key)}`;
 
-  // TODO needs some fancy custom keyboard navigation controls as per the role="tablist" spec
+  useEffect(() => {
+    if (is_arrow_key_navigating.current) {
+      (
+        document.querySelector(
+          `button[aria-controls="${get_panel_id(open_tab_key)}"]`
+        ) as HTMLButtonElement | undefined
+      )?.focus();
+    }
+
+    is_arrow_key_navigating.current = false;
+  }, [open_tab_key]);
+
   return (
     <div className="ib-tabs" id={id}>
       <div className="ib-tabs__tab-list-container">
@@ -41,6 +53,8 @@ export const TabbedContent = <TabKeys extends string[]>({
               tabIndex={key === open_tab_key ? 0 : -1} // as per spec, navigation between tabs uses arrow keys, not tab navigation
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+                  is_arrow_key_navigating.current = true;
+
                   const next_key = (() => {
                     const target_tabs = _.map(tabs, "key");
                     if (e.key === "ArrowLeft") {
@@ -60,7 +74,6 @@ export const TabbedContent = <TabKeys extends string[]>({
                   })();
 
                   tab_open_callback(next_key);
-                  // TODO focus management
                 }
               }}
               onClick={() => tab_open_callback(key)}
