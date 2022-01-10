@@ -5,16 +5,18 @@ import string_hash from "string-hash";
 
 import "./TabbedContent.scss";
 
+interface Tab<TabKeys extends string[]> {
+  key: TabKeys[number];
+  label: React.ReactNode;
+}
+
 export const TabbedContent = <TabKeys extends string[]>({
   tabs,
   tab_open_callback,
   open_tab_key,
   children,
 }: {
-  tabs: {
-    key: TabKeys[number];
-    label: React.ReactNode;
-  }[];
+  tabs: Tab<TabKeys>[];
   open_tab_key: TabKeys[number];
   tab_open_callback: (tab_key: TabKeys[number]) => void;
   children: React.ReactNode;
@@ -91,15 +93,10 @@ export const TabbedContent = <TabKeys extends string[]>({
   );
 };
 
-export const TabbedContentStateful = ({
-  tabs,
-}: {
-  tabs: {
-    key: string;
-    label: string;
-    content: React.ReactNode;
-  }[];
-}) => {
+interface StatefulTab extends Tab<string[]> {
+  content: React.ReactNode;
+}
+export const TabbedContentStateful = ({ tabs }: { tabs: StatefulTab[] }) => {
   const [open_tab_key, set_open_tab_key] = useState(
     _.chain(tabs).map("key").first().value()
   );
