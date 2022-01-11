@@ -5,29 +5,30 @@ import string_hash from "string-hash";
 
 import "./TabbedContent.scss";
 
-interface Tab<TabKeys extends string[]> {
-  key: TabKeys[number];
+type TabKey = string | number;
+interface Tab {
+  key: TabKey;
   label: React.ReactNode;
 }
 
-export const TabbedContent = <TabKeys extends string[]>({
+export const TabbedContent = ({
   tabs,
   tab_open_callback,
   open_tab_key,
   children,
 }: {
-  tabs: Tab<TabKeys>[];
-  open_tab_key: TabKeys[number];
-  tab_open_callback: (tab_key: TabKeys[number]) => void;
+  tabs: Tab[];
+  open_tab_key: TabKey;
+  tab_open_callback: (tab_key: TabKey) => void;
   children: React.ReactNode;
 }) => {
-  const [id] = useState(_.uniqueId("ib-tabs"));
-  const is_arrow_key_navigating = useRef(false);
+  const [id] = useState(_.uniqueId("ib-tabs-"));
 
   // hashing the key value because it might contain non-id-safe characters such as "{". TODO maybe make a generic id-escape util
-  const get_panel_id = (key: TabKeys[number]) =>
-    `${id}__panel-${string_hash(key)}`;
+  const get_panel_id = (key: TabKey) =>
+    `${id}__panel-${string_hash(_.toString(key))}`;
 
+  const is_arrow_key_navigating = useRef(false);
   useEffect(() => {
     if (is_arrow_key_navigating.current) {
       (
@@ -106,11 +107,11 @@ export const TabbedContent = <TabKeys extends string[]>({
   );
 };
 
-interface StatefulTab extends Tab<string[]> {
+interface StatefulTab extends Tab {
   content: React.ReactNode;
 }
 export const TabbedContentStateful = ({ tabs }: { tabs: StatefulTab[] }) => {
-  const [open_tab_key, set_open_tab_key] = useState(
+  const [open_tab_key, set_open_tab_key] = useState<TabKey>(
     _.chain(tabs).map("key").first().value()
   );
 
@@ -120,7 +121,7 @@ export const TabbedContentStateful = ({ tabs }: { tabs: StatefulTab[] }) => {
       open_tab_key={open_tab_key}
       tab_open_callback={set_open_tab_key}
     >
-      {_.find(tabs, { key: open_tab_key })?.content}
+      {_.find(tabs, ({ key }) => key === open_tab_key)?.content}
     </TabbedContent>
   );
 };
