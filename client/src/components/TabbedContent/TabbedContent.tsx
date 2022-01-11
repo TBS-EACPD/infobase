@@ -22,6 +22,15 @@ export const TabbedContent = ({
   tab_open_callback: (tab_key: TabKey) => void;
   children: React.ReactNode;
 }) => {
+  if (!_.chain(tabs).map("key").includes(open_tab_key).value()) {
+    throw new Error(
+      `Provided open_tab_key "${open_tab_key}" does not correspond to any provided tab ${_.map(
+        tabs,
+        "key"
+      )}`
+    );
+  }
+
   const [id] = useState(_.uniqueId("ib-tabs-"));
 
   // hashing the key value because it might contain non-id-safe characters such as "{". TODO maybe make a generic id-escape util
@@ -104,6 +113,7 @@ export const TabbedContent = ({
             "ib-tabs__tab-panel",
             key !== open_tab_key && "ib-tabs__tab-panel--hidden"
           )}
+          aria-hidden={key !== open_tab_key}
         >
           {key === open_tab_key && children}
         </section>
@@ -115,10 +125,14 @@ export const TabbedContent = ({
 interface StatefulTab extends Tab {
   content: React.ReactNode;
 }
-export const TabbedContentStateful = ({ tabs }: { tabs: StatefulTab[] }) => {
-  const [open_tab_key, set_open_tab_key] = useState<TabKey>(
-    _.chain(tabs).map("key").first().value()
-  );
+export const TabbedContentStateful = ({
+  tabs,
+  default_tab_key = _.chain(tabs).map("key").first().value(),
+}: {
+  tabs: StatefulTab[];
+  default_tab_key?: TabKey;
+}) => {
+  const [open_tab_key, set_open_tab_key] = useState<TabKey>(default_tab_key);
 
   return (
     <TabbedContent
