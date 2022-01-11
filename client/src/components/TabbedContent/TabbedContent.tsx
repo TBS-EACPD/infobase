@@ -29,17 +29,18 @@ export const TabbedContent = ({
     `${id}__panel-${string_hash(_.toString(key))}`;
 
   const is_arrow_key_navigating = useRef(false);
+  const open_panel_id = get_panel_id(open_tab_key);
   useEffect(() => {
     if (is_arrow_key_navigating.current) {
       (
-        document.querySelector(
-          `button[aria-controls="${get_panel_id(open_tab_key)}"]`
-        ) as HTMLButtonElement | undefined
+        document.querySelector(`button[aria-controls="${open_panel_id}"]`) as
+          | HTMLButtonElement
+          | undefined
       )?.focus();
     }
 
     is_arrow_key_navigating.current = false;
-  }, [open_tab_key]);
+  }, [open_panel_id]);
 
   return (
     <div className="ib-tabs" id={id}>
