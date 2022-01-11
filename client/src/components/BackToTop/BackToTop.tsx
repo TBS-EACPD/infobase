@@ -18,7 +18,6 @@ export class BackToTop extends React.Component<BackToTopProps> {
   }
 
   handleClick() {
-    console.log(this.props);
     scroll_to_top(this.props.scroll_target);
   }
 
