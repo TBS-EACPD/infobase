@@ -16,7 +16,7 @@ interface FloatingButtonProps {
   left: boolean;
 }
 interface FloatingButtonState {
-  show_back_to_top: boolean;
+  show_floating_button: boolean;
   caught_by_footer: boolean;
 }
 
@@ -34,7 +34,7 @@ export class FloatingButton extends React.Component<
     super(props);
 
     this.state = {
-      show_back_to_top: true,
+      show_floating_button: true,
       caught_by_footer: false,
     };
     this.button_ref = React.createRef();
@@ -46,7 +46,7 @@ export class FloatingButton extends React.Component<
 
       this.header_observer = new IntersectionObserver((entries, _observer) => {
         this.setState({
-          show_back_to_top: entries[0].intersectionRatio <= 0,
+          show_floating_button: entries[0].intersectionRatio <= 0,
         });
       });
       if (this.page_header && this.header_observer) {
@@ -77,7 +77,7 @@ export class FloatingButton extends React.Component<
   }
 
   render() {
-    const { show_back_to_top, caught_by_footer } = this.state;
+    const { show_floating_button, caught_by_footer } = this.state;
     const { left } = this.props;
     return (
       <button
@@ -86,7 +86,7 @@ export class FloatingButton extends React.Component<
           "btn",
           "btn-ib-primary",
           "back-to-top",
-          show_back_to_top && "back-to-top--shown",
+          show_floating_button && "back-to-top--shown",
           !caught_by_footer && "back-to-top--fixed",
           caught_by_footer && "back-to-top--caught"
         )}

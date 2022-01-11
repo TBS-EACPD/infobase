@@ -1,6 +1,6 @@
 @import "src/style_constants/index.scss";
 
-.back-to-top {
+.floating-button {
   display: inline-block;
   text-decoration: none;
   text-align: center;
@@ -11,16 +11,16 @@
   visibility: hidden;
   z-index: 1000;
 
-  &.back-to-top--shown {
+  &.floating-button--shown {
     opacity: 1;
     visibility: visible;
   }
 
-  &.back-to-top--caught {
+  &.floating-button--caught {
     position: absolute;
   }
 
-  &.back-to-top--fixed {
+  &.floating-button--fixed {
     position: fixed;
     bottom: 30px;
   }
