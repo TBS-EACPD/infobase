@@ -47,12 +47,16 @@ export const TabbedContent = ({
       <div className="ib-tabs__tab-list-container">
         <div role="tablist" className="ib-tabs__tab-list">
           {_.map(tabs, ({ key, label }) => (
+            /*
+              Note: per the spec, only the selected tab should be in the tab (navigation) order, controlling the tabs is arrow key based...
+              BUT the spec is still not widely followed! IMO, the better user experience is to support the spec's arrow controls but still allow
+              tab navigation between them. 
+            */
             <button
               key={key}
               role="tab"
               aria-controls={get_panel_id(key)}
               aria-selected={key === open_tab_key}
-              tabIndex={key === open_tab_key ? 0 : -1} // as per spec, navigation between tabs uses arrow keys, not tab navigation
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
                   is_arrow_key_navigating.current = true;
