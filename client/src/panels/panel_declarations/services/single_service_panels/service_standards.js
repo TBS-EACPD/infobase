@@ -109,7 +109,7 @@ export class ServiceStandards extends React.Component {
           standard_report,
           ({ year, lower, count, met_count, is_target_met }) => ({
             name,
-            year,
+            year: _.toString(year),
             standard_type: type,
             target: get_target(target_type, lower),
             channel,
