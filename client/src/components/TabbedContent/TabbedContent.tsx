@@ -56,16 +56,17 @@ export const TabbedContent = ({
       <div className="ib-tabs__tab-list-container">
         <div role="tablist" className="ib-tabs__tab-list">
           {_.map(tabs, ({ key, label }) => (
-            /*
-              Note: per the spec, only the selected tab should be in the tab (navigation) order, controlling the tabs is arrow key based...
-              BUT the spec is still not widely followed! IMO, the better user experience is to support the spec's arrow controls but still allow
-              tab navigation between them. 
-            */
             <button
               key={key}
               role="tab"
+              className={classNames(
+                "button-unstyled",
+                "ib-tabs__tab",
+                key === open_tab_key && "ib-tabs__tab--active"
+              )}
               aria-controls={get_panel_id(key)}
               aria-selected={key === open_tab_key}
+              onClick={() => tab_open_callback(key)}
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
                   is_arrow_key_navigating.current = true;
@@ -91,12 +92,14 @@ export const TabbedContent = ({
                   tab_open_callback(next_key);
                 }
               }}
-              onClick={() => tab_open_callback(key)}
-              className={classNames(
-                "button-unstyled",
-                "ib-tabs__tab",
-                key === open_tab_key && "ib-tabs__tab--active"
-              )}
+              /*
+                Note: per the spec, only the selected tab should be in the tab navigation order, controlling the tabs is arrow key based...
+                BUT the spec is still not widely followed in the wild. IMO, the better user experience is to support the spec's arrow key controls
+                but ALSO allow tab navigation between them?
+
+                To fully meet the spec, uncomment the following line:
+                tabIndex={key === open_tab_key ? 0 : -1}
+              */
             >
               <span className="ib-tabs__tab-label">{label}</span>
             </button>
