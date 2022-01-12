@@ -25,7 +25,6 @@ export class PinnedFAQ extends React.Component {
       TM,
       is_initially_expanded,
       background_color,
-      no_pin,
       subject,
     } = this.props;
 

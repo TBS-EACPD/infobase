@@ -3,20 +3,17 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { CheckBox } from "src/components/CheckBox/CheckBox";
+import { FancyUL } from "src/components/FancyUL/FancyUL";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
-
-import { PinnedFAQ } from "src/components/PinnedFAQ/PinnedFAQ";
 
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
-import form_faq from "src/common_text/faq/form_questions.yaml";
-
-import { primaryColor } from "src/style_constants/colors.interop.scss";
+import faq_text from "src/common_text/faq/form_questions.yaml";
 import { textRed } from "src/style_constants/index";
 
 import {
@@ -28,7 +25,7 @@ import text from "./FormFrontend.yaml";
 
 import "./FormFrontend.scss";
 
-const { TM, text_maker } = create_text_maker_component(text);
+const { TM, text_maker } = create_text_maker_component([text, faq_text]);
 
 const get_values_for_automatic_fields = (automatic_fields) => {
   const automatic_field_getters = {
@@ -307,12 +304,10 @@ class FormFrontend extends React.Component {
       }
     };
 
-    const q_a_key_pairs = [
+    const q_a_pairs_content = [
       ["sample_q", "sample_a"],
       ["ftes_q", "ftes_a"],
     ];
-
-    const { TM: FAQ_TM } = create_text_maker_component([form_faq]);
 
     return (
       <div className="form-backend-form">
@@ -324,13 +319,16 @@ class FormFrontend extends React.Component {
                 {text_maker("form_frontend_faq_note")}
                 {required_asterisk}
               </div>
-              <PinnedFAQ
-                q_a_key_pairs={q_a_key_pairs}
-                TM={FAQ_TM}
-                is_initially_expanded={true}
-                background_color={primaryColor}
-                no_pin={true}
-              />
+              <FancyUL>
+                {_.map(q_a_pairs_content, ([q, a], idx) => {
+                  return (
+                    <div key={idx}>
+                      <TM el={"h4"} k={q} />
+                      <TM k={a} />
+                    </div>
+                  );
+                })}
+              </FancyUL>
               <CheckBox
                 id={"form_frontend_faq"}
                 active={faq_acknowledged}
