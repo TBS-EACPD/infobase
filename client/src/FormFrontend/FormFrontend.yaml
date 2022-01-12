@@ -6,13 +6,12 @@ form_frontend_privacy_ack:
   en: I accept
   fr: J'accepte
 
-## TODO
 form_frontend_faq_note:
-  en: Please read and acknowledge the FAQ before submitting
-  fr: TODO
+  en: Please read and acknowledge the FAQ before submitting.
+  fr: S'il vous plaît lisez et reconnaissez les FAQ avant de soumettre le formulaire.
 form_frontend_faq_ack:
   en: I acknowledge that I read the FAQ
-  fr: TODO
+  fr: Je reconnais que j'ai lu les FAQ
 
 form_frontend_send:
   en: Submit
