@@ -323,7 +323,7 @@ class FormFrontend extends React.Component {
                 {_.map(q_a_pairs_content, ([q, a], idx) => {
                   return (
                     <div key={idx}>
-                      <TM el={"h4"} k={q} />
+                      <div style={{ fontWeight: "bold" }}>{text_maker(q)}</div>
                       <TM k={a} />
                     </div>
                   );
