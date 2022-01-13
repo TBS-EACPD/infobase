@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import type { JSXElementConstructor, ReactNode } from "react";
 import React from "react";
 
 import "./Sidebar.scss";
