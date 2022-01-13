@@ -4,9 +4,9 @@ import "./GlossaryMenu.scss";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { IconArrow } from "src/icons/icons";
+import glossary_text from "src/glossary/glossary.yaml";
 
-import glossary_text from "./glossary.yaml";
+import { IconArrow } from "src/icons/icons";
 
 const { text_maker } = create_text_maker_component(glossary_text);
 
