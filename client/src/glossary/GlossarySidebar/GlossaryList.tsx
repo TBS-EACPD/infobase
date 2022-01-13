@@ -7,7 +7,7 @@ import "./GlossaryMenu.scss";
 import { SearchHighlighter } from "src/search/search_utils";
 
 interface SidebarContentProps {
-  openItem: (key: string) => void;
+  open_definition: (key: string) => void;
   query: string;
   items_by_letter: any;
 }
@@ -48,7 +48,7 @@ export class GlossaryList extends React.Component<
   }
 
   openDefinition(item: ResultProps) {
-    this.props.openItem(item.id);
+    this.props.open_definition(item.id);
     this.setState({
       scrollEl: item.title.replace(/\s+/g, ""),
     });
