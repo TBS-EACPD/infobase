@@ -17,13 +17,13 @@ const { text_maker } = create_text_maker_component(glossary_text);
 
 interface GlossarySidebarProps {
   item: ResultProps;
-  setGlossaryItem: (key: string) => void;
-  showList: boolean;
-  setList: (value: boolean) => void;
+  open_definition: (key: string) => void;
+  show_definition: boolean;
+  toggle_definition: (value: boolean) => void;
   results: ResultProps[];
   query: string;
-  setQuery: (query: string) => void;
-  setResults: (data: ResultProps[]) => void;
+  set_query: (query: string) => void;
+  set_results: (data: ResultProps[]) => void;
 }
 
 export interface ResultProps {
@@ -42,12 +42,12 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
     super(props);
   }
 
-  closeItem() {
-    this.props.setList(true);
+  closeDefinition() {
+    this.props.toggle_definition(true);
   }
 
   openItem(key: string) {
-    this.props.setGlossaryItem(key);
+    this.props.open_definition(key);
   }
 
   render() {
@@ -67,8 +67,8 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
                 type={"glossary-sidebar"}
                 placeholder={text_maker("glossary_placeholder")}
                 search_configs={[glossary_search_config]}
-                getResults={this.props.setResults}
-                setQuery={this.props.setQuery}
+                getResults={this.props.set_results}
+                setQuery={this.props.set_query}
               />
             </div>
             <div className="glossary-sb__example">
@@ -78,15 +78,15 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
         </div>
         <div className="glossary-sb__content-wrapper">
           <div className="glossary-sb__content" id="gloss-sidebar">
-            {!this.props.showList ? (
+            {!this.props.show_definition ? (
               <GlossaryDef
-                closeItem={() => this.closeItem()}
+                close_definition={() => this.closeDefinition()}
                 title={this.props.item.title}
                 def={this.props.item.get_compiled_definition()}
               />
             ) : (
               <GlossaryList
-                openItem={(item) => this.openItem(item)}
+                open_definition={(item) => this.openItem(item)}
                 query={this.props.query}
                 items_by_letter={this.props.results}
               />
