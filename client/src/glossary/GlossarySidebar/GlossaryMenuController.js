@@ -23,7 +23,7 @@ const GlossaryMenuController = withRouter(
       this.state = {
         is_open: false,
         glossaryItem: null,
-        showList: true,
+        show_definition: true,
         results: [],
         query: "",
       };
@@ -36,7 +36,7 @@ const GlossaryMenuController = withRouter(
       const glossary_item = glossaryEntryStore.lookup(glossary_item_key);
 
       this.setGlossaryItem(glossary_item.id);
-      this.setList(false);
+      this.toggleDefinition(false);
 
       this.toggleGlossary(true);
       document.querySelector(`.glossary-sb__search-bar > input`).focus();
@@ -87,13 +87,13 @@ const GlossaryMenuController = withRouter(
     setGlossaryItem(key) {
       this.setState({
         glossaryItem: glossaryEntryStore.lookup(key),
-        showList: false,
+        show_definition: false,
       });
     }
 
-    setList(value) {
+    toggleDefinition(value) {
       this.setState({
-        showList: value,
+        show_definition: value,
       });
     }
 
@@ -113,7 +113,7 @@ const GlossaryMenuController = withRouter(
       this.setState({
         results: test,
       });
-      this.setList(true);
+      this.toggleDefinition(true);
     };
 
     render() {
@@ -129,11 +129,11 @@ const GlossaryMenuController = withRouter(
             children={
               <GlossarySidebar
                 item={this.state.glossaryItem}
-                setGlossaryItem={(key) => this.setGlossaryItem(key)}
-                showList={this.state.showList}
-                setList={(value) => this.setList(value)}
-                setResults={(data) => this.setResults(data)}
-                setQuery={(query) => this.setQuery(query)}
+                open_definition={(key) => this.setGlossaryItem(key)}
+                show_definition={this.state.show_definition}
+                toggle_definition={(value) => this.toggleDefinition(value)}
+                set_results={(data) => this.setResults(data)}
+                set_query={(query) => this.setQuery(query)}
                 results={get_glossary_items_by_letter(this.state.results)}
                 query={this.state.query}
               />
