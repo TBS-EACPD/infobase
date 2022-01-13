@@ -6,6 +6,7 @@ import { create_text_maker_component } from "src/components/index";
 
 import glossary_text from "src/glossary/glossary.yaml";
 
+import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
 
 import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
@@ -51,6 +52,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
   }
 
   render() {
+    const items_by_letter = get_glossary_items_by_letter(this.props.results);
     return (
       <div>
         <div className="glossary-sb__header-wrapper" ref={this.header}>
@@ -88,7 +90,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
               <GlossaryList
                 open_definition={(item) => this.openItem(item)}
                 query={this.props.query}
-                items_by_letter={this.props.results}
+                items_by_letter={items_by_letter}
               />
             )}
           </div>

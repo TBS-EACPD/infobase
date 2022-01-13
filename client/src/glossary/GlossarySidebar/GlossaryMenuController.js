@@ -7,14 +7,9 @@ import { glossaryEntryStore } from "src/models/glossary";
 
 import { SidebarButton, Sidebar } from "src/components";
 
-import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
-
 import { GlossarySidebar } from "./GlossarySidebar";
 
-const ROUTES_WITHOUT_GLOSSARY = {
-  "/start": true,
-  "/glossary": true,
-};
+const routes_without_glossary = ["/start", "/glossary"];
 
 const GlossaryMenuController = withRouter(
   class GlossaryMenuController extends React.Component {
@@ -102,7 +97,7 @@ const GlossaryMenuController = withRouter(
     }
 
     setResults = (childData) => {
-      const test = _.map(childData, (data) => ({
+      const data = _.map(childData, (data) => ({
         id: data.glossary_data.id,
         title: data.glossary_data.title,
         translation: data.glossary_data.translation,
@@ -111,7 +106,7 @@ const GlossaryMenuController = withRouter(
       }));
 
       this.setState({
-        results: test,
+        results: data,
       });
       this.toggleDefinition(true);
     };
@@ -119,7 +114,7 @@ const GlossaryMenuController = withRouter(
     render() {
       const currentPage = this.props.location.pathname;
 
-      if (ROUTES_WITHOUT_GLOSSARY[currentPage]) return null;
+      if (routes_without_glossary.includes(currentPage)) return null;
 
       return (
         <div ref={this.menu_ref}>
@@ -134,7 +129,7 @@ const GlossaryMenuController = withRouter(
                 toggle_definition={(value) => this.toggleDefinition(value)}
                 set_results={(data) => this.setResults(data)}
                 set_query={(query) => this.setQuery(query)}
-                results={get_glossary_items_by_letter(this.state.results)}
+                results={this.state.results}
                 query={this.state.query}
               />
             }
