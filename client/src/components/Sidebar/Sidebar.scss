@@ -1,0 +1,45 @@
+@import "src/style_constants/index.scss";
+
+.sidebar__wrapper {
+  position: fixed;
+  right: -100%;
+  top: 0;
+
+  width: 310px;
+  height: 100%;
+  transition: 850ms;
+  z-index: 1006;
+
+  box-shadow: -3px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar__wrapper.active {
+  right: 0;
+  transition: 350ms;
+}
+
+.sidebar {
+  background-color: $primaryColor;
+  color: $textLightColor;
+  font-size: 14px;
+
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar__icon-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar__close-button {
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  padding: 15px 15px 0px 0px;
+}
+
+.sidebar__close-button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
