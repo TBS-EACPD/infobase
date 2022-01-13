@@ -5,11 +5,11 @@ import { withRouter } from "react-router-dom";
 
 import { glossaryEntryStore } from "src/models/glossary";
 
-import { SidebarButton } from "src/components";
+import { SidebarButton, Sidebar } from "src/components";
 
 import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
-import { GlossaryMenu } from "./GlossaryMenu";
+import { GlossarySidebar } from "./GlossarySidebar";
 
 const ROUTES_WITHOUT_GLOSSARY = {
   "/start": true,
@@ -21,8 +21,7 @@ const GlossaryMenuController = withRouter(
     constructor(props) {
       super(props);
       this.state = {
-        show_sidebar: true,
-        showGlossary: false,
+        is_open: false,
         glossaryItem: null,
         showList: true,
         results: [],
@@ -45,12 +44,8 @@ const GlossaryMenuController = withRouter(
 
     closeSidebar = (e) => {
       const menu_node = this.menu_ref.current;
-      if (
-        this.state.showGlossary &&
-        menu_node &&
-        !menu_node.contains(e.target)
-      ) {
-        this.setState({ showGlossary: false });
+      if (this.state.is_open && menu_node && !menu_node.contains(e.target)) {
+        this.setState({ is_open: false });
       }
     };
 
@@ -85,7 +80,7 @@ const GlossaryMenuController = withRouter(
 
     toggleGlossary(value) {
       this.setState({
-        showGlossary: value,
+        is_open: value,
       });
     }
 
@@ -128,17 +123,21 @@ const GlossaryMenuController = withRouter(
 
       return (
         <div ref={this.menu_ref}>
-          <GlossaryMenu
-            show={this.state.showGlossary}
-            toggle={(value) => this.toggleGlossary(value)}
-            item={this.state.glossaryItem}
-            setGlossaryItem={(key) => this.setGlossaryItem(key)}
-            showList={this.state.showList}
-            setList={(value) => this.setList(value)}
-            setResults={(data) => this.setResults(data)}
-            setQuery={(query) => this.setQuery(query)}
-            results={get_glossary_items_by_letter(this.state.results)}
-            query={this.state.query}
+          <Sidebar
+            is_open={this.state.is_open}
+            close_callback={() => this.toggleGlossary(false)}
+            children={
+              <GlossarySidebar
+                item={this.state.glossaryItem}
+                setGlossaryItem={(key) => this.setGlossaryItem(key)}
+                showList={this.state.showList}
+                setList={(value) => this.setList(value)}
+                setResults={(data) => this.setResults(data)}
+                setQuery={(query) => this.setQuery(query)}
+                results={get_glossary_items_by_letter(this.state.results)}
+                query={this.state.query}
+              />
+            }
           />
           <SidebarButton
             open_sidebar={() => this.toggleGlossary(true)}
