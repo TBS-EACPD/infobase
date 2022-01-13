@@ -5,6 +5,8 @@ import "./GlossaryMenu.scss";
 
 import { create_text_maker_component } from "src/components/index";
 
+import glossary_text from "src/glossary/glossary.yaml";
+
 import { IconX } from "src/icons/icons";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
@@ -13,8 +15,6 @@ import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
 import { GlossaryDef } from "./GlossaryDef";
 import { GlossaryList } from "./GlossaryList";
-
-import glossary_text from "./glossary.yaml";
 
 const { text_maker } = create_text_maker_component(glossary_text);
 
