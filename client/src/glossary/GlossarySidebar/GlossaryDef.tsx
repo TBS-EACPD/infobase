@@ -13,7 +13,7 @@ const { text_maker } = create_text_maker_component(glossary_text);
 interface SidebarContentProps {
   title: string;
   def: string;
-  closeItem: () => void;
+  close_definition: () => void;
 }
 
 interface SidebarContentState {
@@ -41,7 +41,7 @@ export class GlossaryDef extends React.Component<
 
   handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>) {
     if (e.key === "Enter") {
-      this.props.closeItem();
+      this.props.close_definition();
     }
   }
 
@@ -59,7 +59,7 @@ export class GlossaryDef extends React.Component<
           <span
             role="button"
             className="glossary-sb__back-button"
-            onClick={() => this.props.closeItem()}
+            onClick={() => this.props.close_definition()}
             onKeyDown={(e) => this.handleKeyPress(e)}
             tabIndex={0}
           >
