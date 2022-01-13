@@ -2,7 +2,7 @@ import React from "react";
 
 import { Typeahead } from "src/components/index";
 
-import { SideBarSearch } from "src/glossary/SideBarSearch";
+import { SideBarSearch } from "src/glossary/GlossarySidebar/SideBarSearch";
 
 interface SelectInputProps {
   type: string;
