@@ -85,10 +85,10 @@ export class FloatingButton extends React.Component<
         className={classNames(
           "btn",
           "btn-ib-primary",
-          "back-to-top",
-          show_floating_button && "back-to-top--shown",
-          !caught_by_footer && "back-to-top--fixed",
-          caught_by_footer && "back-to-top--caught"
+          "floating-button",
+          show_floating_button && "floating-button--shown",
+          !caught_by_footer && "floating-button--fixed",
+          caught_by_footer && "floating-button--caught"
         )}
         style={{
           top:

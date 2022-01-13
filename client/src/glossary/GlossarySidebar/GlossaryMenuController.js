@@ -7,7 +7,7 @@ import { glossaryEntryStore } from "src/models/glossary";
 
 import { SidebarButton } from "src/components";
 
-import { get_glossary_items_by_letter } from "./glossary_utils";
+import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
 import { GlossaryMenu } from "./GlossaryMenu";
 
