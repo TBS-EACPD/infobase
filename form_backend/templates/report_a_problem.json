@@ -23,6 +23,10 @@
         "en": "The information is outdated",
         "fr": "L'information n'est plus à jour"
       },
+      "accesibility": {
+        "en": "There is an accessibility issue",
+        "fr": "Il y a un problème d'accessibilité"
+      },
       "navigation": {
         "en": "I can't find what I'm looking for",
         "fr": "Je ne trouve pas ce que je cherche"
