@@ -31,8 +31,8 @@ const schema = `
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
   }
   type ServiceGeneralStats{
-    report_years: [Int]
-    standard_years: [Int]
+    report_years: [String]
+    standard_years: [String]
     number_of_services: Float
     number_of_online_enabled_services: Float
     pct_of_standards_met_high_vol_services: Float
@@ -42,7 +42,7 @@ const schema = `
   }
   type ServiceChannelsSummary{
     subject_id: String
-    year: Int
+    year: String
     channel_id: String
     channel_value: Float
   }
@@ -56,7 +56,7 @@ const schema = `
   }
   type ServiceStandardsSummary{
     subject_id: String
-    year: Int
+    year: String
     services_w_standards_count: Float
     standards_count: Float
     met_standards_count: Float
@@ -66,10 +66,9 @@ const schema = `
     number_of_services: Float
     total_volume: Float
   }
-
   type ServiceReport{
     service_id: String
-    year: Int
+    year: String
     cra_business_ids_collected: Boolean
     sin_collected: Boolean
     phone_inquiry_count: Float
@@ -87,7 +86,7 @@ const schema = `
 
   type StandardReport{
     standard_id: String
-    year: Int
+    year: String
     lower: Float
     upper: Float
     count: Float
@@ -101,13 +100,13 @@ const schema = `
     subject_type: String
     org_id: String
     org: Org
-    submission_year: Int
+    submission_year: String
     is_active: Boolean
-    report_years: [Int]
+    report_years: [String]
     program_activity_codes: [String]
     programs: [Program]
-    first_active_year: Int
-    last_active_year: Int
+    first_active_year: String
+    last_active_year: String
 
     name: String
     description: String
@@ -121,9 +120,9 @@ const schema = `
     accessibility_assessors: [String]
     recipient_type: [String]
 
-    last_gender_analysis: Int
-    last_accessibility_review: Int
-    last_improve_from_feedback: Int
+    last_gender_analysis: String
+    last_accessibility_review: String
+    last_improve_from_feedback: String
 
     collects_fees: Boolean
     account_reg_digital_status: Boolean
@@ -143,10 +142,10 @@ const schema = `
     service_id: String
     name: String
 
-    submission_year: Int
-    first_active_year: Int
-    last_active_year: Int
-    last_gcss_tool_year: Int
+    submission_year: String
+    first_active_year: String
+    last_active_year: String
+    last_gcss_tool_year: String
     channel: String
     type: String
     other_type_comment: String

@@ -21,11 +21,11 @@ export default function (model_singleton) {
       id: pkey_type(),
       org_id: parent_fkey_type(),
       program_activity_codes: [sparse_parent_fkey_type()],
-      submission_year: { type: Number },
+      submission_year: str_type,
       is_active: { type: Boolean },
-      report_years: [{ type: Number }],
-      first_active_year: { type: Number },
-      last_active_year: { type: Number },
+      report_years: [str_type],
+      first_active_year: str_type,
+      last_active_year: str_type,
 
       ...bilingual_str("name"),
       ...bilingual_str("description"),
@@ -39,10 +39,9 @@ export default function (model_singleton) {
       ...bilingual("accessibility_assessors", [str_type]),
       ...bilingual("recipient_type", [str_type]),
 
-      last_gender_analysis: { type: Number },
-      last_accessibility_review: { type: Number },
-      last_improve_from_feedback: { type: Number },
-
+      last_gender_analysis: str_type,
+      last_accessibility_review: str_type,
+      last_improve_from_feedback: str_type,
       collects_fees: { type: Boolean },
       account_reg_digital_status: { type: Boolean },
       authentication_status: { type: Boolean },
@@ -53,26 +52,25 @@ export default function (model_singleton) {
       ...bilingual_str("digital_enablement_comment"),
       standards: [
         {
-          submission_year: { type: Number },
+          submission_year: str_type,
           standard_id: parent_fkey_type(),
           service_id: parent_fkey_type(),
-          first_active_year: { type: Number },
-          last_active_year: { type: Number },
+          first_active_year: str_type,
+          last_active_year: str_type,
 
           ...bilingual_str("name"),
 
-          last_gcss_tool_year: { type: Number },
+          last_gcss_tool_year: str_type,
           target_type: str_type,
           ...bilingual_str("channel"),
           ...bilingual_str("type"),
           ...bilingual_str("other_type_comment"),
-
           ...bilingual("standard_urls", [str_type]),
           ...bilingual("rtp_urls", [str_type]),
           standard_report: [
             {
               standard_id: parent_fkey_type(),
-              year: { type: Number },
+              year: str_type,
               lower: { type: Number },
               upper: { type: Number },
               count: { type: Number },
@@ -86,7 +84,7 @@ export default function (model_singleton) {
       service_report: [
         {
           service_id: parent_fkey_type(),
-          year: { type: Number },
+          year: str_type,
           cra_business_ids_collected: { type: Boolean },
           sin_collected: { type: Boolean },
           phone_inquiry_count: { type: Number },
@@ -109,8 +107,8 @@ export default function (model_singleton) {
   const common_service_fields = {
     id: pkey_type(),
     service_general_stats: {
-      report_years: [{ type: Number }],
-      standard_years: [{ type: Number }],
+      report_years: [str_type],
+      standard_years: [str_type],
       number_of_services: { type: Number },
       number_of_online_enabled_services: { type: Number },
       pct_of_online_client_interaction_pts: { type: Number },
@@ -121,7 +119,7 @@ export default function (model_singleton) {
     service_channels_summary: [
       {
         subject_id: parent_fkey_type(),
-        year: { type: Number },
+        year: str_type,
         channel_id: str_type,
         channel_value: { type: Number },
       },
@@ -139,7 +137,7 @@ export default function (model_singleton) {
     service_standards_summary: [
       {
         subject_id: parent_fkey_type(),
-        year: { type: Number },
+        year: str_type,
         services_w_standards_count: { type: Number },
         standards_count: { type: Number },
         met_standards_count: { type: Number },
