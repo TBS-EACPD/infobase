@@ -154,7 +154,8 @@ export class ServiceOverview extends React.Component {
             })}
           </dd>
 
-          {/* SI_TODO enable for 2020-21 data <dt>{text_maker("last_accessibility_review")}</dt>
+          {/* SI_TODO enable for 2020-21 and later data. Data previous to that is empty
+          <dt>{text_maker("last_accessibility_review")}</dt>
           <dd>{service.last_accessibility_review}</dd>
           <dt>{text_maker("last_improve_from_feedback")}</dt>
           <dd>{service.last_improve_from_feedback}</dd>
