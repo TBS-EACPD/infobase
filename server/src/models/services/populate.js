@@ -311,7 +311,7 @@ export default async function ({ models }) {
         service_report,
       };
     })
-    .reject((service) => _.isEqual(service.scope_codes, ["internal"])) // SI_TODO This should be done on pipeline.. I think?
+    .reject((service) => _.isEqual(service.scope_codes, ["internal"]))
     // SI_TODO oof, big mess, need to refactor a lot of stuff to support multiple years of service data. For now, just take the latest submitted version
     // (the client was, generally, doing this in a bunch of places manually already, so this is more of a cleanup than a hack for now)
     .groupBy("id")

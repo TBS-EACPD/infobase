@@ -80,6 +80,15 @@ const ServicesIntroPanel = ({ subject }) => {
         <FormFrontend template_name="service_inventory_feedback" />
       </StatelessModal>
       {/* SI_TODO what's this, can it be deleted?
+      />
+      {/* SI_TODO This was once part of visaulization
+      OCIO decided numbers don't match "their" numbers (either their screwed up DRR, or possibly MAF)
+      Hence, wanted them removed but I believe they're valuable visualizations so kept the code around.
+      I've talked to Mike to we should bring this back, possibly change around to numbers they want
+      But I'm now doubtful if that will happen.
+      
+      To remove this code, server populate summary part should also be removed
+
       <div className="pane-row">
         <div className="pane-rect">
           <span className="pane-max-width">
