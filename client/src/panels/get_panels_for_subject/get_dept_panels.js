@@ -23,7 +23,6 @@ import {
   declare_services_digital_status_panel,
   declare_services_channels_panel,
   declare_services_standards_panel,
-  // SI_TODO declare_no_services_submission_panel,
 
   // shared dept, program
   declare_spend_rev_split_panel,
@@ -114,7 +113,6 @@ export const get_dept_panels = (subject) =>
     ],
     services: services_feature_flag &&
       subject.has_data("services") && [
-        // SI_TODO declare_no_services_submission_panel(),
         declare_services_intro_panel(),
         declare_subject_offering_services_panel(),
         declare_provided_services_list_panel(),

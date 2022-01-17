@@ -18,7 +18,6 @@ import {
   declare_drr_summary_panel,
 
   // shared gov, dept, program
-  // SI_TODO declare_no_services_submission_panel,
   declare_services_digital_status_panel,
   declare_services_channels_panel,
   declare_services_standards_panel,
@@ -66,7 +65,6 @@ export const get_program_panels = (subject) =>
     ],
     services: services_feature_flag &&
       subject.has_data("services") && [
-        // SI_TODO declare_no_services_submission_panel(),
         declare_provided_services_list_panel(),
         declare_services_digital_status_panel(),
         declare_services_channels_panel(),

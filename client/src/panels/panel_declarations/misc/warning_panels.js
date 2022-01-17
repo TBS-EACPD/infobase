@@ -14,10 +14,6 @@ import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
-import {
-  useServicesByOrg,
-  useServicesByProgram,
-} from "src/models/services/services_queries";
 import { Dept } from "src/models/subjects";
 
 import text from "./warning_panels.yaml";
@@ -268,39 +264,3 @@ export const declare_late_planned_resources_panel =
     "planned",
     depts_with_late_planned_resources
   );
-
-const NoServiceSubmissionPanel = ({ subject }) => {
-  const useServices = (() => {
-    if (subject.subject_type === "dept") {
-      return useServicesByOrg;
-    }
-    if (subject.subject_type === "program") {
-      return useServicesByProgram;
-    }
-  })();
-  const { loading, data } = useServices({ id: subject.id });
-  if (loading) {
-    return <span>loading</span>;
-  }
-  const active_services = _.filter(data, "is_active");
-  return (
-    active_services.length <= 0 && (
-      <WarningPanel banner_class="warning">
-        <TM k="no_service_submission_text" args={{ subject }} />
-      </WarningPanel>
-    )
-  );
-};
-
-export const declare_no_services_submission_panel = () =>
-  declare_panel({
-    panel_key: `no_services_submission_warning`,
-    subject_types: ["dept", "program"],
-    panel_config_func: (subject_type, panel_key) => ({
-      ...common_panel_config,
-      render: ({ calculations }) => {
-        const { subject } = calculations;
-        return <NoServiceSubmissionPanel subject={subject} />;
-      },
-    }),
-  });

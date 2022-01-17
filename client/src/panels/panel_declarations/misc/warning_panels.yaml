@@ -18,10 +18,3 @@ m2m_warning_title:
     How to use tags?
   fr: |
     Comment utiliser les étiquettes?
-
-no_service_submission_text:
-  transform: [handlebars, markdown]
-  en: |
-    (SI_TODO text) {{subject.name}} did not submit the latest services data!
-  fr: |
-    TODO
