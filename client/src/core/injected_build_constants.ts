@@ -25,3 +25,5 @@ export const cdn_url = typeof CDN_URL !== "undefined" && CDN_URL;
 export const local_ip = is_dev && typeof LOCAL_IP !== "undefined" && LOCAL_IP;
 
 export const services_feature_flag = true;
+
+export const form_faq_flag = false;
