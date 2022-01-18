@@ -304,10 +304,7 @@ class FormFrontend extends React.Component {
       }
     };
 
-    const q_a_pairs_content = [
-      ["sample_q", "sample_a"],
-      ["ftes_q", "ftes_a"],
-    ];
+    const q_a_pairs_content = [];
 
     return (
       <div className="form-backend-form">
