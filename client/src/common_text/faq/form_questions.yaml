@@ -1,3 +1,4 @@
+# TODO
 sample_q:
   en: |
     sample q
@@ -5,18 +6,6 @@ sample_q:
     sample q (fr)
 
 sample_a:
-  en: |
-    answer
-  fr: |
-    answer (fr)
-
-ftes_q:
-  en: |
-    ftes wrong?
-  fr: |
-    ftes wrong (fr)
-
-ftes_a:
   en: |
     answer
   fr: |
