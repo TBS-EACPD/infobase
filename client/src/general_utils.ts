@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 import JSURL from "jsurl";
 import _ from "lodash";
-import marked from "marked";
+import { marked } from "marked";
 
 export const sanitize_html = (markup: string | Node) => {
   // a little tedious, but this is the safe way to enforce safe usage of target="_blank" with DOMPurify

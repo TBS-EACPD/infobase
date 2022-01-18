@@ -1,7 +1,7 @@
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import Handlebars from "handlebars/dist/cjs/handlebars";
 import _ from "lodash";
-import marked from "marked";
+import { marked } from "marked";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { is_mobile } from "src/core/feature_detection";
