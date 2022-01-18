@@ -11,7 +11,12 @@ import { create_text_maker_component } from "src/components/misc_util_components
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
 import { has_local_storage } from "src/core/feature_detection";
-import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
+import {
+  is_a11y_mode,
+  lang,
+  sha,
+  form_faq_flag,
+} from "src/core/injected_build_constants";
 
 import faq_text from "src/common_text/faq/form_questions.yaml";
 import { textRed } from "src/style_constants/index";
@@ -201,7 +206,7 @@ class FormFrontend extends React.Component {
     const ready_to_send =
       all_required_user_fields_are_filled &&
       all_connected_user_fields_are_filled &&
-      faq_acknowledged &&
+      (form_faq_flag ? faq_acknowledged : true) &&
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&
@@ -304,42 +309,50 @@ class FormFrontend extends React.Component {
       }
     };
 
-    const q_a_pairs_content = [];
+    const q_a_pairs_content = [
+      ["sample_q", "sample_a"],
+      ["sample2_q", "sample2_a"],
+      ["sample3_q", "sample3_a"],
+    ];
 
     return (
       <div className="form-backend-form">
         {loading && <LeafSpinner config_name="subroute" />}
         {!loading && (
           <form>
-            <div className="form_faq">
-              <div style={{ fontWeight: 700 }}>
-                {text_maker("form_frontend_faq_note")}
-                {required_asterisk}
+            {form_faq_flag && (
+              <div className="form_faq">
+                <div style={{ fontWeight: 700 }}>
+                  {text_maker("form_frontend_faq_note")}
+                  {required_asterisk}
+                </div>
+                <FancyUL>
+                  {_.map(q_a_pairs_content, ([q, a], idx) => {
+                    return (
+                      <div key={idx}>
+                        <div style={{ fontWeight: "bold" }}>
+                          {text_maker(q)}
+                        </div>
+                        <TM k={a} />
+                      </div>
+                    );
+                  })}
+                </FancyUL>
+                <CheckBox
+                  id={"form_frontend_faq"}
+                  active={faq_acknowledged}
+                  disabled={disable_forms}
+                  onClick={() =>
+                    this.setState({
+                      faq_acknowledged: !faq_acknowledged,
+                    })
+                  }
+                  label={text_maker("form_frontend_faq_ack")}
+                  label_style={{ fontWeight: "bold" }}
+                  container_style={{ justifyContent: "center" }}
+                />
               </div>
-              <FancyUL>
-                {_.map(q_a_pairs_content, ([q, a], idx) => {
-                  return (
-                    <div key={idx}>
-                      <div style={{ fontWeight: "bold" }}>{text_maker(q)}</div>
-                      <TM k={a} />
-                    </div>
-                  );
-                })}
-              </FancyUL>
-              <CheckBox
-                id={"form_frontend_faq"}
-                active={faq_acknowledged}
-                disabled={disable_forms}
-                onClick={() =>
-                  this.setState({
-                    faq_acknowledged: !faq_acknowledged,
-                  })
-                }
-                label={text_maker("form_frontend_faq_ack")}
-                label_style={{ fontWeight: "bold" }}
-                container_style={{ justifyContent: "center" }}
-              />
-            </div>
+            )}
             <fieldset>
               {_.map(user_fields, (field_info, key) => (
                 <div
