@@ -13,8 +13,8 @@ interface Tab {
 
 export const TabbedContent = ({
   tabs,
-  tab_open_callback,
   open_tab_key,
+  tab_open_callback,
   children,
 }: {
   tabs: Tab[];
@@ -66,7 +66,7 @@ export const TabbedContent = ({
               )}
               aria-controls={get_panel_id(key)}
               aria-selected={key === open_tab_key}
-              onClick={() => tab_open_callback(key)}
+              onClick={() => key !== open_tab_key && tab_open_callback(key)}
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
                   is_arrow_key_navigating.current = true;
