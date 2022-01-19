@@ -16,11 +16,7 @@ import {
 import { create_fake_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
-import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-
-import { StandardLegend } from "src/charts/legends/index";
-import { WrappedNivoHBar } from "src/charts/wrapped_nivo/WrappedNivoBar/wrapped_nivo_bar";
 
 import { toggle_list } from "src/general_utils";
 
@@ -29,10 +25,6 @@ import { IconAttention, IconCheck, IconNotApplicable } from "src/icons/icons";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const standard_statuses = ["met", "not_met", "no_data"];
-const met_text = text_maker("target_met_true");
-const not_met_text = text_maker("target_met_false");
-const no_data_text = text_maker("no_data");
-const standard_statuses_text = [met_text, not_met_text, no_data_text];
 const color_scale = scaleOrdinal()
   .domain(standard_statuses)
   .range(_.take(newIBCategoryColors, 3));
@@ -202,19 +194,6 @@ export class ServiceStandards extends React.Component {
         (active_statuses.length === standard_statuses.length ||
           _.includes(active_statuses, is_target_met))
     );
-    const graph_data = _.chain(data)
-      .groupBy("year")
-      .map((standards, year) => {
-        const { met, not_met, no_data } = _.countBy(standards, "is_target_met");
-        return {
-          year: formats.year_to_fiscal_year_raw(year),
-          [met_text]: met || 0,
-          [not_met_text]: not_met || 0,
-          [no_data_text]: no_data || 0,
-        };
-      })
-      .reverse()
-      .value();
 
     return (
       <InfographicPanel
@@ -226,52 +205,6 @@ export class ServiceStandards extends React.Component {
         {!_.isEmpty(data) ? (
           <Fragment>
             <TM className="medium-panel-text" k="service_standards_text" />
-            <StandardLegend
-              legendListProps={{
-                isHorizontal: true,
-                items: _.map(standard_statuses_text, (status) => ({
-                  id: status,
-                  label: status,
-                  color: color_scale(status),
-                })),
-                checkBoxProps: { isSolidBox: true },
-              }}
-            />
-            <WrappedNivoHBar
-              data={graph_data}
-              is_money={false}
-              enableGridX={false}
-              indexBy={"year"}
-              keys={standard_statuses_text}
-              colors={(d) => color_scale(d.id)}
-              bttm_axis={{
-                renderTick: (tick) =>
-                  tick.value % 1 === 0 && (
-                    <g
-                      key={tick.tickIndex}
-                      transform={`translate(${tick.x},${tick.y + 3})`}
-                    >
-                      <line
-                        x1="0"
-                        x2="0"
-                        y1="0"
-                        y2="7"
-                        transform={`translate(0,-20)`}
-                        style={{ stroke: "rgb(119, 119, 119)", strokeWidth: 1 }}
-                      />
-                      <text
-                        style={{ fontSize: "11px", color: "#333" }}
-                        transform={`translate(-${
-                          4 * _.toString(tick.value).length
-                        },0)`}
-                      >
-                        {tick.value}
-                      </text>
-                    </g>
-                  ),
-              }}
-            />
-            <div className="panel-separator" style={{ marginBottom: "50px" }} />
             {!is_a11y_mode && (
               <VisibilityControl
                 items={_.map(standard_statuses, (status_key) => ({
