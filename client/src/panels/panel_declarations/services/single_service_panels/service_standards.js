@@ -11,11 +11,13 @@ import {
   create_text_maker_component,
   VisibilityControl,
   HeightClipper,
+  TabsStateful,
 } from "src/components/index";
 
 import { create_fake_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
+import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { toggle_list } from "src/general_utils";
@@ -39,23 +41,9 @@ export class ServiceStandards extends React.Component {
   }
 
   render() {
-    const { service, title, sources, datasets } = this.props;
+    const { service, title, sources, datasets, standards, year } = this.props;
 
     const { active_statuses } = this.state;
-
-    const standards = _.uniqBy(service.standards, "standard_id");
-
-    const footnotes = _.chain(standards)
-      .map(
-        (standard) =>
-          standard.other_type_comment &&
-          create_fake_footnote({
-            topic_keys: ["OTHER_TYPE_COMMENT"],
-            text: standard.other_type_comment,
-          })
-      )
-      .filter()
-      .value();
 
     const get_is_target_met = (
       is_target_met,
@@ -95,13 +83,13 @@ export class ServiceStandards extends React.Component {
     };
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
 
-    const data = _.chain(standards)
-      .map(({ name, type, channel, standard_report, target_type }) =>
-        _.map(
-          standard_report,
-          ({ year, lower, count, met_count, is_target_met }) => ({
+    const data = _.flatMap(
+      standards,
+      ({ name, type, channel, standard_report, target_type }) =>
+        _.chain(standard_report)
+          .filter({ year })
+          .map(({ lower, count, met_count, is_target_met }) => ({
             name,
-            year,
             standard_type: type,
             target: get_target(target_type, lower),
             channel,
@@ -120,11 +108,9 @@ export class ServiceStandards extends React.Component {
               count,
               met_count
             ),
-          })
-        )
-      )
-      .flatten()
-      .value();
+          }))
+          .value()
+    );
 
     const get_icon_props = (status) => ({
       key: status,
@@ -145,11 +131,6 @@ export class ServiceStandards extends React.Component {
       name: {
         index: 0,
         header: text_maker("standard_name"),
-        is_searchable: true,
-      },
-      year: {
-        index: 1,
-        header: text_maker("year"),
         is_searchable: true,
       },
       target: {
@@ -202,41 +183,42 @@ export class ServiceStandards extends React.Component {
         datasets={datasets}
         footnotes={footnotes}
       >
-        {!_.isEmpty(data) ? (
-          <Fragment>
-            <TM className="medium-panel-text" k="service_standards_text" />
-            {!is_a11y_mode && (
-              <VisibilityControl
-                items={_.map(standard_statuses, (status_key) => ({
-                  key: status_key,
-                  count: _.countBy(data, "is_target_met")[status_key] || 0,
-                  active:
-                    active_statuses.length === standard_statuses.length ||
-                    _.indexOf(active_statuses, status_key) !== -1,
-                  text: text_maker(status_key),
-                  icon: status_icons[status_key],
-                }))}
-                item_component_order={["count", "icon", "text"]}
-                click_callback={(status_key) =>
-                  this.setState({
-                    active_statuses: toggle_list(active_statuses, status_key),
-                  })
-                }
-                show_eyes_override={
-                  active_statuses.length === standard_statuses.length
-                }
-              />
-            )}
-            <HeightClipper clipHeight={500}>
-              <DisplayTable
-                data={filtered_data}
-                column_configs={column_configs}
-              />
-            </HeightClipper>
-          </Fragment>
-        ) : (
-          <TM className="medium-panel-text" k="no_service_standards_text" />
-        )}
+        <Fragment>
+          {!_.isEmpty(data) ? (
+            <Fragment>
+              {!is_a11y_mode && (
+                <VisibilityControl
+                  items={_.map(standard_statuses, (status_key) => ({
+                    key: status_key,
+                    count: _.countBy(data, "is_target_met")[status_key] || 0,
+                    active:
+                      active_statuses.length === standard_statuses.length ||
+                      _.indexOf(active_statuses, status_key) !== -1,
+                    text: text_maker(status_key),
+                    icon: status_icons[status_key],
+                  }))}
+                  item_component_order={["count", "icon", "text"]}
+                  click_callback={(status_key) =>
+                    this.setState({
+                      active_statuses: toggle_list(active_statuses, status_key),
+                    })
+                  }
+                  show_eyes_override={
+                    active_statuses.length === standard_statuses.length
+                  }
+                />
+              )}
+              <HeightClipper clipHeight={500}>
+                <DisplayTable
+                  data={filtered_data}
+                  column_configs={column_configs}
+                />
+              </HeightClipper>
+            </Fragment>
+          ) : (
+            <TM className="medium-panel-text" k="no_service_standards_text" />
+          )}
+        </Fragment>
       </InfographicPanel>
     );
   }
@@ -248,15 +230,63 @@ export const declare_single_service_standards_panel = () =>
     subject_types: ["service"],
     panel_config_func: () => ({
       get_title: () => text_maker("service_standards_title"),
+      calculate: ({ subject }) => {
+        return {
+          subject,
+        };
+      },
       get_dataset_keys: () => ["service_inventory"],
+      footnotes: false,
       render({ title, subject, sources, datasets }) {
+        const { subject: service } = calculations;
+        const standards = _.uniqBy(service.standards, "standard_id");
+        const years = _.chain(standards)
+          .map("submission_year")
+          .uniq()
+          .sort()
+          .value();
+
+        const footnotes = _.chain(standards)
+          .map(
+            (standard) =>
+              standard.other_type_comment &&
+              create_fake_footnote({
+                topic_keys: ["OTHER_TYPE_COMMENT"],
+                text: standard.other_type_comment,
+              })
+          )
+          .filter()
+          .value();
+
         return (
-          <ServiceStandards
-            service={subject}
-            title={title}
-            sources={sources}
-            datasets={datasets}
-          />
+          <>
+            <TM className="medium-panel-text" k="service_standards_text" />
+            <TabsStateful
+              default_tab_key={_.last(years)}
+              tabs={_.chain(years)
+                .map((year) => [
+                  year,
+                  {
+                    label: formats.year_to_fiscal_year_raw(year),
+                    content: (
+                      <ServiceStandards
+                        standards={_.filter(standards, {
+                          submission_year: year,
+                        })}
+                        year={year}
+                        key={year}
+                        service={subject}
+                        title={title}
+                        sources={sources}
+                        datasets={datasets}
+                      />
+                    ),
+                  },
+                ])
+                .fromPairs()
+                .value()}
+            />
+          </>
         );
       },
     }),
