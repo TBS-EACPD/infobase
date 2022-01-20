@@ -68,8 +68,9 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
-    text_key: "quick_link_DRR_2021",
+    text_key: "quick_link_DRR20",
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
+    is_new: "true",
   },
   {
     text_key: "quick_link_people_2021",
