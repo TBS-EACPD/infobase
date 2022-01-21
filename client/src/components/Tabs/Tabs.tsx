@@ -3,7 +3,7 @@ import _ from "lodash";
 import React, { useState, useEffect, useRef } from "react";
 import string_hash from "string-hash";
 
-import "./TabbedContent.scss";
+import "./Tabs.scss";
 
 export const Tabs = <
   Tabs extends {
