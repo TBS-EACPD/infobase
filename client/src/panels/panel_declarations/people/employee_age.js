@@ -7,7 +7,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
   create_text_maker_component,
-  TabbedContentStateful,
+  TabsStateful,
   GraphOverlay,
 } from "src/components/index";
 
@@ -205,7 +205,7 @@ export const declare_employee_age_panel = () =>
               />
             </Col>
             <Col size={12} isGraph>
-              <TabbedContentStateful
+              <TabsStateful
                 tabs={{
                   age_group: {
                     label: text_maker("age_group"),

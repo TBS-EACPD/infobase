@@ -5,7 +5,7 @@ import string_hash from "string-hash";
 
 import "./TabbedContent.scss";
 
-export const TabbedContent = <
+export const Tabs = <
   Tabs extends {
     [key: string]: React.ReactNode;
   },
@@ -127,7 +127,7 @@ export const TabbedContent = <
   );
 };
 
-export const TabbedContentStateful = <
+export const TabsStateful = <
   Tabs extends {
     [key: string]: { label: React.ReactNode; content: React.ReactNode };
   },
@@ -142,12 +142,12 @@ export const TabbedContentStateful = <
   const [open_tab_key, set_open_tab_key] = useState<TabKey>(default_tab_key);
 
   return (
-    <TabbedContent
+    <Tabs
       tabs={_.mapValues(tabs, ({ label }) => label)}
       open_tab_key={open_tab_key}
       tab_open_callback={set_open_tab_key}
     >
       {tabs[open_tab_key].content}
-    </TabbedContent>
+    </Tabs>
   );
 };

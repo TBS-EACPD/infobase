@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { TabbedContent, CheckBox, LinkStyled } from "src/components/index";
+import { Tabs, CheckBox, LinkStyled } from "src/components/index";
 
 import { formats } from "src/core/format";
 
@@ -20,7 +20,7 @@ const YearSelectionTabs = ({
   children,
 }) =>
   years.length > 1 ? (
-    <TabbedContent
+    <Tabs
       open_tab_key={selected_year}
       tabs={_.chain(years)
         .map((year) => [year, formats.year_to_fiscal_year(year)])
@@ -29,7 +29,7 @@ const YearSelectionTabs = ({
       tab_open_callback={on_select_year}
     >
       {children}
-    </TabbedContent>
+    </Tabs>
   ) : (
     children
   );
