@@ -43,20 +43,22 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
       _.includes(subject_types, panel_args.subject.subject_type)
   );
 
-  return _.map(
-    configs_for_subject_type,
-    ({ key, label, load_data, TabContent }) => ({
+  return _.chain(configs_for_subject_type)
+    .map(({ key, label, load_data, TabContent }) => [
       key,
-      label,
-      content: (
-        <TabLoadingWrapper
-          panel_args={panel_args}
-          load_data={load_data}
-          TabContent={TabContent}
-        />
-      ),
-    })
-  );
+      {
+        label,
+        content: (
+          <TabLoadingWrapper
+            panel_args={panel_args}
+            load_data={load_data}
+            TabContent={TabContent}
+          />
+        ),
+      },
+    ])
+    .fromPairs()
+    .value();
 };
 
 const wrap_with_vote_stat_controls = (Component) => (props) =>

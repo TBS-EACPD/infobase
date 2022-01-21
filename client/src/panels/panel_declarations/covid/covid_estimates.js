@@ -418,11 +418,6 @@ class CovidEstimatesPanel extends React.Component {
         ),
       };
 
-      const tabs = get_tabbed_content_props(
-        tab_content_configs,
-        extended_panel_args
-      );
-
       return (
         <YearSelectionTabs
           years={panel_args.years}
@@ -439,7 +434,13 @@ class CovidEstimatesPanel extends React.Component {
             key={selected_year} below is to force a re-render on year change, as React doesn't compare deep enough
             to see the corresponding prop changes in tabbed_content_props itself 
           */}
-          <TabbedContentStateful tabs={tabs} key={selected_year} />
+          <TabbedContentStateful
+            tabs={get_tabbed_content_props(
+              tab_content_configs,
+              extended_panel_args
+            )}
+            key={selected_year}
+          />
         </YearSelectionTabs>
       );
     }

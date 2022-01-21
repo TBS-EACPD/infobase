@@ -22,10 +22,10 @@ const YearSelectionTabs = ({
   years.length > 1 ? (
     <TabbedContent
       open_tab_key={selected_year}
-      tabs={_.map(years, (year) => ({
-        key: year,
-        label: formats.year_to_fiscal_year(year),
-      }))}
+      tabs={_.chain(years)
+        .map((year) => [year, formats.year_to_fiscal_year(year)])
+        .fromPairs()
+        .value()}
       tab_open_callback={on_select_year}
     >
       {children}

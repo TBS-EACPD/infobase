@@ -266,9 +266,8 @@ class TPMap extends React.Component {
                 <TransferPaymentsByRegionGraph data={transfer_payment_data} />
               ) : (
                 <TabbedContentStateful
-                  tabs={[
-                    {
-                      key: "transfer_payments",
+                  tabs={{
+                    transfer_payments: {
                       label: text_maker("transfer_payments"),
                       content: (
                         <TransferPaymentsByRegionGraph
@@ -276,8 +275,7 @@ class TPMap extends React.Component {
                         />
                       ),
                     },
-                    {
-                      key: "transfer_payments_per_capita",
+                    transfer_payments_per_capita: {
                       label: text_maker("transfer_payments_per_capita"),
                       content: (
                         <TransferPaymentsByRegionGraph
@@ -286,7 +284,7 @@ class TPMap extends React.Component {
                         />
                       ),
                     },
-                  ]}
+                  }}
                 />
               ))}
             {is_a11y_mode && (

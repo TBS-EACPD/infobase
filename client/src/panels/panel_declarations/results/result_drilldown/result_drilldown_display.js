@@ -400,20 +400,24 @@ export default class ResultsExplorerDisplay extends React.Component {
     return (
       <TabbedContent
         open_tab_key={doc}
-        tabs={_.map(docs_with_data, (doc_with_data) => ({
-          key: doc_with_data,
-          label: /drr/.test(doc_with_data) ? (
-            <TM
-              k="DRR_results_option_title"
-              args={{ doc_year: result_docs[doc_with_data].year }}
-            />
-          ) : (
-            <TM
-              k="DP_results_option_title"
-              args={{ doc_year: result_docs[doc_with_data].year }}
-            />
-          ),
-        }))}
+        tabs={_.chain(docs_with_data)
+          .map((doc_with_data) => [
+            doc_with_data,
+
+            /drr/.test(doc_with_data) ? (
+              <TM
+                k="DRR_results_option_title"
+                args={{ doc_year: result_docs[doc_with_data].year }}
+              />
+            ) : (
+              <TM
+                k="DP_results_option_title"
+                args={{ doc_year: result_docs[doc_with_data].year }}
+              />
+            ),
+          ])
+          .fromPairs()
+          .value()}
         tab_open_callback={(doc) => set_doc !== doc && set_doc(doc, subject)}
       >
         {inner_content}
