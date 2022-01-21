@@ -9,7 +9,7 @@ import {
 import _ from "lodash";
 import React from "react";
 
-import { Tabs, TabsStateful } from "./TabbedContent";
+import { Tabs, TabsStateful } from "./Tabs";
 
 describe("Tabs", () => {
   const tabs = _.chain(["tab1", "tab2", "tab3"])
