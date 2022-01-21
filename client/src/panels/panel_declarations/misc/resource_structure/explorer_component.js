@@ -109,26 +109,27 @@ export default class SingleTagResourceExplorerComponent extends React.Component 
     return (
       <TabbedContent
         open_tab_key={year}
-        tabs={_.compact([
-          has_actual_data && {
-            key: actual_year,
-            label: (
-              <TM
-                k="actual_resources"
-                args={{ year: run_template(actual_year) }}
-              />
-            ),
-          },
-          has_planning_data && {
-            key: planning_year,
-            label: (
-              <TM
-                k="planned_resources"
-                args={{ year: run_template(planning_year) }}
-              />
-            ),
-          },
-        ])}
+        tabs={_.chain([
+          has_actual_data && [
+            actual_year,
+            <TM
+              k="actual_resources"
+              args={{ year: run_template(actual_year) }}
+              key={actual_year}
+            />,
+          ],
+          has_planning_data && [
+            planning_year,
+            <TM
+              k="planned_resources"
+              args={{ year: run_template(planning_year) }}
+              key={planning_year}
+            />,
+          ],
+        ])
+          .compact()
+          .fromPairs()
+          .value()}
         tab_open_callback={tab_on_click}
       >
         {inner_content}

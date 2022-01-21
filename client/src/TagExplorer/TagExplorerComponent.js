@@ -261,26 +261,20 @@ export default class TagExplorerComponent extends React.Component {
         />
         <TabbedContent
           open_tab_key={year}
-          tabs={[
-            {
-              key: actual_year,
-              label: (
-                <TM
-                  k="actual_resources"
-                  args={{ year: run_template(actual_year) }}
-                />
-              ),
-            },
-            {
-              key: planning_year,
-              label: (
-                <TM
-                  k="planned_resources"
-                  args={{ year: run_template(planning_year) }}
-                />
-              ),
-            },
-          ]}
+          tabs={{
+            [actual_year]: (
+              <TM
+                k="actual_resources"
+                args={{ year: run_template(actual_year) }}
+              />
+            ),
+            [planning_year]: (
+              <TM
+                k="planned_resources"
+                args={{ year: run_template(planning_year) }}
+              />
+            ),
+          }}
           tab_open_callback={(key) => {
             const route_base = window.location.href.split("#")[0];
 

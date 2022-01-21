@@ -396,13 +396,13 @@ class CovidExpendituresPanel extends React.Component {
             key={selected_year} below is to force a re-render on year change, as React doesn't compare deep enough
             to see the corresponding prop changes in tabbed_content_props itself 
           */}
-          {tabs.length === 1 && (
+          {_.size(tabs) === 1 && (
             <Fragment key={selected_year}>
               <div className="panel-separator" />
-              {tabs[0].content}
+              {tabs[_.keys(tabs)[0]].content}
             </Fragment>
           )}
-          {tabs.length > 1 && (
+          {_.size(tabs) > 1 && (
             <TabbedContentStateful tabs={tabs} key={selected_year} />
           )}
         </YearSelectionTabs>

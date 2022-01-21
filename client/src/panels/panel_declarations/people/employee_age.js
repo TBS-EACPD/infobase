@@ -206,9 +206,8 @@ export const declare_employee_age_panel = () =>
             </Col>
             <Col size={12} isGraph>
               <TabbedContentStateful
-                tabs={[
-                  {
-                    key: "age_group",
+                tabs={{
+                  age_group: {
                     label: text_maker("age_group"),
                     content: (
                       <div id={"emp_age_tab_pane"}>
@@ -219,8 +218,7 @@ export const declare_employee_age_panel = () =>
                       </div>
                     ),
                   },
-                  {
-                    key: "avgage",
+                  avgage: {
                     label: text_maker("avgage"),
                     content: (
                       <div id={"emp_age_tab_pane"}>
@@ -229,7 +227,7 @@ export const declare_employee_age_panel = () =>
                       </div>
                     ),
                   },
-                ]}
+                }}
               />
             </Col>
           </StdPanel>
