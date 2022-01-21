@@ -66,6 +66,7 @@ export const Tabs = <
               aria-controls={get_panel_id(key)}
               aria-selected={key === open_tab_key}
               onClick={() => key !== open_tab_key && tab_open_callback(key)}
+              tabIndex={key === open_tab_key ? 0 : -1}
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
                   is_arrow_key_navigating.current = true;
@@ -91,14 +92,6 @@ export const Tabs = <
                   tab_open_callback(next_key);
                 }
               }}
-              /*
-                Note: per the spec, only the selected tab should be in the tab navigation order, controlling the tabs is arrow key based...
-                BUT the spec is still not widely followed in the wild. IMO, the better user experience is to support the spec's arrow key controls
-                but ALSO allow tab navigation between them?
-
-                To fully meet the spec, uncomment the following line:
-                tabIndex={key === open_tab_key ? 0 : -1}
-              */
             >
               <span className="ib-tabs__tab-label">{label}</span>
             </button>
