@@ -30,12 +30,12 @@ export const Tabs = <
         "key"
       )}`
     );
+  } else if (typeof open_tab_key !== "string") {
+    throw new Error(
+      `Provided open_tab_key "${open_tab_key}" is not of type string (${typeof open_tab_key}). To avoid errors with type
+      consistency/coercion between the tabs prop and the open_tab_key, only strings are allowed.`
+    );
   }
-
-  // gotcha: keys in tabs object will be coerced to strings inside lodash chains below, but open_tab_key may be a number (in non-TS consumers)
-  // The _.has check above does type coercion so it won't catch that case as an error. For consistency, specifically ALLOW type coercion when
-  // comparing open_tab_key to keys here
-  const is_open_tab_key = (key: TabKey) => key == open_tab_key;
 
   // hashing the key value because it might contain non-id-safe characters such as "{". TODO maybe make a generic id-escape util
   const get_panel_id = (key: TabKey) =>
@@ -66,12 +66,12 @@ export const Tabs = <
               className={classNames(
                 "button-unstyled",
                 "ib-tabs__tab",
-                is_open_tab_key(key) && "ib-tabs__tab--active"
+                key === open_tab_key && "ib-tabs__tab--active"
               )}
               aria-controls={get_panel_id(key)}
-              aria-selected={is_open_tab_key(key)}
-              onClick={() => !is_open_tab_key(key) && tab_open_callback(key)}
-              tabIndex={is_open_tab_key(key) ? 0 : -1}
+              aria-selected={key === open_tab_key}
+              onClick={() => key !== open_tab_key && tab_open_callback(key)}
+              tabIndex={key === open_tab_key ? 0 : -1}
               onKeyDown={(e) => {
                 if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
                   is_arrow_key_navigating.current = true;
@@ -82,8 +82,9 @@ export const Tabs = <
                       tab_keys.reverse();
                     }
 
-                    const current_index = _.findIndex(tab_keys, (key) =>
-                      is_open_tab_key(key)
+                    const current_index = _.findIndex(
+                      tab_keys,
+                      (key) => key === open_tab_key
                     );
 
                     if (current_index + 1 < tab_keys.length) {
@@ -112,11 +113,11 @@ export const Tabs = <
             id={get_panel_id(key)}
             className={classNames(
               "ib-tabs__tab-panel",
-              !is_open_tab_key(key) && "ib-tabs__tab-panel--hidden"
+              key !== open_tab_key && "ib-tabs__tab-panel--hidden"
             )}
-            aria-hidden={!is_open_tab_key(key)}
+            aria-hidden={key !== open_tab_key}
           >
-            {is_open_tab_key(key) && children}
+            {key === open_tab_key && children}
           </section>
         ))
         .value()}
