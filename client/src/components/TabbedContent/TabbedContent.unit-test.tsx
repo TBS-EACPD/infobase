@@ -9,9 +9,9 @@ import {
 import _ from "lodash";
 import React from "react";
 
-import { TabbedContent, TabbedContentStateful } from "./TabbedContent";
+import { Tabs, TabsStateful } from "./TabbedContent";
 
-describe("TabbedContent", () => {
+describe("Tabs", () => {
   const tabs = _.chain(["tab1", "tab2", "tab3"])
     .map((key) => [key, key])
     .fromPairs()
@@ -19,13 +19,13 @@ describe("TabbedContent", () => {
 
   it("Has a tablist containing provided tab items, in the provided order", () => {
     render(
-      <TabbedContent
+      <Tabs
         tabs={tabs}
         open_tab_key={_.keys(tabs)[0]}
         tab_open_callback={_.noop}
       >
         whatever
-      </TabbedContent>
+      </Tabs>
     );
 
     const tablist_node = screen.getByRole("tablist");
@@ -39,13 +39,13 @@ describe("TabbedContent", () => {
   });
   it("Has one selected tab. The tab's corresponding tabpanel is the only visible panel", () => {
     render(
-      <TabbedContent
+      <Tabs
         tabs={tabs}
         open_tab_key={_.keys(tabs)[0]}
         tab_open_callback={_.noop}
       >
         whatever
-      </TabbedContent>
+      </Tabs>
     );
 
     const selected_tab = screen.getByRole("tab", { selected: true });
@@ -56,13 +56,13 @@ describe("TabbedContent", () => {
     const content = "whatever";
 
     render(
-      <TabbedContent
+      <Tabs
         tabs={tabs}
         open_tab_key={_.keys(tabs)[0]}
         tab_open_callback={_.noop}
       >
         {content}
-      </TabbedContent>
+      </Tabs>
     );
 
     const visible_panel = screen.getByRole("tabpanel", { hidden: false });
@@ -74,13 +74,13 @@ describe("TabbedContent", () => {
     const mock_tab_open_callback = jest.fn();
 
     render(
-      <TabbedContent
+      <Tabs
         tabs={tabs}
         open_tab_key={open_tab_key}
         tab_open_callback={mock_tab_open_callback}
       >
         whatever
-      </TabbedContent>
+      </Tabs>
     );
 
     const tablist = screen.getByRole("tablist");
@@ -103,13 +103,13 @@ describe("TabbedContent", () => {
       const mock_tab_open_callback = jest.fn();
 
       const { rerender } = render(
-        <TabbedContent
+        <Tabs
           tabs={tabs}
           open_tab_key={open_tab_key}
           tab_open_callback={mock_tab_open_callback}
         >
           whatever
-        </TabbedContent>
+        </Tabs>
       );
 
       const tablist_node = screen.getByRole("tablist");
@@ -125,13 +125,13 @@ describe("TabbedContent", () => {
 
       // when re-rendering after arrow key selection, focus should be moved to the newly selected tab
       rerender(
-        <TabbedContent
+        <Tabs
           tabs={tabs}
           open_tab_key={expected_callback_key}
           tab_open_callback={mock_tab_open_callback}
         >
           whatever
-        </TabbedContent>
+        </Tabs>
       );
       const next_tab = screen.getByRole("tab", { selected: true });
       expect(next_tab).toHaveFocus();
@@ -146,14 +146,14 @@ describe("TabbedContent", () => {
   });
 });
 
-describe("TabbedContentStateful", () => {
+describe("TabsStateful", () => {
   it("Updates selected tab, and corresponding visible tabpanel, on click", () => {
     const stateful_tabs = _.chain(["tab1", "tab2", "tab3"])
       .map((key) => [key, { label: key, content: key }])
       .fromPairs()
       .value();
 
-    render(<TabbedContentStateful tabs={stateful_tabs} />);
+    render(<TabsStateful tabs={stateful_tabs} />);
 
     const tablist_node = screen.getByRole("tablist");
 

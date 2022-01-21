@@ -9,7 +9,7 @@ import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import {
   create_text_maker_component,
   LeafSpinner,
-  TabbedContentStateful,
+  TabsStateful,
   DisplayTable,
 } from "src/components/index";
 
@@ -265,7 +265,7 @@ class TPMap extends React.Component {
               (!text_args.show_per_capita_data ? (
                 <TransferPaymentsByRegionGraph data={transfer_payment_data} />
               ) : (
-                <TabbedContentStateful
+                <TabsStateful
                   tabs={{
                     transfer_payments: {
                       label: text_maker("transfer_payments"),

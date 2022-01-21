@@ -5,11 +5,7 @@ import MediaQuery from "react-responsive";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import {
-  TabbedContentStateful,
-  LeafSpinner,
-  DisplayTable,
-} from "src/components/index";
+import { TabsStateful, LeafSpinner, DisplayTable } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
 import {
@@ -402,9 +398,7 @@ class CovidExpendituresPanel extends React.Component {
               {tabs[_.keys(tabs)[0]].content}
             </Fragment>
           )}
-          {_.size(tabs) > 1 && (
-            <TabbedContentStateful tabs={tabs} key={selected_year} />
-          )}
+          {_.size(tabs) > 1 && <TabsStateful tabs={tabs} key={selected_year} />}
         </YearSelectionTabs>
       );
     }
