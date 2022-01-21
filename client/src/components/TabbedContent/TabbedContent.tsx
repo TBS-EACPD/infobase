@@ -5,24 +5,23 @@ import string_hash from "string-hash";
 
 import "./TabbedContent.scss";
 
-type TabKey = string | number;
-interface Tab {
-  key: TabKey;
-  label: React.ReactNode;
-}
-
-export const TabbedContent = ({
+export const TabbedContent = <
+  Tabs extends {
+    [key: string]: React.ReactNode;
+  },
+  TabKey extends keyof Tabs
+>({
   tabs,
   open_tab_key,
   tab_open_callback,
   children,
 }: {
-  tabs: Tab[];
+  tabs: Tabs;
   open_tab_key: TabKey;
   tab_open_callback: (tab_key: TabKey) => void;
   children: React.ReactNode;
 }) => {
-  if (!_.chain(tabs).map("key").includes(open_tab_key).value()) {
+  if (!_.has(tabs, open_tab_key)) {
     throw new Error(
       `Provided open_tab_key "${open_tab_key}" does not correspond to any provided tab ${_.map(
         tabs,
@@ -55,9 +54,9 @@ export const TabbedContent = ({
     <div className="ib-tabs" id={id}>
       <div className="ib-tabs__tab-list-container">
         <div role="tablist" className="ib-tabs__tab-list">
-          {_.map(tabs, ({ key, label }) => (
+          {_.map(tabs, (label, key: TabKey) => (
             <button
-              key={key}
+              key={_.toString(key)}
               role="tab"
               className={classNames(
                 "button-unstyled",
@@ -72,20 +71,20 @@ export const TabbedContent = ({
                   is_arrow_key_navigating.current = true;
 
                   const next_key = (() => {
-                    const target_tabs = _.map(tabs, "key");
+                    const tab_keys = _.keys(tabs) as TabKey[];
                     if (e.key === "ArrowLeft") {
-                      target_tabs.reverse();
+                      tab_keys.reverse();
                     }
 
                     const current_index = _.findIndex(
-                      target_tabs,
+                      tab_keys,
                       (key) => key === open_tab_key
                     );
 
-                    if (current_index + 1 < target_tabs.length) {
-                      return target_tabs[current_index + 1];
+                    if (current_index + 1 < tab_keys.length) {
+                      return tab_keys[current_index + 1];
                     } else {
-                      return target_tabs[0];
+                      return tab_keys[0];
                     }
                   })();
 
@@ -107,43 +106,48 @@ export const TabbedContent = ({
         </div>
         <div className="ib-tabs__tab_bottom-border" />
       </div>
-      {_.map(tabs, ({ key }) => (
-        <section
-          key={key}
-          role="tabpanel"
-          id={get_panel_id(key)}
-          className={classNames(
-            "ib-tabs__tab-panel",
-            key !== open_tab_key && "ib-tabs__tab-panel--hidden"
-          )}
-          aria-hidden={key !== open_tab_key}
-        >
-          {key === open_tab_key && children}
-        </section>
-      ))}
+      {_.chain(tabs)
+        .keys()
+        .map((key: TabKey) => (
+          <section
+            key={_.toString(key)}
+            role="tabpanel"
+            id={get_panel_id(key)}
+            className={classNames(
+              "ib-tabs__tab-panel",
+              key !== open_tab_key && "ib-tabs__tab-panel--hidden"
+            )}
+            aria-hidden={key !== open_tab_key}
+          >
+            {key === open_tab_key && children}
+          </section>
+        ))
+        .value()}
     </div>
   );
 };
 
-interface StatefulTab extends Tab {
-  content: React.ReactNode;
-}
-export const TabbedContentStateful = ({
+export const TabbedContentStateful = <
+  Tabs extends {
+    [key: string]: { label: React.ReactNode; content: React.ReactNode };
+  },
+  TabKey extends keyof Tabs
+>({
   tabs,
-  default_tab_key = _.chain(tabs).map("key").first().value(),
+  default_tab_key = _.chain(tabs).keys().first().value() as TabKey,
 }: {
-  tabs: StatefulTab[];
+  tabs: Tabs;
   default_tab_key?: TabKey;
 }) => {
   const [open_tab_key, set_open_tab_key] = useState<TabKey>(default_tab_key);
 
   return (
     <TabbedContent
-      tabs={tabs}
+      tabs={_.mapValues(tabs, ({ label }) => label)}
       open_tab_key={open_tab_key}
       tab_open_callback={set_open_tab_key}
     >
-      {_.find(tabs, ({ key }) => key === open_tab_key)?.content}
+      {tabs[open_tab_key].content}
     </TabbedContent>
   );
 };
