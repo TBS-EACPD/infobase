@@ -301,7 +301,7 @@ const axe_scan = () =>
     cy.checkA11y(
       null,
       // TODO expand to include serious impacts, fix those, then expand to include moderate as well
-      { includedImpacts: ["serious", "critical"] },
+      { includedImpacts: ["critical"] },
       cy.terminalLog,
       false
     )
