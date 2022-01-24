@@ -301,7 +301,7 @@ const axe_scan = () =>
     cy.checkA11y(
       null,
       // TODO expand to include serious impacts, fix those, then expand to include moderate as well
-      { includedImpacts: ["critical"] },
+      { includedImpacts: ["serious", "critical"] },
       cy.terminalLog,
       false
     )
@@ -337,10 +337,7 @@ const run_tests_from_config = ({
             .then(wait_on_all_spinners)
             .then(is_not_on_error_boundary)
             .then(() => is_on_expected_route(expected_route_pattern))
-            .then(
-              /* TODO fix all critical axe warnings on the a11y routes, drop the filter on basic builds */
-              () => !/basic-/.test(app) && axe_scan()
-            );
+            .then(() => axe_scan());
         }
       });
     });
