@@ -2,7 +2,12 @@
   "meta": {
     "version": "1.0"
   },
-
+  "faq": {
+    "required": true,
+    "value_type": "boolean",
+    "form_type": "form_faq",
+    "faq_content": [["sample_q", "sample_a"]]
+  },
   "issue_type": {
     "required": true,
     "value_type": "enums",

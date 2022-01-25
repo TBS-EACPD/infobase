@@ -11,14 +11,8 @@ import { create_text_maker_component } from "src/components/misc_util_components
 import { get_client_id, log_standard_event } from "src/core/analytics";
 
 import { has_local_storage } from "src/core/feature_detection";
-import {
-  is_a11y_mode,
-  lang,
-  sha,
-  form_faq_flag,
-} from "src/core/injected_build_constants";
+import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
-import faq_text from "src/common_text/faq/form_questions.yaml";
 import { textRed } from "src/style_constants/index";
 
 import {
@@ -30,7 +24,7 @@ import text from "./FormFrontend.yaml";
 
 import "./FormFrontend.scss";
 
-const { TM, text_maker } = create_text_maker_component([text, faq_text]);
+const { TM, text_maker } = create_text_maker_component(text);
 
 const get_values_for_automatic_fields = (automatic_fields) => {
   const automatic_field_getters = {
@@ -168,6 +162,7 @@ class FormFrontend extends React.Component {
       awaiting_backend_response,
       backend_response,
       template,
+      template_name,
       completed_template,
     } = this.state;
 
@@ -175,7 +170,9 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type }, key) => key === "meta" || !form_type
+      ({ form_type }, key) =>
+        // (template_name == !"report_a_problem" && key === "faq") ||
+        key === "meta" || key === "faq" || !form_type // TODO get rid of key === "faq" once faq content is created
     );
     const all_required_user_fields_are_filled = _.chain(user_fields)
       .omitBy((field) => !field.required)
@@ -206,7 +203,7 @@ class FormFrontend extends React.Component {
     const ready_to_send =
       all_required_user_fields_are_filled &&
       all_connected_user_fields_are_filled &&
-      (form_faq_flag ? faq_acknowledged : true) &&
+      (template_name === "report_a_problem" ? faq_acknowledged : true) &&
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&
@@ -304,55 +301,29 @@ class FormFrontend extends React.Component {
             </Fragment>
           );
         }
+        case "form_faq":
+          return (
+            <FancyUL>
+              {_.map(field_info.faq_content, ([q, a], idx) => {
+                return (
+                  <div key={idx}>
+                    <div style={{ fontWeight: "bold" }}>{text_maker(q)}</div>
+                    <TM k={a} />
+                  </div>
+                );
+              })}
+            </FancyUL>
+          );
         case "error":
           return <label>{field_info.form_label[lang]}</label>;
       }
     };
-
-    const q_a_pairs_content = [
-      ["sample_q", "sample_a"],
-      ["sample2_q", "sample2_a"],
-      ["sample3_q", "sample3_a"],
-    ];
 
     return (
       <div className="form-backend-form">
         {loading && <LeafSpinner config_name="subroute" />}
         {!loading && (
           <form>
-            {form_faq_flag && (
-              <div className="form_faq">
-                <div style={{ fontWeight: 700 }}>
-                  {text_maker("form_frontend_faq_note")}
-                  {required_asterisk}
-                </div>
-                <FancyUL>
-                  {_.map(q_a_pairs_content, ([q, a], idx) => {
-                    return (
-                      <div key={idx}>
-                        <div style={{ fontWeight: "bold" }}>
-                          {text_maker(q)}
-                        </div>
-                        <TM k={a} />
-                      </div>
-                    );
-                  })}
-                </FancyUL>
-                <CheckBox
-                  id={"form_frontend_faq"}
-                  active={faq_acknowledged}
-                  disabled={disable_forms}
-                  onClick={() =>
-                    this.setState({
-                      faq_acknowledged: !faq_acknowledged,
-                    })
-                  }
-                  label={text_maker("form_frontend_faq_ack")}
-                  label_style={{ fontWeight: "bold" }}
-                  container_style={{ justifyContent: "center" }}
-                />
-              </div>
-            )}
             <fieldset>
               {_.map(user_fields, (field_info, key) => (
                 <div
