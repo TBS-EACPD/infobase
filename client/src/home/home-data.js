@@ -73,29 +73,25 @@ const featured_content_items = _.compact([
     is_new: "true",
   },
   {
+    text_key: "quick_link_service_inventory_2019",
+    href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
+    is_new: "true",
+  },
+  {
     text_key: "quick_link_people_2021",
     href: "#infographic/gov/gov/people",
-    is_new: "true",
   },
   {
     text_key: "quick_link_gov_spending",
     href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
-    is_new: "true",
   },
   {
     text_key: "quick_link_spending_by_program",
     href: "#treemap/drf/spending/All/pa_last_year",
-    is_new: "true",
   },
   {
     text_key: "quick_link_ftes_by_program",
     href: "#treemap/drf_ftes/ftes/All/pa_last_year",
-    is_new: "true",
-  },
-  {
-    text_key: "quick_link_service_inventory_2019",
-    href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
-    is_new: "true",
   },
   {
     text_key: "supps_b",
