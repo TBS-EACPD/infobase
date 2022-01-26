@@ -171,17 +171,15 @@ class FormFrontend extends React.Component {
     const user_fields = _.omitBy(
       template,
       ({ form_type }, key) =>
-        // (template_name == !"report_a_problem" && key === "faq") ||
-        key === "meta" || key === "faq" || !form_type // TODO get rid of key === "faq" once faq content is created
+        (template_name == !"report_a_problem" && key === "faq") ||
+        key === "meta" ||
+        !form_type // TODO get rid of key === "faq" once faq content is created
     );
+
     const all_required_user_fields_are_filled = _.chain(user_fields)
       .omitBy((field) => !field.required)
       .keys()
-      .every(
-        (required_field_key) =>
-          !_.isUndefined(completed_template[required_field_key]) &&
-          !_.isEmpty(completed_template[required_field_key])
-      )
+      .every((required_field_key) => !!required_field_key)
       .value();
 
     const all_connected_user_fields_are_filled = _.chain(user_fields)
@@ -203,7 +201,7 @@ class FormFrontend extends React.Component {
     const ready_to_send =
       all_required_user_fields_are_filled &&
       all_connected_user_fields_are_filled &&
-      (template_name === "report_a_problem" ? faq_acknowledged : true) &&
+      // (template_name === "report_a_problem" ? faq_acknowledged : true) &&
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&
@@ -303,16 +301,39 @@ class FormFrontend extends React.Component {
         }
         case "form_faq":
           return (
-            <FancyUL>
-              {_.map(field_info.faq_content, ([q, a], idx) => {
-                return (
-                  <div key={idx}>
-                    <div style={{ fontWeight: "bold" }}>{text_maker(q)}</div>
-                    <TM k={a} />
-                  </div>
-                );
-              })}
-            </FancyUL>
+            <>
+              <div style={{ fontWeight: 700 }}>
+                {text_maker("form_frontend_faq_note")}
+                {required_asterisk}
+              </div>
+              <FancyUL>
+                {_.map(field_info.faq_content, ([q, a], idx) => {
+                  return (
+                    <div key={idx}>
+                      <div style={{ fontWeight: "bold" }}>{text_maker(q)}</div>
+                      <TM k={a} />
+                    </div>
+                  );
+                })}
+              </FancyUL>
+              <CheckBox
+                id={"form_frontend_faq"}
+                active={faq_acknowledged}
+                disabled={disable_forms}
+                onClick={() =>
+                  this.setState({
+                    faq_acknowledged: !faq_acknowledged,
+                    completed_template: {
+                      ...completed_template,
+                      [field_key]: true,
+                    },
+                  })
+                }
+                label={text_maker("form_frontend_faq_ack")}
+                label_style={{ fontWeight: "bold" }}
+                container_style={{ justifyContent: "center" }}
+              />
+            </>
           );
         case "error":
           return <label>{field_info.form_label[lang]}</label>;
