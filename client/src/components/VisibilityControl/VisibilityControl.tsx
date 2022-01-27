@@ -39,7 +39,7 @@ export class VisibilityControl extends React.Component<VisibilityControlProps> {
       true
     );
     return (
-      <div className="visibility-control">
+      <div className="visibility-control" data-cy="visibility-control">
         {_.map(items, (item) => {
           const item_components: {
             [key in itemType]: React.ReactNode;

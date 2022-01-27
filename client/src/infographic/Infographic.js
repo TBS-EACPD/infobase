@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import _ from "lodash";
 import React from "react";
 import { Redirect } from "react-router";
@@ -107,6 +108,7 @@ class Infographic extends React.Component {
   constructor(props) {
     super();
     this.state = get_default_state_from_props(props);
+    this.main_content = React.createRef();
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const should_reload = !shallowEqualObjectsOverKeys(nextProps, prevState, [
@@ -140,6 +142,14 @@ class Infographic extends React.Component {
         options.panel_key &&
         this.scroll_to_panel_when_all_loading_done(options.panel_key);
     }
+
+    const main_content = this.main_content.current;
+    main_content.childElementCount > 0
+      ? main_content.setAttribute(
+          "aria-label",
+          text_maker("main_infographic_content")
+        )
+      : main_content.removeAttribute("aria-label");
   }
   scroll_to_panel_when_all_loading_done = _.debounce((panel_key) => {
     // Stop-gap to make sure linking to panel is resilient to some panels managing their own
@@ -213,7 +223,7 @@ class Infographic extends React.Component {
             )}
           </div>
         </div>
-        <div aria-label={text_maker("main_infographic_content")}>
+        <div ref={this.main_content}>
           {is_a11y_mode && (
             <p id="infographic-explanation-focus" aria-live="polite">
               {loading
