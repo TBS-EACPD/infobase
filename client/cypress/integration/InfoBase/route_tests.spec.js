@@ -297,27 +297,39 @@ const is_on_expected_route = (expected_route_pattern) =>
     .should((url) => expect(url).to.match(expected_route_pattern));
 
 const axe_scan = () =>
-  cy.injectAxe().then(() =>
-    cy.checkA11y(
-      {
-        exclude: [
-          [".modal"],
-          ["[data-cy=visibility-control]"],
-          ["[data-toggle=tooltip]"],
-          ["[data-cy=checkbox"],
-        ],
-      },
-      // TODO expand to include serious impacts, fix those, then expand to include moderate as well
-      {
-        includedImpacts: ["serious", "critical"],
-        rules: {
-          "color-contrast": { enabled: false },
+  cy.injectAxe().then(() => {
+    const violation_log = [];
+    const handle_violations = (violations) => {
+      cy.terminalLog(violations);
+      violation_log.push(violations);
+    };
+
+    return cy
+      .checkA11y(
+        {
+          exclude: [
+            [".modal"],
+            ["[data-cy=visibility-control]"],
+            ["[data-toggle=tooltip]"],
+            ["[data-cy=checkbox"],
+          ],
         },
-      },
-      cy.terminalLog,
-      false
-    )
-  );
+        // TODO expand to include serious impacts, fix those, then expand to include moderate as well
+        {
+          includedImpacts: ["serious", "critical"],
+          rules: {
+            "color-contrast": { enabled: false },
+          },
+        },
+        handle_violations,
+        true
+      )
+      .then(() =>
+        cy.wrap(violation_log).snapshot({
+          name: "Axe violations (allow list, delete entry and run locally to update)",
+        })
+      );
+  });
 
 const run_tests_from_config = ({
   name,
