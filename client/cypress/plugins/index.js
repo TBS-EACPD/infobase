@@ -2,6 +2,8 @@
  * @type {Cypress.PluginConfig}
  */
 
+import fs from "fs";
+
 // eslint-disable-next-line import/no-commonjs
 module.exports = (on) => {
   on("task", {
@@ -20,6 +22,13 @@ module.exports = (on) => {
     },
     warn(message) {
       console.warn("\x1b[33m", "WARNING:", message, "\x1b[0m");
+    },
+    readFileMaybe(filename) {
+      if (fs.existsSync(filename)) {
+        return fs.readFileSync(filename, "utf8");
+      }
+
+      return null;
     },
   });
 };
