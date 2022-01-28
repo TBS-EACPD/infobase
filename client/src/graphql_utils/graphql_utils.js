@@ -72,7 +72,7 @@ const query_as_get_with_query_header = async (uri, options) => {
     body: undefined,
     headers: {
       ...options.headers,
-      "gql-query": query,
+      "uri-encoded-gql-query": encodeURIComponent(query),
     },
   };
 
@@ -99,7 +99,12 @@ export function get_client() {
         uri: prod_api_url,
         // the fetchOptions method is overridden to GET by query_as_get_with_query_header for caching, but need BatchHttpLink
         // to think we're using POST for the batching behaviour we want
-        fetchOptions: { method: "POST" },
+        fetchOptions: {
+          method: "POST",
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+          },
+        },
         fetch: query_as_get_with_query_header,
       }),
       cache: new InMemoryCache({

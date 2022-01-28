@@ -32,7 +32,7 @@ app.use(
       "Authorization",
       "Content-Length",
       "X-Requested-With",
-      "gql-query",
+      "uri-encoded-gql-query",
     ],
   })
 );
@@ -44,7 +44,10 @@ app.use(function (req, res, next) {
   // Instead, the client makes a GET with a header containing the query
   // For caching, we also add a hash of the query as a GET parameter
   // Since apollo isn't expecting this type of request, we mutate it to make it look like a normal POST request
-  if (req.method === "GET" && !_.isEmpty(req.headers["gql-query"])) {
+  if (
+    req.method === "GET" &&
+    !_.isEmpty(req.headers["uri-encoded-gql-query"])
+  ) {
     console.log(`Request type: ${req.originalUrl}, GET with query header`);
     convert_GET_with_query_to_POST(req); // mutates req, changes made persist to subsequent middleware
   } else {
