@@ -312,20 +312,10 @@ const axe_scan = () =>
 
     return cy
       .checkA11y(
-        {
-          exclude: [
-            [".modal"],
-            ["[data-cy=visibility-control]"],
-            ["[data-toggle=tooltip]"],
-            ["[data-cy=checkbox"],
-          ],
-        },
-        // TODO expand to include serious impacts, fix those, then expand to include moderate as well
+        null,
+        // TODO expand to include moderate impacts, fix those, then consider including mild too
         {
           includedImpacts: ["serious", "critical"],
-          rules: {
-            "color-contrast": { enabled: false },
-          },
         },
         handle_violations,
         true
