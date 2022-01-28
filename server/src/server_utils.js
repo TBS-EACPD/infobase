@@ -12,7 +12,7 @@ const quiet_failing_json_parse = (json_string) => {
 // Side effect alert: this function mutates the suplied request object so that the conversion persists to subsequent server midleware
 // ... bit of a hack, and I'm not just talking about a function having side effects
 export const convert_GET_with_query_to_POST = (req) => {
-  const query = req.headers["gql-query"];
+  const query = decodeURIComponent(req.headers["uri-encoded-gql-query"]);
   req.method = "POST";
   req.body = JSON.parse(query);
 };
@@ -53,8 +53,8 @@ export const get_log_objects_for_request = (req) => {
 
   const method =
     req.method === "POST"
-      ? _.has(req.headers, "gql-query")
-        ? "GET with gql-query header, treated as POST"
+      ? _.has(req.headers, "uri-encoded-gql-query")
+        ? "GET with uri-encoded-gql-query header, treated as POST"
         : "POST"
       : req.method;
 

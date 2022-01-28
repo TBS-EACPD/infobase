@@ -12,11 +12,13 @@ const variable_string = JSON.stringify(variables_val);
 const query_object = [{ query, variables: variable_string }];
 
 describe("convert_GET_with_query_to_POST", function () {
-  it("Mutates a GET with an gql-query header in to a standard POST with the query in its body", () => {
+  it("Mutates a GET with an uri-encoded-gql-query header in to a standard POST with the query in its body", () => {
     const GET_with_compressed_query = {
       method: "GET",
       headers: {
-        "gql-query": JSON.stringify(query_object),
+        "uri-encoded-gql-query": encodeURIComponent(
+          JSON.stringify(query_object)
+        ),
       },
     };
 
@@ -26,7 +28,9 @@ describe("convert_GET_with_query_to_POST", function () {
     const expected_POST = {
       method: "POST",
       headers: {
-        "gql-query": JSON.stringify(query_object),
+        "uri-encoded-gql-query": encodeURIComponent(
+          JSON.stringify(query_object)
+        ),
       },
       body: [
         {
@@ -166,10 +170,12 @@ describe("get_log_objects_for_request", function () {
     const GET_with_compressed_query = {
       method: "GET",
       headers: {
-        "gql-query": JSON.stringify({
-          query,
-          variables: variables_val,
-        }),
+        "uri-encoded-gql-query": encodeURIComponent(
+          JSON.stringify({
+            query,
+            variables: variables_val,
+          })
+        ),
         origin: "test",
       },
     };
@@ -188,7 +194,7 @@ describe("get_log_objects_for_request", function () {
 
     // should be the only difference between this and the regular POST case
     expect(log_object.method).toEqual(
-      "GET with gql-query header, treated as POST"
+      "GET with uri-encoded-gql-query header, treated as POST"
     );
   });
 });
