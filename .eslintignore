@@ -1,8 +1,11 @@
-*/.coverage
-*/.cache
 
+# generated stuff, probably keep in sync with simillar section of .eslintignore (some may or may not also be in .gitignore, selectively)
 client/build
 client/build_prod
 client/src/**/*.scss.d.ts
 client/scripts/typescript_progress/output
 client/**/cypress-snapshots.js
+
+*/transpiled_build/
+*/.coverage/
+*/.cache
