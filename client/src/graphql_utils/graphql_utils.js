@@ -101,9 +101,6 @@ export function get_client() {
         // to think we're using POST for the batching behaviour we want
         fetchOptions: {
           method: "POST",
-          headers: {
-            "content-type": "application/json; charset=utf-8",
-          },
         },
         fetch: query_as_get_with_query_header,
       }),
