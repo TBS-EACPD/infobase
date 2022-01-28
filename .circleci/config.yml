@@ -337,11 +337,11 @@ jobs:
           command: (cd client && npm run serve:ci)
           background: true
 
-      - run: touch pre-run-cypress-snapshots && cat ./client/**/cypress-snapshots.js >> pre-run-cypress-snapshots
+      - run: touch pre-run-cypress-snapshots && shopt -s globstar && cat ./client/**/cypress-snapshots.js >> pre-run-cypress-snapshots
 
       - run: (cd client && npm run cypress -- -e BATCH_COUNT=<< parameters.batch-count >>,BATCH_INDEX=<< parameters.batch-index >>)
 
-      - run: touch post-run-cypress-snapshots && cat ./client/**/cypress-snapshots.js >> post-run-cypress-snapshots
+      - run: touch post-run-cypress-snapshots && shopt -s globstar && cat ./client/**/cypress-snapshots.js >> post-run-cypress-snapshots
       - run: diff pre-run-cypress-snapshots post-run-cypress-snapshots || (echo "CI cypress runs SHOULD NOT result in changes to the snapshot file. This indicates that the snapshots need to be updated locally (exiting routes removed, new routes initialized.)" && exit 1)
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
