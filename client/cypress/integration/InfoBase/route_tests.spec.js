@@ -298,10 +298,16 @@ const is_on_expected_route = (expected_route_pattern) =>
 
 const axe_scan = () =>
   cy.injectAxe().then(() => {
-    let maybe_violations = null;
+    let snapshot_violations = null;
     const handle_violations = (violations) => {
-      cy.terminalLog(violations);
-      maybe_violations = _.sortBy(violations, "id");
+      snapshot_violations = _.chain(violations)
+        .sortBy("id")
+        .map(({ id, impact, nodes }) => [
+          `${id}, ${impact}`,
+          _.map(nodes, "html"),
+        ])
+        .fromPairs()
+        .value();
     };
 
     return cy
@@ -325,8 +331,8 @@ const axe_scan = () =>
         true
       )
       .then(() =>
-        cy.wrap(maybe_violations).snapshot({
-          name: "Axe violations (allow list, delete entry and run locally to update)",
+        cy.wrap(snapshot_violations).snapshot({
+          name: "Axe violations allow list",
         })
       );
   });
