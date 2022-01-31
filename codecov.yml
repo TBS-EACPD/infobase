@@ -5,7 +5,7 @@ flags:
   server:
     paths:
       - ./server/
-  form_backend:
+  form-backend:
     paths:
       - ./form_backend/
 
@@ -16,13 +16,13 @@ coverage:
         flags:
           - client
           - server
-          - form_backend
+          - form-backend
       client:
         flags:
           - client
       server:
         flags:
           - server
-      form_backend:
+      form-backend:
         flags:
-          - form_backend
+          - form-backend

@@ -130,7 +130,7 @@ jobs:
       - run: (cd form_backend && npm run end_to_end_tests)
 
       - get_codecov
-      - run: ./codecov -f form_backend/.coverage/*/coverage-final.json -F form_backend
+      - run: ./codecov -f form_backend/.coverage/*/coverage-final.json -F form-backend
 
       - save_cache:
           key: form-backend-jest-cache
