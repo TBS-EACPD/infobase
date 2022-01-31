@@ -72,12 +72,11 @@ commands:
       - run:
           command: |
             curl -fLso codecov https://codecov.io/bash;
-            # TODO either add shasum to the docker image or do checksums some other way
-            #VERSION=$(grep -o 'VERSION=\"[0-9\.]*\"' codecov | cut -d'"' -f2);
-            #for i in 1 256 512
-            #do
-            #  shasum -a $i -c --ignore-missing <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM")
-            #done
+            VERSION=$(grep -o 'VERSION=\"[0-9\.]*\"' codecov | cut -d'"' -f2);
+            for i in 1 256 512
+            do
+              sha${i}sum -c <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM")
+            done
             chmod +x codecov
 
             echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -F << parameters.project >> -f $1
