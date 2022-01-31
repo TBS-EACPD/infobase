@@ -63,9 +63,12 @@ commands:
           paths:
             - client/node_modules
             - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
-  get_codecov:
+  run_codecov:
+    parameters:
+      project:
+        type: string
     steps:
-      # downloads codecov to ./codecov, checksums
+      # downloads codecov to ./codecov, checksums, runs in project (assumes matching flag exists in codecov.yml
       - run:
           command: |
             curl -fLso codecov https://codecov.io/bash;
@@ -76,6 +79,8 @@ commands:
             #  shasum -a $i -c --ignore-missing <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM")
             #done
             chmod +x codecov
+
+            echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -f $1 -F << parameters.project >>
 
 jobs:
   static_analysis:
@@ -129,8 +134,8 @@ jobs:
 
       - run: (cd form_backend && npm run end_to_end_tests)
 
-      - get_codecov
-      - run: ./codecov -f form_backend/.coverage/*/coverage-final.json -F form-backend
+      - run_codecov:
+          project: form_backend
 
       - save_cache:
           key: form-backend-jest-cache
@@ -280,8 +285,8 @@ jobs:
 
       - run: (cd client && npm run unit_tests)
 
-      - get_codecov
-      - run: ./codecov -f client/.coverage/*/coverage-final.json -F client
+      - run_codecov:
+          project: client
 
       - save_cache:
           key: client-jest-cache
@@ -315,8 +320,8 @@ jobs:
 
       - run: (cd server && npm run snapshot_tests)
 
-      - get_codecov
-      - run: ./codecov -f server/.coverage/*/coverage-final.json -F server
+      - run_codecov:
+          project: server
 
       - save_cache:
           key: server-jest-cache

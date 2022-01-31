@@ -12,7 +12,7 @@ This repository contains the following projects:
 
 1. GC InfoBase single page application ([/client](https://github.com/TBS-EACPD/InfoBase/blob/master/client)) [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/codecov/graph/badge.svg?flag=client)](https://app.codecov.io/gh/TBS-EACPD/infobase/)
 2. GC InfoBase data API ([/server](https://github.com/TBS-EACPD/InfoBase/blob/master/server)) [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/codecov/graph/badge.svg?flag=server)](https://app.codecov.io/gh/TBS-EACPD/infobase/)
-3. GC InfoBase form backend ([/form_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/form_backend)) [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/codecov/graph/badge.svg?flag=form-backend)](https://app.codecov.io/gh/TBS-EACPD/infobase/)
+3. GC InfoBase form backend ([/form_backend](https://github.com/TBS-EACPD/InfoBase/blob/master/form_backend)) [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/codecov/graph/badge.svg?flag=form_backend)](https://app.codecov.io/gh/TBS-EACPD/infobase/)
 
 See the README.md files in those respective directories for more details on each project.
 
