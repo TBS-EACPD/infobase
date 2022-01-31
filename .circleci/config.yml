@@ -63,6 +63,17 @@ commands:
           paths:
             - client/node_modules
             - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
+  get_codecov:
+    steps:
+      # downloads codecov to ./codecov, checks hashes
+      - run:
+          command: |
+            curl -fLso codecov https://codecov.io/bash;
+            VERSION=$(grep -o 'VERSION=\"[0-9\.]*\"' codecov | cut -d'"' -f2);
+            for i in 1 256 512
+            do
+              shasum -a $i -c --ignore-missing <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM")
+            done
 
 jobs:
   static_analysis:
@@ -115,6 +126,9 @@ jobs:
       - run: (cd form_backend && npm run unit_tests)
 
       - run: (cd form_backend && npm run end_to_end_tests)
+
+      - get_codecov
+      - run: ./codecov -f form_backend/.coverage/unit_tests/coverage-final.json
 
       - save_cache:
           key: form-backend-jest-cache
