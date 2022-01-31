@@ -80,7 +80,7 @@ commands:
             #done
             chmod +x codecov
 
-            echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -f $1 -F << parameters.project >>
+            echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -F << parameters.project >> -f $1
 
 jobs:
   static_analysis:
