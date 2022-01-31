@@ -128,7 +128,7 @@ jobs:
       - run: (cd form_backend && npm run end_to_end_tests)
 
       - get_codecov
-      - run: ./codecov -f form_backend/.coverage/unit_tests/coverage-final.json
+      - run: ./codecov -f form_backend/.coverage/*/coverage-final.json -F form_backend
 
       - save_cache:
           key: form-backend-jest-cache
@@ -278,6 +278,9 @@ jobs:
 
       - run: (cd client && npm run unit_tests)
 
+      - get_codecov
+      - run: ./codecov -f client/.coverage/*/coverage-final.json -F client
+
       - save_cache:
           key: client-jest-cache
           paths:
@@ -309,6 +312,9 @@ jobs:
           background: true
 
       - run: (cd server && npm run snapshot_tests)
+
+      - get_codecov
+      - run: ./codecov -f server/.coverage/*/coverage-final.json -F server
 
       - save_cache:
           key: server-jest-cache

@@ -1,0 +1,28 @@
+flags:
+  client:
+    paths:
+      - ./client/
+  server:
+    paths:
+      - ./server/
+  form_backend:
+    paths:
+      - ./form_backend/
+
+coverage:
+  status:
+    project:
+      default:
+        flags:
+          - client
+          - server
+          - form_backend
+      client:
+        flags:
+          - client
+      server:
+        flags:
+          - server
+      form_backend:
+        flags:
+          - form_backend
