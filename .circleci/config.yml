@@ -75,6 +75,7 @@ commands:
             #do
             #  shasum -a $i -c --ignore-missing <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM")
             #done
+            chmod +x codecov
 
 jobs:
   static_analysis:
