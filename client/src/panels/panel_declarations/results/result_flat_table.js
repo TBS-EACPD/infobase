@@ -349,7 +349,7 @@ export const declare_results_table_panel = () =>
 
         const last_drr_doc = _.chain(docs_with_data).sort().last().value();
 
-        if (_.isEmpty(docs_with_data)) {
+        if (last_drr_doc !== current_drr_key) {
           return false;
         }
 
