@@ -19,12 +19,8 @@ const get_connection_str = () => {
 export const connect_db = async () => {
   return await mongoose
     .connect(get_connection_str(), {
-      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 7500,
       heartbeatFrequencyMS: 10000,
-      useCreateIndex: true,
-      useNewUrlParser: true,
-      poolSize: 10,
     })
     .then(() => console.log("MongoDB connected"));
 };
