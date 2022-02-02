@@ -329,7 +329,7 @@ jobs:
 
   test_end_to_end:
     docker:
-      - image: eaadtbs/ib-ci-cypress:4.0
+      - image: eaadtbs/ib-ci-cypress:4.1
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     parameters:

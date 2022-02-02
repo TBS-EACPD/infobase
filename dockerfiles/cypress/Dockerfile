@@ -7,8 +7,8 @@ RUN adduser --home ${SERVICE_HOME} --shell /sbin/nologin -u 1001 ${SERVICE_USER}
 
 USER root
 
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
-RUN echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add -
+RUN echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/5.0 main" | tee /etc/apt/sources.list.d/mongodb-org-5.0.list
 RUN apt-get update && apt-get install -y mongodb-org
 
 USER ${SERVICE_USER}
