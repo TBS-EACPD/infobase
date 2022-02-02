@@ -35,7 +35,7 @@ while [ $CURRENT_SHA != $REMOTE_MASTER_SHA ]; do
   esac
 done
 
-CURRENT_PROD_MDB_NAME=$(mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
+CURRENT_PROD_MDB_NAME=$(mongosh $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
   --eval "printjson(db.getSiblingDB('metadata').metadata.findOne({}).prod)" | tail -n 1 | sed 's/"//g')
 if [[ ! $CURRENT_PROD_MDB_NAME =~ ^$DB_SUFFIX  ]]; then
@@ -87,8 +87,8 @@ trap unsafe_deploy_exit_alert EXIT
 
 (cd client && sh scripts/deploy/prod_deploy_staged_client.sh)
 
-# --eval seems to be the go-to way to passing args in to a JS mongo script
-mongo $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
+# --eval seems to be the go-to way to passing args in to a JS mongosh script
+mongosh $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
   --eval "const new_prod_db_name = '$NEW_PROD_MDB_NAME';" \
   scripts/prod_scripts/mongo_post_deploy_cleanup.js

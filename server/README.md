@@ -27,7 +27,7 @@ GraphQL API for InfoBase data.
 - git
 - node@14.x (latest long term support) (`npm install -g n && n lts`)
 - npm@8.x (`npm install -g npm@8`)
-- mongo v4.4.6 (TODO double check what versions work, check if there's any major version upgrades to make, and provide some install examples)
+- MongoDB 5.x, mongosh
 
 ## Running locally
 
