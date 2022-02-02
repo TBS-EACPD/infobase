@@ -107,7 +107,7 @@ Object {
                   "vote": 0,
                 },
               ],
-              "covid_expenditures": CoreDocumentArray [],
+              "covid_expenditures": Array [],
               "fiscal_year": 2021,
             },
           ],
@@ -203,11 +203,11 @@ Object {
             },
           ],
           "years_with_covid_data": Object {
-            "years_with_estimates": CoreMongooseArray [
+            "years_with_estimates": Array [
               2020,
               2021,
             ],
-            "years_with_expenditures": CoreMongooseArray [
+            "years_with_expenditures": Array [
               2020,
             ],
           },
@@ -267,7 +267,7 @@ Object {
                   "vote": 0,
                 },
               ],
-              "covid_expenditures": CoreDocumentArray [],
+              "covid_expenditures": Array [],
               "fiscal_year": 2020,
             },
             Object {
@@ -354,16 +354,16 @@ Object {
                   "vote": 0,
                 },
               ],
-              "covid_expenditures": CoreDocumentArray [],
+              "covid_expenditures": Array [],
               "fiscal_year": 2020,
             },
           ],
           "years_with_covid_data": Object {
-            "years_with_estimates": CoreMongooseArray [
+            "years_with_estimates": Array [
               2020,
               2021,
             ],
-            "years_with_expenditures": CoreMongooseArray [
+            "years_with_expenditures": Array [
               2021,
             ],
           },
@@ -430,7 +430,7 @@ Object {
                   "vote": 9,
                 },
               ],
-              "covid_expenditures": CoreDocumentArray [],
+              "covid_expenditures": Array [],
               "fiscal_year": 2021,
             },
           ],
@@ -486,11 +486,11 @@ Object {
             },
           ],
           "years_with_covid_data": Object {
-            "years_with_estimates": CoreMongooseArray [
+            "years_with_estimates": Array [
               2020,
               2021,
             ],
-            "years_with_expenditures": CoreMongooseArray [
+            "years_with_expenditures": Array [
               2020,
             ],
           },
@@ -508,7 +508,7 @@ Object {
       "gov": Object {
         "all_year_summaries": Array [
           Object {
-            "covid_estimates": CoreDocumentArray [
+            "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
                 "stat": 1007,
@@ -536,13 +536,13 @@ Object {
               "vote": 12,
             },
             "fiscal_year": 2020,
-            "measure_counts": CoreDocumentArray [
+            "measure_counts": Array [
               Object {
                 "with_authorities": 3,
                 "with_spending": 2,
               },
             ],
-            "org_counts": CoreDocumentArray [
+            "org_counts": Array [
               Object {
                 "with_authorities": 4,
                 "with_spending": 3,
@@ -570,7 +570,7 @@ Object {
             ],
           },
           Object {
-            "covid_estimates": CoreDocumentArray [
+            "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
                 "stat": 999,
@@ -588,13 +588,13 @@ Object {
               "vote": 7,
             },
             "fiscal_year": 2021,
-            "measure_counts": CoreDocumentArray [
+            "measure_counts": Array [
               Object {
                 "with_authorities": 3,
                 "with_spending": 1,
               },
             ],
-            "org_counts": CoreDocumentArray [
+            "org_counts": Array [
               Object {
                 "with_authorities": 3,
                 "with_spending": 1,
@@ -616,7 +616,7 @@ Object {
         ],
         "one_year_summary": Array [
           Object {
-            "covid_estimates": CoreDocumentArray [
+            "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
                 "stat": 1007,
@@ -644,13 +644,13 @@ Object {
               "vote": 12,
             },
             "fiscal_year": 2020,
-            "measure_counts": CoreDocumentArray [
+            "measure_counts": Array [
               Object {
                 "with_authorities": 3,
                 "with_spending": 2,
               },
             ],
-            "org_counts": CoreDocumentArray [
+            "org_counts": Array [
               Object {
                 "with_authorities": 4,
                 "with_spending": 3,
@@ -690,11 +690,11 @@ Object {
     "root": Object {
       "gov": Object {
         "years_with_covid_data": Object {
-          "years_with_estimates": CoreMongooseArray [
+          "years_with_estimates": Array [
             2020,
             2021,
           ],
-          "years_with_expenditures": CoreMongooseArray [
+          "years_with_expenditures": Array [
             2020,
             2021,
           ],
@@ -712,7 +712,7 @@ Object {
       "org": Object {
         "all_year_summaries": Array [
           Object {
-            "covid_estimates": CoreDocumentArray [
+            "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
                 "stat": 8,
@@ -737,7 +737,7 @@ Object {
             "fiscal_year": 2020,
           },
           Object {
-            "covid_estimates": CoreDocumentArray [
+            "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
                 "stat": 0,
@@ -755,7 +755,7 @@ Object {
         "name": "National Defence",
         "one_year_summary": Array [
           Object {
-            "covid_estimates": CoreDocumentArray [
+            "covid_estimates": Array [
               Object {
                 "est_doc": "ME",
                 "stat": 8,
@@ -895,11 +895,11 @@ Object {
               },
             ],
             "years_with_covid_data": Object {
-              "years_with_estimates": CoreMongooseArray [
+              "years_with_estimates": Array [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": CoreMongooseArray [
+              "years_with_expenditures": Array [
                 2020,
               ],
             },
@@ -944,11 +944,11 @@ Object {
               },
             ],
             "years_with_covid_data": Object {
-              "years_with_estimates": CoreMongooseArray [
+              "years_with_estimates": Array [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": CoreMongooseArray [
+              "years_with_expenditures": Array [
                 2021,
               ],
             },
@@ -1031,11 +1031,11 @@ Object {
               },
             ],
             "years_with_covid_data": Object {
-              "years_with_estimates": CoreMongooseArray [
+              "years_with_estimates": Array [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": CoreMongooseArray [
+              "years_with_expenditures": Array [
                 2020,
               ],
             },
@@ -1064,11 +1064,11 @@ Object {
             "id": "COV003",
             "name": "measure 3",
             "years_with_covid_data": Object {
-              "years_with_estimates": CoreMongooseArray [
+              "years_with_estimates": Array [
                 2020,
                 2021,
               ],
-              "years_with_expenditures": CoreMongooseArray [
+              "years_with_expenditures": Array [
                 2020,
               ],
             },
@@ -1092,21 +1092,21 @@ Object {
       },
       "has_data": Object {
         "years_with_covid_data": Object {
-          "years_with_estimates": CoreMongooseArray [
+          "years_with_estimates": Array [
             2020,
             2021,
           ],
-          "years_with_expenditures": CoreMongooseArray [
+          "years_with_expenditures": Array [
             2020,
           ],
         },
       },
       "only_has_estimates": Object {
         "years_with_covid_data": Object {
-          "years_with_estimates": CoreMongooseArray [
+          "years_with_estimates": Array [
             2020,
           ],
-          "years_with_expenditures": CoreMongooseArray [],
+          "years_with_expenditures": Array [],
         },
       },
     },
@@ -1122,11 +1122,11 @@ Object {
         "id": "COV001",
         "name": "measure 1",
         "years_with_covid_data": Object {
-          "years_with_estimates": CoreMongooseArray [
+          "years_with_estimates": Array [
             2020,
             2021,
           ],
-          "years_with_expenditures": CoreMongooseArray [
+          "years_with_expenditures": Array [
             2020,
           ],
         },

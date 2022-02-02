@@ -6,7 +6,7 @@ Object {
     "root": Object {
       "gov": Object {
         "people_data": Object {
-          "average_age": CoreDocumentArray [
+          "average_age": Array [
             Object {
               "value": 44.51151646671326,
               "year": 2016,
@@ -28,10 +28,10 @@ Object {
               "year": 2020,
             },
           ],
-          "type": CoreDocumentArray [
+          "type": Array [
             Object {
               "dimension": "cas",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 1433,
                   "year": 2016,
@@ -56,7 +56,7 @@ Object {
             },
             Object {
               "dimension": "ind",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 26557,
                   "year": 2016,
@@ -81,7 +81,7 @@ Object {
             },
             Object {
               "dimension": "stu",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 915,
                   "year": 2016,
@@ -106,7 +106,7 @@ Object {
             },
             Object {
               "dimension": "ter",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 944,
                   "year": 2016,
@@ -143,7 +143,7 @@ Object {
     "root": Object {
       "org": Object {
         "people_data": Object {
-          "average_age": CoreDocumentArray [
+          "average_age": Array [
             Object {
               "value": 44.36036384749371,
               "year": 2016,
@@ -165,11 +165,11 @@ Object {
               "year": 2020,
             },
           ],
-          "type": CoreDocumentArray [
+          "type": Array [
             Object {
               "avg_share": 0.03931927097090677,
               "dimension": "cas",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 300,
                   "year": 2016,
@@ -195,7 +195,7 @@ Object {
             Object {
               "avg_share": 0.8124976415984303,
               "dimension": "ind",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 4098,
                   "year": 2016,
@@ -221,7 +221,7 @@ Object {
             Object {
               "avg_share": 0.09705294139843781,
               "dimension": "stu",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 574,
                   "year": 2016,
@@ -247,7 +247,7 @@ Object {
             Object {
               "avg_share": 0.05113014603222521,
               "dimension": "ter",
-              "yearly_data": CoreDocumentArray [
+              "yearly_data": Array [
                 Object {
                   "value": 195,
                   "year": 2016,

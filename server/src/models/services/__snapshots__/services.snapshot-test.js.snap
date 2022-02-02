@@ -7,7 +7,7 @@ Object {
       "org": Object {
         "service_summary": Object {
           "id": "114",
-          "service_channels_summary": CoreDocumentArray [
+          "service_channels_summary": Array [
             Object {
               "channel_id": "other_application_count",
               "channel_value": 101,
@@ -69,7 +69,7 @@ Object {
               "year": "2019",
             },
           ],
-          "service_digital_status_summary": CoreDocumentArray [
+          "service_digital_status_summary": Array [
             Object {
               "can_online": 0,
               "cannot_online": 2,
@@ -124,12 +124,12 @@ Object {
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 0,
             "number_of_services": 2,
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
           },
-          "service_standards_summary": CoreDocumentArray [
+          "service_standards_summary": Array [
             Object {
               "met_standards_count": null,
               "services_w_standards_count": 1,
@@ -137,7 +137,7 @@ Object {
               "subject_id": "114",
             },
           ],
-          "subject_offering_services_summary": CoreDocumentArray [
+          "subject_offering_services_summary": Array [
             Object {
               "number_of_services": 2,
               "subject_id": "CB-BEZ01",
@@ -158,7 +158,7 @@ Object {
       "program": Object {
         "service_summary": Object {
           "id": "CB-BEZ01",
-          "service_channels_summary": CoreDocumentArray [
+          "service_channels_summary": Array [
             Object {
               "channel_id": "other_application_count",
               "channel_value": 101,
@@ -220,7 +220,7 @@ Object {
               "year": "2019",
             },
           ],
-          "service_digital_status_summary": CoreDocumentArray [
+          "service_digital_status_summary": Array [
             Object {
               "can_online": 0,
               "cannot_online": 2,
@@ -275,12 +275,12 @@ Object {
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 0,
             "number_of_services": 2,
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
           },
-          "service_standards_summary": CoreDocumentArray [
+          "service_standards_summary": Array [
             Object {
               "met_standards_count": null,
               "services_w_standards_count": 1,
@@ -303,7 +303,7 @@ Object {
       "org": Object {
         "services": Array [
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -312,14 +312,14 @@ Object {
             "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada is an economic regulatory body empowered to establish, at the request of an interested party, the royalties to be paid for the use of copyrighted subject-matter, when the administration of such copyright is entrusted to a collective society.",
-            "designations": CoreMongooseArray [
+            "designations": Array [
               "None",
             ],
             "digital_enablement_comment": null,
-            "digital_identity_platforms": CoreMongooseArray [
+            "digital_identity_platforms": Array [
               "",
             ],
-            "feedback_channels": CoreMongooseArray [
+            "feedback_channels": Array [
               "Email",
               "Postal Mail",
               "Telephone",
@@ -338,7 +338,7 @@ Object {
               "name": "Copyright Board Canada",
             },
             "org_id": "114",
-            "program_activity_codes": CoreMongooseArray [
+            "program_activity_codes": Array [
               "CB-BEZ01",
             ],
             "programs": Array [
@@ -346,17 +346,17 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
-            "scope": CoreMongooseArray [
+            "scope": Array [
               "External Service",
             ],
-            "service_report": CoreDocumentArray [
+            "service_report": Array [
               Object {
                 "cra_business_ids_collected": false,
                 "email_application_count": null,
@@ -392,21 +392,21 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
-            "standards": CoreDocumentArray [],
+            "standards": Array [],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Economic Segments",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/tariffs-tarifs/index-e.html",
             ],
           },
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -415,14 +415,14 @@ Object {
             "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
-            "designations": CoreMongooseArray [
+            "designations": Array [
               "None",
             ],
             "digital_enablement_comment": null,
-            "digital_identity_platforms": CoreMongooseArray [
+            "digital_identity_platforms": Array [
               "",
             ],
-            "feedback_channels": CoreMongooseArray [
+            "feedback_channels": Array [
               "Email",
               "Postal Mail",
               "Telephone",
@@ -441,7 +441,7 @@ Object {
               "name": "Copyright Board Canada",
             },
             "org_id": "114",
-            "program_activity_codes": CoreMongooseArray [
+            "program_activity_codes": Array [
               "CB-BEZ01",
             ],
             "programs": Array [
@@ -449,17 +449,17 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
-            "scope": CoreMongooseArray [
+            "scope": Array [
               "External Service",
             ],
-            "service_report": CoreDocumentArray [
+            "service_report": Array [
               Object {
                 "cra_business_ids_collected": false,
                 "email_application_count": null,
@@ -495,10 +495,10 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
-            "standards": CoreDocumentArray [
+            "standards": Array [
               Object {
                 "channel": "Other",
                 "first_active_year": "2018",
@@ -506,10 +506,10 @@ Object {
                 "last_gcss_tool_year": null,
                 "name": "Licences are issued within 45 days once the file is considered complete",
                 "other_type_comment": "By email",
-                "rtp_urls": CoreMongooseArray [],
+                "rtp_urls": Array [],
                 "service_id": "1120",
                 "standard_id": "1073",
-                "standard_report": CoreDocumentArray [
+                "standard_report": Array [
                   Object {
                     "count": 4,
                     "is_target_met": false,
@@ -522,7 +522,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2018",
                 "target_type": null,
                 "type": "Timeliness",
@@ -534,10 +534,10 @@ Object {
                 "last_gcss_tool_year": null,
                 "name": "Licences are issued within 45 days once the file is considered complete",
                 "other_type_comment": null,
-                "rtp_urls": CoreMongooseArray [],
+                "rtp_urls": Array [],
                 "service_id": "1120",
                 "standard_id": "1073",
-                "standard_report": CoreDocumentArray [
+                "standard_report": Array [
                   Object {
                     "count": 4,
                     "is_target_met": false,
@@ -550,7 +550,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2019",
                 "target_type": null,
                 "type": "Timeliness",
@@ -558,10 +558,10 @@ Object {
             ],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Persons",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
             ],
           },
@@ -579,7 +579,7 @@ Object {
       "program": Object {
         "services": Array [
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -588,14 +588,14 @@ Object {
             "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada is an economic regulatory body empowered to establish, at the request of an interested party, the royalties to be paid for the use of copyrighted subject-matter, when the administration of such copyright is entrusted to a collective society.",
-            "designations": CoreMongooseArray [
+            "designations": Array [
               "None",
             ],
             "digital_enablement_comment": null,
-            "digital_identity_platforms": CoreMongooseArray [
+            "digital_identity_platforms": Array [
               "",
             ],
-            "feedback_channels": CoreMongooseArray [
+            "feedback_channels": Array [
               "Email",
               "Postal Mail",
               "Telephone",
@@ -614,7 +614,7 @@ Object {
               "name": "Copyright Board Canada",
             },
             "org_id": "114",
-            "program_activity_codes": CoreMongooseArray [
+            "program_activity_codes": Array [
               "CB-BEZ01",
             ],
             "programs": Array [
@@ -622,17 +622,17 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
-            "scope": CoreMongooseArray [
+            "scope": Array [
               "External Service",
             ],
-            "service_report": CoreDocumentArray [
+            "service_report": Array [
               Object {
                 "cra_business_ids_collected": false,
                 "email_application_count": null,
@@ -668,21 +668,21 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
-            "standards": CoreDocumentArray [],
+            "standards": Array [],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Economic Segments",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/tariffs-tarifs/index-e.html",
             ],
           },
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -691,14 +691,14 @@ Object {
             "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
-            "designations": CoreMongooseArray [
+            "designations": Array [
               "None",
             ],
             "digital_enablement_comment": null,
-            "digital_identity_platforms": CoreMongooseArray [
+            "digital_identity_platforms": Array [
               "",
             ],
-            "feedback_channels": CoreMongooseArray [
+            "feedback_channels": Array [
               "Email",
               "Postal Mail",
               "Telephone",
@@ -717,7 +717,7 @@ Object {
               "name": "Copyright Board Canada",
             },
             "org_id": "114",
-            "program_activity_codes": CoreMongooseArray [
+            "program_activity_codes": Array [
               "CB-BEZ01",
             ],
             "programs": Array [
@@ -725,17 +725,17 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
-            "scope": CoreMongooseArray [
+            "scope": Array [
               "External Service",
             ],
-            "service_report": CoreDocumentArray [
+            "service_report": Array [
               Object {
                 "cra_business_ids_collected": false,
                 "email_application_count": null,
@@ -771,10 +771,10 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
-            "standards": CoreDocumentArray [
+            "standards": Array [
               Object {
                 "channel": "Other",
                 "first_active_year": "2018",
@@ -782,10 +782,10 @@ Object {
                 "last_gcss_tool_year": null,
                 "name": "Licences are issued within 45 days once the file is considered complete",
                 "other_type_comment": "By email",
-                "rtp_urls": CoreMongooseArray [],
+                "rtp_urls": Array [],
                 "service_id": "1120",
                 "standard_id": "1073",
-                "standard_report": CoreDocumentArray [
+                "standard_report": Array [
                   Object {
                     "count": 4,
                     "is_target_met": false,
@@ -798,7 +798,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2018",
                 "target_type": null,
                 "type": "Timeliness",
@@ -810,10 +810,10 @@ Object {
                 "last_gcss_tool_year": null,
                 "name": "Licences are issued within 45 days once the file is considered complete",
                 "other_type_comment": null,
-                "rtp_urls": CoreMongooseArray [],
+                "rtp_urls": Array [],
                 "service_id": "1120",
                 "standard_id": "1073",
-                "standard_report": CoreDocumentArray [
+                "standard_report": Array [
                   Object {
                     "count": 4,
                     "is_target_met": false,
@@ -826,7 +826,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2019",
                 "target_type": null,
                 "type": "Timeliness",
@@ -834,10 +834,10 @@ Object {
             ],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Persons",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
             ],
           },
@@ -909,7 +909,7 @@ Object {
   "data": Object {
     "root": Object {
       "service": Object {
-        "accessibility_assessors": CoreMongooseArray [
+        "accessibility_assessors": Array [
           "",
         ],
         "account_reg_digital_status": false,
@@ -918,14 +918,14 @@ Object {
         "collects_fees": false,
         "decision_digital_status": false,
         "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
-        "designations": CoreMongooseArray [
+        "designations": Array [
           "None",
         ],
         "digital_enablement_comment": null,
-        "digital_identity_platforms": CoreMongooseArray [
+        "digital_identity_platforms": Array [
           "",
         ],
-        "feedback_channels": CoreMongooseArray [
+        "feedback_channels": Array [
           "Email",
           "Postal Mail",
           "Telephone",
@@ -944,7 +944,7 @@ Object {
           "name": "Copyright Board Canada",
         },
         "org_id": "114",
-        "program_activity_codes": CoreMongooseArray [
+        "program_activity_codes": Array [
           "CB-BEZ01",
         ],
         "programs": Array [
@@ -952,17 +952,17 @@ Object {
             "name": "Copyright Tariff Setting and Issuance of Licences",
           },
         ],
-        "recipient_type": CoreMongooseArray [
+        "recipient_type": Array [
           "",
         ],
-        "report_years": CoreMongooseArray [
+        "report_years": Array [
           "2019",
           "2018",
         ],
-        "scope": CoreMongooseArray [
+        "scope": Array [
           "External Service",
         ],
-        "service_report": CoreDocumentArray [
+        "service_report": Array [
           Object {
             "cra_business_ids_collected": false,
             "email_application_count": null,
@@ -998,10 +998,10 @@ Object {
             "year": "2019",
           },
         ],
-        "service_type": CoreMongooseArray [
+        "service_type": Array [
           "Legal",
         ],
-        "standards": CoreDocumentArray [
+        "standards": Array [
           Object {
             "channel": "Other",
             "first_active_year": "2018",
@@ -1009,10 +1009,10 @@ Object {
             "last_gcss_tool_year": null,
             "name": "Licences are issued within 45 days once the file is considered complete",
             "other_type_comment": "By email",
-            "rtp_urls": CoreMongooseArray [],
+            "rtp_urls": Array [],
             "service_id": "1120",
             "standard_id": "1073",
-            "standard_report": CoreDocumentArray [
+            "standard_report": Array [
               Object {
                 "count": 4,
                 "is_target_met": false,
@@ -1025,7 +1025,7 @@ Object {
                 "year": "2018",
               },
             ],
-            "standard_urls": CoreMongooseArray [],
+            "standard_urls": Array [],
             "submission_year": "2018",
             "target_type": null,
             "type": "Timeliness",
@@ -1037,10 +1037,10 @@ Object {
             "last_gcss_tool_year": null,
             "name": "Licences are issued within 45 days once the file is considered complete",
             "other_type_comment": null,
-            "rtp_urls": CoreMongooseArray [],
+            "rtp_urls": Array [],
             "service_id": "1120",
             "standard_id": "1073",
-            "standard_report": CoreDocumentArray [
+            "standard_report": Array [
               Object {
                 "count": 4,
                 "is_target_met": false,
@@ -1053,7 +1053,7 @@ Object {
                 "year": "2018",
               },
             ],
-            "standard_urls": CoreMongooseArray [],
+            "standard_urls": Array [],
             "submission_year": "2019",
             "target_type": null,
             "type": "Timeliness",
@@ -1061,10 +1061,10 @@ Object {
         ],
         "subject_type": "service",
         "submission_year": "2019",
-        "target_groups": CoreMongooseArray [
+        "target_groups": Array [
           "Persons",
         ],
-        "urls": CoreMongooseArray [
+        "urls": Array [
           "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
         ],
       },
