@@ -1,15 +1,28 @@
-FROM greyltc/archlinux-aur:yay
+FROM archlinux:base-devel
 
-RUN sudo -u ab -D~ bash -c 'yay -Syu --removemake --needed --noprogressbar --noconfirm \
+# important to clear the pacman cache as part of the same layer as these installs
+RUN sudo pacman --noconfirm -Syu \
   git \
   python \
+  bash \
   openssh \
   nodejs-lts-fermium \
   npm \
-  mongodb-bin \
-  mongosh-bin \
-  && yay -Sc # empty caches \
-  && pacman -Qtdq | pacman -Rns - # remove orphans'
+  && sudo pacman --noconfirm -Sc
+
+# get mongo packages from the extended Arch User Repository. Using the :base-devel base image gives us the
+# necessary install dependencies, don't need an aur helper because these are distributed in the .deb format
+ENV MAKE_USR non-root
+RUN useradd -s /sbin/bash -u 1000 ${MAKE_USR}
+RUN for aur_package in mongodb-bin mongosh-bin; do \
+    git clone https://aur.archlinux.org/${aur_package}.git \
+      && cd ${aur_package} \
+      && chown ${MAKE_USR} . \
+      && sudo -u ${MAKE_USR} makepkg -s --noconfirm \
+      && sudo pacman -U ${aur_package}*.tar.* --noconfirm \
+      && cd .. && rm -rf ${aur_package}; \
+  done
+RUN userdel ${MAKE_USR}
 
 ENV SERVICE_USER service-user
 ENV SERVICE_HOME /home/${SERVICE_USER}
