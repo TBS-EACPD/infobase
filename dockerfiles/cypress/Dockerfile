@@ -1,4 +1,4 @@
-FROM cypress/base:14.16.0
+FROM cypress/base:16.13.2
 
 ENV SERVICE_USER service-user
 ENV SERVICE_HOME /home/${SERVICE_USER}
