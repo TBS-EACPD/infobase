@@ -17,7 +17,7 @@ Google Cloud Function form backend. More user-friendly and secure/configurable t
 ### Development pre-requisites
 
 - git
-- node@14.x (latest long term support) (`npm install -g n && n lts`)
+- node@16.x (latest long term support) (`npm install -g n && n lts`)
 - npm@8.x (`npm install -g npm@8`)
 - MongoDB 5.x, mongosh
 
