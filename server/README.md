@@ -66,7 +66,7 @@ In production, we use a MongoDB Atlas hosted database. This has little relevance
 
 ### Google Cloud Function
 
-The production environment for the express/GraphQL server is a Google Cloud Function. This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind. We currently transpile with a traget of Node 8 because that is what GCFs run.
+The production environment for the express/GraphQL server is a Google Cloud Function. This hasn't affected much in the code, although a few optimizations and decisions were made with a serverless environment in mind.
 
 # L'interface de programmation d'applications (API) d'InfoBase du GC
 
