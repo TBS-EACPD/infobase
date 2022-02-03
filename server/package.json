@@ -39,6 +39,7 @@
     "unit_tests:watch": "NODE_OPTIONS='--experimental-vm-modules' npx jest --watch --config jest_configs/unit_tests.config.js",
     "unit_tests:debug": "NODE_OPTIONS='--experimental-vm-modules --inspect-brk' npx jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js",
     "test": "(npm run unit_tests && npm run snapshot_tests)",
+    "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node src/dev_server.js",
     "start:debug": "nodemon --watch src --watch package-lock.json --exec node --inspect-brk ./src/dev_server.js",
     "populate_db": "node src/populate_db.js",
     "populate_db:debug": "node --inspect-brk src/populate_db.js",
