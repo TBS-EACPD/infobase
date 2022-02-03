@@ -1,7 +1,7 @@
 {
   "name": "infobase-server",
   "description": "",
-  "main": "transpiled_build/index.js",
+  "main": "src/index.js",
   "engines": {
     "node": "16"
   },
@@ -22,11 +22,7 @@
     "mongoose": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7",
-    "@babel/preset-env": "^7.3.1",
     "axios": "^0.21.1",
-    "babel-plugin-transform-import-meta": "^2.0.0",
     "jest": "^27.3.1",
     "jest-cli": "^27.3.1",
     "kill-port": "^1.5.2",
@@ -46,7 +42,6 @@
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node src/dev_server.js",
     "start:debug": "nodemon --watch src --watch package-lock.json --exec node --inspect-brk ./src/dev_server.js",
     "transpile": "./scripts/deploy/build.sh",
-    "start:transpile": "node transpiled_build/dev_server.js",
     "populate_db": "node src/populate_db.js",
     "populate_db:debug": "node --inspect-brk src/populate_db.js",
     "populate_db:remote": "(export USE_REMOTE_DB=1 && node src/populate_db.js)",
