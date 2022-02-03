@@ -188,19 +188,6 @@ jobs:
       - client_install
       - server_install
 
-      # transpiling the server slightly out of place for this job, not needed till the server deploy step, but
-      # the deploy job image isn't guaranteed to have the necessary environment for this
-      - restore_cache:
-          keys:
-            - server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
-      - run:
-          command: |
-            [ -f "server/transpiled_build/app.js" ] || (cd server && ./scripts/deploy/build.sh)
-      - save_cache:
-          paths:
-            - server/transpiled_build
-          key: server-transpiled-build-{{ .Branch }}-{{ .Revision }}-v2
-
       - persist_to_workspace:
           root: ./
           paths:
@@ -404,8 +391,8 @@ jobs:
 
       - run: ./scripts/ci_scripts/authenticate-server-gcloud.sh
 
-      # Checksum all JS files in transpiled_build, used to determine if the function needs to be redeployed
-      - run: find ./server/transpiled_build -name "*.js" | xargs cksum > server-checksums
+      # Checksum all JS files in src, used to determine if the function needs to be redeployed
+      - run: find ./server/src -name "*.js" | xargs cksum > server-checksums
 
       # Use this cached file to tell if the api needs to be redeployed (if on a new branch, if function code's changed, or if server node modules have changed)
       - restore_cache:
