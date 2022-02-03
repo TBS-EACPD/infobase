@@ -1,6 +1,6 @@
 */.coverage
 */.cache
-*/transpiled_build
+
 client/build
 client/build_prod
 client/src/**/*.scss.d.ts
