@@ -4,7 +4,6 @@ const reporters = !process.env.DO_NOT_PRINT_COVERAGE
 
 export const common_config_rules = {
   rootDir: "..",
-  testPathIgnorePatterns: ["transpiled_build"],
 
   coverageReporters: reporters,
   collectCoverageFrom: [`<rootDir>/src/**/*.js`],
