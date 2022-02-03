@@ -6,7 +6,7 @@ RUN sudo pacman --noconfirm -Syu \
   python \
   bash \
   openssh \
-  nodejs-lts-fermium \
+  nodejs-lts-gallium \
   npm \
   && sudo pacman --noconfirm -Sc
 
