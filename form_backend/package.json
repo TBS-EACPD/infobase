@@ -1,6 +1,6 @@
 {
   "name": "infobase-form-backend",
-  "main": "transpiled_build/index.js",
+  "main": "src/index.js",
   "engines": {
     "node": "16"
   },
@@ -16,10 +16,6 @@
     "mongoose": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7",
-    "@babel/preset-env": "^7.3.1",
-    "babel-plugin-transform-import-meta": "^2.0.0",
     "jest": "^27.3.1",
     "jest-cli": "^27.3.1",
     "json2csv": "^5.0.1",
