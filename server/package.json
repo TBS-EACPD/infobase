@@ -45,7 +45,6 @@
     "test": "(npm run unit_tests && npm run snapshot_tests && npm run merge_coverage_reports)",
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node src/dev_server.js",
     "start:debug": "nodemon --watch src --watch package-lock.json --exec node --inspect-brk ./src/dev_server.js",
-    "transpile": "./scripts/deploy/build.sh",
     "populate_db": "node src/populate_db.js",
     "populate_db:debug": "node --inspect-brk src/populate_db.js",
     "populate_db:remote": "(export USE_REMOTE_DB=1 && node src/populate_db.js)",
