@@ -25,8 +25,8 @@ GraphQL API for InfoBase data.
 ### Development pre-requisites
 
 - git
-- node@16.x (latest long term support) (`npm install -g n && n lts`)
-- npm@8.x (`npm install -g npm@8`)
+- npm@8.x
+- node@16.x
 - MongoDB 5.x, mongosh
 
 ## Running locally
