@@ -37,7 +37,7 @@ done
 
 CURRENT_PROD_MDB_NAME=$(mongosh $(lpass show MDB_SHELL_CONNECT_STRING --notes) \
   --username $(lpass show MDB_WRITE_USER --notes) --password $(lpass show MDB_WRITE_PW --notes) \
-  --eval "printjson(db.getSiblingDB('metadata').metadata.findOne({}).prod)" | tail -n 1 | sed 's/"//g')
+  --eval "printjson(db.getSiblingDB('metadata').metadata.findOne({}).prod)" --quiet | sed 's/"//g')
 if [[ ! $CURRENT_PROD_MDB_NAME =~ ^$DB_SUFFIX  ]]; then
   >&2 echo "ERROR: failed to get current prod DB name. Expected something with the suffix \"$DB_SUFFIX\", got \"$CURRENT_PROD_MDB_NAME\""
   exit
