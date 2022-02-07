@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import { withRouter } from "react-router-dom";
@@ -19,8 +18,6 @@ const GlossaryMenuController = withRouter(
         is_open: false,
         glossaryItem: null,
         show_definition: true,
-        results: [],
-        query: "",
       };
 
       this.menu_ref = React.createRef();
@@ -92,21 +89,6 @@ const GlossaryMenuController = withRouter(
       });
     }
 
-    setQuery(query) {
-      this.setState({ query: query });
-    }
-
-    setResults = (childData) => {
-      const results = _.map(childData, (data) => ({
-        data,
-      }));
-
-      this.setState({
-        results: results,
-      });
-      this.toggleDefinition(true);
-    };
-
     render() {
       const currentPage = this.props.location.pathname;
 
@@ -123,10 +105,6 @@ const GlossaryMenuController = withRouter(
                 open_definition={(key) => this.setGlossaryItem(key)}
                 show_definition={this.state.show_definition}
                 toggle_definition={(value) => this.toggleDefinition(value)}
-                set_results={(data) => this.setResults(data)}
-                set_query={(query) => this.setQuery(query)}
-                results={this.state.results}
-                query={this.state.query}
               />
             }
           />
