@@ -19,28 +19,6 @@ import { get_static_url, make_request } from "src/request_utils";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 
-function all_children_hidden(header) {
-  if (header.children) {
-    return _.every(header.children, all_children_hidden);
-  }
-  return header.hidden;
-}
-
-function calc_col_span(header) {
-  if (header.children) {
-    return _.chain(header.children)
-      .map(calc_col_span)
-      .reduce((x, y) => x + y)
-      .value();
-  }
-  if (header.hidden) {
-    return 0;
-  } else {
-    return 1;
-  }
-}
-
-// some helper functions
 function add_child(x) {
   // this === a column parent
   if (!_.isArray(x)) {
@@ -111,6 +89,125 @@ class Mapper {
   }
 }
 
+class Queries {
+  constructor(table, data, subject) {
+    this.table = table;
+    this.lang = lang;
+    this.dept = subject && subject.subject_type === "dept" && subject.id;
+    this.subject = subject;
+    this.data = data;
+    _.extend(this, table.queries);
+  }
+
+  sum_cols(rows, cols) {
+    var initial = _.map(cols, function () {
+      return 0;
+    });
+    function reducer(x, y) {
+      return _.map(x, function (__, i) {
+        return x[i] + y[i];
+      });
+    }
+    var total = _(rows)
+      .map(function (row) {
+        return _.map(cols, function (col) {
+          return row[col];
+        });
+      })
+      .reduce(reducer, initial);
+
+    // deal with percentage columns
+    _.each(cols, (col, i) => {
+      var type = this.table.col_from_nick(col).type;
+      if (type === "percentage") {
+        total[i] = total[i] / total.length;
+      }
+    });
+    return _.zipObject(cols, total);
+  }
+
+  sum(cols, options) {
+    options = options || { include_defaults: false };
+    var format = options.format || false;
+    var as_object = options.as_object === undefined ? true : options.as_object;
+    var data = this.data;
+    if (_.isUndefined(cols)) {
+      cols = this.default_cols;
+    } else if (!_.isArray(cols)) {
+      cols = [cols];
+    }
+    if (options.include_defaults) {
+      cols = _.uniqBy(cols.concat(this.default_cols));
+    }
+    if (options.filter) {
+      data = _.filter(data, options.filter);
+    }
+    var vals = this.sum_cols(data, cols);
+    if (format) {
+      _.each(cols, (col) => {
+        var type = this.table.col_from_nick(col).type;
+        vals[col] = _.get(formats, type, _.identity)(vals[col]);
+      });
+    }
+    if (!as_object) {
+      if (cols.length === 1) {
+        return vals[cols[0]];
+      } else {
+        return _.map(cols, function (col) {
+          return vals[col];
+        });
+      }
+    }
+    if (cols.length === 1) {
+      return vals[cols[0]];
+    } else {
+      return vals;
+    }
+  }
+}
+function query_adapter(subject) {
+  //normalize different arguments API
+  if (Dept.store.has(subject)) {
+    //patch old dept-id based API
+    subject = Dept.store.lookup(subject);
+  }
+  // work around for new subject data structures
+  if (subject && subject.subject_type === "gov") {
+    subject = undefined;
+  } else if (
+    this.programs &&
+    subject &&
+    _.includes(["tag", "crso"], subject.subject_type)
+  ) {
+    const rows = _.chain(subject.programs)
+      .map((program) => this.programs.get(program))
+      .flatten()
+      .compact()
+      .value();
+    return new Queries(this, rows, subject);
+  } else if (this.programs && subject && subject.subject_type === "program") {
+    const rows = this.programs.get(subject) || [];
+    return new Queries(this, rows, subject);
+  } else if (this.crs && "crso" === subject.subject_type) {
+    const rows = this.crs.get(subject);
+    return new Queries(this, rows, subject);
+  }
+
+  // if `subject` is defined
+  if (!_.isUndefined(subject)) {
+    if (subject && subject.id && this.depts[subject.id]) {
+      // if the table has data on the requested department
+      return new Queries(this, this.depts[subject.id], subject);
+    } else {
+      // otherwise return a query object for an empty array
+      return new Queries(this, []);
+    }
+  }
+  // subject is not defined, therefore, a query object
+  // is created for all the data attached to this table
+  return new Queries(this, this.data);
+}
+
 export class Table {
   static store = make_store(
     (def) => new Table(def),
@@ -126,8 +223,6 @@ export class Table {
         table: "*",
       },
       sort: _.identity,
-      classification: "none",
-      link: { en: "", fr: "" }, //some handlebar templates will crash if they don't see a link
       process_mapped_row: _.identity,
     };
   }
@@ -347,93 +442,10 @@ export class Table {
     return trivial_text_maker(grouping);
   }
 
-  // input should be an array of lowest-level (i.e. exist in table.unique_headers) columns to be included
-  // output is hash of parent columns, indexed by the input columns.
-  header_structure(col_nicks) {
-    //get the array of ancestors for a column
-    const ancestor_cols = (col) =>
-      col.parent ? [...ancestor_cols(col.parent), col] : [col];
-
-    const id_for_col = (col) => _.uniqueId(col.nick || col.wcag);
-
-    //given a col, returns the header string that points TO it.
-    const header_to_col = (col) =>
-      id_for_col(col) + (col.parent ? " " + header_to_col(col.parent) : "");
-
-    const colspan_for_col = (col) =>
-      _.chain(col_nicks)
-        .map((nick) => this.col_from_nick(nick))
-        .map(ancestor_cols)
-        .filter((ancestors) => _.includes(ancestors, col))
-        .value().length;
-
-    //const depth = _.max(this.flat_headers,
-    const col_structure = _.chain(col_nicks)
-      .map((nick) => this.col_from_nick(nick))
-      .map(ancestor_cols)
-      .flatten()
-      .uniqBy()
-      .map((col) => ({
-        colspan: colspan_for_col(col),
-        level: col.level,
-        header_attr: col.parent ? header_to_col(col.parent) : "",
-        display: run_template(col.header[lang]),
-        id_attr: id_for_col(col),
-        nick: col.nick || col.wcag,
-      }))
-      .groupBy("level")
-      .map((group) =>
-        _.sortBy(group, (obj) =>
-          _.indexOf(this.flat_headers, this.col_from_nick(obj.nick))
-        )
-      )
-      .value();
-
-    const headers_for_cell = _.chain(col_nicks)
-      .map((col_nick) => [
-        col_nick,
-        header_to_col(this.col_from_nick(col_nick)),
-      ])
-      .zipObject()
-      .value();
-
-    return { headers_for_cell, col_structure };
-  }
-
   column_description(col_nick) {
     return run_template(this.col_from_nick(col_nick).description[lang]);
   }
 
-  old_presentation_ready_headers() {
-    var flat_headers = this.flat_headers;
-    var headers = [];
-    _.each(flat_headers, function (header) {
-      if (all_children_hidden(header)) {
-        return;
-      }
-      var presentation_copy = {
-        val: run_template(header.header[lang]),
-        id: header.wcag,
-      };
-      if (_.isUndefined(headers[header.level])) {
-        headers[header.level] = [];
-      }
-      if (header.parent) {
-        var wcag_headers = "";
-        var pointer = header;
-        while (pointer.parent) {
-          pointer = pointer.parent;
-          wcag_headers += pointer.wcag + " ";
-        }
-        presentation_copy.headers = wcag_headers;
-      }
-      if (header.children) {
-        presentation_copy.col_span = calc_col_span(header);
-      }
-      headers[header.level].push(presentation_copy);
-    });
-    return headers;
-  }
   col_from_nick(nick) {
     // find a column obj from either the nick name or the wvag uniq ID
     return (
@@ -600,126 +612,3 @@ export class Table {
 }
 
 assign_to_dev_helper_namespace({ Table });
-
-class Queries {
-  constructor(table, data, subject) {
-    this.table = table;
-    this.lang = lang;
-    this.dept = subject && subject.subject_type === "dept" && subject.id;
-    this.subject = subject;
-    this.data = data;
-    _.extend(this, table.queries);
-  }
-
-  sum_cols(rows, cols) {
-    // ar will be an array of
-
-    var initial = _.map(cols, function () {
-      return 0;
-    });
-    function reducer(x, y) {
-      return _.map(x, function (__, i) {
-        return x[i] + y[i];
-      });
-    }
-    var total = _(rows)
-      .map(function (row) {
-        return _.map(cols, function (col) {
-          return row[col];
-        });
-      })
-      .reduce(reducer, initial);
-
-    // deal with percentage columns
-    _.each(cols, (col, i) => {
-      // jump to [col_from_nick](base_tables.html#col_from_nick)
-      var type = this.table.col_from_nick(col).type;
-      if (type === "percentage") {
-        total[i] = total[i] / total.length;
-      }
-    });
-    return _.zipObject(cols, total);
-  }
-
-  sum(cols, options) {
-    options = options || { include_defaults: false };
-    var format = options.format || false;
-    var as_object = options.as_object === undefined ? true : options.as_object;
-    var data = this.data;
-    if (_.isUndefined(cols)) {
-      cols = this.default_cols;
-    } else if (!_.isArray(cols)) {
-      cols = [cols];
-    }
-    if (options.include_defaults) {
-      cols = _.uniqBy(cols.concat(this.default_cols));
-    }
-    if (options.filter) {
-      data = _.filter(data, options.filter);
-    }
-    var vals = this.sum_cols(data, cols);
-    if (format) {
-      _.each(cols, (col) => {
-        // jump to [col_from_nick](base_tables.html#col_from_nick)
-        var type = this.table.col_from_nick(col).type;
-        vals[col] = _.get(formats, type, _.identity)(vals[col]);
-      });
-    }
-    if (!as_object) {
-      if (cols.length === 1) {
-        return vals[cols[0]];
-      } else {
-        return _.map(cols, function (col) {
-          return vals[col];
-        });
-      }
-    }
-    if (cols.length === 1) {
-      return vals[cols[0]];
-    } else {
-      return vals;
-    }
-  }
-}
-function query_adapter(subject) {
-  //normalize different arguments API
-  if (Dept.store.has(subject)) {
-    //patch old dept-id based API
-    subject = Dept.store.lookup(subject);
-  }
-  // work around for new subject data structures
-  if (subject && subject.subject_type === "gov") {
-    subject = undefined;
-  } else if (
-    this.programs &&
-    subject &&
-    _.includes(["tag", "crso"], subject.subject_type)
-  ) {
-    const rows = _.chain(subject.programs)
-      .map((program) => this.programs.get(program))
-      .flatten()
-      .compact()
-      .value();
-    return new Queries(this, rows, subject);
-  } else if (this.programs && subject && subject.subject_type === "program") {
-    const rows = this.programs.get(subject) || [];
-    return new Queries(this, rows, subject);
-  } else if (this.crs && "crso" === subject.subject_type) {
-    const rows = this.crs.get(subject);
-    return new Queries(this, rows, subject);
-  }
-
-  // if `subject` is defined
-  if (!_.isUndefined(subject)) {
-    if (subject && subject.id && this.depts[subject.id]) {
-      // if the table has data on the requested department
-      return new Queries(this, this.depts[subject.id], subject);
-    } else {
-      // otherwise return a query object for an empty array
-      return new Queries(this, []);
-    }
-  }
-  // subject is not defined, therefore, a query object
-  // is created for all the data attached to this table
-  return new Queries(this, this.data);
-}
