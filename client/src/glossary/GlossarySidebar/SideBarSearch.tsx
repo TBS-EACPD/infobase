@@ -9,12 +9,7 @@ const SideBarSearchDefaultProps = {
 };
 
 type SideBarSearchProps = typeof SideBarSearchDefaultProps & {
-  on_query: (str: string) => void;
-  query_value: string;
-  results: [];
-  loading_results?: boolean;
-  getResults?: (data: []) => void;
-  setQuery?: (query: string) => void;
+  setQuery: (str: string) => void;
 };
 
 export class SideBarSearch extends React.Component<SideBarSearchProps> {
@@ -25,25 +20,8 @@ export class SideBarSearch extends React.Component<SideBarSearchProps> {
   }
 
   callback = (query: string) => {
-    this.props.on_query(query);
+    this.props.setQuery(query);
   };
-
-  componentDidUpdate() {
-    if (!this.props.loading_results) {
-      if (this.props.getResults && this.props.setQuery) {
-        this.props.getResults(this.props.results);
-        this.props.setQuery(this.props.query_value);
-      }
-    }
-  }
-
-  shouldComponentUpdate(nextProps: Record<string, unknown>) {
-    if (nextProps.loading_results !== this.props.loading_results) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   render() {
     const { placeholder } = this.props;
