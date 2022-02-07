@@ -206,7 +206,11 @@ module.exports = {
     },
     "Infographic - Gov - All data": {
       "Tested on index-eng.html#infographic/gov/gov/all_data": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "aria-allowed-attr, serious": [
+            "<div aria-label=\"Main infographic content\"></div>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/gov/gov/all_data": {
         "Axe violations allow list": null
