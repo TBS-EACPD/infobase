@@ -16,14 +16,17 @@ if [[ ! $concurrency =~ ^(full|half|none)$ ]]; then
   exit 1
 fi
 
-# calls to npm run webpack... use this env var when set
-export MAX_OLD_SPACE_SIZE=$max_old_space_size
+# pre-build static analysis
+npx prettier
+npx tsc --noEmit
 
-[ -e $BUILD_DIR/InfoBase ] && rm -r $BUILD_DIR/InfoBase # clean up build dir
-
+# pre-webpack build steps
+[ -e $BUILD_DIR/InfoBase ] && rm -r $BUILD_DIR/InfoBase
 npm run build_static
 
-common_build_options="PROD NO-WATCH $options"
+# webpack build configuration
+export MAX_OLD_SPACE_SIZE=$max_old_space_size # calls to npm run webpack ... use this env var when set
+common_build_options="PROD NO-WATCH SKIP-TYPECHECK $options" # note: skip webpack-time type checks to cut memory usage, should be done as a pre-build step 
 
 if [ $concurrency == "none" ]; then
   # Just running all builds one at a time, no backgrounding or output redirection

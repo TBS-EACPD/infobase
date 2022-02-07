@@ -116,6 +116,7 @@ function get_plugins({
   previous_deploy_sha,
   is_actual_prod_release,
   is_dev_link,
+  skip_typecheck,
 }) {
   return _.filter([
     new webpack.DefinePlugin({
@@ -139,10 +140,11 @@ function get_plugins({
       maxRetries: 3,
     }),
     new ESLintPlugin({ extensions: ["js", "ts", "tsx"], cache: true }),
-    new ForkTsCheckerWebpackPlugin({
-      async: true,
-      typescript: { configFile: "tsconfig.json" },
-    }),
+    !skip_typecheck &&
+      new ForkTsCheckerWebpackPlugin({
+        async: true,
+        typescript: { configFile: "tsconfig.json" },
+      }),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       onDetected({ paths, compilation }) {
@@ -235,6 +237,7 @@ function create_config(options) {
     previous_deploy_sha,
     is_ci,
     local_ip,
+    skip_typecheck,
   } = options;
 
   return {
@@ -258,7 +261,12 @@ function create_config(options) {
         than builds with mixed caches/configs.
       */
       name: _.chain(options)
-        .omit(["commit_sha", "previous_deploy_sha", "local_ip"])
+        .omit([
+          "commit_sha",
+          "previous_deploy_sha",
+          "local_ip",
+          "skip_typecheck",
+        ])
         .thru((build_options) => string_hash(JSON.stringify(build_options)))
         .toString()
         .value(),
@@ -291,6 +299,7 @@ function create_config(options) {
       previous_deploy_sha,
       is_actual_prod_release,
       is_dev_link,
+      skip_typecheck,
     }),
     optimization: get_optimizations({ is_prod_build, produce_stats }),
     devtool: !is_prod_build
