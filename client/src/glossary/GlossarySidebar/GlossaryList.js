@@ -1,26 +1,46 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import _ from "lodash";
 import React from "react";
 
-import { Typeahead } from "src/components/index";
+import "./GlossaryMenu.scss";
 
-import { log_standard_event } from "src/core/analytics";
+import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
-import { get_simplified_search_phrase } from "./search_utils";
+import {
+  SearchHighlighter,
+  get_simplified_search_phrase,
+} from "src/search/search_utils";
 
-export class SearchConfigTypeahead extends React.Component {
+export class GlossaryList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      scrollEl: "",
       search_phrase: "",
     };
 
     this.is_unmounting = false;
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { search_phrase: next_phrase } = nextProps;
+    const { search_phrase: prev_phrase } = prevState;
+
+    if (next_phrase !== prev_phrase) {
+      return {
+        search_phrase: next_phrase,
+      };
+    } else {
+      return null;
+    }
+  }
+
   componentWillUnmount() {
     this.is_unmounting = true;
   }
+
+  static getDer;
 
   componentDidUpdate() {
     const { search_configs } = this.props;
@@ -29,7 +49,6 @@ export class SearchConfigTypeahead extends React.Component {
     if (search_phrase !== "") {
       _.each(search_configs, (search_config) => {
         const { config_name, query } = search_config;
-
         const is_not_loading_or_loaded = _.isUndefined(
           this.get_query_result_state(config_name, search_phrase)
         );
@@ -58,32 +77,12 @@ export class SearchConfigTypeahead extends React.Component {
       });
     }
   }
-  results_from_matches = (
-    matches,
-    search_phrase,
-    { header_function, name_function, menu_content_function }
-  ) =>
-    _.map(matches, (match, index) => ({
-      header: index === 0 && header_function(),
-      on_select: this.get_result_on_select(search_phrase, name_function, match),
-      content: menu_content_function(match, search_phrase, name_function),
-      plain_text: name_function(match),
+  results_from_matches = (matches) =>
+    _.map(matches, (match) => ({
+      get_compiled_definition: match.get_compiled_definition,
+      id: match.id,
+      title: match.title,
     }));
-  get_result_on_select = (search_phrase, name_function, match) => () => {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: `TYPEAHEAD_SEARCH_SELECT`,
-      MISC2: `Queried: ${search_phrase}. Selected: ${name_function(match)}`,
-    });
-
-    if (_.isFunction(this.props.on_select)) {
-      this.props.on_select(match);
-    }
-
-    this.setState({
-      search_phrase: "",
-    });
-  };
 
   get_query_result_state_key = (config_name, search_phrase) =>
     `${config_name}__${get_simplified_search_phrase(search_phrase)}`;
@@ -102,18 +101,19 @@ export class SearchConfigTypeahead extends React.Component {
       callback
     );
 
-  on_query = (search_phrase) => {
-    log_standard_event({
-      SUBAPP: window.location.hash.replace("#", ""),
-      MISC1: `TYPEAHEAD_SEARCH_QUERY`,
-      MISC2: `query: ${search_phrase}, search_configs: ${_.map(
-        this.props.search_configs,
-        "config_name"
-      )}`,
+  openDefinition(item) {
+    this.props.open_definition(item.id);
+    this.setState({
+      scrollEl: item.title.replace(/\s+/g, ""),
     });
+  }
 
-    this.setState({ search_phrase });
-  };
+  //place holder arguments while I get passing functions to work...
+  handleKeyPress(e, item) {
+    if (e.key === "Enter" && item) {
+      this.openDefinition(item);
+    }
+  }
 
   render() {
     const { search_configs } = this.props;
@@ -130,14 +130,39 @@ export class SearchConfigTypeahead extends React.Component {
 
     const results = !still_loading_results ? maybe_results : [];
 
+    const items_by_letter = get_glossary_items_by_letter(results);
+
     return (
-      <Typeahead
-        {...this.props}
-        on_query={this.on_query}
-        query_value={search_phrase}
-        results={results}
-        loading_results={still_loading_results}
-      />
+      <div>
+        {_.map(items_by_letter, ({ letter, items }) => (
+          <div key={letter}>
+            <span className="glossary-sb__letter" key={letter}>
+              {letter}
+            </span>
+            <hr />
+            {_.map(items, (item, ix) => (
+              <div key={ix} className="glossary-sb__title">
+                <span
+                  role="button"
+                  id={item.title.replace(/\s+/g, "")}
+                  onClick={() => this.openDefinition(item)}
+                  onKeyDown={(e) => this.handleKeyPress(e, item)}
+                  tabIndex={0}
+                >
+                  {search_phrase ? (
+                    <SearchHighlighter
+                      search={search_phrase}
+                      content={item.title}
+                    />
+                  ) : (
+                    item.title
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     );
   }
 }
