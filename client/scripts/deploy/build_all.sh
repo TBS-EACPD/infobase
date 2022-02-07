@@ -16,10 +16,6 @@ if [[ ! $concurrency =~ ^(full|half|none)$ ]]; then
   exit 1
 fi
 
-# pre-build static analysis
-npx prettier
-npx tsc --noEmit
-
 # pre-webpack build steps
 [ -e $BUILD_DIR/InfoBase ] && rm -r $BUILD_DIR/InfoBase
 npm run build_static
