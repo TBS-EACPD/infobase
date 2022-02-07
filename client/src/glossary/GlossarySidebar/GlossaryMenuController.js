@@ -97,16 +97,12 @@ const GlossaryMenuController = withRouter(
     }
 
     setResults = (childData) => {
-      const data = _.map(childData, (data) => ({
-        id: data.glossary_data.id,
-        title: data.glossary_data.title,
-        translation: data.glossary_data.translation,
-        raw_definition: data.glossary_data.raw_defintion,
-        get_compiled_definition: data.glossary_data.get_compiled_definition,
+      const results = _.map(childData, (data) => ({
+        data,
       }));
 
       this.setState({
-        results: data,
+        results: results,
       });
       this.toggleDefinition(true);
     };

@@ -5,8 +5,6 @@ import { glossaryEntryStore } from "src/models/glossary";
 export interface ResultProps {
   id: string;
   title: string;
-  translation: string;
-  raw_definition: string;
   get_compiled_definition: () => string;
 }
 

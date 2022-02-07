@@ -6,13 +6,11 @@ import { create_text_maker_component } from "src/components/index";
 
 import glossary_text from "src/glossary/glossary.yaml";
 
-import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
-
-import { SearchConfigTypeahead } from "src/search/SearchConfigTypeahead";
 
 import { GlossaryDef } from "./GlossaryDef";
 import { GlossaryList } from "./GlossaryList";
+import { SideBarSearch } from "./SideBarSearch";
 
 const { text_maker } = create_text_maker_component(glossary_text);
 
@@ -21,26 +19,35 @@ interface GlossarySidebarProps {
   open_definition: (key: string) => void;
   show_definition: boolean;
   toggle_definition: (value: boolean) => void;
-  results: ResultProps[];
   query: string;
   set_query: (query: string) => void;
-  set_results: (data: ResultProps[]) => void;
+}
+
+interface GlossarySidebarState {
+  results: ResultProps[];
+  query: string;
 }
 
 export interface ResultProps {
   id: string;
   title: string;
-  translation: string;
-  raw_definition: string;
   get_compiled_definition: () => string;
 }
 
-export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
+export class GlossarySidebar extends React.Component<
+  GlossarySidebarProps,
+  GlossarySidebarState
+> {
   main = React.createRef<HTMLDivElement>();
   header = React.createRef<HTMLDivElement>();
 
   constructor(props: GlossarySidebarProps) {
     super(props);
+
+    this.state = {
+      results: [],
+      query: "",
+    };
   }
 
   closeDefinition() {
@@ -51,8 +58,20 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
     this.props.open_definition(key);
   }
 
+  setResults = (results: ResultProps[]) => {
+    console.log(results);
+    this.setState({
+      results: results,
+    });
+  };
+
+  setQuery(query: string) {
+    this.setState({
+      query: query,
+    });
+  }
+
   render() {
-    const items_by_letter = get_glossary_items_by_letter(this.props.results);
     return (
       <div>
         <div className="glossary-sb__header-wrapper" ref={this.header}>
@@ -65,13 +84,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
               {text_maker("glossary_title")}
             </h1>
             <div className="glossary-sb__search-wrapper">
-              <SearchConfigTypeahead
-                type={"glossary-sidebar"}
-                placeholder={text_maker("glossary_placeholder")}
-                search_configs={[glossary_search_config]}
-                getResults={this.props.set_results}
-                setQuery={this.props.set_query}
-              />
+              <SideBarSearch setQuery={(query) => this.setQuery(query)} />
             </div>
             <div className="glossary-sb__example">
               {text_maker("glossary_example")}
@@ -88,9 +101,9 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
               />
             ) : (
               <GlossaryList
-                open_definition={(item) => this.openItem(item)}
-                query={this.props.query}
-                items_by_letter={items_by_letter}
+                open_definition={(item: string) => this.openItem(item)}
+                search_phrase={this.state.query}
+                search_configs={[glossary_search_config]}
               />
             )}
           </div>
