@@ -7,6 +7,8 @@
     "eslint": "eslint --max-warnings 0 --cache .",
     "eslint:fix": "eslint --fix .",
     "posteslint:fix": "npm run prettier:write",
+    "static_analysis": "npm run eslint && npm run prettier && (cd client && npm run type_check)",
+    "preprod_deploy": "npm run static_analysis",
     "prod_deploy": "sh scripts/prod_scripts/prod_deploy.sh",
     "prod_rollback": "sh scripts/prod_scripts/prod_rollback.sh",
     "infobase_tmux_init": "npm run tmux_env",
