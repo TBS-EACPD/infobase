@@ -18,7 +18,6 @@ import { IconHome } from "src/icons/icons";
 import { index_lang_lookups } from "src/InfoBase/index_data";
 
 import { log_page_view } from "./analytics";
-import { reactAdapter } from "./reactAdapter";
 
 import "./NavComponents.scss";
 
@@ -430,19 +429,6 @@ export const StandardLinkSynchronizer = withRouter(
         "#footer-standard-link",
         standard_link_modifier || default_standard_link_modifier
       );
-    }
-  }
-);
-
-export const ReactUnmounter = withRouter(
-  class ReactUnmounter_ extends React.Component {
-    render() {
-      return null;
-    }
-    componentDidUpdate(prevProps) {
-      if (prevProps.location.pathname !== this.props.location.pathname) {
-        reactAdapter.unmountAll();
-      }
     }
   }
 );
