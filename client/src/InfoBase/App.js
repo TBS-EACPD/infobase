@@ -19,7 +19,6 @@ import {
   is_dev,
 } from "src/core/injected_build_constants";
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
-import { ReactUnmounter } from "src/core/NavComponents";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
 import { TooltipActivator } from "src/glossary/TooltipActivator";
@@ -152,7 +151,6 @@ export class App extends React.Component {
             url_before_redirect_key="pre_redirected_url"
           />
           {has_local_storage && <SurveyPopup />}
-          <ReactUnmounter />
           <TooltipActivator />
           <Suspense fallback={<LeafSpinner config_name={"route"} />}>
             <Switch>
