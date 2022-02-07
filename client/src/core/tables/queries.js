@@ -15,23 +15,6 @@ class Queries {
     _.extend(this, table.queries);
   }
 
-  sort(func, reverse) {
-    var sorter = func;
-    reverse = reverse || false;
-    // a string will be used to look up an attribute in each row
-    if (_.isString(func)) {
-      func = function (d) {
-        return d[sorter];
-      };
-    }
-    var sorted = _.sortBy(this.data, func);
-    if (reverse) {
-      sorted.reverse();
-    }
-
-    return sorted;
-  }
-
   sum_cols(rows, cols) {
     // ar will be an array of
 
