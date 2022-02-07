@@ -19,12 +19,9 @@ interface GlossarySidebarProps {
   open_definition: (key: string) => void;
   show_definition: boolean;
   toggle_definition: (value: boolean) => void;
-  query: string;
-  set_query: (query: string) => void;
 }
 
 interface GlossarySidebarState {
-  results: ResultProps[];
   query: string;
 }
 
@@ -45,7 +42,6 @@ export class GlossarySidebar extends React.Component<
     super(props);
 
     this.state = {
-      results: [],
       query: "",
     };
   }
@@ -57,13 +53,6 @@ export class GlossarySidebar extends React.Component<
   openItem(key: string) {
     this.props.open_definition(key);
   }
-
-  setResults = (results: ResultProps[]) => {
-    console.log(results);
-    this.setState({
-      results: results,
-    });
-  };
 
   setQuery(query: string) {
     this.setState({
