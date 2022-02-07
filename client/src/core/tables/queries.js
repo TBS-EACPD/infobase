@@ -5,16 +5,6 @@ import { Dept } from "src/models/subjects";
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
-// #Queries
-// This module exists to  provides a common interface for querying
-// the data associated with each table.
-// [queries](#queries)  - provides a standardized data
-//      access layer to do things like sum a certain column,
-//      find a row from key values, etc..
-//
-
-//<div id='queries'></div>
-// `queries` object is used
 class Queries {
   constructor(table, data, subject) {
     this.table = table;
@@ -72,14 +62,6 @@ class Queries {
     return _.zipObject(cols, total);
   }
 
-  // <div id='sum'></div>
-  //  ```javascript
-  //    options = {
-  //        include_defaults :
-  //        as_object :
-  //        format :
-  //    }
-  //  ```
   sum(cols, options) {
     options = options || { include_defaults: false };
     var format = options.format || false;
@@ -118,151 +100,6 @@ class Queries {
     } else {
       return vals;
     }
-  }
-
-  get_col(col, options) {
-    options = options || {};
-    options.pop_single = true;
-    return this.get_cols(col, options);
-  }
-
-  // <div id='get_cols'></div>
-  //  ```javascript
-  //    options = {
-  //        sorted :
-  //        reverse :
-  //        gross_percentage :
-  //        format :
-  //    }
-  //  ```
-  get_cols(cols, options) {
-    options = options || {};
-    let data, gp_colname;
-    var sorted = options.sorted || false;
-    var reverse = options.reverse || false;
-    var gross_percentage = options.gross_percentage;
-    var format = options.format;
-    var sort_col = options.sort_col || cols[0];
-    var filter = options.filter || false;
-
-    if (!_.isArray(cols)) {
-      cols = [cols];
-    }
-
-    if (sorted) {
-      data = this.sort(sort_col, reverse);
-    } else {
-      data = this.data;
-    }
-
-    if (filter) {
-      data = _.filter(data, filter);
-    }
-
-    let vals = _.chain(cols)
-      .map((col) => [col, _.map(data, col)])
-      .fromPairs()
-      .value();
-
-    if (gross_percentage) {
-      gp_colname = gross_percentage + "gross_percentage";
-      cols.push(gp_colname);
-      vals[gp_colname] = [];
-      var sum =
-        _.chain(vals[gross_percentage])
-          .filter(function (val) {
-            return val >= 0;
-          })
-          .reduce(function (x, y) {
-            return x + y;
-          })
-          .value() + 1;
-      _.each(vals[gross_percentage], function (val, i, _list) {
-        vals[gp_colname][i] = val / sum;
-      });
-    }
-    if (format) {
-      _.each(cols, (col) => {
-        var type = this.table.col_from_nick(col).type;
-        vals[col] = _.get(formats, type, _.identity)(vals[col]);
-      });
-      if (gross_percentage) {
-        vals[gp_colname] = formats["percentage"](vals[gp_colname]);
-      }
-    }
-    if (options.pop_single && cols.length === 1) {
-      return vals[cols[0]];
-    }
-    if (options.zip) {
-      vals = _.zip.apply(
-        null,
-        _.map(cols, function (col) {
-          return vals[col];
-        })
-      );
-    }
-    return vals;
-  }
-
-  // <div id='get_top_x'></div>
-  get_top_x(cols, x, options) {
-    // x is the number of rows requested
-    // sorts by the first col
-    options = options || {};
-    _.extend(options, { sorted: true, reverse: true });
-    // call ['this.get_cols'](#get_cols)
-    var all_vals = this.get_cols(cols, options);
-    if (options.zip) {
-      all_vals = _.take(all_vals, x);
-    } else {
-      _.each(all_vals, function (list, key) {
-        all_vals[key] = _.take(list, x);
-      });
-    }
-    return all_vals;
-  }
-
-  get_row(criteria) {
-    var each_mapped_obj = (obj) =>
-      _.every(
-        _.toPairs(criteria).map(([key, _val]) => obj[key] === criteria[key])
-      );
-    return _.find(this.data, each_mapped_obj);
-  }
-
-  get_rows(criteria) {
-    var each_mapped_obj = (obj) =>
-      _.every(
-        _.toPairs(criteria).map(([key, _val]) => {
-          if (_.isArray(criteria[key])) {
-            return _.includes(criteria[key], obj[key]);
-          } else {
-            return obj[key] === criteria[key];
-          }
-        })
-      );
-    return _.filter(this.data, each_mapped_obj);
-  }
-
-  get_row_by_key(key) {
-    var key_rows = this.key_rows();
-    var i = _.findIndex(key_rows, function (row) {
-      return _.isEqual(row, key);
-    });
-    return this.data[i];
-  }
-
-  key_rows() {
-    var key_vals = this.get_cols(this.table.keys);
-    if (_.keys(key_vals).length === 1) {
-      return key_vals[_.keys(key_vals)[0]];
-    }
-    return _.zip.apply(
-      this,
-      _.map(key_vals, function (vals, key) {
-        return key_vals[key];
-      })
-    );
   }
 }
 

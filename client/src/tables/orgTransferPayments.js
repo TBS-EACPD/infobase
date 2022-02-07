@@ -114,12 +114,6 @@ export default {
     });
   },
 
-  queries: {
-    types: function () {
-      return _.uniqBy(this.get_cols(["type"]).type);
-    },
-  },
-
   sort: function (mapped_rows) {
     return _.sortBy(mapped_rows, function (row) {
       return [row.type, row.tp];
