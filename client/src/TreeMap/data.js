@@ -5,7 +5,8 @@ import { Dept } from "src/models/subjects";
 import { create_text_maker } from "src/models/text";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
-import { Table } from "src/core/TableClass";
+
+import { Table } from "src/tables/TableClass";
 
 import treemap_text from "./TreeMap.yaml";
 

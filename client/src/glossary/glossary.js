@@ -13,9 +13,9 @@ import {
   scroll_into_view_and_focus,
   scroll_to_top,
 } from "src/core/NavComponents";
-import { Table } from "src/core/TableClass";
 
 import { rpb_link } from "src/rpb/rpb_link";
+import { Table } from "src/tables/TableClass";
 
 import { GlossarySearch } from "./GlossarySearch";
 

@@ -7,7 +7,7 @@ import { TrivialTM as TM, Format } from "src/components/index";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { Table } from "src/core/TableClass";
+import { Table } from "src/tables/TableClass";
 
 const is_planning_year = (year) =>
   _.includes(year_templates.planning_years, year);

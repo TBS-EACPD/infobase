@@ -16,9 +16,9 @@ import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { Table } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
+import { Table } from "src/tables/TableClass";
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending";
 import { format_and_get_fte } from "./welcome_mat_fte";

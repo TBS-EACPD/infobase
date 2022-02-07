@@ -11,9 +11,8 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
-import { Table } from "src/core/TableClass";
-
 import { tertiaryColor } from "src/style_constants/index";
+import { Table } from "src/tables/TableClass";
 
 import text from "./PanelFilterControl.yaml";
 

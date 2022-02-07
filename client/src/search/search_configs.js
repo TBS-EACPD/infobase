@@ -7,9 +7,8 @@ import { Dept, Gov, Program, CRSO, ProgramTag } from "src/models/subjects";
 
 import { trivial_text_maker } from "src/models/text";
 
-import { Table } from "src/core/TableClass";
-
 import { textColor } from "src/style_constants/index";
+import { Table } from "src/tables/TableClass";
 
 import {
   get_simplified_search_phrase,
