@@ -15,7 +15,6 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
-import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
@@ -227,21 +226,13 @@ export class Table {
     this.get_group_by_func();
     this.get_grouping_col_values_func();
   }
-  get links() {
-    return this.link
-      ? [this.link[lang]]
-      : _.map(
-          this.source,
-          (source_key) => all_sources[source_key].open_data[lang]
-        );
-  }
+
   get description() {
     const tmf = create_text_maker(this.text);
     return tmf(this.id, {
       table: this,
       table_level: true,
       details: true,
-      links: this.links,
     });
   }
   get short_description() {
