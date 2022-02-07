@@ -7,7 +7,6 @@ import { glossaryEntryStore } from "src/models/glossary";
 
 import { lang, services_feature_flag } from "src/core/injected_build_constants";
 
-//circular dependency hack..
 import { rpb_link } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
