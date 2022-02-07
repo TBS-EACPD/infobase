@@ -6,6 +6,8 @@ import "./GlossaryMenu.scss";
 
 import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
+import { glossary_lite as glossary_search_config } from "src/search/search_configs";
+
 import {
   SearchHighlighter,
   get_simplified_search_phrase,
@@ -40,10 +42,8 @@ export class GlossaryList extends React.Component {
     this.is_unmounting = true;
   }
 
-  static getDer;
-
   componentDidUpdate() {
-    const { search_configs } = this.props;
+    const search_configs = [glossary_search_config];
     const { search_phrase } = this.state;
 
     if (search_phrase !== "") {
