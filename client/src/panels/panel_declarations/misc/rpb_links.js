@@ -6,9 +6,8 @@ import { TextPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import { create_text_maker_component, CardList } from "src/components/index";
 
-import { Table } from "src/core/TableClass";
-
 import { rpb_link } from "src/rpb/rpb_link";
+import { Table } from "src/tables/TableClass";
 
 import text from "./rpb_links.yaml";
 

@@ -5,9 +5,9 @@ import { subject_types } from "src/models/subjects";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { is_dev } from "src/core/injected_build_constants";
-import { Table } from "src/core/TableClass";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
+import { Table } from "src/tables/TableClass";
 
 const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 

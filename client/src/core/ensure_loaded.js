@@ -14,8 +14,9 @@ import {
 } from "src/models/results/populate_results";
 import { api_load_has_services } from "src/models/services/api_load_has_services";
 
+import { Table } from "src/tables/TableClass";
+
 import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
-import { Table } from "./TableClass";
 
 const load_tables = (table_set) =>
   Promise.all(

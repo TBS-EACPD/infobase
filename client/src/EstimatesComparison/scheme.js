@@ -12,8 +12,6 @@ import {
 import { glossaryEntryStore } from "src/models/glossary";
 import { Dept } from "src/models/subjects";
 
-import { Table } from "src/core/TableClass";
-
 import { AbstractExplorerScheme } from "src/explorer_common/abstract_explorer_scheme";
 import { convert_d3_hierarchy_to_explorer_hierarchy } from "src/explorer_common/hierarchy_tools";
 import {
@@ -21,6 +19,7 @@ import {
   cached_property,
   bound,
 } from "src/general_utils";
+import { Table } from "src/tables/TableClass";
 
 import EstimatesExplorerComponent from "./EstimatesExplorerComponent";
 import {

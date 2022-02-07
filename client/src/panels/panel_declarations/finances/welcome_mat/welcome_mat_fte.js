@@ -8,10 +8,10 @@ import { year_templates, actual_to_planned_gap_year } from "src/models/years";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { Table } from "src/core/TableClass";
 
 import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { tertiaryColor } from "src/style_constants/index";
+import { Table } from "src/tables/TableClass";
 
 const { std_years, planning_years } = year_templates;
 

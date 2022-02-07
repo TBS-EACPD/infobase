@@ -9,7 +9,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { AlertBanner, TagCloud } from "src/components/index";
 
-import { Table } from "src/core/TableClass";
+import { Table } from "src/tables/TableClass";
 
 import { TextMaker, text_maker } from "./rpb_text_provider";
 import {

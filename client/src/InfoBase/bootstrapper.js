@@ -20,7 +20,6 @@ import WebFont from "webfontloader";
 import { populate_initial_stores_from_lookups } from "src/models/populate_initial_stores_from_lookups";
 
 import { initialize_analytics } from "src/core/analytics";
-import { Table } from "src/core/TableClass";
 
 import {
   get_client,
@@ -43,6 +42,7 @@ import programFtes from "src/tables/programFtes";
 import programSobjs from "src/tables/programSobjs";
 import programSpending from "src/tables/programSpending";
 import programVoteStat from "src/tables/programVoteStat";
+import { Table } from "src/tables/TableClass";
 
 import { app_reducer } from "./AppState";
 

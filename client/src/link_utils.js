@@ -1,10 +1,10 @@
 import _ from "lodash";
 
-import { Table } from "./core/TableClass";
 import { infographic_href_template } from "./infographic/infographic_href_template";
 import { glossaryEntryStore } from "./models/glossary";
 import { is_subject_instance } from "./models/subjects";
 import { rpb_link } from "./rpb/rpb_link";
+import { Table } from "./tables/TableClass";
 
 const glossary_href = (subject_or_id, first_character = "#") => {
   const id = _.isString(subject_or_id) ? subject_or_id : subject_or_id.id;

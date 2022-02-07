@@ -11,12 +11,12 @@ import {
 } from "src/models/text";
 import { make_store } from "src/models/utils/make_store";
 
+import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
+import { formats } from "src/core/format";
+import { lang } from "src/core/injected_build_constants";
+
 import { sources as all_sources } from "src/metadata/data_sources";
 import { get_static_url, make_request } from "src/request_utils";
-
-import { assign_to_dev_helper_namespace } from "./assign_to_dev_helper_namespace";
-import { formats } from "./format";
-import { lang } from "./injected_build_constants";
 
 const table_id_to_csv_path = (table_id) => `csv/${_.snakeCase(table_id)}.csv`;
 

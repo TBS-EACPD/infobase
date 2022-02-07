@@ -21,12 +21,13 @@ import {
   StandardRouteContainer,
   LangSynchronizer,
 } from "src/core/NavComponents";
-import { Table } from "src/core/TableClass";
+
+import { SafeJSURL } from "src/general_utils";
+import { Table } from "src/tables/TableClass";
 
 //specific view stuff
 
 //misc app stuff
-import { SafeJSURL } from "src/general_utils";
 
 import { GranularView } from "./granular_view";
 import { rpb_link } from "./rpb_link";

@@ -16,12 +16,12 @@ import { ProgramTag } from "src/models/subjects";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
-import { Table } from "src/core/TableClass";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { get_formatter } from "src/charts/shared";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { textColor, backgroundColor } from "src/style_constants/index";
+import { Table } from "src/tables/TableClass";
 
 import text from "./goco.yaml";
 
