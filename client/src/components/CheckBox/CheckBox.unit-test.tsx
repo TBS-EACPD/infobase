@@ -1,7 +1,7 @@
-import { render } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import * as constants from "src/core/injected_build_constants";
 
 import { with_console_error_silenced } from "src/testing_utils";
 
@@ -23,56 +23,59 @@ const solid_checkbox_with_onclick = (
     label={"sample label"}
     isSolidBox={true}
     active={false}
-    onClick={(_id: string) => console.log("clicked!")}
+    onClick={(_id: string) => onclick_callback()}
   />
 );
+const onclick_callback = jest.fn(() => console.log("clicked!"));
+
+describe("CheckBox, is_a11y_mode = true", () => {
+  Object.defineProperty(constants, "is_a11y_mode", { value: true });
+  afterAll(() => {
+    Object.defineProperty(constants, "is_a11y_mode", { value: false });
+  });
+
+  render(solid_checkbox_no_onclick);
+  test("input in label in div is rendered when is_a11y_mode is true", () => {
+    expect(
+      document.querySelector("div.checkbox label input[type='checkbox']")
+    ).toBeTruthy();
+  });
+});
+
+describe("CheckBox, is_a11y_mode = false", () => {
+  render(solid_checkbox_with_onclick);
+  const transparent_checkbox = document.getElementsByClassName(
+    "checkbox-span checkbox-span--interactive"
+  )[0];
+  test("no background when onclick is truthy and active is falsey", () => {
+    expect(
+      transparent_checkbox &&
+        window
+          .getComputedStyle(transparent_checkbox)
+          .getPropertyValue("background-color")
+    ).toEqual("transparent");
+  });
+
+  const colored_checkbox = document.getElementsByClassName("checkbox-span")[0];
+  test("coloured background when onlick is falsey or active is truthy", () => {
+    expect(
+      colored_checkbox &&
+        window
+          .getComputedStyle(colored_checkbox)
+          .getPropertyValue("background-color")
+    ).not.toEqual("transparent");
+  });
+});
+
+describe("onclick gets called when the checkbox is clicked", () => {
+  fireEvent.click(screen.getAllByText("sample label")[0]);
+  expect(onclick_callback).toHaveBeenCalledTimes(1);
+});
 
 describe("CheckBox", () => {
   it('Throws an error when a solid checkbox is missing "active" and "onclick"', () => {
     with_console_error_silenced(() => {
       expect(() => render(non_solid_checkbox_no_onclick)).toThrow();
     });
-  });
-
-  it("Renders a simple, unstyled CheckBox in a11y mode", () => {
-    if (is_a11y_mode) {
-      render(solid_checkbox_no_onclick);
-      expect(
-        document.querySelector("div.checkbox label input[type='checkbox']")
-      ).toBeTruthy();
-    }
-  });
-
-  it("Displays the given label when an onclick is provided", () => {
-    render(solid_checkbox_with_onclick);
-    const checkbox_span = document.querySelector(
-      is_a11y_mode ? "div.checkbox label input" : "div span.link-styled"
-    );
-    expect(checkbox_span && checkbox_span.textContent).toEqual("sample label");
-  });
-
-  it("Displays a coloured background if onClick is undefined or active is truthy", () => {
-    if (!is_a11y_mode) {
-      render(solid_checkbox_with_onclick);
-      const transparent_checkbox = document.getElementsByClassName(
-        "checkbox-span checkbox-span--interactive"
-      )[0];
-      expect(
-        transparent_checkbox &&
-          window
-            .getComputedStyle(transparent_checkbox)
-            .getPropertyValue("background-color")
-      ).toEqual("transparent");
-
-      render(solid_checkbox_no_onclick);
-      const colored_checkbox =
-        document.getElementsByClassName("checkbox-span")[1];
-      expect(
-        colored_checkbox &&
-          window
-            .getComputedStyle(colored_checkbox)
-            .getPropertyValue("background-color")
-      ).not.toEqual("transparent");
-    }
   });
 });
