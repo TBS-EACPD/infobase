@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
@@ -86,12 +85,4 @@ export default {
       }
       return row.region;
     }),
-
-  queries: {
-    gov_grouping: () =>
-      _.chain(this.table.sum_cols_by_grouped_data(tp_by_region_years, "region"))
-        .map((years, key) => [key].concat(years))
-        .sortBy((row) => sum(_.tail(row)))
-        .value(),
-  },
 };

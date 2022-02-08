@@ -1,5 +1,3 @@
-// see [here](../table_definition.html) for description
-// of the table spec
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";

@@ -5,9 +5,6 @@ import { year_templates } from "src/models/years";
 
 import text from "./orgSobjs.yaml";
 
-// see [here](../table_definition.html) for description
-// of the table spec
-
 const { sos } = businessConstants;
 const { std_years } = year_templates;
 

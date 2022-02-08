@@ -1,11 +1,8 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
-
-import { formats } from "src/core/format";
 
 import { people_five_year_percentage_formula } from "./table_common";
 
@@ -109,56 +106,5 @@ export default {
       }
       return row.region;
     });
-  },
-
-  queries: {
-    gov_grouping: function () {
-      return _.chain(
-        this.table.sum_cols_by_grouped_data(people_years, "region")
-      )
-        .map(function (years, key) {
-          return [key].concat(years);
-        })
-        .sortBy(function (row) {
-          return sum(_.tail(row));
-        })
-        .value();
-    },
-    high_level_prov_split: function (year, options) {
-      options = options || {};
-      var lk = provinces,
-        format = options.format || false,
-        fm1 = formats["big_int"],
-        fm2 = formats.percentage,
-        ncr = this.lang === "en" ? "NCR" : "RCN",
-        non_ncr = "Non-" + ncr,
-        abroad = lk.abroad.text,
-        dept_total = sum(this.data, function (d) {
-          return d[year];
-        });
-      var groups = _.groupBy(
-        this.data,
-        function (x) {
-          if (x.region_code === "ncr") {
-            return ncr;
-          } else if (x.region_code === "abroad") {
-            return abroad;
-          } else {
-            return non_ncr;
-          }
-        },
-        this
-      );
-      return _.map([ncr, non_ncr, abroad], function (key) {
-        var relevant_group = groups[key];
-        var sub_column = _.map(relevant_group, year);
-        var group_total = sum(sub_column);
-        if (format) {
-          return [key, fm1(group_total), fm2(group_total / dept_total)];
-        } else {
-          return [key, group_total, group_total / dept_total];
-        }
-      });
-    },
   },
 };
