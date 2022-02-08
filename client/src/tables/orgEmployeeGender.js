@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
@@ -78,21 +77,6 @@ export default {
       formula: people_five_year_percentage_formula("gender", people_years),
       is_summable: false,
     });
-  },
-
-  queries: {
-    gov_grouping: function () {
-      return _.chain(
-        this.table.sum_cols_by_grouped_data(people_years, "gender")
-      )
-        .map(function (people_years, key) {
-          return [key].concat(people_years);
-        })
-        .sortBy(function (row) {
-          return sum(_.tail(row));
-        })
-        .value();
-    },
   },
 
   mapper: function (row) {

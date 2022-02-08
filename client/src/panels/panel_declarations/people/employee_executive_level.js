@@ -26,11 +26,14 @@ const { ex_levels } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
   gov: (orgEmployeeExLvl) => {
-    const gov_five_year_total_head_count = _.chain(
-      orgEmployeeExLvl.q().gov_grouping()
-    )
-      .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
+    const gov_five_year_total_head_count = _.chain(orgEmployeeExLvl.GOC)
+      .map((row) =>
+        _.chain(row)
+          .pick(people_years)
+          .reduce((sum, value) => value + sum, 0)
+          .value()
+      )
+      .reduce((sum, value) => value + sum, 0)
       .value();
 
     // assuming gov roll up has data in every ex (and non-ex) group... safe because if it didn't then those groups would be dropped?
