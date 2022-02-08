@@ -4,7 +4,7 @@ import { businessConstants } from "src/models/businessConstants";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { people_five_year_percentage_formula } from "./table_common";
+import { people_five_year_percentage_formula } from "./people_five_year_percentage_formula";
 
 import text from "./orgEmployeeAgeGroup.yaml";
 
