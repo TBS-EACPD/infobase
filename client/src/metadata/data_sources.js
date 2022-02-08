@@ -42,13 +42,11 @@ function table_to_row_item(table) {
   return {
     key: table.id,
     text: table.name,
-    inline_link:
-      !table.no_link &&
-      rpb_link({
-        table: table.id,
-        mode: "details",
-      }),
-    external_link: table.link[lang],
+    inline_link: rpb_link({
+      table: table.id,
+      mode: "details",
+    }),
+    external_link: table.link?.[lang],
   };
 }
 
