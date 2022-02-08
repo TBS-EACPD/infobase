@@ -9,12 +9,16 @@ export class DevFip extends React.Component {
       div.style.backgroundColor = "red";
       const h1 = document.createElement("H1");
       h1.style.textAlign = "center";
+      h1.style.marginTop = "0px";
+      h1.style.marginBottom = "0px";
+      h1.style.fontWeight = "400";
+      h1.style.color = "black";
       const text = document.createTextNode("Development version");
       h1.append(text);
       div.append(h1);
-      (<HTMLObjectElement>document.getElementById("ib-site-header")).prepend(
-        div
-      );
+      (<HTMLObjectElement>(
+        document.getElementById("ib-site-header-area")
+      )).prepend(div);
     }
   }
   render() {
