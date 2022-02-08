@@ -75,7 +75,6 @@ export class CheckBox extends React.Component<CheckBoxProps> {
             opacity: disabled ? 0.4 : undefined,
             ...container_style,
           }}
-          data-cy="checkbox"
         >
           <span
             aria-hidden={true}

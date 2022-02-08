@@ -6,6 +6,5 @@ client/src/**/*.scss.d.ts
 client/scripts/typescript_progress/output
 client/**/cypress-snapshots.js
 
-*/transpiled_build/
 */.coverage/
 */.cache
