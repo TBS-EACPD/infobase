@@ -28,11 +28,14 @@ const calculate_funcs_by_subject_type = {
   gov: function () {
     const { orgEmployeeGender } = this.tables;
 
-    const gov_five_year_total_head_count = _.chain(
-      orgEmployeeGender.q().gov_grouping()
-    )
-      .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
+    const gov_five_year_total_head_count = _.chain(orgEmployeeGender.GOC)
+      .map((row) =>
+        _.chain(row)
+          .pick(people_years)
+          .reduce((sum, value) => value + sum, 0)
+          .value()
+      )
+      .reduce((sum, value) => value + sum, 0)
       .value();
 
     return _.chain(gender)

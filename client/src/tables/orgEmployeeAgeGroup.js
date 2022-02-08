@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
@@ -86,19 +85,6 @@ export default {
   mapper: function (row) {
     row.splice(1, 1, age_groups[row[1]].text);
     return row;
-  },
-
-  queries: {
-    gov_grouping: function () {
-      return _.chain(this.table.sum_cols_by_grouped_data(people_years, "age"))
-        .map(function (years, key) {
-          return [key].concat(years);
-        })
-        .sortBy(function (row) {
-          return sum(_.tail(row));
-        })
-        .value();
-    },
   },
 
   sort: function (mapped_rows) {

@@ -45,11 +45,14 @@ const calculate_funcs_by_subject_type = {
       },
     ];
 
-    const gov_five_year_total_head_count = _.chain(
-      orgEmployeeAgeGroup.q().gov_grouping()
-    )
-      .map((row) => sum(_.drop(row)))
-      .reduce((sum, val) => sum + val, 0)
+    const gov_five_year_total_head_count = _.chain(orgEmployeeAgeGroup.GOC)
+      .map((row) =>
+        _.chain(row)
+          .pick(people_years)
+          .reduce((sum, value) => value + sum, 0)
+          .value()
+      )
+      .reduce((sum, value) => value + sum, 0)
       .value();
 
     const age_group = _.map(age_groups, ({ text: age_range }) => {
