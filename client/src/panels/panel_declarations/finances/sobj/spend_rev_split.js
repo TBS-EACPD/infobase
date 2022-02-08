@@ -12,7 +12,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { highlightColor, secondaryColor } from "src/style_constants/index";
-import { rows_to_rev_split } from "src/tables/table_common";
 
 import text from "./spend_rev_split.yaml";
 
@@ -21,6 +20,29 @@ const { text_maker, TM } = create_text_maker_component(text);
 const text_keys_by_subject_type = {
   dept: "dept_spend_rev_split_text",
   program: "program_spend_rev_split_text",
+};
+
+const is_revenue = (so_num) => +so_num > 19;
+const last_year_col = "{{pa_last_year}}";
+
+const sum_last_year_exp = (rows) =>
+  _.chain(rows)
+    .map((row) => row[last_year_col])
+    .filter(_.isNumber)
+    .reduce((acc, item) => acc + item, 0)
+    .value();
+
+const rows_to_rev_split = (rows) => {
+  const [neg_exp, gross_exp] = _.chain(rows)
+    .filter((x) => x) //TODO remove this
+    .partition((row) => is_revenue(row.so_num))
+    .map(sum_last_year_exp)
+    .value();
+  const net_exp = gross_exp + neg_exp;
+  if (neg_exp === 0) {
+    return false;
+  }
+  return { neg_exp, gross_exp, net_exp };
 };
 
 function render({ title, calculations, footnotes, sources }) {
