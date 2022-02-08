@@ -1,18 +1,14 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { formats } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
 
 import text from "./orgVoteStatEstimates.yaml";
-const { estimates_years } = year_templates;
-const est_cols = _.map(estimates_years, (yr) => yr + "_estimates");
-const in_year_col = est_cols[4];
 
+const { estimates_years } = year_templates;
 const { estimates_docs } = businessConstants;
 
 const map_helper = {
@@ -149,61 +145,6 @@ export default {
 
     // remove acronym and vote type
     return row;
-  },
-
-  queries: {
-    estimates_split: function (options, format) {
-      format = format || false;
-      const col = options.col || in_year_col;
-      var filter = options.filter;
-      var add_percentage = options.add_percentage || false;
-      var filter_zeros = options.filter_zeros || false;
-      var total = this.sum(col) + 1;
-      var dept = this.dept || false;
-      return _.chain(this.table.sum_cols_by_grouped_data(col, "est_doc", dept))
-        .toPairs()
-        .sortBy(function (est_doc_lines) {
-          var first_line = est_doc_lines[1][0];
-          return estimates_docs[first_line.est_doc_code].order;
-        })
-        .map((est_doc_lines) => {
-          var est_doc = est_doc_lines[0];
-          var est_lines = est_doc_lines[1];
-          var est_amnt;
-          // filter out lines of a provided vote number (this won't work for stat items)
-          if (filter) {
-            est_lines = _.filter(est_lines, filter);
-          }
-          est_amnt = sum(_.map(est_lines, col));
-          if (add_percentage) {
-            return [est_doc, est_amnt, est_amnt / total];
-          } else {
-            return [est_doc, est_amnt];
-          }
-        })
-        .filter(function (row) {
-          if (filter_zeros) {
-            return row[1] !== 0;
-          } else {
-            return true;
-          }
-        })
-        .map(function (row) {
-          if (format) {
-            return _.chain([
-              _.identity,
-              formats["big-int"],
-              add_percentage && formats["percentage"],
-            ])
-              .compact()
-              .zip(row)
-              .map(([formatter, value]) => formatter(value))
-              .value();
-          }
-          return row;
-        })
-        .value();
-    },
   },
 
   sort: function (mapped_rows) {

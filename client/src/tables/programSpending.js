@@ -6,10 +6,6 @@ import { year_templates } from "src/models/years";
 
 import text from "./programSpending.yaml";
 
-// see [here](../table_definition.html) for description
-// of the table spec
-//const {spending_areas} = require('../../models/goco.js');
-
 const { std_years, planning_years } = year_templates;
 
 export default {
@@ -157,13 +153,5 @@ export default {
       mapped_row.activity_code
     );
     this.programs.set(program_obj, [mapped_row]); //assumption: only one row per program... This is not consistent with e.g. programSobjs.
-  },
-
-  queries: {
-    sorted_programs: function () {
-      return _.sortBy(this.data, function (x) {
-        return -x[_.last(std_years) + "exp"];
-      });
-    },
   },
 };

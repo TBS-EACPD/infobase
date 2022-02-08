@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { Program } from "src/models/subjects";
@@ -9,9 +8,6 @@ import { year_templates } from "src/models/years";
 
 import text from "./programFtes.yaml";
 
-// see [here](../table_definition.html) for description
-// of the table spec
-//
 const { std_years, planning_years } = year_templates;
 
 export default {
@@ -20,7 +16,6 @@ export default {
   legacy_id: "table12",
   subject_type: "program",
   source: ["DP", "DRR"],
-  //"tags" : ["results", "expenditures", "FTE", "planning","report","RPP"],
   tags: ["GOCO", "PA", "FTE", "PROG", "ANNUAL", "PLANNED_EXP", "DP", "DRR"],
 
   name: {
@@ -138,22 +133,5 @@ export default {
       mapped_row.activity_code
     );
     this.programs.set(program_obj, [mapped_row]); //assumption: only one row per program... This is not consistent with e.g. programSobjs.
-  },
-
-  queries: {
-    sorted_programs: function (yrs) {
-      return _.chain(this.data)
-        .map(function (d) {
-          return [d.prgm].concat(
-            _.map(yrs, function (x) {
-              return d[x];
-            })
-          );
-        })
-        .sortBy(function (x) {
-          return -sum(_.tail(x));
-        })
-        .value();
-    },
   },
 };

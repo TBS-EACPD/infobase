@@ -1,4 +1,3 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
 import { trivial_text_maker } from "src/models/text";
@@ -81,33 +80,5 @@ export default {
   mapper: function (row) {
     row.splice(1, 1, trivial_text_maker("avgage"));
     return row;
-  },
-
-  queries: {
-    gov_grouping: function () {
-      return _.chain(
-        this.table.sum_cols_by_grouped_data(people_years, "avgage")
-      )
-        .map(function (people_years, key) {
-          return [key].concat(people_years);
-        })
-        .sortBy(function (row) {
-          return sum(_.tail(row));
-        })
-        .value();
-    },
-    ZGOC_row: function () {
-      var table = this.table;
-      var data_temporary = _.map(people_years, function (year) {
-        return table.GOC[0][year];
-      });
-      return data_temporary;
-    },
-  },
-
-  details: {
-    prepare_total: function () {
-      return [];
-    },
   },
 };

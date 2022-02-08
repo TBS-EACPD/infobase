@@ -9,7 +9,7 @@ import { people_five_year_percentage_formula } from "./table_common";
 
 import text from "./orgEmployeeExLvl.yaml";
 
-const { compact_ex_level_map, ex_levels } = businessConstants;
+const { ex_levels } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
@@ -97,11 +97,6 @@ export default {
           return sum(_.tail(row));
         })
         .value();
-    },
-    summed_levels: function () {
-      return _.groupBy(this.data, function (x) {
-        return compact_ex_level_map[x.ex_lvl];
-      });
     },
   },
 };

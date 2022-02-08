@@ -606,36 +606,6 @@ const NA_values = [
   "Non-EX",
 ];
 
-const ex_level_target =
-  lang === "en"
-    ? ["Executive", "Non-Executive"]
-    : ["Cadres supérieurs", "Non-cadres supérieursn"];
-const compact_ex_level_map = {
-  "EX 01": ex_level_target[0],
-  "EX 02": ex_level_target[0],
-  "EX 03": ex_level_target[0],
-  "EX 04": ex_level_target[0],
-  "EX 05": ex_level_target[0],
-  "Non-EX": ex_level_target[1],
-};
-
-const ex_level_rev_map = _.chain(compact_ex_level_map)
-  .toPairs()
-  .groupBy(function (key_val) {
-    return key_val[1];
-  })
-  .map(function (val, key) {
-    return [key, _.map(val, 0)];
-  })
-  .fromPairs()
-  .value();
-
-const ex_level_stuff = {
-  ex_level_target,
-  compact_ex_level_map,
-  ex_level_rev_map,
-};
-
 const estimates_docs = {
   IE: {
     order: 0,
@@ -729,7 +699,6 @@ const businessConstants = {
   months,
   population_groups,
   transfer_payments,
-  ...ex_level_stuff,
   estimates_docs,
   NA_values,
 };

@@ -1,48 +1,11 @@
-import { sum } from "d3-array";
 import _ from "lodash";
 
-import { trivial_text_maker, run_template } from "src/models/text";
+import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
 import text from "./orgVoteStatPa.yaml";
 
 const { std_years } = year_templates;
-const voted_label = trivial_text_maker("voted");
-const stat_label = trivial_text_maker("stat");
-
-const vote_stat_query = function (vote_or_stat, cut_off) {
-  var total = 0;
-  var cut_off_counter = 0;
-  var dept = this.dept || true;
-
-  return _.chain(
-    this.table.sum_cols_by_grouped_data(std_years, "vote_vs_stat", dept)[
-      vote_or_stat
-    ]
-  )
-    .map(_.clone)
-    .flatten()
-    .sortBy(function (d) {
-      d.total = sum(
-        _.map(std_years, function (year) {
-          return d[year + "auth"];
-        })
-      );
-      total += d.total;
-      return -d.total;
-    })
-    .each(function (d) {
-      d.percent = d.total / total;
-    })
-    .each(function (d) {
-      if (!cut_off) {
-        return;
-      }
-      cut_off_counter += d.percent;
-      d.cut_off = cut_off_counter >= cut_off ? true : false;
-    })
-    .value();
-};
 
 export default {
   text,
@@ -149,22 +112,6 @@ export default {
         },
       ]);
     });
-  },
-
-  queries: {
-    exp_auth_by_year: function (year, format) {
-      format = format === undefined ? false : true;
-      var vals = this.sum([year + "auth", year + "exp"], { format: format });
-      return [run_template(year), vals[year + "auth"], vals[year + "exp"]];
-    },
-    voted_items: function (cut_off) {
-      this.vote_stat_query = vote_stat_query;
-      return this.vote_stat_query(voted_label, cut_off);
-    },
-    stat_items: function (cut_off) {
-      this.vote_stat_query = vote_stat_query;
-      return this.vote_stat_query(stat_label, cut_off);
-    },
   },
 
   sort: function (mapped_rows) {
