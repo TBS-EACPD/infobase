@@ -10,11 +10,34 @@ import { create_text_maker_component } from "src/components/index";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import { is_non_revenue, collapse_by_so } from "src/tables/table_common";
 
 import text from "./top_spending_areas.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
+
+const is_non_revenue = (d) => +d.so_num < 19;
+
+const collapse_by_so = function (programs, table, filter) {
+  // common calculation for organizing program/so row data by so
+  // and summing up all the programs for the last year of spending
+  // then sorting by largest to smallest
+
+  return _.chain(programs)
+    .map((prog) => table.programs.get(prog))
+    .compact()
+    .flatten()
+    .compact()
+    .groupBy("so")
+    .toPairs()
+    .map((key_value) => ({
+      label: key_value[0],
+      so_num: key_value[1][0].so_num,
+      value: sum(key_value[1], (d) => d["{{pa_last_year}}"]),
+    }))
+    .filter(filter || (() => true))
+    .sortBy((d) => -d.value)
+    .value();
+};
 
 const common_cal = (programs, programSobjs) => {
   const cut_off_index = 3;
