@@ -36,7 +36,7 @@ export class PinnedFAQ extends React.Component {
           <ButtonToolbar style={{ margin: 0 }}>
             <AccordionAuto
               title={trivial_text_maker("infographic_faq")}
-              isInitiallyExpanded={is_initially_expanded}
+              is_initially_expanded={is_initially_expanded}
               background_color={background_color}
             >
               <div

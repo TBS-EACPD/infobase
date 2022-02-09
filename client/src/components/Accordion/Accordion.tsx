@@ -16,7 +16,6 @@ export interface CommonAccordionProps {
   max_height: string;
   title: string;
   children: React.ReactNode;
-  onToggle: React.ReactEventHandler<HTMLElement>;
   background_color: string;
 }
 
@@ -28,9 +27,12 @@ export const Accordion = ({
   title,
   is_expanded,
   children,
-  onToggle,
+  on_toggle,
   background_color = secondaryColor,
-}: CommonAccordionProps & { is_expanded: boolean }) => (
+}: CommonAccordionProps & {
+  on_toggle: React.ReactEventHandler<HTMLElement>;
+  is_expanded: boolean;
+}) => (
   <div
     aria-label={title}
     className="pull-down-accordion"
@@ -39,7 +41,7 @@ export const Accordion = ({
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
       <button
         aria-label={get_accordion_label(is_expanded)}
-        onClick={onToggle}
+        onClick={on_toggle}
         style={{ flexGrow: 1, textAlign: "center", paddingRight: "2.5rem" }}
       >
         {title}
@@ -62,9 +64,9 @@ export const Accordion = ({
       className="pull-down-accordion-footer"
       role="button"
       tabIndex={0}
-      onClick={onToggle}
+      onClick={on_toggle}
       onKeyDown={(event) =>
-        _.includes(["Enter", " "], event.key) && onToggle(event)
+        _.includes(["Enter", " "], event.key) && on_toggle(event)
       }
     >
       <div className="pull-down-accordion-expander">
