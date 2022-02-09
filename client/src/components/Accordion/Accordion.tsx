@@ -59,22 +59,18 @@ export const Accordion = ({
       </div>
     </AccordionTransition>
 
-    <div
+    <button
       className="pull-down-accordion-footer"
-      role="button"
-      tabIndex={0}
+      aria-label={get_accordion_label(is_expanded)}
       onClick={on_toggle}
-      onKeyDown={(event) =>
-        _.includes(["Enter", " "], event.key) && on_toggle(event)
-      }
     >
-      <div className="pull-down-accordion-expander">
+      <div className="pull-down-accordion-expander" aria-hidden={true}>
         <IconChevron
           aria_label={get_accordion_label(is_expanded)}
           color={textLightColor}
           rotation={is_expanded ? 180 : undefined}
         />
       </div>
-    </div>
+    </button>
   </div>
 );
