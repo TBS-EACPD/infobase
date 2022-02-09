@@ -4,7 +4,8 @@ import React from "react";
 
 import { ButtonToolbar } from "react-bootstrap";
 
-import { AutoAccordion } from "src/components/Accordion/Accordions";
+import { AccordionAuto } from "src/components/Accordion";
+
 import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 
 import { PinnedContent } from "src/components/PinnedContent/PinnedContent";
@@ -33,7 +34,7 @@ export class PinnedFAQ extends React.Component {
       >
         <div className={classNames("mrgn-bttm-md")}>
           <ButtonToolbar style={{ margin: 0 }}>
-            <AutoAccordion
+            <AccordionAuto
               title={trivial_text_maker("infographic_faq")}
               isInitiallyExpanded={is_initially_expanded}
               background_color={background_color}
@@ -54,7 +55,7 @@ export class PinnedFAQ extends React.Component {
                   )}
                 />
               </div>
-            </AutoAccordion>
+            </AccordionAuto>
           </ButtonToolbar>
         </div>
       </PinnedContent>
