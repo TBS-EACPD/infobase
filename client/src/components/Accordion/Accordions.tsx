@@ -33,8 +33,6 @@ type AccordionTransitionProps = typeof AccordionTransitionDefaultProps & {
   enter?: boolean;
   exit?: boolean;
   in?: boolean;
-  className: string;
-  style: React.CSSProperties;
   children: React.ReactNode;
 };
 
@@ -75,8 +73,6 @@ class AccordionTransition extends React.Component<AccordionTransitionProps> {
       enter,
       exit,
       in: in_prop,
-      className,
-      style,
       children,
     } = this.props;
 
@@ -94,9 +90,7 @@ class AccordionTransition extends React.Component<AccordionTransitionProps> {
             onEntering={this.onEntering}
             onExiting={this.onExiting}
           >
-            <div className={className} style={style}>
-              {children}
-            </div>
+            {children}
           </Transition>
         )}
       </TransitionGroup>
@@ -137,13 +131,16 @@ const StatelessPullDownAccordion = ({
 
     <AccordionTransition
       isExpanded={isExpanded}
-      className="pull-down-accordion-body"
-      style={{ paddingTop: "5px" }}
       expandDuration={600}
       collapseDuration={600}
       max_height={max_height}
     >
-      <div style={{ maxHeight: max_height, overflowY: "auto" }}>{children}</div>
+      <div
+        className="pull-down-accordion-body"
+        style={{ paddingTop: "5px", maxHeight: max_height, overflowY: "auto" }}
+      >
+        {children}
+      </div>
     </AccordionTransition>
 
     <div
