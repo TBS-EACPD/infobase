@@ -8,7 +8,6 @@ import {
   StatelessModal,
 } from "src/components/index";
 
-import { is_IE } from "src/core/feature_detection";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -33,7 +32,6 @@ const fixed_symbol_shape = ({ x, y, size, fill, borderWidth, borderColor }) => (
   <rect
     x={x}
     y={y}
-    transform={is_IE() ? `translate(0 -4)` : ""}
     fill={fill}
     strokeWidth={borderWidth}
     stroke={borderColor}

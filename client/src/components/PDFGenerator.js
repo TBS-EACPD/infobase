@@ -2,7 +2,6 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { debounced_log_standard_event } from "src/core/analytics";
-import { is_IE } from "src/core/feature_detection";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -275,38 +274,36 @@ export class PDFGenerator extends React.Component {
     } = this.props;
 
     return (
-      !is_IE() && (
-        <Fragment>
-          {!generating_pdf && (
-            <button
-              onClick={() => {
-                debounced_log_standard_event("PANEL_PDF_DOWNLOADED", title);
-                this.setState({ generating_pdf: true });
-              }}
-              className={button_class_name}
-            >
-              <IconDownload
-                aria_label={text_maker("download_pdf")}
-                color={icon_color}
-                alternate_color={icon_alternate_color}
-                width={icon_size}
-                height={icon_size}
-              />
-            </button>
-          )}
-          {generating_pdf && (
-            <div
-              title={text_maker("downloading_pdf")}
-              alt={text_maker("downloading_pdf")}
-            >
-              <LeafSpinner
-                config_name={"relative_small"}
-                use_light_colors={true}
-              />
-            </div>
-          )}
-        </Fragment>
-      )
+      <Fragment>
+        {!generating_pdf && (
+          <button
+            onClick={() => {
+              debounced_log_standard_event("PANEL_PDF_DOWNLOADED", title);
+              this.setState({ generating_pdf: true });
+            }}
+            className={button_class_name}
+          >
+            <IconDownload
+              aria_label={text_maker("download_pdf")}
+              color={icon_color}
+              alternate_color={icon_alternate_color}
+              width={icon_size}
+              height={icon_size}
+            />
+          </button>
+        )}
+        {generating_pdf && (
+          <div
+            title={text_maker("downloading_pdf")}
+            alt={text_maker("downloading_pdf")}
+          >
+            <LeafSpinner
+              config_name={"relative_small"}
+              use_light_colors={true}
+            />
+          </div>
+        )}
+      </Fragment>
     );
   }
 }
