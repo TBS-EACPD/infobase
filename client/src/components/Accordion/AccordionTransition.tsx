@@ -8,17 +8,13 @@ import { TransitionGroup, Transition } from "react-transition-group";
 
 const AccordionTransitionDefaultProps = {
   max_height: "80vh" as string | number,
-  opening_opacity: 1e-6 as string | number,
+  expandDuration: 600,
+  collapseDuration: 600,
+  opening_opacity: 1e-6,
   closing_opacity: 1 as string | number,
 };
 type AccordionTransitionProps = typeof AccordionTransitionDefaultProps & {
   isExpanded: boolean;
-  expandDuration: number;
-  collapseDuration: number;
-  onExited?: (node: HTMLElement) => void;
-  enter?: boolean;
-  exit?: boolean;
-  in?: boolean;
   children: React.ReactNode;
 };
 
@@ -51,16 +47,8 @@ export class AccordionTransition extends React.Component<AccordionTransitionProp
       });
   };
   render() {
-    const {
-      isExpanded,
-      expandDuration,
-      collapseDuration,
-      onExited,
-      enter,
-      exit,
-      in: in_prop,
-      children,
-    } = this.props;
+    const { isExpanded, expandDuration, collapseDuration, children } =
+      this.props;
 
     return (
       <TransitionGroup>
@@ -68,10 +56,6 @@ export class AccordionTransition extends React.Component<AccordionTransitionProp
           <Transition
             {...{
               timeout: { enter: expandDuration, exit: collapseDuration },
-              onExited,
-              enter,
-              exit,
-              in: in_prop,
             }}
             onEntering={this.onEntering}
             onExiting={this.onExiting}
