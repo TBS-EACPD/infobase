@@ -20,11 +20,6 @@ const get_accordion_label = (isExpanded: boolean) =>
     false: trivial_text_maker("expand"),
   }[String(!!isExpanded)]);
 
-function FirstChild(props: { children: React.ReactElement }) {
-  const childrenArray = React.Children.toArray(props.children);
-  return childrenArray[0] || null;
-}
-
 const AccordionEnterExitDefaultProps = {
   max_height: "80vh" as string | number,
   opening_opacity: 1e-6 as string | number,
@@ -133,7 +128,7 @@ const StatelessPullDownAccordion = ({
         {title}
       </button>
     </div>
-    <TransitionGroup component={FirstChild}>
+    <TransitionGroup>
       {isExpanded ? (
         <AccordionEnterExit
           className="pull-down-accordion-body"
@@ -195,9 +190,4 @@ class AutoAccordion extends React.Component<
   }
 }
 
-export {
-  FirstChild,
-  AccordionEnterExit,
-  StatelessPullDownAccordion,
-  AutoAccordion,
-};
+export { AccordionEnterExit, StatelessPullDownAccordion, AutoAccordion };
