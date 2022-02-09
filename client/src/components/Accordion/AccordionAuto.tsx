@@ -7,7 +7,7 @@ interface AccordionAutoProps extends CommonAccordionProps {
   isInitiallyExpanded: boolean;
 }
 interface AccordionAutoState {
-  isExpanded: boolean;
+  is_expanded: boolean;
 }
 
 export class AccordionAuto extends React.Component<
@@ -17,15 +17,15 @@ export class AccordionAuto extends React.Component<
   constructor(props: AccordionAutoProps) {
     super(props);
     this.state = {
-      isExpanded: props.isInitiallyExpanded,
+      is_expanded: props.isInitiallyExpanded,
     };
   }
   render() {
-    const { isExpanded } = this.state;
+    const { is_expanded } = this.state;
     return React.createElement(Accordion, {
       ...this.props,
-      isExpanded,
-      onToggle: () => this.setState({ isExpanded: !isExpanded }),
+      is_expanded,
+      onToggle: () => this.setState({ is_expanded: !is_expanded }),
     });
   }
 }

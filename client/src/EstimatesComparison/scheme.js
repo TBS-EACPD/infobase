@@ -413,7 +413,7 @@ function get_data_by_item_types() {
             comparison_value
           ),
         },
-        isExpanded: true,
+        is_expanded: true,
       };
     })
     .value();

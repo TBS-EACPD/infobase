@@ -94,7 +94,7 @@ export function create_full_results_hierarchy({ subject_guid, doc }) {
             const node_id = `${parent_id}-${org.guid}`;
             return {
               id: node_id,
-              isExpanded: false,
+              is_expanded: false,
               data: {
                 name: org.name,
                 subject: org,
@@ -120,7 +120,7 @@ export function create_full_results_hierarchy({ subject_guid, doc }) {
           .filter("is_cr")
           .map((crso) => ({
             id: crso.guid,
-            isExpanded: false,
+            is_expanded: false,
             data: {
               subject: crso,
               type: "cr",

@@ -138,8 +138,8 @@ const get_col_defs = createSelector(
     return [
       {
         id: "name",
-        get_val: ({ data: { name }, isExpanded }) =>
-          !isExpanded && name.length > 115
+        get_val: ({ data: { name }, is_expanded }) =>
+          !is_expanded && name.length > 115
             ? name.substring(0, 115) + "..."
             : name,
         width: 250,

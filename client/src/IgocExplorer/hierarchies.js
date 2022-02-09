@@ -30,13 +30,13 @@ const parent_inst_form_sort_order = [
   "corp_int",
 ];
 
-const pop_group_node = ({ pop_group_key, children, isExpanded }) => ({
+const pop_group_node = ({ pop_group_key, children, is_expanded }) => ({
   id: pop_group_key,
   data: {
     name: population_groups[pop_group_key].text,
   },
   children,
-  isExpanded,
+  is_expanded,
 });
 
 const grouping_options = {
@@ -96,7 +96,7 @@ const grouping_options = {
             const { children } = parent_form_node.children[0];
             parent_form_node.children = children;
           } else {
-            parent_form_node.isExpanded = true;
+            parent_form_node.is_expanded = true;
           }
         })
         .sortBy((parent_form_node) =>
@@ -149,7 +149,7 @@ const grouping_options = {
       const cpa_node = pop_group_node({
         pop_group_key: "cpa",
         children: [cpa_min_dept_node, cpa_other_portion_node],
-        isExpanded: true,
+        is_expanded: true,
       });
 
       const separate_agencies_node = pop_group_node({
@@ -163,7 +163,7 @@ const grouping_options = {
       const fps_node = pop_group_node({
         pop_group_key: "fps",
         children: [cpa_node, separate_agencies_node],
-        isExpanded: true,
+        is_expanded: true,
       });
 
       const na_node = pop_group_node({

@@ -20,20 +20,17 @@ export interface CommonAccordionProps {
   background_color: string;
 }
 
-const get_accordion_label = (isExpanded: boolean) =>
-  ({
-    true: trivial_text_maker("collapse"),
-    false: trivial_text_maker("expand"),
-  }[String(!!isExpanded)]);
+const get_accordion_label = (is_expanded: boolean) =>
+  trivial_text_maker(is_expanded ? "collapse" : "expand");
 
 export const Accordion = ({
   max_height = "80vh",
   title,
-  isExpanded,
+  is_expanded,
   children,
   onToggle,
   background_color = secondaryColor,
-}: CommonAccordionProps & { isExpanded: boolean }) => (
+}: CommonAccordionProps & { is_expanded: boolean }) => (
   <div
     aria-label={title}
     className="pull-down-accordion"
@@ -41,7 +38,7 @@ export const Accordion = ({
   >
     <div className="pull-down-accordion-header" style={{ display: "flex" }}>
       <button
-        aria-label={get_accordion_label(isExpanded)}
+        aria-label={get_accordion_label(is_expanded)}
         onClick={onToggle}
         style={{ flexGrow: 1, textAlign: "center", paddingRight: "2.5rem" }}
       >
@@ -49,7 +46,10 @@ export const Accordion = ({
       </button>
     </div>
 
-    <AccordionTransition isExpanded={isExpanded} max_height={max_height}>
+    <AccordionTransition
+      is_expanded={is_expanded}
+      transition_height={max_height}
+    >
       <div
         className="pull-down-accordion-body"
         style={{ paddingTop: "5px", maxHeight: max_height, overflowY: "auto" }}
@@ -69,9 +69,9 @@ export const Accordion = ({
     >
       <div className="pull-down-accordion-expander">
         <IconChevron
-          aria_label={get_accordion_label(isExpanded)}
+          aria_label={get_accordion_label(is_expanded)}
           color={textLightColor}
-          rotation={isExpanded ? 180 : undefined}
+          rotation={is_expanded ? 180 : undefined}
         />
       </div>
     </div>
