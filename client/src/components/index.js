@@ -1,5 +1,4 @@
 export {
-  FirstChild,
   AccordionEnterExit,
   StatelessPullDownAccordion,
   AutoAccordion,

@@ -5,11 +5,7 @@ import FlipMove from "react-flip-move";
 import { TransitionGroup } from "react-transition-group";
 import { createSelector } from "reselect";
 
-import {
-  FirstChild,
-  AccordionEnterExit,
-  SortDirections,
-} from "src/components/index";
+import { AccordionEnterExit, SortDirections } from "src/components/index";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -189,7 +185,7 @@ export const ExplorerNode = ({
             ))}
           </div>
         </div>
-        <TransitionGroup component={FirstChild}>
+        <TransitionGroup>
           {isExpanded && (
             <AccordionEnterExit
               expandDuration={300}
@@ -207,7 +203,7 @@ export const ExplorerNode = ({
         </TransitionGroup>
       </div>
     </div>
-    <TransitionGroup component={FirstChild}>
+    <TransitionGroup>
       {isExpanded && (
         <AccordionEnterExit
           expandDuration={300}
