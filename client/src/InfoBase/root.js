@@ -1,10 +1,6 @@
 // Important reminder: this file produces the app entry point JS, and it will never be cached by users
 // It should be the absolute minimum to start a spinner and then load the further polyfills and app code afterwards
 
-// minimal polyfils to support further dynamic imports (converted to promises by webpack), all other polyfilling done post-spinner
-import "core-js/modules/web.dom-collections.iterator";
-import "core-js/modules/es.promise";
-
 import "src/components/LeafSpinner/LeafSpinner.scss";
 import { leaf_spinner } from "src/components/LeafSpinner/leaf_spinner";
 
