@@ -12,27 +12,26 @@ import { AccordionTransition } from "./AccordionTransition";
 
 import "./Accordion.scss";
 
-export interface CommonAccordionProps {
-  max_height: string;
-  title: string;
-  children: React.ReactNode;
-  background_color: string;
-}
-
 const get_accordion_label = (is_expanded: boolean) =>
   trivial_text_maker(is_expanded ? "collapse" : "expand");
 
+interface AccordionProps {
+  title: string;
+  children: React.ReactNode;
+  on_toggle: React.ReactEventHandler<HTMLElement>;
+  is_expanded: boolean;
+  max_height?: string;
+  background_color?: string;
+}
+
 export const Accordion = ({
-  max_height = "80vh",
   title,
   is_expanded,
   children,
   on_toggle,
+  max_height = "80vh",
   background_color = secondaryColor,
-}: CommonAccordionProps & {
-  on_toggle: React.ReactEventHandler<HTMLElement>;
-  is_expanded: boolean;
-}) => (
+}: AccordionProps) => (
   <div
     aria-label={title}
     className="pull-down-accordion"

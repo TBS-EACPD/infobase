@@ -1,11 +1,15 @@
 import React from "react";
 
-import type { CommonAccordionProps } from "./Accordion";
+import type { ComponentProps, SafeOmit } from "src/types/util_types";
+
 import { Accordion } from "./Accordion";
 
-interface AccordionAutoProps extends CommonAccordionProps {
-  is_initially_expanded: boolean;
-}
+type AccordionAutoProps = {
+  is_initially_expanded?: boolean;
+} & SafeOmit<
+  SafeOmit<ComponentProps<typeof Accordion>, "is_expanded">,
+  "on_toggle"
+>;
 interface AccordionAutoState {
   is_expanded: boolean;
 }
@@ -17,7 +21,7 @@ export class AccordionAuto extends React.Component<
   constructor(props: AccordionAutoProps) {
     super(props);
     this.state = {
-      is_expanded: props.is_initially_expanded,
+      is_expanded: props.is_initially_expanded || false,
     };
   }
   render() {
