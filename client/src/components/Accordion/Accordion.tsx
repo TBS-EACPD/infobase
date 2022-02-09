@@ -49,12 +49,7 @@ export const Accordion = ({
       </button>
     </div>
 
-    <AccordionTransition
-      isExpanded={isExpanded}
-      expandDuration={600}
-      collapseDuration={600}
-      max_height={max_height}
-    >
+    <AccordionTransition isExpanded={isExpanded} max_height={max_height}>
       <div
         className="pull-down-accordion-body"
         style={{ paddingTop: "5px", maxHeight: max_height, overflowY: "auto" }}
