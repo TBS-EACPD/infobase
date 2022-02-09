@@ -3,8 +3,7 @@
   "description": "",
   "license": "MIT",
   "browserslist": [
-    "defaults",
-    "not IE 11"
+    "> 0.5"
   ],
   "sideEffects": false,
   "scripts": {
