@@ -17,7 +17,7 @@ describe("AccordionTransition", () => {
       </AccordionTransition>
     );
 
-    expect(screen.queryByText(child_text)).toBeFalsy();
+    expect(screen.queryByText(child_text)).toBeNull();
   });
   it("Renders children if is_expanded={true}", () => {
     const child_text = "test child";
@@ -28,7 +28,7 @@ describe("AccordionTransition", () => {
       </AccordionTransition>
     );
 
-    expect(screen.queryByText(child_text)).toBeVisible();
+    expect(screen.getByText(child_text)).toBeVisible();
   });
   it("renders/removes children after is_expanded updates", async () => {
     const child_text = "test child";
@@ -39,7 +39,7 @@ describe("AccordionTransition", () => {
       </AccordionTransition>
     );
 
-    expect(screen.queryByText(child_text)).toBeFalsy();
+    expect(screen.queryByText(child_text)).toBeNull();
 
     rerender(
       <AccordionTransition is_expanded={true}>
@@ -47,7 +47,7 @@ describe("AccordionTransition", () => {
       </AccordionTransition>
     );
 
-    expect(screen.queryByText(child_text)).toBeVisible();
+    expect(screen.getByText(child_text)).toBeVisible();
 
     rerender(
       <AccordionTransition is_expanded={false}>
