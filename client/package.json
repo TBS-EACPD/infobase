@@ -2,6 +2,10 @@
   "name": "infobase-client",
   "description": "",
   "license": "MIT",
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
   "sideEffects": false,
   "scripts": {
     "postinstall": "scripts/postinstall.sh && ../scripts/dev_scripts/clear_eslint_caches.sh",

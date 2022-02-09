@@ -255,7 +255,6 @@ function create_config(options) {
   return {
     name: lang,
     mode: is_prod_build ? "production" : "development",
-    target: ["web", "es5"],
     context,
     entry,
     output,
