@@ -2,10 +2,9 @@ import classNames from "classnames";
 import _ from "lodash";
 import React from "react";
 import FlipMove from "react-flip-move";
-import { TransitionGroup } from "react-transition-group";
 import { createSelector } from "reselect";
 
-import { AccordionEnterExit, SortDirections } from "src/components/index";
+import { AccordionTransition, SortDirections } from "src/components/index";
 
 import { trivial_text_maker } from "src/models/text";
 
@@ -185,41 +184,36 @@ export const ExplorerNode = ({
             ))}
           </div>
         </div>
-        <TransitionGroup>
-          {isExpanded && (
-            <AccordionEnterExit
-              expandDuration={300}
-              collapseDuration={100}
-              style={{ overflowY: "hidden" }}
-            >
-              <div style={{ overflowY: "auto" }}>
-                <div className="ExplorerNode__SuppContent">
-                  {_.isFunction(get_non_col_content) &&
-                    get_non_col_content({ node })}
-                </div>
-              </div>
-            </AccordionEnterExit>
-          )}
-        </TransitionGroup>
-      </div>
-    </div>
-    <TransitionGroup>
-      {isExpanded && (
-        <AccordionEnterExit
+        <AccordionTransition
+          isExpanded={isExpanded}
           expandDuration={300}
           collapseDuration={100}
           style={{ overflowY: "hidden" }}
         >
           <div style={{ overflowY: "auto" }}>
-            {get_children_content({
-              node,
-              depth: depth + 1,
-              explorer_context,
-            })}
+            <div className="ExplorerNode__SuppContent">
+              {_.isFunction(get_non_col_content) &&
+                get_non_col_content({ node })}
+            </div>
           </div>
-        </AccordionEnterExit>
-      )}
-    </TransitionGroup>
+        </AccordionTransition>
+      </div>
+    </div>
+
+    <AccordionTransition
+      isExpanded={isExpanded}
+      expandDuration={300}
+      collapseDuration={100}
+      style={{ overflowY: "hidden" }}
+    >
+      <div style={{ overflowY: "auto" }}>
+        {get_children_content({
+          node,
+          depth: depth + 1,
+          explorer_context,
+        })}
+      </div>
+    </AccordionTransition>
   </div>
 );
 

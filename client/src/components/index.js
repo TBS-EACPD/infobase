@@ -1,5 +1,5 @@
 export {
-  AccordionEnterExit,
+  AccordionTransition,
   StatelessPullDownAccordion,
   AutoAccordion,
 } from "./Accordion/Accordions";

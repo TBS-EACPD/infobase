@@ -20,12 +20,13 @@ const get_accordion_label = (isExpanded: boolean) =>
     false: trivial_text_maker("expand"),
   }[String(!!isExpanded)]);
 
-const AccordionEnterExitDefaultProps = {
+const AccordionTransitionDefaultProps = {
   max_height: "80vh" as string | number,
   opening_opacity: 1e-6 as string | number,
   closing_opacity: 1 as string | number,
 };
-type AccordionEnterExitProps = typeof AccordionEnterExitDefaultProps & {
+type AccordionTransitionProps = typeof AccordionTransitionDefaultProps & {
+  isExpanded: boolean;
   expandDuration: number;
   collapseDuration: number;
   onExited?: (node: HTMLElement) => void;
@@ -37,8 +38,8 @@ type AccordionEnterExitProps = typeof AccordionEnterExitDefaultProps & {
   children: React.ReactNode;
 };
 
-class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
-  static defaultProps = AccordionEnterExitDefaultProps;
+class AccordionTransition extends React.Component<AccordionTransitionProps> {
+  static defaultProps = AccordionTransitionDefaultProps;
   onExiting = (component: HTMLElement) => {
     const node = ReactDOM.findDOMNode(component) as HTMLElement;
     const initialHeight = node.offsetHeight;
@@ -67,6 +68,7 @@ class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
   };
   render() {
     const {
+      isExpanded,
       expandDuration,
       collapseDuration,
       onExited,
@@ -79,21 +81,25 @@ class AccordionEnterExit extends React.Component<AccordionEnterExitProps> {
     } = this.props;
 
     return (
-      <Transition
-        {...{
-          timeout: { enter: expandDuration, exit: collapseDuration },
-          onExited,
-          enter,
-          exit,
-          in: in_prop,
-        }}
-        onEntering={this.onEntering}
-        onExiting={this.onExiting}
-      >
-        <div className={className} style={style}>
-          {children}
-        </div>
-      </Transition>
+      <TransitionGroup>
+        {isExpanded && (
+          <Transition
+            {...{
+              timeout: { enter: expandDuration, exit: collapseDuration },
+              onExited,
+              enter,
+              exit,
+              in: in_prop,
+            }}
+            onEntering={this.onEntering}
+            onExiting={this.onExiting}
+          >
+            <div className={className} style={style}>
+              {children}
+            </div>
+          </Transition>
+        )}
+      </TransitionGroup>
     );
   }
 }
@@ -128,21 +134,18 @@ const StatelessPullDownAccordion = ({
         {title}
       </button>
     </div>
-    <TransitionGroup>
-      {isExpanded ? (
-        <AccordionEnterExit
-          className="pull-down-accordion-body"
-          style={{ paddingTop: "5px" }}
-          expandDuration={600}
-          collapseDuration={600}
-          max_height={max_height}
-        >
-          <div style={{ maxHeight: max_height, overflowY: "auto" }}>
-            {children}
-          </div>
-        </AccordionEnterExit>
-      ) : undefined}
-    </TransitionGroup>
+
+    <AccordionTransition
+      isExpanded={isExpanded}
+      className="pull-down-accordion-body"
+      style={{ paddingTop: "5px" }}
+      expandDuration={600}
+      collapseDuration={600}
+      max_height={max_height}
+    >
+      <div style={{ maxHeight: max_height, overflowY: "auto" }}>{children}</div>
+    </AccordionTransition>
+
     <div
       className="pull-down-accordion-footer"
       role="button"
@@ -190,4 +193,4 @@ class AutoAccordion extends React.Component<
   }
 }
 
-export { AccordionEnterExit, StatelessPullDownAccordion, AutoAccordion };
+export { AccordionTransition, StatelessPullDownAccordion, AutoAccordion };
