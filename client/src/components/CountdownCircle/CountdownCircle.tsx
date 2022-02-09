@@ -3,8 +3,6 @@ import React, { Fragment } from "react";
 
 import { Countdown } from "src/components/Countdown/Countdown";
 
-import { is_IE } from "src/core/feature_detection";
-
 import { buttonPrimaryColor } from "src/style_constants/index";
 
 import "./CountdownCircle.scss";
@@ -61,7 +59,6 @@ export class CountdownCircle extends React.Component<
 
     const time_in_seconds = time / 1000;
 
-    const [stroke_value, stroke_unit] = split_value_and_units(stroke_width);
     const [size_value, size_unit] = split_value_and_units(size);
     const circle_position = `${+size_value / 2}${size_unit}`;
     const circle_radius_value = +size_value / 2.33;
@@ -94,18 +91,13 @@ export class CountdownCircle extends React.Component<
             strokeDasharray: circle_circumference,
             stroke: color,
             strokeWidth: stroke_width,
-            animation: `${
-              !is_IE()
-                ? countdown_circle_instance_id
-                : "countdown-circle-animation-ie-fallback"
-            } ${time}ms linear 1 forwards`,
+            animation: `${countdown_circle_instance_id} ${time}ms linear 1 forwards`,
           }}
         >
-          {!is_IE() && (
-            <Fragment>
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `
+          <Fragment>
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
                   @keyframes ${countdown_circle_instance_id} {
                     from {
                       stroke-dashoffset: 0px;
@@ -115,23 +107,14 @@ export class CountdownCircle extends React.Component<
                     }
                   }
                 `,
-                }}
-              />
-              <circle
-                r={circle_radius}
-                cx={circle_position}
-                cy={circle_position}
-              />
-            </Fragment>
-          )}
-          {is_IE() && (
-            <circle
-              r={stroke_width}
-              cx={circle_position}
-              cy={`${2 * +stroke_value}${stroke_unit}`}
-              fill={color}
+              }}
             />
-          )}
+            <circle
+              r={circle_radius}
+              cx={circle_position}
+              cy={circle_position}
+            />
+          </Fragment>
         </svg>
       </div>
     );
