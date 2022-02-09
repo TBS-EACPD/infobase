@@ -188,12 +188,13 @@ export const ExplorerNode = ({
           isExpanded={isExpanded}
           expandDuration={300}
           collapseDuration={100}
-          style={{ overflowY: "hidden" }}
         >
-          <div style={{ overflowY: "auto" }}>
-            <div className="ExplorerNode__SuppContent">
-              {_.isFunction(get_non_col_content) &&
-                get_non_col_content({ node })}
+          <div style={{ overflowY: "hidden" }}>
+            <div style={{ overflowY: "auto" }}>
+              <div className="ExplorerNode__SuppContent">
+                {_.isFunction(get_non_col_content) &&
+                  get_non_col_content({ node })}
+              </div>
             </div>
           </div>
         </AccordionTransition>
@@ -204,14 +205,15 @@ export const ExplorerNode = ({
       isExpanded={isExpanded}
       expandDuration={300}
       collapseDuration={100}
-      style={{ overflowY: "hidden" }}
     >
-      <div style={{ overflowY: "auto" }}>
-        {get_children_content({
-          node,
-          depth: depth + 1,
-          explorer_context,
-        })}
+      <div style={{ overflowY: "hidden" }}>
+        <div style={{ overflowY: "auto" }}>
+          {get_children_content({
+            node,
+            depth: depth + 1,
+            explorer_context,
+          })}
+        </div>
       </div>
     </AccordionTransition>
   </div>
