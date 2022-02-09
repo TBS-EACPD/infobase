@@ -121,7 +121,7 @@ export const ExplorerNode = ({
   node,
   mod_class,
   node: {
-    isExpanded,
+    is_expanded,
     data: { noExpand },
   },
   depth,
@@ -142,10 +142,10 @@ export const ExplorerNode = ({
             className="ExplorerNode__Expander"
             onClick={() => onClickExpand(node)}
             aria-label={trivial_text_maker(
-              isExpanded ? "select_to_collapse_a11y" : "select_to_expand_a11y"
+              is_expanded ? "select_to_collapse_a11y" : "select_to_expand_a11y"
             )}
           >
-            {isExpanded ? "▼" : "►"}
+            {is_expanded ? "▼" : "►"}
           </button>
         )}
       </div>
@@ -185,9 +185,9 @@ export const ExplorerNode = ({
           </div>
         </div>
         <AccordionTransition
-          isExpanded={isExpanded}
-          expandDuration={300}
-          collapseDuration={100}
+          is_expanded={is_expanded}
+          expand_duration={300}
+          collapse_duration={100}
         >
           <div style={{ overflowY: "hidden" }}>
             <div style={{ overflowY: "auto" }}>
@@ -202,9 +202,9 @@ export const ExplorerNode = ({
     </div>
 
     <AccordionTransition
-      isExpanded={isExpanded}
-      expandDuration={300}
-      collapseDuration={100}
+      is_expanded={is_expanded}
+      expand_duration={300}
+      collapse_duration={100}
     >
       <div style={{ overflowY: "hidden" }}>
         <div style={{ overflowY: "auto" }}>

@@ -25,8 +25,10 @@ const initial_root_state = {
 };
 
 function ids_to_update(root_node, should_expand) {
-  const get_ids_to_update = ({ isExpanded, id, children }) => [
-    (should_expand && !isExpanded) || (!should_expand && isExpanded) ? id : [],
+  const get_ids_to_update = ({ is_expanded, id, children }) => [
+    (should_expand && !is_expanded) || (!should_expand && is_expanded)
+      ? id
+      : [],
     _.map(children, get_ids_to_update),
   ];
   return _.flattenDeep(get_ids_to_update(root_node));
@@ -39,7 +41,7 @@ function root_reducer(state = initial_root_state, action) {
     case "toggle_node": {
       const { node } = payload;
 
-      const shouldExpand = !node.isExpanded;
+      const shouldExpand = !node.is_expanded;
       const { id } = node;
 
       const { userExpanded: oldExpanded, userCollapsed: oldCollapsed } = state;

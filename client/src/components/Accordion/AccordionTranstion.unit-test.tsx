@@ -7,34 +7,34 @@ import React from "react";
 
 import { AccordionTransition } from "./AccordionTransition";
 
-describe("AlertBanner", () => {
-  it("Does not render children if isExpanded={false}", () => {
+describe("AccordionTransition", () => {
+  it("Does not render children if is_expanded={false}", () => {
     const child_text = "test child";
 
     render(
-      <AccordionTransition isExpanded={false}>
+      <AccordionTransition is_expanded={false}>
         <div>{child_text}</div>
       </AccordionTransition>
     );
 
     expect(screen.queryByText(child_text)).toBeFalsy();
   });
-  it("Renders children if isExpanded={true}", () => {
+  it("Renders children if is_expanded={true}", () => {
     const child_text = "test child";
 
     render(
-      <AccordionTransition isExpanded={true}>
+      <AccordionTransition is_expanded={true}>
         <div>{child_text}</div>
       </AccordionTransition>
     );
 
     expect(screen.queryByText(child_text)).toBeVisible();
   });
-  it("renders/removes children after isExpanded updates", async () => {
+  it("renders/removes children after is_expanded updates", async () => {
     const child_text = "test child";
 
     const { rerender } = render(
-      <AccordionTransition isExpanded={false}>
+      <AccordionTransition is_expanded={false}>
         <div>{child_text}</div>
       </AccordionTransition>
     );
@@ -42,7 +42,7 @@ describe("AlertBanner", () => {
     expect(screen.queryByText(child_text)).toBeFalsy();
 
     rerender(
-      <AccordionTransition isExpanded={true}>
+      <AccordionTransition is_expanded={true}>
         <div>{child_text}</div>
       </AccordionTransition>
     );
@@ -50,7 +50,7 @@ describe("AlertBanner", () => {
     expect(screen.queryByText(child_text)).toBeVisible();
 
     rerender(
-      <AccordionTransition isExpanded={false}>
+      <AccordionTransition is_expanded={false}>
         <div>{child_text}</div>
       </AccordionTransition>
     );
