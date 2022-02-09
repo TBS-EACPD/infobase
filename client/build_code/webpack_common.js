@@ -12,7 +12,6 @@ const { RetryChunkLoadPlugin } = require("webpack-retry-chunk-load-plugin");
 
 const get_rules = ({
   lang,
-  is_prod_build,
   is_actual_prod_release,
   instrument_with_istanbul,
 }) => {
@@ -45,17 +44,6 @@ const get_rules = ({
       exclude: /node_modules/,
       use: babel_loader_options,
       sideEffects: true,
-    },
-    {
-      // ensure dependencies are transpiled for IE11 support when needed (much slower build, so only bother in prod builds)
-      test: (path) => is_prod_build && /node_modules\/.*\.js$/.test(path),
-      // transpilling core-js breaks some of its feature detection, exclude it
-      exclude: /node_modules\/core-js\/.*/,
-      use: {
-        ...babel_loader_options,
-        options: { ...babel_loader_options.options, plugins: [] },
-      },
-      // up to dependencies to declare sideEffects true/false in their package.json
     },
     {
       test: /\.scss$/,
