@@ -35,12 +35,8 @@ export const Accordion = ({
     className="pull-down-accordion"
     style={{ backgroundColor: background_color, borderColor: background_color }}
   >
-    <div className="pull-down-accordion-header" style={{ display: "flex" }}>
-      <button
-        aria-label={get_accordion_label(is_expanded)}
-        onClick={on_toggle}
-        style={{ flexGrow: 1, textAlign: "center", paddingRight: "2.5rem" }}
-      >
+    <div className="pull-down-accordion-header">
+      <button aria-label={get_accordion_label(is_expanded)} onClick={on_toggle}>
         {title}
       </button>
     </div>
@@ -57,18 +53,15 @@ export const Accordion = ({
       </div>
     </AccordionTransition>
 
-    <button
-      className="pull-down-accordion-footer"
-      aria-label={get_accordion_label(is_expanded)}
-      onClick={on_toggle}
-    >
-      <div className="pull-down-accordion-expander" aria-hidden={true}>
-        <IconChevron
-          aria_label={get_accordion_label(is_expanded)}
-          color={textLightColor}
-          rotation={is_expanded ? 180 : undefined}
-        />
-      </div>
-    </button>
+    <div className="pull-down-accordion-footer">
+      <button aria-label={get_accordion_label(is_expanded)} onClick={on_toggle}>
+        <div className="pull-down-accordion-expander" aria-hidden={true}>
+          <IconChevron
+            color={textLightColor}
+            rotation={is_expanded ? 180 : undefined}
+          />
+        </div>
+      </button>
+    </div>
   </div>
 );
