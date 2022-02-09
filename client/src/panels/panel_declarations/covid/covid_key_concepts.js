@@ -67,7 +67,7 @@ export const scroll_to_covid_key_concepts = () => {
   if (!_.isNull(covid_key_concept_panel)) {
     scroll_into_view_and_focus(covid_key_concept_panel);
 
-    // Ok, this is where it gets more brittle/hacky. Leaking up a bunch of knowledge about SomeThingsToKeepInMind/AutoAccordion
+    // Ok, this is where it gets more brittle/hacky. Leaking up a bunch of knowledge about SomeThingsToKeepInMind/AccordionAuto
     // implementation. Should fail softly if those change, and as long as they don't it's a solid UX improvement
     const accordion_header_button = covid_key_concept_panel.querySelector(
       ".pull-down-accordion-header > button"

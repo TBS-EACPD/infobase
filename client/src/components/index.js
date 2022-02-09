@@ -1,8 +1,4 @@
-export {
-  AccordionTransition,
-  StatelessPullDownAccordion,
-  AutoAccordion,
-} from "./Accordion/Accordions";
+export { AccordionTransition, Accordion, AccordionAuto } from "./Accordion";
 export { TagCloud } from "./TagCloud";
 export { HeightClipper } from "./HeightClipper/HeightClipper";
 export { RadioButtons } from "./RadioButtons/RadioButtons";
