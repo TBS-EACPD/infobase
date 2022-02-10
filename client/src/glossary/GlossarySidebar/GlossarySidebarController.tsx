@@ -2,49 +2,72 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 
+import type { RouteComponentProps } from "react-router-dom";
+
 import { SidebarButton, Sidebar } from "src/components";
 
 import { GlossarySidebar } from "./GlossarySidebar";
 
 const routes_without_glossary = ["/start", "/glossary"];
 
-const GlossaryMenuController = withRouter(
-  class GlossaryMenuController extends React.Component {
-    constructor(props) {
+interface GlossarySidebarControllerState {
+  is_open: boolean;
+  glossary_item_key: string;
+  show_definition: boolean;
+}
+
+const GlossarySidebarController = withRouter(
+  class GlossarySidebarController extends React.Component<
+    RouteComponentProps,
+    GlossarySidebarControllerState
+  > {
+    menu_ref = React.createRef<HTMLDivElement>();
+
+    constructor(props: RouteComponentProps) {
       super(props);
       this.state = {
         is_open: false,
-        glossary_item_key: null,
+        glossary_item_key: "",
         show_definition: true,
       };
-
-      this.menu_ref = React.createRef();
     }
-    itemClick = (e) => {
+    itemClick = (e: HTMLElement) => {
       const target = e;
       const glossary_item_key = target.dataset.ibttGlossaryKey;
 
-      this.setGlossaryItem(glossary_item_key);
+      if (glossary_item_key) {
+        this.setGlossaryItem(glossary_item_key);
+      }
+
       this.toggleDefinition(false);
 
       this.toggleGlossary(true);
-      document.querySelector(`glossary-sb__item-title`).focus();
+
+      (
+        document.querySelector(`glossary-sb__item-title`) as HTMLDivElement
+      )?.focus();
     };
 
-    closeSidebar = (e) => {
+    closeSidebar = (e: Event) => {
       const menu_node = this.menu_ref.current;
-      if (this.state.is_open && menu_node && !menu_node.contains(e.target)) {
+      if (
+        this.state.is_open &&
+        menu_node &&
+        !menu_node.contains(e.target as HTMLElement)
+      ) {
         this.setState({ is_open: false });
       }
     };
 
-    handleWindowClick = (e) => {
-      const target = e.target.closest("[data-toggle=glossary_sidebar]");
-      target ? this.itemClick(target) : this.closeSidebar(e);
+    handleWindowClick = (e: Event) => {
+      const target = (e.target as HTMLElement).closest(
+        "[data-toggle=glossary_sidebar]"
+      );
+      target ? this.itemClick(target as HTMLElement) : this.closeSidebar(e);
     };
 
-    handleWindowKeyDown = (e) => {
-      if (e.code === "Enter") {
+    handleWindowKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
         this.handleWindowClick(e);
       }
     };
@@ -67,20 +90,20 @@ const GlossaryMenuController = withRouter(
       });
     }
 
-    toggleGlossary(value) {
+    toggleGlossary(value: boolean) {
       this.setState({
         is_open: value,
       });
     }
 
-    setGlossaryItem(key) {
+    setGlossaryItem(key: string) {
       this.setState({
         glossary_item_key: key,
         show_definition: false,
       });
     }
 
-    toggleDefinition(value) {
+    toggleDefinition(value: boolean) {
       this.setState({
         show_definition: value,
       });
@@ -98,7 +121,7 @@ const GlossaryMenuController = withRouter(
             close_callback={() => this.toggleGlossary(false)}
             children={
               <GlossarySidebar
-                item={this.state.glossary_item_key}
+                glossary_item_key={this.state.glossary_item_key}
                 open_definition={(key) => this.setGlossaryItem(key)}
                 show_definition={this.state.show_definition}
                 toggle_definition={(value) => this.toggleDefinition(value)}
@@ -109,7 +132,11 @@ const GlossaryMenuController = withRouter(
             open_sidebar={() => this.toggleGlossary(true)}
             left={false}
             focus={() =>
-              document.querySelector(`.glossary-sb__search-bar > input`).focus()
+              (
+                document.querySelector(
+                  `.glossary-sb__search-bar > input`
+                ) as HTMLElement
+              )?.focus()
             }
           />
         </div>
@@ -118,4 +145,4 @@ const GlossaryMenuController = withRouter(
   }
 );
 
-export { GlossaryMenuController };
+export { GlossarySidebarController };

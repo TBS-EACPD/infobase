@@ -2,7 +2,7 @@
 import _ from "lodash";
 import React from "react";
 
-import "./GlossaryMenu.scss";
+import "./GlossarySidebar.scss";
 
 import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
