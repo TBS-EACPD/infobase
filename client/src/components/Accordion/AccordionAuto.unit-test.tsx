@@ -51,7 +51,7 @@ describe("AccordionAuto", () => {
 
     expect(screen.queryByText(child_text)).toBeNull();
   });
-  it("Has something like a button the toggles the expansion/rendering og the children", async () => {
+  it("Has something like a button the toggles the expansion/rendering of the children", async () => {
     const child_text = "test child";
 
     render(
