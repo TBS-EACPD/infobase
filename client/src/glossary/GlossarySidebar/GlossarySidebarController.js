@@ -2,8 +2,6 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 
-import { glossaryEntryStore } from "src/models/glossary";
-
 import { SidebarButton, Sidebar } from "src/components";
 
 import { GlossarySidebar } from "./GlossarySidebar";
@@ -16,7 +14,7 @@ const GlossaryMenuController = withRouter(
       super(props);
       this.state = {
         is_open: false,
-        glossaryItem: null,
+        glossary_item_key: null,
         show_definition: true,
       };
 
@@ -25,13 +23,12 @@ const GlossaryMenuController = withRouter(
     itemClick = (e) => {
       const target = e;
       const glossary_item_key = target.dataset.ibttGlossaryKey;
-      const glossary_item = glossaryEntryStore.lookup(glossary_item_key);
 
-      this.setGlossaryItem(glossary_item.id);
+      this.setGlossaryItem(glossary_item_key);
       this.toggleDefinition(false);
 
       this.toggleGlossary(true);
-      document.querySelector(`.glossary-sb__search-bar > input`).focus();
+      document.querySelector(`glossary-sb__item-title`).focus();
     };
 
     closeSidebar = (e) => {
@@ -78,7 +75,7 @@ const GlossaryMenuController = withRouter(
 
     setGlossaryItem(key) {
       this.setState({
-        glossaryItem: glossaryEntryStore.lookup(key),
+        glossary_item_key: key,
         show_definition: false,
       });
     }
@@ -101,7 +98,7 @@ const GlossaryMenuController = withRouter(
             close_callback={() => this.toggleGlossary(false)}
             children={
               <GlossarySidebar
-                item={this.state.glossaryItem}
+                item={this.state.glossary_item_key}
                 open_definition={(key) => this.setGlossaryItem(key)}
                 show_definition={this.state.show_definition}
                 toggle_definition={(value) => this.toggleDefinition(value)}
