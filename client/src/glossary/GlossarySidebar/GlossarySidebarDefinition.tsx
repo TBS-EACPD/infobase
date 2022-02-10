@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./GlossaryMenu.scss";
+import "./GlossarySidebar.scss";
 
 import { create_text_maker_component } from "src/components/index";
 
