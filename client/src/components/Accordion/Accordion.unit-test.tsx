@@ -40,23 +40,23 @@ describe("Accordion", () => {
   });
 
   it("Renders children when is_expanded is true", () => {
-    const children_text = "test title";
+    const child_text = "test child";
 
     const { rerender } = render(
       <Accordion
-        {...{ ...testing_default, children: children_text, is_expanded: false }}
+        {...{ ...testing_default, children: child_text, is_expanded: false }}
       />
     );
 
-    expect(screen.queryByText(children_text)).toBeNull();
+    expect(screen.queryByText(child_text)).toBeNull();
 
     rerender(
       <Accordion
-        {...{ ...testing_default, children: children_text, is_expanded: true }}
+        {...{ ...testing_default, children: child_text, is_expanded: true }}
       />
     );
 
-    expect(screen.getByText(children_text)).toBeVisible();
+    expect(screen.getByText(child_text)).toBeVisible();
   });
 
   it("Has buttons, which call on_toggle on interaction", () => {
