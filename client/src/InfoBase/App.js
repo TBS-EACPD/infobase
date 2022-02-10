@@ -22,7 +22,7 @@ import {
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
-import { GlossaryMenuController } from "src/glossary/GlossarySidebar/GlossaryMenuController";
+import { GlossarySidebarController } from "src/glossary/GlossarySidebar/GlossarySidebarController";
 
 import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";

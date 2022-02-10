@@ -4,6 +4,8 @@ import "./GlossaryMenu.scss";
 
 import { create_text_maker_component } from "src/components/index";
 
+import { glossaryEntryStore } from "src/models/glossary";
+
 import glossary_text from "src/glossary/glossary.yaml";
 
 import { IconArrow } from "src/icons/icons";
@@ -11,20 +13,12 @@ import { IconArrow } from "src/icons/icons";
 const { text_maker } = create_text_maker_component(glossary_text);
 
 interface SidebarContentProps {
-  title: string;
-  def: string;
+  glossary_item_key: string;
   close_definition: () => void;
 }
 
 interface SidebarContentState {
   scrollEl: string;
-}
-
-export interface ResultProps {
-  id: string;
-  title: string;
-  translation: string;
-  raw_definition: string;
 }
 
 export class GlossaryDef extends React.Component<
@@ -46,13 +40,19 @@ export class GlossaryDef extends React.Component<
   }
 
   render() {
+    const glossary_item = glossaryEntryStore.lookup(
+      this.props.glossary_item_key
+    );
+    const def = glossary_item.get_compiled_definition();
+    const title = glossary_item.title;
+
     return (
       <div className="glossary-sb__defintion-wrapper">
-        <div className="glossary-sb__item-title">{this.props.title}</div>
+        <div className="glossary-sb__item-title">{title}</div>
         <div
           className="glossary-sb__item-def"
           dangerouslySetInnerHTML={{
-            __html: this.props.def,
+            __html: def,
           }}
         />
         <div>

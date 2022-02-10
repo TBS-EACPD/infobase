@@ -8,14 +8,14 @@ import glossary_text from "src/glossary/glossary.yaml";
 
 import { glossary_lite as glossary_search_config } from "src/search/search_configs";
 
-import { GlossaryDef } from "./GlossaryDef";
-import { GlossaryList } from "./GlossaryList";
-import { SideBarSearch } from "./SideBarSearch";
+import { GlossaryDef } from "./GlossarySidebarDefinition";
+import { GlossaryList } from "./GlossarySidebarList";
+import { SideBarSearch } from "./GlossarySidebarSearch";
 
 const { text_maker } = create_text_maker_component(glossary_text);
 
 interface GlossarySidebarProps {
-  item: ResultProps;
+  glossary_item_key: string;
   open_definition: (key: string) => void;
   show_definition: boolean;
   toggle_definition: (value: boolean) => void;
@@ -23,12 +23,6 @@ interface GlossarySidebarProps {
 
 interface GlossarySidebarState {
   query: string;
-}
-
-export interface ResultProps {
-  id: string;
-  title: string;
-  get_compiled_definition: () => string;
 }
 
 export class GlossarySidebar extends React.Component<
@@ -50,7 +44,7 @@ export class GlossarySidebar extends React.Component<
     this.props.toggle_definition(true);
   }
 
-  openItem(key: string) {
+  openDefinition(key: string) {
     this.props.open_definition(key);
   }
 
@@ -61,6 +55,7 @@ export class GlossarySidebar extends React.Component<
   }
 
   render() {
+    const { glossary_item_key } = this.props;
     return (
       <div>
         <div className="glossary-sb__header-wrapper" ref={this.header}>
@@ -85,12 +80,11 @@ export class GlossarySidebar extends React.Component<
             {!this.props.show_definition ? (
               <GlossaryDef
                 close_definition={() => this.closeDefinition()}
-                title={this.props.item.title}
-                def={this.props.item.get_compiled_definition()}
+                glossary_item_key={glossary_item_key}
               />
             ) : (
               <GlossaryList
-                open_definition={(item: string) => this.openItem(item)}
+                open_definition={(key: string) => this.openDefinition(key)}
                 search_phrase={this.state.query}
                 search_configs={[glossary_search_config]}
               />
