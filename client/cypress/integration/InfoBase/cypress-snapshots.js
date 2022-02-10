@@ -281,8 +281,7 @@ module.exports = {
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
-            "<span role=\"checkbox\" aria-checked=\"false\" tabindex=\"0\" class=\"link-styled\"><span>Show <span class=\"nowrap glossary-tippy-link\" tabindex=\"0\" data-ibtt-glossary-key=\"GBA_PLUS_INDICATOR\" data-toggle=\"tooltip\" aria-expanded=\"false\">GBA Plus indicators</span> only</span></span>"
+            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
         }
       },
@@ -376,8 +375,7 @@ module.exports = {
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
-            "<span role=\"checkbox\" aria-checked=\"false\" tabindex=\"0\" class=\"link-styled\"><span>Show <span class=\"nowrap glossary-tippy-link\" tabindex=\"0\" data-ibtt-glossary-key=\"GBA_PLUS_INDICATOR\" data-toggle=\"tooltip\" aria-expanded=\"false\">GBA Plus indicators</span> only</span></span>"
+            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
         }
       },
@@ -443,8 +441,7 @@ module.exports = {
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
-            "<span role=\"checkbox\" aria-checked=\"false\" tabindex=\"0\" class=\"link-styled\"><span>Show <span class=\"nowrap glossary-tippy-link\" tabindex=\"0\" data-ibtt-glossary-key=\"GBA_PLUS_INDICATOR\" data-toggle=\"tooltip\" aria-expanded=\"false\">GBA Plus indicators</span> only</span></span>"
+            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
         }
       },
