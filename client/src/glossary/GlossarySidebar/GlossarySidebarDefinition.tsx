@@ -17,20 +17,9 @@ interface SidebarContentProps {
   close_definition: () => void;
 }
 
-interface SidebarContentState {
-  scrollEl: string;
-}
-
-export class GlossaryDef extends React.Component<
-  SidebarContentProps,
-  SidebarContentState
-> {
+export class GlossaryDef extends React.Component<SidebarContentProps> {
   constructor(props: SidebarContentProps) {
     super(props);
-
-    this.state = {
-      scrollEl: "",
-    };
   }
 
   handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>) {
