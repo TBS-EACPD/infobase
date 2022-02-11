@@ -310,11 +310,7 @@ module.exports = {
     },
     "Infographic - Dept - All data": {
       "Tested on index-eng.html#infographic/dept/326/all_data": {
-        "Axe violations allow list": {
-          "aria-allowed-attr, serious": [
-            "<div aria-label=\"Main infographic content\"></div>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/dept/326/all_data": {
         "Axe violations allow list": null
