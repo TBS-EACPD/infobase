@@ -67,7 +67,7 @@ const ReportDetails = ({ table, def_ready_columns, footnotes }) => {
 };
 
 const ReportDatasets = ({ table }) => {
-  const dataset_spans = table.link[lang] && [
+  const dataset_spans = table.link?.[lang] && [
     <span key={"datasets_header"} className="fancy-ul__title">
       <TextMaker text_key="metadata" />
     </span>,
@@ -117,7 +117,7 @@ const ReportDatasets = ({ table }) => {
   return (
     <FancyUL className={"rpb-option-fancy-ul"}>
       {_.flatten(
-        [dataset_spans, data_source_spans].filter((d) => d.length > 1)
+        [dataset_spans, data_source_spans].filter((d) => d && d.length > 1)
       )}
     </FancyUL>
   );
