@@ -91,7 +91,6 @@ export const declare_links_to_rpb_panel = () =>
             calculate: _.constant(true),
 
             render({ title, calculations }) {
-              console.log("render");
               const { subject } = calculations;
 
               const list_args = _.chain(subject.table_ids)
