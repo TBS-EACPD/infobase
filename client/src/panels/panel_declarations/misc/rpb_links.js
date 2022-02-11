@@ -81,11 +81,17 @@ export const declare_links_to_rpb_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
+
+            /*
             calculate(subject) {
               return !subject.has_table_data;
             },
+            */
+            // Hotfix while working out a proper dept level version
+            calculate: _.constant(true),
 
             render({ title, calculations }) {
+              console.log("render");
               const { subject } = calculations;
 
               const list_args = _.chain(subject.table_ids)
