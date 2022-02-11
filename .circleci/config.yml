@@ -351,6 +351,9 @@ jobs:
       - run: touch post-run-cypress-snapshots && shopt -s globstar && cat ./client/**/cypress-snapshots.js >> post-run-cypress-snapshots
       - run: diff pre-run-cypress-snapshots post-run-cypress-snapshots || (echo "CI cypress runs SHOULD NOT result in changes to the snapshot file. This indicates that the snapshots need to be updated locally (exiting routes removed, new routes initialized... fiddly formating fixed, etc.)" && exit 1)
 
+      - run_codecov:
+          project: client
+
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
   deploy_data:
