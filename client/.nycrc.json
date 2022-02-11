@@ -1,0 +1,4 @@
+{
+  "report-dir": ".coverage/cypress",
+  "temp-dir": ".coverage/cypress/.nyc-output"
+}
