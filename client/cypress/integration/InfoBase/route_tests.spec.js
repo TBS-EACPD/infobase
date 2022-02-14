@@ -14,251 +14,251 @@ const route_load_tests_config = [
     route: "start",
     test_on: ["eng", "fra", "basic-eng", "basic-fra"],
   },
-  // {
-  //   name: "Glossary",
-  //   route: "glossary",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Datasets",
-  //   route: "metadata",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "About",
-  //   route: "about",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "FAQ",
-  //   route: "faq",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Privacy",
-  //   route: "privacy",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Glossary",
+    route: "glossary",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Datasets",
+    route: "metadata",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "About",
+    route: "about",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "FAQ",
+    route: "faq",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Privacy",
+    route: "privacy",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "IGOC",
-  //   route: "igoc",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Estimates Comparison",
-  //   route: "compare_estimates",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Tag Explorer",
-  //   route: "tag-explorer",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Report Builder - Table Picker",
-  //   route: "rpb/.-.-(subject.-.-'gov_gov.-.-columns.-.-false)",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Report Builder - Report",
-  //   route:
-  //     "rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Treemap Explorer",
-  //   route: "treemap",
-  //   test_on: ["eng"],
-  // },
-  // {
-  //   name: "Indicator text comparison - TBS",
-  //   route: "diff/326",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "IGOC",
+    route: "igoc",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Estimates Comparison",
+    route: "compare_estimates",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Tag Explorer",
+    route: "tag-explorer",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Report Builder - Table Picker",
+    route: "rpb/.-.-(subject.-.-'gov_gov.-.-columns.-.-false)",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Report Builder - Report",
+    route:
+      "rpb/.-.-(table.-.-'orgEmployeeType.-.-subject.-.-'gov_gov.-.-columns.-.-(.-.-'*7b*7bppl_last_year_5*7d*7d.-.-'*7b*7bppl_last_year_4*7d*7d.-.-'*7b*7bppl_last_year_3*7d*7d.-.-'*7b*7bppl_last_year_2*7d*7d.-.-'*7b*7bppl_last_year*7d*7d.-.-'five_year_percent))",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Treemap Explorer",
+    route: "treemap",
+    test_on: ["eng"],
+  },
+  {
+    name: "Indicator text comparison - TBS",
+    route: "diff/326",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Gov - About",
-  //   route: "infographic/gov/gov/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - Finance",
-  //   route: "infographic/gov/gov/financial",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - COVID-19 Response",
-  //   route: "infographic/gov/gov/covid",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - People",
-  //   route: "infographic/gov/gov/people",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - Services",
-  //   route: "infographic/gov/gov/services",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - Results",
-  //   route: "infographic/gov/gov/results",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - Where can I go from here?",
-  //   route: "infographic/gov/gov/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Gov - All data",
-  //   route: "infographic/gov/gov/all_data",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Gov - About",
+    route: "infographic/gov/gov/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - Finance",
+    route: "infographic/gov/gov/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - COVID-19 Response",
+    route: "infographic/gov/gov/covid",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - People",
+    route: "infographic/gov/gov/people",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - Services",
+    route: "infographic/gov/gov/services",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - Results",
+    route: "infographic/gov/gov/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - Where can I go from here?",
+    route: "infographic/gov/gov/related",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Gov - All data",
+    route: "infographic/gov/gov/all_data",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Dept - About",
-  //   route: "infographic/dept/326/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - Finance",
-  //   route: "infographic/dept/326/financial",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - COVID-19 Response",
-  //   route: "infographic/dept/1/covid",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - People",
-  //   route: "infographic/dept/326/people",
-  //   test_on: ["eng", "fra", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - Services",
-  //   route: "infographic/dept/326/services",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - Results",
-  //   route: "infographic/dept/326/results",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - Where can I go from here?",
-  //   route: "infographic/dept/326/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Dept - All data",
-  //   route: "infographic/dept/326/all_data",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Dept - About",
+    route: "infographic/dept/326/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - Finance",
+    route: "infographic/dept/326/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - COVID-19 Response",
+    route: "infographic/dept/1/covid",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - People",
+    route: "infographic/dept/326/people",
+    test_on: ["eng", "fra", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - Services",
+    route: "infographic/dept/326/services",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - Results",
+    route: "infographic/dept/326/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - Where can I go from here?",
+    route: "infographic/dept/326/related",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Dept - All data",
+    route: "infographic/dept/326/all_data",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Crown Corp - About",
-  //   route: "infographic/dept/146/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Crown Corp - Finance",
-  //   route: "infographic/dept/146/financial",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Crown Corp - Where can I go from here?",
-  //   route: "infographic/dept/146/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Crown Corp - About",
+    route: "infographic/dept/146/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Crown Corp - Finance",
+    route: "infographic/dept/146/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Crown Corp - Where can I go from here?",
+    route: "infographic/dept/146/related",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - CRSO - About",
-  //   route: "infographic/crso/TBC-BXA00/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - CRSO - Finance",
-  //   route: "infographic/crso/TBC-BXA00/financial",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - CRSO - Results",
-  //   route: "infographic/crso/TBC-BXA00/results",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - CRSO - Where can I go from here?",
-  //   route: "infographic/crso/TBC-BXA00/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - CRSO - About",
+    route: "infographic/crso/TBC-BXA00/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - Finance",
+    route: "infographic/crso/TBC-BXA00/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - Results",
+    route: "infographic/crso/TBC-BXA00/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - CRSO - Where can I go from here?",
+    route: "infographic/crso/TBC-BXA00/related",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Program - About",
-  //   route: "infographic/program/TBC-BXC04/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Program - Finance",
-  //   route: "infographic/program/TBC-BXC04/financial",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Program - Services",
-  //   route: "infographic/program/TBC-BXB03/services",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Program - Results",
-  //   route: "infographic/program/TBC-BXC04/results",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Program - Where can I go from here?",
-  //   route: "infographic/program/TBC-BXC04/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Program - About",
+    route: "infographic/program/TBC-BXC04/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Finance",
+    route: "infographic/program/TBC-BXC04/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Services",
+    route: "infographic/program/TBC-BXB03/services",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Results",
+    route: "infographic/program/TBC-BXC04/results",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Program - Where can I go from here?",
+    route: "infographic/program/TBC-BXC04/related",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Inactive Program - About",
-  //   route: "infographic/program/PPP-AHZ00/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Inactive Program - Finance",
-  //   route: "infographic/program/PPP-AHZ00/financial",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Inactive Program - Where can I go from here?",
-  //   route: "infographic/program/PPP-AHZ00/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Inactive Program - About",
+    route: "infographic/program/PPP-AHZ00/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - Finance",
+    route: "infographic/program/PPP-AHZ00/financial",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Inactive Program - Where can I go from here?",
+    route: "infographic/program/PPP-AHZ00/related",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Tag - About",
-  //   route: "infographic/tag/GOC002/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Tag - Tagged Programs",
-  //   route: "infographic/tag/GOC002/structure",
-  //   test_on: ["eng", "basic-eng"],
-  // },
-  // {
-  //   name: "Infographic - Tag - Where can I go from here?",
-  //   route: "infographic/tag/GOC002/related",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Tag - About",
+    route: "infographic/tag/GOC002/intro",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Tag - Tagged Programs",
+    route: "infographic/tag/GOC002/structure",
+    test_on: ["eng", "basic-eng"],
+  },
+  {
+    name: "Infographic - Tag - Where can I go from here?",
+    route: "infographic/tag/GOC002/related",
+    test_on: ["eng", "basic-eng"],
+  },
 
-  // {
-  //   name: "Infographic - Service - Intro",
-  //   route: "infographic/service/136/intro",
-  //   test_on: ["eng", "basic-eng"],
-  // },
+  {
+    name: "Infographic - Service - Intro",
+    route: "infographic/service/136/intro",
+    test_on: ["eng", "basic-eng"],
+  },
 ];
 
 const spinner_selector = ".leaf-spinner__inner-circle";
