@@ -48,6 +48,11 @@ export class GlossaryList extends React.Component {
     this.is_unmounting = true;
   }
 
+  // Will discuss if worth moving the query_result state up to parent component
+  componentDidMount() {
+    this.componentDidUpdate();
+  }
+
   componentDidUpdate() {
     const search_configs = [glossary_search_config];
     const { search_phrase } = this.state;
