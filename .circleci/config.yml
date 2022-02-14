@@ -67,6 +67,9 @@ commands:
     parameters:
       project:
         type: string
+      flag:
+        type: string
+        default: ""
     steps:
       # downloads codecov to ./codecov, checksums, runs in project (assumes matching flag exists in codecov.yml
       - run:
@@ -79,7 +82,7 @@ commands:
             done
             chmod +x codecov
 
-            echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -F << parameters.project >> -f $1
+            echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -F $(if [[ << parameters.flag >> ]]; then echo << parameters.flag >>; else echo << parameters.project >>; fi) -f $1
 
 jobs:
   static_analysis:
@@ -353,6 +356,7 @@ jobs:
 
       - run_codecov:
           project: client
+          flag: basic_e2e
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
