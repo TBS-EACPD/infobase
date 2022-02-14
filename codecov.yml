@@ -2,6 +2,9 @@ flags:
   client:
     paths:
       - ./client/
+  basic_e2e:
+    paths:
+      - ./client/
   server:
     paths:
       - ./server/
@@ -15,11 +18,16 @@ coverage:
       default:
         flags:
           - client
+          - basic_e2e
           - server
           - form_backend
       client:
         flags:
           - client
+      basic_e2e:
+        flags:
+          - basic_e2e
+        target: auto
       server:
         flags:
           - server
