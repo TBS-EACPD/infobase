@@ -187,7 +187,6 @@ module.exports = {
           "color-contrast, serious": [
             "<span>See the data: \n</span>",
             "<span>Departmental Results Reports</span>",
-            "<span>Footnote(s)</span>",
             "<span>See the data: \n</span>",
             "<span>Departmental Plans</span>"
           ]
