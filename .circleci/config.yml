@@ -65,11 +65,10 @@ commands:
             - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
   run_codecov:
     parameters:
-      project:
+      coverage_path:
         type: string
       flag:
         type: string
-        default: ""
     steps:
       # downloads codecov to ./codecov, checksums, runs in project (assumes matching flag exists in codecov.yml
       - run:
@@ -82,7 +81,7 @@ commands:
             done
             chmod +x codecov
 
-            echo << parameters.project >>/.coverage/*/coverage-final.json | xargs -n1 ./codecov -F $(if [[ << parameters.flag >> ]]; then echo << parameters.flag >>; else echo << parameters.project >>; fi) -f $1
+            echo << parameters.coverage_path >> | xargs -n1 ./codecov -F << parameters.flag >> -f $1
 
 jobs:
   static_analysis:
@@ -131,7 +130,8 @@ jobs:
       - run: (cd form_backend && npm run end_to_end_tests)
 
       - run_codecov:
-          project: form_backend
+          coverage_path: form_backend/.coverage/*/coverage-final.json
+          flag: form_backend
 
       - save_cache:
           key: form-backend-jest-cache
@@ -269,7 +269,8 @@ jobs:
       - run: (cd client && npm run unit_tests)
 
       - run_codecov:
-          project: client
+          coverage_path: form_backend/.coverage/unit_tests/coverage-final.json
+          flag: client
 
       - save_cache:
           key: client-jest-cache
@@ -304,7 +305,8 @@ jobs:
       - run: (cd server && npm run snapshot_tests)
 
       - run_codecov:
-          project: server
+          coverage_path: server/.coverage/*/coverage-final.json
+          flag: server
 
       - save_cache:
           key: server-jest-cache
@@ -355,8 +357,8 @@ jobs:
       - run: diff pre-run-cypress-snapshots post-run-cypress-snapshots || (echo "CI cypress runs SHOULD NOT result in changes to the snapshot file. This indicates that the snapshots need to be updated locally (exiting routes removed, new routes initialized... fiddly formating fixed, etc.)" && exit 1)
 
       - run_codecov:
-          project: client
-          flag: basic_e2e
+          coverage_path: server/.coverage/cypress/coverage-final.json
+          flag: cypress
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
