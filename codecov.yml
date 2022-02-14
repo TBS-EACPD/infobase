@@ -2,7 +2,7 @@ flags:
   client:
     paths:
       - ./client/
-  basic_e2e:
+  cypress:
     paths:
       - ./client/
   server:
@@ -18,15 +18,15 @@ coverage:
       default:
         flags:
           - client
-          - basic_e2e
+          - cypress
           - server
           - form_backend
       client:
         flags:
           - client
-      basic_e2e:
+      cypress:
         flags:
-          - basic_e2e
+          - cypress
         target: auto
       server:
         flags:
