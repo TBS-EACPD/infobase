@@ -269,7 +269,7 @@ jobs:
       - run: (cd client && npm run unit_tests)
 
       - run_codecov:
-          coverage_path: form_backend/.coverage/unit_tests/coverage-final.json
+          coverage_path: client/.coverage/unit_tests/coverage-final.json
           flag: client
 
       - save_cache:
@@ -357,7 +357,7 @@ jobs:
       - run: diff pre-run-cypress-snapshots post-run-cypress-snapshots || (echo "CI cypress runs SHOULD NOT result in changes to the snapshot file. This indicates that the snapshots need to be updated locally (exiting routes removed, new routes initialized... fiddly formating fixed, etc.)" && exit 1)
 
       - run_codecov:
-          coverage_path: server/.coverage/cypress/coverage-final.json
+          coverage_path: client/.coverage/cypress/coverage-final.json
           flag: cypress
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
