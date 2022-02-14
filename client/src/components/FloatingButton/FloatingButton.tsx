@@ -99,13 +99,6 @@ export class FloatingButton extends React.Component<
             caught_by_footer && is_mobile() && window.innerWidth <= 600
               ? 0
               : undefined,
-          left: this.button_ref.current
-            ? left
-              ? "30px"
-              : `${
-                  window.innerWidth - this.button_ref.current.offsetWidth - 30
-                }px`
-            : "30px",
         }}
         tabIndex={-1}
         onClick={() => this.props.handleClick()}
