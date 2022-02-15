@@ -7,7 +7,6 @@ import { FloatingButton } from "src/components/FloatingButton/FloatingButton";
 interface SidebarButtonProps {
   open_sidebar: () => void;
   left: boolean;
-  focus: () => void;
 }
 
 export class SidebarButton extends React.Component<SidebarButtonProps> {
@@ -17,7 +16,6 @@ export class SidebarButton extends React.Component<SidebarButtonProps> {
 
   handleClick() {
     this.props.open_sidebar();
-    this.props.focus();
   }
 
   render() {

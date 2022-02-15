@@ -13,7 +13,7 @@ interface SidebarProps {
 }
 
 export class Sidebar extends React.Component<SidebarProps> {
-  sidebar = React.createRef<HTMLDivElement>();
+  closeButton = React.createRef<HTMLDivElement>();
   constructor(props: SidebarProps) {
     super(props);
   }
@@ -38,8 +38,9 @@ export class Sidebar extends React.Component<SidebarProps> {
         appear
         mountOnEnter
         unmountOnExit
+        onEnter={() => this.closeButton.current?.focus()}
       >
-        <div className={"sidebar__wrapper"} ref={this.sidebar}>
+        <div className={"sidebar__wrapper"}>
           <aside className="sidebar">
             <div className={"sidebar__icon-wrapper"}>
               <span
@@ -48,6 +49,7 @@ export class Sidebar extends React.Component<SidebarProps> {
                 onClick={() => this.props.close_callback()}
                 onKeyDown={(e) => this.handleKeyPress(e)}
                 tabIndex={0}
+                ref={this.closeButton}
               >
                 <IconX width="25px" color="white" alternate_color={false} />
               </span>
