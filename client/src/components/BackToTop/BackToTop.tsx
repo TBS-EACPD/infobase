@@ -28,6 +28,7 @@ export class BackToTop extends React.Component<BackToTopProps> {
         showWithScroll={true}
         left={false}
         handleClick={() => this.handleClick()}
+        tabIndex={-1}
       />
     );
   }
