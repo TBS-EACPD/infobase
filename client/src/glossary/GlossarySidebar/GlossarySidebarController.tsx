@@ -132,13 +132,6 @@ const GlossarySidebarController = withRouter(
           <SidebarButton
             open_sidebar={() => this.toggleGlossary(true)}
             left={false}
-            focus={() =>
-              (
-                document.querySelector(
-                  `.glossary-sb__search-bar > input`
-                ) as HTMLElement
-              )?.focus()
-            }
           />
         </div>
       );
