@@ -225,7 +225,7 @@ jobs:
             - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
-            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -c "none" -m 1800 -o "PROD_SOURCE_MAP STATS $([[ $CIRCLE_BRANCH = master ]] && echo "STATS-BASELINE")")
+            [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -c "half" -m 1700 -o "PROD_SOURCE_MAP STATS $([[ $CIRCLE_BRANCH = master ]] && echo "STATS-BASELINE")")
       - save_cache:
           key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:
