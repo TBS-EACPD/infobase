@@ -222,6 +222,11 @@ jobs:
 
       - restore_cache:
           keys:
+            # the trailing - means CircleCI will use the latest key matching up to that point
+            - webpack-caches-v5-{{ .Branch }}-
+
+      - restore_cache:
+          keys:
             - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
