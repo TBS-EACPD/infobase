@@ -162,7 +162,6 @@ class FormFrontend extends React.Component {
       awaiting_backend_response,
       backend_response,
       template,
-      template_name,
       completed_template,
     } = this.state;
 
@@ -170,10 +169,8 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type }, key) =>
-        (template_name == !"report_a_problem" && key === "faq") ||
-        key === "meta" ||
-        !form_type // TODO get rid of key === "faq" once faq content is created
+      // TODO replace key === "faq" with (template_name == !"report_a_problem" && key === "faq") once faq content is created
+      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
@@ -201,7 +198,7 @@ class FormFrontend extends React.Component {
     const ready_to_send =
       all_required_user_fields_are_filled &&
       all_connected_user_fields_are_filled &&
-      // (template_name === "report_a_problem" ? faq_acknowledged : true) &&
+      // (template_name === "report_a_problem" &&  faq_acknowledged) && // TODO: uncomment once faq content is created
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&

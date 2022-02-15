@@ -38,11 +38,3 @@ form_frontend_reset:
 form_frontend_required:
   en: Please complete all required fields.
   fr: S'il vous plaît remplir tous les champs requis.
-
-# testing purposes, will get rid of these later
-sample_q:
-  en: sample q
-  fr: sample q francais
-sample_a:
-  en: sample a
-  fr: sample a francais
