@@ -20,6 +20,7 @@ const is_prod_build = arg_is_present("PROD");
 const force_source_map = arg_is_present("PROD_SOURCE_MAP");
 const skip_typecheck = arg_is_present("SKIP-TYPECHECK");
 const no_watch = arg_is_present("NO-WATCH");
+const instrument_with_istanbul = arg_is_present("ISTANBUL");
 
 // For comparison consistency, only actually produce stats for standard client english builds
 const produce_stats = en && !is_a11y_build && arg_is_present("STATS");
@@ -113,6 +114,7 @@ gitsha(function (err, commit_sha) {
       is_ci,
       local_ip,
       skip_typecheck,
+      instrument_with_istanbul,
     })
   );
 
