@@ -128,6 +128,7 @@ const GlossarySidebarController = withRouter(
               />
             }
           />
+
           <SidebarButton
             open_sidebar={() => this.toggleGlossary(true)}
             left={false}
