@@ -1,4 +1,6 @@
-[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase) [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/master/graph/badge.svg?flag=client)](https://app.codecov.io/gh/TBS-EACPD/infobase/)
+[![CircleCI](https://circleci.com/gh/TBS-EACPD/infobase.svg?style=shield)](https://circleci.com/gh/TBS-EACPD/infobase)  
+General: [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/master/graph/badge.svg?flag=client)](https://app.codecov.io/gh/TBS-EACPD/infobase/)  
+Shallow E2E: [![codecov](https://codecov.io/gh/tbs-eacpd/infobase/branch/master/graph/badge.svg?flag=e2e_shallow)](https://app.codecov.io/gh/TBS-EACPD/infobase/)
 
 _(le Français suit)_
 
