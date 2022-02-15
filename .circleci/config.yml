@@ -358,7 +358,7 @@ jobs:
 
       - run_codecov:
           coverage_path: client/.coverage/cypress/coverage-final.json
-          flag: e2e
+          flag: e2e_shallow
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
