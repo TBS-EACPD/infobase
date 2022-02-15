@@ -14,6 +14,7 @@ interface GlossarySidebarControllerState {
   is_open: boolean;
   glossary_item_key: string;
   show_definition: boolean;
+  return_focus_target: HTMLElement | undefined;
 }
 
 const GlossarySidebarController = withRouter(
@@ -29,6 +30,7 @@ const GlossarySidebarController = withRouter(
         is_open: false,
         glossary_item_key: "",
         show_definition: true,
+        return_focus_target: undefined,
       };
     }
     itemClick = (e: HTMLElement) => {
@@ -38,6 +40,10 @@ const GlossarySidebarController = withRouter(
       if (glossary_item_key) {
         this.setGlossaryItem(glossary_item_key);
       }
+
+      this.setState({
+        return_focus_target: e,
+      });
 
       this.toggleDefinition(false);
 
@@ -56,6 +62,8 @@ const GlossarySidebarController = withRouter(
         !menu_node.contains(e.target as HTMLElement)
       ) {
         this.setState({ is_open: false });
+        console.log(this.state.return_focus_target);
+        this.state.return_focus_target?.focus();
       }
     };
 
@@ -94,6 +102,9 @@ const GlossarySidebarController = withRouter(
       this.setState({
         is_open: value,
       });
+      if (!value) {
+        this.state.return_focus_target?.focus();
+      }
     }
 
     setGlossaryItem(key: string) {
