@@ -17,7 +17,16 @@ const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
       // want to make sure that, even when transpiling node_modules for production, we only ever use the /client babel config
       configFile: path.resolve(__dirname, `../.babelrc.json`),
       // istanbul plugin adds necessary instrumentation for producing coverage reports (necessary outside of jest, notably with cypress)
-      ...(!is_actual_prod_release && { plugins: ["istanbul"] }),
+      ...(!is_actual_prod_release && {
+        plugins: [
+          [
+            "istanbul",
+            {
+              useInlineSourceMaps: false,
+            },
+          ],
+        ],
+      }),
     },
   };
 
