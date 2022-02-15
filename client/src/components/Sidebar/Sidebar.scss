@@ -2,20 +2,28 @@
 
 .sidebar__wrapper {
   position: fixed;
-  right: -100%;
   top: 0;
-
+  right: 0;
   width: 310px;
   height: 100%;
-  transition: 850ms;
   z-index: 1006;
 
   box-shadow: -3px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
-.sidebar__wrapper.active {
-  right: 0;
-  transition: 350ms;
+.slide-enter {
+  transform: translateX(200%);
+  transition: transform 500ms ease-out;
+}
+.slide-enter-active {
+  transform: translateX(0);
+}
+.slide-exit {
+  transform: translateX(0);
+  transition: transform 700ms ease-out;
+}
+.slide-exit-active {
+  transform: translateX(200%);
 }
 
 .sidebar {

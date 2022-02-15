@@ -152,7 +152,7 @@ export class App extends React.Component {
             url_before_redirect_key="pre_redirected_url"
           />
           {has_local_storage && <SurveyPopup />}
-          <GlossaryMenuController />
+          <ReactUnmounter />
 
           <Suspense fallback={<LeafSpinner config_name={"route"} />}>
             <Switch>
@@ -223,6 +223,7 @@ export class App extends React.Component {
               />
               <Redirect from="/" to="/start" />
             </Switch>
+            <GlossarySidebarController />
             <PageDetails
               showSurvey={showSurvey}
               toggleSurvey={this.toggleSurvey}

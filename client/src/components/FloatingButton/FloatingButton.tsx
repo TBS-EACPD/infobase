@@ -14,6 +14,7 @@ interface FloatingButtonProps {
   text: string;
   showWithScroll: boolean;
   left: boolean;
+  tabIndex: number;
 }
 interface FloatingButtonState {
   show_floating_button: boolean;
@@ -78,7 +79,7 @@ export class FloatingButton extends React.Component<
 
   render() {
     const { show_floating_button, caught_by_footer } = this.state;
-    const { left } = this.props;
+    const { tabIndex } = this.props;
     return (
       <button
         ref={this.button_ref}
@@ -100,7 +101,7 @@ export class FloatingButton extends React.Component<
               ? 0
               : undefined,
         }}
-        tabIndex={-1}
+        tabIndex={tabIndex}
         onClick={() => this.props.handleClick()}
       >
         {trivial_text_maker(this.props.text)}
