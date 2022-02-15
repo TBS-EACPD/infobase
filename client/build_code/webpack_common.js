@@ -51,7 +51,10 @@ const get_rules = ({
       test: (path) => is_prod_build && /node_modules\/.*\.js$/.test(path),
       // transpilling core-js breaks some of its feature detection, exclude it
       exclude: /node_modules\/core-js\/.*/,
-      use: babel_loader_options,
+      use: {
+        ...babel_loader_options,
+        options: { ...babel_loader_options.options, plugins: [] },
+      },
       // up to dependencies to declare sideEffects true/false in their package.json
     },
     {
