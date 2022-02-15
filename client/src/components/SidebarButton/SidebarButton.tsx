@@ -17,7 +17,6 @@ export class SidebarButton extends React.Component<SidebarButtonProps> {
 
   handleClick() {
     this.props.open_sidebar();
-
     this.props.focus();
   }
 
@@ -28,6 +27,7 @@ export class SidebarButton extends React.Component<SidebarButtonProps> {
         showWithScroll={false}
         left={this.props.left}
         handleClick={() => this.handleClick()}
+        tabIndex={0}
       />
     );
   }
