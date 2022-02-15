@@ -6,7 +6,7 @@
     "required": true,
     "value_type": "boolean",
     "form_type": "form_faq",
-    "faq_content": [["sample_q", "sample_a"]]
+    "faq_content": [["", ""]]
   },
   "issue_type": {
     "required": true,
