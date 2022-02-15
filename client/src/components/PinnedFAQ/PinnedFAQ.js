@@ -65,6 +65,5 @@ export class PinnedFAQ extends React.Component {
 PinnedFAQ.defaultProps = {
   background_color: secondaryColor,
   is_initially_expanded: false,
-  no_pin: false,
   subject: Gov.instance,
 };
