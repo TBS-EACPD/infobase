@@ -10,14 +10,19 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const { RetryChunkLoadPlugin } = require("webpack-retry-chunk-load-plugin");
 
-const get_rules = ({ lang, is_prod_build, is_actual_prod_release }) => {
+const get_rules = ({
+  lang,
+  is_prod_build,
+  is_actual_prod_release,
+  instrument_with_istanbul,
+}) => {
   const babel_loader_options = {
     loader: "babel-loader",
     options: {
       // want to make sure that, even when transpiling node_modules for production, we only ever use the /client babel config
       configFile: path.resolve(__dirname, `../.babelrc.json`),
       // istanbul plugin adds necessary instrumentation for producing coverage reports (necessary outside of jest, notably with cypress)
-      ...(!is_actual_prod_release && {
+      ...(instrument_with_istanbul && {
         plugins: ["istanbul"],
       }),
     },
@@ -242,6 +247,7 @@ function create_config(options) {
     is_ci,
     local_ip,
     skip_typecheck,
+    instrument_with_istanbul,
   } = options;
 
   return {
@@ -287,7 +293,7 @@ function create_config(options) {
         lang,
         is_prod_build,
         is_actual_prod_release,
-        is_ci,
+        instrument_with_istanbul,
       }),
       noParse: /\.csv$/,
     },
