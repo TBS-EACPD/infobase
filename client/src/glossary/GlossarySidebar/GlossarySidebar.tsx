@@ -22,9 +22,6 @@ interface GlossarySidebarProps {
 }
 
 export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
-  main = React.createRef<HTMLDivElement>();
-  header = React.createRef<HTMLDivElement>();
-
   constructor(props: GlossarySidebarProps) {
     super(props);
   }
@@ -41,7 +38,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
     const { glossary_item_key, search_phrase } = this.props;
     return (
       <div>
-        <div className="glossary-sb__header-wrapper" ref={this.header}>
+        <div className="glossary-sb__header-wrapper">
           <div className="glossary-sb__header">
             <div className="glossary-sb__search-wrapper">
               <SideBarSearch
