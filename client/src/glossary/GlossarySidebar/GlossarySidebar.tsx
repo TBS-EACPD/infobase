@@ -19,25 +19,16 @@ interface GlossarySidebarProps {
   open_definition: (key: string) => void;
   show_definition: boolean;
   toggle_definition: (value: boolean) => void;
+  search_phrase: string;
+  set_query: (query: string) => void;
 }
 
-interface GlossarySidebarState {
-  query: string;
-}
-
-export class GlossarySidebar extends React.Component<
-  GlossarySidebarProps,
-  GlossarySidebarState
-> {
+export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
   main = React.createRef<HTMLDivElement>();
   header = React.createRef<HTMLDivElement>();
 
   constructor(props: GlossarySidebarProps) {
     super(props);
-
-    this.state = {
-      query: "",
-    };
   }
 
   closeDefinition() {
@@ -48,14 +39,8 @@ export class GlossarySidebar extends React.Component<
     this.props.open_definition(key);
   }
 
-  setQuery(query: string) {
-    this.setState({
-      query: query,
-    });
-  }
-
   render() {
-    const { glossary_item_key } = this.props;
+    const { glossary_item_key, search_phrase } = this.props;
     return (
       <div>
         <div className="glossary-sb__header-wrapper" ref={this.header}>
@@ -68,7 +53,10 @@ export class GlossarySidebar extends React.Component<
               {text_maker("glossary_title")}
             </h1>
             <div className="glossary-sb__search-wrapper">
-              <SideBarSearch setQuery={(query) => this.setQuery(query)} />
+              <SideBarSearch
+                setQuery={(query) => this.props.set_query(query)}
+                search_phrase={search_phrase}
+              />
             </div>
             <div className="glossary-sb__example">
               {text_maker("glossary_example")}
@@ -85,7 +73,7 @@ export class GlossarySidebar extends React.Component<
             ) : (
               <GlossaryList
                 open_definition={(key: string) => this.openDefinition(key)}
-                search_phrase={this.state.query}
+                search_phrase={search_phrase}
                 search_configs={[glossary_search_config]}
               />
             )}
