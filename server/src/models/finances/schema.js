@@ -83,21 +83,12 @@ const schema = `
     pa_last_year_3_exp: Float
     pa_last_year_2_exp: Float
     pa_last_year_exp: Float
+    
+    pa_last_year_planned: Float,
 
     planning_year_1: Float
-    planning_year_1_rev: Float
-    planning_year_1_spa: Float
-    planning_year_1_gross: Float
-
     planning_year_2: Float
-    planning_year_2_rev: Float
-    planning_year_2_spa: Float
-    planning_year_2_gross: Float
-
     planning_year_3: Float
-    planning_year_3_rev: Float
-    planning_year_3_spa: Float
-    planning_year_3_gross: Float
   }
   type ProgramFte{
     pa_last_year_5: Float,
@@ -105,6 +96,7 @@ const schema = `
     pa_last_year_3: Float,
     pa_last_year_2: Float,
     pa_last_year: Float,
+
     pa_last_year_planned: Float,
 
     planning_year_1: Float,

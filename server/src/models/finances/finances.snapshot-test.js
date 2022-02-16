@@ -76,20 +76,11 @@ program_spending{
   pa_last_year_2_exp
   pa_last_year_exp
 
+  pa_last_year_planned
+
   planning_year_1
-  planning_year_1_rev
-  planning_year_1_spa
-  planning_year_1_gross
-
   planning_year_2
-  planning_year_2_rev
-  planning_year_2_spa
-  planning_year_2_gross
-
   planning_year_3
-  planning_year_3_rev
-  planning_year_3_spa
-  planning_year_3_gross
 }`;
 const program_fte_field = `
 program_fte{
@@ -98,7 +89,9 @@ program_fte{
   pa_last_year_3
   pa_last_year_2
   pa_last_year
+
   pa_last_year_planned
+
   planning_year_1
   planning_year_2
   planning_year_3

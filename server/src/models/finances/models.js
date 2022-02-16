@@ -84,21 +84,11 @@ export default function (model_singleton) {
     pa_last_year_3_exp: number_type,
     pa_last_year_2_exp: number_type,
     pa_last_year_exp: number_type,
+    pa_last_year_planned: number_type,
 
     planning_year_1: number_type,
-    planning_year_1_rev: number_type,
-    planning_year_1_spa: number_type,
-    planning_year_1_gross: number_type,
-
     planning_year_2: number_type,
-    planning_year_2_rev: number_type,
-    planning_year_2_spa: number_type,
-    planning_year_2_gross: number_type,
-
     planning_year_3: number_type,
-    planning_year_3_rev: number_type,
-    planning_year_3_spa: number_type,
-    planning_year_3_gross: number_type,
   });
   const ProgramFteSchema = mongoose.Schema({
     program_id: parent_fkey_type(),
