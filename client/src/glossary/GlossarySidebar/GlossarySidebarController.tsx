@@ -143,6 +143,7 @@ const GlossarySidebarController = withRouter(
             is_open={this.state.is_open}
             callback={(value: boolean) => this.toggleGlossary(value)}
             button_text={text_maker("glossary_title")}
+            title_text={text_maker("glossary_title")}
             children={
               <GlossarySidebar
                 glossary_item_key={this.state.glossary_item_key}

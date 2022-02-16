@@ -45,13 +45,6 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
       <div>
         <div className="glossary-sb__header-wrapper" ref={this.header}>
           <div className="glossary-sb__header">
-            <h1
-              id="glossary-header"
-              className="glossary-sb__header"
-              tabIndex={-1}
-            >
-              {text_maker("glossary_title")}
-            </h1>
             <div className="glossary-sb__search-wrapper">
               <SideBarSearch
                 setQuery={(query) => this.props.set_query(query)}

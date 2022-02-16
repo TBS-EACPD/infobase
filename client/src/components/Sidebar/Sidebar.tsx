@@ -14,10 +14,11 @@ interface SidebarProps {
   callback: (value: boolean) => void;
   children: React.ReactElement;
   button_text: string;
+  title_text: string;
 }
 
 export class Sidebar extends React.Component<SidebarProps> {
-  closeButton = React.createRef<HTMLDivElement>();
+  title = React.createRef<HTMLDivElement>();
   constructor(props: SidebarProps) {
     super(props);
   }
@@ -33,7 +34,7 @@ export class Sidebar extends React.Component<SidebarProps> {
   }
 
   render() {
-    const { is_open, children, button_text } = this.props;
+    const { is_open, children, button_text, title_text } = this.props;
     return (
       <div>
         <FocusLock>
@@ -44,7 +45,7 @@ export class Sidebar extends React.Component<SidebarProps> {
             appear
             mountOnEnter
             unmountOnExit
-            onEnter={() => this.closeButton.current?.focus()}
+            onEnter={() => this.title.current?.focus()}
           >
             <div className={"sidebar__wrapper"}>
               <aside className="sidebar">
@@ -55,10 +56,18 @@ export class Sidebar extends React.Component<SidebarProps> {
                     onClick={() => this.props.callback(false)}
                     onKeyDown={(e) => this.handleKeyPress(e)}
                     tabIndex={0}
-                    ref={this.closeButton}
                   >
                     <IconX width="25px" color="white" alternate_color={false} />
                   </span>
+                </div>
+                <div className={"sidebar__title"}>
+                  <h1
+                    ref={this.title}
+                    className="glossary-sb__header"
+                    tabIndex={0}
+                  >
+                    {title_text}
+                  </h1>
                 </div>
                 {children}
               </aside>
