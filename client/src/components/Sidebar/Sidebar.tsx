@@ -61,11 +61,7 @@ export class Sidebar extends React.Component<SidebarProps> {
                   </span>
                 </div>
                 <div className={"sidebar__title"}>
-                  <h1
-                    ref={this.title}
-                    className="glossary-sb__header"
-                    tabIndex={0}
-                  >
+                  <h1 ref={this.title} tabIndex={0}>
                     {title_text}
                   </h1>
                 </div>
