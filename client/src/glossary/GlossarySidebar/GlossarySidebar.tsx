@@ -26,14 +26,6 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
     super(props);
   }
 
-  closeDefinition() {
-    this.props.set_glossary_item("");
-  }
-
-  openDefinition(key: string) {
-    this.props.set_glossary_item(key);
-  }
-
   render() {
     const { glossary_item_key, search_phrase } = this.props;
     return (
@@ -42,6 +34,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
           <div className="glossary-sb__header">
             <div className="glossary-sb__search-wrapper">
               <SideBarSearch
+                set_glossary_item={(key) => this.props.set_glossary_item(key)}
                 setQuery={(query) => this.props.set_query(query)}
                 search_phrase={search_phrase}
               />
@@ -53,14 +46,16 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
         </div>
         <div className="glossary-sb__content-wrapper">
           <div className="glossary-sb__content" id="gloss-sidebar">
-            {this.props.glossary_item_key ? (
+            {glossary_item_key ? (
               <GlossaryDef
-                close_definition={() => this.closeDefinition()}
+                close_definition={() => this.props.set_glossary_item("")}
                 glossary_item_key={glossary_item_key}
               />
             ) : (
               <GlossaryList
-                open_definition={(key: string) => this.openDefinition(key)}
+                open_definition={(key: string) =>
+                  this.props.set_glossary_item(key)
+                }
                 search_phrase={search_phrase}
                 search_configs={[glossary_search_config]}
               />
