@@ -1,9 +1,9 @@
 gov_dp_summary_title:
   transform: [handlebars]
   en: |
-    {{year}} Departmental Plans Summary
+    Departmental Plans Summary ({{first_year}}{{#if last_year}} to {{last_year}}{{/if}})
   fr: |
-    Sommaire des plans ministériels de {{year}}
+    Sommaire des plans ministériels ({{first_year}}{{#if last_year}} à {{last_year}}{{/if}})
 
 gov_dp_text:
   transform: [handlebars,markdown]
