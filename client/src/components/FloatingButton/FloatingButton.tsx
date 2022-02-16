@@ -13,7 +13,6 @@ interface FloatingButtonProps {
   handleClick: () => void;
   text: string;
   showWithScroll: boolean;
-  left: boolean;
   tabIndex: number;
 }
 interface FloatingButtonState {
