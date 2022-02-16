@@ -40,6 +40,21 @@
   justify-content: flex-end;
 }
 
+h1.sidebar__header {
+  font-weight: 300;
+  font-size: rem(38);
+  line-height: rem(47);
+
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar__title {
+  width: 100%;
+  padding: 0px 20px 0px 20px;
+  background-color: $primaryColor;
+}
+
 .sidebar__close-button {
   opacity: 0.5;
   display: flex;
