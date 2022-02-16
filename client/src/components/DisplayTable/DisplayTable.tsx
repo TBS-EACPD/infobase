@@ -616,7 +616,7 @@ export class _DisplayTable extends React.Component<
                         >
                           <div style={{ display: "flex" }}>
                             <DebouncedTextInput
-                              inputClassName={`search input-sm input-unstyled`}
+                              inputClassName={`form-control search input-sm input-unstyled`}
                               style={{ width: "100%" }}
                               placeHolder={text_maker("search_column")}
                               a11y_label={text_maker("search_column")}
