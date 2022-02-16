@@ -84,7 +84,7 @@ const GlossarySidebarController = withRouter(
     };
 
     componentDidMount() {
-      window.addEventListener("click", this.handleWindowClick, {
+      window.addEventListener("mousedown", this.handleWindowClick, {
         capture: true,
       });
       window.addEventListener("keydown", this.handleWindowKeyDown, {
@@ -93,7 +93,7 @@ const GlossarySidebarController = withRouter(
     }
 
     componentWillUnmount() {
-      window.removeEventListener("click", this.handleWindowClick, {
+      window.removeEventListener("mousedown", this.handleWindowClick, {
         capture: true,
       });
       window.removeEventListener("keydown", this.handleWindowKeyDown, {
