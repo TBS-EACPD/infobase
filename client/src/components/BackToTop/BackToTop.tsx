@@ -4,6 +4,8 @@ import "intersection-observer";
 
 import { FloatingButton } from "src/components/FloatingButton/FloatingButton";
 
+import { trivial_text_maker } from "src/models/text";
+
 import { scroll_to_top } from "src/core/NavComponents";
 
 import "./BackToTop.scss";
@@ -24,9 +26,8 @@ export class BackToTop extends React.Component<BackToTopProps> {
   render() {
     return (
       <FloatingButton
-        text={"back_to_top"}
+        button_text={trivial_text_maker("back_to_top")}
         showWithScroll={true}
-        left={false}
         handleClick={() => this.handleClick()}
         tabIndex={-1}
       />

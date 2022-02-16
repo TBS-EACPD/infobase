@@ -3,15 +3,13 @@ import React from "react";
 
 import "intersection-observer";
 
-import { trivial_text_maker } from "src/models/text";
-
 import { is_mobile } from "src/core/feature_detection";
 
 import "./FloatingButton.scss";
 
 interface FloatingButtonProps {
   handleClick: () => void;
-  text: string;
+  button_text: string;
   showWithScroll: boolean;
   tabIndex: number;
 }
@@ -78,7 +76,7 @@ export class FloatingButton extends React.Component<
 
   render() {
     const { show_floating_button, caught_by_footer } = this.state;
-    const { tabIndex } = this.props;
+    const { tabIndex, button_text } = this.props;
     return (
       <button
         ref={this.button_ref}
@@ -103,7 +101,7 @@ export class FloatingButton extends React.Component<
         tabIndex={tabIndex}
         onClick={() => this.props.handleClick()}
       >
-        {trivial_text_maker(this.props.text)}
+        {button_text}
       </button>
     );
   }

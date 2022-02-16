@@ -4,9 +4,13 @@ import { withRouter } from "react-router-dom";
 
 import type { RouteComponentProps } from "react-router-dom";
 
-import { Sidebar } from "src/components";
+import { Sidebar, create_text_maker_component } from "src/components";
+
+import glossary_text from "src/glossary/glossary.yaml";
 
 import { GlossarySidebar } from "./GlossarySidebar";
+
+const { text_maker } = create_text_maker_component(glossary_text);
 
 const routes_without_glossary = ["/start", "/glossary"];
 
@@ -138,6 +142,7 @@ const GlossarySidebarController = withRouter(
           <Sidebar
             is_open={this.state.is_open}
             callback={(value: boolean) => this.toggleGlossary(value)}
+            button_text={text_maker("glossary_title")}
             children={
               <GlossarySidebar
                 glossary_item_key={this.state.glossary_item_key}
