@@ -16,9 +16,7 @@ const { text_maker } = create_text_maker_component(glossary_text);
 
 interface GlossarySidebarProps {
   glossary_item_key: string;
-  open_definition: (key: string) => void;
-  show_definition: boolean;
-  toggle_definition: (value: boolean) => void;
+  set_glossary_item: (key: string) => void;
   search_phrase: string;
   set_query: (query: string) => void;
 }
@@ -32,11 +30,11 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
   }
 
   closeDefinition() {
-    this.props.toggle_definition(true);
+    this.props.set_glossary_item("");
   }
 
   openDefinition(key: string) {
-    this.props.open_definition(key);
+    this.props.set_glossary_item(key);
   }
 
   render() {
@@ -58,7 +56,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
         </div>
         <div className="glossary-sb__content-wrapper">
           <div className="glossary-sb__content" id="gloss-sidebar">
-            {!this.props.show_definition ? (
+            {this.props.glossary_item_key ? (
               <GlossaryDef
                 close_definition={() => this.closeDefinition()}
                 glossary_item_key={glossary_item_key}

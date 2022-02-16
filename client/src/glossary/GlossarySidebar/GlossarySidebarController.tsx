@@ -17,7 +17,6 @@ const routes_without_glossary = ["/start", "/glossary"];
 interface GlossarySidebarControllerState {
   is_open: boolean;
   glossary_item_key: string;
-  show_definition: boolean;
   return_focus_target: HTMLElement | undefined;
   search_phrase: string;
 }
@@ -34,7 +33,6 @@ const GlossarySidebarController = withRouter(
       this.state = {
         is_open: false,
         glossary_item_key: "",
-        show_definition: true,
         return_focus_target: undefined,
         search_phrase: "",
       };
@@ -51,7 +49,7 @@ const GlossarySidebarController = withRouter(
         return_focus_target: e,
       });
 
-      this.toggleDefinition(false);
+      this.setGlossaryItem("");
 
       this.toggleGlossary(true);
 
@@ -68,7 +66,6 @@ const GlossarySidebarController = withRouter(
         !menu_node.contains(e.target as HTMLElement)
       ) {
         this.setState({ is_open: false });
-        console.log(this.state.return_focus_target);
         this.state.return_focus_target?.focus();
       }
     };
@@ -116,13 +113,6 @@ const GlossarySidebarController = withRouter(
     setGlossaryItem(key: string) {
       this.setState({
         glossary_item_key: key,
-        show_definition: false,
-      });
-    }
-
-    toggleDefinition(value: boolean) {
-      this.setState({
-        show_definition: value,
       });
     }
 
@@ -147,9 +137,7 @@ const GlossarySidebarController = withRouter(
             children={
               <GlossarySidebar
                 glossary_item_key={this.state.glossary_item_key}
-                open_definition={(key) => this.setGlossaryItem(key)}
-                show_definition={this.state.show_definition}
-                toggle_definition={(value) => this.toggleDefinition(value)}
+                set_glossary_item={(key) => this.setGlossaryItem(key)}
                 set_query={(query) => this.setQuery(query)}
                 search_phrase={this.state.search_phrase}
               />
