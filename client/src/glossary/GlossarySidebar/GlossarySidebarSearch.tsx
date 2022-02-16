@@ -17,6 +17,7 @@ const SideBarSearchDefaultProps = {
 
 type SideBarSearchProps = typeof SideBarSearchDefaultProps & {
   setQuery: (str: string) => void;
+  set_glossary_item: (key: string) => void;
   search_phrase: string;
 };
 
@@ -29,6 +30,7 @@ export class SideBarSearch extends React.Component<SideBarSearchProps> {
 
   callback = (query: string) => {
     this.props.setQuery(query);
+    this.props.set_glossary_item("");
   };
 
   render() {
