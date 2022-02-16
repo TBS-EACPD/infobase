@@ -1,4 +1,5 @@
 import React from "react";
+import FocusLock from "react-focus-lock";
 
 import { withRouter } from "react-router-dom";
 
@@ -135,25 +136,27 @@ const GlossarySidebarController = withRouter(
 
       return (
         <div ref={this.menu_ref}>
-          <Sidebar
-            is_open={this.state.is_open}
-            close_callback={() => this.toggleGlossary(false)}
-            children={
-              <GlossarySidebar
-                glossary_item_key={this.state.glossary_item_key}
-                open_definition={(key) => this.setGlossaryItem(key)}
-                show_definition={this.state.show_definition}
-                toggle_definition={(value) => this.toggleDefinition(value)}
-                set_query={(query) => this.setQuery(query)}
-                search_phrase={this.state.search_phrase}
-              />
-            }
-          />
+          <FocusLock>
+            <Sidebar
+              is_open={this.state.is_open}
+              close_callback={() => this.toggleGlossary(false)}
+              children={
+                <GlossarySidebar
+                  glossary_item_key={this.state.glossary_item_key}
+                  open_definition={(key) => this.setGlossaryItem(key)}
+                  show_definition={this.state.show_definition}
+                  toggle_definition={(value) => this.toggleDefinition(value)}
+                  set_query={(query) => this.setQuery(query)}
+                  search_phrase={this.state.search_phrase}
+                />
+              }
+            />
 
-          <SidebarButton
-            open_sidebar={() => this.toggleGlossary(true)}
-            left={false}
-          />
+            <SidebarButton
+              open_sidebar={() => this.toggleGlossary(true)}
+              left={false}
+            />
+          </FocusLock>
         </div>
       );
     }
