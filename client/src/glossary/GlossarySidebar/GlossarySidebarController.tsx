@@ -151,12 +151,12 @@ const GlossarySidebarController = withRouter(
                 />
               }
             />
-
-            <SidebarButton
-              open_sidebar={() => this.toggleGlossary(true)}
-              left={false}
-            />
           </FocusLock>
+
+          <SidebarButton
+            open_sidebar={() => this.toggleGlossary(true)}
+            left={false}
+          />
         </div>
       );
     }
