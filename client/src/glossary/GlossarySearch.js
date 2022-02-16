@@ -20,7 +20,6 @@ const GlossarySearch = withRouter(
 
       return (
         <SearchConfigTypeahead
-          type={"typeahead"}
           placeholder={glossary_placeholder}
           search_configs={[glossary_search_config]}
           on_select={({ id }) =>
