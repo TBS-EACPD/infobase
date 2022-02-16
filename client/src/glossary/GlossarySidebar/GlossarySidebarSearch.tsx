@@ -10,6 +10,7 @@ const SideBarSearchDefaultProps = {
 
 type SideBarSearchProps = typeof SideBarSearchDefaultProps & {
   setQuery: (str: string) => void;
+  search_phrase: string;
 };
 
 export class SideBarSearch extends React.Component<SideBarSearchProps> {
@@ -24,7 +25,7 @@ export class SideBarSearch extends React.Component<SideBarSearchProps> {
   };
 
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, search_phrase } = this.props;
 
     return (
       <div className={"glossary-sb__search-bar"}>
@@ -36,6 +37,7 @@ export class SideBarSearch extends React.Component<SideBarSearchProps> {
         <DebouncedTextInput
           placeHolder={placeholder}
           updateCallback={this.callback}
+          defaultValue={search_phrase}
         />
       </div>
     );

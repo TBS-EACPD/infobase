@@ -15,6 +15,7 @@ interface GlossarySidebarControllerState {
   glossary_item_key: string;
   show_definition: boolean;
   return_focus_target: HTMLElement | undefined;
+  search_phrase: string;
 }
 
 const GlossarySidebarController = withRouter(
@@ -31,6 +32,7 @@ const GlossarySidebarController = withRouter(
         glossary_item_key: "",
         show_definition: true,
         return_focus_target: undefined,
+        search_phrase: "",
       };
     }
     itemClick = (e: HTMLElement) => {
@@ -120,6 +122,12 @@ const GlossarySidebarController = withRouter(
       });
     }
 
+    setQuery(query: string) {
+      this.setState({
+        search_phrase: query,
+      });
+    }
+
     render() {
       const currentPage = this.props.location.pathname;
 
@@ -136,6 +144,8 @@ const GlossarySidebarController = withRouter(
                 open_definition={(key) => this.setGlossaryItem(key)}
                 show_definition={this.state.show_definition}
                 toggle_definition={(value) => this.toggleDefinition(value)}
+                set_query={(query) => this.setQuery(query)}
+                search_phrase={this.state.search_phrase}
               />
             }
           />
