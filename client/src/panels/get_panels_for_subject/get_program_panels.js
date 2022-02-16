@@ -15,7 +15,6 @@ import {
   declare_results_table_panel,
   declare_tags_of_interest_panel,
   declare_planned_actual_comparison_panel,
-  declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
   // shared gov, dept, program
@@ -63,7 +62,6 @@ export const get_program_panels = (subject) =>
       declare_top_spending_areas_panel(),
       declare_spending_in_tag_perspective_panel(),
       declare_planned_actual_comparison_panel(),
-      declare_dp_rev_split_panel(),
     ],
     services: services_feature_flag &&
       subject.has_data("services") && [

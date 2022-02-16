@@ -17,7 +17,6 @@ import {
   declare_results_table_panel,
   declare_tags_of_interest_panel,
   declare_planned_actual_comparison_panel,
-  declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
   // shared gov, dept, program
@@ -94,7 +93,6 @@ export const get_dept_panels = (subject) =>
       declare_detailed_program_spending_split_panel(),
       declare_internal_services_panel(),
       declare_planned_actual_comparison_panel(),
-      declare_dp_rev_split_panel(),
     ],
     covid: subject.has_data("covid") && [
       declare_covid_key_concepts_panel(),
