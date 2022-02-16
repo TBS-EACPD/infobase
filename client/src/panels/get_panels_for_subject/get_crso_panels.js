@@ -15,7 +15,6 @@ import {
   declare_results_table_panel,
   declare_tags_of_interest_panel,
   declare_planned_actual_comparison_panel,
-  declare_dp_rev_split_panel,
   declare_drr_summary_panel,
 
   // crso only panels
@@ -48,7 +47,6 @@ export const get_crso_panels = (subject) =>
       declare_planned_actual_comparison_panel(),
       declare_crso_by_prog_fte_panel(),
       declare_crso_by_prog_exp_panel(),
-      declare_dp_rev_split_panel(),
     ],
     results: !subject.is_internal_service &&
       subject.has_data("results") && [

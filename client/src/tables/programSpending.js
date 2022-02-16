@@ -97,21 +97,6 @@ export default {
             fr: `Correspondent au total des dépenses prévues pour l'exercice ${header}, y compris les fonds approuvés par le Conseil du Trésor.`,
           },
         },
-        {
-          type: "big_int",
-          nick: `${header}_rev`,
-          hidden: true,
-        },
-        {
-          type: "big_int",
-          nick: `${header}_spa`,
-          hidden: true,
-        },
-        {
-          type: "big_int",
-          nick: `${header}_gross`,
-          hidden: true,
-        },
       ]);
     });
   },

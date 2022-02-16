@@ -3,7 +3,6 @@ export { declare_detailed_program_spending_split_panel } from "./detailed_progra
 export {
   declare_crso_by_prog_fte_panel,
   declare_crso_by_prog_exp_panel,
-  declare_dp_rev_split_panel,
   declare_spending_in_tag_perspective_panel,
 } from "./drr_dp_resources/index";
 
