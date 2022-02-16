@@ -1,11 +1,18 @@
 import React from "react";
 
-import { DebouncedTextInput } from "src/components";
+import {
+  DebouncedTextInput,
+  create_text_maker_component,
+} from "src/components";
 
 import { IconSearch } from "src/icons/icons";
 
+import glossary_text from "src/glossary/glossary.yaml";
+
+const { text_maker } = create_text_maker_component(glossary_text);
+
 const SideBarSearchDefaultProps = {
-  placeholder: "Search",
+  placeholder: text_maker("glossary_placeholder"),
 };
 
 type SideBarSearchProps = typeof SideBarSearchDefaultProps & {
