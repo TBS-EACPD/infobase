@@ -85,10 +85,10 @@ const MiniLegend = ({ items }) => (
 );
 
 // TODO: this could be a reusable chart, consider breaking it out at some point
-const StatusGrid = (props) => {
+const StatusGrid = ({ met, not_met, not_available, future, drr_key }) => {
   const max_size = 800;
 
-  const { met, not_met, not_available, future, drr_key } = props;
+  const counts = { met, not_met, not_available, future };
 
   const total = met + not_met + not_available + future;
   const shouldFactorDown = total > max_size;
@@ -98,9 +98,9 @@ const StatusGrid = (props) => {
     total < 100 && "IconArrayItem__Large"
   );
 
-  const is_single_indicator = _.some(props, (value) => value === total);
+  const is_single_indicator = _.some(counts, (value) => value === total);
 
-  const data = _.chain(props)
+  const data = _.chain(counts)
     .pickBy((val) => val > 0 || is_single_indicator)
     .toPairs()
     .groupBy(([key, _val]) => key)
