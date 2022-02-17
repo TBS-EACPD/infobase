@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import _, { get } from "lodash";
+import _ from "lodash";
 import React, { Fragment } from "react";
 
 import {
