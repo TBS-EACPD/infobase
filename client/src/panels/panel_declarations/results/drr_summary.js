@@ -74,7 +74,11 @@ export const declare_drr_summary_panel = () =>
 
         return (
           <InfographicPanel {...{ title, footnotes, sources }}>
-            <CommonDrrSummary subject={subject} {...panel_args} />
+            <CommonDrrSummary
+              subject={subject}
+              drr_key={current_drr_key}
+              {...panel_args}
+            />
           </InfographicPanel>
         );
       },
