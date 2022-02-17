@@ -1,6 +1,6 @@
 drr_summary_title:
   transform: [handlebars]
   en: |
-    {{year}} Departmental Results Report Summary
+    Departmental Results Report Summary ({{first_year}}{{#if last_year}} to {{last_year}}{{/if}})
   fr: |
-    Sommaire des rapport sur les résultats ministériels de {{year}}
+    Sommaire des rapport sur les résultats ministériels ({{first_year}}{{#if last_year}} à {{last_year}}{{/if}})

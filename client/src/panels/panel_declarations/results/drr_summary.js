@@ -1,10 +1,10 @@
 import _ from "lodash";
-import React from "react";
+import React, { useState } from "react";
 
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { create_text_maker_component } from "src/components/index";
+import { create_text_maker_component, Tabs } from "src/components/index";
 
 import * as Results from "src/models/results";
 
@@ -22,9 +22,66 @@ import text from "./drr_summary.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 
-const { current_drr_key, result_docs } = Results;
+const { result_docs } = Results;
 
-const current_drr_year = result_docs[current_drr_key].year;
+const get_verbose_counts = (subject) => {
+  switch (subject.subject_type) {
+    case "dept":
+      return ResultCounts.get_dept_counts(subject.id);
+    case "crso":
+      return _.chain([subject.id, ..._.map(subject.programs, "id")])
+        .map((id) => GranularResultCounts.get_subject_counts(id))
+        .reduce(
+          (accumulator, counts) => _.mergeWith(accumulator, counts, _.add),
+          {}
+        )
+        .value();
+    case "program":
+      return GranularResultCounts.get_subject_counts(subject.id);
+  }
+};
+const get_drr_keys_with_data = (subject) =>
+  _.chain(get_verbose_counts(subject))
+    .pickBy(
+      (count_value, count_key) =>
+        /^drr[0-9]*_total$/.test(count_key) && count_value !== 0
+    )
+    .keys()
+    .map((count_key) => _.split(count_key, "_")[0])
+    .value();
+const get_drr_year = (drr_key) => result_docs[drr_key].year;
+
+const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
+  const [drr_key, set_drr_key] = useState(_.last(drr_keys));
+
+  const counts = row_to_drr_status_counts(verbose_counts, drr_key);
+
+  const summary = (
+    <CommonDrrSummary
+      subject={subject}
+      drr_key={drr_key}
+      verbose_counts={verbose_counts}
+      counts={counts}
+    />
+  );
+
+  if (drr_keys.length > 1) {
+    return (
+      <Tabs
+        tabs={_.chain(drr_keys)
+          .map((drr_key) => [drr_key, get_drr_year(drr_key)])
+          .fromPairs()
+          .value()}
+        open_tab_key={drr_key}
+        tab_open_callback={set_drr_key}
+      >
+        {summary}
+      </Tabs>
+    );
+  } else {
+    return summary;
+  }
+};
 
 export const declare_drr_summary_panel = () =>
   declare_panel({
@@ -33,51 +90,43 @@ export const declare_drr_summary_panel = () =>
     panel_config_func: (subject_type) => ({
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
+      title: (subject) => {
+        const drr_keys = get_drr_keys_with_data(subject);
+
+        return (
+          !_.isEmpty(drr_keys) &&
+          text_maker("drr_summary_title", {
+            first_year: get_drr_year(_.first(drr_keys)),
+            last_year: drr_keys.length > 1 && get_drr_year(_.last(drr_keys)),
+          })
+        );
+      },
       footnotes: ["RESULTS", "DRR"],
       source: () => get_source_links(["DRR"]),
-      title: text_maker("drr_summary_title", { year: current_drr_year }),
       calculate(subject) {
-        const verbose_counts = (() => {
-          switch (subject_type) {
-            case "dept":
-              return ResultCounts.get_dept_counts(subject.id);
-            case "crso":
-              return _.chain([subject.id, ..._.map(subject.programs, "id")])
-                .map((id) => GranularResultCounts.get_subject_counts(id))
-                .reduce(
-                  (accumulator, counts) =>
-                    _.mergeWith(accumulator, counts, _.add),
-                  {}
-                )
-                .value();
-            case "program":
-              return GranularResultCounts.get_subject_counts(subject.id);
-          }
-        })();
+        const drr_keys = get_drr_keys_with_data(subject);
 
-        const counts = row_to_drr_status_counts(
-          verbose_counts,
-          current_drr_key
-        );
-
-        if (verbose_counts[`${current_drr_key}_total`] < 1) {
+        if (_.isEmpty(drr_keys)) {
           return false;
         }
 
         return {
-          verbose_counts,
-          counts,
+          drr_keys,
+          verbose_counts: get_verbose_counts(subject),
         };
       },
       render: ({ title, calculations, footnotes, sources }) => {
-        const { panel_args, subject } = calculations;
+        const {
+          panel_args: { verbose_counts, drr_keys },
+          subject,
+        } = calculations;
 
         return (
           <InfographicPanel {...{ title, footnotes, sources }}>
-            <CommonDrrSummary
+            <DrrSummary
               subject={subject}
-              drr_key={current_drr_key}
-              {...panel_args}
+              drr_keys={drr_keys}
+              verbose_counts={verbose_counts}
             />
           </InfographicPanel>
         );
