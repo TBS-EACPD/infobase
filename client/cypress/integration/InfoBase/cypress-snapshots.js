@@ -185,7 +185,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            "<span>See the data: \n</span>",
             "<span>Departmental Results Reports</span>",
             "<span>See the data: \n</span>",
             "<span>Departmental Plans</span>"
