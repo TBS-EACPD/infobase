@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import _ from "lodash";
+import _, { get } from "lodash";
 import React, { Fragment } from "react";
 
 import {
@@ -31,11 +31,11 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 import "./CommonDrrSummary.scss";
 
-const { current_drr_key, result_docs } = Results;
+const { result_docs } = Results;
 
-const current_drr_year = result_docs[current_drr_key].year;
-const current_drr_target_year =
-  _.toNumber(result_docs[current_drr_key].year_short) + 1;
+const get_drr_year = (drr_key) => result_docs[drr_key].year;
+const get_drr_target_year = (drr_key) =>
+  _.toNumber(result_docs[drr_key].year_short) + 1;
 
 const grid_colors = {
   met: "results-icon-array-pass",
@@ -88,7 +88,7 @@ const MiniLegend = ({ items }) => (
 const StatusGrid = (props) => {
   const max_size = 800;
 
-  const { met, not_met, not_available, future } = props;
+  const { met, not_met, not_available, future, drr_key } = props;
 
   const total = met + not_met + not_available + future;
   const shouldFactorDown = total > max_size;
@@ -150,7 +150,7 @@ const StatusGrid = (props) => {
             index: 1,
             formatter: "big_int",
             header: text_maker("results_icon_array_title", {
-              year: current_drr_year,
+              year: get_drr_year(drr_key),
             }),
           },
         }}
@@ -213,7 +213,7 @@ class PercentageViz extends React.Component {
   }
 
   render() {
-    const { counts } = this.props;
+    const { counts, drr_key } = this.props;
     const { selected } = this.state;
 
     const all_data = _.chain(counts)
@@ -233,7 +233,7 @@ class PercentageViz extends React.Component {
     const colors = ({ id }) => result_color_scale(id);
 
     const new_summary_text_args = {
-      year: current_drr_year,
+      year: get_drr_year(drr_key),
       drr_subset: graph_total,
       drr_total: all_data_total,
       drr_indicators_met: _.includes(selected, "met") && counts.met,
@@ -306,20 +306,21 @@ class PercentageViz extends React.Component {
 
 export const CommonDrrSummary = ({
   subject,
+  drr_key,
   counts,
   verbose_counts,
   results_dept_count,
 }) => {
   const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(
     verbose_counts,
-    current_drr_key
+    drr_key
   );
 
   const summary_text_args = {
     subject,
     results_dept_count: subject.id === "gov" && results_dept_count,
-    year: current_drr_year,
-    target_year: current_drr_target_year,
+    year: get_drr_year(drr_key),
+    target_year: get_drr_target_year(drr_key),
     ...current_drr_counts_with_generic_keys,
   };
 
@@ -352,7 +353,7 @@ export const CommonDrrSummary = ({
         </div>
         <div className="col-12 col-lg-5 ">
           <div style={{ padding: "30px" }}>
-            <StatusGrid {...counts} />
+            <StatusGrid {...counts} drr_key={drr_key} />
           </div>
         </div>
       </div>
@@ -362,6 +363,7 @@ export const CommonDrrSummary = ({
           <PercentageViz
             summary_text_args={summary_text_args}
             counts={counts}
+            drr_key={drr_key}
           />
         </div>
       </div>

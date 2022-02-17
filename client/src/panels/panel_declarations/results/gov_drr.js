@@ -49,6 +49,7 @@ class GovDRR extends React.Component {
         )}
         <CommonDrrSummary
           subject={Gov.instance}
+          drr_key={current_drr_key}
           verbose_counts={verbose_gov_counts}
           counts={gov_counts}
           results_dept_count={results_dept_count}
