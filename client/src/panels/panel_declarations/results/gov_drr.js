@@ -5,14 +5,16 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { DisplayTable } from "src/components/index";
+import {
+  DisplayTable,
+  create_text_maker_component,
+} from "src/components/index";
 
 import { Gov, Dept } from "src/models/subjects";
 
 import { get_source_links } from "src/metadata/data_sources";
 
-import { DrrSummary } from "./drr_summary";
-import { TM, text_maker } from "./drr_summary_text";
+import { CommonDrrSummary } from "./CommonDrrSummary";
 import { LateDepartmentsBanner } from "./result_components";
 import {
   row_to_drr_status_counts,
@@ -23,12 +25,16 @@ import {
   link_to_results_infograph,
 } from "./results_common";
 
+import text from "./gov_drr.yaml";
+
+const { text_maker, TM } = create_text_maker_component(text);
+
 class GovDRR extends React.Component {
   render() {
     const {
       rows_of_counts_by_dept,
       gov_counts,
-      num_depts,
+      results_dept_count,
       verbose_gov_counts,
       late_dept_count,
       column_configs,
@@ -41,12 +47,11 @@ class GovDRR extends React.Component {
             <LateDepartmentsBanner late_dept_count={late_dept_count} />
           </div>
         )}
-        <DrrSummary
+        <CommonDrrSummary
           subject={Gov.instance}
           verbose_counts={verbose_gov_counts}
           counts={gov_counts}
-          is_gov={true}
-          num_depts={num_depts}
+          results_dept_count={results_dept_count}
         />
         <div className="panel-separator" style={{ marginTop: "0px" }} />
         <div>
@@ -89,7 +94,7 @@ export const declare_gov_drr_panel = () =>
           ResultCounts.get_all_dept_counts(),
           (row) => row[`${current_drr_key}_total`] > 0
         );
-        const num_depts = dept_counts.length;
+        const results_dept_count = dept_counts.length;
 
         const column_keys = _.chain(result_statuses)
           .map((row, key) => [`${current_drr_key}_indicators_${key}`, row.text])
@@ -147,7 +152,7 @@ export const declare_gov_drr_panel = () =>
           gov_counts,
           rows_of_counts_by_dept,
           verbose_gov_counts,
-          num_depts,
+          results_dept_count,
           column_configs,
           late_dept_count,
         };
