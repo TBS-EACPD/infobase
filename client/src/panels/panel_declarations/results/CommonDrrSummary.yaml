@@ -1,33 +1,16 @@
-gov_drr_summary_title:
-  transform: [handlebars]
-  en: |
-    {{year}} Departmental Results Reports Summary
-  fr: |
-    Sommaire des rapports sur les résultats ministériels de {{year}}
-
-# like gov_drr_summary_title, but report(s) is singular, subtle difference
-drr_summary_title:
-  transform: [handlebars]
-  en: |
-    {{year}} Departmental Results Report Summary
-  fr: |
-    Sommaire des rapport sur les résultats ministériels de {{year}}
-
-
-# this a multi-level text 
 drr_summary_text_intro:
   transform: [handlebars,markdown]
   en: |
-    {{#if is_gov}}
-      In **{{year}}**, **{{num_depts}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
+    {{#if results_dept_count}}
+      In **{{year}}**, **{{results_dept_count}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
     {{else}}
       In **{{year}}**, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
     Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome (actual result) of the indicator's target.
   fr: |
-    {{#if is_gov}}
-      En **{{year}}**, **{{num_depts}}** organisations ont cherché à obtenir **{{fmt_big_int drr_results}}** résultats.
+    {{#if results_dept_count}}
+      En **{{year}}**, **{{results_dept_count}}** organisations ont cherché à obtenir **{{fmt_big_int drr_results}}** résultats.
     {{else}}
       En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
     {{/if}}
@@ -51,13 +34,6 @@ drr_summary_stats:
       {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) sont {{gl_tt "à atteindre dans le futur" "RESULTS_ONGOING"}}{{/if}}
     {{/if}}
 
-gov_drr_summary_org_table_text:
-  transform: [handlebars,markdown]
-  en: |
-    Click on the name of the organization you wish to explore to learn more about its results and performance indicators.
-    
-  fr: |
-    Cliquez sur le nom de l'organisation qui vous intéresse pour en savoir plus sur ses résultats et ses indicateurs du rendement.
 
 results_icon_array_title:
   transform: [handlebars]

@@ -1,0 +1,14 @@
+gov_drr_summary_title:
+  transform: [handlebars]
+  en: |
+    {{year}} Departmental Results Reports Summary
+  fr: |
+    Sommaire des rapports sur les résultats ministériels de {{year}}
+
+gov_drr_summary_org_table_text:
+  transform: [handlebars,markdown]
+  en: |
+    Click on the name of the organization you wish to explore to learn more about its results and performance indicators.
+    
+  fr: |
+    Cliquez sur le nom de l'organisation qui vous intéresse pour en savoir plus sur ses résultats et ses indicateurs du rendement.
