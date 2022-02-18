@@ -6,8 +6,6 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { create_text_maker_component, Tabs } from "src/components/index";
 
-import * as Results from "src/models/results";
-
 import { get_source_links } from "src/metadata/data_sources";
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
@@ -16,13 +14,12 @@ import {
   row_to_drr_status_counts,
   ResultCounts,
   GranularResultCounts,
+  get_year_for_doc_key,
 } from "./results_common";
 
 import text from "./drr_summary.yaml";
 
 const { text_maker } = create_text_maker_component(text);
-
-const { result_docs } = Results;
 
 const get_verbose_counts = (subject) => {
   switch (subject.subject_type) {
@@ -49,7 +46,6 @@ const get_drr_keys_with_data = (subject) =>
     .keys()
     .map((count_key) => _.split(count_key, "_")[0])
     .value();
-const get_drr_year = (drr_key) => result_docs[drr_key].year;
 
 const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
   const [drr_key, set_drr_key] = useState(_.last(drr_keys));
@@ -69,7 +65,7 @@ const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
     return (
       <Tabs
         tabs={_.chain(drr_keys)
-          .map((drr_key) => [drr_key, get_drr_year(drr_key)])
+          .map((drr_key) => [drr_key, get_year_for_doc_key(drr_key)])
           .fromPairs()
           .value()}
         open_tab_key={drr_key}
@@ -96,8 +92,9 @@ export const declare_drr_summary_panel = () =>
         return (
           !_.isEmpty(drr_keys) &&
           text_maker("drr_summary_title", {
-            first_year: get_drr_year(_.first(drr_keys)),
-            last_year: drr_keys.length > 1 && get_drr_year(_.last(drr_keys)),
+            first_year: get_year_for_doc_key(_.first(drr_keys)),
+            last_year:
+              drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
           })
         );
       },

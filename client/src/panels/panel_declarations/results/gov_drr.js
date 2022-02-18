@@ -24,6 +24,7 @@ import {
   result_docs,
   link_to_results_infograph,
   get_result_doc_keys,
+  get_year_for_doc_key,
 } from "./results_common";
 
 import text from "./gov_drr.yaml";
@@ -31,8 +32,6 @@ import text from "./gov_drr.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 const drr_keys = get_result_doc_keys("drr");
-
-const get_drr_year = (drr_key) => result_docs[drr_key].year;
 
 const get_drr_data = (drr_key) => {
   const verbose_gov_counts = ResultCounts.get_gov_counts();
@@ -151,7 +150,7 @@ const DrrSummary = () => {
     return (
       <Tabs
         tabs={_.chain(drr_keys)
-          .map((drr_key) => [drr_key, get_drr_year(drr_key)])
+          .map((drr_key) => [drr_key, get_year_for_doc_key(drr_key)])
           .fromPairs()
           .value()}
         open_tab_key={drr_key}
@@ -173,8 +172,9 @@ export const declare_gov_drr_panel = () =>
       requires_result_counts: true,
       footnotes: ["RESULTS", "DRR"],
       title: text_maker("gov_drr_summary_title", {
-        first_year: get_drr_year(_.first(drr_keys)),
-        last_year: drr_keys.length > 1 && get_drr_year(_.last(drr_keys)),
+        first_year: get_year_for_doc_key(_.first(drr_keys)),
+        last_year:
+          drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
       }),
       source: () => get_source_links(["DRR"]),
       calculate: () => !_.isEmpty(drr_keys),
