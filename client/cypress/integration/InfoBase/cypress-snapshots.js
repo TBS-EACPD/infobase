@@ -268,7 +268,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/dept/326/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            "<span>See the data: \n</span>",
             "<span>Departmental Results Reports</span>"
           ],
           "nested-interactive, serious": [
@@ -358,7 +357,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            "<span>See the data: \n</span>",
             "<span>Departmental Results Reports</span>"
           ],
           "nested-interactive, serious": [
