@@ -9,9 +9,9 @@ cr_or_program:
 result_flat_table_title:
   transform: [handlebars]
   en: |
-    {{year}} Actual Results by Indicator
+    Actual Results by Indicator ({{first_year}}{{#if last_year}} to {{last_year}}{{/if}})
   fr: |
-    {{year}} résultats réels par indicateur
+    Résultats réels par indicateur ({{first_year}}{{#if last_year}} à {{last_year}}{{/if}})
 
 result_flat_table_text:
   transform: [handlebars,markdown]

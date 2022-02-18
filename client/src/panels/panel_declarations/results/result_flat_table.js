@@ -1,14 +1,18 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
-import { LeafSpinner, DisplayTable, ModalButton } from "src/components/index";
+import {
+  LeafSpinner,
+  DisplayTable,
+  ModalButton,
+  Tabs,
+} from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import * as Results from "src/models/results";
 import { Indicator } from "src/models/results";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -35,13 +39,32 @@ import {
 
 import "./result_flat_table.scss";
 
-const { current_drr_key } = Results;
 const { months } = businessConstants;
 
 const { indicator_target_text, indicator_actual_text } =
   indicator_text_functions;
 
-const current_drr_year = result_docs[current_drr_key].year;
+const get_drr_year = (drr_key) => result_docs[drr_key].year;
+
+const get_subject_result_counts = (subject) =>
+  subject.subject_type === "dept"
+    ? ResultCounts.get_dept_counts(subject.id)
+    : GranularResultCounts.get_subject_counts(subject.id);
+const get_drr_keys_with_data = (subject) => {
+  const subject_result_counts = get_subject_result_counts(subject);
+
+  const had_doc_data = (doc) => {
+    const count_key = `${doc}_total`;
+    return (
+      /drr/.test(doc) &&
+      !_.isUndefined(subject_result_counts) &&
+      !_.isNull(subject_result_counts[count_key]) &&
+      subject_result_counts[count_key] > 0
+    );
+  };
+
+  return _.chain(result_docs).keys().filter(had_doc_data).sort().value();
+};
 
 const get_actual_parent = (indicator_node, full_results_hierarchy) => {
   const parent = _.find(full_results_hierarchy, {
@@ -140,7 +163,7 @@ const sort_date_to_achieve = (
   }
 };
 
-const indicator_table_from_list = (indicator_list, subject) => {
+const indicator_table_from_list = (indicator_list, subject, drr_key) => {
   const ind_map = _.chain(indicator_list)
     .map((ind) => [
       ind.indicator.id,
@@ -231,7 +254,7 @@ const indicator_table_from_list = (indicator_list, subject) => {
   return (
     <DisplayTable
       table_name={text_maker("result_flat_table_title", {
-        year: current_drr_year,
+        year: get_drr_year(drr_key),
       })}
       data={table_data}
       column_configs={column_configs}
@@ -249,22 +272,35 @@ class ResultsTable extends React.Component {
     };
   }
   componentDidMount() {
-    const { subject, last_drr_doc } = this.props;
-
-    ensure_loaded({
-      subject,
-      results: true,
-      result_docs: [last_drr_doc],
-    }).then(() => this.setState({ loading: false }));
+    this.load_data();
   }
+  componentDidUpdate(prevProps) {
+    const { drr_key } = this.props;
+    const { drr_key: previous_drr_key } = prevProps;
+
+    if (drr_key !== previous_drr_key) {
+      this.load_data();
+    }
+  }
+  load_data = () => {
+    const { subject, drr_key } = this.props;
+
+    this.setState({ loading: true }, () =>
+      ensure_loaded({
+        subject,
+        results: true,
+        result_docs: [drr_key],
+      }).then(() => this.setState({ loading: false }))
+    );
+  };
   render() {
-    const { subject, subject_result_counts, last_drr_doc } = this.props;
+    const { subject, subject_result_counts, drr_key } = this.props;
     const { loading, status_active_list } = this.state;
 
     if (loading) {
       return <LeafSpinner config_name={"subroute"} />;
     } else {
-      const flat_indicators = get_indicators(subject, last_drr_doc);
+      const flat_indicators = get_indicators(subject, drr_key);
       const icon_counts = _.countBy(
         flat_indicators,
         ({ indicator }) => indicator.status_key
@@ -289,8 +325,8 @@ class ResultsTable extends React.Component {
               k="result_flat_table_text"
               args={{
                 subject,
-                drr_total: subject_result_counts[`${current_drr_key}_total`],
-                year: current_drr_year,
+                drr_total: subject_result_counts[`${drr_key}_total`],
+                year: get_drr_year(drr_key),
               }}
             />
           </div>
@@ -304,7 +340,7 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators, subject)}
+              {indicator_table_from_list(filtered_indicators, subject, drr_key)}
             </div>
           </HeightClippedGraph>
         </div>
@@ -312,6 +348,39 @@ class ResultsTable extends React.Component {
     }
   }
 }
+
+const DocTabbedResultsTable = ({
+  subject,
+  subject_result_counts,
+  drr_keys_with_data,
+}) => {
+  const [drr_key, set_drr_key] = useState(_.last(drr_keys_with_data));
+
+  const panel_content = (
+    <ResultsTable
+      subject={subject}
+      subject_result_counts={subject_result_counts}
+      drr_key={drr_key}
+    />
+  );
+
+  if (drr_keys_with_data.length > 1) {
+    return (
+      <Tabs
+        tabs={_.chain(drr_keys_with_data)
+          .map((drr_key) => [drr_key, get_drr_year(drr_key)])
+          .fromPairs()
+          .value()}
+        open_tab_key={drr_key}
+        tab_open_callback={set_drr_key}
+      >
+        {panel_content}
+      </Tabs>
+    );
+  } else {
+    return panel_content;
+  }
+};
 
 export const declare_results_table_panel = () =>
   declare_panel({
@@ -323,53 +392,41 @@ export const declare_results_table_panel = () =>
       source: () => get_source_links(["DRR"]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
-      title: text_maker("result_flat_table_title", {
-        year: current_drr_year,
-      }),
-      calculate(subject) {
-        const subject_result_counts =
-          subject_type === "dept"
-            ? ResultCounts.get_dept_counts(subject.id)
-            : GranularResultCounts.get_subject_counts(subject.id);
+      title: (subject) => {
+        const drr_keys_with_data = get_drr_keys_with_data(subject);
 
-        const had_doc_data = (doc) => {
-          const count_key = `${doc}_total`;
-          return (
-            /drr/.test(doc) &&
-            !_.isUndefined(subject_result_counts) &&
-            !_.isNull(subject_result_counts[count_key]) &&
-            subject_result_counts[count_key] > 0
-          );
-        };
-
-        const docs_with_data = _.chain(result_docs)
-          .keys()
-          .filter(had_doc_data)
-          .value();
-
-        const last_drr_doc = _.chain(docs_with_data).sort().last().value();
-
-        if (last_drr_doc !== current_drr_key) {
-          return false;
-        }
-
-        return { docs_with_data, subject_result_counts, last_drr_doc };
+        return text_maker("result_flat_table_title", {
+          first_year: get_drr_year(_.first(drr_keys_with_data)),
+          last_year:
+            drr_keys_with_data.length > 1 &&
+            get_drr_year(_.last(drr_keys_with_data)),
+        });
       },
+      calculate(subject) {
+        const subject_result_counts = get_subject_result_counts(subject);
 
+        const drr_keys_with_data = get_drr_keys_with_data(subject);
+
+        return (
+          !_.isEmpty(drr_keys_with_data) && {
+            drr_keys_with_data,
+            subject_result_counts,
+          }
+        );
+      },
       render({ title, calculations, sources, footnotes }) {
         const {
           subject,
-          panel_args: { docs_with_data, last_drr_doc, subject_result_counts },
+          panel_args: { drr_keys_with_data, subject_result_counts },
         } = calculations;
 
         return (
           <InfographicPanel {...{ title, sources, footnotes }}>
-            <ResultsTable
+            <DocTabbedResultsTable
               {...{
                 subject,
-                docs_with_data,
-                last_drr_doc,
                 subject_result_counts,
+                drr_keys_with_data,
               }}
             />
           </InfographicPanel>
