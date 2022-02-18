@@ -22,6 +22,7 @@ import {
   get_result_doc_keys,
   result_docs,
   link_to_results_infograph,
+  get_year_for_doc_key,
 } from "./results_common";
 
 import text from "./gov_dp.yaml";
@@ -30,7 +31,6 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const dp_keys = get_result_doc_keys("dp");
 
-const get_dp_year = (dp_key) => result_docs[dp_key].year;
 const get_dp_corresponding_drr_year = (dp_key) =>
   _.toNumber(result_docs[dp_key].year_short) + 1;
 
@@ -114,7 +114,7 @@ const DpSummary = () => {
           args={{
             ...counts_with_generic_keys,
             depts_with_dps: rows_of_counts_by_dept.length,
-            year: get_dp_year(dp_key),
+            year: get_year_for_doc_key(dp_key),
             drr_tabling_year: get_dp_corresponding_drr_year(dp_key),
           }}
         />
@@ -133,7 +133,7 @@ const DpSummary = () => {
     return (
       <Tabs
         tabs={_.chain(dp_keys)
-          .map((dp_key) => [dp_key, get_dp_year(dp_key)])
+          .map((dp_key) => [dp_key, get_year_for_doc_key(dp_key)])
           .fromPairs()
           .value()}
         open_tab_key={dp_key}
@@ -154,8 +154,8 @@ export const declare_gov_dp_panel = () =>
     panel_config_func: () => ({
       requires_result_counts: true,
       title: text_maker("gov_dp_summary_title", {
-        first_year: get_dp_year(_.first(dp_keys)),
-        last_year: dp_keys.length > 1 && get_dp_year(_.last(dp_keys)),
+        first_year: get_year_for_doc_key(_.first(dp_keys)),
+        last_year: dp_keys.length > 1 && get_year_for_doc_key(_.last(dp_keys)),
       }),
       calculate: () => !_.isEmpty(dp_keys),
       footnotes: ["RESULTS", "DP"],

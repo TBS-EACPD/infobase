@@ -7,8 +7,6 @@ import {
   create_text_maker_component,
 } from "src/components/index";
 
-import * as Results from "src/models/results";
-
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { IconArray } from "src/charts/IconArray";
@@ -23,6 +21,7 @@ import {
   filter_and_genericize_doc_counts,
   result_statuses,
   result_color_scale,
+  get_year_for_doc_key,
 } from "./results_common";
 
 import text from "./CommonDrrSummary.yaml";
@@ -30,12 +29,6 @@ import text from "./CommonDrrSummary.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
 import "./CommonDrrSummary.scss";
-
-const { result_docs } = Results;
-
-const get_drr_year = (drr_key) => result_docs[drr_key].year;
-const get_drr_target_year = (drr_key) =>
-  _.toNumber(result_docs[drr_key].year_short) + 1;
 
 const grid_colors = {
   met: "results-icon-array-pass",
@@ -150,7 +143,7 @@ const StatusGrid = ({ met, not_met, not_available, future, drr_key }) => {
             index: 1,
             formatter: "big_int",
             header: text_maker("results_icon_array_title", {
-              year: get_drr_year(drr_key),
+              year: get_year_for_doc_key(drr_key),
             }),
           },
         }}
@@ -233,7 +226,7 @@ class PercentageViz extends React.Component {
     const colors = ({ id }) => result_color_scale(id);
 
     const new_summary_text_args = {
-      year: get_drr_year(drr_key),
+      year: get_year_for_doc_key(drr_key),
       drr_subset: graph_total,
       drr_total: all_data_total,
       drr_indicators_met: _.includes(selected, "met") && counts.met,
@@ -319,8 +312,7 @@ export const CommonDrrSummary = ({
   const summary_text_args = {
     subject,
     results_dept_count: subject.id === "gov" && results_dept_count,
-    year: get_drr_year(drr_key),
-    target_year: get_drr_target_year(drr_key),
+    year: get_year_for_doc_key(drr_key),
     ...current_drr_counts_with_generic_keys,
   };
 

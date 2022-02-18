@@ -213,6 +213,8 @@ const result_color_scale = scaleOrdinal() // this is a d3 scale to allow seamles
   .domain(["met", "not_met", "not_available", "future"])
   .range(_.take(newIBCategoryColors, 4));
 
+const get_year_for_doc_key = (key) => result_docs[key].year;
+
 export {
   Result,
   Indicator,
@@ -233,4 +235,5 @@ export {
   indicator_text_functions,
   result_color_scale,
   filter_and_genericize_doc_counts,
+  get_year_for_doc_key,
 };

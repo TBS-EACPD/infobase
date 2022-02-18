@@ -35,6 +35,7 @@ import {
   result_docs,
   result_statuses,
   indicator_text_functions,
+  get_year_for_doc_key,
 } from "./results_common";
 
 import "./result_flat_table.scss";
@@ -43,8 +44,6 @@ const { months } = businessConstants;
 
 const { indicator_target_text, indicator_actual_text } =
   indicator_text_functions;
-
-const get_drr_year = (drr_key) => result_docs[drr_key].year;
 
 const get_subject_result_counts = (subject) =>
   subject.subject_type === "dept"
@@ -254,7 +253,7 @@ const indicator_table_from_list = (indicator_list, subject, drr_key) => {
   return (
     <DisplayTable
       table_name={text_maker("result_flat_table_title", {
-        year: get_drr_year(drr_key),
+        year: get_year_for_doc_key(drr_key),
       })}
       data={table_data}
       column_configs={column_configs}
@@ -326,7 +325,7 @@ class ResultsTable extends React.Component {
               args={{
                 subject,
                 drr_total: subject_result_counts[`${drr_key}_total`],
-                year: get_drr_year(drr_key),
+                year: get_year_for_doc_key(drr_key),
               }}
             />
           </div>
@@ -368,7 +367,7 @@ const DocTabbedResultsTable = ({
     return (
       <Tabs
         tabs={_.chain(drr_keys_with_data)
-          .map((drr_key) => [drr_key, get_drr_year(drr_key)])
+          .map((drr_key) => [drr_key, get_year_for_doc_key(drr_key)])
           .fromPairs()
           .value()}
         open_tab_key={drr_key}
@@ -396,10 +395,10 @@ export const declare_results_table_panel = () =>
         const drr_keys_with_data = get_drr_keys_with_data(subject);
 
         return text_maker("result_flat_table_title", {
-          first_year: get_drr_year(_.first(drr_keys_with_data)),
+          first_year: get_year_for_doc_key(_.first(drr_keys_with_data)),
           last_year:
             drr_keys_with_data.length > 1 &&
-            get_drr_year(_.last(drr_keys_with_data)),
+            get_year_for_doc_key(_.last(drr_keys_with_data)),
         });
       },
       calculate(subject) {
