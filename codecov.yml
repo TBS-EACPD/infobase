@@ -28,6 +28,8 @@ coverage:
         flags:
           - e2e_shallow
         target: auto
+        threshold: 5% # may be too low, these shallow tests can't necessarily target all code, so a high threshold is likely necessary
+        base: auto
       server:
         flags:
           - server
@@ -35,3 +37,5 @@ coverage:
         flags:
           - form_backend
         target: auto
+        threshold: 2%
+        base: auto
