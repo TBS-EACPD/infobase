@@ -6,8 +6,6 @@ import { create_text_maker_component } from "src/components/index";
 
 import glossary_text from "src/glossary/glossary.yaml";
 
-import { glossary_lite as glossary_search_config } from "src/search/search_configs";
-
 import { GlossaryDef } from "./GlossarySidebarDefinition";
 import { GlossaryList } from "./GlossarySidebarList";
 import { SideBarSearch } from "./GlossarySidebarSearch";
@@ -69,7 +67,6 @@ export class GlossarySidebar extends React.Component<
                   this.props.set_glossary_item(key)
                 }
                 search_phrase={search_phrase}
-                search_configs={[glossary_search_config]}
                 focus_item_key={focus_item_key}
               />
             )}

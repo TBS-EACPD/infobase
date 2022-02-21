@@ -9,20 +9,27 @@ import glossary_text from "src/glossary/glossary.yaml";
 
 import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
-import {
-  glossary_lite,
-  glossary_lite as glossary_search_config,
-} from "src/search/search_configs";
+import { glossary_lite as glossary_search_config } from "src/search/search_configs";
 
-import {
-  SearchHighlighter,
-  get_simplified_search_phrase,
-} from "src/search/search_utils";
+import { SearchHighlighter } from "src/search/search_utils";
 
 const { text_maker } = create_text_maker_component(glossary_text);
 
-export class GlossaryList extends React.Component {
-  constructor(props) {
+interface GlossaryListProps {
+  focus_item_key: string;
+  open_definition: (key: string) => void;
+  search_phrase: string;
+}
+
+interface GlossaryListState {
+  search_phrase: string;
+}
+
+export class GlossaryList extends React.Component<
+  GlossaryListProps,
+  GlossaryListState
+> {
+  constructor(props: GlossaryListProps) {
     super(props);
 
     this.state = {
@@ -30,7 +37,10 @@ export class GlossaryList extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(
+    nextProps: GlossaryListProps,
+    prevState: GlossaryListState
+  ) {
     const { search_phrase: next_phrase } = nextProps;
     const { search_phrase: prev_phrase } = prevState;
 
@@ -47,20 +57,20 @@ export class GlossaryList extends React.Component {
     document.getElementById(this.props.focus_item_key)?.focus();
   }
 
-  openDefinition(item) {
-    this.props.open_definition(item.id);
+  openDefinition(key: string) {
+    this.props.open_definition(key);
   }
 
-  handleKeyPress(e, item) {
-    if (e.key === "Enter" && item) {
-      this.openDefinition(item);
+  handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>, key: string) {
+    if (e.key === "Enter" && key) {
+      this.openDefinition(key);
     }
   }
 
   render() {
     const { search_phrase } = this.state;
 
-    const results = glossary_lite.query_sync(search_phrase);
+    const results = glossary_search_config.query_sync(search_phrase);
 
     const items_by_letter = get_glossary_items_by_letter(results);
 
@@ -81,8 +91,8 @@ export class GlossaryList extends React.Component {
                     <span
                       role="button"
                       id={item.id}
-                      onClick={() => this.openDefinition(item)}
-                      onKeyDown={(e) => this.handleKeyPress(e, item)}
+                      onClick={() => this.openDefinition(item.id)}
+                      onKeyDown={(e) => this.handleKeyPress(e, item.id)}
                       tabIndex={0}
                     >
                       {search_phrase ? (
