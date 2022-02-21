@@ -4,13 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import type { RouteComponentProps } from "react-router-dom";
 
-import { Sidebar, create_text_maker_component } from "src/components";
-
-import glossary_text from "src/glossary/glossary.yaml";
-
 import { GlossarySidebar } from "./GlossarySidebar";
-
-const { text_maker } = create_text_maker_component(glossary_text);
 
 const routes_without_glossary = ["/start", "/glossary"];
 
@@ -130,20 +124,14 @@ const GlossarySidebarController = withRouter(
 
       return (
         <div ref={this.menu_ref}>
-          <Sidebar
+          <GlossarySidebar
+            glossary_item_key={this.state.glossary_item_key}
+            focus_item_key={this.state.focus_item_key}
+            set_glossary_item={(key) => this.setGlossaryItem(key)}
+            set_query={(query) => this.setQuery(query)}
+            search_phrase={this.state.search_phrase}
             is_open={this.state.is_open}
-            callback={(value: boolean) => this.toggleGlossary(value)}
-            button_text={text_maker("glossary_title")}
-            title_text={text_maker("glossary_title")}
-            children={
-              <GlossarySidebar
-                glossary_item_key={this.state.glossary_item_key}
-                focus_item_key={this.state.focus_item_key}
-                set_glossary_item={(key) => this.setGlossaryItem(key)}
-                set_query={(query) => this.setQuery(query)}
-                search_phrase={this.state.search_phrase}
-              />
-            }
+            toggle_glossary={(value) => this.toggleGlossary(value)}
           />
         </div>
       );
