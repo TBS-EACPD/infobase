@@ -372,8 +372,10 @@ const drr_docs = build_doc_info_objects("drr", [
   {
     year_short: "2020",
     resource_years: ["{{pa_last_year}}"],
-    doc_url_en: "DRR_TODO",
-    doc_url_fr: "DRR_TODO",
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2020-21-departmental-results-reports.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2020-2021.html",
     late_results_orgs: [],
     late_resources_orgs: [],
   },

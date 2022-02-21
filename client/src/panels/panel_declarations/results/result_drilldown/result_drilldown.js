@@ -86,26 +86,9 @@ const get_docs_with_data = (subject, subject_type) => {
     .intersection(docs_with_data)
     .value();
 
-  // DRR_TODO temporary special case (although should be future proof) to set drr19 as the default tab,
-  // done so that the (temporarily) only year with GBA Plus day is the default
-  // Can drop and return to just most-recent by tabling date with DRR 2020-21
-  const default_doc = (() => {
-    const drr19 = "drr19";
-
-    const has_drr19_data = _.includes(docs_with_data, drr19);
-
-    const is_pre_drr20 = !_.chain(result_docs).keys().includes("drr20").value();
-
-    if (has_drr19_data && is_pre_drr20) {
-      return drr19;
-    } else {
-      return _.last(docs_with_data_in_tabling_order);
-    }
-  })();
-
   return {
     docs_with_data,
-    default_doc: default_doc,
+    default_doc: _.last(docs_with_data_in_tabling_order),
   };
 };
 
