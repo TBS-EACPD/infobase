@@ -237,9 +237,6 @@ function extract_flat_data_from_results_hierarchies(
     indicators = [],
     pi_dr_links = [];
 
-  const parse_non_empty_int = (value) =>
-    _.isEmpty(value) ? null : parseInt(value);
-
   const crawl_hierachy_level = (subject_node) =>
     _.each(subject_node, (subject) => {
       _.each(
@@ -256,18 +253,7 @@ function extract_flat_data_from_results_hierarchies(
           });
 
           _.each(result.indicators, (indicator) => {
-            const processed_indicator = {
-              ...indicator,
-              // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T a header, but an actuall number sign
-              // a header in a methodology would be invalid Titan input anyway, so safe to escape all those cases ourselves
-              methodology:
-                indicator.methodology &&
-                indicator.methodology.replace(/^#/g, "\\#"),
-              target_year: parse_non_empty_int(indicator.target_year),
-              target_month: parse_non_empty_int(indicator.target_month),
-            };
-
-            indicators.push(_.omit(processed_indicator, "__typename"));
+            indicators.push(_.omit(indicator, "__typename"));
           });
         }
       );
@@ -391,7 +377,141 @@ export function api_load_results_bundle(subject, result_docs) {
         extract_flat_data_from_results_hierarchies(hierarchical_response_data);
 
       _.each(results, (obj) => Result.create_and_register(obj));
-      _.each(indicators, (obj) => Indicator.create_and_register(obj));
+      _.each(
+        indicators,
+        (obj) => Indicator.lookup(obj.id) || Indicator.create_and_register(obj)
+      );
+      _.each(pi_dr_links, ({ program_id, result_id }) =>
+        PI_DR_Links.add(program_id, result_id)
+      );
+
+      _.each(
+        docs_to_load,
+        // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
+        // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
+        (doc) => {
+          _.setWith(
+            _api_subject_ids_with_loaded_results,
+            `${doc}.${subject_type}.${id}`,
+            true,
+            Object
+          );
+
+          // can't tell us if subject has no results for any doc, just if it has any for current doc, so only update the _subject_has_results entry if positive
+          _subject_has_results[id] =
+            !_.isEmpty(results) || _subject_has_results[id]; // side effect
+        }
+      );
+
+      return Promise.resolve();
+    })
+    .catch(function (error) {
+      const resp_time = Date.now() - time_at_request;
+      log_standard_event({
+        SUBAPP: window.location.hash.replace("#", ""),
+        MISC1: "API_QUERY_FAILURE",
+        MISC2: `Results, took  ${resp_time} ms - ${error.toString()}`,
+      });
+      throw error;
+    });
+}
+
+export function api_load_single_indicator(subject, result_docs) {
+  const docs_to_load = !_.isEmpty(result_docs) ? result_docs : result_doc_keys;
+
+  const subject_type = (subject && subject.subject_type) || "all";
+
+  const { is_loaded, id, query, response_data_accessor } = (() => {
+    const subject_is_loaded = ({ subject_type, id }) =>
+      _.every(docs_to_load, (doc) =>
+        _.get(
+          _api_subject_ids_with_loaded_results,
+          `${doc}.${subject_type}.${id}`
+        )
+      );
+
+    const all_is_loaded = () =>
+      subject_is_loaded({ subject_type: "all", id: "all" });
+    const dept_is_loaded = (org) => all_is_loaded() || subject_is_loaded(org);
+    const crso_is_loaded = (crso) =>
+      dept_is_loaded(crso.dept) || subject_is_loaded(crso);
+    const program_is_loaded = (program) =>
+      crso_is_loaded(program.crso) || subject_is_loaded(program);
+
+    switch (subject_type) {
+      case "program":
+        return {
+          is_loaded: program_is_loaded(subject),
+          id: subject.id,
+          query: get_program_load_results_bundle_query(docs_to_load),
+          response_data_accessor: (response) => [response.data.root.program],
+        };
+      case "crso":
+        return {
+          is_loaded: crso_is_loaded(subject),
+          id: subject.id,
+          query: get_crso_load_results_bundle_query(docs_to_load),
+          response_data_accessor: (response) => [response.data.root.crso],
+        };
+      case "dept":
+        return {
+          is_loaded: dept_is_loaded(subject),
+          id: String(subject.id),
+          query: get_dept_load_results_bundle_query(docs_to_load),
+          response_data_accessor: (response) => [response.data.root.org],
+        };
+      default:
+        return {
+          is_loaded: all_is_loaded(subject),
+          id: "all",
+          query: get_all_load_results_bundle_query(docs_to_load),
+          response_data_accessor: (response) => response.data.root.orgs,
+        };
+    }
+  })();
+
+  if (is_loaded) {
+    return Promise.resolve();
+  }
+
+  const time_at_request = Date.now();
+  const client = get_client();
+  return client
+    .query({
+      query,
+      variables: {
+        lang: lang,
+        id,
+        _query_name: "results_bundle",
+      },
+    })
+    .then((response) => {
+      const hierarchical_response_data = response_data_accessor(response);
+
+      const resp_time = Date.now() - time_at_request;
+      if (!_.isEmpty(hierarchical_response_data)) {
+        // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_SUCCESS",
+          MISC2: `Results, took ${resp_time} ms`,
+        });
+      } else {
+        log_standard_event({
+          SUBAPP: window.location.hash.replace("#", ""),
+          MISC1: "API_QUERY_UNEXPECTED",
+          MISC2: `Results, took ${resp_time} ms`,
+        });
+      }
+
+      const { results, indicators, pi_dr_links } =
+        extract_flat_data_from_results_hierarchies(hierarchical_response_data);
+
+      _.each(results, (obj) => Result.create_and_register(obj));
+      _.each(
+        indicators,
+        (obj) => Indicator.lookup(obj.id) || Indicator.create_and_register(obj)
+      );
       _.each(pi_dr_links, ({ program_id, result_id }) =>
         PI_DR_Links.add(program_id, result_id)
       );

@@ -105,19 +105,22 @@ export default async function ({ models }) {
     .filter(({ result_id }) => _.includes(results_with_indicators, result_id)) // results without indicators are a data issue. The pipeline tracks these cases, so we can quietly discard them here
     .value();
 
+  const parsed_int_or_null = (numeric_string) =>
+    _.isNaN(parseInt(numeric_string)) ? null : parseInt(numeric_string);
+
   const indicator_records = _.chain(raw_indicator_records)
     .map((indicator) => ({
       ...indicator,
       id: null,
       indicator_id: indicator.id,
-      target_year: _.isNaN(parseInt(indicator.target_year))
-        ? null
-        : parseInt(indicator.target_year),
-      target_month: _.isEmpty(indicator.target_month)
-        ? null
-        : +indicator.target_month,
+      target_year: parsed_int_or_null(indicator.target_year),
+      target_month: parsed_int_or_null(indicator.target_month),
       status_key: indicator.status_key || "dp",
-      gba_plus: _.isNull(indicator.gba_plus) ? null : indicator.gba_plus,
+      gba_plus: indicator?.gba_plus || null,
+      // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T intended to be a header;
+      // a header in a methodology is an invalid Titan input, so just to be safe make sure all number signs are escaped in the input!
+      methodology:
+        indicator.methodology && indicator.methodology.replace(/^#/g, "\\#"),
     }))
     .map((indicator, ix, indicator_records) => {
       const { doc, stable_id } = indicator;

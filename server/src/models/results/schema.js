@@ -91,8 +91,8 @@ ${_.reduce(
     name: String
     doc: String
     
-    target_year: String
-    target_month: String
+    target_year: Int
+    target_month: Int
 
     target_type: String
     target_min: String
