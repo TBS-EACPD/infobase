@@ -13,7 +13,6 @@ import {
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import { Indicator } from "src/models/results";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang } from "src/core/injected_build_constants";
@@ -163,35 +162,9 @@ const sort_date_to_achieve = (
   }
 };
 
-const IndicatorCell = ({ indicator_id, subject }) => {
-  const [show, set_show] = useState(false);
+const IndicatorTable = ({ subject, drr_key, indicator_list }) => {
+  const [open_indicator_id, set_open_indicator_id] = useState(null);
 
-  const indicator = Indicator.lookup(indicator_id);
-
-  return (
-    <Fragment>
-      <button
-        className="btn btn-link"
-        onClick={() => set_show(true)}
-        aria-label={`${lang === "en" ? "Discover more about" : "Découvrir"} ${
-          indicator.name
-        }`}
-        style={{ color: secondaryColor }}
-      >
-        {indicator.name}
-      </button>
-      <StatelessModal
-        show={show}
-        title={text_maker("indicator_display_title")}
-        body={<IndicatorDisplayPanel id={indicator_id} subject={subject} />}
-        on_close_callback={() => set_show(false)}
-        additional_dialog_class={"modal-responsive"}
-      />
-    </Fragment>
-  );
-};
-
-const indicator_table_from_list = (indicator_list, subject, drr_key) => {
   const ind_map = _.chain(indicator_list)
     .map((ind) => [
       ind.indicator.id,
@@ -221,9 +194,21 @@ const indicator_table_from_list = (indicator_list, subject, drr_key) => {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => (
-        <IndicatorCell indicator_id={ind_map[value].id} subject={subject} />
-      ),
+      formatter: (value) => {
+        const { id, name } = ind_map[value];
+        return (
+          <button
+            className="btn btn-link"
+            onClick={() => set_open_indicator_id(id)}
+            aria-label={`${
+              lang === "en" ? "Details for:" : "Détails pour :"
+            } ${name}`}
+            style={{ color: secondaryColor }}
+          >
+            {name}
+          </button>
+        );
+      },
       plain_formatter: (value) => ind_map[value].name,
     },
     target: {
@@ -267,13 +252,26 @@ const indicator_table_from_list = (indicator_list, subject, drr_key) => {
     status: ind.indicator.status_key,
   }));
   return (
-    <DisplayTable
-      table_name={text_maker("result_flat_table_title", {
-        year: get_year_for_doc_key(drr_key),
-      })}
-      data={table_data}
-      column_configs={column_configs}
-    />
+    <Fragment>
+      <DisplayTable
+        table_name={text_maker("result_flat_table_title", {
+          year: get_year_for_doc_key(drr_key),
+        })}
+        data={table_data}
+        column_configs={column_configs}
+      />
+      <StatelessModal
+        show={!_.isNull(open_indicator_id)}
+        on_close_callback={() => set_open_indicator_id(null)}
+        additional_dialog_class={"modal-responsive"}
+        title={text_maker("indicator_display_title")}
+        body={
+          !_.isNull(open_indicator_id) && (
+            <IndicatorDisplayPanel subject={subject} id={open_indicator_id} />
+          )
+        }
+      />
+    </Fragment>
   );
 };
 
@@ -355,7 +353,11 @@ class ResultsTable extends React.Component {
           </div>
           <HeightClippedGraph clipHeight={200}>
             <div className="results-flat-table">
-              {indicator_table_from_list(filtered_indicators, subject, drr_key)}
+              <IndicatorTable
+                subject={subject}
+                drr_key={drr_key}
+                indicator_list={filtered_indicators}
+              />
             </div>
           </HeightClippedGraph>
         </div>
