@@ -16,18 +16,30 @@ const { text_maker } = create_text_maker_component(glossary_text);
 
 interface GlossarySidebarProps {
   glossary_item_key: string;
+  focus_item_key: string;
   set_glossary_item: (key: string) => void;
   search_phrase: string;
   set_query: (query: string) => void;
 }
 
-export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
+interface GlossarySidebarState {
+  focus_item_key: string;
+}
+
+export class GlossarySidebar extends React.Component<
+  GlossarySidebarProps,
+  GlossarySidebarState
+> {
   constructor(props: GlossarySidebarProps) {
     super(props);
+
+    this.state = {
+      focus_item_key: "",
+    };
   }
 
   render() {
-    const { glossary_item_key, search_phrase } = this.props;
+    const { glossary_item_key, search_phrase, focus_item_key } = this.props;
     return (
       <div>
         <div className="glossary-sb__header-wrapper">
@@ -58,6 +70,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
                 }
                 search_phrase={search_phrase}
                 search_configs={[glossary_search_config]}
+                focus_item_key={focus_item_key}
               />
             )}
           </div>

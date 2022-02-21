@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import _ from "lodash";
 import React from "react";
 
@@ -24,7 +23,6 @@ export class GlossaryList extends React.Component {
     super(props);
 
     this.state = {
-      scrollEl: "",
       search_phrase: "",
     };
 
@@ -50,6 +48,7 @@ export class GlossaryList extends React.Component {
 
   // Will discuss if worth moving the query_result state up to parent component
   componentDidMount() {
+    document.getElementById(this.props.focus_item_key)?.focus();
     this.componentDidUpdate();
   }
 
@@ -87,19 +86,8 @@ export class GlossaryList extends React.Component {
         }
       });
     }
-
-    /*
-    if (this.state.scrollEl) {
-      const el = document.getElementById(this.state.scrollEl);
-      const scrollDiv = document.getElementById("gloss-sidebar");
-
-      if (el && scrollDiv) {
-        scrollDiv.scrollTop = el.offsetTop;
-        el.focus();
-      }
-    }
-    */
   }
+
   results_from_matches = (matches) =>
     _.map(matches, (match) => ({
       get_compiled_definition: match.get_compiled_definition,
@@ -125,11 +113,6 @@ export class GlossaryList extends React.Component {
     );
 
   openDefinition(item) {
-    /*
-    this.setState({
-      scrollEl: item.title.replace(/\s+/g, ""),
-    });
-    */
     this.props.open_definition(item.id);
   }
 
@@ -172,7 +155,7 @@ export class GlossaryList extends React.Component {
                   <div key={ix} className="glossary-sb__title">
                     <span
                       role="button"
-                      //id={item.title.replace(/\s+/g, "")}
+                      id={item.id}
                       onClick={() => this.openDefinition(item)}
                       onKeyDown={(e) => this.handleKeyPress(e, item)}
                       tabIndex={0}
