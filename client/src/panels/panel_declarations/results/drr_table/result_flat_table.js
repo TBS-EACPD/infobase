@@ -6,6 +6,27 @@ import { declare_panel } from "src/panels/panel_declarations/common_panel_utils"
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
+  StatusIconTable,
+  large_status_icons,
+} from "src/panels/panel_declarations/results/result_components";
+
+import { create_full_results_hierarchy } from "src/panels/panel_declarations/results/result_drilldown/result_hierarchies";
+
+import {
+  TM,
+  text_maker,
+} from "src/panels/panel_declarations/results/result_text_provider";
+
+import {
+  ResultCounts,
+  GranularResultCounts,
+  result_docs,
+  result_statuses,
+  indicator_text_functions,
+  get_year_for_doc_key,
+} from "src/panels/panel_declarations/results/results_common";
+
+import {
   LeafSpinner,
   DisplayTable,
   Tabs,
@@ -27,19 +48,6 @@ import { smart_sort_func } from "src/sort_utils";
 import { secondaryColor } from "src/style_constants/index";
 
 import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
-
-import { StatusIconTable, large_status_icons } from "./result_components";
-
-import { create_full_results_hierarchy } from "./result_drilldown/result_hierarchies";
-import { TM, text_maker } from "./result_text_provider";
-import {
-  ResultCounts,
-  GranularResultCounts,
-  result_docs,
-  result_statuses,
-  indicator_text_functions,
-  get_year_for_doc_key,
-} from "./results_common";
 
 import "./result_flat_table.scss";
 
