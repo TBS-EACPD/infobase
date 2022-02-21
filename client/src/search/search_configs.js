@@ -236,14 +236,15 @@ const glossary_lite = {
   name_function: _.property("title"),
   menu_content_function: default_menu_content_function,
   query: (search_phrase) =>
-    Promise.resolve(
-      _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
-        memoized_re_matchers(
-          search_phrase,
-          glossary_attributes_to_match,
-          "glossary_lite"
-        )(glossary_entry)
-      )
+    Promise.resolve(glossary_lite.query_sync(search_phrase)),
+  //Temporary sync solution for simple glossary sidebar needs
+  query_sync: (search_phrase) =>
+    _.filter(glossaryEntryStore.get_all(), (glossary_entry) =>
+      memoized_re_matchers(
+        search_phrase,
+        glossary_attributes_to_match,
+        "glossary_lite"
+      )(glossary_entry)
     ),
 };
 
