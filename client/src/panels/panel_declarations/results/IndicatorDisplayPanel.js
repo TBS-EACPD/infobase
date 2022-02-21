@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 
-import _ from "lodash";
 import React from "react";
 
 import {
@@ -26,58 +25,45 @@ import text from "./IndicatorDisplayPanel.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 
-const indicators_fields_fragment = `  id
-  stable_id
-  result_id
-  name
-  doc
-
-  target_year
-  target_month
-
-  target_type
-  target_min
-  target_max
-  target_narrative
-  measure
-  seeking_to
-
-  previous_year_target_type
-  previous_year_target_min
-  previous_year_target_max
-  previous_year_target_narrative
-  previous_year_measure
-  previous_year_seeking_to
-
-  target_explanation
-  result_explanation
-
-  actual_result
-  
-  status_key
-
-  methodology
-`;
-
 const get_indicator_query = gql`
-query($lang: String!, $id: String) {
-  root(lang: $lang) {
-    indicator(id: $id) {
-      ${indicators_fields_fragment}
+  query ($lang: String!, $id: String) {
+    root(lang: $lang) {
+      indicator(id: $id) {
+        id
+        stable_id
+        result_id
+        name
+        doc
+
+        target_year
+        target_month
+
+        target_type
+        target_min
+        target_max
+        target_narrative
+        measure
+        seeking_to
+
+        previous_year_target_type
+        previous_year_target_min
+        previous_year_target_max
+        previous_year_target_narrative
+        previous_year_measure
+        previous_year_seeking_to
+
+        target_explanation
+        result_explanation
+
+        actual_result
+
+        status_key
+
+        methodology
+      }
     }
   }
-}
 `;
-
-const process_indicator = (indicator) => ({
-  ...indicator,
-  target_year: _.isNull(indicator.target_year)
-    ? null
-    : parseInt(indicator.target_year),
-  target_month: _.isNull(indicator.target_month)
-    ? null
-    : parseInt(indicator.target_month),
-});
 
 const query_api = (id) => {
   const time_at_request = Date.now();
@@ -89,13 +75,11 @@ const query_api = (id) => {
       variables: {
         lang: lang,
         id,
-        _query_name: "results_bundle",
+        _query_name: "single_indicator_query",
       },
     })
     .then((response) => {
-      Indicator.create_and_register(
-        process_indicator(response.data.root.indicator)
-      );
+      Indicator.create_and_register(response.data.root.indicator);
       return Promise.resolve();
     })
     .catch(function (error) {
@@ -128,9 +112,11 @@ export default class IndicatorDisplayPanel extends React.Component {
   }
 
   render() {
-    const { id, subject } = this.props;
+    if (this.state.loading) {
+      return <LeafSpinner config_name={"subroute"} />;
+    }
 
-    const { loading } = this.state;
+    const { id, subject } = this.props;
 
     const indicator = Indicator.lookup(id);
 
@@ -141,9 +127,7 @@ export default class IndicatorDisplayPanel extends React.Component {
       })
     );
 
-    return loading ? (
-      <LeafSpinner ref="spinner" config_name={"subroute"} />
-    ) : (
+    return (
       <Panel
         title={indicator.name}
         otherHeaderContent={
