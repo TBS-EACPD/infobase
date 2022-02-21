@@ -136,8 +136,7 @@ class Infographic extends React.Component {
 
       const options = SafeJSURL.parse(this.props.options);
 
-      options &&
-        options.panel_key &&
+      options?.panel_key &&
         this.scroll_to_panel_when_all_loading_done(options.panel_key);
     }
   }
@@ -332,7 +331,7 @@ class Infographic extends React.Component {
             panel_keys: potential_panel_keys,
             subject_type,
             subject: subject,
-            // TODO, this is a monkey patch, need a good API for infographic levels to declare if/how to load footnotes, etc...
+            // TODO, this is a hacky patch, need a good API for infographic levels to declare if/how to load footnotes, etc...
             // Maybe make all this pre-loading the responsibility of individual get_panels_for_subject promises?
             footnotes_for: subject_type !== "service" && subject,
           }).then(() => {
