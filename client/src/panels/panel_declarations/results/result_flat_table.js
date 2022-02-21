@@ -8,8 +8,8 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import {
   LeafSpinner,
   DisplayTable,
-  ModalButton,
   Tabs,
+  StatelessModal,
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
@@ -22,6 +22,7 @@ import { toggle_list } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { get_source_links } from "src/metadata/data_sources";
 import { smart_sort_func } from "src/sort_utils";
+import { secondaryColor } from "src/style_constants/index";
 
 import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
 
@@ -162,6 +163,34 @@ const sort_date_to_achieve = (
   }
 };
 
+const IndicatorCell = ({ indicator_id, subject }) => {
+  const [show, set_show] = useState(false);
+
+  const indicator = Indicator.lookup(indicator_id);
+
+  return (
+    <Fragment>
+      <button
+        className="btn btn-link"
+        onClick={() => set_show(true)}
+        aria-label={`${lang === "en" ? "Discover more about" : "Découvrir"} ${
+          indicator.name
+        }`}
+        style={{ color: secondaryColor }}
+      >
+        {indicator.name}
+      </button>
+      <StatelessModal
+        show={show}
+        title={text_maker("indicator_display_title")}
+        body={<IndicatorDisplayPanel id={indicator_id} subject={subject} />}
+        on_close_callback={() => set_show(false)}
+        additional_dialog_class={"modal-responsive"}
+      />
+    </Fragment>
+  );
+};
+
 const indicator_table_from_list = (indicator_list, subject, drr_key) => {
   const ind_map = _.chain(indicator_list)
     .map((ind) => [
@@ -192,23 +221,9 @@ const indicator_table_from_list = (indicator_list, subject, drr_key) => {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => {
-        const indicator_id = ind_map[value].id;
-        const indicator = Indicator.lookup(indicator_id);
-
-        return (
-          <ModalButton
-            title={text_maker("indicator_display_title")}
-            button_text={indicator.name}
-            aria_label={`${
-              lang === "en" ? "Discover more about" : "Découvrir"
-            } ${indicator.name}`}
-            show_condition={{ name: "indicator", value: indicator_id }}
-          >
-            <IndicatorDisplayPanel id={indicator_id} subject={subject} />
-          </ModalButton>
-        );
-      },
+      formatter: (value) => (
+        <IndicatorCell indicator_id={ind_map[value].id} subject={subject} />
+      ),
       plain_formatter: (value) => ind_map[value].name,
     },
     target: {
