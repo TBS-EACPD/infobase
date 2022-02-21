@@ -108,6 +108,43 @@ export const subject_has_results = (subject) => {
   }
 };
 
+export const indicator_query_fragment = `
+id
+stable_id
+result_id
+name
+doc
+
+target_year
+target_month
+
+target_type
+target_min
+target_max
+target_narrative
+measure
+seeking_to
+gba_plus
+
+previous_year_target_type
+previous_year_target_min
+previous_year_target_max
+previous_year_seeking_to
+previous_year_gba_plus
+previous_year_target_narrative
+previous_year_measure
+previous_year_actual_result
+
+target_explanation
+result_explanation
+
+actual_result
+
+status_key
+
+methodology
+`;
+
 let _api_subject_ids_with_loaded_results = {};
 const results_fields_fragment = (docs_to_load) =>
   _.chain(docs_to_load)
@@ -121,40 +158,7 @@ ${doc}_results: results(doc: "${doc}") {
   doc
 
   indicators {
-    id
-    stable_id
-    result_id
-    name
-    doc
-
-    target_year
-    target_month
-
-    target_type
-    target_min
-    target_max
-    target_narrative
-    measure
-    seeking_to
-    gba_plus
-
-    previous_year_target_type
-    previous_year_target_min
-    previous_year_target_max
-    previous_year_seeking_to
-    previous_year_gba_plus
-    previous_year_target_narrative
-    previous_year_measure
-    previous_year_actual_result
-
-    target_explanation
-    result_explanation
-
-    actual_result
-    
-    status_key
-
-    methodology
+    ${indicator_query_fragment}
   }
 }`
     )

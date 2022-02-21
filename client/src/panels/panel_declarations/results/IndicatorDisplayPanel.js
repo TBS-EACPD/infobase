@@ -11,6 +11,8 @@ import {
 
 import { Indicator } from "src/models/results";
 
+import { indicator_query_fragment } from "src/models/results/populate_results";
+
 import { log_standard_event } from "src/core/analytics";
 import { lang } from "src/core/injected_build_constants";
 
@@ -25,63 +27,29 @@ import text from "./IndicatorDisplayPanel.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 
-const get_indicator_query = gql`
-  query ($lang: String!, $id: String) {
-    root(lang: $lang) {
-      indicator(id: $id) {
-        id
-        stable_id
-        result_id
-        name
-        doc
-
-        target_year
-        target_month
-
-        target_type
-        target_min
-        target_max
-        target_narrative
-        measure
-        seeking_to
-
-        previous_year_target_type
-        previous_year_target_min
-        previous_year_target_max
-        previous_year_target_narrative
-        previous_year_measure
-        previous_year_seeking_to
-
-        target_explanation
-        result_explanation
-
-        actual_result
-
-        status_key
-
-        methodology
-      }
-    }
-  }
-`;
-
-const query_api = (id) => {
+const single_indicator_query = (id) => {
   const time_at_request = Date.now();
   const client = get_client();
-  const query = get_indicator_query;
   return client
     .query({
-      query,
+      query: gql`
+        query ($lang: String!, $id: String) {
+          root(lang: $lang) {
+            indicator(id: $id) {
+              ${indicator_query_fragment}
+            }
+          }
+        }
+      `,
       variables: {
         lang: lang,
         id,
         _query_name: "single_indicator_query",
       },
     })
-    .then((response) => {
-      Indicator.create_and_register(response.data.root.indicator);
-      return Promise.resolve();
-    })
+    .then((response) =>
+      Indicator.create_and_register(response.data.root.indicator)
+    )
     .catch(function (error) {
       const resp_time = Date.now() - time_at_request;
       log_standard_event({
@@ -99,15 +67,11 @@ export default class IndicatorDisplayPanel extends React.Component {
     this.state = { loading: true };
   }
   componentDidMount() {
-    query_api(this.props.id).then(() => this.setState({ loading: false }));
-  }
-
-  componentDidUpdate() {
     const { id } = this.props;
-    const { loading } = this.state;
-
-    if (loading) {
-      query_api(id).then(() => this.setState({ loading: false }));
+    if (Indicator.lookup(id)) {
+      this.setState({ loading: false });
+    } else {
+      single_indicator_query(id).then(() => this.setState({ loading: false }));
     }
   }
 
