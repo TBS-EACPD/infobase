@@ -193,7 +193,8 @@ const indicator_table_from_list = (indicator_list, subject, drr_key) => {
       header: text_maker("indicator"),
       is_searchable: true,
       formatter: (value) => {
-        const indicator = Indicator.lookup(ind_map[value].id);
+        const indicator_id = ind_map[value].id;
+        const indicator = Indicator.lookup(indicator_id);
 
         return (
           <ModalButton
@@ -202,9 +203,9 @@ const indicator_table_from_list = (indicator_list, subject, drr_key) => {
             aria_label={`${
               lang === "en" ? "Discover more about" : "Découvrir"
             } ${indicator.name}`}
-            show_condition={{ name: "indicator", value: ind_map[value].id }}
+            show_condition={{ name: "indicator", value: indicator_id }}
           >
-            <IndicatorDisplayPanel id={ind_map[value].id} subject={subject} />
+            <IndicatorDisplayPanel id={indicator_id} subject={subject} />
           </ModalButton>
         );
       },
