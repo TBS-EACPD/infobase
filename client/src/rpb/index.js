@@ -6,10 +6,6 @@ import React, { Fragment } from "react";
 //re-usable view stuff
 import { withRouter } from "react-router";
 
-import { LeafSpinner, LabeledBox } from "src/components/index";
-
-import { FocusLockedModal } from "src/components/modals_and_popovers/FocusLockedModal";
-
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 import { get_subject_instance_by_guid } from "src/models/subjects";
 
@@ -21,6 +17,8 @@ import {
   StandardRouteContainer,
   LangSynchronizer,
 } from "src/core/NavComponents";
+
+import { LeafSpinner, LabeledBox, FocusLockedModal } from "src/components";
 
 import { SafeJSURL } from "src/general_utils";
 import { Table } from "src/tables/TableClass";

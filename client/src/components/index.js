@@ -43,7 +43,7 @@ export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
 export {
   StatelessModal,
   FixedPopover,
-  ModalButton,
+  FocusLockedModal,
 } from "./modals_and_popovers/index";
 export { DisplayTable } from "./DisplayTable/index";
 
