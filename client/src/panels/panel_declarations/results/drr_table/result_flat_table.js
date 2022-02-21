@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React, { Fragment, useState } from "react";
 
+import { useParams } from "react-router-dom";
+
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
@@ -41,14 +43,13 @@ import { get_subject_instance_by_guid } from "src/models/subjects";
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang } from "src/core/injected_build_constants";
 
-import { toggle_list } from "src/general_utils";
+import { toggle_list, SafeJSURL } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { get_source_links } from "src/metadata/data_sources";
 import { smart_sort_func } from "src/sort_utils";
 import { secondaryColor } from "src/style_constants/index";
 
 import IndicatorDisplayPanel from "./IndicatorDisplayPanel";
-
 import "./result_flat_table.scss";
 
 const { months } = businessConstants;
@@ -156,7 +157,10 @@ const sort_date_to_achieve = (
 };
 
 const IndicatorTable = ({ subject, drr_key, table_data }) => {
-  const [open_indicator_id, set_open_indicator_id] = useState(null);
+  const { options } = useParams();
+  const indicator = SafeJSURL.parse(options)?.indicator || null;
+
+  const [open_indicator_id, set_open_indicator_id] = useState(indicator);
 
   const column_configs = {
     parent: {
