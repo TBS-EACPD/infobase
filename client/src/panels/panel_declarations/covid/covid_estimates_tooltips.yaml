@@ -11,18 +11,22 @@ covid_2021_mains_note:
 covid_2021_supps_a_note:
   transform: [markdown]
   en: |
-    The $20.16 billion identified in the Supplementary Estimates (A) for COVID-19 includes approximately $6.02 billion that has been reprofiled from 2020-21.
+    The $20.26 billion identified in the Supplementary Estimates (A) for COVID-19 includes approximately $6.02 billion that has been reprofiled from 2020-21.
+    The previously reported figure of $20.16 billion did not include $100 million that was in scope of the Economic Response Plan.
   fr: |
-    Les 20,16 milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 6,02 milliard de
-    dollars qui ont été reportés de 2020-2021.
+    Les 20,26 milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 6,02 milliard
+    de dollars qui ont été reportés de 2020-2021. Le montant de 20,16 milliards de dollars indiqué précédemment ne comprenait pas les 100 millions de dollars
+    qui étaient prévus dans le Plan d’intervention économique.
 
 covid_2021_supps_b_note:
   transform: [markdown]
   en: |
-    The $7.4 billion identified in the Supplementary Estimates (B) for COVID-19 includes approximately $143 million that has been reprofiled from 2020-21.
+    The $7.44 billion identified in the Supplementary Estimates (B) for COVID-19 includes approximately $143 million that has been reprofiled from 2020-21.
+    The previously reported figure of $7.40 billion did not include $33.4 million that was in scope of the Economic Response Plan.
   fr: |
-    Les 7,4 milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 143 millions de
-    dollars qui ont été reportés de 2020-2021.
+    Les 7,44 milliards de dollars au titre de la COVID-19 figurant dans le budget supplémentaire des dépenses (A) incluent un montant d'environ 143 millions
+    de dollars qui ont été reportés de 2020-2021. Le montant de 7,40 milliards de dollars indiqué précédemment ne comprenait pas les 33,4 millions de dollars
+    qui étaient prévus dans le Plan d’intervention économique.
 
 # Measure table tooltips
 covid_estimates_2021_mains_COV082_2020_reprofile_tooltip:
