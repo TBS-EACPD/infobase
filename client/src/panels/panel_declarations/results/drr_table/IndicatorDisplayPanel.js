@@ -2,6 +2,8 @@ import { gql } from "@apollo/client";
 
 import React from "react";
 
+import { IndicatorDisplay } from "src/panels/panel_declarations/results/result_components";
+
 import {
   Panel,
   LeafSpinner,
@@ -20,8 +22,6 @@ import { get_client } from "src/graphql_utils/graphql_utils";
 
 import { IconCopyLink } from "src/icons/icons";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
-
-import { IndicatorDisplay } from "./result_components";
 
 import text from "./IndicatorDisplayPanel.yaml";
 
