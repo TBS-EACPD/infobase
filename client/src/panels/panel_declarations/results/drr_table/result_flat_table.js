@@ -156,11 +156,15 @@ const sort_date_to_achieve = (
   }
 };
 
-const IndicatorTable = ({ subject, drr_key, table_data }) => {
-  const { options } = useParams();
-  const indicator = SafeJSURL.parse(options)?.indicator || null;
-
-  const [open_indicator_id, set_open_indicator_id] = useState(indicator);
+const IndicatorTable = ({
+  subject,
+  drr_key,
+  table_data,
+  initial_open_indicator,
+}) => {
+  const [open_indicator_id, set_open_indicator_id] = useState(
+    initial_open_indicator
+  );
 
   const column_configs = {
     parent: {
@@ -291,7 +295,8 @@ class ResultsTable extends React.Component {
     );
   };
   render() {
-    const { subject, subject_result_counts, drr_key } = this.props;
+    const { subject, subject_result_counts, drr_key, initial_open_indicator } =
+      this.props;
     const { loading, status_active_list } = this.state;
 
     if (loading) {
@@ -353,6 +358,7 @@ class ResultsTable extends React.Component {
                 subject={subject}
                 drr_key={drr_key}
                 table_data={table_data}
+                initial_open_indicator={initial_open_indicator}
               />
             </div>
           </HeightClippedGraph>
@@ -367,13 +373,19 @@ const DocTabbedResultsTable = ({
   subject_result_counts,
   drr_keys_with_data,
 }) => {
+  const { options } = useParams();
   const [drr_key, set_drr_key] = useState(_.last(drr_keys_with_data));
+
+  const [initial_open_indicator, set_initial_open_indicator] = useState(
+    SafeJSURL.parse(options)?.indicator || null
+  );
 
   const panel_content = (
     <ResultsTable
       subject={subject}
       subject_result_counts={subject_result_counts}
       drr_key={drr_key}
+      initial_open_indicator={initial_open_indicator}
     />
   );
 
@@ -385,7 +397,10 @@ const DocTabbedResultsTable = ({
           .fromPairs()
           .value()}
         open_tab_key={drr_key}
-        tab_open_callback={set_drr_key}
+        tab_open_callback={(drr_key) => {
+          set_drr_key(drr_key);
+          initial_open_indicator && set_initial_open_indicator(null);
+        }}
       >
         {panel_content}
       </Tabs>
