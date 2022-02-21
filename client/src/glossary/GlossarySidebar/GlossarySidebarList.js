@@ -9,7 +9,10 @@ import glossary_text from "src/glossary/glossary.yaml";
 
 import { get_glossary_items_by_letter } from "src/glossary/glossary_utils";
 
-import { glossary_lite as glossary_search_config } from "src/search/search_configs";
+import {
+  glossary_lite,
+  glossary_lite as glossary_search_config,
+} from "src/search/search_configs";
 
 import {
   SearchHighlighter,
@@ -25,8 +28,6 @@ export class GlossaryList extends React.Component {
     this.state = {
       search_phrase: "",
     };
-
-    this.is_unmounting = false;
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -42,75 +43,9 @@ export class GlossaryList extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    this.is_unmounting = true;
-  }
-
-  // Will discuss if worth moving the query_result state up to parent component
   componentDidMount() {
     document.getElementById(this.props.focus_item_key)?.focus();
-    this.componentDidUpdate();
   }
-
-  componentDidUpdate() {
-    const search_configs = [glossary_search_config];
-    const { search_phrase } = this.state;
-
-    if (search_phrase !== "") {
-      _.each(search_configs, (search_config) => {
-        const { config_name, query } = search_config;
-        const is_not_loading_or_loaded = _.isUndefined(
-          this.get_query_result_state(config_name, search_phrase)
-        );
-
-        if (is_not_loading_or_loaded) {
-          this.set_query_result_state(
-            config_name,
-            search_phrase,
-            "loading",
-            () =>
-              query(search_phrase).then(
-                (matches) =>
-                  !this.is_unmounting &&
-                  this.set_query_result_state(
-                    config_name,
-                    search_phrase,
-                    this.results_from_matches(
-                      matches,
-                      search_phrase,
-                      search_config
-                    )
-                  )
-              )
-          );
-        }
-      });
-    }
-  }
-
-  results_from_matches = (matches) =>
-    _.map(matches, (match) => ({
-      get_compiled_definition: match.get_compiled_definition,
-      id: match.id,
-      title: match.title,
-    }));
-
-  get_query_result_state_key = (config_name, search_phrase) =>
-    `${config_name}__${get_simplified_search_phrase(search_phrase)}`;
-  get_query_result_state = (config_name, search_phrase) =>
-    this.state[this.get_query_result_state_key(config_name, search_phrase)];
-  set_query_result_state = (
-    config_name,
-    search_phrase,
-    state,
-    callback = _.noop
-  ) =>
-    this.setState(
-      {
-        [this.get_query_result_state_key(config_name, search_phrase)]: state,
-      },
-      callback
-    );
 
   openDefinition(item) {
     this.props.open_definition(item.id);
@@ -123,19 +58,9 @@ export class GlossaryList extends React.Component {
   }
 
   render() {
-    const { search_configs } = this.props;
     const { search_phrase } = this.state;
 
-    const maybe_results = _.flatMap(search_configs, ({ config_name }) =>
-      this.get_query_result_state(config_name, search_phrase)
-    );
-
-    const still_loading_results = _.some(
-      maybe_results,
-      (result) => _.isUndefined(result) || result === "loading"
-    );
-
-    const results = !still_loading_results ? maybe_results : [];
+    const results = glossary_lite.query_sync(search_phrase);
 
     const items_by_letter = get_glossary_items_by_letter(results);
 
