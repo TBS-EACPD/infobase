@@ -13,6 +13,9 @@ import {
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
+import { Indicator } from "src/models/results";
+
+import { get_subject_instance_by_guid } from "src/models/subjects";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang } from "src/core/injected_build_constants";
@@ -95,24 +98,6 @@ const get_indicators = (subject, doc) => {
     .value();
 };
 
-const subject_link = (node) => (
-  <span>
-    <a href={infographic_href_template(node.data.subject, "results")}>
-      {node.data.name}
-    </a>
-    <span className="text-nowrap">
-      {" "}
-      (
-      {text_maker(
-        node.data.subject.subject_type === "program"
-          ? node.data.subject.subject_type
-          : "core_resp"
-      )}
-      )
-    </span>
-  </span>
-);
-
 const date_join_character = "/";
 const get_date_to_achieve = ({ target_year, target_month }) => {
   if (_.isNumber(target_month) && _.isNumber(target_year)) {
@@ -162,54 +147,49 @@ const sort_date_to_achieve = (
   }
 };
 
-const IndicatorTable = ({ subject, drr_key, indicator_list }) => {
+const IndicatorTable = ({ subject, drr_key, table_data }) => {
   const [open_indicator_id, set_open_indicator_id] = useState(null);
 
-  const ind_map = _.chain(indicator_list)
-    .map((ind) => [
-      ind.indicator.id,
-      {
-        subject_link: subject_link(ind.parent_node),
-        subject_full_name: `${ind.parent_node.data.name} ${text_maker(
-          ind.parent_node.data.subject.subject_type === "program"
-            ? ind.parent_node.data.subject.subject_type
-            : "core_resp"
-        )}`,
-        id: ind.indicator.id,
-        name: ind.indicator.name,
-      },
-    ])
-    .fromPairs()
-    .value();
-
   const column_configs = {
-    cr_or_program: {
+    parent: {
       index: 0,
       header: text_maker("cr_or_program"),
       is_searchable: true,
-      formatter: (value) => ind_map[value].subject_link,
-      plain_formatter: (value) => ind_map[value].subject_full_name,
+      formatter: (guid) => {
+        const subject = get_subject_instance_by_guid(guid);
+
+        return (
+          <span>
+            <a href={infographic_href_template(subject, "results")}>
+              {subject.name}
+            </a>
+            <span className="text-nowrap">{` (${subject.subject_name})`}</span>
+          </span>
+        );
+      },
+      plain_formatter: (guid) => {
+        const subject = get_subject_instance_by_guid(guid);
+
+        return `${subject.name} (${subject.subject_name})`;
+      },
     },
     indicator: {
       index: 1,
       header: text_maker("indicator"),
       is_searchable: true,
-      formatter: (value) => {
-        const { id, name } = ind_map[value];
-        return (
-          <button
-            className="btn btn-link"
-            onClick={() => set_open_indicator_id(id)}
-            aria-label={`${
-              lang === "en" ? "Details for:" : "Détails pour :"
-            } ${name}`}
-            style={{ color: secondaryColor }}
-          >
-            {name}
-          </button>
-        );
-      },
-      plain_formatter: (value) => ind_map[value].name,
+      formatter: (id) => (
+        <button
+          className="btn btn-link"
+          onClick={() => set_open_indicator_id(id)}
+          aria-label={`${
+            lang === "en" ? "Details for:" : "Détails pour :"
+          } ${name}`}
+          style={{ color: secondaryColor }}
+        >
+          {Indicator.lookup(id).name}
+        </button>
+      ),
+      plain_formatter: (id) => Indicator.lookup(id).name,
     },
     target: {
       index: 2,
@@ -243,14 +223,6 @@ const IndicatorTable = ({ subject, drr_key, indicator_list }) => {
     },
   };
 
-  const table_data = _.map(indicator_list, (ind) => ({
-    cr_or_program: ind.indicator.id,
-    indicator: ind.indicator.id,
-    target: indicator_target_text(ind.indicator),
-    target_result: indicator_actual_text(ind.indicator),
-    date_to_achieve: get_date_to_achieve(ind.indicator),
-    status: ind.indicator.status_key,
-  }));
   return (
     <Fragment>
       <DisplayTable
@@ -313,23 +285,35 @@ class ResultsTable extends React.Component {
     if (loading) {
       return <LeafSpinner config_name={"subroute"} />;
     } else {
-      const flat_indicators = get_indicators(subject, drr_key);
+      const indicator_nodes = get_indicators(subject, drr_key);
+
       const icon_counts = _.countBy(
-        flat_indicators,
+        indicator_nodes,
         ({ indicator }) => indicator.status_key
       );
-      const filtered_indicators = _.filter(
-        flat_indicators,
-        (ind) =>
-          _.isEmpty(status_active_list) ||
-          _.includes(status_active_list, ind.indicator.status_key)
-      );
+
       const toggle_status_status_key = (status_key) =>
         this.setState({
           status_active_list: toggle_list(status_active_list, status_key),
         });
       const clear_status_filter = () =>
         this.setState({ status_active_list: [] });
+
+      const table_data = _.chain(indicator_nodes)
+        .filter(
+          ({ indicator }) =>
+            _.isEmpty(status_active_list) ||
+            _.includes(status_active_list, indicator.status_key)
+        )
+        .map(({ indicator, parent_node }) => ({
+          parent: parent_node.data.subject.guid,
+          indicator: indicator.id,
+          target: indicator_target_text(indicator),
+          target_result: indicator_actual_text(indicator),
+          date_to_achieve: get_date_to_achieve(indicator),
+          status: indicator.status_key,
+        }))
+        .value();
 
       return (
         <div>
@@ -356,7 +340,7 @@ class ResultsTable extends React.Component {
               <IndicatorTable
                 subject={subject}
                 drr_key={drr_key}
-                indicator_list={filtered_indicators}
+                table_data={table_data}
               />
             </div>
           </HeightClippedGraph>
