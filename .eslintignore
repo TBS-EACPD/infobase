@@ -1,4 +1,3 @@
-
 # generated stuff, probably keep in sync with simillar section of .eslintignore (some may or may not also be in .gitignore, selectively)
 client/build
 client/build_prod
