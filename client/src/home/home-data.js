@@ -68,7 +68,7 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
-    text_key: "supps_c",
+    text_key: "quick_link_main_estimates",
     href: "#compare_estimates",
     is_new: "true",
   },
