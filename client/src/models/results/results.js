@@ -383,15 +383,25 @@ const drr_docs = build_doc_info_objects("drr", [
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2021",
+    resource_years: [],
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2021-22-departmental-plans.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2021-2022.html",
+    late_results_orgs: [],
+    late_resources_orgs: [],
+  },
+  {
+    year_short: "2022",
     resource_years: [
       "{{planning_year_1}}",
       "{{planning_year_2}}",
       "{{planning_year_3}}",
     ],
     doc_url_en:
-      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2021-22-departmental-plans.html",
+      "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2022-23-departmental-plans.html",
     doc_url_fr:
-      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2021-2022.html",
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
     late_results_orgs: [],
     late_resources_orgs: [],
   },
