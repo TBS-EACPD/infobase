@@ -780,16 +780,12 @@ self_serve:
   fr: Produire son propre rapport
 main_estimates:
   transform: [handlebars]
-  ## the {{ upsets the YAML parser, so string beginning with
-  # { have to be raw
   en: |
     {{est_in_year}} Main Estimates
   fr: Budget principal des dépenses {{est_in_year}}
 
 interim_mains:
   transform: [handlebars]
-  ## the {{ upsets the YAML parser, so string beginning with
-  # { have to be raw
   en: |
     {{est_next_year}} Interim Estimates
   fr: Budget provisoire des dépenses {{est_next_year}}
@@ -802,20 +798,20 @@ tabled_estimates:
 supps_a:
   transform: [handlebars]
   en: |
-    {{est_in_year}} Supplementary Estimates A
-  fr: Budget supplémentaire des dépenses (A) {{est_in_year}}
+    {{est_last_year}} Supplementary Estimates A
+  fr: Budget supplémentaire des dépenses (A) {{est_last_year}}
 
 supps_b:
   transform: [handlebars]
   en: |
-    {{est_in_year}} Supplementary Estimates B
+    {{est_last_year}} Supplementary Estimates B
   fr: Budget supplémentaire des dépenses (B) {{est_in_year}}
 
 supps_c:
   transform: [handlebars]
   en: |
-    {{est_in_year}} Supplementary Estimates C
-  fr: Budget supplémentaire des dépenses (C) {{est_in_year}}
+    {{est_last_year}} Supplementary Estimates C
+  fr: Budget supplémentaire des dépenses (C) {{est_last_year}}
 
 help:
   en: Help
