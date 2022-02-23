@@ -49,7 +49,6 @@ const year_templates = {
     "{{est_last_year_2}}",
     "{{est_last_year}}",
     "{{est_in_year}}",
-    //"{{est_next_year}}",
   ],
   pa_last_year_planned: "{{pa_last_year_planned}}",
   planning_years: [

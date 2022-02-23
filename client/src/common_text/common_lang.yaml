@@ -778,22 +778,17 @@ separate_agencies:
 self_serve:
   en: Create Your Own Report
   fr: Produire son propre rapport
-main_estimates:
-  transform: [handlebars]
-  en: |
-    {{est_in_year}} Main Estimates
-  fr: Budget principal des dépenses {{est_in_year}}
-
-interim_mains:
-  transform: [handlebars]
-  en: |
-    {{est_next_year}} Interim Estimates
-  fr: Budget provisoire des dépenses {{est_next_year}}
 
 tabled_estimates:
   transform: [handlebars]
   en: Currently Tabled But Not Approved Estimates
   fr: Budget des dépenses déposé mais non approuvé
+
+main_estimates:
+  transform: [handlebars]
+  en: |
+    {{est_in_year}} Main Estimates
+  fr: Budget principal des dépenses {{est_in_year}}
 
 supps_a:
   transform: [handlebars]
