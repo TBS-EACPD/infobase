@@ -341,6 +341,8 @@ const build_doc_info_objects = (doc_type, docs) =>
         has_resources: !_.isEmpty(resource_years),
         could_have_previous: index > 0,
         has_gba_plus: is_drr && +year_short === 2019,
+        is_drr,
+        is_dp: !is_drr,
         ...doc_properties,
       };
     })
