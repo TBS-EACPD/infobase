@@ -40,26 +40,26 @@ tp_region_last_year_5:
   fr: 2015-2016
 
 est_next_year:
-  en: 2022-23
-  fr: 2022-2023
+  en: 2023-24
+  fr: 2023-2024
 est_in_year:
+  en: 2022-21
+  fr: 2022-2021
+est_last_year:
   en: 2021-22
   fr: 2021-2022
-est_last_year:
+est_last_year_2:
   en: 2020-21
   fr: 2020-2021
-est_last_year_2:
+est_last_year_3:
   en: 2019-20
   fr: 2019-2020
-est_last_year_3:
+est_last_year_4:
   en: 2018-19
   fr: 2018-2019
-est_last_year_4:
+est_last_year_5:
   en: 2017-18
   fr: 2017-2018
-est_last_year_5:
-  en: 2016-17
-  fr: 2016-2017
 
 
 
@@ -89,6 +89,7 @@ ppl_last_year_5:
   en: March 2017
   fr: mars 2017
 
+# TODO all of these need to go, they're very easily overlooked. All seem to be consumed by panel code that could either own or derivive these
 mains_date:
   en: February 25th
   fr: 25 février
