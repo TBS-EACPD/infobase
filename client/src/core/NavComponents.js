@@ -149,12 +149,15 @@ const HeaderBanner = withRouter(
   }
 );
 
-const LateFteResources = () => {
-  const route_filter = (match, _history) =>
-    /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
+// TODO all three of these late results banners are hacky AND aren't dry against dynamic footnote content/infographic warning panels
+// whole late results ecosystem needs a cleanup
+const LateResultsBanner = () => {
+  const route_filter = (match, _history) => /^\/(start|diff)/.test(match.path);
 
-  const late_orgs =
-    PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
+  // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
+  const latest_doc = _.last(result_docs_in_tabling_order);
+
+  const late_orgs = latest_doc.late_results_orgs;
 
   if (late_orgs.length === 0) {
     return null;
@@ -167,8 +170,8 @@ const LateFteResources = () => {
     <Fragment>
       {
         {
-          en: "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
-          fr: "Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
+          en: `The ${latest_doc.name} data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
+          fr: `Les données du ${latest_doc.name} des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
         }[lang]
       }
       <MultiColumnList
@@ -191,14 +194,55 @@ const LateFteResources = () => {
     />
   );
 };
+const LateDpResourcesBanner = () => {
+  const route_filter = (match, _history) =>
+    /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
 
-const LateResultsBanner = () => {
-  const route_filter = (match, _history) => /^\/(start|diff)/.test(match.path);
-
-  // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
   const latest_doc = _.last(result_docs_in_tabling_order);
 
-  const late_orgs = latest_doc.late_results_orgs;
+  const late_orgs = latest_doc.late_resources_orgs;
+
+  if (!latest_doc.is_dp || late_orgs.length === 0) {
+    return null;
+  }
+
+  const column_count = late_orgs.length > 3 ? 3 : 2;
+  const li_class = column_count > 2 ? "font-small" : "";
+
+  const banner_content = (
+    <Fragment>
+      {
+        {
+          en: `Planned spending and planned FTE data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
+          fr: `Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
+        }[lang]
+      }
+      <MultiColumnList
+        list_items={_.map(
+          late_orgs,
+          (org_id) => Dept.store.lookup(org_id).name
+        )}
+        column_count={column_count}
+        li_class={li_class}
+      />
+    </Fragment>
+  );
+
+  return (
+    <HeaderBanner
+      route_filter={route_filter}
+      banner_content={banner_content}
+      banner_class="warning"
+      additional_class_names="medium-panel-text"
+    />
+  );
+};
+const LateDrrFteResources = () => {
+  const route_filter = (match, _history) =>
+    /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
+
+  const late_orgs =
+    PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
 
   if (late_orgs.length === 0) {
     return null;
@@ -211,8 +255,8 @@ const LateResultsBanner = () => {
     <Fragment>
       {
         {
-          en: `The ${latest_doc.name} data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
-          fr: `Les données du ${latest_doc.name} des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
+          en: "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
+          fr: "Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
         }[lang]
       }
       <MultiColumnList
@@ -260,7 +304,8 @@ export class StandardRouteContainer extends React.Component {
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
         <LateResultsBanner />
-        <LateFteResources />
+        <LateDpResourcesBanner />
+        <LateDrrFteResources />
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
         {!is_a11y_mode && (
