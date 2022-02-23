@@ -402,8 +402,55 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2022-23-departmental-plans.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
-    late_results_orgs: [],
-    late_resources_orgs: [],
+    late_results_orgs: [
+      /* missing results only */
+      "295", // Royal Canadian Mounted Police
+      "126", // Department of Foreign Affairs, Trade and Development
+      "247", // Office of the Correctional Investigator of Canada
+      /* missing both */
+      "350", // Leaders’ Debates Commission
+      "135", // Department of Public Safety and Emergency Preparedness
+      "130", // Department of Industry
+      "244", // Office of the Intelligence Commissioner
+      "245", // Office of the Conflict of Interest and Ethics Commissioner
+      "140", // Department of Western Economic Diversification
+      "237", // Office of Infrastructure of Canada
+      "256", // Offices of the Information and Privacy Commissioners of Canada
+      "12", // Atlantic Canada Opportunities Agency
+      "209", // Military Grievances External Review Committee
+      "125", // Department of Fisheries and Oceans
+      "123", // Department of Citizenship and Immigration
+      "152", // Financial Transactions and Reports Analysis Centre of Canada
+      "124", // Department of Finance
+      "348", // Department of Indigenous Services
+      "288", // Registrar of the Supreme Court of Canada
+      "326", // Treasury Board Secretariat
+      "98", // Canadian Transportation Accident Investigation and Safety Board
+      "235", // Northern Pipeline Agency
+      "278", // Privy Council Office
+    ],
+    late_resources_orgs: [
+      "350", // Leaders’ Debates Commission
+      "135", // Department of Public Safety and Emergency Preparedness
+      "130", // Department of Industry
+      "244", // Office of the Intelligence Commissioner
+      "245", // Office of the Conflict of Interest and Ethics Commissioner
+      "140", // Department of Western Economic Diversification
+      "237", // Office of Infrastructure of Canada
+      "256", // Offices of the Information and Privacy Commissioners of Canada
+      "12", // Atlantic Canada Opportunities Agency
+      "209", // Military Grievances External Review Committee
+      "125", // Department of Fisheries and Oceans
+      "123", // Department of Citizenship and Immigration
+      "152", // Financial Transactions and Reports Analysis Centre of Canada
+      "124", // Department of Finance
+      "348", // Department of Indigenous Services
+      "288", // Registrar of the Supreme Court of Canada
+      "326", // Treasury Board Secretariat
+      "98", // Canadian Transportation Accident Investigation and Safety Board
+      "235", // Northern Pipeline Agency
+      "278", // Privy Council Office
+    ],
   },
 ]);
 const result_docs = {
