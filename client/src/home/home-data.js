@@ -131,7 +131,7 @@ const subapp_items = _.compact([
       />
     ),
     title_key: "estimates_comp_home_title",
-    text_key: "estimates_comp_home_text_supps",
+    text_key: "estimates_comp_home_text",
     href: "#compare_estimates",
   },
   {
