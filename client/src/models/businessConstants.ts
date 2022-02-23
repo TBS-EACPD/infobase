@@ -607,11 +607,6 @@ const NA_values = [
 ];
 
 const estimates_docs = {
-  IE: {
-    order: 0,
-    en: "Interim Estimates",
-    fr: "Budget provisoire des dépenses",
-  },
   MAINS: {
     order: 0,
     en: "Main Estimates",

@@ -333,11 +333,7 @@ export default class EstimatesExplorerComponent extends React.Component {
             args={{
               href: rpb_link({
                 table: "table8",
-                columns: [
-                  doc_code === "IM"
-                    ? "{{est_next_year}}_estimates"
-                    : "{{est_in_year}}_estimates",
-                ],
+                columns: ["{{est_in_year}}_estimates"],
                 filter: estimates_docs[doc_code][lang],
               }),
             }}

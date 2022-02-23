@@ -39,9 +39,6 @@ tp_region_last_year_5:
   en: 2015-16
   fr: 2015-2016
 
-est_next_year:
-  en: 2023-24
-  fr: 2023-2024
 est_in_year:
   en: 2022-21
   fr: 2022-2021
@@ -87,13 +84,7 @@ ppl_last_year_5:
   en: March 2017
   fr: mars 2017
 
-# TODO all of these need to go, they're very easily overlooked. All seem to be consumed by panel code that could either own or derivive these
-mains_date:
-  en: February 25th
-  fr: 25 février
-interim_mains_table_date:
-  en: January 28 2019
-  fr: 28 janvier 2019
+# TODO this hasn't been maintained consistently, rewrite consumers to derive the latest estimate doc from data perhaps?
 last_estimates:
   en: Main Estimates
   fr: Budget principal des dépenses
