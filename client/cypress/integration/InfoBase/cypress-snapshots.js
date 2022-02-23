@@ -186,7 +186,6 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             "<span>Departmental Results Reports</span>",
-            "<span>See the data: \n</span>",
             "<span>Departmental Plans</span>"
           ]
         }
