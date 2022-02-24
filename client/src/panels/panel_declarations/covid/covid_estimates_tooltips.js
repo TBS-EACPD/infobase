@@ -107,6 +107,23 @@ const tooltips_by_topic = {
         "covid_estimates_2021_supps_b_2020_full_reprofile_tooltip"
       ),
     },
+    {
+      fiscal_years: [2021],
+      subject_ids: ["*"],
+      topic_ids: [
+        "COV145",
+        "COV043",
+        "COV065",
+        "COV134",
+        "COV083",
+        "COV002",
+        "COV079",
+        "COV153",
+      ],
+      text: text_maker(
+        "covid_estimates_2021_supps_c_2020_full_reprofile_tooltip"
+      ),
+    },
   ],
 };
 
