@@ -83,8 +83,3 @@ ppl_last_year_4:
 ppl_last_year_5:
   en: March 2017
   fr: mars 2017
-
-# TODO this hasn't been maintained consistently, rewrite consumers to derive the latest estimate doc from data perhaps?
-last_estimates:
-  en: Main Estimates
-  fr: Budget principal des dépenses
