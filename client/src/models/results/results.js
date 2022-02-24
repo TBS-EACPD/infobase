@@ -410,8 +410,6 @@ const dp_docs = build_doc_info_objects("dp", [
       "126", // Department of Foreign Affairs, Trade and Development
       "247", // Office of the Correctional Investigator of Canada
       /* missing both */
-      "350", // Leaders’ Debates Commission
-      "135", // Department of Public Safety and Emergency Preparedness
       "130", // Department of Industry
       "244", // Office of the Intelligence Commissioner
       "245", // Office of the Conflict of Interest and Ethics Commissioner
@@ -422,18 +420,14 @@ const dp_docs = build_doc_info_objects("dp", [
       "209", // Military Grievances External Review Committee
       "125", // Department of Fisheries and Oceans
       "123", // Department of Citizenship and Immigration
-      "152", // Financial Transactions and Reports Analysis Centre of Canada
       "124", // Department of Finance
       "348", // Department of Indigenous Services
       "288", // Registrar of the Supreme Court of Canada
       "326", // Treasury Board Secretariat
-      "98", // Canadian Transportation Accident Investigation and Safety Board
       "235", // Northern Pipeline Agency
       "278", // Privy Council Office
     ],
     late_resources_orgs: [
-      "350", // Leaders’ Debates Commission
-      "135", // Department of Public Safety and Emergency Preparedness
       "130", // Department of Industry
       "244", // Office of the Intelligence Commissioner
       "245", // Office of the Conflict of Interest and Ethics Commissioner
@@ -444,12 +438,10 @@ const dp_docs = build_doc_info_objects("dp", [
       "209", // Military Grievances External Review Committee
       "125", // Department of Fisheries and Oceans
       "123", // Department of Citizenship and Immigration
-      "152", // Financial Transactions and Reports Analysis Centre of Canada
       "124", // Department of Finance
       "348", // Department of Indigenous Services
       "288", // Registrar of the Supreme Court of Canada
       "326", // Treasury Board Secretariat
-      "98", // Canadian Transportation Accident Investigation and Safety Board
       "235", // Northern Pipeline Agency
       "278", // Privy Council Office
     ],
