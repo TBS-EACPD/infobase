@@ -50,7 +50,7 @@ in_year_voted_stat_split_title:
 gov_in_year_voted_stat_split_text:
   transform: [handlebars, markdown]
   en: |
-    As of the {{est_in_year}} {{last_estimates}}, 
+    As of the {{est_in_year}} {{gt "last_estimates"}}, 
     the government has presented Parliament with a total of **{{fmt_compact1_written tabled_est_in_year}}** in {{gl_tt "authorized" "AUTH"}} spending.
     
     Of the **{{fmt_compact1_written tabled_est_in_year}}**  in total {{gl_tt "authorized" "AUTH"}} spending available to the government, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
@@ -58,7 +58,7 @@ gov_in_year_voted_stat_split_text:
     will come from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
-    En date du {{last_estimates}} {{est_in_year}}, le gouvernement a soumis au Parlement un total de **{{fmt_compact1_written tabled_est_in_year}}** de dépenses {{gl_tt "autorisées" "AUTH"}}.
+    En date du {{gt "last_estimates"}} {{est_in_year}}, le gouvernement a soumis au Parlement un total de **{{fmt_compact1_written tabled_est_in_year}}** de dépenses {{gl_tt "autorisées" "AUTH"}}.
     
     Sur les **{{fmt_compact1_written tabled_est_in_year}}** de dépenses {{gl_tt "autorisées" "AUTH"}} à la disposition du gouvernement, **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**)
     proviendront {{gl_tt "d'autorisations législatives" "STAT"}} et **{{fmt_compact1_written voted_est_in_year}}** (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) {{gl_tt "d'autorisations votées" "VOTED"}}.
@@ -67,13 +67,13 @@ dept_in_year_voted_stat_split_text:
   transform: [handlebars,markdown]
   en: |
    Of the **{{fmt_compact1_written tabled_est_in_year}}** in total {{gl_tt "authorized" "AUTH"}} spending available to **{{subject.name}}** from the 
-   {{est_in_year}} {{last_estimates}}, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
+   {{est_in_year}} {{gt "last_estimates"}}, **{{fmt_compact1_written stat_est_in_year}}** (or **{{fmt_percentage1 stat_percent_est_in_year}}**) 
    will be funded from {{gl_tt "statutory authorities" "STAT"}} and **{{fmt_compact1_written voted_est_in_year}}** 
    (or **{{fmt_percentage1 voted_percent_est_in_year}}**) from {{gl_tt "voted authorities" "VOTED"}}.
 
   fr: |
     Sur les **{{fmt_compact1_written tabled_est_in_year}}** de dépenses totales {{gl_tt "autorisées" "AUTH"}} pour **{{subject.name}}** dans le
-    {{last_estimates}} {{est_in_year}}, **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**)
+    {{gt "last_estimates"}} {{est_in_year}}, **{{fmt_compact1_written stat_est_in_year}}** (ou **{{fmt_percentage1 stat_percent_est_in_year}}**)
     seront financés par des {{gl_tt "crédits législatifs" "STAT"}} et **{{fmt_compact1_written voted_est_in_year}}** 
     (ou **{{fmt_percentage1 voted_percent_est_in_year}}**) par des {{gl_tt "crédits votés" "VOTED"}}.
 
@@ -102,13 +102,13 @@ gov_in_year_estimates_split_text:
 dept_in_year_estimates_split_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, **{{subject.name}}**'s planned budgetary expenditures of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the following
+   As of the {{est_in_year}} {{gt "last_estimates"}}, **{{subject.name}}**'s planned budgetary expenditures of **{{fmt_compact1_written tabled_est_in_year}}** were presented in the following
    {{gl_tt "Estimates processes" "EST_PROC"}} and {{gl_tt "adjustments and transfers" "ADJUS"}}: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
    {{/each}}
   fr: |
-   En date du {{est_in_year}} {{last_estimates}}, pour **{{le_dept subject}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
+   En date du {{est_in_year}} {{gt "last_estimates"}}, pour **{{le_dept subject}}**, les dépenses budgétaires prévues de **{{fmt_compact1_written tabled_est_in_year}}** figurent 
    dans le(s) {{gl_tt "processus budgétaire(s)" "EST_PROC"}}  et {{gl_tt "redressements et virements" "ADJUS"}} suivants: 
    {{#each in_year_estimates_split}}
    * {{ this.[0]}}: **{{fmt_compact1 this.[1] }}** 
@@ -122,11 +122,11 @@ estimates_perspective_title:
 estimates_perspective_text:
   transform: [handlebars,markdown]
   en: |
-   As of the {{est_in_year}} {{last_estimates}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates 
+   As of the {{est_in_year}} {{gt "last_estimates"}}, the government has presented Parliament with planned {{gl_tt "budgetary" 'BUD_EXP'}} expenditure estimates 
    totaling **{{fmt_compact1_written gov_tabled_est_in_year}}**. Of this amount, **{{fmt_compact1_written dept_tabled_est_in_year}}**
    (or **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}**) will be allocated to **{{subject.name}} ({{subject.abbr}})**.	
   fr: |
-   En date du {{last_estimates}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de 
+   En date du {{gt "last_estimates"}} {{est_in_year}}, le gouvernement a présenté au Parlement des dépenses budgétaires prévues d'un total de 
    **{{fmt_compact1_written gov_tabled_est_in_year}}**. De ce montant, **{{fmt_compact1_written dept_tabled_est_in_year}}**
    (ou **{{fmt_smart_percentage1 (divide dept_tabled_est_in_year gov_tabled_est_in_year)}}**) seront attribués à **{{subject.name}} ({{subject.abbr}})**.
 

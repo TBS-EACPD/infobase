@@ -169,4 +169,11 @@ export default {
     }
     return grps[true].concat(grps[false]);
   },
+
+  get_current_doc_code: function () {
+    return "MAINS";
+  },
+  get_current_doc_name: function () {
+    return estimates_docs[this.get_current_doc_code()][lang];
+  },
 };
