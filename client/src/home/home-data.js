@@ -3,6 +3,8 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/index";
 
+import { CURRENT_EST_DOC } from "src/models/estimates";
+
 import { services_feature_flag } from "src/core/injected_build_constants";
 
 import {
@@ -131,7 +133,10 @@ const subapp_items = _.compact([
       />
     ),
     title_key: "estimates_comp_home_title",
-    text_key: "estimates_comp_home_text",
+    text_key:
+      CURRENT_EST_DOC === "MAINS"
+        ? "estimates_comp_home_text"
+        : "estimates_comp_home_text_supps",
     href: "#compare_estimates",
   },
   {
