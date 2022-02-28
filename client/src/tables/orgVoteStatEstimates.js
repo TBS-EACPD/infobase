@@ -153,12 +153,4 @@ export default {
     }
     return grps[true].concat(grps[false]);
   },
-
-  // TODO move somewhere else, maybe build process can derive this from the data and make it an injected build constant
-  get_current_doc_code: function () {
-    return "MAINS";
-  },
-  get_current_doc_name: function () {
-    return estimates_docs[this.get_current_doc_code()][lang];
-  },
 };
