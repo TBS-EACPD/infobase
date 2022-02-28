@@ -39,11 +39,6 @@ export default {
     fr: "Budgets déposés (en dollars)",
   },
 
-  "footnote-topics": {
-    group: ["mains_text"],
-    table: ["~main_text", "mains_text_gov"],
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

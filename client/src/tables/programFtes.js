@@ -28,11 +28,6 @@ export default {
     fr: "Équivalents temps plein (ETP) actuels et prévus par programme de {{pa_last_year_5}} à {{planning_year_3}}",
   },
 
-  "footnote-topics": {
-    group: ["planned_spending"],
-    table: ["~planned_spending", "planned_spending_gov"],
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",
