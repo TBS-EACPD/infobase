@@ -419,7 +419,6 @@ const dp_docs = build_doc_info_objects("dp", [
       "12", // Atlantic Canada Opportunities Agency
       "209", // Military Grievances External Review Committee
       "125", // Department of Fisheries and Oceans
-      "123", // Department of Citizenship and Immigration
       "124", // Department of Finance
       "348", // Department of Indigenous Services
       "288", // Registrar of the Supreme Court of Canada
@@ -437,7 +436,6 @@ const dp_docs = build_doc_info_objects("dp", [
       "12", // Atlantic Canada Opportunities Agency
       "209", // Military Grievances External Review Committee
       "125", // Department of Fisheries and Oceans
-      "123", // Department of Citizenship and Immigration
       "124", // Department of Finance
       "348", // Department of Indigenous Services
       "288", // Registrar of the Supreme Court of Canada
