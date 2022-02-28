@@ -10,7 +10,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -40,7 +40,7 @@ Object {
                   "vote": 9,
                 },
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -97,7 +97,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -117,7 +117,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -147,7 +147,7 @@ Object {
                   "vote": 9,
                 },
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "326",
                     "name": "Treasury Board of Canada Secretariat",
@@ -217,7 +217,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -304,7 +304,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -373,7 +373,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -420,7 +420,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -440,7 +440,7 @@ Object {
             Object {
               "covid_estimates": Array [
                 Object {
-                  "est_doc": "ME",
+                  "est_doc": "MAINS",
                   "org": Object {
                     "id": "133",
                     "name": "National Defence",
@@ -510,7 +510,7 @@ Object {
           Object {
             "covid_estimates": Array [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 1007,
                 "vote": 1107,
               },
@@ -572,7 +572,7 @@ Object {
           Object {
             "covid_estimates": Array [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 999,
                 "vote": 9,
               },
@@ -618,7 +618,7 @@ Object {
           Object {
             "covid_estimates": Array [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 1007,
                 "vote": 1107,
               },
@@ -714,7 +714,7 @@ Object {
           Object {
             "covid_estimates": Array [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 8,
                 "vote": 1107,
               },
@@ -739,7 +739,7 @@ Object {
           Object {
             "covid_estimates": Array [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 0,
                 "vote": 9,
               },
@@ -757,7 +757,7 @@ Object {
           Object {
             "covid_estimates": Array [
               Object {
-                "est_doc": "ME",
+                "est_doc": "MAINS",
                 "stat": 8,
                 "vote": 1107,
               },
@@ -798,7 +798,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -849,7 +849,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -909,7 +909,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -929,7 +929,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -958,7 +958,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -985,7 +985,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1005,7 +1005,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
@@ -1047,7 +1047,7 @@ Object {
               Object {
                 "covid_estimates": Array [
                   Object {
-                    "est_doc": "ME",
+                    "est_doc": "MAINS",
                     "org": Object {
                       "id": "133",
                       "name": "National Defence",
