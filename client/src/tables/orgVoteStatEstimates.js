@@ -11,16 +11,6 @@ import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;
 const { estimates_docs } = businessConstants;
 
-const map_helper = {
-  ME: "MAINS",
-  CONT: "V5",
-  COMP: "V15",
-  GWIDE: "V10",
-  PAYL: "V30",
-  OBCF: "V25",
-  CBCF: "V33",
-};
-
 export default {
   text,
   id: "orgVoteStatEstimates",
@@ -121,8 +111,8 @@ export default {
   },
 
   mapper: function (row) {
-    if (row[5] in map_helper) {
-      row[5] = map_helper[row[5]];
+    if (row[5] === "ME") {
+      row[5] = "MAINS";
     }
     row.splice(6, 0, estimates_docs[row[5]][lang]);
 
@@ -165,6 +155,7 @@ export default {
     return grps[true].concat(grps[false]);
   },
 
+  // TODO move somewhere else, maybe build process can derive this from the data and make it an injected build constant
   get_current_doc_code: function () {
     return "MAINS";
   },
