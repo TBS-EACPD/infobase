@@ -218,10 +218,6 @@ export class Table {
     //this will merged over with table_defs props
     return {
       is_table: true, //hacky way to check something is a table
-      "footnote-topics": {
-        group: "*",
-        table: "*",
-      },
       sort: _.identity,
       process_mapped_row: _.identity,
     };
@@ -251,8 +247,6 @@ export class Table {
     this._cols = [];
     this.flat_headers = [];
     this.data = [];
-    this["footnote-topics"].group = this["footnote-topics"].group || "*";
-    this["footnote-topics"].table = this["footnote-topics"].table || "*";
     this.column_counter = (() => {
       let val = 0;
       return () => ++val;
