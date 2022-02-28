@@ -2,6 +2,8 @@ import { lang } from "src/core/injected_build_constants";
 
 import { smart_sort_func } from "src/sort_utils";
 
+export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" = "MAINS";
+
 export const estimates_docs = {
   MAINS: {
     en: "Main Estimates",
