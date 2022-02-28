@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants";
+import { estimates_docs } from "src/models/estimates";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -9,7 +9,6 @@ import { lang } from "src/core/injected_build_constants";
 import text from "./orgVoteStatEstimates.yaml";
 
 const { estimates_years } = year_templates;
-const { estimates_docs } = businessConstants;
 
 export default {
   text,

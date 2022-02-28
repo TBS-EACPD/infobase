@@ -3,20 +3,16 @@ import React, { useState, useEffect } from "react";
 
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
-import { businessConstants } from "src/models/businessConstants";
+import { get_est_doc_order, get_est_doc_name } from "src/models/estimates";
 
 import { array_to_grammatical_list } from "src/core/format";
 import { lang } from "src/core/injected_build_constants";
-
-import { smart_sort_func } from "src/sort_utils";
 
 import { ToggleVoteStatProvider } from "./covid_common_components";
 
 import { covid_create_text_maker_component } from "./covid_text_provider";
 
 const { text_maker } = covid_create_text_maker_component();
-
-const { estimates_docs } = businessConstants;
 
 const TabLoadingWrapper = ({ panel_args, load_data, TabContent }) => {
   const [loading, set_loading] = useState(true);
@@ -64,27 +60,6 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
 const wrap_with_vote_stat_controls = (Component) => (props) =>
   <ToggleVoteStatProvider Inner={Component} inner_props={props} />;
 
-// TODO these est doc utils should move to somewhere central, maybe in models
-const get_est_doc_name = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc][lang] : "";
-const get_est_doc_order = (est_doc) =>
-  estimates_docs[est_doc] ? estimates_docs[est_doc].order : 9999;
-const est_doc_sort_func = (est_doc_a, est_doc_b, descending) => {
-  const order_a = get_est_doc_order(est_doc_a);
-  const order_b = get_est_doc_order(est_doc_b);
-
-  return smart_sort_func(order_a, order_b, descending);
-};
-const get_est_doc_glossary_key = (est_doc) =>
-  ({
-    MAINS: "MAINS",
-    MYA: "MYA",
-    VA: "VOTED",
-    SA: "ADJUS",
-    SEA: "SUPPSA",
-    SEB: "SUPPSB",
-    SEC: "SUPPSC",
-  }[est_doc]);
 const get_est_doc_list_plain_text = (est_docs) =>
   _.chain(est_docs)
     .sortBy(get_est_doc_order)
@@ -182,10 +157,6 @@ const get_date_last_updated_text = (fiscal_year, month_last_updated) => {
 export {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
-  get_est_doc_name,
-  get_est_doc_order,
-  est_doc_sort_func,
-  get_est_doc_glossary_key,
   roll_up_flat_measure_data_by_property,
   get_date_last_updated_text,
   get_est_doc_list_plain_text,
