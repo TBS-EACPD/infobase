@@ -5,7 +5,7 @@ import React from "react";
 import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 
-import { businessConstants } from "src/models/businessConstants";
+import { estimates_docs } from "src/models/estimates";
 
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -21,7 +21,6 @@ import { filter_row_by_subj } from "src/tables/TableClass";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
 
-const { estimates_docs } = businessConstants;
 const est_in_year_col = "{{est_in_year}}_estimates";
 
 const estimates_split_calculate = function (subject) {

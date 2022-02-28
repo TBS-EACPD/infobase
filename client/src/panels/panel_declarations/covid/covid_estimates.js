@@ -16,6 +16,11 @@ import {
 } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
+import {
+  get_est_doc_name,
+  get_est_doc_order,
+  get_est_doc_glossary_key,
+} from "src/models/estimates";
 import { Dept } from "src/models/subjects";
 
 import { infobase_colors } from "src/core/color_schemes";
@@ -38,9 +43,6 @@ import {
 import {
   get_tabbed_content_props,
   wrap_with_vote_stat_controls,
-  get_est_doc_name,
-  get_est_doc_order,
-  get_est_doc_glossary_key,
   roll_up_flat_measure_data_by_property,
   get_est_doc_list_plain_text,
 } from "./covid_common_utils";

@@ -14,7 +14,7 @@ import {
 } from "src/components/index";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { businessConstants } from "src/models/businessConstants";
+import { estimates_docs } from "src/models/estimates";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -33,8 +33,6 @@ import {
   current_doc_is_mains,
   current_sups_letter,
 } from "./utils";
-
-const { estimates_docs } = businessConstants;
 
 const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
   const sorted_items = _.sortBy(
