@@ -84,7 +84,6 @@ const get_est_doc_glossary_key = (est_doc) =>
     SEA: "SUPPSA",
     SEB: "SUPPSB",
     SEC: "SUPPSC",
-    IE: "INTER_EST",
   }[est_doc]);
 const get_est_doc_list_plain_text = (est_docs) =>
   _.chain(est_docs)
