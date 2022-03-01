@@ -413,11 +413,6 @@ const dp_2022_broken_program_structure = [
   /* Also late to submit results and resources */
   "237", // Office of Infrastructure of Canada
   "140", // Department of Western Economic Diversification
-
-  /* these three have a different, simpler, problem with their program structure as I understand it, more likely to be fixed in time? */
-  "136", // Department of Public Works and Government Services
-  "26", // Canada Border Services Agency
-  "71", // Canadian Human Rights Commission
 ];
 const dp_docs = build_doc_info_objects("dp", [
   {
