@@ -1,5 +1,5 @@
 dept_code,vote_num,vs_type,name_en,name_fr,doc,est_last_year_4,est_last_year_3,est_last_year_2,est_last_year,est_in_year
-CPCC,1,1,Operating and Program,Fonctionnement and Programme,ME,2434137,18853197,20963206,28089505,31704049
+CPCC,1,1,Operating and Program,Fonctionnement and Programme,MAINS,2434137,18853197,20963206,28089505,31704049
 CPCC,1,1,Operating and Program,Fonctionnement and Programme,SEA,1,0,0,-1704000,0
 CPCC,1,1,Operating and Program,Fonctionnement and Programme,SEB,0,0,628559,1,0
 CPCC,1,1,Operating and Program,Fonctionnement and Programme,SEC,8239414,0,0,0,0
@@ -8,56 +8,56 @@ CPCC,7,2,Capital - Used until 2015-16,Capital - utilisé jusqu'en 2015-2016,SEC,
 CPCC,7,2,Capital - Used until 2015-16,Capital - utilisé jusqu'en 2015-2016,VA,6259365,,,,
 CPCC,9,3,Grants & Contributions - Used until 2015-16,Subventions et Contributions - utilisé jusqu'en 2015-2016,SEC,-1716972,,,,
 CPCC,9,3,Grants & Contributions - Used until 2015-16,Subventions et Contributions - utilisé jusqu'en 2015-2016,VA,1716972,,,,
-CPCC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,ME,139948,622077,631025,1017101,1097559
+CPCC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,MAINS,139948,622077,631025,1017101,1097559
 CPCC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SA,273930,-118677,128049,0,0
-ND,1,1,Operating and Program,Fonctionnement and Programme,ME,13483693376,13765146779,14201614868,15237553800,15831781435
+ND,1,1,Operating and Program,Fonctionnement and Programme,MAINS,13483693376,13765146779,14201614868,15237553800,15831781435
 ND,1,1,Operating and Program,Fonctionnement and Programme,SEA,111652445,0,0,5611249,0
 ND,1,1,Operating and Program,Fonctionnement and Programme,SEB,0,178290762,320571973,382596384,0
 ND,1,1,Operating and Program,Fonctionnement and Programme,SEC,211861594,77968835,724840344,0,0
 ND,1,1,Operating and Program,Fonctionnement and Programme,VA,357344311,282769502,803403133,0,0
-ND,10,3,Grants & Contributions,Subventions et Contributions,ME,168742820,164592820,164695408,176719317,181364645
+ND,10,3,Grants & Contributions,Subventions et Contributions,MAINS,168742820,164592820,164695408,176719317,181364645
 ND,10,3,Grants & Contributions,Subventions et Contributions,SEA,0,0,0,13183114,0
 ND,10,3,Grants & Contributions,Subventions et Contributions,SEB,0,9500000,0,20000000,0
 ND,10,3,Grants & Contributions,Subventions et Contributions,SEC,0,-11100000,12308014,0,0
 ND,10,3,Grants & Contributions,Subventions et Contributions,VA,-3190521,0,0,0,0
-ND,15,1,Operating and Program,Fonctionnement and Programme,ME,,,,,435458107
+ND,15,1,Operating and Program,Fonctionnement and Programme,MAINS,,,,,435458107
 ND,15,4,Debt Forgiveness - Used until 2018-19,Radiation de dettes - utilisé jusqu'en 2018-2019,SEA,,,,15381,
 ND,20,4,Debt Forgiveness - Used until 2018-19,Radiation de dettes - utilisé jusqu'en 2018-2019,SEA,,,,174,
-ND,20,7,Protecting Canada’s National Security,Protéger la sécurité nationale du Canada,ME,,,,,2067264
-ND,25,7,Renewing Canada's Middle East Strategy,Renouveler la Stratégie du Canada au Moyen-Orient,ME,,,,,199400000
-ND,30,7,Supporting Veterans as They Transition to Post-Service Life,Soutenir les vétérans pendant la transition vers la vie après le service militaire,ME,,,,,18990000
-ND,35,7,Reinforcing Canada's Support for Ukraine,Renforcer le soutien du Canada envers l'Ukraine,ME,,,,,34073332
-ND,5,2,Capital,Capital,ME,4020883722,3395930409,3102710864,3761023833,3767569717
+ND,20,7,Protecting Canada’s National Security,Protéger la sécurité nationale du Canada,MAINS,,,,,2067264
+ND,25,7,Renewing Canada's Middle East Strategy,Renouveler la Stratégie du Canada au Moyen-Orient,MAINS,,,,,199400000
+ND,30,7,Supporting Veterans as They Transition to Post-Service Life,Soutenir les vétérans pendant la transition vers la vie après le service militaire,MAINS,,,,,18990000
+ND,35,7,Reinforcing Canada's Support for Ukraine,Renforcer le soutien du Canada envers l'Ukraine,MAINS,,,,,34073332
+ND,5,2,Capital,Capital,MAINS,4020883722,3395930409,3102710864,3761023833,3767569717
 ND,5,2,Capital,Capital,SEA,108194584,0,0,301652924,0
 ND,5,2,Capital,Capital,SEB,0,46207136,666207731,149064555,0
 ND,5,2,Capital,Capital,SEC,-23610074,-37899772,33328079,0,0
 ND,5,2,Capital,Capital,VA,0,100000000,83281555,0,0
-ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,ME,283120971,301573636,273777210,276016331,290652037
+ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,MAINS,283120971,301573636,273777210,276016331,290652037
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SA,-24128528,-45960684,-16331509,0,0
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEA,0,0,0,-163853,0
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEB,0,65060,2854335,0,0
 ND,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEC,0,0,9476332,0,0
-ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,ME,980000568,1009616089,916558484,924054674,1129794282
+ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,MAINS,980000568,1009616089,916558484,924054674,1129794282
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SA,286037030,201429825,2167810979,0,0
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SEB,0,5043600,66619353,7546634,0
 ND,S,0,Contributions to employee benefit plans (Members of the Military),Contributions aux régimes d'avantages sociaux des employés - Membres militaires,SEC,3356758,0,0,0,0
 ND,S,0,Court Awards,Montants adjugés par une cour,SA,,59763,,,
 ND,S,0,Losses on Foreign Exchange,Pertes d'opérations de change,SA,2739996,2349366,492327,,
-ND,S,0,"Payments to dependants of certain members of the Royal Canadian Air Force killed while serving as instructors under British Commonwealth Air Training Plan (Appropriation Act No. 4, 1968)",Versements aux ayants droit de certains membres de l'Aviation royale du Canada tués dans l'exercice de leurs fonctions alors qu'ils servaient à titre d'instructeurs dans le cadre du Plan d'entraînement des aviateurs du Commonwealth britannique (Loi nº4 de 1968 portant affectation de crédits),ME,25700,25700,26000,26000,23000
+ND,S,0,"Payments to dependants of certain members of the Royal Canadian Air Force killed while serving as instructors under British Commonwealth Air Training Plan (Appropriation Act No. 4, 1968)",Versements aux ayants droit de certains membres de l'Aviation royale du Canada tués dans l'exercice de leurs fonctions alors qu'ils servaient à titre d'instructeurs dans le cadre du Plan d'entraînement des aviateurs du Commonwealth britannique (Loi nº4 de 1968 portant affectation de crédits),MAINS,25700,25700,26000,26000,23000
 ND,S,0,"Payments to dependants of certain members of the Royal Canadian Air Force killed while serving as instructors under British Commonwealth Air Training Plan (Appropriation Act No. 4, 1968)",Versements aux ayants droit de certains membres de l'Aviation royale du Canada tués dans l'exercice de leurs fonctions alors qu'ils servaient à titre d'instructeurs dans le cadre du Plan d'entraînement des aviateurs du Commonwealth britannique (Loi nº4 de 1968 portant affectation de crédits),SA,-1654,697,-3316,0,0
-ND,S,0,Payments under Parts I-IV of the Defence Services Pension Continuation Act,Versements en vertu des parties I à IV de la Loi sur la continuation de la pension des services de défense,ME,929668,600000,500000,400000,400000
+ND,S,0,Payments under Parts I-IV of the Defence Services Pension Continuation Act,Versements en vertu des parties I à IV de la Loi sur la continuation de la pension des services de défense,MAINS,929668,600000,500000,400000,400000
 ND,S,0,Payments under Parts I-IV of the Defence Services Pension Continuation Act,Versements en vertu des parties I à IV de la Loi sur la continuation de la pension des services de défense,SA,-491792,-229077,-183899,0,0
-ND,S,0,Payments under the Supplementary Retirement Benefits Act,Versements en vertu de la Loi sur les prestations de retraite supplémentaires,ME,4492604,2700000,2100000,1700000,1500000
+ND,S,0,Payments under the Supplementary Retirement Benefits Act,Versements en vertu de la Loi sur les prestations de retraite supplémentaires,MAINS,4492604,2700000,2100000,1700000,1500000
 ND,S,0,Payments under the Supplementary Retirement Benefits Act,Versements en vertu de la Loi sur les prestations de retraite supplémentaires,SA,-2377439,-936218,-614599,0,0
-ND,S,0,Salary and Motor Car Allowance,Traitement et allocation pour automobile,ME,164200,83500,84400,86000,87700
+ND,S,0,Salary and Motor Car Allowance,Traitement et allocation pour automobile,MAINS,164200,83500,84400,86000,87700
 ND,S,0,Salary and Motor Car Allowance,Traitement et allocation pour automobile,SA,-33068,0,200,0,0
 ND,S,0,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,SA,28003109,22536721,41808529,,
-TBC,1,1,Operating and Program,Fonctionnement and Programme,ME,219601334,209531439,222912616,233305792,259075962
+TBC,1,1,Operating and Program,Fonctionnement and Programme,MAINS,219601334,209531439,222912616,233305792,259075962
 TBC,1,1,Operating and Program,Fonctionnement and Programme,SEA,17102060,43371793,26392686,26629870,0
 TBC,1,1,Operating and Program,Fonctionnement and Programme,SEB,0,91802806,30671729,169587,0
 TBC,1,1,Operating and Program,Fonctionnement and Programme,SEC,42682760,5872708,10330068,0,0
 TBC,1,1,Operating and Program,Fonctionnement and Programme,VA,23708083,16228470,18992405,0,0
-TBC,10,6,Government-Wide Initiatives,Initiatives pangouvernementales,ME,2090470,3193000,3193000,28193000,326825856
+TBC,10,6,Government-Wide Initiatives,Initiatives pangouvernementales,MAINS,2090470,3193000,3193000,28193000,326825856
 TBC,10,6,Government-Wide Initiatives,Initiatives pangouvernementales,SEA,0,0,0,247520000,0
 TBC,10,6,Government-Wide Initiatives,Initiatives pangouvernementales,SEB,0,0,0,95516932,0
 TBC,10,6,Government-Wide Initiatives,Initiatives pangouvernementales,VA,0,-2500000,-2500000,0,0
@@ -65,36 +65,36 @@ TBC,15,6,Compensation Adjustments,Rajustements à la rémunération,SEA,,0,0,541
 TBC,15,6,Compensation Adjustments,Rajustements à la rémunération,SEB,,6183243,654565472,8247749,
 TBC,15,6,Compensation Adjustments,Rajustements à la rémunération,SEC,,95448569,36120434,0,
 TBC,15,6,Compensation Adjustments,Rajustements à la rémunération,VA,,-101631812,-690685906,0,
-TBC,20,6,Public Service Insurance,Assurances de la fonction publique,ME,2250070604,2337061397,2398570604,2398905397,2656910100
+TBC,20,6,Public Service Insurance,Assurances de la fonction publique,MAINS,2250070604,2337061397,2398570604,2398905397,2656910100
 TBC,20,6,Public Service Insurance,Assurances de la fonction publique,SEA,0,1909207,0,0,0
 TBC,20,6,Public Service Insurance,Assurances de la fonction publique,SEB,0,44700000,253209974,0,0
 TBC,20,6,Public Service Insurance,Assurances de la fonction publique,SEC,469200000,76400000,622900000,0,0
-TBC,25,6,Operating Budget Carry Forward,Report du budget de fonctionnement,ME,1600000000,1600000000,1600000000,1600000000,1600000000
+TBC,25,6,Operating Budget Carry Forward,Report du budget de fonctionnement,MAINS,1600000000,1600000000,1600000000,1600000000,1600000000
 TBC,25,6,Operating Budget Carry Forward,Report du budget de fonctionnement,VA,-1148400616,-1095172936,-1377002308,0,0
-TBC,30,6,Paylist Requirements,Besoins en matière de rémunération,ME,1000000000,600000000,600000000,600000000,600000000
+TBC,30,6,Paylist Requirements,Besoins en matière de rémunération,MAINS,1000000000,600000000,600000000,600000000,600000000
 TBC,30,6,Paylist Requirements,Besoins en matière de rémunération,SEA,0,0,625000000,0,0
 TBC,30,6,Paylist Requirements,Besoins en matière de rémunération,SEB,0,0,0,200000000,0
 TBC,30,6,Paylist Requirements,Besoins en matière de rémunération,SEC,0,545000000,250000000,0,0
 TBC,30,6,Paylist Requirements,Besoins en matière de rémunération,VA,-252533321,-222871780,-1225573239,0,0
-TBC,35,6,Capital Budget Carry Forward,Report du budget des dépenses en capital,ME,600000000,600000000,600000000,600000000,800000000
+TBC,35,6,Capital Budget Carry Forward,Report du budget des dépenses en capital,MAINS,600000000,600000000,600000000,600000000,800000000
 TBC,35,6,Capital Budget Carry Forward,Report du budget des dépenses en capital,VA,-491221855,-526141284,-557779981,0,0
-TBC,40,6,Budget 2018 Implementation - Used until 2018-19,Exécution du budget 2018 - utilisé jusqu'en 2018-2019,ME,,,,7040392000,
-TBC,45,7,Advancing Gender Equality,Promouvoir l'égalité entre les sexes,ME,,,,,300000
-TBC,5,6,Government Contingencies,Dépenses éventuelles du gouvernement,ME,750000000,750000000,750000000,750000000,750000000
+TBC,40,6,Budget 2018 Implementation - Used until 2018-19,Exécution du budget 2018 - utilisé jusqu'en 2018-2019,MAINS,,,,7040392000,
+TBC,45,7,Advancing Gender Equality,Promouvoir l'égalité entre les sexes,MAINS,,,,,300000
+TBC,5,6,Government Contingencies,Dépenses éventuelles du gouvernement,MAINS,750000000,750000000,750000000,750000000,750000000
 TBC,5,6,Government Contingencies,Dépenses éventuelles du gouvernement,SEB,519572387,0,0,0,0
 TBC,5,6,Government Contingencies,Dépenses éventuelles du gouvernement,VA,-519572387,-114357229,-219725102,0,0
-TBC,50,7,Ensuring Proper Payments for Public Servants,S'assurer que les fonctionnaires reçoivent le paiement qui convient,ME,,,,,25069086
-TBC,55,7,Federal Public Service Dental Plan Amendments,Modifications apportées au Régime de soins dentaires de la fonction publique fédérale,ME,,,,,11000000
-TBC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,ME,27599825,27936693,27100744,27897303,30025868
+TBC,50,7,Ensuring Proper Payments for Public Servants,S'assurer que les fonctionnaires reçoivent le paiement qui convient,MAINS,,,,,25069086
+TBC,55,7,Federal Public Service Dental Plan Amendments,Modifications apportées au Régime de soins dentaires de la fonction publique fédérale,MAINS,,,,,11000000
+TBC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,MAINS,27599825,27936693,27100744,27897303,30025868
 TBC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SA,-1424668,-3630348,-1362292,0,0
 TBC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEA,52956,305599,242190,0,0
 TBC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEB,0,2039868,1167458,18114,0
 TBC,S,0,Contributions to employee benefit plans,Contributions aux régimes d'avantages sociaux des employés,SEC,5622,367677,784625,0,0
-TBC,S,0,Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act,Contributions aux régimes d'avantages sociaux des employés,ME,443000000,443000000,340000000,340000000,0
+TBC,S,0,Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act,Contributions aux régimes d'avantages sociaux des employés,MAINS,443000000,443000000,340000000,340000000,0
 TBC,S,0,Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act,Contributions aux régimes d'avantages sociaux des employés,SA,719000000,-256356,1250848,0,0
 TBC,S,0,Employer contributions made under the Public Service Superannuation Act and other retirement acts and the Employment Insurance Act,Contributions aux régimes d'avantages sociaux des employés,SEB,0,-103000000,0,3107000000,0
 TBC,S,0,Payments for the Pay Equity Settlement,Paiements au titre de l'entente sur la parité salariale,SA,2556,-39653,-3072,,
 TBC,S,0,Payments under the Public Service Pension Adjustment Act,Versements en vertu de la Loi sur la mise au point des pensions du service public,SA,3238,355,15823,,
-TBC,S,0,Salary and Motor Car Allowance,Traitement et allocation pour automobile,ME,82100,83500,84400,86000,87700
+TBC,S,0,Salary and Motor Car Allowance,Traitement et allocation pour automobile,MAINS,82100,83500,84400,86000,87700
 TBC,S,0,Salary and Motor Car Allowance,Traitement et allocation pour automobile,SA,228,0,200,0,0
 TBC,S,0,Spending of proceeds from the disposal of surplus Crown assets,Dépenses des produits de la vente de biens excédentaires de l'État,SA,46535,41394,8141,,

@@ -76,7 +76,7 @@ Object {
       "org": Object {
         "org_vote_stat_estimates": Array [
           Object {
-            "doc": "ME",
+            "doc": "MAINS",
             "est_in_year": 31704049,
             "est_last_year": 28089505,
             "est_last_year_2": 20963206,
@@ -175,7 +175,7 @@ Object {
             "vs_type": 3,
           },
           Object {
-            "doc": "ME",
+            "doc": "MAINS",
             "est_in_year": 1097559,
             "est_last_year": 1017101,
             "est_last_year_2": 631025,
