@@ -119,8 +119,11 @@ export default async function ({ models }) {
       gba_plus: indicator?.gba_plus || null,
       // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T intended to be a header;
       // a header in a methodology is an invalid Titan input, so just to be safe make sure all number signs are escaped in the input!
-      methodology:
-        indicator.methodology && indicator.methodology.replace(/^#/g, "\\#"),
+      ..._.chain(["en", "fr"])
+        .map((lang) => `methodology_${lang}`)
+        .map((key) => [key, indicator[key]?.replace(/^#/gm, "\\#")])
+        .fromPairs()
+        .value(),
     }))
     .map((indicator, ix, indicator_records) => {
       const { doc, stable_id } = indicator;

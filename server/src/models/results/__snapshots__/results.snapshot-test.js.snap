@@ -3479,7 +3479,7 @@ Notes/definitions: The single indicator is currently in development but will be 
                     "measure": null,
                     "methodology": "Explanation/rationale: To assist Department of National Defence in managing select Major Capital Projects for equipment acquisition, an Assistant Deputy Minister level interdepartmental oversight committee, was created. Projects under the oversight of the committee are most Major Equipment Acquisition projects. The oversight committee named Major Capital Project – Interdepartmental Oversight Committee has developed and approved an interdepartmental Performance Measurement Protocol that ensures consistency across departments. The Performance Measurement Protocol clearly defined in the Major Capital Project – Interdepartmental Oversight Committee Terms of Reference is also used as measurement protocol for the DR 5.2 performance indicator.
 Formula/calculation:  % of capital equipment projects that remain in approved scope. In this case, capital equipment projects refers to Major Capital Projects under the oversight of the Major Capital Project – Interdepartmental Oversight Committee.
-# of Major Capital Projects  with Scope Status (GREEN) / # of Major Capital Projects (Expressed in %)
+\\\\# of Major Capital Projects  with Scope Status (GREEN) / # of Major Capital Projects (Expressed in %)
 Measurement strategy: To be determined
 Baseline: To be determined
 Notes/definitions: Scope performance measurement protocol is part of the Major Capital Project – Interdepartmental Oversight Committee Terms or Reference, and is used to assess project scope performance status.
@@ -3518,7 +3518,7 @@ For projects in Definition Phase or Implementation Phase:
                     "measure": null,
                     "methodology": "Explanation/rationale: The oversight committee named Major Capital Project – Interdepartmental Oversight Committee has developed and approved an interdepartmental Performance Measurement Protocol that ensures consistency across departments. The Performance Measurement Protocol clearly defined in the Major Capital Project – Interdepartmental Oversight Committee Terms of Reference is also used as measurement protocol for the DR 5.2 performance indicator.
 Formula/calculation:  % of capital equipment projects that remains in approved schedule. In this case, capital equipment projects refers to Major Capital Projects under the oversight of the Major Capital Project – Interdepartmental Oversight Committee.
-# of Major Capital Project with Schedule Status (GREEN) / # of Major Capital Projects (Expressed in %)
+\\\\# of Major Capital Project with Schedule Status (GREEN) / # of Major Capital Projects (Expressed in %)
 Measurement Strategy: To be determined
 Baseline: To be determined
 Notes/definitions: None
@@ -3553,7 +3553,7 @@ Notes/definitions: None
                     "measure": null,
                     "methodology": "Explanation/rationale: To assist the Department of National Defence in managing select Major Capital Projects for equipment acquisition, an Assistant Deputy Minister level interdepartmental oversight committee was created. Projects under the oversight of the committee are most Major Equipment Acquisition projects. The oversight committee named Major Capital Project – Interdepartmental Oversight Committee has developed and approved an interdepartmental Performance Measurement Protocol that ensures consistency across departments. The Performance Measurement Protocol clearly defined in the Major Capital Project – Interdepartmental Oversight Committee Terms of Reference is also used as measurement protocol for the DR 5.2 performance indicator.
 Formula/calculation: % of capital equipment projects that remain in approved expenditure authority. In this case, capital equipment projects refers to Major Capital Projects under the oversight of the Major Capital Project – Interdepartmental Oversight Committee.
-# of Major Capital Project with Budget Status (GREEN or YELLOW)/# of Major Capital Projects (Expressed in %)
+\\\\# of Major Capital Project with Budget Status (GREEN or YELLOW)/# of Major Capital Projects (Expressed in %)
 Measurement Strategy: To be determined
 Baseline: To be determined  
 Notes/definitions: : The budget performance measurement protocol is part of the mandate of the Major Capital Project – Inter departmental Oversight Committee and is used to evaluate the project budget performance status.
