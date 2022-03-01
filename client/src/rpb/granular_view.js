@@ -161,7 +161,7 @@ class GranularView extends React.Component {
                       grouping: current_grouping,
                     });
                   }}
-                  defaultChecked={current_grouping === grouping}
+                  checked={current_grouping === grouping}
                 />
                 <label htmlFor={group_id} className={"normal-radio-btn-label"}>
                   {current_grouping === "default" ||
