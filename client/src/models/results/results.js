@@ -383,12 +383,15 @@ const drr_docs = build_doc_info_objects("drr", [
   },
 ]);
 
-const dp_2022_late_submissions = [
+const dp_2022_late_results = [
+  "295", // Royal Canadian Mounted Police
+  "126", // Department of Foreign Affairs, Trade and Development
+  "247", // Office of the Correctional Investigator of Canada
+];
+const dp_2022_late_results_and_resources = [
   "130", // Department of Industry
   "244", // Office of the Intelligence Commissioner
   "245", // Office of the Conflict of Interest and Ethics Commissioner
-  "140", // Department of Western Economic Diversification
-  "237", // Office of Infrastructure of Canada
   "256", // Offices of the Information and Privacy Commissioners of Canada
   "12", // Atlantic Canada Opportunities Agency
   "209", // Military Grievances External Review Committee
@@ -399,20 +402,22 @@ const dp_2022_late_submissions = [
   "326", // Treasury Board Secretariat
   "235", // Northern Pipeline Agency
   "278", // Privy Council Office
+  /* Also have program structure issues */
+  "237", // Office of Infrastructure of Canada
+  "140", // Department of Western Economic Diversification
 ];
-
 const dp_2022_broken_program_structure = [
-  "239", // CEO
-  "26", // CBSA
-  "560", // PCAN
-  "140", // WDO
-  "128", // HRSD
-  "136", // GSC
-  "561", // FEDNO
-  "71", // CHRC
-  "237", // OICC
+  "239", // Office of the Chief Electoral Officer
+  "26", // Canada Border Services Agency
+  "560", // Pacific Economic Development Agency of Canada
+  "128", // Department of Employment and Social Development
+  "136", // Department of Public Works and Government Services
+  "561", // Federal Economic Development Agency for Northern Ontario
+  "71", // Canadian Human Rights Commission
+  /* Also late to submit results and resources */
+  "237", // Office of Infrastructure of Canada
+  "140", // Department of Western Economic Diversification
 ];
-
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2021",
@@ -436,15 +441,12 @@ const dp_docs = build_doc_info_objects("dp", [
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
     late_results_orgs: _.uniq([
-      /* missing results only */
-      "295", // Royal Canadian Mounted Police
-      "126", // Department of Foreign Affairs, Trade and Development
-      "247", // Office of the Correctional Investigator of Canada
-      ...dp_2022_late_submissions,
+      ...dp_2022_late_results,
+      ...dp_2022_late_results_and_resources,
       ...dp_2022_broken_program_structure,
     ]),
     late_resources_orgs: _.uniq([
-      ...dp_2022_late_submissions,
+      ...dp_2022_late_results_and_resources,
       ...dp_2022_broken_program_structure,
     ]),
   },
