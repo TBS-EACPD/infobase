@@ -400,7 +400,6 @@ const dp_2022_late_results_and_resources = [
   "288", // Registrar of the Supreme Court of Canada
   "326", // Treasury Board Secretariat
   "235", // Northern Pipeline Agency
-  "278", // Privy Council Office
   /* Also have program structure issues */
   "237", // Office of Infrastructure of Canada
   "140", // Department of Western Economic Diversification
