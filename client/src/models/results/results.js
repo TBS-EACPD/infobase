@@ -385,7 +385,6 @@ const drr_docs = build_doc_info_objects("drr", [
 
 const dp_2022_late_results = [
   "295", // Royal Canadian Mounted Police
-  "126", // Department of Foreign Affairs, Trade and Development
   "247", // Office of the Correctional Investigator of Canada
 ];
 const dp_2022_late_results_and_resources = [
