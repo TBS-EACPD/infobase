@@ -382,6 +382,37 @@ const drr_docs = build_doc_info_objects("drr", [
     late_resources_orgs: [],
   },
 ]);
+
+const dp_2022_late_submissions = [
+  "130", // Department of Industry
+  "244", // Office of the Intelligence Commissioner
+  "245", // Office of the Conflict of Interest and Ethics Commissioner
+  "140", // Department of Western Economic Diversification
+  "237", // Office of Infrastructure of Canada
+  "256", // Offices of the Information and Privacy Commissioners of Canada
+  "12", // Atlantic Canada Opportunities Agency
+  "209", // Military Grievances External Review Committee
+  "125", // Department of Fisheries and Oceans
+  "124", // Department of Finance
+  "348", // Department of Indigenous Services
+  "288", // Registrar of the Supreme Court of Canada
+  "326", // Treasury Board Secretariat
+  "235", // Northern Pipeline Agency
+  "278", // Privy Council Office
+];
+
+const dp_2022_broken_program_structure = [
+  "239", // CEO
+  "26", // CBSA
+  "560", // PCAN
+  "140", // WDO
+  "128", // HRSD
+  "136", // GSC
+  "561", // FEDNO
+  "71", // CHRC
+  "237", // OICC
+];
+
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2021",
@@ -404,45 +435,18 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2022-23-departmental-plans.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
-    late_results_orgs: [
+    late_results_orgs: _.uniq([
       /* missing results only */
       "295", // Royal Canadian Mounted Police
       "126", // Department of Foreign Affairs, Trade and Development
       "247", // Office of the Correctional Investigator of Canada
-      /* missing both */
-      "130", // Department of Industry
-      "244", // Office of the Intelligence Commissioner
-      "245", // Office of the Conflict of Interest and Ethics Commissioner
-      "140", // Department of Western Economic Diversification
-      "237", // Office of Infrastructure of Canada
-      "256", // Offices of the Information and Privacy Commissioners of Canada
-      "12", // Atlantic Canada Opportunities Agency
-      "209", // Military Grievances External Review Committee
-      "125", // Department of Fisheries and Oceans
-      "124", // Department of Finance
-      "348", // Department of Indigenous Services
-      "288", // Registrar of the Supreme Court of Canada
-      "326", // Treasury Board Secretariat
-      "235", // Northern Pipeline Agency
-      "278", // Privy Council Office
-    ],
-    late_resources_orgs: [
-      "130", // Department of Industry
-      "244", // Office of the Intelligence Commissioner
-      "245", // Office of the Conflict of Interest and Ethics Commissioner
-      "140", // Department of Western Economic Diversification
-      "237", // Office of Infrastructure of Canada
-      "256", // Offices of the Information and Privacy Commissioners of Canada
-      "12", // Atlantic Canada Opportunities Agency
-      "209", // Military Grievances External Review Committee
-      "125", // Department of Fisheries and Oceans
-      "124", // Department of Finance
-      "348", // Department of Indigenous Services
-      "288", // Registrar of the Supreme Court of Canada
-      "326", // Treasury Board Secretariat
-      "235", // Northern Pipeline Agency
-      "278", // Privy Council Office
-    ],
+      ...dp_2022_late_submissions,
+      ...dp_2022_broken_program_structure,
+    ]),
+    late_resources_orgs: _.uniq([
+      ...dp_2022_late_submissions,
+      ...dp_2022_broken_program_structure,
+    ]),
   },
 ]);
 const result_docs = {
