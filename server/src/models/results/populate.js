@@ -117,8 +117,8 @@ export default async function ({ models }) {
       target_month: parsed_int_or_null(indicator.target_month),
       status_key: indicator.status_key || "dp",
       gba_plus: indicator?.gba_plus || null,
-      // methodologies are markdown, but many contain a line starting with an unescaped # that ISN'T intended to be a header;
-      // a header in a methodology is an invalid Titan input, so just to be safe make sure all number signs are escaped in the input!
+      // methodologies are markdown, but when input in Titan the users specifically do not expect leading #'s to result in headers (and we don't
+      // want them to either). Escape them so they can display regular number signs, as expected
       ..._.chain(["en", "fr"])
         .map((lang) => `methodology_${lang}`)
         .map((key) => [key, indicator[key]?.replace(/^#/gm, "\\#")])
