@@ -387,7 +387,6 @@ const dp_2022_late_results = [
   "209", // Military Grievances External Review Committee
 ];
 const dp_2022_late_results_and_resources = [
-  "130", // Department of Industry
   "244", // Office of the Intelligence Commissioner
   "245", // Office of the Conflict of Interest and Ethics Commissioner
   "125", // Department of Fisheries and Oceans
@@ -401,6 +400,8 @@ const dp_2022_broken_program_structure = [
   "560", // Pacific Economic Development Agency of Canada
   "561", // Federal Economic Development Agency for Northern Ontario
   "140", // Department of Western Economic Diversification
+  "295", // Royal Canadian Mounted Police
+  "71", // Canadian Human Rights Commission
 
   /* Also late to submit results and resources */
   "237", // Office of Infrastructure of Canada
