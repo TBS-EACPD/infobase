@@ -16,8 +16,6 @@ import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
 import { Dept } from "src/models/subjects";
 
-import { lang } from "src/core/injected_build_constants";
-
 import text from "./warning_panels.yaml";
 
 const { TM, text_maker } = create_text_maker_component([
@@ -164,16 +162,7 @@ export const declare_late_results_warning_panel = () =>
                       result_doc.late_results_orgs,
                       (org_id) => Dept.store.lookup(org_id).name
                     )}
-                    column_count={
-                      lang === "en" && result_doc.late_results_orgs.length > 3
-                        ? 2
-                        : 1
-                    }
-                    li_class={
-                      result_doc.late_results_orgs.length > 4
-                        ? "font-small"
-                        : ""
-                    }
+                    column_count={2}
                   />
                 </div>
               );
@@ -222,23 +211,18 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
             ...late_panel_config,
 
             calculate: () => !_.isEmpty(late_orgs),
-            render: () => {
-              const column_count = late_orgs.length > 3 ? 3 : 2;
-              const li_class = column_count > 2 ? "font-small" : "";
-              return (
-                <WarningPanel center_text={false} banner_class="warning">
-                  <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
-                  <MultiColumnList
-                    list_items={_.map(
-                      late_orgs,
-                      (org_id) => Dept.store.lookup(org_id).name
-                    )}
-                    column_count={column_count}
-                    li_class={li_class}
-                  />
-                </WarningPanel>
-              );
-            },
+            render: () => (
+              <WarningPanel center_text={false} banner_class="warning">
+                <TM k={`late_${planned_or_actual}_resources_warning_gov`} />
+                <MultiColumnList
+                  list_items={_.map(
+                    late_orgs,
+                    (org_id) => Dept.store.lookup(org_id).name
+                  )}
+                  column_count={2}
+                />
+              </WarningPanel>
+            ),
           };
         default:
           return {

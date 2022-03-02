@@ -163,9 +163,6 @@ const LateResultsBanner = () => {
     return null;
   }
 
-  const column_count = late_orgs.length > 3 ? 3 : 2;
-  const li_class = column_count > 2 ? "font-small" : "";
-
   const banner_content = (
     <Fragment>
       {
@@ -179,8 +176,7 @@ const LateResultsBanner = () => {
           late_orgs,
           (org_id) => Dept.store.lookup(org_id).name
         )}
-        column_count={column_count}
-        li_class={li_class}
+        column_count={2}
       />
     </Fragment>
   );
@@ -206,9 +202,6 @@ const LateDpResourcesBanner = () => {
     return null;
   }
 
-  const column_count = late_orgs.length > 3 ? 3 : 2;
-  const li_class = column_count > 2 ? "font-small" : "";
-
   const banner_content = (
     <Fragment>
       {
@@ -222,8 +215,7 @@ const LateDpResourcesBanner = () => {
           late_orgs,
           (org_id) => Dept.store.lookup(org_id).name
         )}
-        column_count={column_count}
-        li_class={li_class}
+        column_count={2}
       />
     </Fragment>
   );
@@ -248,9 +240,6 @@ const LateDrrFteResources = () => {
     return null;
   }
 
-  const column_count = late_orgs.length > 3 ? 3 : 2;
-  const li_class = column_count > 2 ? "font-small" : "";
-
   const banner_content = (
     <Fragment>
       {
@@ -264,8 +253,7 @@ const LateDrrFteResources = () => {
           late_orgs,
           (org_id) => Dept.store.lookup(org_id).name
         )}
-        column_count={column_count}
-        li_class={li_class}
+        column_count={2}
       />
     </Fragment>
   );
