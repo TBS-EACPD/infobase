@@ -273,10 +273,6 @@ module.exports = {
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
         }
@@ -284,10 +280,6 @@ module.exports = {
       "Tested on index-basic-eng.html#infographic/dept/326/results": {
         "Axe violations allow list": {
           "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
@@ -362,10 +354,6 @@ module.exports = {
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
         }
@@ -373,10 +361,6 @@ module.exports = {
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/results": {
         "Axe violations allow list": {
           "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
@@ -428,10 +412,6 @@ module.exports = {
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
         }
@@ -439,10 +419,6 @@ module.exports = {
       "Tested on index-basic-eng.html#infographic/program/TBC-BXC04/results": {
         "Axe violations allow list": {
           "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
             "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
