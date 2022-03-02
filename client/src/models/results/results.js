@@ -399,7 +399,6 @@ const dp_2022_late_results_and_resources = [
 const dp_2022_broken_program_structure = [
   "239", // Office of the Chief Electoral Officer
   "560", // Pacific Economic Development Agency of Canada
-  "128", // Department of Employment and Social Development
   "561", // Federal Economic Development Agency for Northern Ontario
   "140", // Department of Western Economic Diversification
 
