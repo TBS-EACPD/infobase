@@ -429,9 +429,9 @@ const dp_docs = build_doc_info_objects("dp", [
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
     late_results_orgs: _.uniq([
-      ...dp_2022_late_results,
       ...dp_2022_late_results_and_resources,
       ...dp_2022_broken_program_structure,
+      ...dp_2022_late_results,
     ]),
     late_resources_orgs: _.uniq([
       ...dp_2022_late_results_and_resources,
