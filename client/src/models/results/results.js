@@ -384,35 +384,27 @@ const drr_docs = build_doc_info_objects("drr", [
 ]);
 
 const dp_2022_late_results = [
-  "295", // Royal Canadian Mounted Police
-  "247", // Office of the Correctional Investigator of Canada
+  "209", // Military Grievances External Review Committee
 ];
 const dp_2022_late_results_and_resources = [
   "130", // Department of Industry
   "244", // Office of the Intelligence Commissioner
   "245", // Office of the Conflict of Interest and Ethics Commissioner
-  "256", // Offices of the Information and Privacy Commissioners of Canada
-  "12", // Atlantic Canada Opportunities Agency
-  "209", // Military Grievances External Review Committee
   "125", // Department of Fisheries and Oceans
-  "124", // Department of Finance
-  "348", // Department of Indigenous Services
   "288", // Registrar of the Supreme Court of Canada
-  "326", // Treasury Board Secretariat
-  "235", // Northern Pipeline Agency
+
   /* Also have program structure issues */
   "237", // Office of Infrastructure of Canada
-  "140", // Department of Western Economic Diversification
 ];
 const dp_2022_broken_program_structure = [
   "239", // Office of the Chief Electoral Officer
   "560", // Pacific Economic Development Agency of Canada
   "128", // Department of Employment and Social Development
   "561", // Federal Economic Development Agency for Northern Ontario
+  "140", // Department of Western Economic Diversification
 
   /* Also late to submit results and resources */
   "237", // Office of Infrastructure of Canada
-  "140", // Department of Western Economic Diversification
 ];
 const dp_docs = build_doc_info_objects("dp", [
   {
