@@ -140,3 +140,12 @@
   display: flex;
   align-items: center;
 }
+
+.glossary-sb__item-def a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.glossary-sb__item-def a:visited {
+  color: #fff;
+}
