@@ -85,7 +85,7 @@ export class Sidebar extends React.Component<SidebarProps> {
           <div className={"sidebar__wrapper"}>
             <FocusLock
               onDeactivation={() => {
-                return_focus_target?.focus();
+                return_focus_target?.focus({ preventScroll: true });
               }}
             >
               <aside className="sidebar">
