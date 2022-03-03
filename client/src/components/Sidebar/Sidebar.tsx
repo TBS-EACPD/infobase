@@ -5,15 +5,12 @@ import "./Sidebar.scss";
 
 import { CSSTransition } from "react-transition-group";
 
-import { FloatingButton } from "src/components/FloatingButton/FloatingButton";
-
 import { IconX } from "src/icons/icons";
 
 interface SidebarProps {
   is_open: boolean;
   callback: (value: boolean) => void;
   children: React.ReactElement;
-  button_text: string;
   title_text: string;
   sidebar_toggle_target: string;
   return_focus_target: HTMLElement | undefined;
@@ -67,8 +64,7 @@ export class Sidebar extends React.Component<SidebarProps> {
   };
 
   render() {
-    const { is_open, children, button_text, title_text, return_focus_target } =
-      this.props;
+    const { is_open, children, title_text, return_focus_target } = this.props;
     return (
       <div ref={this.sidebar_ref}>
         <CSSTransition
@@ -114,13 +110,6 @@ export class Sidebar extends React.Component<SidebarProps> {
             </FocusLock>
           </div>
         </CSSTransition>
-
-        <FloatingButton
-          button_text={button_text}
-          showWithScroll={false}
-          handleClick={() => this.props.callback(true)}
-          tabIndex={0}
-        />
       </div>
     );
   }

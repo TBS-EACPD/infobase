@@ -57,7 +57,6 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
       <Sidebar
         is_open={is_open}
         callback={(value: boolean) => this.props.toggle_glossary(value)}
-        button_text={text_maker("glossary_title")}
         title_text={text_maker("glossary_title")}
         sidebar_toggle_target={"[data-toggle=glossary_sidebar]"}
         return_focus_target={return_focus_target}
