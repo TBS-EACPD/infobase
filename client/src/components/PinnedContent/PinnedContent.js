@@ -87,7 +87,8 @@ class _PinnedContent extends React.Component {
 
           return (
             <div ref={ref}>
-              <ReactResizeDetector handleHeight>
+              {/* height resize detector to sync pinned content height with a placeholder div that's used, when pinned, to keep the page content from shifting */}
+              <ReactResizeDetector handleHeight refreshMode="debounce">
                 {({ targetRef }) => (
                   <>
                     {should_pin && (
