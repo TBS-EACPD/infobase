@@ -119,7 +119,7 @@ const GlossarySidebarController = withRouter(
       if (routes_without_glossary.includes(currentPage)) return null;
 
       return (
-        <div>
+        <>
           <GlossarySidebar
             glossary_item_key={this.state.glossary_item_key}
             focus_item_key={this.state.focus_item_key}
@@ -136,7 +136,7 @@ const GlossarySidebarController = withRouter(
             handleClick={() => this.buttonClick()}
             tabIndex={0}
           />
-        </div>
+        </>
       );
     }
   }
