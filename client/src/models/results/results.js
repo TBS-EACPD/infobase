@@ -388,7 +388,6 @@ const dp_2022_late_results = [
 ];
 const dp_2022_late_results_and_resources = [
   "244", // Office of the Intelligence Commissioner
-  "245", // Office of the Conflict of Interest and Ethics Commissioner
   "125", // Department of Fisheries and Oceans
   "288", // Registrar of the Supreme Court of Canada
 
