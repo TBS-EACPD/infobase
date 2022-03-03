@@ -98,65 +98,80 @@ class NonA11yPinnedContent extends React.Component {
 
           return (
             <div ref={ref}>
-              {/* height resize detector to sync pinned content height with a placeholder div that's used, when pinned, to keep the page content from shifting */}
+              {/* height resize dectector to sync the height of the content with the height of a placeholder div used,
+              when the content is floating, to prevent the page content from shifting when the content catches/uncatches 
+              on the initial location */}
               <ReactResizeDetector handleHeight refreshMode="debounce">
-                {({ targetRef }) => (
-                  <>
-                    {should_pin && (
-                      <div style={{ height: targetRef.current.offsetHeight }} />
-                    )}
-                    <div
-                      ref={targetRef}
-                      style={{
-                        ...(should_pin && {
-                          position: "fixed",
-                          top: 0,
-                          zIndex: 2001,
-                        }),
-                      }}
-                    >
-                      <div style={{ position: "relative" }}>
-                        {children}
+                {({ targetRef: contentRef }) => (
+                  /* width resize dectector to sync the content's width with the width given to it's original rendering context
+                  (grabbed from the placeholder), so that it stays consistent when transitioning to a fixed position*/
+                  <ReactResizeDetector handleWidth refreshMode="debounce">
+                    {({ targetRef: placeHolderRef }) => (
+                      <>
                         <div
+                          ref={placeHolderRef}
                           style={{
-                            position: "absolute",
-                            top: "1rem",
-                            right: "1rem",
+                            width: "100%",
+                            height: should_pin
+                              ? contentRef.current?.offsetHeight
+                              : "0px",
+                          }}
+                        />
+                        <div
+                          ref={contentRef}
+                          style={{
+                            width: placeHolderRef.current?.offsetWidth,
+                            ...(should_pin && {
+                              position: "fixed",
+                              top: 0,
+                              zIndex: 2001,
+                            }),
                           }}
                         >
-                          <button
-                            onClick={this.click_pin}
-                            onKeyDown={this.tab_over_pin}
-                            style={{
-                              background: "none",
-                              border: "none",
-                            }}
-                            aria-label={text_maker(
-                              !this.is_pinned ? "pin" : "unpin"
-                            )}
-                          >
-                            {!this.is_pinned ? (
-                              <IconPin
-                                height="25px"
-                                width="25px"
-                                svg_style={{ verticalAlign: "Top" }}
-                                color={backgroundColor}
-                                alternate_color="false"
-                              />
-                            ) : (
-                              <IconUnpin
-                                height="25px"
-                                width="25px"
-                                svg_style={{ verticalAlign: "Top" }}
-                                color={backgroundColor}
-                                alternate_color="false"
-                              />
-                            )}
-                          </button>
+                          <div style={{ position: "relative" }}>
+                            {children}
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "1rem",
+                                right: "1rem",
+                              }}
+                            >
+                              <button
+                                onClick={this.click_pin}
+                                onKeyDown={this.tab_over_pin}
+                                style={{
+                                  background: "none",
+                                  border: "none",
+                                }}
+                                aria-label={text_maker(
+                                  !this.is_pinned ? "pin" : "unpin"
+                                )}
+                              >
+                                {!this.is_pinned ? (
+                                  <IconPin
+                                    height="25px"
+                                    width="25px"
+                                    svg_style={{ verticalAlign: "Top" }}
+                                    color={backgroundColor}
+                                    alternate_color="false"
+                                  />
+                                ) : (
+                                  <IconUnpin
+                                    height="25px"
+                                    width="25px"
+                                    svg_style={{ verticalAlign: "Top" }}
+                                    color={backgroundColor}
+                                    alternate_color="false"
+                                  />
+                                )}
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </>
+                      </>
+                    )}
+                  </ReactResizeDetector>
                 )}
               </ReactResizeDetector>
             </div>
