@@ -14,6 +14,8 @@ interface SidebarProps {
   title_text: string;
   sidebar_toggle_target: string;
   return_focus_target: HTMLElement | undefined;
+  keydown_close: () => void;
+  keydown_close_value: boolean;
 }
 
 export class Sidebar extends React.Component<SidebarProps> {
@@ -37,7 +39,7 @@ export class Sidebar extends React.Component<SidebarProps> {
 
   handleKeyPress(e: React.KeyboardEvent) {
     if (e.key === "Enter") {
-      this.props.callback(false);
+      this.props.keydown_close();
     }
   }
 
@@ -62,7 +64,13 @@ export class Sidebar extends React.Component<SidebarProps> {
   };
 
   render() {
-    const { is_open, children, title_text, return_focus_target } = this.props;
+    const {
+      is_open,
+      children,
+      title_text,
+      return_focus_target,
+      keydown_close_value,
+    } = this.props;
     return (
       <div ref={this.sidebar_ref}>
         <CSSTransition
@@ -79,7 +87,9 @@ export class Sidebar extends React.Component<SidebarProps> {
           <div className={"sidebar__wrapper"}>
             <FocusLock
               onDeactivation={() => {
-                return_focus_target?.focus({ preventScroll: true });
+                if (keydown_close_value) {
+                  return_focus_target?.focus({ preventScroll: true });
+                }
               }}
             >
               <aside className="sidebar">
