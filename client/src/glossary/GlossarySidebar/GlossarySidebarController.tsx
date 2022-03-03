@@ -4,10 +4,14 @@ import { withRouter } from "react-router-dom";
 
 import type { RouteComponentProps } from "react-router-dom";
 
+import glossary_text from "src/glossary/glossary.yaml";
+
 import { GlossarySidebar } from "./GlossarySidebar";
-import { valueToObjectRepresentation } from "@apollo/client/utilities";
+import { FloatingButton, create_text_maker_component } from "src/components";
 
 const routes_without_glossary = ["/start", "/glossary"];
+
+const { text_maker } = create_text_maker_component(glossary_text);
 
 interface GlossarySidebarControllerState {
   is_open: boolean;
@@ -104,13 +108,20 @@ const GlossarySidebarController = withRouter(
       });
     }
 
+    buttonClick() {
+      this.toggleGlossary(true);
+      this.setState({
+        return_focus_target: undefined,
+      });
+    }
+
     render() {
       const currentPage = this.props.location.pathname;
 
       if (routes_without_glossary.includes(currentPage)) return null;
 
       return (
-        <div ref={this.menu_ref}>
+        <div>
           <GlossarySidebar
             glossary_item_key={this.state.glossary_item_key}
             focus_item_key={this.state.focus_item_key}
@@ -120,6 +131,12 @@ const GlossarySidebarController = withRouter(
             is_open={this.state.is_open}
             toggle_glossary={(value) => this.toggleGlossary(value)}
             return_focus_target={this.state.return_focus_target}
+          />
+          <FloatingButton
+            button_text={text_maker("glossary_title")}
+            showWithScroll={false}
+            handleClick={() => this.buttonClick()}
+            tabIndex={0}
           />
         </div>
       );
