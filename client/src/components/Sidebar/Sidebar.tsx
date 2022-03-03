@@ -15,39 +15,79 @@ interface SidebarProps {
   children: React.ReactElement;
   button_text: string;
   title_text: string;
+  sidebar_toggle_target: string;
+  return_focus_target: HTMLElement | undefined;
 }
 
 export class Sidebar extends React.Component<SidebarProps> {
   title = React.createRef<HTMLDivElement>();
+  sidebar_ref = React.createRef<HTMLDivElement>();
   constructor(props: SidebarProps) {
     super(props);
   }
 
-  handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>) {
+  componentDidMount() {
+    window.addEventListener("click", this.handleWindowClick, {
+      capture: true,
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("click", this.handleWindowClick, {
+      capture: true,
+    });
+  }
+
+  handleKeyPress(e: React.KeyboardEvent) {
     if (e.key === "Enter") {
-      this.close();
+      this.props.callback(false);
     }
   }
 
-  close() {
-    this.props.callback(false);
-  }
+  closeSidebar = (e: Event) => {
+    const sidebar_node = this.sidebar_ref.current;
+    if (
+      this.props.is_open &&
+      sidebar_node &&
+      !sidebar_node.contains(e.target as HTMLElement)
+    ) {
+      this.props.callback(false);
+    }
+  };
+
+  handleWindowClick = (e: Event) => {
+    const { sidebar_toggle_target, is_open } = this.props;
+    const selection = window.getSelection();
+    if (selection?.type != "Range") {
+      const target = (e.target as HTMLElement).closest(sidebar_toggle_target);
+      if (!target && is_open) {
+        this.closeSidebar(e);
+      }
+    }
+  };
 
   render() {
-    const { is_open, children, button_text, title_text } = this.props;
+    const { is_open, children, button_text, title_text, return_focus_target } =
+      this.props;
     return (
-      <div>
-        <FocusLock>
-          <CSSTransition
-            in={is_open}
-            timeout={1000}
-            classNames="slide"
-            appear
-            mountOnEnter
-            unmountOnExit
-            onEnter={() => this.title.current?.focus()}
-          >
-            <div className={"sidebar__wrapper"}>
+      <div ref={this.sidebar_ref}>
+        <CSSTransition
+          in={is_open}
+          timeout={1000}
+          classNames="slide"
+          appear
+          mountOnEnter
+          unmountOnExit
+          onEntered={() => {
+            this.title.current?.focus();
+          }}
+        >
+          <div className={"sidebar__wrapper"}>
+            <FocusLock
+              onDeactivation={() => {
+                return_focus_target?.focus();
+              }}
+            >
               <aside className="sidebar">
                 <div className={"sidebar__icon-wrapper"}>
                   <span
@@ -71,9 +111,10 @@ export class Sidebar extends React.Component<SidebarProps> {
                 </div>
                 {children}
               </aside>
-            </div>
-          </CSSTransition>
-        </FocusLock>
+            </FocusLock>
+          </div>
+        </CSSTransition>
+
         <FloatingButton
           button_text={button_text}
           showWithScroll={false}
