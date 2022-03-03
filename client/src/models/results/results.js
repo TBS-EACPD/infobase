@@ -383,9 +383,6 @@ const drr_docs = build_doc_info_objects("drr", [
   },
 ]);
 
-const dp_2022_late_results = [
-  "209", // Military Grievances External Review Committee
-];
 const dp_2022_late_results_and_resources = [
   "244", // Office of the Intelligence Commissioner
   "125", // Department of Fisheries and Oceans
@@ -396,9 +393,6 @@ const dp_2022_late_results_and_resources = [
 ];
 const dp_2022_broken_program_structure = [
   "239", // Office of the Chief Electoral Officer
-  "560", // Pacific Economic Development Agency of Canada
-  "561", // Federal Economic Development Agency for Northern Ontario
-  "140", // Department of Western Economic Diversification
   "295", // Royal Canadian Mounted Police
   "71", // Canadian Human Rights Commission
 
@@ -430,7 +424,6 @@ const dp_docs = build_doc_info_objects("dp", [
     late_results_orgs: _.uniq([
       ...dp_2022_late_results_and_resources,
       ...dp_2022_broken_program_structure,
-      ...dp_2022_late_results,
     ]),
     late_resources_orgs: _.uniq([
       ...dp_2022_late_results_and_resources,

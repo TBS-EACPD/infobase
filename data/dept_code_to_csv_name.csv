@@ -36,6 +36,7 @@ CNEDA,crso
 CNMI,crso
 CPC,crso
 CPCC,crso
+CRRF,crso
 CRTC,crso
 CSA,crso
 CSC,crso
@@ -49,6 +50,7 @@ EDC,crso
 ERC,crso
 FBCL,crso
 FCAC,crso
+FEDNO,crso
 FEDSO,crso
 FIN,crso
 FJA,crso
@@ -101,6 +103,7 @@ OSEO,crso
 OSFI,crso
 PBO,crso
 PCA,crso
+PCAN,crso
 PCC,crso
 PCO,crso
 PHAC,crso
@@ -1280,6 +1283,7 @@ EDC,program_ftes
 ERC,program_ftes
 FBCL,program_ftes
 FCAC,program_ftes
+FEDNO,program_ftes
 FEDSO,program_ftes
 FIN,program_ftes
 FJA,program_ftes
@@ -1332,6 +1336,7 @@ OSEO,program_ftes
 OSFI,program_ftes
 PBO,program_ftes
 PCA,program_ftes
+PCAN,program_ftes
 PCC,program_ftes
 PCO,program_ftes
 PHAC,program_ftes
@@ -1532,6 +1537,7 @@ EDC,program_spending
 ERC,program_spending
 FBCL,program_spending
 FCAC,program_spending
+FEDNO,program_spending
 FEDSO,program_spending
 FIN,program_spending
 FJA,program_spending
@@ -1584,6 +1590,7 @@ OSEO,program_spending
 OSFI,program_spending
 PBO,program_spending
 PCA,program_spending
+PCAN,program_spending
 PCC,program_spending
 PCO,program_spending
 PHAC,program_spending
