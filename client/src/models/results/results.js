@@ -399,6 +399,10 @@ const dp_2022_broken_program_structure = [
   /* Also late to submit results and resources */
   "237", // Office of Infrastructure of Canada
 ];
+const non_dp_broken_program_structures_with_resource_impacts = [
+  "58", // Canadian Commercial Corporation
+  "92", // Canadian Race Relations Foundation, only has estimates and doesn't get a financial infographic, so this is a bit weird. Them being late still effects gov totals though
+];
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2021",
@@ -428,6 +432,7 @@ const dp_docs = build_doc_info_objects("dp", [
     late_resources_orgs: _.uniq([
       ...dp_2022_late_results_and_resources,
       ...dp_2022_broken_program_structure,
+      ...non_dp_broken_program_structures_with_resource_impacts,
     ]),
   },
 ]);
