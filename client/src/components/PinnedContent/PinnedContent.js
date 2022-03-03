@@ -31,14 +31,30 @@ export const set_pinned_content_local_storage = (local_storage_name, value) => {
     localStorage.setItem(local_storage_name, value);
 };
 
-class _PinnedContent extends React.Component {
+const get_is_pinned = (
+  local_storage_name,
+  default_pin_state,
+  is_pinned_local_storage_mirror = null
+) => {
+  if (has_local_storage && local_storage_name) {
+    const is_pinned = get_pinned_content_local_storage(local_storage_name);
+    return _.isBoolean(is_pinned) ? is_pinned : default_pin_state;
+  } else {
+    return _.isBoolean(is_pinned_local_storage_mirror)
+      ? is_pinned_local_storage_mirror
+      : default_pin_state;
+  }
+};
+
+class NonA11yPinnedContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.content_ref = React.createRef();
-
     this.state = {
-      is_pinned_local_storage_mirror: null,
+      is_pinned_local_storage_mirror: get_is_pinned(
+        props.local_storage_name,
+        props.default_pin_state
+      ),
     };
   }
 
@@ -46,32 +62,27 @@ class _PinnedContent extends React.Component {
     const { local_storage_name, default_pin_state } = this.props;
     const { is_pinned_local_storage_mirror } = this.state;
 
-    if (has_local_storage && local_storage_name) {
-      const is_pinned = get_pinned_content_local_storage(local_storage_name);
-      return _.isBoolean(is_pinned) ? is_pinned : default_pin_state;
-    } else {
-      return _.isBoolean(is_pinned_local_storage_mirror)
-        ? is_pinned_local_storage_mirror
-        : default_pin_state;
-    }
+    return get_is_pinned(
+      local_storage_name,
+      default_pin_state,
+      is_pinned_local_storage_mirror
+    );
   }
 
   set_is_pinned = (is_pinned) => {
     set_pinned_content_local_storage(this.props.local_storage_name, is_pinned);
     this.setState({ is_pinned_local_storage_mirror: is_pinned });
   };
-  pin_pressed = () => {
+  click_pin = () => {
     this.set_is_pinned(!this.is_pinned);
   };
-  handleKeyDown = (e) => {
+  tab_over_pin = (e) => {
+    // keyboard pin presses generally handeled by the onClick, since it's a button; special case where we make tabbing through the pin button
+    // specifically disable pinning. Otherwise, the pinned content drawer will follow the screen down and likely cover whatever next takes tab focus
     if (e.key === "Tab") {
       this.set_is_pinned(false);
     }
   };
-
-  componentDidMount() {
-    this.set_is_pinned(this.is_pinned);
-  }
 
   render() {
     const { children } = this.props;
@@ -95,6 +106,7 @@ class _PinnedContent extends React.Component {
                       <div style={{ height: targetRef.current.offsetHeight }} />
                     )}
                     <div
+                      ref={targetRef}
                       style={{
                         ...(should_pin && {
                           position: "fixed",
@@ -102,7 +114,6 @@ class _PinnedContent extends React.Component {
                           zIndex: 2001,
                         }),
                       }}
-                      ref={targetRef}
                     >
                       <div style={{ position: "relative" }}>
                         {children}
@@ -114,7 +125,8 @@ class _PinnedContent extends React.Component {
                           }}
                         >
                           <button
-                            onClick={this.pin_pressed}
+                            onClick={this.click_pin}
+                            onKeyDown={this.tab_over_pin}
                             style={{
                               background: "none",
                               border: "none",
@@ -122,7 +134,6 @@ class _PinnedContent extends React.Component {
                             aria-label={text_maker(
                               !this.is_pinned ? "pin" : "unpin"
                             )}
-                            onKeyDown={this.handleKeyDown}
                           >
                             {!this.is_pinned ? (
                               <IconPin
@@ -155,7 +166,7 @@ class _PinnedContent extends React.Component {
     );
   }
 }
-_PinnedContent.defaultProps = {
+NonA11yPinnedContent.defaultProps = {
   default_pin_state: has_local_storage,
 };
 
@@ -164,7 +175,7 @@ export class PinnedContent extends React.Component {
     return is_a11y_mode ? (
       this.props.children
     ) : (
-      <_PinnedContent {...this.props} />
+      <NonA11yPinnedContent {...this.props} />
     );
   }
 }
