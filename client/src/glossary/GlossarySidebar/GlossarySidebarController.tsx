@@ -55,14 +55,11 @@ const GlossarySidebarController = withRouter(
     };
 
     handleWindowClick = (e: Event) => {
-      const selection = window.getSelection();
-      if (selection?.type != "Range") {
-        const target = (e.target as HTMLElement).closest(
-          "[data-toggle=glossary_sidebar]"
-        );
-        if (target) {
-          this.itemClick(target as HTMLElement);
-        }
+      const target = (e.target as HTMLElement).closest(
+        "[data-toggle=glossary_sidebar]"
+      );
+      if (target) {
+        this.itemClick(target as HTMLElement);
       }
     };
 

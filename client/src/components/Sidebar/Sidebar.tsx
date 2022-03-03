@@ -54,12 +54,10 @@ export class Sidebar extends React.Component<SidebarProps> {
 
   handleWindowClick = (e: Event) => {
     const { sidebar_toggle_target, is_open } = this.props;
-    const selection = window.getSelection();
-    if (selection?.type != "Range") {
-      const target = (e.target as HTMLElement).closest(sidebar_toggle_target);
-      if (!target && is_open) {
-        this.closeSidebar(e);
-      }
+
+    const target = (e.target as HTMLElement).closest(sidebar_toggle_target);
+    if (!target && is_open) {
+      this.closeSidebar(e);
     }
   };
 
