@@ -20,6 +20,7 @@ interface GlossarySidebarControllerState {
   focus_item_key: string;
   return_focus_target: HTMLElement | undefined;
   search_phrase: string;
+  keydown_close: boolean;
 }
 
 const GlossarySidebarController = withRouter(
@@ -37,6 +38,7 @@ const GlossarySidebarController = withRouter(
         focus_item_key: "",
         return_focus_target: undefined,
         search_phrase: "",
+        keydown_close: false,
       };
     }
     itemClick = (e: HTMLElement) => {
@@ -90,6 +92,14 @@ const GlossarySidebarController = withRouter(
     toggleGlossary(value: boolean) {
       this.setState({
         is_open: value,
+        keydown_close: false,
+      });
+    }
+
+    keydownClose() {
+      this.setState({
+        is_open: false,
+        keydown_close: true,
       });
     }
 
@@ -110,6 +120,7 @@ const GlossarySidebarController = withRouter(
       this.toggleGlossary(true);
       this.setState({
         return_focus_target: undefined,
+        keydown_close: true,
       });
     }
 
@@ -128,7 +139,9 @@ const GlossarySidebarController = withRouter(
             search_phrase={this.state.search_phrase}
             is_open={this.state.is_open}
             toggle_glossary={(value) => this.toggleGlossary(value)}
+            keydown_close={() => this.keydownClose()}
             return_focus_target={this.state.return_focus_target}
+            keydown_close_value={this.state.keydown_close}
           />
           <FloatingButton
             button_text={text_maker("glossary_title")}
