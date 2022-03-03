@@ -1,7 +1,10 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { create_text_maker_component, BackToTop } from "src/components/index";
+import {
+  create_text_maker_component,
+  FloatingButton,
+} from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -162,7 +165,14 @@ export default class Glossary extends React.Component {
           <TM k="glossary" />
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          {!is_a11y_mode && <BackToTop />}
+          {!is_a11y_mode && (
+            <FloatingButton
+              button_text={text_maker("back_to_top")}
+              showWithScroll={true}
+              handleClick={() => scroll_to_top()}
+              tabIndex={-1}
+            />
+          )}
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}
