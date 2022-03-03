@@ -75,7 +75,7 @@ export class GlossaryList extends React.Component<
     const items_by_letter = get_glossary_items_by_letter(results);
 
     return (
-      <div>
+      <>
         {results.length == 0 && search_phrase != "" ? (
           <div>{text_maker("no_matches_found")}</div>
         ) : (
@@ -110,7 +110,7 @@ export class GlossaryList extends React.Component<
             ))}
           </div>
         )}
-      </div>
+      </>
     );
   }
 }

@@ -61,7 +61,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
         sidebar_toggle_target={"[data-toggle=glossary_sidebar]"}
         return_focus_target={return_focus_target}
         children={
-          <div>
+          <>
             <div className="glossary-sb__header-wrapper">
               <div className="glossary-sb__header">
                 <div className="glossary-sb__search-wrapper">
@@ -105,7 +105,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
                 )}
               </div>
             </div>
-          </div>
+          </>
         }
       />
     );
