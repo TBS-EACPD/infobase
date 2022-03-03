@@ -4,10 +4,11 @@ import { withRouter } from "react-router-dom";
 
 import type { RouteComponentProps } from "react-router-dom";
 
+import { FloatingButton, create_text_maker_component } from "src/components";
+
 import glossary_text from "src/glossary/glossary.yaml";
 
 import { GlossarySidebar } from "./GlossarySidebar";
-import { FloatingButton, create_text_maker_component } from "src/components";
 
 const routes_without_glossary = ["/start", "/glossary"];
 
