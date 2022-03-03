@@ -74,7 +74,7 @@ export class Sidebar extends React.Component<SidebarProps> {
           appear
           mountOnEnter
           unmountOnExit
-          onEntered={() => {
+          onEnter={() => {
             this.title.current?.focus();
           }}
         >
@@ -97,11 +97,7 @@ export class Sidebar extends React.Component<SidebarProps> {
                   </span>
                 </div>
                 <div className={"sidebar__title"}>
-                  <h1
-                    ref={this.title}
-                    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-                    tabIndex={0}
-                  >
+                  <h1 ref={this.title} tabIndex={-1}>
                     {title_text}
                   </h1>
                 </div>
