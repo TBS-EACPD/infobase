@@ -101,11 +101,11 @@ class NonA11yPinnedContent extends React.Component {
               {/* height resize dectector to sync the height of the content with the height of a placeholder div used,
               when the content is floating, to prevent the page content from shifting when the content catches/uncatches 
               on the initial location */}
-              <ReactResizeDetector handleHeight refreshMode="debounce">
+              <ReactResizeDetector handleHeight refreshMode="throttle">
                 {({ targetRef: contentRef }) => (
                   /* width resize dectector to sync the content's width with the width given to it's original rendering context
                   (grabbed from the placeholder), so that it stays consistent when transitioning to a fixed position*/
-                  <ReactResizeDetector handleWidth refreshMode="debounce">
+                  <ReactResizeDetector handleWidth refreshMode="throttle">
                     {({ targetRef: placeHolderRef }) => (
                       <>
                         <div
