@@ -70,13 +70,12 @@
 
 .glossary-sb__content-wrapper {
   height: 100%;
+  overflow-y: auto;
 }
 
 .glossary-sb__content {
   background-color: $secondaryColor;
-  height: calc(100vh - 187px);
   padding: 15px;
-  overflow-y: auto;
 }
 
 .glossary-sb__letter {
