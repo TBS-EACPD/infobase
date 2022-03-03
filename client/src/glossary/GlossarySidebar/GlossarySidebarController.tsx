@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import type { RouteComponentProps } from "react-router-dom";
 
 import { GlossarySidebar } from "./GlossarySidebar";
+import { valueToObjectRepresentation } from "@apollo/client/utilities";
 
 const routes_without_glossary = ["/start", "/glossary"];
 
@@ -46,29 +47,18 @@ const GlossarySidebarController = withRouter(
       });
 
       this.toggleGlossary(true);
-
-      (
-        document.querySelector(`glossary-sb__item-title`) as HTMLDivElement
-      )?.focus();
-    };
-
-    closeSidebar = (e: Event) => {
-      const menu_node = this.menu_ref.current;
-      if (
-        this.state.is_open &&
-        menu_node &&
-        !menu_node.contains(e.target as HTMLElement)
-      ) {
-        this.setState({ is_open: false });
-        this.state.return_focus_target?.focus();
-      }
     };
 
     handleWindowClick = (e: Event) => {
-      const target = (e.target as HTMLElement).closest(
-        "[data-toggle=glossary_sidebar]"
-      );
-      target ? this.itemClick(target as HTMLElement) : this.closeSidebar(e);
+      const selection = window.getSelection();
+      if (selection?.type != "Range") {
+        const target = (e.target as HTMLElement).closest(
+          "[data-toggle=glossary_sidebar]"
+        );
+        if (target) {
+          this.itemClick(target as HTMLElement);
+        }
+      }
     };
 
     handleWindowKeyDown = (e: KeyboardEvent) => {
@@ -78,7 +68,7 @@ const GlossarySidebarController = withRouter(
     };
 
     componentDidMount() {
-      window.addEventListener("mousedown", this.handleWindowClick, {
+      window.addEventListener("click", this.handleWindowClick, {
         capture: true,
       });
       window.addEventListener("keydown", this.handleWindowKeyDown, {
@@ -87,7 +77,7 @@ const GlossarySidebarController = withRouter(
     }
 
     componentWillUnmount() {
-      window.removeEventListener("mousedown", this.handleWindowClick, {
+      window.removeEventListener("click", this.handleWindowClick, {
         capture: true,
       });
       window.removeEventListener("keydown", this.handleWindowKeyDown, {
@@ -99,9 +89,6 @@ const GlossarySidebarController = withRouter(
       this.setState({
         is_open: value,
       });
-      if (!value) {
-        this.state.return_focus_target?.focus();
-      }
     }
 
     setGlossaryItem(key: string) {
@@ -132,6 +119,7 @@ const GlossarySidebarController = withRouter(
             search_phrase={this.state.search_phrase}
             is_open={this.state.is_open}
             toggle_glossary={(value) => this.toggleGlossary(value)}
+            return_focus_target={this.state.return_focus_target}
           />
         </div>
       );
