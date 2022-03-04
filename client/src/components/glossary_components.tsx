@@ -20,7 +20,7 @@ interface GlossaryIconProps {
   id: string;
   alternate_text?: string;
   icon_color?: string;
-  icon_alt_color?: string;
+  icon_alt_color?: string | false;
 }
 
 interface GlossaryItemProps {
@@ -58,7 +58,7 @@ export const GlossaryIcon = ({
   id,
   alternate_text,
   icon_color,
-  icon_alt_color,
+  icon_alt_color = primaryColor,
 }: GlossaryIconProps) => (
   <GlossaryTooltipWrapper no_bottom_border={true} id={id}>
     {is_a11y_mode ? (
@@ -71,7 +71,7 @@ export const GlossaryIcon = ({
       <IconQuestion
         color={icon_color ? icon_color : backgroundColor}
         width={"1.2em"}
-        alternate_color={icon_alt_color ? icon_alt_color : primaryColor}
+        alternate_color={icon_alt_color}
         svg_style={{ verticalAlign: "-0.3em" }}
       />
     )}
