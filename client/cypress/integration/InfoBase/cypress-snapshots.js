@@ -84,9 +84,6 @@ module.exports = {
           "aria-dialog-name, serious": [
             "<div role=\"dialog\" aria-modal=\"true\" class=\"fade modal show\" tabindex=\"-1\" style=\"display: block; padding-left: 15px;\">"
           ],
-          "color-contrast, serious": [
-            "<span style=\"margin-left: 5px;\">Authorities</span>"
-          ],
           "tabindex, serious": [
             "<div data-focus-guard=\"true\" tabindex=\"1\" style=\"width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;\"></div>"
           ]

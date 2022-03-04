@@ -42,9 +42,8 @@ export const TagCloud = ({ tags, onSelectTag }: TagCloudProps) => (
           <span style={{ marginLeft: "5px" }}>{label}</span>
         </button>
         {glossaryEntryStore.has(id) && (
-          /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-          <span className="tag-button-helper" tabIndex={0}>
-            <GlossaryIcon id={id} />
+          <span className="tag-button-helper">
+            <GlossaryIcon id={id} icon_alt_color={false} />
           </span>
         )}
       </li>
