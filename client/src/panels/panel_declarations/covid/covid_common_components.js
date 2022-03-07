@@ -63,12 +63,20 @@ class ToggleVoteStatProvider extends React.Component {
     const { Inner, inner_props } = this.props;
 
     const ToggleVoteStat = () => (
-      <CheckBox
-        active={show_vote_stat}
-        onClick={this.toggle_show_vote_stat}
-        label={<TM k="show_vote_stat_split" />}
-        container_style={{ justifyContent: "flex-end", marginBottom: "-15px" }}
-      />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "-15px",
+        }}
+      >
+        <CheckBox
+          active={show_vote_stat}
+          onClick={this.toggle_show_vote_stat}
+          label={<TM k="show_vote_stat_split" />}
+        />
+        <TM k="show_vote_stat_split_glossary" style={{ marginLeft: "0.5em" }} />
+      </div>
     );
 
     return <Inner {...{ ...inner_props, show_vote_stat, ToggleVoteStat }} />;

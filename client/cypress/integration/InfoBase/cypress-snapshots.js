@@ -232,11 +232,7 @@ module.exports = {
     },
     "Infographic - Dept - COVID-19 Response": {
       "Tested on index-eng.html#infographic/dept/1/covid": {
-        "Axe violations allow list": {
-          "nested-interactive, serious": [
-            "<span role=\"checkbox\" aria-checked=\"false\" tabindex=\"0\" class=\"link-styled\">"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/dept/1/covid": {
         "Axe violations allow list": null
