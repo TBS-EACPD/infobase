@@ -207,7 +207,6 @@ export class ServiceStandards extends React.Component {
                   active:
                     active_statuses.length === standard_statuses.length ||
                     _.indexOf(active_statuses, status_key) !== -1,
-                  aria_text: text_maker(status_key),
                   text: text_maker(status_key),
                   icon: status_icons[status_key],
                 }))}
