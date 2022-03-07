@@ -18,7 +18,6 @@ interface VisibilityControlProps {
 
 interface itemInterface {
   active: boolean;
-  aria_text: string;
   count: number;
   key: string;
   icon: React.ReactNode;
@@ -66,8 +65,8 @@ export class VisibilityControl extends React.Component<VisibilityControlProps> {
               key={item.key}
               aria-label={
                 {
-                  en: `Activate to filter "${item.aria_text}" items from the following presentation.`,
-                  fr: `Appuyez pour filtrer les données «${item.aria_text}» de la présentation`,
+                  en: `Activate to filter "${item.text}" items from the following presentation.`,
+                  fr: `Appuyez pour filtrer les données «${item.text}» de la présentation`,
                 }[lang]
               }
             >

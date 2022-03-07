@@ -327,7 +327,6 @@ const StatusIconTable = ({ icon_counts, onIconClick, active_list }) => (
           active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
         count: icon_counts[status_key] || 0,
         text: text_maker(status_key),
-        aria_text: text_maker(status_key),
         icon: large_status_icons[status_key],
       }))}
       item_component_order={["count", "icon", "text"]}
