@@ -82,9 +82,12 @@ module.exports = {
       "Tested on index-eng.html#rpb/.-.-(subject.-.-'gov_gov.-.-columns.-.-false)": {
         "Axe violations allow list": {
           "aria-dialog-name, serious": [
+            // TODO Fixable?
             "<div role=\"dialog\" aria-modal=\"true\" class=\"fade modal show\" tabindex=\"-1\" style=\"display: block; padding-left: 15px;\">"
           ],
           "tabindex, serious": [
+            // Frome react-focus-lock, may not be "fixable" without a package patch, and would need to make sure the tab ordering isn't necessary
+            // for the focus lock's functionality. Otherwise, given the use case, don't believe it's a real issue
             "<div data-focus-guard=\"true\" tabindex=\"1\" style=\"width: 1px; height: 0px; padding: 0px; overflow: hidden; position: fixed; top: 1px; left: 1px;\"></div>"
           ]
         }
@@ -134,6 +137,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/covid": {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
+            // Should be fixed by PR #1315
             "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
             "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
             "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
@@ -143,6 +147,7 @@ module.exports = {
       "Tested on index-basic-eng.html#infographic/gov/gov/covid": {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
+            // Should be fixed by PR #1315
             "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
             "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
             "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
