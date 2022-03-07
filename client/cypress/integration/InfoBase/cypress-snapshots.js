@@ -271,23 +271,10 @@ module.exports = {
             // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>"
           ],
-          "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
-          ]
-        }
+          "nested-interactive, serious": null,
       },
       "Tested on index-basic-eng.html#infographic/dept/326/results": {
-        "Axe violations allow list": {
-          "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
-          ]
-        }
+        "Axe violations allow list": null,
       }
     },
     "Infographic - Dept - Where can I go from here?": {
@@ -352,25 +339,10 @@ module.exports = {
           "color-contrast, serious": [
             // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>"
-          ],
-          "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
           ]
-        }
       },
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/results": {
-        "Axe violations allow list": {
-          "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
-          ]
-        }
-      }
+        "Axe violations allow list": null
     },
     "Infographic - CRSO - Where can I go from here?": {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/related": {
@@ -411,24 +383,10 @@ module.exports = {
     },
     "Infographic - Program - Results": {
       "Tested on index-eng.html#infographic/program/TBC-BXC04/results": {
-        "Axe violations allow list": {
-          "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/program/TBC-BXC04/results": {
-        "Axe violations allow list": {
-          "nested-interactive, serious": [
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not met&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Not Available&quot; items from the following presentation.\">",
-            "<button aria-pressed=\"true\" class=\"visibility-control__item visibility-control__item--active\" aria-label=\"Activate to filter &quot;Result to be achieved&quot; items from the following presentation.\">"
-          ]
-        }
+        "Axe violations allow list": null
       }
     },
     "Infographic - Program - Where can I go from here?": {
