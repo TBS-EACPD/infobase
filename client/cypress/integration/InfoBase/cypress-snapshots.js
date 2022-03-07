@@ -167,6 +167,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>See the data: \n</span>",
             "<span>Service Inventory</span>",
             "<span>Applications by other channels</span>",
@@ -187,6 +188,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>",
             "<span>Departmental Plans</span>"
           ]
@@ -255,6 +257,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/dept/326/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>See the data: \n</span>",
             "<span>Service Inventory</span>",
             "<span class=\"text-nowrap\">0.0%</span>"
@@ -269,6 +272,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/dept/326/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>"
           ],
           "nested-interactive, serious": [
@@ -350,6 +354,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>"
           ],
           "nested-interactive, serious": [
@@ -399,6 +404,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/program/TBC-BXB03/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            // Inside a height clipper, related to but different from other false positive colour contrast issues
             "<span class=\"text-nowrap\">0.0%</span>"
           ]
         }
