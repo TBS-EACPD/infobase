@@ -13,16 +13,23 @@ const StatelessModalDefaultProps = {
 type StatelessModalProps = typeof StatelessModalDefaultProps & {
   on_close_callback: () => void;
   show: boolean;
-  title?: React.ReactNode;
+  title: string;
   subtitle?: React.ReactNode;
-  header?: React.ReactNode;
   body?: React.ReactNode;
   footer?: React.ReactNode;
   additional_dialog_class?: string;
 };
 
-export class StatelessModal extends React.Component<StatelessModalProps> {
+export class StatelessModal extends React.Component<
+  StatelessModalProps,
+  { title_id: string }
+> {
   static defaultProps = StatelessModalDefaultProps;
+  constructor(props: StatelessModalProps) {
+    super(props);
+
+    this.state = { title_id: _.uniqueId("modal-title-") };
+  }
   componentWillUnmount() {
     this.closeModal();
   }
@@ -30,30 +37,18 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
     this.props.on_close_callback();
   };
   render() {
+    const { title_id } = this.state;
+
     const {
       show,
       title,
       subtitle,
-      header,
       body,
       footer,
       close_text,
       include_close_button_in_header,
       additional_dialog_class,
     } = this.props;
-
-    const default_header = (
-      <div className="modal-dialog__title-layout">
-        {title && (
-          <Modal.Title style={{ fontSize: "130%" }}>{title}</Modal.Title>
-        )}
-        {subtitle && (
-          <Modal.Title style={{ fontSize: "100%", marginTop: "7px" }}>
-            {subtitle}
-          </Modal.Title>
-        )}
-      </div>
-    );
 
     const common_layout = (
       content: React.ReactNode,
@@ -72,10 +67,21 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
         )}
       </div>
     );
+
     const header_content = common_layout(
-      header || default_header,
+      <div className="modal-dialog__title-layout">
+        <Modal.Title style={{ fontSize: "130%" }}>
+          <h1 id={title_id}>{title}</h1>
+        </Modal.Title>
+        {subtitle && (
+          <Modal.Title style={{ fontSize: "100%", marginTop: "7px" }}>
+            {subtitle}
+          </Modal.Title>
+        )}
+      </div>,
       include_close_button_in_header
     );
+
     const footer_content =
       footer ||
       (!include_close_button_in_header &&
@@ -88,6 +94,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
         onHide={this.closeModal}
         dialogClassName={classNames("modal-dialog", additional_dialog_class)}
         centered
+        aria-labelledby={title_id}
       >
         <div role="main">
           <Modal.Header closeButton={!close_text}>
