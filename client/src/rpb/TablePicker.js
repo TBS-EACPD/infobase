@@ -139,30 +139,20 @@ class TablePicker extends React.Component {
 
     return (
       <div ref="main" id="tbp-main">
-        <h1>
-          <TextMaker text_key="table_picker_title" />
-        </h1>
         {broken_url && <BrokenLinkBanner />}
-        <p className="medium-panel-text">
-          <TextMaker text_key="table_picker_top_instructions" />
-        </p>
-        <div>
-          <TaggedItemCloud
-            exiting={this.state.exiting}
-            items={tables_to_render}
-            tags={concepts_to_display}
-            item_tag_linkage={relevant_linkage}
-            onSelectTag={(concept_id) => {
-              this.selectConcept(concept_id);
-            }}
-            onSelectItem={(table_id) => {
-              this.fadeOutAndSelectTable(table_id);
-            }}
-            noItemsMessage={
-              <TextMaker text_key="table_picker_no_tables_found" />
-            }
-          />
-        </div>
+        <TaggedItemCloud
+          exiting={this.state.exiting}
+          items={tables_to_render}
+          tags={concepts_to_display}
+          item_tag_linkage={relevant_linkage}
+          onSelectTag={(concept_id) => {
+            this.selectConcept(concept_id);
+          }}
+          onSelectItem={(table_id) => {
+            this.fadeOutAndSelectTable(table_id);
+          }}
+          noItemsMessage={<TextMaker text_key="table_picker_no_tables_found" />}
+        />
       </div>
     );
   }
