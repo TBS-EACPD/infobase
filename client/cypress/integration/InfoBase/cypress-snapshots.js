@@ -270,11 +270,11 @@ module.exports = {
           "color-contrast, serious": [
             // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>"
-          ],
-          "nested-interactive, serious": null,
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/dept/326/results": {
-        "Axe violations allow list": null,
+        "Axe violations allow list": null
       }
     },
     "Infographic - Dept - Where can I go from here?": {
@@ -340,9 +340,11 @@ module.exports = {
             // TODO Intersect with tall height clipped table, false positives. Table should paginate
             "<span>Departmental Results Reports</span>"
           ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/results": {
         "Axe violations allow list": null
+      }
     },
     "Infographic - CRSO - Where can I go from here?": {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/related": {
