@@ -40,11 +40,7 @@ export { IconGrid } from "./IconGrid/IconGrid";
 export { PinnedFAQ } from "./PinnedFAQ/PinnedFAQ";
 
 export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
-export {
-  StatelessModal,
-  FixedPopover,
-  FocusLockedModal,
-} from "./modals_and_popovers/index";
+export { StatelessModal, FixedPopover } from "./modals_and_popovers/index";
 export { DisplayTable } from "./DisplayTable/index";
 
 export {
