@@ -129,7 +129,7 @@ export default class Home extends React.Component {
               }}
             >
               <header className="container">
-                <h2 className="h1">
+                <h2 className="h2">
                   <TM k="subapps_title" />
                 </h2>
                 <h3 className="h2">
