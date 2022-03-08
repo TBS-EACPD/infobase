@@ -15,9 +15,9 @@ type StatelessModalProps = typeof StatelessModalDefaultProps & {
   show: boolean;
   title: string;
   subtitle?: React.ReactNode;
-  body?: React.ReactNode;
   footer?: React.ReactNode;
   additional_dialog_class?: string;
+  children?: React.ReactNode;
 };
 
 export class StatelessModal extends React.Component<
@@ -43,11 +43,11 @@ export class StatelessModal extends React.Component<
       show,
       title,
       subtitle,
-      body,
       footer,
       close_text,
       include_close_button_in_header,
       additional_dialog_class,
+      children,
     } = this.props;
 
     const common_layout = (
@@ -100,7 +100,7 @@ export class StatelessModal extends React.Component<
           <Modal.Header closeButton={!close_text}>
             {header_content}
           </Modal.Header>
-          {body && <Modal.Body>{body}</Modal.Body>}
+          {children && <Modal.Body>{children}</Modal.Body>}
           {footer_content && <Modal.Footer>{footer_content}</Modal.Footer>}
         </div>
       </Modal>
