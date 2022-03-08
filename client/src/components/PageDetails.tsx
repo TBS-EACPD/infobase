@@ -88,11 +88,12 @@ const PageDetails = withRouter(
           <StatelessModal
             title={text_maker("report_a_problem")}
             show={showReportProblem}
-            body={<FormFrontend template_name="report_a_problem" />}
             on_close_callback={() =>
               this.setState({ showReportProblem: false })
             }
-          />
+          >
+            <FormFrontend template_name="report_a_problem" />
+          </StatelessModal>
 
           {!_.includes(non_survey_routes, location.pathname) && (
             <button
@@ -105,9 +106,10 @@ const PageDetails = withRouter(
           <StatelessModal
             title={text_maker("feedback")}
             show={showSurvey}
-            body={<FormFrontend top_border={false} template_name="feedback" />}
             on_close_callback={() => toggleSurvey(false)}
-          />
+          >
+            <FormFrontend top_border={false} template_name="feedback" />
+          </StatelessModal>
 
           <div className="pagedetails__version-number col-12 col-lg-4 col-md-6">
             <VersionNumber />

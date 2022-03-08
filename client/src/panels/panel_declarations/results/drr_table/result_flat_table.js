@@ -253,12 +253,11 @@ const IndicatorTable = ({
         on_close_callback={() => set_open_indicator_id(null)}
         additional_dialog_class={"modal-responsive"}
         title={text_maker("indicator_display_title")}
-        body={
-          !_.isNull(open_indicator_id) && (
-            <IndicatorDisplayPanel subject={subject} id={open_indicator_id} />
-          )
-        }
-      />
+      >
+        {!_.isNull(open_indicator_id) && (
+          <IndicatorDisplayPanel subject={subject} id={open_indicator_id} />
+        )}
+      </StatelessModal>
     </Fragment>
   );
 };

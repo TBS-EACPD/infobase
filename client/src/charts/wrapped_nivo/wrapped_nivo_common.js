@@ -221,10 +221,11 @@ class InteractiveGraph extends React.Component {
         <StatelessModal
           show={show_table}
           title={table_name || nivo_common_text_maker("default_table_name")}
-          body={table}
           on_close_callback={() => this.setState({ show_table: false })}
           additional_dialog_class={"modal-responsive"}
-        />
+        >
+          {table}
+        </StatelessModal>
       </Fragment>
     ) : (
       table

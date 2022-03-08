@@ -313,13 +313,12 @@ class RPB extends React.Component {
                     className="medium-panel-text"
                   />
                 }
-                body={
-                  <TablePicker
-                    onSelect={(id) => this.pickTable(id)}
-                    broken_url={broken_url}
-                  />
-                }
-              />
+              >
+                <TablePicker
+                  onSelect={(id) => this.pickTable(id)}
+                  broken_url={broken_url}
+                />
+              </StatelessModal>
             )}
           </div>
         </LabeledBox>

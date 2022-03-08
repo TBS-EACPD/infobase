@@ -118,48 +118,45 @@ export class ShareButton extends React.Component<
               {title}
             </Fragment>
           }
-          body={
-            <Fragment>
-              <CommonSocialMediaShareButton
-                complete_url={`https://www.facebook.com/sharer/sharer.php?u=${encoded_url}`}
-                media_icon={
-                  <IconFacebook
-                    {...common_icon_props}
-                    aria_label={`${text_maker("share_on")} Facebook`}
-                  />
-                }
-              />
-              <CommonSocialMediaShareButton
-                complete_url={`https://twitter.com/intent/tweet?url=${encoded_url}`}
-                media_icon={
-                  <IconTwitter
-                    {...common_icon_props}
-                    aria_label={`${text_maker("share_on")} Twitter`}
-                  />
-                }
-              />
-              <CommonSocialMediaShareButton
-                complete_url={`https://www.reddit.com/submit?url=${encoded_url}&title=${title}`}
-                media_icon={
-                  <IconReddit
-                    {...common_icon_props}
-                    aria_label={`${text_maker("share_on")} Reddit`}
-                  />
-                }
-              />
-              <CommonSocialMediaShareButton
-                complete_url={`mailto:?subject=${title}&body=${encoded_url}`}
-                media_icon={
-                  <IconEmail
-                    {...common_icon_props}
-                    aria_label={text_maker("share_via_email")}
-                  />
-                }
-              />
-            </Fragment>
-          }
           close_text={text_maker("cancel")}
-        />
+        >
+          <CommonSocialMediaShareButton
+            complete_url={`https://www.facebook.com/sharer/sharer.php?u=${encoded_url}`}
+            media_icon={
+              <IconFacebook
+                {...common_icon_props}
+                aria_label={`${text_maker("share_on")} Facebook`}
+              />
+            }
+          />
+          <CommonSocialMediaShareButton
+            complete_url={`https://twitter.com/intent/tweet?url=${encoded_url}`}
+            media_icon={
+              <IconTwitter
+                {...common_icon_props}
+                aria_label={`${text_maker("share_on")} Twitter`}
+              />
+            }
+          />
+          <CommonSocialMediaShareButton
+            complete_url={`https://www.reddit.com/submit?url=${encoded_url}&title=${title}`}
+            media_icon={
+              <IconReddit
+                {...common_icon_props}
+                aria_label={`${text_maker("share_on")} Reddit`}
+              />
+            }
+          />
+          <CommonSocialMediaShareButton
+            complete_url={`mailto:?subject=${title}&body=${encoded_url}`}
+            media_icon={
+              <IconEmail
+                {...common_icon_props}
+                aria_label={text_maker("share_via_email")}
+              />
+            }
+          />
+        </StatelessModal>
       </Fragment>
     );
   }

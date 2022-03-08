@@ -76,9 +76,10 @@ const ServicesIntroPanel = ({ subject }) => {
       <StatelessModal
         title={text_maker("service_inventory_feedback_title")}
         show={show_service_feedback}
-        body={<FormFrontend template_name="service_inventory_feedback" />}
         on_close_callback={() => set_show_service_feedback(false)}
-      />
+      >
+        <FormFrontend template_name="service_inventory_feedback" />
+      </StatelessModal>
       {/* SI_TODO what's this, can it be deleted?
       <div className="pane-row">
         <div className="pane-rect">
