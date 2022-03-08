@@ -89,7 +89,7 @@ export class StatelessModal extends React.Component<StatelessModalProps> {
         dialogClassName={classNames("modal-dialog", additional_dialog_class)}
         centered
       >
-        <div>
+        <div role="main">
           <Modal.Header closeButton={!close_text}>
             {header_content}
           </Modal.Header>
