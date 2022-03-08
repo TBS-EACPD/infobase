@@ -1,9 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-//data and state stuff
-
-//re-usable view stuff
 import { withRouter } from "react-router";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
@@ -18,18 +15,14 @@ import {
   LangSynchronizer,
 } from "src/core/NavComponents";
 
-import { LeafSpinner, LabeledBox, FocusLockedModal } from "src/components";
+import { LeafSpinner, LabeledBox, StatelessModal } from "src/components";
 
 import { SafeJSURL } from "src/general_utils";
 import { Table } from "src/tables/TableClass";
 
-//specific view stuff
-
-//misc app stuff
-
 import { GranularView } from "./granular_view";
 import { rpb_link } from "./rpb_link";
-import { TextMaker, text_maker } from "./rpb_text_provider";
+import { TM, text_maker } from "./rpb_text_provider";
 import { ShareReport } from "./shared";
 import { AccessibleTablePicker, TablePicker } from "./TablePicker";
 import "./rpb.scss";
@@ -262,7 +255,7 @@ class RPB extends React.Component {
           <h1> {text_maker("report_builder_title")} </h1>
           <ShareReport />
         </div>
-        <LabeledBox label={<TextMaker text_key="rpb_pick_data" />}>
+        <LabeledBox label={<TM k="rpb_pick_data" />}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div
               role="region"
@@ -284,8 +277,8 @@ class RPB extends React.Component {
                     this.setState({ table_picking: true });
                   }}
                 >
-                  <TextMaker
-                    text_key={
+                  <TM
+                    k={
                       table
                         ? "select_another_table_button"
                         : "select_table_button"
@@ -295,9 +288,9 @@ class RPB extends React.Component {
               )}
             </div>
             {!is_a11y_mode && (
-              <FocusLockedModal
-                mounted={this.state.table_picking}
-                on_exit={() => {
+              <StatelessModal
+                show={this.state.table_picking}
+                on_close_callback={() => {
                   if (this.state.table_picking) {
                     this.setState({
                       table_picking: false,
@@ -313,26 +306,20 @@ class RPB extends React.Component {
                     }, 200);
                   }
                 }}
-                aria_label={`${text_maker("table_picker_title")}. 
-                  ${text_maker("table_picker_top_instructions")}`}
-                getApplicationNode={() => document.getElementById("app")}
-                underlayStyle={{
-                  paddingTop: "50px",
-                  paddingBottom: "50px",
-                }}
-                focusDialog={true}
-              >
-                <div
-                  tabIndex={-1}
-                  id="modal-child"
-                  className="container app-font rpb-modal-container"
-                >
+                title={<TM k="table_picker_title" el="h1" />}
+                subtitle={
+                  <TM
+                    k="table_picker_top_instructions"
+                    className="medium-panel-text"
+                  />
+                }
+                body={
                   <TablePicker
                     onSelect={(id) => this.pickTable(id)}
                     broken_url={broken_url}
                   />
-                </div>
-              </FocusLockedModal>
+                }
+              />
             )}
           </div>
         </LabeledBox>
