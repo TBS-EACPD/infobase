@@ -107,17 +107,17 @@ export class ShareButton extends React.Component<
         <StatelessModal
           show={this.state.showModal}
           on_close_callback={() => this.toggleModal(false)}
-          title={
+          title={text_maker("share")}
+          subtitle={
             <Fragment>
               <IconShare
                 aria_label={text_maker("share")}
                 color={tertiaryColor}
                 alternate_color={false}
               />
-              {text_maker("share")}
+              {title}
             </Fragment>
           }
-          subtitle={title}
           body={
             <Fragment>
               <CommonSocialMediaShareButton

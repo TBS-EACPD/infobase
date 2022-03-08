@@ -306,7 +306,7 @@ class RPB extends React.Component {
                     }, 200);
                   }
                 }}
-                title={<TM k="table_picker_title" el="h1" />}
+                title={text_maker("table_picker_title")}
                 subtitle={
                   <TM
                     k="table_picker_top_instructions"
