@@ -91,7 +91,6 @@ class FormFrontend extends React.Component {
     this.state = {
       template_name: props.template_name,
       loading: true,
-      faq_acknowledged: false,
       privacy_acknowledged: !props.include_privacy,
       sent_to_backend: false,
       awaiting_backend_response: false,
@@ -156,12 +155,12 @@ class FormFrontend extends React.Component {
   render() {
     const {
       loading,
-      faq_acknowledged,
       privacy_acknowledged,
       sent_to_backend,
       awaiting_backend_response,
       backend_response,
       template,
+      template_name,
       completed_template,
     } = this.state;
 
@@ -169,14 +168,20 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      // TODO replace key === "faq" with (template_name == !"report_a_problem" && key === "faq") once faq content is created
-      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type
+      ({ form_type }, key) =>
+        (template_name == !"report_a_problem" && key === "faq") ||
+        key === "meta" ||
+        !form_type
     );
-
+    console.log({ completed_template, user_fields });
     const all_required_user_fields_are_filled = _.chain(user_fields)
       .omitBy((field) => !field.required)
       .keys()
-      .every((required_field_key) => !!required_field_key)
+      .every(
+        (required_field_key) =>
+          !_.isUndefined(completed_template[required_field_key]) &&
+          !_.isEmpty(completed_template[required_field_key])
+      )
       .value();
 
     const all_connected_user_fields_are_filled = _.chain(user_fields)
@@ -198,12 +203,16 @@ class FormFrontend extends React.Component {
     const ready_to_send =
       all_required_user_fields_are_filled &&
       all_connected_user_fields_are_filled &&
-      // (template_name === "report_a_problem" &&  faq_acknowledged) && // TODO: uncomment once faq content is created
       privacy_acknowledged &&
       (!sent_to_backend || // hasn't been submitted yet
         (sent_to_backend &&
           !_.isEmpty(backend_response) &&
           !backend_response.success)); // submitted, but received a failing response, allow for retrys
+    console.log({
+      all_required_user_fields_are_filled,
+      all_connected_user_fields_are_filled,
+      ready_to_send,
+    });
 
     const disable_forms =
       (sent_to_backend && backend_response.success) ||
@@ -315,16 +324,13 @@ class FormFrontend extends React.Component {
               </FancyUL>
               <CheckBox
                 id={"form_frontend_faq"}
-                active={faq_acknowledged}
+                active={!!completed_template[field_key]}
                 disabled={disable_forms}
                 onClick={() =>
-                  this.setState({
-                    faq_acknowledged: !faq_acknowledged,
-                    completed_template: {
-                      ...completed_template,
-                      [field_key]: true,
-                    },
-                  })
+                  this.mergeIntoCompletedTemplateState(
+                    field_key,
+                    completed_template[field_key] ? null : { 0: true }
+                  )
                 }
                 label={text_maker("form_frontend_faq_ack")}
                 label_style={{ fontWeight: "bold" }}
