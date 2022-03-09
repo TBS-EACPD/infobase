@@ -167,7 +167,7 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type }, key) => key === "meta" || !form_type
+      ({ form_type }, key) => key === "meta" || !form_type // TODO remove key === "form_faq" once faq keys are completed
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
@@ -304,13 +304,11 @@ class FormFrontend extends React.Component {
                 {required_asterisk}
               </div>
               <FancyUL>
-                {_.map(field_info.faq_content, ([q_by_lang, a_by_lang]) => {
+                {_.map(field_info.faq_content, ({ q, a }) => {
                   return (
                     <div key={_.uniqueId("form-faq-qa-pair_")}>
-                      <div style={{ fontWeight: "bold" }}>
-                        {q_by_lang[lang]}
-                      </div>
-                      <div>{a_by_lang[lang]}</div>
+                      <div style={{ fontWeight: "bold" }}>{q[lang]}</div>
+                      <div>{a[lang]}</div>
                     </div>
                   );
                 })}
