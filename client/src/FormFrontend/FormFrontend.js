@@ -160,7 +160,6 @@ class FormFrontend extends React.Component {
       awaiting_backend_response,
       backend_response,
       template,
-      template_name,
       completed_template,
     } = this.state;
 
@@ -168,12 +167,9 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type }, key) =>
-        (template_name == !"report_a_problem" && key === "faq") ||
-        key === "meta" ||
-        !form_type
+      ({ form_type }, key) => key === "meta" || !form_type
     );
-    console.log({ completed_template, user_fields });
+
     const all_required_user_fields_are_filled = _.chain(user_fields)
       .omitBy((field) => !field.required)
       .keys()
@@ -208,11 +204,6 @@ class FormFrontend extends React.Component {
         (sent_to_backend &&
           !_.isEmpty(backend_response) &&
           !backend_response.success)); // submitted, but received a failing response, allow for retrys
-    console.log({
-      all_required_user_fields_are_filled,
-      all_connected_user_fields_are_filled,
-      ready_to_send,
-    });
 
     const disable_forms =
       (sent_to_backend && backend_response.success) ||
@@ -313,11 +304,13 @@ class FormFrontend extends React.Component {
                 {required_asterisk}
               </div>
               <FancyUL>
-                {_.map(field_info.faq_content, ([q, a], idx) => {
+                {_.map(field_info.faq_content, ([q_by_lang, a_by_lang]) => {
                   return (
-                    <div key={idx}>
-                      <div style={{ fontWeight: "bold" }}>{text_maker(q)}</div>
-                      <TM k={a} />
+                    <div key={_.uniqueId("form-faq-qa-pair_")}>
+                      <div style={{ fontWeight: "bold" }}>
+                        {q_by_lang[lang]}
+                      </div>
+                      <div>{a_by_lang[lang]}</div>
                     </div>
                   );
                 })}

@@ -6,7 +6,28 @@
     "required": true,
     "value_type": "json",
     "form_type": "form_faq",
-    "faq_content": [["sample_q", "sample_a"]]
+    "faq_content": [
+      [
+        {
+          "en": "sample q",
+          "fr": "sample q francais"
+        },
+        {
+          "en": "sample a",
+          "fr": "sample a francais"
+        }
+      ],
+      [
+        {
+          "en": "q2",
+          "fr": "q2 francais"
+        },
+        {
+          "en": "a2",
+          "fr": "a2 francais"
+        }
+      ]
+    ]
   },
   "issue_type": {
     "required": true,
