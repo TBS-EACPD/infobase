@@ -130,13 +130,13 @@ const make_form_backend = (templates) => {
         log_error_case(request, error_message);
         return null;
       } else {
-        send_to_slack(
-          make_slack_message_from_completed_template(
-            template_name,
-            original_template,
-            completed_template
-          )
-        ).catch((error) => log_error_case(request, error));
+        // send_to_slack(
+        //   make_slack_message_from_completed_template(
+        //     template_name,
+        //     original_template,
+        //     completed_template
+        //   )
+        // ).catch((error) => log_error_case(request, error));
 
         await write_to_db(
           request,

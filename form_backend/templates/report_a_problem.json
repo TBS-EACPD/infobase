@@ -4,9 +4,9 @@
   },
   "faq": {
     "required": true,
-    "value_type": "boolean",
+    "value_type": "json",
     "form_type": "form_faq",
-    "faq_content": [["", ""]]
+    "faq_content": [["sample_q", "sample_a"]]
   },
   "issue_type": {
     "required": true,

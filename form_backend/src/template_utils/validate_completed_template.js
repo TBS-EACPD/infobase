@@ -46,8 +46,6 @@ const verify_values_are_expected_and_match_value_types = (
                 );
               })
               .value();
-          case "boolean":
-            return submitted_value;
           default:
             return false; //unexpected type in the json itself
         }
