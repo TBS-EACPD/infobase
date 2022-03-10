@@ -10,18 +10,23 @@ import { get_static_url, make_request } from "src/request_utils";
 
 import { log_standard_event } from "./analytics";
 
+// warning, at least right now, PromiseRejectionEvent["reason"] has type any. This isn't a useful type
+type BoundaryHandledError =
+  | { toString: () => string }
+  | PromiseRejectionEvent["reason"];
+
 const NoIndex = () =>
   ReactDOM.createPortal(
     <meta name="robots" content="noindex" />,
     document.head
   );
 
-const state_from_error = (error) => ({
+const state_from_error = (error: BoundaryHandledError) => ({
   error: error,
   testing_for_stale_client: true,
 });
 
-const log_error = (error) => {
+const log_error = (error: BoundaryHandledError) => {
   console.error(error);
 
   !is_dev &&
@@ -32,9 +37,20 @@ const log_error = (error) => {
     });
 };
 
-export class ErrorBoundary extends React.Component {
-  constructor() {
-    super();
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+interface ErrorBoundaryState {
+  error?: BoundaryHandledError;
+  testing_for_stale_client: boolean;
+}
+
+export class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
 
     this.state = {
       error: null,
@@ -42,11 +58,11 @@ export class ErrorBoundary extends React.Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: BoundaryHandledError) {
     return state_from_error(error);
   }
 
-  get_state_from_unhandled_rejection = (event) => {
+  get_state_from_unhandled_rejection = (event: PromiseRejectionEvent) => {
     this.setState(state_from_error(event.reason));
   };
   componentDidMount() {
@@ -75,7 +91,7 @@ export class ErrorBoundary extends React.Component {
         const local_sha_matches_remote_sha = build_sha.search(`^${sha}`) !== -1;
 
         if (!local_sha_matches_remote_sha && !is_dev) {
-          window.location.reload(true);
+          window.location.reload();
         }
       })
       .finally(() => {
