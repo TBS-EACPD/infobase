@@ -10,7 +10,7 @@ function bundle_extended_bootstrap_css(output_path) {
     name: "container page css bundle",
     mode: "production",
     entry: [
-      "./src/extended_bootstrap_css/extended_bootstrap_index.side-effects.js",
+      "./src/extended_bootstrap_css/extended_bootstrap_index.side-effects.ts",
     ],
     output: {
       path: output_path,
@@ -31,7 +31,7 @@ function bundle_extended_bootstrap_css(output_path) {
     plugins: [
       new MiniCssExtractPlugin({ filename: "extended-bootstrap.css" }),
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
-      new FilterChunkWebpackPlugin({ patterns: ["*.js"] }),
+      new FilterChunkWebpackPlugin({ patterns: ["*.js", "*.ts", "*.tsx"] }),
     ],
   };
 
