@@ -33,6 +33,7 @@
     "@nivo/line": "^0.72.0",
     "@nivo/pie": "^0.72.0",
     "@nivo/treemap": "^0.72.0",
+    "@types/react-responsive": "^8.0.5",
     "@types/react-transition-group": "^4.4.4",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",

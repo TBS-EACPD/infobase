@@ -15,8 +15,12 @@ import {
   scroll_to_top,
 } from "src/core/NavComponents";
 
+import { IconArrow } from "src/icons/icons";
+
 import { rpb_link } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
+
+import { textLightColor } from "src/style_constants/index";
 
 import { get_glossary_items_by_letter } from "./glossary_utils";
 
@@ -171,6 +175,14 @@ export default class Glossary extends React.Component {
               showWithScroll={true}
               handleClick={() => scroll_to_top()}
               tabIndex={-1}
+              mobile_icon={
+                <IconArrow
+                  inline={true}
+                  aria_hide={true}
+                  alternate_color={textLightColor}
+                  rotation={-90}
+                />
+              }
             />
           )}
           <Glossary_
