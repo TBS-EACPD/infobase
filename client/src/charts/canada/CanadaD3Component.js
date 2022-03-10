@@ -225,8 +225,8 @@ export class CanadaD3Component {
     svg
       .selectAll(".province")
       .each(function (_d) {
-        var that = select(this);
-        var prov_key = that.attr("id").split("-")[1];
+        const that = select(this);
+        const prov_key = that.attr("id").split("-")[1];
         select(this).datum(prov_key);
       })
       .styles({
