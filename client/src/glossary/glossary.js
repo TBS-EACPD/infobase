@@ -18,9 +18,10 @@ import {
 import { IconArrow } from "src/icons/icons";
 
 import { rpb_link } from "src/rpb/rpb_link";
-import { Table } from "src/tables/TableClass";
 
 import { textLightColor } from "src/style_constants/index";
+
+import { Table } from "src/tables/TableClass";
 
 import { get_glossary_items_by_letter } from "./glossary_utils";
 

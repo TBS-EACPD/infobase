@@ -156,7 +156,6 @@ export class App extends React.Component {
             url_before_redirect_key="pre_redirected_url"
           />
           {has_local_storage && <SurveyPopup />}
-          <ReactUnmounter />
 
           <Suspense fallback={<LeafSpinner config_name={"route"} />}>
             <Switch>
