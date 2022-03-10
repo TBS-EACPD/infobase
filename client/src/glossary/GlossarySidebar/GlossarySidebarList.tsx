@@ -61,12 +61,6 @@ export class GlossaryList extends React.Component<
     this.props.open_definition(key);
   }
 
-  handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>, key: string) {
-    if (e.key === "Enter" && key) {
-      this.openDefinition(key);
-    }
-  }
-
   render() {
     const { search_phrase } = this.state;
 
@@ -88,12 +82,11 @@ export class GlossaryList extends React.Component<
                 <hr />
                 {_.map(items, (item, ix) => (
                   <div key={ix} className="glossary-sb__title">
-                    <span
-                      role="button"
+                    <button
                       id={item.id}
                       onClick={() => this.openDefinition(item.id)}
-                      onKeyDown={(e) => this.handleKeyPress(e, item.id)}
-                      tabIndex={0}
+                      className={"glossary-sb__list-item"}
+                      aria-label={text_maker("open_definition") + item.title}
                     >
                       {search_phrase ? (
                         <SearchHighlighter
@@ -103,7 +96,7 @@ export class GlossaryList extends React.Component<
                       ) : (
                         item.title
                       )}
-                    </span>
+                    </button>
                   </div>
                 ))}
               </div>

@@ -62,12 +62,15 @@
 
 .sidebar__close-button {
   opacity: 0.5;
-  display: flex;
-  align-items: center;
   padding: 15px 15px 0px 0px;
+  background-color: Transparent;
+  border: none;
 }
 
 .sidebar__close-button:hover {
   opacity: 1;
-  cursor: pointer;
+}
+
+.sidebar__close-button:focus {
+  opacity: 1;
 }

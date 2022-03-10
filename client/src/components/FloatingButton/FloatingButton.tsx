@@ -7,6 +7,7 @@ import { is_mobile } from "src/core/feature_detection";
 import "./FloatingButton.scss";
 
 import { maxSmallDevice } from "src/style_constants/index";
+import { string } from "prop-types";
 
 interface FloatingButtonProps {
   handleClick: () => void;
@@ -14,6 +15,7 @@ interface FloatingButtonProps {
   showWithScroll: boolean;
   tabIndex: number;
   mobile_icon: React.ReactNode;
+  aria_label: string;
 }
 interface FloatingButtonState {
   show_floating_button: boolean;
@@ -78,7 +80,7 @@ export class FloatingButton extends React.Component<
 
   render() {
     const { show_floating_button, caught_by_footer } = this.state;
-    const { tabIndex, button_text, mobile_icon } = this.props;
+    const { tabIndex, button_text, mobile_icon, aria_label } = this.props;
     return (
       <button
         ref={this.button_ref}
@@ -102,6 +104,7 @@ export class FloatingButton extends React.Component<
         }}
         tabIndex={tabIndex}
         onClick={() => this.props.handleClick()}
+        aria-label={aria_label}
       >
         <MediaQuery minWidth={maxSmallDevice}>{button_text}</MediaQuery>
         <MediaQuery maxWidth={maxSmallDevice}>{mobile_icon}</MediaQuery>
