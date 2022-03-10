@@ -151,6 +151,9 @@ back_to_top:
 glossary_button:
   en: Glossary
   fr: Glossaire
+open_glossary_definition:
+  en: click to open glossary defintion for 
+  fr: appuyez pour ouvrir la définition du glossaire de 
 data:
   en: Data
   fr: Données

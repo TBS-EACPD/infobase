@@ -119,8 +119,12 @@ hr {
 
 .glossary-sidebar-link,
 .glossary-sidebar-link:visited {
-  text-decoration: none;
-  border-bottom: 1px dotted $textColor;
+  background-color: Transparent;
+  font-size: inherit;
+  border: none;
+  padding: 0;
+  text-decoration: underline dotted;
+  text-underline-offset: 5px;
   transition: width 2s;
   opacity: 0.8;
 }
