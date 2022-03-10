@@ -172,6 +172,7 @@ export default class Glossary extends React.Component {
           {!is_a11y_mode && (
             <FloatingButton
               button_text={text_maker("back_to_top")}
+              aria_label={text_maker("back_to_top")}
               showWithScroll={true}
               handleClick={() => scroll_to_top()}
               tabIndex={-1}

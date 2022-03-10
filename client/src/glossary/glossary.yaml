@@ -37,3 +37,15 @@ back_text:
 no_matches_found:
   en: No results found
   fr: Aucun résultat
+
+return_to_glossary:
+  en: "Return to glossary list"
+  fr: "Retourner à la liste du glossaire"
+
+open_definition:
+  en: "Open definition: "
+  fr: "Ouvrir la définition "
+
+open_glossary:
+  en: "Open glossary sidebar"
+  fr: "Ouvrir le menu du glossaire"
