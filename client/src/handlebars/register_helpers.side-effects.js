@@ -669,8 +669,15 @@ HandlebarsWithPrototypeAccess.registerHelper("gl", function glossary_link(key) {
 HandlebarsWithPrototypeAccess.registerHelper(
   "gl_tt",
   function glossary_tooltip(display, key) {
+    const glos_item = glossaryEntryStore.lookup(key);
     return new HandlebarsWithPrototypeAccess.SafeString(
-      `<span class="nowrap glossary-sidebar-link" tabindex="0" data-ibtt-glossary-key="${key}" data-toggle="glossary_sidebar">${display}</span>`
+      `<button class="nowrap glossary-sidebar-link" data-ibtt-glossary-key="${key}" aria-label="${
+        display +
+        `, ` +
+        trivial_text_maker("open_glossary_definition") +
+        ` ` +
+        glos_item.title
+      }" data-toggle="glossary_sidebar">${display}</button>`
     );
   }
 );
