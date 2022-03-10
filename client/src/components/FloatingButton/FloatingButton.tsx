@@ -7,7 +7,6 @@ import { is_mobile } from "src/core/feature_detection";
 import "./FloatingButton.scss";
 
 import { maxSmallDevice } from "src/style_constants/index";
-import { string } from "prop-types";
 
 interface FloatingButtonProps {
   handleClick: () => void;
