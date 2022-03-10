@@ -598,16 +598,6 @@ export const transfer_payments = normalizeBilinguals({
   },
 });
 
-const NA_values = [
-  "Not Available",
-  "Non disponible",
-  "NA",
-  "N/A",
-  "na",
-  "n/a",
-  "Non-EX",
-];
-
 const businessConstants = {
   sos,
   tenure,
@@ -624,7 +614,6 @@ const businessConstants = {
   population_groups,
   transfer_payments,
   estimates_docs,
-  NA_values,
 };
 
 assign_to_dev_helper_namespace({ businessConstants });
