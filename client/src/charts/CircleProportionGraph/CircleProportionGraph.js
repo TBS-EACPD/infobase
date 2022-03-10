@@ -8,11 +8,12 @@ import { newIBCategoryColors } from "src/core/color_schemes";
 
 import { TabularLegend } from "src/charts/legends";
 
+import { get_formatter } from "src/charts/shared";
+
 import {
   InteractiveGraph,
   create_text_maker_component_with_nivo_common,
   general_default_props,
-  get_formatter,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 import text from "./CircleProportionGraph.yaml";

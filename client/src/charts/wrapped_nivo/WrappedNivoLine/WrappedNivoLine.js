@@ -5,12 +5,13 @@ import React from "react";
 
 import { DisplayTable } from "src/components/index";
 
+import { get_formatter } from "src/charts/shared";
+
 import {
   create_text_maker_component_with_nivo_common,
   InteractiveGraph,
   general_default_props,
   DefaultTooltip,
-  get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 import { IconZoomIn, IconZoomOut } from "src/icons/icons";
