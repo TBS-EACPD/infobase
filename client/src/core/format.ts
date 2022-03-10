@@ -331,7 +331,7 @@ const types_to_format: {
   },
 };
 
-type Formattable =
+export type Formattable =
   | number
   | string
   | (number | string)[]
@@ -409,7 +409,9 @@ const legacy_string_formats = _.chain(legacy_string_format_keys)
   .value() as {
   [key in
     | LegacyStringNumberFormatKeys
-    | `${LegacyStringNumberFormatKeys}_raw`]: <T>(value: T) => T;
+    | `${LegacyStringNumberFormatKeys}_raw`]: <T extends Formattable>(
+    value: T
+  ) => T;
 };
 
 export const formats = { ...number_formats, ...legacy_string_formats };
