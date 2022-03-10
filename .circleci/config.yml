@@ -288,20 +288,11 @@ jobs:
           at: ./
       - run: ./scripts/ci_scripts/create_envs.sh
 
-      - restore_cache:
-          keys:
-            - client-jest-cache
-
       - run: (cd client && npm run unit_tests)
 
       - run_codecov:
           coverage_path: client/.coverage/unit_tests/coverage-final.json
           flag: client
-
-      - save_cache:
-          key: client-jest-cache
-          paths:
-            - client/.cache/jest
 
   test_server:
     docker:
