@@ -1,17 +1,19 @@
 import classNames from "classnames";
 import React from "react";
-
-import "intersection-observer";
+import MediaQuery from "react-responsive";
 
 import { is_mobile } from "src/core/feature_detection";
 
 import "./FloatingButton.scss";
+
+import { maxSmallDevice } from "src/style_constants/index";
 
 interface FloatingButtonProps {
   handleClick: () => void;
   button_text: string;
   showWithScroll: boolean;
   tabIndex: number;
+  mobile_icon: React.ReactNode;
 }
 interface FloatingButtonState {
   show_floating_button: boolean;
@@ -76,7 +78,7 @@ export class FloatingButton extends React.Component<
 
   render() {
     const { show_floating_button, caught_by_footer } = this.state;
-    const { tabIndex, button_text } = this.props;
+    const { tabIndex, button_text, mobile_icon } = this.props;
     return (
       <button
         ref={this.button_ref}
@@ -101,7 +103,8 @@ export class FloatingButton extends React.Component<
         tabIndex={tabIndex}
         onClick={() => this.props.handleClick()}
       >
-        {button_text}
+        <MediaQuery minWidth={maxSmallDevice}>{button_text}</MediaQuery>
+        <MediaQuery maxWidth={maxSmallDevice}>{mobile_icon}</MediaQuery>
       </button>
     );
   }
