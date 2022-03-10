@@ -1,5 +1,4 @@
 import { scaleOrdinal } from "d3-scale";
-import _ from "lodash";
 
 const newIBCategoryColors = [
   "#206BBD", // blue
@@ -54,8 +53,6 @@ const sequentialPurples = [
   "#673C8F",
 ];
 
-const NA_color = _.last(newIBCategoryColors);
-
 const infobase_colors = () => scaleOrdinal().range(newIBCategoryColors);
 
 export {
@@ -66,6 +63,5 @@ export {
   sequentialReds,
   sequentialGreens,
   sequentialPurples,
-  NA_color,
   infobase_colors,
 };

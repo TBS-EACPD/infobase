@@ -10,7 +10,7 @@ import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
 import { TabularLegend } from "src/charts/legends/index";
-import { get_formatter, infobase_colors_smart } from "src/charts/shared";
+import { get_formatter } from "src/charts/shared";
 
 import {
   nivo_common_text_maker,
@@ -43,9 +43,7 @@ export class WrappedNivoPie extends React.Component {
       id,
     } = this.props;
 
-    const color_scale = infobase_colors_smart(
-      scaleOrdinal().range(colors || newIBCategoryColors)
-    );
+    const color_scale = scaleOrdinal().range(colors || newIBCategoryColors);
     const color_func = colors || ((d) => color_scale(d.label));
 
     const legend_items =

@@ -1,20 +1,9 @@
 import _ from "lodash";
 
-import { businessConstants } from "src/models/businessConstants";
-
-import { NA_color } from "src/core/color_schemes";
-
 import type { FormatKey, Formattable } from "src/core/format";
 import { formats } from "src/core/format";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
-
-export const infobase_colors_smart = (col_scale: any) => (label: any) => {
-  if (_.includes(businessConstants.NA_values, label)) {
-    return NA_color;
-  }
-  return col_scale(label);
-};
 
 export const get_formatter = (
   is_money: boolean,
