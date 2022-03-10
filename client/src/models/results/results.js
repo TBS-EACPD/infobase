@@ -386,23 +386,12 @@ const drr_docs = build_doc_info_objects("drr", [
 const dp_2022_late_results_and_resources = [
   "244", // Office of the Intelligence Commissioner
   "125", // Department of Fisheries and Oceans
-  "288", // Registrar of the Supreme Court of Canada
-
-  /* Also have program structure issues */
-  "237", // Office of Infrastructure of Canada
-];
-const dp_2022_broken_program_structure = [
-  "239", // Office of the Chief Electoral Officer
-  "295", // Royal Canadian Mounted Police
-  "71", // Canadian Human Rights Commission
-
-  /* Also late to submit results and resources */
-  "237", // Office of Infrastructure of Canada
 ];
 const non_dp_broken_program_structures_with_resource_impacts = [
   "58", // Canadian Commercial Corporation
   "92", // Canadian Race Relations Foundation, only has estimates and doesn't get a financial infographic, so this is a bit weird. Them being late still effects gov totals though
 ];
+
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2021",
@@ -425,13 +414,9 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2022-23-departmental-plans.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
-    late_results_orgs: _.uniq([
-      ...dp_2022_late_results_and_resources,
-      ...dp_2022_broken_program_structure,
-    ]),
+    late_results_orgs: dp_2022_late_results_and_resources,
     late_resources_orgs: _.uniq([
       ...dp_2022_late_results_and_resources,
-      ...dp_2022_broken_program_structure,
       ...non_dp_broken_program_structures_with_resource_impacts,
     ]),
   },
