@@ -12,7 +12,6 @@ import { is_IE } from "src/core/feature_detection";
 import { formats } from "src/core/format";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_formatter, infobase_colors_smart } from "src/charts/shared";
 import { IconTable } from "src/icons/icons";
 import {
   secondaryColor,
@@ -287,7 +286,5 @@ export {
   general_default_props,
   nivo_common_text_maker,
   create_text_maker_component_with_nivo_common,
-  get_formatter,
-  infobase_colors_smart,
   fix_legend_symbols,
 };

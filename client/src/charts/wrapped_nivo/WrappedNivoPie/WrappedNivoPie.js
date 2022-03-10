@@ -10,13 +10,12 @@ import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
 import { TabularLegend } from "src/charts/legends/index";
+import { get_formatter, infobase_colors_smart } from "src/charts/shared";
 
 import {
   nivo_common_text_maker,
   InteractiveGraph,
   general_default_props,
-  infobase_colors_smart,
-  get_formatter,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 
 import "./WrappedNivoPie.scss";

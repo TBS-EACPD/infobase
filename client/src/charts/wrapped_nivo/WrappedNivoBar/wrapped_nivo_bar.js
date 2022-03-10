@@ -5,11 +5,12 @@ import React from "react";
 
 import { DisplayTable } from "src/components/index";
 
+import { get_formatter } from "src/charts/shared";
+
 import {
   nivo_common_text_maker,
   InteractiveGraph,
   general_default_props,
-  get_formatter,
   fix_legend_symbols,
 } from "src/charts/wrapped_nivo/wrapped_nivo_common";
 import { textColor } from "src/style_constants/index";
