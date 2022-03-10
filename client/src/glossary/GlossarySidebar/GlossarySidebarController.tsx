@@ -149,6 +149,7 @@ const GlossarySidebarController = withRouter(
           />
           <FloatingButton
             button_text={text_maker("glossary_title")}
+            aria_label={text_maker("open_glossary")}
             showWithScroll={false}
             handleClick={() => this.buttonClick()}
             tabIndex={0}

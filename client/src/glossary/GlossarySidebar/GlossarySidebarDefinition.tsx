@@ -22,12 +22,6 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
     super(props);
   }
 
-  handleKeyPress(e: React.KeyboardEvent<HTMLSpanElement>) {
-    if (e.key === "Enter") {
-      this.props.close_definition();
-    }
-  }
-
   render() {
     const glossary_item = glossaryEntryStore.lookup(
       this.props.glossary_item_key
@@ -45,12 +39,10 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
           }}
         />
         <div>
-          <span
-            role="button"
+          <button
             className="glossary-sb__back-button"
             onClick={() => this.props.close_definition()}
-            onKeyDown={(e) => this.handleKeyPress(e)}
-            tabIndex={0}
+            aria-label={text_maker("return_to_glossary")}
           >
             <IconArrow
               rotation={180}
@@ -59,7 +51,7 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
               alternate_color={false}
             />
             {text_maker("back_text")}
-          </span>
+          </button>
         </div>
       </div>
     );
