@@ -5,10 +5,9 @@ import React, { Fragment } from "react";
 import { DisplayTable, Format } from "src/components/index";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
+import { get_formatter } from "src/core/format";
 
 import { TabularLegend } from "src/charts/legends";
-
-import { get_formatter } from "src/charts/shared";
 
 import {
   InteractiveGraph,

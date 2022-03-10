@@ -3,7 +3,7 @@
 //  site.scss also establishes the widths for displaying each of the data types
 import _ from "lodash";
 
-import { lang } from "src/core/injected_build_constants";
+import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 const number_formatter = {
   en: _.map(
@@ -433,5 +433,43 @@ export const array_to_grammatical_list = (items: string[]) => {
       .join(", ")
       .thru((list_fragment) => `${list_fragment}, ${and_et} ${_.last(items)}`)
       .value();
+  }
+};
+
+// TODO legacy; at a minimum it needs a much clearer API, or even a full deprecation. This encapsualtes some old "smart" logic for determining the
+// appropriate formatter for a given value (although it has to be cued on whether it's "money"). Widley used in charts, at least historically
+export const get_formatter = (
+  is_money: boolean,
+  formatter?: typeof formats[FormatKey],
+  raw = true,
+  full = false
+) => {
+  if (_.isUndefined(formatter)) {
+    if (!is_money) {
+      return (value: Formattable) => formats.big_int(value, { raw });
+    } else {
+      if (raw) {
+        if (full) {
+          return (value: Formattable) => formats.dollar_raw(value);
+        } else {
+          return (value: Formattable) =>
+            is_a11y_mode
+              ? formats.compact2_written_raw(value)
+              : formats.compact2_raw(value);
+        }
+      } else {
+        if (full) {
+          return (value: Formattable) => formats.dollar(value);
+        } else {
+          return (value: Formattable) =>
+            is_a11y_mode
+              ? formats.compact2_written_raw
+              : formats.compact2(value);
+        }
+      }
+    }
+  } else {
+    return (value: Formattable) =>
+      raw ? formatter(value, { raw }) : formatter(value);
   }
 };

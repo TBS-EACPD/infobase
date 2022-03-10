@@ -7,10 +7,9 @@ import React from "react";
 import { Format, DisplayTable } from "src/components/index";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
-import { formats } from "src/core/format";
+import { formats, get_formatter } from "src/core/format";
 
 import { TabularLegend } from "src/charts/legends/index";
-import { get_formatter } from "src/charts/shared";
 
 import {
   nivo_common_text_maker,

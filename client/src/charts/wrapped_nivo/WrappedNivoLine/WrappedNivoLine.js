@@ -5,7 +5,7 @@ import React from "react";
 
 import { DisplayTable } from "src/components/index";
 
-import { get_formatter } from "src/charts/shared";
+import { get_formatter } from "src/core/format";
 
 import {
   create_text_maker_component_with_nivo_common,
