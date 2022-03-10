@@ -43,7 +43,8 @@ export class WriteToClipboard extends React.Component {
           className={button_class_name}
           onClick={() => {
             debounced_log_standard_event("WRITE_TO_CLIPBOARD", text_to_copy);
-            window.Clipboard.writeText(text_to_copy)
+            window.navigator.clipboard
+              .writeText(text_to_copy)
               .then(() =>
                 this.setState({
                   copy_status_message: text_maker("copy_success"),
