@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Key, MouseEventHandler } from "react";
 import FocusLock from "react-focus-lock";
 
 import "./Sidebar.scss";
@@ -6,6 +6,8 @@ import "./Sidebar.scss";
 import { CSSTransition } from "react-transition-group";
 
 import { IconX } from "src/icons/icons";
+
+import { trivial_text_maker } from "src/models/text";
 
 interface SidebarProps {
   is_open: boolean;
@@ -37,12 +39,6 @@ export class Sidebar extends React.Component<SidebarProps> {
     });
   }
 
-  handleKeyPress(e: React.KeyboardEvent) {
-    if (e.key === "Enter") {
-      this.props.keydown_close();
-    }
-  }
-
   closeSidebar = (e: Event) => {
     const sidebar_node = this.sidebar_ref.current;
     if (
@@ -60,6 +56,14 @@ export class Sidebar extends React.Component<SidebarProps> {
     const target = (e.target as HTMLElement).closest(sidebar_toggle_target);
     if (!target && is_open) {
       this.closeSidebar(e);
+    }
+  };
+
+  closeButtonClick = (e: React.MouseEvent) => {
+    if (e.detail == 0) {
+      this.props.keydown_close();
+    } else {
+      this.props.callback(false);
     }
   };
 
@@ -94,15 +98,15 @@ export class Sidebar extends React.Component<SidebarProps> {
             >
               <aside className="sidebar">
                 <div className={"sidebar__icon-wrapper"}>
-                  <span
-                    role="button"
+                  <button
                     className="sidebar__close-button"
-                    onClick={() => this.props.callback(false)}
-                    onKeyDown={(e) => this.handleKeyPress(e)}
-                    tabIndex={0}
+                    aria-label={trivial_text_maker("close")}
+                    onClick={(e) => {
+                      this.closeButtonClick(e);
+                    }}
                   >
                     <IconX width="25px" color="white" alternate_color={false} />
-                  </span>
+                  </button>
                 </div>
                 <div className={"sidebar__title"}>
                   <h1 ref={this.title} tabIndex={-1}>

@@ -102,16 +102,40 @@
   font-weight: 500;
 }
 
+.glossary-sb__list-item {
+  background-color: Transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+}
+
+.glossary-sb__list-item:hover {
+  text-decoration: underline;
+}
+
+.glossary-sb__list-item:focus {
+  text-decoration: underline;
+}
+
 .glossary-sb__item-def {
   margin-bottom: 10px;
 }
 
 .glossary-sb__back-button:hover {
-  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.glossary-sb__back-button:focus {
   text-decoration-line: underline;
 }
 
 .glossary-sb__back-button {
+  background-color: Transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  text-align: left;
   font-size: 16px;
 }
 
