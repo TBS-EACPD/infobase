@@ -8,6 +8,10 @@ import { FloatingButton, create_text_maker_component } from "src/components";
 
 import glossary_text from "src/glossary/glossary.yaml";
 
+import { IconGlossary } from "src/icons/icons";
+
+import { textLightColor } from "src/style_constants/index";
+
 import { GlossarySidebar } from "./GlossarySidebar";
 
 const routes_without_glossary = ["/start", "/glossary"];
@@ -148,6 +152,13 @@ const GlossarySidebarController = withRouter(
             showWithScroll={false}
             handleClick={() => this.buttonClick()}
             tabIndex={0}
+            mobile_icon={
+              <IconGlossary
+                inline={true}
+                aria_hide={true}
+                alternate_color={textLightColor}
+              />
+            }
           />
         </>
       );
