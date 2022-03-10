@@ -1,13 +1,13 @@
-import React, { Key, MouseEventHandler } from "react";
+import React from "react";
 import FocusLock from "react-focus-lock";
 
 import "./Sidebar.scss";
 
 import { CSSTransition } from "react-transition-group";
 
-import { IconX } from "src/icons/icons";
-
 import { trivial_text_maker } from "src/models/text";
+
+import { IconX } from "src/icons/icons";
 
 interface SidebarProps {
   is_open: boolean;
