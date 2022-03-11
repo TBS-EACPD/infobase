@@ -122,8 +122,8 @@ const tooltips_by_topic = {
         "COV079",
         "COV153",
       ],
-      text: text_maker(
-        "covid_estimates_2021_supps_c_2020_full_reprofile_tooltip"
+      tooltip: (
+        <TM k="covid_estimates_2021_supps_c_2020_full_reprofile_tooltip" />
       ),
     },
   ],
