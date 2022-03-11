@@ -1270,6 +1270,7 @@ CNEDA,program_ftes
 CNMI,program_ftes
 CPC,program_ftes
 CPCC,program_ftes
+CRRF,program_ftes
 CRTC,program_ftes
 CSA,program_ftes
 CSC,program_ftes
@@ -1524,6 +1525,7 @@ CNEDA,program_spending
 CNMI,program_spending
 CPC,program_spending
 CPCC,program_spending
+CRRF,program_spending
 CRTC,program_spending
 CSA,program_spending
 CSC,program_spending
