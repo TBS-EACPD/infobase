@@ -16,7 +16,11 @@ module.exports = {
     },
     "Glossary": {
       "Tested on index-eng.html#glossary": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "color-contrast, serious": [
+            "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" tabindex=\"-1\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#glossary": {
         "Axe violations allow list": null
@@ -127,20 +131,18 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/covid": {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
-            // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
           ]
         }
       },
       "Tested on index-basic-eng.html#infographic/gov/gov/covid": {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
-            // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
           ]
         }
       }
@@ -157,7 +159,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>See the data: \n</span>",
             "<span>Service Inventory</span>",
             "<span>Applications by other channels</span>",
@@ -178,7 +179,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>Departmental Results Reports</span>",
             "<span>Departmental Plans</span>"
           ]
@@ -243,7 +243,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/dept/326/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>See the data: \n</span>",
             "<span>Service Inventory</span>",
             "<span class=\"text-nowrap\">0.0%</span>"
@@ -258,7 +257,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/dept/326/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>Departmental Results Reports</span>"
           ]
         }
@@ -327,7 +325,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>Departmental Results Reports</span>"
           ]
         }
@@ -364,7 +361,6 @@ module.exports = {
       "Tested on index-eng.html#infographic/program/TBC-BXB03/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // Inside a height clipper, related to but different from other false positive colour contrast issues. Likely WONTFIX
             "<span class=\"text-nowrap\">0.0%</span>"
           ]
         }
