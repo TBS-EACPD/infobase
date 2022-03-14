@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e # will exit if any command has non-zero exit value 
 
+../scripts/dev_scripts/rm_eslint_caches.sh
+
 npx patch-package
 
 # @cypress/snapshot has an annoying post-install script that ignores your configuration and assumes you want snapshots in the default location,

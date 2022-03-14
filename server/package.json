@@ -33,6 +33,8 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
+    "postinstall": "../scripts/dev_scripts/rm_eslint_caches.sh",
+    "postci": "../scripts/dev_scripts/rm_eslint_caches.sh",
     "presnapshot_tests": "(export USE_TEST_DATA=1 && node src/populate_db.js)",
     "snapshot_tests": "(export USE_TEST_DATA=1 && npx jest --coverage --forceExit --config jest_configs/snapshot_tests.config.js)",
     "presnapshot_tests:update": "(export USE_TEST_DATA=1 && node src/populate_db.js)",
