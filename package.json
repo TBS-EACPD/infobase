@@ -2,6 +2,8 @@
   "name": "infobase-monorepo",
   "description": "",
   "scripts": {
+    "postinstall": "scripts/dev_scripts/rm_eslint_caches.sh",
+    "postci": "scripts/dev_scripts/rm_eslint_caches.sh",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write --loglevel warn .",
     "eslint": "eslint --max-warnings 0 --cache .",
