@@ -406,11 +406,9 @@ const dp_docs = build_doc_info_objects("dp", [
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2022-2023.html",
     late_results_orgs: [
-      "244", // Office of the Intelligence Commissioner
       "125", // Department of Fisheries and Oceans
     ],
     late_resources_orgs: [
-      "244", // Office of the Intelligence Commissioner
       "125", // Department of Fisheries and Oceans
     ],
   },
