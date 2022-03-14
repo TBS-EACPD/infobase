@@ -98,6 +98,7 @@ jobs:
       - server_install
       - client_install
 
+      # reminder: .eslintcache is rm-ed by postinstall/ci scripts, so restoring it must occur post-install!
       - restore_cache:
           keys:
             - repo-wide-lint-cache-{{ .Branch }}
