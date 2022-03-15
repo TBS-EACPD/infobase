@@ -33,8 +33,8 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "postinstall": "[ -f ../scripts/dev_scripts/clear_eslint_caches.sh ] && ../scripts/dev_scripts/clear_eslint_caches.sh",
-    "postci": "[ -f ../scripts/dev_scripts/clear_eslint_caches.sh ] && ../scripts/dev_scripts/clear_eslint_caches.sh",
+    "postinstall": "[ -f ../scripts/dev_scripts/clear_eslint_caches.sh ] && ../scripts/dev_scripts/clear_eslint_caches.sh || true",
+    "postci": "[ -f ../scripts/dev_scripts/clear_eslint_caches.sh ] && ../scripts/dev_scripts/clear_eslint_caches.sh || true",
     "presnapshot_tests": "(export USE_TEST_DATA=1 && node src/populate_db.js)",
     "snapshot_tests": "(export USE_TEST_DATA=1 && npx jest --coverage --forceExit --config jest_configs/snapshot_tests.config.js)",
     "presnapshot_tests:update": "(export USE_TEST_DATA=1 && node src/populate_db.js)",
