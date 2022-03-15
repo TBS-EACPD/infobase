@@ -26,8 +26,8 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "postinstall": "scripts/postinstall.sh",
-    "postci": "scripts/postinstall.sh",
+    "postinstall": "[[ -f ../scripts/dev_scripts/clear_eslint_caches.sh ]] && ../scripts/dev_scripts/clear_eslint_caches.sh",
+    "postci": "[[ -f ../scripts/dev_scripts/clear_eslint_caches.sh ]] && ../scripts/dev_scripts/clear_eslint_caches.sh",
     "start": "nodemon --watch src --watch package-lock.json --watch templates -e js,json --exec node src/index.js",
     "start:debug": "nodemon --watch src --watch package-lock.json --watch templates -e js.json --exec node --inspect-brk src/index.js",
     "unit_tests": "npx jest --coverage --forceExit  --config jest_configs/unit_tests.config.js",
