@@ -17,7 +17,8 @@
           "fr": ""
         }
       }
-    ]
+    ],
+    "templates": ["report_a_problem"]
   },
   "issue_type": {
     "required": true,

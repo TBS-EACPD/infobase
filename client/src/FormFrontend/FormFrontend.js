@@ -167,7 +167,11 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type // TODO remove key === "faq" once faq keys are completed
+      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type
+      /* TODO remove key === "faq" once faq keys are completed
+      replace with (!_.isUndefined(templates) && !_.includes(templates, template_name)) 
+      Replace ({ form_type }, key) with ({ form_type, templates }, key)
+      Also get template_name from this.state */
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
