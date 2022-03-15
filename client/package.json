@@ -4,8 +4,8 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "postinstall": "scripts/postinstall.sh",
-    "postci": "scripts/postinstall.sh",
+    "postinstall": "scripts/postinstall.sh && ../scripts/dev_scripts/clear_eslint_caches.sh",
+    "postci": "scripts/postinstall.sh && ../scripts/dev_scripts/clear_eslint_caches.sh",
     "build_static": "node build_code/copy_static_assets.js",
     "build_static:debug": "node --inspect-brk build_code/copy_static_assets.js",
     "build_static:watch": "nodemon --exitcrash --watch ../data --watch build_code --watch src/extended_bootstrap_css --watch src/png --watch src/svg --watch src/InfoBase/index.hbs.html --watch src/InfoBase/index_data.ts -e csv,js,css,scss,png,svg build_code/copy_static_assets.js",
