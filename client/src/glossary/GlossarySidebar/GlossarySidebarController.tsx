@@ -22,7 +22,7 @@ interface GlossarySidebarControllerState {
   is_open: boolean;
   glossary_item_key: string;
   focus_item_key: string;
-  return_focus_target: HTMLElement | undefined;
+  return_focus_target: HTMLElement | null;
   search_phrase: string;
   keydown_close: boolean;
 }
@@ -40,7 +40,7 @@ const GlossarySidebarController = withRouter(
         is_open: false,
         glossary_item_key: "",
         focus_item_key: "",
-        return_focus_target: undefined,
+        return_focus_target: null,
         search_phrase: "",
         keydown_close: false,
       };
@@ -123,7 +123,7 @@ const GlossarySidebarController = withRouter(
     buttonClick() {
       this.toggleGlossary(true);
       this.setState({
-        return_focus_target: undefined,
+        return_focus_target: null,
         keydown_close: true,
       });
     }

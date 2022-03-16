@@ -29,7 +29,7 @@ type GlossarySidebarProps = typeof GlossarySidebarSearchDefaultProps & {
   set_query: (query: string) => void;
   is_open: boolean;
   toggle_glossary: (value: boolean) => void;
-  return_focus_target: HTMLElement | undefined;
+  return_focus_target: HTMLElement | null;
   keydown_close: () => void;
   keydown_close_value: boolean;
 };
