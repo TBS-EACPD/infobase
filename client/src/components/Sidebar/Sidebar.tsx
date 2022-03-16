@@ -15,7 +15,7 @@ interface SidebarProps {
   children: React.ReactElement;
   title_text: string;
   sidebar_toggle_target: string;
-  return_focus_target: HTMLElement | undefined;
+  return_focus_target: HTMLElement | null;
   keydown_close: () => void;
   keydown_close_value: boolean;
 }
