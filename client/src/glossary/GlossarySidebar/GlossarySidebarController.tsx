@@ -69,26 +69,14 @@ const GlossarySidebarController = withRouter(
       }
     };
 
-    handleWindowKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        this.handleWindowClick(e);
-      }
-    };
-
     componentDidMount() {
       window.addEventListener("click", this.handleWindowClick, {
-        capture: true,
-      });
-      window.addEventListener("keydown", this.handleWindowKeyDown, {
         capture: true,
       });
     }
 
     componentWillUnmount() {
       window.removeEventListener("click", this.handleWindowClick, {
-        capture: true,
-      });
-      window.removeEventListener("keydown", this.handleWindowKeyDown, {
         capture: true,
       });
     }
