@@ -11,18 +11,17 @@ import { IconX } from "src/icons/icons";
 
 interface SidebarProps {
   is_open: boolean;
-  callback: (value: boolean) => void;
-  children: React.ReactElement;
+  open_close_callback: (value: boolean) => void;
+  children: React.ReactNode;
   title_text: string;
   sidebar_toggle_target: string;
   return_focus_target: HTMLElement | null;
-  keydown_close: () => void;
-  keydown_close_value: boolean;
 }
 
 export class Sidebar extends React.Component<SidebarProps> {
   title = React.createRef<HTMLDivElement>();
   sidebar_ref = React.createRef<HTMLDivElement>();
+  private key_down: boolean = false;
   constructor(props: SidebarProps) {
     super(props);
   }
@@ -46,7 +45,7 @@ export class Sidebar extends React.Component<SidebarProps> {
       sidebar_node &&
       !sidebar_node.contains(e.target as HTMLElement)
     ) {
-      this.props.callback(false);
+      this.props.open_close_callback(false);
     }
   };
 
@@ -60,21 +59,13 @@ export class Sidebar extends React.Component<SidebarProps> {
   };
 
   closeButtonClick = (e: React.MouseEvent) => {
-    if (e.detail == 0) {
-      this.props.keydown_close();
-    } else {
-      this.props.callback(false);
-    }
+    //Hacky solution to differentiate between keyboard and mouse click
+    this.key_down = e.detail === 0;
+    this.props.open_close_callback(false);
   };
 
   render() {
-    const {
-      is_open,
-      children,
-      title_text,
-      return_focus_target,
-      keydown_close_value,
-    } = this.props;
+    const { is_open, children, title_text, return_focus_target } = this.props;
     return (
       <div ref={this.sidebar_ref}>
         <CSSTransition
@@ -91,7 +82,7 @@ export class Sidebar extends React.Component<SidebarProps> {
           <div className={"sidebar__wrapper"}>
             <FocusLock
               onDeactivation={() => {
-                if (keydown_close_value) {
+                if (this.key_down) {
                   return_focus_target?.focus({ preventScroll: true });
                 }
               }}
@@ -113,7 +104,7 @@ export class Sidebar extends React.Component<SidebarProps> {
                     {title_text}
                   </h1>
                 </div>
-                {children}
+                <>{children}</>
               </aside>
             </FocusLock>
           </div>

@@ -30,8 +30,6 @@ type GlossarySidebarProps = typeof GlossarySidebarSearchDefaultProps & {
   is_open: boolean;
   toggle_glossary: (value: boolean) => void;
   return_focus_target: HTMLElement | null;
-  keydown_close: () => void;
-  keydown_close_value: boolean;
 };
 
 export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
@@ -54,65 +52,61 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
       placeholder,
       is_open,
       return_focus_target,
-      keydown_close_value,
     } = this.props;
     return (
       <Sidebar
         is_open={is_open}
-        callback={(value: boolean) => this.props.toggle_glossary(value)}
+        open_close_callback={(value: boolean) =>
+          this.props.toggle_glossary(value)
+        }
         title_text={text_maker("glossary_title")}
         sidebar_toggle_target={"[data-toggle=glossary_sidebar]"}
         return_focus_target={return_focus_target}
-        keydown_close_value={keydown_close_value}
-        keydown_close={() => this.props.keydown_close()}
-        children={
-          <>
-            <div className="glossary-sb__header-wrapper">
-              <div className="glossary-sb__header">
-                <div className="glossary-sb__search-wrapper">
-                  <div className={"glossary-sb__search-bar"}>
-                    <div className={"glossary-sb__icon-container"}>
-                      <span aria-hidden="true">
-                        <IconSearch
-                          width="30px"
-                          color="#2C70C9"
-                          alternate_color={false}
-                        />
-                      </span>
-                    </div>
-                    <DebouncedTextInput
-                      placeHolder={placeholder}
-                      updateCallback={this.callback}
-                      defaultValue={search_phrase}
+      >
+        <div className="glossary-sb__header-wrapper">
+          <div className="glossary-sb__header">
+            <div className="glossary-sb__search-wrapper">
+              <div className={"glossary-sb__search-bar"}>
+                <div className={"glossary-sb__icon-container"}>
+                  <span aria-hidden="true">
+                    <IconSearch
+                      width="30px"
+                      color="#2C70C9"
+                      alternate_color={false}
                     />
-                  </div>
+                  </span>
                 </div>
-                <div className="glossary-sb__example">
-                  {text_maker("glossary_example")}
-                </div>
+                <DebouncedTextInput
+                  placeHolder={placeholder}
+                  updateCallback={this.callback}
+                  defaultValue={search_phrase}
+                />
               </div>
             </div>
-            <div className="glossary-sb__content-wrapper">
-              <div className="glossary-sb__content" id="gloss-sidebar">
-                {glossary_item_key ? (
-                  <GlossaryDef
-                    close_definition={() => this.props.set_glossary_item("")}
-                    glossary_item_key={glossary_item_key}
-                  />
-                ) : (
-                  <GlossaryList
-                    open_definition={(key: string) =>
-                      this.props.set_glossary_item(key)
-                    }
-                    search_phrase={search_phrase}
-                    focus_item_key={focus_item_key}
-                  />
-                )}
-              </div>
+            <div className="glossary-sb__example">
+              {text_maker("glossary_example")}
             </div>
-          </>
-        }
-      />
+          </div>
+        </div>
+        <div className="glossary-sb__content-wrapper">
+          <div className="glossary-sb__content" id="gloss-sidebar">
+            {glossary_item_key ? (
+              <GlossaryDef
+                close_definition={() => this.props.set_glossary_item("")}
+                glossary_item_key={glossary_item_key}
+              />
+            ) : (
+              <GlossaryList
+                open_definition={(key: string) =>
+                  this.props.set_glossary_item(key)
+                }
+                search_phrase={search_phrase}
+                focus_item_key={focus_item_key}
+              />
+            )}
+          </div>
+        </div>
+      </Sidebar>
     );
   }
 }
