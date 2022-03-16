@@ -38,7 +38,6 @@ const DatasetsRoute = React.lazy(() =>
 const IgocExplorer = React.lazy(() => import("src/IgocExplorer/IgocExplorer"));
 const TagExplorer = React.lazy(() => import("src/TagExplorer/TagExplorer"));
 const Glossary = React.lazy(() => import("src/glossary/glossary"));
-const ReportBuilder = React.lazy(() => import("src/rpb/index"));
 const Infographic = React.lazy(() => import("src/infographic/Infographic"));
 const EstimatesComparison = React.lazy(() =>
   import("src/EstimatesComparison/EstimatesComparison")
@@ -48,6 +47,16 @@ const PrivacyStatement = React.lazy(() =>
 );
 const TextDiff = React.lazy(() => import("src/TextDiff/TextDiff"));
 const TreeMap = React.lazy(() => import("src/TreeMap/TreeMap"));
+
+const LegacyRpbRedirect = React.lazy(() =>
+  import("src/reports/LegacyRpbRedirect")
+);
+const ReportPicker = React.lazy(() =>
+  import("src/reports/ReportPicker/ReportPicker")
+);
+const ReportBuilder = React.lazy(() =>
+  import("src/reports/ReportBuilder/ReportBuilder")
+);
 
 const PanelInventory = React.lazy(() => import("src/panels/PanelInventory"));
 
@@ -180,7 +189,13 @@ export class App extends React.Component {
               component={Infographic}
             />
             <Route path="/glossary/:active_key?" component={Glossary} />
-            <Route path="/rpb/:config?" component={ReportBuilder} />
+            <Route
+              path="/reports/builder/:report_id?/:report_state?"
+              component={ReportBuilder}
+            />
+            <Route path="/reports/picker" component={ReportPicker} />
+            <Redirect from="/reports" to="/reports/picker" />
+            <Route path="/rpb/:config?" component={LegacyRpbRedirect} />
             <Route
               path="/about"
               render={() => <About toggleSurvey={this.toggleSurvey} />}
