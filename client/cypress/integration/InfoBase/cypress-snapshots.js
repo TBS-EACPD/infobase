@@ -17,8 +17,9 @@ module.exports = {
     "Glossary": {
       "Tested on index-eng.html#glossary": {
         "Axe violations allow list": {
+          //Seems to be an issue with hidden visibility
           "color-contrast, serious": [
-            "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" tabindex=\"-1\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
+            '<button class="btn btn-ib-primary floating-button floating-button--fixed" tabindex="-1" aria-label="Back to top" style="top: auto;">Back to top</button>'
           ]
         }
       },
@@ -132,9 +133,9 @@ module.exports = {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
             // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
           ]
         }
       },
@@ -142,9 +143,9 @@ module.exports = {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
             // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
           ]
         }
       }
@@ -368,7 +369,7 @@ module.exports = {
       "Tested on index-eng.html#infographic/program/TBC-BXB03/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
+            // Inside a height clipper, related to but different from other false positive colour contrast issues. Likely WONTFIX
             "<span class=\"text-nowrap\">0.0%</span>"
           ]
         }
