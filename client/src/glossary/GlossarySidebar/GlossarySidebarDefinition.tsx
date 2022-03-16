@@ -42,7 +42,6 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
           <button
             className="glossary-sb__back-button"
             onClick={() => this.props.close_definition()}
-            aria-label={text_maker("return_to_glossary")}
           >
             <IconArrow
               rotation={180}
@@ -50,7 +49,7 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
               color="white"
               alternate_color={false}
             />
-            {text_maker("back_text")}
+            {text_maker("return_to_glossary")}
           </button>
         </div>
       </div>
