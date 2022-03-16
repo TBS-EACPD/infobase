@@ -21,7 +21,7 @@ interface SidebarProps {
 export class Sidebar extends React.Component<SidebarProps> {
   title = React.createRef<HTMLDivElement>();
   sidebar_ref = React.createRef<HTMLDivElement>();
-  private key_down: boolean = false;
+  private key_down = false;
   constructor(props: SidebarProps) {
     super(props);
   }
