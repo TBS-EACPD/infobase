@@ -19,7 +19,7 @@ module.exports = {
         "Axe violations allow list": {
           //Seems to be an issue with hidden visibility
           "color-contrast, serious": [
-            '<button class="btn btn-ib-primary floating-button floating-button--fixed" tabindex="-1" aria-label="Back to top" style="top: auto;">Back to top</button>'
+            "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" tabindex=\"-1\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
           ]
         }
       },
