@@ -127,7 +127,6 @@ const GlossarySidebarController = withRouter(
             aria_label={text_maker("open_glossary")}
             showWithScroll={false}
             handleClick={() => this.buttonClick()}
-            tabIndex={0}
             mobile_icon={
               <IconGlossary
                 inline={true}
