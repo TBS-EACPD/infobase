@@ -72,13 +72,9 @@ export class FloatingButton extends React.Component<
     }
   }
 
-  handleClick() {
-    this.props.handleClick();
-  }
-
   render() {
     const { show_floating_button, caught_by_footer } = this.state;
-    const { button_text, mobile_icon, aria_label } = this.props;
+    const { button_text, mobile_icon, aria_label, handleClick } = this.props;
     return (
       <button
         ref={this.button_ref}
@@ -100,7 +96,7 @@ export class FloatingButton extends React.Component<
               ? 0
               : undefined,
         }}
-        onClick={() => this.props.handleClick()}
+        onClick={handleClick}
         aria-label={aria_label}
       >
         <MediaQuery minWidth={maxSmallDevice}>{button_text}</MediaQuery>

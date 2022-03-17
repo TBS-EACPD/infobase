@@ -14,7 +14,7 @@ const { text_maker } = create_text_maker_component(glossary_text);
 
 interface SidebarContentProps {
   glossary_item_key: string;
-  close_definition: () => void;
+  close_definition: (key: string) => void;
 }
 
 export class GlossaryDef extends React.Component<SidebarContentProps> {
@@ -41,7 +41,7 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
         <div>
           <button
             className="glossary-sb__back-button"
-            onClick={() => this.props.close_definition()}
+            onClick={() => this.props.close_definition("")}
           >
             <IconArrow
               rotation={180}
