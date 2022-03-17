@@ -79,31 +79,31 @@ const GlossarySidebarController = withRouter(
       });
     }
 
-    toggleGlossary(value: boolean) {
+    toggleGlossary = (value: boolean) => {
       this.setState({
         is_open: value,
       });
-    }
+    };
 
-    setGlossaryItem(key: string) {
+    setGlossaryItem = (key: string) => {
       this.setState({
         glossary_item_key: key,
         focus_item_key: key ? key : this.state.focus_item_key,
       });
-    }
+    };
 
-    setQuery(query: string) {
+    setQuery = (query: string) => {
       this.setState({
         search_phrase: query,
       });
-    }
+    };
 
-    buttonClick() {
+    buttonClick = () => {
       this.toggleGlossary(true);
       this.setState({
         return_focus_target: null,
       });
-    }
+    };
 
     render() {
       const currentPage = this.props.location.pathname;
@@ -115,18 +115,18 @@ const GlossarySidebarController = withRouter(
           <GlossarySidebar
             glossary_item_key={this.state.glossary_item_key}
             focus_item_key={this.state.focus_item_key}
-            set_glossary_item={(key) => this.setGlossaryItem(key)}
-            set_query={(query) => this.setQuery(query)}
+            set_glossary_item={this.setGlossaryItem}
+            set_query={this.setQuery}
             search_phrase={this.state.search_phrase}
             is_open={this.state.is_open}
-            toggle_glossary={(value) => this.toggleGlossary(value)}
+            toggle_glossary={this.toggleGlossary}
             return_focus_target={this.state.return_focus_target}
           />
           <FloatingButton
             button_text={text_maker("glossary_title")}
             aria_label={text_maker("open_glossary")}
             showWithScroll={false}
-            handleClick={() => this.buttonClick()}
+            handleClick={this.buttonClick}
             mobile_icon={
               <IconGlossary
                 inline={true}

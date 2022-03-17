@@ -52,13 +52,13 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
       placeholder,
       is_open,
       return_focus_target,
+      set_glossary_item,
+      toggle_glossary,
     } = this.props;
     return (
       <Sidebar
         is_open={is_open}
-        open_close_callback={(value: boolean) =>
-          this.props.toggle_glossary(value)
-        }
+        open_close_callback={toggle_glossary}
         title_text={text_maker("glossary_title")}
         sidebar_toggle_target={"[data-toggle=glossary_sidebar]"}
         return_focus_target={return_focus_target}
@@ -92,14 +92,12 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
           <div className="glossary-sb__content" id="gloss-sidebar">
             {glossary_item_key ? (
               <GlossaryDef
-                close_definition={() => this.props.set_glossary_item("")}
+                close_definition={set_glossary_item}
                 glossary_item_key={glossary_item_key}
               />
             ) : (
               <GlossaryList
-                open_definition={(key: string) =>
-                  this.props.set_glossary_item(key)
-                }
+                open_definition={set_glossary_item}
                 search_phrase={search_phrase}
                 focus_item_key={focus_item_key}
               />
