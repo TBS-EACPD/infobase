@@ -170,26 +170,23 @@ export default class Glossary extends React.Component {
           <TM k="glossary" />
         </h1>
         <ScrollToTargetContainer target_id={active_key}>
-          {!is_a11y_mode && (
-            <FloatingButton
-              button_text={text_maker("back_to_top")}
-              aria_label={text_maker("back_to_top")}
-              showWithScroll={true}
-              handleClick={() => scroll_to_top()}
-              tabIndex={-1}
-              mobile_icon={
-                <IconArrow
-                  inline={true}
-                  aria_hide={true}
-                  alternate_color={textLightColor}
-                  rotation={-90}
-                />
-              }
-            />
-          )}
           <Glossary_
             active_key={active_key}
             items_by_letter={items_by_letter}
+          />
+          <FloatingButton
+            button_text={text_maker("back_to_top")}
+            aria_label={text_maker("back_to_top")}
+            showWithScroll={true}
+            handleClick={() => scroll_to_top()}
+            mobile_icon={
+              <IconArrow
+                inline={true}
+                aria_hide={true}
+                alternate_color={textLightColor}
+                rotation={-90}
+              />
+            }
           />
         </ScrollToTargetContainer>
       </StandardRouteContainer>
