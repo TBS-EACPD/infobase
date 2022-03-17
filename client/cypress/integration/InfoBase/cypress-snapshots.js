@@ -24,7 +24,12 @@ module.exports = {
         }
       },
       "Tested on index-basic-eng.html#glossary": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          //Seems to be an issue with hidden visibility
+          "color-contrast, serious": [
+            "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
+          ]
+        }
       }
     },
     "Datasets": {
@@ -133,9 +138,9 @@ module.exports = {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
             // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
           ]
         }
       },
@@ -143,9 +148,9 @@ module.exports = {
         "Axe violations allow list": {
           "aria-hidden-focus, serious": [
             // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
+            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
           ]
         }
       }
