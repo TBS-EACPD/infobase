@@ -12,7 +12,6 @@ interface FloatingButtonProps {
   handleClick: () => void;
   button_text: string;
   showWithScroll: boolean;
-  tabIndex: number;
   mobile_icon: React.ReactNode;
   aria_label: string;
 }
@@ -79,7 +78,7 @@ export class FloatingButton extends React.Component<
 
   render() {
     const { show_floating_button, caught_by_footer } = this.state;
-    const { tabIndex, button_text, mobile_icon, aria_label } = this.props;
+    const { button_text, mobile_icon, aria_label } = this.props;
     return (
       <button
         ref={this.button_ref}
@@ -101,7 +100,6 @@ export class FloatingButton extends React.Component<
               ? 0
               : undefined,
         }}
-        tabIndex={tabIndex}
         onClick={() => this.props.handleClick()}
         aria-label={aria_label}
       >
