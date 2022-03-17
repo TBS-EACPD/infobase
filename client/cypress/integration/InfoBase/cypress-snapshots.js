@@ -135,31 +135,10 @@ module.exports = {
     },
     "Infographic - Gov - COVID-19 Response": {
       "Tested on index-eng.html#infographic/gov/gov/covid": {
-<<<<<<< HEAD
-        "Axe violations allow list": {
-          "aria-hidden-focus, serious": [
-            // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
-          ]
-        }
-      },
-      "Tested on index-basic-eng.html#infographic/gov/gov/covid": {
-        "Axe violations allow list": {
-          "aria-hidden-focus, serious": [
-            // Should be fixed by PR #1315
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>",
-            "<span class=\"link-unstyled\" tabindex=\"0\" aria-hidden=\"true\" data-toggle=\"glossary_sidebar\" data-ibtt-html=\"true\" data-ibtt-container=\"body\" data-ibtt-text=\"<p>"
-          ]
-        }
-=======
         "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/gov/gov/covid": {
         "Axe violations allow list": null
->>>>>>> ecf95ee52 (Update cypress AXE snapshot, previously allow-listed covid infographic aria-hidden-focus instances resolved)
       }
     },
     "Infographic - Gov - People": {
