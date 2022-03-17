@@ -57,12 +57,9 @@ export class GlossaryList extends React.Component<
     document.getElementById(this.props.focus_item_key)?.focus();
   }
 
-  openDefinition(key: string) {
-    this.props.open_definition(key);
-  }
-
   render() {
     const { search_phrase } = this.state;
+    const { open_definition } = this.props;
 
     const results = glossary_search_config.query_sync(search_phrase);
 
@@ -84,7 +81,7 @@ export class GlossaryList extends React.Component<
                   <div key={ix} className="glossary-sb__title">
                     <button
                       id={item.id}
-                      onClick={() => this.openDefinition(item.id)}
+                      onClick={() => open_definition(item.id)}
                       className={"glossary-sb__list-item"}
                       aria-label={text_maker("open_definition") + item.title}
                     >
