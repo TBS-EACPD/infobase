@@ -13,10 +13,11 @@ type DataSetDef = {
   open_data_link?: string;
   other_links?: { text: string; href: { [key in LangType]: string } }[];
   frequency_key?: keyof typeof Frequencies;
+  report_builder_link?: string;
 };
 
 const data_set_definitions: Record<string, DataSetDef> = {
-  test: { name: "", source_key: "test" },
+  test: { name: "", source_key: "IGOC" },
 };
 
 export const DataSets = _.mapValues(
