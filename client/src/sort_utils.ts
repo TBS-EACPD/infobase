@@ -2,18 +2,22 @@ import _ from "lodash";
 
 type SortComparator = 1 | 0 | -1;
 
-export const wrap_sort_with_undefined_handling = <T>(
-  a: T | undefined,
-  b: T | undefined,
+type EmptyValue = undefined | null;
+const is_empty = <T>(value: T | EmptyValue): value is EmptyValue =>
+  typeof value === "undefined" || value === null;
+
+export const wrap_sort_with_empty_handling = <T>(
+  a: T | EmptyValue,
+  b: T | EmptyValue,
   sort_func: (a: T, b: T) => SortComparator
 ): SortComparator => {
-  if (typeof a !== "undefined" && typeof b !== "undefined") {
+  if (!is_empty(a) && !is_empty(b)) {
     return sort_func(a, b);
   }
 
-  if (typeof a === "undefined" && typeof b !== "undefined") {
+  if (is_empty(a) && !is_empty(b)) {
     return -1;
-  } else if (typeof a !== "undefined" && typeof b === "undefined") {
+  } else if (!is_empty(a) && is_empty(b)) {
     return 1;
   }
   return 0;
@@ -28,10 +32,10 @@ export const wrap_sort_with_direction = <T>(
 const get_plain_string = (string: string) =>
   _.chain(string).deburr().lowerCase().value();
 export const string_sort_func = (
-  a: string | undefined,
-  b: string | undefined
+  a: string | EmptyValue,
+  b: string | EmptyValue
 ) =>
-  wrap_sort_with_undefined_handling(
+  wrap_sort_with_empty_handling(
     a,
     b,
     (a: string, b: string): SortComparator => {
@@ -49,10 +53,10 @@ export const string_sort_func = (
   );
 
 export const number_sort_func = (
-  a: number | undefined,
-  b: number | undefined
+  a: number | EmptyValue,
+  b: number | EmptyValue
 ) =>
-  wrap_sort_with_undefined_handling(
+  wrap_sort_with_empty_handling(
     a,
     b,
     (a: number, b: number): SortComparator => {
@@ -65,19 +69,19 @@ export const number_sort_func = (
     }
   );
 
-export const smart_sort_func = <T extends number | string | undefined>(
+export const smart_sort_func = <T extends string | number | EmptyValue>(
   a: T,
   b: T,
   reverse = false
 ): SortComparator => {
   if (
-    (typeof a === "string" || typeof a === "undefined") &&
-    (typeof b === "string" || typeof b === "undefined")
+    (typeof a === "string" || is_empty(a)) &&
+    (typeof b === "string" || is_empty(b))
   ) {
     return wrap_sort_with_direction(reverse, string_sort_func)(a, b);
   } else if (
-    (typeof a === "number" || typeof a === "undefined") &&
-    (typeof b === "number" || typeof b === "undefined")
+    (typeof a === "number" || is_empty(a)) &&
+    (typeof b === "number" || is_empty(b))
   ) {
     return wrap_sort_with_direction(reverse, number_sort_func)(a, b);
   } else {
