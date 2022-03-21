@@ -33,6 +33,6 @@
     "eslint-plugin-node": "^11.0.0",
     "husky": "^6.0.0",
     "jest-test-gen": "^0.0.6",
-    "prettier": "^2.5"
+    "prettier": "^2.6"
   }
 }
