@@ -12,6 +12,8 @@ import glossary_text from "src/glossary/glossary.yaml";
 
 import { IconSearch } from "src/icons/icons";
 
+import { secondaryColor } from "src/style_constants/index";
+
 import { GlossaryDef } from "./GlossarySidebarDefinition";
 import { GlossaryList } from "./GlossarySidebarList";
 
@@ -71,7 +73,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
                   <span aria-hidden="true">
                     <IconSearch
                       width="30px"
-                      color="#2C70C9"
+                      color={secondaryColor}
                       alternate_color={false}
                     />
                   </span>
