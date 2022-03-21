@@ -1,5 +1,5 @@
 import {
-  wrap_sort_with_undefined_handling,
+  wrap_sort_with_empty_handling,
   wrap_sort_with_direction,
   string_sort_func,
   number_sort_func,
@@ -16,18 +16,17 @@ function sort_func(a: number | string, b: number | string): -1 | 0 | 1 {
   }
 }
 
-describe("wrap_sort_with_undefined_handling", () => {
-  it("Sorting function that handles undefined arguments", () => {
-    expect(wrap_sort_with_undefined_handling(3, 10, sort_func)).toBe(-1);
-    expect(wrap_sort_with_undefined_handling(undefined, 10, sort_func)).toBe(
-      -1
+describe("wrap_sort_with_empty_handling", () => {
+  it("Sorting function that handles undefined/null arguments", () => {
+    expect(wrap_sort_with_empty_handling(3, 10, sort_func)).toBe(-1);
+    expect(wrap_sort_with_empty_handling(undefined, 10, sort_func)).toBe(-1);
+    expect(wrap_sort_with_empty_handling("3", undefined, sort_func)).toBe(1);
+    expect(wrap_sort_with_empty_handling(undefined, undefined, sort_func)).toBe(
+      0
     );
-    expect(wrap_sort_with_undefined_handling("3", undefined, sort_func)).toBe(
-      1
-    );
-    expect(
-      wrap_sort_with_undefined_handling(undefined, undefined, sort_func)
-    ).toBe(0);
+    expect(wrap_sort_with_empty_handling(null, 10, sort_func)).toBe(-1);
+    expect(wrap_sort_with_empty_handling("3", null, sort_func)).toBe(1);
+    expect(wrap_sort_with_empty_handling(null, null, sort_func)).toBe(0);
   });
 });
 
@@ -50,20 +49,26 @@ describe("string_sort_func", () => {
 });
 
 describe("number_sort_func", () => {
-  it("Sorts numbers with undefined handling", () => {
+  it("Sorts numbers with undefined/null handling", () => {
     expect(number_sort_func(3, 10)).toBe(-1);
     expect(number_sort_func(undefined, 10)).toBe(-1);
     expect(number_sort_func(3, undefined)).toBe(1);
     expect(number_sort_func(undefined, undefined)).toBe(0);
+    expect(number_sort_func(null, 10)).toBe(-1);
+    expect(number_sort_func(3, null)).toBe(1);
+    expect(number_sort_func(null, null)).toBe(0);
   });
 });
 
 describe("smart_sort_func", () => {
-  it("Sorting function that handles strings, numbers, and undefined", () => {
+  it("Sorting function that handles strings, numbers, and undefined/null", () => {
     expect(smart_sort_func("hello", "world")).toBe(1);
     expect(smart_sort_func(4, 22)).toBe(-1);
     expect(smart_sort_func(undefined, 10)).toBe(-1);
     expect(smart_sort_func("bbbbbb", undefined)).toBe(1);
     expect(smart_sort_func(undefined, undefined)).toBe(0);
+    expect(smart_sort_func(null, 10)).toBe(-1);
+    expect(smart_sort_func("bbbbbb", null)).toBe(1);
+    expect(smart_sort_func(null, null)).toBe(0);
   });
 });
