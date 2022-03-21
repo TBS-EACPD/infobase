@@ -26,3 +26,14 @@
     text-decoration: inherit;
   }
 }
+
+@mixin light-link {
+  color: #abc8ed;
+  &:focus,
+  &:hover {
+    color: #76a4df;
+  }
+  &:visited {
+    color: #d4bdeb;
+  }
+}

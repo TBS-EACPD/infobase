@@ -3,15 +3,4 @@
 @forward "./fonts.interop.scss";
 @forward "./dimensions.interop.scss";
 
-@forward "./unstyled-mixins.scss";
-
-@mixin light-link {
-  color: $linkColorLight;
-  &:focus,
-  &:hover {
-    color: $linkFocusColorLight;
-  }
-  &:visited {
-    color: $linkVisitedColorLight;
-  }
-}
+@forward "./mixins.scss";
