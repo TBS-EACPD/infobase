@@ -96,7 +96,7 @@ export class FloatingButton extends React.Component<
               ? 0
               : undefined,
         }}
-        onClick={handleClick}
+        onClick={() => handleClick()}
         aria-label={aria_label}
       >
         <MediaQuery minWidth={maxSmallDevice}>{button_text}</MediaQuery>

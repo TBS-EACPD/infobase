@@ -153,8 +153,10 @@ glossary_button:
   fr: Glossaire
 open_glossary_definition:
   transform: [handlebars]
-  en: "{{display}}, click to open glossary defintion for {{title}}"
-  fr: appuyez pour ouvrir la définition du glossaire de 
+  en: |
+    {{display}}, click to open glossary defintion for {{title}}
+  fr: |
+    {{display}}, appuyez pour ouvrir la définition du glossaire de {{title}}
 data:
   en: Data
   fr: Données

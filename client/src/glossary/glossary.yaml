@@ -15,33 +15,33 @@ glossary_related_data:
   fr: 'Données connexes :'
 
 glossary_placeholder: 
-  en: "Search for a term"
-  fr: "Rechercher un terme"
+  en: Search for a term
+  fr: Rechercher un terme
 
 glossary_example:
   en: 'Example: "Expenditures"'
   fr: 'Exemple: "Dépenses"'
 
 glossary_title:
-  en: "Glossary"
-  fr: "Glossaire"
+  en: Glossary
+  fr: Glossaire
 
 glossary_navigation:
-  en: "Close glossary"
-  fr: "Fermé le glossaire"
+  en: Close glossary
+  fr: Fermé le glossaire
 
 no_matches_found:
   en: No results found
   fr: Aucun résultat
 
 return_to_glossary:
-  en: "Return to glossary list"
-  fr: "Retourner à la liste du glossaire"
+  en: Return to glossary list
+  fr: Retourner à la liste du glossaire
 
 open_definition:
-  en: "Open definition: "
-  fr: "Ouvrir la définition "
+  en: 'Open definition: '
+  fr: Ouvrir la définition 
 
 open_glossary:
-  en: "Open glossary sidebar"
-  fr: "Ouvrir le menu du glossaire"
+  en: Open glossary sidebar
+  fr: Ouvrir le menu du glossaire

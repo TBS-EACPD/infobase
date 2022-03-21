@@ -178,7 +178,7 @@ export default class Glossary extends React.Component {
             button_text={text_maker("back_to_top")}
             aria_label={text_maker("back_to_top")}
             showWithScroll={true}
-            handleClick={() => scroll_to_top()}
+            handleClick={scroll_to_top}
             mobile_icon={
               <IconArrow
                 inline={true}
