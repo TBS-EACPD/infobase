@@ -38,30 +38,30 @@ export class Sidebar extends React.Component<SidebarProps> {
     });
   }
 
-  closeSidebar = (e: Event) => {
-    const sidebar_node = this.sidebar_ref.current;
-    if (
-      this.props.is_open &&
-      sidebar_node &&
-      !sidebar_node.contains(e.target as HTMLElement)
-    ) {
-      this.props.open_close_callback(false);
-    }
+  closeSidebar = () => {
+    this.props.open_close_callback(false);
   };
 
   handleWindowClick = (e: Event) => {
     const { sidebar_toggle_target, is_open } = this.props;
+    const sidebar_node = this.sidebar_ref.current;
 
     const target = (e.target as HTMLElement).closest(sidebar_toggle_target);
-    if (!target && is_open) {
-      this.closeSidebar(e);
+
+    if (
+      !target &&
+      is_open &&
+      sidebar_node &&
+      !sidebar_node.contains(e.target as HTMLElement)
+    ) {
+      this.closeSidebar();
     }
   };
 
   closeButtonClick = (e: React.MouseEvent) => {
     //Hacky solution to differentiate between keyboard and mouse click
     this.key_down = e.detail === 0;
-    this.props.open_close_callback(false);
+    this.closeSidebar();
   };
 
   render() {

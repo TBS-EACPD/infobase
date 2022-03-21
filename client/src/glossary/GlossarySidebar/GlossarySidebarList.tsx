@@ -67,7 +67,7 @@ export class GlossaryList extends React.Component<
 
     return (
       <>
-        {results.length == 0 && search_phrase != "" ? (
+        {results.length === 0 && search_phrase !== "" ? (
           <div>{text_maker("no_matches_found")}</div>
         ) : (
           <div>
