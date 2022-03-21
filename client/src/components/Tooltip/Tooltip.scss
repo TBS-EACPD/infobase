@@ -8,4 +8,8 @@
   &:focus-within {
     visibility: visible !important;
   }
+
+  & a {
+    @include light-link;
+  }
 }

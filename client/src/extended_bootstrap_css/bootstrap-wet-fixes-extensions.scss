@@ -668,6 +668,9 @@ a {
     color: $linkVisitedColor;
   }
 }
+a.light-link {
+  @include light-link;
+}
 
 ol.breadcrumb > li:last-child > :last-child {
   text-decoration: none;
