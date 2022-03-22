@@ -3,8 +3,11 @@ common_infobase_open_data_link:
   fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f
 
 igoc_name:
-  en: Inventory of Federal Organizations and Interests
-  fr: Répertoire des organisations et intérêts fédéraux
+  transform: [handlebars]
+  en: | 
+    {{gt "igoc"}}
+  fr: | 
+    {{gt "igoc"}}
 igoc_desc:
   en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
   fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille). 
@@ -12,6 +15,28 @@ igoc_desc:
 pa_name:
   en: Public Accounts of Canada
   fr: Comptes publics du Canada
+pa_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+  transform: [markdown]
+  en: |
+    The Public Accounts of Canada is the report of the Government of Canada prepared annually by the Receiver General, as required by section 64 of the
+    _Financial Administration Act_. It covers the fiscal year of the Government, which ends on March 31.  
+
+    The information contained in the report originates from two sources of data:
+      - the summarized financial transactions presented in the Accounts of Canada, maintained by the Receiver General; and
+      - the detailed records, maintained by departments and agencies.  
+    
+    Each department and agency is responsible for reconciling its accounts to the control accounts of the Receiver General, and for maintaining detailed
+    records of the transactions in their accounts.
+  fr: |
+    Les Comptes publics du Canada constituent le rapport du gouvernement du Canada préparé annuellement par le receveur général, comme l'exige l'article
+    64 de la _Loi sur la gestion des finances publiques_. Il couvre l'exercice du gouvernement se terminant le 31 mars.  
+
+    L'information contenue dans le rapport provient de deux sources de données :
+      - le sommaire des opérations financières présentées dans les comptes du Canada, tenus par le receveur général; et
+      - les registres détaillés, tenus par les ministères et organismes.  
+
+    Chaque ministère et organisme est responsable de la conciliation de ses comptes avec les comptes de contrôle du receveur général, et de tenir des
+    registres détaillés des opérations qui y sont portées.
 pa_authoritative_link:
   en: https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-eng.html
   fr: https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-fra.html
@@ -19,6 +44,35 @@ pa_authoritative_link:
 estimates_name:
   en: Main Estimates and Supplementary Estimates (A, B and C)
   fr: Budget principal de dépenses et budgets supplémentaires de dépenses (A, B et C)
+estimates_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+  transform: [markdown]
+  en: |
+    The Main Estimates is a document that directly supports the appropriation act for the beginning of a fiscal year. It provides a listing of
+    the resources required by individual departments and agencies for the upcoming fiscal year in order to deliver the programs for which they
+    are responsible. It identifies the spending authorities (votes) and the amounts to be included in subsequent appropriation bills that
+    Parliament will be asked to approve to enable the government to proceed with its spending plans. It is traditionally known as the “Blue Book”.  
+
+    Supplementary Estimates are part of the normal parliamentary approval process to ensure that previously planned government initiatives
+    receive the necessary funding to move them forward, therefore meeting the needs of Canadians. They present information to Parliament on
+    the Government of Canada’s spending requirements that were not sufficiently developed in time for inclusion in the Main Estimates, and
+    will from time to time include urgent but unforeseen expenditures, such as natural disasters (an ice storm, H1N1, etc.). Supplementary
+    Estimates directly support an appropriation act.  
+
+    Supplementary Estimates are published throughout the year; each release is identified alphabetically (A, B, C, etc.).
+  fr: |
+    Le budget principal des dépenses est le document qui appuie directement la loi de crédits adoptée pour commencer un exercice. On y trouve une liste
+    des ressources dont les ministères et organismes auront besoin pour l’exécution des programmes dont ils sont responsables au cours du prochain exercice.
+    Il fait état des autorisations de dépenser (crédits) et des montants qui figureront dans les prochains projets de loi de crédits que le gouvernement
+    cherchera à faire approuver par le Parlement pour mettre en œuvre ses plans de dépenses. Ce document est traditionnellement appelé « Livre bleu ».  
+
+    Les budgets supplémentaires des dépenses font partie du processus normal d'approbation parlementaire qui permet de veiller à ce que les initiatives
+    gouvernementales planifiées au préalable reçoivent le financement nécessaire pour aller de l'avant et répondre aux besoins des Canadiens. Ils présentent
+    au Parlement de l'information sur les besoins en matière de dépenses du gouvernement du Canada qui n'étaient pas suffisamment élaborés au moment du dépôt
+    du budget principal des dépenses, et de temps à autre, ils incluent des dépenses urgentes, mais imprévues comme les dépenses engagées en cas de catastrophes
+    naturelles (p. ex. une tempête de verglas et H1N1). Les budgets supplémentaires des dépenses appuient directement une loi de crédits.
+
+    Les budgets supplémentaires des dépenses sont publiés à différents moments au cours de l'exercice. Ces publications sont désignées en ordre alphabétique
+    croissant (A, B, C, etc.).
 estimates_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html
@@ -26,6 +80,9 @@ estimates_authoritative_link:
 cfmrs_name:
   en: Central Financial Management Reporting System (CFMRS)
   fr: Système central de gestion des rapports financiers (SCGRF)
+cfmrs_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+  en: The CFMRS is a central system within the suite of Public Works and Government Services Canada (PWGSC) central systems. The CFMRS contains departmental account balances at the level of the Government-wide Coding (GWC) Structure.
+  fr: Le SCGRF est un système central de la suite des systèmes centraux de TPSGC. Le SCGRF comprend les soldes des comptes ministériels dans le cadre de la structure du codage à l'échelle du gouvernement.
 cfmrs_open_data_link:
   en: http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf
   fr: http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf
@@ -43,6 +100,25 @@ rtp_open_data_link:
 dp_name:
   en: Departmental Plans
   fr: Plans Ministériels
+dp_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+  transform: [markdown]
+  en: |
+    Departmental Plans (DPs) – previously named Reports on Plans and Priorities (RPP) – are forward-looking documents that provide plans for each department
+    and agency (excluding Crown corporations). They describe departmental priorities, results and associated resource requirements covering three fiscal years.
+    The first year of this document supplements information contained in the Main Estimates.  
+
+    DPs are tabled in Parliament by the President of the Treasury Board on behalf of the ministers who preside over the appropriation-dependent departments and
+    agencies identified in Schedules I, I.1 and II of the _Financial Administration Act_, on or before March 31 each year. They are a component of Part III
+    (Departmental Expenditure Plans) of the Estimates process, along with the Departmental Results Reports.
+  fr: |
+    Les plans ministériels (PM) – anciennement appelés « rapports sur les plans et les priorités (RPP) » – sont des documents prospectifs sur ce que compte
+    faire les ministères et organismes (sauf les sociétés d’État). On y décrit les priorités ministérielles, les résultats escomptés et les besoins connexes
+    en ressources pour trois exercices financiers. Les renseignements concernant le premier exercice complètent l’information figurant au budget principa
+    des dépenses.  
+
+    Les PM sont déposés au Parlement par le président du Conseil du Trésor pour le compte des ministres responsables des ministères et organismes dépendant
+    des crédits votés qui sont désignés aux annexes I, I.1 et II de la _Loi sur la gestion des finances publiques_, au plus tard le 31 mars. À l’instar des
+    rapports ministériels sur le rendement, ils sont une composante de la partie III (Plans de dépenses des ministères) des budgets des dépenses.
 dp_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html
@@ -50,6 +126,22 @@ dp_authoritative_link:
 drr_name:
   en: Departmental Results Reports
   fr: Rapport sur les résultats ministériels
+drr_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+  transform: [markdown]
+  en: |
+    Departmental Results Reports (DRRs) – previously named Departmental Performance Reports (DPR) – are individual department and agency accounts of
+    actual accomplishments against plans, priorities and results set out in their respective Departmental Plans (DPs). DPs and DRRs make up Part III
+    (the Departmental Expenditure Plans) of the Estimates publications.  
+    
+    Through DRRs, individual departments and agencies provide information on how they are progressing toward their strategic goals. DRRs cover the
+    most recently completed fiscal year and are normally tabled in the fall.
+  fr: |
+    Les rapports sur les résultats ministériels (RRM) – anciennement appelés « rapports ministériels sur le rendement (RMR) » – sont une reddition de
+    compte des réalisations des ministères et organismes par rapport aux plans, priorités et résultats escomptés établis dans leur plan ministériel (PM).
+    Les PM et les RRM forment la partie III (Plans de dépenses des ministères) des budgets des dépenses.  
+
+    Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques.
+    Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne.
 drr_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html
@@ -57,6 +149,10 @@ drr_authoritative_link:
 rps_name:
   en: People Management Data
   fr: Données sur la gestion des personnes
+rps_desc: # TODO duplicated against glossary entry... in this case could probably use a more fleshed out description and glossary entry
+  transform: [markdown]
+  en: People Management data presents key demographics of the Federal Public Service (FPS) workforce.
+  fr: Les données sur la gestion du personnel décrivent les caractéristiques démographiques des employées travaillant au sein de la fonction publique fédérale.
 rps_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html
