@@ -33,8 +33,9 @@ export const GlossaryTooltipWrapper = ({
   id,
   children,
   no_bottom_border,
-}: GlossaryTooltipWrapperProps) =>
-  is_a11y_mode ? (
+}: GlossaryTooltipWrapperProps) => {
+  const glos_item = glossaryEntryStore.lookup(id);
+  return is_a11y_mode ? (
     <a
       href={glossary_href(id)}
       title={trivial_text_maker("glossary_link_title")}
@@ -42,17 +43,20 @@ export const GlossaryTooltipWrapper = ({
       {children}
     </a>
   ) : (
-    <span
+    <button
       className="nowrap glossary-sidebar-link"
       style={no_bottom_border ? { borderBottom: "none" } : undefined}
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-      tabIndex={0}
       data-ibtt-glossary-key={id}
       data-toggle="glossary_sidebar"
+      aria-label={trivial_text_maker("open_glossary_definition", {
+        display: glos_item.title,
+        title: glos_item.title,
+      })}
     >
       {children}
-    </span>
+    </button>
   );
+};
 
 export const GlossaryIcon = ({
   id,
