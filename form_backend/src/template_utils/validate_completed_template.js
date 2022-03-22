@@ -46,6 +46,12 @@ const verify_values_are_expected_and_match_value_types = (
                 );
               })
               .value();
+          case "true":
+            return (
+              _.isArray(submitted_value) &&
+              _.isBoolean(submitted_value[0]) &&
+              submitted_value[0]
+            );
           default:
             return false; //unexpected type in the json itself
         }

@@ -160,6 +160,7 @@ class FormFrontend extends React.Component {
       awaiting_backend_response,
       backend_response,
       template,
+      template_name,
       completed_template,
     } = this.state;
 
@@ -167,11 +168,10 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type
-      /* TODO remove key === "faq" once faq keys are completed
-      replace with (!_.isUndefined(templates) && !_.includes(templates, template_name)) 
-      Replace ({ form_type }, key) with ({ form_type, templates }, key)
-      Also get template_name from this.state */
+      ({ form_type, templates }, key) =>
+        key === "meta" ||
+        (!_.isUndefined(templates) && !_.includes(templates, template_name)) ||
+        !form_type
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
@@ -324,7 +324,7 @@ class FormFrontend extends React.Component {
                 onClick={() =>
                   this.mergeIntoCompletedTemplateState(
                     field_key,
-                    completed_template[field_key] ? null : { 0: true }
+                    completed_template[field_key] ? null : [true]
                   )
                 }
                 label={text_maker("form_frontend_faq_ack")}
