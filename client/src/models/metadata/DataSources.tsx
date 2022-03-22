@@ -3,8 +3,6 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
 
-import { glossaryEntryStore } from "src/models/glossary";
-
 import { Frequencies } from "./Frequencies";
 
 import text from "./DataSources.yaml";
@@ -31,83 +29,58 @@ export type SourceKey =
   | "COVID"
   | "SERVICES";
 
-// HACK WARNING: because the glossaryEntryStore is populated at run time, we can't safely access glossary definitions on-module-load.
-// Currently, the glossary stores _will_ allways be populated in time for DataSources to be used though, as long as any sources that
-// pull thier definition from the glossary use a getter so that access to the glossary item is lazy-evaluated. Not necessarily future proof
-// TODO consider future proof solutions (worst case, duplicate relevant glossary text in DataSources.yaml)
-function desc_from_glossary_keys(...glossary_keys: string[]) {
-  const definitions = _.map(glossary_keys, (glossary_key) =>
-    glossaryEntryStore.lookup(glossary_key).get_compiled_definition()
-  );
-  return _.map(definitions, (def, ix) => (
-    <div key={ix} dangerouslySetInnerHTML={{ __html: def }} />
-  ));
-}
-
 const source_definitions: { [key in SourceKey]: SourceDef } = {
   IGOC: {
     name: text_maker("igoc_name"),
-    description: text_maker("igoc_desc"),
+    description: <TM k="igoc_desc" />,
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   PA: {
     name: text_maker("pa_name"),
-    get description() {
-      return desc_from_glossary_keys("PA");
-    },
+    description: <TM k="igoc_desc" />,
     authoritative_link: text_maker("pa_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   ESTIMATES: {
     name: text_maker("estimates_name"),
-    get description() {
-      return desc_from_glossary_keys("MAINS", "SUPPS");
-    },
+    description: <TM k="estimates_desc" />,
     authoritative_link: text_maker("estimates_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "quarterly",
   },
   CFMRS: {
     name: text_maker("cfmrs_name"),
-    get description() {
-      return desc_from_glossary_keys("CFMRS");
-    },
+    description: <TM k="cfmrs_desc" />,
     open_data_link: text_maker("cfmrs_open_data_link"),
     frequency_key: "yearly",
   },
   RTP: {
     name: text_maker("rtp_name"),
-    description: text_maker("rtp_desc"),
+    description: <TM k="rtp_desc" />,
     open_data_link: text_maker("rtp_open_data_link"),
     frequency_key: "yearly",
   },
   DP: {
     name: text_maker("dp_name"),
-    get description() {
-      return desc_from_glossary_keys("DP");
-    },
+    description: <TM k="dp_desc" />,
     authoritative_link: text_maker("dp_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   DRR: {
     name: text_maker("drr_name"),
-    get description() {
-      return desc_from_glossary_keys("DRR");
-    },
+    description: <TM k="drr_desc" />,
     authoritative_link: text_maker("drr_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   RPS: {
     name: text_maker("rps_name"),
-    get description() {
-      return desc_from_glossary_keys("PEOPLE_DATA");
-    },
-    frequency_key: "yearly",
+    description: <TM k="rps_desc" />,
     authoritative_link: text_maker("rps_authoritative_link"),
+    frequency_key: "yearly",
   },
   COVID: {
     name: text_maker("covid_name"),
@@ -117,7 +90,7 @@ const source_definitions: { [key in SourceKey]: SourceDef } = {
   },
   SERVICES: {
     name: text_maker("services_name"),
-    description: text_maker("services_desc"),
+    description: <TM k="services_desc" />,
     open_data_link: text_maker("services_open_data_link"),
     frequency_key: "yearly",
   },
