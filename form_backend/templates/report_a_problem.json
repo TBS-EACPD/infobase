@@ -4,7 +4,7 @@
   },
   "faq": {
     "required": true,
-    "value_type": "json",
+    "value_type": "true",
     "form_type": "form_faq",
     "faq_content": [
       {

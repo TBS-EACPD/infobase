@@ -31,6 +31,8 @@ const template_type_to_schema_type = (value_type) => {
       return Object;
     case "number":
       return Number;
+    case "true":
+      return Array;
     default:
       return String;
   }
