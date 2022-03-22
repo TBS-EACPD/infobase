@@ -2,7 +2,7 @@ import classNames from "classnames";
 import _ from "lodash";
 import type { ChangeEvent, KeyboardEvent, ReactElement } from "react";
 import React, { Fragment } from "react";
-import ReactResizeDetector from "react-resize-detector/build/withPolyfill";
+import ReactResizeDetector from "react-resize-detector";
 
 import type { List } from "react-virtualized";
 import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
