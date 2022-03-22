@@ -160,7 +160,6 @@ class FormFrontend extends React.Component {
       awaiting_backend_response,
       backend_response,
       template,
-      template_name,
       completed_template,
     } = this.state;
 
@@ -168,10 +167,8 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type, templates }, key) =>
-        key === "meta" ||
-        (!_.isUndefined(templates) && !_.includes(templates, template_name)) ||
-        !form_type
+      // keeping key === "faq" until faq content is made
+      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
