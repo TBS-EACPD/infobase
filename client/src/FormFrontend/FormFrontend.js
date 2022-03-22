@@ -448,12 +448,23 @@ class FormFrontend extends React.Component {
                             )
                             .value();
 
+                          const keys_staying_completed = _.chain(template)
+                            .pickBy(
+                              (field_info) => !!field_info["stay_completed"]
+                            )
+                            .keys()
+                            .value();
+
                           this.setState({
                             ...this.state,
                             sent_to_backend: false,
                             awaiting_backend_response: false,
                             backend_response: {},
-                            completed_template: {},
+                            completed_template: _.pickBy(
+                              completed_template,
+                              (field_info, field_key) =>
+                                _.includes(keys_staying_completed, field_key)
+                            ),
                           });
                         }}
                       >

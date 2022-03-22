@@ -18,7 +18,8 @@
         }
       }
     ],
-    "templates": ["report_a_problem"]
+    "templates": ["report_a_problem"],
+    "stay_completed": true
   },
   "issue_type": {
     "required": true,
