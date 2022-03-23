@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { estimates_docs } from "src/models/estimates";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -16,17 +17,10 @@ export default {
   legacy_id: "table8",
   tags: ["AUTH", "EST_PROC", "VOTED", "STAT"],
 
-  source: ["ESTIMATES"],
-
   name: {
-    en: "Tabled Estimates",
-    fr: "Budgets déposés",
+    [lang]: DataSets.tabled_estimates.name,
   },
-
-  title: {
-    en: "Tabled Estimates ($)",
-    fr: "Budgets déposés (en dollars)",
-  },
+  source: DataSets.tabled_estimates.source_keys,
 
   add_cols: function () {
     this.add_col({

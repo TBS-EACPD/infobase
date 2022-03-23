@@ -44,3 +44,6 @@ export type ComponentProps<T> = T extends
   | React.Component<infer P>
   ? JSX.LibraryManagedAttributes<T, P>
   : never;
+
+export type PartialOn<T, K extends keyof T> = SafeOmit<T, K> &
+  Partial<Pick<T, K>>;
