@@ -6,9 +6,9 @@ top_spending_areas_title:
 std_obj_quick_def:
   transform: [handlebars, markdown]
   en: |
-    {{glossary_sidebar_link "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures. 
+    {{gl_sidebar_link "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures. 
   fr: |
-    Les {{glossary_sidebar_link "articles courants" "SOBJ"}} représentent le niveau le plus élevé de classification des dépenses.
+    Les {{gl_sidebar_link "articles courants" "SOBJ"}} représentent le niveau le plus élevé de classification des dépenses.
 
 
 tag_top_spending_areas_text:

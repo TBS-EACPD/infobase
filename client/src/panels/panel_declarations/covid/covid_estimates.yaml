@@ -2,13 +2,13 @@
 covid_estimates_above_tab_footnote_list:
   transform: [handlebars,markdown]
   en: |
-    * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{glossary_sidebar_link "spending authorities" "AUTH"}} sought in
+    * Parliamentary approval is required for all government spending. These figures represent new COVID-19 {{gl_sidebar_link "spending authorities" "AUTH"}} sought in
       {{gov_tabled_est_docs_in_year_text}} for {{fmt_year_to_fiscal_year selected_year}} and align with the COVID-19 Economic Response Plan (ERP)
       presented in {{{gt "covid_erp_source"}}}.
     * Any reallocations of existing authorities to the COVID-19 pandemic response are excluded.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
   fr: |
-    * L'approbation du Parlement est requise pour toutes les dépenses du gouvernement. Ces chiffres représentent les nouvelles {{glossary_sidebar_link "autorisations de dépenser" "AUTH"}}
+    * L'approbation du Parlement est requise pour toutes les dépenses du gouvernement. Ces chiffres représentent les nouvelles {{gl_sidebar_link "autorisations de dépenser" "AUTH"}}
       au titre de COVID-19 qui figurent dans {{gov_tabled_est_docs_in_year_text}} pour l'exercice {{fmt_year_to_fiscal_year selected_year}} et correspondent au Plan
       d’intervention économique du Canada pour répondre à la COVID-19, présenté dans {{{gt "covid_erp_source"}}}.
     * Sont exclues toutes les réaffectations d'autorisations existantes à la réponse à la pandémie COVID-19.
@@ -18,20 +18,20 @@ covid_estimates_above_tab_footnote_list:
 covid_estimates_summary_text_gov:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     **{{fmt_compact1_written gov_covid_estimates_in_year}}** in authorities were presented through the Estimates in response to the COVID-19 pandemic.
   fr:  |
-    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     des autorisations d’un montant de **{{fmt_compact1_written gov_covid_estimates_in_year}}** ont été accordées par le biais des budgets des dépenses pour les
     interventions en réponse à la pandémie de COVID-19.
 covid_estimates_summary_text_dept:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     **{{subject.name}}** had **{{fmt_compact1_written dept_covid_estimates_in_year}}** in authorities available for its response to the COVID-19 pandemic,
     as presented through the Estimates.
   fr: |
-    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     **{{subject.name}}** a pu disposer d’autorisation d’un montant de **{{fmt_compact1_written dept_covid_estimates_in_year}}** pour ses interventions en réponse
     à la COVID-19, tel qu’il est indiqué dans les budgets des dépenses.
 
@@ -39,32 +39,32 @@ covid_estimates_summary_text_dept:
 covid_estimates_by_release_title:
   transform: [handlebars,markdown]
   en: |
-    Total COVID-19 authorities by {{glossary_sidebar_link "release" "EST_DOC"}}:
+    Total COVID-19 authorities by {{gl_sidebar_link "release" "EST_DOC"}}:
   fr: |
-    Total des autorisations liées à la COVID-19 par {{glossary_sidebar_link "source" "EST_DOC"}} :
+    Total des autorisations liées à la COVID-19 par {{gl_sidebar_link "source" "EST_DOC"}} :
 covid_estimates_by_release:
   transform: [handlebars,markdown]
   en: |
-    {{glossary_sidebar_link est_doc_name est_doc_glossary_key}}: **{{fmt_compact1_written total}}**
+    {{gl_sidebar_link est_doc_name est_doc_glossary_key}}: **{{fmt_compact1_written total}}**
   fr: |
-    {{glossary_sidebar_link est_doc_name est_doc_glossary_key}} : **{{fmt_compact1_written total}}**
+    {{gl_sidebar_link est_doc_name est_doc_glossary_key}} : **{{fmt_compact1_written total}}**
 
 covid_estimates_department_tab_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     the organization with the largest COVID-19 related authorities was **{{largest_dept_name}}** with **{{fmt_compact1_written largest_dept_auth}}**.
   fr: |
-    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     l'organisation ayant le plus grand sommes d'autorisations liées à COVID-19 était **{{largest_dept_name}}** avec **{{fmt_compact1_written largest_dept_auth}}**.
 
 covid_estimates_measure_tab_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    In **{{fmt_year_to_fiscal_year selected_year}}**, as of the {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     the COVID-19 measure with the largest COVID-19 related authorities was "**{{largest_measure_name}}**" with **{{fmt_compact1_written largest_measure_auth}}**.
   fr: |
-    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{glossary_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
+    En **{{fmt_year_to_fiscal_year selected_year}}**, selon le {{gl_sidebar_link gov_latest_tabled_est_doc_in_year_text gov_latest_tabled_est_doc_in_year_glossary_key}},
     la mesure COVID-19 disposant des crédits les plus grand sommes d'autorisations liées à COVID-19 était « **{{largest_measure_name}}** »
     avec **{{fmt_compact1_written largest_measure_auth}}**.
 

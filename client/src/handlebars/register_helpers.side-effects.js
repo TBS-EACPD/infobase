@@ -630,7 +630,7 @@ HandlebarsWithPrototypeAccess.registerHelper("gl", function glossary_link(key) {
   return new HandlebarsWithPrototypeAccess.SafeString(str);
 });
 
-function glossary_sidebar_link(display, key) {
+function gl_sidebar_link(display, key) {
   const glos_item = glossaryEntryStore.lookup(key);
   return new HandlebarsWithPrototypeAccess.SafeString(
     `<button 
@@ -648,10 +648,10 @@ function glossary_sidebar_link(display, key) {
 }
 HandlebarsWithPrototypeAccess.registerHelper(
   "gl_sidebar_link",
-  glossary_sidebar_link
+  gl_sidebar_link
 );
 // gl_tt is a legacy shorthand, don't use it! Need to keep it around because it appears appears in a few places in /data/footnotes.csv, need to get that cleaned upstream
-HandlebarsWithPrototypeAccess.registerHelper("gl_tt", glossary_sidebar_link);
+HandlebarsWithPrototypeAccess.registerHelper("gl_tt", gl_sidebar_link);
 
 HandlebarsWithPrototypeAccess.registerHelper("gl_title", function (key) {
   const glos_item = glossaryEntryStore.lookup(key);

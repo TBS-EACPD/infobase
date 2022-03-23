@@ -28,9 +28,9 @@ simplographic_people_title:
 simplographic_people_text:
   transform: [handlebars,markdown]
   en: |
-    As of **{{ppl_last_year_end_ticks}}** there were **<a href="{{org_employee_type_link}}">{{fmt_big_int empl_count_total}}</a>** employees in the {{glossary_sidebar_link "Federal Public Service" "FPS"}}, with **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** located in the National Capital Region.
+    As of **{{ppl_last_year_end_ticks}}** there were **<a href="{{org_employee_type_link}}">{{fmt_big_int empl_count_total}}</a>** employees in the {{gl_sidebar_link "Federal Public Service" "FPS"}}, with **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** located in the National Capital Region.
   fr: |
-    Au **31 mars {{ppl_last_year_short_second}}**, il y avait **<a href="{{org_employee_type_link}}">{{fmt_big_int empl_count_total}}</a>** employés au sein de la {{glossary_sidebar_link "fonction publique générale" "FPS"}}, dont **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** travaillaient dans la région de la capitale nationale.
+    Au **31 mars {{ppl_last_year_short_second}}**, il y avait **<a href="{{org_employee_type_link}}">{{fmt_big_int empl_count_total}}</a>** employés au sein de la {{gl_sidebar_link "fonction publique générale" "FPS"}}, dont **<a href="{{org_employee_region_link}}">{{fmt_percentage1 empl_count_ncr_ratio}}</a>** travaillaient dans la région de la capitale nationale.
 
 simplographic_struct_title:
   en: How we're structured
@@ -51,9 +51,9 @@ simplographic_results_title:
 simplographic_results_text:
   transform: [handlebars,markdown]
   en: |
-    In {{pa_last_year}}, the federal government sought to achieve **{{num_results}}** results. Progress towards meeting these results was measured using **{{fmt_big_int num_indicators}}** {{glossary_sidebar_link "indicators" "IND_RESULT"}}. 
-    Of those indicators, **{{fmt_big_int num_met}}** (**{{fmt_percentage pct_met}}**) have {{glossary_sidebar_link "met" "RESULTS_MET"}} their target.
+    In {{pa_last_year}}, the federal government sought to achieve **{{num_results}}** results. Progress towards meeting these results was measured using **{{fmt_big_int num_indicators}}** {{gl_sidebar_link "indicators" "IND_RESULT"}}. 
+    Of those indicators, **{{fmt_big_int num_met}}** (**{{fmt_percentage pct_met}}**) have {{gl_sidebar_link "met" "RESULTS_MET"}} their target.
   fr: |
-    En {{pa_last_year}}, le gouvernement fédéral a cherché à rencontrer **{{num_results}}** résultats. Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int num_indicators}}** {{glossary_sidebar_link "indicateurs" "IND_RESULT"}}. 
-    De ces indicateurs, **{{fmt_big_int num_met}}** (**{{fmt_percentage pct_met}}**) ont {{glossary_sidebar_link "atteint" "RESULTS_MET"}} leur cible.
+    En {{pa_last_year}}, le gouvernement fédéral a cherché à rencontrer **{{num_results}}** résultats. Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int num_indicators}}** {{gl_sidebar_link "indicateurs" "IND_RESULT"}}. 
+    De ces indicateurs, **{{fmt_big_int num_met}}** (**{{fmt_percentage pct_met}}**) ont {{gl_sidebar_link "atteint" "RESULTS_MET"}} leur cible.
 
