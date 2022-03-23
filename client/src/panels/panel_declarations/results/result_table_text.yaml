@@ -16,12 +16,12 @@ result_flat_table_title:
 result_flat_table_text:
   transform: [handlebars,markdown]
   en: |
-    In **{{year}}**, {{subject.name}} measured **{{fmt_big_int drr_total}}** {{glossary_sidebar_link "indicators" "IND_RESULT"}}.
+    In **{{year}}**, {{subject.name}} measured **{{fmt_big_int drr_total}}** {{gl_sidebar_link "indicators" "IND_RESULT"}}.
 
     You can filter the data by selecting the result status you want to explore (you may select multiple statuses). 
     To find all data about an indicator (such as explanations), click on the indicator name.
   fr: |
-    En **{{year}}**, {{subject.name}} a mesuré **{{fmt_big_int drr_total}}** {{glossary_sidebar_link "indicateurs" "IND_RESULT"}}.
+    En **{{year}}**, {{subject.name}} a mesuré **{{fmt_big_int drr_total}}** {{gl_sidebar_link "indicateurs" "IND_RESULT"}}.
 
     Vous pouvez filtrer les données en sélectionnant l'état du résultat à analyser (plusieurs états peuvent être sélectionnés).
     Pour trouver les données sur un indicateur (tel que  les explications), cliquez sur le nom de l'indicateur.

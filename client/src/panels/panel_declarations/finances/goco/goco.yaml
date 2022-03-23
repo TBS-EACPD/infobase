@@ -9,14 +9,14 @@ spending_area:
 goco_intro_text:
   transform: [handlebars, markdown]
   en: |
-   In {{pa_last_year}}, the federal government spent **{{fmt_compact1_written total_spending}}** and employed **{{fmt_big_int total_ftes}}** {{glossary_sidebar_link "full-time equivalents" "FTE"}}. 
+   In {{pa_last_year}}, the federal government spent **{{fmt_compact1_written total_spending}}** and employed **{{fmt_big_int total_ftes}}** {{gl_sidebar_link "full-time equivalents" "FTE"}}. 
    The largest spending area was **{{max_sa}}** and accounted for **{{fmt_percentage1 max_sa_share}}** of the government total spending. 
 
 
-   To further explore a particular spending area, click on its name to expand the graph and discover what {{glossary_sidebar_link "Government of Canada Activities" "OUT_AREA"}} are included.
+   To further explore a particular spending area, click on its name to expand the graph and discover what {{gl_sidebar_link "Government of Canada Activities" "OUT_AREA"}} are included.
   fr: |
-   En {{pa_last_year}}, le gouvernement fédéral a dépensé **{{fmt_compact1_written total_spending}}** et employé **{{fmt_big_int total_ftes}}** {{glossary_sidebar_link "équivalents temps plein" "FTE"}}. 
+   En {{pa_last_year}}, le gouvernement fédéral a dépensé **{{fmt_compact1_written total_spending}}** et employé **{{fmt_big_int total_ftes}}** {{gl_sidebar_link "équivalents temps plein" "FTE"}}. 
    Le secteur de dépenses le plus important était celui des **{{max_sa}}** qui représentait **{{fmt_percentage1 max_sa_share}}** des dépenses totales du gouvernement. 
 
 
-   Pour explorer plus en détail un secteur de dépenses en particulier, cliquez sur son nom pour agrandir le graphique et découvrir les {{glossary_sidebar_link "activités du gouvernement du Canada" "GOCO"}} qui y sont incluses.
+   Pour explorer plus en détail un secteur de dépenses en particulier, cliquez sur son nom pour agrandir le graphique et découvrir les {{gl_sidebar_link "activités du gouvernement du Canada" "GOCO"}} qui y sont incluses.

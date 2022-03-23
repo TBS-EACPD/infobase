@@ -74,12 +74,12 @@ what_are_gocos_a:
   en: | 
     Each governmental program is mapped to a high-level activity which is itself associated to a major spending area.
 
-    Departments and agencies are required to indicate the alignment of programs to Government of Canada activities. Because this alignment is intended to make it possible to calculate spending by Government of Canada activity, while correctly totaling all government spending, a {{glossary_sidebar_link "program" "PROG"}} can only be aligned to one Government of Canada activity. A {{glossary_sidebar_link "Core Responsibility" "CR"}} and a {{glossary_sidebar_link "Strategic Outcome" "SO"}}, however, can contribute to more than one activity.
+    Departments and agencies are required to indicate the alignment of programs to Government of Canada activities. Because this alignment is intended to make it possible to calculate spending by Government of Canada activity, while correctly totaling all government spending, a {{gl_sidebar_link "program" "PROG"}} can only be aligned to one Government of Canada activity. A {{gl_sidebar_link "Core Responsibility" "CR"}} and a {{gl_sidebar_link "Strategic Outcome" "SO"}}, however, can contribute to more than one activity.
 
   fr: |
     Chaque programme gouvernemental est mis en correspondance avec une activité de haut niveau, qui est lui-même associé à un secteur de dépenses.
 
-    Les ministères et les organismes doivent indiquer l’harmonisation des programmes par rapport aux activités du gouvernement du Canada. Étant donné que l’harmonisation vise à permettre le calcul des dépenses du gouvernement du Canada pour chacune des secteurs d'activités, même tout en calculant correctement le total de l’ensemble des dépenses du gouvernement, un {{glossary_sidebar_link "programme" "PROG"}} ne peut être harmonisé qu’à une seule activité. Une {{glossary_sidebar_link "responsabilité essentielle" "CR"}} et un {{glossary_sidebar_link "résultat stratéqigue" "SO"}} peuvent toutefois contribuer à plus d’un secteur d'activités.
+    Les ministères et les organismes doivent indiquer l’harmonisation des programmes par rapport aux activités du gouvernement du Canada. Étant donné que l’harmonisation vise à permettre le calcul des dépenses du gouvernement du Canada pour chacune des secteurs d'activités, même tout en calculant correctement le total de l’ensemble des dépenses du gouvernement, un {{gl_sidebar_link "programme" "PROG"}} ne peut être harmonisé qu’à une seule activité. Une {{gl_sidebar_link "responsabilité essentielle" "CR"}} et un {{gl_sidebar_link "résultat stratéqigue" "SO"}} peuvent toutefois contribuer à plus d’un secteur d'activités.
 
 how_do_progs_support_DRs_q:
   en: How do programs support Departmental Results? 
@@ -88,8 +88,8 @@ how_do_progs_support_DRs_q:
 how_do_progs_support_DRs_a:
   transform: [handlebars, markdown]
   en: |
-    Programs can support the achievement of one or multiple more specific {{glossary_sidebar_link "Departmental Results (DR)" "DR"}} under their {{glossary_sidebar_link "Core Responsibility (CR)" "CR"}}. 
+    Programs can support the achievement of one or multiple more specific {{gl_sidebar_link "Departmental Results (DR)" "DR"}} under their {{gl_sidebar_link "Core Responsibility (CR)" "CR"}}. 
   fr: |
-    Sous les programmes du Répertoire de programmes, il est possible de soutenir la réalisation d’un ou de plusieurs {{glossary_sidebar_link "résultats ministériels (DR)" "DR"}} précis liés à la {{glossary_sidebar_link "par exemple, responsabilité essentielle (CR)" "CR"}} dont ils relèvent. 
+    Sous les programmes du Répertoire de programmes, il est possible de soutenir la réalisation d’un ou de plusieurs {{gl_sidebar_link "résultats ministériels (DR)" "DR"}} précis liés à la {{gl_sidebar_link "par exemple, responsabilité essentielle (CR)" "CR"}} dont ils relèvent. 
 
 

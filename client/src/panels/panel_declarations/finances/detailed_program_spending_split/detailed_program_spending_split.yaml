@@ -7,15 +7,15 @@ detailed_program_spending_split_title:
 so_spend_by_prog:
   transform: [handlebars]
   en: |
-    {{glossary_sidebar_link "Standard Object" "SOBJ"}} Spending by Program ({{pa_last_year}})
+    {{gl_sidebar_link "Standard Object" "SOBJ"}} Spending by Program ({{pa_last_year}})
   fr: |
-    Dépenses par {{glossary_sidebar_link "article courant" "SOBJ"}}, par programmes ({{pa_last_year}})
+    Dépenses par {{gl_sidebar_link "article courant" "SOBJ"}}, par programmes ({{pa_last_year}})
 
 
 filter_by_so:
   transform: [handlebars]
-  en: Filter by {{glossary_sidebar_link "Standard Object" "SOBJ"}}
-  fr: Filtrer par {{glossary_sidebar_link "article courant" "SOBJ"}}
+  en: Filter by {{gl_sidebar_link "Standard Object" "SOBJ"}}
+  fr: Filtrer par {{gl_sidebar_link "article courant" "SOBJ"}}
 
 other_sos:
   en: All Other Standard Objects
@@ -33,7 +33,7 @@ historical_prog_title:
 dept_historical_program_spending_text:
   transform: [handlebars,markdown]
   en: |
-   Each organization is responsible for a number of {{glossary_sidebar_link "Programs" "PROG"}}.
+   Each organization is responsible for a number of {{gl_sidebar_link "Programs" "PROG"}}.
    In {{pa_last_year}}, **{{subject.name}}** had **{{in_year_prog_count}}** programs.
    {{#if top_2_prgm_name}}
    During that fiscal year, the largest program in terms of net spending was "**{{top_1_prgm_name}}**" (**{{fmt_compact1_written top_1_prgm_amt}}**)
