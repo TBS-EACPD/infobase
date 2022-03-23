@@ -24,7 +24,7 @@ interface LabeledTombstoneProps {
 }
 
 const LabeledTombstone = ({ labels_and_items }: LabeledTombstoneProps) => (
-  <dl className="tombstone-data-list">
+  <dl className="col tombstone-data-list">
     {_.map(labels_and_items, ([label, item], ix) => (
       <Fragment key={ix}>
         <div className="row tombstone-data-div">
