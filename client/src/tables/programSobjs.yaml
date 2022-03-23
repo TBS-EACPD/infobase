@@ -1,9 +1,9 @@
 programSobjs_short: 
   transform: [handlebars,markdown]
   en: |
-   Using {{gl_tt "Central Financial Management Reporting System (CFMRS)" "CFMRS"}} data, this table presents {{gl_tt "Program" "PROG"}} {{gl_tt "expenditures" "BUD_EXP"}} by {{gl_tt "standard object" "SOBJ"}} for {{pa_last_year}}.
+   Using {{gl_sidebar_link "Central Financial Management Reporting System (CFMRS)" "CFMRS"}} data, this table presents {{gl_sidebar_link "Program" "PROG"}} {{gl_sidebar_link "expenditures" "BUD_EXP"}} by {{gl_sidebar_link "standard object" "SOBJ"}} for {{pa_last_year}}.
   fr: |
-   Selon les données tiréss du {{gl_tt "Système central de gestion des rapports financiers (SCGRF)" "CFMRS"}}, ce tableau présente les {{gl_tt "dépenses" "BUD_EXP"}} de {{gl_tt "programme" "PROG"}} par {{gl_tt "article courant" "SOBJ"}} pour {{pa_last_year}}.
+   Selon les données tiréss du {{gl_sidebar_link "Système central de gestion des rapports financiers (SCGRF)" "CFMRS"}}, ce tableau présente les {{gl_sidebar_link "dépenses" "BUD_EXP"}} de {{gl_sidebar_link "programme" "PROG"}} par {{gl_sidebar_link "article courant" "SOBJ"}} pour {{pa_last_year}}.
 
 programSobjs: 
   transform: [handlebars,markdown]

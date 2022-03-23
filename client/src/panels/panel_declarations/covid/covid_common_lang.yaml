@@ -37,8 +37,8 @@ show_vote_stat_split:
   fr: Afficher la ventilation des montants votés et législatifs
 show_vote_stat_split_glossary:
   transform: [handlebars]
-  en: ({{gl_tt "voted" "VOTED"}}, {{gl_tt "statutory" "STAT"}})
-  fr: ({{gl_tt "votés" "VOTED"}}, {{gl_tt "législatifs" "STAT"}})
+  en: ({{glossary_sidebar_link "voted" "VOTED"}}, {{glossary_sidebar_link "statutory" "STAT"}})
+  fr: ({{glossary_sidebar_link "votés" "VOTED"}}, {{glossary_sidebar_link "législatifs" "STAT"}})
 
 supps_list:
   transform: [handlebars]

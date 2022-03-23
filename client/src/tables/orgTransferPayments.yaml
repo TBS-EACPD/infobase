@@ -1,13 +1,13 @@
 orgTransferPayments_short:
   transform: [handlebars,markdown]
   en: |
-   Using {{gl_tt "Public Accounts" "PA"}} data, this table presents detailed {{gl_tt "voted" "VOTED"}} and 
-   {{gl_tt "statutory" "STAT"}} {{gl_tt "Transfer Payments" "TP"}} information by type of transfer 
-   ({{gl_tt "grant" "GRANT_TP"}}, {{gl_tt "contribution" "CONT_TP"}} and 
-   {{gl_tt "other transfer payment" "OTHER_TP"}}) from {{pa_last_year_5}} to {{pa_last_year}}.
+   Using {{gl_sidebar_link "Public Accounts" "PA"}} data, this table presents detailed {{gl_sidebar_link "voted" "VOTED"}} and 
+   {{gl_sidebar_link "statutory" "STAT"}} {{gl_sidebar_link "Transfer Payments" "TP"}} information by type of transfer 
+   ({{gl_sidebar_link "grant" "GRANT_TP"}}, {{gl_sidebar_link "contribution" "CONT_TP"}} and 
+   {{gl_sidebar_link "other transfer payment" "OTHER_TP"}}) from {{pa_last_year_5}} to {{pa_last_year}}.
   fr: |
-   Selon les données des {{gl_tt "Comptes publics" "PA"}}, ce tableau présente des renseignements sur les {{gl_tt "paiements de transfert" "TP"}} {{gl_tt "voté" "VOTED"}} et {{gl_tt "législatif" "STAT"}} par 
-   type de transfert ({{gl_tt "subvention" "GRANT_TP"}}, {{gl_tt "contribution" "CONT_TP"}} et {{gl_tt "autre paiement de transfert" "OTHER_TP"}}) de {{pa_last_year_5}} à {{pa_last_year}}.
+   Selon les données des {{gl_sidebar_link "Comptes publics" "PA"}}, ce tableau présente des renseignements sur les {{gl_sidebar_link "paiements de transfert" "TP"}} {{gl_sidebar_link "voté" "VOTED"}} et {{gl_sidebar_link "législatif" "STAT"}} par 
+   type de transfert ({{gl_sidebar_link "subvention" "GRANT_TP"}}, {{gl_sidebar_link "contribution" "CONT_TP"}} et {{gl_sidebar_link "autre paiement de transfert" "OTHER_TP"}}) de {{pa_last_year_5}} à {{pa_last_year}}.
 
 orgTransferPayments:
   transform: [handlebars,markdown]

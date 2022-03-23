@@ -1,14 +1,14 @@
 programFtes_short: 
   transform: [handlebars,markdown]
   en: |
-   Using Estimates Part III documents ({{gl_tt "Departmental Plans" "DP"}} and {{gl_tt "Departmental Results Reports" "DRR"}}), this table presents 
-   actual and planned {{gl_tt "Full-time Equivalents (FTE)" "FTE"}} by {{gl_tt "Program" "PROG"}} from {{pa_last_year_5}} to {{planning_year_3}}. 
-   FTEs are presented by {{gl_tt "Spending Areas" "SA"}} and {{gl_tt "Government of Canada Activities" "OUT_AREA"}}.
+   Using Estimates Part III documents ({{gl_sidebar_link "Departmental Plans" "DP"}} and {{gl_sidebar_link "Departmental Results Reports" "DRR"}}), this table presents 
+   actual and planned {{gl_sidebar_link "Full-time Equivalents (FTE)" "FTE"}} by {{gl_sidebar_link "Program" "PROG"}} from {{pa_last_year_5}} to {{planning_year_3}}. 
+   FTEs are presented by {{gl_sidebar_link "Spending Areas" "SA"}} and {{gl_sidebar_link "Government of Canada Activities" "OUT_AREA"}}.
    
   fr: |
-   Selon les documents de la partie III du Budget des dépenses ({{gl_tt "plans ministériels" "DP"}} et {{gl_tt "rapports ministériels sur le rendement" "DRR"}}), ce tableau 
-   présente les {{gl_tt "équivalents temps plein (ETP)" "FTE"}} actuels et prévus par {{gl_tt "programme" "PROG"}} de {{pa_last_year_5}} à {{[planning_year_3]}}. Les ETP sont 
-   présentées en fonction des {{gl_tt "secteurs des dépenses" "SA"}} et des secteurs {{gl_tt "d'activités du gouvernement du Canada" "OUT_AREA"}}. 
+   Selon les documents de la partie III du Budget des dépenses ({{gl_sidebar_link "plans ministériels" "DP"}} et {{gl_sidebar_link "rapports ministériels sur le rendement" "DRR"}}), ce tableau 
+   présente les {{gl_sidebar_link "équivalents temps plein (ETP)" "FTE"}} actuels et prévus par {{gl_sidebar_link "programme" "PROG"}} de {{pa_last_year_5}} à {{[planning_year_3]}}. Les ETP sont 
+   présentées en fonction des {{gl_sidebar_link "secteurs des dépenses" "SA"}} et des secteurs {{gl_sidebar_link "d'activités du gouvernement du Canada" "OUT_AREA"}}. 
 
 programFtes:
   transform: [handlebars,markdown]
@@ -17,7 +17,7 @@ programFtes:
 
 
    **Notes :**
-   * Full-Time Equivalents (FTEs) differ from {{gl_tt "Employee Headcounts" "HEAD"}} as: 
+   * Full-Time Equivalents (FTEs) differ from {{gl_sidebar_link "Employee Headcounts" "HEAD"}} as: 
     * **Full-Time Equivalents (FTEs)** are a measure of the extent to which an employee represents a full person-year charge against a departmental budget. 
     FTEs are calculated as a ratio of assigned hours of work to scheduled hours of work, as set out in collective agreements. Adjustments are 
     made to the calculation for term and seasonal workers to reflect the proportion of paid weeks in year. 
@@ -25,8 +25,8 @@ programFtes:
     appointees, deputy ministers, and federal judges as of March 31 of each year. Employees on leave without pay are not included. 
     The counts include employees working in organizations in Schedules I, IV, and V of the _Financial Administration Act_. 
     No adjustments are made to account for hours of work.
-   * **Program can only be aligned with one of the 16 Go vernment of Canada Activities**. However a {{gl_tt "strategic outcome" "SO"}} and a {{gl_tt "core responsibility" "CR"}} can contribute to more than one activity.
-   * For the purposes of GC InfoBase, {{gl_tt "Internal Service" "INT_SERVICES"}} is presented as one area of government spending.
+   * **Program can only be aligned with one of the 16 Go vernment of Canada Activities**. However a {{gl_sidebar_link "strategic outcome" "SO"}} and a {{gl_sidebar_link "core responsibility" "CR"}} can contribute to more than one activity.
+   * For the purposes of GC InfoBase, {{gl_sidebar_link "Internal Service" "INT_SERVICES"}} is presented as one area of government spending.
    * To ensure comparability over time, Program names and structures used in GC InfoBase are sourced from the Public Accounts of Canada and may differ from an organization's Departmental Results Report and Departmental Plan.
 
 
@@ -38,7 +38,7 @@ programFtes:
 
 
    **Remarques:**
-   * Les nombres d’ETP diffèrent du {{gl_tt "relevé des effectifs" "HEAD"}} pour les raisons suivantes : 
+   * Les nombres d’ETP diffèrent du {{gl_sidebar_link "relevé des effectifs" "HEAD"}} pour les raisons suivantes : 
     * Les **équivalents temps plein (ETP)** correspondent à la mesure dans laquelle un employé représente une année-personne complète dans les 
     budgets ministériels. Les ETP sont calculés en fonction du coefficient des heures de travail assignées et des heures de travail prescrites, 
     comme cela se fait dans les conventions collectives. Des rajustements sont apportés aux calculs pour les travailleurs à période déterminée et 
@@ -49,8 +49,8 @@ programFtes:
     dans les organisations figurant aux annexes I, IV et V de la _Loi sur la gestion des finances publiques_. 
     Aucun rajustement n’est effectué pour tenir compte des heures de travail.
 
-    * Un programme ne peut correspondre qu'à l'un des 16 secteurs d'activités du gouvernement du Canada. Toutefois un {{gl_tt "résultat stratégique" "SO"}} et une {{gl_tt "responsabilité essentielle" "CR"}} peuvent contribuer à plus d'une activité.
-    * Pour InfoBase du GC, les {{gl_tt "services internes" "INT_SERVICES"}} sont présentés en tant qu'un secteur des dépenses du gouvernement.
+    * Un programme ne peut correspondre qu'à l'un des 16 secteurs d'activités du gouvernement du Canada. Toutefois un {{gl_sidebar_link "résultat stratégique" "SO"}} et une {{gl_sidebar_link "responsabilité essentielle" "CR"}} peuvent contribuer à plus d'une activité.
+    * Pour InfoBase du GC, les {{gl_sidebar_link "services internes" "INT_SERVICES"}} sont présentés en tant qu'un secteur des dépenses du gouvernement.
     * Pour assurer la comparabilité au fil du temps, la composition et le nom des programmes présentés dans InfoBase du GC correspondent à ceux utilisés dans les Comptes Publics du Canada et pourraient différer du rapport sur les résultats ministériel et du plan ministériel d’une organisation.
 
 

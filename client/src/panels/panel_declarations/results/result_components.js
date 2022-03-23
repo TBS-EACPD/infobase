@@ -5,7 +5,7 @@ import {
   HeightClipper,
   VisibilityControl,
   AlertBanner,
-  GlossaryTooltipWrapper,
+  GlossarySidebarLinkWrapper,
 } from "src/components/index";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
@@ -388,7 +388,7 @@ const NewBadge = () => (
   <span className="badge badge--is-new-indicator">{text_maker("new")}</span>
 );
 const GBAPlusBadge = ({ use_icon }) => (
-  <GlossaryTooltipWrapper id="GBA_PLUS_INDICATOR" no_bottom_border={true}>
+  <GlossarySidebarLinkWrapper id="GBA_PLUS_INDICATOR" no_bottom_border={true}>
     {use_icon ? (
       <img
         alt={text_maker("gba_plus")}
@@ -400,7 +400,7 @@ const GBAPlusBadge = ({ use_icon }) => (
         {text_maker("gba_plus_short")}
       </span>
     )}
-  </GlossaryTooltipWrapper>
+  </GlossarySidebarLinkWrapper>
 );
 
 const LateDepartmentsBanner = ({ late_dept_count }) => (
