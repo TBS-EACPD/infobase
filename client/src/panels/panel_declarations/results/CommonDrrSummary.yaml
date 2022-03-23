@@ -6,7 +6,7 @@ drr_summary_text_intro:
     {{else}}
       In **{{year}}**, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
-    Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
+    Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** indicators, and a {{glossary_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome (actual result) of the indicator's target.
   fr: |
     {{#if results_dept_count}}
@@ -14,24 +14,24 @@ drr_summary_text_intro:
     {{else}}
       En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
     {{/if}}
-    Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** indicateurs, et un {{gl_tt "état du résultat" "RESULTS_STATUS"}}
+    Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** indicateurs, et un {{glossary_sidebar_link "état du résultat" "RESULTS_STATUS"}}
     a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.
 
 drr_summary_stats:
   transform: [handlebars,markdown]
   en: |
     In **{{year}}**, there was a total of **{{fmt_big_int drr_total}}** indicators. Of the **{{fmt_big_int drr_subset}}** selected above:
-      {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{gl_tt "met" "RESULTS_MET"}} their target{{/if}}
-      {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) did {{gl_tt "not meet" "RESULTS_NOT_MET"}} their target{{/if}}
-      {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) have {{gl_tt "no result available" "RESULTS_NOT_AVAILABLE"}}{{/if}}
-      {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) are {{gl_tt "to be achieved in the future" "RESULTS_ONGOING"}}{{/if}}
+      {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{glossary_sidebar_link "met" "RESULTS_MET"}} their target{{/if}}
+      {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) did {{glossary_sidebar_link "not meet" "RESULTS_NOT_MET"}} their target{{/if}}
+      {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) have {{glossary_sidebar_link "no result available" "RESULTS_NOT_AVAILABLE"}}{{/if}}
+      {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) are {{glossary_sidebar_link "to be achieved in the future" "RESULTS_ONGOING"}}{{/if}}
   fr: |
     {{#if drr_total}}
     En **{{year}}**, il y avait **{{fmt_big_int drr_total}}** indicateurs au total. Sur les **{{fmt_big_int drr_subset}}** susmentionnés:
-      {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{gl_tt "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
-      {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) {{gl_tt "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
-      {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) {{gl_tt "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
-      {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) sont {{gl_tt "à atteindre dans le futur" "RESULTS_ONGOING"}}{{/if}}
+      {{#if drr_indicators_met}}* **{{fmt_big_int drr_indicators_met}}** (**{{fmt_percentage1 (divide drr_indicators_met drr_subset)}}**) {{glossary_sidebar_link "ont atteint" "RESULTS_MET"}} leur cible{{/if}}
+      {{#if drr_indicators_not_met}}* **{{fmt_big_int drr_indicators_not_met}}** (**{{fmt_percentage1 (divide drr_indicators_not_met drr_subset)}}**) {{glossary_sidebar_link "n’ont pas atteint" "RESULTS_NOT_MET"}} leur cible{{/if}}
+      {{#if drr_indicators_not_available}}* **{{fmt_big_int drr_indicators_not_available}}** (**{{fmt_percentage1 (divide drr_indicators_not_available drr_subset)}}**) {{glossary_sidebar_link "n’ont pas de résultat disponible" "RESULTS_NOT_AVAILABLE"}}{{/if}}
+      {{#if drr_indicators_future}}* **{{fmt_big_int drr_indicators_future}}** (**{{fmt_percentage1 (divide drr_indicators_future drr_subset)}}**) sont {{glossary_sidebar_link "à atteindre dans le futur" "RESULTS_ONGOING"}}{{/if}}
     {{/if}}
 
 
@@ -57,20 +57,20 @@ result_status_explanation:
 
 result_status_explanation_met:
   transform: [handlebars]
-  en: If the measured outcome satisfies the target, the indicator is assigned a status of {{gl_tt "Target met" "RESULTS_MET"}}.
-  fr: Si le résultat mesuré correspond à la cible, l'indicateur se voit attribuer l'état {{gl_tt "Cible atteinte" "RESULTS_MET"}}.
+  en: If the measured outcome satisfies the target, the indicator is assigned a status of {{glossary_sidebar_link "Target met" "RESULTS_MET"}}.
+  fr: Si le résultat mesuré correspond à la cible, l'indicateur se voit attribuer l'état {{glossary_sidebar_link "Cible atteinte" "RESULTS_MET"}}.
 
 result_status_explanation_not_met:
   transform: [handlebars]
-  en: If the measured outcome is outside the range or standard established by the target, the indicator's status is {{gl_tt "Target not met" "RESULTS_NOT_MET"}}.
-  fr: Si le résultat mesuré se situe en dehors de la fourchette ou de la norme établie par la cible, l’état de l'indicateur est {{gl_tt "Cible non atteinte" "RESULTS_NOT_MET"}}.
+  en: If the measured outcome is outside the range or standard established by the target, the indicator's status is {{glossary_sidebar_link "Target not met" "RESULTS_NOT_MET"}}.
+  fr: Si le résultat mesuré se situe en dehors de la fourchette ou de la norme établie par la cible, l’état de l'indicateur est {{glossary_sidebar_link "Cible non atteinte" "RESULTS_NOT_MET"}}.
 
 result_status_explanation_not_available:
   transform: [handlebars]
-  en: Indicators for which no target was set, or for which data was unavailable, are assigned the status {{gl_tt "No result available" "RESULTS_NOT_AVAILABLE"}}.
-  fr: Les indicateurs pour lesquels aucune cible n'a été fixée, ou pour lesquels les données n'étaient pas disponibles, se voient attribuer l’état {{gl_tt "Résultat non disponible" "RESULTS_NOT_AVAILABLE"}}.
+  en: Indicators for which no target was set, or for which data was unavailable, are assigned the status {{glossary_sidebar_link "No result available" "RESULTS_NOT_AVAILABLE"}}.
+  fr: Les indicateurs pour lesquels aucune cible n'a été fixée, ou pour lesquels les données n'étaient pas disponibles, se voient attribuer l’état {{glossary_sidebar_link "Résultat non disponible" "RESULTS_NOT_AVAILABLE"}}.
 
 result_status_explanation_future:
   transform: [handlebars]
-  en: If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{gl_tt "Result to be achieved in the future" "RESULTS_ONGOING"}}.
-  fr: Si la date d’atteinte de la cible est postérieure à la fin de l'exercice financier (31 mars), ou s'il n'y a pas de date d’atteinte de la cible, l’état est {{gl_tt "Résultat à atteindre dans le futur" "RESULTS_ONGOING"}}.
+  en: If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{glossary_sidebar_link "Result to be achieved in the future" "RESULTS_ONGOING"}}.
+  fr: Si la date d’atteinte de la cible est postérieure à la fin de l'exercice financier (31 mars), ou s'il n'y a pas de date d’atteinte de la cible, l’état est {{glossary_sidebar_link "Résultat à atteindre dans le futur" "RESULTS_ONGOING"}}.

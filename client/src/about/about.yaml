@@ -12,7 +12,7 @@ principle_1_name:
 
 principle_1_desc:
   transform: [handlebars, markdown]
-  en: GC InfoBase facilitates the analysis of previously hard to access information by aligning data from various public reports into a consistent framework based on Volume II of the {{gl_tt "Public Accounts" "PA"}}. We help "connect the dots".
+  en: GC InfoBase facilitates the analysis of previously hard to access information by aligning data from various public reports into a consistent framework based on Volume II of the {{gl_sidebar_link "Public Accounts" "PA"}}. We help "connect the dots".
   fr: L'InfoBase du GC facilite l'analyse de l'information, auparavant difficile d'accès, en regroupant les données de divers rapports publics dans un cadre uniforme reposant sur le volume II des Comptes publics. Elle permet de faire le lien entre les différents éléments.
 
 principle_2_name:
@@ -104,11 +104,11 @@ our_data_sub_title_1:
 our_data_sub_text_1:
   transform: [handlebars, markdown]
   en: |
-    We rely on several governmental reports such as the {{gl_tt "Public Accounts" "PA"}}, the {{gl_tt "Estimates" "EST_PROC"}}, {{gl_tt "Departmental Plans" "DP"}}, and {{gl_tt "Departmental Results Reports" "DRR"}}. A full listing can be found on our [Datasets page](#metadata).
+    We rely on several governmental reports such as the {{gl_sidebar_link "Public Accounts" "PA"}}, the {{gl_sidebar_link "Estimates" "EST_PROC"}}, {{gl_sidebar_link "Departmental Plans" "DP"}}, and {{gl_sidebar_link "Departmental Results Reports" "DRR"}}. A full listing can be found on our [Datasets page](#metadata).
 
     GC InfoBase rolls up available datasets to provide users with a clear picture of government-wide data with a focus on finances and results. Users can easily drill down to get a similar view for individual departments and even for specific programs.
   fr: |
-    Nous comptons sur plusieurs rapports gouvernementaux, tels que les {{gl_tt "Comptes publics" "PA"}}, les {{gl_tt "budgets des dépenses" "EST_PROC"}}, les {{gl_tt "plans ministériels" "DP"}} et les {{gl_tt "rapports financiers trimestriels" "DRR"}}. 
+    Nous comptons sur plusieurs rapports gouvernementaux, tels que les {{gl_sidebar_link "Comptes publics" "PA"}}, les {{gl_sidebar_link "budgets des dépenses" "EST_PROC"}}, les {{gl_sidebar_link "plans ministériels" "DP"}} et les {{gl_sidebar_link "rapports financiers trimestriels" "DRR"}}. 
     Vous trouverez la liste complète dans la page [Données](#metadata).
 
     L'InfoBase du GC regroupe les ensembles de données disponibles pour donner à l'utilisateur une image claire des dépenses de l'administration publique, en mettant l'accent sur les finances et les résultats. Grâce au menu déroulant, l'utilisateur peut facilement obtenir une image similaire pour chacun des ministères ou même pour un programme précis.
@@ -174,13 +174,13 @@ behind_scenes_sub_title_2:
 behind_scenes_sub_text_2:
   transform: [handlebars, markdown]
   en: |
-    Whenever possible, we align the information on GC InfoBase to the universe of organizations and concepts that are presented in Volume II of the {{gl_tt "Public Accounts" "PA"}}. As a result, organizations that are presented separately in other reports may be grouped together on GC InfoBase to match the Public Accounts.
+    Whenever possible, we align the information on GC InfoBase to the universe of organizations and concepts that are presented in Volume II of the {{gl_sidebar_link "Public Accounts" "PA"}}. As a result, organizations that are presented separately in other reports may be grouped together on GC InfoBase to match the Public Accounts.
 
     GC InfoBase may deviate from the Public Accounts in cases where a legal entity is dissolved and replaced by a new entity that inherits its resources or functions. Organizations may be joined to preserve trend data, even if those organizations are presented separately in the Public Accounts.
 
     At times we may deviate from official reports in subtle ways to improve accessibility. For example, GC InfoBase preferentially displays the applied title of organizations, as opposed to their legal titles which are used in the Public Accounts.
   fr: |
-    Dans la mesure du possible, nous faisons en sorte que les renseignements de l'InfoBase du GC correspondent à l'univers d’organisations et de concepts du volume II des {{gl_tt "Comptes publics" "PA"}}. Ainsi, les organisations répertoriées autrement dans divers rapports peuvent être intégrées dans l'InfoBase du GC de la façon décrite dans les Comptes publics.
+    Dans la mesure du possible, nous faisons en sorte que les renseignements de l'InfoBase du GC correspondent à l'univers d’organisations et de concepts du volume II des {{gl_sidebar_link "Comptes publics" "PA"}}. Ainsi, les organisations répertoriées autrement dans divers rapports peuvent être intégrées dans l'InfoBase du GC de la façon décrite dans les Comptes publics.
 
     L'InfoBase du GC peut diverger des Comptes publics dans les cas où une entité juridique est dissoute et remplacée par une nouvelle entité qui reprend ses ressources ou ses fonctions. Des organisations peuvent être regroupées pour préserver les données sur les tendances, même si ces organisations figurent séparément dans les Comptes publics.
 

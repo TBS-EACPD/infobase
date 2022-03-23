@@ -5,9 +5,9 @@ internal_service_panel_title:
 internal_service_panel_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, **{{fmt_percentage1 isc_fte_pct}}** of {{gl_tt "employees" "FTE"}} in {{subject.name}} worked for {{gl_tt "internal service" "INT_SERVICES"}} programs. In comparison, government as a whole uses **{{fmt_percentage1 gov_isc_fte_pct}}** of its workforce for internal services.
+    In {{pa_last_year}}, **{{fmt_percentage1 isc_fte_pct}}** of {{glossary_sidebar_link "employees" "FTE"}} in {{subject.name}} worked for {{glossary_sidebar_link "internal service" "INT_SERVICES"}} programs. In comparison, government as a whole uses **{{fmt_percentage1 gov_isc_fte_pct}}** of its workforce for internal services.
   fr: |
-    En {{pa_last_year}}, **{{fmt_percentage1 isc_fte_pct}}** des {{gl_tt "employés" "FTE"}} dans l'organisation {{subject.name}} travaillaient pour des programmes de {{gl_tt "services internes" "INT_SERVICES"}}. En comparaison, {{fmt_percentage1 gov_isc_fte_pct}} du personnel de le gouvernement travaillaient pour des programmes de services internes.
+    En {{pa_last_year}}, **{{fmt_percentage1 isc_fte_pct}}** des {{glossary_sidebar_link "employés" "FTE"}} dans l'organisation {{subject.name}} travaillaient pour des programmes de {{glossary_sidebar_link "services internes" "INT_SERVICES"}}. En comparaison, {{fmt_percentage1 gov_isc_fte_pct}} du personnel de le gouvernement travaillaient pour des programmes de services internes.
 
 other_programs:
   en: Other programs

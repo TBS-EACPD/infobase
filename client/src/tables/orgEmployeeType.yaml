@@ -1,10 +1,10 @@
 orgEmployeeType_short:
   transform: [handlebars,embeded-markdown,markdown ]
   en: |
-    This table presents the {{gl_tt "active" "ACTIV_PEOPLE"}} Government of Canada employee population by {{gl_tt "Employee Type" "ETYPE_PEOPLE"}} from {{ppl_last_year_5}} to {{ppl_last_year}}.
+    This table presents the {{gl_sidebar_link "active" "ACTIV_PEOPLE"}} Government of Canada employee population by {{gl_sidebar_link "Employee Type" "ETYPE_PEOPLE"}} from {{ppl_last_year_5}} to {{ppl_last_year}}.
     This information is sourced from the Regional and Phoenix Pay Systems as of March 31 of each fiscal year.
   fr: |
-    Ce tableau présente le {{gl_tt "relevé des effectifs actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon le {{gl_tt "type d’employé" "ETYPE_PEOPLE"}} de {{ppl_last_year_5}} à {{ppl_last_year}}. 
+    Ce tableau présente le {{gl_sidebar_link "relevé des effectifs actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon le {{gl_sidebar_link "type d’employé" "ETYPE_PEOPLE"}} de {{ppl_last_year_5}} à {{ppl_last_year}}. 
     Ces renseignements proviennent des systèmes de paye regional et Phénix au 31 mars de chaque exercice financier.
 
 orgEmployeeType:

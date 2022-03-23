@@ -1,9 +1,9 @@
 orgVoteStatPa_short:
   transform: [handlebars,markdown]
   en: |
-   Using {{gl_tt "Public Accounts" "PA"}} data, this table presents net budgetary {{gl_tt "authorities" "AUTH"}} and {{gl_tt "expenditures" "BUD_EXP"}} by {{gl_tt "vote" "VOTED"}} and {{gl_tt "statutory" "STAT"}} items for {{pa_last_year_5}} to {{pa_last_year}}.
+   Using {{gl_sidebar_link "Public Accounts" "PA"}} data, this table presents net budgetary {{gl_sidebar_link "authorities" "AUTH"}} and {{gl_sidebar_link "expenditures" "BUD_EXP"}} by {{gl_sidebar_link "vote" "VOTED"}} and {{gl_sidebar_link "statutory" "STAT"}} items for {{pa_last_year_5}} to {{pa_last_year}}.
   fr: |
-   Selon les données des {{gl_tt "Comptes publics" "PA"}}, ce tableau présente les {{gl_tt "autorisations" "AUTH"}} et {{gl_tt "dépenses budgétaires" "BUD_EXP"}} nettes par {{gl_tt "crédit" "VOTED"}} et par {{gl_tt "poste législatifs" "STAT"}} pour {{pa_last_year_5}} à {{pa_last_year}}.
+   Selon les données des {{gl_sidebar_link "Comptes publics" "PA"}}, ce tableau présente les {{gl_sidebar_link "autorisations" "AUTH"}} et {{gl_sidebar_link "dépenses budgétaires" "BUD_EXP"}} nettes par {{gl_sidebar_link "crédit" "VOTED"}} et par {{gl_sidebar_link "poste législatifs" "STAT"}} pour {{pa_last_year_5}} à {{pa_last_year}}.
 
 orgVoteStatPa:
   transform: [handlebars,markdown]

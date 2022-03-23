@@ -630,42 +630,28 @@ HandlebarsWithPrototypeAccess.registerHelper("gl", function glossary_link(key) {
   return new HandlebarsWithPrototypeAccess.SafeString(str);
 });
 
-HandlebarsWithPrototypeAccess.registerHelper(
-  "gl_tt",
-  function glossary_tooltip(display, key) {
-    const glos_item = glossaryEntryStore.lookup(key);
-    return new HandlebarsWithPrototypeAccess.SafeString(
-      `<button 
-        class="nowrap glossary-sidebar-link" 
-        data-ibtt-glossary-key="${key}" 
-        aria-label="${trivial_text_maker("open_glossary_definition", {
-          display: display,
-          title: glos_item.title,
-        })}"
-        data-toggle="glossary_sidebar"
-      >
-        ${display}
-      </button>`
-    );
-  }
-);
-
-HandlebarsWithPrototypeAccess.registerHelper("gl_def", function (key) {
+function glossary_sidebar_link(display, key) {
   const glos_item = glossaryEntryStore.lookup(key);
-  var str = glos_item.get_compiled_definition();
-  // SafeString is used to avoid having to use the [HandlebarsWithPrototypeAccess triple bracket syntax](http://handlebarsjs.com/#html_escaping)
-  return new HandlebarsWithPrototypeAccess.SafeString(str);
-});
-
+  return new HandlebarsWithPrototypeAccess.SafeString(
+    `<button 
+      class="nowrap glossary-sidebar-link" 
+      data-ibtt-glossary-key="${key}" 
+      aria-label="${trivial_text_maker("open_glossary_definition", {
+        display: display,
+        title: glos_item.title,
+      })}"
+      data-toggle="glossary_sidebar"
+    >
+      ${display}
+    </button>`
+  );
+}
 HandlebarsWithPrototypeAccess.registerHelper(
-  "gl_title_and_link",
-  function (key) {
-    const glos_item = glossaryEntryStore.lookup(key);
-    const str = `<a href="${glossary_href(key)}">${glos_item.title}</a>`;
-    // SafeString is used to avoid having to use the [HandlebarsWithPrototypeAccess triple bracket syntax](http://handlebarsjs.com/#html_escaping)
-    return new HandlebarsWithPrototypeAccess.SafeString(str);
-  }
+  "gl_sidebar_link",
+  glossary_sidebar_link
 );
+// gl_tt is a legacy shorthand, don't use it! Need to keep it around because it appears appears in a few places in /data/footnotes.csv, need to get that cleaned upstream
+HandlebarsWithPrototypeAccess.registerHelper("gl_tt", glossary_sidebar_link);
 
 HandlebarsWithPrototypeAccess.registerHelper("gl_title", function (key) {
   const glos_item = glossaryEntryStore.lookup(key);

@@ -112,22 +112,22 @@ treemap_instructions:
    Organizations are grouped by ministerial portfolio, and smaller organizations are grouped together for ease of viewing.
    
     To get started, choose from one of the following exploration perspectives, then select a single year or a two-year period to compare:
-    * By **Program Spending** shows the breakdown of federal organizations by total {{gl_tt "expenditures" "EXP"}}. Boxes can be coloured by expenditure amounts or by FTEs.
-    * By **Total Employees** shows the breakdown of federal organizations by total {{gl_tt "Full-Time Equivalents (FTE)" "FTE"}}. Boxes can be coloured by expenditure amounts or by FTEs.
-    * By **Transfer Payments** shows the breakdown of federal organizations by total {{gl_tt "Transfer Payments" "TP"}}. You can filter the data by {{gl_tt "grants" "GRANT_TP"}} or a {{gl_tt "contributions" "CONT_TP"}}.
-    * By **Expenditures by Vote / Statutory type** shows the breakdown of federal organizations by total expenditures. You can filter the data by {{gl_tt "Vote" "VOTED"}} or {{gl_tt "Statutory" "STAT_EXP"}} items.
-    * By **Expenditures by Standard Object** shows total expenditures by {{gl_tt "Standard Object" "SOBJ"}}. You can filter the data by Standard Object category.
+    * By **Program Spending** shows the breakdown of federal organizations by total {{gl_sidebar_link "expenditures" "EXP"}}. Boxes can be coloured by expenditure amounts or by FTEs.
+    * By **Total Employees** shows the breakdown of federal organizations by total {{gl_sidebar_link "Full-Time Equivalents (FTE)" "FTE"}}. Boxes can be coloured by expenditure amounts or by FTEs.
+    * By **Transfer Payments** shows the breakdown of federal organizations by total {{gl_sidebar_link "Transfer Payments" "TP"}}. You can filter the data by {{gl_sidebar_link "grants" "GRANT_TP"}} or a {{gl_sidebar_link "contributions" "CONT_TP"}}.
+    * By **Expenditures by Vote / Statutory type** shows the breakdown of federal organizations by total expenditures. You can filter the data by {{gl_sidebar_link "Vote" "VOTED"}} or {{gl_sidebar_link "Statutory" "STAT_EXP"}} items.
+    * By **Expenditures by Standard Object** shows total expenditures by {{gl_sidebar_link "Standard Object" "SOBJ"}}. You can filter the data by Standard Object category.
 
   fr: |
     Cliquez sur l'une des cases ci-dessous pour comparer visuellement les dépenses des organisations et le nombre de personnes qu'elles emploient.
     Les organisations sont regroupées par portefeuille ministériel, et les plus petites sont regroupées pour en faciliter la consultation.
 
     Pour commencer, choisissez l’une des possibilités d’exploration suivantes puis choisissez une année ou une période de deux ans pour effectuer la comparaison :
-    * **« Dépenses de programmes »** affiche la ventilation des organisations fédérales selon leurs {{gl_tt "dépenses" "EXP"}} totales. Les cases peuvent être coloriées par montant des dépenses ou par ETP.
-    * **« Nombre total d'employés »** affiche la ventilation des organisations fédérales selon le {{gl_tt "nombre total d'équivalents temps plein (ETP)" "FTE"}}. Les cases peuvent être coloriées par montant des dépenses ou par ETP.
-    * **« Paiements de transfert »** affiche la ventilation des organisations fédérales selon le total de leurs {{gl_tt "paiements de transfert" "TP"}}. Vous pouvez filtrer les données par subventions ou contributions.
-    * **« Dépenses par crédit / par loi »** affiche la ventilation des organisations fédérales selon leurs dépenses totales. Vous pouvez filtrer les données par {{gl_tt "crédit" "VOTED"}} ou {{gl_tt "poste législatif" "STAT_EXP"}}.
-    * **« Dépenses par article courant »** affiche les dépenses totales par {{gl_tt "article courant" "SOBJ"}}. Vous pouvez filtrer les données par catégorie d'objets courants.
+    * **« Dépenses de programmes »** affiche la ventilation des organisations fédérales selon leurs {{gl_sidebar_link "dépenses" "EXP"}} totales. Les cases peuvent être coloriées par montant des dépenses ou par ETP.
+    * **« Nombre total d'employés »** affiche la ventilation des organisations fédérales selon le {{gl_sidebar_link "nombre total d'équivalents temps plein (ETP)" "FTE"}}. Les cases peuvent être coloriées par montant des dépenses ou par ETP.
+    * **« Paiements de transfert »** affiche la ventilation des organisations fédérales selon le total de leurs {{gl_sidebar_link "paiements de transfert" "TP"}}. Vous pouvez filtrer les données par subventions ou contributions.
+    * **« Dépenses par crédit / par loi »** affiche la ventilation des organisations fédérales selon leurs dépenses totales. Vous pouvez filtrer les données par {{gl_sidebar_link "crédit" "VOTED"}} ou {{gl_sidebar_link "poste législatif" "STAT_EXP"}}.
+    * **« Dépenses par article courant »** affiche les dépenses totales par {{gl_sidebar_link "article courant" "SOBJ"}}. Vous pouvez filtrer les données par catégorie d'objets courants.
 
 skip_to_main_content:
   en: "Skip to main content"

@@ -4,9 +4,9 @@ dept_related_tags_title:
 dept_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    Programs under **{{subject.name}}** have been {{gl_tt "tagged" "TAG"}} under the following areas of interest
+    Programs under **{{subject.name}}** have been {{glossary_sidebar_link "tagged" "TAG"}} under the following areas of interest
   fr: |
-    Les Programmes sous **{{subject.name}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
+    Les Programmes sous **{{subject.name}}** ont été {{glossary_sidebar_link "étiquetés" "TAG"}} comme relevant des sujets suivants
 
 program_tags_title:
   en: Tags for this Program
@@ -14,9 +14,9 @@ program_tags_title:
 program_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    **{{subject.name}}** has been {{gl_tt "tagged" "TAG"}} with the following areas of interest
+    **{{subject.name}}** has been {{glossary_sidebar_link "tagged" "TAG"}} with the following areas of interest
   fr: |
-    Le Programme **{{subject.name}}** a été {{gl_tt "étiqueté" "TAG"}} aux domaines d'intérêt suivants
+    Le Programme **{{subject.name}}** a été {{glossary_sidebar_link "étiqueté" "TAG"}} aux domaines d'intérêt suivants
 
 crso_tags_title:
   en: Tags for this Core Responsibility
@@ -24,9 +24,9 @@ crso_tags_title:
 crso_is_tagged_with_following:
   transform: [handlebars,markdown]
   en: |
-    Programs under **{{subject.name}}** have been {{gl_tt "tagged" "TAG"}} under the following areas of interest
+    Programs under **{{subject.name}}** have been {{glossary_sidebar_link "tagged" "TAG"}} under the following areas of interest
   fr: |
-    Les Programmes sous **{{subject.name}}** ont été {{gl_tt "étiquetés" "TAG"}} comme relevant des sujets suivants
+    Les Programmes sous **{{subject.name}}** ont été {{glossary_sidebar_link "étiquetés" "TAG"}} comme relevant des sujets suivants
 
 tag_progs_by_dept_title:
   en: Which organizations have programs under this tag? 

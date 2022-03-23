@@ -1,10 +1,10 @@
 orgVoteStatEstimates_short:
   transform: [handlebars,embeded-markdown, markdown]
   en: |
-   This table presents net budgetary {{gl_tt "authorities" "AUTH"}} ({{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}}) by {{gl_tt "Estimates documents" "EST_DOC"}} and by {{gl_tt "adjustments and transfers" "ADJUS"}}.
+   This table presents net budgetary {{gl_sidebar_link "authorities" "AUTH"}} ({{gl_sidebar_link "voted" "VOTED"}} and {{gl_sidebar_link "statutory" "STAT"}}) by {{gl_sidebar_link "Estimates documents" "EST_DOC"}} and by {{gl_sidebar_link "adjustments and transfers" "ADJUS"}}.
   
   fr: |
-   Ce tableau présente les {{gl_tt "autorisations" "AUTH"}} ({{gl_tt "votées" "VOTED"}} and {{gl_tt "législatives" "STAT"}}) par {{gl_tt "documents budgétaires" "EST_DOC"}} et par {{gl_tt "réajustements et transferts" "ADJUS"}}.
+   Ce tableau présente les {{gl_sidebar_link "autorisations" "AUTH"}} ({{gl_sidebar_link "votées" "VOTED"}} and {{gl_sidebar_link "législatives" "STAT"}}) par {{gl_sidebar_link "documents budgétaires" "EST_DOC"}} et par {{gl_sidebar_link "réajustements et transferts" "ADJUS"}}.
 
 
 orgVoteStatEstimates:
@@ -20,7 +20,7 @@ orgVoteStatEstimates:
 
 
    **Notes**:
-   * Further details on the composition of Main Estimates may be found in Part I of the Estimates process ({{gl_tt "Government Expenditure Plan" "PART1"}}).
+   * Further details on the composition of Main Estimates may be found in Part I of the Estimates process ({{gl_sidebar_link "Government Expenditure Plan" "PART1"}}).
    * The tabling of an estimate does not guarantee its approval by Parliament. Only after an appropriation act is introduced to Parliament, approved and granted royal assent, does it become law.
    * Note that for comparison purposes, voted and statutory items' labels in this table were modified to align with the most recently published estimates document. 
    * Please note that allocations from Treasury Board Vote 40, Budget 2018 Implementation, during 2018-19 are reported on GC InfoBase [Budget Implementation Votes](https://www.tbs-sct.gc.ca/ems-sgd/edb-bdd/index-eng.html#budget-tracker/budget-measure/overview/budget-2018) page          
@@ -29,15 +29,15 @@ orgVoteStatEstimates:
    {{{gt "orgVoteStatEstimates_short"}}}
 
 
-   Les dépenses effectuées par le gouvernement doivent être autorisées par le Parlement. Cette {{gl_tt "approbation" "AUTH"}} est donnée de deux façons :
-   * {{gl_tt "lois annuelles de crédits" "APP_ACT"}} pour les montants {{gl_tt "votés" "VOTED"}}; 
-   * autres autorisations particulières prévues par la loi pour les paiements {{gl_tt "législatifs" "STAT"}}. 
+   Les dépenses effectuées par le gouvernement doivent être autorisées par le Parlement. Cette {{gl_sidebar_link "approbation" "AUTH"}} est donnée de deux façons :
+   * {{gl_sidebar_link "lois annuelles de crédits" "APP_ACT"}} pour les montants {{gl_sidebar_link "votés" "VOTED"}}; 
+   * autres autorisations particulières prévues par la loi pour les paiements {{gl_sidebar_link "législatifs" "STAT"}}. 
    Les documents budgétaires sont préparés pour appuyer les lois de crédits.
 
 
    **Remarques:**
    * De plus amples détails sur la composition du Budget principal des dépenses se trouvent dans la partie I du processus budgétaire 
-   {{gl_tt "(Plan de dépenses du gouvernement)" "PART1"}}. 
+   {{gl_sidebar_link "(Plan de dépenses du gouvernement)" "PART1"}}. 
    * Le dépôt d'un budget des dépenses ne signifie pas qu'il est approuvé par le Parlement. Une loi de crédits n’entre en vigueur qu’après avoir été présentée 
    et dûment adoptée par le Parlement, et reçue la sanction royale. 
    * Notez que, pour faciliter la comparaison des données entres des années différentes, les descriptions et les numéros des items votés et statutaires ont été modifiés afin qu'ils correspondent au document budgétaire le plus récemment publié. 

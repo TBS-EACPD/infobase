@@ -143,4 +143,4 @@ methodology:
 result_status_with_gl:
   transform: [handlebars]
   text: |
-    {{gl_tt text glossary_key}}
+    {{gl_sidebar_link text glossary_key}}
