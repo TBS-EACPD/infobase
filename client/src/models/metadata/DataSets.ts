@@ -1,5 +1,9 @@
 import _ from "lodash";
 
+// import/order seems to not behave well with `import type ...` lines right now,
+// VS code auto fixes to move the util_type import here on save, but the webpack linting complains about it
+// TODO there's some import/order + import type related PRs on the package right now, might be fixed soon, keep an eye out
+// eslint-disable-next-line import/order
 import type { PartialOn } from "src/types/util_types";
 
 import { create_text_maker } from "src/models/text";
