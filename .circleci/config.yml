@@ -298,10 +298,6 @@ jobs:
           name: server mongod
           command: (cd server && npm run mongod)
           background: true
-      - run:
-          name: start_api_server
-          command: (cd server && npm run start)
-          background: true
 
       - run: (cd server && npm run snapshot_tests)
 
