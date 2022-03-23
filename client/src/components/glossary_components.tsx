@@ -10,7 +10,7 @@ import { IconQuestion } from "src/icons/icons";
 import { glossary_href } from "src/link_utils";
 import { backgroundColor, primaryColor } from "src/style_constants/index";
 
-interface GlossaryTooltipWrapperProps {
+interface GlossarySidebarLinkWrapperProps {
   id: string;
   children?: React.ReactNode;
   no_bottom_border?: boolean;
@@ -29,11 +29,11 @@ interface GlossaryItemProps {
   item_class: string;
 }
 
-export const GlossaryTooltipWrapper = ({
+export const GlossarySidebarLinkWrapper = ({
   id,
   children,
   no_bottom_border,
-}: GlossaryTooltipWrapperProps) => {
+}: GlossarySidebarLinkWrapperProps) => {
   const glos_item = glossaryEntryStore.lookup(id);
   return is_a11y_mode ? (
     <a
@@ -64,7 +64,7 @@ export const GlossaryIcon = ({
   icon_color,
   icon_alt_color = primaryColor,
 }: GlossaryIconProps) => (
-  <GlossaryTooltipWrapper no_bottom_border={true} id={id}>
+  <GlossarySidebarLinkWrapper no_bottom_border={true} id={id}>
     {is_a11y_mode ? (
       alternate_text ? (
         alternate_text
@@ -79,7 +79,7 @@ export const GlossaryIcon = ({
         svg_style={{ verticalAlign: "-0.3em" }}
       />
     )}
-  </GlossaryTooltipWrapper>
+  </GlossarySidebarLinkWrapper>
 );
 
 export const GlossaryItem = ({
@@ -87,9 +87,9 @@ export const GlossaryItem = ({
   alternate_text,
   item_class,
 }: GlossaryItemProps) => (
-  <GlossaryTooltipWrapper id={id}>
+  <GlossarySidebarLinkWrapper id={id}>
     <span className={item_class}>
       {alternate_text ? alternate_text : glossaryEntryStore.lookup(id).title}
     </span>
-  </GlossaryTooltipWrapper>
+  </GlossarySidebarLinkWrapper>
 );

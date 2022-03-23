@@ -50,7 +50,7 @@
   color: $textLightColor;
 
   // override glossary icon size
-  & > .glossary-tooltip-link > svg {
+  & > * > svg {
     width: 1.5em !important;
     height: 2em !important;
   }

@@ -10,7 +10,7 @@ choose_explore_point:
 tag_nav_intro_text:
   transform: [handlebars, markdown]
   en: |
-    The Explorer allows you to navigate quickly and easily through financial and human resources information on government operations using {{gl_tt "Tags" "TAG"}} — keywords that map financial, human resources and results information to specific areas of interest.   
+    The Explorer allows you to navigate quickly and easily through financial and human resources information on government operations using {{gl_sidebar_link "Tags" "TAG"}} — keywords that map financial, human resources and results information to specific areas of interest.   
 
 
     **How to Navigate:**
@@ -22,7 +22,7 @@ tag_nav_intro_text:
     4. You can decide to explore the data based on what was actually spent ({{pa_last_year}} Actual Resources) or what is planned to be spent ({{planning_year_1}} Planned Resources).
 
   fr: |
-    L’Explorateur vous permet de naviguer rapidement et facilement dans les renseignements sur les ressources financières et humaines concernant les activités du gouvernement par l’utilisation {{gl_tt "d’étiquettes" "TAG"}} – des mot clés qui schématisent l’information sur les finances, les ressources humaines et les résultats dans des domaines d’intérêt particuliers.  
+    L’Explorateur vous permet de naviguer rapidement et facilement dans les renseignements sur les ressources financières et humaines concernant les activités du gouvernement par l’utilisation {{gl_sidebar_link "d’étiquettes" "TAG"}} – des mot clés qui schématisent l’information sur les finances, les ressources humaines et les résultats dans des domaines d’intérêt particuliers.  
 
 
     **Comment naviguer**

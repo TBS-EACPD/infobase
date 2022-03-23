@@ -13,7 +13,7 @@ crso_by_prog_exp_or_ftes:
   transform: [handlebars,markdown]
   en: |
    {{#if most_recent_top_1_name}}
-   In **{{pa_last_year}}**, {{gl_tt (pluralize most_recent_number_of_programs "program")  "PROG"}} fell under this {{gt "core_resp"}}
+   In **{{pa_last_year}}**, {{glossary_sidebar_link (pluralize most_recent_number_of_programs "program")  "PROG"}} fell under this {{gt "core_resp"}}
    {{#if is_fte}}
    with **{{most_recent_top_1_name}}** ({{fmt_big_int most_recent_top_1_value}} FTEs) being the largest in terms of employment,
    {{#if most_recent_top_2_name}} followed by **{{most_recent_top_2_name}}** ({{fmt_big_int most_recent_top_2_value}} FTEs). {{else}}. {{/if}}
@@ -25,7 +25,7 @@ crso_by_prog_exp_or_ftes:
 
 
    {{#if first_planning_year_top_1_name}}
-   In **{{planning_year_1}}**, {{gl_tt (pluralize first_planning_year_number_of_programs "program")  "PROG"}} will fall under this {{gt "core_resp"}}
+   In **{{planning_year_1}}**, {{glossary_sidebar_link (pluralize first_planning_year_number_of_programs "program")  "PROG"}} will fall under this {{gt "core_resp"}}
    {{#if is_fte}}
    with **{{first_planning_year_top_1_name}}** ({{fmt_big_int first_planning_year_top_1_value}} FTEs) being the largest in terms of employment,
    {{#if first_planning_year_top_2_name}} followed by **{{first_planning_year_top_2_name}}** ({{fmt_big_int first_planning_year_top_2_value}} FTEs). {{else}}. {{/if}}

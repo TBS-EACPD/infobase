@@ -5,12 +5,12 @@ orgEmployeeAvgAge_title:
 orgEmployeeAvgAge_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    This table presents the average age of the {{gl_tt "active employee" "ACTIV_PEOPLE"}} population from {{ppl_last_year_5}} to {{ppl_last_year}}. 
+    This table presents the average age of the {{gl_sidebar_link "active employee" "ACTIV_PEOPLE"}} population from {{ppl_last_year_5}} to {{ppl_last_year}}. 
     This information is sourced from the Regional Pay System (RPS) on March 31 
     (the last day of each fiscal year). All invalid age cases have been excluded from the average.
 
   fr: |
-    Ce tableau présente l’âge moyen de la population d’{{gl_tt "employés actifs" "ACTIV_PEOPLE"}} de {{ppl_last_year_5}} à {{ppl_last_year}}. 
+    Ce tableau présente l’âge moyen de la population d’{{gl_sidebar_link "employés actifs" "ACTIV_PEOPLE"}} de {{ppl_last_year_5}} à {{ppl_last_year}}. 
     Cette information est tirée du système régional de paye (SRP) au 31 mars (le dernier jour 
     de chaque exercice). Tous les cas d’âge non valides ont été exclus de la moyenne.
 

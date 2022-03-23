@@ -1,11 +1,11 @@
 orgEmployeeRegion_short:
   transform: [handlebars,embeded-markdown,markdown]
   en: |
-    This table presents the {{gl_tt "active" "ACTIV_PEOPLE"}} Government of Canada employee population by Geographic Region from {{ppl_last_year_5}} to {{ppl_last_year}}. 
+    This table presents the {{gl_sidebar_link "active" "ACTIV_PEOPLE"}} Government of Canada employee population by Geographic Region from {{ppl_last_year_5}} to {{ppl_last_year}}. 
     The **National Capital Region (NCR)** includes employees working in both Ottawa (Ontario) and Gatineau (Quebec). This information is sourced from the Regional and Phoenix Pay Systems as of March 31 of each fiscal year.
 
   fr: |
-    Ce tableau présente le {{gl_tt "relevé des effectifs actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon la région géographique de {{ppl_last_year_5}} à {{ppl_last_year}}. La **région de la capitale nationale (RCN)** inclut à la fois les 
+    Ce tableau présente le {{gl_sidebar_link "relevé des effectifs actifs" "ACTIV_PEOPLE"}} du gouvernement du Canada selon la région géographique de {{ppl_last_year_5}} à {{ppl_last_year}}. La **région de la capitale nationale (RCN)** inclut à la fois les 
     employés qui travaillent à Ottawa (Ontario) et ceux qui travaillent à Gatineau (Québec).
     Ces renseignements proviennent des systèmes de paye regional et Phénix au 31 mars de chaque exercice financier.
 

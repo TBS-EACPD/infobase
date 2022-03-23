@@ -1,10 +1,10 @@
 programVoteStat_short: 
   transform: [handlebars,markdown]
   en: |
-   Using data from the  {{gl_tt "Central Financial Management Reporting System (CFMRS)" "CFMRS"}}, this table presents {{gl_tt "Program" "PROG"}} {{gl_tt "expenditures" "BUD_EXP"}} by authority type ({{gl_tt "voted" "VOTED"}} and {{gl_tt "statutory" "STAT"}}) for {{pa_last_year}}.
+   Using data from the  {{gl_sidebar_link "Central Financial Management Reporting System (CFMRS)" "CFMRS"}}, this table presents {{gl_sidebar_link "Program" "PROG"}} {{gl_sidebar_link "expenditures" "BUD_EXP"}} by authority type ({{gl_sidebar_link "voted" "VOTED"}} and {{gl_sidebar_link "statutory" "STAT"}}) for {{pa_last_year}}.
 
   fr: |
-   Ce tableau présente les {{gl_tt "dépenses" "BUD_EXP"}} de {{gl_tt "programme" "PROG"}} par type d’autorisation ({{gl_tt "votées" "VOTED"}} et {{gl_tt "législatives" "STAT"}}) pour {{pa_last_year}}, selon les données du {{gl_tt "Système central de gestion des rapports financiers (SCGRF)" "CFMRS"}}.
+   Ce tableau présente les {{gl_sidebar_link "dépenses" "BUD_EXP"}} de {{gl_sidebar_link "programme" "PROG"}} par type d’autorisation ({{gl_sidebar_link "votées" "VOTED"}} et {{gl_sidebar_link "législatives" "STAT"}}) pour {{pa_last_year}}, selon les données du {{gl_sidebar_link "Système central de gestion des rapports financiers (SCGRF)" "CFMRS"}}.
 
 programVoteStat: 
   transform: [handlebars,markdown]

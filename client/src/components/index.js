@@ -27,7 +27,7 @@ export { SelectAllControl } from "./SelectAllControl";
 export {
   GlossaryIcon,
   GlossaryItem,
-  GlossaryTooltipWrapper,
+  GlossarySidebarLinkWrapper,
 } from "./glossary_components";
 export { CardList } from "./CardList/CardList";
 export { LabeledTable } from "./LabeledTable/LabeledTable";

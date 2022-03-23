@@ -62,9 +62,9 @@ ochro_includes_excludes_en:
     <div class='embeded-markdown col-md-6'>
     **Included in this information are:** 
 
-    * Active {{gl_tt "full-time" "FULL_PEOPLE"}} and {{gl_tt "part-time" "PART_PEOPLE"}} 
-    employees of all employment tenures ({{gl_tt "Indeterminate" 'INDET_PEOPLE'}}, 
-    {{gl_tt "Term" "TERM_PEOPLE"}}, {{gl_tt "Casual" "CASUAL_PEOPLE"}} and {{gl_tt "Student" "STUD_PEOPLE"}})
+    * Active {{gl_sidebar_link "full-time" "FULL_PEOPLE"}} and {{gl_sidebar_link "part-time" "PART_PEOPLE"}} 
+    employees of all employment tenures ({{gl_sidebar_link "Indeterminate" 'INDET_PEOPLE'}}, 
+    {{gl_sidebar_link "Term" "TERM_PEOPLE"}}, {{gl_sidebar_link "Casual" "CASUAL_PEOPLE"}} and {{gl_sidebar_link "Student" "STUD_PEOPLE"}})
     * Governor-in-Council appointees
     * Deputy Ministers
     * Federal Judges 
@@ -83,7 +83,7 @@ ochro_includes_excludes_en:
 
 
     **Notes**: 
-    1. Employee Headcounts differ from {{gl_tt "Full-Time Equivalents (FTEs)" "FTE"}} for several reasons: 
+    1. Employee Headcounts differ from {{gl_sidebar_link "Full-Time Equivalents (FTEs)" "FTE"}} for several reasons: 
        * **Employee Headcounts** is a count of employees of all tenures (Indeterminate, Term, Casual and Student) as well as Governor-in-Council 
        appointees, deputy ministers, and federal judges as of March 31 of each year. Employees on leave without pay are not included. 
        The counts include employees working in organizations in Schedules I, IV, and V of the _Financial Administration Act_. 
@@ -109,8 +109,8 @@ ochro_includes_excludes_fr:
   text: |
     <div class='embeded-markdown col-md-6'>
     Renseignements inclus :
-    * les {{gl_tt "employés à plein temps" "FULL_PEOPLE"}} et à {{gl_tt "temps partiel" "PART_PEOPLE"}}, quelle que soit la période d’emploi (nommés pour une période {{gl_tt "indéterminée" 'INDET_PEOPLE'}}, 
-      nommés pour une {{gl_tt "période déterminée" "TERM_PEOPLE"}}, {{gl_tt "occasionnels" "CASUAL_PEOPLE"}} et {{gl_tt "étudiants" "STUD_PEOPLE"}})
+    * les {{gl_sidebar_link "employés à plein temps" "FULL_PEOPLE"}} et à {{gl_sidebar_link "temps partiel" "PART_PEOPLE"}}, quelle que soit la période d’emploi (nommés pour une période {{gl_sidebar_link "indéterminée" 'INDET_PEOPLE'}}, 
+      nommés pour une {{gl_sidebar_link "période déterminée" "TERM_PEOPLE"}}, {{gl_sidebar_link "occasionnels" "CASUAL_PEOPLE"}} et {{gl_sidebar_link "étudiants" "STUD_PEOPLE"}})
     * les personnes nommées par le gouverneur en conseil
     * les sous-ministres
     * les juges fédéraux
@@ -126,7 +126,7 @@ ochro_includes_excludes_fr:
     </div>
     
     **Remarques:**
-    1. Le relevé des effectifs diffère du {{gl_tt "nombre d’équivalents temps plein (ETP)" "FTE"}} pour plusieurs raisons :  
+    1. Le relevé des effectifs diffère du {{gl_sidebar_link "nombre d’équivalents temps plein (ETP)" "FTE"}} pour plusieurs raisons :  
      * Le **relevé des effectifs** comprend toutes les personnes à l’emploi des organismes figurant aux annexes I, IV et V de la _Loi sur la gestion des finances publiques_, 
      quelle que soit la période d’emploi (nommés pour une période indéterminée, nommés pour une période déterminée, occasionnels et étudiants), de même que 
      les personnes nommées par le gouverneur en conseil, les sous-ministres et les juges fédéraux, au 31 mars de chaque année. 

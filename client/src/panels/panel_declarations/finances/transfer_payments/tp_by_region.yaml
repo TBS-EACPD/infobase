@@ -6,7 +6,7 @@ tp_by_region_title:
 tp_by_region_text: 
   transform: [handlebars, markdown]
   en: |
-    In **{{tp_region_last_year}}**, **{{#if is_gov}}the government{{else}}{{subject.name}}{{/if}}** paid out **{{fmt_compact1_written subject_total_value}}** in {{gl_tt "transfer payments" "TP"}}. **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{#if is_gov}}the government{{else}}{{subject.name}}{{/if}}'s transfer payments.
+    In **{{tp_region_last_year}}**, **{{#if is_gov}}the government{{else}}{{subject.name}}{{/if}}** paid out **{{fmt_compact1_written subject_total_value}}** in {{glossary_sidebar_link "transfer payments" "TP"}}. **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** went to recipients in **{{largest_total_prov}}**, making it the region receiving the largest total share of {{#if is_gov}}the government{{else}}{{subject.name}}{{/if}}'s transfer payments.
 
     {{#if show_per_capita_data}}
       When accounting for population, the province or territory with the largest per capita transfer payment value in **{{tp_region_last_year}}** was **{{largest_per_capita_prov}}**, at **{{#compare largest_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_per_capita_value}}{{else}}less than $0.01{{/compare}} per capita**.
@@ -15,7 +15,7 @@ tp_by_region_text:
       {{/if}}
     {{/if}}
   fr: |
-    En **{{tp_region_last_year}}**, **{{#if is_gov}}le gouvernement{{else}}{{le_dept subject}}{{/if}}** a versé **{{fmt_compact1_written subject_total_value}}** en {{gl_tt "paiements de transfert" "TP"}}. Un montant de **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** a été versé aux bénéficiaires **{{de_largest_total_prov}}**, ce qui en fait la région qui reçoit la plus grande part des paiements de transfert {{#if is_gov}}du gouvernement{{else}}{{de_dept subject}}{{/if}}.
+    En **{{tp_region_last_year}}**, **{{#if is_gov}}le gouvernement{{else}}{{le_dept subject}}{{/if}}** a versé **{{fmt_compact1_written subject_total_value}}** en {{glossary_sidebar_link "paiements de transfert" "TP"}}. Un montant de **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})** a été versé aux bénéficiaires **{{de_largest_total_prov}}**, ce qui en fait la région qui reçoit la plus grande part des paiements de transfert {{#if is_gov}}du gouvernement{{else}}{{de_dept subject}}{{/if}}.
 
     {{#if show_per_capita_data}}
       Lorsque l'on prend en compte la population, la province ou le territoire, **{{le_largest_per_capita_prov}}** est celui qui a reçu le plus de paiements de transfert par habitant en **{{tp_region_last_year}}**, soit **{{#compare largest_per_capita_value 0.01 operator=">=" }}{{fmt_compact2_written largest_per_capita_value}}{{else}}moins de 0,01 ${{/compare}} par habitant**.

@@ -7,19 +7,19 @@ results_intro_text:
   transform: [handlebars,markdown]
   en: |
     Since April 2018, all organizations are using a results reporting structure based on the
-    {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}, consisting of a {{gl_tt "Departmental Results Framework" "DRF"}}
-    and a {{gl_tt "Program Inventory" "PI"}}.
+    {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}, consisting of a {{glossary_sidebar_link "Departmental Results Framework" "DRF"}}
+    and a {{glossary_sidebar_link "Program Inventory" "PI"}}.
     
-    Organizations are made up of {{gl_tt "Core Responsibilities" "CR"}} and {{gl_tt "Programs" "PROG"}} within each Core Responsibility. Core Responsibilities and Programs
-    have {{gl_tt "results" "RESULT"}}. Progress for each result is measured by one or more {{gl_tt "indicators" "IND_RESULT"}}, each of which has a target.
+    Organizations are made up of {{glossary_sidebar_link "Core Responsibilities" "CR"}} and {{glossary_sidebar_link "Programs" "PROG"}} within each Core Responsibility. Core Responsibilities and Programs
+    have {{glossary_sidebar_link "results" "RESULT"}}. Progress for each result is measured by one or more {{glossary_sidebar_link "indicators" "IND_RESULT"}}, each of which has a target.
   fr: |
     Depuis avril 2018, toutes les organisations utilisent une structure redditionnelle des résultats conforme à la 
     {{ext_link "Politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}, composée 
-    d’un {{gl_tt "Cadre ministériel des résultats" "DRF"}} et d’un {{gl_tt "Répertoire des programmes" "PI"}}.
+    d’un {{glossary_sidebar_link "Cadre ministériel des résultats" "DRF"}} et d’un {{glossary_sidebar_link "Répertoire des programmes" "PI"}}.
 
-    Les organisations ont des {{gl_tt "responsabilités essentielles" "CR"}} auxquelles des {{gl_tt "programmes" "PROG"}} sont rattachés.
-    Les responsabilités essentielles et les programmes donnent des {{gl_tt "résultats" "RESULT"}}. Pour chaque résultat, les progrès
-    sont mesurés à l'aide d'un ou de plusieurs {{gl_tt "indicateurs" "IND_RESULT"}}, chacun d'eux comportant une cible.
+    Les organisations ont des {{glossary_sidebar_link "responsabilités essentielles" "CR"}} auxquelles des {{glossary_sidebar_link "programmes" "PROG"}} sont rattachés.
+    Les responsabilités essentielles et les programmes donnent des {{glossary_sidebar_link "résultats" "RESULT"}}. Pour chaque résultat, les progrès
+    sont mesurés à l'aide d'un ou de plusieurs {{glossary_sidebar_link "indicateurs" "IND_RESULT"}}, chacun d'eux comportant une cible.
 results_intro_img_text:
   en: |
     Organizations are made up of Core Responsibilities and Programs within each Core Responsibility. Core Responsibilities and Programs
@@ -31,18 +31,18 @@ results_intro_img_text:
 reports_links_text:
   transform: [handlebars,markdown]
   en: |
-    The full text of all {{#if dp_url}}{{gl_tt "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}. {{/if}}{{#if drr_url}}{{gl_tt "Departmental Results Reports" "DRR"}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
+    The full text of all {{#if dp_url}}{{glossary_sidebar_link "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}. {{/if}}{{#if drr_url}}{{glossary_sidebar_link "Departmental Results Reports" "DRR"}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
   fr: |
-    Les documents complets des {{#if dp_url}}{{gl_tt "plans ministériels" "DP"}} se trouvent {{ext_link "içi" dp_url "liste des plans ministériels"}}. .{{/if}}{{#if drr_url}}Les {{gl_tt "rapports sur les résultats ministériels" "DRR"}} se trouvent {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
+    Les documents complets des {{#if dp_url}}{{glossary_sidebar_link "plans ministériels" "DP"}} se trouvent {{ext_link "içi" dp_url "liste des plans ministériels"}}. .{{/if}}{{#if drr_url}}Les {{glossary_sidebar_link "rapports sur les résultats ministériels" "DRR"}} se trouvent {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
 gba_plus_intro_text:
   transform: [handlebars,markdown]
   en: |
-    The federal government uses {{gl_tt "gender-based analysis plus" "GBA_PLUS"}} (GBA Plus) in the development of policies, programs and legislation.
-    Indicators from the most recent results reports, **2019-20**, have been marked as {{gl_tt "GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
+    The federal government uses {{glossary_sidebar_link "gender-based analysis plus" "GBA_PLUS"}} (GBA Plus) in the development of policies, programs and legislation.
+    Indicators from the most recent results reports, **2019-20**, have been marked as {{glossary_sidebar_link "GBA Plus" "GBA_PLUS_INDICATOR"}} where applicable.
     These indicators and their GBA Plus markings can be found on the pages for individual organizations.
   fr: |
-    L'{{gl_tt "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est utilisée par le gouvernement fédéral pour l'élaboration de politiques, de programmes et de lois. 
-    Dans les plus récents rapports sur les résultats (**2019-2020**), les indicateurs portent un marqueur {{gl_tt "ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
+    L'{{glossary_sidebar_link "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est utilisée par le gouvernement fédéral pour l'élaboration de politiques, de programmes et de lois. 
+    Dans les plus récents rapports sur les résultats (**2019-2020**), les indicateurs portent un marqueur {{glossary_sidebar_link "ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
     Ces indicateurs et le marquage ACS Plus se trouvent sur la page de chaque organisation.
 
 
@@ -53,7 +53,7 @@ dp_summary_text:
       In **{{year}}**, **{{fmt_big_int depts_with_dps}}** organizations are seeking to achieve **{{fmt_big_int dp_results}}** results, measured
       by **{{fmt_big_int dp_indicators}}** indicators. Assessed performance of planned results will be reported in **Fall {{tabling_year}}**.
     {{else}}
-      In its **{{year}}** {{gl_tt "Departmental Plan" "DP"}}, {{subject.name}} is seeking to achieve **{{fmt_big_int dp_results}}** results, measured
+      In its **{{year}}** {{glossary_sidebar_link "Departmental Plan" "DP"}}, {{subject.name}} is seeking to achieve **{{fmt_big_int dp_results}}** results, measured
       by **{{fmt_big_int dp_indicators}}** indicators. Assessed performance of planned results for **{{fmt_big_int num_crs}}** Core Responsibilities and **{{fmt_big_int num_programs}}** Programs will be reported
       in **Fall {{tabling_year}}**.
     {{/if}}
@@ -62,7 +62,7 @@ dp_summary_text:
       En **{{year}}**, **{{fmt_big_int depts_with_dps}}** organisations cherchent à atteindre **{{fmt_big_int dp_results}}**
       résultats, mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. On fera état du rendement des résultats escomptés à **l'automne {{tabling_year}}**.
     {{else}}
-      Dans son {{gl_tt "plan ministériel" "DP"}} de **{{year}}**, {{subject.name}} cherche à atteindre **{{fmt_big_int dp_results}}** résultats,
+      Dans son {{glossary_sidebar_link "plan ministériel" "DP"}} de **{{year}}**, {{subject.name}} cherche à atteindre **{{fmt_big_int dp_results}}** résultats,
       mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. On fera état du rendement des résultats escomptés
       pour **{{fmt_big_int num_crs}}** responsabilités essentielles et **{{fmt_big_int num_programs}}** programmes à **l'automne {{tabling_year}}**.
     {{/if}}
@@ -74,18 +74,18 @@ drr_summary_text:
     {{#if is_gov}}
       In **{{year}}**, **{{fmt_big_int depts_with_drrs}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
     {{else}}
-      In its **{{year}}** {{gl_tt "Departmental Results Report" "DRR"}}, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
+      In its **{{year}}** {{glossary_sidebar_link "Departmental Results Report" "DRR"}}, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
     {{/if}}
-    Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{gl_tt "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
+    Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{glossary_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
     based on the measured outcome of the indicator's target.
   fr: |
     {{#if is_gov}}
       En **{{year}}**, **{{fmt_big_int depts_with_drrs}}** organisations ont cherché à atteindre **{{fmt_big_int drr_results}}** résultats. 
       Les progrès vers l'atteinte de ces résultats ont été mesurés à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et
-      un {{gl_tt "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur selon la mesure du résultat prévu pour la cible de l'indicateur.
+      un {{glossary_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{else}}
-      Dans son {{gl_tt "rapport sur les résultats ministériel" "DRR"}} de **{{year}}**, {{subject.name}}
+      Dans son {{glossary_sidebar_link "rapport sur les résultats ministériel" "DRR"}} de **{{year}}**, {{subject.name}}
       a cherché à obtenir **{{fmt_big_int drr_results}}** résultats. On a mesuré les progrès vers l'atteinte de ces résultats
-      à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un {{gl_tt "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur
+      à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un {{glossary_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{/if}}
