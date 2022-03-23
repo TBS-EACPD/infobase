@@ -6,20 +6,20 @@ planned_actual_title:
 dept_planned_actual_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, {{subject.name}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{glossary_sidebar_link "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
+    In {{pa_last_year}}, {{subject.name}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{gl_sidebar_link "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
   fr: |
-    En {{pa_last_year}}, {{subject.name}} prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{glossary_sidebar_link "équivalents temps plein (ETP)" "FTE"}}. En fait, l'organisation a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.
+    En {{pa_last_year}}, {{subject.name}} prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{gl_sidebar_link "équivalents temps plein (ETP)" "FTE"}}. En fait, l'organisation a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.
 
 program_planned_actual_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, the **{{subject.name}}** program planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{glossary_sidebar_link "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
+    In {{pa_last_year}}, the **{{subject.name}}** program planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{gl_sidebar_link "full-time equivalents (FTE)" "FTE"}}. It actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
   fr: |
-    En {{pa_last_year}}, le programme **«{{subject.name}}»** prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{glossary_sidebar_link "équivalents temps plein (ETP)" "FTE"}}. En fait, le programme a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.
+    En {{pa_last_year}}, le programme **«{{subject.name}}»** prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{gl_sidebar_link "équivalents temps plein (ETP)" "FTE"}}. En fait, le programme a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.
 
 crso_planned_actual_text:
   transform: [handlebars, markdown]
   en: |
-    In {{pa_last_year}}, the {{glossary_sidebar_link (pluralize program_count_last_year "program")  "PROG"}} that fell under the **{{subject.name}}** {{glossary_sidebar_link (gt "core_resp") "CR"}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{glossary_sidebar_link "full-time equivalents (FTE)" "FTE"}}. They actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
+    In {{pa_last_year}}, the {{gl_sidebar_link (pluralize program_count_last_year "program")  "PROG"}} that fell under the **{{subject.name}}** {{gl_sidebar_link (gt "core_resp") "CR"}} planned to spend **{{fmt_compact1_written planned_spend}}** and employ **{{fmt_big_int planned_ftes}}** {{gl_sidebar_link "full-time equivalents (FTE)" "FTE"}}. They actually spent **{{fmt_compact1_written actual_spend}}** and employed **{{fmt_big_int actual_ftes}}** FTEs.
   fr: |
-    En {{pa_last_year}}, le {{glossary_sidebar_link (gt "core_resp") "CR"}} **{{subject.name}}** compte {{glossary_sidebar_link (pluralize program_count_last_year "programme") "PROG"}}. Ces programme prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{glossary_sidebar_link "équivalents temps plein (ETP)" "FTE"}}. En fait, le programme a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.
+    En {{pa_last_year}}, le {{gl_sidebar_link (gt "core_resp") "CR"}} **{{subject.name}}** compte {{gl_sidebar_link (pluralize program_count_last_year "programme") "PROG"}}. Ces programme prévoyait dépenser **{{fmt_compact1_written planned_spend}}** et employer **{{fmt_big_int planned_ftes}}** {{gl_sidebar_link "équivalents temps plein (ETP)" "FTE"}}. En fait, le programme a dépensé **{{fmt_compact1_written actual_spend}}** et employé **{{fmt_big_int actual_ftes}}** ETP.

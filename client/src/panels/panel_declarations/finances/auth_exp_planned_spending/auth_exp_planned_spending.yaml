@@ -6,24 +6,24 @@ gap_explain_title:
 gov_gap_explain_body:
   transform: [handlebars]
   en: |
-    Actual expenditures for all organizations are sourced from the {{glossary_sidebar_link "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{glossary_sidebar_link "Departmental Plans" "DP"}}.
+    Actual expenditures for all organizations are sourced from the {{gl_sidebar_link "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_sidebar_link "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in the latest Departmental Plans, but the {{gap_year}} {{glossary_sidebar_link "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in the latest Departmental Plans, but the {{gap_year}} {{gl_sidebar_link "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
-    Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{glossary_sidebar_link "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{glossary_sidebar_link "plans ministériels" "DP"}}.
+    Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_sidebar_link "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_sidebar_link "plans ministériels" "DP"}}.
 
-    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans les plan ministériels les plus récents, mais les {glossary_sidebar_link "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
+    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans les plan ministériels les plus récents, mais les {gl_sidebar_link "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
 
 dept_gap_explain_body:
   transform: [handlebars]
   en: |
-    Actual expenditures for all organizations are sourced from the {{glossary_sidebar_link "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{glossary_sidebar_link "Departmental Plans" "DP"}}.
+    Actual expenditures for all organizations are sourced from the {{gl_sidebar_link "Public Accounts of Canada" "PA"}}. Planned expenditures for most organizations are sourced from {{gl_sidebar_link "Departmental Plans" "DP"}}.
 
-    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{dept.name}}’s latest Departmental Plan, but the {{gap_year}} {{glossary_sidebar_link "Public Accounts of Canada" "PA"}} are not yet available.
+    Planned expenditures for {{est_in_year}} to {{last_planned_year}} have been published in {{dept.name}}’s latest Departmental Plan, but the {{gap_year}} {{gl_sidebar_link "Public Accounts of Canada" "PA"}} are not yet available.
   fr: |
-    Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{glossary_sidebar_link "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{glossary_sidebar_link "plans ministériels" "DP"}}.
+    Les dépenses réelles de toutes les organisations correspondent à celle publiées dans les {{gl_sidebar_link "Comptes publics du Canada" "PA"}}. Les dépenses prévues pour la plupart des organisations proviennent des {{gl_sidebar_link "plans ministériels" "DP"}}.
 
-    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de {{dept.name}} le plus récent, mais les {{glossary_sidebar_link "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
+    Les dépenses prévues pour {{est_in_year}} à {{last_planned_year}} ont été publiés dans le plan ministériel de {{dept.name}} le plus récent, mais les {{gl_sidebar_link "Comptes publics du Canada" "PA"}} de {{gap_year}} ne sont pas encore disponibles.
 
 auth_exp_planned_spending_title:
   transform: [handlebars]
@@ -37,26 +37,26 @@ auth_exp_planned_spending_title:
 gov_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, the government has {{glossary_sidebar_link "authorized" "AUTH"}} an average spending of **{{fmt_compact1_written five_year_auth_average}}** through appropriation acts and other legislation
-    while {{glossary_sidebar_link "actually spending" "BUD_EXP"}} an average of **{{fmt_compact1_written five_year_exp_average}}**.
+    Over the last 5 years, the government has {{gl_sidebar_link "authorized" "AUTH"}} an average spending of **{{fmt_compact1_written five_year_auth_average}}** through appropriation acts and other legislation
+    while {{gl_sidebar_link "actually spending" "BUD_EXP"}} an average of **{{fmt_compact1_written five_year_exp_average}}**.
     
     {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact1_written last_planned_spending}}** by {{last_planned_year}}. {{/if}}
   fr: |
-    Au cours des cinq dernières années, le gouvernement a {{glossary_sidebar_link "autorisé" "AUTH"}} des dépenses moyennes de **{{fmt_compact1_written five_year_auth_average}}**
-    de dollars par le biais de lois de crédit annuelles et d'autres textes législatifs alors que les {{glossary_sidebar_link "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written five_year_exp_average}}**.
+    Au cours des cinq dernières années, le gouvernement a {{gl_sidebar_link "autorisé" "AUTH"}} des dépenses moyennes de **{{fmt_compact1_written five_year_auth_average}}**
+    de dollars par le biais de lois de crédit annuelles et d'autres textes législatifs alors que les {{gl_sidebar_link "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written five_year_exp_average}}**.
 
     {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact1_written last_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
 
 dept_auth_exp_planned_spending_body:
   transform: [handlebars, markdown]
   en: |
-    Over the last 5 years, **{{dept.name}}** has received average {{glossary_sidebar_link "authorities" "AUTH"}} of **{{fmt_compact2_written five_year_auth_average}}** through appropriation acts and other legislation
-    while {{glossary_sidebar_link "actually spending" "BUD_EXP"}} an average of **{{fmt_compact2_written five_year_exp_average}}**.
+    Over the last 5 years, **{{dept.name}}** has received average {{gl_sidebar_link "authorities" "AUTH"}} of **{{fmt_compact2_written five_year_auth_average}}** through appropriation acts and other legislation
+    while {{gl_sidebar_link "actually spending" "BUD_EXP"}} an average of **{{fmt_compact2_written five_year_exp_average}}**.
     
     {{#if has_planned_spending}}Spending is {{will_change_to plan_change ""}} **{{fmt_compact2_written last_planned_spending}}** by {{last_planned_year}}. {{/if}}
   fr: |
-    Au cours des cinq dernières années, **{{dept.name}}** a reçu des {{glossary_sidebar_link "autorisations" "AUTH"}} moyennes de **{{fmt_compact1_written five_year_auth_average}}**
-    de dollars par le biais de lois de crédit annuelles et d'autres textes législatifs alors que les {{glossary_sidebar_link "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written five_year_exp_average}}**.
+    Au cours des cinq dernières années, **{{dept.name}}** a reçu des {{gl_sidebar_link "autorisations" "AUTH"}} moyennes de **{{fmt_compact1_written five_year_auth_average}}**
+    de dollars par le biais de lois de crédit annuelles et d'autres textes législatifs alors que les {{gl_sidebar_link "dépenses" "BUD_EXP"}} réelles s'élevaient en moyenne à **{{fmt_compact1_written five_year_exp_average}}**.
     
     {{#if has_planned_spending}}Les dépenses {{fr_will_change_to plan_change "f" "p" ""}} **{{fmt_compact2_written last_planned_spending}}** d'ici à {{last_planned_year}}. {{/if}}
 
@@ -66,8 +66,8 @@ budgetary_expenditures:
 
 actual_spending_footnote:
   transform: [handlebars]
-  en: 'Here, "actual spending" refers to {{glossary_sidebar_link "budgetary expenditure" "BUD_EXP"}} values'
-  fr: 'Par « dépenses réelles », on entend ici la valeur des {{glossary_sidebar_link "dépenses budgétaires" "BUD_EXP"}}'
+  en: 'Here, "actual spending" refers to {{gl_sidebar_link "budgetary expenditure" "BUD_EXP"}} values'
+  fr: 'Par « dépenses réelles », on entend ici la valeur des {{gl_sidebar_link "dépenses budgétaires" "BUD_EXP"}}'
 
 lapse_by_votes:
   transform: [handlebars]
@@ -85,10 +85,10 @@ show_lapsed_authorities_in:
 
 gov_lapse_by_votes_text:
   transform: [handlebars, markdown]
-  en: Over the past five years, the government {{glossary_sidebar_link "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** in {{glossary_sidebar_link "voted" "VOTED"}} {{glossary_sidebar_link "authorities" "AUTH"}}. This corresponds to **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament through an appropriation act. Lapsing funds is a normal and expected part of any budgetary process.
-  fr: Au cours des cinq dernières années, la {{glossary_sidebar_link "péremption" "LAPSE"}} moyenne du gouvernement s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}** {{glossary_sidebar_link "d'autorisations" "AUTH"}} {{glossary_sidebar_link "votées" "VOTED"}}. Cela correspond à **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit. Dans tout processus budgétaire, il est normal que les fonds ne soient pas tous dépensés.
+  en: Over the past five years, the government {{gl_sidebar_link "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** in {{gl_sidebar_link "voted" "VOTED"}} {{gl_sidebar_link "authorities" "AUTH"}}. This corresponds to **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending authorities granted by Parliament through an appropriation act. Lapsing funds is a normal and expected part of any budgetary process.
+  fr: Au cours des cinq dernières années, la {{gl_sidebar_link "péremption" "LAPSE"}} moyenne du gouvernement s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}** {{gl_sidebar_link "d'autorisations" "AUTH"}} {{gl_sidebar_link "votées" "VOTED"}}. Cela correspond à **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des autorisations de dépenses accordées par le Parlement par le biais d'une loi de crédit. Dans tout processus budgétaire, il est normal que les fonds ne soient pas tous dépensés.
 
 dept_lapse_by_votes_text:
   transform: [handlebars, markdown]
-  en: Over the past five years, **{{subject.name}}** {{glossary_sidebar_link "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** from **{{num_of_votes}} {{glossary_sidebar_link "votes" "VOTED"}}**. On average, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending {{glossary_sidebar_link "authorities" "AUTH"}} granted by Parliament to **{{subject.name}}** through an appropriation act have lapsed compared to an average government-wide lapse of **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}**. Lapsing funds is a normal and expected part of any budgetary process.
-  fr: Au cours des cinq dernières années, pour trois **{{num_of_votes}} {{glossary_sidebar_link "votés" "VOTED"}}**, la {{glossary_sidebar_link "péremption" "LAPSE"}} moyenne **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. En moyenne, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des {{glossary_sidebar_link "autorisations" "AUTH"}} de dépenses accordées par le Parlement par le biais d'une loi de crédit sont devenues périmées, contre **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}** en moyenne pour l'ensemble du gouvernement. Dans tout processus budgétaire, il est normal que les fonds ne soient pas tous dépensés.
+  en: Over the past five years, **{{subject.name}}** {{gl_sidebar_link "lapsed" "LAPSE"}} an average of **{{fmt_compact1_written avg_lapsed_by_votes}}** from **{{num_of_votes}} {{gl_sidebar_link "votes" "VOTED"}}**. On average, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** of the spending {{gl_sidebar_link "authorities" "AUTH"}} granted by Parliament to **{{subject.name}}** through an appropriation act have lapsed compared to an average government-wide lapse of **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}**. Lapsing funds is a normal and expected part of any budgetary process.
+  fr: Au cours des cinq dernières années, pour trois **{{num_of_votes}} {{gl_sidebar_link "votés" "VOTED"}}**, la {{gl_sidebar_link "péremption" "LAPSE"}} moyenne **{{subject.name}}** s'est élevée à **{{fmt_compact1_written avg_lapsed_by_votes}}**. En moyenne, **{{fmt_percentage1 avg_lapsed_by_votes_pct}}** des {{gl_sidebar_link "autorisations" "AUTH"}} de dépenses accordées par le Parlement par le biais d'une loi de crédit sont devenues périmées, contre **{{fmt_percentage1 gov_avg_lapsed_by_votes_pct}}** en moyenne pour l'ensemble du gouvernement. Dans tout processus budgétaire, il est normal que les fonds ne soient pas tous dépensés.

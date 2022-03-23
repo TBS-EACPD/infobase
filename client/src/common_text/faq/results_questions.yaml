@@ -17,10 +17,10 @@ what_is_diff_with_mrrs_q:
 what_is_diff_with_mrrs_a:
   transform: [handlebars, markdown]
   en: |
-    The Policy on Results represents a transition from old reporting structures {{ext_link "(Policy on MRRS)" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218"}} to emphasize results. Previously, organizations were required to report against a small number of {{glossary_sidebar_link "Strategic Outcomes" "SO"}}. 
+    The Policy on Results represents a transition from old reporting structures {{ext_link "(Policy on MRRS)" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=18218"}} to emphasize results. Previously, organizations were required to report against a small number of {{gl_sidebar_link "Strategic Outcomes" "SO"}}. 
     
     
-    Departments now report against {{glossary_sidebar_link "Core Responsibilities" "CR"}} under a Departmental Results Frameworks designed to provide a clearer picture of what the departments is trying to achieve.  
+    Departments now report against {{gl_sidebar_link "Core Responsibilities" "CR"}} under a Departmental Results Frameworks designed to provide a clearer picture of what the departments is trying to achieve.  
 
     
     
@@ -30,10 +30,10 @@ what_is_diff_with_mrrs_a:
     
     This means that programs under the new policy are to be roughly equivalent, in the level of granularity, to the organization’s previous sub-programs or, where they have them, sub-sub programs, but the new Policy provides a clearer indication of how these programs help the departments achieve its objectives. 
   fr: |
-    La politique sur les résultats marque un virage par rapport aux anciennes structures redditionnelles ({{ext_link "Politique sur la SGRR" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218"}}) de manière à mettre l’accent sur les résultats. Auparavant, les organisations devaient rendre compte d’un nombre restreint de {{glossary_sidebar_link "résultats stratégiques" "SO"}}.
+    La politique sur les résultats marque un virage par rapport aux anciennes structures redditionnelles ({{ext_link "Politique sur la SGRR" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=18218"}}) de manière à mettre l’accent sur les résultats. Auparavant, les organisations devaient rendre compte d’un nombre restreint de {{gl_sidebar_link "résultats stratégiques" "SO"}}.
     
     
-    Dorénavant, les ministères doivent rendre compte des {{glossary_sidebar_link "responsabilités essentielles" "CR"}} figurant à leur Cadre ministériel des résultats, qui brosse un tableau plus clair de ce que le ministère cherche à accomplir.
+    Dorénavant, les ministères doivent rendre compte des {{gl_sidebar_link "responsabilités essentielles" "CR"}} figurant à leur Cadre ministériel des résultats, qui brosse un tableau plus clair de ce que le ministère cherche à accomplir.
 
      
     En vertu de la Politique sur la SGRR, la reddition des comptes se fait en fonction d'architectures d'alignement des programmes comportant deux, et parfois même trois paliers (programmes, sous-programmes et sous-sous-programmes). Aux termes de la nouvelle Politique sur les résultats, les organisations doivent encore rendre compte de leur programmes, mais l'ensemble est plus clair et les ministères décrivent comment chaque programme les aides à réaliser leur mandat et le relie à une responsabilité essentielle.
@@ -85,22 +85,22 @@ what_are_DPs_and_DRRs_q:
 what_are_DPs_and_DRRs_a:
   transform: [handlebars, markdown]
   en: |
-    To ensure clear, transparent, and accessible reporting on performance, the Government of Canada annually tables {{glossary_sidebar_link "Departmental Plans" "DP"}} and {{glossary_sidebar_link "Departmental Results Reports" "DRR"}}. 
+    To ensure clear, transparent, and accessible reporting on performance, the Government of Canada annually tables {{gl_sidebar_link "Departmental Plans" "DP"}} and {{gl_sidebar_link "Departmental Results Reports" "DRR"}}. 
 
-    These reports allow parliamentarians and the public to  hold the government accountable by requiring organizations to describe how resources are allocated to each of their {{glossary_sidebar_link "Programs" "PROG"}}, what they intend to achieve with these resources, and how they will measure progress toward the results they seek to achieve over a three-year period. This is done through a reporting framework consisting of:
+    These reports allow parliamentarians and the public to  hold the government accountable by requiring organizations to describe how resources are allocated to each of their {{gl_sidebar_link "Programs" "PROG"}}, what they intend to achieve with these resources, and how they will measure progress toward the results they seek to achieve over a three-year period. This is done through a reporting framework consisting of:
 
-    * Planned Resources ({{glossary_sidebar_link "Spending" "PLANNED_EXP"}} and {{glossary_sidebar_link "Full-time Equivalents" "FTE"}});
-    * Intended {{glossary_sidebar_link "Results" "RESULT"}} for delivery; and
-    * Detailed {{glossary_sidebar_link "Indicators" "IND_RESULT"}} to measure performance.
+    * Planned Resources ({{gl_sidebar_link "Spending" "PLANNED_EXP"}} and {{gl_sidebar_link "Full-time Equivalents" "FTE"}});
+    * Intended {{gl_sidebar_link "Results" "RESULT"}} for delivery; and
+    * Detailed {{gl_sidebar_link "Indicators" "IND_RESULT"}} to measure performance.
     
     Note that Crown corporations, parliamentary entities, the Office of the Governor General and some departments and agencies are not required to submit Departmental Plans and Departmental Results Reports.  Consequently, no results information is available for these organizations.
   fr: |
-    Afin d’assurer la clarté, la transparence et l’accessibilité des rapports sur le rendement, le gouvernement du Canada dépose chaque année des {{glossary_sidebar_link "plans ministériels" "DP"}} et des {{glossary_sidebar_link "rapports sur les résultats ministériels" "DRR"}}.  
+    Afin d’assurer la clarté, la transparence et l’accessibilité des rapports sur le rendement, le gouvernement du Canada dépose chaque année des {{gl_sidebar_link "plans ministériels" "DP"}} et des {{gl_sidebar_link "rapports sur les résultats ministériels" "DRR"}}.  
 
 
-    Ces rapports permettent aux parlementaires et au public de tenir le gouvernement responsable en exigeant des organisations qu’elles décrivent comment les ressources qui leur ont été attribuées seront allouées à chacun de leurs {{glossary_sidebar_link "programmes" "PROG"}}, ce qu’elles se proposent de réaliser avec ces ressources, ainsi que la façon dont elles mesureront les progrès menant aux résultats qu’elles souhaitent atteindre au cours d’une période de trois ans. Ce processus se déroule selon un cadre de présentation de rapports composé des éléments suivants :
-    * ressources prévues ({{glossary_sidebar_link "dépenses" "PLANNED_EXP"}} et {{glossary_sidebar_link "équivalents temps plein" "FTE"}});
-    * {{glossary_sidebar_link "résultats" "RESULT"}} escomptés à fournir;
-    * {{glossary_sidebar_link "indicateurs" "IND_RESULT"}} détaillés pour mesurer le rendement.
+    Ces rapports permettent aux parlementaires et au public de tenir le gouvernement responsable en exigeant des organisations qu’elles décrivent comment les ressources qui leur ont été attribuées seront allouées à chacun de leurs {{gl_sidebar_link "programmes" "PROG"}}, ce qu’elles se proposent de réaliser avec ces ressources, ainsi que la façon dont elles mesureront les progrès menant aux résultats qu’elles souhaitent atteindre au cours d’une période de trois ans. Ce processus se déroule selon un cadre de présentation de rapports composé des éléments suivants :
+    * ressources prévues ({{gl_sidebar_link "dépenses" "PLANNED_EXP"}} et {{gl_sidebar_link "équivalents temps plein" "FTE"}});
+    * {{gl_sidebar_link "résultats" "RESULT"}} escomptés à fournir;
+    * {{gl_sidebar_link "indicateurs" "IND_RESULT"}} détaillés pour mesurer le rendement.
 
     Veillez noter que les société d'État, les entités parlementaires, le Bureau du gouverneur général et certains ministères et organismes ne sont pas tenus de présenter des plans ministériels et des rapports sur les résultats ministériels. Par conséquant, aucun renseignment sur les résultats n'est disponible pour ces organisastions.   

@@ -228,13 +228,13 @@ no_spend_auth_this_year:
 gov_welcome_mat_spending_summary:
   transform: [handlebars, markdown]
   en: |
-   In the last 5 years, overall government {{glossary_sidebar_link "spending" "EXP"}} has
+   In the last 5 years, overall government {{gl_sidebar_link "spending" "EXP"}} has
    {{changed_by  exp_hist_change "fmt_percentage1"}}
    and is
    {{will_change_by  exp_plan_change "fmt_percentage1"}} 
    by {{planning_year_3}}.
   fr: |
-   Au cours des 5 dernières années, les {{glossary_sidebar_link "dépenses" "EXP"}} totales du gouvernement
+   Au cours des 5 dernières années, les {{gl_sidebar_link "dépenses" "EXP"}} totales du gouvernement
    {{fr_changed_by  exp_hist_change "f" "p" "fmt_percentage1" }}.
    D'ici {{planning_year_3}}, les dépenses prévues
    {{fr_will_change_by  exp_plan_change "f" "p" "fmt_percentage1"}}.
@@ -242,14 +242,14 @@ gov_welcome_mat_spending_summary:
 welcome_mat_fte_summary:
   transform: [handlebars, markdown]
   en: |
-   Over the same period, the number of {{glossary_sidebar_link "Full-Time Equivalents (FTEs)" "FTE"}} 
+   Over the same period, the number of {{gl_sidebar_link "Full-Time Equivalents (FTEs)" "FTE"}} 
    employed has 
    {{changed_by  fte_hist_change "fmt_percentage1" }} 
    and is
    {{will_change_by fte_plan_change "fmt_percentage1" }}
    by {{planning_year_3}}.
   fr: |
-   Au cours de la même période, le nombre {{glossary_sidebar_link "d’équivalents temps plein (ETP)" "FTE"}}
+   Au cours de la même période, le nombre {{gl_sidebar_link "d’équivalents temps plein (ETP)" "FTE"}}
    {{fr_changed_by  fte_hist_change "m" "s" "fmt_percentage1" }}.
    D'ici {{planning_year_3}}, le nombre ETP prévues
    {{fr_will_change_by fte_plan_change "m" "s" "fmt_percentage1" }}.
@@ -263,7 +263,7 @@ dept1_welcome_mat_spending_summary:
    {{will_change_by  exp_plan_change "fmt_percentage1"}} 
    by {{planning_year_3}}.
   fr: |
-   Les {{glossary_sidebar_link "dépenses" "EXP"}} {{de_dept subject}} {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
+   Les {{gl_sidebar_link "dépenses" "EXP"}} {{de_dept subject}} {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
    D'ici {{planning_year_3}}, les dépenses prévues
    {{fr_will_change_by  exp_plan_change  "f" "p" "fmt_percentage1"}}.
 
@@ -273,7 +273,7 @@ dept2_welcome_mat_spending_summary:
    In the last {{actual_hist_years_apart}} years, total spending for {{subject.name}}
    {{changed_by  exp_hist_change "fmt_percentage1"  }}.
   fr: |
-   Au cours des {{actual_hist_years_apart}} dernières années, les {{glossary_sidebar_link "dépenses" "EXP"}} totales pour {{subject.name}}      
+   Au cours des {{actual_hist_years_apart}} dernières années, les {{gl_sidebar_link "dépenses" "EXP"}} totales pour {{subject.name}}      
    {{fr_changed_by  exp_hist_change  "f" "p" "fmt_percentage1"  }}.
 
 CR_exp_ftes_fte_summary:
