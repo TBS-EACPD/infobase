@@ -8,7 +8,7 @@ import {
   fiscal_year_to_year,
 } from "src/models/years";
 
-import type { FootNoteDef } from "./footnotes";
+import type { FootNoteDef, TopicKey } from "./footnotes";
 
 import text from "./dynamic_footnotes.yaml";
 
@@ -32,28 +32,35 @@ const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
 ];
 
 export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
-  const gap_year_footnotes = _.chain(class_subject_types)
-    .map(
-      (subject_type) =>
-        actual_to_planned_gap_year && {
-          subject_type: subject_type,
-          subject_id: subject_type === "gov" ? Gov.instance.id : "*",
-          topic_keys: ["EXP", "PLANNED_EXP"],
-          text: text_maker("gap_year_warning", {
-            gap_year: actual_to_planned_gap_year,
-          }),
-          year1: fiscal_year_to_year(actual_to_planned_gap_year) || undefined,
-        }
-    )
-    .compact()
-    .value();
+  const gap_year_footnotes = actual_to_planned_gap_year
+    ? _.chain(class_subject_types)
+        .map(
+          (subject_type): FootNoteDef => ({
+            id: _.uniqueId("gap_year_warning"),
+            subject_type,
+            subject_id: subject_type === "gov" ? Gov.instance.id : "*",
+            topic_keys: ["EXP", "PLANNED_EXP"],
+            text: text_maker("gap_year_warning", {
+              gap_year: actual_to_planned_gap_year,
+            }),
+            year1: fiscal_year_to_year(actual_to_planned_gap_year) || undefined,
+          })
+        )
+        .compact()
+        .value()
+    : [];
 
   const late_result_or_resource_footnotes = _.flatMap(
     ["results", "resources"],
     (result_or_resource) => {
-      const get_topic_keys_for_doc_type = (doc_type: "dp" | "drr") => {
-        if (result_or_resource === "results") {
-          return [_.toUpper(doc_type)];
+      const get_topic_keys_for_doc_type = (
+        doc_type: "dp" | "drr"
+      ): TopicKey[] => {
+        if (
+          result_or_resource === "results" &&
+          _.includes(["dp", "drr"], doc_type)
+        ) {
+          return [doc_type === "dp" ? "DP" : "DRR"];
         } else {
           if (doc_type === "dp") {
             return ["PLANNED_EXP", "DP_EXP", "PLANNED_FTE", "DP_FTE"];
