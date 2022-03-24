@@ -230,7 +230,7 @@ export class Table {
       name: table_def.data_set?.name || table_def.name[lang],
       source: table_def.data_set?.source_keys || table_def.source,
       link: table_def.data_set?.open_data_link || table_def.link?.[lang],
-      tags: (table_def.tags || []).concat(table_def.id),
+      tags: table_def.tags || [],
     });
 
     if (this.subject_type === "program") {
