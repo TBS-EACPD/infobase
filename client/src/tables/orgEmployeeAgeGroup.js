@@ -28,11 +28,6 @@ export default {
     fr: "Groupe d’âge",
   },
 
-  title: {
-    en: "Employee Age Group",
-    fr: "Groupe d’âge",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

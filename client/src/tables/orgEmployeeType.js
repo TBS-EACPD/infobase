@@ -28,11 +28,6 @@ export default {
     fr: "Type d’employé",
   },
 
-  title: {
-    en: "Employee Type",
-    fr: "Type d’employé",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

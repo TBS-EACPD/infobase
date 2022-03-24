@@ -28,11 +28,6 @@ export default {
     fr: "Région géographique",
   },
 
-  title: {
-    en: "Geographic Region",
-    fr: "Région géographique",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

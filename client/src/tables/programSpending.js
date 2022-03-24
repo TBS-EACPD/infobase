@@ -26,11 +26,9 @@ export default {
     "DRR",
   ],
 
-  name: { en: "Spending by Program", fr: "Dépenses de programmes" },
-
-  title: {
-    en: "Expenditures and Planned Spending by Program from {{pa_last_year_5}} to {{planning_year_3}} ($)",
-    fr: "Dépenses réelles et prévues par programme de {{pa_last_year_5}} à {{planning_year_3}} (en dollars)",
+  name: {
+    en: "Expenditures and Planned Spending by Program",
+    fr: "Dépenses réelles et prévues par programme",
   },
 
   add_cols: function () {

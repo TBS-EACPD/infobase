@@ -223,17 +223,16 @@ export class Table {
     };
   }
   constructor(table_def) {
-    const { title: title_def, name: name_def, tags: tags_def } = table_def;
+    const { name: name_def, tags: tags_def } = table_def;
 
     const name = name_def[lang];
 
     Object.assign(
       this,
       this.constructor.default_props(),
-      _.omit(table_def, ["title", "name", "tags"]),
+      _.omit(table_def, ["name", "tags"]),
       {
         name,
-        title_def,
         tags: (tags_def || []).concat(table_def.id),
       }
     );
@@ -327,9 +326,6 @@ export class Table {
   get short_description() {
     const tmf = create_text_maker(this.text);
     return tmf(this.id + "_short");
-  }
-  get title() {
-    return run_template(this.title_def[lang]);
   }
 
   get groupings() {

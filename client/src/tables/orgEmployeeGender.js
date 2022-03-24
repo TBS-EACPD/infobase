@@ -28,11 +28,6 @@ export default {
     fr: "Sexe des employés",
   },
 
-  title: {
-    en: "Employee Gender",
-    fr: "Sexe des employés",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

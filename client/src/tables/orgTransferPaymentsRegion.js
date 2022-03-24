@@ -24,11 +24,6 @@ export default {
     fr: "Paiements de transfert par région du bénéficiaire",
   },
 
-  title: {
-    en: "Transfer Payments by recipient region",
-    fr: "Paiements de transfert par région du bénéficiaire",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

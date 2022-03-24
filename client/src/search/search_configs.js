@@ -304,7 +304,7 @@ const who_we_help = {
 const datasets = {
   config_name: "datasets",
   header_function: () => trivial_text_maker("build_a_report"),
-  name_function: (table) => table.title,
+  name_function: (table) => table.name,
   menu_content_function: default_menu_content_function,
   query: (search_phrase) =>
     Promise.resolve(
@@ -312,7 +312,6 @@ const datasets = {
         .reject("reference_table")
         .map((t) => ({
           name: t.name,
-          title: t.title,
           flat_tag_titles: _.chain(t.tags)
             .map(
               (key) =>
