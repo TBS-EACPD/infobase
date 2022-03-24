@@ -13,12 +13,10 @@ const { provinces } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.employee_region,
-
-  text,
   id: "orgEmployeeRegion",
   legacy_id: "table10",
-  tags: ["PEOPLE", "GEO", "FPS", "ANNUAL"],
+  data_set: DataSets.employee_region,
+  text,
 
   add_cols: function () {
     this.add_col({

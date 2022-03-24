@@ -13,12 +13,10 @@ const { tenure } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.employee_type,
-
-  text,
   id: "orgEmployeeType",
   legacy_id: "table9",
-  tags: ["PEOPLE", "FPS", "ANNUAL"],
+  data_set: DataSets.employee_type,
+  text,
 
   add_cols: function () {
     this.add_col({

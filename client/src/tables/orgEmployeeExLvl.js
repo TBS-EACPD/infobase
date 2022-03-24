@@ -13,12 +13,10 @@ const { ex_levels } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.ex_level,
-
-  text,
   id: "orgEmployeeExLvl",
   legacy_id: "table112",
-  tags: ["PEOPLE", "FPS", "EX_LVL", "ANNUAL"],
+  data_set: DataSets.ex_level,
+  text,
 
   add_cols: function () {
     this.add_col({

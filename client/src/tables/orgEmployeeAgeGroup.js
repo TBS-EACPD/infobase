@@ -13,12 +13,10 @@ const { age_groups } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.age_group,
-
-  text,
   id: "orgEmployeeAgeGroup",
   legacy_id: "table11",
-  tags: ["PEOPLE", "FPS", "AGE", "ANNUAL", "SUPPRESSED_DATA"],
+  data_set: DataSets.age_group,
+  text,
 
   add_cols: function () {
     this.add_col({

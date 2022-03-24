@@ -13,12 +13,10 @@ const { fol } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.employee_fol,
-
-  text,
   id: "orgEmployeeFol",
   legacy_id: "table303",
-  tags: ["PEOPLE", "FPS", "SUPPRESSED_DATA", "FOL", "ANNUAL"],
+  data_set: DataSets.employee_fol,
+  text,
 
   add_cols: function () {
     this.add_col({
