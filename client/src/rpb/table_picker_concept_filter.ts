@@ -12,7 +12,7 @@ const concept_categories: { [key: string]: string[] } = {
   ],
   concept_category_people: ["PEOPLE", "FTE", "GENDER", "AGE", "FOL", "GEO"],
   concept_category_source: ["PA", "EST_PROC", "DP", "DRR"],
-  concept_category_other: ["ANNUAL", "QUARTERLY", "PROG"],
+  concept_category_other: ["PROG"],
 };
 
 /* some tables have tags that we don't want to show, so establish a whitelist */
