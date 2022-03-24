@@ -32,7 +32,7 @@ class GranularView extends React.Component {
           <Details
             summary_content={
               <div>
-                {table.title} : {subject.name}
+                {table.name} : {subject.name}
               </div>
             }
             content={<ReportDetails {...this.props} />}

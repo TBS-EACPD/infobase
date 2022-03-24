@@ -21,11 +21,6 @@ export default {
     fr: "Paiements de transfert",
   },
 
-  title: {
-    en: "Transfer Payments from {{pa_last_year_5}} to {{pa_last_year}} ($)",
-    fr: "Paiements de transfert de {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
-  },
-
   add_cols: function () {
     this.add_col({
       header: {

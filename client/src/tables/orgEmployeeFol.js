@@ -28,11 +28,6 @@ export default {
     fr: "Première langue officielle",
   },
 
-  title: {
-    en: "First Official Language",
-    fr: "Première langue officielle",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

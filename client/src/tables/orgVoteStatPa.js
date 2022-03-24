@@ -19,11 +19,6 @@ export default {
     fr: "Autorisations et dépenses",
   },
 
-  title: {
-    en: "Authorities and Actual Expenditures from {{pa_last_year_5}} to {{pa_last_year}} ($)",
-    fr: "Autorisations et dépenses réelles {{pa_last_year_5}} à {{pa_last_year}} (en dollars)",
-  },
-
   add_cols: function () {
     this.add_col({
       header: {

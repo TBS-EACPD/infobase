@@ -24,11 +24,6 @@ export default {
     fr: "Âge moyen",
   },
 
-  title: {
-    en: "Average Age",
-    fr: "Âge moyen",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",

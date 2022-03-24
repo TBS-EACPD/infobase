@@ -28,11 +28,6 @@ export default {
     fr: "Niveaux des cadres supérieurs",
   },
 
-  title: {
-    en: "Executive Level",
-    fr: "Niveaux des cadres supérieurs",
-  },
-
   add_cols: function () {
     this.add_col({
       type: "int",
