@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -12,21 +13,12 @@ const { provinces } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.employee_region,
+
   text,
   id: "orgEmployeeRegion",
   legacy_id: "table10",
-  source: ["RPS"],
   tags: ["PEOPLE", "GEO", "FPS", "ANNUAL"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa",
-  },
-
-  name: {
-    en: "Geographic Region",
-    fr: "Région géographique",
-  },
 
   add_cols: function () {
     this.add_col({

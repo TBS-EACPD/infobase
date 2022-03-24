@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -12,21 +13,12 @@ const { fol } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.employee_fol,
+
   text,
   id: "orgEmployeeFol",
   legacy_id: "table303",
-  source: ["RPS"],
   tags: ["PEOPLE", "FPS", "SUPPRESSED_DATA", "FOL", "ANNUAL"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/9582d4b0-4ba2-4a0f-9c5f-70c192567208",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/9582d4b0-4ba2-4a0f-9c5f-70c192567208",
-  },
-
-  name: {
-    en: "First Official Language",
-    fr: "Première langue officielle",
-  },
 
   add_cols: function () {
     this.add_col({

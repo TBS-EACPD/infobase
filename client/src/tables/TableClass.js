@@ -225,9 +225,11 @@ export class Table {
   constructor(table_def) {
     Object.assign(this, this.constructor.default_props(), {
       ...table_def,
-      // TODO only get name and source valuse from data_set once all tables ported to relate to one
+      // TODO only get name, source, and link values from data_set once all tables ported to relate to one
+      // some might be droppable from the table after the report builder rewrite
       name: table_def.data_set?.name || table_def.name[lang],
       source: table_def.data_set?.source_keys || table_def.source,
+      link: table_def.data_set?.open_data_link || table_def.link?.[lang],
       tags: (table_def.tags || []).concat(table_def.id),
     });
 

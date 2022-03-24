@@ -58,10 +58,58 @@ const common_source_data_set_defs = (
 //const drr = common_source_data_set_defs("DRR", {
 //  TODO: { name: "TODO" },
 //});
-//
-//const people = common_source_data_set_defs("RPS", {
-//  TODO: { name: "TODO" },
-//});
+
+const people = common_source_data_set_defs("RPS", {
+  age_group: {
+    name: text_maker("age_group_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeAgeGroup",
+    }),
+    open_data_link: text_maker("age_group_open_data_link"),
+  },
+  avg_age: {
+    name: text_maker("avg_age_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeAvgAge",
+    }),
+    open_data_link: text_maker("avg_age_open_data_link"),
+  },
+  ex_level: {
+    name: text_maker("ex_level_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeExLvl",
+    }),
+    open_data_link: text_maker("ex_level_open_data_link"),
+  },
+  employee_fol: {
+    name: text_maker("employee_fol_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeFol",
+    }),
+    open_data_link: text_maker("employee_fol_open_data_link"),
+  },
+  employee_gender: {
+    name: text_maker("employee_gender_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeGender",
+    }),
+    open_data_link: text_maker("employee_gender_open_data_link"),
+  },
+  employee_region: {
+    name: text_maker("employee_region_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeRegion",
+    }),
+    open_data_link: text_maker("employee_region_open_data_link"),
+  },
+  employee_type: {
+    name: text_maker("employee_type_dataset"),
+    infobase_link: rpb_link({
+      table: "orgEmployeeType",
+    }),
+    open_data_link: text_maker("employee_type_open_data_link"),
+  },
+});
 
 const covid = common_source_data_set_defs("COVID", {
   covid_auth: {
@@ -105,7 +153,7 @@ const misc: DataSetDefs = {
 };
 
 export const DataSets = _.mapValues(
-  { ...misc, ...covid },
+  { ...misc, ...people, ...covid },
   (def: DataSetDef) => ({
     ...def,
     sources: _.chain(def.source_keys)
