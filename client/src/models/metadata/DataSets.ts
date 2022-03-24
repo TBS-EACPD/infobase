@@ -69,7 +69,7 @@ const common_source_and_topic_data_set_defs = (
 
 const people = common_source_and_topic_data_set_defs(
   ["RPS"],
-  ["PEOPLE", "FPS", "ANNUAL"],
+  ["PEOPLE", "FPS"],
   {
     age_group: {
       name: text_maker("age_group_dataset"),

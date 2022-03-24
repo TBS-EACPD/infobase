@@ -14,17 +14,7 @@ export default {
   legacy_id: "table6",
   subject_type: "program",
   source: ["PA", "DP", "DRR"],
-  tags: [
-    "GOCO",
-    "PLANNED_EXP",
-    "PA",
-    "EXP",
-    "AUTH",
-    "PROG",
-    "ANNUAL",
-    "DP",
-    "DRR",
-  ],
+  tags: ["GOCO", "PLANNED_EXP", "PA", "EXP", "AUTH", "PROG", "DP", "DRR"],
 
   name: {
     en: "Expenditures and Planned Spending by Program",
