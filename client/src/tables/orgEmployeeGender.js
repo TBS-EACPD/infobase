@@ -13,12 +13,10 @@ const { gender } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.employee_gender,
-
-  text,
   id: "orgEmployeeGender",
   legacy_id: "table302",
-  tags: ["PEOPLE", "FPS", "SUPPRESSED_DATA", "GENDER", "ANNUAL"],
+  data_set: DataSets.employee_gender,
+  text,
 
   add_cols: function () {
     this.add_col({

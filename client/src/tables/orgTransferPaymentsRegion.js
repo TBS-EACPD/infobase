@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { year_templates } from "src/models/years";
 
 import text from "./orgTransferPaymentsRegion.yaml";
@@ -9,20 +10,9 @@ const { provinces } = businessConstants;
 const { tp_by_region_years } = year_templates;
 
 export default {
-  text,
   id: "orgTransferPaymentsRegion",
-  source: ["RTP", "PA"],
-  tags: ["TP_GEO", "SOBJ10"],
-
-  link: {
-    en: "https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-    fr: "https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092",
-  },
-
-  name: {
-    en: "Transfer Payments by recipient region",
-    fr: "Paiements de transfert par région du bénéficiaire",
-  },
+  data_set: DataSets.transfer_payments_by_region,
+  text,
 
   add_cols: function () {
     this.add_col({

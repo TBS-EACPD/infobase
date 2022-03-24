@@ -9,12 +9,10 @@ import text from "./orgEmployeeAvgAge.yaml";
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
-  data_set: DataSets.avg_age,
-
-  text,
   id: "orgEmployeeAvgAge",
   legacy_id: "table304",
-  tags: ["PEOPLE", "FPS", "AGE", "ANNUAL"],
+  data_set: DataSets.avg_age,
+  text,
 
   add_cols: function () {
     this.add_col({

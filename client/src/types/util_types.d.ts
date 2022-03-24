@@ -47,3 +47,5 @@ export type ComponentProps<T> = T extends
 
 export type PartialOn<T, K extends keyof T> = SafeOmit<T, K> &
   Partial<Pick<T, K>>;
+
+export type NonEmpty<T> = T extends Array<infer U> ? U[] & { "0": U } : never;
