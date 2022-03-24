@@ -12,15 +12,12 @@ import text from "./orgVoteStatEstimates.yaml";
 const { estimates_years } = year_templates;
 
 export default {
+  data_set: DataSets.tabled_estimates,
+
   text,
   id: "orgVoteStatEstimates",
   legacy_id: "table8",
   tags: ["AUTH", "EST_PROC", "VOTED", "STAT"],
-
-  name: {
-    [lang]: DataSets.tabled_estimates.name,
-  },
-  source: DataSets.tabled_estimates.source_keys,
 
   add_cols: function () {
     this.add_col({

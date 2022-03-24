@@ -223,19 +223,13 @@ export class Table {
     };
   }
   constructor(table_def) {
-    const { name: name_def, tags: tags_def } = table_def;
-
-    const name = name_def[lang];
-
-    Object.assign(
-      this,
-      this.constructor.default_props(),
-      _.omit(table_def, ["name", "tags"]),
-      {
-        name,
-        tags: (tags_def || []).concat(table_def.id),
-      }
-    );
+    Object.assign(this, this.constructor.default_props(), {
+      ...table_def,
+      // TODO only get name and source valuse from data_set once all tables ported to relate to one
+      name: table_def.data_set?.name || table_def.name[lang],
+      source: table_def.data_set?.source_keys || table_def.source,
+      tags: (table_def.tags || []).concat(table_def.id),
+    });
 
     if (this.subject_type === "program") {
       this.programs = new Map();
