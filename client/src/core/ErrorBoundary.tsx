@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React from "react";
-import ReactDOM from "react-dom";
 
 import { lang, sha, is_dev } from "src/core/injected_build_constants";
 
+import { NoIndex } from "src/components";
 import { IconNotAvailable } from "src/icons/icons";
 
 import { get_static_url, make_request } from "src/request_utils";
@@ -14,12 +14,6 @@ import { log_standard_event } from "./analytics";
 type BoundaryHandledError =
   | { toString: () => string }
   | PromiseRejectionEvent["reason"];
-
-const NoIndex = () =>
-  ReactDOM.createPortal(
-    <meta name="robots" content="noindex" />,
-    document.head
-  );
 
 const state_from_error = (error: BoundaryHandledError) => ({
   error: error,

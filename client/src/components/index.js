@@ -44,6 +44,7 @@ export { StatelessModal, FixedPopover } from "./modals_and_popovers/index";
 export { DisplayTable } from "./DisplayTable/index";
 
 export {
+  NoIndex,
   Format,
   TrivialTextMaker,
   TrivialTM,

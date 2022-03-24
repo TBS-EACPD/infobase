@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import _ from "lodash";
+
 import React, { Fragment } from "react";
+import ReactDOM from "react-dom";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -17,6 +19,12 @@ import { maxSmallDevice } from "src/style_constants/index";
 import { TextMaker, TM } from "./TextMaker";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
+
+const NoIndex = () =>
+  ReactDOM.createPortal(
+    <meta name="robots" content="noindex" />,
+    document.head
+  );
 
 const ExternalLink = ({ children, href, title }) => (
   <a target="_blank" rel="noopener noreferrer" href={href} title={title}>
@@ -122,6 +130,7 @@ const LinkStyled = ({ on_click, className, style, children }) => (
 );
 
 export {
+  NoIndex,
   Format,
   TrivialTextMaker,
   TrivialTM,
