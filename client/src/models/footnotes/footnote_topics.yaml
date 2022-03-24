@@ -56,10 +56,6 @@ PEOPLE:
   en: Data about Public Servants
   fr: Données sur les fonctionaires
 
-FPS:
-  en: Federal Public Service (FPS)
-  fr: Fonction publique fédérale (FPF)
-
 GENDER:
   en: Employee gender
   fr: Sexe des employés
@@ -67,10 +63,6 @@ GENDER:
 AGE:
   en: Employee age
   fr: Âge des employés
-
-GOV_FRAM:
-  en: Whole-of-government framework
-  fr: Cadre pangouvernemental
 
 SOBJ:
   en: Standard Objects
@@ -92,10 +84,6 @@ FOL:
   en: First Official Language
   fr: Première langue officielle
 
-PLAN_DATA:
-  en: Planning Data
-  fr: Données relatives à la planification
-
 ESTIMATES:
   en: Estimates
   fr: Budget des dépenses
@@ -111,14 +99,6 @@ SUPPRESSED_DATA:
 GOCO:
   en: Government of Canada Spending areas and Activities
   fr: Secteurs de dépenses et d’activités du gouvernement du Canada
-
-ANNUAL:
-  en: Annual
-  fr: Annuelle
-
-QUARTERLY:
-  en: Quarterly
-  fr: Trimestrielle
 
 DP:
   en: Departmental Plans
@@ -147,6 +127,7 @@ OTHER_TYPE_COMMENT:
 ANY:
   en: Any
   fr: Tout
+
 COVID:
   en: COVID-19 Response
   fr: Réponse à la COVID-19
