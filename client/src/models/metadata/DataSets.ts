@@ -5,6 +5,7 @@ import _ from "lodash";
 // TODO there's some import/order + import type related PRs on the package right now, might be fixed soon, keep an eye out
 // eslint-disable-next-line import/order
 import type { PartialOn } from "src/types/util_types";
+import type { TopicKey } from "src/models/footnotes/footnotes";
 
 import { create_text_maker } from "src/models/text";
 
@@ -21,6 +22,7 @@ type DataSetDef = {
   name: string;
   infobase_link: string;
   source_keys: SourceKey[];
+  //topic_tags: TopicKey[];
   open_data_link?: string;
 };
 

@@ -20,6 +20,7 @@ import { get_static_url, make_request } from "src/request_utils";
 
 import { get_dynamic_footnote_definitions } from "./dynamic_footnotes";
 import { footNoteStore } from "./footnotes";
+import type { TopicKey } from "./footnotes";
 
 import footnote_topic_text from "./footnote_topics.yaml";
 
@@ -41,9 +42,10 @@ function populate_footnotes(csv_str: string) {
       footnote,
     } = obj;
 
+    // Assumed to be valid topic keys at run time, be careful about that!
     const split_topic_keys = topic_keys
       .split(",")
-      .map((key) => key.replace(" ", ""));
+      .map((key) => key.replace(" ", "")) as TopicKey[];
 
     const invalid_keys = _.difference(split_topic_keys, footnote_topic_keys);
     if (invalid_keys.length > 0) {

@@ -9,8 +9,55 @@ import { make_store } from "src/models/utils/make_store";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
+// Aside from the wildcard *, all of these MUST have corrsponding text in footnote_topics.yaml!
+// ... TODO would be nice to get fancier type generation for yaml files some time so this can be infered
+export type TopicKey =
+  | "*"
+  | "PA"
+  | "EST_PROC"
+  | "AUTH"
+  | "VOTED"
+  | "STAT"
+  | "EXP"
+  | "PLANNED_EXP"
+  | "FTE"
+  | "PLANNED_FTE"
+  | "DRR_EXP"
+  | "DRR_FTE"
+  | "DP_EXP"
+  | "DP_FTE"
+  | "SOBJ10"
+  | "PEOPLE"
+  | "FPS"
+  | "GENDER"
+  | "AGE"
+  | "GOV_FRAM"
+  | "SOBJ"
+  | "PROG"
+  | "GEO"
+  | "TP_GEO"
+  | "FOL"
+  | "PLAN_DATA"
+  | "ESTIMATES"
+  | "EX_LVL"
+  | "SUPPRESSED_DATA"
+  | "GOCO"
+  | "ANNUAL"
+  | "QUARTERLY"
+  | "DP"
+  | "DRR"
+  | "RESULTS"
+  | "MACHINERY"
+  | "DIGITAL_STATUS"
+  | "OTHER_TYPE_COMMENT"
+  | "ANY"
+  | "COVID"
+  | "COVID_AUTH"
+  | "COVID_EXP"
+  | "COVID_MEASURE";
+
 type FakeFootNoteDef = {
-  topic_keys: string[];
+  topic_keys: TopicKey[];
   text: string;
   year1?: number;
   year2?: number;
@@ -20,7 +67,7 @@ export type FootNoteDef = {
   id: string;
   subject_type: ClassSubjectType; // TODO footnotes currently only work for class subjects, make allowances for API only subjects later
   subject_id: string;
-  topic_keys: string[];
+  topic_keys: TopicKey[];
   text: string;
   year1?: number;
   year2?: number;
