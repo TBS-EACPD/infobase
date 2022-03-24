@@ -46,7 +46,7 @@ function table_to_row_item(table) {
       table: table.id,
       mode: "details",
     }),
-    external_link: table.link?.[lang],
+    external_link: table.link,
   };
 }
 

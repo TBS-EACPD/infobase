@@ -67,7 +67,7 @@ const ReportDetails = ({ table, def_ready_columns, footnotes }) => {
 };
 
 const ReportDatasets = ({ table }) => {
-  const dataset_spans = table.link?.[lang] && [
+  const dataset_spans = table.link && [
     <span key={"datasets_header"} className="fancy-ul__title">
       <TextMaker text_key="metadata" />
     </span>,
@@ -78,7 +78,7 @@ const ReportDatasets = ({ table }) => {
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-          href={table.link[lang]}
+          href={table.link}
         >
           <TextMaker text_key="open_data_link" />
         </a>

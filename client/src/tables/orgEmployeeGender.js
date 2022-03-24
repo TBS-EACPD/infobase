@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -12,21 +13,12 @@ const { gender } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.employee_gender,
+
   text,
   id: "orgEmployeeGender",
   legacy_id: "table302",
-  source: ["RPS"],
   tags: ["PEOPLE", "FPS", "SUPPRESSED_DATA", "GENDER", "ANNUAL"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/ae34a065-99b9-4e04-90f7-8d29afafc886",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/ae34a065-99b9-4e04-90f7-8d29afafc886",
-  },
-
-  name: {
-    en: "Employee Gender",
-    fr: "Sexe des employés",
-  },
 
   add_cols: function () {
     this.add_col({

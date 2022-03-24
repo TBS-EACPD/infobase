@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -12,21 +13,12 @@ const { age_groups } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.age_group,
+
   text,
   id: "orgEmployeeAgeGroup",
   legacy_id: "table11",
-  source: ["RPS"],
   tags: ["PEOPLE", "FPS", "AGE", "ANNUAL", "SUPPRESSED_DATA"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186",
-  },
-
-  name: {
-    en: "Employee Age Group",
-    fr: "Groupe d’âge",
-  },
 
   add_cols: function () {
     this.add_col({

@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -12,21 +13,12 @@ const { ex_levels } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.ex_level,
+
   text,
   id: "orgEmployeeExLvl",
   legacy_id: "table112",
-  source: ["RPS"],
   tags: ["PEOPLE", "FPS", "EX_LVL", "ANNUAL"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96",
-  },
-
-  name: {
-    en: "Executive Level",
-    fr: "Niveaux des cadres supérieurs",
-  },
 
   add_cols: function () {
     this.add_col({

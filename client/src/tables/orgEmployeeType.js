@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -12,21 +13,12 @@ const { tenure } = businessConstants;
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.employee_type,
+
   text,
   id: "orgEmployeeType",
   legacy_id: "table9",
-  source: ["RPS"],
   tags: ["PEOPLE", "FPS", "ANNUAL"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/13c5b5c5-5bbb-48b1-907a-dc7c5975345d",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/13c5b5c5-5bbb-48b1-907a-dc7c5975345d",
-  },
-
-  name: {
-    en: "Employee Type",
-    fr: "Type d’employé",
-  },
 
   add_cols: function () {
     this.add_col({

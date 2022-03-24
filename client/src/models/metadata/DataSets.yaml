@@ -1,3 +1,53 @@
 tabled_estimates_dataset:
   en: Tabled Estimates
   fr: Budgets déposés
+
+
+age_group_dataset:
+  en: Employee Age Group
+  fr: Groupe d’âge
+age_group_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186
+  fr: http://ouvert.canada.ca/data/fr/dataset/d712930d-66f4-4377-a2bf-5d55d09c1186
+
+avg_age_dataset:
+  en: Average Age
+  fr: Âge moyen
+avg_age_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/ccf74651-aef9-4f9e-b13c-f4bf15f18697
+  fr: http://ouvert.canada.ca/data/fr/dataset/ccf74651-aef9-4f9e-b13c-f4bf15f18697
+
+ex_level_dataset:
+  en: Executive Level
+  fr: Niveaux des cadres supérieurs
+ex_level_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96
+  fr: http://ouvert.canada.ca/data/fr/dataset/2e4e5626-3185-4c8d-932a-7e161355fb96
+
+employee_fol_dataset:
+  en: First Official Language
+  fr: Première langue officielle
+employee_fol_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/9582d4b0-4ba2-4a0f-9c5f-70c192567208
+  fr: http://ouvert.canada.ca/data/fr/dataset/9582d4b0-4ba2-4a0f-9c5f-70c192567208
+
+employee_gender_dataset:
+  en: Employee Gender
+  fr: Sexe des employés
+employee_gender_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/ae34a065-99b9-4e04-90f7-8d29afafc886
+  fr: http://ouvert.canada.ca/data/fr/dataset/ae34a065-99b9-4e04-90f7-8d29afafc886
+
+employee_region_dataset:
+  en: Geographic Region
+  fr: Région géographique
+employee_region_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa
+  fr: http://ouvert.canada.ca/data/fr/dataset/933f8f6e-daee-4368-a7dc-4eadc8b5ecfa
+
+employee_type_dataset:
+  en: Employee Type
+  fr: Type d’employé
+employee_type_open_data_link:
+  en: http://open.canada.ca/data/en/dataset/13c5b5c5-5bbb-48b1-907a-dc7c5975345d
+  fr: http://ouvert.canada.ca/data/fr/dataset/13c5b5c5-5bbb-48b1-907a-dc7c5975345d

@@ -1,5 +1,6 @@
 import _ from "lodash";
 
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -8,21 +9,12 @@ import text from "./orgEmployeeAvgAge.yaml";
 const { people_years, people_years_short_second } = year_templates;
 
 export default {
+  data_set: DataSets.avg_age,
+
   text,
   id: "orgEmployeeAvgAge",
   legacy_id: "table304",
-  source: ["RPS"],
   tags: ["PEOPLE", "FPS", "AGE", "ANNUAL"],
-
-  link: {
-    en: "http://open.canada.ca/data/en/dataset/ccf74651-aef9-4f9e-b13c-f4bf15f18697",
-    fr: "http://ouvert.canada.ca/data/fr/dataset/ccf74651-aef9-4f9e-b13c-f4bf15f18697",
-  },
-
-  name: {
-    en: "Average Age",
-    fr: "Âge moyen",
-  },
 
   add_cols: function () {
     this.add_col({
