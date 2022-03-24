@@ -13,7 +13,7 @@ export default {
   text,
   id: "orgTransferPayments",
   legacy_id: "table7",
-  tags: ["AUTH", "EXP", "PA", "VOTED", "STAT", "SOBJ10", "ANNUAL"],
+  tags: ["AUTH", "EXP", "PA", "VOTED", "STAT", "SOBJ10"],
 
   source: ["PA"],
   name: {

@@ -11,7 +11,7 @@ export default {
   text,
   id: "orgVoteStatPa",
   legacy_id: "table4",
-  tags: ["PA", "AUTH", "EXP", "VOTED", "STAT", "ANNUAL"],
+  tags: ["PA", "AUTH", "EXP", "VOTED", "STAT"],
 
   source: ["PA"],
   name: {

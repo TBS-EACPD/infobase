@@ -15,7 +15,7 @@ export default {
   id: "programVoteStat",
   legacy_id: "table300",
   subject_type: "program",
-  tags: ["PROG", "PA", "EXP", "VOTED", "STAT", "ANNUAL"],
+  tags: ["PROG", "PA", "EXP", "VOTED", "STAT"],
   source: ["CFMRS"],
   name: {
     en: "Program Expenditures by Authority Type",

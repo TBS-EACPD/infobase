@@ -16,7 +16,7 @@ export default {
   legacy_id: "table12",
   subject_type: "program",
   source: ["DP", "DRR"],
-  tags: ["GOCO", "PA", "FTE", "PROG", "ANNUAL", "PLANNED_EXP", "DP", "DRR"],
+  tags: ["GOCO", "PA", "FTE", "PROG", "PLANNED_EXP", "DP", "DRR"],
 
   name: {
     en: "Actual and Planned Full-Time Equivalents (FTEs) by Program",

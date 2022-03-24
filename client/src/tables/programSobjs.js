@@ -17,7 +17,7 @@ export default {
   legacy_id: "table305",
   subject_type: "program",
   source: ["CFMRS"],
-  tags: ["PA", "SOBJ", "EXP", "PROG", "ANNUAL", "GOCO"],
+  tags: ["PA", "SOBJ", "EXP", "PROG", "GOCO"],
   name: {
     en: "Program Expenditures by Standard Object",
     fr: "Dépenses de programmes par article courant",

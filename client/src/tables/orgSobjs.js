@@ -12,7 +12,7 @@ export default {
   text,
   id: "orgSobjs",
   legacy_id: "table5",
-  tags: ["SOBJ", "EXP", "PA", "ANNUAL"],
+  tags: ["SOBJ", "EXP", "PA"],
   source: ["PA"],
   name: {
     en: "Expenditures by Standard Object",
