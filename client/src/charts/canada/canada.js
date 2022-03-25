@@ -13,11 +13,7 @@ import React, {
   useState,
 } from "react";
 
-import {
-  create_text_maker_component,
-  GraphOverlay,
-  Select,
-} from "src/components/index";
+import { create_text_maker_component, Select } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text";
@@ -263,14 +259,12 @@ export class Canada extends React.Component {
             </div>
           )}
 
-          <GraphOverlay>
-            <NewCanadaGraph
-              graph_args={graph_args}
-              selected_year_index={selected_year_index}
-              data={data}
-              prov_select_callback={this.prov_select_callback}
-            />
-          </GraphOverlay>
+          <NewCanadaGraph
+            graph_args={graph_args}
+            selected_year_index={selected_year_index}
+            data={data}
+            prov_select_callback={this.prov_select_callback}
+          />
         </div>
       </div>
     );
