@@ -174,7 +174,7 @@ function NewCanadaGraph({
   );
 
   return (
-    <div ref={containerRef} style={{ height: "700px" }}>
+    <div ref={containerRef}>
       <CanadaProvinceChart
         data={singleYearData}
         colorScale={colorScale}
