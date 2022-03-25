@@ -35,6 +35,12 @@ const { text_maker } = create_text_maker_component(text);
 
 const { provinces } = businessConstants;
 
+function applyOpacity(colorStr) {
+  // canada-province-chart's fill-color take our provided color and applies a 0.8 opacity.
+  // In order to match the color in legend, we need to apply it manually
+  return color(colorStr).copy({ opacity: 0.8 }).toString();
+}
+
 class CanadaGraphBarLegend extends React.Component {
   constructor() {
     super();
@@ -69,9 +75,7 @@ class CanadaGraphBarLegend extends React.Component {
               {`${d.data.year}: ${formatter(d.formattedValue)}`}
             </tspan>
           )}
-          colors={(_d) =>
-            color(interpolateBlues(0.5)).copy({ opacity: 0.8 }).toString()
-          }
+          colors={(_d) => applyOpacity(interpolateBlues(0.5))}
           margin={{
             top: 40,
             right: 30,
@@ -216,9 +220,7 @@ export class Canada extends React.Component {
             : `${formatter(tick)}+`,
         active: true,
         id: tick,
-        color: color(interpolateBlues(color_scale(tick)))
-          .copy({ opacity: 0.8 })
-          .toString(),
+        color: applyOpacity(interpolateBlues(color_scale(tick))),
       })
     );
     return (
