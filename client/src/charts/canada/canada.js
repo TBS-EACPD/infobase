@@ -144,7 +144,7 @@ function NewCanadaGraph({
 
   const colorScale = useCallback(
     (datum, _provCode) => {
-      if (!datum?.value) {
+      if (_.isUndefined(datum)) {
         return "#ccc";
       }
       return interpolateBlues(color_scale(datum.value));
@@ -158,7 +158,7 @@ function NewCanadaGraph({
         containerWidth > 800
           ? (provCode) => getProvinceName(provCode, lang)
           : (provCode) => getProvinceShortName(provCode, lang);
-      if (!datum?.value) {
+      if (_.isUndefined(datum)) {
         return null;
       }
       return `<div>
