@@ -2,6 +2,7 @@ import DOMPurify from "dompurify";
 import JSURL from "jsurl";
 import _ from "lodash";
 import { marked } from "marked";
+import { useLayoutEffect, useState } from "react";
 
 export const sanitize_html = (markup: string | Node) => {
   // a little tedious, but this is the safe way to enforce safe usage of target="_blank" with DOMPurify
@@ -291,3 +292,18 @@ export function bound(elementDescriptor: ElementDescriptor) {
 // toggle_list([1,2,3],4) => [1,2,3,4]
 export const toggle_list = <Type>(arr: Type[], el: Type): Type[] =>
   _.includes(arr, el) ? _.without(arr, el) : arr.concat([el]);
+
+export function useWindowWidth(delay = 700) {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useLayoutEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    const debouncedHandleResize = _.debounce(handleResize, delay);
+    window.addEventListener("resize", debouncedHandleResize);
+    return () => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
+  }, [delay]);
+
+  return width;
+}

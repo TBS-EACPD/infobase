@@ -1,8 +1,17 @@
-import { select } from "d3-selection";
+import CanadaProvinceChart, {
+  getProvinceName,
+  getProvinceShortName,
+} from "canada-province-chart";
+import { color } from "d3-color";
+import { interpolateBlues } from "d3-scale-chromatic";
 import _ from "lodash";
-import React from "react";
-
-import ReactDOM from "react-dom";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import {
   create_text_maker_component,
@@ -13,24 +22,18 @@ import {
 import { businessConstants } from "src/models/businessConstants";
 import { run_template } from "src/models/text";
 
+import { lang } from "src/core/injected_build_constants";
+
 import { StandardLegend } from "src/charts/legends/index";
 import { LegendContainer } from "src/charts/legends/LegendContainer";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-import { hex_to_rgb } from "src/general_utils";
-import { secondaryColor, tertiaryColor } from "src/style_constants/index";
-
-import { CanadaD3Component } from "./CanadaD3Component";
+import { useWindowWidth } from "src/general_utils";
 
 import text from "./canada.yaml";
 
 const { text_maker } = create_text_maker_component(text);
 
 const { provinces } = businessConstants;
-
-const get_graph_color = (alpha) => {
-  const rgb = hex_to_rgb(secondaryColor);
-  return rgb && `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha || 1})`;
-};
 
 class CanadaGraphBarLegend extends React.Component {
   constructor() {
@@ -66,7 +69,9 @@ class CanadaGraphBarLegend extends React.Component {
               {`${d.data.year}: ${formatter(d.formattedValue)}`}
             </tspan>
           )}
-          colors={(_d) => get_graph_color(0.5)}
+          colors={(_d) =>
+            color(interpolateBlues(0.5)).copy({ opacity: 0.8 }).toString()
+          }
           margin={{
             top: 40,
             right: 30,
@@ -96,62 +101,86 @@ class CanadaGraphBarLegend extends React.Component {
   }
 }
 
-class CanadaGraph extends React.PureComponent {
-  constructor() {
-    super();
-    this.graph_area = React.createRef();
-  }
-  render() {
-    return <div ref={this.graph_area} />;
-  }
-  componentDidMount() {
-    this._render();
-  }
-  componentDidUpdate() {
-    this._render();
-  }
-  componentWillUnmount() {
-    this.graph_instance.cleanup();
-  }
-  _render() {
-    const { graph_args, prov_select_callback, data, selected_year_index } =
-      this.props;
-    const { color_scale, years, formatter } = graph_args;
+function NewCanadaGraph({
+  prov_select_callback,
+  data,
+  selected_year_index,
+  graph_args,
+}) {
+  const { color_scale, formatter } = graph_args;
+  const containerRef = useRef();
+  const [containerWidth, setContainerWidth] = useState(null);
 
-    const graph_area_sel = select(
-      ReactDOM.findDOMNode(this.graph_area.current)
-    );
+  const windowWidth = useWindowWidth();
 
-    const ticks = _.map(years, (y) => `${run_template(y)}`);
+  useEffect(() => {
+    setContainerWidth(containerRef?.current?.offsetWidth);
+  }, [windowWidth]);
 
-    this.graph_instance?.cleanup();
-
-    this.graph_instance = new CanadaD3Component(graph_area_sel.node(), {
-      main_color: get_graph_color(1),
-      secondary_color: tertiaryColor,
-      selected_year_index,
-      data,
-      ticks,
-      color_scale,
-      formatter,
-    });
-
+  const [onMouseEnter, onMouseLeave] = useMemo(() => {
+    //TODO: fix hacky closure that holds onto province
     let active_prov = false;
-    this.graph_instance.dispatch.on("dataMouseEnter", (prov) => {
+    function onMouseEnter(datum, provCode) {
       active_prov = true;
-      prov_select_callback(prov);
-    });
-    this.graph_instance.dispatch.on("dataMouseLeave", () => {
-      _.delay(() => {
+      prov_select_callback(provCode);
+    }
+    function onMouseLeave() {
+      setTimeout(() => {
         if (!active_prov) {
           prov_select_callback(null);
         }
       }, 200);
       active_prov = false;
-    });
+    }
+    return [onMouseEnter, onMouseLeave];
+  }, [prov_select_callback]);
 
-    this.graph_instance.render();
-  }
+  const singleYearData = useMemo(() => {
+    const dataForYear = data[selected_year_index];
+    return _.chain(dataForYear)
+      .map((value, provCode) => ({ value, provCode }))
+      .value();
+  }, [selected_year_index, data]);
+
+  const colorScale = useCallback(
+    (datum, _provCode) => {
+      if (!datum?.value) {
+        return "#ccc";
+      }
+      return interpolateBlues(color_scale(datum.value));
+    },
+    [color_scale]
+  );
+
+  const htmlForLabel = useCallback(
+    (datum, provCode) => {
+      const getName =
+        containerWidth > 800
+          ? (provCode) => getProvinceName(provCode, lang)
+          : (provCode) => getProvinceShortName(provCode, lang);
+      if (!datum?.value) {
+        return null;
+      }
+      return `<div>
+      <div>${formatter(datum.value)}</div>
+      <div>${getName(provCode)}</div>
+    </div>`;
+    },
+    [formatter, containerWidth]
+  );
+
+  return (
+    <div ref={containerRef} style={{ height: "700px" }}>
+      <CanadaProvinceChart
+        data={singleYearData}
+        colorScale={colorScale}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        htmlForLabel={htmlForLabel}
+        lang={lang}
+      />
+    </div>
+  );
 }
 
 export class Canada extends React.Component {
@@ -187,7 +216,9 @@ export class Canada extends React.Component {
             : `${formatter(tick)}+`,
         active: true,
         id: tick,
-        color: get_graph_color(color_scale(tick)),
+        color: color(interpolateBlues(color_scale(tick)))
+          .copy({ opacity: 0.8 })
+          .toString(),
       })
     );
     return (
@@ -229,8 +260,9 @@ export class Canada extends React.Component {
               />
             </div>
           )}
+
           <GraphOverlay>
-            <CanadaGraph
+            <NewCanadaGraph
               graph_args={graph_args}
               selected_year_index={selected_year_index}
               data={data}
