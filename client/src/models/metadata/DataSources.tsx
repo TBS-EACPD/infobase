@@ -3,6 +3,8 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
 
+import { InferedKeysRecordHelper } from "src/types/type_utils";
+
 import { Frequencies } from "./Frequencies";
 
 import text from "./DataSources.yaml";
@@ -17,19 +19,7 @@ type SourceDef = {
   frequency_key?: keyof typeof Frequencies;
 };
 
-export type SourceKey =
-  | "IGOC"
-  | "PA"
-  | "ESTIMATES"
-  | "CFMRS"
-  | "RTP"
-  | "DP"
-  | "DRR"
-  | "RPS"
-  | "COVID"
-  | "SERVICES";
-
-const source_definitions: { [key in SourceKey]: SourceDef } = {
+const source_definitions = InferedKeysRecordHelper<SourceDef>()({
   IGOC: {
     name: text_maker("igoc_name"),
     description: <TM k="igoc_desc" />,
@@ -94,7 +84,9 @@ const source_definitions: { [key in SourceKey]: SourceDef } = {
     open_data_link: text_maker("services_open_data_link"),
     frequency_key: "yearly",
   },
-};
+});
+
+export type SourceKey = keyof typeof source_definitions;
 
 export const DataSources = _.mapValues(source_definitions, (def: SourceDef) => {
   const { frequency_key } = def;

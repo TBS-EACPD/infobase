@@ -29,7 +29,7 @@
   
   Only downside is that it uses actual code for purely type system gains, since a curried outer function is necessary for partial
   type inference. It transpiles to an identity, so it's about as negligible for the run time as it could be. That and the empty
-  curry call is a bit ugly itself. Ah well, at least you're not maintaining a separate type for all your keys anymore!
+  curry call is a bit ugly itself. Ah well, at least you're not maintaining a separate union type for all your keys anymore!
 */
 export const InferedKeysRecordHelper =
   <RecordValue>() =>
