@@ -4,12 +4,13 @@ import _ from "lodash";
 // VS code auto fixes to move the util_type import here on save, but the webpack linting complains about it
 // TODO there's some import/order + import type related PRs on the package right now, might be fixed soon, keep an eye out
 // eslint-disable-next-line import/order
-import type { PartialOn, NonEmpty } from "src/types/util_types";
+import { make_identity_which_types_a_record_while_preserving_keys } from "src/types/type_utils";
 import type { TopicKey } from "src/models/footnotes/footnotes";
 
 import { create_text_maker } from "src/models/text";
 
 import { rpb_link } from "src/rpb/rpb_link";
+import type { PartialOn, NonEmpty } from "src/types/util_types.d";
 
 import type { SourceKey } from "./DataSources";
 import { DataSources } from "./DataSources";
@@ -28,16 +29,16 @@ type DataSetDef = {
   open_data_link?: string;
 };
 
-type DataSetDefs = Record<string, DataSetDef>;
-
-const common_source_and_topic_data_set_defs = (
-  common_sources: NonEmptySourceKeys,
-  common_topic_keys: TopicKey[],
-  partial_defs: Record<
+const common_source_and_topic_data_set_defs = <
+  PartialDefs extends Record<
     string,
     PartialOn<PartialOn<DataSetDef, "source_keys">, "topic_keys">
   >
-): DataSetDefs =>
+>(
+  common_sources: NonEmptySourceKeys,
+  common_topic_keys: TopicKey[],
+  partial_defs: PartialDefs
+): { [DataSetKey in keyof PartialDefs]: DataSetDef } =>
   _.mapValues(
     partial_defs,
     (def): DataSetDef => ({
@@ -126,56 +127,61 @@ const people = common_source_and_topic_data_set_defs(["RPS"], ["PEOPLE"], {
 });
 
 // TODO is covid measures also a "dataset"?
-const covid = common_source_and_topic_data_set_defs(["COVID"], ["COVID"], {
-  covid_auth: {
-    name: text_maker("covid_measure_spending_auth"),
-    topic_keys: ["COVID_AUTH", "COVID_MEASURE"],
-    infobase_link:
-      "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
-  },
-  covid_exp: {
-    name: text_maker("covid_expenditures_estimated_exp"),
-    topic_keys: ["COVID_EXP", "COVID_MEASURE"],
-    infobase_link:
-      "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
-  },
-});
+const covid = common_source_and_topic_data_set_defs(
+  ["COVID"],
+  ["COVID", "COVID_MEASURE"],
+  {
+    covid_auth: {
+      name: text_maker("covid_measure_spending_auth"),
+      topic_keys: ["COVID_AUTH"],
+      infobase_link:
+        "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+    },
+    covid_exp: {
+      name: text_maker("covid_expenditures_estimated_exp"),
+      topic_keys: ["COVID_EXP"],
+      infobase_link:
+        "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
+    },
+  }
+);
 
 // TODO is the program structure also a "dataset"?
-const misc: DataSetDefs = {
-  igoc: {
-    name: DataSources.IGOC.name,
-    source_keys: ["IGOC"],
-    topic_keys: [],
-    infobase_link: "#igoc",
-  },
-  tabled_estimates: {
-    name: text_maker("tabled_estimates_dataset"),
-    source_keys: ["ESTIMATES"],
-    topic_keys: ["AUTH", "EST_PROC", "VOTED", "STAT"],
-    infobase_link: rpb_link({
-      table: "orgVoteStatEstimates",
-    }),
-  },
-  transfer_payments_by_region: {
-    name: DataSources.RTP.name,
-    source_keys: ["RTP"],
-    topic_keys: ["TP_GEO", "SOBJ10"],
-    infobase_link: rpb_link({
-      table: "orgTransferPaymentsRegion",
-    }),
-  },
-  service_inventory: {
-    name: DataSources.SERVICES.name,
-    source_keys: ["SERVICES"],
-    topic_keys: ["SERVICES"],
-    infobase_link:
-      "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
-  },
-};
+const misc =
+  make_identity_which_types_a_record_while_preserving_keys<DataSetDef>()({
+    igoc: {
+      name: DataSources.IGOC.name,
+      source_keys: ["IGOC"],
+      topic_keys: [],
+      infobase_link: "#igoc",
+    },
+    tabled_estimates: {
+      name: text_maker("tabled_estimates_dataset"),
+      source_keys: ["ESTIMATES"],
+      topic_keys: ["AUTH", "EST_PROC", "VOTED", "STAT"],
+      infobase_link: rpb_link({
+        table: "orgVoteStatEstimates",
+      }),
+    },
+    transfer_payments_by_region: {
+      name: DataSources.RTP.name,
+      source_keys: ["RTP"],
+      topic_keys: ["TP_GEO", "SOBJ10"],
+      infobase_link: rpb_link({
+        table: "orgTransferPaymentsRegion",
+      }),
+    },
+    service_inventory: {
+      name: DataSources.SERVICES.name,
+      source_keys: ["SERVICES"],
+      topic_keys: ["SERVICES"],
+      infobase_link:
+        "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
+    },
+  });
 
 export const DataSets = _.mapValues(
-  { ...misc, ...people, ...covid },
+  _.merge(people, covid, misc),
   (def: DataSetDef) => ({
     ...def,
     sources: _.chain(def.source_keys)
