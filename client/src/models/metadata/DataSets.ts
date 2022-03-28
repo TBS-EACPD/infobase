@@ -1,15 +1,12 @@
 import _ from "lodash";
 
-// import/order seems to not behave well with `import type ...` lines right now,
-// VS code auto fixes to move the util_type import here on save, but the webpack linting complains about it
-// TODO there's some import/order + import type related PRs on the package right now, might be fixed soon, keep an eye out
-// eslint-disable-next-line import/order
-import { InferedKeysRecordHelper } from "src/types/type_utils";
 import type { TopicKey } from "src/models/footnotes/footnotes";
 
 import { create_text_maker } from "src/models/text";
 
 import { rpb_link } from "src/rpb/rpb_link";
+
+import { InferedKeysRecordHelper } from "src/types/type_utils";
 import type { PartialOn, NonEmpty } from "src/types/util_types.d";
 
 import type { SourceKey } from "./DataSources";
