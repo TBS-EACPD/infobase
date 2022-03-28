@@ -181,7 +181,10 @@ export const DataSets = _.mapValues(
   (def: DataSetDef) => ({
     ...def,
     sources: _.chain(def.source_keys)
-      .map((source_key) => [source_key, DataSources[source_key]])
+      .map((source_key): [SourceKey, typeof DataSources[SourceKey]] => [
+        source_key,
+        DataSources[source_key],
+      ])
       .fromPairs()
       .value(),
   })
