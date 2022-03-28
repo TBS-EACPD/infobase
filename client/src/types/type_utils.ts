@@ -1,50 +1,39 @@
-// VERY RARELY, some actual TS can be useful for it's typing rather than any actual effect.
+// VERY RARELY, some actual _code_ can be useful for it's typing rather than its actual effect.
 // These are probably all hacks, especially if they don't strictly transpile to an identity!
 
 /*
-  Problem: when you're defining an object with arbitrary keys and some fixed value type. You want the values to be type checked
-  and you also want the type system to know the keys afterwards.
+  Problem: you're declaring an object with arbitrary keys and some fixed type for all values (and that type's non-literal). 
+  You want the values to be typed (like a Record<...>) BUT you also really want the type system to know the keys of the object 
+  itself (like an object literal).
 
-  Note: if your value type is a literal, then this is all unnecessary. You can declare the object `as const` and the type system
-  will unambiguously know the keys.
-
-  By default, you might write this
-  ```
-    const some_typed_record_with_known_keys: Record<string, ArbitraryType> = {
-      key1: ...,
-      key2: ...,
-    };
-  ```
-  `ArbitraryType` _will_ be checked/known on the values, but the type of `some_typed_record_with_known_keys` will be 
-  `{ [x: string]: ArbitraryType}`, not picking up the fixed key values.
-
-  Most ways I've seen for solving this require duplicating the keys as both types and actual JS values, e.g
+  Most ways I've seen for solving this require duplicating the keys on the object and in separate union type, e.g
   ```
     type SomeKeys = "key1" | "key2";
 
-    const some_typed_record_with_known_keys: { [key in SomeKeys]: ArbitraryType } = {
+    const some_typed_record_with_known_keys: Record<SomeKeys, ArbitraryType> = {
       key1: ...,
       key2: ...,
     };
   ```
 
-  That's a bother! Can we do better? Turns out, with a bit of uglyness, yes! Using the utility function below, we can write
+  That's a bother to write and maintain! Can we do better? Turns out, with a bit of uglyness, yes! Using the utility function 
+  below, we can write
   ```
-    const some_typed_record_with_known_keys = make_identity_which_types_a_record_while_preserving_keys<ArbitraryType>()({
+    const some_typed_record_with_known_keys = InferedKeyRecordHelper<ArbitraryType>()({
       key1: ...,
       key2: ...,
     });
   ```
-
-  And boom, the value types are asserted, and the keys of the resulting record are known to the type system! The function used
-  to pull of this little hack transpiles to an identity, so the run time trade off is almost certainly worth the improved typing
-  experience.
-
-  TODO explain _how_ it works
+  And boom, the type system sees `some_typed_record_with_known_keys` as an object literal and knows it's keys, but also knows
+  (and asserts, in the identity's argument) that the value's are `ArbitraryType`s! 
+  
+  Only downside is that it uses actual code for purely type system gains, since a curried outer function is necessary for partial
+  type inference. It transpiles to an identity, so it's about as negligible for the run time as it could be. That and the empty
+  curry call is a bit ugly itself. Ah well, at least you're not maintaining a separate type for all your keys anymore!
 */
-export const make_identity_which_types_a_record_while_preserving_keys =
-  <ValueType>() =>
-  <RecordType extends Record<string | number | symbol, ValueType>>(
-    record: RecordType
-  ): { [key in keyof RecordType]: ValueType } =>
+export const InferedKeysRecordHelper =
+  <RecordValue>() =>
+  <RecordKeys extends string | number | symbol>(record: {
+    [Key in RecordKeys]: RecordValue;
+  }) =>
     record;
