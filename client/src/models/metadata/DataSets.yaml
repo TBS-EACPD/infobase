@@ -81,3 +81,11 @@ employee_type_open_data_link:
 tabled_estimates_dataset:
   en: Tabled Estimates
   fr: Budgets déposés
+
+
+actual_results_dataset:
+  en: Performance information (results and indicators) by Program and by Organization
+  fr: Information sur le rendement (résultats et indicateurs) par programme et par organisation
+planned_results_dataset:
+  en: Planned performance information (results and indicators) by Program and by Organization
+  fr: Information sur le rendement prévu (résultats et indicateurs) par programme et par organisation

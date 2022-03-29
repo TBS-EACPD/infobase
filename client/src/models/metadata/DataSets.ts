@@ -230,6 +230,19 @@ const misc = InferedKeysRecordHelper<DataSetDef>()({
     infobase_link:
       "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
   },
+  actual_results: {
+    name: text_maker("actual_results_dataset"),
+    source_keys: ["DRR"],
+    topic_keys: ["DRR", "RESULTS"],
+    infobase_link:
+      "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
+  },
+  planned_results: {
+    name: text_maker("planned_results_dataset"),
+    source_keys: ["DP"],
+    topic_keys: ["DP", "RESULTS"],
+    infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
+  },
 });
 
 const all_data_set_defs = _.merge(
