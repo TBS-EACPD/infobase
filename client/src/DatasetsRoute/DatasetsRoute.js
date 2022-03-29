@@ -19,6 +19,11 @@ import text from "./DatasetsRoute.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+const legacy_id_map = _.chain(DataSources)
+  .map(({ key, legacy_key }) => [legacy_key, key])
+  .fromPairs()
+  .value();
+
 export default class DatasetsRoute extends React.Component {
   render() {
     const {
@@ -42,7 +47,13 @@ export default class DatasetsRoute extends React.Component {
         <p>
           <TM k="datasets_route_description" />
         </p>
-        <ScrollToTargetContainer target_id={data_source}>
+        <ScrollToTargetContainer
+          target_id={
+            _.has(legacy_id_map, data_source)
+              ? legacy_id_map[data_source]
+              : data_source
+          }
+        >
           {_.map(DataSources, (source) => {
             const data_sets = _.pickBy(Datasets, ({ source_keys }) =>
               _.includes(source_keys, source.key)

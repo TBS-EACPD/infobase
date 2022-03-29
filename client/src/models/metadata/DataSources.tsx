@@ -19,73 +19,84 @@ type SourceDef = {
   authoritative_link?: string;
   open_data_link?: string;
   frequency_key?: keyof typeof Frequencies;
+  legacy_key?: string;
 };
 
 const source_definitions = InferedKeysRecordHelper<SourceDef>()({
-  IGOC: {
+  igoc: {
     name: text_maker("igoc_name"),
     description: <TM k="igoc_desc" />,
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
+    legacy_key: "IGOC",
   },
-  PA: {
+  pa: {
     name: text_maker("pa_name"),
     description: <TM k="igoc_desc" />,
     authoritative_link: text_maker("pa_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
+    legacy_key: "PA",
   },
-  CFMRS: {
+  cfmrs: {
     name: text_maker("cfmrs_name"),
     description: <TM k="cfmrs_desc" />,
     open_data_link: text_maker("cfmrs_open_data_link"),
     frequency_key: "yearly",
+    legacy_key: "CFMRS",
   },
-  RTP: {
+  rtp: {
     name: text_maker("rtp_name"),
     description: <TM k="rtp_desc" />,
     open_data_link: text_maker("rtp_open_data_link"),
     frequency_key: "yearly",
+    legacy_key: "RTP",
   },
-  ESTIMATES: {
+  estimates: {
     name: text_maker("estimates_name"),
     description: <TM k="estimates_desc" />,
     authoritative_link: text_maker("estimates_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "quarterly",
+    legacy_key: "ESTIMATES",
   },
-  DP: {
+  dp: {
     name: text_maker("dp_name"),
     description: <TM k="dp_desc" />,
     authoritative_link: text_maker("dp_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
+    legacy_key: "DP",
   },
-  DRR: {
+  drr: {
     name: text_maker("drr_name"),
     description: <TM k="drr_desc" />,
     authoritative_link: text_maker("drr_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
+    legacy_key: "DRR",
   },
-  RPS: {
+  rps: {
     name: text_maker("rps_name"),
     description: <TM k="rps_desc" />,
     authoritative_link: text_maker("rps_authoritative_link"),
     frequency_key: "yearly",
+    legacy_key: "RPS",
   },
-  COVID: {
+  covid: {
     name: text_maker("covid_name"),
     description: <TM k="covid_desc" />,
     open_data_link: text_maker("covid_open_data_link"),
     frequency_key: "as_needed",
+    legacy_key: "COVID",
   },
   ...(services_feature_flag && {
-    SERVICES: {
+    services: {
       name: text_maker("services_name"),
       description: <TM k="services_desc" />,
       open_data_link: text_maker("services_open_data_link"),
       frequency_key: "yearly",
+      legacy_key: "SERVICES",
     },
   }),
 });

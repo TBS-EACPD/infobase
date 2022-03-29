@@ -340,7 +340,7 @@ export default class EstimatesExplorerComponent extends React.Component {
           <br />
           <TM
             k="estimates_source_link"
-            args={{ href: DataSources.ESTIMATES.open_data_link }}
+            args={{ href: DataSources.estimates.open_data_link }}
           />
         </div>
       </div>
