@@ -17,7 +17,7 @@ import {
 
 import { create_fake_footnote } from "src/models/footnotes/footnotes";
 
-import { get_source_links } from "src/metadata/utils";
+import { get_source_links } from "src/Datasets/utils";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

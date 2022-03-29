@@ -20,8 +20,8 @@ import { Dept, Program } from "src/models/subjects";
 
 import { formats } from "src/core/format";
 
+import { get_source_links } from "src/Datasets/utils";
 import { infographic_href_template } from "src/link_utils";
-import { get_source_links } from "src/metadata/utils";
 
 import "src/panels/panel_declarations/services/services.scss";
 

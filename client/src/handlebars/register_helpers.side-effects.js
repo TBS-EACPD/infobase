@@ -711,9 +711,9 @@ HandlebarsWithPrototypeAccess.registerHelper(
 );
 
 HandlebarsWithPrototypeAccess.registerHelper(
-  "metadata_source_link",
+  "datasets_source_link",
   function (link_text, source_key) {
-    const str = `<a href=${"#metadata/" + source_key}>${link_text}</a>`;
+    const str = `<a href=${"#datasets/" + source_key}>${link_text}</a>`;
     return new HandlebarsWithPrototypeAccess.SafeString(str);
   }
 );

@@ -15,7 +15,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/metadata/utils";
+import { get_source_links } from "src/Datasets/utils";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

@@ -1,8 +1,4 @@
-metadata_desc_meta_attr:
-  en: Open and accessible datasets. The hard numbers, organized by their source report to make your research easy. If it’s in the Public Accounts, Main Estimates or Departmental Plans, it’s here.
-  fr: Ensembles de données ouvertes et accessibles. Les chiffres réels sont organisés par « rapport source » pour faciliter vos recherches. Si cela figure dans les Comptes publics, le budget principal des dépenses ou les plans ministériels, c'est ici.
-
-metadata_t:
+datasets_route_description:
   transform: [handlebars,markdown]
   en: |
     The financial, people management and results data presented in GC InfoBase are periodically updated as new information becomes available.
@@ -22,7 +18,6 @@ where_does_data_come_from:
   en: Where does GC InfoBase's data come from ?
   fr: D'où vient les données d'InfoBase du GC ?
 
-
 links:
   en: Links
   fr: Liens
@@ -36,7 +31,3 @@ refresh_freq:
 rpb_link_text:
   en: Build a report
   fr: Générer un rapport
-
-datasets:
-  en: Datasets
-  fr: Tableaux de données

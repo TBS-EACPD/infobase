@@ -9,7 +9,7 @@ import { LeafSpinner } from "src/components/index";
 import { query_gov_covid_summaries } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
-import { get_source_links } from "src/metadata/utils";
+import { get_source_links } from "src/Datasets/utils";
 
 import { YearSelectionTabs } from "./covid_common_components";
 import {

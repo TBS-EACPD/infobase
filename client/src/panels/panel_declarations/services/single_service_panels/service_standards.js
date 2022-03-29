@@ -17,10 +17,10 @@ import { create_fake_footnote } from "src/models/footnotes/footnotes";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import { get_source_links } from "src/Datasets/utils";
 import { toggle_list } from "src/general_utils";
 
 import { IconAttention, IconCheck, IconNotApplicable } from "src/icons/icons";
-import { get_source_links } from "src/metadata/utils";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

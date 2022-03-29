@@ -67,7 +67,7 @@ const search_options_hierarchy = {
     child_options: {
       include_services: { label: text_maker("services") },
       include_glossary: { label: text_maker("glossary") },
-      include_tables: { label: text_maker("metadata") },
+      include_tables: { label: text_maker("datasets") },
     },
   },
 };
