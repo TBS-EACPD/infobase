@@ -21,7 +21,7 @@ const route_load_tests_config = [
   },
   {
     name: "Datasets",
-    route: "metadata",
+    route: "datasets",
     test_on: ["eng", "basic-eng"],
   },
   {
