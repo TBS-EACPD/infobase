@@ -101,13 +101,13 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
   }),
 });
 
-export type SourceKey = keyof typeof source_definitions;
+export type DataSourceKey = keyof typeof source_definitions;
 
 export const DataSources = _.mapValues(
   source_definitions,
   (def: SourceDef, key) => ({
     ...def,
-    key: key as SourceKey,
+    key: key as DataSourceKey,
     frequency:
       def.frequency_key !== undefined
         ? Frequencies[def.frequency_key]
