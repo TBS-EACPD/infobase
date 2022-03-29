@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -11,7 +11,7 @@ const { std_years } = year_templates;
 export default {
   id: "orgVoteStatPa",
   legacy_id: "table4",
-  data_set: DataSets.org_vote_stat,
+  data_set: Datasets.org_vote_stat,
   text,
 
   add_cols: function () {

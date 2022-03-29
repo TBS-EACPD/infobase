@@ -10,7 +10,7 @@ import {
 
 import { DataSources } from "src/models/metadata/DataSources";
 
-import { get_source_link } from "src/Datasets/utils";
+import { get_source_link } from "src/DatasetsRoute/utils";
 import { IconCopyLink } from "src/icons/icons";
 
 import { secondaryColor } from "src/style_constants/index";

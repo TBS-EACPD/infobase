@@ -16,7 +16,7 @@ import {
   useServicesByProgram,
 } from "src/models/services/services_queries";
 
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import text from "./services.yaml";

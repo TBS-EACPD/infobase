@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { year_templates } from "src/models/years";
 
 import text from "./orgTransferPaymentsRegion.yaml";
@@ -11,7 +11,7 @@ const { tp_by_region_years } = year_templates;
 
 export default {
   id: "orgTransferPaymentsRegion",
-  data_set: DataSets.transfer_payments_by_region,
+  data_set: Datasets.transfer_payments_by_region,
   text,
 
   add_cols: function () {

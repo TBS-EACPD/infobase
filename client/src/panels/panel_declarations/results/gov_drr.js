@@ -13,7 +13,7 @@ import {
 
 import { Gov, Dept } from "src/models/subjects";
 
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
 import { LateDepartmentsBanner } from "./result_components";

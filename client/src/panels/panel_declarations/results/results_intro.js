@@ -11,7 +11,7 @@ import { Dept } from "src/models/subjects";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 
 import { get_static_url } from "src/request_utils";
 

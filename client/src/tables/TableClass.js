@@ -225,7 +225,7 @@ export class Table {
   constructor(table_def) {
     Object.assign(this, this.constructor.default_props(), {
       ...table_def,
-      // TODO all of these should eventually stop being on the table objects, panels and the RPB should access this information via the DataSets model directly
+      // TODO all of these should eventually stop being on the table objects, panels and the RPB should access this information via the s model directly
       name: table_def.data_set?.name || table_def.name[lang],
       source: table_def.data_set?.source_keys || table_def.source,
       link: table_def.data_set?.open_data_link || table_def.link?.[lang],

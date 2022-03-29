@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -13,7 +13,7 @@ const { transfer_payments } = businessConstants;
 export default {
   id: "orgTransferPayments",
   legacy_id: "table7",
-  data_set: DataSets.transfer_payments,
+  data_set: Datasets.transfer_payments,
   text,
 
   add_cols: function () {

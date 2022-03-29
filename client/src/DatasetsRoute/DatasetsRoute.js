@@ -7,7 +7,7 @@ import {
   Panel,
 } from "src/components/index";
 
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { DataSources } from "src/models/metadata/DataSources";
 
 import {
@@ -15,11 +15,11 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents";
 
-import text from "./Datasets.yaml";
+import text from "./DatasetsRoute.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-export default class Datasets extends React.Component {
+export default class DatasetsRoute extends React.Component {
   render() {
     const {
       match: {
@@ -44,7 +44,7 @@ export default class Datasets extends React.Component {
         </p>
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(DataSources, (source) => {
-            const data_sets = _.pickBy(DataSets, ({ source_keys }) =>
+            const data_sets = _.pickBy(Datasets, ({ source_keys }) =>
               _.includes(source_keys, source.key)
             );
 

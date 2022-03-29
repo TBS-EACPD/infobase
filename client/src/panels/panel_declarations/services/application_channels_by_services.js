@@ -23,7 +23,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 
 import { application_channels_keys } from "./shared";
 

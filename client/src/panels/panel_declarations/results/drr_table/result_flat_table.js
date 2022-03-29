@@ -43,7 +43,7 @@ import { get_subject_instance_by_guid } from "src/models/subjects";
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 import { toggle_list, SafeJSURL } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { smart_sort_func } from "src/sort_utils";

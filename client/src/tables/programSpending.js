@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { Program } from "src/models/subjects";
 import { year_templates } from "src/models/years";
 
@@ -11,7 +11,7 @@ const { std_years, planning_years } = year_templates;
 export default {
   id: "programSpending",
   legacy_id: "table6",
-  data_set: DataSets.program_spending,
+  data_set: Datasets.program_spending,
   text,
 
   subject_type: "program",

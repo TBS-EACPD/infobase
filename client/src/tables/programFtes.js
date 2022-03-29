@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { Program } from "src/models/subjects";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
@@ -12,7 +12,7 @@ const { std_years, planning_years } = year_templates;
 export default {
   id: "programFtes",
   legacy_id: "table12",
-  data_set: DataSets.program_ftes,
+  data_set: Datasets.program_ftes,
   text,
 
   subject_type: "program",

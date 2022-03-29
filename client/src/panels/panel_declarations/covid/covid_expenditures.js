@@ -19,7 +19,7 @@ import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStor
 import { Dept } from "src/models/subjects";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { minLargeDevice } from "src/style_constants/index";
 
