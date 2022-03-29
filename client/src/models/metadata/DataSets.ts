@@ -176,16 +176,15 @@ const misc = InferedKeysRecordHelper<DataSetDef>()({
   },
 });
 
+const all_data_set_defs = _.merge(people, covid, misc);
+
+export type DataSetKey = keyof typeof all_data_set_defs;
+
 export const DataSets = _.mapValues(
-  _.merge(people, covid, misc),
-  (def: DataSetDef) => ({
+  all_data_set_defs,
+  (def: DataSetDef, key) => ({
     ...def,
-    sources: _.chain(def.source_keys)
-      .map((source_key): [SourceKey, typeof DataSources[SourceKey]] => [
-        source_key,
-        DataSources[source_key],
-      ])
-      .fromPairs()
-      .value(),
+    key: key as DataSetKey,
+    sources: _.map(def.source_keys, (source_key) => DataSources[source_key]),
   })
 );
