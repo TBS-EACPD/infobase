@@ -1,9 +1,11 @@
 {
   "meta": {
+    "hidden": true,
     "version": "1.0"
   },
   "faq": {
-    "required": false,
+    "hidden": true,
+    "required": true,
     "value_type": "true",
     "form_type": "form_faq",
     "faq_content": [
@@ -18,8 +20,7 @@
         }
       }
     ],
-    "templates": ["report_a_problem"],
-    "stay_completed": true
+    "templates": ["report_a_problem"]
   },
   "issue_type": {
     "required": true,

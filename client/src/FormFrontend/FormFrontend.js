@@ -167,8 +167,7 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      // keeping key === "faq" until faq content is made
-      ({ form_type }, key) => key === "meta" || key === "faq" || !form_type
+      ({ form_type, hidden }) => !!hidden || !form_type
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)
@@ -305,9 +304,9 @@ class FormFrontend extends React.Component {
                 {required_asterisk}
               </div>
               <FancyUL>
-                {_.map(field_info.faq_content, ({ q, a }) => {
+                {_.map(field_info.faq_content, ({ q, a }, idx) => {
                   return (
-                    <div key={_.uniqueId("form-faq-qa-pair_")}>
+                    <div key={idx}>
                       <div style={{ fontWeight: "bold" }}>{q[lang]}</div>
                       <div>{a[lang]}</div>
                     </div>
@@ -445,23 +444,12 @@ class FormFrontend extends React.Component {
                             )
                             .value();
 
-                          const keys_staying_completed = _.chain(template)
-                            .pickBy(
-                              (field_info) => !!field_info["stay_completed"]
-                            )
-                            .keys()
-                            .value();
-
                           this.setState({
                             ...this.state,
                             sent_to_backend: false,
                             awaiting_backend_response: false,
                             backend_response: {},
-                            completed_template: _.pickBy(
-                              completed_template,
-                              (field_info, field_key) =>
-                                _.includes(keys_staying_completed, field_key)
-                            ),
+                            completed_template: {},
                           });
                         }}
                       >
