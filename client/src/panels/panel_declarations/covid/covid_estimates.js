@@ -32,7 +32,7 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { toggle_list } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
-import { get_source_links } from "src/metadata/data_sources";
+import { get_source_links } from "src/metadata/utils";
 import { smart_sort_func } from "src/sort_utils";
 import { textColor } from "src/style_constants/index";
 

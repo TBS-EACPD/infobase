@@ -18,7 +18,7 @@ import {
 
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
-import { get_source_links } from "src/metadata/data_sources";
+import { get_source_links } from "src/metadata/utils";
 
 import text from "./services.yaml";
 

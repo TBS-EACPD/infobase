@@ -18,7 +18,7 @@ import {
 
 import { Dept, Program } from "src/models/subjects";
 
-import { get_source_links } from "src/metadata/data_sources";
+import { get_source_links } from "src/metadata/utils";
 
 import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);

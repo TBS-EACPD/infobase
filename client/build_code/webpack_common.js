@@ -175,7 +175,6 @@ function get_plugins({
           their initial execution safely.
         */
         const allowed_circular_dependencies = [
-          ["src/metadata/data_sources.js", "src/core/TableClass.js"],
           ["src/models/subjects/Dept.ts", "src/models/subjects/CRSO.ts"],
           ["src/models/subjects/CRSO.ts", "src/models/subjects/Program.ts"],
         ];

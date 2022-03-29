@@ -4,6 +4,8 @@ import type { TopicKey } from "src/models/footnotes/footnotes";
 
 import { create_text_maker } from "src/models/text";
 
+import { services_feature_flag } from "src/core/injected_build_constants";
+
 import { rpb_link } from "src/rpb/rpb_link";
 
 import { InferedKeysRecordHelper } from "src/types/type_utils";
@@ -223,13 +225,6 @@ const misc = InferedKeysRecordHelper<DataSetDef>()({
       table: "orgTransferPaymentsRegion",
     }),
   },
-  service_inventory: {
-    name: DataSources.SERVICES.name,
-    source_keys: ["SERVICES"],
-    topic_keys: ["SERVICES"],
-    infobase_link:
-      "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
-  },
   actual_results: {
     name: text_maker("actual_results_dataset"),
     source_keys: ["DRR"],
@@ -243,16 +238,25 @@ const misc = InferedKeysRecordHelper<DataSetDef>()({
     topic_keys: ["DP", "RESULTS"],
     infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
   },
+  ...(services_feature_flag && {
+    service_inventory: {
+      name: DataSources.SERVICES.name,
+      source_keys: ["SERVICES"],
+      topic_keys: ["SERVICES"],
+      infobase_link:
+        "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
+    },
+  }),
 });
 
-const all_data_set_defs = _.merge(
-  public_accounts,
-  cfmrs,
-  program_resources,
-  people,
-  covid,
-  misc
-);
+const all_data_set_defs = {
+  ...public_accounts,
+  ...cfmrs,
+  ...program_resources,
+  ...people,
+  ...covid,
+  ...misc,
+};
 
 export type DataSetKey = keyof typeof all_data_set_defs;
 

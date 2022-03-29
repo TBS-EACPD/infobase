@@ -45,7 +45,7 @@ import { lang } from "src/core/injected_build_constants";
 
 import { toggle_list, SafeJSURL } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
-import { get_source_links } from "src/metadata/data_sources";
+import { get_source_links } from "src/metadata/utils";
 import { smart_sort_func } from "src/sort_utils";
 import { secondaryColor } from "src/style_constants/index";
 

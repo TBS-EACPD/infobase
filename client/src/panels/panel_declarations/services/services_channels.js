@@ -25,7 +25,7 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { StandardLegend } from "src/charts/legends";
 
 import { WrappedNivoPie, WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/metadata/data_sources";
+import { get_source_links } from "src/metadata/utils";
 import { textColor } from "src/style_constants/index";
 
 import { application_channels_keys } from "./shared";

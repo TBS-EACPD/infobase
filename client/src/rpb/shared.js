@@ -8,11 +8,11 @@ import {
   FootnoteList,
 } from "src/components/index";
 
-import { lang } from "src/core/injected_build_constants";
+import { DataSources } from "src/models/metadata/DataSources";
 
 import { IconCopyLink } from "src/icons/icons";
 
-import { sources as all_sources } from "src/metadata/data_sources";
+import { get_source_link } from "src/metadata/utils";
 import { secondaryColor } from "src/style_constants/index";
 
 import { TextMaker } from "./rpb_text_provider";
@@ -91,16 +91,18 @@ const ReportDatasets = ({ table }) => {
       <TextMaker text_key="data_sources" />
     </span>,
     ..._.chain(table.source)
-      .map((source) => {
-        return all_sources[source].open_data ? (
+      .map((source_key) => {
+        const source = DataSources[source_key];
+
+        return source.open_data_link ? (
           <span key={table.id} className="row">
             <div className="col-12 d-flex">
-              <a href={"#metadata/" + source}>{all_sources[source].title}</a>
+              <a href={get_source_link(source).href}>{source.name}</a>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-xs btn-ib-primary btn-responsive-fixed-width"
-                href={all_sources[source].open_data[lang]}
+                href={source.open_data_link}
               >
                 <TextMaker text_key="open_data_link" />
               </a>
