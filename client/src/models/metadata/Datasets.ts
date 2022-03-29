@@ -52,7 +52,7 @@ const common_source_and_topic_data_set_defs = <
   );
 
 const public_accounts = common_source_and_topic_data_set_defs(
-  ["PA"],
+  ["pa"],
   ["PA", "EXP"],
   {
     org_standard_objects: {
@@ -80,7 +80,7 @@ const public_accounts = common_source_and_topic_data_set_defs(
 );
 
 const cfmrs = common_source_and_topic_data_set_defs(
-  ["CFMRS"],
+  ["cfmrs"],
   ["PROG", "PA", "EXP"],
   {
     program_standard_objects: {
@@ -101,7 +101,7 @@ const cfmrs = common_source_and_topic_data_set_defs(
 );
 
 const program_resources = common_source_and_topic_data_set_defs(
-  ["DRR", "DP"],
+  ["drr", "dp"],
   // PA and PLANNED_EXP don't seem like they should apply to FTEs, but they were already in the programFtes table
   // TODO check actual footnote content, see if FTE footnotes were making use of PA or PLANNED_EXP for some reason
   ["DRR", "DP", "PROG", "GOCO", "PA", "PLANNED_EXP"],
@@ -123,7 +123,7 @@ const program_resources = common_source_and_topic_data_set_defs(
   }
 );
 
-const people = common_source_and_topic_data_set_defs(["RPS"], ["PEOPLE"], {
+const people = common_source_and_topic_data_set_defs(["rps"], ["PEOPLE"], {
   age_group: {
     name: text_maker("age_group_dataset"),
     topic_keys: ["AGE", "SUPPRESSED_DATA"],
@@ -182,7 +182,7 @@ const people = common_source_and_topic_data_set_defs(["RPS"], ["PEOPLE"], {
 });
 
 const covid = common_source_and_topic_data_set_defs(
-  ["COVID"],
+  ["covid"],
   ["COVID", "COVID_MEASURE"],
   {
     covid_auth: {
@@ -203,23 +203,23 @@ const covid = common_source_and_topic_data_set_defs(
 
 const misc = InferedKeysRecordHelper<DatasetDef>()({
   igoc: {
-    name: DataSources.IGOC.name,
-    source_keys: ["IGOC"],
+    name: DataSources.igoc.name,
+    source_keys: ["igoc"],
     topic_keys: [],
     infobase_link: "#igoc",
   },
   // TODO is the program structure also a "dataset"?
   tabled_estimates: {
     name: text_maker("tabled_estimates_dataset"),
-    source_keys: ["ESTIMATES"],
+    source_keys: ["estimates"],
     topic_keys: ["AUTH", "EST_PROC", "VOTED", "STAT"],
     infobase_link: rpb_link({
       table: "orgVoteStatEstimates",
     }),
   },
   transfer_payments_by_region: {
-    name: DataSources.RTP.name,
-    source_keys: ["RTP"],
+    name: DataSources.rtp.name,
+    source_keys: ["rtp"],
     topic_keys: ["TP_GEO", "SOBJ10"],
     infobase_link: rpb_link({
       table: "orgTransferPaymentsRegion",
@@ -227,21 +227,21 @@ const misc = InferedKeysRecordHelper<DatasetDef>()({
   },
   actual_results: {
     name: text_maker("actual_results_dataset"),
-    source_keys: ["DRR"],
+    source_keys: ["drr"],
     topic_keys: ["DRR", "RESULTS"],
     infobase_link:
       "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
   },
   planned_results: {
     name: text_maker("planned_results_dataset"),
-    source_keys: ["DP"],
+    source_keys: ["dp"],
     topic_keys: ["DP", "RESULTS"],
     infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
   },
   ...(services_feature_flag && {
     service_inventory: {
-      name: DataSources.SERVICES.name,
-      source_keys: ["SERVICES"],
+      name: DataSources.services.name,
+      source_keys: ["services"],
       topic_keys: ["SERVICES"],
       infobase_link:
         "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
