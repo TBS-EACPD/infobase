@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { estimates_docs } from "src/models/estimates";
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -14,7 +14,7 @@ const { estimates_years } = year_templates;
 export default {
   id: "orgVoteStatEstimates",
   legacy_id: "table8",
-  data_set: DataSets.tabled_estimates,
+  data_set: Datasets.tabled_estimates,
   text,
 
   add_cols: function () {

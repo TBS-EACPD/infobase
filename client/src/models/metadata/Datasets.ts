@@ -14,13 +14,13 @@ import type { PartialOn, NonEmpty } from "src/types/util_types.d";
 import type { SourceKey } from "./DataSources";
 import { DataSources } from "./DataSources";
 
-import text from "./DataSets.yaml";
+import text from "./Datasets.yaml";
 
 const text_maker = create_text_maker(text);
 
 type NonEmptySourceKeys = NonEmpty<SourceKey[]>;
 
-type DataSetDef = {
+type DatasetDef = {
   name: string;
   source_keys: NonEmpty<SourceKey[]>;
   topic_keys: TopicKey[];
@@ -29,18 +29,18 @@ type DataSetDef = {
 };
 
 const common_source_and_topic_data_set_defs = <
-  DataSetKey extends string | number | symbol
+  DatasetKey extends string | number | symbol
 >(
   common_sources: NonEmptySourceKeys,
   common_topic_keys: TopicKey[],
   partial_defs: Record<
-    DataSetKey,
-    PartialOn<PartialOn<DataSetDef, "source_keys">, "topic_keys">
+    DatasetKey,
+    PartialOn<PartialOn<DatasetDef, "source_keys">, "topic_keys">
   >
 ) =>
   _.mapValues(
     partial_defs,
-    (def): DataSetDef => ({
+    (def): DatasetDef => ({
       ...def,
       topic_keys: _.uniq([...common_topic_keys, ...(def.topic_keys ?? [])]),
       // type inference on NonEmpty isn't ideal, but we can safely assert this as NonEmpty because common_sources is too
@@ -201,7 +201,7 @@ const covid = common_source_and_topic_data_set_defs(
   }
 );
 
-const misc = InferedKeysRecordHelper<DataSetDef>()({
+const misc = InferedKeysRecordHelper<DatasetDef>()({
   igoc: {
     name: DataSources.IGOC.name,
     source_keys: ["IGOC"],
@@ -258,13 +258,13 @@ const all_data_set_defs = {
   ...misc,
 };
 
-export type DataSetKey = keyof typeof all_data_set_defs;
+export type DatasetKey = keyof typeof all_data_set_defs;
 
-export const DataSets = _.mapValues(
+export const Datasets = _.mapValues(
   all_data_set_defs,
-  (def: DataSetDef, key) => ({
+  (def: DatasetDef, key) => ({
     ...def,
-    key: key as DataSetKey,
+    key: key as DatasetKey,
     sources: _.map(def.source_keys, (source_key) => DataSources[source_key]),
   })
 );

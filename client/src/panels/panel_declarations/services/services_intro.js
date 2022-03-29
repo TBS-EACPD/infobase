@@ -15,7 +15,7 @@ import {
   useServiceSummaryOrg,
 } from "src/models/services/services_queries";
 
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 import { FormFrontend } from "src/FormFrontend";
 
 // import { formats } from "src/core/format";

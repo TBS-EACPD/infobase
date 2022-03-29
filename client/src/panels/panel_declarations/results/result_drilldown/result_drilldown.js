@@ -15,7 +15,7 @@ import { LeafSpinner } from "src/components/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
-import { get_source_links } from "src/Datasets/utils";
+import { get_source_links } from "src/DatasetsRoute/utils";
 
 import ResultsExplorer from "./results_scheme";
 

@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -11,7 +11,7 @@ const { people_years, people_years_short_second } = year_templates;
 export default {
   id: "orgEmployeeAvgAge",
   legacy_id: "table304",
-  data_set: DataSets.avg_age,
+  data_set: Datasets.avg_age,
   text,
 
   add_cols: function () {

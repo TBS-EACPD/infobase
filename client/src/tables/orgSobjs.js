@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { year_templates } from "src/models/years";
 
 import text from "./orgSobjs.yaml";
@@ -12,7 +12,7 @@ const { std_years } = year_templates;
 export default {
   id: "orgSobjs",
   legacy_id: "table5",
-  data_set: DataSets.org_standard_objects,
+  data_set: Datasets.org_standard_objects,
   text,
 
   add_cols: function () {

@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -15,7 +15,7 @@ const { people_years, people_years_short_second } = year_templates;
 export default {
   id: "orgEmployeeAgeGroup",
   legacy_id: "table11",
-  data_set: DataSets.age_group,
+  data_set: Datasets.age_group,
   text,
 
   add_cols: function () {

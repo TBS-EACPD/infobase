@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { Program } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
 
@@ -13,7 +13,7 @@ const { std_years } = year_templates;
 export default {
   id: "programVoteStat",
   legacy_id: "table300",
-  data_set: DataSets.program_vote_stat_objects,
+  data_set: Datasets.program_vote_stat_objects,
   text,
 
   subject_type: "program",

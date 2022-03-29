@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
-import { DataSets } from "src/models/metadata/DataSets";
+import { Datasets } from "src/models/metadata/Datasets";
 import { Program } from "src/models/subjects";
 
 import { year_templates } from "src/models/years";
@@ -15,7 +15,7 @@ const { std_years } = year_templates;
 export default {
   id: "programSobjs",
   legacy_id: "table305",
-  data_set: DataSets.program_standard_objects,
+  data_set: Datasets.program_standard_objects,
   text,
 
   subject_type: "program",
