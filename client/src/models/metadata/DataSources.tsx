@@ -35,13 +35,6 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
-  ESTIMATES: {
-    name: text_maker("estimates_name"),
-    description: <TM k="estimates_desc" />,
-    authoritative_link: text_maker("estimates_authoritative_link"),
-    open_data_link: text_maker("common_infobase_open_data_link"),
-    frequency_key: "quarterly",
-  },
   CFMRS: {
     name: text_maker("cfmrs_name"),
     description: <TM k="cfmrs_desc" />,
@@ -53,6 +46,13 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     description: <TM k="rtp_desc" />,
     open_data_link: text_maker("rtp_open_data_link"),
     frequency_key: "yearly",
+  },
+  ESTIMATES: {
+    name: text_maker("estimates_name"),
+    description: <TM k="estimates_desc" />,
+    authoritative_link: text_maker("estimates_authoritative_link"),
+    open_data_link: text_maker("common_infobase_open_data_link"),
+    frequency_key: "quarterly",
   },
   DP: {
     name: text_maker("dp_name"),
