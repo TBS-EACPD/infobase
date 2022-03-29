@@ -23,10 +23,10 @@ module.exports = {
       }
     },
     "Datasets": {
-      "Tested on index-eng.html#metadata": {
+      "Tested on index-eng.html#datasets": {
         "Axe violations allow list": null
       },
-      "Tested on index-basic-eng.html#metadata": {
+      "Tested on index-basic-eng.html#datasets": {
         "Axe violations allow list": null
       }
     },
