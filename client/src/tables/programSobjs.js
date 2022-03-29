@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { Program } from "src/models/subjects";
 
 import { year_templates } from "src/models/years";
@@ -12,16 +13,13 @@ const { sos } = businessConstants;
 const { std_years } = year_templates;
 
 export default {
-  text,
   id: "programSobjs",
   legacy_id: "table305",
+  data_set: DataSets.program_standard_objects,
+  text,
+
   subject_type: "program",
-  source: ["CFMRS"],
-  tags: ["PA", "SOBJ", "EXP", "PROG", "GOCO"],
-  name: {
-    en: "Program Expenditures by Standard Object",
-    fr: "Dépenses de programmes par article courant",
-  },
+
   add_cols() {
     this.add_col({
       type: "int",

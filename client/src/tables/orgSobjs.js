@@ -1,6 +1,7 @@
 import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
+import { DataSets } from "src/models/metadata/DataSets";
 import { year_templates } from "src/models/years";
 
 import text from "./orgSobjs.yaml";
@@ -9,15 +10,10 @@ const { sos } = businessConstants;
 const { std_years } = year_templates;
 
 export default {
-  text,
   id: "orgSobjs",
   legacy_id: "table5",
-  tags: ["SOBJ", "EXP", "PA"],
-  source: ["PA"],
-  name: {
-    en: "Expenditures by Standard Object",
-    fr: "Dépenses par article courant",
-  },
+  data_set: DataSets.org_standard_objects,
+  text,
 
   add_cols: function () {
     this.add_col({

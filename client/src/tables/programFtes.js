@@ -1,9 +1,8 @@
 import _ from "lodash";
 
+import { DataSets } from "src/models/metadata/DataSets";
 import { Program } from "src/models/subjects";
-
 import { run_template } from "src/models/text";
-
 import { year_templates } from "src/models/years";
 
 import text from "./programFtes.yaml";
@@ -11,17 +10,12 @@ import text from "./programFtes.yaml";
 const { std_years, planning_years } = year_templates;
 
 export default {
-  text,
   id: "programFtes",
   legacy_id: "table12",
-  subject_type: "program",
-  source: ["DP", "DRR"],
-  tags: ["GOCO", "PA", "FTE", "PROG", "PLANNED_EXP", "DP", "DRR"],
+  data_set: DataSets.program_ftes,
+  text,
 
-  name: {
-    en: "Actual and Planned Full-Time Equivalents (FTEs) by Program",
-    fr: "Équivalents temps plein (ETP) actuels et prévus par programme",
-  },
+  subject_type: "program",
 
   add_cols: function () {
     this.add_col({

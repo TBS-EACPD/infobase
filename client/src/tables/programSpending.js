@@ -1,7 +1,7 @@
 import _ from "lodash";
 
+import { DataSets } from "src/models/metadata/DataSets";
 import { Program } from "src/models/subjects";
-
 import { year_templates } from "src/models/years";
 
 import text from "./programSpending.yaml";
@@ -9,17 +9,12 @@ import text from "./programSpending.yaml";
 const { std_years, planning_years } = year_templates;
 
 export default {
-  text,
   id: "programSpending",
   legacy_id: "table6",
-  subject_type: "program",
-  source: ["PA", "DP", "DRR"],
-  tags: ["GOCO", "PLANNED_EXP", "PA", "EXP", "AUTH", "PROG", "DP", "DRR"],
+  data_set: DataSets.program_spending,
+  text,
 
-  name: {
-    en: "Expenditures and Planned Spending by Program",
-    fr: "Dépenses réelles et prévues par programme",
-  },
+  subject_type: "program",
 
   add_cols: function () {
     this.add_col({ nick: "preamble", header: "" }).add_child([
