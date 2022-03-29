@@ -1,7 +1,7 @@
 import _ from "lodash";
 
+import { DataSets } from "src/models/metadata/DataSets";
 import { Program } from "src/models/subjects";
-
 import { trivial_text_maker } from "src/models/text";
 
 import { year_templates } from "src/models/years";
@@ -11,16 +11,13 @@ import text from "./programVoteStat.yaml";
 const { std_years } = year_templates;
 
 export default {
-  text,
   id: "programVoteStat",
   legacy_id: "table300",
+  data_set: DataSets.program_vote_stat_objects,
+  text,
+
   subject_type: "program",
-  tags: ["PROG", "PA", "EXP", "VOTED", "STAT"],
-  source: ["CFMRS"],
-  name: {
-    en: "Program Expenditures by Authority Type",
-    fr: "Dépenses de programme par type d'autorisation",
-  },
+
   add_cols: function () {
     this.add_col({
       type: "int",

@@ -1,5 +1,6 @@
 import _ from "lodash";
 
+import { DataSets } from "src/models/metadata/DataSets";
 import { trivial_text_maker } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -8,16 +9,10 @@ import text from "./orgVoteStatPa.yaml";
 const { std_years } = year_templates;
 
 export default {
-  text,
   id: "orgVoteStatPa",
   legacy_id: "table4",
-  tags: ["PA", "AUTH", "EXP", "VOTED", "STAT"],
-
-  source: ["PA"],
-  name: {
-    en: "Authorities and Expenditures",
-    fr: "Autorisations et dépenses",
-  },
+  data_set: DataSets.org_vote_stat,
+  text,
 
   add_cols: function () {
     this.add_col({

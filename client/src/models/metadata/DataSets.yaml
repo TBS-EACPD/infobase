@@ -1,6 +1,31 @@
-tabled_estimates_dataset:
-  en: Tabled Estimates
-  fr: Budgets déposés
+org_standard_objects_dataset:
+  en: Expenditures by Standard Object
+  fr: Dépenses par article courant
+
+transfer_payments_dataset:
+  en: Transfer Payments
+  fr: Paiements de transfert
+
+org_vote_stat_dataset:
+  en: Authorities and Expenditures
+  fr: Autorisations et dépenses
+
+
+program_standard_objects_dataset:
+  en: Program Expenditures by Standard Object
+  fr: Dépenses de programmes par article courant
+
+program_vote_stat_objects_dataset:
+  en: Program Expenditures by Authority Type
+  fr: Dépenses de programme par type d'autorisation
+
+
+program_spending_dataset:
+  en: Expenditures and Planned Spending by Program
+  fr: Dépenses réelles et prévues par programme
+program_ftes_dataset:
+  en: Actual and Planned Full-Time Equivalents (FTEs) by Program
+  fr: Équivalents temps plein (ETP) actuels et prévus par programme
 
 
 age_group_dataset:
@@ -51,3 +76,8 @@ employee_type_dataset:
 employee_type_open_data_link:
   en: http://open.canada.ca/data/en/dataset/13c5b5c5-5bbb-48b1-907a-dc7c5975345d
   fr: http://ouvert.canada.ca/data/fr/dataset/13c5b5c5-5bbb-48b1-907a-dc7c5975345d
+
+
+tabled_estimates_dataset:
+  en: Tabled Estimates
+  fr: Budgets déposés
