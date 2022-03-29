@@ -3,6 +3,8 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
 
+import { services_feature_flag } from "src/core/injected_build_constants";
+
 import { InferedKeysRecordHelper } from "src/types/type_utils";
 
 import { Frequencies } from "./Frequencies";
@@ -78,12 +80,14 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     open_data_link: text_maker("covid_open_data_link"),
     frequency_key: "as_needed",
   },
-  SERVICES: {
-    name: text_maker("services_name"),
-    description: <TM k="services_desc" />,
-    open_data_link: text_maker("services_open_data_link"),
-    frequency_key: "yearly",
-  },
+  ...(services_feature_flag && {
+    SERVICES: {
+      name: text_maker("services_name"),
+      description: <TM k="services_desc" />,
+      open_data_link: text_maker("services_open_data_link"),
+      frequency_key: "yearly",
+    },
+  }),
 });
 
 export type SourceKey = keyof typeof source_definitions;

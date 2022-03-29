@@ -16,6 +16,8 @@ import { create_text_maker_component } from "src/components/misc_util_components
 
 import { estimates_docs } from "src/models/estimates";
 
+import { DataSources } from "src/models/metadata/DataSources";
+
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
 import common_faq from "src/common_text/faq/common_questions.yaml";
@@ -24,7 +26,6 @@ import fin_faq from "src/common_text/faq/financial_questions.yaml";
 import { Explorer } from "src/explorer_common/explorer_components";
 import { get_root } from "src/explorer_common/hierarchy_tools";
 import { infographic_href_template, rpb_link } from "src/link_utils";
-import { sources } from "src/metadata/data_sources";
 import { primaryColor } from "src/style_constants/colors.interop.scss";
 
 import {
@@ -339,7 +340,7 @@ export default class EstimatesExplorerComponent extends React.Component {
           <br />
           <TM
             k="estimates_source_link"
-            args={{ href: sources.ESTIMATES.open_data[lang] }}
+            args={{ href: DataSources.ESTIMATES.open_data_link }}
           />
         </div>
       </div>

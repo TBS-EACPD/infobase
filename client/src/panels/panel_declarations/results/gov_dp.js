@@ -13,7 +13,7 @@ import {
 
 import { Dept } from "src/models/subjects";
 
-import { get_source_links } from "src/metadata/data_sources";
+import { get_source_links } from "src/metadata/utils";
 
 import { LateDepartmentsBanner } from "./result_components";
 import {
