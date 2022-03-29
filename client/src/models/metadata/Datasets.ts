@@ -11,18 +11,18 @@ import { rpb_link } from "src/rpb/rpb_link";
 import { InferedKeysRecordHelper } from "src/types/type_utils";
 import type { PartialOn, NonEmpty } from "src/types/util_types.d";
 
-import type { SourceKey } from "./DataSources";
+import type { DataSourceKey } from "./DataSources";
 import { DataSources } from "./DataSources";
 
 import text from "./Datasets.yaml";
 
 const text_maker = create_text_maker(text);
 
-type NonEmptySourceKeys = NonEmpty<SourceKey[]>;
+type NonEmptySourceKeys = NonEmpty<DataSourceKey[]>;
 
 type DatasetDef = {
   name: string;
-  source_keys: NonEmpty<SourceKey[]>;
+  source_keys: NonEmpty<DataSourceKey[]>;
   topic_keys: TopicKey[];
   infobase_link: string;
   open_data_link?: string;

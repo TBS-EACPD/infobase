@@ -15,20 +15,17 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents";
 
+import { data_source_legacy_key_map } from "./utils";
+
 import text from "./DatasetsRoute.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const legacy_id_map = _.chain(DataSources)
-  .map(({ key, legacy_key }) => [legacy_key, key])
-  .fromPairs()
-  .value();
 
 export default class DatasetsRoute extends React.Component {
   render() {
     const {
       match: {
-        params: { data_source },
+        params: { data_source_key },
       },
     } = this.props;
 
@@ -49,9 +46,9 @@ export default class DatasetsRoute extends React.Component {
         </p>
         <ScrollToTargetContainer
           target_id={
-            _.has(legacy_id_map, data_source)
-              ? legacy_id_map[data_source]
-              : data_source
+            data_source_key in data_source_legacy_key_map
+              ? data_source_legacy_key_map[data_source_key]
+              : data_source_key
           }
         >
           {_.map(DataSources, (source) => {
