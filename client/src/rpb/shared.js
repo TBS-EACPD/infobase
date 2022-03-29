@@ -10,9 +10,9 @@ import {
 
 import { DataSources } from "src/models/metadata/DataSources";
 
+import { get_source_link } from "src/Datasets/utils";
 import { IconCopyLink } from "src/icons/icons";
 
-import { get_source_link } from "src/metadata/utils";
 import { secondaryColor } from "src/style_constants/index";
 
 import { TextMaker } from "./rpb_text_provider";
@@ -69,7 +69,7 @@ const ReportDetails = ({ table, def_ready_columns, footnotes }) => {
 const ReportDatasets = ({ table }) => {
   const dataset_spans = table.link && [
     <span key={"datasets_header"} className="fancy-ul__title">
-      <TextMaker text_key="metadata" />
+      <TextMaker text_key="datasets" />
     </span>,
     <span key={table.id} className="row">
       <div className="col-12 d-flex">

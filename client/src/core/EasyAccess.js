@@ -36,14 +36,14 @@ const EasyAccess_ = () => (
         <TM k="glossary" />
       </span>
     </a>
-    <a href="#metadata" className="link-unstyled nav-item">
+    <a href="#datasets" className="link-unstyled nav-item">
       <IconDataset
-        aria_label={trivial_text_maker("metadata")}
+        aria_label={trivial_text_maker("datasets")}
         inline={true}
         aria_hide={true}
       />
       <span className="mrgn-lft-sm">
-        <TM k="metadata" />
+        <TM k="datasets" />
       </span>
     </a>
     <a href="#about" className="link-unstyled nav-item">

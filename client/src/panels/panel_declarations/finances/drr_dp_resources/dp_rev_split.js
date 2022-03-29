@@ -13,7 +13,7 @@ import {
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { get_source_links } from "src/metadata/utils";
+import { get_source_links } from "src/Datasets/utils";
 import { textGreen, textRed } from "src/style_constants/index";
 
 import text from "./dp_rev_split.yaml";

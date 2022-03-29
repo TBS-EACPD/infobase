@@ -15,11 +15,11 @@ import {
   ScrollToTargetContainer,
 } from "src/core/NavComponents";
 
-import metadata_text from "./metadata.yaml";
+import text from "./Datasets.yaml";
 
-const { text_maker, TM } = create_text_maker_component(metadata_text);
+const { text_maker, TM } = create_text_maker_component(text);
 
-export default class MetaData extends React.Component {
+export default class Datasets extends React.Component {
   render() {
     const {
       match: {
@@ -29,18 +29,18 @@ export default class MetaData extends React.Component {
 
     return (
       <StandardRouteContainer
-        title={text_maker("metadata")}
-        breadcrumbs={[text_maker("metadata")]}
-        description={text_maker("metadata_desc_meta_attr")}
+        title={text_maker("datasets")}
+        breadcrumbs={[text_maker("datasets")]}
+        description={text_maker("datasets_route_description")}
         route_key="_metadata"
       >
         <div>
           <h1>
-            <TM k="metadata" />
+            <TM k="datasets" />
           </h1>
         </div>
         <p>
-          <TM k="metadata_t" />
+          <TM k="datasets_route_description" />
         </p>
         <ScrollToTargetContainer target_id={data_source}>
           {_.map(DataSources, (source) => {

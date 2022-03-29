@@ -29,10 +29,10 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import { get_source_links } from "src/Datasets/utils";
 import { toggle_list } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
-import { get_source_links } from "src/metadata/utils";
 import { smart_sort_func } from "src/sort_utils";
 import { textColor } from "src/style_constants/index";
 

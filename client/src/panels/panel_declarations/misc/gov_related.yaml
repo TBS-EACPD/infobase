@@ -11,7 +11,7 @@ gov_related_info_text:
     * To navigate across levels and find your area of interest, try our **[Explorer tool](#resource-explorer)**.
     {{#unless is_a11y_mode}}* For a more visual exploration of organizations scaled by expenditures or by number of employees, see the **[TreeMap Explorer](#treemap)**. {{/unless}}
     * To view a wider scope of organizations, including interests of the federal government, go to our **[{{gt "igoc"}}](#igoc)**.
-    * For further analysis, visit our **[datasets](#metadata)** section where you will find links to all data sources that suppports GC InfoBase, organized in customizable reports.
+    * For further analysis, visit our **[datasets](#datasets)** section where you will find links to all data sources that suppports GC InfoBase, organized in customizable reports.
     * Visit our **[ad hoc reports](#rpb)** section to create your own exportable report, with the ability to sort and filter the data
 
   fr: |
@@ -21,5 +21,5 @@ gov_related_info_text:
     * Pour naviguer entre les niveaux et trouver votre secteur d'intérêt, essayer notre outil **["Explorateur"](#resource-explorer)**.
     {{#unless is_a11y_mode}}* Pour une exploration plus visuelle des organisations en fonction des dépenses ou par nombre d'employés, consulter les **[Carte proportionnelle](#treemap)**. {{/unless}}
     * Pour voir une portée plus élargie des organisations, y compris les intérêts ministériels du gouvernement fédéral, veuillez consulter notre **[{{gt "igoc"}}](#igoc)**.
-    * Consulter notre section de **[données](#metadata)** pour plus d'informations concernant les données supportant InfoBase du GC, organisée dans des rapports personnalisables.
+    * Consulter notre section de **[données](#datasets)** pour plus d'informations concernant les données supportant InfoBase du GC, organisée dans des rapports personnalisables.
     * Veuillez visiter notre section de **[rapports ad hoc](#rpb)** pour créer votre propre rapport exportable, avec la possibilité de trier et de filtrer les données

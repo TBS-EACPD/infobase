@@ -104,12 +104,12 @@ our_data_sub_title_1:
 our_data_sub_text_1:
   transform: [handlebars, markdown]
   en: |
-    We rely on several governmental reports such as the {{gl_tt "Public Accounts" "PA"}}, the {{gl_tt "Estimates" "EST_PROC"}}, {{gl_tt "Departmental Plans" "DP"}}, and {{gl_tt "Departmental Results Reports" "DRR"}}. A full listing can be found on our [Datasets page](#metadata).
+    We rely on several governmental reports such as the {{gl_tt "Public Accounts" "PA"}}, the {{gl_tt "Estimates" "EST_PROC"}}, {{gl_tt "Departmental Plans" "DP"}}, and {{gl_tt "Departmental Results Reports" "DRR"}}. A full listing can be found on our [Datasets page](#datasets).
 
     GC InfoBase rolls up available datasets to provide users with a clear picture of government-wide data with a focus on finances and results. Users can easily drill down to get a similar view for individual departments and even for specific programs.
   fr: |
     Nous comptons sur plusieurs rapports gouvernementaux, tels que les {{gl_tt "Comptes publics" "PA"}}, les {{gl_tt "budgets des dépenses" "EST_PROC"}}, les {{gl_tt "plans ministériels" "DP"}} et les {{gl_tt "rapports financiers trimestriels" "DRR"}}. 
-    Vous trouverez la liste complète dans la page [Données](#metadata).
+    Vous trouverez la liste complète dans la page [Données](#datasets).
 
     L'InfoBase du GC regroupe les ensembles de données disponibles pour donner à l'utilisateur une image claire des dépenses de l'administration publique, en mettant l'accent sur les finances et les résultats. Grâce au menu déroulant, l'utilisateur peut facilement obtenir une image similaire pour chacun des ministères ou même pour un programme précis.
 

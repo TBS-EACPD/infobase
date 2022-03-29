@@ -9,7 +9,7 @@ import { create_text_maker_component } from "src/components/index";
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
-import { get_source_links } from "src/metadata/utils";
+import { get_source_links } from "src/Datasets/utils";
 
 import { PlannedActualTable } from "./PlannedActualTable";
 

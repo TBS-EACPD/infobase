@@ -33,7 +33,7 @@ const A11yHome = React.lazy(() => import("src/home/a11y_home"));
 const About = React.lazy(() => import("src/about/about"));
 const Contact = React.lazy(() => import("src/contact/contact"));
 const FAQ = React.lazy(() => import("src/FAQ/FAQ"));
-const MetaData = React.lazy(() => import("src/metadata/metadata"));
+const Datasets = React.lazy(() => import("src/Datasets/Datasets"));
 const IgocExplorer = React.lazy(() => import("src/IgocExplorer/IgocExplorer"));
 const TagExplorer = React.lazy(() => import("src/TagExplorer/TagExplorer"));
 const Glossary = React.lazy(() => import("src/glossary/glossary"));
@@ -162,7 +162,11 @@ export class App extends React.Component {
                   throw new Error("This route throws errors!");
                 }}
               />
-              <Route path="/metadata/:data_source?" component={MetaData} />
+              <Redirect
+                from="/metadata/:data_source?"
+                to="/datasets/:data_source?"
+              />
+              <Route path="/datasets/:data_source?" component={Datasets} />
               <Route path="/igoc/:grouping?" component={IgocExplorer} />
               <Redirect
                 from="/resource-explorer/:hierarchy_scheme?/:doc?"

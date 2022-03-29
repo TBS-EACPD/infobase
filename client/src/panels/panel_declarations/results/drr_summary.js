@@ -6,7 +6,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { create_text_maker_component, Tabs } from "src/components/index";
 
-import { get_source_links } from "src/metadata/utils";
+import { get_source_links } from "src/Datasets/utils";
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
 
