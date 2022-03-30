@@ -416,7 +416,7 @@ export const declare_results_table_panel = () =>
     panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR"],
       depends_on: ["programSpending", "programFtes"],
-      source: () => get_source_links(["DRR"]),
+      source: () => get_source_links(["departmental_results_reports"]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       title: (subject) => {

@@ -98,7 +98,11 @@ export const declare_results_intro_panel = () =>
       requires_result_counts: subject_type === "gov",
       requires_granular_result_counts: subject_type !== "gov",
       footnotes: ["RESULTS", "DRR", "DP"],
-      source: () => get_source_links(["DP", "DRR"]),
+      source: () =>
+        get_source_links([
+          "departmental_plans",
+          "departmental_results_reports",
+        ]),
       title: text_maker("results_intro_title"),
       calculate: (subject) => {
         const is_gov = subject.subject_type == "gov";

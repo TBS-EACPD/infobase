@@ -24,7 +24,12 @@ export const declare_planned_actual_comparison_panel = () =>
     panel_config_func: () => ({
       depends_on: ["programSpending", "programFtes"],
       title: text_maker("planned_actual_title"),
-      source: () => get_source_links(["DP", "DRR", "PA"]),
+      source: () =>
+        get_source_links([
+          "departmental_plans",
+          "departmental_results_reports",
+          "public_accounts",
+        ]),
       calculate(subject) {
         if (subject.subject_type === "dept") {
           if (

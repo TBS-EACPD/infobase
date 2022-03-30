@@ -414,7 +414,7 @@ export const declare_covid_expenditures_panel = () =>
       requires_covid_measures: true,
       title: text_maker("covid_expenditures_estimated_exp"),
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
-      source: () => get_source_links(["COVID"]),
+      source: () => get_source_links(["covid"]),
       calculate: (subject) => {
         const years_with_expenditures = yearsWithCovidDataStore.lookup(
           subject.id
