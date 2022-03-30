@@ -30,25 +30,27 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     frequency_key: "yearly",
     legacy_key: "IGOC",
   },
-  pa: {
-    name: text_maker("pa_name"),
+  public_accounts: {
+    name: text_maker("public_accounts_name"),
     description: <TM k="igoc_desc" />,
-    authoritative_link: text_maker("pa_authoritative_link"),
+    authoritative_link: text_maker("public_accounts_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
     legacy_key: "PA",
   },
-  cfmrs: {
-    name: text_maker("cfmrs_name"),
-    description: <TM k="cfmrs_desc" />,
-    open_data_link: text_maker("cfmrs_open_data_link"),
+  central_financial_management_system: {
+    name: text_maker("central_financial_management_system_name"),
+    description: <TM k="central_financial_management_system_desc" />,
+    open_data_link: text_maker(
+      "central_financial_management_system_open_data_link"
+    ),
     frequency_key: "yearly",
     legacy_key: "CFMRS",
   },
-  rtp: {
-    name: text_maker("rtp_name"),
-    description: <TM k="rtp_desc" />,
-    open_data_link: text_maker("rtp_open_data_link"),
+  regional_transfer_payments: {
+    name: text_maker("regional_transfer_payments_name"),
+    description: <TM k="regional_transfer_payments_desc" />,
+    open_data_link: text_maker("regional_transfer_payments_open_data_link"),
     frequency_key: "yearly",
     legacy_key: "RTP",
   },
@@ -60,26 +62,28 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     frequency_key: "quarterly",
     legacy_key: "ESTIMATES",
   },
-  dp: {
-    name: text_maker("dp_name"),
-    description: <TM k="dp_desc" />,
-    authoritative_link: text_maker("dp_authoritative_link"),
+  departmental_plans: {
+    name: text_maker("departmental_plans_name"),
+    description: <TM k="departmental_plans_desc" />,
+    authoritative_link: text_maker("departmental_plans_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
     legacy_key: "DP",
   },
-  drr: {
-    name: text_maker("drr_name"),
-    description: <TM k="drr_desc" />,
-    authoritative_link: text_maker("drr_authoritative_link"),
+  departmental_results_reports: {
+    name: text_maker("departmental_results_reports_name"),
+    description: <TM k="departmental_results_reports_desc" />,
+    authoritative_link: text_maker(
+      "departmental_results_reports_authoritative_link"
+    ),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
     legacy_key: "DRR",
   },
-  rps: {
-    name: text_maker("rps_name"),
-    description: <TM k="rps_desc" />,
-    authoritative_link: text_maker("rps_authoritative_link"),
+  employee_pay_system: {
+    name: text_maker("employee_pay_system_name"),
+    description: <TM k="employee_pay_system_desc" />,
+    authoritative_link: text_maker("employee_pay_system_authoritative_link"),
     frequency_key: "yearly",
     legacy_key: "RPS",
   },
@@ -91,10 +95,10 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     legacy_key: "COVID",
   },
   ...(services_feature_flag && {
-    services: {
-      name: text_maker("services_name"),
-      description: <TM k="services_desc" />,
-      open_data_link: text_maker("services_open_data_link"),
+    service_inventory: {
+      name: text_maker("service_inventory_name"),
+      description: <TM k="service_inventory_desc" />,
+      open_data_link: text_maker("service_inventory_open_data_link"),
       frequency_key: "yearly",
       legacy_key: "SERVICES",
     },

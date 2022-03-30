@@ -12,10 +12,10 @@ igoc_desc:
   en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
   fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille). 
 
-pa_name:
+public_accounts_name:
   en: Public Accounts of Canada
   fr: Comptes publics du Canada
-pa_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+public_accounts_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
   transform: [markdown]
   en: |
     The Public Accounts of Canada is the report of the Government of Canada prepared annually by the Receiver General, as required by section 64 of the
@@ -77,30 +77,30 @@ estimates_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/government-expenditure-plan-main-estimates.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/plan-depenses-budget-principal.html
 
-cfmrs_name:
+central_financial_management_system_name:
   en: Central Financial Management Reporting System (CFMRS)
   fr: Système central de gestion des rapports financiers (SCGRF)
-cfmrs_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+central_financial_management_system_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
   en: The CFMRS is a central system within the suite of Public Works and Government Services Canada (PWGSC) central systems. The CFMRS contains departmental account balances at the level of the Government-wide Coding (GWC) Structure.
   fr: Le SCGRF est un système central de la suite des systèmes centraux de TPSGC. Le SCGRF comprend les soldes des comptes ministériels dans le cadre de la structure du codage à l'échelle du gouvernement.
-cfmrs_open_data_link:
+central_financial_management_system_open_data_link:
   en: http://open.canada.ca/data/en/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf
   fr: http://ouvert.canada.ca/data/fr/dataset/5e6dcf6b-dbed-4b51-84e5-1f4926ad7fdf
 
-rtp_name:
+regional_transfer_payments_name:
   en: Transfer Payments by recipient region
   fr: Paiements de transfert par région du bénéficiaire
-rtp_desc:
+regional_transfer_payments_desc:
   en: A transfer payment is a grant, contribution or other payment made by the Government for which no goods or services are received. This data shows the ministry, department, the name and location of the recipient, together with the total amount paid.
   fr: Un paiement de transfert est une subvention, une contribution ou un autre paiement effectué par le gouvernement à l'égard duquel il ne reçoit ni produit, ni service en contrepartie. Cette information comprend le portefeuille ministériel, le ministère, nom et le lieu du bénéficiaire, ainsi que le montant total versé. Les annexes mentionnées dans le jeu de données peuvent être trouvées dans la version officielle de l’enregistrement.
-rtp_open_data_link:
+regional_transfer_payments_open_data_link:
   en: https://open.canada.ca/data/en/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092
   fr: https://ouvert.canada.ca/data/fr/dataset/69bdc3eb-e919-4854-bc52-a435a3e19092
 
-dp_name:
+departmental_plans_name:
   en: Departmental Plans
   fr: Plans Ministériels
-dp_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+departmental_plans_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
   transform: [markdown]
   en: |
     Departmental Plans (DPs) – previously named Reports on Plans and Priorities (RPP) – are forward-looking documents that provide plans for each department
@@ -119,14 +119,14 @@ dp_desc: # TODO duplicated against glossary entry, consider plainer language rew
     Les PM sont déposés au Parlement par le président du Conseil du Trésor pour le compte des ministres responsables des ministères et organismes dépendant
     des crédits votés qui sont désignés aux annexes I, I.1 et II de la _Loi sur la gestion des finances publiques_, au plus tard le 31 mars. À l’instar des
     rapports ministériels sur le rendement, ils sont une composante de la partie III (Plans de dépenses des ministères) des budgets des dépenses.
-dp_authoritative_link:
+departmental_plans_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites.html
 
-drr_name:
+departmental_results_reports_name:
   en: Departmental Results Reports
   fr: Rapport sur les résultats ministériels
-drr_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
+departmental_results_reports_desc: # TODO duplicated against glossary entry, consider plainer language rewrite
   transform: [markdown]
   en: |
     Departmental Results Reports (DRRs) – previously named Departmental Performance Reports (DPR) – are individual department and agency accounts of
@@ -142,18 +142,18 @@ drr_desc: # TODO duplicated against glossary entry, consider plainer language re
 
     Dans le RRM, les ministères et organismes donnent de l’information sur les progrès accomplis vers l’atteinte de leurs objectifs stratégiques.
     Les RRM couvrent l’exercice précédent et sont habituellement déposés à l’automne.
-drr_authoritative_link:
+departmental_results_reports_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement.html
   
-rps_name:
+employee_pay_system_name:
   en: People Management Data
   fr: Données sur la gestion des personnes
-rps_desc: # TODO duplicated against glossary entry... in this case could probably use a more fleshed out description and glossary entry
+employee_pay_system_desc: # TODO duplicated against glossary entry... in this case could probably use a more fleshed out description and glossary entry
   transform: [markdown]
   en: People Management data presents key demographics of the Federal Public Service (FPS) workforce.
   fr: Les données sur la gestion du personnel décrivent les caractéristiques démographiques des employées travaillant au sein de la fonction publique fédérale.
-rps_authoritative_link:
+employee_pay_system_authoritative_link:
   en: https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html
   fr: https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html
 
@@ -194,12 +194,12 @@ covid_open_data_link:
   fr: https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e
 
 
-services_name:
+service_inventory_name:
   en: Service Inventory
   fr: Répertoire de services
-services_desc:
+service_inventory_desc:
   en: Provision of a specific final output that addresses one or more needs of an intended recipient and contributes to the achievement of an outcome.
   fr: Extrant final précis qui comble un ou plusieurs besoins d’un bénéficiaire visé et qui contribue à l’obtention d’un résultat.
-services_open_data_link:
+service_inventory_open_data_link:
   en: https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c
   fr: https://ouvert.canada.ca/data/fr/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c
