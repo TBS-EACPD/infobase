@@ -561,7 +561,17 @@ export class _DisplayTable extends React.Component<
               {_.map(
                 visible_ordered_col_keys,
                 (column_key: string, row_index) => (
-                  <th key={row_index} className={"text-center"}>
+                  <th
+                    key={row_index}
+                    className={"text-center"}
+                    aria-sort={
+                      column_key === sort_by
+                        ? !descending
+                          ? "ascending"
+                          : "descending"
+                        : "none"
+                    }
+                  >
                     {col_configs_with_defaults[column_key].header}
                   </th>
                 )
