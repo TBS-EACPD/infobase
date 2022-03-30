@@ -64,6 +64,7 @@ describe("End-to-end tests for form_backend endpoints", () => {
     text: "a",
     number: 1,
     json: { bleh: "bleh", a: 1 },
+    true: [true],
 
     required_automatic: "blah",
     optional_automatic: "bluh",
