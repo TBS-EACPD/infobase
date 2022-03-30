@@ -10,16 +10,30 @@ import {
 import { Datasets } from "src/models/metadata/Datasets";
 import { DataSources } from "src/models/metadata/DataSources";
 
+import { services_feature_flag } from "src/core/injected_build_constants";
 import {
   StandardRouteContainer,
   ScrollToTargetContainer,
 } from "src/core/NavComponents";
 
-import { data_source_legacy_key_map } from "./utils";
-
 import text from "./DatasetsRoute.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
+
+const data_source_legacy_key_map = {
+  IGOC: "igoc",
+  PA: "public_accounts",
+  CFMRS: "central_financial_management_system",
+  RTP: "regional_transfer_payments",
+  ESTIMATES: "estimates",
+  DP: "departmental_plans",
+  DRR: "departmental_results_reports",
+  RPS: "employee_pay_system",
+  COVID: "covid",
+  ...(services_feature_flag && {
+    SERVICES: "service_inventory",
+  }),
+};
 
 export default class DatasetsRoute extends React.Component {
   render() {

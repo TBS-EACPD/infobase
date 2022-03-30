@@ -19,7 +19,6 @@ type SourceDef = {
   authoritative_link?: string;
   open_data_link?: string;
   frequency_key?: keyof typeof Frequencies;
-  legacy_key?: string;
 };
 
 const source_definitions = InferedKeysRecordHelper<SourceDef>()({
@@ -28,7 +27,6 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     description: <TM k="igoc_desc" />,
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
-    legacy_key: "IGOC",
   },
   public_accounts: {
     name: text_maker("public_accounts_name"),
@@ -36,7 +34,6 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     authoritative_link: text_maker("public_accounts_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
-    legacy_key: "PA",
   },
   central_financial_management_system: {
     name: text_maker("central_financial_management_system_name"),
@@ -45,14 +42,12 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
       "central_financial_management_system_open_data_link"
     ),
     frequency_key: "yearly",
-    legacy_key: "CFMRS",
   },
   regional_transfer_payments: {
     name: text_maker("regional_transfer_payments_name"),
     description: <TM k="regional_transfer_payments_desc" />,
     open_data_link: text_maker("regional_transfer_payments_open_data_link"),
     frequency_key: "yearly",
-    legacy_key: "RTP",
   },
   estimates: {
     name: text_maker("estimates_name"),
@@ -60,7 +55,6 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     authoritative_link: text_maker("estimates_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "quarterly",
-    legacy_key: "ESTIMATES",
   },
   departmental_plans: {
     name: text_maker("departmental_plans_name"),
@@ -68,7 +62,6 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     authoritative_link: text_maker("departmental_plans_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
-    legacy_key: "DP",
   },
   departmental_results_reports: {
     name: text_maker("departmental_results_reports_name"),
@@ -78,21 +71,18 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
     ),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
-    legacy_key: "DRR",
   },
   employee_pay_system: {
     name: text_maker("employee_pay_system_name"),
     description: <TM k="employee_pay_system_desc" />,
     authoritative_link: text_maker("employee_pay_system_authoritative_link"),
     frequency_key: "yearly",
-    legacy_key: "RPS",
   },
   covid: {
     name: text_maker("covid_name"),
     description: <TM k="covid_desc" />,
     open_data_link: text_maker("covid_open_data_link"),
     frequency_key: "as_needed",
-    legacy_key: "COVID",
   },
   ...(services_feature_flag && {
     service_inventory: {
@@ -100,7 +90,6 @@ const source_definitions = InferedKeysRecordHelper<SourceDef>()({
       description: <TM k="service_inventory_desc" />,
       open_data_link: text_maker("service_inventory_open_data_link"),
       frequency_key: "yearly",
-      legacy_key: "SERVICES",
     },
   }),
 });
