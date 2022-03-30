@@ -615,7 +615,7 @@ export const declare_covid_estimates_panel = () =>
       title: text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       depends_on: [],
-      source: () => get_source_links(["COVID"]),
+      source: () => get_source_links(["covid"]),
       calculate: function (subject) {
         const years_with_estimates =
           yearsWithCovidDataStore.has(subject.id) &&

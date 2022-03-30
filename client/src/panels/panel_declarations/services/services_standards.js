@@ -171,7 +171,7 @@ export const declare_services_standards_panel = () =>
         };
       },
       footnotes: false,
-      source: () => get_source_links(["SERVICES"]),
+      source: () => get_source_links(["service_inventory"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

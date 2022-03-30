@@ -115,7 +115,7 @@ export const declare_subject_offering_services_panel = () =>
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
       footnotes: false,
-      source: () => get_source_links(["SERVICES"]),
+      source: () => get_source_links(["service_inventory"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

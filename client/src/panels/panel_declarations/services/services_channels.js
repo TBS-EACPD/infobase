@@ -258,7 +258,7 @@ export const declare_services_channels_panel = () =>
     panel_config_func: () => ({
       title: text_maker("services_channels_title"),
       footnotes: false,
-      source: () => get_source_links(["SERVICES"]),
+      source: () => get_source_links(["service_inventory"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

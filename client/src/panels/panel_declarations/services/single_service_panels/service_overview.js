@@ -179,7 +179,7 @@ export const declare_single_service_overview_panel = () =>
     panel_config_func: () => ({
       title: text_maker("service_overview_title"),
       footnotes: false,
-      source: () => get_source_links(["SERVICES"]),
+      source: () => get_source_links(["service_inventory"]),
       render({ title, calculations, sources }) {
         const { subject } = calculations;
         return (

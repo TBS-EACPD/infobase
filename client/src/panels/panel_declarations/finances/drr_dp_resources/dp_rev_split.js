@@ -55,7 +55,7 @@ export const declare_dp_rev_split_panel = () =>
       machinery_footnotes: false,
       footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],
-      source: () => get_source_links(["DP"]),
+      source: () => get_source_links(["departmental_plans"]),
       calculate(subject) {
         const { programSpending } = this.tables;
         const q = programSpending.q(subject);
