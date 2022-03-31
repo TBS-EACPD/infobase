@@ -210,8 +210,8 @@ const covid = common_source_and_topic_data_set_defs(
 
 const misc = InferedKeysRecordHelper<DatasetDef>()({
   igoc: {
-    name: DataSources.igoc.name,
-    source_keys: ["igoc"],
+    name: DataSources.inventory_of_government_organizations.name,
+    source_keys: ["inventory_of_government_organizations"],
     topic_keys: [],
     infobase_link: "#igoc",
   },
