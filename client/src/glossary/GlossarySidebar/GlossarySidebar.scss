@@ -81,6 +81,7 @@
 .glossary-sb__letter {
   font-size: 20px;
   font-weight: 500;
+  margin-top: 0;
 }
 
 .glossary-sb__title {
@@ -100,6 +101,10 @@
   font-size: 23px;
   margin-bottom: 10px;
   font-weight: 500;
+}
+
+.glossary-sb__list {
+  @include unstyled-list;
 }
 
 .glossary-sb__list-item {
