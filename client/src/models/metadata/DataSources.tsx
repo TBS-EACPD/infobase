@@ -22,15 +22,15 @@ type SourceDef = {
 };
 
 const source_definitions = InferedKeysRecordHelper<SourceDef>()({
-  igoc: {
-    name: text_maker("igoc_name"),
-    description: <TM k="igoc_desc" />,
+  inventory_of_government_organizations: {
+    name: text_maker("inventory_of_government_organizations_name"),
+    description: <TM k="inventory_of_government_organizations_desc" />,
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   public_accounts: {
     name: text_maker("public_accounts_name"),
-    description: <TM k="igoc_desc" />,
+    description: <TM k="public_accounts_desc" />,
     authoritative_link: text_maker("public_accounts_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",

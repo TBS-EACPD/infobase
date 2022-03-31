@@ -2,13 +2,13 @@ common_infobase_open_data_link:
   en: http://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f
   fr: https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f
 
-igoc_name:
+inventory_of_government_organizations_name:
   transform: [handlebars]
   en: | 
     {{gt "igoc"}}
   fr: | 
     {{gt "igoc"}}
-igoc_desc:
+inventory_of_government_organizations_desc:
   en: The Inventory of Federal Organizations and Interests provides a comprehensive listing of federal organizations and interests that can be grouped by various categories (e.g., by portfolio).
   fr: Le Répertoire des organisations et intérêts fédéraux dresse la liste complète des organisations fédérales et des sociétés dans lesquelles le Canada détient des intérêts, que l’on peut regrouper en diverses catégories (p. ex. par portefeuille). 
 
@@ -37,7 +37,7 @@ public_accounts_desc: # TODO duplicated against glossary entry, consider plainer
 
     Chaque ministère et organisme est responsable de la conciliation de ses comptes avec les comptes de contrôle du receveur général, et de tenir des
     registres détaillés des opérations qui y sont portées.
-pa_authoritative_link:
+public_accounts_authoritative_link:
   en: https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-eng.html
   fr: https://www.tpsgc-pwgsc.gc.ca/recgen/cpc-pac/apropos-about-fra.html
 
