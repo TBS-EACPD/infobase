@@ -16,6 +16,7 @@ interface SidebarProps {
   title_text: string;
   sidebar_toggle_target: string;
   return_focus_target: HTMLElement | null;
+  set_done_animating: (value: boolean) => void;
 }
 
 export class Sidebar extends React.Component<SidebarProps> {
@@ -65,18 +66,29 @@ export class Sidebar extends React.Component<SidebarProps> {
   };
 
   render() {
-    const { is_open, children, title_text, return_focus_target } = this.props;
+    const {
+      is_open,
+      children,
+      title_text,
+      return_focus_target,
+      set_done_animating,
+    } = this.props;
     return (
       <div ref={this.sidebar_ref}>
         <CSSTransition
           in={is_open}
           timeout={1000}
           classNames="slide"
-          appear
           mountOnEnter
           unmountOnExit
           onEnter={() => {
             this.title.current?.focus();
+          }}
+          onEntered={() => {
+            set_done_animating(true);
+          }}
+          onExited={() => {
+            set_done_animating(false);
           }}
         >
           <div className={"sidebar__wrapper"}>
