@@ -15,11 +15,29 @@ const { text_maker } = create_text_maker_component(glossary_text);
 interface SidebarContentProps {
   glossary_item_key: string;
   close_definition: (key: string) => void;
+  done_animating: boolean;
 }
 
 export class GlossaryDef extends React.Component<SidebarContentProps> {
+  definition_ref = React.createRef<HTMLDivElement>();
   constructor(props: SidebarContentProps) {
     super(props);
+  }
+
+  shouldComponentUpdate(nextProps: SidebarContentProps) {
+    return nextProps.done_animating;
+  }
+
+  componentDidMount() {
+    if (this.props.done_animating) {
+      this.definition_ref.current?.focus();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.done_animating) {
+      this.definition_ref.current?.focus();
+    }
   }
 
   render() {
@@ -31,12 +49,16 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
 
     return (
       <div className="glossary-sb__defintion-wrapper">
-        <div className="glossary-sb__item-title">{title}</div>
+        <div className="glossary-sb__item-title" tabIndex={-1}>
+          {title}
+        </div>
         <div
+          ref={this.definition_ref}
           className="glossary-sb__item-def"
           dangerouslySetInnerHTML={{
             __html: def,
           }}
+          tabIndex={-1}
         />
         <div>
           <button
