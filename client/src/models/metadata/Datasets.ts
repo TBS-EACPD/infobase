@@ -8,7 +8,7 @@ import { services_feature_flag } from "src/core/injected_build_constants";
 
 import { rpb_link } from "src/rpb/rpb_link";
 
-import { InferedKeysRecordHelper } from "src/types/type_utils";
+import { LiteralKeyedRecordHelper } from "src/types/type_utils";
 import type { PartialOn, NonEmpty } from "src/types/util_types.d";
 
 import type { DataSourceKey } from "./DataSources";
@@ -209,7 +209,7 @@ const covid = common_source_and_topic_data_set_defs(
   }
 );
 
-const misc = InferedKeysRecordHelper<DatasetDef>()({
+const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   igoc: {
     name: DataSources.inventory_of_government_organizations.name,
     source_keys: ["inventory_of_government_organizations"],

@@ -5,7 +5,7 @@ import { create_text_maker_component } from "src/components/misc_util_components
 
 import { services_feature_flag } from "src/core/injected_build_constants";
 
-import { InferedKeysRecordHelper } from "src/types/type_utils";
+import { LiteralKeyedRecordHelper } from "src/types/type_utils";
 
 import { Frequencies } from "./Frequencies";
 
@@ -21,7 +21,7 @@ type SourceDef = {
   frequency_key?: keyof typeof Frequencies;
 };
 
-const source_definitions = InferedKeysRecordHelper<SourceDef>()({
+const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   inventory_of_government_organizations: {
     name: text_maker("inventory_of_government_organizations_name"),
     description: <TM k="inventory_of_government_organizations_desc" />,
