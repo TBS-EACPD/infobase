@@ -97,7 +97,7 @@ const ReportDatasets = ({ table }) => {
         return source.open_data_link ? (
           <span key={table.id} className="row">
             <div className="col-12 d-flex">
-              <a href={get_source_link(source).href}>{source.name}</a>
+              <a href={get_source_link(source.key).href}>{source.name}</a>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
