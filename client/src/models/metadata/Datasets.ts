@@ -267,9 +267,13 @@ const all_data_set_defs = {
 
 export type DatasetKey = keyof typeof all_data_set_defs;
 
+type Dataset = DatasetDef & {
+  key: DatasetKey;
+  sources: typeof DataSources[DataSourceKey][];
+};
 export const Datasets = _.mapValues(
   all_data_set_defs,
-  (def: DatasetDef, key) => ({
+  (def: DatasetDef, key): Dataset => ({
     ...def,
     key: key as DatasetKey,
     sources: _.map(def.source_keys, (source_key) => DataSources[source_key]),

@@ -96,9 +96,13 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
 
 export type DataSourceKey = keyof typeof source_definitions;
 
+type DataSource = SourceDef & {
+  key: DataSourceKey;
+  frequency?: string;
+};
 export const DataSources = _.mapValues(
   source_definitions,
-  (def: SourceDef, key) => ({
+  (def: SourceDef, key): DataSource => ({
     ...def,
     key: key as DataSourceKey,
     frequency:
