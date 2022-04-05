@@ -31,7 +31,7 @@
   type inference. It transpiles to an identity, so it's about as negligible for the run time as it could be. That and the empty
   curry call is a bit ugly itself. Ah well, at least you're not maintaining a separate union type for all your keys anymore!
 */
-export const InferedKeysRecordHelper =
+export const LiteralKeyedRecordHelper =
   <RecordValue>() =>
   <RecordKeys extends string | number | symbol>(record: {
     [Key in RecordKeys]: RecordValue;
