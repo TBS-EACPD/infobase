@@ -5,6 +5,11 @@ import type { DataSourceKey } from "src/models/metadata/DataSources";
 
 export const get_source_link = (key: DataSourceKey) => {
   const source = DataSources[key];
+
+  if (_.isUndefined(source)) {
+    throw new Error(`"${key}" is not a valid data source key`);
+  }
+
   return {
     html: source.name,
     href: `#datasets/${source.key}`,
