@@ -12,9 +12,9 @@ export const get_source_link = (key: DataSourceKey) => {
 
   return {
     html: source.name,
-    href: `#datasets/${source.key}`,
+    href: `#datasets/${key}`,
   };
 };
 
 export const get_source_links = (source_keys: (keyof typeof DataSources)[]) =>
-  _.chain(source_keys).map(get_source_link).compact().value();
+  _.map(source_keys, get_source_link);
