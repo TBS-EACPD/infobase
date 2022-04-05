@@ -111,6 +111,7 @@ const program_resources = common_source_and_topic_data_set_defs(
   {
     program_spending: {
       name: text_maker("program_spending_dataset"),
+      source_keys: ["public_accounts"],
       topic_keys: ["EXP", "AUTH"],
       infobase_link: rpb_link({
         table: "programSpending",
