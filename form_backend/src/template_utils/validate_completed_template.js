@@ -63,21 +63,28 @@ const verify_values_are_expected_and_match_value_types = (
     .value();
 
 const validate_completed_template = (original_template, completed_template) => {
-  const field_templates = _.omitBy(original_template, ({ hidden }) => !!hidden);
-  const completed_fields = _.omitBy(
-    completed_template,
-    ({ hidden }) => !!hidden
+  const required_fields_present = verify_required_fields_present(
+    original_template,
+    completed_template
   );
 
-  const required_fields_present = verify_required_fields_present(
-    field_templates,
-    completed_fields
+  const user_hidden_field_keys = _.chain(original_template)
+    .map(({ hidden }, key) => hidden && key)
+    .compact()
+    .value();
+  const template_user_fields = _.omit(
+    original_template,
+    user_hidden_field_keys
+  );
+  const completed_user_fields = _.omit(
+    completed_template,
+    user_hidden_field_keys
   );
 
   const values_are_expected_and_match_value_types =
     verify_values_are_expected_and_match_value_types(
-      field_templates,
-      completed_fields
+      template_user_fields,
+      completed_user_fields
     );
 
   return required_fields_present && values_are_expected_and_match_value_types;

@@ -9,6 +9,7 @@ import {
 describe("validate_completed_template", () => {
   const template_test_fields = {
     meta: {
+      hidden: true,
       version: "1.0",
     },
 
@@ -81,19 +82,19 @@ describe("validate_completed_template", () => {
       },
     },
     sha: {
+      hidden: true,
       required: true,
       value_type: "string",
-      form_type: false,
     },
     id: {
+      hidden: true,
       required: false,
       value_type: "string",
-      form_type: false,
     },
     additional: {
+      hidden: true,
       required: false,
       value_type: "json",
-      form_type: false,
     },
   };
 
@@ -113,6 +114,10 @@ describe("validate_completed_template", () => {
   const invalid_completed_test_fields_missing_required = _.omit(
     valid_completed_test_fields,
     ["issue"]
+  );
+  const invalid_completed_test_fields_missing_user_hidden_and_required = _.omit(
+    valid_completed_test_fields,
+    ["sha"]
   );
   const invalid_completed_test_fields_bad_value_type = {
     ...valid_completed_test_fields,
@@ -139,6 +144,7 @@ describe("validate_completed_template", () => {
     valid_completed_test_fields,
     valid_completed_test_fields_required_only,
     invalid_completed_test_fields_missing_required,
+    invalid_completed_test_fields_missing_user_hidden_and_required,
     invalid_completed_test_fields_bad_value_type,
     invalid_completed_test_fields_bad_extra_field,
     invalid_completed_test_fields_empty_required_enums,
@@ -151,7 +157,7 @@ describe("validate_completed_template", () => {
       _.map(test_completed_fields, (completed_fields) =>
         verify_required_fields_present(template_test_fields, completed_fields)
       )
-    ).toEqual([true, true, false, true, true, true, true, true]);
+    ).toEqual([true, true, false, false, true, true, true, true, true]);
   });
 
   it("values_are_expected_and_match_value_types checks that all present fields are expected and match their type from the original template", () => {
@@ -162,7 +168,7 @@ describe("validate_completed_template", () => {
           completed_fields
         )
       )
-    ).toEqual([true, true, true, false, false, false, false, false]);
+    ).toEqual([true, true, true, true, false, false, false, false, false]);
   });
 
   it("validate_completed_template works end-to-end", () => {
@@ -170,6 +176,6 @@ describe("validate_completed_template", () => {
       _.map(test_completed_fields, (completed_fields) =>
         validate_completed_template(template_test_fields, completed_fields)
       )
-    ).toEqual([true, true, false, false, false, false, false, false]);
+    ).toEqual([true, true, false, false, false, false, false, false, false]);
   });
 });
