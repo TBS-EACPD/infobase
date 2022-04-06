@@ -1,5 +1,6 @@
 {
   "meta": {
+    "hidden": true,
     "version": "1.0"
   },
 
@@ -72,15 +73,32 @@
       "fr": "JSON"
     }
   },
+  "true": {
+    "required": true,
+    "value_type": "true",
+    "form_type": "form_faq",
+    "faq_content": [
+      {
+        "q": {
+          "en": "",
+          "fr": ""
+        },
+        "a": {
+          "en": "",
+          "fr": ""
+        }
+      }
+    ]
+  },
 
   "required_automatic": {
+    "hidden": true,
     "required": true,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   },
   "optional_automatic": {
+    "hidden": true,
     "required": false,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   }
 }
