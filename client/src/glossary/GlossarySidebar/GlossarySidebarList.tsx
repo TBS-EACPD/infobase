@@ -72,31 +72,33 @@ export class GlossaryList extends React.Component<
         ) : (
           <div>
             {_.map(items_by_letter, ({ letter, items }) => (
-              <ul key={letter} className={"glossary-sb__list"}>
+              <section>
                 <h2 className="glossary-sb__letter" key={letter}>
                   {letter}
                 </h2>
                 <hr />
-                {_.map(items, (item, ix) => (
-                  <li key={ix} className="glossary-sb__title">
-                    <button
-                      id={item.id}
-                      onClick={() => open_definition(item.id)}
-                      className={"glossary-sb__list-item"}
-                      aria-label={text_maker("open_definition") + item.title}
-                    >
-                      {search_phrase ? (
-                        <SearchHighlighter
-                          search={search_phrase}
-                          content={item.title}
-                        />
-                      ) : (
-                        item.title
-                      )}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+                <ul key={letter} className={"glossary-sb__list"}>
+                  {_.map(items, (item, ix) => (
+                    <li key={ix} className="glossary-sb__title">
+                      <button
+                        id={item.id}
+                        onClick={() => open_definition(item.id)}
+                        className={"glossary-sb__list-item"}
+                        aria-label={text_maker("open_definition") + item.title}
+                      >
+                        {search_phrase ? (
+                          <SearchHighlighter
+                            search={search_phrase}
+                            content={item.title}
+                          />
+                        ) : (
+                          item.title
+                        )}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             ))}
           </div>
         )}
