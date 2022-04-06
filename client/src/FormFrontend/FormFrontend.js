@@ -124,7 +124,7 @@ class FormFrontend extends React.Component {
     if (awaiting_backend_response && !sent_to_backend) {
       const automatic_fields = _.omitBy(
         template,
-        ({ is_user_hidden }) => is_user_hidden
+        ({ is_user_hidden }) => !is_user_hidden
       );
 
       const values_for_automatic_fields =
