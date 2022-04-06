@@ -124,7 +124,7 @@ class NonA11yPinnedContent extends React.Component {
                             ...(should_pin && {
                               position: "fixed",
                               top: 0,
-                              zIndex: 2001,
+                              zIndex: 2002,
                             }),
                           }}
                         >
