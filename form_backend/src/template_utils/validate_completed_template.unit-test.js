@@ -117,10 +117,6 @@ describe("validate_completed_template", () => {
     ...valid_completed_test_fields,
     radio: ["yes", "no"],
   };
-  const invalid_completed_test_fields_faq_string_array = {
-    ...valid_completed_test_fields,
-    faq: ["true"],
-  };
 
   const test_completed_fields = [
     valid_completed_test_fields,
@@ -131,7 +127,6 @@ describe("validate_completed_template", () => {
     invalid_completed_test_fields_bad_extra_field,
     invalid_completed_test_fields_empty_required_enums,
     invalid_completed_test_fields_multiple_values_from_a_radio_form,
-    invalid_completed_test_fields_faq_string_array,
   ];
 
   it("verify_required_fields_present checks that all fields marked required in the template are in the completed fields", () => {
@@ -139,7 +134,7 @@ describe("validate_completed_template", () => {
       _.map(test_completed_fields, (completed_fields) =>
         verify_required_fields_present(template_test_fields, completed_fields)
       )
-    ).toEqual([true, true, false, false, true, true, true, true, true]);
+    ).toEqual([true, true, false, false, true, true, true, true]);
   });
 
   it("values_are_expected_and_match_value_types checks that all present fields are expected and match their type from the original template", () => {
@@ -150,7 +145,7 @@ describe("validate_completed_template", () => {
           completed_fields
         )
       )
-    ).toEqual([true, true, true, true, false, false, false, false, false]);
+    ).toEqual([true, true, true, true, false, false, false, false]);
   });
 
   it("validate_completed_template works end-to-end", () => {
@@ -158,6 +153,6 @@ describe("validate_completed_template", () => {
       _.map(test_completed_fields, (completed_fields) =>
         validate_completed_template(template_test_fields, completed_fields)
       )
-    ).toEqual([true, true, false, false, false, false, false, false, false]);
+    ).toEqual([true, true, false, false, false, false, false, false]);
   });
 });
