@@ -73,23 +73,6 @@
       "fr": "JSON"
     }
   },
-  "true": {
-    "required": true,
-    "value_type": "true",
-    "form_type": "form_faq",
-    "faq_content": [
-      {
-        "q": {
-          "en": "",
-          "fr": ""
-        },
-        "a": {
-          "en": "",
-          "fr": ""
-        }
-      }
-    ]
-  },
 
   "required_automatic": {
     "is_user_hidden": true,
