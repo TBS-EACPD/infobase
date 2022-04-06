@@ -3,7 +3,6 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { CheckBox } from "src/components/CheckBox/CheckBox";
-import { FancyUL } from "src/components/FancyUL/FancyUL";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
@@ -13,6 +12,7 @@ import { get_client_id, log_standard_event } from "src/core/analytics";
 import { has_local_storage } from "src/core/feature_detection";
 import { is_a11y_mode, lang, sha } from "src/core/injected_build_constants";
 
+import { sanitized_dangerous_inner_html } from "src/general_utils";
 import { textRed } from "src/style_constants/index";
 
 import {
@@ -124,7 +124,7 @@ class FormFrontend extends React.Component {
     if (awaiting_backend_response && !sent_to_backend) {
       const automatic_fields = _.omitBy(
         template,
-        ({ form_type }, key) => key === "meta" || form_type
+        ({ is_user_hidden }) => is_user_hidden
       );
 
       const values_for_automatic_fields =
@@ -221,6 +221,13 @@ class FormFrontend extends React.Component {
                 {field_info.form_label[lang]}
                 {field_info.required && required_asterisk}
               </legend>
+              {field_info.additional_html && (
+                <div
+                  dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+                    field_info.additional_html[lang]
+                  )}
+                />
+              )}
               <div
                 className={classNames({
                   "d-flex justify-content-between":
@@ -275,6 +282,13 @@ class FormFrontend extends React.Component {
                 {field_info.form_label[lang]}
                 {connected_required && required_asterisk}
               </label>
+              {field_info.additional_html && (
+                <div
+                  dangerouslySetInnerHTML={sanitized_dangerous_inner_html(
+                    field_info.additional_html[lang]
+                  )}
+                />
+              )}
               <textarea
                 style={{ marginBottom: "1rem" }}
                 id={get_field_id(field_key)}
@@ -296,39 +310,6 @@ class FormFrontend extends React.Component {
             </Fragment>
           );
         }
-        case "form_faq":
-          return (
-            <>
-              <div style={{ fontWeight: 700 }}>
-                {text_maker("form_frontend_faq_note")}
-                {required_asterisk}
-              </div>
-              <FancyUL>
-                {_.map(field_info.faq_content, ({ q, a }, idx) => {
-                  return (
-                    <div key={idx}>
-                      <div style={{ fontWeight: "bold" }}>{q[lang]}</div>
-                      <div>{a[lang]}</div>
-                    </div>
-                  );
-                })}
-              </FancyUL>
-              <CheckBox
-                id={"form_frontend_faq"}
-                active={!!completed_template[field_key]}
-                disabled={disable_forms}
-                onClick={() =>
-                  this.mergeIntoCompletedTemplateState(
-                    field_key,
-                    completed_template[field_key] ? null : [true]
-                  )
-                }
-                label={text_maker("form_frontend_faq_ack")}
-                label_style={{ fontWeight: "bold" }}
-                container_style={{ justifyContent: "center" }}
-              />
-            </>
-          );
         case "error":
           return <label>{field_info.form_label[lang]}</label>;
       }

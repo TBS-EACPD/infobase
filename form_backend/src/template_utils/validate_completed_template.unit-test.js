@@ -13,23 +13,6 @@ describe("validate_completed_template", () => {
       version: "1.0",
     },
 
-    faq: {
-      required: true,
-      value_type: "true",
-      form_type: "form_faq",
-      faq_content: [
-        {
-          q: {
-            en: "q en",
-            fr: "q fr",
-          },
-          a: {
-            en: "a en",
-            fr: "a fr",
-          },
-        },
-      ],
-    },
     enums: {
       required: true,
       value_type: "enums",
@@ -102,7 +85,6 @@ describe("validate_completed_template", () => {
     enums: ["bug", "other"],
     radio: ["yes"],
     issue: "I don't think the line graphs should always start at 0",
-    faq: [true],
     sha: "fenef8723hhf2h9jdj2j3d92093",
     id: "1234qwert",
     additional: { bleh: "blah", bluh: { blagh: "blargh" } },

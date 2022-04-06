@@ -4,23 +4,24 @@
     "version": "1.0"
   },
   "faq": {
-    "is_user_hidden": true,
     "required": true,
-    "value_type": "true",
-    "form_type": "form_faq",
-    "faq_content": [
-      {
-        "q": {
-          "en": "",
-          "fr": ""
-        },
-        "a": {
-          "en": "",
-          "fr": ""
-        }
+    "is_user_hidden": true,
+    "value_type": "enums",
+    "enum_values": {
+      "acknowledge": {
+        "en": "I acknowledge that I have read the FAQ",
+        "fr": "Je reconnais que j'ai lu la FAQ"
       }
-    ],
-    "templates": ["report_a_problem"]
+    },
+    "form_type": "checkbox",
+    "form_label": {
+      "en": "Please read and acknowledge these FAQs before submitting:",
+      "fr": "Veuillez lire et reconnais ces FAQ avant de soumettre :"
+    },
+    "additional_html": {
+      "en": "<dl style=\"margin-left: 25px;\"><dt>Some question</dt><dd>Some answer</dd><dt>Another question</dt><dd>Another answer</dd></dl>",
+      "fr": ""
+    }
   },
   "issue_type": {
     "required": true,
