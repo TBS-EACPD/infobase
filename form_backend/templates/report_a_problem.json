@@ -4,7 +4,7 @@
     "version": "1.0"
   },
   "faq": {
-    "required": true,
+    "required": false,
     "is_user_hidden": true,
     "value_type": "enums",
     "enum_values": {
