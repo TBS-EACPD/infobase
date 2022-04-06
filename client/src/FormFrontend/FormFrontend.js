@@ -167,7 +167,7 @@ class FormFrontend extends React.Component {
 
     const user_fields = _.omitBy(
       template,
-      ({ form_type, hidden }) => !!hidden || !form_type
+      ({ form_type, is_user_hidden }) => is_user_hidden || !form_type
     );
 
     const all_required_user_fields_are_filled = _.chain(user_fields)

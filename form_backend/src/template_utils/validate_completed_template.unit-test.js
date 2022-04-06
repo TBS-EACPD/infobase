@@ -9,7 +9,7 @@ import {
 describe("validate_completed_template", () => {
   const template_test_fields = {
     meta: {
-      hidden: true,
+      is_user_hidden: true,
       version: "1.0",
     },
 
@@ -82,17 +82,17 @@ describe("validate_completed_template", () => {
       },
     },
     sha: {
-      hidden: true,
+      is_user_hidden: true,
       required: true,
       value_type: "string",
     },
     id: {
-      hidden: true,
+      is_user_hidden: true,
       required: false,
       value_type: "string",
     },
     additional: {
-      hidden: true,
+      is_user_hidden: true,
       required: false,
       value_type: "json",
     },
