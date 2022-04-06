@@ -1,5 +1,6 @@
 {
   "meta": {
+    "hidden": true,
     "version": "1.0"
   },
 
@@ -306,33 +307,33 @@
   },
 
   "sha": {
+    "hidden": true,
     "required": true,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   },
   "route": {
+    "hidden": true,
     "required": true,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   },
   "lang": {
+    "hidden": true,
     "required": true,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   },
   "app_version": {
+    "hidden": true,
     "required": true,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   },
   "client_id": {
+    "hidden": true,
     "required": true,
-    "value_type": "string",
-    "form_type": false
+    "value_type": "string"
   },
   "additional": {
+    "hidden": true,
     "required": false,
-    "value_type": "json",
-    "form_type": false
+    "value_type": "json"
   }
 }
