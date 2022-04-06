@@ -69,7 +69,7 @@ const validate_completed_template = (original_template, completed_template) => {
   );
 
   const user_hidden_field_keys = _.chain(original_template)
-    .map(({ hidden }, key) => hidden && key)
+    .map(({ is_user_hidden }, key) => is_user_hidden && key)
     .compact()
     .value();
   const template_user_fields = _.omit(
