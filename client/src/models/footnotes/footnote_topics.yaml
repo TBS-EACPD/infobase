@@ -147,3 +147,7 @@ COVID_MEASURE:
 SERVICES:
   en: Service Inventory
   fr: Répertoire de services
+
+CFMRS:
+  en: Central Financial Management Reporting System
+  fr: Système central de gestion des rapports financiers

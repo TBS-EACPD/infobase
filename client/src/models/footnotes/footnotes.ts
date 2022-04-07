@@ -52,7 +52,8 @@ export type TopicKey =
   | "COVID_AUTH"
   | "COVID_EXP"
   | "COVID_MEASURE"
-  | "SERVICES";
+  | "SERVICES"
+  | "CFMRS";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];

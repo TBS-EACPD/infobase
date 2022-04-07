@@ -55,7 +55,7 @@ const common_source_and_topic_data_set_defs = <
 
 const public_accounts = common_source_and_topic_data_set_defs(
   "public_accounts",
-  ["PA", "EXP"],
+  ["EXP"],
   {
     org_standard_objects: {
       name: text_maker("org_standard_objects_dataset"),
@@ -107,7 +107,7 @@ const program_resources = common_source_and_topic_data_set_defs(
   ["departmental_results_reports", "departmental_plans"],
   // PA and PLANNED_EXP don't seem like they should apply to FTEs, but they were already in the programFtes table
   // TODO check actual footnote content, see if FTE footnotes were making use of PA or PLANNED_EXP for some reason
-  ["DRR", "DP", "PROG", "GOCO", "PA", "PLANNED_EXP"],
+  ["PROG", "GOCO", "PA", "PLANNED_EXP"],
   {
     program_spending: {
       name: text_maker("program_spending_dataset"),
@@ -129,7 +129,7 @@ const program_resources = common_source_and_topic_data_set_defs(
 
 const people = common_source_and_topic_data_set_defs(
   "employee_pay_system",
-  ["PEOPLE"],
+  [],
   {
     age_group: {
       name: text_maker("age_group_dataset"),
@@ -191,7 +191,7 @@ const people = common_source_and_topic_data_set_defs(
 
 const covid = common_source_and_topic_data_set_defs(
   "covid",
-  ["COVID", "COVID_MEASURE"],
+  ["COVID_MEASURE"],
   {
     covid_auth: {
       name: text_maker("covid_measure_spending_auth"),
@@ -220,7 +220,7 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   tabled_estimates: {
     name: text_maker("tabled_estimates_dataset"),
     source_keys: ["estimates"],
-    topic_keys: ["AUTH", "EST_PROC", "VOTED", "STAT"],
+    topic_keys: ["AUTH", "VOTED", "STAT"],
     infobase_link: rpb_link({
       table: "orgVoteStatEstimates",
     }),
@@ -228,7 +228,7 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   transfer_payments_by_region: {
     name: DataSources.regional_transfer_payments.name,
     source_keys: ["regional_transfer_payments"],
-    topic_keys: ["TP_GEO", "SOBJ10"],
+    topic_keys: ["SOBJ10"],
     infobase_link: rpb_link({
       table: "orgTransferPaymentsRegion",
     }),
@@ -236,20 +236,20 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   actual_results: {
     name: text_maker("actual_results_dataset"),
     source_keys: ["departmental_results_reports"],
-    topic_keys: ["DRR", "RESULTS"],
+    topic_keys: ["RESULTS"],
     infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
   },
   planned_results: {
     name: text_maker("planned_results_dataset"),
     source_keys: ["departmental_plans"],
-    topic_keys: ["DP", "RESULTS"],
+    topic_keys: ["RESULTS"],
     infobase_link: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
   },
   ...(services_feature_flag && {
     service_inventory: {
       name: DataSources.service_inventory.name,
       source_keys: ["service_inventory"],
-      topic_keys: ["SERVICES"],
+      topic_keys: [],
       infobase_link:
         "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
     },
@@ -273,9 +273,24 @@ type Dataset = DatasetDef & {
 };
 export const Datasets = _.mapValues(
   all_data_set_defs,
-  (def: DatasetDef, key): Dataset => ({
-    ...def,
-    key: key as DatasetKey,
-    sources: _.map(def.source_keys, (source_key) => DataSources[source_key]),
-  })
+  (def: DatasetDef, key): Dataset => {
+    const sources = _.map(
+      def.source_keys,
+      (source_key) => DataSources[source_key]
+    );
+
+    const topic_keys = _.chain(sources)
+      .map("topic_key")
+      .concat(def.topic_keys)
+      .compact()
+      .uniq()
+      .value();
+
+    return {
+      ...def,
+      topic_keys,
+      key: key as DatasetKey,
+      sources,
+    };
+  }
 );
