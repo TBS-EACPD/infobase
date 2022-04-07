@@ -3,6 +3,8 @@ import React from "react";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
 
+import type { TopicKey } from "src/models/footnotes/footnotes";
+
 import { services_feature_flag } from "src/core/injected_build_constants";
 
 import { LiteralKeyedRecordHelper } from "src/types/type_utils";
@@ -16,6 +18,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 type SourceDef = {
   name: string;
   description: React.ReactNode;
+  topic_key: TopicKey;
   authoritative_link?: string;
   open_data_link?: string;
   frequency_key?: keyof typeof Frequencies;
@@ -25,12 +28,14 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   inventory_of_government_organizations: {
     name: text_maker("inventory_of_government_organizations_name"),
     description: <TM k="inventory_of_government_organizations_desc" />,
+    topic_key: "MACHINERY",
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
   },
   public_accounts: {
     name: text_maker("public_accounts_name"),
     description: <TM k="public_accounts_desc" />,
+    topic_key: "PA",
     authoritative_link: text_maker("public_accounts_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
@@ -38,6 +43,7 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   central_financial_management_system: {
     name: text_maker("central_financial_management_system_name"),
     description: <TM k="central_financial_management_system_desc" />,
+    topic_key: "CFMRS",
     open_data_link: text_maker(
       "central_financial_management_system_open_data_link"
     ),
@@ -46,12 +52,14 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   regional_transfer_payments: {
     name: text_maker("regional_transfer_payments_name"),
     description: <TM k="regional_transfer_payments_desc" />,
+    topic_key: "TP_GEO",
     open_data_link: text_maker("regional_transfer_payments_open_data_link"),
     frequency_key: "yearly",
   },
   estimates: {
     name: text_maker("estimates_name"),
     description: <TM k="estimates_desc" />,
+    topic_key: "EST_PROC",
     authoritative_link: text_maker("estimates_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "quarterly",
@@ -59,6 +67,7 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   departmental_plans: {
     name: text_maker("departmental_plans_name"),
     description: <TM k="departmental_plans_desc" />,
+    topic_key: "DP",
     authoritative_link: text_maker("departmental_plans_authoritative_link"),
     open_data_link: text_maker("common_infobase_open_data_link"),
     frequency_key: "yearly",
@@ -66,6 +75,7 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   departmental_results_reports: {
     name: text_maker("departmental_results_reports_name"),
     description: <TM k="departmental_results_reports_desc" />,
+    topic_key: "DRR",
     authoritative_link: text_maker(
       "departmental_results_reports_authoritative_link"
     ),
@@ -75,12 +85,14 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   employee_pay_system: {
     name: text_maker("employee_pay_system_name"),
     description: <TM k="employee_pay_system_desc" />,
+    topic_key: "PEOPLE",
     authoritative_link: text_maker("employee_pay_system_authoritative_link"),
     frequency_key: "yearly",
   },
   covid: {
     name: text_maker("covid_name"),
     description: <TM k="covid_desc" />,
+    topic_key: "COVID",
     open_data_link: text_maker("covid_open_data_link"),
     frequency_key: "as_needed",
   },
@@ -88,6 +100,7 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     service_inventory: {
       name: text_maker("service_inventory_name"),
       description: <TM k="service_inventory_desc" />,
+      topic_key: "SERVICES",
       open_data_link: text_maker("service_inventory_open_data_link"),
       frequency_key: "yearly",
     },
