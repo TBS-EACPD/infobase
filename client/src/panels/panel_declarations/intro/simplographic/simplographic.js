@@ -116,7 +116,6 @@ export const declare_simplographic_panel = () =>
       },
 
       render({ title, calculations }) {
-        const { big_info } = calculations;
         const Row = (props) => {
           const this_row_props = {
             className: "row about-government-intro-grid",
@@ -159,7 +158,7 @@ export const declare_simplographic_panel = () =>
                 >
                   <TM k={props.title_key} />
                 </div>
-                <TM el="p" k={props.text_key} args={big_info} />
+                <TM el="p" k={props.text_key} args={calculations} />
               </section>
             </div>
           );
