@@ -14,9 +14,6 @@ const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 const default_args = {
   depends_on: [],
   machinery_footnotes: true,
-  layout: {
-    full: { graph: 12, text: 12 },
-  },
 };
 
 const panels = {};
@@ -47,16 +44,6 @@ class PanelRegistry {
       .value();
   }
 
-  static panels_for_table(table_id) {
-    return _.filter(panels, ({ depends_on }) =>
-      _.includes(depends_on, table_id)
-    );
-  }
-
-  static panels_for_subject_type(subject_type_name) {
-    return _.filter(panels, { subject_type: subject_type_name });
-  }
-
   static register_instance(instance) {
     const { key, full_key, subject_type, title, is_static } = instance;
 
@@ -81,20 +68,7 @@ class PanelRegistry {
     panels[full_key] = instance;
   }
 
-  new_api_warnings() {
-    if (is_dev) {
-      _.each(["layout_def", "text", "title"], (property) => {
-        if (this[property]) {
-          // eslint-disable-next-line no-console
-          console.warning(`PanelRegistry redundant property: ${property}`);
-        }
-      });
-    }
-  }
-
   constructor(def) {
-    this.new_api_warnings();
-
     //note that everything attached to this is read-only
     //Additionally, every panel only has one object like this, so this object contains nothing about
 
@@ -108,17 +82,7 @@ class PanelRegistry {
 
     this.get_panel_args = _.memoize(this.get_panel_args);
   }
-  get_title(subject) {
-    return _.isFunction(this.title) ? this.title(subject) : this.title;
-  }
 
-  get tables() {
-    //table defs in depends_on indexed by their table ids
-    return _.chain(this.depends_on)
-      .map((table_id) => [table_id, Table.store.lookup(table_id)])
-      .fromPairs()
-      .value();
-  }
   get_panel_args(subject, options) {
     const calc_func = this._inner_calculate;
     return calc_func.call(this, subject, options);
@@ -149,7 +113,6 @@ class PanelRegistry {
     }
     return true;
   }
-
   calculate(subject, options = {}) {
     if (this.is_panel_valid_for_subject(subject, options)) {
       const panel_args = this.get_panel_args(subject, options);
@@ -159,6 +122,10 @@ class PanelRegistry {
     } else {
       return false;
     }
+  }
+
+  get_title(subject) {
+    return _.isFunction(this.title) ? this.title(subject) : this.title;
   }
 
   get_source(subject) {
@@ -195,7 +162,9 @@ class PanelRegistry {
         .uniqBy()
         .value();
     } else {
-      return _.chain(this.tables)
+      return _.chain(this.depends_on)
+        .map((table_id) => [table_id, Table.store.lookup(table_id)])
+        .fromPairs()
         .map("tags")
         .compact()
         .flatten()
@@ -204,11 +173,6 @@ class PanelRegistry {
         .value();
     }
   }
-
-  get_glossary_keys() {
-    return this.glossary_keys || [];
-  }
-
   get_footnotes(subject) {
     //array of footnote strings
 
@@ -224,19 +188,19 @@ class PanelRegistry {
 
   render(calculations, options = {}) {
     const { subject } = calculations;
-    const render_func = this._inner_render;
-    const footnotes = this.get_footnotes(subject);
-    const glossary_keys = this.get_glossary_keys();
-    const sources = this.get_source(subject);
-    const title = this.get_title(subject);
 
-    const react_el = render_func(
+    const title = this.get_title(subject);
+    const sources = this.get_source(subject);
+    const footnotes = this.get_footnotes(subject);
+    const glossary_keys = this.glossary_keys || [];
+
+    const react_el = this._inner_render(
       {
-        title,
         calculations,
+        title,
+        sources,
         footnotes,
         glossary_keys,
-        sources,
       },
       options
     );
@@ -245,21 +209,17 @@ class PanelRegistry {
   }
 }
 
-function panels_with_key(key, subject_type) {
-  let panels = _.filter(PanelRegistry.panels, { key });
-  if (subject_type) {
-    panels = _.filter(panels, { subject_type });
-  }
-  return panels;
-}
+const tables_for_panel = (panel_key, subject_type) =>
+  _.chain(PanelRegistry.panels)
+    .filter({ key: panel_key })
+    .thru((panels) =>
+      subject_type ? _.filter(panels, { subject_type }) : panels
+    )
+    .map("depends_on")
+    .flatten()
+    .uniqBy()
+    .value();
 
-function tables_for_panel(panel_key, subject_type) {
-  const panel_objs = panels_with_key(panel_key, subject_type);
-  return _.chain(panel_objs).map("depends_on").flatten().uniqBy().value();
-}
-
-const layout_types = { full: "full", half: "half" };
-
-export { PanelRegistry, layout_types, panels_with_key, tables_for_panel };
+export { PanelRegistry, tables_for_panel };
 
 assign_to_dev_helper_namespace({ PanelRegistry });
