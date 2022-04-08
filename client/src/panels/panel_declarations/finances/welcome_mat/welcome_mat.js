@@ -805,11 +805,16 @@ const MobileOrA11YContent = ({ children }) => [
   </PaneItem>,
 ];
 
-function render({ title, calculations, footnotes, glossary_keys, sources }) {
-  const { panel_args, subject } = calculations;
-
+function render({
+  title,
+  subject,
+  calculations,
+  footnotes,
+  glossary_keys,
+  sources,
+}) {
   let sources_override = sources;
-  const { type, calcs } = panel_args;
+  const { type, calcs } = calculations;
   if (type === "planned") {
     sources_override = [
       get_planned_spending_source_link(subject),
@@ -838,7 +843,7 @@ function render({ title, calculations, footnotes, glossary_keys, sources }) {
     <InfographicPanel
       {...{ sources: sources_override, glossary_keys, footnotes, title }}
     >
-      <WelcomeMat subject={subject} {...panel_args} />
+      <WelcomeMat subject={subject} {...calculations} />
     </InfographicPanel>
   );
 }

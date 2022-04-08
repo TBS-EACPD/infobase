@@ -45,9 +45,8 @@ const rows_to_rev_split = (rows) => {
   return { neg_exp, gross_exp, net_exp };
 };
 
-function render({ title, calculations, footnotes, sources }) {
-  const { panel_args, subject } = calculations;
-  const { text_calculations } = panel_args;
+function render({ title, subject, calculations, footnotes, sources }) {
+  const { text_calculations } = calculations;
   const { last_year_gross_exp, last_year_net_exp, last_year_rev } =
     text_calculations;
 

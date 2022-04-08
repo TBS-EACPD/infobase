@@ -44,9 +44,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type =
   (is_fte) =>
-  ({ title, calculations, footnotes }) => {
-    const { panel_args, subject } = calculations;
-
+  ({ title, subject, calculations, footnotes }) => {
     const sources = [
       is_fte
         ? get_planned_fte_source_link(subject)
@@ -60,7 +58,7 @@ const render_resource_type =
       exp_years,
       exp_gap_year,
       fte_gap_year,
-    } = panel_args;
+    } = calculations;
 
     //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
     const all_program_names = _.chain(exp_data).map("label").uniq().value();
@@ -82,7 +80,7 @@ const render_resource_type =
           subject,
           first_year_program_count,
           is_fte: is_fte,
-          ...panel_args,
+          ...calculations,
         }}
       />
     );

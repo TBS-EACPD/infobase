@@ -89,8 +89,7 @@ export const declare_single_service_digital_status_panel = () =>
       title: text_maker("digital_status"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <ServiceDigitalStatus
             service={subject}

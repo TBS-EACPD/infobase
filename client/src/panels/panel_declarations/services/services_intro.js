@@ -142,8 +142,7 @@ export const declare_services_intro_panel = () =>
       },
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>
             <ServicesIntroPanel subject={subject} />

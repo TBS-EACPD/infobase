@@ -130,8 +130,7 @@ export const declare_dp_rev_split_panel = () =>
         };
       },
       render({ title, calculations, footnotes, sources, glossary_keys }) {
-        const { panel_args } = calculations;
-        const { table_data, column_configs } = panel_args;
+        const { table_data, column_configs } = calculations;
 
         return (
           <InfographicPanel {...{ title, footnotes, sources, glossary_keys }}>

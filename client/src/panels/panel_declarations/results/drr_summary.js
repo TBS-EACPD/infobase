@@ -112,11 +112,8 @@ export const declare_drr_summary_panel = () =>
           verbose_counts: get_verbose_counts(subject),
         };
       },
-      render: ({ title, calculations, footnotes, sources }) => {
-        const {
-          panel_args: { verbose_counts, drr_keys },
-          subject,
-        } = calculations;
+      render: ({ title, subject, calculations, footnotes, sources }) => {
+        const { verbose_counts, drr_keys } = calculations;
 
         return (
           <InfographicPanel {...{ title, footnotes, sources }}>

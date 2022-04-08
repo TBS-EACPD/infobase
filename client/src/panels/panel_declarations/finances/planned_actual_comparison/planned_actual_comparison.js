@@ -103,9 +103,7 @@ export const declare_planned_actual_comparison_panel = () =>
         };
       },
 
-      render({ title, calculations, sources }) {
-        const { panel_args, subject } = calculations;
-
+      render({ title, subject, calculations, sources }) {
         const {
           actual_spend,
           actual_ftes,
@@ -115,7 +113,7 @@ export const declare_planned_actual_comparison_panel = () =>
           diff_spend,
           footnotes,
           text_calculations,
-        } = panel_args;
+        } = calculations;
 
         return (
           <TextPanel {...{ title, footnotes, sources }}>

@@ -542,14 +542,12 @@ export const declare_detailed_program_spending_split_panel = () =>
 
       render({ title, calculations, footnotes, sources }) {
         const {
-          panel_args: {
-            text_calculations,
-            flat_data,
-            higher_level_mapping,
-            top_3_so_nums,
-            processed_spending_data,
-            program_footnotes,
-          },
+          text_calculations,
+          flat_data,
+          higher_level_mapping,
+          top_3_so_nums,
+          processed_spending_data,
+          program_footnotes,
         } = calculations;
 
         const filter_to_specific_so = (so_num) => (test_so_num) =>

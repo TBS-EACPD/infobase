@@ -70,11 +70,10 @@ class ProvPanel extends React.Component {
     };
   }
   render() {
-    const { title, calculations, footnotes, sources, subject_type } =
+    const { title, subject, calculations, footnotes, sources, subject_type } =
       this.props.render_args;
 
-    const { panel_args, subject } = calculations;
-    const { data } = panel_args;
+    const { data } = calculations;
 
     const employees_by_year = _.map(data, (year) =>
       _.chain(year).values().sum().value()
@@ -133,7 +132,7 @@ class ProvPanel extends React.Component {
         </Col>
         {!is_a11y_mode && (
           <Col size={12} isGraph>
-            <Canada graph_args={panel_args} />
+            <Canada graph_args={calculations} />
           </Col>
         )}
         {is_a11y_mode && (

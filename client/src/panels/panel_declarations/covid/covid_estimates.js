@@ -107,7 +107,7 @@ const get_common_column_configs = (show_vote_stat, est_docs) => ({
 });
 
 const ByDepartmentTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+  ({ show_vote_stat, ToggleVoteStat, args: { calculations }, data }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
 
     const pre_sorted_dept_data = _.chain(data)
@@ -180,7 +180,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
         <TM
           k={"covid_estimates_department_tab_text"}
           args={{
-            ...panel_args,
+            ...calculations,
             largest_dept_name: Dept.store.lookup(largest_dept_id).name,
             largest_dept_auth,
           }}
@@ -203,7 +203,12 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 
 const get_measure_name = (id) => CovidMeasureStore.lookup(id).name;
 const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+  ({
+    show_vote_stat,
+    ToggleVoteStat,
+    args: { subject, calculations },
+    data,
+  }) => {
     const est_docs = _.chain(data).map("est_doc").uniq().value();
 
     const pre_sorted_data = _.chain(data)
@@ -246,12 +251,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         formatter: (id) => (
           <Fragment>
             {get_measure_name(id)}
-            {get_tooltip(
-              "measure",
-              panel_args.selected_year,
-              panel_args.subject.id,
-              id
-            )}
+            {get_tooltip("measure", calculations.selected_year, subject.id, id)}
           </Fragment>
         ),
         plain_formatter: get_measure_name,
@@ -274,7 +274,7 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
         <TM
           k={"covid_estimates_measure_tab_text"}
           args={{
-            ...panel_args,
+            ...calculations,
             largest_measure_name:
               CovidMeasureStore.lookup(largest_measure_id).name,
             largest_measure_auth,
@@ -296,8 +296,14 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
   }
 );
 
-const SummaryTab = ({ args: panel_args, data }) => {
-  return <SummaryTabComponent panel_args={panel_args} data={data} />;
+const SummaryTab = ({ args: { subject, calculations }, data }) => {
+  return (
+    <SummaryTabComponent
+      subject={subject}
+      calculations={calculations}
+      data={data}
+    />
+  );
 };
 
 const tab_content_configs = [
@@ -305,7 +311,7 @@ const tab_content_configs = [
     key: "summary",
     subject_types: ["gov", "dept"],
     label: text_maker("summary_tab_label"),
-    load_data: ({ subject, selected_year }) =>
+    load_data: ({ subject, calculations: { selected_year } }) =>
       (() => {
         if (subject.subject_type === "dept") {
           return query_org_covid_summary({
@@ -324,7 +330,7 @@ const tab_content_configs = [
     key: "department",
     subject_types: ["gov"],
     label: text_maker("by_department_tab_label"),
-    load_data: ({ selected_year }) =>
+    load_data: ({ calculations: { selected_year } }) =>
       query_all_covid_estimates_by_measure_id({
         fiscal_year: selected_year,
       }).then((data) =>
@@ -336,7 +342,7 @@ const tab_content_configs = [
     key: "measure",
     subject_types: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
-    load_data: ({ subject, selected_year }) =>
+    load_data: ({ subject, calculations: { selected_year } }) =>
       (() => {
         if (subject.subject_type === "dept") {
           return query_org_covid_estimates_by_measure_id({
@@ -361,7 +367,7 @@ class CovidEstimatesPanel extends React.Component {
     this.state = {
       loading: true,
       summary_by_fiscal_year: null,
-      selected_year: _.last(props.panel_args.years),
+      selected_year: _.last(props.calculations.years),
     };
   }
   componentDidMount() {
@@ -382,7 +388,7 @@ class CovidEstimatesPanel extends React.Component {
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
     const { loading, selected_year, summary_by_fiscal_year } = this.state;
-    const { panel_args } = this.props;
+    const { subject, calculations } = this.props;
 
     if (loading) {
       return <LeafSpinner config_name={"subroute"} />;
@@ -397,8 +403,8 @@ class CovidEstimatesPanel extends React.Component {
         gov_tabled_est_docs_in_year
       );
 
-      const extended_panel_args = {
-        ...panel_args,
+      const extended_calculations = {
+        ...calculations,
         selected_year,
         gov_tabled_est_docs_in_year,
         gov_tabled_est_docs_in_year_text: get_est_doc_list_plain_text(
@@ -418,14 +424,14 @@ class CovidEstimatesPanel extends React.Component {
 
       return (
         <YearSelectionTabs
-          years={panel_args.years}
+          years={calculations.years}
           on_select_year={this.on_select_year}
           selected_year={selected_year}
         >
-          <AboveTabFootnoteList subject={panel_args.subject}>
+          <AboveTabFootnoteList subject={subject}>
             <TM
               k="covid_estimates_above_tab_footnote_list"
-              args={extended_panel_args}
+              args={extended_calculations}
             />
           </AboveTabFootnoteList>
           {/* 
@@ -435,7 +441,8 @@ class CovidEstimatesPanel extends React.Component {
           <TabsStateful
             tabs={get_tabbed_content_props(
               tab_content_configs,
-              extended_panel_args
+              subject,
+              extended_calculations
             )}
             key={selected_year}
           />
@@ -523,13 +530,16 @@ class SummaryTabComponent extends React.Component {
   }
 
   render() {
-    const { subject, selected_year } = this.props.panel_args;
+    const { subject, calculations } = this.props;
+
+    const { selected_year } = calculations;
+
     const additional_text_args = (() => {
       if (subject.subject_type === "gov") {
         return {
           covid_est_pct_of_all_est:
-            this.props.panel_args[`gov_covid_estimates_in_year`] /
-            this.props.panel_args[`gov_total_estimates_in_year`],
+            calculations[`gov_covid_estimates_in_year`] /
+            calculations[`gov_total_estimates_in_year`],
         };
       } else {
         const dept_covid_estimates_in_year = _.reduce(
@@ -549,7 +559,7 @@ class SummaryTabComponent extends React.Component {
         <div className="col-12 col-lg-6 medium-panel-text">
           <TM
             k={`covid_estimates_summary_text_${subject.subject_type}`}
-            args={{ ...this.props.panel_args, ...additional_text_args }}
+            args={{ subject, ...calculations, ...additional_text_args }}
           />
           <TM k={"covid_estimates_by_release_title"} />
           <ul>
@@ -624,12 +634,7 @@ export const declare_covid_estimates_panel = () =>
           !_.isEmpty(years_with_estimates) && { years: years_with_estimates }
         );
       },
-      render: ({
-        title,
-        calculations: { panel_args, subject },
-        footnotes,
-        sources,
-      }) => (
+      render: ({ title, subject, calculations, footnotes, sources }) => (
         <InfographicPanel
           allowOverflow={true}
           {...{
@@ -638,7 +643,7 @@ export const declare_covid_estimates_panel = () =>
             footnotes,
           }}
         >
-          <CovidEstimatesPanel panel_args={{ ...panel_args, subject }} />
+          <CovidEstimatesPanel subject={subject} calculations={calculations} />
         </InfographicPanel>
       ),
     }),

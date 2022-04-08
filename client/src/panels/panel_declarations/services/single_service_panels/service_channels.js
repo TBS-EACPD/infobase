@@ -118,8 +118,7 @@ export const declare_single_service_channels_panel = () =>
       title: text_maker("single_service_channels_title"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <ServiceChannels service={subject} title={title} sources={sources} />
         );

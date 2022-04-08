@@ -14,13 +14,18 @@ import { covid_create_text_maker_component } from "./covid_text_provider";
 
 const { text_maker } = covid_create_text_maker_component();
 
-const TabLoadingWrapper = ({ panel_args, load_data, TabContent }) => {
+const TabLoadingWrapper = ({
+  subject,
+  calculations,
+  load_data,
+  TabContent,
+}) => {
   const [loading, set_loading] = useState(true);
   const [data, set_data] = useState([]);
 
   useEffect(() => {
     loading &&
-      load_data(panel_args).then((data) => {
+      load_data({ subject, calculations }).then((data) => {
         set_data(data);
         set_loading(false);
       });
@@ -29,14 +34,17 @@ const TabLoadingWrapper = ({ panel_args, load_data, TabContent }) => {
   if (loading) {
     return <LeafSpinner config_name={"subroute"} />;
   } else {
-    return <TabContent args={panel_args} data={data} />;
+    return <TabContent args={{ subject, calculations }} data={data} />;
   }
 };
-const get_tabbed_content_props = (tab_content_configs, panel_args) => {
+const get_tabbed_content_props = (
+  tab_content_configs,
+  subject,
+  calculations
+) => {
   const configs_for_subject_type = _.filter(
     tab_content_configs,
-    ({ subject_types }) =>
-      _.includes(subject_types, panel_args.subject.subject_type)
+    ({ subject_types }) => _.includes(subject_types, subject.subject_type)
   );
 
   return _.chain(configs_for_subject_type)
@@ -46,7 +54,8 @@ const get_tabbed_content_props = (tab_content_configs, panel_args) => {
         label,
         content: (
           <TabLoadingWrapper
-            panel_args={panel_args}
+            subject={subject}
+            calculations={calculations}
             load_data={load_data}
             TabContent={TabContent}
           />

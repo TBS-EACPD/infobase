@@ -115,7 +115,7 @@ export const declare_profile_panel = () =>
         }
       },
       render({ title, calculations }) {
-        const { profile_fields } = calculations.panel_args;
+        const { profile_fields } = calculations;
 
         const labels_and_items = _.chain(profile_fields)
           .map(([label_key, item]) => {
@@ -150,9 +150,7 @@ export const declare_description_panel = () =>
       footnotes: false,
       calculate: (subject) => !_.isEmpty(subject.description),
       title: text_maker("tag_desc_title"),
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         return (
           <TextPanel title={title}>
             <div

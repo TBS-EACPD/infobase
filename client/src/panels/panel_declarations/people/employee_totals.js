@@ -43,9 +43,8 @@ export const declare_employee_totals_panel = () =>
         };
       },
 
-      render({ title, calculations, footnotes, sources }) {
-        const { subject, panel_args } = calculations;
-        const { series, ticks } = panel_args;
+      render({ title, subject, calculations, footnotes, sources }) {
+        const { series, ticks } = calculations;
 
         const first_active_year_index = _.findIndex(series, (pop) => pop !== 0);
         const last_active_year_index = _.findLastIndex(

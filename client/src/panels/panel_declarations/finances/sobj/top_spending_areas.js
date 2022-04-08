@@ -68,8 +68,7 @@ const common_cal = (programs, programSobjs) => {
 const render_w_options =
   ({ text_key }) =>
   ({ title, calculations, footnotes, sources }) => {
-    const { panel_args } = calculations;
-    const { top_3_sos_and_remainder, text_calculations } = panel_args;
+    const { top_3_sos_and_remainder, text_calculations } = calculations;
 
     const graph_data = top_3_sos_and_remainder.map((d) => ({
       label: d["label"],

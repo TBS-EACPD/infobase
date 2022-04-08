@@ -441,11 +441,8 @@ export const declare_results_table_panel = () =>
           }
         );
       },
-      render({ title, calculations, sources, footnotes }) {
-        const {
-          subject,
-          panel_args: { drr_keys_with_data, subject_result_counts },
-        } = calculations;
+      render({ title, subject, calculations, sources, footnotes }) {
+        const { drr_keys_with_data, subject_result_counts } = calculations;
 
         return (
           <InfographicPanel {...{ title, sources, footnotes }}>

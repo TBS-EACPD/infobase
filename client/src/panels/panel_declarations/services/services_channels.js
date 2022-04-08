@@ -259,8 +259,7 @@ export const declare_services_channels_panel = () =>
       title: text_maker("services_channels_title"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>
             <ServicesChannelsPanel subject={subject} />

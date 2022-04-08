@@ -41,8 +41,8 @@ const { text_maker, TM } = covid_create_text_maker_component(text);
 
 const panel_key = "covid_expenditures_panel";
 
-const SummaryTab = ({ args: panel_args, data }) => {
-  const { gov_covid_expenditures_in_year } = panel_args;
+const SummaryTab = ({ args: { calculations }, data }) => {
+  const { gov_covid_expenditures_in_year } = calculations;
   const { top_spending_orgs, top_spending_measures } = data;
 
   const { name: top_spending_org_name, spending: top_spending_org_amount } =
@@ -52,7 +52,7 @@ const SummaryTab = ({ args: panel_args, data }) => {
     spending: top_spending_measure_amount,
   } = _.first(top_spending_measures);
   const text_args = {
-    ...panel_args,
+    ...calculations,
     top_spending_org_name,
     top_spending_org_amount,
     top_spending_measure_name,
@@ -163,7 +163,7 @@ const get_common_column_configs = (show_vote_stat) => ({
 });
 
 const ByDepartmentTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+  ({ show_vote_stat, ToggleVoteStat, args: { calculations }, data }) => {
     const pre_sorted_rows = get_expenditures_by_index(data, "org_id");
 
     const column_configs = {
@@ -201,7 +201,7 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
         <TM
           k={"covid_expenditures_department_tab_text"}
           args={{
-            ...panel_args,
+            ...calculations,
             largest_dept: Dept.store.lookup(largest_dept_id),
             largest_dept_exp,
           }}
@@ -221,7 +221,12 @@ const ByDepartmentTab = wrap_with_vote_stat_controls(
 );
 
 const ByMeasureTab = wrap_with_vote_stat_controls(
-  ({ show_vote_stat, ToggleVoteStat, args: panel_args, data }) => {
+  ({
+    show_vote_stat,
+    ToggleVoteStat,
+    args: { subject, calculations },
+    data,
+  }) => {
     const pre_sorted_rows_with_measure_names = _.chain(
       get_expenditures_by_index(data, "measure_id")
     )
@@ -248,9 +253,10 @@ const ByMeasureTab = wrap_with_vote_stat_controls(
       .last()
       .value();
 
-    const subject_type = panel_args.subject.subject_type;
+    const subject_type = subject.subject_type;
     const text_args = {
-      ...panel_args,
+      subject,
+      ...calculations,
       largest_measure_name,
       largest_measure_exp,
       ...(subject_type === "dept" && {
@@ -287,7 +293,7 @@ const tab_content_configs = [
     key: "summary",
     subject_types: ["gov"],
     label: text_maker("summary_tab_label"),
-    load_data: ({ selected_year }) =>
+    load_data: ({ calculations: { selected_year } }) =>
       query_top_covid_spending({ fiscal_year: selected_year }),
     TabContent: SummaryTab,
   },
@@ -295,7 +301,7 @@ const tab_content_configs = [
     key: "department",
     subject_types: ["gov"],
     label: text_maker("by_department_tab_label"),
-    load_data: ({ selected_year }) =>
+    load_data: ({ calculations: { selected_year } }) =>
       query_all_covid_expenditures_by_measure_id({
         fiscal_year: selected_year,
       }).then((data) => roll_up_flat_measure_data_by_property(data, "org_id")),
@@ -305,7 +311,7 @@ const tab_content_configs = [
     key: "measure",
     subject_types: ["gov", "dept"],
     label: text_maker("by_measure_tab_label"),
-    load_data: ({ subject, selected_year }) =>
+    load_data: ({ subject, calculations: { selected_year } }) =>
       (() => {
         if (subject.subject_type === "dept") {
           return query_org_covid_expenditures_by_measure_id({
@@ -330,7 +336,7 @@ class CovidExpendituresPanel extends React.Component {
     this.state = {
       loading: true,
       summary_by_fiscal_year: null,
-      selected_year: _.last(props.panel_args.years),
+      selected_year: _.last(props.calculations.years),
     };
   }
   componentDidMount() {
@@ -350,7 +356,7 @@ class CovidExpendituresPanel extends React.Component {
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
     const { loading, selected_year, summary_by_fiscal_year } = this.state;
-    const { panel_args } = this.props;
+    const { subject, calculations } = this.props;
 
     if (loading) {
       return <LeafSpinner config_name={"subroute"} />;
@@ -360,8 +366,8 @@ class CovidExpendituresPanel extends React.Component {
 
       const gov_covid_expenditures_in_year = vote + stat;
 
-      const extended_panel_args = {
-        ...panel_args,
+      const extended_calculations = {
+        ...calculations,
         selected_year,
         next_year: +selected_year + 1,
         date_last_updated_text: get_date_last_updated_text(
@@ -373,19 +379,20 @@ class CovidExpendituresPanel extends React.Component {
 
       const tabs = get_tabbed_content_props(
         tab_content_configs,
-        extended_panel_args
+        subject,
+        extended_calculations
       );
 
       return (
         <YearSelectionTabs
-          years={panel_args.years}
+          years={calculations.years}
           on_select_year={this.on_select_year}
           selected_year={selected_year}
         >
-          <AboveTabFootnoteList subject={panel_args.subject}>
+          <AboveTabFootnoteList subject={subject}>
             <TM
               k="covid_expenditures_above_tab_footnote_list"
-              args={extended_panel_args}
+              args={extended_calculations}
             />
           </AboveTabFootnoteList>
           {/* 
@@ -425,12 +432,7 @@ export const declare_covid_expenditures_panel = () =>
           }
         );
       },
-      render: ({
-        title,
-        calculations: { panel_args, subject },
-        footnotes,
-        sources,
-      }) => (
+      render: ({ title, subject, calculations, footnotes, sources }) => (
         <InfographicPanel
           {...{
             title,
@@ -438,7 +440,10 @@ export const declare_covid_expenditures_panel = () =>
             footnotes,
           }}
         >
-          <CovidExpendituresPanel panel_args={{ ...panel_args, subject }} />
+          <CovidExpendituresPanel
+            subject={subject}
+            calculations={calculations}
+          />
         </InfographicPanel>
       ),
     }),

@@ -180,8 +180,7 @@ export const declare_single_service_overview_panel = () =>
       title: text_maker("service_overview_title"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <ServiceOverview service={subject} title={title} sources={sources} />
         );

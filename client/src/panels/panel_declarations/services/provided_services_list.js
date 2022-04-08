@@ -142,8 +142,7 @@ export const declare_provided_services_list_panel = () =>
       title: text_maker("list_of_provided_services_title"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>
             <ProvidedServicesListPanel subject={subject} />

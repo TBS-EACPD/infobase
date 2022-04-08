@@ -103,11 +103,8 @@ export const declare_employee_executive_level_panel = () =>
           subject
         );
       },
-      render({ title, calculations, footnotes, sources }) {
-        const {
-          panel_args: { series, has_non_ex_only },
-          subject,
-        } = calculations;
+      render({ title, subject, calculations, footnotes, sources }) {
+        const { series, has_non_ex_only } = calculations;
 
         const text_calculations = (() => {
           if (has_non_ex_only) {

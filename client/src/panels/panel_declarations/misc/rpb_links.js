@@ -45,9 +45,7 @@ export const declare_links_to_rpb_panel = () =>
             ...common_panel_config,
             calculate: _.constant(true),
 
-            render({ title, calculations }) {
-              const { subject } = calculations;
-
+            render({ title, subject }) {
               const list_args = _.chain(Table.store.get_all())
                 .reject("reference_table")
                 .groupBy(get_table_type)
@@ -90,9 +88,7 @@ export const declare_links_to_rpb_panel = () =>
             // Hotfix while working out a proper dept level version
             calculate: _.constant(true),
 
-            render({ title, calculations }) {
-              const { subject } = calculations;
-
+            render({ title, subject }) {
               const list_args = _.chain(subject.table_ids)
                 .map((id) => Table.store.has(id) && Table.store.lookup(id))
                 .compact()

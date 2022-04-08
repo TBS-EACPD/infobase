@@ -460,9 +460,14 @@ class LapseByVotesGraph extends React.Component {
     );
   }
 }
-const render = function ({ calculations, footnotes, sources, glossary_keys }) {
-  const { panel_args, subject } = calculations;
-  const { data_series, additional_info, queried_votes } = panel_args;
+const render = function ({
+  subject,
+  calculations,
+  footnotes,
+  sources,
+  glossary_keys,
+}) {
+  const { data_series, additional_info, queried_votes } = calculations;
 
   const final_info = {
     ...additional_info,

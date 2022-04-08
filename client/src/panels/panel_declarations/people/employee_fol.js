@@ -82,27 +82,25 @@ export const declare_employee_fol_panel = () =>
       table_dependencies: ["orgEmployeeFol"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_fol_title"),
-      render({ title, calculations, footnotes, sources }) {
-        const { panel_args, subject } = calculations;
-
+      render({ title, subject, calculations, footnotes, sources }) {
         const text_groups = (() => {
           const has_eng_data = _.some(
-            panel_args,
+            calculations,
             ({ label }) => label === fol.eng.text
           );
           const has_fr_data = _.some(
-            panel_args,
+            calculations,
             ({ label }) => label === fol.fre.text
           );
           const has_eng_fr_data = has_eng_data && has_fr_data;
 
           if (has_eng_fr_data) {
             return _.filter(
-              panel_args,
+              calculations,
               ({ label }) => label === fol.eng.text || label === fol.fre.text
             );
           } else {
-            const sorted_groups = _.sortBy(panel_args, "five_year_percent");
+            const sorted_groups = _.sortBy(calculations, "five_year_percent");
             return _.uniq([_.head(sorted_groups), _.last(sorted_groups)]);
           }
         })();
@@ -115,7 +113,7 @@ export const declare_employee_fol_panel = () =>
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
         const has_suppressed_data = _.some(
-          panel_args,
+          calculations,
           (graph_arg) => graph_arg.label === fol.sup.text
         );
 
@@ -150,7 +148,7 @@ export const declare_employee_fol_panel = () =>
                     formatter: formats.big_int_raw,
                   },
                   initial_graph_mode: "bar_grouped",
-                  data: panel_args,
+                  data: calculations,
                 }}
               />
             </Col>
