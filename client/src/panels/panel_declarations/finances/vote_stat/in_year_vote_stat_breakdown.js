@@ -215,7 +215,7 @@ const declare_in_year_voted_breakdown_panel = () =>
     panel_key: "in_year_voted_breakdown",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      depends_on: ["orgVoteStatEstimates"],
+      table_dependencies: ["orgVoteStatEstimates"],
       title: text_maker("in_year_voted_breakdown_title"),
       calculate: planned_vote_or_stat_calculate("voted"),
       render: planned_vote_or_stat_render("voted"),
@@ -226,7 +226,7 @@ const declare_in_year_stat_breakdown_panel = () =>
     panel_key: "in_year_stat_breakdown",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      depends_on: ["orgVoteStatEstimates"],
+      table_dependencies: ["orgVoteStatEstimates"],
       title: text_maker("in_year_stat_breakdown_title"),
       calculate: planned_vote_or_stat_calculate("stat"),
       render: planned_vote_or_stat_render("stat"),

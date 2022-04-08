@@ -44,7 +44,7 @@ export const declare_vote_stat_split_panel = () =>
     panel_key: "vote_stat_split",
     subject_types: ["program"],
     panel_config_func: () => ({
-      depends_on: ["programVoteStat"],
+      table_dependencies: ["programVoteStat"],
       footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
       title: text_maker("vote_stat_split_title"),

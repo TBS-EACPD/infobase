@@ -66,13 +66,16 @@ const getSubj = (subject_type, id) => {
 // const link_to_footnotes = ( panel_key, subject_type) => `#footnotes/panel/${panel_key}/${subject_type}`;
 
 function panels_of_interest(panel) {
-  const { depends_on, key } = panel;
+  const { table_dependencies, key } = panel;
   const same_key = _.filter(
     PanelRegistry.panels,
     (g) => g.key === key && g !== panel
   );
   const similar_dependencies = _.chain(PanelRegistry.panels)
-    .filter((g) => !_.isEmpty(_.intersection(g.depends_on, depends_on)))
+    .filter(
+      (g) =>
+        !_.isEmpty(_.intersection(g.table_dependencies, table_dependencies))
+    )
     .reject((g) => g === panel)
     .value();
 
@@ -179,7 +182,7 @@ const PanelTableRow = ({ current_subject, panel, className }) => {
     <tr className={className}>
       <td>{panel.key}</td>
       <td>{panel.subject_type}</td>
-      <td>{panel.depends_on.join(", ")}</td>
+      <td>{panel.table_dependencies.join(", ")}</td>
       <td>{panel.notes}</td>
       <td>
         <Link to={url}>link</Link>

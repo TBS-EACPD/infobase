@@ -70,7 +70,7 @@ const get_text_calculations = (table, subject) => {
 };
 
 const common_panel_config = {
-  depends_on: ["orgVoteStatEstimates"],
+  table_dependencies: ["orgVoteStatEstimates"],
   machinery_footnotes: false,
   glossary_keys: ["AUTH"],
   title: text_maker("in_year_voted_stat_split_title"),

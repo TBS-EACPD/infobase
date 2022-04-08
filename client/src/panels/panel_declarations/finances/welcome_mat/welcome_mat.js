@@ -1007,7 +1007,7 @@ const common_program_crso_calculate = function (subject) {
 };
 
 const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
-const depends_on = ["programSpending", "programFtes"];
+const table_dependencies = ["programSpending", "programFtes"];
 
 const common_panel_config = {
   footnotes,
@@ -1023,7 +1023,7 @@ export const declare_welcome_mat_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-            depends_on,
+            table_dependencies,
 
             calculate(subject) {
               const { programSpending, programFtes } = this.tables;
@@ -1043,10 +1043,10 @@ export const declare_welcome_mat_panel = () =>
           return {
             ...common_panel_config,
             missing_info: "ok",
-            depends_on: [
+            table_dependencies: [
               "orgVoteStatEstimates",
               "orgVoteStatPa",
-              ...depends_on,
+              ...table_dependencies,
             ],
             calculate(subject) {
               const { programSpending, programFtes, orgVoteStatEstimates } =
@@ -1105,7 +1105,7 @@ export const declare_welcome_mat_panel = () =>
         case "program":
           return {
             ...common_panel_config,
-            depends_on,
+            table_dependencies,
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,
@@ -1113,7 +1113,7 @@ export const declare_welcome_mat_panel = () =>
         case "crso":
           return {
             ...common_panel_config,
-            depends_on,
+            table_dependencies,
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,

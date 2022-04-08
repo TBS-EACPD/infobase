@@ -22,7 +22,7 @@ export const declare_personnel_spend_panel = () =>
     panel_key: "personnel_spend",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      depends_on: ["orgSobjs"],
+      table_dependencies: ["orgSobjs"],
       title: text_maker("personnel_spend_title"),
       calculate(subject) {
         const { orgSobjs } = this.tables;

@@ -199,7 +199,7 @@ export const declare_spend_by_so_hist_panel = () =>
     panel_key: "spend_by_so_hist",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      depends_on: ["orgSobjs"],
+      table_dependencies: ["orgSobjs"],
       title: text_maker("dept_fin_spend_by_so_hist_title"),
       footnotes: ["SOBJ", "EXP"],
       calculate(subject) {

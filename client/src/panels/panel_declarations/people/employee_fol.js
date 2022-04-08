@@ -79,7 +79,7 @@ export const declare_employee_fol_panel = () =>
     panel_key: "employee_fol",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      depends_on: ["orgEmployeeFol"],
+      table_dependencies: ["orgEmployeeFol"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_fol_title"),
       render({ title, calculations, footnotes, sources }) {

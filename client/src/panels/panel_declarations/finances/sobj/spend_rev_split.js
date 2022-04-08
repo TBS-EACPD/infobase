@@ -120,7 +120,7 @@ export const declare_spend_rev_split_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
-            depends_on: ["orgSobjs"],
+            table_dependencies: ["orgSobjs"],
             footnotes: ["SOBJ_REV"],
             calculate(subject) {
               const { orgSobjs } = this.tables;
@@ -157,7 +157,7 @@ export const declare_spend_rev_split_panel = () =>
         case "program":
           return {
             ...common_panel_config,
-            depends_on: ["programSobjs"],
+            table_dependencies: ["programSobjs"],
             calculate(subject) {
               const { programSobjs } = this.tables;
               const prog_rows = programSobjs.programs.get(subject);

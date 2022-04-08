@@ -383,7 +383,7 @@ export const declare_crso_by_prog_fte_panel = () =>
     subject_types: ["crso"],
     panel_config_func: () => ({
       footnotes: ["PLANNED_FTE", "FTE"],
-      depends_on: ["programSpending", "programFtes"],
+      table_dependencies: ["programSpending", "programFtes"],
       title: text_maker("crso_by_prog_fte_title"),
       calculate: get_calculate_func(true),
       render: render_resource_type(true),
@@ -395,7 +395,7 @@ export const declare_crso_by_prog_exp_panel = () =>
     subject_types: ["crso"],
     panel_config_func: () => ({
       footnotes: ["PLANNED_EXP", "EXP"],
-      depends_on: ["programSpending", "programFtes"],
+      table_dependencies: ["programSpending", "programFtes"],
       title: text_maker("crso_by_prog_exp_title"),
       calculate: get_calculate_func(false),
       render: render_resource_type(false),

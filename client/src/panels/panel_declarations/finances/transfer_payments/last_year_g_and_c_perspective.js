@@ -15,7 +15,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
     panel_key: "last_year_g_and_c_perspective",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      depends_on: ["orgTransferPayments", "programSpending"],
+      table_dependencies: ["orgTransferPayments", "programSpending"],
       footnotes: ["SOBJ10"],
       title: text_maker("last_year_g_and_c_perspective_title"),
       calculate(subject) {

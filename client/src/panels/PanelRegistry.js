@@ -12,7 +12,7 @@ import { Table } from "src/tables/TableClass";
 const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 
 const default_args = {
-  depends_on: [],
+  table_dependencies: [],
   machinery_footnotes: true,
 };
 
@@ -99,7 +99,7 @@ class PanelRegistry {
       this.subject_type === "dept" &&
       this.missing_info !== "ok" &&
       _.some(
-        this.depends_on,
+        this.table_dependencies,
         (t) =>
           Table.store.lookup(t).depts &&
           !Table.store.lookup(t).depts[subject.id]
@@ -162,7 +162,7 @@ class PanelRegistry {
         .uniqBy()
         .value();
     } else {
-      return _.chain(this.depends_on)
+      return _.chain(this.table_dependencies)
         .map((table_id) => [table_id, Table.store.lookup(table_id)])
         .fromPairs()
         .map("tags")
@@ -215,7 +215,7 @@ const tables_for_panel = (panel_key, subject_type) =>
     .thru((panels) =>
       subject_type ? _.filter(panels, { subject_type }) : panels
     )
-    .map("depends_on")
+    .map("table_dependencies")
     .flatten()
     .uniqBy()
     .value();
