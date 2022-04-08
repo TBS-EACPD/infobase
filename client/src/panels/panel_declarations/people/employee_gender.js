@@ -81,7 +81,7 @@ export const declare_employee_gender_panel = () =>
     panel_key: "employee_gender",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      depends_on: ["orgEmployeeGender"],
+      table_dependencies: ["orgEmployeeGender"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_gender_title"),
       render({ title, calculations, footnotes, sources }) {

@@ -107,7 +107,7 @@ export const declare_explore_results_panel = () =>
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR", "DP"],
-      depends_on: ["programSpending", "programFtes"],
+      table_dependencies: ["programSpending", "programFtes"],
       source: () =>
         get_source_links([
           "departmental_plans",

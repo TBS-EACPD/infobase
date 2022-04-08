@@ -16,7 +16,7 @@ export const declare_resource_structure_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       title: text_maker("resource_structure_title"),
-      depends_on: ["programSpending", "programFtes"],
+      table_dependencies: ["programSpending", "programFtes"],
 
       calculate(subject) {
         const { programSpending } = this.tables;

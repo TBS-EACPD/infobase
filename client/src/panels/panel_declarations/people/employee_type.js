@@ -71,7 +71,7 @@ export const declare_employee_type_panel = () =>
     panel_key: "employee_type",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      depends_on: ["orgEmployeeType"],
+      table_dependencies: ["orgEmployeeType"],
       title: text_maker("employee_type_title"),
       glossary_keys: [
         "INDET_PEOPLE",

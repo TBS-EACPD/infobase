@@ -33,7 +33,7 @@ export const declare_simplographic_panel = () =>
       footnotes: false,
       requires_result_counts: true,
 
-      depends_on: ["orgVoteStatPa", "orgEmployeeRegion"],
+      table_dependencies: ["orgVoteStatPa", "orgEmployeeRegion"],
       title: text_maker("simplographic_title"),
       calculate() {
         const { orgVoteStatPa, orgEmployeeRegion } = this.tables;

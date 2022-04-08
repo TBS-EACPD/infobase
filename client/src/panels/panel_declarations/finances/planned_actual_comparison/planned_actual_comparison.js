@@ -22,7 +22,7 @@ export const declare_planned_actual_comparison_panel = () =>
     panel_key: "planned_actual_comparison",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: () => ({
-      depends_on: ["programSpending", "programFtes"],
+      table_dependencies: ["programSpending", "programFtes"],
       title: text_maker("planned_actual_title"),
       source: () =>
         get_source_links([

@@ -22,7 +22,8 @@ const get_default_table_tag_state = ({ panel_keys, subject }) =>
   _.chain(panel_keys)
     .flatMap(
       (panel_key) =>
-        PanelRegistry.lookup(panel_key, subject.subject_type)?.depends_on
+        PanelRegistry.lookup(panel_key, subject.subject_type)
+          ?.table_dependencies
     )
     .uniq()
     .map((table_id) => [table_id, false])
@@ -176,7 +177,7 @@ export default class PanelFilterControl extends React.Component {
         const panel = PanelRegistry.lookup(panel_key, subject.subject_type);
         return (
           panel.is_static ||
-          _.intersection(panel.depends_on, active_table_ids).length > 0
+          _.intersection(panel.table_dependencies, active_table_ids).length > 0
         );
       });
   };
