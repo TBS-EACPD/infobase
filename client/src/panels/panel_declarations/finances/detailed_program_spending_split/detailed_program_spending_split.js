@@ -447,8 +447,8 @@ export const declare_detailed_program_spending_split_panel = () =>
       table_dependencies: ["programSobjs", "programSpending"],
       title: text_maker("detailed_program_spending_split_title"),
       footnotes: footnote_topics,
-      calculate(subject) {
-        const { programSobjs, programSpending } = this.tables;
+      calculate: (subject, tables) => {
+        const { programSobjs, programSpending } = tables;
 
         const table_data = programSobjs.q(subject).data;
 

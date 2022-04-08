@@ -24,8 +24,8 @@ export const declare_personnel_spend_panel = () =>
     panel_config_func: () => ({
       table_dependencies: ["orgSobjs"],
       title: text_maker("personnel_spend_title"),
-      calculate(subject) {
-        const { orgSobjs } = this.tables;
+      calculate: (subject, tables) => {
+        const { orgSobjs } = tables;
         const year_value_pairs = _.map(std_years, (year) => [
           run_template(year),
           orgSobjs.sum_cols_by_grouped_data(year, "so", subject)[sos[1].text],

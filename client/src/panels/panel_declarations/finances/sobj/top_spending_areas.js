@@ -97,14 +97,14 @@ export const declare_top_spending_areas_panel = () =>
       table_dependencies: ["programSobjs"],
       footnotes: ["SOBJ"],
       title: text_maker("top_spending_areas_title"),
-      calculate(subject) {
-        if (_.isEmpty(this.tables.programSobjs.programs.get(subject))) {
+      calculate: (subject, tables) => {
+        if (_.isEmpty(tables.programSobjs.programs.get(subject))) {
           return false;
         }
 
         const top_3_sos_and_remainder = common_cal(
           [subject],
-          this.tables.programSobjs
+          tables.programSobjs
         );
         if (!top_3_sos_and_remainder) {
           return false;

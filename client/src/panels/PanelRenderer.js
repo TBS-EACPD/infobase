@@ -12,17 +12,16 @@ export const PanelRenderer = withRouter(
     render() {
       let { subject, panel_key, history, active_bubble_id } = this.props;
 
-      const panel_obj = PanelRegistry.lookup(panel_key, subject.subject_type);
-
       const panel_options = { history };
 
       const { Provider } = panel_context;
 
-      const calculations = panel_obj.calculate(subject, panel_options);
+      const panel = PanelRegistry.lookup(panel_key, subject.subject_type);
 
-      if (!calculations) {
+      if (!panel.is_panel_valid_for_subject(subject, panel_options)) {
         return null;
       }
+
       return (
         <div id={panel_key}>
           <Provider
@@ -32,7 +31,7 @@ export const PanelRenderer = withRouter(
               subject,
             }}
           >
-            {panel_obj.render(calculations, panel_options)}
+            {panel.render(subject, panel_options)}
           </Provider>
         </div>
       );

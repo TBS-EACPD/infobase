@@ -202,8 +202,8 @@ export const declare_spend_by_so_hist_panel = () =>
       table_dependencies: ["orgSobjs"],
       title: text_maker("dept_fin_spend_by_so_hist_title"),
       footnotes: ["SOBJ", "EXP"],
-      calculate(subject) {
-        const { orgSobjs } = this.tables;
+      calculate: (subject, tables) => {
+        const { orgSobjs } = tables;
 
         const data = _.chain(sos)
           .sortBy((sobj) => sobj.so_num)

@@ -30,7 +30,7 @@ export const declare_planned_actual_comparison_panel = () =>
           "departmental_results_reports",
           "public_accounts",
         ]),
-      calculate(subject) {
+      calculate: (subject, tables) => {
         if (subject.subject_type === "dept") {
           if (
             !subject.is_dp_org ||
@@ -53,7 +53,7 @@ export const declare_planned_actual_comparison_panel = () =>
           }
         }
 
-        const { programSpending, programFtes } = this.tables;
+        const { programSpending, programFtes } = tables;
         const spend_q = programSpending.q(subject);
         const fte_q = programFtes.q(subject);
 

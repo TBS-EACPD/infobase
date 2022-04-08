@@ -111,7 +111,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
     panel_config_func: () => ({
       title: text_maker("program_spending_in_tag_perspective_title"),
       table_dependencies: ["programSpending"],
-      calculate(subject) {
+      calculate: (subject, tables) => {
         if (is_a11y_mode) {
           //turn off this panel in a11y mode
           return false;
@@ -119,7 +119,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
         if (subject.is_dead) {
           return false;
         }
-        const { programSpending } = this.tables;
+        const { programSpending } = tables;
         //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
         const prog_row = _.first(programSpending.programs.get(subject));
 
