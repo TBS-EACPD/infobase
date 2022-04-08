@@ -90,7 +90,7 @@ export const declare_m2m_tag_warning_panel = () =>
     panel_config_func: () => ({
       ...common_panel_config,
 
-      calculate(subject) {
+      calculate: (subject) => {
         return subject.is_m2m;
       },
 

@@ -35,8 +35,8 @@ export const declare_simplographic_panel = () =>
 
       table_dependencies: ["orgVoteStatPa", "orgEmployeeRegion"],
       title: text_maker("simplographic_title"),
-      calculate() {
-        const { orgVoteStatPa, orgEmployeeRegion } = this.tables;
+      calculate: (_subject, tables) => {
+        const { orgVoteStatPa, orgEmployeeRegion } = tables;
         const gov_exp_pa_last_year = orgVoteStatPa
           .q()
           .sum("{{pa_last_year}}exp");

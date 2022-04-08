@@ -87,7 +87,7 @@ export const declare_tags_of_interest_panel = () =>
     panel_config_func: (subject_type) => ({
       footnotes: false,
       title: text_maker(title_by_subject_type[subject_type]),
-      calculate(subject) {
+      calculate: (subject) => {
         const tags_by_root = get_related_tag_list_args(subject);
         if (subject.dp_status === false || _.isEmpty(tags_by_root)) {
           return false;

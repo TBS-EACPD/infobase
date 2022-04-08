@@ -73,25 +73,30 @@ class PanelRegistry {
     //Additionally, every panel only has one object like this, so this object contains nothing about
 
     //we copy every thing except render and calculate, which follow a specific API
-    this._inner_calculate = def.calculate || (() => true);
-    this._inner_render = def.render;
     const to_assign = _.omit(def, ["render", "calculate"]);
+
     const full_key = create_panel_key(def.key, def.subject_type);
     Object.assign(this, default_args, to_assign, { full_key });
+
+    this._inner_render = def.render;
+    this._inner_calculate = _.memoize(def.calculate || (() => true));
+
     this.constructor.register_instance(this);
-
-    this.get_panel_args = _.memoize(this.get_panel_args);
   }
 
-  get_panel_args(subject, options) {
-    const calc_func = this._inner_calculate;
-    return calc_func.call(this, subject, options);
+  get tables() {
+    return _.chain(this.table_dependencies)
+      .map((table_id) => [table_id, Table.store.lookup(table_id)])
+      .fromPairs()
+      .value();
   }
+
   is_panel_valid_for_subject(subject, options = {}) {
     //delegates to the proper subject_type's calculate function
     if (this.subject_type !== subject.subject_type) {
       return false;
     }
+
     // TODO: this is something panels should handle themselves. Troublesome that the PanelRegistry
     // makes this sort of check for dept tables but not CR or program tables. One way or another, this
     // will go away when we drop tables all together
@@ -107,21 +112,19 @@ class PanelRegistry {
     ) {
       return false;
     }
-    const panel_args = this.get_panel_args(subject, options);
+
+    const panel_args = this._inner_calculate(subject, this.tables, options);
     if (panel_args === false) {
       return false;
     }
+
     return true;
   }
-  calculate(subject, options = {}) {
-    if (this.is_panel_valid_for_subject(subject, options)) {
-      const panel_args = this.get_panel_args(subject, options);
 
-      //inner_render API : a panel's inner_render fucntion usually wants access to panel_args and subject.
-      return { subject, panel_args };
-    } else {
-      return false;
-    }
+  calculate(subject, options = {}) {
+    const panel_args = this._inner_calculate(subject, this.tables, options);
+
+    return { subject, panel_args };
   }
 
   get_title(subject) {
@@ -135,21 +138,16 @@ class PanelRegistry {
     if (_.isFunction(this.source)) {
       return this.source(subject);
     } else {
-      //if it's undefined we'll make one
-      /* eslint-disable-next-line no-use-before-define */
-      return _.chain(tables_for_panel(this.key, subject.subject_type))
-        .map((table) => Table.store.lookup(table))
-        .map((table) => {
-          return {
-            html: table.name,
-            href: rpb_link({
-              subject: get_appropriate_rpb_subject(subject).guid,
-              table: table.id,
-              mode: "details",
-            }),
-          };
-        })
-        .value();
+      return _.map(this.tables, (table) => {
+        return {
+          html: table.name,
+          href: rpb_link({
+            subject: get_appropriate_rpb_subject(subject).guid,
+            table: table.id,
+            mode: "details",
+          }),
+        };
+      });
     }
   }
 
@@ -162,9 +160,7 @@ class PanelRegistry {
         .uniqBy()
         .value();
     } else {
-      return _.chain(this.table_dependencies)
-        .map((table_id) => [table_id, Table.store.lookup(table_id)])
-        .fromPairs()
+      return _.chain(this.tables)
         .map("tags")
         .compact()
         .flatten()
@@ -186,9 +182,8 @@ class PanelRegistry {
       .value();
   }
 
-  render(calculations, options = {}) {
-    const { subject } = calculations;
-
+  render(subject, options = {}) {
+    const calculations = this.calculate(subject, options);
     const title = this.get_title(subject);
     const sources = this.get_source(subject);
     const footnotes = this.get_footnotes(subject);

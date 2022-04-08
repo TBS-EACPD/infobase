@@ -1025,8 +1025,8 @@ export const declare_welcome_mat_panel = () =>
             ...common_panel_config,
             table_dependencies,
 
-            calculate(subject) {
-              const { programSpending, programFtes } = this.tables;
+            calculate: (subject, tables) => {
+              const { programSpending, programFtes } = tables;
               const q6 = programSpending.q(subject);
               const q12 = programFtes.q(subject);
 
@@ -1048,9 +1048,9 @@ export const declare_welcome_mat_panel = () =>
               "orgVoteStatPa",
               ...table_dependencies,
             ],
-            calculate(subject) {
+            calculate: (subject, tables) => {
               const { programSpending, programFtes, orgVoteStatEstimates } =
-                this.tables;
+                tables;
               const q6 = programSpending.q(subject);
               const q12 = programFtes.q(subject);
 

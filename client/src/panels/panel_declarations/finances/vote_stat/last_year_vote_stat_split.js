@@ -48,8 +48,8 @@ export const declare_vote_stat_split_panel = () =>
       footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
       title: text_maker("vote_stat_split_title"),
-      calculate(subject) {
-        const { programVoteStat } = this.tables;
+      calculate: (subject, tables) => {
+        const { programVoteStat } = tables;
 
         const vote_stat = _.map(
           programVoteStat.programs.get(subject),

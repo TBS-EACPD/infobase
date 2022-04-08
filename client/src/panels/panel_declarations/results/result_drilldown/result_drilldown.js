@@ -115,7 +115,7 @@ export const declare_explore_results_panel = () =>
         ]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
-      calculate(subject) {
+      calculate: (subject) => {
         return get_docs_with_data(subject, subject_type);
       },
       title: (subject) => {
