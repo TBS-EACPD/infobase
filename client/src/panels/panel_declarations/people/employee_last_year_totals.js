@@ -50,11 +50,9 @@ export const declare_employee_last_year_totals_panel = () =>
         };
       },
 
-      render({ title, calculations, footnotes, sources }) {
-        const { subject, panel_args } = calculations;
-
-        const dept_emp_value = panel_args.vals[1].value;
-        const gov_emp_value = panel_args.vals[0].value;
+      render({ title, subject, calculations, footnotes, sources }) {
+        const dept_emp_value = calculations.vals[1].value;
+        const gov_emp_value = calculations.vals[0].value;
 
         const dept_emp_pct = dept_emp_value / gov_emp_value;
 

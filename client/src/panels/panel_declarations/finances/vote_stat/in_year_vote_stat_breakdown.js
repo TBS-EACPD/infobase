@@ -46,10 +46,9 @@ const color_scale = (vs) =>
 
 const planned_vote_or_stat_render = (vs) =>
   function ({ title, calculations, footnotes, sources }) {
-    const { panel_args } = calculations;
     const isVoted = vs === "voted";
 
-    const { data, voted_stat_est_in_year } = panel_args;
+    const { data, voted_stat_est_in_year } = calculations;
 
     const top_10_rows = _.take(data, 10);
     const total_amt = sum(data, _.property(main_col));

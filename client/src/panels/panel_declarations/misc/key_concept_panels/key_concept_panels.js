@@ -20,7 +20,7 @@ const common_panel_config = {
 };
 
 const curried_render = ({ q_a_key_pairs }) =>
-  function ({ calculations: { subject } }) {
+  function ({ subject }) {
     let rendered_q_a_key_pairs = _.compact([
       ...q_a_key_pairs,
       subject.subject_type === "crso" && ["what_are_CR_q", "what_are_CR_a"],

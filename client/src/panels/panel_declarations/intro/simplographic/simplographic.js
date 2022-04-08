@@ -116,7 +116,7 @@ export const declare_simplographic_panel = () =>
       },
 
       render({ title, calculations }) {
-        const { panel_args: big_info } = calculations;
+        const { big_info } = calculations;
         const Row = (props) => {
           const this_row_props = {
             className: "row about-government-intro-grid",

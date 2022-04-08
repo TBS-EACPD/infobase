@@ -243,9 +243,7 @@ export const declare_spend_by_so_hist_panel = () =>
         };
       },
       render({ title, calculations, footnotes, sources }) {
-        const {
-          panel_args: { data, text_calculations },
-        } = calculations;
+        const { data, text_calculations } = calculations;
 
         const graph_content = (() => {
           if (is_a11y_mode) {

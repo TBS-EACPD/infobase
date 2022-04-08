@@ -193,12 +193,10 @@ export const declare_results_intro_panel = () =>
           has_current_drr,
         };
       },
-      render({ title, calculations, sources, footnotes }) {
-        const { panel_args } = calculations;
-
+      render({ title, subject, calculations, sources, footnotes }) {
         return (
           <InfographicPanel {...{ title, sources, footnotes }}>
-            <ResultsIntroPanel {...panel_args} />
+            <ResultsIntroPanel subject={subject} {...calculations} />
           </InfographicPanel>
         );
       },

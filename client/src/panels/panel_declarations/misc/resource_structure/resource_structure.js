@@ -44,11 +44,8 @@ export const declare_resource_structure_panel = () =>
         );
       },
 
-      render({ title, calculations }) {
-        const {
-          subject,
-          panel_args: { has_planning_data, has_actual_data },
-        } = calculations;
+      render({ title, subject, calculations }) {
+        const { has_planning_data, has_actual_data } = calculations;
 
         const explorer_instance = new SingleTagResourceExplorer(
           subject,

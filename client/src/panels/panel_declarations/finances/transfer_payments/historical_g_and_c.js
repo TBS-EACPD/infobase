@@ -395,13 +395,12 @@ export const declare_historical_g_and_c_panel = () =>
               };
             },
             render({ title, calculations, footnotes, sources }) {
-              const { panel_args } = calculations;
               const {
                 payments: series,
                 five_year_avg,
                 largest_avg,
                 largest_type,
-              } = panel_args;
+              } = calculations;
               return (
                 <InfographicPanel
                   allowOverflow={true}
@@ -426,14 +425,14 @@ export const declare_historical_g_and_c_panel = () =>
             ...common_panel_config,
             key: "historical_g_and_c",
             footnotes: ["SOBJ10"],
-            calculate: (dept, tables) => {
+            calculate: (subject, tables) => {
               const { orgTransferPayments } = tables;
 
               const rolled_up_transfer_payments =
                 orgTransferPayments.sum_cols_by_grouped_data(
                   exp_years,
                   "type_id",
-                  dept
+                  subject
                 );
 
               const five_year_avg =
@@ -458,7 +457,7 @@ export const declare_historical_g_and_c_panel = () =>
                 .some((value) => value !== 0)
                 .value();
 
-              const rows = _.chain(orgTransferPayments.q(dept).data)
+              const rows = _.chain(orgTransferPayments.q(subject).data)
                 .sortBy("{{pa_last_year}}exp")
                 .reverse()
                 .value();
@@ -475,7 +474,7 @@ export const declare_historical_g_and_c_panel = () =>
                 rows[_.indexOf(tp_average_payments, max_tp_avg)].tp;
 
               const text_calculations = {
-                dept,
+                dept: subject,
                 five_year_avg,
                 max_avg: max_payment.value,
                 max_type,
@@ -492,9 +491,7 @@ export const declare_historical_g_and_c_panel = () =>
               );
             },
             render({ title, calculations, footnotes, sources }) {
-              const {
-                panel_args: { rows, rolled_up, text_calculations },
-              } = calculations;
+              const { rows, rolled_up, text_calculations } = calculations;
               const text_content = (
                 <TM k="dept_historical_g_and_c_text" args={text_calculations} />
               );

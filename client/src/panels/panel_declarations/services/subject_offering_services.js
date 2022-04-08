@@ -116,8 +116,7 @@ export const declare_subject_offering_services_panel = () =>
           : text_maker("programs_offering_services_title"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>
             <OrgsOfferingServicesPanel subject={subject} />

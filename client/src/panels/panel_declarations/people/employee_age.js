@@ -120,10 +120,8 @@ export const declare_employee_age_panel = () =>
       table_dependencies: ["orgEmployeeAgeGroup", "orgEmployeeAvgAge"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       title: text_maker("employee_age_title"),
-      render({ title, calculations, footnotes, sources }) {
-        const { panel_args, subject } = calculations;
-
-        const { avg_age, age_group } = panel_args;
+      render({ title, subject, calculations, footnotes, sources }) {
+        const { avg_age, age_group } = calculations;
 
         const dept_avg_first_active_year =
           avg_age.length > 1 ? _.first(avg_age[1].data) : null;
@@ -167,7 +165,7 @@ export const declare_employee_age_panel = () =>
             formatter: formats.big_int_raw,
           },
           initial_graph_mode: "bar_grouped",
-          data: panel_args.age_group,
+          data: calculations.age_group,
         };
         const avg_age_options = {
           legend_title: text_maker("legend"),
@@ -179,12 +177,12 @@ export const declare_employee_age_panel = () =>
           },
           disable_toggle: true,
           initial_graph_mode: "line",
-          data: panel_args.avg_age,
+          data: calculations.avg_age,
           formatter: formats.decimal2,
         };
 
         const has_suppressed_data = _.some(
-          panel_args.age_group,
+          calculations.age_group,
           (data) => data.label === age_groups.sup.text
         );
         const required_footnotes = (() => {

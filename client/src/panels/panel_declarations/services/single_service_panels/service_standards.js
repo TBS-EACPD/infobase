@@ -242,8 +242,7 @@ export const declare_single_service_standards_panel = () =>
       title: text_maker("service_standards_title"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <ServiceStandards service={subject} title={title} sources={sources} />
         );

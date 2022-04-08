@@ -95,8 +95,8 @@ export const declare_tags_of_interest_panel = () =>
 
         return tags_by_root;
       },
-      render({ title, calculations }) {
-        const { panel_args: tags_by_root, subject } = calculations;
+      render({ title, subject, calculations }) {
+        const { tags_by_root } = calculations;
 
         return (
           <TextPanel title={title}>
@@ -120,9 +120,7 @@ export const declare_tag_progs_by_dept_panel = () =>
       title: text_maker("tag_progs_by_dept_title"),
       calculate: _.constant(true),
 
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const list_args = _.chain(subject.programs)
           .groupBy((prog) => prog.dept.id)
           .map((prog_group, dept_id) => ({
@@ -208,9 +206,7 @@ export const declare_related_tags_panel = () =>
       },
 
       render({ title, calculations }) {
-        const {
-          panel_args: { related_tags_by_type_with_counts },
-        } = calculations;
+        const { related_tags_by_type_with_counts } = calculations;
 
         const list_args = _.map(
           related_tags_by_type_with_counts,

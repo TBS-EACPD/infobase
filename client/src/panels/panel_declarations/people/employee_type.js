@@ -81,24 +81,29 @@ export const declare_employee_type_panel = () =>
       ],
       calculate: calculate_funcs_by_subject_type[subject_type],
 
-      render({ title, calculations, footnotes, sources, glossary_keys }) {
-        const { panel_args, subject } = calculations;
-
+      render({
+        title,
+        subject,
+        calculations,
+        footnotes,
+        sources,
+        glossary_keys,
+      }) {
         const student = _.find(
-          panel_args,
+          calculations,
           (type) => type.label === text_maker("student")
         );
 
         const student_data = student && student.data;
 
-        const common_text_args = calculate_common_text_args(panel_args);
+        const common_text_args = calculate_common_text_args(calculations);
 
-        const sum_emp_first_active_year = _.chain(panel_args)
+        const sum_emp_first_active_year = _.chain(calculations)
           .map((type) => type.data[common_text_args.first_active_year_index])
           .sum()
           .value();
 
-        const sum_emp_last_active_year = _.chain(panel_args)
+        const sum_emp_last_active_year = _.chain(calculations)
           .map((type) => type.data[common_text_args.last_active_year_index])
           .sum()
           .value();
@@ -140,7 +145,7 @@ export const declare_employee_type_panel = () =>
                     formatter: formats.big_int_raw,
                   },
                   initial_graph_mode: "bar_stacked",
-                  data: panel_args,
+                  data: calculations,
                 }}
               />
             </Col>

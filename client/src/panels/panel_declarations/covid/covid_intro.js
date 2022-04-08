@@ -57,7 +57,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
   }
   on_select_year = (year) => this.setState({ selected_year: year });
   render() {
-    const { panel_args } = this.props;
+    const { calculations } = this.props;
     const { loading, selected_year, summaries_by_year } = this.state;
 
     if (loading) {
@@ -83,7 +83,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
             <TM
               k="covid_intro_est"
               args={{
-                ...panel_args,
+                ...calculations,
                 selected_year,
                 gov_tabled_est_docs_in_year_text:
                   get_est_doc_list_plain_text(est_docs_in_year),
@@ -101,7 +101,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
               <TM
                 k="covid_intro_exp"
                 args={{
-                  ...panel_args,
+                  ...calculations,
                   selected_year,
                   date_last_updated_text: get_date_last_updated_text(
                     selected_year,
@@ -129,13 +129,7 @@ export const declare_covid_intro_panel = () =>
       source: () => get_source_links(["covid"]),
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
-      render: ({
-        title,
-        calculations: { panel_args },
-        footnotes,
-        sources,
-        glossary_keys,
-      }) => (
+      render: ({ title, calculations, footnotes, sources, glossary_keys }) => (
         <InfographicPanel
           {...{
             title,
@@ -145,7 +139,7 @@ export const declare_covid_intro_panel = () =>
           }}
         >
           <div className="medium-panel-text">
-            <CovidIntroPanelDyanmicText panel_args={panel_args} />
+            <CovidIntroPanelDyanmicText calculations={calculations} />
           </div>
         </InfographicPanel>
       ),

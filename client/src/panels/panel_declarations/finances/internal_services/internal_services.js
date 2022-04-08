@@ -73,17 +73,9 @@ export const declare_internal_services_panel = () =>
           series,
         };
       },
-      render({ title, calculations, sources, footnotes }) {
-        const {
-          subject,
-          panel_args: {
-            gov_fte_total,
-            gov_isc_fte,
-            total_fte,
-            isc_fte,
-            series,
-          },
-        } = calculations;
+      render({ title, subject, calculations, sources, footnotes }) {
+        const { gov_fte_total, gov_isc_fte, total_fte, isc_fte, series } =
+          calculations;
 
         const years = _.map(std_years, (yr) => run_template(yr));
         const label_keys = [

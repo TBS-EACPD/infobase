@@ -17,8 +17,7 @@ const { std_years } = year_templates;
 const render_w_options =
   ({ text_key, graph_col, text_col }) =>
   ({ title, calculations, sources, footnotes, glossary_keys }) => {
-    const { panel_args } = calculations;
-    const { vote_stat, text_calculations } = panel_args;
+    const { vote_stat, text_calculations } = calculations;
 
     const data = _.map(vote_stat, (data_set) => ({
       ...data_set,

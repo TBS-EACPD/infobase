@@ -78,8 +78,8 @@ class PanelRegistry {
     const full_key = create_panel_key(def.key, def.subject_type);
     Object.assign(this, default_args, to_assign, { full_key });
 
+    this.calculate = _.memoize(def.calculate || _.constant(true));
     this._inner_render = def.render;
-    this._inner_calculate = _.memoize(def.calculate || (() => true));
 
     this.constructor.register_instance(this);
   }
@@ -92,12 +92,12 @@ class PanelRegistry {
   }
 
   is_panel_valid_for_subject(subject, options = {}) {
-    //delegates to the proper subject_type's calculate function
     if (this.subject_type !== subject.subject_type) {
       return false;
     }
 
-    // TODO: this is something panels should handle themselves. Troublesome that the PanelRegistry
+    // Enforces that panels with table dependencies actually have data for the given subject, unless they're explicitly ok with "missing info"
+    // TODO: This is something panels should handle themselves. Troublesome that the PanelRegistry
     // makes this sort of check for dept tables but not CR or program tables. One way or another, this
     // will go away when we drop tables all together
     if (
@@ -113,18 +113,12 @@ class PanelRegistry {
       return false;
     }
 
-    const panel_args = this._inner_calculate(subject, this.tables, options);
-    if (panel_args === false) {
+    // returning false from a calculate is the primary way for a panel to communicate that it shouldn't render for the given subject
+    if (!this.calculate(subject, this.tables, options)) {
       return false;
     }
 
     return true;
-  }
-
-  calculate(subject, options = {}) {
-    const panel_args = this._inner_calculate(subject, this.tables, options);
-
-    return { subject, panel_args };
   }
 
   get_title(subject) {
@@ -183,7 +177,8 @@ class PanelRegistry {
   }
 
   render(subject, options = {}) {
-    const calculations = this.calculate(subject, options);
+    const calculations = this.calculate(subject, this.tables, options);
+
     const title = this.get_title(subject);
     const sources = this.get_source(subject);
     const footnotes = this.get_footnotes(subject);
@@ -191,6 +186,7 @@ class PanelRegistry {
 
     const react_el = this._inner_render(
       {
+        subject,
         calculations,
         title,
         sources,

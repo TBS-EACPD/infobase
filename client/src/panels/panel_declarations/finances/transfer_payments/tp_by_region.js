@@ -160,16 +160,13 @@ class TPMap extends React.Component {
     );
   }
   render() {
-    const { title, calculations, footnotes, sources } = this.props;
+    const { title, subject, calculations, footnotes, sources } = this.props;
     const { loading, population_data } = this.state;
 
     if (loading) {
       return <LeafSpinner config_name={"subroute"} />;
     } else {
-      const {
-        subject,
-        panel_args: { table: transfer_payments_table },
-      } = calculations;
+      const { table: transfer_payments_table } = calculations;
 
       const transfer_payments_by_prov =
         transfer_payments_table.sum_cols_by_grouped_data(
@@ -327,8 +324,8 @@ export const declare_tp_by_region_panel = () =>
 
         return { table: orgTransferPaymentsRegion };
       },
-      render: ({ title, calculations, footnotes, sources }) => (
-        <TPMap {...{ title, calculations, footnotes, sources }} />
+      render: ({ title, subject, calculations, footnotes, sources }) => (
+        <TPMap {...{ title, subject, calculations, footnotes, sources }} />
       ),
     }),
   });

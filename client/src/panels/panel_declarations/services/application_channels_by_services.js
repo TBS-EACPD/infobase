@@ -290,8 +290,7 @@ export const declare_application_channels_by_services_panel = () =>
       title: text_maker("customizable_service_graph"),
       footnotes: false,
       source: () => get_source_links(["service_inventory"]),
-      render({ title, calculations, sources }) {
-        const { subject } = calculations;
+      render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>
             <ServicesChannelsPanel subject={subject} />

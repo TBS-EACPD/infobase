@@ -138,10 +138,8 @@ export const declare_spending_in_tag_perspective_panel = () =>
         return { tag_exps, prog_exp };
       },
 
-      render({ title, calculations, footnotes, sources }) {
-        const { panel_args, subject } = calculations;
-
-        const { tag_exps, prog_exp } = panel_args;
+      render({ title, subject, calculations, footnotes, sources }) {
+        const { tag_exps, prog_exp } = calculations;
 
         return (
           <InfographicPanel {...{ title, footnotes, sources }}>

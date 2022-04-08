@@ -17,8 +17,7 @@ const main_col = "{{est_in_year}}_estimates";
 const render_w_options =
   ({ graph_col, text_col, text_key }) =>
   ({ title, calculations, footnotes, sources, glossary_keys }) => {
-    const { panel_args } = calculations;
-    const { vote_stat_est_in_year, text_calculations } = panel_args;
+    const { vote_stat_est_in_year, text_calculations } = calculations;
 
     const data = _.map(vote_stat_est_in_year, (data_set) => ({
       ...data_set,

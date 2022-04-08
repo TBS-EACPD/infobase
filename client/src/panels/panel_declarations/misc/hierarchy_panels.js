@@ -36,9 +36,7 @@ export const declare_portfolio_structure_intro_panel = () =>
         return !_.isEmpty(subject.ministry);
       },
 
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         return (
           <TextPanel title={title}>
             <HeightClipper allowReclip={true} clipHeight={250}>
@@ -67,9 +65,7 @@ export const declare_portfolio_structure_related_panel = () =>
         return !_.isEmpty(subject.programs);
       },
 
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy_view = org_internal_hierarchy({
           subject,
           href_generator: infographic_href_template,
@@ -94,9 +90,7 @@ export const declare_program_fed_structure_panel = () =>
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("program_fed_structure_title"),
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy = program_hierarchy({
           subject,
           href_generator: infographic_href_template,
@@ -126,9 +120,7 @@ export const declare_related_program_structure_panel = () =>
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("related_program_structure_title"),
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy = program_hierarchy({
           subject,
           href_generator: infographic_href_template,
@@ -158,9 +150,7 @@ export const declare_tag_fed_structure_panel = () =>
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("tag_fed_structure_title"),
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy_structure = tag_hierarchy({
           subject,
           showSiblings: false,
@@ -188,9 +178,7 @@ export const declare_sibling_tags_panel = () =>
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("sibling_tags_title"),
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy_structure = tag_hierarchy({
           subject,
           showSiblings: true,
@@ -219,9 +207,7 @@ export const declare_crso_in_gov_panel = () =>
       title: text_maker("crso_in_gov_title"),
       calculate: _.constant(true),
 
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy = crso_pi_hierarchy({
           subject,
           href_generator: infographic_href_template,
@@ -245,9 +231,7 @@ export const declare_crso_links_to_other_crso_panel = () =>
       footnotes: false,
       calculate: _.constant(true),
       title: text_maker("crso_links_to_other_crso_title"),
-      render({ title, calculations }) {
-        const { subject } = calculations;
-
+      render({ title, subject }) {
         const hierarchy = crso_hierarchy({
           subject,
           href_generator: infographic_href_template,

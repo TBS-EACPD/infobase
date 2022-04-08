@@ -126,11 +126,8 @@ export const declare_explore_results_panel = () =>
           ...year_range_with_data,
         });
       },
-      render({ title, calculations, sources, footnotes }) {
-        const {
-          subject,
-          panel_args: { docs_with_data, default_doc },
-        } = calculations;
+      render({ title, subject, calculations, sources, footnotes }) {
+        const { docs_with_data, default_doc } = calculations;
 
         return (
           <InfographicPanel {...{ title, sources, footnotes }}>
