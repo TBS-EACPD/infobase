@@ -85,7 +85,7 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
                 />
               </div>
             </div>
-            <div className="glossary-sb__example" tabIndex={-1}>
+            <div className="glossary-sb__example">
               {text_maker("glossary_example")}
             </div>
           </div>
