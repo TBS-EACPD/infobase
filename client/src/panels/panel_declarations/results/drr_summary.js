@@ -86,7 +86,7 @@ export const declare_drr_summary_panel = () =>
     panel_config_func: (subject_type) => ({
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
-      title: (subject) => {
+      get_title: (subject) => {
         const drr_keys = get_drr_keys_with_data(subject);
 
         return (
