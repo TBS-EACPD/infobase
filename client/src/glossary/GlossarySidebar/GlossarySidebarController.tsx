@@ -24,7 +24,6 @@ interface GlossarySidebarControllerState {
   focus_item_key: string;
   return_focus_target: HTMLElement | null;
   search_phrase: string;
-  done_animating: boolean;
 }
 
 const GlossarySidebarController = withRouter(
@@ -40,7 +39,6 @@ const GlossarySidebarController = withRouter(
         focus_item_key: "",
         return_focus_target: null,
         search_phrase: "",
-        done_animating: false,
       };
     }
     itemClick = (e: HTMLElement) => {
@@ -105,12 +103,6 @@ const GlossarySidebarController = withRouter(
       });
     };
 
-    setDoneAnimating = (value: boolean) => {
-      this.setState({
-        done_animating: value,
-      });
-    };
-
     render() {
       const currentPage = this.props.location.pathname;
 
@@ -127,8 +119,6 @@ const GlossarySidebarController = withRouter(
             is_open={this.state.is_open}
             toggle_glossary={this.toggleGlossary}
             return_focus_target={this.state.return_focus_target}
-            done_animating={this.state.done_animating}
-            set_done_animating={this.setDoneAnimating}
           />
           <FloatingButton
             button_text={text_maker("glossary_title")}

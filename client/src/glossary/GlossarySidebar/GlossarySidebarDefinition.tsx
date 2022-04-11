@@ -2,7 +2,10 @@ import React from "react";
 
 import "./GlossarySidebar.scss";
 
-import { create_text_maker_component } from "src/components/index";
+import {
+  create_text_maker_component,
+  SidebarContext,
+} from "src/components/index";
 
 import { glossaryEntryStore } from "src/models/glossary";
 
@@ -15,27 +18,25 @@ const { text_maker } = create_text_maker_component(glossary_text);
 interface SidebarContentProps {
   glossary_item_key: string;
   close_definition: (key: string) => void;
-  done_animating: boolean;
 }
 
 export class GlossaryDef extends React.Component<SidebarContentProps> {
   definition_ref = React.createRef<HTMLDivElement>();
+  static contextType = SidebarContext;
   constructor(props: SidebarContentProps) {
     super(props);
   }
 
-  shouldComponentUpdate(nextProps: SidebarContentProps) {
-    return nextProps.done_animating;
-  }
-
   componentDidMount() {
-    if (this.props.done_animating) {
+    const doneAnimating = this.context.doneAnimating;
+    if (doneAnimating) {
       this.definition_ref.current?.focus();
     }
   }
 
   componentDidUpdate() {
-    if (this.props.done_animating) {
+    const doneAnimating = this.context.doneAnimating;
+    if (doneAnimating) {
       this.definition_ref.current?.focus();
     }
   }
