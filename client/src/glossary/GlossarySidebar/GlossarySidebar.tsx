@@ -32,8 +32,6 @@ type GlossarySidebarProps = typeof GlossarySidebarSearchDefaultProps & {
   is_open: boolean;
   toggle_glossary: (value: boolean) => void;
   return_focus_target: HTMLElement | null;
-  done_animating: boolean;
-  set_done_animating: (value: boolean) => void;
 };
 
 export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
@@ -56,10 +54,8 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
       placeholder,
       is_open,
       return_focus_target,
-      done_animating,
       set_glossary_item,
       toggle_glossary,
-      set_done_animating,
     } = this.props;
     return (
       <Sidebar
@@ -68,7 +64,6 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
         title_text={text_maker("glossary_title")}
         sidebar_toggle_target={"[data-toggle=glossary_sidebar]"}
         return_focus_target={return_focus_target}
-        set_done_animating={set_done_animating}
       >
         <div className="glossary-sb__header-wrapper">
           <div className="glossary-sb__header">
@@ -101,7 +96,6 @@ export class GlossarySidebar extends React.Component<GlossarySidebarProps> {
               <GlossaryDef
                 close_definition={set_glossary_item}
                 glossary_item_key={glossary_item_key}
-                done_animating={done_animating}
               />
             ) : (
               <GlossaryList

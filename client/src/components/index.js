@@ -39,6 +39,7 @@ export { PinnedContent } from "./PinnedContent/PinnedContent";
 export { IconGrid } from "./IconGrid/IconGrid";
 export { PinnedFAQ } from "./PinnedFAQ/PinnedFAQ";
 export { Sidebar } from "./Sidebar/Sidebar";
+export { SidebarContext } from "./Sidebar/SidebarContext";
 export { Tooltip } from "./Tooltip/Tooltip";
 
 export { GraphOverlay } from "./GraphOverlay/GraphOverlay";
