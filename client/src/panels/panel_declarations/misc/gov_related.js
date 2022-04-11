@@ -20,7 +20,7 @@ export const declare_gov_related_info_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       calculate: _.constant(true),
-      title: text_maker("gov_related_info_title"),
+      get_title: () => text_maker("gov_related_info_title"),
       render({ title }) {
         return (
           <InfographicPanel title={title}>

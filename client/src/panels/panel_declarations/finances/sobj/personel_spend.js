@@ -23,7 +23,7 @@ export const declare_personnel_spend_panel = () =>
     subject_types: ["gov"],
     panel_config_func: () => ({
       table_dependencies: ["orgSobjs"],
-      title: text_maker("personnel_spend_title"),
+      get_title: () => text_maker("personnel_spend_title"),
       calculate: (subject, tables) => {
         const { orgSobjs } = tables;
         const year_value_pairs = _.map(std_years, (year) => [

@@ -311,7 +311,7 @@ export const declare_tp_by_region_panel = () =>
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       table_dependencies: ["orgTransferPaymentsRegion"],
-      title: text_maker("tp_by_region_title"),
+      get_title: () => text_maker("tp_by_region_title"),
       calculate: function (subject) {
         const { orgTransferPaymentsRegion } = this.tables;
 

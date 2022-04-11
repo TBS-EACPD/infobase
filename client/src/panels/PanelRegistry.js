@@ -121,10 +121,6 @@ class PanelRegistry {
     return true;
   }
 
-  get_title(subject) {
-    return _.isFunction(this.title) ? this.title(subject) : this.title;
-  }
-
   get_source(subject) {
     if (this.source === false) {
       return [];
@@ -179,9 +175,11 @@ class PanelRegistry {
   render(subject, options = {}) {
     const calculations = this.calculate(subject, this.tables, options);
 
-    const title = this.get_title(subject);
+    const title = this.get_title(subject, calculations);
+
     const sources = this.get_source(subject);
     const footnotes = this.get_footnotes(subject);
+
     const glossary_keys = this.glossary_keys || [];
 
     const react_el = this._inner_render(

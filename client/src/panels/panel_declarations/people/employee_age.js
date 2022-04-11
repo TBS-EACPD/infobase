@@ -119,7 +119,7 @@ export const declare_employee_age_panel = () =>
     panel_config_func: (subject_type) => ({
       table_dependencies: ["orgEmployeeAgeGroup", "orgEmployeeAvgAge"],
       calculate: calculate_funcs_by_subject_type[subject_type],
-      title: text_maker("employee_age_title"),
+      get_title: () => text_maker("employee_age_title"),
       render({ title, subject, calculations, footnotes, sources }) {
         const { avg_age, age_group } = calculations;
 

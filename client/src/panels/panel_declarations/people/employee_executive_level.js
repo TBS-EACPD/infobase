@@ -94,7 +94,7 @@ export const declare_employee_executive_level_panel = () =>
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
       table_dependencies: ["orgEmployeeExLvl"],
-      title: text_maker("employee_executive_level_title"),
+      get_title: () => text_maker("employee_executive_level_title"),
       calculate: function (subject) {
         const { orgEmployeeExLvl } = this.tables;
 

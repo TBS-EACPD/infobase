@@ -51,7 +51,7 @@ export const declare_dp_rev_split_panel = () =>
     subject_types: ["dept", "crso", "program"],
     panel_config_func: () => ({
       table_dependencies: ["programSpending"],
-      title: text_maker("dp_rev_split_title"),
+      get_title: () => text_maker("dp_rev_split_title"),
       machinery_footnotes: false,
       footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],

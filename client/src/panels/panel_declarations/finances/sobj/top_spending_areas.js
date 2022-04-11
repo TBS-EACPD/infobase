@@ -95,7 +95,7 @@ export const declare_top_spending_areas_panel = () =>
     panel_config_func: () => ({
       table_dependencies: ["programSobjs"],
       footnotes: ["SOBJ"],
-      title: text_maker("top_spending_areas_title"),
+      get_title: () => text_maker("top_spending_areas_title"),
       calculate: (subject, tables) => {
         if (_.isEmpty(tables.programSobjs.programs.get(subject))) {
           return false;

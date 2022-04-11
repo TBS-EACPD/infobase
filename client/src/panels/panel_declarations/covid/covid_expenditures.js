@@ -419,7 +419,7 @@ export const declare_covid_expenditures_panel = () =>
     panel_config_func: () => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
-      title: text_maker("covid_expenditures_estimated_exp"),
+      get_title: () => text_maker("covid_expenditures_estimated_exp"),
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
       source: () => get_source_links(["covid"]),
       calculate: (subject) => {

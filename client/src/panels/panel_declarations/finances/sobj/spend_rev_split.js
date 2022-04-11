@@ -106,7 +106,7 @@ function render({ title, subject, calculations, footnotes, sources }) {
 }
 
 const common_panel_config = {
-  title: text_maker("spend_rev_split_title"),
+  get_title: () => text_maker("spend_rev_split_title"),
   render,
 };
 

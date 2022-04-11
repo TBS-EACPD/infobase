@@ -17,7 +17,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
     panel_config_func: () => ({
       table_dependencies: ["orgTransferPayments", "programSpending"],
       footnotes: ["SOBJ10"],
-      title: text_maker("last_year_g_and_c_perspective_title"),
+      get_title: () => text_maker("last_year_g_and_c_perspective_title"),
       calculate: (subject, tables) => {
         const { orgTransferPayments, programSpending } = tables;
 
