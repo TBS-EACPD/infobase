@@ -13,6 +13,7 @@ const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 
 const default_args = {
   table_dependencies: [],
+  glossary_keys: [],
   machinery_footnotes: true,
 };
 
@@ -169,21 +170,18 @@ class PanelRegistry {
   render(subject, options = {}) {
     const calculations = this.calculate(subject, this.tables, options);
 
-    const title = this.get_title(subject, calculations);
-
     const sources = this.get_source(subject);
-    const footnotes = this.get_footnotes(subject);
 
-    const glossary_keys = this.glossary_keys || [];
+    const footnotes = this.get_footnotes(subject);
 
     const react_el = this._inner_render(
       {
         subject,
         calculations,
-        title,
+        title: this.get_title(subject, calculations),
         sources,
         footnotes,
-        glossary_keys,
+        glossary_keys: this.glossary_keys,
       },
       options
     );
