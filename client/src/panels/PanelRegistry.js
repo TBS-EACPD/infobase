@@ -3,12 +3,11 @@ import _ from "lodash";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
-import { is_dev } from "src/core/injected_build_constants";
 
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
-const create_panel_key = (key, subject_type) => `${key}:${subject_type}`;
+const create_full_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 
 const default_args = {
   table_dependencies: [],
@@ -22,43 +21,45 @@ class PanelRegistry {
     return panels;
   }
 
-  static lookup(key, subject_type) {
-    const lookup = create_panel_key(key, subject_type);
-    if (is_dev && !panels[lookup]) {
-      // eslint-disable-next-line no-console
-      console.error(
-        `bad panel key - ${lookup} for subject_type ${subject_type}`
-      );
-      return null;
-    }
-    return panels[lookup];
+  static is_registered_full_key(panel_key) {
+    return panel_key in panels;
   }
 
-  static is_registered_panel_key(test_key) {
-    return _.chain(panels)
-      .keys(panels)
-      .join()
-      .thru((all_panel_keys) =>
-        RegExp(`,${test_key}:.+,`).test(`,${all_panel_keys},`)
-      )
-      .value();
+  static is_registered_key_base(key_base) {
+    return _.some(
+      panels,
+      ({ key_base: registered_key_base }) => registered_key_base === key_base
+    );
   }
 
   static register_instance(instance) {
     const { full_key } = instance;
 
-    if (full_key in panels) {
-      throw new Error(`panel ${instance.key} has already been defined`);
+    if (PanelRegistry.is_registered_full_key(full_key)) {
+      throw new Error(`panel ${full_key} has already been defined`);
     }
 
     panels[full_key] = instance;
+  }
+
+  static lookup(key, subject_type) {
+    const full_key = create_full_panel_key(key, subject_type);
+
+    if (!PanelRegistry.is_registered_full_key(full_key)) {
+      throw new Error(
+        `Bad panel key "${full_key}" - no panel for subject type "${subject_type}" with key "${key}"`
+      );
+    }
+
+    return panels[full_key];
   }
 
   constructor(def) {
     Object.assign(this, default_args, _.omit(def, ["render", "calculate"]), {
       calculate: def.calculate ? _.memoize(def.calculate) : _.constant(true),
       _inner_render: def.render,
-      full_key: create_panel_key(def.key, def.subject_type),
+      key_base: def.key,
+      full_key: create_full_panel_key(def.key, def.subject_type),
     });
 
     this.constructor.register_instance(this);

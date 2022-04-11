@@ -4,7 +4,7 @@ import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
 const declare_panel = ({ panel_key, subject_types, panel_config_func }) => {
-  if (!PanelRegistry.is_registered_panel_key(panel_key)) {
+  if (!PanelRegistry.is_registered_key_base(panel_key)) {
     subject_types.forEach(
       (subject_type) =>
         new PanelRegistry({
