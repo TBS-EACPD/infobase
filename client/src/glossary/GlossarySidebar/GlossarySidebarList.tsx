@@ -72,12 +72,10 @@ export class GlossaryList extends React.Component<
         ) : (
           <div>
             {_.map(items_by_letter, ({ letter, items }) => (
-              <section>
-                <h2 className="glossary-sb__letter" key={letter}>
-                  {letter}
-                </h2>
+              <section key={letter}>
+                <h2 className="glossary-sb__letter">{letter}</h2>
                 <hr />
-                <ul key={letter} className={"glossary-sb__list"}>
+                <ul className={"glossary-sb__list"}>
                   {_.map(items, (item, ix) => (
                     <li key={ix} className="glossary-sb__title">
                       <button
