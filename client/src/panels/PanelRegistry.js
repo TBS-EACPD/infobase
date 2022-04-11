@@ -69,17 +69,11 @@ class PanelRegistry {
   }
 
   constructor(def) {
-    //note that everything attached to this is read-only
-    //Additionally, every panel only has one object like this, so this object contains nothing about
-
-    //we copy every thing except render and calculate, which follow a specific API
-    const to_assign = _.omit(def, ["render", "calculate"]);
-
-    const full_key = create_panel_key(def.key, def.subject_type);
-    Object.assign(this, default_args, to_assign, { full_key });
-
-    this.calculate = _.memoize(def.calculate || _.constant(true));
-    this._inner_render = def.render;
+    Object.assign(this, default_args, _.omit(def, ["render", "calculate"]), {
+      calculate: def.calculate ? _.memoize(def.calculate) : _.constant(true),
+      _inner_render: def.render,
+      full_key: create_panel_key(def.key, def.subject_type),
+    });
 
     this.constructor.register_instance(this);
   }
