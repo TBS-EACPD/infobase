@@ -28,6 +28,7 @@ export const declare_covid_key_concepts_panel = () =>
       is_static: true,
       footnotes: false,
       source: false,
+      get_title: _.constant(false),
       calculate: _.constant(true),
       render: () => (
         <PinnedFAQ

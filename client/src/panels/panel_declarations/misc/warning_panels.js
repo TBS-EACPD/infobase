@@ -41,6 +41,7 @@ const WarningPanel = ({
 
 const common_panel_config = {
   is_static: true,
+  get_title: _.constant(false),
   footnotes: false,
 };
 

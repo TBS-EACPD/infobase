@@ -419,7 +419,7 @@ export const declare_results_table_panel = () =>
       source: () => get_source_links(["departmental_results_reports"]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
-      title: (subject) => {
+      get_title: (subject) => {
         const drr_keys_with_data = get_drr_keys_with_data(subject);
 
         return text_maker("result_flat_table_title", {

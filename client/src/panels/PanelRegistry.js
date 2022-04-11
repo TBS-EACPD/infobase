@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
-import { subject_types } from "src/models/subjects";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 import { is_dev } from "src/core/injected_build_constants";
@@ -46,21 +45,7 @@ class PanelRegistry {
   }
 
   static register_instance(instance) {
-    const { key, full_key, subject_type, get_title, is_static } = instance;
-
-    if (!_.includes(subject_types, subject_type)) {
-      throw new Error(
-        `panel ${key}'s subject_type (${subject_type}) is not valid; subject_type is required and must correspond to a valid subject (one of ${_.join(
-          subject_types,
-          ", "
-        )}).`
-      );
-    }
-    if (!is_static && _.isUndefined(get_title)) {
-      throw new Error(
-        `panel ${key}'s get_title is undefined; get_title is required, unless the panel is "static"`
-      );
-    }
+    const { full_key } = instance;
 
     if (full_key in panels) {
       throw new Error(`panel ${instance.key} has already been defined`);
