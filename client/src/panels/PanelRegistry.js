@@ -45,7 +45,7 @@ class PanelRegistry {
   }
 
   static register_instance(instance) {
-    const { key, full_key, subject_type, title, is_static } = instance;
+    const { key, full_key, subject_type, get_title, is_static } = instance;
 
     if (!_.includes(subject_types, subject_type)) {
       throw new Error(
@@ -55,9 +55,9 @@ class PanelRegistry {
         )}).`
       );
     }
-    if (!is_static && _.isUndefined(title)) {
+    if (!is_static && _.isUndefined(get_title)) {
       throw new Error(
-        `panel ${key}'s title is undefined; title is required, unless the panel is "static"`
+        `panel ${key}'s get_title is undefined; get_title is required, unless the panel is "static"`
       );
     }
 
