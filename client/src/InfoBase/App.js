@@ -133,12 +133,7 @@ export class App extends React.Component {
   render() {
     const { outage_msg, showSurvey } = this.state;
     return (
-      <div
-        tabIndex={-1}
-        id="app-focus-root"
-        className={`app-focus-root--${is_a11y_mode ? "a11y" : "standard"}`}
-      >
-        {is_a11y_mode && <NoIndex />}
+      <div className={`app-focus-root--${is_a11y_mode ? "a11y" : "standard"}`}>
         <ErrorBoundary>
           <DevFip />
           <InsertRuntimeFooterLinks />
