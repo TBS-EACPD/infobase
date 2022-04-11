@@ -32,8 +32,7 @@ function initialize_analytics() {
     return;
   }
 
-  const is_dev =
-    String(window.location.hostname).indexOf("tbs-sct.gc.ca") === -1;
+  const is_dev = String(window.location.hostname).indexOf("canada.ca") === -1;
 
   ga("create", "UA-97024958-1", "auto");
   ga("set", "anonymizeIp", true);
