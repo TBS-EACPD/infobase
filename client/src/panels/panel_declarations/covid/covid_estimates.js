@@ -622,7 +622,7 @@ export const declare_covid_estimates_panel = () =>
     panel_config_func: () => ({
       requires_years_with_covid_data: true,
       requires_covid_measures: true,
-      title: text_maker("covid_measure_spending_auth"),
+      get_title: () => text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       table_dependencies: [],
       source: () => get_source_links(["covid"]),

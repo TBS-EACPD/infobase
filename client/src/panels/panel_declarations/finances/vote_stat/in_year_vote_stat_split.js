@@ -72,7 +72,7 @@ const common_panel_config = {
   table_dependencies: ["orgVoteStatEstimates"],
   machinery_footnotes: false,
   glossary_keys: ["AUTH"],
-  title: text_maker("in_year_voted_stat_split_title"),
+  get_title: () => text_maker("in_year_voted_stat_split_title"),
 };
 
 export const declare_in_year_voted_stat_split_panel = () =>

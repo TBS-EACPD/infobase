@@ -21,7 +21,7 @@ export const declare_estimates_in_perspective_panel = () =>
     panel_key: "estimates_in_perspective",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      title: text_maker("estimates_perspective_title"),
+      get_title: () => text_maker("estimates_perspective_title"),
       table_dependencies: ["orgVoteStatEstimates"],
       machinery_footnotes: false,
       calculate: (subject, tables) => {

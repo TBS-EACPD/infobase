@@ -445,7 +445,7 @@ export const declare_detailed_program_spending_split_panel = () =>
     subject_types: ["dept"],
     panel_config_func: () => ({
       table_dependencies: ["programSobjs", "programSpending"],
-      title: text_maker("detailed_program_spending_split_title"),
+      get_title: () => text_maker("detailed_program_spending_split_title"),
       footnotes: footnote_topics,
       calculate: (subject, tables) => {
         const { programSobjs, programSpending } = tables;

@@ -83,7 +83,7 @@ export const declare_employee_gender_panel = () =>
     panel_config_func: (subject_type) => ({
       table_dependencies: ["orgEmployeeGender"],
       calculate: calculate_funcs_by_subject_type[subject_type],
-      title: text_maker("employee_gender_title"),
+      get_title: () => text_maker("employee_gender_title"),
       render({ title, subject, calculations, footnotes, sources }) {
         const text_groups = (() => {
           const has_male_data = _.some(

@@ -1016,7 +1016,7 @@ const table_dependencies = ["programSpending", "programFtes"];
 
 const common_panel_config = {
   footnotes,
-  title: text_maker("welcome_mat_title"),
+  get_title: () => text_maker("welcome_mat_title"),
 };
 
 export const declare_welcome_mat_panel = () =>

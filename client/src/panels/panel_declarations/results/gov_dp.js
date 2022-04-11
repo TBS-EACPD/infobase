@@ -153,10 +153,12 @@ export const declare_gov_dp_panel = () =>
     subject_types: ["gov"],
     panel_config_func: () => ({
       requires_result_counts: true,
-      title: text_maker("gov_dp_summary_title", {
-        first_year: get_year_for_doc_key(_.first(dp_keys)),
-        last_year: dp_keys.length > 1 && get_year_for_doc_key(_.last(dp_keys)),
-      }),
+      get_title: () =>
+        text_maker("gov_dp_summary_title", {
+          first_year: get_year_for_doc_key(_.first(dp_keys)),
+          last_year:
+            dp_keys.length > 1 && get_year_for_doc_key(_.last(dp_keys)),
+        }),
       calculate: () => !_.isEmpty(dp_keys),
       footnotes: ["RESULTS", "DP"],
       source: () => get_source_links(["departmental_plans"]),

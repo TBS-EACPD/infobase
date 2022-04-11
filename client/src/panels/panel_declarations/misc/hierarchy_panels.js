@@ -31,7 +31,7 @@ export const declare_portfolio_structure_intro_panel = () =>
 
     panel_config_func: () => ({
       footnotes: false,
-      title: text_maker("portfolio_structure_intro_title"),
+      get_title: () => text_maker("portfolio_structure_intro_title"),
       calculate: (subject) => {
         return !_.isEmpty(subject.ministry);
       },
@@ -60,7 +60,7 @@ export const declare_portfolio_structure_related_panel = () =>
 
     panel_config_func: () => ({
       footnotes: false,
-      title: text_maker("portfolio_structure_related_title"),
+      get_title: () => text_maker("portfolio_structure_related_title"),
       calculate: (subject) => {
         return !_.isEmpty(subject.programs);
       },
@@ -89,7 +89,7 @@ export const declare_program_fed_structure_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       calculate: _.constant(true),
-      title: text_maker("program_fed_structure_title"),
+      get_title: () => text_maker("program_fed_structure_title"),
       render({ title, subject }) {
         const hierarchy = program_hierarchy({
           subject,
@@ -119,7 +119,7 @@ export const declare_related_program_structure_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       calculate: _.constant(true),
-      title: text_maker("related_program_structure_title"),
+      get_title: () => text_maker("related_program_structure_title"),
       render({ title, subject }) {
         const hierarchy = program_hierarchy({
           subject,
@@ -149,7 +149,7 @@ export const declare_tag_fed_structure_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       calculate: _.constant(true),
-      title: text_maker("tag_fed_structure_title"),
+      get_title: () => text_maker("tag_fed_structure_title"),
       render({ title, subject }) {
         const hierarchy_structure = tag_hierarchy({
           subject,
@@ -177,7 +177,7 @@ export const declare_sibling_tags_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       calculate: _.constant(true),
-      title: text_maker("sibling_tags_title"),
+      get_title: () => text_maker("sibling_tags_title"),
       render({ title, subject }) {
         const hierarchy_structure = tag_hierarchy({
           subject,
@@ -204,7 +204,7 @@ export const declare_crso_in_gov_panel = () =>
 
     panel_config_func: () => ({
       footnotes: false,
-      title: text_maker("crso_in_gov_title"),
+      get_title: () => text_maker("crso_in_gov_title"),
       calculate: _.constant(true),
 
       render({ title, subject }) {
@@ -230,7 +230,7 @@ export const declare_crso_links_to_other_crso_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       calculate: _.constant(true),
-      title: text_maker("crso_links_to_other_crso_title"),
+      get_title: () => text_maker("crso_links_to_other_crso_title"),
       render({ title, subject }) {
         const hierarchy = crso_hierarchy({
           subject,

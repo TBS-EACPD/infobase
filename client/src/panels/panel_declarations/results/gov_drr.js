@@ -171,11 +171,12 @@ export const declare_gov_drr_panel = () =>
     panel_config_func: () => ({
       requires_result_counts: true,
       footnotes: ["RESULTS", "DRR"],
-      title: text_maker("gov_drr_summary_title", {
-        first_year: get_year_for_doc_key(_.first(drr_keys)),
-        last_year:
-          drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
-      }),
+      get_title: () =>
+        text_maker("gov_drr_summary_title", {
+          first_year: get_year_for_doc_key(_.first(drr_keys)),
+          last_year:
+            drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
+        }),
       source: () => get_source_links(["departmental_results_reports"]),
       calculate: () => !_.isEmpty(drr_keys),
       render({ title, calculations, footnotes, sources }) {

@@ -164,7 +164,7 @@ export const declare_services_standards_panel = () =>
     panel_key: "services_standards",
     subject_types: ["gov", "dept", "program"],
     panel_config_func: () => ({
-      title: text_maker("service_standards_title"),
+      get_title: () => text_maker("service_standards_title"),
       calculate: (subject) => {
         return {
           subject,

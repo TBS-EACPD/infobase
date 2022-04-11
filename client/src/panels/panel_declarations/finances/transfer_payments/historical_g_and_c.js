@@ -353,7 +353,7 @@ class DetailedHistTPItems extends React.Component {
 }
 
 const common_panel_config = {
-  title: text_maker("historical_g_and_c_title"),
+  get_title: () => text_maker("historical_g_and_c_title"),
   table_dependencies: ["orgTransferPayments"],
 };
 

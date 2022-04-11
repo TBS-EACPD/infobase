@@ -30,7 +30,7 @@ const get_table_type = (table) =>
 
 const common_panel_config = {
   footnotes: false,
-  title: text_maker("links_to_rpb_title"),
+  get_title: () => text_maker("links_to_rpb_title"),
 };
 
 export const declare_links_to_rpb_panel = () =>

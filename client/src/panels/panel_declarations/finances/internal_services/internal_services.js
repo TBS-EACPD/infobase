@@ -32,7 +32,7 @@ export const declare_internal_services_panel = () =>
     subject_types: ["dept"],
     panel_config_func: () => ({
       table_dependencies: ["programFtes"],
-      title: text_maker("internal_service_panel_title"),
+      get_title: () => text_maker("internal_service_panel_title"),
       calculate: (subject, tables) => {
         const { programFtes } = tables;
 

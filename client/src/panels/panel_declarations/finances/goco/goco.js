@@ -530,7 +530,7 @@ export const declare_gocographic_panel = () =>
     subject_types: ["gov"],
     panel_config_func: () => ({
       table_dependencies: ["programSpending", "programFtes"],
-      title: text_maker("gocographic_title"),
+      get_title: () => text_maker("gocographic_title"),
       footnotes: ["GOCO"],
       glossary_keys: ["GOCO"],
       render,

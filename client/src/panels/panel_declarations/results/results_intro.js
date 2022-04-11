@@ -103,7 +103,7 @@ export const declare_results_intro_panel = () =>
           "departmental_plans",
           "departmental_results_reports",
         ]),
-      title: text_maker("results_intro_title"),
+      get_title: () => text_maker("results_intro_title"),
       calculate: (subject) => {
         const is_gov = subject.subject_type == "gov";
 

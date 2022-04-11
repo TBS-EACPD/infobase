@@ -117,7 +117,7 @@ const estimates_split_render_w_text_key =
 const common_panel_config = {
   machinery_footnotes: false,
   table_dependencies: ["orgVoteStatEstimates"],
-  title: text_maker("in_year_estimates_split_title"),
+  get_title: () => text_maker("in_year_estimates_split_title"),
   calculate: estimates_split_calculate,
 };
 
