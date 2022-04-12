@@ -1,26 +1,24 @@
 import { PanelRegistry } from "src/panels/PanelRegistry";
 
-import { is_dev } from "src/core/injected_build_constants";
-
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
 const declare_panel = ({ panel_key, subject_types, panel_config_func }) => {
-  subject_types.forEach((subject_type) => {
-    if (
-      !PanelRegistry.is_registered_key_for_subject_type(panel_key, subject_type)
-    ) {
-      new PanelRegistry({
-        subject_type,
-        key: panel_key,
-        ...panel_config_func(subject_type, panel_key),
-      });
-    } else if (is_dev) {
-      console.warn(
-        `Panel with ${panel_key} is already registered for subject type ${subject_type}`
-      );
-    }
-  });
+  // HACK WARNING: redeclarations on the same panel_key are quietly thrown out here, with no warning.
+  // With the current flow for loading panels from the infographic route via `get_panels_for_subject`, which was designed for bundle splitting,
+  // these declare_panel calls are repeated on every infographic bubble load. Untangling this will be a thorny TODO, but until we do there's
+  // going to be a potential blind spot on miss-use of `declare_panel` and/or reused panel keys
+
+  if (!PanelRegistry.is_registered_key(panel_key)) {
+    subject_types.forEach(
+      (subject_type) =>
+        new PanelRegistry({
+          subject_type,
+          key: panel_key,
+          ...panel_config_func(subject_type, panel_key),
+        })
+    );
+  }
 
   return panel_key;
 };
