@@ -33,9 +33,8 @@ const { people_years } = year_templates;
 const { age_groups } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: function () {
-    const { orgEmployeeAgeGroup } = this.tables;
-    const { orgEmployeeAvgAge } = this.tables;
+  gov: (_subject, tables) => {
+    const { orgEmployeeAgeGroup, orgEmployeeAvgAge } = tables;
 
     const avg_age = [
       {
@@ -76,11 +75,10 @@ const calculate_funcs_by_subject_type = {
       age_group: age_group,
     };
   },
-  dept: function (dept) {
-    const { orgEmployeeAgeGroup } = this.tables;
-    const { orgEmployeeAvgAge } = this.tables;
+  dept: (subject, tables) => {
+    const { orgEmployeeAgeGroup, orgEmployeeAvgAge } = tables;
 
-    const avg_age = _.chain(orgEmployeeAvgAge.q(dept).data)
+    const avg_age = _.chain(orgEmployeeAvgAge.q(subject).data)
       .map((row) => ({
         label: Dept.store.lookup(row.dept).name,
         data: people_years.map((year) => row[year]),
@@ -95,7 +93,7 @@ const calculate_funcs_by_subject_type = {
       .sortBy((d) => -sum(d.data))
       .value();
 
-    const age_group = _.chain(orgEmployeeAgeGroup.q(dept).data)
+    const age_group = _.chain(orgEmployeeAgeGroup.q(subject).data)
       .map((row) => ({
         label: row.age,
         data: people_years.map((year) => row[year]),

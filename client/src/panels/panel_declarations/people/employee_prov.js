@@ -182,16 +182,16 @@ const calculate_common = (data) => {
   };
 };
 const calculate_funcs_by_subject_type = {
-  gov: function () {
-    const { orgEmployeeRegion } = this.tables;
+  gov: (_subject, tables) => {
+    const { orgEmployeeRegion } = tables;
     return calculate_common(
       people_years.map((year) =>
         orgEmployeeRegion.sum_cols_by_grouped_data(year, "region_code")
       )
     );
   },
-  dept: function (subject) {
-    const { orgEmployeeRegion } = this.tables;
+  dept: (subject, tables) => {
+    const { orgEmployeeRegion } = tables;
     return calculate_common(
       people_years.map((year) =>
         orgEmployeeRegion.sum_cols_by_grouped_data(year, "region_code", subject)

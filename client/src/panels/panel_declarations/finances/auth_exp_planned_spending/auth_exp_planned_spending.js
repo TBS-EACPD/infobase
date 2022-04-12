@@ -534,8 +534,8 @@ const render = function ({
   );
 };
 
-const calculate = function (subject) {
-  const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = this.tables;
+const calculate = (subject, tables) => {
+  const { orgVoteStatPa, programSpending, orgVoteStatEstimates } = tables;
 
   const query_subject = subject.subject_type === "gov" ? undefined : subject;
   const gov_queried_subject = orgVoteStatPa.q();

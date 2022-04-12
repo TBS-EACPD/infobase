@@ -228,157 +228,155 @@ class PlannedProgramResources extends React.Component {
   }
 }
 
-const get_calculate_func = (is_fte) => {
-  return function (subject) {
-    if (subject.is_dead) {
-      return false;
-    }
+const get_calculate_func = (is_fte) => (subject, tables) => {
+  if (subject.is_dead) {
+    return false;
+  }
 
-    const { programSpending, programFtes } = this.tables;
+  const { programSpending, programFtes } = tables;
 
-    const queried_exp = programSpending.q(subject);
-    const queried_fte = programFtes.q(subject);
-    const get_valid_years_for_data = (data, years) =>
-      _.chain(data)
-        .reduce(
-          (sum_by_year, row) => {
-            _.each(years, (year) => {
-              sum_by_year[year] = sum_by_year[year] + row[year];
-            });
-            return sum_by_year;
-          },
-          _.chain(years)
-            .map((year) => [year, 0])
-            .fromPairs()
-            .value()
-        )
-        .pickBy((sum_by_year) => sum_by_year !== 0)
-        .keys()
-        .value();
-    const exp_historical_years = get_valid_years_for_data(
-      queried_exp.data,
-      _.map(std_years, (year) => `${year}exp`)
-    );
-    const exp_planning_years = get_valid_years_for_data(
-      queried_exp.data,
-      planning_years
-    );
-    const fte_historical_years = get_valid_years_for_data(
-      queried_fte.data,
-      std_years
-    );
-    const fte_planning_years = get_valid_years_for_data(
-      queried_fte.data,
-      planning_years
-    );
-    const exp_gap_year_exists =
-      subject.has_planned_spending &&
-      _.includes(exp_historical_years, "{{pa_last_year}}exp") &&
-      _.includes(exp_planning_years, "{{planning_year_1}}");
-    const fte_gap_year_exists =
-      subject.has_planned_spending &&
-      _.includes(fte_historical_years, "{{pa_last_year}}") &&
-      _.includes(fte_planning_years, "{{planning_year_1}}");
-
-    const exp_gap_year =
-      (exp_gap_year_exists && actual_to_planned_gap_year) || null;
-    const fte_gap_year =
-      (fte_gap_year_exists && actual_to_planned_gap_year) || null;
-
-    const exp_years_with_gap_year = _.chain(exp_historical_years)
-      .concat([exp_gap_year], planning_years)
-      .compact()
+  const queried_exp = programSpending.q(subject);
+  const queried_fte = programFtes.q(subject);
+  const get_valid_years_for_data = (data, years) =>
+    _.chain(data)
+      .reduce(
+        (sum_by_year, row) => {
+          _.each(years, (year) => {
+            sum_by_year[year] = sum_by_year[year] + row[year];
+          });
+          return sum_by_year;
+        },
+        _.chain(years)
+          .map((year) => [year, 0])
+          .fromPairs()
+          .value()
+      )
+      .pickBy((sum_by_year) => sum_by_year !== 0)
+      .keys()
       .value();
-    const fte_years_with_gap_year = _.chain(fte_historical_years)
-      .concat([fte_gap_year], planning_years)
-      .compact()
-      .value();
+  const exp_historical_years = get_valid_years_for_data(
+    queried_exp.data,
+    _.map(std_years, (year) => `${year}exp`)
+  );
+  const exp_planning_years = get_valid_years_for_data(
+    queried_exp.data,
+    planning_years
+  );
+  const fte_historical_years = get_valid_years_for_data(
+    queried_fte.data,
+    std_years
+  );
+  const fte_planning_years = get_valid_years_for_data(
+    queried_fte.data,
+    planning_years
+  );
+  const exp_gap_year_exists =
+    subject.has_planned_spending &&
+    _.includes(exp_historical_years, "{{pa_last_year}}exp") &&
+    _.includes(exp_planning_years, "{{planning_year_1}}");
+  const fte_gap_year_exists =
+    subject.has_planned_spending &&
+    _.includes(fte_historical_years, "{{pa_last_year}}") &&
+    _.includes(fte_planning_years, "{{planning_year_1}}");
 
-    const total_exp = _.sumBy(exp_years_with_gap_year, (col) =>
-      queried_exp.sum(col)
-    );
-    const total_fte = _.sumBy(fte_years_with_gap_year, (col) =>
-      queried_fte.sum(col)
-    );
+  const exp_gap_year =
+    (exp_gap_year_exists && actual_to_planned_gap_year) || null;
+  const fte_gap_year =
+    (fte_gap_year_exists && actual_to_planned_gap_year) || null;
 
-    const should_bail = is_fte ? total_fte === 0 : total_exp === 0;
-    if (should_bail) {
-      return false;
-    }
+  const exp_years_with_gap_year = _.chain(exp_historical_years)
+    .concat([exp_gap_year], planning_years)
+    .compact()
+    .value();
+  const fte_years_with_gap_year = _.chain(fte_historical_years)
+    .concat([fte_gap_year], planning_years)
+    .compact()
+    .value();
 
-    /* 
+  const total_exp = _.sumBy(exp_years_with_gap_year, (col) =>
+    queried_exp.sum(col)
+  );
+  const total_fte = _.sumBy(fte_years_with_gap_year, (col) =>
+    queried_fte.sum(col)
+  );
+
+  const should_bail = is_fte ? total_fte === 0 : total_exp === 0;
+  if (should_bail) {
+    return false;
+  }
+
+  /* 
       Both exp and fte data is returned in either case so the render can ensure consistency in the association of colour to program names
       across the two panels
     */
-    const exp_data = _.map(queried_exp.data, (row) => ({
-      label: row.prgm,
-      data: exp_years_with_gap_year.map((col) =>
-        _.isUndefined(row[col]) ? null : row[col]
-      ),
-    }));
-    const fte_data = _.map(queried_fte.data, (row) => ({
-      label: row.prgm,
-      data: fte_years_with_gap_year.map((col) =>
-        _.isUndefined(row[col]) ? null : row[col]
-      ),
-    }));
+  const exp_data = _.map(queried_exp.data, (row) => ({
+    label: row.prgm,
+    data: exp_years_with_gap_year.map((col) =>
+      _.isUndefined(row[col]) ? null : row[col]
+    ),
+  }));
+  const fte_data = _.map(queried_fte.data, (row) => ({
+    label: row.prgm,
+    data: fte_years_with_gap_year.map((col) =>
+      _.isUndefined(row[col]) ? null : row[col]
+    ),
+  }));
 
-    const relevant_data = is_fte ? queried_fte.data : queried_exp.data;
-    const valid_most_recent_year = is_fte
-      ? _.last(fte_historical_years)
-      : _.last(exp_historical_years);
+  const relevant_data = is_fte ? queried_fte.data : queried_exp.data;
+  const valid_most_recent_year = is_fte
+    ? _.last(fte_historical_years)
+    : _.last(exp_historical_years);
 
-    const most_recent_top_2_programs = _.chain(relevant_data)
-      .flatMap((program_data) => ({
-        prgm: program_data.prgm,
-        value: program_data[valid_most_recent_year],
-      }))
-      .sortBy("value")
-      .takeRight(2)
-      .reverse()
-      .value();
-    const first_planning_year_top_2_programs = _.chain(relevant_data)
-      .flatMap((program_data) => ({
-        prgm: program_data.prgm,
-        value: program_data["{{planning_year_1}}"],
-      }))
-      .sortBy("value")
-      .takeRight(2)
-      .reverse()
-      .value();
+  const most_recent_top_2_programs = _.chain(relevant_data)
+    .flatMap((program_data) => ({
+      prgm: program_data.prgm,
+      value: program_data[valid_most_recent_year],
+    }))
+    .sortBy("value")
+    .takeRight(2)
+    .reverse()
+    .value();
+  const first_planning_year_top_2_programs = _.chain(relevant_data)
+    .flatMap((program_data) => ({
+      prgm: program_data.prgm,
+      value: program_data["{{planning_year_1}}"],
+    }))
+    .sortBy("value")
+    .takeRight(2)
+    .reverse()
+    .value();
 
-    return {
-      fte_data,
-      exp_data,
-      exp_years: _.map(exp_years_with_gap_year, (year) =>
-        _.replace(year, "exp", "")
-      ),
-      fte_years: fte_years_with_gap_year,
-      exp_gap_year,
-      fte_gap_year,
-      most_recent_number_of_programs: _.filter(
-        relevant_data,
-        valid_most_recent_year
-      ).length,
-      first_planning_year_number_of_programs: _.filter(
-        relevant_data,
-        "{{planning_year_1}}"
-      ).length,
-      ..._.chain(most_recent_top_2_programs)
-        .flatMap(({ prgm, value }, ix) => [
-          [`most_recent_top_${ix + 1}_name`, prgm],
-          [`most_recent_top_${ix + 1}_value`, value],
-        ])
-        .fromPairs()
-        .value(),
-      ..._.chain(first_planning_year_top_2_programs)
-        .flatMap(({ prgm, value }, ix) => [
-          [`first_planning_year_top_${ix + 1}_name`, prgm],
-          [`first_planning_year_top_${ix + 1}_value`, value],
-        ])
-        .fromPairs()
-        .value(),
-    };
+  return {
+    fte_data,
+    exp_data,
+    exp_years: _.map(exp_years_with_gap_year, (year) =>
+      _.replace(year, "exp", "")
+    ),
+    fte_years: fte_years_with_gap_year,
+    exp_gap_year,
+    fte_gap_year,
+    most_recent_number_of_programs: _.filter(
+      relevant_data,
+      valid_most_recent_year
+    ).length,
+    first_planning_year_number_of_programs: _.filter(
+      relevant_data,
+      "{{planning_year_1}}"
+    ).length,
+    ..._.chain(most_recent_top_2_programs)
+      .flatMap(({ prgm, value }, ix) => [
+        [`most_recent_top_${ix + 1}_name`, prgm],
+        [`most_recent_top_${ix + 1}_value`, value],
+      ])
+      .fromPairs()
+      .value(),
+    ..._.chain(first_planning_year_top_2_programs)
+      .flatMap(({ prgm, value }, ix) => [
+        [`first_planning_year_top_${ix + 1}_name`, prgm],
+        [`first_planning_year_top_${ix + 1}_value`, value],
+      ])
+      .fromPairs()
+      .value(),
   };
 };
 
