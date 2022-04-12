@@ -9,12 +9,6 @@ import { Table } from "src/tables/TableClass";
 
 const create_full_panel_key = (key, subject_type) => `${key}:${subject_type}`;
 
-const default_args = {
-  table_dependencies: [],
-  glossary_keys: [],
-  machinery_footnotes: true,
-};
-
 const panels = {};
 class PanelRegistry {
   static get panels() {
@@ -54,12 +48,44 @@ class PanelRegistry {
     return panels[full_key];
   }
 
-  constructor(def) {
-    Object.assign(this, default_args, _.omit(def, ["render", "calculate"]), {
-      calculate: def.calculate ? _.memoize(def.calculate) : _.constant(true),
-      _inner_render: def.render,
-      key_base: def.key,
-      full_key: create_full_panel_key(def.key, def.subject_type),
+  constructor(panel_def) {
+    const panel_def_defaults = {
+      table_dependencies: [],
+      glossary_keys: [],
+      calculate: _.constant(true),
+      machinery_footnotes: true,
+    };
+
+    const def_with_defaults = { ...panel_def_defaults, ...panel_def };
+
+    const calculate = _.memoize(
+      (subject) => def_with_defaults.calculate(subject, this.tables),
+      ({ subject_type, id }) => `${subject_type}:${id}`
+    );
+
+    const curry_getter_with_calculations = (getter) => (subject) =>
+      getter(subject, calculate(subject));
+
+    Object.assign(this, def_with_defaults, {
+      key_base: def_with_defaults.key,
+      full_key: create_full_panel_key(
+        def_with_defaults.key,
+        def_with_defaults.subject_type
+      ),
+      calculate,
+      get_title: curry_getter_with_calculations(def_with_defaults.get_title),
+      render: (subject, options = {}) =>
+        def_with_defaults.render(
+          {
+            subject,
+            calculations: this.calculate(subject),
+            title: this.get_title(subject),
+            sources: this.get_source(subject),
+            footnotes: this.get_footnotes(subject),
+            glossary_keys: this.glossary_keys,
+          },
+          options
+        ),
     });
 
     this.constructor.register_instance(this);
@@ -72,7 +98,7 @@ class PanelRegistry {
       .value();
   }
 
-  is_panel_valid_for_subject(subject, options = {}) {
+  is_panel_valid_for_subject(subject) {
     if (this.subject_type !== subject.subject_type) {
       return false;
     }
@@ -95,7 +121,7 @@ class PanelRegistry {
     }
 
     // returning false from a calculate is the primary way for a panel to communicate that it shouldn't render for the given subject
-    if (!this.calculate(subject, this.tables, options)) {
+    if (!this.calculate(subject)) {
       return false;
     }
 
@@ -151,28 +177,6 @@ class PanelRegistry {
       .uniqBy("text") //some footnotes are duplicated to support different topics, years, orgs, etc.
       .compact()
       .value();
-  }
-
-  render(subject, options = {}) {
-    const calculations = this.calculate(subject, this.tables, options);
-
-    const sources = this.get_source(subject);
-
-    const footnotes = this.get_footnotes(subject);
-
-    const react_el = this._inner_render(
-      {
-        subject,
-        calculations,
-        title: this.get_title(subject, calculations),
-        sources,
-        footnotes,
-        glossary_keys: this.glossary_keys,
-      },
-      options
-    );
-
-    return react_el;
   }
 }
 
