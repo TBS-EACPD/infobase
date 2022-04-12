@@ -59,30 +59,34 @@ class PanelRegistry {
   constructor(panel_def) {
     const panel_def_defaults = {
       table_dependencies: [],
-      glossary_keys: [],
       calculate: _.constant(true),
       machinery_footnotes: true,
+      glossary_keys: [],
     };
 
-    const def_with_defaults = { ...panel_def_defaults, ...panel_def };
+    const def = { ...panel_def_defaults, ...panel_def };
 
     const calculate = _.memoize(
-      (subject) => def_with_defaults.calculate(subject, this.tables),
+      (subject) => def.calculate(subject, this.tables),
       ({ subject_type, id }) => `${subject_type}:${id}`
     );
 
     const curry_getter_with_calculations = (getter) => (subject) =>
       getter(subject, calculate(subject));
 
-    Object.assign(this, def_with_defaults, {
+    Object.assign(this, def, {
       full_key: PanelRegistry.get_full_key_for_subject_type(
-        def_with_defaults.key,
-        def_with_defaults.subject_type
+        def.key,
+        def.subject_type
       ),
+      tables: _.chain(def.table_dependencies)
+        .map((table_id) => [table_id, Table.store.lookup(table_id)])
+        .fromPairs()
+        .value(),
       calculate,
-      get_title: curry_getter_with_calculations(def_with_defaults.get_title),
+      get_title: curry_getter_with_calculations(def.get_title),
       render: (subject, options = {}) =>
-        def_with_defaults.render(
+        def.render(
           {
             subject,
             calculations: this.calculate(subject),
@@ -96,13 +100,6 @@ class PanelRegistry {
     });
 
     this.constructor.register_instance(this);
-  }
-
-  get tables() {
-    return _.chain(this.table_dependencies)
-      .map((table_id) => [table_id, Table.store.lookup(table_id)])
-      .fromPairs()
-      .value();
   }
 
   is_panel_valid_for_subject(subject) {
@@ -127,7 +124,8 @@ class PanelRegistry {
       return false;
     }
 
-    // returning false from a calculate is the primary way for a panel to communicate that it shouldn't render for the given subject
+    // returning false from a calculate is the primary way for a panel to communicate that it shouldn't render for the given subject,
+    // small hacky double-purpose to the current calculate function API
     if (!this.calculate(subject)) {
       return false;
     }
