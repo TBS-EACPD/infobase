@@ -1,19 +1,26 @@
 import { PanelRegistry } from "src/panels/PanelRegistry";
 
+import { is_dev } from "src/core/injected_build_constants";
+
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
 const declare_panel = ({ panel_key, subject_types, panel_config_func }) => {
-  if (!PanelRegistry.is_registered_key_base(panel_key)) {
-    subject_types.forEach(
-      (subject_type) =>
-        new PanelRegistry({
-          subject_type,
-          key: panel_key,
-          ...panel_config_func(subject_type, panel_key),
-        })
-    );
-  }
+  subject_types.forEach((subject_type) => {
+    if (
+      !PanelRegistry.is_registered_key_for_subject_type(panel_key, subject_type)
+    ) {
+      new PanelRegistry({
+        subject_type,
+        key: panel_key,
+        ...panel_config_func(subject_type, panel_key),
+      });
+    } else if (is_dev) {
+      console.warn(
+        `Panel with ${panel_key} is already registered for subject type ${subject_type}`
+      );
+    }
+  });
 
   return panel_key;
 };

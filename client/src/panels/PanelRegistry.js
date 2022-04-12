@@ -7,22 +7,27 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
-const create_full_panel_key = (key, subject_type) => `${key}:${subject_type}`;
-
 const panels = {};
+
 class PanelRegistry {
   static get panels() {
     return panels;
   }
 
-  static is_registered_full_key(panel_key) {
-    return panel_key in panels;
+  static get_full_key_for_subject_type = (key, subject_type) =>
+    `${key}:${subject_type}`;
+
+  static is_registered_key(key) {
+    return _.some(panels, ({ key: registered_key }) => registered_key === key);
   }
 
-  static is_registered_key_base(key_base) {
-    return _.some(
-      panels,
-      ({ key_base: registered_key_base }) => registered_key_base === key_base
+  static is_registered_full_key(full_key) {
+    return full_key in panels;
+  }
+
+  static is_registered_key_for_subject_type(key, subject_type) {
+    return PanelRegistry.is_registered_full_key(
+      PanelRegistry.get_full_key_for_subject_type(key, subject_type)
     );
   }
 
@@ -37,7 +42,10 @@ class PanelRegistry {
   }
 
   static lookup(key, subject_type) {
-    const full_key = create_full_panel_key(key, subject_type);
+    const full_key = PanelRegistry.get_full_key_for_subject_type(
+      key,
+      subject_type
+    );
 
     if (!PanelRegistry.is_registered_full_key(full_key)) {
       throw new Error(
@@ -67,8 +75,7 @@ class PanelRegistry {
       getter(subject, calculate(subject));
 
     Object.assign(this, def_with_defaults, {
-      key_base: def_with_defaults.key,
-      full_key: create_full_panel_key(
+      full_key: PanelRegistry.get_full_key_for_subject_type(
         def_with_defaults.key,
         def_with_defaults.subject_type
       ),
