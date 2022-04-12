@@ -18,7 +18,7 @@ export const PanelRenderer = withRouter(
 
       const panel = PanelRegistry.lookup(panel_key, subject.subject_type);
 
-      if (!panel.is_panel_valid_for_subject(subject, panel_options)) {
+      if (!panel.is_panel_valid_for_subject(subject)) {
         return null;
       }
 
