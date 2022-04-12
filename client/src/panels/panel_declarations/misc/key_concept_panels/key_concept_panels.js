@@ -13,7 +13,7 @@ import results_faq from "src/common_text/faq/results_questions.yaml";
 import tag_faq from "src/common_text/faq/tagging_questions.yaml";
 
 const common_panel_config = {
-  is_static: true,
+  is_meta_panel: true,
   footnotes: false,
   source: false,
   get_title: _.constant(false),

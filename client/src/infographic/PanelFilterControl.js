@@ -30,6 +30,8 @@ const get_default_table_tag_state = ({ panel_keys, subject }) =>
     .fromPairs()
     .value();
 
+const should_excluded_from_filtering = (panel) => panel.is_meta_panel;
+
 export default class PanelFilterControl extends React.Component {
   constructor(props) {
     super(props);
@@ -86,13 +88,11 @@ export default class PanelFilterControl extends React.Component {
       .sortBy("label")
       .value();
 
-    const static_panel_count = _.chain(panel_keys)
-      .map(
-        (panel_key) =>
-          PanelRegistry.lookup(panel_key, subject.subject_type).is_static
+    const excluded_panel_count = _.filter(panel_keys, (key) =>
+      should_excluded_from_filtering(
+        PanelRegistry.lookup(key, subject.subject_type)
       )
-      .compact()
-      .value().length;
+    ).length;
 
     return (
       <Details
@@ -103,9 +103,10 @@ export default class PanelFilterControl extends React.Component {
               className="panel-status-text"
               k="panels_status"
               args={{
-                total_number_of_panels: panel_keys.length - static_panel_count,
+                total_number_of_panels:
+                  panel_keys.length - excluded_panel_count,
                 number_of_active_panels:
-                  panel_filter(panel_keys).length - static_panel_count,
+                  panel_filter(panel_keys).length - excluded_panel_count,
               }}
             />
           </div>
@@ -176,7 +177,7 @@ export default class PanelFilterControl extends React.Component {
       _.filter(panel_keys, (panel_key) => {
         const panel = PanelRegistry.lookup(panel_key, subject.subject_type);
         return (
-          panel.is_static ||
+          should_excluded_from_filtering(panel) ||
           _.intersection(panel.table_dependencies, active_table_ids).length > 0
         );
       });
