@@ -643,7 +643,7 @@ function gl_sidebar_link(display, key) {
       data-toggle="glossary_sidebar"
     >
       ${display}
-    </button>`
+    </button>`.replace(/\r?\n|\r/g, "")
   );
 }
 HandlebarsWithPrototypeAccess.registerHelper(
