@@ -27,8 +27,6 @@ import { GlossarySidebarController } from "src/glossary/GlossarySidebar/Glossary
 import { make_request } from "src/request_utils";
 import { SurveyPopup } from "src/Survey/SurveyPopup";
 
-import "./App.scss";
-
 const Home = React.lazy(() => import("src/home/home"));
 const A11yHome = React.lazy(() => import("src/home/a11y_home"));
 const About = React.lazy(() => import("src/about/about"));
