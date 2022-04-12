@@ -56,47 +56,54 @@ class PanelRegistry {
     return panels[full_key];
   }
 
-  constructor(panel_def) {
+  constructor(provided_def) {
     const panel_def_defaults = {
       table_dependencies: [],
       calculate: _.constant(true),
       machinery_footnotes: true,
       glossary_keys: [],
     };
+    const panel_def = { ...panel_def_defaults, ...provided_def };
 
-    const def = { ...panel_def_defaults, ...panel_def };
-
-    const calculate = _.memoize(
-      (subject) => def.calculate(subject, this.tables),
-      ({ subject_type, id }) => `${subject_type}:${id}`
+    const full_key = PanelRegistry.get_full_key_for_subject_type(
+      panel_def.key,
+      panel_def.subject_type
     );
 
+    const tables = _.chain(panel_def.table_dependencies)
+      .map((table_id) => [table_id, Table.store.lookup(table_id)])
+      .fromPairs()
+      .value();
+
+    const calculate = _.memoize(
+      (subject) => panel_def.calculate(subject, this.tables),
+      ({ guid }) => guid
+    );
     const curry_getter_with_calculations = (getter) => (subject) =>
       getter(subject, calculate(subject));
 
-    Object.assign(this, def, {
-      full_key: PanelRegistry.get_full_key_for_subject_type(
-        def.key,
-        def.subject_type
-      ),
-      tables: _.chain(def.table_dependencies)
-        .map((table_id) => [table_id, Table.store.lookup(table_id)])
-        .fromPairs()
-        .value(),
+    const curried_render = (subject, options = {}) =>
+      panel_def.render(
+        {
+          subject,
+          calculations: this.calculate(subject),
+          title: this.get_title(subject),
+          sources: this.get_source(subject),
+          footnotes: this.get_footnotes(subject),
+          glossary_keys: this.glossary_keys,
+        },
+        options
+      );
+
+    Object.assign(this, panel_def, {
+      // overwritten panel_def properties
       calculate,
-      get_title: curry_getter_with_calculations(def.get_title),
-      render: (subject, options = {}) =>
-        def.render(
-          {
-            subject,
-            calculations: this.calculate(subject),
-            title: this.get_title(subject),
-            sources: this.get_source(subject),
-            footnotes: this.get_footnotes(subject),
-            glossary_keys: this.glossary_keys,
-          },
-          options
-        ),
+      get_title: curry_getter_with_calculations(panel_def.get_title),
+      render: curried_render,
+
+      // additional derived properties
+      full_key,
+      tables,
     });
 
     this.constructor.register_instance(this);
