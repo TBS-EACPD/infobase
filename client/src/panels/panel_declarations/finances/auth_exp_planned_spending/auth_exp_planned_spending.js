@@ -748,7 +748,7 @@ export const declare_auth_exp_planned_spending_panel = () =>
         "orgVoteStatEstimates",
       ],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
-      get_title: () => (subject) =>
+      get_title: (subject) =>
         text_maker("auth_exp_planned_spending_title", {
           has_planned_spending: subject.has_planned_spending,
         }),
