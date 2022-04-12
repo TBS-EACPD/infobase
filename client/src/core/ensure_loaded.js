@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { PanelRegistry, tables_for_panel } from "src/panels/PanelRegistry";
+import { PanelRegistry } from "src/panels/PanelRegistry";
 
 import {
   api_load_years_with_covid_data,
@@ -27,8 +27,8 @@ const load_tables = (table_set) =>
   );
 
 function ensure_loaded({
-  table_keys,
-  panel_keys,
+  table_keys = [],
+  panel_keys = [],
   subject_type,
   subject,
   has_results,
@@ -42,20 +42,17 @@ function ensure_loaded({
   covid_measures,
   footnotes_for: footnotes_subject,
 }) {
-  const table_set = _.chain(table_keys)
-    .union(
-      _.chain(panel_keys)
-        .map((key) => tables_for_panel(key, subject_type))
-        .flatten()
-        .value()
-    )
-    .uniqBy()
-    .map((table_key) => Table.store.lookup(table_key))
-    .value();
-
   const panel_set = _.map(panel_keys, (key) =>
     PanelRegistry.lookup(key, subject_type)
   );
+
+  const table_set = _.chain([
+    ...table_keys,
+    ..._.flatMap(panel_set, "table_dependencies"),
+  ])
+    .uniqBy()
+    .map((table_key) => Table.store.lookup(table_key))
+    .value();
 
   const check_for_panel_dependency = (dependency_key) =>
     _.chain(panel_set).map(dependency_key).some().value();

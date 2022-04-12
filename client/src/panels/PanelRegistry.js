@@ -7,22 +7,25 @@ import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_na
 import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
 import { Table } from "src/tables/TableClass";
 
-const panels = {};
+const panel_store = {};
 
-class PanelRegistry {
+export class PanelRegistry {
   static get panels() {
-    return panels;
+    return panel_store;
   }
 
   static get_full_key_for_subject_type = (key, subject_type) =>
     `${key}:${subject_type}`;
 
   static is_registered_key(key) {
-    return _.some(panels, ({ key: registered_key }) => registered_key === key);
+    return _.some(
+      panel_store,
+      ({ key: registered_key }) => registered_key === key
+    );
   }
 
   static is_registered_full_key(full_key) {
-    return full_key in panels;
+    return full_key in panel_store;
   }
 
   static is_registered_key_for_subject_type(key, subject_type) {
@@ -35,10 +38,10 @@ class PanelRegistry {
     const { full_key } = instance;
 
     if (PanelRegistry.is_registered_full_key(full_key)) {
-      throw new Error(`panel ${full_key} has already been defined`);
+      throw new Error(`Panel ${full_key} has already been defined`);
     }
 
-    panels[full_key] = instance;
+    panel_store[full_key] = instance;
   }
 
   static lookup(key, subject_type) {
@@ -49,11 +52,11 @@ class PanelRegistry {
 
     if (!PanelRegistry.is_registered_full_key(full_key)) {
       throw new Error(
-        `Bad panel key "${full_key}" - no panel for subject type "${subject_type}" with key "${key}"`
+        `Lookup found nothing for panel key "${key}" and subject type "${subject_type}"`
       );
     }
 
-    return panels[full_key];
+    return panel_store[full_key];
   }
 
   constructor(provided_def) {
@@ -61,9 +64,9 @@ class PanelRegistry {
       table_dependencies: [],
       calculate: _.constant(true),
       get_data_set_keys: _.constant([]),
-      get_data_source_keys: _.constant([]),
-      get_footnote_topic_keys: _.constant([]),
-      machinery_footnotes: true, // TODO could be always included along with derived footnotes to get_footnote_topic_keys, panels could ommit as desired from there
+      get_datasource_keys: _.constant([]),
+      get_topic_keys: _.constant([]),
+      machinery_footnotes: true, // TODO could be always included along with derived keys to get_topic_keys, panels could ommit as desired from there
       glossary_keys: [],
     };
     const panel_def = { ...panel_def_defaults, ...provided_def };
@@ -96,11 +99,11 @@ class PanelRegistry {
         this.derive_datasources_from_data_sets(subject)
       );
 
-    const curried_get_footnote_topic_keys = (subject) =>
-      panel_def.get_footnote_topic_keys(
+    const curried_get_topic_keys = (subject) =>
+      panel_def.get_topic_keys(
         subject,
         curried_memoized_calculate(subject),
-        this.derive_footnote_topic_keys_from_datasources_and_data_sets(subject)
+        this.derive_topic_keys_from_datasources_and_data_sets(subject)
       );
 
     const curried_render = (subject, options = {}) =>
@@ -121,8 +124,8 @@ class PanelRegistry {
       calculate: curried_memoized_calculate,
       get_title: curried_get_title,
       get_data_set_keys: curried_get_data_set_keys,
-      get_data_source_keys: curried_get_datasource_keys,
-      get_footnote_topic_keys: curried_get_footnote_topic_keys,
+      get_datasource_keys: curried_get_datasource_keys,
+      get_topic_keys: curried_get_topic_keys,
       render: curried_render,
 
       // additional derived properties
@@ -187,7 +190,7 @@ class PanelRegistry {
     }
   }
 
-  derive_footnote_topic_keys_from_datasources_and_data_sets(_subject) {
+  derive_topic_keys_from_datasources_and_data_sets(_subject) {
     return []; // TODO
   }
   get footnote_concept_keys() {
@@ -214,23 +217,10 @@ class PanelRegistry {
     return _.chain(
       get_footnotes_by_subject_and_topic(subject, footnote_concepts)
     )
-      .uniqBy("text") //some footnotes are duplicated to support different topics, years, orgs, etc.
+      .uniqBy("text")
       .compact()
       .value();
   }
 }
-
-const tables_for_panel = (panel_key, subject_type) =>
-  _.chain(PanelRegistry.panels)
-    .filter({ key: panel_key })
-    .thru((panels) =>
-      subject_type ? _.filter(panels, { subject_type }) : panels
-    )
-    .map("table_dependencies")
-    .flatten()
-    .uniqBy()
-    .value();
-
-export { PanelRegistry, tables_for_panel };
 
 assign_to_dev_helper_namespace({ PanelRegistry });
