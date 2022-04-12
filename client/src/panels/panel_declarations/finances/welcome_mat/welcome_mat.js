@@ -987,8 +987,8 @@ function get_calcs(subject, q6, q12) {
   };
 }
 
-const common_program_crso_calculate = function (subject) {
-  const { programSpending, programFtes } = this.tables;
+const common_program_crso_calculate = (subject, tables) => {
+  const { programSpending, programFtes } = tables;
   const q6 = programSpending.q(subject);
   const q12 = programFtes.q(subject);
 

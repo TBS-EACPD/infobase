@@ -25,8 +25,8 @@ const { people_years } = year_templates;
 const { fol } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: function () {
-    const { orgEmployeeFol } = this.tables;
+  gov: (_subject, tables) => {
+    const { orgEmployeeFol } = tables;
 
     const gov_five_year_total_head_count = _.chain(orgEmployeeFol.GOC)
       .map((row) =>
@@ -59,9 +59,9 @@ const calculate_funcs_by_subject_type = {
       .sortBy((d) => -sum(d.data))
       .value();
   },
-  dept: function (dept) {
-    const { orgEmployeeFol } = this.tables;
-    return _.chain(orgEmployeeFol.q(dept).data)
+  dept: (subject, tables) => {
+    const { orgEmployeeFol } = tables;
+    return _.chain(orgEmployeeFol.q(subject).data)
       .map((row) => ({
         label: row.fol,
         data: people_years.map((year) => row[year]),

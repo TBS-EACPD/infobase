@@ -23,8 +23,8 @@ import { text_maker, TM } from "./vote_stat_text_provider";
 
 const est_in_year_col = "{{est_in_year}}_estimates";
 
-const estimates_split_calculate = function (subject) {
-  const { orgVoteStatEstimates } = this.tables;
+const estimates_split_calculate = (subject, tables) => {
+  const { orgVoteStatEstimates } = tables;
   const q = orgVoteStatEstimates.q(subject);
 
   const in_year_estimates_split = _.chain(orgVoteStatEstimates.data)
