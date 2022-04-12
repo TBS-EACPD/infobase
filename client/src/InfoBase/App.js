@@ -133,110 +133,108 @@ export class App extends React.Component {
   render() {
     const { outage_msg, showSurvey } = this.state;
     return (
-      <div className={`app-focus-root--${is_a11y_mode ? "a11y" : "standard"}`}>
-        <ErrorBoundary>
-          <DevFip />
-          <InsertRuntimeFooterLinks />
-          <EasyAccess />
-          {outage_msg && (
-            <HeaderNotification
-              list_of_text={[outage_msg]}
-              hideNotification={() => {
-                this.setState({ outage_msg: null });
+      <ErrorBoundary>
+        <DevFip />
+        <InsertRuntimeFooterLinks />
+        <EasyAccess />
+        {outage_msg && (
+          <HeaderNotification
+            list_of_text={[outage_msg]}
+            hideNotification={() => {
+              this.setState({ outage_msg: null });
+            }}
+          />
+        )}
+        <RedirectHeader
+          redirect_msg_key="redirected_msg"
+          url_before_redirect_key="pre_redirected_url"
+        />
+        {has_local_storage && <SurveyPopup />}
+        <TooltipActivator />
+        <Suspense fallback={<LeafSpinner config_name={"route"} />}>
+          <Switch>
+            <Route
+              path="/error-boundary-test"
+              component={() => {
+                throw new Error("This route throws errors!");
               }}
             />
-          )}
-          <RedirectHeader
-            redirect_msg_key="redirected_msg"
-            url_before_redirect_key="pre_redirected_url"
-          />
-          {has_local_storage && <SurveyPopup />}
-
-          <Suspense fallback={<LeafSpinner config_name={"route"} />}>
-            <Switch>
-              <Route
-                path="/error-boundary-test"
-                component={() => {
-                  throw new Error("This route throws errors!");
-                }}
-              />
-              <Redirect
-                from="/metadata/:data_source_key?"
-                to="/datasets/:data_source_key?"
-              />
-              <Route
-                path="/datasets/:data_source_key?"
-                component={DatasetsRoute}
-              />
-              <Route path="/igoc/:grouping?" component={IgocExplorer} />
-              <Redirect
-                from="/resource-explorer/:hierarchy_scheme?/:doc?"
-                to="/tag-explorer/:hierarchy_scheme?"
-              />
-              <Route
-                path="/tag-explorer/:hierarchy_scheme?/:period?"
-                component={TagExplorer}
-              />
-              <Redirect
-                from="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
-                to="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
-              />
-              <Route
-                path="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
-                component={Infographic}
-              />
-              <Route path="/glossary/:active_key?" component={Glossary} />
-              <Route path="/rpb/:config?" component={ReportBuilder} />
-              <Route
-                path="/about"
-                render={() => <About toggleSurvey={this.toggleSurvey} />}
-              />
-              <Route
-                path="/contact"
-                render={() => <Contact toggleSurvey={this.toggleSurvey} />}
-              />
-              <Route path="/faq/:selected_qa_key?" component={FAQ} />
-              <Route
-                path="/compare_estimates/:h7y_layout?"
-                component={EstimatesComparison}
-              />
-              <Route path="/privacy" component={PrivacyStatement} />
-              <Route
-                path="/diff/:org_id?/:crso_id?/:program_id?"
-                component={TextDiff}
-              />
-              <Route
-                path="/panel-inventory/:subject_type?/:panel?/:id?"
-                component={PanelInventory}
-              />
-              {!is_a11y_mode && (
-                <Route
-                  path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
-                  component={TreeMap}
-                />
-              )}
-              <Route path="/survey" component={Survey} />
-              {is_a11y_mode && (
-                <Route
-                  path="/start/:no_basic_equiv?"
-                  render={() => <A11yHome />}
-                />
-              )}
-              <Route
-                path="/start"
-                render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
-              />
-              <Redirect from="/" to="/start" />
-            </Switch>
-            <GlossarySidebarController />
-            <PageDetails
-              showSurvey={showSurvey}
-              toggleSurvey={this.toggleSurvey}
-              non_survey_routes={["/contact", "/survey"]}
+            <Redirect
+              from="/metadata/:data_source_key?"
+              to="/datasets/:data_source_key?"
             />
-          </Suspense>
-        </ErrorBoundary>
-      </div>
+            <Route
+              path="/datasets/:data_source_key?"
+              component={DatasetsRoute}
+            />
+            <Route path="/igoc/:grouping?" component={IgocExplorer} />
+            <Redirect
+              from="/resource-explorer/:hierarchy_scheme?/:doc?"
+              to="/tag-explorer/:hierarchy_scheme?"
+            />
+            <Route
+              path="/tag-explorer/:hierarchy_scheme?/:period?"
+              component={TagExplorer}
+            />
+            <Redirect
+              from="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
+              to="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
+            />
+            <Route
+              path="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
+              component={Infographic}
+            />
+            <Route path="/glossary/:active_key?" component={Glossary} />
+            <Route path="/rpb/:config?" component={ReportBuilder} />
+            <Route
+              path="/about"
+              render={() => <About toggleSurvey={this.toggleSurvey} />}
+            />
+            <Route
+              path="/contact"
+              render={() => <Contact toggleSurvey={this.toggleSurvey} />}
+            />
+            <Route path="/faq/:selected_qa_key?" component={FAQ} />
+            <Route
+              path="/compare_estimates/:h7y_layout?"
+              component={EstimatesComparison}
+            />
+            <Route path="/privacy" component={PrivacyStatement} />
+            <Route
+              path="/diff/:org_id?/:crso_id?/:program_id?"
+              component={TextDiff}
+            />
+            <Route
+              path="/panel-inventory/:subject_type?/:panel?/:id?"
+              component={PanelInventory}
+            />
+            {!is_a11y_mode && (
+              <Route
+                path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
+                component={TreeMap}
+              />
+            )}
+            <Route path="/survey" component={Survey} />
+            {is_a11y_mode && (
+              <Route
+                path="/start/:no_basic_equiv?"
+                render={() => <A11yHome />}
+              />
+            )}
+            <Route
+              path="/start"
+              render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
+            />
+            <Redirect from="/" to="/start" />
+          </Switch>
+          <GlossarySidebarController />
+          <PageDetails
+            showSurvey={showSurvey}
+            toggleSurvey={this.toggleSurvey}
+            non_survey_routes={["/contact", "/survey"]}
+          />
+        </Suspense>
+      </ErrorBoundary>
     );
   }
 }
