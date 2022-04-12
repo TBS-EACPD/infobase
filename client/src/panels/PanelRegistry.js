@@ -60,7 +60,10 @@ class PanelRegistry {
     const panel_def_defaults = {
       table_dependencies: [],
       calculate: _.constant(true),
-      machinery_footnotes: true,
+      get_data_set_keys: _.constant([]),
+      get_data_source_keys: _.constant([]),
+      get_footnote_topic_keys: _.constant([]),
+      machinery_footnotes: true, // TODO could be always included along with derived footnotes to get_footnote_topic_keys, panels could ommit as desired from there
       glossary_keys: [],
     };
     const panel_def = { ...panel_def_defaults, ...provided_def };
@@ -75,12 +78,30 @@ class PanelRegistry {
       .fromPairs()
       .value();
 
-    const calculate = _.memoize(
+    const curried_memoized_calculate = _.memoize(
       (subject) => panel_def.calculate(subject, this.tables),
       ({ guid }) => guid
     );
-    const curry_getter_with_calculations = (getter) => (subject) =>
-      getter(subject, calculate(subject));
+
+    const curried_get_title = (subject) =>
+      panel_def.get_title(subject, curried_memoized_calculate(subject));
+
+    const curried_get_data_set_keys = (subject) =>
+      panel_def.get_data_set_keys(subject, curried_memoized_calculate(subject));
+
+    const curried_get_datasource_keys = (subject) =>
+      panel_def.get_data_set_keys(
+        subject,
+        curried_memoized_calculate(subject),
+        this.derive_datasources_from_data_sets(subject)
+      );
+
+    const curried_get_footnote_topic_keys = (subject) =>
+      panel_def.get_footnote_topic_keys(
+        subject,
+        curried_memoized_calculate(subject),
+        this.derive_footnote_topic_keys_from_datasources_and_data_sets(subject)
+      );
 
     const curried_render = (subject, options = {}) =>
       panel_def.render(
@@ -97,8 +118,11 @@ class PanelRegistry {
 
     Object.assign(this, panel_def, {
       // overwritten panel_def properties
-      calculate,
-      get_title: curry_getter_with_calculations(panel_def.get_title),
+      calculate: curried_memoized_calculate,
+      get_title: curried_get_title,
+      get_data_set_keys: curried_get_data_set_keys,
+      get_data_source_keys: curried_get_datasource_keys,
+      get_footnote_topic_keys: curried_get_footnote_topic_keys,
       render: curried_render,
 
       // additional derived properties
@@ -140,6 +164,9 @@ class PanelRegistry {
     return true;
   }
 
+  derive_datasources_from_data_sets(_subject) {
+    return []; // TODO
+  }
   get_source(subject) {
     if (this.source === false) {
       return [];
@@ -160,6 +187,9 @@ class PanelRegistry {
     }
   }
 
+  derive_footnote_topic_keys_from_datasources_and_data_sets(_subject) {
+    return []; // TODO
+  }
   get footnote_concept_keys() {
     if (this.footnotes === false) {
       return [];
@@ -179,8 +209,6 @@ class PanelRegistry {
     }
   }
   get_footnotes(subject) {
-    //array of footnote strings
-
     const footnote_concepts = this.footnote_concept_keys;
 
     return _.chain(
