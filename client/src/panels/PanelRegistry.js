@@ -64,56 +64,50 @@ export class PanelRegistry {
       table_dependencies: [],
       calculate: _.constant(true),
       get_dataset_keys: _.constant([]),
-      get_data_source_keys: _.constant([]),
-      get_topic_keys: _.constant([]),
+      get_data_source_keys: _.property("derived_source_keys"),
+      get_topic_keys: _.property("derived_topic_keys"),
       machinery_footnotes: true, // TODO could be always included along with derived keys to get_topic_keys, panels could ommit as desired from there
       glossary_keys: [],
     };
     const panel_def = { ...panel_def_defaults, ...provided_def };
 
-    const full_key = PanelRegistry.get_full_key_for_subject_type(
-      panel_def.key,
-      panel_def.subject_type
-    );
+    Object.assign(this, panel_def);
 
-    const tables = _.chain(panel_def.table_dependencies)
-      .map((table_id) => [table_id, Table.store.lookup(table_id)])
-      .fromPairs()
-      .value();
-
-    const curried_memoized_calculate = _.memoize(
-      (subject) => panel_def.calculate(subject, this.tables),
+    // Wrap provided callbacks with memoization and currying
+    this.calculate = _.memoize(
+      (subject) => panel_def.calculate({ subject, tables: this.tables }),
       ({ guid }) => guid
     );
 
-    const curried_get_title = (subject) =>
+    this.get_title = (subject) =>
       panel_def.get_title({
         subject,
-        calculations: curried_memoized_calculate(subject),
+        calculations: this.calculate(subject),
       });
 
-    const curried_get_dataset_keys = (subject) =>
+    this.get_dataset_keys = (subject) =>
       panel_def.get_dataset_keys({
         subject,
-        calculations: curried_memoized_calculate(subject),
+        calculations: this.calculate(subject),
       });
 
-    const curried_get_data_source_keys = (subject) =>
+    this.get_data_source_keys = (subject) =>
       panel_def.get_dataset_keys({
         subject,
-        calculations: curried_memoized_calculate(subject),
-        derived_data_sources: this.derive_data_sources_from_datasets(subject),
+        calculations: this.calculate(subject),
+        derived_source_keys:
+          this.derive_data_source_keys_from_datasets(subject),
       });
 
-    const curried_get_topic_keys = (subject) =>
+    this.get_topic_keys = (subject) =>
       panel_def.get_topic_keys({
         subject,
-        calculations: curried_memoized_calculate(subject),
+        calculations: this.calculate(subject),
         derived_topic_keys:
           this.derive_topic_keys_from_data_sources_and_datasets(subject),
       });
 
-    const curried_render = (subject, options = {}) =>
+    this.render = (subject, options = {}) =>
       panel_def.render(
         {
           subject,
@@ -126,21 +120,21 @@ export class PanelRegistry {
         options
       );
 
-    Object.assign(this, panel_def, {
-      // overwritten panel_def properties
-      calculate: curried_memoized_calculate,
-      get_title: curried_get_title,
-      get_dataset_keys: curried_get_dataset_keys,
-      get_data_source_keys: curried_get_data_source_keys,
-      get_topic_keys: curried_get_topic_keys,
-      render: curried_render,
+    PanelRegistry.register_instance(this);
+  }
 
-      // additional derived properties
-      full_key,
-      tables,
-    });
+  get full_key() {
+    return PanelRegistry.get_full_key_for_subject_type(
+      this.key,
+      this.subject_type
+    );
+  }
 
-    this.constructor.register_instance(this);
+  get tables() {
+    return _.chain(this.table_dependencies)
+      .map((table_id) => [table_id, Table.store.lookup(table_id)])
+      .fromPairs()
+      .value();
   }
 
   is_panel_valid_for_subject(subject) {
@@ -155,18 +149,13 @@ export class PanelRegistry {
     if (
       this.subject_type === "dept" &&
       this.missing_info !== "ok" &&
-      _.some(
-        this.table_dependencies,
-        (t) =>
-          Table.store.lookup(t).depts &&
-          !Table.store.lookup(t).depts[subject.id]
-      )
+      _.some(this.tables, ({ depts }) => depts && depts[subject.id])
     ) {
       return false;
     }
 
     // returning false from a calculate is the primary way for a panel to communicate that it shouldn't render for the given subject,
-    // small hacky double-purpose to the current calculate function API
+    // small hacky double-purpose to the current calculate function API. TODO standalone should_panel_render function?
     if (!this.calculate(subject)) {
       return false;
     }
@@ -174,7 +163,7 @@ export class PanelRegistry {
     return true;
   }
 
-  derive_data_sources_from_datasets(_subject) {
+  derive_data_source_keys_from_datasets(_subject) {
     return []; // TODO
   }
   get_source(subject) {
