@@ -59,6 +59,7 @@ export class GlossaryDef extends React.Component<SidebarContentProps> {
           dangerouslySetInnerHTML={{
             __html: def,
           }}
+          tabIndex={-1}
         />
         <div>
           <button

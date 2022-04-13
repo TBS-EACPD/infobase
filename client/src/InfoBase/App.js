@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import { HeaderNotification } from "src/components/HeaderNotification/HeaderNotification";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
-import { NoIndex } from "src/components/misc_util_components";
 import { PageDetails } from "src/components/PageDetails";
 
 import { log_standard_event } from "src/core/analytics";
@@ -148,7 +147,6 @@ export class App extends React.Component {
           url_before_redirect_key="pre_redirected_url"
         />
         {has_local_storage && <SurveyPopup />}
-        <TooltipActivator />
         <Suspense fallback={<LeafSpinner config_name={"route"} />}>
           <Switch>
             <Route
