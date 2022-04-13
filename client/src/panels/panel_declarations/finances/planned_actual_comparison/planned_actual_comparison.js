@@ -30,7 +30,7 @@ export const declare_planned_actual_comparison_panel = () =>
           "departmental_results_reports",
           "public_accounts",
         ]),
-      calculate: (subject, tables) => {
+      calculate: ({ subject, tables }) => {
         if (subject.subject_type === "dept") {
           if (
             !subject.is_dp_org ||

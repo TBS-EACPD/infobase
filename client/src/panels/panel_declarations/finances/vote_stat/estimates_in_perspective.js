@@ -24,7 +24,7 @@ export const declare_estimates_in_perspective_panel = () =>
       get_title: () => text_maker("estimates_perspective_title"),
       table_dependencies: ["orgVoteStatEstimates"],
       machinery_footnotes: false,
-      calculate: (subject, tables) => {
+      calculate: ({ subject, tables }) => {
         const { orgVoteStatEstimates } = tables;
         const gov_q = orgVoteStatEstimates.q(Gov.instance);
         const dept_q = orgVoteStatEstimates.q(subject);

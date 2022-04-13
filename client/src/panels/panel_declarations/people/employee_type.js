@@ -25,7 +25,7 @@ const { people_years } = year_templates;
 const { tenure } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: (_subject, tables) => {
+  gov: ({ tables }) => {
     const { orgEmployeeType } = tables;
     return _.chain(tenure)
       .values()
@@ -51,7 +51,7 @@ const calculate_funcs_by_subject_type = {
       .sortBy((d) => -sum(d.data))
       .value();
   },
-  dept: (subject, tables) => {
+  dept: ({ subject, tables }) => {
     const { orgEmployeeType } = tables;
     return _.chain(orgEmployeeType.q(subject).data)
       .map((row) => ({

@@ -182,7 +182,7 @@ const calculate_common = (data) => {
   };
 };
 const calculate_funcs_by_subject_type = {
-  gov: (_subject, tables) => {
+  gov: ({ tables }) => {
     const { orgEmployeeRegion } = tables;
     return calculate_common(
       people_years.map((year) =>
@@ -190,7 +190,7 @@ const calculate_funcs_by_subject_type = {
       )
     );
   },
-  dept: (subject, tables) => {
+  dept: ({ subject, tables }) => {
     const { orgEmployeeRegion } = tables;
     return calculate_common(
       people_years.map((year) =>

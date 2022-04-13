@@ -121,7 +121,7 @@ export const declare_spend_rev_split_panel = () =>
             ...common_panel_config,
             table_dependencies: ["orgSobjs"],
             footnotes: ["SOBJ_REV"],
-            calculate: (subject, tables) => {
+            calculate: ({ subject, tables }) => {
               const { orgSobjs } = tables;
               const last_year_spend = orgSobjs.sum_cols_by_grouped_data(
                 "{{pa_last_year}}",
@@ -157,7 +157,7 @@ export const declare_spend_rev_split_panel = () =>
           return {
             ...common_panel_config,
             table_dependencies: ["programSobjs"],
-            calculate: (subject, tables) => {
+            calculate: ({ subject, tables }) => {
               const { programSobjs } = tables;
               const prog_rows = programSobjs.programs.get(subject);
               const rev_split = rows_to_rev_split(prog_rows);

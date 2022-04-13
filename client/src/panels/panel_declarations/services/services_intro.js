@@ -135,7 +135,7 @@ export const declare_services_intro_panel = () =>
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       get_title: () => text_maker("services_intro_title"),
-      calculate: (subject) => {
+      calculate: ({ subject }) => {
         return {
           subject,
         };

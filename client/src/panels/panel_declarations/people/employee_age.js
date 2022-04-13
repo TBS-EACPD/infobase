@@ -33,7 +33,7 @@ const { people_years } = year_templates;
 const { age_groups } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: (_subject, tables) => {
+  gov: ({ tables }) => {
     const { orgEmployeeAgeGroup, orgEmployeeAvgAge } = tables;
 
     const avg_age = [
@@ -75,7 +75,7 @@ const calculate_funcs_by_subject_type = {
       age_group: age_group,
     };
   },
-  dept: (subject, tables) => {
+  dept: ({ subject, tables }) => {
     const { orgEmployeeAgeGroup, orgEmployeeAvgAge } = tables;
 
     const avg_age = _.chain(orgEmployeeAvgAge.q(subject).data)

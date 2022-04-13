@@ -25,7 +25,7 @@ const { people_years } = year_templates;
 const { gender } = businessConstants;
 
 const calculate_funcs_by_subject_type = {
-  gov: (_subject, tables) => {
+  gov: ({ tables }) => {
     const { orgEmployeeGender } = tables;
 
     const gov_five_year_total_head_count = _.chain(orgEmployeeGender.GOC)
@@ -61,7 +61,7 @@ const calculate_funcs_by_subject_type = {
       .sortBy((d) => -sum(d.data))
       .value();
   },
-  dept: (subject, tables) => {
+  dept: ({ subject, tables }) => {
     const { orgEmployeeGender } = tables;
     return _.chain(orgEmployeeGender.q(subject).data)
       .map((row) => ({

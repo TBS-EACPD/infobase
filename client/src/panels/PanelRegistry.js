@@ -87,24 +87,31 @@ export class PanelRegistry {
     );
 
     const curried_get_title = (subject) =>
-      panel_def.get_title(subject, curried_memoized_calculate(subject));
+      panel_def.get_title({
+        subject,
+        calculations: curried_memoized_calculate(subject),
+      });
 
     const curried_get_dataset_keys = (subject) =>
-      panel_def.get_dataset_keys(subject, curried_memoized_calculate(subject));
+      panel_def.get_dataset_keys({
+        subject,
+        calculations: curried_memoized_calculate(subject),
+      });
 
     const curried_get_data_source_keys = (subject) =>
-      panel_def.get_dataset_keys(
+      panel_def.get_dataset_keys({
         subject,
-        curried_memoized_calculate(subject),
-        this.derive_data_sources_from_datasets(subject)
-      );
+        calculations: curried_memoized_calculate(subject),
+        derived_data_sources: this.derive_data_sources_from_datasets(subject),
+      });
 
     const curried_get_topic_keys = (subject) =>
-      panel_def.get_topic_keys(
+      panel_def.get_topic_keys({
         subject,
-        curried_memoized_calculate(subject),
-        this.derive_topic_keys_from_data_sources_and_datasets(subject)
-      );
+        calculations: curried_memoized_calculate(subject),
+        derived_topic_keys:
+          this.derive_topic_keys_from_data_sources_and_datasets(subject),
+      });
 
     const curried_render = (subject, options = {}) =>
       panel_def.render(

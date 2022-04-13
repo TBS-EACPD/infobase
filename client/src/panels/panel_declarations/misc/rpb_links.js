@@ -81,7 +81,7 @@ export const declare_links_to_rpb_panel = () =>
             ...common_panel_config,
 
             /*
-            calculate(subject) {
+            calculate: ({subject}) => {
               return !subject.has_table_data;
             },
             */

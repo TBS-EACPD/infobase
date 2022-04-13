@@ -25,7 +25,7 @@ export const declare_employee_last_year_totals_panel = () =>
     panel_config_func: () => ({
       table_dependencies: ["orgEmployeeType"],
       get_title: () => text_maker("dept_employee_last_year_totals_title"),
-      calculate: (subject, tables) => {
+      calculate: ({ subject, tables }) => {
         const { orgEmployeeType } = tables;
         const dept_last_year_emp = orgEmployeeType
           .q(subject)

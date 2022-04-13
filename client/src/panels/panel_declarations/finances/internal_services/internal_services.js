@@ -33,7 +33,7 @@ export const declare_internal_services_panel = () =>
     panel_config_func: () => ({
       table_dependencies: ["programFtes"],
       get_title: () => text_maker("internal_service_panel_title"),
-      calculate: (subject, tables) => {
+      calculate: ({ subject, tables }) => {
         const { programFtes } = tables;
 
         const isc_crsos = _.filter(subject.crsos, "is_internal_service");

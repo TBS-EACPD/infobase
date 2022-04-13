@@ -419,7 +419,7 @@ export const declare_results_table_panel = () =>
       source: () => get_source_links(["departmental_results_reports"]),
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
-      get_title: (subject) => {
+      get_title: ({ subject }) => {
         const drr_keys_with_data = get_drr_keys_with_data(subject);
 
         return text_maker("result_flat_table_title", {
@@ -429,7 +429,7 @@ export const declare_results_table_panel = () =>
             get_year_for_doc_key(_.last(drr_keys_with_data)),
         });
       },
-      calculate(subject) {
+      calculate: ({ subject }) => {
         const subject_result_counts = get_subject_result_counts(subject);
 
         const drr_keys_with_data = get_drr_keys_with_data(subject);
