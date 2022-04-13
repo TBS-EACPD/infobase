@@ -242,7 +242,7 @@ module.exports = {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>See the data: \n</span>",
-            "<span>Service Inventory</span>",
+            "<span>Service Inventory</span>"
           ]
         }
       },
