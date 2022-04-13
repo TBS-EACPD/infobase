@@ -174,7 +174,7 @@ function get_file_name_without_lang_and_extension(file_path) {
 
 function write_gitsha_file(dir) {
   gitsha(function (err, sha) {
-    fs.writeFileSync(`${dir}/build_sha`, sha);
+    fs.writeFileSync(`${dir}/build_sha.txt`, sha);
   });
 }
 
