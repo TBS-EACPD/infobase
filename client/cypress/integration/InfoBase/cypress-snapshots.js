@@ -162,7 +162,8 @@ module.exports = {
             "<span>Applications by telephone</span>",
             "<span class=\"infobase-pie__legend-data\">1,327,740</span>",
             "<span class=\"text-nowrap\">0.4%</span>",
-            "<strong>Government of Canada</strong>"
+            "<strong>2019-20</strong>",
+            "<p>"
           ]
         }
       },
@@ -242,7 +243,6 @@ module.exports = {
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>See the data: \n</span>",
             "<span>Service Inventory</span>",
-            "<span class=\"text-nowrap\">0.0%</span>"
           ]
         }
       },
@@ -358,12 +358,7 @@ module.exports = {
     },
     "Infographic - Program - Services": {
       "Tested on index-eng.html#infographic/program/TBC-BXB03/services": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            // Inside a height clipper, related to but different from other false positive colour contrast issues. Likely WONTFIX
-            "<span class=\"text-nowrap\">0.0%</span>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/program/TBC-BXB03/services": {
         "Axe violations allow list": null
