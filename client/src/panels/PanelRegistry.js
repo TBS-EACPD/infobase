@@ -63,8 +63,8 @@ export class PanelRegistry {
     const panel_def_defaults = {
       table_dependencies: [],
       calculate: _.constant(true),
-      get_data_set_keys: _.constant([]),
-      get_datasource_keys: _.constant([]),
+      get_dataset_keys: _.constant([]),
+      get_data_source_keys: _.constant([]),
       get_topic_keys: _.constant([]),
       machinery_footnotes: true, // TODO could be always included along with derived keys to get_topic_keys, panels could ommit as desired from there
       glossary_keys: [],
@@ -89,21 +89,21 @@ export class PanelRegistry {
     const curried_get_title = (subject) =>
       panel_def.get_title(subject, curried_memoized_calculate(subject));
 
-    const curried_get_data_set_keys = (subject) =>
-      panel_def.get_data_set_keys(subject, curried_memoized_calculate(subject));
+    const curried_get_dataset_keys = (subject) =>
+      panel_def.get_dataset_keys(subject, curried_memoized_calculate(subject));
 
-    const curried_get_datasource_keys = (subject) =>
-      panel_def.get_data_set_keys(
+    const curried_get_data_source_keys = (subject) =>
+      panel_def.get_dataset_keys(
         subject,
         curried_memoized_calculate(subject),
-        this.derive_datasources_from_data_sets(subject)
+        this.derive_data_sources_from_datasets(subject)
       );
 
     const curried_get_topic_keys = (subject) =>
       panel_def.get_topic_keys(
         subject,
         curried_memoized_calculate(subject),
-        this.derive_topic_keys_from_datasources_and_data_sets(subject)
+        this.derive_topic_keys_from_data_sources_and_datasets(subject)
       );
 
     const curried_render = (subject, options = {}) =>
@@ -123,8 +123,8 @@ export class PanelRegistry {
       // overwritten panel_def properties
       calculate: curried_memoized_calculate,
       get_title: curried_get_title,
-      get_data_set_keys: curried_get_data_set_keys,
-      get_datasource_keys: curried_get_datasource_keys,
+      get_dataset_keys: curried_get_dataset_keys,
+      get_data_source_keys: curried_get_data_source_keys,
       get_topic_keys: curried_get_topic_keys,
       render: curried_render,
 
@@ -167,7 +167,7 @@ export class PanelRegistry {
     return true;
   }
 
-  derive_datasources_from_data_sets(_subject) {
+  derive_data_sources_from_datasets(_subject) {
     return []; // TODO
   }
   get_source(subject) {
@@ -190,7 +190,7 @@ export class PanelRegistry {
     }
   }
 
-  derive_topic_keys_from_datasources_and_data_sets(_subject) {
+  derive_topic_keys_from_data_sources_and_datasets(_subject) {
     return []; // TODO
   }
   get footnote_concept_keys() {
