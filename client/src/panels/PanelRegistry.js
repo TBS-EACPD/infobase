@@ -149,7 +149,7 @@ export class PanelRegistry {
     if (
       this.subject_type === "dept" &&
       this.missing_info !== "ok" &&
-      _.some(this.tables, ({ depts }) => depts && depts[subject.id])
+      _.some(this.tables, ({ depts }) => depts && !depts[subject.id])
     ) {
       return false;
     }
