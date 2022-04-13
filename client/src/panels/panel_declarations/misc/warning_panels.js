@@ -47,7 +47,7 @@ const common_panel_config = {
 
 const dead_panel_config = {
   ...common_panel_config,
-  calculate: _.property("is_dead"),
+  calculate: ({ subject }) => subject.is_dead,
 };
 
 export const declare_dead_program_warning_panel = () =>
@@ -91,7 +91,7 @@ export const declare_m2m_tag_warning_panel = () =>
     panel_config_func: () => ({
       ...common_panel_config,
 
-      calculate: (subject) => {
+      calculate: ({ subject }) => {
         return subject.is_m2m;
       },
 
@@ -175,7 +175,7 @@ export const declare_late_results_warning_panel = () =>
           return {
             ...late_panel_config,
 
-            calculate: (subject) =>
+            calculate: ({ subject }) =>
               _.chain(docs_with_late_orgs)
                 .flatMap("late_results_orgs")
                 .includes(
@@ -229,7 +229,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
           return {
             ...late_panel_config,
 
-            calculate: (subject) =>
+            calculate: ({ subject }) =>
               _.includes(
                 late_orgs,
                 subject_type === "dept" ? subject.id : subject.dept.id

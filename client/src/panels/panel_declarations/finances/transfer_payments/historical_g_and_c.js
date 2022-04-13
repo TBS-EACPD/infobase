@@ -367,7 +367,7 @@ export const declare_historical_g_and_c_panel = () =>
           return {
             ...common_panel_config,
 
-            calculate: (_subject, tables) => {
+            calculate: ({ tables }) => {
               const { orgTransferPayments } = tables;
 
               const payments = orgTransferPayments.sum_cols_by_grouped_data(
@@ -425,7 +425,7 @@ export const declare_historical_g_and_c_panel = () =>
             ...common_panel_config,
             key: "historical_g_and_c",
             footnotes: ["SOBJ10"],
-            calculate: (subject, tables) => {
+            calculate: ({ subject, tables }) => {
               const { orgTransferPayments } = tables;
 
               const rolled_up_transfer_payments =

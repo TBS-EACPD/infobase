@@ -23,7 +23,7 @@ export const declare_profile_panel = () =>
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
       get_title: () => text_maker(`profile`),
-      calculate: (subject) => {
+      calculate: ({ subject }) => {
         switch (subject_type) {
           case "dept":
             return (
@@ -148,7 +148,7 @@ export const declare_description_panel = () =>
     subject_types: ["tag"],
     panel_config_func: () => ({
       footnotes: false,
-      calculate: (subject) => !_.isEmpty(subject.description),
+      calculate: ({ subject }) => !_.isEmpty(subject.description),
       get_title: () => text_maker("tag_desc_title"),
       render({ title, subject }) {
         return (

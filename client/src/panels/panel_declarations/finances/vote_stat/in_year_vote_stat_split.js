@@ -84,7 +84,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-            calculate: (subject, tables) => {
+            calculate: ({ subject, tables }) => {
               const { orgVoteStatEstimates } = tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
                 orgVoteStatEstimates,
@@ -108,7 +108,7 @@ export const declare_in_year_voted_stat_split_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
-            calculate: (subject, tables) => {
+            calculate: ({ subject, tables }) => {
               const { orgVoteStatEstimates } = tables;
               const vote_stat_est_in_year = get_vote_stat_est_in_year(
                 orgVoteStatEstimates,

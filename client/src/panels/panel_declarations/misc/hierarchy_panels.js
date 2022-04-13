@@ -32,7 +32,7 @@ export const declare_portfolio_structure_intro_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       get_title: () => text_maker("portfolio_structure_intro_title"),
-      calculate: (subject) => {
+      calculate: ({ subject }) => {
         return !_.isEmpty(subject.ministry);
       },
 
@@ -61,7 +61,7 @@ export const declare_portfolio_structure_related_panel = () =>
     panel_config_func: () => ({
       footnotes: false,
       get_title: () => text_maker("portfolio_structure_related_title"),
-      calculate: (subject) => {
+      calculate: ({ subject }) => {
         return !_.isEmpty(subject.programs);
       },
 

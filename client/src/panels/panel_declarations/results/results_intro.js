@@ -104,7 +104,7 @@ export const declare_results_intro_panel = () =>
           "departmental_results_reports",
         ]),
       get_title: () => text_maker("results_intro_title"),
-      calculate: (subject) => {
+      calculate: ({ subject }) => {
         const is_gov = subject.subject_type == "gov";
 
         const verbose_counts = (() => {

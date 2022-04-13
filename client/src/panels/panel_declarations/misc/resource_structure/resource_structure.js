@@ -18,7 +18,7 @@ export const declare_resource_structure_panel = () =>
       get_title: () => text_maker("resource_structure_title"),
       table_dependencies: ["programSpending", "programFtes"],
 
-      calculate: (subject, tables) => {
+      calculate: ({ subject, tables }) => {
         const { programSpending } = tables;
 
         const has_some_program_spending_for_year = (resource_year) =>

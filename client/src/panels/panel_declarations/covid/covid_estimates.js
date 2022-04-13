@@ -626,7 +626,7 @@ export const declare_covid_estimates_panel = () =>
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       table_dependencies: [],
       source: () => get_source_links(["covid"]),
-      calculate: function (subject) {
+      calculate: ({ subject }) => {
         const years_with_estimates =
           yearsWithCovidDataStore.has(subject.id) &&
           yearsWithCovidDataStore.lookup(subject.id).years_with_estimates;

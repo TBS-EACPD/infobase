@@ -18,7 +18,7 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
       table_dependencies: ["orgTransferPayments", "programSpending"],
       footnotes: ["SOBJ10"],
       get_title: () => text_maker("last_year_g_and_c_perspective_title"),
-      calculate: (subject, tables) => {
+      calculate: ({ subject, tables }) => {
         const { orgTransferPayments, programSpending } = tables;
 
         const exp_pa_last_year = "{{pa_last_year}}exp";

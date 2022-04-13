@@ -151,62 +151,64 @@ const planned_vote_or_stat_render = (vs) =>
     );
   };
 
-const planned_vote_or_stat_calculate = (vs) => (subject, tables) => {
-  const { orgVoteStatEstimates } = tables;
-  const { group_by_func, grouping_col_values_func } = orgVoteStatEstimates;
+const planned_vote_or_stat_calculate =
+  (vs) =>
+  ({ subject, tables }) => {
+    const { orgVoteStatEstimates } = tables;
+    const { group_by_func, grouping_col_values_func } = orgVoteStatEstimates;
 
-  const text = text_maker(vs);
+    const text = text_maker(vs);
 
-  const all_rows = _.chain(orgVoteStatEstimates.data)
-    .thru((data) => group_by_func(data, "vote_vs_stat"))
-    .map((data_group) => [
-      grouping_col_values_func(data_group[0], "vote_vs_stat")[1],
-      data_group,
-    ])
-    .fromPairs()
-    .get(text)
-    .groupBy("dept")
-    .flatMap((dept_group, dept) =>
-      _.chain(dept_group)
-        .groupBy("desc")
-        .map((desc_group, desc) => ({
-          dept,
-          desc,
-          [main_col]: _.reduce(
-            desc_group,
-            (memo, row) => memo + row[main_col],
-            0
-          ),
-        }))
-        .value()
-    )
-    .sortBy((x) => -x[main_col])
-    .value();
+    const all_rows = _.chain(orgVoteStatEstimates.data)
+      .thru((data) => group_by_func(data, "vote_vs_stat"))
+      .map((data_group) => [
+        grouping_col_values_func(data_group[0], "vote_vs_stat")[1],
+        data_group,
+      ])
+      .fromPairs()
+      .get(text)
+      .groupBy("dept")
+      .flatMap((dept_group, dept) =>
+        _.chain(dept_group)
+          .groupBy("desc")
+          .map((desc_group, desc) => ({
+            dept,
+            desc,
+            [main_col]: _.reduce(
+              desc_group,
+              (memo, row) => memo + row[main_col],
+              0
+            ),
+          }))
+          .value()
+      )
+      .sortBy((x) => -x[main_col])
+      .value();
 
-  const ret = {};
-  ret.data = _.take(all_rows, 10);
-  if (vs === "voted") {
-    //vote descriptions are of the form "<vote desc> - <vote num>"
-    //lets strip out the hyphen and everything that follows
-    ret.data.forEach((row) => (row.desc = row.desc.replace(/-.+$/, "")));
-  }
-  ret.data.push({
-    desc: text_maker(`all_other_${vs}_items`),
-    others: true,
-    [main_col]: sum(
-      _.takeRight(all_rows, all_rows.length - 10),
-      (d) => d[main_col]
-    ),
-  });
-  const voted_stat_est_in_year =
-    orgVoteStatEstimates.sum_cols_by_grouped_data(
-      main_col,
-      "vote_vs_stat",
-      subject
-    )[text] || 0;
+    const ret = {};
+    ret.data = _.take(all_rows, 10);
+    if (vs === "voted") {
+      //vote descriptions are of the form "<vote desc> - <vote num>"
+      //lets strip out the hyphen and everything that follows
+      ret.data.forEach((row) => (row.desc = row.desc.replace(/-.+$/, "")));
+    }
+    ret.data.push({
+      desc: text_maker(`all_other_${vs}_items`),
+      others: true,
+      [main_col]: sum(
+        _.takeRight(all_rows, all_rows.length - 10),
+        (d) => d[main_col]
+      ),
+    });
+    const voted_stat_est_in_year =
+      orgVoteStatEstimates.sum_cols_by_grouped_data(
+        main_col,
+        "vote_vs_stat",
+        subject
+      )[text] || 0;
 
-  return { ...ret, voted_stat_est_in_year };
-};
+    return { ...ret, voted_stat_est_in_year };
+  };
 
 const declare_in_year_voted_breakdown_panel = () =>
   declare_panel({
