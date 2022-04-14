@@ -379,12 +379,15 @@ const programs = {
   },
   query: (search_phrase) =>
     Promise.resolve(
-      _.filter(Program.store.get_all(), (program) =>
-        memoized_re_matchers(
-          search_phrase,
-          ["name", "old_name", "activity_code"],
-          "programs"
-        )(program)
+      _.filter(
+        Program.store.get_all(),
+        (program) =>
+          !program.is_fake &&
+          memoized_re_matchers(
+            search_phrase,
+            ["name", "old_name", "activity_code"],
+            "programs"
+          )(program)
       )
     ),
 };
