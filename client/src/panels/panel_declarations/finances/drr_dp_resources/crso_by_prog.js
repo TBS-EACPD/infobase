@@ -118,10 +118,17 @@ class PlannedProgramResources extends React.Component {
 
     const { active_programs } = this.state;
 
+    // merge programs with the same name; limitation of nivo being keyed by label while we have programs with reused names
     const graph_data = _.chain(programs)
       .filter(({ label }) => _.includes(active_programs, label))
-      .map(({ label, data }) => [label, data])
-      .fromPairs()
+      .groupBy("label")
+      .mapValues((programs) =>
+        _.chain(programs)
+          .map("data")
+          .thru((data_rows) => _.zip(...data_rows))
+          .map(_.sum)
+          .value()
+      )
       .value();
 
     //have to have an empty string in key to make sure
@@ -133,6 +140,16 @@ class PlannedProgramResources extends React.Component {
         .fromPairs()
         .value(),
     }));
+
+    const nivo_props = {
+      data: data_by_year,
+      padding: 0.3,
+      keys: Object.keys(graph_data),
+      indexBy: "year",
+      colors: (d) => colors(d.id),
+      is_money: !is_fte,
+    };
+
     const get_nivo_bar_graph = (gap_year_marker_x_px) => (
       <WrappedNivoBar
         {...{
@@ -154,16 +171,6 @@ class PlannedProgramResources extends React.Component {
         }}
       />
     );
-
-    const nivo_props = {
-      data: data_by_year,
-      padding: 0.3,
-      keys: Object.keys(graph_data),
-      indexBy: "year",
-      colors: (d) => colors(d.id),
-      is_money: !is_fte,
-    };
-
     return (
       <div>
         <div className="medium-panel-text mrgn-bttm-lg">{text}</div>

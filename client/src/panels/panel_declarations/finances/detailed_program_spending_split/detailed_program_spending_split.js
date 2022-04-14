@@ -76,7 +76,6 @@ class HistoricalProgramBars extends React.Component {
     const colors = scaleOrdinal().range(
       _.concat(newIBLightCategoryColors, newIBDarkCategoryColors)
     );
-    const all_keys = _.map(data, "id");
 
     const custom_table_data = _.chain(data)
       .filter(({ id }) => _.includes(selected, id))
@@ -86,21 +85,27 @@ class HistoricalProgramBars extends React.Component {
       }))
       .value();
 
-    const processed_data = _.chain(data)
+    // merge programs with the same name; limitation of nivo being keyed by label while we have programs with reused names
+    const filtered_data_merged_by_program_name = _.chain(data)
       .filter(({ id }) => _.includes(selected, id))
-      .map(({ label, data }) => [label, data])
-      .fromPairs()
+      .groupBy("label")
+      .mapValues((programs) =>
+        _.chain(programs)
+          .map("data")
+          .thru((data_rows) => _.zip(...data_rows))
+          .map(_.sum)
+          .value()
+      )
       .value();
 
-    //have to have an empty string in key to make sure
-    //that negative bars will be displayed
     const graph_data = _.map(ticks, (year, year_index) => ({
       year,
-      ..._.chain(processed_data)
-        .map((data, label) => [label, data[year_index]])
-        .fromPairs()
-        .value(),
+      ..._.mapValues(
+        filtered_data_merged_by_program_name,
+        (data) => data[year_index]
+      ),
     }));
+
     const column_configs = {
       label: {
         index: 0,
@@ -168,7 +173,9 @@ class HistoricalProgramBars extends React.Component {
               Controls={
                 <SelectAllControl
                   key="SelectAllControl"
-                  SelectAllOnClick={() => this.setState({ selected: all_keys })}
+                  SelectAllOnClick={() =>
+                    this.setState({ selected: _.map(data, "id") })
+                  }
                   SelectNoneOnClick={() => this.setState({ selected: [] })}
                 />
               }
@@ -178,7 +185,7 @@ class HistoricalProgramBars extends React.Component {
             <GraphOverlay>
               <WrappedNivoBar
                 data={graph_data}
-                keys={Object.keys(processed_data)}
+                keys={Object.keys(filtered_data_merged_by_program_name)}
                 indexBy="year"
                 colors={(d) => colors(d.id)}
                 margin={{
