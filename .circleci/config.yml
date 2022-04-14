@@ -224,7 +224,7 @@ jobs:
       - restore_cache:
           keys:
             # the trailing - means CircleCI will use the latest key matching up to that point
-            - webpack-caches-v5-{{ .Branch }}-
+            - webpack-caches-v6-{{ .Branch }}-
 
       - restore_cache:
           keys:
@@ -238,7 +238,7 @@ jobs:
             - client/build
 
       - save_cache:
-          key: webpack-caches-v5-{{ .Branch }}-{{ .Revision }}
+          key: webpack-caches-v6-{{ .Branch }}-{{ .Revision }}
           paths:
             - client/node_modules/.cache/webpack
             - client/node_modules/.cache/babel-loader
