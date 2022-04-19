@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 import { InView } from "react-intersection-observer";
-import "intersection-observer";
 import ReactResizeDetector from "react-resize-detector";
 
 import { create_text_maker } from "src/models/text";

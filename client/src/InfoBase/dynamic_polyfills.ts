@@ -59,7 +59,13 @@ async function intl_numberformat() {
 
 async function resize_observer() {
   if (!window.ResizeObserver) {
-    import("resize-observer").then(({ install }) => install());
+    await import("resize-observer").then(({ install }) => install());
+  }
+}
+
+async function intersection_observer() {
+  if (!window.IntersectionObserver) {
+    await import("intersection-observer");
   }
 }
 
@@ -72,4 +78,5 @@ export const dynamic_polyfills = () =>
     intl_pluralrules(),
     intl_numberformat(),
     resize_observer(),
+    intersection_observer(),
   ]);
