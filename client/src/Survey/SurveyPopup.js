@@ -20,79 +20,48 @@ import text from "./SurveyPopup.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
+const currentDate = new Date();
+
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
 
-const miliseconds_in_five_minutes = 60 * 5 * 1000;
-const miliseconds_in_a_quarter = 60 * 60 * 24 * (365 / 4) * 1000;
-const miliseconds_in_a_half_year = miliseconds_in_a_quarter * 2;
-
-const should_reset_local_storage = () => {
-  const is_deactivated = localStorage.getItem(
-    `infobase_survey_popup_deactivated`
-  );
-
-  const postponed_since = localStorage.getItem(
-    `infobase_survey_popup_postponed_since`
-  );
-  const stale_postponement =
-    postponed_since &&
-    Date.now() - postponed_since > miliseconds_in_five_minutes;
-
-  const deactivated_since = localStorage.getItem(
-    `infobase_survey_popup_deactivated_since`
-  );
-  const stale_deactivation =
-    deactivated_since &&
-    Date.now() - deactivated_since > miliseconds_in_a_half_year;
-
-  return is_deactivated && (stale_postponement || stale_deactivation);
-};
-
-const reset_local_storage = () => {
-  localStorage.removeItem("infobase_survey_popup_page_visited");
-  localStorage.removeItem("infobase_survey_popup_deactivated");
-  localStorage.removeItem("infobase_survey_popup_deactivated_since");
-};
-
-const get_state_defaults = () => {
-  const default_active = true;
-  const default_page_visited = 1;
-
-  const local_storage_deactivated = localStorage.getItem(
-    `infobase_survey_popup_deactivated`
-  );
-  const local_storage_page_visited = localStorage.getItem(
-    `infobase_survey_popup_page_visited`
-  );
-
-  // localStorage is all strings, note that we cast the values read from it to a boolean and a number below
-  return {
-    active: !_.isNull(local_storage_deactivated)
-      ? !local_storage_deactivated
-      : default_active,
-    page_visited: !_.isNull(local_storage_page_visited)
-      ? +local_storage_page_visited
-      : default_page_visited,
-  };
-};
-
-const is_survey_campaign_active = () => {
+const is_survey_campaign_ongoing = () => {
   if (is_dev || is_dev_link) {
     return false;
   }
 
-  const currentDate = new Date();
-
   // Reminder: months are 0-indexed, years and days aren't
-  const is_start_of_new_trimester = _.includes(
-    [0, 4, 8],
-    currentDate.getMonth()
-  );
+  const is_start_of_trimester = _.includes([0, 4, 8], currentDate.getMonth());
 
   const is_second_half_of_month = currentDate.getDate() > 14;
 
-  return is_start_of_new_trimester && is_second_half_of_month;
+  return is_start_of_trimester && is_second_half_of_month;
+};
+
+const key_suffix = `--${currentDate.getFullYear()}-${currentDate.getMonth()}`;
+const postponed_since_storage_key =
+  "infobase_survey_popup_postponed_since" + key_suffix;
+const is_deactivated_storage_key =
+  "infobase_survey_popup_deactivated" + key_suffix;
+const page_visit_count_storage_key =
+  "infobase_survey_popup_page_visit_count" + key_suffix;
+
+const get_state_defaults = () => {
+  const postponed_since = localStorage.getItem(postponed_since_storage_key);
+  const is_deactivated = localStorage.getItem(is_deactivated_storage_key);
+  const page_visit_count = localStorage.getItem(page_visit_count_storage_key);
+
+  const milliseconds_in_a_day = 1000 * 60 * 60 * 24;
+  const is_currently_postponed = !_.isNull(postponed_since)
+    ? Date.now() - +postponed_since >= milliseconds_in_a_day
+    : false;
+
+  return {
+    active:
+      !is_currently_postponed &&
+      (!_.isNull(is_deactivated) ? is_deactivated !== "true" : true),
+    page_visit_count: !_.isNull(page_visit_count) ? +page_visit_count : 1,
+  };
 };
 
 export const SurveyPopup = withRouter(
@@ -105,37 +74,29 @@ export const SurveyPopup = withRouter(
           this.state.active &&
           this.state.previous_path_root !== get_path_root(pathname)
         ) {
-          const new_page_visited = this.state.page_visited + 1;
+          const new_page_visit_count = this.state.page_visit_count + 1;
 
           localStorage.setItem(
-            `infobase_survey_popup_page_visited`,
-            new_page_visited
+            page_visit_count_storage_key,
+            new_page_visit_count
           );
 
           this.setState({
-            page_visited: new_page_visited,
+            page_visit_count: new_page_visit_count,
             previous_path_root: get_path_root(pathname),
           });
         }
       });
 
-      if (should_reset_local_storage()) {
-        reset_local_storage();
-      }
-
-      const { active, page_visited } = get_state_defaults();
-
-      this.timeout = setTimeout(() => {
-        this.setState({ show_popup: true });
-      }, miliseconds_in_five_minutes);
+      const { active, page_visit_count } = get_state_defaults();
 
       this.state = {
         active: active,
-        page_visited: page_visited,
+        page_visit_count: page_visit_count,
         previous_path_root: null,
-        show_popup: false,
       };
     }
+
     handleButtonPress = (button_type) => {
       log_standard_event({
         SUBAPP: window.location.hash.replace("#", "") || "start",
@@ -143,21 +104,15 @@ export const SurveyPopup = withRouter(
         MISC2: `interaction: ${button_type}`,
       });
 
-      localStorage.setItem(`infobase_survey_popup_deactivated`, "true");
       if (_.includes(["yes", "no", "short_survey_submitted"], button_type)) {
-        localStorage.setItem(
-          `infobase_survey_popup_deactivated_since`,
-          Date.now()
-        );
+        localStorage.setItem(is_deactivated_storage_key, "true");
       } else if (button_type === "later") {
-        localStorage.setItem(
-          `infobase_survey_popup_postponed_since`,
-          Date.now()
-        );
+        localStorage.setItem(postponed_since_storage_key, Date.now());
       }
 
-      this.setState({ active: false, show_popup: false });
+      this.setState({ active: false });
     };
+
     static getDerivedStateFromProps(props) {
       if (props.showSurvey) {
         return { active: false };
@@ -165,20 +120,20 @@ export const SurveyPopup = withRouter(
 
       return null;
     }
-    shouldComponentUpdate(nextProps, nextState) {
-      const page_changed = this.state.page_visited !== nextState.page_visited;
-      const is_closing = this.state.active !== nextState.active;
-      const state_show_popup = this.state.show_popup !== nextState.show_popup;
 
-      return page_changed || is_closing || state_show_popup;
+    shouldComponentUpdate(_nextProps, nextState) {
+      const page_changed =
+        this.state.page_visit_count !== nextState.page_visit_count;
+      const is_closing = this.state.active !== nextState.active;
+
+      return page_changed || is_closing;
     }
+
     render() {
-      const { active, page_visited, show_popup } = this.state;
+      const { active, page_visit_count } = this.state;
 
       const should_show =
-        is_survey_campaign_active() &&
-        (page_visited >= 3 || show_popup) &&
-        active;
+        is_survey_campaign_ongoing() && active && page_visit_count >= 4;
 
       if (should_show) {
         clearTimeout(this.timeout);
@@ -188,6 +143,8 @@ export const SurveyPopup = withRouter(
           MISC1: "SURVEY_POPUP",
           MISC2: "displayed",
         });
+      } else {
+        return null;
       }
 
       return (
