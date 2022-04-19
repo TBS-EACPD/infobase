@@ -7,7 +7,7 @@ export IS_ACTUAL_PROD_RELEASE="true"
 export BUILD_DIR="build_prod"
 export CDN_URL="https://cdn-rdc.ea-ad.ca/InfoBase"
 
-export PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha)
+export PREVIOUS_DEPLOY_SHA=$(curl --fail $CDN_URL/build_sha.txt)
 
 export GCLOUD_BUCKET="gs://cdn-rdc.ea-ad.ca"
 export STAGING_BUCKET="$GCLOUD_BUCKET/staging"
