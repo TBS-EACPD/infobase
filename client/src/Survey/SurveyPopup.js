@@ -20,14 +20,13 @@ import text from "./SurveyPopup.yaml";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
-const page_visit_increment = 1;
-const survey_campaign_end_date = new Date(2022, 2, 1).getTime(); // Reminder: months are 0-indexed, years and days aren't
-
 const get_path_root = (path) =>
   _.chain(path).replace(/^\//, "").split("/").first().value();
 
 const miliseconds_in_five_minutes = 60 * 5 * 1000;
-const miliseconds_in_a_half_year = 60 * 60 * 24 * (365 / 2) * 1000;
+const miliseconds_in_a_quarter = 60 * 60 * 24 * (365 / 4) * 1000;
+const miliseconds_in_a_half_year = miliseconds_in_a_quarter * 2;
+
 const should_reset_local_storage = () => {
   const is_deactivated = localStorage.getItem(
     `infobase_survey_popup_deactivated`
@@ -78,8 +77,23 @@ const get_state_defaults = () => {
   };
 };
 
-const is_survey_campaign_over = () =>
-  Date.now() > survey_campaign_end_date || is_dev || is_dev_link;
+const is_survey_campaign_active = () => {
+  if (is_dev || is_dev_link) {
+    return false;
+  }
+
+  const currentDate = new Date();
+
+  // Reminder: months are 0-indexed, years and days aren't
+  const is_start_of_new_trimester = _.includes(
+    [0, 4, 8],
+    currentDate.getMonth()
+  );
+
+  const is_second_half_of_month = currentDate.getDate() > 14;
+
+  return is_start_of_new_trimester && is_second_half_of_month;
+};
 
 export const SurveyPopup = withRouter(
   class _SurveyPopup extends React.Component {
@@ -91,8 +105,7 @@ export const SurveyPopup = withRouter(
           this.state.active &&
           this.state.previous_path_root !== get_path_root(pathname)
         ) {
-          const new_page_visited =
-            this.state.page_visited + page_visit_increment;
+          const new_page_visited = this.state.page_visited + 1;
 
           localStorage.setItem(
             `infobase_survey_popup_page_visited`,
@@ -114,7 +127,7 @@ export const SurveyPopup = withRouter(
 
       this.timeout = setTimeout(() => {
         this.setState({ show_popup: true });
-      }, 180000);
+      }, miliseconds_in_five_minutes);
 
       this.state = {
         active: active,
@@ -163,7 +176,7 @@ export const SurveyPopup = withRouter(
       const { active, page_visited, show_popup } = this.state;
 
       const should_show =
-        !is_survey_campaign_over() &&
+        is_survey_campaign_active() &&
         (page_visited >= 3 || show_popup) &&
         active;
 
