@@ -204,6 +204,7 @@ class InteractiveGraph extends React.Component {
                 zIndex: 999,
               }}
               onClick={() => this.setState({ show_table: !show_table })}
+              title={nivo_common_text_maker("show_table")}
             >
               <IconTable
                 aria_label={nivo_common_text_maker("show_table")}
