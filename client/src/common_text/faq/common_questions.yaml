@@ -6,13 +6,13 @@ different_org_names_q:
 different_org_names_a:
   transform: [handlebars, markdown]
   en: |
-    {{#isEqual subject.applied_title subject.legal_title}}{{else}}**{{subject.applied_title}} / {{subject.legal_title}}**{{/isEqual}}
+    {{#isEqual subject.applied_title subject.legal_title}}{{else}}{{#if subject.applied_title}}**{{subject.applied_title}} / {{subject.legal_title}}**{{/if}}{{/isEqual}}
 
     In some cases, an organization may be referred to by two different names—an applied title and a legal title. The applied title is used in communications material and is therefore the name that most people associate with the organization. An organization’s legal title is the name that appears in its enabling legislation (act), proclamation, order in council, or other instrument used to create a federal organization.
 
     Applied and legal titles are not always different. When there is a difference, GC InfoBase favours the applied title over the legal title so as to better service the public. Note that some of the data sources for GC InfoBase, such as Main Estimates and Public Accounts, are always presented by legal title in their original publication.
   fr: |
-    {{#isEqual subject.applied_title subject.legal_title}}{{else}}**{{subject.applied_title}} / {{subject.legal_title}}**{{/isEqual}}
+    {{#isEqual subject.applied_title subject.legal_title}}{{else}}{{#if subject.applied_title}}**{{subject.applied_title}} / {{subject.legal_title}}**{{/if}}{{/isEqual}}
 
     Dans certains cas, une organisation peut être désignée par deux noms différents : un titre d'usage et un titre légal. Le titre d'usage est utilisé dans les documents de communication et est donc le nom que la plupart des gens associent à l'organisation. Le titre légal d'une organisation est le nom qui apparaît dans sa loi d'habilitation (loi), sa proclamation, son décret ou tout autre instrument utilisé pour créer une organisation fédérale.
 
