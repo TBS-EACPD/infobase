@@ -68,7 +68,7 @@ export class SurveyPopup extends React.Component {
 
   handlePopupButtonPress = (button_type) => {
     log_standard_event({
-      SUBAPP: this.props.location.pathname,
+      SUBAPP: window.location.pathname,
       MISC1: "SURVEY_POPUP",
       MISC2: `interaction: ${button_type}`,
     });
@@ -89,12 +89,6 @@ export class SurveyPopup extends React.Component {
     if (!show_popup) {
       return null;
     }
-
-    log_standard_event({
-      SUBAPP: this.props.location.pathname,
-      MISC1: "SURVEY_POPUP",
-      MISC2: "displayed",
-    });
 
     return (
       <FixedPopover
