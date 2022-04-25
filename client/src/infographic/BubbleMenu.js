@@ -41,38 +41,66 @@ const BubbleMenu = ({ items, active_item_id }) => {
       </nav>
     );
   } else {
-    return (
-      <div style={{ position: "relative" }}>
-        <nav className="bubble-menu">
-          {_.map(items, ({ id, title, description, href, Icon }) => (
-            <a
-              className={classNames(
-                "centerer bubble-button",
-                id === active_item_id && "active"
-              )}
-              href={href}
+    if (items.length === 1) {
+      return (
+        <>
+          {_.map(items, ({ id, title, Icon }) => (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "10px",
+              }}
               key={id}
             >
-              <div className="bub-item">
-                <strong className="title">{title}</strong>
-                <div className="bub-svg" title={description}>
-                  {Icon && (
-                    <Icon
-                      alternate_color={false}
-                      width="90%"
-                      heigth="100%"
-                      color={
-                        id === active_item_id ? backgroundColor : primaryColor
-                      }
-                    />
-                  )}
-                </div>
-              </div>
-            </a>
+              {Icon && (
+                <Icon
+                  key={id}
+                  alternate_color={false}
+                  width="30px"
+                  color={primaryColor}
+                />
+              )}
+
+              <h2 style={{ margin: 0, marginLeft: "5px" }}>{title}</h2>
+            </div>
           ))}
-        </nav>
-      </div>
-    );
+        </>
+      );
+    } else {
+      return (
+        <div style={{ position: "relative" }}>
+          <nav className="bubble-menu">
+            {_.map(items, ({ id, title, description, href, Icon }) => (
+              <a
+                className={classNames(
+                  "centerer bubble-button",
+                  id === active_item_id && "active"
+                )}
+                href={href}
+                key={id}
+              >
+                <div className="bub-item">
+                  <strong className="title">{title}</strong>
+                  <div className="bub-svg" title={description}>
+                    {Icon && (
+                      <Icon
+                        alternate_color={false}
+                        width="90%"
+                        heigth="100%"
+                        color={
+                          id === active_item_id ? backgroundColor : primaryColor
+                        }
+                      />
+                    )}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </nav>
+        </div>
+      );
+    }
   }
 };
 
