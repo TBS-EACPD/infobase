@@ -151,7 +151,13 @@ export class SurveyPopup extends React.Component {
           </Fragment>
         }
         footer={
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-evenly",
+            }}
+          >
             {_.map(["later", "no"], (button_type) => (
               <button
                 key={button_type}
