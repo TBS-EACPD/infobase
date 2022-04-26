@@ -166,18 +166,85 @@ export class PanelRegistry {
   derive_data_source_keys_from_datasets(_subject) {
     return []; // TODO
   }
-  get_source_links(_subject) {
-    const data_source_links = _.map(this.source, get_source_links);
+  get_source_links(subject) {
+    const legacy_api_data_source_keys = this.source;
 
-    const dataset_links = _.map(
+    const new_api_api_data_source_keys = this.get_data_source_keys(subject);
+
+    const new_api_data_source_keys = _.difference(
+      new_api_api_data_source_keys,
+      legacy_api_data_source_keys
+    );
+    if (!_.isEmpty(new_api_data_source_keys)) {
+      console.warn(
+        `Panel ${
+          this.full_key
+        }'s new data source key api includes additional keys not found in the legacy api. This may be correct? ${_.join(
+          new_api_data_source_keys,
+          ", "
+        )}`
+      );
+    }
+
+    const missing_data_source_keys = _.difference(
+      legacy_api_data_source_keys,
+      new_api_api_data_source_keys
+    );
+    if (!_.isEmpty(missing_data_source_keys)) {
+      console.warn(
+        `Panel ${
+          this.full_key
+        }'s new data source key api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
+          missing_data_source_keys,
+          ", "
+        )}`
+      );
+    }
+
+    const legacy_api_dataset_keys = _.map(
       this.tables,
-      ({ data_set: { name, infobase_link } }) => ({
-        html: name,
-        href: infobase_link,
-      })
+      ({ data_set: { key } }) => key
     );
 
-    return [...data_source_links, ...dataset_links];
+    const new_api_dataset_keys = this.get_dataset_keys(subject);
+
+    const new_data_set_keys = _.difference(
+      new_api_dataset_keys,
+      legacy_api_dataset_keys
+    );
+    if (!_.isEmpty(new_data_set_keys)) {
+      console.warn(
+        `Panel ${
+          this.full_key
+        }'s new data set key api includes additional keys not found in the legacy api. This may be correct? ${_.join(
+          new_data_set_keys,
+          ", "
+        )}`
+      );
+    }
+
+    const missing_data_set_keys = _.difference(
+      legacy_api_dataset_keys,
+      new_api_dataset_keys
+    );
+    if (!_.isEmpty(missing_data_set_keys)) {
+      console.warn(
+        `Panel ${
+          this.full_key
+        }'s new data set key api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
+          missing_data_set_keys,
+          ", "
+        )}`
+      );
+    }
+
+    return [
+      ..._.map(legacy_api_data_source_keys, get_source_links),
+      ..._.map(this.tables, ({ data_set: { name, infobase_link } }) => ({
+        html: name,
+        href: infobase_link,
+      })),
+    ];
   }
 
   derive_topic_keys_from_data_sources_and_datasets(_subject) {
@@ -210,7 +277,7 @@ export class PanelRegistry {
       console.warn(
         `Panel ${
           this.full_key
-        }'s new footnote topic api includes additional keys not found in the legacy api. This may be correct thing? ${_.join(
+        }'s new footnote topic api includes additional keys not found in the legacy api. This may be correct? ${_.join(
           new_keys,
           ", "
         )}`
@@ -229,9 +296,7 @@ export class PanelRegistry {
       );
     }
 
-    return _.chain(
-      get_footnotes_by_subject_and_topic(subject, this.get_topic_keys(subject))
-    )
+    return _.chain(get_footnotes_by_subject_and_topic(subject, legacy_api_keys))
       .uniqBy("text")
       .compact()
       .value();
