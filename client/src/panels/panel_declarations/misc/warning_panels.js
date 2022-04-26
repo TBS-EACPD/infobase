@@ -117,7 +117,6 @@ export const declare_m2m_tag_warning_panel = () =>
 
 const late_panel_config = {
   ...common_panel_config,
-  source: false,
 };
 
 export const declare_late_results_warning_panel = () =>

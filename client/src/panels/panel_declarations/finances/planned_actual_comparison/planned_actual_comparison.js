@@ -9,8 +9,6 @@ import { create_text_maker_component } from "src/components/index";
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import { PlannedActualTable } from "./PlannedActualTable";
 
 import text from "./planned_actual_comparison.yaml";
@@ -24,12 +22,11 @@ export const declare_planned_actual_comparison_panel = () =>
     panel_config_func: () => ({
       table_dependencies: ["programSpending", "programFtes"],
       get_title: () => text_maker("planned_actual_title"),
-      source: () =>
-        get_source_links([
-          "departmental_plans",
-          "departmental_results_reports",
-          "public_accounts",
-        ]),
+      source: [
+        "departmental_plans",
+        "departmental_results_reports",
+        "public_accounts",
+      ],
       calculate: ({ subject, tables }) => {
         if (subject.subject_type === "dept") {
           if (

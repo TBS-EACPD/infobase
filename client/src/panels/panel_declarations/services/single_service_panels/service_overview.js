@@ -20,7 +20,6 @@ import { Dept, Program } from "src/models/subjects";
 
 import { formats } from "src/core/format";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { infographic_href_template } from "src/link_utils";
 
 import "src/panels/panel_declarations/services/services.scss";
@@ -179,7 +178,7 @@ export const declare_single_service_overview_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("service_overview_title"),
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <ServiceOverview service={subject} title={title} sources={sources} />

@@ -11,8 +11,6 @@ import { Dept } from "src/models/subjects";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import { get_static_url } from "src/request_utils";
 
 import {
@@ -98,11 +96,7 @@ export const declare_results_intro_panel = () =>
       requires_result_counts: subject_type === "gov",
       requires_granular_result_counts: subject_type !== "gov",
       footnotes: ["RESULTS", "DRR", "DP"],
-      source: () =>
-        get_source_links([
-          "departmental_plans",
-          "departmental_results_reports",
-        ]),
+      source: ["departmental_plans", "departmental_results_reports"],
       get_title: () => text_maker("results_intro_title"),
       calculate: ({ subject }) => {
         const is_gov = subject.subject_type == "gov";

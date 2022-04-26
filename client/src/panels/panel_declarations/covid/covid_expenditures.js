@@ -19,7 +19,6 @@ import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStor
 import { Dept } from "src/models/subjects";
 
 import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { minLargeDevice } from "src/style_constants/index";
 
@@ -421,7 +420,7 @@ export const declare_covid_expenditures_panel = () =>
       requires_covid_measures: true,
       get_title: () => text_maker("covid_expenditures_estimated_exp"),
       footnotes: ["COVID", "COVID_EXP", "COVID_MEASURE"],
-      source: () => get_source_links(["covid"]),
+      source: ["covid"],
       calculate: ({ subject }) => {
         const years_with_expenditures = yearsWithCovidDataStore.lookup(
           subject.id

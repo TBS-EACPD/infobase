@@ -15,8 +15,6 @@ import { LeafSpinner } from "src/components/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import ResultsExplorer from "./results_scheme";
 
 class SingleSubjResultsContainer extends React.Component {
@@ -108,11 +106,7 @@ export const declare_explore_results_panel = () =>
     panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR", "DP"],
       table_dependencies: ["programSpending", "programFtes"],
-      source: () =>
-        get_source_links([
-          "departmental_plans",
-          "departmental_results_reports",
-        ]),
+      source: ["departmental_plans", "departmental_results_reports"],
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       calculate: ({ subject }) => {

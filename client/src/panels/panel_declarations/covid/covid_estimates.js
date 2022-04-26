@@ -29,7 +29,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { toggle_list } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
@@ -625,7 +624,7 @@ export const declare_covid_estimates_panel = () =>
       get_title: () => text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
       table_dependencies: [],
-      source: () => get_source_links(["covid"]),
+      source: ["covid"],
       calculate: ({ subject }) => {
         const years_with_estimates =
           yearsWithCovidDataStore.has(subject.id) &&

@@ -9,8 +9,6 @@ import { LeafSpinner } from "src/components/index";
 import { query_gov_covid_summaries } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import { YearSelectionTabs } from "./covid_common_components";
 import {
   get_date_last_updated_text,
@@ -126,7 +124,7 @@ export const declare_covid_intro_panel = () =>
       requires_years_with_covid_data: true,
       footnotes: ["COVID"],
       get_title: () => text_maker("covid_intro_panel_title"),
-      source: () => get_source_links(["covid"]),
+      source: ["covid"],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
       render: ({ title, calculations, footnotes, sources, glossary_keys }) => (

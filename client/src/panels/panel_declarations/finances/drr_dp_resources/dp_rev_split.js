@@ -13,7 +13,6 @@ import {
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { textGreen, textRed } from "src/style_constants/index";
 
 import text from "./dp_rev_split.yaml";
@@ -55,7 +54,7 @@ export const declare_dp_rev_split_panel = () =>
       machinery_footnotes: false,
       footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],
-      source: () => get_source_links(["departmental_plans"]),
+      source: ["departmental_plans"],
       calculate: ({ subject, tables }) => {
         const { programSpending } = tables;
         const q = programSpending.q(subject);

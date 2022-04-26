@@ -4,7 +4,7 @@ import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnot
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
-import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
+import { get_source_links } from "src/DatasetsRoute/utils";
 import { Table } from "src/tables/TableClass";
 
 const panel_store = {};
@@ -113,7 +113,7 @@ export class PanelRegistry {
           subject,
           calculations: this.calculate(subject),
           title: this.get_title(subject),
-          sources: this.get_source(subject),
+          sources: this.get_source_links(subject),
           footnotes: this.get_footnotes(subject),
           glossary_keys: this.glossary_keys,
         },
@@ -166,24 +166,18 @@ export class PanelRegistry {
   derive_data_source_keys_from_datasets(_subject) {
     return []; // TODO
   }
-  get_source(subject) {
-    if (this.source === false) {
-      return [];
-    }
-    if (_.isFunction(this.source)) {
-      return this.source(subject);
-    } else {
-      return _.map(this.tables, (table) => {
-        return {
-          html: table.name,
-          href: rpb_link({
-            subject: get_appropriate_rpb_subject(subject).guid,
-            table: table.id,
-            mode: "details",
-          }),
-        };
-      });
-    }
+  get_source_links(_subject) {
+    const data_source_links = _.map(this.source, get_source_links);
+
+    const dataset_links = _.map(
+      this.tables,
+      ({ data_set: { name, infobase_link } }) => ({
+        html: name,
+        href: infobase_link,
+      })
+    );
+
+    return [...data_source_links, ...dataset_links];
   }
 
   derive_topic_keys_from_data_sources_and_datasets(_subject) {
@@ -191,14 +185,12 @@ export class PanelRegistry {
   }
   get_footnotes(subject) {
     const legacy_api_keys = (() => {
-      if (this.footnotes === false) {
-        return [];
-      } else if (_.isArray(this.footnotes)) {
+      if (_.isArray(this.footnotes)) {
         return _.chain(this.footnotes)
           .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
           .uniqBy()
           .value();
-      } else {
+      } else if (this.tables) {
         return _.chain(this.tables)
           .map("tags")
           .compact()
@@ -206,6 +198,8 @@ export class PanelRegistry {
           .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
           .uniqBy()
           .value();
+      } else {
+        return [];
       }
     })();
 

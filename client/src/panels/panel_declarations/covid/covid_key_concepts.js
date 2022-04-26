@@ -27,7 +27,6 @@ export const declare_covid_key_concepts_panel = () =>
     panel_config_func: () => ({
       is_meta_panel: true,
       footnotes: false,
-      source: false,
       get_title: _.constant(false),
       calculate: _.constant(true),
       render: () => (

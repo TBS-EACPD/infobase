@@ -16,7 +16,6 @@ import {
   useServicesByProgram,
 } from "src/models/services/services_queries";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import text from "./services.yaml";
@@ -141,7 +140,7 @@ export const declare_provided_services_list_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("list_of_provided_services_title"),
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>
