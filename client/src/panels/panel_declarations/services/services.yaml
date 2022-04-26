@@ -251,8 +251,8 @@ most_used_phone_application_count:
   fr: |
     **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes par téléphone**; la plupart des clients ont ont préféré présenter leur demande par téléphone.
 no_applications:
-  en: This service did not receive any applications
-  fr: Ce service n'a reçu aucune demande
+  en: This service did not receive any applications. Not all services require, accept or record the quantity of applications.
+  fr: Ce service n'a reçu aucune candidature. Tous les services n'exigent, n'acceptent ou n'enregistrent pas la quantité de demandes.
 live_application_count:
   en: In person applications
   fr: Demandes en personne
