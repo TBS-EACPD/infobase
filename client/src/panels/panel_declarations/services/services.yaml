@@ -366,11 +366,11 @@ last_accessibility_review:
   en: Last accessibility review
   fr: SI_TODO
 last_improve_from_feedback:
-  en: Last improve from feedback
-  fr: SI_TODO
+  en: Last service improvement based on feedback
+  fr: Dernière amélioration du service fondée sur les commentaires
 last_gender_analysis:
-  en: Last gender analysis
-  fr: SI_TODO
+  en: Last GBA+ completed
+  fr: Dernière ACS+ menée
 
 # Standard
 services_standards_text:
