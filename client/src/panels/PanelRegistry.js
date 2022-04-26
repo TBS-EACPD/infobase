@@ -116,7 +116,7 @@ export class PanelRegistry {
           subject,
           calculations: this.calculate(subject),
           title: this.get_title(subject),
-          sources: this.get_source_links(subject),
+          sources: this.sources(subject),
           footnotes: this.get_footnotes(subject),
           glossary_keys: this.glossary_keys,
         },
@@ -178,7 +178,7 @@ export class PanelRegistry {
   get_datasources(subject) {
     return _.map(this.get_data_source_keys(subject), (key) => DataSources[key]);
   }
-  get_source_links(subject) {
+  sources(subject) {
     const legacy_api_data_source_keys = this.source;
 
     const new_api_api_data_source_keys = this.get_data_source_keys(subject);
@@ -251,7 +251,7 @@ export class PanelRegistry {
     }
 
     return [
-      ..._.map(legacy_api_data_source_keys, get_source_links),
+      ...get_source_links(legacy_api_data_source_keys),
       ..._.map(this.tables, ({ data_set: { name, infobase_link } }) => ({
         html: name,
         href: infobase_link,
