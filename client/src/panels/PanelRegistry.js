@@ -2,6 +2,9 @@ import _ from "lodash";
 
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
+import { Datasets } from "src/models/metadata/Datasets";
+import { DataSources } from "src/models/metadata/DataSources";
+
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
 import { get_source_links } from "src/DatasetsRoute/utils";
@@ -163,8 +166,17 @@ export class PanelRegistry {
     return true;
   }
 
-  derive_data_source_keys_from_datasets(_subject) {
-    return []; // TODO
+  get_datasets(subject) {
+    return _.map(this.get_dataset_keys(subject), (key) => Datasets[key]);
+  }
+  derive_data_source_keys_from_datasets(subject) {
+    return _.chain(this.get_datasets(subject))
+      .flatMap("source_keys")
+      .uniq()
+      .value();
+  }
+  get_datasources(subject) {
+    return _.map(this.get_data_source_keys(subject), (key) => DataSources[key]);
   }
   get_source_links(subject) {
     const legacy_api_data_source_keys = this.source;
@@ -247,8 +259,20 @@ export class PanelRegistry {
     ];
   }
 
-  derive_topic_keys_from_data_sources_and_datasets(_subject) {
-    return []; // TODO
+  derive_topic_keys_from_data_sources_and_datasets(subject) {
+    const dataset_topic_keys = _.flatMap(
+      this.get_datasets(subject),
+      "topic_keys"
+    );
+    const datasource_topic_keys = _.flatMap(
+      this.get_datasources(subject),
+      "topic_key"
+    );
+    return _.uniq([
+      ...dataset_topic_keys,
+      ...datasource_topic_keys,
+      ...(this.machinery_footnotes ? ["MACHINERY"] : []),
+    ]);
   }
   get_footnotes(subject) {
     const legacy_api_keys = (() => {
