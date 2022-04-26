@@ -189,29 +189,54 @@ export class PanelRegistry {
   derive_topic_keys_from_data_sources_and_datasets(_subject) {
     return []; // TODO
   }
-  get footnote_concept_keys() {
-    if (this.footnotes === false) {
-      return [];
-    } else if (_.isArray(this.footnotes)) {
-      return _.chain(this.footnotes)
-        .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
-        .uniqBy()
-        .value();
-    } else {
-      return _.chain(this.tables)
-        .map("tags")
-        .compact()
-        .flatten()
-        .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
-        .uniqBy()
-        .value();
-    }
-  }
   get_footnotes(subject) {
-    const footnote_concepts = this.footnote_concept_keys;
+    const legacy_api_keys = (() => {
+      if (this.footnotes === false) {
+        return [];
+      } else if (_.isArray(this.footnotes)) {
+        return _.chain(this.footnotes)
+          .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
+          .uniqBy()
+          .value();
+      } else {
+        return _.chain(this.tables)
+          .map("tags")
+          .compact()
+          .flatten()
+          .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
+          .uniqBy()
+          .value();
+      }
+    })();
+
+    const new_api_keys = this.get_topic_keys(subject);
+
+    const new_keys = _.difference(new_api_keys, legacy_api_keys);
+    if (!_.isEmpty(new_keys)) {
+      console.warn(
+        `Panel ${
+          this.full_key
+        }'s new footnote topic api includes additional keys not found in the legacy api. This may be correct thing? ${_.join(
+          new_keys,
+          ", "
+        )}`
+      );
+    }
+
+    const missing_keys = _.difference(legacy_api_keys, new_api_keys);
+    if (!_.isEmpty(missing_keys)) {
+      console.warn(
+        `Panel ${
+          this.full_key
+        }'s new footnote topic api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
+          missing_keys,
+          ", "
+        )}`
+      );
+    }
 
     return _.chain(
-      get_footnotes_by_subject_and_topic(subject, footnote_concepts)
+      get_footnotes_by_subject_and_topic(subject, this.get_topic_keys(subject))
     )
       .uniqBy("text")
       .compact()
