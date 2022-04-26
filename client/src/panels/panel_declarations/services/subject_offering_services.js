@@ -18,8 +18,6 @@ import {
 
 import { Dept, Program } from "src/models/subjects";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import text from "./services.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -115,7 +113,7 @@ export const declare_subject_offering_services_panel = () =>
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>

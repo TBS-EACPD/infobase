@@ -43,7 +43,6 @@ import { get_subject_instance_by_guid } from "src/models/subjects";
 import { ensure_loaded } from "src/core/ensure_loaded";
 import { lang } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { toggle_list, SafeJSURL } from "src/general_utils";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 import { smart_sort_func } from "src/sort_utils";
@@ -416,7 +415,7 @@ export const declare_results_table_panel = () =>
     panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR"],
       table_dependencies: ["programSpending", "programFtes"],
-      source: () => get_source_links(["departmental_results_reports"]),
+      source: ["departmental_results_reports"],
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       get_title: ({ subject }) => {

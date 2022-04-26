@@ -19,8 +19,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import Gauge from "src/charts/gauge";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import text from "./services.yaml";
 import "./services.scss";
 
@@ -171,7 +169,7 @@ export const declare_services_standards_panel = () =>
         };
       },
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>

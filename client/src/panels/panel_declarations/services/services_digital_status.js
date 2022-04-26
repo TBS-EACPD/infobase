@@ -22,7 +22,6 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { StandardLegend } from "src/charts/legends/index";
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-import { get_source_links } from "src/DatasetsRoute/utils";
 import {
   secondaryColor,
   highlightOrangeColor,
@@ -210,7 +209,7 @@ export const declare_services_digital_status_panel = () =>
         };
       },
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>

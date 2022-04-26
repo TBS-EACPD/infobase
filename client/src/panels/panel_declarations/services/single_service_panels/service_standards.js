@@ -17,7 +17,6 @@ import { create_fake_footnote } from "src/models/footnotes/footnotes";
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { toggle_list } from "src/general_utils";
 
 import { IconAttention, IconCheck, IconNotApplicable } from "src/icons/icons";
@@ -241,7 +240,7 @@ export const declare_single_service_standards_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("service_standards_title"),
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <ServiceStandards service={subject} title={title} sources={sources} />

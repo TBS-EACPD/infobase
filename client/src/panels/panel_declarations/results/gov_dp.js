@@ -13,8 +13,6 @@ import {
 
 import { Dept } from "src/models/subjects";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import { LateDepartmentsBanner } from "./result_components";
 import {
   ResultCounts,
@@ -161,7 +159,7 @@ export const declare_gov_dp_panel = () =>
         }),
       calculate: () => !_.isEmpty(dp_keys),
       footnotes: ["RESULTS", "DP"],
-      source: () => get_source_links(["departmental_plans"]),
+      source: ["departmental_plans"],
       render({ title, sources, footnotes }) {
         return (
           <InfographicPanel {...{ title, sources, footnotes }} allowOverflow>

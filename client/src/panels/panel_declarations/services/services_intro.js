@@ -15,7 +15,6 @@ import {
   useServiceSummaryOrg,
 } from "src/models/services/services_queries";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { FormFrontend } from "src/FormFrontend";
 
 // import { formats } from "src/core/format";
@@ -141,7 +140,7 @@ export const declare_services_intro_panel = () =>
         };
       },
       footnotes: false,
-      source: () => get_source_links(["service_inventory"]),
+      source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>

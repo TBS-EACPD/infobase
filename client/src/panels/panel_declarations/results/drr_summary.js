@@ -6,8 +6,6 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 
 import { create_text_maker_component, Tabs } from "src/components/index";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import { CommonDrrSummary } from "./CommonDrrSummary";
 
 import {
@@ -99,7 +97,7 @@ export const declare_drr_summary_panel = () =>
         );
       },
       footnotes: ["RESULTS", "DRR"],
-      source: () => get_source_links(["departmental_results_reports"]),
+      source: ["departmental_results_reports"],
       calculate: ({ subject }) => {
         const drr_keys = get_drr_keys_with_data(subject);
 

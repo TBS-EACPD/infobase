@@ -13,8 +13,6 @@ import {
 
 import { Gov, Dept } from "src/models/subjects";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
-
 import { CommonDrrSummary } from "./CommonDrrSummary";
 import { LateDepartmentsBanner } from "./result_components";
 import {
@@ -177,7 +175,7 @@ export const declare_gov_drr_panel = () =>
           last_year:
             drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
         }),
-      source: () => get_source_links(["departmental_results_reports"]),
+      source: ["departmental_results_reports"],
       calculate: () => !_.isEmpty(drr_keys),
       render({ title, calculations, footnotes, sources }) {
         return (
