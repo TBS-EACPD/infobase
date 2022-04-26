@@ -287,7 +287,6 @@ export const declare_application_channels_by_services_panel = () =>
     subject_types: ["dept", "program"],
     panel_config_func: () => ({
       get_title: () => text_maker("customizable_service_graph"),
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

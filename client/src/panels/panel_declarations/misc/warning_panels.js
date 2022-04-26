@@ -42,7 +42,6 @@ const WarningPanel = ({
 const common_panel_config = {
   is_meta_panel: true,
   get_title: _.constant(false),
-  footnotes: false,
 };
 
 const dead_panel_config = {

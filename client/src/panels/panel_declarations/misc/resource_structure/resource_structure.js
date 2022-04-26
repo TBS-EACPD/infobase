@@ -14,7 +14,6 @@ export const declare_resource_structure_panel = () =>
     subject_types: ["tag"],
 
     panel_config_func: () => ({
-      footnotes: false,
       get_title: () => text_maker("resource_structure_title"),
       table_dependencies: ["programSpending", "programFtes"],
 

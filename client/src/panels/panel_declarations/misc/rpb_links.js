@@ -29,7 +29,6 @@ const get_table_type = (table) =>
     : text_maker("finances");
 
 const common_panel_config = {
-  footnotes: false,
   get_title: () => text_maker("links_to_rpb_title"),
 };
 

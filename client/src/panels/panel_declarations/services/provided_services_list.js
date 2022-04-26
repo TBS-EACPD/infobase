@@ -139,7 +139,6 @@ export const declare_provided_services_list_panel = () =>
     subject_types: ["dept", "program"],
     panel_config_func: () => ({
       get_title: () => text_maker("list_of_provided_services_title"),
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

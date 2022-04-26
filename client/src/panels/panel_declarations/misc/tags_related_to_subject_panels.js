@@ -85,7 +85,6 @@ export const declare_tags_of_interest_panel = () =>
     panel_key: "tags_of_interest",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
-      footnotes: false,
       get_title: () => text_maker(title_by_subject_type[subject_type]),
       calculate: ({ subject }) => {
         const tags_by_root = get_related_tag_list_args(subject);
@@ -116,7 +115,6 @@ export const declare_tag_progs_by_dept_panel = () =>
     panel_key: "tag_progs_by_dept",
     subject_types: ["tag"],
     panel_config_func: () => ({
-      footnotes: false,
       get_title: () => text_maker("tag_progs_by_dept_title"),
       calculate: _.constant(true),
 
@@ -170,7 +168,6 @@ export const declare_related_tags_panel = () =>
     subject_types: ["tag"],
 
     panel_config_func: () => ({
-      footnotes: false,
       get_title: () => text_maker("related_tags_title"),
       calculate: ({ subject }) => {
         const related_tags_by_type_with_counts = _.chain(subject.programs)

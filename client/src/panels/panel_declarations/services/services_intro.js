@@ -139,7 +139,6 @@ export const declare_services_intro_panel = () =>
           subject,
         };
       },
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

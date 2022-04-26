@@ -147,7 +147,6 @@ export const declare_description_panel = () =>
     panel_key: "description",
     subject_types: ["tag"],
     panel_config_func: () => ({
-      footnotes: false,
       calculate: ({ subject }) => !_.isEmpty(subject.description),
       get_title: () => text_maker("tag_desc_title"),
       render({ title, subject }) {

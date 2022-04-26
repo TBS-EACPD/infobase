@@ -112,7 +112,6 @@ export const declare_subject_offering_services_panel = () =>
         subject_type === "gov"
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (
