@@ -256,7 +256,6 @@ export const declare_services_channels_panel = () =>
     subject_types: ["gov", "dept", "program"],
     panel_config_func: () => ({
       get_title: () => text_maker("services_channels_title"),
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

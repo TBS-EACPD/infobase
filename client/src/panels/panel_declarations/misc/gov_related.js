@@ -18,7 +18,6 @@ export const declare_gov_related_info_panel = () =>
     subject_types: ["gov"],
 
     panel_config_func: () => ({
-      footnotes: false,
       calculate: _.constant(true),
       get_title: () => text_maker("gov_related_info_title"),
       render({ title }) {

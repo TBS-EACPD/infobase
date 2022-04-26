@@ -168,7 +168,6 @@ export const declare_services_standards_panel = () =>
           subject,
         };
       },
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

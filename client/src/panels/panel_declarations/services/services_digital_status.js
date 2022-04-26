@@ -208,7 +208,6 @@ export const declare_services_digital_status_panel = () =>
           subject,
         };
       },
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

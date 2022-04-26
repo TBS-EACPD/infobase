@@ -177,7 +177,6 @@ export const declare_single_service_overview_panel = () =>
     subject_types: ["service"],
     panel_config_func: () => ({
       get_title: () => text_maker("service_overview_title"),
-      footnotes: false,
       source: ["service_inventory"],
       render({ title, subject, sources }) {
         return (

@@ -14,7 +14,6 @@ import tag_faq from "src/common_text/faq/tagging_questions.yaml";
 
 const common_panel_config = {
   is_meta_panel: true,
-  footnotes: false,
   get_title: _.constant(false),
   calculate: _.constant(true),
 };

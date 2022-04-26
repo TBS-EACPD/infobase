@@ -26,7 +26,6 @@ export const declare_covid_key_concepts_panel = () =>
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       is_meta_panel: true,
-      footnotes: false,
       get_title: _.constant(false),
       calculate: _.constant(true),
       render: () => (

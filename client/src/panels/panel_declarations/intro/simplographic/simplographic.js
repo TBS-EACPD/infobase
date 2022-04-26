@@ -30,7 +30,6 @@ export const declare_simplographic_panel = () =>
     panel_key: "simplographic",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      footnotes: false,
       requires_result_counts: true,
 
       table_dependencies: ["orgVoteStatPa", "orgEmployeeRegion"],

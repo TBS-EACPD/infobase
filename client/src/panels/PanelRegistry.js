@@ -185,7 +185,7 @@ export class PanelRegistry {
   }
   get_footnotes(subject) {
     const legacy_api_keys = (() => {
-      if (_.isArray(this.footnotes)) {
+      if (this.footnotes) {
         return _.chain(this.footnotes)
           .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
           .uniqBy()
