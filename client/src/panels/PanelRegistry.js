@@ -3,7 +3,7 @@ import _ from "lodash";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { Datasets } from "src/models/metadata/Datasets";
-import { DataSources } from "src/models/metadata/Sources";
+import { Sources } from "src/models/metadata/Sources";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
@@ -67,7 +67,7 @@ export class PanelRegistry {
       table_dependencies: [],
       calculate: _.constant(true),
       get_dataset_keys: _.constant([]),
-      get_data_source_keys: _.property("derived_source_keys"),
+      get_source_keys: _.property("derived_source_keys"),
       get_topic_keys: _.property("derived_topic_keys"),
       machinery_footnotes: true, // TODO could be always included along with derived keys to get_topic_keys, panels could ommit as desired from there
       glossary_keys: [],
@@ -94,12 +94,11 @@ export class PanelRegistry {
         calculations: this.calculate(subject),
       });
 
-    this.get_data_source_keys = (subject) =>
+    this.get_source_keys = (subject) =>
       panel_def.get_dataset_keys({
         subject,
         calculations: this.calculate(subject),
-        derived_source_keys:
-          this.derive_data_source_keys_from_datasets(subject),
+        derived_source_keys: this.derive_source_keys_from_datasets(subject),
       });
 
     this.get_topic_keys = (subject) =>
@@ -107,7 +106,7 @@ export class PanelRegistry {
         subject,
         calculations: this.calculate(subject),
         derived_topic_keys:
-          this.derive_topic_keys_from_data_sources_and_datasets(subject),
+          this.derive_topic_keys_from_sources_and_datasets(subject),
       });
 
     this.render = (subject, options = {}) =>
@@ -169,45 +168,45 @@ export class PanelRegistry {
   get_datasets(subject) {
     return _.map(this.get_dataset_keys(subject), (key) => Datasets[key]);
   }
-  derive_data_source_keys_from_datasets(subject) {
+  derive_source_keys_from_datasets(subject) {
     return _.chain(this.get_datasets(subject))
       .flatMap("source_keys")
       .uniq()
       .value();
   }
-  get_data_sources(subject) {
-    return _.map(this.get_data_source_keys(subject), (key) => DataSources[key]);
+  get_sources(subject) {
+    return _.map(this.get_source_keys(subject), (key) => Sources[key]);
   }
   sources(subject) {
-    const legacy_api_data_source_keys = this.source;
+    const legacy_api_source_keys = this.source;
 
-    const new_api_api_data_source_keys = this.get_data_source_keys(subject);
+    const new_api_api_source_keys = this.get_source_keys(subject);
 
-    const new_api_data_source_keys = _.difference(
-      new_api_api_data_source_keys,
-      legacy_api_data_source_keys
+    const new_api_source_keys = _.difference(
+      new_api_api_source_keys,
+      legacy_api_source_keys
     );
-    if (!_.isEmpty(new_api_data_source_keys)) {
+    if (!_.isEmpty(new_api_source_keys)) {
       console.warn(
         `Panel ${
           this.full_key
         }'s new data source key api includes additional keys not found in the legacy api. This may be correct? ${_.join(
-          new_api_data_source_keys,
+          new_api_source_keys,
           ", "
         )}`
       );
     }
 
-    const missing_data_source_keys = _.difference(
-      legacy_api_data_source_keys,
-      new_api_api_data_source_keys
+    const missing_source_keys = _.difference(
+      legacy_api_source_keys,
+      new_api_api_source_keys
     );
-    if (!_.isEmpty(missing_data_source_keys)) {
+    if (!_.isEmpty(missing_source_keys)) {
       console.warn(
         `Panel ${
           this.full_key
         }'s new data source key api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
-          missing_data_source_keys,
+          missing_source_keys,
           ", "
         )}`
       );
@@ -251,7 +250,7 @@ export class PanelRegistry {
     }
 
     return [
-      ...get_source_links(legacy_api_data_source_keys),
+      ...get_source_links(legacy_api_source_keys),
       ..._.map(this.tables, ({ data_set: { name, infobase_link } }) => ({
         html: name,
         href: infobase_link,
@@ -259,18 +258,15 @@ export class PanelRegistry {
     ];
   }
 
-  derive_topic_keys_from_data_sources_and_datasets(subject) {
+  derive_topic_keys_from_sources_and_datasets(subject) {
     const dataset_topic_keys = _.flatMap(
       this.get_datasets(subject),
       "topic_keys"
     );
-    const datasource_topic_keys = _.flatMap(
-      this.get_data_sources(subject),
-      "topic_key"
-    );
+    const Source_topic_keys = _.flatMap(this.get_sources(subject), "topic_key");
     return _.uniq([
       ...dataset_topic_keys,
-      ...datasource_topic_keys,
+      ...Source_topic_keys,
       ...(this.machinery_footnotes ? ["MACHINERY"] : []),
     ]);
   }

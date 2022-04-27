@@ -16,7 +16,7 @@ import { create_text_maker_component } from "src/components/misc_util_components
 
 import { estimates_docs } from "src/models/estimates";
 
-import { DataSources } from "src/models/metadata/Sources";
+import { Sources } from "src/models/metadata/Sources";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -340,7 +340,7 @@ export default class EstimatesExplorerComponent extends React.Component {
           <br />
           <TM
             k="estimates_source_link"
-            args={{ href: DataSources.estimates.open_data_link }}
+            args={{ href: Sources.estimates.open_data_link }}
           />
         </div>
       </div>

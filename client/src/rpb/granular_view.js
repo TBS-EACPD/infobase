@@ -38,7 +38,7 @@ class GranularView extends React.Component {
             content={<ReportDetails {...this.props} />}
           />
         </LabeledBox>
-        <LabeledBox label={<TextMaker text_key="rpb_report_data_sources" />}>
+        <LabeledBox label={<TextMaker text_key="rpb_report_sources" />}>
           <ReportDatasets {...this.props} />
         </LabeledBox>
 
