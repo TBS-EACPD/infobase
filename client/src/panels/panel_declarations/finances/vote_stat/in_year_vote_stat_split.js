@@ -69,7 +69,8 @@ const get_text_calculations = (table, subject) => {
 };
 
 const common_panel_config = {
-  table_dependencies: ["orgVoteStatEstimates"],
+  legacy_table_dependencies: ["orgVoteStatEstimates"],
+  get_dataset_keys: () => ["tabled_estimates"],
   machinery_footnotes: false,
   glossary_keys: ["AUTH"],
   get_title: () => text_maker("in_year_voted_stat_split_title"),

@@ -31,7 +31,8 @@ export const declare_internal_services_panel = () =>
     panel_key: "internal_services",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      table_dependencies: ["programFtes"],
+      legacy_table_dependencies: ["programFtes"],
+      get_dataset_keys: () => ["program_ftes"],
       get_title: () => text_maker("internal_service_panel_title"),
       calculate: ({ subject, tables }) => {
         const { programFtes } = tables;

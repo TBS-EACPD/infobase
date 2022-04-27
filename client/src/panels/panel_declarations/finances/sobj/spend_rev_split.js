@@ -119,7 +119,8 @@ export const declare_spend_rev_split_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
-            table_dependencies: ["orgSobjs"],
+            legacy_table_dependencies: ["orgSobjs"],
+            get_dataset_keys: () => ["org_standard_objects"],
             footnotes: ["SOBJ_REV"],
             calculate: ({ subject, tables }) => {
               const { orgSobjs } = tables;
@@ -156,7 +157,8 @@ export const declare_spend_rev_split_panel = () =>
         case "program":
           return {
             ...common_panel_config,
-            table_dependencies: ["programSobjs"],
+            legacy_table_dependencies: ["programSobjs"],
+            get_dataset_keys: () => ["program_standard_objects"],
             calculate: ({ subject, tables }) => {
               const { programSobjs } = tables;
               const prog_rows = programSobjs.programs.get(subject);

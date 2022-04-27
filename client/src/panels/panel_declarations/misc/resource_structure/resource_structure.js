@@ -15,7 +15,8 @@ export const declare_resource_structure_panel = () =>
 
     panel_config_func: () => ({
       get_title: () => text_maker("resource_structure_title"),
-      table_dependencies: ["programSpending", "programFtes"],
+      legacy_table_dependencies: ["programSpending", "programFtes"],
+      get_dataset_keys: () => ["program_spending", "program_ftes"],
 
       calculate: ({ subject, tables }) => {
         const { programSpending } = tables;

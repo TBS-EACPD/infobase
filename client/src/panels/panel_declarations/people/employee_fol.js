@@ -79,7 +79,8 @@ export const declare_employee_fol_panel = () =>
     panel_key: "employee_fol",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      table_dependencies: ["orgEmployeeFol"],
+      legacy_table_dependencies: ["orgEmployeeFol"],
+      get_dataset_keys: () => ["employee_fol"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       get_title: () => text_maker("employee_fol_title"),
       render({ title, subject, calculations, footnotes, sources }) {

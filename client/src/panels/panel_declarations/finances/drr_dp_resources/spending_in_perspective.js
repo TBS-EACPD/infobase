@@ -110,7 +110,8 @@ export const declare_spending_in_tag_perspective_panel = () =>
     subject_types: ["program"],
     panel_config_func: () => ({
       get_title: () => text_maker("program_spending_in_tag_perspective_title"),
-      table_dependencies: ["programSpending"],
+      legacy_table_dependencies: ["programSpending"],
+      get_dataset_keys: () => ["program_spending"],
       calculate: ({ subject, tables }) => {
         if (is_a11y_mode) {
           //turn off this panel in a11y mode

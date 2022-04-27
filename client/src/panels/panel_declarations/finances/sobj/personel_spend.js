@@ -22,7 +22,8 @@ export const declare_personnel_spend_panel = () =>
     panel_key: "personnel_spend",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      table_dependencies: ["orgSobjs"],
+      legacy_table_dependencies: ["orgSobjs"],
+      get_dataset_keys: () => ["org_standard_objects"],
       get_title: () => text_maker("personnel_spend_title"),
       calculate: ({ subject, tables }) => {
         const { orgSobjs } = tables;

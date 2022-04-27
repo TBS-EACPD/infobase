@@ -354,7 +354,8 @@ class DetailedHistTPItems extends React.Component {
 
 const common_panel_config = {
   get_title: () => text_maker("historical_g_and_c_title"),
-  table_dependencies: ["orgTransferPayments"],
+  legacy_table_dependencies: ["orgTransferPayments"],
+  get_dataset_keys: () => ["transfer_payments"],
 };
 
 export const declare_historical_g_and_c_panel = () =>

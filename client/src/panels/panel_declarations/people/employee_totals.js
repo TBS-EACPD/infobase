@@ -32,7 +32,8 @@ export const declare_employee_totals_panel = () =>
     panel_key: "employee_totals",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      table_dependencies: ["orgEmployeeType"],
+      legacy_table_dependencies: ["orgEmployeeType"],
+      get_dataset_keys: () => ["employee_type"],
       get_title: () => text_maker(subject_type + "_employee_totals_title"),
       calculate: ({ subject, tables }) => {
         const { orgEmployeeType } = tables;

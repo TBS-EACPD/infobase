@@ -623,7 +623,6 @@ export const declare_covid_estimates_panel = () =>
       requires_covid_measures: true,
       get_title: () => text_maker("covid_measure_spending_auth"),
       footnotes: ["COVID", "COVID_AUTH", "COVID_MEASURE"],
-      table_dependencies: [],
       source: ["covid"],
       calculate: ({ subject }) => {
         const years_with_estimates =
