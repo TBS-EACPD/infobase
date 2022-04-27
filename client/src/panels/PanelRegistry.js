@@ -219,31 +219,31 @@ export class PanelRegistry {
 
     const new_api_dataset_keys = this.get_dataset_keys(subject);
 
-    const new_data_set_keys = _.difference(
+    const new_dataset_keys = _.difference(
       new_api_dataset_keys,
       legacy_api_dataset_keys
     );
-    if (!_.isEmpty(new_data_set_keys)) {
+    if (!_.isEmpty(new_dataset_keys)) {
       console.warn(
         `Panel ${
           this.full_key
         }'s new data set key api includes additional keys not found in the legacy api. This may be correct? ${_.join(
-          new_data_set_keys,
+          new_dataset_keys,
           ", "
         )}`
       );
     }
 
-    const missing_data_set_keys = _.difference(
+    const missing_dataset_keys = _.difference(
       legacy_api_dataset_keys,
       new_api_dataset_keys
     );
-    if (!_.isEmpty(missing_data_set_keys)) {
-      console.warn(
+    if (!_.isEmpty(missing_dataset_keys)) {
+      throw new Error(
         `Panel ${
           this.full_key
         }'s new data set key api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
-          missing_data_set_keys,
+          missing_dataset_keys,
           ", "
         )}`
       );
