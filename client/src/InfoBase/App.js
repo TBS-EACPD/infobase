@@ -158,13 +158,10 @@ export class App extends React.Component {
               }}
             />
             <Redirect
-              from="/metadata/:data_source_key?"
-              to="/datasets/:data_source_key?"
+              from="/metadata/:source_key?"
+              to="/datasets/:source_key?"
             />
-            <Route
-              path="/datasets/:data_source_key?"
-              component={DatasetsRoute}
-            />
+            <Route path="/datasets/:source_key?" component={DatasetsRoute} />
             <Route path="/igoc/:grouping?" component={IgocExplorer} />
             <Redirect
               from="/resource-explorer/:hierarchy_scheme?/:doc?"

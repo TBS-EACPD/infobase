@@ -107,17 +107,17 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
   }),
 });
 
-export type DataSourceKey = keyof typeof source_definitions;
+export type SourceKey = keyof typeof source_definitions;
 
-type DataSource = SourceDef & {
-  key: DataSourceKey;
+type Source = SourceDef & {
+  key: SourceKey;
   frequency?: string;
 };
-export const DataSources = _.mapValues(
+export const Sources = _.mapValues(
   source_definitions,
-  (def: SourceDef, key): DataSource => ({
+  (def: SourceDef, key): Source => ({
     ...def,
-    key: key as DataSourceKey,
+    key: key as SourceKey,
     frequency:
       def.frequency_key !== undefined
         ? Frequencies[def.frequency_key]

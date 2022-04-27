@@ -11,18 +11,18 @@ import { rpb_link } from "src/rpb/rpb_link";
 import { LiteralKeyedRecordHelper } from "src/types/type_utils";
 import type { PartialOn, NonEmpty } from "src/types/util_types.d";
 
-import type { DataSourceKey } from "./DataSources";
-import { DataSources } from "./DataSources";
+import type { SourceKey } from "./Sources";
+import { Sources } from "./Sources";
 
 import text from "./Datasets.yaml";
 
 const text_maker = create_text_maker(text);
 
-type NonEmptySourceKeys = NonEmpty<DataSourceKey[]>;
+type NonEmptySourceKeys = NonEmpty<SourceKey[]>;
 
 type DatasetDef = {
   name: string;
-  source_keys: NonEmpty<DataSourceKey[]>;
+  source_keys: NonEmpty<SourceKey[]>;
   topic_keys: TopicKey[];
   infobase_link: string;
   open_data_link?: string;
@@ -31,7 +31,7 @@ type DatasetDef = {
 const common_source_and_topic_data_set_defs = <
   DatasetKey extends string | number | symbol
 >(
-  common_sources: DataSourceKey | NonEmptySourceKeys,
+  common_sources: SourceKey | NonEmptySourceKeys,
   common_topic_keys: TopicKey[],
   partial_defs: Record<
     DatasetKey,
@@ -211,7 +211,7 @@ const covid = common_source_and_topic_data_set_defs(
 
 const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   igoc: {
-    name: DataSources.inventory_of_government_organizations.name,
+    name: Sources.inventory_of_government_organizations.name,
     source_keys: ["inventory_of_government_organizations"],
     topic_keys: [],
     infobase_link: "#igoc",
@@ -226,7 +226,7 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
     }),
   },
   transfer_payments_by_region: {
-    name: DataSources.regional_transfer_payments.name,
+    name: Sources.regional_transfer_payments.name,
     source_keys: ["regional_transfer_payments"],
     topic_keys: ["SOBJ10"],
     infobase_link: rpb_link({
@@ -247,7 +247,7 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   },
   ...(services_feature_flag && {
     service_inventory: {
-      name: DataSources.service_inventory.name,
+      name: Sources.service_inventory.name,
       source_keys: ["service_inventory"],
       topic_keys: [],
       infobase_link:
@@ -269,15 +269,12 @@ export type DatasetKey = keyof typeof all_data_set_defs;
 
 type Dataset = DatasetDef & {
   key: DatasetKey;
-  sources: typeof DataSources[DataSourceKey][];
+  sources: typeof Sources[SourceKey][];
 };
 export const Datasets = _.mapValues(
   all_data_set_defs,
   (def: DatasetDef, key): Dataset => {
-    const sources = _.map(
-      def.source_keys,
-      (source_key) => DataSources[source_key]
-    );
+    const sources = _.map(def.source_keys, (source_key) => Sources[source_key]);
 
     const topic_keys = _.chain(sources)
       .map("topic_key")

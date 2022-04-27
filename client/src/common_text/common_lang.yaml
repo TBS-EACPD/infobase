@@ -135,7 +135,7 @@ finished_export_table_to_clipboard:
 finished_export_table:
   en: Exported
   fr: Exporté
-data_sources:
+sources:
   en: Data sources
   fr: Sources des données
 

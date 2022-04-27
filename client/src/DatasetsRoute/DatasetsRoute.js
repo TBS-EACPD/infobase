@@ -8,7 +8,7 @@ import {
 } from "src/components/index";
 
 import { Datasets } from "src/models/metadata/Datasets";
-import { DataSources } from "src/models/metadata/Sources";
+import { Sources } from "src/models/metadata/Sources";
 
 import { services_feature_flag } from "src/core/injected_build_constants";
 import {
@@ -20,7 +20,7 @@ import text from "./DatasetsRoute.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const data_source_legacy_key_map = {
+const source_legacy_key_map = {
   IGOC: "igoc",
   PA: "public_accounts",
   CFMRS: "central_financial_management_system",
@@ -39,7 +39,7 @@ export default class DatasetsRoute extends React.Component {
   render() {
     const {
       match: {
-        params: { data_source_key },
+        params: { source_key },
       },
     } = this.props;
 
@@ -60,12 +60,12 @@ export default class DatasetsRoute extends React.Component {
         </p>
         <ScrollToTargetContainer
           target_id={
-            data_source_key in data_source_legacy_key_map
-              ? data_source_legacy_key_map[data_source_key]
-              : data_source_key
+            source_key in source_legacy_key_map
+              ? source_legacy_key_map[source_key]
+              : source_key
           }
         >
-          {_.map(DataSources, (source) => {
+          {_.map(Sources, (source) => {
             const data_sets = _.pickBy(Datasets, ({ source_keys }) =>
               _.includes(source_keys, source.key)
             );

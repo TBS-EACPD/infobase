@@ -8,7 +8,7 @@ import {
   FootnoteList,
 } from "src/components/index";
 
-import { DataSources } from "src/models/metadata/Sources";
+import { Sources } from "src/models/metadata/Sources";
 
 import { get_source_link } from "src/DatasetsRoute/utils";
 import { IconCopyLink } from "src/icons/icons";
@@ -86,13 +86,13 @@ const ReportDatasets = ({ table }) => {
     </span>,
   ];
 
-  const data_source_spans = table.source.length > 0 && [
+  const source_spans = table.source.length > 0 && [
     <span key={"datasets_header"} className="fancy-ul__title">
-      <TextMaker text_key="data_sources" />
+      <TextMaker text_key="sources" />
     </span>,
     ..._.chain(table.source)
       .map((source_key) => {
-        const source = DataSources[source_key];
+        const source = Sources[source_key];
 
         return source.open_data_link ? (
           <span key={table.id} className="row">
@@ -119,7 +119,7 @@ const ReportDatasets = ({ table }) => {
   return (
     <FancyUL className={"rpb-option-fancy-ul"}>
       {_.flatten(
-        [dataset_spans, data_source_spans].filter((d) => d && d.length > 1)
+        [dataset_spans, source_spans].filter((d) => d && d.length > 1)
       )}
     </FancyUL>
   );
