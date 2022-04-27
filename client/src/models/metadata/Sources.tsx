@@ -11,7 +11,7 @@ import { LiteralKeyedRecordHelper } from "src/types/type_utils";
 
 import { Frequencies } from "./Frequencies";
 
-import text from "./DataSources.yaml";
+import text from "./Sources.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 

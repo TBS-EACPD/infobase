@@ -8,7 +8,7 @@ import {
   FootnoteList,
 } from "src/components/index";
 
-import { DataSources } from "src/models/metadata/DataSources";
+import { DataSources } from "src/models/metadata/Sources";
 
 import { get_source_link } from "src/DatasetsRoute/utils";
 import { IconCopyLink } from "src/icons/icons";

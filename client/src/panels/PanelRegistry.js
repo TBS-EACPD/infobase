@@ -3,7 +3,7 @@ import _ from "lodash";
 import { get_footnotes_by_subject_and_topic } from "src/models/footnotes/footnotes";
 
 import { Datasets } from "src/models/metadata/Datasets";
-import { DataSources } from "src/models/metadata/DataSources";
+import { DataSources } from "src/models/metadata/Sources";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
@@ -175,7 +175,7 @@ export class PanelRegistry {
       .uniq()
       .value();
   }
-  get_datasources(subject) {
+  get_data_sources(subject) {
     return _.map(this.get_data_source_keys(subject), (key) => DataSources[key]);
   }
   sources(subject) {
@@ -265,7 +265,7 @@ export class PanelRegistry {
       "topic_keys"
     );
     const datasource_topic_keys = _.flatMap(
-      this.get_datasources(subject),
+      this.get_data_sources(subject),
       "topic_key"
     );
     return _.uniq([
