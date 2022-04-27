@@ -1,7 +1,7 @@
 import _ from "lodash";
 
-import { DataSources } from "src/models/metadata/DataSources";
-import type { DataSourceKey } from "src/models/metadata/DataSources";
+import { DataSources } from "src/models/metadata/Sources";
+import type { DataSourceKey } from "src/models/metadata/Sources";
 
 export const get_source_link = (key: DataSourceKey) => {
   const source = DataSources[key];

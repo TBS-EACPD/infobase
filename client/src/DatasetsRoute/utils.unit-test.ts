@@ -1,14 +1,11 @@
-import type {
-  DataSources,
-  DataSourceKey,
-} from "src/models/metadata/DataSources";
+import type { DataSources, DataSourceKey } from "src/models/metadata/Sources";
 
 import { with_console_error_silenced } from "src/testing_utils";
 
 import { get_source_link, get_source_links } from "./utils";
 
 // A bit of an iffy mock, but I trust the type system to keep it relatively maintainable
-jest.mock("src/models/metadata/DataSources", () => {
+jest.mock("src/models/metadata/Sources", () => {
   const mock_DataSources: Partial<{
     [key in DataSourceKey]: Partial<typeof DataSources[key]>;
   }> = {

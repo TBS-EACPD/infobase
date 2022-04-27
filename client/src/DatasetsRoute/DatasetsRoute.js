@@ -8,7 +8,7 @@ import {
 } from "src/components/index";
 
 import { Datasets } from "src/models/metadata/Datasets";
-import { DataSources } from "src/models/metadata/DataSources";
+import { DataSources } from "src/models/metadata/Sources";
 
 import { services_feature_flag } from "src/core/injected_build_constants";
 import {
