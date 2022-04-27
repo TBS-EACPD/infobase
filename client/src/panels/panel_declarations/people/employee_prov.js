@@ -205,7 +205,8 @@ export const declare_employee_prov_panel = () =>
     panel_key: "employee_prov",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      table_dependencies: ["orgEmployeeRegion"],
+      legacy_table_dependencies: ["orgEmployeeRegion"],
+      get_dataset_keys: () => ["employee_region"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       get_title: () => text_maker("employee_prov_title"),
       render(render_args) {

@@ -310,7 +310,8 @@ export const declare_tp_by_region_panel = () =>
     panel_key: "tp_by_region",
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      table_dependencies: ["orgTransferPaymentsRegion"],
+      legacy_table_dependencies: ["orgTransferPaymentsRegion"],
+      get_dataset_keys: () => ["transfer_payments_by_region"],
       get_title: () => text_maker("tp_by_region_title"),
       calculate: ({ subject, tables }) => {
         const { orgTransferPaymentsRegion } = tables;

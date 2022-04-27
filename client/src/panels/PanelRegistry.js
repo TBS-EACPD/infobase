@@ -64,7 +64,7 @@ export class PanelRegistry {
 
   constructor(provided_def) {
     const panel_def_defaults = {
-      table_dependencies: [],
+      legacy_table_dependencies: [],
       calculate: _.constant(true),
       get_dataset_keys: _.constant([]),
       get_source_keys: _.property("derived_source_keys"),
@@ -133,7 +133,7 @@ export class PanelRegistry {
   }
 
   get tables() {
-    return _.chain(this.table_dependencies)
+    return _.chain(this.legacy_table_dependencies)
       .map((table_id) => [table_id, Table.store.lookup(table_id)])
       .fromPairs()
       .value();

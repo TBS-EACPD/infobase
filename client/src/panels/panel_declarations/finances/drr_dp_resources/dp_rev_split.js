@@ -49,7 +49,8 @@ export const declare_dp_rev_split_panel = () =>
     panel_key: "dp_rev_split",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: () => ({
-      table_dependencies: ["programSpending"],
+      legacy_table_dependencies: ["programSpending"],
+      get_dataset_keys: () => ["program_spending"],
       get_title: () => text_maker("dp_rev_split_title"),
       machinery_footnotes: false,
       footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],

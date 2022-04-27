@@ -105,7 +105,8 @@ export const declare_explore_results_panel = () =>
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR", "DP"],
-      table_dependencies: ["programSpending", "programFtes"],
+      legacy_table_dependencies: ["programSpending", "programFtes"],
+      get_dataset_keys: () => ["program_spending", "program_ftes"],
       source: ["departmental_plans", "departmental_results_reports"],
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",

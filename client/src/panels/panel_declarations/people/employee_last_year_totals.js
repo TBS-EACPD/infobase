@@ -23,7 +23,8 @@ export const declare_employee_last_year_totals_panel = () =>
     panel_key: "employee_last_year_totals",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      table_dependencies: ["orgEmployeeType"],
+      legacy_table_dependencies: ["orgEmployeeType"],
+      get_dataset_keys: () => ["employee_type"],
       get_title: () => text_maker("dept_employee_last_year_totals_title"),
       calculate: ({ subject, tables }) => {
         const { orgEmployeeType } = tables;

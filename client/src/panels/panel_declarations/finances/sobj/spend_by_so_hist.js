@@ -199,7 +199,8 @@ export const declare_spend_by_so_hist_panel = () =>
     panel_key: "spend_by_so_hist",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      table_dependencies: ["orgSobjs"],
+      legacy_table_dependencies: ["orgSobjs"],
+      get_dataset_keys: () => ["org_standard_objects"],
       get_title: () => text_maker("dept_fin_spend_by_so_hist_title"),
       footnotes: ["SOBJ", "EXP"],
       calculate: ({ subject, tables }) => {

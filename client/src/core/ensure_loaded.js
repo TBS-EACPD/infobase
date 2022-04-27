@@ -48,7 +48,7 @@ function ensure_loaded({
 
   const table_set = _.chain([
     ...table_keys,
-    ..._.flatMap(panel_set, "table_dependencies"),
+    ..._.flatMap(panel_set, "legacy_table_dependencies"),
   ])
     .uniqBy()
     .map((table_key) => Table.store.lookup(table_key))

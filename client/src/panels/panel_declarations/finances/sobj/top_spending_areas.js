@@ -93,7 +93,8 @@ export const declare_top_spending_areas_panel = () =>
     panel_key: "top_spending_areas",
     subject_types: ["program"],
     panel_config_func: () => ({
-      table_dependencies: ["programSobjs"],
+      legacy_table_dependencies: ["programSobjs"],
+      get_dataset_keys: () => ["program_standard_objects"],
       footnotes: ["SOBJ"],
       get_title: () => text_maker("top_spending_areas_title"),
       calculate: ({ subject, tables }) => {

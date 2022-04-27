@@ -437,7 +437,8 @@ export const declare_detailed_program_spending_split_panel = () =>
     panel_key: "detailed_program_spending_split",
     subject_types: ["dept"],
     panel_config_func: () => ({
-      table_dependencies: ["programSobjs", "programSpending"],
+      legacy_table_dependencies: ["programSobjs", "programSpending"],
+      get_dataset_keys: () => ["program_standard_objects", "program_spending"],
       get_title: () => text_maker("detailed_program_spending_split_title"),
       footnotes: footnote_topics,
       calculate: ({ subject, tables }) => {

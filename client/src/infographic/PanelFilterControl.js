@@ -23,7 +23,7 @@ const get_default_table_tag_state = ({ panel_keys, subject }) =>
     .flatMap(
       (panel_key) =>
         PanelRegistry.lookup(panel_key, subject.subject_type)
-          ?.table_dependencies
+          ?.legacy_table_dependencies
     )
     .uniq()
     .map((table_id) => [table_id, false])
@@ -178,7 +178,8 @@ export default class PanelFilterControl extends React.Component {
         const panel = PanelRegistry.lookup(panel_key, subject.subject_type);
         return (
           should_excluded_from_filtering(panel) ||
-          _.intersection(panel.table_dependencies, active_table_ids).length > 0
+          _.intersection(panel.legacy_table_dependencies, active_table_ids)
+            .length > 0
         );
       });
   };

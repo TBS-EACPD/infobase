@@ -1011,11 +1011,10 @@ const common_program_crso_calculate = ({ subject, tables }) => {
   return { type, calcs };
 };
 
-const footnotes = ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"];
-const table_dependencies = ["programSpending", "programFtes"];
-
 const common_panel_config = {
-  footnotes,
+  legacy_table_dependencies: ["programSpending", "programFtes"],
+  get_dataset_keys: () => ["program_spending", "program_ftes"],
+  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   get_title: () => text_maker("welcome_mat_title"),
 };
 
@@ -1028,7 +1027,6 @@ export const declare_welcome_mat_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-            table_dependencies,
 
             calculate: ({ subject, tables }) => {
               const { programSpending, programFtes } = tables;
@@ -1048,10 +1046,15 @@ export const declare_welcome_mat_panel = () =>
           return {
             ...common_panel_config,
             missing_info: "ok",
-            table_dependencies: [
+            legacy_table_dependencies: [
+              ...common_panel_config.legacy_table_dependencies,
               "orgVoteStatEstimates",
               "orgVoteStatPa",
-              ...table_dependencies,
+            ],
+            get_dataset_keys: () => [
+              ...common_panel_config.get_dataset_keys(),
+              "tabled_estimates",
+              "org_vote_stat",
             ],
             calculate: ({ subject, tables }) => {
               const { programSpending, programFtes, orgVoteStatEstimates } =
@@ -1110,7 +1113,6 @@ export const declare_welcome_mat_panel = () =>
         case "program":
           return {
             ...common_panel_config,
-            table_dependencies,
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,
@@ -1118,7 +1120,6 @@ export const declare_welcome_mat_panel = () =>
         case "crso":
           return {
             ...common_panel_config,
-            table_dependencies,
             glossary_keys: ["FTE"],
             calculate: common_program_crso_calculate,
             render,

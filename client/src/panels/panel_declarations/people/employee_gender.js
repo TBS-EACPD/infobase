@@ -81,7 +81,8 @@ export const declare_employee_gender_panel = () =>
     panel_key: "employee_gender",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      table_dependencies: ["orgEmployeeGender"],
+      legacy_table_dependencies: ["orgEmployeeGender"],
+      get_dataset_keys: () => ["employee_gender"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       get_title: () => text_maker("employee_gender_title"),
       render({ title, subject, calculations, footnotes, sources }) {

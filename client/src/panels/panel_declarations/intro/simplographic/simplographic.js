@@ -32,7 +32,8 @@ export const declare_simplographic_panel = () =>
     panel_config_func: () => ({
       requires_result_counts: true,
 
-      table_dependencies: ["orgVoteStatPa", "orgEmployeeRegion"],
+      legacy_table_dependencies: ["orgVoteStatPa", "orgEmployeeRegion"],
+      get_dataset_keys: () => ["org_vote_stat", "employee_region"],
       get_title: () => text_maker("simplographic_title"),
       calculate: ({ tables }) => {
         const { orgVoteStatPa, orgEmployeeRegion } = tables;

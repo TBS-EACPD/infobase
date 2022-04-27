@@ -742,10 +742,15 @@ export const declare_auth_exp_planned_spending_panel = () =>
     panel_key: "auth_exp_planned_spending",
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      table_dependencies: [
+      legacy_table_dependencies: [
         "orgVoteStatPa",
         "programSpending",
         "orgVoteStatEstimates",
+      ],
+      get_dataset_keys: () => [
+        "org_vote_stat",
+        "program_spending",
+        "tabled_estimates",
       ],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
       get_title: ({ subject }) =>

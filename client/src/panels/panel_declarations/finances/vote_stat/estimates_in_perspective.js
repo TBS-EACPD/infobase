@@ -22,7 +22,8 @@ export const declare_estimates_in_perspective_panel = () =>
     subject_types: ["dept"],
     panel_config_func: () => ({
       get_title: () => text_maker("estimates_perspective_title"),
-      table_dependencies: ["orgVoteStatEstimates"],
+      legacy_table_dependencies: ["orgVoteStatEstimates"],
+      get_dataset_keys: () => ["tabled_estimates"],
       machinery_footnotes: false,
       calculate: ({ subject, tables }) => {
         const { orgVoteStatEstimates } = tables;
