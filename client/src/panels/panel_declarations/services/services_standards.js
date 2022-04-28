@@ -168,7 +168,7 @@ export const declare_services_standards_panel = () =>
           subject,
         };
       },
-      source: ["service_inventory"],
+      get_source_keys: () => ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>

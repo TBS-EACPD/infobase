@@ -175,7 +175,7 @@ export const declare_gov_drr_panel = () =>
           last_year:
             drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
         }),
-      source: ["departmental_results_reports"],
+      get_source_keys: () => ["departmental_results_reports"],
       calculate: () => !_.isEmpty(drr_keys),
       render({ title, calculations, footnotes, sources }) {
         return (

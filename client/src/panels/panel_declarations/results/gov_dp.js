@@ -159,7 +159,7 @@ export const declare_gov_dp_panel = () =>
         }),
       calculate: () => !_.isEmpty(dp_keys),
       footnotes: ["RESULTS", "DP"],
-      source: ["departmental_plans"],
+      get_source_keys: () => ["departmental_plans"],
       render({ title, sources, footnotes }) {
         return (
           <InfographicPanel {...{ title, sources, footnotes }} allowOverflow>

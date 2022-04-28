@@ -23,11 +23,6 @@ export const declare_planned_actual_comparison_panel = () =>
       legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => ["program_spending", "program_ftes"],
       get_title: () => text_maker("planned_actual_title"),
-      source: [
-        "departmental_plans",
-        "departmental_results_reports",
-        "public_accounts",
-      ],
       calculate: ({ subject, tables }) => {
         if (subject.subject_type === "dept") {
           if (
