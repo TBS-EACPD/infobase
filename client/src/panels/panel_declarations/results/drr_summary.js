@@ -97,7 +97,7 @@ export const declare_drr_summary_panel = () =>
         );
       },
       footnotes: ["RESULTS", "DRR"],
-      source: ["departmental_results_reports"],
+      get_source_keys: () => ["departmental_results_reports"],
       calculate: ({ subject }) => {
         const drr_keys = get_drr_keys_with_data(subject);
 

@@ -115,7 +115,7 @@ export const declare_single_service_channels_panel = () =>
     subject_types: ["service"],
     panel_config_func: () => ({
       get_title: () => text_maker("single_service_channels_title"),
-      source: ["service_inventory"],
+      get_source_keys: () => ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <ServiceChannels service={subject} title={title} sources={sources} />

@@ -239,7 +239,7 @@ export const declare_single_service_standards_panel = () =>
     subject_types: ["service"],
     panel_config_func: () => ({
       get_title: () => text_maker("service_standards_title"),
-      source: ["service_inventory"],
+      get_source_keys: () => ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <ServiceStandards service={subject} title={title} sources={sources} />

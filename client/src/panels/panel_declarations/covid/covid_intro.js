@@ -124,7 +124,7 @@ export const declare_covid_intro_panel = () =>
       requires_years_with_covid_data: true,
       footnotes: ["COVID"],
       get_title: () => text_maker("covid_intro_panel_title"),
-      source: ["covid"],
+      get_source_keys: () => ["covid"],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
       render: ({ title, calculations, footnotes, sources, glossary_keys }) => (

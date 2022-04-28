@@ -112,7 +112,7 @@ export const declare_subject_offering_services_panel = () =>
         subject_type === "gov"
           ? text_maker("subject_offering_services_title")
           : text_maker("programs_offering_services_title"),
-      source: ["service_inventory"],
+      get_source_keys: () => ["service_inventory"],
       render({ title, subject, sources }) {
         return (
           <InfographicPanel title={title} sources={sources}>

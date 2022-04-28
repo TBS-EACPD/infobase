@@ -414,7 +414,7 @@ export const declare_results_table_panel = () =>
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
       footnotes: ["RESULTS", "DRR"],
-      source: ["departmental_results_reports"],
+      get_source_keys: () => ["departmental_results_reports"],
       requires_result_counts: subject_type === "dept",
       requires_granular_result_counts: subject_type !== "dept",
       get_title: ({ subject }) => {
