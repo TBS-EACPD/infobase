@@ -224,7 +224,7 @@ export class PanelRegistry {
       legacy_api_dataset_keys
     );
     if (!_.isEmpty(new_dataset_keys)) {
-      console.warn(
+      throw new Error(
         `Panel ${
           this.full_key
         }'s new data set key api includes additional keys not found in the legacy api. This may be correct? ${_.join(
