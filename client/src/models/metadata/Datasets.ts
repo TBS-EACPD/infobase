@@ -119,7 +119,7 @@ const program_resources = common_source_and_topic_data_set_defs(
     },
     program_ftes: {
       name: text_maker("program_ftes_dataset"),
-      topic_keys: ["FTE"],
+      topic_keys: ["FTE", "PLANNED_FTE"],
       infobase_link: rpb_link({
         table: "programFtes",
       }),
