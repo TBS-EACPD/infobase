@@ -115,7 +115,6 @@ const estimates_split_render_w_text_key =
   };
 
 const common_panel_config = {
-  machinery_footnotes: false,
   legacy_table_dependencies: ["orgVoteStatEstimates"],
   get_dataset_keys: () => ["tabled_estimates"],
   get_title: () => text_maker("in_year_estimates_split_title"),

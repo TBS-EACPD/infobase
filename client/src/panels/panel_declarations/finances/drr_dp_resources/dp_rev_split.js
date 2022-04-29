@@ -52,7 +52,6 @@ export const declare_dp_rev_split_panel = () =>
       legacy_table_dependencies: ["programSpending"],
       get_dataset_keys: () => ["program_spending"],
       get_title: () => text_maker("dp_rev_split_title"),
-      machinery_footnotes: false,
       glossary_keys: ["SPA"],
       calculate: ({ subject, tables }) => {
         const { programSpending } = tables;

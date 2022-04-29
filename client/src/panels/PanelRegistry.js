@@ -68,7 +68,6 @@ export class PanelRegistry {
       get_dataset_keys: _.constant([]),
       get_source_keys: _.property("derived_source_keys"),
       get_topic_keys: _.property("derived_topic_keys"),
-      machinery_footnotes: true, // TODO could be always included along with derived keys to get_topic_keys, panels could ommit as desired from there
       glossary_keys: [],
     };
     const panel_def = { ...panel_def_defaults, ...provided_def };
@@ -183,12 +182,8 @@ export class PanelRegistry {
       this.get_datasets(subject),
       "topic_keys"
     );
-    const Source_topic_keys = _.flatMap(this.get_sources(subject), "topic_key");
-    return _.uniq([
-      ...dataset_topic_keys,
-      ...Source_topic_keys,
-      ...(this.machinery_footnotes ? ["MACHINERY"] : []),
-    ]);
+    const source_topic_keys = _.flatMap(this.get_sources(subject), "topic_key");
+    return _.uniq([...dataset_topic_keys, ...source_topic_keys, "MACHINERY"]);
   }
   get_footnotes(subject) {
     return _.chain(
