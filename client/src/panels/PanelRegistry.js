@@ -226,7 +226,7 @@ export class PanelRegistry {
 
     const missing_keys = _.difference(legacy_api_keys, new_api_keys);
     if (!_.isEmpty(missing_keys)) {
-      console.warn(
+      throw new Error(
         `Panel ${
           this.full_key
         }'s new footnote topic api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
