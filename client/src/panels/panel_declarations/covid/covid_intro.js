@@ -126,7 +126,6 @@ export const declare_covid_intro_panel = () =>
       get_dataset_keys: () => ["covid_auth", "covid_exp"],
       get_topic_keys: () => ["COVID", "MACHINERY"],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
-      calculate: _.constant(true),
       render: ({
         title,
         calculations,

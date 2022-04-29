@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
@@ -18,7 +17,6 @@ export const declare_gov_related_info_panel = () =>
     subject_types: ["gov"],
 
     panel_config_func: () => ({
-      calculate: _.constant(true),
       get_title: () => text_maker("gov_related_info_title"),
       render({ title }) {
         return (
