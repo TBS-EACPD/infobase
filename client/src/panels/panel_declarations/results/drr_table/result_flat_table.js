@@ -413,9 +413,11 @@ export const declare_results_table_panel = () =>
     panel_key: "results_flat_table",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
+      legacy_non_table_dependencies:
+        subject_type === "gov"
+          ? ["requires_result_counts"]
+          : ["requires_granular_result_counts"],
       get_dataset_keys: () => ["actual_results"],
-      requires_result_counts: subject_type === "dept",
-      requires_granular_result_counts: subject_type !== "dept",
       get_title: ({ subject }) => {
         const drr_keys_with_data = get_drr_keys_with_data(subject);
 

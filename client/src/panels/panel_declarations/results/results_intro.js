@@ -93,8 +93,10 @@ export const declare_results_intro_panel = () =>
     panel_key: "results_intro",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      requires_result_counts: subject_type === "gov",
-      requires_granular_result_counts: subject_type !== "gov",
+      legacy_non_table_dependencies:
+        subject_type === "gov"
+          ? ["requires_result_counts"]
+          : ["requires_granular_result_counts"],
       get_dataset_keys: () => ["actual_results", "planned_results"],
       get_title: () => text_maker("results_intro_title"),
       calculate: ({ subject }) => {

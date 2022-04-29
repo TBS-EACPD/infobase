@@ -55,7 +55,10 @@ function ensure_loaded({
     .value();
 
   const check_for_panel_dependency = (dependency_key) =>
-    _.chain(panel_set).map(dependency_key).some().value();
+    _.chain(panel_set)
+      .flatMap("legacy_non_table_dependencies")
+      .includes(dependency_key)
+      .value();
 
   const should_load_results =
     results || check_for_panel_dependency("requires_results");

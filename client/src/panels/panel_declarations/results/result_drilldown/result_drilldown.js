@@ -104,6 +104,10 @@ export const declare_explore_results_panel = () =>
     panel_key: "explore_results",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
+      legacy_non_table_dependencies:
+        subject_type === "gov"
+          ? ["requires_result_counts"]
+          : ["requires_granular_result_counts"],
       legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => [
         "actual_results",
@@ -111,8 +115,6 @@ export const declare_explore_results_panel = () =>
         "program_spending",
         "program_ftes",
       ],
-      requires_result_counts: subject_type === "dept",
-      requires_granular_result_counts: subject_type !== "dept",
       calculate: ({ subject }) => {
         return get_docs_with_data(subject, subject_type);
       },

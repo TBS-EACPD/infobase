@@ -64,6 +64,7 @@ export class PanelRegistry {
   constructor(provided_def) {
     const panel_def_defaults = {
       legacy_table_dependencies: [],
+      legacy_non_table_dependencies: [],
       is_meta_panel: false,
       calculate: _.constant(true),
       get_dataset_keys: _.constant([]),
