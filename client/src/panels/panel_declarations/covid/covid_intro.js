@@ -127,11 +127,19 @@ export const declare_covid_intro_panel = () =>
       get_source_keys: () => ["covid"],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
-      render: ({ title, calculations, footnotes, sources, glossary_keys }) => (
+      render: ({
+        title,
+        calculations,
+        footnotes,
+        sources,
+        datasets,
+        glossary_keys,
+      }) => (
         <InfographicPanel
           {...{
             title,
             sources,
+            datasets,
             footnotes,
             glossary_keys,
           }}

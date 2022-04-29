@@ -120,11 +120,11 @@ export const declare_explore_results_panel = () =>
           ...year_range_with_data,
         });
       },
-      render({ title, subject, calculations, sources, footnotes }) {
+      render({ title, subject, calculations, sources, datasets, footnotes }) {
         const { docs_with_data, default_doc } = calculations;
 
         return (
-          <InfographicPanel {...{ title, sources, footnotes }}>
+          <InfographicPanel {...{ title, sources, datasets, footnotes }}>
             <SingleSubjResultsContainer
               {...{
                 subject,

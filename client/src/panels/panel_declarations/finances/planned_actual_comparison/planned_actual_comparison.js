@@ -96,7 +96,7 @@ export const declare_planned_actual_comparison_panel = () =>
         };
       },
 
-      render({ title, subject, calculations, sources }) {
+      render({ title, subject, calculations, sources, datasets }) {
         const {
           actual_spend,
           actual_ftes,
@@ -109,7 +109,7 @@ export const declare_planned_actual_comparison_panel = () =>
         } = calculations;
 
         return (
-          <TextPanel {...{ title, footnotes, sources }}>
+          <TextPanel {...{ title, footnotes, sources, datasets }}>
             <TM
               k={`${subject.subject_type}_planned_actual_text`}
               args={text_calculations}

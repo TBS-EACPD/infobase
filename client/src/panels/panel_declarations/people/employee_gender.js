@@ -85,7 +85,7 @@ export const declare_employee_gender_panel = () =>
       get_dataset_keys: () => ["employee_gender"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       get_title: () => text_maker("employee_gender_title"),
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const text_groups = (() => {
           const has_male_data = _.some(
             calculations,
@@ -135,7 +135,9 @@ export const declare_employee_gender_panel = () =>
         })();
 
         return (
-          <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
+          <StdPanel
+            {...{ title, footnotes: required_footnotes, sources, datasets }}
+          >
             <Col size={12} isText>
               <TM
                 k={subject_type + "_employee_gender_text"}

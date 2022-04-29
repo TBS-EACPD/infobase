@@ -177,9 +177,9 @@ export const declare_gov_drr_panel = () =>
         }),
       get_source_keys: () => ["departmental_results_reports"],
       calculate: () => !_.isEmpty(drr_keys),
-      render({ title, calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources, datasets }) {
         return (
-          <InfographicPanel {...{ title, footnotes, sources }}>
+          <InfographicPanel {...{ title, footnotes, sources, datasets }}>
             <DrrSummary {...calculations} />
           </InfographicPanel>
         );

@@ -395,7 +395,7 @@ export const declare_historical_g_and_c_panel = () =>
                 largest_type,
               };
             },
-            render({ title, calculations, footnotes, sources }) {
+            render({ title, calculations, footnotes, sources, datasets }) {
               const {
                 payments: series,
                 five_year_avg,
@@ -405,7 +405,7 @@ export const declare_historical_g_and_c_panel = () =>
               return (
                 <InfographicPanel
                   allowOverflow={true}
-                  {...{ title, footnotes, sources }}
+                  {...{ title, footnotes, sources, datasets }}
                 >
                   <HistTPTypes
                     text={
@@ -491,7 +491,7 @@ export const declare_historical_g_and_c_panel = () =>
                 }
               );
             },
-            render({ title, calculations, footnotes, sources }) {
+            render({ title, calculations, footnotes, sources, datasets }) {
               const { rows, rolled_up, text_calculations } = calculations;
               const text_content = (
                 <TM k="dept_historical_g_and_c_text" args={text_calculations} />
@@ -500,7 +500,7 @@ export const declare_historical_g_and_c_panel = () =>
               return (
                 <InfographicPanel
                   allowOverflow={true}
-                  {...{ title, sources, footnotes }}
+                  {...{ title, sources, datasets, footnotes }}
                 >
                   <HistTPTypes
                     text={text_content}

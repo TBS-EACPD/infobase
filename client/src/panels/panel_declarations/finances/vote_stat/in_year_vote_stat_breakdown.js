@@ -45,7 +45,7 @@ const color_scale = (vs) =>
   };
 
 const planned_vote_or_stat_render = (vs) =>
-  function ({ title, calculations, footnotes, sources }) {
+  function ({ title, calculations, footnotes, sources, datasets }) {
     const isVoted = vs === "voted";
 
     const { data, voted_stat_est_in_year } = calculations;
@@ -117,7 +117,7 @@ const planned_vote_or_stat_render = (vs) =>
 
     const show_pack = !is_a11y_mode;
     return (
-      <StdPanel {...{ title, footnotes, sources }}>
+      <StdPanel {...{ title, footnotes, sources, datasets }}>
         <Col isText size={12}>
           <TM
             k={

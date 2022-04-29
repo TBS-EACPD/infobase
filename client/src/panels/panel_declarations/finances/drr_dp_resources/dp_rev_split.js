@@ -128,11 +128,20 @@ export const declare_dp_rev_split_panel = () =>
           column_configs,
         };
       },
-      render({ title, calculations, footnotes, sources, glossary_keys }) {
+      render({
+        title,
+        calculations,
+        footnotes,
+        sources,
+        datasets,
+        glossary_keys,
+      }) {
         const { table_data, column_configs } = calculations;
 
         return (
-          <InfographicPanel {...{ title, footnotes, sources, glossary_keys }}>
+          <InfographicPanel
+            {...{ title, footnotes, sources, datasets, glossary_keys }}
+          >
             <DisplayTable
               table_name={text_maker("dp_rev_split_title")}
               data={table_data}

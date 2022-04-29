@@ -42,7 +42,7 @@ export const declare_estimates_in_perspective_panel = () =>
         };
       },
 
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const { gov_tabled_est_in_year, dept_tabled_est_in_year } =
           calculations;
 
@@ -57,7 +57,10 @@ export const declare_estimates_in_perspective_panel = () =>
           footnotes
         );
         return (
-          <StdPanel {...{ title, footnotes, sources }} allowOverflow={true}>
+          <StdPanel
+            {...{ title, footnotes, sources, datasets }}
+            allowOverflow={true}
+          >
             <Col isText size={!is_a11y_mode ? 5 : 12}>
               <TM k="estimates_perspective_text" args={calculations} />
             </Col>

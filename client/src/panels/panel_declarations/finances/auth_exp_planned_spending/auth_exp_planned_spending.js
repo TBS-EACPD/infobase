@@ -465,6 +465,7 @@ const render = function ({
   calculations,
   footnotes,
   sources,
+  datasets,
   glossary_keys,
 }) {
   const { data_series, additional_info, queried_votes } = calculations;
@@ -488,7 +489,7 @@ const render = function ({
     <InfographicPanel
       containerAlign={subject.has_planned_spending ? "top" : "middle"}
       title={text_maker("auth_exp_planned_spending_title", final_info)}
-      {...{ footnotes, sources, glossary_keys }}
+      {...{ footnotes, sources, datasets, glossary_keys }}
     >
       <div className="frow middle-xs">
         <div className="fcol-xs-12 fcol-md-4">

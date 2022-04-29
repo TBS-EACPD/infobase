@@ -632,12 +632,20 @@ export const declare_covid_estimates_panel = () =>
           !_.isEmpty(years_with_estimates) && { years: years_with_estimates }
         );
       },
-      render: ({ title, subject, calculations, footnotes, sources }) => (
+      render: ({
+        title,
+        subject,
+        calculations,
+        footnotes,
+        sources,
+        datasets,
+      }) => (
         <InfographicPanel
           allowOverflow={true}
           {...{
             title,
             sources,
+            datasets,
             footnotes,
           }}
         >

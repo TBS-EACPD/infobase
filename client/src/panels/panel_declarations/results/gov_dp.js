@@ -160,9 +160,12 @@ export const declare_gov_dp_panel = () =>
       calculate: () => !_.isEmpty(dp_keys),
       footnotes: ["RESULTS", "DP"],
       get_source_keys: () => ["departmental_plans"],
-      render({ title, sources, footnotes }) {
+      render({ title, sources, datasets, footnotes }) {
         return (
-          <InfographicPanel {...{ title, sources, footnotes }} allowOverflow>
+          <InfographicPanel
+            {...{ title, sources, datasets, footnotes }}
+            allowOverflow
+          >
             <DpSummary />
           </InfographicPanel>
         );

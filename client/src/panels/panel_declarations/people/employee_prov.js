@@ -70,8 +70,15 @@ class ProvPanel extends React.Component {
     };
   }
   render() {
-    const { title, subject, calculations, footnotes, sources, subject_type } =
-      this.props.render_args;
+    const {
+      title,
+      subject,
+      calculations,
+      footnotes,
+      sources,
+      datasets,
+      subject_type,
+    } = this.props.render_args;
 
     const { data } = calculations;
 
@@ -123,7 +130,7 @@ class ProvPanel extends React.Component {
     };
 
     return (
-      <StdPanel {...{ title, footnotes, sources }}>
+      <StdPanel {...{ title, footnotes, sources, datasets }}>
         <Col size={12} isText>
           <TM
             k={subject_type + "_employee_prov_text"}

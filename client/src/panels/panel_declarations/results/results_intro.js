@@ -190,9 +190,9 @@ export const declare_results_intro_panel = () =>
           has_current_drr,
         };
       },
-      render({ title, subject, calculations, sources, footnotes }) {
+      render({ title, subject, calculations, sources, datasets, footnotes }) {
         return (
-          <InfographicPanel {...{ title, sources, footnotes }}>
+          <InfographicPanel {...{ title, sources, datasets, footnotes }}>
             <ResultsIntroPanel subject={subject} {...calculations} />
           </InfographicPanel>
         );

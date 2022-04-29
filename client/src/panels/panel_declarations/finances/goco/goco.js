@@ -516,9 +516,11 @@ class Goco extends React.Component {
   }
 }
 
-function render({ title, footnotes, sources, glossary_keys }) {
+function render({ title, footnotes, sources, datasets, glossary_keys }) {
   return (
-    <InfographicPanel {...{ title, sources, footnotes, glossary_keys }}>
+    <InfographicPanel
+      {...{ title, sources, datasets, footnotes, glossary_keys }}
+    >
       <Goco />
     </InfographicPanel>
   );

@@ -67,7 +67,7 @@ const common_cal = (programs, programSobjs) => {
 
 const render_w_options =
   ({ text_key }) =>
-  ({ title, calculations, footnotes, sources }) => {
+  ({ title, calculations, footnotes, sources, datasets }) => {
     const { top_3_sos_and_remainder, text_calculations } = calculations;
 
     const graph_data = top_3_sos_and_remainder.map((d) => ({
@@ -77,7 +77,7 @@ const render_w_options =
     }));
 
     return (
-      <StdPanel {...{ title, footnotes, sources }}>
+      <StdPanel {...{ title, footnotes, sources, datasets }}>
         <Col isText size={5}>
           <TM k={text_key} args={text_calculations} />
         </Col>

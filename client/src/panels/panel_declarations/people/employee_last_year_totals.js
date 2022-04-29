@@ -51,7 +51,7 @@ export const declare_employee_last_year_totals_panel = () =>
         };
       },
 
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const dept_emp_value = calculations.vals[1].value;
         const gov_emp_value = calculations.vals[0].value;
 
@@ -59,7 +59,10 @@ export const declare_employee_last_year_totals_panel = () =>
 
         const text_calculations = { dept_emp_value, dept_emp_pct, subject };
         return (
-          <StdPanel {...{ title, footnotes, sources }} allowOverflow={true}>
+          <StdPanel
+            {...{ title, footnotes, sources, datasets }}
+            allowOverflow={true}
+          >
             <Col size={!is_a11y_mode ? 5 : 12} isText>
               <TM
                 k="dept_employee_last_year_totals_text"
