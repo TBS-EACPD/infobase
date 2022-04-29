@@ -439,11 +439,11 @@ export const declare_results_table_panel = () =>
           }
         );
       },
-      render({ title, subject, calculations, sources, footnotes }) {
+      render({ title, subject, calculations, sources, datasets, footnotes }) {
         const { drr_keys_with_data, subject_result_counts } = calculations;
 
         return (
-          <InfographicPanel {...{ title, sources, footnotes }}>
+          <InfographicPanel {...{ title, sources, datasets, footnotes }}>
             <DocTabbedResultsTable
               {...{
                 subject,

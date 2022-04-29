@@ -74,7 +74,7 @@ export const declare_internal_services_panel = () =>
           series,
         };
       },
-      render({ title, subject, calculations, sources, footnotes }) {
+      render({ title, subject, calculations, sources, datasets, footnotes }) {
         const { gov_fte_total, gov_isc_fte, total_fte, isc_fte, series } =
           calculations;
 
@@ -180,7 +180,7 @@ export const declare_internal_services_panel = () =>
 
         return (
           !_.isEmpty(bar_data) && (
-            <InfographicPanel {...{ title, sources, footnotes }}>
+            <InfographicPanel {...{ title, sources, datasets, footnotes }}>
               {to_render}
             </InfographicPanel>
           )

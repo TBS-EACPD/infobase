@@ -16,7 +16,7 @@ const main_col = "{{est_in_year}}_estimates";
 
 const render_w_options =
   ({ graph_col, text_col, text_key }) =>
-  ({ title, calculations, footnotes, sources, glossary_keys }) => {
+  ({ title, calculations, footnotes, sources, datasets, glossary_keys }) => {
     const { vote_stat_est_in_year, text_calculations } = calculations;
 
     const data = _.map(vote_stat_est_in_year, (data_set) => ({
@@ -25,7 +25,7 @@ const render_w_options =
     }));
 
     return (
-      <StdPanel {...{ title, sources, footnotes, glossary_keys }}>
+      <StdPanel {...{ title, sources, datasets, footnotes, glossary_keys }}>
         <Col isText size={text_col}>
           <TM k={text_key} args={text_calculations} />
         </Col>

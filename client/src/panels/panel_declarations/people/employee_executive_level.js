@@ -104,7 +104,7 @@ export const declare_employee_executive_level_panel = () =>
           subject
         );
       },
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const { series, has_non_ex_only } = calculations;
 
         const text_calculations = (() => {
@@ -161,7 +161,7 @@ export const declare_employee_executive_level_panel = () =>
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
         return (
-          <StdPanel {...{ title, footnotes, sources }}>
+          <StdPanel {...{ title, footnotes, sources, datasets }}>
             <Col size={12} isText>
               <TM
                 k={

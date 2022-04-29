@@ -38,7 +38,7 @@ export class ServiceStandards extends React.Component {
   }
 
   render() {
-    const { service, title, sources } = this.props;
+    const { service, title, sources, datasets } = this.props;
 
     const { active_statuses } = this.state;
 
@@ -194,7 +194,12 @@ export class ServiceStandards extends React.Component {
     );
 
     return (
-      <InfographicPanel title={title} sources={sources} footnotes={footnotes}>
+      <InfographicPanel
+        title={title}
+        sources={sources}
+        datasets={datasets}
+        footnotes={footnotes}
+      >
         {!_.isEmpty(data) ? (
           <Fragment>
             <TM className="medium-panel-text" k="service_standards_text" />
@@ -240,9 +245,14 @@ export const declare_single_service_standards_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("service_standards_title"),
       get_source_keys: () => ["service_inventory"],
-      render({ title, subject, sources }) {
+      render({ title, subject, sources, datasets }) {
         return (
-          <ServiceStandards service={subject} title={title} sources={sources} />
+          <ServiceStandards
+            service={subject}
+            title={title}
+            sources={sources}
+            datasets={datasets}
+          />
         );
       },
     }),

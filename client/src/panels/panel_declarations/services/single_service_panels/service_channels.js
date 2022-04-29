@@ -20,7 +20,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceChannels extends React.Component {
   render() {
-    const { service, title, sources } = this.props;
+    const { service, title, sources, datasets } = this.props;
 
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
@@ -58,7 +58,7 @@ export class ServiceChannels extends React.Component {
     }));
 
     return (
-      <InfographicPanel title={title} sources={sources}>
+      <InfographicPanel title={title} sources={sources} datasets={datasets}>
         {filtered_keys.length > 0 ? (
           <Fragment>
             <TM k="service_channels_text" className="medium-panel-text" />
@@ -116,9 +116,14 @@ export const declare_single_service_channels_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("single_service_channels_title"),
       get_source_keys: () => ["service_inventory"],
-      render({ title, subject, sources }) {
+      render({ title, subject, sources, datasets }) {
         return (
-          <ServiceChannels service={subject} title={title} sources={sources} />
+          <ServiceChannels
+            service={subject}
+            title={title}
+            sources={sources}
+            datasets={datasets}
+          />
         );
       },
     }),

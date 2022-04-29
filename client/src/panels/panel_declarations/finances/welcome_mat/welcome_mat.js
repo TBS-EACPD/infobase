@@ -764,9 +764,12 @@ function render({
   footnotes,
   glossary_keys,
   sources,
+  datasets,
 }) {
   return (
-    <InfographicPanel {...{ sources, glossary_keys, footnotes, title }}>
+    <InfographicPanel
+      {...{ sources, datasets, glossary_keys, footnotes, title }}
+    >
       <WelcomeMat subject={subject} {...calculations} />
     </InfographicPanel>
   );

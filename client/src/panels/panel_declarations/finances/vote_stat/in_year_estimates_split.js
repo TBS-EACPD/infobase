@@ -54,7 +54,7 @@ const estimates_split_calculate = ({ subject, tables }) => {
 
 const estimates_split_render_w_text_key =
   (text_key) =>
-  ({ title, calculations, footnotes, sources }) => {
+  ({ title, calculations, footnotes, sources, datasets }) => {
     const { in_year_estimates_split } = calculations;
     const estimate_data = _.map(in_year_estimates_split, ([tick, data]) => ({
       label: tick,
@@ -103,7 +103,7 @@ const estimates_split_render_w_text_key =
     );
 
     return (
-      <StdPanel {...{ title, sources, footnotes }}>
+      <StdPanel {...{ title, sources, datasets, footnotes }}>
         <Col isText size={6}>
           <TM k={text_key} args={calculations} />
         </Col>

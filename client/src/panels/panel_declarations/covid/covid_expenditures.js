@@ -431,11 +431,19 @@ export const declare_covid_expenditures_panel = () =>
           }
         );
       },
-      render: ({ title, subject, calculations, footnotes, sources }) => (
+      render: ({
+        title,
+        subject,
+        calculations,
+        footnotes,
+        sources,
+        datasets,
+      }) => (
         <InfographicPanel
           {...{
             title,
             sources,
+            datasets,
             footnotes,
           }}
         >

@@ -88,6 +88,7 @@ export const declare_employee_type_panel = () =>
         calculations,
         footnotes,
         sources,
+        datasets,
         glossary_keys,
       }) {
         const student = _.find(
@@ -128,7 +129,7 @@ export const declare_employee_type_panel = () =>
         const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
         return (
-          <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
+          <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
             <Col size={12} isText>
               <TM
                 k={subject_type + "_employee_type_text"}

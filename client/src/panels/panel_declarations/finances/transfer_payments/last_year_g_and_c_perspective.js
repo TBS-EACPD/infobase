@@ -59,11 +59,13 @@ export const declare_last_year_g_and_c_perspective_panel = () =>
           total_pct,
         };
       },
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const { gov_tp, org_tp, dept_spending } = calculations;
 
         return (
-          <StdPanel {...{ title, footnotes, sources, allowOverflow: true }}>
+          <StdPanel
+            {...{ title, footnotes, sources, datasets, allowOverflow: true }}
+          >
             <Col size={!is_a11y_mode ? 6 : 12} isText>
               <TM
                 k="dept_last_year_g_and_c_perspective_text"

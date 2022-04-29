@@ -288,9 +288,9 @@ export const declare_application_channels_by_services_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("customizable_service_graph"),
       get_source_keys: () => ["service_inventory"],
-      render({ title, subject, sources }) {
+      render({ title, subject, sources, datasets }) {
         return (
-          <InfographicPanel title={title} sources={sources}>
+          <InfographicPanel title={title} sources={sources} datasets={datasets}>
             <ServicesChannelsPanel subject={subject} />
           </InfographicPanel>
         );

@@ -40,7 +40,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type =
   (is_fte) =>
-  ({ title, sources, subject, calculations, footnotes }) => {
+  ({ title, sources, datasets, subject, calculations, footnotes }) => {
     const {
       exp_data,
       fte_data,
@@ -76,7 +76,7 @@ const render_resource_type =
     );
 
     return (
-      <InfographicPanel {...{ title, sources, footnotes }}>
+      <InfographicPanel {...{ title, sources, datasets, footnotes }}>
         <PlannedProgramResources
           years_with_gap_year={is_fte ? fte_years : exp_years}
           programs={_.sortBy(is_fte ? fte_data : exp_data, "label")}

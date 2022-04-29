@@ -119,7 +119,7 @@ export const declare_employee_age_panel = () =>
       get_dataset_keys: () => ["age_group", "avg_age"],
       calculate: calculate_funcs_by_subject_type[subject_type],
       get_title: () => text_maker("employee_age_title"),
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const { avg_age, age_group } = calculations;
 
         const dept_avg_first_active_year =
@@ -197,7 +197,9 @@ export const declare_employee_age_panel = () =>
         })();
 
         return (
-          <StdPanel {...{ title, footnotes: required_footnotes, sources }}>
+          <StdPanel
+            {...{ title, footnotes: required_footnotes, sources, datasets }}
+          >
             <Col size={12} isText>
               <TM
                 k={subject_type + "_employee_age_text"}

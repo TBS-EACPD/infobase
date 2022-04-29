@@ -16,7 +16,7 @@ const { std_years } = year_templates;
 
 const render_w_options =
   ({ text_key, graph_col, text_col }) =>
-  ({ title, calculations, sources, footnotes, glossary_keys }) => {
+  ({ title, calculations, sources, datasets, footnotes, glossary_keys }) => {
     const { vote_stat, text_calculations } = calculations;
 
     const data = _.map(vote_stat, (data_set) => ({
@@ -25,7 +25,7 @@ const render_w_options =
     }));
 
     return (
-      <StdPanel {...{ title, footnotes, sources, glossary_keys }}>
+      <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
         <Col isText size={text_col}>
           <TM k={text_key} args={text_calculations} />
         </Col>

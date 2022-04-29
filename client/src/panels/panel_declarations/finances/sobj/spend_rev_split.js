@@ -45,7 +45,14 @@ const rows_to_rev_split = (rows) => {
   return { neg_exp, gross_exp, net_exp };
 };
 
-function render({ title, subject, calculations, footnotes, sources }) {
+function render({
+  title,
+  subject,
+  calculations,
+  footnotes,
+  sources,
+  datasets,
+}) {
   const { text_calculations } = calculations;
   const { last_year_gross_exp, last_year_net_exp, last_year_rev } =
     text_calculations;
@@ -91,7 +98,7 @@ function render({ title, subject, calculations, footnotes, sources }) {
   })();
 
   return (
-    <StdPanel {...{ title, footnotes, sources }}>
+    <StdPanel {...{ title, footnotes, sources, datasets }}>
       <Col size={5} isText>
         <TM
           k={text_keys_by_subject_type[subject.subject_type]}

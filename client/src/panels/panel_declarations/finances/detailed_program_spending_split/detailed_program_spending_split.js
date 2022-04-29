@@ -548,7 +548,7 @@ export const declare_detailed_program_spending_split_panel = () =>
         };
       },
 
-      render({ title, calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources, datasets }) {
         const {
           text_calculations,
           flat_data,
@@ -586,6 +586,7 @@ export const declare_detailed_program_spending_split_panel = () =>
             {...{
               title,
               sources,
+              datasets,
               footnotes: [...footnotes, ...program_footnotes],
             }}
           >

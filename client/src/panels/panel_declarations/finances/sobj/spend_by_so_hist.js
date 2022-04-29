@@ -243,7 +243,7 @@ export const declare_spend_by_so_hist_panel = () =>
           text_calculations,
         };
       },
-      render({ title, calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources, datasets }) {
         const { data, text_calculations } = calculations;
 
         const graph_content = (() => {
@@ -255,7 +255,7 @@ export const declare_spend_by_so_hist_panel = () =>
         })();
 
         return (
-          <InfographicPanel {...{ title, sources, footnotes }}>
+          <InfographicPanel {...{ title, sources, datasets, footnotes }}>
             <div className="medium-panel-text">
               <TM k="dept_fin_spend_by_so_hist_text" args={text_calculations} />
             </div>

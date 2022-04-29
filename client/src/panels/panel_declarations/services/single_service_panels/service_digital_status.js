@@ -21,7 +21,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 export class ServiceDigitalStatus extends React.Component {
   render() {
-    const { service, title, sources } = this.props;
+    const { service, title, sources, datasets } = this.props;
 
     const footnote = service.digital_enablement_comment && [
       create_fake_footnote({
@@ -59,7 +59,12 @@ export class ServiceDigitalStatus extends React.Component {
     };
 
     return (
-      <InfographicPanel title={title} sources={sources} footnotes={footnote}>
+      <InfographicPanel
+        title={title}
+        sources={sources}
+        datasets={datasets}
+        footnotes={footnote}
+      >
         <TM className="medium-panel-text" k="overview_digital_status_title" />
         <DisplayTable
           unsorted_initial={true}
@@ -86,12 +91,13 @@ export const declare_single_service_digital_status_panel = () =>
     panel_config_func: () => ({
       get_title: () => text_maker("digital_status"),
       get_source_keys: () => ["service_inventory"],
-      render({ title, subject, sources }) {
+      render({ title, subject, sources, datasets }) {
         return (
           <ServiceDigitalStatus
             service={subject}
             title={title}
             sources={sources}
+            datasets={datasets}
           />
         );
       },

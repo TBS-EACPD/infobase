@@ -53,7 +53,7 @@ export const declare_personnel_spend_panel = () =>
         };
       },
 
-      render({ title, calculations, footnotes, sources }) {
+      render({ title, calculations, footnotes, sources, datasets }) {
         const { text_calculations } = calculations;
 
         const personnel_data = [
@@ -67,7 +67,7 @@ export const declare_personnel_spend_panel = () =>
         ];
 
         return (
-          <StdPanel {...{ title, footnotes, sources }}>
+          <StdPanel {...{ title, footnotes, sources, datasets }}>
             <Col size={5} isText>
               <TM k="personnel_spend_text" args={text_calculations} />
             </Col>

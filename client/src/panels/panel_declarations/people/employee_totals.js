@@ -44,7 +44,7 @@ export const declare_employee_totals_panel = () =>
         };
       },
 
-      render({ title, subject, calculations, footnotes, sources }) {
+      render({ title, subject, calculations, footnotes, sources, datasets }) {
         const { series, ticks } = calculations;
 
         const first_active_year_index = _.findIndex(series, (pop) => pop !== 0);
@@ -82,7 +82,7 @@ export const declare_employee_totals_panel = () =>
         ];
 
         return (
-          <StdPanel {...{ title, footnotes, sources }}>
+          <StdPanel {...{ title, footnotes, sources, datasets }}>
             <Col size={4} isText>
               <TM
                 k={subject_type + "_employee_totals_text"}
