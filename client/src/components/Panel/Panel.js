@@ -7,6 +7,8 @@ import { FootnoteList } from "src/components/FootnoteList/FootnoteList";
 import { GlossaryItem } from "src/components/glossary_components";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
+import { get_source_links } from "src/DatasetsRoute/utils";
+
 import { textLightColor } from "src/style_constants/index";
 
 import text from "./Panel.yaml";
@@ -14,52 +16,16 @@ import "./Panel.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const PanelSource = ({ links }) => {
-  if (_.isEmpty(links)) {
-    return null;
-  }
-  const last_ix = links.length - 1;
-  return (
-    <span>
-      <span aria-hidden>
-        <TM k="panel_source_link_text" />
-      </span>
-      <span className="sr-only">
-        <TM k="panel_a11y_source_expl" />
-      </span>
-      <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
-        {_.map(links, ({ href, html }, ix) => (
-          <li key={ix} className="list-inline-item">
-            <a className="bold" href={href}>
-              <span dangerouslySetInnerHTML={{ __html: html }} />
-            </a>
-            {ix !== last_ix && ", "}
-          </li>
-        ))}
-      </ul>
-    </span>
-  );
-};
-
-const PanelGlossary = ({ keys }) => {
-  if (_.isEmpty(keys)) {
-    return null;
-  }
-  const last_ix = keys.length - 1;
-  return (
-    <span>
-      <TM k="panel_glossary_text" />
-      <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
-        {_.map(keys, (key, ix) => (
-          <li key={ix} className="list-inline-item">
-            <GlossaryItem id={key} item_class="bold" />
-            {ix !== last_ix && ", "}
-          </li>
-        ))}
-      </ul>
-    </span>
-  );
-};
+const InlineCommaList = ({ items }) => (
+  <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
+    {_.map(items, (item, ix) => (
+      <li key={ix} className="list-inline-item">
+        {item}
+        {ix !== items.length - 1 && ", "}
+      </li>
+    ))}
+  </ul>
+);
 
 export class Panel extends React.Component {
   constructor(props) {
@@ -76,6 +42,7 @@ export class Panel extends React.Component {
       otherHeaderContent,
       children,
       sources,
+      datasets,
       glossary_keys,
       footnotes,
     } = this.props;
@@ -111,15 +78,45 @@ export class Panel extends React.Component {
         {isOpen && (
           <div className="panel-body">
             {children}
-            <div className="mrgn-tp-md" />
-            {!_.isEmpty(sources) && (
-              <div>
-                <PanelSource links={sources} />
-              </div>
-            )}
             {!_.isEmpty(glossary_keys) && (
               <div className="mrgn-tp-md">
-                <PanelGlossary keys={glossary_keys} />
+                <TM k="panel_additional_terms" />
+                <TM k="panel_inline_colon" />
+                <InlineCommaList
+                  items={_.map(glossary_keys, (key) => (
+                    <GlossaryItem id={key} item_class="bold" />
+                  ))}
+                />
+              </div>
+            )}
+            {!_.isEmpty(sources) && (
+              <div className="mrgn-tp-md">
+                <TM k="sources" />
+                <TM k="panel_inline_colon" />
+                <InlineCommaList
+                  items={_.chain(sources)
+                    .map("key")
+                    .thru(get_source_links)
+                    .map(({ href, html }, ix) => (
+                      <a key={ix} className="bold" href={href}>
+                        <span dangerouslySetInnerHTML={{ __html: html }} />
+                      </a>
+                    ))
+                    .value()}
+                />
+              </div>
+            )}
+            {!_.isEmpty(datasets) && (
+              <div className="mrgn-tp-md">
+                <TM k="datasets" />
+                <TM k="panel_inline_colon" />
+                <InlineCommaList
+                  items={_.map(datasets, ({ name, infobase_link }) => (
+                    <a className="bold" href={infobase_link}>
+                      <span dangerouslySetInnerHTML={{ __html: name }} />
+                    </a>
+                  ))}
+                />
               </div>
             )}
             {!_.isEmpty(footnotes) && (

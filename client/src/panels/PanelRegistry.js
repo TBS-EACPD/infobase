@@ -7,7 +7,6 @@ import { Sources } from "src/models/metadata/Sources";
 
 import { assign_to_dev_helper_namespace } from "src/core/assign_to_dev_helper_namespace";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { Table } from "src/tables/TableClass";
 
 const panel_store = {};
@@ -115,7 +114,8 @@ export class PanelRegistry {
           subject,
           calculations: this.calculate(subject),
           title: this.get_title(subject),
-          sources: this.sources(subject),
+          sources: this.get_sources(subject),
+          datasets: this.get_datasets(subject),
           footnotes: this.get_footnotes(subject),
           glossary_keys: this.glossary_keys,
         },
@@ -176,15 +176,6 @@ export class PanelRegistry {
   }
   get_sources(subject) {
     return _.map(this.get_source_keys(subject), (key) => Sources[key]);
-  }
-  sources(subject) {
-    return [
-      ...get_source_links(this.get_source_keys(subject)),
-      ..._.map(this.get_datasets(subject), ({ name, infobase_link }) => ({
-        html: name,
-        href: infobase_link,
-      })),
-    ];
   }
 
   derive_topic_keys_from_sources_and_datasets(subject) {

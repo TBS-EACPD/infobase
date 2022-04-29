@@ -1,21 +1,15 @@
-panel_source_link_text:
-  en: | 
-    See the data: 
-  fr: | 
-    Voir les données : 
-
-panel_a11y_source_expl:
-  en: For data in a tabular format, see the following links
-  fr: Pour voir les données en forme tabulaire, veuillez voir les liens suivants
-
-panel_glossary_text:
-  en: |
-    Additional terms:
-  fr: |
-    Définitions supplémentaires :
 collapse_panel:
   en: Collapse this panel
   fr: Fermer ce graphique
+  
 expand_panel:
   en: Expand this panel
   fr: Ouvrir ce graphique
+
+panel_inline_colon:
+  en: ": "
+  fr: " : "
+
+panel_additional_terms:
+  en: Additional terms
+  fr: Définitions supplémentaires
