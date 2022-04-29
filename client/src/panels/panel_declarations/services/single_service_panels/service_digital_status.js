@@ -90,7 +90,7 @@ export const declare_single_service_digital_status_panel = () =>
     subject_types: ["service"],
     panel_config_func: () => ({
       get_title: () => text_maker("digital_status"),
-      get_source_keys: () => ["service_inventory"],
+      get_dataset_keys: () => ["service_inventory"],
       render({ title, subject, sources, datasets }) {
         return (
           <ServiceDigitalStatus
