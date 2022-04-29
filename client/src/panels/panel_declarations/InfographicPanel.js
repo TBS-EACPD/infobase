@@ -11,9 +11,14 @@ import {
   ShareButton,
   WriteToClipboard,
   PDFGenerator,
+  Details,
+  FootnoteList,
+  GlossaryItem,
 } from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
+
+import { get_source_links } from "src/DatasetsRoute/utils";
 
 import { IconCopyLink } from "src/icons/icons";
 
@@ -21,7 +26,18 @@ import { infographic_href_template } from "src/infographic/infographic_href_temp
 
 import text from "./InfographicPanel.yaml";
 
-const { text_maker } = create_text_maker_component(text);
+const { text_maker, TM } = create_text_maker_component(text);
+
+const InlineCommaList = ({ items }) => (
+  <ul className="list-unstyled list-inline" style={{ display: "inline" }}>
+    {_.map(items, (item, ix) => (
+      <li key={ix} className="list-inline-item">
+        {item}
+        {ix !== items.length - 1 && ", "}
+      </li>
+    ))}
+  </ul>
+);
 
 export const InfographicPanel = (props) => {
   const { Consumer } = panel_context;
@@ -30,12 +46,12 @@ export const InfographicPanel = (props) => {
 class Panel_ extends React.Component {
   render() {
     const {
-      context,
       title,
       sources,
       datasets,
       glossary_keys,
       footnotes,
+      context,
       children,
       allowOverflow,
     } = this.props;
@@ -101,12 +117,58 @@ class Panel_ extends React.Component {
         allowOverflow={allowOverflow}
         title={title}
         otherHeaderContent={header_utils}
-        children={children}
-        sources={sources}
-        datasets={datasets}
-        glossary_keys={glossary_keys}
-        footnotes={footnotes}
-      />
+      >
+        {children}
+        {!_.isEmpty(glossary_keys) && (
+          <div className="mrgn-tp-md">
+            <TM k="panel_additional_terms" />
+            <TM k="panel_inline_colon" />
+            <InlineCommaList
+              items={_.map(glossary_keys, (key) => (
+                <GlossaryItem id={key} item_class="bold" />
+              ))}
+            />
+          </div>
+        )}
+        {!_.isEmpty(sources) && (
+          <div className="mrgn-tp-md">
+            <TM k="sources" />
+            <TM k="panel_inline_colon" />
+            <InlineCommaList
+              items={_.chain(sources)
+                .map("key")
+                .thru(get_source_links)
+                .map(({ href, html }, ix) => (
+                  <a key={ix} className="bold" href={href}>
+                    <span dangerouslySetInnerHTML={{ __html: html }} />
+                  </a>
+                ))
+                .value()}
+            />
+          </div>
+        )}
+        {!_.isEmpty(datasets) && (
+          <div className="mrgn-tp-md">
+            <TM k="datasets" />
+            <TM k="panel_inline_colon" />
+            <InlineCommaList
+              items={_.map(datasets, ({ name, infobase_link }) => (
+                <a className="bold" href={infobase_link}>
+                  <span dangerouslySetInnerHTML={{ __html: name }} />
+                </a>
+              ))}
+            />
+          </div>
+        )}
+        {!_.isEmpty(footnotes) && (
+          <div className="mrgn-tp-md">
+            <Details
+              summary_content={<TM k="footnotes" />}
+              content={<FootnoteList footnotes={footnotes} />}
+            />
+          </div>
+        )}
+      </Panel>
     );
   }
 }
