@@ -24,7 +24,6 @@ export const declare_estimates_in_perspective_panel = () =>
       get_title: () => text_maker("estimates_perspective_title"),
       legacy_table_dependencies: ["orgVoteStatEstimates"],
       get_dataset_keys: () => ["tabled_estimates"],
-      machinery_footnotes: false,
       calculate: ({ subject, tables }) => {
         const { orgVoteStatEstimates } = tables;
         const gov_q = orgVoteStatEstimates.q(Gov.instance);
