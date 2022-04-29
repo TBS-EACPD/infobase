@@ -150,7 +150,7 @@ export const declare_gov_dp_panel = () =>
     panel_key: "gov_dp",
     subject_types: ["gov"],
     panel_config_func: () => ({
-      requires_result_counts: true,
+      legacy_non_table_dependencies: ["requires_result_counts"],
       get_title: () =>
         text_maker("gov_dp_summary_title", {
           first_year: get_year_for_doc_key(_.first(dp_keys)),

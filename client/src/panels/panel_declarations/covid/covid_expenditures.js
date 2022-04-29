@@ -416,8 +416,10 @@ export const declare_covid_expenditures_panel = () =>
     panel_key,
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      requires_years_with_covid_data: true,
-      requires_covid_measures: true,
+      legacy_non_table_dependencies: [
+        "requires_years_with_covid_data",
+        "requires_covid_measures",
+      ],
       get_title: () => text_maker("covid_expenditures_estimated_exp"),
       get_dataset_keys: () => ["covid_exp"],
       calculate: ({ subject }) => {

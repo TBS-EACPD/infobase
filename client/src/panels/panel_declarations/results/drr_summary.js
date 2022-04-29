@@ -82,8 +82,10 @@ export const declare_drr_summary_panel = () =>
     panel_key: "drr_summary",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
-      requires_result_counts: subject_type === "dept",
-      requires_granular_result_counts: subject_type !== "dept",
+      legacy_non_table_dependencies:
+        subject_type === "dept"
+          ? ["requires_result_counts"]
+          : ["requires_granular_result_counts"],
       get_title: ({ subject }) => {
         const drr_keys = get_drr_keys_with_data(subject);
 

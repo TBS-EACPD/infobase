@@ -121,7 +121,7 @@ export const declare_covid_intro_panel = () =>
     panel_key: "covid_intro",
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      requires_years_with_covid_data: true,
+      legacy_non_table_dependencies: ["requires_years_with_covid_data"],
       get_title: () => text_maker("covid_intro_panel_title"),
       get_dataset_keys: () => ["covid_auth", "covid_exp"],
       get_topic_keys: () => ["COVID", "MACHINERY"],
