@@ -122,9 +122,9 @@ export const declare_covid_intro_panel = () =>
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       requires_years_with_covid_data: true,
-      footnotes: ["COVID"],
       get_title: () => text_maker("covid_intro_panel_title"),
       get_dataset_keys: () => ["covid_auth", "covid_exp"],
+      get_topic_keys: () => ["COVID", "MACHINERY"],
       glossary_keys: ["MAINS", "SUPPS", "EXP"],
       calculate: _.constant(true),
       render: ({

@@ -440,7 +440,6 @@ export const declare_detailed_program_spending_split_panel = () =>
       legacy_table_dependencies: ["programSobjs", "programSpending"],
       get_dataset_keys: () => ["program_standard_objects", "program_spending"],
       get_title: () => text_maker("detailed_program_spending_split_title"),
-      footnotes: footnote_topics,
       calculate: ({ subject, tables }) => {
         const { programSobjs, programSpending } = tables;
 

@@ -941,7 +941,6 @@ const common_program_crso_calculate = ({ subject, tables }) => {
 const common_panel_config = {
   legacy_table_dependencies: ["programSpending", "programFtes"],
   get_dataset_keys: () => ["program_spending", "program_ftes"],
-  footnotes: ["MACHINERY", "PLANNED_EXP", "FTE", "PLANNED_FTE", "EXP"],
   get_title: () => text_maker("welcome_mat_title"),
 };
 

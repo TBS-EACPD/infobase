@@ -45,7 +45,6 @@ export const declare_vote_stat_split_panel = () =>
     panel_config_func: () => ({
       legacy_table_dependencies: ["programVoteStat"],
       get_dataset_keys: () => ["program_vote_stat_objects"],
-      footnotes: ["VOTED", "STAT"],
       glossary_keys: ["AUTH"],
       get_title: () => text_maker("vote_stat_split_title"),
       calculate: ({ subject, tables }) => {

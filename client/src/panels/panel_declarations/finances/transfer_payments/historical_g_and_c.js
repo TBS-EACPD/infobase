@@ -425,7 +425,6 @@ export const declare_historical_g_and_c_panel = () =>
           return {
             ...common_panel_config,
             key: "historical_g_and_c",
-            footnotes: ["SOBJ10"],
             calculate: ({ subject, tables }) => {
               const { orgTransferPayments } = tables;
 

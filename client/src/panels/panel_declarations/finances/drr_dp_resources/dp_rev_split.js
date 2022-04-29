@@ -53,7 +53,6 @@ export const declare_dp_rev_split_panel = () =>
       get_dataset_keys: () => ["program_spending"],
       get_title: () => text_maker("dp_rev_split_title"),
       machinery_footnotes: false,
-      footnotes: ["PLANNED_GROSS", "PLANNED_EXP", "PLANNED_FTE"],
       glossary_keys: ["SPA"],
       calculate: ({ subject, tables }) => {
         const { programSpending } = tables;
