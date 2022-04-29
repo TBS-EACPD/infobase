@@ -5,11 +5,3 @@ collapse_panel:
 expand_panel:
   en: Expand this panel
   fr: Ouvrir ce graphique
-
-panel_inline_colon:
-  en: ": "
-  fr: " : "
-
-panel_additional_terms:
-  en: Additional terms
-  fr: Définitions supplémentaires

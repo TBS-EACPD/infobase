@@ -9,3 +9,11 @@ panel_permalink:
 panel_share_button:
   en: Share panel link
   fr: Partager le lien du graphique
+
+panel_inline_colon:
+  en: ": "
+  fr: " : "
+
+panel_additional_terms:
+  en: Additional terms
+  fr: Définitions supplémentaires
