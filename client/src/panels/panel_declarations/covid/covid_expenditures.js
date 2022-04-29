@@ -2,8 +2,8 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import { TabsStateful, LeafSpinner, DisplayTable } from "src/components/index";
 

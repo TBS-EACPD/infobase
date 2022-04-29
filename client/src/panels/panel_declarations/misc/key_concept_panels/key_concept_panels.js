@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import { PinnedFAQ } from "src/components/index";
 import { create_text_maker_component } from "src/components/misc_util_components";

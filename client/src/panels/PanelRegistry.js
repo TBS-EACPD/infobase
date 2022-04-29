@@ -243,4 +243,28 @@ export class PanelRegistry {
   }
 }
 
+export const declare_panel = ({
+  panel_key,
+  subject_types,
+  panel_config_func,
+}) => {
+  // HACK WARNING: redeclarations on the same panel_key are quietly thrown out here, with no warning.
+  // With the current flow for loading panels from the infographic route via `get_panels_for_subject`, which was designed for bundle splitting,
+  // these declare_panel calls are repeated on every infographic bubble load. Untangling this will be a thorny TODO, but until we do there's
+  // going to be a potential blind spot on miss-use of `declare_panel` and/or reused panel keys
+
+  if (!PanelRegistry.is_registered_key(panel_key)) {
+    subject_types.forEach(
+      (subject_type) =>
+        new PanelRegistry({
+          subject_type,
+          key: panel_key,
+          ...panel_config_func(subject_type, panel_key),
+        })
+    );
+  }
+
+  return panel_key;
+};
+
 assign_to_dev_helper_namespace({ PanelRegistry });

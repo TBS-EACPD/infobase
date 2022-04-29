@@ -33,6 +33,7 @@ class Panel_ extends React.Component {
       context,
       title,
       sources,
+      datasets,
       glossary_keys,
       footnotes,
       children,
@@ -41,12 +42,8 @@ class Panel_ extends React.Component {
 
     const subject = context && context.subject;
 
-    const file_name_context = subject
-      ? subject.subject_type === "dept"
-        ? subject.dept_code
-        : subject.id
-      : "";
-    const file_name = `${file_name_context}_${title}.pdf`;
+    const file_name = `${subject.id}_${title}.pdf`;
+
     const panel_link =
       context &&
       infographic_href_template(subject, context.active_bubble_id, {
@@ -106,6 +103,7 @@ class Panel_ extends React.Component {
         otherHeaderContent={header_utils}
         children={children}
         sources={sources}
+        datasets={datasets}
         glossary_keys={glossary_keys}
         footnotes={footnotes}
       />

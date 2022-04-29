@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { text_maker } from "src/panels/panel_declarations/results/result_text_provider";
 import {
@@ -10,6 +9,7 @@ import {
   result_docs,
   result_docs_in_tabling_order,
 } from "src/panels/panel_declarations/results/results_common";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import { LeafSpinner } from "src/components/index";
 

@@ -2,12 +2,8 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import {
-  get_planned_fte_source_link,
-  get_planned_spending_source_link,
-  declare_panel,
-} from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component, Format } from "src/components/index";
 
@@ -16,9 +12,6 @@ import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
-
-import { rpb_link, get_appropriate_rpb_subject } from "src/rpb/rpb_link";
-import { Table } from "src/tables/TableClass";
 
 import { format_and_get_exp_program_spending } from "./welcome_mat_exp_program_spending";
 import { format_and_get_fte } from "./welcome_mat_fte";
@@ -36,47 +29,6 @@ const SpendFormat = ({ amt }) => (
   <Format type={is_a11y_mode ? "compact1_written" : "compact1"} content={amt} />
 );
 const FteFormat = ({ amt }) => <Format type="big_int" content={amt} />;
-
-const get_estimates_source_link = (subject) => {
-  const table = Table.store.lookup("orgVoteStatEstimates");
-  return {
-    html: table.name,
-    href: rpb_link({
-      subject: subject.guid,
-      table: table.id,
-      mode: "details",
-      columns: ["{{est_in_year}}_estimates"],
-    }),
-  };
-};
-
-const get_historical_spending_source_link = (subject) => {
-  const table = Table.store.lookup("programSpending");
-  const appropriate_subject = get_appropriate_rpb_subject(subject);
-  return {
-    html: table.name,
-    href: rpb_link({
-      subject: appropriate_subject.guid,
-      table: table.id,
-      mode: "details",
-      columns: std_years.map((yr) => `${yr}exp`),
-    }),
-  };
-};
-
-const get_historical_fte_source_link = (subject) => {
-  const table = Table.store.lookup("programFtes");
-  const appropriate_subject = get_appropriate_rpb_subject(subject);
-  return {
-    html: table.name,
-    href: rpb_link({
-      subject: appropriate_subject.guid,
-      table: table.id,
-      mode: "details",
-      columns: std_years,
-    }),
-  };
-};
 
 const Pane = ({ size, children, is_header, noPadding }) => (
   <div className={`mat-grid__lg-panel${size} mat-grid__sm-panel`}>
@@ -813,36 +765,8 @@ function render({
   glossary_keys,
   sources,
 }) {
-  let sources_override = sources;
-  const { type, calcs } = calculations;
-  if (type === "planned") {
-    sources_override = [
-      get_planned_spending_source_link(subject),
-      get_planned_fte_source_link(subject),
-    ];
-  } else if (type === "estimates") {
-    sources_override = [get_estimates_source_link(subject)];
-  } else if (type === "hist_estimates") {
-    sources_override = [
-      get_estimates_source_link(subject),
-      get_historical_spending_source_link(subject),
-    ];
-  } else if (type === "hist") {
-    sources_override = [get_historical_spending_source_link(subject)];
-    if (calcs.fte_data) {
-      sources_override.push(get_historical_fte_source_link(subject));
-    }
-  } else if (type === "hist_planned") {
-    sources_override = [
-      get_planned_fte_source_link(subject),
-      get_planned_spending_source_link(subject),
-    ];
-  }
-
   return (
-    <InfographicPanel
-      {...{ sources: sources_override, glossary_keys, footnotes, title }}
-    >
+    <InfographicPanel {...{ sources, glossary_keys, footnotes, title }}>
       <WelcomeMat subject={subject} {...calculations} />
     </InfographicPanel>
   );
