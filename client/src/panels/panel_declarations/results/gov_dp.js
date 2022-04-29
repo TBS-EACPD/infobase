@@ -159,7 +159,7 @@ export const declare_gov_dp_panel = () =>
         }),
       calculate: () => !_.isEmpty(dp_keys),
       footnotes: ["RESULTS", "DP"],
-      get_source_keys: () => ["departmental_plans"],
+      get_dataset_keys: () => ["planned_results"],
       render({ title, sources, datasets, footnotes }) {
         return (
           <InfographicPanel
