@@ -154,15 +154,15 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>See the data: \n</span>",
+            "<span>Data sources</span>",
             "<span>Service Inventory</span>",
-            "<span>Applications by other channels</span>",
-            "<span class=\"infobase-pie__legend-data\">20,647,744</span>",
-            "<span class=\"text-nowrap\">6.2%</span>",
+            "<span>Datasets</span>",
+            "<span>Service Inventory</span>",
             "<span>Applications by telephone</span>",
             "<span class=\"infobase-pie__legend-data\">1,327,740</span>",
             "<span class=\"text-nowrap\">0.4%</span>",
             "<strong>2019-20</strong>",
+            "<strong>Government of Canada</strong>",
             "<p>"
           ]
         }
@@ -177,7 +177,9 @@ module.exports = {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
             "<span>Departmental Results Reports</span>",
-            "<span>Departmental Plans</span>"
+            "<span>Performance information (results and indicators) by Program and by Organization</span>",
+            "<span>Departmental Plans</span>",
+            "<span>Planned performance information (results and indicators) by Program and by Organization</span>"
           ]
         }
       },
@@ -241,7 +243,9 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>See the data: \n</span>",
+            "<span>Data sources</span>",
+            "<span>Service Inventory</span>",
+            "<span>Datasets</span>",
             "<span>Service Inventory</span>"
           ]
         }
@@ -255,7 +259,8 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Departmental Results Reports</span>"
+            "<span>Departmental Results Reports</span>",
+            "<span>Performance information (results and indicators) by Program and by Organization</span>"
           ]
         }
       },
@@ -324,7 +329,8 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Departmental Results Reports</span>"
+            "<span>Departmental Results Reports</span>",
+            "<span>Performance information (results and indicators) by Program and by Organization</span>"
           ]
         }
       },
