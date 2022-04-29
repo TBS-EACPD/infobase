@@ -128,7 +128,6 @@ export const declare_spend_rev_split_panel = () =>
             ...common_panel_config,
             legacy_table_dependencies: ["orgSobjs"],
             get_dataset_keys: () => ["org_standard_objects"],
-            footnotes: ["SOBJ_REV"],
             calculate: ({ subject, tables }) => {
               const { orgSobjs } = tables;
               const last_year_spend = orgSobjs.sum_cols_by_grouped_data(
