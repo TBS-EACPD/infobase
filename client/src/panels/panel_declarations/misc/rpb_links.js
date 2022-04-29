@@ -42,7 +42,6 @@ export const declare_links_to_rpb_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
-            calculate: _.constant(true),
 
             render({ title, subject }) {
               const list_args = _.chain(Table.store.get_all())
@@ -79,13 +78,11 @@ export const declare_links_to_rpb_panel = () =>
           return {
             ...common_panel_config,
 
-            /*
+            /* TODO need a better way to tell if a org has relevant data in the RPB, for now this panel always renders
             calculate: ({subject}) => {
               return !subject.has_table_data;
             },
             */
-            // Hotfix while working out a proper dept level version
-            calculate: _.constant(true),
 
             render({ title, subject }) {
               const list_args = _.chain(subject.table_ids)

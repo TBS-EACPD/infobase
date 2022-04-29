@@ -116,8 +116,6 @@ export const declare_tag_progs_by_dept_panel = () =>
     subject_types: ["tag"],
     panel_config_func: () => ({
       get_title: () => text_maker("tag_progs_by_dept_title"),
-      calculate: _.constant(true),
-
       render({ title, subject }) {
         const list_args = _.chain(subject.programs)
           .groupBy((prog) => prog.dept.id)
