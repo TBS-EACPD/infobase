@@ -1,7 +1,7 @@
 import React from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import {
   DisplayTable,

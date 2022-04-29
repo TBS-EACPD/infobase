@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Fragment } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import text from "src/panels/panel_declarations/services/services.yaml";
 import {
@@ -9,6 +8,7 @@ import {
   available_icons,
   available_keys,
 } from "src/panels/panel_declarations/services/shared";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import {
   create_text_maker_component,

@@ -4,7 +4,6 @@ import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 
 import {
@@ -27,6 +26,7 @@ import {
   indicator_text_functions,
   get_year_for_doc_key,
 } from "src/panels/panel_declarations/results/results_common";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import {
   LeafSpinner,

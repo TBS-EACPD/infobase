@@ -2,12 +2,8 @@ import _ from "lodash";
 import React from "react";
 import MediaQuery from "react-responsive";
 
-import {
-  get_planned_fte_source_link,
-  get_planned_spending_source_link,
-  declare_panel,
-} from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component } from "src/components/index";
 
@@ -44,13 +40,7 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const render_resource_type =
   (is_fte) =>
-  ({ title, subject, calculations, footnotes }) => {
-    const sources = [
-      is_fte
-        ? get_planned_fte_source_link(subject)
-        : get_planned_spending_source_link(subject),
-    ];
-
+  ({ title, sources, subject, calculations, footnotes }) => {
     const {
       exp_data,
       fte_data,
@@ -389,7 +379,7 @@ export const declare_crso_by_prog_fte_panel = () =>
     panel_config_func: () => ({
       footnotes: ["PLANNED_FTE", "FTE"],
       legacy_table_dependencies: ["programSpending", "programFtes"],
-      get_dataset_keys: () => ["program_spending", "program_ftes"],
+      get_dataset_keys: () => ["program_ftes"],
       get_title: () => text_maker("crso_by_prog_fte_title"),
       calculate: get_calculate_func(true),
       render: render_resource_type(true),
@@ -402,7 +392,7 @@ export const declare_crso_by_prog_exp_panel = () =>
     panel_config_func: () => ({
       footnotes: ["PLANNED_EXP", "EXP"],
       legacy_table_dependencies: ["programSpending", "programFtes"],
-      get_dataset_keys: () => ["program_spending", "program_ftes"],
+      get_dataset_keys: () => ["program_spending"],
       get_title: () => text_maker("crso_by_prog_exp_title"),
       calculate: get_calculate_func(false),
       render: render_resource_type(false),

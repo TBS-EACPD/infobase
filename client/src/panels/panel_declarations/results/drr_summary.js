@@ -1,8 +1,8 @@
 import _ from "lodash";
 import React, { useState } from "react";
 
-import { declare_panel } from "src/panels/panel_declarations/common_panel_utils";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component, Tabs } from "src/components/index";
 
