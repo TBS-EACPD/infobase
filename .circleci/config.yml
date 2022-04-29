@@ -455,12 +455,12 @@ workflows:
     jobs:
       - checkout_and_install
 
-      #- test_client:
-      #    requires:
-      #      - checkout_and_install
+      - test_client:
+          requires:
+            - checkout_and_install
       - build_client:
           requires:
-            - checkout_and_install #test_client
+            - test_client
 
       - test_server:
           requires:
