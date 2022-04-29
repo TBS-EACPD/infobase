@@ -158,7 +158,6 @@ export const declare_gov_dp_panel = () =>
             dp_keys.length > 1 && get_year_for_doc_key(_.last(dp_keys)),
         }),
       calculate: () => !_.isEmpty(dp_keys),
-      footnotes: ["RESULTS", "DP"],
       get_dataset_keys: () => ["planned_results"],
       render({ title, sources, datasets, footnotes }) {
         return (

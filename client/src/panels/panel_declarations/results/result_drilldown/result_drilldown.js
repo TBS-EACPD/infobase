@@ -104,7 +104,6 @@ export const declare_explore_results_panel = () =>
     panel_key: "explore_results",
     subject_types: ["dept", "crso", "program"],
     panel_config_func: (subject_type) => ({
-      footnotes: ["RESULTS", "DRR", "DP"],
       legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => [
         "actual_results",

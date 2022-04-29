@@ -377,7 +377,6 @@ export const declare_crso_by_prog_fte_panel = () =>
     panel_key: "crso_by_prog_fte",
     subject_types: ["crso"],
     panel_config_func: () => ({
-      footnotes: ["PLANNED_FTE", "FTE"],
       legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => ["program_ftes"],
       get_title: () => text_maker("crso_by_prog_fte_title"),
@@ -390,7 +389,6 @@ export const declare_crso_by_prog_exp_panel = () =>
     panel_key: "crso_by_prog_exp",
     subject_types: ["crso"],
     panel_config_func: () => ({
-      footnotes: ["PLANNED_EXP", "EXP"],
       legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => ["program_spending"],
       get_title: () => text_maker("crso_by_prog_exp_title"),

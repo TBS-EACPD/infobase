@@ -191,52 +191,9 @@ export class PanelRegistry {
     ]);
   }
   get_footnotes(subject) {
-    const legacy_api_keys = (() => {
-      if (this.footnotes) {
-        return _.chain(this.footnotes)
-          .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
-          .uniqBy()
-          .value();
-      } else if (this.tables) {
-        return _.chain(this.tables)
-          .map("tags")
-          .compact()
-          .flatten()
-          .concat(this.machinery_footnotes ? ["MACHINERY"] : [])
-          .uniqBy()
-          .value();
-      } else {
-        return [];
-      }
-    })();
-
-    const new_api_keys = this.get_topic_keys(subject);
-
-    const new_keys = _.difference(new_api_keys, legacy_api_keys);
-    if (!_.isEmpty(new_keys)) {
-      console.warn(
-        `Panel ${
-          this.full_key
-        }'s new footnote topic api includes additional keys not found in the legacy api. This may be correct? ${_.join(
-          new_keys,
-          ", "
-        )}`
-      );
-    }
-
-    const missing_keys = _.difference(legacy_api_keys, new_api_keys);
-    if (!_.isEmpty(missing_keys)) {
-      throw new Error(
-        `Panel ${
-          this.full_key
-        }'s new footnote topic api is missing some keys found in the legacy api. This is almost certainly an error. ${_.join(
-          missing_keys,
-          ", "
-        )}`
-      );
-    }
-
-    return _.chain(get_footnotes_by_subject_and_topic(subject, legacy_api_keys))
+    return _.chain(
+      get_footnotes_by_subject_and_topic(subject, this.get_topic_keys(subject))
+    )
       .uniqBy("text")
       .compact()
       .value();

@@ -168,7 +168,6 @@ export const declare_gov_drr_panel = () =>
     subject_types: ["gov"],
     panel_config_func: () => ({
       requires_result_counts: true,
-      footnotes: ["RESULTS", "DRR"],
       get_title: () =>
         text_maker("gov_drr_summary_title", {
           first_year: get_year_for_doc_key(_.first(drr_keys)),
