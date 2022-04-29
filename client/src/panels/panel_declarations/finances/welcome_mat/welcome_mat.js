@@ -978,11 +978,24 @@ export const declare_welcome_mat_panel = () =>
               "orgVoteStatEstimates",
               "orgVoteStatPa",
             ],
-            get_dataset_keys: () => [
-              ...common_panel_config.get_dataset_keys(),
-              "tabled_estimates",
-              "org_vote_stat",
-            ],
+            get_dataset_keys: ({ calculations: { type } }) => {
+              switch (type) {
+                case "hist":
+                case "planned":
+                case "hist_planned":
+                  return ["program_spending", "program_ftes"];
+                case "estimates":
+                  return ["tabled_estimates"];
+                case "hist_estimates":
+                  return ["tabled_estimates", "program_spending"];
+              }
+            },
+
+            //[
+            //  ...common_panel_config.get_dataset_keys(),
+            //  "tabled_estimates",
+            //  "org_vote_stat",
+            //],
             calculate: ({ subject, tables }) => {
               const { programSpending, programFtes, orgVoteStatEstimates } =
                 tables;
