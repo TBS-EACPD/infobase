@@ -41,49 +41,6 @@ gba_plus_intro_text:
     Dans les plus récents rapports sur les résultats (**2019-2020**), les indicateurs portent un marqueur {{gl_sidebar_link "ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
     Ces indicateurs et le marquage ACS Plus se trouvent sur la page de chaque organisation.
 
-dp_summary_text:
-  transform: [handlebars,markdown]
-  en: |
-    {{#if is_gov}}
-      In **{{year}}**, **{{fmt_big_int depts_with_dps}}** organizations are seeking to achieve **{{fmt_big_int dp_results}}** results, measured
-      by **{{fmt_big_int dp_indicators}}** indicators. Assessed performance of planned results will be reported in **Fall {{tabling_year}}**.
-    {{else}}
-      In its **{{year}}** {{gl_sidebar_link "Departmental Plan" "DP"}}, {{subject.name}} is seeking to achieve **{{fmt_big_int dp_results}}** results, measured
-      by **{{fmt_big_int dp_indicators}}** indicators. Assessed performance of planned results for **{{fmt_big_int num_crs}}** Core Responsibilities and **{{fmt_big_int num_programs}}** Programs will be reported
-      in **Fall {{tabling_year}}**.
-    {{/if}}
-  fr: |
-    {{#if is_gov}}
-      En **{{year}}**, **{{fmt_big_int depts_with_dps}}** organisations cherchent à atteindre **{{fmt_big_int dp_results}}**
-      résultats, mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. On fera état du rendement des résultats escomptés à **l'automne {{tabling_year}}**.
-    {{else}}
-      Dans son {{gl_sidebar_link "plan ministériel" "DP"}} de **{{year}}**, {{subject.name}} cherche à atteindre **{{fmt_big_int dp_results}}** résultats,
-      mesurés par **{{fmt_big_int dp_indicators}}** indicateurs. On fera état du rendement des résultats escomptés
-      pour **{{fmt_big_int num_crs}}** responsabilités essentielles et **{{fmt_big_int num_programs}}** programmes à **l'automne {{tabling_year}}**.
-    {{/if}}
-
-drr_summary_text:
-  transform: [handlebars,markdown]
-  en: |
-    {{#if is_gov}}
-      In **{{year}}**, **{{fmt_big_int depts_with_drrs}}** organizations sought to achieve **{{fmt_big_int drr_results}}** results.
-    {{else}}
-      In its **{{year}}** {{gl_sidebar_link "Departmental Results Report" "DRR"}}, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
-    {{/if}}
-    Progress towards meeting these results was measured using **{{fmt_big_int drr_indicators}}** indicators, and a {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
-    based on the measured outcome of the indicator's target.
-  fr: |
-    {{#if is_gov}}
-      En **{{year}}**, **{{fmt_big_int depts_with_drrs}}** organisations ont cherché à atteindre **{{fmt_big_int drr_results}}** résultats. 
-      Les progrès vers l'atteinte de ces résultats ont été mesurés à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et
-      un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur selon la mesure du résultat prévu pour la cible de l'indicateur.
-    {{else}}
-      Dans son {{gl_sidebar_link "rapport sur les résultats ministériel" "DRR"}} de **{{year}}**, {{subject.name}}
-      a cherché à obtenir **{{fmt_big_int drr_results}}** résultats. On a mesuré les progrès vers l'atteinte de ces résultats
-      à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur
-      selon la mesure du résultat prévu pour la cible de l'indicateur.
-    {{/if}}
-
 reports_links_text:
   transform: [handlebars,markdown]
   en: |
