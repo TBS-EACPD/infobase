@@ -175,7 +175,9 @@ export const declare_results_intro_panel = () =>
         };
 
         const doc_urls = {
+          dp_url_year: result_docs[current_dp_key].year,
           dp_url: result_docs[current_dp_key][`doc_url_${lang}`],
+          drr_url_year: result_docs[current_drr_key].year,
           drr_url: result_docs[current_drr_key][`doc_url_${lang}`],
         };
 

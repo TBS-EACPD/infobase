@@ -20,20 +20,7 @@ results_intro_text:
     Les organisations ont des {{gl_sidebar_link "responsabilités essentielles" "CR"}} auxquelles des {{gl_sidebar_link "programmes" "PROG"}} sont rattachés.
     Les responsabilités essentielles et les programmes donnent des {{gl_sidebar_link "résultats" "RESULT"}}. Pour chaque résultat, les progrès
     sont mesurés à l'aide d'un ou de plusieurs {{gl_sidebar_link "indicateurs" "IND_RESULT"}}, chacun d'eux comportant une cible.
-results_intro_img_text:
-  en: |
-    Organizations are made up of Core Responsibilities and Programs within each Core Responsibility. Core Responsibilities and Programs
-    have results. Progress for each result is measured by one or more indicators, each of which has a target.
-  fr: |
-    Les organisations ont des responsabilités essentielles auxquelles des programmes sont rattachés.
-    Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
-    sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
-reports_links_text:
-  transform: [handlebars,markdown]
-  en: |
-    The full text of all {{#if dp_url}}{{gl_sidebar_link "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}. {{/if}}{{#if drr_url}}{{gl_sidebar_link "Departmental Results Reports" "DRR"}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
-  fr: |
-    Les documents complets des {{#if dp_url}}{{gl_sidebar_link "plans ministériels" "DP"}} se trouvent {{ext_link "içi" dp_url "liste des plans ministériels"}}. .{{/if}}{{#if drr_url}}Les {{gl_sidebar_link "rapports sur les résultats ministériels" "DRR"}} se trouvent {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
+
 gba_plus_intro_text:
   transform: [handlebars,markdown]
   en: |
@@ -45,6 +32,14 @@ gba_plus_intro_text:
     Dans les plus récents rapports sur les résultats (**2019-2020**), les indicateurs portent un marqueur {{gl_sidebar_link "ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
     Ces indicateurs et le marquage ACS Plus se trouvent sur la page de chaque organisation.
 
+results_intro_img_text:
+  en: |
+    Organizations are made up of Core Responsibilities and Programs within each Core Responsibility. Core Responsibilities and Programs
+    have results. Progress for each result is measured by one or more indicators, each of which has a target.
+  fr: |
+    Les organisations ont des responsabilités essentielles auxquelles des programmes sont rattachés.
+    Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
+    sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
 
 dp_summary_text:
   transform: [handlebars,markdown]
@@ -67,7 +62,6 @@ dp_summary_text:
       pour **{{fmt_big_int num_crs}}** responsabilités essentielles et **{{fmt_big_int num_programs}}** programmes à **l'automne {{tabling_year}}**.
     {{/if}}
 
-
 drr_summary_text:
   transform: [handlebars,markdown]
   en: |
@@ -89,3 +83,12 @@ drr_summary_text:
       à l'aide de **{{fmt_big_int drr_indicators}}** indicateurs, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été associé à chaque indicateur
       selon la mesure du résultat prévu pour la cible de l'indicateur.
     {{/if}}
+
+reports_links_text:
+  transform: [handlebars,markdown]
+  en: |
+    {{#if dp_url}}The full text of all {{dp_url_year}} {{gl_sidebar_link "Departmental Plans" "DP"}} can be found {{ext_link "here" dp_url "index of Departmental Plans"}}.{{/if}}
+    {{#if drr_url}}{{gl_sidebar_link "Departmental Results Reports" "DRR"}} for {{drr_url_year}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
+  fr: |
+    {{#if dp_url}}Le texte intégral des {{gl_sidebar_link "plans ministériels" "DP"}} {{dp_url_year}} se trouve {{ext_link "içi" dp_url "liste des plans ministériels"}}.{{/if}}
+    {{#if drr_url}}Les {{gl_sidebar_link "rapports sur les résultats ministériels" "DRR"}} pour {{drr_url_year}} peuvent être consultés {ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
