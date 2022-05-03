@@ -80,9 +80,7 @@ const ResultsIntroPanel = ({
             }}
           />
         )}
-        {_.some(doc_urls, (doc_url) => !_.isNull(doc_url)) && (
-          <TM k="reports_links_text" args={doc_urls} />
-        )}
+        <TM k="reports_links_text" args={doc_urls} />
       </div>
     </div>
   );
