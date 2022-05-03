@@ -39,7 +39,6 @@ const ResultsIntroPanel = ({
     <div className="row align-items-center">
       <div className="col-12 col-lg-7 medium-panel-text">
         <TM k="results_intro_text" />
-        <TM k="gba_plus_intro_text" />
       </div>
       {!is_a11y_mode && (
         <div className="col-12 col-lg-5">
@@ -60,6 +59,7 @@ const ResultsIntroPanel = ({
         </div>
       )}
       <div className="col-12 col-lg-12 medium-panel-text">
+        <TM k="gba_plus_intro_text" />
         {has_current_dp && (
           <TM
             k="dp_summary_text"

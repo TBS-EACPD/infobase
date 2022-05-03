@@ -21,6 +21,15 @@ results_intro_text:
     Les responsabilités essentielles et les programmes donnent des {{gl_sidebar_link "résultats" "RESULT"}}. Pour chaque résultat, les progrès
     sont mesurés à l'aide d'un ou de plusieurs {{gl_sidebar_link "indicateurs" "IND_RESULT"}}, chacun d'eux comportant une cible.
 
+results_intro_img_text:
+  en: |
+    Organizations are made up of Core Responsibilities and Programs within each Core Responsibility. Core Responsibilities and Programs
+    have results. Progress for each result is measured by one or more indicators, each of which has a target.
+  fr: |
+    Les organisations ont des responsabilités essentielles auxquelles des programmes sont rattachés.
+    Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
+    sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
+
 gba_plus_intro_text:
   transform: [handlebars,markdown]
   en: |
@@ -31,15 +40,6 @@ gba_plus_intro_text:
     L'{{gl_sidebar_link "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est utilisée par le gouvernement fédéral pour l'élaboration de politiques, de programmes et de lois. 
     Dans les plus récents rapports sur les résultats (**2019-2020**), les indicateurs portent un marqueur {{gl_sidebar_link "ACS Plus" "GBA_PLUS_INDICATOR"}}, le cas échéant. 
     Ces indicateurs et le marquage ACS Plus se trouvent sur la page de chaque organisation.
-
-results_intro_img_text:
-  en: |
-    Organizations are made up of Core Responsibilities and Programs within each Core Responsibility. Core Responsibilities and Programs
-    have results. Progress for each result is measured by one or more indicators, each of which has a target.
-  fr: |
-    Les organisations ont des responsabilités essentielles auxquelles des programmes sont rattachés.
-    Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
-    sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
 
 dp_summary_text:
   transform: [handlebars,markdown]
