@@ -33,6 +33,7 @@ results_intro_img_text:
     Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
     sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
 
+# Note: no markdown transform, since we need to stick the react tooltip component inline to this, we don't want it to be returned wrapped in a paragraph
 gba_plus_intro_text_p_1:
   transform: [handlebars]
   en: |
@@ -46,6 +47,7 @@ gba_plus_intro_text_p_1:
 gba_plus_intro_tooltip_content:
   en: Such as age, disability, education, ethnicity, economic status, geography, language, and sexual orientation
   fr: Comme l'âge, le handicap, la scolarité, l'ethnicité, le statut économique, la géographie, la langue et l'orientation sexuelle
+
 gba_plus_intro_text_p_2:
   transform: [handlebars,markdown]
   en: |
