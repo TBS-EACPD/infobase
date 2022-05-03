@@ -436,7 +436,7 @@ export const get_tooltip = (topic, selected_year, panel_subject_id, topic_id) =>
     )
     .map(({ tooltip }, ix) => (
       <Tooltip tooltip_content={tooltip} key={ix}>
-        <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "0em" }} />
+        <IconQuestion width={"1.2em"} svg_style={{ verticalAlign: "-0.2em" }} />
       </Tooltip>
     ))
     .value();

@@ -49,7 +49,7 @@ const ResultsIntroPanel = ({ doc_urls }) => {
           >
             <IconQuestion
               width={"1.2em"}
-              svg_style={{ verticalAlign: "0em" }}
+              svg_style={{ verticalAlign: "-0.2em" }}
             />
           </Tooltip>
           {"."}
