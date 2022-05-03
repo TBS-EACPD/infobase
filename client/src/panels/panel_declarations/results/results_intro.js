@@ -3,16 +3,18 @@ import React from "react";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component } from "src/components/index";
+import { create_text_maker_component, Tooltip } from "src/components/index";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
+
+import { get_source_links } from "src/DatasetsRoute/utils";
+import { IconQuestion } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";
 
 import { result_docs, current_drr_key, current_dp_key } from "./results_common";
 
 import text from "./results_intro_text.yaml";
-
 const { text_maker, TM } = create_text_maker_component(text);
 
 const ResultsIntroPanel = ({ doc_urls }) => {
@@ -40,7 +42,19 @@ const ResultsIntroPanel = ({ doc_urls }) => {
         </div>
       )}
       <div className="col-12 col-lg-12 medium-panel-text">
-        <TM k="gba_plus_intro_text" />
+        <p>
+          <TM k="gba_plus_intro_text_p_1" />
+          <Tooltip
+            tooltip_content={text_maker("gba_plus_intro_tooltip_content")}
+          >
+            <IconQuestion
+              width={"1.2em"}
+              svg_style={{ verticalAlign: "0em" }}
+            />
+          </Tooltip>
+          {"."}
+        </p>
+        <TM k="gba_plus_intro_text_p_2" />
         <TM k="reports_links_text" args={doc_urls} />
       </div>
     </div>
