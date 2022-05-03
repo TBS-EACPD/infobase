@@ -33,23 +33,26 @@ results_intro_img_text:
     Les responsabilités essentielles et les programmes donnent des résultats. Pour chaque résultat, les progrès
     sont mesurés à l'aide d'un ou de plusieurs indicateurs, chacun d'eux comportant une cible.
 
-gba_plus_intro_text:
-  transform: [handlebars,markdown]
+gba_plus_intro_text_p_1:
+  transform: [handlebars]
   en: |
     Diverse groups of people experience policies, programs and initiatives differently. {{gl_sidebar_link "Gender Based Analysis Plus" "GBA_PLUS"}} (GBA Plus)
     is an analytical tool used to support the development of responsive and inclusive policies, programs, and other initiatives. 
-    It involves intersectional analysis that goes beyond sex and gender differences to consider
-    other factors [TODO hover over text: Such as age, disability, education, ethnicity, economic status, geography, language, and sexual orientation].
-    
+    It involves intersectional analysis that goes beyond sex and gender differences to consider other factors
+  fr: |
+    Les politiques, les initiatives et les programmes sont perçus différemment par divers groupes de personnes.
+    L'{{gl_sidebar_link "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est un outil d'analyse servant à l'élaboration de politiques, d’initiatives et de
+    programmes adaptés et inclusifs. Elle repose sur une analyse par recoupement qui va au-delà des différences de sexe et de genre pour prendre en compte d'autres facteurs
+gba_plus_intro_tooltip_content:
+  en: Such as age, disability, education, ethnicity, economic status, geography, language, and sexual orientation
+  fr: Comme l'âge, le handicap, la scolarité, l'ethnicité, le statut économique, la géographie, la langue et l'orientation sexuelle
+gba_plus_intro_text_p_2:
+  transform: [handlebars,markdown]
+  en: |
     Since 2019-20, {{gl_sidebar_link "GBA Plus indicators" "GBA_PLUS_INDICATOR"}} for measuring program results have been marked with badges.
     These represent a subset of the GBA Plus indicators tracked by the Government of Canada. Other indicators are reported in
     Departmental Results Report GBA Plus Supplementary Information Tables.
   fr: |
-    Les politiques, les initiatives et les programmes sont perçus différemment par divers groupes de personnes.
-    L'{{gl_sidebar_link "analyse comparative entre les sexes plus" "GBA_PLUS"}} (ACS Plus) est un outil d'analyse servant à l'élaboration de politiques, d’initiatives
-    et de programmes adaptés et inclusifs. Elle repose sur une analyse par recoupement qui va au-delà des différences de sexe et de genre pour prendre en compte
-    d'autres facteurs [TODO hover over text: Comme l'âge, le handicap, la scolarité, l'ethnicité, le statut économique, la géographie, la langue et l'orientation sexuelle].
-    
     Depuis 2019-2020, les {{gl_sidebar_link "indicateurs de l'ACS Plus" "GBA_PLUS_INDICATOR"}} permettant de mesurer les résultats des programmes sont accompagnés
     d’un insigne représentant un sous-ensemble d’indicateurs de l'ACS Plus dont le gouvernement du Canada assure le suivi. D'autres indicateurs figurent dans les
     tableaux de renseignements supplémentaires sur l’ACS Plus dans les rapports sur les résultats ministériels.
