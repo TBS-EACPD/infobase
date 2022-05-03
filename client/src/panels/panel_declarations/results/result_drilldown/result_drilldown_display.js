@@ -326,7 +326,7 @@ export default class ResultsExplorerDisplay extends React.Component {
                 )}
               </form>
             </div>
-            {result_docs[doc].has_gba_plus && (
+            {result_docs[doc].can_have_gba_plus && (
               <div
                 style={{
                   display: "flex",
