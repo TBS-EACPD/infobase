@@ -6,20 +6,23 @@ results_intro_title:
 results_intro_text:
   transform: [handlebars,markdown]
   en: |
-    Since April 2018, all organizations are using a results reporting structure based on the
-    {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}, consisting of a {{gl_sidebar_link "Departmental Results Framework" "DRF"}}
-    and a {{gl_sidebar_link "Program Inventory" "PI"}}.
-    
-    Organizations are made up of {{gl_sidebar_link "Core Responsibilities" "CR"}} and {{gl_sidebar_link "Programs" "PROG"}} within each Core Responsibility. Core Responsibilities and Programs
-    have {{gl_sidebar_link "results" "RESULT"}}. Progress for each result is measured by one or more {{gl_sidebar_link "indicators" "IND_RESULT"}}, each of which has a target.
-  fr: |
-    Depuis avril 2018, toutes les organisations utilisent une structure redditionnelle des résultats conforme à la 
-    {{ext_link "Politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}, composée 
-    d’un {{gl_sidebar_link "Cadre ministériel des résultats" "DRF"}} et d’un {{gl_sidebar_link "Répertoire des programmes" "PI"}}.
+    Federal government departments present their plans and results, and reports to the people of Canada and Parliament, using a
+    {{gl_sidebar_link "Departmental Results Framework" "DRF"}} and a {{gl_sidebar_link "Program Inventory" "PI"}}, as described
+    in the {{ext_link "Policy on Results" "https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=31300"}}.  
 
-    Les organisations ont des {{gl_sidebar_link "responsabilités essentielles" "CR"}} auxquelles des {{gl_sidebar_link "programmes" "PROG"}} sont rattachés.
-    Les responsabilités essentielles et les programmes donnent des {{gl_sidebar_link "résultats" "RESULT"}}. Pour chaque résultat, les progrès
-    sont mesurés à l'aide d'un ou de plusieurs {{gl_sidebar_link "indicateurs" "IND_RESULT"}}, chacun d'eux comportant une cible.
+    The Departmental Results Framework describes an organization’s {{gl_sidebar_link "Core Responsibilities" "CR"}}
+    the {{gl_sidebar_link "results" "RESULT"}} it is working toward, and the {{gl_sidebar_link "indicators" "IND_RESULT"}} that measure
+    progress towards those results. The Program Inventory articulates how an organization’s {{gl_sidebar_link "programs" "PROG"}} contribute
+    to the organization’s Core Responsibilities and its expected results.  
+  fr: |
+    Les ministères du gouvernement fédéral présentent leurs plans et leurs résultats à la population canadienne et au Parlement, dont ils rendent compte au moyen du
+    {{gl_sidebar_link "Cadre ministériel des résultats" "DRF"}} et du {{gl_sidebar_link "Répertoire des programmes" "PI"}}, conformément à la
+    {{ext_link "Politique sur les résultats" "https://www.tbs-sct.gc.ca/pol/doc-fra.aspx?id=31300"}}.  
+
+    Le Cadre ministériel des résultats décrit les {{gl_sidebar_link "responsabilités essentielles" "CR"}} de l'organisation,
+    les {{gl_sidebar_link "résultats" "RESULT"}} qu'elle s'efforce d'atteindre et les {{gl_sidebar_link "indicateurs" "IND_RESULT"}} qui
+    mesurent les progrès accomplis pour atteindre ces résultats. Le Répertoire des programmes précise comment les {{gl_sidebar_link "programmes" "PROG"}}
+    de l'organisation contribuent aux responsabilités essentielles de l'organisation et aux résultats escomptés.    
 
 results_intro_img_text:
   en: |
