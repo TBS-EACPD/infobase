@@ -181,11 +181,26 @@ const tooltips_by_topic = {
     },
     {
       fiscal_years: [2022],
-      subject_ids: ["280"],
+      subject_ids: ["gov"],
+      topic_ids: ["COV145"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_partial_reprofile_tooltip"
+          args={{
+            est_doc: text_maker("est_doc_mains"),
+            approved_year: year_to_fiscal_year(2020),
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["gov", "280"],
       topic_ids: ["COV010", "COV082"],
       tooltip: (
         <TM
-          k="covid_estimates_generic_full_reprofile_tooltip"
+          k="covid_estimates_generic_partial_reprofile_tooltip"
           args={{
             est_doc: text_maker("est_doc_mains"),
             approved_year: year_to_fiscal_year(2020),
@@ -211,11 +226,11 @@ const tooltips_by_topic = {
     },
     {
       fiscal_years: [2022],
-      subject_ids: ["228", "280"],
+      subject_ids: ["gov", "228", "280"],
       topic_ids: ["COV082"],
       tooltip: (
         <TM
-          k="covid_estimates_generic_full_reprofile_tooltip"
+          k="covid_estimates_generic_partial_reprofile_tooltip"
           args={{
             est_doc: text_maker("est_doc_mains"),
             approved_year: year_to_fiscal_year(2021),
@@ -226,11 +241,11 @@ const tooltips_by_topic = {
     },
     {
       fiscal_years: [2022],
-      subject_ids: ["280"],
+      subject_ids: ["gov", "280"],
       topic_ids: ["COV211"],
       tooltip: (
         <TM
-          k="covid_estimates_generic_full_reprofile_tooltip"
+          k="covid_estimates_generic_partial_reprofile_tooltip"
           args={{
             est_doc: text_maker("est_doc_mains"),
             approved_year: year_to_fiscal_year(2021),
@@ -246,6 +261,24 @@ const tooltips_by_topic = {
       tooltip: (
         <TM
           k="covid_estimates_generic_full_reprofile_tooltip"
+          args={{
+            est_doc: text_maker("est_doc_mains"),
+            approved_year: {
+              en: "2020-21 and 2021-22,",
+              fr: "2020-2021 et 2021-2022,",
+            }[lang],
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["gov"],
+      topic_ids: ["COV010"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_partial_reprofile_tooltip"
           args={{
             est_doc: text_maker("est_doc_mains"),
             approved_year: {
