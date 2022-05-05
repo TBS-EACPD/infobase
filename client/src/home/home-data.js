@@ -70,14 +70,17 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "covid_measure_spending_auth_2022",
+    href: "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
+    is_new: "true",
+  },
+  {
     text_key: "quick_link_DP22",
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
-    is_new: "true",
   },
   {
     text_key: "quick_link_main_estimates",
     href: "#compare_estimates",
-    is_new: "true",
   },
   {
     text_key: "quick_link_DRR20",
@@ -106,10 +109,6 @@ const featured_content_items = _.compact([
   {
     text_key: "covid_expenditures_estimated_exp_2021",
     href: "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
-  },
-  {
-    text_key: "covid_measure_spending_auth",
-    href: "#infographic/gov/gov/covid/.-.-(panel_key.-.-'covid_estimates_panel)",
   },
   {
     text_key: "quick_link_tp_by_region",
