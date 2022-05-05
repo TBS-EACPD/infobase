@@ -73,17 +73,16 @@ covid_estimates_2021_supps_a_2020_full_reprofile_tooltip:
 
 
 covid_supps_est_doc_template:
+  transform: [handlebars]
   en: Supplementary Estimates {{letter}}
   fr: Budget supplémentaire des dépenses {{letter}}
 
 covid_estimates_generic_full_reprofile_tooltip:
-  en: |
-    The {{est_doc}} amount was originally approved in {{approved_year}}, but has subsequently been reprofiled to {{reprofiled_year}}.
-  fr: |
-    Le montant inscrit au {{est_doc}} a été approuvée en {{approved_year}} mais a ensuite été reporté à {{reprofiled_year}}.
+  transform: [handlebars]
+  en: The {{est_doc}} amount was originally approved in {{approved_year}}, but has subsequently been reprofiled to {{reprofiled_year}}.
+  fr: Le montant inscrit au {{est_doc}} a été approuvée en {{approved_year}} mais a ensuite été reporté à {{reprofiled_year}}.
 
 covid_estimates_generic_partial_reprofile_tooltip:
-  en: |
-    A portion of the {{est_doc}} amount was originally approved in {{approved_year}}, but has subsequently been reprofiled to {{reprofiled_year}}.
-  fr: |
-    Une partie du montant inscrit au {{est_doc}} a été approuvée en {{approved_year}} mais a ensuite été reporté à {{reprofiled_year}}.
+  transform: [handlebars]
+  en: A portion of the {{est_doc}} amount was originally approved in {{approved_year}}, but has subsequently been reprofiled to {{reprofiled_year}}.
+  fr: Une partie du montant inscrit au {{est_doc}} a été approuvée en {{approved_year}} mais a ensuite été reporté à {{reprofiled_year}}.
