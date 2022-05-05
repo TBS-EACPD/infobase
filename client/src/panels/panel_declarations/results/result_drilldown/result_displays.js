@@ -77,6 +77,8 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
           subject,
 
           doc_year: result_docs[doc].year,
+          dp_corresponding_drr_year:
+            _.toNumber(result_docs[doc].year_short) + 1,
 
           num_programs: count_items.program || 0,
           num_prog_results: count_items.result || 0,
