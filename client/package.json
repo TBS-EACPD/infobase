@@ -16,8 +16,8 @@
     "serve:open": "http-server -c-1",
     "cypress": "cypress run",
     "cypress:debug": "cypress run --headed",
-    "unit_tests": "npx jest --coverage --forceExit --config jest_configs/unit_tests.config.js",
-    "unit_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js",
+    "unit_tests": "npx jest --coverage --config jest_configs/unit_tests.config.js",
+    "unit_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage -config jest_configs/unit_tests.config.js",
     "type_check": "npx tsc --noEmit"
   },
   "dependencies": {
