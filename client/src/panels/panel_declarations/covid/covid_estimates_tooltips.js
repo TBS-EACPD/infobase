@@ -212,7 +212,25 @@ const tooltips_by_topic = {
     {
       fiscal_years: [2022],
       subject_ids: ["gov"],
-      topic_ids: ["COV010", "COV082"],
+      topic_ids: ["COV010"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_full_reprofile_tooltip"
+          args={{
+            est_doc: text_maker("est_doc_mains"),
+            approved_year: {
+              en: "2020-21 and 2021-22",
+              fr: "2020-2021 et 2021-2022",
+            }[lang],
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["gov"],
+      topic_ids: ["COV082"],
       tooltip: (
         <TM
           k="covid_estimates_generic_partial_reprofile_tooltip"
@@ -263,7 +281,7 @@ const tooltips_by_topic = {
       topic_ids: ["COV010"],
       tooltip: (
         <TM
-          k="covid_estimates_generic_partial_reprofile_tooltip"
+          k="covid_estimates_generic_full_reprofile_tooltip"
           args={{
             est_doc: text_maker("est_doc_mains"),
             approved_year: {
