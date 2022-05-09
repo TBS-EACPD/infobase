@@ -7,7 +7,6 @@ import { create_text_maker_component, Tooltip } from "src/components/index";
 
 import { lang, is_a11y_mode } from "src/core/injected_build_constants";
 
-import { get_source_links } from "src/DatasetsRoute/utils";
 import { IconQuestion } from "src/icons/icons";
 
 import { get_static_url } from "src/request_utils";
@@ -66,7 +65,6 @@ export const declare_results_intro_panel = () =>
     panel_key: "results_intro",
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
-      get_dataset_keys: () => ["actual_results", "planned_results"],
       get_title: () => text_maker("results_intro_title"),
       calculate: () => ({
         doc_urls: {
