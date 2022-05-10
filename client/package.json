@@ -87,7 +87,6 @@
     "react-router-dom": "^5",
     "react-tooltip": "^4.2.21",
     "react-transition-group": "^4.4.2",
-    "react-virtualized": "^9.22.3",
     "redux": "^3.7.1",
     "redux-promise-middleware": "^6.1.0",
     "regenerator-runtime": "^0.13.9",
