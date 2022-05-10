@@ -1,13 +1,8 @@
 import classNames from "classnames";
 import _ from "lodash";
-import type { ChangeEvent, KeyboardEvent, ReactElement } from "react";
+import type { ChangeEvent, KeyboardEvent } from "react";
 import React, { Fragment } from "react";
-import ReactResizeDetector from "react-resize-detector";
 
-import type { List } from "react-virtualized";
-import { AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
-
-import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 import { create_text_maker_component } from "src/components/misc_util_components";
 
@@ -19,10 +14,6 @@ import text from "./Typeahead.yaml";
 import "./Typeahead.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const virtualized_cell_measure_cache = new CellMeasurerCache({
-  fixedWidth: true,
-});
 
 /*
   Currently using a circular counter to represent the selection cursor in state (potentially a TODO to rewrite, 
@@ -65,7 +56,8 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
   menu_id: string;
 
   private typeahead_ref = React.createRef<HTMLDivElement>();
-  private virtualized_list_ref = React.createRef<List>();
+  private dropdown_ref = React.createRef<HTMLDivElement>();
+  private selected_item_ref = React.createRef<HTMLDivElement>();
 
   constructor(props: TypeaheadProps) {
     super(props);
@@ -106,8 +98,6 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
     const { results: prev_results } = prevState;
 
     if (next_results !== prev_results) {
-      virtualized_cell_measure_cache.clearAll();
-
       return {
         results: next_results,
         selection_cursor: default_selection_cursor,
@@ -116,19 +106,33 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
       return null;
     }
   }
+
   componentDidUpdate(_prevProps: TypeaheadProps, prevState: TypeaheadState) {
     const { selection_cursor } = this.state;
     const { selection_cursor: prev_selection_cursor } = prevState;
 
-    if (this.virtualized_list_ref.current) {
-      if (
-        selection_cursor !== prev_selection_cursor &&
-        prev_selection_cursor > selection_cursor
-      ) {
-        //scrolling up is choppy if we don't do this
-        this.virtualized_list_ref.current.recomputeRowHeights(
-          selection_cursor >= 0 ? selection_cursor : 0
-        );
+    const dropdown = this.dropdown_ref.current;
+    const selected_item = this.selected_item_ref.current;
+
+    if (
+      selection_cursor !== prev_selection_cursor &&
+      dropdown &&
+      selected_item
+    ) {
+      const is_item_fully_visible_in_dropdown =
+        selected_item.offsetTop >= dropdown.scrollTop &&
+        selected_item.offsetTop + selected_item.offsetHeight <=
+          dropdown.scrollTop + dropdown.offsetHeight;
+
+      if (!is_item_fully_visible_in_dropdown) {
+        if (selection_cursor > prev_selection_cursor) {
+          dropdown.scrollTop = selected_item.offsetTop;
+        } else {
+          dropdown.scrollTop =
+            selected_item.offsetTop +
+            selected_item.offsetHeight -
+            dropdown.offsetHeight;
+        }
       }
     }
   }
@@ -193,99 +197,68 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
           />
         )}
         {this.show_menu && (
-          <AutoSizer>
-            {({ width }) => (
-              <ReactResizeDetector
-                handleWidth
-                onResize={() => {
-                  virtualized_cell_measure_cache.clearAll();
-                }}
-              >
-                {() => (
-                  <AutoHeightVirtualList
-                    className="typeahead__dropdown"
-                    max_height={400}
-                    role="listbox"
-                    id={this.menu_id}
-                    ariaExpanded={this.show_menu}
-                    width={width}
-                    list_ref={this.virtualized_list_ref}
-                    scrollToIndex={selection_cursor >= 0 ? selection_cursor : 0}
-                    deferredMeasurementCache={virtualized_cell_measure_cache}
-                    rowHeight={virtualized_cell_measure_cache.rowHeight}
-                    rowCount={results.length || 1}
-                    rowRenderer={({
-                      index: result_index,
-                      key,
-                      parent,
-                      style,
-                    }): ReactElement => (
-                      <CellMeasurer
-                        cache={virtualized_cell_measure_cache}
-                        columnIndex={0}
-                        key={key}
-                        parent={parent}
-                        rowIndex={result_index}
-                      >
-                        <div style={style}>
-                          {result_index === 0 &&
-                            (loading_results || !_.isEmpty(results) ? (
-                              <div
-                                className="typeahead__header"
-                                style={{ borderTop: "none" }}
-                              >
-                                <TM
-                                  k="menu_with_results_status"
-                                  args={{
-                                    total_results: results.length,
-                                    loading_results,
-                                  }}
-                                />
-                                {loading_results && (
-                                  <LeafSpinner config_name={"inline_small"} />
-                                )}
-                              </div>
-                            ) : (
-                              <div className="typeahead__header">
-                                {text_maker("no_matches_found")}
-                              </div>
-                            ))}
-                          {!loading_results && !_.isEmpty(results) && (
-                            <Fragment key={result_index}>
-                              {results[result_index].header && (
-                                <div className="typeahead__header">
-                                  {results[result_index].header}
-                                </div>
-                              )}
-                              <div
-                                className={classNames(
-                                  "typeahead__result",
-                                  result_index === selection_cursor &&
-                                    "typeahead__result--active"
-                                )}
-                                tabIndex={0}
-                                role="option"
-                                aria-selected={
-                                  result_index === selection_cursor
-                                }
-                                onKeyPress={(event) =>
-                                  _.includes(["Enter", " "], event.key) &&
-                                  results[result_index].on_select()
-                                }
-                                onClick={results[result_index].on_select}
-                              >
-                                {results[result_index].content}
-                              </div>
-                            </Fragment>
-                          )}
-                        </div>
-                      </CellMeasurer>
+          <div
+            className="typeahead__dropdown"
+            role="listbox"
+            id={this.menu_id}
+            aria-expanded={this.show_menu}
+            ref={this.dropdown_ref}
+          >
+            {_.map(results, ({ header, on_select, content }, result_index) => (
+              <Fragment key={result_index}>
+                {result_index === 0 &&
+                  (loading_results || !_.isEmpty(results) ? (
+                    <div
+                      className="typeahead__header"
+                      style={{ borderTop: "none" }}
+                    >
+                      <TM
+                        k="menu_with_results_status"
+                        args={{
+                          total_results: results.length,
+                          loading_results,
+                        }}
+                      />
+                      {loading_results && (
+                        <LeafSpinner config_name={"inline_small"} />
+                      )}
+                    </div>
+                  ) : (
+                    <div className="typeahead__header">
+                      {text_maker("no_matches_found")}
+                    </div>
+                  ))}
+                {!loading_results && !_.isEmpty(results) && (
+                  <Fragment>
+                    {header && (
+                      <div className="typeahead__header">{header}</div>
                     )}
-                  />
+                    <div
+                      className={classNames(
+                        "typeahead__result",
+                        result_index === selection_cursor &&
+                          "typeahead__result--active"
+                      )}
+                      tabIndex={0}
+                      role="option"
+                      aria-selected={result_index === selection_cursor}
+                      ref={
+                        result_index === selection_cursor
+                          ? this.selected_item_ref
+                          : undefined
+                      }
+                      onKeyPress={(event) =>
+                        _.includes(["Enter", " "], event.key) && on_select()
+                      }
+                      onClick={on_select}
+                    >
+                      {content}
+                    </div>
+                  </Fragment>
                 )}
-              </ReactResizeDetector>
-            )}
-          </AutoSizer>
+              </Fragment>
+            ))}
+          </div>
         )}
       </div>
     );
