@@ -19,6 +19,9 @@ button.display_table__util-icon {
   margin: 0px 2.5px;
 }
 .display-table-dropdown-filter {
+  max-height: 300px;
+  width: 230px;
+  overflow-y: auto;
   margin-bottom: 12px;
   margin-top: 12px;
   background-color: $backgroundColor;
