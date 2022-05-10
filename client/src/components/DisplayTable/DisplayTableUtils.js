@@ -1,8 +1,6 @@
 import _ from "lodash";
 import React, { Fragment, useState } from "react";
-import { CellMeasurerCache, CellMeasurer } from "react-virtualized";
 
-import { AutoHeightVirtualList } from "src/components/AutoHeightVirtualList";
 import { CheckBox } from "src/components/CheckBox/CheckBox";
 import { DebouncedTextInput } from "src/components/DebouncedTextInput/DebouncedTextInput";
 import { DropdownMenu } from "src/components/DropdownMenu/DropdownMenu";
@@ -23,138 +21,28 @@ import "./DisplayTableUtils.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
-const DropdownFilterVirtualizedList = ({
-  column_key,
-  set_filter_options,
-  filter_options_by_column,
-  column_searches,
-}) => {
-  const virtualized_cell_measure_cache = new CellMeasurerCache({
-    fixedWidth: true,
-    minHeight: 30,
-  });
-  const virtualized_list_ref = React.createRef();
-  const [search, set_search] = useState("");
-  const clean_search_string = (string) =>
-    _.chain(string).deburr().toLower().trim().value();
-
-  const list = filter_options_by_column[column_key];
-  const filtered_list = _.filter(
-    filter_options_by_column[column_key],
-    ({ label }) => {
-      const cleaned_label = clean_search_string(label);
-      return (
-        _.includes(cleaned_label, clean_search_string(search)) &&
-        _.includes(cleaned_label, column_searches[column_key])
-      );
-    }
-  );
-
-  return (
-    <div>
-      <DebouncedTextInput
-        inputClassName={`search input-sm border-radius`}
-        style={{ width: "100%" }}
-        placeHolder={text_maker("search_filter_options")}
-        a11y_label={text_maker("search_filter_options")}
-        defaultValue={search}
-        updateCallback={(search_value) => set_search(search_value)}
-        debounceTime={300}
-      />
-      {filtered_list.length > 0 ? (
-        <div>
-          <AutoHeightVirtualList
-            className="display-table-dropdown-filter"
-            max_height={300}
-            overscanRowCount={10}
-            id={column_key}
-            width={230}
-            list_ref={virtualized_list_ref}
-            deferredMeasurementCache={virtualized_cell_measure_cache}
-            rowHeight={({ index }) => {
-              const item_num_of_chars = filtered_list[index].label.length + 10;
-              const pre_calculated_row_height =
-                item_num_of_chars < 30 ? 30 : item_num_of_chars;
-              const cached_row_height =
-                virtualized_cell_measure_cache._cellHeightCache[`${index}-0`];
-              return cached_row_height
-                ? cached_row_height + 10
-                : pre_calculated_row_height;
-            }}
-            rowCount={filtered_list.length}
-            rowRenderer={({ index, key, parent, style }) => {
-              const item = filtered_list[index];
-              return (
-                <CellMeasurer
-                  cache={virtualized_cell_measure_cache}
-                  columnIndex={0}
-                  key={key}
-                  parent={parent}
-                  rowIndex={index}
-                >
-                  <div style={style}>
-                    <CheckBox
-                      key={key}
-                      id={item.id}
-                      color={item.color}
-                      label={item.label}
-                      active={item.active}
-                      label_style={{ textAlign: "left" }}
-                      onClick={(item_id) => {
-                        const toggled_list = _.map(list, (item) =>
-                          item.id === item_id
-                            ? { ...item, active: !item.active }
-                            : item
-                        );
-                        set_filter_options({
-                          ...filter_options_by_column,
-                          [column_key]: toggled_list,
-                        });
-                      }}
-                    />
-                  </div>
-                </CellMeasurer>
-              );
-            }}
-          />
-          <div style={{ marginBottom: "5px" }}>
-            <SelectAllControl
-              SelectAllOnClick={() =>
-                set_filter_options({
-                  ...filter_options_by_column,
-                  [column_key]: _.map(list, (item) => ({
-                    ...item,
-                    active: true,
-                  })),
-                })
-              }
-              SelectNoneOnClick={() =>
-                set_filter_options({
-                  ...filter_options_by_column,
-                  [column_key]: _.map(list, (item) => ({
-                    ...item,
-                    active: false,
-                  })),
-                })
-              }
-            />
-          </div>
-        </div>
-      ) : (
-        <TM k="no_data" className="large_panel_text" />
-      )}
-    </div>
-  );
-};
-
 export const DropdownFilter = ({
   column_key,
   set_filter_options,
   filter_options_by_column,
   column_searches,
 }) => {
-  const is_filter_active =
-    _.reject(filter_options_by_column[column_key], "active").length > 0;
+  const [search, set_search] = useState("");
+  const clean_search_string = (string) =>
+    _.chain(string).deburr().toLower().trim().value();
+
+  const list = filter_options_by_column[column_key];
+
+  const is_filter_active = _.reject(list, "active").length > 0;
+
+  const filtered_list = _.filter(list, ({ label }) => {
+    const cleaned_label = clean_search_string(label);
+    return (
+      _.includes(cleaned_label, clean_search_string(search)) &&
+      _.includes(cleaned_label, column_searches[column_key])
+    );
+  });
+
   return (
     <DropdownMenu
       opened_button_class_name={"button-unstyled"}
@@ -167,12 +55,65 @@ export const DropdownFilter = ({
         />
       }
       dropdown_content={
-        <DropdownFilterVirtualizedList
-          column_key={column_key}
-          column_searches={column_searches}
-          set_filter_options={set_filter_options}
-          filter_options_by_column={filter_options_by_column}
-        />
+        <div>
+          <DebouncedTextInput
+            inputClassName={`search input-sm border-radius`}
+            style={{ width: "100%" }}
+            placeHolder={text_maker("search_filter_options")}
+            a11y_label={text_maker("search_filter_options")}
+            defaultValue={search}
+            updateCallback={(search_value) => set_search(search_value)}
+            debounceTime={300}
+          />
+          {filtered_list.length > 0 ? (
+            <>
+              <div className="display-table-dropdown-filter">
+                {_.map(filtered_list, ({ id, label, active, color }) => (
+                  <CheckBox
+                    key={id}
+                    color={color}
+                    label={label}
+                    active={active}
+                    container_style={{ marginTop: "10px" }}
+                    label_style={{ textAlign: "left" }}
+                    onClick={() =>
+                      set_filter_options({
+                        ...filter_options_by_column,
+                        [column_key]: _.map(list, (item) =>
+                          item.id === id ? { ...item, active: !active } : item
+                        ),
+                      })
+                    }
+                  />
+                ))}
+              </div>
+              <div style={{ marginBottom: "5px" }}>
+                <SelectAllControl
+                  SelectAllOnClick={() =>
+                    set_filter_options({
+                      ...filter_options_by_column,
+                      [column_key]: _.map(list, (item) => ({
+                        ...item,
+                        active: true,
+                      })),
+                    })
+                  }
+                  SelectNoneOnClick={() =>
+                    set_filter_options({
+                      ...filter_options_by_column,
+                      [column_key]: _.map(list, (item) => ({
+                        ...item,
+                        active: false,
+                      })),
+                    })
+                  }
+                />
+              </div>
+            </>
+          ) : (
+            <TM k="no_data" className="large_panel_text" />
+          )}
+        </div>
       }
     />
   );
