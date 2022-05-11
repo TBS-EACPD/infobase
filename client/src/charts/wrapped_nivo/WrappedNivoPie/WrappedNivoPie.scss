@@ -25,9 +25,8 @@
       width: 100%;
     }
     & > .infobase-pie__legend {
-      flex: 0 1 50%;
-      align-items: center;
-      margin-right: 100px;
+      align-self: center;
+      flex-grow: 1;
     }
     & > .infobase-pie__legend > .centerer {
       height: 100%;
