@@ -204,30 +204,26 @@ export class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
             aria-expanded={this.show_menu}
             ref={this.dropdown_ref}
           >
+            <div className="typeahead__header" style={{ borderTop: "none" }}>
+              {loading_results || !_.isEmpty(results) ? (
+                <>
+                  <TM
+                    k="menu_with_results_status"
+                    args={{
+                      total_results: results.length,
+                      loading_results,
+                    }}
+                  />
+                  {loading_results && (
+                    <LeafSpinner config_name={"inline_small"} />
+                  )}
+                </>
+              ) : (
+                text_maker("no_matches_found")
+              )}
+            </div>
             {_.map(results, ({ header, on_select, content }, result_index) => (
               <Fragment key={result_index}>
-                {result_index === 0 &&
-                  (loading_results || !_.isEmpty(results) ? (
-                    <div
-                      className="typeahead__header"
-                      style={{ borderTop: "none" }}
-                    >
-                      <TM
-                        k="menu_with_results_status"
-                        args={{
-                          total_results: results.length,
-                          loading_results,
-                        }}
-                      />
-                      {loading_results && (
-                        <LeafSpinner config_name={"inline_small"} />
-                      )}
-                    </div>
-                  ) : (
-                    <div className="typeahead__header">
-                      {text_maker("no_matches_found")}
-                    </div>
-                  ))}
                 {!loading_results && !_.isEmpty(results) && (
                   <Fragment>
                     {header && (
