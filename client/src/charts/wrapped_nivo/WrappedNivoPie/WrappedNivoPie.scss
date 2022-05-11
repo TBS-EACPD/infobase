@@ -42,14 +42,9 @@
   padding-right: 5px;
 }
 
-.infobase-pie > .infobase-pie__legend > .centerer > .centerer-IE-fix {
+.infobase-pie__legend-header {
+  display: inline-block;
   width: 100%;
-  flex-grow: 1;
-
-  & > .infobase-pie__legend-header {
-    display: inline-block;
-    width: 100%;
-    text-align: right;
-    font-weight: bold;
-  }
+  text-align: right;
+  font-weight: bold;
 }

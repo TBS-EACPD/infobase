@@ -22,12 +22,9 @@ export const LegendContainer = ({
           {title}
         </p>
       )}
-      {/* have to hard code max height since overflow on IE is bugged */}
       <div
         style={{
           overflowX: "hidden",
-          maxHeight: "351px",
-          msOverflowStyle: "-ms-autohiding-scrollbar",
         }}
       >
         {children}

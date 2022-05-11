@@ -14,7 +14,6 @@ $borderColor: transparent;
 
 .IBDetails__Summary {
   @include unstyled-button;
-  background-color: transparent; /* override unstyle-button's inherit because IE11 won't apply it */
   width: 100%;
 
   color: $linkColor;
