@@ -152,32 +152,28 @@ export class WrappedNivoPie extends React.Component {
             enableArcLinkLabels={false}
           />
         </div>
-        <div className="infobase-pie__legend">
-          <div className="centerer">
-            <div className="centerer-IE-fix">
-              {show_legend && (
-                <TabularLegend
-                  items={legend_items}
-                  get_right_content={(item) => (
-                    <div>
-                      <span className="infobase-pie__legend-data">
-                        {value_formatter(item.value)}
-                      </span>
-                      {include_percent && (
-                        <span className="infobase-pie__legend-data">
-                          <Format
-                            type="percentage1"
-                            content={item.value / graph_total || 0}
-                          />
-                        </span>
-                      )}
-                    </div>
+        {show_legend && (
+          <div className="infobase-pie__legend">
+            <TabularLegend
+              items={legend_items}
+              get_right_content={(item) => (
+                <div>
+                  <span className="infobase-pie__legend-data">
+                    {value_formatter(item.value)}
+                  </span>
+                  {include_percent && (
+                    <span className="infobase-pie__legend-data">
+                      <Format
+                        type="percentage1"
+                        content={item.value / graph_total || 0}
+                      />
+                    </span>
                   )}
-                />
+                </div>
               )}
-            </div>
+            />
           </div>
-        </div>
+        )}
       </div>
     );
 

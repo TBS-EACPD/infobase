@@ -117,10 +117,6 @@ $smallMargin: 10px;
   text-align: center;
   text-transform: uppercase;
   color: $textLightColor;
-
-  @media (min-width: $minSmallDevice) {
-    width: 100%; /* IE fix */
-  }
 }
 .home-infographic-link-item__icon {
   width: 40%;

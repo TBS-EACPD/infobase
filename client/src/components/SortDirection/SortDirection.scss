@@ -2,13 +2,6 @@
 
 .SortIndicator {
   @include unstyled-button;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0
-  ); /* IE issue, doesn't inherit background color properly */
-
   &:focus {
     border: 1px dotted white;
   }
