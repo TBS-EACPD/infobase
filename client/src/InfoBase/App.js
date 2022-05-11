@@ -7,18 +7,11 @@ import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 import { NoIndex } from "src/components/misc_util_components";
 import { PageDetails } from "src/components/PageDetails";
 
-import { log_standard_event } from "src/core/analytics";
-
 import { DevFip } from "src/core/DevFip";
 import { EasyAccess } from "src/core/EasyAccess";
 import { ErrorBoundary } from "src/core/ErrorBoundary";
 import { has_local_storage } from "src/core/feature_detection";
-import {
-  lang,
-  is_a11y_mode,
-  cdn_url,
-  is_dev,
-} from "src/core/injected_build_constants";
+import { lang, is_a11y_mode, is_dev } from "src/core/injected_build_constants";
 import { InsertRuntimeFooterLinks } from "src/core/InsertRuntimeFooterLinks";
 import { RedirectHeader } from "src/core/RedirectHeader";
 
@@ -53,44 +46,7 @@ const PanelInventory = React.lazy(() => import("src/panels/PanelInventory"));
 
 const Survey = React.lazy(() => import("src/Survey/Survey"));
 
-const are_linked_stylesheets_loaded = () => {
-  try {
-    // Link tags for stylesheets should all have non null sheet properties
-    const linked_style_sheets_have_loaded = _.chain(
-      document.head.querySelectorAll(
-        `link[rel='stylesheet'][href^='${cdn_url}']`
-      )
-    )
-      .map(_.identity)
-      .every((link_tag) => !_.isNull(link_tag.sheet))
-      .value();
-    return linked_style_sheets_have_loaded;
-  } catch (e) {
-    // Some versions of FireFox throw a security error on accessing cssRules from a non-local styleSheet
-    // No other good way to test that the sheets loaded, so have to assume they did in that case
-    return true;
-  }
-};
-
 export class App extends React.Component {
-  constructor() {
-    super();
-
-    // IE has an infrequent, unreproducable bug where it fails to load our linked stylesheets
-    // Rare, but happens within our team often enough that it must happen to users too (at least to other TBS employees, if it's caused by our own network)
-    // Collecting analytics on this event, hopefully that helps us pin it down eventually. Check GA for recent occurences before deleting any of this code!
-    // No decent fix, but reloading page seems to be enough when it happens within the team, so doing that programatically in prod
-    if (!are_linked_stylesheets_loaded() && !is_dev) {
-      log_standard_event({
-        SUBAPP: window.location.hash.replace("#", ""),
-        MISC1: "ERROR_IN_PROD",
-        MISC2: "Linked style sheets failed to load!",
-      });
-
-      window.location.reload();
-    }
-  }
-
   state = {
     outage_message: null,
     showSurvey: false,
