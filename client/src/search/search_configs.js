@@ -349,8 +349,8 @@ const programs = {
     if (program.old_name) {
       const regex = search_phrase_to_all_words_regex(search);
 
-      const matched_on_current_name = _.deburr(program.name).match(regex);
-      const matched_on_old_name = _.deburr(program.old_name).match(regex);
+      const matched_on_current_name = regex.test(_.deburr(program.name));
+      const matched_on_old_name = regex.test(_.deburr(program.old_name));
 
       if (matched_on_old_name && !matched_on_current_name) {
         return (
@@ -362,20 +362,20 @@ const programs = {
           />
         );
       }
-    } else {
-      if (program.is_dead) {
-        return (
-          <span className="typeahead__grayed-out">
-            <SearchHighlighter
-              search={search}
-              content={`${name} (${trivial_text_maker("non_active_program")})`}
-            />
-          </span>
-        );
-      } else {
-        return <SearchHighlighter search={search} content={name} />;
-      }
     }
+
+    if (program.is_dead) {
+      return (
+        <span className="typeahead__grayed-out">
+          <SearchHighlighter
+            search={search}
+            content={`${name} (${trivial_text_maker("non_active_program")})`}
+          />
+        </span>
+      );
+    }
+
+    return <SearchHighlighter search={search} content={name} />;
   },
   query: (search_phrase) =>
     Promise.resolve(
