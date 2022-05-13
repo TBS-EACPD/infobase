@@ -41,7 +41,8 @@ _(Le Français suit)_
 1. `cd` to the `InfoBase/client` dir
 2. `npm ci`
 3. `npm run build_static:watch` to gather and bundle static files (csv's, svg's, extended bootstrap css). Can be left running to watch for changes
-4. `npm run webpack -- EN FR` to bundle the source code
+4. `npm run gqlgen:watch` to generate .gql.ts files from .graphql files
+5. `npm run webpack -- EN FR` to bundle the source code
 
 ### Visiting a local build
 
@@ -104,7 +105,8 @@ New route load tests can be added in `cypress/integration/InfoBase/route_tests.s
 0. Avec un commande d'exécution, naviguez au chemin d’accès au répertoire d'InfoBase du GC, p. ex. `cd ~/Documents/infobase/client`
 1. `npm ci` pour télécharger les modules node.
 2. `npm run build_static:watch` pour recueillir et empaqueter les fichiers statiques (les fichiers csv, svg, et css élargies de bootstrap). Ce processus peut être laissé en cours d'exécution pour détecter les changements.
-3. `npm run webpack -- EN FR` pour empaqueter le code source
+3. `npm run gqlgen:watch` pour générer les fichiers .gql.ts à partir des fichiers .graphql
+4. `npm run webpack -- EN FR` pour empaqueter le code source
 
 ### Visitez une copie locale
 
