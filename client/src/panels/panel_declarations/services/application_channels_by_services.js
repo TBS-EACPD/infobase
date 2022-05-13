@@ -7,12 +7,16 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   DisplayTable,
   create_text_maker_component,
-  LeafSpinner,
   Select,
   SelectAllControl,
 } from "src/components/index";
 
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
+
+import {
+  useServicesForOrg,
+  useServicesForProgram,
+} from "src/models/services/queries/new_service_queries";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -24,10 +28,6 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { application_channels_keys } from "./shared";
 
 import text from "./services.yaml";
-import {
-  useServicesForOrg,
-  useServicesForProgram,
-} from "src/models/services/queries/new_service_queries";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const colors = infobase_colors();

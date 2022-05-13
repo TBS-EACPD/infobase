@@ -5,12 +5,9 @@ import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_c
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import {
-  create_text_maker_component,
-  FancyUL,
-  LeafSpinner,
-} from "src/components/index";
+import { create_text_maker_component, FancyUL } from "src/components/index";
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
+
 import {
   useServicesForOrg,
   useServicesForProgram,
