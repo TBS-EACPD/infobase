@@ -18,7 +18,9 @@
     "cypress:debug": "cypress run --headed",
     "unit_tests": "npx jest --coverage --config jest_configs/unit_tests.config.js",
     "unit_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage -config jest_configs/unit_tests.config.js",
-    "type_check": "npx tsc --noEmit"
+    "type_check": "npx tsc --noEmit",
+    "gqlgen": "graphql-codegen --config codegen.yml",
+    "gqlgen:watch": "graphql-codegen --config codegen.yml --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.2.6",
@@ -100,6 +102,13 @@
     "@babel/preset-typescript": "^7.13.0",
     "@cypress/code-coverage": "^3.9.12",
     "@cypress/snapshot": "^2.1.7",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/near-operation-file-preset": "^1.17.11",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-graphql-files-modules": "^1.18.0",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-codegen/typescript-react-apollo": "3.2.11",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@types/d3-dispatch": "^2.0.0",
