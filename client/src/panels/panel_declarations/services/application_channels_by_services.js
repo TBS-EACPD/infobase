@@ -12,10 +12,7 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
-import {
-  useServicesByOrg,
-  useServicesByProgram,
-} from "src/models/services/services_queries";
+import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -27,6 +24,10 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { application_channels_keys } from "./shared";
 
 import text from "./services.yaml";
+import {
+  useServicesForOrg,
+  useServicesForProgram,
+} from "src/models/services/queries/new_service_queries";
 
 const { text_maker, TM } = create_text_maker_component(text);
 const colors = infobase_colors();
@@ -34,11 +35,11 @@ const get_report_years = (data) =>
   _.chain(data).flatMap("report_years").uniq().sort().reverse().value();
 
 const ServicesChannelsPanel = ({ subject }) => {
-  const useServices =
+  const useServicesQuery =
     subject.subject_type === "program"
-      ? useServicesByProgram
-      : useServicesByOrg;
-  const { loading, data: services } = useServices({ id: subject.id });
+      ? useServicesForProgram
+      : useServicesForOrg;
+  const services = useServicesQuery(subject.id);
 
   const [active_services, set_active_services] = useState({});
   const [active_year, set_active_year] = useState("");
@@ -76,10 +77,6 @@ const ServicesChannelsPanel = ({ subject }) => {
       .value();
     set_active_services(median_3_values);
   }, [services, most_recent_year]);
-
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
 
   const most_recent_filtered_data = _.map(services, (service) => ({
     ...service,
@@ -291,7 +288,9 @@ export const declare_application_channels_by_services_panel = () =>
       render({ title, subject, sources, datasets }) {
         return (
           <InfographicPanel title={title} sources={sources} datasets={datasets}>
-            <ServicesChannelsPanel subject={subject} />
+            <SuspenseLeafSpinner config_name={"subroute"}>
+              <ServicesChannelsPanel subject={subject} />
+            </SuspenseLeafSpinner>
           </InfographicPanel>
         );
       },

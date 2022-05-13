@@ -203,41 +203,6 @@ export const { query_services_by_gov, useServicesByGov } = query_factory({
   resolver: (response) => _.get(response, "root.orgs.services"),
 });
 
-export const { query_services_by_org, useServicesByOrg } = query_factory({
-  query_name: "services_by_org",
-  query: gql`
-    query($lang: String! = "${lang}", $id: String) {
-      root(lang: $lang) {
-        org(org_id: $id) {
-          id
-          services {
-            ${all_service_fragments}
-          }
-        }
-      }
-    }
-    `,
-  resolver: (response) => _.get(response, "root.org.services"),
-});
-
-export const { query_services_by_program, useServicesByProgram } =
-  query_factory({
-    query_name: "services_by_program",
-    query: gql`
-    query($lang: String! = "${lang}", $id: String) {
-      root(lang: $lang) {
-        program(id: $id) {
-          id
-          services {
-            ${all_service_fragments}
-          }
-        }
-      }
-    }
-    `,
-    resolver: (response) => _.get(response, "root.program.services"),
-  });
-
 export const { query_service_summary_gov, useServiceSummaryGov } =
   query_factory({
     query_name: "service_summary_gov",

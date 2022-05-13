@@ -1,0 +1,81 @@
+fragment StandardServiceFragment on Service {
+  id
+  subject_type
+  org_id
+  submission_year
+  is_active
+  report_years
+  program_activity_codes
+  first_active_year
+  last_active_year
+
+  name
+  description
+  service_type
+  scope
+  designations
+  target_groups
+  feedback_channels
+  urls
+  digital_identity_platforms
+  accessibility_assessors
+  recipient_type
+
+  last_gender_analysis
+  last_accessibility_review
+  last_improve_from_feedback
+
+  collects_fees
+  account_reg_digital_status
+  authentication_status
+  application_digital_status
+  decision_digital_status
+  issuance_digital_status
+  issue_res_digital_status
+  digital_enablement_comment
+  service_report {
+    service_id
+    year
+    cra_business_ids_collected
+    sin_collected
+    phone_inquiry_count
+    online_inquiry_count
+    online_application_count
+    live_application_count
+    mail_application_count
+    phone_application_count
+    other_application_count
+    email_application_count
+    fax_application_count
+    phone_inquiry_and_application_count
+    service_report_comment
+  }
+
+  standards {
+    standard_id
+    service_id
+    name
+
+    submission_year
+    first_active_year
+    last_active_year
+    last_gcss_tool_year
+    channel
+    type
+    other_type_comment
+
+    target_type
+    standard_urls
+    rtp_urls
+    standard_report {
+      standard_id
+      year
+      lower
+      upper
+      count
+      met_count
+      is_target_met
+      standard_report_comment
+    }
+  }
+}

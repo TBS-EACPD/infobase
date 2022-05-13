@@ -10,11 +10,11 @@ import {
   FancyUL,
   LeafSpinner,
 } from "src/components/index";
-
+import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 import {
-  useServicesByOrg,
-  useServicesByProgram,
-} from "src/models/services/services_queries";
+  useServicesForOrg,
+  useServicesForProgram,
+} from "src/models/services/queries/new_service_queries";
 
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
@@ -27,15 +27,11 @@ const service_infographic_link = (id) =>
 
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
-  const useServices =
+  const useServicesQuery =
     subject.subject_type === "program"
-      ? useServicesByProgram
-      : useServicesByOrg;
-  const { loading, data: services } = useServices({ id: subject.id });
-
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
+      ? useServicesForProgram
+      : useServicesForOrg;
+  const services = useServicesQuery(subject.id);
 
   const { active_count, inactive_count } = _.chain(services)
     .groupBy(({ is_active }) => (is_active ? "active_count" : "inactive_count"))
@@ -143,7 +139,9 @@ export const declare_provided_services_list_panel = () =>
       render({ title, subject, sources, datasets }) {
         return (
           <InfographicPanel title={title} sources={sources} datasets={datasets}>
-            <ProvidedServicesListPanel subject={subject} />
+            <SuspenseLeafSpinner config_name={"subroute"}>
+              <ProvidedServicesListPanel subject={subject} />
+            </SuspenseLeafSpinner>
           </InfographicPanel>
         );
       },

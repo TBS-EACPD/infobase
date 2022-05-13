@@ -1,5 +1,6 @@
 import _ from "lodash";
-import React from "react";
+import type { ReactNode } from "react";
+import React, { Suspense } from "react";
 
 import { primaryColor, secondaryColor } from "src/style_constants/index";
 
@@ -97,3 +98,10 @@ export const LeafSpinner = ({
     </div>
   );
 };
+
+export const SuspenseLeafSpinner = ({
+  children,
+  ...spinnerProps
+}: LeafSpinnerProps & { children: ReactNode }) => (
+  <Suspense fallback={<LeafSpinner {...spinnerProps} />}> {children}</Suspense>
+);
