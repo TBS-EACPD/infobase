@@ -10,7 +10,7 @@ export default {
     }
 
     type Query {
-      root(lang:String!): Root
+      root(lang:String!): Root!
     }
 
     type Root {

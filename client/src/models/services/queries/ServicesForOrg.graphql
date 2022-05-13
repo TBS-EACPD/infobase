@@ -1,0 +1,12 @@
+#import "./StandardServiceFragment.graphql"
+
+query ServicesForOrg($lang: String!, $id: String) {
+  root(lang: $lang) {
+    org(org_id: $id) {
+      id
+      services {
+        ...StandardServiceFragment
+      }
+    }
+  }
+}
