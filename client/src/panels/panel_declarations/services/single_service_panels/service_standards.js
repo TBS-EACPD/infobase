@@ -41,7 +41,7 @@ export class ServiceStandards extends React.Component {
   }
 
   render() {
-    const { service, title, sources, datasets, standards, year } = this.props;
+    const { standards, year } = this.props;
 
     const { active_statuses } = this.state;
 
@@ -177,49 +177,42 @@ export class ServiceStandards extends React.Component {
     );
 
     return (
-      <InfographicPanel
-        title={title}
-        sources={sources}
-        datasets={datasets}
-        footnotes={footnotes}
-      >
-        <Fragment>
-          {!_.isEmpty(data) ? (
-            <Fragment>
-              {!is_a11y_mode && (
-                <VisibilityControl
-                  items={_.map(standard_statuses, (status_key) => ({
-                    key: status_key,
-                    count: _.countBy(data, "is_target_met")[status_key] || 0,
-                    active:
-                      active_statuses.length === standard_statuses.length ||
-                      _.indexOf(active_statuses, status_key) !== -1,
-                    text: text_maker(status_key),
-                    icon: status_icons[status_key],
-                  }))}
-                  item_component_order={["count", "icon", "text"]}
-                  click_callback={(status_key) =>
-                    this.setState({
-                      active_statuses: toggle_list(active_statuses, status_key),
-                    })
-                  }
-                  show_eyes_override={
-                    active_statuses.length === standard_statuses.length
-                  }
-                />
-              )}
-              <HeightClipper clipHeight={500}>
-                <DisplayTable
-                  data={filtered_data}
-                  column_configs={column_configs}
-                />
-              </HeightClipper>
-            </Fragment>
-          ) : (
-            <TM className="medium-panel-text" k="no_service_standards_text" />
-          )}
-        </Fragment>
-      </InfographicPanel>
+      <Fragment>
+        {!_.isEmpty(data) ? (
+          <Fragment>
+            {!is_a11y_mode && (
+              <VisibilityControl
+                items={_.map(standard_statuses, (status_key) => ({
+                  key: status_key,
+                  count: _.countBy(data, "is_target_met")[status_key] || 0,
+                  active:
+                    active_statuses.length === standard_statuses.length ||
+                    _.indexOf(active_statuses, status_key) !== -1,
+                  text: text_maker(status_key),
+                  icon: status_icons[status_key],
+                }))}
+                item_component_order={["count", "icon", "text"]}
+                click_callback={(status_key) =>
+                  this.setState({
+                    active_statuses: toggle_list(active_statuses, status_key),
+                  })
+                }
+                show_eyes_override={
+                  active_statuses.length === standard_statuses.length
+                }
+              />
+            )}
+            <HeightClipper clipHeight={500}>
+              <DisplayTable
+                data={filtered_data}
+                column_configs={column_configs}
+              />
+            </HeightClipper>
+          </Fragment>
+        ) : (
+          <TM className="medium-panel-text" k="no_service_standards_text" />
+        )}
+      </Fragment>
     );
   }
 }
@@ -230,16 +223,10 @@ export const declare_single_service_standards_panel = () =>
     subject_types: ["service"],
     panel_config_func: () => ({
       get_title: () => text_maker("service_standards_title"),
-      calculate: ({ subject }) => {
-        return {
-          subject,
-        };
-      },
       get_dataset_keys: () => ["service_inventory"],
       footnotes: false,
       render({ title, subject, sources, datasets }) {
-        const { subject: service } = calculations;
-        const standards = _.uniqBy(service.standards, "standard_id");
+        const standards = _.uniqBy(subject.standards, "standard_id");
         const years = _.chain(standards)
           .map("submission_year")
           .uniq()
@@ -259,7 +246,12 @@ export const declare_single_service_standards_panel = () =>
           .value();
 
         return (
-          <>
+          <InfographicPanel
+            title={title}
+            sources={sources}
+            datasets={datasets}
+            footnotes={footnotes}
+          >
             <TM className="medium-panel-text" k="service_standards_text" />
             <TabsStateful
               default_tab_key={_.last(years)}
@@ -275,10 +267,8 @@ export const declare_single_service_standards_panel = () =>
                         })}
                         year={year}
                         key={year}
-                        service={subject}
                         title={title}
-                        sources={sources}
-                        datasets={datasets}
+                        footnotes={footnotes}
                       />
                     ),
                   },
@@ -286,7 +276,7 @@ export const declare_single_service_standards_panel = () =>
                 .fromPairs()
                 .value()}
             />
-          </>
+          </InfographicPanel>
         );
       },
     }),
