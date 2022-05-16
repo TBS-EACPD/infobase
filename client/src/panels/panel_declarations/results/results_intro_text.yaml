@@ -66,4 +66,4 @@ reports_links_text:
     {{#if drr_url}}{{gl_sidebar_link "Departmental Results Reports" "DRR"}} for {{drr_url_year}} can be found {{ext_link "here" drr_url "index of Departmental Results Reports"}}.{{/if}}
   fr: |
     {{#if dp_url}}Le texte intégral des {{gl_sidebar_link "plans ministériels" "DP"}} {{dp_url_year}} se trouve {{ext_link "içi" dp_url "liste des plans ministériels"}}.{{/if}}
-    {{#if drr_url}}Les {{gl_sidebar_link "rapports sur les résultats ministériels" "DRR"}} pour {{drr_url_year}} peuvent être consultés {ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
+    {{#if drr_url}}Les {{gl_sidebar_link "rapports sur les résultats ministériels" "DRR"}} pour {{drr_url_year}} peuvent être consultés {{ext_link "içi" drr_url "liste des rapports sur les résultats ministériels"}}.{{/if}}
