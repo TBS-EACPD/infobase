@@ -56,7 +56,7 @@ const GlossarySidebarController = withRouter(
       this.toggleGlossary(true);
     };
 
-    handleWindowClick = (e: Event) => {
+    delegatedClickEvent = (e: Event) => {
       const target = (e.target as HTMLElement).closest(
         "[data-toggle=glossary_sidebar]"
       );
@@ -64,15 +64,26 @@ const GlossarySidebarController = withRouter(
         this.itemClick(target as HTMLElement);
       }
     };
+    delegatedKeydownEvent = (e: KeyboardEvent) => {
+      if (e.key === " " || e.key === "Enter") {
+        this.delegatedClickEvent(e);
+      }
+    };
 
     componentDidMount() {
-      window.addEventListener("click", this.handleWindowClick, {
+      window.addEventListener("click", this.delegatedClickEvent, {
+        capture: true,
+      });
+      window.addEventListener("keydown", this.delegatedKeydownEvent, {
         capture: true,
       });
     }
 
     componentWillUnmount() {
-      window.removeEventListener("click", this.handleWindowClick, {
+      window.removeEventListener("click", this.delegatedClickEvent, {
+        capture: true,
+      });
+      window.removeEventListener("keydown", this.delegatedKeydownEvent, {
         capture: true,
       });
     }

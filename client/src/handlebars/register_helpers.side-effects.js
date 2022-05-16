@@ -632,18 +632,22 @@ HandlebarsWithPrototypeAccess.registerHelper("gl", function glossary_link(key) {
 
 function gl_sidebar_link(display, key) {
   const glos_item = glossaryEntryStore.lookup(key);
+
+  // DUPLICATION WARNING: this html be manually kept in sync with react component version
   return new HandlebarsWithPrototypeAccess.SafeString(
-    `<button 
-      class="nowrap glossary-sidebar-link" 
-      data-ibtt-glossary-key="${key}" 
+    `<span 
+      role="button"
+      tabindex="0"
+      class="glossary-sidebar-link" 
+      data-ibtt-glossary-key="${key}"
+      data-toggle="glossary_sidebar"
       aria-label="${trivial_text_maker("open_glossary_definition", {
         display: display,
         title: glos_item.title,
       })}"
-      data-toggle="glossary_sidebar"
     >
       ${display}
-    </button>`.replace(/\r?\n|\r/g, "")
+    </span>`.replace(/\r?\n|\r/g, "")
   );
 }
 HandlebarsWithPrototypeAccess.registerHelper(
