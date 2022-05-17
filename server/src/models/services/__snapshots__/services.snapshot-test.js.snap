@@ -124,11 +124,11 @@ Object {
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 0,
             "number_of_services": 2,
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
-            "standard_years": CoreMongooseArray [
+            "standard_years": Array [
               "2018",
             ],
           },
@@ -279,11 +279,11 @@ Object {
             "num_of_subject_offering_services": null,
             "number_of_online_enabled_services": 0,
             "number_of_services": 2,
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
-            "standard_years": CoreMongooseArray [
+            "standard_years": Array [
               "2018",
             ],
           },
@@ -311,7 +311,7 @@ Object {
       "org": Object {
         "services": Array [
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -354,10 +354,10 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
@@ -400,21 +400,21 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
             "standards": Array [],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Economic Segments",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/tariffs-tarifs/index-e.html",
             ],
           },
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -427,7 +427,7 @@ Object {
               "None",
             ],
             "digital_enablement_comment": null,
-            "digital_identity_platforms": CoreMongooseArray [
+            "digital_identity_platforms": Array [
               "",
             ],
             "feedback_channels": Array [
@@ -457,10 +457,10 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
@@ -503,7 +503,7 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
             "standards": Array [
@@ -530,7 +530,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2018",
                 "target_type": null,
                 "type": "Timeliness",
@@ -558,7 +558,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2019",
                 "target_type": null,
                 "type": "Timeliness",
@@ -566,10 +566,10 @@ Object {
             ],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Persons",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
             ],
           },
@@ -587,7 +587,7 @@ Object {
       "program": Object {
         "services": Array [
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -630,10 +630,10 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
@@ -676,21 +676,21 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
             "standards": Array [],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Economic Segments",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/tariffs-tarifs/index-e.html",
             ],
           },
           Object {
-            "accessibility_assessors": CoreMongooseArray [
+            "accessibility_assessors": Array [
               "",
             ],
             "account_reg_digital_status": false,
@@ -703,7 +703,7 @@ Object {
               "None",
             ],
             "digital_enablement_comment": null,
-            "digital_identity_platforms": CoreMongooseArray [
+            "digital_identity_platforms": Array [
               "",
             ],
             "feedback_channels": Array [
@@ -733,10 +733,10 @@ Object {
                 "name": "Copyright Tariff Setting and Issuance of Licences",
               },
             ],
-            "recipient_type": CoreMongooseArray [
+            "recipient_type": Array [
               "",
             ],
-            "report_years": CoreMongooseArray [
+            "report_years": Array [
               "2019",
               "2018",
             ],
@@ -779,7 +779,7 @@ Object {
                 "year": "2019",
               },
             ],
-            "service_type": CoreMongooseArray [
+            "service_type": Array [
               "Legal",
             ],
             "standards": Array [
@@ -806,7 +806,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2018",
                 "target_type": null,
                 "type": "Timeliness",
@@ -834,7 +834,7 @@ Object {
                     "year": "2018",
                   },
                 ],
-                "standard_urls": CoreMongooseArray [],
+                "standard_urls": Array [],
                 "submission_year": "2019",
                 "target_type": null,
                 "type": "Timeliness",
@@ -842,10 +842,10 @@ Object {
             ],
             "subject_type": "service",
             "submission_year": "2019",
-            "target_groups": CoreMongooseArray [
+            "target_groups": Array [
               "Persons",
             ],
-            "urls": CoreMongooseArray [
+            "urls": Array [
               "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
             ],
           },
@@ -917,7 +917,7 @@ Object {
   "data": Object {
     "root": Object {
       "service": Object {
-        "accessibility_assessors": CoreMongooseArray [
+        "accessibility_assessors": Array [
           "",
         ],
         "account_reg_digital_status": false,
@@ -930,7 +930,7 @@ Object {
           "None",
         ],
         "digital_enablement_comment": null,
-        "digital_identity_platforms": CoreMongooseArray [
+        "digital_identity_platforms": Array [
           "",
         ],
         "feedback_channels": Array [
@@ -960,10 +960,10 @@ Object {
             "name": "Copyright Tariff Setting and Issuance of Licences",
           },
         ],
-        "recipient_type": CoreMongooseArray [
+        "recipient_type": Array [
           "",
         ],
-        "report_years": CoreMongooseArray [
+        "report_years": Array [
           "2019",
           "2018",
         ],
@@ -1006,7 +1006,7 @@ Object {
             "year": "2019",
           },
         ],
-        "service_type": CoreMongooseArray [
+        "service_type": Array [
           "Legal",
         ],
         "standards": Array [
@@ -1033,7 +1033,7 @@ Object {
                 "year": "2018",
               },
             ],
-            "standard_urls": CoreMongooseArray [],
+            "standard_urls": Array [],
             "submission_year": "2018",
             "target_type": null,
             "type": "Timeliness",
@@ -1061,7 +1061,7 @@ Object {
                 "year": "2018",
               },
             ],
-            "standard_urls": CoreMongooseArray [],
+            "standard_urls": Array [],
             "submission_year": "2019",
             "target_type": null,
             "type": "Timeliness",
@@ -1069,10 +1069,10 @@ Object {
         ],
         "subject_type": "service",
         "submission_year": "2019",
-        "target_groups": CoreMongooseArray [
+        "target_groups": Array [
           "Persons",
         ],
-        "urls": CoreMongooseArray [
+        "urls": Array [
           "https://cb-cda.gc.ca/unlocatable-introuvables/brochure2-e.html",
         ],
       },
