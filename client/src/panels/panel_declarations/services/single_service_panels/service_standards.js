@@ -47,21 +47,12 @@ export class ServiceStandards extends React.Component {
 
     const uniq_standards = _.uniqBy(standards, "standard_id");
 
-    const get_is_target_met = (
-      is_target_met,
-      target_type,
-      lower,
-      count,
-      met_count
-    ) => {
+    const get_is_target_met = (is_target_met, lower, count, met_count) => {
       if (is_target_met) {
-        if (
-          target_type !== "Other type of target" &&
-          !lower &&
-          !count &&
-          !met_count
-        ) {
+        if (!lower && !count && !met_count) {
           return "no_data";
+        } else if (lower && !count && !met_count) {
+          return "not_met";
         } else {
           return "met";
         }
@@ -69,43 +60,35 @@ export class ServiceStandards extends React.Component {
         return "not_met";
       }
     };
-    const get_target = (target_type, target) => {
+    const get_target = (target) => {
       if (_.isNull(target)) {
         return "N/A";
       }
-      if (target_type === "Other type of target") {
+
+      if (target === 0) {
         return target;
       } else {
-        if (target === 0) {
-          return target;
-        } else {
-          return `${target}%`;
-        }
+        return `${target}%`;
       }
     };
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
 
     const data = _.flatMap(
       uniq_standards,
-      ({ name, type, channel, standard_report, target_type }) =>
+      ({ name, type, channel, standard_report }) =>
         _.chain(standard_report)
           .filter({ year })
           .map(({ lower, count, met_count, is_target_met }) => ({
             name,
             standard_type: type,
-            target: get_target(target_type, lower),
+            target: get_target(lower),
             channel,
             count: get_counts(count),
             met_count: get_counts(met_count),
-            performance:
-              target_type === "Other type of target"
-                ? met_count / count
-                  ? met_count / count
-                  : "N/A"
-                : met_count / count || 0,
+            performance: met_count / count || 0,
             is_target_met: get_is_target_met(
               is_target_met,
-              target_type,
+
               lower,
               count,
               met_count
