@@ -141,9 +141,11 @@ export class ServiceOverview extends React.Component {
             {text_maker("application_digital")} ({most_recent_year})
           </dt>
           <dd>
-            {formats["big_int"](applications, {
-              raw: true,
-            })}
+            {applications
+              ? formats["big_int"](applications, {
+                  raw: true,
+                })
+              : text_maker("no_applications")}
           </dd>
           <dt>
             {text_maker("online_inquiry_count")} ({most_recent_year})
