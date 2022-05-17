@@ -5,11 +5,11 @@ services_intro_title:
 gov_total_number_of_services:
   transform: [handlebars, markdown]
   en: Total number of services in {{subject.name}}
-  fr: SI_TODO
+  fr: Nombre total de services dans {{subject.name}}
 dept_total_number_of_services:
   transform: [handlebars, markdown]
   en: Total number of services offered by {{subject.name}}
-  fr: SI_TODO
+  fr: Nombre total de services offert par {{subject.name}}
   
 number_value_of_services:
   transform: [handlebars, markdown]
@@ -22,17 +22,17 @@ pct_of_met_high_vol_services:
   en: |
     % of service standards that are met for {{subject.name}} {{gl_sidebar_link "High Volume Services" "HIGH_VOL_SERVICES"}}
   fr: |
-    SI_TODO
+    % des normes de service qui sont atteints pour {{subject.name}} {{gl_sidebar_link "High Volume Services" "HIGH_VOL_SERVICES"}}
 pct_of_client_interaction_pts_online:
   en: |
     % of client interaction points available online
   fr: |
-    SI_TODO
+    % des points d'interactions disponible en ligne liés aux clients 
 pct_of_online_end_services:
   en: |
     % of services that are online end-to-end
   fr: |
-    SI_TODO
+    % des services qui sont en ligne de bout-en-bout
 
 services_intro_gov:
   transform: [handlebars, markdown]
@@ -364,7 +364,7 @@ service_types:
   fr: Types de service
 last_accessibility_review:
   en: Last accessibility review
-  fr: SI_TODO
+  fr: Dernière révision d'accessibilité
 last_improve_from_feedback:
   en: Last service improvement based on feedback
   fr: Dernière amélioration du service fondée sur les commentaires
