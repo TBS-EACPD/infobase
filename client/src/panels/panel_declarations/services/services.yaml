@@ -146,11 +146,11 @@ issue_res_digital:
   en: Issue Resolution and Feedback
   fr: Résolution du problème et commentaires
 can_online:
-  en: Yes (can be done online)
-  fr: Oui (Peut se faire en ligne)
+  en: Can be done online
+  fr: Peut se faire en ligne
 cannot_online:
-  en: No (cannot be done online)
-  fr: Non (Ne peut pas se faire en ligne)
+  en: Cannot be done online
+  fr: Ne peut pas se faire en ligne
 client_interaction_point:
   en: Client Interaction Points
   fr: Points d'interaction liés aux clients
