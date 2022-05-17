@@ -45,6 +45,8 @@ export class ServiceStandards extends React.Component {
 
     const { active_statuses } = this.state;
 
+    const uniq_standards = _.uniqBy(standards, "standard_id");
+
     const get_is_target_met = (
       is_target_met,
       target_type,
@@ -84,7 +86,7 @@ export class ServiceStandards extends React.Component {
     const get_counts = (value) => (_.isNull(value) ? "N/A" : value);
 
     const data = _.flatMap(
-      standards,
+      uniq_standards,
       ({ name, type, channel, standard_report, target_type }) =>
         _.chain(standard_report)
           .filter({ year })
@@ -226,7 +228,7 @@ export const declare_single_service_standards_panel = () =>
       get_dataset_keys: () => ["service_inventory"],
       footnotes: false,
       render({ title, subject, sources, datasets }) {
-        const standards = _.uniqBy(subject.standards, "standard_id");
+        const standards = subject.standards;
         const years = _.chain(standards)
           .map("submission_year")
           .uniq()
