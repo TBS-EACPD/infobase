@@ -159,11 +159,9 @@ module.exports = {
             "<span>Datasets</span>",
             "<span>Service Inventory</span>",
             "<span>Applications by telephone</span>",
-            "<span class=\"infobase-pie__legend-data\">1,327,740</span>",
-            "<span class=\"text-nowrap\">0.4%</span>",
-            "<strong>2019-20</strong>",
-            "<strong>Government of Canada</strong>",
-            "<p>"
+            "<span class=\"infobase-pie__legend-data\">5,675,706</span>",
+            "<span class=\"text-nowrap\">2.1%</span>",
+            "<strong>Government of Canada</strong>"
           ]
         }
       },
@@ -436,7 +434,12 @@ module.exports = {
     },
     "Infographic - Service - Intro": {
       "Tested on index-eng.html#infographic/service/136/intro": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "color-contrast, serious": [
+            "<span>Service Inventory</span>",
+            "<span>Service Inventory</span>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/service/136/intro": {
         "Axe violations allow list": null

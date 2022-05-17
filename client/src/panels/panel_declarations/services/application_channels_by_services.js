@@ -199,7 +199,7 @@ const ServicesChannelsPanel = ({ subject }) => {
             <TM className="medium-panel-text" k="customizable_service_graph" />
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Select
-                id="services_channels_select"
+                id="application_channels_select"
                 title={text_maker("select_period")}
                 selected={active_year}
                 options={_.map(report_years, (year) => ({
