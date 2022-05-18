@@ -416,6 +416,66 @@ const tooltips_by_topic = {
         />
       ),
     },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["gov"],
+      topic_ids: ["COV207", "COV091", "COV010", "COV082", "COV239", "COV079"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_full_reprofile_tooltip" // TODO need final data to confirm whether these are all full or may be partial at the gov level
+          args={{
+            est_doc: text_maker("est_doc_sea"),
+            approved_year: year_to_fiscal_year(2021),
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["42"],
+      topic_ids: ["COV207", "COV091"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_full_reprofile_tooltip"
+          args={{
+            est_doc: text_maker("est_doc_sea"),
+            approved_year: year_to_fiscal_year(2021),
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["280"],
+      topic_ids: ["COV010", "COV082", "COV239"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_full_reprofile_tooltip"
+          args={{
+            est_doc: text_maker("est_doc_sea"),
+            approved_year: year_to_fiscal_year(2021),
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
+    {
+      fiscal_years: [2022],
+      subject_ids: ["127"],
+      topic_ids: ["COV079"],
+      tooltip: (
+        <TM
+          k="covid_estimates_generic_full_reprofile_tooltip"
+          args={{
+            est_doc: text_maker("est_doc_sea"),
+            approved_year: year_to_fiscal_year(2021),
+            reprofiled_year: year_to_fiscal_year(2022),
+          }}
+        />
+      ),
+    },
   ],
 };
 
