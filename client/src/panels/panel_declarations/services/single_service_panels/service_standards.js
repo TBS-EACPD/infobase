@@ -47,14 +47,12 @@ export class ServiceStandards extends React.Component {
 
     const uniq_standards = _.uniqBy(standards, "standard_id");
 
-    const get_is_target_met = (is_target_met, lower, count, met_count) => {
+    const get_is_target_met = (is_target_met, count, met_count) => {
       if (is_target_met) {
-        if (!lower && !count && !met_count) {
-          return "no_data";
-        } else if (lower && !count && !met_count) {
-          return "not_met";
-        } else {
+        if (met_count / count) {
           return "met";
+        } else {
+          return "no_data";
         }
       } else {
         return "not_met";
@@ -86,13 +84,7 @@ export class ServiceStandards extends React.Component {
             count: get_counts(count),
             met_count: get_counts(met_count),
             performance: met_count / count || 0,
-            is_target_met: get_is_target_met(
-              is_target_met,
-
-              lower,
-              count,
-              met_count
-            ),
+            is_target_met: get_is_target_met(is_target_met, count, met_count),
           }))
           .value()
     );
