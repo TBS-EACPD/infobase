@@ -13,7 +13,6 @@ import { createHashHistory } from "history";
 import _ from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
-import { QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import WebFont from "webfontloader";
@@ -27,7 +26,6 @@ import {
   wake_up_graphql_cloud_function,
 } from "src/graphql_utils/graphql_utils";
 
-import { reactQueryClient } from "src/graphql_utils/react_query_client";
 import orgEmployeeAgeGroup from "src/tables/orgEmployeeAgeGroup";
 import orgEmployeeAvgAge from "src/tables/orgEmployeeAvgAge";
 import orgEmployeeExLvl from "src/tables/orgEmployeeExLvl";
@@ -103,12 +101,10 @@ function bootstrapper(App, done) {
     ReactDOM.render(
       <ApolloProvider client={client}>
         <Provider store={store}>
-          <QueryClientProvider client={reactQueryClient}>
-            {/* ConnectedRouter will use the store from Provider automatically */}
-            <ConnectedRouter history={history}>
-              <App />
-            </ConnectedRouter>
-          </QueryClientProvider>
+          {/* ConnectedRouter will use the store from Provider automatically */}
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
         </Provider>
       </ApolloProvider>,
       document.getElementById("app")
