@@ -1,6 +1,6 @@
 import { lang } from "src/core/injected_build_constants";
 
-import { useSuspensedQuery } from "src/graphql_utils/useSuspensedQuery";
+import { getSuspensedQuery } from "src/graphql_utils/getSuspensedQuery";
 
 import type {
   ServicesForOrgQuery,
@@ -13,17 +13,17 @@ import type {
 } from "./ServicesForProgram.gql";
 import { ServicesForProgramDocument } from "./ServicesForProgram.gql";
 
-export const useServicesForOrg = (id: string) => {
-  const { data } = useSuspensedQuery<
+export const getServicesForOrg = (id: string) => {
+  const data = getSuspensedQuery<
     ServicesForOrgQuery,
     ServicesForOrgQueryVariables
   >(ServicesForOrgDocument, { lang, id });
-  return data?.root.org?.services;
+  return data.root.org?.services;
 };
-export const useServicesForProgram = (id: string) => {
-  const { data } = useSuspensedQuery<
+export const getServicesForProgram = (id: string) => {
+  const data = getSuspensedQuery<
     ServicesForProgramQuery,
     ServicesForProgramQueryVariables
   >(ServicesForProgramDocument, { lang, id });
-  return data?.root.program?.services;
+  return data.root.program?.services;
 };

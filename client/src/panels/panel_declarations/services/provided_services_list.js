@@ -9,8 +9,8 @@ import { create_text_maker_component, FancyUL } from "src/components/index";
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
 import {
-  useServicesForOrg,
-  useServicesForProgram,
+  getServicesForOrg,
+  getServicesForProgram,
 } from "src/models/services/queries/new_service_queries";
 
 import { infographic_href_template } from "src/infographic/infographic_href_template";
@@ -24,11 +24,11 @@ const service_infographic_link = (id) =>
 
 const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
-  const useServicesQuery =
+  const getServicesQuery =
     subject.subject_type === "program"
-      ? useServicesForProgram
-      : useServicesForOrg;
-  const services = useServicesQuery(subject.id);
+      ? getServicesForProgram
+      : getServicesForOrg;
+  const services = getServicesQuery(subject.id);
 
   const { active_count, inactive_count } = _.chain(services)
     .groupBy(({ is_active }) => (is_active ? "active_count" : "inactive_count"))
