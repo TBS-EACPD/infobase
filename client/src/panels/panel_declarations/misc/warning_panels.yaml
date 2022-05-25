@@ -18,3 +18,10 @@ m2m_warning_title:
     How to use tags?
   fr: |
     Comment utiliser les étiquettes?
+
+no_service_submission_text:
+  transform: [handlebars, markdown]
+  en: |
+    {{subject.name}} had a gap in reporting service data. As a result, not all fiscal years include data on application volumes.
+  fr: |
+    {{subject.name}} avait une lacune dans la communication des données de service. Par conséquent, ce ne sont pas tous les exercices financiers qui incluent des données sur les volumes de demandes.
