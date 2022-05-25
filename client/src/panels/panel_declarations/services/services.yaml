@@ -391,6 +391,12 @@ service_standards_text:
 no_service_standards_text:
   en: This service does not have any service standards
   fr: Ce service n'a pas de normes de service
+no_services_with_standards:
+  transform: [handlebars, markdown]
+  en: |
+    **{{subject.name}}** does not have any service with standards.
+  fr: |
+    **{{subject.name}}** n'a aucun service ayant des normes de service.
 standard_name:
   en: Standard name
   fr: Norme de service
