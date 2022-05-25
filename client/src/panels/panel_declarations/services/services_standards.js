@@ -43,8 +43,16 @@ const ServicesStandardsPanel = ({ subject }) => {
     }
   }, [data]);
 
-  if (loading || !active_year) {
+  if (loading) {
     return <LeafSpinner config_name="subroute" />;
+  } else if (!active_year) {
+    return (
+      <TM
+        className="medium-panel-text"
+        k="no_services_with_standards"
+        args={{ subject }}
+      />
+    );
   }
 
   const {
