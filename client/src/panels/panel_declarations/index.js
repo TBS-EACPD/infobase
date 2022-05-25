@@ -54,6 +54,7 @@ export {
   declare_tags_of_interest_panel,
   declare_tag_progs_by_dept_panel,
   declare_related_tags_panel,
+  declare_no_services_submission_panel,
 } from "./misc/index";
 
 export {
