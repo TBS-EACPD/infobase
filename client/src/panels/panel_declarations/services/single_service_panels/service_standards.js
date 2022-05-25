@@ -229,30 +229,36 @@ export const declare_single_service_standards_panel = () =>
             datasets={datasets}
             footnotes={footnotes}
           >
-            <TM className="medium-panel-text" k="service_standards_text" />
-            <TabsStateful
-              default_tab_key={_.last(years)}
-              tabs={_.chain(years)
-                .map((year) => [
-                  year,
-                  {
-                    label: formats.year_to_fiscal_year_raw(year),
-                    content: (
-                      <ServiceStandards
-                        standards={_.filter(standards, {
-                          submission_year: year,
-                        })}
-                        year={year}
-                        key={year}
-                        title={title}
-                        footnotes={footnotes}
-                      />
-                    ),
-                  },
-                ])
-                .fromPairs()
-                .value()}
-            />
+            {!_.isEmpty(standards) ? (
+              <>
+                <TM className="medium-panel-text" k="service_standards_text" />
+                <TabsStateful
+                  default_tab_key={_.last(years)}
+                  tabs={_.chain(years)
+                    .map((year) => [
+                      year,
+                      {
+                        label: formats.year_to_fiscal_year_raw(year),
+                        content: (
+                          <ServiceStandards
+                            standards={_.filter(standards, {
+                              submission_year: year,
+                            })}
+                            year={year}
+                            key={year}
+                            title={title}
+                            footnotes={footnotes}
+                          />
+                        ),
+                      },
+                    ])
+                    .fromPairs()
+                    .value()}
+                />
+              </>
+            ) : (
+              <TM className="medium-panel-text" k="no_service_standards_text" />
+            )}
           </InfographicPanel>
         );
       },
