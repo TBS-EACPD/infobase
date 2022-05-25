@@ -54,7 +54,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
           k={"list_of_provided_services_desc"}
           args={{
             subject_name: subject.name,
-            num_of_services: services.length || 0,
+            active_count: _.filter(services, "is_active").length || 0,
           }}
         />
       </div>
