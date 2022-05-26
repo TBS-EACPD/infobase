@@ -539,8 +539,7 @@
 "INDSC","S",999,"Refunds of amounts credited to revenues in previous years","Remboursements de montants portés aux revenus d'exercices antérieurs",,,,,,,,,,43,43,,,,
 "INDSC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",,,,,,,1855,1855.00,,65625,65625,,89200,89200,
 "INDSC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",,,,64771.00,2184.12,62587,550383,160467.00,389916,3540976,1141707,2399269,4007573,2536250,1471323
-"INVIC",1,1,"Operating/Program","Fonctionnement/Programme",,,,,,,22758599,10718935.00,0,37166761,26096450,0,36094386,29622107,0
-"INVIC",3,1,"Operating/Program","Fonctionnement/Programme",,,,11103293.00,2032683.00,0,,,,,,,,,
+"INVIC",1,1,"Operating/Program","Fonctionnement/Programme",,,,11103293.00,2032683.00,0,22758599,10718935.00,0,37166761,26096450,0,36094386,29622107,0
 "IPC",1,1,"Operating/Program","Fonctionnement/Programme",13574140,11818752,0,12634041.00,12507692.00,0,13723662,13317275.00,0,14705641,13146702,0,15460887,14504595,0
 "IPC",5,1,"Operating/Program","Fonctionnement/Programme",22910623,21295678,0,23879678.00,23237576.00,0,23981227,22987956.00,0,27591920,25947764,0,29296458,28500006,0
 "IPC",10,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,,,,,,,459147,0,0,,,
