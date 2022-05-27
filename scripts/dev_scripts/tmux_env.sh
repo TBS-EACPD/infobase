@@ -25,45 +25,65 @@ else
     mkdir client/build && mkdir client/build/InfoBase 
   fi
 
-  # note: lots of while loops used to keep scripts retrying until their relevant node modules finish installing
+  # notes:
+  #  - `select-pane -T` sets a pane's name; also overiding pane-border-status and automatic-rename so that the desired names show and stick
+  #    - the default is for a pane's name to be the current working directory, not useful
+  #  - after splitting, the tmux command context is the _new_ pane, which is why there's not a bunch of manual pane selecting between setup steps
+  #  - `C-m` appears at the end of `send-keys` lines because it's the readline code for hitting enter, to make bash execute the command in quotes 
+  #  - `while true; ...; sleep 30; done` being used to keep commands retrying until their dependencies sort out, works as long as they exit with error codes
+  #    - notable exception, `gqlgen:watch` will fail and stay failed if it can't find the server on its first try, hence the curl test preceding it
   tmux new-session -t "IB" \; \
     rename-window "client" \; \
+    select-pane -T "Workspace" \; \
+    send-keys "tmux set -g pane-border-status top" C-m \; \
+    send-keys "tmux set -g automatic-rename off" C-m \; \
     send-keys "$can_reach_npm && npm ci" C-m \; \
     split-window -h \; \
-    send-keys 'cd client' C-m \; \
+    select-pane -T "Webpack build" \; \
     send-keys "$can_reach_npm && npm ci" C-m \; \
     send-keys "npm run webpack -- EN FR" C-m \; \
     split-window -v \; \
     send-keys 'cd client' C-m \; \
+    select-pane -T "GQL types codegen" \; \
+    send-keys 'while true; do curl http://localhost:1337/graphql; sleep 10; done' C-m \; \
     send-keys 'while true; do npm run gqlgen:watch; sleep 30; done' C-m \; \
     split-window -v \; \
     send-keys 'cd client' C-m \; \
+    select-pane -T "HTTP server" \; \
     send-keys 'while true; do npm run serve; sleep 30; done' C-m \; \
     split-window -h \; \
     send-keys 'cd client' C-m \; \
+    select-pane -T "Non-webpack build tasks" \; \
     send-keys 'while true; do npm run build_static:watch; sleep 30; done' C-m \; \
     new-window \; \
     rename-window "server" \; \
     send-keys 'cd server' C-m \; \
+    select-pane -T "Workspace" \; \
     send-keys "$can_reach_npm && npm ci" C-m \; \
     split-window -h \; \
     send-keys 'cd server' C-m \; \
+    select-pane -T "GQL Server" \; \
     send-keys 'while true; do npm run start; sleep 30; done' C-m \; \
     split-window -v \; \
     send-keys 'cd server' C-m \; \
+    select-pane -T "GQL MongoDB" \; \
     send-keys 'npm run mongod' C-m \; \
     split-window -h \; \
     send-keys 'cd server' C-m \; \
+    select-pane -T "Populate GQL MongoDB" \; \
     send-keys 'while true; do npm run populate_db:exitcrash; sleep 30; done' C-m \; \
     new-window \; \
     rename-window "form_backend" \; \
     send-keys 'cd form_backend' C-m \; \
+    select-pane -T "Workspace" \; \
     send-keys "$can_reach_npm && npm ci" C-m \; \
     split-window -h \; \
     send-keys 'cd form_backend' C-m \; \
+    select-pane -T "Form Backend Server" \; \
     send-keys 'while true; do npm run start; sleep 30; done' C-m \; \
     split-window -v \; \
     send-keys 'cd form_backend' C-m \; \
+    select-pane -T "Form Backend MongoDB" \; \
     send-keys 'npm run mongod' C-m \; \
-    select-window -t 0 \;
+    select-window -t 0 \;  
 fi
