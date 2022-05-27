@@ -2,6 +2,7 @@
 client/build
 client/build_prod
 client/src/**/*.scss.d.ts
+client/src/**/*.gql.ts
 client/scripts/typescript_progress/output
 client/**/cypress-snapshots.js
 
