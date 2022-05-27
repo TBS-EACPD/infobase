@@ -25,37 +25,45 @@ else
     mkdir client/build && mkdir client/build/InfoBase 
   fi
 
-  # steps:
-  #  - split, with working window to the left, area for watch scripts on the right
-  #  - start installing client packages in window that will run client webpack
-  #  - open window for client server. Keep trying (with delay) to run until serve works, as installation above may not have finished yet
-  #  - split window vertically to make window for local API server, start installing API server packages
-  #  - move back to client server window, need to open windows in jumbled order to get desired layout
-  #  - open window for client base build to the right of the client server window, keep trying to start as client packages may still be installing
-  #  - move back to API server window
-  #  - open window for mongod
-  #  - to the right of mongod, open window for API populate_db process, keep trying to start it as the API packages may still be installing
+  # note: lots of while loops used to keep scripts retrying until their relevant node modules finish installing
   tmux new-session -t "IB" \; \
+    rename-window "client" \; \
+    send-keys "$can_reach_npm && npm ci" C-m \; \
     split-window -h \; \
-    send-keys "cd client && $can_reach_npm && npm ci" C-m \; \
+    send-keys 'cd client' C-m \; \
+    send-keys "$can_reach_npm && npm ci" C-m \; \
     send-keys "npm run webpack -- EN FR" C-m \; \
     split-window -v \; \
     send-keys 'cd client' C-m \; \
-    send-keys 'while true; do npm run serve; sleep 30; done' C-m \; \
+    send-keys 'while true; do npm run gqlgen:watch; sleep 30; done' C-m \; \
     split-window -v \; \
-    send-keys "cd server && $can_reach_npm && npm ci" C-m \; \
-    send-keys "npm start" C-m \; \
-    selectp -t 2 \; \
+    send-keys 'cd client' C-m \; \
+    send-keys 'while true; do npm run serve; sleep 30; done' C-m \; \
     split-window -h \; \
     send-keys 'cd client' C-m \; \
     send-keys 'while true; do npm run build_static:watch; sleep 30; done' C-m \; \
-    selectp -t 4 \; \
+    new-window \; \
+    rename-window "server" \; \
+    send-keys 'cd server' C-m \; \
+    send-keys "$can_reach_npm && npm ci" C-m \; \
+    split-window -h \; \
+    send-keys 'cd server' C-m \; \
+    send-keys 'while true; do npm run start; sleep 30; done' C-m \; \
     split-window -v \; \
     send-keys 'cd server' C-m \; \
     send-keys 'npm run mongod' C-m \; \
     split-window -h \; \
     send-keys 'cd server' C-m \; \
     send-keys 'while true; do npm run populate_db:exitcrash; sleep 30; done' C-m \; \
-    selectp -t 0 \; \
-    send-keys "$can_reach_npm && npm ci" C-m \;
+    new-window \; \
+    rename-window "form_backend" \; \
+    send-keys 'cd form_backend' C-m \; \
+    send-keys "$can_reach_npm && npm ci" C-m \; \
+    split-window -h \; \
+    send-keys 'cd form_backend' C-m \; \
+    send-keys 'while true; do npm run start; sleep 30; done' C-m \; \
+    split-window -v \; \
+    send-keys 'cd form_backend' C-m \; \
+    send-keys 'npm run mongod' C-m \; \
+    select-window -t 0 \;
 fi
