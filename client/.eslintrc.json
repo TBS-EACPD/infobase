@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": "*.gql.ts", // duplicated against line in repo root .eslintignore, the client build seemed to still lint these files sometimes
   "plugins": ["react", "@typescript-eslint", "jsx-a11y"],
   "extends": [
     "../.eslintrc.json",
