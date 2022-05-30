@@ -43,18 +43,18 @@ else
     send-keys "$can_reach_npm && npm ci" C-m \; \
     send-keys "npm run webpack -- EN FR" C-m \; \
     split-window -v \; \
+    set -p @manual_pane_title "Non-webpack build tasks" \; \
+    send-keys 'cd client' C-m \; \
+    send-keys 'while true; do npm run build_static:watch; sleep 10; done' C-m \; \
+    split-window -v \; \
     set -p @manual_pane_title "GQL Types Codegen" \; \
     send-keys 'cd client' C-m \; \
     send-keys 'while true; do sleep 10; curl -f http://localhost:1337/.well-known/apollo/server-health || continue && break; done' C-m \; \
     send-keys 'while true; do npm run gqlgen:watch; sleep 10; done' C-m \; \
-    split-window -v \; \
+    split-window -h \; \
     set -p @manual_pane_title "HTTP server" \; \
     send-keys 'cd client' C-m \; \
     send-keys 'while true; do npm run serve; sleep 10; done' C-m \; \
-    split-window -h \; \
-    set -p @manual_pane_title "Non-webpack build tasks" \; \
-    send-keys 'cd client' C-m \; \
-    send-keys 'while true; do npm run build_static:watch; sleep 10; done' C-m \; \
     new-window \; \
     rename-window "server" \; \
     set -p @manual_pane_title "Workspace" \; \
