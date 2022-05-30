@@ -253,6 +253,31 @@ jobs:
           paths:
             - ./*
 
+  check_gql_codegen_integrity:
+    docker:
+      - image: eaadtbs/ib-ci:1.3
+        <<: *dockerhub_auth
+    working_directory: "~/InfoBase"
+    steps:
+      - attach_workspace:
+          at: ./
+      - run: ./scripts/ci_scripts/create_envs.sh
+
+      - run:
+          name: server mongod
+          command: (cd server && npm run mongod)
+          background: true
+      - run: (cd server && npm run populate_db)
+      - run:
+          name: start_api_server
+          command: (cd server && npm run start)
+          background: true
+
+      - run: while true; do sleep 10; curl -f http://localhost:1337/.well-known/apollo/server-health || continue && break; done
+      - run: (cd client && npm run gqlgen)
+
+      - run: git status | grep "\.gql\.ts" && echo "Committed .gql.ts files do not match output of gqlgen in CI. Regenerate and commit these types locally." && exit 1
+
   test_client:
     docker:
       - image: eaadtbs/ib-ci:1.3
@@ -455,6 +480,10 @@ workflows:
   build_test_deploy:
     jobs:
       - checkout_and_install
+
+      - check_gql_codegen_integrity:
+          requires:
+            - checkout_and_install
 
       - test_client:
           requires:
