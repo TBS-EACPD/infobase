@@ -481,16 +481,16 @@ workflows:
     jobs:
       - checkout_and_install
 
-      - check_gql_codegen_integrity:
+      - test_client:
           requires:
             - checkout_and_install
-
-      - test_client:
+      - check_gql_codegen_integrity:
           requires:
             - checkout_and_install
       - build_client:
           requires:
             - test_client
+            - check_gql_codegen_integrity
 
       - test_server:
           requires:
