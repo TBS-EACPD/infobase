@@ -6,7 +6,7 @@ import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type ServicesForOrgQueryVariables = Types.Exact<{
   lang: Types.Scalars['String'];
-  id: Types.InputMaybe<Types.Scalars['String']>;
+  id?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 
