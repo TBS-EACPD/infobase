@@ -275,7 +275,7 @@ jobs:
       - run: while true; do sleep 10; curl -f http://localhost:1337/.well-known/apollo/server-health || continue && break; done
       - run: (cd client && npm run gqlgen)
 
-      - run: git status | grep "\.gql\.ts" && echo "Committed .gql.ts files do not match output of gqlgen in CI. Regenerate and commit these types locally." && exit 1
+      - run: (git status | grep "\.gql\.ts") && (echo "Committed .gql.ts files do not match output of gqlgen in CI. Regenerate and commit these types locally." && exit 1) || (echo "CI generated .gql.ts files match committed files." && exit 0)
 
   test_client:
     docker:
