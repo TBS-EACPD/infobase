@@ -336,8 +336,8 @@ const datasets = {
     ),
 };
 
-const program_or_crso_search_name = ({ is_internal_service, name, dept }) =>
-  is_internal_service ? name : `${name} - ${dept.name}`;
+const program_or_crso_search_name = ({ name, dept }) =>
+  `${name} - ${dept.name}`;
 
 const programs = {
   config_name: "programs",
