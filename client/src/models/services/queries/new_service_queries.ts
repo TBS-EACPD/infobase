@@ -1,6 +1,6 @@
 import { lang } from "src/core/injected_build_constants";
 
-import { getSuspensedQuery } from "src/graphql_utils/getSuspensedQuery";
+import { getSuspensedQuery } from "src/graphql_utils/getQuery";
 
 import type {
   ServicesForOrgQuery,
