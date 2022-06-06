@@ -1,5 +1,7 @@
+import type { NormalizedCacheObject } from "@apollo/client";
 import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
+import type { DocumentNode } from "graphql";
 import _ from "lodash";
 
 import string_hash from "string-hash";
@@ -15,7 +17,11 @@ import { make_request } from "src/request_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
-const poke_server = (api_url, fetch_options, query_name = "poke_server") =>
+const poke_server = (
+  api_url: string,
+  fetch_options?: RequestInit,
+  query_name = "poke_server"
+) =>
   make_request(
     `${api_url}?query={ root(lang: "en") { non_field } }&query_name=${query_name}`,
     { retries: 0, fetch_options: { cache: "no-cache", ...fetch_options } }
@@ -56,12 +62,20 @@ export const wake_up_graphql_cloud_function = () =>
     .then((api_url) => poke_server(api_url))
     .catch(_.noop);
 
-const query_as_get_with_query_header = async (uri, options) => {
+const query_as_get_with_query_header = async (
+  _uri: string,
+  options: RequestInit
+) => {
   // want GET requests for client side caching (safe to do given our cache busting scheme and read-only GraphQL API)
   // due to GET query param length limits, do this by moving the actual query/batched queries to the request header "gql-query",
   // which our server is configured to specially handle
 
-  const query = options.body;
+  const query = options.body?.toString();
+
+  if (typeof query === "undefined") {
+    throw new Error("TODO");
+  }
+
   const query_hash = string_hash(query);
 
   const uriWithVersionAndQueryHash = `${await get_api_url()}?v=${sha}&queryHash=${query_hash}`;
@@ -76,8 +90,7 @@ const query_as_get_with_query_header = async (uri, options) => {
     },
   };
 
-  const query_names = _.chain(query)
-    .thru(JSON.parse)
+  const query_names = _.chain(JSON.parse(query))
     .map("variables._query_name")
     .join(", ")
     .value();
@@ -90,9 +103,9 @@ const query_as_get_with_query_header = async (uri, options) => {
   });
 };
 
-let client = null;
+let client: undefined | ApolloClient<NormalizedCacheObject> = undefined;
 export function get_client() {
-  if (!client) {
+  if (typeof client === "undefined") {
     client = new ApolloClient({
       link: new BatchHttpLink({
         // query_as_get_with_query_header replaces the uri on the fly, switches to appropriate local uri in dev
@@ -121,60 +134,77 @@ export function get_client() {
   return client;
 }
 
-const query_promise_factory = (query_name, query, resolver) => (variables) => {
-  return get_client()
-    .query({
-      query: query,
-      variables: {
-        ...variables,
-        _query_name: query_name,
-      },
-    })
-    .then(({ data }) => resolver(data));
-};
-
-const query_hook_factory = (query_name, query, resolver) => (variables) => {
-  const { loading, error, data } = useQuery(query, {
-    variables: {
-      ...variables,
-      _query_name: query_name,
-    },
-  });
-
-  if (loading) {
-    return {
-      loading,
-      error,
-      data,
-    };
-  } else if (error) {
-    throw new Error(error);
-  } else {
-    return {
-      loading,
-      error,
-      data: resolver(data),
-    };
-  }
-};
-
-export const query_factory = ({ query_name, query, resolver = _.identity }) => {
+export const query_factory = <
+  Query,
+  Variables,
+  Resolver extends (response: Query) => any
+>({
+  query_name,
+  query,
+  resolver,
+}: {
+  query_name: string;
+  query: DocumentNode;
+  resolver?: Resolver;
+}) => {
   if (!query_name) {
     throw new Error(
       "All queries must have (unique) names, for logging purposes."
     );
   }
 
+  const resolver_or_identity =
+    typeof resolver === "undefined" ? (response: Query) => response : resolver;
+
   const promise_key = `query_${query_name}`;
+  const query_promise = (variables: Variables) => {
+    return get_client()
+      .query<Query, Variables>({
+        query: query,
+        variables: {
+          ...variables,
+          _query_name: query_name,
+        },
+      })
+      .then(({ data }) => resolver_or_identity(data));
+  };
 
   const hook_key = _.chain(query_name)
     .camelCase()
     .upperFirst()
     .thru((pascal_case_name) => `use${pascal_case_name}`)
     .value();
+  const useQueryHook = (variables: Variables) => {
+    const { loading, error, data } = useQuery<Query, Variables>(query, {
+      variables: {
+        ...variables,
+        _query_name: query_name,
+      },
+    });
+
+    if (loading) {
+      return {
+        loading,
+        error,
+        data,
+      };
+    } else if (error) {
+      throw new Error(JSON.stringify(error));
+    } else if (typeof data === "undefined") {
+      throw new Error(
+        `query_name: ${query_name}, unexpected undefined data result from useQuery in a non-loading and non-error state.`
+      );
+    } else {
+      return {
+        loading,
+        error,
+        data: resolver_or_identity(data),
+      };
+    }
+  };
 
   return {
-    [promise_key]: query_promise_factory(query_name, query, resolver),
-    [hook_key]: query_hook_factory(query_name, query, resolver),
+    [promise_key]: query_promise,
+    [hook_key]: useQueryHook,
   };
 };
