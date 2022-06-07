@@ -1,7 +1,7 @@
-import * as Types from '../../../types.gql';
+import * as Types from '../../../../types.gql';
 
 import { gql } from '@apollo/client';
-import { StandardServiceFragmentFragmentDoc } from './StandardServiceFragment.gql';
+import { StandardServiceFragmentFragmentDoc } from '../StandardServiceFragment.gql';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type ServicesForOrgQueryVariables = Types.Exact<{

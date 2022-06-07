@@ -8,8 +8,10 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, FancyUL } from "src/components/index";
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
-import { suspendedServicesForOrg } from "src/models/services/queries/ServicesForOrg";
-import { suspendedServicesForProgram } from "src/models/services/queries/ServicesForProgram";
+import {
+  suspendedServicesForOrg,
+  suspendedServicesForProgram,
+} from "src/models/services/queries";
 
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
