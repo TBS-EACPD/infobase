@@ -1,6 +1,9 @@
+import _ from "lodash";
+
 import { lang } from "src/core/injected_build_constants";
 
 import { getSuspensedQuery } from "src/graphql_utils/getQuery";
+import { query_factory } from "src/graphql_utils/graphql_utils";
 
 import type {
   ServicesForOrgQuery,
@@ -20,6 +23,16 @@ export const getServicesForOrg = (id: string) => {
   >(ServicesForOrgDocument, { lang, id });
   return data.root.org?.services;
 };
+
+const { suspendedServicesForOrg } = query_factory<
+  ServicesForOrgQuery,
+  ServicesForOrgQueryVariables
+>()({
+  query_name: "ServicesForOrg",
+  query: ServicesForOrgDocument,
+  resolver: (response: ServicesForOrgQuery) => response,
+});
+
 export const getServicesForProgram = (id: string) => {
   const data = getSuspensedQuery<
     ServicesForProgramQuery,

@@ -1,4 +1,7 @@
-import { LiteralKeyedRecordHelper } from "./type_utils";
+import {
+  LiteralKeyedRecordHelper,
+  ComputedLiteralKeyRecord,
+} from "./type_utils";
 
 describe("LiteralKeyedRecordHelper", () => {
   it("Is an identity at runtime", () => {
@@ -25,6 +28,43 @@ describe("LiteralKeyedRecordHelper", () => {
         : never;
 
     const type_assertion: AssertExpectedType<typeof record> = true;
+
+    expect(type_assertion).toEqual(true);
+  });
+});
+
+describe("ComputedLiteralKeyRecord", () => {
+  it("Coverts key and value arg to object at run time", () => {
+    const key = "key";
+    const value = "value";
+    expect(ComputedLiteralKeyRecord(key, value)).toStrictEqual({
+      [key]: value,
+    });
+  });
+
+  it("Type system test: the type system sees the computed keys as literals, retains the value's type", () => {
+    const key_base = "base";
+
+    const record_with_computed_literal_keys = {
+      ...ComputedLiteralKeyRecord(`prefix_${key_base}`, 1),
+      ...ComputedLiteralKeyRecord(`${key_base}_suffix`, "a"),
+    };
+
+    type ExpectedLiteralKeyedType = {
+      prefix_base: number;
+      base_suffix: string;
+    };
+
+    type AssertExpectedType<ActualType> =
+      ActualType extends ExpectedLiteralKeyedType
+        ? ExpectedLiteralKeyedType extends ActualType
+          ? true
+          : never
+        : never;
+
+    const type_assertion: AssertExpectedType<
+      typeof record_with_computed_literal_keys
+    > = true;
 
     expect(type_assertion).toEqual(true);
   });
