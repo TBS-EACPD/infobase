@@ -3,6 +3,9 @@ import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
 import type { DocumentNode } from "graphql";
 import _ from "lodash";
+
+import type { PartialOn } from "src/types/util_types";
+
 import string_hash from "string-hash";
 import { suspend } from "suspend-react";
 
@@ -11,6 +14,7 @@ import {
   local_ip,
   is_dev,
   is_ci,
+  lang,
 } from "src/core/injected_build_constants";
 
 import { make_request } from "src/request_utils";
@@ -171,11 +175,17 @@ export const query_factory =
       used_query_names.set(query_name, null);
     }
 
-    const promiseQuery = (variables: Variables) => {
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    type PartialVariables = Variables extends { lang: any }
+      ? PartialOn<Variables, "lang">
+      : Variables;
+
+    const promiseQuery = (variables: PartialVariables) => {
       return get_client()
-        .query<Query, Variables>({
+        .query<Query, PartialVariables>({
           query: query,
           variables: {
+            lang,
             ...variables,
             _query_name: query_name,
           },
@@ -183,18 +193,22 @@ export const query_factory =
         .then(({ data }) => resolver(data));
     };
 
-    const suspendedQuery = (variables: Variables): Resolved => {
-      const key = query_name + JSON.stringify(variables);
+    const suspendedQuery = (variables: PartialVariables): Resolved => {
+      const key = query_name + lang + JSON.stringify(variables);
       return suspend(() => promiseQuery(variables), [key]);
     };
 
-    const useQueryHook = (variables: Variables) => {
-      const { loading, error, data } = useQuery<Query, Variables>(query, {
-        variables: {
-          ...variables,
-          _query_name: query_name,
-        },
-      });
+    const useQueryHook = (variables: PartialVariables) => {
+      const { loading, error, data } = useQuery<Query, PartialVariables>(
+        query,
+        {
+          variables: {
+            lang,
+            ...variables,
+            _query_name: query_name,
+          },
+        }
+      );
 
       if (loading) {
         return {
