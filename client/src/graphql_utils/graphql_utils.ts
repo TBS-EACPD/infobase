@@ -4,8 +4,6 @@ import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
 import type { DocumentNode } from "graphql";
 import _ from "lodash";
 
-import type { PartialOn } from "src/types/util_types";
-
 import string_hash from "string-hash";
 import { suspend } from "suspend-react";
 
@@ -18,7 +16,10 @@ import {
 } from "src/core/injected_build_constants";
 
 import { make_request } from "src/request_utils";
+
 import { ComputedLiteralKeyRecord } from "src/types/type_utils";
+
+import type { PartialOn } from "src/types/util_types"; // eslint-disable-line import/order
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
