@@ -1,0 +1,18 @@
+query AllCovidEstimatesByMeasureId($lang: String!, $fiscal_year: Int) {
+  root(lang: $lang) {
+    covid_estimates_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+      id
+
+      covid_data(fiscal_year: $fiscal_year) {
+        fiscal_year
+
+        covid_estimates {
+          org_id
+          est_doc
+          vote
+          stat
+        }
+      }
+    }
+  }
+}

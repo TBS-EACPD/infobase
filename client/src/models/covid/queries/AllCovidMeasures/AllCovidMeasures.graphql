@@ -1,0 +1,8 @@
+query AllCovidMeasures($lang: String!) {
+  root(lang: $lang) {
+    covid_measures {
+      id
+      name
+    }
+  }
+}

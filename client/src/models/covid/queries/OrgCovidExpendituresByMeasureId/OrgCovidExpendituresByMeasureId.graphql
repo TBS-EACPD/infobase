@@ -1,0 +1,24 @@
+query OrgCovidExpendituresByMeasureId(
+  $lang: String!
+  $org_id: String!
+  $fiscal_year: Int
+) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      id
+      covid_expenditures_by_measure: covid_measures(fiscal_year: $fiscal_year) {
+        id
+
+        covid_data(fiscal_year: $fiscal_year, org_id: $org_id) {
+          fiscal_year
+
+          covid_expenditures {
+            org_id
+            vote
+            stat
+          }
+        }
+      }
+    }
+  }
+}
