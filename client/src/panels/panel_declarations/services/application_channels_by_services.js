@@ -13,10 +13,8 @@ import {
 
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
-import {
-  getServicesForOrg,
-  getServicesForProgram,
-} from "src/models/services/queries/new_service_queries";
+import { suspendedServicesForOrg } from "src/models/services/queries/ServicesForOrg";
+import { suspendedServicesForProgram } from "src/models/services/queries/ServicesForProgram";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -37,8 +35,8 @@ const get_report_years = (data) =>
 const ServicesChannelsPanel = ({ subject }) => {
   const getServicesQuery =
     subject.subject_type === "program"
-      ? getServicesForProgram
-      : getServicesForOrg;
+      ? suspendedServicesForProgram
+      : suspendedServicesForOrg;
   const services = getServicesQuery(subject.id);
 
   const [active_services, set_active_services] = useState({});
