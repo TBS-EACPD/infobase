@@ -8,10 +8,8 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, FancyUL } from "src/components/index";
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
-import {
-  getServicesForOrg,
-  getServicesForProgram,
-} from "src/models/services/queries/new_service_queries";
+import { suspendedServicesForOrg } from "src/models/services/queries/ServicesForOrg";
+import { suspendedServicesForProgram } from "src/models/services/queries/ServicesForProgram";
 
 import { infographic_href_template } from "src/infographic/infographic_href_template";
 
@@ -26,8 +24,8 @@ const ProvidedServicesListPanel = ({ subject }) => {
   const [service_query, set_service_query] = useState("");
   const getServicesQuery =
     subject.subject_type === "program"
-      ? getServicesForProgram
-      : getServicesForOrg;
+      ? suspendedServicesForProgram
+      : suspendedServicesForOrg;
   const services = getServicesQuery(subject.id);
 
   const { active_count, inactive_count } = _.chain(services)
