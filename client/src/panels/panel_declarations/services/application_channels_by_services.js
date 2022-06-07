@@ -13,8 +13,10 @@ import {
 
 import { SuspenseLeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
 
-import { suspendedServicesForOrg } from "src/models/services/queries/ServicesForOrg";
-import { suspendedServicesForProgram } from "src/models/services/queries/ServicesForProgram";
+import {
+  suspendedServicesForOrg,
+  suspendedServicesForProgram,
+} from "src/models/services/queries";
 
 import { infobase_colors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
