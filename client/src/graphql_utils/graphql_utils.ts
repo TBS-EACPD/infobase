@@ -134,88 +134,89 @@ export function get_client() {
   return client;
 }
 
-export const query_factory = <
-  Query,
-  Variables,
-  Resolver extends (response: Query) => any
->({
-  query_name,
-  query,
-  resolver,
-}: {
-  query_name: string;
-  query: DocumentNode;
-  resolver?: Resolver;
-}) => {
-  if (!query_name) {
-    throw new Error(
-      "All queries must have (unique) names, for logging purposes."
-    );
-  }
+const used_query_names = new Map<string, null>();
+export const query_factory =
+  <Query, Variables>() =>
+  <QueryName extends string, Resolver extends (response: Query) => any>({
+    query_name,
+    query,
+    resolver,
+  }: {
+    query_name: QueryName;
+    query: DocumentNode;
+    resolver?: Resolver;
+  }) => {
+    if (
+      !query_name ||
+      !_.chain(query_name).camelCase().upperFirst().isEqual(query_name).value()
+    ) {
+      throw new Error(
+        `Query name "${query_name}" is either empty or not pascal case. A pascal case name is required for convention, in particular for the constructed hook name.`
+      );
+    }
 
-  const resolver_or_identity =
-    typeof resolver === "undefined" ? (response: Query) => response : resolver;
+    if (used_query_names.has(query_name)) {
+      throw new Error(
+        `Reused query name "${query_name}", all queries must have unique names for logging and caching purposes.`
+      );
+    } else {
+      used_query_names.set(query_name, null);
+    }
 
-  const promise_key = `query_${query_name}`;
-  const promise_query = (variables: Variables) => {
-    return get_client()
-      .query<Query, Variables>({
-        query: query,
+    const resolver_or_identity =
+      typeof resolver === "undefined"
+        ? (response: Query) => response
+        : resolver;
+
+    const promiseQuery = (variables: Variables) => {
+      return get_client()
+        .query<Query, Variables>({
+          query: query,
+          variables: {
+            ...variables,
+            _query_name: query_name,
+          },
+        })
+        .then(({ data }) => resolver_or_identity(data));
+    };
+
+    const suspendedQuery = (variables: Variables): Query => {
+      const key = query_name + JSON.stringify(variables);
+      return suspend(() => promiseQuery(variables), [key]);
+    };
+
+    const useQueryHook = (variables: Variables) => {
+      const { loading, error, data } = useQuery<Query, Variables>(query, {
         variables: {
           ...variables,
           _query_name: query_name,
         },
-      })
-      .then(({ data }) => resolver_or_identity(data));
-  };
+      });
 
-  const suspended_key = _.chain(query_name)
-    .camelCase()
-    .upperFirst()
-    .thru((pascal_case_name) => `suspended${pascal_case_name}`)
-    .value();
-  const suspendedQuery = (variables: Variables): Query => {
-    const key = query_name + JSON.stringify(variables);
-    return suspend(() => promise_query(variables), [key]);
-  };
+      if (loading) {
+        return {
+          loading,
+          error,
+          data,
+        };
+      } else if (error) {
+        throw new Error(JSON.stringify(error));
+      } else if (typeof data === "undefined") {
+        throw new Error(
+          `query_name: ${query_name}, unexpected undefined data result from useQuery in a non-loading and non-error state.`
+        );
+      } else {
+        return {
+          loading,
+          error,
+          data: resolver_or_identity(data),
+        };
+      }
+    };
 
-  const hook_key = _.chain(query_name)
-    .camelCase()
-    .upperFirst()
-    .thru((pascal_case_name) => `use${pascal_case_name}`)
-    .value();
-  const useHookQuery = (variables: Variables) => {
-    const { loading, error, data } = useQuery<Query, Variables>(query, {
-      variables: {
-        ...variables,
-        _query_name: query_name,
-      },
-    });
-
-    if (loading) {
-      return {
-        loading,
-        error,
-        data,
-      };
-    } else if (error) {
-      throw new Error(JSON.stringify(error));
-    } else if (typeof data === "undefined") {
-      throw new Error(
-        `query_name: ${query_name}, unexpected undefined data result from useQuery in a non-loading and non-error state.`
-      );
-    } else {
-      return {
-        loading,
-        error,
-        data: resolver_or_identity(data),
-      };
-    }
+    return {
+      [`promise${query_name}`]: promiseQuery,
+      [`suspended${query_name}`]: suspendedQuery,
+      [`use${query_name}`]: useQueryHook,
+    };
   };
-
-  return {
-    [promise_key]: promise_query,
-    [suspended_key]: suspendedQuery,
-    [hook_key]: useHookQuery,
-  };
-};
