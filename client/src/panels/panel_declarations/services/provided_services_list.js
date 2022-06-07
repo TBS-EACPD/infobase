@@ -26,7 +26,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
     subject.subject_type === "program"
       ? suspendedServicesForProgram
       : suspendedServicesForOrg;
-  const services = getServicesQuery(subject.id);
+  const services = getServicesQuery({ id: subject.id });
 
   const { active_count, inactive_count } = _.chain(services)
     .groupBy(({ is_active }) => (is_active ? "active_count" : "inactive_count"))

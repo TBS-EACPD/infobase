@@ -37,7 +37,7 @@ const ServicesChannelsPanel = ({ subject }) => {
     subject.subject_type === "program"
       ? suspendedServicesForProgram
       : suspendedServicesForOrg;
-  const services = getServicesQuery(subject.id);
+  const services = getServicesQuery({ id: subject.id });
 
   const [active_services, set_active_services] = useState({});
   const [active_year, set_active_year] = useState("");
