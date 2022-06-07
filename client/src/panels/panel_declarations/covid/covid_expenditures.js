@@ -9,10 +9,10 @@ import { TabsStateful, LeafSpinner, DisplayTable } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
 import {
-  query_gov_covid_summaries,
-  query_top_covid_spending,
-  query_all_covid_expenditures_by_measure_id,
-  query_org_covid_expenditures_by_measure_id,
+  promisedGovCovidSummaries,
+  promisedTopCovidSpending,
+  promisedAllCovidExpendituresByMeasureId,
+  promisedOrgCovidExpendituresByMeasureId,
 } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
@@ -293,7 +293,7 @@ const tab_content_configs = [
     subject_types: ["gov"],
     label: text_maker("summary_tab_label"),
     load_data: ({ calculations: { selected_year } }) =>
-      query_top_covid_spending({ fiscal_year: selected_year }),
+      promisedTopCovidSpending({ fiscal_year: selected_year }),
     TabContent: SummaryTab,
   },
   {
@@ -301,7 +301,7 @@ const tab_content_configs = [
     subject_types: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ calculations: { selected_year } }) =>
-      query_all_covid_expenditures_by_measure_id({
+      promisedAllCovidExpendituresByMeasureId({
         fiscal_year: selected_year,
       }).then((data) => roll_up_flat_measure_data_by_property(data, "org_id")),
     TabContent: ByDepartmentTab,
@@ -313,12 +313,12 @@ const tab_content_configs = [
     load_data: ({ subject, calculations: { selected_year } }) =>
       (() => {
         if (subject.subject_type === "dept") {
-          return query_org_covid_expenditures_by_measure_id({
+          return promisedOrgCovidExpendituresByMeasureId({
             org_id: String(subject.id),
             fiscal_year: selected_year,
           });
         } else {
-          return query_all_covid_expenditures_by_measure_id({
+          return promisedAllCovidExpendituresByMeasureId({
             fiscal_year: selected_year,
           });
         }
@@ -339,7 +339,7 @@ class CovidExpendituresPanel extends React.Component {
     };
   }
   componentDidMount() {
-    query_gov_covid_summaries().then((covid_summaries) =>
+    promisedGovCovidSummaries().then((covid_summaries) =>
       this.setState({
         summary_by_fiscal_year: _.chain(covid_summaries)
           .map(({ fiscal_year, covid_expenditures }) => [

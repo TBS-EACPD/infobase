@@ -4,9 +4,9 @@ import { Gov } from "src/models/subjects/Gov";
 
 import { CovidMeasureStore } from "./CovidMeasureStore";
 import {
-  query_gov_years_with_covid_data,
-  query_org_years_with_covid_data,
-  query_all_covid_measures,
+  promisedGovYearsWithCovidData,
+  promisedOrgYearsWithCovidData,
+  promisedAllCovidMeasures,
 } from "./queries";
 import { yearsWithCovidDataStore } from "./yearsWithCovidDataStore";
 
@@ -22,14 +22,14 @@ export const api_load_years_with_covid_data = (subject) => {
           is_loaded: subject_is_loaded(subject.id),
           subject_type: "dept",
           id: String(subject.id),
-          query: query_org_years_with_covid_data,
+          query: promisedOrgYearsWithCovidData,
         };
       default:
         return {
           is_loaded: subject_is_loaded("gov"),
           subject_type: "gov",
           id: "gov",
-          query: query_gov_years_with_covid_data,
+          query: promisedGovYearsWithCovidData,
         };
     }
   })();
@@ -80,7 +80,7 @@ export const api_load_all_covid_measures = () => {
     return Promise.resolve();
   }
 
-  return query_all_covid_measures().then((covid_measures) => {
+  return promisedAllCovidMeasures().then((covid_measures) => {
     _.each(covid_measures, (covid_measure) =>
       CovidMeasureStore.create_and_register(covid_measure)
     );

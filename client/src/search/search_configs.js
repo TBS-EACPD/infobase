@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
-import { query_search_services } from "src/models/services/services_queries";
+import { promisedSearchServices } from "src/models/services/services_queries";
 import { Dept, Gov, Program, CRSO, ProgramTag } from "src/models/subjects";
 
 import { trivial_text_maker } from "src/models/text";
@@ -420,7 +420,7 @@ const services = {
     `${service.name} - ${Dept.store.lookup(service.org_id).name}`,
   menu_content_function: default_menu_content_function,
   query: (search_phrase) =>
-    query_search_services({
+    promisedSearchServices({
       search_phrase: get_simplified_search_phrase(search_phrase),
     }),
 };

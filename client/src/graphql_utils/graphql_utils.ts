@@ -218,7 +218,7 @@ export const query_factory =
     };
 
     return {
-      ...ComputedLiteralKeyRecord(`promise${query_name}`, promiseQuery),
+      ...ComputedLiteralKeyRecord(`promised${query_name}`, promiseQuery),
       ...ComputedLiteralKeyRecord(`suspended${query_name}`, suspendedQuery),
       ...ComputedLiteralKeyRecord(`use${query_name}`, useQueryHook),
     };

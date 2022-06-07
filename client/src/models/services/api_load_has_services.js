@@ -3,8 +3,8 @@ import _ from "lodash";
 import { log_standard_event } from "src/core/analytics";
 
 import {
-  query_dept_has_services,
-  query_program_has_services,
+  promisedDeptHasServices,
+  promisedProgramHasServices,
 } from "./services_queries";
 
 export const api_load_has_services = (subject) => {
@@ -25,13 +25,13 @@ export const api_load_has_services = (subject) => {
         return {
           is_loaded: has_services_is_loaded,
           id: String(subject.id),
-          query: query_dept_has_services,
+          query: promisedDeptHasServices,
         };
       case "program":
         return {
           is_loaded: has_services_is_loaded,
           id: String(subject.id),
-          query: query_program_has_services,
+          query: promisedProgramHasServices,
         };
       default:
         return {
