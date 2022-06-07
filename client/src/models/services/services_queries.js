@@ -126,8 +126,12 @@ const all_service_summary_fragments = `
   }
 `;
 
-export const { query_dept_has_services, useDeptHasServices } = query_factory({
-  query_name: "dept_has_services",
+export const {
+  promisedDeptHasServices,
+  suspendedDeptHasServices,
+  useDeptHasServices,
+} = query_factory()({
+  query_name: "DeptHasServices",
   query: gql`
     query($lang: String! = "${lang}", $id: String!) {
       root(lang: $lang) {
@@ -140,10 +144,13 @@ export const { query_dept_has_services, useDeptHasServices } = query_factory({
   `,
   resolver: (response) => _.get(response, "root.org"),
 });
-export const { query_program_has_services, useProgramHasServices } =
-  query_factory({
-    query_name: "program_has_services",
-    query: gql`
+export const {
+  promisedProgramHasServices,
+  suspendedProgramHasServices,
+  useProgramHasServices,
+} = query_factory()({
+  query_name: "ProgramHasServices",
+  query: gql`
     query($lang: String! = "${lang}", $id: String!) {
       root(lang: $lang) {
         program(id: $id) {
@@ -153,11 +160,15 @@ export const { query_program_has_services, useProgramHasServices } =
       }
     }
   `,
-    resolver: (response) => _.get(response, "root.program"),
-  });
+  resolver: (response) => _.get(response, "root.program"),
+});
 
-export const { query_search_services, useSearchServices } = query_factory({
-  query_name: "search_services",
+export const {
+  promisedSearchServices,
+  suspendedSearchServices,
+  useSearchServices,
+} = query_factory()({
+  query_name: "SearchServices",
   query: gql`
     query($lang: String! = "${lang}", $search_phrase: String!) {
       root(lang: $lang) {
@@ -173,8 +184,12 @@ export const { query_search_services, useSearchServices } = query_factory({
   resolver: (response) => _.get(response, "root.search_services"),
 });
 
-export const { query_single_service, useSingleService } = query_factory({
-  query_name: "single_service",
+export const {
+  promisedSingleService,
+  suspendedSingleService,
+  useSingleService,
+} = query_factory()({
+  query_name: "SingleService",
   query: gql`
     query($lang: String! = "${lang}", $service_id: String!) {
       root(lang: $lang) {
@@ -187,8 +202,12 @@ export const { query_single_service, useSingleService } = query_factory({
   resolver: (response) => _.get(response, "root.service"),
 });
 
-export const { query_services_by_gov, useServicesByGov } = query_factory({
-  query_name: "services_by_gov",
+export const {
+  promisedServicesByGov,
+  suspendedServicesByGov,
+  useServicesByGov,
+} = query_factory()({
+  query_name: "ServicesByGov",
   query: gql`
   query($lang: String! = "${lang}") {
     root(lang: $lang) {
@@ -203,10 +222,13 @@ export const { query_services_by_gov, useServicesByGov } = query_factory({
   resolver: (response) => _.get(response, "root.orgs.services"),
 });
 
-export const { query_service_summary_gov, useServiceSummaryGov } =
-  query_factory({
-    query_name: "service_summary_gov",
-    query: gql`
+export const {
+  promisedServiceSummaryGov,
+  suspendedServiceSummaryGov,
+  useServiceSummaryGov,
+} = query_factory()({
+  query_name: "ServiceSummaryGov",
+  query: gql`
     query($lang: String! = "${lang}") {
       root(lang: $lang) {
         gov{
@@ -216,12 +238,15 @@ export const { query_service_summary_gov, useServiceSummaryGov } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.gov.service_summary"),
-  });
-export const { query_service_summary_org, useServiceSummaryOrg } =
-  query_factory({
-    query_name: "service_summary_org",
-    query: gql`
+  resolver: (response) => _.get(response, "root.gov.service_summary"),
+});
+export const {
+  promisedServiceSummaryOrg,
+  suspendedServiceSummaryOrg,
+  useServiceSummaryOrg,
+} = query_factory()({
+  query_name: "ServiceSummaryOrg",
+  query: gql`
     query($lang: String! = "${lang}", $id: String) {
       root(lang: $lang) {
         org(org_id: $id){
@@ -231,12 +256,15 @@ export const { query_service_summary_org, useServiceSummaryOrg } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.org.service_summary"),
-  });
-export const { query_service_summary_program, useServiceSummaryProgram } =
-  query_factory({
-    query_name: "service_summary_program",
-    query: gql`
+  resolver: (response) => _.get(response, "root.org.service_summary"),
+});
+export const {
+  promisedServiceSummaryProgram,
+  suspendedServiceSummaryProgram,
+  useServiceSummaryProgram,
+} = query_factory()({
+  query_name: "ServiceSummaryProgram",
+  query: gql`
     query($lang: String! = "${lang}", $id: String) {
       root(lang: $lang) {
         program(id: $id){
@@ -246,5 +274,5 @@ export const { query_service_summary_program, useServiceSummaryProgram } =
       }
     }
     `,
-    resolver: (response) => _.get(response, "root.program.service_summary"),
-  });
+  resolver: (response) => _.get(response, "root.program.service_summary"),
+});

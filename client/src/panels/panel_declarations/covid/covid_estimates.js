@@ -8,11 +8,11 @@ import { TabsStateful, LeafSpinner, DisplayTable } from "src/components/index";
 
 import { CovidMeasureStore } from "src/models/covid/CovidMeasureStore";
 import {
-  query_gov_covid_summaries,
-  query_gov_covid_summary,
-  query_org_covid_summary,
-  query_all_covid_estimates_by_measure_id,
-  query_org_covid_estimates_by_measure_id,
+  promisedGovCovidSummaries,
+  promisedGovCovidSummary,
+  promisedOrgCovidSummary,
+  promisedAllCovidEstimatesByMeasureId,
+  promisedOrgCovidEstimatesByMeasureId,
 } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
@@ -313,12 +313,12 @@ const tab_content_configs = [
     load_data: ({ subject, calculations: { selected_year } }) =>
       (() => {
         if (subject.subject_type === "dept") {
-          return query_org_covid_summary({
+          return promisedOrgCovidSummary({
             org_id: String(subject.id),
             fiscal_year: selected_year,
           });
         } else {
-          return query_gov_covid_summary({
+          return promisedGovCovidSummary({
             fiscal_year: selected_year,
           });
         }
@@ -330,7 +330,7 @@ const tab_content_configs = [
     subject_types: ["gov"],
     label: text_maker("by_department_tab_label"),
     load_data: ({ calculations: { selected_year } }) =>
-      query_all_covid_estimates_by_measure_id({
+      promisedAllCovidEstimatesByMeasureId({
         fiscal_year: selected_year,
       }).then((data) =>
         roll_up_flat_measure_data_by_property(data, "org_id", "est_doc")
@@ -344,12 +344,12 @@ const tab_content_configs = [
     load_data: ({ subject, calculations: { selected_year } }) =>
       (() => {
         if (subject.subject_type === "dept") {
-          return query_org_covid_estimates_by_measure_id({
+          return promisedOrgCovidEstimatesByMeasureId({
             org_id: String(subject.id),
             fiscal_year: selected_year,
           });
         } else {
-          return query_all_covid_estimates_by_measure_id({
+          return promisedAllCovidEstimatesByMeasureId({
             fiscal_year: selected_year,
           });
         }
@@ -370,7 +370,7 @@ class CovidEstimatesPanel extends React.Component {
     };
   }
   componentDidMount() {
-    query_gov_covid_summaries().then((covid_summaries) =>
+    promisedGovCovidSummaries().then((covid_summaries) =>
       this.setState({
         summary_by_fiscal_year: _.chain(covid_summaries)
           .map(({ fiscal_year, covid_estimates }) => [

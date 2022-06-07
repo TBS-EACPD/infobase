@@ -12,7 +12,7 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/components/PinnedFAQ/PinnedFAQ";
 
-import { query_single_service } from "src/models/services/services_queries";
+import { promisedSingleService } from "src/models/services/services_queries";
 
 import {
   Gov,
@@ -422,7 +422,7 @@ class InfographicRoute extends React.Component {
       if (_.includes(api_subject_types, subject_type)) {
         switch (subject_type) {
           case "service":
-            query_single_service({ service_id: subject_id }).then((service) =>
+            promisedSingleService({ service_id: subject_id }).then((service) =>
               this.setState({
                 loading: false,
                 subject: service,

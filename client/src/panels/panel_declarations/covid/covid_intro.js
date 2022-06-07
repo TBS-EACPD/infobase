@@ -6,7 +6,7 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { LeafSpinner } from "src/components/index";
 
-import { query_gov_covid_summaries } from "src/models/covid/queries";
+import { promisedGovCovidSummaries } from "src/models/covid/queries";
 import { yearsWithCovidDataStore } from "src/models/covid/yearsWithCovidDataStore";
 
 import { YearSelectionTabs } from "./covid_common_components";
@@ -39,7 +39,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
     };
   }
   componentDidMount() {
-    query_gov_covid_summaries().then((covid_summaries) => {
+    promisedGovCovidSummaries().then((covid_summaries) => {
       this.setState({
         loading: false,
         summaries_by_year: _.chain(covid_summaries)
