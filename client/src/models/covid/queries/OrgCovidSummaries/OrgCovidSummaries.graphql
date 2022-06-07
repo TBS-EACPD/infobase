@@ -1,0 +1,23 @@
+query OrgCovidSummaries($lang: String!, $org_id: String!) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      id
+      covid_summary {
+        id
+
+        fiscal_year
+
+        covid_estimates {
+          est_doc
+          vote
+          stat
+        }
+        covid_expenditures {
+          month_last_updated
+          vote
+          stat
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+query GovCovidSummary($lang: String!, $fiscal_year: Int!) {
+  root(lang: $lang) {
+    gov {
+      id
+      covid_summary(fiscal_year: $fiscal_year) {
+        id
+
+        fiscal_year
+
+        covid_estimates {
+          est_doc
+          vote
+          stat
+        }
+        covid_expenditures {
+          month_last_updated
+          vote
+          stat
+        }
+      }
+    }
+  }
+}

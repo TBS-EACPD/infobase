@@ -1,0 +1,11 @@
+query OrgYearsWithCovidData($lang: String!, $org_id: String!) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      id
+      years_with_covid_data {
+        years_with_estimates
+        years_with_expenditures
+      }
+    }
+  }
+}
