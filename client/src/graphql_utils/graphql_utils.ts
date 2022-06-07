@@ -3,8 +3,8 @@ import { InMemoryCache, ApolloClient, useQuery } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http/index";
 import type { DocumentNode } from "graphql";
 import _ from "lodash";
-
 import string_hash from "string-hash";
+import { suspend } from "suspend-react";
 
 import {
   sha,
@@ -157,7 +157,7 @@ export const query_factory = <
     typeof resolver === "undefined" ? (response: Query) => response : resolver;
 
   const promise_key = `query_${query_name}`;
-  const query_promise = (variables: Variables) => {
+  const promise_query = (variables: Variables) => {
     return get_client()
       .query<Query, Variables>({
         query: query,
@@ -169,12 +169,22 @@ export const query_factory = <
       .then(({ data }) => resolver_or_identity(data));
   };
 
+  const suspended_key = _.chain(query_name)
+    .camelCase()
+    .upperFirst()
+    .thru((pascal_case_name) => `suspended${pascal_case_name}`)
+    .value();
+  const suspendedQuery = (variables: Variables): Query => {
+    const key = query_name + JSON.stringify(variables);
+    return suspend(() => promise_query(variables), [key]);
+  };
+
   const hook_key = _.chain(query_name)
     .camelCase()
     .upperFirst()
     .thru((pascal_case_name) => `use${pascal_case_name}`)
     .value();
-  const useQueryHook = (variables: Variables) => {
+  const useHookQuery = (variables: Variables) => {
     const { loading, error, data } = useQuery<Query, Variables>(query, {
       variables: {
         ...variables,
@@ -204,7 +214,8 @@ export const query_factory = <
   };
 
   return {
-    [promise_key]: query_promise,
-    [hook_key]: useQueryHook,
+    [promise_key]: promise_query,
+    [suspended_key]: suspendedQuery,
+    [hook_key]: useHookQuery,
   };
 };
