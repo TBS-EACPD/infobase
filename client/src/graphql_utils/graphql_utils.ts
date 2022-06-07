@@ -14,6 +14,7 @@ import {
 } from "src/core/injected_build_constants";
 
 import { make_request } from "src/request_utils";
+import { ComputedLiteralKeyRecord } from "src/types/type_utils";
 
 const prod_api_url = `https://us-central1-ib-serverless-api-prod.cloudfunctions.net/prod-api-${sha}/graphql`;
 
@@ -137,14 +138,14 @@ export function get_client() {
 const used_query_names = new Map<string, null>();
 export const query_factory =
   <Query, Variables>() =>
-  <QueryName extends string, Resolver extends (response: Query) => any>({
+  <QueryName extends string, Resolved>({
     query_name,
     query,
     resolver,
   }: {
     query_name: QueryName;
     query: DocumentNode;
-    resolver?: Resolver;
+    resolver: (response: Query) => Resolved;
   }) => {
     if (
       !query_name ||
@@ -163,11 +164,6 @@ export const query_factory =
       used_query_names.set(query_name, null);
     }
 
-    const resolver_or_identity =
-      typeof resolver === "undefined"
-        ? (response: Query) => response
-        : resolver;
-
     const promiseQuery = (variables: Variables) => {
       return get_client()
         .query<Query, Variables>({
@@ -177,10 +173,10 @@ export const query_factory =
             _query_name: query_name,
           },
         })
-        .then(({ data }) => resolver_or_identity(data));
+        .then(({ data }) => resolver(data));
     };
 
-    const suspendedQuery = (variables: Variables): Query => {
+    const suspendedQuery = (variables: Variables): Resolved => {
       const key = query_name + JSON.stringify(variables);
       return suspend(() => promiseQuery(variables), [key]);
     };
@@ -209,14 +205,14 @@ export const query_factory =
         return {
           loading,
           error,
-          data: resolver_or_identity(data),
+          data: resolver(data),
         };
       }
     };
 
     return {
-      [`promise${query_name}`]: promiseQuery,
-      [`suspended${query_name}`]: suspendedQuery,
-      [`use${query_name}`]: useQueryHook,
+      ...ComputedLiteralKeyRecord(`promise${query_name}`, promiseQuery),
+      ...ComputedLiteralKeyRecord(`suspended${query_name}`, suspendedQuery),
+      ...ComputedLiteralKeyRecord(`use${query_name}`, useQueryHook),
     };
   };
