@@ -135,6 +135,13 @@ export function get_client() {
   return client;
 }
 
+/*
+   NOTE: using an extra function layer to split explicit and infered generics
+   Type args for Query and Variables need to be provided explicitly, QueryName and Resolved should be implicit from the arguments
+   Call signature looks like:
+     - in TS: `query_factory<QueryType, VariableType>()({query_name, query, resolver})`
+     - in JS: `query_factory()({query_name, query, resolver})`
+*/
 const used_query_names = new Map<string, null>();
 export const query_factory =
   <Query, Variables>() =>
