@@ -1,3 +1,5 @@
+import fs from "fs";
+
 import { ApolloServer } from "apollo-server-express";
 import compression from "compression";
 import cors from "cors";
@@ -87,6 +89,17 @@ async function start_apollo() {
   });
   await server.start();
   server.applyMiddleware({ app });
+
+  if (!process.env.USE_REMOTE_DB) {
+    fs.mkdir("./.dev_artifacts", () =>
+      fs.writeFile(
+        "./.dev_artifacts/compiled_schema.graphql",
+        _.join(typeDefs, "\n"),
+        _.noop
+      )
+    );
+  }
+
   return server;
 }
 

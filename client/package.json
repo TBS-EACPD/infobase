@@ -20,7 +20,7 @@
     "unit_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage -config jest_configs/unit_tests.config.js",
     "type_check": "npx tsc --noEmit",
     "gqlgen": "graphql-codegen --config codegen.yml",
-    "gqlgen:watch": "graphql-codegen --config codegen.yml --watch"
+    "gqlgen:watch": "nodemon --watch ../server/.dev_artifacts -e .graphql --exec 'graphql-codegen --config codegen.yml --watch'"
   },
   "dependencies": {
     "@apollo/client": "^3.2.6",
