@@ -5,7 +5,7 @@ import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type ServiceSummaryOrgQueryVariables = Types.Exact<{
   lang: Types.Scalars['String'];
-  id?: Types.InputMaybe<Types.Scalars['String']>;
+  id: Types.Scalars['String'];
 }>;
 
 
@@ -13,7 +13,7 @@ export type ServiceSummaryOrgQuery = { __typename?: 'Query', root: { __typename?
 
 
 export const ServiceSummaryOrgDocument = gql`
-    query ServiceSummaryOrg($lang: String!, $id: String) {
+    query ServiceSummaryOrg($lang: String!, $id: String!) {
   root(lang: $lang) {
     org(org_id: $id) {
       id

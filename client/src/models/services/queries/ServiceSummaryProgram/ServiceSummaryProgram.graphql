@@ -1,4 +1,4 @@
-query ServiceSummaryProgram($lang: String!, $id: String) {
+query ServiceSummaryProgram($lang: String!, $id: String!) {
   root(lang: $lang) {
     program(id: $id) {
       id

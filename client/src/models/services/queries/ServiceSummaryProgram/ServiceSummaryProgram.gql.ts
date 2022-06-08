@@ -5,7 +5,7 @@ import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type ServiceSummaryProgramQueryVariables = Types.Exact<{
   lang: Types.Scalars['String'];
-  id?: Types.InputMaybe<Types.Scalars['String']>;
+  id: Types.Scalars['String'];
 }>;
 
 
@@ -13,7 +13,7 @@ export type ServiceSummaryProgramQuery = { __typename?: 'Query', root: { __typen
 
 
 export const ServiceSummaryProgramDocument = gql`
-    query ServiceSummaryProgram($lang: String!, $id: String) {
+    query ServiceSummaryProgram($lang: String!, $id: String!) {
   root(lang: $lang) {
     program(id: $id) {
       id
