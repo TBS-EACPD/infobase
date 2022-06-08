@@ -6,7 +6,7 @@ import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type ServicesForOrgQueryVariables = Types.Exact<{
   lang: Types.Scalars['String'];
-  id?: Types.InputMaybe<Types.Scalars['String']>;
+  id: Types.Scalars['String'];
 }>;
 
 
@@ -14,7 +14,7 @@ export type ServicesForOrgQuery = { __typename?: 'Query', root: { __typename?: '
 
 
 export const ServicesForOrgDocument = gql`
-    query ServicesForOrg($lang: String!, $id: String) {
+    query ServicesForOrg($lang: String!, $id: String!) {
   root(lang: $lang) {
     org(org_id: $id) {
       id

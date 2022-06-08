@@ -16,7 +16,7 @@ import {
   useServiceSummaryGov,
   useServiceSummaryOrg,
   useServiceSummaryProgram,
-} from "src/models/services/services_queries";
+} from "src/models/services/queries";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 

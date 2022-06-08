@@ -1,0 +1,8 @@
+query ProgramHasServices($lang: String!, $id: String!) {
+  root(lang: $lang) {
+    program(id: $id) {
+      id
+      has_services
+    }
+  }
+}

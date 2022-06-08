@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { glossaryEntryStore } from "src/models/glossary";
-import { promisedSearchServices } from "src/models/services/services_queries";
+import { promisedSearchServices } from "src/models/services/queries";
 import { Dept, Gov, Program, CRSO, ProgramTag } from "src/models/subjects";
 
 import { trivial_text_maker } from "src/models/text";
