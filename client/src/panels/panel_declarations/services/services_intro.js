@@ -13,7 +13,7 @@ import {
 import {
   useServiceSummaryGov,
   useServiceSummaryOrg,
-} from "src/models/services/services_queries";
+} from "src/models/services/queries";
 
 import { FormFrontend } from "src/FormFrontend";
 

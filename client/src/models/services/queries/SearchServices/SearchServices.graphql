@@ -1,0 +1,10 @@
+query SearchServices($lang: String!, $search_phrase: String!) {
+  root(lang: $lang) {
+    search_services(search_phrase: $search_phrase) {
+      id
+      subject_type
+      org_id
+      name
+    }
+  }
+}

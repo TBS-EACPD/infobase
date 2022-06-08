@@ -12,7 +12,7 @@ import { create_text_maker_component, LeafSpinner } from "src/components/index";
 import { set_pinned_content_local_storage } from "src/components/PinnedContent/PinnedContent";
 import { SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY } from "src/components/PinnedFAQ/PinnedFAQ";
 
-import { promisedSingleService } from "src/models/services/services_queries";
+import { promisedSingleService } from "src/models/services/queries";
 
 import {
   Gov,

@@ -2,10 +2,7 @@ import _ from "lodash";
 
 import { log_standard_event } from "src/core/analytics";
 
-import {
-  promisedDeptHasServices,
-  promisedProgramHasServices,
-} from "./services_queries";
+import { promisedDeptHasServices, promisedProgramHasServices } from "./queries";
 
 export const api_load_has_services = (subject) => {
   const subject_type = subject && subject.subject_type;

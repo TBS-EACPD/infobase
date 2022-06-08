@@ -1,0 +1,9 @@
+#import "./StandardServiceFragment.graphql"
+
+query SingleService($lang: String!, $service_id: String!) {
+  root(lang: $lang) {
+    service(id: $service_id) {
+      ...StandardServiceFragment
+    }
+  }
+}
