@@ -15,9 +15,9 @@ import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
 import {
-  useServicesByOrg,
-  useServicesByProgram,
-} from "src/models/services/services_queries";
+  useServicesForOrg,
+  useServicesForProgram,
+} from "src/models/services/queries";
 import { Dept } from "src/models/subjects";
 
 import text from "./warning_panels.yaml";
@@ -79,10 +79,10 @@ const dept_with_gaps = [
 const NoServiceSubmissionPanel = ({ subject }) => {
   const useServices = (() => {
     if (subject.subject_type === "dept") {
-      return useServicesByOrg;
+      return useServicesForOrg;
     }
     if (subject.subject_type === "program") {
-      return useServicesByProgram;
+      return useServicesForProgram;
     }
   })();
 
