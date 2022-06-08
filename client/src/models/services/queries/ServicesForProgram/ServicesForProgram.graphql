@@ -1,6 +1,6 @@
 #import "./StandardServiceFragment.graphql"
 
-query ServicesForProgram($lang: String!, $id: String) {
+query ServicesForProgram($lang: String!, $id: String!) {
   root(lang: $lang) {
     program(id: $id) {
       id
