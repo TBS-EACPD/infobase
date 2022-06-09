@@ -48,6 +48,8 @@ const get_text_args = (subject, transfer_payment_data) => {
     .sortBy(([_prov_code, value]) => value)
     .last()
     .value();
+
+  const larges_prov_is_not_na = largest_total_prov_code !== "na";
   const largest_total_prov = provinces[largest_total_prov_code].text;
   const le_largest_total_prov = le_provinces[largest_total_prov_code].text;
   const de_largest_total_prov = de_provinces[largest_total_prov_code].text;
@@ -57,7 +59,7 @@ const get_text_args = (subject, transfer_payment_data) => {
     subject,
     is_gov: subject.subject_type === "gov",
     subject_total_value,
-
+    larges_prov_is_not_na,
     largest_total_prov,
     le_largest_total_prov,
     de_largest_total_prov,
