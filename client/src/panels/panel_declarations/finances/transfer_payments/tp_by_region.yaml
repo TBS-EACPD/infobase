@@ -17,7 +17,7 @@ tp_by_region_text:
   fr: |
     En **{{tp_region_last_year}}**, **{{#if is_gov}}le gouvernement{{else}}{{le_dept subject}}{{/if}}** a versé **{{fmt_compact1_written subject_total_value}}**
     en {{gl_sidebar_link "paiements de transfert" "TP"}}. Un montant de **{{fmt_compact1_written largest_total_value}} ({{fmt_percentage1 largest_total_percent}})**
-    {{#if larges_prov_is_not_na}
+    {{#if larges_prov_is_not_na}}
     a été versé aux bénéficiaires **{{de_largest_total_prov}}**, ce qui en fait la région qui reçoit
     {{else}}
     sont allés à des bénéficiaires dont la province **n'est pas disponible dans cet ensemble de données**, ce qui représente
