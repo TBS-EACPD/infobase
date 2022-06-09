@@ -105,22 +105,13 @@ const table_csvs = _.map(
   (name) => public_dir_prefixer(`${name}.csv`)
 );
 
-const other_csv_names_unilingual = [
-  "canadian_population_estimates_by_province.csv",
-];
-const other_csv_names_bilingual = [];
-const other_csvs = _.map(
-  [...other_csv_names_unilingual, ...other_csv_names_bilingual],
-  public_dir_prefixer
-);
-
 var IB = {
   name: "InfoBase",
   lookups_en: common_lookups.concat(common_lookups_en),
   lookups_fr: common_lookups.concat(common_lookups_fr),
   svg: svg_path,
   png: png_path,
-  csv: table_csvs.concat(other_csvs),
+  csv: table_csvs,
   well_known: ["src/InfoBase/security.txt"],
   other: ["src/robots/robots.txt", "src/InfoBase/favicon.ico"],
 };
