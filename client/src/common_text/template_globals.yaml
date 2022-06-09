@@ -24,20 +24,20 @@ pa_last_year_planned:
   fr: 2020-2021
 
 tp_region_last_year:
-  en: 2020-21
-  fr: 2020-2021
-tp_region_last_year_2:
   en: 2019-20
   fr: 2019-2020
-tp_region_last_year_3:
+tp_region_last_year_2:
   en: 2018-19
   fr: 2018-2019
-tp_region_last_year_4:
+tp_region_last_year_3:
   en: 2017-18
   fr: 2017-2018
-tp_region_last_year_5:
+tp_region_last_year_4:
   en: 2016-17
   fr: 2016-2017
+tp_region_last_year_5:
+  en: 2015-16
+  fr: 2015-2016
 
 est_in_year:
   en: 2022-23
