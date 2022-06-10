@@ -1,88 +1,97 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
 
-import * as constants from "src/core/injected_build_constants";
+import { CheckBox } from "./CheckBox";
 
 import { with_console_error_silenced } from "src/testing_utils";
 
-import { CheckBox } from "./CheckBox";
+const testing_default = {
+  id: "id",
+  label: "label",
+  active: false,
+};
 
-const orig_constants = constants;
-
-const onclick_callback = jest.fn(() => console.log("clicked!"));
-
-describe("CheckBox, is_a11y_mode = true", () => {
-  Object.defineProperty(constants, "is_a11y_mode", { value: true });
-  afterAll(() => {
-    Object.defineProperty(constants, "is_a11y_mode", {
-      value: orig_constants["is_a11y_mode"],
-    });
-  });
-
-  render(
-    <CheckBox
-      id={"1"}
-      label={"solid no onclick"}
-      isSolidBox={true}
-      active={true}
-      color={"#000000"}
-    />
-  );
-
-  test("input in label in div is rendered when is_a11y_mode is true", () => {
-    expect(
-      document.querySelector("div.checkbox label input[type='checkbox']")
-    ).toBeTruthy();
-  });
-});
+jest.mock("src/core/injected_build_constants", () => ({
+  is_a11y_mode: false,
+}));
 
 describe("CheckBox, is_a11y_mode = false", () => {
-  Object.defineProperty(constants, "is_a11y_mode", { value: false });
-  afterAll(() => {
-    Object.defineProperty(constants, "is_a11y_mode", {
-      value: orig_constants["is_a11y_mode"],
-    });
+  it('Throws an error when a non-solid checkbox is missing prop "active"', () => {
+    const onClick = jest.fn();
+    with_console_error_silenced(() =>
+      expect(() =>
+        render(<CheckBox id={"id"} label={"label"} onClick={onClick} />)
+      ).toThrow()
+    );
   });
 
-  render(
-    <CheckBox
-      id={"2"}
-      label={"not solid with onclick"}
-      onClick={(_id: string) => onclick_callback()}
-      active={false}
-      isSolidBox={false}
-    />
-  );
-
-  const outer_div_colored = screen.getByText("solid no onclick").closest("div");
-  const colored_checkbox =
-    outer_div_colored && outer_div_colored.children[0].children[0];
-  test("coloured background when onlick is falsey or active is truthy", () => {
-    expect(
-      colored_checkbox &&
-        window
-          .getComputedStyle(colored_checkbox)
-          .getPropertyValue("background-color")
-    ).not.toEqual("transparent");
+  it('Throws an error when a non-solid checkbox is missing prop "onClick"', () => {
+    with_console_error_silenced(() =>
+      expect(() =>
+        render(<CheckBox id={"id"} label={"label"} active={false} />)
+      ).toThrow()
+    );
   });
 
-  test("no icon check mark when isSolidBox is false", () => {
-    const outer_div_no_colour = screen
-      .getByText("not solid with onclick")
-      .closest("div");
-    const icon_check_box =
-      outer_div_no_colour && outer_div_no_colour.children[0];
-    expect(icon_check_box && icon_check_box.children[0]).not.toBeVisible();
+  it("Can be rendered as only solid, without active or onClick", () => {
+    expect(() =>
+      render(<CheckBox id={"id"} label={"label"} isSolidBox={true} />)
+    );
+    expect(!screen.queryByRole("checkbox"));
   });
-});
 
-test("onclick gets called when the checkbox is clicked", () => {
-  fireEvent.click(screen.getByText("not solid with onclick"));
-  expect(onclick_callback).toHaveBeenCalledTimes(1);
-});
+  it("Calls onClick when checkbox is clicked", () => {
+    const onClick = jest.fn();
 
-test('Throws an error when a solid checkbox is missing "active" and "onclick"', () => {
-  with_console_error_silenced(() =>
-    expect(() => render(<CheckBox id={"id"} label={"label"} />)).toThrow()
-  );
+    render(<CheckBox {...{ ...testing_default, onClick }} />);
+
+    expect(screen.queryByRole("checkbox"));
+
+    const checkbox = screen.getByRole("checkbox");
+
+    expect(onClick).toHaveBeenCalledTimes(0);
+    fireEvent.click(checkbox);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    fireEvent.keyDown(checkbox, { key: "Enter", code: "Enter", charCode: 13 });
+    expect(onClick).toHaveBeenCalledTimes(2);
+    fireEvent.keyDown(checkbox, { key: " ", code: "(space)", charCode: 32 });
+    expect(onClick).toHaveBeenCalledTimes(3);
+  });
+
+  it("Is checked when checkbox is active", () => {
+    let active = false;
+    const onClick = jest.fn(() => (active = !active));
+
+    const { rerender, container } = render(
+      <CheckBox {...{ ...testing_default, active, onClick }} />
+    );
+
+    const checkbox = screen.getByRole("checkbox");
+
+    expect(checkbox).not.toBeChecked();
+    fireEvent.click(checkbox);
+    rerender(<CheckBox {...{ ...testing_default, active, onClick }} />);
+    expect(checkbox).toBeChecked();
+  });
+
+  it("Cannot be clicked while disabled", () => {
+    const onClick = jest.fn();
+
+    render(<CheckBox {...{ ...testing_default, onClick, disabled: true }} />);
+    const checkbox = screen.getByRole("checkbox");
+    fireEvent.click(checkbox);
+    expect(onClick).toHaveBeenCalledTimes(0);
+    fireEvent.keyDown(checkbox, { key: "Enter", code: "Enter", charCode: 13 });
+    expect(onClick).toHaveBeenCalledTimes(0);
+  });
+
+  it("Has checkmark svg", () => {
+    const onClick = jest.fn();
+    const { container } = render(
+      <CheckBox {...{ ...testing_default, onClick }} />
+    );
+
+    const icon_svg = container.getElementsByClassName("icon-svg")[0];
+    expect(icon_svg).not.toBeUndefined();
+  });
 });
