@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
 
-import { CheckBox } from "./CheckBox";
-
 import { with_console_error_silenced } from "src/testing_utils";
+
+import { CheckBox } from "./CheckBox";
 
 const testing_default = {
   id: "id",
@@ -62,7 +62,7 @@ describe("CheckBox, is_a11y_mode = false", () => {
     let active = false;
     const onClick = jest.fn(() => (active = !active));
 
-    const { rerender, container } = render(
+    const { rerender } = render(
       <CheckBox {...{ ...testing_default, active, onClick }} />
     );
 
