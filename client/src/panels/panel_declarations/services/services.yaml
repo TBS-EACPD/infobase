@@ -449,3 +449,6 @@ gauge_standards_met_text:
     **{{fmt_percentage1 standards_met_pct}}** of service standard targets were met
   fr: |
     **{{fmt_percentage1 standards_met_pct}}** des cibles des normes de service ont été atteintes.
+new_standards_data:
+  en: Change in methodology for calculating result status starting June 15th 2022. Some service standards results may have been affected. 
+  fr: Changement de méthodologie pour calculer l'état des résultats à compter du 15 juin 2022. Certains résultats des normes de service peuvent avoir été affectés.

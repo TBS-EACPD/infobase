@@ -210,17 +210,23 @@ export const declare_single_service_standards_panel = () =>
           .sort()
           .value();
 
-        const footnotes = _.chain(standards)
-          .map(
-            (standard) =>
-              standard.other_type_comment &&
-              create_fake_footnote({
-                topic_keys: ["OTHER_TYPE_COMMENT"],
-                text: standard.other_type_comment,
-              })
-          )
-          .filter()
-          .value();
+        const footnotes = _.concat(
+          create_fake_footnote({
+            topic_keys: ["SERVICE_STANDARDS"],
+            text: text_maker("new_standards_data"),
+          }),
+          _.chain(standards)
+            .map(
+              (standard) =>
+                standard.other_type_comment &&
+                create_fake_footnote({
+                  topic_keys: ["OTHER_TYPE_COMMENT"],
+                  text: standard.other_type_comment,
+                })
+            )
+            .filter()
+            .value()
+        );
 
         return (
           <InfographicPanel
