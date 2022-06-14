@@ -3,8 +3,11 @@
   "description": "",
   "license": "MIT",
   "browserslist": [
-    "> 0.5%",
-    "not dead"
+    "> 0.3%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE11"
   ],
   "sideEffects": false,
   "scripts": {
