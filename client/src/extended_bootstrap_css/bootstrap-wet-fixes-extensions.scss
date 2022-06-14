@@ -561,7 +561,7 @@ details.alert[open].alert-warning {
 .alert-danger,
 details.alert.alert-danger,
 details.alert[open].alert-danger {
-  background: $backgroundColor;
+  background: $failLightColor;
   border-color: $failDarkColor;
 }
 
