@@ -450,18 +450,10 @@ export type ProgramSpending = {
   pa_last_year_4_exp?: Maybe<Scalars['Float']>;
   pa_last_year_5_exp?: Maybe<Scalars['Float']>;
   pa_last_year_exp?: Maybe<Scalars['Float']>;
+  pa_last_year_planned?: Maybe<Scalars['Float']>;
   planning_year_1?: Maybe<Scalars['Float']>;
-  planning_year_1_gross?: Maybe<Scalars['Float']>;
-  planning_year_1_rev?: Maybe<Scalars['Float']>;
-  planning_year_1_spa?: Maybe<Scalars['Float']>;
   planning_year_2?: Maybe<Scalars['Float']>;
-  planning_year_2_gross?: Maybe<Scalars['Float']>;
-  planning_year_2_rev?: Maybe<Scalars['Float']>;
-  planning_year_2_spa?: Maybe<Scalars['Float']>;
   planning_year_3?: Maybe<Scalars['Float']>;
-  planning_year_3_gross?: Maybe<Scalars['Float']>;
-  planning_year_3_rev?: Maybe<Scalars['Float']>;
-  planning_year_3_spa?: Maybe<Scalars['Float']>;
 };
 
 export type ProgramVoteStat = {
