@@ -124,6 +124,10 @@ OTHER_TYPE_COMMENT:
   en: Other type comment
   fr: Autre type de commentaire
 
+SERVICE_STANDARDS:
+  en: Service Standards
+  fr: Normes de service
+
 ANY:
   en: Any
   fr: Tout
