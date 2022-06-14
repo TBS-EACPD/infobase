@@ -36,7 +36,7 @@ function bundle_extended_bootstrap_css(output_path) {
   };
 
   webpack(config, function (err, stats) {
-    console.log(stats.toString({ cached: true, modules: true }));
+    console.log(stats?.toString({ cached: true, modules: true }) || err);
     if (err || stats.hasErrors()) {
       process.exitCode = 1;
     }
