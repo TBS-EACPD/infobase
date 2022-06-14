@@ -5,7 +5,13 @@
   margin-left: -50px;
   top: 50%;
   margin-top: -50px;
+
   z-index: 9000;
+
+  // the rotation of the inner rings cause their bounding boxes to effectively change height/width periodically (between side length and diagonal length),
+  // in some use cases this could cause content reflow or appearing/disappearing scroll bars. Since the visible rotating content is a circle though, we can
+  // just hide the parts that occasionally rotate to "clip out" of the intended square container
+  overflow: hidden;
 }
 
 .leaf-spinner {
