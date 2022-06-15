@@ -6,5 +6,7 @@ client/src/**/*.gql.ts
 client/scripts/typescript_progress/output
 client/**/cypress-snapshots.js
 
+server/.dev_artifacts/compiled_schema.graphql
+
 */.coverage/
 */.cache
