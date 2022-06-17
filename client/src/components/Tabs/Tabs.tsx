@@ -23,17 +23,21 @@ export const Tabs = <
 }) => {
   const [id] = useState(_.uniqueId("ib-tabs-"));
 
+  if (typeof open_tab_key !== "string") {
+    throw new Error(
+      `Provided open_tab_key "${_.toString(
+        open_tab_key
+      )}" is not of type string (${typeof open_tab_key}). To avoid errors with type
+      consistency/coercion between the tabs prop and the open_tab_key, only strings are allowed.`
+    );
+  }
+
   if (!_.has(tabs, open_tab_key)) {
     throw new Error(
       `Provided open_tab_key "${open_tab_key}" does not correspond to any provided tab ${_.map(
         tabs,
         "key"
       )}`
-    );
-  } else if (typeof open_tab_key !== "string") {
-    throw new Error(
-      `Provided open_tab_key "${open_tab_key}" is not of type string (${typeof open_tab_key}). To avoid errors with type
-      consistency/coercion between the tabs prop and the open_tab_key, only strings are allowed.`
     );
   }
 
@@ -59,7 +63,7 @@ export const Tabs = <
     <div className="ib-tabs" id={id}>
       <div className="ib-tabs__tab-list-container">
         <div role="tablist" className="ib-tabs__tab-list">
-          {_.map(tabs, (label, key: TabKey) => (
+          {_.map(tabs, (label: Tabs[TabKey], key: TabKey) => (
             <button
               key={_.toString(key)}
               role="tab"
