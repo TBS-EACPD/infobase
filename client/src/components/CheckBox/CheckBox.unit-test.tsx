@@ -21,7 +21,7 @@ describe("CheckBox, is_a11y_mode = false", () => {
     with_console_error_silenced(() =>
       expect(() =>
         render(<CheckBox id={"id"} label={"label"} onClick={onClick} />)
-      ).toThrow()
+      ).toThrow("Non solid CheckBox requires 'active', 'onClick'")
     );
   });
 
@@ -29,15 +29,21 @@ describe("CheckBox, is_a11y_mode = false", () => {
     with_console_error_silenced(() =>
       expect(() =>
         render(<CheckBox id={"id"} label={"label"} active={false} />)
-      ).toThrow()
+      ).toThrow("Non solid CheckBox requires 'active', 'onClick'")
     );
   });
 
   it("Can be rendered as only solid, without active or onClick", () => {
-    expect(() =>
-      render(<CheckBox id={"id"} label={"label"} isSolidBox={true} />)
-    );
+    render(<CheckBox id={"id"} label={"label"} isSolidBox={true} />);
     expect(!screen.queryByRole("checkbox"));
+  });
+
+  it("Has role checkbox when onClick", () => {
+    const onClick = jest.fn();
+
+    render(<CheckBox {...{ ...testing_default, onClick }} />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox);
   });
 
   it("Calls onClick when checkbox is clicked", () => {
@@ -59,18 +65,14 @@ describe("CheckBox, is_a11y_mode = false", () => {
   });
 
   it("Is checked when checkbox is active", () => {
-    let active = false;
-    const onClick = jest.fn(() => (active = !active));
+    const onClick = jest.fn();
 
     const { rerender } = render(
-      <CheckBox {...{ ...testing_default, active, onClick }} />
+      <CheckBox {...{ ...testing_default, onClick }} />
     );
-
     const checkbox = screen.getByRole("checkbox");
-
     expect(checkbox).not.toBeChecked();
-    fireEvent.click(checkbox);
-    rerender(<CheckBox {...{ ...testing_default, active, onClick }} />);
+    rerender(<CheckBox {...{ ...testing_default, active: true, onClick }} />);
     expect(checkbox).toBeChecked();
   });
 
@@ -83,15 +85,7 @@ describe("CheckBox, is_a11y_mode = false", () => {
     expect(onClick).toHaveBeenCalledTimes(0);
     fireEvent.keyDown(checkbox, { key: "Enter", code: "Enter", charCode: 13 });
     expect(onClick).toHaveBeenCalledTimes(0);
-  });
-
-  it("Has checkmark svg", () => {
-    const onClick = jest.fn();
-    const { container } = render(
-      <CheckBox {...{ ...testing_default, onClick }} />
-    );
-
-    const icon_svg = container.getElementsByClassName("icon-svg")[0];
-    expect(icon_svg).not.toBeUndefined();
+    fireEvent.keyDown(checkbox, { key: " ", code: "(space)", charCode: 32 });
+    expect(onClick).toHaveBeenCalledTimes(0);
   });
 });
