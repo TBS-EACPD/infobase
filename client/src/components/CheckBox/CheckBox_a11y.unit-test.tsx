@@ -35,23 +35,19 @@ describe("CheckBox, is_a11y_mode = true", () => {
   });
 
   it("Is checked when active", () => {
-    let active = false;
-    const onClick = jest.fn(() => (active = !active));
+    const onClick = jest.fn();
 
     const { rerender, container } = render(
-      <CheckBox {...{ ...testing_default, active, onClick }} />
+      <CheckBox {...{ ...testing_default, onClick }} />
     );
 
     const checkbox = container.querySelector(
       "input[type=checkbox]"
     ) as HTMLInputElement;
+
     if (checkbox) {
       expect(!checkbox.checked);
-
-      fireEvent.click(checkbox);
-
-      rerender(<CheckBox {...{ ...testing_default, active, onClick }} />);
-
+      rerender(<CheckBox {...{ ...testing_default, active: true, onClick }} />);
       expect(checkbox.checked);
     } else {
       throw Error;
@@ -60,7 +56,6 @@ describe("CheckBox, is_a11y_mode = true", () => {
 
   it("Cannot be clicked while disabled", () => {
     const onClick = jest.fn();
-
     render(<CheckBox {...{ ...testing_default, onClick, disabled: true }} />);
     const checkbox = screen.getByRole("checkbox");
     fireEvent.click(checkbox);
