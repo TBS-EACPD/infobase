@@ -20,6 +20,7 @@ TODO: some of these tips are more global testing things, but I'll leave them her
   ```
   - note the `as jest.MockedFunction<typeof ...>` in the previous example, necessary to fill in the type information
 - You can mock `global`s too, just remember to retain the original and revert the mocking when done e.g.
+
   ```
     const orignal_fetch = global.fetch;
     const mocked_fetch = jest.fn(() => Promise.resolve({}));
@@ -33,6 +34,13 @@ TODO: some of these tips are more global testing things, but I'll leave them her
     afterAll(() => {
       global.fetch = orignal_fetch;
     });
+  ```
+
+- mock different `injected_build_constants` in seperate files with naming convention: `ComponentName--InjectedBuildConstant.unit-test.tsx` (ex: `Checkbox--a11y.unit-test.tsx`).
+  ```
+    jest.mock("src/core/injected_build_constants", () => ({
+      is_a11y_mode: true,
+    }));
   ```
 
 2. When testing a case that _should_ throw an error, wrap your test code in `with_console_error_silenced` from `testing_utils.ts`. Otherwise error output will clutter up the console even if caught. Note: not useful for a promise that rejects with an error, silence those as necessary with a `.catch(() => undefined)`.
