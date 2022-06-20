@@ -36,7 +36,7 @@ TODO: some of these tips are more global testing things, but I'll leave them her
     });
   ```
 
-- mock different `injected_build_constants` in seperate files with naming convention: `ComponentName--InjectedBuildConstant.unit-test.tsx` (ex: `Checkbox--a11y.unit-test.tsx`).
+- mock different `injected_build_constants` in seperate files with naming convention: `ComponentName--InjectedBuildConstant.unit-test.tsx` (ex: `Checkbox--a11y.unit-test.tsx`). Mocking these types of constants have proven to be tricky. Seems like there is no clear solution to mocking one constant with different values in one file. Only the first mocked value is considered in a file. However, it is possible to mock exported functions (and manipulate the function's return). Can look to convert these constants to functions later on to allow for all mockings to be done within one file.
   ```
     jest.mock("src/core/injected_build_constants", () => ({
       is_a11y_mode: true,
