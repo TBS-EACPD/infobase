@@ -77,7 +77,10 @@ export const get_dept_panels = (subject) =>
     has_services: services_feature_flag,
   }).then(() => ({
     intro: [declare_profile_panel(), declare_portfolio_structure_intro_panel()],
-    financial: _.includes(subject.table_ids, "programSpending") && [
+    financial: !_.chain(subject.table_ids)
+      .intersection(["programSpending", "orgVoteStatEstimates"])
+      .isEmpty()
+      .value() && [
       declare_financial_key_concepts_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
