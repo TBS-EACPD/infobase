@@ -7,7 +7,7 @@ set -e # will exit if any command has non-zero exit value
 printf "lpass status: "
 lpass status
 
-read -p "Provide a one sentence reason for this deploy, for the slack alert:
+read -e -p "Provide a one sentence reason for this deploy, for the slack alert:
 > " DEPLOY_MESSAGE
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
