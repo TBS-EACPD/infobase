@@ -50,7 +50,7 @@ export class WriteToClipboard extends React.Component {
 
             // wraping the API call itself in a promise so that errors where clipboard/writeText itself in undefined are handled by the same copy fail logic
             new Promise((resolve) =>
-              resolve(window.navigator.clipddddboard.writeText(text_to_copy))
+              resolve(window.navigator.clipboard.writeText(text_to_copy))
             )
               .then(() => {
                 this.setState({
@@ -58,12 +58,13 @@ export class WriteToClipboard extends React.Component {
                   is_successfully_copied: true,
                 });
               })
-              .catch(() =>
+              .catch((e) => {
+                debounced_log_standard_event("WRITE_TO_CLIPBOARD_ERROR", e);
                 this.setState({
                   is_model_open: true,
                   is_successfully_copied: false,
-                })
-              );
+                });
+              });
           }}
           onKeyDown={() =>
             this.setState({ keyboard_navigation_detected: true })
