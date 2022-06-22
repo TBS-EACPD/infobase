@@ -7,5 +7,5 @@ export default {
   coverageDirectory: "<rootDir>/.coverage/snapshot_tests",
   cacheDirectory: "<rootDir>/.cache/jest/snapshot_tests",
 
-  setupTestFrameworkScriptFile: "<rootDir>/src/snapshot_tests_setup.js",
+  setupFilesAfterEnv: ["<rootDir>/src/snapshot_tests_setup.js"],
 };
