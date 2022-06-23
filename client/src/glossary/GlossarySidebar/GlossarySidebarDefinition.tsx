@@ -15,27 +15,38 @@ import { IconArrow } from "src/icons/icons";
 
 const { text_maker } = create_text_maker_component(glossary_text);
 
+/*
+  TODO: annotating `this.context as SidebarContextType` on each use in this component is a hacky workaround, the 
+  correct typing would be a `declare context: React.ContextType<typeof SidebarContext>;` statement under
+  `static contextType = SidebarContext;`. Using the TS `declare` syntax with our current babel configuration
+  (in particular our need for plugin-proposal-decorators I expect) seems to be problematic. There's a lot of
+  "don't know why, but this worked for me" style responses to this problem online, but I found manual annotations
+  to work better. Maybe just avoid context in class components for now, ugh
+*/
+type SidebarContextType = React.ContextType<typeof SidebarContext>;
+
 interface SidebarContentProps {
   glossary_item_key: string;
   close_definition: (key: string) => void;
 }
 
 export class GlossaryDef extends React.Component<SidebarContentProps> {
-  definition_ref = React.createRef<HTMLDivElement>();
   static contextType = SidebarContext;
+
+  definition_ref = React.createRef<HTMLDivElement>();
   constructor(props: SidebarContentProps) {
     super(props);
   }
 
   componentDidMount() {
-    const doneAnimating = this.context.doneAnimating;
+    const doneAnimating = (this.context as SidebarContextType).doneAnimating;
     if (doneAnimating) {
       this.definition_ref.current?.focus();
     }
   }
 
   componentDidUpdate() {
-    const doneAnimating = this.context.doneAnimating;
+    const doneAnimating = (this.context as SidebarContextType).doneAnimating;
     if (doneAnimating) {
       this.definition_ref.current?.focus();
     }
