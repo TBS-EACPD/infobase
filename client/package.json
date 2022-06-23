@@ -86,7 +86,7 @@
     "react-router-dom": "^5.0.0",
     "react-tooltip": "^4.2.21",
     "react-transition-group": "^4.4.2",
-    "redux": "^3.7.1",
+    "redux": "^4.0.0",
     "redux-promise-middleware": "^6.1.0",
     "regenerator-runtime": "^0.13.9",
     "reselect": "^3.0.1",
