@@ -114,7 +114,7 @@
     "@graphql-codegen/typescript-operations": "2.3.5",
     "@graphql-codegen/typescript-react-apollo": "3.2.11",
     "@testing-library/jest-dom": "^5.15.0",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^13.0.0",
     "@types/d3-dispatch": "^2.0.0",
     "@types/d3-dsv": "^2.0.1",
     "@types/d3-ease": "^2.0.0",

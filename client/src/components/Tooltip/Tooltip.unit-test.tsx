@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import React from "react";
 
 import { Tooltip } from "./Tooltip";
@@ -55,13 +61,11 @@ describe("Tooltip", () => {
 
     expect(document.querySelector(`#${tooltip_id}`)).not.toBeVisible();
 
-    screen.getByText(target).focus();
+    act(() => screen.getByText(target).focus());
 
-    await waitFor(() => {
-      expect(document.querySelector(`#${tooltip_id}`)).toBeVisible();
-    });
+    expect(document.querySelector(`#${tooltip_id}`)).toBeVisible();
 
-    screen.getByText(target).blur();
+    act(() => screen.getByText(target).blur());
 
     await waitFor(() => {
       expect(document.querySelector(`#${tooltip_id}`)).not.toBeVisible();
@@ -70,11 +74,9 @@ describe("Tooltip", () => {
   it("Keyboard: stays open if focus enters the tooltip content", async () => {
     render(TestTooltip);
 
-    screen.getByText(target).focus();
+    act(() => screen.getByText(target).focus());
 
-    await waitFor(() => {
-      expect(document.querySelector(`#${tooltip_id}`)).toBeVisible();
-    });
+    expect(document.querySelector(`#${tooltip_id}`)).toBeVisible();
 
     fireEvent.focusIn(document.querySelector(`#${tooltip_id}`) as Element);
 
