@@ -8,10 +8,11 @@ interface ContentItem {
   label: string;
   content: React.ReactNode;
 }
+type Title = string;
 interface LabeledTableProps {
-  title: string;
+  title: Title;
   contents: Array<ContentItem>;
-  TitleComponent?: React.ComponentType;
+  TitleComponent?: React.ComponentType<{ children: Title }>;
 }
 
 export const LabeledTable = (props: LabeledTableProps) => (

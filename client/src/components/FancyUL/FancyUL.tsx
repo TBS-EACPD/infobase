@@ -4,10 +4,12 @@ import React from "react";
 
 import "./FancyUL.scss";
 
+type Title = string;
+
 interface FancyULProps {
   className: string;
-  title?: string;
-  TitleComponent?: React.ComponentType;
+  title?: Title;
+  TitleComponent?: React.ComponentType<{ children?: Title }>;
   children: React.ReactNode[];
 }
 
