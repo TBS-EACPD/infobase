@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { TrivialTM } from "src/components/index";
 
@@ -19,7 +19,7 @@ export class EasyAccess extends React.Component {
     return null;
   }
   componentDidMount() {
-    ReactDOM.render(<EasyAccess_ />, document.getElementById("easy-access"));
+    createRoot(document.getElementById("easy-access")).render(<EasyAccess_ />);
   }
 }
 const TM = TrivialTM;

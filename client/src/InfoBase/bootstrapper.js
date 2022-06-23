@@ -6,7 +6,7 @@ import "src/handlebars/register_helpers.side-effects";
 import { ApolloProvider } from "@apollo/client";
 import _ from "lodash";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import WebFont from "webfontloader";
@@ -86,13 +86,12 @@ function bootstrapper(App, done) {
     const client = get_client();
     done();
 
-    ReactDOM.render(
+    createRoot(document.getElementById("app")).render(
       <ApolloProvider client={client}>
         <Provider store={store}>
           <App />
         </Provider>
-      </ApolloProvider>,
-      document.getElementById("app")
+      </ApolloProvider>
     );
   });
 }
