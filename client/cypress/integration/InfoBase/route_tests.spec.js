@@ -67,17 +67,6 @@ const route_load_tests_config = [
     test_on: ["eng", "basic-eng"],
   },
   {
-    name: "Treemap Explorer",
-    route: "treemap",
-    test_on: ["eng"],
-  },
-  {
-    name: "Indicator text comparison - TBS",
-    route: "diff/326",
-    test_on: ["eng", "basic-eng"],
-  },
-
-  {
     name: "Infographic - Gov - About",
     route: "infographic/gov/gov/intro",
     test_on: ["eng", "basic-eng"],
