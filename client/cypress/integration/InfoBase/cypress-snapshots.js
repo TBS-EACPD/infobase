@@ -104,19 +104,6 @@ module.exports = {
         "Axe violations allow list": null
       }
     },
-    "Treemap Explorer": {
-      "Tested on index-eng.html#treemap": {
-        "Axe violations allow list": null
-      }
-    },
-    "Indicator text comparison - TBS": {
-      "Tested on index-eng.html#diff/326": {
-        "Axe violations allow list": null
-      },
-      "Tested on index-basic-eng.html#diff/326": {
-        "Axe violations allow list": null
-      }
-    },
     "Infographic - Gov - About": {
       "Tested on index-eng.html#infographic/gov/gov/intro": {
         "Axe violations allow list": null
