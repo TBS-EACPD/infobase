@@ -1321,65 +1321,6 @@ const IconHierarchy = (props: IconProps) => {
   );
 };
 
-const IconTreemap = (props: IconProps) => {
-  const SVGTreemap = () => (
-    <Fragment>
-      <g>
-        <path
-          d="M526.5,76.5V532H69.1V76.5H526.5 M526.5,52.5H69.1c-13.3,0-24,10.7-24,24V532c0,13.3,10.7,24,24,24h457.5
-          c13.3,0,24-10.7,24-24V76.5C550.5,63.2,539.8,52.5,526.5,52.5L526.5,52.5z"
-        />
-      </g>
-      <rect
-        x="332.7"
-        y="100.3"
-        className="icon-stroke"
-        width="171.3"
-        height="204.9"
-        strokeWidth="15px"
-        strokeMiterlimit="10px"
-      />
-      <rect
-        x="91.2"
-        y="100.3"
-        className="icon-stroke"
-        width="216"
-        height="409.7"
-        strokeWidth="15px"
-        strokeMiterlimit="10px"
-      />
-      <rect
-        x="332.7"
-        y="329.8"
-        className="icon-stroke"
-        width="171.3"
-        height="107.1"
-        strokeWidth="15px"
-        strokeMiterlimit="10px"
-      />
-      <rect
-        x="332.7"
-        y="462.7"
-        className="icon-stroke"
-        width="83"
-        height="47.3"
-        strokeWidth="15px"
-        strokeMiterlimit="10px"
-      />
-      <rect
-        x="440.3"
-        y="462.7"
-        className="icon-stroke"
-        width="63.7"
-        height="47.3"
-        strokeWidth="15px"
-        strokeMiterlimit="10px"
-      />
-    </Fragment>
-  );
-
-  return <_IconWrapper {...props} viewbox_width={600} ChildSVG={SVGTreemap} />;
-};
 const IconTag = (props: IconProps) => {
   const SVGExplorer = () => (
     <Fragment>
@@ -2266,7 +2207,6 @@ export {
   IconPartition,
   IconCompareEstimates,
   IconHierarchy,
-  IconTreemap,
   IconTag,
   IconReport,
   IconLab,

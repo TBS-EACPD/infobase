@@ -17,7 +17,6 @@ import {
   IconHierarchy,
   IconTag,
   IconReport,
-  IconTreemap,
 } from "src/icons/icons";
 
 import infographic_sections_text_bundle from "src/infographic/bubble_definitions.yaml";
@@ -104,11 +103,11 @@ const featured_content_items = _.compact([
   },
   {
     text_key: "quick_link_spending_by_program",
-    href: "#treemap/drf/spending/All/pa_last_year",
+    href: "#rpb/.-.-(table.-.-'programSpending)",
   },
   {
     text_key: "quick_link_ftes_by_program",
-    href: "#treemap/drf_ftes/ftes/All/pa_last_year",
+    href: "#rpb/.-.-(table.-.-'programFtes)",
   },
   {
     text_key: "quick_link_tp_by_region",
@@ -149,12 +148,6 @@ const subapp_items = _.compact([
     title_key: "home_build_a_report",
     text_key: "report_builder_home_desc",
     href: "#rpb",
-  },
-  {
-    svg: <IconTreemap width="100%" color="#2C70C9" alternate_color={false} />,
-    title_key: "treemap_title",
-    text_key: "treemap_text",
-    href: "#treemap",
   },
 ]);
 
