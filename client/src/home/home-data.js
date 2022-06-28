@@ -13,7 +13,6 @@ import {
   IconClipboardAlt,
   IconHelpAlt,
   IconServicesHome,
-  IconResultsReport,
   IconCompareEstimates,
   IconHierarchy,
   IconTag,
@@ -156,14 +155,6 @@ const subapp_items = _.compact([
     title_key: "treemap_title",
     text_key: "treemap_text",
     href: "#treemap",
-  },
-  {
-    svg: (
-      <IconResultsReport width="100%" color="#2C70C9" alternate_color={false} />
-    ),
-    title_key: "home_diff_title",
-    text_key: "home_diff_text",
-    href: "#diff",
   },
 ]);
 

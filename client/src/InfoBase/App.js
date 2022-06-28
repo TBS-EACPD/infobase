@@ -39,7 +39,6 @@ const EstimatesComparison = React.lazy(() =>
 const PrivacyStatement = React.lazy(() =>
   import("src/PrivacyStatement/PrivacyStatement")
 );
-const TextDiff = React.lazy(() => import("src/TextDiff/TextDiff"));
 const TreeMap = React.lazy(() => import("src/TreeMap/TreeMap"));
 
 const PanelInventory = React.lazy(() => import("src/panels/PanelInventory"));
@@ -151,10 +150,6 @@ export class App extends React.Component {
               component={EstimatesComparison}
             />
             <Route path="/privacy" component={PrivacyStatement} />
-            <Route
-              path="/diff/:org_id?/:crso_id?/:program_id?"
-              component={TextDiff}
-            />
             <Route
               path="/panel-inventory/:subject_type?/:panel?/:id?"
               component={PanelInventory}

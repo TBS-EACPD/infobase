@@ -88,13 +88,6 @@ datasets_home_desc:
   en: Find information on, and external links to, GC InfoBase's data sources
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
-home_diff_title:
-  en: Indicator text comparisons
-  fr: Comparaison de texte des indicateurs
-home_diff_text:
-  en: Compare text portions of indicators between the most recent two departmental plans
-  fr: Comparer entre elles des portions de texte d’indicateurs dans les deux plans ministériels les plus récents
-
 treemap_title:
   en: Treemap Explorer
   fr: Carte proportionelle

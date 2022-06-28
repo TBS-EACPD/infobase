@@ -152,7 +152,7 @@ const HeaderBanner = withRouter(
 // TODO all three of these late results banners are hacky AND aren't dry against dynamic footnote content/infographic warning panels
 // whole late results ecosystem needs a cleanup
 const LateResultsBanner = () => {
-  const route_filter = (match, _history) => /^\/(start|diff)/.test(match.path);
+  const route_filter = (match, _history) => /^\/(start)/.test(match.path);
 
   // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
   const latest_doc = _.last(result_docs_in_tabling_order);
