@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import { create_text_maker_component, AlertBanner } from "src/components/index";
+import { create_text_maker_component } from "src/components/index";
 
 import { StandardRouteContainer } from "src/core/NavComponents";
 
@@ -16,13 +16,7 @@ import home_text from "./home.yaml";
 
 const { text_maker, TM } = create_text_maker_component([home_text]);
 
-const Home = (props) => {
-  const {
-    match: {
-      params: { no_basic_equiv },
-    },
-  } = props;
-
+const Home = () => {
   return (
     <StandardRouteContainer
       route_key="start"
@@ -31,14 +25,6 @@ const Home = (props) => {
       <h1>
         <TM k="title" />
       </h1>
-      {no_basic_equiv === "no_basic_equiv" && (
-        <AlertBanner
-          banner_class={"warning"}
-          additional_class_names={"large_panel_text"}
-        >
-          <TM k="home_a11y_non_a11y_redirect_warning" />
-        </AlertBanner>
-      )}
       <section>
         <h2>
           <TM k="home_gov_infograph" />

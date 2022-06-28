@@ -282,7 +282,6 @@ export class StandardRouteContainer extends React.Component {
       route_key,
       children,
       shouldSyncLang,
-      non_a11y_route,
     } = this.props;
 
     return (
@@ -296,9 +295,7 @@ export class StandardRouteContainer extends React.Component {
         <LateDrrFteResources />
         <AnalyticsSynchronizer route_key={route_key} />
         {shouldSyncLang !== false && <LangSynchronizer />}
-        {!is_a11y_mode && (
-          <A11yLinkSynchronizer non_a11y_route={non_a11y_route} />
-        )}
+        {!is_a11y_mode && <A11yLinkSynchronizer />}
         {is_a11y_mode && <StandardLinkSynchronizer />}
         <div>{children}</div>
       </div>
@@ -426,17 +423,8 @@ export const A11yLinkSynchronizer = withRouter(
       this._update();
     }
     _update() {
-      let { non_a11y_route, a11y_link_modifier } = this.props;
-
-      if (non_a11y_route) {
-        a11y_link_modifier = () => "#start/no_basic_equiv";
-      }
-
-      synchronize_link(
-        "#ib-site-header a.a11y-version-link",
-        a11y_link_modifier
-      );
-      synchronize_link("#footer-a11y-link", a11y_link_modifier);
+      synchronize_link("#ib-site-header a.a11y-version-link");
+      synchronize_link("#footer-a11y-link");
     }
   }
 );
@@ -453,15 +441,7 @@ export const StandardLinkSynchronizer = withRouter(
       this._update();
     }
     _update() {
-      let { standard_link_modifier } = this.props;
-
-      const default_standard_link_modifier = (hash) =>
-        hash === "start/no_basic_equiv" ? "start" : hash;
-
-      synchronize_link(
-        "#footer-standard-link",
-        standard_link_modifier || default_standard_link_modifier
-      );
+      synchronize_link("#footer-standard-link");
     }
   }
 );

@@ -154,12 +154,6 @@ export class App extends React.Component {
               component={PanelInventory}
             />
             <Route path="/survey" component={Survey} />
-            {is_a11y_mode && (
-              <Route
-                path="/start/:no_basic_equiv?"
-                render={() => <A11yHome />}
-              />
-            )}
             <Route
               path="/start"
               render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
