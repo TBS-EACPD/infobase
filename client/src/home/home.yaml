@@ -88,13 +88,6 @@ datasets_home_desc:
   en: Find information on, and external links to, GC InfoBase's data sources
   fr: Voir le complément d'information sur les données et sur les liens vers des sites de données ouvertes
 
-treemap_title:
-  en: Treemap Explorer
-  fr: Carte proportionelle
-treemap_text:
-  en: Compare organizations by how much they spend and how many people they employ
-  fr: Comparer les dépenses des organisations et le nombre d'employés à leur service
-
 
 ## Featured content section
 featured_data_title:

@@ -39,7 +39,6 @@ const EstimatesComparison = React.lazy(() =>
 const PrivacyStatement = React.lazy(() =>
   import("src/PrivacyStatement/PrivacyStatement")
 );
-const TreeMap = React.lazy(() => import("src/TreeMap/TreeMap"));
 
 const PanelInventory = React.lazy(() => import("src/panels/PanelInventory"));
 
@@ -154,12 +153,6 @@ export class App extends React.Component {
               path="/panel-inventory/:subject_type?/:panel?/:id?"
               component={PanelInventory}
             />
-            {!is_a11y_mode && (
-              <Route
-                path="/treemap/:perspective?/:color_var?/:filter_var?/:year?/:get_changes?"
-                component={TreeMap}
-              />
-            )}
             <Route path="/survey" component={Survey} />
             {is_a11y_mode && (
               <Route

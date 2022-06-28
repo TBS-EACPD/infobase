@@ -192,7 +192,7 @@ const LateResultsBanner = () => {
 };
 const LateDpResourcesBanner = () => {
   const route_filter = (match, _history) =>
-    /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
+    /^\/(start|tag-explorer|rpb)/.test(match.path);
 
   const latest_doc = _.last(result_docs_in_tabling_order);
 
@@ -231,7 +231,7 @@ const LateDpResourcesBanner = () => {
 };
 const LateDrrFteResources = () => {
   const route_filter = (match, _history) =>
-    /^\/(start|tag-explorer|treemap|rpb)/.test(match.path);
+    /^\/(start|tag-explorer|rpb)/.test(match.path);
 
   const late_orgs =
     PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs;
