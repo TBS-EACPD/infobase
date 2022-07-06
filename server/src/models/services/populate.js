@@ -239,7 +239,11 @@ export default async function ({ models }) {
         id,
         submission_year,
         org_id: dept_id_by_dept_code[dept_code],
-        collects_fees: convert_to_bool_or_null(collects_fees, "TRUE", "FALSE"),
+        collects_fees: convert_to_bool_or_null(
+          collects_fees.toLowerCase(),
+          "true",
+          "false"
+        ),
         account_reg_digital_status: convert_to_bool_or_null(
           account_reg_digital_status,
           "ENABLED",
