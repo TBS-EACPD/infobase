@@ -317,7 +317,7 @@ Object {
             "account_reg_digital_status": false,
             "application_digital_status": false,
             "authentication_status": false,
-            "collects_fees": null,
+            "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada is an economic regulatory body empowered to establish, at the request of an interested party, the royalties to be paid for the use of copyrighted subject-matter, when the administration of such copyright is entrusted to a collective society.",
             "designations": Array [
@@ -420,7 +420,7 @@ Object {
             "account_reg_digital_status": false,
             "application_digital_status": false,
             "authentication_status": false,
-            "collects_fees": null,
+            "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
             "designations": Array [
@@ -593,7 +593,7 @@ Object {
             "account_reg_digital_status": false,
             "application_digital_status": false,
             "authentication_status": false,
-            "collects_fees": null,
+            "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada is an economic regulatory body empowered to establish, at the request of an interested party, the royalties to be paid for the use of copyrighted subject-matter, when the administration of such copyright is entrusted to a collective society.",
             "designations": Array [
@@ -696,7 +696,7 @@ Object {
             "account_reg_digital_status": false,
             "application_digital_status": false,
             "authentication_status": false,
-            "collects_fees": null,
+            "collects_fees": false,
             "decision_digital_status": false,
             "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
             "designations": Array [
@@ -923,7 +923,7 @@ Object {
         "account_reg_digital_status": false,
         "application_digital_status": false,
         "authentication_status": false,
-        "collects_fees": null,
+        "collects_fees": false,
         "decision_digital_status": false,
         "description": "The Copyright Board of Canada issues non-exclusive licences authorizing the use of published copyrighted works when the copyright owner cannot be located, and outlines the terms under which the works can be used.",
         "designations": Array [
