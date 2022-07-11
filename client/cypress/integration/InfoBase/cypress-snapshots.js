@@ -17,7 +17,7 @@ module.exports = {
     "Glossary": {
       "Tested on index-eng.html#glossary": {
         "Axe violations allow list": {
-          //Seems to be an issue with hidden visibility
+          // Not shown until page scrolls, TODO: something about the way this is hidden pre-scroll is potentially an issue
           "color-contrast, serious": [
             "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
           ]
@@ -25,7 +25,7 @@ module.exports = {
       },
       "Tested on index-basic-eng.html#glossary": {
         "Axe violations allow list": {
-          //Seems to be an issue with hidden visibility
+          // Not shown until page scrolls, TODO: something about the way this is hidden pre-scroll is potentially an issue
           "color-contrast, serious": [
             "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
           ]
@@ -140,14 +140,26 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/services": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Data sources</span>",
-            "<span>Service Inventory</span>",
-            "<span>Datasets</span>",
-            "<span>Service Inventory</span>",
+            // TODO is inside of/intersects with a tall height clipped table, false positives
+            "<span>In person applications</span>",
+            "<span class=\"infobase-pie__legend-data\">15,198,643</span>",
+            "<span class=\"text-nowrap\">5.7%</span>",
+            "<span>Applications by other channels</span>",
+            "<span class=\"infobase-pie__legend-data\">8,777,551</span>",
+            "<span class=\"text-nowrap\">3.3%</span>",
             "<span>Applications by telephone</span>",
             "<span class=\"infobase-pie__legend-data\">5,675,706</span>",
-            "<span class=\"text-nowrap\">2.1%</span>"
+            "<span class=\"text-nowrap\">2.1%</span>",
+            "<p>",
+            "<span role=\"button\" tabindex=\"0\" class=\"glossary-sidebar-link\" data-ibtt-glossary-key=\"SERVICE\" data-toggle=\"glossary_sidebar\" aria-label=\"services, click to open glossary defintion for Service\">      services    </span>",
+            "<span role=\"button\" tabindex=\"0\" class=\"glossary-sidebar-link\" data-ibtt-glossary-key=\"STANDARD\" data-toggle=\"glossary_sidebar\" aria-label=\"standards, click to open glossary defintion for Service Standard\">      standards    </span>",
+            "<h4 style=\"text-align: center;\">844 / 1375</h4>",
+            "<span class=\"text-nowrap\">61.4%</span>",
+            "<span class=\"text-nowrap\">2,270</span>",
+            "<p>How many service <span role=\"button\" tabindex=\"0\" class=\"glossary-sidebar-link\" data-ibtt-glossary-key=\"STANDARD\" data-toggle=\"glossary_sidebar\" aria-label=\"standards', click to open glossary defintion for Service Standard\">      standards'    </span> targets were met?</p>",
+            "<span role=\"button\" tabindex=\"0\" class=\"glossary-sidebar-link\" data-ibtt-glossary-key=\"STANDARD\" data-toggle=\"glossary_sidebar\" aria-label=\"standards', click to open glossary defintion for Service Standard\">      standards'    </span>",
+            "<h4 style=\"text-align: center;\">1373 / 2270</h4>",
+            "<span class=\"text-nowrap\">60.5%</span>"
           ]
         }
       },
@@ -159,11 +171,10 @@ module.exports = {
       "Tested on index-eng.html#infographic/gov/gov/results": {
         "Axe violations allow list": {
           "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Departmental Results Reports</span>",
-            "<span>Performance information (results and indicators) by Program and by Organization</span>",
-            "<span>Departmental Plans</span>",
-            "<span>Planned performance information (results and indicators) by Program and by Organization</span>"
+            // TODO intersects with tall height clipped table, false positive
+            "<span class=\"text-nowrap\">1,529</span>",
+            "<span class=\"text-nowrap\">2,779</span>",
+            "<strong>fall 2023</strong>"
           ]
         }
       },
@@ -224,15 +235,7 @@ module.exports = {
     },
     "Infographic - Dept - Services": {
       "Tested on index-eng.html#infographic/dept/326/services": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Data sources</span>",
-            "<span>Service Inventory</span>",
-            "<span>Datasets</span>",
-            "<span>Service Inventory</span>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/dept/326/services": {
         "Axe violations allow list": null
@@ -240,13 +243,7 @@ module.exports = {
     },
     "Infographic - Dept - Results": {
       "Tested on index-eng.html#infographic/dept/326/results": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Departmental Results Reports</span>",
-            "<span>Performance information (results and indicators) by Program and by Organization</span>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/dept/326/results": {
         "Axe violations allow list": null
@@ -310,13 +307,7 @@ module.exports = {
     },
     "Infographic - CRSO - Results": {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/results": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            // TODO intersects with tall height clipped table, false positives. The related table should use pagination instead of a height clipper
-            "<span>Departmental Results Reports</span>",
-            "<span>Performance information (results and indicators) by Program and by Organization</span>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/results": {
         "Axe violations allow list": null
@@ -324,7 +315,12 @@ module.exports = {
     },
     "Infographic - CRSO - Where can I go from here?": {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/related": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "color-contrast, serious": [
+            // Within the faded area of a height clipper, intended
+            "<a href=\"#infographic/program/TBC-BXB05\" tabindex=\"-999\">Acquired Services and Assets Policies and Initiatives</a>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/related": {
         "Axe violations allow list": null
@@ -364,7 +360,12 @@ module.exports = {
     },
     "Infographic - Program - Where can I go from here?": {
       "Tested on index-eng.html#infographic/program/TBC-BXC04/related": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "color-contrast, serious": [
+            // Within the faded area of a height clipper, intended
+            "<a href=\"#infographic/program/TBC-BXB03\" tabindex=\"-999\">Digital Strategy, Planning, and Oversight</a>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/program/TBC-BXC04/related": {
         "Axe violations allow list": null
@@ -420,12 +421,7 @@ module.exports = {
     },
     "Infographic - Service - Intro": {
       "Tested on index-eng.html#infographic/service/136/intro": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            "<span>Service Inventory</span>",
-            "<span>Service Inventory</span>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/service/136/intro": {
         "Axe violations allow list": null
