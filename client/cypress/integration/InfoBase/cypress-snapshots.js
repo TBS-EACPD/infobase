@@ -432,5 +432,5 @@ module.exports = {
       }
     }
   },
-  "__version": "8.6.0"
+  "__version": "8.7.0"
 }
