@@ -49,13 +49,6 @@ const source_definitions = LiteralKeyedRecordHelper<SourceDef>()({
     ),
     frequency_key: "yearly",
   },
-  regional_transfer_payments: {
-    name: text_maker("regional_transfer_payments_name"),
-    description: <TM k="regional_transfer_payments_desc" />,
-    topic_key: "TP_GEO",
-    open_data_link: text_maker("regional_transfer_payments_open_data_link"),
-    frequency_key: "yearly",
-  },
   estimates: {
     name: text_maker("estimates_name"),
     description: <TM k="estimates_desc" />,

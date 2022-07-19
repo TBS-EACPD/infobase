@@ -109,10 +109,6 @@ const featured_content_items = _.compact([
     text_key: "quick_link_ftes_by_program",
     href: "#rpb/.-.-(table.-.-'programFtes)",
   },
-  {
-    text_key: "quick_link_tp_by_region",
-    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'tp_by_region)",
-  },
 ]);
 
 const subapp_items = _.compact([

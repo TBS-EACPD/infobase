@@ -35,7 +35,6 @@ import orgEmployeeRegion from "src/tables/orgEmployeeRegion";
 import orgEmployeeType from "src/tables/orgEmployeeType";
 import orgSobjs from "src/tables/orgSobjs";
 import orgTransferPayments from "src/tables/orgTransferPayments";
-import orgTransferPaymentsRegion from "src/tables/orgTransferPaymentsRegion";
 import orgVoteStatEstimates from "src/tables/orgVoteStatEstimates";
 import orgVoteStatPa from "src/tables/orgVoteStatPa";
 import programFtes from "src/tables/programFtes";
@@ -51,7 +50,6 @@ const table_defs = [
   orgSobjs,
   programSpending,
   orgTransferPayments,
-  orgTransferPaymentsRegion,
   orgVoteStatEstimates,
   orgEmployeeType,
   orgEmployeeRegion,

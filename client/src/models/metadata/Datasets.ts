@@ -225,14 +225,6 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
       table: "orgVoteStatEstimates",
     }),
   },
-  transfer_payments_by_region: {
-    name: Sources.regional_transfer_payments.name,
-    source_keys: ["regional_transfer_payments"],
-    topic_keys: ["SOBJ10"],
-    infobase_link: rpb_link({
-      table: "orgTransferPaymentsRegion",
-    }),
-  },
   actual_results: {
     name: text_maker("actual_results_dataset"),
     source_keys: ["departmental_results_reports"],
