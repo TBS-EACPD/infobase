@@ -94,7 +94,6 @@ const table_csvs = _.map(
     "org_employee_type",
     "org_sobjs",
     "org_transfer_payments",
-    "org_transfer_payments_region",
     "org_vote_stat_estimates",
     "org_vote_stat_pa",
     "program_ftes",
