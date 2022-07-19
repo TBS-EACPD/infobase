@@ -15,7 +15,6 @@ import services from "./services/index.js";
 // import search from './search/index.js';
 // import vote_stat from './vote_stat/index.js';
 // import transfer_payments from './transfer_payments/index.js';
-// import transfer_payments_loc from './transfer_payments_loc/index.js';
 
 //the order of sub_module_defs controls the order of model creation and database population, which potentially matters
 const sub_module_defs = _.compact([
@@ -30,7 +29,6 @@ const sub_module_defs = _.compact([
   // search,
   // vote_stat,
   // transfer_payments,
-  // transfer_payments_loc,
 ]);
 
 export function create_models() {
