@@ -31,7 +31,6 @@ import {
   declare_application_channels_by_services_panel,
 
   // shared gov, dept
-  declare_tp_by_region_panel,
   declare_links_to_rpb_panel,
   declare_in_year_voted_stat_split_panel,
   declare_in_year_estimates_split_panel,
@@ -89,7 +88,6 @@ export const get_dept_panels = (subject) =>
       declare_in_year_estimates_split_panel(),
       declare_in_year_voted_stat_split_panel(),
       declare_estimates_in_perspective_panel(),
-      declare_tp_by_region_panel(),
       declare_spend_by_so_hist_panel(),
       declare_last_year_g_and_c_perspective_panel(),
       declare_historical_g_and_c_panel(),

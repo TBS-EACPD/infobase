@@ -33,7 +33,6 @@ export type TopicKey =
   | "SOBJ"
   | "PROG"
   | "GEO"
-  | "TP_GEO"
   | "FOL"
   | "ESTIMATES"
   | "EX_LVL"

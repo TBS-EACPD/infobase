@@ -24,7 +24,6 @@ export {
 export {
   declare_historical_g_and_c_panel,
   declare_last_year_g_and_c_perspective_panel,
-  declare_tp_by_region_panel,
 } from "./transfer_payments/index";
 
 export {

@@ -76,10 +76,6 @@ GEO:
   en: Geographic Data
   fr: Données géographique
 
-TP_GEO:
-  en: Transfer Payments by Recipient Region
-  fr: Paiements de transfert par région du bénéficiaire
-
 FOL:
   en: First Official Language
   fr: Première langue officielle

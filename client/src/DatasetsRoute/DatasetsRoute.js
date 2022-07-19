@@ -24,7 +24,6 @@ const source_legacy_key_map = {
   IGOC: "igoc",
   PA: "public_accounts",
   CFMRS: "central_financial_management_system",
-  RTP: "regional_transfer_payments",
   ESTIMATES: "estimates",
   DP: "departmental_plans",
   DRR: "departmental_results_reports",
