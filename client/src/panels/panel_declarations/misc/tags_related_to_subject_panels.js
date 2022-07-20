@@ -95,7 +95,7 @@ export const declare_tags_of_interest_panel = () =>
         return tags_by_root;
       },
       render({ title, subject, calculations }) {
-        const { tags_by_root } = calculations;
+        const tags_by_root = calculations;
 
         return (
           <TextPanel title={title}>
