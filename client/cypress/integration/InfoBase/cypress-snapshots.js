@@ -315,7 +315,18 @@ module.exports = {
     },
     "Infographic - CRSO - Where can I go from here?": {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/related": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "color-contrast, serious": [
+            // Within the faded area of a height clipper, intended
+            "<a href=\"#infographic/program/TBC-BXB05\" tabindex=\"-999\">Acquired Services and Assets Policies and Initiatives</a>",
+            "<a href=\"#infographic/program/TBC-BXB06\" tabindex=\"-999\">Digital Comptrollership Program</a>",
+            "<a href=\"#infographic/program/TBC-BXB02\" tabindex=\"-999\">Digital Policy</a>",
+            "<a href=\"#infographic/program/TBC-BXB07\" tabindex=\"-999\">Internal Audit Policies and Initiatives</a>",
+            "<a href=\"#infographic/program/TBC-BXB04\" tabindex=\"-999\">Management Accountability Framework</a>",
+            "<a href=\"#infographic/program/TBC-BXC02\" tabindex=\"-999\">Pension and Benefits Management</a>",
+            "<a href=\"#infographic/program/TBC-BXC06\" tabindex=\"-999\">People Management Systems and Processes</a>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/related": {
         "Axe violations allow list": null
@@ -355,7 +366,17 @@ module.exports = {
     },
     "Infographic - Program - Where can I go from here?": {
       "Tested on index-eng.html#infographic/program/TBC-BXC04/related": {
-        "Axe violations allow list": null
+        "Axe violations allow list": {
+          "color-contrast, serious": [
+            "<a href=\"#infographic/program/TBC-BXB03\" tabindex=\"-999\">Digital Strategy, Planning, and Oversight</a>",
+            "<a href=\"#infographic/program/TBC-BXB07\" tabindex=\"-999\">Internal Audit Policies and Initiatives</a>",
+            "<a href=\"#infographic/program/TBC-BXB04\" tabindex=\"-999\">Management Accountability Framework</a>",
+            "<a href=\"#infographic/program/TBC-BXC01\" tabindex=\"-999\">Employee Relations and Total Compensation</a>",
+            "<a href=\"#infographic/program/TBC-BXC05\" tabindex=\"-999\">Executive and Leadership Development</a>",
+            "<a href=\"#infographic/crso/TBC-ISS00\" tabindex=\"-999\">Internal Services</a>",
+            "<a href=\"#infographic/program/TBC-ISS0Z\" tabindex=\"-999\">Acquisition Management Services</a>"
+          ]
+        }
       },
       "Tested on index-basic-eng.html#infographic/program/TBC-BXC04/related": {
         "Axe violations allow list": null
