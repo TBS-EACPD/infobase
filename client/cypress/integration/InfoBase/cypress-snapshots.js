@@ -315,12 +315,7 @@ module.exports = {
     },
     "Infographic - CRSO - Where can I go from here?": {
       "Tested on index-eng.html#infographic/crso/TBC-BXA00/related": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            // Within the faded area of a height clipper, intended
-            "<a href=\"#infographic/program/TBC-BXB05\" tabindex=\"-999\">Acquired Services and Assets Policies and Initiatives</a>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/crso/TBC-BXA00/related": {
         "Axe violations allow list": null
@@ -360,12 +355,7 @@ module.exports = {
     },
     "Infographic - Program - Where can I go from here?": {
       "Tested on index-eng.html#infographic/program/TBC-BXC04/related": {
-        "Axe violations allow list": {
-          "color-contrast, serious": [
-            // Within the faded area of a height clipper, intended
-            "<a href=\"#infographic/program/TBC-BXB03\" tabindex=\"-999\">Digital Strategy, Planning, and Oversight</a>"
-          ]
-        }
+        "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/program/TBC-BXC04/related": {
         "Axe violations allow list": null
