@@ -4,17 +4,11 @@ import "./utils.scss";
 import "src/handlebars/register_helpers.side-effects";
 
 import { ApolloProvider } from "@apollo/client";
-import {
-  ConnectedRouter,
-  routerMiddleware,
-  connectRouter,
-} from "connected-react-router";
-import { createHashHistory } from "history";
 import _ from "lodash";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers } from "redux";
 import WebFont from "webfontloader";
 
 import { populate_initial_stores_from_lookups } from "src/models/populate_initial_stores_from_lookups";
@@ -81,31 +75,21 @@ function bootstrapper(App, done) {
       Table.store.create_and_register(table_def)
     );
 
-    const history = createHashHistory({ hashType: "noslash" });
-
-    const middleware = routerMiddleware(history);
-
     const store = createStore(
       combineReducers({
         app: app_reducer,
-        router: connectRouter(history),
-      }),
-      applyMiddleware(middleware)
+      })
     );
 
     const client = get_client();
     done();
 
-    ReactDOM.render(
+    createRoot(document.getElementById("app")).render(
       <ApolloProvider client={client}>
         <Provider store={store}>
-          {/* ConnectedRouter will use the store from Provider automatically */}
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
+          <App />
         </Provider>
-      </ApolloProvider>,
-      document.getElementById("app")
+      </ApolloProvider>
     );
   });
 }

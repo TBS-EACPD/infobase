@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Suspense } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { HeaderNotification } from "src/components/HeaderNotification/HeaderNotification";
 import { LeafSpinner } from "src/components/LeafSpinner/LeafSpinner";
@@ -85,89 +85,85 @@ export class App extends React.Component {
   render() {
     const { outage_msg, showSurvey } = this.state;
     return (
-      <ErrorBoundary>
-        {is_a11y_mode && <NoIndex />}
-        <DevFip />
-        <InsertRuntimeFooterLinks />
-        <EasyAccess />
-        {outage_msg && (
-          <HeaderNotification
-            list_of_text={[outage_msg]}
-            hideNotification={() => {
-              this.setState({ outage_msg: null });
-            }}
-          />
-        )}
-        <RedirectHeader
-          redirect_msg_key="redirected_msg"
-          url_before_redirect_key="pre_redirected_url"
-        />
-        {has_local_storage && <SurveyPopup />}
-        <Suspense fallback={<LeafSpinner config_name={"route"} />}>
-          <Switch>
-            <Route
-              path="/error-boundary-test"
-              component={() => {
-                throw new Error("This route throws errors!");
+      <HashRouter hashType="noslash">
+        <ErrorBoundary>
+          {is_a11y_mode && <NoIndex />}
+          <DevFip />
+          <InsertRuntimeFooterLinks />
+          <EasyAccess />
+          {outage_msg && (
+            <HeaderNotification
+              list_of_text={[outage_msg]}
+              hideNotification={() => {
+                this.setState({ outage_msg: null });
               }}
             />
-            <Redirect
-              from="/metadata/:source_key?"
-              to="/datasets/:source_key?"
-            />
-            <Route path="/datasets/:source_key?" component={DatasetsRoute} />
-            <Route path="/igoc/:grouping?" component={IgocExplorer} />
-            <Redirect
-              from="/resource-explorer/:hierarchy_scheme?/:doc?"
-              to="/tag-explorer/:hierarchy_scheme?"
-            />
-            <Route
-              path="/tag-explorer/:hierarchy_scheme?/:period?"
-              component={TagExplorer}
-            />
-            <Redirect
-              from="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
-              to="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
-            />
-            <Route
-              path="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
-              component={Infographic}
-            />
-            <Route path="/glossary/:active_key?" component={Glossary} />
-            <Route path="/rpb/:config?" component={ReportBuilder} />
-            <Route
-              path="/about"
-              render={() => <About toggleSurvey={this.toggleSurvey} />}
-            />
-            <Route
-              path="/contact"
-              render={() => <Contact toggleSurvey={this.toggleSurvey} />}
-            />
-            <Route path="/faq/:selected_qa_key?" component={FAQ} />
-            <Route
-              path="/compare_estimates/:h7y_layout?"
-              component={EstimatesComparison}
-            />
-            <Route path="/privacy" component={PrivacyStatement} />
-            <Route
-              path="/panel-inventory/:subject_type?/:panel?/:id?"
-              component={PanelInventory}
-            />
-            <Route path="/survey" component={Survey} />
-            <Route
-              path="/start"
-              render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
-            />
-            <Redirect from="/" to="/start" />
-          </Switch>
-          <GlossarySidebarController />
-          <PageDetails
-            showSurvey={showSurvey}
-            toggleSurvey={this.toggleSurvey}
-            non_survey_routes={["/contact", "/survey"]}
+          )}
+          <RedirectHeader
+            redirect_msg_key="redirected_msg"
+            url_before_redirect_key="pre_redirected_url"
           />
-        </Suspense>
-      </ErrorBoundary>
+          {has_local_storage && <SurveyPopup />}
+          <Suspense fallback={<LeafSpinner config_name={"route"} />}>
+            <Switch>
+              <Redirect
+                from="/metadata/:source_key?"
+                to="/datasets/:source_key?"
+              />
+              <Route path="/datasets/:source_key?" component={DatasetsRoute} />
+              <Route path="/igoc/:grouping?" component={IgocExplorer} />
+              <Redirect
+                from="/resource-explorer/:hierarchy_scheme?/:doc?"
+                to="/tag-explorer/:hierarchy_scheme?"
+              />
+              <Route
+                path="/tag-explorer/:hierarchy_scheme?/:period?"
+                component={TagExplorer}
+              />
+              <Redirect
+                from="/orgs/:subject_type/:subject_id/infograph/:active_bubble_id?/:options?/"
+                to="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
+              />
+              <Route
+                path="/infographic/:subject_type/:subject_id/:active_bubble_id?/:options?/"
+                component={Infographic}
+              />
+              <Route path="/glossary/:active_key?" component={Glossary} />
+              <Route path="/rpb/:config?" component={ReportBuilder} />
+              <Route
+                path="/about"
+                render={() => <About toggleSurvey={this.toggleSurvey} />}
+              />
+              <Route
+                path="/contact"
+                render={() => <Contact toggleSurvey={this.toggleSurvey} />}
+              />
+              <Route path="/faq/:selected_qa_key?" component={FAQ} />
+              <Route
+                path="/compare_estimates/:h7y_layout?"
+                component={EstimatesComparison}
+              />
+              <Route path="/privacy" component={PrivacyStatement} />
+              <Route
+                path="/panel-inventory/:subject_type?/:panel?/:id?"
+                component={PanelInventory}
+              />
+              <Route path="/survey" component={Survey} />
+              <Route
+                path="/start"
+                render={() => (is_a11y_mode ? <A11yHome /> : <Home />)}
+              />
+              <Redirect from="/" to="/start" />
+            </Switch>
+            <GlossarySidebarController />
+            <PageDetails
+              showSurvey={showSurvey}
+              toggleSurvey={this.toggleSurvey}
+              non_survey_routes={["/contact", "/survey"]}
+            />
+          </Suspense>
+        </ErrorBoundary>
+      </HashRouter>
     );
   }
 }
