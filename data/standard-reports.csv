@@ -1,4 +1,4 @@
-﻿standard,year,lower,upper,count,met_count,is_target_met,comment_en,comment_fr
+standard,year,lower,upper,count,met_count,is_target_met,comment_en,comment_fr
 10,2018,99.0,100,10117,0,0,Annual Business Volume Satisfying Standard: Data collection and measurement is not possible at this time as the current tool has not been configured to collect this information. A new IT Service Management (ITSM) tool has been procured and its configuration is in the initial stages.,Volume d'activités annuelles qui répond à la norme: La collecte et l’analyse des données ne peuvent être effectuées à l’heure actuelle puisque l’outil n’a pas été configuré à des fins de collecte d’information. On a fait l’acquisition d’un nouvel outil de gestion des services de TI (GSTI) et on a commencé sa configuration.
 14,2018,50.0,100,1034,0,0,Annual Business Volume Satisfying Standard: Data collection and measurement is not possible at this time as the current tool has not been configured to collect this information. A new IT Service Management (ITSM) tool has been procured and its configuration is in the initial stages.,Volume d'activités annuelles qui répond à la norme: La collecte et l’analyse des données ne peuvent être effectuées à l’heure actuelle puisque l’outil n’a pas été configuré à des fins de collecte d’information. On a fait l’acquisition d’un nouvel outil de gestion des services de TI (GSTI) et on a commencé sa configuration.
 16,2018,95.0,100,16889,0,0,Annual Business Volume Satisfying Standard: Data collection and measurement is not possible at this time as the current tool has not been configured to collect this information. A new IT Service Management (ITSM) tool has been procured and its configuration is in the initial stages.,Volume d'activités annuelles qui répond à la norme: La collecte et l’analyse des données ne peuvent être effectuées à l’heure actuelle puisque l’outil n’a pas été configuré à des fins de collecte d’information. On a fait l’acquisition d’un nouvel outil de gestion des services de TI (GSTI) et on a commencé sa configuration.
@@ -3923,7 +3923,7 @@ Il n’y a pas eu d’appel de propositions pour AF 2019-2020."
 2934,2019,80.0,100,152255,140707,1,,
 2935,2019,80.0,100,15371,15021,1,,
 2936,2019,80.0,100,3693,3530,1,,
-2941,2019,90.0,100,219862,219296,1,,
+2941,2019,90.0,100,243981,243308,1,,
 2942,2019,90.0,100,28733,28616,1,,
 2943,2019,90.0,100,213699,213559,1,,
 2944,2019,90.0,100,140617,140206,1,,

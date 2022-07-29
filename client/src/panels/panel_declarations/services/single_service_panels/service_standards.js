@@ -215,6 +215,10 @@ export const declare_single_service_standards_panel = () =>
             topic_keys: ["SERVICE_STANDARDS"],
             text: text_maker("new_standards_data"),
           }),
+          create_fake_footnote({
+            topic_keys: ["SERVICE_STANDARDS"],
+            text: text_maker("IRCC_hotfix"),
+          }),
           _.chain(standards)
             .map(
               (standard) =>

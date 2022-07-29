@@ -452,3 +452,6 @@ gauge_standards_met_text:
 new_standards_data:
   en: Change in methodology for calculating result status starting June 15th 2022. Some service standards results may have been affected. 
   fr: Changement de méthodologie pour calculer l'état des résultats à compter du 15 juin 2022. Certains résultats des normes de service peuvent avoir été affectés.
+IRCC_hotfix:
+  en: Total Business Volume and Volume Meeting Target for Passport application by mail - 20 business days (2019-20) were updated after data verification.
+  fr: Mise à jour du Volume d'activités total et Volume atteignant la cible pour Demande de passeport envoyée par la poste - 20 jours ouvrables (2019-20) suite à la vérification des données.
