@@ -177,11 +177,16 @@ const run_form_backend = () => {
   const form_backend = make_form_backend(templates);
 
   if (!process.env.IS_PROD_SERVER) {
-    form_backend.set("port", 7331);
-    form_backend.listen(form_backend.get("port"), () => {
-      const port = form_backend.get("port");
-      console.log(`InfoBase form backend running at http://127.0.0.1:${port}`);
-    });
+    // Note: telling express to listen on port "0" actually means "pick any free port". 7331 is our arbitrarily selected dev port
+    const form_backend_server = form_backend.listen(
+      process.env.NODE_ENV === "test" ? 0 : 7331
+    );
+    form_backend.set("port", form_backend_server.address().port);
+    console.log(
+      `InfoBase form backend running at http://127.0.0.1:${form_backend.get(
+        "port"
+      )}`
+    );
   }
 
   return form_backend;
