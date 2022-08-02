@@ -72,7 +72,7 @@ const make_form_backend = (templates) => {
   });
 
   form_backend.get("/form_template_names", (request, response) =>
-    response.status("200").send(
+    response.status(200).send(
       _.chain(templates)
         .keys()
         .filter((template_name) => !/\.test$/.test(template_name))
@@ -88,10 +88,10 @@ const make_form_backend = (templates) => {
     if (_.isUndefined(requested_template)) {
       const error_message =
         "Bad Request: form template request has invalid or missing `template_name` value";
-      response.status("400").send(error_message);
+      response.status(400).send(error_message);
       log_error_case(request, error_message);
     } else {
-      response.status("200").json(templates[template_name]);
+      response.status(200).json(templates[template_name]);
     }
   });
 
@@ -117,7 +117,7 @@ const make_form_backend = (templates) => {
       const error_message =
         "Bad Request: submitted form content either doesn't correspond to any templates, " +
         "or does not validate against its corresponding template";
-      response.status("400").send(error_message);
+      response.status(400).send(error_message);
       log_error_case(request, error_message);
     } else {
       const this_client_is_in_timeout = throttle_requests_by_client(
@@ -126,7 +126,7 @@ const make_form_backend = (templates) => {
       if (process.env.IS_PROD_SERVER && this_client_is_in_timeout) {
         const error_message =
           "Bad Request: too many recent requests from your IP, try again later.";
-        response.status("400").send(error_message);
+        response.status(400).send(error_message);
         log_error_case(request, error_message);
         return null;
       } else {
@@ -145,11 +145,11 @@ const make_form_backend = (templates) => {
           completed_template
         )
           .then(() => {
-            response.send("200");
+            response.status(200).send();
             log_success_case(request);
           })
           .catch((error) => {
-            response.status("500").send(`Internal Server Error: ${error}`);
+            response.status(500).send(`Internal Server Error: ${error}`);
             log_error_case(request, error);
           });
       }
@@ -160,7 +160,7 @@ const make_form_backend = (templates) => {
 
   form_backend.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status("500").send("Internal server error");
+    res.status(500).send("Internal server error");
     next(err);
   });
 
