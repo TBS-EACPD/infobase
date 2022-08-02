@@ -23,18 +23,10 @@ const mock_send_to_slack = send_to_slack.mockImplementation(() =>
 );
 
 import { run_form_backend } from "./form_backend.js";
-beforeAll((done) => {
-  run_form_backend();
-  done();
-});
 
 describe("End-to-end tests for form_backend endpoints", () => {
-  const prod_test_url =
-    "https://us-central1-report-a-problem-email-244220.cloudfunctions.net/prod-email-backend";
-  const local_test_url = `http://127.0.0.1:7331`;
-
-  const test_against_prod = false;
-  const test_url = test_against_prod ? prod_test_url : local_test_url;
+  const form_backend = run_form_backend();
+  const test_url = `http://127.0.0.1:${form_backend.get("port")}`;
 
   const make_form_template_names_request = () =>
     axios.get(`${test_url}/form_template_names`);
