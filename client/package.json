@@ -25,6 +25,7 @@
     "cypress:debug": "cypress run --headed",
     "unit_tests": "npx jest --coverage --config jest_configs/unit_tests.config.js",
     "unit_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage -config jest_configs/unit_tests.config.js",
+    "tests": "npm run unit_tests",
     "type_check": "npx tsc --noEmit",
     "gqlgen": "graphql-codegen --config codegen.yml",
     "gqlgen:watch": "nodemon --watch ../server/.dev_artifacts -e .graphql --exec 'graphql-codegen --config codegen.yml --watch'"

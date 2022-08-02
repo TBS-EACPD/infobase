@@ -16,7 +16,8 @@
     "infobase_tmux_init": "npm run tmux_env",
     "tmux_env": "sh scripts/dev_scripts/tmux_env.sh",
     "refresh_pipeline_data": "sh scripts/dev_scripts/refresh_pipeline_data.sh",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tests": "(cd client && npm run tests); (cd server && npm run tests); (cd form_backend && npm run tests)"
   },
   "authors": [
     "Alex Cousineau-Leduc",

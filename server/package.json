@@ -41,7 +41,7 @@
     "unit_tests": "npx jest --coverage --forceExit --config jest_configs/unit_tests.config.js",
     "unit_tests:watch": "npx jest --watch --config jest_configs/unit_tests.config.js",
     "unit_tests:debug": "NODE_OPTIONS='--inspect-brk' npx --runInBand --coverage --forceExit --config jest_configs/unit_tests.config.js",
-    "test": "(npm run unit_tests && npm run snapshot_tests && npm run merge_coverage_reports)",
+    "tests": "npm run unit_tests; npm run snapshot_tests",
     "start": "nodemon --config nodemon_start_config.json --watch src --watch package-lock.json --watch ../data -e csv,json,js --exec node src/dev_server.js",
     "start:debug": "nodemon --watch src --watch package-lock.json --exec node --inspect-brk ./src/dev_server.js",
     "populate_db": "node src/populate_db.js",
