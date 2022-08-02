@@ -35,6 +35,7 @@
     "integration_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage --forceExit --config jest_configs/integration_tests.config.js",
     "end_to_end_tests": "npx jest --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
     "end_to_end_tests:debug": "NODE_OPTIONS='--inspect-brk' npx jest --runInBand --coverage --forceExit  --config jest_configs/end_to_end_tests.config.js",
+    "tests": "npm run unit_tests; npm run integration_tests; npm run end_to_end_tests",
     "prod_deploy": "sh ./scripts/deploy/prod_deploy_form_backend_function.sh",
     "mongod": "sh ../scripts/dev_scripts/local_mongod.sh -p 27018",
     "extract_data:dev": "sh ./scripts/extract_data/extract_data.sh -m dev",
