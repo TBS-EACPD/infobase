@@ -1,0 +1,17 @@
+diff --git a/node_modules/@graphql-codegen/visitor-plugin-common/cjs/imports.js b/node_modules/@graphql-codegen/visitor-plugin-common/cjs/imports.js
+index 5ad1905..8c61fa6 100644
+--- a/node_modules/@graphql-codegen/visitor-plugin-common/cjs/imports.js
++++ b/node_modules/@graphql-codegen/visitor-plugin-common/cjs/imports.js
+@@ -27,7 +27,11 @@ function generateImportStatement(statement) {
+     const importNames = importSource.identifiers && importSource.identifiers.length
+         ? `{ ${Array.from(new Set(importSource.identifiers)).join(', ')} }`
+         : '*';
+-    const importExtension = importPath.startsWith('/') || importPath.startsWith('.') ? (statement.emitLegacyCommonJSImports ? '' : '.js') : '';
++    // bug here(ish). For SomeQuery.graphql that imports SomeFragment.graphql, the corresponding generated SomeQuery.ts tried to explicitly import SomeFragment.js,
++    // which does not exist (SomeFragment.ts does). As we are not using ESM, either an explicit .ts or an ambiguous file name is necessary.
++    // Neither the default emitLegacyCommonJSImports of true nor an explicitly configured emitLegacyCommonJSImports of true seems to be used in that case  
++    // const importExtension = importPath.startsWith('/') || importPath.startsWith('.') ? (statement.emitLegacyCommonJSImports ? '' : '.js') : '';
++    const importExtension = '';
+     const importAlias = importSource.namespace ? ` as ${importSource.namespace}` : '';
+     const importStatement = typesImport ? 'import type' : 'import';
+     return `${importStatement} ${importNames}${importAlias} from '${importPath}${importExtension}';${importAlias ? '\n' : ''}`;
