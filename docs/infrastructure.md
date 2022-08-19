@@ -106,40 +106,40 @@ sequenceDiagram
   participant gf as Google Fonts
 
   browser->>azure: {domain + base path}/index-{variant}.html
-  azure-->>browser:
+  azure-->>browser: #%20;
 
   par index-{variant}.html resource
     browser->>ga: Analytics and tag manager init scripts
-    ga-->>browser:
+    ga-->>browser: #%20;
 
     browser->>cdn: header and footer SVGs
-    cdn-->>browser:
+    cdn-->>browser: #%20;
 
     browser->>cdn: extended-bootstrap.css
-    cdn-->>browser:
+    cdn-->>browser: #%20;
 
     browser->>cdn: app-{variant}.min.js, JS bundle entrypoint
-    cdn-->>browser:
+    cdn-->>browser: #%20;
   end
 
   browser->>cdn: JS bundles for SPA init (polyfills, react + router and navigation level components, etc)
-  cdn-->>browser:
+  cdn-->>browser: #%20;
 
   browser->>gf: Fonts
-  gf-->>browser:
+  gf-->>browser: #%20;
 
   browser->>cdn: "lookup" data bundle (legacy, populates core models, to be phased out at end of GraphQL port)
-  cdn-->>browser:
+  cdn-->>browser: #%20;
 
   opt SPA run time resources, dependent on URL {hash path} location
     browser->>cdn: Additional JS bundles
-    cdn-->>browser:
+    cdn-->>browser: #%20;
 
     browser->>cdn: Additional SVGs
-    cdn-->>browser:
+    cdn-->>browser: #%20;
 
     browser->>cdn: Additional data bundles (legacy, to be phased out during GraphQL port)
-    cdn-->>browser:
+    cdn-->>browser: #%20;
   end
 ```
 
