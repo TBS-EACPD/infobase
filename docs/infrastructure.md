@@ -2,6 +2,20 @@
 
 This markdown file includes [mermaid](mermaid-js.github.io/mermaid) diagrams. GitHub's markdown viewer will render these. For local viewing/editing, install the VS Code mermaid preview and syntax highlighting extensions.
 
+<!-- toc -->
+
+- [High-level Architecture](#high-level-architecture)
+  - [Grouped by subrepo](#grouped-by-subrepo)
+  - [Grouped by environment](#grouped-by-environment)
+- [Component Architectures](#component-architectures)
+  - [Static content](#static-content)
+    - [InfoBase CDN](#infobase-cdn)
+    - [Sketch of typical static content loading sequence](#sketch-of-typical-static-content-loading-sequence)
+  - [GraphQL API](#graphql-api)
+  - [Form Backend API](#form-backend-api)
+
+<!-- tocstop -->
+
 ## High-level Architecture
 
 Notes:
