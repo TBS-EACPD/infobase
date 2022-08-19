@@ -6,8 +6,8 @@ This markdown file includes [mermaid](mermaid-js.github.io/mermaid) diagrams. Gi
 
 Notes:
 
-- These high-level diagrams are for reference, they make certain simplifications and are light on explanations. See [Detailed Component Architectures](#detailed-component-architectures) for more granular per-component information
 - Arrows point in the direction data is flowing
+- These high-level diagrams are for reference, they make certain simplifications and are light on explanations. See [Detailed Component Architectures](#detailed-component-architectures) for more granular per-component information
 - These diagrams represent the production infrastructure. At the level of these diagrams, the only difference for "dev link" builds is that Azure plays no part in them and all static content comes from Google Cloud.
   - There are other important differences between prod and dev links, but they're all more granular than these high-level sections cover. The largest difference worth also mentioning here is that, currently, dev links _do not_ deploy their own form backend infrastructure, they just speak to the production forms API directly.
 
@@ -17,7 +17,6 @@ Notes:
 flowchart TB
   subgraph client subrepo
     spa(React SPA)
-
     storage("Google Cloud Storage")
   end
 
@@ -29,8 +28,7 @@ flowchart TB
   subgraph form_backend subrepo
     forms(Forms Google Cloud Function)
     forms_mongo(Forms DB, Mongo Atlas)
-
-  slack(Slack alerts)
+    slack(Slack alerts)
   end
 
   cloudflare(Cloudflare)
@@ -96,6 +94,52 @@ flowchart LR
 ## Detailed Component Architectures
 
 ### Static content
+
+#### Initial load sketch
+
+```mermaid
+sequenceDiagram
+  participant browser as Browser at {domain + base path}/index-{variant}.html#35;{hash path}
+  participant azure as IMTD Azure VM (resolves {domain + base path})
+  participant cdn as InfoBase CDN
+
+  browser->>azure: GET {domain + base path}/index-{variant}.html
+  azure-->>browser: index-{variant.html}
+
+```
+
+#### InfoBase CDN
+
+```mermaid
+sequenceDiagram
+  participant browser as Browser
+  participant cloudflare as Cloudflare
+  participant storage as GCloud Storage
+
+  browser->>cloudflare: GET cdn-rdc.ea-ad.ca/{content}
+  alt Cacheable
+    opt Is not in cache
+      cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+      storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+      cloudflare->>cloudflare: Add to cache
+    end
+    cloudflare->>cloudflare: Retrieve from cache
+  else Not cacheable
+    cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+    storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+  end
+  cloudflare-->>browser: cdn-rdc.ea-ad.ca/{content}
+```
+
+Our CDN domain is resolved by Cloudflare which proxies requests to the corresponding GCloud storage. This gives us:
+
+- distributed caching; potential speed boost and takes load off the cloud storage (performance and cost bonus)
+- fine grained caching rules; see configuration in the Cloudflare dashboard
+- programatic cache resets; see selective Cloudflare cache clearing step in the deploy scripts
+- easy and free HTTPS; Google storage itself only handles HTTP. Should we be concerned that the HTTPS is not end-to-end?
+  - Secrecy is not a concern, all data from the CDN is public
+  - privacy? Guess I don't actually know if Cloudflare includes initial requestor information when populating it's own cache, hm
+  - integrity is still provided for the leg of the trip between cloudflare and the client, which covers the regional/local network boxes. What threat actors will be in a hop between Google and Cloudflare _and_ be willing to risk that access doing anything that threatens integrity? Well, maybe certain network-isolated state actors, hm
 
 ### GraphQL API
 
