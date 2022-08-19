@@ -91,11 +91,44 @@ flowchart LR
   forms--Function alerts on valid submission-->slack
 ```
 
-## Detailed Component Architectures
+## Component Architectures
 
 ### Static content
 
-#### Non-exhaustive static content loading sequence sketch
+#### InfoBase CDN
+
+```mermaid
+sequenceDiagram
+  participant browser as Browser
+  participant cloudflare as Cloudflare
+  participant storage as GCloud Storage
+
+  browser->>cloudflare: GET cdn-rdc.ea-ad.ca/{content}
+  alt Cacheable
+    opt Is not in cache
+      cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+      storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+      cloudflare->>cloudflare: Add to cache
+    end
+    cloudflare->>cloudflare: Retrieve from cache
+  else Not cacheable
+    cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+    storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+  end
+  cloudflare-->>browser: cdn-rdc.ea-ad.ca/{content}
+```
+
+Our CDN domain is resolved by Cloudflare which proxies requests to the corresponding GCloud storage. This gives us:
+
+- distributed caching; potential speed boost and takes load off the cloud storage (performance and cost bonus)
+- fine grained caching rules; see configuration in the Cloudflare dashboard
+- programatic cache resets; see selective Cloudflare cache clearing step in the deploy scripts
+- easy and free HTTPS; Google storage itself only handles HTTP. Should we be concerned that the HTTPS is not end-to-end?
+  - Secrecy is not a concern, all data from the CDN is public
+  - privacy? Guess I don't actually know if Cloudflare includes initial requestor information when populating it's own cache, hm
+  - integrity is still provided for the leg of the trip between cloudflare and the client, which covers the regional/local network boxes. What threat actors will be in a hop between Google and Cloudflare _and_ be willing to risk that access doing anything that threatens integrity? Well, maybe certain network-isolated state actors, hm
+
+#### Sketch of typical static content loading sequence
 
 ```mermaid
 sequenceDiagram
@@ -151,39 +184,6 @@ Notes:
   - `app-{variant}.min.js` must never be cached. It is the entry to the deploy-specific bundle . In practice it _is_ cached at the cloudflare level for performance; cached versions are flushed via the cloudflare API at deploy-time
   - other hardcoded index html resources may have relatively short client TTLs for performance, but are also flushed from cloudflare during deploys. Tradeoff that changes to them will not immediately propogate to all users
 - `app-{variant}.min.js` needs to be as minimal as possible, it should only start the initial loading spinner and then kick off additional loading of the run time bundles. This gets the spinner going asap and makes up for the limited caching for this file
-
-#### InfoBase CDN
-
-```mermaid
-sequenceDiagram
-  participant browser as Browser
-  participant cloudflare as Cloudflare
-  participant storage as GCloud Storage
-
-  browser->>cloudflare: GET cdn-rdc.ea-ad.ca/{content}
-  alt Cacheable
-    opt Is not in cache
-      cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
-      storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
-      cloudflare->>cloudflare: Add to cache
-    end
-    cloudflare->>cloudflare: Retrieve from cache
-  else Not cacheable
-    cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
-    storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
-  end
-  cloudflare-->>browser: cdn-rdc.ea-ad.ca/{content}
-```
-
-Our CDN domain is resolved by Cloudflare which proxies requests to the corresponding GCloud storage. This gives us:
-
-- distributed caching; potential speed boost and takes load off the cloud storage (performance and cost bonus)
-- fine grained caching rules; see configuration in the Cloudflare dashboard
-- programatic cache resets; see selective Cloudflare cache clearing step in the deploy scripts
-- easy and free HTTPS; Google storage itself only handles HTTP. Should we be concerned that the HTTPS is not end-to-end?
-  - Secrecy is not a concern, all data from the CDN is public
-  - privacy? Guess I don't actually know if Cloudflare includes initial requestor information when populating it's own cache, hm
-  - integrity is still provided for the leg of the trip between cloudflare and the client, which covers the regional/local network boxes. What threat actors will be in a hop between Google and Cloudflare _and_ be willing to risk that access doing anything that threatens integrity? Well, maybe certain network-isolated state actors, hm
 
 ### GraphQL API
 
