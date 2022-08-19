@@ -95,18 +95,62 @@ flowchart LR
 
 ### Static content
 
-#### Initial load sketch
+#### Non-exhaustive static content loading sequence sketch
 
 ```mermaid
 sequenceDiagram
   participant browser as Browser at {domain + base path}/index-{variant}.html#35;{hash path}
   participant azure as IMTD Azure VM (resolves {domain + base path})
   participant cdn as InfoBase CDN
+  participant ga as Google Analytics
+  participant gf as Google Fonts
 
-  browser->>azure: GET {domain + base path}/index-{variant}.html
-  azure-->>browser: index-{variant.html}
+  browser->>azure: {domain + base path}/index-{variant}.html
+  azure-->>browser:
 
+  par index-{variant}.html resource
+    browser->>ga: Analytics and tag manager init scripts
+    ga-->>browser:
+
+    browser->>cdn: header and footer SVGs
+    cdn-->>browser:
+
+    browser->>cdn: extended-bootstrap.css
+    cdn-->>browser:
+
+    browser->>cdn: app-{variant}.min.js, JS bundle entrypoint
+    cdn-->>browser:
+  end
+
+  browser->>cdn: JS bundles for SPA init (polyfills, react + router and navigation level components, etc)
+  cdn-->>browser:
+
+  browser->>gf: Fonts
+  gf-->>browser:
+
+  browser->>cdn: "lookup" data bundle (legacy, populates core models, to be phased out at end of GraphQL port)
+  cdn-->>browser:
+
+  opt SPA run time resources, dependent on URL {hash path} location
+    browser->>cdn: Additional JS bundles
+    cdn-->>browser:
+
+    browser->>cdn: Additional SVGs
+    cdn-->>browser:
+
+    browser->>cdn: Additional data bundles (legacy, to be phased out during GraphQL port)
+    cdn-->>browser:
+  end
 ```
+
+Notes:
+
+- see the `client/build_code` webpack configuration for more on the JS bundles. Note that they include CSS and text content (from yaml files) as well
+- legacy "data bundles" come from two scripts in `client/build_code`, `copy_static_assets.js` and `write_footnote_bundles.js`
+- `index-{variant}.html` files are not refreshed as part of the standard deploy, due to their legacy management outside of our CDN (in the production case). As a result, the resources directly requested from the html entry file are hardcoded too
+  - `app-{variant}.min.js` must never be cached. It is the entry to the deploy-specific bundle . In practice it _is_ cached at the cloudflare level for performance; cached versions are flushed via the cloudflare API at deploy-time
+  - other hardcoded index html resources may have relatively short client TTLs for performance, but are also flushed from cloudflare during deploys. Tradeoff that changes to them will not immediately propogate to all users
+- `app-{variant}.min.js` needs to be as minimal as possible, it should only start the initial loading spinner and then kick off additional loading of the run time bundles. This gets the spinner going asap and makes up for the limited caching for this file
 
 #### InfoBase CDN
 
