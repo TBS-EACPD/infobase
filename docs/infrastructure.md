@@ -118,17 +118,23 @@ sequenceDiagram
   participant storage as GCloud Storage
 
   browser->>cloudflare: GET cdn-rdc.ea-ad.ca/{content}
+
   alt Cacheable
     opt Is not in cache
       cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+
       storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+
       cloudflare->>cloudflare: Add to cache
     end
+
     cloudflare->>cloudflare: Retrieve from cache
   else Not cacheable
     cloudflare->>storage: GET storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
+
     storage-->>cloudflare: storage.googleapis.com/cdn-rdc.ea-ad.ca/{content}
   end
+
   cloudflare-->>browser: cdn-rdc.ea-ad.ca/{content}
 ```
 
@@ -199,14 +205,76 @@ Notes:
   - other hardcoded index html resources may have relatively short client TTLs for performance, but are also flushed from cloudflare during deploys. Tradeoff that changes to them will not immediately propogate to all users
 - `app-{variant}.min.js` needs to be as minimal as possible, it should only start the initial loading spinner and then kick off additional loading of the run time bundles. This gets the spinner going asap and makes up for the limited caching for this file
 
-### GraphQL API
+### GraphQL API (+ batching and caching details)
+
+Lots of implementation details surfaced in this one, but I'm making sure to cover them as they may have future maintenance implications and are worth being aware of.
 
 ```mermaid
 sequenceDiagram
   participant app as App code
+  participant apollo as Apollo client
+  participant fetch as Custom Apollo fetch method
   participant api as GraphQL Google Cloud Function
   participant db as Mongo Atlas
+
+  Note right of fetch: < client side | server side >
+
+  app->>apollo: app code makes query
+
+  apollo->>apollo: Apollo checks it's session cache
+
+  opt query found in cache
+    break
+      apollo-->>app: query resolves
+    end
+  end
+
+  opt additional uncached queries in brief succession
+    app->>apollo: app code makes query
+
+    apollo->>apollo: Apollo batches queries together
+  end
+
+  apollo->>fetch: Apollo sends batched queries as a POST
+
+  fetch->>fetch: custom fetch coverts POST to GET (see notes below for details)
+
+  alt GET request found in browser cache
+    fetch->>fetch: response retrieved from browser cache
+
+  else GET request not found in browser cache
+    fetch->>api: GET request for batched queries sent to API
+
+    api->>api: custom headers on GET recognized, handled as necessary
+
+    api->>api: Apollo server unbatches and handles queries
+
+    api->>db: GraphQL query resolvers result in mongo queries
+    db-->>api: #%20;
+
+    api-->>fetch: Batched queries response
+
+    fetch->>fetch: GET response cached by browser
+  end
+
+  fetch-->>apollo: GraphQL query response
+
+  apollo->>apollo: Apollo session cache filled
+
+  apollo-->>app: individual queries resolve in app code
 ```
+
+Notes:
+
+- outside of the custom fetch, this is mostly a pretty straight forward Apollo GraphQL use case. With respect to the custom fetch layer:
+  - the end goal is making queries as GETs to leverage native HTTP caching. We can do this for all queries becase a) we never make mutation queries and b) the app data in Mongo Atlas is only modified at deploy-time. Deploying the app creates a new cloud function, with a new URL, busting the browser cache in the process
+  - it is notably at odds with Apollo batching; a call may need to be made at some point to drop either batching or the GET requests
+    - Apollo only allows batching when configured for POST requests, although converting to a GET at the fetch level and reverting that on the server side before handling it has no problem
+    - exactly which queries are batched togeth _can_ be effected by client side performance/timing, two visits to the site might result in different batch contents, which will result in misses against previously cached responses
+  - I've kicked the ball down the road on picking one over the other; until more of the app migrates to GraphQL we won't have a full picture on what is called for
+    - if most routes send lots of small queries than batching might be best; provided we can set up the apollo cache to persist to browser storage or something between sessions
+    - if there aren't too many individual queries shooting off at once, HTTP caching is more reliable than alternatives. We could even consider altering the infrastrucutre to gain a static address for our prod API and fronting it through a service like cloudflare, in which case the GET responses (with approrpaite cache busting controls) could get very nice distributed caching
+- excluded from the diagram, but GraphQL resolvers that make mongo queries likely make use of data loaders internally as an additional caching layer. As the cloud functions should be considered ephemeral, this is more about queries that may revisit the same
 
 ### Form Backend API
 
@@ -218,31 +286,43 @@ sequenceDiagram
   participant slack as Slack
 
   front->>front: FormFrontent renders with template_name prop
+
   front->>back: GET {function}/form_template?template_name={template_name}
+
   alt template_name is not valid
     back-->>front: Error code and text
+
     break
       front->>front: Render error text
     end
   else template_name is valid
     back-->>front: Form template JSON
   end
+
   front->>front: Render form from template JSON
+
   front->>front: User completes form, submits (once client side validation permits)
+
   front->>back: POST {function}/submit_form with completed template
+
   back->>back: Validate against original template
+
   alt Backend validation fails
     back-->>front: Error code and text
+
     break
       front->>front: Render error text
     end
   else Backend validation passes
     par
       back->>db: Completed form for long term storage
+
       back->>slack: Completed form for review and potential triage
+
       back-->>front: Ok
     end
   end
+
   front->>front: Render success message
 ```
 
