@@ -201,4 +201,53 @@ Notes:
 
 ### GraphQL API
 
+```mermaid
+sequenceDiagram
+  participant app as App code
+  participant api as GraphQL Google Cloud Function
+  participant db as Mongo Atlas
+```
+
 ### Form Backend API
+
+```mermaid
+sequenceDiagram
+  participant front as FormFrontend react component
+  participant back as Form Backend Google Cloud Function
+  participant db as Mongo Atlas
+  participant slack as Slack
+
+  front->>front: FormFrontent renders with template_name prop
+  front->>back: GET {function}/form_template?template_name={template_name}
+  alt template_name is not valid
+    back-->>front: Error code and text
+    break
+      front->>front: Render error text
+    end
+  else template_name is valid
+    back-->>front: Form template JSON
+  end
+  front->>front: Render form from template JSON
+  front->>front: User completes form, submits (once client side validation permits)
+  front->>back: POST {function}/submit_form with completed template
+  back->>back: Validate against original template
+  alt Backend validation fails
+    back-->>front: Error code and text
+    break
+      front->>front: Render error text
+    end
+  else Backend validation passes
+    par
+      back->>db: Completed form for long term storage
+      back->>slack: Completed form for review and potential triage
+      back-->>front: Ok
+    end
+  end
+  front->>front: Render success message
+```
+
+Notes:
+
+- the client side (via the FormFrontend component) is responsible for the forms UI. This creates a pretty strong coupling between it and the whole form_backend subrepo, which is important to maintain. Moving responsibility for rendering the forms to the service itself is an option to get this a bit better organized but not very high priority. This whole thing was always a minimum-effort side project
+- the client side validation is mainly for required and pair-required (e.g. a text input that's only required if yes anserwed on related yes/no radio) inputs
+- server side validation re-asserts the required fields and verifies response types/enum values. Outside of coding errors/desyncs with the frontend, this should always pass. It's primary purpose is to discard any (theoretical) direct garbage submissions spammed at the API
