@@ -224,9 +224,7 @@ sequenceDiagram
   apollo->>apollo: Apollo checks it's session cache
 
   opt query found in cache
-    break
-      apollo-->>app: query resolves
-    end
+    apollo-->>app: query resolves, break here
   end
 
   opt additional uncached queries in brief succession
@@ -292,9 +290,7 @@ sequenceDiagram
   alt template_name is not valid
     back-->>front: Error code and text
 
-    break
-      front->>front: Render error text
-    end
+    front->>front: Render error text, break here
   else template_name is valid
     back-->>front: Form template JSON
   end
@@ -310,9 +306,7 @@ sequenceDiagram
   alt Backend validation fails
     back-->>front: Error code and text
 
-    break
-      front->>front: Render error text
-    end
+    front->>front: Render error text, break here
   else Backend validation passes
     par
       back->>db: Completed form for long term storage
