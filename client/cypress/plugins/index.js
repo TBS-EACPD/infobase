@@ -6,7 +6,6 @@ import fs from "fs";
 
 // eslint-disable-next-line import/no-commonjs
 module.exports = (on, config) => {
-  on("task", require("@cypress/code-coverage/task")(on, config));
   on("task", {
     log(message) {
       console.log(message);
