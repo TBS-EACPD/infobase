@@ -8,6 +8,7 @@ import { textLightColor } from "src/style_constants/index";
 import text from "./Panel.yaml";
 import "./Panel.scss";
 
+//testing push
 const text_maker = create_text_maker(text);
 
 export class Panel extends React.Component {
