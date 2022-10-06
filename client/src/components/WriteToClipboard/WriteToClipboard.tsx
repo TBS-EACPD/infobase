@@ -37,7 +37,10 @@ const default_state = {
   keyboard_navigation_detected: false,
 };
 
-export class WriteToClipboard extends React.Component<WriteToClipboardProps, WriteToClipboardState> {
+export class WriteToClipboard extends React.Component<
+  WriteToClipboardProps,
+  WriteToClipboardState
+> {
   static defaultProps = WriteToClipboardDefaultProps;
 
   constructor(props: WriteToClipboardProps) {
