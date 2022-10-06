@@ -15,14 +15,33 @@ import text from "./WriteToClipboard.yaml";
 
 const text_maker = create_text_maker(text);
 
+const WriteToClipboardDefaultProps = {
+  button_description: text_maker("copy_to_clipboard"),
+  IconComponent: IconCopy,
+  icon_color: textLightColor,
+};
+type WriteToClipboardProps = typeof WriteToClipboardDefaultProps & {
+  text_to_copy: string;
+  button_class_name: string;
+};
+
+interface WriteToClipboardState {
+  is_model_open: boolean;
+  is_successfully_copied: boolean | null;
+  keyboard_navigation_detected: boolean;
+}
+
 const default_state = {
   is_model_open: false,
   is_successfully_copied: null,
   keyboard_navigation_detected: false,
 };
-export class WriteToClipboard extends React.Component {
-  constructor() {
-    super();
+
+export class WriteToClipboard extends React.Component<WriteToClipboardProps, WriteToClipboardState> {
+  static defaultProps = WriteToClipboardDefaultProps;
+
+  constructor(props: WriteToClipboardProps) {
+    super(props);
 
     this.state = default_state;
   }
@@ -115,8 +134,3 @@ export class WriteToClipboard extends React.Component {
     );
   }
 }
-WriteToClipboard.defaultProps = {
-  button_description: text_maker("copy_to_clipboard"),
-  IconComponent: IconCopy,
-  icon_color: textLightColor,
-};
