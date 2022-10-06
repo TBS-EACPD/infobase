@@ -21,13 +21,13 @@ import "./FixedPopover.scss";
 // (TODO, but likely only after we've updated to Bootstrap 4)
 
 type FixedPopoverProps = {
-  title?: string;
-  subtitle?: string;
+  title?: string | React.ReactNode;
+  subtitle?: string | React.ReactNode;
   header?: string;
-  body?: string;
+  body?: string | React.ReactNode;
   footer?: string;
   additional_dialog_class?: string;
-  auto_close_time?: number;
+  auto_close_time?: number | boolean | null;
 } & typeof FixedPopover.defaultProps;
 
 type FixedPopoverState = {
