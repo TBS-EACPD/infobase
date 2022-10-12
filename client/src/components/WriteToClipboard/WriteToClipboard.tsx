@@ -16,7 +16,7 @@ import text from "./WriteToClipboard.yaml";
 const text_maker = create_text_maker(text);
 
 const WriteToClipboardDefaultProps = {
-  button_description: text_maker("copy_to_clipboard"),
+  button_description: text_maker("copy_to_clipboard") as string,
   IconComponent: IconCopy,
   icon_color: textLightColor,
 };
