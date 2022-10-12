@@ -27,6 +27,8 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.2",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "eslint": "^8.5.0",
     "eslint-plugin-import": "^2.25.1",
     "eslint-plugin-jest": "^26.0.0",
@@ -35,5 +37,15 @@
     "husky": "^6.0.0",
     "jest-test-gen": "^1.0.1",
     "prettier": "^2.6"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "classNames": "npm:classnames@^2.3.2",
+    "from": "^0.1.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
+    "react-responsive": "^9.0.0",
+    "redux": "^4.2.0"
   }
 }

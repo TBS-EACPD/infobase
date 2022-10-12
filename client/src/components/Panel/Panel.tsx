@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classNames from "classNames";
 import React from "react";
 
 import { create_text_maker } from "src/models/text";
@@ -8,11 +8,24 @@ import { textLightColor } from "src/style_constants/index";
 import text from "./Panel.yaml";
 import "./Panel.scss";
 
+
+interface PanelState {
+  isOpen: boolean;
+}
+
 //testing push
+interface PanelProps {
+  section: React.ReactNode;
+  allowOverflow: boolean;
+  title: string;
+  otherHeaderContent: string;
+  children: React.ReactNode;
+}
+
 const text_maker = create_text_maker(text);
 
-export class Panel extends React.Component {
-  constructor(props) {
+export class Panel extends React.Component<PanelProps, PanelState> {
+  constructor(props: PanelProps) {
     super(props);
     this.state = {
       isOpen: true,

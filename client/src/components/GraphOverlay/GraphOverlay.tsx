@@ -11,9 +11,15 @@ import { hide_graph_overlay } from "src/InfoBase/AppState";
 import text from "./GraphOverlay.yaml";
 import "./GraphOverlay.scss";
 
+interface GraphOverlayProps {
+  children: React.ReactNode;
+  is_showing_graph_overlay: boolean;
+  hide_graph_overlay: React.MouseEventHandler;
+
+}
 const { TM, text_maker } = create_text_maker_component(text);
 
-class _GraphOverlay extends React.Component {
+class _GraphOverlay extends React.Component<GraphOverlayProps> {
   render() {
     const { children, is_showing_graph_overlay, hide_graph_overlay } =
       this.props;
@@ -54,11 +60,11 @@ class _GraphOverlay extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   is_showing_graph_overlay: state.app.is_showing_graph_overlay,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   hide_graph_overlay: () => dispatch(hide_graph_overlay()),
 });
 
