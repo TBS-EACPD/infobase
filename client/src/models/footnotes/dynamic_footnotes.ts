@@ -22,7 +22,27 @@ export const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
   doc_type: "drr",
   year: run_template("{{pa_last_year}}"),
   late_results_orgs: [] as string[],
-  late_resources_orgs: [] as string[],
+  late_resources_orgs: [
+    "297",
+    "114",
+    "117",
+    "118",
+    "125",
+    "127",
+    "130",
+    "135",
+    "138",
+    "140",
+    "150",
+    "152",
+    "230",
+    "250",
+    "278",
+    "280",
+    "282",
+    "345",
+    "326",
+  ] as string[],
 };
 
 const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
