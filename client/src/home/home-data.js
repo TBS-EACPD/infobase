@@ -68,14 +68,17 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "quick_link_gov_spending",
+    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
+    is_new: "true",
+  },
+  {
     text_key: "quick_link_service_inventory_2020",
     href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
-    is_new: "true",
   },
   {
     text_key: "covid_expenditures_estimated_exp_2022",
     href: "#orgs/gov/gov/infograph/covid/.-.-(panel_key.-.-'covid_expenditures_panel)",
-    is_new: "true",
   },
   {
     text_key: "supps_a",
@@ -96,18 +99,6 @@ const featured_content_items = _.compact([
   {
     text_key: "quick_link_people_2021",
     href: "#infographic/gov/gov/people",
-  },
-  {
-    text_key: "quick_link_gov_spending",
-    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
-  },
-  {
-    text_key: "quick_link_spending_by_program",
-    href: "#rpb/.-.-(table.-.-'programSpending)",
-  },
-  {
-    text_key: "quick_link_ftes_by_program",
-    href: "#rpb/.-.-(table.-.-'programFtes)",
   },
 ]);
 
