@@ -20,8 +20,8 @@ pa_last_year_5:
 
 # should always be in-sync with pa_last_year?
 pa_last_year_planned:
-  en: 2020-21
-  fr: 2020-2021
+  en: 2021-22
+  fr: 2021-2022
 
 est_in_year:
   en: 2022-23
