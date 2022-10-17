@@ -26,7 +26,7 @@ const PinnedFAQDefaultProps = {
 
 type PinnedFAQProps = typeof PinnedFAQDefaultProps & {
   q_a_key_pairs: Array<Array<string>>;
-  TM: React.ReactNode;
+  TM: React.ElementType;
 };
 
 export class PinnedFAQ extends React.Component<PinnedFAQProps> {
