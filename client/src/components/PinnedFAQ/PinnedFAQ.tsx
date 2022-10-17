@@ -18,7 +18,20 @@ import { secondaryColor } from "src/style_constants/colors.interop.scss";
 export const SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY =
   "user_enabled_pinning_key_concepts";
 
-export class PinnedFAQ extends React.Component {
+const PinnedFAQDefaultProps = {
+  background_color: secondaryColor,
+  is_initially_expanded: false,
+  subject: Gov.instance,
+};
+
+type PinnedFAQProps = typeof PinnedFAQDefaultProps & {
+  q_a_key_pairs: Array<Array<string>>;
+  TM: React.ReactNode;
+};
+
+export class PinnedFAQ extends React.Component<PinnedFAQProps> {
+  static PinnedFAQProps = PinnedFAQDefaultProps;
+
   render() {
     const {
       q_a_key_pairs,
@@ -62,8 +75,3 @@ export class PinnedFAQ extends React.Component {
     );
   }
 }
-PinnedFAQ.defaultProps = {
-  background_color: secondaryColor,
-  is_initially_expanded: false,
-  subject: Gov.instance,
-};
