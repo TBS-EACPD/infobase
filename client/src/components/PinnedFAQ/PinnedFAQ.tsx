@@ -25,7 +25,7 @@ const PinnedFAQDefaultProps = {
 };
 
 type PinnedFAQProps = typeof PinnedFAQDefaultProps & {
-  q_a_key_pairs: Array<Array<string>>;
+  q_a_key_pairs: string[][];
   TM: React.ElementType;
 };
 
