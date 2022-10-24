@@ -210,14 +210,10 @@ export const declare_single_service_standards_panel = () =>
           .sort()
           .value();
 
-        const footnotes = _.concat(
+        let footnotes = _.concat(
           create_fake_footnote({
             topic_keys: ["SERVICE_STANDARDS"],
             text: text_maker("new_standards_data"),
-          }),
-          create_fake_footnote({
-            topic_keys: ["SERVICE_STANDARDS"],
-            text: text_maker("IRCC_hotfix"),
           }),
           _.chain(standards)
             .map(
@@ -231,6 +227,16 @@ export const declare_single_service_standards_panel = () =>
             .filter()
             .value()
         );
+
+        if (subject.id === "1491") {
+          footnotes = _.concat(
+            footnotes,
+            create_fake_footnote({
+              topic_keys: ["SERVICE_STANDARDS"],
+              text: text_maker("IRCC_hotfix"),
+            })
+          );
+        }
 
         return (
           <InfographicPanel
