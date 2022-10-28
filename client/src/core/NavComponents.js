@@ -245,7 +245,7 @@ const LateDrrFteResources = () => {
       {
         {
           en: "The latest actual FTE values do not include values from the organizations listed below, as their data is not yet available. Updates will follow.",
-          fr: "Dépenses planifiées des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
+          fr: "Les dernières valeurs ETP réelles des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.",
         }[lang]
       }
       <MultiColumnList
