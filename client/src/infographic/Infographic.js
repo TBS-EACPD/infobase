@@ -522,6 +522,10 @@ class InfographicRoute extends React.Component {
       ? active_bubble_id
       : null;
 
+    const bubble_title = _.find(get_bubble_defs(subject), {
+      id: active_bubble_id,
+    }).title;
+
     const breadcrumbs = _.chain(
       (() => {
         switch (subject_type) {
@@ -551,7 +555,7 @@ class InfographicRoute extends React.Component {
           {parent_subj.name}
         </a>
       ))
-      .concat(subject.name)
+      .concat(subject.name, bubble_title)
       .value();
 
     const desc_key = {
