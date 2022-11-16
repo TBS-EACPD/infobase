@@ -382,6 +382,24 @@ const drr_docs = build_doc_info_objects("drr", [
     late_results_orgs: [],
     late_resources_orgs: [],
   },
+  {
+    year_short: "2021",
+    resource_years: ["{{pa_last_year}}"],
+    doc_url_en: "DRR_TODO",
+    doc_url_fr: "DRR_TODO",
+    late_results_orgs: [
+      "46",
+      "118",
+      "123",
+      "209",
+      "305",
+      "326",
+      "130",
+      "278",
+      "345",
+    ],
+    late_resources_orgs: [],
+  },
 ]);
 
 const dp_docs = build_doc_info_objects("dp", [
