@@ -99,6 +99,33 @@ const tooltips_by_topic = {
       ),
     },
     {
+      fiscal_years: [2022],
+      subject_ids: ["*"],
+      topic_ids: [
+        "COV049",
+        "COV210",
+        "COV219",
+        "COV202",
+        "COV082",
+        "COV032",
+        "COV125",
+        "COV045",
+        "COV117",
+        "COV215",
+        "COV145",
+        "COV041",
+        "COV004",
+        "COV134",
+        "COV118",
+        "COV112",
+        "COV122",
+        "COV211",
+      ],
+      tooltip: (
+        <TM k="covid_estimates_2021_supps_b_2020_full_reprofile_tooltip" />
+      ),
+    },
+    {
       fiscal_years: [2021],
       subject_ids: ["*"],
       topic_ids: [
