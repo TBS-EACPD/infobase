@@ -6,16 +6,14 @@ covid_expenditures_above_tab_footnote_list:
     * {{{gt "covid_above_tab_limited_measure_note"}}}
     * All data reported to TBS by organizations can be found on {{ext_link "Open Data" "https://open.canada.ca/data/en/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
       {{gt "covid_above_tab_data_org_websites_note"}}
-    * Reported data has not been audited. A reconciliation of the estimated expenditures will be conducted at year end to align with final
-      expenditures reported in the Public Accounts of Canada {{next_year}} which will likely be tabled in Parliament in Fall {{next_year}}.
+    * Reported data have not been audited. Year-end adjustments are submitted by organizations after the end of the fiscal year to align with final expenditures reported in the {{selected_year}} Public Accounts of Canada.
   fr: |
     * Compte tenu du contexte extraordinaire de la pandémie, le Secrétariat du Conseil du Trésor (SCT) a entrepris de recueillir des données
       sur les dépenses auprès des organisations gouvernementales.
     * {{{gt "covid_above_tab_limited_measure_note"}}}
     * Toutes les données fournies au SCT par les organisations se trouve sur {{ext_link "Données ouvertes" "https://ouvert.canada.ca/data/fr/dataset/9fa1da9a-8c0f-493e-b207-0cc95889823e"}}.
       {{gt "covid_above_tab_data_org_websites_note"}}
-    * Les données déclarées n'ont pas été vérifiées. Un rapprochement des dépenses estimées sera effectué à la fin de l’exercice pour qu'elles
-      concordent avec le calcul définitif des dépenses finales déclarée dans les Comptes publics du Canada 2021, qui seront probablement déposés au Parlement à l'automne 2021.
+    * Les données déclarées n'ont pas été vérifiées. Les organisations doivent présenter leurs rajustements de fin d'exercice une fois l'exercice terminé de manière à ce que leurs dépenses finales correspondent à celles figurants dans les Comptes publics du Canada {{selected_year}}.
     
 #####
 # GARBAGE ALERT: thanks to some last minute rewrites, this panel's pre-2021-22 text is a bit of a hash, tells a narative that only makese sense
