@@ -71,6 +71,12 @@ covid_estimates_2021_supps_a_2020_full_reprofile_tooltip:
     Le montant inscrit au Budget supplémentaire des dépenses A a été approuvée en 2020-2021 mais a ensuite été reporté à 2021-2022.
     Ces autorisations votées pour les montants du Budget supplémentaire des dépenses A de 2020-2021 seront inscrites en tant qu’affectations bloquées dans les Comptes Publics du 2021.
 
+covid_estimates_2021_supps_b_2020_full_reprofile_tooltip:
+  transform: [markdown]
+  en: |
+    The Supp. Estimates B amount was originally approved in 2021-22, but has subsequently been reprofiled to 2022-23.
+  fr: |
+    Le montant inscrit au Budget supp. B a été approuvée en 2021-2022 mais a ensuite été reporté à 2022-2023.
 
 covid_supps_est_doc_template:
   transform: [handlebars]
