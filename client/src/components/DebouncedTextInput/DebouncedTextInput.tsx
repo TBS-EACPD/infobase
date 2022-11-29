@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import _ from "lodash";
+import type { ChangeEvent } from "react";
 import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
@@ -32,7 +33,7 @@ class DebouncedTextInput extends React.Component<DebouncedTextInputProps> {
       (event) => updateCallback(event.target.value),
       debounceTime
     );
-    const handle_change = (event) => {
+    const handle_change = (event: ChangeEvent<HTMLInputElement>) => {
       event.persist();
       this.debounced_callback(event);
     };
