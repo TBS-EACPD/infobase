@@ -4,7 +4,19 @@ import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
 
-class DebouncedTextInput extends React.Component {
+const DebouncedTextInputDefaultProps = {
+  debounceTime: 500,
+  inputClassName: "input-lg",
+};
+type DebouncedTextInputProps = typeof DebouncedTextInputDefaultProps & {
+  a11y_label?: string;
+  placeHolder: string;
+  defaultValue: string;
+  updateCallback: (search_value: string) => void;
+  style?: React.CSSProperties;
+};
+
+class DebouncedTextInput extends React.Component<DebouncedTextInputProps> {
   render() {
     const {
       a11y_label,
@@ -44,10 +56,5 @@ class DebouncedTextInput extends React.Component {
     !_.isUndefined(this.debounced_callback) && this.debounced_callback.cancel();
   }
 }
-
-DebouncedTextInput.defaultProps = {
-  debounceTime: 500,
-  inputClassName: "input-lg",
-};
 
 export { DebouncedTextInput };
