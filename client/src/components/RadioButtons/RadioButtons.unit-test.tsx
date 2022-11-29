@@ -1,9 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { FAILSAFE_SCHEMA } from "js-yaml";
 import React from "react";
-
-import { with_console_error_silenced } from "src/testing_utils";
-
 import { RadioButtons } from "./RadioButtons";
 
 const testing_default = {
