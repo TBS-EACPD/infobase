@@ -49,8 +49,7 @@ else
     split-window -v \; \
     set -p @manual_pane_title "GQL Types Codegen" \; \
     send-keys 'cd client' C-m \; \
-    send-keys 'while true; do sleep 10; curl -f http://localhost:1337/.well-known/apollo/server-health || continue && break; done' C-m \; \
-    send-keys 'while true; do npm run gqlgen:watch; sleep 10; done' C-m \; \
+    send-keys 'while true; do sleep 10; curl -f http://localhost:1337/.well-known/apollo/server-health || continue && break; done; while true; do npm run gqlgen:watch; sleep 10; done' C-m \; \
     split-window -h \; \
     set -p @manual_pane_title "HTTP server" \; \
     send-keys 'cd client' C-m \; \
