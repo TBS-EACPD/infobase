@@ -214,7 +214,7 @@ export class PinnedContent extends React.Component {
       this.props.children
     ) : (
       //not sure that this is a valid way to deal with local_storage_name 
-      //additionally children is too 
+      //additionally local_storage_name is vague in whether it is required of not
       <NonA11yPinnedContent local_storage_name={""} {...this.props} />
     );
   }
