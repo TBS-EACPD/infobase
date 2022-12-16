@@ -12,27 +12,43 @@ import { IconPin, IconUnpin } from "src/icons/icons";
 import { backgroundColor } from "src/style_constants/index";
 
 import text from "./PinnedContent.yaml";
+import { defaultProps } from "@nivo/bar";
+
+const NonA11yPinnedContentDefaultProps = {
+  default_pin_state: has_local_storage
+}
+
+interface NonA11yPinnedContentState {
+  is_pinned_local_storage_mirror: any;
+}
+
+interface NonA11yPinnedContentProps {
+  local_storage_name: string;
+  default_pin_state: boolean;
+  children: React.ReactNode;
+}
 
 const text_maker = create_text_maker(text);
 
-export const get_pinned_content_local_storage = (local_storage_name) => {
+export const get_pinned_content_local_storage = (local_storage_name: string) => {
   try {
     return has_local_storage && local_storage_name
-      ? JSON.parse(localStorage.getItem(local_storage_name))
+    // local_storage_name)! only works if for sure local_storage_name can't be null
+      ?  JSON.parse(localStorage.getItem(local_storage_name)!)
       : null;
   } catch {
     return null;
   }
 };
-export const set_pinned_content_local_storage = (local_storage_name, value) => {
+export const set_pinned_content_local_storage = (local_storage_name: string, value: string) => {
   has_local_storage &&
     local_storage_name &&
     localStorage.setItem(local_storage_name, value);
 };
 
 const get_is_pinned = (
-  local_storage_name,
-  default_pin_state,
+  local_storage_name: string,
+  default_pin_state: boolean,
   is_pinned_local_storage_mirror = null
 ) => {
   if (has_local_storage && local_storage_name) {
@@ -45,8 +61,13 @@ const get_is_pinned = (
   }
 };
 
-class NonA11yPinnedContent extends React.Component {
-  constructor(props) {
+class NonA11yPinnedContent extends React.Component<NonA11yPinnedContentProps, NonA11yPinnedContentState>{
+  
+  static defaultProps = NonA11yPinnedContentDefaultProps;
+  placeHolderRef = React.createRef<HTMLDivElement>();
+  contentRef = React.createRef<HTMLDivElement>();
+
+  constructor(props: NonA11yPinnedContentProps) {
     super(props);
 
     this.state = {
@@ -68,14 +89,16 @@ class NonA11yPinnedContent extends React.Component {
     );
   }
 
-  set_is_pinned = (is_pinned) => {
+  set_is_pinned = (is_pinned:boolean) => {
+    //set_pinned_content_local_storage requires a string as variable (setItem(string, string)) 
+    //but is pinned is used as a boolean in line 99 --> this.set_is_pinned(!this.is_pinned);
     set_pinned_content_local_storage(this.props.local_storage_name, is_pinned);
     this.setState({ is_pinned_local_storage_mirror: is_pinned });
   };
   click_pin = () => {
     this.set_is_pinned(!this.is_pinned);
   };
-  tab_over_pin = (e) => {
+  tab_over_pin = (e: { key: string; }) => {
     // keyboard pin presses generally handeled by the onClick, since it's a button; special case where we make tabbing through the pin button
     // specifically disable pinning. Otherwise, the pinned content drawer will follow the screen down and likely cover whatever next takes tab focus
     if (e.key === "Tab") {
@@ -108,18 +131,18 @@ class NonA11yPinnedContent extends React.Component {
                     {({ targetRef: placeHolderRef }) => (
                       <>
                         <div
-                          ref={placeHolderRef}
+                          ref={this.placeHolderRef}
                           style={{
                             width: "100%",
                             height: should_pin
-                              ? contentRef.current?.offsetHeight
+                              ? this.contentRef.current?.offsetHeight
                               : "0px",
                           }}
                         />
                         <div
-                          ref={contentRef}
+                          ref={this.contentRef}
                           style={{
-                            width: placeHolderRef.current?.offsetWidth,
+                            width: this.placeHolderRef.current?.offsetWidth,
                             ...(should_pin && {
                               position: "fixed",
                               top: 0,
@@ -180,16 +203,19 @@ class NonA11yPinnedContent extends React.Component {
     );
   }
 }
-NonA11yPinnedContent.defaultProps = {
+
+/**NonA11yPinnedContent.defaultProps = {
   default_pin_state: has_local_storage,
-};
+};**/
 
 export class PinnedContent extends React.Component {
   render() {
     return is_a11y_mode ? (
       this.props.children
     ) : (
-      <NonA11yPinnedContent {...this.props} />
+      //not sure that this is a valid way to deal with local_storage_name 
+      //additionally children is too 
+      <NonA11yPinnedContent local_storage_name={""} {...this.props} />
     );
   }
 }
