@@ -24,4 +24,4 @@ covid_intro_exp:
     on COVID-19 ERP measures in **{{fmt_year_to_fiscal_year selected_year}}**.
   fr: |
     En date du **{{date_last_updated_text}}**, les organisations fédérales ont **estimé à {{fmt_compact1_written gov_covid_expenditures_in_year}}
-    le total des dépenses** au titre des mesures du PIE pour 2020-2021.
+    le total des dépenses** au titre des mesures du PIE pour **{{fmt_year_to_fiscal_year selected_year}}**.
