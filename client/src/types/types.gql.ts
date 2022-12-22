@@ -14,8 +14,6 @@ export type Scalars = {
 
 export type AllDocResultCount = {
   __typename?: 'AllDocResultCount';
-  dp21_indicators?: Maybe<Scalars['Int']>;
-  dp21_results?: Maybe<Scalars['Int']>;
   dp22_indicators?: Maybe<Scalars['Int']>;
   dp22_results?: Maybe<Scalars['Int']>;
   drr18_indicators_future?: Maybe<Scalars['Int']>;

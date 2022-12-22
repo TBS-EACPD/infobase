@@ -5,7 +5,6 @@ const current_doc_keys_ordered_by_time_period = [
   "drr19",
   "drr20",
   "drr21",
-  "dp21",
   "dp22",
 ];
 
