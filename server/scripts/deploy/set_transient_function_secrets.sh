@@ -30,7 +30,7 @@ export PROJECT=$(lpass show PROD_API_PROJECT_ID --notes)
 touch $scratch/envs.yaml
 echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml
 
-export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING_3 --notes)
+export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING --notes)
 export MDB_USERNAME=$(lpass show MDB_READ_USER --notes)
 export MDB_PW=$(lpass show MDB_READ_PW --notes)
 echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> $scratch/envs.yaml

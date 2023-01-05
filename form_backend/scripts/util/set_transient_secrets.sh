@@ -36,7 +36,7 @@ echo "USE_REMOTE_DB: '$USE_REMOTE_DB'" >> $scratch/envs.yaml
 echo "CURRENT_SHA: '$CURRENT_SHA'" >> $scratch/envs.yaml
 
 export MDB_NAME=$(lpass show FORM_BACKEND_MDB_NAME --notes)
-export MDB_CONNECT_STRING=$(lpass show FORM_BACKEND_MDB_CONNECT_STRING_3 --notes)
+export MDB_CONNECT_STRING=$(lpass show FORM_BACKEND_MDB_CONNECT_STRING --notes)
 export MDB_USERNAME=$(lpass show FORM_BACKEND_MDB_USER --notes)
 export MDB_PW=$(lpass show FORM_BACKEND_MDB_PW --notes)
 echo "MDB_NAME: '$MDB_NAME'" >> $scratch/envs.yaml

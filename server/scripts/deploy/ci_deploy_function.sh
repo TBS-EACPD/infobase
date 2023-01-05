@@ -3,7 +3,7 @@ set -e
 
 touch ./envs.yaml
 echo "MDB_NAME: '$MDB_NAME'" >> ./envs.yaml
-echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING_3'" >> ./envs.yaml
+echo "MDB_CONNECT_STRING: '$MDB_CONNECT_STRING'" >> ./envs.yaml
 echo "MDB_USERNAME: '$MDB_USERNAME'" >> ./envs.yaml
 echo "MDB_PW: '$MDB_PW'" >> ./envs.yaml
 
