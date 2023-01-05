@@ -11,6 +11,6 @@ function cleanup {
 }
 trap cleanup EXIT
 
-export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING_3 --notes)
+export MDB_CONNECT_STRING=$(lpass show MDB_CONNECT_STRING --notes)
 export MDB_USERNAME=$(lpass show MDB_WRITE_USER --notes)
 export MDB_PW=$(lpass show MDB_WRITE_PW --notes)
