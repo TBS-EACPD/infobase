@@ -22,7 +22,8 @@
   "authors": [
     "Alex Cousineau-Leduc",
     "Stephen O'Neil",
-    "Taewan Kang"
+    "Taewan Kang",
+    "Stéphane Rancourt"
   ],
   "license": "MIT",
   "devDependencies": {
