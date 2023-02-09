@@ -5,7 +5,7 @@ import React from "react";
 import "./FancyUL.scss";
 
 interface FancyULProps {
-  className: string;
+  className?: string;
   title?: string;
   TitleComponent?: React.ComponentType;
   children: React.ReactNode[];
