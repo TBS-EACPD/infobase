@@ -16,21 +16,17 @@ import "./Panel.scss";
 
 const text_maker = create_text_maker(text);
 
-
-
-
 type PanelProps = {
   isOpen: boolean;
   allowOverflow: boolean;
   title: string;
   otherHeaderContent: JSX.Element;
-}
+};
 
 interface isOpenInterface {
   isOpen: boolean;
 }
-export class Panel extends React.Component<PanelProps,isOpenInterface> {
-  
+export class Panel extends React.Component<PanelProps, isOpenInterface> {
   constructor(props: PanelProps) {
     super(props);
     this.state = {
