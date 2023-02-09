@@ -4,28 +4,24 @@ import React from "react";
 import { FancyUL } from "src/components/FancyUL/FancyUL";
 
 import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
-import { is_subject_class, is_subject_instance,  } from "src/models/subjects";
+import { is_subject_class, is_subject_instance } from "src/models/subjects";
 import { create_text_maker } from "src/models/text";
-import type {SubjectClassInstance} from 'src/models/subjects';
-import type {TopicKey} from "src/models/footnotes/footnotes";
+
 import { sanitized_dangerous_inner_html } from "src/general_utils";
 
 import footnote_list_text from "./FootnoteList.yaml";
 import "./FootnoteList.scss";
-import { FootNoteDef } from "src/models/footnotes/footnotes";
-
-
 
 const text_maker = create_text_maker([footnote_list_text, footnote_topic_text]);
 
-const is_real_footnote = ({subject, topic_keys}: {subject: SubjectClassInstance, topic_keys: TopicKey[]}) =>
-  _.isObject(subject) && !_.isEmpty(topic_keys)? true : false;
+const is_real_footnote = ({ subject, topic_keys }) =>
+  _.isObject(subject) && !_.isEmpty(topic_keys);
 
-const FootnoteListSubtitle = ({ title }: {title: string}) => (
+const FootnoteListSubtitle = ({ title }) => (
   <div className="footnote-list__subtitle">{title}</div>
 );
 
-const SubjectSubtitle = ({ subject }: {subject: SubjectClassInstance}) => {
+const SubjectSubtitle = ({ subject }) => {
   if (is_subject_instance(subject) && !_.isUndefined(subject.name)) {
     return (
       <FootnoteListSubtitle
@@ -53,18 +49,18 @@ const SubjectSubtitle = ({ subject }: {subject: SubjectClassInstance}) => {
   }
 };
 
-const years_to_plain_text = (year1:number, year2:number) => {
+const years_to_plain_text = (year1, year2) => {
   if (year1 && year2 && year1 !== year2) {
     return text_maker("footnote_years", { year1, year2 });
   } else if (year1 || year2) {
-    const year: number = year1 || year2;
+    const year = year1 || year2;
     return text_maker("footnote_year", { year });
   }
 };
-const topic_keys_to_plain_text = (topic_keys: TopicKey[]) =>
+const topic_keys_to_plain_text = (topic_keys) =>
   _.chain(topic_keys).map(text_maker).sort().uniq().value();
 
-const FootnoteMeta = ({ meta_items }: {meta_items: any}) => (
+const FootnoteMeta = ({ meta_items }) => (
   <div className={"footnote-list__meta_container"} aria-hidden={true}>
     {_.map(meta_items, (meta_item_text, ix) => (
       <div key={ix} className="footnote-list__meta_item tag-badge">
@@ -74,11 +70,11 @@ const FootnoteMeta = ({ meta_items }: {meta_items: any}) => (
   </div>
 );
 
-const FootnoteSublist = ({ footnotes }: {footnotes: any}) => (
+const FootnoteSublist = ({ footnotes }) => (
   <ul className="list-unstyled">
     {_.chain(footnotes)
       .uniqBy("text")
-      .map(({ text, year1, year2, topic_keys, subject }: {text: string, year1: number, year2: number, topic_keys: TopicKey[], subject: SubjectClassInstance}, ix) => (
+      .map(({ text, year1, year2, topic_keys, subject }, ix) => (
         <li key={`footnote_${ix}`} className={"footnote-list__item"}>
           <div
             className="footnote-list__note"
@@ -102,18 +98,18 @@ const FootnoteSublist = ({ footnotes }: {footnotes: any}) => (
 
 // sortBy is stable, so sorting by properties in reverse importance order results in the desired final ordering
 // note: not sorting by subject, expect that sorting/grouping to happen elsewhere, this is just footnote metadata sorting
-const sort_footnotes = (footnotes: any) =>
+const sort_footnotes = (footnotes) =>
   _.chain(footnotes)
-    .sortBy(({ topic_keys }: {topic_keys:TopicKey[]}) =>
+    .sortBy(({ topic_keys }) =>
       _.chain(topic_keys).thru(topic_keys_to_plain_text).join(" ").value()
     )
     .sortBy(({ topic_keys }) => -topic_keys.length)
-    .sortBy(({ year1, year2 }: {year1: number,year2: number}) => -(year2 || year1 || Infinity))
+    .sortBy(({ year1, year2 }) => -(year2 || year1 || Infinity))
     .value();
 
-const group_and_sort_footnotes = (footnotes: any) =>
+const group_and_sort_footnotes = (footnotes) =>
   _.chain(footnotes)
-    .groupBy(({ subject }: {subject: SubjectClassInstance}) => {
+    .groupBy(({ subject }) => {
       const { id, name, subject_type } = subject;
 
       const subject_type_sort_importance = (() => {
@@ -142,7 +138,7 @@ const group_and_sort_footnotes = (footnotes: any) =>
     .map(([grouped_footnotes]) => sort_footnotes(grouped_footnotes))
     .value();
 
-const FootnoteList = ({ footnotes }: {footnotes: any[]}) => {
+const FootnoteList = ({ footnotes }) => {
   const { true: real_footnotes, false: fake_footnotes } = _.groupBy(
     footnotes,
     is_real_footnote
