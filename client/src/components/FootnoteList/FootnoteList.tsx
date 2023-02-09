@@ -4,14 +4,15 @@ import React from "react";
 import { FancyUL } from "src/components/FancyUL/FancyUL";
 
 import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
-import { is_subject_class, is_subject_instance, SubjectClassInstance } from "src/models/subjects";
+import { is_subject_class, is_subject_instance,  } from "src/models/subjects";
 import { create_text_maker } from "src/models/text";
-
+import type {SubjectClassInstance} from 'src/models/subjects';
+import type {TopicKey} from "src/models/footnotes/footnotes";
 import { sanitized_dangerous_inner_html } from "src/general_utils";
 
 import footnote_list_text from "./FootnoteList.yaml";
 import "./FootnoteList.scss";
-import { FootNoteDef, TopicKey } from "src/models/footnotes/footnotes";
+import { FootNoteDef } from "src/models/footnotes/footnotes";
 
 
 
