@@ -7,11 +7,27 @@ import { textLightColor } from "src/style_constants/index";
 
 import text from "./Panel.yaml";
 import "./Panel.scss";
+import { StatelessDetails } from "../Details/Details";
+import { Concast } from "@apollo/client/utilities";
 
 const text_maker = create_text_maker(text);
 
-export class Panel extends React.Component {
-  constructor(props) {
+
+
+
+type PanelProps = {
+  isOpen: boolean;
+  allowOverflow: boolean;
+  title: string;
+  otherHeaderContent: JSX.Element;
+}
+
+interface isOpenInterface {
+  isOpen: boolean;
+}
+export class Panel extends React.Component<PanelProps,isOpenInterface> {
+  
+  constructor(props: PanelProps) {
     super(props);
     this.state = {
       isOpen: true,
