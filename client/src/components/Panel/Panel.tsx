@@ -1,4 +1,5 @@
 import classNames from "classnames";
+
 import React from "react";
 
 import { create_text_maker } from "src/models/text";
@@ -6,9 +7,12 @@ import { create_text_maker } from "src/models/text";
 import { textLightColor } from "src/style_constants/index";
 
 import text from "./Panel.yaml";
+
 import "./Panel.scss";
-import { StatelessDetails } from "../Details/Details";
-import { Concast } from "@apollo/client/utilities";
+
+//import { StatelessDetails } from "../Details/Details";
+
+//import { Concast } from "@apollo/client/utilities";
 
 const text_maker = create_text_maker(text);
 
