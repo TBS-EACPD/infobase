@@ -17,10 +17,10 @@ import "./Panel.scss";
 const text_maker = create_text_maker(text);
 
 type PanelProps = {
-  isOpen: boolean;
   allowOverflow: boolean;
   title: string;
   otherHeaderContent: JSX.Element;
+  children: React.ReactNode;
 };
 
 interface isOpenInterface {
