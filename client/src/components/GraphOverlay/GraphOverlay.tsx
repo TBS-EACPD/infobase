@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
+
 import { connect } from "react-redux";
+
 import MediaQuery from "react-responsive";
 
 import { create_text_maker_component } from "src/components/misc_util_components";
@@ -9,11 +11,23 @@ import { IconRotatePhone, IconExpandWindowWidth } from "src/icons/icons";
 import { hide_graph_overlay } from "src/InfoBase/AppState";
 
 import text from "./GraphOverlay.yaml";
+
 import "./GraphOverlay.scss";
+
+//import { MouseEventHandler } from "@nivo/pie";
+
+//import { App } from "src/InfoBase/App";
+
+//import { lang } from "src/core/injected_build_constants";
 
 const { TM, text_maker } = create_text_maker_component(text);
 
-class _GraphOverlay extends React.Component {
+interface GraphOverlayProps {
+  is_showing_graph_overlay: boolean,
+  hide_graph_overlay: React.MouseEventHandler<HTMLButtonElement>,
+}
+
+class _GraphOverlay extends React.Component<GraphOverlayProps> {
   render() {
     const { children, is_showing_graph_overlay, hide_graph_overlay } =
       this.props;
@@ -54,11 +68,12 @@ class _GraphOverlay extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = (state: { app: { is_showing_graph_overlay: boolean; }; }) => ({
   is_showing_graph_overlay: state.app.is_showing_graph_overlay,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: (arg0: { type: string; }) => Record<string,unknown>) => ({
   hide_graph_overlay: () => dispatch(hide_graph_overlay()),
 });
 
@@ -66,3 +81,4 @@ export const GraphOverlay = connect(
   mapStateToProps,
   mapDispatchToProps
 )(_GraphOverlay);
+
