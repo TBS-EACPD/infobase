@@ -23,8 +23,8 @@ import "./GraphOverlay.scss";
 const { TM, text_maker } = create_text_maker_component(text);
 
 interface GraphOverlayProps {
-  is_showing_graph_overlay: boolean,
-  hide_graph_overlay: React.MouseEventHandler<HTMLButtonElement>,
+  is_showing_graph_overlay: boolean;
+  hide_graph_overlay: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 class _GraphOverlay extends React.Component<GraphOverlayProps> {
@@ -68,12 +68,15 @@ class _GraphOverlay extends React.Component<GraphOverlayProps> {
   }
 }
 
-
-const mapStateToProps = (state: { app: { is_showing_graph_overlay: boolean; }; }) => ({
+const mapStateToProps = (state: {
+  app: { is_showing_graph_overlay: boolean };
+}) => ({
   is_showing_graph_overlay: state.app.is_showing_graph_overlay,
 });
 
-const mapDispatchToProps = (dispatch: (arg0: { type: string; }) => Record<string,unknown>) => ({
+const mapDispatchToProps = (
+  dispatch: (arg0: { type: string }) => Record<string, unknown>
+) => ({
   hide_graph_overlay: () => dispatch(hide_graph_overlay()),
 });
 
@@ -81,4 +84,3 @@ export const GraphOverlay = connect(
   mapStateToProps,
   mapDispatchToProps
 )(_GraphOverlay);
-
