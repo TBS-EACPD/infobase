@@ -1,18 +1,26 @@
 import _ from "lodash";
+
 import React from "react";
 
 import { FancyUL } from "src/components/FancyUL/FancyUL";
 
 import footnote_topic_text from "src/models/footnotes/footnote_topics.yaml";
+
+import type {FootNoteDef, TopicKey} from "src/models/footnotes/footnotes";
+
 import { is_subject_class, is_subject_instance,  } from "src/models/subjects";
-import { create_text_maker } from "src/models/text";
+
 import type {SubjectClassInstance} from 'src/models/subjects';
-import type {TopicKey} from "src/models/footnotes/footnotes";
+
+import { create_text_maker } from "src/models/text";
+
 import { sanitized_dangerous_inner_html } from "src/general_utils";
 
 import footnote_list_text from "./FootnoteList.yaml";
+
 import "./FootnoteList.scss";
-import { FootNoteDef } from "src/models/footnotes/footnotes";
+
+//import { FootNoteDef } from "src/models/footnotes/footnotes";
 
 
 
@@ -64,7 +72,7 @@ const years_to_plain_text = (year1:number, year2:number) => {
 const topic_keys_to_plain_text = (topic_keys: TopicKey[]) =>
   _.chain(topic_keys).map(text_maker).sort().uniq().value();
 
-const FootnoteMeta = ({ meta_items }: {meta_items: any}) => (
+const FootnoteMeta = ({ meta_items }: {meta_items: string[]}) => (
   <div className={"footnote-list__meta_container"} aria-hidden={true}>
     {_.map(meta_items, (meta_item_text, ix) => (
       <div key={ix} className="footnote-list__meta_item tag-badge">
@@ -74,7 +82,7 @@ const FootnoteMeta = ({ meta_items }: {meta_items: any}) => (
   </div>
 );
 
-const FootnoteSublist = ({ footnotes }: {footnotes: any}) => (
+const FootnoteSublist = ({ footnotes }: {footnotes: FootNoteDef[]}) => (
   <ul className="list-unstyled">
     {_.chain(footnotes)
       .uniqBy("text")
@@ -108,14 +116,15 @@ const sort_footnotes = (footnotes: any) =>
       _.chain(topic_keys).thru(topic_keys_to_plain_text).join(" ").value()
     )
     .sortBy(({ topic_keys }) => -topic_keys.length)
-    .sortBy(({ year1, year2 }: {year1: number,year2: number}) => -(year2 || year1 || Infinity))
+    .sortBy(({ year1, year2 }) => -(year2 || year1 || Infinity))
     .value();
 
 const group_and_sort_footnotes = (footnotes: any) =>
   _.chain(footnotes)
-    .groupBy(({ subject }: {subject: SubjectClassInstance}) => {
+    .groupBy(( {subject}: {subject: SubjectClassInstance} ) => {
+      
       const { id, name, subject_type } = subject;
-
+      
       const subject_type_sort_importance = (() => {
         switch (subject_type) {
           case "gov":
