@@ -68,11 +68,16 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "main_estimates",
+    href: "#compare_estimates",
+    is_new: "true",
+  },
+  {
     text_key: "quick_link_DRR22",
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
   },
   {
-    text_key: "supps_b",
+    text_key: "supps_c",
     href: "#compare_estimates",
   },
   {
