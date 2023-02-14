@@ -77,10 +77,6 @@ const featured_content_items = _.compact([
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
   },
   {
-    text_key: "supps_c",
-    href: "#compare_estimates",
-  },
-  {
     text_key: "quick_link_gov_spending",
     href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
   },
