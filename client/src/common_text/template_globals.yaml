@@ -1,69 +1,69 @@
 current_fiscal_year:
-  en: 2022-23
-  fr: 2022-2023
+  en: 2023-24
+  fr: 2023-2024
 
 pa_last_year:
+  en: 2022-23
+  fr: 2022-2023
+pa_last_year_2:
   en: 2021-22
   fr: 2021-2022
-pa_last_year_2:
-  en: 2020-21
-  fr: 202o-2021
 pa_last_year_3:
+  en: 2020-21
+  fr: 2020-2021
+pa_last_year_4:
   en: 2019-20
   fr: 2019-2020
-pa_last_year_4:
+pa_last_year_5:
   en: 2018-19
   fr: 2018-2019
-pa_last_year_5:
-  en: 2017-18
-  fr: 2017-2018
 
 # should always be in-sync with pa_last_year?
 pa_last_year_planned:
-  en: 2021-22
-  fr: 2021-2022
+  en: 2022-23
+  fr: 2022-2023
 
 est_in_year:
-  en: 2022-23
-  fr: 2022-2023
-est_last_year:
-  en: 2021-22
-  fr: 2021-2022
-est_last_year_2:
-  en: 2020-21
-  fr: 2020-2021
-est_last_year_3:
-  en: 2019-20
-  fr: 2019-2020
-est_last_year_4:
-  en: 2018-19
-  fr: 2018-2019
-est_last_year_5:
-  en: 2017-18
-  fr: 2017-2018
-
-planning_year_1:
-  en: 2022-23
-  fr: 2022-2023
-planning_year_2:
   en: 2023-24
   fr: 2023-2024
-planning_year_3:
+est_last_year:
+  en: 2022-23
+  fr: 2022-2023
+est_last_year_2:
+  en: 2021-22
+  fr: 2021-2022
+est_last_year_3:
+  en: 2020-21
+  fr: 2020-2021
+est_last_year_4:
+  en: 2019-20
+  fr: 2019-2020
+est_last_year_5:
+  en: 2018-19
+  fr: 2018-2019
+
+planning_year_1:
+  en: 2023-24
+  fr: 2023-2024
+planning_year_2:
   en: 2024-25
   fr: 2024-2025
+planning_year_3:
+  en: 2025-26
+  fr: 2025-2026
 
 ppl_last_year:
+  en: March 2022
+  fr: mars 2022
+ppl_last_year_2:
   en: March 2021
   fr: mars 2021
-ppl_last_year_2:
+ppl_last_year_3:
   en: March 2020
   fr: mars 2020
-ppl_last_year_3:
+ppl_last_year_4:
   en: March 2019
   fr: mars 2019
-ppl_last_year_4:
+ppl_last_year_5:
   en: March 2018
   fr: mars 2018
-ppl_last_year_5:
-  en: March 2017
-  fr: mars 2017
