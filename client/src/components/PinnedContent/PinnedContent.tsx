@@ -11,6 +11,8 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { IconPin, IconUnpin } from "src/icons/icons";
 import { backgroundColor } from "src/style_constants/index";
 
+export {NonA11yPinnedContent}
+
 
 import text from "./PinnedContent.yaml";
 
@@ -209,3 +211,4 @@ export class PinnedContent extends React.Component {
     );
   }
 }
+
