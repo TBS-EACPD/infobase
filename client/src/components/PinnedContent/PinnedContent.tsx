@@ -18,10 +18,19 @@ import text from "./PinnedContent.yaml";
 
 const text_maker = create_text_maker(text);
 
+type NonA11yPinnedContentProps = {
+  local_storage_name: string,
+  default_pin_state: string,
+}
+
+interface isPinnedMirrorHelper {
+  is_pinned_local_storage_mirror: string | boolean | null,
+}
+
 export const get_pinned_content_local_storage = (local_storage_name: string) => {
   try {
-    return has_local_storage && local_storage_name
-      ? JSON.parse(localStorage.getItem(local_storage_name)!)
+    return has_local_storage && local_storage_name 
+      ? (JSON.parse(localStorage.getItem(local_storage_name) || '{}'))
       : null;
   } catch {
     return null;
@@ -48,16 +57,6 @@ const get_is_pinned = (
   }
 };
 
-type NonA11yPinnedContentProps = {
-  local_storage_name: string,
-  default_pin_state: string,
-}
-
-interface isPinnedMirrorHelper {
-  is_pinned_local_storage_mirror: any,
-}
-
-
 
 class NonA11yPinnedContent extends React.Component<NonA11yPinnedContentProps,isPinnedMirrorHelper> {
   placeHolderRef = React.createRef<HTMLDivElement>();
@@ -82,7 +81,7 @@ class NonA11yPinnedContent extends React.Component<NonA11yPinnedContentProps,isP
     return get_is_pinned(
       local_storage_name,
       default_pin_state,
-      is_pinned_local_storage_mirror,
+      null,
     );
   }
 
