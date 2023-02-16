@@ -98,7 +98,11 @@ class BreadCrumbs extends React.Component {
                 {">"}
               </span>
               {_.isString(display) ? ( //allow strings or react elements to be used here (note that some strings may have the weird french apostrophe that needs to non-escaped)
-                <a href={window.location.href} aria-current="page" dangerouslySetInnerHTML={{ __html: display }} />
+                <a
+                  href={window.location.href}
+                  aria-current="page"
+                  dangerouslySetInnerHTML={{ __html: display }}
+                />
               ) : (
                 display
               )}
