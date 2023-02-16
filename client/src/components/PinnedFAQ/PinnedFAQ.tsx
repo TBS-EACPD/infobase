@@ -10,8 +10,6 @@ import { KeyConceptList } from "src/components/KeyConceptList/KeyConceptList";
 
 import { PinnedContent } from "src/components/PinnedContent/PinnedContent";
 
-import {NonA11yPinnedContent} from "src/components/PinnedContent/PinnedContent";
-
 import { Gov } from "src/models/subjects";
 import { trivial_text_maker } from "src/models/text";
 
@@ -44,7 +42,7 @@ export class PinnedFAQ extends React.Component<PinnedFAQProps> {
     } = this.props;
 
     return (
-      <NonA11yPinnedContent
+      <PinnedContent
         local_storage_name={SOME_THINGS_TO_KEEP_IN_MIND_STORAGE_KEY}
       >
         <div className={classNames("mrgn-bttm-md")}>
@@ -73,7 +71,7 @@ export class PinnedFAQ extends React.Component<PinnedFAQProps> {
             </AccordionAuto>
           </ButtonToolbar>
         </div>
-      </NonA11yPinnedContent>
+      </PinnedContent>
     );
   }
 }
