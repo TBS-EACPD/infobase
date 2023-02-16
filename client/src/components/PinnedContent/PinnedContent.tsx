@@ -11,32 +11,41 @@ import { is_a11y_mode } from "src/core/injected_build_constants";
 import { IconPin, IconUnpin } from "src/icons/icons";
 import { backgroundColor } from "src/style_constants/index";
 
-export {NonA11yPinnedContent}
-
+export { NonA11yPinnedContent };
 
 import text from "./PinnedContent.yaml";
 
 const text_maker = create_text_maker(text);
 
-type NonA11yPinnedContentProps = {
-  local_storage_name: string,
-  default_pin_state: string,
+interface NonA11yPinnedContentProps {
+  local_storage_name: string;
+  default_pin_state: boolean;
+}
+
+//Needed for PinnedFAQ to function correctly.
+interface PinnedContentProps {
+  local_storage_name: string;
 }
 
 interface isPinnedMirrorHelper {
-  is_pinned_local_storage_mirror: string | boolean | null,
+  is_pinned_local_storage_mirror: string | boolean | null;
 }
 
-export const get_pinned_content_local_storage = (local_storage_name: string) => {
+export const get_pinned_content_local_storage = (
+  local_storage_name: string
+) => {
   try {
-    return has_local_storage && local_storage_name 
-      ? (JSON.parse(localStorage.getItem(local_storage_name) || '{}'))
+    return has_local_storage && local_storage_name
+      ? JSON.parse(localStorage.getItem(local_storage_name) || "{}")
       : null;
   } catch {
     return null;
   }
 };
-export const set_pinned_content_local_storage = (local_storage_name: string, value: string) => {
+export const set_pinned_content_local_storage = (
+  local_storage_name: string,
+  value: string
+) => {
   has_local_storage &&
     local_storage_name &&
     localStorage.setItem(local_storage_name, value);
@@ -44,11 +53,12 @@ export const set_pinned_content_local_storage = (local_storage_name: string, val
 
 const get_is_pinned = (
   local_storage_name: string,
-  default_pin_state: string,
+  default_pin_state: boolean,
   is_pinned_local_storage_mirror = null
 ) => {
   if (has_local_storage && local_storage_name) {
-    const is_pinned: boolean = get_pinned_content_local_storage(local_storage_name);
+    const is_pinned: boolean =
+      get_pinned_content_local_storage(local_storage_name);
     return _.isBoolean(is_pinned) ? is_pinned : default_pin_state;
   } else {
     return _.isBoolean(is_pinned_local_storage_mirror)
@@ -57,12 +67,14 @@ const get_is_pinned = (
   }
 };
 
-
-class NonA11yPinnedContent extends React.Component<NonA11yPinnedContentProps,isPinnedMirrorHelper> {
+class NonA11yPinnedContent extends React.Component<
+  NonA11yPinnedContentProps,
+  isPinnedMirrorHelper
+> {
   placeHolderRef = React.createRef<HTMLDivElement>();
   contentRef = React.createRef<HTMLDivElement>();
-  static defaultProps: { default_pin_state: boolean; };
- 
+  static defaultProps: { default_pin_state: boolean };
+
   constructor(props: NonA11yPinnedContentProps) {
     super(props);
 
@@ -76,17 +88,20 @@ class NonA11yPinnedContent extends React.Component<NonA11yPinnedContentProps,isP
 
   get is_pinned() {
     const { local_storage_name, default_pin_state } = this.props;
-    const { is_pinned_local_storage_mirror } = this.state;
+    //Removed is_pinned_local_storage_mirror const here as it is not being used.
 
-    return get_is_pinned(
-      local_storage_name,
-      default_pin_state,
-      null,
-    );
+    //const { is_pinned_local_storage_mirror } = this.state;
+
+    //Swapped is_local_storage_mirror with 'null' here, as the get_is_planned
+    //const always sets it to null. This is not compatible with it's typing.
+    return get_is_pinned(local_storage_name, default_pin_state, null);
   }
 
   set_is_pinned = (is_pinned: boolean) => {
-    set_pinned_content_local_storage(this.props.local_storage_name, is_pinned.toString());
+    set_pinned_content_local_storage(
+      this.props.local_storage_name,
+      is_pinned.toString()
+    );
     this.setState({ is_pinned_local_storage_mirror: is_pinned });
   };
   click_pin = () => {
@@ -112,17 +127,18 @@ class NonA11yPinnedContent extends React.Component<NonA11yPinnedContentProps,isP
             entry &&
             entry.boundingClientRect.top < 0;
 
+          //Removed 2 instances of targetRef as it was not being used and gave warnings.
           return (
             <div ref={ref}>
               {/* height resize dectector to sync the height of the content with the height of a placeholder div used,
               when the content is floating, to prevent the page content from shifting when the content catches/uncatches 
               on the initial location */}
               <ReactResizeDetector handleHeight refreshMode="throttle">
-                {({ targetRef: contentRef }) => (
+                {() => (
                   /* width resize dectector to sync the content's width with the width given to it's original rendering context
                   (grabbed from the placeholder), so that it stays consistent when transitioning to a fixed position*/
                   <ReactResizeDetector handleWidth refreshMode="throttle">
-                    {({ targetRef: placeHolderRef }) => (
+                    {() => (
                       <>
                         <div
                           ref={this.placeHolderRef}
@@ -201,13 +217,12 @@ NonA11yPinnedContent.defaultProps = {
   default_pin_state: has_local_storage,
 };
 
-export class PinnedContent extends React.Component {
+export class PinnedContent extends React.Component<PinnedContentProps> {
   render() {
     return is_a11y_mode ? (
       this.props.children
     ) : (
-      <NonA11yPinnedContent local_storage_name={""} {...this.props} />
+      <NonA11yPinnedContent {...this.props} />
     );
   }
 }
-
