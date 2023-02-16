@@ -35,7 +35,7 @@ export const get_pinned_content_local_storage = (
   local_storage_name: string
 ) => {
   try {
-    return has_local_storage && local_storage_name
+    return has_local_storage && local_storage_name //Added {} option for JSON.parse in case getItem returns null.
       ? JSON.parse(localStorage.getItem(local_storage_name) || "{}")
       : null;
   } catch {
