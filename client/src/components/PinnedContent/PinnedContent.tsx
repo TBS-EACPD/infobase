@@ -28,7 +28,7 @@ interface PinnedContentProps {
 }
 
 interface isPinnedMirrorHelper {
-  is_pinned_local_storage_mirror: string | boolean | null;
+  is_pinned_local_storage_mirror: boolean | null;
 }
 
 export const get_pinned_content_local_storage = (
