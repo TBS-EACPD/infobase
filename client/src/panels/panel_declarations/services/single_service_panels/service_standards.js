@@ -14,7 +14,9 @@ import {
   TabsStateful,
 } from "src/components/index";
 
-import { create_fake_footnote } from "src/models/footnotes/footnotes";
+//import { create_fake_footnote } from "src/models/footnotes/footnotes";
+
+import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -211,7 +213,10 @@ export const declare_single_service_standards_panel = () =>
           .value();
 
         let footnotes = _.concat(
-          create_fake_footnote({
+          create_footnote({
+            id: "",
+            subject_type: "service",
+            subject_id: subject.id,
             topic_keys: ["SERVICE_STANDARDS"],
             text: text_maker("new_standards_data"),
           }),
@@ -219,7 +224,10 @@ export const declare_single_service_standards_panel = () =>
             .map(
               (standard) =>
                 standard.other_type_comment &&
-                create_fake_footnote({
+                create_footnote({
+                  id: "",
+                  subject_type: "service",
+                  subject_id: subject.id,
                   topic_keys: ["OTHER_TYPE_COMMENT"],
                   text: standard.other_type_comment,
                 })
@@ -231,7 +239,10 @@ export const declare_single_service_standards_panel = () =>
         if (subject.id === "1491") {
           footnotes = _.concat(
             footnotes,
-            create_fake_footnote({
+            create_footnote({
+              id: "",
+              subject_type: "service",
+              subject_id: subject.id,
               topic_keys: ["SERVICE_STANDARDS"],
               text: text_maker("IRCC_hotfix"),
             })
