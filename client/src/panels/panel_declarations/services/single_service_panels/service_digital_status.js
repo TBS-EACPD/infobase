@@ -15,7 +15,7 @@ import {
   DisplayTable,
 } from "src/components/index";
 
-import { create_fake_footnote } from "src/models/footnotes/footnotes";
+import { create_footnote } from "src/models/footnotes/footnotes";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -24,7 +24,10 @@ export class ServiceDigitalStatus extends React.Component {
     const { service, title, sources, datasets } = this.props;
 
     const footnote = service.digital_enablement_comment && [
-      create_fake_footnote({
+      create_footnote({
+        id: service.id,
+        subject_type: service.subject_type,
+        subject_id: service.subject_id,
         topic_keys: ["DIGITAL_STATUS"],
         text: service.digital_enablement_comment,
       }),
