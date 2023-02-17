@@ -14,12 +14,6 @@ import text from "./GraphOverlay.yaml";
 
 import "./GraphOverlay.scss";
 
-//import { MouseEventHandler } from "@nivo/pie";
-
-//import { App } from "src/InfoBase/App";
-
-//import { lang } from "src/core/injected_build_constants";
-
 const { TM, text_maker } = create_text_maker_component(text);
 
 interface GraphOverlayProps {
