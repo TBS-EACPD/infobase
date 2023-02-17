@@ -215,7 +215,7 @@ export const declare_single_service_standards_panel = () =>
         let footnotes = _.concat(
           create_footnote({
             id: "",
-            subject_type: "service",
+            subject_type: subject.subject_type,
             subject_id: subject.id,
             topic_keys: ["SERVICE_STANDARDS"],
             text: text_maker("new_standards_data"),
@@ -226,7 +226,7 @@ export const declare_single_service_standards_panel = () =>
                 standard.other_type_comment &&
                 create_footnote({
                   id: "",
-                  subject_type: "service",
+                  subject_type: subject.subject_type,
                   subject_id: subject.id,
                   topic_keys: ["OTHER_TYPE_COMMENT"],
                   text: standard.other_type_comment,
@@ -241,7 +241,7 @@ export const declare_single_service_standards_panel = () =>
             footnotes,
             create_footnote({
               id: "",
-              subject_type: "service",
+              subject_type: subject.subject_type,
               subject_id: subject.id,
               topic_keys: ["SERVICE_STANDARDS"],
               text: text_maker("IRCC_hotfix"),
