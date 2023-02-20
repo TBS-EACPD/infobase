@@ -10,10 +10,6 @@ import text from "./Panel.yaml";
 
 import "./Panel.scss";
 
-//import { StatelessDetails } from "../Details/Details";
-
-//import { Concast } from "@apollo/client/utilities";
-
 const text_maker = create_text_maker(text);
 
 type PanelProps = {
