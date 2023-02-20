@@ -14,8 +14,6 @@ import {
   TabsStateful,
 } from "src/components/index";
 
-//import { create_fake_footnote } from "src/models/footnotes/footnotes";
-
 import { create_footnote } from "src/models/footnotes/footnotes";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
