@@ -217,7 +217,7 @@ const ServicesChannelsPanel = ({ subject }) => {
           }}
         />
       ) : (
-        <HeightClippedGraph clipHeight={300}>
+        //<HeightClippedGraph clipHeight={300}>
           <div style={{ marginTop: "50px" }} className="col-12 col-lg-12">
             <div style={{ textAlign: "center" }}>
               <TM
@@ -244,7 +244,7 @@ const ServicesChannelsPanel = ({ subject }) => {
               display_horizontal={true}
             />
           </div>
-        </HeightClippedGraph>
+        //</HeightClippedGraph>
       )}
     </div>
   );

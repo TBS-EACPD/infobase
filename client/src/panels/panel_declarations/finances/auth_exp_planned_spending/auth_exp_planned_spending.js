@@ -455,7 +455,7 @@ class LapseByVotesGraph extends React.Component {
           args={{ lapse_unit: is_showing_lapse_pct ? "%" : "$" }}
           style={{ textAlign: "center" }}
         />
-        <HeightClipper clipHeight={200}>{lapse_infograph}</HeightClipper>
+        {lapse_infograph}
       </div>
     );
   }
