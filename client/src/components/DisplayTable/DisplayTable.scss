@@ -137,6 +137,7 @@ table.display-table:not(.no-total-row) > tbody > tr > td {
   font-weight: normal;
 }
 
+//For mobile devices
 @media (max-width: 500px) {
   .display-table-container {
     overflow-x: auto;
