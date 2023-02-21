@@ -6,7 +6,7 @@ import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel
 import { declare_panel } from "src/panels/PanelRegistry";
 
 import {
-  HeightClipper,
+  //HeightClipper,
   create_text_maker_component,
   Details,
   GraphOverlay,

@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
-
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+//import {HeightClippedGraph}
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
