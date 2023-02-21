@@ -221,32 +221,32 @@ const ServicesChannelsPanel = ({ subject }) => {
         />
       ) : (
         //<HeightClippedGraph clipHeight={300}>
-          <div style={{ marginTop: "50px" }} className="col-12 col-lg-12">
-            <div style={{ textAlign: "center" }}>
-              <TM
-                style={{ fontWeight: 700 }}
-                className="medium-panel-text"
-                k="application_breakdown_by_channel"
-              />
-            </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Select
-                id="services_channels_select"
-                title={text_maker("select_period")}
-                selected={active_year}
-                options={_.map(report_years, (year) => ({
-                  id: year,
-                  display: formats.year_to_fiscal_year_raw(year),
-                }))}
-                onSelect={(year) => set_active_year(year)}
-              />
-            </div>
-            <WrappedNivoPie
-              data={channel_pct_data}
-              is_money={false}
-              display_horizontal={true}
+        <div style={{ marginTop: "50px" }} className="col-12 col-lg-12">
+          <div style={{ textAlign: "center" }}>
+            <TM
+              style={{ fontWeight: 700 }}
+              className="medium-panel-text"
+              k="application_breakdown_by_channel"
             />
           </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Select
+              id="services_channels_select"
+              title={text_maker("select_period")}
+              selected={active_year}
+              options={_.map(report_years, (year) => ({
+                id: year,
+                display: formats.year_to_fiscal_year_raw(year),
+              }))}
+              onSelect={(year) => set_active_year(year)}
+            />
+          </div>
+          <WrappedNivoPie
+            data={channel_pct_data}
+            is_money={false}
+            display_horizontal={true}
+          />
+        </div>
         //</HeightClippedGraph>
       )}
     </div>
