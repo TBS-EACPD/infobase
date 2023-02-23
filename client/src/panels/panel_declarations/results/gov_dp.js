@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Fragment, useState } from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -117,14 +116,13 @@ const DpSummary = () => {
           }}
         />
       </div>
-      
-        <DisplayTable
-          table_name={"Government DP"}
-          data={rows_of_counts_by_dept}
-          column_configs={column_configs}
-          page_size_increment={15}
-        />
-      
+
+      <DisplayTable
+        table_name={"Government DP"}
+        data={rows_of_counts_by_dept}
+        column_configs={column_configs}
+        page_size_increment={15}
+      />
     </Fragment>
   );
 

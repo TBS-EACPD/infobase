@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { useState } from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -133,14 +132,13 @@ const DrrSummary = () => {
         <div className="medium-panel-text">
           <TM k="gov_drr_summary_org_table_text" />
         </div>
-        
-          <DisplayTable
-            table_name={"Government DRR"}
-            data={rows_of_counts_by_dept}
-            column_configs={column_configs}
-            page_size_increment={15}
-          />
-        
+
+        <DisplayTable
+          table_name={"Government DRR"}
+          data={rows_of_counts_by_dept}
+          column_configs={column_configs}
+          page_size_increment={15}
+        />
       </div>
     </div>
   );
