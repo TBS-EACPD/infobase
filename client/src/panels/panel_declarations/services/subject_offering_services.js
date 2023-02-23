@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React from "react";
 
-import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -76,7 +75,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
     }),
   };
   return (
-    <HeightClippedGraph clipHeight={600}>
+    <div>
       {!is_gov && (
         <TM
           className="medium-panel-text"
@@ -98,8 +97,9 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
         unsorted_initial={true}
         data={cleaned_data}
         column_configs={column_configs}
+        page_size_increment={15}
       />
-    </HeightClippedGraph>
+    </div>
   );
 };
 

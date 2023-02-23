@@ -487,8 +487,8 @@ export class _DisplayTable extends React.Component<
         num_items={_.size(sorted_filtered_data)}
         num_options_max={page_size_num_options_max}
       />
-    ); 
-    
+    );
+
     const util_components_with_defaults = _.chain({
       ...util_components_default,
       ...util_components,
@@ -500,7 +500,7 @@ export class _DisplayTable extends React.Component<
     const paginated_data = _.chunk(
       sorted_filtered_data,
       !enable_pagination ? _.size(sorted_filtered_data) : page_size
-    ); 
+    );
 
     const number_of_pages = paginated_data.length;
 
@@ -808,27 +808,24 @@ export class DisplayTable extends React.Component<DisplayTableProps> {
         is_sortable: supplied_column_config.is_sortable && showing_sort,
       })
     );
-      if(this.props.page_size_increment==undefined){
-    return (
-      <_DisplayTable
-        {...this.props}
-        column_configs={smart_column_configs}
-        enable_pagination={
-          _.size(data) > _DisplayTable.defaultProps.page_size_increment
-        }
-      />
-    );
-      }
-      else{
-        return (
-          <_DisplayTable
-            {...this.props}
-            column_configs={smart_column_configs}
-            enable_pagination={
-              _.size(data) > this.props.page_size_increment
-            }
-          />
-        );
-      }
+    if (this.props.page_size_increment == undefined) {
+      return (
+        <_DisplayTable
+          {...this.props}
+          column_configs={smart_column_configs}
+          enable_pagination={
+            _.size(data) > _DisplayTable.defaultProps.page_size_increment
+          }
+        />
+      );
+    } else {
+      return (
+        <_DisplayTable
+          {...this.props}
+          column_configs={smart_column_configs}
+          enable_pagination={_.size(data) > this.props.page_size_increment}
+        />
+      );
+    }
   }
 }
