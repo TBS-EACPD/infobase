@@ -808,15 +808,27 @@ export class DisplayTable extends React.Component<DisplayTableProps> {
         is_sortable: supplied_column_config.is_sortable && showing_sort,
       })
     );
-
+      if(this.props.page_size_increment==undefined){
     return (
       <_DisplayTable
         {...this.props}
         column_configs={smart_column_configs}
         enable_pagination={
-          _.size(data) > this.props.page_size_increment
+          _.size(data) > _DisplayTable.defaultProps.page_size_increment
         }
       />
     );
+      }
+      else{
+        return (
+          <_DisplayTable
+            {...this.props}
+            column_configs={smart_column_configs}
+            enable_pagination={
+              _.size(data) > this.props.page_size_increment
+            }
+          />
+        );
+      }
   }
 }
