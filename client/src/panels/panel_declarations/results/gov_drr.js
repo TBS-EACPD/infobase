@@ -133,13 +133,14 @@ const DrrSummary = () => {
         <div className="medium-panel-text">
           <TM k="gov_drr_summary_org_table_text" />
         </div>
-        <HeightClippedGraph clipHeight={330}>
+        
           <DisplayTable
             table_name={"Government DRR"}
             data={rows_of_counts_by_dept}
             column_configs={column_configs}
+            page_size_increment={15}
           />
-        </HeightClippedGraph>
+        
       </div>
     </div>
   );

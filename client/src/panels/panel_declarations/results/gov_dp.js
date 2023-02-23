@@ -117,13 +117,14 @@ const DpSummary = () => {
           }}
         />
       </div>
-      <HeightClippedGraph clipHeight={330}>
+      
         <DisplayTable
           table_name={"Government DP"}
           data={rows_of_counts_by_dept}
           column_configs={column_configs}
+          page_size_increment={15}
         />
-      </HeightClippedGraph>
+      
     </Fragment>
   );
 
