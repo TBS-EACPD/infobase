@@ -159,3 +159,7 @@ PCAN_EXP:
 PCAN_AUTH:
   en: Authorities Representation Inaccuracy
   fr: Inexactitude de la représentation des autorités
+
+LACK_INFO:
+  en: Not Enough Transfer Information
+  fr: Pas assez d'informations sur le transfert

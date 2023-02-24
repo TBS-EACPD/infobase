@@ -54,7 +54,8 @@ export type TopicKey =
   | "SERVICES"
   | "CFMRS"
   | "PCAN_AUTH"
-  | "PCAN_EXP";
+  | "PCAN_EXP"
+  | "LACK_INFO";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];
