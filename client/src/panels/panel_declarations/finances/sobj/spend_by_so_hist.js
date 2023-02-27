@@ -202,6 +202,9 @@ export const declare_spend_by_so_hist_panel = () =>
       legacy_table_dependencies: ["orgSobjs"],
       get_dataset_keys: () => ["org_standard_objects"],
       get_topic_keys: () => [
+        "PROG",
+        "GOCO",
+        "PA",
         "PLANNED_EXP",
         "EXP",
         "SOBJ",
