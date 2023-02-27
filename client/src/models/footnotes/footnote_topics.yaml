@@ -160,6 +160,14 @@ PCAN_AUTH:
   en: Authorities Representation Inaccuracy
   fr: Inexactitude de la représentation des autorités
 
+PCAN_5_YEAR:
+  en: Standardised Presentation not Suitable
+  fr: Présentation standardisée non adaptée
+
+PCAN_TRANSFER:
+  en: Transfer Payments Expenditures
+  fr: Dépenses liées aux paiements de transfert
+
 LACK_INFO:
   en: Not Enough Transfer Information
   fr: Pas assez d'informations sur le transfert

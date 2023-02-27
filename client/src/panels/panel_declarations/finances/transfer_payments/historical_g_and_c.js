@@ -356,7 +356,6 @@ const common_panel_config = {
   get_title: () => text_maker("historical_g_and_c_title"),
   legacy_table_dependencies: ["orgTransferPayments"],
   get_dataset_keys: () => ["transfer_payments"],
-  get_topic_keys: () => ["EXP", "SOBJ", "AUTH", "VOTED", "STAT", "SOBJ10", "LACK_INFO"],
 };
 
 export const declare_historical_g_and_c_panel = () =>
@@ -425,6 +424,7 @@ export const declare_historical_g_and_c_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
+            get_topic_keys: () => ["GOCO", "PA", "PLANNED_EXP", "EXP", "SOBJ", "AUTH", "VOTED", "STAT", "SOBJ10", "LACK_INFO", "PCAN_5_YEAR","PCAN_TRANSFER"],
             key: "historical_g_and_c",
             calculate: ({ subject, tables }) => {
               const { orgTransferPayments } = tables;
