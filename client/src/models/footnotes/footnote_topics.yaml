@@ -171,3 +171,7 @@ PCAN_TRANSFER:
 LACK_INFO:
   en: Not Enough Transfer Information
   fr: Pas assez d'informations sur le transfert
+
+PCAN_STANDARD_OBJ:
+  en: Standard Objects Representation Inaccuracy
+  fr: Inexactitude de la représentation des objets standard

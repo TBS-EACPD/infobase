@@ -57,7 +57,8 @@ export type TopicKey =
   | "PCAN_EXP"
   | "LACK_INFO"
   | "PCAN_5_YEAR"
-  | "PCAN_TRANSFER";
+  | "PCAN_TRANSFER"
+  | "PCAN_STANDARD_OBJ";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];

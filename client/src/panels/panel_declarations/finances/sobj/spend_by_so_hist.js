@@ -201,6 +201,7 @@ export const declare_spend_by_so_hist_panel = () =>
     panel_config_func: () => ({
       legacy_table_dependencies: ["orgSobjs"],
       get_dataset_keys: () => ["org_standard_objects"],
+      get_topic_keys: () => ["PLANNED_EXP","EXP", "SOBJ", "AUTH", "VOTED", "STAT", "SOBJ10", "PCAN_5_YEAR", "PCAN_STANDARD_OBJ"],
       get_title: () => text_maker("dept_fin_spend_by_so_hist_title"),
       calculate: ({ subject, tables }) => {
         const { orgSobjs } = tables;
