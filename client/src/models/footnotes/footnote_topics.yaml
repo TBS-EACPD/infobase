@@ -175,3 +175,11 @@ LACK_INFO:
 PCAN_STANDARD_OBJ:
   en: Standard Objects Representation Inaccuracy
   fr: Inexactitude de la représentation des objets standard
+
+PCAN_ACTUAL:
+  en: Actual Resources
+  fr: Dépenses réelles
+
+PCAN_LACK_PLANNED:
+  en: Lack of Planned Information
+  fr: Manque d'informations planifiées

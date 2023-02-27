@@ -22,6 +22,7 @@ export const declare_planned_actual_comparison_panel = () =>
     panel_config_func: () => ({
       legacy_table_dependencies: ["programSpending", "programFtes"],
       get_dataset_keys: () => ["program_spending", "program_ftes"],
+      //get_topic_keys: () => ["DRR_EXP", "DRR_FTE", "EXP", "AUTH", "FTE", "PLANNED_FTE", "RESULTS", "VOTED", "STAT", "SOBJ", "SOBJ10", "PROG", "GOCO", "PA", "PLANNED_EXP", "PCAN_ACTUAL", "PCAN_LACK_PLANNED"],
       get_title: () => text_maker("planned_actual_title"),
       calculate: ({ subject, tables }) => {
         if (subject.subject_type === "dept") {
@@ -64,6 +65,8 @@ export const declare_planned_actual_comparison_panel = () =>
         const footnotes = get_footnotes_by_subject_and_topic(subject, [
           "DRR_EXP",
           "DRR_FTE",
+          "PCAN_ACTUAL",
+          "PCAN_LACK_PLANNED"
         ]);
 
         const text_calculations = {
