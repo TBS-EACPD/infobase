@@ -424,7 +424,20 @@ export const declare_historical_g_and_c_panel = () =>
         case "dept":
           return {
             ...common_panel_config,
-            get_topic_keys: () => ["GOCO", "PA", "PLANNED_EXP", "EXP", "SOBJ", "AUTH", "VOTED", "STAT", "SOBJ10", "LACK_INFO", "PCAN_5_YEAR","PCAN_TRANSFER"],
+            get_topic_keys: () => [
+              "GOCO",
+              "PA",
+              "PLANNED_EXP",
+              "EXP",
+              "SOBJ",
+              "AUTH",
+              "VOTED",
+              "STAT",
+              "SOBJ10",
+              "LACK_INFO",
+              "PCAN_5_YEAR",
+              "PCAN_TRANSFER",
+            ],
             key: "historical_g_and_c",
             calculate: ({ subject, tables }) => {
               const { orgTransferPayments } = tables;

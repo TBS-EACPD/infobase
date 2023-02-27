@@ -3,7 +3,7 @@ import _ from "lodash";
 import React, { Fragment } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
-import { declare_panel} from "src/panels/PanelRegistry";
+import { declare_panel } from "src/panels/PanelRegistry";
 
 import {
   HeightClipper,
@@ -753,7 +753,24 @@ export const declare_auth_exp_planned_spending_panel = () =>
         "program_spending",
         "tabled_estimates",
       ],
-      get_topic_keys: () => ["GOCO", "RESULTS", "FTE", "DP_FTE", "DP_EXP", "PLANNED_FTE", "PLANNED_EXP", "DRR", "DP", "EXP", "AUTH", "VOTED", "STAT", "PCAN_AUTH", "PCAN_EXP", "PCAN_5_YEAR"],
+      get_topic_keys: () => [
+        "GOCO",
+        "RESULTS",
+        "FTE",
+        "DP_FTE",
+        "DP_EXP",
+        "PLANNED_FTE",
+        "PLANNED_EXP",
+        "DRR",
+        "DP",
+        "EXP",
+        "AUTH",
+        "VOTED",
+        "STAT",
+        "PCAN_AUTH",
+        "PCAN_EXP",
+        "PCAN_5_YEAR",
+      ],
       glossary_keys: ["BUD_EXP", "NB_EXP"],
       get_title: ({ subject }) =>
         text_maker("auth_exp_planned_spending_title", {

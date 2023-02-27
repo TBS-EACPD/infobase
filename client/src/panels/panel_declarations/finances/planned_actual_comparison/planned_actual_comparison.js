@@ -66,7 +66,7 @@ export const declare_planned_actual_comparison_panel = () =>
           "DRR_EXP",
           "DRR_FTE",
           "PCAN_ACTUAL",
-          "PCAN_LACK_PLANNED"
+          "PCAN_LACK_PLANNED",
         ]);
 
         const text_calculations = {
