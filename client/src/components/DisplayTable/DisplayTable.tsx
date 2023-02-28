@@ -52,7 +52,7 @@ type _DisplayTableProps = typeof _DisplayTablePropsDefaultProps & {
   disable_column_select?: boolean;
 };
 
-interface _DisplayTableState {
+export interface _DisplayTableState {
   page_size?: number;
   current_page: number;
   show_pagination_load_spinner: boolean;
@@ -69,7 +69,7 @@ interface _DisplayTableState {
 interface DisplayTableData {
   [key: string]: CellValue;
 }
-interface FilterOption {
+export interface FilterOption {
   id: string;
   label: string;
   active: boolean;
