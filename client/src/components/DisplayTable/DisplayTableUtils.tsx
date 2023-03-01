@@ -1,7 +1,5 @@
 import _ from "lodash";
 
-import type { List } from "lodash";
-
 import React, { Fragment, useState } from "react";
 
 import { CheckBox } from "src/components/CheckBox/CheckBox";
@@ -311,7 +309,7 @@ export const SelectPage = ({
   ) => {
     //depending on the sze of the options, we may have to format to ensure the correct number of options are shown
     //the if check below is where we determine if we have the correct number of options
-    const raw_page_options: List<number> = _.chain(
+    const raw_page_options = _.chain(
       //get numbers from current page and go left/right option_windows number of times
       //ex: if current page is 10 and option_window is 2, we get [8,9,10,11,12]
       get_shifted_option_range(page_count, current_page, option_window)
@@ -327,6 +325,8 @@ export const SelectPage = ({
       .sortBy()
       .value();
 
+      //console.log(raw_page_options[0] + " " + raw_page_options[1]);
+
     //option window * 2 because we go both left and right side by option window number of times
     //+5: 1 from the current page, 2 from the ellipsis number, and 2 for the extremities
     if (page_count > option_window * 2 + 5) {
@@ -337,9 +337,9 @@ export const SelectPage = ({
         //we are missing 4 options (2 ellipses and 2 extremeties)
         return [
           1,
-          (_.first(raw_page_options) as any) - 1,
-          ...(raw_page_options as any),
-          (_.last(raw_page_options) as any) + 1,
+          (_.first(raw_page_options) as number) - 1,
+          ...(raw_page_options as number[]),
+          (_.last(raw_page_options) as number) + 1,
           page_count,
         ];
       } else {
@@ -348,14 +348,14 @@ export const SelectPage = ({
           //if we are close to the very front, we must manually add the ellipsis value and the very last value
           return [
             1,
-            (_.first(raw_page_options) as any) - 1,
-            ...(raw_page_options as any),
+            (_.first(raw_page_options) as number) - 1,
+            ...(raw_page_options as number[]),
           ];
         } else if (!_.includes(raw_page_options, page_count)) {
           //same thing here except we are close to the very end
           return [
-            ...(raw_page_options as any),
-            (_.last(raw_page_options) as any) + 1,
+            ...(raw_page_options as number[]),
+            (_.last(raw_page_options) as number) + 1,
             page_count,
           ];
         }
@@ -386,8 +386,8 @@ export const SelectPage = ({
                   } page-selector`}
                   onClick={() => change_page(page_num - 1)}
                   aria-label={
-                    _is_ellipsis(page_options as any, page_num, index)
-                      ? (page_options as any)[index + 1] !== page_num + 1
+                    _is_ellipsis(page_options as number[], page_num, index)
+                      ? (page_options as number[])[index + 1] !== page_num + 1
                         ? text_maker("ellipsis_end", { page_num: page_num })
                         : text_maker("ellipsis_start", { page_num: page_num })
                       : text_maker("page", { page_num: page_num })
@@ -395,9 +395,9 @@ export const SelectPage = ({
                   role="tab"
                   aria-selected={page_num - 1 === current_page}
                   dangerouslySetInnerHTML={{
-                    __html: _is_ellipsis(page_options as any, page_num, index)
+                    __html: _is_ellipsis((page_options as number[]), page_num, index)
                       ? "&hellip;"
-                      : page_num,
+                      : page_num.toString(),
                   }}
                 ></button>
               ))}
