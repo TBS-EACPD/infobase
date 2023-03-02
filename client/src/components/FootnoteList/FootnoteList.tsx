@@ -28,8 +28,6 @@ import footnote_list_text from "./FootnoteList.yaml";
 
 import "./FootnoteList.scss";
 
-//import { FootNoteDef } from "src/models/footnotes/footnotes";
-
 const text_maker = create_text_maker([footnote_list_text, footnote_topic_text]);
 
 const is_real_footnote = ({
@@ -201,10 +199,6 @@ const FootnoteList = ({ footnotes }: { footnotes: FootNoteDef[] }) => {
   );
   const instance_footnotes_grouped_and_sorted = group_and_sort_footnotes(
     instance_specific_footnotes as FootNoteDef[]
-  );
-
-  console.log(
-    footnotes[0].subject_id + footnotes[0].subject_type + footnotes[0].id
   );
 
   return (
