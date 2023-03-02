@@ -4,6 +4,7 @@ import React from "react";
 
 import "./FancyUL.scss";
 
+//Made className optional as some calls to FancyUL do not have a className.
 interface FancyULProps {
   className?: string;
   title?: string;
