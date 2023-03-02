@@ -12,9 +12,13 @@ import {
   is_subject_class,
   is_subject_instance,
   get_subject_instance_by_guid,
+  get_subject_class_by_type,
 } from "src/models/subjects";
 
-import type { SubjectClassInstance } from "src/models/subjects";
+import type {
+  SubjectClassInstance,
+  ClassSubjectType,
+} from "src/models/subjects";
 
 import { create_text_maker } from "src/models/text";
 
@@ -40,7 +44,9 @@ const FootnoteListSubtitle = ({ title }: { title: string }) => (
   <div className="footnote-list__subtitle">{title}</div>
 );
 
-const SubjectSubtitle = ({ subject }: { subject: SubjectClassInstance }) => {
+const SubjectSubtitle = ({
+  subject,
+}: { subject: SubjectClassInstance } | { subject: ClassSubjectType }) => {
   if (is_subject_instance(subject) && !_.isUndefined(subject.name)) {
     return (
       <FootnoteListSubtitle
@@ -143,7 +149,8 @@ const sort_footnotes = (footnotes: FootNoteDef[]) =>
     .sortBy(({ year1, year2 }) => -(year2 || year1 || Infinity))
     .value();
 
-const group_and_sort_footnotes = (footnotes: object[] | FootNoteDef) =>
+//Need object[] option as subject is not a part of footnotedef.
+const group_and_sort_footnotes = (footnotes: object[] | FootNoteDef[]) =>
   _.chain(footnotes)
     .groupBy(({ subject }: { subject: SubjectClassInstance }) => {
       const { id, name, subject_type } = subject;
@@ -196,7 +203,9 @@ const FootnoteList = ({ footnotes }: { footnotes: FootNoteDef[] }) => {
     instance_specific_footnotes as FootNoteDef[]
   );
 
-  //console.log(footnotes[0].subject_id + footnotes[0].subject_type + footnotes[0].id);
+  console.log(
+    footnotes[0].subject_id + footnotes[0].subject_type + footnotes[0].id
+  );
 
   return (
     <div className={"footnote-list"}>
@@ -205,12 +214,20 @@ const FootnoteList = ({ footnotes }: { footnotes: FootNoteDef[] }) => {
           ..._.chain(class_footnotes_grouped_and_sorted)
             .concat(instance_footnotes_grouped_and_sorted)
             .map((footnotes, ix) => (
+              //"subject" does not exist on type FootnoteDef, and as such a workaround was needed which accounted
+              //for a lack of subject_id's.
               <div key={`${ix}`}>
                 <SubjectSubtitle
                   subject={
-                    get_subject_instance_by_guid(
-                      footnotes[0].subject_type + "_" + footnotes[0].subject_id
-                    ) as SubjectClassInstance
+                    footnotes[0].subject_id == "*"
+                      ? (get_subject_class_by_type(
+                          footnotes[0].subject_type
+                        ) as unknown as ClassSubjectType)
+                      : (get_subject_instance_by_guid(
+                          footnotes[0].subject_type +
+                            "_" +
+                            footnotes[0].subject_id
+                        ) as SubjectClassInstance)
                   }
                 />
                 <FootnoteSublist footnotes={footnotes} />
