@@ -756,7 +756,6 @@ export const declare_auth_exp_planned_spending_panel = () =>
       get_topic_keys: () => [
         "GOCO",
         "RESULTS",
-        "FTE",
         "DP_FTE",
         "DP_EXP",
         "PLANNED_FTE",
