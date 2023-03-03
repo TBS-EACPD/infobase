@@ -758,6 +758,7 @@ export const declare_auth_exp_planned_spending_panel = () =>
         "RESULTS",
         "DP_FTE",
         "DP_EXP",
+        "FTE", 
         "PLANNED_FTE",
         "PLANNED_EXP",
         "DRR",
