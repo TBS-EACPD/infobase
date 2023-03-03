@@ -30,6 +30,8 @@ import "./DisplayTableUtils.scss";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
+//var set_filter_options = function(test: { [col_keys: string]: [FilterOption] } | {[col_keys: string]: FilterOption[]}) {} => void;
+
 export const DropdownFilter = ({
   column_key,
   set_filter_options,
@@ -37,7 +39,9 @@ export const DropdownFilter = ({
   column_searches,
 }: {
   column_key: string;
-  set_filter_options: any;
+  set_filter_options: (filter_ops_by_column: {
+    [col_keys: string]: [FilterOption];
+  }) => void;
   filter_options_by_column: { [col_keys: string]: [FilterOption] };
   column_searches: { [keys: string]: string };
 }) => {
@@ -103,12 +107,14 @@ export const DropdownFilter = ({
                       active={active}
                       container_style={{ marginTop: "10px" }}
                       label_style={{ textAlign: "left" }}
+                      //as [FilterOption] needed due to a possible FilterOption[] type which
+                      //does not fit with how set_filter_options is called in DisplayTable.tsx.
                       onClick={() =>
                         set_filter_options({
                           ...filter_options_by_column,
                           [column_key]: _.map(list, (item) =>
                             item.id === id ? { ...item, active: !active } : item
-                          ),
+                          ) as [FilterOption],
                         })
                       }
                     />
@@ -123,7 +129,7 @@ export const DropdownFilter = ({
                       [column_key]: _.map(list, (item) => ({
                         ...item,
                         active: true,
-                      })),
+                      })) as [FilterOption],
                     })
                   }
                   SelectNoneOnClick={() =>
@@ -132,7 +138,7 @@ export const DropdownFilter = ({
                       [column_key]: _.map(list, (item) => ({
                         ...item,
                         active: false,
-                      })),
+                      })) as [FilterOption],
                     })
                   }
                 />
@@ -325,7 +331,7 @@ export const SelectPage = ({
       .sortBy()
       .value();
 
-      //console.log(raw_page_options[0] + " " + raw_page_options[1]);
+    //console.log(raw_page_options[0] + " " + raw_page_options[1]);
 
     //option window * 2 because we go both left and right side by option window number of times
     //+5: 1 from the current page, 2 from the ellipsis number, and 2 for the extremities
@@ -395,7 +401,11 @@ export const SelectPage = ({
                   role="tab"
                   aria-selected={page_num - 1 === current_page}
                   dangerouslySetInnerHTML={{
-                    __html: _is_ellipsis((page_options as number[]), page_num, index)
+                    __html: _is_ellipsis(
+                      page_options as number[],
+                      page_num,
+                      index
+                    )
                       ? "&hellip;"
                       : page_num.toString(),
                   }}
