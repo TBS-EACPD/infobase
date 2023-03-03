@@ -107,7 +107,7 @@ export const DropdownFilter = ({
                       active={active}
                       container_style={{ marginTop: "10px" }}
                       label_style={{ textAlign: "left" }}
-                      //as [FilterOption] needed due to a possible FilterOption[] type which
+                      //"as [FilterOption]" needed due to a possible FilterOption[] type which
                       //does not fit with how set_filter_options is called in DisplayTable.tsx.
                       onClick={() =>
                         set_filter_options({
