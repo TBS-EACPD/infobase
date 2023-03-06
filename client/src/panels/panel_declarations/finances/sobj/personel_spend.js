@@ -1,20 +1,11 @@
-import _ from "lodash";
 import { sum } from "d3-array";
+import { scaleOrdinal } from "d3-scale";
+import _ from "lodash";
 import React from "react";
 
-import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
+
 import { declare_panel } from "src/panels/PanelRegistry";
-
-//import { GraphOverlay } from "src/components/index";
-
-import { businessConstants } from "src/models/businessConstants";
-import { run_template } from "src/models/text";
-import { year_templates } from "src/models/years";
-
-//import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
-import { primaryColor } from "src/style_constants/index";
-
-//import { text_maker, TM } from "./sobj_text_provider";
 
 import {
   DisplayTable,
@@ -22,10 +13,14 @@ import {
   SelectAllControl,
 } from "src/components/index";
 
+import { businessConstants } from "src/models/businessConstants";
+import { run_template } from "src/models/text";
+import { year_templates } from "src/models/years";
+
 import {
   newIBLightCategoryColors,
   newIBDarkCategoryColors,
-} from "src/core/color_schemes"; 
+} from "src/core/color_schemes";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
@@ -36,10 +31,6 @@ import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { toggle_list } from "src/general_utils";
 
 import { text_maker, TM } from "./sobj_text_provider";
-
-import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
-
-import { scaleOrdinal } from "d3-scale";
 
 const { sos } = businessConstants;
 const { std_years } = year_templates;
@@ -213,74 +204,46 @@ export const declare_personnel_spend_panel = () =>
       get_title: () => text_maker("personnel_spend_title"),
       calculate: ({ subject, tables }) => {
         const { orgSobjs } = tables;
-        const year_value_pairs = _.map(std_years, (year) => [
-          run_template(year),
-          orgSobjs.sum_cols_by_grouped_data(year, "so", subject)[sos[1].text],
-        ]);
 
         const data = _.chain(sos)
-        .sortBy((sobj) => sobj.so_num)
-        .map((sobj) => ({
-          label: sobj.text,
-          data: std_years.map(
-            (year) =>
-              orgSobjs.sum_cols_by_grouped_data(year, "so_num", subject)[
-                sobj.so_num
-              ]
-          ),
-        }))
-        .filter((d) => sum(d.data))
-        .value();
+          .sortBy((sobj) => sobj.so_num)
+          .map((sobj) => ({
+            label: sobj.text,
+            data: std_years.map(
+              (year) =>
+                orgSobjs.sum_cols_by_grouped_data(year, "so_num", subject)[
+                  sobj.so_num
+                ]
+            ),
+          }))
+          .filter((d) => sum(d.data))
+          .value();
 
-      console.log(data[0]);
+        console.log(data[0]);
 
-      const avg_data = _.map(
-        data,
-        (object) => _.sum(object.data) / object.data.length
-      );
+        const avg_data = _.map(
+          data,
+          (object) => _.sum(object.data) / object.data.length
+        );
 
-      const max_avg = _.max(avg_data);
-      const max_index = avg_data.indexOf(max_avg);
-      const max_share = data[max_index].label;
+        const max_avg = _.max(avg_data);
+        const max_index = avg_data.indexOf(max_avg);
+        const max_share = data[max_index].label;
 
-      const five_year_avg_spending = _.sum(avg_data);
+        const five_year_avg_spending = _.sum(avg_data);
 
-      const text_calculations = {
-        subject,
-        max_avg,
-        max_share,
-        five_year_avg_spending,
-      };
-
-      return {
-        data,
-        text_calculations,
-      };
-      },
-
-       /* const series = _.map(year_value_pairs, _.last);
-        const five_year_avg = _.sum(series) / series.length;
-
-
-        const sorted_pairs = _.sortBy(year_value_pairs, _.last);
-
-        const [max_year, max_spend] = _.last(sorted_pairs);
-        const [min_year, min_spend] = _.first(sorted_pairs);
         const text_calculations = {
-          five_year_avg,
-          max_spend,
-          max_year,
-          min_spend,
-          min_year,
+          subject,
+          max_avg,
+          max_share,
+          five_year_avg_spending,
         };
 
         return {
-          series,
+          data,
           text_calculations,
         };
       },
-      */
-      
 
       render({ title, calculations, footnotes, sources, datasets }) {
         const { data, text_calculations } = calculations;
@@ -304,4 +267,3 @@ export const declare_personnel_spend_panel = () =>
       },
     }),
   });
-
