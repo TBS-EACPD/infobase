@@ -201,7 +201,7 @@ export const declare_personnel_spend_panel = () =>
     panel_config_func: () => ({
       legacy_table_dependencies: ["orgSobjs"],
       get_dataset_keys: () => ["org_standard_objects"],
-      get_title: () => text_maker("personnel_spend_title"),
+      get_title: () => text_maker("dept_fin_spend_by_so_hist_title"),
       calculate: ({ subject, tables }) => {
         const { orgSobjs } = tables;
 
