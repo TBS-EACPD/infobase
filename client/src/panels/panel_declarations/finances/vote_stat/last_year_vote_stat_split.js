@@ -8,9 +8,9 @@ import { year_templates } from "src/models/years";
 
 import { infobase_colors } from "src/core/color_schemes";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
-
 import { formats } from "src/core/format";
+
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
@@ -31,6 +31,8 @@ const render_w_options =
       id: data_set.label,
     }));
 
+    
+
     return (
       <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
         <Col isText size={text_col}>
@@ -47,7 +49,7 @@ const render_w_options =
               isInteractive={false}
               enableLabel={true}
               indexBy={"id"}
-              colors={["red", "blue"]}
+              colors={(d) => colors(d.id)}
               margin={{
                 top: 50,
                 right: 40,

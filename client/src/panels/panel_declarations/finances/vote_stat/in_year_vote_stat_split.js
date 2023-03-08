@@ -8,9 +8,9 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { infobase_colors } from "src/core/color_schemes";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
-
 import { formats } from "src/core/format";
+
+import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
