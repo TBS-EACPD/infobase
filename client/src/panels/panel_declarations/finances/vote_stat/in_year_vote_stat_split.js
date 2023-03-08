@@ -6,13 +6,18 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
+
+import { infobase_colors } from "src/core/color_schemes";
+
+import { textColor } from "src/style_constants/index";
 
 const voted = text_maker("voted");
 const stat = text_maker("stat");
 const main_col = "{{est_in_year}}_estimates";
+const colors = infobase_colors();
 
 const render_w_options =
   ({ graph_col, text_col, text_key }) =>
@@ -31,7 +36,39 @@ const render_w_options =
         </Col>
         {!is_a11y_mode && (
           <Col isGraph size={graph_col}>
-            <WrappedNivoPie data={data} />
+            <WrappedNivoBar
+              data={data}
+              keys={["value"]}
+              indexBy={"id"}
+              colors={(d) => colors(d.id)}
+              margin={{
+                top: 50,
+                right: 40,
+                bottom: 120,
+                left: 40,
+              }}
+              bttm_axis={{
+                format: (d) =>
+                  _.words(d).length > 3 ? d.substring(0, 20) + "..." : d,
+                tickSize: 3,
+                tickRotation: -45,
+                tickPadding: 10,
+              }}
+              graph_height="450px"
+              enableGridX={false}
+              remove_left_axis={true}
+              theme={{
+                axis: {
+                  ticks: {
+                    text: {
+                      fontSize: 12,
+                      fill: textColor,
+                      fontWeight: "550",
+                    },
+                  },
+                },
+              }}
+            />
           </Col>
         )}
       </StdPanel>
