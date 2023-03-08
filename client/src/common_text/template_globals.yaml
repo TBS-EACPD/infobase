@@ -43,14 +43,14 @@ est_last_year_5:
   fr: 2018-2019
 
 planning_year_1:
-  en: 2022-23
-  fr: 2022-2023
-planning_year_2:
   en: 2023-24
   fr: 2023-2024
-planning_year_3:
+planning_year_2:
   en: 2024-25
   fr: 2024-2025
+planning_year_3:
+  en: 2025-26
+  fr: 2025-2026
 
 ppl_last_year:
   en: March 2021
