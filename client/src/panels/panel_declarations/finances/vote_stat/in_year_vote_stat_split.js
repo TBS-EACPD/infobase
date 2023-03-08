@@ -1,18 +1,20 @@
 import _ from "lodash";
+
 import React from "react";
 
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
+
 import { declare_panel } from "src/panels/PanelRegistry";
+
+import { infobase_colors } from "src/core/color_schemes";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
-import { text_maker, TM } from "./vote_stat_text_provider";
-
-import { infobase_colors } from "src/core/color_schemes";
-
 import { textColor } from "src/style_constants/index";
+
+import { text_maker, TM } from "./vote_stat_text_provider";
 
 const voted = text_maker("voted");
 const stat = text_maker("stat");
