@@ -6,13 +6,20 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { year_templates } from "src/models/years";
 
+import { infobase_colors } from "src/core/color_schemes";
+
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
+import { formats } from "src/core/format";
+
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+
+import { textColor } from "src/style_constants/index";
 
 import { text_maker, TM } from "./vote_stat_text_provider";
 
 const { std_years } = year_templates;
+const colors = infobase_colors();
 
 const render_w_options =
   ({ text_key, graph_col, text_col }) =>
@@ -31,7 +38,44 @@ const render_w_options =
         </Col>
         {!is_a11y_mode && (
           <Col isGraph size={graph_col}>
-            <WrappedNivoPie data={data} />
+            <WrappedNivoBar
+              data={data}
+              keys={["value"]}
+              label={(d) => (
+                <tspan y={-10}>{formats.compact2_raw(d.formattedValue)}</tspan>
+              )}
+              isInteractive={false}
+              enableLabel={true}
+              indexBy={"id"}
+              colors={["red", "blue"]}
+              margin={{
+                top: 50,
+                right: 40,
+                bottom: 120,
+                left: 40,
+              }}
+              bttm_axis={{
+                format: (d) =>
+                  _.words(d).length > 3 ? d.substring(0, 20) + "..." : d,
+                tickSize: 3,
+                tickRotation: -45,
+                tickPadding: 10,
+              }}
+              graph_height="450px"
+              enableGridX={false}
+              remove_left_axis={true}
+              theme={{
+                axis: {
+                  ticks: {
+                    text: {
+                      fontSize: 12,
+                      fill: textColor,
+                      fontWeight: "550",
+                    },
+                  },
+                },
+              }}
+            />
           </Col>
         )}
       </StdPanel>

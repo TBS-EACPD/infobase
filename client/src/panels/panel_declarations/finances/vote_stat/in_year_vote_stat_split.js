@@ -10,6 +10,8 @@ import { infobase_colors } from "src/core/color_schemes";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
 
+import { formats } from "src/core/format";
+
 import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 
 import { textColor } from "src/style_constants/index";
@@ -41,6 +43,11 @@ const render_w_options =
             <WrappedNivoBar
               data={data}
               keys={["value"]}
+              label={(d) => (
+                <tspan y={-10}>{formats.compact2_raw(d.formattedValue)}</tspan>
+              )}
+              isInteractive={false}
+              enableLabel={true}
               indexBy={"id"}
               colors={(d) => colors(d.id)}
               margin={{
