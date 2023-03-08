@@ -31,8 +31,6 @@ const render_w_options =
       id: data_set.label,
     }));
 
-    
-
     return (
       <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
         <Col isText size={text_col}>
