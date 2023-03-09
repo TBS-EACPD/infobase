@@ -1293,14 +1293,17 @@ DR-drr19-1207,DR-201,MPCC-BVJ00,Military Police and the public have access to cu
 DR-drr20-1207,DR-201,MPCC-BVJ00,Military Police and the public have access to current information on the issues addressed by the Military Police Complaints Commission of Canada.,La Police militaire et le public ont accès à des informations à jour sur les questions traitées par la Commission d'examen des plaintes concernant la police militaire du Canada.,drr20
 DR-drr21-1207,DR-201,MPCC-BVJ00,Military Police and the public have access to current information on the issues addressed by the Military Police Complaints Commission of Canada.,La Police militaire et le public ont accès à des informations à jour sur les questions traitées par la Commission d'examen des plaintes concernant la police militaire du Canada.,drr21
 DR-dp22-1207,DR-201,MPCC-BVJ00,Military Police and the public have access to current information on the issues addressed by the Military Police Complaints Commission of Canada.,La Police militaire et le public ont accès à des informations à jour sur les questions traitées par la Commission d'examen des plaintes concernant la police militaire du Canada.,dp22
+DR-dp23-1207,DR-201,MPCC-BVJ00,Military Police and the public have access to current information on the issues addressed by the Military Police Complaints Commission of Canada.,La Police militaire et le public ont accès à des informations à jour sur les questions traitées par la Commission d'examen des plaintes concernant la police militaire du Canada.,dp23
 DR-drr19-1208,DR-200,MPCC-BVJ00,Information requests pertaining to complaint files are responded to in a timely manner.,Les demandes d’information concernant des dossiers relatifs à des plaintes sont traitées en temps opportun.,drr19
 DR-drr20-1208,DR-200,MPCC-BVJ00,Information requests pertaining to complaint files are responded to in a timely manner.,Les demandes d’information concernant des dossiers relatifs à des plaintes sont traitées en temps opportun.,drr20
 DR-drr21-1208,DR-200,MPCC-BVJ00,Information requests pertaining to complaint files are responded to in a timely manner.,Les demandes d’information concernant des dossiers relatifs à des plaintes sont traitées en temps opportun.,drr21
 DR-dp22-1208,DR-200,MPCC-BVJ00,Information requests pertaining to complaint files are responded to in a timely manner.,Les demandes d’information concernant des dossiers relatifs à des plaintes sont traitées en temps opportun.,dp22
+DR-dp23-1208,DR-200,MPCC-BVJ00,Information requests pertaining to complaint files are responded to in a timely manner.,Les demandes d’information concernant des dossiers relatifs à des plaintes sont traitées en temps opportun.,dp23
 DR-drr19-1209,DR-199,MPCC-BVJ00,Final Reports provide sound findings and recommendations and are issued in a timely manner.,"Les rapports finaux présentent des recommandations et des résultats judicieux, et ils sont communiqués en temps opportun.",drr19
 DR-drr20-1209,DR-199,MPCC-BVJ00,Final Reports provide sound findings and recommendations and are issued in a timely manner.,"Les rapports finaux présentent des recommandations et des résultats judicieux, et ils sont communiqués en temps opportun.",drr20
 DR-drr21-1209,DR-199,MPCC-BVJ00,Final Reports provide sound findings and recommendations and are issued in a timely manner.,"Les rapports finaux présentent des recommandations et des résultats judicieux, et ils sont communiqués en temps opportun.",drr21
 DR-dp22-1209,DR-199,MPCC-BVJ00,Final Reports provide sound findings and recommendations and are issued in a timely manner.,"Les rapports finaux présentent des recommandations et des résultats judicieux, et ils sont communiqués en temps opportun.",dp22
+DR-dp23-1209,DR-199,MPCC-BVJ00,Final Reports provide sound findings and recommendations and are issued in a timely manner.,"Les rapports finaux présentent des recommandations et des résultats judicieux, et ils sont communiqués en temps opportun.",dp23
 DR-drr19-1210,DR-153,CB-BEZ00,Timely issuance of licences,Délivrance de licences en temps opportun,drr19
 DR-drr20-1210,DR-153,CB-BEZ00,Timely issuance of licences,Délivrance de licences en temps opportun,drr20
 DR-drr21-1210,DR-153,CB-BEZ00,Timely issuance of licences,Délivrance de licences en temps opportun,drr21
@@ -4888,6 +4891,13 @@ Canada.","La Police militaire et le public ont accès à
 des informations à jour sur les questions traitées
 par la Commission d’examen des plaintes concernant
 la police militaire du Canada",dp22
+PROGRAM-dp23-3168,PROGRAM-470,MPCC-BVJ01,"Military Police and the public have access
+to current information on the issues addressed
+by the Military Police Complaints Commission of
+Canada.","La Police militaire et le public ont accès à
+des informations à jour sur les questions traitées
+par la Commission d’examen des plaintes concernant
+la police militaire du Canada",dp23
 PROGRAM-drr19-3169,PROGRAM-469,MPCC-BVJ01,"Information requests pertaining to complaint
 files are responded to in a timely manner","Les demandes d’information concernant
 des dossiers relatifs à des plaintes sont traitées en
@@ -4904,6 +4914,10 @@ PROGRAM-dp22-3169,PROGRAM-469,MPCC-BVJ01,"Information requests pertaining to com
 files are responded to in a timely manner","Les demandes d’information concernant
 des dossiers relatifs à des plaintes sont traitées en
 temps opportun.",dp22
+PROGRAM-dp23-3169,PROGRAM-469,MPCC-BVJ01,"Information requests pertaining to complaint
+files are responded to in a timely manner","Les demandes d’information concernant
+des dossiers relatifs à des plaintes sont traitées en
+temps opportun.",dp23
 PROGRAM-drr19-3170,PROGRAM-468,MPCC-BVJ01,"Final Reports provide sound findings
 and recommendations and are issued in a timely
 manner.","Les rapports finaux présentent des conclusions
@@ -4924,6 +4938,11 @@ and recommendations and are issued in a timely
 manner.","Les rapports finaux présentent des conclusions
 et des recommandations judicieuses, et sont
 communiqués en temps opportun",dp22
+PROGRAM-dp23-3170,PROGRAM-468,MPCC-BVJ01,"Final Reports provide sound findings
+and recommendations and are issued in a timely
+manner.","Les rapports finaux présentent des conclusions
+et des recommandations judicieuses, et sont
+communiqués en temps opportun",dp23
 PROGRAM-drr19-3171,PROGRAM-394,CB-BEZ01,Timely tariff decisions,Publication de décisions relatives aux tarifs en temps opportun,drr19
 PROGRAM-drr20-3171,PROGRAM-394,CB-BEZ01,Timely tariff decisions,Publication de décisions relatives aux tarifs en temps opportun,drr20
 PROGRAM-drr21-3171,PROGRAM-394,CB-BEZ01,Timely tariff decisions,Publication de décisions relatives aux tarifs en temps opportun,drr21
@@ -7635,6 +7654,8 @@ PROGRAM-dp23-4668,PROGRAM-178,LAC-BSI04,Digital content is preserved for the lon
 PROGRAM-dp23-4673,PROGRAM-731,NR-BTM11,Federal government decision-makers and stakeholders have the tools and information to support decisions and negotiations on key clean energy issues,Les décideurs du gouvernement fédéral et les intervenants ont accès aux outils et aux renseignements nécessaires pour soutenir les décisions et les négociations relatives à des questions clés en matière d’énergie,dp23
 PROGRAM-dp23-4675,PROGRAM-1553,HRSD-BGO29,Participants explore and succeed in apprenticeship opportunities in the Red Seal trades.,Les participants explorent et réussissent dans les possibilités d’apprentissage dans les métiers sceau rouge.,dp23
 PROGRAM-dp23-4676,PROGRAM-700,NR-BTL13,Project agreements are made with researchers for logistics support across Canada and its Arctic,Accords de projets sont conclues avec les chercheurs pour obtenir du soutien logistique partout au Canada et dans les zones arctiques,dp23
+PROGRAM-dp23-4677,PROGRAM-1554,H-BVG21,Provinces and Territories and health care providers fulfil legislative or regulatory requirements,Les provinces et territoires et les fournisseurs de soins de santé satisfont aux exigences législatives ou réglementaires,dp23
+PROGRAM-dp23-4678,PROGRAM-1555,H-BVG21,Stakeholders implement improvements in health or social services across health care systems,Les intervenants mettent en œuvre des améliorations aux services de santé ou services sociaux dans tous les systèmes de soins de santé,dp23
 PROGRAM-dp23-4684,PROGRAM-1557,AGR-BWP13,"Sector, including processors from underrepresented and marginalized groups, is prepared to mitigate the impacts of an African Swine Fever outbreak","L’industrie, y compris les transformateurs de groupes sous-représentés et marginalisés, est prête à atténuer les répercussions d’une éclosion de peste porcine africaine",dp23
 PROGRAM-dp23-4685,PROGRAM-1558,AGR-BWP13,"Sector implements the tools and strategies necessary to mitigate the impacts of an African Swine Fever outbreak, including for members from underrepresented and marginalized groups","L’industrie met en œuvre les outils et les stratégies nécessaires pour atténuer les répercussions d’une éclosion de peste porcine africaine, y compris pour les membres de groupes sous-représentés et marginalisés",dp23
 PROGRAM-dp23-4686,PROGRAM-1509,WDO-BYM04,Prairie community economic development is supported.,Le développement économique communautaire des Prairies est soutenu.,dp23
@@ -7647,6 +7668,7 @@ PROGRAM-dp23-4695,PROGRAM-1560,INAC-BWM16,The Core Housing Need for Métis house
 PROGRAM-dp23-4696,PROGRAM-1561,INAC-BWM16,The Core Housing Need for Inuit households is reduced,Les besoins impérieux en matière de logement des ménages inuits sont réduits,dp23
 PROGRAM-dp23-4697,PROGRAM-687,INAC-BWM09,Claims Negotiations/Out-of-court Settlement Achieved,Des revendications sont négociées et des règlements hors cour sont conclus,dp23
 PROGRAM-dp23-4700,PROGRAM-1563,INAC-BWM14,Indigenous partners and communities successfully secure funding to plan and implement Calls to Action 74 to 76 initiatives,Les partenaires et collectivités autochtones obtiennent avec succès du financement pour planifier et mettre en œuvre les initiatives des appels à l’action 74 à 76,dp23
+PROGRAM-dp23-4701,PROGRAM-1564,H-BVG21,Health care systems facilitate access to targeted health services and products for Canadians,Les systèmes de soins de santé facilitent l’accès des Canadiens à des services et à des produits de santé ciblés,dp23
 PROGRAM-dp23-4702,PROGRAM-693,INAC-BWR10,"Residents in eligible communities have access to nutritious, perishable foods at a subsidized rate",Les résidents des collectivités admissibles ont accès à des aliments périssables nutritifs à un tarif subventionné,dp23
 PROGRAM-dp23-4703,PROGRAM-694,INAC-BWR04,Northern and Indigenous communities are resilient to changing environmental conditions,Les collectivités nordiques et autochtones sont résilientes face aux conditions environnementales changeantes,dp23
 PROGRAM-dp23-4704,PROGRAM-697,INAC-BWR08,"Northern lands, waters, and natural resources are sustainably managed","Les terres, les eaux et les ressources naturelles dans le Nord sont gérées de façon durable",dp23
@@ -7661,7 +7683,12 @@ PROGRAM-dp23-4714,PROGRAM-776,ND-BUN07,Canada and Canadians are protected from t
 PROGRAM-dp23-4715,PROGRAM-777,ND-BUN07,Other Government Departments (OGDs) are supported,Les autres ministères gouvernementaux sont soutenus,dp23
 PROGRAM-dp23-4721,PROGRAM-1566,HRSD-BGP02,Claimants receive timely workers’ compensation services and benefits.,Les demandeurs reçoivent des services et des indemnités pour accidents de d'accident du travail en temps opportun.,dp23
 PROGRAM-dp23-4732,PROGRAM-527,CH-BSE01,Canadians are increasingly engaged in Celebrations and Commemorations of national significance,Les Canadiens participent davantage aux célébrations et commémorations d’importance nationale,dp23
+PROGRAM-dp23-4733,PROGRAM-1575,H-BVG21,"Targeted stakeholders acquire knowledge, skills and supports to improve health care systems and services","Les intervenants ciblés acquièrent des connaissances, des compétences et du soutien pour améliorer les systèmes et les services de soins de santé",dp23
+PROGRAM-dp23-4736,PROGRAM-1576,H-BVG22,Inclusive and people-centric approaches are applied to address the diverse health needs of priority populations,Des approches inclusives et axées sur les personnes sont appliquées pour répondre aux divers besoins de santé des populations prioritaires,dp23
+PROGRAM-dp23-4737,PROGRAM-1577,H-BVG22,"People and communities have access to equitable, effective and quality health services","Les personnes et les collectivités ont accès à des services de santé équitables, efficaces et de qualité",dp23
+PROGRAM-dp23-4739,PROGRAM-1578,H-BVG22,Communities and health organizations have the knowledge and support required to design and implement inclusive people-centred improvements to health interventions,Les communautés et les organismes de santé possèdent les connaissances et le soutien nécessaires pour concevoir et mettre en œuvre des améliorations inclusives axées sur les personnes dans les interventions en santé,dp23
 PROGRAM-dp23-4746,PROGRAM-1546,TC-BTX01,New Medium and heavy-duty zero-emission vehicles registrations continue to move towards Canada’s sales target,Les nouvelles immatriculations de véhicules moyens et lourds à zéro émission continuent de se rapprocher de l'objectif de vente du Canada,dp23
+PROGRAM-dp23-4747,PROGRAM-1580,H-BVG23,Health care stakeholders use health evidence to inform future research or the development of health care and health system solutions,Les intervenants en soins de santé utilisent les données probantes sur la santé pour éclairer les recherches futures ou l’élaboration de solutions en matière de soins de santé et de système de santé,dp23
 PROGRAM-dp23-4754,PROGRAM-1398,TC-BTX06,TC is able to issue approvals for works on Navigable waters in a timely manner,TC est en mesure d'émettre des autorisations pour les travaux sur les eaux navigables en temps opportun,dp23
 PROGRAM-dp23-4756,PROGRAM-1466,CH-BSE03,"Heritage workers participate in a diversity of learning opportunities to enhance their professional knowledge, skills and practices","Les travailleurs du patrimoine patricipent à une diversité de possibilités d'apprentissage pour améliorer leurs connaissances, compétences et pratiques professionnelles",dp23
 PROGRAM-dp23-4758,PROGRAM-1562,INAC-BWM13,"Government of Canada obligations and commitments under the Indian Residential Schools Settlement Agreement are met, including identification and sharing of all possible residential school and Settlement Agreement related documents with the National Centre for Truth and Reconciliation","Les obligations et les engagements du gouvernement du Canada en vertu de la Convention relative aux pensionnats indiens sont respectés, y compris la localisation et le partage de tous les documents possibles liés aux pensionnats indiens et à la Convention de règlement avec le Centre national pour la vérité et la réconciliation",dp23
