@@ -42,7 +42,18 @@ const render_w_options =
               data={data}
               keys={["value"]}
               label={(d) => (
-                <tspan y={-10}>{formats.compact2_raw(d.formattedValue)} ({Number(Math.round(((d.formattedValue/(vote_stat[0].value + vote_stat[1].value))*100)+'e1')+'e-1')}%)</tspan>
+                <tspan y={-10}>
+                  {formats.compact2_raw(d.formattedValue)} (
+                  {Number(
+                    Math.round(
+                      (d.formattedValue /
+                        (vote_stat[0].value + vote_stat[1].value)) *
+                        100 +
+                        "e1"
+                    ) + "e-1"
+                  )}
+                  %)
+                </tspan>
               )}
               isInteractive={false}
               enableLabel={true}
