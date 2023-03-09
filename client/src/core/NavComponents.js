@@ -1,4 +1,4 @@
-import _, { map } from "lodash";
+import _ from "lodash";
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
@@ -155,8 +155,6 @@ const LateResultsBanner = () => {
   const route_filter = (match, _history) => /^\/(start)/.test(match.path);
 
   // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
-  const latest_doc = _.last(result_docs_in_tabling_order);
-
   return _.map(result_docs_in_tabling_order, (doc) => {
     const late_orgs = doc.late_results_orgs;
     if (late_orgs.length === 0) {
