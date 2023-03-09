@@ -55,7 +55,7 @@ const render_w_options =
                         "e1"
                     ) + "e-1"
                   )}
-                  %){" "}
+                  %)
                 </tspan>
               )}
               isInteractive={false}
