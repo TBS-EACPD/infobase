@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _, { map } from "lodash";
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { withRouter } from "react-router";
@@ -157,38 +157,40 @@ const LateResultsBanner = () => {
   // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
   const latest_doc = _.last(result_docs_in_tabling_order);
 
-  const late_orgs = latest_doc.late_results_orgs;
-
-  if (late_orgs.length === 0) {
-    return null;
-  }
-
-  const banner_content = (
-    <Fragment>
-      {
+  return _.map(result_docs_in_tabling_order, (doc) => {
+    const late_orgs = doc.late_results_orgs;
+    if (late_orgs.length === 0) {
+      return null;
+    }
+    const banner_content = (
+      <Fragment key={doc.name}>
         {
-          en: `The ${latest_doc.name} data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
-          fr: `Les données du ${latest_doc.name} des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
-        }[lang]
-      }
-      <MultiColumnList
-        list_items={_.map(
-          late_orgs,
-          (org_id) => Dept.store.lookup(org_id).name
-        )}
-        column_count={2}
-      />
-    </Fragment>
-  );
+          {
+            en: `The ${doc.name} data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.`,
+            fr: `Les données du ${doc.name} des organisations ci-dessous ne sont pas encore disponibles. Des mises à jour suivront au fur et à mesure de la transmission de ces données.`,
+          }[lang]
+        }
+        <MultiColumnList
+          key={doc.name}
+          list_items={_.map(
+            late_orgs,
+            (org_id) => Dept.store.lookup(org_id).name
+          )}
+          column_count={2}
+        />
+      </Fragment>
+    );
 
-  return (
-    <HeaderBanner
-      route_filter={route_filter}
-      banner_content={banner_content}
-      banner_class="warning"
-      additional_class_names="medium-panel-text"
-    />
-  );
+    return (
+      <HeaderBanner
+        route_filter={route_filter}
+        banner_content={banner_content}
+        banner_class="warning"
+        additional_class_names="medium-panel-text"
+        key={doc.name}
+      />
+    );
+  });
 };
 const LateDpResourcesBanner = () => {
   const route_filter = (match, _history) =>
