@@ -64,6 +64,8 @@ export const declare_planned_actual_comparison_panel = () =>
         const footnotes = get_footnotes_by_subject_and_topic(subject, [
           "DRR_EXP",
           "DRR_FTE",
+          "PCAN_ACTUAL",
+          "PCAN_LACK_PLANNED",
         ]);
 
         const text_calculations = {

@@ -35,7 +35,7 @@ PLANNED_FTE:
   fr: Équivalents temps plein (ETP) prévus
 
 DRR_EXP:
-  en: Variance explanation - actual spending 
+  en: Variance explanation - actual spending
   fr: Explication de l'écart - dépenses réelles
 DRR_FTE:
   en: Variance explanation - actual FTEs
@@ -151,3 +151,35 @@ SERVICES:
 CFMRS:
   en: Central Financial Management Reporting System
   fr: Système central de gestion des rapports financiers
+
+PCAN_EXP:
+  en: Spending Representation Inaccuracy
+  fr: Inexactitude de la représentation des dépenses
+
+PCAN_AUTH:
+  en: Authorities Representation Inaccuracy
+  fr: Inexactitude de la représentation des autorités
+
+PCAN_5_YEAR:
+  en: Standardised Presentation not Suitable
+  fr: Présentation standardisée non adaptée
+
+PCAN_TRANSFER:
+  en: Transfer Payments Expenditures
+  fr: Dépenses liées aux paiements de transfert
+
+LACK_INFO:
+  en: Not Enough Transfer Information
+  fr: Pas assez d'informations sur le transfert
+
+PCAN_STANDARD_OBJ:
+  en: Standard Objects Representation Inaccuracy
+  fr: Inexactitude de la représentation des objets standard
+
+PCAN_ACTUAL:
+  en: Actual Resources
+  fr: Dépenses réelles
+
+PCAN_LACK_PLANNED:
+  en: Lack of Planned Information
+  fr: Manque d'informations planifiées

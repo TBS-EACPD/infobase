@@ -52,7 +52,15 @@ export type TopicKey =
   | "COVID_EXP"
   | "COVID_MEASURE"
   | "SERVICES"
-  | "CFMRS";
+  | "CFMRS"
+  | "PCAN_AUTH"
+  | "PCAN_EXP"
+  | "LACK_INFO"
+  | "PCAN_5_YEAR"
+  | "PCAN_TRANSFER"
+  | "PCAN_STANDARD_OBJ"
+  | "PCAN_ACTUAL"
+  | "PCAN_LACK_PLANNED";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];
