@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import _ from "lodash";
 
-import React, { Fragment, ReactChild } from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import { useMediaQuery } from "react-responsive";
@@ -12,11 +12,15 @@ import {
   create_text_maker,
 } from "src/models/text";
 
-import { FormatKey, formats } from "src/core/format";
+import { formats } from "src/core/format";
+
+import type { FormatKey } from "src/core/format";
 
 import { maxSmallDevice } from "src/style_constants/index";
 
-import { TextMaker, TM, TMProps, } from "./TextMaker";
+import { TextMaker, TM, } from "./TextMaker";
+
+import type { TMProps } from "./TextMaker";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
