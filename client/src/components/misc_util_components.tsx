@@ -18,15 +18,25 @@ import type { FormatKey } from "src/core/format";
 
 import { maxSmallDevice } from "src/style_constants/index";
 
-import { TextMaker, TM, } from "./TextMaker";
+import type { CellValue } from "./DisplayTable/DisplayTable";
+
+import { TextMaker, TM } from "./TextMaker";
 
 import type { TMProps } from "./TextMaker";
 
 // Misc. utility components that don't justify having their own file in ./components, for various reasons
 
 interface FormatProps {
-  type: any;
-  content: any;
+  type: FormatKey;
+  content:
+    | string
+    | number
+    | (string | number)[]
+    | {
+        [key: string]: string | number;
+      }
+    | CellValue
+    | undefined;
   style?: React.CSSProperties;
   className?: string;
   in_parenthesis?: boolean;
@@ -39,7 +49,15 @@ const NoIndex = () =>
     document.head
   );
 
-const ExternalLink = ({ children, href, title }: {children: React.ReactNode,href: string, title: string}) => (
+const ExternalLink = ({
+  children,
+  href,
+  title,
+}: {
+  children: React.ReactNode;
+  href: string;
+  title: string;
+}) => (
   <a target="_blank" rel="noopener noreferrer" href={href} title={title}>
     {children}
   </a>
@@ -50,8 +68,14 @@ class Format extends React.PureComponent<FormatProps> {
     const { type, content, style, className, in_parenthesis, prefix } =
       this.props;
 
-    const formatted_content = _.chain(content)
-      .thru(formats[type as FormatKey])
+    const formatted_content = _.chain(
+      content as
+        | (string | number)[]
+        | {
+            [key: string]: string | number;
+          }
+    )
+      .thru(formats[type])
       .thru((content) =>
         prefix ? `<span>${prefix}${content}</span>` : content
       )
@@ -72,18 +96,25 @@ class Format extends React.PureComponent<FormatProps> {
   }
 }
 
-const Year = ({ y }: {y: number}) => run_template(`{{${y}}}`);
+const Year = ({ y }: { y: number }) => run_template(`{{${y}}}`);
 
-const TrivialTM = (props: JSX.IntrinsicAttributes & TMProps) => <TM tmf={trivial_text_maker} {...props} />;
-const TrivialTextMaker = (props: any) => (
-  <TextMaker text_maker_func={trivial_text_maker} {...props} />
+const TrivialTM = (props: JSX.IntrinsicAttributes & TMProps) => (
+  <TM tmf={trivial_text_maker} {...props} />
+);
+const TrivialTextMaker = (props: JSX.IntrinsicAttributes) => (
+  <TextMaker text_maker_func={trivial_text_maker} text_key={""} {...props} />
 );
 const create_text_maker_component = (text: TextBundle) => {
   const text_maker = create_text_maker(text);
-  return { text_maker, TM: (props: JSX.IntrinsicAttributes & TMProps) => <TM tmf={text_maker} {...props} /> };
+  return {
+    text_maker,
+    TM: (props: JSX.IntrinsicAttributes & TMProps) => (
+      <TM tmf={text_maker} {...props} />
+    ),
+  };
 };
 
-const DlItem = ({ term, def }: {term: object,def:object}) => (
+const DlItem = ({ term, def }: { term: object; def: object }) => (
   <Fragment>
     <dt>{term}</dt>
     <dd>{def}</dd>
@@ -97,7 +128,14 @@ const MultiColumnList = ({
   ul_class,
   li_class,
   responsive = true,
-}: {list_items: any[], column_count: number, className: string, ul_class: string,li_class:string,responsive: boolean}) => {
+}: {
+  list_items: string[];
+  column_count: number;
+  className: string;
+  ul_class: string;
+  li_class: string;
+  responsive: boolean;
+}) => {
   const is_small_screen = useMediaQuery({
     query: `(max-width: ${maxSmallDevice})`,
   });
@@ -129,12 +167,25 @@ const MultiColumnList = ({
   );
 };
 
-const LinkStyled = ({ on_click, className, style, children }: {on_click: React.MouseEventHandler<HTMLButtonElement>,className:string,style:React.CSSProperties,children: React.ReactNode}) => (
+const LinkStyled = ({
+  on_click,
+  className,
+  style,
+  children,
+}: {
+  on_click: React.MouseEventHandler<HTMLButtonElement>;
+  className: string;
+  style: React.CSSProperties;
+  children: React.ReactNode;
+}) => (
   <button
     role="link"
     tabIndex={0}
     onClick={on_click}
-    onKeyDown={(e) => e.key === "Enter" && on_click((e as unknown as React.MouseEvent<HTMLButtonElement>)) }
+    onKeyDown={(e) =>
+      e.key === "Enter" &&
+      on_click(e as unknown as React.MouseEvent<HTMLButtonElement>)
+    }
     className={classNames("link-styled", "button-unstyled", className)}
     style={style}
   >
@@ -154,4 +205,3 @@ export {
   MultiColumnList,
   LinkStyled,
 };
-
