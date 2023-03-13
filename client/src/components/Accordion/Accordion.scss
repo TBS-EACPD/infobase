@@ -5,6 +5,14 @@
   background-color: $secondaryColor;
   border-radius: $standardBorderRadius;
   width: 100%;
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.8s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.8s !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 .pull-down-accordion-header,
