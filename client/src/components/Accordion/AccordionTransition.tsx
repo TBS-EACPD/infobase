@@ -6,9 +6,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, Transition } from "react-transition-group";
 
+const checkReduceMotion =
+  window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+let animation;
+
+if (!checkReduceMotion) {
+  animation = 600;
+} else {
+  animation = 0;
+}
+
 const AccordionTransitionDefaultProps = {
-  expand_duration: 600,
-  collapse_duration: 600,
+  expand_duration: animation,
+  collapse_duration: animation,
   transition_opacity: 1e-6 as string | number,
   transition_height: "80vh" as string | number,
 };

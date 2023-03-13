@@ -230,6 +230,16 @@ class InteractiveGraph extends React.Component {
     );
   }
 }
+const checkReduceMotion =
+  window.matchMedia(`(prefers-reduced-motion: reduce)`) === true ||
+  window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+let animation;
+
+if (!checkReduceMotion) {
+  animation = true;
+} else {
+  animation = false;
+}
 
 const general_default_props = {
   tooltip: (d, formatter) => (
@@ -250,6 +260,7 @@ const general_default_props = {
   enableGridX: true,
   enableGridY: true,
   disable_table_view: false,
+  animate: animation,
   margin: {
     top: 50,
     right: 40,
