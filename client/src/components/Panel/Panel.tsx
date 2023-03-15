@@ -19,10 +19,10 @@ type PanelProps = {
   children: React.ReactNode;
 };
 
-interface isOpenInterface {
+interface PanelState {
   isOpen: boolean;
 }
-export class Panel extends React.Component<PanelProps, isOpenInterface> {
+export class Panel extends React.Component<PanelProps, PanelState> {
   constructor(props: PanelProps) {
     super(props);
     this.state = {
