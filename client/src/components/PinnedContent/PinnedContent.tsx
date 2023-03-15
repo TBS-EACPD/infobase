@@ -27,7 +27,7 @@ interface PinnedContentProps {
   local_storage_name: string;
 }
 
-interface isPinnedMirrorHelper {
+interface NonA11yPinnedContentState {
   is_pinned_local_storage_mirror: boolean | null;
 }
 
@@ -54,7 +54,7 @@ export const set_pinned_content_local_storage = (
 const get_is_pinned = (
   local_storage_name: string,
   default_pin_state: boolean,
-  is_pinned_local_storage_mirror = null
+  is_pinned_local_storage_mirror: boolean | null
 ) => {
   if (has_local_storage && local_storage_name) {
     const is_pinned: boolean =
@@ -69,19 +69,23 @@ const get_is_pinned = (
 
 class NonA11yPinnedContent extends React.Component<
   NonA11yPinnedContentProps,
-  isPinnedMirrorHelper
+  NonA11yPinnedContentState
 > {
   placeHolderRef = React.createRef<HTMLDivElement>();
   contentRef = React.createRef<HTMLDivElement>();
   static defaultProps: { default_pin_state: boolean };
 
-  constructor(props: NonA11yPinnedContentProps) {
+  constructor(
+    props: NonA11yPinnedContentProps,
+    state: NonA11yPinnedContentState
+  ) {
     super(props);
 
     this.state = {
       is_pinned_local_storage_mirror: get_is_pinned(
         props.local_storage_name,
-        props.default_pin_state
+        props.default_pin_state,
+        state.is_pinned_local_storage_mirror
       ),
     };
   }
