@@ -22,7 +22,7 @@ const testing_default = {
 };
 
 describe("Select", () => {
-  it("initializes initial select-option, calls onSelect when select option is changes", async () => {
+  it("initializes initial select-option, calls onSelect when select is changed", () => {
     const onSelect = jest.fn();
     const id = "Selector";
     const selected = "selectinitial";
@@ -40,4 +40,24 @@ describe("Select", () => {
     fireEvent.change(getByTestId("select"), { target: { value: "select2" } });
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
+
+  it("changes other select-option besides initial option to be 'selected'", () => {
+    const onSelect = jest.fn();
+    const id = "Selector";
+    const selected = "selectinitial";
+
+    const { queryAllByTestId } = render(
+      <Select {...{ ...testing_default, id, selected: selected, onSelect }} />
+    );
+
+    const options = queryAllByTestId(
+      "select-option"
+    ) as unknown as HTMLOptionElement[];
+    expect(options[0].selected).toBeTruthy();
+    //Directly swaps currently selected option
+    fireEvent.change(options[1], { target: { selected: true } });
+    expect(options[0].selected).toBeFalsy();
+    expect(options[1].selected).toBeTruthy();
+  });
+
 });
