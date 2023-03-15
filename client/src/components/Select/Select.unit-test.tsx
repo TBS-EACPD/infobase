@@ -1,6 +1,7 @@
 import { render, fireEvent } from "@testing-library/react";
+
 import React from "react";
-import _ from "lodash";
+
 import { Select } from "./Select";
 
 const testing_default = {
@@ -24,17 +25,18 @@ describe("Select", () => {
   it("initializes initial select-option, calls onSelect when select option is changes", async () => {
     const onSelect = jest.fn();
     const id = "Selector";
-    let selected = "selectinitial";
+    const selected = "selectinitial";
 
     const { getByTestId, queryAllByTestId } = render(
       <Select {...{ ...testing_default, id, selected: selected, onSelect }} />
     );
 
-    let options = queryAllByTestId(
+    const options = queryAllByTestId(
       "select-option"
     ) as unknown as HTMLOptionElement[];
     expect(options[0].selected).toBeTruthy();
     expect(onSelect).toHaveBeenCalledTimes(0);
+    //Does not actually seem to be changing the selected value for some reason.
     fireEvent.change(getByTestId("select"), { target: { value: "select2" } });
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
