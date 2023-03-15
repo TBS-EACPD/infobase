@@ -59,5 +59,4 @@ describe("Select", () => {
     expect(options[0].selected).toBeFalsy();
     expect(options[1].selected).toBeTruthy();
   });
-
 });
