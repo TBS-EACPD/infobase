@@ -1,7 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import _ from "lodash";
-
 import React from "react";
 
 import { Details } from "./Details";
