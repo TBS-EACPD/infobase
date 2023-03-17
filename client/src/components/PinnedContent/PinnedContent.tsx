@@ -94,11 +94,13 @@ class NonA11yPinnedContent extends React.Component<
     const { local_storage_name, default_pin_state } = this.props;
     //Removed is_pinned_local_storage_mirror const here as it is not being used.
 
-    //const { is_pinned_local_storage_mirror } = this.state;
+    const { is_pinned_local_storage_mirror } = this.state;
 
-    //Swapped is_local_storage_mirror with 'null' here, as the get_is_planned
-    //const always sets it to null. This is not compatible with it's typing.
-    return get_is_pinned(local_storage_name, default_pin_state, null);
+    return get_is_pinned(
+      local_storage_name,
+      default_pin_state,
+      is_pinned_local_storage_mirror
+    );
   }
 
   set_is_pinned = (is_pinned: boolean) => {
