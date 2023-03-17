@@ -92,15 +92,11 @@ class NonA11yPinnedContent extends React.Component<
 
   get is_pinned() {
     const { local_storage_name, default_pin_state } = this.props;
-    //Removed is_pinned_local_storage_mirror const here as it is not being used.
 
     const { is_pinned_local_storage_mirror } = this.state;
 
-    return get_is_pinned(
-      local_storage_name,
-      default_pin_state,
-      is_pinned_local_storage_mirror
-    );
+    
+    return get_is_pinned(local_storage_name, default_pin_state, is_pinned_local_storage_mirror);
   }
 
   set_is_pinned = (is_pinned: boolean) => {
