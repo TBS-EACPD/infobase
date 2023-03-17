@@ -219,8 +219,6 @@ export const declare_personnel_spend_panel = () =>
           .filter((d) => sum(d.data))
           .value();
 
-        console.log(data[0]);
-
         const avg_data = _.map(
           data,
           (object) => _.sum(object.data) / object.data.length
