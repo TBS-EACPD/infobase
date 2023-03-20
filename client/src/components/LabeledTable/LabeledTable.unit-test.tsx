@@ -4,8 +4,6 @@ import React from "react";
 
 import { LabeledTable } from "./LabeledTable";
 
-import "client/src/Infobase/site.scss";
-
 const testing_no_ids = {
   options: [
     {
