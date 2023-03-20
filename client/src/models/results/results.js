@@ -397,11 +397,7 @@ const drr_docs = build_doc_info_objects("drr", [
 const dp_docs = build_doc_info_objects("dp", [
   {
     year_short: "2022",
-    resource_years: [
-      "{{planning_year_1}}",
-      "{{planning_year_2}}",
-      "{{planning_year_3}}",
-    ],
+    resource_years: [],
     doc_url_en:
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2022-23-departmental-plans.html",
     doc_url_fr:
