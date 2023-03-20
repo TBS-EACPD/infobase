@@ -474,12 +474,15 @@ DR-dp22-1011,DR-10,PSEP-BVU00,"Canada can effectively mitigate, prepare for, res
 DR-dp23-1011,DR-10,PSEP-BVU00,"Canada can effectively mitigate, prepare for, respond to and recover from all-hazards events","Le Canada peut efficacement atténuer les événements tous risques, s’y préparer, intervenir, le cas échéant, et se rétablir",dp23
 DR-drr19-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,drr19
 DR-drr20-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,drr20
+DR-drr21-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,drr21
 DR-dp22-1012,DR-321,PCO-BWW00,Government‘s priorities are achieved,Les priorités du gouvernement sont réalisées,dp22
 DR-drr19-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr19
 DR-drr20-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
+DR-drr21-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 DR-dp22-1013,DR-322,PCO-BWW00,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp22
 DR-drr19-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr19
 DR-drr20-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr20
+DR-drr21-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,drr21
 DR-dp22-1014,DR-323,PCO-BWW00,Cabinet and its committees focus on priorities,Le Cabinet et ses comités axent leurs efforts sur les priorités,dp22
 DR-drr19-1015,DR-324,PCO-BWW00,The Clerk’s priorities are achieved,Les priorités du greffier sont réalisées,drr19
 DR-drr19-1016,DR-41,CEAA-BGV00,Environmental Assessment Decision Statements are complied with.,"Pourcentage d’évaluations environnementales auxquelles ont participé le public et les intervenants. 
@@ -1962,6 +1965,7 @@ DR-drr20-1468,DR-496,INAC-BWR00,Northern lands and resources are sustainably man
 DR-drr21-1468,DR-496,INAC-BWR00,Northern lands and resources are sustainably managed,Les terres et les ressources dans le Nord sont gérées de façon durable,drr21
 DR-dp22-1468,DR-496,INAC-BWR00,Northern lands and resources are sustainably managed,Les terres et les ressources dans le Nord sont gérées de façon durable,dp22
 DR-drr20-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,drr20
+DR-drr21-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,drr21
 DR-dp22-1469,DR-324,PCO-BWW00,Public Service priorities are achieved,Les priorités de la fonction publique sont réalisées,dp22
 DR-drr21-1472,DR-498,CASDO-BXZ00,"Research informs the next generation
 of standards.","La recherche informe Ia prochaine
@@ -3563,11 +3567,13 @@ PROGRAM-drr21-2789,PROGRAM-17,PSEP-BVU03,Canada has a comprehensive approach to 
 PROGRAM-drr19-2790,PROGRAM-745,PCO-BWW01,The Clerk’s priorities are achieved,Les priorités du greffier sont réalisées,drr19
 PROGRAM-drr19-2791,PROGRAM-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",drr19
 PROGRAM-drr20-2791,PROGRAM-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",drr20
+PROGRAM-drr21-2791,PROGRAM-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",drr21
 PROGRAM-dp22-2791,PROGRAM-746,PCO-BWW01,"Vacant positions are filled through open, transparent and merit based selection processes","Les postes vacants sont dotés au moyen de processus de sélection ouverts, transparents et fondés sur le mérite",dp22
 PROGRAM-drr19-2792,PROGRAM-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale",drr19
 PROGRAM-drr20-2792,PROGRAM-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale",drr20
 PROGRAM-drr19-2793,PROGRAM-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr19
 PROGRAM-drr20-2793,PROGRAM-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
+PROGRAM-drr21-2793,PROGRAM-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 PROGRAM-dp22-2793,PROGRAM-744,PCO-BWW03,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp22
 PROGRAM-drr19-2794,PROGRAM-747,PCO-BWW04,Human Resources services provided to the Commission of Inquiry are timely,Les services de ressources humaines sont fournis à la Commission en temps opportun,drr19
 PROGRAM-drr19-2795,PROGRAM-748,PCO-BWW04,Administrative and financial services provided to the Commission are timely,Les services administratifs et financiers fournis à la Commission le sont en temps opportun,drr19
@@ -3581,9 +3587,11 @@ PROGRAM-drr19-2802,PROGRAM-741,PCO-BWW07,Horizontal relationships established,De
 PROGRAM-drr19-2803,PROGRAM-742,PCO-BWW07,Increasing number of outcomes-based policy and program exemplars,Nombre croissant de modèles de politiques et de programmes fondés sur des résultats,drr19
 PROGRAM-drr19-2804,PROGRAM-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr19
 PROGRAM-drr20-2804,PROGRAM-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr20
+PROGRAM-drr21-2804,PROGRAM-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",drr21
 PROGRAM-dp22-2804,PROGRAM-734,PCO-BWW08,Foundation set for enhanced FPT coordination and cooperation,"Les bases sont jetées pour accroître la coordination et la collaboration à l’échelle fédérale, provinciale et territoriale (FPT).",dp22
 PROGRAM-drr19-2805,PROGRAM-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr19
 PROGRAM-drr20-2805,PROGRAM-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
+PROGRAM-drr21-2805,PROGRAM-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 PROGRAM-dp22-2805,PROGRAM-736,PCO-BWW09,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp22
 PROGRAM-drr19-2806,PROGRAM-102,CEAA-BGV01,Increase awareness of process from participants and proponents.,Meilleure connaissance du processus chez les participants et les promoteurs.,drr19
 PROGRAM-drr20-2806,PROGRAM-102,CEAA-BGV01,Increase awareness of process from participants and proponents.,Meilleure connaissance du processus chez les participants et les promoteurs.,drr20
@@ -6699,8 +6707,10 @@ PROGRAM-drr20-3960,PROGRAM-1268,INDSC-BXL02,Clinical and Client Care services ar
 PROGRAM-drr21-3960,PROGRAM-1268,INDSC-BXL02,Clinical and Client Care services are delivered efficiently,La prestation des services du programme Soins cliniques et aux clients est efficiente,drr21
 PROGRAM-dp22-3960,PROGRAM-1268,INDSC-BXL02,Clinical and Client Care services are delivered efficiently,La prestation des services du programme Soins cliniques et aux clients est efficiente,dp22
 PROGRAM-drr20-3962,PROGRAM-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr20
+PROGRAM-drr21-3962,PROGRAM-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,drr21
 PROGRAM-dp22-3962,PROGRAM-1363,PCO-BWW06,Cabinet receives high quality advice,Le Cabinet reçoit des avis de grande qualité,dp22
 PROGRAM-drr20-3972,PROGRAM-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,drr20
+PROGRAM-drr21-3972,PROGRAM-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,drr21
 PROGRAM-dp22-3972,PROGRAM-739,PCO-BWW07,Outcomes-based policy approaches  tested,Les approches stratégiques fondées sur les résultats sont mises à l'essai.,dp22
 PROGRAM-drr20-3973,PROGRAM-1365,ORL-BVA04,Transparent and ethical lobbying,Lobbying transparent et éthique,drr20
 PROGRAM-drr21-3973,PROGRAM-1365,ORL-BVA04,Transparent and ethical lobbying,Lobbying transparent et éthique,drr21
@@ -7215,6 +7225,7 @@ PROGRAM-dp23-4276,PROGRAM-567,SC-BNV04,High-quality statistical information is r
 PROGRAM-drr21-4277,PROGRAM-568,SC-BNV05,High-quality statistical information is accessed by Canadians,Les Canadiens accèdent à des renseignements statistiques de grande qualité,drr21
 PROGRAM-dp22-4277,PROGRAM-568,SC-BNV05,High-quality statistical information is accessed by Canadians,Les Canadiens accèdent à des renseignements statistiques de grande qualité,dp22
 PROGRAM-dp23-4277,PROGRAM-568,SC-BNV05,High-quality statistical information is accessed by Canadians,Les Canadiens accèdent à des renseignements statistiques de grande qualité,dp23
+PROGRAM-drr21-4278,PROGRAM-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security and international files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale et aux affaires internationales",drr21
 PROGRAM-dp22-4278,PROGRAM-733,PCO-BWW02,"The Prime Minister is informed, advised and supported with respect to national security and international files","Le premier ministre est informé, conseillé et appuyé en ce qui concerne les dossiers liés à la sécurité nationale et aux affaires internationales",dp22
 PROGRAM-drr21-4279,PROGRAM-663,CI-BGE02,Benefits of regional economic immigration are distributed across all regions of the country,Les avantages liés à l'immigration économique régionale sont répartis dans toutes les régions du pays,drr21
 PROGRAM-dp22-4279,PROGRAM-663,CI-BGE02,Benefits of regional economic immigration are distributed across all regions of the country,Les avantages liés à l'immigration économique régionale sont répartis dans toutes les régions du pays,dp22
