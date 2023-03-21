@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import React from "react";
 
@@ -32,7 +32,7 @@ describe("Sidebar", () => {
     expect(screen.queryByText("Sidebar Title")).toBeNull();
   });
 
-  it("Displays sidebar title and content when is_open is true", () => {
+  it("Calls on_click when sidebar close button is clicked.", () => {
     const on_click = jest.fn();
     render(
       <Sidebar
@@ -47,7 +47,8 @@ describe("Sidebar", () => {
       />
     );
 
-    expect(screen.queryByText("Testing child")).toBeVisible();
-    expect(screen.queryByText("Sidebar Title")).toBeVisible();
+    expect(on_click).toHaveBeenCalledTimes(0);
+    fireEvent.click(screen.queryByRole("button") as HTMLButtonElement);
+    expect(on_click).toHaveBeenCalledTimes(1);
   });
 });
