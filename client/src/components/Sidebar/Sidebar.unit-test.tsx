@@ -32,6 +32,25 @@ describe("Sidebar", () => {
     expect(screen.queryByText("Sidebar Title")).toBeNull();
   });
 
+  it("Displays sidebar title and content when is_open is true", () => {
+    const on_click = jest.fn();
+    render(
+      <Sidebar
+        {...{
+          is_open: true,
+          open_close_callback: on_click,
+          children: "Testing child",
+          title_text: "Sidebar Title",
+          sidebar_toggle_target: "[toggletest]",
+          return_focus_target: null,
+        }}
+      />
+    );
+
+    expect(screen.queryByText("Testing child")).toBeVisible();
+    expect(screen.queryByText("Sidebar Title")).toBeVisible();
+  });
+
   it("Calls on_click when sidebar close button is clicked.", () => {
     const on_click = jest.fn();
     render(
