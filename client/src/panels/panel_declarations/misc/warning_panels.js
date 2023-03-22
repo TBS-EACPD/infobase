@@ -191,15 +191,33 @@ export const declare_late_results_warning_panel = () =>
         .filter(({ late_results_orgs }) => late_results_orgs.length > 0)
         .value();
 
-      const get_per_doc_late_results_alert = (per_doc_inner_content) => (
-        <Fragment>
-          {_.map(docs_with_late_orgs, (result_doc, ix) => (
-            <WarningPanel key={ix} banner_class="warning">
-              {per_doc_inner_content(result_doc)}
-            </WarningPanel>
-          ))}
-        </Fragment>
-      );
+      const get_per_doc_late_results_alert = (
+        per_doc_inner_content,
+        subject
+      ) => {
+        return (
+          <Fragment>
+            {_.map(docs_with_late_orgs, (result_doc, ix) => {
+              if (subject_type != "gov") {
+                return _.map(result_doc.late_results_orgs, (org_id) => {
+                  if (org_id == subject.id)
+                    return (
+                      <WarningPanel key={ix} banner_class="warning">
+                        {per_doc_inner_content(result_doc)}
+                      </WarningPanel>
+                    );
+                });
+              } else {
+                return (
+                  <WarningPanel key={ix} banner_class="warning">
+                    {per_doc_inner_content(result_doc)}
+                  </WarningPanel>
+                );
+              }
+            })}
+          </Fragment>
+        );
+      };
 
       switch (subject_type) {
         case "gov":
@@ -207,7 +225,7 @@ export const declare_late_results_warning_panel = () =>
             ...late_panel_config,
 
             calculate: () => !_.isEmpty(docs_with_late_orgs),
-            render() {
+            render({ subject }) {
               const per_doc_inner_content = (result_doc) => (
                 <div style={{ textAlign: "left" }}>
                   <TM
@@ -229,7 +247,10 @@ export const declare_late_results_warning_panel = () =>
                 </div>
               );
 
-              return get_per_doc_late_results_alert(per_doc_inner_content);
+              return get_per_doc_late_results_alert(
+                per_doc_inner_content,
+                subject
+              );
             },
           };
         default:
@@ -243,19 +264,27 @@ export const declare_late_results_warning_panel = () =>
                   subject_type === "dept" ? subject.id : subject.dept.id
                 )
                 .value(),
-            render() {
-              const per_doc_inner_content = (result_doc) => (
-                <TM
-                  k={`late_results_warning_${subject_type}`}
-                  args={{
-                    result_doc_name: text_maker(`${result_doc.doc_type}_name`, {
-                      year: result_doc.year,
-                    }),
-                  }}
-                />
-              );
+            render({ subject }) {
+              const per_doc_inner_content = (result_doc) => {
+                return (
+                  <TM
+                    k={`late_results_warning_${subject_type}`}
+                    args={{
+                      result_doc_name: text_maker(
+                        `${result_doc.doc_type}_name`,
+                        {
+                          year: result_doc.year,
+                        }
+                      ),
+                    }}
+                  />
+                );
+              };
 
-              return get_per_doc_late_results_alert(per_doc_inner_content);
+              return get_per_doc_late_results_alert(
+                per_doc_inner_content,
+                subject
+              );
             },
           };
       }
