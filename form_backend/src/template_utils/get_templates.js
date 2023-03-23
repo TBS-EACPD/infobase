@@ -10,10 +10,10 @@ const get_templates = () => {
 
   const json_template_names = _.chain(readdirSync(templates_path))
     .filter((file_name) => /\.json$/.test(file_name))
-    .invokeMap((file_name) => file_name.replace(/\.json$/, ""))
+    .map((file_name) => file_name.replace(/\.json$/, ""))
     .value();
 
-  const template_name_content_pairs = _.map(
+  const template_name_content_pairs = _.invokeMap(
     json_template_names,
     (json_template_name) => [
       json_template_name,
