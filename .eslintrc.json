@@ -19,7 +19,7 @@
     "lodash/unwrap": ["error"],
     "lodash/prefer-includes": ["warn"],
     "lodash/prefer-immutable-method": ["warn"],
-    "lodash/chaining": ["warn"],
+    "lodash/prefer-lodash-chain": ["warn"],
     "lodash/prefer-invoke-map": ["warn"],
     "import/order": [
       "warn",
