@@ -1,12 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import _ from "lodash";
 
 import React from "react";
 
-import { KeyConceptList } from "./KeyConceptList";
-
 import { TM } from "../TextMaker";
+
 import { trivial_text_maker } from "src/models/text";
+
+import { KeyConceptList } from "./KeyConceptList";
 
 jest.mock("src/models/text");
 const mocked_trivial_text_maker = trivial_text_maker as jest.MockedFunction<
