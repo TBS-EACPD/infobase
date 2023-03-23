@@ -17,6 +17,10 @@
     "lodash/no-double-unwrap": ["error"],
     "lodash/no-unbound-this": ["error"],
     "lodash/unwrap": ["error"],
+    "lodash/prefer-includes": ["warn"],
+    "lodash/prefer-immutable-method": ["warn"],
+    "lodash/chaining": ["warn"],
+    "lodash/prefer-invoke-map": ["warn"],
     "import/order": [
       "warn",
       {
