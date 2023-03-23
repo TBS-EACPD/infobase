@@ -4,8 +4,6 @@ import _ from "lodash";
 
 import React from "react";
 
-import { TM } from "../TextMaker";
-
 import { trivial_text_maker } from "src/models/text";
 
 import { KeyConceptList } from "./KeyConceptList";
@@ -34,8 +32,8 @@ describe("KeyConceptList", () => {
             [q3, a3],
           ],
           ([q_key, a_key]) => [
-            <TM key={q_key} k={q_key} />,
-            <TM key={a_key} k={a_key} />,
+            <div key={q_key}>{q_key}</div>,
+            <div key={a_key}>{a_key}</div>,
           ]
         )}
       />
@@ -66,8 +64,8 @@ describe("KeyConceptList", () => {
             [q3, a3],
           ],
           ([q_key, a_key]) => [
-            <TM key={q_key} k={q_key} />,
-            <TM key={a_key} k={a_key} />,
+            <div key={q_key}>{q_key}</div>,
+            <div key={a_key}>{a_key}</div>,
           ]
         )}
         compact={false}
@@ -99,8 +97,8 @@ describe("KeyConceptList", () => {
             [q3, a3],
           ],
           ([q_key, a_key]) => [
-            <TM key={q_key} k={q_key} />,
-            <TM key={a_key} k={a_key} />,
+            <div key={q_key}>{q_key}</div>,
+            <div key={a_key}>{a_key}</div>,
           ]
         )}
         compact={true}
