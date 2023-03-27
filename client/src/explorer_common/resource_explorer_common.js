@@ -46,7 +46,7 @@ const get_rows_for_subject_from_table = _.memoize(
     } else if (!_.isEmpty(subject.children_tags)) {
       return _.chain(subject.children_tags)
         .flatMap((tag) => get_rows_for_subject_from_table(tag, type, year))
-        .flatten(true)
+        .flatten()
         .uniqBy()
         .compact()
         .value();
