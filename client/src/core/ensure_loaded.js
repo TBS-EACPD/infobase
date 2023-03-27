@@ -22,7 +22,7 @@ const load_tables = (table_set) =>
   Promise.all(
     _.chain(table_set)
       .reject(_.property("loaded"))
-      .invokeMap((table) => table.load())
+      .map((table) => table.load())
       .value()
   );
 
