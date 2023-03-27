@@ -88,7 +88,7 @@ const get_est_doc_list_plain_text = (est_docs) =>
 const summable_data_keys = ["stat", "vote"];
 const row_group_reducer = (group) => {
   const keys_to_sum_over = _.chain(group)
-    .first()
+    .head()
     .keys()
     .intersection(summable_data_keys)
     .value();
@@ -112,7 +112,7 @@ const roll_up_flat_measure_data_by_property = (
       // since the key value will have been converted to a string (happens with fiscal_year below, but we
       // know that should be an int so can just covert back ourselves)
       const roll_up_value = _.chain(roll_up_group)
-        .first()
+        .head()
         .get(roll_up_property)
         .value();
 

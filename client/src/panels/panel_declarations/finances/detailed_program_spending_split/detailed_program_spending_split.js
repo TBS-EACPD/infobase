@@ -286,7 +286,7 @@ class DetailedProgramSplit extends React.Component {
       )
       .groupBy((row) => row.program.name)
       .map((group) => ({
-        label: _.first(group).program.name,
+        label: _.head(group).program.name,
 
         ..._.chain(group)
           .groupBy("so_label")

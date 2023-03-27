@@ -38,7 +38,7 @@ export default async function ({ models }) {
       _.join([org_id, fiscal_year, covid_measure_id], "__")
     )
     .map((rolled_up_rows) => ({
-      ..._.first(rolled_up_rows),
+      ..._.head(rolled_up_rows),
       ..._.reduce(
         rolled_up_rows,
         (memo, row) => ({
@@ -65,7 +65,7 @@ export default async function ({ models }) {
               `covid_expenditures.csv contains more than one uniqe calendar_month (${calendar_month}) for ${fiscal_year}`
             );
           } else {
-            return _.first(calendar_month);
+            return _.head(calendar_month);
           }
         })
         .value()

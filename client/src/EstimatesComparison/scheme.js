@@ -359,7 +359,7 @@ function get_data_by_item_types() {
         }
       }
 
-      const is_voted = _.isNumber(_.first(rows).votenum);
+      const is_voted = _.isNumber(_.head(rows).votenum);
 
       const is_single_item =
         _.chain(rows).map(row_identifier_func).uniq().value().length === 1;

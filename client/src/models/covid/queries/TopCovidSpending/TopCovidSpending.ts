@@ -17,14 +17,14 @@ export const {
   query: TopCovidSpendingDocument,
   resolver: (response: TopCovidSpendingQuery) =>
     _.chain(response?.root?.gov?.covid_summary)
-      .first()
+      .head()
       .thru(({ top_spending_orgs, top_spending_measures }) => ({
         top_spending_orgs: _.map(
           _.compact(top_spending_orgs),
           ({ name, covid_summary }) => ({
             name,
             spending: _.chain(covid_summary)
-              .first()
+              .head()
               .get("covid_expenditures")
               .thru(({ vote, stat }) => (vote || 0) + (stat || 0))
               .value(),
@@ -35,7 +35,7 @@ export const {
           ({ name, covid_data }) => ({
             name,
             spending: _.chain(covid_data)
-              .first()
+              .head()
               .get("covid_expenditures")
               .compact()
               .reduce(

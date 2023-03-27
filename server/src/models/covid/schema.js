@@ -116,7 +116,7 @@ export default function ({ models, loaders }) {
   const years_with_covid_data_resolver = (subject_id) =>
     years_with_covid_data_loader.load(subject_id).then(
       (years_with_covid_data) =>
-        _.first(years_with_covid_data) || {
+        _.head(years_with_covid_data) || {
           years_with_estimates: [],
           years_with_expenditures: [],
         }

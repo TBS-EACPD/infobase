@@ -74,14 +74,14 @@ export const format_and_get_fte = (type, subject) => {
   const shouldTickRender = (tick) => {
     if (type === "hist" || type === "hist_estimates") {
       return (
-        tick === _.first(historical_ticks) || tick === _.last(historical_ticks)
+        tick === _.head(historical_ticks) || tick === _.last(historical_ticks)
       );
     } else if (type === "planned") {
-      return tick === _.first(planned_ticks) || tick === _.last(planned_ticks);
+      return tick === _.head(planned_ticks) || tick === _.last(planned_ticks);
     } else {
       return (
         tick === gap_year ||
-        tick === _.first(historical_ticks) ||
+        tick === _.head(historical_ticks) ||
         tick === _.last(planned_ticks)
       );
     }

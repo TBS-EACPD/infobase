@@ -174,9 +174,9 @@ export const declare_related_tags_panel = () =>
           .reject({ id: subject.id })
           .groupBy((tag) => tag.id)
           .map((group) => ({
-            tag: _.first(group),
+            tag: _.head(group),
             count: group.length,
-            type: _.first(group).root.id,
+            type: _.head(group).root.id,
           }))
           .filter("count")
           .groupBy("type")

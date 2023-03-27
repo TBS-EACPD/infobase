@@ -16,5 +16,5 @@ export const {
   query_name: "GovCovidSummary",
   query: GovCovidSummaryDocument,
   resolver: (response: GovCovidSummaryQuery) =>
-    _.first(response?.root?.gov?.covid_summary),
+    _.head(response?.root?.gov?.covid_summary),
 });

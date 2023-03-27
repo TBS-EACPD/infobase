@@ -76,7 +76,7 @@ export const LeafSpinner = ({
   config_name,
   use_light_colors = false,
 }: LeafSpinnerProps) => {
-  const default_config_name = _.chain(spinner_configs).keys().first().value();
+  const default_config_name = _.chain(spinner_configs).keys().head().value();
 
   const { outer_positioning_style, spinner_container_style } =
     spinner_configs[config_name || default_config_name];

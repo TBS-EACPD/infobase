@@ -153,7 +153,7 @@ export const declare_gov_dp_panel = () =>
       legacy_non_table_dependencies: ["requires_result_counts"],
       get_title: () =>
         text_maker("gov_dp_summary_title", {
-          first_year: get_year_for_doc_key(_.first(dp_keys)),
+          first_year: get_year_for_doc_key(_.head(dp_keys)),
           last_year:
             dp_keys.length > 1 && get_year_for_doc_key(_.last(dp_keys)),
         }),

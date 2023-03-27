@@ -123,10 +123,10 @@ export const declare_employee_age_panel = () =>
         const { avg_age, age_group } = calculations;
 
         const dept_avg_first_active_year =
-          avg_age.length > 1 ? _.first(avg_age[1].data) : null;
+          avg_age.length > 1 ? _.head(avg_age[1].data) : null;
         const dept_avg_last_active_year =
           avg_age.length > 1 ? _.last(avg_age[1].data) : null;
-        const gov_avgage_last_year_5 = _.first(avg_age[0].data);
+        const gov_avgage_last_year_5 = _.head(avg_age[0].data);
         const gov_avgage_last_year = _.last(avg_age[0].data);
 
         const common_text_args = calculate_common_text_args(age_group);

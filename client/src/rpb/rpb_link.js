@@ -14,7 +14,7 @@ const rpb_link = (naive_state, first_character = "#") =>
         table: table && table.is_table ? table.id : table,
         subject: subject && subject.subject_type ? subject.guid : subject,
         columns:
-          _.first(columns) && _.first(columns).nick
+          _.head(columns) && _.head(columns).nick
             ? _.map(columns, "nick")
             : columns,
       };

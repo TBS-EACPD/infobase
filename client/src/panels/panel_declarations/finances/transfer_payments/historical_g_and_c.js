@@ -134,7 +134,7 @@ class DetailedHistTPItems extends React.Component {
     const { rows } = props;
     this.state = {
       active_indices: [0],
-      active_type: _.first(rows, "type_id").type_id,
+      active_type: _.head(rows, "type_id").type_id,
     };
 
     this.color_scale = infobase_colors();

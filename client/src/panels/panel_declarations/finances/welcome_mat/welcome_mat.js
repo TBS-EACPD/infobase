@@ -838,7 +838,7 @@ function get_calcs(subject, q6, q12) {
     matched_data = matched_data
       ? matched_data
       : {
-          year: reverse ? _.last(years) : _.first(years),
+          year: reverse ? _.last(years) : _.head(years),
           value: 0,
         };
     return matched_data;
@@ -855,7 +855,7 @@ function get_calcs(subject, q6, q12) {
   );
 
   const spend_latest_year = latest_hist_spend_data.value;
-  const spend_plan_1 = _.first(planned_spend_data);
+  const spend_plan_1 = _.head(planned_spend_data);
   const spend_plan_3 = _.last(planned_spend_data);
 
   const latest_year_hist_spend_diff =
@@ -882,7 +882,7 @@ function get_calcs(subject, q6, q12) {
   );
 
   const fte_latest_year = latest_hist_fte_data.value;
-  const fte_plan_1 = _.first(planned_fte_data);
+  const fte_plan_1 = _.head(planned_fte_data);
   const fte_plan_3 = _.last(planned_fte_data);
 
   const latest_year_hist_fte_diff =

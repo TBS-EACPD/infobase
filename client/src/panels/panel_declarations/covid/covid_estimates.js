@@ -478,7 +478,7 @@ class SummaryTabComponent extends React.Component {
       .value();
 
     this.graph_keys = _.chain(this.graph_data)
-      .first()
+      .head()
       .omit(this.graph_index_key)
       .keys()
       .value();

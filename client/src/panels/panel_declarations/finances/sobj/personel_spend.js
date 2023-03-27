@@ -38,7 +38,7 @@ export const declare_personnel_spend_panel = () =>
         const sorted_pairs = _.sortBy(year_value_pairs, _.last);
 
         const [max_year, max_spend] = _.last(sorted_pairs);
-        const [min_year, min_spend] = _.first(sorted_pairs);
+        const [min_year, min_spend] = _.head(sorted_pairs);
         const text_calculations = {
           five_year_avg,
           max_spend,

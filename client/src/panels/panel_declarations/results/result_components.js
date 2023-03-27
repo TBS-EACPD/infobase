@@ -373,9 +373,9 @@ function indicators_period_span_str(indicators) {
     .sortBy() //sort by year (no arg needed)
     .thru((nums) => {
       if (nums.length > 1) {
-        return `${_.first(nums)} - ${_.last(nums)}`;
+        return `${_.head(nums)} - ${_.last(nums)}`;
       } else if (nums.length === 1) {
-        return _.first(nums);
+        return _.head(nums);
       } else {
         return "";
       }

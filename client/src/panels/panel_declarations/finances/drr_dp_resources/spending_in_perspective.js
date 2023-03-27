@@ -122,7 +122,7 @@ export const declare_spending_in_tag_perspective_panel = () =>
         }
         const { programSpending } = tables;
         //analysis: as of writing this (oct 2016) the max number of tags encountered is 13.
-        const prog_row = _.first(programSpending.programs.get(subject));
+        const prog_row = _.head(programSpending.programs.get(subject));
 
         if (!prog_row || !(prog_row[col] > 0)) {
           return false;
