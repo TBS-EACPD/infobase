@@ -113,7 +113,7 @@ export const declare_employee_executive_level_panel = () =>
               ...calculate_common_text_args(series),
               subject,
               avg_num_non_ex: _.chain(series)
-                .head(({ label }) => label === "Non-EX")
+                .first(({ label }) => label === "Non-EX")
                 .thru(({ data }) => _.mean(data))
                 .value(),
             };
