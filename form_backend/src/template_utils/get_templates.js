@@ -13,7 +13,7 @@ const get_templates = () => {
     .map((file_name) => file_name.replace(/\.json$/, ""))
     .value();
 
-  const template_name_content_pairs = _.invokeMap(
+  const template_name_content_pairs = _.map(
     json_template_names,
     (json_template_name) => [
       json_template_name,
