@@ -40,13 +40,12 @@ const get_rows_for_subject_from_table = _.memoize(
         .value();
     } else if (subject.subject_type === "ministry") {
       return _.chain(subject.orgs)
-        .map((org) => get_rows_for_subject_from_table(org, type, year))
-        .flatten(true)
+        .flatMap((org) => get_rows_for_subject_from_table(org, type, year))
         .compact()
         .value();
     } else if (!_.isEmpty(subject.children_tags)) {
       return _.chain(subject.children_tags)
-        .map((tag) => get_rows_for_subject_from_table(tag, type, year))
+        .flatMap((tag) => get_rows_for_subject_from_table(tag, type, year))
         .flatten(true)
         .uniqBy()
         .compact()

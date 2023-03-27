@@ -56,7 +56,7 @@ function get_related_tag_list_args(subject) {
       tags_by_root_id = _.chain(subject.programs)
         .map("tags")
         .flatten()
-        .uniq("id")
+        .uniqBy("id")
         .groupBy("root.id")
         .value();
 
