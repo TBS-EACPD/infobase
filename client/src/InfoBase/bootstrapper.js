@@ -77,7 +77,7 @@ function bootstrapper(App, done) {
   wake_up_graphql_cloud_function();
 
   populate_initial_stores_from_lookups().then(() => {
-    _.each(table_defs, (table_def) =>
+    _.forEach(table_defs, (table_def) =>
       Table.store.create_and_register(table_def)
     );
 

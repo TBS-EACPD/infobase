@@ -37,7 +37,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "big_int",
         nick: header,

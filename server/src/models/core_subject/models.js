@@ -176,7 +176,7 @@ export default function define_core_subjects(model_singleton) {
     ),
     crso_id_loader: create_resource_by_id_attr_dataloader(Crso, "crso_id"),
   };
-  _.each(loaders, (val, key) => model_singleton.define_loader(key, val));
+  _.forEach(loaders, (val, key) => model_singleton.define_loader(key, val));
 
   const search_orgs = create_searcher(Org);
   const search_programs = create_searcher(Program);

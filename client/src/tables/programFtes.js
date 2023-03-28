@@ -50,7 +50,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(std_years, (header) => {
+    _.forEach(std_years, (header) => {
       this.add_col({
         type: "decimal2",
         nick: header,
@@ -81,7 +81,7 @@ export default {
         fr: `Correspond au nombre total d'équivalents temps plein (ETP) prévus pour l'exercice {{pa_last_year_planned}}`,
       },
     });
-    _.each(planning_years, (header) => {
+    _.forEach(planning_years, (header) => {
       this.add_col({
         type: "decimal2",
         nick: header,

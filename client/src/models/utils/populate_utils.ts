@@ -6,7 +6,7 @@ export const enforced_required_fields = <
 >(
   enforced_required_fields: RequiredFields
 ) => {
-  _.each(enforced_required_fields, (cell, key) => {
+  _.forEach(enforced_required_fields, (cell, key) => {
     if (typeof cell === "undefined") {
       throw new Error(`Required field "${key}" has an empty cell`);
     }

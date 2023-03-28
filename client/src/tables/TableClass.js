@@ -24,7 +24,7 @@ function add_child(x) {
   if (!_.isArray(x)) {
     x = [x];
   }
-  _.each(x, (col) => {
+  _.forEach(x, (col) => {
     if (_.isString(col)) {
       col = { header: { en: col, fr: col } };
     }
@@ -117,7 +117,7 @@ class Queries {
       .reduce(reducer, initial);
 
     // deal with percentage columns
-    _.each(cols, (col, i) => {
+    _.forEach(cols, (col, i) => {
       var type = this.table.col_from_nick(col).type;
       if (type === "percentage") {
         total[i] = total[i] / total.length;
@@ -144,7 +144,7 @@ class Queries {
     }
     var vals = this.sum_cols(data, cols);
     if (format) {
-      _.each(cols, (col) => {
+      _.forEach(cols, (col) => {
         var type = this.table.col_from_nick(col).type;
         vals[col] = _.get(formats, type, _.identity)(vals[col]);
       });
@@ -259,7 +259,7 @@ export class Table {
 
     to_chain
       .filter((col) => !_.isUndefined(col.formula))
-      .each((col) => {
+      .forEach((col) => {
         var formula = col.formula;
         col.formula = (data) => formula(this, data);
       })
@@ -274,7 +274,7 @@ export class Table {
           _.isUndefined(col.formula)
         );
       })
-      .each(function (col) {
+      .forEach(function (col) {
         col.formula = function (data) {
           if (_.isArray(data)) {
             const to_sum = _.map(data, col.nick || col.wcag);
@@ -498,7 +498,7 @@ export class Table {
     data = _.chain(parsed_data)
       .tail()
       .map(row_transf)
-      .each((row) => this.process_mapped_row(row))
+      .forEach((row) => this.process_mapped_row(row))
       .groupBy((row) => row.dept === "ZGOC")
       .value();
     this.csv_headers = _.head(parsed_data);
@@ -507,7 +507,7 @@ export class Table {
 
     this.depts = {};
 
-    _.each(this.data, (row) => {
+    _.forEach(this.data, (row) => {
       if (!this.depts[row.dept]) {
         this.depts[row.dept] = [row];
       } else {

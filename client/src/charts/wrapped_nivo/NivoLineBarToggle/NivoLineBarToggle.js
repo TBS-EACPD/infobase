@@ -60,7 +60,7 @@ export class NivoLineBarToggle extends React.Component {
     // so this ensures that the mapping will be the same for
     // each sub-graph
     const set_graph_colors = (items) =>
-      _.each(items, (item) => colors(item.label));
+      _.forEach(items, (item) => colors(item.label));
     set_graph_colors(props.data);
 
     this.state = {

@@ -8,7 +8,7 @@ import { lang } from "src/core/injected_build_constants";
 import { glossaryEntryStore } from "./glossary";
 
 export const populate_glossary = (glossary: ParsedCsvWithUndefineds) =>
-  _.each(glossary, ({ id, name_en, name_fr, def_en, def_fr }) => {
+  _.forEach(glossary, ({ id, name_en, name_fr, def_en, def_fr }) => {
     const raw_definition = lang === "en" ? def_en : def_fr;
 
     raw_definition &&

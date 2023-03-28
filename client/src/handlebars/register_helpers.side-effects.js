@@ -14,7 +14,7 @@ import { lang } from "src/core/injected_build_constants";
 
 import { infographic_href_template, glossary_href } from "src/link_utils";
 
-_.each(formats, (format, key) => {
+_.forEach(formats, (format, key) => {
   HandlebarsWithPrototypeAccess.registerHelper(
     "fmt_" + key,
     (amount) => new HandlebarsWithPrototypeAccess.SafeString(format(amount))

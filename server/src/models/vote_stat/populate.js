@@ -23,28 +23,28 @@ export default function ({ models }) {
   );
 
   const prog_years = _.takeRight(public_account_years, 2);
-  _.each(program_vs_records, (obj) => {
+  _.forEach(program_vs_records, (obj) => {
     obj.program_id = create_program_id(obj);
-    _.each(prog_years, (col) => {
+    _.forEach(prog_years, (col) => {
       obj[col] = obj[col] && parseFloat(obj[col]);
     });
   });
 
-  _.each(pa_records, (record) => {
-    _.each(
+  _.forEach(pa_records, (record) => {
+    _.forEach(
       public_account_years_auth_exp,
       (col) => (record[col] = record[col] && parseFloat(record[col]))
     );
   });
 
-  _.each(estimates_records, (record) => {
-    _.each(
+  _.forEach(estimates_records, (record) => {
+    _.forEach(
       estimates_years,
       (col) => (record[col] = record[col] && parseFloat(record[col]))
     );
   });
 
-  _.each(pa_records, (record) => PAVoteStat.register(record));
-  _.each(estimates_records, (record) => EstimatesVoteStat.register(record));
-  _.each(program_vs_records, (record) => ProgramVoteStat.register(record));
+  _.forEach(pa_records, (record) => PAVoteStat.register(record));
+  _.forEach(estimates_records, (record) => EstimatesVoteStat.register(record));
+  _.forEach(program_vs_records, (record) => ProgramVoteStat.register(record));
 }

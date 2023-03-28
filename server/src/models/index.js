@@ -32,7 +32,7 @@ const sub_module_defs = _.compact([
 ]);
 
 export function create_models() {
-  _.each(
+  _.forEach(
     sub_module_defs,
     ({ define_models }) =>
       _.isFunction(define_models) && define_models(model_singleton)
@@ -54,7 +54,7 @@ export function get_schema_deps() {
   const schema_strings = [root_schema.schema];
   const resolver_objs = [root_schema.resolvers];
 
-  _.each(sub_module_defs, ({ define_schema }) => {
+  _.forEach(sub_module_defs, ({ define_schema }) => {
     if (_.isFunction(define_schema)) {
       const { schema, resolvers } = define_schema(model_singleton);
 

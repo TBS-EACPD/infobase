@@ -51,7 +51,7 @@ export default {
         can_group_by: true,
       },
     ]);
-    _.each(std_years, (header) => {
+    _.forEach(std_years, (header) => {
       //TODO: the col definitions here are copied from orgVoteStatPa, either change them or make it DRY
       this.add_col(header).add_child([
         {
@@ -83,7 +83,7 @@ export default {
         fr: `Correspondent au total des dépenses prévues pour l'exercice {{pa_last_year_planned}}, y compris les fonds approuvés par le Conseil du Trésor.`,
       },
     });
-    _.each(planning_years, (header) => {
+    _.forEach(planning_years, (header) => {
       this.add_col(header).add_child([
         {
           type: "big_int",

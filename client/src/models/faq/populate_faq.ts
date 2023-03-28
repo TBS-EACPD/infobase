@@ -10,7 +10,7 @@ import { sanitized_marked } from "src/general_utils";
 import { faqStore } from "./faq";
 
 export const populate_faq = (faq: ParsedCsvWithUndefineds) =>
-  _.each(faq, (faq) => {
+  _.forEach(faq, (faq) => {
     faqStore.create_and_register({
       ...enforced_required_fields({
         id: faq.id,

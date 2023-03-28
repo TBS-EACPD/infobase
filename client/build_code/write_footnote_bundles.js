@@ -32,16 +32,16 @@ function populate_stores(parsed_models) {
     footnotes,
   } = parsed_models;
 
-  _.each(crsos, ({ id, dept_code }) => {
+  _.forEach(crsos, ({ id, dept_code }) => {
     crso_deptcodes[id] = dept_code;
   });
 
-  _.each(programs, ({ dept_code, activity_code }) => {
+  _.forEach(programs, ({ dept_code, activity_code }) => {
     const prog_id = `${dept_code}-${activity_code}`;
     program_deptcodes[prog_id] = dept_code;
   });
 
-  _.each(tag_prog_links, ({ program_id, tag_id }) => {
+  _.forEach(tag_prog_links, ({ program_id, tag_id }) => {
     if (!program_tag_ids[program_id]) {
       program_tag_ids[program_id] = [];
     }
@@ -62,7 +62,7 @@ function populate_stores(parsed_models) {
     .fromPairs()
     .value();
 
-  _.each(footnotes, (obj) => {
+  _.forEach(footnotes, (obj) => {
     //FIXME: once pipeline starts including unique IDs for each footnote, we can stop using index.
     //"id","subject_class","subject_id","fyear1","fyear2","keys","footnote_en","footnote_fr"
     all_footnotes.push(obj);
@@ -90,7 +90,7 @@ function populate_stores(parsed_models) {
           footnotes_by_deptcode[dept_code].push(obj);
 
           const tag_ids = program_tag_ids[subject_id];
-          _.each(tag_ids, (tag_id) => {
+          _.forEach(tag_ids, (tag_id) => {
             footnotes_by_tag_id[tag_id].push(obj);
           });
 

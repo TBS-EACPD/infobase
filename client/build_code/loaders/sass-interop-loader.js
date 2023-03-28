@@ -16,7 +16,7 @@ const get_top_level_variable_names = (content) =>
   _.chain(content)
     .split("\n")
     .filter((line) => sass_variable_pattern.test(line))
-    .invokeMap((export_line) => export_line.replace(sass_variable_pattern, "$1"))
+    .map((export_line) => export_line.replace(sass_variable_pattern, "$1"))
     .value();
 
 const test_variable_type_cases = (scss_module_path, variable_names) => {

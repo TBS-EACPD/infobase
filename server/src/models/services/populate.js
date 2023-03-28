@@ -327,7 +327,7 @@ export default async function ({ models }) {
         .value()
     )
     // only valid under above logic, will need to rework active status deterination in multi-year refactor
-    .each((service) => {
+    .forEach((service) => {
       service.is_active =
         service.submission_year === absolute_most_recent_submission_year;
     })

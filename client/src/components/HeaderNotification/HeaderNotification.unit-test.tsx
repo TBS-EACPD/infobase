@@ -23,7 +23,7 @@ describe("HeaderNotification", () => {
       />
     );
 
-    _.each(list_of_text, (text) => {
+    _.forEach(list_of_text, (text) => {
       expect(screen.getByText(text)).toBeInTheDocument();
     });
   });

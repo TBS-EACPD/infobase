@@ -154,7 +154,7 @@ const text_bundles_by_filename = {};
 const add_text_bundle = (text_bundle) => {
   const { __file_name__ } = text_bundle;
   const to_add = {};
-  _.each(_.omit(text_bundle, "__file_name__"), (text_obj, key) => {
+  _.forEach(_.omit(text_bundle, "__file_name__"), (text_obj, key) => {
     if (text_obj.handlebars_partial) {
       HandlebarsWithPrototypeAccess.registerPartial(key, text_obj.text);
       return;
@@ -223,7 +223,7 @@ const _create_text_maker =
     }
 
     let rtn = text_obj.text;
-    _.each(text_obj.transform, (transform) => {
+    _.forEach(text_obj.transform, (transform) => {
       if (transform === "handlebars") {
         if (!text_obj.handlebars_compiled) {
           text_obj.text = HandlebarsWithPrototypeAccess.compile(rtn);

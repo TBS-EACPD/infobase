@@ -44,7 +44,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(std_years, (header) => {
+    _.forEach(std_years, (header) => {
       this.add_col({
         type: "dollar",
         nick: header,

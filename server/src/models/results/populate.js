@@ -26,7 +26,7 @@ const counts_from_indicators = (indicators) =>
       return _.chain(indicator_count_fragments)
         .reduce(
           (memo, count_fragment) => {
-            _.each(count_fragment, (value, key) =>
+            _.forEach(count_fragment, (value, key) =>
               _.isArray(memo[key]) ? memo[key].push(value) : memo[key]++
             );
             return memo;

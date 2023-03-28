@@ -123,7 +123,7 @@ function get_index_pages() {
 
   const en_lang_lookups = _.mapValues(index_lang_lookups, "en");
   const fr_lang_lookups = _.mapValues(index_lang_lookups, "fr");
-  _.each(
+  _.forEach(
     [en_lang_lookups, fr_lang_lookups],
     (lookups) => (lookups.CDN_URL = CDN_URL)
   );
@@ -174,7 +174,7 @@ function build_proj(PROJ) {
   const footnotes_dir = `${dir}/footnotes`;
   const well_known_dir = `${dir}/.well-known`;
 
-  _.each([build_dir_name, dir, app_dir, footnotes_dir], (name) =>
+  _.forEach([build_dir_name, dir, app_dir, footnotes_dir], (name) =>
     make_dir_if_exists(name)
   );
 
@@ -195,7 +195,7 @@ function build_proj(PROJ) {
 
   write_gitsha_file(dir);
 
-  _.each(["en", "fr"], (lang) => {
+  _.forEach(["en", "fr"], (lang) => {
     const {
       depts: dept_footnotes,
       tags: tag_footnotes,
@@ -204,7 +204,7 @@ function build_proj(PROJ) {
       estimates: estimate_footnotes,
     } = get_footnote_file_defs(parsed_bilingual_models, lang);
 
-    _.each(_.merge(dept_footnotes, tag_footnotes), (file_str, subj_id) => {
+    _.forEach(_.merge(dept_footnotes, tag_footnotes), (file_str, subj_id) => {
       // reminder: the funky .json.js exstension is to ensure that Cloudflare caches these, as it usually won't cache .json
       fs.writeFileSync(
         `${footnotes_dir}/fn_${lang}_${subj_id}.json.js`,
@@ -252,7 +252,7 @@ function build_proj(PROJ) {
   );
   PROJ.other.forEach((f_name) => copy_file_to_target_dir(f_name, dir));
 
-  _.each(get_index_pages(), ({ file_prefix, en, fr }) => {
+  _.forEach(get_index_pages(), ({ file_prefix, en, fr }) => {
     fs.writeFileSync(`${dir}/${file_prefix}-eng.html`, en);
     fs.writeFileSync(`${dir}/${file_prefix}-fra.html`, fr);
   });

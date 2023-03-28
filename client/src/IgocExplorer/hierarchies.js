@@ -90,7 +90,7 @@ const grouping_options = {
             }))
             .value(),
         }))
-        .each((parent_form_node) => {
+        .forEach((parent_form_node) => {
           if (parent_form_node.children.length === 1) {
             //if an inst form grouping just contains a single inst form, 'skip' the level
             const { children } = parent_form_node.children[0];

@@ -6,8 +6,8 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 export default function ({ models }) {
   const records = get_standard_csv_file_rows("transfer_payments.csv");
 
-  _.each(records, (record) => {
-    _.each(
+  _.forEach(records, (record) => {
+    _.forEach(
       public_account_years_auth_exp,
       (col) => (record[col] = record[col] && parseFloat(record[col]))
     );
@@ -15,5 +15,5 @@ export default function ({ models }) {
 
   const { TransferPayments } = models;
 
-  _.each(records, (rec) => TransferPayments.register(rec));
+  _.forEach(records, (rec) => TransferPayments.register(rec));
 }
