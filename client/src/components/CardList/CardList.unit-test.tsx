@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import _ from "lodash";
+import { render, screen } from "@testing-library/react";
+
 import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
