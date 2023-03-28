@@ -20,7 +20,6 @@
     "lodash/prefer-includes": ["warn"],
     "lodash/prefer-immutable-method": ["warn"],
     "lodash/prefer-lodash-chain": ["warn"],
-    "lodash/prefer-invoke-map": ["warn"],
     "lodash/no-extra-args": ["warn"],
     "import/order": [
       "warn",
