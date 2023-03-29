@@ -23,6 +23,19 @@ const testing_cardlist = [
   },
 ];
 
+const testing_cardlist_hrefs = [
+  {
+    display: "Outer Display1",
+    href: "test",
+    children: [{ display: "Inner Display1", href: "innerolo2" }],
+  },
+  {
+    display: "Outer Display2",
+    href: "https://github.com/TBS-EACPD/infobase",
+    children: [{ display: "Inner Display2", href: "innerolo2" }],
+  },
+];
+
 describe("CardList", () => {
   it("Renders a CardList with visible CardListElementProps and CardListChildElementProps", async () => {
     render(<CardList elements={testing_cardlist} />);
@@ -30,5 +43,14 @@ describe("CardList", () => {
     expect(screen.getByText("Outer Display2")).toBeInTheDocument();
     expect(screen.getByText("Inner Display1")).toBeInTheDocument();
     expect(screen.getByText("Inner Display2")).toBeInTheDocument();
+  });
+
+  it("Renders a CardList with visible CardListElementProps and CardListChildElementProps, along with href's.", async () => {
+    render(<CardList elements={testing_cardlist_hrefs} />);
+    expect(screen.getByText("Outer Display1")).toBeInTheDocument();
+    expect(screen.getByText("Outer Display2")).toBeInTheDocument();
+    expect(screen.getByText("Inner Display1")).toBeInTheDocument();
+    expect(screen.getByText("Inner Display2")).toBeInTheDocument();
+    expect(screen.getAllByRole("link")).toBeTruthy();
   });
 });
