@@ -112,7 +112,7 @@ const StatusGrid = ({ met, not_met, not_available, future, drr_key }) => {
   const viz_data = _.chain(data)
     .sortBy(({ status_key }) => icon_order[status_key])
     .flatMap(({ viz_count, status_key }) => {
-      return _.range(0, viz_count).map(() => ({ status_key }));
+      return _.times(viz_count, () => ({ status_key }));
     })
     .value();
 

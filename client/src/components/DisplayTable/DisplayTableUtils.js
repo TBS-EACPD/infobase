@@ -357,8 +357,7 @@ export const SelectPageSize = ({
       : _.ceil(num_items / page_size_increment);
 
   const options = _.chain(num_options + 1)
-    .range()
-    .map((_, ix) => {
+    .times((_, ix) => {
       if (ix === num_options) {
         return { value: num_items, label: text_maker("show_all") };
       } else {
