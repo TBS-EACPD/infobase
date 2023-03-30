@@ -362,12 +362,10 @@ export class Table {
 
     return (
       _.chain(cols)
-        .filter((col) => col.nick === grouping)
-        .head()
+        .find((col) => col.nick === grouping)
         .value() ||
       _.chain(cols)
-        .filter((col) => _.has(col, `custom_groupings.${grouping}`))
-        .head()
+        .find((col) => _.has(col, `custom_groupings.${grouping}`))
         .value() || { nick: "default" }
     );
   }

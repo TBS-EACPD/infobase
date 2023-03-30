@@ -337,8 +337,7 @@ const get_declare_late_resources_panel = (planned_or_actual, late_orgs) => () =>
   });
 
 const depts_with_late_actual_resources = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "drr")
-  .last()
+  .findLast(({ doc_type }) => doc_type === "drr")
   .get("late_resources_orgs")
   .concat(PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC.late_resources_orgs)
   .uniq()
@@ -347,8 +346,7 @@ export const declare_late_actual_resources_panel =
   get_declare_late_resources_panel("actual", depts_with_late_actual_resources);
 
 const depts_with_late_planned_resources = _.chain(result_docs_in_tabling_order)
-  .filter(({ doc_type }) => doc_type === "dp")
-  .last()
+  .findLast(({ doc_type }) => doc_type === "dp")
   .get("late_resources_orgs")
   .value();
 export const declare_late_planned_resources_panel =
