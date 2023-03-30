@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 
+import _ from "lodash";
+
 import React from "react";
 
 import { trivial_text_maker } from "src/models/text";
-
-import { IconGrid } from "./IconGrid";
 
 import {
   IconHTML,
@@ -18,7 +18,7 @@ import {
   IconBaselineCloud,
 } from "src/icons/icons";
 
-import _ from "lodash";
+import { IconGrid } from "./IconGrid";
 
 const tech_icon_list = _.chain([
   IconHTML,
