@@ -21,6 +21,7 @@
     "lodash/prefer-immutable-method": ["warn"],
     "lodash/prefer-lodash-chain": ["warn"],
     "lodash/no-extra-args": ["warn"],
+    "lodash/prefer-times": ["warn"],
     "import/order": [
       "warn",
       {
