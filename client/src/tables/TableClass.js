@@ -525,7 +525,7 @@ export class Table {
       var mapped_row = mapper.map(row);
       // turn the array of data into an object with keys based on the defined columns
       var row_obj = _.zipObject(this.unique_headers, mapped_row);
-      _.toPairs(row_obj).forEach((pair) => {
+      _.toPairs(row_obj).flatMap((pair) => {
         const [key, val] = pair;
         const type = this.col_from_nick(key).type;
         // in case we have numbers represented as string, we'll convert them to integers
@@ -572,7 +572,7 @@ export class Table {
           row_obj[key] = 0;
         }
       });
-      _.toPairs(row_obj).forEach(([key, _val]) => {
+      _.toPairs(row_obj).flatMap(([key, _val]) => {
         const col = this.col_from_nick(key);
         if (col.formula && _.isUndefined(col.formula.default)) {
           row_obj[key] = col.formula(row_obj);

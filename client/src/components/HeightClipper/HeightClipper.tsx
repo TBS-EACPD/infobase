@@ -21,7 +21,7 @@ interface HeightClipperProps {
 interface HeightClipperState {
   exceedsHeight: boolean;
   shouldClip: boolean;
-}
+} 
 
 export const HeightClipper = (props: HeightClipperProps) =>
   is_a11y_mode ? props.children : <_HeightClipper {...props} />;
@@ -88,12 +88,12 @@ class _HeightClipper extends React.Component<
       _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll('[tabindex="-999"]'),
         _.identity
-      ).forEach((node: HTMLElement) => node.removeAttribute("tabindex"));
+      ).flatMap((node: HTMLElement) => node.removeAttribute("tabindex"));
 
       _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll("[prev-tabindex]"),
         _.identity
-      ).forEach((node: HTMLElement) => {
+      ).flatMap((node: HTMLElement) => {
         const temp = node.getAttribute("prev-tabidnex");
         if (temp !== null) {
           const previous_tabindex = temp;
@@ -105,7 +105,7 @@ class _HeightClipper extends React.Component<
       _.map<Element, HTMLElement>(
         height_clipper_node.querySelectorAll("svg"),
         _.identity
-      ).forEach((node: HTMLElement) => node.removeAttribute("focusable"));
+      ).flatMap((node: HTMLElement) => node.removeAttribute("focusable"));
     }
   }
 
@@ -113,7 +113,7 @@ class _HeightClipper extends React.Component<
     _.map<Element, HTMLElement>(
       untabbable_children_node.querySelectorAll("*"),
       _.identity
-    ).forEach((node: HTMLElement) => {
+    ).flatMap((node: HTMLElement) => {
       if (
         !_.isUndefined(node.tabIndex) &&
         !_.isNull(node.tabIndex) &&
@@ -131,7 +131,7 @@ class _HeightClipper extends React.Component<
     _.map<Element, HTMLElement>(
       untabbable_children_node.querySelectorAll("svg"),
       _.identity
-    ).forEach((node: HTMLElement) => {
+    ).flatMap((node: HTMLElement) => {
       node.setAttribute("focusable", "false");
     });
   }

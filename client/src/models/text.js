@@ -241,7 +241,7 @@ const _create_text_maker =
           temp_dom_node.querySelectorAll(".embeded-markdown");
 
         if (embedded_markdown_nodes.length) {
-          _.map(embedded_markdown_nodes, _.identity).forEach(
+          _.map(embedded_markdown_nodes, _.identity).flatMap(
             (node) =>
               (node.innerHTML = marked(node.innerHTML, {
                 sanitize: false,
