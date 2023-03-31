@@ -115,7 +115,7 @@ const run_template = function (s, extra_args = {}) {
   }
   // build common arguments object which will be passed
   // to all templates
-  const args = _.extend({}, extra_args, full_template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
+  const args = _.assignIn({}, extra_args, full_template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
   // combine the `extra_args` with the common arguments
   if (s) {
     let _template;
@@ -174,7 +174,7 @@ const add_text_bundle = (text_bundle) => {
       text_obj.handlebars_compiled = true;
     }
   });
-  _.extend(template_store, to_add);
+  _.assignIn(template_store, to_add);
 
   text_bundles_by_filename[__file_name__] = to_add;
 };
@@ -272,7 +272,7 @@ const create_text_maker = (bundles) => {
   }
 
   const combined = combine_bundles(bundles);
-  _.extend(combined, combined_global_bundle);
+  _.assignIn(combined, combined_global_bundle);
   const func = _create_text_maker(combined);
   combined.__text_maker_func__ = func;
 

@@ -96,7 +96,7 @@ class Queries {
     this.dept = subject && subject.subject_type === "dept" && subject.id;
     this.subject = subject;
     this.data = data;
-    _.extend(this, table.queries);
+    _.assignIn(this, table.queries);
   }
 
   sum_cols(rows, cols) {
