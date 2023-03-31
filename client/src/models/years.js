@@ -71,12 +71,7 @@ const actual_to_planned_gap_year = _.chain(year_templates)
     _.head(planning_years),
   ])
   .map((fiscal_year) =>
-    _.chain(fiscal_year)
-      .thru(run_template)
-      .split("-")
-      .head()
-      .parseInt()
-      .value()
+    _.chain(fiscal_year).thru(run_template).split("-").head().parseInt().value()
   )
   .thru(([last_pa_year, first_planning_year]) => {
     if (first_planning_year - last_pa_year == 2) {

@@ -322,8 +322,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, active_list }) => (
     <VisibilityControl
       items={_.map(ordered_status_keys, (status_key) => ({
         key: status_key,
-        active:
-          active_list.length === 0 || _.includes(active_list, status_key),
+        active: active_list.length === 0 || _.includes(active_list, status_key),
         count: icon_counts[status_key] || 0,
         text: text_maker(status_key),
         icon: large_status_icons[status_key],

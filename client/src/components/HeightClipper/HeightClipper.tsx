@@ -21,7 +21,7 @@ interface HeightClipperProps {
 interface HeightClipperState {
   exceedsHeight: boolean;
   shouldClip: boolean;
-} 
+}
 
 export const HeightClipper = (props: HeightClipperProps) =>
   is_a11y_mode ? props.children : <_HeightClipper {...props} />;
