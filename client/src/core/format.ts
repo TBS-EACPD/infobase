@@ -122,9 +122,8 @@ const compact = (
         }
       });
 
-      const defined_compacted = _.reject(
-        compacted,
-        (pair) => _.isUndefined(pair)
+      const defined_compacted = _.reject(compacted, (pair) =>
+        _.isUndefined(pair)
       );
       const defined_compact_val = defined_compacted[0];
 
