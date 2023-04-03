@@ -106,9 +106,9 @@ export const get_dynamic_footnote_definitions = (): FootNoteDef[] => {
           doc_type,
           year,
         }))
-        .filter(
+        .reject(
           ({ late_orgs }) =>
-            !_.chain(late_orgs).intersection(EXEMPT_ORGS).isEmpty().value()
+            _.chain(late_orgs).intersection(EXEMPT_ORGS).isEmpty().value()
         )
         .value();
       if (!_.isEmpty(docs_with_late_expempt_orgs)) {

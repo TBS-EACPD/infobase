@@ -20,9 +20,9 @@ const get_top_level_variable_names = (content) =>
     .value();
 
 const test_variable_type_cases = (scss_module_path, variable_names) => {
-  const non_camel_case_names = _.filter(
+  const non_camel_case_names = _.reject(
     variable_names,
-    (name) => _.camelCase(name) !== name
+    (name) => _.camelCase(name) === name
   );
 
   if (!_.isEmpty(non_camel_case_names)) {

@@ -248,7 +248,7 @@ class Infographic extends React.Component {
               .map((panel_key) =>
                 PanelRegistry.lookup(panel_key, subject.subject_type)
               )
-              .filter((panel) => !panel.is_meta_panel)
+              .reject((panel) => panel.is_meta_panel)
               .map((panel) => [panel.key, panel.get_title(subject)])
               .fromPairs()
               .value()}

@@ -49,7 +49,7 @@ json.modules.forEach((node) => {
     return;
   }
   node.dependencies = node.dependencies
-    .filter((dep) => !dep.resolved.match(excludedRe))
+    .reject((dep) => dep.resolved.match(excludedRe))
     .map((dep) => ({ ...dep, source: dep.resolved }));
 
   recordsByName[node.source] = node;
