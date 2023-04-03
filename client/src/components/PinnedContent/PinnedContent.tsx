@@ -75,9 +75,7 @@ class NonA11yPinnedContent extends React.Component<
   contentRef = React.createRef<HTMLDivElement>();
   static defaultProps: { default_pin_state: boolean };
 
-  constructor(
-    props: NonA11yPinnedContentProps
-  ) {
+  constructor(props: NonA11yPinnedContentProps) {
     super(props);
 
     this.state = {
