@@ -76,8 +76,7 @@ class NonA11yPinnedContent extends React.Component<
   static defaultProps: { default_pin_state: boolean };
 
   constructor(
-    props: NonA11yPinnedContentProps,
-    state: NonA11yPinnedContentState
+    props: NonA11yPinnedContentProps
   ) {
     super(props);
 
@@ -85,7 +84,7 @@ class NonA11yPinnedContent extends React.Component<
       is_pinned_local_storage_mirror: get_is_pinned(
         props.local_storage_name,
         props.default_pin_state,
-        state.is_pinned_local_storage_mirror
+        null
       ),
     };
   }
