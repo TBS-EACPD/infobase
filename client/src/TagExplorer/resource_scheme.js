@@ -83,15 +83,15 @@ function create_resource_hierarchy({ hierarchy_scheme, year }) {
                   },
                   subject.is_m2m &&
                     !_.isEmpty(
-                      _.filter(
+                      _.reject(
                         prog.tags_by_scheme[subject.root.id],
-                        (tag) => tag.id !== subject.id
+                        (tag) => tag.id === subject.id
                       )
                     ) &&
                     related_tags_row(
-                      _.filter(
+                      _.reject(
                         prog.tags_by_scheme[subject.root.id],
-                        (tag) => tag.id !== subject.id
+                        (tag) => tag.id === subject.id
                       ),
                       "program"
                     ),

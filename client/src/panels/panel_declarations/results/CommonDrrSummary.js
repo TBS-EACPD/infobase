@@ -190,7 +190,7 @@ class PercentageViz extends React.Component {
     const all_ids = _.keys(counts);
     const present_ids = _.chain(counts)
       .toPairs()
-      .filter((count) => count[1] !== 0)
+      .reject((count) => count[1] === 0)
       .fromPairs()
       .value();
 
