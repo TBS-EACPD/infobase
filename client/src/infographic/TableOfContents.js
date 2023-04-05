@@ -7,8 +7,6 @@ import {
   UnlabeledTombstone,
 } from "src/components/index";
 
-import { separatorColor } from "src/style_constants/index";
-
 import { infographic_href_template } from "./infographic_href_template";
 
 import text from "./TableOfContents.yaml";
@@ -30,7 +28,36 @@ export default class TableOfContents extends React.Component {
 
     return (
       !_.isEmpty(panel_titles_by_key) && (
-        <StatelessDetails
+        <div
+          aria-label="Table of contents"
+          style={{
+            border: "1px solid",
+            position: "fixed",
+            display: "inline-block",
+            left: "5px",
+            top: "150px",
+            backgroundColor: "transparent",
+            zIndex: "999",
+            boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
+            font: "8px",
+            overflow: "auto",
+          }}
+        >
+          <UnlabeledTombstone
+            items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
+              <a
+                key={panel_key}
+                href={infographic_href_template(subject, active_bubble_id, {
+                  panel_key,
+                })}
+              >
+                {panel_title}
+              </a>
+            ))}
+          />
+        </div>
+
+        /* <StatelessDetails
           summary_content={
             <div>
               <TM k="table_of_contents" />{" "}
@@ -42,7 +69,13 @@ export default class TableOfContents extends React.Component {
               style={{
                 border: "1px solid",
                 borderColor: separatorColor,
-                borderRadius: "5px",
+                position: "fixed",
+                left: "5px",
+                top: "150px",
+                backgroundColor: "white",
+                zIndex: "999",
+                boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
+                font: "10px"
               }}
             >
               <UnlabeledTombstone
@@ -62,6 +95,7 @@ export default class TableOfContents extends React.Component {
           on_click={this.on_click}
           is_open={is_open}
         />
+        */
       )
     );
   }
