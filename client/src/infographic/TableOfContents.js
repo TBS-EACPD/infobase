@@ -26,7 +26,7 @@ export default class TableOfContents extends React.Component {
             display: "inline-block",
             left: "5px",
             top: "110px",
-            backgroundColor: "transparent",
+            backgroundColor: "white",
             zIndex: "999",
             boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
             font: "3px",
@@ -35,6 +35,7 @@ export default class TableOfContents extends React.Component {
             maxHeight: "580px",
           }}
         >
+          <h2 style={{backgroundColor: "blue", color: "white"}}>Table of Contents</h2>
           <UnlabeledTombstone
             items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
               <a
