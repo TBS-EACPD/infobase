@@ -1,17 +1,9 @@
 import _ from "lodash";
 import React from "react";
 
-import {
-  StatelessDetails,
-  create_text_maker_component,
-  UnlabeledTombstone,
-} from "src/components/index";
+import { UnlabeledTombstone } from "src/components/index";
 
 import { infographic_href_template } from "./infographic_href_template";
-
-import text from "./TableOfContents.yaml";
-
-const { TM } = create_text_maker_component(text);
 
 export default class TableOfContents extends React.Component {
   constructor(props) {
@@ -24,8 +16,6 @@ export default class TableOfContents extends React.Component {
   render() {
     const { subject, active_bubble_id, panel_titles_by_key } = this.props;
 
-    const { is_open } = this.state;
-
     return (
       !_.isEmpty(panel_titles_by_key) && (
         <div
@@ -35,12 +25,14 @@ export default class TableOfContents extends React.Component {
             position: "fixed",
             display: "inline-block",
             left: "5px",
-            top: "150px",
+            top: "110px",
             backgroundColor: "transparent",
             zIndex: "999",
             boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
-            font: "8px",
+            font: "3px",
             overflow: "auto",
+            maxWidth: "150px",
+            maxHeight: "580px",
           }}
         >
           <UnlabeledTombstone
