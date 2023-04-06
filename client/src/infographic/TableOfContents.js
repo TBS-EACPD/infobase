@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 import React from "react";
 
 import { UnlabeledTombstone } from "src/components/index";
@@ -10,8 +11,145 @@ export default class TableOfContents extends React.Component {
     super(props);
     this.state = {
       is_open: false,
+      //active_page: null,
+      previous_href: null,
+      active_href: null,
     };
   }
+  /* activeId = useState();
+  setActiveId = useState();
+  nestedHeadings = useHeadingsData();
+  useIntersectionObserver(setActiveId);
+
+   useHeadingsData = () => {
+    const [nestedHeadings, setNestedHeadings] = useState([]);
+  
+    useEffect(() => {
+      const headingElements = Array.from(
+        document.querySelectorAll("h2")
+      );
+  
+      const newNestedHeadings = getNestedHeadings(headingElements);
+      setNestedHeadings(newNestedHeadings);
+    }, []);
+  
+    return { nestedHeadings };
+  };
+
+  getNestedHeadings = (headingElements) => {
+    const nestedHeadings = [];
+  
+    headingElements.forEach((heading, index) => {
+      const { innerText: title, id } = heading;
+  
+      if (heading.nodeName === "H2") {
+        nestedHeadings.push({ id, title, items: [] });
+      } else if (heading.nodeName === "H3" && nestedHeadings.length > 0) {
+        nestedHeadings[nestedHeadings.length - 1].items.push({
+          id,
+          title,
+        });
+      }
+    });
+  
+    return nestedHeadings;
+  };
+
+  useIntersectionObserver = (setActiveId) => {
+    const headingElementsRef = useRef({});
+    useEffect(() => {
+      const callback = (headings) => {
+        headingElementsRef.current = headings.reduce((map, headingElement) => {
+          map[headingElement.target.id] = headingElement;
+          return map;
+        }, headingElementsRef.current);
+  
+        const visibleHeadings = [];
+        Object.keys(headingElementsRef.current).forEach((key) => {
+          const headingElement = headingElementsRef.current[key];
+          if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
+        });
+  
+        const getIndexFromId = (id) =>
+          headingElements.findIndex((heading) => heading.id === id);
+  
+        if (visibleHeadings.length === 1) {
+          setActiveId(visibleHeadings[0].target.id);
+        } else if (visibleHeadings.length > 1) {
+          const sortedVisibleHeadings = visibleHeadings.sort(
+            (a, b) => getIndexFromId(a.target.id) > getIndexFromId(b.target.id)
+          );
+          setActiveId(sortedVisibleHeadings[0].target.id);
+        }
+      };
+  
+      const observer = new IntersectionObserver(callback, {
+        rootMargin: "0px 0px -40% 0px"
+      });
+  
+      const headingElements = Array.from(document.querySelectorAll("h2, h3"));
+  
+      headingElements.forEach((element) => observer.observe(element));
+  
+      return () => observer.disconnect();
+    }, [setActiveId]);
+  };
+  */
+
+  componentDidMount() {
+    const { subject, active_bubble_id } = this.props;
+    /*const { active_page } = this.state;
+    this.getUpdate(active_page);
+    */
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const panel_key = entry.target.parentElement.getAttribute("id");
+          const query = `a[href="${infographic_href_template(
+            subject,
+            active_bubble_id,
+            { panel_key }
+          )}"]`;
+
+          const href = document.querySelector(query);
+          if (href) {
+            if (entry.intersectionRatio > 0.5) {
+              href.classList.add("active");
+              console.log(this.state.active_href);
+              const temp = this.state.active_href;
+              this.setState({
+                active_href: href,
+                previous_href: temp,
+              });
+              this.state.previous_href?.classList.remove("active");
+            }
+          }
+        });
+      },
+      { threshold: [0, 0.5] }
+    );
+
+    setTimeout(() => {
+      const panels = document.getElementsByClassName("panel");
+      for (const el of panels) {
+        observer.observe(el);
+      }
+    }, 3000);
+  }
+
+  /* componentDidUpdate () {
+    if(!window.location.href.includes(this.props.active_bubble_id)){
+      const { active_page } = this.state;
+      this.getUpdate(active_page);
+    }
+  }
+
+  getUpdate = () => {
+    this.setState({active_page: window.location.href});
+};
+*/
+
   on_click = () => this.setState({ is_open: !this.state.is_open });
   render() {
     const { subject, active_bubble_id, panel_titles_by_key } = this.props;
@@ -41,10 +179,17 @@ export default class TableOfContents extends React.Component {
           <UnlabeledTombstone
             items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
               <a
+                className={"toc_link"}
                 key={panel_key}
                 href={infographic_href_template(subject, active_bubble_id, {
                   panel_key,
                 })}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(panel_key).scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
               >
                 {panel_title}
               </a>

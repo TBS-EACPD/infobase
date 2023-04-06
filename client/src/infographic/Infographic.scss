@@ -77,3 +77,13 @@ of the advanced search for mobile */
     overflow-x: visible;
   }
 }
+
+.toc_link {
+  font-size: 11px;
+}
+
+.toc_link.active {
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: underline;
+}
