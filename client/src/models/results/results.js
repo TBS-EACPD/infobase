@@ -389,7 +389,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2021-22-departmental-results-reports.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2021-2022.html",
-    late_results_orgs: ["46"],
+    late_results_orgs: [],
     late_resources_orgs: [],
   },
 ]);
