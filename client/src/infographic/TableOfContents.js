@@ -11,96 +11,14 @@ export default class TableOfContents extends React.Component {
     super(props);
     this.state = {
       is_open: false,
-      //active_page: null,
+      active_page: null,
       previous_href: null,
       active_href: null,
     };
   }
-  /* activeId = useState();
-  setActiveId = useState();
-  nestedHeadings = useHeadingsData();
-  useIntersectionObserver(setActiveId);
 
-   useHeadingsData = () => {
-    const [nestedHeadings, setNestedHeadings] = useState([]);
-  
-    useEffect(() => {
-      const headingElements = Array.from(
-        document.querySelectorAll("h2")
-      );
-  
-      const newNestedHeadings = getNestedHeadings(headingElements);
-      setNestedHeadings(newNestedHeadings);
-    }, []);
-  
-    return { nestedHeadings };
-  };
-
-  getNestedHeadings = (headingElements) => {
-    const nestedHeadings = [];
-  
-    headingElements.forEach((heading, index) => {
-      const { innerText: title, id } = heading;
-  
-      if (heading.nodeName === "H2") {
-        nestedHeadings.push({ id, title, items: [] });
-      } else if (heading.nodeName === "H3" && nestedHeadings.length > 0) {
-        nestedHeadings[nestedHeadings.length - 1].items.push({
-          id,
-          title,
-        });
-      }
-    });
-  
-    return nestedHeadings;
-  };
-
-  useIntersectionObserver = (setActiveId) => {
-    const headingElementsRef = useRef({});
-    useEffect(() => {
-      const callback = (headings) => {
-        headingElementsRef.current = headings.reduce((map, headingElement) => {
-          map[headingElement.target.id] = headingElement;
-          return map;
-        }, headingElementsRef.current);
-  
-        const visibleHeadings = [];
-        Object.keys(headingElementsRef.current).forEach((key) => {
-          const headingElement = headingElementsRef.current[key];
-          if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
-        });
-  
-        const getIndexFromId = (id) =>
-          headingElements.findIndex((heading) => heading.id === id);
-  
-        if (visibleHeadings.length === 1) {
-          setActiveId(visibleHeadings[0].target.id);
-        } else if (visibleHeadings.length > 1) {
-          const sortedVisibleHeadings = visibleHeadings.sort(
-            (a, b) => getIndexFromId(a.target.id) > getIndexFromId(b.target.id)
-          );
-          setActiveId(sortedVisibleHeadings[0].target.id);
-        }
-      };
-  
-      const observer = new IntersectionObserver(callback, {
-        rootMargin: "0px 0px -40% 0px"
-      });
-  
-      const headingElements = Array.from(document.querySelectorAll("h2, h3"));
-  
-      headingElements.forEach((element) => observer.observe(element));
-  
-      return () => observer.disconnect();
-    }, [setActiveId]);
-  };
-  */
-
-  componentDidMount() {
+  updateTableofContents() {
     const { subject, active_bubble_id } = this.props;
-    /*const { active_page } = this.state;
-    this.getUpdate(active_page);
-    */
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -138,17 +56,18 @@ export default class TableOfContents extends React.Component {
     }, 3000);
   }
 
-  /* componentDidUpdate () {
-    if(!window.location.href.includes(this.props.active_bubble_id)){
-      const { active_page } = this.state;
-      this.getUpdate(active_page);
-    }
+  componentDidMount() {
+    this.setState({ active_page: this.props.active_bubble_id });
+    this.updateTableofContents();
   }
 
-  getUpdate = () => {
-    this.setState({active_page: window.location.href});
-};
-*/
+  componentDidUpdate() {
+    if (this.props.active_bubble_id != this.state.active_page) {
+      console.log("true!");
+      this.setState({ active_page: this.props.active_bubble_id });
+      this.updateTableofContents();
+    }
+  }
 
   on_click = () => this.setState({ is_open: !this.state.is_open });
   render() {
@@ -196,46 +115,6 @@ export default class TableOfContents extends React.Component {
             ))}
           />
         </div>
-
-        /* <StatelessDetails
-          summary_content={
-            <div>
-              <TM k="table_of_contents" />{" "}
-              <TM className="panel-status-text" k="skip_to_panel" />
-            </div>
-          }
-          content={
-            <div
-              style={{
-                border: "1px solid",
-                borderColor: separatorColor,
-                position: "fixed",
-                left: "5px",
-                top: "150px",
-                backgroundColor: "white",
-                zIndex: "999",
-                boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
-                font: "10px"
-              }}
-            >
-              <UnlabeledTombstone
-                items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
-                  <a
-                    key={panel_key}
-                    href={infographic_href_template(subject, active_bubble_id, {
-                      panel_key,
-                    })}
-                  >
-                    {panel_title}
-                  </a>
-                ))}
-              />
-            </div>
-          }
-          on_click={this.on_click}
-          is_open={is_open}
-        />
-        */
       )
     );
   }
