@@ -53,7 +53,7 @@ export default class TableOfContents extends React.Component {
       for (const el of panels) {
         observer.observe(el);
       }
-    }, 3000);
+    }, 1500);
   }
 
   componentDidMount() {
@@ -63,7 +63,6 @@ export default class TableOfContents extends React.Component {
 
   componentDidUpdate() {
     if (this.props.active_bubble_id != this.state.active_page) {
-      console.log("true!");
       this.setState({ active_page: this.props.active_bubble_id });
       this.updateTableofContents();
     }
