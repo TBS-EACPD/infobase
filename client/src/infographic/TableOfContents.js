@@ -32,7 +32,7 @@ export default class TableOfContents extends React.Component {
 
           const href = document.querySelector(query);
           if (href) {
-            if (entry.intersectionRatio > 0.5) {
+            if (entry.intersectionRatio > 0.4) {
               href.classList.add("active");
               console.log(this.state.active_href);
               const temp = this.state.active_href;
@@ -45,7 +45,7 @@ export default class TableOfContents extends React.Component {
           }
         });
       },
-      { threshold: [0, 0.5] }
+      { threshold: [0, 0.4] }
     );
 
     setTimeout(() => {
@@ -53,7 +53,7 @@ export default class TableOfContents extends React.Component {
       for (const el of panels) {
         observer.observe(el);
       }
-    }, 1500);
+    }, 750);
   }
 
   componentDidMount() {
@@ -91,7 +91,7 @@ export default class TableOfContents extends React.Component {
             maxHeight: "580px",
           }}
         >
-          <h2 style={{ backgroundColor: "blue", color: "white" }}>
+          <h2 style={{ backgroundColor: "rgb(44, 112, 201)", color: "white", display: "flex", textAlign: "center", fontSize: "1.2em", fontWeight: "500" }}>
             Table of Contents
           </h2>
           <UnlabeledTombstone
