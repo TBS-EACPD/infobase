@@ -91,7 +91,16 @@ export default class TableOfContents extends React.Component {
             maxHeight: "580px",
           }}
         >
-          <h2 style={{ backgroundColor: "rgb(44, 112, 201)", color: "white", display: "flex", textAlign: "center", fontSize: "1.2em", fontWeight: "500" }}>
+          <h2
+            style={{
+              backgroundColor: "rgb(44, 112, 201)",
+              color: "white",
+              display: "flex",
+              textAlign: "center",
+              fontSize: "1.2em",
+              fontWeight: "500",
+            }}
+          >
             Table of Contents
           </h2>
           <UnlabeledTombstone
