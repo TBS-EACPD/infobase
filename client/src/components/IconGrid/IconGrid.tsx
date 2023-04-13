@@ -20,6 +20,9 @@ interface IconGridProps {
 export class IconGrid extends React.Component<IconGridProps> {
   render() {
     const { icons } = this.props;
+    const hidePStyle = {
+      display: "none",
+    };
     return (
       <div aria-hidden="true" className="icon-block">
         {_.map(icons, (icon, ix) =>
@@ -28,7 +31,11 @@ export class IconGrid extends React.Component<IconGridProps> {
               <img alt={icon.alt} src={icon.src} />
             </a>
           ) : (
-            <Fragment key={ix}>{icon.svg}</Fragment>
+            //Extra p is utilized for testing, as a Fragment cannot have
+            //a data-testid value.
+            <p data-testid={ix} key={ix} style={hidePStyle}>
+              <Fragment key={ix}>{icon.svg}</Fragment>
+            </p>
           )
         )}
       </div>
