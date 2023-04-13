@@ -2,7 +2,11 @@ import _ from "lodash";
 
 import React from "react";
 
-import { UnlabeledTombstone, StatelessDetails, create_text_maker_component} from "src/components/index";
+import {
+  UnlabeledTombstone,
+  StatelessDetails,
+  create_text_maker_component,
+} from "src/components/index";
 
 import { infographic_href_template } from "./infographic_href_template";
 
@@ -80,66 +84,65 @@ export default class TableOfContents extends React.Component {
     return (
       !_.isEmpty(panel_titles_by_key) && (
         <StatelessDetails
-        summary_content={
-          <div>
-            <TM k="table_of_contents" />{" "}
-            <TM className="panel-status-text" k="skip_to_panel" />
-          </div>
-        }
-        content={
-          
-        <div
-          aria-label="Table of contents"
-          style={{
-            border: "1px solid",
-            position: "fixed",
-            display: "inline-block",
-            left: "5px",
-            top: "110px",
-            backgroundColor: "white",
-            zIndex: "999",
-            boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
-            font: "3px",
-            overflow: "auto",
-            maxWidth: "150px",
-            maxHeight: "580px",
-          }}
-        >
-          <h2
-            style={{
-              backgroundColor: "rgb(44, 112, 201)",
-              color: "white",
-              display: "flex",
-              textAlign: "center",
-              fontSize: "1.2em",
-              fontWeight: "500",
-            }}
-          >
-            <TM k="table_of_contents" />{" "}
-          </h2>
-          <UnlabeledTombstone
-            items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
-              <a
-                className={"toc_link"}
-                key={panel_key}
-                href={infographic_href_template(subject, active_bubble_id, {
-                  panel_key,
-                })}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById(panel_key).scrollIntoView({
-                    behavior: "smooth",
-                  });
+          summary_content={
+            <div>
+              <TM k="table_of_contents" />{" "}
+              <TM className="panel-status-text" k="skip_to_panel" />
+            </div>
+          }
+          content={
+            <div
+              aria-label="Table of contents"
+              style={{
+                border: "1px solid",
+                position: "fixed",
+                display: "inline-block",
+                left: "5px",
+                top: "110px",
+                backgroundColor: "white",
+                zIndex: "999",
+                boxShadow: "0 1px 2px rgb(43 59 93 / 29%)",
+                font: "3px",
+                overflow: "auto",
+                maxWidth: "150px",
+                maxHeight: "580px",
+              }}
+            >
+              <h2
+                style={{
+                  backgroundColor: "rgb(44, 112, 201)",
+                  color: "white",
+                  display: "flex",
+                  textAlign: "center",
+                  fontSize: "1.2em",
+                  fontWeight: "500",
                 }}
               >
-                {panel_title}
-              </a>
-            ))}
-          />
-        </div>
-        }
-        on_click={this.on_click}
-        is_open={is_open}
+                <TM k="table_of_contents" />{" "}
+              </h2>
+              <UnlabeledTombstone
+                items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
+                  <a
+                    className={"toc_link"}
+                    key={panel_key}
+                    href={infographic_href_template(subject, active_bubble_id, {
+                      panel_key,
+                    })}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(panel_key).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    {panel_title}
+                  </a>
+                ))}
+              />
+            </div>
+          }
+          on_click={this.on_click}
+          is_open={is_open}
         />
       )
     );
