@@ -38,7 +38,6 @@ export default class TableOfContents extends React.Component {
           if (href) {
             if (entry.intersectionRatio > 0.4) {
               href.classList.add("active");
-              console.log(this.state.active_href);
               const temp = this.state.active_href;
               this.setState({
                 active_href: href,
@@ -57,7 +56,7 @@ export default class TableOfContents extends React.Component {
       for (const el of panels) {
         observer.observe(el);
       }
-    }, 750);
+    }, 2500);
   }
 
   componentDidMount() {
@@ -88,6 +87,7 @@ export default class TableOfContents extends React.Component {
           </div>
         }
         content={
+          
         <div
           aria-label="Table of contents"
           style={{
@@ -115,7 +115,7 @@ export default class TableOfContents extends React.Component {
               fontWeight: "500",
             }}
           >
-            Table of Contents
+            <TM k="table_of_contents" />{" "}
           </h2>
           <UnlabeledTombstone
             items={_.map(panel_titles_by_key, (panel_title, panel_key) => (
@@ -145,4 +145,3 @@ export default class TableOfContents extends React.Component {
     );
   }
 }
-
