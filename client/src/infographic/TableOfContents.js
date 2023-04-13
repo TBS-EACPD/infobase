@@ -80,7 +80,6 @@ export default class TableOfContents extends React.Component {
     const { subject, active_bubble_id, panel_titles_by_key } = this.props;
 
     const { is_open } = this.state;
-
     return (
       !_.isEmpty(panel_titles_by_key) && (
         <StatelessDetails
@@ -118,6 +117,9 @@ export default class TableOfContents extends React.Component {
                   fontWeight: "500",
                 }}
               >
+                <button onClick={this.on_click} style={{ textAlign: "left" }}>
+                  x
+                </button>
                 <TM k="table_of_contents" />{" "}
               </h2>
               <UnlabeledTombstone
