@@ -31,8 +31,13 @@ const infographic_link_items = _.compact([
     svg: (
       <IconFinancesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
-    title: text_maker("financial_title"),
-    description: text_maker("financial_desc"),
+    title:
+      text_maker(
+        "financial_title"
+      ) /*+ "In 2021-22, the government spent $376.1 billion. The three largest items in terms of spending were: Old Age Security payments (Old Age Security Act) - Employment and Social Development Canada, Canada Health Transfer (Part V.1 - Federal-Provincial Fiscal Arrangements Act) - Department of Finance Canada, Fiscal Equalization (Part I - Federal-Provincial Fiscal Arrangements Act) - Department of Finance Canada"*/,
+    description:
+      text_maker("financial_desc") +
+      ". In 2021-22, the government spent $376.1 billion. The three largest items in terms of spending were: Old Age Security payments (Old Age Security Act) - Employment and Social Development Canada, Canada Health Transfer (Part V.1 - Federal-Provincial Fiscal Arrangements Act) - Department of Finance Canada, Fiscal Equalization (Part I - Federal-Provincial Fiscal Arrangements Act) - Department of Finance Canada. Click to learn more.",
   },
   {
     href: "#infographic/gov/gov/covid",
@@ -46,7 +51,9 @@ const infographic_link_items = _.compact([
       <IconEmployeesAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: text_maker("people_title"),
-    description: text_maker("people_desc"),
+    description:
+      text_maker("people_desc") +
+      ". As of March 31st, 2021 there were 319,601 employees in the Federal Public Service , with 42.2% located in the National Capital Region. Click to learn more.",
   },
   {
     href: "#infographic/gov/gov/results",
@@ -54,7 +61,9 @@ const infographic_link_items = _.compact([
       <IconClipboardAlt width="100%" color="#FFFFFF" alternate_color={false} />
     ),
     title: text_maker("results_title"),
-    description: text_maker("results_desc"),
+    description:
+      text_maker("results_desc") +
+      ". In 2021-22, the federal government sought to achieve 1501 results. Progress towards meeting these results was measured using 2,698 indicators . Of those indicators, 1,343 (50%) have met their target. Click to learn more.",
   },
   services_feature_flag && {
     href: "#infographic/gov/gov/services",

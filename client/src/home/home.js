@@ -17,6 +17,7 @@ import { highlightColor } from "src/style_constants/index";
 
 import { CardImage } from "./CardImage/CardImage";
 
+//import { declare_simplographic_panel } from "src/panels/panel_declarations/index";
 import {
   infographic_link_items,
   featured_content_items,
@@ -82,6 +83,7 @@ export default class Home extends React.Component {
                         <div className="home-infographic-link-item__icon">
                           {svg}
                         </div>
+                        {description}
                       </a>
                     )
                   )}
