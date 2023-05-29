@@ -151,3 +151,7 @@ SERVICES:
 CFMRS:
   en: Central Financial Management Reporting System
   fr: Système central de gestion des rapports financiers
+
+5YEAR_TREND:
+  en: Standardised presentation not suitable
+  fr: Présentation standardisée non adaptée
