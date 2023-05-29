@@ -356,6 +356,9 @@ const common_panel_config = {
   get_title: () => text_maker("historical_g_and_c_title"),
   legacy_table_dependencies: ["orgTransferPayments"],
   get_dataset_keys: () => ["transfer_payments"],
+  get_topic_keys: ({ derived_topic_keys }) => {
+    return [...derived_topic_keys, "5YEAR_TREND"];
+  },
 };
 
 export const declare_historical_g_and_c_panel = () =>
