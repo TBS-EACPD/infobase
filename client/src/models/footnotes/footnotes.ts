@@ -53,7 +53,8 @@ export type TopicKey =
   | "COVID_MEASURE"
   | "SERVICES"
   | "CFMRS"
-  | "5YEAR_TREND";
+  | "5YEAR_TREND"
+  | "AVG_AUTH_EXP";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];

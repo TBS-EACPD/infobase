@@ -155,3 +155,7 @@ CFMRS:
 5YEAR_TREND:
   en: Standardised presentation not suitable
   fr: Présentation standardisée non adaptée
+
+AVG_AUTH_EXP:
+  en: Variance explanation - average authorities and spending
+  fr: Explication de l'écart - autorisations et dépenses moyennes
