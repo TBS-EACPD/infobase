@@ -754,7 +754,7 @@ export const declare_auth_exp_planned_spending_panel = () =>
         "tabled_estimates",
       ],
       get_topic_keys: ({ derived_topic_keys }) => {
-        return [...derived_topic_keys, "5YEAR_TREND"];
+        return [...derived_topic_keys, "5YEAR_TREND", "AVG_AUTH_EXP"];
       },
       glossary_keys: ["BUD_EXP", "NB_EXP"],
       get_title: ({ subject }) =>
