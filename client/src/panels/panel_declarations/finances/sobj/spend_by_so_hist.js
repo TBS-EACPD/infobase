@@ -202,7 +202,7 @@ export const declare_spend_by_so_hist_panel = () =>
       legacy_table_dependencies: ["orgSobjs"],
       get_dataset_keys: () => ["org_standard_objects"],
       get_topic_keys: ({ derived_topic_keys }) => {
-        return [...derived_topic_keys, "5YEAR_TREND"];
+        return [...derived_topic_keys, "5YEAR_TREND", "AVG_SOBJ"];
       },
       get_title: () => text_maker("dept_fin_spend_by_so_hist_title"),
       calculate: ({ subject, tables }) => {
