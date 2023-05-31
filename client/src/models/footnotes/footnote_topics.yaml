@@ -163,3 +163,7 @@ AVG_AUTH_EXP:
 AVG_SOBJ:
   en: Variance explanation - average spending by standard objects
   fr: Explication de l'écart - dépenses moyennes par articles courants
+
+AVG_SOBJ10:
+  en: Variance explanation - average transfer payments
+  fr: Explication de l'écart - paiements de transfert moyens
