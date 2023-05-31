@@ -56,7 +56,8 @@ export type TopicKey =
   | "5YEAR_TREND"
   | "AVG_AUTH_EXP"
   | "AVG_SOBJ"
-  | "AVG_SOBJ10";
+  | "AVG_SOBJ10"
+  | "ACTUAL_SOBJ10";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];

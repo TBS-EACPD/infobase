@@ -167,3 +167,7 @@ AVG_SOBJ:
 AVG_SOBJ10:
   en: Variance explanation - average transfer payments
   fr: Explication de l'écart - paiements de transfert moyens
+
+ACTUAL_SOBJ10:
+  en: Variance explanation - actual transfer payments
+  fr: Explication de l'écart - paiements de transfert réelles
