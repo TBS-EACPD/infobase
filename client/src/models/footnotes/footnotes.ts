@@ -54,7 +54,8 @@ export type TopicKey =
   | "SERVICES"
   | "CFMRS"
   | "5YEAR_TREND"
-  | "AVG_AUTH_EXP";
+  | "AVG_AUTH_EXP"
+  | "AVG_SOBJ";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];

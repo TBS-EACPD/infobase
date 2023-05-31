@@ -159,3 +159,7 @@ CFMRS:
 AVG_AUTH_EXP:
   en: Variance explanation - average authorities and spending
   fr: Explication de l'écart - autorisations et dépenses moyennes
+
+AVG_SOBJ:
+  en: Variance explanation - average spending by standard objects
+  fr: Explication de l'écart - dépenses moyennes par articles courants
