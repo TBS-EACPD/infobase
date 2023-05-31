@@ -357,7 +357,7 @@ const common_panel_config = {
   legacy_table_dependencies: ["orgTransferPayments"],
   get_dataset_keys: () => ["transfer_payments"],
   get_topic_keys: ({ derived_topic_keys }) => {
-    return [...derived_topic_keys, "5YEAR_TREND"];
+    return [...derived_topic_keys, "5YEAR_TREND", "AVG_SOBJ10"];
   },
 };
 
