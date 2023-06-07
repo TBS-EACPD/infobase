@@ -503,14 +503,14 @@ workflows:
             - test_server
           <<: *deploy_filter
 
-      # - test_end_to_end:
-      #     requires:
-      #       - test_server
-      #       - build_client
-      #     matrix:
-      #       parameters:
-      #         batch-count: [3]
-      #         batch-index: [0, 1, 2]
+      - test_end_to_end:
+          requires:
+            - test_server
+            - build_client
+          matrix:
+            parameters:
+              batch-count: [3]
+              batch-index: [0, 1, 2]
 
       - deploy_client:
           requires:
