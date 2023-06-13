@@ -174,7 +174,7 @@ module.exports = {
             // TODO intersects with tall height clipped table, false positive
             "<span class=\"text-nowrap\">1,529</span>",
             "<span class=\"text-nowrap\">2,779</span>",
-            "<strong>fall 2023</strong>"
+            "<strong>fall 2024</strong>"
           ]
         }
       },
