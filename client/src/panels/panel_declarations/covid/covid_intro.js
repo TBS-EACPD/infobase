@@ -110,6 +110,7 @@ class CovidIntroPanelDyanmicText extends React.Component {
                 }}
               />
             )}
+          <TM k={"covid_intro_notice"} />
         </YearSelectionTabs>
       );
     }
