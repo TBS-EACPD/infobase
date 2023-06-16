@@ -172,8 +172,8 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             // TODO intersects with tall height clipped table, false positive
-            "<span class=\"text-nowrap\">1,529</span>",
-            "<span class=\"text-nowrap\">2,779</span>",
+            "<span class=\"text-nowrap\">1,483</span>",
+            "<span class=\"text-nowrap\">2,738</span>",
             "<strong>fall 2024</strong>"
           ]
         }
