@@ -318,13 +318,13 @@ module.exports = {
         "Axe violations allow list": {
           "color-contrast, serious": [
             // Within the faded area of a height clipper, intended
-            "<a href=\"#infographic/program/TBC-BXB05\" tabindex=\"-999\">Acquired Services and Assets Policies and Initiatives</a>",
-            "<a href=\"#infographic/program/TBC-BXB06\" tabindex=\"-999\">Digital Comptrollership Program</a>",
-            "<a href=\"#infographic/program/TBC-BXB02\" tabindex=\"-999\">Digital Policy</a>",
-            "<a href=\"#infographic/program/TBC-BXB07\" tabindex=\"-999\">Internal Audit Policies and Initiatives</a>",
-            "<a href=\"#infographic/program/TBC-BXB04\" tabindex=\"-999\">Management Accountability Framework</a>",
-            "<a href=\"#infographic/program/TBC-BXC02\" tabindex=\"-999\">Pension and Benefits Management</a>",
-            "<a href=\"#infographic/program/TBC-BXC06\" tabindex=\"-999\">People Management Systems and Processes</a>"
+            "<a href=\"#infographic/program/TBC-BXB09\" tabindex=\"-999\">Canadian Digital Service</a>",
+            "<a href=\"#infographic/program/TBC-BXB13\" tabindex=\"-999\">Digital Government Program</a>",
+            "<a href=\"#infographic/program/TBC-BXB11\" tabindex=\"-999\">Public Service Accessibility</a>",
+            "<a href=\"#infographic/program/TBC-BXB03\" tabindex=\"-999\">Digital Strategy, Planning, and Oversight</a>",
+            "<a href=\"#infographic/program/TBC-BXB01\" tabindex=\"-999\">Financial Management Policies and Initiatives</a>",
+            "<a href=\"#infographic/program/TBC-BXC08\" tabindex=\"-999\">Employer Program</a>",
+            "<a href=\"#infographic/program/TBC-BXC04\" tabindex=\"-999\">Public Service Employer Payments</a>"
           ]
         }
       },
