@@ -368,13 +368,12 @@ module.exports = {
       "Tested on index-eng.html#infographic/program/TBC-BXC04/related": {
         "Axe violations allow list": {
           "color-contrast, serious": [
+            "<a href=\"#infographic/program/TBC-BXB05\" tabindex=\"-999\">Acquired Services and Assets Policies and Initiatives</a>",
             "<a href=\"#infographic/program/TBC-BXB03\" tabindex=\"-999\">Digital Strategy, Planning, and Oversight</a>",
-            "<a href=\"#infographic/program/TBC-BXB07\" tabindex=\"-999\">Internal Audit Policies and Initiatives</a>",
-            "<a href=\"#infographic/program/TBC-BXB04\" tabindex=\"-999\">Management Accountability Framework</a>",
-            "<a href=\"#infographic/program/TBC-BXC01\" tabindex=\"-999\">Employee Relations and Total Compensation</a>",
-            "<a href=\"#infographic/program/TBC-BXC05\" tabindex=\"-999\">Executive and Leadership Development</a>",
-            "<a href=\"#infographic/crso/TBC-ISS00\" tabindex=\"-999\">Internal Services</a>",
-            "<a href=\"#infographic/program/TBC-ISS0Z\" tabindex=\"-999\">Acquisition Management Services</a>"
+            "<a href=\"#infographic/program/TBC-BXB01\" tabindex=\"-999\">Financial Management Policies and Initiatives</a>",
+            "<a href=\"#infographic/crso/TBC-BXC00\" tabindex=\"-999\">Employer</a>",
+            "<span class=\"\">Public Service Employer Payments</span>",
+            "<a href=\"#infographic/program/TBC-BXC06\" tabindex=\"-999\">People Management Systems and Processes</a>",
           ]
         }
       },
