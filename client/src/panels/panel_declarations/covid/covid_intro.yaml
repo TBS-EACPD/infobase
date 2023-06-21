@@ -29,8 +29,9 @@ covid_intro_exp:
 covid_intro_notice:
   transform: [handlebars,markdown]
   en: |
-    **Important:** As a result of the sunsetting of the Government of Canada’s COVID-19 Economic Response Plan authorities in fiscal year **2022-23**, please note that the Treasury
-    Board Secretariat **has ceased collecting data on COVID Expenditures as of March 31, 2023**.
+    **Important:** As a result of the sunsetting of the Government of Canada’s COVID-19 Economic Response Plan authorities in fiscal year **2022-23**, please 
+    note that the Treasury Board Secretariat **has ceased collecting data on COVID Expenditures as of March 31, 2023**.
   fr: |
-    **Important:** Étant donné l’élimination progressive des autorités du Plan d'intervention économique du Canada pour répondre à la COVID-19 au cours de l’exercice financier 
-    **2022-23**, veuillez noter que le Secrétariat du Conseil du Trésor **a cessé de recueillir des données sur les dépenses au titre de la COVID-19 en date du 31 mars 2023**.
+    **Important:** Étant donné l’élimination progressive des autorités du Plan d'intervention économique du Canada pour répondre à la COVID-19 au cours de 
+    l’exercice financier **2022-23**, veuillez noter que le Secrétariat du Conseil du Trésor **a cessé de recueillir des données sur les dépenses au titre 
+    de la COVID-19 en date du 31 mars 2023**.
