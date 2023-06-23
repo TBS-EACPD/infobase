@@ -374,6 +374,7 @@ module.exports = {
             "<a href=\"#infographic/crso/TBC-BXC00\" tabindex=\"-999\">Employer</a>",
             "<span class=\"\">Public Service Employer Payments</span>",
             "<a href=\"#infographic/program/TBC-BXC06\" tabindex=\"-999\">People Management Systems and Processes</a>",
+            "<a href=\"#infographic/program/TBC-BXC07\" tabindex=\"-999\">Research, Planning and Renewal</a>"
           ]
         }
       },
