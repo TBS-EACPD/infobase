@@ -954,6 +954,7 @@ export const declare_welcome_mat_panel = () =>
         case "gov":
           return {
             ...common_panel_config,
+            get_dataset_keys: () => ["program_spending"],
 
             calculate: ({ subject, tables }) => {
               const { programSpending, programFtes } = tables;
