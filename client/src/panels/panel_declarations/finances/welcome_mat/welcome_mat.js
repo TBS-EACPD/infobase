@@ -567,7 +567,7 @@ const WelcomeMat = (props) => {
     if (!_.includes(["crso", "program"], subject_type)) {
       if (subject_type === "gov") {
         spend_summary_key = "gov_welcome_mat_spending_summary";
-        fte_summary_key = "welcome_mat_fte_summary";
+        fte_summary_key = false;
       } else if (subject_type === "dept") {
         spend_summary_key = "dept1_welcome_mat_spending_summary";
         fte_summary_key = "welcome_mat_fte_summary";
@@ -652,6 +652,7 @@ const WelcomeMat = (props) => {
           ]
         }
         fte_row={
+          subject_type !== "gov" &&
           has_fte && [
             !latest_equals_oldest_hist && (
               <Pane key="a" size={15}>
