@@ -24,12 +24,7 @@ module.exports = {
         }
       },
       "Tested on index-basic-eng.html#glossary": {
-        "Axe violations allow list": {
-          // Not shown until page scrolls, TODO: something about the way this is hidden pre-scroll is potentially an issue
-          "color-contrast, serious": [
-            "<button class=\"btn btn-ib-primary floating-button floating-button--fixed\" aria-label=\"Back to top\" style=\"top: auto;\">Back to top</button>"
-          ]
-        }
+        "Axe violations allow list": null
       }
     },
     "Datasets": {
