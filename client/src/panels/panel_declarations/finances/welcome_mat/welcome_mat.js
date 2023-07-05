@@ -64,6 +64,9 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
       {header_row}
     </div>
     <div className="mat-grid__row">{spend_row}</div>
+    <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
+      {header_row}
+    </div>
     {fte_row && <div className="mat-grid__row">{fte_row}</div>}
     {text_row && <div className="mat-grid__row">{text_row}</div>}
   </div>
