@@ -64,11 +64,14 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
       {header_row}
     </div>
     <div className="mat-grid__row">{spend_row}</div>
-    <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
-      {header_row}
-    </div>
+    {text_row && <div className="mat-grid__row">{text_row[0]}</div>}
+    {fte_row && (
+      <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
+        {header_row}
+      </div>
+    )}
     {fte_row && <div className="mat-grid__row">{fte_row}</div>}
-    {text_row && <div className="mat-grid__row">{text_row}</div>}
+    {text_row && <div className="mat-grid__row">{text_row[1]}</div>}
   </div>
 );
 
@@ -716,7 +719,7 @@ const WelcomeMat = (props) => {
         }
         text_row={[
           spend_summary_key && (
-            <Pane key="a" size={45}>
+            <Pane key="a" size={100}>
               <PaneItem textSize="small">
                 <TM
                   k={spend_summary_key}
@@ -733,7 +736,7 @@ const WelcomeMat = (props) => {
             </Pane>
           ),
           fte_summary_key && (
-            <Pane key="b" size={55}>
+            <Pane key="b" size={100}>
               <PaneItem textSize="small">
                 <TM
                   k={fte_summary_key}
