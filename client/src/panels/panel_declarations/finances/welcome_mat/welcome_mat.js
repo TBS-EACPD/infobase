@@ -91,12 +91,10 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => {
             label: text_maker("spending"),
             content: spending_tab_content,
           },
-          ...(fte_row && {
-            employment: {
-              label: text_maker("employment"),
-              content: employment_tab_content,
-            },
-          }),
+          employment: {
+            label: text_maker("employment"),
+            content: employment_tab_content,
+          },
         }}
       />
     );
