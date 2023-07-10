@@ -5,7 +5,11 @@ import React, { Fragment } from "react";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component, Format } from "src/components/index";
+import {
+  create_text_maker_component,
+  Format,
+  TabsStateful,
+} from "src/components/index";
 
 import { run_template } from "src/models/text";
 
@@ -59,20 +63,36 @@ const PaneItem = ({ children, textSize, hide_lg }) => (
 );
 
 const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
-  <div className="mat-grid">
-    <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
-      {header_row}
-    </div>
-    <div className="mat-grid__row">{spend_row}</div>
-    {text_row && <div className="mat-grid__row">{text_row[0]}</div>}
-    {fte_row && (
-      <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
-        {header_row}
-      </div>
-    )}
-    {fte_row && <div className="mat-grid__row">{fte_row}</div>}
-    {text_row && <div className="mat-grid__row">{text_row[1]}</div>}
-  </div>
+  <TabsStateful
+    tabs={{
+      spending: {
+        label: text_maker("spending"),
+        content: (
+          <div className="mat-grid">
+            <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
+              {header_row}
+            </div>
+            <div className="mat-grid__row">{spend_row}</div>
+            {text_row && <div className="mat-grid__row">{text_row[0]}</div>}
+          </div>
+        ),
+      },
+      ...(fte_row && {
+        employment: {
+          label: text_maker("employment"),
+          content: (
+            <div className="mat-grid">
+              <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
+                {header_row}
+              </div>
+              <div className="mat-grid__row">{fte_row}</div>
+              {text_row && <div className="mat-grid__row">{text_row[1]}</div>}
+            </div>
+          ),
+        },
+      }),
+    }}
+  />
 );
 
 /*
