@@ -62,38 +62,48 @@ const PaneItem = ({ children, textSize, hide_lg }) => (
   </div>
 );
 
-const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => (
-  <TabsStateful
-    tabs={{
-      spending: {
-        label: text_maker("spending"),
-        content: (
-          <div className="mat-grid">
-            <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
-              {header_row}
-            </div>
-            <div className="mat-grid__row">{spend_row}</div>
-            {text_row && <div className="mat-grid__row">{text_row[0]}</div>}
-          </div>
-        ),
-      },
-      ...(fte_row && {
-        employment: {
-          label: text_maker("employment"),
-          content: (
-            <div className="mat-grid">
-              <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
-                {header_row}
-              </div>
-              <div className="mat-grid__row">{fte_row}</div>
-              {text_row && <div className="mat-grid__row">{text_row[1]}</div>}
-            </div>
-          ),
-        },
-      }),
-    }}
-  />
-);
+const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => {
+  const spending_tab_content = (
+    <div className="mat-grid">
+      <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
+        {header_row}
+      </div>
+      <div className="mat-grid__row">{spend_row}</div>
+      {text_row && <div className="mat-grid__row">{text_row[0]}</div>}
+    </div>
+  );
+
+  const employment_tab_content = (
+    <div className="mat-grid">
+      <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
+        {header_row}
+      </div>
+      <div className="mat-grid__row">{fte_row}</div>
+      {text_row && <div className="mat-grid__row">{text_row[1]}</div>}
+    </div>
+  );
+
+  if (fte_row) {
+    return (
+      <TabsStateful
+        tabs={{
+          spending: {
+            label: text_maker("spending"),
+            content: spending_tab_content,
+          },
+          ...(fte_row && {
+            employment: {
+              label: text_maker("employment"),
+              content: employment_tab_content,
+            },
+          }),
+        }}
+      />
+    );
+  } else {
+    return spending_tab_content;
+  }
+};
 
 /*
   markup:
