@@ -294,3 +294,11 @@ CR_exp_ftes_fte_summary:
    Au cours des 3 prochaines années, le total des dépenses {{fr_will_change_by  exp_calcs.exp_plan_change "m" "s" "fmt_percentage1"}} et 
    le nombre d'[équivalents temps plein (ETPs)]{{gl "FTE"}} {{fr_will_change_by fte_calcs.fte_plan_change "m" "s" "fmt_percentage1"}}.
    {{/if}}
+
+spending:
+  en: "Spending"
+  fr: "Dépenses"
+
+employment:
+  en: "Employment"
+  fr: "Emploi"
