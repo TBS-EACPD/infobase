@@ -977,6 +977,14 @@ const common_panel_config = {
   legacy_table_dependencies: ["programSpending", "programFtes"],
   get_dataset_keys: () => ["program_spending", "program_ftes"],
   get_title: () => text_maker("welcome_mat_title"),
+  get_title: ({ calculations }) => {
+    const has_fte_data = calculations.calcs.has_fte;
+    if (has_fte_data) {
+      return text_maker("welcome_mat_title");
+    } else {
+      return text_maker("welcome_mat_spending_title");
+    }
+  },
 };
 
 export const declare_welcome_mat_panel = () =>

@@ -3,6 +3,11 @@ welcome_mat_title:
   en: Spending and Employment Trend
   fr: Tendance des dépenses et de l'emploi
 
+welcome_mat_spending_title:
+  transform: [handlebars]
+  en: Spending Trend
+  fr: Tendance des dépenses
+
 no_wrap_year:
   transform: [handlebars]
   handlebars_partial : true
