@@ -33,7 +33,7 @@ const flatten_to_string = (searchable_content) => {
 const add_derived_search_terms_to_doc = (doc, searchable_keys_by_lang) =>
   _.chain(search_terms_def)
     .keys()
-    .each((search_terms_field_key) => {
+    .forEach((search_terms_field_key) => {
       const search_field_lang = /.*_(.*?)$/.exec(search_terms_field_key)?.[1];
 
       const searchable_fields = (() => {
@@ -94,7 +94,7 @@ export const make_schema_with_search_terms = (
 
   // insertMany operations do not call save middleware, needs its own
   schema.pre("insertMany", function (next, docs) {
-    _.each(docs, (doc) =>
+    _.forEach(docs, (doc) =>
       add_derived_search_terms_to_doc(doc, searchable_keys_by_lang)
     );
 

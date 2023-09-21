@@ -31,7 +31,7 @@ function populate_footnotes(csv_str: string) {
     _.mapValues(row, (item) => _.trim(item))
   );
 
-  _.each(rows, (obj) => {
+  _.forEach(rows, (obj) => {
     const {
       id,
       subject_class,
@@ -132,7 +132,7 @@ function load_footnotes_bundle(
 function populate_global_footnotes(csv_str: string) {
   populate_footnotes(csv_str);
 
-  _.each(get_dynamic_footnote_definitions(), function (footnote_config) {
+  _.forEach(get_dynamic_footnote_definitions(), function (footnote_config) {
     footNoteStore.create_and_register(footnote_config);
   });
 }

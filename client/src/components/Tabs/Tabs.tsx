@@ -136,7 +136,7 @@ export const TabsStateful = <
   TabKey extends keyof Tabs
 >({
   tabs,
-  default_tab_key = _.chain(tabs).keys().first().value() as TabKey,
+  default_tab_key = _.chain(tabs).keys().head().value() as TabKey,
 }: {
   tabs: Tabs;
   default_tab_key?: TabKey;

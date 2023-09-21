@@ -53,7 +53,7 @@ const render_resource_type =
     //use hacky side-effects to create colors for all programs, so that these colours are consitent accross the fte/$ panel
     const all_program_names = _.chain(exp_data).map("label").uniq().value();
     const colors = infobase_colors();
-    _.each(all_program_names, (name) => colors(name));
+    _.forEach(all_program_names, (name) => colors(name));
 
     const first_year_program_count = _.chain(exp_data)
       .zip(fte_data)
@@ -233,7 +233,7 @@ const get_calculate_func =
       _.chain(data)
         .reduce(
           (sum_by_year, row) => {
-            _.each(years, (year) => {
+            _.forEach(years, (year) => {
               sum_by_year[year] = sum_by_year[year] + row[year];
             });
             return sum_by_year;

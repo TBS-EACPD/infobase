@@ -92,7 +92,7 @@ export const declare_drr_summary_panel = () =>
         return (
           !_.isEmpty(drr_keys) &&
           text_maker("drr_summary_title", {
-            first_year: get_year_for_doc_key(_.first(drr_keys)),
+            first_year: get_year_for_doc_key(_.head(drr_keys)),
             last_year:
               drr_keys.length > 1 && get_year_for_doc_key(_.last(drr_keys)),
           })

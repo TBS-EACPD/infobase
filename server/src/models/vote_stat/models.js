@@ -50,7 +50,7 @@ function flatten_program_records(records, years_to_include = program_years) {
         exp: row[year],
       }))
     )
-    .compact("exp")
+    .compact()
     .value();
 }
 

@@ -242,8 +242,8 @@ function extract_flat_data_from_results_hierarchies(
     pi_dr_links = [];
 
   const crawl_hierachy_level = (subject_node) =>
-    _.each(subject_node, (subject) => {
-      _.each(
+    _.forEach(subject_node, (subject) => {
+      _.forEach(
         _.chain(subject)
           .pickBy((value, key) => /(drr|dp)[0-9][0-9]_results/.test(key))
           .reduce((memo, doc_results) => [...memo, ...doc_results], [])
@@ -256,18 +256,18 @@ function extract_flat_data_from_results_hierarchies(
             doc: result.doc,
           });
 
-          _.each(result.indicators, (indicator) => {
+          _.forEach(result.indicators, (indicator) => {
             indicators.push(_.omit(indicator, "__typename"));
           });
         }
       );
 
       if (!_.isEmpty(subject.pidrlinks)) {
-        _.each(subject.pidrlinks, (pidrlink) => pi_dr_links.push(pidrlink));
+        _.forEach(subject.pidrlinks, (pidrlink) => pi_dr_links.push(pidrlink));
       }
     });
 
-  _.each(hierarchical_response_data, (response) => {
+  _.forEach(hierarchical_response_data, (response) => {
     switch (response.__typename) {
       case "Program":
         crawl_hierachy_level([response]);
@@ -380,16 +380,16 @@ export function api_load_results_bundle(subject, result_docs) {
       const { results, indicators, pi_dr_links } =
         extract_flat_data_from_results_hierarchies(hierarchical_response_data);
 
-      _.each(results, (obj) => Result.create_and_register(obj));
-      _.each(
+      _.forEach(results, (obj) => Result.create_and_register(obj));
+      _.forEach(
         indicators,
         (obj) => Indicator.lookup(obj.id) || Indicator.create_and_register(obj)
       );
-      _.each(pi_dr_links, ({ program_id, result_id }) =>
+      _.forEach(pi_dr_links, ({ program_id, result_id }) =>
         PI_DR_Links.add(program_id, result_id)
       );
 
-      _.each(
+      _.forEach(
         docs_to_load,
         // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
         // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
@@ -511,16 +511,16 @@ export function api_load_single_indicator(subject, result_docs) {
       const { results, indicators, pi_dr_links } =
         extract_flat_data_from_results_hierarchies(hierarchical_response_data);
 
-      _.each(results, (obj) => Result.create_and_register(obj));
-      _.each(
+      _.forEach(results, (obj) => Result.create_and_register(obj));
+      _.forEach(
         indicators,
         (obj) => Indicator.lookup(obj.id) || Indicator.create_and_register(obj)
       );
-      _.each(pi_dr_links, ({ program_id, result_id }) =>
+      _.forEach(pi_dr_links, ({ program_id, result_id }) =>
         PI_DR_Links.add(program_id, result_id)
       );
 
-      _.each(
+      _.forEach(
         docs_to_load,
         // Need to use _.setWith and pass Object as the customizer function to account for keys that may be numbers (e.g. dept id's)
         // Just using _.set makes large empty arrays when using a number as an accessor in the target string, bleh
@@ -672,7 +672,7 @@ export function api_load_results_counts(level = "summary") {
         }
 
         // if it's in the results count set, it has results data
-        _.each(mapped_rows, ({ id }) => (_subject_has_results[id] = true)); // side effect
+        _.forEach(mapped_rows, ({ id }) => (_subject_has_results[id] = true)); // side effect
 
         return Promise.resolve();
       })

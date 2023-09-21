@@ -109,7 +109,7 @@ export default function (model_singleton) {
     Indicator,
     "indicator_id"
   );
-  _.each(
+  _.forEach(
     {
       result_by_subj_loader,
       indicator_by_result_loader,

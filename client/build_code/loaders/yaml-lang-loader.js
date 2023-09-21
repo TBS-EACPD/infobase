@@ -11,7 +11,7 @@ module.exports = function (src) {
   var lang = this.query.lang;
 
   var obj = yaml.load(src);
-  _.each(obj, function (val, key) {
+  _.forEach(obj, function (val, key) {
     if (!_.isObject(val)) {
       return [key, val];
     }

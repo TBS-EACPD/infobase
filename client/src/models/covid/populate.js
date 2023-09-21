@@ -81,7 +81,7 @@ export const api_load_all_covid_measures = () => {
   }
 
   return promisedAllCovidMeasures().then((covid_measures) => {
-    _.each(covid_measures, (covid_measure) =>
+    _.forEach(covid_measures, (covid_measure) =>
       CovidMeasureStore.create_and_register(covid_measure)
     );
 

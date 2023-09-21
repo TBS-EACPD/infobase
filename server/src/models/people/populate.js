@@ -7,7 +7,7 @@ import { headcount_types } from "./utils.js";
 const headcount_non_year_headers = ["dept_code", "dimension", "avg_share"];
 const validate_headcount_headers = (csv_name, csv) =>
   _.chain(csv)
-    .first()
+    .head()
     .keys()
     .thru((headers) => {
       const has_expected_non_year_headers = _.chain(headers)

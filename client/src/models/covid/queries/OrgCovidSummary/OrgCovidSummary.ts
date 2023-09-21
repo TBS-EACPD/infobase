@@ -16,5 +16,5 @@ export const {
   query_name: "OrgCovidSummary",
   query: OrgCovidSummaryDocument,
   resolver: (response: OrgCovidSummaryQuery) =>
-    _.first(response?.root?.org?.covid_summary),
+    _.head(response?.root?.org?.covid_summary),
 });

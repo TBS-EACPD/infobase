@@ -37,7 +37,7 @@ export const calculate_common_text_args = (
     .value();
 
   const [top_avg_group, top_avg_group_share] = _.last(group_avg_shares);
-  const [bottom_avg_group, bottom_avg_group_share] = _.first(group_avg_shares);
+  const [bottom_avg_group, bottom_avg_group_share] = _.head(group_avg_shares);
 
   return {
     first_active_year_index,

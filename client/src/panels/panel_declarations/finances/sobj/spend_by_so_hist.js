@@ -72,7 +72,7 @@ class SobjLine extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active_sobjs: [_.first(props.data).label],
+      active_sobjs: [_.head(props.data).label],
     };
     this.colors = scaleOrdinal().range(
       _.concat(newIBLightCategoryColors, newIBDarkCategoryColors)

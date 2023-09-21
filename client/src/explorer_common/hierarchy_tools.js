@@ -15,7 +15,7 @@ function flat_descendants(node) {
   let currentWave = [node];
   const flat_nodes = [];
   while (_.some(currentWave, (node) => !_.isEmpty(node.children))) {
-    _.each(currentWave, (node) => {
+    _.forEach(currentWave, (node) => {
       if (!_.isEmpty(node.children)) {
         flat_nodes.push(...node.children);
       }
@@ -31,7 +31,7 @@ function flat_descendants(node) {
 
 function _create_children_links(node, nodes_by_parent_id) {
   node.children = nodes_by_parent_id[node.id] || null;
-  _.each(node.children, (child) =>
+  _.forEach(node.children, (child) =>
     _create_children_links(child, nodes_by_parent_id)
   );
 }
@@ -76,7 +76,7 @@ function filter_hierarchy(
     .value();
 
   //add in ancestors of all the current nodes
-  _.each(positive_search_results, (node) => {
+  _.forEach(positive_search_results, (node) => {
     let current = node;
     let done = false;
     while (!done) {
@@ -111,7 +111,7 @@ function ensureVisibility(nodes, shouldNodeBeVisible) {
 
   const nodes_to_ensure_visibility = _.filter(nodes, shouldNodeBeVisible);
 
-  _.each(nodes_to_ensure_visibility, (node) => {
+  _.forEach(nodes_to_ensure_visibility, (node) => {
     let current = node.parent_id && nodes_by_id[node.parent_id];
     while (current) {
       current.is_expanded = true;
@@ -204,7 +204,7 @@ function convert_d3_hierarchy_to_explorer_hierarchy(root) {
   const new_nodes_by_parent_id = _.groupBy(new_nodes, (node) => node.parent_id);
 
   //finally, attach the children links.
-  _.each(new_nodes, (node) => {
+  _.forEach(new_nodes, (node) => {
     node.children = new_nodes_by_parent_id[node.id];
   });
 
@@ -246,7 +246,7 @@ function simplify_hierarchy(flat_nodes, is_simple_parent, bottom_layer_filter) {
     .value();
 
   const ancestors_by_id = {};
-  _.each(simple_parents, (node) => {
+  _.forEach(simple_parents, (node) => {
     let current = node;
     let done = false;
     while (!done) {

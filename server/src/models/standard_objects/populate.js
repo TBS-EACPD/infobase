@@ -23,16 +23,16 @@ export default function ({ models }) {
     })
   );
 
-  _.each(org_records, (record) => {
-    _.each(
+  _.forEach(org_records, (record) => {
+    _.forEach(
       public_account_years,
       (col) => (record[col] = record[col] && parseFloat(record[col]))
     );
   });
 
   const prog_sobj_cols = _.takeRight(public_account_years, 2);
-  _.each(prog_records, (record) => {
-    _.each(
+  _.forEach(prog_records, (record) => {
+    _.forEach(
       prog_sobj_cols,
       (col) => (record[col] = record[col] && parseFloat(record[col]))
     );
@@ -40,6 +40,6 @@ export default function ({ models }) {
 
   const { OrgSobj, ProgSobj } = models;
 
-  _.each(org_records, (rec) => OrgSobj.register(rec));
-  _.each(prog_records, (rec) => ProgSobj.register(rec));
+  _.forEach(org_records, (rec) => OrgSobj.register(rec));
+  _.forEach(prog_records, (rec) => ProgSobj.register(rec));
 }

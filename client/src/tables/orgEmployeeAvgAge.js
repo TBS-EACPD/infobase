@@ -29,7 +29,7 @@ export default {
       nick: "avgage",
       header: trivial_text_maker("avgage"),
     });
-    _.each(people_years, (header, ix) => {
+    _.forEach(people_years, (header, ix) => {
       this.add_col({
         type: "decimal1",
         nick: header,

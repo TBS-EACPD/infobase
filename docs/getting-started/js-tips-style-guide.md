@@ -53,7 +53,7 @@ Our (un)official (and somewhat incomplete) rules for code style:
       - `const [ name_ix, text_ix, year_ix] = d3.range(0,3); const name = line[name_ix];`
 - Iterating structures : Don't use that for loop!
   - the **only** case for for loops: iterating over hundreds of items (at least) _when_ you can optimize by exiting early with a `break`. Even then, a lodash method like `_.find` that already exists early is usually good enough and more elegant.
-  - `_.each(structure, func(val,key_or_index) )` and `arr.forEach(func(val,index))` are better than for loops, but it's better not to use them, since they can only do useful work through _side-effects_, which are to be avoided
+  - `_.forEach(structure, func(val,key_or_index) )` and `arr.forEach(func(val,index))` are better than for loops, but it's better not to use them, since they can only do useful work through _side-effects_, which are to be avoided
   - Instead, if you're processing data into a new variable, better to use lodash helpers for functionally creating new data structures
 - Identifier names
   - HTML ID or class: `lower-case-separated-by-dashes`. When styling DOM for a cohesive element, use [BEM](http://getbem.com/) naming conventions

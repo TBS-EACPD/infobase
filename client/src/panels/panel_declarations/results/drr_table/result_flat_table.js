@@ -422,7 +422,7 @@ export const declare_results_table_panel = () =>
         const drr_keys_with_data = get_drr_keys_with_data(subject);
 
         return text_maker("result_flat_table_title", {
-          first_year: get_year_for_doc_key(_.first(drr_keys_with_data)),
+          first_year: get_year_for_doc_key(_.head(drr_keys_with_data)),
           last_year:
             drr_keys_with_data.length > 1 &&
             get_year_for_doc_key(_.last(drr_keys_with_data)),

@@ -27,7 +27,7 @@ export class SearchConfigTypeahead extends React.Component {
     const { search_phrase } = this.state;
 
     if (search_phrase !== "") {
-      _.each(search_configs, (search_config) => {
+      _.forEach(search_configs, (search_config) => {
         const { config_name, query } = search_config;
 
         const is_not_loading_or_loaded = _.isUndefined(

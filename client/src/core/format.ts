@@ -122,9 +122,8 @@ const compact = (
         }
       });
 
-      const defined_compacted = _.filter(
-        compacted,
-        (pair) => !_.isUndefined(pair)
+      const defined_compacted = _.reject(compacted, (pair) =>
+        _.isUndefined(pair)
       );
       const defined_compact_val = defined_compacted[0];
 
@@ -184,8 +183,8 @@ const compact_written = (
         }
       });
 
-      const defined_compacted = _.filter(compacted, (pair) => {
-        return !_.isUndefined(pair);
+      const defined_compacted = _.reject(compacted, (pair) => {
+        return _.isUndefined(pair);
       });
 
       // ... this code is a real pile of crap. Refactor a TODO, in the meantime just wanted to note that the pre-TS code assumed

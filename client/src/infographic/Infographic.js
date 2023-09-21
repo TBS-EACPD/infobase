@@ -248,7 +248,7 @@ class Infographic extends React.Component {
               .map((panel_key) =>
                 PanelRegistry.lookup(panel_key, subject.subject_type)
               )
-              .filter((panel) => !panel.is_meta_panel)
+              .reject((panel) => panel.is_meta_panel)
               .map((panel) => [panel.key, panel.get_title(subject)])
               .fromPairs()
               .value()}
@@ -313,7 +313,7 @@ class Infographic extends React.Component {
 
         if (!_.has(subject_panels_by_bubble_id, active_bubble_id)) {
           const fallback_bubble_for_subject =
-            _.chain(subject_panels_by_bubble_id).keys().first().value() || null;
+            _.chain(subject_panels_by_bubble_id).keys().head().value() || null;
 
           this.props.url_replace(
             infographic_href_template(

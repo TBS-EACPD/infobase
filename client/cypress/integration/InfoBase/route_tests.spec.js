@@ -385,5 +385,5 @@ describe("Route tests", () => {
     }
   })();
 
-  _.each(route_configs_to_test, run_tests_from_config);
+  _.forEach(route_configs_to_test, run_tests_from_config);
 });

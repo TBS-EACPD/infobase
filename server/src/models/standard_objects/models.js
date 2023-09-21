@@ -13,7 +13,7 @@ function flatten_so_records(records, years_to_include) {
         amount: row[year],
       }))
     )
-    .compact("amount")
+    .compact()
     .value();
 }
 

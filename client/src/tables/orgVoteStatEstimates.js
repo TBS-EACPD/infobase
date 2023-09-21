@@ -85,7 +85,7 @@ export default {
       },
       can_group_by: true,
     });
-    _.each(estimates_years, (yr) => {
+    _.forEach(estimates_years, (yr) => {
       this.add_col({
         type: "dollar",
         nick: yr + "_estimates",

@@ -322,8 +322,7 @@ const StatusIconTable = ({ icon_counts, onIconClick, active_list }) => (
     <VisibilityControl
       items={_.map(ordered_status_keys, (status_key) => ({
         key: status_key,
-        active:
-          active_list.length === 0 || _.indexOf(active_list, status_key) !== -1,
+        active: active_list.length === 0 || _.includes(active_list, status_key),
         count: icon_counts[status_key] || 0,
         text: text_maker(status_key),
         icon: large_status_icons[status_key],
@@ -373,9 +372,9 @@ function indicators_period_span_str(indicators) {
     .sortBy() //sort by year (no arg needed)
     .thru((nums) => {
       if (nums.length > 1) {
-        return `${_.first(nums)} - ${_.last(nums)}`;
+        return `${_.head(nums)} - ${_.last(nums)}`;
       } else if (nums.length === 1) {
-        return _.first(nums);
+        return _.head(nums);
       } else {
         return "";
       }

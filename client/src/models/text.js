@@ -115,7 +115,7 @@ const run_template = function (s, extra_args = {}) {
   }
   // build common arguments object which will be passed
   // to all templates
-  const args = _.extend({}, extra_args, full_template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
+  const args = _.assignIn({}, extra_args, full_template_globals); //FIXME: extra_args should take precedence over template globals. Don't have time to test this right now.
   // combine the `extra_args` with the common arguments
   if (s) {
     let _template;
@@ -154,7 +154,7 @@ const text_bundles_by_filename = {};
 const add_text_bundle = (text_bundle) => {
   const { __file_name__ } = text_bundle;
   const to_add = {};
-  _.each(_.omit(text_bundle, "__file_name__"), (text_obj, key) => {
+  _.forEach(_.omit(text_bundle, "__file_name__"), (text_obj, key) => {
     if (text_obj.handlebars_partial) {
       HandlebarsWithPrototypeAccess.registerPartial(key, text_obj.text);
       return;
@@ -174,7 +174,7 @@ const add_text_bundle = (text_bundle) => {
       text_obj.handlebars_compiled = true;
     }
   });
-  _.extend(template_store, to_add);
+  _.assignIn(template_store, to_add);
 
   text_bundles_by_filename[__file_name__] = to_add;
 };
@@ -223,7 +223,7 @@ const _create_text_maker =
     }
 
     let rtn = text_obj.text;
-    _.each(text_obj.transform, (transform) => {
+    _.forEach(text_obj.transform, (transform) => {
       if (transform === "handlebars") {
         if (!text_obj.handlebars_compiled) {
           text_obj.text = HandlebarsWithPrototypeAccess.compile(rtn);
@@ -241,7 +241,7 @@ const _create_text_maker =
           temp_dom_node.querySelectorAll(".embeded-markdown");
 
         if (embedded_markdown_nodes.length) {
-          _.map(embedded_markdown_nodes, _.idenity).forEach(
+          _.map(embedded_markdown_nodes, _.identity).flatMap(
             (node) =>
               (node.innerHTML = marked(node.innerHTML, {
                 sanitize: false,
@@ -272,7 +272,7 @@ const create_text_maker = (bundles) => {
   }
 
   const combined = combine_bundles(bundles);
-  _.extend(combined, combined_global_bundle);
+  _.assignIn(combined, combined_global_bundle);
   const func = _create_text_maker(combined);
   combined.__text_maker_func__ = func;
 

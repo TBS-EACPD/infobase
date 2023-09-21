@@ -73,5 +73,5 @@ export default function (model_singleton) {
     ),
   };
 
-  _.each(loaders, (val, key) => model_singleton.define_loader(key, val));
+  _.forEach(loaders, (val, key) => model_singleton.define_loader(key, val));
 }

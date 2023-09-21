@@ -57,7 +57,7 @@ const ServicesIntroPanel = ({ subject }) => {
         args={{
           subject,
           from_year: _.last(report_years),
-          to_year: _.first(report_years),
+          to_year: _.head(report_years),
           ...(subject.subject_type === "gov"
             ? { num_of_subject_offering_services }
             : { num_of_programs_offering_services }),

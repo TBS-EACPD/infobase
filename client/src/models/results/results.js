@@ -327,7 +327,7 @@ const build_doc_info_objects = (doc_type, docs) =>
 
       const primary_resource_year = is_drr
         ? _.last(resource_years)
-        : _.first(resource_years);
+        : _.head(resource_years);
 
       return {
         doc_type,

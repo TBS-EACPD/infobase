@@ -45,11 +45,11 @@ const SummaryTab = ({ args: { calculations }, data }) => {
   const { top_spending_orgs, top_spending_measures } = data;
 
   const { name: top_spending_org_name, spending: top_spending_org_amount } =
-    _.first(top_spending_orgs);
+    _.head(top_spending_orgs);
   const {
     name: top_spending_measure_name,
     spending: top_spending_measure_amount,
-  } = _.first(top_spending_measures);
+  } = _.head(top_spending_measures);
   const text_args = {
     ...calculations,
     top_spending_org_name,

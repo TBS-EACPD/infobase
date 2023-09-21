@@ -42,8 +42,8 @@ function people_five_year_percentage_formula(
             return d[col_name] === cats[0];
           }).length === row.length;
       }
-      _.each(col_names_to_be_averaged, function (year, i) {
-        _.each(table.data, function (d) {
+      _.forEach(col_names_to_be_averaged, function (year, i) {
+        _.forEach(table.data, function (d) {
           // scenario 2
           if (all_cat_lines) {
             total_totals[i] = total_totals[i] + d[year] || d[year];

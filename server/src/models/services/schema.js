@@ -184,7 +184,7 @@ export default function ({ models, loaders }) {
 
   const resolvers = {
     Root: {
-      service: (_x, { id }) => service_loader.load(id).then(_.first),
+      service: (_x, { id }) => service_loader.load(id).then(_.head),
       search_services: get_search_terms_resolver(Service),
     },
     Gov: {

@@ -69,7 +69,7 @@ export default {
         },
       },
     ]);
-    _.each(std_years, (header) => {
+    _.forEach(std_years, (header) => {
       this.add_col(header).add_child([
         {
           type: "big_int",

@@ -127,7 +127,7 @@ export class Dept extends BaseSubjectFactory<DeptDef, typeof dept_subject_type>(
     return _.filter(Dept.store.get_all(), (dept) => dept.has_table_data);
   }
   static depts_without_table_data() {
-    return _.filter(Dept.store.get_all(), (dept) => !dept.has_table_data);
+    return _.reject(Dept.store.get_all(), (dept) => dept.has_table_data);
   }
   get has_table_data() {
     return !_.isEmpty(this.table_ids);

@@ -31,7 +31,7 @@ describe("Tabs", () => {
     const tablist_node = screen.getByRole("tablist");
 
     const tab_nodes = getAllByRole(tablist_node, "tab");
-    _.each(tab_nodes, (tab_node, index) => {
+    _.forEach(tab_nodes, (tab_node, index) => {
       expect(tab_node).toContainElement(
         getByText(tablist_node, tabs[_.keys(tabs)[index]])
       );

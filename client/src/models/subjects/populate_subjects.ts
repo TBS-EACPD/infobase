@@ -21,7 +21,7 @@ export const populate_depts = (
   dept_code_to_csv_name: ParsedCsvWithUndefineds,
   crso: ParsedCsvWithUndefineds
 ) => {
-  _.each(ministries, ({ id, name_en, name_fr }) => {
+  _.forEach(ministries, ({ id, name_en, name_fr }) => {
     Dept.ministryStore.create_and_register({
       ...enforced_required_fields({
         id,
@@ -30,7 +30,7 @@ export const populate_depts = (
     });
   });
 
-  _.each(ministers, ({ id, name_en, name_fr }) => {
+  _.forEach(ministers, ({ id, name_en, name_fr }) => {
     Dept.ministerStore.create_and_register({
       ...enforced_required_fields({
         id,
@@ -39,7 +39,7 @@ export const populate_depts = (
     });
   });
 
-  _.each(inst_forms, ({ id, parent_id, name_en, name_fr }) => {
+  _.forEach(inst_forms, ({ id, parent_id, name_en, name_fr }) => {
     Dept.instFormStore.create_and_register({
       ...enforced_required_fields({
         id,
@@ -54,7 +54,7 @@ export const populate_depts = (
     const url_row = _.find(url_lookups, ({ id }) => id === url_key);
     return url_row?.[`url_${lang}`] || "";
   };
-  _.each(
+  _.forEach(
     igoc,
     ({
       org_id: id,
@@ -146,7 +146,7 @@ export const populate_crsos = (
   igoc: ParsedCsvWithUndefineds,
   program: ParsedCsvWithUndefineds
 ) =>
-  _.each(
+  _.forEach(
     crso,
     ({ id, dept_code, name, desc, is_active, is_drf, is_internal_service }) => {
       CRSO.store.create_and_register({
@@ -181,7 +181,7 @@ export const populate_programs_and_tags = (
   program_tags: ParsedCsvWithUndefineds,
   tags_to_programs: ParsedCsvWithUndefineds
 ) => {
-  _.each(
+  _.forEach(
     program,
     ({
       dept_code,
@@ -230,7 +230,7 @@ export const populate_programs_and_tags = (
       });
     }
   );
-  _.each(
+  _.forEach(
     program_tag_types,
     ({ id, type: cardinality, name_en, name_fr, desc_en, desc_fr }) => {
       ProgramTag.store.create_and_register({
@@ -250,7 +250,7 @@ export const populate_programs_and_tags = (
       });
     }
   );
-  _.each(
+  _.forEach(
     program_tags,
     ({
       tag_id: id,

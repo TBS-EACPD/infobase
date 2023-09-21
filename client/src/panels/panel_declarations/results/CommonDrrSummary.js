@@ -112,7 +112,7 @@ const StatusGrid = ({ met, not_met, not_available, future, drr_key }) => {
   const viz_data = _.chain(data)
     .sortBy(({ status_key }) => icon_order[status_key])
     .flatMap(({ viz_count, status_key }) => {
-      return _.range(0, viz_count).map(() => ({ status_key }));
+      return _.times(viz_count, () => ({ status_key }));
     })
     .value();
 
@@ -190,7 +190,7 @@ class PercentageViz extends React.Component {
     const all_ids = _.keys(counts);
     const present_ids = _.chain(counts)
       .toPairs()
-      .filter((count) => count[1] !== 0)
+      .reject((count) => count[1] === 0)
       .fromPairs()
       .value();
 

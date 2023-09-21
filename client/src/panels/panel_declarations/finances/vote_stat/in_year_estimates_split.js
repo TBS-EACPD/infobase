@@ -38,7 +38,7 @@ const estimates_split_calculate = ({ subject, tables }) => {
       const est_amnt = sum(_.map(est_doc_lines[1], est_in_year_col));
       return [est_doc_lines[0], est_amnt];
     })
-    .filter((row) => row[1] !== 0)
+    .reject((row) => row[1] === 0)
     .value();
 
   const calculations = {
