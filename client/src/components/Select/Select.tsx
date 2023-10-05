@@ -30,6 +30,7 @@ const Select = ({
   title,
 }: SelectProps) => (
   <select
+    data-testid="select"
     style={style}
     id={id}
     disabled={disabled}
@@ -40,7 +41,7 @@ const Select = ({
     aria-label={title}
   >
     {_.map(options, (choice) => (
-      <option key={choice.id} value={choice.id}>
+      <option data-testid="select-option" key={choice.id} value={choice.id}>
         {choice.display}
       </option>
     ))}
