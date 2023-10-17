@@ -18,6 +18,23 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
 const no_data_or_na_to_null = (counts) =>
   counts === "no_data" || counts === "not_applicable" ? null : counts;
 
+const combine_other_fax_email_counts = (
+  other_counts,
+  fax_counts,
+  email_counts
+) => {
+  const num_other_counts = no_data_or_na_to_null(other_counts);
+  const num_fax_counts = no_data_or_na_to_null(fax_counts);
+  const num_email_counts = no_data_or_na_to_null(email_counts);
+
+  const total =
+    (num_other_counts === null ? null : parseInt(num_other_counts)) +
+    (num_fax_counts === null ? null : parseInt(num_fax_counts)) +
+    (num_email_counts === null ? null : parseInt(num_email_counts));
+
+  return total;
+};
+
 const get_years_from_service_report = (services) =>
   _.chain(services)
     .flatMap(({ service_report }) => _.map(service_report, "year"))
@@ -114,7 +131,11 @@ export default async function ({ models }) {
         mail_application_count: no_data_or_na_to_null(mail_application_count),
         email_application_count: no_data_or_na_to_null(email_application_count),
         fax_application_count: no_data_or_na_to_null(fax_application_count),
-        other_application_count: no_data_or_na_to_null(other_application_count),
+        other_application_count: combine_other_fax_email_counts(
+          other_application_count,
+          fax_application_count,
+          email_application_count
+        ),
         ...other_fields,
       };
     }
@@ -181,6 +202,12 @@ export default async function ({ models }) {
     .uniq()
     .sort()
     .last()
+    .value();
+
+  const unique_dept_codes = _.chain(raw_service_rows)
+    .map("dept_code")
+    .uniq()
+    .sort()
     .value();
 
   const dept_id_by_dept_code = _.chain(get_standard_csv_file_rows("igoc.csv"))
@@ -569,10 +596,7 @@ export default async function ({ models }) {
           get_pct_of_standards_met_high_vol_services(
             absolute_most_recent_year_filtered_services
           ),
-        num_of_subject_offering_services: _.chain(
-          absolute_most_recent_year_filtered_services
-        )
-          .groupBy("org_id")
+        num_of_subject_offering_services: _.chain(unique_dept_codes)
           .size()
           .value(),
         num_of_programs_offering_services: _.chain(
