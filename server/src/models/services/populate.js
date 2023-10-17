@@ -32,7 +32,7 @@ const combine_other_fax_email_counts = (
     (num_fax_counts === null ? null : parseInt(num_fax_counts)) +
     (num_email_counts === null ? null : parseInt(num_email_counts));
 
-  return total;
+  return total === 0 ? null : total;
 };
 
 const get_years_from_service_report = (services) =>
