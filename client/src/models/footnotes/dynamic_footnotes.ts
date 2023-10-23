@@ -21,8 +21,26 @@ const text_maker = create_text_maker(text);
 export const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
   doc_type: "drr",
   year: run_template("{{pa_last_year}}"),
-  late_results_orgs: [] as string[],
-  late_resources_orgs: [] as string[],
+  late_results_orgs: [
+    "46", // Canada Revenue Agency
+    "221", // Canadian Energy Regulator
+    "138", // Department of Transport
+    "128", // Department of Employment and Social Development
+    "199", // Library and Archives of Canada
+    "326", // Treasury Board Secretariat
+  ] as string[],
+  late_resources_orgs: [
+    "46", // Canada Revenue Agency
+    "221", // Canadian Energy Regulator
+    "138", // Department of Transport
+    "98", // Canadian Transportation Accident Investigation and Safety Board
+    "129", // Department of Crown-Indigenous Relations and Northern Affairs
+    "348", // Department of Indigenous Services
+    "133", // Department of National Defence
+    "302", // National Security and Intelligence Review Agency Secretariat
+    "278", // Privy Council Office
+    "345", // Secretariat of the National Security and Intelligence Committee of Parliamentarians
+  ] as string[],
 };
 
 const expand_dept_cr_and_programs = (dept: InstanceType<typeof Dept>) => [
