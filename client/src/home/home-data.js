@@ -85,6 +85,7 @@ const featured_content_items = _.compact([
   {
     text_key: "quick_link_service_inventory_2021",
     href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
+    is_new: "true",
   },
   {
     text_key: "quick_link_DRR22",
