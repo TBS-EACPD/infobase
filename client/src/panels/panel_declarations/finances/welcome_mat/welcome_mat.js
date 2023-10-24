@@ -23,9 +23,10 @@ import { format_and_get_fte } from "./welcome_mat_fte";
 import text from "./welcome_mat.yaml";
 import "./welcome-mat.scss";
 
-const { std_years, planning_years } = year_templates;
+const { std_years, planning_years, fte_years } = year_templates;
 const exp_cols = _.map(std_years, (yr) => `${yr}exp`);
 const actual_history_years = _.map(std_years, run_template);
+const actual_history_years_fte = _.map(fte_years, run_template);
 
 const { text_maker, TM } = create_text_maker_component(text);
 
@@ -62,7 +63,13 @@ const PaneItem = ({ children, textSize, hide_lg }) => (
   </div>
 );
 
-const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => {
+const WelcomeMatShell = ({
+  header_row,
+  header_row_fte,
+  spend_row,
+  fte_row,
+  text_row,
+}) => {
   const spending_tab_content = (
     <div className="mat-grid">
       <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
@@ -76,7 +83,7 @@ const WelcomeMatShell = ({ header_row, spend_row, fte_row, text_row }) => {
   const employment_tab_content = (
     <div className="mat-grid">
       <div className="mat-grid__row mat-grid__row--sm-hide" aria-hidden>
-        {header_row}
+        {header_row_fte}
       </div>
       <div className="mat-grid__row">{fte_row}</div>
       {text_row && <div className="mat-grid__row">{text_row[1]}</div>}
@@ -134,6 +141,8 @@ const WelcomeMat = (props) => {
   const {
     latest_hist_spend_data,
     oldest_hist_spend_data,
+    fte_oldest_hist_spend_data,
+    fte_latest_hist_spend_data,
     has_spending,
     has_fte,
   } = calcs;
@@ -142,6 +151,12 @@ const WelcomeMat = (props) => {
     [oldest_hist_spend_data.year, latest_hist_spend_data.year],
     (fiscal_year) => _.chain(fiscal_year).split("-").head().parseInt().value()
   );
+
+  const [oldest_hist_year_fte, latest_hist_year_fte] = _.map(
+    [fte_oldest_hist_spend_data.year, fte_latest_hist_spend_data.year],
+    (fiscal_year) => _.chain(fiscal_year).split("-").head().parseInt().value()
+  );
+
   const current_year = _.parseInt(
     run_template("{{current_fiscal_year_short_first}}")
   );
@@ -155,9 +170,14 @@ const WelcomeMat = (props) => {
   const current_hist_years_apart = current_year - oldest_hist_year;
   const current_planned_years_apart = latest_planned_year - current_year;
 
+  const current_hist_years_apart_fte = current_year - oldest_hist_year_fte;
+
   //vars used multiple times accross multiple cases
   const latest_equals_oldest_hist =
     oldest_hist_spend_data.year === latest_hist_spend_data.year;
+
+  const latest_equals_oldest_hist_fte =
+    fte_oldest_hist_spend_data.year === fte_latest_hist_spend_data.year;
 
   const years_ago = (
     <TM
@@ -169,12 +189,34 @@ const WelcomeMat = (props) => {
       }}
     />
   );
+
+  const fte_years_ago = (
+    <TM
+      k="years_ago_fte"
+      args={{
+        plural_years: current_hist_years_apart_fte > 1,
+        current_hist_years_apart_fte,
+        oldest_hist_spend_year: fte_oldest_hist_spend_data.year,
+      }}
+    />
+  );
+
   const hist_trend = (
     <TM
       k="hist_trend"
       args={{
         oldest_hist_spend_year: oldest_hist_spend_data.year,
         latest_hist_spend_year: latest_hist_spend_data.year,
+      }}
+    />
+  );
+
+  const fte_hist_trend = (
+    <TM
+      k="hist_trend"
+      args={{
+        oldest_hist_spend_year: fte_oldest_hist_spend_data.year,
+        latest_hist_spend_year: fte_latest_hist_spend_data.year,
       }}
     />
   );
@@ -191,6 +233,30 @@ const WelcomeMat = (props) => {
             plural_years: true,
             current_hist_years_apart: current_latest_hist_years_apart,
             oldest_hist_spend_year: latest_hist_spend_data.year,
+          }}
+        />
+      );
+    } else if (current_latest_hist_years_apart === 1) {
+      return last_year;
+    } else if (current_latest_hist_years_apart === 0) {
+      return in_this_year;
+    } else {
+      throw new Error(
+        "Actual spending years are ahead of current fiscal year value? Shouldn't happen"
+      );
+    }
+  })();
+
+  const latest_hist_year_text_fte = (() => {
+    const current_latest_hist_years_apart = current_year - latest_hist_year_fte;
+    if (current_latest_hist_years_apart > 1) {
+      return (
+        <TM
+          k="years_ago_fte"
+          args={{
+            plural_years: true,
+            current_hist_years_apart_fte: current_latest_hist_years_apart,
+            oldest_hist_spend_year: fte_latest_hist_spend_data.year,
           }}
         />
       );
@@ -237,6 +303,14 @@ const WelcomeMat = (props) => {
       args={{ oldest_hist_spend_year: oldest_hist_spend_data.year }}
     />
   );
+
+  const long_term_trend_fte = (
+    <TM
+      k="long_term_trend"
+      args={{ oldest_hist_spend_year: fte_oldest_hist_spend_data.year }}
+    />
+  );
+
   const planned_trend = <TM k="3_year_trend" />;
   const no_hist_spending = <TM k="no_historical_spending__new" />;
   const spending_auths_are = <TM k="spending_authorities_are" />;
@@ -259,9 +333,8 @@ const WelcomeMat = (props) => {
     const {
       latest_year_hist_spend_diff,
       latest_year_hist_fte_diff,
-
       spend_latest_year,
-      oldest_hist_fte_data,
+      fte_oldest_hist_spend_data,
       fte_latest_year,
     } = calcs;
 
@@ -271,6 +344,11 @@ const WelcomeMat = (props) => {
           <HeaderPane key="a" size={20} children={years_ago} />,
           <HeaderPane key="b" size={20} children={latest_hist_year_text} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
+        ]}
+        header_row_fte={[
+          <HeaderPane key="a" size={20} children={fte_years_ago} />,
+          <HeaderPane key="b" size={20} children={latest_hist_year_text_fte} />,
+          <HeaderPane key="d" size={40} children={fte_hist_trend} />,
         ]}
         spend_row={
           has_spending && [
@@ -305,17 +383,17 @@ const WelcomeMat = (props) => {
         fte_row={
           has_fte && [
             <Pane key="a" size={20}>
-              <MobileOrA11YContent children={years_ago} />
+              <MobileOrA11YContent children={fte_years_ago} />
               <PaneItem textSize="small">
                 <TM k="ftes_were_employed" />
               </PaneItem>
               <PaneItem textSize="medium">
-                <FteFormat amt={oldest_hist_fte_data.value} />
+                <FteFormat amt={fte_oldest_hist_spend_data.value} />
               </PaneItem>
             </Pane>,
 
             <Pane key="b" size={20}>
-              <MobileOrA11YContent children={latest_hist_year_text} />
+              <MobileOrA11YContent children={latest_hist_year_text_fte} />
               <PaneItem textSize="small">
                 <TM
                   k="fte_change_was__new"
@@ -355,6 +433,11 @@ const WelcomeMat = (props) => {
           <HeaderPane key="b" size={20} children={years_ahead} />,
           <HeaderPane key="c" size={40} children={planned_trend} />,
         ]}
+        header_row_fte={[
+          <HeaderPane key="a" size={20} children={first_planned_year_text} />,
+          <HeaderPane key="b" size={20} children={years_ahead} />,
+          <HeaderPane key="c" size={40} children={planned_trend} />,
+        ]}
         spend_row={
           has_spending && [
             <Pane key="a" size={20}>
@@ -388,7 +471,7 @@ const WelcomeMat = (props) => {
         fte_row={
           has_fte && [
             <Pane key="a" size={20}>
-              <MobileOrA11YContent children={latest_hist_year_text} />
+              <MobileOrA11YContent children={latest_hist_year_text_fte} />
               <PaneItem textSize="medium">
                 <FteFormat amt={fte_plan_1} />
               </PaneItem>
@@ -429,6 +512,12 @@ const WelcomeMat = (props) => {
           <HeaderPane key="b" size={20} children={latest_hist_year_text} />,
           <HeaderPane key="c" size={20} children={in_this_year} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
+        ]}
+        header_row_fte={[
+          <HeaderPane key="a" size={20} children={fte_years_ago} />,
+          <HeaderPane key="b" size={20} children={latest_hist_year_text_fte} />,
+          <HeaderPane key="c" size={20} children={in_this_year} />,
+          <HeaderPane key="d" size={40} children={fte_hist_trend} />,
         ]}
         spend_row={[
           <Pane key="a" size={20}>
@@ -491,6 +580,27 @@ const WelcomeMat = (props) => {
           ),
           <HeaderPane key="c" size={20} children={in_this_year} />,
           <HeaderPane key="d" size={40} children={hist_trend} />,
+        ]}
+        header_row_fte={[
+          !latest_equals_oldest_hist_fte && (
+            <HeaderPane key="a" size={20} children={fte_years_ago} />
+          ),
+          !latest_equals_oldest_hist_fte && (
+            <HeaderPane
+              key="b"
+              size={20}
+              children={latest_hist_year_text_fte}
+            />
+          ),
+          latest_equals_oldest_hist_fte && (
+            <HeaderPane
+              key="b2"
+              size={40}
+              children={latest_hist_year_text_fte}
+            />
+          ),
+          <HeaderPane key="c" size={20} children={in_this_year} />,
+          <HeaderPane key="d" size={40} children={fte_hist_trend} />,
         ]}
         spend_row={
           has_spending && [
@@ -590,7 +700,7 @@ const WelcomeMat = (props) => {
 
       spend_latest_year,
       fte_latest_year,
-      oldest_hist_fte_data,
+      fte_oldest_hist_spend_data,
       fte_plan_3,
       planned_fte_diff,
     } = calcs;
@@ -625,6 +735,27 @@ const WelcomeMat = (props) => {
           ),
           <HeaderPane key="c" size={15} children={years_ahead} />,
           <HeaderPane key="d" size={55} children={long_term_trend} />,
+        ]}
+        header_row_fte={[
+          !latest_equals_oldest_hist_fte && (
+            <HeaderPane key="a" size={15} children={fte_years_ago} />
+          ),
+          !latest_equals_oldest_hist_fte && (
+            <HeaderPane
+              key="b"
+              size={15}
+              children={latest_hist_year_text_fte}
+            />
+          ),
+          latest_equals_oldest_hist_fte && (
+            <HeaderPane
+              key="b2"
+              size={30}
+              children={latest_hist_year_text_fte}
+            />
+          ),
+          <HeaderPane key="c" size={15} children={years_ahead} />,
+          <HeaderPane key="d" size={55} children={long_term_trend_fte} />,
         ]}
         spend_row={
           has_spending && [
@@ -688,21 +819,21 @@ const WelcomeMat = (props) => {
         fte_row={
           subject_type !== "gov" &&
           has_fte && [
-            !latest_equals_oldest_hist && (
+            !latest_equals_oldest_hist_fte && (
               <Pane key="a" size={15}>
-                <MobileOrA11YContent children={years_ago} />
+                <MobileOrA11YContent children={fte_years_ago} />
                 <PaneItem textSize="small">
                   <TM k="ftes_were_employed" />
                 </PaneItem>
                 <PaneItem textSize="medium">
-                  <FteFormat amt={oldest_hist_fte_data.value} />
+                  <FteFormat amt={fte_oldest_hist_spend_data.value} />
                 </PaneItem>
               </Pane>
             ),
 
-            !latest_equals_oldest_hist && (
+            !latest_equals_oldest_hist_fte && (
               <Pane key="b" size={15}>
-                <MobileOrA11YContent children={latest_hist_year_text} />
+                <MobileOrA11YContent children={latest_hist_year_text_fte} />
                 <PaneItem textSize="small">
                   <TM
                     k="fte_change_was__new"
@@ -715,9 +846,9 @@ const WelcomeMat = (props) => {
               </Pane>
             ),
 
-            latest_equals_oldest_hist && (
+            latest_equals_oldest_hist_fte && (
               <Pane key="b2" size={30}>
-                <MobileOrA11YContent children={latest_hist_year_text} />
+                <MobileOrA11YContent children={latest_hist_year_text_fte} />
                 <PaneItem textSize="small">
                   <TM k="ftes_were_employed" />
                 </PaneItem>
@@ -902,8 +1033,10 @@ function get_calcs(subject, q6, q12) {
   // Use FTEs from latest years with planned spending. They're in the same column under the same year heading (latest_hist_year_text)
   // so they should be in sync... assuming that there can't be a case where there's a year with 0 spending and non-0 FTEs (in which case
   // the years from oldest_hist_spend_data etc are the wrong ones)
+
+  /*
   const get_data_by_historical_year = (data, year) =>
-    _.chain(actual_history_years)
+    _.chain(actual_history_years_fte)
       .indexOf(year)
       .thru((index) => ({ year, value: data[index] }))
       .value();
@@ -915,20 +1048,32 @@ function get_calcs(subject, q6, q12) {
     hist_fte_data,
     latest_hist_spend_data.year
   );
+  */
 
-  const fte_latest_year = latest_hist_fte_data.value;
+  const fte_oldest_hist_spend_data = get_non_zero_data_year(
+    hist_fte_data,
+    actual_history_years_fte
+  );
+  const fte_latest_hist_spend_data = get_non_zero_data_year(
+    hist_fte_data,
+    actual_history_years_fte,
+    true
+  );
+
+  const fte_latest_year = fte_latest_hist_spend_data.value;
   const fte_plan_1 = _.first(planned_fte_data);
   const fte_plan_3 = _.last(planned_fte_data);
 
   const latest_year_hist_fte_diff =
-    (latest_hist_fte_data.value - oldest_hist_fte_data.value) /
-    oldest_hist_fte_data.value;
+    (fte_latest_hist_spend_data.value - fte_oldest_hist_spend_data.value) /
+    fte_oldest_hist_spend_data.value;
   const planned_fte_diff = (fte_plan_3 - fte_latest_year) / fte_latest_year;
 
   return {
     oldest_hist_spend_data,
     latest_hist_spend_data,
-    oldest_hist_fte_data,
+    fte_oldest_hist_spend_data,
+    fte_latest_hist_spend_data,
     has_hist,
     has_planned,
     spend_latest_year,

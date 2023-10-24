@@ -18,6 +18,12 @@ years_ago:
     {{current_hist_years_apart}} year{{#if plural_years}}s{{/if}} ago ({{oldest_hist_spend_year}})
   fr: |
     Il y a {{current_hist_years_apart}} an{{#if plural_years}}s{{/if}} ({{oldest_hist_spend_year}})
+years_ago_fte:
+  transform: [handlebars, markdown]
+  en: |
+    {{current_hist_years_apart_fte}} year{{#if plural_years}}s{{/if}} ago ({{oldest_hist_spend_year}})
+  fr: |
+    Il y a {{current_hist_years_apart_fte}} an{{#if plural_years}}s{{/if}} ({{oldest_hist_spend_year}})
 last_year:
   transform: [handlebars]
   en: |

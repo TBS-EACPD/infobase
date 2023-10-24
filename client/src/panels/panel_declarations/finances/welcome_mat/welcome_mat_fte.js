@@ -4,7 +4,10 @@ import React, { Fragment } from "react";
 import MediaQuery from "react-responsive";
 
 import { run_template, trivial_text_maker } from "src/models/text";
-import { year_templates, actual_to_planned_gap_year } from "src/models/years";
+import {
+  year_templates,
+  fte_actual_to_planned_gap_year,
+} from "src/models/years";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -13,19 +16,19 @@ import { WrappedNivoLine } from "src/charts/wrapped_nivo/index";
 import { tertiaryColor } from "src/style_constants/index";
 import { Table } from "src/tables/TableClass";
 
-const { std_years, planning_years } = year_templates;
+const { std_years, fte_years, planning_years } = year_templates;
 
 export const format_and_get_fte = (type, subject) => {
   const colors = scaleOrdinal().range(newIBCategoryColors);
 
   const gap_year =
-    (subject.has_planned_spending && actual_to_planned_gap_year) || null;
+    (subject.has_planned_spending && fte_actual_to_planned_gap_year) || null;
 
   const series_labels = [
     trivial_text_maker("actual_ftes"),
     trivial_text_maker("planned_ftes"),
   ];
-  const historical_ticks = _.map(std_years, run_template);
+  const historical_ticks = _.map(fte_years, run_template);
   const planned_ticks = _.map(planning_years, run_template);
 
   const programFtes = Table.store.lookup("programFtes");

@@ -22,12 +22,20 @@ const year_to_fiscal_year = (year) => {
 
 const year_templates = {
   current_fiscal_year: "{{current_fiscal_year}}",
+  fte_current_fiscal_year: "{{fte_current_fiscal_year}}",
   std_years: [
     "{{pa_last_year_5}}",
     "{{pa_last_year_4}}",
     "{{pa_last_year_3}}",
     "{{pa_last_year_2}}",
     "{{pa_last_year}}",
+  ],
+  fte_years: [
+    "{{fte_last_year_5}}",
+    "{{fte_last_year_4}}",
+    "{{fte_last_year_3}}",
+    "{{fte_last_year_2}}",
+    "{{fte_last_year}}",
   ],
   years_short: [
     "{{pa_last_year_5_short_first}}",
@@ -49,6 +57,12 @@ const year_templates = {
     "{{planning_year_2}}",
     "{{planning_year_3}}",
   ],
+  fte_last_year_planned: "{{fte_last_year_planned}}",
+  fte_planning_years: [
+    "{{fte_planning_year_1}}",
+    "{{fte_planning_year_2}}",
+    "{{fte_planning_year_3}}",
+  ],
   people_years: [
     "{{ppl_last_year_5}}",
     "{{ppl_last_year_4}}",
@@ -64,6 +78,38 @@ const year_templates = {
     "{{ppl_last_year_short_second}}",
   ],
 };
+
+const fte_actual_to_planned_gap_year = _.chain(year_templates)
+  .thru(({ fte_years, planning_years }) => [
+    _.last(fte_years),
+    _.first(planning_years),
+  ])
+  .map((fiscal_year) =>
+    _.chain(fiscal_year)
+      .thru(run_template)
+      .split("-")
+      .first()
+      .parseInt()
+      .value()
+  )
+  .thru(([last_fte_year, first_planning_year]) => {
+    if (first_planning_year - last_fte_year == 2) {
+      const first_year = last_fte_year + 1;
+      const second_year =
+        lang === "en"
+          ? first_planning_year.toString().substring(2)
+          : first_planning_year;
+
+      return `${first_year}-${second_year}`;
+    } else if (first_planning_year - last_fte_year > 2) {
+      throw new Error(
+        "The gap between the latest Public Accounts year and the first Planning year is more than one fiscal year. This should never happen?"
+      );
+    } else {
+      return false;
+    }
+  })
+  .value();
 
 const actual_to_planned_gap_year = _.chain(year_templates)
   .thru(({ std_years, planning_years }) => [
@@ -102,4 +148,5 @@ export {
   year_to_fiscal_year,
   year_templates,
   actual_to_planned_gap_year,
+  fte_actual_to_planned_gap_year,
 };

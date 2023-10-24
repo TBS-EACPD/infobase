@@ -1,3 +1,8 @@
+
+fte_current_fiscal_year:
+  en: 2022-23
+  fr: 2022-2023
+
 current_fiscal_year:
   en: 2023-24
   fr: 2023-2024
@@ -22,6 +27,26 @@ pa_last_year_5:
 pa_last_year_planned:
   en: 2022-23
   fr: 2022-2023
+
+fte_last_year:
+  en: 2021-22
+  fr: 2021-2022
+fte_last_year_2:
+  en: 2020-21
+  fr: 202o-2021
+fte_last_year_3:
+  en: 2019-20
+  fr: 2019-2020
+fte_last_year_4:
+  en: 2018-19
+  fr: 2018-2019
+fte_last_year_5:
+  en: 2017-18
+  fr: 2017-2018
+
+fte_last_year_planned:
+  en: 2021-22
+  fr: 2021-2022
 
 est_in_year:
   en: 2023-24
@@ -49,6 +74,16 @@ planning_year_2:
   en: 2024-25
   fr: 2024-2025
 planning_year_3:
+  en: 2025-26
+  fr: 2025-2026
+
+fte_planning_year_1:
+  en: 2023-24
+  fr: 2023-2024
+fte_planning_year_2:
+  en: 2024-25
+  fr: 2024-2025
+fte_planning_year_3:
   en: 2025-26
   fr: 2025-2026
 
