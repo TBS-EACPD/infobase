@@ -530,18 +530,21 @@ module.exports = {
       }
     },
     "Infographic - Inactive Program - About": {
-      "Tested on index-eng.html#infographic/program/PPP-AHZ00/intro": {
+      "Tested on index-eng.html#infographic/program/AGR-BWN06/financial": {
         "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/program/PPP-AHZ00/intro": {
         "Axe violations allow list": null
+      },
+      "Tested on index-basic-eng.html#infographic/program/AGR-BWN06/financial": {
+        "Axe violations allow list": null
       }
     },
     "Infographic - Inactive Program - Finance": {
-      "Tested on index-eng.html#infographic/program/PPP-AHZ00/financial": {
+      "Tested on index-eng.html#infographic/program/AGR-BWN06/financial": {
         "Axe violations allow list": null
       },
-      "Tested on index-basic-eng.html#infographic/program/PPP-AHZ00/financial": {
+      "Tested on index-basic-eng.html#infographic/program/AGR-BWN06/financial": {
         "Axe violations allow list": null
       }
     },
@@ -550,6 +553,12 @@ module.exports = {
         "Axe violations allow list": null
       },
       "Tested on index-basic-eng.html#infographic/program/PPP-AHZ00/related": {
+        "Axe violations allow list": null
+      },
+      "Tested on index-eng.html#infographic/program/AGR-BWN06/financial": {
+        "Axe violations allow list": null
+      },
+      "Tested on index-basic-eng.html#infographic/program/AGR-BWN06/financial": {
         "Axe violations allow list": null
       }
     },

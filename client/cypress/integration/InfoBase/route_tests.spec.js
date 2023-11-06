@@ -213,17 +213,17 @@ const route_load_tests_config = [
 
   {
     name: "Infographic - Inactive Program - About",
-    route: "infographic/program/PPP-AHZ00/intro",
+    route: "infographic/program/AGR-BWN06/financial",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Infographic - Inactive Program - Finance",
-    route: "infographic/program/PPP-AHZ00/financial",
+    route: "infographic/program/AGR-BWN06/financial",
     test_on: ["eng", "basic-eng"],
   },
   {
     name: "Infographic - Inactive Program - Where can I go from here?",
-    route: "infographic/program/PPP-AHZ00/related",
+    route: "infographic/program/AGR-BWN06/financial",
     test_on: ["eng", "basic-eng"],
   },
 
