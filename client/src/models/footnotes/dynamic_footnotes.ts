@@ -34,8 +34,6 @@ export const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
     "221", // Canadian Energy Regulator
     "138", // Department of Transport
     "98", // Canadian Transportation Accident Investigation and Safety Board
-    "129", // Department of Crown-Indigenous Relations and Northern Affairs
-    "348", // Department of Indigenous Services
     "133", // Department of National Defence
     //"151", // Financial Consumer Agency of Canada
     "302", // National Security and Intelligence Review Agency Secretariat
