@@ -395,9 +395,16 @@ const drr_docs = build_doc_info_objects("drr", [
   {
     year_short: "2022",
     resource_years: ["{{pa_last_year}}"],
-    doc_url_en: "DRR_TODO",
-    doc_url_fr: "DRR_TODO",
-    late_results_orgs: [],
+    doc_url_en:
+      "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2022-23-departmental-results-reports.html",
+    doc_url_fr:
+      "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2022-2023.html",
+    late_results_orgs: [
+      "128", // Department of Employment and Social Development
+      "302", // National Security and Intelligence Review Agency Secretariat
+      "278", // Privy Council Office
+      "345",
+    ], // Secretariat of the National Security and Intelligence Committee of Parliamentarians
     late_resources_orgs: [],
   },
 ]);
