@@ -1,4 +1,4 @@
-﻿"dept_code","vote_num","vs_type","name_en","name_fr","doc","est_last_year_4","est_last_year_3","est_last_year_2","est_last_year","est_in_year"
+"dept_code","vote_num","vs_type","name_en","name_fr","doc","est_last_year_4","est_last_year_3","est_last_year_2","est_last_year","est_in_year"
 "ACOA",1,1,"Operating and Program","Fonctionnement and Programme","MAINS",65905491,68395032,70111122.00,70011300,68404079
 "ACOA",1,1,"Operating and Program","Fonctionnement and Programme","SEA",0,498312,793805.00,0,2078192
 "ACOA",1,1,"Operating and Program","Fonctionnement and Programme","SEB",3932,695552,700238.00,0,193228
@@ -833,8 +833,6 @@
 "FIN","S",0,"Fiscal Stabilization (Part II — Federal-Provincial Fiscal Arrangements Act)","Stabilisation fiscale (Partie II — Loi sur les arrangements fiscaux entre le gouvernement fédéral et les provinces)","SA",271733098,,,,
 "FIN","S",0,"Grant to the IMF's Resilience and Sustainability Trust (Bretton Woods and Related Agreements Act, Section 8.1(2))","Subvention en vertu du fonds fiduciaire pour la résilience et la durabilité du FMI (Loi sur les accords de Bretton Woods et des accords connexes,article 8.1(2))","SA",,,,-40000000,
 "FIN","S",0,"Grant to the IMF's Resilience and Sustainability Trust (Bretton Woods and Related Agreements Act, Section 8.1(2))","Subvention en vertu du fonds fiduciaire pour la résilience et la durabilité du FMI (Loi sur les accords de Bretton Woods et des accords connexes,article 8.1(2))","SEC",,,,40000000,
-"FIN","S",0,"Hibernia Dividend Backed Annuity Agreement","Entente sur les paiements annuels de ristournes liées au projet Hibernia","SA",,,100555856.00,100733215,0
-"FIN","S",0,"Hibernia Dividend Backed Annuity Agreement","Entente sur les paiements annuels de ristournes liées au projet Hibernia","SEB",,,,,156850000
 "FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","MAINS",18684000000,17352000000,15824892341.00,18743000000,32939000000
 "FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","SA",-847007477,190461768,92672922.00,-257600676,0
 "FIN","S",0,"Interest on Unmatured Debt","Intérêt sur la dette non échue","SEA",0,0,348107659.00,895000000,737000000
@@ -848,6 +846,8 @@
 "FIN","S",0,"Other Interest Costs","Autres frais d'intérêts","SEC",0,-25000000,0.00,-2000000,0
 "FIN","S",0,"Payment of liabilities previously recorded as revenue","Paiement de dettes comptabilisées antérieurement à titre de revenus","SA",5133457,16686279,10366758.00,15799914,
 "FIN","S",0,"Payment pursuant to section 24(1) of the Financial Administration Act","Payment pursuant to section 24(1) of the Financial Administration Act","SA",3066900,,,,
+"FIN","S",0,"Payment to Newfoundland and Labrador related to the Hibernia Dividend Backed Annuity Agreement (Section 200 - Budget Implementation Act, 2021, No. 1)","Paiement à Terre-Neuve-et-Labrador lié à l'Entente sur les paiementsannuels de ristournes liées au projet Hibernia (article 200 – Loi no 1d’exécution du budget de 2021)","SA",,,100555856.00,100733215,0
+"FIN","S",0,"Payment to Newfoundland and Labrador related to the Hibernia Dividend Backed Annuity Agreement (Section 200 - Budget Implementation Act, 2021, No. 1)","Paiement à Terre-Neuve-et-Labrador lié à l'Entente sur les paiementsannuels de ristournes liées au projet Hibernia (article 200 – Loi no 1d’exécution du budget de 2021)","SEB",,,,,156850000
 "FIN","S",0,"Payment to the Bank of Canada pursuant to section 60.2 of the Financial Administration Act","Paiement à la Banque du Canada en vertu de l'article 60.2 de la Loi sur la gestion des finances publiques)","SA",,,,602,
 "FIN","S",0,"Payment to the Canada Infrastructure Bank","Paiements à la Banque d'infrastructures du Canada","MAINS",0,0,3967976000.00,4533117000,2921312000
 "FIN","S",0,"Payment to the Canada Infrastructure Bank","Paiements à la Banque d'infrastructures du Canada","SA",759153755,-2199410253,-3757025543.00,-1685196967,0
