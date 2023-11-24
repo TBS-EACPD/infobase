@@ -41,13 +41,49 @@ const counts_from_indicators = (indicators) =>
     })
     .value();
 
+const dr_counts_from_indicators = (indicators) => {
+  const dr_indicators = _.filter(indicators, ({ result_id }) =>
+    _.startsWith(result_id, "DR")
+  );
+
+  return _.chain(dr_indicators)
+    .map(({ doc, result_id, status_key }) => ({
+      [`${doc}_results`]: result_id,
+      [`${doc}_indicators${status_key === "dp" ? "" : `_${status_key}`}`]: 1,
+    }))
+    .thru((indicator_count_fragments) => {
+      //console.log(indicator_count_fragments);
+      const count_keys = _.chain(indicator_count_fragments)
+        .flatMap(_.keys)
+        .uniq()
+        .value();
+
+      return _.chain(indicator_count_fragments)
+        .reduce(
+          (memo, count_fragment) => {
+            _.each(count_fragment, (value, key) => {
+              return _.isArray(memo[key]) ? memo[key].push(value) : memo[key]++;
+            });
+            return memo;
+          },
+          _.chain(count_keys)
+            .map((key) => (_.endsWith(key, "_results") ? [key, []] : [key, 0]))
+            .fromPairs()
+            .value()
+        )
+        .mapValues((value) => (_.isArray(value) ? _.uniq(value).length : value))
+        .value();
+    })
+    .value();
+};
+
 const get_result_count_records = (results, indicators) => {
   const indicators_by_result_id = _.groupBy(indicators, "result_id");
 
   const gov_row = {
     subject_id: "total",
     level: "all",
-    ...counts_from_indicators(indicators),
+    ...dr_counts_from_indicators(indicators),
   };
 
   const igoc_rows = get_standard_csv_file_rows("igoc.csv");
