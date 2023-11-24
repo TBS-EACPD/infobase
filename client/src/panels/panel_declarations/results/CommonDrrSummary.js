@@ -227,6 +227,9 @@ class PercentageViz extends React.Component {
 
     const new_summary_text_args = {
       year: get_year_for_doc_key(drr_key),
+      results_dept_count:
+        this.props.summary_text_args.subject.id === "gov" &&
+        this.props.summary_text_args.results_dept_count,
       drr_subset: graph_total,
       drr_total: all_data_total,
       drr_indicators_met: _.includes(selected, "met") && counts.met,
