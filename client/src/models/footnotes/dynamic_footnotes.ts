@@ -22,17 +22,10 @@ export const PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC = {
   doc_type: "drr",
   year: run_template("{{pa_last_year}}"),
   late_results_orgs: [
-    "128", // Department of Employment and Social Development
-    "302", // National Security and Intelligence Review Agency Secretariat
     "278", // Privy Council Office
-    "345", // Secretariat of the National Security and Intelligence Committee of Parliamentarians
   ] as string[],
   late_resources_orgs: [
-    "138", // Department of Transport
-    "98", // Canadian Transportation Accident Investigation and Safety Board
-    //"151", // Financial Consumer Agency of Canada
     "278", // Privy Council Office
-    "345", // Secretariat of the National Security and Intelligence Committee of Parliamentarians
   ] as string[],
 };
 
