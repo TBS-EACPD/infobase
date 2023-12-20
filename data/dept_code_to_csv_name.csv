@@ -1269,6 +1269,7 @@ GG,program_ftes
 GSC,program_ftes
 H,program_ftes
 HC,program_ftes
+HFR,program_ftes
 HRSD,program_ftes
 IDRC,program_ftes
 IJC,program_ftes
@@ -1526,6 +1527,7 @@ GG,program_spending
 GSC,program_spending
 H,program_spending
 HC,program_spending
+HFR,program_spending
 HRSD,program_spending
 IDRC,program_spending
 IJC,program_spending

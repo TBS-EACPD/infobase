@@ -399,9 +399,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2022-23-departmental-results-reports.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2022-2023.html",
-    late_results_orgs: [
-      "278", // Privy Council Office
-    ],
+    late_results_orgs: [],
     late_resources_orgs: [],
   },
 ]);
