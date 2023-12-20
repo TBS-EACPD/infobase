@@ -136,7 +136,7 @@ export class WrappedNivoPie extends React.Component {
                 return percent_value_tooltip(
                   [data_with_original_values],
                   get_formatter(is_money, text_formatter, false),
-                  _.sumBy(data_with_absolute_values, "value")
+                  _.sumBy(this.props.data, "value")
                 );
               } else {
                 return tooltip(
