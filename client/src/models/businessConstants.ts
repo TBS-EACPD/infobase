@@ -490,7 +490,7 @@ export const result_statuses = normalizeBilinguals({
   },
   future: {
     en: "Result to be achieved in the future",
-    fr: "Résultat à atteindre dans le future",
+    fr: "Résultat à atteindre dans le futur",
   },
 });
 
