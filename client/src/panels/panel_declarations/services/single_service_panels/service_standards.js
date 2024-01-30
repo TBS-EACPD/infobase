@@ -10,7 +10,6 @@ import {
   DisplayTable,
   create_text_maker_component,
   VisibilityControl,
-  HeightClipper,
   TabsStateful,
 } from "src/components/index";
 
@@ -179,12 +178,10 @@ export class ServiceStandards extends React.Component {
                 }
               />
             )}
-            <HeightClipper clipHeight={500}>
-              <DisplayTable
-                data={filtered_data}
-                column_configs={column_configs}
-              />
-            </HeightClipper>
+            <DisplayTable
+              data={filtered_data}
+              column_configs={column_configs}
+            />
           </Fragment>
         ) : (
           <TM className="medium-panel-text" k="no_service_standards_text" />

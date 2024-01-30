@@ -3,10 +3,7 @@ import { scaleOrdinal } from "d3-scale";
 import _ from "lodash";
 import React from "react";
 
-import {
-  HeightClippedGraph,
-  TspanLineWrapper,
-} from "src/panels/panel_declarations/common_panel_components";
+import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -609,13 +606,11 @@ export const declare_detailed_program_spending_split_panel = () =>
                 />
               </div>
               <div>
-                <HeightClippedGraph clipHeight={300}>
-                  <DetailedProgramSplit
-                    flat_data={flat_data}
-                    arrangements={arrangements}
-                    top_3_so_nums={top_3_so_nums}
-                  />
-                </HeightClippedGraph>
+                <DetailedProgramSplit
+                  flat_data={flat_data}
+                  arrangements={arrangements}
+                  top_3_so_nums={top_3_so_nums}
+                />
               </div>
             </div>
           </InfographicPanel>
