@@ -438,7 +438,7 @@ jobs:
             - api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v2
       - run:
           command: |
-            [ -f "./this-api-is-deployed" ] || (cd server && ./scripts/deploy/ci_deploy_function.sh)
+            [ -f "./this-api-is-deployed" ] || (yes N | (cd server && ./scripts/deploy/ci_deploy_function.sh))
       - run: touch ./this-api-is-deployed
       - save_cache:
           key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v2
