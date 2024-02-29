@@ -16,6 +16,8 @@ export type AllDocResultCount = {
   __typename?: 'AllDocResultCount';
   dp23_indicators?: Maybe<Scalars['Int']>;
   dp23_results?: Maybe<Scalars['Int']>;
+  dp24_indicators?: Maybe<Scalars['Int']>;
+  dp24_results?: Maybe<Scalars['Int']>;
   drr18_indicators_future?: Maybe<Scalars['Int']>;
   drr18_indicators_met?: Maybe<Scalars['Int']>;
   drr18_indicators_not_available?: Maybe<Scalars['Int']>;
