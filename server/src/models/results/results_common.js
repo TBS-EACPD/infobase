@@ -7,6 +7,7 @@ const current_doc_keys_ordered_by_time_period = [
   "drr21",
   "drr22",
   "dp23",
+  "dp24",
 ];
 
 const current_drr_docs = _.filter(
