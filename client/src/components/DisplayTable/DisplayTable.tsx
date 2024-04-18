@@ -401,12 +401,12 @@ export class _DisplayTable extends React.Component<
     const total_row = _.reduce<DisplayTableData, { [key: string]: number }>(
       sorted_filtered_data,
       (totals, row: DisplayTableData) =>
-        _.mapValues(totals, (total: number, col_key) =>
-          col_configs_with_defaults[col_key].sum_func(
+        _.mapValues(totals, (total: number, col_key) => {
+          return col_configs_with_defaults[col_key].sum_func(
             total,
-            row[col_key] as number
-          )
-        ),
+            typeof row[col_key] === "number" ? (row[col_key] as number) : 0
+          );
+        }),
       _.chain(col_configs_with_defaults)
         .toPairs()
         .filter(([_key, col]) => col.is_summable)
