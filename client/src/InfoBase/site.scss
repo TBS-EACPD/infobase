@@ -120,15 +120,15 @@ strong,
   font-weight: $lightFontWeight;
 }
 
+a,
 .link-styled {
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
   color: $linkColor;
   background-color: transparent;
   &:focus,
   &:hover {
     color: $linkFocusColor;
-    text-decoration: underline;
   }
 }
 .border-radius {
