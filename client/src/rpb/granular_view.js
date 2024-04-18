@@ -107,9 +107,10 @@ class GranularView extends React.Component {
 
       // remove planned spending projections from crown corps
       if (org.inst_form_id === "crown_corp") {
-        planning_years.forEach(
-          (year) => (filtered_columns[year] = "Not Applicable")
-        );
+        planning_years.forEach((year) => {
+          if (year in filtered_columns)
+            filtered_columns[year] = "Not Applicable";
+        });
       }
 
       if (grouping_default_or_dept) {
