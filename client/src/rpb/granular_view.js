@@ -97,8 +97,22 @@ class GranularView extends React.Component {
         .fromPairs()
         .value();
 
+      const org = Dept.store.lookup(row.dept);
+
+      const planning_years = [
+        "{{planning_year_1}}",
+        "{{planning_year_2}}",
+        "{{planning_year_3}}",
+      ];
+
+      // remove planned spending projections from crown corps
+      if (org.inst_form_id === "crown_corp") {
+        planning_years.forEach(
+          (year) => (filtered_columns[year] = "Not Applicable")
+        );
+      }
+
       if (grouping_default_or_dept) {
-        const org = Dept.store.lookup(row.dept);
         return {
           dept: org.name,
           legal_title: org.legal_title ? org.legal_title : org.name,
