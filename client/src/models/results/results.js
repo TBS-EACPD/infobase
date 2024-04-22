@@ -426,24 +426,8 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/planned-government-spending/reports-plans-priorities/2024-25-departmental-plans.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2024-2025.html",
-    late_results_orgs: [
-      "99" /*Canadian Transportation Agency*/,
-      "117" /*Correctional Service of Canada*/,
-      "130" /*Department of Industry*/,
-      //"151" /*Financial Consumer Agency of Canada*/,
-      "350" /*Leaders Debate Commission*/,
-      "235" /*Northern Pipeline Agency*/,
-      "253" /*Office of the Superintendent of Finanical Institutions*/,
-      "278" /*Privy Council Office*/,
-    ],
-    late_resources_orgs: [
-      "99" /*Department of Industry*/,
-      "137" /*Department of the Environment*/,
-      //"151" /*Financial Consumer Agency of Canada*/,
-      "350" /*Leaders Debate Commission*/,
-      "253" /*Office of the Superintendent of Finanical Institutions*/,
-      "278" /*Privy Council Office*/,
-    ],
+    late_results_orgs: [],
+    late_resources_orgs: [],
   },
 ]);
 const result_docs = {
