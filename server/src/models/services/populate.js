@@ -573,11 +573,36 @@ export default async function ({ models }) {
       submission_year === absolute_most_recent_submission_year
   );
 
+  const get_missing_departments_per_year = (filtered_services) => {
+    const all_report_years = get_years_from_service_report(
+      absolute_most_recent_year_filtered_services
+    );
+
+    const report_years_per_org_id = _.chain(filtered_service_rows)
+      .groupBy("org_id")
+      .flatMap((services, org_id) => {
+        const years = get_years_from_service_report(services);
+        return {
+          org_id: org_id,
+          report_years: years,
+        };
+      })
+      .value();
+
+    return _.filter(
+      report_years_per_org_id,
+      ({ report_years }) => report_years.length !== all_report_years.length
+    );
+  };
+
   const gov_summary = [
     {
       id: "gov",
       service_general_stats: {
         report_years: get_years_from_service_report(
+          absolute_most_recent_year_filtered_services
+        ),
+        all_report_years: get_years_from_service_report(
           absolute_most_recent_year_filtered_services
         ),
         standard_years: get_years_from_service_standards(
@@ -606,6 +631,9 @@ export default async function ({ models }) {
           .size()
           .value(),
       },
+      list_of_missing_dept: get_missing_departments_per_year(
+        absolute_most_recent_year_filtered_services
+      ),
       service_channels_summary: get_service_channels_summary(
         absolute_most_recent_year_filtered_services
       ),
@@ -641,6 +669,9 @@ export default async function ({ models }) {
         id: org_id,
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
+          all_report_years: get_years_from_service_report(
+            absolute_most_recent_year_filtered_services
+          ),
           standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
@@ -667,6 +698,8 @@ export default async function ({ models }) {
           get_subject_offering_services_summary(
             _.reduce(filtered_services, group_by_program_id, {})
           ),
+        list_of_missing_dept:
+          get_missing_departments_per_year(filtered_services),
       };
     })
     .value();
@@ -684,6 +717,9 @@ export default async function ({ models }) {
         id: program_id,
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
+          all_report_years: get_years_from_service_report(
+            absolute_most_recent_year_filtered_services
+          ),
           standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
@@ -705,6 +741,8 @@ export default async function ({ models }) {
           filtered_services,
           program_id
         ),
+        list_of_missing_dept:
+          get_missing_departments_per_year(filtered_services),
       };
     })
     .value();
