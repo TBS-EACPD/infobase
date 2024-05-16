@@ -108,6 +108,7 @@ export default function (model_singleton) {
     id: pkey_type(),
     service_general_stats: {
       report_years: [str_type],
+      all_report_years: [str_type],
       standard_years: [str_type],
       number_of_services: { type: Number },
       number_of_online_enabled_services: { type: Number },
@@ -141,6 +142,12 @@ export default function (model_singleton) {
         services_w_standards_count: { type: Number },
         standards_count: { type: Number },
         met_standards_count: { type: Number },
+      },
+    ],
+    list_of_missing_dept: [
+      {
+        org_id: str_type,
+        report_years: [str_type],
       },
     ],
   };

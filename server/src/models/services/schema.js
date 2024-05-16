@@ -29,9 +29,11 @@ const schema = `
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
+    list_of_missing_dept: [MissingDept]
   }
   type ServiceGeneralStats{
     report_years: [String]
+    all_report_years: [String]
     standard_years: [String]
     number_of_services: Float
     number_of_online_enabled_services: Float
@@ -154,6 +156,11 @@ const schema = `
     standard_urls: [String]
     rtp_urls: [String]
     standard_report: [StandardReport]
+  }
+
+  type MissingDept{
+    org_id: String
+    report_years: [String]
   }
 `;
 

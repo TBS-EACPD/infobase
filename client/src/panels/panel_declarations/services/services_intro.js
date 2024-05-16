@@ -15,6 +15,10 @@ import {
   useServiceSummaryOrg,
 } from "src/models/services/queries";
 
+import { Dept } from "src/models/subjects";
+
+import { year_to_fiscal_year } from "src/models/years";
+
 import { FormFrontend } from "src/FormFrontend";
 
 // import { formats } from "src/core/format";
@@ -39,6 +43,7 @@ const ServicesIntroPanel = ({ subject }) => {
   const {
     service_general_stats: {
       report_years,
+      all_report_years,
       // number_of_services,
       // number_of_online_enabled_services,
       // pct_of_standards_met_high_vol_services,
@@ -46,9 +51,52 @@ const ServicesIntroPanel = ({ subject }) => {
       num_of_subject_offering_services,
       num_of_programs_offering_services,
     },
+    list_of_missing_dept,
   } = data;
 
   // const pct_formatter = (value) => formats.percentage1_raw(value);
+
+  console.log(list_of_missing_dept);
+
+  const missing_dept_text = () => {
+    const most_recent_year_missing_dept = _.filter(
+      list_of_missing_dept,
+      ({ report_years }) => report_years[0] !== all_report_years[0]
+    );
+    const missing_years = _.filter(
+      all_report_years,
+      (year) => !report_years.includes(year)
+    );
+    const gov_list = _.reduce(
+      most_recent_year_missing_dept,
+      (text, org) => `${text}- ${Dept.store.lookup(org.org_id).name} \n`,
+      ""
+    );
+    const org_list = _.reduce(
+      missing_years,
+      (text, year) => `${text}- **${year_to_fiscal_year(parseInt(year))}** \n`,
+      ""
+    );
+    return (
+      //<div className="ib-alert alert alert-warning alert-no-symbol">
+      <TM
+        k={`services_late_submissions_${subject.subject_type}`}
+        args={{
+          subject,
+          year: _.first(report_years),
+          total_depts_submitted:
+            num_of_subject_offering_services -
+            most_recent_year_missing_dept.length,
+          total_depts: num_of_subject_offering_services,
+          missing_dept: list_of_missing_dept.some(
+            ({ org_id }) => org_id === subject.id
+          ),
+          list: subject.id === "gov" ? gov_list : org_list,
+        }}
+      />
+      //</div>
+    );
+  };
 
   return (
     <div className="medium-panel-text">
@@ -63,6 +111,7 @@ const ServicesIntroPanel = ({ subject }) => {
             : { num_of_programs_offering_services }),
         }}
       />
+      {missing_dept_text()}
       <p>
         {text_maker("service_inventory_feedback_request")}{" "}
         <button
