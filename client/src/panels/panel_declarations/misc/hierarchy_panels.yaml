@@ -46,4 +46,4 @@ hierarchy_contains_dead_elements:
   en:  |
     : Corresponds to Programs and/or Strategic Outcomes that either ended or merged into new ones between {{pa_last_year_5}} and {{planning_year_1}}.
   fr: |
-    : Corresponds aux programmes ou résultats stratégiques qui ont pris fin ou qui ont fusionné entre {{pa_last_year_5}} et {{planning_year_1}}.
+    : Correspond aux programmes ou aux résultats stratégiques qui ont soit pris fin, soit fusionné avec de nouveaux programmes entre {{pa_last_year_5}} et {{planning_year_1}}.
