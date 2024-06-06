@@ -58,7 +58,7 @@ const ServicesIntroPanel = ({ subject }) => {
 
   console.log(list_of_missing_dept);
 
-  const missing_dept_text = () => {
+  const intro_text = () => {
     const most_recent_year_missing_dept = _.filter(
       list_of_missing_dept,
       ({ report_years }) => report_years[0] !== all_report_years[0]
@@ -79,10 +79,16 @@ const ServicesIntroPanel = ({ subject }) => {
     );
     return (
       //<div className="ib-alert alert alert-warning alert-no-symbol">
+
       <TM
-        k={`services_late_submissions_${subject.subject_type}`}
+        k={`services_intro_${subject.subject_type}`}
         args={{
           subject,
+          from_year: _.last(report_years),
+          to_year: _.first(report_years),
+          ...(subject.subject_type === "gov"
+            ? { num_of_subject_offering_services }
+            : { num_of_programs_offering_services }),
           year: _.first(report_years),
           total_depts_submitted:
             num_of_subject_offering_services -
@@ -100,18 +106,7 @@ const ServicesIntroPanel = ({ subject }) => {
 
   return (
     <div className="medium-panel-text">
-      <TM
-        k={`services_intro_${subject.subject_type}`}
-        args={{
-          subject,
-          from_year: _.last(report_years),
-          to_year: _.first(report_years),
-          ...(subject.subject_type === "gov"
-            ? { num_of_subject_offering_services }
-            : { num_of_programs_offering_services }),
-        }}
-      />
-      {missing_dept_text()}
+      {intro_text()}
       <p>
         {text_maker("service_inventory_feedback_request")}{" "}
         <button
