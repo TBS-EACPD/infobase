@@ -383,11 +383,15 @@ export class _DisplayTable extends React.Component<
                 .map((row) => row[sort_by])
                 .thru(([value_a, value_b]) =>
                   sort_func(
-                    plain_formatter(value_a),
-                    plain_formatter(value_b),
+                    value_a === "Not Applicable"
+                      ? -1
+                      : plain_formatter(value_a),
+                    value_b === "Not Applicable"
+                      ? -1
+                      : plain_formatter(value_b),
                     descending,
-                    value_a,
-                    value_b
+                    value_a === "Not Applicable" ? -1 : value_a,
+                    value_b === "Not Applicable" ? -1 : value_b
                   )
                 )
                 .value()
