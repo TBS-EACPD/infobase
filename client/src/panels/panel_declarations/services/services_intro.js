@@ -77,6 +77,8 @@ const ServicesIntroPanel = ({ subject }) => {
       (text, year) => `${text}- **${year_to_fiscal_year(parseInt(year))}** \n`,
       ""
     );
+
+    console.log(list_of_missing_dept.some(({ org_id }) => org_id === "46"));
     return (
       //<div className="ib-alert alert alert-warning alert-no-symbol">
 
@@ -98,6 +100,9 @@ const ServicesIntroPanel = ({ subject }) => {
             ({ org_id }) => org_id === subject.id
           ),
           list: subject.id === "gov" ? gov_list : org_list,
+          missing_cra:
+            list_of_missing_dept.some(({ org_id }) => org_id === "46") &&
+            (subject.id === "gov" || subject.id === "46"),
         }}
       />
       //</div>

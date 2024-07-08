@@ -43,6 +43,9 @@ services_intro_gov:
 
     In **{{fmt_year_to_fiscal_year year}}**, **{{total_depts_submitted}} out of {{total_depts}} departments and agencies** reported data in the **GC Service Inventory** and **does not** include values from the following:
     {{list}}
+    {{#if missing_cra}}
+    Note: the Canada Revenue Agency voluntarily reports on services via the Service Inventory.
+    {{/if}}
   fr: |
     Les renseignements sur les {{gl_sidebar_link "services" "SERVICE"}} offerts par le **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement d'un service donné. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_sidebar_link "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sur les services sont combinées ou compilées au niveau du programme, du ministère et du gouvernement. 
  
@@ -50,6 +53,9 @@ services_intro_gov:
 
     En **{{fmt_year_to_fiscal_year year}}**, **{{total_depts_submitted}} des {{total_depts}} ministères et organismes** ont déclaré des données dans le **Répertoire des services du GC**. Le répertoire **n'inclue pas** les données des ministères et organismes suivant:
     {{list}}
+    {{#if missing_cra}}
+    Remarque : l'Agence du revenu du Canada déclare volontairement leurs services via le Répertoire des services du GC.
+    {{/if}}
 services_intro_dept:
   transform: [handlebars, markdown]
   en: | 
@@ -58,11 +64,17 @@ services_intro_dept:
     The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**. {{#if missing_dept}} Please note that it **does not** contain data from the following years:
     {{list}}
     {{/if}}
+    {{#if missing_cra}}
+    Note: the Canada Revenue Agency voluntarily reports on services via the Service Inventory.
+    {{/if}}
   fr: |
     Les renseignements sur les {{gl_sidebar_link "services" "SERVICE"}} offerts par **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement des services. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_sidebar_link "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sont compilées au niveau du programme, du ministère et du gouvernement. 
 
     **Le Répertoire des services** pour **{{subject.name}}** contient actuellement des données sur les services offerts par **{{num_of_programs_offering_services}} programmes** et couvre les résultats de **{{fmt_year_to_fiscal_year from_year}}** à **{{fmt_year_to_fiscal_year to_year}}**. {{#if missing_dept}} Notez bien qu'il **ne contient pas** actuellement les données des années suivantes:
     {{list}}
+    {{/if}}
+    {{#if missing_cra}}
+    Remarque : l'Agence du revenu du Canada déclare volontairement les services via le Répertoire des services du GC.
     {{/if}}
 
 services_late_submissions_gov:
