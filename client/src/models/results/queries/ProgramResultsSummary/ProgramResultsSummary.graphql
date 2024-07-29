@@ -1,0 +1,18 @@
+query ProgramResultsSummary($lang: String!, $programId: String) {
+  root(lang: $lang) {
+    program(id: $programId) {
+      id
+      results {
+        id
+        doc
+        name
+        indicators {
+          id
+          name
+          status_key
+          actual_result
+        }
+      }
+    }
+  }
+}
