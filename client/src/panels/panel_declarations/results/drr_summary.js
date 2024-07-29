@@ -7,12 +7,16 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, Tabs } from "src/components/index";
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
+//import { useDeptResultsSummary } from "src/models/results/queries";
+
+//import { LeafSpinner } from "src/components/index";
 
 import {
   row_to_drr_status_counts,
   ResultCounts,
   GranularResultCounts,
   get_year_for_doc_key,
+  result_counts,
 } from "./results_common";
 
 import text from "./drr_summary.yaml";
@@ -49,6 +53,8 @@ const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
   const [drr_key, set_drr_key] = useState(_.last(drr_keys));
 
   const counts = row_to_drr_status_counts(verbose_counts, drr_key);
+
+  const results = result_counts(subject, drr_key);
 
   const summary = (
     <CommonDrrSummary

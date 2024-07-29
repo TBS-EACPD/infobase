@@ -3,6 +3,9 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 import * as Results from "src/models/results";
+import { useDeptResultsSummary } from "src/models/results/queries";
+import { useProgramResultsSummary } from "src/models/results/queries";
+import { useCrsoResultsSummary } from "src/models/results/queries";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
@@ -27,6 +30,23 @@ const {
 } = Results;
 
 const { result_statuses } = businessConstants;
+
+const load_results_api = (subject) => {
+  switch (subject.subject_type) {
+    case "dept":
+      return useDeptResultsSummary({ orgId: subject.id });
+
+    case "program":
+      return useProgramResultsSummary({ programId: subject.id });
+
+    case "crso":
+      return useCrsoResultsSummary({ crsoId: subject.id });
+  }
+};
+
+const result_counts = (subject, drr_key) => {
+  const { loading, data } = load_results_api(subject);
+};
 
 const link_to_results_infograph = (subject) =>
   infographic_href_template(subject, "results");
@@ -236,4 +256,5 @@ export {
   result_color_scale,
   filter_and_genericize_doc_counts,
   get_year_for_doc_key,
+  result_counts,
 };
