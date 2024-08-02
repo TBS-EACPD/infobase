@@ -5,6 +5,7 @@ import React, { Fragment } from "react";
 import {
   DisplayTable,
   create_text_maker_component,
+  TabsStateful,
 } from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -300,35 +301,9 @@ class PercentageViz extends React.Component {
   }
 }
 
-export const CommonDrrSummary = ({
-  subject,
-  drr_key,
-  counts,
-  verbose_counts,
-  results_dept_count,
-  org_counts,
-}) => {
-  const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(
-    verbose_counts,
-    drr_key
-  );
-
-  const summary_text_args = {
-    subject,
-    results_dept_count: subject.id === "gov" && results_dept_count,
-    results_dept_level: subject.subject_type === "dept",
-    year: get_year_for_doc_key(drr_key),
-    ...current_drr_counts_with_generic_keys,
-    ...org_counts,
-  };
-
+const IndicatorPane = ({ counts, drr_key, summary_text_args }) => {
   return (
-    <Fragment>
-      <div className="row align-items-center justify-content-lg-between">
-        <div className="col-12 medium-panel-text">
-          <TM k="drr_summary_text_intro" args={summary_text_args} />
-        </div>
-      </div>
+    <div id={"indicators_tab_pane"}>
       <div className="row align-items-center justify-content-lg-between">
         <div className="col-12 col-lg-7  medium-panel-text">
           <div style={{ padding: "10px" }}>
@@ -365,6 +340,84 @@ export const CommonDrrSummary = ({
           />
         </div>
       </div>
+    </div>
+  );
+};
+
+export const CommonDrrSummary = ({
+  subject,
+  drr_key,
+  counts,
+  verbose_counts,
+  results_dept_count,
+  org_counts,
+}) => {
+  const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(
+    verbose_counts,
+    drr_key
+  );
+
+  const results_org_level = subject.subject_type === "dept";
+
+  const summary_text_args = {
+    subject,
+    results_dept_count: subject.id === "gov" && results_dept_count,
+    results_org_level,
+    year: get_year_for_doc_key(drr_key),
+    ...current_drr_counts_with_generic_keys,
+    ...org_counts,
+  };
+
+  return (
+    <Fragment>
+      <div className="row align-items-center justify-content-lg-between">
+        <div className="col-12 medium-panel-text">
+          <TM k="drr_summary_text_intro" args={summary_text_args} />
+        </div>
+      </div>
+      {results_org_level && (
+        <TabsStateful
+          tabs={{
+            org: {
+              label: text_maker("org_indicators"),
+              content: (
+                <IndicatorPane
+                  counts={counts}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                />
+              ),
+            },
+            dept: {
+              label: text_maker("dept_indicators"),
+              content: (
+                <IndicatorPane
+                  counts={org_counts.dept_indicators_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                />
+              ),
+            },
+            program: {
+              label: text_maker("program_indicators"),
+              content: (
+                <IndicatorPane
+                  counts={org_counts.program_indicators_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                />
+              ),
+            },
+          }}
+        />
+      )}
+      {!results_org_level && (
+        <IndicatorPane
+          counts={counts}
+          drr_key={drr_key}
+          summary_text_args={summary_text_args}
+        />
+      )}
     </Fragment>
   );
 };

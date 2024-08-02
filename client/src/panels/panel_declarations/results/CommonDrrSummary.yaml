@@ -5,7 +5,7 @@ drr_summary_text_intro:
       In **{{year}}**, **{{results_dept_count}}** organizations sought to achieve **{{fmt_big_int drr_results}}** {{gl_sidebar_link "Departmental Results" "DR"}}.
       Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** {{gl_sidebar_link "Departmental Result Indicators" "IND_RESULT"}}, and a {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
       based on the measured outcome (actual result) of the indicator's target.
-    {{else if results_dept_level}}
+    {{else if results_org_level}}
       In **{{year}}**, {{subject.name}} organizations sought to achieve **{{fmt_big_int org_results}}** results through **{{fmt_big_int dept_results}}** {{gl_sidebar_link "Departmental Results" "DR"}} and **{{fmt_big_int program_results}}** {{gl_sidebar_link "Program Outcomes" "PO"}}.
       Progress towards meeting these results was measured using **{{fmt_big_int org_indicators}}** {{gl_sidebar_link "indicators" "IND_RESULT"}}, which was made up of **{{fmt_big_int dept_indicators}}** Departmental Result Indicators and **{{fmt_big_int program_indicators}}** Program Outcome Indicators. A {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
       based on the measured outcome (actual result) of the indicator's target.
@@ -90,3 +90,18 @@ result_status_explanation_future:
   transform: [handlebars]
   en: If the date to achieve the target is after the end of the fiscal year (March 31), or if there is no date to achieve the target, the status is {{gl_sidebar_link "Result to be achieved in the future" "RESULTS_ONGOING"}}.
   fr: Si la date d’atteinte de la cible est postérieure à la fin de l'exercice financier (31 mars), ou s'il n'y a pas de date d’atteinte de la cible, l’état est {{gl_sidebar_link "Résultat à atteindre dans le futur" "RESULTS_ONGOING"}}.
+
+org_indicators:
+  transform: [handlebars]
+  en: Organizational Results
+  fr: Résultat Organisationnel
+
+dept_indicators:
+  transform: [handlebars]
+  en: Departmental Results
+  fr: Résultats ministériels
+
+program_indicators:
+  transform: [handlebars]
+  en: Program Outcomes
+  fr: Résultat du programme
