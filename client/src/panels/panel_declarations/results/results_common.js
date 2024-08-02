@@ -99,6 +99,7 @@ const hierarchy_to_org_counts = (data, drr_key) => {
       `${type}_status`,
       _.chain(indicators)
         .groupBy("status_key")
+        .pick(["met", "not_met", "not_available", "future"])
         .toPairs()
         .map(([status_key, indicators]) => [status_key, indicators.length])
         .fromPairs()
