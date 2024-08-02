@@ -9,7 +9,7 @@ export type DeptResultsSummaryQueryVariables = Types.Exact<{
 }>;
 
 
-export type DeptResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', crsos?: Array<{ __typename?: 'Crso', name?: string | null, results?: Array<{ __typename?: 'Result', doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null, programs?: Array<{ __typename?: 'Program', name?: string | null, results?: Array<{ __typename?: 'Result', doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } };
+export type DeptResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', org?: { __typename?: 'Org', crsos?: Array<{ __typename?: 'Crso', name?: string | null, results?: Array<{ __typename?: 'Result', doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null, programs?: Array<{ __typename?: 'Program', name?: string | null, results?: Array<{ __typename?: 'Result', doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } };
 
 
 export const DeptResultsSummaryDocument = gql`
@@ -24,6 +24,7 @@ export const DeptResultsSummaryDocument = gql`
           indicators {
             id
             name
+            doc
             status_key
             actual_result
           }
@@ -36,6 +37,7 @@ export const DeptResultsSummaryDocument = gql`
             indicators {
               id
               name
+              doc
               status_key
               actual_result
             }

@@ -9,6 +9,7 @@ query ProgramResultsSummary($lang: String!, $programId: String) {
         indicators {
           id
           name
+          doc
           status_key
           actual_result
         }

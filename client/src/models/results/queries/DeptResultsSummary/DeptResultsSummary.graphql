@@ -9,6 +9,7 @@ query DeptResultsSummary($lang: String!, $orgId: String) {
           indicators {
             id
             name
+            doc
             status_key
             actual_result
           }
@@ -21,6 +22,7 @@ query DeptResultsSummary($lang: String!, $orgId: String) {
             indicators {
               id
               name
+              doc
               status_key
               actual_result
             }

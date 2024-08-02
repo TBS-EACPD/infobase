@@ -3,16 +3,12 @@ import _ from "lodash";
 
 import { businessConstants } from "src/models/businessConstants";
 import * as Results from "src/models/results";
-import { useDeptResultsSummary } from "src/models/results/queries";
-import { useProgramResultsSummary } from "src/models/results/queries";
-import { useCrsoResultsSummary } from "src/models/results/queries";
 
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
-
 import { text_maker } from "./result_text_provider";
 
 const {
@@ -31,21 +27,103 @@ const {
 
 const { result_statuses } = businessConstants;
 
-const load_results_api = (subject) => {
-  switch (subject.subject_type) {
-    case "dept":
-      return useDeptResultsSummary({ orgId: subject.id });
+const results_hierarchy = (data, drr_key) => {
+  const dept_results = _.chain(data)
+    .map((crso) => crso.results)
+    .flatten()
+    .map((result) => ({ ...result, type: "departmental" }))
+    .filter({ doc: drr_key })
+    .value();
 
-    case "program":
-      return useProgramResultsSummary({ programId: subject.id });
+  const prog_results = _.chain(data)
+    .map((crso) => crso.programs)
+    .flatten()
+    .map((program) => program.results)
+    .flatten()
+    .map((result) => ({ ...result, type: "program" }))
+    .filter({ doc: drr_key })
+    .value();
 
-    case "crso":
-      return useCrsoResultsSummary({ crsoId: subject.id });
-  }
+  const org_results = dept_results.concat(prog_results);
+
+  return { org_results, dept_results, prog_results };
 };
 
-const result_counts = (subject, drr_key) => {
-  const { loading, data } = load_results_api(subject);
+const indicator_hierarchy = (data, drr_key) => {
+  const list_results = results_hierarchy(data, drr_key).org_results;
+
+  const org_indicators = _.chain(list_results)
+    .map((result) => result.indicators)
+    .flatten()
+    .value();
+
+  const dept_indicators = _.chain(list_results)
+    .filter({ type: "departmental" })
+    .map((result) => result.indicators)
+    .flatten()
+    .value();
+
+  const prog_indicators = _.chain(list_results)
+    .filter({ type: "program" })
+    .map((result) => result.indicators)
+    .flatten()
+    .value();
+
+  return { org_indicators, dept_indicators, prog_indicators };
+};
+
+const hierarchy_to_org_counts = (data, drr_key) => {
+  const cleaned_data = _.chain(data)
+    .reject(["name", "Internal Services"])
+    .value();
+
+  const list_results = results_hierarchy(cleaned_data, drr_key);
+
+  const list_indicators = indicator_hierarchy(cleaned_data, drr_key);
+
+  const crso_count = cleaned_data.length;
+
+  const num_results = _.chain(list_results)
+    .toPairs()
+    .map(([type, results]) => [type, results.length])
+    .fromPairs()
+    .value();
+
+  const num_indicators = _.chain(list_indicators)
+    .toPairs()
+    .map(([type, indicators]) => [type, indicators.length])
+    .fromPairs()
+    .value();
+
+  const org_indicator_status = _.chain(list_indicators.org_indicators)
+    .groupBy("status_key")
+    .toPairs()
+    .map(([status_key, indicators]) => [status_key, indicators.length])
+    .fromPairs()
+    .value();
+
+  const dept_indicator_status = _.chain(list_indicators.dept_indicators)
+    .groupBy("status_key")
+    .toPairs()
+    .map(([status_key, indicators]) => [status_key, indicators.length])
+    .fromPairs()
+    .value();
+
+  const prog_indicator_status = _.chain(list_indicators.prog_indicators)
+    .groupBy("status_key")
+    .toPairs()
+    .map(([status_key, indicators]) => [status_key, indicators.length])
+    .fromPairs()
+    .value();
+
+  return {
+    crso_count,
+    ...num_results,
+    ...num_indicators,
+    org_indicator_status,
+    dept_indicator_status,
+    prog_indicator_status,
+  };
 };
 
 const link_to_results_infograph = (subject) =>
@@ -256,5 +334,5 @@ export {
   result_color_scale,
   filter_and_genericize_doc_counts,
   get_year_for_doc_key,
-  result_counts,
+  hierarchy_to_org_counts,
 };

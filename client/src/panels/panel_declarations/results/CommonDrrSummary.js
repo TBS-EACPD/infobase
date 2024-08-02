@@ -306,6 +306,7 @@ export const CommonDrrSummary = ({
   counts,
   verbose_counts,
   results_dept_count,
+  org_counts,
 }) => {
   const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(
     verbose_counts,
@@ -315,8 +316,10 @@ export const CommonDrrSummary = ({
   const summary_text_args = {
     subject,
     results_dept_count: subject.id === "gov" && results_dept_count,
+    results_dept_level: subject.subject_type === "dept",
     year: get_year_for_doc_key(drr_key),
     ...current_drr_counts_with_generic_keys,
+    ...org_counts,
   };
 
   return (
