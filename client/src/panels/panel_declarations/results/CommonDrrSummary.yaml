@@ -6,8 +6,8 @@ drr_summary_text_intro:
       Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** {{gl_sidebar_link "Departmental Result Indicators" "IND_RESULT"}}, and a {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
       based on the measured outcome (actual result) of the indicator's target.
     {{else if results_dept_level}}
-      In **{{year}}**, {{subject.name}} organizations sought to achieve **{{fmt_big_int org_results}}** results through **{{fmt_big_int dept_results}}** {{gl_sidebar_link "Departmental Results" "DR"}} and **{{fmt_big_int prog_results}}** {{gl_sidebar_link "Program Outcomes" "PO"}}.
-      Progress towards meeting these results was measured using **{{fmt_big_int org_indicators}}** {{gl_sidebar_link "indicators" "IND_RESULT"}}, which was made up of **{{fmt_big_int dept_indicators}}** Departmental Result Indicators and **{{fmt_big_int prog_indicators}}** Program Outcome Indicators. A {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
+      In **{{year}}**, {{subject.name}} organizations sought to achieve **{{fmt_big_int org_results}}** results through **{{fmt_big_int dept_results}}** {{gl_sidebar_link "Departmental Results" "DR"}} and **{{fmt_big_int program_results}}** {{gl_sidebar_link "Program Outcomes" "PO"}}.
+      Progress towards meeting these results was measured using **{{fmt_big_int org_indicators}}** {{gl_sidebar_link "indicators" "IND_RESULT"}}, which was made up of **{{fmt_big_int dept_indicators}}** Departmental Result Indicators and **{{fmt_big_int program_indicators}}** Program Outcome Indicators. A {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
       based on the measured outcome (actual result) of the indicator's target.
     {{else}}
       In **{{year}}**, {{subject.name}} sought to achieve **{{fmt_big_int drr_results}}** results.
