@@ -31,11 +31,11 @@ const results_hierarchy = (data, drr_key) => {
   const dept_results = _.chain(data)
     .map((crso) => crso.results)
     .flatten()
-    .map((result) => ({ ...result, type: "departmental" }))
+    .map((result) => ({ ...result, type: "dept" }))
     .filter({ doc: drr_key })
     .value();
 
-  const prog_results = _.chain(data)
+  const program_results = _.chain(data)
     .map((crso) => crso.programs)
     .flatten()
     .map((program) => program.results)
@@ -44,9 +44,9 @@ const results_hierarchy = (data, drr_key) => {
     .filter({ doc: drr_key })
     .value();
 
-  const org_results = dept_results.concat(prog_results);
+  const org_results = dept_results.concat(program_results);
 
-  return { org_results, dept_results, prog_results };
+  return { org_results, dept_results, program_results };
 };
 
 const indicator_hierarchy = (data, drr_key) => {
@@ -57,19 +57,17 @@ const indicator_hierarchy = (data, drr_key) => {
     .flatten()
     .value();
 
-  const dept_indicators = _.chain(list_results)
-    .filter({ type: "departmental" })
-    .map((result) => result.indicators)
-    .flatten()
+  const dept_prog_indicators = _.chain(list_results)
+    .groupBy("type")
+    .toPairs()
+    .map(([type, results]) => [
+      `${type}_indicators`,
+      _.chain(results).map("indicators").flatten().value(),
+    ])
+    .fromPairs()
     .value();
 
-  const prog_indicators = _.chain(list_results)
-    .filter({ type: "program" })
-    .map((result) => result.indicators)
-    .flatten()
-    .value();
-
-  return { org_indicators, dept_indicators, prog_indicators };
+  return { org_indicators, ...dept_prog_indicators };
 };
 
 const hierarchy_to_org_counts = (data, drr_key) => {
@@ -95,24 +93,17 @@ const hierarchy_to_org_counts = (data, drr_key) => {
     .fromPairs()
     .value();
 
-  const org_indicator_status = _.chain(list_indicators.org_indicators)
-    .groupBy("status_key")
+  const indicator_status = _.chain(list_indicators)
     .toPairs()
-    .map(([status_key, indicators]) => [status_key, indicators.length])
-    .fromPairs()
-    .value();
-
-  const dept_indicator_status = _.chain(list_indicators.dept_indicators)
-    .groupBy("status_key")
-    .toPairs()
-    .map(([status_key, indicators]) => [status_key, indicators.length])
-    .fromPairs()
-    .value();
-
-  const prog_indicator_status = _.chain(list_indicators.prog_indicators)
-    .groupBy("status_key")
-    .toPairs()
-    .map(([status_key, indicators]) => [status_key, indicators.length])
+    .map(([type, indicators]) => [
+      `${type}_status`,
+      _.chain(indicators)
+        .groupBy("status_key")
+        .toPairs()
+        .map(([status_key, indicators]) => [status_key, indicators.length])
+        .fromPairs()
+        .value(),
+    ])
     .fromPairs()
     .value();
 
@@ -120,9 +111,7 @@ const hierarchy_to_org_counts = (data, drr_key) => {
     crso_count,
     ...num_results,
     ...num_indicators,
-    org_indicator_status,
-    dept_indicator_status,
-    prog_indicator_status,
+    ...indicator_status,
   };
 };
 
