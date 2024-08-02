@@ -9,6 +9,7 @@ query CrsoResultsSummary($lang: String!, $crsoId: String) {
         indicators {
           id
           name
+          doc
           status_key
           actual_result
         }
@@ -22,6 +23,7 @@ query CrsoResultsSummary($lang: String!, $crsoId: String) {
           indicators {
             id
             name
+            doc
             status_key
             actual_result
           }

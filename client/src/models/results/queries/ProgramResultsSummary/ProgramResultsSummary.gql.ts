@@ -9,7 +9,7 @@ export type ProgramResultsSummaryQueryVariables = Types.Exact<{
 }>;
 
 
-export type ProgramResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', program?: { __typename?: 'Program', id?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null } };
+export type ProgramResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', program?: { __typename?: 'Program', id?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null } };
 
 
 export const ProgramResultsSummaryDocument = gql`
@@ -24,6 +24,7 @@ export const ProgramResultsSummaryDocument = gql`
         indicators {
           id
           name
+          doc
           status_key
           actual_result
         }

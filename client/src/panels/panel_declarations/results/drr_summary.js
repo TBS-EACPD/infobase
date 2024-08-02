@@ -4,19 +4,22 @@ import React, { useState } from "react";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component, Tabs } from "src/components/index";
+import {
+  create_text_maker_component,
+  Tabs,
+  LeafSpinner,
+} from "src/components/index";
+
+import { useDeptResultsSummary } from "src/models/results/queries";
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
-//import { useDeptResultsSummary } from "src/models/results/queries";
-
-//import { LeafSpinner } from "src/components/index";
 
 import {
   row_to_drr_status_counts,
   ResultCounts,
   GranularResultCounts,
   get_year_for_doc_key,
-  result_counts,
+  hierarchy_to_org_counts,
 } from "./results_common";
 
 import text from "./drr_summary.yaml";
@@ -54,7 +57,15 @@ const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
 
   const counts = row_to_drr_status_counts(verbose_counts, drr_key);
 
-  const results = result_counts(subject, drr_key);
+  const { loading, data } = useDeptResultsSummary({
+    orgId: subject.id,
+  });
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  const org_counts = hierarchy_to_org_counts(data, drr_key);
 
   const summary = (
     <CommonDrrSummary
@@ -62,6 +73,7 @@ const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
       drr_key={drr_key}
       verbose_counts={verbose_counts}
       counts={counts}
+      org_counts={org_counts}
     />
   );
 
