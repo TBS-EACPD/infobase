@@ -9,6 +9,7 @@ import { formats } from "src/core/format";
 
 import { get_resources_for_subject } from "src/explorer_common/resource_explorer_common";
 import { infographic_href_template } from "src/infographic/infographic_href_template";
+
 import { text_maker } from "./result_text_provider";
 
 const {
