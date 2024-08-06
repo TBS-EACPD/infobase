@@ -29,17 +29,14 @@ const { result_statuses } = businessConstants;
 
 const results_hierarchy = (data, drr_key) => {
   const dept_results = _.chain(data)
-    .map((crso) => crso.results)
-    .flatten()
+    .flatMap((crso) => crso.results)
     .map((result) => ({ ...result, type: "dept" }))
     .filter({ doc: drr_key })
     .value();
 
   const program_results = _.chain(data)
-    .map((crso) => crso.programs)
-    .flatten()
-    .map((program) => program.results)
-    .flatten()
+    .flatMap((crso) => crso.programs)
+    .flatMap((program) => program.results)
     .map((result) => ({ ...result, type: "program" }))
     .filter({ doc: drr_key })
     .value();
@@ -53,8 +50,7 @@ const indicator_hierarchy = (data, drr_key) => {
   const list_results = results_hierarchy(data, drr_key).org_results;
 
   const org_indicators = _.chain(list_results)
-    .map((result) => result.indicators)
-    .flatten()
+    .flatMap((result) => result.indicators)
     .value();
 
   const dept_prog_indicators = _.chain(list_results)
@@ -62,7 +58,7 @@ const indicator_hierarchy = (data, drr_key) => {
     .toPairs()
     .map(([type, results]) => [
       `${type}_indicators`,
-      _.chain(results).map("indicators").flatten().value(),
+      _.chain(results).flatMap("indicators").value(),
     ])
     .fromPairs()
     .value();
