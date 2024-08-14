@@ -4,12 +4,6 @@ import _ from "lodash";
 import { businessConstants } from "src/models/businessConstants";
 import * as Results from "src/models/results";
 
-import {
-  useDeptResultsSummary,
-  useCrsoResultsSummary,
-  useProgramResultsSummary,
-} from "src/models/results/queries";
-
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
@@ -34,7 +28,7 @@ const {
 
 const { result_statuses } = businessConstants;
 
-const load_results_api = (subject) => {
+/* const LoadResultsAPI = (subject) => {
   switch (subject.subject_type) {
     case "dept":
       return useDeptResultsSummary({ orgId: subject.id });
@@ -45,7 +39,18 @@ const load_results_api = (subject) => {
     case "program":
       return useProgramResultsSummary({ programId: subject.id });
   }
-};
+  const useSummaryResults = {
+    dept: useDeptResultsSummary({ orgId: subject.id }),
+    crso: useCrsoResultsSummary({ crsoId: subject.id }),
+    program: useProgramResultsSummary({ programId: subject.id }),
+  }[subject.subject_type];
+  const { loading, data } = useSummaryResults({ id: subject.id });
+}; */
+/* const useSummaryResults = {
+  dept: useDeptResultsSummary({ orgId: subject.id }),
+  crso: useCrsoResultsSummary({ crsoId: subject.id }),
+  program: useProgramResultsSummary({ programId: subject.id }),
+}; */
 
 const results_hierarchy = (data) => {
   switch (data.__typename) {
@@ -361,6 +366,6 @@ export {
   result_color_scale,
   filter_and_genericize_doc_counts,
   get_year_for_doc_key,
-  load_results_api,
   hierarchy_to_counts,
+  indicator_hierarchy,
 };
