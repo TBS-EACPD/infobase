@@ -10,16 +10,14 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { useDeptResultsSummary } from "src/models/results/queries";
-
 import { CommonDrrSummary } from "./CommonDrrSummary";
 
 import {
-  row_to_drr_status_counts,
   ResultCounts,
   GranularResultCounts,
   get_year_for_doc_key,
-  hierarchy_to_org_counts,
+  load_results_api,
+  hierarchy_to_counts,
 } from "./results_common";
 
 import text from "./drr_summary.yaml";
@@ -55,17 +53,13 @@ const get_drr_keys_with_data = (subject) =>
 const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
   const [drr_key, set_drr_key] = useState(_.last(drr_keys));
 
-  const counts = row_to_drr_status_counts(verbose_counts, drr_key);
-
-  const { loading, data } = useDeptResultsSummary({
-    orgId: subject.id,
-  });
+  const { loading, data } = load_results_api(subject);
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
   }
 
-  const org_counts = hierarchy_to_org_counts(data, drr_key);
+  const counts = hierarchy_to_counts(data, drr_key);
 
   const summary = (
     <CommonDrrSummary
@@ -73,7 +67,6 @@ const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
       drr_key={drr_key}
       verbose_counts={verbose_counts}
       counts={counts}
-      org_counts={org_counts}
     />
   );
 

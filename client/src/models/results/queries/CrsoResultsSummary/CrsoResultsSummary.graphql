@@ -2,6 +2,7 @@ query CrsoResultsSummary($lang: String!, $crsoId: String) {
   root(lang: $lang) {
     crso(id: $crsoId) {
       id
+      name
       results {
         id
         doc
@@ -16,6 +17,7 @@ query CrsoResultsSummary($lang: String!, $crsoId: String) {
       }
       programs {
         id
+        name
         results {
           id
           doc
