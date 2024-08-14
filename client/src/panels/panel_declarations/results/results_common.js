@@ -4,6 +4,12 @@ import _ from "lodash";
 import { businessConstants } from "src/models/businessConstants";
 import * as Results from "src/models/results";
 
+import {
+  useDeptResultsSummary,
+  useCrsoResultsSummary,
+  useProgramResultsSummary,
+} from "src/models/results/queries";
+
 import { newIBCategoryColors } from "src/core/color_schemes";
 import { formats } from "src/core/format";
 
@@ -28,87 +34,121 @@ const {
 
 const { result_statuses } = businessConstants;
 
-const results_hierarchy = (data, drr_key) => {
-  const dept_results = _.chain(data)
-    .flatMap((crso) => crso.results)
-    .map((result) => ({ ...result, type: "dept" }))
-    .filter({ doc: drr_key })
-    .value();
+const load_results_api = (subject) => {
+  switch (subject.subject_type) {
+    case "dept":
+      return useDeptResultsSummary({ orgId: subject.id });
 
-  const program_results = _.chain(data)
-    .flatMap((crso) => crso.programs)
-    .flatMap((program) => program.results)
-    .map((result) => ({ ...result, type: "program" }))
-    .filter({ doc: drr_key })
-    .value();
+    case "crso":
+      return useCrsoResultsSummary({ crsoId: subject.id });
 
-  const org_results = dept_results.concat(program_results);
-
-  return { org_results, dept_results, program_results };
+    case "program":
+      return useProgramResultsSummary({ programId: subject.id });
+  }
 };
 
-const indicator_hierarchy = (data, drr_key) => {
-  const list_results = results_hierarchy(data, drr_key).org_results;
+const results_hierarchy = (data) => {
+  switch (data.__typename) {
+    case "Program":
+      return _.chain(data.results)
+        .map((result) => ({
+          ...result,
+          type: "program",
+          parent_name: data.name,
+        }))
+        .value();
+    case "Crso":
+      return _.chain(data.results)
+        .map((result) => ({ ...result, type: "dept", parent_name: data.name }))
+        .concat(
+          _.flatMap(data.programs, (program) => results_hierarchy(program))
+        )
+        .value();
+    default:
+      return _.chain(data)
+        .flatMap((crso) => results_hierarchy(crso))
+        .value();
+  }
+};
 
-  const org_indicators = _.chain(list_results)
-    .flatMap((result) => result.indicators)
+const indicator_hierarchy = (data) => {
+  const results_list = results_hierarchy(data);
+
+  return _.chain(results_list)
+    .flatMap((result) =>
+      _.map(result.indicators, (indicator) => ({
+        ...indicator,
+        type: result.type,
+        parent_name: result.parent_name,
+      }))
+    )
     .value();
+};
 
-  const dept_prog_indicators = _.chain(list_results)
-    .groupBy("type")
-    .toPairs()
-    .map(([type, results]) => [
-      `${type}_indicators`,
-      _.chain(results).flatMap("indicators").value(),
+const indicator_status_list = (indicators) => {
+  return _.chain(ordered_status_keys)
+    .map((status_key) => [
+      status_key,
+      _.filter(indicators, { status_key: status_key }).length,
     ])
     .fromPairs()
     .value();
-
-  return { org_indicators, ...dept_prog_indicators };
 };
 
-const hierarchy_to_org_counts = (data, drr_key) => {
-  const cleaned_data = _.chain(data)
-    .reject(["name", "Internal Services"])
-    .value();
+const hierarchy_to_counts = (data, drr_key) => {
+  const results_list = _.filter(results_hierarchy(data), { doc: drr_key });
+  const indicators_list = _.filter(indicator_hierarchy(data), { doc: drr_key });
 
-  const list_results = results_hierarchy(cleaned_data, drr_key);
+  const crso_count = _.chain(results_list)
+    .filter({ type: "dept" })
+    .groupBy("parent_name")
+    .keys()
+    .value().length;
 
-  const list_indicators = indicator_hierarchy(cleaned_data, drr_key);
+  const program_count = _.chain(results_list)
+    .filter({ type: "program" })
+    .groupBy("parent_name")
+    .keys()
+    .value().length;
 
-  const crso_count = cleaned_data.length;
+  const total_result_count = results_list.length;
 
-  const num_results = _.chain(list_results)
+  const result_counts = _.chain(results_list)
+    .groupBy("type")
     .toPairs()
-    .map(([type, results]) => [type, results.length])
+    .map(([type, results]) => [`${type}_results`, results.length])
     .fromPairs()
     .value();
 
-  const num_indicators = _.chain(list_indicators)
+  const total_indicator_count = indicators_list.length;
+
+  const indicator_counts = _.chain(indicators_list)
+    .groupBy("type")
     .toPairs()
-    .map(([type, indicators]) => [type, indicators.length])
+    .map(([type, results]) => [`${type}_indicator_counts`, results.length])
     .fromPairs()
     .value();
 
-  const indicator_status = _.chain(list_indicators)
+  const total_indicator_status = indicator_status_list(indicators_list);
+
+  const indicator_status = _.chain(indicators_list)
+    .groupBy("type")
     .toPairs()
     .map(([type, indicators]) => [
-      `${type}_status`,
-      _.chain(indicators)
-        .groupBy("status_key")
-        .pick(["met", "not_met", "not_available", "future"])
-        .toPairs()
-        .map(([status_key, indicators]) => [status_key, indicators.length])
-        .fromPairs()
-        .value(),
+      `${type}_indicators_status`,
+      indicator_status_list(indicators),
     ])
     .fromPairs()
     .value();
 
   return {
     crso_count,
-    ...num_results,
-    ...num_indicators,
+    program_count,
+    total_result_count,
+    ...result_counts,
+    total_indicator_count,
+    ...indicator_counts,
+    total_indicator_status,
     ...indicator_status,
   };
 };
@@ -321,5 +361,6 @@ export {
   result_color_scale,
   filter_and_genericize_doc_counts,
   get_year_for_doc_key,
-  hierarchy_to_org_counts,
+  load_results_api,
+  hierarchy_to_counts,
 };

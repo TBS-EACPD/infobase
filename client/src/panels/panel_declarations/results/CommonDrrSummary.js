@@ -117,8 +117,8 @@ const StatusGrid = ({ met, not_met, not_available, future, drr_key }) => {
     })
     .value();
 
-  const legend_data = _.chain(data)
-    .map(({ status_key }) => ({
+  const legend_data = _.chain(ordered_status_keys)
+    .map((status_key) => ({
       className: grid_colors[status_key],
       id: status_key,
       label: text_maker(status_key),
@@ -301,7 +301,7 @@ class PercentageViz extends React.Component {
   }
 }
 
-const IndicatorPane = ({ counts, drr_key, summary_text_args }) => {
+const IndicatorSummary = ({ counts, drr_key, summary_text_args }) => {
   return (
     <div id={"indicators_tab_pane"}>
       <div className="row align-items-center justify-content-lg-between">
@@ -350,7 +350,6 @@ export const CommonDrrSummary = ({
   counts,
   verbose_counts,
   results_dept_count,
-  org_counts,
 }) => {
   const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(
     verbose_counts,
@@ -365,7 +364,7 @@ export const CommonDrrSummary = ({
     results_org_level,
     year: get_year_for_doc_key(drr_key),
     ...current_drr_counts_with_generic_keys,
-    ...org_counts,
+    ...counts,
   };
 
   return (
@@ -379,10 +378,10 @@ export const CommonDrrSummary = ({
         <TabsStateful
           tabs={{
             org: {
-              label: text_maker("org_indicators"),
+              label: text_maker("overview_indicators"),
               content: (
-                <IndicatorPane
-                  counts={counts}
+                <IndicatorSummary
+                  counts={counts.total_indicator_status}
                   drr_key={drr_key}
                   summary_text_args={summary_text_args}
                 />
@@ -391,8 +390,8 @@ export const CommonDrrSummary = ({
             dept: {
               label: text_maker("dept_indicators"),
               content: (
-                <IndicatorPane
-                  counts={org_counts.dept_indicators_status}
+                <IndicatorSummary
+                  counts={counts.dept_indicators_status}
                   drr_key={drr_key}
                   summary_text_args={summary_text_args}
                 />
@@ -401,8 +400,8 @@ export const CommonDrrSummary = ({
             program: {
               label: text_maker("program_indicators"),
               content: (
-                <IndicatorPane
-                  counts={org_counts.program_indicators_status}
+                <IndicatorSummary
+                  counts={counts.program_indicators_status}
                   drr_key={drr_key}
                   summary_text_args={summary_text_args}
                 />
@@ -412,8 +411,8 @@ export const CommonDrrSummary = ({
         />
       )}
       {!results_org_level && (
-        <IndicatorPane
-          counts={counts}
+        <IndicatorSummary
+          counts={counts.total_indicator_status}
           drr_key={drr_key}
           summary_text_args={summary_text_args}
         />

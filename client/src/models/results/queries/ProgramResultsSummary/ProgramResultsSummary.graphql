@@ -2,6 +2,7 @@ query ProgramResultsSummary($lang: String!, $programId: String) {
   root(lang: $lang) {
     program(id: $programId) {
       id
+      name
       results {
         id
         doc

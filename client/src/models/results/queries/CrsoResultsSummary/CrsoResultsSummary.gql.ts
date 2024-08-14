@@ -9,7 +9,7 @@ export type CrsoResultsSummaryQueryVariables = Types.Exact<{
 }>;
 
 
-export type CrsoResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', crso?: { __typename?: 'Crso', id?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null, programs?: Array<{ __typename?: 'Program', id?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null> | null } | null } };
+export type CrsoResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', crso?: { __typename?: 'Crso', id?: string | null, name?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null, programs?: Array<{ __typename?: 'Program', id?: string | null, name?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null> | null } | null } };
 
 
 export const CrsoResultsSummaryDocument = gql`
@@ -17,6 +17,7 @@ export const CrsoResultsSummaryDocument = gql`
   root(lang: $lang) {
     crso(id: $crsoId) {
       id
+      name
       results {
         id
         doc
@@ -31,6 +32,7 @@ export const CrsoResultsSummaryDocument = gql`
       }
       programs {
         id
+        name
         results {
           id
           doc
