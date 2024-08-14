@@ -374,7 +374,14 @@ export const CommonDrrSummary = ({
           <TM k="drr_summary_text_intro" args={summary_text_args} />
         </div>
       </div>
-      {results_org_level && (
+      {results_dept_count && (
+        <IndicatorSummary
+          counts={counts}
+          drr_key={drr_key}
+          summary_text_args={summary_text_args}
+        />
+      )}
+      {!results_dept_count && results_org_level && (
         <TabsStateful
           tabs={{
             org: {
@@ -410,7 +417,7 @@ export const CommonDrrSummary = ({
           }}
         />
       )}
-      {!results_org_level && (
+      {!results_dept_count && !results_org_level && (
         <IndicatorSummary
           counts={counts.total_indicator_status}
           drr_key={drr_key}
