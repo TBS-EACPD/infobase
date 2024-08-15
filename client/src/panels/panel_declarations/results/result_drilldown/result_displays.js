@@ -51,7 +51,6 @@ export const ResultCounts = ({ base_hierarchy, doc, subject }) => {
     .fromPairs()
     .value();
 
-  console.log(count_items);
   let text_key = "";
   if (subject.subject_type === "dept") {
     if (/drr/.test(doc)) {
