@@ -58,8 +58,6 @@ const get_drr_keys_with_data = (subject) =>
 const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
   const [drr_key, set_drr_key] = useState(_.last(drr_keys));
 
-  //const { loading, data } = LoadResultsAPI(subject);
-
   const useSummaryResults = (subject) =>
     ({
       dept: useDeptResultsSummary({ orgId: subject.id }),
