@@ -11,8 +11,15 @@ query ProgramResultsSummary($lang: String!, $programId: String) {
           id
           name
           doc
-          status_key
+          target_month
+          target_year
+          target_min
           actual_result
+          status_key
+          result_explanation
+          methodology
+          previous_year_target_min
+          previous_year_actual_result
         }
       }
     }

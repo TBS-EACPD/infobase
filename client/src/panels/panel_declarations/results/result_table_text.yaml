@@ -33,18 +33,3 @@ of:
 a_masc:
   en: a
   fr: un
-
-overview_indicators:
-  transform: [handlebars]
-  en: Results Overview
-  fr: Aperçu des Résultats
-
-dept_indicators:
-  transform: [handlebars]
-  en: Departmental Results
-  fr: Résultats ministériels
-
-program_indicators:
-  transform: [handlebars]
-  en: Program Outcomes
-  fr: Résultat du programme

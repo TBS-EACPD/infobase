@@ -25,7 +25,6 @@ import {
   result_statuses,
   indicator_text_functions,
   get_year_for_doc_key,
-  hierarchy_to_counts,
 } from "src/panels/panel_declarations/results/results_common";
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -34,17 +33,10 @@ import {
   DisplayTable,
   Tabs,
   StatelessModal,
-  TabsStateful,
 } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
 import { Indicator } from "src/models/results";
-
-import {
-  useDeptResultsSummary,
-  useCrsoResultsSummary,
-  useProgramResultsSummary,
-} from "src/models/results/queries";
 
 import { get_subject_instance_by_guid } from "src/models/subjects";
 
@@ -269,40 +261,6 @@ const IndicatorTable = ({
   );
 };
 
-const IndicatorTabs = ({
-  status_active_list,
-  icon_counts,
-  toggle_status_status_key,
-  clear_status_filter,
-  subject,
-  drr_key,
-  table_data,
-  initial_open_indicator,
-}) => {
-  return (
-    <div id={"indicators_tab_pane"}>
-      <div style={{ padding: "10px 10px" }}>
-        <StatusIconTable
-          active_list={status_active_list}
-          icon_counts={icon_counts}
-          onIconClick={toggle_status_status_key}
-          onClearClick={clear_status_filter}
-        />
-      </div>
-      <HeightClippedGraph clipHeight={200}>
-        <div className="results-flat-table">
-          <IndicatorTable
-            subject={subject}
-            drr_key={drr_key}
-            table_data={table_data}
-            initial_open_indicator={initial_open_indicator}
-          />
-        </div>
-      </HeightClippedGraph>
-    </div>
-  );
-};
-
 class ResultsTable extends React.Component {
   constructor() {
     super();
@@ -335,7 +293,8 @@ class ResultsTable extends React.Component {
     );
   };
   render() {
-    const { subject, counts, drr_key, initial_open_indicator } = this.props;
+    const { subject, subject_result_counts, drr_key, initial_open_indicator } =
+      this.props;
     const { loading, status_active_list } = this.state;
 
     if (loading) {
@@ -371,16 +330,6 @@ class ResultsTable extends React.Component {
         }))
         .value();
 
-      const dept_table_data = table_data.filter((indicator) =>
-        indicator.parent.includes("crso")
-      );
-
-      const program_table_data = table_data.filter((indicator) =>
-        indicator.parent.includes("program")
-      );
-
-      const results_org_level = subject.subject_type === "dept";
-
       return (
         <div>
           <div className="medium-panel-text">
@@ -388,81 +337,40 @@ class ResultsTable extends React.Component {
               k="result_flat_table_text"
               args={{
                 subject,
-                drr_total: counts.total_indicator_count,
+                drr_total: subject_result_counts[`${drr_key}_total`],
                 year: get_year_for_doc_key(drr_key),
               }}
             />
           </div>
-          {results_org_level && (
-            <TabsStateful
-              tabs={{
-                org: {
-                  label: text_maker("overview_indicators"),
-                  content: (
-                    <IndicatorTabs
-                      status_active_list={status_active_list}
-                      icon_counts={icon_counts}
-                      toggle_status_status_key={toggle_status_status_key}
-                      clear_status_filter={clear_status_filter}
-                      subject={subject}
-                      drr_key={drr_key}
-                      table_data={table_data}
-                      initial_open_indicator={initial_open_indicator}
-                    />
-                  ),
-                },
-                dept: {
-                  label: text_maker("dept_indicators"),
-                  content: (
-                    <IndicatorTabs
-                      status_active_list={status_active_list}
-                      icon_counts={counts.dept_indicators_status}
-                      toggle_status_status_key={toggle_status_status_key}
-                      clear_status_filter={clear_status_filter}
-                      subject={subject}
-                      drr_key={drr_key}
-                      table_data={dept_table_data}
-                      initial_open_indicator={initial_open_indicator}
-                    />
-                  ),
-                },
-                program: {
-                  label: text_maker("program_indicators"),
-                  content: (
-                    <IndicatorTabs
-                      status_active_list={status_active_list}
-                      icon_counts={counts.program_indicators_status}
-                      toggle_status_status_key={toggle_status_status_key}
-                      clear_status_filter={clear_status_filter}
-                      subject={subject}
-                      drr_key={drr_key}
-                      table_data={program_table_data}
-                      initial_open_indicator={initial_open_indicator}
-                    />
-                  ),
-                },
-              }}
-            />
-          )}
-          {!results_org_level && (
-            <IndicatorTabs
-              status_active_list={status_active_list}
+          <div style={{ padding: "10px 10px" }}>
+            <StatusIconTable
+              active_list={status_active_list}
               icon_counts={icon_counts}
-              toggle_status_status_key={toggle_status_status_key}
-              clear_status_filter={clear_status_filter}
-              subject={subject}
-              drr_key={drr_key}
-              table_data={table_data}
-              initial_open_indicator={initial_open_indicator}
+              onIconClick={toggle_status_status_key}
+              onClearClick={clear_status_filter}
             />
-          )}
+          </div>
+          <HeightClippedGraph clipHeight={200}>
+            <div className="results-flat-table">
+              <IndicatorTable
+                subject={subject}
+                drr_key={drr_key}
+                table_data={table_data}
+                initial_open_indicator={initial_open_indicator}
+              />
+            </div>
+          </HeightClippedGraph>
         </div>
       );
     }
   }
 }
 
-const DocTabbedResultsTable = ({ subject, drr_keys_with_data }) => {
+const DocTabbedResultsTable = ({
+  subject,
+  subject_result_counts,
+  drr_keys_with_data,
+}) => {
   const { options } = useParams();
   const [drr_key, set_drr_key] = useState(_.last(drr_keys_with_data));
 
@@ -470,25 +378,10 @@ const DocTabbedResultsTable = ({ subject, drr_keys_with_data }) => {
     SafeJSURL.parse(options)?.indicator || null
   );
 
-  const useSummaryResults = (subject) =>
-    ({
-      dept: useDeptResultsSummary({ orgId: subject.id }),
-      crso: useCrsoResultsSummary({ crsoId: subject.id }),
-      program: useProgramResultsSummary({ programId: subject.id }),
-    }[subject.subject_type]);
-
-  const { loading, data } = useSummaryResults(subject);
-
-  if (loading) {
-    return <LeafSpinner config_name="subroute" />;
-  }
-
-  const counts = hierarchy_to_counts(data, drr_key);
-
   const panel_content = (
     <ResultsTable
       subject={subject}
-      counts={counts}
+      subject_result_counts={subject_result_counts}
       drr_key={drr_key}
       initial_open_indicator={initial_open_indicator}
     />
@@ -548,13 +441,14 @@ export const declare_results_table_panel = () =>
         );
       },
       render({ title, subject, calculations, sources, datasets, footnotes }) {
-        const { drr_keys_with_data } = calculations;
+        const { drr_keys_with_data, subject_result_counts } = calculations;
 
         return (
           <InfographicPanel {...{ title, sources, datasets, footnotes }}>
             <DocTabbedResultsTable
               {...{
                 subject,
+                subject_result_counts,
                 drr_keys_with_data,
               }}
             />

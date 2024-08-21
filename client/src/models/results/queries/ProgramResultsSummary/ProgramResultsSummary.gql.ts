@@ -9,7 +9,7 @@ export type ProgramResultsSummaryQueryVariables = Types.Exact<{
 }>;
 
 
-export type ProgramResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', program?: { __typename?: 'Program', id?: string | null, name?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, status_key?: string | null, actual_result?: string | null } | null> | null } | null> | null } | null } };
+export type ProgramResultsSummaryQuery = { __typename?: 'Query', root: { __typename?: 'Root', program?: { __typename?: 'Program', id?: string | null, name?: string | null, results?: Array<{ __typename?: 'Result', id?: string | null, doc?: string | null, name?: string | null, indicators?: Array<{ __typename?: 'Indicator', id?: string | null, name?: string | null, doc?: string | null, target_month?: number | null, target_year?: number | null, target_min?: string | null, actual_result?: string | null, status_key?: string | null, result_explanation?: string | null, methodology?: string | null, previous_year_target_min?: string | null, previous_year_actual_result?: string | null } | null> | null } | null> | null } | null } };
 
 
 export const ProgramResultsSummaryDocument = gql`
@@ -26,8 +26,15 @@ export const ProgramResultsSummaryDocument = gql`
           id
           name
           doc
-          status_key
+          target_month
+          target_year
+          target_min
           actual_result
+          status_key
+          result_explanation
+          methodology
+          previous_year_target_min
+          previous_year_actual_result
         }
       }
     }

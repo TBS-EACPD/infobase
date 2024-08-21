@@ -31,7 +31,7 @@ past_tense_results_progress_fragment_fr:
 result_counts_drr_dept:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year}}, **{{subject.name}}** sought to achieve **{{fmt_big_int num_results}}** results through **{{fmt_big_int num_crs}}** {{gl_sidebar_link (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{fmt_big_int num_programs}}** {{gl_sidebar_link (plural_branch num_programs "Program" "Programs") "PROG"}}. The **{{fmt_big_int num_results}}** results comprised of **{{fmt_big_int num_drs}}** departmental results and **{{fmt_big_int num_prog_results}}** program results. {{> "past_tense_results_progress_fragment_en"}}.
+    In {{doc_year}}, **{{subject.name}}** sought to achieve **{{fmt_big_int num_results}}** results through **{{fmt_big_int num_crs}}** {{gl_sidebar_link (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{fmt_big_int num_programs}}** {{gl_sidebar_link (plural_branch num_programs "Program" "Programs") "PROG"}}. {{> "past_tense_results_progress_fragment_en"}}
   fr: |
     En {{doc_year}}, **{{subject.name}}** a cherché à rencontrer **{{fmt_big_int num_results}} résultats** à l’aide de **{{fmt_big_int num_crs}}** {{gl_sidebar_link (plural_branch num_crs "responsabilité essentielle" "responsabilités essentielles") "CR"}} et **{{fmt_big_int num_programs}}** {{gl_sidebar_link (plural_branch num_programs "programme" "programmes") "PROG"}}. {{> "past_tense_results_progress_fragment_fr"}}
 result_counts_drr_cr:
@@ -70,7 +70,7 @@ dp_corresponding_drr_tabling_fragment_fr:
 result_counts_dp_dept:
   transform: [handlebars,markdown]
   en: |
-    In {{doc_year}}, **{{subject.name}}** seeks to achieve **{{fmt_big_int num_results}}** results through **{{fmt_big_int num_crs}}** {{gl_sidebar_link (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{fmt_big_int num_programs}}** {{gl_sidebar_link (plural_branch num_programs "Program" "Programs") "PROG"}}. The **{{fmt_big_int num_results}}** results comprised of **{{fmt_big_int num_drs}}** departmental results and **{{fmt_big_int num_prog_results}}** program results. {{> "future_tense_results_progress_fragment_en"}} {{> "dp_corresponding_drr_tabling_fragment_en"}}
+    In {{doc_year}}, **{{subject.name}}** seeks to achieve **{{fmt_big_int num_results}}** results through **{{fmt_big_int num_crs}}** {{gl_sidebar_link (plural_branch num_crs "Core Responsibility" "Core Responsibilities") "CR"}} and **{{fmt_big_int num_programs}}** {{gl_sidebar_link (plural_branch num_programs "Program" "Programs") "PROG"}}. {{> "future_tense_results_progress_fragment_en"}} {{> "dp_corresponding_drr_tabling_fragment_en"}}
   fr: |
     En {{doc_year}}, **{{subject.name}}** cherche à rencontrer **{{fmt_big_int num_results}}** résultats à l’aide de **{{fmt_big_int num_crs}}** {{gl_sidebar_link (plural_branch num_crs "responsabilité essentielle" "responsabilités essentielles") "CR"}} et **{{fmt_big_int num_programs}}** {{gl_sidebar_link (plural_branch num_programs "programme" "programmes") "PROG"}}. {{> "future_tense_results_progress_fragment_fr"}} {{> "dp_corresponding_drr_tabling_fragment_fr"}}
 result_counts_dp_cr:
