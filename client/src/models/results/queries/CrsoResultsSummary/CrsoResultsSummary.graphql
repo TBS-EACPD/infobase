@@ -8,18 +8,7 @@ query CrsoResultsSummary($lang: String!, $crsoId: String) {
         doc
         name
         indicators {
-          id
-          name
-          doc
-          target_month
-          target_year
-          target_min
-          actual_result
-          status_key
-          result_explanation
-          methodology
-          previous_year_target_min
-          previous_year_actual_result
+          ...IndicatorSummary
         }
       }
       programs {
@@ -30,18 +19,7 @@ query CrsoResultsSummary($lang: String!, $crsoId: String) {
           doc
           name
           indicators {
-            id
-            name
-            doc
-            target_month
-            target_year
-            target_min
-            actual_result
-            status_key
-            result_explanation
-            methodology
-            previous_year_target_min
-            previous_year_actual_result
+            ...IndicatorSummary
           }
         }
       }
