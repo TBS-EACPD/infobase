@@ -28,30 +28,6 @@ const {
 
 const { result_statuses } = businessConstants;
 
-/* const LoadResultsAPI = (subject) => {
-  switch (subject.subject_type) {
-    case "dept":
-      return useDeptResultsSummary({ orgId: subject.id });
-
-    case "crso":
-      return useCrsoResultsSummary({ crsoId: subject.id });
-
-    case "program":
-      return useProgramResultsSummary({ programId: subject.id });
-  }
-  const useSummaryResults = {
-    dept: useDeptResultsSummary({ orgId: subject.id }),
-    crso: useCrsoResultsSummary({ crsoId: subject.id }),
-    program: useProgramResultsSummary({ programId: subject.id }),
-  }[subject.subject_type];
-  const { loading, data } = useSummaryResults({ id: subject.id });
-}; */
-/* const useSummaryResults = {
-  dept: useDeptResultsSummary({ orgId: subject.id }),
-  crso: useCrsoResultsSummary({ crsoId: subject.id }),
-  program: useProgramResultsSummary({ programId: subject.id }),
-}; */
-
 const results_hierarchy = (data) => {
   switch (data.__typename) {
     case "Program":
@@ -367,5 +343,4 @@ export {
   filter_and_genericize_doc_counts,
   get_year_for_doc_key,
   hierarchy_to_counts,
-  indicator_hierarchy,
 };

@@ -1,0 +1,14 @@
+fragment IndicatorSummary on Indicator {
+  id
+  name
+  doc
+  target_month
+  target_year
+  target_min
+  actual_result
+  status_key
+  result_explanation
+  methodology
+  previous_year_target_min
+  previous_year_actual_result
+}

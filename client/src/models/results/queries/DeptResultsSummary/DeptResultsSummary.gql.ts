@@ -1,6 +1,7 @@
 import * as Types from '../../../../types/types.gql';
 
 import { gql } from '@apollo/client';
+import { IndicatorSummaryFragmentDoc } from '../IndicatorSummary/IndicatorSummary.gql';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 export type DeptResultsSummaryQueryVariables = Types.Exact<{
@@ -22,18 +23,7 @@ export const DeptResultsSummaryDocument = gql`
           doc
           name
           indicators {
-            id
-            name
-            doc
-            target_month
-            target_year
-            target_min
-            actual_result
-            status_key
-            result_explanation
-            methodology
-            previous_year_target_min
-            previous_year_actual_result
+            ...IndicatorSummary
           }
         }
         programs {
@@ -42,18 +32,7 @@ export const DeptResultsSummaryDocument = gql`
             doc
             name
             indicators {
-              id
-              name
-              doc
-              target_month
-              target_year
-              target_min
-              actual_result
-              status_key
-              result_explanation
-              methodology
-              previous_year_target_min
-              previous_year_actual_result
+              ...IndicatorSummary
             }
           }
         }
@@ -61,7 +40,7 @@ export const DeptResultsSummaryDocument = gql`
     }
   }
 }
-    `;
+    ${IndicatorSummaryFragmentDoc}`;
 
 /**
  * __useDeptResultsSummaryQuery__

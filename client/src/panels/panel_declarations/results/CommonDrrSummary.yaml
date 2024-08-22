@@ -19,9 +19,11 @@ drr_summary_text_intro:
       En **{{year}}**, **{{results_dept_count}}** organisations ont cherché à obtenir **{{fmt_big_int drr_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}}.
       Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** {{gl_sidebar_link "indicateurs de résultat ministériel" "IND_RESULT"}}, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}}
       a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.
+    {{else if results_org_level}}
+      Needs to be filled in.
     {{else}}
-      En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int drr_results}}** résultats.
-      Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** indicateurs, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}}
+      En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int total_result_count}}** résultats.
+      Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int total_indicator_count}}** indicateurs, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}}
       a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.
     {{/if}}
 
@@ -99,9 +101,9 @@ overview_indicators:
 dept_indicators:
   transform: [handlebars]
   en: Departmental Results
-  fr: Résultats ministériels
+  fr: Résultats Ministériels
 
 program_indicators:
   transform: [handlebars]
   en: Program Outcomes
-  fr: Résultat du programme
+  fr: Résultat du Programme
