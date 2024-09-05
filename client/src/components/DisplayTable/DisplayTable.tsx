@@ -333,6 +333,7 @@ export class _DisplayTable extends React.Component<
     );
 
     const determine_text_align = (row: DisplayTableData, col: string) => {
+      console.log(row, col);
       const current_col_formatter = col_configs_with_defaults[col].formatter;
       const current_col_plain_formatter =
         col_configs_with_defaults[col].plain_formatter;
@@ -383,15 +384,11 @@ export class _DisplayTable extends React.Component<
                 .map((row) => row[sort_by])
                 .thru(([value_a, value_b]) =>
                   sort_func(
-                    value_a === "Not Applicable"
-                      ? -1
-                      : plain_formatter(value_a),
-                    value_b === "Not Applicable"
-                      ? -1
-                      : plain_formatter(value_b),
+                    value_a === "-" ? -1 : plain_formatter(value_a),
+                    value_b === "-" ? -1 : plain_formatter(value_b),
                     descending,
-                    value_a === "Not Applicable" ? -1 : value_a,
-                    value_b === "Not Applicable" ? -1 : value_b
+                    value_a === "-" ? -1 : value_a,
+                    value_b === "-" ? -1 : value_b
                   )
                 )
                 .value()

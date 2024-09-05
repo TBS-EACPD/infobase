@@ -108,8 +108,7 @@ class GranularView extends React.Component {
       // remove planned spending projections from crown corps
       if (org.inst_form_id === "crown_corp") {
         planning_years.forEach((year) => {
-          if (year in filtered_columns)
-            filtered_columns[year] = "Not Applicable";
+          if (year in filtered_columns) filtered_columns[year] = "-";
         });
       }
 
@@ -209,6 +208,8 @@ class GranularView extends React.Component {
       ),
     };
 
+    console.log(table_data);
+    console.log(column_configs);
     return (
       <DisplayTable
         data={table_data}
