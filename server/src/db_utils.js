@@ -23,6 +23,7 @@ function get_connection_str() {
 // It's safe to let the connection happen fully async because further mongoose opperations are also async and will
 // buffer until the connection's made
 export async function connect_db() {
+  mongoose.set("strictQuery", true);
   return await mongoose
     .connect(get_connection_str(), {
       serverSelectionTimeoutMS: 7500,
