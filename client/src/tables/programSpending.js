@@ -86,7 +86,7 @@ export default {
     _.each(planning_years, (header) => {
       this.add_col(header).add_child([
         {
-          type: "big_int",
+          type: "dollar",
           nick: header,
           header: {
             en: "Planned Spending",

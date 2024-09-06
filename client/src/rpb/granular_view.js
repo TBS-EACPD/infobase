@@ -208,8 +208,6 @@ class GranularView extends React.Component {
       ),
     };
 
-    console.log(table_data);
-    console.log(column_configs);
     return (
       <DisplayTable
         data={table_data}
