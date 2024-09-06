@@ -333,14 +333,20 @@ export class _DisplayTable extends React.Component<
     );
 
     const determine_text_align = (row: DisplayTableData, col: string) => {
-      console.log(row, col);
       const current_col_formatter = col_configs_with_defaults[col].formatter;
       const current_col_plain_formatter =
         col_configs_with_defaults[col].plain_formatter;
-      return (_.isString(current_col_formatter) && _.isNumber(row[col])) ||
+
+      if (
+        (_.isString(current_col_formatter) && _.isNumber(row[col])) ||
         _.isNumber(current_col_plain_formatter(row[col]))
-        ? "right"
-        : "left";
+      ) {
+        return "right";
+      } else if (current_col_plain_formatter(row[col]) === "-") {
+        return "center";
+      } else {
+        return "left";
+      }
     };
 
     const clean_search_string = (search_string: CellValue) =>
