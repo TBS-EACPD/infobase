@@ -27,7 +27,7 @@ _(Le Français suit)_
 
 - git
 - npm@8.x
-- node@16.x
+- node@20.x
 
 ### First time setup
 
