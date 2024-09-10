@@ -90,7 +90,7 @@ const WelcomeMatShell = ({
     </div>
   );
 
-  if (fte_row) {
+  if (spend_row && fte_row) {
     return (
       <TabsStateful
         tabs={{
@@ -105,8 +105,10 @@ const WelcomeMatShell = ({
         }}
       />
     );
-  } else {
+  } else if (spend_row && !fte_row) {
     return spending_tab_content;
+  } else if (!spend_row && fte_row) {
+    return employment_tab_content;
   }
 };
 
@@ -942,11 +944,24 @@ function render({
 }
 
 //assumes programSpending/12 are loaded
-function has_hist_data(subject, q6) {
+function has_hist_spending_data(subject, q6) {
   return _.chain(exp_cols)
     .map((yr) => q6.sum(yr) || 0)
     .some()
     .value();
+}
+
+function has_hist_ftes_data(subject, q12) {
+  return _.chain(std_years)
+    .map((yr) => q12.sum(yr) || 0)
+    .some()
+    .value();
+}
+
+function has_hist_data(subject, q6, q12) {
+  return (
+    has_hist_spending_data(subject, q6) || has_hist_ftes_data(subject, q12)
+  );
 }
 
 function has_planning_data(subject, q6) {
@@ -974,7 +989,7 @@ function has_planning_data(subject, q6) {
 
 function get_calcs(subject, q6, q12) {
   const has_planned = has_planning_data(subject, q6);
-  const has_hist = has_hist_data(subject, q6);
+  const has_hist = has_hist_data(subject, q6, q12);
 
   const hist_spend_data = _.map(exp_cols, (col) => q6.sum(col) || 0);
   const planned_spend_data = _.map(planning_years, (col) => q6.sum(col) || 0);
@@ -1100,7 +1115,7 @@ const common_program_crso_calculate = ({ subject, tables }) => {
   const q12 = programFtes.q(subject);
 
   const has_planned = has_planning_data(subject, q6);
-  const has_hist = has_hist_data(subject, q6);
+  const has_hist = has_hist_data(subject, q6, q12);
   const calcs = get_calcs(subject, q6, q12);
 
   let type;
@@ -1123,10 +1138,13 @@ const common_panel_config = {
   get_dataset_keys: () => ["program_spending", "program_ftes"],
   get_title: ({ calculations }) => {
     const has_fte_data = calculations.calcs.has_fte;
-    if (has_fte_data) {
+    const has_spending_data = calculations.calcs.has_spending;
+    if (has_spending_data && has_fte_data) {
       return text_maker("welcome_mat_title");
-    } else {
+    } else if (has_spending_data && !has_fte_data) {
       return text_maker("welcome_mat_spending_title");
+    } else if (!has_spending_data && has_fte_data) {
+      return text_maker("welcome_mat_fte_title");
     }
   },
 };
@@ -1191,7 +1209,7 @@ export const declare_welcome_mat_panel = () =>
               const q12 = programFtes.q(subject);
 
               const has_planned = has_planning_data(subject, q6);
-              const has_hist = has_hist_data(subject, q6);
+              const has_hist = has_hist_data(subject, q6, q12);
               const estimates_amt = orgVoteStatEstimates
                 .q(subject)
                 .sum("{{est_in_year}}_estimates");
