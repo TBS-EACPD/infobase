@@ -2,7 +2,7 @@
   "name": "infobase-form-backend",
   "main": "src/index.js",
   "engines": {
-    "node": "16"
+    "node": "20"
   },
   "type": "module",
   "dependencies": {
