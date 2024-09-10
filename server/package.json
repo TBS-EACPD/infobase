@@ -3,7 +3,7 @@
   "description": "",
   "main": "src/index.js",
   "engines": {
-    "node": "16"
+    "node": "20"
   },
   "type": "module",
   "dependencies": {
