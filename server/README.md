@@ -26,7 +26,7 @@ GraphQL API for InfoBase data.
 
 - git
 - npm@8.x
-- node@16.x
+- node@20.x
 - MongoDB 5.x, mongosh
 
 ## Running locally
