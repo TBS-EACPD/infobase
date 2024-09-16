@@ -7,10 +7,10 @@
   "type": "module",
   "dependencies": {
     "axios": "^1.7.4",
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.20.3",
     "compression": "^1.7.1",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "lodash": "^4.17.21",
     "mongoose": "^6.12.0"
   },
