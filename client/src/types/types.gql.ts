@@ -252,6 +252,12 @@ export type Ministry = {
   orgs?: Maybe<Array<Maybe<Org>>>;
 };
 
+export type MissingDept = {
+  __typename?: 'MissingDept';
+  org_id?: Maybe<Scalars['String']>;
+  report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 export type Org = SubjectI & {
   __typename?: 'Org';
   acronym?: Maybe<Scalars['String']>;
@@ -671,6 +677,7 @@ export type ServiceDigitalStatusSummary = {
 
 export type ServiceGeneralStats = {
   __typename?: 'ServiceGeneralStats';
+  all_report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
   num_of_programs_offering_services?: Maybe<Scalars['Float']>;
   num_of_subject_offering_services?: Maybe<Scalars['Float']>;
   number_of_online_enabled_services?: Maybe<Scalars['Float']>;
@@ -730,6 +737,7 @@ export type ServiceStandardsSummary = {
 export type ServiceSummary = {
   __typename?: 'ServiceSummary';
   id?: Maybe<Scalars['String']>;
+  list_of_missing_dept?: Maybe<Array<Maybe<MissingDept>>>;
   service_channels_summary?: Maybe<Array<Maybe<ServiceChannelsSummary>>>;
   service_digital_status_summary?: Maybe<Array<Maybe<ServiceDigitalStatusSummary>>>;
   service_general_stats?: Maybe<ServiceGeneralStats>;
