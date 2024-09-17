@@ -6,7 +6,7 @@ drr_summary_text_intro:
       Progress towards meeting these results was measured using **{{fmt_big_int drr_total}}** {{gl_sidebar_link "Departmental Result Indicators" "IND_RESULT"}}, and a {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
       based on the measured outcome (actual result) of the indicator's target.
     {{else if results_org_level}}
-      In **{{year}}**, {{subject.name}} organizations sought to achieve **{{fmt_big_int total_result_count}}** results through **{{fmt_big_int dept_results}}** {{gl_sidebar_link "Departmental Results" "DR"}} and **{{fmt_big_int program_results}}** {{gl_sidebar_link "Program Outcomes" "PO"}}.
+      In **{{year}}**, {{subject.name}} sought to achieve **{{fmt_big_int total_result_count}}** results through **{{fmt_big_int dept_results}}** {{gl_sidebar_link "Departmental Results" "DR"}} and **{{fmt_big_int program_results}}** {{gl_sidebar_link "Program Outcomes" "PO"}}.
       Progress towards meeting these results was measured using **{{fmt_big_int total_indicator_count}}** {{gl_sidebar_link "indicators" "IND_RESULT"}}, consisting of **{{fmt_big_int dept_indicator_counts}}** departmental result indicators and **{{fmt_big_int program_indicator_counts}}** program outcome indicators. A {{gl_sidebar_link "Result Status" "RESULTS_STATUS"}} was assigned to each indicator
       based on the measured outcome (actual result) of the indicator's target.
     {{else}}
@@ -20,7 +20,9 @@ drr_summary_text_intro:
       Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int drr_total}}** {{gl_sidebar_link "indicateurs de résultat ministériel" "IND_RESULT"}}, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}}
       a été attribué à chaque indicateur correspondant au résultat obtenu pour la cible de l'indicateur.
     {{else if results_org_level}}
-      Needs to be filled in.
+    En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int total_result_count}}** résultats grâce à **{{fmt_big_int dept_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}} et **{{fmt_big_int program_results}}** {{gl_sidebar_link "résultat du programme" "PO"}}.
+    Les progrès vers l’atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int total_indicator_count}}** {{gl_sidebar_link "indicateurs" "IND_RESULT"}}, soit **{{fmt_big_int dept_indicator_counts}}** indicateurs de résultats ministériels et **{{fmt_big_int program_indicator_counts}}** indicateurs de résultats de programme.
+    Un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été attribué à chaque indicateur en fonction du résultat mesuré de la cible de l’indicateur.
     {{else}}
       En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int total_result_count}}** résultats.
       Les progrès réalisés pour atteindre ces résultats ont été mesurés au moyen de **{{fmt_big_int total_indicator_count}}** indicateurs, et un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}}
@@ -96,14 +98,14 @@ result_status_explanation_future:
 overview_indicators:
   transform: [handlebars]
   en: Results Overview
-  fr: Aperçu des Résultats
+  fr: Aperçu des résultats
 
 dept_indicators:
   transform: [handlebars]
   en: Departmental Results
-  fr: Résultats Ministériels
+  fr: Résultats ministériels
 
 program_indicators:
   transform: [handlebars]
   en: Program Outcomes
-  fr: Résultat du Programme
+  fr: Résultat du programme
