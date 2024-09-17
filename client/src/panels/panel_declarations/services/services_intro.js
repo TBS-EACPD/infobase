@@ -56,8 +56,6 @@ const ServicesIntroPanel = ({ subject }) => {
 
   // const pct_formatter = (value) => formats.percentage1_raw(value);
 
-  console.log(list_of_missing_dept);
-
   const intro_text = () => {
     const most_recent_year_missing_dept = _.filter(
       list_of_missing_dept,
@@ -78,7 +76,6 @@ const ServicesIntroPanel = ({ subject }) => {
       ""
     );
 
-    console.log(list_of_missing_dept.some(({ org_id }) => org_id === "46"));
     return (
       //<div className="ib-alert alert alert-warning alert-no-symbol">
 
