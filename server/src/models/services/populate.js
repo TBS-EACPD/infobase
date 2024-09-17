@@ -573,7 +573,7 @@ export default async function ({ models }) {
       submission_year === absolute_most_recent_submission_year
   );
 
-  const get_missing_departments_per_year = (filtered_services) => {
+  const get_missing_departments_per_year = () => {
     const all_report_years = get_years_from_service_report(
       absolute_most_recent_year_filtered_services
     );
@@ -631,9 +631,7 @@ export default async function ({ models }) {
           .size()
           .value(),
       },
-      list_of_missing_dept: get_missing_departments_per_year(
-        absolute_most_recent_year_filtered_services
-      ),
+      list_of_missing_dept: get_missing_departments_per_year(),
       service_channels_summary: get_service_channels_summary(
         absolute_most_recent_year_filtered_services
       ),
@@ -698,8 +696,7 @@ export default async function ({ models }) {
           get_subject_offering_services_summary(
             _.reduce(filtered_services, group_by_program_id, {})
           ),
-        list_of_missing_dept:
-          get_missing_departments_per_year(filtered_services),
+        list_of_missing_dept: get_missing_departments_per_year(),
       };
     })
     .value();
@@ -741,8 +738,7 @@ export default async function ({ models }) {
           filtered_services,
           program_id
         ),
-        list_of_missing_dept:
-          get_missing_departments_per_year(filtered_services),
+        list_of_missing_dept: get_missing_departments_per_year(),
       };
     })
     .value();
