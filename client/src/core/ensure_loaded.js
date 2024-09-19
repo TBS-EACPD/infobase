@@ -92,7 +92,15 @@ function ensure_loaded({
     : Promise.resolve();
 
   const result_counts_prom = should_load_result_counts
-    ? api_load_results_counts("summary")
+    ? api_load_results_counts("summary", "all")
+    : Promise.resolve();
+
+  const dr_result_counts_prom = should_load_result_counts
+    ? api_load_results_counts("summary", "dr")
+    : Promise.resolve();
+
+  const pr_result_counts_prom = should_load_result_counts
+    ? api_load_results_counts("summary", "pr")
     : Promise.resolve();
 
   const has_results_prom =
@@ -106,7 +114,15 @@ function ensure_loaded({
       : Promise.resolve();
 
   const granular_result_counts_prom = should_load_granular_result_counts
-    ? api_load_results_counts("granular")
+    ? api_load_results_counts("granular", "all")
+    : Promise.resolve();
+
+  const dr_granular_result_counts_prom = should_load_granular_result_counts
+    ? api_load_results_counts("granular", "dr")
+    : Promise.resolve();
+
+  const pr_granular_result_counts_prom = should_load_granular_result_counts
+    ? api_load_results_counts("granular", "pr")
     : Promise.resolve();
 
   const footnotes_prom = footnotes_subject
@@ -125,9 +141,13 @@ function ensure_loaded({
     load_tables(table_set),
     results_prom,
     result_counts_prom,
+    dr_result_counts_prom,
+    pr_result_counts_prom,
     has_results_prom,
     has_services_prom,
     granular_result_counts_prom,
+    dr_granular_result_counts_prom,
+    pr_granular_result_counts_prom,
     footnotes_prom,
     years_with_covid_data_prom,
     covid_measures_prom,

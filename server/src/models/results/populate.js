@@ -41,7 +41,7 @@ const counts_from_indicators = (indicators) =>
     })
     .value();
 
-const dr_counts_from_indicators = (indicators) => {
+/*const dr_counts_from_indicators = (indicators) => {
   const dr_indicators = _.filter(indicators, ({ result_id }) =>
     _.startsWith(result_id, "DR")
   );
@@ -76,14 +76,14 @@ const dr_counts_from_indicators = (indicators) => {
     })
     .value();
 };
-
+*/
 const get_result_count_records = (results, indicators) => {
   const indicators_by_result_id = _.groupBy(indicators, "result_id");
 
   const gov_row = {
     subject_id: "total",
     level: "all",
-    ...dr_counts_from_indicators(indicators),
+    ...counts_from_indicators(indicators),
   };
 
   const igoc_rows = get_standard_csv_file_rows("igoc.csv");
@@ -118,7 +118,14 @@ const get_result_count_records = (results, indicators) => {
 };
 
 export default async function ({ models }) {
-  const { Result, ResultCount, Indicator, PIDRLink } = models;
+  const {
+    Result,
+    ResultCount,
+    ResultDrCount,
+    ResultPrCount,
+    Indicator,
+    PIDRLink,
+  } = models;
 
   const raw_result_records = get_standard_csv_file_rows("results.csv");
 
@@ -218,13 +225,41 @@ export default async function ({ models }) {
     .filter(valid_doc_filter)
     .value();
 
+  const dr_result_record = _.filter(result_records, ({ result_id }) =>
+    _.startsWith(result_id, "DR")
+  );
+
+  const pr_result_record = _.filter(result_records, ({ result_id }) =>
+    _.startsWith(result_id, "PROGRAM")
+  );
+
+  const dr_indicator_record = _.filter(indicator_records, ({ result_id }) =>
+    _.startsWith(result_id, "DR")
+  );
+
+  const pr_indicator_record = _.filter(indicator_records, ({ result_id }) =>
+    _.startsWith(result_id, "PROGRAM")
+  );
+
   const result_count_records = get_result_count_records(
     result_records,
     indicator_records
   );
 
+  const dr_result_count_records = get_result_count_records(
+    dr_result_record,
+    dr_indicator_record
+  );
+
+  const pr_result_count_records = get_result_count_records(
+    pr_result_record,
+    pr_indicator_record
+  );
+
   await Result.insertMany(result_records);
   await ResultCount.insertMany(result_count_records);
+  await ResultDrCount.insertMany(dr_result_count_records);
+  await ResultPrCount.insertMany(pr_result_count_records);
   await Indicator.insertMany(indicator_records);
   return await PIDRLink.insertMany(pi_dr_links);
 }

@@ -14,6 +14,10 @@ const schema = `
     all_target_counts_summary: [AllDocResultCount]
     all_target_counts_granular: [AllDocResultCount]
     target_counts(doc: String): ResultCount
+    dr_target_counts_summary: [AllDocResultCount]
+    dr_target_counts_granular: [AllDocResultCount]
+    pr_target_counts_summary: [AllDocResultCount]
+    pr_target_counts_granular: [AllDocResultCount]
   }
 
   extend type Org {
@@ -131,7 +135,8 @@ ${_.reduce(
 `;
 
 export default function ({ models, loaders }) {
-  const { Org, Crso, Program, ResultCount } = models;
+  const { Org, Crso, Program, ResultCount, ResultDrCount, ResultPrCount } =
+    models;
 
   const {
     prog_dept_code_loader,
@@ -204,6 +209,14 @@ export default function ({ models, loaders }) {
     return await ResultCount.find({ level: { $in: levels } });
   }
 
+  async function get_dr_target_counts(levels) {
+    return await ResultDrCount.find({ level: { $in: levels } });
+  }
+
+  async function get_pr_target_counts(levels) {
+    return await ResultPrCount.find({ level: { $in: levels } });
+  }
+
   //this should take 6 DB queries, but the first 2 can be done in paralel
   async function get_org_target_counts(orgs, doc) {
     const dept_codes = _.chain(orgs).map("dept_code").compact().value();
@@ -261,6 +274,12 @@ export default function ({ models, loaders }) {
       all_target_counts_granular: () =>
         get_all_target_counts(["crso_or_program"]),
       target_counts: (_x, { doc }) => get_gov_target_counts(doc),
+      dr_target_counts_summary: () => get_dr_target_counts(["all", "dept"]),
+      dr_target_counts_granular: () =>
+        get_dr_target_counts(["crso_or_program"]),
+      pr_target_counts_summary: () => get_pr_target_counts(["all", "dept"]),
+      pr_target_counts_granular: () =>
+        get_pr_target_counts(["crso_or_program"]),
     },
     Org: {
       target_counts: (org, { doc }) => get_org_target_counts(org, doc),
