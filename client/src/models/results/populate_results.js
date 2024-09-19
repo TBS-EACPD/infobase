@@ -12,7 +12,11 @@ import {
   Result,
   PI_DR_Links,
   ResultCounts,
+  ResultDrCounts,
+  ResultPrCounts,
   GranularResultCounts,
+  GranularDrResultCounts,
+  GranularPrResultCounts,
   get_result_doc_keys,
 } from ".";
 
@@ -551,12 +555,12 @@ export function api_load_single_indicator(subject, result_docs) {
     });
 }
 
-const load_results_counts_query = (level = "summary") => gql`
+const load_results_counts_query = (level = "summary", type = "all") => gql`
 query($lang: String!) {
   root(lang: $lang) {
     gov {
       id
-      all_target_counts_${level} {
+      ${type}_target_counts_${level} {
         subject_id
         level
 ${
@@ -585,8 +589,31 @@ ${fragment}`
   }
 }
 `;
-export function api_load_results_counts(level = "summary") {
-  const CountObject = level === "summary" ? ResultCounts : GranularResultCounts;
+
+const test = (level, type) => {
+  if (level === "summary") {
+    if (type === "dr") {
+      return ResultDrCounts;
+    } else if (type === "pr") {
+      return ResultPrCounts;
+    } else {
+      return ResultCounts;
+    }
+  } else {
+    if (type === "dr") {
+      return GranularDrResultCounts;
+    } else if (type === "pr") {
+      return GranularPrResultCounts;
+    } else {
+      return GranularResultCounts;
+    }
+  }
+};
+
+export function api_load_results_counts(level = "summary", type = "all") {
+  //const CountObject = level === "summary" ? ResultCounts : GranularResultCounts;
+
+  const CountObject = test(level, type);
 
   if (!_.isEmpty(CountObject.data)) {
     return Promise.resolve();
@@ -595,7 +622,7 @@ export function api_load_results_counts(level = "summary") {
     const client = get_client();
     return client
       .query({
-        query: load_results_counts_query(level),
+        query: load_results_counts_query(level, type),
         variables: {
           lang: lang,
           _query_name: "results_counts",
@@ -605,7 +632,7 @@ export function api_load_results_counts(level = "summary") {
         const resp_time = Date.now() - time_at_request;
 
         const response_rows =
-          response && response.data.root.gov[`all_target_counts_${level}`];
+          response && response.data.root.gov[`${type}_target_counts_${level}`];
 
         if (!_.isEmpty(response_rows)) {
           // Not a very good test, might report success with unexpected data... ah well, that's the API's job to test!

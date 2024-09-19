@@ -4,15 +4,25 @@ import React, { useState } from "react";
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component, Tabs } from "src/components/index";
+import {
+  create_text_maker_component,
+  Tabs,
+  LeafSpinner,
+} from "src/components/index";
+
+import {
+  useDeptResultsSummary,
+  useCrsoResultsSummary,
+  useProgramResultsSummary,
+} from "src/models/results/queries";
 
 import { CommonDrrSummary } from "./CommonDrrSummary";
 
 import {
-  row_to_drr_status_counts,
   ResultCounts,
   GranularResultCounts,
   get_year_for_doc_key,
+  hierarchy_to_counts,
 } from "./results_common";
 
 import text from "./drr_summary.yaml";
@@ -48,7 +58,20 @@ const get_drr_keys_with_data = (subject) =>
 const DrrSummary = ({ subject, drr_keys, verbose_counts }) => {
   const [drr_key, set_drr_key] = useState(_.last(drr_keys));
 
-  const counts = row_to_drr_status_counts(verbose_counts, drr_key);
+  const useSummaryResults = (subject) =>
+    ({
+      dept: useDeptResultsSummary({ orgId: subject.id }),
+      crso: useCrsoResultsSummary({ crsoId: subject.id }),
+      program: useProgramResultsSummary({ programId: subject.id }),
+    }[subject.subject_type]);
+
+  const { loading, data } = useSummaryResults(subject);
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  const counts = hierarchy_to_counts(data, drr_key);
 
   const summary = (
     <CommonDrrSummary

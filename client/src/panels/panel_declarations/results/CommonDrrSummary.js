@@ -2,9 +2,12 @@ import classNames from "classnames";
 import _ from "lodash";
 import React, { Fragment } from "react";
 
+import { HeightClippedGraph } from "src/panels/panel_declarations/common_panel_components";
+
 import {
   DisplayTable,
   create_text_maker_component,
+  TabsStateful,
 } from "src/components/index";
 
 import { is_a11y_mode } from "src/core/injected_build_constants";
@@ -116,8 +119,8 @@ const StatusGrid = ({ met, not_met, not_available, future, drr_key }) => {
     })
     .value();
 
-  const legend_data = _.chain(data)
-    .map(({ status_key }) => ({
+  const legend_data = _.chain(ordered_status_keys)
+    .map((status_key) => ({
       className: grid_colors[status_key],
       id: status_key,
       label: text_maker(status_key),
@@ -300,32 +303,16 @@ class PercentageViz extends React.Component {
   }
 }
 
-export const CommonDrrSummary = ({
-  subject,
-  drr_key,
+const IndicatorSummary = ({
   counts,
-  verbose_counts,
+  drr_key,
+  summary_text_args,
   results_dept_count,
+  rows_of_counts_by_dept,
+  column_configs,
 }) => {
-  const current_drr_counts_with_generic_keys = filter_and_genericize_doc_counts(
-    verbose_counts,
-    drr_key
-  );
-
-  const summary_text_args = {
-    subject,
-    results_dept_count: subject.id === "gov" && results_dept_count,
-    year: get_year_for_doc_key(drr_key),
-    ...current_drr_counts_with_generic_keys,
-  };
-
   return (
-    <Fragment>
-      <div className="row align-items-center justify-content-lg-between">
-        <div className="col-12 medium-panel-text">
-          <TM k="drr_summary_text_intro" args={summary_text_args} />
-        </div>
-      </div>
+    <div id={"indicators_tab_pane"}>
       <div className="row align-items-center justify-content-lg-between">
         <div className="col-12 col-lg-7  medium-panel-text">
           <div style={{ padding: "10px" }}>
@@ -362,6 +349,148 @@ export const CommonDrrSummary = ({
           />
         </div>
       </div>
+      {results_dept_count && (
+        <div id={"gov_indicator_table"}>
+          <div className="panel-separator" style={{ marginTop: "0px" }} />
+          <div>
+            <div className="medium-panel-text">
+              <TM k="gov_drr_summary_org_table_text" />
+            </div>
+            <HeightClippedGraph clipHeight={330}>
+              <DisplayTable
+                table_name={"Government DRR"}
+                data={rows_of_counts_by_dept}
+                column_configs={column_configs}
+              />
+            </HeightClippedGraph>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const CommonDrrSummary = ({
+  subject,
+  drr_key,
+  counts,
+  verbose_counts,
+  results_dept_count,
+  rows_of_counts_by_dept,
+  column_configs,
+}) => {
+  const current_drr_counts_with_generic_keys = {
+    total: filter_and_genericize_doc_counts(verbose_counts.total, drr_key),
+    dr: filter_and_genericize_doc_counts(verbose_counts.dr, drr_key),
+    pr: filter_and_genericize_doc_counts(verbose_counts.pr, drr_key),
+  };
+
+  const results_org_level = subject.subject_type === "dept";
+
+  const summary_text_args = {
+    subject,
+    results_dept_count: subject.id === "gov" && results_dept_count,
+    results_org_level,
+    year: get_year_for_doc_key(drr_key),
+    ...current_drr_counts_with_generic_keys,
+    ...counts,
+  };
+
+  return (
+    <Fragment>
+      <div className="row align-items-center justify-content-lg-between">
+        <div className="col-12 medium-panel-text">
+          <TM k="drr_summary_text_intro" args={summary_text_args} />
+        </div>
+      </div>
+      {results_dept_count && (
+        <TabsStateful
+          tabs={{
+            org: {
+              label: text_maker("overview_indicators"),
+              content: (
+                <IndicatorSummary
+                  counts={counts.total_indicator_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                  results_dept_count={results_dept_count}
+                  rows_of_counts_by_dept={rows_of_counts_by_dept.total}
+                  column_configs={column_configs}
+                />
+              ),
+            },
+            dept: {
+              label: text_maker("dept_indicators"),
+              content: (
+                <IndicatorSummary
+                  counts={counts.dept_indicator_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                  results_dept_count={results_dept_count}
+                  rows_of_counts_by_dept={rows_of_counts_by_dept.dr}
+                  column_configs={column_configs}
+                />
+              ),
+            },
+            program: {
+              label: text_maker("program_indicators"),
+              content: (
+                <IndicatorSummary
+                  counts={counts.program_indicator_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                  results_dept_count={results_dept_count}
+                  rows_of_counts_by_dept={rows_of_counts_by_dept.pr}
+                  column_configs={column_configs}
+                />
+              ),
+            },
+          }}
+        />
+      )}
+      {!results_dept_count && results_org_level && (
+        <TabsStateful
+          tabs={{
+            org: {
+              label: text_maker("overview_indicators"),
+              content: (
+                <IndicatorSummary
+                  counts={counts.total_indicator_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                />
+              ),
+            },
+            dept: {
+              label: text_maker("dept_indicators"),
+              content: (
+                <IndicatorSummary
+                  counts={counts.dept_indicators_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                />
+              ),
+            },
+            program: {
+              label: text_maker("program_indicators"),
+              content: (
+                <IndicatorSummary
+                  counts={counts.program_indicators_status}
+                  drr_key={drr_key}
+                  summary_text_args={summary_text_args}
+                />
+              ),
+            },
+          }}
+        />
+      )}
+      {!results_dept_count && !results_org_level && (
+        <IndicatorSummary
+          counts={counts.total_indicator_status}
+          drr_key={drr_key}
+          summary_text_args={summary_text_args}
+        />
+      )}
     </Fragment>
   );
 };
