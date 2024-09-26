@@ -6,7 +6,7 @@ RUN sudo pacman --noconfirm -Syu \
   python \
   bash \
   openssh \
-  nodejs-lts-gallium \
+  nodejs-lts-iron \
   npm \
   && sudo pacman --noconfirm -Sc
 

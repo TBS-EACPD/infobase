@@ -86,7 +86,7 @@ commands:
 jobs:
   static_analysis:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -112,7 +112,7 @@ jobs:
 
   test_form_backend:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -141,7 +141,7 @@ jobs:
 
   cleanup_dev_links:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -173,7 +173,7 @@ jobs:
 
   checkout_and_install:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     resource_class: medium
@@ -193,7 +193,7 @@ jobs:
 
   build_client:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     resource_class: medium
@@ -255,7 +255,7 @@ jobs:
 
   check_gql_codegen_integrity:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -279,7 +279,7 @@ jobs:
 
   test_client:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     resource_class: medium
@@ -305,7 +305,7 @@ jobs:
 
   test_server:
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     working_directory: "~/InfoBase"
     steps:
@@ -395,7 +395,7 @@ jobs:
   deploy_data:
     working_directory: "~/InfoBase"
     docker:
-      - image: eaadtbs/ib-ci:1.3
+      - image: eaadtbs/ib-ci:1.4
         <<: *dockerhub_auth
     steps:
       - attach_workspace:
