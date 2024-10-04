@@ -2,14 +2,16 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
+import { TspanLineWrapper } from "src/panels/panel_declarations/common_panel_components";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { formats } from "src/core/format";
 
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
+import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
+import { highlightColor, secondaryColor } from "src/style_constants/index";
 
 import text from "./top_spending_areas.yaml";
 
@@ -35,7 +37,6 @@ const collapse_by_so = function (programs, table, filter) {
       value: sum(key_value[1], (d) => d["{{pa_last_year}}"]),
     }))
     .filter(filter || (() => true))
-    .sortBy((d) => -d.value)
     .value();
 };
 
@@ -51,6 +52,7 @@ const common_cal = (programs, programSobjs) => {
   }
 
   const top_3_sos = _.take(rows_by_so, cut_off_index);
+
   const remainder =
     top_3_sos.length > cut_off_index - 1
       ? {
@@ -68,23 +70,59 @@ const common_cal = (programs, programSobjs) => {
 const render_w_options =
   ({ text_key }) =>
   ({ title, calculations, footnotes, sources, datasets }) => {
-    const { top_3_sos_and_remainder, text_calculations } = calculations;
+    const { text_calculations, rows_by_so } = calculations;
 
-    const graph_data = top_3_sos_and_remainder.map((d) => ({
-      label: d["label"],
-      id: d["label"],
-      value: d["value"],
-    }));
+    const graph_data = _.map(rows_by_so, (row) => _.omit(row, ["so_num"]));
+
+    const nivoprops = {
+      data: graph_data,
+      keys: ["value"],
+      indexBy: "label",
+      enableLabel: true,
+      isInteractive: false,
+      remove_left_axis: true,
+      bttm_axis: {
+        renderTick: (tick) => {
+          return (
+            <g
+              key={tick.tickIndex}
+              transform={`translate(${tick.x},${tick.y + 16})`}
+            >
+              <text
+                textAnchor="middle"
+                dominantBaseline="middle"
+                style={{
+                  fontSize: "11px",
+                }}
+              >
+                <TspanLineWrapper text={tick.value} width={20} />
+              </text>
+            </g>
+          );
+        },
+      },
+      margin: {
+        top: 50,
+        right: 40,
+        bottom: 150,
+        left: 40,
+      },
+      padding: 0.3,
+      graph_height: "450px",
+      label: (d) => (
+        <tspan y={-10}>
+          {formats.compact1(d.formattedValue, { raw: true })}
+        </tspan>
+      ),
+      colors: (d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor),
+      enableGridX: false,
+    };
 
     return (
-      <StdPanel {...{ title, footnotes, sources, datasets }}>
-        <Col isText size={5}>
-          <TM k={text_key} args={text_calculations} />
-        </Col>
-        <Col isGraph={!is_a11y_mode} size={7}>
-          <WrappedNivoPie data={graph_data} graph_height="450px" />
-        </Col>
-      </StdPanel>
+      <InfographicPanel {...{ title, footnotes, sources, datasets }}>
+        <TM k={text_key} args={text_calculations} />
+        <WrappedNivoBar {...nivoprops} />
+      </InfographicPanel>
     );
   };
 
@@ -123,9 +161,15 @@ export const declare_top_spending_areas_panel = () =>
           top_so_pct,
         };
 
+        const rows_by_so = collapse_by_so(
+          [subject],
+          tables.programSobjs,
+          is_non_revenue
+        );
+
         return {
           text_calculations,
-          top_3_sos_and_remainder,
+          rows_by_so,
         };
       },
       render: render_w_options({ text_key: "program_top_spending_areas_text" }),
