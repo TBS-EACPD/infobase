@@ -1,6 +1,6 @@
 top_spending_areas_title:
   transform: [handlebars]
-  en: Gross Spending by Standard Object ({{pa_last_year}})
+  en: Spending and Revenue by Standard Object ({{pa_last_year}})
   fr: Dépenses brutes par article courant ({{pa_last_year}})
 
 std_obj_quick_def:
@@ -29,8 +29,8 @@ tag_top_spending_areas_text:
 program_top_spending_areas_text:
   transform: [handlebars, markdown]
   en: | 
-    In {{pa_last_year}}, **{{subject.name}}** had a total _gross_ expenditure of **({{fmt_compact1_written total_spent}})**. The total _gross_ expenditure can be broken down into its
-    {{gl_sidebar_link "Standard Objects" "SOBJ"}} categories, which are the highest level of classification for categorizing expenditures. 
+    In {{pa_last_year}}, **{{subject.name}}** had a gross expenditure of **({{fmt_compact1_written exp_sum}})** and a revenue of **({{fmt_compact1_written rev_sum}})**, resulting in a net expenditure of **({{fmt_compact1_written net_sum}})**. The total net expenditure can be broken down into its
+    {{gl_sidebar_link "Standard Objects" "SOBJ"}} categories, which are the highest level of classification for categorizing expenditures and revenues.
   
   fr: |
     {{{gt "std_obj_quick_def"}}}

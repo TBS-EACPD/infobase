@@ -14,10 +14,9 @@ import { WrappedNivoBar } from "src/charts/wrapped_nivo/index";
 import { highlightColor, secondaryColor } from "src/style_constants/index";
 
 import text from "./top_spending_areas.yaml";
+import { StandardLegend } from "src/charts/legends";
 
 const { text_maker, TM } = create_text_maker_component(text);
-
-const is_non_revenue = (d) => +d.so_num < 19;
 
 const collapse_by_so = function (programs, table, filter) {
   // common calculation for organizing program/so row data by so
@@ -42,7 +41,7 @@ const collapse_by_so = function (programs, table, filter) {
 
 const common_cal = (programs, programSobjs) => {
   const cut_off_index = 3;
-  const rows_by_so = collapse_by_so(programs, programSobjs, is_non_revenue);
+  const rows_by_so = collapse_by_so(programs, programSobjs);
 
   if (
     rows_by_so.length <= 1 ||
@@ -118,9 +117,31 @@ const render_w_options =
       enableGridX: false,
     };
 
+    const legend_items = [
+      {
+        active: true,
+        color: secondaryColor,
+        id: "exp",
+        label: "Expenditure",
+      },
+      {
+        active: true,
+        color: highlightColor,
+        id: "rev",
+        label: "Revenue",
+      },
+    ];
+
     return (
       <InfographicPanel {...{ title, footnotes, sources, datasets }}>
         <TM k={text_key} args={text_calculations} />
+        <StandardLegend
+          legendListProps={{
+            items: legend_items,
+            isHorizontal: true,
+            checkBoxProps: { isSolidBox: true },
+          }}
+        />
         <WrappedNivoBar {...nivoprops} />
       </InfographicPanel>
     );
@@ -152,6 +173,20 @@ export const declare_top_spending_areas_panel = () =>
         );
         const top_so_pct = top_3_sos_and_remainder[0].value / total_spent;
 
+        const rows_by_so = collapse_by_so([subject], tables.programSobjs);
+
+        const exp_sum = _.chain(rows_by_so)
+          .map((row) => (row.value > 0 ? row.value : 0))
+          .sum()
+          .value();
+
+        const rev_sum = _.chain(rows_by_so)
+          .map((row) => (row.value < 0 ? row.value : 0))
+          .sum()
+          .value();
+
+        const net_sum = exp_sum + rev_sum;
+
         const text_calculations = {
           subject,
           top_3_sos_and_remainder,
@@ -159,13 +194,10 @@ export const declare_top_spending_areas_panel = () =>
           top_so_spent: top_3_sos_and_remainder[0].value,
           total_spent,
           top_so_pct,
+          exp_sum,
+          rev_sum,
+          net_sum,
         };
-
-        const rows_by_so = collapse_by_so(
-          [subject],
-          tables.programSobjs,
-          is_non_revenue
-        );
 
         return {
           text_calculations,
