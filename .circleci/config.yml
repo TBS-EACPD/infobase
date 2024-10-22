@@ -353,10 +353,6 @@ jobs:
       - run: ./scripts/ci_scripts/create_envs.sh
 
       - run:
-          name: Install Curl
-          command: sudo apt-get update && sudo apt-get install -y curl
-
-      - run:
           name: server mongod
           command: (cd server && npm run mongod)
           background: true
@@ -390,9 +386,9 @@ jobs:
       #       && exit 1\
       #     )
 
-      - run_codecov:
-          coverage_path: client/.coverage/cypress/coverage-final.json
-          flag: e2e_shallow
+      # - run_codecov:
+      #     coverage_path: client/.coverage/cypress/coverage-final.json
+      #     flag: e2e_shallow
 
       - run: circleci step halt # held open at this point by the running server, force halt (returns successful)
 
