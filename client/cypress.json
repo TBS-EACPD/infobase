@@ -1,7 +1,0 @@
-{
-  "video": false,
-  "screenshotOnRunFailure": false,
-  "useRelativeSnapshots": true,
-  "snapshotFileName": "cypress-snapshots.js",
-  "ignoreTestFiles": ["**/ignoredTestFiles/*.js", "**/cypress-snapshots.js"]
-}

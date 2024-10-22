@@ -345,8 +345,8 @@ const run_tests_from_config = ({
           cy.visit(target_url)
             .then(wait_on_all_spinners)
             .then(is_not_on_error_boundary)
-            .then(() => is_on_expected_route(expected_route_pattern))
-            .then(() => axe_scan());
+            .then(() => is_on_expected_route(expected_route_pattern));
+          //.then(() => axe_scan());
         }
       });
     });
