@@ -403,7 +403,7 @@ jobs:
       - run: ./scripts/ci_scripts/create_envs.sh
 
       # Checksum all files in data dir, used to determine if the database needs to be populated
-      - run: cksum ./data/* > data-checksums
+      - run: find ./data -type f -exec cksum {} + > data-checksums
 
       # Use this cached file to tell if the data needs to be loaded to mongodb (if on a new branch or if data has changed)
       - restore_cache:
