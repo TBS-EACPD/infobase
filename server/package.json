@@ -18,7 +18,7 @@
     "graphql-depth-limit": "^1.1.0",
     "lodash": "^4.17.21",
     "md5": "^2.2.1",
-    "mongoose": "^6.12.0"
+    "mongoose": "^8.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7",
