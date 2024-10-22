@@ -16,36 +16,36 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - top-level-dependencies-{{ checksum "package-lock.json" }}-v3
+            - top-level-dependencies-{{ checksum "package-lock.json" }}-v2
       - run:
           command: |
             [ -e "node_modules" ] || npm ci
       - save_cache:
-          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v3
+          key: top-level-dependencies-{{ checksum "package-lock.json" }}-v2
           paths:
             - node_modules
   form_backend_install:
     steps:
       - restore_cache:
           keys:
-            - form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v3
+            - form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
       - run:
           command: |
             [ -e "form_backend/node_modules" ] || (cd form_backend && npm ci)
       - save_cache:
-          key: form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v3
+          key: form-backend-dependencies-{{ checksum "form_backend/package-lock.json" }}-v2
           paths:
             - form_backend/node_modules
   server_install:
     steps:
       - restore_cache:
           keys:
-            - server-dependencies-{{ checksum "server/package-lock.json" }}-v3
+            - server-dependencies-{{ checksum "server/package-lock.json" }}-v2
       - run:
           command: |
             [ -e "server/node_modules" ] || (cd server && npm ci)
       - save_cache:
-          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v3
+          key: server-dependencies-{{ checksum "server/package-lock.json" }}-v2
           paths:
             - server/node_modules
   client_install:
@@ -54,12 +54,12 @@ commands:
       - run: cksum ./client/patches/* > client-patch-checksums
       - restore_cache:
           keys:
-            - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v3
+            - client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
       - run:
           command: |
             [ -e "client/node_modules" ] || (cd client && npm ci)
       - save_cache:
-          key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v3
+          key: client-dependencies-{{ checksum "client/package-lock.json" }}-{{ checksum "client-patch-checksums" }}-v2
           paths:
             - client/node_modules
             - client/.cache/Cypress # path set by CYPRESS_CACHE_FOLDER env var
@@ -158,7 +158,7 @@ jobs:
       # Use checksum of branch list to tell if the dev DBs need to be cleaned up
       - restore_cache:
           keys:
-            - dev-dbs-clean-for-these-branches--{{ checksum "./active-branches" }}-v3
+            - dev-dbs-clean-for-these-branches--{{ checksum "./active-branches" }}-v2
       - run:
           command: |
             if [ ! -f "./dev-dbs-clean-for-these-branches" ]; then
@@ -167,7 +167,7 @@ jobs:
             fi
       - run: touch ./dev-dbs-clean-for-these-branches
       - save_cache:
-          key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches" }}-v3
+          key: dev-dbs-clean-for-these-branches--{{ checksum "./active-branches" }}-v2
           paths:
             - ./dev-dbs-clean-for-these-branches
 
@@ -228,12 +228,12 @@ jobs:
 
       - restore_cache:
           keys:
-            - prod-build-{{ .Branch }}{{ .Revision }}-v3
+            - prod-build-{{ .Branch }}{{ .Revision }}-v2
       - run:
           command: |
             [ -f "client/$BUILD_DIR/InfoBase/app/app-a11y-en.min.js" ] || (cd client && ./scripts/deploy/build_all.sh -c "half" -m 1700 -o "PROD_SOURCE_MAP ISTANBUL STATS $([[ $CIRCLE_BRANCH = master ]] && echo "STATS-BASELINE")")
       - save_cache:
-          key: prod-build-{{ .Branch }}-{{ .Revision }}-v3
+          key: prod-build-{{ .Branch }}-{{ .Revision }}-v2
           paths:
             - client/build
 
@@ -408,13 +408,13 @@ jobs:
       # Use this cached file to tell if the data needs to be loaded to mongodb (if on a new branch or if data has changed)
       - restore_cache:
           keys:
-            - data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums" }}-v3
+            - data-is-deployed-{{ .Branch }}-{{ checksum "./data-checksums" }}-v2
       - run:
           command: |
             [ -f "./this-data-is-deployed" ] || (cd server && npm run populate_db:remote)
       - run: touch ./this-data-is-deployed
       - save_cache:
-          key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums" }}-v3
+          key: data-is-deployed--{{ .Branch }}-{{ checksum "./data-checksums" }}-v2
           paths:
             - ./this-data-is-deployed
 
@@ -435,13 +435,13 @@ jobs:
       # Use this cached file to tell if the api needs to be redeployed (if on a new branch, if function code's changed, or if server node modules have changed)
       - restore_cache:
           keys:
-            - api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v3
+            - api-is-deployed-{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v2
       - run:
           command: |
             [ -f "./this-api-is-deployed" ] || (cd server && ./scripts/deploy/ci_deploy_function.sh)
       - run: touch ./this-api-is-deployed
       - save_cache:
-          key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v3
+          key: api-is-deployed--{{ .Branch }}-{{ checksum "./server-checksums" }}-{{ checksum "./server/package-lock.json" }}-v2
           paths:
             - ./this-api-is-deployed
 
