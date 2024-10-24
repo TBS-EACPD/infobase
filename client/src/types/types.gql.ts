@@ -169,9 +169,13 @@ export type Gov = {
   all_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
   all_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
   covid_summary?: Maybe<Array<Maybe<CovidGovSummary>>>;
+  dr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
+  dr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   people_data?: Maybe<GovPeopleSummary>;
+  pr_target_counts_granular?: Maybe<Array<Maybe<AllDocResultCount>>>;
+  pr_target_counts_summary?: Maybe<Array<Maybe<AllDocResultCount>>>;
   service_summary?: Maybe<ServiceSummary>;
   subject_type?: Maybe<Scalars['String']>;
   target_counts?: Maybe<ResultCount>;

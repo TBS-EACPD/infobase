@@ -49,6 +49,54 @@ export default function (model_singleton) {
       .value(),
   });
 
+  const ResultDrCountSchema = mongoose.Schema({
+    subject_id: parent_fkey_type(),
+    level: str_type,
+
+    ..._.chain(drr_docs)
+      .flatMap((drr_doc) => [
+        [`${drr_doc}_results`, number_type],
+        [`${drr_doc}_indicators_met`, number_type],
+        [`${drr_doc}_indicators_not_met`, number_type],
+        [`${drr_doc}_indicators_not_available`, number_type],
+        [`${drr_doc}_indicators_future`, number_type],
+      ])
+      .fromPairs()
+      .value(),
+
+    ..._.chain(dp_docs)
+      .flatMap((dp_doc) => [
+        [`${dp_doc}_results`, number_type],
+        [`${dp_doc}_indicators`, number_type],
+      ])
+      .fromPairs()
+      .value(),
+  });
+
+  const ResultPrCountSchema = mongoose.Schema({
+    subject_id: parent_fkey_type(),
+    level: str_type,
+
+    ..._.chain(drr_docs)
+      .flatMap((drr_doc) => [
+        [`${drr_doc}_results`, number_type],
+        [`${drr_doc}_indicators_met`, number_type],
+        [`${drr_doc}_indicators_not_met`, number_type],
+        [`${drr_doc}_indicators_not_available`, number_type],
+        [`${drr_doc}_indicators_future`, number_type],
+      ])
+      .fromPairs()
+      .value(),
+
+    ..._.chain(dp_docs)
+      .flatMap((dp_doc) => [
+        [`${dp_doc}_results`, number_type],
+        [`${dp_doc}_indicators`, number_type],
+      ])
+      .fromPairs()
+      .value(),
+  });
+
   const IndicatorSchema = mongoose.Schema({
     indicator_id: pkey_type(),
     stable_id: str_type,
@@ -91,6 +139,8 @@ export default function (model_singleton) {
 
   model_singleton.define_model("Result", ResultSchema);
   model_singleton.define_model("ResultCount", ResultCountSchema);
+  model_singleton.define_model("ResultDrCount", ResultDrCountSchema);
+  model_singleton.define_model("ResultPrCount", ResultPrCountSchema);
   model_singleton.define_model("Indicator", IndicatorSchema);
   model_singleton.define_model("PIDRLink", PIDRLinkSchema);
 

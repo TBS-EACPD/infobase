@@ -1,0 +1,28 @@
+query CrsoResultsSummary($lang: String!, $crsoId: String) {
+  root(lang: $lang) {
+    crso(id: $crsoId) {
+      id
+      name
+      results {
+        id
+        doc
+        name
+        indicators {
+          ...IndicatorSummary
+        }
+      }
+      programs {
+        id
+        name
+        results {
+          id
+          doc
+          name
+          indicators {
+            ...IndicatorSummary
+          }
+        }
+      }
+    }
+  }
+}

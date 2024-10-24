@@ -267,6 +267,72 @@ const ResultCounts = {
   },
 };
 
+const dr_results_counts_not_loaded_error =
+  "departmental result counts have not yet been loaded!";
+const ResultDrCounts = {
+  data: null,
+  get_dept_counts(org_id) {
+    if (_.isEmpty(this.data)) {
+      throw new Error(dr_results_counts_not_loaded_error);
+    }
+    return _.chain(this.data).find({ id: org_id.toString() }).value();
+  },
+  get_gov_counts() {
+    if (_.isEmpty(this.data)) {
+      throw new Error(dr_results_counts_not_loaded_error);
+    }
+    return _.chain(this.data).find({ id: "total" }).value();
+  },
+  get_data() {
+    if (_.isEmpty(this.data)) {
+      throw new Error(dr_results_counts_not_loaded_error);
+    }
+    return this.data;
+  },
+  set_data(data) {
+    if (!_.isEmpty(this.data)) {
+      throw new Error("data has already been set");
+    }
+    this.data = data;
+  },
+  get_all_dept_counts() {
+    return _.filter(this.data, { level: "dept" });
+  },
+};
+
+const pr_results_counts_not_loaded_error =
+  "program result counts have not yet been loaded!";
+const ResultPrCounts = {
+  data: null,
+  get_dept_counts(org_id) {
+    if (_.isEmpty(this.data)) {
+      throw new Error(pr_results_counts_not_loaded_error);
+    }
+    return _.chain(this.data).find({ id: org_id.toString() }).value();
+  },
+  get_gov_counts() {
+    if (_.isEmpty(this.data)) {
+      throw new Error(pr_results_counts_not_loaded_error);
+    }
+    return _.chain(this.data).find({ id: "total" }).value();
+  },
+  get_data() {
+    if (_.isEmpty(this.data)) {
+      throw new Error(pr_results_counts_not_loaded_error);
+    }
+    return this.data;
+  },
+  set_data(data) {
+    if (!_.isEmpty(this.data)) {
+      throw new Error("data has already been set");
+    }
+    this.data = data;
+  },
+  get_all_dept_counts() {
+    return _.filter(this.data, { level: "dept" });
+  },
+};
+
 //assumes ensure_loaded: requires_granular_result_counts has been called
 const granular_results_counts_not_loaded_error =
   "granular result counts have not yet been loaded!";
@@ -281,6 +347,54 @@ const GranularResultCounts = {
   get_data() {
     if (_.isEmpty(this.data)) {
       throw new Error(granular_results_counts_not_loaded_error);
+    }
+    return this.data;
+  },
+  set_data(data) {
+    if (!_.isEmpty(this.data)) {
+      throw new Error("data has already been set");
+    }
+    this.data = data;
+  },
+};
+
+const dr_granular_results_counts_not_loaded_error =
+  "departmental granular result counts have not yet been loaded!";
+const GranularDrResultCounts = {
+  data: null,
+  get_subject_counts(subject_id) {
+    if (_.isEmpty(this.data)) {
+      throw new Error(dr_granular_results_counts_not_loaded_error);
+    }
+    return _.chain(this.data).find({ id: subject_id }).value();
+  },
+  get_data() {
+    if (_.isEmpty(this.data)) {
+      throw new Error(dr_granular_results_counts_not_loaded_error);
+    }
+    return this.data;
+  },
+  set_data(data) {
+    if (!_.isEmpty(this.data)) {
+      throw new Error("data has already been set");
+    }
+    this.data = data;
+  },
+};
+
+const pr_granular_results_counts_not_loaded_error =
+  "program granular result counts have not yet been loaded!";
+const GranularPrResultCounts = {
+  data: null,
+  get_subject_counts(subject_id) {
+    if (_.isEmpty(this.data)) {
+      throw new Error(pr_granular_results_counts_not_loaded_error);
+    }
+    return _.chain(this.data).find({ id: subject_id }).value();
+  },
+  get_data() {
+    if (_.isEmpty(this.data)) {
+      throw new Error(pr_granular_results_counts_not_loaded_error);
     }
     return this.data;
   },
@@ -466,7 +580,11 @@ export {
   Indicator,
   PI_DR_Links,
   ResultCounts,
+  ResultDrCounts,
+  ResultPrCounts,
   GranularResultCounts,
+  GranularDrResultCounts,
+  GranularPrResultCounts,
   status_key_to_glossary_key,
   ordered_status_keys,
   result_docs,
@@ -482,6 +600,10 @@ assign_to_dev_helper_namespace({
     Indicator,
     PI_DR_Links,
     ResultCounts,
+    ResultDrCounts,
+    ResultPrCounts,
     GranularResultCounts,
+    GranularDrResultCounts,
+    GranularPrResultCounts,
   },
 });

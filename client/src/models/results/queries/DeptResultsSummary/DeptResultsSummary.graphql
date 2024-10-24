@@ -1,0 +1,26 @@
+query DeptResultsSummary($lang: String!, $orgId: String) {
+  root(lang: $lang) {
+    org(org_id: $orgId) {
+      crsos {
+        name
+        results {
+          doc
+          name
+          indicators {
+            ...IndicatorSummary
+          }
+        }
+        programs {
+          name
+          results {
+            doc
+            name
+            indicators {
+              ...IndicatorSummary
+            }
+          }
+        }
+      }
+    }
+  }
+}
