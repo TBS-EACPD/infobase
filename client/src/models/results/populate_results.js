@@ -590,30 +590,30 @@ ${fragment}`
 }
 `;
 
-const test = (level, type) => {
+const get_level = (level, type) => {
   if (level === "summary") {
-    if (type === "dr") {
-      return ResultDrCounts;
-    } else if (type === "pr") {
-      return ResultPrCounts;
-    } else {
-      return ResultCounts;
+    switch (type) {
+      case "dr":
+        return ResultDrCounts;
+      case "pr":
+        return ResultPrCounts;
+      case "all":
+        return ResultCounts;
     }
   } else {
-    if (type === "dr") {
-      return GranularDrResultCounts;
-    } else if (type === "pr") {
-      return GranularPrResultCounts;
-    } else {
-      return GranularResultCounts;
+    switch (type) {
+      case "dr":
+        return GranularDrResultCounts;
+      case "pr":
+        return GranularPrResultCounts;
+      case "all":
+        return GranularResultCounts;
     }
   }
 };
 
 export function api_load_results_counts(level = "summary", type = "all") {
-  //const CountObject = level === "summary" ? ResultCounts : GranularResultCounts;
-
-  const CountObject = test(level, type);
+  const CountObject = get_level(level, type);
 
   if (!_.isEmpty(CountObject.data)) {
     return Promise.resolve();

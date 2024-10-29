@@ -308,7 +308,10 @@ export default function ({ models, loaders }) {
     Result: {
       id: _.property("result_id"),
       indicators: async (result, { doc }) => {
-        let records = await indicator_by_result_loader.load(result.result_id);
+        let records = _.filter(
+          await indicator_by_result_loader.load(result.result_id),
+          ["result_id", result.result_id]
+        );
 
         if (doc) {
           records = _.filter(records, { doc });
