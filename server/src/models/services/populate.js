@@ -2,10 +2,36 @@ import _ from "lodash";
 
 import { get_standard_csv_file_rows } from "../load_utils.js";
 
-import { digital_status_keys, application_channels_keys } from "./constants.js";
+import {
+  digital_status_keys,
+  application_channels_keys,
+  channel_def_en,
+  channel_def_fr,
+  service_std_type_fr,
+  service_type_en,
+  service_type_fr,
+  scope_def_en,
+  scope_def_fr,
+  target_group_en,
+  target_group_fr,
+  ident_platform_en,
+  ident_platform_fr,
+  accessibility_assessors_en,
+  accessibility_assessors_fr,
+  service_recipient_type_en,
+  service_recipient_type_fr,
+} from "./constants.js";
 
+/*
 const multi_value_string_fields_to_arrays = (list_fields, seperator = "<>") =>
   _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
+*/
+
+// The space after the comma is done on purpose, don't remove it
+const multi_value_string_fields_to_array = (list_fields, seperator = ", ") => {
+  return _.split(list_fields, seperator);
+};
+
 const convert_to_bool_or_null = (value, true_val, false_val) => {
   if (value === true_val) {
     return true;
@@ -17,6 +43,20 @@ const convert_to_bool_or_null = (value, true_val, false_val) => {
 };
 const no_data_or_na_to_null = (counts) =>
   counts === "no_data" || counts === "not_applicable" ? null : counts;
+
+//new
+const split_year = (value) => {
+  const year = _.chain(value).split("-").first().value();
+
+  return _.toInteger(year) === 0 ? null : year;
+};
+
+//new
+const key_to_text_def = (definition, list_values) => {
+  return _.chain(list_values)
+    .map((value) => _.get(definition, value))
+    .value();
+};
 
 const combine_other_fax_email_counts = (
   other_counts,
@@ -59,6 +99,7 @@ export default async function ({ models }) {
     ProgramServiceSummary,
   } = models;
 
+  /*
   const urls = _.chain(get_standard_csv_file_rows("service-urls.csv"))
     .map(
       ({
@@ -71,6 +112,48 @@ export default async function ({ models }) {
     )
     .groupBy("service_id")
     .value();
+*/
+  //complete
+  const service_urls = _.chain(
+    get_standard_csv_file_rows("service_inventory.csv")
+  )
+    .map(
+      ({
+        fiscal_yr: submission_year,
+        service_id,
+        service_url_en: value_en,
+        service_url_fr: value_fr,
+      }) => ({
+        submission_year: split_year(submission_year),
+        service_id,
+        value_en,
+        value_fr,
+      })
+    )
+    .groupBy("service_id")
+    .value();
+
+  //complete
+  const standard_urls = _.chain(
+    get_standard_csv_file_rows("service_standards.csv")
+  )
+    .map(
+      ({
+        fiscal_yr: submission_year,
+        service_id,
+        service_std_url_en: value_en,
+        service_std_url_fr: value_fr,
+      }) => ({
+        submission_year: split_year(submission_year),
+        service_id,
+        value_en,
+        value_fr,
+      })
+    )
+    .groupBy("service_id")
+    .value();
+
+  /*
   const get_corresponding_urls = (
     urls,
     submission_year,
@@ -87,7 +170,21 @@ export default async function ({ models }) {
       [`${column_name}_fr`]: _.map(corresponding_urls, "value_fr"),
     };
   };
+*/
 
+  //complete
+  const get_corresponding_urls = (urls, submission_year, column_name) => {
+    const corresponding_urls = _.filter(
+      urls,
+      (url) => url.submission_year === submission_year
+    );
+    return {
+      [`${column_name}_en`]: _.map(corresponding_urls, "value_en"),
+      [`${column_name}_fr`]: _.map(corresponding_urls, "value_fr"),
+    };
+  };
+
+  /*
   const service_report_rows = _.map(
     get_standard_csv_file_rows("service-reports.csv"),
     ({
@@ -140,6 +237,63 @@ export default async function ({ models }) {
       };
     }
   );
+
+  */
+
+  //complete
+  const service_report_rows = _.map(
+    get_standard_csv_file_rows("service_inventory.csv"),
+    ({
+      fiscal_yr: year,
+      service_id,
+      use_of_cra_number: cra_business_ids_collected,
+      use_of_sin_number: sin_collected,
+      special_remarks_en: service_report_comment_en,
+      special_remarks_fr: service_report_comment_fr,
+      calls_received: phone_inquiry_count,
+      web_visits: online_inquiry_count,
+      telephone_applications: phone_application_count,
+      online_applications: online_application_count,
+      in_person_applications: live_application_count,
+      postal_mail_applications: mail_application_count,
+      email_applications: email_application_count,
+      fax_applications: fax_application_count,
+      other_applications: other_application_count,
+    }) => {
+      return {
+        year: split_year(year),
+        service_id,
+        cra_business_ids_collected: convert_to_bool_or_null(
+          cra_business_ids_collected,
+          "YES",
+          "NO"
+        ),
+        sin_collected: convert_to_bool_or_null(sin_collected, "YES", "NO"),
+        service_report_comment_en,
+        service_report_comment_fr,
+        phone_inquiry_and_application_count: no_data_or_na_to_null(
+          _.sum(phone_application_count, phone_inquiry_count)
+        ),
+        phone_inquiry_count: no_data_or_na_to_null(phone_inquiry_count),
+        online_inquiry_count: no_data_or_na_to_null(online_inquiry_count),
+        phone_application_count: no_data_or_na_to_null(phone_application_count),
+        online_application_count: no_data_or_na_to_null(
+          online_application_count
+        ),
+        live_application_count: no_data_or_na_to_null(live_application_count),
+        mail_application_count: no_data_or_na_to_null(mail_application_count),
+        email_application_count: no_data_or_na_to_null(email_application_count),
+        fax_application_count: no_data_or_na_to_null(fax_application_count),
+        other_application_count: combine_other_fax_email_counts(
+          other_application_count,
+          fax_application_count,
+          email_application_count
+        ),
+      };
+    }
+  );
+
+  /*
   const standard_report_rows = _.map(
     get_standard_csv_file_rows("standard-reports.csv"),
     ({
@@ -157,6 +311,34 @@ export default async function ({ models }) {
     })
   );
 
+  */
+
+  //complete
+  const standard_report_rows = _.map(
+    get_standard_csv_file_rows("service_standards.csv"),
+    ({
+      target_met: is_target_met,
+      service_std_id: standard_id,
+      standard_comment_en,
+      standard_comment_fr,
+      fiscal_yr: year,
+      service_std_target: lower,
+      volume_meeting_target: met_count,
+      total_volume: count,
+    }) => ({
+      is_target_met: convert_to_bool_or_null(is_target_met, "Y", "N"),
+      standard_id,
+      standard_comment_en,
+      standard_comment_fr,
+      year: split_year(year),
+      lower,
+      upper: "100",
+      met_count,
+      count,
+    })
+  );
+
+  /*
   const service_standard_rows = _.map(
     get_standard_csv_file_rows("standards.csv"),
     ({
@@ -196,25 +378,115 @@ export default async function ({ models }) {
     })
   );
 
+*/
+
+  //complete
+  const service_standard_rows = _.map(
+    get_standard_csv_file_rows("service_standards.csv"),
+    ({
+      fiscal_yr: submission_year,
+      service_std_id: standard_id,
+      service_id,
+      channel,
+      service_std_type,
+      service_std_en,
+      service_std_fr,
+      gcss_tool_fiscal_yr,
+      standard_comment_en,
+      standard_comment_fr,
+    }) => ({
+      standard_id,
+      service_id,
+      submission_year: split_year(submission_year),
+      channel_en: _.get(channel_def_en, channel),
+      channel_fr: _.get(channel_def_fr, channel),
+      type_en: service_std_type,
+      type_fr: _.get(service_std_type_fr, service_std_type),
+      name_en: service_std_en,
+      name_fr: service_std_fr,
+      last_gcss_tool_year: gcss_tool_fiscal_yr,
+      channel_code: channel,
+      standard_type__code: service_std_type,
+      standard_comment_en,
+      standard_comment_fr,
+      ...get_corresponding_urls(
+        standard_urls[service_id],
+        split_year(submission_year),
+        "standard_urls"
+      ),
+      standard_report: _.filter(
+        standard_report_rows,
+        (standard_report) => standard_report.standard_id === standard_id
+      ),
+    })
+  );
+
+  /*
   const raw_service_rows = get_standard_csv_file_rows("services.csv");
+  */
+
+  //complete
+  const raw_service_rows = get_standard_csv_file_rows("service_inventory.csv");
+
+  //complete
+  const service_program_id_rows = get_standard_csv_file_rows(
+    "goc_service_program.csv"
+  );
+
+  /*
   const absolute_most_recent_submission_year = _.chain(raw_service_rows)
     .map("dept_submissions__document__year")
     .uniq()
     .sort()
     .last()
     .value();
+  */
 
+  //complete
+  const absolute_most_recent_submission_year = _.chain(raw_service_rows)
+    .map(({ fiscal_yr }) => _.split(fiscal_yr, "-")[0])
+    .uniq()
+    .sort()
+    .last()
+    .value();
+
+  /*
   const unique_dept_codes = _.chain(raw_service_rows)
     .map("dept_code")
     .uniq()
     .sort()
     .value();
+  */
 
+  //complete
+  const unique_dept_names = _.chain(raw_service_rows)
+    .map("department_name_en")
+    .uniq()
+    .sort()
+    .value();
+
+  /*
   const dept_id_by_dept_code = _.chain(get_standard_csv_file_rows("igoc.csv"))
     .map(({ org_id, dept_code }) => [dept_code, org_id])
     .fromPairs()
     .value();
+  */
 
+  //complete
+  const dept_id_by_dept_name = _.chain(
+    get_standard_csv_file_rows("goc_org_variants.csv")
+  )
+    .map(({ org_name_variant, org_id }) => [org_name_variant, org_id])
+    .fromPairs()
+    .value();
+
+  //complete
+  const dept_code_by_dept_name = _.chain(get_standard_csv_file_rows("igoc.csv"))
+    .map(({ org_id, dept_code }) => [org_id, dept_code])
+    .fromPairs()
+    .value();
+
+  /*
   const filtered_service_rows = _.chain(raw_service_rows)
     .map((service) => {
       const {
@@ -338,6 +610,202 @@ export default async function ({ models }) {
         }),
         ...other_fields,
         ...get_corresponding_urls(urls[id], submission_year, "SERVICE", "urls"),
+        standards,
+        service_report,
+      };
+    })
+    .reject((service) => _.isEqual(service.scope_codes, ["internal"]))
+    // SI_TODO oof, big mess, need to refactor a lot of stuff to support multiple years of service data. For now, just take the latest submitted version
+    // (the client was, generally, doing this in a bunch of places manually already, so this is more of a cleanup than a hack for now)
+    .groupBy("id")
+    // Filter by relatively most recent services (e.g.: absolute most recent year could be 2020 but a service may not have submitted in 2020, hence relatively most recent year is 2019)
+    .map((service_across_years) =>
+      _.chain(service_across_years)
+        .sortBy(({ submission_year }) => _.toInteger(submission_year))
+        .last()
+        .value()
+    )
+    // only valid under above logic, will need to rework active status deterination in multi-year refactor
+    .each((service) => {
+      service.is_active =
+        service.submission_year === absolute_most_recent_submission_year;
+    })
+    .value();
+*/
+
+  //complete
+  const filtered_service_rows = _.chain(raw_service_rows)
+    .map((service) => {
+      const {
+        fiscal_yr: submission_year,
+        department_name_en: dept_name,
+        service_id: id,
+        service_fee: collects_fees,
+        e_registration: account_reg_digital_status,
+        e_authentication: authentication_status,
+        e_application: application_digital_status,
+        e_decision: decision_digital_status,
+        e_issuance: issuance_digital_status,
+        e_feedback: issue_res_digital_status,
+        last_year_of_service_improvement_based_on_client_feedback:
+          last_improve_from_feedback,
+        last_GBA: last_gender_analysis,
+        service_type,
+        service_scope,
+        client_target_groups,
+        client_feedback,
+        ident_platform,
+        how_has_the_service_been_assessed_for_accessibility:
+          accessibility_assessors,
+        service_recipient_type,
+        service_name_en: name_en,
+        service_name_fr: name_fr,
+        service_description_en: description_en,
+        service_description_fr: description_fr,
+        online_comments_en: digital_enablement_comment_en,
+        online_comments_fr: digital_enablement_comment_fr,
+      } = service;
+
+      const service_report = _.filter(
+        service_report_rows,
+        (service_report) => service_report.service_id === id
+      );
+
+      const standards = _.filter(
+        service_standard_rows,
+        (service_standard_rows) => service_standard_rows.service_id === id
+      );
+
+      return {
+        id,
+        submission_year: split_year(submission_year),
+        org_id: dept_id_by_dept_name[dept_name],
+        collects_fees: convert_to_bool_or_null(collects_fees, "Y", "N"),
+        account_reg_digital_status: convert_to_bool_or_null(
+          account_reg_digital_status,
+          "Y",
+          "N"
+        ),
+        authentication_status: convert_to_bool_or_null(
+          authentication_status,
+          "Y",
+          "N"
+        ),
+        application_digital_status: convert_to_bool_or_null(
+          application_digital_status,
+          "Y",
+          "N"
+        ),
+        decision_digital_status: convert_to_bool_or_null(
+          decision_digital_status,
+          "Y",
+          "N"
+        ),
+        issuance_digital_status: convert_to_bool_or_null(
+          issuance_digital_status,
+          "Y",
+          "N"
+        ),
+        issue_res_digital_status: convert_to_bool_or_null(
+          issue_res_digital_status,
+          "Y",
+          "N"
+        ),
+        report_years: get_years_from_service_report([{ service_report }]),
+        program_activity_codes: _.chain(service_program_id_rows)
+          .filter(
+            (row) => row.fiscal_yr === submission_year && row.service_id === id
+          )
+          .flatMap(
+            (row) =>
+              `${dept_code_by_dept_name[dept_id_by_dept_name[dept_name]]}-${
+                row.program_id
+              }`
+          )
+          .value(),
+        last_improve_from_feedback: split_year(last_improve_from_feedback),
+        last_gender_analysis: split_year(last_gender_analysis),
+        service_type_en: key_to_text_def(
+          service_type_en,
+          multi_value_string_fields_to_array(service_type)
+        ),
+        service_type_fr: key_to_text_def(
+          service_type_fr,
+          multi_value_string_fields_to_array(service_type)
+        ),
+        service_scope_en: key_to_text_def(
+          scope_def_en,
+          multi_value_string_fields_to_array(service_scope)
+        ),
+        service_scope_fr: key_to_text_def(
+          scope_def_fr,
+          multi_value_string_fields_to_array(service_scope)
+        ),
+        scope_codes: multi_value_string_fields_to_array(service_scope),
+        target_groups_name_en: key_to_text_def(
+          target_group_en,
+          multi_value_string_fields_to_array(client_target_groups)
+        ),
+        target_groups_name_fr: key_to_text_def(
+          target_group_fr,
+          multi_value_string_fields_to_array(client_target_groups)
+        ),
+        feedback_channels_en: key_to_text_def(
+          channel_def_en,
+          multi_value_string_fields_to_array(client_feedback)
+        ),
+        feedback_channels_fr: key_to_text_def(
+          channel_def_fr,
+          multi_value_string_fields_to_array(client_feedback)
+        ),
+        digital_identity_platforms_en: key_to_text_def(
+          ident_platform_en,
+          multi_value_string_fields_to_array(ident_platform)
+        ),
+        digital_identity_platforms_fr: key_to_text_def(
+          ident_platform_fr,
+          multi_value_string_fields_to_array(ident_platform)
+        ),
+        accessibility_assessors_en: key_to_text_def(
+          accessibility_assessors_en,
+          multi_value_string_fields_to_array(accessibility_assessors)
+        ),
+        accessibility_assessors_fr: key_to_text_def(
+          accessibility_assessors_fr,
+          multi_value_string_fields_to_array(accessibility_assessors)
+        ),
+        recipient_type_en: key_to_text_def(
+          service_recipient_type_en,
+          multi_value_string_fields_to_array(service_recipient_type)
+        ),
+        recipient_type_fr: key_to_text_def(
+          service_recipient_type_fr,
+          multi_value_string_fields_to_array(service_recipient_type)
+        ),
+        name_en,
+        name_fr,
+        description_en,
+        description_fr,
+        digital_enablement_comment_en,
+        digital_enablement_comment_fr,
+        service_type_code: multi_value_string_fields_to_array(service_type),
+        target_groups_id:
+          multi_value_string_fields_to_array(client_target_groups),
+        feedback_channels_code:
+          multi_value_string_fields_to_array(client_feedback),
+        digital_identity_platforms_code:
+          multi_value_string_fields_to_array(ident_platform),
+        accessibility_assessors_code: multi_value_string_fields_to_array(
+          accessibility_assessors
+        ),
+        recipient_type_code: multi_value_string_fields_to_array(
+          service_recipient_type
+        ),
+        ...get_corresponding_urls(
+          service_urls[id],
+          split_year(submission_year),
+          "urls"
+        ),
         standards,
         service_report,
       };
@@ -596,7 +1064,7 @@ export default async function ({ models }) {
           get_pct_of_standards_met_high_vol_services(
             absolute_most_recent_year_filtered_services
           ),
-        num_of_subject_offering_services: _.chain(unique_dept_codes)
+        num_of_subject_offering_services: _.chain(unique_dept_names)
           .size()
           .value(),
         num_of_programs_offering_services: _.chain(
