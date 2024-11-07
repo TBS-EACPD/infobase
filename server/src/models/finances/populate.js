@@ -11,6 +11,8 @@ export default async function ({ models }) {
     OrgVoteStatEstimates,
     OrgTransferPayments,
     ProgramSobjs,
+    ProgramExpSobjs,
+    ProgramRevSobjs,
     ProgramVoteStat,
     ProgramSpending,
     ProgramFte,
@@ -35,13 +37,61 @@ export default async function ({ models }) {
     .value();
 
   const programSobjs_records = _.chain(
-    get_standard_csv_file_rows("program_sobjs.csv")
+    get_standard_csv_file_rows("program_sobjs_new.csv")
   )
     .map((obj) => ({
       ...obj,
       program_id: create_program_id(obj),
     }))
     .map((obj) => new ProgramSobjs(obj))
+    .value();
+
+  const programExpSobjs_records = _.chain(programSobjs_records)
+    .map(
+      ({
+        program_id,
+        so_num,
+        pa_exp_last_year_5,
+        pa_exp_last_year_4,
+        pa_exp_last_year_3,
+        pa_exp_last_year_2,
+        pa_exp_last_year,
+        _id,
+      }) => ({
+        program_id,
+        so_num,
+        pa_exp_last_year_5,
+        pa_exp_last_year_4,
+        pa_exp_last_year_3,
+        pa_exp_last_year_2,
+        pa_exp_last_year,
+        _id,
+      })
+    )
+    .value();
+
+  const programRevSobjs_records = _.chain(programSobjs_records)
+    .map(
+      ({
+        program_id,
+        so_num,
+        pa_rev_last_year_5,
+        pa_rev_last_year_4,
+        pa_rev_last_year_3,
+        pa_rev_last_year_2,
+        pa_rev_last_year,
+        _id,
+      }) => ({
+        program_id,
+        so_num,
+        pa_rev_last_year_5,
+        pa_rev_last_year_4,
+        pa_rev_last_year_3,
+        pa_rev_last_year_2,
+        pa_rev_last_year,
+        _id,
+      })
+    )
     .value();
 
   const programVoteStat_records = _.chain(
@@ -79,6 +129,8 @@ export default async function ({ models }) {
     OrgVoteStatEstimates.insertMany(orgVoteStatEstimates_records),
     OrgTransferPayments.insertMany(orgTransferPayments_records),
     ProgramSobjs.insertMany(programSobjs_records),
+    ProgramExpSobjs.insertMany(programExpSobjs_records),
+    ProgramRevSobjs.insertMany(programRevSobjs_records),
     ProgramVoteStat.insertMany(programVoteStat_records),
     ProgramSpending.insertMany(programSpending_records),
     ProgramFte.insertMany(programFte_records),

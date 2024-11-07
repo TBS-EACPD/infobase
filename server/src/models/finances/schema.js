@@ -9,6 +9,8 @@ const schema = `
   
   extend type Program{
     program_sobjs: [ProgramSobjs]
+    program_exp_sobjs: [ProgramExpSobjs]
+    program_rev_sobjs: [ProgramRevSobjs]
     program_vote_stat: [ProgramVoteStat]
     program_spending: [ProgramSpending]
     program_fte: [ProgramFte]
@@ -67,9 +69,32 @@ const schema = `
   }
   type ProgramSobjs{
     so_num: Float
-    pa_last_year_3: Float
-    pa_last_year_2: Float
-    pa_last_year: Float
+    pa_exp_last_year_5: Float
+    pa_exp_last_year_4: Float
+    pa_exp_last_year_3: Float
+    pa_exp_last_year_2: Float
+    pa_exp_last_year: Float
+    pa_rev_last_year_5: Float
+    pa_rev_last_year_4: Float
+    pa_rev_last_year_3: Float
+    pa_rev_last_year_2: Float
+    pa_rev_last_year: Float
+  }
+  type ProgramExpSobjs{
+    so_num: Float
+    pa_exp_last_year_5: Float
+    pa_exp_last_year_4: Float
+    pa_exp_last_year_3: Float
+    pa_exp_last_year_2: Float
+    pa_exp_last_year: Float
+  }
+  type ProgramRevSobjs{
+    so_num: Float
+    pa_rev_last_year_5: Float
+    pa_rev_last_year_4: Float
+    pa_rev_last_year_3: Float
+    pa_rev_last_year_2: Float
+    pa_rev_last_year: Float
   }
   type ProgramVoteStat{
     vs_type: String
@@ -111,6 +136,8 @@ export default function ({ loaders }) {
     orgVoteStatEstimates_loader,
     orgTransferPayments_loader,
     programSobjs_loader,
+    programExpSobjs_loader,
+    programRevSobjs_loader,
     programVoteStat_loader,
     programSpending_loader,
     programFte_loader,
@@ -127,6 +154,8 @@ export default function ({ loaders }) {
     },
     Program: {
       program_sobjs: (prog) => programSobjs_loader.load(prog.program_id),
+      program_exp_sobjs: (prog) => programExpSobjs_loader.load(prog.program_id),
+      program_rev_sobjs: (prog) => programRevSobjs_loader.load(prog.program_id),
       program_vote_stat: (prog) => programVoteStat_loader.load(prog.program_id),
       program_spending: (prog) => programSpending_loader.load(prog.program_id),
       program_fte: (prog) => programFte_loader.load(prog.program_id),

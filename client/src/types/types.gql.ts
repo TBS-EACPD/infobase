@@ -415,7 +415,9 @@ export type Program = SubjectI & {
   old_name?: Maybe<Scalars['String']>;
   org?: Maybe<Org>;
   pidrlinks?: Maybe<Array<Maybe<PidrLink>>>;
+  program_exp_sobjs?: Maybe<Array<Maybe<ProgramExpSobjs>>>;
   program_fte?: Maybe<Array<Maybe<ProgramFte>>>;
+  program_rev_sobjs?: Maybe<Array<Maybe<ProgramRevSobjs>>>;
   program_sobjs?: Maybe<Array<Maybe<ProgramSobjs>>>;
   program_spending?: Maybe<Array<Maybe<ProgramSpending>>>;
   program_vote_stat?: Maybe<Array<Maybe<ProgramVoteStat>>>;
@@ -436,6 +438,16 @@ export type ProgramTarget_CountsArgs = {
   doc?: InputMaybe<Scalars['String']>;
 };
 
+export type ProgramExpSobjs = {
+  __typename?: 'ProgramExpSobjs';
+  pa_exp_last_year?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_2?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_3?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_4?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_5?: Maybe<Scalars['Float']>;
+  so_num?: Maybe<Scalars['Float']>;
+};
+
 export type ProgramFte = {
   __typename?: 'ProgramFte';
   pa_last_year?: Maybe<Scalars['Float']>;
@@ -449,11 +461,28 @@ export type ProgramFte = {
   planning_year_3?: Maybe<Scalars['Float']>;
 };
 
+export type ProgramRevSobjs = {
+  __typename?: 'ProgramRevSobjs';
+  pa_rev_last_year?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_2?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_3?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_4?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_5?: Maybe<Scalars['Float']>;
+  so_num?: Maybe<Scalars['Float']>;
+};
+
 export type ProgramSobjs = {
   __typename?: 'ProgramSobjs';
-  pa_last_year?: Maybe<Scalars['Float']>;
-  pa_last_year_2?: Maybe<Scalars['Float']>;
-  pa_last_year_3?: Maybe<Scalars['Float']>;
+  pa_exp_last_year?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_2?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_3?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_4?: Maybe<Scalars['Float']>;
+  pa_exp_last_year_5?: Maybe<Scalars['Float']>;
+  pa_rev_last_year?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_2?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_3?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_4?: Maybe<Scalars['Float']>;
+  pa_rev_last_year_5?: Maybe<Scalars['Float']>;
   so_num?: Maybe<Scalars['Float']>;
 };
 

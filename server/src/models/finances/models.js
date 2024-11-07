@@ -66,9 +66,34 @@ export default function (model_singleton) {
   const ProgramSobjsSchema = mongoose.Schema({
     program_id: parent_fkey_type(),
     so_num: number_type,
-    pa_last_year_3: number_type,
-    pa_last_year_2: number_type,
-    pa_last_year: number_type,
+    pa_exp_last_year_5: number_type,
+    pa_exp_last_year4: number_type,
+    pa_exp_last_year_3: number_type,
+    pa_exp_last_year_2: number_type,
+    pa_exp_last_year: number_type,
+    pa_rev_last_year_5: number_type,
+    pa_rev_last_year4: number_type,
+    pa_rev_last_year_3: number_type,
+    pa_rev_last_year_2: number_type,
+    pa_rev_last_year: number_type,
+  });
+  const ProgramExpSobjsSchema = mongoose.Schema({
+    program_id: parent_fkey_type(),
+    so_num: number_type,
+    pa_exp_last_year_5: number_type,
+    pa_exp_last_year4: number_type,
+    pa_exp_last_year_3: number_type,
+    pa_exp_last_year_2: number_type,
+    pa_exp_last_year: number_type,
+  });
+  const ProgramRevSobjsSchema = mongoose.Schema({
+    program_id: parent_fkey_type(),
+    so_num: number_type,
+    pa_rev_last_year_5: number_type,
+    pa_rev_last_year4: number_type,
+    pa_rev_last_year_3: number_type,
+    pa_rev_last_year_2: number_type,
+    pa_rev_last_year: number_type,
   });
   const ProgramVoteStatSchema = mongoose.Schema({
     program_id: parent_fkey_type(),
@@ -115,6 +140,8 @@ export default function (model_singleton) {
   );
 
   model_singleton.define_model("ProgramSobjs", ProgramSobjsSchema);
+  model_singleton.define_model("ProgramExpSobjs", ProgramExpSobjsSchema);
+  model_singleton.define_model("ProgramRevSobjs", ProgramRevSobjsSchema);
   model_singleton.define_model("ProgramVoteStat", ProgramVoteStatSchema);
   model_singleton.define_model("ProgramSpending", ProgramSpendingSchema);
   model_singleton.define_model("ProgramFte", ProgramFteSchema);
@@ -124,6 +151,8 @@ export default function (model_singleton) {
     OrgVoteStatEstimates,
     OrgTransferPayments,
     ProgramSobjs,
+    ProgramExpSobjs,
+    ProgramRevSobjs,
     ProgramVoteStat,
     ProgramSpending,
     ProgramFte,
@@ -144,6 +173,14 @@ export default function (model_singleton) {
     ),
     programSobjs_loader: create_resource_by_foreignkey_attr_dataloader(
       ProgramSobjs,
+      "program_id"
+    ),
+    programExpSobjs_loader: create_resource_by_foreignkey_attr_dataloader(
+      ProgramExpSobjs,
+      "program_id"
+    ),
+    programRevSobjs_loader: create_resource_by_foreignkey_attr_dataloader(
+      ProgramRevSobjs,
       "program_id"
     ),
     programVoteStat_loader: create_resource_by_foreignkey_attr_dataloader(
