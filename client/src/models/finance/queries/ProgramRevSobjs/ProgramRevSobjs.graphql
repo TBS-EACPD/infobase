@@ -1,4 +1,4 @@
-query ProgramSobjs($lang: String!, $programId: String) {
+query ProgramRevSobjs($lang: String!, $programId: String) {
   root(lang: $lang) {
     program(id: $programId) {
       program_sobjs {
