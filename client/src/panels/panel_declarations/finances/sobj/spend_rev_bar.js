@@ -11,19 +11,19 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
-
 import { StandardLegend } from "src/charts/legends/index";
 
 import { formats } from "src/core/format";
+
+import { useProgramSobjs } from "src/models/finance/queries";
+
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 
 import {
   highlightColor,
   secondaryColor,
   textColor,
 } from "src/style_constants/index";
-
-import { useProgramSobjs } from "src/models/finance/queries";
 
 import text from "./spend_rev_bar.yaml";
 
