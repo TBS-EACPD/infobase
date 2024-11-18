@@ -49,7 +49,7 @@ const common_cal = (subject, data) => {
   };
 };
 
-const ProgramSobjs = ({ subject }) => {
+const ProgramSobjSummary = ({ subject }) => {
   const { loading, data } = useProgramSobjs({ programId: subject.id });
 
   if (loading) {
@@ -123,7 +123,7 @@ export const declare_top_spending_areas_panel = () =>
       render: ({ title, subject, footnotes, sources, datasets }) => {
         return (
           <InfographicPanel {...{ title, footnotes, sources, datasets }}>
-            <ProgramSobjs subject={subject} />
+            <ProgramSobjSummary subject={subject} />
           </InfographicPanel>
         );
       },

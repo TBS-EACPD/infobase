@@ -11,6 +11,7 @@ export {
   declare_spend_by_so_hist_panel,
   declare_spend_rev_split_panel,
   declare_top_spending_areas_panel,
+  declare_spend_rev_bar_panel,
   declare_historical_g_and_c_panel,
   declare_last_year_g_and_c_perspective_panel,
   declare_estimates_in_perspective_panel,
