@@ -1,4 +1,10 @@
 export {
+  promisedProgramSobjs,
+  suspendedProgramSobjs,
+  useProgramSobjs,
+} from "./ProgramSobjs/ProgramSobjs";
+
+export {
   promisedProgramExpSobjs,
   suspendedProgramExpSobjs,
   useProgramExpSobjs,

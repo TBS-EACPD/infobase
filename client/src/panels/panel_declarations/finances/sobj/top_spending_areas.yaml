@@ -1,7 +1,7 @@
 top_spending_areas_title:
   transform: [handlebars]
-  en: Gross Spending by Standard Object ({{pa_last_year}})
-  fr: Dépenses brutes par article courant ({{pa_last_year}})
+  en: Expenditure and Revenue by Standard Object ({{pa_last_year}})
+  fr: (update) Dépenses brutes par article courant ({{pa_last_year}})
 
 std_obj_quick_def:
   transform: [handlebars, markdown]
@@ -30,9 +30,39 @@ program_top_spending_areas_text:
   transform: [handlebars, markdown]
   en: | 
     In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
-    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the program's total _gross_ expenditures of **{{fmt_compact1_written total_spent}}**.
+    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the program's total expenditures of **{{fmt_compact1_written total_spent}}**.
     {{gl_sidebar_link "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures. 
   fr: |
     En {{pa_last_year}}, la partie la plus importante des dépenses du programme «**{{subject.name}}**» a été enregistrée 
-    sous l'article courant «**{{top_so_name}}**» **({{fmt_compact1_written top_so_spent}})**, soit **{{fmt_percentage1 top_so_pct}}** des dépenses _brutes_ du programme totalisant **{{fmt_compact1_written total_spent}}**.
+    sous l'article courant «**{{top_so_name}}**» **({{fmt_compact1_written top_so_spent}})**, soit **{{fmt_percentage1 top_so_pct}}** des dépenses du programme totalisant **{{fmt_compact1_written total_spent}}**.
     Les {{gl_sidebar_link "articles courants" "SOBJ"}} représentent le niveau le plus élevé de classification des dépenses.
+
+program_top_revenue_areas_text:
+  transform: [handlebars, markdown]
+  en: | 
+    In {{pa_last_year}}, the largest share of revenues for "**{{subject.name}}**" were recorded under the 
+    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the program's total revenues of **{{fmt_compact1_written total_spent}}**.
+    {{gl_sidebar_link "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures. 
+  fr: |
+    En {{pa_last_year}}, la partie la plus importante des recettes du programme «**{{subject.name}}**» a été enregistrée 
+    sous l'article courant «**{{top_so_name}}**» **({{fmt_compact1_written top_so_spent}})**, soit **{{fmt_percentage1 top_so_pct}}** des recettes du programme totalisant **{{fmt_compact1_written total_spent}}**.
+    Les {{gl_sidebar_link "articles courants" "SOBJ"}} représentent le niveau le plus élevé de classification des dépenses.
+
+spending_title:
+  transform: [handlebars]
+  en: |
+    Expenditure
+  fr: |
+    Dépenses 
+
+revenue_title:
+  transform: [handlebars]
+  en: |
+    Revenue
+  fr: |
+    Dépenses 
+
+
+
+
+
