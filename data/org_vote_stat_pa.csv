@@ -293,8 +293,8 @@
 "EC","S",999,"Salary and Motor Car Allowance","Traitement et allocation pour automobile",86000,86000.00,,87500,87500,,89200,89200,,90700.00,90700.00,,92400,92400,
 "EC","S",999,"Spending of proceeds from the disposal of surplus Crown assets","Dépenses des produits de la vente de biens excédentaires de l'État",1898558,1129062.00,769496,1874175,1584736,289439,730092,116135,440653,1412803.00,278582.00,972150,2220368,1113586,1106782
 "EDC","S",999,"Administrative fees","Frais administratif",7409042,7409042.00,,8589503,8589503,,149546653,149546653,,238560520.00,238560520.00,,252879933,252879933,
+"EDC","S",999,"Forgiveness of non-budgetary loans pursuant to section 23(6) of the Export Development Act","Renonciation de prêts non budgétaires en vertu de l'article 23(6) de la Loi sur le développement des exportations",1627722,1627722.00,,,,,,,,1015572320.00,1015572320.00,,1353550947,1353550947,
 "EDC","S",999,"Losses on Foreign Exchange","Pertes d'opérations de change",,,,,,,103471372,103471372,,1510441.00,1510441.00,,,,
-"EDC","S",999,"Payments of concessional loans to facilitate and develop trade between Canada and foreign countries","Versement de prêts à des conditions de faveur pour faciliter et développer le commerce entre le Canada et les pays étrangers",1627722,1627722.00,,,,,,,,1015572320.00,1015572320.00,,1353550947,1353550947,
 "ERC",1,1,"Operating/Program","Fonctionnement/Programme",3195355,2117840.00,0,3918215,2882311,0,4863015,2890822,0,5805010.00,3493016.00,0,5852431,4398975,0
 "ERC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",193367,193367.00,,250590,250590,,294694,294694,,381688.00,381688.00,,478645,478645,
 "FBCL",1,5,"Payments to Crown Corps","Paiement aux sociétés d'État",3472857,3463982.00,0,,,,8292020,4581003,0,18497000.00,9123879.00,0,5303000,4423000,0
@@ -563,16 +563,16 @@
 "ISC",1,1,"Operating/Program","Fonctionnement/Programme",434879136,429858463.00,0,481428884,476015192,0,525626646,501015509,0,595321628.00,564606696.00,0,659722916,624428938,0
 "ISC",5,2,"Capital","Capital",8551968,7562323.00,0,9232810,7869741,0,9643290,9103002,0,56506431.00,16594785.00,0,73834965,13586687,0
 "ISC",10,3,"Grants & Contributions","Subventions et Contributions",2520600972,1679515444.00,0,2369573160,1740264099,0,3186014879,2136396422,0,3925882807.00,2321941169.00,0,4928632433,2846548325,0
-"ISC",15,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,4023056,0,0,,,,,,,,,
-"ISC",20,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,248990,0,0,,,,,,,,,
-"ISC",25,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,1266718,0,0,,,,,,,,,
-"ISC",30,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,964000,0,0,,,,,,,,,
-"ISC",35,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,283628,0,0,,,,,,,,,
-"ISC",40,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,0,0,0,,,,,,,,,
-"ISC",45,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,2648333,0,0,,,,,,,,,
+"ISC",25,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,4023056,0,0,,,,,,,,,
+"ISC",30,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,248990,0,0,,,,,,,,,
+"ISC",35,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,1266718,0,0,,,,,,,,,
+"ISC",40,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,964000,0,0,,,,,,,,,
+"ISC",45,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,283628,0,0,,,,,,,,,
 "ISC",50,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,0,0,0,,,,,,,,,
-"ISC",55,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,47093,0,0,,,,,,,,,
-"ISC",60,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,34742,0,0,,,,,,,,,
+"ISC",55,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,2648333,0,0,,,,,,,,,
+"ISC",60,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,0,0,0,,,,,,,,,
+"ISC",65,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,47093,0,0,,,,,,,,,
+"ISC",70,7,"Budget Implementation Vote","Crédit Exécution du budget",,,,34742,0,0,,,,,,,,,
 "ISC","S",999,"Canadian Intellectual Property Office Revolving Fund","Fonds renouvelable de l'Office de la propriété intellectuelle du Canada",150498345,16130992.00,134367353,134367353,19600283,114767070,114767070,14186051,100581019,100581019.00,17128598.00,83452421,83452421,14540312,68912109
 "ISC","S",999,"Contributions to employee benefit plans","Contributions aux régimes d'avantages sociaux des employés",54406229,54406229.00,,57619579,57619579,,63807327,63807327,,65875947.00,65875947.00,,73805808,73805808,
 "ISC","S",999,"Contributions to the Canadian Institute for Advanced Research - Pan Canadian Artificial Intelligence","Contributions à l'Institut canadien de recherches avancées pour la stratégie pancanadienne en matière d'intelligence artificielle",21000000,21000000.00,,17619000,17619000,,21562650,21562650,,25849032.00,25849032.00,,9737869,9737869,
