@@ -75,12 +75,10 @@ const featured_content_items = _.compact([
   {
     text_key: "quick_link_DP24",
     href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_dp)",
-    is_new: "false",
   },
   {
     text_key: "quick_link_service_inventory_2022",
     href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
-    is_new: "false",
   },
   {
     text_key: "quick_link_DRR23",
