@@ -11,11 +11,11 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { StandardLegend } from "src/charts/legends/index";
+import { useProgramSobjs } from "src/models/finance/queries";
 
 import { formats } from "src/core/format";
 
-import { useProgramSobjs } from "src/models/finance/queries";
+import { StandardLegend } from "src/charts/legends/index";
 
 import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
 

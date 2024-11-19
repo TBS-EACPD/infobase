@@ -57,9 +57,16 @@ org_transfer_payments{
 const program_sobjs_field = `
 program_sobjs{
   so_num
-  pa_last_year_3
-  pa_last_year_2
-  pa_last_year
+  pa_exp_last_year_5
+  pa_exp_last_year_4
+  pa_exp_last_year_3
+  pa_exp_last_year_2
+  pa_exp_last_year
+  pa_rev_last_year_5
+  pa_rev_last_year_4
+  pa_rev_last_year_3
+  pa_rev_last_year_2
+  pa_rev_last_year
 }`;
 const program_vote_stat_field = `
 program_vote_stat{
