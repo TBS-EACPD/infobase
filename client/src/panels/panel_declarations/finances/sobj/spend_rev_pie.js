@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -20,12 +20,12 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const common_cal = (subject, data) => {
   const graph_data = _.chain(data)
-    .filter((row) => row.pa_last_year)
     .map(({ so_num, pa_last_year }) => ({
       id: so_num,
       label: text_maker(`SOBJ${so_num}`),
       value: Math.abs(pa_last_year),
     }))
+    .filter((row) => row.value)
     .compact()
     .value();
 
@@ -33,13 +33,15 @@ const common_cal = (subject, data) => {
 
   const top_so_spent = _.maxBy(graph_data, "value");
 
-  const top_so_pct = top_so_spent.value / total_spent;
+  const top_so_pct = _.isEmpty(top_so_spent)
+    ? null
+    : top_so_spent.value / total_spent;
 
   const text_calculations = {
     subject,
     total_spent,
-    top_so_name: top_so_spent.label,
-    top_so_spent: top_so_spent.value,
+    top_so_name: _.isEmpty(top_so_spent) ? null : top_so_spent.label,
+    top_so_spent: _.isEmpty(top_so_spent) ? null : top_so_spent.value,
     top_so_pct,
   };
 
@@ -72,43 +74,95 @@ const ProgramSobjSummary = ({ subject }) => {
     }))
   );
 
+  const rev_tab = !_.isEmpty(rev_values.graph_data);
+
+  const exp_tab = !_.isEmpty(exp_values.graph_data);
+
   return (
-    <TabsStateful
-      tabs={{
-        spending: {
-          label: text_maker("spending_title"),
-          content: (
-            <div>
-              <TM
-                k={"program_top_spending_areas_text"}
-                args={exp_values.text_calculations}
-              />
-              <WrappedNivoPie
-                data={exp_values.graph_data}
-                display_horizontal={true}
-                graph_height="450px"
-              />
-            </div>
-          ),
-        },
-        revenue: {
-          label: text_maker("revenue_title"),
-          content: (
-            <div>
-              <TM
-                k={"program_top_revenue_areas_text"}
-                args={rev_values.text_calculations}
-              />
-              <WrappedNivoPie
-                data={rev_values.graph_data}
-                display_horizontal={true}
-                graph_height="450px"
-              />
-            </div>
-          ),
-        },
-      }}
-    />
+    <Fragment>
+      {exp_tab && rev_tab && (
+        <TabsStateful
+          tabs={{
+            spending: {
+              label: text_maker("spending_title"),
+              content: (
+                <div>
+                  <TM
+                    k={"program_top_spending_areas_text"}
+                    args={exp_values.text_calculations}
+                  />
+                  <WrappedNivoPie
+                    data={exp_values.graph_data}
+                    display_horizontal={true}
+                    graph_height="450px"
+                  />
+                </div>
+              ),
+            },
+            revenue: {
+              label: text_maker("revenue_title"),
+              content: (
+                <div>
+                  <TM
+                    k={"program_top_revenue_areas_text"}
+                    args={rev_values.text_calculations}
+                  />
+                  <WrappedNivoPie
+                    data={rev_values.graph_data}
+                    display_horizontal={true}
+                    graph_height="450px"
+                  />
+                </div>
+              ),
+            },
+          }}
+        />
+      )}
+      {exp_tab && (
+        <TabsStateful
+          tabs={{
+            spending: {
+              label: text_maker("spending_title"),
+              content: (
+                <div>
+                  <TM
+                    k={"program_top_spending_areas_text"}
+                    args={exp_values.text_calculations}
+                  />
+                  <WrappedNivoPie
+                    data={exp_values.graph_data}
+                    display_horizontal={true}
+                    graph_height="450px"
+                  />
+                </div>
+              ),
+            },
+          }}
+        />
+      )}
+      {rev_tab && (
+        <TabsStateful
+          tabs={{
+            revenue: {
+              label: text_maker("revenue_title"),
+              content: (
+                <div>
+                  <TM
+                    k={"program_top_revenue_areas_text"}
+                    args={rev_values.text_calculations}
+                  />
+                  <WrappedNivoPie
+                    data={rev_values.graph_data}
+                    display_horizontal={true}
+                    graph_height="450px"
+                  />
+                </div>
+              ),
+            },
+          }}
+        />
+      )}
+    </Fragment>
   );
 };
 

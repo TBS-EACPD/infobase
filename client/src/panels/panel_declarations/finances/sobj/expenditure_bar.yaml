@@ -32,10 +32,8 @@ program_top_spending_areas_text:
     In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
     "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})** and the smallest share of expenditures were recorded under the
     "**{{so_min_name}}**" standard object **({{fmt_compact1_written so_min_spent}})**. Resulting in a total program expenditure value of **{{fmt_compact1_written total_spent}}**.
+    {{gl_sidebar_link "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures.
     
-    {{{gt "std_obj_quick_def"}}}
-
-    (add a footnote about how expenditure can be negative)
   fr: |
     {{{gt "std_obj_quick_def"}}}
     

@@ -39,6 +39,7 @@ const common_cal = (subject, data) => {
       net: pa_exp_last_year + pa_rev_last_year,
       label: text_maker(`SOBJ${so_num}`),
     }))
+    .filter((row) => row.Expenditure || row.Revenue)
     .orderBy("id", "desc")
     .compact()
     .value();
@@ -125,7 +126,7 @@ const ProgramSobjSummary = ({ subject }) => {
   // This is required to corretly display the labels when too many programs are present
   const divHeight = _.chain([1000 * (graph_data.length / 30) * 2, 100]) // 100 is the minimum graph height
     .max()
-    .thru((maxVal) => [maxVal, 600]) // 1200 is the max graph height
+    .thru((maxVal) => [maxVal, 500]) // 1200 is the max graph height
     .min()
     .value();
 
@@ -142,18 +143,37 @@ const ProgramSobjSummary = ({ subject }) => {
     legendOffsetY: Math.max(-(divHeight / (3.3 * graph_data.length)), -18), // Math.max so that there would be a set value for when the graph has one bar/data point
   }));
 
-  const legend_items = [
-    {
-      id: "Expenditure",
-      label: "Expenditure",
-      color: secondaryColor,
-    },
-    {
-      id: "Revenue",
-      label: "Revenue",
-      color: highlightColor,
-    },
-  ];
+  const rev_data_available = !_.chain(graph_data)
+    .filter((row) => row.Revenue)
+    .isEmpty()
+    .value();
+
+  const exp_data_available = !_.chain(graph_data)
+    .filter((row) => row.Expenditure)
+    .isEmpty()
+    .value();
+
+  const exp_legend_items = exp_data_available
+    ? [
+        {
+          id: "Expenditure",
+          label: "Expenditure",
+          color: secondaryColor,
+        },
+      ]
+    : [];
+
+  const rev_legend_items = rev_data_available
+    ? [
+        {
+          id: "Revenue",
+          label: "Revenue",
+          color: highlightColor,
+        },
+      ]
+    : [];
+
+  const legend_items = rev_legend_items.concat(exp_legend_items);
 
   return (
     <Fragment>
@@ -182,7 +202,7 @@ const ProgramSobjSummary = ({ subject }) => {
               top: 0,
               right: 100,
               bottom: 50,
-              left: 250,
+              left: 220,
             }}
             bttm_axis={{
               tickSize: 5,
