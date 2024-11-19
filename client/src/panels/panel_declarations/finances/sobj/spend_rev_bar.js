@@ -39,7 +39,7 @@ const common_cal = (subject, data) => {
       net: pa_exp_last_year + pa_rev_last_year,
       label: text_maker(`SOBJ${so_num}`),
     }))
-    .sortBy("id")
+    .orderBy("id", "desc")
     .compact()
     .value();
 

@@ -35,7 +35,9 @@ import {
   declare_spending_in_tag_perspective_panel,
   declare_vote_stat_split_panel,
   declare_top_spending_areas_panel,
+  declare_expenditure_bar_panel,
   declare_spend_rev_bar_panel,
+  declare_spend_rev_pie_panel,
 } from "src/panels/panel_declarations/index";
 
 import { ensure_loaded } from "src/core/ensure_loaded";
@@ -62,7 +64,9 @@ export const get_program_panels = (subject) =>
       declare_vote_stat_split_panel(),
       declare_spend_rev_split_panel(),
       declare_top_spending_areas_panel(),
+      declare_expenditure_bar_panel(),
       declare_spend_rev_bar_panel(),
+      declare_spend_rev_pie_panel(),
       declare_spending_in_tag_perspective_panel(),
       declare_planned_actual_comparison_panel(),
     ],

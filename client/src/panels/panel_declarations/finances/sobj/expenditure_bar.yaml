@@ -1,6 +1,6 @@
 top_spending_areas_title:
   transform: [handlebars]
-  en: Gross Spending by Standard Object ({{pa_last_year}})
+  en: Expenditure by Standard Object ({{pa_last_year}})
   fr: Dépenses brutes par article courant ({{pa_last_year}})
 
 std_obj_quick_def:
@@ -29,11 +29,13 @@ tag_top_spending_areas_text:
 program_top_spending_areas_text:
   transform: [handlebars, markdown]
   en: | 
-    {{{gt "std_obj_quick_def"}}}
-    
     In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
-    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the program's total _gross_ expenditures of **{{fmt_compact1_written total_spent}}**.
-  
+    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})** and the smallest share of expenditures were recorded under the
+    "**{{so_min_name}}**" standard object **({{fmt_compact1_written so_min_spent}})**. Resulting in a total program expenditure value of **{{fmt_compact1_written total_spent}}**.
+    
+    {{{gt "std_obj_quick_def"}}}
+
+    (add a footnote about how expenditure can be negative)
   fr: |
     {{{gt "std_obj_quick_def"}}}
     

@@ -8,6 +8,11 @@ const newIBCategoryColors = [
   "#a2d173", // light green
   "#15918b", // dark teal
   "#8c949e", // grey
+  "#3a9b1c", // dark green
+  "#136d96", // dark blue
+  "#61A3EB", // blue
+  "#a34c00", // brown
+  "#f7a09c", // pink
 ];
 
 // for contrast against dark text
