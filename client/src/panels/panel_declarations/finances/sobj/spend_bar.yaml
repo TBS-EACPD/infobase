@@ -17,7 +17,7 @@ program_spending_revenue_areas_text:
     In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
     "**{{top_so_exp_name}}**" standard object **({{fmt_compact1_written top_so_exp}})** and the largest share of 
     {{gl_sidebar_link "expenditure offsets" "SOBJ_EXP_OFFSET"}} were recorded under the "**{{top_so_rev_name}}**" standard object **({{fmt_compact1_written top_so_rev}})**.
-    Summing the net expenditure standard objects results in a total expenditure of **({{fmt_compact1_written net_exp}})** for the program.
+    Summing the net expenditure standard objects results in a total expenditure of **({{fmt_compact1_written net_exp}})** for this program.
 
   fr: |
     En {{pa_last_year}}, la partie la plus importante des dépenses du programme «**{{subject.name}}**» a été enregistrée 

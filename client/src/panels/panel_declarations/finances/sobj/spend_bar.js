@@ -88,9 +88,11 @@ const common_cal = (subject, data) => {
 
   const total_spent = _.sumBy(graph_data, "net");
 
-  const top_so_exp = _.maxBy(graph_data, "net");
+  const top_so_exp = _.maxBy(graph_data, "Expenditure");
 
-  const top_so_rev = _.minBy(graph_data, "net");
+  const top_so_rev = _.minBy(graph_data, "Offset");
+
+  console.log(top_so_rev);
 
   const top_so_pct = top_so_exp.net / total_spent;
 
@@ -98,9 +100,9 @@ const common_cal = (subject, data) => {
     subject,
     total_spent,
     top_so_exp_name: top_so_exp.label,
-    top_so_exp: top_so_exp.net,
+    top_so_exp: top_so_exp.Expenditure,
     top_so_rev_name: top_so_rev.label,
-    top_so_rev: top_so_rev.net,
+    top_so_rev: top_so_rev.Offset,
     top_so_pct,
     net_exp: _.sumBy(graph_data, "net"),
   };
