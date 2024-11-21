@@ -6,8 +6,6 @@ export { declare_spend_rev_split_panel } from "./spend_rev_split";
 
 export { declare_top_spending_areas_panel } from "./top_spending_areas";
 
-export { declare_expenditure_bar_panel } from "./expenditure_bar";
-
-export { declare_spend_rev_bar_panel } from "./spend_rev_bar";
+export { declare_spend_bar_panel } from "./spend_bar";
 
 export { declare_spend_rev_pie_panel } from "./spend_rev_pie";

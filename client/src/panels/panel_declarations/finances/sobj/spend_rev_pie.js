@@ -84,7 +84,7 @@ const ProgramSobjSummary = ({ subject }) => {
         <TabsStateful
           tabs={{
             spending: {
-              label: text_maker("spending_title"),
+              label: text_maker("expenditure"),
               content: (
                 <div>
                   <TM
@@ -100,7 +100,7 @@ const ProgramSobjSummary = ({ subject }) => {
               ),
             },
             revenue: {
-              label: text_maker("revenue_title"),
+              label: text_maker("offset"),
               content: (
                 <div>
                   <TM
@@ -118,11 +118,11 @@ const ProgramSobjSummary = ({ subject }) => {
           }}
         />
       )}
-      {exp_tab && (
+      {!rev_tab && exp_tab && (
         <TabsStateful
           tabs={{
             spending: {
-              label: text_maker("spending_title"),
+              label: text_maker("expenditure"),
               content: (
                 <div>
                   <TM
@@ -140,11 +140,11 @@ const ProgramSobjSummary = ({ subject }) => {
           }}
         />
       )}
-      {rev_tab && (
+      {!exp_tab && rev_tab && (
         <TabsStateful
           tabs={{
             revenue: {
-              label: text_maker("revenue_title"),
+              label: text_maker("offset"),
               content: (
                 <div>
                   <TM

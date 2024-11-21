@@ -454,10 +454,7 @@ SA,Government of Canada Spending areas,Secteurs de dépenses du gouvernement du 
 SEAS_PEOPLE,Seasonal Employee,Employé saisonnier,Seasonal employees are persons employed to work a portion of a year (season) each year.,Employé saisonnier correspond à une personne embauchée pour travailler une période précise de l'année (saison) chaque année.
 SE_PEOPLE,Separate Agencies,Organismes distincts,"Separate Agencies are organizations for which the Treasury Board is not the employer, but for which the Public Service Commission has exclusive authority to make appointments. They represent a portion of the federal public administration named in Schedule V of the Financial Administration Act (FAA).","Les organismes distincts sont des organisations où l’employeur n’est pas le Conseil du Trésor, mais pour lesquelles la Commission de la fonction publique a autorité exclusive sur les nominations. Ces organisations représentent une partie de l'administration publique centrale et sont énumérées à l'Annexe V de la Loi sur la gestion des finances publiques."
 SO,Strategic Outcome,Résultat stratégique,A strategic outcome is a long-term and enduring benefit to Canadians that stems from a department's mandate and vision. It represents the difference a department intends to make for Canadians and should be measurable and within the department's sphere of influence.,"Un résultat stratégique est un avantage durable à long terme pour les Canadiens qui découle du mandat et de la vision d'un ministère. Il représente un résultat qu’un ministère entend obtenir au profit de la population canadienne, qui devrait être mesurable et devrait s’inscrire dans la sphère d’influence du ministère en question."
-SOBJ,Standard Objects,Articles courants,"Standard objects are the highest level of classification for categorizing expenditures and revenues. They are used for Parliamentary and organizational management purposes. All departments, agencies and Crown corporations must register their expenditures for purchases to one of twelve expenditure categories. 
-
-
-The expenditure standard objects are as follows:
+SOBJ,Expenditure Standard Objects,Articles courants,"Expenditure standard objects are the highest level of classification for categorizing expenditures. They are used for Parliamentary and organizational management purposes. All departments, agencies and Crown corporations must register their expenditures for purchases to one of twelve expenditure categories. They are as follows:
 
 1. Personnel
 2. Transportation and communications
@@ -470,14 +467,7 @@ The expenditure standard objects are as follows:
 9. Acquisition of machinery and equipment
 10. Transfer payments
 11. Public debt charge
-12. Other subsidies and payments
-
-
-The revenue standard objects are as follows:
-
-20. Revenues
-21. External Revenues
-22. Internal Revenues","Par « articles courants », on entend le niveau de classification le plus élevé que le Parlement et le pouvoir exécutif utilisent pour les dépenses; les articles courants figurent dans le budget principal des dépenses, les budgets supplémentaires et les Comptes publics. Voici en quoi consistent les articles courants : 
+12. Other subsidies and payments","Par « articles courants », on entend le niveau de classification le plus élevé que le Parlement et le pouvoir exécutif utilisent pour les dépenses; les articles courants figurent dans le budget principal des dépenses, les budgets supplémentaires et les Comptes publics. Voici en quoi consistent les articles courants : 
 1. Personnel 
 2. Transports et communications 
 3. Information 
@@ -490,6 +480,21 @@ The revenue standard objects are as follows:
 10. Paiements de transfert 
 11. Service de la dette publique 
 12. Autres subventions et paiements"
+SOBJ_EXP_OFFSET,Expenditure Standard Object Offsets, Expenditure Standard Object Offsets,"Expenditure standard object offsets are the sum of negative transcations reported under each expenditure standard object due to a variety of reasons. 
+
+For example:
+* Recoveries
+* Refunds
+* Rebates
+* Adjustments",""
+SOBJ_REV_OFFSET,Revenue Standard Object Offsets, Revenue Standard Object Offsets,"Revenue standard object offsets are the sum of positive transactions reported under each revenue object due to a variety of reasons.
+
+For example:
+* Refunds
+* Reimbursements
+* Allowances
+* Reversals
+* Adjustments",""  
 SOBJ1,Personnel,Personnel,"Standard Object 1 encompasses all expenditures related to personnel, including:
 
 * Salaries and wages, overtime, severance pay, retroactive pay and other special pay of civilian continuing (full–time) or term(part–time, seasonal and casual) employees except those of agency and proprietary Crown corporations, as well as members of the military and the Royal Canadian Mounted Police. 

@@ -25,55 +25,61 @@ import {
   textColor,
 } from "src/style_constants/index";
 
-import text from "./spend_rev_bar.yaml";
+import text from "./spend_bar.yaml";
 
 const { text_maker, TM } = create_text_maker_component(text);
 
 const common_cal = (subject, data) => {
   const graph_data = _.chain(data)
     .filter((row) => row.pa_exp_last_year || row.pa_rev_last_year)
+    .filter((row) => row.so_num < 19)
     .map(({ so_num, pa_exp_last_year, pa_rev_last_year }) => ({
       id: so_num,
       Expenditure: pa_exp_last_year,
-      Revenue: pa_rev_last_year,
+      Offset: pa_rev_last_year,
       net: pa_exp_last_year + pa_rev_last_year,
       label: text_maker(`SOBJ${so_num}`),
     }))
-    .filter((row) => row.Expenditure || row.Revenue)
+    .filter((row) => row.Expenditure || row.Offset)
     .orderBy("id", "desc")
     .compact()
     .value();
 
-  const custom_table_data = _.map(
-    graph_data,
-    ({ label, Expenditure, Revenue, net }) => ({
+  const custom_table_data = _.chain(graph_data)
+    .map(({ id, label, Expenditure, Offset, net }) => ({
+      id,
       label,
       Expenditure,
-      Revenue,
+      Offset,
       net,
-    })
-  );
+    }))
+    .sortBy("id")
+    .value();
 
   const column_configs = {
-    label: {
+    id: {
       index: 0,
+      header: "ID",
+    },
+    label: {
+      index: 1,
       header: "Standard Objects",
       is_searchable: true,
     },
     Expenditure: {
-      index: 1,
-      header: "Expenditure",
+      index: 2,
+      header: text_maker("expenditure"),
       is_summable: true,
       formatter: "dollar",
     },
-    Revenue: {
-      index: 2,
-      header: "Revenue",
+    Offset: {
+      index: 3,
+      header: text_maker("offset"),
       is_summable: true,
       formatter: "dollar",
     },
     net: {
-      index: 2,
+      index: 4,
       header: "Net",
       is_summable: true,
       formatter: "dollar",
@@ -96,6 +102,7 @@ const common_cal = (subject, data) => {
     top_so_rev_name: top_so_rev.label,
     top_so_rev: top_so_rev.net,
     top_so_pct,
+    net_exp: _.sumBy(graph_data, "net"),
   };
 
   return {
@@ -144,7 +151,7 @@ const ProgramSobjSummary = ({ subject }) => {
   }));
 
   const rev_data_available = !_.chain(graph_data)
-    .filter((row) => row.Revenue)
+    .filter((row) => row.Offset)
     .isEmpty()
     .value();
 
@@ -157,7 +164,7 @@ const ProgramSobjSummary = ({ subject }) => {
     ? [
         {
           id: "Expenditure",
-          label: "Expenditure",
+          label: text_maker("expenditure"),
           color: secondaryColor,
         },
       ]
@@ -166,8 +173,8 @@ const ProgramSobjSummary = ({ subject }) => {
   const rev_legend_items = rev_data_available
     ? [
         {
-          id: "Revenue",
-          label: "Revenue",
+          id: "Offset",
+          label: text_maker("offset"),
           color: highlightColor,
         },
       ]
@@ -194,7 +201,7 @@ const ProgramSobjSummary = ({ subject }) => {
         <GraphOverlay>
           <WrappedNivoHBar
             data={graph_data}
-            keys={["Expenditure", "Revenue"]}
+            keys={["Expenditure", "Offset"]}
             indexBy="label"
             colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
             graph_height={divHeight}
@@ -225,9 +232,9 @@ const ProgramSobjSummary = ({ subject }) => {
   );
 };
 
-export const declare_spend_rev_bar_panel = () =>
+export const declare_spend_bar_panel = () =>
   declare_panel({
-    panel_key: "spend_rev_bar",
+    panel_key: "spend_bar",
     subject_types: ["program"],
     panel_config_func: () => ({
       legacy_table_dependencies: ["programSobjs"],
