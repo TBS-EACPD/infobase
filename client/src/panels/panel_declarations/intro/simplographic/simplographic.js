@@ -6,7 +6,12 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component } from "src/components/index";
 
-import { ResultCounts, current_drr_key } from "src/models/results";
+import {
+  ResultCounts,
+  ResultDrCounts,
+  ResultPrCounts,
+  current_drr_key,
+} from "src/models/results";
 import { Gov, Dept } from "src/models/subjects";
 
 import { is_mobile } from "src/core/feature_detection";
@@ -67,6 +72,8 @@ export const declare_simplographic_panel = () =>
         const empl_count_ncr_ratio = ncr_employees / total_employees;
 
         const gov_counts = ResultCounts.get_gov_counts();
+        const dr_counts = ResultDrCounts.get_gov_counts();
+        const pr_counts = ResultPrCounts.get_gov_counts();
 
         const col = "{{pa_last_year}}exp";
         const largest_items = _.chain(orgVoteStatPa.data)
@@ -92,7 +99,17 @@ export const declare_simplographic_panel = () =>
         const num_indicators = gov_counts[`${current_drr_key}_total`];
         const num_met = gov_counts[`${current_drr_key}_indicators_met`];
 
+        const dr_results = dr_counts[`${current_drr_key}_results`];
+        const dr_indicators = dr_counts[`${current_drr_key}_total`];
+        const dr_met = dr_counts[`${current_drr_key}_indicators_met`];
+
+        const pr_results = pr_counts[`${current_drr_key}_results`];
+        const pr_indicators = pr_counts[`${current_drr_key}_total`];
+        const pr_met = pr_counts[`${current_drr_key}_indicators_met`];
+
         const pct_met = num_met / num_indicators;
+        const dr_pct_met = dr_met / dr_indicators;
+        const pr_pct_met = pr_met / pr_indicators;
 
         return {
           largest_items,
@@ -106,6 +123,16 @@ export const declare_simplographic_panel = () =>
           num_indicators,
           num_met,
           pct_met,
+
+          dr_results,
+          dr_indicators,
+          dr_met,
+          dr_pct_met,
+
+          pr_results,
+          pr_indicators,
+          pr_met,
+          pr_pct_met,
 
           org_vote_stat_pa_link,
           org_employee_type_link,
