@@ -29,11 +29,12 @@ tag_top_spending_areas_text:
 program_top_spending_areas_text:
   transform: [handlebars, markdown]
   en: | 
-    {{{gt "std_obj_quick_def"}}}
-    
     In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
-    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_spent}})**, representing **{{fmt_percentage1 top_so_pct}}** of the program's total _gross_ expenditures of **{{fmt_compact1_written total_spent}}**.
-  
+    "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_value}})** and the smallest share of expenditures were recorded under the
+    "**{{low_so_name}}**" standard object **({{fmt_compact1_written low_so_value}})**. The total _gross_ expenditure for this program was **{{fmt_compact1_written total_spent}}**.
+
+    {{{gt "std_obj_quick_def"}}}
+
   fr: |
     {{{gt "std_obj_quick_def"}}}
     

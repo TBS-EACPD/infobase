@@ -2,14 +2,19 @@ import { sum } from "d3-array";
 import _ from "lodash";
 import React from "react";
 
-import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
+import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
 
-import { create_text_maker_component } from "src/components/index";
+import {
+  create_text_maker_component,
+  DisplayTable,
+} from "src/components/index";
 
-import { is_a11y_mode } from "src/core/injected_build_constants";
+import { formats } from "src/core/format";
 
-import { WrappedNivoPie } from "src/charts/wrapped_nivo/index";
+import { WrappedNivoHBar } from "src/charts/wrapped_nivo/index";
+
+import { highlightColor, secondaryColor, textColor } from "src/style_constants";
 
 import text from "./top_spending_areas.yaml";
 
@@ -39,52 +44,91 @@ const collapse_by_so = function (programs, table, filter) {
     .value();
 };
 
-const common_cal = (programs, programSobjs) => {
-  const cut_off_index = 3;
-  const rows_by_so = collapse_by_so(programs, programSobjs, is_non_revenue);
-
-  if (
-    rows_by_so.length <= 1 ||
-    _.every(rows_by_so, ({ value }) => value === 0)
-  ) {
-    return false;
-  }
-
-  const top_3_sos = _.take(rows_by_so, cut_off_index);
-  const remainder =
-    top_3_sos.length > cut_off_index - 1
-      ? {
-          label: text_maker("other_s"),
-          value: sum(
-            _.takeRight(rows_by_so, rows_by_so.length - cut_off_index),
-            _.property("value")
-          ),
-        }
-      : [];
-
-  return top_3_sos.concat(remainder);
-};
-
 const render_w_options =
   ({ text_key }) =>
   ({ title, calculations, footnotes, sources, datasets }) => {
-    const { top_3_sos_and_remainder, text_calculations } = calculations;
+    const { text_calculations, rows_by_so } = calculations;
 
-    const graph_data = top_3_sos_and_remainder.map((d) => ({
-      label: d["label"],
-      id: d["label"],
-      value: d["value"],
+    const graph_data = _.chain(rows_by_so)
+      .map((d) => ({
+        label: d["label"],
+        id: d["so_num"],
+        value: d["value"],
+      }))
+      .orderBy("id", "desc")
+      .value();
+
+    // Increase height of the graph region for y-axis labels to have sufficient room
+    // This is required to corretly display the labels when too many programs are present
+    const divHeight = _.chain([1000 * (graph_data.length / 30) * 2, 100]) // 100 is the minimum graph height
+      .max()
+      .thru((maxVal) => [maxVal, 500]) // 500 is the max graph height
+      .min()
+      .value();
+
+    const markers = _.map(graph_data, ({ label, value }) => ({
+      axis: "y",
+      value: label,
+      lineStyle: { strokeWidth: 0 },
+      textStyle: {
+        fill: value < 0 ? highlightColor : textColor,
+        fontSize: "11px",
+      },
+      legend: formats.compact1_raw(value),
+      legendOffsetX: -60,
+      legendOffsetY: Math.max(-(divHeight / (3.3 * graph_data.length)), -18), // Math.max so that there would be a set value for when the graph has one bar/data point
     }));
 
+    const column_configs = {
+      so_num: {
+        index: 0,
+        header: "ID",
+      },
+      label: {
+        index: 1,
+        header: "Standard Objects",
+        is_searchable: true,
+      },
+      value: {
+        index: 2,
+        header: "Expenditure",
+        is_summable: true,
+        formatter: "dollar",
+      },
+    };
+
+    const custom_table_data = _.sortBy(rows_by_so, "so_num");
+
     return (
-      <StdPanel {...{ title, footnotes, sources, datasets }}>
-        <Col isText size={5}>
-          <TM k={text_key} args={text_calculations} />
-        </Col>
-        <Col isGraph={!is_a11y_mode} size={7}>
-          <WrappedNivoPie data={graph_data} graph_height="450px" />
-        </Col>
-      </StdPanel>
+      <InfographicPanel {...{ title, footnotes, sources, datasets }}>
+        <TM k={text_key} args={text_calculations} />
+        <WrappedNivoHBar
+          data={graph_data}
+          keys={["value"]}
+          indexBy="label"
+          colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
+          margin={{
+            top: 0,
+            right: 100,
+            bottom: 50,
+            left: 250,
+          }}
+          bttm_axis={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickValues: 6,
+            tickRotation: -20,
+            format: (d) => formats.compact1_raw(d),
+          }}
+          markers={markers}
+          custom_table={
+            <DisplayTable
+              column_configs={column_configs}
+              data={custom_table_data}
+            />
+          }
+        />
+      </InfographicPanel>
     );
   };
 
@@ -101,31 +145,34 @@ export const declare_top_spending_areas_panel = () =>
           return false;
         }
 
-        const top_3_sos_and_remainder = common_cal(
+        const rows_by_so = collapse_by_so(
           [subject],
-          tables.programSobjs
+          tables.programSobjs,
+          is_non_revenue
         );
-        if (!top_3_sos_and_remainder) {
+
+        if (_.isEmpty(rows_by_so)) {
           return false;
         }
 
-        const total_spent = _.sum(
-          _.map(top_3_sos_and_remainder, (so) => so.value)
-        );
-        const top_so_pct = top_3_sos_and_remainder[0].value / total_spent;
+        const total_spent = _.sum(_.map(rows_by_so, (so) => so.value));
+
+        const top_so = _.maxBy(rows_by_so, "value");
+
+        const low_so = _.minBy(rows_by_so, "value");
 
         const text_calculations = {
           subject,
-          top_3_sos_and_remainder,
-          top_so_name: top_3_sos_and_remainder[0].label,
-          top_so_spent: top_3_sos_and_remainder[0].value,
+          top_so_name: top_so.label,
+          top_so_value: top_so.value,
+          low_so_name: low_so.label,
+          low_so_value: low_so.value,
           total_spent,
-          top_so_pct,
         };
 
         return {
           text_calculations,
-          top_3_sos_and_remainder,
+          rows_by_so,
         };
       },
       render: render_w_options({ text_key: "program_top_spending_areas_text" }),
