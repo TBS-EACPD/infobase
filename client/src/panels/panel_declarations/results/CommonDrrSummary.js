@@ -406,19 +406,6 @@ export const CommonDrrSummary = ({
       {results_dept_count && (
         <TabsStateful
           tabs={{
-            org: {
-              label: text_maker("overview_indicators"),
-              content: (
-                <IndicatorSummary
-                  counts={counts.total_indicator_status}
-                  drr_key={drr_key}
-                  summary_text_args={summary_text_args}
-                  results_dept_count={results_dept_count}
-                  rows_of_counts_by_dept={rows_of_counts_by_dept.total}
-                  column_configs={column_configs}
-                />
-              ),
-            },
             dept: {
               label: text_maker("dept_indicators"),
               content: (
@@ -451,16 +438,6 @@ export const CommonDrrSummary = ({
       {!results_dept_count && results_org_level && (
         <TabsStateful
           tabs={{
-            org: {
-              label: text_maker("overview_indicators"),
-              content: (
-                <IndicatorSummary
-                  counts={counts.total_indicator_status}
-                  drr_key={drr_key}
-                  summary_text_args={summary_text_args}
-                />
-              ),
-            },
             dept: {
               label: text_maker("dept_indicators"),
               content: (
