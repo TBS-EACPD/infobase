@@ -87,7 +87,6 @@ const render_w_options =
       label: {
         index: 1,
         header: "Standard Objects",
-        is_searchable: true,
       },
       value: {
         index: 2,
@@ -145,10 +144,9 @@ export const declare_top_spending_areas_panel = () =>
           return false;
         }
 
-        const rows_by_so = collapse_by_so(
-          [subject],
-          tables.programSobjs,
-          is_non_revenue
+        const rows_by_so = _.filter(
+          collapse_by_so([subject], tables.programSobjs, is_non_revenue),
+          (row) => row.value
         );
 
         if (_.isEmpty(rows_by_so)) {
