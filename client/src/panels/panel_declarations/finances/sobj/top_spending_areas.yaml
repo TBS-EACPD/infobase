@@ -1,7 +1,7 @@
 top_spending_areas_title:
   transform: [handlebars]
-  en: Gross Spending by Standard Object ({{pa_last_year}})
-  fr: Dépenses brutes par article courant ({{pa_last_year}})
+  en: Gross Expenditure by Standard Object ({{pa_last_year}})
+  fr: (update) Dépenses brutes par article courant ({{pa_last_year}})
 
 std_obj_quick_def:
   transform: [handlebars, markdown]
@@ -29,14 +29,12 @@ tag_top_spending_areas_text:
 program_top_spending_areas_text:
   transform: [handlebars, markdown]
   en: | 
-    In {{pa_last_year}}, the largest share of expenditures for "**{{subject.name}}**" were recorded under the 
+    In {{pa_last_year}}, the total _gross_ expenditure for "**{{subject.name}}**" was **{{fmt_compact1_written total_spent}}**. The largest share of expenditures were recorded under the 
     "**{{top_so_name}}**" standard object **({{fmt_compact1_written top_so_value}})** and the smallest share of expenditures were recorded under the
-    "**{{low_so_name}}**" standard object **({{fmt_compact1_written low_so_value}})**. The total _gross_ expenditure for this program was **{{fmt_compact1_written total_spent}}**.
-
-    {{{gt "std_obj_quick_def"}}}
+    "**{{low_so_name}}**" standard object **({{fmt_compact1_written low_so_value}})**. {{gl_sidebar_link "Standard Objects" "SOBJ"}} are the highest level of classification for categorizing expenditures. 
 
   fr: |
-    {{{gt "std_obj_quick_def"}}}
+    (update) {{{gt "std_obj_quick_def"}}}
     
     En {{pa_last_year}}, la partie la plus importante des dépenses du programme «**{{subject.name}}**» a été enregistrée 
     sous l'article courant «**{{top_so_name}}**» **({{fmt_compact1_written top_so_spent}})**, soit **{{fmt_percentage1 top_so_pct}}** des dépenses _brutes_ du programme totalisant **{{fmt_compact1_written total_spent}}**.
