@@ -53,7 +53,7 @@ const render_w_options =
       .map((d) => ({
         label: d["label"],
         id: d["so_num"],
-        value: d["value"],
+        Expenditure: d["value"],
       }))
       .orderBy("id", "desc")
       .value();
@@ -79,6 +79,15 @@ const render_w_options =
       legendOffsetY: Math.max(-(divHeight / (3.3 * graph_data.length)), -18), // Math.max so that there would be a set value for when the graph has one bar/data point
     }));
 
+    const custom_table_data = _.chain(rows_by_so)
+      .map((d) => ({
+        label: d["label"],
+        so_num: d["so_num"],
+        value: d["value"],
+      }))
+      .sortBy("so_num")
+      .value();
+
     const column_configs = {
       so_num: {
         index: 0,
@@ -96,14 +105,12 @@ const render_w_options =
       },
     };
 
-    const custom_table_data = _.sortBy(rows_by_so, "so_num");
-
     return (
       <InfographicPanel {...{ title, footnotes, sources, datasets }}>
         <TM k={text_key} args={text_calculations} />
         <WrappedNivoHBar
           data={graph_data}
-          keys={["value"]}
+          keys={["Expenditure"]}
           indexBy="label"
           colors={(d) => (d.data[d.id] < 0 ? highlightColor : secondaryColor)}
           margin={{
