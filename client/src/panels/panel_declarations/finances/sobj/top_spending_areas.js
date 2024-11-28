@@ -95,11 +95,11 @@ const render_w_options =
       },
       label: {
         index: 1,
-        header: "Standard Objects",
+        header: text_maker("sos"),
       },
       value: {
         index: 2,
-        header: "Expenditure",
+        header: text_maker("expenditures"),
         is_summable: true,
         formatter: "dollar",
       },
