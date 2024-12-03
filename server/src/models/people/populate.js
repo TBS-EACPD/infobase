@@ -4,166 +4,275 @@ import { get_standard_csv_file_rows } from "../load_utils.js";
 
 import { headcount_types } from "./utils.js";
 
-const headcount_non_year_headers = ["dept_code", "dimension", "avg_share"];
-const validate_headcount_headers = (csv_name, csv) =>
-  _.chain(csv)
-    .first()
-    .keys()
-    .thru((headers) => {
-      const has_expected_non_year_headers = _.chain(headers)
-        .intersection(headcount_non_year_headers)
-        .size()
-        .eq(headcount_non_year_headers.length)
-        .value();
+// Memoize CSV parsing
+const get_org_id_by_dept_name = _.memoize(() => {
+  return _.chain(get_standard_csv_file_rows("goc-org-variants.csv"))
+    .map(({ org_name_variant, org_id }) => [org_name_variant, org_id])
+    .fromPairs()
+    .value();
+});
 
-      if (!has_expected_non_year_headers) {
-        throw new Error(
-          `${csv_name} is being processed as a standard headcount dataset but is missing one of the expected non-year headers (expect ${_.join(
-            headcount_non_year_headers,
-            ", "
-          )})`
-        );
-      }
+// Mapping headcount types to respective CSV columns
+const headcountTypeMapping = {
+  type: "tenure",
+  gender: "sex",
+  fol: "first_official_language",
+  ex_lvl: "executive_level",
+  age_group: "age_band",
+  region: "province_or_territory_of_work",
+};
 
-      const other_non_year_columns = _.chain(headers)
-        .keys()
-        .without(headcount_non_year_headers)
-        .filter(
-          (expected_year) =>
-            _.isNaN(+expected_year) ||
-            (+expected_year < 1900 && +expected_year > 2100)
+// Transform headers: lowercase and replace spaces with underscores
+const transformHeaders = (csv) =>
+  csv.map((record) =>
+    _.mapKeys(record, (value, key) => key.toLowerCase().replace(/ /g, "_"))
+  );
+
+// Retrieve value based on dept_name, year, dimension, headcount_type
+const getValue = (filteredCsv, dept_name, year, dimension, headcount_type) => {
+  const record = filteredCsv.find(
+    (item) =>
+      item.department_or_agency === dept_name &&
+      item.year == year &&
+      item[headcountTypeMapping[headcount_type]] === dimension
+  );
+  return record && record.number_of_employees !== "*"
+    ? record.number_of_employees
+    : null;
+};
+
+// Cache org IDs for departments
+const get_org_id_from_dept_name = (csv_name, dept_name) => {
+  const org_id_by_dept_name = get_org_id_by_dept_name();
+  const orgId = org_id_by_dept_name[dept_name];
+  if (!orgId) {
+    console.warn(`No org_id found for department name: ${dept_name}`);
+  }
+  return orgId;
+};
+
+// Calculate average share for all departments
+const calculateAverageShare = (data, headcount_type, orgIdCache) => {
+  if (headcount_type === "ave_age") return null;
+
+  const dataWithOrgIds = data
+    .map((record) => ({
+      ...record,
+      orgId: orgIdCache[record.department_or_agency],
+    }))
+    .filter((record) => record.orgId);
+
+  return _.chain(dataWithOrgIds)
+    .groupBy("orgId")
+    .mapValues((orgData) =>
+      _.chain(orgData)
+        .groupBy(headcountTypeMapping[headcount_type])
+        .mapValues(
+          (records) =>
+            _.sumBy(records, (record) =>
+              parseInt(record.number_of_employees, 10)
+            ) / records.length
         )
-        .value();
-      const all_remaining_columns_are_years = _.isEmpty(other_non_year_columns);
+        .value()
+    )
+    .value();
+};
 
-      if (!all_remaining_columns_are_years) {
-        throw new Error(
-          `${csv_name} is being processed as a standard headcount dataset but has unexpected headers ${_.join(
-            other_non_year_columns,
-            ", "
-          )}`
-        );
+// Main dataset processing for headcount types
+const process_standard_headcount_dataset = (headcount_type) => {
+  const csv_name = `test_org_employee_${headcount_type}.csv`;
+  const csv = get_standard_csv_file_rows(csv_name);
+  const orgIdCache = {};
+  const filteredCsv = transformHeaders(csv).filter(
+    (record) => record.department_or_agency !== "Office of the Prime Minister"
+  );
+
+  if (_.isEmpty(filteredCsv)) {
+    console.warn(`No data found for headcount type: ${headcount_type}`);
+    return [];
+  }
+
+  filteredCsv.forEach((record) => {
+    if (record.year >= 2018) {
+      const deptName = record.department_or_agency;
+      if (!orgIdCache[deptName]) {
+        orgIdCache[deptName] =
+          deptName === "Federal public service"
+            ? "gov"
+            : get_org_id_from_dept_name(csv_name, deptName);
       }
+    }
+  });
 
-      return has_expected_non_year_headers && all_remaining_columns_are_years;
+  const averageShares = calculateAverageShare(
+    filteredCsv,
+    headcount_type,
+    orgIdCache
+  );
+
+  const reported_years = _.chain(filteredCsv)
+    .map("year")
+    .uniq()
+    .filter((year) => year >= 2018)
+    .value();
+
+  const createDeptRecord = (rows, orgIdCache) => {
+    const deptName = rows[0]?.department_or_agency;
+    return {
+      org_id: orgIdCache[deptName],
+      dimension: "Total",
+      yearly_data: _.chain(rows)
+        .map((record) => ({
+          year: record.year,
+          value: record.number_of_employees,
+        }))
+        .value(),
+      avg_share: averageShares[orgIdCache[deptName]]?.["Total"] || 0,
+    };
+  };
+
+  if (headcount_type === "avg_age") {
+    return _.chain(filteredCsv)
+      .filter(({ year }) => year >= 2018)
+      .groupBy("department_or_agency")
+      .map((rows) => ({
+        org_id: orgIdCache[rows[0]?.department_or_agency],
+        average_age: rows
+          .map((record) => ({
+            year: parseInt(record.year, 10),
+            value:
+              record.average_age === "*"
+                ? null
+                : parseFloat(record.average_age),
+          }))
+          .filter(({ value }) => _.isFinite(value) || value === null),
+      }))
+      .filter(Boolean)
+      .value();
+  }
+
+  if (headcount_type === "dept") {
+    return _.chain(filteredCsv)
+      .filter(({ year }) => year >= 2018)
+      .groupBy("department_or_agency")
+      .map((rows) =>
+        createDeptRecord(rows, headcount_type, orgIdCache, reported_years)
+      )
+      .value();
+  }
+
+  return _.chain(filteredCsv)
+    .filter(({ year }) => year >= 2018)
+    .groupBy(
+      (row) =>
+        `${row.department_or_agency}__${
+          row[headcountTypeMapping[headcount_type]]
+        }`
+    )
+    .map((rows, key) => {
+      const [deptName, dimension] = key.split("__");
+      const dimensionToUse = headcount_type === "dept" ? "Total" : dimension;
+
+      return {
+        org_id: orgIdCache[deptName],
+        dimension: dimensionToUse,
+        yearly_data: reported_years.map((year) => ({
+          year,
+          value: getValue(
+            filteredCsv,
+            deptName,
+            year,
+            dimensionToUse,
+            headcount_type
+          ),
+        })),
+        avg_share: averageShares[orgIdCache[deptName]]?.[dimensionToUse] || 0,
+      };
     })
     .value();
-
-// awkward little gotcha with the server code, the populate modules aren't written to run in the deployed cloud function environment (where, for instance,
-// the data that get_standard_csv_file_rows doesn't exist)... but the modules are still loaded and parsed because populate and run time overlap in src/models/index.js
-// SO top level code in a populate script can break the google cloud run time (... e.g. with a call to get_standard_csv_file_rows)
-// Luckily that will be caught and prevent the function from deploying, but it might be a pain to debug (you have to read multiple logs on GCloud to piece the error
-// together, for some reason). Spliting up src/models/index.js is a TODO
-const get_org_id_by_dept_code = _.memoize(() =>
-  _.chain(get_standard_csv_file_rows("igoc.csv"))
-    .map(({ dept_code, org_id }) => [dept_code, org_id])
-    .fromPairs()
-    .value()
-);
-const get_org_id_from_dept_code = (csv_name, dept_code) => {
-  const org_id_by_dept_code = get_org_id_by_dept_code();
-
-  if (!_.has(org_id_by_dept_code, dept_code)) {
-    throw new Error(
-      `${csv_name} contains a dept_code, "${dept_code}", which could not be mapped to an org_id via the igoc`
-    );
-  }
-  return org_id_by_dept_code[dept_code];
 };
 
-const process_standard_headcount_dataset = (headcount_type) => {
-  const csv_name = `org_employee_${headcount_type}.csv`;
-
-  const csv = get_standard_csv_file_rows(csv_name);
-
-  validate_headcount_headers(csv_name, csv);
-
-  return _.chain(csv)
-    .reject({ dept_code: "ZGOC" })
-    .map(({ dept_code, dimension, avg_share, ...values_by_year }) => ({
-      org_id: get_org_id_from_dept_code(csv_name, dept_code),
-      dimension,
-      yearly_data: _.map(values_by_year, (value, year) => ({
-        year,
-        value: +value,
-      })),
-      avg_share: +avg_share,
-    }))
-    .value();
-};
-
+// Main function to process all headcount datasets
 export default async function ({ models }) {
   const { OrgPeopleData, GovPeopleSummary } = models;
 
+  // Process headcount datasets for all types
   const headcount_datasets_by_type = _.chain(headcount_types)
-    .map((headcount_type) => [
-      headcount_type,
-      process_standard_headcount_dataset(headcount_type),
-    ])
+    .map((headcount_type) => {
+      const dataset = process_standard_headcount_dataset(headcount_type);
+      return dataset
+        ? [
+            headcount_type === "avg_age" ? "average_age" : headcount_type,
+            dataset,
+          ]
+        : null;
+    })
+    .filter(Boolean)
     .fromPairs()
     .value();
 
-  const { true: gov_average_age_rows, false: org_average_age_rows } = _.chain(
-    get_standard_csv_file_rows("org_employee_avg_age.csv")
-  )
-    .flatMap(({ dept_code, dimension, ...values_by_year }) =>
-      _.map(values_by_year, (value, year) => ({
-        org_id:
-          dept_code === "ZGOC"
-            ? "ZGOC"
-            : get_org_id_from_dept_code("org_employee_avg_age.csv", dept_code),
-        year,
-        value: +value,
-      }))
-    )
-    .groupBy(({ org_id }) => org_id === "ZGOC")
-    .value();
-
-  const org_people_data = _.chain({
-    ...headcount_datasets_by_type,
-    org_average_age_rows,
-  })
+  const org_people_data = _.chain(headcount_datasets_by_type)
     .flatMap((dataset) => _.map(dataset, "org_id"))
     .uniq()
     .map((org_id) => ({
       org_id,
-      average_age: _.filter(org_average_age_rows, { org_id }),
       ..._.mapValues(headcount_datasets_by_type, (dataset) =>
         _.filter(dataset, { org_id })
       ),
     }))
     .value();
 
-  const gov_people_summary = {
-    id: "gov",
-    average_age: gov_average_age_rows,
-    ..._.mapValues(headcount_datasets_by_type, (dataset) => {
-      const dataset_years = _.chain(dataset)
-        .flatMap(({ yearly_data }) => _.map(yearly_data, "year"))
-        .uniq()
-        .value();
+  const getHeadcountData = (headcount_type, isGovFiltered = false) => {
+    const dataset = process_standard_headcount_dataset(headcount_type);
+    return _.chain(dataset)
+      .filter(({ org_id }) => (isGovFiltered ? org_id === "gov" : true))
+      .groupBy("dimension")
+      .mapValues((dimension_rows) => {
+        const yearly_data = _.chain(dimension_rows)
+          .flatMap("yearly_data")
+          .groupBy("year")
+          .map((yearRows, year) => ({
+            year: parseInt(year, 10),
+            value: _.sumBy(yearRows, (row) => parseFloat(row.value) || 0),
+          }))
+          .value();
 
-      return _.chain(dataset)
-        .groupBy("dimension")
-        .map((dimension_rows, dimension) => ({
-          dimension,
-          yearly_data: _.reduce(
-            dimension_rows,
-            (summed_dimension_row, { yearly_data }) =>
-              _.map(summed_dimension_row, ({ year, value }) => ({
-                year,
-                value: value + (_.find(yearly_data, { year }).value || 0),
-              })),
-            _.map(dataset_years, (year) => ({ year, value: 0 }))
-          ),
-        }))
-        .value();
-    }),
+        return { dimension: dimension_rows[0]?.dimension, yearly_data };
+      })
+      .filter((val) => val.dimension && val.yearly_data.length > 0)
+      .value();
   };
 
-  // TODO could add some checks such as asserting that the headcount tables have consistent totals by year and dept
+  const gov_people_summary = {
+    id: "gov",
+    gender: getHeadcountData("gender", true),
+    fol: getHeadcountData("fol", true),
+    age_group: getHeadcountData("age_group", true),
+  };
 
-  return await Promise.all([
+  headcount_types.forEach((headcount_type) => {
+    if (!["gender", "fol", "age_group", "avg_age"].includes(headcount_type)) {
+      const data = getHeadcountData(headcount_type, false);
+      if (data.length > 0) {
+        gov_people_summary[headcount_type] = data;
+      }
+    }
+  });
+
+  gov_people_summary.average_age = _.chain(
+    process_standard_headcount_dataset("avg_age")
+  )
+    .filter(({ org_id }) => !!org_id)
+    .flatMap((item) => item.average_age || [])
+    .groupBy("year")
+    .map((rows, year) => ({
+      year: parseInt(year, 10),
+      value: _.meanBy(rows, (row) => row.value),
+    }))
+    .filter(({ value }) => _.isFinite(value))
+    .value();
+
+  await Promise.all([
     OrgPeopleData.insertMany(org_people_data),
     GovPeopleSummary.insertMany(gov_people_summary),
   ]);
