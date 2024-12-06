@@ -51,11 +51,11 @@ simplographic_results_title:
 simplographic_results_text:
   transform: [handlebars,markdown]
   en: |
-    In {{pa_last_year}}, the federal government sought to achieve **{{dr_results}}** {{gl_sidebar_link "departmental results" "DR"}} and **{{pr_results}}** {{gl_sidebar_link "program outcomes" "PO"}}. 
+    In **{{pa_last_year}}**, the federal government sought to achieve **{{dr_results}}** {{gl_sidebar_link "departmental results" "DR"}} and **{{pr_results}}** {{gl_sidebar_link "program outcomes" "PO"}}. 
     Progress towards meeting these results was measured using **{{fmt_big_int dr_indicators}}** departmental result {{gl_sidebar_link "indicators" "IND_RESULT"}} and **{{fmt_big_int pr_indicators}}** program outcome indicators. 
     Of those indicators, **{{fmt_big_int dr_met}}** (**{{fmt_percentage dr_pct_met}}**) departmental result indicators have {{gl_sidebar_link "met" "RESULTS_MET"}} their target
     and **{{fmt_big_int pr_met}}** (**{{fmt_percentage pr_pct_met}}**) program outcome indicators have met their target.
   fr: |
-    (need to update) En {{pa_last_year}}, le gouvernement fédéral a cherché à rencontrer **{{num_results}}** résultats. Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int num_indicators}}** {{gl_sidebar_link "indicateurs" "IND_RESULT"}}. 
-    De ces indicateurs, **{{fmt_big_int num_met}}** (**{{fmt_percentage pct_met}}**) ont {{gl_sidebar_link "atteint" "RESULTS_MET"}} leur cible.
+    En **{{pa_last_year}}**, le gouvernement fédéral a cherché à atteindre **{{fmt_big_int dr_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}} et **{{fmt_big_int pr_results}}** {{gl_sidebar_link "résultat de programme" "PO"}}. Les progrès accomplis dans l'atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int dr_indicators}}** indicateurs de résultats ministériels et **{{fmt_big_int pr_indicators}}** indicateurs de résultats de programme.
+    De ces indicateurs, **{{fmt_big_int dr_met}}** (**{{fmt_percentage dr_pct_met}}**) indicateurs de résultats ministériels ont {{gl_sidebar_link "atteint" "RESULTS_MET"}} leur cible et **{{fmt_big_int pr_met}}** (**{{fmt_percentage pr_pct_met}}**) indicateurs de résultats de programme ont atteint leur cible.
 

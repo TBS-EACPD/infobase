@@ -18,13 +18,13 @@ drr_summary_text_intro:
     {{/if}}
   fr: |
     {{#if results_dept_count}}
-    (need to update) En **{{year}}**, **{{results_dept_count}}** organisations ont cherché à atteindre **{{fmt_big_int total.drr_results}}** résultats grâce à **{{fmt_big_int dr.drr_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}} et **{{fmt_big_int pr.drr_results}}** {{gl_sidebar_link "résultat de programme" "PO"}}.
-    Les progrès vers l’atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int total.drr_total}}** {{gl_sidebar_link "indicateurs" "IND_RESULT"}}, soit **{{fmt_big_int dr.drr_total}}** indicateurs de résultats ministériels et **{{fmt_big_int pr.drr_total}}** indicateurs de résultats de programme.
+    En **{{year}}**, **{{results_dept_count}}** organisations ont cherché à atteindre **{{fmt_big_int dr.drr_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}} et **{{fmt_big_int pr.drr_results}}** {{gl_sidebar_link "résultat de programme" "PO"}}.
+    Les progrès vers l’atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int dr.drr_total}}** indicateurs de résultats ministériels et **{{fmt_big_int pr.drr_total}}** indicateurs de résultats de programme.
     Un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été attribué à chaque indicateur en fonction du résultat mesuré de la cible de l’indicateur.
     
     {{else if results_org_level}}
-    (need to update) En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int total_result_count}}** résultats grâce à **{{fmt_big_int dept_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}} et **{{fmt_big_int program_results}}** {{gl_sidebar_link "résultat de programme" "PO"}}.
-    Les progrès vers l’atteinte de ces résultats ont été mesurés à l’aide de **{{fmt_big_int total_indicator_count}}** {{gl_sidebar_link "indicateurs" "IND_RESULT"}}, soit **{{fmt_big_int dept_indicator_counts}}** indicateurs de résultats ministériels et **{{fmt_big_int program_indicator_counts}}** indicateurs de résultats de programme.
+    En **{{year}}**, {{subject.name}} a cherché à atteindre **{{fmt_big_int dept_results}}** {{gl_sidebar_link "résultats ministériels" "DR"}} et **{{fmt_big_int program_results}}** {{gl_sidebar_link "résultat de programme" "PO"}}.
+    Les progrès vers l’atteinte de ces résultats ont été mesurés à l’aide **{{fmt_big_int dept_indicator_counts}}** indicateurs de résultats ministériels et **{{fmt_big_int program_indicator_counts}}** indicateurs de résultats de programme.
     Un {{gl_sidebar_link "état du résultat" "RESULTS_STATUS"}} a été attribué à chaque indicateur en fonction du résultat mesuré de la cible de l’indicateur.
     
     {{else}}
