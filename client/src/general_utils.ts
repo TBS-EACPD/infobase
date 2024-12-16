@@ -25,7 +25,7 @@ export const sanitize_html = (markup: string | Node) => {
 };
 
 export const sanitized_marked = (markdown: string) =>
-  sanitize_html(marked(markdown, { sanitize: false, gfm: true }));
+  sanitize_html(marked(markdown, { sanitize: false, gfm: true, breaks: true }));
 
 export const sanitized_dangerous_inner_html = (html: string) => ({
   __html: sanitize_html(html),
