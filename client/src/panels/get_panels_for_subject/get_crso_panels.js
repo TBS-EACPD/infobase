@@ -8,6 +8,7 @@ import {
   declare_late_results_warning_panel,
   declare_late_actual_resources_panel,
   declare_late_planned_resources_panel,
+  declare_temp_untabled_warning_panel,
 
   // shared dept, crso, program
   declare_profile_panel,
@@ -55,6 +56,7 @@ export const get_crso_panels = (subject) =>
         declare_late_actual_resources_panel(),
         declare_late_planned_resources_panel(),
         declare_late_results_warning_panel(),
+        declare_temp_untabled_warning_panel(),
         declare_drr_summary_panel(),
         declare_results_table_panel(),
         declare_explore_results_panel(),

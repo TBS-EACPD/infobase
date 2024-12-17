@@ -475,6 +475,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2019-2020.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    temp_untabled_orgs: [],
   },
   {
     year_short: "2020",
@@ -485,6 +486,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2020-2021.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    temp_untabled_orgs: [],
   },
   {
     year_short: "2021",
@@ -495,6 +497,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2021-2022.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    temp_untabled_orgs: [],
   },
   {
     year_short: "2022",
@@ -505,6 +508,7 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2022-2023.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    temp_untabled_orgs: [],
   },
   {
     year_short: "2023",
@@ -513,8 +517,9 @@ const drr_docs = build_doc_info_objects("drr", [
       "https://www.canada.ca/en/treasury-board-secretariat/services/departmental-performance-reports/2023-24-departmental-results-reports.html",
     doc_url_fr:
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/rapports-ministeriels-rendement/rapport-resultats-ministeriels-2023-2024.html",
-    late_results_orgs: [],
-    late_resources_orgs: [],
+    late_results_orgs: ["278"],
+    late_resources_orgs: ["278"],
+    temp_untabled_orgs: ["124", "152", "253", "238"],
   },
 ]);
 
@@ -532,6 +537,7 @@ const dp_docs = build_doc_info_objects("dp", [
       "https://www.canada.ca/fr/secretariat-conseil-tresor/services/depenses-prevues/rapports-plans-priorites/plans-ministeriels-2024-2025.html",
     late_results_orgs: [],
     late_resources_orgs: [],
+    temp_untabled_orgs: [],
   },
 ]);
 const result_docs = {

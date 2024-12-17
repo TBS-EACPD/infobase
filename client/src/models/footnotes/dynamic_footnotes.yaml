@@ -42,6 +42,16 @@ late_actual_resources_warning_crso:
   en: The latest actual FTE values for this Core Responsibility are not yet available. An update will follow.
   fr: Les dernières valeurs ETP réelles pour cette responsabilité essentielle ne sont pas encore disponibles. Une mise à jour suivra.
 
+temp_untabled_orgs_gov:
+  transform: [handlebars]
+  en: The {{result_doc_name}} data for the following organizations will be tabled at a later date. Updates will follow.
+  fr: Les données du {{result_doc_name}} des organisations suivantes seront déposées à une date ultérieure. Une mise à jour suivra.
+
+temp_untabled_orgs:
+  transform: [handlebars]
+  en: The {{result_doc_name}} data for this organization is not yet tabled. An update will follow.
+  fr: Les données du {{result_doc_name}} de cette organisation ne sont pas encore déposées. Une mise à jour suivra.
+
 
 late_planned_resources_warning_gov:
   en: Planned spending and planned FTE data does not include values from the organizations listed below, as their data is not yet available. Updates will follow.
