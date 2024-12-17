@@ -44,13 +44,13 @@ late_actual_resources_warning_crso:
 
 temp_untabled_orgs_gov:
   transform: [handlebars]
-  en: The {{result_doc_name}} data for the following organizations will be tabled at a later date. Updates will follow.
-  fr: Les données du {{result_doc_name}} des organisations suivantes seront déposées à une date ultérieure. Une mise à jour suivra.
+  en: The {{result_doc_name}} data and latest actual FTE values for the following organizations will be tabled at a later date. Updates will follow.
+  fr: Les données du {{result_doc_name}} et les dernières valeurs ETP réelles des organisations suivantes seront déposées à une date ultérieure. Une mise à jour suivra.
 
 temp_untabled_orgs:
   transform: [handlebars]
-  en: The {{result_doc_name}} data for this organization is not yet tabled. An update will follow.
-  fr: Les données du {{result_doc_name}} de cette organisation ne sont pas encore déposées. Une mise à jour suivra.
+  en: The {{result_doc_name}} data and latest actual FTE values for this organization is not yet tabled. An update will follow.
+  fr: Les données du {{result_doc_name}} et les dernières valeurs ETP réelles pour cette organisation ne sont pas encore déposées. Une mise à jour suivra.
 
 
 late_planned_resources_warning_gov:
