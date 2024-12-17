@@ -68,9 +68,18 @@ const infographic_link_items = _.compact([
 
 const featured_content_items = _.compact([
   {
+    text_key: "quick_link_DRR24",
+    href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
+    is_new: "true",
+  },
+  {
+    text_key: "quick_link_gov_spending",
+    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
+    is_new: "true",
+  },
+  {
     text_key: "supps_b",
     href: "#compare_estimates",
-    is_new: "true",
   },
   {
     text_key: "quick_link_DP24",
@@ -79,14 +88,6 @@ const featured_content_items = _.compact([
   {
     text_key: "quick_link_service_inventory_2022",
     href: "#infographic/gov/gov/services/.-.-(panel_key.-.-'services_intro)",
-  },
-  {
-    text_key: "quick_link_DRR23",
-    href: "#infographic/gov/gov/results/.-.-(panel_key.-.-'gov_drr)",
-  },
-  {
-    text_key: "quick_link_gov_spending",
-    href: "#infographic/gov/gov/financial/.-.-(panel_key.-.-'welcome_mat)",
   },
   {
     text_key: "covid_expenditures_estimated_exp_2022",
