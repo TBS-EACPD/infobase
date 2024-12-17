@@ -122,7 +122,9 @@ const get_drr_data = (drr_key) => {
       .fromPairs()
       .value(),
   };
-  const late_dept_count = result_docs[drr_key].late_results_orgs.length;
+  const late_dept_count =
+    result_docs[drr_key].late_results_orgs.length +
+    result_docs[drr_key].temp_untabled_orgs.length;
 
   return {
     gov_counts,

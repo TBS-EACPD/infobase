@@ -44,6 +44,7 @@ export const get_crso_panels = (subject) =>
       declare_dead_crso_warning_panel(),
       declare_late_actual_resources_panel(),
       declare_late_planned_resources_panel(),
+      declare_temp_untabled_warning_panel(),
       declare_welcome_mat_panel(),
       declare_planned_actual_comparison_panel(),
       declare_crso_by_prog_fte_panel(),
