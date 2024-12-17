@@ -194,6 +194,45 @@ const LateResultsBanner = () => {
     );
   });
 };
+const TempUntabledBanner = () => {
+  const route_filter = (match, _history) => /^\/(start)/.test(match.path);
+
+  // TODO what if DPs table and some DRRs are still late? Do we just want the prominent DRR banner, or do we want both?
+  return _.map(result_docs_in_tabling_order, (doc) => {
+    const late_orgs = doc.temp_untabled_orgs;
+    if (late_orgs.length === 0) {
+      return null;
+    }
+    const banner_content = (
+      <Fragment key={doc.name}>
+        {
+          {
+            en: `The ${doc.name} data for the following organizations will be tabled at a later date. Updates will follow.`,
+            fr: `Les données du ${doc.name} des organisations suivantes seront déposées à une date ultérieure. Une mise à jour suivra.`,
+          }[lang]
+        }
+        <MultiColumnList
+          key={doc.name}
+          list_items={_.map(
+            late_orgs,
+            (org_id) => Dept.store.lookup(org_id).name
+          )}
+          column_count={2}
+        />
+      </Fragment>
+    );
+
+    return (
+      <HeaderBanner
+        route_filter={route_filter}
+        banner_content={banner_content}
+        banner_class="warning"
+        additional_class_names="medium-panel-text"
+        key={doc.name}
+      />
+    );
+  });
+};
 const LateDpResourcesBanner = () => {
   const route_filter = (match, _history) =>
     /^\/(start|tag-explorer|rpb)/.test(match.path);
@@ -295,6 +334,7 @@ export class StandardRouteContainer extends React.Component {
         <BreadCrumbs crumbs={breadcrumbs} />
         <HeaderBanner route_filter={_.constant(false)} />
         <LateResultsBanner />
+        <TempUntabledBanner />
         <LateDpResourcesBanner />
         <LateDrrFteResources />
         <AnalyticsSynchronizer route_key={route_key} />

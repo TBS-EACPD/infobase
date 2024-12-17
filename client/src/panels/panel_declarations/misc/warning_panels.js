@@ -28,6 +28,7 @@ const { TM, text_maker } = create_text_maker_component([
 ]);
 
 const { result_docs_in_tabling_order } = Results;
+console.log(result_docs_in_tabling_order);
 
 const WarningPanel = ({
   banner_class = "info",
@@ -180,6 +181,116 @@ export const declare_m2m_tag_warning_panel = () =>
 const late_panel_config = {
   ...common_panel_config,
 };
+
+export const declare_temp_untabled_warning_panel = () =>
+  declare_panel({
+    panel_key: "temp_untabled_warning",
+    subject_types: ["gov", "dept", "crso", "program"],
+    panel_config_func: (subject_type) => {
+      const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
+        .reverse()
+        .filter(({ temp_untabled_orgs }) => temp_untabled_orgs.length > 0)
+        .value();
+
+      const get_per_doc_late_results_alert = (
+        per_doc_inner_content,
+        subject
+      ) => {
+        return (
+          <Fragment>
+            {_.map(docs_with_late_orgs, (result_doc, ix) => {
+              if (subject_type != "gov") {
+                return _.map(result_doc.temp_untabled_orgs, (org_id) => {
+                  if (org_id == subject.id)
+                    return (
+                      <WarningPanel key={ix} banner_class="warning">
+                        {per_doc_inner_content(result_doc)}
+                      </WarningPanel>
+                    );
+                });
+              } else {
+                return (
+                  <WarningPanel key={ix} banner_class="warning">
+                    {per_doc_inner_content(result_doc)}
+                  </WarningPanel>
+                );
+              }
+            })}
+          </Fragment>
+        );
+      };
+
+      switch (subject_type) {
+        case "gov":
+          return {
+            ...late_panel_config,
+
+            calculate: () => !_.isEmpty(docs_with_late_orgs),
+            render({ subject }) {
+              const per_doc_inner_content = (result_doc) => (
+                <div style={{ textAlign: "left" }}>
+                  <TM
+                    k={"temp_untabled_orgs_gov"}
+                    args={{
+                      result_doc_name: text_maker(
+                        `${result_doc.doc_type}_name`,
+                        { year: result_doc.year }
+                      ),
+                    }}
+                  />
+                  <MultiColumnList
+                    list_items={_.map(
+                      result_doc.temp_untabled_orgs,
+                      (org_id) => Dept.store.lookup(org_id).name
+                    )}
+                    column_count={2}
+                  />
+                </div>
+              );
+
+              return get_per_doc_late_results_alert(
+                per_doc_inner_content,
+                subject
+              );
+            },
+          };
+        default:
+          return {
+            ...late_panel_config,
+
+            calculate: ({ subject }) =>
+              _.chain(docs_with_late_orgs)
+                .flatMap("temp_untabled_orgs")
+                .includes(
+                  subject_type === "dept" ? subject.id : subject.dept.id
+                )
+                .value(),
+            render({ subject }) {
+              const per_doc_inner_content = (result_doc) => {
+                return (
+                  <TM
+                    k={`temp_untabled_orgs`}
+                    args={{
+                      result_doc_name: text_maker(
+                        `${result_doc.doc_type}_name`,
+                        {
+                          year: result_doc.year,
+                        }
+                      ),
+                    }}
+                  />
+                );
+              };
+
+              return get_per_doc_late_results_alert(
+                per_doc_inner_content,
+                subject
+              );
+            },
+          };
+      }
+    },
+  });
 
 export const declare_late_results_warning_panel = () =>
   declare_panel({
