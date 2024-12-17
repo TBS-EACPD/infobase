@@ -14,15 +14,8 @@ export type Scalars = {
 
 export type AllDocResultCount = {
   __typename?: 'AllDocResultCount';
-  dp23_indicators?: Maybe<Scalars['Int']>;
-  dp23_results?: Maybe<Scalars['Int']>;
   dp24_indicators?: Maybe<Scalars['Int']>;
   dp24_results?: Maybe<Scalars['Int']>;
-  drr18_indicators_future?: Maybe<Scalars['Int']>;
-  drr18_indicators_met?: Maybe<Scalars['Int']>;
-  drr18_indicators_not_available?: Maybe<Scalars['Int']>;
-  drr18_indicators_not_met?: Maybe<Scalars['Int']>;
-  drr18_results?: Maybe<Scalars['Int']>;
   drr19_indicators_future?: Maybe<Scalars['Int']>;
   drr19_indicators_met?: Maybe<Scalars['Int']>;
   drr19_indicators_not_available?: Maybe<Scalars['Int']>;
@@ -43,6 +36,11 @@ export type AllDocResultCount = {
   drr22_indicators_not_available?: Maybe<Scalars['Int']>;
   drr22_indicators_not_met?: Maybe<Scalars['Int']>;
   drr22_results?: Maybe<Scalars['Int']>;
+  drr23_indicators_future?: Maybe<Scalars['Int']>;
+  drr23_indicators_met?: Maybe<Scalars['Int']>;
+  drr23_indicators_not_available?: Maybe<Scalars['Int']>;
+  drr23_indicators_not_met?: Maybe<Scalars['Int']>;
+  drr23_results?: Maybe<Scalars['Int']>;
   level?: Maybe<Scalars['String']>;
   subject_id?: Maybe<Scalars['String']>;
 };
