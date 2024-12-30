@@ -92,7 +92,7 @@ const schema = `
     count: Float
     met_count: Float
     is_target_met: Boolean
-    standard_report_comment: String
+    standard_comment: String
   }
 
   type Service{
@@ -111,9 +111,9 @@ const schema = `
     name: String
     description: String
     service_type: [String]
-    scope: [String]
+    service_scope: [String]
     designations: [String]
-    target_groups: [String]
+    target_groups_name: [String]
     feedback_channels: [String]
     urls: [String]
     digital_identity_platforms: [String]
@@ -211,9 +211,9 @@ export default function ({ models, loaders }) {
       name: bilingual_field("name"),
       description: bilingual_field("description"),
       service_type: bilingual_field("service_type"),
-      scope: bilingual_field("scope"),
+      service_scope: bilingual_field("service_scope"),
       designations: bilingual_field("designations"),
-      target_groups: bilingual_field("target_groups"),
+      target_groups_name: bilingual_field("target_groups_name"),
       feedback_channels: bilingual_field("feedback_channels"),
       urls: bilingual_field("urls"),
       digital_enablement_comment: bilingual_field("digital_enablement_comment"),
@@ -234,7 +234,7 @@ export default function ({ models, loaders }) {
       service_report_comment: bilingual_field("service_report_comment"),
     },
     StandardReport: {
-      standard_report_comment: bilingual_field("standard_report_comment"),
+      standard_comment: bilingual_field("standard_comment"),
     },
   };
 

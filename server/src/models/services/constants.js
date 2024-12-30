@@ -36,11 +36,22 @@ const channel_def_fr = {
   oth: "Autre",
 };
 
+const service_std_type_en = {
+  acs: "Access",
+  acy: "Accuracy",
+  oth: "Other",
+  tml: "Timeliness",
+};
+
 const service_std_type_fr = {
-  Access: "Access",
-  Accuracy: "Accuracy",
-  Other: "Other",
-  Timeliness: "Rapidité",
+  access: "Access",
+  accuracy: "Accuracy",
+  other: "Other",
+  timeliness: "Rapidité",
+  acs: "Accès",
+  acy: "Exactitude",
+  oth: "Autre",
+  tml: "Délai",
 };
 
 const service_type_en = {
@@ -70,6 +81,7 @@ const scope_def_en = {
   extern: "External Service",
   enterprise: "Internal Enterprise Service",
   "intern cluster": "Internal Service Cluster",
+  cluster: "Internal Cluster Service",
 };
 
 const scope_def_fr = {
@@ -77,15 +89,17 @@ const scope_def_fr = {
   extern: "Service externe",
   enterprise: "Service interne integré",
   "intern cluster": "Service interne cluster",
+  cluster: "Service cluster interne",
 };
 
 const target_group_en = {
   econom: "Economic Segments (Businesses)",
   for: "Foreign Entities",
   intern_gov: "Internal to Government",
-  NGO: "Non Profit Institutions and Organizations",
+  ngo: "Non Profit Institutions and Organizations",
   persons: "Persons",
-  PTC: "Provinces, Territories or Communities",
+  person: "Persons",
+  ptc: "Provinces, Territories or Communities",
   enviro: "Environmental",
 };
 
@@ -93,31 +107,11 @@ const target_group_fr = {
   econom: "Segments économiques",
   for: "Entités étrangères",
   intern_gov: "Interne au gouvernement",
-  NGO: " Institutions et organisations sans but lucratif",
+  ngo: " Institutions et organisations sans but lucratif",
   persons: "Étiquettes associées aux personnes",
-  PTC: "Provinces, territoires et communautés",
+  person: "Personnes",
+  ptc: "Provinces, territoires et communautés",
   enviro: "Environnemental",
-};
-
-const ident_platform_en = {
-  ex_auth:
-    "Cyber Auth/ECM - External (Public) credential and authentication (GCKey, CBS)",
-  signin_authenti: "Sign In Canada",
-  gcpass: "GCpass/ICAS (Internal Centralized Authentication Service)",
-  in_auth:
-    "ICM - Internal (GC worker) credential and authentication service (myKEY)",
-  oth: "Other",
-  na: "N/A (not applicable)",
-};
-
-const ident_platform_fr = {
-  ex_auth:
-    "Authentification électronique/GJE - Service de gestion des justificatifs externes (CléGC, SCJI)",
-  signin_authenti: "Authenti-Canada",
-  gcpass: "GCpass/SICA (le Service Interne Centralizé d'Authentification)",
-  in_auth: "GJI - Service de gestion des justificatifs internes (maClé)",
-  oth: "Autre",
-  na: "S.O. (n’est pas applicable)",
 };
 
 const accessibility_assessors_en = {
@@ -157,6 +151,7 @@ export {
   application_channels_keys,
   channel_def_en,
   channel_def_fr,
+  service_std_type_en,
   service_std_type_fr,
   service_type_en,
   service_type_fr,
@@ -164,8 +159,6 @@ export {
   scope_def_fr,
   target_group_en,
   target_group_fr,
-  ident_platform_en,
-  ident_platform_fr,
   accessibility_assessors_en,
   accessibility_assessors_fr,
   service_recipient_type_en,
