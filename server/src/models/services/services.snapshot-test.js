@@ -19,9 +19,9 @@ const service_fields = `
   name
   description
   service_type
-  scope
+  service_scope
   designations
-  target_groups
+  target_groups_name
   feedback_channels
   urls
   digital_identity_platforms
@@ -84,7 +84,7 @@ const service_fields = `
       count
       met_count
       is_target_met
-      standard_report_comment  
+      standard_comment  
     }
   }
 `;
@@ -132,7 +132,7 @@ service_summary{
 const all_services_and_standards_for_org = `
 query{
   root(lang: "en"){
-    org(org_id: "114"){
+    org(org_id: "136"){
       services{
         ${service_fields}
       }
@@ -143,7 +143,7 @@ query{
 const all_services_and_standards_for_program = `
 query{
   root(lang: "en"){
-    program(id: "CB-BEZ01"){
+    program(id: "GSC-BVY08"){
       services{
         ${service_fields}
       }
@@ -154,7 +154,7 @@ query{
 const all_summary_for_org = `
 query{
   root(lang: "en"){
-    org(org_id: "114"){
+    org(org_id: "136"){
       ${summary_fields}
     }
   }
@@ -163,7 +163,7 @@ query{
 const all_summary_for_program = `
 query{
   root(lang: "en"){
-    program(id: "CB-BEZ01"){
+    program(id: "GSC-BVY08"){
       ${summary_fields}
     }
   }
@@ -172,7 +172,7 @@ query{
 const single_service = `
 query{
   root(lang: "en"){
-    service(id: "1120"){
+    service(id: "938"){
       ${service_fields}
     }
   }
@@ -181,11 +181,11 @@ query{
 const search_services_en = `
 query{
   en_root: root(lang: "en"){
-    search_by_french_word: search_services(search_phrase: "Établissement"){
+    search_by_french_word: search_services(search_phrase: "Sécurité"){
       id,
       name
     }
-    search_by_english_word: search_services(search_phrase: "Copyright"){
+    search_by_english_word: search_services(search_phrase: "Contract"){
       id,
       name
     }
@@ -194,19 +194,19 @@ query{
 const search_services_fr = `
 query{
   fr_root: root(lang: "fr"){
-    diacritical_search: search_services(search_phrase: "Établissement"){
+    diacritical_search: search_services(search_phrase: "Sécurité"){
       id,
       name
     }
-    diacritical_free_search: search_services(search_phrase: "Etablissement"){
+    diacritical_free_search: search_services(search_phrase: "Securite"){
       id,
       name
     }
-    multi_word_search: search_services(search_phrase: "tarifs droit"){
+    multi_word_search: search_services(search_phrase: "contrats personnel"){
       id,
       name
     }
-    partial_word_search: search_services(search_phrase: "es"){
+    partial_word_search: search_services(search_phrase: "ec"){
       id,
       name
     }
