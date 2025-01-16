@@ -53,7 +53,7 @@ const get_org_id_from_dept_name = (csv_name, dept_name) => {
 
 // Calculate average share for all departments
 const calculateAverageShare = (data, headcount_type, orgIdCache) => {
-  if (headcount_type === "ave_age") return null;
+  if (headcount_type === "avg_age") return null;
 
   const dataWithOrgIds = data
     .map((record) => ({
@@ -64,27 +64,42 @@ const calculateAverageShare = (data, headcount_type, orgIdCache) => {
 
   return _.chain(dataWithOrgIds)
     .groupBy("orgId")
-    .mapValues((orgData) =>
-      _.chain(orgData)
+    .mapValues((orgData) => {
+      const totalEmployees = _.sumBy(orgData, (record) =>
+        parseInt(record.number_of_employees, 10)
+      );
+      return _.chain(orgData)
         .groupBy(headcountTypeMapping[headcount_type])
         .mapValues(
           (records) =>
             _.sumBy(records, (record) =>
               parseInt(record.number_of_employees, 10)
-            ) / records.length
+            ) / totalEmployees
         )
-        .value()
-    )
+        .value();
+    })
     .value();
+};
+
+// Get the range of the 5 most recent years dynamically
+const getMostRecentYears = (csv) => {
+  const maxYear =
+    _.maxBy(csv, (record) => parseInt(record.year, 10))?.year || 0;
+  const maxYearInt = parseInt(maxYear, 10);
+  return _.range(maxYearInt - 4, maxYearInt + 1); // Get the last 5 years
 };
 
 // Main dataset processing for headcount types
 const process_standard_headcount_dataset = (headcount_type) => {
   const csv_name = `test_org_employee_${headcount_type}.csv`;
   const csv = get_standard_csv_file_rows(csv_name);
-  const orgIdCache = {};
+
+  // Transform headers and filter by the 5 most recent years dynamically
+  const recentYears = getMostRecentYears(csv);
   const filteredCsv = transformHeaders(csv).filter(
-    (record) => record.department_or_agency !== "Office of the Prime Minister"
+    (record) =>
+      record.department_or_agency !== "Office of the Prime Minister" &&
+      recentYears.includes(parseInt(record.year, 10))
   );
 
   if (_.isEmpty(filteredCsv)) {
@@ -92,15 +107,14 @@ const process_standard_headcount_dataset = (headcount_type) => {
     return [];
   }
 
+  const orgIdCache = {};
   filteredCsv.forEach((record) => {
-    if (record.year >= 2018) {
-      const deptName = record.department_or_agency;
-      if (!orgIdCache[deptName]) {
-        orgIdCache[deptName] =
-          deptName === "Federal public service"
-            ? "gov"
-            : get_org_id_from_dept_name(csv_name, deptName);
-      }
+    const deptName = record.department_or_agency;
+    if (!orgIdCache[deptName]) {
+      orgIdCache[deptName] =
+        deptName === "Federal public service"
+          ? "gov"
+          : get_org_id_from_dept_name(csv_name, deptName);
     }
   });
 
@@ -110,11 +124,7 @@ const process_standard_headcount_dataset = (headcount_type) => {
     orgIdCache
   );
 
-  const reported_years = _.chain(filteredCsv)
-    .map("year")
-    .uniq()
-    .filter((year) => year >= 2018)
-    .value();
+  const reported_years = recentYears;
 
   const createDeptRecord = (rows, orgIdCache) => {
     const deptName = rows[0]?.department_or_agency;
@@ -133,7 +143,6 @@ const process_standard_headcount_dataset = (headcount_type) => {
 
   if (headcount_type === "avg_age") {
     return _.chain(filteredCsv)
-      .filter(({ year }) => year >= 2018)
       .groupBy("department_or_agency")
       .map((rows) => ({
         org_id: orgIdCache[rows[0]?.department_or_agency],
@@ -153,16 +162,12 @@ const process_standard_headcount_dataset = (headcount_type) => {
 
   if (headcount_type === "dept") {
     return _.chain(filteredCsv)
-      .filter(({ year }) => year >= 2018)
       .groupBy("department_or_agency")
-      .map((rows) =>
-        createDeptRecord(rows, headcount_type, orgIdCache, reported_years)
-      )
+      .map((rows) => createDeptRecord(rows, orgIdCache))
       .value();
   }
 
   return _.chain(filteredCsv)
-    .filter(({ year }) => year >= 2018)
     .groupBy(
       (row) =>
         `${row.department_or_agency}__${
