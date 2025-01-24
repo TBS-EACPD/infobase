@@ -200,6 +200,14 @@ export type GovPeopleSummary = {
   type?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
 };
 
+export type IncompleteServices = {
+  __typename?: 'IncompleteServices';
+  dept_code?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  submission_year?: Maybe<Scalars['String']>;
+};
+
 export type Indicator = {
   __typename?: 'Indicator';
   actual_result?: Maybe<Scalars['String']>;
@@ -730,6 +738,8 @@ export type ServiceStandardsSummary = {
 export type ServiceSummary = {
   __typename?: 'ServiceSummary';
   id?: Maybe<Scalars['String']>;
+  incomplete_dept?: Maybe<Array<Maybe<Scalars['String']>>>;
+  incomplete_services?: Maybe<Array<Maybe<IncompleteServices>>>;
   service_channels_summary?: Maybe<Array<Maybe<ServiceChannelsSummary>>>;
   service_digital_status_summary?: Maybe<Array<Maybe<ServiceDigitalStatusSummary>>>;
   service_general_stats?: Maybe<ServiceGeneralStats>;

@@ -106,6 +106,15 @@ export default function (model_singleton) {
 
   const common_service_fields = {
     id: pkey_type(),
+    incomplete_dept: [str_type],
+    incomplete_services: [
+      {
+        id: str_type,
+        submission_year: str_type,
+        dept_code: str_type,
+        program_activity_codes: [str_type],
+      },
+    ],
     service_general_stats: {
       report_years: [str_type],
       standard_years: [str_type],

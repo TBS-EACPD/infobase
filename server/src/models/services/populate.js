@@ -125,6 +125,12 @@ export default async function ({ models }) {
 
   const igoc_rows = get_standard_csv_file_rows("igoc.csv");
 
+  const program_rows = get_standard_csv_file_rows("program.csv");
+
+  const program_ids = _.chain(program_rows)
+    .map(({ dept_code, activity_code }) => `${dept_code}-${activity_code}`)
+    .value();
+
   const get_urls = (key_en, key_fr, doc) => {
     return _.chain(doc)
       .map(
@@ -793,6 +799,32 @@ export default async function ({ models }) {
     })
     .value();
 
+  const incomplete_services = _.chain(filtered_service_rows)
+    .filter(
+      (service) =>
+        _.difference(service.program_activity_codes, program_ids).length != 0
+    )
+    .map(({ id, submission_year, org_id, program_activity_codes }) => ({
+      id,
+      submission_year,
+      dept_code: dept_code_by_dept_id[org_id],
+      program_activity_codes: _.map(
+        program_activity_codes,
+        (program_code) => _.split(program_code, "-")[1]
+      ),
+    }))
+    .value();
+
+  const incomplete_dept = _.chain(filtered_service_rows)
+    .map(({ org_id, program_activity_codes }) =>
+      _.difference(program_activity_codes, program_ids).length != 0
+        ? org_id
+        : null
+    )
+    .compact()
+    .uniq()
+    .value();
+
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_activity_codes, (program_id) => {
       result[program_id] = result[program_id]
@@ -1009,6 +1041,8 @@ export default async function ({ models }) {
   const gov_summary = [
     {
       id: "gov",
+      incomplete_dept,
+      incomplete_services,
       service_general_stats: {
         report_years: get_years_from_service_report(
           absolute_most_recent_year_filtered_services
