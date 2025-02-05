@@ -10,6 +10,10 @@ import {
   write_to_db,
 } from "./db_utils/index.js";
 import {
+  create_github_issue,
+  make_github_issue_from_completed_template,
+} from "./github_utils/index.js";
+import {
   make_slack_message_from_completed_template,
   send_to_slack,
 } from "./slack_utils/index.js";
@@ -130,6 +134,17 @@ const make_form_backend = (templates) => {
         log_error_case(request, error_message);
         return null;
       } else {
+        if (template_name === "report_a_problem") {
+          const githubIssue = make_github_issue_from_completed_template(
+            template_name,
+            original_template,
+            completed_template
+          );
+          create_github_issue(githubIssue).catch((error) =>
+            log_error_case(request, error)
+          );
+        }
+
         send_to_slack(
           make_slack_message_from_completed_template(
             template_name,
