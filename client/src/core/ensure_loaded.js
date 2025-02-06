@@ -7,6 +7,7 @@ import {
   api_load_all_covid_measures,
 } from "src/models/covid/populate";
 import { load_footnotes_bundle } from "src/models/footnotes/populate_footnotes";
+import { api_load_has_people_data } from "src/models/people/api_load_has_people_data";
 import {
   api_load_results_bundle,
   api_load_results_counts,
@@ -41,6 +42,7 @@ function ensure_loaded({
   years_with_covid_data,
   covid_measures,
   footnotes_for: footnotes_subject,
+  has_people_data,
 }) {
   const panel_set = _.map(panel_keys, (key) =>
     PanelRegistry.lookup(key, subject_type)
@@ -137,6 +139,11 @@ function ensure_loaded({
     ? api_load_all_covid_measures()
     : Promise.resolve();
 
+  const has_people_data_prom =
+    has_people_data && _.isFunction(subject.set_has_data)
+      ? api_load_has_people_data(subject)
+      : Promise.resolve();
+
   return Promise.all([
     load_tables(table_set),
     results_prom,
@@ -151,6 +158,7 @@ function ensure_loaded({
     footnotes_prom,
     years_with_covid_data_prom,
     covid_measures_prom,
+    has_people_data_prom,
   ]);
 }
 
