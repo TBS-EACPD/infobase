@@ -194,6 +194,8 @@ export type GovPeopleSummary = {
   __typename?: 'GovPeopleSummary';
   age_group?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
   average_age?: Maybe<Array<Maybe<YearlyData>>>;
+  avg_age?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
+  dept?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
   ex_lvl?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
   fol?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
   gender?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
@@ -332,6 +334,8 @@ export type OrgPeopleData = {
   __typename?: 'OrgPeopleData';
   age_group?: Maybe<Array<Maybe<OrgHeadcountData>>>;
   average_age?: Maybe<Array<Maybe<YearlyData>>>;
+  avg_age?: Maybe<Array<Maybe<OrgHeadcountData>>>;
+  dept?: Maybe<Array<Maybe<OrgHeadcountData>>>;
   ex_lvl?: Maybe<Array<Maybe<OrgHeadcountData>>>;
   fol?: Maybe<Array<Maybe<OrgHeadcountData>>>;
   gender?: Maybe<Array<Maybe<OrgHeadcountData>>>;

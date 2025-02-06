@@ -1,0 +1,61 @@
+query OrgPeopleSummary($lang: String!, $org_id: String!) {
+  root(lang: $lang) {
+    org(org_id: $org_id) {
+      people_data {
+        org_id
+        average_age {
+          year
+          value
+        }
+        type {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        region {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        age_group {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        ex_lvl {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        gender {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+        fol {
+          dimension
+          yearly_data {
+            year
+            value
+          }
+          avg_share
+        }
+      }
+    }
+  }
+}
