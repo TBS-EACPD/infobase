@@ -204,6 +204,7 @@ export type IncompleteServices = {
   __typename?: 'IncompleteServices';
   dept_code?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
   submission_year?: Maybe<Scalars['String']>;
 };

@@ -799,31 +799,41 @@ export default async function ({ models }) {
     })
     .value();
 
-  const incomplete_services = _.chain(filtered_service_rows)
-    .filter(
-      (service) =>
-        _.difference(service.program_activity_codes, program_ids).length != 0
-    )
-    .map(({ id, submission_year, org_id, program_activity_codes }) => ({
-      id,
-      submission_year,
-      dept_code: dept_code_by_dept_id[org_id],
-      program_activity_codes: _.map(
-        program_activity_codes,
-        (program_code) => _.split(program_code, "-")[1]
-      ),
-    }))
-    .value();
+  const get_incomplete_services = (services) =>
+    _.chain(services)
+      .filter(
+        (service) =>
+          _.difference(service.program_activity_codes, program_ids).length != 0
+      )
+      .map(
+        ({
+          id,
+          name_en,
+          name_fr,
+          submission_year,
+          org_id,
+          program_activity_codes,
+        }) => ({
+          id,
+          name_en,
+          name_fr,
+          submission_year,
+          dept_code: dept_code_by_dept_id[org_id],
+          program_activity_codes,
+        })
+      )
+      .value();
 
-  const incomplete_dept = _.chain(filtered_service_rows)
-    .map(({ org_id, program_activity_codes }) =>
-      _.difference(program_activity_codes, program_ids).length != 0
-        ? org_id
-        : null
-    )
-    .compact()
-    .uniq()
-    .value();
+  const get_incomplete_dept = (services) =>
+    _.chain(services)
+      .map(({ org_id, program_activity_codes }) =>
+        _.difference(program_activity_codes, program_ids).length != 0
+          ? org_id
+          : null
+      )
+      .compact()
+      .uniq()
+      .value();
 
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_activity_codes, (program_id) => {
@@ -1041,8 +1051,12 @@ export default async function ({ models }) {
   const gov_summary = [
     {
       id: "gov",
-      incomplete_dept,
-      incomplete_services,
+      incomplete_dept: get_incomplete_dept(
+        absolute_most_recent_year_filtered_services
+      ),
+      incomplete_services: get_incomplete_services(
+        absolute_most_recent_year_filtered_services
+      ),
       service_general_stats: {
         report_years: get_years_from_service_report(
           absolute_most_recent_year_filtered_services
@@ -1106,6 +1120,8 @@ export default async function ({ models }) {
       });
       return {
         id: org_id,
+        incomplete_dept: get_incomplete_dept(filtered_services),
+        incomplete_services: get_incomplete_services(filtered_services),
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
           standard_years: get_years_from_service_standards(filtered_services),

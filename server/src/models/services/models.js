@@ -110,6 +110,7 @@ export default function (model_singleton) {
     incomplete_services: [
       {
         id: str_type,
+        ...bilingual_str("name"),
         submission_year: str_type,
         dept_code: str_type,
         program_activity_codes: [str_type],

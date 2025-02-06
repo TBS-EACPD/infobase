@@ -34,6 +34,7 @@ const schema = `
   }
   type IncompleteServices{
     id: String
+    name: String
     submission_year: String
     dept_code: String
     program_activity_codes: [String]
@@ -243,6 +244,9 @@ export default function ({ models, loaders }) {
     },
     StandardReport: {
       standard_comment: bilingual_field("standard_comment"),
+    },
+    IncompleteServices: {
+      name: bilingual_field("name"),
     },
   };
 

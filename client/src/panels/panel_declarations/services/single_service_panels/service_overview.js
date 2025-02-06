@@ -30,6 +30,12 @@ export class ServiceOverview extends React.Component {
   render() {
     const { service, title, sources, datasets } = this.props;
 
+    const list_program_codes = Dept.store.lookup(service.org_id).program_ids;
+
+    const has_valid_programs =
+      !_.difference(service.program_activity_codes, list_program_codes)
+        .length != 0;
+
     const most_recent_year = service.report_years[0];
     const most_recent_report = _.find(service.service_report, {
       year: most_recent_year,
@@ -42,7 +48,7 @@ export class ServiceOverview extends React.Component {
     const get_uniq_flat_standard_urls = (url_field) =>
       _.chain(service.standards).flatMap(url_field).filter().uniq().value();
     const all_urls = {
-      service_url: _.filter(service.urls, null),
+      service_url: service.urls,
       standard_url: get_uniq_flat_standard_urls("standard_urls"),
       rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
     };
@@ -79,20 +85,25 @@ export class ServiceOverview extends React.Component {
           </dd>
           <dt>{text_maker("programs")}</dt>
           <dd>
-            <ul>
-              {_.map(service.program_activity_codes, (program_id) => {
-                const program = Program.store.lookup(program_id);
-                return (
-                  program && (
-                    <li key={program_id}>
-                      <a href={infographic_href_template(program, "services")}>
-                        {program.name}
-                      </a>
-                    </li>
-                  )
-                );
-              })}
-            </ul>
+            {has_valid_programs && (
+              <ul>
+                {_.map(service.program_activity_codes, (program_id) => {
+                  const program = Program.store.lookup(program_id);
+                  return (
+                    program && (
+                      <li key={program_id}>
+                        <a
+                          href={infographic_href_template(program, "services")}
+                        >
+                          {program.name}
+                        </a>
+                      </li>
+                    )
+                  );
+                })}
+              </ul>
+            )}
+            {!has_valid_programs && "To Be Updated"}
           </dd>
           <dt>{text_maker("service_types")}</dt>
           <dd>

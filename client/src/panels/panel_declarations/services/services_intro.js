@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 import React, { useState } from "react";
 
 import { InfographicPanel } from "src/panels/panel_declarations/InfographicPanel";
@@ -8,12 +9,16 @@ import {
   create_text_maker_component,
   LeafSpinner,
   StatelessModal,
+  StatelessDetails,
+  DisplayTable,
 } from "src/components/index";
 
 import {
   useServiceSummaryGov,
   useServiceSummaryOrg,
 } from "src/models/services/queries";
+
+import { Dept } from "src/models/subjects";
 
 import { FormFrontend } from "src/FormFrontend";
 
@@ -31,6 +36,7 @@ const ServicesIntroPanel = ({ subject }) => {
   const { loading, data } = useSummaryServices({ id: subject.id });
 
   const [show_service_feedback, set_show_service_feedback] = useState(false);
+  const [is_open, set_is_open] = useState(false);
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
@@ -39,16 +45,47 @@ const ServicesIntroPanel = ({ subject }) => {
   const {
     service_general_stats: {
       report_years,
-      // number_of_services,
+      number_of_services,
       // number_of_online_enabled_services,
       // pct_of_standards_met_high_vol_services,
       // pct_of_online_client_interaction_pts,
       num_of_subject_offering_services,
       num_of_programs_offering_services,
     },
+    incomplete_dept,
+    incomplete_services,
   } = data;
 
+  const incomplete_gov_list = _.reduce(
+    incomplete_dept,
+    (text, org) => `${text}- ${Dept.store.lookup(org).name} \n`,
+    ""
+  );
+
   // const pct_formatter = (value) => formats.percentage1_raw(value);
+
+  const missing_services = _.flatMap(incomplete_services, ({ id, name }) => ({
+    id,
+    name,
+  }));
+
+  const missing_programs = _.chain(incomplete_services)
+    .flatMap(({ program_activity_codes }) => program_activity_codes)
+    .uniq()
+    .value();
+
+  const column_configs = {
+    id: {
+      index: 0,
+      header: "ID",
+      is_searchable: true,
+    },
+    name: {
+      index: 1,
+      header: "Service Name",
+      is_searchable: true,
+    },
+  };
 
   return (
     <div className="medium-panel-text">
@@ -61,13 +98,44 @@ const ServicesIntroPanel = ({ subject }) => {
           ...(subject.subject_type === "gov"
             ? { num_of_subject_offering_services }
             : { num_of_programs_offering_services }),
+          list: incomplete_gov_list,
+          num_missing_dept: incomplete_dept.length,
+          total_missing_services: missing_services.length,
+          num_of_programs:
+            num_of_programs_offering_services - missing_programs.length,
+          number_of_services,
         }}
+      />
+      <StatelessDetails
+        summary_content={
+          <TM
+            k={`missing_${subject.subject_type}_list_title`}
+            style={{ color: "black" }}
+          />
+        }
+        content={
+          subject.subject_type === "gov" ? (
+            <TM
+              k="missing_dept_list"
+              args={{ list: incomplete_gov_list }}
+              style={{ color: "black" }}
+            />
+          ) : (
+            <DisplayTable
+              data={missing_services}
+              column_configs={column_configs}
+              enable_pagination={true}
+            />
+          )
+        }
+        on_click={() => set_is_open(!is_open)}
+        is_open={is_open}
       />
       <p>
         {text_maker("service_inventory_feedback_request")}{" "}
         <button
           onClick={() => set_show_service_feedback(true)}
-          className={"link-styled button-unstyled"}
+          className={"button-unstyled"}
         >
           {text_maker("service_inventory_feedback_button")}
         </button>

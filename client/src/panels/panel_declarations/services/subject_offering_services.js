@@ -35,14 +35,21 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
   const {
     subject_offering_services_summary,
     service_general_stats: { report_years, number_of_services },
+    incomplete_services,
   } = data;
+
+  const missing_services = _.flatMap(
+    incomplete_services,
+    (service) => service.program_activity_codes
+  );
 
   const is_gov = subject.subject_type === "gov";
   const correct_subject = is_gov ? Dept : Program;
 
-  const cleaned_data = _.map(subject_offering_services_summary, (row) =>
-    _.omit(row, ["__typename", "id", !is_gov && "total_volume"])
-  );
+  const cleaned_data = _.chain(subject_offering_services_summary)
+    .filter((row) => !_.includes(missing_services, row.subject_id))
+    .map((row) => _.omit(row, ["__typename", "id", !is_gov && "total_volume"]))
+    .value();
 
   const column_configs = {
     subject_id: {
@@ -91,7 +98,7 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
           most_recent_year: report_years[0],
           number_of_subjects: cleaned_data.length,
           number_of_applications: _.sumBy(cleaned_data, "total_volume"),
-          number_of_services,
+          number_of_services: number_of_services - incomplete_services.length,
         }}
       />
       <DisplayTable
