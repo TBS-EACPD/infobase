@@ -39,7 +39,9 @@ services_intro_gov:
   en: | 
     Information on {{gl_sidebar_link "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_sidebar_link "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. 
         
-    The **GC Service Inventory** currently contains service data from **{{num_of_subject_offering_services}} departments and agencies**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
+    The **GC Service Inventory** currently contains service data from departments and agencies, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
+
+    For **{{fmt_year_to_fiscal_year to_year}}**, **{{num_missing_dept}}** out of **{{num_of_subject_offering_services}}** departments and agencies in the **GC Service Inventory** are still in the process of reporting service data. Updates will follow.
   fr: |
     Les renseignements sur les {{gl_sidebar_link "services" "SERVICE"}} offerts par le **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement d'un service donné. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_sidebar_link "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sur les services sont combinées ou compilées au niveau du programme, du ministère et du gouvernement. 
  
@@ -49,7 +51,9 @@ services_intro_dept:
   en: | 
     Information on {{gl_sidebar_link "services" "SERVICE"}} provided by the **{{subject.name}}** has been visualized here so that Canadians can track service performance. These visualizations include information on {{gl_sidebar_link "service standards" "STANDARD"}} and performance, applications for these services, and service fees information. Each service has its own page, and service data has been combined, or aggregated at the program, department and government level. 
         
-    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs_offering_services}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
+    The **Service Inventory** for **{{subject.name}}** currently contains service data from **{{num_of_programs}} programs**, covering results from **{{fmt_year_to_fiscal_year from_year}}** to **{{fmt_year_to_fiscal_year to_year}}**.
+    
+    In **{{fmt_year_to_fiscal_year to_year}}**, for **{{total_missing_services}}** out of **{{number_of_services}}** services the **{{subject.name}}** has not reported what programs these services are offered through. Information on these services can still be viewed and an update will follow to link programs to these services.
   fr: |
     Les renseignements sur les {{gl_sidebar_link "services" "SERVICE"}} offerts par **{{subject.name}}** sont présentés ici sous forme visuelle pour permettre aux Canadiens de suivre le rendement des services. Dans ces visualisations, vous trouverez des renseignements sur les {{gl_sidebar_link "normes de service" "STANDARD"}}, le rendement, les demandes et les frais de service. Chaque service a sa propre page et les données sont compilées au niveau du programme, du ministère et du gouvernement. 
 
@@ -455,3 +459,16 @@ new_standards_data:
 IRCC_hotfix:
   en: Total Business Volume and Volume Meeting Target for Passport application by mail - 20 business days (2019-20) were updated after data verification.
   fr: Mise à jour du Volume d'activités total et Volume atteignant la cible pour Demande de passeport envoyée par la poste - 20 jours ouvrables (2019-20) suite à la vérification des données.
+
+missing_gov_list_title:
+  en: Click here to view a list of the departments and agencies in the process of reporting data
+  fr: Fill later
+missing_dept_list_title:
+  en: Click here to view a list of services that have not reported what programs they are offered through
+  fr: Fill later
+missing_dept_list:
+  transform: [handlebars, markdown]
+  en: |
+    {{list}}
+  fr: |
+    {{list}}

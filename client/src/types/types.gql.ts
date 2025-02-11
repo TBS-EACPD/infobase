@@ -202,6 +202,15 @@ export type GovPeopleSummary = {
   type?: Maybe<Array<Maybe<SummaryHeadcountData>>>;
 };
 
+export type IncompleteServices = {
+  __typename?: 'IncompleteServices';
+  dept_code?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  submission_year?: Maybe<Scalars['String']>;
+};
+
 export type Indicator = {
   __typename?: 'Indicator';
   actual_result?: Maybe<Scalars['String']>;
@@ -643,13 +652,13 @@ export type Service = {
   programs?: Maybe<Array<Maybe<Program>>>;
   recipient_type?: Maybe<Array<Maybe<Scalars['String']>>>;
   report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
-  scope?: Maybe<Array<Maybe<Scalars['String']>>>;
   service_report?: Maybe<Array<Maybe<ServiceReport>>>;
+  service_scope?: Maybe<Array<Maybe<Scalars['String']>>>;
   service_type?: Maybe<Array<Maybe<Scalars['String']>>>;
   standards?: Maybe<Array<Maybe<ServiceStandard>>>;
   subject_type?: Maybe<Scalars['String']>;
   submission_year?: Maybe<Scalars['String']>;
-  target_groups?: Maybe<Array<Maybe<Scalars['String']>>>;
+  target_groups_name?: Maybe<Array<Maybe<Scalars['String']>>>;
   urls?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
@@ -732,6 +741,8 @@ export type ServiceStandardsSummary = {
 export type ServiceSummary = {
   __typename?: 'ServiceSummary';
   id?: Maybe<Scalars['String']>;
+  incomplete_dept?: Maybe<Array<Maybe<Scalars['String']>>>;
+  incomplete_services?: Maybe<Array<Maybe<IncompleteServices>>>;
   service_channels_summary?: Maybe<Array<Maybe<ServiceChannelsSummary>>>;
   service_digital_status_summary?: Maybe<Array<Maybe<ServiceDigitalStatusSummary>>>;
   service_general_stats?: Maybe<ServiceGeneralStats>;
@@ -745,8 +756,8 @@ export type StandardReport = {
   is_target_met?: Maybe<Scalars['Boolean']>;
   lower?: Maybe<Scalars['Float']>;
   met_count?: Maybe<Scalars['Float']>;
+  standard_comment?: Maybe<Scalars['String']>;
   standard_id?: Maybe<Scalars['String']>;
-  standard_report_comment?: Maybe<Scalars['String']>;
   upper?: Maybe<Scalars['Float']>;
   year?: Maybe<Scalars['String']>;
 };

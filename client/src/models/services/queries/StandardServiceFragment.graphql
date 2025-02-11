@@ -12,9 +12,9 @@ fragment StandardServiceFragment on Service {
   name
   description
   service_type
-  scope
+  service_scope
   designations
-  target_groups
+  target_groups_name
   feedback_channels
   urls
   digital_identity_platforms
@@ -71,11 +71,10 @@ fragment StandardServiceFragment on Service {
       standard_id
       year
       lower
-      upper
       count
       met_count
       is_target_met
-      standard_report_comment
+      standard_comment
     }
   }
 }

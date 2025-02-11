@@ -3,6 +3,14 @@ query ServiceSummaryOrg($lang: String!, $id: String!) {
     org(org_id: $id) {
       id
       service_summary {
+        incomplete_dept
+        incomplete_services {
+          id
+          name
+          submission_year
+          dept_code
+          program_activity_codes
+        }
         service_general_stats {
           report_years
           standard_years

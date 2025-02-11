@@ -30,9 +30,9 @@ export default function (model_singleton) {
       ...bilingual_str("name"),
       ...bilingual_str("description"),
       ...bilingual("service_type", [str_type]),
-      ...bilingual("scope", [str_type]),
+      ...bilingual("service_scope", [str_type]),
       ...bilingual("designations", [str_type]),
-      ...bilingual("target_groups", [str_type]),
+      ...bilingual("target_groups_name", [str_type]),
       ...bilingual("feedback_channels", [str_type]),
       ...bilingual("urls", [str_type]),
       ...bilingual("digital_identity_platforms", [str_type]),
@@ -76,7 +76,7 @@ export default function (model_singleton) {
               count: { type: Number },
               met_count: { type: Number },
               is_target_met: { type: Boolean },
-              ...bilingual_str("standard_report_comment"),
+              ...bilingual_str("standard_comment"),
             },
           ],
         },
@@ -106,6 +106,16 @@ export default function (model_singleton) {
 
   const common_service_fields = {
     id: pkey_type(),
+    incomplete_dept: [str_type],
+    incomplete_services: [
+      {
+        id: str_type,
+        ...bilingual_str("name"),
+        submission_year: str_type,
+        dept_code: str_type,
+        program_activity_codes: [str_type],
+      },
+    ],
     service_general_stats: {
       report_years: [str_type],
       standard_years: [str_type],
