@@ -1,7 +1,6 @@
-import { sum } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import _ from "lodash";
-import React from "react";
+import React, { memo } from "react";
 
 import { StdPanel, Col } from "src/panels/panel_declarations/InfographicPanel";
 import { declare_panel } from "src/panels/PanelRegistry";
@@ -9,11 +8,11 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import {
   create_text_maker_component,
   DisplayTable,
+  LeafSpinner,
 } from "src/components/index";
 
-import { businessConstants } from "src/models/businessConstants";
+import { useOrgPeopleSummary } from "src/models/people/queries";
 import { run_template } from "src/models/text";
-
 import { year_templates } from "src/models/years";
 
 import { formats } from "src/core/format";
@@ -29,182 +28,140 @@ import text from "./employee_prov.yaml";
 const { text_maker, TM } = create_text_maker_component(text);
 const { people_years } = year_templates;
 const years = _.map(people_years, (y) => run_template(y));
-const formatter = formats["big_int_raw"];
 
-const { provinces } = businessConstants;
+const EmployeeProvPanel = ({
+  title,
+  subject,
+  footnotes,
+  sources,
+  datasets,
+  subject_type,
+}) => {
+  const { data, loading } = useOrgPeopleSummary({
+    org_id: subject.id,
+  });
 
-const prepare_data_for_a11y_table = (data) => {
-  const all_year_headcount_total = _.chain(data)
-    .map((row) => sum(_.values(row)))
-    .reduce((sum, value) => sum + value, 0)
-    .value();
-  const table_data = _.chain(provinces)
-    .map((val, key) => ({ key, label: val.text }))
-    .reject(({ key }) => _.includes(["qclessncr", "onlessncr"], key))
-    .map((province) => {
-      const yearly_headcounts = _.map(data, (row) => row[province.key]);
-      const zipped_data = _.chain(years)
-        .zip(yearly_headcounts)
-        .fromPairs()
-        .value();
-      const five_year_avg_share =
-        sum(yearly_headcounts) / all_year_headcount_total;
-      return (
-        five_year_avg_share !== 0 && {
-          label: province.label,
-          five_year_avg_share,
-          ...zipped_data,
-        }
-      );
-    })
-    .filter()
-    .value();
-  return table_data;
-};
-
-class ProvPanel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      prov: "Canada",
-    };
+  if (!data?.region) {
+    return null;
   }
-  render() {
-    const {
-      title,
-      subject,
-      calculations,
-      footnotes,
-      sources,
-      datasets,
-      subject_type,
-    } = this.props.render_args;
 
-    const { data } = calculations;
+  const formatted_data = data.region.map((region) => ({
+    label: region.dimension,
+    data: region.yearly_data.map((year) => year.value),
+    five_year_percent: region.avg_share,
+  }));
 
-    const employees_by_year = _.map(data, (year) =>
-      _.chain(year).values().sum().value()
-    );
+  // Map of full province names to dimension codes
+  const regionToProvinceCode = {
+    Alberta: "ab",
+    "British Columbia": "bc",
+    Manitoba: "mb",
+    "New Brunswick": "nb",
+    "Newfoundland and Labrador": "nl",
+    "Nova Scotia": "ns",
+    "Northwest Territories": "nt",
+    Nunavut: "nu",
+    "Ontario (minus the NCR)": "onlessncr",
+    "Prince Edward Island": "pe",
+    "Quebec (minus the NCR)": "qclessncr",
+    Saskatchewan: "sk",
+    Yukon: "yt",
+    "National Capital Region (NCR)": "ncr",
+    "Outside of Canada": "abroad",
+    Unknown: "na",
+  };
 
-    const first_active_year_index = _.findIndex(
-      employees_by_year,
-      (employees) => employees !== 0
-    );
+  // Transform data for the Canada component
+  const yearly_data = [];
+  formatted_data.forEach((region) => {
+    region.data.forEach((value, index) => {
+      if (!yearly_data[index]) {
+        yearly_data[index] = {};
+      }
+      const dimensionCode = regionToProvinceCode[region.label];
+      if (dimensionCode && value !== null && value !== 0) {
+        yearly_data[index][dimensionCode] = value;
+      }
+    });
+  });
 
-    const last_active_year_index = _.findLastIndex(
-      employees_by_year,
-      (employees) => employees !== 0
-    );
+  // Calculate totals by year for the bar chart
+  const alt_totals_by_year = yearly_data.map((yearData) =>
+    _.sum(Object.values(yearData))
+  );
 
-    const duration = last_active_year_index - first_active_year_index + 1;
+  // Calculate color scale
+  const max_value = Math.max(...formatted_data.flatMap((d) => d.data));
+  const color_scale = scaleLinear().domain([0, max_value]).range([0.2, 1]);
 
-    const pre_formatted_data = _.reduce(
-      data,
-      (result, year) => {
-        if (_.isEmpty(result)) {
-          return _.map(year, (region_value, region) => ({
-            label: region,
-            data: [region_value],
-          }));
-        }
-        return _.map(result, (region) => ({
-          label: region.label,
-          data: [...region.data, year[region.label]],
-        }));
-      },
-      []
-    );
+  const graph_args = {
+    data: yearly_data,
+    years: people_years,
+    color_scale,
+    formatter: formats.big_int_raw,
+    alt_totals_by_year,
+  };
 
-    const formatted_data = _.map(pre_formatted_data, (region) => ({
-      ...region,
-      five_year_percent:
-        _.sum(region.data) / duration / (_.sum(employees_by_year) / duration),
-    }));
+  const common_text_args = calculate_common_text_args(formatted_data);
+  const text_calculations = {
+    ...common_text_args,
+    subject,
+    top_avg_group: common_text_args.top_avg_group,
+  };
 
-    const common_text_args = calculate_common_text_args(formatted_data);
+  const MemoizedCanada = memo(Canada);
 
-    const text_calculations = {
-      ...common_text_args,
-      subject,
-      top_avg_group: provinces[common_text_args.top_avg_group].text,
-    };
-
-    return (
-      <StdPanel {...{ title, footnotes, sources, datasets }}>
-        <Col size={12} isText>
-          <TM
-            k={subject_type + "_employee_prov_text"}
-            args={text_calculations}
-          />
-        </Col>
-        {!is_a11y_mode && (
-          <Col size={12} isGraph>
-            <Canada graph_args={calculations} />
-          </Col>
-        )}
-        {is_a11y_mode && (
-          <Col size={12} isGraph>
-            <DisplayTable
-              column_configs={{
-                label: {
-                  index: 0,
-                  header: text_maker("prov"),
-                  is_searchable: true,
-                },
-                five_year_avg_share: {
-                  index: years.length + 1,
-                  header: text_maker("five_year_percent_header"),
-                  formatter: "percentage1",
-                },
-                ..._.chain(years)
-                  .map((year, idx) => [
-                    year,
-                    {
-                      index: idx + 1,
-                      header: year,
-                      formatter: "big_int",
-                    },
-                  ])
-                  .fromPairs()
-                  .value(),
-              }}
-              data={prepare_data_for_a11y_table(data)}
+  return (
+    <StdPanel {...{ title, footnotes, sources, datasets }}>
+      {loading ? (
+        <LeafSpinner config_name="subroute" />
+      ) : (
+        <>
+          <Col size={12} isText>
+            <TM
+              k={subject_type + "_employee_prov_text"}
+              args={text_calculations}
             />
           </Col>
-        )}
-      </StdPanel>
-    );
-  }
-}
-
-const calculate_common = (data) => {
-  const max = _.chain(data).last().values().max().value();
-  const color_scale = scaleLinear().domain([0, max]).range([0.2, 1]);
-
-  return {
-    data,
-    color_scale,
-    years: people_years,
-    formatter,
-  };
-};
-const calculate_funcs_by_subject_type = {
-  gov: ({ tables }) => {
-    const { orgEmployeeRegion } = tables;
-    return calculate_common(
-      people_years.map((year) =>
-        orgEmployeeRegion.sum_cols_by_grouped_data(year, "region_code")
-      )
-    );
-  },
-  dept: ({ subject, tables }) => {
-    const { orgEmployeeRegion } = tables;
-    return calculate_common(
-      people_years.map((year) =>
-        orgEmployeeRegion.sum_cols_by_grouped_data(year, "region_code", subject)
-      )
-    );
-  },
+          {!is_a11y_mode && (
+            <Col size={12} isGraph>
+              <MemoizedCanada graph_args={graph_args} />
+            </Col>
+          )}
+          {is_a11y_mode && (
+            <Col size={12} isGraph>
+              <DisplayTable
+                column_configs={{
+                  label: {
+                    index: 0,
+                    header: text_maker("prov"),
+                    is_searchable: true,
+                  },
+                  five_year_percent: {
+                    index: years.length + 1,
+                    header: text_maker("five_year_percent_header"),
+                    formatter: "percentage1",
+                  },
+                  ..._.chain(years)
+                    .map((year, idx) => [
+                      year,
+                      {
+                        index: idx + 1,
+                        header: year,
+                        formatter: "big_int",
+                      },
+                    ])
+                    .fromPairs()
+                    .value(),
+                }}
+                data={formatted_data}
+              />
+            </Col>
+          )}
+        </>
+      )}
+    </StdPanel>
+  );
 };
 
 export const declare_employee_prov_panel = () =>
@@ -212,12 +169,10 @@ export const declare_employee_prov_panel = () =>
     panel_key: "employee_prov",
     subject_types: ["gov", "dept"],
     panel_config_func: (subject_type) => ({
-      legacy_table_dependencies: ["orgEmployeeRegion"],
       get_dataset_keys: () => ["employee_region"],
-      calculate: calculate_funcs_by_subject_type[subject_type],
       get_title: () => text_maker("employee_prov_title"),
-      render(render_args) {
-        return <ProvPanel render_args={{ ...render_args, subject_type }} />;
+      render(props) {
+        return <EmployeeProvPanel {...props} subject_type={subject_type} />;
       },
     }),
   });
