@@ -307,7 +307,7 @@ export const declare_late_results_warning_panel = () =>
     panel_config_func: (subject_type) => {
       const docs_with_late_orgs = _.chain(result_docs_in_tabling_order)
         .reverse()
-        .filter(({ late_results_orgs }) => late_results_orgs.length > 0)
+        .filter(({ late_results_orgs }) => (late_results_orgs || []).length > 0)
         .value();
 
       const get_per_doc_late_results_alert = (
