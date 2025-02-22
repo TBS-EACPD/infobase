@@ -21,6 +21,7 @@ function cleanup {
   unset MDB_PW
 
   unset SLACK_BOT_SERVICE_LINK
+  unset GITHUB_TOKEN
 }
 trap cleanup EXIT
 
@@ -46,3 +47,14 @@ echo "MDB_PW: '$MDB_PW'" >> $scratch/envs.yaml
 
 export SLACK_BOT_SERVICE_LINK=$(lpass show FORM_BACKEND_SLACK_BOT_SERVICE_LINK --notes)
 echo "SLACK_BOT_SERVICE_LINK: '$SLACK_BOT_SERVICE_LINK'" >> $scratch/envs.yaml
+
+# Add GitHub token for issue creation
+export GITHUB_ACCESS_TOKEN=$(lpass show FORM_BACKEND_GITHUB_TOKEN --notes)
+echo "GITHUB_ACCESS_TOKEN: '$GITHUB_ACCESS_TOKEN'" >> $scratch/envs.yaml
+
+# Add GitHub repository info
+export GITHUB_OWNER="TBS-EACPD"
+echo "GITHUB_OWNER: '$GITHUB_OWNER'" >> $scratch/envs.yaml
+
+export GITHUB_REPO="infobase"
+echo "GITHUB_REPO: '$GITHUB_REPO'" >> $scratch/envs.yaml
