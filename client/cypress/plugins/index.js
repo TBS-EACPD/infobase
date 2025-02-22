@@ -2,7 +2,8 @@
  * @type {Cypress.PluginConfig}
  */
 
-import fs from "fs";
+// eslint-disable-next-line import/no-commonjs
+const fs = require("fs");
 
 // eslint-disable-next-line import/no-commonjs
 module.exports = (on, config) => {
