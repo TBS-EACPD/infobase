@@ -24,11 +24,20 @@ const schema = `
 
   type ServiceSummary{
     id: String
+    depts_missing_program_ids: [String]
+    services_missing_program_ids: [ServicesMissingProgramIds]
     service_general_stats: ServiceGeneralStats
     service_channels_summary: [ServiceChannelsSummary]
     service_digital_status_summary: [ServiceDigitalStatusSummary]
     service_standards_summary: [ServiceStandardsSummary]
     subject_offering_services_summary: [OrgsOfferingServicesSummary]
+  }
+  type ServicesMissingProgramIds{
+    id: String
+    name: String
+    submission_year: String
+    dept_code: String
+    program_activity_codes: [String]
   }
   type ServiceGeneralStats{
     report_years: [String]

@@ -14,4 +14,75 @@ const application_channels_keys = [
   "online_application_count",
 ];
 
-export { digital_status_keys, application_channels_keys };
+const channel_def_en = {
+  eml: "Email",
+  fax: "Fax",
+  person: "In-Person",
+  non: "None",
+  onl: "Online",
+  post: "Postal Mail",
+  tel: "Telephone",
+  oth: "Other",
+};
+
+const channel_def_fr = {
+  eml: "Courriel",
+  fax: "Fax",
+  person: "En personne",
+  non: "Aucun",
+  onl: "En ligne",
+  post: "Courrier postal",
+  tel: "Téléphone",
+  oth: "Autre",
+};
+
+const service_std_type_en = {
+  acs: "Access",
+  acy: "Accuracy",
+  oth: "Other",
+  tml: "Timeliness",
+};
+
+const service_std_type_fr = {
+  access: "Access",
+  accuracy: "Accuracy",
+  other: "Other",
+  timeliness: "Rapidité",
+  acs: "Accès",
+  acy: "Exactitude",
+  oth: "Autre",
+  tml: "Délai",
+};
+
+const service_type_en = {
+  cer: "Care, Education, Recreation",
+  gnc: "Grants and Contributions",
+  reg_vol: "High Volume Regulatory Transactions",
+  res: "Resources",
+  apir: "Agreements, Permissions, Inspections, Rulings",
+  lrp: "Legislation, Regulation, Policy",
+  info: "Information",
+  ppi: "Penalties, Protection, Intervention",
+};
+
+const service_type_fr = {
+  cer: "Soins, éducation, loisirs",
+  gnc: "Subventions et Contributions",
+  reg_vol: "Transaction réglementaires à demande élevée",
+  res: "Resources",
+  apir: "Accords, autorisations, inspections, décisions",
+  lrp: "Législation, réglementation, politique",
+  info: "Information",
+  ppi: "Pénalités, protection, intervention",
+};
+
+export {
+  digital_status_keys,
+  application_channels_keys,
+  channel_def_en,
+  channel_def_fr,
+  service_std_type_en,
+  service_std_type_fr,
+  service_type_en,
+  service_type_fr,
+};

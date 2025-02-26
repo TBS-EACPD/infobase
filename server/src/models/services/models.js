@@ -106,6 +106,16 @@ export default function (model_singleton) {
 
   const common_service_fields = {
     id: pkey_type(),
+    depts_missing_program_ids: [str_type],
+    services_missing_program_ids: [
+      {
+        id: str_type,
+        ...bilingual_str("name"),
+        submission_year: str_type,
+        dept_code: str_type,
+        program_activity_codes: [str_type],
+      },
+    ],
     service_general_stats: {
       report_years: [str_type],
       standard_years: [str_type],

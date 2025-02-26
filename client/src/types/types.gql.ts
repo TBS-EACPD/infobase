@@ -731,12 +731,23 @@ export type ServiceStandardsSummary = {
 
 export type ServiceSummary = {
   __typename?: 'ServiceSummary';
+  depts_missing_program_ids?: Maybe<Array<Maybe<Scalars['String']>>>;
   id?: Maybe<Scalars['String']>;
   service_channels_summary?: Maybe<Array<Maybe<ServiceChannelsSummary>>>;
   service_digital_status_summary?: Maybe<Array<Maybe<ServiceDigitalStatusSummary>>>;
   service_general_stats?: Maybe<ServiceGeneralStats>;
   service_standards_summary?: Maybe<Array<Maybe<ServiceStandardsSummary>>>;
+  services_missing_program_ids?: Maybe<Array<Maybe<ServicesMissingProgramIds>>>;
   subject_offering_services_summary?: Maybe<Array<Maybe<OrgsOfferingServicesSummary>>>;
+};
+
+export type ServicesMissingProgramIds = {
+  __typename?: 'ServicesMissingProgramIds';
+  dept_code?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  submission_year?: Maybe<Scalars['String']>;
 };
 
 export type StandardReport = {

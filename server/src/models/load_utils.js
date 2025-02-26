@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 
 import { join } from "path";
 
-import { csvParse } from "d3-dsv";
+import { csvParse, dsvFormat } from "d3-dsv";
 
 import _ from "lodash";
 
@@ -17,7 +17,7 @@ export function get_file_from_data_dir(file_name) {
 export const empties_to_nulls = (obj) =>
   _.mapValues(obj, (val) => (_.includes(["", "."], val) ? null : val));
 
-export function get_standard_csv_file_rows(file_name) {
+export function get_standard_csv_file_rows(file_name, delimiter = ",") {
   const file = get_file_from_data_dir(file_name);
 
   // Not using _.snakeCase because we don't want it's behaviour of adding new _'s on case changes
@@ -25,9 +25,9 @@ export function get_standard_csv_file_rows(file_name) {
     _.chain(header_row).replace(" ", "_").toLower().value()
   );
 
-  const rows = csvParse(file_with_snake_case_headers).map((row) =>
-    empties_to_nulls(row)
-  );
+  const rows = dsvFormat(delimiter)
+    .parse(file_with_snake_case_headers)
+    .map((row) => empties_to_nulls(row));
 
   return rows;
 }
