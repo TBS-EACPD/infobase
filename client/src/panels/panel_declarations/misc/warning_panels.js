@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import { declare_panel } from "src/panels/PanelRegistry";
 
@@ -8,6 +8,8 @@ import {
   AlertBanner,
   KeyConceptList,
   MultiColumnList,
+  LeafSpinner,
+  StatelessDetails,
 } from "src/components/index";
 
 import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/dynamic_footnotes";
@@ -17,7 +19,12 @@ import * as Results from "src/models/results";
 import {
   useServicesForOrg,
   useServicesForProgram,
+  useServiceSummaryGov,
+  useServiceSummaryOrg,
 } from "src/models/services/queries";
+
+import { infographic_href_template } from "src/infographic/infographic_href_template";
+
 import { Dept } from "src/models/subjects";
 
 import text from "./warning_panels.yaml";
@@ -28,7 +35,6 @@ const { TM, text_maker } = create_text_maker_component([
 ]);
 
 const { result_docs_in_tabling_order } = Results;
-console.log(result_docs_in_tabling_order);
 
 const WarningPanel = ({
   banner_class = "info",
@@ -77,6 +83,9 @@ const dept_with_gaps = [
   "99",
 ];
 
+const service_infographic_link = (id) =>
+  infographic_href_template({ id, subject_type: "service" });
+
 const NoServiceSubmissionPanel = ({ subject }) => {
   const useServices = (() => {
     if (subject.subject_type === "dept") {
@@ -101,6 +110,87 @@ const NoServiceSubmissionPanel = ({ subject }) => {
   );
 };
 
+const ServicesMissingProgramsPanel = ({ subject }) => {
+  const [is_open, set_is_open] = useState(false);
+
+  const is_gov = subject.subject_type === "gov";
+
+  const useSummaryServices = {
+    gov: useServiceSummaryGov,
+    dept: useServiceSummaryOrg,
+  }[subject.subject_type];
+  const { loading, data } = useSummaryServices({ id: subject.id });
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
+
+  const {
+    depts_missing_program_ids,
+    services_missing_program_ids,
+    service_general_stats: { report_years },
+    subject_offering_services_summary,
+  } = data;
+
+  const list_depts_missing_program_ids = _.chain(depts_missing_program_ids)
+    .map((org) => {
+      return (
+        <li key={org}>
+          <a href={`#infographic/dept/${org}/services`}>
+            {Dept.store.lookup(org).name}
+          </a>
+        </li>
+      );
+    })
+    .value();
+
+  const list_services_missing_program_ids = _.chain(
+    services_missing_program_ids
+  )
+    .sortBy("name")
+    .map((service) => {
+      return (
+        <li key={service.id}>
+          <a href={service_infographic_link(service.id)}>{service.name}</a>
+        </li>
+      );
+    })
+    .value();
+
+  const show_panel = is_gov
+    ? !_.isEmpty(depts_missing_program_ids)
+    : depts_missing_program_ids.includes(subject.id);
+
+  return (
+    show_panel && (
+      <WarningPanel banner_class="warning" center_text={false}>
+        <TM
+          k={`${subject.subject_type}_services_missing_program_intro`}
+          args={{
+            to_year: _.first(report_years),
+
+            subject,
+          }}
+        />
+        <StatelessDetails
+          summary_content={
+            <TM k={`${subject.subject_type}_missing_program_ids_dropdown`} />
+          }
+          content={
+            is_gov ? (
+              <ul>{list_depts_missing_program_ids}</ul>
+            ) : (
+              <ul>{list_services_missing_program_ids}</ul>
+            )
+          }
+          on_click={() => set_is_open(!is_open)}
+          is_open={is_open}
+        />
+      </WarningPanel>
+    )
+  );
+};
+
 export const declare_no_services_submission_panel = () =>
   declare_panel({
     panel_key: `no_services_submission_warning`,
@@ -109,6 +199,19 @@ export const declare_no_services_submission_panel = () =>
       ...common_panel_config,
       render: ({ subject }) => {
         return <NoServiceSubmissionPanel subject={subject} />;
+      },
+    }),
+  });
+
+export const declare_services_missing_program_ids_panel = () =>
+  declare_panel({
+    panel_key: `servicves_missing_program_ids_warning`,
+    subject_types: ["gov", "dept"],
+    panel_config_func: () => ({
+      ...common_panel_config,
+
+      render: ({ subject }) => {
+        return <ServicesMissingProgramsPanel subject={subject} />;
       },
     }),
   });

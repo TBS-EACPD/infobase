@@ -8,7 +8,7 @@ export type ServiceSummaryGovQueryVariables = Types.Exact<{
 }>;
 
 
-export type ServiceSummaryGovQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', id?: string | null, service_summary?: { __typename?: 'ServiceSummary', service_general_stats?: { __typename?: 'ServiceGeneralStats', report_years?: Array<string | null> | null, standard_years?: Array<string | null> | null, number_of_services?: number | null, number_of_online_enabled_services?: number | null, pct_of_standards_met_high_vol_services?: number | null, pct_of_online_client_interaction_pts?: number | null, num_of_subject_offering_services?: number | null, num_of_programs_offering_services?: number | null } | null, service_channels_summary?: Array<{ __typename?: 'ServiceChannelsSummary', subject_id?: string | null, year?: string | null, channel_id?: string | null, channel_value?: number | null } | null> | null, service_digital_status_summary?: Array<{ __typename?: 'ServiceDigitalStatusSummary', key?: string | null, key_desc?: string | null, subject_id?: string | null, can_online?: number | null, cannot_online?: number | null, not_applicable?: number | null } | null> | null, service_standards_summary?: Array<{ __typename?: 'ServiceStandardsSummary', subject_id?: string | null, year?: string | null, services_w_standards_count?: number | null, standards_count?: number | null, met_standards_count?: number | null } | null> | null, subject_offering_services_summary?: Array<{ __typename?: 'OrgsOfferingServicesSummary', subject_id?: string | null, number_of_services?: number | null, total_volume?: number | null } | null> | null } | null } | null } };
+export type ServiceSummaryGovQuery = { __typename?: 'Query', root: { __typename?: 'Root', gov?: { __typename?: 'Gov', id?: string | null, service_summary?: { __typename?: 'ServiceSummary', depts_missing_program_ids?: Array<string | null> | null, services_missing_program_ids?: Array<{ __typename?: 'ServicesMissingProgramIds', id?: string | null, name?: string | null, submission_year?: string | null, dept_code?: string | null, program_activity_codes?: Array<string | null> | null } | null> | null, service_general_stats?: { __typename?: 'ServiceGeneralStats', report_years?: Array<string | null> | null, all_report_years?: Array<string | null> | null, standard_years?: Array<string | null> | null, number_of_services?: number | null, number_of_online_enabled_services?: number | null, pct_of_standards_met_high_vol_services?: number | null, pct_of_online_client_interaction_pts?: number | null, num_of_subject_offering_services?: number | null, num_of_programs_offering_services?: number | null } | null, service_channels_summary?: Array<{ __typename?: 'ServiceChannelsSummary', subject_id?: string | null, year?: string | null, channel_id?: string | null, channel_value?: number | null } | null> | null, service_digital_status_summary?: Array<{ __typename?: 'ServiceDigitalStatusSummary', key?: string | null, key_desc?: string | null, subject_id?: string | null, can_online?: number | null, cannot_online?: number | null, not_applicable?: number | null } | null> | null, service_standards_summary?: Array<{ __typename?: 'ServiceStandardsSummary', subject_id?: string | null, year?: string | null, services_w_standards_count?: number | null, standards_count?: number | null, met_standards_count?: number | null } | null> | null, subject_offering_services_summary?: Array<{ __typename?: 'OrgsOfferingServicesSummary', subject_id?: string | null, number_of_services?: number | null, total_volume?: number | null } | null> | null, list_of_missing_dept?: Array<{ __typename?: 'MissingDept', org_id?: string | null, report_years?: Array<string | null> | null } | null> | null } | null } | null } };
 
 
 export const ServiceSummaryGovDocument = gql`
@@ -17,8 +17,17 @@ export const ServiceSummaryGovDocument = gql`
     gov {
       id
       service_summary {
+        depts_missing_program_ids
+        services_missing_program_ids {
+          id
+          name
+          submission_year
+          dept_code
+          program_activity_codes
+        }
         service_general_stats {
           report_years
+          all_report_years
           standard_years
           number_of_services
           number_of_online_enabled_services
@@ -52,6 +61,10 @@ export const ServiceSummaryGovDocument = gql`
           subject_id
           number_of_services
           total_volume
+        }
+        list_of_missing_dept {
+          org_id
+          report_years
         }
       }
     }

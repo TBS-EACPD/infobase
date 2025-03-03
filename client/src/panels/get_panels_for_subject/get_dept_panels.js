@@ -32,6 +32,7 @@ import {
   declare_application_channels_by_services_panel,
 
   // shared gov, dept
+  declare_services_missing_program_ids_panel,
   declare_links_to_rpb_panel,
   declare_in_year_voted_stat_split_panel,
   declare_in_year_estimates_split_panel,
@@ -118,6 +119,7 @@ export const get_dept_panels = (subject) =>
     services: services_feature_flag &&
       subject.has_data("services") && [
         declare_no_services_submission_panel(),
+        declare_services_missing_program_ids_panel(),
         declare_services_intro_panel(),
         declare_subject_offering_services_panel(),
         declare_provided_services_list_panel(),
