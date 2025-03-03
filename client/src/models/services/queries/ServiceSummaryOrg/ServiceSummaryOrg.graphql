@@ -3,8 +3,17 @@ query ServiceSummaryOrg($lang: String!, $id: String!) {
     org(org_id: $id) {
       id
       service_summary {
+        depts_missing_program_ids
+        services_missing_program_ids {
+          id
+          name
+          submission_year
+          dept_code
+          program_activity_codes
+        }
         service_general_stats {
           report_years
+          all_report_years
           standard_years
           number_of_services
           number_of_online_enabled_services
@@ -38,6 +47,10 @@ query ServiceSummaryOrg($lang: String!, $id: String!) {
           subject_id
           number_of_services
           total_volume
+        }
+        list_of_missing_dept {
+          org_id
+          report_years
         }
       }
     }

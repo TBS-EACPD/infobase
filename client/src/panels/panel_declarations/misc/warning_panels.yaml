@@ -25,3 +25,47 @@ no_service_submission_text:
     {{subject.name}} had a gap in reporting service data. As a result, not all fiscal years include data on application volumes.
   fr: |
     {{subject.name}} avait une lacune dans la communication des données de service. Par conséquent, ce ne sont pas tous les exercices financiers qui incluent des données sur les volumes de demandes.
+
+gov_services_missing_program_intro:
+ transform: [handlebars, markdown]
+ en: |
+   For **{{fmt_year_to_fiscal_year to_year}}**, some departments and agencies in the **GC Service Inventory** are still in the process of reporting service data. Updates will follow.
+ fr: |
+   Fill in
+
+dept_services_missing_program_intro:
+  transform: [handlebars, markdown]
+  en: |
+    For **{{fmt_year_to_fiscal_year to_year}}**, the collection of program data through which certain services are offered through is still in progress for **{{subject.name}}**. Updates will follow. 
+  fr: |
+    Fill in
+
+gov_missing_program_ids_dropdown:
+  en: Click here to view the list of the departments and agencies
+  fr: Fill later
+
+dept_missing_program_ids_dropdown:
+  en: Click here to view the list of services
+  fr: Fill later
+
+gov_services_missing_programs_list:
+  transform: [handlebars, markdown]
+  en: |
+    {{list}}
+  fr: |
+    {{list}} 
+
+depts_missing_programs_intro:
+  transform: [handlebars, markdown]
+  en: |
+    For **{{fmt_year_to_fiscal_year to_year}}**, **{{num_missing_dept}}** out of **{{num_of_subject_offering_services}}** departments and agencies in the **GC Service Inventory** are still in the process of reporting service data. Updates will follow.
+depts_missing_programs_ids_text:
+  en: Click here to view a list of the departments and agencies in the process of reporting
+  fr: Fill later
+
+missing_dept_list:
+  transform: [handlebars, markdown]
+  en: |
+    {{list}}
+  fr: |
+    {{list}}   

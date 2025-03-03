@@ -11,6 +11,7 @@ import {
   declare_late_planned_resources_panel,
 
   // shared gov, dept
+  declare_services_missing_program_ids_panel,
   declare_links_to_rpb_panel,
   declare_in_year_voted_stat_split_panel,
   declare_in_year_estimates_split_panel,
@@ -82,6 +83,7 @@ export const get_gov_panels = () => ({
     declare_employee_gender_panel(),
   ],
   services: services_feature_flag && [
+    declare_services_missing_program_ids_panel(),
     declare_services_intro_panel(),
     declare_subject_offering_services_panel(),
     declare_services_digital_status_panel(),

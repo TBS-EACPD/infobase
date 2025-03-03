@@ -55,6 +55,7 @@ export {
   declare_tag_progs_by_dept_panel,
   declare_related_tags_panel,
   declare_no_services_submission_panel,
+  declare_services_missing_program_ids_panel,
 } from "./misc/index";
 
 export {

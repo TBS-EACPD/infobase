@@ -421,10 +421,6 @@ export default async function ({ models }) {
 
   const get_services_missing_program_ids = (services) =>
     _.chain(services)
-      .filter(
-        (service) =>
-          _.difference(service.program_activity_codes, program_ids).length != 0
-      )
       .map(
         ({
           id,
@@ -439,9 +435,12 @@ export default async function ({ models }) {
           name_fr,
           submission_year,
           dept_code: dept_code_by_dept_id[org_id],
-          program_activity_codes,
+          program_activity_codes: program_activity_codes.filter(
+            (value) => !program_ids.includes(value)
+          ),
         })
       )
+      .filter((row) => !_.isEmpty(row.program_activity_codes))
       .value();
 
   const get_depts_missing_program_ids = (services) =>
@@ -668,6 +667,28 @@ export default async function ({ models }) {
       submission_year === absolute_most_recent_submission_year
   );
 
+  const get_missing_departments_per_year = () => {
+    const all_report_years = get_years_from_service_report(
+      absolute_most_recent_year_filtered_services
+    );
+
+    const report_years_per_org_id = _.chain(filtered_service_rows)
+      .groupBy("org_id")
+      .flatMap((services, org_id) => {
+        const years = get_years_from_service_report(services);
+        return {
+          org_id: org_id,
+          report_years: years,
+        };
+      })
+      .value();
+
+    return _.filter(
+      report_years_per_org_id,
+      ({ report_years }) => report_years.length !== all_report_years.length
+    );
+  };
+
   const gov_summary = [
     {
       id: "gov",
@@ -679,6 +700,9 @@ export default async function ({ models }) {
       ),
       service_general_stats: {
         report_years: get_years_from_service_report(
+          absolute_most_recent_year_filtered_services
+        ),
+        all_report_years: get_years_from_service_report(
           absolute_most_recent_year_filtered_services
         ),
         standard_years: get_years_from_service_standards(
@@ -707,6 +731,7 @@ export default async function ({ models }) {
           .size()
           .value(),
       },
+      list_of_missing_dept: get_missing_departments_per_year(),
       service_channels_summary: get_service_channels_summary(
         absolute_most_recent_year_filtered_services
       ),
@@ -743,11 +768,13 @@ export default async function ({ models }) {
         depts_missing_program_ids: get_depts_missing_program_ids(
           absolute_most_recent_year_filtered_services
         ),
-        services_missing_program_ids: get_services_missing_program_ids(
-          absolute_most_recent_year_filtered_services
-        ),
+        services_missing_program_ids:
+          get_services_missing_program_ids(filtered_services),
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
+          all_report_years: get_years_from_service_report(
+            absolute_most_recent_year_filtered_services
+          ),
           standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
@@ -774,6 +801,7 @@ export default async function ({ models }) {
           get_subject_offering_services_summary(
             _.reduce(filtered_services, group_by_program_id, {})
           ),
+        list_of_missing_dept: get_missing_departments_per_year(),
       };
     })
     .value();
@@ -791,6 +819,9 @@ export default async function ({ models }) {
         id: program_id,
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
+          all_report_years: get_years_from_service_report(
+            absolute_most_recent_year_filtered_services
+          ),
           standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
           number_of_online_enabled_services:
@@ -812,6 +843,7 @@ export default async function ({ models }) {
           filtered_services,
           program_id
         ),
+        list_of_missing_dept: get_missing_departments_per_year(),
       };
     })
     .value();
