@@ -121,6 +121,7 @@ export default function (model_singleton) {
       all_report_years: [str_type],
       standard_years: [str_type],
       number_of_services: { type: Number },
+      number_of_services_w_program: { type: Number },
       number_of_online_enabled_services: { type: Number },
       pct_of_online_client_interaction_pts: { type: Number },
       pct_of_standards_met_high_vol_services: { type: Number },

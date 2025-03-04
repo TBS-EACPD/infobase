@@ -684,6 +684,7 @@ export type ServiceGeneralStats = {
   num_of_subject_offering_services?: Maybe<Scalars['Float']>;
   number_of_online_enabled_services?: Maybe<Scalars['Float']>;
   number_of_services?: Maybe<Scalars['Float']>;
+  number_of_services_w_program?: Maybe<Scalars['Float']>;
   pct_of_online_client_interaction_pts?: Maybe<Scalars['Float']>;
   pct_of_standards_met_high_vol_services?: Maybe<Scalars['Float']>;
   report_years?: Maybe<Array<Maybe<Scalars['String']>>>;
