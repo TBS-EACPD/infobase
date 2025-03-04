@@ -32,7 +32,6 @@ gov_services_missing_program_intro:
    For **{{fmt_year_to_fiscal_year to_year}}**, some departments and agencies in the **GC Service Inventory** are still in the process of reporting service data. Updates will follow.
  fr: |
    Fill in
-
 dept_services_missing_program_intro:
   transform: [handlebars, markdown]
   en: |
@@ -43,29 +42,7 @@ dept_services_missing_program_intro:
 gov_missing_program_ids_dropdown:
   en: Click here to view the list of the departments and agencies
   fr: Fill later
-
 dept_missing_program_ids_dropdown:
   en: Click here to view the list of services
   fr: Fill later
 
-gov_services_missing_programs_list:
-  transform: [handlebars, markdown]
-  en: |
-    {{list}}
-  fr: |
-    {{list}} 
-
-depts_missing_programs_intro:
-  transform: [handlebars, markdown]
-  en: |
-    For **{{fmt_year_to_fiscal_year to_year}}**, **{{num_missing_dept}}** out of **{{num_of_subject_offering_services}}** departments and agencies in the **GC Service Inventory** are still in the process of reporting service data. Updates will follow.
-depts_missing_programs_ids_text:
-  en: Click here to view a list of the departments and agencies in the process of reporting
-  fr: Fill later
-
-missing_dept_list:
-  transform: [handlebars, markdown]
-  en: |
-    {{list}}
-  fr: |
-    {{list}}   

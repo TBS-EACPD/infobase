@@ -23,9 +23,9 @@ import {
   useServiceSummaryOrg,
 } from "src/models/services/queries";
 
-import { infographic_href_template } from "src/infographic/infographic_href_template";
-
 import { Dept } from "src/models/subjects";
+
+import { infographic_href_template } from "src/infographic/infographic_href_template";
 
 import text from "./warning_panels.yaml";
 
@@ -129,7 +129,6 @@ const ServicesMissingProgramsPanel = ({ subject }) => {
     depts_missing_program_ids,
     services_missing_program_ids,
     service_general_stats: { report_years },
-    subject_offering_services_summary,
   } = data;
 
   const list_depts_missing_program_ids = _.chain(depts_missing_program_ids)

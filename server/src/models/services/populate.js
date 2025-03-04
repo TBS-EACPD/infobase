@@ -275,6 +275,20 @@ export default async function ({ models }) {
     .fromPairs()
     .value();
 
+  const program_activity_codes_formatter = (program_activity_codes, org_id) =>
+    _.chain(program_activity_codes)
+      .split(",")
+      .map((id) =>
+        _.includes(id, "ISS")
+          ? id &&
+            `${dept_code_by_dept_id[org_id]}-${internal_service.concat(
+              id.slice(-1)
+            )}`
+          : id && `${dept_code_by_dept_id[org_id]}-${id}`
+      )
+      .compact()
+      .value();
+
   const filtered_service_rows = _.chain(service_rows_raw)
     .map((service) => {
       const {
@@ -359,18 +373,10 @@ export default async function ({ models }) {
           "N"
         ),
         report_years: get_years_from_service_report([{ service_report }]),
-        program_activity_codes: _.chain(program_activity_codes)
-          .split(",")
-          .map((id) =>
-            _.includes(id, "ISS")
-              ? id &&
-                `${dept_code_by_dept_id[org_id]}-${internal_service.concat(
-                  id.slice(-1)
-                )}`
-              : id && `${dept_code_by_dept_id[org_id]}-${id}`
-          )
-          .compact()
-          .value(),
+        program_activity_codes: program_activity_codes_formatter(
+          program_activity_codes,
+          org_id
+        ).filter((value) => program_ids.includes(value)),
         last_accessibility_review: last_accessibility_review
           ? _.toInteger(last_accessibility_review)
           : last_accessibility_review,
@@ -419,40 +425,45 @@ export default async function ({ models }) {
     })
     .value();
 
-  const get_services_missing_program_ids = (services) =>
-    _.chain(services)
-      .map(
-        ({
-          id,
-          name_en,
-          name_fr,
-          submission_year,
-          org_id,
+  const services_missing_program_ids = _.chain(service_rows_raw)
+    .filter(
+      ({ fiscal_yr }) =>
+        get_fiscal_yr(fiscal_yr) === absolute_most_recent_submission_year
+    )
+    .map(
+      ({
+        service_id: id,
+        service_name_en: name_en,
+        service_name_fr: name_fr,
+        fiscal_yr: submission_year,
+        org_id,
+        program_id: program_activity_codes,
+      }) => ({
+        id,
+        name_en,
+        name_fr,
+        submission_year: get_fiscal_yr(submission_year),
+        org_id,
+        dept_code: dept_code_by_dept_id[org_id],
+        program_activity_codes: program_activity_codes_formatter(
           program_activity_codes,
-        }) => ({
-          id,
-          name_en,
-          name_fr,
-          submission_year,
-          dept_code: dept_code_by_dept_id[org_id],
-          program_activity_codes: program_activity_codes.filter(
-            (value) => !program_ids.includes(value)
-          ),
-        })
-      )
-      .filter((row) => !_.isEmpty(row.program_activity_codes))
-      .value();
+          org_id
+        ).filter(
+          (value) => !program_ids.includes(value) && !_.includes(value, "ISS")
+        ),
+      })
+    )
+    .filter((row) => !_.isEmpty(row.program_activity_codes))
+    .value();
 
-  const get_depts_missing_program_ids = (services) =>
-    _.chain(services)
-      .map(({ org_id, program_activity_codes }) =>
-        _.difference(program_activity_codes, program_ids).length != 0
-          ? org_id
-          : null
-      )
-      .compact()
-      .uniq()
-      .value();
+  const org_w_services_missing_program_ids = _.chain(
+    services_missing_program_ids
+  )
+    .map((service) => service.org_id)
+    .compact()
+    .uniq()
+    .sort()
+    .value();
 
   const group_by_program_id = (result, service) => {
     _.forEach(service.program_activity_codes, (program_id) => {
@@ -692,12 +703,8 @@ export default async function ({ models }) {
   const gov_summary = [
     {
       id: "gov",
-      depts_missing_program_ids: get_depts_missing_program_ids(
-        absolute_most_recent_year_filtered_services
-      ),
-      services_missing_program_ids: get_services_missing_program_ids(
-        absolute_most_recent_year_filtered_services
-      ),
+      depts_missing_program_ids: org_w_services_missing_program_ids,
+      services_missing_program_ids: services_missing_program_ids,
       service_general_stats: {
         report_years: get_years_from_service_report(
           absolute_most_recent_year_filtered_services
@@ -765,11 +772,11 @@ export default async function ({ models }) {
       });
       return {
         id: org_id,
-        depts_missing_program_ids: get_depts_missing_program_ids(
-          absolute_most_recent_year_filtered_services
+        depts_missing_program_ids: org_w_services_missing_program_ids,
+        services_missing_program_ids: _.filter(
+          services_missing_program_ids,
+          (row) => row.org_id === org_id
         ),
-        services_missing_program_ids:
-          get_services_missing_program_ids(filtered_services),
         service_general_stats: {
           report_years: get_years_from_service_report(filtered_services),
           all_report_years: get_years_from_service_report(
@@ -777,6 +784,10 @@ export default async function ({ models }) {
           ),
           standard_years: get_years_from_service_standards(filtered_services),
           number_of_services: filtered_services.length,
+          number_of_services_w_program: _.filter(
+            filtered_services,
+            (row) => !_.isEmpty(row.program_activity_codes)
+          ).length,
           number_of_online_enabled_services:
             get_number_of_online_enabled_services(filtered_services),
           pct_of_online_client_interaction_pts:
