@@ -17,8 +17,6 @@ import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
 import {
-  useServicesForOrg,
-  useServicesForProgram,
   useServiceSummaryGov,
   useServiceSummaryOrg,
 } from "src/models/services/queries";
@@ -60,55 +58,8 @@ const dead_panel_config = {
   calculate: ({ subject }) => subject.is_dead,
 };
 
-const dept_with_gaps = [
-  "263",
-  "124",
-  "69",
-  "150",
-  "98",
-  "297",
-  "347",
-  "246",
-  "210",
-  "539",
-  "333",
-  "302",
-  "222",
-  "174",
-  "152",
-  "134",
-  "118",
-  "117",
-  "114",
-  "99",
-];
-
 const service_infographic_link = (id) =>
   infographic_href_template({ id, subject_type: "service" });
-
-const NoServiceSubmissionPanel = ({ subject }) => {
-  const useServices = (() => {
-    if (subject.subject_type === "dept") {
-      return useServicesForOrg;
-    }
-    if (subject.subject_type === "program") {
-      return useServicesForProgram;
-    }
-  })();
-
-  const { loading } = useServices({ id: subject.id });
-  if (loading) {
-    return <span>loading</span>;
-  }
-
-  return (
-    dept_with_gaps.includes(subject.id) && (
-      <WarningPanel banner_class="warning">
-        <TM k="no_service_submission_text" args={{ subject }} />
-      </WarningPanel>
-    )
-  );
-};
 
 const ServicesMissingProgramsPanel = ({ subject }) => {
   const [is_open, set_is_open] = useState(false);
@@ -189,18 +140,6 @@ const ServicesMissingProgramsPanel = ({ subject }) => {
     )
   );
 };
-
-export const declare_no_services_submission_panel = () =>
-  declare_panel({
-    panel_key: `no_services_submission_warning`,
-    subject_types: ["dept", "program"],
-    panel_config_func: () => ({
-      ...common_panel_config,
-      render: ({ subject }) => {
-        return <NoServiceSubmissionPanel subject={subject} />;
-      },
-    }),
-  });
 
 export const declare_services_missing_program_ids_panel = () =>
   declare_panel({
