@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 
 import { join } from "path";
 
-import { csvParse, dsvFormat } from "d3-dsv";
+import { dsvFormat } from "d3-dsv";
 
 import _ from "lodash";
 

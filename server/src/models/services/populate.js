@@ -15,9 +15,6 @@ import {
 
 const internal_service = "ISS0";
 
-const multi_value_string_fields_to_arrays = (list_fields, seperator = ",") =>
-  _.mapValues(list_fields, (array_string) => _.split(array_string, seperator));
-
 const key_to_text_def = (definition, list_values) => {
   if (list_values.length > 1) {
     return _.chain(list_values)
