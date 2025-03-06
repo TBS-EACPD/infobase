@@ -30,8 +30,6 @@ const ProvidedServicesListPanel = ({ subject }) => {
       : suspendedServicesForOrg;
   const services = getServicesQuery({ id: subject.id });
 
-  const does_active_service_exist = _.filter(services, "is_active").length > 0;
-
   const includes_lowercase = (value, query) =>
     _.includes(value.toLowerCase(), query.toLowerCase());
   const filtered_sorted_data = _.chain(services)
@@ -98,7 +96,7 @@ const ProvidedServicesListPanel = ({ subject }) => {
                         {type}
                       </span>
                     ))}
-                    {does_active_service_exist && !is_active && (
+                    {!is_active && (
                       <span
                         className="tag-badge tag-badge--red"
                         style={{ marginRight: "1rem" }}

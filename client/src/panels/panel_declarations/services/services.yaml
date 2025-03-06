@@ -112,6 +112,12 @@ list_of_provided_services_program_caveat:
     Programs can have one or more {{gl_sidebar_link "services" "SERVICE"}}. As well, a service may be offered through several programs.
   fr: |
     Les programmes peuvent avoir un ou plusieurs {{gl_sidebar_link "services" "SERVICE"}}. De même, un service peut être offert par le biais de plusieurs programmes.
+no_services_with_programs:
+  transform: [handlebars, markdown]
+  en: |
+    **{{subject.name}}** does not have any services provided via programs.
+  fr: |
+    Fill later
 
 view_service:
   en: Explore the service

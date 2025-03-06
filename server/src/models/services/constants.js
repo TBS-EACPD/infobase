@@ -44,10 +44,6 @@ const service_std_type_en = {
 };
 
 const service_std_type_fr = {
-  access: "Access",
-  accuracy: "Accuracy",
-  other: "Other",
-  timeliness: "Rapidité",
   acs: "Accès",
   acy: "Exactitude",
   oth: "Autre",

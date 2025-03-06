@@ -79,7 +79,13 @@ const OrgsOfferingServicesPanel = ({ subject }) => {
       },
     }),
   };
-  return (
+  return _.isEmpty(cleaned_data) ? (
+    <TM
+      className="medium-panel-text"
+      k="no_services_with_programs"
+      args={{ subject }}
+    />
+  ) : (
     <HeightClippedGraph clipHeight={600}>
       {!is_gov && (
         <TM

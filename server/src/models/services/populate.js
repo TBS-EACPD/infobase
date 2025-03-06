@@ -215,7 +215,7 @@ export default async function ({ models }) {
       standard_report_comment_en,
       standard_report_comment_fr,
       year: get_fiscal_yr(year),
-      lower,
+      lower: lower * 100,
       met_count,
       count,
     })
@@ -231,8 +231,6 @@ export default async function ({ models }) {
       type,
       service_standard_en: name_en,
       service_standard_fr: name_fr,
-      comments_en: standard_comment_en,
-      comments_fr: standard_comment_fr,
     }) => ({
       standard_id,
       service_id,
@@ -245,8 +243,6 @@ export default async function ({ models }) {
       type_fr: key_to_text_def(service_std_type_fr, [type]),
       name_en,
       name_fr,
-      standard_comment_en,
-      standard_comment_fr,
       ...get_corresponding_urls(
         standards_urls[service_id],
         get_fiscal_yr(submission_year),
@@ -259,7 +255,12 @@ export default async function ({ models }) {
     })
   );
 
-  const absolute_most_recent_submission_year = "2023";
+  const absolute_most_recent_submission_year = _.chain(service_rows_raw)
+    .map(({ fiscal_yr }) => get_fiscal_yr(fiscal_yr))
+    .uniq()
+    .sort()
+    .last()
+    .value();
 
   const unique_dept_codes = _.chain(service_rows_raw)
     .map("org_id")
@@ -296,16 +297,13 @@ export default async function ({ models }) {
         service_name_fr: name_fr,
         service_description_en: description_en,
         service_description_fr: description_fr,
-        collects_fees,
+        service_fee: collects_fees,
         os_account_registration: account_reg_digital_status,
         os_authentication: authentication_status,
         os_application: application_digital_status,
         os_decision: decision_digital_status,
         os_issuance: issuance_digital_status,
         os_issue_resolution_feedback: issue_res_digital_status,
-        last_service_review,
-        last_service_improvement,
-        last_gba,
 
         service_type,
         program_id: program_activity_codes,
@@ -313,22 +311,14 @@ export default async function ({ models }) {
         os_comments_client_interaction_fr: digital_enablement_comment_fr,
       } = service;
 
-      const service_report = _.filter(
-        service_report_rows,
-        (service_report) => service_report.service_id === id
-      );
-      const standards = _.filter(
-        service_standard_rows,
-        (service_standard) => service_standard.service_id === id
-      );
-
-      const last_accessibility_review = get_fiscal_yr(last_service_review);
-
-      const last_improve_from_feedback = get_fiscal_yr(
-        last_service_improvement
-      );
-
-      const last_gender_analysis = get_fiscal_yr(last_gba);
+      const service_report = _.chain(service_report_rows)
+        .filter((service_report) => service_report.service_id === id)
+        .sortBy("year")
+        .value();
+      const standards = _.chain(service_standard_rows)
+        .filter((service_standard) => service_standard.service_id === id)
+        .sortBy("submission_year")
+        .value();
 
       return {
         id,
@@ -374,15 +364,6 @@ export default async function ({ models }) {
           program_activity_codes,
           org_id
         ).filter((value) => program_ids.includes(value)),
-        last_accessibility_review: last_accessibility_review
-          ? _.toInteger(last_accessibility_review)
-          : last_accessibility_review,
-        last_improve_from_feedback: last_improve_from_feedback
-          ? _.toInteger(last_improve_from_feedback)
-          : last_improve_from_feedback,
-        last_gender_analysis: last_gender_analysis
-          ? _.toInteger(last_gender_analysis)
-          : last_gender_analysis,
 
         service_type_code: service_type,
         service_type_en: key_to_text_def(
