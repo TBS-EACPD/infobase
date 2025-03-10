@@ -64,35 +64,16 @@ const service_infographic_link = (id) =>
 const ServicesMissingProgramsPanel = ({ subject }) => {
   const [is_open, set_is_open] = useState(false);
 
-  const is_gov = subject.subject_type === "gov";
-
-  const useSummaryServices = {
-    gov: useServiceSummaryGov,
-    dept: useServiceSummaryOrg,
-  }[subject.subject_type];
-  const { loading, data } = useSummaryServices({ id: subject.id });
+  const { loading, data } = useServiceSummaryOrg({ id: subject.id });
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
   }
 
   const {
-    depts_missing_program_ids,
     services_missing_program_ids,
     service_general_stats: { report_years },
   } = data;
-
-  const list_depts_missing_program_ids = _.chain(depts_missing_program_ids)
-    .map((org) => {
-      return (
-        <li key={org}>
-          <a href={`#infographic/dept/${org}/services`}>
-            {Dept.store.lookup(org).name}
-          </a>
-        </li>
-      );
-    })
-    .value();
 
   const list_services_missing_program_ids = _.chain(
     services_missing_program_ids
@@ -107,32 +88,21 @@ const ServicesMissingProgramsPanel = ({ subject }) => {
     })
     .value();
 
-  const show_panel = is_gov
-    ? !_.isEmpty(depts_missing_program_ids)
-    : depts_missing_program_ids.includes(subject.id);
+  const show_panel = !_.isEmpty(services_missing_program_ids);
 
   return (
     show_panel && (
       <WarningPanel banner_class="warning" center_text={false}>
         <TM
-          k={`${subject.subject_type}_services_missing_program_intro`}
+          k={`dept_services_missing_program_intro`}
           args={{
             to_year: _.first(report_years),
-
             subject,
           }}
         />
         <StatelessDetails
-          summary_content={
-            <TM k={`${subject.subject_type}_missing_program_ids_dropdown`} />
-          }
-          content={
-            is_gov ? (
-              <ul>{list_depts_missing_program_ids}</ul>
-            ) : (
-              <ul>{list_services_missing_program_ids}</ul>
-            )
-          }
+          summary_content={<TM k={`dept_missing_program_ids_dropdown`} />}
+          content={<ul>{list_services_missing_program_ids}</ul>}
           on_click={() => set_is_open(!is_open)}
           is_open={is_open}
         />
@@ -144,7 +114,7 @@ const ServicesMissingProgramsPanel = ({ subject }) => {
 export const declare_services_missing_program_ids_panel = () =>
   declare_panel({
     panel_key: `services_missing_program_ids_warning`,
-    subject_types: ["gov", "dept"],
+    subject_types: ["dept"],
     panel_config_func: () => ({
       ...common_panel_config,
 
