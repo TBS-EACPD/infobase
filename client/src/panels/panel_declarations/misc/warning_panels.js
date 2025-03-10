@@ -16,10 +16,7 @@ import { PRE_DRR_PUBLIC_ACCOUNTS_LATE_FTE_MOCK_DOC } from "src/models/footnotes/
 
 import dynamic_footnote_text from "src/models/footnotes/dynamic_footnotes.yaml";
 import * as Results from "src/models/results";
-import {
-  useServiceSummaryGov,
-  useServiceSummaryOrg,
-} from "src/models/services/queries";
+import { useServiceSummaryOrg } from "src/models/services/queries";
 
 import { Dept } from "src/models/subjects";
 
