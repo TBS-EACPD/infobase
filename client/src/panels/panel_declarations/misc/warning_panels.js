@@ -143,7 +143,7 @@ const ServicesMissingProgramsPanel = ({ subject }) => {
 
 export const declare_services_missing_program_ids_panel = () =>
   declare_panel({
-    panel_key: `servicves_missing_program_ids_warning`,
+    panel_key: `services_missing_program_ids_warning`,
     subject_types: ["gov", "dept"],
     panel_config_func: () => ({
       ...common_panel_config,

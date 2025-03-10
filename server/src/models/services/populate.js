@@ -360,10 +360,13 @@ export default async function ({ models }) {
           "N"
         ),
         report_years: get_years_from_service_report([{ service_report }]),
-        program_activity_codes: program_activity_codes_formatter(
-          program_activity_codes,
-          org_id
-        ).filter((value) => program_ids.includes(value)),
+        program_activity_codes:
+          _.difference(
+            program_activity_codes_formatter(program_activity_codes, org_id),
+            program_ids
+          ).length == 0
+            ? program_activity_codes_formatter(program_activity_codes, org_id)
+            : [],
 
         service_type_code: service_type,
         service_type_en: key_to_text_def(

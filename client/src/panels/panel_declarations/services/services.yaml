@@ -407,6 +407,9 @@ last_improve_from_feedback:
 last_gender_analysis:
   en: Last GBA+ completed
   fr: Dernière ACS+ menée
+program_information_unavailable:
+  en: Program information unavailable, updates will follow
+  fr: Fill in
 
 # Standard
 services_standards_text:
