@@ -115,7 +115,9 @@ const schema = `
     submission_year: String
     is_active: Boolean
     report_years: [String]
+    all_program_activity_codes: [String]
     program_activity_codes: [String]
+    is_missing_program_activity_codes: Boolean
     programs: [Program]
     first_active_year: String
     last_active_year: String
