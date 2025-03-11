@@ -117,7 +117,7 @@ no_services_with_programs:
   en: |
     **{{subject.name}}** does not have any services provided via programs.
   fr: |
-    Fill in later
+    **{{subject.name}}** n'a reçu aucun service fourni par le biais de programmes.
 
 view_service:
   en: Explore the service
@@ -194,13 +194,13 @@ client_interaction_point:
 # Channels
 application_channels:
   en: Application channels
-  fr: Modes d’acheminement des demandes
+  fr: Modes d'acheminement des demandes
 service_name:
   en: Service name
   fr: Nom du service
 services_channels_title:
   en: Applications for services by channel
-  fr: Demandes de service par mode d’acheminement
+  fr: Demandes de service par mode d'acheminement
 application_breakdown_by_channel:
   en: Breakdown of how clients chose to submit their application
   fr: Ventilation de la manière dont les clients ont choisi de présenter leur demande
@@ -279,7 +279,7 @@ most_used_other_application_count:
   en: |
     **In {{fmt_year_to_fiscal_year most_recent_year}}**, there were **{{fmt_big_int max_value}} applications by other channels**; most clients chose to submit their applications by other channels.
   fr: |
-    **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes par d’autres moyens**; la plupart des clients ont préféré présenter leur demande par d’autres moyens.
+    **In {{fmt_year_to_fiscal_year most_recent_year}}**, Il y a eu **{{fmt_big_int max_value}} demandes par d'autres moyens**; la plupart des clients ont préféré présenter leur demande par d'autres moyens.
 most_used_phone_application_count:
   transform: [handlebars, markdown]
   en: |
@@ -424,9 +424,9 @@ service_standards_title:
 service_standards_text:
   transform: [handlebars, markdown]
   en: |
-    {{gl_tt "Service standards" "STANDARD"}} measure the government’s performance, which strengthens its accountability. They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tell them what to expect from the services.
+    {{gl_tt "Service standards" "STANDARD"}} measure the government's performance, which strengthens its accountability. They also help clients make timely, important decisions about accessing {{gl_tt "services" "SERVICE"}} and tell them what to expect from the services.
   fr: |
-    Les {{gl_tt "normes de service" "STANDARD"}} mesurent le rendement du gouvernement, ce qui accroît la reddition de compte. Elles aident également les clients à prendre des décisions importantes et opportunes concernant l'accès aux {{gl_tt "services" "SERVICE"}} et leur indiquent ce à quoi ils peuvent s’attendre.
+    Les {{gl_tt "normes de service" "STANDARD"}} mesurent le rendement du gouvernement, ce qui accroît la reddition de compte. Elles aident également les clients à prendre des décisions importantes et opportunes concernant l'accès aux {{gl_tt "services" "SERVICE"}} et leur indiquent ce à quoi ils peuvent s'attendre.
 no_service_standards_text:
   en: This service does not have any service standards
   fr: Ce service n'a pas de normes de service
@@ -456,13 +456,13 @@ has_standards:
   fr: Le service a des normes
 no_standards:
   en: Service does not have standards
-  fr: Le service n’a pas de normes
+  fr: Le service n'a pas de normes
 target_met_true:
   en: Standard target is met
   fr: La cible standard est atteinte
 target_met_false:
   en: Standard target is not met
-  fr: La cible standard n’est pas atteinte
+  fr: La cible standard n'est pas atteinte
 has_standards_text:
   transform: [handlebars, markdown]
   en: How many {{gl_sidebar_link "services" "SERVICE"}} have {{gl_sidebar_link "standards" "STANDARD"}}?

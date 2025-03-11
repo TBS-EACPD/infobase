@@ -31,9 +31,9 @@ dept_services_missing_program_intro:
   en: |
     For **{{fmt_year_to_fiscal_year to_year}}**, data collection is ongoing to identify the programs through which the following services are offered. Updates will follow.
   fr: |
-    Fill in later
+    Pour **{{fmt_year_to_fiscal_year to_year}}**, la collecte de données est en cours pour identifier les programmes par lesquels les services suivants sont offerts. Des mises à jour suivront.
 
 dept_missing_program_ids_dropdown:
   en: Click here to view the list of services
-  fr: Fill in later
+  fr: Cliquez ici pour voir la liste des services
 
