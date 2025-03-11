@@ -287,6 +287,37 @@ export default async function ({ models }) {
       .compact()
       .value();
 
+  const services_missing_program_ids = _.chain(service_rows_raw)
+    .filter(
+      ({ fiscal_yr }) =>
+        get_fiscal_yr(fiscal_yr) === absolute_most_recent_submission_year
+    )
+    .map(
+      ({
+        service_id: id,
+        service_name_en: name_en,
+        service_name_fr: name_fr,
+        fiscal_yr: submission_year,
+        org_id,
+        program_id: program_activity_codes,
+      }) => ({
+        id,
+        name_en,
+        name_fr,
+        submission_year: get_fiscal_yr(submission_year),
+        org_id,
+        dept_code: dept_code_by_dept_id[org_id],
+        program_activity_codes: program_activity_codes_formatter(
+          program_activity_codes,
+          org_id
+        ).filter(
+          (value) => !program_ids.includes(value) && !_.includes(value, "ISS")
+        ),
+      })
+    )
+    .filter((row) => !_.isEmpty(row.program_activity_codes))
+    .value();
+
   const filtered_service_rows = _.chain(service_rows_raw)
     .map((service) => {
       const {
@@ -360,6 +391,10 @@ export default async function ({ models }) {
           "N"
         ),
         report_years: get_years_from_service_report([{ service_report }]),
+        all_program_activity_codes: program_activity_codes_formatter(
+          program_activity_codes,
+          org_id
+        ),
         program_activity_codes:
           _.difference(
             program_activity_codes_formatter(program_activity_codes, org_id),
@@ -367,6 +402,9 @@ export default async function ({ models }) {
           ).length == 0
             ? program_activity_codes_formatter(program_activity_codes, org_id)
             : [],
+        is_missing_program_activity_codes: services_missing_program_ids.some(
+          (service) => service["id"] === id
+        ),
 
         service_type_code: service_type,
         service_type_en: key_to_text_def(
@@ -404,37 +442,6 @@ export default async function ({ models }) {
       service.is_active =
         service.submission_year === absolute_most_recent_submission_year;
     })
-    .value();
-
-  const services_missing_program_ids = _.chain(service_rows_raw)
-    .filter(
-      ({ fiscal_yr }) =>
-        get_fiscal_yr(fiscal_yr) === absolute_most_recent_submission_year
-    )
-    .map(
-      ({
-        service_id: id,
-        service_name_en: name_en,
-        service_name_fr: name_fr,
-        fiscal_yr: submission_year,
-        org_id,
-        program_id: program_activity_codes,
-      }) => ({
-        id,
-        name_en,
-        name_fr,
-        submission_year: get_fiscal_yr(submission_year),
-        org_id,
-        dept_code: dept_code_by_dept_id[org_id],
-        program_activity_codes: program_activity_codes_formatter(
-          program_activity_codes,
-          org_id
-        ).filter(
-          (value) => !program_ids.includes(value) && !_.includes(value, "ISS")
-        ),
-      })
-    )
-    .filter((row) => !_.isEmpty(row.program_activity_codes))
     .value();
 
   const org_w_services_missing_program_ids = _.chain(

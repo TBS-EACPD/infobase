@@ -46,7 +46,7 @@ export class ServiceOverview extends React.Component {
       standard_url: get_uniq_flat_standard_urls("standard_urls"),
       rtp_url: get_uniq_flat_standard_urls("rtp_urls"),
     };
-    const is_missing_program_ids = _.isEmpty(service.program_activity_codes);
+
     return (
       <TextPanel title={title} sources={sources} datasets={datasets}>
         {!service.is_active && (
@@ -80,7 +80,7 @@ export class ServiceOverview extends React.Component {
           </dd>
           <dt>{text_maker("programs")}</dt>
           <dd>
-            {is_missing_program_ids ? (
+            {service.is_missing_program_activity_codes ? (
               <TM k={"program_information_unavailable"} />
             ) : (
               <ul>

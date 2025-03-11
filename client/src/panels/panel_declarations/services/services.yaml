@@ -117,7 +117,7 @@ no_services_with_programs:
   en: |
     **{{subject.name}}** does not have any services provided via programs.
   fr: |
-    Fill later
+    Fill in later
 
 view_service:
   en: Explore the service
@@ -409,7 +409,7 @@ last_gender_analysis:
   fr: Dernière ACS+ menée
 program_information_unavailable:
   en: Program information unavailable, updates will follow
-  fr: Fill in
+  fr: Fill in later
 
 # Standard
 services_standards_text:

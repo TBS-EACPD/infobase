@@ -624,6 +624,7 @@ export type Service = {
   __typename?: 'Service';
   accessibility_assessors?: Maybe<Array<Maybe<Scalars['String']>>>;
   account_reg_digital_status?: Maybe<Scalars['Boolean']>;
+  all_program_activity_codes?: Maybe<Array<Maybe<Scalars['String']>>>;
   application_digital_status?: Maybe<Scalars['Boolean']>;
   authentication_status?: Maybe<Scalars['Boolean']>;
   collects_fees?: Maybe<Scalars['Boolean']>;
@@ -636,6 +637,7 @@ export type Service = {
   first_active_year?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   is_active?: Maybe<Scalars['Boolean']>;
+  is_missing_program_activity_codes?: Maybe<Scalars['Boolean']>;
   issuance_digital_status?: Maybe<Scalars['Boolean']>;
   issue_res_digital_status?: Maybe<Scalars['Boolean']>;
   last_accessibility_review?: Maybe<Scalars['String']>;
