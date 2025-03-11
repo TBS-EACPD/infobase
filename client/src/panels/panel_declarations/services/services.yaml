@@ -409,7 +409,7 @@ last_gender_analysis:
   fr: Dernière ACS+ menée
 program_information_unavailable:
   en: Program information unavailable, updates will follow
-  fr: Fill in later
+  fr: Informations sur le programme ne sont pas disponibles, des mises à jour suivront
 
 # Standard
 services_standards_text:
