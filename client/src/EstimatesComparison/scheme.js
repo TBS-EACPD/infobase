@@ -208,7 +208,11 @@ function get_data_by_org(include_stat) {
             current_value,
             comparison_value
           ),
-          footnotes: get_footnotes_by_subject_and_topic(org, ["VOTED", "STAT"]),
+          footnotes: get_footnotes_by_subject_and_topic(org, [
+            "VOTED",
+            "STAT",
+            "SPECIAL_WARRANTS",
+          ]),
           amounts_by_doc,
         },
         children: _.chain(rows)

@@ -206,7 +206,7 @@ const misc = LiteralKeyedRecordHelper<DatasetDef>()({
   tabled_estimates: {
     name: text_maker("tabled_estimates_dataset"),
     source_keys: ["estimates"],
-    topic_keys: ["AUTH", "VOTED", "STAT"],
+    topic_keys: ["AUTH", "VOTED", "STAT", "SPECIAL_WARRANTS"],
     infobase_link: rpb_link({
       table: "orgVoteStatEstimates",
     }),
