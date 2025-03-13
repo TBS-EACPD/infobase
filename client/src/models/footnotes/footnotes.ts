@@ -57,7 +57,8 @@ export type TopicKey =
   | "AVG_AUTH_EXP"
   | "AVG_SOBJ"
   | "AVG_SOBJ10"
-  | "ACTUAL_SOBJ10";
+  | "ACTUAL_SOBJ10"
+  | "SPECIAL_WARRANTS";
 
 type FakeFootNoteDef = {
   topic_keys: TopicKey[];
