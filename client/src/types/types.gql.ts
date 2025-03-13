@@ -816,6 +816,7 @@ export type SubjectU = Crso | Org | Program;
 
 export type SummaryHeadcountData = {
   __typename?: 'SummaryHeadcountData';
+  avg_share?: Maybe<Scalars['Float']>;
   dimension?: Maybe<Scalars['String']>;
   yearly_data?: Maybe<Array<Maybe<YearlyData>>>;
 };
