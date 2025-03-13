@@ -6,7 +6,10 @@ import { declare_panel } from "src/panels/PanelRegistry";
 
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
-import { useOrgPeopleSummary } from "src/models/people/queries";
+import {
+  useOrgPeopleSummary,
+  useGovPeopleSummary,
+} from "src/models/people/queries";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -22,45 +25,46 @@ const { text_maker, TM } = create_text_maker_component(text);
 
 const { people_years } = year_templates;
 
-const calculate_funcs_by_subject_type = (data) => {
-  if (!data?.type) return [];
-
-  const orgEmployeeType = data.type;
-  return orgEmployeeType
-    .map((row) => {
-      const yearlyData = row.yearly_data.slice(-5);
-      return {
-        label: row.dimension,
-        data: yearlyData.map((entry) => entry.value),
-        five_year_percent: row.avg_share,
-        active: true,
-        total_employees: _.sumBy(yearlyData, "value"),
-        year_range: `${yearlyData[0].year}-${
-          yearlyData[yearlyData.length - 1].year
-        }`,
-      };
-    })
-    .sort((a, b) => b.total_employees - a.total_employees);
-};
-
 const EmployeeTypePanel = ({
   title,
   subject,
-  //calculations,
   footnotes,
   sources,
   datasets,
   glossary_keys,
   subject_type,
 }) => {
-  const { data, loading } = useOrgPeopleSummary({
+  const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
   });
 
-  const calculations = useMemo(
-    () => calculate_funcs_by_subject_type(data),
-    [data]
-  );
+  const { data: govData, loading: govLoading } = useGovPeopleSummary({});
+
+  // Select the appropriate data based on subject_type
+  const data = subject_type === "gov" ? govData : orgData;
+  const loading = subject_type === "gov" ? govLoading : orgLoading;
+
+  const calculations = useMemo(() => {
+    if (!data?.type) return [];
+
+    return data.type
+      .filter((item) => item && item.yearly_data)
+      .map((row) => {
+        const yearlyData = row.yearly_data.filter((entry) => entry).slice(-5);
+        return {
+          label: row.dimension,
+          data: yearlyData.map((entry) => entry.value),
+          five_year_percent: row.avg_share,
+          active: true,
+          total_employees: _.sumBy(yearlyData, "value"),
+          year_range: `${yearlyData[0]?.year}-${
+            yearlyData[yearlyData.length - 1]?.year
+          }`,
+        };
+      })
+      .filter((item) => _.some(item.data, (val) => val !== null && val !== 0))
+      .sort((a, b) => b.total_employees - a.total_employees);
+  }, [data]);
 
   if (loading) {
     return <LeafSpinner config_name="subroute" />;
@@ -80,6 +84,9 @@ const EmployeeTypePanel = ({
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
   const MemoizedNivoLineBarToggle = memo(NivoLineBarToggle);
+
+  console.log(data);
+  console.log(calculations);
 
   return (
     <StdPanel {...{ title, footnotes, sources, datasets, glossary_keys }}>
@@ -123,8 +130,6 @@ export const declare_employee_type_panel = () =>
         "CASUAL_PEOPLE",
         "STUD_PEOPLE",
       ],
-      //calculate: calculate_funcs_by_subject_type[subject_type],
-
       render(props) {
         return <EmployeeTypePanel {...props} subject_type={subject_type} />;
       },
