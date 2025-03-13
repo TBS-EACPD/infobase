@@ -47,6 +47,7 @@ describe("People data", () => {
                 year,
                 value,
               }
+              avg_share
             }
           }
         }
