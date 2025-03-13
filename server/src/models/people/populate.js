@@ -354,7 +354,7 @@ const processGovData = (headcount_datasets_by_type) => {
       // First, calculate total employees across all dimensions for each year
       const totalsByYear = {};
 
-      _.forEach(dimensionGroups, (items, dimension) => {
+      _.forEach(dimensionGroups, (items) => {
         const yearlyData = _.chain(items)
           .flatMap("yearly_data")
           .groupBy("year")
