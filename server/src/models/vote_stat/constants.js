@@ -34,4 +34,9 @@ export const estimates_docs = {
     fr: "Budget supp. C",
     order: 4,
   },
+  SW1: {
+    en: "Special Warrants (SW placeholder name)",
+    fr: "Mandats spéciaux (SW placeholder name)",
+    order: 5,
+  },
 };

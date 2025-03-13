@@ -4,7 +4,7 @@ import { smart_sort_func } from "src/sort_utils";
 
 // TODO ideally CURRENT_EST_DOC could be derived from input data and injected in to the app at build time, or something like that
 // For now, needs to be manually updated on new estimates publication!
-export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" = "SEB";
+export const CURRENT_EST_DOC: "MAINS" | "SEA" | "SEB" | "SEC" | "SW1" = "SW1";
 
 export const estimates_docs = {
   MAINS: {
@@ -42,6 +42,11 @@ export const estimates_docs = {
     fr: "Budget supp. C",
     order: 4,
   },
+  SW1: {
+    en: "Special Warrants (SW placeholder name)",
+    fr: "Mandats spéciaux (SW placeholder name)",
+    order: 5,
+  },
 } as const;
 
 export type est_doc = keyof typeof estimates_docs;
@@ -55,6 +60,7 @@ export const get_est_doc_glossary_key = (est_doc: est_doc) =>
     SEA: "SUPPSA",
     SEB: "SUPPSB",
     SEC: "SUPPSC",
+    SW1: "SW1",
   }[est_doc]);
 
 export const get_est_doc_name = (est_doc: est_doc) =>

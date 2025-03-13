@@ -6,9 +6,9 @@ diff_view_title:
 diff_view_top_text:
   transform: [handlebars, markdown]
   en: |
-    A presentation of the recently tabled {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} {{est_in_year}} with context from previously tabled estimate documents.
+    A presentation of the recently tabled {{#if current_doc_is_mains}}Main Estimates{{else if current_doc_is_sw}}Special Warrants (SW placeholder name){{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} {{est_in_year}} with context from previously tabled estimate documents.
   fr: |
-    Une présentation du {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents.
+    Une présentation du {{#if current_doc_is_mains}}Budget principal des dépenses{{else if current_doc_is_sw}}Mandats spéciaux (SW placeholder name){{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} {{est_in_year}} récemment déposé avec de l'information contextuelle des budget de dépenses précédents.
 
 general_info:
   en: General Information
@@ -17,22 +17,26 @@ general_info:
 estimates_expl:
   transform: [handlebars, markdown]
   en: |
-    In order to spend money, the government must receive Parliament’s approval, either through previously adopted legislation that provides ongoing authority or on an annual basis through the introduction and passage of appropriation bills in Parliament. As with other bills, appropriation bills become law after being approved by both the House of Commons and the Senate and receiving Royal Assent.
+    In order to spend money, the government must receive Parliament's approval, either through previously adopted legislation that provides ongoing authority or on an annual basis through the introduction and passage of appropriation bills in Parliament. As with other bills, appropriation bills become law after being approved by both the House of Commons and the Senate and receiving Royal Assent.
     
-    To support Parliament’s consideration and review, the President of the Treasury Board tables in Parliament an Estimates publication (Main or Supplementary) that provides information and details on spending authorities sought. While the Main Estimates provide an overview of spending requirements for the upcoming fiscal year, Supplementary Estimates present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services.
+    To support Parliament's consideration and review, the President of the Treasury Board tables in Parliament an Estimates publication (Main or Supplementary) that provides information and details on spending authorities sought. While the Main Estimates provide an overview of spending requirements for the upcoming fiscal year, Supplementary Estimates present information on additional spending requirements which were either not sufficiently developed in time for inclusion in the Main Estimates, or have subsequently been refined to account for developments in particular programs and services.
+    
+    In exceptional circumstances when Parliament is not in session, {{gl_sidebar_link "Special Warrants" "SPEC_WARR"}} may be issued to authorize urgent expenditures. These warrants are temporary in nature and must be replaced by an appropriation act once Parliament reconvenes.
   fr: |
-    Avant de dépenser des fonds publics, le gouvernement doit obtenir l’autorisation du Parlement, soit au moyen de lois adoptées auparavant qui accordent une autorisation permanente, soit au moyen d’un projet de loi de crédits annuel déposé et adopté au Parlement. Comme pour les autres projets de loi, les projets de loi de crédits deviennent des lois une fois qu’ils ont été approuvés par la Chambre des communes et le Sénat et qu’ils ont reçu la sanction royale.
+    Avant de dépenser des fonds publics, le gouvernement doit obtenir l'autorisation du Parlement, soit au moyen de lois adoptées auparavant qui accordent une autorisation permanente, soit au moyen d'un projet de loi de crédits annuel déposé et adopté au Parlement. Comme pour les autres projets de loi, les projets de loi de crédits deviennent des lois une fois qu'ils ont été approuvés par la Chambre des communes et le Sénat et qu'ils ont reçu la sanction royale.
 
-    Pour appuyer l’examen des projets de loi par le Parlement, le président du Conseil du Trésor dépose au Parlement un document du budget des dépenses (budget principal ou budget supplémentaire) qui fournit des renseignements et des détails sur les autorisations de dépenses demandées. Bien que le budget principal des dépenses fournisse un aperçu des besoins en matière de dépenses pour l’exercice à venir, le budget supplémentaire des dépenses présente de l’information sur les besoins supplémentaires en matière des dépenses qui n’étaient pas suffisamment étoffées au moment du dépôt du budget principal des dépenses ou encore qui ont été peaufinées par la suite pour prendre en compte les changements apportés à des programmes ou à des services particuliers.
+    Pour appuyer l'examen des projets de loi par le Parlement, le président du Conseil du Trésor dépose au Parlement un document du budget des dépenses (budget principal ou budget supplémentaire) qui fournit des renseignements et des détails sur les autorisations de dépenses demandées. Bien que le budget principal des dépenses fournisse un aperçu des besoins en matière de dépenses pour l'exercice à venir, le budget supplémentaire des dépenses présente de l'information sur les besoins supplémentaires en matière des dépenses qui n'étaient pas suffisamment étoffées au moment du dépôt du budget principal des dépenses ou encore qui ont été peaufinées par la suite pour prendre en compte les changements apportés à des programmes ou à des services particuliers.
+    
+    Dans des circonstances exceptionnelles, lorsque le Parlement n'est pas en session, des mandats spéciaux peuvent être émis pour autoriser des dépenses urgentes. Ces mandats sont de nature temporaire et doivent être remplacés par une loi de crédits une fois que le Parlement se réunit à nouveau.
 
 
 
 current_doc_this_year:
   transform: [handlebars]
   en: |
-   {{#if current_doc_is_mains}}Main Estimates{{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
+   {{#if current_doc_is_mains}}Main Estimates{{else if current_doc_is_sw}}Special Warrants (SW placeholder name){{else}}Supplementary Estimates {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
   fr: |
-    {{#if current_doc_is_mains}}Budget principal des dépenses{{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
+    {{#if current_doc_is_mains}}Budget principal des dépenses{{else if current_doc_is_sw}}Mandats spéciaux (SW placeholder name){{else}}Budget supplémentaire des dépenses {{current_sups_letter}}{{/if}} <span class="nowrap">{{est_in_year}}</span>
 
 new:
   en: New Item

@@ -80,8 +80,8 @@ export default {
       key: true,
       nick: "est_doc",
       header: {
-        en: "Estimates Instrument",
-        fr: "Instrument des dépenses",
+        en: "Funding Source",
+        fr: "Source de financement",
       },
       can_group_by: true,
     });
