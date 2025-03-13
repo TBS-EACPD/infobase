@@ -33,6 +33,7 @@ import {
   TM,
   current_doc_is_mains,
   current_sups_letter,
+  current_doc_is_sw,
 } from "./utils";
 
 const DetailedAmountsByDoc = ({ amounts_by_doc }) => {
@@ -201,7 +202,11 @@ export default class EstimatesExplorerComponent extends React.Component {
         <div className="medium-panel-text mrgn-tp-lg">
           <TM
             k="diff_view_top_text"
-            args={{ current_doc_is_mains, current_sups_letter }}
+            args={{
+              current_doc_is_mains,
+              current_sups_letter,
+              current_doc_is_sw,
+            }}
           />
         </div>
         <h2>

@@ -27,6 +27,7 @@ import {
   TM,
   current_doc_is_mains,
   current_sups_letter,
+  current_doc_is_sw,
 } from "./utils";
 
 const biv_footnote = text_maker("biv_footnote");
@@ -36,8 +37,10 @@ const row_identifier_func = (row) => `${row.dept}-${row.votenum}-${row.desc}`;
 
 const current_doc_code = current_doc_is_mains
   ? "MAINS"
+  : current_doc_is_sw
+  ? "SW1"
   : `SE${current_sups_letter}`;
-const ordered_est_docs = ["MAINS", "VA", "SA", "SEA", "SEB", "SEC"];
+const ordered_est_docs = ["MAINS", "VA", "SA", "SEA", "SEB", "SEC", "SW1"];
 
 function footnote_from_glossary_item(key) {
   return () => glossaryEntryStore.lookup(key).get_compiled_definition();
