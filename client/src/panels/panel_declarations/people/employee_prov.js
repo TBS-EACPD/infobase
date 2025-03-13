@@ -11,7 +11,7 @@ import {
   LeafSpinner,
 } from "src/components/index";
 
-import { useOrgPeopleSummary } from "src/models/people/queries";
+import { useOrgPeopleSummary, useGovPeopleSummary } from "src/models/people/queries";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -37,19 +37,34 @@ const EmployeeProvPanel = ({
   datasets,
   subject_type,
 }) => {
-  const { data, loading } = useOrgPeopleSummary({
+  const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
   });
+  
+  const { data: govData, loading: govLoading } = useGovPeopleSummary({});
+  
+  // Select the appropriate data based on subject_type
+  const data = subject_type === "gov" ? govData : orgData;
+  const loading = subject_type === "gov" ? govLoading : orgLoading;
+
+  if (loading) {
+    return <LeafSpinner config_name="subroute" />;
+  }
 
   if (!data?.region) {
     return null;
   }
 
-  const formatted_data = data.region.map((region) => ({
-    label: region.dimension,
-    data: region.yearly_data.map((year) => year.value),
-    five_year_percent: region.avg_share,
-  }));
+  const formatted_data = data.region
+    .filter(region => region && region.yearly_data)
+    .map((region) => ({
+      label: region.dimension,
+      data: region.yearly_data
+        .filter(entry => entry)
+        .map((year) => year.value),
+      five_year_percent: region.avg_share,
+    }))
+    .filter(item => _.some(item.data, val => val !== null && val !== 0));
 
   // Map of full province names to dimension codes
   const regionToProvinceCode = {
@@ -113,52 +128,46 @@ const EmployeeProvPanel = ({
 
   return (
     <StdPanel {...{ title, footnotes, sources, datasets }}>
-      {loading ? (
-        <LeafSpinner config_name="subroute" />
-      ) : (
-        <>
-          <Col size={12} isText>
-            <TM
-              k={subject_type + "_employee_prov_text"}
-              args={text_calculations}
-            />
-          </Col>
-          {!is_a11y_mode && (
-            <Col size={12} isGraph>
-              <MemoizedCanada graph_args={graph_args} />
-            </Col>
-          )}
-          {is_a11y_mode && (
-            <Col size={12} isGraph>
-              <DisplayTable
-                column_configs={{
-                  label: {
-                    index: 0,
-                    header: text_maker("prov"),
-                    is_searchable: true,
+      <Col size={12} isText>
+        <TM
+          k={subject_type + "_employee_prov_text"}
+          args={text_calculations}
+        />
+      </Col>
+      {!is_a11y_mode && (
+        <Col size={12} isGraph>
+          <MemoizedCanada graph_args={graph_args} />
+        </Col>
+      )}
+      {is_a11y_mode && (
+        <Col size={12} isGraph>
+          <DisplayTable
+            column_configs={{
+              label: {
+                index: 0,
+                header: text_maker("prov"),
+                is_searchable: true,
+              },
+              five_year_percent: {
+                index: years.length + 1,
+                header: text_maker("five_year_percent_header"),
+                formatter: "percentage1",
+              },
+              ..._.chain(years)
+                .map((year, idx) => [
+                  year,
+                  {
+                    index: idx + 1,
+                    header: year,
+                    formatter: "big_int",
                   },
-                  five_year_percent: {
-                    index: years.length + 1,
-                    header: text_maker("five_year_percent_header"),
-                    formatter: "percentage1",
-                  },
-                  ..._.chain(years)
-                    .map((year, idx) => [
-                      year,
-                      {
-                        index: idx + 1,
-                        header: year,
-                        formatter: "big_int",
-                      },
-                    ])
-                    .fromPairs()
-                    .value(),
-                }}
-                data={formatted_data}
-              />
-            </Col>
-          )}
-        </>
+                ])
+                .fromPairs()
+                .value(),
+            }}
+            data={formatted_data}
+          />
+        </Col>
       )}
     </StdPanel>
   );
