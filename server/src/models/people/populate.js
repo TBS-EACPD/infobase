@@ -37,7 +37,7 @@ const getValue = (filteredCsv, dept_name, year, dimension, headcount_type) => {
       item[headcountTypeMapping[headcount_type]] === dimension
   );
   return record && record.number_of_employees !== "*"
-    ? record.number_of_employees
+    ? parseInt(record.number_of_employees, 10)
     : null;
 };
 
@@ -66,16 +66,23 @@ const calculateAverageShare = (data, headcount_type, orgIdCache) => {
     .groupBy("orgId")
     .mapValues((orgData) => {
       const totalEmployees = _.sumBy(orgData, (record) =>
-        parseInt(record.number_of_employees, 10)
+        record.number_of_employees === "*"
+          ? 0
+          : parseInt(record.number_of_employees, 10)
       );
+
+      if (totalEmployees === 0) return {};
+
       return _.chain(orgData)
         .groupBy(headcountTypeMapping[headcount_type])
-        .mapValues(
-          (records) =>
-            _.sumBy(records, (record) =>
-              parseInt(record.number_of_employees, 10)
-            ) / totalEmployees
-        )
+        .mapValues((records) => {
+          const sum = _.sumBy(records, (record) =>
+            record.number_of_employees === "*"
+              ? 0
+              : parseInt(record.number_of_employees, 10)
+          );
+          return totalEmployees > 0 ? sum / totalEmployees : 0;
+        })
         .value();
     })
     .value();
@@ -83,20 +90,91 @@ const calculateAverageShare = (data, headcount_type, orgIdCache) => {
 
 // Get the range of the 5 most recent years dynamically
 const getMostRecentYears = (csv) => {
-  const maxYear =
-    _.maxBy(csv, (record) => parseInt(record.year, 10))?.year || 0;
-  const maxYearInt = parseInt(maxYear, 10);
-  return _.range(maxYearInt - 4, maxYearInt + 1); // Get the last 5 years
+  const years = _.chain(csv)
+    .map((record) => parseInt(record.year, 10))
+    .filter((year) => !isNaN(year))
+    .uniq()
+    .sortBy()
+    .value();
+
+  return years.slice(-5); // Get the last 5 years
+};
+
+// Process average age data separately
+const process_avg_age_dataset = () => {
+  const csv_name = `test_org_employee_avg_age.csv`;
+  const csv = get_standard_csv_file_rows(csv_name);
+
+  if (_.isEmpty(csv)) {
+    console.warn("No data found for average_age");
+    return [];
+  }
+
+  // Transform headers and filter
+  const transformedCsv = transformHeaders(csv);
+  const recentYears = getMostRecentYears(transformedCsv);
+
+  const filteredCsv = transformedCsv.filter(
+    (record) =>
+      record.department_or_agency !== "Office of the Prime Minister" &&
+      recentYears.includes(parseInt(record.year, 10))
+  );
+
+  const orgIdCache = {};
+  filteredCsv.forEach((record) => {
+    const deptName = record.department_or_agency;
+    if (!orgIdCache[deptName]) {
+      orgIdCache[deptName] =
+        deptName === "Federal public service"
+          ? "gov"
+          : get_org_id_from_dept_name(csv_name, deptName);
+    }
+  });
+
+  // Group by department and create records
+  return _.chain(filteredCsv)
+    .groupBy("department_or_agency")
+    .map((rows) => {
+      const deptName = rows[0]?.department_or_agency;
+      const orgId = orgIdCache[deptName];
+
+      if (!orgId) return null;
+
+      return {
+        org_id: orgId,
+        average_age: _.chain(rows)
+          .map((record) => ({
+            year: parseInt(record.year, 10),
+            value:
+              record.average_age === "*"
+                ? null
+                : parseFloat(record.average_age),
+          }))
+          .filter(
+            (item) => item.year && (item.value === null || !isNaN(item.value))
+          )
+          .sortBy("year")
+          .value(),
+      };
+    })
+    .filter(Boolean)
+    .value();
 };
 
 // Main dataset processing for headcount types
 const process_standard_headcount_dataset = (headcount_type) => {
+  if (headcount_type === "avg_age") {
+    return process_avg_age_dataset();
+  }
+
   const csv_name = `test_org_employee_${headcount_type}.csv`;
   const csv = get_standard_csv_file_rows(csv_name);
 
   // Transform headers and filter by the 5 most recent years dynamically
-  const recentYears = getMostRecentYears(csv);
-  const filteredCsv = transformHeaders(csv).filter(
+  const transformedCsv = transformHeaders(csv);
+  const recentYears = getMostRecentYears(transformedCsv);
+
+  const filteredCsv = transformedCsv.filter(
     (record) =>
       record.department_or_agency !== "Office of the Prime Minister" &&
       recentYears.includes(parseInt(record.year, 10))
@@ -124,49 +202,39 @@ const process_standard_headcount_dataset = (headcount_type) => {
     orgIdCache
   );
 
-  const reported_years = recentYears;
-
-  const createDeptRecord = (rows, orgIdCache) => {
-    const deptName = rows[0]?.department_or_agency;
-    return {
-      org_id: orgIdCache[deptName],
-      dimension: "Total",
-      yearly_data: _.chain(rows)
-        .map((record) => ({
-          year: record.year,
-          value: record.number_of_employees,
-        }))
-        .value(),
-      avg_share: averageShares[orgIdCache[deptName]]?.["Total"] || 0,
-    };
-  };
-
-  if (headcount_type === "avg_age") {
+  // For department-level data
+  if (headcount_type === "dept") {
     return _.chain(filteredCsv)
       .groupBy("department_or_agency")
-      .map((rows) => ({
-        org_id: orgIdCache[rows[0]?.department_or_agency],
-        average_age: rows
-          .map((record) => ({
-            year: parseInt(record.year, 10),
-            value:
-              record.average_age === "*"
-                ? null
-                : parseFloat(record.average_age),
-          }))
-          .filter(({ value }) => _.isFinite(value) || value === null),
-      }))
+      .map((rows) => {
+        const deptName = rows[0]?.department_or_agency;
+        const orgId = orgIdCache[deptName];
+
+        if (!orgId) return null;
+
+        return {
+          org_id: orgId,
+          dimension: "Total",
+          yearly_data: _.chain(recentYears)
+            .map((year) => {
+              const yearData = rows.find((r) => parseInt(r.year, 10) === year);
+              return {
+                year,
+                value:
+                  yearData && yearData.number_of_employees !== "*"
+                    ? parseInt(yearData.number_of_employees, 10)
+                    : null,
+              };
+            })
+            .value(),
+          avg_share: 1.0, // Total is always 100%
+        };
+      })
       .filter(Boolean)
       .value();
   }
 
-  if (headcount_type === "dept") {
-    return _.chain(filteredCsv)
-      .groupBy("department_or_agency")
-      .map((rows) => createDeptRecord(rows, orgIdCache))
-      .value();
-  }
-
+  // For other headcount types
   return _.chain(filteredCsv)
     .groupBy(
       (row) =>
@@ -176,109 +244,262 @@ const process_standard_headcount_dataset = (headcount_type) => {
     )
     .map((rows, key) => {
       const [deptName, dimension] = key.split("__");
-      const dimensionToUse = headcount_type === "dept" ? "Total" : dimension;
+      const orgId = orgIdCache[deptName];
+
+      if (!orgId || !dimension) return null;
 
       return {
-        org_id: orgIdCache[deptName],
-        dimension: dimensionToUse,
-        yearly_data: reported_years.map((year) => ({
-          year,
-          value: getValue(
-            filteredCsv,
-            deptName,
+        org_id: orgId,
+        dimension: dimension,
+        yearly_data: _.chain(recentYears)
+          .map((year) => ({
             year,
-            dimensionToUse,
-            headcount_type
-          ),
-        })),
-        avg_share: averageShares[orgIdCache[deptName]]?.[dimensionToUse] || 0,
+            value: getValue(
+              filteredCsv,
+              deptName,
+              year,
+              dimension,
+              headcount_type
+            ),
+          }))
+          .value(),
+        avg_share: averageShares[orgId]?.[dimension] || 0,
       };
     })
+    .filter(Boolean)
     .value();
+};
+
+// Process government-level data
+const processGovData = (headcount_datasets_by_type) => {
+  const gov_people_summary = { id: "gov" };
+
+  // Process average_age for government
+  if (headcount_datasets_by_type.average_age) {
+    const govData = headcount_datasets_by_type.average_age.find(
+      (item) => item.org_id === "gov"
+    );
+
+    if (govData && govData.average_age) {
+      gov_people_summary.average_age = govData.average_age;
+    } else {
+      // Calculate average from all departments if no direct gov data
+      gov_people_summary.average_age = _.chain(
+        headcount_datasets_by_type.average_age
+      )
+        .flatMap((item) => item.average_age || [])
+        .groupBy("year")
+        .map((yearData, year) => ({
+          year: parseInt(year, 10),
+          value: _.meanBy(yearData, (d) => d.value),
+        }))
+        .filter((item) => !isNaN(item.value))
+        .sortBy("year")
+        .value();
+    }
+  }
+
+  // Process other headcount types
+  _.without(headcount_types, "avg_age").forEach((headcount_type) => {
+    if (!headcount_datasets_by_type[headcount_type]) return;
+
+    // Get government data directly if available
+    const govData = _.filter(
+      headcount_datasets_by_type[headcount_type],
+      (item) => item.org_id === "gov" && item.dimension !== "Total"
+    );
+
+    if (govData.length > 0) {
+      // Recalculate avg_share without considering "Total"
+      const yearlyTotals = {};
+
+      // Calculate totals for each year
+      govData.forEach((item) => {
+        item.yearly_data.forEach((yearData) => {
+          if (yearData.value) {
+            const year = yearData.year.toString();
+            yearlyTotals[year] = (yearlyTotals[year] || 0) + yearData.value;
+          }
+        });
+      });
+
+      gov_people_summary[headcount_type] = _.map(govData, (item) => {
+        // Calculate new avg_share
+        let totalShare = 0;
+        let validYearCount = 0;
+
+        item.yearly_data.forEach((yearData) => {
+          const year = yearData.year.toString();
+          if (yearData.value && yearlyTotals[year]) {
+            totalShare += yearData.value / yearlyTotals[year];
+            validYearCount++;
+          }
+        });
+
+        return {
+          dimension: item.dimension,
+          yearly_data: item.yearly_data,
+          avg_share: validYearCount > 0 ? totalShare / validYearCount : 0,
+        };
+      });
+    } else {
+      // Aggregate data from all departments if no direct gov data
+      const dimensionGroups = _.chain(
+        headcount_datasets_by_type[headcount_type]
+      )
+        .filter((item) => item.dimension !== "Total") // Filter out "Total" dimension
+        .groupBy("dimension")
+        .value();
+
+      // First, calculate total employees across all dimensions for each year
+      const totalsByYear = {};
+
+      _.forEach(dimensionGroups, (items, dimension) => {
+        const yearlyData = _.chain(items)
+          .flatMap("yearly_data")
+          .groupBy("year")
+          .mapValues((yearItems) =>
+            _.sum(_.map(yearItems, (item) => item.value || 0))
+          )
+          .value();
+
+        _.forEach(yearlyData, (value, year) => {
+          totalsByYear[year] = (totalsByYear[year] || 0) + value;
+        });
+      });
+
+      // Now calculate the data for each dimension with proper avg_share
+      gov_people_summary[headcount_type] = _.map(
+        dimensionGroups,
+        (items, dimension) => {
+          // Sum values for each year
+          const yearly_data = _.chain(items)
+            .flatMap("yearly_data")
+            .groupBy("year")
+            .map((yearItems, year) => {
+              const yearValue = _.sum(
+                _.map(yearItems, (item) => item.value || 0)
+              );
+              return {
+                year: parseInt(year, 10),
+                value: yearValue,
+              };
+            })
+            .sortBy("year")
+            .value();
+
+          // Calculate average share across all years
+          let totalShare = 0;
+          let validYearCount = 0;
+
+          yearly_data.forEach((yearData) => {
+            const year = yearData.year.toString();
+            if (yearData.value && totalsByYear[year]) {
+              totalShare += yearData.value / totalsByYear[year];
+              validYearCount++;
+            }
+          });
+
+          const avg_share =
+            validYearCount > 0 ? totalShare / validYearCount : 0;
+
+          return {
+            dimension,
+            yearly_data,
+            avg_share,
+          };
+        }
+      );
+    }
+  });
+
+  return gov_people_summary;
 };
 
 // Main function to process all headcount datasets
 export default async function ({ models }) {
   const { OrgPeopleData, GovPeopleSummary } = models;
 
-  // Process headcount datasets for all types
-  const headcount_datasets_by_type = _.chain(headcount_types)
-    .map((headcount_type) => {
-      const dataset = process_standard_headcount_dataset(headcount_type);
-      return dataset
-        ? [
-            headcount_type === "avg_age" ? "average_age" : headcount_type,
-            dataset,
-          ]
-        : null;
-    })
-    .filter(Boolean)
-    .fromPairs()
-    .value();
+  console.log("Starting to process people data...");
 
-  const org_people_data = _.chain(headcount_datasets_by_type)
-    .flatMap((dataset) => _.map(dataset, "org_id"))
-    .uniq()
-    .map((org_id) => ({
-      org_id,
-      ..._.mapValues(headcount_datasets_by_type, (dataset) =>
-        _.filter(dataset, { org_id })
-      ),
-    }))
-    .value();
-
-  const getHeadcountData = (headcount_type, isGovFiltered = false) => {
-    const dataset = process_standard_headcount_dataset(headcount_type);
-    return _.chain(dataset)
-      .filter(({ org_id }) => (isGovFiltered ? org_id === "gov" : true))
-      .groupBy("dimension")
-      .mapValues((dimension_rows) => {
-        const yearly_data = _.chain(dimension_rows)
-          .flatMap("yearly_data")
-          .groupBy("year")
-          .map((yearRows, year) => ({
-            year: parseInt(year, 10),
-            value: _.sumBy(yearRows, (row) => parseFloat(row.value) || 0),
-          }))
-          .value();
-
-        return { dimension: dimension_rows[0]?.dimension, yearly_data };
+  try {
+    // Process headcount datasets for all types
+    const headcount_datasets_by_type = _.chain(headcount_types)
+      .map((headcount_type) => {
+        console.log(`Processing ${headcount_type} data...`);
+        const dataset = process_standard_headcount_dataset(headcount_type);
+        return dataset && dataset.length > 0
+          ? [
+              headcount_type === "avg_age" ? "average_age" : headcount_type,
+              dataset,
+            ]
+          : null;
       })
-      .filter((val) => val.dimension && val.yearly_data.length > 0)
+      .filter(Boolean)
+      .fromPairs()
       .value();
-  };
 
-  const gov_people_summary = {
-    id: "gov",
-    gender: getHeadcountData("gender", true),
-    fol: getHeadcountData("fol", true),
-    age_group: getHeadcountData("age_group", true),
-  };
+    console.log("Organizing data by organization...");
 
-  headcount_types.forEach((headcount_type) => {
-    if (!["gender", "fol", "age_group", "avg_age"].includes(headcount_type)) {
-      const data = getHeadcountData(headcount_type, false);
-      if (data.length > 0) {
-        gov_people_summary[headcount_type] = data;
+    // Organize data by organization
+    const all_org_ids = _.chain(headcount_datasets_by_type)
+      .flatMap((dataset, type) => {
+        if (type === "average_age") {
+          return _.map(dataset, "org_id");
+        } else {
+          return _.map(dataset, "org_id");
+        }
+      })
+      .uniq()
+      .value();
+
+    const org_people_data = _.map(all_org_ids, (org_id) => {
+      // For each organization, collect all its data
+      const org_data = { org_id };
+
+      // Handle average_age specially
+      if (headcount_datasets_by_type.average_age) {
+        const avg_age_data = _.find(headcount_datasets_by_type.average_age, {
+          org_id,
+        });
+        if (avg_age_data && avg_age_data.average_age) {
+          org_data.average_age = avg_age_data.average_age;
+        }
       }
-    }
-  });
 
-  gov_people_summary.average_age = _.chain(
-    process_standard_headcount_dataset("avg_age")
-  )
-    .filter(({ org_id }) => !!org_id)
-    .flatMap((item) => item.average_age || [])
-    .groupBy("year")
-    .map((rows, year) => ({
-      year: parseInt(year, 10),
-      value: _.meanBy(rows, (row) => row.value),
-    }))
-    .filter(({ value }) => _.isFinite(value))
-    .value();
+      // Handle other headcount types
+      _.without(Object.keys(headcount_datasets_by_type), "average_age").forEach(
+        (type) => {
+          org_data[type] = _.filter(headcount_datasets_by_type[type], {
+            org_id,
+          });
+        }
+      );
 
-  await Promise.all([
-    OrgPeopleData.insertMany(org_people_data),
-    GovPeopleSummary.insertMany(gov_people_summary),
-  ]);
+      return org_data;
+    });
+
+    console.log("Processing government-level summary...");
+
+    // Process government-level summary
+    const gov_people_summary = processGovData(headcount_datasets_by_type);
+
+    console.log("Saving data to database...");
+
+    // Save to database
+    await Promise.all([
+      OrgPeopleData.deleteMany({}),
+      GovPeopleSummary.deleteMany({}),
+    ]);
+
+    await Promise.all([
+      OrgPeopleData.insertMany(org_people_data),
+      GovPeopleSummary.insertMany([gov_people_summary]),
+    ]);
+
+    console.log("People data processing completed successfully!");
+  } catch (error) {
+    console.error("Error processing people data:", error);
+    throw error;
+  }
 }
