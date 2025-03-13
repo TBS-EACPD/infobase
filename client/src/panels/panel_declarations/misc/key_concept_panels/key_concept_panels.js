@@ -59,6 +59,7 @@ export const declare_financial_key_concepts_panel = () =>
           ["what_are_exps_q", "what_are_exps_a"],
           ["why_cant_i_see_prov_spend_q", "why_cant_i_see_prov_spend_a"],
           ["what_spending_is_included_q", "what_spending_is_included_a"],
+          ["what_are_sw_q", "what_are_sw_a"],
           subject_type === "dept" && [
             "different_org_names_q",
             "different_org_names_a",
