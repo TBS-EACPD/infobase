@@ -15,4 +15,4 @@ export const {
   query: GovPeopleSummaryDocument,
   resolver: (response: GovPeopleSummaryQuery) =>
     response?.root?.gov?.people_data,
-}); 
+});

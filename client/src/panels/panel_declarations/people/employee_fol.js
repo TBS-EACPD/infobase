@@ -7,7 +7,10 @@ import { declare_panel } from "src/panels/PanelRegistry";
 import { create_text_maker_component, LeafSpinner } from "src/components/index";
 
 import { businessConstants } from "src/models/businessConstants";
-import { useOrgPeopleSummary, useGovPeopleSummary } from "src/models/people/queries";
+import {
+  useOrgPeopleSummary,
+  useGovPeopleSummary,
+} from "src/models/people/queries";
 import { run_template } from "src/models/text";
 import { year_templates } from "src/models/years";
 
@@ -35,9 +38,9 @@ const EmployeeFolPanel = ({
   const { data: orgData, loading: orgLoading } = useOrgPeopleSummary({
     org_id: subject.id,
   });
-  
+
   const { data: govData, loading: govLoading } = useGovPeopleSummary({});
-  
+
   // Select the appropriate data based on subject_type
   const data = subject_type === "gov" ? govData : orgData;
   const loading = subject_type === "gov" ? govLoading : orgLoading;
@@ -46,16 +49,16 @@ const EmployeeFolPanel = ({
     if (!data?.fol) return [];
 
     return data.fol
-      .filter(item => item && item.yearly_data)
-      .map(row => ({
+      .filter((item) => item && item.yearly_data)
+      .map((row) => ({
         label: row.dimension,
         data: row.yearly_data
-          .filter(entry => entry)
-          .map(entry => entry.value),
+          .filter((entry) => entry)
+          .map((entry) => entry.value),
         five_year_percent: row.avg_share,
         active: true,
       }))
-      .filter(item => _.some(item.data, val => val !== null && val !== 0))
+      .filter((item) => _.some(item.data, (val) => val !== null && val !== 0))
       .sort((a, b) => _.sum(b.data) - _.sum(a.data));
   }, [data]);
 
@@ -94,7 +97,7 @@ const EmployeeFolPanel = ({
     single_type_flag: text_groups.length === 1,
     subject,
   };
-  
+
   const ticks = _.map(people_years, (y) => `${run_template(y)}`);
 
   const has_suppressed_data = _.some(
@@ -115,14 +118,9 @@ const EmployeeFolPanel = ({
   })();
 
   return (
-    <StdPanel
-      {...{ title, footnotes: required_footnotes, sources, datasets }}
-    >
+    <StdPanel {...{ title, footnotes: required_footnotes, sources, datasets }}>
       <Col size={12} isText>
-        <TM
-          k={subject_type + "_employee_fol_text"}
-          args={text_calculations}
-        />
+        <TM k={subject_type + "_employee_fol_text"} args={text_calculations} />
       </Col>
       <Col size={12} isGraph>
         <NivoLineBarToggle
